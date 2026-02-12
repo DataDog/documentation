@@ -34,7 +34,7 @@ RUM 보기 이벤트는 모든 페이지 보기에 대한 광범위한 성능 �
 
 ## 이벤트 타이밍 및 코어 웹 바이탈
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Datadog의 Core Web Vitals 메트릭은 <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> 패키지 v2.2.0 이상부터 사용할 수 있습니다.
 </div>
 

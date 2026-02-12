@@ -4,11 +4,11 @@ title: Instrumenting Java Serverless Applications Using the Datadog Forwarder
 ---
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/java">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.14.0</code> as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below.
 </div>
 
@@ -62,9 +62,9 @@ dependencies {
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-    DD_LOGS_INJECTION: true
+    DD_LOGS_INJECTION: true # default value
     DD_JMXFETCH_ENABLED: false
-    DD_TRACE_ENABLED: true
+    DD_TRACE_ENABLED: true # default value
     ```
 
 3. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda Library:
@@ -153,7 +153,7 @@ Some versions of `datadog-lambda-java` include a transitive dependency on log4j 
 -  `<=0.3.3`
 -  `1.4.0`
 
-The latest version of `datadog-lambda-java` is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
+The latest version of `datadog-lambda-java` is ![Maven Cental][4]. Use this version (omitting the preceding `v`) when following the upgrading instructions below.
 
 If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well.
 You may find the latest version of `0.3.x` in the [`datadog-lambda-java` repository][13].

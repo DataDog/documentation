@@ -17,7 +17,7 @@ further_reading:
 title: Integraciones
 ---
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Las integraciones de PagerDuty y de OpsGenie del portal interno de desarrolladores no son compatibles con el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}

@@ -1,17 +1,23 @@
 ---
 title: Set Up Code Coverage
+description: "Configure Code Coverage by integrating with GitHub or GitLab, setting permissions, creating PR Gates, and uploading coverage reports."
 further_reading:
   - link: "/code_coverage"
     tag: "Documentation"
     text: "Code Coverage"
+  - link: "/code_coverage/configuration"
+    tag: "Documentation"
+    text: "Configure Code Coverage"
+  - link: "/code_coverage/flags"
+    tag: "Documentation"
+    text: "Organize coverage data with flags"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
 
 Setting up Code Coverage involves the following steps:
 
@@ -27,7 +33,7 @@ Code Coverage supports the following:
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-See the [GitHub integration documentation][1] for detailed instructions for integrating with GitHub.
+Follow instructions in the [GitHub integration documentation][1] on how to connect your GitHub repositories to Datadog.
 
 Code Coverage requires the following GitHub App permissions:
 | Permission | Access Level | Purpose |
@@ -51,6 +57,26 @@ If everything is configured correctly, a green check mark is displayed in Datado
 
 [1]: /integrations/github/#github-apps-1
 [2]: https://app.datadoghq.com/integrations/github/configuration
+{{% /tab %}}
+{{% tab "Gitlab" %}}
+
+Follow instructions in the [Gitlab Source Code integration documentation][1] on how to connect your Gitlab repositories to Datadog.
+
+See [Datadog Source Code Integration Guide][2] for additional context.
+
+[1]: /integrations/gitlab-source-code/
+[2]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
+[2]: https://app.datadoghq.com/integrations/gitlab-source-code
+
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
+Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Azure DevOps repositories to Datadog
+using [Azure DevOps Source Code integration][2].
+
+[1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
+[2]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -98,6 +124,25 @@ BRDA:4,0,1,0
 BRF:2
 BRH:1
 end_of_record
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Go Coverprofile" level="h4" expanded=false id="go-coverprofile" %}}
+{{< code-block lang="text" >}}
+mode: atomic
+example/calculator.go:51.148,53.2 1 0
+example/calculator.go:55.190,61.15 3 0
+example/calculator.go:61.15,64.3 2 0
+example/calculator.go:66.2,67.16 2 0
+example/calculator.go:67.16,69.3 1 0
+example/clients/api_client.go:27.87,31.2 3 2
+example/clients/api_client.go:34.85,36.2 1 3
+example/clients/api_client.go:39.126,44.2 4 3
+example/clients/api_client.go:47.106,50.2 2 3
+example/notifications/notifier.go:49.79,51.2 1 3
+example/notifications/notifier.go:60.33,69.2 1 0
+example/notifications/notifier.go:79.131,86.15 3 2
+example/notifications/notifier.go:104.3,104.10 1 3
 {{< /code-block >}}
 {{% /collapse-content %}}
 
@@ -294,6 +339,11 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Docker image
+
+Alternatively, you can update your CI job to run in a container based on the [Datadog CI Docker image][13].
+The image comes with `datadog-ci` preinstalled and ready to use.
+
 ### Uploading coverage reports
 
 <div class="alert alert-info">
@@ -315,6 +365,26 @@ steps:
 </code>
 </pre>
 {{% /tab %}}
+{{% tab "Gitlab" %}}
+<pre>
+<code class="language-yaml" data-lang="yaml">
+test:
+  stage: test
+  script:
+    - ... # run your tests and generate coverage reports
+    - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
+</code>
+</pre>
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+<code class="language-yaml" data-lang="yaml">
+- script: datadog-ci coverage upload --format=clover coverage/clover.xml
+  displayName: 'Upload coverage to Datadog'
+  env:
+    DD_API_KEY: $(DD_API_KEY)
+    DD_SITE: 'datadoghq.com'
+</code>
+{{% /tab %}}
 {{< /tabs >}}
 
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
@@ -327,7 +397,7 @@ You can also view your coverage data aggregated by pull request in the [Code Cov
 
 ## Troubleshooting
 
-### Coverage upload command does not detect your coverage report files
+### Coverage upload command does not detect coverage report files
 
 The `datadog-ci coverage upload` command automatically detects supported coverage report files in the specified directories using heuristics, such as file names and extensions.
 If your coverage report files do not match expected patterns, the command might not detect them automatically. In this case, specify the report format and provide the file paths as positional arguments. For example:
@@ -341,7 +411,7 @@ datadog-ci coverage upload --format=lcov \
 ### Coverage upload fails with "Format could not be detected" error
 
 The `datadog-ci coverage upload` command automatically detects the format of the coverage report files based on their content and file extension.
-If the command fails with the following error: 
+If the command fails with the following error:
 ```
 Invalid coverage report file [...]: format could not be detected
 ```
@@ -358,6 +428,27 @@ If you are using a [source code provider integration][12], such as Datadog GitHu
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --skip-git-metadata-upload=1 .
+{{< /code-block >}}
+
+### Datadog UI does not show changed files in the PR view
+
+By default, the "Changed files" table only contains executable source code files that are present in the uploaded coverage reports.
+Select **Non-executable files** or **All** in the table header to display all files that were changed in the PR, regardless of whether they are executable or not.
+
+{{< img src="/code_coverage/non_executable_files.png" text="In Changed files, you have the option to select Non-executable on the table header" style="width:100%" >}}
+
+If a source code file is mistakenly marked as non-executable, it is probably missing from your uploaded coverage reports.
+Make sure that you are uploading all of your relevant reports, and double-check your coverage tool configuration to verify that coverage data is collected for all applicable files.
+
+Test sources are not considered executable files as they are not part of the production codebase being measured for coverage.
+
+### Datadog UI shows incorrect file paths
+
+Code Coverage relies on the file paths in coverage reports to be either absolute or relative to the repository root.
+If the paths in your report are relative to a different directory in your repository, specify the correct base path (relative to the repo root) with the `--base-path` option when running the `datadog-ci coverage upload` command, like this:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
 
 ### Discrepancy between Datadog UI and coverage report values
@@ -382,6 +473,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider
+[13]: https://hub.docker.com/r/datadog/ci

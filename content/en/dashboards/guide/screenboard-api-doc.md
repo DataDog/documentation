@@ -1,11 +1,12 @@
 ---
 title: Screenboard API
+description: DEPRECATED - API for the deprecated Screenboard endpoint. Use the Dashboard endpoint for dashboard operations instead.
 aliases:
   - /graphing/faq/screenboard-api-doc
   - /graphing/guide/screenboard-api-doc
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/">new Dashboard endpoint</a> instead.
 </div>
 

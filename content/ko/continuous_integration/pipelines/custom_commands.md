@@ -48,7 +48,7 @@ echo "Hello World"
 </pre>
 {{< /site-region >}}
 {{< site-region region="us5,gov" >}}
-<div class="alert alert-warning">CI Visibility는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
+<div class="alert alert-danger">CI Visibility는 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
 ## 구성 설정

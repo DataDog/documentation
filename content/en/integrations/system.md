@@ -78,9 +78,9 @@ The system core check is included in the [Datadog Agent][4] package. No addition
     ```yaml
     init_config:
     instances:
-        - foo: bar
+      - foo: bar
         tags:
-            - key:value
+          - key:value
     ```
 
 2. [Restart the Agent][7].

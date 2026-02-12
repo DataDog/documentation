@@ -30,7 +30,7 @@ The minimum tracer version to get all supported AAP capabilities for PHP is 0.98
 | Docker      | {{< X >}}                |
 | Kubernetes  | {{< X >}}                |
 | Amazon ECS  | {{< X >}}                |
-| AWS Fargate |                          |
+| AWS Fargate | {{< X >}}                |
 | AWS Lambda  |                          |
 
 ## Language and framework compatibility
@@ -60,6 +60,7 @@ App and API Protection capabililties for PHP support the following SAPI's:
 | cli            | Fully Supported |
 | fpm-fcgi       | Fully Supported |
 | cgi-fcgi       | Fully Supported |
+| FrankenPHP     | Fully Supported |
 
 ## Supported processor architectures
 

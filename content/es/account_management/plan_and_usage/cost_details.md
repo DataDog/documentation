@@ -1,4 +1,7 @@
 ---
+description: Rastrea los costos de Datadog con resúmenes de costes y devoluciones,
+  incluidos los costos mensuales previstos, los datos históricos y la asignación de
+  costos a varias organizaciones.
 further_reading:
 - link: https://docs.datadoghq.com/account_management/billing/
   tag: Documentación
@@ -9,7 +12,7 @@ further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Documentación
   text: Gestión de cuentas de varias organizaciones
-title: Detalles de costes
+title: Detalles de costos
 ---
 
 ## Información general
@@ -19,6 +22,8 @@ El resumen de costes y las devoluciones de costes te ayudan a entender tus coste
 Puedes desglosar tus costes por suborganización y por producto para:
 - Asignar los costes en función de su origen
 - Obtener información sobre el seguimiento de los costes
+
+Para conocer el gasto diario de Datadog en Cloud Cost Explorer, dashboards y [monitores de costes][7], consulta [Costes de Datadog][8] en Cloud Cost Management.
 
 ### Permisos
 
@@ -69,7 +74,7 @@ Para consultar datos de costes estimados a través de la API, consulta [Obtener 
 
 ### Resumen de costes (suborganización)
 
-<div class="alert alert-warning">Esta función tiene una disponibilidad limitada. Para solicitar acceso y confirmar que tu organización cumple los criterios de la función, ponte en contacto con tu representante de cuenta o con el <a href="https://docs.datadoghq.com/help/">servicio de atención al cliente</a>.</div>
+<div class="alert alert-danger">Esta función tiene una disponibilidad limitada. Para solicitar acceso y confirmar que tu organización cumple los criterios de la función, ponte en contacto con tu representante de cuenta o con el <a href="https://docs.datadoghq.com/help/">Servicio de atención al cliente</a>.</div>
 
 Como suborganización, sólo puedes ver los costes de tu organización. Esta restricción permite una propiedad más distribuida y elimina la necesidad de conceder permisos de administrador más amplios a la organización principal.
 
@@ -157,3 +162,5 @@ Los productos facturados por la suma del uso a lo largo del mes incluyen logs in
 [4]: /es/api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /es/account_management/plan_and_usage/cost_details/#cost-summary
 [6]: /es/api/latest/usage-metering/#get-projected-cost-across-your-account
+[7]: /es/cloud_cost_management/cost_changes/monitors/?tab=costmetricbased
+[8]: /es/cloud_cost_management/datadog_costs/

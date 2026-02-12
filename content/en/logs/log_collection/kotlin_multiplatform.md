@@ -41,21 +41,11 @@ kotlin {
 
     Add the following Datadog iOS SDK dependencies, which are needed for the linking step:
 
-    * `DatadogObjc`
+    * `DatadogCore`
+    * `DatadogLogs`
     * `DatadogCrashReporting`
 
-    **Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself.
-
-    | Datadog Kotlin Multiplatform SDK version | Datadog iOS SDK version |
-    |------------------------------------------|-------------------------| 
-    | 0.0.1                                    | 2.14.1                  |
-    | 0.0.2                                    | 2.17.0                  |
-    | 0.0.3                                    | 2.17.0                  |
-    | 0.4.0                                    | 2.20.0                  |
-    | 0.5.0                                    | 2.22.1                  |
-    | 1.0.0                                    | 2.23.0                  |
-    | 1.1.0                                    | 2.26.0                  |
-    | 1.2.0                                    | 2.29.0                  |
+    **Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][6]. If you are using Kotlin Multiplatform SDK version 1.3.0 or below, add `DatadogObjc` dependency instead of `DatadogCore` and `DatadogLogs`.
 
     #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -69,14 +59,19 @@ kotlin {
             baseName = "sharedLib"
         }
 
-        pod("DatadogObjc") {
+        pod("DatadogCore") {
             linkOnly = true
-            version = 2.29.0
+            version = x.x.x
+        }
+
+        pod("DatadogLogs") {
+            linkOnly = true
+            version = x.x.x
         }
 
         pod("DatadogCrashReporting") {
             linkOnly = true
-            version = 2.29.0
+            version = x.x.x
         }
     }
     ```
@@ -95,163 +90,24 @@ kotlin {
 
    For more information about setting up a client token, see the [client token documentation][2].
 
-   {{< site-region region="us" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
 
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .build()
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    ){{< region-param key=kotlin_multiplatform_site_config >}}
+        .build()
 
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-    ```
-   {{< /site-region >}}
-
-   {{< site-region region="eu" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
-
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .useSite(DatadogSite.EU1)
-            .trackCrashes(true)
-            .build()
-
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="us3" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
-
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .useSite(DatadogSite.US3)
-            .trackCrashes(true)
-            .build()
-
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="us5" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
-
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .useSite(DatadogSite.US5)
-            .trackCrashes(true)
-            .build()
-
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="gov" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
-
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .useSite(DatadogSite.US1_FED)
-            .trackCrashes(true)
-            .build()
-
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-   ```
-   {{< /site-region >}}
-
-   {{< site-region region="ap1" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
-
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .useSite(DatadogSite.AP1)
-            .trackCrashes(true)
-            .build()
-
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-   ```
-   {{< /site-region >}}
-   {{< site-region region="ap2" >}}
-   ```kotlin
-    // in common source set
-    fun initializeDatadog(context: Any? = null) {
-        // context should be application context on Android and can be null on iOS
-        val appClientToken = <CLIENT_TOKEN>
-        val appEnvironment = <ENV_NAME>
-        val appVariantName = <APP_VARIANT_NAME>
-
-        val configuration = Configuration.Builder(
-                clientToken = appClientToken,
-                env = appEnvironment,
-                variant = appVariantName
-        )
-            .useSite(DatadogSite.AP2)
-            .trackCrashes(true)
-            .build()
-
-        Datadog.initialize(context, configuration, trackingConsent)
-    }
-   ```
-   {{< /site-region >}}
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
 
     To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
     Tracking consent can be one of the following values:
@@ -439,3 +295,4 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /logs/processing/attributes_naming_convention/
 [5]: /getting_started/tagging/
+[6]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md

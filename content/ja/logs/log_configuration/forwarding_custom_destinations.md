@@ -16,7 +16,7 @@ title: カスタム宛先へのログの転送
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 ガバメントサイトでは、ログ転送はご利用いただけません。詳しくはアカウント担当者にお問い合わせください。
 </div>
 {{% /site-region %}}

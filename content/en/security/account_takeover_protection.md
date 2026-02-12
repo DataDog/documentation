@@ -76,6 +76,8 @@ The following user activity events are used for ATO tracking.
 
 Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
 
+<div class="alert alert-info">You can use the <a href="https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules">Suggested Rules</a> feature to automatically analyze application traffic and propose rules to help monitor and protect login and API flows. See <a href="/security/application_security/policies/inapp_waf_rules/#suggested-rules">Suggested Rules.</a></div>
+
 For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
 For the latest list of relevant detections and instrumentation requirements, go to [Detection Rules][2] page.

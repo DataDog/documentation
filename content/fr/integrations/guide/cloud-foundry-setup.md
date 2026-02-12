@@ -92,7 +92,7 @@ Il existe trois points d'intégration avec Datadog. Chacun a son propre objectif
 - **La version BOSH de l'Agent de cluster Datadog** : déployez une tâche de l'Agent de cluster Datadog. La tâche interroge les API CAPI et BBS pour récupérer des métadonnées au niveau du cluster et de l'application et ainsi fournir des fonctionnalités de tagging améliorées au sein de vos applications et de vos conteneurs.
 - **Firehose Nozzle de Datadog** : déployez une ou plusieurs tâches Firehose Nozzle de Datadog. Les tâches puisent dans le Loggregator Firehose de votre déploiement et envoient toutes les métriques hors conteneur à Datadog.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Ces intégrations sont destinées aux administrateurs du déploiement Cloud Foundry, et non aux utilisateurs finaux.
 </div>
 

@@ -14,7 +14,7 @@ Interactúa con tus listas de dashboard a través de la API para que sea más f�
 
 ## Obtener elementos de una lista de dashboard
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Este endpoint está obsoleto. Utiliza en su lugar el endpoint <a href="https://docs.datadoghq.com/api#get-items-of-a-dashboard-list">obtener elementos de una lista de cuadros de mando v2.</a>.
 </div>
 
@@ -374,7 +374,7 @@ curl -X GET \
 
 ## Añadir elementos a la lista de dashboard
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Este endpoint está obsoleto. Utiliza en su lugar el endpoint <a href="https://docs.datadoghq.com/api#add-items-to-a-dashboard-lista">añadir elementos a una lista del cuadro de mandos v2</a>.
 </div>
 
@@ -625,7 +625,7 @@ curl -X ADD -H "Tipo de contenido: aplicación/json" \
 
 ## Modificar elementos de una lista de dashboards
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Este endpoint está obsoleto. Utiliza en su lugar el endpoint <a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-lista">actualizar elementos de una lista de cuadros de mando v2</a>.
 </div>
 
@@ -878,7 +878,7 @@ curl -X UPDATE -H "Tipo de contenido: aplicación/json" \
 
 ## Eliminar elementos de una lista de dashboards
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Este endpoint está obsoleto. Utiliza en su lugar el endpoint <a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-lista">de eliminación de elementos de una lista dashboard v2</a>.
 </div>
 

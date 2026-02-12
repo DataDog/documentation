@@ -16,9 +16,9 @@ title: Carga de archivos de informes de tests JUnit en Datadog
 type: lenguaje de código múltiple
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Datadog recomienda la instrumentación nativa de los tests sobre la carga de archivos XML JUnit,
-  ya que la instrumentación nativa proporciona resultados de tiempo más precisos, admite trazas distribuidas en tests de integraciones 
+  ya que la instrumentación nativa proporciona resultados de tiempo más precisos, admite trazas distribuidas en tests de integraciones
   y otras características que no están disponibles con las cargas XML JUnit.
   Para obtener más detalles, consulte la tabla <a href="/continuous_integration/tests/#supported-features">Características compatibles.
 </div>
@@ -48,7 +48,7 @@ npm install -g @datadog/datadog-ci
 
 ### Binario independiente (Beta)
 
-<div class="alert alert-warning"><strong>Nota</strong>: Los binarios independientes están en <strong>fase beta</strong> y su estabilidad no está garantizada.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Los binarios independientes están en <strong>fase beta</strong> y su estabilidad no está garantizada.</div>
 
 Si la instalación de Node.js en el CI es un problema, se proporcionan binarios independientes con las [versiones de Datadog CI][4]. Sólo son compatibles linux-x64, darwin-x64, (MacOS) y win-x64 (Windows). Para instalarlos, ejecuta lo siguiente en tu terminal:
 
@@ -109,7 +109,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-<div class="alert alert-warning">Asegúrate de que este comando se ejecuta en tu CI, incluso si tus tests han fallado. Normalmente, cuando los tests fallan, la tarea CI aborta la ejecución y el comando de carga no se ejecuta.</div>
+<div class="alert alert-danger">Asegúrate de que este comando se ejecuta en tu CI, incluso si tus tests han fallado. Normalmente, cuando los tests fallan, la tarea CI aborta la ejecución y el comando de carga no se ejecuta.</div>
 
 {{< tabs >}}
 
@@ -187,7 +187,7 @@ Es posible que los informes de más de 250 MB no se procesen por completo, por l
 Esta es la lista completa de opciones disponibles cuando se utiliza el comando `datadog-ci junit upload`:
 
 `--service` (Requerido)
-: Nombre del servicio o de la biblioteca a los que se realizan tests.<br/>
+: Nombre del servicio o de la librería a los que se realizan tests.<br/>
 **Variable de entorno**: `DD_SERVICE`<br/>
 **Ejemplo**: `my-api-service`
 
@@ -276,7 +276,7 @@ Además, configura el sitio Datadog para utilizar el sitio ({{< region-param key
 
 {{% ci-git-metadata %}}
 
-## Recopilación de metadatos de configuración de entornos 
+## Recopilación de metadatos de configuración de entornos
 
 Datadog utiliza etiquetas especial exclusivas para identificar la configuración del entorno en el que se ejecutan los tests, incluyendo el sistema operativo, el tiempo de ejecución y la información del dispositivo, si corresponde. Cuando el mismo test para el mismo envío se ejecuta en más de una configuración (por ejemplo, en Windows y en Linux), las etiquetas se utilizan para diferenciar el test en la detección de fallos e irregularidades.
 
@@ -484,7 +484,7 @@ datadog-ci junit upload --service service_name \
 
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Cuando utilices bash desde Git para Windows, define la variable de entorno <strong>MSYS_NO_PATHCONV=1</strong>.
   De lo contrario, cualquier argumento que empiece por <strong>/</strong> se expandirá a una ruta Windows.
 </div>

@@ -1,6 +1,5 @@
 ---
 title: Database Monitoring Guides
-
 private: true
 disable_toc: true
 cascade:
@@ -11,7 +10,6 @@ cascade:
 ---
 
 {{< whatsnext desc="General guides:" >}}
-    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Setting up Heroku Postgres for Database Monitoring{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}Tagging Database Statements{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/managed_authentication" >}}Connecting with Managed Authentication{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/aurora_autodiscovery" >}}Configuring Database Monitoring for Amazon Aurora DB Clusters{{< /nextlink >}}
@@ -22,6 +20,8 @@ cascade:
 {{< whatsnext desc="SQL Server guides:" >}}
     {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Exploring SQL Server AlwaysOn Availability Groups{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/sql_deadlock" >}}Configuring Deadlock Monitoring on SQL Server{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/sql_extended_events" >}}Configuring Query Completion and Query Error Collection on SQL Server{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/parameterized_queries" >}}Capturing SQL Query Parameter Values With Database Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="PostgreSQL guides:" >}}

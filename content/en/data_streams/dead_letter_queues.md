@@ -2,6 +2,12 @@
 title: Dead Letter Queues
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 Data Streams Monitoring (DSM) provides visibility into your non-empty dead letter queues (DLQs), enabling you to monitor and inspect message processing failures. DSM also enables you to remediate these message processing failures directly within Datadog.
 
 <div class="alert alert-info">Monitoring dead letter queues is available for Amazon SQS queues.</div>

@@ -24,10 +24,10 @@ title: DORA Metrics에 대한 인시던트 데이터 설정
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">현재 선택한 사이트({{< region-param key="dd_site_name" >}})에서 DORA 메트릭을 사용할 수 없습니다.</div>
+<div class="alert alert-danger">현재 선택한 사이트({{< region-param key="dd_site_name" >}})에서 DORA 메트릭을 사용할 수 없습니다.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA 메트릭은 공개 베타 버전입니다.</div>
+<div class="alert alert-danger">DORA 메트릭은 공개 베타 버전입니다.</div>
 
 ## 개요
 

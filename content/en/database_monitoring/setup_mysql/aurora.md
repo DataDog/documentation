@@ -201,7 +201,7 @@ instances:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint here, not the cluster endpoint.</div>
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -251,7 +251,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
+<div class="alert alert-danger">Use the Aurora instance endpoint as the host, not the cluster endpoint.</div>
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -262,11 +262,62 @@ If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Databas
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
+### Operator
+
+Using the [Operator instructions in Kubernetes and Integrations][3] as a reference, follow the steps below to set up the MySQL integration:
+
+1. Create or update the `datadog-agent.yaml` file with the following configuration:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              mysql.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <AWS_INSTANCE_ENDPOINT>
+                  port: <PORT>
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  dbm: true
+                  aws:
+                    instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+                    region: <AWS_REGION>
+    ```
+
+2. Apply the changes to the Datadog Operator using the following command:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
+
 ### Helm
 
-Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
-
-1. Complete the [Datadog Agent installation instructions][3] for Helm.
+1. Complete the [Datadog Agent installation instructions][4] for Helm.
 2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
     ```yaml
     clusterAgent:
@@ -276,16 +327,21 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
           init_config:
           instances:
             - dbm: true
-              host: <INSTANCE_ADDRESS>
-              port: 3306
+              host: <AWS_INSTANCE_ENDPOINT>
+              port: <PORT>
               username: datadog
               password: 'ENC[datadog_user_database_password]'
+              aws:
+                instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+                region: <AWS_REGION>
 
     clusterChecksRunner:
       enabled: true
     ```
 
+
 3. Deploy the Agent with the above configuration file from the command line:
+
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
@@ -293,10 +349,6 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 <div class="alert alert-info">
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
 
 ### Configure with mounted files
 
@@ -308,14 +360,17 @@ init_config:
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
-    port: 3306
+    port: <PORT>
     username: datadog
     password: 'ENC[datadog_user_database_password]'
+    aws:
+      instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+      region: <AWS_REGION>
 ```
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 
 ```yaml
@@ -334,28 +389,34 @@ metadata:
         {
           "dbm": true,
           "host": "<AWS_INSTANCE_ENDPOINT>",
-          "port": 3306,
+          "port": <PORT>,
           "username": "datadog",
-          "password": "ENC[datadog_user_database_password]"
+          "password": "ENC[datadog_user_database_password]",
+          "aws": {
+            "instance_endpoint": "<AWS_INSTANCE_ENDPOINT>",
+            "region": "<AWS_REGION>"
+          }
         }
       ]
 spec:
   ports:
-  - port: 3306
+  - port: <PORT>
     protocol: TCP
-    targetPort: 3306
+    targetPort: <PORT>
     name: mysql
 ```
-<div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][6] and declare the password using the `ENC[]` syntax.
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
-[4]: /agent/configuration/secrets-management
+[1]: /containers/cluster_agent/setup/
+[2]: /containers/cluster_agent/clusterchecks/
+[3]: /containers/kubernetes/integrations/?tab=datadogoperator
+[4]: /containers/kubernetes/integrations/?tab=helm
+[5]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[6]: /agent/configuration/secrets-management
+
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -10,7 +10,7 @@ algolia:
   - recomendaciones de fiabilidad
   - rastreo
 description: Aprende a optimizar el rendimiento y la fiabilidad de tu aplicación con
-  las recomendaciones de APM.
+  las Recomendaciones de APM.
 further_reading:
 - link: /tracing/
   tag: Documentación
@@ -24,6 +24,9 @@ further_reading:
 - link: /database_monitoring/recommendations/
   tag: Documentación
   text: Recomendaciones de DBM
+- link: https://www.datadoghq.com/blog/proactive-app-recommendations/
+  tag: Blog
+  text: Mejora el rendimiento y la fiabilidad con Proactive App Recommendations
 multifiltersearch:
   data:
   - category: Rendimiento
@@ -91,14 +94,15 @@ multifiltersearch:
   - filter_by: true
     id: recommendation_prerequisite
     name: Requisito previo de la recomendación
+site_support_id: apm_recommendations
 title: Recomendaciones de APM
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Las recomendaciones de APM están en vista previa. Las características y recomendaciones pueden cambiar antes de la disponibilidad general.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/apm-proactive-recommendations/" >}}
+Las Recomendaciones de APM están en vista previa. Las funciones y recomendaciones pueden cambiar antes de la disponibilidad general. Para solicitar acceso, rellena este formulario.
+{{< /callout >}}
 
-Las recomendaciones de APM te ayudan a optimizar el rendimiento, la fiabilidad y los porcentajes de error de tus aplicaciones ofreciéndote oportunidades de optimización basadas en la telemetría recopilada sobre tus aplicaciones. Estas recomendaciones están diseñadas para:
+Las Recomendaciones de APM te ayudan a optimizar el rendimiento, la fiabilidad y los porcentajes de error de tus aplicaciones ofreciéndote oportunidades de optimización basadas en la telemetría recopilada sobre tus aplicaciones. Estas recomendaciones están diseñadas para:
 
 - Identificar y resolver los cuellos de botella en el rendimiento
 - Mejorar la fiabilidad y el tiempo de actividad del servicio
@@ -112,7 +116,7 @@ Algunas recomendaciones dependen de productos específicos de Datadog. Utiliza e
 
 ## Cómo funciona
 
-Las recomendaciones de APM se basan en datos recopilados de diferentes partes de tu stack tecnológico:
+Las Recomendaciones de APM se basan en datos recopilados de diferentes partes de tu stack tecnológico:
 
 - Sesiones y recorridos de los usuarios a partir de Real User Monitoring (RUM)
 - Trazas distribuidas a partir de Application Performance Monitoring (APM)
@@ -121,11 +125,11 @@ Las recomendaciones de APM se basan en datos recopilados de diferentes partes de
 
 Al examinar conjuntamente estas fuentes, Datadog encuentra formas de ayudarte a mejorar el rendimiento, la fiabilidad y la experiencia del usuario.
 
-## Utilización de las recomendaciones de APM 
+## Uso de las Recomendaciones de APM 
 
 Revisar las recomendaciones que requieren tu atención:
 
-1. Ve a [**APM** > **Recommendations**][1] (APM > Recomendaciones).
+1. Ve a [**APM** > **Recommendations** (APM > Recomendaciones)][1].
 2. Revisa las recomendaciones en **For Review** (Para revisión).
 3. Selecciona una recomendación de la lista para ver el problema, el impacto y cómo resolverlo.
 4. Revisa el problema, su impacto y la recomendación de Datadog para resolverlo.

@@ -1,5 +1,6 @@
 ---
 title: Can I set up the dd-agent mysql check on my Google CloudSQL?
+description: "Configure the Datadog Agent MySQL integration to monitor a MySQL instance running in Google CloudSQL with remote connection setup."
 aliases:
   - /agent/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
   - /integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/

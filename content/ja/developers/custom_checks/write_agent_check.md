@@ -20,7 +20,7 @@ title: カスタム Agent チェックの書き方
 
 カスタム Agent チェックを作成する前に、[Datadog Agent][1] をインストールしてください。
 
-<div class="alert alert-warning">最新バージョンの Agent と互換性を保つには、カスタム Agent チェックは Python 3 互換である必要があります。</div>
+<div class="alert alert-danger">最新バージョンの Agent と互換性を保つには、カスタム Agent チェックは Python 3 互換である必要があります。</div>
 
 ### 構成
 

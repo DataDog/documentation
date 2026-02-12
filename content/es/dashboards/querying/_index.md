@@ -31,13 +31,13 @@ Cuando abras por primera vez el editor de gráficas, te encontrarás en la pesta
 
 Para configurar tu gráfica en los dashboards, sigue este proceso:
 
-1. [Selecciona la visualización](#select-your-visualization)
-2. [Define la métrica](#define-the-metric)
-3. [Filtra tu métrica](#filter)
-4. [Configura la agregación temporal](#configure-the-time-aggregation)
-5. [Configura la agregación espacial](#configure-the-space-aggregation)
-6. [Aplica la función](#advanced-graphing)
-7. [Asígnale un título a la gráfica](#create-a-title)
+1. [Seleccionar la visualización](#select-your-visualization)
+2. [Definir la métrica](#define-the-metric)
+3. [Filtrar tu métrica](#filter)
+4. [Configurar la agregación temporal](#configure-the-time-aggregation)
+5. [Configurar la agregación espacial](#configure-the-space-aggregation)
+6. [Aplicar la función](#advanced-graphing)
+7. [Asignar un título a la gráfica](#create-a-title)
 
 ### Seleccionar la visualización
 
@@ -46,6 +46,8 @@ Selecciona tu visualización entre los [widgets][3] disponibles.
 ### Definir la métrica
 
 Elige la métrica a graficar al buscarla o seleccionarla en el menú desplegable junto a **Metric** (Métrica). Si no sabes qué métrica utilizar, el menú desplegable de métricas proporciona información adicional, como por ejemplo `unit`, `type`, `interval`, `description`, `tags` y el número de `tag values`. 
+
+También puedes ver indicadores de origen Datadog u OpenTelemetry. Si tu entorno utiliza ambos, puedes utilizar el selector **Modo semántico** de Datadog para [consultar todas las métricas de Datadog y OpenTelemetry][18] en un único gráfico.
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Menú desplegable del selector de métricas" responsive="true" style="width:100%;">}}
 
@@ -72,7 +74,7 @@ El método de agregación se encuentra junto al menú desplegable del filtro. Po
 
 Independientemente de las opciones elegidas anteriormente, siempre habrá agregación de datos debido a las limitaciones físicas de tamaño del período que contiene la gráfica. Si una métrica se actualiza cada segundo y se dispone de 4 horas de datos, se necesitan 14 400 puntos para mostrar todo. En cada gráfica se muestran unos 300 puntos en un momento dado. Por lo tanto, cada punto mostrado en la pantalla representa 48 puntos de datos.
 
-En la práctica, el Agent recopila métricas cada 15-20 segundos. Por tanto, un día de datos equivale a 4.320 puntos de datos. Si muestras los datos de un día en un solo gráfico, Datadog agrupa automáticamente los datos. Para obtener más detalles sobre la agregación temporal, consulta [Introducción a las métricas][10]. Para obtener más información sobre los intervalos de rollup y sobre cómo Datadog amplía automáticamente los puntos de datos, consulta la documentación [rollup][11].
+En la práctica, el Agent recopila métricas cada 15-20 segundos. Por tanto, un día de datos equivale a 4.320 puntos de datos. Si muestras los datos de un día en un solo gráfico, Datadog agrupa automáticamente los datos. Para obtener más detalles sobre la agregación temporal, consulta [Introducción a las métricas][10]. Para obtener más información sobre los intervalos de rollup y sobre cómo Datadog amplía automáticamente los puntos de datos, consulta la documentación [Rollup][11].
 
 Para agrupar manualmente los datos, utiliza la [función rollup][12]. Haz clic en el icono sigma para añadir una función y selecciona `rollup` en el menú desplegable. A continuación, elige cómo quieres agregar los datos y el intervalo en segundos.
 
@@ -197,6 +199,24 @@ min(status:error, status:warn)
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Ejemplo de fórmula para «min» que muestra el valor de recuento mínimo entre dos consultas de log" style="width:75%;" >}}
 
+#### Exponenciación
+
+Ahora puedes utilizar la función `pow()` para elevar una constante o una métrica a la potencia de otra constante o métrica. Esto te permite modelar el crecimiento o la desintegración exponencial.
+
+El siguiente es un ejemplo de cómo prever el crecimiento de usuarios aplicando un factor de crecimiento exponencial a un periodo de tiempo anterior:
+
+```text
+users.sessions{*} * pow(1.1, timeshift(-1))
+```
+
+El siguiente es un ejemplo de cómo evidenciar las anomalías amplificando el valor mediante la exponenciación: 
+
+```text
+pow(ping{region:*}, 2)
+```
+
+Para utilizar `pow(a, b)`, `a` y `b` pueden ser constantes o métricas. Esta función sólo está disponible para métricas.
+
 ### Crear un alias
 
 Puedes crear un alias personalizado para tus fuentes de datos a fin de facilitar a tus usuarios la interpretación de los resultados de la gráfica.
@@ -259,3 +279,4 @@ Con las gráficas divididas, puedes consultar las visualizaciones de métricas d
 [15]: /es/metrics/advanced-filtering/#boolean-filtered-queries
 [16]: /es/dashboards/widgets/timeseries/#event-overlay
 [17]: /es/logs/explorer/search_syntax/
+[18]: /es/metrics/open_telemetry/query_metrics

@@ -1,5 +1,6 @@
 ---
 title: Build workflows
+description: Create workflows from blueprints or build custom workflows using AI assistance, manual configuration, and drag-and-drop actions.
 disable_toc: false
 aliases:
 - /workflows/build
@@ -12,7 +13,7 @@ further_reading:
   text: "Getting Started with Workflow Automation"
 - link: "/actions/actions_catalog"
   tag: "Documentation"
-  text: "Browse the available actions in the Actions Catalog"
+  text: "Browse the available actions in the Action Catalog"
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
@@ -55,7 +56,7 @@ To iterate on an existing workflow:
 1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to add the functionality to your workflow.
 
-<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://datadoghq.slack.com/">Datadog Community Slack</a></div>
+<div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://chat.datadoghq.com/">Datadog Community Slack</a></div>
 
 ## Create a custom workflow
 
@@ -103,6 +104,20 @@ See the test and debug page for information on [how to test a step][11].
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+### Updating a published workflow
+
+You can update published workflows without affecting the live version until you are ready.
+
+Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
+
+Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor.
+
+To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
+
+**Notes**:
+- Running a draft for published workflows do not accrue costs.
+- Any update to the workflow properties (name, tags, or notifications) bypass the drafting flow and are applied immediately to the published version.
 
 ## Variables and parameters
 
@@ -190,7 +205,7 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
-[10]: https://datadoghq.slack.com/
+[10]: https://chat.datadoghq.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
 [12]: /service_management/workflows/variables/
 [13]: /api/latest/workflow-automation/

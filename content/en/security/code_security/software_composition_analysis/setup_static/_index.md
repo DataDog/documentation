@@ -11,66 +11,19 @@ aliases:
 
 Datadog Software Composition Analysis (SCA) scans your repositories for open-source libraries and detects known security vulnerabilities before you ship to production.
 
-**Supported languages:** C#, Go, Java, JavaScript, PHP, Python, Ruby
-
 To get started:
 1. Open [Code Security settings][2].
 2. In **Activate scanning for your repositories**, click **Manage Repositories**.
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
-The sections below cover the different ways to configure SCA for your repositories.
+### Supported languages and dependency manifests
+Datadog SCA scans libraries in the following languages using dependency manifests (such as lockfiles and other supported manifest files) to identify vulnerable dependencies.
 
-## Select where to run static SCA scans
-
-You can run SCA scans in two ways:
-
-- **Datadog-hosted:** For GitHub repositories (except those using [Git Large File Storage](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage)).
-- **CI Pipelines:** For other providers (GitHub, GitLab, Azure DevOps).
-
-{{< tabs >}}
-{{% tab "Datadog" %}}
-**Analyze code directly in Datadog**
-
-For GitHub repositories, you can run Datadog SCA scans directly on Datadog infrastructure. To get started, navigate to [Code Security settings][1].
-
-[1]: https://app.datadoghq.com/security/configuration/code-security/setup
-
-<div class="alert alert-info">
-Datadog-hosted SCA does not support repositories that:<br>
-- Use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a><br>
-- Contain file paths with parent directory traversal (<code>..</code>)<br>
-- Contain file names longer than 255 characters<br>
-Use CI Pipelines for these repositories.
-</div>
-
-{{% /tab %}}
-{{% tab "CI Pipelines" %}}
-**Analyze code in your CI Pipelines**
-
-Run SCA by following instructions for your chosen CI provider below. Datadog SCA offers native support for:
-- [Github][1]
-- [Azure DevOps][2]
-- [Gitlab][3]
-- [Others][4] (via CLI)
-
-You **must** scan your default branch at least once before results appear in Datadog **Code Security**.
-
-[1]: /security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider
-[2]: /security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider
-[3]: /security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider
-[4]: /security/code_security/software_composition_analysis/setup_static/?tab=other#select-your-source-code-management-provider
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Run SCA scans in your CI Pipelines
-
-Datadog SCA scans libraries in the following languages and **requires** a lockfile to report them:
-
-| Language   | Package Manager    | Lockfile                                |
+| Language   | Package Manager    | File                                |
 |------------|-------------------|------------------------------------------|
-| C#         | .NET              | `packages.lock.json`                     |
+| C#         | .NET              | `packages.lock.json`, `.csproj` files    |
+| C++        | Conan             | `conan.lock`                             |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
@@ -78,17 +31,48 @@ Datadog SCA scans libraries in the following languages and **requires** a lockfi
 | Node.js    | pnpm              | `pnpm-lock.yaml`                         |
 | Node.js    | yarn              | `yarn.lock`                              |
 | PHP        | composer          | `composer.lock`                          |
+| Python     | PDM               | `pdm.lock`                               |
 | Python     | pip               | `requirements.txt`, `Pipfile.lock`       |
 | Python     | poetry            | `poetry.lock`                            |
+| Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
+| Rust       | Cargo           | `cargo.lock`                               |
 
-### Select your source code management provider
+**Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
+
+## Select where to run static SCA scans
+By default, scans are automatically run upon each commit to a lockfile within an enabled repository. Default branch results are updated every hour to detect new vulnerabilities on existing packages.
+
+### Scan with Datadog-hosted scanning
+
+You can run Datadog Static SCA scans directly on Datadog infrastructure. Supported repository types include:
+- [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider) (excluding repositories that use [Git Large File Storage][21])
+- [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
+- [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
+
+To get started, navigate to the [**Code Security** page][2].
+
+<div class="alert alert-info">
+Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
+For these cases, scan using CI Pipelines.
+</div>
+
+### Scan in CI pipelines
+Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
+
+Configure your Datadog API and application keys by adding `DD_APP_KEY` and `DD_API_KEY` as secrets. Make sure the application key has the `code_analysis_read` scope.
+
+<div class="alert alert-info">
+You must scan your default branch at least once before results appear in <b>Code Security</b>.
+</div>
+
+## Select your source code management provider
 Datadog SCA supports all source code management providers, with native support for GitHub, GitLab, and Azure DevOps.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If GitHub is your source code management provider, you must configure a GitHub App using the [GitHub integration tile][1] and set up the [source code integration][2] to see inline code snippets and enable [pull request comments][3].
+Configure a GitHub App with the [GitHub integration tile][1] and set up the [source code integration][2] to enable inline code snippets and [pull request comments][3].
 
 When installing a GitHub App, the following permissions are required to enable certain features:
 
@@ -101,70 +85,24 @@ When installing a GitHub App, the following permissions are required to enable c
 [3]: /security/code_security/dev_tool_int/github_pull_requests
 
 {{% /tab %}}
+{{% tab "GitLab" %}}
+
+See the [GitLab source code setup instructions][1] to connect GitLab to Datadog. Both GitLab.com and Self-Managed instances are supported.
+
+[1]: /integrations/gitlab-source-code/#setup
+
+{{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
-Repositories from Azure DevOps are supported in closed Preview. Your Azure DevOps organizations must be connected to a Microsoft Entra tenant. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
-</div>
+**Note:** Your Azure DevOps integrations must be connected to a Microsoft Entra tenant. Azure DevOps Server is **not** supported.
 
-If Azure DevOps is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow the instructions below to complete the setup process.
-
-**Note:** Azure DevOps Server is not supported.
-
-### Create and register a Microsoft Entra app
-If you are an admin in your Azure portal, you can configure Entra apps to connect your tenant to Datadog.
-
-1. Navigate to [Code Security setup][1].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
-3. Select **CI Pipelines**.
-4. Select the scan types you want to use.
-5. Select **Azure DevOps** as your source code management provider.
-6. If this is your first time connecting an Azure DevOps organization to Datadog, click **Connect Azure DevOps Account**.
-7. When connecting a Microsoft Entra tenant for the first time you will need to go to your [Azure Portal][2] to register a new application. During this creation process, ensure the following:
-   1. You select **Accounts in this organizational directory only (Datadog, Inc. only - Single tenant)** as the account type.
-   2. Set the redirect URI to **Web** and paste the URI given to you in the instructions.
-8. Copy the values for **Application (client) ID** and **Directory (tenant) ID** and paste them into Datadog.
-9. In the Azure Portal for your app registration, navigate to **Manage > Certificates & secrets** and switch to **Client secrets**.
-10. Click **New client secret** and create a secret with your desired description and expiration values.
-11. Copy and paste the string in the **Value** column for your new secret, paste it into Datadog, and click **Create Configuration** to complete connecting your Entra tenant to Datadog.
-13. Add one or more Azure DevOps organizations by pasting the organization slug into Datadog and then adding your Service Principal as a user by going to **Organization settings > Users > Add users**.
-    1.  Your Service Principal will need the **Basic** access level and at least the **Project Contributor** security group.
-14. Click **Submit Organization**.
-
-### Configure project service hooks
-
-To enable all Code Security features in Azure DevOps, you'll need to use a [Datadog API key][3] to configure service hooks for your projects.
-
-First, set your environment variables (note: the Datadog UI will fill these values out for you):
-```shell
-export AZURE_DEVOPS_TOKEN="..."                 # Client Secret Value
-export DD_API_KEY="..."                         # Datadog API Key
-```
-
-Then, replace the placeholders in the script below with your [Datadog Site][5] and Azure DevOps organization name to configure the necessary service hooks on your organization's projects:
-```shell
-curl https://raw.githubusercontent.com/DataDog/azdevops-sci-hooks/refs/heads/main/setup-hooks.py > setup-hooks.py && chmod a+x ./setup-hooks.py
-./setup-hooks.py --dd-site="<dd-site>" --az-devops-org="<org-name>"
-```
-
-Click [here][4] to see our CLI that automates this process.
+See the [Azure source code setup instructions][4] to connect Azure DevOps repositories to Datadog.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/DataDog/azdevops-sci-hooks
+[4]: /integrations/azure-devops-source-code/#setup
 [5]: /getting_started/site/
-
-{{% /tab %}}
-{{% tab "GitLab" %}}
-
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
-</div>
-
-If GitLab is your source code management provider, before you can begin installation, you must request access to the closed Preview using the form above. After being granted access, follow [these instructions][1] to complete the setup process.
-
-[1]: https://github.com/DataDog/gitlab-integration-setup
 
 {{% /tab %}}
 {{% tab "Other" %}}
@@ -194,8 +132,12 @@ There are two ways to run SCA scans from within your CI Pipelines:
 
 You can run SCA scans automatically as part of your CI/CD workflows using built-in integrations for popular CI providers.
 
+<div class="alert alert-danger">
+Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, for example) are not supported and can cause issues with the product.
+</div>
+
 {{< tabs >}}
-{{% tab "Github" %}}
+{{% tab "GitHub" %}}
 **GitHub Actions**
 
 SCA can run as a job in your GitHub Actions workflows. The action provided below invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][1], on your codebase and uploads the results into Datadog.
@@ -250,14 +192,8 @@ trigger:
       # Optionally specify a specific branch to trigger on when merging
       - "*"
 
-pr:
-  branches:
-    include:
-      - "*"
-
 variables:
   - group: "Datadog"
-
 
 jobs:
   - job: DatadogSoftwareCompositionAnalysis
@@ -335,6 +271,8 @@ You can upload SBOMs generated by other tools if they meet these requirements:
 
 Third-party SBOM files are uploaded to Datadog using the [`datadog-ci`](https://github.com/DataDog/datadog-ci/?tab=readme-ov-file#how-to-install-the-cli) command.
 
+You can find optional arguments and other information in the `datadog-ci` [README][22].
+
 You can use the following command to upload your third-party SBOM. Ensure the environment variables `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE`
 are set to your API key, APP key, and [Datadog site][12], respectively.
 
@@ -342,73 +280,17 @@ are set to your API key, APP key, and [Datadog site][12], respectively.
 datadog-ci sbom upload /path/to/third-party-sbom.json
 ```
 
-## Features
+<div class="alert alert-info">
+If you already have automatic scanning enabled for a repository, a manual upload will replace any existing result for that commit.
+</div>
 
-### Link results to services
-Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
-The [schema version `v3`][15] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+## Link findings to Datadog services and teams
 
-The `paths` attribute is a list of globs that should match paths in the repository.
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - "**"
-{{< /code-block >}}
-{{% /collapse-content %}}
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
-{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-{{% /collapse-content %}}
 
-{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
-
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
-
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
-
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name closest to the filename is selected.
-{{% /collapse-content %}}
-
-If one method succeeds (in order), no further mapping attempts are made.
-
-### Link results to teams
-
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
-
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
-
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][16] for this feature to function properly.
-
-### Reachability analysis
+## Filter by reachable vulnerabilities
 
 Datadog offers static reachability analysis to help teams assess whether vulnerable code paths in dependencies are referenced within their application code. This capability supports more effective prioritization by identifying vulnerabilities that are statically unreachable and therefore present minimal immediate risk.
 
@@ -460,6 +342,22 @@ Static reachability analysis is available for the following advisories:
 - [GHSA-f3j5-rmmp-3fc5](https://osv.dev/vulnerability/GHSA-f3j5-rmmp-3fc5)
 {{% /collapse-content %}}
 
+## Data Retention
+
+Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
+
+## Further Reading
+
+{{< whatsnext desc="More about SCA:">}}
+    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Set up runtime detection of library vulnerabilities{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Other Code Security scanning for your repositories:">}}
+    {{< nextlink href="/security/code_security/static_analysis/" >}}Static Code Analysis (SAST){{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/iac_scanning/" >}}Infrastructure as Code (IaC){{< /nextlink >}}
+    {{< nextlink href="/security/code_security/secret_scanning/" >}}Secrets Scanning{{< /nextlink >}}
+{{< /whatsnext >}}
+
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 [3]: /security/code_security/software_composition_analysis/setup_static
@@ -479,17 +377,12 @@ Static reachability analysis is available for the following advisories:
 [18]: https://cyclonedx.org/docs/1.4/json/
 [19]: https://cyclonedx.org/docs/1.5/json/
 [20]: https://cyclonedx.org/docs/1.6/json/
-
-
-## Further Reading
-
-{{< whatsnext desc="More about SCA:">}}
-    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Runtime detection of libraries vulnerabilities{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Other Code Security scanning for your repositories:">}}
-    {{< nextlink href="/security/code_security/static_analysis/" >}}Static Code Analysis (SAST){{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/iac_scanning/" >}}Infrastructure as Code (IaC){{< /nextlink >}}
-    {{< nextlink href="/security/code_security/secret_scanning/" >}}Secrets Scanning{{< /nextlink >}}
-{{< /whatsnext >}}
-
+[21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[22]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-sbom
+[23]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[24]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[25]: https://docs.datadoghq.com/data_security/data_retention_periods/
+[26]: https://docs.datadoghq.com/account_management/teams/
+[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[103]: https://docs.datadoghq.com/data_security/data_retention_periods/

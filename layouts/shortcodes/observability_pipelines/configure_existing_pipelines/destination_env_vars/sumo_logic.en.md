@@ -2,4 +2,4 @@
     - The Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:   
         - `<ENDPOINT>` is your Sumo collection endpoint.
         - `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
-    -  Stored in the environment variable `DD_OP_DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
+    -  The default environment variable is `DD_OP_DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.

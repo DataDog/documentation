@@ -73,7 +73,7 @@ Add the following environment variable value to your Docker command line:
 $ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
@@ -84,7 +84,7 @@ Add the following environment variable value to your application container's Doc
 ENV DD_APPSEC_ENABLED=true
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App & API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App & API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -103,7 +103,7 @@ spec:
               value: "true"
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
@@ -120,7 +120,7 @@ Update your application's ECS task definition JSON file using this environment s
 ]
 ```
 
-For more information on how to create a fitting docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 
@@ -147,7 +147,7 @@ If you are building your Go application without [CGO][9], you can still enable A
    $ CGO_ENABLED=0 orchestrion go build -tags appsec my-program
    ```
 
-  <div class="alert alert-warning">Disabling CGO usually guarantees a statically-linked binary. This is will not be the case here.</div>
+  <div class="alert alert-danger">Disabling CGO usually guarantees a statically-linked binary. This is will not be the case here.</div>
 
 2. Install `libc.so.6`, `libpthread.so.0` and `libdl.so.2` on your system, as these libraries are required by the Datadog WAF:
    This installation can be done by installing the `glibc` package on your system with your package manager. See [Creating a Dockerfile for App and API Protection for Go][3].

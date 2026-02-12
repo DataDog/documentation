@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Code Security
+description: Secure applications with SAST, SCA, and IAST tools to detect vulnerabilities in first-party code and open source libraries.
 aliases:
 - /getting_started/code_analysis/
 ---
@@ -46,15 +47,14 @@ To start running code scans in your IDE, see the respective documentation for yo
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Customize your repository settings
 In [Code Security Settings][3], you can manage which repositories have PR comments enabled, as well as [customize the configuration][11] of which Static Code Analysis (SAST) rules are applied across or within repositories. For all the default rules provided by Datadog, see the [SAST Rules][4].
 
-### Set up Quality Gates
+### Set up PR Gates
 
-Datadog provides [Quality Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [Quality Gate setup][7].
+Datadog provides [PR Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [PR Gate setup][7].
 
 ## Prioritize vulnerabilities with runtime context
 
@@ -134,76 +134,18 @@ Code Security helps you set up workflows to track and manage remediation of find
 - Set up [notification rules][9] to notify your team(s) of new findings via Slack, Jira, email, and more
 - Track vulnerabilities by service and team in the **Code Security Summary** page.
 
-## Link results to Datadog services and teams
+## Link findings to Datadog services and teams
 
-### Link results to services
-Datadog associates code and library scan results with relevant services by using the following mechanisms:
-
-1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
-2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
-3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
-
-If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
-
-#### Identifying the code location in the Software Catalog
-
-The [schema version `v3`][12] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
-
-The `paths` attribute is a list of globs that should match paths in the repository.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-
-
-#### Detecting file usage patterns
-
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-
-#### Detecting service name in paths and repository names
-
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
-
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
-
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name the closest to the filename is selected.
-
-
-### Link results to teams
-
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
-
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
-
-**Note**: You must [accurately map][13] your Git provider teams to your [Datadog teams][10] for this feature to function properly.
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: /security/code_security/dev_tool_int/github_pull_requests/
 [3]: https://app.datadoghq.com/security/configuration/code-security/setup
 [4]: /security/code_security/static_analysis/static_analysis_rules/
 [5]: /security/code_security/dev_tool_int/ide_plugins/
-[6]: /quality_gates/
-[7]: /quality_gates/setup
+[6]: /pr_gates/
+[7]: /pr_gates/setup
 [8]: /security/code_security/software_composition_analysis/#datadog-severity-score
 [9]: https://app.datadoghq.com/security/configuration/notification-rules
 [10]: /account_management/teams/
 [11]: /security/code_security/static_analysis/setup/#customize-your-configuration
-[12]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
-[13]: /integrations/github/#connect-github-teams-to-datadog-teams

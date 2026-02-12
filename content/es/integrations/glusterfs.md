@@ -1,91 +1,34 @@
 ---
 app_id: glusterfs
-app_uuid: 3c3562fb-8dce-4265-a8de-eacaa30974e1
-assets:
-  dashboards:
-    Red Hat Gluster Storage: assets/dashboards/red_hat_gluster_storage.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: glusterfs.cluster.nodes.count
-      metadata_path: metadata.csv
-      prefix: glusterfs.
-    process_signatures:
-    - glusterd
-    - gluster
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10145
-    source_type_name: GlusterFS
-  monitors:
-    Number of offline bricks is high: assets/monitors/brick_status.json
-  saved_views:
-    glusterfs_processes: assets/saved_views/glusterfs_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - almacenes de datos
 - recopilación de logs
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: glusterfs
-integration_id: glusterfs
-integration_title: Red Hat Gluster Storage
-integration_version: 3.0.1
-is_public: true
-manifest_version: 2.0.0
-name: glusterfs
-public_title: Red Hat Gluster Storage
-short_description: Monitoriza métricas de estados de nodo, de volumen y de ladrillo
-  del clúster GlusterFS.
+description: Monitoriza métricas de estados de nodo, de volumen y de ladrillo del
+  clúster GlusterFS.
+integration_version: 3.0.2
+media: []
 supported_os:
 - Linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Categoría::Almacenes de datos
-  - Categoría::Recopilación de logs
-  - Oferta::Integración
-  configuration: README.md#Configuración
-  description: Monitoriza métricas de estados de nodo, de volumen y de ladrillo del
-    clúster GlusterFS.
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Red Hat Gluster Storage
+title: Red Hat Gluster Storage
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Este check monitoriza la situación, el volumen y el estado de ladrillos del clúster [Red Hat Gluster Storage][1] a través del Datadog Agent. 
-Esta integración GlusterFS es compatible con las versiones de código abierto y vendidas por Red Hat de GlusterFS.
+Este check monitoriza el estado del clúster de [Red Hat Gluster Storage](https://www.redhat.com/en/technologies/storage/gluster), el volumen y el estado de los bloques a través del Datadog Agent.
+Esta integración de GlusterFS es compatible con las versiones de Red Hat de terceros y de código abierto de GlusterFS.
 
 ## Configuración
 
-Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecute en un host. Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de estas instrucciones.
 
 ### Instalación
 
-El check de GlusterFS está incluido en el paquete del [Datadog Agent ][3].
+El check de GlusterFS está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest).
 No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
 
-1. Edita el archivo `glusterfs.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent, para empezar a recopilar los datos de rendimiento de tu GlusterFS. Para conocer todas las opciones de configuración disponibles, consulta el [glusterfs.d/conf.yaml de ejemplo][4].
+1. Edita el archivo `glusterfs.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para comenzar a recopilar tus datos de rendimiento de GlusterFS. Consulta el [glusterfs.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example de ejemplo) para todas las opciones de configuración disponibles.
 
    ```yaml
    init_config:
@@ -110,7 +53,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
         min_collection_interval: 60
    ```
 
-   **NOTA**: Por defecto, [`gstatus`][5] llama internamente al comando `gluster` que requiere ser ejecutado como superusuario. Añade una línea como la siguiente a tu archivo `sudoers`:
+   **NOTA**: Por defecto, [`gstatus`](https://github.com/gluster/gstatus#install) llama internamente al comando `gluster` que requiere ser ejecutado como superusuario. Añade una línea como la siguiente a tu archivo `sudoers`:
 
    ```text
     dd-agent ALL=(ALL) NOPASSWD:/path/to/your/gstatus
@@ -118,66 +61,98 @@ No es necesaria ninguna instalación adicional en tu servidor.
 
    Si tu entorno GlusterFS no requiere raíz, define la opción de configuración `use_sudo` como `false`.
 
-2. [Reinicia el Agent][6].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 #### Recopilación de logs
 
+1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+   ```yaml
+   logs_enabled: true
+   ```
 
-    ```yaml
-    logs_enabled: true
-    ```
+1. Edita este bloque de configuración en tu archivo `glusterfs.d/conf.yaml` para empezar a recopilar tus logs de GlusterFS:
 
-2. Edita este bloque de configuración en tu archivo `glusterfs.d/conf.yaml` para empezar a recopilar tus logs de GlusterFS:
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/glusterfs/glusterd.log
+       source: glusterfs
+     - type: file
+       path: /var/log/glusterfs/cli.log
+       source: glusterfs
+   ```
 
-    ```yaml
-    logs:
-      - type: file
-        path: /var/log/glusterfs/glusterd.log
-        source: glusterfs
-      - type: file
-        path: /var/log/glusterfs/cli.log
-        source: glusterfs
-    ```
+Cambia el valor del parámetro `path` en función de tu entorno. Consulta el [conf.yaml de ejemplo](https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-  Cambia el valor del parámetro `path` en función de tu entorno. Para ver todas las opciones de configuración disponibles, consulta el [conf.yaml de ejemplo][4].
+3. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-  3. [Reinicia el Agent][6].
-
-Para obtener más información sobre cómo configurar el Agent para la recopilación de logs en entornos Kubernetes, consulta [Recopilación de logs de Kubernetes][7].
+Para obtener información sobre la configuración del Agent para la recopilación de logs en entornos de Kubernetes, consulta [Recopilación de logs de Kubernetes](https://docs.datadoghq.com/agent/kubernetes/log/).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][8] y busca `glusterfs` en la sección **Checks**.
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `glusterfs` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "glusterfs" >}}
 
+| | |
+| --- | --- |
+| **glusterfs.brick.block_size** <br>(gauge) | Tamaño de bloque del bloque<br>_Se muestra como byte_ |
+| **glusterfs.brick.inodes.free** <br>(gauge) | Inodos libres en el bloque<br>_Se muestra como byte_ |
+| **glusterfs.brick.inodes.total** <br>(gauge) | Total de inodos en el bloque<br>_Se muestra como byte_ |
+| **glusterfs.brick.inodes.used** <br>(gauge) | Inode utilizado en el bloque<br>_Se muestra como byte_ |
+| **glusterfs.brick.online** <br>(gauge) | Número de bloques en línea<br>_Se muestra como unidad_ |
+| **glusterfs.brick.size.free** <br>(gauge) | Tamaño del bloque libre<br>_Se muestra como byte_ |
+| **glusterfs.brick.size.total** <br>(gauge) | Tamaño total del bloque<br>_Se muestra como byte_ |
+| **glusterfs.brick.size.used** <br>(gauge) | Bytes actuales utilizados en el bloque<br>_Se muestra como byte_ |
+| **glusterfs.cluster.nodes.active** <br>(gauge) | Nodos activos actuales<br>_Se muestra como nodo_ |
+| **glusterfs.cluster.nodes.count** <br>(gauge) | Número total de nodos en el clúster<br>_Se muestra como nodo_ |
+| **glusterfs.cluster.volumes.count** <br>(gauge) | Número de volúmenes en el clúster<br>_Se muestra como unidad_ |
+| **glusterfs.cluster.volumes.started** <br>(gauge) | Número de volúmenes iniciados en el clúster<br>_Se muestra como unidad_ |
+| **glusterfs.subvol.disperse** <br>(gauge) | Recuento disperso del subvolumen<br>_Se muestra como unidad_ |
+| **glusterfs.subvol.disperse_redundancy** <br>(gauge) | Redundancia dispersa del subvolumen<br>_Se muestra como unidad_ |
+| **glusterfs.subvol.replica** <br>(gauge) | Réplicas en subvolumen<br>_Se muestra como unidad_ |
+| **glusterfs.volume.bricks.count** <br>(gauge) | Número de bloques en el volumen<br>_Se muestra como unidad_ |
+| **glusterfs.volume.disperse** <br>(gauge) | Número de dispersos en el volumen<br>_Se muestra como unidad_ |
+| **glusterfs.volume.disperse_redundancy** <br>(gauge) | Número de redundancia dispersa en el volumen<br>_Se muestra como unidad_ |
+| **glusterfs.volume.distribute** <br>(gauge) | Número de distribuidos<br>_Se muestra como unidad_ |
+| **glusterfs.volume.inodes.free** <br>(gauge) | Inodos libres en el volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.inodes.total** <br>(gauge) | Tamaño total de inodos en el volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.inodes.used** <br>(gauge) | Bytes usados de inodos en el volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.online** <br>(gauge) | Número de volúmenes en línea<br>_Se muestra como unidad_ |
+| **glusterfs.volume.replica** <br>(gauge) | Réplicas en volúmenes<br>_Se muestra como unidad_ |
+| **glusterfs.volume.size.free** <br>(gauge) | Bytes libres en el volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.size.total** <br>(gauge) | Bytes totales en el volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.size.used** <br>(gauge) | Bytes utilizados en el volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.snapshot.count** <br>(gauge) | Número de snapshots del volumen<br>_Se muestra como byte_ |
+| **glusterfs.volume.used.percent** <br>(gauge) | Porcentaje de volumen utilizado<br>_Se muestra en porcentaje_ |
 
 ### Eventos
 
 GlusterFS no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "glusterfs" >}}
 
+**glusterfs.brick.health**
+
+Devuelve `CRITICAL` si el subvolumen es 'degraded'. Devuelve `OK` si es 'up'.
+
+_Estados: ok, critical, warning_
+
+**glusterfs.volume.health**
+
+Devuelve `CRITICAL` si el volumen es 'degraded'. Devuelve `OK` si es 'up'.
+
+_Estados: ok, critical, warning_
+
+**glusterfs.cluster.health**
+
+Devuelve `CRITICAL` si el volumen es 'degraded'. Devuelve `OK` en caso contrario.
+
+_Estados: ok, critical, warning_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
-
-
-[1]: https://www.redhat.com/en/technologies/storage/gluster
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/datadog_checks/glusterfs/data/conf.yaml.example
-[5]: https://github.com/gluster/gstatus#install
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/es/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/metadata.csv
-[10]: https://github.com/DataDog/integrations-core/blob/master/glusterfs/assets/service_checks.json
-[11]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

@@ -25,7 +25,7 @@ assets:
     source_type_name: RapDev IBM Cloud
   logs: {}
   monitors:
-    IBM Cloud Integration is Unable to Run: assets/monitors/ibm_cloud_api_connection.json
+    IBM Cloud Integration Unable to Run: assets/monitors/ibm_cloud_api_connection.json
 author:
   contact_link: https://meetings.hubspot.com/ewilliams/rapdev-marketplace
   homepage: https://www.rapdev.io
@@ -39,7 +39,7 @@ categories:
 - incident-teams
 - プロビジョニング
 - オーケストレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -140,7 +140,7 @@ IBM Cloud Integration を使用すると、IBM Cloud アカウントから利用
 [3]: https://cloud.ibm.com/docs/account?topic=account-userapikey&interface=ui#create_user_key
 [4]: https://cloud.ibm.com/docs/key-protect?topic=key-protect-retrieve-instance-ID&interface=ui
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information 
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-ibm-cloud" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-ibm-cloud" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

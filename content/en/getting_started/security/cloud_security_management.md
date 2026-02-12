@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Cloud Security
+description: Deploy Datadog Cloud Security for unified visibility across your infrastructure. Configure threat detection, misconfigurations, identity risks, and vulnerabilities.
 aliases:
 - /getting_started/cloud_security_management
 further_reading:
@@ -28,6 +29,10 @@ further_reading:
 [Datadog Cloud Security][1] delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with Cloud Security.
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Phase 1: Deployment
 

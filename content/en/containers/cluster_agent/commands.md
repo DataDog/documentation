@@ -1,5 +1,6 @@
 ---
 title: Cluster Agent Commands and Options
+description: Reference guide for Datadog Cluster Agent command-line interface and environment variables
 aliases:
 - /agent/cluster_agent/commands
 further_reading:

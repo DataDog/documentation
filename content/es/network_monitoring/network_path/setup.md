@@ -195,7 +195,7 @@ Se requiere el Agent `v7.59+`.
 
 Configura rutas de tráfico de red para permitir que el Agent detecte automáticamente y monitorice rutas de red basadas en el tráfico de red real, sin necesidad de especificar los endpoints manualmente.
 
-<div class="alert alert-warning">Habilitar Network Path para detectar automáticamente rutas puede generar una cantidad importante de logs, especialmente cuando se monitorizan rutas de red en un gran número de hosts. </div>
+<div class="alert alert-danger">Habilitar Network Path para detectar automáticamente rutas puede generar una cantidad importante de logs, especialmente cuando se monitorizan rutas de red en un gran número de hosts. </div>
 
 {{< tabs >}}
 {{% tab "Linux" %}}

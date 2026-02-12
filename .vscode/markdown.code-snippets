@@ -27,7 +27,7 @@
         "scope": "markdown",
         "prefix": ";;gov-region",
         "body": [
-            "{{< site-region region=\"gov\" >}}<div class=\"alert alert-warning\"> Enter summary here <a href=\"/getting_started/site\">Datadog site</a> ({{< region-param key=\"dd_site_name\" >}}).</div>",
+            "{{< site-region region=\"gov\" >}}<div class=\"alert alert-danger\"> Enter summary here <a href=\"/getting_started/site\">Datadog site</a> ({{< region-param key=\"dd_site_name\" >}}).</div>",
             "{{< /site-region >}}"
         ],
         "description": "Gov Site region shortcode"
@@ -48,6 +48,7 @@
         "body": [
             "---",
             "title: Doc Title",
+            "description: One line description",
             "disable_toc: false",
             "aliases:",
             "- /path-to-old-doc/",
@@ -79,19 +80,19 @@
 
     "Alert box": {
         "scope": "markdown",
-        "prefix": ";;alert",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": [
-            "<div class=\"alert alert-${1|info,danger,warning|}\">Text containing an <a href=\"https://google.com\">HTML link.</a></div>"
+            "<div class=\"alert alert-${1|info,tip,danger,warning|}\">${2:Text containing an <a href=\"https://google.com\">HTML link.</a>}</div>"
         ],
-        "description": "Alert box with choice of info, danger, or warning"
+        "description": "Alert box with choice of info, tip, danger, or warning"
     },
 
     "Callout": {
         "scope": "markdown",
         "prefix": ";;callout",
         "body": [
-            "{{< callout url=\"https://google.com\" d_toggle=\"modal\" d_target=\"#signupModal\" custom_class=\"sign-up-trigger\" btn_hidden=\"false\" header=\"Join the Beta!\">}}",
-            "Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!",
+            "{{< callout url="#" btn_hidden=\"false\" header=\"Join the Preview!\">}}",
+            "<Product name> is in Preview. Use this form to submit your request today.",
             "{{< /callout >}}"
         ],
         "description": "A callout with all parameters"

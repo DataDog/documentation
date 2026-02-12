@@ -27,7 +27,7 @@ Incluye los tres componentes siguientes:
 * Trace Agent
 * Container Agent
 
-Puedes utilizar DogStatsD para introducir tus métricas de aplicación personalizadas en Datadog. DogStatsD es un servicio de agregación de métricas que implementa el protocolo StatsD y añade algunas extensiones específicas de Datadog. Para obtener más información, consulta la documentación de [DogStatsD][5]. Además, Datadog proporciona una lista de bibliotecas DogStatsD que puedes utilizar para buscar las [bibliotecas][9] compatibles con tu aplicación.
+Puedes utilizar DogStatsD para introducir tus métricas de aplicación personalizadas en Datadog. DogStatsD es un servicio de agregación de métricas que implementa el protocolo StatsD y añade algunas extensiones específicas de Datadog. Para obtener más información, consulta la documentación de [DogStatsD][5]. Además, Datadog proporciona una lista de librerías DogStatsD que puedes utilizar para buscar las [bibliotecas][9] compatibles con tu aplicación.
 
 Trace Agent es un servicio que recopila trazas (traces) de aplicaciones de varias fuentes y las reenvía a Datadog APM. Para obtener más información, consulta la documentación sobre [rastreo][7].
 

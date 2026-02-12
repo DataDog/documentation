@@ -1,5 +1,6 @@
 ---
 title: Rank
+description: Select and display top or bottom metric series using various aggregation methods like max, mean, sum, and area.
 aliases:
     - /graphing/functions/rank/
 ---

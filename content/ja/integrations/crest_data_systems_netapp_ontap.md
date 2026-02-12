@@ -28,30 +28,30 @@ assets:
     source_type_id: 10325
     source_type_name: crest_data_systems_netapp_ontap
   monitors:
-    '[NetApp ONTAP] Aggregate plex status': assets/monitors/cds_plex_status.json
-    '[NetApp ONTAP] Aggregate raid status': assets/monitors/cds_raid_status.json
-    '[NetApp ONTAP] Aggregate utilization': assets/monitors/cds_aggregate_utilization.json
-    '[NetApp ONTAP] Battery status of Node': assets/monitors/cds_node_battery.json
-    '[NetApp ONTAP] CPU disk busy percent': assets/monitors/cds_disk_busy_percent.json
-    '[NetApp ONTAP] Cluster utilization': assets/monitors/cds_cluster_used_capacity.json
-    '[NetApp ONTAP] Ethernet Port status': assets/monitors/cds_ethernet_port_status.json
-    '[NetApp ONTAP] Fan failed for node': assets/monitors/cds_failed_power_supply.json
-    '[NetApp ONTAP] High IOPS of LUN': assets/monitors/cds_lun_iops.json
-    '[NetApp ONTAP] High IOPS of cluster': assets/monitors/cds_cluster_iops.json
-    '[NetApp ONTAP] High IOPS of volume': assets/monitors/cds_volume_iops.json
-    '[NetApp ONTAP] High latency of Disk': assets/monitors/cds_disk_latency.json
-    '[NetApp ONTAP] High latency of LUN': assets/monitors/cds_lun_latency.json
-    '[NetApp ONTAP] High latency of cluster': assets/monitors/cds_cluster_latency.json
-    '[NetApp ONTAP] High latency of volume': assets/monitors/cds_volume_latency.json
-    '[NetApp ONTAP] High utilization of volume': assets/monitors/cds_volume_utilization.json
-    '[NetApp ONTAP] Low throughput of cluster': assets/monitors/cds_cluster_throughput.json
-    '[NetApp ONTAP] Low throughput of volume': assets/monitors/cds_volume_throughput.json
-    '[NetApp ONTAP] Network Interface status': assets/monitors/cds_network_interface_status.json
-    '[NetApp ONTAP] Node Health': assets/monitors/cds_node_health.json
-    '[NetApp ONTAP] Node Temperature': assets/monitors/cds_node_temperature.json
-    '[NetApp ONTAP] Power supply failed for node': assets/monitors/cds_failed_fan_count.json
-    '[NetApp ONTAP] Size used by snapshot exceeds reserved size': assets/monitors/cds_snapshot_size_exceed.json
-    '[NetApp ONTAP] Volume Status': assets/monitors/cds_volume_offline.json
+    Aggregate Plex is offline.: assets/monitors/cds_plex_status.json
+    Aggregate RAID group is offline: assets/monitors/cds_raid_status.json
+    Aggregate over-utilized above 90%.: assets/monitors/cds_aggregate_utilization.json
+    Cluster is exhibiting high IOPS: assets/monitors/cds_cluster_iops.json
+    Cluster is over-utilized above 90%.: assets/monitors/cds_cluster_used_capacity.json
+    Ethernet Port is down: assets/monitors/cds_ethernet_port_status.json
+    Fan failed for node: assets/monitors/cds_failed_power_supply.json
+    High disk latency: assets/monitors/cds_disk_latency.json
+    High latency of cluster: assets/monitors/cds_cluster_latency.json
+    LUN is exhibiting high IOPS: assets/monitors/cds_lun_iops.json
+    LUN is exhibiting high latency: assets/monitors/cds_lun_latency.json
+    Low throughput of cluster: assets/monitors/cds_cluster_throughput.json
+    Network Interface is down: assets/monitors/cds_network_interface_status.json
+    Node is unhealthy: assets/monitors/cds_node_health.json
+    Node temperature is in alert status: assets/monitors/cds_node_temperature.json
+    Power supply to node failed: assets/monitors/cds_failed_fan_count.json
+    Size used by snapshot exceeds reserved size: assets/monitors/cds_snapshot_size_exceed.json
+    The battery status of a node is down: assets/monitors/cds_node_battery.json
+    The percentage of CPU disk activity is high: assets/monitors/cds_disk_busy_percent.json
+    Volume has low throughput: assets/monitors/cds_volume_throughput.json
+    Volume is exhibiting high IOPS: assets/monitors/cds_volume_iops.json
+    'Volume is exhibiting high latency ': assets/monitors/cds_volume_latency.json
+    Volume is exhibiting high utilization: assets/monitors/cds_volume_utilization.json
+    Volume is offline.: assets/monitors/cds_volume_offline.json
 author:
   homepage: https://www.crestdata.ai
   name: Crest Data
@@ -61,7 +61,7 @@ author:
 categories:
 - data stores
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -131,8 +131,8 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][9]
-- Sales Email: [datadog-sales@crestdata.ai][10]
+- サポートメール: [datadog.integrations@crestdata.ai][9]
+- 営業メール: [datadog-sales@crestdata.ai][10]
 - Web サイト: [crestdata.ai][3]
 - よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
@@ -148,4 +148,4 @@ tile:
 [10]: mailto:datadog-sales@crestdata.ai
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-ontap" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-ontap" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

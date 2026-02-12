@@ -10,7 +10,7 @@ title: Modelo de datos de pipeline y tipos de ejecución
 
 ## Información general
 
-Esta guía describe cómo configurar mediante programación las ejecuciones de pipelines en CI Visibility y define los tipos de ejecución de pipelines que admite CI Visibility. 
+Esta guía describe cómo configurar mediante programación las ejecuciones de pipelines en CI Visibility y define los tipos de ejecución de pipelines que admite CI Visibility.
 
 Esta guía se aplica a los pipelines creados mediante la [API pública de pipelines de CI Visibility][3]. Las integraciones con otros proveedores de CI puede variar.
 
@@ -35,7 +35,7 @@ Se espera que las etapas, los trabajos y los pasos tengan exactamente el mismo n
 
 Todas las ejecuciones de pipeline dentro de un nivel deben tener un identificador único. Por ejemplo, un pipeline y un trabajo pueden tener el mismo identificador único, pero no dos pipelines.
 
-Cuando se envían IDs repetidos con diferentes marcas de tiempo, la interfaz de usuario puede mostrar un comportamiento no deseado. Por ejemplo, las gráficas de llama pueden mostrar etiquetas de tramo de una ejecución de pipeline diferente. Si se envían IDs duplicados con las mismas marcas de tiempo, sólo se almacenan los valores de la última ejecución de pipeline recibida.
+Cuando se envían IDs repetidos con diferentes marcas de tiempo, la interfaz de usuario puede mostrar un comportamiento no deseado. Por ejemplo, las gráficas de llama pueden mostrar span tags de una ejecución de pipeline diferente. Si se envían IDs duplicados con las mismas marcas de tiempo, sólo se almacenan los valores de la última ejecución de pipeline recibida.
 
 ## Tipos de ejecución de pipeline
 
@@ -51,17 +51,17 @@ Tras la finalización de cada componente, debe enviarse una carga útil a Datado
 
 ### Reintentos completos
 
-Los reintentos completos de un pipeline deben tener ID únicos de pipeline diferentes. 
+Los reintentos completos de un pipeline deben tener ID únicos de pipeline diferentes.
 
 En el endpoint de la API pública, puedes rellenar el campo `previous_attempt` para enlazar con reintentos anteriores. Los reintentos se tratan como ejecuciones de pipelines independientes en Datadog, y la hora de inicio y fin solo deben abarcar ese reintento.
 
 ### Reintentos parciales
 
-Al reintentar un subconjunto de trabajos dentro de un pipeline, debes enviar un nuevo evento de pipeline con un nuevo ID único de pipeline. La carga útil de los nuevos trabajos debe estar vinculada al nuevo ID único del canal. Para vincularlos al reintento anterior, añade el campo `previous_attempt`. 
+Al reintentar un subconjunto de trabajos dentro de un pipeline, debes enviar un nuevo evento de pipeline con un nuevo ID único de pipeline. La carga útil de los nuevos trabajos debe estar vinculada al nuevo ID único del canal. Para vincularlos al reintento anterior, añade el campo `previous_attempt`.
 
 Los reintentos parciales también se tratan como pipelines separados. Las horas de inicio y fin no deben incluir la hora del reintento original. Para un reintento parcial, no envíe cargas útiles para trabajos que se ejecutaron en el intento anterior. Además, establece el campo `partial_retry` en `true` en los reintentos parciales para excluirlos de la agregación al calcular los tiempos de ejecución.
 
-Por ejemplo, un pipeline llamado `P` tiene tres trabajos diferentes, a saber `J1`, `J2` y `J3`, ejecutados secuencialmente. En la primera ejecución de `P`, sólo se ejecutan `J1` y `J2`, y `J2` falla. 
+Por ejemplo, un pipeline llamado `P` tiene tres trabajos diferentes, a saber `J1`, `J2` y `J3`, ejecutados secuencialmente. En la primera ejecución de `P`, sólo se ejecutan `J1` y `J2`, y `J2` falla.
 
 Por lo tanto, necesitas enviar un total de tres cargas útiles:
 
@@ -69,7 +69,7 @@ Por lo tanto, necesitas enviar un total de tres cargas útiles:
 2. Carga de trabajo para `J2`, con ID `J2_1` e ID de pipeline `P_1`.
 3. Carga útil para `P`, con ID `P_1`.
 
-Supongamos que se produce un reintento parcial de la cadena a partir de `J2`, en el que todos los trabajos restantes tienen éxito. 
+Supongamos que se produce un reintento parcial de la cadena a partir de `J2`, en el que todos los trabajos restantes tienen éxito.
 
 Necesitas enviar tres cargas útiles adicionales:
 
@@ -81,7 +81,7 @@ Los valores reales de los ID no son importantes. Lo que importa es que se modifi
 
 ### Pipelines bloqueados
 
-Si un pipeline se bloquea indefinidamente debido a que requiere intervención manual, debe enviarse una carga útil del evento de pipeline en cuanto el pipeline alcance el estado de bloqueo. El estado del pipeline debe establecerse en `blocked`. 
+Si un pipeline se bloquea indefinidamente debido a que requiere intervención manual, debe enviarse una carga útil del evento de pipeline en cuanto el pipeline alcance el estado de bloqueo. El estado del pipeline debe establecerse en `blocked`.
 
 {{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="Flujo de ejecución de pipeline bloqueado" style="width:100%;">}}
 

@@ -103,7 +103,7 @@ title: トレースメトリクス
 
 ### Duration
 
-<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
+<div class="alert alert-danger">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration`
 : **前提条件:** このメトリクスは、すべての APM サービスに存在します。<br>
@@ -115,7 +115,7 @@ title: トレースメトリクス
 
 ### 継続時間
 
-<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
+<div class="alert alert-danger">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
 : **前提条件:** このメトリクスは、http メタデータが存在する場合 HTTP/WEB APM サービスに存在します。

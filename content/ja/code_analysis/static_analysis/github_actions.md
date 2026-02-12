@@ -26,10 +26,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -55,7 +55,6 @@ Static Analysis に以下のパラメーターを設定することができま�
 | `enable_performance_statistics` | 分析されたファイルの実行時間統計を取得します。                                                                                                   | いいえ      | `false`         |
 | `debug`      | デバッグに役立つ追加ログをアナライザーに出力させます。有効にするには `yes` を設定します。                                                                  | いいえ      | `no`            |
 | `subdirectory` | 解析対象を制限するサブディレクトリ パターンまたはグロブ (複数の場合はスペース区切り) を指定します。例: "src" または "src packages"。 | `false` |                 |
-| `architecture` | アナライザーで使用する CPU アーキテクチャを指定します。サポートされている値は `x86_64` と `aarch64` です。                                                              | いいえ      | `x86_64`        |
 | `diff_aware` | [差分認識スキャン モード][5] を有効にします。                                                                                                                   | いいえ      | `true`          |
 | `secrets_enabled` | シークレット スキャンを有効にします (非公開ベータ)。                                                                                                              | いいえ      | `false`         |
 
@@ -63,11 +62,6 @@ Static Analysis に以下のパラメーターを設定することができま�
 
 1. 差分認識スキャンでは、フィーチャ ブランチを解析する際にコミットで変更されたファイルのみをスキャンします。差分認識はデフォルトで有効です。無効にするには、GitHub アクションの `diff_aware` パラメーターを `false` に設定してください。
 2. シークレット スキャンは非公開ベータです。シークレット スキャンを有効にするには、Datadog カスタマー サクセス マネージャーにお問い合わせください。
-
-### 廃止済み入力
-以下のアクション入力は廃止されており、もはや効果はありません。これらを指定すると警告が表示されます。
-* `dd_service`
-* `dd_env`
 
 ## ルールのカスタマイズ
 

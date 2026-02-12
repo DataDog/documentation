@@ -59,7 +59,7 @@ jdk.ObjectAllocationOutsideTLAB#enabled=true
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ## Enabling the heap profiler
-<div class="aler alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
+<div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
 
 Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
@@ -70,10 +70,12 @@ jdk.OldObjectSample#enabled=true
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
-## Enabling the heap histogram metrics
-<div class="aler alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
+## Enabling the heap class histogram collection
+<div class="alert alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
 
-To enable the heap histogram metrics, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable.
+To enable the heap class histogram collection, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable. This powers the Heap Occupancy metrics and improves the Memory Leaks workflow.
+
+This data is collected when the JVM performs a Full Garbage Collection cycle and may only appear intermittently or not at all if your service does not have significant memory pressure.
 
 ## Removing sensitive information from profiles
 
@@ -164,6 +166,13 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
+## PODs are getting evicted due to disk usage
+
+The profiler uses ephemeral storage (usually `/tmp`) to save captured profiling data.
+If the node is under disk pressure and the pod hasn't requested ephemeral storage, it may be evicted.
+
+Fix: Add a small ephemeral storage request (such as 100MB) in the pod spec to prevent eviction.
+
 ## Managing issues related to the tmp folder
 
 The Continuous Profiler may encounter errors related to the use of the system `/tmp` directory, particularly in environments with strict security or limited execution permissions (for example, Docker, Kubernetes, or SELinux-enabled systems). These issues can lead to:
@@ -176,7 +185,7 @@ Below are basic troubleshooting steps for resolving those issues:
 
 - Use dd-trace-java Version 1.47.0 or later
   Starting with v1.47.0, the profiler uses PID-specific subdirectories inside the configured temp directory. This reduces clutter and potential conflicts from orphaned files when JVM processes exit unexpectedly.
-   
+
 - Specify a custom executable temp directory
   To ensure proper operation across environments, explicitly configure a writable, executable temp directory using the following JVM option:
    ```
@@ -193,7 +202,11 @@ Below are basic troubleshooting steps for resolving those issues:
     chmod 755 /opt/datadog-profiler-tmp
     java -Ddd.profiling.tempdir=/opt/datadog-profiler-tmp -javaagent:/path/to/dd-java-agent.jar ...
     ```
-  
+- If you enable profiling using SSI, you can include the below environment variable in the `application_monitoring.yaml`.
+
+    ```
+    DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
+    ```
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

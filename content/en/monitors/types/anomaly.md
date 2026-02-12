@@ -6,6 +6,9 @@ aliases:
     - /monitors/create/types/anomaly/
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
+- link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
+  tag: "Blog"
+  text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -165,8 +168,6 @@ For detailed instructions on the **Configure notifications and automations** sec
 ## API
 
 Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
-
-**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
 Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 

@@ -4,6 +4,8 @@ aliases:
 - /fr/agent/cluster_agent/
 - /fr/containers/cluster_agent/event_collection
 - /fr/containers/cluster_agent/metadata_provider
+description: Approche centralisée de la collecte des données de surveillance au niveau
+  du cluster avec l'Agent de cluster de Datadog
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
@@ -12,6 +14,10 @@ further_reading:
   tag: Blog
   text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique
     Datadog
+- link: https://www.datadoghq.com/blog/datadog-csi-driver/
+  tag: Blog
+  text: Apporter une observabilité haute performance aux environnements Kubernetes
+    sécurisés avec le driver CSI Datadog
 title: Agent de cluster pour Kubernetes
 ---
 
@@ -29,24 +35,19 @@ Grâce à l'Agent de cluster Datadog, vous pouvez :
 
 Si vous avez installé l'Agent Datadog à l'aide du chart Helm v2.7.0 ou de l'Operator Datadog v.1.0.0+, l'**Agent de cluster Datadog est activé par défaut**.
 
-Si vous utilisez Docker, l'Agent de cluster Datadog est disponible sur Docker Hub et GCR :
+Datadog publie des images de conteneur sur Google Artifact Registry, Amazon ECR, Azure ACR et Docker Hub :
 
-| Docker Hub                                       | GCR                                                       |
-|--------------------------------------------------|-----------------------------------------------------------|
-| [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
+| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
+| ------------------------ | ---------------------- | -------------------- | ----------------- |
+| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
 
-<div class="alert alert-warning">Docker Hub est soumis à des limites de pull d'images. Si vous n'êtes pas client Docker Hub, Datadog vous recommande de mettre à jour la configuration de votre Agent Datadog et de votre Agent de cluster afin de récupérer les images à partir de GCR ou ECR. Pour connaître la marche à suivre, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
+Par défaut, l'image de l'Agent de cluster est extraite de Google Artifact Registry ('gcr.io/datadoghq'). Si Artifact Registry n'est pas accessible dans votre région de déploiement, utilisez un autre registre.
+
+<div class="alert alert-danger">Docker Hub est soumis à des limites de taux d'extraction d'images. Si vous n'êtes pas client Docker Hub, Datadog recommande de mettre à jour votre configuration de l'Agent Datadog et de l'Agent de cluster pour extraire depuis GCR ou ECR. Pour obtenir des instructions, consultez la section <a href="/agent/guide/changing_container_registry">Modifier votre registre de conteneurs</a>.</div>
 
 ### Versions minimales de l'Agent et de l'Agent de cluster
 
-Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, vous devez exécuter des versions minimales de l'Agent Datadog et de l'Agent de cluster.
-
-| Version de Kubernetes | Version de l'Agent  | Version de l'Agent de cluster | Raison                                |
-|--------------------|----------------|-----------------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | Obsolescence des métriques Kubelet           |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | Obsolescence des ressources Kubernetes       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Prise en charge du jeton de compte de service dynamique |
-| 1.25.0+            | 7.40.0+        | 7.40.0+               | Prise en charge du groupe d'API `v1`               |
+Pour une compatibilité optimale, Datadog recommande de maintenir votre Agent de cluster et votre Agent sur des versions correspondantes. Pour une matrice de compatibilité complète des versions Kubernetes et des versions Datadog, consultez la [page d'installation Kubernetes][2].
 
 {{< whatsnext desc="Cette section aborde les sujets suivants :">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Configuration</u> : configurez l'Agent de cluster Datadog sur votre cluster Kubernetes.{{< /nextlink >}}
@@ -58,13 +59,12 @@ Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, v
 {{< /whatsnext >}}
 
 ## Surveillance de l'Agent de cluster
-L'Agent Datadog inclut une intégration qui surveille automatiquement l'Agent de cluster. Cette intégration s'exécute sur le pod de l'Agent Datadog standard situé sur le même nœud que l'Agent de cluster. Elle ne s'exécute pas dans l'Agent de cluster lui-même. Pour plus de détails, consultez la [documentation relative à l'intégration de l'Agent de cluster de Datadog][4].
+L'Agent Datadog inclut une intégration qui surveille automatiquement l'Agent de cluster. L'intégration s'exécute sur le pod de l'Agent Datadog standard qui se trouve sur le même nœud que l'Agent de cluster. Elle ne s'exécutera pas dans l'Agent de cluster lui-même. Consultez la [documentation de l'intégration Agent de cluster de Datadog][3] pour plus de détails.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/containers/guide/cluster_agent_autoscaling_metrics
-[2]: https://hub.docker.com/r/datadog/cluster-agent
-[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
-[4]: https://docs.datadoghq.com/fr/integrations/datadog_cluster_agent/
+[2]: /fr/containers/kubernetes/installation#minimum-kubernetes-and-datadog-agent-versions
+[3]: https://docs.datadoghq.com/fr/integrations/datadog_cluster_agent/

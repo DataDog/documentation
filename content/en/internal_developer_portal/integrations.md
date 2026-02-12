@@ -17,14 +17,14 @@ further_reading:
   text: "Learn about the PagerDuty integration"
 ---
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 PagerDuty and OpsGenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
   
 ## Overview
 
-When you configure a service account for a [Datadog integration][1], you can incorporate metadata from your integrations into [Software Catalog][16] entity definitions. From there, you can use the [Actions Catalog][31] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
+When you configure a service account for a [Datadog integration][1], you can incorporate metadata from your integrations into [Software Catalog][16] entity definitions. From there, you can use the [Action Catalog][31] to query external systems or trigger actions—such as creating incidents or updating tickets—without leaving Datadog.
 
 {{< callout url="https://forms.gle/PzXWxrnGaQPiVf9M8" d_target="#signupModal" btn_hidden="false" header="Request a new integration" >}}
 {{< /callout >}}
@@ -100,7 +100,7 @@ Once you've completed these steps, an **On Call** information box appears in the
 |--------------|----------------|----------------------------------|
 | [GitHub][11] | Create issues or PRs, manage repo files, and automate team access. | `Add labels to pull request`, `Get team membership` <br> [See all available actions.][41] |
 | [GitLab][12] | Manage issues, merge requests, branches, and commits. | `Approve merge request`, `Cherry pick commit` <br> [See all available actions.][42] |
-| Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Software Catalog or Actions Catalog. | N/A; use HTTP actions and reqeusts to call platform APIs |
+| Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Software Catalog or Action Catalog. | N/A; use HTTP actions and reqeusts to call platform APIs |
 
 You can also use GitHub to manage entity definitions and configure the GitHub integration to automatically pull definitions into Software Catalog. Learn more about [creating entity definitions and importing them from GitHub][83].
 

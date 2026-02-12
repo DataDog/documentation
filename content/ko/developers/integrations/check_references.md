@@ -7,14 +7,16 @@ further_reading:
 - link: /developers/integrations/
   tag: 설명서
   text: 에이전트 또는 API 기반 통합 생성에 대해 알아보기
-- link: /developers/integrations/oauth_for_integrations/
+- link: /developers/integrations/api_integration/
   tag: 설명서
-  text: 통합용 OAuth 사용에 대해 알아보기
-title: 통합 에셋 참조
+  text: API 기반 통합을 위한 OAuth 사용 방법
+title: 통합 자산 참조
 ---
 ## 개요
 
 이 페이지에서는 [**Integration** 페이지][12] 또는 [**Marketplace** 페이지][9]에서 제공 사항을 생성하기 위해 필요한 파일을 설명합니다.
+
+<div class="alert alert-info">일부 파일은 Integration Developer Platform을 사용하여 생성되지 <em>않은</em> 레거시 통합에만 적용됩니다.</div>
 
 ## 설정 파일
 
@@ -124,8 +126,9 @@ YAML 구문에 대한 자세한 내용은 [YAML 위키피디아 문서][2]를 �
 | `description`   | 선택 사항           | 메트릭에 대한 설명입니다.                                                                                                                                                                                                                                                                                                              |
 | `orientation`   | 필수 사항          | 메트릭이 `myapp.turnover`와 같이 증가해야 하는 경우  `1`로 설정합니다. 메트릭 변동이 관련이 없는 경우, `0`으로 설정합니다. ` if the metric should go down, such as `myapp.latency' 일 경우, '-1'로 설정합니다.                                                                                                                                                         |
 | `integration`   | 필수 사항          | 메트릭을 내보내는 통합의 이름입니다. `manifest.json`파일의 `tile.title`는 표준화된  버전이어야 합니다. 문자, 밑줄, 대시 및 숫자를 제외한 모든 문자는 밑줄로 변환됩니다. 예: `Openstack Controller`->`openstack_controller`, `ASP.NET`-> `asp_net`, `CRI-o`->`cri-o`. |
-| `short_name`    | 필수 사항          | 메트릭의 명시적인 고유 ID입니다.                                                                                                                                                                                                                                                                                                      |
-| `curated_metric`| 선택 사항           | 특정 유형 (`cpu`및 `memory` 둘 다 허용됨)에 대해 주목할 만한 통합 메트릭을 표시합니다. 이러한 항목은 다른 통합 메트릭 위의 UI에 표시됩니다.
+| `short_name`    | 필수 사항          | 사람이 읽을 수 있는 축약된 버전의 메트릭 이름. 통합 이름을 반복하지 마세요. 예를 들어, `postgresql.index_blocks_hit`는 `idx blks hit`로 줄여야 합니다.                                                                                                                                                                                                                                                                                                     |
+| `curated_metric`| 선택 사항           | 특정 유형 (`cpu`및 `memory` 둘 다 허용됨)에 대해 주목할 만한 통합 메트릭을 표시합니다. 이러한 항목은 다른 통합 메트릭 위의 UI에 표시됩니다. |
+| `sample_tags` | 선택 사항           | 메트릭과 연결된 예시 태그 목록입니다. 쉼표로 구분되며 (공백 없이) 따옴표 안에 위치합니다. 예: `"host,region,deployment"` |
 
 ## 참고 자료
 

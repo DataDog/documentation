@@ -1,5 +1,6 @@
 ---
 title: Scale Graphing Expertise with Powerpacks
+description: Standardize dashboard widgets and scale monitoring expertise across teams using reusable Powerpack widget groups.
 further_reading:
 - link: "/dashboards/widgets/powerpack"
   tag: "Documentation"

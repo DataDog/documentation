@@ -313,7 +313,7 @@ Consulta las trazas y tramos para observar el estado y el rendimiento de las sol
 
    {{< img src="/getting_started/opentelemetry/traces2.png" alt="Visualizar trazas de la aplicación Calendar" style="width:90%;" >}}
 
-3. [Explora tus trazas en `calendar-OpenTelemetry`][8].
+3. [Explora tus trazas en `calendar-otel`][8].
 
    Para empezar, haz clic en una traza para abrir el panel lateral de la traza y ver más detalles sobre la traza y sus tramos. Por ejemplo, el [gráfico de llamas][9] refleja cuánto tiempo se ha dedicado a cada componente de la ruta de ejecución del Calendario:
 

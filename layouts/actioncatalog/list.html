@@ -23,20 +23,20 @@
     {{/*  Using INTEGRATION logo  */}}
     <img src="{{ .logo_path }}" height="17" alt="{{ .workflow_title }}"/>
   {{ else if and .icon_name (eq .icon_type "ICON") }}
-    {{/*  
-      Using ICON from iconfont 
+    {{/*
+      Using ICON from iconfont
       1. Change icon name to kebab case to match our iconfont names (e.g. SecurityPlatform --> security-platform)
       2. Icon Verfication
       3. Conditionally render icon or default datadog integration logo
     */}}
     {{ $kebab_icon_name := (replaceRE `(.)([A-Z][a-z]+)` (print "$1" "-" "$2") .icon_name) | lower }}
-    {{ partial "partials/verify-icon" (dict "name" $kebab_icon_name) }}
+    {{ partial "verify-icon" (dict "name" $kebab_icon_name) }}
 
     <span x-data="{showIcon: false}" x-init='$nextTick(() => {
       // Evaluate value set in `verify-icon` partial
       const icon = document.getElementById("icon-{{$kebab_icon_name}}")
       showIcon = icon.dataset.iconExists === "true";
-    })'>  
+    })'>
       <template x-if="showIcon">
         {{ partial "icon" (dict "name" $kebab_icon_name "size" "17px" "vertical_align" "-5px") }}
       </template>
@@ -89,11 +89,11 @@
       {{ $icon_id := .icon.id }}
       {{ $icon_name := .icon.name }}
       {{ $icon_type := .icon.type }}
-      
+
       {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
       {{ $default_dd_logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" "_datadog" "variant" "avatar" "fallback" "cloud") "_datadog" "avatar" }}
       <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
-        <div class="js-group-header mb-1 d-flex align-items-center active" id="">
+        <div class="js-group-header mb-1 d-flex align-items-center" id="">
           <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
             {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
           </div>

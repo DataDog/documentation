@@ -1,6 +1,6 @@
 ---
 title: Use Multiple Instances of the Mobile SDK
-
+description: "Configure and manage multiple named instances of RUM mobile SDKs for complex application architectures and multi-tenant scenarios."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -29,12 +29,17 @@ Datadog.setUserInfo(userInfo, sdkCore = namedSdkInstance)
 
 Logs.enable(logsConfig, namedSdkInstance)
 val logger = Logger.Builder(namedSdkInstance)
-    ...
+    // ...
     .build()
 
 Trace.enable(traceConfig, namedSdkInstance)
-val tracer = AndroidTracer.Builder(namedSdkInstance)
-    ...
+
+// OpenTelemetry (recommended)
+val tracer  = GlobalOpenTelemetry.get().getTracer("...")
+
+// Datadog API
+val tracer = DatadogTracing.newTracerBuilder(namedSdkInstance)
+    // ...
     .build()
 
 Rum.enable(rumConfig, namedSdkInstance)
@@ -51,7 +56,7 @@ SessionReplay.enable(sessionReplayConfig, namedSdkInstance)
 In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
 
 ```kotlin
-    webView.settings.javaScriptEnabled = true
+webView.settings.javaScriptEnabled = true
 ```
 
 You can retrieve the named SDK instance by calling `Datadog.getInstance(<name>)` and use the `Datadog.isInitialized(<name>)` method to check if the particular SDK instance is initialized.
@@ -66,8 +71,8 @@ import DatadogLogs
 import DatadogTrace
 
 let core = Datadog.initialize(
-    with: configuration, 
-    trackingConsent: trackingConsent, 
+    with: configuration,
+    trackingConsent: trackingConsent,
     instanceName: "my-instance"
 )
 
@@ -111,7 +116,6 @@ import DatadogRUM
 
 let monitor = RUMMonitor.shared(in: core)
 ```
-
 
 {{% /tab %}}
 {{< /tabs >}}

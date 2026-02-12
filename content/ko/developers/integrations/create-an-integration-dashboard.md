@@ -8,65 +8,27 @@ title: 통합 대시보드 만들기
 ---
 ## 개요
 
-[Datadog 대시보드][1]를 사용하면 주요 메트릭을 표시하고 추적하여 인프라스트럭처 및 통합을 효율적으로 모니터링할 수 있습니다. Datadog은 다양한 기능과 통합을 위한 기본 대시보드 세트를 제공합니다. [대시보드 목록][12]을 통해 액세스할 수 있습니다.
+이 페이지에서는 Datadog에서 기본 제공(out-of-the-box, OOTB) 통합 대시보드를 생성하는 단계와 생성 과정에서 따라야 할 모범 사례를 알아봅니다.
 
-[Datadog 통합을 생성한 경우][2], 즉시 사용 가능한 대시보드를 생성해 통합 사용자가 더욱 빠르게 통합의 가치를 누리도록 해야 합니다. 이 가이드는 생성 과정에서 통합 대시보드를 생성하는 단계와 모범 사례를 제공합니다.
+[Datadog Dashboards][1]를 사용하면 주요 메트릭을 표시하고 추적하여 인프라 및 통합을 모니터링할 수 있습니다. Datadog은 다양한 기능과 통합에 대한 OOTB 대시보드 세트를 제공합니다. [Dashboard List][12]에서 해당 대시보드에 액세스할 수 있습니다.
 
-Datadog 통합을 생성하려면 [에이전트 통합 생성][2]을 참조하세요.
+[Datadog 통합을 생성한 후][2] 사용자가 통합의 가치를 쉽게 확인할 수 있도록 기본 제공 대시보드를 생성해야 합니다.
 
 ## 통합 대시보드 만들기
 
 ### 대시보드 생성
 
-Datadog의 [**대시보드 목록**][12]에서 **+ 새 대시보드**를 클릭하세요.
+Datadog 샌드박스의 [**Dashboard List**][12]에서 **New Dashboard**를 클릭합니다.
 
 {{< img src="dashboards/create_dashboard.png" alt="통합을 위한 대시보드 생성" width="80%">}}
 
 대시보드에 요소를 추가할 때 [이 가이드의 모범 사례를 따르세요](#대시보드-모범-사례-따르기).
 
-### 대시보드 내보내기
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-**공유** 또는 **설정** 아이콘을 클릭하고 **JSON 대시보드 내보내기**를 선택하여 대시보드를 JSON으로 내보세요.
+### 대시보드 업로드하기
+Integration Developer Platform의 통합 내에서 Content 탭으로 이동합니다. 그런 다음 **import dashboard**를 선택하여 사용 가능한 대시보드 목록에서 대시보드를 선택합니다. 통합에 포함할 대시보드를 최대 10개까지 선택할 수 있습니다.
 
 {{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="공유 아이콘과 대시보드 JSON 내보내기를 클릭하여 대시보드를 JSON 파일로 내보내세요." width="100%">}}
 
-대시보드 제목에 따라 파일 이름을 지정합니다. 예: `your_integration_name_overview.json`
-
-통합의 `assets/dashboards` 폴더에 이 파일을 저장합니다. 자산을 `manifest.json` 파일에 추가합니다. 통합 파일의 구조와 매니페스트 파일에 대한 자세한 정보는 [통합 자산 참고 자료][101]를 참조하세요.
-
-[101]: /ko/developers/integrations/check_references/#manifest-file
-
-{{% /tab %}}
-{{% tab "Programmatically" %}}
-
-- [Datadog 에이전트 통합 개발 툴][103](`ddev`)을 설치했는지 확인하세요.
-- [`ddev` 설정 파일][101]에 대시보드를 포함하는 조직의 경우 `api_key` 및 `app_key`를 설정했는지 확인하세요.
-
-`--extras` 또는 `-e` 플래그 포함 [`ddev meta dash export` 명령][102]을 실행하여 대시보드 정의를 내보내세요.
-
-```shell
-ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
-```
-
-대시보드 제목에 따라 파일 이름을 지정합니다.
-
-이 명령은 대시보드 정의를 통합의 `manifest.json` 파일에 추가합니다. 통합의 `assets/dashboards` 폴더에서 대시보드 JSON 파일을 찾을 수 있습니다. 
-
-**참고:** 각 지역의 다음 주소(`/dash/integration/<DASHBOARD_KEY>`)에서 대시보드를 사용할 수 있습니다. `<DASHBOARD_KEY>`는 대시보드의 `manifest.json` 파일에 포함된 항목과 일치합니다. 링크를 대시보드 내 또 다른 대시보드에 추가하길 원하는 경우 이 값을 전환할 수 있습니다.
-
-[101]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-config
-[102]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-meta-dash-export
-[103]: /ko/developers/integrations/python/
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### 풀 리퀘스트 열기
-
-[`integrations-extras` GitHub 리포지토리][13]와 풀 리퀘스트(PR) 열기를 통해 대시보드 JSON 파일과 업데이트된 매니페스트 파일을 해당하는 통합 폴더에 추가합니다. Datadog는 모든 `integration-extras` PR을 검토합니다. 승인되면 Datadog는 PR을 결합하고 통합 대시보드는 프로덕션으로 푸시됩니다.
 
 ### 프로덕션 환경에서 대시보드 확인하기
 

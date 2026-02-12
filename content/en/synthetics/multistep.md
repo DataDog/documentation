@@ -232,7 +232,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (30 minutes).
 
-For HTTP steps, see [common HTTP step failures][14]. For gRPC steps, see [common gRPC step failures][15].
+For a complete list of other API test error codes, see [API Testing Errors][19].
 
 ## Permissions
 
@@ -263,11 +263,11 @@ You can restrict access to a multistep API test based on the roles in your organ
 [9]: /monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [10]: http://daringfireball.net/projects/markdown/syntax
 [11]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[12]: /synthetics/guide/synthetic-test-monitors
+[12]: /monitors/types/synthetic_monitoring/
 [13]: /synthetics/settings/#global-variables
-[14]: /synthetics/api_tests/http_tests?tab=requestoptions#test-failure
+[14]: /synthetics/api_tests/errors/#ssl-errors
 [15]: /synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
 [16]: /account_management/rbac/
 [17]: /account_management/rbac#custom-roles
 [18]: /account_management/rbac/#create-a-custom-role
-[19]: /synthetics/api_tests/grpc_tests
+[19]: /synthetics/api_tests/errors/

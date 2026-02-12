@@ -13,11 +13,14 @@
           "set": {
             "name": "test_set",
             "value": "test_value",
-            "scope": "process"
+            "scope": "process",
+            "inherited": true
           }
         },
         {
-          "hash": {}
+          "hash": {
+            "field": "exec.file"
+          }
         }
       ]
     },

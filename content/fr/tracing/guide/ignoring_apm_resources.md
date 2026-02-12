@@ -9,7 +9,7 @@ Pour éviter qu'un endpoint spécifique soit tracé et inclus dans les métrique
 - Utiliser la [configuration de l'Agent de trace](#options-de-configuration-de-l-agent-datadog) (dans l'Agent Datadog) ; ou
 - Utiliser la [configuration du traceur](#options-de-configuration-du-traceur)
 
-<div class="alert alert-warning"><strong>Remarque</strong> : le filtrage des traces via l'une des options suivantes entraîne la suppression des requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans altérer les métriques de trace, consultez la section relative aux <a href="/tracing/trace_ingestion/ingestion_controls">contrôles de l'ingestion</a>.</div>
+<div class="alert alert-danger"><strong>Remarque</strong> : le filtrage des traces via l'une des options suivantes entraîne la suppression des requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans altérer les métriques de trace, consultez la section relative aux <a href="/tracing/trace_ingestion/ingestion_controls">contrôles de l'ingestion</a>.</div>
 
 Si vous avez besoin d'aide, contactez l'[assistance Datadog][1].
 
@@ -92,7 +92,7 @@ Côté backend, Datadog crée et ajoute les tags de spans suivants aux spans apr
 | `http.useragent_details.browser.family` | La famille de navigateur indiquée par le user-agent.    |
 | `http.useragent_details.device.family`  | La famille d'appareil indiquée par le user-agent.     |
 
-<div class="alert alert-warning"><strong>Remarque</strong> : à compter du 1er octobre 2022, le backend Datadog procède à un remappage afin d'appliquer la <a href="/tracing/trace_collection/tracing_naming_convention">sémantique des tags de span
+<div class="alert alert-danger"><strong>Remarque</strong> : à compter du 1er octobre 2022, le backend Datadog procède à un remappage afin d'appliquer la <a href="/tracing/trace_collection/tracing_naming_convention">sémantique des tags de span
 </a> sur toutes les spans ingérées, quel que soit le traceur. Si vous souhaitez ignorer des spans en fonction de tags au niveau de l'Agent Datadog, utilisez les tags de la colonne <strong>Remapper depuis</strong>.</div>
 
 #### Communications réseau
@@ -362,13 +362,13 @@ Si vous utilisez Amazon ECS (par exemple, EC2) dans votre définition du conten
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Remarque</strong> : le filtrage des traces à l'aide de cette méthode supprime les requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans toucher aux métriques de trace, consultez la section relative aux <a href="/tracing/trace_ingestion/ingestion_controls">contrôles de l'ingestion</a>.</div>
+<div class="alert alert-danger"><strong>Remarque</strong> : le filtrage des traces à l'aide de cette méthode supprime les requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans toucher aux métriques de trace, consultez la section relative aux <a href="/tracing/trace_ingestion/ingestion_controls">contrôles de l'ingestion</a>.</div>
 
 ## Options de configuration du traceur
 
 Pour certains langages, les traceurs permettent de modifier les spans avant leur envoi à l'Agent Datadog. Utilisez cette option si vous devez répondre à certaines exigences spécifiques pour votre application dans l'un des langages répertoriés ci-dessous.
 
-<div class="alert alert-danger"><strong>Attention</strong> : si la requête est associée à une trace distribuée, lorsque vous ignorez une partie de la trace obtenue en raison des règles de filtrage, la trace peut inclure des erreurs d'échantillonnage.</div>
+<div class="alert alert-warning"><strong>Attention</strong> : si la requête est associée à une trace distribuée, lorsque vous ignorez une partie de la trace obtenue en raison des règles de filtrage, la trace peut inclure des erreurs d'échantillonnage.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
@@ -460,7 +460,7 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>Remarque</strong> : le filtrage des traces à l'aide de cette méthode supprime les requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans toucher aux métriques de trace, consultez la section relative aux <a href="/tracing/trace_ingestion/ingestion_controls">contrôles de l'ingestion</a>.</div>
+<div class="alert alert-danger"><strong>Remarque</strong> : le filtrage des traces à l'aide de cette méthode supprime les requêtes concernées des <a href="/tracing/guide/metrics_namespace/">métriques de trace</a>. Pour découvrir comment réduire l'ingestion sans toucher aux métriques de trace, consultez la section relative aux <a href="/tracing/trace_ingestion/ingestion_controls">contrôles de l'ingestion</a>.</div>
 
 [1]: /fr/help/
 [2]: /fr/tracing/guide/add_span_md_and_graph_it/

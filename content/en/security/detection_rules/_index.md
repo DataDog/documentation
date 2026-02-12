@@ -176,7 +176,7 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel (Cloud Security Misconfigurations only)
-    - [Rule editor][10] for that specific rule 
+    - [Rule editor][10] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
@@ -194,11 +194,11 @@ The rule deprecation process is as follows:
 [8]: /tracing/
 [9]: /agent/
 [10]: https://app.datadoghq.com/security/configuration/
-[11]: /security/cloud_siem/detection_rules/
+[11]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [12]: /security/application_security/policies/custom_rules/
 [13]: /security/cloud_security_management/misconfigurations/custom_rules
 [14]: /security/workload_protection/workload_security_rules?tab=host#create-custom-rules
 [15]: https://app.datadoghq.com/security/configuration/
-[16]: https://app.datadoghq.com/security/rules
+[16]: https://app.datadoghq.com/security/siem/rules
 [17]: https://app.datadoghq.com/security/workload-protection/detection-rules
 

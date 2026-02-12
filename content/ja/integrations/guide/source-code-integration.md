@@ -414,7 +414,7 @@ GitHub インテグレーションを設定することで、[**Error Tracking**
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 セルフマネージド GitLab インスタンスからのリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 
@@ -452,7 +452,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{% tab "その他の Git プロバイダー" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 セルフホストインスタンスまたはプライベート URL 上のリポジトリは、ソースコードインテグレーションではすぐに使えません。この機能を有効にするには、<a href="/help">サポートにお問い合わせください</a>。
 </div>
 

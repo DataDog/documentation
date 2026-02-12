@@ -60,10 +60,6 @@ La información de uso también está disponible a través del endpoint [`GetHou
 
 ## Imponer la configuración de etiquetas a nivel de la organización
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  La atribución de uso de RUM impuesta está en Vista previa. Para solicitar acceso, ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a>.
-{{< /callout >}}
-
 Impón etiquetas de atribución de uso en aplicaciones RUM para realizar un seguimiento de su contribución a tu factura de Datadog. Esta configuración puede aplicarse sin necesidad de instrumentar o volver a instrumentar tu aplicación. Cuando esta configuración está activa, las etiquetas deben definirse al crear o actualizar aplicaciones RUM en Datadog.
 
 **Nota**: Cuando las etiquetas de atribución se definen tanto a nivel de los datos (en eventos recopilados por el SDK), como a nivel de la aplicación, Datadog utiliza la información definida a nivel de la aplicación.

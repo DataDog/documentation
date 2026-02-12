@@ -33,7 +33,7 @@ En **Region** (Región), selecciona las regiones que deseas escanear. Por defect
 
 Una vez realizada la selección, las regiones se escanean automáticamente y el número de recursos encontrados se muestra junto al nombre de la región. Puedes hacer clic en el botón **Synch** (Sincronizar) situado encima de la sección **Region** (Región) para activar un escaneado manual de todas las regiones seleccionadas.
 
-<div class="alert alert-warning">La selección de muchas regiones puede afectar al rendimiento del proceso de escaneo en vivo.</div>
+<div class="alert alert-danger">La selección de muchas regiones puede afectar al rendimiento del proceso de escaneo en vivo.</div>
 
 ## Filtrar recursos
 

@@ -42,7 +42,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 0.29.0+
 - **Runtimes**: Java 8+
 
-<div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
+<div class="alert alert-danger">JMX metrics collection is not supported in AWS Lambda environments.</div>
 
 {{% /tab %}}
 
@@ -103,12 +103,12 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">Runtime metrics for PHP is not supported.</div>
+<div class="alert alert-danger">Runtime metrics for PHP is not supported.</div>
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-<div class="alert alert-warning">Runtime metrics for C++ is not supported.</div>
+<div class="alert alert-danger">Runtime metrics for C++ is not supported.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,7 +125,7 @@ Enable [DogStatsD for the Agent][2]. By default, the Datadog Agent is configured
 
 When running the Agent in containerized environments, additional configuration is required:
 
-1. Set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
+1. Verify that DogStatsD non-local traffic is enabled. This setting is enabled by default. If you have previously disabled it, set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
 2. Follow these container-specific setup instructions:
 
 {{< partial name="apm/apm-runtime-metrics-containers.html" >}}
@@ -187,7 +187,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-warning">This only applies if you are not using <code>ddtrace-run</code></div>
+<div class="alert alert-danger">This only applies if you are not using <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}

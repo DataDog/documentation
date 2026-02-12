@@ -2,10 +2,10 @@
 title: Remap Reserved Attributes
 disable_toc: false
 further_reading:
-- link: "observability_pipelines/processors/edit_fields/"
+- link: "/observability_pipelines/processors/edit_fields/"
   tag: "Documentation"
   text: "Learn more about the Edit Fields processor"
-- link: "observability_pipelines/processors/custom_processor/"
+- link: "/observability_pipelines/processors/custom_processor/"
   tag: "Documentation"
   text: "Learn more about the Custom Processor processor"
 ---
@@ -22,6 +22,8 @@ In Datadog, [reserved attributes][1] are log fields that are set aside for speci
 - Google Cloud Storage (for Log Archives)
 
 There are restrictions in Observability Pipelines on how you can modify reserved attributes. For example, reserved attributes cannot be renamed using the Rename Field processor, but must be remapped instead. This guide walks you through the steps to remap the value of reserved attributes.
+
+If your specific setup uses a Splunk HEC source and Datadog destination, see [Remap source and service attributes when using the Splunk HEC source and Datadog destination](#remap-source-and-service-attributes-when-using-the-splunk-hec-source-and-datadog-destination).
 
 ## Remap the value of reserved attributes
 
@@ -70,6 +72,98 @@ The following Custom Processor script sets the `status` field to the static valu
 In the below example image, the input shows `status` with the value `wrongstatus`. After processing the log with the script, the output shows `status` with `info` as assigned.
 
 {{< img src="observability_pipelines/guide/remap_attributes/custom_processor_statically_assign.png" alt="A custom processor showing an input the incorrect status value and the output showing the correct status" style="width:100%;" >}}
+
+## Remap source and service attributes when using the Splunk HEC source and Datadog destination
+
+Follow the instructions in this section to remap the `source` and/or `service` values if you are using a Splunk HEC source and Datadog destination. You must follow these instructions to remap those attributes because:
+
+ - Splunk's `service` is what Datadog calls the `source` attribute.
+ - Splunk's `sourcetype` is what Datadog calls the `ddsource` attribute.
+
+**Note**: If you want to remap other reserved attributes, such as `env` and `hostname`, follow the [Remap the value of reserved attributes](#remap-the-value-of-reserved-attributes) instructions.
+
+You can use the [Custom Processor](#remap-service-and-source-attributes-using-the-custom-processor) or [Edit Fields](#remap-service-and-source-attributes-using-edit-fields) to:
+
+1. Remap the input log's `service` field to the `source` field name.
+1. Remap the input log's `source` field to the `ddsource` field name.
+
+### Remap service and source attributes using the Custom Processor
+
+This is an example input log from the Splunk HEC source:
+
+```json
+{
+  "service": "wrongService"
+  "source": "wrongSource"
+}
+```
+
+Assume these are the correct values you want for the log sent to Datadog:
+
+```json
+{
+  "ddsource": "akamai",
+  "source": "cdn-logs"
+}
+
+Use this Custom Processor script to remap the `service` and `source` to the correct values:
+
+```json
+  .source = "cdn-logs"
+  .ddsource = "akamai"
+  del(.service)
+```
+
+After processing the log with the script, the output shows:
+
+```json
+{
+  "ddsource": "akamai",
+  "source": "cdn-logs"
+}
+```
+
+In the below example image, the input shows `source` and `service` with the value `wrongstatus`. After processing the log with the script, the correct values are shown.
+
+{{< img src="observability_pipelines/guide/remap_attributes/custom_processor_splunkhec_dd.png" alt="A custom processor showing an input the incorrect status value and the output showing the correct status" style="width:100%;" >}}
+
+### Remap service and source attributes using Edit Fields
+
+This is example input log from the Splunk HEC source:
+
+```json
+{
+  "service": "wrongService"
+  "source": "wrongSource"
+}
+```
+
+Assume these are the correct values you want for the log sent to Datadog:
+
+```json
+{
+  "ddsource": "akamai",
+  "source": "cdn-logs"
+}
+```
+
+Do the following to remap the `source` and `service` attributes to the correct values:
+
+1. Use a **Remove field** processor to drop the `source` field`.
+    - Enter `source` in the **Field to drop** field.
+    {{< img src="observability_pipelines/guide/remap_attributes/remove_field_source.png" alt="A remove field processor that removes the source field" style="width:50%;" >}}
+1. Use an **Add field** processor to add the `ddsource` field with the value `akamai`.
+    - Enter `ddsource` in the **Field to add** field.
+    - Enter `akamai` in the **Value to add** field.
+    {{< img src="observability_pipelines/guide/remap_attributes/add_field_ddsource.png" alt="An add field processor that adds the ddsource field" style="width:50%;" >}}
+1. Use a **Remove field** processor to drop the `service` field.
+    - Enter `service` in the **Field to drop** field.
+    {{< img src="observability_pipelines/guide/remap_attributes/remove_field_service.png" alt="A remove field processor that removes the service field" style="width:50%;" >}}
+1. Use an **Add field** processor to add the `source` field with the value `cdn-logs`.
+    - Enter `source` in the **Field to add** field.
+    - Enter `cdn-logs` in the **Value to add** field.
+    {{< img src="observability_pipelines/guide/remap_attributes/add_field_source.png" alt="An add field processor that adds the ddsource field" style="width:50%;" >}}
+
 
 ## Further reading
 

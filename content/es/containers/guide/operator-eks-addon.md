@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/guide/operator-eks-addon
+description: Instala y configura el Datadog Agent en Amazon EKS utilizando el Datadog
+  Operator como complemento de EKS
 further_reading:
 - link: agent/kubernetes/log
   tag: Documentación
@@ -8,8 +10,12 @@ further_reading:
 title: Instalación de Datadog Agent en Amazon EKS con el complemento Datadog Operator
 ---
 
+<div class="alert alert-info">A partir de la versión 0.1.9, el complemento Datadog Operator admite la inyección lateral automática del Agent en pods programados en instancias de Fargate. Consulta <a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">esta guía</a> para obtener más información.
+</div>
+
+
 Puedes instalar Datadog Agent en un clúster de Amazon EKS instalando el [Datadog Operator](/containers/datadog_operator)
-como un [complemento de Amazon EKS](https://docs.AWS.amazon.com/eks/latest/userguide/eks-add-ons.html) y aplicando el manifiesto `DatadogAgent`.
+como un [complemento de Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) y aplicando el manifiesto `DatadogAgent`.
 
 Los Agents instalados mediante el complemento Operator solo recopilan datos de pods que se ejecutan en instancias de EC2. Para los pods que se ejecutan en AWS Fargate, sigue la [documentación de Amazon EKS en AWS Fargate][10].
 
@@ -80,7 +86,7 @@ Sigue las instrucciones para configurar el Datadog Agent utilizando el recurso p
      global:
        # Required in case the Agent cannot resolve the cluster name through IMDS. See the note below.
        clusterName: <CLUSTER_NAME>
-       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com/datadog
+       registry: <PRIVATE_EKS_REGISTRY_PATH>
        credentials:
          apiSecret:
            secretName: datadog-secret

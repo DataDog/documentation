@@ -1,5 +1,6 @@
 ---
 title: Ingestion volume control with APM Distributed Tracing
+description: Learn how to control span ingestion volume with APM tracing mechanisms to manage costs while maintaining observability.
 
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls/"
@@ -74,7 +75,7 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (disp
 
 ### Globally configure the ingestion sampling rate at the Agent level
 
-The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally accross services.
+The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally across services.
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
 

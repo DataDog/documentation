@@ -27,7 +27,7 @@ title: Azure 로그를 Datadog 리소스로 전송
 
 활동 로그를 Datadog으로 전송하려면 **구독 활동 로그 전송하기**를 선택하세요. 이 옵션을 선택해야 활동 로그가 Datadog로 전송됩니다.
 
-<div class="alert alert-warning">로그 수집을 사용하도록 설정하면 Datadog 리소스가 <a href="https://learn.microsoft.com/azure/app-서비스/">App 서비스</a>의 로깅 구성을 자동으로 수정합니다. 로깅 구성이 변경되면 Azure는 App 서비스를 <strong>다시 시작하도록</strong> 트리거합니다.</div>
+<div class="alert alert-danger">로그 수집을 사용하도록 설정하면 Datadog 리소스가 <a href="https://learn.microsoft.com/azure/app-서비스/">App 서비스</a>의 로깅 구성을 자동으로 수정합니다. 로깅 구성이 변경되면 Azure는 App 서비스를 <strong>다시 시작하도록</strong> 트리거합니다.</div>
 
 ## Azure 리소스 로그
 

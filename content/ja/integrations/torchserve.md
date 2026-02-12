@@ -86,7 +86,7 @@ tile:
 
 Agent リリース 7.47.0 から、TorchServe チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加インストールする必要はありません。
 
-<div class="alert alert-warning">このチェックでは、<a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a> を使って TorchServe が公開できる OpenMetrics エンドポイントからメトリクスを収集します。</div>
+<div class="alert alert-danger">このチェックでは、<a href="https://docs.datadoghq.com/integrations/openmetrics/">OpenMetrics</a> を使って TorchServe が公開できる OpenMetrics エンドポイントからメトリクスを収集します。</div>
 
 ### 前提条件
 
@@ -215,7 +215,7 @@ instances:
 
 デフォルトでは、インテグレーションはチェックを実行するたびにモデルの完全なリストを取得します。このチェックのパフォーマンスを向上させるために、`interval` オプションを使用してこのリストをキャッシュすることができます。
 
-<div class="alert alert-warning">`interval` オプションを使うと、メトリクスやイベントを遅らせることもできます。</div>
+<div class="alert alert-danger">`interval` オプションを使うと、メトリクスやイベントを遅らせることもできます。</div>
 
 [1]: https://pytorch.org/serve/management_api.html
 [2]: https://github.com/DataDog/integrations-core/blob/master/torchserve/datadog_checks/torchserve/data/conf.yaml.example
@@ -366,7 +366,7 @@ TorchServe インテグレーションは、TorchServe のサービスからロ�
 
 TorchServe でのログ構成については、[TorchServe 公式ドキュメント][10]を参照してください。
 
-<div class="alert alert-warning">`access_log.log` ファイルからログを収集することもできます。ただし、これらのログは `ts_log.log` ファイルに含まれるため、両方のファイルを構成すると Datadog のログが重複することになります。</div>
+<div class="alert alert-danger">`access_log.log` ファイルからログを収集することもできます。ただし、これらのログは `ts_log.log` ファイルに含まれるため、両方のファイルを構成すると Datadog のログが重複することになります。</div>
 
 ## トラブルシューティング
 

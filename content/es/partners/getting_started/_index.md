@@ -21,10 +21,10 @@ Consulta la [guía de capacitación en ventas para socios][5] para obtener una h
 ## Mantenerse al día con Datadog
 
 Hay muchas formas de mantenerse al día con Datadog y conocer las nuevas funciones:
-- Puedes [consultar las notas de la versión][6] en el sitio de Datadog 
+- Puedes [consultar las notas de la versión][6] en el sitio de Datadog
 - Como miembro de la red de socios de Datadog, tienes acceso exclusivo al [portal de la red de socios de Datadog][7]. Allí encontrarás:
   - Material publicitario y de formación
-  - El seminario web trimestral DPN Live Briefing: Ve las sesiones grabadas en la biblioteca de recursos o espera la invitación en tu bandeja de entrada.
+  - El seminario web trimestral DPN Live Briefing: Ve las sesiones grabadas en la librería de recursos o espera la invitación en tu bandeja de entrada.
 - Datadog comparte las numerosas lecciones aprendidas sobre sistemas escalables y distribuidos en la nube con la serie [Datadog sobre...][8].
 
 ### Información de estado

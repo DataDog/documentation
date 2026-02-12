@@ -1,4 +1,6 @@
 ---
+description: Correlaciona tramos en trazas (traces) y operaciones utilizando enlaces
+  de tramos de OpenTelemetry para complejos flujos de trabajo de sistemas distribuidos.
 further_reading:
 - link: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
   tag: Documentación
@@ -9,21 +11,21 @@ further_reading:
 - link: /tracing/trace_collection/custom_instrumentation/
   tag: Documentación
   text: Instrumentación personalizada con bibliotecas de Datadog
-title: Enlaces de tramos
+title: Enlaces de tramos (spans)
 ---
 
 {{< img src="tracing/span_links/span_links_tab_2.png" alt="Pestaña Enlaces de tramos" style="width:90%;">}}
 
 ## Información general
 
-Los enlaces de tramos (spans) son un [concepto de OpenTelemetry][5] y son parte de la [API de rastreo OpenTelemetry][2]. Datadog admite enlaces de tramos para:
+Los enlaces de tramos son un [concepto de OpenTelemetry][5] y son parte de la [API de rastreo OpenTelemetry][2]. Datadog admite enlaces de tramos para:
 
 - Aplicaciones instrumentadas con [SDK de OpenTelemetry][6].
 - Aplicaciones instrumentadas con [SDK Datadog][9].
 
-Los enlaces de tramos correlacionan uno o más tramos que están causalmente relacionados pero no tienen una relación típica elemento principal-secundario. Estos enlaces pueden correlacionar tramos dentro de una misma traza (trace) o entre diferentes trazas.
+Los enlaces de tramos correlacionan uno o más tramos que están causalmente relacionados pero no tienen una relación típica elemento principal-secundario. Estos enlaces pueden correlacionar tramos dentro de una misma traza o entre diferentes trazas.
 
-Los enlaces de tramos ayudan a rastrear operaciones en sistemas distribuidos, donde los flujos de trabajo a menudo se desvían de los patrones de ejecución lineales. Son útiles para rastrear el flujo (flow) de operaciones en sistemas que ejecutan solicitudes por lotes o eventos de procesos de forma asíncrona.
+Los enlaces de tramos ayudan a rastrear operaciones en sistemas distribuidos, donde los flujos de trabajo a menudo se desvían de los patrones de ejecución lineales. Son útiles para rastrear el flujo de operaciones en sistemas que ejecutan solicitudes por lotes o eventos de procesos de forma asíncrona.
 
 Datadog admite enlaces de tramos prospectivos y retrospectivos, lo que permite a los usuarios visualizar y recorrer las relaciones de tramos entre trazas en ambas direcciones.
 
@@ -76,11 +78,10 @@ Puedes consultar los enlaces de tramos desde el [Explorador de trazas][4] en Dat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /es/tracing/trace_collection/custom_instrumentation/php/#adding-span-links-beta
+[1]: /es/tracing/trace_collection/custom_instrumentation/php/#adding-span-links
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
 [3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
-[4]: /es/tracing/trace_explorer/trace_view/?tab=spanlinksbeta#more-information
+[4]: /es/tracing/trace_explorer/trace_view/?tab=spanlinks#more-information
 [5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/es/tracing/trace_collection/automatic_instrumentation/dd_libraries/

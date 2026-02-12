@@ -36,7 +36,7 @@ He aquí un ejemplo de algunas configuraciones IP/TCP de SQL Server que han func
 
 ## Cadena de conexión vacía
 
-El check de SQL Server de Datadog se basa en la biblioteca adodbapi de Python, que tiene algunas limitaciones en cuanto a los caracteres que puedes utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent experimenta problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en tu collector.logs del Agent, tu `sqlserver.yaml` probablemente incluye algún carácter que causa problemas con adodbapi.
+El check de SQL Server de Datadog se basa en la librería adodbapi de Python, que tiene algunas limitaciones en cuanto a los caracteres que puedes utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent experimenta problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en tu collector.logs del Agent, tu `sqlserver.yaml` probablemente incluye algún carácter que causa problemas con adodbapi.
 
 ```text
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')

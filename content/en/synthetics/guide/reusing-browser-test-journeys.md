@@ -5,12 +5,15 @@ further_reading:
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Configure a Browser Test'
-    - link: '/synthetics/browser_tests/actions'
+    - link: '/synthetics/browser_tests/test_steps'
       tag: 'Documentation'
       text: 'Create Browser Test Steps'
     - link: 'https://www.datadoghq.com/blog/test-creation-best-practices/'
       tag: 'Blog'
       text: 'Best practices for creating end-to-end tests'
+    - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+      tag: "Blog"
+      text: "How I helped my client scale their browser tests with Datadog"
 
 ---
 

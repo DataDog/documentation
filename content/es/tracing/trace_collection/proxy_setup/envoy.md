@@ -246,7 +246,7 @@ Para configurar tu frecuencia de muestreo con `DD_TRACE_SAMPLING_RULES`, utiliza
 
 ## Variables de entorno
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Las variables <code>DD_AGENT_HOST</code>, <code>DD_TRACE_AGENT_PORT</code> y <code>DD_TRACE_AGENT_URL</code> no se aplican a Envoy, ya que la dirección del Datadog Agent se configura utilizando los parámetros del <code>clúster</code>.
 </div>
 

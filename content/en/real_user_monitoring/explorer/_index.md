@@ -1,8 +1,12 @@
 ---
 title: RUM Explorer
+description: "Explore and analyze RUM data to investigate performance issues, navigate user sessions, and troubleshoot application errors."
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+  tag: "Blog"
+  text: "Unify and correlate frontend and backend data with retention filters"
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Learn more about search in the RUM Explorer"

@@ -18,7 +18,7 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: false
           sparse-checkout: |
@@ -30,7 +30,7 @@ jobs:
           echo $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} static | xargs) > files.txt
           
       - name: Validate filenames
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
             const fs = require('fs');
@@ -87,7 +87,7 @@ jobs:
           fi
 
       - name: Post comment with suggestions
-        uses: actions/github-script@v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         if: ${{ steps.check.outputs.HAS_INVALID_FILES == 'true' }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

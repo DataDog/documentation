@@ -1,7 +1,7 @@
 {
     "Alert box": {
         "scope": "markdoc",
-        "prefix": ";;alert",
+        "prefix": [";;alert", ";;admonition", ";;note"],
         "body": ["{% alert level=\"${1|info,warning,danger|}\" %}", "${2:This is an alert message.}", "{% /alert %}"],
         "description": "Markdoc alert block with a level attribute (info, warning, danger)"
     },
@@ -10,7 +10,7 @@
         "scope": "markdoc",
         "prefix": ";;callout",
         "body": [
-            "{% callout src=\"${1:https://www.example.com}\" header=\"${2:Join the Preview!}\" btn_hidden=${3|false,true|} %}",
+            "{% callout url=\"${1:https://www.example.com}\" header=\"${2:Join the Preview!}\" btn_hidden=${3|false,true|} %}",
             "${4:Callout content goes here.}",
             "{% /callout %}"
         ],
@@ -26,6 +26,17 @@
             "```"
         ],
         "description": "Markdoc code block with attributes and tabstop choices"
+    },
+
+    "Collapse content": {
+        "scope": "markdoc",
+        "prefix": ";;collapse-content",
+        "body": [
+            "{% collapse-content title=\"${1:Your title}\" level=\"${2|h4,h1,h2,h3,h5|}\" expanded=${3|true,false|} id=\"${4:unique-id}\" %}",
+            "${5:Collapsible content goes here.}",
+            "{% /collapse-content %}"
+        ],
+        "description": "Markdoc collapse block with customizable label"
     },
 
     "Definition list": {
@@ -130,6 +141,13 @@
             "{% /tabs %}"
         ],
         "description": "Markdoc tabs block with two labeled tabs"
+    },
+
+    "Tooltip": {
+        "scope": "markdoc",
+        "prefix": ";;tooltip",
+        "body": ["{% tooltip contents=\"${1:Popup text}\" %}", "${2:display text}", "{% /tooltip %}"],
+        "description": "Markdoc tooltip block with customizable content"
     },
 
     "Check mark": {

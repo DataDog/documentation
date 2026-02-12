@@ -75,6 +75,8 @@ The default mapping is as follows:
 
 **Note**: Histogram metrics in OTLP are mapped by default to Distribution metrics. Because of how OTLP sends this data, percentile aggregations and the max and min (if not available on the original OTLP data) are approximations, not accurate calculations.
 
+Datadog distributions are powered by the [DDSketch data structure][4]. See [Distributions][5] for details on enabling percentile aggregations and threshold queries on your mapped metrics.
+
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:
 
@@ -217,3 +219,5 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 [1]: /opentelemetry/schema_semantics/hostname/
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
 [3]: /opentelemetry/guide/otlp_delta_temporality/
+[4]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+[5]: /metrics/distributions/

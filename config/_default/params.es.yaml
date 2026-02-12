@@ -1,11 +1,10 @@
 announcement_banner:
-  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability
-    Platforms
-  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
-  mobile_message: Leader in the Gartner® Magic Quadrant™
+  desktop_message: Read the 2025 State of Containers and Serverless Report!
+  external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
+  mobile_message: Read the State of Containers and Serverless Report!
 disclaimer: Esta página aún no está disponible en español. Estamos trabajando en su
   traducción. <br> Si tienes alguna pregunta o comentario sobre nuestro actual proyecto
-  de traducción, <a href="https://docs.datadoghq.com/fr/help/">no dudes en ponerte
+  de traducción, <a href="https://docs.datadoghq.com/es/help/">no dudes en ponerte
   en contacto con nosotros</a>.
 meta_description: Datadog, el servicio líder de monitorización a escala en nube.
 meta_title: Empezando con Datadog

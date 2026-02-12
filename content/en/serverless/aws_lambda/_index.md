@@ -1,36 +1,42 @@
 ---
 title: Serverless Monitoring for AWS Lambda
 further_reading:
-- link: '/serverless/configuration/'
-  tag: 'Documentation'
-  text: 'Configure Serverless monitoring'
-- link: "/integrations/amazon_lambda/"
-  tag: "Documentation"
-  text: "AWS Lambda integration"
-- link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
-  tag: "Blog"
-  text: "Monitor AWS Lambda functions deployed using container images"
-- link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
-  tag: "Blog"
-  text: "Best practices for collecting and managing serverless logs"
-- link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
-  tag: "Blog"
-  text: "Designing production-ready AWS serverless applications"
-- link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
-  tag: "Blog"
-  text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
-- link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
-  tag: "Blog"
-  text: "Monitor your AWS Lambda functions' ephemeral storage usage"
-- link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
-  tag: "Blog"
-  text: "Understand serverless function performance with Cold Start Tracing"
-- link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
-  tag: "Blog"
-  text: "Identify deprecated Lambda functions with Datadog"
-- link: "https://www.datadoghq.com/blog/monitoring-lwa-with-datadog/"
-  tag: "Blog"
-  text: "Monitor Lambda-hosted web apps with the Lambda Web Adapter integration"
+  - link: '/serverless/configuration/'
+    tag: 'Documentation'
+    text: 'Configure Serverless monitoring'
+  - link: "/integrations/amazon_lambda/"
+    tag: "Documentation"
+    text: "AWS Lambda integration"
+  - link: "/serverless/guide/disable_serverless"
+    tag: "Documentation"
+    text: "Disable Serverless Monitoring"
+  - link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
+    tag: "Blog"
+    text: "Monitor AWS Lambda functions deployed using container images"
+  - link: "https://www.datadoghq.com/blog/manage-serverless-logs-datadog/"
+    tag: "Blog"
+    text: "Best practices for collecting and managing serverless logs"
+  - link: "https://www.datadoghq.com/blog/aws-serverless-application-design/"
+    tag: "Blog"
+    text: "Designing production-ready AWS serverless applications"
+  - link: "https://www.datadoghq.com/blog/well-architected-serverless-applications-best-practices/"
+    tag: "Blog"
+    text: "Best practices for building serverless applications that follow AWS's Well-Architected Framework"
+  - link: "https://www.datadoghq.com/blog/aws-lambda-functions-ephemeral-storage-monitoring/"
+    tag: "Blog"
+    text: "Monitor your AWS Lambda functions' ephemeral storage usage"
+  - link: "https://www.datadoghq.com/blog/serverless-cold-start-traces/"
+    tag: "Blog"
+    text: "Understand serverless function performance with Cold Start Tracing"
+  - link: "https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/"
+    tag: "Blog"
+    text: "Identify deprecated Lambda functions with Datadog"
+  - link: "https://www.datadoghq.com/blog/monitoring-lwa-with-datadog/"
+    tag: "Blog"
+    text: "Monitor Lambda-hosted web apps with the Lambda Web Adapter integration"
+  - link: https://www.datadoghq.com/blog/lambda-managed-instances
+    tag: Blog
+    text: Monitor AWS Lambda Managed Instances with Datadog
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.
@@ -43,7 +49,7 @@ To get started, follow the [installation instructions][1] to collect metrics, tr
 
 Datadog Serverless Monitoring makes use of a runtime-specific Datadog Lambda Library, in conjunction with the Datadog Lambda extension, to send telemetry from your Lambda functions.
 
-The Datadog Lambda extension collects logs through CloudWatch, in addition to traces, enhanced metrics, and custom metrics from the Datadog Lambda Library.
+The Datadog Lambda Extension collects function logs using the Lambda Telemetry API, eliminating the need for CloudWatch. It also generates enhanced metrics. It unifies these telemetry signals with APM traces, custom spans, and custom metrics from the Datadog Lambda Library.
 
 ## Usage
 

@@ -8,7 +8,7 @@ title: トレーサーデバッグログ
 
 ## 自動化されたデバッグログ収集
 
-<div class="alert alert-warning">自動化されたデバッグログは、Java、.NET、Node.js、Python でサポートされています。他の言語の場合は、代わりに<a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">手動でのデバッグログ収集</a>をご利用ください。</div>
+<div class="alert alert-danger">自動化されたデバッグログは、Java、.NET、Node.js、Python でサポートされています。他の言語の場合は、代わりに<a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">手動でのデバッグログ収集</a>をご利用ください。</div>
 
 フレアを使用すると、機密データを除去したうえで、必要なトラブルシューティング情報 (レーサーログを含む) を Datadog サポートチームに送信できます。これは、高い CPU 使用率やメモリ使用率、スパンの欠落などの問題をトラブルシューティングする際に有用です。
 

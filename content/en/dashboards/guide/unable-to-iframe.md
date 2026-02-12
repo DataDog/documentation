@@ -1,5 +1,6 @@
 ---
 title: Why am I unable to iFrame certain HTTPS URLs?
+description: Troubleshoot iFrame issues caused by X-Frame-Options headers and learn how to configure ALLOW-FROM settings.
 aliases:
     - /graphing/faq/why-am-i-unable-to-iframe-certain-https-urls
     - /dashboards/faq/why-am-i-unable-to-iframe-certain-https-urls

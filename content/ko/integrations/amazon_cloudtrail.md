@@ -28,7 +28,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cloud SIEM을 위해 AWS CloudTrail을 설정하는 경우 <a href="https://docs.datadoghq.com/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/">Cloud SIEM에 대한 AWS 설정</a>을 참조합니다.
 </div>
 

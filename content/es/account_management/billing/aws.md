@@ -16,8 +16,8 @@ Otros recursos de AWS, como ELB, RDS y DynamoDB, no forman parte de la facturaci
 
 ## Exclusión de recursos de AWS
 
-Puedes limitar las métricas de AWS recopiladas para algunos servicios a recursos específicos. En la [página de integración de AWS de Datadog][3], selecciona la cuenta de AWS y haz clic en la pestaña **Metric Collection**. En **Limit Metric Collection to Specific Resources**, puedes limitar las métricas para una o más de las métricas personalizadas de EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS y CloudWatch.
-Asegúrate de que las etiquetas (tags) agregadas a esta sección estén asignadas a los recursos correspondientes en AWS.
+Puedes limitar las métricas de AWS recopiladas para algunos servicios a recursos específicos. En la [página de integración de AWS de Datadog][3], selecciona la cuenta de AWS y haz clic en la pestaña **Metric Collection** (Recopilación de métricas). En **Limit Metric Collection to Specific Resources** (Limitar la recopilación de métricas para recursos específicos), puedes limitar las métricas para una o más de las métricas personalizadas de EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, Step Functions y CloudWatch.
+Asegúrate de que las etiquetas agregadas a esta sección estén asignadas a los recursos correspondientes en AWS.
 
 **Nota**: si utilizas la notación de exclusión (`!`), asegúrate de que el recurso carezca de la etiqueta especificada.
 
@@ -25,7 +25,7 @@ Asegúrate de que las etiquetas (tags) agregadas a esta sección estén asignada
 
 También puedes limitar las métricas de AWS utilizando la [API][4].
 
-**Nota**: Datadog solo puede facturar EC2 (hosts), Lambda (funciones activas) y CloudWatch Custom Metrics (métricas personalizadas). Las métricas integradas para los demás servicios que puedes filtrar no generan cargos en Datadog.
+**Nota**: Datadog solo puede facturar EC2 (hosts), Lambda (funciones activas), CloudWatch Custom Metrics (métricas personalizadas) y [contenedores][9]. Las métricas integradas para los demás servicios que puedes filtrar no generan cargos en Datadog.
 
 ### EC2
 
@@ -52,6 +52,22 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 
 Opcionalmente, puedes [enviar métricas de CloudWatch a Datadog utilizando CloudWatch Metric Streams y Amazon Data Firehose][8], en lugar de utilizar el método de sondeo de API predeterminado. Si tu organización utiliza el método CloudWatch Metric Streams con Kinesis, no se aplican las reglas de exclusión de recursos de AWS definidas en la página de integración de AWS de Datadog. Debes gestionar todas las reglas para incluir y excluir espacios de nombres de métricas o nombres específicos de métricas en la configuración de CloudWatch Metric Streams para cada una de tus cuentas de AWS en la consola de AWS.
 
+## Comprobar si un host es monitorizado por el Agent o por AWS
+
+En la lista de hosts de infraestructura:
+
+- **Monitorizado por la integración AWS**
+
+  Si un host solo muestra el logotipo de AWS o si tus métricas se limitan al espacio de nombres `aws.*`, esto indica que el host está siendo monitorizado exclusivamente por la integración AWS.
+
+  {{< img src="account_management/billing/infra-aws.png" alt="Lista de hosts de infraestructura que muestra varios hosts solo con el logotipo de AWS, lo que indica una monitorización realizada por la integración AWS." >}}
+
+- **Monitorizado por el Datadog Agent**
+
+  Si un host muestra el logotipo del Datadog Agent pero no el logotipo de AWS, o si sus métricas se recopilan del Datadog Agent (como `datadog.*`, `system.*`, etc.), esto indica que el host está siendo monitorizado por el Datadog Agent.
+
+  {{< img src="account_management/billing/infra-agent.png" alt="Lista de hosts de infraestructura que muestra un host con el logotipo del Datadog Agent, pero no con el logotipo de AWS, lo que indica una monitorización realizada por el Datadog Agent." >}}
+
 ## Solucionar problemas
 
 Si tienes preguntas técnicas, contacta con el [soporte de Datadog][6].
@@ -66,3 +82,4 @@ Si tienes preguntas sobre la facturación, ponte en contacto con tu [asesor de c
 [6]: /es/help/
 [7]: mailto:success@datadoghq.com
 [8]: /es/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[9]: /es/account_management/billing/containers/

@@ -8,13 +8,13 @@ title: Reenvío de eventos de auditorías a destinos personalizados
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El reenvío de eventos de auditorías no está disponible en el sitio US1-FED.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="US,US3,US5,EU,AP1" %}}
-<div class="alert alert-warning">El reenvío de eventos de auditorías está en fase beta. </div>
+<div class="alert alert-danger">El reenvío de eventos de auditorías está en fase beta. </div>
 {{% /site-region %}}
 
 ## Información general

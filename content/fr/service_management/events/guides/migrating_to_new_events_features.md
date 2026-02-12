@@ -10,7 +10,7 @@ further_reading:
 title: Migration vers les nouvelles fonctionnalités dédiées aux événements
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 À partir du <strong>30 juin 2022</strong>, Datadog cessera de prendre en charge les anciens monitors d'événements et le flux d'événements et proposera à la place une nouvelle expérience améliorée pour tous ses clients. Cette page contient des informations importantes concernant cette migration. Suivez les étapes qui y sont présentées avant la date de fin de la prise en charge pour que vos monitors et visualisations d'événements existants continuent de fonctionner correctement.</div>
 
 
