@@ -126,6 +126,211 @@ You can configure toxicity evaluations to use specific categories of toxicity, l
 
 The toxicity categories in this table are informed by: [Banko et al. (2020)][6], [Inan et al. (2023)][7], [Ghosh et al. (2024)][8], [Zheng et al. (2024)][9].
 
+#### Goal Completeness
+
+An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluation checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
+
+{{< img src="llm_observability/evaluations/goal_completeness_1.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| **Evaluation Stage** | **Evaluation Definition** |
+|---|---|---|
+| Evaluated on LLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
+
+##### How to Use
+
+To enable Goal Completeness evaluation, you need to instrument your application to track sessions and their completion status. This evaluation works by analyzing complete sessions to determine if all user intentions were successfully addressed.
+
+The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
+
+The span should contain meaningful `input_data` and `output_data` that represent the final state of the session. This helps the evaluation understand the session's context and outcomes when assessing completeness.
+
+
+
+## Tool Selection
+
+This evaluation checks whether the agent successfully selected the appropriate tools to address the user’s request. Incorrect or irrelevant tool choices lead to wasted calls, higher latency, and failed tasks.
+
+### Evaluation Summary
+
+| **Evaluation Stage** | **Evaluation Definition** | 
+|---|---|---|
+| Evaluated on spans with tool calls | Verifies that the tools chosen by the LLM align with the user’s request and the set of available tools. Flags irrelevant or incorrect tool calls. |
+
+### Example
+
+{{< img src="llm_observability/evaluations/tool_selection_1.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+
+### How to use
+
+1. Ensure you are running `dd-trace` v3.12+.
+1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+1. Enable the `ToolSelection` template evaluation in the Datadog UI by [creating a new evaluation][18] or [editing an existing evaluation][19].
+
+This evaluation is supported in `dd-trace` version 3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][20]** to run this evaluation.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from agents import Agent, ModelSettings, function_tool
+
+@function_tool
+def add_numbers(a: int, b: int) -> int:
+    """
+    Adds two numbers together.
+    """
+    return a + b
+
+@function_tool
+def subtract_numbers(a: int, b: int) -> int:
+    """
+    Subtracts two numbers.
+    """
+    return a - b
+    
+
+# List of tools available to the agent 
+math_tutor_agent = Agent(
+    name="Math Tutor",
+    handoff_description="Specialist agent for math questions",
+    instructions="You provide help with math problems. Please use the tools to find the answer.",
+    model="o3-mini",
+    tools=[
+        add_numbers, subtract_numbers
+    ],
+)
+
+history_tutor_agent = Agent(
+    name="History Tutor",
+    handoff_description="Specialist agent for history questions",
+    instructions="You provide help with history problems.",
+    model="o3-mini",
+)
+
+# The triage agent decides which specialized agent to hand off the task to — another type of tool selection covered by this evaluation.
+triage_agent = Agent(  
+    'openai:gpt-4o',
+    model_settings=ModelSettings(temperature=0),
+    instructions='What is the sum of 1 to 10?',  
+    handoffs=[math_tutor_agent, history_tutor_agent],
+)
+{{< /code-block >}}
+
+### Troubleshooting
+
+- If you frequently see irrelevant tool calls, review your tool descriptions—they may be too vague for the LLM to distinguish.
+- Make sure you include descriptions of the tools (i.e. the quotes containing the tool description under the function name, the sdk autoparses this as the description)
+
+## Tool Argument Correctness
+
+Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (for example, a string instead of an integer) or irrelevant values cause failures in downstream execution.
+
+### Evaluation summary
+
+| **Span kind** | **Evaluation Definition** | 
+|---|---|---|
+| Evaluated on spans with tool calls | Verifies that arguments provided to a tool are correct and relevant based on the tool schema. Identifies invalid or irrelevant arguments. |
+
+### Example
+
+{{< img src="llm_observability/evaluations/tool_argument_correctness_1.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
+
+##### Instrumentation
+
+This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][21]** to run this evaluation.  
+
+### How to use
+<div class="alert alert-info">Tool argument correctness is only available for OpenAI and Azure OpenAI.</div>
+
+1. Install `dd-trace` v3.12+.
+1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
+
+Enable the ToolArgumentCorrectness evaluation in the Datadog UI by [creating a new evaluation][18] or [editing an existing evaluation][19].
+
+{{< code-block lang="python" >}}
+import os
+
+from ddtrace.llmobs import LLMObs
+from pydantic_ai import Agent
+
+
+# Define tools as regular functions with type hints
+def add_numbers(a: int, b: int) -> int:
+    """
+    Adds two numbers together.
+    """
+    return a + b
+
+
+def subtract_numbers(a: int, b: int) -> int:
+    """
+    Subtracts two numbers.
+    """
+    return a - b
+
+    
+def multiply_numbers(a: int, b: int) -> int:
+    """
+    Multiplies two numbers.
+    """
+    return a * b
+
+
+def divide_numbers(a: int, b: int) -> float:
+    """
+    Divides two numbers.
+    """
+    return a / b
+
+
+# Enable LLMObs
+LLMObs.enable(
+    ml_app="tool_argument_correctness_test",
+    api_key=os.environ["DD_API_KEY"],
+    site=os.environ["DD_SITE"],
+    agentless_enabled=True,
+)
+
+
+# Create the Math Tutor agent with tools
+math_tutor_agent = Agent(
+    'openai:gpt-5-nano',
+    instructions="You provide help with math problems. Please use the tools to find the answer.",
+    tools=[add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
+)
+
+# Create the History Tutor agent (note: gpt-5-nano doesn't exist, using gpt-4o-mini)
+history_tutor_agent = Agent(
+    'openai:gpt-5-nano',
+    instructions="You provide help with history problems.",
+)
+
+# Create the triage agent
+# Note: pydantic_ai handles handoffs differently - you'd typically use result_type 
+# or custom logic to route between agents
+triage_agent = Agent(
+    'openai:gpt-5-nano',
+    instructions=(
+        'DO NOT RELY ON YOUR OWN MATHEMATICAL KNOWLEDGE, '
+        'MAKE SURE TO CALL AVAILABLE TOOLS TO SOLVE EVERY SUBPROBLEM.'
+    ),
+    tools=[add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
+)
+
+
+# Run the agent synchronously
+result = triage_agent.run_sync(
+    '''
+    Help me solve the following problem:
+    What is the sum of the numbers between 1 and 100?
+    Make sure you list out all the mathematical operations (addition, subtraction, multiplication, division) in order before you start calling tools in that order.
+    '''
+)
+{{< /code-block >}}
+
+### Troubleshooting
+- Make sure your tools use type hints—the evaluation relies on schema definitions.
+- Make sure to include a tool description (for example, the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
+- Validate that your LLM prompt includes enough context for correct argument construction.
+
 
 [1]: https://learnprompting.org/docs/prompt_hacking/offensive_measures/simple-instruction-attack
 [2]: https://owasp.org/www-community/attacks/Code_Injection
@@ -144,3 +349,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][6],
 [15]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
 [16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#failure-to-answer
 [17]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/
+[18]: /llm_observability/evaluations/managed_evaluations/#create-new-evaluations
+[19]: /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
+[20]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/1-tool-selection-demo.py
+[21]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/2-tool-argument-correctness-demo.py
