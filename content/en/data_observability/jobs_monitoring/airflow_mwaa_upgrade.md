@@ -9,9 +9,11 @@ further_reading:
 
 ## Overview
 
-Use this guide if your Amazon MWAA environment runs Airflow `2.7.2`, `2.8.1`, or `2.9.2` and installing `apache-airflow-providers-openlineage` from `requirements.txt` fails with dependency resolution errors.
+Use this guide if your Amazon MWAA environment runs Airflow `2.7.2`, `2.8.1`, or `2.9.2`.
 
-Amazon MWAA enforces package constraints for each Airflow and Python version. When you upgrade OpenLineage packages, the new dependency requirements can conflict with MWAA defaults. Resolve this by using a custom constraints file and referencing it from `requirements.txt`.
+For these Airflow versions, MWAA default constraints pin older `apache-airflow-providers-openlineage` and OpenLineage package versions. These versions can cause known reliability and compatibility issues, which can degrade the Data Observability experience.
+
+To use provider versions that include these fixes, update constraints and requirements together. Amazon MWAA enforces package constraints for each Airflow and Python version, so upgrading OpenLineage packages can conflict with MWAA defaults unless you provide custom constraints.
 
 For details about MWAA dependency and constraints behavior, see AWS documentation on [Python dependencies][3]. To review provider compatibility and requirements, see [OpenLineage provider documentation][4].
 
