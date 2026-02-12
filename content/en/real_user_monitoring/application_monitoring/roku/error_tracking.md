@@ -27,7 +27,7 @@ Enable Roku Crash Reporting and Error Tracking to get comprehensive crash report
 Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
-Follow the [in-app setup instructions][2] or [the steps on this page][5] to install the SDK and enable Roku Crash Reporting and Error Tracking.
+If you have not yet set up the Roku SDK, follow the [in-app setup instructions][2] or see the [Roku Crash Reporting and Error Tracking documentation][5].
 
 
 [1]: https://app.datadoghq.com/rum/error-tracking
