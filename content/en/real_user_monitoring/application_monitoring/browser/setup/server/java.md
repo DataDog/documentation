@@ -35,16 +35,16 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
   - WebLogic 12+
   - WebSphere AS 8+ / Open Liberty 17+
 
-## Getting started
+## Setup
 
 Choose your preferred setup method:
 
 {{< tabs >}}
 {{% tab "Single-Step Instrumentation (Recommended)" %}}
 
-Enables RUM Browser monitoring via [Single Step Instrumentation (SSI)][2].
+Enables RUM Browser monitoring with [Single Step Instrumentation (SSI)][2].
 When you run the Agent installation with RUM enabled, Datadog:
-- Loads the Java SDK into your Java applications via SSI
+- Loads the Java SDK into your Java applications through SSI
 - Creates a RUM application for you
 - Configures the Java SDK with the required RUM environment variables
 
@@ -52,7 +52,7 @@ When you run the Agent installation with RUM enabled, Datadog:
 
 1. Go to the [**Agent Installation**][1] page.
 2. Select your platform (for example, Linux).
-3. In the **Customize your observability coverage** section, turn on **Real User Monitoring** under **Application Observability**.
+3. In the **Customize your observability coverage** section, enable **Real User Monitoring** under **Application Observability**.
 
    A RUM application is automatically created for you when you enable this option.
 
@@ -79,7 +79,7 @@ Use manual configuration if you prefer to set up RUM Browser monitoring independ
   - `applicationId`
   - `remoteConfigurationId`
 
-### Enable RUM Instrumentation on Java SDK
+### Enable RUM instrumentation on the Java SDK
 
 RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK Library][5].
 
@@ -117,7 +117,7 @@ HTML documents should now contain the Datadog RUM JavaScript tag right before th
 
 ## Configuration options
 
-Here are all the configuration options related to RUM Enablement on the Java SDK:
+Here are all the configuration options related for enabling RUM on the Java SDK:
 
 | Property | Environment variable | Value | Requirement |
 |----------|---------------------|-------|-------------|
