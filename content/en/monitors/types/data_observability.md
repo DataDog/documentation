@@ -225,7 +225,8 @@ The following additional variables are available for **Anomaly** detection monit
 
 ### Example notification
 
-**Threshold monitor:**
+{{< tabs >}}
+{{% tab "Threshold" %}}
 
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -239,7 +240,8 @@ Current value {{value}} is within the threshold of {{threshold}}.
 {{/is_recovery}}
 {{< /code-block >}}
 
-**Anomaly monitor:**
+{{% /tab %}}
+{{% tab "Anomaly" %}}
 
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -254,18 +256,23 @@ Observed value {{observed}} is within the expected range.
 {{/is_recovery}}
 {{< /code-block >}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Example monitors
 
 To create any of the examples below, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
 
-### Unexpected row count drop
+{{< tabs >}}
+{{% tab "Row count drop" %}}
 
 Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
 
 1. Select **Table** > **Row Count** and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
 1. Select **Anomaly** as the detection method. The monitor triggers when the row count deviates from its historical baseline.
 
-### Stale table detection
+{{% /tab %}}
+{{% tab "Stale table" %}}
 
 Alert when a critical table has not been updated within the expected time window.
 
@@ -273,12 +280,16 @@ Alert when a critical table has not been updated within the expected time window
 1. Select **Threshold** as the detection method.
 1. Set the **Alert threshold** to **6 hours** and optionally a **Warning threshold** at **4 hours**.
 
-### Column null percentage spike
+{{% /tab %}}
+{{% tab "Null percentage spike" %}}
 
 Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
 
 1. Select **Column** > **Nullness** and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
 1. Select **Anomaly** as the detection method.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
