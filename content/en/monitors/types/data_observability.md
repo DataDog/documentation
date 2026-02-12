@@ -54,8 +54,6 @@ Data Observability monitors require [Quality Monitoring](/data_observability/qua
 
 To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/data-obs/monitors) in the UI.
 
-{{< img src="data_observability/data_observability_monitor/full_page_do_monitor_creation.png" alt="Full flow of DO monitor creation." style="width:80%;" >}}
-
 ## Choose data to monitor
 
 First, select whether you are monitoring at the **Table** or **Column** level:
@@ -74,7 +72,7 @@ Then, use the **Edit** tab to search for tables, views, or columns by typing `ke
 
 Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
 
-{{< img src="data_observability/data_observability_monitor/metric_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:80%;" >}}
+{{< img src="data_observability/data_observability_monitor/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:80%;" >}}
 
 **Examples:**
 
@@ -144,6 +142,8 @@ The **Custom SQL** metric type tracks a custom metric value returned by a SQL qu
 If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the **Group by** field (for example, `column_a, column_b`). Each group is evaluated independently.
 
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
+
+{{< img src="data_observability/data_observability_monitor/custom_sql_example.png" alt="Input field for custom SQL monitor creatoin." style="width:80%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
