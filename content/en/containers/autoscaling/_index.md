@@ -30,7 +30,7 @@ further_reading:
 </div>
 {{< /site-region >}}
 
-Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
+Datadog Kubernetes Autoscaling continuously monitors your Kubernetes resources to provide immediate scaling recommendations and multidimensional autoscaling of your Kubernetes workloads and clusters. You can deploy autoscaling through the Datadog web interface, or with a `DatadogPodAutoscaler` custom resource.
 
 ## How it works
 Datadog uses real-time and historical utilization metrics and event signals from your existing Datadog Agents to make recommendations. You can then examine these recommendations and choose to deploy them.
@@ -68,7 +68,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
    - Autoscaling Manage
 - (Recommended) Linux kernel v5.19+ and cgroup v2
 
-## Setup
+## Set up workload autoscaling
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -198,6 +198,10 @@ If Cloud Cost Management is **not** enabled, Datadog Kubernetes Autoscaling show
 _Fixed cost values are subject to refinement over time._
 {{% /tab %}}
 {{< /tabs >}}
+
+## Set up cluster autoscaling
+
+TBD
 
 ## Usage
 
