@@ -52,7 +52,7 @@ Data Observability monitors require [Quality Monitoring](/data_observability/qua
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/monitors/create/data-observability) in the UI.
+To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/data-obs/monitors) in the UI.
 
 ## Select an entity type and metric type
 
@@ -187,6 +187,17 @@ To receive a notification when Datadog stops receiving quality monitoring data f
 ### Advanced alert conditions
 
 For more information about advanced alert options such as evaluation delay, see [Configure Monitors](/monitors/create/configuration/#advanced-alert-conditions).
+
+### Annotate bounds
+
+For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
+
+| Annotation | Description |
+|---|---|
+| **Expected** | Expand bounds to include the marked behavior permanently. |
+| **Reset for now** | Mark behavior as OK, but alert if it happens again. |
+| **Missed alert** | Contract bounds to alert on this behavior. |
+| **Ignore** | Exclude annotated data when modeling bounds. |
 
 ## Configure notifications and automations
 
