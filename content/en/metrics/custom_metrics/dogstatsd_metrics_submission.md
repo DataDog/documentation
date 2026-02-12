@@ -20,7 +20,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 
 [COUNT](#count), [GAUGE](#gauge), and [SET](#set) metric types are familiar to StatsD users. `TIMER` from StatsD is a sub-set of `HISTOGRAM` in DogStatsD. Additionally, you can submit [HISTOGRAM](#histogram) and [DISTRIBUTION](#distribution) metric types using DogStatsD.
 
-**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
+**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. To get RATE metrics through DogStatsD, submit either a [COUNT][16] or [HISTOGRAM][18] metric. Count metric values and `<HISTOGRAM>.count` values are time-normalized deltas of the metric's value over the StatsD flush period.
 
 ## Functions
 
