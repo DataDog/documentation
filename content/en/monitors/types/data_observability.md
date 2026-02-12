@@ -60,7 +60,7 @@ To create a Data Observability monitor in Datadog, navigate to [**Monitors** > *
 
 First, select whether you are monitoring at the **Table** or **Column** level:
 
-- **Table**: Monitor table-level signals such as freshness, row count, or a custom SQL query result.
+- **Table**: Monitor table-level metrics such as freshness, row count, or a custom SQL query result.
 - **Column**: Monitor column-level metrics such as nullness, uniqueness, cardinality, or statistical measures.
 
 Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field. The following attributes are available:
@@ -138,8 +138,12 @@ The **Custom SQL** metric type tracks a custom metric value returned by a SQL qu
     - **Default**: The query returns a scalar value. Use this in most cases.
     - **Freshness**: The query returns the difference (in seconds) between the current time and the last time an event occurred.
     - **Percentage**: The query returns a percentage value between 0 and 100.
-1. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`
-1. Click **Validate** to verify your query syntax.
+2. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`
+3. Click **Validate** to verify your query syntax.
+
+If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the **Group by** field (for example, `column_a, column_b`). Each group is evaluated independently.
+
+**Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
 {{% /tab %}}
 {{< /tabs >}}
