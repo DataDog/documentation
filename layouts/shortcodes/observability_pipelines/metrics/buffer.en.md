@@ -35,12 +35,13 @@ These metrics are specific to destination buffers, located upstream of a destina
 `pipelines.buffer_discarded_events_total`
 : **Description**: Events discarded by the buffer.
 : **Metric type**: counter
-: **Additional tag**: `intentional` - `true` if events were dropped due to buffer overflow policy, `false` if due to an error.
+: **Additional tags**: `intentional:true` means an incoming event was dropped because the buffer was configured with the `drop newest` on full behavior, and hte buffer was full. `intentional:false` means the event was dropped due to an error.
+
 
 `pipelines.buffer_discarded_bytes_total`
 : **Description**: Bytes discarded by the buffer.
 : **Metric type**: counter
-: **Additional tag**: `intentional` - `true` if events were dropped due to buffer overflow policy, `false` if due to an error.
+: **Additional tags**: `intentional:true` means an incoming event was dropped because the buffer was configured with the `drop newest` on full behavior, and hte buffer was full. `intentional:false` means the event was dropped due to an error.
 
 #### Source buffer metrics
 
