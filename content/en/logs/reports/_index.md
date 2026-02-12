@@ -1,5 +1,6 @@
 ---
 title: Scheduled CSV Reports
+site_support_id: logs_scheduled_reports
 ---
 
 ## Overview
