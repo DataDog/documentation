@@ -6561,6 +6561,11 @@ menu:
       url: logs/explorer/saved_views/
       parent: log_explorer
       weight: 514
+    - name: Processors
+      url: logs/processors/
+      parent: log_management
+      identifier: log_processors
+      weight: 6
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
