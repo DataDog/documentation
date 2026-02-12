@@ -134,34 +134,34 @@ The following table describes the products in which you can use the team filter:
 
 | Product List Page              | Filter basis                                                                       |
 |--------------------------------|------------------------------------------------------------------------------------|
+| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
 | [Apps][21]                     | Team handle                                                                        |
 | [Case Management projects][22] | Team handle                                                                        |
 | [Connections][23]              | Team handle                                                                        |
 | [Connection Groups][24]        | Team handle                                                                        |
 | [Cross Org Connections][25]    | Team handle                                                                        |
 | [Datastores][26]               | Team handle                                                                        |
+| [Data Streams Monitoring][18]  | Team handle                                                                        |
+| [Dashboards][11]               | Team handle                                                                        |
+| [Incidents][13]                | Team handle                                                                        |
 | [Integrations][27]             | Team handle                                                                        |
+| [Logs Error Tracking][16]      | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
 | [Logs Pipelines][28]           | Team handle                                                                        |
+| [Monitors][14]                 | Team handle                                                                        |
+| [Notebooks][20]                | Team handle                                                                        |
 | [Observability Pipelines][29]  | Team handle                                                                        |
 | [On-Call][30]                  | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
-| [Private Action Runner][31]    | Team handle                                                                        |
 | [Powerpacks][32]               | Team handle                                                                        |
+| [Private Action Runner][31]    | Team handle                                                                        |
 | [Reference tables][33]         | Team handle                                                                        |
+| [Resource Catalog][8]          | Team handle                                                                        |
 | [RUM apps][34]                 | Team handle                                                                        |
 | [Security rules][35]           | Team handle                                                                        |
 | [Security suppressions][36]    | Team handle                                                                        |
-| [Sheets][37]                   | Team handle                                                                        |
-| [Dashboards][11]               | Team handle                                                                        |
-| [Resource Catalog][8]          | Team handle                                                                        |
-| [Software Catalog][12]         | Team handle                                                                        |
-| [Incidents][13]                | Team handle                                                                        |
-| [Monitors][14]                 | Team handle                                                                        |
-| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
-| [Logs Error Tracking][16]      | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
 | [Service Level Objectives][17] | Team handle                                                                        |
-| [Data Streams Monitoring][18]  | Team handle                                                                        |
+| [Sheets][37]                   | Team handle                                                                        |
+| [Software Catalog][12]         | Team handle                                                                        |
 | [Synthetic Tests][19]          | Team handle                                                                        |
-| [Notebooks][20]                | Team handle                                                                        |
 
 
 ## Permissions
