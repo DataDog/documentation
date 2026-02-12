@@ -102,8 +102,8 @@ To enable Agentless Scanning, use one of the following workflows:
 - **[Quick start](#quick-start-setup)**: Guided setup for new users using AWS CloudFormation.
 - **[Terraform](#terraform-setup)**: For AWS, Azure, and GCP using the Terraform module directly.
 - **[AWS CloudFormation](#aws-cloudformation-setup)**: For new or existing AWS accounts.
-- **[GCP Cloud Shell](#gcp-cloud-shell-setup)**: Recommended for GCP. Uses Google Cloud Shell to run a setup script that wraps the Terraform module.
 - **[AWS CloudFormation StackSet](#aws-cloudformation-stackset-setup)**: For AWS Organizations with multiple accounts.
+- **[GCP Cloud Shell](#gcp-cloud-shell-setup)**: Recommended for GCP. Uses Google Cloud Shell to run a setup script that wraps the Terraform module.
 - **[Azure Resource Manager](#azure-resource-manager-setup)**: For new or existing Azure accounts.
 
 ### Quick start
@@ -284,33 +284,6 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 
 <br />
 
-### GCP Cloud Shell
-
-Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script][21] that you can review, and then runs it to wrap the [Terraform Datadog Agentless Scanner module for GCP][22], making the installation process straightforward without needing to manage Terraform directly.
-
-{{% collapse-content title="GCP Cloud Shell setup guide" level="h4" id="gcp-cloud-shell-setup" %}}
-If you've already [set up Cloud Security][10] and want to enable [Agentless Scanning][1] on an existing integrated GCP project, you can use Google Cloud Shell for a guided setup experience. This approach is recommended for GCP as it simplifies the Terraform installation by handling the configuration automatically.
-
-<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
-
-##### Set up GCP Cloud Shell
-
-1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
-1. Expand the account containing the project where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
-1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
-1. Select an **API key** that has [Remote Configuration][3] enabled. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-1. An **Application key** is automatically created for you. Copy it and store it securely.
-1. Select the **GCP projects** you want to scan.
-1. Configure the **Scanner project** (the project where the scanner will be deployed, which must be one of the selected projects) and **Scanner region**.
-1. Click **Open Google Cloud Shell** to open [Google Cloud Shell][23] with the setup command pre-filled. Alternatively, copy the generated command and paste it into your own Google Cloud Shell session.
-1. Review and run the command in Google Cloud Shell. The script downloads the [setup script][21], which applies the [Terraform Datadog Agentless Scanner module for GCP][22] to deploy and configure the scanner in your selected project and region.
-1. Once the command completes successfully, return to the Datadog setup page and click **Done**.
-
-{{% /collapse-content %}}
-
-<br />
-
 ### AWS CloudFormation StackSet (Multi-Account)
 
 For AWS Organizations with multiple accounts, use a CloudFormation StackSet to deploy the Agentless Scanning delegate role across all member accounts. This approach automates the onboarding process and ensures new accounts added to your Organization are automatically configured.
@@ -356,6 +329,33 @@ After the StackSet deploys successfully, the member accounts are configured to a
 
 [18]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
 [19]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
+
+{{% /collapse-content %}}
+
+<br />
+
+### GCP Cloud Shell
+
+Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script][21] that you can review, and then runs it to wrap the [Terraform Datadog Agentless Scanner module for GCP][22], making the installation process straightforward without needing to manage Terraform directly.
+
+{{% collapse-content title="GCP Cloud Shell setup guide" level="h4" id="gcp-cloud-shell-setup" %}}
+If you've already [set up Cloud Security][10] and want to enable [Agentless Scanning][1] on an existing integrated GCP project, you can use Google Cloud Shell for a guided setup experience. This approach is recommended for GCP as it simplifies the Terraform installation by handling the configuration automatically.
+
+<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
+
+##### Set up GCP Cloud Shell
+
+1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
+1. Expand the account containing the project where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
+1. Select an **API key** that has [Remote Configuration][3] enabled. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Create an **Application key**.
+1. Select the **GCP projects** you want to scan.
+1. Configure the **Scanner project** (the project where the scanner will be deployed, which must be one of the selected projects) and **Scanner region**.
+1. Click **Open Google Cloud Shell** to open [Google Cloud Shell][23], which displays the setup command in the terminal. Copy and run the displayed command.
+1. Review and run the command in Google Cloud Shell. The script downloads the [setup script][21], which applies the [Terraform Datadog Agentless Scanner module for GCP][22] to deploy and configure the scanner in your selected project and region.
+1. Once the command completes successfully, return to the Datadog setup page and click **Done**.
 
 {{% /collapse-content %}}
 
