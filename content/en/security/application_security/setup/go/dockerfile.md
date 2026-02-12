@@ -30,7 +30,7 @@ A list of `Dockerfile` examples can be found in the [`examples/docker`][3] direc
 Here is an example of it in its simplest form:
 
 ```dockerfile
-FROM golang:1 AS build
+FROM golang:1.25.7 AS build
 WORKDIR /app
 COPY . .
 
@@ -70,7 +70,7 @@ When CGO is disabled, however, Go usually produces a fully, statically linked bi
 This is the recommended approach for most users, using Debian/Ubuntu-based images:
 
 ```dockerfile
-FROM golang:1 AS build
+FROM golang:1.25.7 AS build
 WORKDIR /app
 COPY . .
 
@@ -95,7 +95,7 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 If you need CGO but still want a lighter runtime image, build with a Debian-based image and run with Alpine:
 
 ```dockerfile
-FROM golang:1 AS build
+FROM golang:1.25.7 AS build
 WORKDIR /app
 COPY . .
 
@@ -120,7 +120,7 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 For minimal build and runtime size, using CGO disabled builds (the default on Alpine):
 
 ```dockerfile
-FROM golang:1-alpine AS build
+FROM golang:1.25.7-alpine AS build
 WORKDIR /app
 COPY . .
 
@@ -142,7 +142,7 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 For ultra-minimal images when using `CGO_ENABLED=0`:
 
 ```dockerfile
-FROM golang:1 AS build
+FROM golang:1.25.7 AS build
 WORKDIR /app
 COPY . .
 
@@ -174,7 +174,7 @@ ENTRYPOINT [ "/main" ]
 For security-focused deployments using [Google's distroless][7] images:
 
 ```dockerfile
-FROM golang:1 AS build
+FROM golang:1.25.7 AS build
 WORKDIR /app
 COPY . .
 
@@ -205,7 +205,7 @@ ENTRYPOINT [ "/main" ]
 For building applications targeting different architectures:
 
 ```dockerfile
-FROM golang:1 AS build
+FROM golang:1.25.7 AS build
 # Install cross-compilation toolchain
 RUN apt-get update && apt-get install -y gcc-aarch64-linux-gnu
 
