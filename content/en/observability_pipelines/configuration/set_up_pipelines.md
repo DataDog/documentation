@@ -40,14 +40,12 @@ You can create a pipeline with one of the following methods:
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-### Set up pipeline components
-
-1. Navigate to [Observability Pipelines][7].
-1. Select a [template][4] based on your use case.
-1. Select and set up your [source][1].
-1. Add [processors][2] to transform, redact, and enrich your log data.
+1. Navigate to [Observability Pipelines][1].
+1. Select a [template][2] based on your use case.
+1. Select and set up your [source][3].
+1. Add [processors][4] to transform, redact, and enrich your log data. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
-1. Select and set up [destinations][3] for your processed logs.
+1. Select and set up [destinations][5] for your processed logs.
 
 #### Add or remove components
 
@@ -69,17 +67,12 @@ You can create a pipeline with one of the following methods:
 
 {{% observability_pipelines/set_up_pipelines/add_another_destination %}}
 
-[1]: /observability_pipelines/sources/
-[2]: /observability_pipelines/processors/
-[3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/configuration/explore_templates/
-[5]: /observability_pipelines/configuration/update_existing_pipelines/
-[6]: /observability_pipelines/configuration/install_the_worker/
-[7]: https://app.datadoghq.com/observability-pipelines
-[8]: /monitors/types/metric/
-[9]: /observability_pipelines/guide/environment_variables/
-[10]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
-[11]: /observability_pipelines/search_syntax/logs/
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/explore_templates/
+[3]: /observability_pipelines/sources/
+[4]: /observability_pipelines/processors/
+[5]: /observability_pipelines/destinations/
+[6]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
@@ -89,7 +82,7 @@ You can create a pipeline with one of the following methods:
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
-1. Add [processors][4] to filter and transform your metrics.
+1. Add [processors][4] to filter and transform your metrics. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
 1. Set up the [Datadog Metrics][5] destination.
 
@@ -111,27 +104,18 @@ You can create a pipeline with one of the following methods:
 
 ### Install the Worker and deploy the pipeline
 
-After you have set up your source, processors, and destinations:
+After you have set up your source, processors, and destinations, click **Next: Install**. See [Install the Worker][12] for instructions on how to install the Worker for your platform. See [Advanced Worker Configurations][5] for bootstrapping options.
 
-1. Click **Next: Install**.
-1. Select the platform on which you want to install the Worker.
-1. Enter the [environment variables][9] for your sources and destinations, if applicable.
-1. Follow the instructions on installing the Worker for your platform. The command provided in the UI to install the Worker has the relevant environment variables populated.
-    - See [Install the Worker][6] for more information.
-    - **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][10].
-1. Enable out-of-the-box monitors for your pipeline.
-    1. Navigate to the [Pipelines][7] page and find your pipeline.
-    1. Click **Enable monitors** in the **Monitors** column for your pipeline.
-    1. Click **Start** to set up a monitor for one of the suggested use cases.<br>
-        - The metric monitor is configured based on the selected use case. You can update the configuration to further customize it. See the [Metric monitor documentation][8] for more information.
+If you want to make changes to your pipeline after you have deployed it, see [Update Existing Pipelines][11].
 
-After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
+### Enable out-of-the-box monitors for your pipeline
 
-See [Advanced Worker Configurations][5] for bootstrapping options.
+1. Navigate to the [Pipelines][4] page and find your pipeline.
+1. Click **Enable monitors** in the **Monitors** column for your pipeline.
+1. Click **Start** to set up a monitor for one of the suggested use cases.<br>
+    - The metric monitor is configured based on the selected use case. You can update the configuration to further customize it. See the [Metric monitor documentation][13] for more information.
 
 ## Set up a pipeline with the API
-
-<div class="alert alert-info">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 1. Use the Observability Pipelines API to [create a pipeline][6]. See the API reference for example request payloads.
 
@@ -197,3 +181,5 @@ To delete a pipeline in the UI:
 [9]: /observability_pipelines/guide/environment_variables/
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [11]: /observability_pipelines/configuration/update_existing_pipelines/?
+[12]: /observability_pipelines/configuration/install_the_worker/
+[13]: /monitors/types/metric/

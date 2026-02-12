@@ -12,10 +12,10 @@ To set up the sample processor:
 If you have the following setup for the sample processor:
 - Filter query: `env:staging`
 - Retain: `40%` of matching logs
-- Group by: `status` and `host`
+- Group by: `status` and `service`
 
 <figure class="text-center">
-<img src="{{ .Site.Params.img_url}}images/observability_pipelines/processors/group-by-example-sample.png" alt="The sample processor with example values" width="40%">
+<img src="{{ .Site.Params.img_url}}images/observability_pipelines/processors/group-by-example-service.png" alt="The sample processor with example values" width="40%">
 </figure>
 
 Then, 40% of logs for each unique combination of `status` and `service` from `env:staging` is retained. For example:

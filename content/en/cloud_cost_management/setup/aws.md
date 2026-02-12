@@ -32,7 +32,7 @@ You can setup using the [API][21], [Terraform][22], or directly in Datadog by fo
 
 ### Configure the AWS integration
 
-Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
+Navigate to [Setup & Configuration][7], add an AWS account and follow the steps to configure the AWS integration.
 
 **Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**.
 
@@ -47,7 +47,7 @@ These settings ensure complete cost accuracy by allowing periodic cost calculati
 
 {{% tab "CloudFormation" %}}
 
-{{< img src="cloud_cost/setup/aws_cloudformation_setup.jpg" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_cloudformation_setup.png" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
 
 ### Select the resources to create
 
@@ -77,7 +77,7 @@ Enter the following details for your Cost and Usage Report:
 
 {{% tab "Manual" %}}
 
-{{< img src="cloud_cost/setup/aws_manual_setup.jpg" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_manual_setup.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
 
 ### Prerequisite: generate a Cost and Usage Report
 
@@ -197,7 +197,7 @@ Use Account Filtering to control which AWS member accounts to pull into Cloud Co
 
 Using Account Filtering requires an AWS management account. You can configure account filters after an account has been configured in Cloud Cost Management.
 
-**Note:** Account filters are not supported for Recommendations or tag search.
+**Note:** Account filters are not supported for tag search.
 
 #### Configure account filters for an existing account
 
