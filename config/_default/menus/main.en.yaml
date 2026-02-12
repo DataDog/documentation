@@ -5189,7 +5189,7 @@ menu:
       identifier: llm_obs_external_evaluations
       weight: 402
     - name: Developer Guide
-      url: llm_observability/evaluations/evaluation_developer_guide
+      url: llm_observability/guide/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
       weight: 4021
