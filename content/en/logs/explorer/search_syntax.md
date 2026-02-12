@@ -102,7 +102,6 @@ status:error
 host:i-1234567890abcdef0
 ```
 
-All other attributes require the `@` prefix for search.
 
 **Notes**:
 
