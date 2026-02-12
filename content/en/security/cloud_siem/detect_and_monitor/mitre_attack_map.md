@@ -47,7 +47,7 @@ To view more information about a technique and the rules monitoring the techniqu
 
 ### Add attacker technique and tactic tags to custom rules
 
-Custom rules only show up in the map if they are tagged in the rule editor with the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
+Custom rules only show up in the map if they are tagged in the rule editor with both the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
 
 This is an example of the format you need to use for tagging custom rules and the correct pairing of tactic and technique tags:
 
@@ -56,6 +56,14 @@ This is an example of the format you need to use for tagging custom rules and th
 - `technique: <technique number>-<technique name>`
     - For example: `technique:T1566-Phishing`
 
+When adding tags to custom rules, the following formatting requirements are also in place: 
+
+- The tag prefix (tactic or technique) **must be lowercase**
+- The technique ID **is case insensitive**
+    - For example: `TA0001 or T1566`
+- Dashes and underscores are **interchangeable** in the tag name
+
+    - For example: `technique:T1566-Phishing`
 **Note**: The tactic and technique need to be based on the MITRE ATT&CK version stated on the [MITRE ATT&CK Map][3] page.
 
 ## Further reading
