@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Governance Console provides centralized configuration and governance for multi-team, multi-organization Datadog accounts. It offers a unified view of usage, adoption, configuration, and cost across your Datadog deployment. Governance Console enforces policies, applies default configurations, and transforms your organization's activity into metrics and insights for optimization. 
+Governance Console provides centralized configuration and governance for multi-team Datadog accounts. It offers a unified view of usage, adoption, and configuration across your Datadog deployment. Governance Console enforces policies, applies default configurations, and transforms your organization's activity into insights for optimization. 
 
 ### Required permissions
 
