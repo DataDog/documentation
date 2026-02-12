@@ -26,7 +26,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-Follow the [in-app setup instructions][2] or the steps on this page to install the SDK and enable Roku Crash Reporting and Error Tracking.
+If you have not set up the Roku SDK yet, follow the [in-app setup instructions][2] or see the [Roku setup documentation][7].
 
 ### Step 1 - Declare the SDK as a dependency
 
