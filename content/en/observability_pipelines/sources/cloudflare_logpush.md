@@ -20,7 +20,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 
 - A Cloudflare account with Logpush enabled.
 - A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from Cloudflare's CIDR blocks or the public internet.
-- A DNS entry that points to your Workers' load balancer.
+- A DNS entry that points to your Workers' load balancer or OPW server.
 - An SSL/TLS certificate for your domain. Cloudflare requires an HTTPS endpoint and does not accept HTTP.
 	- **Note**: You cannot use Cloudflare origin certificates because they are not publicly trusted.
 - If you are using a firewall in front of your Worker or Workers' load balancer, ensure you add [Cloudflare's IP addresses][1] to your allowlist.
@@ -39,7 +39,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
   1. Toggle the switch to **Enable TLS**.
       - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
       - The following certificate and key files are required. **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][7] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-        - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+        - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
         - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
         - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
 1. Copy your certificates into the configuration directory:
