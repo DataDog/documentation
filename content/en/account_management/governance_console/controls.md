@@ -74,12 +74,12 @@ Users in No Teams
 Cost optimization controls detect and correct configuration that could lead to increased spending on low value usage.
 
 Unqueried Metrics
-: Identifies monitors that contain invalid or broken @-mention handles, which may prevent notifications from reaching the intended recipients.dentifies metrics that are rarely or never queried and are not associated with any monitors, dashboards, SLOs, or notebooks, indicating potential cost savings opportunities. The default Metric Name Pattern includes all metrics, but can be adjusted to select a specific namespace or scope. The default Metric Lookback Period is 30 days of query activity, and can be adjusted.<br/><br/>
+: Identifies metrics that are rarely or never queried and are not associated with any monitors, dashboards, SLOs, or notebooks, indicating potential cost savings opportunities.<br/><br/>
 
   Enforcement automatically removes unused metric tags using Metrics without Limits™ to optimize cardinality and reduce costs.
 
-Inactive Metric Tags
-: Identifies monitors that contain invalid or broken @-mention handles, which may prevent notifications from reaching the intended recipients.dentifies metric tags that are rarely or never queried and are not associated with any monitors, dashboards, SLOs, or notebooks, presenting opportunities to reduce cardinality and costs.<br/><br/>
+Inactive Metric Tag
+: Identifies metric tags that are rarely or never queried and are not associated with any monitors, dashboards, SLOs, or notebooks, presenting opportunities to reduce cardinality and costs.<br/><br/>
 
   Enforcement automatically configures Metrics without Limits™ to allowlist only active tags on filtered metrics, optimizing cardinality and cost efficiency.
 
