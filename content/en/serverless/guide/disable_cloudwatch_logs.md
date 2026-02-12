@@ -56,27 +56,30 @@ datadog-ci lambda cloudwatch disable --region <region> --functions-regex <REGEX>
 [1]: /serverless/libraries_integrations/cli
 
 {{% /tab %}}
-{{% tab "Terraform" %}}
+{{% tab "Serverless Framework" %}}
 
-Add an `aws_iam_role_policy` resource that denies CloudWatch Logs actions for the function's log group:
+Add a deny statement to `provider.iam.role.statements` in your `serverless.yml`:
 
-{{< code-block lang="hcl" >}}
-resource "aws_iam_role_policy" "deny_cloudwatch_logs" {
-  name = "DenyCloudWatchLogs"
-  role = aws_iam_role.lambda_execution.name
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect   = "Deny"
-      Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
-      Resource = "arn:aws:logs:*:*:log-group:/aws/lambda/${aws_lambda_function.example.function_name}:*"
-    }]
-  })
-}
+{{< code-block lang="yaml" >}}
+provider:
+  iam:
+    role:
+      statements:
+        - Effect: Deny
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-<FUNCTION_NAME>:*"
 {{< /code-block >}}
 
-Replace `aws_iam_role.lambda_execution` and `aws_lambda_function.example` with references to your own resources.
+Replace `<FUNCTION_NAME>` with the name of your function as defined in the `functions` block. By default, Serverless Framework names Lambda functions `<service>-<stage>-<functionName>`.
+
+**Note**: This applies the deny policy to the shared execution role. To disable CloudWatch logs for all functions in the service, use a wildcard:
+
+{{< code-block lang="yaml" >}}
+Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-*:*"
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "AWS CloudFormation" %}}
@@ -140,30 +143,27 @@ fn.role?.addToPolicy(new iam.PolicyStatement({
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "Terraform" %}}
 
-Add a deny statement to `provider.iam.role.statements` in your `serverless.yml`:
+Add an `aws_iam_role_policy` resource that denies CloudWatch Logs actions for the function's log group:
 
-{{< code-block lang="yaml" >}}
-provider:
-  iam:
-    role:
-      statements:
-        - Effect: Deny
-          Action:
-            - logs:CreateLogGroup
-            - logs:CreateLogStream
-            - logs:PutLogEvents
-          Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-<FUNCTION_NAME>:*"
+{{< code-block lang="hcl" >}}
+resource "aws_iam_role_policy" "deny_cloudwatch_logs" {
+  name = "DenyCloudWatchLogs"
+  role = aws_iam_role.lambda_execution.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Deny"
+      Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+      Resource = "arn:aws:logs:*:*:log-group:/aws/lambda/${aws_lambda_function.example.function_name}:*"
+    }]
+  })
+}
 {{< /code-block >}}
 
-Replace `<FUNCTION_NAME>` with the name of your function as defined in the `functions` block. By default, Serverless Framework names Lambda functions `<service>-<stage>-<functionName>`.
-
-**Note**: This applies the deny policy to the shared execution role. To disable CloudWatch logs for all functions in the service, use a wildcard:
-
-{{< code-block lang="yaml" >}}
-Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-*:*"
-{{< /code-block >}}
+Replace `aws_iam_role.lambda_execution` and `aws_lambda_function.example` with references to your own resources.
 
 {{% /tab %}}
 {{% tab "AWS Console" %}}
