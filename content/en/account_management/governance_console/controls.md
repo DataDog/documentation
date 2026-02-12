@@ -27,7 +27,7 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
    For **Select automated mitigation**, select a mitigation. If you select **Manual** (default), the control detects noncompliant assets, and you can manually take actions based on these detections. See [manual mitigation](#manual-mitigation).
 
-   To delay mitigation, enter a number of days under **Remediation Delay**. You can delay remediation for up to one week. This grants additional time for administrators to take additional actions before automatic enforcement occurs.
+   To delay mitigation, enter a number of days under **Remediation Delay**. You can delay remediation for up to 1 week. This grants additional time for administrators to take additional actions before automatic enforcement occurs.
 
 ## Manual mitigation
 
@@ -61,7 +61,7 @@ Unused Application Keys
 Roles Without Users
 : Identifies roles that have no active users assigned to them, indicating potential cleanup opportunities.<br/><br/>
 
-  _This control does not support enforcement._
+  _This control does not support enforcement. Manual removal of unused roles required._
 
 Users in No Teams
 : Identifies active users that are not in any teams, indicating potential cleanup opportunities.<br/><br/>
