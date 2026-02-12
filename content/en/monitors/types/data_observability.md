@@ -179,28 +179,6 @@ Set how often the monitor evaluates your data:
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
 
-## Set alert conditions
-
-Choose an aggregation type:
-
-- **Simple Alert**: Send a single notification when any monitored table or column meets the condition.
-- **Multi Alert**: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
-
-### Annotate bounds
-
-For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time.
-
-{{< img src="data_observability/data_observability_monitor/bounds_annotation_example.png" alt="Hover menu for annotating a monitor bound." style="width:80%;" >}}
-
-On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
-
-| Annotation | Description |
-|---|---|
-| **Expected** | Expand bounds to include the marked behavior permanently. |
-| **Reset for now** | Mark behavior as OK, but alert if it happens again. |
-| **Missed alert** | Contract bounds to alert on this behavior. |
-| **Ignore** | Exclude annotated data when modeling bounds. |
-
 ## Configure notifications and automations
 
 For detailed instructions on the **Configure notifications and automations** section, see [Notifications](/monitors/notify/).
@@ -226,6 +204,13 @@ The following additional variables are available for **Anomaly** detection monit
 | `{{predicted}}`     | The expected value based on the historical baseline. |
 | `{{upper_bound}}`   | The upper confidence bound of the prediction.  |
 | `{{lower_bound}}`   | The lower confidence bound of the prediction.  |
+
+### Set alert conditions
+
+Choose an aggregation type:
+
+- **Simple Alert**: Send a single notification when any monitored table or column meets the condition.
+- **Multi Alert**: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
 
 ### Example notification
 
@@ -294,6 +279,21 @@ Detect when a column's null percentage exceeds normal levels, which may indicate
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Annotate bounds
+
+For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time.
+
+{{< img src="data_observability/data_observability_monitor/bounds_annotation_example.png" alt="Hover menu for annotating a monitor bound." style="width:80%;" >}}
+
+On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
+
+| Annotation | Description |
+|---|---|
+| **Expected** | Expand bounds to include the marked behavior permanently. |
+| **Reset for now** | Mark behavior as OK, but alert if it happens again. |
+| **Missed alert** | Contract bounds to alert on this behavior. |
+| **Ignore** | Exclude annotated data when modeling bounds. |
 
 ## Further Reading
 
