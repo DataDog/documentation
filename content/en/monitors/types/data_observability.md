@@ -160,6 +160,8 @@ Combine filters with `AND` or `OR`, use parentheses to group conditions, and pre
 | All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
 | Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
 
+A single monitor can track up to 5,000 entities. This limit cannot be increased. If your query matches more entities, split them across multiple monitors.
+
 Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
 
 {{< code-block lang="text" >}}
