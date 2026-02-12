@@ -894,20 +894,6 @@ further_reading:
     Depending on the cloud provider, certain resources may or may not be
     available for cost allocation.
   </p>
-  <h2 id="plain-tooltip">Plain tooltip</h2>
-  <p>
-    This sentence
-    <!-- prettier-ignore -->
-    <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-uses-a-tooltip">uses a tooltip</button><span id="tooltip-uses-a-tooltip" class="tooltip-content" role="tooltip">I'm the tooltip text</span></span
-    >.
-  </p>
-  <h2 id="tooltip-with-html-link">Tooltip with HTML link</h2>
-  <p>
-    This sentence
-    <!-- prettier-ignore -->
-    <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-uses-a-tooltip">uses a tooltip</button><span id="tooltip-uses-a-tooltip" class="tooltip-content" role="tooltip">I'm the tooltip text, and I link to <a href='https://www.google.com'>Google</a>!</span></span
-    >.
-  </p>
   <table>
     <thead>
       <tr>

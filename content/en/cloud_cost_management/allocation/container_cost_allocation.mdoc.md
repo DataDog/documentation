@@ -8,9 +8,9 @@ content_filters:
 aliases:
   - /cloud_cost_management/container_cost_allocation
 further_reading:
-  - link: "/cloud_cost_management/"
-    tag: "Documentation"
-    text: "Learn about Cloud Cost Management"
+- link: "/cloud_cost_management/"
+  tag: "Documentation"
+  text: "Learn about Cloud Cost Management"
 ---
 
 ## Overview
