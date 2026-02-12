@@ -460,6 +460,23 @@ To uninstall Agentless Scanning, remove the scanner module from your Terraform c
 To uninstall Agentless Scanning, log in to your AWS console and delete the CloudFormation stack created for Agentless Scanning.
 {{% /tab %}}
 
+{{% tab "GCP Cloud Shell" %}}
+To uninstall Agentless Scanning that was set up using Google Cloud Shell, run the same setup command you used during installation, replacing `deploy` with `destroy` at the end. For example:
+
+```text
+curl -sSL "<CLOUD_SHELL_SCRIPT_URL>" -o gcp_agentless_setup.pyz && \
+DD_API_KEY="<DD_API_KEY>" \
+DD_APP_KEY="<DD_APP_KEY>" \
+DD_SITE="<DD_SITE>" \
+SCANNER_PROJECT="<SCANNER_PROJECT>" \
+SCANNER_REGIONS="<SCANNER_REGION>" \
+PROJECTS_TO_SCAN="<PROJECTS>" \
+python3 gcp_agentless_setup.pyz destroy
+```
+
+You can review the [setup script source][21] before running the command.
+{{% /tab %}}
+
 {{% tab "Azure Resource Manager" %}}
 To uninstall Agentless Scanning, log in to your Azure account. If you created a dedicated resource group for the Agentless scanner, delete this resource group along with the following Azure role definitions:
   - Datadog Agentless Scanner Role
