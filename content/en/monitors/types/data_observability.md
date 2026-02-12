@@ -176,6 +176,11 @@ The default limit is 100 groups per monitor. To increase this limit, <a href="/h
 
 ## Set alert conditions
 
+Choose an aggregation type:
+
+- **Simple Alert**: Send a single notification when any monitored table or column meets the condition.
+- **Multi Alert**: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
+
 1. Set an alert to trigger whenever the monitored value is `above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to` a threshold that you define. For help configuring the options in this view, see [Configure Monitors](/monitors/configuration/?tab=thresholdalert#thresholds).
 1. Set a **Critical** threshold (required) and optionally a **Warning** threshold for early detection.
 1. Determine your desired behavior when data is missing, for example, `evaluate as zero`, `show NO DATA`, `show NO DATA and notify`, or `show OK`.
