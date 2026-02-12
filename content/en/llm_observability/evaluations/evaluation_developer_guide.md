@@ -1,8 +1,6 @@
 ---
 title: Evaluation Developer Guide
 description: Learn how to build custom evaluators using the LLM Observability SDK.
-aliases:
-    - /llm_observability/evaluations/developer_guide
 further_reading:
     - link: '/llm_observability/evaluations/external_evaluations'
       tag: 'Documentation'
@@ -17,42 +15,32 @@ further_reading:
 
 ## Overview
 
-This guide covers how to build custom evaluators with the LLM Observability SDK and use them in experiments and production. It walks through:
-
-- [Key concepts](#key-concepts): How evaluations work in experiments versus production
-- [Building evaluators](#building-evaluators): Class-based and function-based approaches
-- [Using evaluators in experiments](#using-evaluators-in-experiments): Running evaluators against a dataset
-- [Using evaluators in production](#using-evaluators-in-production): Evaluating live spans
-- [Data model reference](#data-model-reference): Detailed field descriptions for all evaluation types
+This guide covers how to build custom evaluators with the LLM Observability SDK and use them in LLM Experiments and in production. 
 
 ## Key concepts
 
 An **evaluation** measures a specific quality of your LLM application's output, such as accuracy, tone, or harmfulness. You write the evaluation logic inside an **evaluator**, which receives context about the LLM interaction and returns a result.
 
-There are two contexts for running evaluators:
+### Running evaluators in an Experiment
+To test your LLM application against a dataset before deploying, run your evaluators in [LLM Experiments][4]. In Experiments, evaluators run automatically: the SDK calls your evaluator on each distinct record. Use evaluators through the SDK.
 
-| | Experiments | Production |
-|---|---|---|
-| **Purpose** | Test your LLM application against a dataset before deploying. | Monitor the quality of live LLM responses. |
-| **How evaluators run** | Automatically — the SDK calls your evaluator on each dataset record. | Manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluations][4]. |
-| **Available through** | SDK | SDK, HTTP API, or Datadog UI |
+### Running evaluators in production
+To monitor the quality of your live LLM responses, run evaluators in production. You can run evaluators manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluations][5]. Use evaluators through the SDK, HTTP API, or the Datadog UI.
 
 For production, there are two approaches:
 - **Manual evaluations** (this guide): You run evaluators in your application code and submit results with `LLMObs.submit_evaluation()` or the HTTP API. This gives you full control over evaluation logic and timing.
-- **[Custom LLM-as-a-judge evaluations][4]**: You configure evaluations in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
+- **Custom LLM-as-a-judge evaluations**: You configure evaluations in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
 
-This guide focuses on manual evaluations. For managed LLM-as-a-judge evaluations, see [Custom LLM-as-a-Judge Evaluations][4].
-
-[4]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+This guide focuses on manual evaluations. For managed LLM-as-a-judge evaluations, see [Custom LLM-as-a-Judge Evaluations][5].
 
 ### Evaluation components
 
 The evaluation system has four main components:
 
-1. **[EvaluatorContext](#evaluatorcontext)** — The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In experiments, the SDK builds this automatically from each dataset record. In production, you construct it yourself.
-2. **[EvaluatorResult](#evaluatorresult)** — The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`, `dict`) instead.
-3. **[Metric type](#metric-types)** — Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), `boolean` (pass/fail), or `json` (structured data).
-4. **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
+- **[EvaluatorContext](#evaluatorcontext)**: The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In Experiments, the SDK builds this automatically from each dataset record. In production, you construct the EvaluatorContext yourself.
+- **[EvaluatorResult](#evaluatorresult)**: The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`, `dict`) instead.
+- **[Metric type](#metric-types)**: Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), `boolean` (pass/fail), or `json` (structured data).
+- **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
 
 The typical flow:
 
@@ -68,9 +56,8 @@ There are two ways to define an evaluator: class-based and function-based.
 | **Best for** | Reusable evaluators with custom configuration or state. | One-off evaluators with straightforward logic. |
 | **Receives** | An `EvaluatorContext` object with full span context (input, output, expected output, metadata, span/trace IDs). | `input_data`, `output_data`, and `expected_output` as separate arguments. |
 | **Supports summary evaluators** | Yes (`BaseSummaryEvaluator`). | No. |
-| **Future capabilities** | Class-based evaluators are the foundation for upcoming features such as defining custom LLM-as-a-judge evaluators from code. | No additional features planned. |
 
-If you are unsure, start with class-based evaluators. They provide the same capabilities as function-based evaluators today and support additional features going forward.
+If you are unsure, start with class-based evaluators. They provide the same capabilities as function-based evaluators.
 
 ### Class-based evaluators
 
@@ -102,8 +89,6 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
         )
 {{< /code-block >}}
 
-**Key points:**
-
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Implement `evaluate(context: EvaluatorContext)` with your evaluation logic.
 - Return an `EvaluatorResult` for rich results, or a plain value (`str`, `float`, `int`, `bool`, `dict`).
@@ -131,8 +116,6 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
         return sum(scores) / len(scores)
 {{< /code-block >}}
 
-**Key points:**
-
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
 
@@ -153,7 +136,7 @@ def exact_match_evaluator(input_data, output_data, expected_output):
     )
 {{< /code-block >}}
 
-**Function signature:**
+**Function signature**:
 
 {{< code-block lang="python" >}}
 def evaluator_function(
@@ -165,7 +148,7 @@ def evaluator_function(
 {{< /code-block >}}
 
 You can return either:
-- A plain value (`str`, `float`, `int`, `bool`, `dict`)
+- A plain value (`str`, `float`, `int`, `bool`, `dict`), or
 - An `EvaluatorResult` for rich results with reasoning and metadata
 
 ## Using evaluators in experiments
@@ -267,11 +250,11 @@ A frozen dataclass containing all the information needed to run an evaluation.
 | `span_id` | `str` | The span's unique identifier. |
 | `trace_id` | `str` | The trace's unique identifier. |
 
-In experiments, the SDK populates this automatically from each dataset record. In production, you construct it yourself from your span data.
+In Experiments, the SDK populates this automatically from each dataset record. In production, you construct it yourself from your span data.
 
 ### EvaluatorResult
 
-Allows you to return rich evaluation results with additional context. Used in both experiments and production.
+Allows you to return rich evaluation results with additional context. Used in both Experiments and production.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -321,7 +304,7 @@ Evaluation labels must follow these conventions:
 
 Set the `jobs` parameter to run tasks and evaluators concurrently on multiple threads, allowing experiments to complete faster when processing multiple dataset records.
 
-**Note**: Asynchronous evaluators are not yet supported for concurrent execution. Only synchronous evaluators benefit from parallel execution.
+<div class="alert alert-info">Asynchronous evaluators are not yet supported for concurrent execution. Only synchronous evaluators benefit from parallel execution.</div>
 
 ### OpenTelemetry integration
 
@@ -334,3 +317,5 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [1]: /llm_observability/evaluations/external_evaluations
 [2]: /llm_observability/instrumentation/api/#evaluations-api
 [3]: /llm_observability/instrumentation/otel_instrumentation
+[4]: /llm_observability/experiments
+[5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
