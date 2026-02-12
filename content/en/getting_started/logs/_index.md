@@ -113,7 +113,7 @@ Aggregate your logs into `Fields` and visualize as **Top List** to see your top 
 
 {{< img src="/getting_started/logs/top-list-view-2024.png" alt="A top list in the Log Explorer">}}
 
-The Log Explorer offers many powerful features for log troubleshooting and exploration, including:
+The Log Explorer offers the following features for log troubleshooting and exploration:
 - [Advanced search and filtering][31] with facets and queries
 - [Log Analytics][17] for grouping logs into patterns and aggregating data
 - [Visualizations][28] to display log data in various formats
