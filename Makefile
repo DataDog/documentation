@@ -79,12 +79,6 @@ watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
-# compile .mdoc.md files to HTML
-# so Hugo can include them in the site
-build-llms-txt:
-	@echo "Launching llms.txt build ...";
-	@node ./local/bin/js/llms-txt-build.js;
-
 build-api-derefs:
 	@node ./assets/scripts/build-api-derefs.js
 
@@ -137,7 +131,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt build-api-derefs
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
@@ -167,7 +161,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.72592276-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.94619755-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython

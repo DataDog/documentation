@@ -26,6 +26,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
     tag: "Blog"
     text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
+  - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+    tag: "Blog"
+    text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+  - link: "https://www.datadoghq.com/blog/human-name-detection"
+    tag: "Blog"
+    text: "Detect human names in logs with ML in Sensitive Data Scanner"
 cascade:
     algolia:
         rank: 70
@@ -45,7 +51,7 @@ Monitor critical changes by checking metrics, integration availability, and netw
 
 ## Get started
 
-The fastest way to start with Datadog Monitors is with [Recommended Monitors][1]. These are a collection of monitors within Datadog that are preconfigured by Datadog and integration partners.
+The fastest way to start with Datadog Monitors is with [Monitor templates][1]. These are a collection of monitors within Datadog that are preconfigured by Datadog and integration partners.
 
 You can also build your own monitors from scratch in lab environments in the Learning Center, or in your application by following the Getting Started with Monitors guide.
 
@@ -79,7 +85,7 @@ Monitors and alerts are essential tools for ensuring the reliability, performanc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/recommended
+[1]: https://app.datadoghq.com/monitors/templates
 [2]: /monitors/notify
 [3]: /monitors/downtimes
 [4]: /monitors/downtimes/?tab=bymonitorname

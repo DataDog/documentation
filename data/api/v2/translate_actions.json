@@ -3,6 +3,14 @@
     "description": "Retrieve a list of all available Datadog Agent versions.\n\nThis endpoint returns the available Agent versions that can be deployed to your fleet.\nThese versions are used when creating deployments or configuring schedules for\nautomated Agent upgrades.",
     "summary": "List all available Agent versions"
   },
+  "ListFleetAgents": {
+    "description": "Retrieve a paginated list of all Datadog Agents.\nThis endpoint returns a paginated list of all Datadog Agents with support for pagination, sorting, and filtering.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
+    "summary": "List all Datadog Agents"
+  },
+  "GetFleetAgentInfo": {
+    "description": "Retrieve detailed information about a specific Datadog Agent.\nThis endpoint returns comprehensive information about an agent including:\n- Agent details and metadata\n- Configured integrations organized by status (working, warning, error, missing)\n- Detected integrations\n- Configuration files and layers",
+    "summary": "Get detailed information about an agent"
+  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
@@ -331,6 +339,9 @@
     "request_description": "The updated definition of the retention filter.",
     "request_schema_description": "The body of the retention filter to be updated."
   },
+  "GetServiceList": {
+    "summary": "Get service list"
+  },
   "DeleteApps": {
     "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete Multiple Apps",
@@ -449,6 +460,32 @@
     "description": "Get the details of a project by `project_id`.",
     "summary": "Get the details of a project"
   },
+  "UpdateProject": {
+    "description": "Update a project.",
+    "summary": "Update a project",
+    "request_description": "Project payload",
+    "request_schema_description": "Project update request"
+  },
+  "GetProjectNotificationRules": {
+    "description": "Get all notification rules for a project.",
+    "summary": "Get notification rules"
+  },
+  "CreateProjectNotificationRule": {
+    "description": "Create a notification rule for a project.",
+    "summary": "Create a notification rule",
+    "request_description": "Notification rule payload",
+    "request_schema_description": "Notification rule create request"
+  },
+  "DeleteProjectNotificationRule": {
+    "description": "Delete a notification rule using the notification rule's `id`.",
+    "summary": "Delete a notification rule"
+  },
+  "UpdateProjectNotificationRule": {
+    "description": "Update a notification rule.",
+    "summary": "Update a notification rule",
+    "request_description": "Notification rule payload",
+    "request_schema_description": "Notification rule update request"
+  },
   "GetAllCaseTypes": {
     "description": "Get all case types",
     "summary": "Get all case types"
@@ -534,6 +571,46 @@
     "summary": "Update case priority",
     "request_description": "Case priority update payload",
     "request_schema_description": "Case update priority request"
+  },
+  "LinkIncident": {
+    "description": "Link an incident to a case",
+    "summary": "Link incident to case",
+    "request_description": "Incident link request",
+    "request_schema_description": "Relationship to incident request"
+  },
+  "UnlinkJiraIssue": {
+    "description": "Remove the link between a Jira issue and a case",
+    "summary": "Remove Jira issue link from case"
+  },
+  "LinkJiraIssueToCase": {
+    "description": "Link an existing Jira issue to a case",
+    "summary": "Link existing Jira issue to case",
+    "request_description": "Jira issue link request",
+    "request_schema_description": "Jira issue link request"
+  },
+  "CreateCaseJiraIssue": {
+    "description": "Create a new Jira issue and link it to a case",
+    "summary": "Create Jira issue for case",
+    "request_description": "Jira issue creation request",
+    "request_schema_description": "Jira issue creation request"
+  },
+  "CreateCaseNotebook": {
+    "description": "Create a new investigation notebook and link it to a case",
+    "summary": "Create investigation notebook for case",
+    "request_description": "Notebook creation request",
+    "request_schema_description": "Notebook creation request"
+  },
+  "MoveCaseToProject": {
+    "description": "Update the project associated with a case",
+    "summary": "Update case project",
+    "request_description": "Project update request",
+    "request_schema_description": "Relationship to project"
+  },
+  "CreateCaseServiceNowTicket": {
+    "description": "Create a new ServiceNow incident ticket and link it to a case",
+    "summary": "Create ServiceNow ticket for case",
+    "request_description": "ServiceNow ticket creation request",
+    "request_schema_description": "ServiceNow ticket creation request"
   },
   "UpdateStatus": {
     "description": "Update case status",
@@ -754,13 +831,22 @@
     "request_description": "",
     "request_schema_description": "The definition of the `BudgetWithEntries` object."
   },
+  "ValidateCsvBudget": {
+    "summary": "Validate CSV budget"
+  },
+  "ValidateBudget": {
+    "description": "Validate a budget configuration without creating or modifying it",
+    "summary": "Validate budget",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteBudget": {
-    "description": "Delete a budget.",
-    "summary": "Delete a budget"
+    "description": "Delete a budget",
+    "summary": "Delete budget"
   },
   "GetBudget": {
-    "description": "Get a budget.",
-    "summary": "Get a budget"
+    "description": "Get a budget",
+    "summary": "Get budget"
   },
   "ListBudgets": {
     "description": "List budgets.",
@@ -912,6 +998,10 @@
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
   },
+  "GetDeploymentGateRules": {
+    "description": "Endpoint to get rules for a deployment gate.",
+    "summary": "Get rules for a deployment gate"
+  },
   "CreateDeploymentRule": {
     "description": "Endpoint to create a deployment rule. A gate for the rule must already exist.",
     "summary": "Create deployment rule",
@@ -975,6 +1065,12 @@
   "GetDORADeployment": {
     "description": "Use this API endpoint to get a deployment event.",
     "summary": "Get a deployment event"
+  },
+  "PatchDORADeployment": {
+    "description": "Use this API endpoint to patch a deployment event.",
+    "summary": "Patch a deployment event",
+    "request_description": "",
+    "request_schema_description": "Request to patch a DORA deployment event."
   },
   "CreateDORAFailure": {
     "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
@@ -1057,7 +1153,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -1072,6 +1168,16 @@
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
   },
+  "GetHamrOrgConnection": {
+    "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
+    "summary": "Get HAMR organization connection"
+  },
+  "CreateHamrOrgConnection": {
+    "description": "Create or update the High Availability Multi-Region (HAMR) organization connection.\nThis endpoint allows you to configure the HAMR connection between the authenticated organization\nand a target organization, including setting the connection status (ONBOARDING, PASSIVE, FAILOVER, ACTIVE, RECOVERY)",
+    "summary": "Create or update HAMR organization connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
@@ -1081,6 +1187,36 @@
     "summary": "Create an incident",
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
+  },
+  "DeleteGlobalIncidentHandle": {
+    "description": "Delete a global incident handle.",
+    "summary": "Delete global incident handle"
+  },
+  "ListGlobalIncidentHandles": {
+    "description": "Retrieve a list of global incident handles.",
+    "summary": "List global incident handles"
+  },
+  "CreateGlobalIncidentHandle": {
+    "description": "Create a new global incident handle.",
+    "summary": "Create global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateGlobalIncidentHandle": {
+    "description": "Update an existing global incident handle.",
+    "summary": "Update global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetGlobalIncidentSettings": {
+    "description": "Retrieve global incident settings for the organization.",
+    "summary": "Get global incident settings"
+  },
+  "UpdateGlobalIncidentSettings": {
+    "description": "Update global incident settings for the organization.",
+    "summary": "Update global incident settings",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
@@ -1130,6 +1266,30 @@
     "request_description": "",
     "request_schema_description": "Update request for a notification template."
   },
+  "ListIncidentPostmortemTemplates": {
+    "description": "Retrieve a list of all postmortem templates for incidents.",
+    "summary": "List postmortem templates"
+  },
+  "CreateIncidentPostmortemTemplate": {
+    "description": "Create a new postmortem template for incidents.",
+    "summary": "Create postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentPostmortemTemplate": {
+    "description": "Delete a postmortem template.",
+    "summary": "Delete postmortem template"
+  },
+  "GetIncidentPostmortemTemplate": {
+    "description": "Retrieve details of a specific postmortem template.",
+    "summary": "Get postmortem template"
+  },
+  "UpdateIncidentPostmortemTemplate": {
+    "description": "Update an existing postmortem template.",
+    "summary": "Update postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -1173,14 +1333,28 @@
     "request_schema_description": "Update request for an incident."
   },
   "ListIncidentAttachments": {
-    "description": "Get all attachments for a given incident.",
-    "summary": "Get a list of attachments"
+    "description": "List incident attachments.",
+    "summary": "List incident attachments"
   },
-  "UpdateIncidentAttachments": {
-    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
-    "summary": "Create, update, and delete incident attachments",
-    "request_description": "Incident Attachment Payload.",
-    "request_schema_description": "The update request for an incident's attachments."
+  "CreateIncidentAttachment": {
+    "description": "Create an incident attachment.",
+    "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": "Create request for an attachment."
+  },
+  "CreateIncidentPostmortemAttachment": {
+    "description": "Create a postmortem attachment for an incident.\n\nThe endpoint accepts markdown for notebooks created in Confluence or Google Docs.\nPostmortems created from notebooks need to be formatted using frontend notebook cells,\nin addition to markdown format.",
+    "summary": "Create postmortem attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentAttachment": {
+    "summary": "Delete incident attachment"
+  },
+  "UpdateIncidentAttachment": {
+    "summary": "Update incident attachment",
+    "request_description": "",
+    "request_schema_description": "Request to update an attachment."
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -1338,6 +1512,38 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "ListJiraAccounts": {
+    "description": "Get all Jira accounts for the organization.",
+    "summary": "List Jira accounts"
+  },
+  "DeleteJiraAccount": {
+    "description": "Delete a Jira account by ID.",
+    "summary": "Delete Jira account"
+  },
+  "ListJiraIssueTemplates": {
+    "description": "Get all Jira issue templates for the organization.",
+    "summary": "List Jira issue templates"
+  },
+  "CreateJiraIssueTemplate": {
+    "description": "Create a new Jira issue template.",
+    "summary": "Create Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to create a Jira issue template"
+  },
+  "DeleteJiraIssueTemplate": {
+    "description": "Delete a Jira issue template by ID.",
+    "summary": "Delete Jira issue template"
+  },
+  "GetJiraIssueTemplate": {
+    "description": "Get a Jira issue template by ID.",
+    "summary": "Get Jira issue template"
+  },
+  "UpdateJiraIssueTemplate": {
+    "description": "Update a Jira issue template by ID.",
+    "summary": "Update Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to update a Jira issue template"
+  },
   "GetChannelByName": {
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
     "summary": "Get channel information by name"
@@ -1390,6 +1596,34 @@
     "request_description": "Workflows Webhook handle payload.",
     "request_schema_description": "Update Workflows webhook handle request."
   },
+  "ListTenancyProducts": {
+    "description": "Lists the products for a given tenancy. Returns the enabled/disabled status of Datadog products (such as Cloud Security Posture Management) for specific OCI tenancies.",
+    "summary": "List tenancy products"
+  },
+  "GetTenancyConfigs": {
+    "description": "Get a list of all configured OCI tenancy integrations. Returns basic information about each tenancy including authentication credentials, region settings, and collection preferences for metrics, logs, and resources.",
+    "summary": "Get tenancy configs"
+  },
+  "CreateTenancyConfig": {
+    "description": "Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.",
+    "summary": "Create tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteTenancyConfig": {
+    "description": "Delete an existing tenancy config. This will stop all data collection from the specified OCI tenancy and remove the stored configuration. This operation cannot be undone.",
+    "summary": "Delete tenancy config"
+  },
+  "GetTenancyConfig": {
+    "description": "Get a single tenancy config object by its OCID. Returns detailed configuration including authentication credentials, enabled services, region settings, and collection preferences.",
+    "summary": "Get tenancy config"
+  },
+  "UpdateTenancyConfig": {
+    "description": "Update an existing tenancy config. You can modify authentication credentials, enable/disable collection types, update service filters, and change region settings. Warning: We recommend using the Datadog web UI to avoid unintended update effects.",
+    "summary": "Update tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -1413,6 +1647,46 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
+  },
+  "ListServiceNowAssignmentGroups": {
+    "description": "Get all assignment groups for a ServiceNow instance.",
+    "summary": "List ServiceNow assignment groups"
+  },
+  "ListServiceNowBusinessServices": {
+    "description": "Get all business services for a ServiceNow instance.",
+    "summary": "List ServiceNow business services"
+  },
+  "ListServiceNowTemplates": {
+    "description": "Get all ServiceNow templates for the organization.",
+    "summary": "List ServiceNow templates"
+  },
+  "CreateServiceNowTemplate": {
+    "description": "Create a new ServiceNow template.",
+    "summary": "Create ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to create a ServiceNow template"
+  },
+  "DeleteServiceNowTemplate": {
+    "description": "Delete a ServiceNow template by ID.",
+    "summary": "Delete ServiceNow template"
+  },
+  "GetServiceNowTemplate": {
+    "description": "Get a ServiceNow template by ID.",
+    "summary": "Get ServiceNow template"
+  },
+  "UpdateServiceNowTemplate": {
+    "description": "Update a ServiceNow template by ID.",
+    "summary": "Update ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to update a ServiceNow template"
+  },
+  "ListServiceNowInstances": {
+    "description": "Get all ServiceNow instances for the organization.",
+    "summary": "List ServiceNow instances"
+  },
+  "ListServiceNowUsers": {
+    "description": "Get all users for a ServiceNow instance.",
+    "summary": "List ServiceNow users"
   },
   "ListCloudflareAccounts": {
     "description": "List Cloudflare accounts.",
@@ -1710,6 +1984,12 @@
     "request_description": "",
     "request_schema_description": "Update a restriction query."
   },
+  "ReplaceRestrictionQuery": {
+    "description": "Replace a restriction query.",
+    "summary": "Replace a restriction query",
+    "request_description": "",
+    "request_schema_description": "Update a restriction query."
+  },
   "RemoveRoleFromRestrictionQuery": {
     "description": "Removes a role from a restriction query.",
     "summary": "Revoke role from a restriction query",
@@ -1721,7 +2001,7 @@
     "summary": "List roles for a restriction query"
   },
   "AddRoleToRestrictionQuery": {
-    "description": "Adds a role to a restriction query.",
+    "description": "Adds a role to a restriction query.\n\n**Note**: This operation automatically grants the `logs_read_data` permission to the role if it doesn't already have it.",
     "summary": "Grant role to a restriction query",
     "request_description": "",
     "request_schema_description": "Relationship to role."
@@ -1757,7 +2037,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
+    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
@@ -1914,6 +2194,36 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "ListPipelines": {
+    "description": "Retrieve a list of pipelines.",
+    "summary": "List pipelines"
+  },
+  "CreatePipeline": {
+    "description": "Create a new pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "ValidatePipeline": {
+    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
+    "summary": "Validate an observability pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "DeletePipeline": {
+    "description": "Delete a pipeline.",
+    "summary": "Delete a pipeline"
+  },
+  "GetPipeline": {
+    "description": "Get a specific pipeline by its ID.",
+    "summary": "Get a specific pipeline"
+  },
+  "UpdatePipeline": {
+    "description": "Update a pipeline.",
+    "summary": "Update a pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -1974,7 +2284,7 @@
   },
   "GetScheduleOnCallUser": {
     "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
-    "summary": "Get the schedule on-call user"
+    "summary": "Get scheduled on-call user"
   },
   "GetTeamOnCallUsers": {
     "description": "Get a team's on-call users at a given time",
@@ -1989,6 +2299,48 @@
     "summary": "Set On-Call team routing rules",
     "request_description": "",
     "request_schema_description": "Represents a request to create or update team routing rules, including the data payload."
+  },
+  "ListUserNotificationChannels": {
+    "description": "List the notification channels for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification channels for a user"
+  },
+  "CreateUserNotificationChannel": {
+    "description": "Create a new notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification channel for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification channel for a user"
+  },
+  "DeleteUserNotificationChannel": {
+    "description": "Delete a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification channel for a user"
+  },
+  "GetUserNotificationChannel": {
+    "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification channel for a user"
+  },
+  "ListUserNotificationRules": {
+    "description": "List the notification rules for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification rules for a user"
+  },
+  "CreateUserNotificationRule": {
+    "description": "Create a new notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification rule for a user"
+  },
+  "DeleteUserNotificationRule": {
+    "description": "Delete a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification rule for a user"
+  },
+  "GetUserNotificationRule": {
+    "description": "Get a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification rule for a user"
+  },
+  "UpdateUserNotificationRule": {
+    "description": "Update a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Update an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -2069,6 +2421,12 @@
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
+  },
+  "SubmitProductAnalyticsEvent": {
+    "description": "Send server-side events to Product Analytics. Server-side events are retained for 15 months.\n\nServer-Side events in Product Analytics are helpful for tracking events that occur on the server,\nas opposed to client-side events, which are captured by Real User Monitoring (RUM) SDKs.\nThis allows for a more comprehensive view of the user journey by including actions that happen on the server.\nTypical examples could be `checkout.completed` or `payment.processed`.\n\nIngested server-side events are integrated into Product Analytics to allow users to select and filter\nthese events in the event picker, similar to how views or actions are handled.\n\n**Requirements:**\n- At least one of `usr`, `account`, or `session` must be provided with a valid ID.\n- The `application.id` must reference a Product Analytics-enabled application.\n\n**Custom Attributes:**\nAny additional fields in the payload are flattened and searchable as facets.\nFor example, a payload with `{\"customer\": {\"tier\": \"premium\"}}` is searchable with\nthe syntax `@customer.tier:premium` in Datadog.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: The request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+    "summary": "Send server-side events",
+    "request_description": "Server-side event to send (JSON format).",
+    "request_schema_description": "A Product Analytics server-side event."
   },
   "GetAccountFacetInfo": {
     "description": "Get facet information for account attributes including possible values and counts",
@@ -2160,9 +2518,21 @@
     "request_description": "",
     "request_schema_description": "Request body for updating an existing reference table."
   },
+  "DeleteRows": {
+    "description": "Delete multiple rows from a Reference Table by their primary key values.",
+    "summary": "Delete rows",
+    "request_description": "",
+    "request_schema_description": "The request body for deleting multiple rows from a reference table."
+  },
   "GetRowsByID": {
     "description": "Get reference table rows by their primary key values.",
     "summary": "Get rows by id"
+  },
+  "UpsertRows": {
+    "description": "Create or update rows in a Reference Table by their primary key values. If a row with the specified primary key exists, it is updated; otherwise, a new row is created.",
+    "summary": "Upsert rows",
+    "request_description": "",
+    "request_schema_description": "The request body for creating or updating multiple rows into a reference table."
   },
   "CreateReferenceTableUpload": {
     "description": "Create a reference table upload for bulk data ingestion",
@@ -2270,35 +2640,25 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
-  "ListPipelines": {
-    "description": "Retrieve a list of pipelines.",
-    "summary": "List pipelines"
+  "ListReplayHeatmapSnapshots": {
+    "description": "List heatmap snapshots.",
+    "summary": "List replay heatmap snapshots"
   },
-  "CreatePipeline": {
-    "description": "Create a new pipeline.",
-    "summary": "Create a new pipeline",
+  "CreateReplayHeatmapSnapshot": {
+    "description": "Create a heatmap snapshot.",
+    "summary": "Create replay heatmap snapshot",
     "request_description": "",
-    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+    "request_schema_description": ""
   },
-  "ValidatePipeline": {
-    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
-    "summary": "Validate an observability pipeline",
+  "DeleteReplayHeatmapSnapshot": {
+    "description": "Delete a heatmap snapshot.",
+    "summary": "Delete replay heatmap snapshot"
+  },
+  "UpdateReplayHeatmapSnapshot": {
+    "description": "Update a heatmap snapshot.",
+    "summary": "Update replay heatmap snapshot",
     "request_description": "",
-    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
-  },
-  "DeletePipeline": {
-    "description": "Delete a pipeline.",
-    "summary": "Delete a pipeline"
-  },
-  "GetPipeline": {
-    "description": "Get a specific pipeline by its ID.",
-    "summary": "Get a specific pipeline"
-  },
-  "UpdatePipeline": {
-    "description": "Update a pipeline.",
-    "summary": "Update a pipeline",
-    "request_description": "",
-    "request_schema_description": "Top-level schema representing a pipeline."
+    "request_schema_description": ""
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
@@ -2309,7 +2669,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -2474,6 +2834,70 @@
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
   },
+  "ListRumReplayPlaylists": {
+    "description": "List playlists.",
+    "summary": "List rum replay playlists"
+  },
+  "CreateRumReplayPlaylist": {
+    "description": "Create a playlist.",
+    "summary": "Create rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteRumReplayPlaylist": {
+    "description": "Delete a playlist.",
+    "summary": "Delete rum replay playlist"
+  },
+  "GetRumReplayPlaylist": {
+    "description": "Get a playlist.",
+    "summary": "Get rum replay playlist"
+  },
+  "UpdateRumReplayPlaylist": {
+    "description": "Update a playlist.",
+    "summary": "Update rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "BulkRemoveRumReplayPlaylistSessions": {
+    "description": "Remove sessions from a playlist.",
+    "summary": "Bulk remove rum replay playlist sessions",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayPlaylistSessions": {
+    "description": "List sessions in a playlist.",
+    "summary": "List rum replay playlist sessions"
+  },
+  "RemoveRumReplaySessionFromPlaylist": {
+    "description": "Remove a session from a playlist.",
+    "summary": "Remove rum replay session from playlist"
+  },
+  "AddRumReplaySessionToPlaylist": {
+    "description": "Add a session to a playlist.",
+    "summary": "Add rum replay session to playlist"
+  },
+  "GetSegments": {
+    "description": "Get segments for a view.",
+    "summary": "Get segments"
+  },
+  "ListRumReplaySessionWatchers": {
+    "description": "List session watchers.",
+    "summary": "List rum replay session watchers"
+  },
+  "DeleteRumReplaySessionWatch": {
+    "description": "Delete session watch history.",
+    "summary": "Delete rum replay session watch"
+  },
+  "CreateRumReplaySessionWatch": {
+    "description": "Record a session watch.",
+    "summary": "Create rum replay session watch",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayViewershipHistorySessions": {
+    "description": "List watched sessions.",
+    "summary": "List rum replay viewership history sessions"
+  },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
@@ -2576,9 +3000,53 @@
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
   },
+  "ListEntityRiskScores": {
+    "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
+    "summary": "List Entity Risk Scores"
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
+  },
+  "ListSecurityFindings": {
+    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "summary": "List security findings"
+  },
+  "DetachCase": {
+    "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
+    "summary": "Detach security findings from their case",
+    "request_description": "",
+    "request_schema_description": "Request for detaching security findings from their case."
+  },
+  "CreateCases": {
+    "description": "Create cases for security findings.\nYou can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
+    "summary": "Create cases for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create cases for security findings."
+  },
+  "AttachCase": {
+    "description": "Attach security findings to a case.\nYou can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
+    "summary": "Attach security findings to a case",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a case."
+  },
+  "AttachJiraIssue": {
+    "description": "Attach security findings to a Jira issue by providing the Jira issue URL.\nYou can attach up to 50 security findings per Jira issue. If the Jira issue is not linked to any case, this operation will create a case for the security findings and link the Jira issue to the newly created case. To configure the Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira). Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the specified Jira issue.",
+    "summary": "Attach security findings to a Jira issue",
+    "request_description": "",
+    "request_schema_description": "Request for attaching security findings to a Jira issue."
+  },
+  "CreateJiraIssues": {
+    "description": "Create Jira issues for security findings.\nThis operation creates a case in Datadog and a Jira issue linked to that case for bidirectional sync between Datadog and Jira. To configure the Jira integration, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira). You can create up to 50 Jira issues per request and associate up to 50 security findings per Jira issue. Security findings that are already attached to another Jira issue will be detached from their previous Jira issue and attached to the newly created Jira issue.",
+    "summary": "Create Jira issues for security findings",
+    "request_description": "",
+    "request_schema_description": "List of requests to create Jira issues for security findings."
+  },
+  "SearchSecurityFindings": {
+    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "summary": "Search security findings",
+    "request_description": "",
+    "request_schema_description": "The request body for searching security findings."
   },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
@@ -2672,6 +3140,34 @@
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
+  "ListSecurityMonitoringCriticalAssets": {
+    "description": "Get the list of all critical assets.",
+    "summary": "Get all critical assets"
+  },
+  "CreateSecurityMonitoringCriticalAsset": {
+    "description": "Create a new critical asset.",
+    "summary": "Create a critical asset",
+    "request_description": "The definition of the new critical asset.",
+    "request_schema_description": "Request object that includes the critical asset that you would like to create."
+  },
+  "GetCriticalAssetsAffectingRule": {
+    "description": "Get the list of critical assets that affect a specific existing rule by the rule's ID.",
+    "summary": "Get critical assets affecting a specific rule"
+  },
+  "DeleteSecurityMonitoringCriticalAsset": {
+    "description": "Delete a specific critical asset.",
+    "summary": "Delete a critical asset"
+  },
+  "GetSecurityMonitoringCriticalAsset": {
+    "description": "Get the details of a specific critical asset.",
+    "summary": "Get a critical asset"
+  },
+  "UpdateSecurityMonitoringCriticalAsset": {
+    "description": "Update a specific critical asset.",
+    "summary": "Update a critical asset",
+    "request_description": "New definition of the critical asset. Supports partial updates.",
+    "request_schema_description": "Request object containing the fields to update on the critical asset."
+  },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
     "summary": "Get all security filters"
@@ -2736,6 +3232,22 @@
     "request_description": "New definition of the suppression rule. Supports partial updates.",
     "request_schema_description": "Request object containing the fields to update on the suppression rule."
   },
+  "GetSuppressionVersionHistory": {
+    "description": "Get a suppression's version history.",
+    "summary": "Get a suppression's version history"
+  },
+  "GetContentPacksStates": {
+    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
+    "summary": "Get content pack states"
+  },
+  "ActivateContentPack": {
+    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "summary": "Activate content pack"
+  },
+  "DeactivateContentPack": {
+    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "summary": "Deactivate content pack"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -2745,6 +3257,12 @@
     "summary": "Create a detection rule",
     "request_description": "",
     "request_schema_description": "Create a new rule."
+  },
+  "BulkExportSecurityMonitoringRules": {
+    "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
+    "summary": "Bulk export security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk exporting security monitoring rules."
   },
   "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
     "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
@@ -3012,9 +3530,17 @@
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
   },
+  "GetSloStatus": {
+    "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
+    "summary": "Get SLO status"
+  },
   "GetSPARecommendations": {
-    "description": "Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
+    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
     "summary": "Get SPA Recommendations"
+  },
+  "GetSPARecommendationsWithShard": {
+    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA Recommendations with a shard parameter"
   },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
@@ -3042,6 +3568,54 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "DeleteCustomRuleset": {
+    "description": "Delete a custom ruleset",
+    "summary": "Delete Custom Ruleset"
+  },
+  "GetCustomRuleset": {
+    "description": "Get a custom ruleset by name",
+    "summary": "Show Custom Ruleset"
+  },
+  "UpdateCustomRuleset": {
+    "description": "Update an existing custom ruleset",
+    "summary": "Update Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateCustomRule": {
+    "description": "Create a new custom rule within a ruleset",
+    "summary": "Create Custom Rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteCustomRule": {
+    "description": "Delete a custom rule",
+    "summary": "Delete Custom Rule"
+  },
+  "GetCustomRule": {
+    "description": "Get a custom rule by name",
+    "summary": "Show Custom Rule"
+  },
+  "ListCustomRuleRevisions": {
+    "description": "Get all revisions for a custom rule",
+    "summary": "List Custom Rule Revisions"
+  },
+  "CreateCustomRuleRevision": {
+    "description": "Create a new revision for a custom rule",
+    "summary": "Create Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "RevertCustomRuleRevision": {
+    "description": "Revert a custom rule to a previous revision",
+    "summary": "Revert Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetCustomRuleRevision": {
+    "description": "Get a specific revision of a custom rule",
+    "summary": "Show Custom Rule Revision"
+  },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",
     "summary": "Ruleset get multiple",
@@ -3049,8 +3623,80 @@
     "request_schema_description": ""
   },
   "GetSecretsRules": {
-    "description": "Returns list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID",
-    "summary": "Returns list of Secrets rules"
+    "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
+    "summary": "Returns a list of Secrets rules"
+  },
+  "ListStatusPages": {
+    "description": "Lists all status pages for the organization.",
+    "summary": "List status pages"
+  },
+  "CreateStatusPage": {
+    "description": "Creates a new status page.",
+    "summary": "Create status page",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListDegradations": {
+    "description": "Lists all degradations for the organization. Optionally filter by status and page.",
+    "summary": "List degradations"
+  },
+  "DeleteStatusPage": {
+    "description": "Deletes a status page by its ID.",
+    "summary": "Delete status page"
+  },
+  "GetStatusPage": {
+    "description": "Retrieves a specific status page by its ID.",
+    "summary": "Get status page"
+  },
+  "UpdateStatusPage": {
+    "description": "Updates an existing status page's attributes.",
+    "summary": "Update status page",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListComponents": {
+    "description": "Lists all components for a status page.",
+    "summary": "List components"
+  },
+  "CreateComponent": {
+    "description": "Creates a new component.",
+    "summary": "Create component",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteComponent": {
+    "description": "Deletes a component by its ID.",
+    "summary": "Delete component"
+  },
+  "GetComponent": {
+    "description": "Retrieves a specific component by its ID.",
+    "summary": "Get component"
+  },
+  "UpdateComponent": {
+    "description": "Updates an existing component's attributes.",
+    "summary": "Update component",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateDegradation": {
+    "description": "Creates a new degradation.",
+    "summary": "Create degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteDegradation": {
+    "description": "Deletes a degradation by its ID.",
+    "summary": "Delete degradation"
+  },
+  "GetDegradation": {
+    "description": "Retrieves a specific degradation by its ID.",
+    "summary": "Get degradation"
+  },
+  "UpdateDegradation": {
+    "description": "Updates an existing degradation's attributes.",
+    "summary": "Update degradation",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
@@ -3061,6 +3707,34 @@
     "summary": "Save new value for on-demand concurrency cap",
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
+  },
+  "CreateSyntheticsSuite": {
+    "summary": "Synthetics: Create a test suite",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteSyntheticsSuites": {
+    "summary": "Synthetics: Bulk delete suites",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "SearchSuites": {
+    "description": "Search for Synthetics suites.",
+    "summary": "Search Synthetics suites"
+  },
+  "GetSyntheticsSuite": {
+    "summary": "Synthetics: Get a suite"
+  },
+  "EditSyntheticsSuite": {
+    "summary": "Synthetics: Edit a test suite",
+    "request_description": "New suite details to be saved.",
+    "request_schema_description": ""
+  },
+  "PatchGlobalVariable": {
+    "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
+    "summary": "Patch a global variable",
+    "request_description": "JSON Patch document with operations to apply.",
+    "request_schema_description": "JSON Patch request for global variable."
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
@@ -3108,6 +3782,24 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
+  "ListTeamHierarchyLinks": {
+    "description": "List all team hierarchy links that match the provided filters.",
+    "summary": "Get team hierarchy links"
+  },
+  "AddTeamHierarchyLink": {
+    "description": "Create a new team hierarchy link between a parent team and a sub team.",
+    "summary": "Create a team hierarchy link",
+    "request_description": "",
+    "request_schema_description": "Request to create a team hierarchy link"
+  },
+  "RemoveTeamHierarchyLink": {
+    "description": "Remove a team hierarchy link by the given link_id.",
+    "summary": "Remove a team hierarchy link"
+  },
+  "GetTeamHierarchyLink": {
+    "description": "Get a single team hierarchy link for the given link_id.",
+    "summary": "Get a team hierarchy link"
+  },
   "DeleteTeamConnections": {
     "description": "Delete multiple team connections.",
     "summary": "Delete team connections",
@@ -3135,17 +3827,17 @@
     "request_schema_description": "Team sync request."
   },
   "ListMemberTeams": {
-    "description": "Get all member teams.",
+    "description": "Get all member teams.\n\n**Note**: This API is deprecated. For team hierarchy relationships (parent-child\nteams), use the team hierarchy links API: `GET /api/v2/team-hierarchy-links`.",
     "summary": "Get all member teams"
   },
   "AddMemberTeam": {
-    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.",
+    "description": "Add a member team.\nAdds the team given by the `id` in the body as a member team of the super team.\n\n**Note**: This API is deprecated. For creating team hierarchy links, use the team hierarchy links API: `POST /api/v2/team-hierarchy-links`.",
     "summary": "Add a member team",
     "request_description": "",
     "request_schema_description": "Request to add a member team to super team's hierarchy"
   },
   "RemoveMemberTeam": {
-    "description": "Remove a super team's member team identified by `member_team_id`.",
+    "description": "Remove a super team's member team identified by `member_team_id`.\n\n**Note**: This API is deprecated. For deleting team hierarchy links, use the team hierarchy links API: `DELETE /api/v2/team-hierarchy-links/{link_id}`.",
     "summary": "Remove a member team"
   },
   "DeleteTeam": {
@@ -3191,20 +3883,39 @@
     "summary": "Get team memberships"
   },
   "CreateTeamMembership": {
-    "description": "Add a user to a team.",
+    "description": "Add a user to a team.\n\n**Note**: Each team has a setting that determines who is allowed to modify membership of the team. The `user_access_manage` permission generally grants access to modify membership of any team. To get the full picture, see [Team Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).",
     "summary": "Add a user to a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
   },
   "DeleteTeamMembership": {
-    "description": "Remove a user from a team.",
+    "description": "Remove a user from a team.\n\n**Note**: Each team has a setting that determines who is allowed to modify membership of the team. The `user_access_manage` permission generally grants access to modify membership of any team. To get the full picture, see [Team Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).",
     "summary": "Remove a user from a team"
   },
   "UpdateTeamMembership": {
-    "description": "Update a user's membership attributes on a team.",
+    "description": "Update a user's membership attributes on a team.\n\n**Note**: Each team has a setting that determines who is allowed to modify membership of the team. The `user_access_manage` permission generally grants access to modify membership of any team. To get the full picture, see [Team Membership documentation](https://docs.datadoghq.com/account_management/teams/manage/#team-membership).",
     "summary": "Update a user's membership attributes on a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
+  },
+  "GetTeamNotificationRules": {
+    "summary": "Get team notification rules"
+  },
+  "CreateTeamNotificationRule": {
+    "summary": "Create team notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a team notification rule"
+  },
+  "DeleteTeamNotificationRule": {
+    "summary": "Delete team notification rule"
+  },
+  "GetTeamNotificationRule": {
+    "summary": "Get team notification rule"
+  },
+  "UpdateTeamNotificationRule": {
+    "summary": "Update team notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a team notification rule"
   },
   "GetTeamPermissionSettings": {
     "description": "Get all permission settings for a given team.",
@@ -3240,8 +3951,14 @@
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
   },
+  "UpdateFlakyTests": {
+    "description": "Update the state of multiple flaky tests in Flaky Test Management.",
+    "summary": "Update flaky test states",
+    "request_description": "",
+    "request_schema_description": "Request to update the state of multiple flaky tests."
+  },
   "SearchFlakyTests": {
-    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.\n\nThe response includes comprehensive test information including:\n- Test identification and metadata (module, suite, name)\n- Flaky state and categorization\n- First and last flake occurrences (timestamp, branch, commit SHA)\n- Test execution statistics from the last 7 days (failure rate)\n- Pipeline impact metrics (failed pipelines count, total lost time)\n- Complete status change history (optional, ordered from most recent to oldest)\n\nSet `include_history` to `true` in the request to receive the status change history for each test.\nHistory is disabled by default for better performance.\n\nResults support filtering by various facets including service, environment, repository, branch, and test state.",
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."

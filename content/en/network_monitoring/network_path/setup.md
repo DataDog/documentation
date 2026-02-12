@@ -23,11 +23,13 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
-### Monitor individual paths
+<div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+
+### Scheduled tests
 
 You can monitor specific network paths by defining them in the Agent configuration file located at `/etc/datadog-agent/conf.d/network_path.d/conf.yaml`.
 
-To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization, see [increase the number of workers](#increase-the-number-of-workers).
+To get started, copy the [example configuration][5], remove the `.example` extension, and update it with your desired settings, or use one of the environment-specific configurations below. For performance optimization in large environments, see [increase the number of workers](#increase-the-number-of-workers).
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -240,21 +242,16 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-### Network traffic paths (experimental)
+### Dynamic tests
 
 **Prerequisites**: [CNM][1] must be enabled.
 
-**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
-
-Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [exclude CIDR ranges](#exclude-cidr-ranges) to filter specific network ranges.
-
-<div class="alert alert-danger"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
-
+Configure dynamic tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-Agent `v7.59+` is required.
+Agent `v7.73+` is required.
 
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
@@ -308,7 +305,7 @@ Agent `v7.59+` is required.
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Agent `v7.61+` is required.
+Agent `v7.73+` is required.
 
 1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
@@ -361,7 +358,7 @@ Agent `v7.61+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.59+` is required.
+Agent `v7.73+` is required.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
 **Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
@@ -384,14 +381,18 @@ datadog:
     ## The `workers` refers to the number of concurrent workers available for network path execution.
     #
     # workers: 4
-    #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
-    # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-    # pathtest_interval: 10m
+    
+    ## @param pathtest_interval - integer - optional - default: 35m
+    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 30m
+    ## The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+    #
+    # pathtest_interval: 30m
 
-    # @param pathtest_ttl - integer - optional - default: 35m
-    # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-    # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-    # The TTL is reset each time the connection is seen again.
+    ## @param pathtest_ttl - integer - optional - default: 35m
+    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+    ## The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+    ## The TTL is reset each time the connection is seen again.
+    #
     # pathtest_ttl: 35m
 
 ```
@@ -402,30 +403,62 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Exclude CIDR ranges
+#### Filter syntax
 
-Classless Inter-Domain Routing (CIDR) ranges define blocks of IP addresses using network prefixes. You may want to exclude certain CIDR ranges from network traffic paths to:
+Configure filters to include or exclude domains and IPs, allowing you to:
 
 - Reduce monitoring overhead for internal networks
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-To exclude specific CIDR ranges from network traffic paths, configure the following in your `/etc/datadog-agent/datadog.yaml` file:
+To include or exclude specific domains or IP ranges from dynamic tests, add the following to your `/etc/datadog-agent/datadog.yaml` file:
 
 ```yaml
 network_path:
-    connections_monitoring:
-        enabled: true # enable network path collection
-    collector:
-        source_excludes:
-            "10.0.0.0/8":
-                - "*" # all ports
-        dest_excludes:
-            "10.0.0.0/8":
-                - "*" # all ports
-            "8.8.8.8":
-                - "53" # dns
-                - "33434-33464" # traceroute range
+  connections_monitoring:
+    enabled: true
+  collector:
+    filters:
+      # exclude single domain
+      - match_domain: 'api.slack.com'
+        type: exclude
+
+      # exclude domain using `*` wildcard
+      - match_domain: '*.datadoghq.com'      # this translates to regex '.*\.datadoghq\.com
+        type: exclude
+      - match_domain: '*.zoom.us'
+        match_domain_strategy: wildcard      # use simple wildcard matching (wildcard matching is the default)
+        type: exclude
+
+      # exclude single IP or using CIDR notation
+      - match_ip: 10.10.10.10
+        type: exclude
+      - match_ip: 10.20.0.0/24
+        type: exclude
+
+      # exclude using regex
+      - match_domain: '.*\.zoom\.us'
+        match_domain_strategy: regex         # use regex matching strategy
+        type: exclude
+
+      # include
+      - match_domain: 'api.datadoghq.com'
+        type: include
+```
+
+**Note**: 
+Filters are applied sequentially, with later filters taking precedence over earlier ones.
+
+For example, all domains matching `*.datadoghq.com` are ignored, except `api.datadoghq.com`.
+
+```yaml
+network_path:
+  collector:
+    filters:
+      - match_domain: '*.datadoghq.com'
+        type: exclude
+      - match_domain: 'api.datadoghq.com'
+        type: include
 ```
 
 ## Troubleshooting
@@ -469,6 +502,7 @@ If you encounter an error like the following:
 [3]: /help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[15]: /synthetics/network_path_tests/
 
 
 

@@ -25,7 +25,7 @@ Data privacy
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
-- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. 
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load.
 - `disabled` mode disables propagation and does not send any information from applications.
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |    Oracle    |  MongoDB   |
@@ -93,7 +93,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \*\*\*\* Service/Full mode MongoDB for Node.js:
   - Prerequisite:
-    - Node.js tracer 5.37.0 or greater
+    - Node.js tracer 5.80.0 or greater
 
 \*\*\*\*\* Service/Full mode MongoDB for Python:
   - Prerequisite:
@@ -470,9 +470,15 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 ### Visualize the downstream database hosts of APM services
 
-{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring, and determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's database dependencies:
+1. Select the service in the [Software Catalog][26] to open a details panel.
+1. Select **Service Page** in the panel. 
+1. On the Service page, select the **Databases section**.
+1. Within the Databases section, select the **Databases tab**.
 
-On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Software Catalog][26] to open a details panel, then click **View Service Page** in the panel.
+### Visualize span durations and view query details
+
+Select the **Queries tab** from the **Databases section** on the APM service page to view latency outliers and a full list of queries from the selected time interval. Select a query in the table to view the query panel and access diagnostics, error details, and trace information.
 
 ### Identify potential optimizations using explain plans for database queries in traces
 

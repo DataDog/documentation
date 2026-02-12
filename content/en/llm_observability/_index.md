@@ -3,6 +3,18 @@ title: LLM Observability
 aliases:
     - /tracing/llm_observability/
 further_reading:
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
+  tag: "Blog"
+  text: "Building reliable dashboard agents with Datadog LLM Observability"
+- link: https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/
+  tag: Blog
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
+- link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+  tag: Blog
+  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 - link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
   tag: "Blog"
   text: "Monitor your Anthropic applications with Datadog LLM Observability"
@@ -24,6 +36,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-abuse-ai-infrastructure/"
   tag: "Blog"
   text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
+  tag: "Blog"
+  text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
 ---
 
 {{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}

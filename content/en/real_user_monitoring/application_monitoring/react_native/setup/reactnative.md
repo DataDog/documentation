@@ -41,6 +41,12 @@ The React Native SDK supports the following services:
 
 ## Setup
 
+Follow these instructions to manually add and configure the RUM SDK in your React Native application.
+
+### Manual setup
+
+To send RUM data from your React Native application to Datadog, complete the following steps.
+
 To install with NPM, run:
 
 ```sh
@@ -63,7 +69,7 @@ Install the added pod:
 
 ### Android
 
-If you use a React Native version strictly over 0.67, make sure to use Java version 17. If you use React Native version equal or below ot 0.67, make sure to use Java version 11.
+If you use a React Native version strictly over 0.67, make sure to use Java version 17. If you use React Native version equal or below 0.67, make sure to use Java version 11.
 
 In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
 
@@ -75,6 +81,8 @@ buildscript {
     }
 }
 ```
+
+The minimum supported Android SDK version is API level 23. Make sure to set `minSdkVersion` to 23 (or higher) in your Android configuration.
 
 The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or higher in the Android application setup, which implies that you should use Build Tools version 31 or higher, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using a React Native version that's actively supported.
 
@@ -117,34 +125,58 @@ For more information about setting up a client token, see the [Client Token docu
 
 ```js
 import {
+    SdkVerbosity,
     DatadogProvider,
-    DatadogProviderConfiguration
+    DatadogProviderConfiguration,
+    PropagatorType
 } from '@datadog/mobile-react-native';
 
+// Configure Datadog SDK
 const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
+    '<CLIENT_TOKEN>', 
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // Track user interactions (such as a tap on buttons).
-    true, // Track XHR resources
-    true // Track errors
+    // Optional: Configure the Datadog Site to target. Default is 'US1'.
+    site: 'US1',
+    // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+    service: 'com.example.reactnative',
+    // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+    verbosity: SdkVerbosity.WARN,
+    // Enable RUM
+    rumConfiguration: {
+        // Required: RUM Application ID
+        applicationId: '<APPLICATION_ID>',
+        // Track user interactions (set to false if using Error Tracking only)
+        trackInteractions: true,
+        // Track XHR resources (set to false if using Error Tracking only)
+        trackResources: true,
+        // Track errors
+        trackErrors: true,
+        // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+        sessionSampleRate: 80,
+        // Optional: Enable or disable native crash reports.
+        nativeCrashReportEnabled: true,
+        // Optional: Sample tracing integrations for network calls between your app and your backend 
+        // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+        // the APM view. Default is 20%).
+        // You need to specify the hosts of your backends to enable tracing with these backends
+        resourceTraceSampleRate: 80,
+        firstPartyHosts: [
+            { 
+                match: 'example.com', 
+                propagatorTypes: [
+                    PropagatorType.DATADOG,
+                    PropagatorType.TRACECONTEXT
+                ]
+            }
+        ]
+    },
+    // Enable Logs with default configuration
+    logsConfiguration: {},
+    // Enable Trace with default configuration
+    traceConfiguration: {}
 );
-config.site = 'US1';
-// Optional: Enable or disable native crash reports
-config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
-// You need to specify the hosts of your backends to enable tracing with these backends
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
-// Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
-config.serviceName = 'com.example.reactnative';
-// Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
-config.verbosity = SdkVerbosity.WARN;
 
-//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
-
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 export default function App() {
     return (
         <DatadogProvider configuration={config}>
@@ -153,7 +185,7 @@ export default function App() {
     );
 }
 
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -162,30 +194,58 @@ export default function App() {
 
 ```js
 import {
+    SdkVerbosity,
     DatadogProvider,
-    DatadogProviderConfiguration
+    DatadogProviderConfiguration,
+    PropagatorType
 } from '@datadog/mobile-react-native';
 
+// Configure Datadog SDK
 const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
+    '<CLIENT_TOKEN>', 
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // Track user interactions (such as a tap on buttons).
-    true, // Track XHR resources
-    true // Track errors
+    // Optional: Configure the Datadog Site to target. Default is 'US1'.
+    site: 'US3',
+    // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+    service: 'com.example.reactnative',
+    // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+    verbosity: SdkVerbosity.WARN,
+    // Enable RUM
+    rumConfiguration: {
+        // Required: RUM Application ID
+        applicationId: '<APPLICATION_ID>',
+        // Track user interactions (set to false if using Error Tracking only)
+        trackInteractions: true,
+        // Track XHR resources (set to false if using Error Tracking only)
+        trackResources: true,
+        // Track errors
+        trackErrors: true,
+        // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+        sessionSampleRate: 80,
+        // Optional: Enable or disable native crash reports.
+        nativeCrashReportEnabled: true,
+        // Optional: Sample tracing integrations for network calls between your app and your backend 
+        // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+        // the APM view. Default is 20%).
+        // You need to specify the hosts of your backends to enable tracing with these backends
+        resourceTraceSampleRate: 80,
+        firstPartyHosts: [
+            { 
+                match: 'example.com', 
+                propagatorTypes: [
+                    PropagatorType.DATADOG,
+                    PropagatorType.TRACECONTEXT
+                ]
+            }
+        ]
+    },
+    // Enable Logs with default configuration
+    logsConfiguration: {},
+    // Enable Trace with default configuration
+    traceConfiguration: {}
 );
-config.site = 'US3';
-// Optional: Enable or disable native crash reports
-config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
-// You need to specify the hosts of your backends to enable tracing with these backends
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
-
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 export default function App() {
     return (
         <DatadogProvider configuration={config}>
@@ -194,47 +254,7 @@ export default function App() {
     );
 }
 
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
-
-const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // Track User interactions (e.g.: Tap on buttons).
-    true, // Track XHR Resources
-    true // Track Errors
-);
-config.site = 'US5';
-// Optional: Enable or disable native crash reports
-config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
-// You need to specify the hosts of your backends to enable tracing with these backends
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // Matches 'example.com' and subdomains like 'api.example.com'
-
-//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
-
-export default function App() {
-    return (
-        <DatadogProvider configuration={config}>
-            <Navigation />
-        </DatadogProvider>
-    );
-}
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -243,30 +263,58 @@ export default function App() {
 
 ```js
 import {
+    SdkVerbosity,
     DatadogProvider,
-    DatadogProviderConfiguration
+    DatadogProviderConfiguration,
+    PropagatorType
 } from '@datadog/mobile-react-native';
 
+// Configure Datadog SDK
 const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
+    '<CLIENT_TOKEN>', 
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // Track User interactions (e.g.: Tap on buttons).
-    true, // Track XHR Resources
-    true // Track Errors
+    // Optional: Configure the Datadog Site to target. Default is 'US1'.
+    site: 'EU1',
+    // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+    service: 'com.example.reactnative',
+    // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+    verbosity: SdkVerbosity.WARN,
+    // Enable RUM
+    rumConfiguration: {
+        // Required: RUM Application ID
+        applicationId: '<APPLICATION_ID>',
+        // Track user interactions (set to false if using Error Tracking only)
+        trackInteractions: true,
+        // Track XHR resources (set to false if using Error Tracking only)
+        trackResources: true,
+        // Track errors
+        trackErrors: true,
+        // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+        sessionSampleRate: 80,
+        // Optional: Enable or disable native crash reports.
+        nativeCrashReportEnabled: true,
+        // Optional: Sample tracing integrations for network calls between your app and your backend 
+        // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+        // the APM view. Default is 20%).
+        // You need to specify the hosts of your backends to enable tracing with these backends
+        resourceTraceSampleRate: 80,
+        firstPartyHosts: [
+            { 
+                match: 'example.com', 
+                propagatorTypes: [
+                    PropagatorType.DATADOG,
+                    PropagatorType.TRACECONTEXT
+                ]
+            }
+        ]
+    },
+    // Enable Logs with default configuration
+    logsConfiguration: {},
+    // Enable Trace with default configuration
+    traceConfiguration: {}
 );
-config.site = 'EU1';
-// Optional: Enable or disable native crash reports
-config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%).
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%)
-// You need to specify the hosts of your backends to enable tracing with these backends
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
-
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 export default function App() {
     return (
         <DatadogProvider configuration={config}>
@@ -274,6 +322,7 @@ export default function App() {
         </DatadogProvider>
     );
 }
+
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
@@ -283,30 +332,58 @@ export default function App() {
 
 ```js
 import {
+    SdkVerbosity,
     DatadogProvider,
-    DatadogProviderConfiguration
+    DatadogProviderConfiguration,
+    PropagatorType
 } from '@datadog/mobile-react-native';
 
+// Configure Datadog SDK
 const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
+    '<CLIENT_TOKEN>', 
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // Track User interactions (e.g.: Tap on buttons).
-    true, // Track XHR Resources
-    true // Track Errors
+    // Optional: Configure the Datadog Site to target. Default is 'US1'.
+    site: 'US1_FED',
+    // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+    service: 'com.example.reactnative',
+    // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+    verbosity: SdkVerbosity.WARN,
+    // Enable RUM
+    rumConfiguration: {
+        // Required: RUM Application ID
+        applicationId: '<APPLICATION_ID>',
+        // Track user interactions (set to false if using Error Tracking only)
+        trackInteractions: true,
+        // Track XHR resources (set to false if using Error Tracking only)
+        trackResources: true,
+        // Track errors
+        trackErrors: true,
+        // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+        sessionSampleRate: 80,
+        // Optional: Enable or disable native crash reports.
+        nativeCrashReportEnabled: true,
+        // Optional: Sample tracing integrations for network calls between your app and your backend 
+        // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+        // the APM view. Default is 20%).
+        // You need to specify the hosts of your backends to enable tracing with these backends
+        resourceTraceSampleRate: 80,
+        firstPartyHosts: [
+            { 
+                match: 'example.com', 
+                propagatorTypes: [
+                    PropagatorType.DATADOG,
+                    PropagatorType.TRACECONTEXT
+                ]
+            }
+        ]
+    },
+    // Enable Logs with default configuration
+    logsConfiguration: {},
+    // Enable Trace with default configuration
+    traceConfiguration: {}
 );
-config.site = 'US1_FED';
-// Optional: Enable or disable native crash reports
-config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (here, 80% of sessions are sent to Datadog. Default = 100%)
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend (here, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default = 20%).
-// You need to specify the hosts of your backends to enable tracing with these backends
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // matches 'example.com' and subdomains like 'api.example.com'
 
-//Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
-
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
 export default function App() {
     return (
         <DatadogProvider configuration={config}>
@@ -314,7 +391,8 @@ export default function App() {
         </DatadogProvider>
     );
 }
-// Once the Datadog React Native SDK is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
+
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 {{< /site-region >}}
@@ -352,26 +430,134 @@ Datadog recommends using a `versionSuffix` to the `DatadogProviderConfiguration`
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true,
-    true,
-    true
+    {
+       versionSuffix: 'codepush.3'
+    }
 );
-
-config.versionSuffix = 'codepush.3';
 ```
 
 If the commercial version of your app is "1.2.44", it is reported as "1.2.44-codepush.3" in Datadog. A dash (`-`) is automatically added between the version and the suffix.
 
-You can also completely override the version by specifying the `version` field. However, make sure you set it correctly, as it has to match the one specified during the upload of your source maps and other mapping files.
+You can also completely override the version by specifying the `version` field.
 
 For more information about limitations on the version field, see the [Tags documentation][10].
 
 ### User interactions tracking
 
-If user interactions tracking is enabled as in the code example above, the Datadog React Native SDK traverses up the hierarchy of components starting from the component that received a tap, looking for `dd-action-name` property. Once found, it is used as a name for the action reported.
+The preferred way to set up interaction tracking is by using the Datadog React Native Babel Plugin (`@datadog/mobile-react-native-babel-plugin`). This plugin automatically enriches React components with contextual metadata, improving interaction tracking accuracy and enabling a range of configuration options.
 
-Alternatively, you can use the `accessibilityLabel` element property to give the tap action a name; otherwise, the element type is reported. You can check the sample app for usage examples.
+#### Installation
+
+To install with NPM, run:
+
+```sh
+npm install @datadog/mobile-react-native-babel-plugin
+```
+
+To install with Yarn, run:
+
+```sh
+yarn add @datadog/mobile-react-native-babel-plugin
+```
+
+#### Configure Babel
+
+Add the plugin to your Babel configuration file (`babel.config.js`, `.babelrc`, or similar):
+
+```js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+  plugins: ['@datadog/mobile-react-native-babel-plugin']
+};
+```
+
+#### Basic usage
+
+Once the plugin is installed and configured, it automatically tracks interactions on standard React Native components. No additional code changes are required for basic usage.
+
+#### Configuration options
+
+You can customize the plugin's behavior to match your application's needs:
+
+```js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+  plugins: [
+    [
+      '@datadog/mobile-react-native-babel-plugin',
+      {
+        sessionReplay: {
+          // Enable SVG tracking for Session Replay (default: false)
+          svgTracking: true
+        },
+        components: {
+          // Use component content as action name (default: true)
+          useContent: true,
+          // Prefix actions with component name (default: true)
+          useNamePrefix: true,
+        },
+      },
+    ],
+  ],
+};
+```
+#### Tracking custom components
+
+For custom components, you can configure specific tracking behavior:
+
+```js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+  plugins: [
+    [
+      '@datadog/mobile-react-native-babel-plugin',
+      {
+        components: {
+          tracked: [
+            {
+              name: 'CustomButton',
+              // Prop your component uses as content (if available)
+              // When not set, the plugin tries to find the most likely match
+              contentProp: 'label',
+              handlers: [{event: 'onPress', action: 'TAP'}],
+            },
+            {
+              name: 'CustomInput',
+              handlers: [{event: 'onFocus', action: 'TAP'}],
+            },
+          ],
+        },
+      },
+    ],
+  ],
+};
+```
+
+#### Custom action names
+
+You can specify custom action names for components using the `actionNameAttribute` configuration:
+
+```js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],
+  plugins: [
+    [
+      '@datadog/mobile-react-native-babel-plugin',
+      {
+        actionNameAttribute: 'data-dd-action-name',
+      },
+    ],
+  ],
+};
+```
+
+Then use it in your components:
+
+```jsx
+<Button data-dd-action-name="checkout-button" onPress={handleCheckout}>
+  Complete Purchase
+</Button>
+```
 
 ## Sending data when device is offline
 
@@ -391,7 +577,7 @@ You can track events such as crashes and network requests when your application 
 Add the following snippet during initialization in your Datadog configuration:
 
 ```javascript
-configuration.trackBackgroundEvents = true;
+rumConfiguration.trackBackgroundEvents = true;
 ```
 
 ## Data storage
@@ -411,15 +597,12 @@ While in development mode, your application can submit extra events related to t
 To prevent these events from showing in the dashboard, you can disable errors and resources tracking in dev mode using the `__DEV__` flag:
 
 ```js
-const config = new DatadogProviderConfiguration(
-	CLIENT_TOKEN,
-	ENVIRONMENT,
-	APPLICATION_ID,
-	true,
-	!__DEV__  /* trackResources will be false in DEV mode, true otherwise */,
-	!__DEV__  /* trackErrors will be false in DEV mode, true otherwise */,
-	trackingConsent
-)
+const rumConfig = new RumConfiguration(
+    '<APPLICATION_ID>',
+    true, // Track user interactions (such as a tap on buttons).
+    !__DEV__, // Track XHR resources
+    !__DEV__  // Track errors
+);
 ```
 
 ## New architecture support

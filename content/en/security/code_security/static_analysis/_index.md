@@ -7,6 +7,9 @@ is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 further_reading:
+- link: https://www.datadoghq.com/blog/code-security-secret-scanning
+  tag: Blog
+  text: Detect and block exposed credentials with Datadog Secret Scanning
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
@@ -80,63 +83,8 @@ For more information, see [AI-Enhanced Static Code Analysis][17].
 ## Customize your configuration
 To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
 
-## Link results to Datadog services and teams
-
-### Link results to services
-Datadog associates code and library scan results with relevant services by using the following mechanisms:
-
-1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
-2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
-3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
-
-If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
-
-#### Identifying the code location in the Software Catalog
-
-The [schema version `v3`][12] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
-
-The `paths` attribute is a list of globs that should match paths in the repository.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-
-
-#### Detecting file usage patterns
-
-Datadog detects file usage in additional products such as Error Tracking and
-files associated with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-
-#### Detecting service name in paths and repository names
-
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
-
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
-
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name closest to the filename is selected.
-
-### Link results to teams
-Datadog associates scan results with the team attached to a service. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
-
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
-
-**Note**: You must [accurately map][15] your Git provider teams to your [Datadog teams][14] for this feature to function properly.
+## Link findings to Datadog services and teams
+To link findings to Datadog services and teams, see the [Setup documentation][13].
 
 ## Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->

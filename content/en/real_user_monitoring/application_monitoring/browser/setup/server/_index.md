@@ -16,7 +16,10 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
+{{< callout url=https://www.datadoghq.com/product-preview/rum-sdk-auto-instrumentation/
+ btn_hidden="false" header="Join the Preview!">}}
+RUM Auto-Instrumentation is in Preview. Use this form to sign up.
+{{< /callout >}}
 
 ## Overview
 
@@ -36,7 +39,7 @@ Select a platform to start collecting RUM data on your application:
 
 ## Limitations
 
-Keep in mind the following limitations when using auto-instrumentation:
+Consider the following limitations when using auto-instrumentation:
 
 - This instrumentation method **does not support [advanced RUM configurations][1]**.
 - If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK **cannot be injected**. To ensure proper instrumentation:

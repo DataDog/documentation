@@ -6,6 +6,12 @@ aliases:
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
 - /security/application_security/vulnerability_management/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+
 ---
 ## Overview
 
@@ -18,9 +24,15 @@ Using Software Composition Analysis provides organizations with the following be
 
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
-## Set up Software Composition Analysis
+## SCA language support
 
-{{% security-products/sca-supported-lang %}}  
+Software Composition Analysis (SCA) supports the following languages:
+
+{{< partial name="code_security/sca-lang-support.html" >}}
+
+For steps on setting up SCA for your language, see [Set up SCA][15].
+
+## Set up SCA
 
 SCA supports both static and runtime dependency detection:
 - For **static detection**, you can scan your repositories from your CI/CD pipelines or directly from Datadog's infrastructure. See [static setup][1] to get started.
@@ -31,17 +43,16 @@ SCA supports both static and runtime dependency detection:
 The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 ### Datadog severity score
-Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.
+Each vulnerability begins with a base CVSS score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by incorporating runtime context and exploitability signals. These factors help distinguish theoretical risk from vulnerabilities that are more likely to be exploited in real-world environments. The table below describes how each factor influences the final score.
 
-Four score modifiers may apply to a base score. Two are provided by runtime context:
- - Vulnerability is in production
- - Service affected by vulnerability is under attack
-
-Two are provided by CVE context:
- - Whether an exploit is available
- - The exploitation probability
-
-Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score based on the factors above.
+| Risk factor                       | How it is evaluated                                                  | Impact on the score                                    |
+|-----------------------------------|----------------------------------------------------------------------|--------------------------------------------------------|
+| Base CVSS score                   | Published CVSS score for the vulnerability.                          | Starting point for the severity score.                 |
+| Reachability                      | Whether the vulnerable code path is actually executed.               | Increased when the vulnerable code is invoked.         |
+| Production runtime context        | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
+| Under attack                      | Evidence of active attack activity targeting the service.            | Decreased if there is no observed attack activity.     |
+| Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
+| Exploitation probability (EPSS)   | Likelihood of real-world exploitation based on EPSS data.            | Decreased when the probability of exploitation is low. |
 
 ### Repositories explorer
 The [Repositories][12] explorer provides a repository-centric view of all scan results across Static Code Analysis (SAST) and Software Composition Analysis (SCA). Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
@@ -98,6 +109,11 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 
 <!-- **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][9] documentation. -->
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
@@ -109,3 +125,4 @@ The Vulnerability Explorer offers remediation recommendations for detected vulne
 [12]: https://app.datadoghq.com/ci/code-analysis
 [13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
 [14]: /security/code_security/software_composition_analysis/library_inventory
+[15]: /security/code_security/software_composition_analysis/#set-up-sca
