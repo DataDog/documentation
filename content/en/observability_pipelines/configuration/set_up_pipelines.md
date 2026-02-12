@@ -43,7 +43,7 @@ You can create a pipeline with one of the following methods:
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case.
 1. Select and set up your [source][3].
-1. Add [processors][4] to transform, redact, and enrich your log data.
+1. Add [processors][4] to transform, redact, and enrich your log data. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
 1. Select and set up [destinations][5] for your processed logs.
 
@@ -82,7 +82,7 @@ You can create a pipeline with one of the following methods:
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
-1. Add [processors][4] to filter and transform your metrics.
+1. Add [processors][4] to filter and transform your metrics. **Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
     - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
 1. Set up the [Datadog Metrics][5] destination.
 

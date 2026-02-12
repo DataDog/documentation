@@ -31056,6 +31056,11 @@ components:
     InputSchemaParameters:
       description: The definition of `InputSchemaParameters` object.
       properties:
+        allowExtraValues:
+          description: The `InputSchemaParameters` `allowExtraValues`.
+          type: boolean
+        allowedValues:
+          description: The `InputSchemaParameters` `allowedValues`.
         defaultValue:
           description: The `InputSchemaParameters` `defaultValue`.
         description:
@@ -53709,6 +53714,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration'
         detectionTolerance:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance'
+        instantaneousBaseline:
+          $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration'
         learningPeriodBaseline:
@@ -54046,6 +54053,13 @@ components:
         or credentialed API access.'
       example: true
       type: boolean
+    SecurityMonitoringRuleInstantaneousBaseline:
+      description: When set to true, Datadog uses previous values that fall within
+        the defined learning window to construct the baseline, enabling the system
+        to establish an accurate baseline more rapidly rather than relying solely
+        on gradual learning over time.
+      example: false
+      type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: 'Once a signal is generated, the signal will remain "open" if a
         case is matched at least once within
@@ -54119,7 +54133,7 @@ components:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
         instantaneousBaseline:
-          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline'
+          $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
         learningMethod:
@@ -54145,13 +54159,6 @@ components:
       - TWO_WEEKS
       - THREE_WEEKS
       - FOUR_WEEKS
-    SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline:
-      description: When set to true, Datadog uses previous values that fall within
-        the defined learning window to construct the baseline, enabling the system
-        to establish an accurate baseline more rapidly rather than relying solely
-        on gradual learning over time.
-      example: false
-      type: boolean
     SecurityMonitoringRuleNewValueOptionsLearningDuration:
       default: 0
       description: 'The duration in days during which values are learned, and after
