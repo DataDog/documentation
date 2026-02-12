@@ -5,7 +5,7 @@ description: Learn about the compatibility requirements for evaluations.
 
 ## Evaluation compatibility
 
-The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, and Bedrock Anthropic.
+The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, and AI Gateway.
 
 ### Managed evaluations
 
@@ -23,12 +23,12 @@ Managed evaluations are supported for the following configurations.
 
 Custom LLM-as-a-judge evaluations are supported for the following configurations.
 
-| Evaluation       | DD-trace version | LLM Provider                                                      | Applicable span |
-| ---------------- | ---------------- | ----------------------------------------------------------------- | --------------- |
-| [Boolean][11]    | Fully supported  | All third party LLM providers                                     | All span kinds  |
-| [Score][11]      | Fully supported  | OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, VertexAI, AI Gateway    | All span kinds  |
-| [Categorical][11]| Fully supported  | OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, VertexAI, AI Gateway    | All span kinds  |
-| [JSON][11]       | Fully supported  | OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, VertexAI, AI Gateway    | All span kinds  |
+| Evaluation       | DD-trace version | LLM Provider                  | Applicable span |
+| ---------------- | ---------------- | ----------------------------- | --------------- |
+| [Boolean][11]    | Fully supported  | All third party LLM providers | All span kinds  |
+| [Score][11]      | Fully supported  | All third party LLM providers | All span kinds  |
+| [Categorical][11]| Fully supported  | All third party LLM providers | All span kinds  |
+| [JSON][11]       | Fully supported  | All third party LLM providers | All span kinds  |
 
 #### Template LLM-as-a-judge evaluations
 
