@@ -33,7 +33,8 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source:
   1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][3] for the defaults used.
-  1. Set the authorization strategy to **Basic**. If you are using Secrets Management, enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
+  1. Select your authorization strategy. If you selected **Basic**:
+    - Enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
   1. In the **Decoding** dropdown menu, select **Bytes**.
   1. Toggle the switch to **Enable TLS**.
       - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
