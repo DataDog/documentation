@@ -28,7 +28,7 @@ Product-specific permissions restrict users' ability to change product-specific 
 
 ## Using Governance Console
 
-{{< img src="account_management/governance_console/governance-console-overview-2.png" alt="Governance Console Summary page. Shows an Org Usage Summary section with visualizations of key metrics." style="width:100%;" >}}
+{{< img src="account_management/governance_console/governance-console-overview-3.png" alt="Governance Console Summary page. Shows an Org Usage Summary section with visualizations of key metrics." style="width:100%;" >}}
 
 ### Summary 
 
