@@ -1,8 +1,12 @@
 ---
 title: Kubernetes log collection
+description: Configure log collection from containerized applications running on Kubernetes using the Datadog Agent
 aliases:
   - /agent/kubernetes/log
 further_reading:
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitor logs from Amazon EKS on Fargate with Datadog
 - link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
@@ -18,6 +22,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "/containers/troubleshooting/log-collection"
+  tag: "Documentation"
+  text: "Container Log Collection Troubleshooting"
 ---
 
 This page discusses collecting logs from Kubernetes log files.
@@ -63,7 +70,7 @@ Then apply the new configuration:
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-See the sample [manifest with logs, metrics, and APM collection enabled][1] for an additional example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+See the sample [manifest with logs, metrics, and APM collection enabled][1] for an additional example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection. For more information, see [Log discovery - Filtering](#filtering).
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-logs-apm.yaml
 {{% /tab %}}
@@ -78,7 +85,7 @@ datadog:
     containerCollectAll: true
 ```
 
-You can set `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+You can set `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection. For more information, see [Log discovery - Filtering](#filtering).
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -136,7 +143,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Warning for unprivileged installations</strong>
 <br/><br/>
 When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.
@@ -154,9 +161,13 @@ The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datad
 
 ### Filtering
 
-You can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
+When "Container Collect All" is enabled you can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
 
-See [Container Discovery Management][8] to learn more.
+When filtering out logs through methods like `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude`, the Agent ignores log collection regardless of explicitly defined log collection configurations in [Autodiscovery annotations][19] or [Autodiscovery configuration files][20].
+
+When "Container Collect All" is disabled (default) you don't need to add any filtering because everything is excluded by default. To include collection for only selected pods, you can enable the log configuration by [Autodiscovery annotations][19] or [Autodiscovery configuration files][20] for the desired pods.
+
+See [Container Discovery Management][8] to learn more about filtering.
 
 ### Tagging
 
@@ -376,6 +387,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% /tab %}}
 {{< /tabs >}}
 
+To match a log configuration to a set of containers with more granularity than the container short image name, see [Autodiscovery Container Identifiers][22].
+
 ## Advanced log collection
 
 Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
@@ -388,7 +401,7 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IMAGE>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
+However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_NAME>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
@@ -454,68 +467,7 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 
 ## Troubleshooting
 
-#### Short lived containers
-
-By default the Agent looks every 5 seconds for new containers.
-
-For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
-
-#### Missing tags on new containers or Pods
-
-When sending logs to Datadog from newly created containers or Pods, the Datadog Agent's internal tagger may not yet have the related container/pod tags. As a result, tags may be missing from these logs.
-
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to configure a duration (in seconds) for the Datadog Agent to wait before it begins to send logs from newly created containers and Pods. The default value is `0`.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
-          value: "5"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
-      value: "5"
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Missing host-level tags on new hosts or nodes
-
-Host-level tags are those seen in the infrastructure list for a given host, and are sourced from either a cloud provider or the Datadog Agent. Common host-level tags include `kube_cluster_name`, `region`, `instance-type`, and `autoscaling-group`.
-
-When sending logs to Datadog from a newly created host or node, it can take a few minutes for host-level tags to be [inherited][12]. As a result, host-level tags may be missing from these logs.
-
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to configure a duration (in minutes). For this duration, the Datadog Agent manually attaches the host-level tags that it knows about to each sent log. After this duration, the Agent reverts to relying on tag inheritance at intake.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
-          value: "10m"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
-      value: "10m"
-```
-{{% /tab %}}
-{{< /tabs >}}
+For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 
 ## Further Reading
 
@@ -539,3 +491,7 @@ datadog:
 [16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [17]: /containers/guide/template_variables/
 [18]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
+[19]: /containers/kubernetes/log/?tab=helm#autodiscovery-annotations
+[20]: /containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files
+[21]: /containers/troubleshooting/log-collection/?tab=datadogoperator
+[22]: /containers/guide/ad_identifiers/

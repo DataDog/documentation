@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.es.cpuutilization
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.es.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -23,7 +23,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- aws
 - metrics
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +34,6 @@ integration_id: amazon-es
 integration_title: Amazon OpenSearch Service
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_es
 public_title: Amazon OpenSearch Service
@@ -41,7 +42,9 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::AWS
   - Category::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon OpenSearch Service는 OpenSearch를 손쉽개 배포하고 운영할 수 있도록 해줍니다.
   media: []
@@ -63,17 +66,33 @@ Amazon OpenSearch Service는 AWS Cloud에서 OpenSearch 클러스터를 손쉽�
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정합니다. 
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][2]을 설정하세요. 
 
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][3]의 `Metric Collection` 탭 아래에서 `ES`가 활성화되어 있는지 확인하세요.
 2. [Datadog - Amazon OpenSearch Service 통합][4]을 설치하세요.
 
-## 수집한 데이터
+### 로그 수집
+
+#### 로깅 활성화
+
+로그를 S3 버킷이나 CloudWatch로 전송하도록 Amazon OpenSearch Service를 구성합니다.
+
+**참고**: S3 버킷에 로그할 경우 _대상 접두사_로 `amazon_elasticsearch`를 설정해야 합니다.
+
+#### Datadog로 로그 전송
+
+1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][5]를 설정하세요.
+2. Lambda 함수가 설치되면 AWS 콘솔에서 Amazon Elasticsearch 로그가 포함된 S3 버킷 또는 CloudWatch 로그 그룹에 트리거를 수동으로 추가합니다.
+
+    - [S3 버킷에서 수동 트리거 추가][6]
+    - [클라우드와치 로그 그룹에 수동 트리거 추가][7]
+
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_es" >}}
+{{< get-metrics-from-git "amazon-es" >}}
 
 
 ### 이벤트
@@ -86,11 +105,14 @@ Amazon OpenSearch Service 통합에는 서비스 점검이 포함되어 있지 �
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][6]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][9]에 문의하세요.
 
 [1]: https://docs.datadoghq.com/ko/integrations/elastic
 [2]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-es
-[5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
-[6]: https://docs.datadoghq.com/ko/help/
+[5]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#manually-set-up-triggers
+[8]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/assets/metrics/metric-spec.yaml
+[9]: https://docs.datadoghq.com/ko/help/

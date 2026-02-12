@@ -1,5 +1,6 @@
 ---
 title: Cost Details
+description: Track Datadog costs with cost summaries and chargebacks, including projected monthly costs, historical data, and multi-organization cost allocation.
 further_reading:
 - link: "https://docs.datadoghq.com/account_management/billing/"
   tag: "Documentation"
@@ -20,6 +21,8 @@ You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
 - Gain insight into how costs are tracking
 
+For visibility into daily Datadog spending in Cloud Cost Explorer, dashboards, and [cost monitors][7], see [Datadog Costs][8] under Cloud Cost Management.
+
 ### Permissions
 
 Roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Cost Summary and Cost Chargebacks data. Users with the Datadog Admin role have these permissions by default.
@@ -37,7 +40,7 @@ Use the cost summary to:
 
 ### Projected Costs (parent organization)
 
-Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
+Projected end-of-month costs are calculated by applying the prior and current month's projected usage data against your contracted rates. Projected end-of-month costs are updated daily and may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
 
 ### Cost Summary (parent organization)
 
@@ -45,7 +48,7 @@ The cost summary functionality changes according to your Datadog usage as a sing
 
 {{< img src="account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
-View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1,3, 6 or 12 months.
+View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1, 3, 6 or 12 months.
 
 {{< img src="account_management/plan_and_usage/parent-org-multi-month-cost-changes.png" alt="Screenshot of a parent organization's historical costs over a three month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
@@ -69,7 +72,7 @@ To query estimated cost data through the API, see [Get estimated cost across you
 
 ### Cost Summary (sub-organization)
 
-<div class="alert alert-warning">This feature is in limited availability. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+<div class="alert alert-danger">This feature is in limited availability. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
@@ -157,3 +160,5 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
 [6]: /api/latest/usage-metering/#get-projected-cost-across-your-account
+[7]: /cloud_cost_management/cost_changes/monitors/?tab=costmetricbased
+[8]: /cloud_cost_management/datadog_costs/

@@ -1,8 +1,11 @@
 ---
+description: Modifica la salida de variables de plantilla en las notificaciones de
+  monitor utilizando operaciones matemáticas, funciones y manipulación de cadenas
+  con la sintaxis eval.
 title: Evaluación de variables de plantilla
 ---
 
-En los mensajes de notificación del monitor, puedes modificar la salida de las variables de plantilla utilizando la sintaxis `eval`, que permite realizar diferentes operaciones matemáticas y funciones en variables de plantilla con un valor numérico.
+En los mensajes de notificación del monitor, puedes modificar la salida de variables de plantilla utilizando la sintaxis `eval`, que permite varias operaciones matemáticas diferentes y funciones en las variables de plantilla con un valor numérico o de cadena.
 
 ## Operadores
 
@@ -43,20 +46,27 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 
 ### Enrutamiento de notificaciones a diferentes equipos en función de la hora del día
 
-Puedes combinar una evaluación de módulo `%` de la variable `last_triggered_at_epoch` con `{{#is_match}}{{/is_match}}` para personalizar el enrutamiento de notificaciones en función de la hora del día:
+Puedes combinar una evaluación modulo `%` de la variable `last_triggered_at_epoch` con `{{#is_exact_match}}{{/is_exact_match}}` para personalizar el enrutamiento de notificaciones en función de la hora del día (UTC):
 ```
-{{#is_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "14" "15" "16"}}  
-Identificador que debería recibir la notificación si el tiempo está entre 2PM y 5PM
-{{/is_match}}
+{{#is_exact_match (eval "int(last_triggered_at_epoch / 3600000 % 24)") "8" "9" "10" "11" "12" "13"}}  
+Handle that should receive notification if time is between 8AM and 2PM UTC
+{{/is_exact_match}}
 ```
+
+**Nota:** Si necesitas evaluar tu monitor en un cronograma, consulta [Cronogramas personalizados][2] en su lugar.
 
 ## Funciones
 
-El valor de una variable de plantilla numérica puede utilizarse como entrada para las funciones de evaluación para cambiar el formato de la variable de plantilla o realizar una operación matemática sobre el valor. La sintaxis utiliza el siguiente formato. **Nota**: Las expresiones deben ir entre comillas (`"`).
+El valor de una variable de plantilla puede utilizarse como entrada para las funciones de evaluación para cambiar el formato de la variable de plantilla o realizar una operación matemática sobre el valor (si procede). La sintaxis utiliza el siguiente formato. **Nota**: Las expresiones deben ir entre comillas (`"`).
 
 ```text
 {{eval "function(TEMPLATE_VARIABLE_NAME)"}}
 ```
+
+
+{{< tabs >}}
+{{% tab "Variable numérica" %}}
+
 
 Las siguientes funciones cambian el formato del valor de una variable de plantilla numérica:
 
@@ -112,4 +122,26 @@ Si `{{value}}` está evaluando a un gran número de bytes o bits, utiliza la fun
 {{eval "humanize_bits(value)"}}
 ```
 
+{{% /tab %}}
+
+
+{{% tab "Variable de cadena" %}}
+
+Las siguientes funciones pueden utilizarse para realizar determinadas operaciones con variables de cadena:
+
+| Función            | Descripción|
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| upper(var) | Devuelve una cadena convertida a mayúsculas|
+| lower(var)  | Devuelve una cadena convertida a minúsculas|
+| substring(var, start, end)            | Extrae caracteres de una cadena, entre dos índices especificados (start, end). El tercer parámetro es opcional.<br>Por ejemplo: substring("host:D", 5) = "D"|
+| strip(var, characters)            | Elimina los caracteres iniciales y finales. Cuando el segundo parámetro es null, elimina los espacios al principio y al final de la cadena. Por ejemplo:<br>strip(" host:E ") = "host:E"<br>strip("abchost:Eabc", "abc") = "host:E"|
+
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+
 [1]: /es/logs/explorer/
+[2]: /es/monitors/guide/custom_schedules

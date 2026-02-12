@@ -34,7 +34,7 @@ draft: false
 git_integration_title: sap_hana
 integration_id: sap-hana
 integration_title: SAP HANA
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: sap_hana
@@ -42,28 +42,28 @@ public_title: SAP HANA
 short_description: Monitoriza métricas de memoria, red, volumen y otras métricas de
   tu sistema SAP HANA.
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Almacenes de datos
+  - Category::Data Stores
   - Categoría::SAP
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Monitoriza métricas de memoria, red, volumen y otras métricas de tu
     sistema SAP HANA.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: SAP HANA
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -74,7 +74,7 @@ Este check monitoriza [SAP HANA][1] 2.0, SPS 2 a través del Datadog Agent.
 
 ### Instalación
 
-El check de SAP HANA está incluido en el paquete del [Datadog Agent][2]. Para utilizar esta integración, es necesario instalar la biblioteca [hdbcli][3] manualmente.
+El check de SAP HANA está incluido en el paquete del [Datadog Agent][2]. Para utilizar esta integración, es necesario instalar la librería [hdbcli][3] manualmente.
 
 
 Para Unix:
@@ -159,7 +159,14 @@ Para saber cómo configurar el número de puerto para las bases de datos de inqu
 
 #### Recopilación de logs
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+1. En tu base de datos SAP HANA, ejecuta el siguiente comando para asegurarte de que puedes leer logs de auditorías:
+
+    ```shell
+    GRANT AUDIT READ TO DD_MONITOR;
+    GRANT SELECT ON SYS.AUDIT_LOG TO DD_MONITOR
+    ```
+
+1. La recopilación de logs está desactivada por defecto en el Datadog Agent. Actívala en `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -185,7 +192,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `sap_hana` en la sección
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "sap_hana" >}}
+{{< get-metrics-from-git "sap-hana" >}}
 
 
 ### Eventos
@@ -193,7 +200,7 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `sap_hana` en la sección
 SAP HANA no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "sap_hana" >}}
+{{< get-service-checks-from-git "sap-hana" >}}
 
 
 ## Solucionar problemas

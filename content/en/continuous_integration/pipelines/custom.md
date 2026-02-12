@@ -15,13 +15,9 @@ further_reading:
 
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
-You can send custom pipelines through HTTP using the [public API endpoint][1]. For more information about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
+If your CI provider is not supported, you can send custom pipelines through HTTP using the [public API endpoint][1]. For more information about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
 
 ### Compatibility
 
@@ -34,6 +30,9 @@ You can send custom pipelines through HTTP using the [public API endpoint][1]. F
 | [Partial retries][10] | Partial pipelines | View partially retried pipeline executions. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 | [Queue time][12] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Filter CI Jobs on the critical path][16] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][17] | Execution time  | View the amount of time pipelines have been running jobs. |
+
 
 ## Configure CI Visibility
 
@@ -56,7 +55,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    | Status | The final status of the pipeline. Allowed enum values: `success`, `error`, `canceled`, `skipped`, `blocked`, or `running`. | `success` |
    | Partial Retry | Whether or not the pipeline was a partial retry of a previous attempt. This field expects a boolean value (`true` or `false`). A partial retry is one which only runs a subset of the original jobs. | `false` |
    | Start | Time when the pipeline run started (it should not include any [queue time][12]). The time format must be RFC3339. | `2024-08-22T11:36:29-07:00` |
-   | End | Time when the pipeline run finished. The time format must be RFC3339. | `2024-08-22T14:36:00-07:00` |
+   | End | Time when the pipeline run finished. The time format must be RFC3339. The end time cannot be longer than 1 year after the start time. | `2024-08-22T14:36:00-07:00` |
    | URL | The URL to look at the pipeline in the CI provider UI. | `http://your-ci-provider.com/pipeline/{pipeline-id}` |
 
    For example, this payload sends a CI pipeline event to Datadog:
@@ -69,6 +68,7 @@ To send pipeline events programmatically to Datadog, ensure that your [`DD_API_K
    {
      "data": {
        "attributes": {
+         "provider_name": "<YOUR_CI_PROVIDER>",
          "resource": {
            "level": "pipeline",
            "unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
@@ -127,3 +127,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [13]: /continuous_integration/search/#search-for-pipelines
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: /glossary/#running-pipeline
+[16]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[17]: /glossary/#pipeline-execution-time

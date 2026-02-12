@@ -1,28 +1,56 @@
 ---
-aliases:
-- /ja/integrations/azure_applicationgateway
+app_id: azure-applicationgateway
+app_uuid: f797ba91-33c8-49e8-9316-159ca6c83764
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.network_applicationgateways.current_connections
+      metadata_path: metadata.csv
+      prefix: azure.network_applicationgateways
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 280
+    source_type_name: Azure Application Gateway
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Azure Application Gateway のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_application_gateway/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_application_gateway
-has_logo: true
 integration_id: azure-applicationgateway
-integration_title: Microsoft Azure Application Gateway
+integration_title: Azure Application Gateway
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_application_gateway
-public_title: Datadog-Microsoft Azure Application Gateway インテグレーション
+public_title: Azure Application Gateway
 short_description: Azure Application Gateway のキーメトリクスを追跡
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Application Gateway のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Application Gateway
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Application Gateway は、Web アプリケーションへのトラフィックを管理できる Web トラフィックロードバランサーです。
@@ -38,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure Application Gat
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_application_gateway" >}}
+{{ get-metrics-from-git "azure-applicationgateway" }}
 
 
 ### イベント

@@ -43,7 +43,7 @@ draft: false
 git_integration_title: argo_rollouts
 integration_id: argo-rollouts
 integration_title: Argo Rollouts
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_rollouts
@@ -144,7 +144,7 @@ Argo Rollouts のログは、Kubernetes を通じて、異なる Argo Rollouts �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "argo_rollouts" >}}
+{{< get-metrics-from-git "argo-rollouts" >}}
 
 
 ### イベント
@@ -152,7 +152,7 @@ Argo Rollouts のログは、Kubernetes を通じて、異なる Argo Rollouts �
 Argo Rollouts インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "argo_rollouts" >}}
+{{< get-service-checks-from-git "argo-rollouts" >}}
 
 
 ## トラブルシューティング

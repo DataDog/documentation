@@ -7,9 +7,16 @@ aliases:
 cascade:
     algolia:
         rank: 70
+further_reading:
+    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+      tag: "Blog"
+      text: "Best practices for managing Datadog organizations at scale"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-danger">The Datadog for Government platform supports only SAML or basic authentication using a username/email and password. Before configuring SAML authentication, ensure that at least one username/email and password account is established to maintain access during the setup process. Datadog recommends enabling multi-factor authentication (MFA) for password-based accounts.
+
+If you need SAML enabled for a trial account, contact <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
+
 {{< /site-region >}}
 
 ## Personal settings
@@ -26,14 +33,14 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ### Preferences
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 You can manage your timezone, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page. 
 
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
-{{< site-region region="us3,us5,gov,ap1" >}}
-<div class="alert alert-warning">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="us3,us5,gov,ap1,ap2" >}}
+<div class="alert alert-danger">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest
@@ -59,7 +66,7 @@ The [Organizations tab][12] in **Personal Settings** lists all of the organizati
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join <Organization Name>". Click the **Join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join \<Organization Name>". Click the **Join Account** button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
@@ -80,6 +87,40 @@ The [Application Keys tab][13] in **Personal Settings** allows you to manage you
 The [Apps tab][14] in **Personal Settings** allows you to manage apps that have been installed or created by members of your organization. You can filter apps with a search string, or choose to view only enabled or disabled apps using checkboxes.
 
 When you hover over an app, the option to enable or disable it appears on the right of the app listing.
+
+#### Email verification
+Verify your email address for enhanced account security and access to additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
+
+- **Google login users** are automatically verified during their first login.
+- **Password-based users** verify their email when setting their password for the first time.
+- **SAML users** must manually verify their email through Datadog.
+
+After being verified, you gain access to:
+- The ability to **log out of all active web sessions** across devices, ensuring security in case of credential compromise.
+- The ability to **view and switch between organizations** outside of your current org hierarchy.
+
+Unverified users can still access Datadog, but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
+
+#### Verify your email
+
+To verify your email:
+1. Navigate to your **Profile Settings**.
+2. Click on **Verify Account**.
+3. Enter the **verification code** sent to your registered email.
+4. Click **Submit** to complete the verification process.
+
+#### Log out of all active web sessions
+
+To log out of all active web sessions:
+Logging out of all active web sessions logs you out of all current sessions across devices, including the one you're using.
+
+
+To log out of all active sessions:
+1. Go to **Personal Settings**.
+2. Click **Log Out of All Web Sessions**.
+3. Confirm the action.
+
+After confirming, you are logged out from all devices and need to log back in.
 
 ## Appearance
 

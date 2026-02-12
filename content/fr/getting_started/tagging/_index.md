@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - tagging
 aliases:
 - /fr/getting_started/getting_started_with_tags
 - /fr/guides/getting_started/tagging/
@@ -23,11 +26,16 @@ further_reading:
 title: Débuter avec les tags
 ---
 
-## Présentation
+## Section Overview
 
 Les tags sont conçus pour ajouter des caractéristiques aux données de télémétrie Datadog, afin de pouvoir les filtrer, les agréger et les comparer au sein de visualisations Datadog. Lorsque vous [utilisez des tags][1], vous pouvez observer les performances globales de plusieurs hosts et même affiner davantage les résultats selon des éléments spécifiques. En somme, les tags constituent un moyen d'observer des points de données agrégées.
 
-Les tags relient différents types de données dans Datadog. Grâce à certaines clés de tag **réservées**, vous pouvez corréler différent(e)s métriques, traces et logs et déclencher des actions.
+Les tags sont des paires `key:value` contenant deux parties :
+
+- La clé de tag est l’identifiant. Elle ne peut exister qu’une seule fois par ressource et est sensible à la casse.
+- La valeur de tag correspond aux données ou informations associées à la clé. Les valeurs de tag ne sont pas uniques par ressource et peuvent être utilisées sur de nombreuses ressources dans une paire `key-value`.
+
+Les tags relient différents types de données dans Datadog. Grâce à certaines clés de tag **réservées**, vous pouvez corréler différent(e)s métriques, traces et logs et déclencher des actions :
 
 | Clé de tag   | Fonctionnalité                                                            |
 | --------- | --------------------------------------------------------------------- |
@@ -37,6 +45,7 @@ Les tags relient différents types de données dans Datadog. Grâce à certaines
 | `service` | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs. |
 | `env`     | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs. |
 | `version` | Définition du contexte des données spécifiques à l'application pour l'ensemble des métriques, traces et logs. |
+| `team`    | Attribuer une responsabilité aux ressources                                     |
 
 Datadog vous conseille d'étudier les données des conteneurs, machines virtuelles et de l'infrastructure cloud dans leur ensemble, au niveau des services. Par exemple, consultez l'utilisation du processeur d'un ensemble de hosts qui représentent un service, plutôt que d'analyser l'utilisation distincte d'un serveur A ou d'un serveur B.
 
@@ -83,9 +92,14 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 | [DogStatsD][6]           | Lors de l'envoi de métriques avec DogStatsD                          |
 
 Pour en savoir plus, consultez la section [Assigner des tags][7].
+
 #### Tagging de service unifié
 
 Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Cette fonctionnalité permet de lier les données de télémétrie Datadog entre elles via trois tags standard : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la section [Tagging de service unifié][8].
+
+### Héritage des tags
+
+Toutes les métriques, tous les logs, toutes les traces et toutes les intégrations suivent un processus d’héritage des `host-tag` lors de l’ingestion des données dans Datadog. Étant donné que les données sont associées à un host donné, ces composants héritent de tous les tags `host-level` associés à ce host. Ces tags sont visibles dans la [liste d’infrastructure][12] pour un host donné, et proviennent soit du fournisseur cloud, soit de l’Agent Datadog. Consultez la section sur les [tags `host-level` manquants sur les nouveaux hosts ou nœuds][25] pour plus d’informations.
 
 ## Utilisation
 
@@ -139,3 +153,4 @@ Pour en savoir plus, consultez la section [Utiliser les tags][1].
 [22]: /fr/getting_started/tagging/using_tags/#developers
 [23]: /fr/account_management/billing/usage_attribution/
 [24]: /fr/getting_started/tagging/using_tags/#ci-visibility
+[25]: /fr/containers/kubernetes/log/?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes

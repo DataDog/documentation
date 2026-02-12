@@ -4,8 +4,8 @@ aliases:
 categories:
 - azure
 - nube
-- contenedores
-- aprovisionamiento
+- rastreo
+- suministro
 custom_kind: integración
 dependencies: []
 description: Rastrea las métricas clave de Azure Container Instances.
@@ -40,7 +40,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_container_instances" >}}
+{{ get-metrics-from-git "azure-containerinstances" }}
 
 
 ### Eventos
@@ -51,7 +51,7 @@ La integración Azure Container Instances no incluye eventos.
 
 La integración Azure Container Instances no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

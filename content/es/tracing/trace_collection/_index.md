@@ -39,17 +39,18 @@ Existen dos enfoques principales para instrumentar tu aplicación: automático o
 
 Crea {{< tooltip glossary="span" >}} para tu aplicación con pocos pasos manuales. Para instrumentar automáticamente tu aplicación, puedes utilizar cualquiera de estas opciones:
 
-- [Instrumentación en un solo paso (Vista previa)][7]: Ejecuta un comando de instalación de una sola línea para instalar el Datadog Agent, habilitar APM e instrumentar todos tus servicios en tu host Linux, máquina virtual o contenedor.
+- [Instrumentación de paso único][7]: ejecuta un comando de instalación de una sola línea para instalar el Agent, habilitar APM e instrumentar todos tus servicios en tu host de Linux, VM o contenedor.
 - [Bibliotecas de Datadog][8]: añade bibliotecas de rastreo de Datadog a tu aplicación.
 
 Para más información, consulta [Instrumentación automática][5].
 
 ### Instrumentación personalizada
 
-Captura datos de observabilidad de código propio o funciones complejas que no son capturadas por la instrumentación automática. Para instrumentar tu aplicación de forma personalizada, puedes utilizar cualquiera de estas opciones:
+Captura datos de observabilidad de código interno o funciones complejas que no captura  la instrumentación automática. Para instrumentar de forma personalizada tu aplicación, puedes utilizar cualquiera de estas opciones:
 
 - [Bibliotecas de Datadog][9]: utiliza bibliotecas de rastreo de Datadog para añadir y personalizar la observabilidad dentro de Datadog.
 - [APIs de OpenTelemetry][10]: utiliza la compatibilidad con la API de OpenTelemetry en bibliotecas de Datadog para disponer de una instrumentación independiente de tu código.
+- [Dynamic Instrumentation][11]: Utiliza Dynamic Instrumentation para añadir telemetría personalizada en ubicaciones de código específicas, desde la interfaz de usuario de Datadog.
 
 Para más información, consulta [Instrumentación personalizada][6].
 
@@ -80,9 +81,9 @@ Los siguientes tutoriales te guiarán a través de la configuración de trazas d
     {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Habilitación del rastreo para una aplicación Go en Amazon ECS con Fargate{{< /nextlink >}}
 
 {{< /whatsnext >}}
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/developers/community/libraries/#apm-tracing-client-libraries
 [2]: /es/tracing/trace_collection/library_injection_local/
@@ -93,3 +94,4 @@ Grabar pruebas de aplicaciones móviles
 [8]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [9]: /es/tracing/trace_collection/custom_instrumentation/dd_libraries/
 [10]: /es/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[11]: /es/tracing/dynamic_instrumentation/

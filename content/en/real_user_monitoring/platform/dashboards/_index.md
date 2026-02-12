@@ -13,11 +13,11 @@ further_reading:
 
 When you create a RUM application, Datadog [collects data][1] and generates dashboards about your application's performance, errors, resources, and user sessions. 
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Application Overview page" style="width:90%;" >}}
+{{< img src="real_user_monitoring/dashboards/rum-dashboards-performance-summary.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
 Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or from your application summary pages (**Digital Experience > Performance Summary** and **Digital Experience > Product Analytics > Analytics Summary**).
 
-{{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
+{{< img src="real_user_monitoring/dashboards/available-rum-dashboards.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
 {{< whatsnext desc="You can explore the following out-of-the-box RUM dashboards:" >}}
   {{< nextlink href="/real_user_monitoring/platform/dashboards/performance" >}}<u>Performance Overviews</u>: See a global view of your website/app performance and demographics. {{< /nextlink >}}
@@ -38,7 +38,7 @@ The generated RUM dashboards automatically contain a set of default template var
 
 To explore individual events, click on a graph and click **View RUM events**. This redirects you to the RUM Explorer with pre-selected search filters.
 
-{{< img src="real_user_monitoring/dashboards/view_rum_events.mp4" alt="View RUM events" video=true style="width:80%;" >}}
+{{< img src="real_user_monitoring/dashboards/rum-view-events-2.mp4" alt="View RUM events" video=true style="width:80%;" >}}
 
 ### Customize dashboards
 

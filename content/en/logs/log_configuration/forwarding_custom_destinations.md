@@ -13,17 +13,14 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Forward logs directly from your environment with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/microsoft-sentinel-logs/"
+  tag: "Blog"
+  text: "Centrally process and govern your logs in Datadog before sending them to Microsoft Sentinel"
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Log forwarding is not available for the Government site. Contact your account representative for more information.
-</div>
-{{% /site-region %}}
 
 ## Overview
 
-Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
+Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP by default.
 
 **Note**: Only Datadog users with the [`logs_write_forwarding_rules`][2] permission can [create][6], [edit][7], and [delete][8] custom destinations for forwarding logs.
 
@@ -39,14 +36,18 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 ## Set up log forwarding to custom destinations
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Sending logs to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+{{< /site-region >}}
+
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-1. Navigate to [Log Forwarding][4].
+1. Navigate to [Log Archiving & Forwarding][4].
 3. Select **Custom Destinations**.
 4. Click **New Destination**.
 5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.
 6. Select the **Destination Type**.
 
-{{< img src="logs/log_configuration/forwarding/log-forwarding-tag-sentinel.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
+{{< img src="logs/log_configuration/forwarding/log-forwarding-gzip-opt-out.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
@@ -54,7 +55,8 @@ The following metrics report on logs that have been forwarded successfully, incl
 7. Enter a name for the destination.
 8. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
     - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
-9. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
+9. (Optional) Disable GZIP compression if your HTTP endpoint does not support compressed payloads.
+10. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
   | Authentication Type      | Description                                                                                                              | Example                                                             |
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 | **Basic Authentication** | Provide the username and password for the account to which you want to send logs.                                        | Username: `myaccount`<br>Password: `mypassword`                       |
@@ -90,8 +92,6 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 {{% tab "Microsoft Sentinel" %}}
 
-<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
-
 7. Enter a name for the destination.
 8. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
 9. In the **Configure Destination** section, enter the following details:
@@ -103,11 +103,37 @@ The following metrics report on logs that have been forwarded successfully, incl
 
 {{% /tab %}}
 
+{{% tab "Google SecOps (Chronicle)" %}}
+
+<div class="alert alert-info">
+<b>Preview available</b>: You can send logs to Google SecOps (Chronicle) from Datadog  <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-google-chronicle/">Register for the Preview</a>.
+</div>
+
+7. Enter a name for the destination.
+8. Authentication for the Google Chronicle Forwarder requires using a GCP Service Account with Chronicle write access.
+9. In the **Configure Destination** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Customer ID** | The Chronicle customer ID provided by Google. | `abcd1234`   |
+| **Regional Endpoint**           | The Chronicle ingestion API endpoint URL based on your region.  **Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings. | `https://us.chronicle.googleapis.com`              |
+| **Namespace**| The namespace in which your Chronicle logs should be ingested.  | `default`                                          |
+
+10. In the **Configure authentication settings** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Project ID**| The GCP project ID associated with the Chronicle instance.  | `my-gcp-chronicle-project`                                          |
+| **Private Key ID**| The ID of the private key from your service account credentials.  | `0123456789abcdef`                                          |
+| **Private Key**| The private key from your service account credentials.  | `-----BEGIN PRIVATE KEY-----\nMIIE...`                                          |
+| **Client Email**| The email address of the service account.  | `chronicle-writer@my-gcp-chronicle-project.iam.gserviceaccount.com`                                          |
+| **Client ID**| The client ID from your service account credentials.  | `123456789012345678901`                                          |
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 10. In the **Select Tags to Forward** section:
-  a. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
-  b. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
+    1. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
+    1. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
 11. Click **Save**.
 
 

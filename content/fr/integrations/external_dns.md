@@ -31,7 +31,7 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: ExternalDNS
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: external_dns
@@ -60,7 +60,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Présentation
+## Section Overview
 
 Recueillez des métriques sur le service ExternalDNS en temps réel pour visualiser et surveiller les métriques recueillies avec le plug-in Prometheus ExternalDNS pour Kubernetes.
 

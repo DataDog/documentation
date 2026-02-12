@@ -1,11 +1,14 @@
 ---
 title: Notebooks
+description: "Create collaborative rich text documents with live Datadog graphs for investigations, postmortems, runbooks, and data-driven storytelling."
 aliases:
   - /graphing/notebooks/
+  - /notebooks_new/
+  - /notebooks_legacy/
 further_reading:
-- link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
-  tag: "Blog"
-  text: "Create and navigate a documentation library"
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -15,248 +18,282 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
   tag: "blog"
   text: "Transform and enrich your logs with Datadog Observability Pipelines"
-cascade:
-    algolia:
-        rank: 70
+- link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
+  tag: "Blog"
+  text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
+- link: "https://www.datadoghq.com/blog/finops-at-datadog/"
+  tag: "Blog"
+  text: "How we've created a successful FinOps practice at Datadog"
 ---
 
 ## Overview
 
-Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
+Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
 
-## Getting started
+## Creating a notebook
 
-1. From the [Notebook List][1] page, click **+ New Notebook**.
+You can create a notebook in two places:
 
-2. Click the **Save Notebook** button. </br>
-  **Note**: A new notebook is not saved by default.
+- From the left-hand navigation bar, click **Dashboards > New Notebook**.
+- On the upper-right-hand corner of the [Notebooks List page][1], click **New Notebook**.
 
-3. Add new cells to your notebook with [supported graph and text content](#types-of-content). 
+### Notebook templates
 
-4. [Configure cells](#cell-configuration).
+In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
-## Collaboration
+## Editing a notebook
 
-{{< img src="notebooks/collaboration.png" alt="Indicators of users viewing the notebook and making live edits" style="width:100%;">}}
+Notebooks offer a rich text editing experience to create and collaborate on content. You can freely type and format text using familiar toolbar options and keyboard shortcuts—such as bold, italic, headers, lists, and more—directly in the editor.
 
-Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time, as well as real-time edits to notebook cells. Changes made to a notebook appear automatically, without the need to refresh.
+For users who prefer shortcuts, Notebooks also supports Markdown syntax. For example, typing `#` followed by a space creates a header, and using triple backticks (<code>```</code>) starts a code block.
 
-Everyone on your team can open any notebook, but a notebook can only be modified or deleted by any Datadog role with the `Notebooks Write` permission.
+Text content is automatically saved as you type. For embedded graphs, be sure to save your changes in the graph editor to apply them within the notebook.
 
-### Commenting
+### Content types
 
-To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell. From the comments you can also notify a member on your team through the `@mention` feature. Click the three vertical dots in the top-right corner of your comment to edit or delete a comment you wrote. View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
+Notebooks support various rich-text and embedded content types, including but not limited to:
 
-Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
+- [Graphs](#graphs-in-notebooks)
+- Images
+- Headers (H1 - H3)
+- Lists (bullet lists, numbered lists, and checklists)
+- Codeblocks
+- Block quotes
+- Markdown cells
 
-### View mode
+For the full list, type <kbd>/</kbd> into a notebook.
 
-{{< img src="notebooks/read_mode.png" alt="View mode dropdown menu" style="width:100%;">}}
+### Graphs in notebooks
 
-You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
+Notebooks support all widget types. For the full list, see [Widgets][3].
 
-- **Editing**: make changes to the notebook.
+Hover over the widget to display options for editing and configuring graphs.
 
-- **Viewing**: contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
+To edit the query or configure the graph's display, use the **Quick Edit** feature to make most changes inline. For more advanced configuration, click the pencil icon or hold down the <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> key and click on the graph to open the full graph editor. You can adjust the local timeframe or link the graph to the global notebook time by clicking the clock icon.
 
-- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legends.
+Additional graph configuration options are accessible under the three-dot ellipsis menu, depending on the graph type:
+- **Graph size**: Adjust the graph height by selecting XS, S, M (default), L, or XL.
+- **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for XS and S graphs.
 
-## Share notebooks
+### Rich text features
 
-Click on the cog icon in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
+Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list.
 
-To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting.
+| Feature       | Description                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------------------------------------------|
+| **Bold**      | To bold text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>B</kbd>.                                           |
+| *Italics*     | To italicize text, select it and press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.                                      |
+| `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                          |
+| Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu.           |
+| Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                                    |
+| Text tables   | Insert a table by typing `/table` or using the **Add Cell** menu.                                                          |
+| Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, or `!CAUTION` and then pressing <kbd>Space</kbd>.   |
 
-### Import or export notebook JSON
+### Smart chips
 
-Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
+| Feature    | Description                                                                |
+|------------|----------------------------------------------------------------------------|
+| `@Mention` | To mention another user, type `@` followed by their name or email address. |
+| `$TemplateVariable` | Type `$` followed by the name of your existing template variable. |
+| `/date` | Add a date chip by typing `/date`. You can edit the date or time in the popover whenever you click the chip. Also try out `/today` and `/now`! |
 
-### Link to individual cells
+### Slash commands
 
-To copy the URL for a specific cell, click the cell's **Share** menu and select **Link directly to cell**. Direct linking is available for both visualization and Markdown cells.
+Slash commands are an interface for creating graphs or inserting other content. On a new line, type `/` to open the slash command menu. Continue typing the name of the desired content type and select the appropriate option.
 
-When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
+{{< img src="/notebooks/notebooks_new/slash_command_menu.png" alt="Slash command menu that appears when you type / into a notebook" style="width:70%;" >}}
 
-## Add images to notebooks
+When you select a graph type, it opens the [graph editor][3]. After you click **Save**, the graph appears in your notebook.
+
+### Keyboard shortcuts
+
+{{< img src="/notebooks/notebook_keyboard_shortcuts.png" alt="Keyboard shortcuts menu for Datadog notebooks" style="width:70%;" >}}
+
+At the bottom-left corner of a notebook, click the keyboard icon to view a list of keyboard shortcuts for editing.
+
+Additionally, you can use the following shortcuts to cut and paste widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
+
+### Table of contents
+
+Notebooks automatically generate a table of contents from any headers or graphs you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and clicking **Header** in the toolbar.
+
+### Notebook tags
+
+{{< img src="/notebooks/notebooks_new/notebook_tags.png" alt="Notebook tag options to favorite a notebook, add a team, or add a type" style="width:80%;" >}}
+
+| Tag action                | Description                                                                                                          |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Favorite a Notebook**   | Favorite a notebook to pin it to the top of your results in the Notebook List page. To toggle a notebook as a favorite, click the star icon in the header of the notebook.                                                                     |
+| **Tag by Team**           | Tagging a notebook with a team allows you to use it as a filter when searching for a notebook. You can tag a notebook with up to 5 teams. To tag a notebook, click on the **Team** option in the notebook header and select the desired teams. |
+| **Tag by Type**           | You can tag your notebooks with type tags for easier searching, such as: Postmortem, Runbook, Investigation, Documentation, Report. To tag a notebook, click **Type** and select a type.                                                     |
+
+### Add images to notebooks
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using either the [image cell](#image-cell) or the [Markdown editor](#markdown-editor).
+You can add images to your notebook using `/image` or the **Add Cell** menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
 
-### Image cell
-
-This approach places the image in a separate cell from your text, and provides options for resizing, aligning, and captioning the image. Images uploaded by the image cell are hosted by Datadog.
-
-To add an image, click the **Image** cell option in the **Add New Cell** menu. 
-
-{{< img src="notebooks/image_cell.png" alt="Image cell in the Add New Cell menu of cells" style="width:70%;" >}}
+<!-- TODO Add updated image from new notebooks -->
 
 You can use any of the following options to upload an image to be hosted by Datadog:
 - Drop an image file into the upload area
 - Click **Choose File** and locate the image in your file directory
 - Paste a publicly accessible URL for the image
 
-Click the icons on the cell action tray to adjust the size, alignment, add a caption for the image cell, or view the image in full screen mode.
+Click the icons on the image action tray to adjust the size, alignment, add a caption for the image, or view the image in full screen mode.
 
-{{< img src="notebooks/notebooks_image_edit_action_tray.png" alt="Image cell action tray to adjust image alignment and add a caption" style="width:70%;" >}}
 
-### Markdown editor
+## Adding comments to a notebook
 
-This approach places the image inline with your text, but does not provide options for resizing the image.
+You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar.
 
-Enter the edit mode on any Markdown cell and use any of the following options to add the image:
-- Drop an image file into the text cell area.
-- Copy and paste the image directly into the text cell area.
-- Hyperlink an external image using the image widget in the header or by referencing the [official Markdown guide][2]. **Note**: This option does not upload the image to be hosted by Datadog. 
+<!-- TODO Add updated image from new notebooks -->
 
-You can preview the image in the Preview tab before saving it to your notebook.
+To comment on a graph or an image, click on the comment icon to the right of the graph.
 
-## Notebook List
+| Feature                  | Description                                                                                                          |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Navigating to Comments** | Saved comments appear in the right margin of the notebook. Click a comment highlight in the text to open it in the margin, or click a comment in the margin to scroll to its location. |
+| **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking **Resolve**. |
+| **Linking to Comments**    | Link to a specific comment by clicking the link icon in the top right corner of the comment to copy its link.      |
+| **Editing or Deleting Comments** | Edit or delete your comments by clicking the three-dot ellipsis menu in the top right corner of the comment.                 |
+| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the cog menu, select **Notifications**. |
 
-{{< img src="notebooks/notebook_list.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
+## Multiplayer experience in Notebooks
 
-The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
+Notebooks support full collaboration, allowing multiple users to edit simultaneously. When a collaborator opens your notebook, their cursor appears in real time. Hover over a cursor to see the collaborator's name.
 
-* **Your Notebooks**: Notebooks created by you.
-* **All Notebooks**: All Notebooks in your organization.
-* **[Notebook Type](#notebook-types)**: Group notebooks by type.
+<!-- TODO Add updated image from new notebooks -->
 
-Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
+### Widgets
 
-## Template gallery
-From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+When another user is editing a widget, an outline appears around the widget. Since widgets are saved as last write wins, avoid editing a widget that someone else is working on.
 
-## Version history
-From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][4].
+<!-- TODO Add updated image from new notebooks -->
 
-## Notebook configuration
+#### Presence
 
-### Time frames
+At the top of the notebook, you can see avatar images of all of the users currently viewing the notebook. Hover over an avatar to see the name of the associated collaborator.
 
-By default, all graph cells are linked to the global time frame set in the notebook header.
+<!-- TODO Add updated image from new notebooks -->
 
-To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The notebook URL will update to reflect this new time frame without saving it to the notebook.
-
-**Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
-
-{{< img src="notebooks/set_default_time.png" alt="Save notebook global time with Set Default Time button" style="width:100%;">}}
-
-To save this time as the notebook's default, click **Set Default Time**. To reset your global time back to the previously saved default global time, click the reset button.
-
-Individual cells can be unlinked from the global time and set to an independent time frame.
-
-{{< img src="notebooks/cell_time.png" alt="Cell Time Selector with the cell unlinked from global time" style="width:100%;">}}
-
-To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
-
-### Notebook types
-
-{{< img src="notebooks/add_notebook_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
-
-Notebooks can be grouped into types, giving you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type**, or to edit the type, click the pencil icon that appears next to it on hover.
-
-### Graph snapshots
-
-Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
-
-{{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
-
- Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
-
- You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
-
-To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
+## Configuring a notebook
 
 ### Template variables
 
 Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
-### Cell configuration
+<div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
 
-To add cells, use the **+** button that appears to the left of the cell, or select an option from the **Add New Cell** section at the bottom of the notebook. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
+### Time controls
 
-#### Edit options
+By default, all graphs are linked to the global time frame set in the notebook header.
 
-Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
+To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The notebook URL updates to reflect this new time frame without saving it to the notebook.
 
-#### Layout options
+**Note**: Clicking and dragging to zoom in on a graph does not unlock the graph from the global time. It changes the notebook's global time instead.
 
-In a Notebook cell, click **Edit** to view the cell configuration in edit mode. You can also see the available layout options, which vary based on the cell content type, but include the following:
+<!-- TODO Add updated image from new notebooks -->
 
-* **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
-* **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
-* **Grouping**: Display one graph per tag value to see small multiples of your visualization.
+To save this time as the notebook's default, click **Set Default Time**. To reset your global time back to the previously saved default global time, click the reset button.
 
-{{< img src="notebooks/edit_cell_action_menu.png" alt="The graph settings option of a notebook cell in edit mode displaying layout options for graph size, legend, and grouping configuration" style="width:100%;">}}
+Individual graphs can be unlinked from the global time and set to an independent time frame.
 
-**Note**: Changing any of these settings only affects the targeted cell.
+<!-- TODO Add updated image from new notebooks -->
 
-#### Types of content
+To view a different time frame on a single graph, edit the graph and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][6], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][7].
+### Modes
 
-Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
+You can switch between modes from within the notebook by selecting the dropdown at the top right of your notebook.
 
-* [Text][8]
-* [Images](#add-images-to-cells)
-* [Timeseries][9]
-* [Top List][10]
-* [Table][11]
-* [Query Value][12]
-* [Heatmap][13]
-* [Distribution][14]
-* [List][15]
-* [Profiling Flame Graph][16]
-* [Funnel][17]
-* [Pie][18]
-* [Treemap][16]
-* [Geomap][19]
-* [SLO][20]
+- **Editing**: Make changes to the notebook.
+- **Viewing**: Contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
 
-### Limit edit access
+### Version history
+
+From a notebook, click the cog icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
+
+### Graph snapshots
+
+Notebooks automatically snapshot graphs with fixed time ranges to preserve the view before data retention limits apply. No setup is required. Use the kebab menu next to a graph to view or download a snapshot.
+
+{{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
+
+Snapshots are static images of graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). A snapshot updates when the graph is updated, as long as the graph continues to use a fixed time range. Switching the graph to a global time range (for example, `Past 1 hour`) removes the snapshot.
+
+You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
+
+{{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator showing how many snapshots have been generated" style="width:100%;">}}
+
+When a notebook contains a graph with data that is past its data retention limits, the notebook displays an inline snapshot of the graph. The snapshot is a static image, but it is replaced if you edit the underlying graph.
+
+### Permissions
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][21] that may edit a particular notebook:
-1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+Use our access controls to restrict view and edit access to only yourself:
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **Private to me**.
+1. Click **Save**.
+
+Use granular access controls to limit the [roles][7] that may edit a particular notebook:
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **Custom**.
+1. Update the Organization access to **Viewer** to revoke edit access from the rest of the organization.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**
-
-**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
-
-To restore general access to a notebook with restricted access, follow the steps below:
-1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
 1. Click **Save**.
 
-## Further Reading
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving.
+
+You must have edit access to restore general access to a restricted notebook. Complete the following steps:
+1. While viewing a notebook, click the **Share** button in the upper right.
+1. Select **My Org**.
+1. Click **Save**.
+
+## Finding notebooks
+
+The [Notebooks List][1] page is the place to find all of your notebooks.
+
+<!-- TODO Add updated image from new notebooks -->
+
+### Search
+
+The search field supports full-text search. Type your query to display the relevant notebooks as results.
+
+### Filtering
+
+You can filter notebooks with the following methods:
+| Filter Type      | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| **Author**       | To filter by author, select the author dropdown and enter names to filter by. |
+| **Team**         | To filter by team, select the team dropdown and enter team names to filter by. |
+| **Notebook Type**| Filter by investigation, postmortem, runbook, report, or documentation.     |
+| **Modified Date**| Filter based on how recently a notebook was edited using the modified date dropdown. |
+
+There are also quick filters to access your notebooks and notebooks tagged with your teams.
+
+### Jump back in
+
+If no filters are enabled, the Jump Back In section appears, displaying the most recent notebooks you've viewed or edited.
+
+<!-- TODO Add updated image from new notebooks -->
+
+### Sorting notebooks
+
+You can sort notebooks by selecting the ⭐, details, or modified headers to sort by those values.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://www.markdownguide.org/basic-syntax/#images-1
-[3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /notebooks/guide/version_history
+[2]: https://app.datadoghq.com/notebook/template-gallery
+[3]: /dashboards/querying/#graphing-editor
+[4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /dashboards/template_variables/
-[6]: https://daringfireball.net/projects/markdown/
-[7]: https://mermaid.js.org/
-[8]: /dashboards/widgets/free_text/
-[9]: /dashboards/widgets/timeseries/
-[10]: /dashboards/widgets/top_list/
-[11]: /dashboards/widgets/table/
-[12]: /dashboards/widgets/query_value/
-[13]: /dashboards/widgets/heatmap/
-[14]: /dashboards/widgets/distribution/
-[15]: /dashboards/widgets/list/
-[16]: /dashboards/widgets/treemap/
-[17]: /dashboards/widgets/funnel/
-[18]: /dashboards/widgets/pie_chart/
-[19]: /dashboards/widgets/geomap/
-[20]: /dashboards/widgets/slo/
-[21]: /account_management/rbac/
+[6]: /notebooks/guide/version_history
+[7]: /account_management/rbac/

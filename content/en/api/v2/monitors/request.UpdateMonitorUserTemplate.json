@@ -1,0 +1,32 @@
+{
+  "data": {
+    "attributes": {
+      "description": "A description.",
+      "monitor_definition": {
+        "message": "A msg.",
+        "name": "A name example-monitor",
+        "query": "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100",
+        "type": "query alert"
+      },
+      "tags": [
+        "integration:Azure"
+      ],
+      "template_variables": [
+        {
+          "available_values": [
+            "value1",
+            "value2"
+          ],
+          "defaults": [
+            "defaultValue"
+          ],
+          "name": "regionName",
+          "tag_key": "datacenter"
+        }
+      ],
+      "title": "Postgres DB example-monitor"
+    },
+    "id": "00000000-0000-1234-0000-000000000000",
+    "type": "monitor-user-template"
+  }
+}

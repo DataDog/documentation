@@ -1,10 +1,12 @@
-site_name: "Datadog Infrastructure and Application Monitoring"
-meta_title: Getting Started with Datadog
-meta_description: Datadog, the leading service for cloud-scale monitoring.
-disclaimer: "이 페이지는 아직 한국어로 제공되지 않으며 번역 작업 중입니다. 번역에 관한 질문이나 의견이 있으시면 언제든지 저희에게 연락해 주십시오."
 announcement_banner:
-  desktop_message: "14일 동안 무료 트라이얼을 신청하시면 원하는 갯수의 서버를 모니터링하실수 있습니다"
-  mobile_message: "14일 동안 무료 트라이얼을 신청하시면 원하는 갯수의 서버를 모니터링하실수 있습니다"
-  external_link: https://www.datadoghq.com/ko/free-datadog-trial/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-coreplatform-korea-docs-announcement-trial-freetrial-ko
-exclude: []
-translate_status_banner: "이 번역은 최신 버전이 아닙니다. 최신 한국어 버전을 보려면 여기를 클릭하세요"
+  desktop_message: Read the 2025 State of Containers and Serverless Report!
+  external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
+  mobile_message: Read the State of Containers and Serverless Report!
+disclaimer: 이 페이지는 아직 한국어로 제공되지 않습니다. 번역 작업 중입니다. <br>현재 번역 프로젝트에 대한 질문이나 피드백이 있으신
+  경우<a href="https://docs.datadoghq.com/ko/help/"> 언제든지 연락주시기 바랍니다.</a>
+meta_description: 클라우드 스케일 모니터링의 선두주자, Datadog
+meta_title: Datadog로 시작하기
+site_name: Datadog 인프라스트럭처 및 응용 프로그램 모니터링
+site_support_banner: 이 제품은 선택한 <a href="/getting_started/site">Datadog 사이트</a>에서 지원되지
+  않습니다.
+translate_status_banner: 이 번역은 최신 버전이 아닙니다. 최신 영문 버전을 보려면 여기를 클릭하세요.

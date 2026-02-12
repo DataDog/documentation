@@ -1,5 +1,6 @@
 ---
 title: Saved Views
+description: "Save RUM Explorer configurations including queries, facets, visualizations, and time ranges for quick access and team sharing."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

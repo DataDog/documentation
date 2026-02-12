@@ -18,7 +18,7 @@ further_reading:
 title: 사용자 관리
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
+<div class="alert alert-danger">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
 {{< /site-region >}}
 
 Datadog **Organization Settings**의 **User** 탭에서 사용자와 사용자에게 할당된 역할을 관리하세요. 오른쪽에서 **List View** 또는 **Grid View**를 눌러 목록 보기와 그리드 보기 화면을 전환할 수 있습니다.
@@ -34,7 +34,7 @@ Datadog **Organization Settings**의 **User** 탭에서 사용자와 사용자�
 **참조**: 사용자 초대(Invite User) 권한이 있는 사용자는 본인이 보유한 모든 역할에 사용자를 초대할 수 있습니다. 사용자 초대 및 액세스 관리(Access Management) 권한이 있는 사용자는 모든 역할에 사용자를 초대할 수 있습니다.
 5. **Send Invites**를 클릭합니다.
 
-신규 사용자는 로그인 링크가 담인 이메일을 받습니다 사용자는 로그인하기 전까지 `Invite Pending` 상태로 표시됩니다. 로그인하기 전에 초대를 취소하려면 목록 보기 화면에서 사용자 열 오른쪽이나 그리드 보기 화면의 사용자 박스에 있는 **Delete Invite** 버튼을 누르세요.
+신규 사용자는 로그인 링크가 담긴 이메일을 받습니다. 이 링크는 48시간 동안 유효합니다. 사용자는 로그인하기 전까지 `Invite Pending` 상태로 표시됩니다. 로그인하기 전에 초대를 취소하려면 목록 보기 화면에서 사용자 열 오른쪽이나 그리드 보기 화면의 사용자 박스에 있는 **Delete Invite** 버튼을 누르세요.
 
 목록 보기 화면에서 초대를 재전송하려면 사용자를 클릭해 사용자 패널을 연 다음 **Resend Invite**를 클릭합니다. 또는 그리드 보기 화면에서 사용자 상자 위에 커서를 올린 다음 **Resend Invite**를 선택하세요.
 
@@ -65,7 +65,7 @@ Datadog **Organization Settings**의 **User** 탭에서 사용자와 사용자�
 2. 사용자 열 오른쪽의 **Edit** 버튼을 클릭합니다.
 3. **Override Default Login Methods** 옆의 토글을 전환해 사용자의 설정을 덮어쓰도록 활성화하거나 비활성화하세요.
 4. 덮어쓰기를 활성화한 경우, 사용자가 Datadog에 접속할 때 사용할 수 있는 로그인 수단 세트를 선택하세요. 하나의 옵션이 될 수도 있고, 조직에서 설정한 모든 옵션이 될 수도 있습니다.
-5. **Save**를 클릭합니다.
+5. **저장**을 클릭합니다.
 
 
 **참조**: 덮어쓰기는 유효한 로그인 수단에서만 설정할 수 있습니다. SAML을 설정하지 않은 경우에는 사용자가 덮어쓰기할 로그인 수단으로 선택할 수 없습니다.

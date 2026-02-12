@@ -42,7 +42,7 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 6.0.0
+integration_version: 6.1.1
 is_public: true
 manifest_version: 2.0.0
 name: marklogic

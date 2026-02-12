@@ -15,7 +15,7 @@ further_reading:
 
 In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language and version, the information collected about your profile differs.
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php,ddprof,full_host" >}}
 {{< programming-lang lang="java" >}}
 
 Once profiling is enabled, the following profile types are collected for [supported Java versions][1]:
@@ -41,7 +41,7 @@ Heap Live Size (in Preview, 1.39.0+)
 _Requires: Java 11.0.23+, 17.0.11+, 21.0.3+ or 22+_ <br />
 
 Wall Time in Native Code
-: The elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
+: The elapsed time spent by each method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
 
 Class Load
 : The number of classes loaded by each method.
@@ -123,10 +123,10 @@ Allocated Memory
 : The amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Heap Live Objects
-: The number of objects allocated by each function in heap memory that have not yet been garbage collected. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The number of objects allocated by each function in heap memory that remain in use after garbage collection. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not yet been garbage collected. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and [identifying potential memory leaks][4].
+: The amount of heap memory allocated by each function that remains in use after garbage collection. Under default settings (GOGC=100), this will typically represent ~50% of the RSS usage of the process. Go calls this `inuse_space`. Use this metric to review memory consumption and [diagnose leaks][4]. For more details about how Go manages memory, see [Go memory metrics demystified][5] and [A Guide to the Go Garbage Collector][6].
 
 Mutex
 : The time functions have been waiting on mutexes during the profiling period (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
@@ -138,13 +138,15 @@ Goroutines
 : A snapshot of the number of goroutines currently executing the same functions (both on-CPU and waiting off-CPU). An increasing number of goroutines between snapshots can indicate that the program is leaking goroutines. In most healthy applications this profile is dominated by worker pools and the number of goroutines they use. Applications that are extremely latency-sensitive and use a large number of goroutines (> 10.000) should be aware that enabling this profile requires stop-the-world pauses. The pauses occur only once every profiling period (default 60s) and normally last for around `1µsec` per goroutine. Typical applications with a p99 latency SLO of around `100ms` can generally ignore this warning. See Datadog's [Goroutine Profiling in Go][2] research for more in-depth information.
 
 #### Delta profiles
-<div class="alert alert-info"><strong>Note</strong>: In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>accumulated since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. Delta profiling is on by default. Profiler version <code>1.35.0</code> allows you to disable delta profiles using the <code>WithDeltaProfiles</code> option. <br/><br/>As of profiler version <code>1.37.0</code>, accumulated profiles are no longer uploaded when delta profiling is enabled to reduce upload bandwidth usage. <a href="/help/">Contact Support</a> to discuss your use case if you rely on the full accumulated profiles.</div>
+<div class="alert alert-info">In Go profiler versions before <code>1.33.0</code>, Allocations, Allocated Memory, Mutex, and Block metrics are shown as measures <em>accumulated since the process was started</em>, as opposed to <em>during the profiling period</em>. The change to delta profiles in version <code>1.33.0</code> lets you see how these measures are changing instead of accumulating. Delta profiling is on by default. Profiler version <code>1.35.0</code> allows you to disable delta profiles using the <code>WithDeltaProfiles</code> option. <br/><br/>As of profiler version <code>1.37.0</code>, accumulated profiles are no longer uploaded when delta profiling is enabled to reduce upload bandwidth usage. <a href="/help/">Contact Support</a> to discuss your use case if you rely on the full accumulated profiles.</div>
 
 
 [1]: https://github.com/DataDog/go-profiler-notes/blob/main/block.md
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
 [3]: /profiler/enabling/go#requirements
 [4]: /profiler/guide/solve-memory-leaks
+[5]: https://www.datadoghq.com/blog/go-memory-metrics/
+[6]: https://go.dev/doc/gc-guide
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -160,17 +162,17 @@ Allocations (v2.3.0+)
 : The number of objects allocated by each method during the profiling period (default: 60s), including allocations which were subsequently freed. This is useful for investigating garbage collection load.<br />
 _Requires:_ [Manual enablement][2]
 
-Heap Live Objects (alpha, v2.3.0+)
+Heap Live Objects (Preview, v2.18.0+)
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 3.1+_ and [manual enablement][2]
+_Requires: Ruby 3.1+_ and [manual enablement][2] (Not yet compatible with Ruby 4)
 
-Heap Live Size (alpha, v2.3.0+)
+Heap Live Size (Preview, v2.18.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Ruby 3.1+_ and [manual enablement][2]
+_Requires: Ruby 3.1+_ and [manual enablement][2] (Not yet compatible with Ruby 4)
 
-GVL profiling (in Timeline) (preview, v2.4.0+)
+GVL profiling (in Timeline) (v2.11.0+)
 : Records time when threads are prevented from working by other "noisy neighbor" threads, including background threads. This is useful for investigating latency spikes in the application when using the timeline visualization.<br />
-_Requires: Ruby 3.2+_ and [manual enablement][2]
+_Requires: Ruby 3.2+_
 
 [1]: /profiler/enabling/ruby/#requirements
 [2]: /profiler/enabling/ruby/#configuration
@@ -181,12 +183,14 @@ Once profiling is enabled, the following profile types are collected for [suppor
 
 CPU
 : The time each function spent running on the CPU, including JavaScript and native code.<br />
+: CPU profiling is available on Linux and macOS. The feature is not available on Windows.
 
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
 Heap Live Size
 : The amount of heap memory allocated by each function that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: Deep stack traces in Heap Live Size profiles are truncated to 64 frames.
 
 [1]: /profiler/enabling/nodejs/#requirements
 {{< /programming-lang >}}
@@ -203,17 +207,33 @@ CPU (v2.15+)
 Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
-Allocations (in Preview, v2.18+)
-: The number and size of allocated objects by each method, as well as their type.<br />
-_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+_
+Allocations (v3.28+)
+: The number and size of allocated objects by each method, as well as their type.
+For .NET Framework, the size is not available.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 6+, but Datadog recommends .NET 10+ for more accurate sampling.
 
 Lock (v2.49+)
 : The number of times threads are waiting for a lock and for how long.<br />
-_Requires: Preview .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
+_Requires: .NET Framework (requires Datadog Agent 7.51+) / .NET 5+_
 
-Live Heap (in Preview, v2.22+)
+Live Heap (v3.28+)
 : A subset of the allocated objects (with their class name) that are still in memory.<br />
+_Requires: .NET 7+ but Datadog recommends .NET 10+ for more accurate sampling.
+
+Outgoing HTTP requests (in Timeline) (in beta v3.19+)
+: Start and end of outgoing HTTP requests with the duration of the different phases (DNS, security handshake, socket, request/response) and possible unexpected redirections.<br />
 _Requires: .NET 7+_
+
+Thread lifetime (in Timeline) (v3.19+)
+: Start and end of threads life to easily detect ThreadPool starvation and short lived threads.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
+
+Garbage Collector CPU consumption (v3.19+)
+: The time garbage collector's threads spent running on the CPU.<br />
+_Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
+
+**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results.
+
 
 [1]: /profiler/enabling/dotnet/#requirements
 {{< /programming-lang >}}
@@ -238,6 +258,12 @@ _Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2
 Thrown Exceptions (v0.92+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type.
 
+File I/O (in beta, v1.7.2+)
+: The time each method spent reading from and writing to files, as well as the amount of bytes read from and written to files.
+
+Socket I/O (in beta, v1.7.2+)
+: The time each method spent reading from and writing to a socket, as well as the amount of bytes read from and written to sockets.
+
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="ddprof" >}}
@@ -255,7 +281,18 @@ Allocated memory
 
 [1]: /profiler/enabling/ddprof/
 {{< /programming-lang >}}
+{{< programming-lang lang="full_host" >}}
+
+Once profiling is enabled, the following profile types are collected for [supported languages and versions][1]:
+
+CPU Time (eBPF)
+: Time each method or function spent running on the CPU. In multi-threaded programs, CPU time can be greater than elapsed time: if 2 threads are running during 45s each, you'd see "eBPF CPU Time, 1m 30s per minute".
+
+[1]: /profiler/enabling/full_host/
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
+
+
 
 
 ## Further Reading

@@ -20,6 +20,7 @@
   "options": {
     "accept_self_signed": true,
     "checkCertificateRevocation": true,
+    "disableAiaIntermediateFetching": true,
     "tick_every": 60
   },
   "subtype": "ssl",

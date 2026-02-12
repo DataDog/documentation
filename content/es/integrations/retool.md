@@ -24,7 +24,7 @@ author:
   support_email: support@retool.com
 categories:
 - herramientas de desarrollo
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/retool/README.md
 display_on_public_website: true
@@ -39,26 +39,26 @@ name: retool
 public_title: Retool
 short_description: Retool es una forma rápida de crear herramientas internas
 supported_os:
-- Linux
-- macOS
-- Windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Categoría::Herramientas de desarrollo
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Developer Tools
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Retool es una forma rápida de crear herramientas internas
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Retool
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general

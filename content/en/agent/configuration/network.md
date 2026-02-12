@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
@@ -39,17 +39,26 @@ Add the following domains to your inclusion list to allow for Agent installation
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 - `apt.datadoghq.com`
+- `windows-agent.datadoghq.com`
 
 ## Destinations
+<div class="alert alert-warning">
+Starting with version 7.67.0, the Agent converts Datadog sites to fully qualified domain names (by adding a dot at the end of the domain) to reduce the number of DNS queries.
+For example, it sends APM payloads to <code>trace.agent.datadoghq.com.</code>.<br>
+This behavior can be disabled in version 7.72.0 and later by setting <code>convert_dd_site_fqdn.enabled</code> to <code>false</code> in the configuration, or with the environment variable <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
+</div>
 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[LLM Observabilty][23]
+: `llmobs-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Container Images][13]
 : `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Live Containers][3] & [Live Process][4]
+[Live Containers][3], [Live Process][4], [Cloud Network Monitoring][24], [Universal Service Monitoring][25]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Device Monitoring][10]
@@ -70,13 +79,16 @@ Add the following domains to your inclusion list to allow for Agent installation
 [Real User Monitoring (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+[Cloud Security Vulnerabilities][29]
+: `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [Synthetic Monitoring Private Locations][8]
 : Synthetics Worker v1.5.0 or later: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint you need to configure.<br>
 API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -85,101 +97,22 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /agent/remote_config
+[101]: /remote_configuration
 [102]: /database_monitoring/
 
 {{% /site-region %}}
 
-{{% site-region region="us" %}}
-[Logs][200] & [HIPAA logs][201]
-: TCP: `agent-intake.logs.datadoghq.com`<br>
-HTTP: `agent-http-intake.logs.datadoghq.com`<br>
-Other: See [logs endpoints][203]
+{{% logs-tcp-disclaimer %}}
 
-[HIPAA logs legacy][201]
-: `tcp-encrypted-intake.logs.datadoghq.com`<br>
-`lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.datadoghq.com`<br>
-`http-encrypted-intake.logs.datadoghq.com`
+[Logs][30] & [HIPAA logs][31]
+: (Deprecated) TCP: {{< region-param key=tcp_endpoint code="true" >}}<br>
+HTTP: {{< region-param key=agent_http_endpoint code="true" >}}<br>
+Other: See [logs endpoints][32]
 
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[203]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
+[HIPAA logs legacy][31] (Deprecated, TCP not supported)
+: {{< region-param key=hipaa_logs_legacy code="true" >}}
 
-{{% site-region region="eu" %}}
-[Logs][200] & [HIPAA logs][201]
-: TCP: `agent-intake.logs.datadoghq.eu`<br>
-HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `tcp-encrypted-intake.logs.datadoghq.eu`<br>
-`lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
-`gcp-encrypted-intake.logs.datadoghq.eu`<br>
-`http-encrypted-intake.logs.datadoghq.eu`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="us3" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
-`http-encrypted-intake.logs.us3.datadoghq.com`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="us5" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
-`gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
-`http-encrypted-intake.logs.us5.datadoghq.com`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="ap1" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
-Other: See [logs endpoints][202]
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-{{% site-region region="gov" %}}
-[Logs][200] & [HIPAA logs][201]
-: HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
-Other: See [logs endpoints][202]
-
-[HIPAA logs legacy][201]
-: `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
-`gcp-encrypted-intake.logs.ddog-gov.com`<br>
-`http-encrypted-intake.logs.ddog-gov.com`
-
-[200]: /logs/
-[201]: /data_security/logs/#hipaa-enabled-customers
-[202]: /logs/log_collection/#logging-endpoints
-{{% /site-region %}}
-
-All other Agent data
+[Metrics][26], [Service Checks][27], [Events][28], and other Agent metadata
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 reports to `7-31-0-app.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (For example, display validity of configured API key):<br>
@@ -232,7 +165,7 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 ## Open ports
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 All outbound traffic is sent over SSL through TCP or UDP.
 <br><br>
 Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
@@ -242,13 +175,14 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 #### Outbound
 
-{{% site-region region="us" %}}
+{{% site-region region="us,eu" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring | 443 | TCP | Most Agent data uses port 443. |
 | [Custom Agent Autoscaling][22] | 8443 | TCP |  |
-| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| Log collection | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice.
+For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][21]. |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
 [19]: /agent/faq/network-time-protocol-ntp-offset-issues/
@@ -258,27 +192,11 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="eu" %}}
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 
 | Product/Functionality | Port | Protocol | Description |
 | ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
-| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
-| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
-| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
-
-[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[20]: /integrations/ntp/#overview
-[21]: /logs/log_collection/#logging-endpoints
-[22]: /containers/guide/cluster_agent_autoscaling_metrics
-
-{{% /site-region %}}
-
-{{% site-region region="us3,us5,gov,ap1" %}}
-
-| Product/Functionality | Port | Protocol | Description |
-| ------  | ---- | ------- | ----------- |
-| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics<br>Cloud Network Monitoring<br>Universal Service Monitoring | 443 | TCP | Most Agent data uses port 443. |
 | NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
 [19]: /agent/faq/network-time-protocol-ntp-offset-issues/
@@ -351,7 +269,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-warning">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 
@@ -367,6 +285,18 @@ Agent v7.27.0 or later stores the metrics on disk when the memory limit is reach
 The metrics are stored in the folder defined by the `forwarder_storage_path` setting, which is by default `/opt/datadog-agent/run/transactions_to_retry` on Unix systems, and `C:\ProgramData\Datadog\run\transactions_to_retry` on Windows.
 
 To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 80 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
+
+## Installing the Datadog Operator
+
+If you are installing the Datadog Operator in a Kubernetes environment with limited connectivity, you need to allowlist the following endpoints for TCP port 443, based on your location:
+
+- `gcr.io/datadoghq` (GCR US)
+- `eu.gcr.io/datadoghq` (GCR Europe)
+- `asia.gcr.io/datadoghq` (GCR Asia)
+- `datadoghq.azurecr.io` (Azure)
+- `public.ecr.aws/datadog` (AWS)
+- `docker.io/datadog` (DockerHub)
+
 
 ## Further Reading
 
@@ -394,3 +324,13 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [20]: /integrations/ntp/#overview
 [21]: /logs/log_collection/#logging-endpoints
 [22]: /containers/guide/cluster_agent_autoscaling_metrics
+[23]: /llm_observability/
+[24]: /network_monitoring/cloud_network_monitoring/
+[25]: /universal_service_monitoring/
+[26]: /metrics/
+[27]: /developers/service_checks/
+[28]: /events/
+[29]: /security/cloud_security_management/vulnerabilities/
+[30]: /logs/
+[31]: /data_security/logs/#hipaa-enabled-customers
+[32]: /logs/log_collection/#logging-endpoints

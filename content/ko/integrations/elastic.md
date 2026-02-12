@@ -46,12 +46,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
-integration_title: ElasticSearch
-integration_version: 6.3.1
+integration_title: Elasticsearch
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: elastic
-public_title: ElasticSearch
+public_title: Elasticsearch
 short_description: 전체 클러스터 상태부터 JVM 힙 사용량 및 그 사이의 모든 것을 모니터링하세요.
 supported_os:
 - linux
@@ -79,13 +79,13 @@ tile:
   - resource_type: 블로그
     url: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
   support: README.md#Support
-  title: ElasticSearch
+  title: Elasticsearch
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Elastic search dashboard][1]
+![Elasticsearch dashboard][1]
 
 ## 개요
 
@@ -143,9 +143,9 @@ Elasticsearch 검사는 [Datadog Agent][2] 패키지에 포함되어 있어 추�
 
       - AWS Elasticsearch 서비스에 대한 Agent의 Elasticsearch 통합을 사용하려면 AWS Elasticsearch 통계 URL을 가리키도록 `url` 파라미터를 설정합니다.
       - Amazon ES 구성 API에 대한 모든 요청은 서명해야 합니다. 자세한 내용은 [OpenSearch 서비스 요청 만들기 및 서명][4]을 참조하세요.
-      - `aws` 인증 유형은 [boto3][5]를 사용하여 `.aws/credentials`에서 AWS 크리덴셜을 자동으로 수집합니다. `conf.yaml`에서 `auth_type: basic`를 사용하고 `username: <USERNAME>` 및 `password: <PASSWORD>`으로 크리덴셜을 정의합니다. 
+      - `aws` 인증 유형은 [boto3][5]를 사용하여 `.aws/credentials`에서 AWS 크리덴셜을 자동으로 수집합니다. `conf.yaml`에서 `auth_type: basic`를 사용하고 `username: <USERNAME>` 및 `password: <PASSWORD>`으로 크리덴셜을 정의합니다.
       - Elasticsearch에서 모니터링할 적절한 권한이 있는 사용자와 역할(아직 없는 경우)을 생성해야 합니다. 이는 Elasticsearch에서 제공하는 REST API 또는 Kibana UI를 통해 수행할 수 있습니다.
-      - Elastic Search에서 보안 기능을 사용하도록 설정한 경우, API를 사용하는 동안 `monitor` 또는 `manage` 권한을 부여하여 Elastic Search 인덱스를 호출할 수 있습니다.
+      - If you have enabled security features in Elasticsearch, you can use `monitor` or `manage` privilege while using the API to make the calls to the Elasticsearch indices.
       - 생성된 역할에 다음 속성을 포함합니다.
         ```json
         name = "datadog"
@@ -166,9 +166,9 @@ Elasticsearch 검사는 [Datadog Agent][2] 패키지에 포함되어 있어 추�
 
 ###### 커스텀 쿼리
 
-ElasticSearch 통합을 사용하면 `custom_queries` 구성 옵션을 사용하여 커스텀 쿼리를 통해 커스텀 메트릭을 수집할 수 있습니다.
+The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option.
 
-**참고:** 커스텀 쿼리를 실행할 때 읽기 전용 계정을 사용하여 ElasticSearch 인스턴스가 변경되지 않도록 하세요.
+**Note:** When running custom queries, use a read only account to ensure that the Elasticsearch instance does not change.
 
 ```yaml
 custom_queries:
@@ -209,7 +209,7 @@ custom_queries:
 Datadog APM은 Elasticsearch와 통합되어 분산 시스템 전체의 트레이스를 확인합니다. Datadog Agent v6+에서는 트레이스 수집이 기본적으로 활성화되어 있습니다. 트레이스 수집을 시작하려면 다음 안내를 따르세요.
 
 1. [Datadog에서 트레이스 수집을 활성화합니다][9].
-2. [ElasticSearch에 요청하는 애플리케이션을 계측합니다][10].
+2. [Instrument your application that makes requests to Elasticsearch][10].
 
 ##### 로그 수집
 
@@ -529,7 +529,7 @@ Agent 컨테이너의 필수 환경 변수:
 - `slm_stats`는 **elasticsearch.slm.\*** 메트릭을 전송합니다.
 
 ### 메트릭
-{{< get-metrics-from-git "elastic" >}}
+{{< get-metrics-from-git "elasticsearch" >}}
 
 
 ### 이벤트
@@ -537,7 +537,7 @@ Agent 컨테이너의 필수 환경 변수:
 Elasticsearch 검사는 Elasticsearch 클러스터의 전체 상태가 빨간색, 노란색 또는 녹색으로 변경될 때마다 Datadog에 이벤트를 내보냅니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "elastic" >}}
+{{< get-service-checks-from-git "elasticsearch" >}}
 
 
 ## 트러블슈팅

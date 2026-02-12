@@ -1,31 +1,63 @@
 ---
+app_id: azure-cosmosdb
+app_uuid: 57c2e89b-5ad8-4bef-8012-96087b66b6bb
+assets:
+  dashboards:
+    azure_cosmosdb: assets/dashboards/azure_cosmosdb.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.cosmosdb.data_usage
+      metadata_path: metadata.csv
+      prefix: azure.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 285
+    source_type_name: Azure CosmosDB
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - nube
 - almacenes de datos
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas principales de Azure Cosmos DB.
-doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-cosmos-db-integrated-cache-datadog/
-  tag: Blog
-  text: Monitorizar la caché integrada de Azure Cosmos DB con Datadog
 git_integration_title: azure_cosmosdb
-has_logo: true
 integration_id: azure-cosmosdb
-integration_title: Microsoft Azure Cosmos DB
+integration_title: Azure CosmosDB
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_cosmosdb
-public_title: Integración de Datadog y Microsoft Azure Cosmos DB
-short_description: Rastrea las métricas principales de Azure Cosmos DB.
-version: '1.0'
+public_title: Azure CosmosDB
+short_description: Rastrea las métricas clave de Azure CosmosDB.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas clave de Azure CosmosDB.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: Blog
+    url: https://www.datadoghq.com/blog/azure-cosmos-db-integrated-cache-datadog/
+  support: README.md#Support
+  title: Azure CosmosDB
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Cosmos DB es un servicio de base de datos multimodelo distribuido globalmente que admite bases de datos de documentos, clave-valor, columnas anchas y gráficos.
@@ -36,7 +68,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Cosmos 
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requieren pasos adicionales.
 
 ## Datos recopilados
 
@@ -48,15 +80,15 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure Cosmos DB no incluye ningún evento.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de Azure Cosmos DB no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -34,7 +34,7 @@ draft: false
 git_integration_title: riak
 integration_id: riak
 integration_title: Riak
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: riak

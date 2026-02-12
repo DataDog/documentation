@@ -30,7 +30,7 @@ For other scenarios, including the application and Agent on a host, the applicat
 
 This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of Datadog APM setup, use one of the host or container tutorials instead.
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.
+See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.  {{% tracing-go-v2 %}}
 
 ### Prerequisites
 
@@ -162,10 +162,10 @@ To enable tracing support:
 1. Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 
    {{< code-block lang="go" filename="cmd/notes/main.go">}}
-     sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
-     chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi"
-     httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+     sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
+     chitrace "github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2"
+     httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+     "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
    {{< /code-block >}}
 
 1. In the `main()` function, uncomment the following lines:
@@ -180,11 +180,11 @@ To enable tracing support:
    })){{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-   r.Use(chitrace.Middleware(chitrace.WithServiceName("notes"))){{< /code-block >}}
+   r.Use(chitrace.Middleware(chitrace.WithService("notes"))){{< /code-block >}}
 
 1. In `setupDB()`, uncomment the following lines:
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
-   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithServiceName("db"))
+   sqltrace.Register("sqlite3", &sqlite3.SQLiteDriver{}, sqltrace.WithService("db"))
    db, err := sqltrace.Open("sqlite3", "file::memory:?cache=shared"){{< /code-block >}}
 
    {{< code-block lang="go" filename="cmd/notes/main.go" >}}
@@ -213,7 +213,8 @@ To enable tracing support:
    Also remove the comment around the following import:
 
    {{< code-block lang="go" disable_copy="true" filename="notes/notesController.go" collapsible="true" >}}
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"{{< /code-block >}}
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   {{< /code-block >}}
 
 1. The `doLongRunningProcess` function creates child spans from a parent context. Remove the comments to enable it:
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
@@ -437,3 +438,4 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/apm/traces
 [10]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
+[11]: /tracing/trace_collection/custom_instrumentation/go/migration

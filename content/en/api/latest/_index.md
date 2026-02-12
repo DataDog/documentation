@@ -1,6 +1,6 @@
 ---
 title: API Reference
-type: documentation
+type: api
 further_reading:
   - link: /api/latest/using-the-api/
     tag: Documentation
@@ -34,7 +34,7 @@ To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collect
 
 [Using the API][4] is a guide to the endpoints.
 
-**Notes**: 
+**Notes**:
    - Add your API and application key values to the **Variables** tab of the Datadog API Collection.
    - cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils with the [Homebrew package manager][5]: `brew install coreutils`
 
@@ -237,9 +237,9 @@ Or check out the libraries directly:
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-Trying to get started with the application instead? Check out Datadogs general [Getting Started docs][7].
+Trying to get started with the application instead? Check out Datadog's general [Getting Started docs][7].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

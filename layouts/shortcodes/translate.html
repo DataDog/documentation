@@ -1,21 +1,21 @@
-{{ $dot := . }}
-{{ $key := .Get "key" }}
+{{- $dot := . -}}
+{{- $key := .Get "key" -}}
 <!-- attempts to load a data file at the same path/filename as md file e.g content/foo/bar.md will try look for data/foo/bar.yaml -->
-{{ $.Scratch.Set "data" "" }}
-{{ if (fileExists (print "data/" $dot.Page.Lang "/" $dot.Page.File.Dir (replace $dot.Page.File.TranslationBaseName "-" "_") ".yaml")) }}
-    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data $dot.Page.Lang) }}
-    {{ range $k, $v := (split $dot.Page.File.Dir "/") }}
-        {{ if ne $v "/"}}
-            {{ if ne $v ""}}
-                {{ $.Scratch.Set "data" (index ($.Scratch.Get "data") $v) }}
-            {{ end }}
-        {{ end }}
-    {{ end }}
-    {{ $.Scratch.Set "data" (index ($.Scratch.Get "data") (replace $dot.Page.File.TranslationBaseName "-" "_")) }}
-{{ end }}
+{{- $.Scratch.Set "data" "" -}}
+{{- if (fileExists (print "data/" $dot.Page.Lang "/" $dot.Page.File.Dir (replace $dot.Page.File.TranslationBaseName "-" "_") ".yaml")) -}}
+    {{- $.Scratch.Set "data" (index $dot.Page.Site.Data $dot.Page.Lang) -}}
+    {{- range $k, $v := (split $dot.Page.File.Dir "/") -}}
+        {{- if ne $v "/" -}}
+            {{- if ne $v "" -}}
+                {{- $.Scratch.Set "data" (index ($.Scratch.Get "data") $v) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $.Scratch.Set "data" (index ($.Scratch.Get "data") (replace $dot.Page.File.TranslationBaseName "-" "_")) -}}
+{{- end -}}
 <!-- output the value from datafile if we have it otherwise look in i18n -->
-{{ if eq ($.Scratch.Get "data") $key }}
-    {{ safeHTML (index ($.Scratch.Get "data") $key) }}
-{{ else }}
-    {{- i18n $key -}}
-{{ end }}
+{{- if eq ($.Scratch.Get "data") $key -}}
+{{- safeHTML (index ($.Scratch.Get "data") $key) -}}
+{{- else -}}
+{{- i18n $key -}}
+{{- end -}}

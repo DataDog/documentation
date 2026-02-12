@@ -1,6 +1,6 @@
 ---
 title: Real User Monitoring & Session Replay Guides
-
+description: "Comprehensive guides for RUM and Session Replay implementation, optimization, and best practices for web and mobile applications."
 private: true
 disable_toc: true
 cascade:
@@ -14,7 +14,6 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}Understanding the RUM event hierarchy{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Compute Apdex and custom performance indicators with RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Create alerts with RUM data{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
@@ -23,6 +22,8 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigate obfuscated stack traces with RUM debug symbols{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/retention_filter_best_practices" >}}Retention filter best practices{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-tracing-native-ios-android-apps" >}}Best practices for tracing native iOS and Android apps{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}

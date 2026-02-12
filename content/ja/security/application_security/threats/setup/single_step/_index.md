@@ -1,20 +1,20 @@
 ---
 external_redirect: /security/application_security/threats/threat_detection/
-title: シングルステップインスツルメンテーションを使用して ASM の脅威検出と防御を有効化する
+title: シングルステップインスツルメンテーションを使用して AAP の脅威検出と防御を有効化する
 ---
 
-<div class="alert alert-info">シングルステップインスツルメンテーションを使用した ASM の脅威検出および防御機能の有効化は、現在プレビュー版です。</div>
+<div class="alert alert-info">シングルステップインスツルメンテーションを使用した AAP の脅威検出および防御機能の有効化は、現在プレビュー版です。</div>
 
 ## 要件
 
 - **最小 Agent バージョン 7.53.0**
 - **Helm の最小対応バージョン: 3.62.0** (Kubernetes デプロイ向け)
-- **対応言語およびアーキテクチャ**: シングルステップ ASM インスツルメンテーションは、`x86_64` および `arm64` アーキテクチャ上で、Java、Python、Node.js、.NET Core の各サービスのトレースのみをサポートします。
+- **対応言語およびアーキテクチャ**: シングルステップ AAP インスツルメンテーションは、`x86_64` および `arm64` アーキテクチャ上で、Java、Python、Node.js、.NET Core の各サービスのトレースのみをサポートします。
 - **オペレーティングシステム**: Linux VM (Debian、Ubuntu、Amazon Linux、CentOS/Red Hat、Fedora)、Docker、Kubernetes クラスター (Linux コンテナ)
 
 ## ワンステップで有効化
 
-[Datadog Agent をインストールまたはアップデート][1]する際に **Enable Threat Protection (new)** オプションを選択すると、Agent がインストールされ ASM が有効な状態に構成されます。これにより、追加のインストールや設定を行わずにアプリケーションを自動的にインスツルメントできます。この変更を反映させるには、サービスを再起動してください。
+[Datadog Agent をインストールまたはアップデート][1]する際に **Enable Threat Protection (new)** オプションを選択すると、Agent がインストールされ AAP が有効な状態に構成されます。これにより、追加のインストールや設定を行わずにアプリケーションを自動的にインスツルメントできます。この変更を反映させるには、サービスを再起動してください。
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_threat_detection_2.png" alt="アカウント設定 (Ubuntu セットアップページ) で、APM インスツルメンテーションと Threat Protection の有効化トグルが強調表示されている様子。" style="width:100%;" >}}
@@ -24,14 +24,14 @@ title: シングルステップインスツルメンテーションを使用し�
 {{< tabs >}}
 {{% tab "Linux ホストまたは VM" %}}
 
-1 つのコマンドで Agent のインストール、構成、起動を行うと同時に、ASM によるサービスのインスツルメンテーションも可能です。
+1 つのコマンドで Agent のインストール、構成、起動を行うと同時に、AAP によるサービスのインスツルメンテーションも可能です。
 
 Ubuntu ホストの場合
 
 1. 1 行のインストールコマンドを実行します。
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    a. `<YOUR_DD_API_KEY>` を自分の [Datadog API キー][4]に置き換えます。
@@ -49,7 +49,7 @@ Ubuntu ホストの場合
 4. ホストまたは VM 上のサービスを再起動します。
 5. [Datadog でサービスのパフォーマンス可観測性を調べます][5]。
 
-**注:** ASM Threat Protection とコードセキュリティの両方をシングルステップで有効化するには、`DD_APPSEC_ENABLED=true` と `DD_IAST_ENABLED=true` の両環境変数をインストールコマンド (1行) に追加してください。
+**注:** AAP Threat Protection とコードセキュリティの両方をシングルステップで有効化するには、`DD_APPSEC_ENABLED=true` と `DD_IAST_ENABLED=true` の両環境変数をインストールコマンド (1行) に追加してください。
 
 ### トレーシングライブラリのバージョン指定 {#lib-linux}
 
@@ -67,6 +67,7 @@ DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KE
 - Python (`python`)
 - Java (`java`)
 - Node.js (`js`)
+- PHP (`php`)
 
 **注**: Node.js のトレーシングライブラリについては、Node.js のバージョンによって互換性があります。詳細は [Datadog/dd-trace-js: JavaScript APM トレーサー][6]を参照してください。
 
@@ -77,13 +78,13 @@ Agent を通過するインスツルメンテーションされたサービス�
 例:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [2]: /ja/agent/remote_config
 [3]: /ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /ja/service_catalog/
+[5]: /ja/software_catalog/
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 {{% /tab %}}
@@ -94,7 +95,7 @@ Docker Linux コンテナの場合
 
 1. ライブラリインジェクターをインストールします。
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Docker で Agent を構成します。
    ```shell
@@ -140,6 +141,7 @@ DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENA
 - Java (`java`)
 - Node.js (`js`)
 - Ruby (`ruby`)
+- PHP (`php`)
 
 **注**: Node.js のトレーシングライブラリについては、Node.js のバージョンによって互換性があります。詳細は [Datadog/dd-trace-js: JavaScript APM トレーサー][7]を参照してください。
 
@@ -165,7 +167,7 @@ docker run -d --name dd-agent \
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /ja/service_catalog/
+[6]: /ja/software_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 
@@ -208,7 +210,7 @@ Helm でシングルステップのインスツルメンテーションを有効
 [17]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services
 {{% /tab %}}
 {{< /tabs >}}
-## シングルステップ APM および ASM インスツルメンテーションを Agent から削除する方法
+## シングルステップ APM および AAP インスツルメンテーションを Agent から削除する方法
 特定のサービス、ホスト、VM、コンテナのトレースデータを収集したくない場合は、次の手順を実行します。
 ### 特定のサービスについてインスツルメンテーションを削除する
 以下のコマンドを実行してサービスを再起動すると、そのサービスへのライブラリ注入およびトレースの生成が停止します。
@@ -219,7 +221,7 @@ Helm でシングルステップのインスツルメンテーションを有効
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. サービスを再起動します。
-3. ASM を無効化するには、アプリケーションの構成から `DD_APPSEC_ENABLED=true` 環境変数を削除し、サービスを再起動してください。
+3. AAP を無効化するには、アプリケーションの構成から `DD_APPSEC_ENABLED=true` 環境変数を削除し、サービスを再起動してください。
 {{% /tab %}}
 {{% tab "Docker" %}}
 1. サービス起動コマンドに環境変数 `DD_INSTRUMENT_SERVICE_WITH_APM` を追加します。
@@ -227,7 +229,7 @@ Helm でシングルステップのインスツルメンテーションを有効
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. サービスを再起動します。
-3. ASM を無効化するには、アプリケーションの構成から `DD_APPSEC_ENABLED=true` 環境変数を削除し、サービスを再起動してください。
+3. AAP を無効化するには、アプリケーションの構成から `DD_APPSEC_ENABLED=true` 環境変数を削除し、サービスを再起動してください。
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 1. ポッド仕様の `admission.datadoghq.com/enabled:` ラベルを `"false"` に設定します。

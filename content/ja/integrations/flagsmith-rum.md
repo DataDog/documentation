@@ -8,10 +8,10 @@ author:
   sales_email: support@flagsmith.com
   support_email: support@flagsmith.com
 categories:
-- 構成 & デプロイ
+- 構成とデプロイ
 - 問題追跡
-- developer tools
-custom_kind: integration
+- 開発ツール
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flagsmith-rum/README.md
 display_on_public_website: true

@@ -18,13 +18,16 @@ title: 브라우저 로그 수집
 - 실제 클라이언트 IP 주소와 사용자 에이전트를 기록합니다.
 - 자동 대량 포스트로 네트워크 사용을 최적화합니다.
 
+**참고**: 
+- **RUM SDK와 무관**: Browser Logs SDK는 RUM SDK 없이 사용할 수 있습니다.
+
 ## 설정
 
 **Datadog 클라이언트 토큰**: 보안상의 이유로 [API 키][1]는 브라우저 로그 SDK를 설정하는 데 사용할 수 없습니다. 키가 클라이언트 사이드 자바스크립트(Javascript) 코드에 노출되기 때문입니다. 웹 브라우저에서 로그를 수집하려면 반드시 [클라이언트 토큰][2]을 사용해야 합니다. 자세한 정보는 [클라이언트 토큰 설명서][2]를 참조하세요.
 
 **Datadog 브라우저 로그 SDK**: [NPM](#npm)를 사용해 SDK를 설정하거나 헤드 태그에서 [CDN 비동기화](#cdn-async) 또는 [CDN 동기화](#cdn-sync) 코드 스니펫을 사용합니다.
 
-**지원되는 브라우저**: 브라우저 로그 SDK는 현대의 모든 데스크탑 및 IE11를 포함하는 모바일 브라우저를 지원합니다. [브라우저 지원][4] 표를 참조하세요.
+**지원되는 브라우저**: Browser Logs SDK는 모든 최신 데스크톱 및 모바일 브라우저를 지원합니다. [브라우저 지원][4] 표를 참조하세요.
 
 ### 올바른 설치 방법 선택
 
@@ -57,13 +60,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
+    <title>Example to send logs to Datadog</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -81,13 +84,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
+    <title>Example to send logs to Datadog</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
       DD_LOGS.onReady(function() {
           DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -105,13 +108,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
+    <title>Example to send logs to Datadog</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -129,13 +132,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
+    <title>Example to send logs to Datadog</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -153,13 +156,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
+    <title>Example to send logs to Datadog</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -177,13 +180,13 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
+    <title>Example to send logs to Datadog</title>
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v5.js','DD_LOGS')
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
           window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
@@ -209,8 +212,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -228,8 +231,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         DD_LOGS.init({
@@ -247,8 +250,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -266,8 +269,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -285,8 +288,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -304,8 +307,8 @@ datadogLogs.init({
 ```html
 <html>
   <head>
-    <title>Datadog 로그 전송 예시</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -358,7 +361,7 @@ window.DD_LOGS.init({
 | `forwardConsoleLogs`       | `"all"` 또는 `"log"` `"debug"` `"info"` `"warn"` `"error"` 어레이      | No       | `[]`            | `console.*`에서 Datadog로 로그를 전달합니다. `"all"`을 사용해 전체를 전달하거나 콘솔 API 이름 어레이를 사용해 하위 집합만 전달합니다.                                                |
 | `forwardReports`           | `"all"` 또는 `"intervention"` `"deprecation"` `"csp_violation"` 어레이 | No       | `[]`            | [보고 API][8]에서 Datadog로 보고서를 전달합니다. `"all"`을 사용해 전체를 전달하거나 보고 유형 어레이를 사용해 하위 집합만 전달합니다.                                       |
 | `sampleRate`               | 숫자                                                                    | No       | `100`           | **지원 중단됨** - `sessionSampleRate` 참조                                                                                                                                             |
-| `sessionSampleRate`        | 숫자                                                                    | No       | `100`           | 추적할 세션 비율: 전체의 경우 `100`, 전체 해제의 경우 `0`. 추적된 세션만 로그를 전송합니다.                                                                                    |
+| `sessionSampleRate`        | 숫자                                                                    | No       | `100`           | 추적할 세션의 비율: `100`은 모두를 나타내고 `0`는 없음을 의미합니다. 추적된 세션만 로그를 보냅니다. 이는 Browser Logs SDK를 통해 수집된 로그에만 적용되며 RUM 데이터와는 별개입니다.                                                                                    |
 | `trackingConsent`          | `"granted"` 또는 `"not-granted"`                                            | No       | `"granted"`     | 초기 사용자 추적 동의 상태를 설정합니다. [사용자 추적 동의][15]를 참조하세요.                                                                                                         |
 | `silentMultipleInit`       | Boolean                                                                   | No       |                 | 여러 init을 포함하면서 오류를 기록하는 것을 방지합니다.                                                                                                                                    |
 | `proxy`                    | 문자열                                                                    | No       |                 | 부수적 프록시 URL(예: https://www.proxy.com/path). 자세한 정보는 전체 [프록시 설정 가이드][6]를 참조합니다.                                                                        |
@@ -370,13 +373,15 @@ window.DD_LOGS.init({
 
 `RUM` SDK를 사용할 때 옵션에 일치하는 설정이 있어야 합니다.
 
-| 파라미터                              | 유형    | 필수 | 기본값 | 설명                                                                                                                                                              |
-|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `trackSessionAcrossSubdomains`         | Boolean | No       | `false` | 동일한 사이트에 대한 하위 도메인에서 세션을 보존합니다.                                                                                                                |
-| `useSecureSessionCookie`               | Boolean | No       | `false` | 보안 세션 쿠키를 사용합니다. 이를 통해 안전하지 않은(비-HTTPS) 연결에서 전송된 로그를 비활성화합니다.                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | 파티션된 보안 크로스 사이트 세션 쿠키를 사용합니다. 이를 통해 사이트가 또 다른 iframe에서 로딩될 때 로그 SDK가 실행되도록 할 수 있습니다. `useSecureSessionCookie`를 의미합니다. |
-| `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **지원 중단됨** `usePartitionedCrossSiteSessionCookie`를 참조합니다.                                                                                                              |
-| `usePciIntake`                         | Boolean | No       | `false` | 로그를 [PCI 호환 인테이크][16]로 전달하려면 `true`로 설정합니다. PCI 호환 인테이크는 US1 사이트의 Datadog 조직에서만 사용할 수 있습니다. `usePciIntake`가 `true`로 설정되어 있고 사이트가 US1(datadoghq.com)이 아닌 경우 로그가 기본 인테이크에 전송됩니다. |
+
+| 파라미터                              | 유형                            | 필수 | 기본값    | 설명                                                                                                                                                                                                                                                              |
+| -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sessionPersistence`                   | `"cookie"` 또는 `"local-storage"` | No       | `"cookie"` | 세션 지속에 사용할 스토리지 전략입니다. `cookie` 또는 `local-storage`일 수 있습니다.                                                                                                                                                                        |
+| `trackAnonymousUser`                   | Boolean                         | No       | `true`     | 세션 전반에 걸쳐 익명 사용자 ID 수집을 활성화합니다.                                                                                                                                                                        |
+| `trackSessionAcrossSubdomains`         | Boolean                         | No       | `false`    | 동일한 사이트에 대한 하위 도메인에서 세션을 보존합니다.                                                                                                                                                                                                                |
+| `useSecureSessionCookie`               | Boolean                         | No       | `false`    | 보안 세션 쿠키를 사용합니다. 이를 통해 안전하지 않은(비-HTTPS) 연결에서 전송된 로그를 비활성화합니다.                                                                                                                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean                         | No       | `false`    | 파티션된 보안 크로스 사이트 세션 쿠키를 사용합니다. 이를 통해 사이트가 또 다른 iframe에서 로딩될 때 로그 SDK가 실행되도록 할 수 있습니다. `useSecureSessionCookie`를 의미합니다.                                                                                                 |
+| `usePciIntake`                         | Boolean                         | No       | `false`    | 로그를 [PCI 호환 인테이크][16]로 전달하려면 `true`로 설정합니다. PCI 호환 인테이크는 US1 사이트의 Datadog 조직에서만 사용할 수 있습니다. `usePciIntake`가 `true`로 설정되어 있고 사이트가 US1(datadoghq.com)이 아닌 경우 로그가 기본 인테이크에 전송됩니다. |
 
 ## 사용법
 

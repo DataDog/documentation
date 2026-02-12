@@ -34,7 +34,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ## Apache
 
-For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with PHP-FPM, use the `env[]` directive in your `www.conf` configuration file to configure the PHP tracer. For example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -47,7 +47,9 @@ env[DD_SERVICE] = my-app
 php_value datadog.service my-app
 ```
 
-Alternatively, you can use [`SetEnv`][2] from the server config, virtual host, directory, or `.htaccess` file.
+**Note:** By default, PHP-FPM does not inherit environment variables from the host system when `clear_env=yes` is set in `www.conf`. If you need to use environment variables set on the host, you must explicitly define them using the `env[]` directive.
+
+For Apache without PHP-FPM (mod_php setups), you can set environment variables directly in the server config, virtual host, directory, or `.htaccess` file using [`SetEnv`][2]:
 
 ```text
 # In a virtual host configuration as an environment variable
@@ -58,8 +60,8 @@ php_value datadog.service my-app
 
 ## NGINX and PHP-FPM
 
-<div class="alert alert-warning">
-<strong>Note:</strong> PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
+<div class="alert alert-danger">
+PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
 </div>
 
 For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
@@ -111,7 +113,8 @@ The default app name.
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
 **Default**: `1`<br>
-Enable the tracer globally.
+Enable the tracer globally.<br/>
+See also [DD_APM_TRACING_ENABLED][21].
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
@@ -272,12 +275,6 @@ Works for Linux. Set to `true` to retain capabilities on Datadog background thre
 **Default**: `true`<br>
 Enable route-based naming for HTTP server requests. Set to `true` to use the integration-specific root span's resource name format. When `false`, the HTTP method and path are used instead. Added in version `0.89.0`.
 
-`DD_TRACE_SAMPLE_RATE`
-: **INI**: `datadog.trace.sample_rate`<br>
-**Default**: `-1`<br>
-The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
-
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Default**: `0`<br>
@@ -320,7 +317,7 @@ Enables IP collection client side. Added in version `0.84.0`.
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
 **Default**: `null`<br>
-The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.84.0` (`0.76.0` when using ASM).
+The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.84.0` (`0.76.0` when using AAP).
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
@@ -330,27 +327,10 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
-`DD_TRACE_SAMPLING_RULES`
-: **INI**: `datadog.trace.sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
-
-`DD_TRACE_SAMPLING_RULES_FORMAT`
-: **INI**: `datadog.trace.sampling_rules_format`<br>
-**Default**: `glob`<br>
-Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
-
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`<br>
 **Default**: `1000`<br>
 The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
-
-`DD_SPAN_SAMPLING_RULES`
-: **INI**: `datadog.span_sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
-**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
 
 ### Agent
 
@@ -414,8 +394,8 @@ The `'full'` option enables connection between database spans with database quer
 
 `DD_LOGS_INJECTION`
 : **INI**: `datadog.logs_injection`<br>
-**Default**: `0`<br>
-Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+**Default**: `1`<br>
+Enables or disables automatic injection of correlation identifiers into JSON/structured application logs. Added in version `0.89.0`<br>
 See [logs correlation documentation][17] for more information.
 
 ### OpenTelemetry
@@ -442,6 +422,11 @@ Whether to enable the endpoint data collection in profiles. Added in version `0.
 **Default**: `1`<br>
 Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
+
+`DD_PROFILING_ALLOCATION_SAMPLING_DISTANCE`
+: **INI**: `datadog.profiling.allocation_sampling_distance`.
+**Default**: `4194304` (4 MB)<br>
+Configure the sampling distance for allocations. The higher the sampling distance, the fewer samples are created and the lower the overhead. Added in version `1.9.0`.
 
 `DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
 : **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
@@ -479,6 +464,11 @@ Configure the sampling distance for exceptions. The higher the sampling distance
 Enable the timeline profile type. Added in version `0.89.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
 
+`DD_PROFILING_EXPERIMENTAL_IO_ENABLED`
+: **INI**: `datadog.profiling.experimental_io_enabled`. INI available since `1.7.2`.<br>
+**Default**: `1`<br>
+Enable the I/O profile type. Added as beta in version `1.7.2`.
+
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
 **Default**: `off`<br>
@@ -490,23 +480,25 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
   - [b3multi][7]
   - [B3 single header][8]
   - Datadog
+  - [Baggage][22]
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `Datadog,tracecontext,b3multi,B3 single header`<br>
+**Default**: `Datadog,tracecontext,b3multi,B3 single header,baggage`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
   - [b3multi][7]
   - [B3 single header][8]
   - Datadog
+  - [Baggage][22]
 
 ### Integrations
 
@@ -604,7 +596,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 
 ## Map resource names to normalized URI
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
 </div>
 
@@ -688,3 +680,5 @@ When the application runs in a docker container, the path `/proc/self` should al
 [18]: /tracing/trace_collection/otel_instrumentation/php/
 [19]: /tracing/trace_collection/compatibility/php/
 [20]: /opentelemetry/interoperability/environment_variable_support
+[21]: /tracing/trace_collection/library_config/#traces
+[22]: https://www.w3.org/TR/baggage/

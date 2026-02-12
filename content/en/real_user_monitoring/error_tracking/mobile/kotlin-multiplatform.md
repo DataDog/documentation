@@ -3,9 +3,11 @@ title: Kotlin Multiplatform Crash Reporting and Error Tracking
 description: Set up Error Tracking for your Kotlin Multiplatform applications.
 aliases:
     - /real_user_monitoring/error_tracking/kotlin-multiplatform
+    - /real_user_monitoring/error_tracking/kotlin_multiplatform
+    - /error_tracking/frontend/mobile/kotlin_multiplatform/
 type: multi-code-lang
 code_lang: kotlin-multiplatform
-code_lang_weight: 10
+code_lang_weight: 50
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'
@@ -56,7 +58,7 @@ kotlin {
 
 2. Enable NDK crash collection after initializing the SDK.
 
-``` kotlin
+```kotlin
 // in Android source set
 NdkCrashReports.enable()
 ```
@@ -93,7 +95,7 @@ Use the following guides to see how you can upload mapping files (Android) or dS
 
 ### File sizing
 
-Individual debug symbols (mapping files and dSYMs) are limited to 500 MB each.
+Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 ### Collection
 
@@ -126,11 +128,11 @@ To test your implementation:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
+[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
 [4]: https://developer.android.com/topic/performance/vitals/anr
 [5]: /real_user_monitoring/error_tracking/mobile/android/#add-anr-reporting
 [6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [7]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/#track-background-events
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios
+[9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
+[10]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#add-native-dependencies-for-ios

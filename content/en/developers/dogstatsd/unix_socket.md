@@ -38,7 +38,7 @@ To enable the Agent DogStatsD UDS:
 {{< tabs >}}
 {{% tab "Host" %}}
 
-<div class="alert alert-warning"><strong>Note</strong>: The Agent install script automatically creates the socket file with the correct permissions, and <code>use_dogstatsd: true</code> & <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> are set by default. </div>
+<div class="alert alert-warning">The Agent install script automatically creates the socket file with the correct permissions, and <code>use_dogstatsd: true</code> & <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> are set by default. </div>
 
 1. Create a socket file for DogStatsD to use as a listening socket. For example:
    ```shell
@@ -265,7 +265,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     },
     ```
 
-2. Add the [`PidMode` parameter][10] in the task definition and set it to `task` as follows:
+2. Add the [PidMode parameter][2] in the task definition and set it to `task` as follows:
 
     ```json
     "pidMode": "task"
@@ -281,6 +281,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     ```
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -390,4 +391,3 @@ For guidelines on creating additional implementation options, see the [datadog-a
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
 [9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
-[10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params

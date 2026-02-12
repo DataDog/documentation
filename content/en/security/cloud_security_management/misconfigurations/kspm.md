@@ -5,20 +5,20 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration detection rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration detection rules"
 - link: "/security/misconfigurations/custom_rules"
   tag: "Documentation"
   text: "Create Custom Rules"
 ---
 
-Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM) helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
+Kubernetes Security Posture Management (KSPM) for Cloud Security helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
 
 ## Setting up KSPM
 
 To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations. For detailed instructions, see the following articles:
 
-- CSM Enterprise ([Agent][14] and [cloud integrations][15])
-- CSM Pro ([Agent][12] and [cloud integrations][13])
+- [Deploying Cloud Security on the Agent][12]
+- [Deploying Cloud Security via Cloud Integrations][13]
 
 This allows Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 
@@ -36,17 +36,17 @@ This allows Datadog to detect risks in your Kubernetes deployments for each of t
 
 ## Monitor risk across Kubernetes deployments
 
-With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations Explorer][11].
+With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations explorer][11].
 
-Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within CSM or by [executing a pre-defined workflow][8].
+Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within Cloud Security or by [executing a pre-defined workflow][8].
 
 **Note**: You can also use the [API to programmatically interact with findings][10].
 
-{{< img src="security/csm/kspm_finding.png" alt="The details panel for a high severity finding for the EKS Cluster should have public access limited rule" width="80%">}}
+{{< img src="security/csm/kspm_finding_1.png" alt="The details panel for a medium severity finding for the EKS Cluster should have public access limited rule" width="80%">}}
 
 ## Assess your Kubernetes security posture against industry-standard frameworks
 
-CSM provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
+Cloud Security provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
 
 For an in-depth explanation on how the security posture score works, see [Security posture score][3].
 
@@ -56,9 +56,9 @@ To view the security posture score for your Kubernetes deployments, navigate to 
 
 ### View detailed reports for Kubernetes frameworks
 
-To view a detailed report that gives you insight into how you score against the framework's requirements and rules, click **Framework Overview**. On the framework page, you can download a copy of the report as a PDF or export it as a CSV.
+Click a framework to view a detailed report that gives you insight into how you score against the framework's requirements and rules. On the framework page, you can download a copy of the report as a PDF or export it as a CSV.
 
-{{< img src="security/csm/kubernetes_posture_score.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
+{{< img src="security/csm/kubernetes_posture_score_3.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
 
 ## Create your own Kubernetes detection rules
 
@@ -81,7 +81,5 @@ After you create the detection rule, you can customize its severity (`Critical`,
 [9]: https://app.datadoghq.com/security/compliance/home
 [10]: /api/latest/security-monitoring/#list-findings
 [11]: https://app.datadoghq.com/security/compliance
-[12]: /security/cloud_security_management/setup/csm_pro/agent/kubernetes
-[13]: /security/cloud_security_management/setup/csm_pro/cloud_accounts
-[14]: /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes
-[15]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+[12]: /security/cloud_security_management/setup/agent/
+[13]: /security/cloud_security_management/setup/cloud_integrations/

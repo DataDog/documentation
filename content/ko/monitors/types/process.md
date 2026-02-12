@@ -19,7 +19,7 @@ further_reading:
 title: 실시간 프로세스 모니터
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 실시간 프로세스 및 Live 프로세스 모니터링은 Enterprise 요금제에 포함되어 있습니다. 다른 모든 요금제의 경우 계정 담당자 또는 <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>에 문의하여 이 기능을 요청하세요.
 </div>
 

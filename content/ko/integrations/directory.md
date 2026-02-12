@@ -29,7 +29,7 @@ draft: false
 git_integration_title: 디렉토리
 integration_id: 시스템
 integration_title: 디렉토리
-integration_version: 2.1.1
+integration_version: 4.0.1
 is_public: true
 manifest_version: 2.0.0
 name: 디렉토리
@@ -46,6 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::OS & 시스템
+  - Offering::Integration
   configuration: README.md#Setup
   description: 통합 디렉토리는 지정된 디렉토리 파일의 메트릭을 보고합니다.
   media: []
@@ -72,7 +73,7 @@ tile:
 
 디렉토리 점검은 [Datadog 에이전트][1] 패키지에 포함되어 있으므로 서버에 추가 설치할 필요가 없습니다.
 
-### 설정
+### 구성
 
 1. 디렉토리 성능 데이터 수집을 시작하려면 [에이전트 설정 디렉토리][2] 루트에 있는 `conf.d/` 폴더에서 `directory.d/conf.yaml` 파일을 편집합니다. 사용 가능한 모든 설정 옵션은 [directory.d/conf.yaml 샘플][3]을 참조하세요.
 
@@ -91,7 +92,7 @@ tile:
 
     **참고**: 윈도우즈(Windows)에서 디렉토리를 추가할 때 단일 백슬래시 (`C:\path\to\directory`) 대신 이중 백슬래시 (`C:\\path\\to\\directory`)를 사용하여 점검을 실행합니다. 그렇지 않으면 디렉토리 점검이 실패하고 `found unknown escape character in "<string>"` 오류를 발생시키는 트레이스백이 발생합니다.
 
-2. [에이전트를 다시 시작합니다][4].
+2. [Agent를 재시작합니다][4].
 
 ### 검증
 

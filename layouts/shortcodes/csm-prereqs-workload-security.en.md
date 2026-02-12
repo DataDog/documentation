@@ -1,6 +1,6 @@
 Datadog Agent `7.46` or later installed on your hosts or containers. 
 
-CSM Threats supports the following Linux distributions:
+Workload Protection supports the following Linux distributions:
 | Linux Distribution                 | Supported Versions                               |
 | ---------------------------------- | ------------------------------------------------- |
 | Ubuntu LTS                         | 18.04, 20.04, 22.04                              |
@@ -13,7 +13,7 @@ CSM Threats supports the following Linux distributions:
 
 **Notes**: 
 
-* [CSM Threats on Windows is available in beta][103].
+* [Workload Protection on Windows is available in beta][103].
 * Custom kernel builds are not supported.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].

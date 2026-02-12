@@ -4,7 +4,7 @@ Welcome to the Datadog documentation repository. The markdown stored in this rep
 
 ## Contribute to the docs
 
-Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request in this repo for the documentation team to review
+Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request (PR) in this repo for the Documentation team to review. The Documentation team is added as a PR reviewer automatically.
 
 Most pages on the documentation site feature an **Edit** button that sends you to the source file in this repo. You can make an edit straight from the GitHub website!
 
@@ -14,22 +14,24 @@ For more information on contributing, see the [contribution guidelines][18].
 
 ## Working on Docs
 
-### Datadog Staff
-
-- Always branch off of master; never commit directly to master.
-- Name your branch `slack_username/branch_name`. If you don't include the forward slash (`/`), the Gitlab pipeline won't run and you won't get a branch preview. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links. Using a [Slack username][21] ensures you get build notifications in Slack.
-- Consult our [contributing guidelines][8].
-- When you're ready to commit, create a new pull request to master from your branch.
-- Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
-- If you've named your branch correctly, a GitHub bot posts a link to the docs preview website for your PR. After the preview build completes, you can use the link to preview your changes.
-- Running the build locally is optional. If you followed the branch naming conventions above, your pull request should generate a preview. For information on local builds, see the [Build setup guide][20].
-
 ### Outside Contributors
+Follow these steps if you are NOT a Datadog employee:
 
 - Fork the master branch.
 - Consult our [contributing guidelines][8].
 - When you're ready to finalize your changes, commit them and make a pull request back to `DataDog/master`.
 - A Datadog technical writer might change your PR title with a DOCS ticket number, such as "[DOCS-9000]," which means it has been added to the team's internal Jira queue to triage and review. No action is necessary from you if we change the title of your PR.
+
+### Datadog Staff
+Follow these steps if you are a Datadog employee:
+
+- Always branch off of master; never commit directly to master.
+- You MUST name your branch `<name>/<description>`. If you do not include the forward slash (`/`), the GitLab pipeline won't run, you won't get a branch preview, and your pull request will not pass in CI. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links. Using a [Slack username][21] also ensures you get build notifications in Slack.
+- Consult our [contributing guidelines][8].
+- When you're ready to commit, create a new pull request to master from your branch.
+- Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
+- If you've named your branch correctly, a GitHub bot posts a link to the docs preview website for your PR. After the preview build completes, you can use the link to preview your changes.
+- Running the build locally is optional. If you followed the branch naming conventions above, your pull request should generate a preview. For information on local builds, see the [Build setup guide][20].
 
 ### A note about markdown
 
@@ -41,7 +43,7 @@ Make sure all files are lowercase. Macs are case-insensitive when creating links
 
 ## Releasing
 
-Within 10 minutes of merging to master, it deploys automatically.
+Merging to `master` triggers an automatic deployment. This process typically begins within 10 minutes and usually takes around 35 minutes to complete, though these times may vary.
 
 ## How to add a new integration
 

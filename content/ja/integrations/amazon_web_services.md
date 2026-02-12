@@ -1,10 +1,35 @@
 ---
-aliases:
-- /ja/integrations/aws/
-- /ja/logs/aws
-- /ja/integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration/
-- /ja/integrations/faq/additional-aws-metrics-min-max-sum
-- /ja/integrations/faq/why-am-i-only-seeing-the-average-values-of-my-custom-aws-cloudwatch-metrics/
+app_id: amazon-web-services
+app_uuid: 45508037-7831-469d-80da-20241f00cbed
+assets:
+  dashboards:
+    aws_advisor: assets/dashboards/aws_advisor.json
+    aws_ebs: assets/dashboards/aws_ebs.json
+    aws_event_bridge: assets/dashboards/aws_event_bridge.json
+    aws_firehose: assets/dashboards/aws_firehose.json
+    aws_overall: assets/dashboards/aws_overall.json
+    aws_sns: assets/dashboards/aws_sns.json
+    aws_sqs: assets/dashboards/aws_sqs.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - aws.usage.call_count
+      metadata_path: assets/metrics/metric-spec.yaml
+      prefix: aws.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 10
+    source_type_name: Amazon Web Services
+  monitors:
+    Integration Health Status: assets/monitors/aws_integration_status_monitor.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - aws
 - cloud
@@ -13,33 +38,43 @@ categories:
 - event management
 custom_kind: インテグレーション
 dependencies: []
-description: AWS サービスを Datadog と統合。
-doc_link: https://docs.datadoghq.com/integrations/amazon_web_services/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
-  tag: ブログ
-  text: Datadog で AWS コントロールプレーン API の使用量メトリクスを監視する
-- link: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
-  tag: ブログ
-  text: AWS re:Invent 2022 のハイライト
-- link: https://www.datadoghq.com/blog/iam-least-privilege/
-  tag: ブログ
-  text: 最小権限の AWS IAM ポリシー作成のベストプラクティス
 git_integration_title: amazon_web_services
-has_logo: true
 integration_id: amazon-web-services
-integration_title: AWS
+integration_title: Amazon Web Services
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_web_services
-public_title: Datadog-AWS インテグレーション
-short_description: AWS サービスを Datadog と統合。
-version: '1.0'
+public_title: Amazon Web Services
+short_description: Amazon Web Services (AWS) は、クラウド コンピューティング プラットフォームを構成する Web サービス群です。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::クラウド
+  - Category::IoT
+  - Category::ログの収集
+  - Category::Event Management
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Amazon Web Services (AWS) は、クラウド コンピューティング プラットフォームを構成する Web サービス群です。
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/iam-least-privilege/
+  support: README.md#Support
+  title: Amazon Web Services
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Amazon Web Services (AWS) を接続すると、次のことができるようになります。
@@ -61,13 +96,13 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
 
 ### 自動
 
-  * **CloudFormation (手早く始めるには最適)**  
+  * **CloudFormation (すぐに始めたい場合に最適)**
     CloudFormation で AWS インテグレーションを設定するには、[AWS スタートガイド][1]を参照してください。
 
-  * **Terraform**  
+  * **Terraform**
     AWS と Terraform のインテグレーションを設定するには、[AWS と Terraform のインテグレーション][4]を参照してください。
 
-  * **Control Tower**  
+  * **Control Tower**
     [Control Tower Account Factory][5] で新規に AWS アカウントをプロビジョニングする際の AWS インテグレーション設定は、[Control Tower セットアップガイド][6]をご覧ください。
 
   * **AWS 組織向けマルチアカウント設定**
@@ -75,11 +110,11 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
 
 ### 手動
 
-   * **ロールの委任**  
+   * **ロールの委任**
      AWS インテグレーションをロールの委任で手動設定する場合は、[手動設定ガイド][8]を参照してください。
 
-   * **アクセスキー (GovCloud または中国\*のみ)**  
-     アクセスキーを使用して AWS インテグレーションをセットアップするには、[手動セットアップガイド][9]をご覧ください。
+   * **アクセス キー (GovCloud または China\* のみ)**
+     アクセスキーによる AWS インテグレーションを設定する場合は、[手動設定ガイド][9]を参照してください。
 
       *\* 中国本土における (または中国本土内の環境に関連する) Datadog サービスの使用はすべて、当社 Web サイトの[サービス制限地域][10]セクションに掲載されている免責事項に従うものとします。*
 
@@ -109,32 +144,65 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 {{% aws-resource-collection %}}
 
-### Cloud Security Management
+### リソース タイプと権限
+
+以下のセクションでは、Datadog の各プロダクトで収集されるリソース タイプと、Datadog IAM ロールが代理でデータを収集するために必要な権限をまとめています。これらの権限を、既存の AWS インテグレーション IAM ポリシー (`SecurityAudit` ポリシーをアタッチ済み) に追加してください。
+
+{{% collapse-content title="Cloud Cost Management (CCM)" level="h4" expanded=false id="cloud-cost-management" %}}
+{{% aws-resource-collection-cloud-cost-management %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Cloudcraft" level="h4" expanded=false id="cloudcraft" %}}
+{{% aws-resource-collection-cloudcraft %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Cloud Security Monitoring (CSM)" level="h4" expanded=false id="cloud-security-monitoring" %}}
+{{% aws-resource-collection-cloud-security-monitoring %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Network Performance Monitoring (NPM)" level="h4" expanded=false id="network-performance-monitoring" %}}
+{{% aws-resource-collection-network-performance-monitoring %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Resource Catalog" level="h4" expanded=false id="resource-catalog" %}}
+{{% aws-resource-collection-resource-catalog %}}
+{{% /collapse-content %}}
+
+#### 今後のリリース
+
+ここに記載している権限は、今後 30 日以内に追加予定のリソースを反映したものです。Datadog のリソース カバレッジとトラッキングを最大限に活用するため、これらの権限を既存の AWS インテグレーション IAM ポリシー (`SecurityAudit` ポリシーをアタッチ済み) に含めてください。
+
+{{% collapse-content title="今後のリリース向けの権限" level="h4" expanded=false id="upcoming-permissions" %}}
+{{% aws-resource-collection-upcoming-permissions %}}
+{{% /collapse-content %}}
+
+### Cloud Security
 
 #### セットアップ
 
-お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][16]を完了させます。Cloud Security Management が有効化されていることを適宜ご確認ください。
+AWS アカウントに AWS インテグレーションをまだ設定していない場合は、上記の [セットアップ手順][16] を完了してください。手順内で案内される箇所では Cloud Security を必ず有効化してください。
 
 **注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
 
-既存の AWS インテグレーションに Cloud Security Management を追加するには、以下の手順でリソース収集を有効にしてください。
+既存の AWS インテグレーションに Cloud Security を追加するには、以下の手順に従ってリソースの収集を有効化してください。
 
-1. Datadog の AWS IAM ロールに、AWS が管理している `SecurityAudit` ポリシーをアタッチして、Datadog の IAM ロールに必要な権限を付与します。このポリシーは [AWS コンソール][17]にあります。
+1. Datadog IAM ロールに必要な権限を付与するには、AWS マネージドの `SecurityAudit` ポリシーを Datadog の AWS IAM ロールにアタッチしてください。このポリシーは [AWS コンソール][17] で確認できます。
 
 2. [Datadog AWS インテグレーションページ][18]で、以下の手順で設定を完了させます。または、[Update an AWS Integration][8] API エンドポイントを利用することも可能です。
 
    1. リソース収集を有効化したい AWS アカウントを選択します。
-   2. そのアカウントの **Resource collection** タブに移動し、`Cloud Security Posture Management Collection` を有効にします。
-   3. ページの右下にある `Save` をクリックします。
+   2. **Resource collection** タブで、Cloud Security の横にある **Enable** をクリックします。Cloud Security Setup ページへリダイレクトされ、選択したアカウントのセットアップ ダイアログが自動的に開きます。
+   3. セットアップダイアログで、**Enable Resource Scanning** トグルをオンに切り替えます。 
+   4. **Done** をクリックしてセットアップを完了します。
 
 ## アラームの収集
 
 AWS CloudWatch アラームを Datadog イベントエクスプローラーに送信する方法は 2 つあります。
 
-- アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][19] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
+- Alarm polling: Alarm polling は AWS インテグレーションに標準で含まれており、[DescribeAlarmHistory][19] API を通じてメトリクス アラームを取得します。この方法を採用すると、アラームはイベント ソース `Amazon Web Services` として分類されます。**注**: クローラはコンポジット アラームを収集しません。
 - SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントエクスプローラー内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][20]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_web_services" >}}
@@ -193,7 +261,7 @@ AWS インテグレーションにより以下のタグが収集されます。*
 | [VPC][60]              | `nategatewayid`、`vpnid`、`tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][61]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
 
-### サービスチェック
+### サービス チェック
 {{< get-service-checks-from-git "amazon_web_services" >}}
 
 
@@ -203,12 +271,16 @@ AWS インテグレーションに関する問題解決は、[AWS インテグ�
 
 ## その他の参考資料
 
-{{< partial name="whats-next/whats-next.html" >}}
+お役に立つドキュメント、リンクや記事:
+- [Datadog で AWS コントロール プレーン API の使用量メトリクスを監視する][64]
+- [AWS re:Invent 2022 のハイライト][65]
+- [最小権限の AWS IAM ポリシーを作成するためのベスト プラクティス][66]
+
 
 [1]: https://docs.datadoghq.com/ja/getting_started/integrations/aws/
 [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
 [3]: https://docs.datadoghq.com/ja/integrations/#cat-aws
-[4]: https://docs.datadoghq.com/ja/integrations/guide/aws-terraform-setup
+[4]: https://docs.datadoghq.com/ja/integrations/guide/aws-terraform-setup/
 [5]: https://docs.aws.amazon.com/controltower/latest/userguide/account-factory.html
 [6]: https://aws.amazon.com/blogs/awsmarketplace/deploy-datadogs-aws-integration-accounts-aws-control-tower-account-factory-customization/
 [7]: https://docs.datadoghq.com/ja/integrations/guide/aws-organizations-setup/
@@ -225,7 +297,7 @@ AWS インテグレーションに関する問題解決は、[AWS インテグ�
 [18]: https://app.datadoghq.com/integrations/amazon-web-services
 [19]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html#API_DescribeAlarmHistory_RequestParameters
 [20]: https://docs.datadoghq.com/ja/integrations/amazon_sns/#receive-sns-messages
-[21]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/amazon_web_services_metadata.csv
+[21]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_web_services/assets/metrics/metric-spec.yaml
 [22]: https://docs.datadoghq.com/ja/integrations/guide/aws-integration-and-cloudwatch-faq/#can-i-collect-aws-custom-metrics-through-the-integration
 [23]: https://docs.datadoghq.com/ja/integrations/amazon_api_gateway/
 [24]: https://docs.datadoghq.com/ja/integrations/amazon_app_runner
@@ -266,5 +338,8 @@ AWS インテグレーションに関する問題解決は、[AWS インテグ�
 [59]: https://docs.datadoghq.com/ja/integrations/amazon_sqs/
 [60]: https://docs.datadoghq.com/ja/integrations/amazon_vpc/
 [61]: https://docs.datadoghq.com/ja/integrations/amazon_workspaces/
-[62]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_web_services/service_checks.json
+[62]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_web_services/assets/service_checks.json
 [63]: https://docs.datadoghq.com/ja/integrations/guide/aws-integration-troubleshooting/
+[64]: https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/
+[65]: https://www.datadoghq.com/blog/aws-reinvent-2022-recap/
+[66]: https://www.datadoghq.com/blog/iam-least-privilege/

@@ -1,5 +1,6 @@
 ---
 title: Shared Dashboards
+description: Create public, invite-only, and embedded dashboards for external access with customizable timeframes and variables.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
@@ -23,9 +24,19 @@ further_reading:
 ## Overview
 
 
-Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
+Shared dashboards in Datadog allow external users or those who prefer not to log in to view your dashboards. You can create multiple shared dashboards, each with its own set of configuration options.
+
+To share a dashboard, click **Share** then **Share dashboard** at the top-right of the dashboard page. To view or edit existing shared dashboards, click **Share** then **Manage shared dashboards**.
+
+{{< img src="/dashboards/sharing/shared_dashboards/manage_modal.png" alt="Example of an manage shared dashboards modal" style="width:90%;" >}}
+
+All shared dashboards in the organization and their public access settings are listed on the [Shared Dashboards page][2]. You can also add additional security configurations, such as disabling specific sharing types, or setting the Maximum Access Period for invitations on the [Public Sharing Settings page][3].
+
+**Note**: When the shared dashboards feature is disabled, dashboards are no longer publicly accessible. However, their configurations remain viewable and editable. This feature operates independently of the `Active` or `Paused` status of individual dashboards, even `Active` shared dashboards become publicly inaccessible.
 
 Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
+
+Viewers of Shared Dashboards see all telemetry data displayed in the Dashboard in accordance to the [creator's permissions][4]. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
 
 ## Share states
 
@@ -53,6 +64,10 @@ To share a dashboard with one or more email addresses:
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
 
 **Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
+
+The Maximum Access Period of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3]. By default, it is not configured.
+
+**Note**: Maximum Access Period is enforced by exact timestamp. For example, with a Maximum Access Period of one day, an invitation created at Jan 1st 11:00AM must expire by Jan 2nd 11:00AM.
 
 ### Access an invite-only shared dashboard
 
@@ -88,13 +103,18 @@ By default, public dashboards are accessible for one year before they expire and
 
 ## Embedded shared dashboards
 
-You can add embedded shared dashboards to a website with an iframe. Embedded shared dashboards can only be accessed through the allowlisted website base URLs. To share an embedded dashboard:
+You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
+This feature is not supported on Safari web browsers.
+
+The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings) you should check the actual network request. 
+
+To share an embedded dashboard:
 
 1. Click **Share** in the upper-right corner of the dashboard.
 2. Select **Share Dashboard**.
 3. Select the **Embed** option in the **Select a Share Type** step.
 4. Configure the desired time, variable, and color options in the **Configure Dashboard** step.
-5. Add the website base URLs that you want to allowlist.
+5. Add the referrers that you want to allowlist.
 6. Click **Share Dashboard** to create the share URL.
 
 ## Configuration Options
@@ -137,7 +157,7 @@ Shared dashboards support a limited number of timeframe options and do not allow
 
 ## Edit Shared Dashboards
 
-<div class="alert alert-warning">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
+<div class="alert alert-danger">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
 
 To make a change to the share type, configuration, or recipients of a shared dashboard:
 
@@ -150,7 +170,9 @@ You can temporarily pause or re-enable access to a shared dashboard from this me
 
 ## View All Shared Dashboards
 
-View all shared dashboards in your organization and your settings on the [Shared Dashboards][2] page. From this page, you can filter dashboards by status and share type, and see and claim any unowned shared dashboards.
+View all shared dashboards in your organization and your settings on the [Shared Dashboards][2] page. From this page, you can query, filter, and sort dashboards by share type, last accessed, sharer, and more. You can also find and claim any unowned shared dashboards.
+
+{{< img src="/dashboards/sharing/shared_dashboards/shared_search.png" alt="Example of shared dashboards list page" style="width:90%;" >}}
 
 ## Further reading
 
@@ -158,3 +180,5 @@ View all shared dashboards in your organization and your settings on the [Shared
 
 [1]: /dashboards/#refresh-rate
 [2]: https://app.datadoghq.com/dashboard/shared
+[3]: https://app.datadoghq.com/organization-settings/public-sharing
+[4]: /account_management/rbac/data_access/#dashboards-and-notebooks

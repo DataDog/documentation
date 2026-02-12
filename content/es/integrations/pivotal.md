@@ -1,30 +1,22 @@
 ---
+app_id: pivotal
 categories:
-- Collaboration
+- collaboration
 - issue tracking
-custom_kind: integration
-dependencies: []
-description: Lee y comenta historias en tu flujo de eventos (streams) Datadog.
-doc_link: https://docs.datadoghq.com/integrations/pivotal/
-draft: false
-git_integration_title: pivotal
-has_logo: true
-integration_id: pivotal
-integration_title: Pivotal Tracker
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: pivotal
-public_title: Integración de Pivotal Tracker en Datadog
-short_description: Lee y comenta historias en tu flujo de eventos Datadog.
-team: integraciones_web
-version: '1.0'
+custom_kind: integración
+description: Pivotal Tracker es un software como servicio (SaaS) para la gestión ágil
+  de proyectos and collaboration.
+integration_version: 1.0.0
+media: []
+supported_os:
+- linux
+- windows
+- macos
+title: Pivotal
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## Información general
 
-[Pivotal Tracker][1] utiliza historias para ayudar a los equipos a realizar un seguimiento de los proyectos y colaborar a lo largo de las diferentes etapas del ciclo de desarrollo, como la creación de nuevas funciones, la resolución de errores o el tratamiento de la deuda técnica. Conecta Pivotal Tracker a Datadog para:
+[Pivotal Tracker](https://www.pivotaltracker.com/features) utiliza historias para ayudar a los equipos a realizar un seguimiento de los proyectos y colaborar a lo largo de las distintas partes del ciclo de desarrollo, como la creación de nuevas funciones, la resolución de errores o el tratamiento de la deuda técnica. Conecta Pivotal Tracker a Datadog para:
 
 - Ver y discutir el progreso de tus historias en el Explorador de eventos de Datadog.
 - Correlacionar y graficar la finalización de historias con otros eventos y otras métricas en tu sistema.
@@ -34,9 +26,9 @@ version: '1.0'
 
 ### Instalación
 
-Para obtener eventos Pivotal en en el Explorador de eventos de Datadog, introduce el token de API generado desde la [página de tu perfil] de Pivotal[2].
+Para obtener eventos de Pivotal en el Explorador de eventos de Datadog, introduce el token de API generado de tu [página de perfil](https://www.pivotaltracker.com/signin) de Pivotal.
 
-{{< img src="integrations/pivotal/pivotal_token.png" alt="pivotal token" popup="true">}}
+![token de pivotal](images/pivotal_token.png)
 
 ## Datos recopilados
 
@@ -52,10 +44,6 @@ La integración Pivotal Tracker no incluye eventos.
 
 La integración Pivotal Tracker no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
-
-[1]: https://www.pivotaltracker.com/features
-[2]: https://www.pivotaltracker.com/signin
-[3]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

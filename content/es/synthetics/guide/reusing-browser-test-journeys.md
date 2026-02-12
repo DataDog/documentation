@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Prácticas recomendadas para crear tests de extremo a extremo
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Cómo ayudé a mi cliente a ampliar sus tests de navegador con Datadog
 title: Reutiliza los recorridos de tests del navegador en todo el conjunto de tests
 ---
 
@@ -32,19 +35,19 @@ Si para monitorizar tu aplicación primero tienes que iniciar sesión, es recome
 
 Para crear un test de inicio de sesión y emplearlo a modo de subtest dentro de un conjunto, haz lo siguiente:
 
-1. Crea un test A que se limite a iniciar sesión en la aplicación y, en el parámetro **Starting URL** (URL de inicio) de dicho test, introduce la URL previa al inicio de sesión.
+1. Crea un test que se limite a iniciar sesión en la aplicación. Define el parámetro **Starting URL** (URL de inicio) del test como la URL previa al inicio de sesión.
 
-  {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording.mp4" alt="Grabación del subtest de inicio de sesión" video="true" width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/login_subtest_recording_2.mp4" alt="Grabación del subtest de inicio de sesión" video="true" width="100%">}}
 
-2. Crea un test B para monitorizar el funcionamiento posterior al inicio de sesión en la aplicación. En el siguiente ejemplo, este test B monitoriza la creación de un dashboard. En el parámetro **Starting URL** (URL de inicio) del test B, introduce también la URL previa al inicio de sesión.
+2. Crea un segundo test para monitorizar el funcionamiento posterior al inicio de sesión en la aplicación. En el siguiente ejemplo, este segundo test monitoriza la creación de un dashboard. Define también el parámetro **Starting URL** (URL de inicio) del test como la URL previa al inicio de sesión.
 
-  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration.png" alt="Configuración del test principal" >}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_configuration_2.png" alt="Configuración del test principal" >}}
 
-3. Cuando grabes el test B, haz clic en **Subtest** y selecciona el test A de inicio de sesión. 
+3. Cuando grabes el segundo test, haz clic en **Subtest** y selecciona el test de inicio de sesión que creaste en el paso 1. 
 
-  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_test_subtest.mp4" alt="Introducción del subtest en el test principal" video="true" width="100%">}}
+  {{< img src="synthetics/guide/reusing-browser-test-journeys/dashboard_subtest_2.mp4" alt="Inclusión del subtest en el test principal" video="true" width="80%">}}
 
-  Cuando creas este paso de subtest, todo los pasos del test A se reproducen al principio del test B principal y, además, las variables del subtest A se importan en el test B principal. De forma predeterminada, el subtest se reproduce en la pestaña principal, por lo que los pasos incluidos en él se reproducen en la misma pestaña que los pasos previos y posteriores. El subtest empieza a ejecutarse con la URL configurada en el test principal (en este ejemplo, la URL previa al inicio de sesión) y, una vez ejecutados todos los pasos del subtest, el test de navegador ejecuta el primer paso del test principal que no pertenece al subtest en la página en la que se quedó en subtest. Hasta el momento, no se ha creado ningún paso principal.
+  Cuando creas este paso de subtest, todo los pasos del test de inicio de sesión se reproducen al principio del test principal y, además, las variables del subtest se importan en el segundo test. De forma predeterminada, el subtest se reproduce en la pestaña principal, por lo que los pasos incluidos en él se reproducen en la misma pestaña que los pasos previos y posteriores. El subtest empieza a ejecutarse con la URL configurada en el test principal (en este ejemplo, la URL previa al inicio de sesión) y, una vez ejecutados todos los pasos del subtest, el test de navegador ejecuta el primer paso del test principal que no pertenece al subtest en la página en la que se quedó el subtest. Hasta el momento, no se creó ningún paso principal.
 
 **Nota:** En [**Subtest Advanced Options**][1] (Opciones avanzadas del subtest), puedes elegir en qué pestaña debe ejecutarse el subtest.
 
@@ -58,7 +61,7 @@ Para crear un test de inicio de sesión y emplearlo a modo de subtest dentro de 
 
  En el anterior ejemplo, con el subtest de inicio de sesión nos aseguramos de que, después de iniciar sesión en la cuenta de prueba de Datadog, los usuarios puedan crear timeboards, que se asocian a dichos usuarios.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

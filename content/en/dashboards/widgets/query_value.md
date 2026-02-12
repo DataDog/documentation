@@ -14,7 +14,7 @@ Query values display the current value of a given metric, APM, or log query. The
 
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
-{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Query value widget" style="width:80%;" >}}
+{{< img src="/dashboards/widgets/query_value/query_value_change_indicator.png" alt="Query value widget" style="width:80%;" >}}
 
 ## Setup
 
@@ -40,9 +40,21 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 <div class="alert alert-info">Visual formatting rules should be based on the metric's raw value. If the metric base unit is in nanoseconds, but the Query Value autoformats to seconds, your conditional rules should be based on nanoseconds.</div>
 
-Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, internal servers must be updated to support cross origin requests to reference internal images.
-
 {{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
+
+Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, you can either upload an image from your local computer or reference images from the public internet. Internal servers must be updated to support cross origin requests to reference internal images.
+
+#### Change indicator
+
+Enable the **Change Indicator** to highlight how the current value compares to a previous time frame.
+
+{{< img src="/dashboards/widgets/query_value/change_indicator_config.png" alt="Query value widget change indicator configuration options" style="width:90%;" >}}
+
+* **Display**: `Relative Change` (percentage), `Absolute Change` (raw value), `Both`, or `Off`
+* **Color**: `Increases as better` (green ↑, red ↓), `Decreases as better` (red ↑, green ↓), or `Neutral`
+* **Compared to**: `Previous Period`, `Previous Day/Week/Month`, or `Custom` time frame
+
+The widget displays the difference below the primary metric, helping highlight recent trends at a glance.
 
 #### Context links
 

@@ -22,11 +22,9 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 30
     source_type_name: Apache
-  logs:
-    source: apache
   monitors:
-    '[Apache] Low number of idle workers': assets/monitors/apache_low_idle_workers.json
-    '[Apache] resource utilization': assets/monitors/high_keep_alive_and_cpu.json
+    CPU load is running high: assets/monitors/high_keep_alive_and_cpu.json
+    Idle workers number is low: assets/monitors/apache_low_idle_workers.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -40,6 +38,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 display_on_public_website: true
@@ -47,9 +46,8 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 4.5.0
+integration_version: 6.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: apache
 public_title: Apache
@@ -61,14 +59,22 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::로그 수집
+  - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
-  description: 초당 요청, 제공된 바이트, 작업자 스레드, 가동 시간 등을 추적합니다.
+  description: 초당 요청, 제공된 바이트, 작업자 스레드, 업타임 등을 추적합니다.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/collect-apache-performance-metrics
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitor-apache-web-server-datadog
   support: README.md#Support
   title: Apache
 ---
@@ -92,7 +98,7 @@ Apache 점검은 [Datadog 에이전트][2]를 사용해 패키징됩니다. Apac
 
 2. Apache 서버에 `mod_status`를 설치한 다음 `ExtendedStatus`를 활성화합니다.
 
-### 설정
+### 구성
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -115,11 +121,11 @@ Apache 점검은 [Datadog 에이전트][2]를 사용해 패키징됩니다. Apac
      - apache_status_url: http://localhost/server-status?auto
    ```
 
-2. [Restart the Agent][3].
+2. [에이전트를 재시작][3]하세요.
 
 ##### 로그 수집
 
-_에이전트 버전 > 6.0 이상 사용 가능_
+_Agent 버전 6.0 이상에서 사용 가능_
 
 1. 로그 수집은 기본적으로 Datadog 에이전트에서 비활성화되어 있습니다. `datadog.yaml`에서 활성화하세요.
 
@@ -146,21 +152,21 @@ _에이전트 버전 > 6.0 이상 사용 가능_
 
    사용 가능한 모든 설정 옵션에 대해 [샘플 apache.d/conf.yaml][2]를 참조하세요.
 
-3. [Restart the Agent][3].
+3. [에이전트를 재시작][3]하세요.
 
 [1]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Docker" %}}
+{{% tab "도커" %}}
 
 #### Docker
 
-컨테이너에서 실행되는 에이전트에 대해 이 점검을 구성하려면,
+컨테이너에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 
-도커가 애플리케이션 컨테이너를 레이블링하면 [자동탐지 통합 템플릿][1]을 설정하세요.
+애플리케이션 컨테이너에 [자동탐지 통합 템플릿][1]을 Docker 레이블로 설정하세요.
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["apache"]'
@@ -171,9 +177,9 @@ LABEL "com.datadoghq.ad.instances"='[{"apache_status_url": "http://%%host%%/serv
 ##### 로그 수집
 
 
-기본적으로 로그 수집은 Datadog 에이전트에서 비활성화되어 있습니다. 활성화하려면 [도커(Docker) 로그 수집][2]을 참조하세요.
+기본적으로 로그 수집은 Datadog 에이전트에서 비활성화되어 있습니다. 활성화하려면 [Docker 로그 수집][2]을 참고하세요.
 
-그런 다음 도커(Docker) 레이블로 [로그 통합][3]을 설정하세요.
+그런 다음 Docker 레이블로 [로그 통합][3]을 설정하세요.
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"}]'
@@ -185,15 +191,15 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Kubernetes
+#### 쿠버네티스(Kubernetes)
 
-쿠버네티스(Kubernetes)에서 실행되는 에이전트에 대해 이 점검을 구성하는 방법:
+쿠버네티스에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 
-[자동탐지 통합 템플릿][1]을 애플리케이션 컨테이너의 포드 주석으로 설정합니다. 이외 템플릿은 또한 [파일, configmap, key-value store][2]로 설정할 수 있습니다.
+[자동탐지 통합 템플릿][1]을 애플리케이션 컨테이너의 포드 주석으로 설정합니다. 이외 템플릿은 또한 [파일, configmap, key-value store][2]로 설정할 수 있습니다.
 
-**주석 v1** (Datadog 에이전트 v7.36 이하용)
+**주석 v1**(Datadog 에이전트 v7.36 이하용)
 
 ```yaml
 apiVersion: v1
@@ -241,7 +247,7 @@ spec:
 ##### 로그 수집
 
 
-Datadog 에이전트에서 기본적으로 로그 수집이 비활성화되어 있습니다. 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집]을 확인하세요.
+Datadog 에이전트에서 기본적으로 로그 수집이 비활성화되어 있습니다. 활성화하려면 [쿠버네티스 로그 수집]을 확인하세요.
 
 그런 다음 [로그 통합][4]을 포드 주석으로 설정합니다. 또한 [파일, configmap, 또는 key-value store][5]로 설정할 수 있습니다.
 
@@ -270,11 +276,11 @@ spec:
 
 #### ECS
 
-ECS에서 실행되는 에이전트에 대해 이 점검을 설정하는 방법:
+ECS에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 
-도커가 애플리케이션 컨테이너를 레이블링하면 [자동탐지 통합 템플릿][1]을 설정하세요.
+애플리케이션 컨테이너에 [자동탐지 통합 템플릿][1]을 Docker 레이블로 설정하세요.
 
 ```json
 {
@@ -295,7 +301,7 @@ ECS에서 실행되는 에이전트에 대해 이 점검을 설정하는 방법:
 
 기본적으로 로그 수집은 Datadog 에이전트에서 비활성화되어 있습니다. 활성화하려면 [ECS 로그 수집][2]을 참조하세요.
 
-그런 다음 도커(Docker) 레이블로 [로그 통합][3]을 설정하세요.
+그런 다음 Docker 레이블로 [로그 통합][3]을 설정하세요.
 
 ```json
 {
@@ -317,9 +323,9 @@ ECS에서 실행되는 에이전트에 대해 이 점검을 설정하는 방법:
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행][4]하고 점검 섹션에서 `apache`를 찾습니다.
+[에이전트 상태 하위 명령을 실행][4]하고 Checks 섹션에서 `apache`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "apache" >}}
@@ -329,7 +335,7 @@ ECS에서 실행되는 에이전트에 대해 이 점검을 설정하는 방법:
 
 Apache 점검은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 {{< get-service-checks-from-git "apache" >}}
 
 

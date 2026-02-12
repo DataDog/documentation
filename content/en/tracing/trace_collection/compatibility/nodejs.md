@@ -49,7 +49,7 @@ For more information about Node.js release, see the [official Node.js documentat
 
 ### Operating system support
 
-The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example AAP, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
@@ -73,7 +73,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `4.x`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
@@ -139,21 +139,25 @@ Or, modify the `package.json` file if you typically start an application with np
 | [mysql][35]            | `>=2`    | Fully supported |                                                  |
 | [mysql2][36]           | `>=1`    | Fully supported |                                                  |
 | [oracledb][37]         | `>=5`    | Fully supported |                                                  |
+| [opensearch][69]       | `>=1`    | Fully supported |                                                  |
 | [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
 | [redis][39]            | `>=0.12` | Fully supported |                                                  |
 | [sharedb][40]          | `>=1`    | Fully supported |                                                  |
 | [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [Prisma][69]           | `>=6.1.0`| Fully supported |                                                  |
 
 ### Worker compatibility
 
-| Module                     | Versions | Support Type    | Notes                                                  |
-| -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][43]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
-| [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
-| [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
-| [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [rhea][48]                 | `>=1`    | Fully supported |                                                        |
+| Module                               | Versions  | Support Type    | Notes                                                  |
+| --------------------------           | --------  | --------------- | ------------------------------------------------------ |
+| [@azure/service-bus][68]             | `>=7.9.2` | Fully supported |                                                        |
+| [@confluentinc/kafka-javascript][67] | `>=1`     | Fully supported |                                                        |
+| [@google-cloud/pubsub][42]           | `>=1.2`   | Fully supported |                                                        |
+| [amqp10][43]                         | `>=3`     | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][44]                        | `>=0.5`   | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
+| [generic-pool][45]                   | `>=2`     | Fully supported |                                                        |
+| [kafkajs][46]                        | `>=1.4`   | Fully supported |                                                        |
+| [rhea][48]                           | `>=1`     | Fully supported |                                                        |
 
 ### SDK compatibility
 
@@ -201,7 +205,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
-[8]: https://expressjs.com/en/resources/frameworks.html
 [9]: https://www.fastify.io
 [10]: https://github.com/graphql/graphql-js
 [11]: https://grpc.io/
@@ -227,7 +230,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/
@@ -259,3 +262,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [64]: https://github.com/openai/openai-node
 [65]: https://github.com/dotansimha/graphql-yoga
 [66]: https://js.langchain.com/
+[67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
+[68]: https://www.npmjs.com/package/@azure/service-bus
+[69]: https://github.com/opensearch-project/opensearch-js

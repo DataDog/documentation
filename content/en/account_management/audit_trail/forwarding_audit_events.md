@@ -1,5 +1,6 @@
 ---
 title: Forwarding Audit Events to Custom Destinations
+description: Forward audit events from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints for compliance and security monitoring.
 disable_toc: false
 further_reading:
 - link: "/account_management/audit_trail/"
@@ -7,17 +8,9 @@ further_reading:
   text: "Learn more about Audit Trail"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Audit Event Forwarding is not available in the US1-FED site.
-</div>
-{{% /site-region %}}
-
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Audit Event Forwarding is in Preview.
 </div>
-{{% /site-region %}}
 
 ## Overview
 
@@ -68,15 +61,25 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
 6. Enter a name for the destination.
 7. In the **Configure Destination** section, enter the following details:
-
-   a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
-
-   b. The name of the destination index where you want to send the logs.
-   
-   c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
-
+   1. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
+   1. The name of the destination index where you want to send the logs.   
+   1. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
 8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
 9. Click **Save**.
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview.</div>
+
+6. Enter a name for the destination.
+7. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
+8. In the **Configure Destination** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Logs Ingestion Endpoint** | Enter the endpoint on the Data Collection Endpoint (DCE) where logs are sent. This is labeled "Logs Ingestion" on the DCE Overview page. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`   |
+| **Immutable ID**           | Specify the immutable ID of the Data Collection Rule (DCR) where logging routes are defined, as found on the DCR Overview page as "Immutable Id".  **Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings. | `dcr-000a00a000a00000a000000aa000a0aa`                     |
+| **Stream Declaration Name**| Provide the name of the target Stream Declaration found in the Resource JSON of the DCR under `streamDeclarations`.  | `Custom-MyTable`                                          |
 
 {{% /tab %}}
 {{< /tabs >}}

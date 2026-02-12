@@ -17,7 +17,7 @@
             <p class="m-0">{{$banner.title | safeHTML}}</p>
         </div>
         <div class="external-link d-flex align-items-center position-relative">
-            <span href="/code-analysis">{{$banner.link.name}}</span>
+            <span>{{$banner.link.name}}</span>
             {{ partial "icon" (dict "name" "external-link" "size" "12px" "color" "#006BC2") }}
             <a class="stretched-link" href="{{$banner.link.url}}"></a>
         </div>

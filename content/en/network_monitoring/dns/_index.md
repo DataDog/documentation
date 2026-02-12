@@ -17,51 +17,50 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
       tag: 'Blog'
       text: 'Use DNS resolution to monitor cloud and external endpoints'
+    - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+      tag: "Blog"
+      text: "Monitor DNS logs for network and security analysis"
 ---
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
+## Overview
 
-<div class="alert alert-info">
-Upgrade to Agent version 7.33 or later to enable DNS monitoring.
+DNS Monitoring provides visibility into DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, you can identify:
+
+* Which pods or services are making DNS requests and which servers are handling them.
+* Top requesters and their query rates.
+* DNS servers experiencing gradual or sudden response time spikes.
+* High error rates and specific error types from DNS servers.
+* Domain resolution patterns across your infrastructure.
+
+{{< img src="network_performance_monitoring/dns_monitoring/dns_overview_2.png" alt="The CNM Analytics page with the DNS toggle enabled." >}}
+
+## Prerequisites
+
+- Agent version 7.33 or later
+- Enable [Cloud Network Monitoring][1] (CNM)
+
+<div class="alert alert-info"> This documentation applies to DNS Monitoring in CNM. For information on Network Device Monitroring (NDM), see the <a href="/network_monitoring/devices/setup/">NDM setup instructions</a>.
 </div>
-
-DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
-
-* The pods or services making DNS requests and the servers receiving those requests.
-* The endpoints making the most requests or making requests at the highest rate.
-* If a DNS server's response time to requests has gradually or suddenly increased.
-* The DNS servers with a high error rate and the type of errors being emitted.
-* Which domains are being resolved.
-
-## Setup
-
-Before you can begin to use DNS Monitoring, [set up Cloud Network Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Cloud Network Monitoring product.
-
-Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
 ## Queries
 
-Use the search bar at the top of the page to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
+On the **DNS** toggle in [**CNM > Analytics**][5], use the search bar to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port `53` so that all resulting dependencies match this **client → DNS server** format.
 
-To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
+To narrow your search to a specific client, use client tags in the search bar to filter DNS traffic. By default, clients are grouped by the most common tags, with each row representing a service making DNS requests to a DNS server.
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_client_search.png" alt="The DNS monitoring page with client_service:ad-server entered into the search bar, pod_name entered for View clients as, and network.dns_query entered for View servers as" style="width:100%;">}}
+   {{< img src="network_performance_monitoring/dns_monitoring/dns_client_search_2.png" alt="The DNS monitoring page with client_service:web-store entered into the search bar and `network.dns_query` entered for View servers as" style="width:100%;">}}
 
 To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
 
-* `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
-* `host`: The host name of the DNS server.
-* `service`: The service running on the DNS server.
-* `IP`: The IP of the DNS server.
-* `dns_query`: (Requires Agent version 7.33 or later) The domain that was queried.
-
-This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
-
-{{< img src="network_performance_monitoring/dns_monitoring/dns_query_example.png" alt="Query with client_availability_zone:us-central1-b and client_env: prod entered into the Search for field, pod_name selected in the View clients as dropdown, and host selected in the View servers as dropdown" style="width:100%;">}}
+   * `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
+   * `host`: The host name of the DNS server.
+   * `service`: The service running on the DNS server.
+   * `IP`: The IP of the DNS server.
+   * `dns_query`: The domain that was queried.
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/dns_monitoring/recommended_queries_dns.png" alt="Recommended queries in the DNS monitoring page displaying the description of a query" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/recommended_queries_dns_2.png" alt="Recommended queries in the DNS monitoring page displaying the description of a query for DNS timeouts." style="width:100%;">}}
 
 There are three recommended queries at the top of the DNS page, similar to the [Network Analytics][4] page. These are static queries commonly used to investigate DNS health and view high-level DNS metrics. Use the recommended queries as a starting point to gain further insights into your DNS configuration and troubleshoot DNS issues. 
 
@@ -69,11 +68,9 @@ You can hover over a recommended query to see a short description of what the re
 
 ## Metrics
 
-Your DNS metrics are displayed through the graphs and the associated table.
+The following DNS metrics are available:
 
 **Note**: Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
-
-The following DNS metrics are available:
 
 | Metric                   | Description                                                                                                             |
 |--------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -89,11 +86,11 @@ The following DNS metrics are available:
 
 ## Table
 
-The network table breaks down the above metrics by each _client_ and _server_ dependency defined by your query.
-
-Configure the columns in your table using the **Customize** button at the top right of the table.
+The network table breaks down the above metrics by each _client_ and _server_ dependency defined by your query. You can configure the columns in your table using the Customize gear icon (⚙️) at the top right of the table.
 
 Narrow down the traffic in your view with the **Filter Traffic** [options][3].
+
+{{< img src="network_performance_monitoring/dns_monitoring/dns_table_view.png" alt="The CNM Analytics page showing the table view of DNS network traffic." >}}
 
 ## Sidepanel
 
@@ -103,14 +100,15 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 * Application errors in the code on the client side
 * A high number of requests originating from a particular port or IP
 
-{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel_3.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /network_monitoring/cloud_network_monitoring/
+[1]: /network_monitoring/cloud_network_monitoring/setup
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [3]: /network_monitoring/cloud_network_monitoring/network_analytics#table
 [4]: /network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries
+[5]: https://app.datadoghq.com/network

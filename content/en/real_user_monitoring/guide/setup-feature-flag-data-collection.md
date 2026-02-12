@@ -42,7 +42,7 @@ If you are using a version previous to 5.17.0, initialize the RUM SDK and config
     ...
 });
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
@@ -54,7 +54,7 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript
@@ -70,43 +70,43 @@ window.DD_RUM &&
 </details>
 <br/>
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/
+[1]: /real_user_monitoring/application_monitoring/android/setup/
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
+[1]: /real_user_monitoring/application_monitoring/flutter/setup/
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
+[1]: /real_user_monitoring/application_monitoring/ios/setup
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
 
 Feature flag tracking is available for your Kotlin Multiplatform applications. To start, set up [RUM Kotlin Multiplatform monitoring][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
 {{% /tab %}}
 {{% tab "React Native" %}}
 
 Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+[1]: /real_user_monitoring/application_monitoring/react_native/setup
 {{% /tab %}}
 {{% tab "Unity" %}}
 
 Feature flag tracking is available for your Unity applications. To start, set up [RUM Unity monitoring][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
+[1]: /real_user_monitoring/application_monitoring/unity/setup
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -177,20 +177,20 @@ Initialize Amplitude's SDK and create an inspector reporting feature flag evalua
 For more information about initializing Amplitude's SDK, see Amplitude's [Android SDK documentation][1].
 
 ```kotlin
-  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
-    override fun track(exposure: Exposure) {
-        // Send the feature flag when Amplitude reports the exposure
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(
-            exposure.flagKey,
-            exposure.variant.orEmpty()
-        )
-    }
+internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+  override fun track(exposure: Exposure) {
+      // Send the feature flag when Amplitude reports the exposure
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(
+          exposure.flagKey,
+          exposure.variant.orEmpty()
+      )
   }
+}
 
-  // In initialization:
-  val config = ExperimentConfig.Builder()
-      .exposureTrackingProvider(DatadogExposureTrackingProvider())
-      .build()
+// In initialization:
+val config = ExperimentConfig.Builder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider())
+    .build()
 ```
 
 [1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
@@ -572,6 +572,91 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
+### GrowthBook integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by using the `onFeatureUsage` callback.
+
+For more information about initializing GrowthBook's SDK, see [GrowthBook's JavaScript SDK documentation][1].
+
+```javascript
+const gb = new GrowthBook({
+  ...,
+  onFeatureUsage: (featureKey, result) => {
+    datadogRum.addFeatureFlagEvaluation(featureKey, result.value);
+  },
+});
+
+gb.init();
+```
+
+[1]: https://docs.growthbook.io/lib/js#step-1-configure-your-app
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+GrowthBook does not support this integration. Contact GrowthBook to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by calling `setFeatureUsageCallback`.
+
+For more information about initializing GrowthBook's SDK, see [GrowthBook's Android SDK documentation][1].
+
+```kotlin
+val gbBuilder = GBSDKBuilder(...)
+
+gbBuilder.setFeatureUsageCallback { featureKey, result ->
+  GlobalRumMonitor.get().addFeatureFlagEvaluation(featureKey, result.value);
+}
+
+val gb = gbBuilder.initialize()
+```
+
+[1]: https://docs.growthbook.io/lib/kotlin#quick-usage
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by calling `setFeatureUsageCallback`.
+
+For more information about initializing GrowthBook's SDK, see [GrowthBook's Flutter SDK documentation][1].
+
+```dart
+final gbBuilder = GBSDKBuilderApp(...);
+gbBuilder.setFeatureUsageCallback((featureKey, result) {
+  DatadogSdk.instance.rum?.addFeatureFlagEvaluation(featureKey, result.value);
+});
+final gb = await gbBuilder.initialize();
+```
+
+[1]: https://docs.growthbook.io/lib/flutter#quick-usage
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+When initializing the GrowthBook SDK, report feature flag evaluations to Datadog by using the `onFeatureUsage` callback.
+
+For more information about initializing GrowthBook's SDK, see [GrowthBook's React Native SDK documentation][1].
+
+```javascript
+const gb = new GrowthBook({
+  ...,
+  onFeatureUsage: (featureKey, result) => {
+    datadogRum.addFeatureFlagEvaluation(featureKey, result.value);
+  },
+});
+
+gb.init();
+```
+
+[1]: https://docs.growthbook.io/lib/react-native#step-1-configure-your-app
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Kameleoon integration
 
@@ -740,23 +825,23 @@ Initialize Split's SDK and create an inspector reporting feature flag evaluation
 For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
 
 ```kotlin
-  internal class DatadogSplitImpressionListener : ImpressionListener {
-    override fun log(impression: Impression) {
-        // Send the feature flag when Split reports the impression
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(
-            impression.split(),
-            impression.treatment()
-        )
-    }
-    override fun close() {
-    }
+internal class DatadogSplitImpressionListener : ImpressionListener {
+  override fun log(impression: Impression) {
+      // Send the feature flag when Split reports the impression
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(
+          impression.split(),
+          impression.treatment()
+      )
   }
+  override fun close() {
+  }
+}
 
-  // In initialization:
-  val apikey = BuildConfig.SPLIT_API_KEY
-  val config = SplitClientConfig.builder()
-      .impressionListener(DatadogSplitImpressionListener())
-      .build()
+// In initialization:
+val apikey = BuildConfig.SPLIT_API_KEY
+val config = SplitClientConfig.builder()
+    .impressionListener(DatadogSplitImpressionListener())
+    .build()
 ```
 
 
@@ -885,7 +970,7 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you c
 
 ## Troubleshooting
 
-### Feature flag data is not reflecting the expected information
+### My feature flag data doesn't reflect what I expect to see
 Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
@@ -901,19 +986,11 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 
 When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
 
-### Feature flag naming
-
-The following special characters are not supported for [Feature Flag Tracking][5]: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
-
-```javascript
-datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
-```
-
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

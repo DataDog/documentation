@@ -22,7 +22,7 @@ author:
   support_email: support@rigor.com
 categories:
 - tests
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
 display_on_public_website: true
@@ -38,27 +38,27 @@ public_title: Rigor
 short_description: Rigor proporciona monitorización y optimización Synthetic durante
   todo el ciclo del desarrollo.
 supported_os:
-- Linux
-- Windows
-- macOS
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
+  - Supported OS::Linux
+  - Supported OS::Windows
   - Categoría::Tests
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::macOS
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Rigor proporciona monitorización y optimización Synthetic durante todo
     el ciclo del desarrollo.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Rigor
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 ## Información general
 
 Rigor proporciona monitorización y optimización Synthetic durante todo el ciclo del desarrollo.

@@ -91,7 +91,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "unifi_console" >}}
+{{< get-metrics-from-git "unifi-console" >}}
 
 
 ### イベント
@@ -99,7 +99,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 Unifi Console インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "unifi_console" >}}
+{{< get-service-checks-from-git "unifi-console" >}}
 
 
 

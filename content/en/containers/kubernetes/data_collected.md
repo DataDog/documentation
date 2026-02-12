@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Data Collected
+description: Reference guide for metrics and events collected by the Datadog Agent from Kubernetes clusters
 aliases:
  - /agent/kubernetes/metrics
  - /agent/kubernetes/data_collected
@@ -24,15 +25,17 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. 
+This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. The set of metrics collected may vary depending on the version of Kubernetes in use.
 
-The set of metrics collected may vary depending on the version of Kubernetes in use.
+**Note**: For Windows containers, see [Limited metrics for Windows deployments][7].
 
 ## Metrics
 
 ### Kubernetes
 
 {{< get-metrics-from-git "kubernetes" >}}
+
+**Note**: For more information about `kubernetes.cpu.*` metrics, see [Discrepancies in `kubernetes.cpu.*` and `container.cpu.*` metrics][8].
 
 ### Kubelet
 
@@ -54,35 +57,35 @@ For more information, see the documentation for the [Kubernetes state metrics co
 
 ### Kubernetes DNS
 
-{{< get-metrics-from-git "kube_dns" >}}
+{{< get-metrics-from-git "kube-dns" >}}
 
 ### Kubernetes proxy
 
-{{< get-metrics-from-git "kube_proxy" >}}
+{{< get-metrics-from-git "kube-proxy" >}}
 
 ### Kubernetes API server
 
 For more information, see the documentation for the [Kubernetes API server][3] integration.
 
-{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+{{< get-metrics-from-git "kube-apiserver-metrics" >}}
 
 ### Kubernetes controller manager
 
 For more information, see the documentation for the [Kubernetes controller manager][2] integration.
 
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 ### Kubernetes metrics server
 
 For more information, see the documentation for the [Kubernetes metrics server][4] integration.
 
-{{< get-metrics-from-git "kube_metrics_server" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
 ### Kubernetes scheduler
 
 For more information, see the documentation for the [Kubernetes scheduler][5] integration.
 
-{{< get-metrics-from-git "kube_scheduler" >}}
+{{< get-metrics-from-git "kube-scheduler" >}}
 
 
 ## Events
@@ -126,19 +129,19 @@ For more information, see the documentation for the [Kubelet][1] integration.
 
 For more information, see the documentation for the [Kubernetes controller manager][2] integration.
 
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 ### Kubernetes metrics server
 
 For more information, see the documentation for the [Kubernetes metrics server][4] integration.
 
-{{< get-service-checks-from-git "kube_metrics_server" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
 ### Kubernetes scheduler
 
 For more information, see the documentation for the [Kubernetes scheduler][5] integration.
 
-{{< get-service-checks-from-git "kube_scheduler" >}}
+{{< get-service-checks-from-git "kube-scheduler" >}}
 
 ### Kubernetes state metrics core
 
@@ -178,3 +181,5 @@ For more information, see the documentation for the [Kubernetes state metrics co
 [4]: /integrations/kube_metrics_server
 [5]: /integrations/kube_scheduler
 [6]: /integrations/kubernetes_state_core/
+[7]: /agent/troubleshooting/windows_containers/#limited-metrics-for-windows-deployments
+[8]: /containers/faq/cpu-usage-metrics

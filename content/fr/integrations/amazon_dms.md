@@ -4,6 +4,7 @@ categories:
 - cloud
 - data stores
 - log collection
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés AWS Database Migration Service (DMS).
 doc_link: https://docs.datadoghq.com/integrations/amazon_dms/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: AWS Database Migration Service (DMS)
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_dms
 public_title: Intégration Datadog/AWS Database Migration Service (DMS)
@@ -23,13 +23,13 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 AWS Database Migration Service (DMS) est un service cloud qui simplifie la migration de bases de données relationnelles, d'entrepôts de données, de bases de données NoSQL et d'autres types de data stores.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques de DMS.
 
-## Formule et utilisation
+## Configuration
 
 ### Installation
 
@@ -40,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 1. Sur la [page de l'intégration AWS][2], vérifiez que `Database Migration Service` est activé dans l'onglet `Metric Collection`.
 2. Installez l'[intégration Datadog/AWS Database Migration Service (DMS)][3].
 
-### APM
+### Collecte de logs
 
 #### Activer le logging
 
@@ -56,17 +56,17 @@ Configurez AWS Database Migration Service de façon à ce que ses logs soient en
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
     - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "amazon_dms" >}}
 
 
-### Aide
+### Événements
 
 L'intégration AWS Database Migration Service (DMS) n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration AWS Database Migration Service (DMS) n'inclut aucun check de service.
 
@@ -78,7 +78,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-dms
 [4]: https://docs.datadoghq.com/fr/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dms/amazon_dms_metadata.csv
 [8]: https://docs.datadoghq.com/fr/help/

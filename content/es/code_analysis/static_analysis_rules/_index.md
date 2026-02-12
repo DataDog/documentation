@@ -2,8 +2,8 @@
 title: Reglas de análisis estático
 description: Consulta reglas de varios lenguajes para el análisis estático.
 aliases:
-- /continuous_integration/static_analysis/rules
-- /static_analysis/rules
+- /es/continuous_integration/static_analysis/rules
+- /es/static_analysis/rules
 is_beta: false
 type: static-analysis
 rulesets:
@@ -255,7 +255,7 @@ Code Analysis se encuentra en versión preliminar.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Analysis no se encuentra disponible para el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}

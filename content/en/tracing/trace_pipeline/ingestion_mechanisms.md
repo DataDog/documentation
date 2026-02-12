@@ -13,6 +13,9 @@ further_reading:
 - link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#improving-tracing-efficiency-through-targeted-changes"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}
@@ -45,19 +48,19 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][23] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][21] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
 
 #### Local configuration
 
 Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
-@param max_traces_per_second - integer - optional - default: 10
-@env DD_APM_MAX_TPS - integer - optional - default: 10
+@param target_traces_per_second - integer - optional - default: 10
+@env DD_APM_TARGET_TPS - integer - optional - default: 10
 ```
 
 **Notes**:
 - The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
-- The maximum traces per second is a target, not a fixed value. In reality, it fluctuates depending on traffic spikes and other factors.
+- The target is not a fixed value. In reality, it fluctuates depending on traffic spikes and other factors.
 
 All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
@@ -76,7 +79,7 @@ The configuration can be set by environment variables or directly in the code:
 {{% tab "Java" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
@@ -90,7 +93,7 @@ For example, to capture 100% of traces for the resource `GET /checkout` from the
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\":1},{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{"service": "my-service", "resource": "GET /checkout", "sample_rate":1},{"service": "my-service", "sample_rate":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
@@ -109,6 +112,15 @@ Read more about sampling controls in the [Java tracing library documentation][2]
 [3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
 {{% /tab %}}
 {{% tab "Python" %}}
+**Remote configuration**
+
+Starting from version <a href="https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0">2.9.0</a>, for Python applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][3].
+
+**Note**: Remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
 For Python applications, set by-service and by-resource (starting from version [v2.8.0][1] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
 For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
@@ -125,8 +137,18 @@ Read more about sampling controls in the [Python tracing library documentation][
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
 [2]: /tracing/trace_collection/dd_libraries/python
+[3]: /tracing/guide/resource_based_sampling/
 {{% /tab %}}
 {{% tab "Ruby" %}}
+**Remote configuration**
+
+Starting from version <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, for Ruby applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+
+**Note**: Remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
 For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
 For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
@@ -145,7 +167,7 @@ Read more about sampling controls in the [Ruby tracing library documentation][1]
 {{% tab "Go" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.64.0">1.64.0</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. 
 
 Read more about how to remotely configure sampling rates by service and resource in this [article][3].
 
@@ -172,6 +194,16 @@ Read more about sampling controls in the [Go tracing library documentation][1].
 [3]: /tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
+**Remote configuration**
+
+Starting from version <a href="https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0">5.16.0</a>, for Node.js applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+
+**Note**: Remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
+
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
 You can also set by-service sampling rates. For instance, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
@@ -198,7 +230,7 @@ Read more about sampling controls in the [Node.js tracing library documentation]
 {{% tab "PHP" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>. Starting from version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, for PHP applications, set by-service and by-resource sampling rates from the <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Ingestion Control Page</a>. Use <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">this form</a> to request access today.</div>
+Starting from version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, for PHP applications, set by-service and by-resource sampling rates from the <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Ingestion Control Page</a>.
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
@@ -220,6 +252,15 @@ Read more about sampling controls in the [PHP tracing library documentation][1].
 [1]: /tracing/trace_collection/dd_libraries/php
 {{% /tab %}}
 {{% tab "C++" %}}
+**Remote configuration**
+
+Starting from version <a href="https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2">0.2.2</a>, for C++ applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+
+**Note**: Remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
 Starting in [v0.1.0][1], the Datadog C++ library supports the following configurations:
 - Global sampling rate: `DD_TRACE_SAMPLE_RATE` environment variable
 - Sampling rates by service: `DD_TRACE_SAMPLING_RULES` environment variable.
@@ -243,11 +284,18 @@ For .NET applications, set a global sampling rate for the library using the `DD_
 For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+#using powershell
+$env:DD_TRACE_SAMPLE_RATE=0.1
+$env:DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+
+#using JSON file   
+{
+    "DD_TRACE_SAMPLE_RATE": "0.1",
+    "DD_TRACE_SAMPLING_RULES": "[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\": 0.5}]"
+}
 ```
 
-<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/remote_configuration">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
@@ -450,6 +498,8 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+{{% tracing-go-v2 %}}
+
 Manually keep a trace:
 
 ```Go
@@ -458,8 +508,8 @@ package main
 import (
     "log"
     "net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" 
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -483,8 +533,8 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/ext"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -762,7 +812,13 @@ Starting from version [v2.18.0][1], for .NET applications, set by-service and by
 For example, to collect `100%` of the spans from the service named `my-service`, for the operation `http.request`, up to `50` spans per second:
 
 ```
-@env DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+#using powershell
+$env:DD_SPAN_SAMPLING_RULES='[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]'
+
+#using JSON file   
+{
+    "DD_SPAN_SAMPLING_RULES": "[{\"service\": \"my-service\", \"name\": \"http.request\", \"sample_rate\": 1.0, \"max_per_second\": 50}]"
+}
 ```
 
 Read more about sampling controls in the [.NET tracing library documentation][2].
@@ -772,7 +828,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
+<div class="alert alert-danger"> The <a href="/tracing/legacy_app_analytics/">App Analytics</a> mechanism is fully deprecated. To ingest single spans without the complete trace, use the <a href="/tracing/trace_pipeline/ingestion_mechanisms#single-spans">Single Span sampling</a> configuration. To ingest complete traces, use <a href="/tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling">Head-Based sampling</a> configurations.</div>
 
 ## Product ingested spans
 
@@ -808,8 +864,8 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 | Product    | Ingestion Reason                    | Ingestion Mechanism Description |
 |------------|-------------------------------------|---------------------------------|
 | Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][14] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
-| Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][15] as a threat. |
-| Data Jobs Monitoring    | `data_jobs`                            | Traces ingested from the Datadog Java Tracer Spark integration or the Databricks integration. |
+| App and API Protection     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [AAP][15] as a threat. |
+| Data Observability: Jobs Monitoring    | `data_jobs`                            | Traces ingested from the Datadog Java Tracer Spark integration or the Databricks integration. |
 
 ## Ingestion mechanisms in OpenTelemetry
 `ingestion_reason:otel`
@@ -826,7 +882,7 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [4]: /tracing/glossary/#trace-root-span
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /tracing/trace_pipeline/generate_metrics/
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/
+[7]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
 [9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
 [10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
@@ -840,6 +896,5 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /agent/remote_config/#enabling-remote-configuration
+[21]: /tracing/guide/remote_config/
 [22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry
-[23]: /agent/remote_config/

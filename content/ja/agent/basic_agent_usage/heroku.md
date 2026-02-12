@@ -9,7 +9,9 @@ title: Datadog Heroku ビルドパック
 
 ## インストール
 
-このガイドでは、Heroku で実行中のアプリケーションがあることを前提としています。アプリケーションを Heroku にデプロイする方法については、Heroku のドキュメントを参照してください。
+Heroku 上に Datadog Agent をインストールするには、[Fleet Automation の アプリ内 インストール ガイド][33] に従ってください。
+
+このガイドでは、Heroku で実行中のアプリケーションがあることを前提としています。アプリケーションを Heroku にデプロイする方法については、[Heroku のドキュメント][34]を参照してください。
 
 1. [Datadog API 設定][3]で Datadog API キーをコピーし、次の環境変数へエクスポートします:
 
@@ -38,14 +40,14 @@ title: Datadog Heroku ビルドパック
    heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
    # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
-   heroku config:add DD_DYNO_HOST=true
+   heroku config:add DD_DYNO_HOST=true -a $APPNAME
 
    # Set the DD_SITE env variable automatically
-   heroku config:add DD_SITE=$DD_SITE
+   heroku config:add DD_SITE=$DD_SITE -a $APPNAME
 
    # Add this buildpack and set your Datadog API key
-   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-   heroku config:add DD_API_KEY=$DD_API_KEY
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git -a $APPNAME
+   heroku config:add DD_API_KEY=$DD_API_KEY -a $APPNAME
 
    # Deploy to Heroku forcing a rebuild
    git commit --allow-empty -m "Rebuild slug"
@@ -102,11 +104,11 @@ git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
 
-## 構成
+## 設定
 
 上で示した環境変数のほかにも、いくつか設定できる変数があります。
 
-| 設定                    | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 設定                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`               | *必須。*API キーは、[Organization Settings -> API Keys][3] のページにあります。**注**: これは、アプリケーションキーではなく *API* キーです。                                                                                                                                                                                                                                                                                                                                                                                |
 | `DD_HOSTNAME`              | オプション。**警告**: ホスト名を手動で設定すると、メトリクスの連続性エラーが発生する可能性があります。この変数は設定しないことをお勧めします。dyno のホストはエフェメラルであるため、タグ `dynoname` または `appname` に基づいて監視することをお勧めします。                                                                                                                                                                                                                                                       |
@@ -146,6 +148,7 @@ Heroku dyno はエフェメラルです。新しいコードのデプロイ、�
 dyno タイプに基づいて Datadog Agent を無効にするには、次のスニペットを [prerun.sh スクリプト]（＃prerun-script）(#prerun-script)に追加します (監視したくない dyno のタイプに適合させます)。
 
 ```shell
+DYNOTYPE=${DYNO%%.*}
 # dyno タイプに基づいて Datadog Agent を無効にします
 if [ "$DYNOTYPE" == "run" ] || [ "$DYNOTYPE" == "scheduler" ] || [ "$DYNOTYPE" == "release" ]; then
   DISABLE_DATADOG_AGENT="true"
@@ -217,6 +220,52 @@ heroku config:set DD_ENABLE_DBM=true
 ```
 
 データベースモニタリングは、Datadog Agent のデータベース資格情報を作成する必要があるため、Heroku Postgres Essential Tier プランでは DBM は利用できません。
+
+### Dogstatsd Mapper プロファイルを有効にする (Sidekiq)
+
+[Sidekiq](https://docs.datadoghq.com/integrations/sidekiq/) のようないくつかのインテグレーションでは、 [DogStatsD Mapper](https://docs.datadoghq.com/developers/dogstatsd/dogstatsd_mapper/) プロファイルが必要です。
+
+新しい DogStatsD Mapper プロファイルを追加するには、[prerun.sh スクリプト](#prerun-script)に次のスニペットを追加してください:
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: '<PROFILE_NAME>'
+    prefix: '<PROFILE_PREFIX>'
+    mappings:
+      - match: '<METRIC_TO_MATCH>'
+        match_type: '<MATCH_TYPE>'
+        name: '<MAPPED_METRIC_NAME>'
+        tags:
+          '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
+EOF
+```
+
+例えば、Sidekiq インテグレーションを有効にするには、次のスニペットを追加してください:
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: sidekiq
+    prefix: "sidekiq."
+    mappings:
+      - match: 'sidekiq\.sidekiq\.(.*)'
+        match_type: "regex"
+        name: "sidekiq.$1"
+      - match: 'sidekiq\.jobs\.(.*)\.perform'
+        name: "sidekiq.jobs.perform"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+      - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+        name: "sidekiq.jobs.worker.$2"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+EOF
+```
 
 ### その他のインテグレーションを有効にする
 
@@ -296,7 +345,8 @@ Heroku アプリケーションのファイルシステムはすべての dyno �
 
 例えば、Gunicorn のインテグレーションが `web` タイプの dyno でのみ実行される必要がある場合、プリランスクリプトに以下を追加します。
 
-```
+```shell
+DYNOTYPE=${DYNO%%.*}
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
@@ -328,6 +378,9 @@ fi
 
 ```shell
 #!/usr/bin/env bash
+
+# Heroku の '$DYNO' 環境変数から dyno タイプを抽出します 
+DYNOTYPE="${DYNO%%.*}"
 
 # dyno タイプに基づいて Datadog Agent を無効にします
 if [ "$DYNOTYPE" == "run" ]; then
@@ -454,7 +507,7 @@ Docker イメージのより高度なオプションについては、[Datadog A
 
 このプロジェクトの以前のバージョンは、[miketheman heroku-buildpack-datadog プロジェクト][31]から分岐したものです。その後、Datadog の Agent バージョン 6 向けに大幅な書き換えが行われました。変更内容と詳細は、[changelog][32] にあります。
 
-## トラブルシューティング
+## トラブル シューティング
 
 ### Agent ステータスの取得
 
@@ -590,7 +643,7 @@ APM Agent
 [15]: https://docs.datadoghq.com/ja/logs/guide/collect-heroku-logs
 [16]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
 [17]: https://docs.datadoghq.com/ja/database_monitoring/
-[18]: https://docs.datadoghq.com/ja/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
+[18]: https://docs.datadoghq.com/ja/database_monitoring/setup_postgres/heroku/
 [19]: https://docs.datadoghq.com/ja/integrations/
 [20]: https://docs.datadoghq.com/ja/getting_started/integrations/#configuring-agent-integrations
 [21]: https://docs.datadoghq.com/ja/integrations/mcache/
@@ -605,3 +658,5 @@ APM Agent
 [30]: https://github.com/DataDog/heroku-buildpack-datadog
 [31]: https://github.com/miketheman/heroku-buildpack-datadog
 [32]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=heroku
+[34]: https://devcenter.heroku.com/categories/deployment

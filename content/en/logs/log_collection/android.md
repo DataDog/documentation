@@ -40,31 +40,31 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       class SampleApplication : Application() {
-           override fun onCreate() {
-               super.onCreate()
-               val configuration = Configuration.Builder(
-                   clientToken = <CLIENT_TOKEN>,
-                   env = <ENV_NAME>,
-                   variant = <APP_VARIANT_NAME>
-               ).build()
-               Datadog.initialize(this, configuration, trackingConsent)
-           }
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+               clientToken = <CLIENT_TOKEN>,
+               env = <ENV_NAME>,
+               variant = <APP_VARIANT_NAME>
+           ).build()
+           Datadog.initialize(this, configuration, trackingConsent)
        }
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       public class SampleApplication extends Application {
-           @Override
-           public void onCreate() {
-               super.onCreate();
-               Configuration configuration =
-                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
-                               .build();
-               Datadog.initialize(this, configuration, trackingConsent);
-           }
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
        }
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -74,34 +74,34 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       class SampleApplication : Application() {
-           override fun onCreate() {
-               super.onCreate()
-               val configuration = Configuration.Builder(
-                        clientToken = <CLIENT_TOKEN>,
-                        env = <ENV_NAME>,
-                        variant = <APP_VARIANT_NAME>
-                    )
-                    .useSite(DatadogSite.EU1)
-                    .build()
-               Datadog.initialize(this, configuration, trackingConsent)
-           }
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               )
+               .useSite(DatadogSite.EU1)
+               .build()
+           Datadog.initialize(this, configuration, trackingConsent)
        }
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       public class SampleApplication extends Application {
-           @Override
-           public void onCreate() {
-               super.onCreate();
-               Configuration configuration =
-                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
-                               .useSite(DatadogSite.EU1)
-                               .build();
-               Datadog.initialize(this, configuration, trackingConsent);
-           }
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .useSite(DatadogSite.EU1)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
        }
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -111,34 +111,34 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       class SampleApplication : Application() {
-           override fun onCreate() {
-               super.onCreate()
-               val configuration = Configuration.Builder(
-                        clientToken = <CLIENT_TOKEN>,
-                        env = <ENV_NAME>,
-                        variant = <APP_VARIANT_NAME>
-                    )
-                    .useSite(DatadogSite.US3)
-                    .build()
-               Datadog.initialize(this, configuration, trackingConsent)
-           }
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               )
+               .useSite(DatadogSite.US3)
+               .build()
+           Datadog.initialize(this, configuration, trackingConsent)
        }
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       public class SampleApplication extends Application {
-           @Override
-           public void onCreate() {
-               super.onCreate();
-               Configuration configuration =
-                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
-                               .useSite(DatadogSite.US3)
-                               .build();
-               Datadog.initialize(this, configuration, trackingConsent);
-           }
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .useSite(DatadogSite.US3)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
        }
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -148,34 +148,34 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       class SampleApplication : Application() {
-           override fun onCreate() {
-               super.onCreate()
-               val configuration = Configuration.Builder(
-                        clientToken = <CLIENT_TOKEN>,
-                        env = <ENV_NAME>,
-                        variant = <APP_VARIANT_NAME>
-                    )
-                    .useSite(DatadogSite.US5)
-                    .build()
-               Datadog.initialize(this, configuration, trackingConsent)
-           }
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               )
+               .useSite(DatadogSite.US5)
+               .build()
+           Datadog.initialize(this, configuration, trackingConsent)
        }
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       public class SampleApplication extends Application {
-           @Override
-           public void onCreate() {
-               super.onCreate();
-               Configuration configuration =
-                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
-                               .useSite(DatadogSite.US5)
-                               .build();
-               Datadog.initialize(this, configuration, trackingConsent);
-           }
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .useSite(DatadogSite.US5)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
        }
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -185,34 +185,34 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       class SampleApplication : Application() {
-           override fun onCreate() {
-               super.onCreate()
-               val configuration = Configuration.Builder(
-                        clientToken = <CLIENT_TOKEN>,
-                        env = <ENV_NAME>,
-                        variant = <APP_VARIANT_NAME>
-                    )
-                    .useSite(DatadogSite.US1_FED)
-                    .build()
-               Datadog.initialize(this, configuration, trackingConsent)
-           }
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               )
+               .useSite(DatadogSite.US1_FED)
+               .build()
+           Datadog.initialize(this, configuration, trackingConsent)
        }
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       public class SampleApplication extends Application {
-           @Override
-           public void onCreate() {
-               super.onCreate();
-               Configuration configuration =
-                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
-                               .useSite(DatadogSite.US1_FED)
-                               .build();
-               Datadog.initialize(this, configuration, trackingConsent);
-           }
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .useSite(DatadogSite.US1_FED)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
        }
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -222,34 +222,71 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       class SampleApplication : Application() {
-           override fun onCreate() {
-               super.onCreate()
-               val configuration = Configuration.Builder(
-                        clientToken = <CLIENT_TOKEN>,
-                        env = <ENV_NAME>,
-                        variant = <APP_VARIANT_NAME>
-                    )
-                    .useSite(DatadogSite.AP1)
-                    .build()
-               Datadog.initialize(this, configuration, trackingConsent)
-           }
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               )
+               .useSite(DatadogSite.AP1)
+               .build()
+           Datadog.initialize(this, configuration, trackingConsent)
        }
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       public class SampleApplication extends Application {
-           @Override
-           public void onCreate() {
-               super.onCreate();
-               Configuration configuration =
-                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
-                               .useSite(DatadogSite.AP1)
-                               .build();
-               Datadog.initialize(this, configuration, trackingConsent);
-           }
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .useSite(DatadogSite.AP1)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
        }
+   }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+       override fun onCreate() {
+           super.onCreate()
+           val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               )
+               .useSite(DatadogSite.AP2)
+               .build()
+           Datadog.initialize(this, configuration, trackingConsent)
+       }
+   }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+       @Override
+       public void onCreate() {
+           super.onCreate();
+           Configuration configuration =
+                   new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                           .useSite(DatadogSite.AP2)
+                           .build();
+           Datadog.initialize(this, configuration, trackingConsent);
+       }
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -271,9 +308,9 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    Use the utility method `isInitialized` to check if the SDK is properly initialized:
 
    ```kotlin
-    if (Datadog.isInitialized()) {
-        // your code here
-    }
+   if (Datadog.isInitialized()) {
+       // your code here
+   }
    ```
 
    When writing your application, you can enable development logs by calling the `setVerbosity` method. All internal messages in the library with a priority equal to or higher than the provided level are then logged to Android's Logcat:
@@ -286,15 +323,15 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-        val logsConfig = LogsConfiguration.Builder().build()
-        Logs.enable(logsConfig)
+   val logsConfig = LogsConfiguration.Builder().build()
+   Logs.enable(logsConfig)
    ```
    {{% /tab %}}
 
    {{% tab "Java" %}}
    ```java
-        LogsConfiguration logsConfig = new LogsConfiguration.Builder().build();
-        Logs.enable(logsConfig);
+   LogsConfiguration logsConfig = new LogsConfiguration.Builder().build();
+   Logs.enable(logsConfig);
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -304,25 +341,25 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-        val logger = Logger.Builder()
-           .setNetworkInfoEnabled(true)
-           .setLogcatLogsEnabled(true)
-           .setRemoteSampleRate(100f)
-           .setBundleWithTraceEnabled(true)
-           .setName("<LOGGER_NAME>")
-           .build()
+   val logger = Logger.Builder()
+       .setNetworkInfoEnabled(true)
+       .setLogcatLogsEnabled(true)
+       .setRemoteSampleRate(100f)
+       .setBundleWithTraceEnabled(true)
+       .setName("<LOGGER_NAME>")
+       .build()
    ```
    {{% /tab %}}
 
    {{% tab "Java" %}}
    ```java
-        Logger logger = new Logger.Builder()
-           .setNetworkInfoEnabled(true)
-           .setLogcatLogsEnabled(true)
-           .setRemoteSampleRate(100f)
-           .setBundleWithTraceEnabled(true)
-           .setName("<LOGGER_NAME>")
-           .build();
+   Logger logger = new Logger.Builder()
+       .setNetworkInfoEnabled(true)
+       .setLogcatLogsEnabled(true)
+       .setRemoteSampleRate(100f)
+       .setBundleWithTraceEnabled(true)
+       .setName("<LOGGER_NAME>")
+       .build();
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -336,25 +373,25 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
     logger.e("An error was met!")
     logger.wtf("What a Terrible Failure!")
     ```
-   
+
 6. Exceptions caught can be sent with a message:
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       try { 
-           doSomething() 
-       } catch (e: IOException) {
-           logger.e("Error while doing something", e) 
-       }
+   try {
+       doSomething()
+   } catch (e: IOException) {
+       logger.e("Error while doing something", e)
+   }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       try {
-           doSomething();
-       } catch (IOException e) {
-           logger.e("Error while doing something", e);
-       }
+   try {
+       doSomething();
+   } catch (IOException e) {
+       logger.e("Error while doing something", e);
+   }
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -366,14 +403,14 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       logger.i("onPageStarted", attributes = mapOf("http.url" to url))
+   logger.i("onPageStarted", attributes = mapOf("http.url" to url))
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       Map<String, Object> attributes = new HashMap<>();
-       attributes.put("http.url", url);
-       logger.i("onPageStarted", null, attributes);
+   Map<String, Object> attributes = new HashMap<>();
+   attributes.put("http.url", url);
+   logger.i("onPageStarted", null, attributes);
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -383,18 +420,18 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       val logsConfig = LogsConfiguration.Builder()
-                   // ...
-                   .setEventMapper(logEventMapper)
-                   .build()
+   val logsConfig = LogsConfiguration.Builder()
+               // ...
+               .setEventMapper(logEventMapper)
+               .build()
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-       LogsConfiguration logsConfig = new LogsConfiguration.Builder()
-                   // ...
-                   .setEventMapper(logEventMapper)
-                   .build();
+   LogsConfiguration logsConfig = new LogsConfiguration.Builder()
+               // ...
+               .setEventMapper(logEventMapper)
+               .build();
    ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -415,7 +452,7 @@ The following methods in `Logger.Builder` can be used when initializing the logg
 | `setBundleWithTraceEnabled(true)`| Set to `true` (default) to bundle the logs with the active trace in your application. This parameter lets you display all the logs sent during a specific trace by using the Datadog dashboard.                                                        |
 | `setBundleWithRumEnabled(true)`| Set to `true` (default) to bundle the logs with the current RUM context in your application. This parameter lets you display all the logs sent while a specific View is active by using the Datadog RUM Explorer.                                                        |
 | `setName(<LOGGER_NAME>)`   | Set `<LOGGER_NAME>` as the value for the `logger.name` attribute attached to all logs sent to Datadog.                                                                                                                                                                  |
-| `setRemoteSampleRate(<SAMPLE_RATE>)`   | Set the sampling rate for this logger. All the logs produced by the logger instance are randomly sampled according to the provided sample rate (default 1.0 = all logs). **Note**: The Logcat logs are not sampled.            |
+| `setRemoteSampleRate(<SAMPLE_RATE>)`   | Set the sampling rate for this logger. All the logs produced by the logger instance are randomly sampled according to the provided sample rate (default 100f = all logs). **Note**: The Logcat logs are not sampled.            |
 | `build()`                        | Build a new logger instance with all options set.                                                                                                                                                                                                                       |
 
 ### Global configuration
@@ -461,14 +498,24 @@ By default, the following attributes are added to all logs sent by a logger:
 Use the `addAttribute("<ATTRIBUTE_KEY>", "<ATTRIBUTE_VALUE>")` function to add a custom attribute to all logs sent by a specific logger:
 
 ```kotlin
-// This adds an attribute "version_code" with an integer value
+// This adds an attribute "version_code" with an Integer value for this logger instance
 logger.addAttribute("version_code", BuildConfig.VERSION_CODE)
 
-// This adds an attribute "version_name" with a String value
+// This adds an attribute "version_name" with a String value for this logger instance
 logger.addAttribute("version_name", BuildConfig.VERSION_NAME)
 ```
 
-The `<ATTRIBUTE_VALUE>` can be any primitive, `String`, or Date.
+Attributes can be added globally across all Logs instances (for example: service name, environment) by using:
+
+```kotlin
+// This adds an attribute "version_code" with an integer value in all Logs instances.
+Logs.addAttribute("version_code", BuildConfig.VERSION_CODE)
+
+// This adds an attribute "version_name" with a String value in all Logs instances.
+Logs.addAttribute("version_name", BuildConfig.VERSION_NAME)
+```
+
+The `<ATTRIBUTE_VALUE>` can be any primitive, `String`, or `Date`.
 
 ##### Remove attributes
 
@@ -480,6 +527,16 @@ logger.removeAttribute("version_code")
 
 // This removes the attribute "version_name" from all further log send.
 logger.removeAttribute("version_name")
+```
+
+To remove a global attribute from all Logs instances:
+
+```kotlin
+// This removes the attribute "version_code" from all Logs instances.
+Logs.removeAttribute("version_code")
+
+// This removes the attribute "version_name" from all Logs instances.
+Logs.removeAttribute("version_name")
 ```
 
 ## Batch collection

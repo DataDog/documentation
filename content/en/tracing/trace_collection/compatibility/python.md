@@ -17,23 +17,22 @@ further_reading:
 
 The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime.
 
-Two Python APM Client library release branches are supported:
+The following Python APM Client library release branches are supported:
 
-| Release    | Support level        |
-|------------|----------------------|
-| `>=1.0,<2` | Maintenance          |
-| `>=2.0,<3` | General Availability |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
+
+Support levels are defined by the following:
+
+| Support Level | Support Provided | Lifecycle Timeline |
+| :--- | :--- | :--- |
+| **General Availability (GA)** | <li>New features and enhancements</li><li>All bug and security fixes (on the latest minor release)</li><li>Critical fixes backported (to the 3 most recent minor releases)</li> | A major version is in GA for **12 months** following its initial `x.0.0` release. |
+| **Maintenance** | <li>Critical security and bug fixes only</li> | A major version enters Maintenance **12 months** after its initial release and remains for **6 months**. |
+| **End of Life (EOL)** | <li>No updates or support</li> | A major version becomes EOL **18 months** after its initial `x.0.0` release. |  
 
 The Python APM Client library supports the following Python runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
-|---------|-----------------------|---------|-----------------|---------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                      |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7+            | `>=2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7+            | `>=2`                     |
-| Windows | 64bit, 32bit          | CPython | 3.7+            | `>=2`                     |
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
+
 
 ## Integrations
 
@@ -57,7 +56,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [FastAPI][10]              | >= 0.51           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
 | [Gunicorn][61]            | >= 20.0.04        | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gunicorn |
 | [Molten][11]               | >= 0.7.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
-| [Pylons][12]              | >= 0.9.6          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
+| [Pylons][12]              | >= 0.9.6 (dd-trace-py 1.x only) | no | https://ddtrace.readthedocs.io/en/v1.20.19/integrations.html#pylons  |
 | [Pyramid][13]             | >= 1.7            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
 | [Sanic][15]               | >= 19.6.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
 | [Starlette][16]           | >= 0.13.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
@@ -119,7 +118,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][58]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
+| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   |
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
@@ -134,7 +133,7 @@ The `ddtrace` library includes support for the following libraries:
 [3]: http://asgi.readthedocs.io/
 [4]: https://aiohttp.readthedocs.io
 [5]: https://bottlepy.org
-[6]: https://cherrypy.org/
+[6]: https://cherrypy.dev/
 [7]: https://www.djangoproject.com
 [8]: https://falconframework.org
 [9]: http://flask.pocoo.org
@@ -157,14 +156,14 @@ The `ddtrace` library includes support for the following libraries:
 [26]: https://pymemcache.readthedocs.io
 [27]: https://www.mongodb.com/what-is-mongodb
 [28]: http://mongoengine.org
-[29]: https://api.mongodb.com/python/current
+[29]: https://pymongo.readthedocs.io/en/stable/
 [30]: https://www.mysql.com
 [31]: https://pypi.org/project/MySQL-python
 [32]: https://pypi.org/project/mysqlclient
 [33]: https://dev.mysql.com/doc/connector-python/en/
 [34]: https://www.postgresql.org
 [35]: https://aiopg.readthedocs.io
-[36]: http://initd.org/psycopg
+[36]: https://www.psycopg.org/
 [37]: https://pypi.org/project/PyMySQL/
 [38]: https://pynamodb.readthedocs.io/en/latest/
 [39]: https://pypi.org/project/pyodbc/

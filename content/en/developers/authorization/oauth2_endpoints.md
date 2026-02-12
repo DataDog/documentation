@@ -29,7 +29,7 @@ In the authorization request, the application constructs the redirect URI by add
 |---------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | `redirect_uri`                                | Your application's redirection endpoint after a user grants or denies access.                              |
 | `client_id`                                   | The Client ID of your OAuth2 client.                                                                       |
-| `response_type`                               | The response type must be code for this grant flow.                                                        |
+| `response_type`                               | The response type must be `code` for this grant flow.                                                        |
 | `code_challenge`  (if PKCE is enabled)        | A transformation of `code_verifier`. Datadog recommends using `SHA-256` to compute the code challenge.     |
 | `code_challenge_method`  (if PKCE is enabled) | The method used to compute the code challenge. `SHA-256`, or `S256`, is supported.  |
 

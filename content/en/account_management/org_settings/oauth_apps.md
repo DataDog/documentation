@@ -1,5 +1,6 @@
 ---
 title: OAuth Apps
+description: Manage and monitor OAuth applications in your organization, including permissions, user access, and application status controls.
 further_reading:
 - link: "/account_management/org_settings/"
   tag: "Documentation"
@@ -14,13 +15,13 @@ Use the **OAuth Apps** management page under [Organization Settings][1] to manag
 ## Setup
 ### Permissions
 
-By default, users with [Datadog Standard and Datadog Admin roles][2] can access the OAuth Apps management page. If your organization has [custom roles][3] defined, add your user to any custom role with `org_authorized_apps_read` and `org_authorized_apps_write` permissions. 
+By default, users with the [Datadog Admin role][2] can access the OAuth Apps management page. If your organization has [custom roles][3] defined, add your user to any custom role with the `org_management` permission.
 
-Only users with the Datadog Admin role or the `org_authorized_apps_write` permission can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
+Only users with the Datadog Admin role or the `org_management` permission can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
 
 ### Enable
 
-Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App<!-- and your custom [UI Extensions][4] that have [OAuth API Access][5]-->. 
+Enabled OAuth applications allow users with necessary permissions to authorize access on their behalf. OAuth applications include the Datadog Mobile App<!-- and your custom [UI Extensions][4] that have [OAuth API Access][5]-->.
 
 ### Disable
 

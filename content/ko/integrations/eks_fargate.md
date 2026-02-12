@@ -31,7 +31,7 @@ draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
 integration_title: AWS Fargate에서의 Amazon EKS
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
@@ -71,12 +71,12 @@ tile:
 
 ## 개요
 
-<div class="alert alert-warning"> 본 페이지에서는 EKS Fargate 통합에 대해 설명합니다. ECS Fargate의 경우 Datadog <a href="http://docs.datadoghq.com/통합/ecs_fargate">ECS Fargate 통합</a> 설명서를 참조하세요.
+<div class="alert alert-danger"> 본 페이지에서는 EKS Fargate 통합에 대해 설명합니다. ECS Fargate의 경우 Datadog <a href="http://docs.datadoghq.com/통합/ecs_fargate">ECS Fargate 통합</a> 설명서를 참조하세요.
 </div>
 
 AWS Fargate의 Amazon EKS는 표준 쿠버네티스(Kubernetes) 환경의 배포 및 유지 관리의 특정 측면을 자동화하는 관리형 쿠버네티스(Kubernetes) 서비스입니다. 쿠버네티스(Kubernetes) 노드는 AWS Fargate로 관리하며 사용자로부터 추상화됩니다.
 
-**참고**: EKS Fargate는 네트워크 성능 모니터링(NPM)을 지원하지 않습니다.
+**참고**: 클라우드 네트워크 모니터링(CNM)은 EKS Fargate에서 지원되지 않습니다.
 
 ## 설정
 
@@ -181,7 +181,7 @@ metadata:
 {{% tab "Datadog Operator" %}}
 ##### Datadog Operator를 사용하는 승인 컨트롤러
 
-<div class="alert alert-warning">이 기능을 사용하려면 Cluster Agent v7.52.0+, Datadog Operator v1.7.0+ 및 <a href="https://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate 통합</a>이 필요합니다.
+<div class="alert alert-danger">이 기능을 사용하려면 Cluster Agent v7.52.0+, Datadog Operator v1.7.0+ 및 <a href="https://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate 통합</a>이 필요합니다.
 </div>
 
 하단의 설정으로 에이전트 사이드카와 통신하도록 클러스터 에이전트를 설정하여 [이벤트 컬렉션][1], [쿠버네티스(Kubernetes) 리소스 보기][2], [클러스터 점검][3] 등의 기능에 접근할 수 있게 합니다.
@@ -357,7 +357,7 @@ Agent 또는 해당 컨테이너 리소스를 추가로 구성하려면 `Datadog
 {{% tab "Helm" %}}
 ##### Helm을 사용한 승인 컨트롤러
 
-<div class="alert alert-warning">이 기능을 사용하려면 Cluster Agent v7.52.0 이상이 필요합니다.
+<div class="alert alert-danger">이 기능을 사용하려면 Cluster Agent v7.52.0 이상이 필요합니다.
 </div>
 
 하단의 설정으로 에이전트 사이드카와 통신하도록 클러스터 에이전트를 설정하여 [이벤트 컬렉션][1], [쿠버네티스(Kubernetes) 리소스 보기][2], [클러스터 점검][3] 등의 기능에 접근할 수 있게 합니다.

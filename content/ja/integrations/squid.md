@@ -2,6 +2,8 @@
 app_id: squid
 app_uuid: de18c581-69ee-48cf-ba23-7794bfb7a4bd
 assets:
+  dashboards:
+    Squid: assets/dashboards/squid.json
   integration:
     auto_install: true
     configuration:
@@ -16,6 +18,13 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10022
     source_type_name: Squid
+  logs:
+    source: squid
+  monitors:
+    CPU usage exceeded: assets/monitors/cpu_usage_exceeded.json
+    High latency requests: assets/monitors/high_latency_requests.json
+    High rate of client HTTP errors: assets/monitors/high_rate_of_client_http_errors.json
+    High rate of server errors: assets/monitors/high_rate_of_server_errors.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -32,7 +41,7 @@ draft: false
 git_integration_title: squid
 integration_id: squid
 integration_title: Squid
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: squid
@@ -53,7 +62,10 @@ tile:
   - Offering::Integration
   configuration: README.md#Setup
   description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
-  media: []
+  media:
+  - caption: Squid
+    image_url: images/squid.png
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
   title: Squid
@@ -63,6 +75,17 @@ tile:
 
 
 ## 概要
+[Squid][1] は、ネットワーク上のクライアントとサーバーの間に位置し、キャッシュおよびフォワーディングを行うオープンソースの Web プロキシサーバーです。ゲートウェイとして機能し、クライアントがウェブサイトやファイルなどのサーバー上のさまざまなインターネットリソースにアクセスできるようにします。
+
+このインテグレーションは Squid のログに対するエンリッチメントと可視化を提供します。既成のダッシュボードや検出ルールを通じて Squid ログ分析の詳細なインサイトを可視化し、検知と対応の能力を強化します。
+
+さらに、以下の状況に対して事前に構成されたモニターを備えており、能動的な通知を行います。
+
+1. サーバーエラーの発生率が高い
+2. CPU 使用率の上限超過
+3. 応答遅延が高いリクエスト
+4. クライアント HTTP エラーの発生率が高い
+
 
 このチェックは、Datadog Agent を通してキャッシュマネージャーから取得された [Squid][1] メトリクスを監視します。
 
@@ -154,6 +177,38 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ## 収集データ
 
+### ログ
+Squid インテグレーションはアクセスログとキャッシュログを収集します。
+
+#### サポートされているアクセスログ形式
+|名前                 | フォーマット仕様|
+|---------------------|------------------------------|
+| Squid      |`%ts.%03tu %6tr %>a %Ss/%03>Hs %<st %rm %ru %[un %Sh/%<a %mt`|
+| common     |`%>a - %[un [%tl] "%rm %ru HTTP/%rv" %>Hs %<st %Ss:%Sh`|
+| combined   |`%>a - %[un [%tl] "%rm %ru HTTP/%rv" %>Hs %<st "%{Referer}>h" "%{User-Agent}>h" %Ss:%Sh`|
+
+詳しくは [Squid ログ形式][4]を参照してください。
+
+**注**: 既定の `logformat` タイプは `squid` です。サポートされるログ形式は `/etc/squid/squid.conf` で更新し、Squid を再起動することができます。
+
+`logformat` に `combined` タイプを使用する場合は、`/etc/squid/squid.conf` ファイルに以下の行を追加してください。
+
+```
+logformat combined   %>a %[ui %[un [%tl] "%rm %ru HTTP/%rv" %>Hs %<st "%{Referer}>h" "%{User-Agent}>h" %Ss:%Sh
+access_log /var/log/squid/access.log combined
+```
+続いて、以下のコマンドを使用して `squid` サービスを再起動します。
+
+```shell
+sudo systemctl restart squid
+```  
+
+**注**:
+
+- `Top Avg Request Duration by URL Host` パネルは、`logformat` が既定の `squid` タイプに設定されている場合のみ読み込まれます。
+- `Top Browsers` と `Top HTTP Referrer` パネルは、`logformat` が `combined` タイプに設定されている場合のみ読み込まれます。
+
+
 ### メトリクス
 {{< get-metrics-from-git "squid" >}}
 
@@ -168,11 +223,12 @@ Squid チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 
 [1]: http://www.squid-cache.org/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://www.squid-cache.org/Doc/config/logformat/
+[5]: https://docs.datadoghq.com/ja/help/

@@ -23,7 +23,7 @@ author:
   support_email: brent@bmontague.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/resin/README.md
 display_on_public_website: true

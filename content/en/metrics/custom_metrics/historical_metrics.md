@@ -15,9 +15,15 @@ further_reading:
   text: "Monitor system performance across longer time frames with historical metrics"
 ---
 
+{{< jqmath-vanilla >}}
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
+
 ## Overview
 
-Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
+Enabling Historical Metrics Ingestion allows you to collect **custom metric** values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
 
 Having Historical Metrics Ingestion enabled on your metrics can be helpful for a variety of use cases such as recovering from an outage, correcting erroneous values, and managing IoT delays.
 
@@ -33,7 +39,7 @@ With Historical Metrics Ingestion enabled, if you submit multiple values with th
 
 You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  
 
-**Note**: Historical Metrics Ingestion is not available for distribution metrics.
+**Note**: Historical Metrics Ingestion is not available for distribution metrics, or custom metrics generated from other Datadog data types (such as logs).
 
 ## Configuration
 
@@ -437,21 +443,31 @@ public class DogStatsdClient
 
 Historical Metrics Ingestion has varying latency depending on how far in the past your metrics' timestamps are.
 
-| Metric Delayed by:   | Ingestion Latency                     |
-|----------------------|---------------------------------------|
-| 1-12 hours           | Near Real-Time Ingestion (1 hour MAX) |
-| 12 hours - 30 days   | Up to 14 hour latency                 |
-| +30 days             | +14 hours latency                     |
-
+| Metric Delayed by:   | Ingestion Latency                         |
+|----------------------|-------------------------------------------|
+| 1-12 hours           | Near Real-Time Ingestion (1 hour maximum) |
+| 12 hours - 30 days   | Up to 14 hours latency                    |
+| Over 30 days         | Over 14 hours latency                     |
 
 ## Historical Metrics Ingestion billing
 
-Historical Metrics are counted and billed as indexed custom metrics. Billable custom metrics are determined by the **timestamp of the metrics submitted**, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. For more information, see the [Custom Metrics billing][3] documentation.
+Historical Metrics are counted and billed as indexed custom metrics. Billable custom metrics are determined by the **timestamp of the metrics submitted**, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting **any** value (regardless of the timestamp), it would be considered active in the hour that it was submitted. 
+
+The following example assumes:
+- 3000 unique tag-value combinations
+- 1500 real-time metrics
+- 1500 historical metrics 
+- 720 hours in the month (30 days)
+- Custom metric cost of $5 per 100 metrics
+
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Usage Summary section of the Plan and Usage page, which shows both custom indexed and historical indexed metrics" style="width:100%;" >}}
 
+For more information, see the [Custom Metrics billing][3] documentation.
+ 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

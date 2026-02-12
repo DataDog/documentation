@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/agent/cluster_agent/commands
+description: Datadog Cluster Agent のコマンド ライン インターフェイスと環境変数に関するリファレンス ガイドです。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: ブログ
@@ -33,11 +34,11 @@ Datadog Cluster Agent には次のコマンドがあります。
 `datadog-cluster-agent flare <CASE_ID>`
 ノードベース Agent と同様に、Cluster Agent は、ログや使用された構成を集計し、サポートチームにアーカイブを転送したり、圧縮してローカルで使用したりすることもできます。**注**: このコマンドは Cluster Agent ポッド内から実行されます。
 
-## Cluster Agent environment variables
+## Cluster Agent 環境変数
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Set Cluster Agent environment variables under `override.clusterAgent.env`:
+`override.clusterAgent.env` の下で Cluster Agent の環境変数を設定します。
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -54,7 +55,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Set Cluster Agent environment variables under `clusterAgent.env`:
+`clusterAgent.env` の下で Cluster Agent の環境変数を設定します。
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 clusterAgent:
   env:
@@ -74,7 +75,7 @@ clusterAgent:
 クラスターチェックのオートディスカバリーを有効にします。デフォルトは `false` です。
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`                 
-: 32-character token that needs to be shared between the node Agent and the Datadog Cluster Agent.
+: ノード Agent と Datadog Cluster Agent 間で共有する必要がある 32 文字のトークンです。
 
 `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`
 Cluster Agent が公開される Kubernetes サービスの名前。デフォルトは `datadog-cluster-agent` です。
@@ -83,7 +84,7 @@ Cluster Agent が公開される Kubernetes サービスの名前。デフォル
 クラスター名。インスタンスタグとしてすべてのクラスターチェック構成に追加されます。
 
 `DD_CLUSTER_CHECKS_ENABLED`
-: When true, enables dispatching logic on the leader Cluster Agent. Default: `false`.
+: true に設定すると、リーダー Cluster Agent 上でのディスパッチロジックを有効にします。デフォルト: `false`
 
 `DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`
 ノードベースの Agent が停止していると見なされてプールから削除されるまでの時間（秒単位）。デフォルトは `30` 秒です。
@@ -95,13 +96,13 @@ Cluster Agent が公開される Kubernetes サービスの名前。デフォル
 `DD_CLUSTER_NAME` オプションによって設定されるインスタンスタグの名前。デフォルトは `cluster_name` です。
 
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`                
-: Adds extra tags to cluster check metrics.
+: クラスターチェックのメトリクスに追加のタグを付与します。
 
 `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED`
-: When true, the leader Cluster Agent collects stats from the cluster-level check runners to optimize check dispatching logic. Default: `false`.
+: true に設定すると、リーダー Cluster Agent がクラスターレベルのチェックランナーから統計情報を収集し、チェックのディスパッチロジックを最適化します。デフォルト: `false`
 
 `DD_CLUSTER_CHECKS_CLC_RUNNERS_PORT`
-: The port used by the Cluster Agent client to reach cluster-level check runners and collect their stats. Default: `5005`.
+: Cluster Agent クライアントがクラスターレベルのチェックランナーにアクセスし、その統計情報を収集する際に使用するポートです。デフォルト: `5005`
 
 `DD_HOSTNAME`
 Datadog Cluster Agent に使用するホスト名。
@@ -169,7 +170,7 @@ Datadog からのメトリクスの問い合わせに使用するウィンドウ
 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
 : init コンテナのメモリリクエストと制限を構成します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

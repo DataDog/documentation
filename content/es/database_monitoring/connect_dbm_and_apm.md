@@ -6,15 +6,15 @@ further_reading:
   tag: Blog
   text: Correlacionar sin problemas los datos de telemetría de DBM y APM para comprender
     el rendimiento de las consultas integrales
-title: Correlacionar Database Monitoring y trazas
+title: Correlacionar Database Monitoring y trazas (traces)
 ---
 
-En esta guía se considera que has configurado [Database Monitoring][1] y usas [APM][2]. La conexión de APM y DBM inyecta identificadores de traza (trace) de APM en la recopilación de datos de DBM, lo que permite la correlación de estas dos fuentes de datos. Esto permite que las funciones del producto muestren información sobre la base de datos en el producto de APM, y datos de APM en el producto de DBM.
+En esta guía se considera que has configurado [Database Monitoring][1] y usas [APM][2]. La conexión de APM y DBM inyecta identificadores de trazas de APM en la recopilación de datos de DBM, lo que permite la correlación de estas dos fuentes de datos. Esto permite que las funciones del producto muestren información sobre la base de datos en el producto de APM, y datos de APM en el producto de DBM.
 
 ## Antes de empezar
 
 Bases de datos compatibles
-: Postgres, MySQL, SQL Server, Oracle
+: Postgres, MySQL, SQL Server, Oracle, MongoDB
 
 Versiones compatibles del Agent 
 : 7.46 o posterior
@@ -26,100 +26,126 @@ Privacidad de los datos
 Las integraciones del rastreador de APM admiten un *Modo de propagación*, que controla la cantidad de información que pasa de las aplicaciones a la base de datos.
 
 - El modo `full` envía información completa sobre la traza a la base de datos, lo que te permite investigar trazas individuales en DBM. Esta es la solución recomendada para la mayoría de las integraciones.
-- El modo `service` envía el nombre del servicio, lo que te permite conocer qué servicios contribuyen a la carga de la base de datos. Este es el único modo compatible con las aplicaciones de Oracle.
+- `service` envía el nombre del servicio, lo que permite saber qué servicios contribuyen a la carga de la base de datos.
 - El modo `disabled` deshabilita la propagación y no envía información desde las aplicaciones.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
-|:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
-| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |    Oracle    |  MongoDB   |
+|:------------------------|:---------:|:-----------:|:----------:|:------------:|:----------:|
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} ** | {{< X >}}  |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}}    | {{< X >}}  |
 
 \* El modo de propagación completa en Aurora MySQL requiere la versión 3.
 
-\*\* SQL Server solo es compatible con el modo completo con los rastreadores de Java y .NET.
+\*\* El modo de propagación completa en Oracle solo es compatible con Java.
+
 
 **Rastreadores y controladores de aplicaciones compatibles**
 
-| Lenguaje                                 | Biblioteca o marco   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
-|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
-|                                          | [base de datos/sql][4]      | {{< X >}} | {{< X >}} | solo el modo `service` | solo el modo `service` |
-|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | solo el modo `service` | solo el modo `service` |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | solo el modo `service` |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
-|                                          | [pg][8]                | {{< X >}} |           |                     |                     |
-|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
-|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
-|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
-|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
-|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
-|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
-|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
-|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
-|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
-|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
-|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
-|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
-|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
-|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
-|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |
-|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
-|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
+| Lenguaje                                 | Biblioteca o marco   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |       MongoDB        |
+|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|:--------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |                      |
+|                                          | [base de datos/sql][4]      | {{< X >}} | {{< X >}} | solo el modo `service` | solo el modo `service` |                      |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | solo el modo `service` | solo el modo `service` |                      |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |                      |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |                      |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |                      |
+|                                          | [pg][8]                | {{< X >}} |           |                     |                     |                      |
+|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |                      |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |                      |
+|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [psycopg][34]          | {{< X >}} |           |                     |                     |                      |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |                      |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |                      |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |                      |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |                      |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |                      |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |                      |
+|                                          | [pymongo][35]          |           |           |                     |                     | {{< X >}} *****      |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |                      |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |                      |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |                      |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |                      |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |                      |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |                      |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |                      |
+|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |                      |
+|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |                      |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |                      |
+|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |                      |
+|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |                      |
+|                                          | [mongodb][33]          |           |           |                     |                     | {{< X >}} ****       |
 
 \* [CommandType.StoredProcedure][25] no compatible
 
 \*\* Modo completo de SQL Server para Java/.NET:
+
+<div class="alert alert-danger">Si tu aplicación utiliza <code>context_info</code> para la instrumentación, el rastreador de APM lo sobrescribe.</div>
+
   - La instrumentación ejecuta un comando `SET context_info` cuando el cliente emite una consulta, lo que realiza un recorrido completo adicional a la base de datos.
-  - Si tus aplicaciones usan `context_info` para instrumentar la aplicación, el rastreador de APM lo sobrescribe.
   - Requisitos previos:
     - Versión 7.55.0 o posterior del Agent
     - Versión 1.39.0 o posterior del rastreador de Java
     - Versión del rastreador .NET 3.3 o posterior
 
+\*\*\* Oracle modo completo para Java:
+  - La instrumentación sobrescribe `V$SESSION.ACTION`.
+  - Requisito previo: rastreador de Java 1.45 o posterior
+
+\*\*\*\* Servicio/Modo completo MongoDB para Node.js:
+  - Requisito previo:
+    - Rastreador Node.js v5.37.0 o posterior
+
+\*\*\*\*\* Servicio/Modo completo MongoDB para Python:
+  - Requisito previo:
+    - Rastreador Python v3.5.0 o posterior
+
 ## Configuración
 Para obtener la mejor experiencia de usuario, asegúrate de que las siguientes variables de entorno se hayan configurado en tu aplicación:
 
 ```
-DD_SERVICE=(nombre de la aplicación)
-DD_ENV=(entorno de la aplicación)
-DD_VERSION=(versión de la aplicación)
+DD_SERVICE=(application name)
+DD_ENV=(application environment)
+DD_VERSION=(application version)
 ```
+
+Datadog recomienda establecer el modo de enmascaramiento en `obfuscate_and_normalize` para las versiones del Agent `7.63` y posteriores. Añade el siguiente parámetro en la sección `apm_config` de tu archivo de configuración del Agent de APM:
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
+```
+
+<div class="alert alert-warning">Cambiar el modo de enmascaramiento puede alterar el texto SQL normalizado. Si tienes monitores basados en texto SQL en trazas de APM, puede que necesites actualizarlos.</div>
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Actualiza las dependencias de tu aplicación para incluir [dd-trace-go@v1.44.0][1] o posterior:
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+Actualiza las dependencias de tu aplicación para incluir [dd-trace-go@v1.44.0][1] o posterior. {{% tracing-go-v2 %}}
+```shell
+go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Actualiza tu código para importar el paquete `contrib/database/sql`:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
 Habilita la función de propagación de la monitorización de base de datos mediante uno de los siguientes métodos:
-1. Variable de entorno:
+- Variable de entorno:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. Uso de código durante el registro del controlador:
+- Uso de código durante el registro del controlador:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. Uso de código en `sqltrace.Open`:
+- Uso de código en `sqltrace.Open`:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -131,22 +157,22 @@ Ejemplo completo:
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {
-    // El primer paso es establecer el modo de propagación de dbm al registrar el controlador. Ten en cuenta que esto
-    // también se puede hacer en sqltrace.Open para obtener un control más detallado sobre la función.
+    // The first step is to set the dbm propagation mode when registering the driver. Note that this can also
+    // be done on sqltrace.Open for more granular control over the feature.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // Seguido de una llamada para abrir.
+    // Followed by a call to Open.
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // Luego, continuamos usando el paquete de base de datos/sql como lo haríamos normalmente, con rastreo.
+    // Then, we continue using the database/sql package as we normally would, with tracing.
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -172,7 +198,7 @@ Habilita la función de propagación de la monitorización de base de datos medi
 
 Ejemplo completo:
 ```
-# Inicia el Java Agent con las propiedades del sistema requeridas
+# Start the Java Agent with the required system properties
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
 
@@ -189,13 +215,23 @@ public class Application {
             stmt.close();
             connection.close();
         } catch (SQLException exception) {
-            //  lógica de excepción
+            //  exception logic
         }
     }
 }
 ```
 
-**Nota**: Las instrucciones preparadas no son compatibles con el modo `full` y todas las llamadas a la API de JDBC que usan instrucciones preparadas se degradan de manera automática al modo `service`. Debido a que la mayoría de las bibliotecas SQL de Java usan instrucciones preparadas de forma predeterminada, esto significa que la **mayoría** de las aplicaciones Java solo pueden usar el modo `service`.
+**Versiones 1.44 y posteriores**:
+Habilita el rastreo de sentencias preparadas para Postgres mediante **uno** de los siguientes métodos:
+- Establece la propiedad del sistema `dd.dbm.trace_prepared_statements=true`
+- Establece la variable de entorno `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
+
+**Nota**: La instrumentación de sentencias preparadas sobrescribe la propiedad `Application` con el texto `_DD_overwritten_by_tracer`, y provocan un viaje de ida y vuelta adicional a la base de datos. Este viaje de ida y vuelta adicional normalmente tiene un impacto insignificante en el tiempo de ejecución de la sentencia SQL.
+
+<div class="alert alert-danger">La activación del rastreo de sentencias preparadas puede provocar un aumento de la asignación de pines de conexión al utilizar Amazon RDS Proxy, lo que reduce la eficacia de la agrupación de conexión. Para obtener más información, consulta <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-pinning.html">asignación de pines de conexión en RDS Proxy</a>.</div>
+
+**Versiones del rastreador inferiores a 1.44**:
+Las sentencias preparadas no son compatibles con el modo `full` para Postgres y MySQL, y todas las llamadas a la API de JDBC que utilizan sentencias preparadas se degradan automáticamente al modo `service`. Dado que la mayoría de las bibliotecas SQL de Java utilizan sentencias preparadas por defecto, esto significa que **la mayoría** de las aplicaciones Java solo pueden utilizar el modo `service`.
 
 [1]: /es/tracing/trace_collection/dd_libraries/java/
 [2]: /es/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -208,9 +244,9 @@ En tu archivo GEM, instala o actualiza [dd-trace-rb][1] a la versión `1.8.0` o 
 
 ```rb
 source 'https://rubygems.org'
-gem 'datadog' # Usa `'ddtrace', '>= 1.8.0'` si estás usando v1.x
+gem 'datadog' # Use `'ddtrace', '>= 1.8.0'` if you're using v1.x
 
-# Depende de tu uso
+# Depends on your usage
 gem 'mysql2'
 gem 'pg'
 ```
@@ -257,17 +293,21 @@ Actualiza las dependencias de tu aplicación para incluir [dd-trace-py>=1.9.0][1
 pip install "ddtrace>=1.9.0"
 ```
 
-Instala [psycopg2][2]:
+Para Postgres, instala [psycopg2][2]:
 ```
 pip install psycopg2
+```
+
+Para MongoDB (requiere dd-trace-py>=3.5.0), instala pymongo:
+```
+pip install pymongo
 ```
 
 Habilita la función de propagación de la monitorización de base de datos al establecer la siguiente variable de entorno:
    - `DD_DBM_PROPAGATION_MODE=full`
 
-Ejemplo completo:
+Ejemplo de Postgres:
 ```python
-
 import psycopg2
 
 POSTGRES_CONFIG = {
@@ -278,12 +318,30 @@ POSTGRES_CONFIG = {
     "dbname": "postgres_db_name",
 }
 
-# conecta a la base de datos de Postgres
+# connect to postgres db
 conn = psycopg2.connect(**POSTGRES_CONFIG)
 cursor = conn.cursor()
-# ejecuta consultas de SQL
+# execute sql queries
 cursor.execute("select 'blah'")
 cursor.executemany("select %s", (("foo",), ("bar",)))
+```
+
+Ejemplo de MongoDB:
+```python
+from pymongo import MongoClient
+
+# Connect to MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+db = client['test_database']
+collection = db['test_collection']
+
+# Insert a document
+collection.insert_one({"name": "test", "value": 1})
+
+# Query documents
+results = collection.find({"name": "test"})
+for doc in results:
+    print(doc)
 ```
 
 [1]: https://ddtrace.readthedocs.io/en/stable/release_notes.html
@@ -293,8 +351,8 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
-Esta función requiere que la instrumentación automática se encuentre habilitada para tu servicio de .NET.
+<div class="alert alert-danger">
+Esta función requiere que la instrumentación automática esté activada para tu servicio .NET.
 </div>
 
 Sigue las [instrucciones de rastreo de .NET Framework][1] o las [instrucciones de rastreo de .NET Core][2] a fin de instalar el paquete de instrumentación automática y habilitar el rastreo para tu servicio.
@@ -313,8 +371,8 @@ Habilita la función de propagación de la monitorización de base de datos al e
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
-Esta función requiere que la extensión del rastreador se encuentre habilitada para tu servicio de PHP.
+<div class="alert alert-danger">
+Esta función requiere que la extensión de rastreo esté habilitada para tu servicio PHP.
 </div>
 
 Sigue las [instrucciones de rastreo de PHP][1] a fin de instalar el paquete de instrumentación automática y habilitar el rastreo para tu servicio.
@@ -338,7 +396,7 @@ npm install dd-trace@^3.17.0
 
 Actualiza tu código para importar e inicializar el rastreador:
 ```javascript
-// Esta línea debe venir antes de importar cualquier módulo instrumentado.
+// This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
 
@@ -379,7 +437,7 @@ client.connect(err => {
 });
 
 client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
-    // gestiona el resultado
+    // handle result
 })
 ```
 
@@ -415,7 +473,7 @@ Al visualizar una muestra de consulta en Database Monitoring, si APM ha realizad
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualiza los hosts de bases de datos descendentes de los que dependen tus servicios de APM desde la Página de servicios.">}}
 
-En la página de APM de un servicio determinado, visualiza las dependencias de bases de datos descendentes directas del servicio identificadas por Database Monitoring. Determina con rapidez si algún host tiene una carga desproporcionada que puede ser causada por hosts vecinos ruidosos. Para ver la página de un servicio, haz clic en el servicio en el [Service Catalog][26] a fin de abrir un panel de detalles y, a continuación, haz clic en **View Service Page** (Ver página de servicios) en el panel.
+En la página de APM de un servicio determinado, visualiza las dependencias de bases de datos descendentes directas del servicio identificadas por Database Monitoring. Determina con rapidez si algún host tiene una carga desproporcionada que puede ser causada por hosts vecinos ruidosos. Para ver la página de un servicio, haz clic en el servicio en el [Catálogo de servicios][26] a fin de abrir un panel de detalles y, a continuación, haz clic en **View Service Page** (Ver página de servicios) en el panel.
 
 ### Identificar posibles optimizaciones mediante planes de explicación para consultas de bases de datos en trazas
 
@@ -459,3 +517,6 @@ Visualiza el rendimiento histórico de consultas similares a las que se ejecutan
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
 [32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace
+[33]: https://github.com/mongodb/node-mongodb-native
+[34]: https://www.psycopg.org/psycopg3/
+[35]: https://pymongo.readthedocs.io/en/stable/

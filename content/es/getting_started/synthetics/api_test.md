@@ -1,17 +1,14 @@
 ---
+description: Crea tests de API en Datadog para monitorizar tus endpoints de forma
+  proactiva. Crea tests de API de uno o varios pasos con aserciones, configura alertas
+  y soluciona problemas.
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: Centro de aprendizaje
-  text: Introducción a los tests Synthetic
 - link: /api/latest/synthetics/#create-an-api-test
   tag: API
   text: Crear un test de API mediante programación
 - link: /synthetics/api_tests
   tag: Documentación
   text: Más información sobre los tests de API únicos
-- link: /synthetics/multistep
-  tag: Documentación
-  text: Más información sobre los tests de API multipasos
 - link: /getting_started/synthetics/private_location
   tag: Documentación
   text: Más información sobre las localizaciones privadas
@@ -24,47 +21,55 @@ further_reading:
   text: Descubre cómo identificar los bots Synthetic de los tests de API
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
-  text: Más información sobre los monitores de tests Synthetic
+  text: Más información sobre los monitores de test Synthetic
 title: Empezando con los tests de API
 ---
 
 ## Información general
 
-Las pruebas de API **monitorizan proactivamente** tus **servicios más importantes** para que estén disponibles en cualquier momento y desde cualquier lugar. Las [pruebas de API únicas][1] vienen en ocho subtipos que te permiten iniciar solicitudes en las diferentes capas de red de tus sistemas (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` y `gRPC`). Las [pruebas de API multipaso][2] te permiten ejecutar pruebas de API en secuencia para monitorizar el tiempo de actividad de los recorridos clave a nivel de API.
+Los tests de API **monitorizan proactivamente** tus **servicios más importantes** para que estén disponibles en cualquier momento y desde cualquier lugar. Los [tests de API únicos][1] vienen en ocho subtipos que te permiten iniciar solicitudes en las diferentes capas de red de tus sistemas (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` y `gRPC`). Los [tests de API multipaso][2] te permiten ejecutar tests de API en secuencia para monitorizar el tiempo de actividad de los recorridos clave a nivel de API.
 
 ## Crear un test de API único
 
 Los tests HTTP monitorizan los endpoints de tu API, y te avisan cuando la latencia de la respuesta es alta o cuando no cumple con alguna de las condiciones que hayas definido, tales como el código de estado HTTP previsto, los encabezados de respuesta o el contenido del cuerpo de la respuesta.
 
-{{< img src="getting_started/synthetics/api-test.png" alt="Información general de un test HTTP de Synthetics" style="width:100%;" >}}
- 
- 
- 
+Los siguientes ejemplos muestran cómo crear un [test HTTP][3], un subtipo de [tests de API única][1].
 
-El siguiente ejemplo muestra cómo crear un [test HTTP][3], que es un subtipo de [test de API único][1].
+1. En el sitio Datadog, pasa el ratón por encima de **Experiencia digital** y selecciona **[Tests][4]** (en **Monitorización y tests Synthetic**).
 
-### Definir una solicitud
-
-1. En el sitio de Datadog, pasa el cursor sobre **UX Monitoring** (Monitorizar la experiencia de uso) y selecciona **[Synthetic Tests][4]** (Tests Synthetic).
 2. Haz clic en **New Testt** (Nuevo test) > **[New API test][5]** (Nuevo test de API).
-3. Selecciona el tipo de solicitud `HTTP`.
-4. Define tu solicitud:
 
-    - Añade la URL del endpoint que quieres monitorizar. Si no sabes con qué empezar, puedes utilizar `https://www.shopist.io/`, una aplicación web de comercio electrónico de prueba. Al definir el endpoint que deseas probar, se rellena automáticamente el nombre de tu test en `Test on www.shopist.io`.
-    - Puedes seleccionar **Advanced Options** (Opciones avanzadas) para establecer las opciones de solicitud, certificados, credenciales de autenticación y otros parámetros personalizados.
+3. Puedes crear un test utilizando una de las siguientes opciones:
 
-      **Nota:** Puedes crear [variables globales][6] seguras para almacenar credenciales y [variables locales][7] para generar marcas de tiempo dinámicas para la carga útil de tu solicitud. Después de crear estas variables, escribe `{{` en cualquier campo relevante y selecciona la variable para introducir su valor en tus opciones de test.  
+   - **Crea un test a partir de una plantilla**:
 
-      En este ejemplo, no se necesita ninguna opción avanzada en concreto.
-    - Puedes definir etiquetas (tags) tales como `env:prod` y `app:shopist` en tu test. Las etiquetas te permiten mantener organizado tu conjunto de tests, así como encontrar rápidamente en la página de inicio los tests que te interesan.
+      1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor.
+      2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Definir solicitud**, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+      3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
 
-5. Haz clic en **Test URL** para activar la ejecución de un test de prueba.
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API de Synthetic" video="true" >}}
 
-{{< img src="getting_started/synthetics/api-test-config-3.png" alt="Configuración del test de API" style="width:100%;">}}
+   - **Crea un test desde cero**:
 
-### Definir aserciones
+      1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero) y selecciona el tipo de solicitud `HTTP`.
 
-Al hacer clic en **Test URL**, se rellenan automáticamente las aserciones básicas sobre la respuesta de tu endpoint. Las aserciones definen qué es una ejecución de test satisfactoria.
+      2. Añade la URL del endpoint que quieres monitorizar. Si no sabes con qué empezar, puedes utilizar `https://www.shopist.io/`, una aplicación web de comercio electrónico de tests. Si utilizas la URL Shopist de test, el nombre de tu test se rellena automáticamente como `Test on shopist.io`.
+
+      3. Opcionalmente, selecciona **Opciones avanzadas** para configurar opciones de solicitud personalizadas, certificados, credenciales de autenticación y crear [variables globales][6] or [variables locales][7] seguras para entradas dinámicas.
+
+         **Nota**: Escribe `{{` en cualquier campo relevante para seleccionar una variable e inyectar su valor en tus opciones de test.
+
+      4. Opcionalmente, puedes configurar etiquetas (tags) como `env:prod` y `app:shopist` en tu test. Las etiquetas te permiten mantener tu conjunto de tests organizado y encontrar rápidamente los tests que te interesan en la página de inicio.
+
+      5. Haz clic en **Send** (Enviar) para activar un test de ejemplo.
+
+         {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Configuración de test de API" style="width:90%;">}}
+
+      6. Haz clic en **Create Test** (Crear test) para enviar tu test de API.
+
+### Definición de aserciones
+
+Al hacer clic en **Send** (Enviar), se rellenan automáticamente las aserciones básicas sobre la respuesta de tu endpoint. Las aserciones definen qué es una ejecución de test satisfactoria.
 
 En este ejemplo, se rellenan tres aserciones predeterminadas después de activar la ejecución del test de prueba:
 
@@ -86,7 +91,7 @@ Selecciona la frecuencia con la que quieres que se ejecute tu test. Puedes mante
 
 Además de ejecutar tu test Synthetic de forma programada, puedes activarlo manualmente o desde tus [pipelines de CI/CD][9].
 
-### Definir condiciones para las alertas
+### Definir las condiciones de alerta
 
 Puedes definir las condiciones de alerta para asegurarte de que tu test no se active en situaciones como un incidente breve y esporádico en la red. De este modo, solo recibirás alertas en caso de que haya problemas reales con tu endpoint.
 
@@ -96,7 +101,7 @@ Puedes indicar el número de fallos consecutivos que deberían producirse antes 
 Retry test 2 times after 300 ms in case of failure
 ```
 
-También puedes configurar tu test para activar solo una notificación cuando el endpoint deje de funcionar durante cierto tiempo y en un número determinado de localizaciones. En el siguiente ejemplo, la regla de alerta está configurada para enviar una notificación si la prueba falla durante tres minutos en dos localizaciones distintas:
+También puedes configurar tu test para activar solo una notificación cuando el endpoint deje de funcionar durante cierto tiempo y en un número determinado de localizaciones. En el siguiente ejemplo, la regla de alerta está configurada para enviar una notificación si el test falla durante tres minutos en dos localizaciones distintas:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
@@ -114,7 +119,7 @@ Los [test de API multipaso][2] te permiten monitorizar las transacciones empresa
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Información general de un test de API multipaso de Synthetics" style="width:100%;" >}}
 
-De forma similar a las [pruebas de API][3], las pruebas de API multipaso te avisan cuando tus endpoints se vuelven demasiado lentos o no cumplen alguna de las condiciones que has definido. Puedes crear variables a partir de respuestas de pasos individuales y volver a introducir tus valores en pasos posteriores, encadenando pasos de forma que imiten el comportamiento de tu aplicación o servicio.
+De forma similar a los [tests de API][3], los tests de API multipaso te avisan cuando tus endpoints funcionan demasiado lentos o no cumplen alguna de las condiciones que has definido. Puedes crear variables a partir de respuestas de pasos individuales y volver a introducir tus valores en pasos posteriores, encadenando pasos de forma que imiten el comportamiento de tu aplicación o servicio.
 
 El test de ejemplo que puedes ver a continuación muestra cómo se crea un test de API multipaso que monitorice la adición de un elemento a un carrito. Este test consta de tres pasos:
 
@@ -124,7 +129,7 @@ El test de ejemplo que puedes ver a continuación muestra cómo se crea un test 
 
 Si no sabes en qué endpoints de la API crear tu test de API multipaso, utiliza los endpoints de ejemplo que aparecen a continuación.
 
-Para crear un test de API multipaso nuevo, haz clic en **New Test** (Nuevo test) > **[Multistep API test][12]** (Test de API multipaso). Añade un nombre de prueba, como por ejemplo `Añadir un producto al carrito`, incluye etiquetas (tags) y selecciona localizaciones.
+Para crear un test de API multipaso nuevo, haz clic en **New Test** (Nuevo test) > **[Multistep API test][12]** (Test de API multipaso). Añade un nombre de test, como por ejemplo `Añadir un producto al carrito`, incluye etiquetas y selecciona localizaciones.
 
 ### Obtener un carrito
 
@@ -205,14 +210,14 @@ Para solucionar un problema de un test fallido, baja hasta **Test Results** (Res
 
 Consulta la traza (trace) generada a partir de la ejecución del test fallido en la pestaña **Trazas** y descubre la causa raíz mediante la [integración de APM con la monitorización Synthetic][14] de Datadog.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/synthetics/api_tests/
 [2]: /es/synthetics/multistep
 [3]: /es/synthetics/api_tests/http_tests
-[4]: https://app.datadoghq.com/synthetics/list
+[4]: https://app.datadoghq.com/synthetics/tests
 [5]: https://app.datadoghq.com/synthetics/create
 [6]: /es/synthetics/settings/#global-variables
 [7]: /es/synthetics/api_tests/http_tests#variables

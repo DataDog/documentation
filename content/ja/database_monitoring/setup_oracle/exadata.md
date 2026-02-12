@@ -24,8 +24,8 @@ title: Oracle Exadata のデータベースモニタリングの設定
 プロキシ、ロードバランサー、コネクションプーラー
 : Agent は、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
 
-Data security considerations
-: See [Sensitive information][7] for information about what data the Agent collects from your databases and how to ensure it is secure.
+データセキュリティへの配慮
+: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][7]を参照してください。
 
 ## セットアップ
 
@@ -41,44 +41,34 @@ Oracle データベースでデータベースモニタリングを有効にす�
 
 {{% dbm-create-oracle-user %}}
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### Agent のインストール
 
-See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
+Agent をどこにインストールするかについては、[DBM セットアップアーキテクチャ][12]のドキュメントを参照してください。Agent は外部の Oracle クライアントを必要としません。
 
-For installation steps, see the [Agent installation instructions][9].
+インストール手順については、[Agent インストール手順][9]を参照してください。
 
 ### Agent の構成
 
 #### マルチノード Exadata
 
-Configure the Agent for each node by following the instructions for [Oracle RAC][4].
+[Oracle RAC][4] の手順に従って、各ノードの Agent を構成します。
 
 #### シングルノード Exadata
 
-Configure the Agent by following the instructions for [self-hosted Oracle databases][3].
-
-### Oracle インテグレーションをインストールまたは検証する
-
-#### 初めてインストールする場合
-
-On the Integrations page in Datadog, install the [Oracle integration][10] for your organization. This installs an [Oracle dashboard][11] in your account that can be used to monitor the performance of your Oracle databases.
-
-#### すでにインストール済みの場合
-
-{{% dbm-existing-oracle-integration-setup %}}
+[セルフホスト型 Oracle データベース][3]の手順に従って Agent を構成します。
 
 ### セットアップの検証
 
-[Run the Agent's status subcommand][1] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][11] and the [Databases][2] page in Datadog to get started.
+[Agent の status サブコマンドを実行][1]し、**Checks** セクションで `oracle` を探します。Datadog の[ダッシュボード][11]と[データベース][2]のページに移動して開始します。
 
 ## カスタムクエリ
 
-Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][5] to learn more about the configuration options available.
+Database Monitoring は、Oracle データベースのカスタムクエリをサポートしています。使用可能な構成オプションの詳細については、[conf.yaml.example][5] を参照してください。
 
-<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
+<div class="alert alert-danger">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases

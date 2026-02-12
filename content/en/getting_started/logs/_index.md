@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Logs
+description: Collect logs from multiple sources, process and analyze them, and correlate these logs with traces and metrics.
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'
@@ -146,7 +147,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [4]: /security/cloud_siem/
 [5]: /getting_started/integrations/
 [6]: /agent/
-[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[7]: /agent/configuration/agent-commands/#restart-the-agent
 [8]: https://app.datadoghq.com/logs/onboarding/server
 [9]: /agent/logs/?tab=tailfiles#custom-log-collection
 [10]: /agent/docker/log/?tab=containerinstallation

@@ -1,40 +1,40 @@
 ---
 aliases:
-- /security_platform/application_security/custom_rules
-- /security/application_security/custom_rules
+- /es/security_platform/application_security/custom_rules
+- /es/security/application_security/custom_rules
 further_reading:
 - link: /security/application_security/
   tag: Documentación
-  text: Protección contra las amenazas con Datadog Application Security Management
+  text: Protégete contra las amenazas con la protección de aplicaciones y API de Datadog
 - link: /security/application_security/event_rules/
   tag: Documentación
   text: Crear reglas de eventos
 - link: /security/application_security/troubleshooting
   tag: Documentación
-  text: Solucionar problemas habituales de Application Security Management (ASM) de
-    Datadog
+  text: Soluciona los problemas más comunes de la protección de aplicaciones y API
+    de Datadog
 - link: /security/notifications/variables/
   tag: Documentación
   text: Más información sobre las variables de notificación de seguridad
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentación
-  text: Sintaxis para definir las consultas de ASM
+  text: Sintaxis para definir la consulta AAP
 title: Reglas de detección personalizadas
 ---
 
 ## Información general
 
-Application Security Management (ASM) viene con un conjunto de [reglas de detección predefinidas][1] cuyo objetivo es detectar los intentos de ataque, las vulnerabilidades encontradas por el atacante y el abuso de la lógica de negocio que afectan a tus sistemas de producción.
+La protección de aplicaciones y API (AAP) viene con un conjunto de [reglas predefinidas de detección][1] cuyo objetivo es detectar los intentos de ataque, las vulnerabilidades encontradas por el atacante y el abuso de la lógica de negocios que afectan a tus sistemas de producción.
 
 Sin embargo, hay situaciones en las que puedes querer personalizar una regla según tu entorno o carga de trabajo. Por ejemplo, es posible que desees personalizar una regla de detección que detecte a los usuarios que realizan acciones confidenciales desde una geolocalización en la que no opera tu empresa.
 
-También puedes personalizar una regla para que se excluya una herramienta de análisis de seguridad interna. ASM detectará su actividad como siempre, pero quizá no quieras recibir notificaciones de los análisis que realiza habitualmente.
+Otro ejemplo es la personalización de una regla para excluir un escáner de seguridad interno. AAP detecta su actividad como es de esperar. Sin embargo, es posible que no desees que se te notifique su análisis periódico.
 
-En estos casos, se puede crear una regla de detección personalizada para excluir dichos eventos. En esta guía, te explicamos cómo crear una regla de detección personalizada en ASM.
+En estas situaciones, se puede crear una regla de detección personalizada para excluir tales eventos. Esta guía muestra cómo crear una regla de detección personalizada para AAP.
 
 ## Regla de detección de abuso de lógica de negocio
 
-ASM ofrece reglas predefinidas para detectar el abuso de la lógica de negocio (por ejemplo, hacer un reestablecimiento forzado de una contraseña). Estas reglas requieren [añadir información de lógica de negocio a trazas (traces)][7].
+AAP ofrece reglas predefinidas para detectar el abuso de la lógica de negocios (por ejemplo, restablecer una contraseña mediante fuerza bruta). Estas reglas requieren [añadir información de lógica de negocios a las traces (trazas)][7].
 
 Intento reciente de las bibliotecas de rastreo de Datadog de detectar y enviar el inicio de sesión de usuario y los eventos de registro automáticamente sin necesidad de modificar el código. En caso necesario, puedes [desactivar el rastreo automático del evento de la actividad del usuario][8].
 
@@ -46,13 +46,13 @@ Consulta la sección siguiente para ver cómo configurar tus reglas.
 
 Para personalizar una regla de detección predefinida, lo primero que tienes que hacer es clonar una regla ya existente. Ve a la sección [Detection Rules (Reglas de detección)][2] y selecciónala. Desplázate hasta el final de la regla y haz clic en el botón Clone Rule (Clonar regla). Así, podrás editar la regla.
 
-### Definir una consulta de ASM
+### Definir una consulta de AAP
 
-Crea una consulta de ASM utilizando la [misma sintaxis de consulta que en el ASM Trace Explorer][3]. Por ejemplo, crea una consulta para monitorizar los inicio de sesión exitosos desde fuera de Estados Unidos: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
+Construye una consulta de AAP utilizando la [misma sintaxis de consulta que en el Trace Explorer de AAP][3]. Por ejemplo, crea una consulta para monitorizar éxitos de inicio de sesión desde el exterior de Estados Unidos: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
 También puedes definir un count único y una agrupación de señales. Cuenta el número de valores únicos que se observan en relación con un atributo en una franja de tiempo determinada. El parámetro group-by definido genera una señal por cada valor group-by. Lo más habitual es que el parámetro group-by sea una entidad (un usuario, una IP o servicio). Este parámetro también se usa para [unir consultas](#joining-queries).
 
-Utiliza la sección de vista previa para ver qué trazas de ASM coinciden con la consulta de búsqueda. También puedes añadir consultas adicionales con el botón Add Query (Añadir consulta).
+Utiliza la sección de vista previa para ver qué traces (trazas) de AAP coinciden con la consulta de búsqueda. También puedes añadir consultas adicionales con el botón Añadir consulta.
 
 ##### Unir consultas
 
@@ -116,5 +116,5 @@ Utilice el menú desplegable **etiquetar señales resultantes** para añadir eti
 [4]: /es/monitors/notify/?tab=is_alert#integrations
 [5]: /es/security/notifications/variables/
 [6]: /es/security/notifications/variables/#template-variables
-[7]: /es/security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[8]: /es/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[7]: /es/security/application_security/how-it-works/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /es/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking

@@ -1,72 +1,76 @@
 ---
 aliases:
 - /es/dashboards/ddsql_editor/
-- /es/ddsql_editor/reference/
+description: Consulta de recursos de infraestructura y datos telemétricos mediante
+  lenguaje natural o sintaxis de DDSQL compatible con etiquetas como columnas de tabla.
 further_reading:
-- link: /ddsql_editor/reference
-  tag: Documentation
-  text: Referencias para consultas DDSQL
-- link: /ddsql_editor/guide/ddsql_use_cases
-  tag: Guía
-  text: Consultas y casos de uso habituales
+- link: ddsql_reference/ddsql_default
+  tag: Documentación
+  text: Referencia de DDSQL
+- link: https://www.datadoghq.com/blog/advanced-analysis-tools/
+  tag: Blog
+  text: Explora tus datos con Sheets, DDSQL Editor y Notebooks para análisis avanzados
+    en Datadog
 title: Editor DDSQL
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+La consulta de logs, métricas, spans  (tramos), RUM y Product Analytics como sources (fuentes) de datos en DDSQL está en vista previa. Utiliza este formulario para solicitar acceso.
 
-{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-El Editor DDSQL Editor está en vista previa.
+Si deseas acceder a spans (tramos), RUM u otras sources (fuentes) de datos no enumeradas en la sección de casos de uso, menciónalas en el formulario de solicitud de acceso.
 {{< /callout >}}
 
 ## Información general
 
-Con el [Editar DDSQL][1], puedes obtener una visibilidad más profunda de tu infraestructura consultando tus recursos con lenguaje natural o con [DDSQL](#use-sql-syntax-ddsql), un dialecto de SQL con soporte adicional para consultar etiquetas (tags).
+Con el [Editor DDSQL][1], puedes lograr una visibilidad más profunda de tu infraestructura consultando tus recursos con lenguaje natural o con [DDSQL](#use-sql-syntax-ddsql), un dialecto de SQL con soporte adicional para consultar etiquetas (tags).
 
-{{< img src="ddsql_editor/query-result.png" alt="El resultado de una consulta SQL que muestra la página DDSQL en Datadog" style="width:100%;" >}}
+{{< img src="/ddsql_editor/query-results-cloud-provider-host-count.png" alt="El resultado de una consulta SQL que muestra el recuento de host del proveedor en la nube en la página de DDSQL en Datadog" style="width:100%;" >}}
 
 ## Consulta en lenguaje natural
 
-Escribe tu pregunta en el cuadro de búsqueda y Datadog creará la consulta SQL por ti.
+Escribe tu pregunta en el cuadro de búsqueda y Datadog creará la consulta de SQL por ti. Puedes aceptar o descartar los cambios y aportar tus comentarios para mejorar la función.
 
-{{< img src="ddsql_editor/natural-language-query.png" alt="Una consulta ingresada en el cuadro de búsqueda por lenguaje natural" style="width:90%;" >}}
+{{< img src="ddsql_editor/natural-language-query-2.png" alt="Una consulta ingresada en el cuadro de búsqueda en lenguaje natural" style="width:90%;" >}}
 
 ## Utilizar la sintaxis SQL (DDSQL)
 
-DDSQL es un lenguaje de consulta para datos de Datadog. Implementa varias operaciones SQL estándar, como `SELECT`, y permite realizar consultas contra datos no estructurados, como [etiquetas (tags)][2]. Obtén exactamente los datos que deseas escribiendo tu propia sentencia `SELECT`. Consulta etiquetas como si fueran columnas de una tabla estándar. 
+DDSQL es un lenguaje de consulta para datos de Datadog. Implementa varias operaciones SQL estándar, como `SELECT`, y permite realizar consultas sobre datos no estructurados, como [etiquetas][2]. Obtén exactamente los datos que deseas escribiendo tu propia sentencia `SELECT`. Consulta las etiquetas como si fueran columnas de una tabla estándar. Para más información, consulta la [Referencia de DDSQL][6].
 
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
-FROM aws_ec2_instance
-WHERE env = 'staging' -- env is a tag, not a column
+FROM aws.ec2_instance
+WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
 
-{{< whatsnext desc="For more information on DDSQL queries, see the DDSQL References:" >}}
-    {{< nextlink href="ddsql_editor/reference/functions" >}}Funciones{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/data_types" >}}Tipos de datos{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/expressions_and_operators" >}}Expresiones y operadores{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/statements" >}}Sentenciass{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/tags" >}}Etiquetas{{< /nextlink >}}
-{{< /whatsnext >}}
+## Explorar tu telemetría
 
-### Explora tus datos en infraestructura 
+<div class="alert alert-danger">La consulta de logs, métricas, spans (tramos) and RUM mediante DDSQL está en vista previa. Utiliza este <a href="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/">formulario</a> para solicitar acceso.
 
-Ve y filtra la lista de tablas y campos en el panel lateral del esquema:
+Si deseas acceder a spans (tramos), RUM u otras sources (fuentes) de datos no enumeradas en la sección de casos de uso, menciónalas en el formulario de solicitud de acceso.
+</div>
 
-{{< img src="ddsql_editor/schema-explorer.png" alt="Una lista de las tablas disponibles" style="width:90%;" >}}
+Visualiza, filtra y crea consultas en el Explorador de datos.
+
+{{< img src="/ddsql_editor/data-tab-available-tables.png" alt="Panel lateral que muestra una lista de tablas disponibles para consultar en el DDSQL Editor" style="width:90%;" >}}
 
 Haz clic en el nombre de una tabla para ver tus columnas y relaciones:
 
-{{< img src="ddsql_editor/table-details.png" alt="Los detalles de una tabla, incluidas sus columnas y relaciones" style="width:60%;" >}}
+{{< img src="ddsql_editor/data-tab.png" alt="La pestaña de datos que muestra la información de la tabla para aws.ec2_instance" style="width:70%;" >}}
 
-### Guardar y compartir consultas
+Para sources (fuentes) de datos como logs, utiliza el creador de consultas para generar funciones de tabla.
 
-Guarda consultas útiles o exporta los datos como CSV.
+## Guardar y compartir consultas
 
-{{< img src="ddsql_editor/save-or-export-result.png" alt="Un resultado de consulta que muestra las acciones de guardar y exportar" style="width:90%;" >}}
+Guarda las consultas útiles para futuras consultas o descarga los datos como CSV.
 
-Examina y vuelve a ejecutar las consultas guardadas en el panel lateral.
+{{< img src="/ddsql_editor/save_export.png" alt="Interfaz de DDSQL Editor que muestra resultados de consulta con las opciones de guardar y exportar resaltadas" style="width:90%;" >}}
 
-{{< img src="ddsql_editor/saved-queries-panel.png" alt="Una lista de consultas guardadas" style="width:60%;" >}}
+Exporta una consulta guardada a un dashboard haciendo clic en **Save to Dashboard** (Guardar en el dashboard). Desde un dashboard puede visualizar los resultados y enviar informes programados.
+
+Explora y vuelve a ejecutar consultas recientes o guardadas en el panel lateral.
+
+{{< img src="/ddsql_editor/queries-tab-recent-queries.png" alt="Panel lateral que muestra la pestaña Consultas con una lista de las consultas guardadas y recientes en el DDSQL Editor" style="width:70%;" >}}
 
 ## Permisos
 
@@ -76,7 +80,9 @@ Para acceder a la aplicación del Editor de DDSQL, los usuarios necesitan el per
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/ddsql/editor
-[2]: /es/dashboards/ddsql_editor/reference/tags
+[2]: /es/ddsql_reference/ddsql_default/#tags
 [3]: /es/account_management/rbac/
+[4]: /es/bits_ai
+[5]: /es/help/
+[6]: /es/ddsql_reference/ddsql_default/

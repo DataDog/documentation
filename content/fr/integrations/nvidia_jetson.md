@@ -60,7 +60,7 @@ Lancez la [sous-commande status de l'Agent][5] et cherchez `jetson` dans la sect
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "nvidia_jetson" >}}
+{{< get-metrics-from-git "nvidia-jetson" >}}
 
 
 Certaines métriques sont uniquement transmises lorsque `use_sudo` est défini sur true :

@@ -6,7 +6,7 @@ aliases:
 - /account_management/billing/apm_tracing_profiling/
 ---
 
-APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM gives you deep visibility into your applications, with distributed tracing capabilities, seamless correlation between traces, logs, and other telemetry, and out-of-the-box performance dashboards for your service. With Continuous Profiler in APM Enterprise, you can pinpoint the slowest and most resource-intensive methods, in aggregate at the service and endpoint levels, as well as for every distributed trace. With Data Streams Monitoring (DSM) in APM Pro and APM Enterprise, you can easily track the end-to-end performance of your data streaming pipelines and event-driven applications that use Kafka and RabbitMQ.
+APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM gives you deep visibility into your applications, with distributed tracing capabilities, seamless correlation between traces, logs, and other telemetry, and out-of-the-box performance dashboards for your service. With Continuous Profiler in APM Enterprise, you can pinpoint the slowest and most resource-intensive methods, in aggregate at the service and endpoint levels, as well as for every distributed trace. With Data Streams Monitoring (DSM) in APM Pro and APM Enterprise, you can easily track the end-to-end performance of your data streaming pipelines and event-driven applications that use Kafka, SQS, and RabbitMQ.
 
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
@@ -14,7 +14,7 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 | [APM Host][5]      | $31 per underlying [APM host][5] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement. [More APM pricing information.][5] |
 | APM Pro (APM Host with Data Streams Monitoring) | $35 per underlying [APM host][5]. Includes Data Streams Monitoring. | Same as APM Host | Datadog records the number of unique APM hosts in the Datadog APM service and unique DSM hosts you are concurrently monitoring once an hour. The hourly measurements and billing for APM Pro are conducted the same as for APM Hosts.  |
 | APM Enterprise (APM Host with Data Streams Monitoring & [Continuous Profiler)][6] | $40 per underlying [APM host][5]. Includes Data Streams Monitoring and [Continuous Profiler][6] with four profiled containers per host per month. | Same as APM Host | Datadog records the number of unique APM hosts in the APM service, unique DSM hosts, and unique Continuous Profiler hosts you are concurrently monitoring once per hour. The hourly measurements and billing for APM Enterprise are conducted the same as for APM Hosts. |
-| [Fargate][4]       | APM: $2 per concurrent task per month <br> APM Pro: $2.30 per concurrent task per month <br> APM Enterprise: $2.60 per concurrent task per month              | 65,000 Indexed Spans and 10 GB of Ingested Spans included in pricing.              | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the average number of hours your applications were run and monitored. [More Fargate pricing information.][4]              |
+| [Fargate][4]       | $6 per concurrent task per month              | 195,000 Indexed Spans and 30 GB of Ingested Spans included in pricing.              | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the average number of hours your applications were run and monitored. [More Fargate pricing information.][16]              |
 | [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed with retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More APM pricing information.][5]                                                                                          |
 | [Ingested span][5] | $0.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More APM pricing information.][5]                                                                                          |
 
@@ -77,9 +77,9 @@ Using five APM hosts, sending 20 million Indexed Spans, and have deployed APM on
 | Billable Unit  | Quantity   | Price                                                                                           | Formula             | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
 | APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31             | $155                  |
-| Fargate Tasks  | 20         | $2 per task                                                                                     | 20 * $2             | $40                   |
+| Fargate Tasks  | 20         | $6 per task                                                                                     | 20 * $6             | $120                   |
 | Indexed Spans | 20 million | 5 million included with 5 APM hosts. 1.3 million included with 20 Fargate tasks. $1.70 per million for additional 13.7 million Indexed Spans | 13.7 * $1.70          | $23.29                |
-| Total          |            |                                                                                                 | $155 + $40 + $23.29 | **$218.29 per month** |
+| Total          |            |                                                                                                 | $155 + $120 + $23.29 | **$298.29 per month** |
 
 ### APM Enterprise Hosts, services, containers, and indexed spans
 
@@ -99,8 +99,8 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 | Billable Unit | Quantity | Price        | Formula    | Subtotal           |
 |---------------|----------|--------------|------------|--------------------|
 | APM Hosts     | 7        | $31 per host | 7 * $31    | $217               |
-| Fargate Tasks | 28       | $2 per task  | 28 * $2    | $56                |
-| Total         |          |              | $217 + $56 | **$273 per month** |
+| Fargate Tasks | 28       | $6 per task  | 28 * $6    | $168                |
+| Total         |          |              | $217 + $168 | **$385 per month** |
 
 **Note**: The container count does not matter if the deployed Agent is on the EC2 instances.
 
@@ -193,3 +193,4 @@ Yes. Let Datadog know if you are interested in buying Data Streams Monitoring wi
 [13]: /tracing/trace_pipeline/trace_retention/
 [14]: /tracing/trace_pipeline/metrics
 [15]: /universal_service_monitoring/
+[16]: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=aws-fargate#products

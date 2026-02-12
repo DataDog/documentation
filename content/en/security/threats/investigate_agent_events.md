@@ -4,16 +4,13 @@ disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
-    text: "Explore CSM Threats detection rules"
-  - link: "/security/threats/workload_security_rules"
+    text: "Explore Workload Protection detection rules"
+  - link: "/security/workload_protection/workload_security_rules"
     tag: "Documentation"
-    text: "Learn how to manage CSM Threats detection rules"
+    text: "Learn how to manage Workload Protection detection rules"
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
-  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
-    tag: "Blog"
-    text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
 
 
@@ -66,11 +63,11 @@ To triage an event:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[11]: /security/threats/security_signals
+[11]: /security/workload_protection/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
-[14]: /service_management/events/explorer/
+[14]: /events/explorer/
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process
-[18]: /security/cloud_security_management/guide/active-protection
+[18]: /security/workload_protection/guide/active-protection

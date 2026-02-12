@@ -12,7 +12,7 @@ Azure 통합은 월간 청구 요금에 영향을 미치지 않으면서 다른 
 
 ## Azure 가상 머신 제외
 
-Datadog-Azure 통합 타일을 사용해 Datadog에서 모니터링하는 가상 머신을 필터링할 수 있습니다. 설정 탭으로 이동해 기존 앱 등록을 수정하거나 새 앱을 추가하세요. 각 필터는 “다음 태그가 있는 호스트에 대한 메트릭 수집을 선택적으로 제한:”에서 관리할 수 있습니다.
+Datadog-Azure 통합 타일을 사용해 Datadog에서 모니터링하는 가상 머신을 필터링할 수 있습니다. Metric Collection 탭으로 이동해 기존 앱 등록을 수정하거나 새 앱을 추가하세요. 각 필터는 "Optionally limit metrics collection to hosts with tag:(다음 태그가 있는 호스트에 대한 메트릭 수집을 선택적으로 제한:)"에서 관리할 수 있습니다.
 
 통합 타일에서 기존 Azure 테넌트에 제한 사항을 추가할 때, 기존에 탐지된 VM은 인프라스트럭처 목록에 최대 2시간 동안 표시됩니다. 트랜지션 동안에는 VM의 상태가 `???`로 표시됩니다. 이는 요금 청구 대상에 포함되지 않습니다.
 
@@ -38,5 +38,5 @@ Datadog-Azure 통합 타일을 사용하여 Datadog에서 모니터링하는 Azu
 [2]: /ko/getting_started/tagging/using_tags/#integrations
 [3]: /ko/infrastructure/
 [4]: /ko/account_management/billing/custom_metrics/?tab=countrate
-[5]: /ko/integrations/azure#configuration
+[5]: /ko/integrations/azure#data-collected
 [6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported

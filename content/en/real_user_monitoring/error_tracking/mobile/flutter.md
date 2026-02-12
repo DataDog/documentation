@@ -6,7 +6,7 @@ aliases:
 - /real_user_monitoring/error_tracking/flutter
 type: multi-code-lang
 code_lang: flutter
-code_lang_weight: 50
+code_lang_weight: 40
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: "Source Code"
@@ -113,12 +113,7 @@ See the [RUM Debug Symbols][10] page to view all uploaded symbols.
 
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
+Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 ## Test your implementation
 
@@ -160,9 +155,9 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
+[5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/flutter-symbols
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [7]: https://docs.flutter.dev/deployment/flavors
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html

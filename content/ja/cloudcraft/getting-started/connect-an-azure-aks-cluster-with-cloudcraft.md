@@ -18,9 +18,9 @@ Azure AKS クラスターを Cloudcraft に接続する前に、まず Azure ア
 
 Azure 環境をブループリントにマッピングした状態で、スキャンしたい Azure AKS クラスターを選択し、コンポーネントツールバーに表示される **Enable cluster scanning** ボタンをクリックします。
 
-{{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Interactive Cloudcraft diagram showing an Azure AKS cluster with enable cluster scanning button highlighted." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Enable cluster scanning ボタンがハイライト表示された Azure AKS クラスターを示すインタラクティブな Cloudcraft ダイアグラム。" responsive="true" style="width:100%;">}}
 
-The next screen provides step-by-step instructions to complete in Azure.
+次の画面では、Azure で実行する手順が順を追って表示されます。
 
 1. 最初のリンクをクリックして Azure Subscriptions ページを開き、左サイドバーの **Access control (IAM)** をクリックします。
 2. **Add** をクリックし、**Add role assignment** を選択します。

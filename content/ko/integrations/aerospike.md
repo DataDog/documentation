@@ -20,8 +20,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10067
     source_type_name: Aerospike
-  logs:
-    source: aerospike
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -30,6 +28,7 @@ author:
 categories:
 - data stores
 - log collection
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
 display_on_public_website: true
@@ -37,9 +36,8 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 2.2.0
+integration_version: 4.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: aerospike
 public_title: Aerospike
@@ -52,6 +50,7 @@ tile:
   - Supported OS::Linux
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Aerospike 데이터베이스에서 클러스터 및 네임스페이스 통계를 수집하세요
   media: []
@@ -80,7 +79,7 @@ Aerospike 데이터베이스에서 메트릭을 확보하여 실시간으로 다
 Aerospike 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 서버에 추가 설치가 필요하지 않습니다.
 
-### 설정
+### 구성
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -130,30 +129,62 @@ Aerospike 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 {{% tab "컨테이너화" %}}
 
 
-#### 컨테이너화된 환경
+#### 컨테이너화
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우, 하단의 파라미터 적용 지침은 [자동탐지로 쿠버네티스(Kubernetes) 통합 설정][1] 또는 [자동탐지로 Docker 통합 설정][2]을 참조하세요. 사용 가능한 모든 설정 옵션은 [aerospike.d/conf.yaml 샘플][3]을 참조하세요.
 
 ##### 메트릭 수집
 
 | 파라미터            | 값                                |
 | -------------------- | ------------------------------------ |
 | `<INTEGRATION_NAME>` | `aerospike`                          |
-| `<INIT_CONFIG>`      | 비워두거나 `{}`                        |
-| `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
+| `<INIT_CONFIG>`      | 비어 있음 또는 `{}`                        |
+| `<INSTANCES_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}` |
+
+**예시**
+
+다음 어노테이션을 포드에 적용합니다. 여기서 `<CONTAINER_NAME>`은 Aerospike 컨테이너 이미지 이름 또는 [커스텀 식별자][4]입니다.
+
+```
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
+  {
+    "aerospike": {
+      "init_config": {},
+      "instances": [{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}]
+    }
+  } 
+```
+
 
 ##### 로그 수집
 
 _Agent 버전 6.0 이상에서 사용 가능_
 
-Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][2]을 참조하세요.
+Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [Kubernetes 로그 수집][5]을 참조하세요.
 
 | 파라미터      | 값                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "aerospike", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ko/agent/kubernetes/log/
+**예시**
+
+다음 어노테이션을 포드에 적용합니다. 여기서 `<CONTAINER_NAME>`은 Aerospike 컨테이너 이미지 이름 또는 [커스텀 식별자][4]입니다.
+
+```
+ad.datadoghq.com/<CONTAINER_NAME>.logs: |
+  [
+    {
+      "type": "file",
+      "path": "/var/log/aerospike/aerospike.log",
+      "source": "aerospike"
+    } 
+  ]
+```
+[1]: https://docs.datadoghq.com/ko/containers/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/ko/containers/docker/integrations/
+[3]: https://github.com/DataDog/integrations-core/blob/master/aerospike/datadog_checks/aerospike/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/ko/containers/guide/ad_identifiers/
+[5]: https://docs.datadoghq.com/ko/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -161,13 +192,13 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 
 [Agent의 상태 하위 명령을 실행][3]하고 Checks 섹션에서 `aerospike`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "aerospike" >}}
 
 
-### 서비스 검사
+### 서비스 점검
 
 **aerospike.can_connect**
 **aerospike.cluster_up**

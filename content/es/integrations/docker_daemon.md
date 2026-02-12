@@ -2,6 +2,8 @@
 app_id: Docker
 app_uuid: ca1a7870-7d95-40c7-9790-ef6c1e928967
 assets:
+  dashboards:
+    docker: assets/dashboards/docker_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -30,7 +32,7 @@ categories:
 - contenedores
 - recopilación de logs
 - la red
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_on_public_website: true
@@ -79,12 +81,12 @@ tile:
   title: Docker Daemon
 ---
 
-<!--  CON ORIGEN EN https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 **Nota**: El check de Docker Daemon todavía se mantiene, pero solo funciona con el **Agent v5**.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>Para utilizar la integración de Docker con el Agent v6 consulta la <a href="#Agent-v6">sección Agent v6</a> a continuación.</b>
 </div>
 
@@ -102,15 +104,15 @@ Configura este check del Agent para obtener métricas del servicio de Docker_dae
 
 Para recopilar métricas de Docker sobre todos tus contenedores, ejecuta **un** Datadog Agent en cada host. Hay dos formas de ejecutar el Agent: directamente en cada host o en un [contenedor de docker-dd-agent][2] (recomendado).
 
-Para cualquiera de las opciones, tus hosts necesitan una gestión de memoria de grupo activada para que el check de Docker tenga éxito. Consulta el [repositorio docker-dd-agent][3] para saber cómo activarla.
+Para cualquiera de las opciones, tus hosts necesitan una gestión de memoria de grupo activada para que el check de Docker tenga éxito. Consulta el [repositorio de docker-dd-agent][3] para saber cómo activarla.
 
 #### Instalación del host
 
 1. Asegúrate de que Docker se esté ejecutando en el host.
 2. Instala el Agent tal y como se describe en [las instrucciones de instalación del Agent ][4] para tu sistema operativo del host.
 3. Activa [el ícono de integración de Docker en la aplicación][5].
-4. Añade el usuario del Agent al grupo Docker: `usermod -a -G docker dd-agent`
-5. Crea un archivo `docker_daemon.yaml` copiando [el archivo de ejemplo en el directorio Agent conf.d][6]. Si tienes una instalación estándar de Docker en tu host, no debería haber nada que necesites cambiar para que la integración funcione.
+4. Añade el usuario del Agent al grupo de Docker: `usermod -a -G docker dd-agent`
+5. Crea un archivo `docker_daemon.yaml` copiando [el archivo de ejemplo en el directorio de Agent conf.d][6]. Si tienes una instalación estándar de Docker en tu host, no debería haber nada que necesites cambiar para que la integración funcione.
 6. Para activar otras integraciones, utiliza `docker ps` para identificar los puertos utilizados por las aplicaciones correspondientes.
     ![Comando ps de Docker][7]
 
@@ -131,14 +133,14 @@ En el comando anterior, puedes pasar tu clave de la API al Datadog Agent utiliza
 | **Variable**                                                                                      | **Descripción**                                                                                                                                                                                                                  |
 |---------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | API_KEY                                                                                           | Configura tu clave de la API de Datadog.                                                                                                                                                                                                       |
-| DD_HOSTNAME                                                                                       | Configura el nombre el host en el archivo `datadog.conf`del contenedor del Agent. Si no se configura esta variable, el contenedor del Agent utiliza valores predeterminados para el campo `Name` (tal y como se indica en el comando `docker info`) como el nombre del host del contenedor del Agent.  |
+| DD_HOSTNAME                                                                                       | Configura el nombre del host en el archivo `datadog.conf`del contenedor del Agent. Si no se configura esta variable, el contenedor del Agent utiliza valores predeterminados para el campo `Name` (tal y como se indica en el comando `docker info`) como el nombre del host del contenedor del Agent.  |
 | DD_URL                                                                                            | Configura la URL del servidor de entrada de Datadog al que el Agent envía los datos. Esto es útil cuando [se utiliza el Agent como proxy][9].                                                                                                              |
 | LOG_LEVEL                                                                                         | Configura el nivel de detalle del registro (CRÍTICO, ERROR, ADVERTENCIA, INFORMACIÓN, DEPURAR). Por ejemplo, `-e LOG_LEVEL=DEBUG` configura el registro en el modo de depuración.                                                                                                    |
-| ETIQUETAS (tags)                                                                                              | Configura etiquetas (tags) del host como una cadena delimitada por comas. Están disponibles tanto etiquetas (tags) simples como etiquetas (tags) clave-valor, por ejemplo: `-e etiquetas (tags)="simple-etiquetar, etiquetar-clave:etiquetar-valor"`.                                                                           |
-| EC2_TAGS                                                                                          | Activar esta función permite al Agent consultar y capturar el conjunto personalizado etiquetas (tags) utilizando la API de EC2 durante el inicio. Para activarla, utiliza `-e EC2_TAGS=yes`. **Nota**: Esta función requiere un rol IAM asociado a la instancia.        |
-| NON_LOCAL_TRAFFIC                                                                                 | Activar esta función permite informar StatsD desde cualquier IP externa. Para activarla, utiliza `-e NON_LOCAL_TRAFFIC=yes`. Esto se usa para informar métricas desde otros contenedores o sistemas. Consulta [configuración de red][10] para obtener más detalles. |
+| ETIQUETAS                                                                                              | Configura etiquetas (tags) del host como una cadena delimitada por comas. Están disponibles tanto etiquetas (tags) simples como etiquetas clave-valor, por ejemplo: `-e etiquetas (tags)="simple-etiquetar, etiquetar-clave:etiquetar-valor"`.                                                                           |
+| EC2_TAGS                                                                                          | Activar esta función permite al Agent consultar y capturar el conjunto de etiquetas personalizadas utilizando la API de EC2 durante el inicio. Para activarla, utiliza `-e EC2_TAGS=yes`. **Nota**: Esta función requiere un rol IAM asociado a la instancia.        |
+| NON_LOCAL_TRAFFIC                                                                                 | Activar esta función permite informar StatsD desde cualquier IP externa. Para activarla, utiliza `-e NON_LOCAL_TRAFFIC=yes`. Esto se usa para informar métricas desde otros contenedores o sistemas. Consulta la [configuración de red][10] para obtener más detalles. |
 | PROXY_HOST, PROXY_PORT, PROXY_USER, PROXY_PASSWORD                                                | Define detalles de la configuración de proxy. **Nota**: `PROXY_PASSWORD` es obligatorio para pasar una contraseña de autenticación y no puede renombrarse. Para más información, consulta la [documentación de proxy del Agent][11].                                                                                                                                  |
-| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Activa y configura Autodiscovery. Para más información, consulta la [guía de Autodiscovery ][12].                                                                                                                                   |
+| SD_BACKEND, SD_CONFIG_BACKEND, SD_BACKEND_HOST, SD_BACKEND_PORT, SD_TEMPLATE_DIR, SD_CONSUL_TOKEN | Activa y configura Autodiscovery. Para más información, consulta la [guía de Autodiscovery][12].                                                                                                                                   |
 
 **Nota**: Añade `--restart=unless-stopped` si quieres que tu Agent sea resistente a los reinicios.
 
@@ -157,9 +159,9 @@ docker run -d --name dd-agent \
 
 #### Contenedor basado en Alpine Linux
 
-La imagen estándar de Docker está basada en Debian Linux, pero a partir del Datadog Agent v5.7, existe una imagen basada en [Alpine Linux][13]. La imagen Alpine Linux es considerablemente más pequeña que la imagen tradicional basada en Debian. También hereda el diseño orientado a la seguridad de Alpine.
+La imagen estándar de Docker está basada en Debian Linux, pero a partir del Datadog Agent v5.7, existe una imagen basada en [Alpine Linux][13]. La imagen de Alpine Linux es considerablemente más pequeña que la imagen tradicional basada en Debian. También hereda el diseño orientado a la seguridad de Alpine.
 
-Para utilizar la imagen de Alpine Linux, añade `-alpine` a la etiqueta (tag) de la versión. Por ejemplo:
+Para utilizar la imagen de Alpine Linux, añade `-alpine` a la etiqueta de la versión. Por ejemplo:
 
 ```
 docker run -d --name dd-agent \
@@ -187,16 +189,16 @@ Para obtener más información sobre la creación de contenedores personalizados
 
 ## Agent v6
 
-El último check de Docker se denomina `docker` y está escrito en Go para aprovechar la nueva arquitectura interna. A partir de la versión 6.0, el Agent ya no carga la el check `docker_daemon`, aunque siga disponible y se mantenga para el Agent v5. Todas las funciones se portan en la versión >6.0, excepto las obsoletas siguientes:
+El último check de Docker se denomina `docker` y está escrito en Go para aprovechar la nueva arquitectura interna. A partir de la versión 6.0, el Agent ya no carga el check `docker_daemon`, aunque siga disponible y se mantenga para el Agent v5. Todas las funciones se portan en la versión >6.0, excepto las obsoletas siguientes:
 
   * Las opciones `url`, `api_version` y `tags*` están obsoletas. Se fomenta el uso directo de las [variables de entorno estándar de Docker][15].
-  * Las opciones `ecs_tags`, `performance_tags` y `container_tags` están obsoletas. Cada etiquetar relevante se recopila de modo predeterminado.
+  * Las opciones `ecs_tags`, `performance_tags` y `container_tags` están obsoletas. Cada etiqueta relevante se recopila de modo predeterminado.
   * La opción `collect_container_count` para activar la métrica`docker.container.count` no es compatible. Deben utilizarse `docker.containers.running` y `.stopped`.
 
 Algunas opciones se han movido de `docker_daemon.yaml` al archivo `datadog.yaml` principal:
 
-  * `collect_labels_as_tags` ha pasado a llamarse `docker_labels_as_tags` y admite etiquetas (tags) de cardinalidad alta. Conslta los detalles en `datadog.yaml.example`.
-  * `exclude` y `include` han pasado a denominarse `ac_include` y `ac_exclude`. Para que el filtrado sea coherente en todos los componentes del Agent, se ha suprimido el filtrado en etiquetas (tags) arbitrario. Los únicos filtros admitidos en etiquetas (tags) son `image` (nombre de la imagen) y `name` (nombre del contenedor). El filtrado de expresiones regulares sigue estando disponible; consulta `datadog.yaml.example` para ver ejemplos.
+  * `collect_labels_as_tags` ha pasado a llamarse `docker_labels_as_tags` y admite etiquetas de cardinalidad alta. Consulta los detalles en `datadog.yaml.example`.
+  * `exclude` y `include` han pasado a denominarse `ac_include` y `ac_exclude`. Para que el filtrado sea coherente en todos los componentes del Agent, se ha suprimido el filtrado en etiquetas  arbitrario. Los únicos filtros admitidos en etiquetas son `image` (nombre de la imagen) y `name` (nombre del contenedor). El filtrado de expresiones regulares sigue estando disponible; consulta `datadog.yaml.example` para ver ejemplos.
   * La opción `docker_root` se ha dividido en dos opciones: `container_cgroup_root` y `container_proc_root`.
   * `exclude_pause_container` se ha añadido para excluir los contenedores en pausa en Kubernetes y Openshift (el valor predeterminado es true). Esto evita eliminarlos de la lista por error.
 
@@ -209,7 +211,7 @@ El comando [`import`][18] convierte el antiguo `docker_daemon.yaml` en el nuevo 
 
 ## Datos recopilados
 ### Métricas
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 
 ### Eventos
@@ -227,14 +229,14 @@ La integración de Docker produce los siguientes eventos:
 * Actualización
 
 ### Checks de servicio
-{{< get-service-checks-from-git "docker_daemon" >}}
+{{< get-service-checks-from-git "docker" >}}
 
 
 **Nota**: Para utilizar `docker.exit`, añade `collect_exit_codes: true` en tu [archivo Docker YAML][21] y reinicia el Agent.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con [soporte técnico de Datadog][22].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][22].
 
 ## Referencias adicionales
 
@@ -244,7 +246,7 @@ La integración de Docker produce los siguientes eventos:
 * [Cómo monitorizar métricas de recursos de Docker][26]
 * [Cómo recopilar métricas de Docker][27]
 * [8 Datos sorprendentes sobre la adopción de Real Docker ][28]
-* [Monitorizar Docker en AWS ECS][29]
+* [Monitorización de Docker en Amazon ECS][29]
 * [Adaptar Datadog a Docker][30]
 * [Monitorizar Docker con Datadog][31]
 

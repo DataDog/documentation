@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/mobile_app_testing/mobile_app_tests/"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create mobile app tests"
 - link: "/synthetics/mobile_app_testing/mobile_app_tests/steps/"
@@ -18,10 +18,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic Monitoring Data Security"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 ## Overview
 

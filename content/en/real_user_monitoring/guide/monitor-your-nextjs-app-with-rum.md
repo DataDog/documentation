@@ -10,235 +10,304 @@ further_reading:
 
 ## Overview
 
-[Next.js][1] is a JavaScript framework created by [Vercel][8] that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend and backend applications for browser-related metrics that you give insight into performance and user behavior.
+[Next.js][1] is a JavaScript framework created by [Vercel][7] for building React web applications and Node.js APIs. This guide shows you how to add Datadog RUM to your Next.js application to monitor frontend performance and user behavior.
 
-## Setup
+## Prerequisites
 
-Follow the steps below to set up Datadog RUM browser monitoring.
+Create a RUM application in Datadog to get your credentials:
 
-### Create an application
+1. Go to [**Digital Experience > Performance Summary**][2].
+2. Click **New Application**.
+3. Select **JS**, enter an application name, and click **Create Application**.
+4. Copy the `applicationId` and `clientToken` values.
 
-1. Navigate to **[Digital Experience > Performance Summary][2]**.
-2. Click the **New Application** button.
-3. Make sure JS is selected, then enter a name for your application and click **Create New RUM Application**. A `clientToken` and `applicationId` are automatically generated for your application.
+<div class="alert alert-info">If you store these in <code>.env.local</code>, prefix them with <code>NEXT_PUBLIC_</code> to expose them to the browser. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Next.js environment variables</a>.</div>
 
-<div class="alert alert-info">When using `.env.local`, only variables prefixed with `NEXT_PUBLIC_` are included in the client bundle. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Bundling Environment Variables for the Browser</a> in the Next.js docs.</div>
+## Install the RUM SDK
 
-### Instrument your application
+For routing setup instructions, see the section that matches your Next.js configuration: [App Router](#app-router) or [Pages Router](#pages-router).
 
-1. Choose your instrumentation type, then copy and paste the code snippet from the Datadog RUM UI into the appropriate file based on the instrumentation type.
+### App Router
 
-   {{< tabs >}}
-   {{% tab "npm" %}}
+**Note:** The [App Router][8] is available in Next.js v13+.
 
-   When using npm, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+The App Router uses React Server Components by default. Since RUM must run in the browser, initialize it in a [Client Component][9].
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), Datadog recommends using the CDN RUM instrumentation to ensure that the RUM initialization occurs in the client. If you want to use the npm package, the initialization code must run in a [client component][5] so RUM can collect telemetry from the client. You can achieve this without making your [`layout.tsx`][2] file itself a client component by following the example below to create an empty `<DatadogInit />` component with the RUM initialization code, and then rendering that `<DatadogInit />` component in your `layout.tsx`.
-   - If your Next.js application relies on the **older** Next.js [Page Router][3], you can paste the initialization snippet into the custom [`_app.tsx`][4] file without the `"use client"` directive and without a separate `<DatadogInit />` component.
+{{< tabs >}}
+{{% tab "npm" %}}
 
-   {{< code-block lang="javascript" filename="datadog-init.tsx" disable_copy="false" collapsible="true" >}}
-   // Necessary if using App Router to ensure this file runs on the client
+1. Install the RUM SDK:
+
+   ```bash
+   npm install @datadog/browser-rum
+   ```
+
+2. Create a client component for RUM initialization:
+
+   {{< code-block lang="tsx" filename="components/datadog-init.tsx" disable_copy="false" >}}
    "use client";
-    
-    import { datadogRum } from "@datadog/browser-rum";
-    
-    datadogRum.init({
-      applicationId: "<YOUR_APPLICATION_ID>",
-      clientToken: "<CLIENT_TOKEN>",
-      site: "datadoghq.com",
-      service: "<SERVICE_NAME>",
-      env: "<ENV_NAME>",
-      // Specify a version number to identify the deployed version of your application in Datadog
-      // version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 20,
-      trackUserInteractions: true,
-      trackResources: true,
-      trackLongTasks: true,
-      defaultPrivacyLevel: "mask-user-input",
-      // Specify URLs to propagate trace headers for connection between RUM and backend trace
-      allowedTracingUrls: [
-        { match: "https://example.com/api/", propagatorTypes: ["tracecontext"] },
-      ],
-    });
-    
-    export default function DatadogInit() {
-      // Render nothing - this component is only included so that the init code
-      // above will run client-side
-      return null;
-    }
-   {{< /code-block >}}
-   
-   {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
-    import DatadogInit from "@/components/datadog-init";
 
-    export default function RootLayout({
-      children,
-    }: {
-      children: React.ReactNode;
-    }) {
-      return (
-        <html lang="en">
-          <body>
-            <DatadogInit />
-            {children}
-          </body>
-        </html>
-      );
-    }
+   import { datadogRum } from "@datadog/browser-rum";
 
-   {{< /code-block >}}
+   datadogRum.init({
+     applicationId: "<YOUR_APPLICATION_ID>",
+     clientToken: "<CLIENT_TOKEN>",
+     site: "datadoghq.com",
+     service: "<SERVICE_NAME>",
+     env: "<ENV_NAME>",
+     sessionSampleRate: 100,
+     sessionReplaySampleRate: 20,
+     trackUserInteractions: true,
+     trackResources: true,
+     trackLongTasks: true,
+   });
 
-   [1]: https://nextjs.org/docs/app
-   [2]: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
-   [3]: https://nextjs.org/docs/pages
-   [4]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
-   [5]: https://nextjs.org/docs/app/building-your-application/rendering/client-components#using-client-components-in-nextjs
-
-   {{% /tab %}}
-   {{% tab "CDN async" %}}
-
-   When using CDN async, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
-
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
-   - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
-   - The Next.js external scripts need to be loaded like in [this page][5].
-
-   **Note**: The Next.js scripts include import and export lines, and includes curly braces and backticks between the `Script id`, where all instances of `Script` are in uppercase.
-
-   {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
-
-   import Script from "next/script";
-
-   export default function RootLayout({
-     children,
-   }: {
-     children: React.ReactNode;
-   }) {
-     return (
-       <html lang="en">
-         <Script id="datadog-rum">
-           {`
-             (function(h,o,u,n,d) {
-               h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-               d=o.createElement(u);d.async=1;d.src=n
-               n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
-             window.DD_RUM.onReady(function() {
-               window.DD_RUM.init({
-                 clientToken: '<CLIENT_TOKEN>',
-                 applicationId: '<YOUR_APPLICATION_ID>',
-                 site: 'datadoghq.com',
-                 service: 'next-app-router-rum',
-                 env: '<ENV_NAME>',
-                 // Specify a version number to identify the deployed version of your application in Datadog
-                 // version: '1.0.0',
-                 sessionSampleRate: 100,
-                 sessionReplaySampleRate: 100,
-                 trackUserInteractions: true,
-                 trackResources: true,
-                 trackLongTasks: true,
-               });
-             })
-           `}
-         </Script>
-         <body>{children}</body>
-       </html>
-     );
+   export default function DatadogInit() {
+     return null;
    }
-
    {{< /code-block >}}
 
-   [1]: https://nextjs.org/docs/app
-   [2]: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
-   [3]: https://nextjs.org/docs/pages
-   [4]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
-   [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
+3. Add the component to your [root layout][1]:
 
-   {{% /tab %}}
-   {{% tab "CDN sync" %}}
+   {{< code-block lang="tsx" filename="app/layout.tsx" disable_copy="false" >}}
+   import DatadogInit from "@/components/datadog-init";
 
-   When using CDN sync, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
-
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
-   - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
-   - The Next.js external scripts need to be loaded like in [this page][5].
-
-   **Note**: The Next.js scripts include import and export lines, and includes curly braces and backticks between the `Script id`, where all instances of `Script` are in uppercase.
-
-   {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
-
-   import Script from "next/script";
-
-   export default function RootLayout({
-     children,
-   }: {
-     children: React.ReactNode;
-   }) {
+   export default function RootLayout({ children }: { children: React.ReactNode }) {
      return (
        <html lang="en">
          <body>
-           <Script
-             id="dd-rum-sync"
-             src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"
-             type="text/javascript"
-             strategy="beforeInteractive"
-           />
-           <Script id="datadog-rum">
-             {`
-               window.DD_RUM && window.DD_RUM.init({
-                 clientToken: '<CLIENT_TOKEN>',
-                 applicationId: '<YOUR_APPLICATION_ID>',
-                 site: 'datadoghq.com',
-                 service: 'rum-cdn-async',
-                 env: '<ENV_NAME>',
-                 // Specify a version number to identify the deployed version of your application in Datadog
-                 // version: '1.0.0',
-                 sessionSampleRate: 100,
-                 sessionReplaySampleRate: 100,
-                 trackUserInteractions: true,
-                 trackResources: true,
-                 trackLongTasks: true,
-               });
-             `}
-           </Script>
+           <DatadogInit />
            {children}
          </body>
        </html>
      );
    }
-
    {{< /code-block >}}
 
-   [1]: https://nextjs.org/docs/app
-   [2]: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
-   [3]: https://nextjs.org/docs/pages
-   [4]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
-   [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
+[1]: https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates
 
-   {{% /tab %}}
-   {{< /tabs >}}
+{{% /tab %}}
+{{% tab "CDN async" %}}
 
-3. Follow the in-app steps to verify your installation.
-4. Deploy the changes to your application. Once your deployment is live, Datadog collects events from user browsers.
-5. You can visualize the [data collected][3] in your Next.js application using [dashboards][4].
+Use the Next.js `Script` component to load RUM asynchronously:
+
+{{< code-block lang="tsx" filename="app/layout.tsx" disable_copy="false" >}}
+import Script from "next/script";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <Script id="datadog-rum">
+        {`
+          (function(h,o,u,n,d) {
+            h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+            d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+            n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+          window.DD_RUM.onReady(function() {
+            window.DD_RUM.init({
+              clientToken: '<CLIENT_TOKEN>',
+              applicationId: '<YOUR_APPLICATION_ID>',
+              site: 'datadoghq.com',
+              service: '<SERVICE_NAME>',
+              env: '<ENV_NAME>',
+              sessionSampleRate: 100,
+              sessionReplaySampleRate: 20,
+            });
+          })
+        `}
+      </Script>
+      <body>{children}</body>
+    </html>
+  );
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+Use `strategy="beforeInteractive"` to load RUM synchronously before the page becomes interactive:
+
+{{< code-block lang="tsx" filename="app/layout.tsx" disable_copy="false" >}}
+import Script from "next/script";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Script
+          id="dd-rum-sync"
+          src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+          crossOrigin=""
+          type="text/javascript"
+          strategy="beforeInteractive"
+        />
+        <Script id="datadog-rum">
+          {`
+            window.DD_RUM && window.DD_RUM.init({
+              clientToken: '<CLIENT_TOKEN>',
+              applicationId: '<YOUR_APPLICATION_ID>',
+              site: 'datadoghq.com',
+              service: '<SERVICE_NAME>',
+              env: '<ENV_NAME>',
+              sessionSampleRate: 100,
+              sessionReplaySampleRate: 20,
+            });
+          `}
+        </Script>
+        {children}
+      </body>
+    </html>
+  );
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Pages Router
+
+The [Pages Router][10] runs on the client, so you can initialize RUM directly in [`_app.tsx`][11].
+
+{{< tabs >}}
+{{% tab "npm" %}}
+
+1. Install the RUM SDK:
+
+   ```bash
+   npm install @datadog/browser-rum
+   ```
+
+2. Initialize RUM in your custom App component:
+
+   {{< code-block lang="tsx" filename="pages/_app.tsx" disable_copy="false" >}}
+   import type { AppProps } from "next/app";
+   import { datadogRum } from "@datadog/browser-rum";
+
+   datadogRum.init({
+     applicationId: "<YOUR_APPLICATION_ID>",
+     clientToken: "<CLIENT_TOKEN>",
+     site: "datadoghq.com",
+     service: "<SERVICE_NAME>",
+     env: "<ENV_NAME>",
+     sessionSampleRate: 100,
+     sessionReplaySampleRate: 20,
+     trackUserInteractions: true,
+     trackResources: true,
+     trackLongTasks: true,
+   });
+
+   export default function App({ Component, pageProps }: AppProps) {
+     return <Component {...pageProps} />;
+   }
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+Use the Next.js `Script` component to load RUM asynchronously:
+
+{{< code-block lang="tsx" filename="pages/_app.tsx" disable_copy="false" >}}
+import type { AppProps } from "next/app";
+import Script from "next/script";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Script id="datadog-rum">
+        {`
+          (function(h,o,u,n,d) {
+            h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+            d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+            n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+          })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+          window.DD_RUM.onReady(function() {
+            window.DD_RUM.init({
+              clientToken: '<CLIENT_TOKEN>',
+              applicationId: '<YOUR_APPLICATION_ID>',
+              site: 'datadoghq.com',
+              service: '<SERVICE_NAME>',
+              env: '<ENV_NAME>',
+              sessionSampleRate: 100,
+              sessionReplaySampleRate: 20,
+            });
+          })
+        `}
+      </Script>
+      <Component {...pageProps} />
+    </>
+  );
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+Use `strategy="beforeInteractive"` to load RUM synchronously before the page becomes interactive:
+
+{{< code-block lang="tsx" filename="pages/_app.tsx" disable_copy="false" >}}
+import type { AppProps } from "next/app";
+import Script from "next/script";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Script
+        id="dd-rum-sync"
+        src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+        crossOrigin=""
+        type="text/javascript"
+        strategy="beforeInteractive"
+      />
+      <Script id="datadog-rum">
+        {`
+          window.DD_RUM && window.DD_RUM.init({
+            clientToken: '<CLIENT_TOKEN>',
+            applicationId: '<YOUR_APPLICATION_ID>',
+            site: 'datadoghq.com',
+            service: '<SERVICE_NAME>',
+            env: '<ENV_NAME>',
+            sessionSampleRate: 100,
+            sessionReplaySampleRate: 20,
+          });
+        `}
+      </Script>
+      <Component {...pageProps} />
+    </>
+  );
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Verify and deploy
+
+1. Run your app locally and visualize the [data collected][12] in [dashboards][13] or create a search query in the [RUM Explorer][14].
+2. Deploy your changes. While doing so, don't forget to change your env and version so you can find your production sessions later.
 
 ## Backend monitoring
 
-To start backend monitoring of your Next.js applications:
+To connect RUM with your backend traces:
 
-1. Follow the browser setup steps for [Connecting RUM and Traces][6].
-2. Follow the browser setup steps for [OpenTelemetry support][7] to connect with APM.
+1. Set up [RUM and Traces][5] to correlate frontend and backend data.
+2. Configure [OpenTelemetry support][6] if using APM.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://nextjs.org/
-[2]: https://app.datadoghq.com/rum/performance-monitoring?_gl=1*il22i*_gcl_aw*R0NMLjE2OTAzMDM5MzcuQ2owS0NRanc1ZjJsQmhDa0FSSXNBSGVUdmxqb3ZQX1YyMFRsV1o1UlJLVHNUNHNITll2ZEJ0bTZONnlxdVM1X3lzY2NOejE4QzVON1ktOGFBcHpYRUFMd193Y0I.*_gcl_au*MjMxOTI4ODMzLjE2OTAyMjI1NTA.*_ga*MTIwMTk2NTA5Ny4xNjY2NzEzMjY2*_ga_KN80RDFSQK*MTY5MTc5ODE4OS4xMzYuMS4xNjkxNzk4NTQyLjAuMC4w*_fplc*RnA3SEVTb1BoTG9ndDI0OFQ5TERxRWRtMjNwTWVrTWZ3VGNGeWRaYm9HRkpJSXBxVHdVdFNTcURCWW1rZENHUldmU2EyTzhtZ3NXVzRUR0JUTzRnSGdPeGRkVVpWYVA5V0x4JTJGeTFRNWo5djNqYmNwQnJpckdHUU93M08xU3clM0QlM0Q
-[3]: /real_user_monitoring/browser/data_collected/
+[2]: https://app.datadoghq.com/rum/performance-monitoring
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [4]: /real_user_monitoring/platform/dashboards/
-[5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
-[8]: https://vercel.com
+[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#setup-rum
+[6]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
+[7]: https://vercel.com
+[8]: https://nextjs.org/docs/app
+[9]: https://nextjs.org/docs/app/building-your-application/rendering/client-components
+[10]: https://nextjs.org/docs/pages
+[11]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app
+[12]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[13]: /real_user_monitoring/platform/dashboards/
+[14]: https://app.datadoghq.com/rum/sessions

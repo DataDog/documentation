@@ -15,14 +15,6 @@ AWS Payload Extraction captures request and response data exchanged between your
 
 ## Requirements
 
-The following AWS services are supported:
-
-- Amazon Simple Notification Service (SNS)
-- Amazon Simple Queue Service (SQS)
-- Amazon Kinesis
-- Amazon S3
-- Amazon EventBridge
-
 The following tracer versions and AWS SDK packages are supported:
 
 | Language | Version            | Instrumented AWS SDK Packages  |
@@ -126,13 +118,14 @@ Each tracer implementation provides additional configuration options specific to
 {{< programming-lang lang="nodejs" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 
 - SNS
 - SQS
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 <div class="alert alert-info">To request support for additional services, open a feature request with the <a href="/help/">Datadog Support</a> team.</div>
 
@@ -147,12 +140,13 @@ The Node.js tracer applies redaction rules on a per-service basis. For example:
 {{< programming-lang lang="python" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 - SNS
 - SQS
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 #### Configure services
 
@@ -166,10 +160,10 @@ DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge
 Add services by appending to the comma-separated list. For example, to add support for AWS Amplify:
 
 ```sh
-DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,amplify
+DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,dynamodb,amplify
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Added services do not include default redactions. Test your application in staging to identify and configure necessary redactions.
 </div>
 
@@ -189,7 +183,7 @@ Control the maximum number of extracted tags with:
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_TAGS=758
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The default value (758) is the maximum the Datadog Agent can accept. Increasing this value is not recommended.
 </div>
 
@@ -218,7 +212,7 @@ To enable tag extraction for additional services, use this environment variable:
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=ApiGateway,ApiGatewayV2,EventBridge,Sqs,Sns,S3,Kinesis
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Added services do not include default redactions. Test your application in staging to identify and configure necessary redactions.
 </div>
 
@@ -243,7 +237,7 @@ Control the maximum number of extracted tags with:
 DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_TAGS=758
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The default value (758) is the maximum the Datadog Agent can accept. Increasing this value is not recommended.
 </div>
 

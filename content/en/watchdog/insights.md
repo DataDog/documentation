@@ -42,8 +42,9 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Processes Explorer][7]
     - [Serverless Explorer][8]
     - [Kubernetes Explorer][9]
-- [Real User Monitoring (RUM) Explorer][10]
-- [Error Tracking issue side panel][13]
+    - [Real User Monitoring (RUM) Explorer][10]
+    - [Synthetic Monitoring & Testing Explorer][15]
+    - [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
@@ -70,6 +71,7 @@ The link to the outlier expires with the retention of the underlying data. For i
 
 ## Explore graph insights with Watchdog explains
 {{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
+
 Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
 - What is the source of the spike?
 - Does this anomaly affect everyone or is an isolated incident?
@@ -161,7 +163,7 @@ In the banner card view, you can see:
   * The name of the impacted service
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
-    
+
 {{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
 
 In the full side panel, you can see instructions on how to resolve the lock contention:
@@ -210,7 +212,7 @@ Find the databases impacted by one or multiple outliers by using the Insight car
 
 {{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:100%;">}}
 
-An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened. 
+An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened.
 
 {{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:100%;">}}
 
@@ -247,8 +249,25 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 [1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+{{% /tab %}}
+{{% tab "Synthetic Monitoring" %}}
+
+### Error outliers
+
+Error outliers in Synthetic Monitoring display unexpected behaviors and performance deviations. These anomalies provide insights into the reliability issues in your [Synthetic Browser Tests][101]. Identifying these error outliers helps you troubleshoot errors in failed test runs, enhancing debugging and reducing Mean Time To Resolution (MTTR).
+
+When reviewing failed test runs, you can see the number of error outliers on the failed test:
+
+{{< img src="watchdog/synthetics_watchdog_outlier.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
+
+To view the error outlier message, click on the outlier. Then, on the test step side panel, click the **Errors & Warnings** tab.
+
+{{< img src="watchdog/outlier_step_error_2.png" alt="An error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
+
+[101]: /synthetics/browser_tests
+
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
@@ -274,7 +293,7 @@ An overlay is then set on the function, with pink pills highlighting the differe
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer. 
+For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
 
 [1]: https://app.datadoghq.com/process
 {{% /tab %}}
@@ -296,7 +315,7 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [3]: /tracing/services/service_page/
 [4]: /tracing/services/resource_page/
 [5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/search
+[6]: https://app.datadoghq.com/profiling/explorer
 [7]: https://app.datadoghq.com/process
 [8]: https://app.datadoghq.com/functions
 [9]: https://app.datadoghq.com/orchestration/overview/pod
@@ -305,3 +324,5 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
 [14]: /dashboards/graph_insights/watchdog_explains
+[15]: https://app.datadoghq.com/synthetics/explorer
+

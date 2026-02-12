@@ -1,0 +1,118 @@
+{{ $dot := . }}
+<div class="code-analysis-supported-languages">
+  <div class="container cards-dd">
+    <div class="row justify-content-center"> 
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Python">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/python_avatar.svg" "class" "img-fluid" "alt" "python" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=JavaScript">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/javascript_large.png" "class" "img-fluid" "alt" "javascript" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/typescript_large.svg" "class" "img-fluid" "alt" "typescript" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Java">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/java_avatar.svg" "class" "img-fluid" "alt" "java" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=CSharp">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_avatar.svg" "class" "img-fluid" "alt" "c sharp" "width" "50") }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </br>
+    <div class="row justify-content-center"> 
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Go">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/golang-avatar.png" "class" "img-fluid" "alt" "go" "width" "60") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Ruby">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby_avatar.svg" "class" "img-fluid" "alt" "ruby" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=PHP">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/php_opcache.png" "class" "img-fluid" "alt" "php" "width" "80") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Docker">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/docker_avatar.svg" "class" "img-fluid" "alt" "docker" "width" "50") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=YAML">
+          <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/yaml.png" "class" "img-fluid" "alt" "yaml" "width" "50") }}
+          </div>
+        </a>
+      </div>  
+    </div>
+  </br>
+  <div class="row justify-content-center"> 
+    <div class="col">
+      <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Kotlin">
+        <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/kotlin.png" "class" "img-fluid" "alt" "kotlin" "width" "80") }}
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir">
+        <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/elixir.png" "class" "img-fluid" "alt" "elixir" "width" "50") }}
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex">
+        <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/salesforce_large.svg" "class" "img-fluid" "alt" "apex" "width" "90") }}
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card h-100" href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift">
+        <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/swift_large.svg" "class" "img-fluid" "alt" "swift" "width" "80") }}
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a class="card h-100" href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog">
+        <div class="card-body text-center py-2 px-1 d-flex justify-content-center align-items-center">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/datadog_avatar.svg" "class" "img-fluid" "alt" "other" "width" "50") }}
+        </div>
+      </a>
+    </div>
+  </div>    
+  </div>
+</div>

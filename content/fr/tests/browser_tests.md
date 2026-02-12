@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/guides/rum_integration
-- /continuous_integration/integrate_tests/browser_tests
-- /continuous_integration/tests/browser_tests
+- /fr/continuous_integration/guides/rum_integration
+- /fr/continuous_integration/integrate_tests/browser_tests
+- /fr/continuous_integration/tests/browser_tests
 description: Découvrez comment utiliser CI Visibility et RUM pour associer les résultats
   de vos tests aux sessions Browser et aux replays.
 further_reading:
@@ -14,10 +14,6 @@ further_reading:
   text: En savoir plus sur la surveillance Browser RUM
 title: Instrumenter vos tests Browser avec RUM
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Présentation
 

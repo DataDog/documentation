@@ -406,7 +406,34 @@ describe(`filterExampleJson`, () => {
       "type": "array"
     };
     const actual = bp.filterExampleJson("response", mockSchema);
-    const expected = ["namespace1", "namespace2", "namespace3"];
+    const expected = {
+        "value": [
+            "namespace1",
+            "namespace2",
+            "namespace3"
+        ]
+    };
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show example data when array', () => {
+    const mockSchema = {
+      "example": [
+          "namespace1",
+          "namespace2",
+          "namespace3"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    };
+    const actual = bp.filterExampleJson("response", mockSchema);
+    const expected = [
+        "namespace1",
+        "namespace2",
+        "namespace3"
+    ];
     expect(actual).toEqual(expected);
   });
 
@@ -2138,6 +2165,257 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   })
 
+  it('should make top level example take precedence if it exists and its response', () => {
+    const mockSchema = {
+        "description": "List of aggregated DNS flows.",
+        "properties": {
+          "data": {
+            "description": "Array of aggregated DNS objects.",
+            "items": {
+              "description": "Object describing an aggregated DNS flow.",
+              "properties": {
+                "attributes": {
+                  "description": "Attributes for an aggregated DNS flow.",
+                  "properties": {
+                    "group_bys": {
+                      "description": "The key, value pairs for each group by.",
+                      "items": {
+                        "description": "Attributes associated with a group by",
+                        "properties": {
+                          "key": {
+                            "description": "The group by key.",
+                            "type": "string",
+                          },
+                          "value": {
+                            "description": "The group by value.",
+                            "type": "string",
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "example": [
+                          {
+                            "key": "client_team",
+                            "value": "networks"
+                          },
+                          {
+                            "key": "server_service",
+                            "value": "hucklebuck"
+                          }
+                      ],
+                      "type": "array"
+                    },
+                    "metrics": {
+                      "description": "Metrics associated with an aggregated DNS flow.",
+
+                      "items": {
+                        "description": "Metrics associated with an aggregated DNS flow.",
+                        "properties": {
+                          "key": {
+                            "description": "The metric key for DNS metrics.",
+                            "enum": [
+                              "dns_total_requests",
+                              "dns_failures",
+                              "dns_successful_responses",
+                              "dns_failed_responses",
+                              "dns_timeouts",
+                              "dns_responses.nxdomain",
+                              "dns_responses.servfail",
+                              "dns_responses.other",
+                              "dns_success_latency_percentile",
+                              "dns_failure_latency_percentile"
+                            ],
+                            "type": "string",
+                            "x-enum-descriptions": [
+                              "The total number of DNS requests made by the client.",
+                              "The total number of timeouts and errors in DNS requests.",
+                              "The total number of successful DNS responses.",
+                              "The total number of failed DNS responses.",
+                              "The total number of DNS timeouts.",
+                              "The total number of DNS responses with the NXDOMAIN error code.",
+                              "The total number of DNS responses with the SERVFAIL error code.",
+                              "The total number of DNS responses with other error codes.",
+                              "The latency percentile for successful DNS responses.",
+                              "The latency percentile for failed DNS responses."
+                            ],
+                            "x-enum-varnames": [
+                              "DNS_TOTAL_REQUESTS",
+                              "DNS_FAILURES",
+                              "DNS_SUCCESSFUL_RESPONSES",
+                              "DNS_FAILED_RESPONSES",
+                              "DNS_TIMEOUTS",
+                              "DNS_RESPONSES_NXDOMAIN",
+                              "DNS_RESPONSES_SERVFAIL",
+                              "DNS_RESPONSES_OTHER",
+                              "DNS_SUCCESS_LATENCY_PERCENTILE",
+                              "DNS_FAILURE_LATENCY_PERCENTILE"
+                            ]
+                          },
+                          "value": {
+                            "description": "The metric value.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                },
+                "id": {
+                  "description": "A unique identifier for the aggregated DNS traffic based on the group by values.",
+                  "example": "client_service:example-service,network.dns_query:example.com",
+                  "type": "string"
+                },
+                "type": {
+                  "example": "aggregated_dns",
+                  "default": "aggregated_dns",
+                  "description": "Aggregated DNS resource type.",
+                  "enum": [
+                    "aggregated_dns"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "AGGREGATED_DNS"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "example": {
+            "data": [
+                {
+                    "attributes": {
+                        "group_bys": [
+                            {
+                                "key": "network.dns_query",
+                                "value": [
+                                    "foo-bar.com"
+                                ]
+                            },
+                            {
+                                "key": "client_service",
+                                "value": [
+                                    "foo-resolver"
+                                ]
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "key": "dns_total_requests",
+                                "value": 1652837
+                            },
+                            {
+                                "key": "dns_failures",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_successful_responses",
+                                "value": 1652837
+                            },
+                            {
+                                "key": "dns_failed_responses",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_timeouts",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_responses.nxdomain",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_responses.servfail",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_responses.other",
+                                "value": 0
+                            },
+                            {
+                                "key": "dns_success_latency_percentile",
+                                "value": 493
+                            }
+                        ]
+                    },
+                    "id": "network.dns_query:foo-bar.com,client_service:foo-resolver",
+                    "type": "aggregated_dns"
+                }
+            ]
+        },
+        "type": "object"
+    };
+    const actual = bp.filterExampleJson('response', mockSchema);
+    const expected = {
+        "data": [
+            {
+                "attributes": {
+                    "group_bys": [
+                        {
+                            "key": "network.dns_query",
+                            "value": [
+                                "foo-bar.com"
+                            ]
+                        },
+                        {
+                            "key": "client_service",
+                            "value": [
+                                "foo-resolver"
+                            ]
+                        }
+                    ],
+                    "metrics": [
+                        {
+                            "key": "dns_total_requests",
+                            "value": 1652837
+                        },
+                        {
+                            "key": "dns_failures",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_successful_responses",
+                            "value": 1652837
+                        },
+                        {
+                            "key": "dns_failed_responses",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_timeouts",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_responses.nxdomain",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_responses.servfail",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_responses.other",
+                            "value": 0
+                        },
+                        {
+                            "key": "dns_success_latency_percentile",
+                            "value": 493
+                        }
+                    ]
+                },
+                "id": "network.dns_query:foo-bar.com,client_service:foo-resolver",
+                "type": "aggregated_dns"
+            }
+        ]
+    };
+    expect(actual).toEqual(expected);
+  })
 });
 
 describe(`isReadOnlyRow`, () => {
@@ -2211,7 +2489,7 @@ describe(`fieldColumn`, () => {
 
   const emptyResult = `
     <div class="col-4 column">
-      <p class="key"></p>
+      <p class="key table-cell"></p>
     </div>
   `.trim();
 
@@ -2229,7 +2507,7 @@ describe(`typeColumn`, () => {
   it('should show type value', () => {
     const obj = {description: ""};
     const actual = bp.typeColumn("type", "array", "");
-    const expected = `<div class="col-2 column"><p>array</p></div>`;
+    const expected = `<div class="col-2 column"><p class="table-cell">array</p></div>`;
     expect(actual).toEqual(expected);
   });
 
@@ -2260,7 +2538,7 @@ describe(`descColumn`, () => {
     const obj = "TODO";
     const key = "description";
     const actual = bp.descColumn(key, obj);
-    const expected = '<div class="col-6 column"><p>TODO</p></div>';
+    const expected = '<div class="col-6 column"><p class="table-cell">TODO</p></div>';
     expect(actual).toEqual(expected);
   });
 

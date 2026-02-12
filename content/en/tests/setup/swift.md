@@ -19,29 +19,24 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
-</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported languages:
 
-| Language | Version |
-|---|---|
-| Swift | >= 5.7 |
-| Objective-C | >= 2.0 |
-| Xcode | >= 14.3 |
+| Language    | Version |
+| ----------- | ------- |
+| Swift       | >= 5.9  |
+| Objective-C | >= 2.0  |
+| Xcode       | >= 16.0 |
 
 Supported platforms:
 
-| Platform | Version |
-|---|---|
-| iOS | >= 11.0 |
-| macOS | >= 10.13 |
-| tvOS | >= 11.0 |
+| Platform     | Version  |
+| ------------ | -------- |
+| iOS / iPadOS | >= 12.0  |
+| macOS        | >= 10.13 |
+| tvOS         | >= 12.0  |
+| macCatalyst  | >= 13.0  |
 
 ## Installing the Swift testing SDK
 
@@ -76,8 +71,6 @@ There are three ways you can install the testing framework:
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. If you run UI Tests and don't use RUM, also add the dependency to your applications running the tests.
-
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
@@ -96,8 +89,6 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. If you run UI Tests and don't use RUM, also add the dependency to the app running the tests.
-
 {{% /tab %}}
 {{% tab "Framework linking" %}}
 
@@ -107,12 +98,11 @@ end
 
 {{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
 
-3. If you run UI Tests and don't use RUM, also link the app running the tests with this library.
-
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
+
+<div class="alert alert-danger">This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
 
@@ -124,7 +114,7 @@ To enable testing instrumentation, add the following environment variables to yo
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
-<div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
+<div class="alert alert-danger">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
 For UI Tests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
@@ -153,6 +143,12 @@ Set all these variables in your test target:
 `DD_API_KEY`
 : The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
+
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
@@ -208,7 +204,7 @@ Environment variables need to be set only in the test target, because the framew
 
 ### Test Optimisation SDK
 
-If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-intrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
+If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-instrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
 
 Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
@@ -241,7 +237,7 @@ The framework enables auto-instrumentation of all supported libraries, but in so
 
 `DD_DISABLE_CRASH_HANDLER`
 : Disables crash handling and reporting. (Boolean)
-<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
+<div class="alert alert-danger">If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
 ### Network auto-instrumentation
 
@@ -621,6 +617,32 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 <key>com.apple.security.app-sandbox</key>
  <false/>
 {{< /code-block >}}
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `swift test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
+
+- `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Further reading
 

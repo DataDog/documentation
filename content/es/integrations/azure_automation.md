@@ -1,27 +1,58 @@
 ---
+app_id: azure-automation
+app_uuid: 4df0e16c-2c9b-472a-962a-12b6d4e3f7c8
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.automation_automationaccounts.total_job
+      metadata_path: metadata.csv
+      prefix: azure.automation_automationaccounts
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 281
+    source_type_name: Azure Automation
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - automatización
 - azure
 - nube
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas principales de Azure Automation.
-doc_link: https://docs.datadoghq.com/integrations/azure_automation/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_automation
-has_logo: true
 integration_id: azure-automation
-integration_title: Microsoft Azure Automation
+integration_title: Azure Automation
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_automation
-public_title: Integración de Datadog y Microsoft Azure Automation
+public_title: Azure Automation
 short_description: Rastrea las métricas principales de Azure Automation.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Categoría::Azure
+  - Category::Cloud
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas principales de Azure Automation.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Automation
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Automation ofrece un servicio de configuración y automatización basado en la nube que proporciona una gestión consistente en los entornos que son de Azure y que no son de Azure.
@@ -48,7 +79,7 @@ La integración Azure Automation no incluye ningún evento.
 
 La integración Azure Automation no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

@@ -32,8 +32,8 @@ The Datadog CloudFormation StackSet performs the following steps:
 1. Deploys the Datadog AWS CloudFormation Stack in every account under an AWS Organization or Organizational Unit.
 2. Automatically creates the necessary IAM role and policies in the target accounts.
 3. Automatically initiates ingestion of AWS CloudWatch metrics and events from the AWS resources in the accounts.
-4. Optionally disables metric collection for the AWS infrastructure. This is useful for Cloud Cost Management (CCM) or Cloud Security Management Misconfigurations (CSM Misconfigurations) specific use cases.
-5. Optionally configures CSM Misconfigurations to monitor resource misconfigurations in your AWS accounts.
+4. Optionally disables metric collection for the AWS infrastructure. This is useful for Cloud Cost Management (CCM) or Cloud Security Misconfigurations specific use cases.
+5. Optionally configures Cloud Security Misconfigurations to monitor resource misconfigurations in your AWS accounts.
 
 **Note**: The StackSet does not set up log forwarding in the AWS accounts. To set up logs, follow the steps in the [Log Collection][2] guide.
 
@@ -60,8 +60,8 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
     - *Optionally:*  
-        a. Enable [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
-        b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [CSM Misconfigurations][5] specific use cases.
+        1. Enable [Cloud Security Misconfigurations][5] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+        1. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [Cloud Security Misconfigurations][5] specific use cases.
 
 3. **Configure StackSet options**  
 Keep the **Execution configuration** option as `Inactive` so the StackSet performs one operation at a time.
@@ -81,6 +81,11 @@ Keep the **Execution configuration** option as `Inactive` so the StackSet perfor
     Go to the **Review** page and click **Submit**. This launches the creation process for the Datadog StackSet. This could take several minutes depending on how many accounts need to be integrated. Ensure that the StackSet successfully creates all resources before proceeding.
 
     After the stacks are created, go back to the AWS integration config page in Datadog and click **Done**. It may take a few minutes to see metrics and events reporting from your newly integrated AWS accounts.
+
+6. *(Optional)* **Integrate the AWS management account**
+
+   The AWS management account does not automatically deploy after this StackSet setup, due to AWS's restrictions on [Service-managed permissions][10].
+   Follow the steps in [Datadog-Amazon Cloudformation][9] to integrate the AWS management account.
 
 
 ## Enable integrations for individual AWS services
@@ -107,3 +112,5 @@ To uninstall the AWS integration from all AWS accounts and regions in an Organiz
 [6]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[9]: https://docs.datadoghq.com/integrations/guide/amazon_cloudformation/
+[10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html

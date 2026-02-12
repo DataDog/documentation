@@ -26,7 +26,7 @@ For specific information regarding Squid, see the [Squid](#squid) section of thi
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can NOT be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
 </div>
 
@@ -313,9 +313,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
 backend datadog-api
     mode http
@@ -596,9 +596,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
 
 backend datadog-api
     mode http
@@ -824,7 +824,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
@@ -943,7 +943,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
@@ -1136,7 +1136,7 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 
 [1]: https://app.datadoghq.com/infrastructure#overview
 
-[1]: /agent/configuration/agent-fips-proxy
+[1]: /agent/configuration/fips-compliance
 [2]: /agent/guide/agent-5-commands
 [3]: http://www.squid-cache.org/
 [4]: https://app.datadoghq.com/infrastructure

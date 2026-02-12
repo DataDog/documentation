@@ -21,6 +21,7 @@ algolia:
   - 'csp'
   - 'report-uri'
   - 'report-to'
+  - 'reporting-endpoints'
   - 'Content-Security-Policy'
   - 'violated-directive'
   - 'blocked-uri'
@@ -33,6 +34,9 @@ further_reading:
   - link: "/getting_started/tagging/unified_service_tagging/"
     tag: "Documentation"
     text: "Learn about Unified Service Tagging"
+  - link: "https://www.datadoghq.com/blog/content-security-policy-reporting-with-datadog/"
+    tag: "Blog"
+    text: "Monitor Content Security Policy violations with Datadog"
 ---
 
 ## Overview
@@ -83,21 +87,17 @@ You can either embed the URL in an HTTP header (recommended), or embed it in a `
 
 ### Embed the policy in an HTTP header
 
-Datadog recommends embedding the Content Security Policy in an HTTP header. You can either use the `report-uri` directive or the `report-to` directive. The `report-to` directive will eventually supersede `report-uri`, but is not yet supported by all browsers.
+Datadog recommends embedding the Content Security Policy in an HTTP header. You can either use the `report-uri` directive or the `reporting-endpoints` directive. The `reporting-endpoints` directive will eventually supersede `report-uri`, but is not yet supported by all browsers.
 
 - If you're using the `report-uri` directive:
   ```bash
   Content-Security-Policy: ...; report-uri https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report
   ```
 
-- If you're using the `report-to` directive:
+- If you're using the `reporting-endpoints` directive:
   ```json
   Content-Security-Policy: ...; report-to browser-intake-datadoghq
-  Report-To: { "group": "browser-intake-datadoghq",
-              "max_age": 10886400,
-              "endpoints": [
-                  { "url": "https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
-              ] }
+  Reporting-Endpoints: browser-intake-datadoghq="https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report"
   ```
 
 ### Policy embedded in a `<meta>` HTML tag
@@ -200,16 +200,12 @@ If you are using the CDN async or CDN sync setup for [Real User Monitoring][6] o
 script-src https://www.datadoghq-browser-agent.com
 ```
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /real_user_monitoring/browser/setup/#initialization-parameters
+[4]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [5]: /logs/log_collection/javascript/#initialization-parameters
-[6]: /real_user_monitoring/browser/setup/
+[6]: /real_user_monitoring/application_monitoring/browser/setup/
 [7]: /logs/log_collection/javascript/#cdn-async
 [8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
 [9]: https://www.npmjs.com/package/@datadog/browser-worker

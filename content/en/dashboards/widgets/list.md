@@ -1,5 +1,6 @@
 ---
 title: List Widget
+description: Display filterable lists of events and issues from logs, RUM, events, and other sources in dashboard widgets.
 widget_type: list_stream
 further_reading:
 - link: "/dashboards/graphing_json/"
@@ -88,8 +89,44 @@ For Events, you can choose how they're displayed in the widget:
 For incidents, you can sort by:
 
 * Created time
+* Detected time
+* Last modified time
+* Resolved time
 * Severity
 * Status
+* Title
+
+Ascending or descending
+
+### CD deployments
+
+#### Sorting by
+
+For CD deployments, you can sort by:
+
+* Deployment Status
+* Service
+* Deployment Name
+* Environment
+* Duration
+* Revision Value
+* Repository URL
+* Timestamp
+
+Ascending or descending
+
+### CI pipelines
+
+#### Sorting by
+
+For CI pipelines, you can sort by:
+
+* CI Status
+* Pipeline Name
+* Duration
+* Pipeline ID
+* Branch
+* Timestamp
 
 Ascending or descending
 

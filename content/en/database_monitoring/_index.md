@@ -2,6 +2,9 @@
 title: Database Monitoring
 description: Learn about Database Monitoring and get started
 further_reading:
+- link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
+  tag: "Blog"
+  text: "Improve database host and query performance with Database Monitoring Recommendations"
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
   tag: "Blog"
   text: "Monitor and visualize database performance"
@@ -10,7 +13,10 @@ further_reading:
   text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
   tag: "Blog"
-  text: "Track and troubleshoot MongoDB performance"
+  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-database-research/"
+  tag: "Blog"
+  text: "How microservice architectures have shaped the usage of database technologies"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -20,9 +26,6 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
-- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
-  tag: "Blog"
-  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:

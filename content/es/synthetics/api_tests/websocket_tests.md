@@ -34,13 +34,21 @@ Los tests WebSocket pueden ejecutarse tanto desde [localizaciones gestionadas](#
 
 ## Configuración
 
-Cuando decidas crear un test `WebSocket`, define la solicitud de tu test.
+Puedes crear un test utilizando una de las siguientes opciones:
 
-### Definición de la solicitud
+- **Crea un test a partir de una plantilla**:
 
-1. Especifica la **URL** donde se ejecutará el test. 
-2. Introduce la cadena que quieres enviar en tu test.
-3. Añade **Opciones avanzadas** (opcional) a tu test:
+     1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor. 
+     2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Define Request** (Definir solicitud), en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+     3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API de Synthetics" video="true" >}}
+
+- **Crea un test desde cero**:
+
+    1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero) y selecciona el tipo de solicitud `WebSocket`.
+    1. Especifica la **URL** donde se ejecutará el test. 
+    1. Introduce la cadena que quieres enviar en tu test.
+    1. Añade **Opciones avanzadas** (opcional) a tu test:<br /><br>
 
    {{< tabs >}}
 
@@ -53,30 +61,35 @@ Cuando decidas crear un test `WebSocket`, define la solicitud de tu test.
 
    {{% tab "Autenticación" %}}
 
-   * **Autenticación básica HTTP**: Añade credenciales de autenticación básica HTTP.
+   * **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
 
    {{% /tab %}}
 
    {{< /tabs >}}
 
-<br/>
+</br>
 
-4. **Pon un nombre** a tu test WebSocket.
-5. Añade **Etiquetas** (tags) `env` así como cualquier otra etiqueta a tu test WebSocket. Luego, puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la [página de monitorización y tests continuos Synthetic][3].
+  5. **Pon un nombre** a tu test WebSocket.
+  6. Añade **etiquetas** de entorno así como cualquier otra etiqueta a tu test WebSocket. A continuación, puedes utilizar estas etiquetas para filtrar a través de tus tests de Synthetic en la [página de monitorización de Synthetic y tests continuos][3]. 
+  7. Haz clic en **Enviar** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
 
-{{< img src="synthetics/api_tests/websocket_test_config.png" alt="Definir una solicitud WebSocket" style="width:90%;" >}}
+     {{< img src="synthetics/api_tests/websocket_test_config_2.png" alt="Definir solicitud de WebSocket" style="width:90%;" >}}
 
-Haz clic en **Test de URL** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
+  8. Haz clic en **Create Test** (Crear test) para enviar tu test de API.
+
+### Fragmentos
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Definición de aserciones
 
-Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en **Test de URL** (URL de test), se añade una aserción básica sobre el `response time`. Debes definir al menos una aserción para que sea monitorizada por tu test.
+Las aserciones definen cuál es un resultado de test esperado. Al hacer clic en **URL del test**, se añade una aserción básica sobre el `response time`. Debes definir al menos una aserción para que sea monitorizada por tu test.
 
 | Tipo            | Operador                                                                         | Tipo de valor                        |
 |-----------------|----------------------------------------------------------------------------------|-----------------------------------|
-| tiempo de respuesta   | `is less than`                                                                   | _Integer (ms)_                    |
-| respuesta de cadena | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_        |
-| cabecera          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | _String_ <br> _[Regex][4]_        |
+| tiempo de respuesta   | `is less than`                                                                   | _Entero (ms)_                    |
+| respuesta de cadena | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | Cadena <br> [Expresión regular][4]        |
+| encabezado          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match` | Cadena <br> [Expresión regular][4]        |
 
 Selecciona la vista previa de la respuesta directamente o haz clic en **Nueva aserción** para crear una aserción. Puedes crear hasta 20 aserciones por cada test WebSocket.
 
@@ -84,15 +97,15 @@ Selecciona la vista previa de la respuesta directamente o haz clic en **Nueva as
 
 Para aplicar una lógica `OR` en una aserción, utiliza los comparadores `matches regex` o `does not match regex` para definir una expresión regular con varios valores esperados para el mismo tipo de aserción, como `(0|100)`. Se considera que el resultado del test tiene éxito si el valor de respuesta de la cadena o de la aserción de la cabecera es 0 o 100.
 
-Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud, dentro del límite de tiempo de espera establecido por el worker de Synthetics.
+Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
 
-Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparece un error `Assertions on the body/response cannot be run beyond this limit`.
+Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
 
 ### Seleccionar localizaciones
 
 Selecciona las **Localizaciones** desde donde ejecutar tu test WebSocket. Los tests WebSocket pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Indicar la frecuencia del test
 
@@ -100,13 +113,13 @@ Los tests WebSocket se pueden ejecutar:
 
 * **De forma programada** para asegurar que tus endpoints más importantes estén siempre disponibles para tus usuarios. Selecciona la frecuencia con la que quieres que Datadog ejecute tu test WebSocket.
 * [**En tus pipelines CI/CD**][2] para empezar a realizar envíos sin temer que un código defectuoso pueda afectar a la experiencia de tus clientes.
-* **Bajo demanda** para ejecutar tus tests cuando resulte más conveniente para tu equipo.
+* **Bajo demanda** para ejecutar tus tests cuando sea más conveniente para tu equipo.
 
 {{% synthetics-alerting-monitoring %}}
 
-{{% synthetics-variables %}} 
+{{% synthetics-variables %}}
 
-### Uso de variables
+### Usar variables
 
 Puedes utilizar las [variables globales definidas en la página **Parámetros**][4] en la URL, las opciones avanzadas y las aserciones de tus tests WebSocket.
 
@@ -116,29 +129,7 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 Un test se considera `FAILED` si no satisface una o más aserciones o si la solicitud ha fallado prematuramente. En algunos casos, el test puede fallar sin comprobar las aserciones respecto al endpoint.
 
-Entre las razones figuran las siguientes:
-
-`CONNRESET`
-: El servidor remoto ha finalizado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o falla al responder, o que se haya perdido la conectividad del servidor web.
-
-`DNS`:
-No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
-
-`INVALID_REQUEST` 
-: La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
-
-`SSL`
-: No se ha podido realizar la conexión SSL. [Para obtener más información, consulta la página de errores específica][9].
-
-`TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
-  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
-
-`WEBSOCKET`
-: La conexión WebSocket se ha cerrado o no se puede abrir. Puede ocurrir un tipo de error `WEBSOCKET`:
-  - `WEBSOCKET: Received message longer than the maximum supported length.` indica que la longitud del mensaje de respuesta alcanza la longitud máxima (50kb).
+Para obtener una lista completa de los códigos de error de WebSocket, consulta [Errores de test de la API][9].
 
 ## Permisos
 
@@ -148,11 +139,7 @@ Si estás utilizando la [función de rol personalizado][11], añade tu usuario a
 
 ### Restringir el acceso
 
-La restricción del acceso está disponible para clientes que utilizan [roles personalizados][12] en sus cuentas.
-
-Puedes restringir el acceso a un test WebSocket en función de los roles de tu organización. Al crear un test WebSocket, elige qué roles (además de tu usuario) pueden leer y escribir tu test.
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Definir permisos para tu test" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## Referencias adicionales
 
@@ -166,7 +153,6 @@ Puedes restringir el acceso a un test WebSocket en función de los roles de tu o
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /es/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /es/synthetics/guide/synthetic-test-monitors
-[9]: /es/synthetics/api_tests/errors/#ssl-errors
+[9]: /es/synthetics/api_tests/errors/#websocket-errors
 [10]: /es/account_management/rbac/
 [11]: /es/account_management/rbac#custom-roles
-[12]: /es/account_management/rbac/#create-a-custom-role

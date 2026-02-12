@@ -1,4 +1,6 @@
 ---
+description: Carga mapas fuente de JavaScript para mejorar el rastreo de errores con
+  stack traces legibles y una mejor depuración del código minificado.
 further_reading:
 - link: /real_user_monitoring/error_tracking
   tag: Documentación
@@ -6,7 +8,7 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentación
   text: Visualización de tus datos de rastreo de errores en el Explorer
-- link: https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
   tag: Código fuente
   text: Referencia del comando Sourcemaps
 title: Carga de mapas de fuente de JavaScript
@@ -16,19 +18,14 @@ title: Carga de mapas de fuente de JavaScript
 
 Si el código fuente de tu frontend JavaScript está minificado, carga tus mapas de fuente a Datadog para deenmascarar tus diferentes stack traces. Para cualquier error dado, puedes acceder a la ruta del archivo, el número de línea y el fragmento de código para cada marco del stack trace relacionado. Datadog también puede vincular marcos de stack a tu código fuente en tu repositorio.
 
-<div class="alert alert-info">Solo pueden desminificarse los errores recopilados por <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, y logs de <a href="/Logs/log_collection/JavaScript/">Browser Logs Collection</a>.</div>
+<div class="alert alert-info">Solo pueden desminificarse los errores recopilados por <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> y logs de <a href="/logs/log_collection/javascript/">Browser Logs Collection</a>.</div>
 
 ## Instrumentar tu código
 
-Configura tu empaquetador de JavaScript para que, al minificar tu código fuente, genere mapas de fuente que incluyan directamente el código fuente relacionado en el atributo `sourcesContent`.
+Configura tu empaquetador de JavaScript para que, al minificar el código fuente,, genere mapas fuente que incluyan directamente el código fuente relacionado en el atributo `sourcesContent`.
 
-<div class="alert alert-warning">
-{{< site-region region="us,us3,us5,eu" >}}
-Asegúrate de que el tamaño de cada mapa de fuente aumentado con el tamaño del archivo minificado relacionado no supere el límite de **300** MB.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-Asegúrate de que el tamaño de cada mapa de fuente aumentado con el tamaño del archivo minificado relacionado no supere el límite de **50** MB.
-{{< /site-region >}}
+<div class="alert alert-danger">
+Asegúrate de que el tamaño de cada source map (mapa de fuentes) aumentado con el tamaño del archivo minificado relacionado no supere el límite de **500 MB**.
 </div>
 
 Consulta las siguientes configuraciones para los empaquetadores más populares de JavaScript.
@@ -71,6 +68,27 @@ module.exports = {
 Parcel genera mapas de fuente por defecto cuando se ejecuta el comando build: `parcel build <entry file>`.
 
 {{% /tab %}}
+{{% tab "Vite" %}}
+
+Puedes generar source maps (mapas de fuentes) configurando la opción `build.sourcemap` en tu archivo `vite.config.js`.
+
+Consulta el ejemplo de configuración:
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    sourcemap: true, // generates .js.map files
+    minify: 'terser', // or 'esbuild'
+  }
+})
+```
+
+**Nota**: Si estás utilizando TypeScript, asegúrate de que `compilerOptions.sourceMap` se configure en `true` en tu archivo `tsconfig.json`.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Tras compilar la aplicación, los empaquetadores generan un directorio (normalmente denominado `dist`) con los archivos JavaScript minificados junto con sus correspondientes mapas de fuente.
@@ -86,13 +104,8 @@ Consulta el siguiente ejemplo:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
-{{< site-region region="us,us3,us5,eu" >}}
-Si la suma del tamaño del archivo de <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> excede el <b>límite de **300** MB</b>, reduce el tamaño al configurar el compilador para dividir el código fuente en múltiples fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">División de código con WebpackJS</a>.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-Si la suma del tamaño del archivo de <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> excede el <b>límite de **50** MB</b>, reduce el tamaño al configurar el compilador para dividir el código fuente en múltiples fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">División de código con WebpackJS</a>.
-{{< /site-region >}}
+<div class="alert alert-danger">
+Si la suma del tamaño de los archivos <code>javascript.364758.min.js</code> y <code>javascript.364758.js.map</code> supera el límite de <b>500 MB</b>, redúcelo configurando el empaquetador para dividir el código source (fuente) en varios fragmentos más pequeños. Para obtener más información, consulta <a href="https://webpack.js.org/guides/code-splitting/">División del código con WebpackJS</a>.
 </div>
 
 ## Cargar tus mapas de fuente
@@ -102,29 +115,29 @@ La mejor manera de cargar mapas de fuente es añadir un paso adicional en tu pip
 {{< site-region region="us" >}}
 1. Añade `@datadog/datadog-ci` a tu archivo `package.json` (asegúrate de estar utilizando la última versión).
 2. [Crea una clave de API dedicada de Datadog][1] y expórtala como una variable de entorno denominada `DATADOG_API_KEY`.
-3. Ejecuta el siguiente comando una vez por servicio en tu aplicación RUM:
+3. Ejecuta el siguiente comando una vez por servicio en tu aplicación:
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1" >}}
+{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
 1. Añade `@datadog/datadog-ci` a tu archivo `package.json` (asegúrate de estar utilizando la última versión).
 2. [Crea una clave de API dedicada de Datadog][1] y expórtala como una variable de entorno denominada `DATADOG_API_KEY`.
 3. Configura la CLI para cargar archivos al sitio {{<region-param key="dd_site_name">}} exportando dos variables de entorno: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} y `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
-4. Ejecuta el siguiente comando una vez por servicio en tu aplicación RUM:
+4. Ejecuta el siguiente comando una vez por servicio en tu aplicación:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
@@ -135,9 +148,9 @@ Para minimizar la sobrecarga en el rendimiento de tu CI, la CLI está optimizada
 
 **Nota**: Volver a cargar un mapa de fuente no anula el existente si la versión no ha cambiado.
 
-Los parámetros `--service` y `--release-version` deben coincidir las etiquetas (tags) `service` y `version` en tus eventos RUM y logs de navegador. Para más información sobre cómo configurar estas etiquetas, consulta la [documentación de inicialización del SDK del navegador RUM][2] o la [documentación de la recopilación de logs de navegador][3].
+Los parámetros `--service` y `--release-version` deben coincidir con las etiquetas (tags) `service` y `version` de tus eventos de Error Tracking, eventos de RUM y logs del navegador. Para más información sobre cómo configurar estas etiquetas, consulta la [documentación inicial del SDK del navegador][2] o la [documentación de la recopilación de logs del navegador][3].
 
-<div class="alert alert-info">Si has definido varios servicios en tu aplicación RUM, ejecuta el comando CI tantas veces como haya servicios, aunque tengas un conjunto de mapas de fuente para toda la aplicación RUM.</div>
+<div class="alert alert-info">Si has definido varios servicios en tu aplicación, ejecuta el comando CI tantas veces como haya servicios, incluso si tienes un conjunto de mapas fuente para toda la aplicación.</div>
 
 Al ejecutar el comando contra el directorio de ejemplo `dist`, Datadog espera que tu servidor o CDN entregue los archivos JavaScript en `https://hostname.com/static/js/javascript.364758.min.js` y `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
@@ -167,7 +180,7 @@ Por otro lado, un stack trace sin minificar te proporciona todo el contexto que 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/es/real_user_monitoring/browser/setup/#initialization-parameters
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
+[2]: https://docs.datadoghq.com/es/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/es/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

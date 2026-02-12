@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
+- 클라우드
 - azure
+custom_kind: 통합
 dependencies: []
 description: Azure Service Bus의 핵심 메트릭 추적하기.
 doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
@@ -12,7 +13,6 @@ integration_id: azure-service-bus
 integration_title: Microsoft Azure Service Bus
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: azure_service_bus
 public_title: Datadog-Microsoft Azure Service Bus 통합
@@ -36,17 +36,17 @@ Azure Service Bus 메트릭을 얻으면 다음을 할 수 있습니다.
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_service_bus" >}}
+{{< get-metrics-from-git "azure-service-bus" >}}
 
 
 ### 이벤트
 
 Azure Service Bus 통합에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure Service Bus 통합에는 서비스 점검이 포함되어 있지 않습니다.
 

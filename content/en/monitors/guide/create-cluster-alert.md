@@ -1,5 +1,6 @@
 ---
 title: Create cluster alerts to notify when a percentage of groups are in critical state
+description: "Learn to create cluster alerts that notify when a percentage of groups meet conditions, like alerting when 40% of hosts have high CPU usage."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -21,12 +22,9 @@ In this example, you want to receive a notification when 40 percent of hosts hav
 * Use the `min_cutoff` function to count the number of hosts that have CPU usage above 50 percent.
 * Use the `count_nonzero` function to count the total number of hosts.
 * Divide one by the other for the resulting percentage of hosts with CPU usage above 50 percent.
-
-{{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition" >}}
-
 * Then, set the condition to alert if the percentage of hosts in that condition reaches 40 percent.
 
-{{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger" >}}
+{{< img src="/monitors/guide/create_cluster_alert/cluster_alert_config.png" alt="Monitor configuration for cluster alert to receive a notification when 40 percent of hosts have a CPU usage above 50 percent" style="width:100%;" >}}
 
 This monitor tracks the percentage of host that have a CPU usage above 50 percent within the last ten minutes and generates a notification if more than 40 percent of those hosts meet the specified condition.
 

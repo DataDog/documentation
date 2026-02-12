@@ -18,12 +18,12 @@ title: 에이전트 데이터 보안
 에이전트 공식 리포지토리 및 바이너리 패키지는 서명되어 있습니다. 다음 공개 키 중 하나의 서명을 확인하여 배포 채널을 인증합니다:
 
 - Linux DEB 패키지 및 리포 메타데이터:
-  - [D18886567EABAD8B2D2526900D826EB906462314][21]
+  - [D18886567EABAD8B2D2526900D826EB906462314][22]
   - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Linux RPM 패키지 및 리포 메타데이터:
-  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][22]
+  - [2416A37757B1BB0268B3634B52AFC5994F09D16B][21]
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
@@ -88,6 +88,99 @@ Datadog 보안 시스템에서 버그를 발견했다면 [security@datadoghq.com
 
 자세한 내용을 확인하려면 [기밀 정보 관리][18] 문서를 참조하세요.
 
+## 텔레메트리 수집
+
+{{< site-region region="gov" >}}
+
+에이전트는 비정부 사이트에서 Datadog 에이전트의 환경, 성능, 기능 사용 정보를 수집합니다. 에이전트에서 정부 사이트나 [Datadog 에이전트 FIPS 프록시][1] 사용을 감지할 경우, 자동으로 텔레메트리 수집을 비활성화합니다. 이와 같은 감지가 불가능할 경우(예: 프록시가 사용될 경우), 에이전트 텔레메트리가 전송되지만 Datadog의 수집 과정에서 즉시 삭제됩니다. 처음부터 전송되지 않도록 하려면 에이전트 구성 파일에서 `agent_telemetry`를 업데이트하여 에이전트 텔레메트리를 명시적으로 비활성화할 것을 권장합니다. 다음 예시를 참고하세요.
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{% tab "환경 변수" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+{{% /tab %}}
+{{< /tabs >}}
+[1]: https://docs.datadoghq.com/ko/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
+{{< /site-region >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+Datadog에서 Datadog 에이전트의 환경, 성능, 기능 사용 정보를 수집할 수 있습니다. 여기에는 Datadog 에이전트의 진단 로그, 충돌 덤프, 불명확한 스택 트레이스가 포함되어 Datadog 에이전트가 개선되는 데 사용됩니다.
+
+에이전트 구성 파일에서 `agent_telemetry` 설정을 업데이트해 이 텔레메트리 수집을 비활성화할 수 있습니다. 다음 예시를 참고하세요.
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+agent_telemetry:
+  enabled: false
+```
+{{% /tab %}}
+{{% tab "환경 변수" %}}
+
+```bash
+DD_AGENT_TELEMETRY_ENABLED=false
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**텔레메트리 내용:**
+| 메타데이터([소스][1]) |
+| ---------------------- |
+| Machine id             |
+| Machine name           |
+| OS                     |
+| OS version             |
+| Agent version          |
+
+| 메트릭([소스][2])                       | 설명                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| checks.execution_time                       | 실행 시간을 밀리초 단위로 점검                                                            |
+| pymem.inuse                                 | Python 인터프리터가 할당한 바이트 수                                               |
+| pymem.alloc                                 | 에이전트 시작 후부터 지금까지 Python 인터프리터가 할당한 총 바이트 수            |
+| api_server.request_duration_seconds         | CLI 명령 실행 성능(실행한 경우)                                                  |
+| logs.decoded                                | 디코딩된 로그 총 수                                                                      |
+| logs.sender_latency                         | HTTP 발신자 지연 시간(밀리초 단위)                                                               |
+| logs.bytes_missed                           | 에이전트에서 소비하기 전에 손실된 총 바이트 수(예: 로그 회전 후) |
+| logs.dropped                                | 삭제된 로그 총수                                                                      |
+| logs.bytes_sent                             | 인코딩 전 전송한 바이트 총수(있을 경우)                                                |
+| logs.encoded_bytes_sent                     | 인코딩 후 전송한 바이트 총수(있을 경우)                                                 |
+| dogstatsd.udp_packets                       | DogStatsD UDP 패킷 바이트                                                                       |
+| dogstatsd.uds_packets                       | DogStatsD UDS 패킷 바이트                                                                       |
+| transactions.input_count                    | 수신 트랜잭션 수                                                                        |
+| transactions.requeued                       | 트랜잭션 재대기 수                                                                         |
+| transactions.retries                        | 트랜잭션 재시도 수                                                                           |
+| point.sent                                  | 전송된 메트릭 총수                                                                      |
+| point.dropped                               | 삭제된 메트릭 총수                                                                   |
+| oracle.activity_samples_count               | 측정 쿼리 활동에서 가져온 행 수(수집된 활동 샘플 수)         |
+| oracle.activity_latency                     | 쿼리 활동 가져오는 데 걸린 시간(밀리초 단위)                                                   |
+| oracle.statement_metrics                    | 데이터베이스 메트릭을 가져오는 데 걸린 시간(밀리초 단위)                                                 |
+| oracle.statement_plan_errors                | 실행 플랜 가져오기 실패 수                                                    |
+| postgres.collect_relations_autodiscovery_ms | 자동탐지 관계 수집 시간(밀리초)                                          |
+| postgres.collect_stat_autodiscovery_ms      | 자동탐지 통계 수집 시간(밀리초)                                               |
+| postgres.get_new_pg_stat_activity_ms        | `pg_stat_activity` 가져오는 데 걸린 시간(밀리초)                                                    |
+| postgres.get_new_pg_stat_activity_count     | `pg_stat_activity` 수집에 가져온 총 행수                                                  |
+| postgres.get_active_connections_ms          | 활성 연결하는 데 걸린 시간(밀리초)                                                    |
+| postgres.get_active_connections_count       | 활성 연결을 위해 가져온 총 행수                                                      |
+| postgres.collect_activity_snapshot_ms       | 활성 스냅샷을 가져오는 데 걸린 시간(밀리초)                                                     |
+| postgres.collect_statement_samples_ms       | 문 샘플을 가져오는 데 걸린 시간(밀리초)                                                     |
+| postgres.collect_statement_samples_count    | 문 샘플을 수집하는 데 가져온 총 행수                                                   |
+
+적용 가능한 메트릭만 전송됩니다. 예를 들어 DBM이 비활성화된 경우 메트릭과 관련된 데이터베이스는 전혀 전송되지 않습니다.
+
+
+[1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
+[2]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/config.go#L156
+
+{{< /site-region >}}
+
 ### 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -112,5 +205,5 @@ Datadog 보안 시스템에서 버그를 발견했다면 [security@datadoghq.com
 [18]: /ko/agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
-[21]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
-[22]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+[21]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+[22]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public

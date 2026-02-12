@@ -9,7 +9,7 @@ further_reading:
 title: 新イベント機能への移行
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog のレガシーイベントストリームとイベントモニターは、<strong>2022 年 6 月 30 日</strong>に廃止します。Datadog は、すべてのお客様を新しく改良されたイベントエクスペリエンスに移行します。このページには、この移行に関する重要な情報が記載されています。廃止日までに、このページの手順に従って、既存のイベント可視化およびモニターが引き続き適切に動作することを確認してください。</div>
 
 
@@ -45,7 +45,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 ### イベント分析
 
-{{< img src="service_management/events/events-analytics.png" alt="Events Analytics display filtered by 'source:cloudtrail'" >}}
+{{< img src="service_management/events/events-analytics.png" alt="'source:cloudtrail' でフィルタリングされたイベントアナリティクスの表示" >}}
 
 エクスプローラーでのイベントの表示や検索に加え、時系列、トップリスト、テーブルとしてグラフ化し、指定したクエリのイベント数をグループ化することができるようになりました。詳しくは、[イベントアナリティクス][2]をご覧ください。
 
@@ -56,7 +56,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 ### ダッシュボードでイベントをグラフ化する
 
-{{< img src="service_management/events/graph-events.png" alt="Events Analytics">}}
+{{< img src="service_management/events/graph-events.png" alt="イベントアナリティクス" >}}
 
 ダッシュボード内で、指定したクエリのイベントを、時系列グラフ、クエリ値、トップリスト、テーブルなどでグラフ化できるようになりました。
 
@@ -68,7 +68,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 イベントモニターを作成する際、従来の空白で埋めるタイプのクエリから、新しいクエリ検索フィールドにオートコンプリートが追加されました。
 
-{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="New UI for monitor query syntax" style="width:100%;" >}}
+{{< img src="service_management/events/guides/events-migration-monitor-new.png" alt="モニタークエリ構文の新しい UI" style="width:100%;" >}}
 
 新しいクエリ検索では、ブール演算子やワイルドカードなどの新しい機能により、イベントモニターで複雑なクエリを使用することができます。
 
@@ -80,7 +80,7 @@ Datadog は、JSON 形式のイベントを自動的にパースします。イ�
 
 このリストでは、イベントとともに自動的に取り込まれる予約属性について説明します。
 
-| 属性 | 説明                                                                                                                                                                                                                                |
+| 属性 | Description                                                                                                                                                                                                                                |
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | メトリクスで定義された送信元ホストの名前。Datadog で一致したホストから、対応するホストタグが自動的に取得され、イベントに適用されます。Agent では、この値が自動的に設定されます。                          |
 | `source`  | これは、インテグレーション名、またはイベントの生成元に対応します。インテグレーション名と一致する場合、対応するパーサーとファセットが自動的にインストールされます。たとえば、`nginx`、`postgresql` などです。 |
@@ -189,14 +189,14 @@ GitHub または Chef からのイベントを表示する
 : 新しい構文 </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /ja/service_management/events/explorer
 [2]: /ja/service_management/events/explorer/analytics
-[3]: service_management/events/usage/#custom-metrics
+[3]: /ja/service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /ja/service_management/events/guides/new_events_sources/
 [6]: /ja/help/

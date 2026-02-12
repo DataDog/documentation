@@ -3,10 +3,15 @@ aliases:
 - /es/agent/autodiscovery/template_variables
 - /es/agent/faq/template_variables
 - /es/agent/guide/template_variables
+description: Guía de referencia para las variables de plantilla disponibles en la
+  configuración de la integración de Autodiscovery para entornos de contenedores dinámicos
 further_reading:
-- link: /agent/kubernetes/integrations/
+- link: /contenedores/Kubernetes/integraciones/
   tag: Documentación
-  text: Crea y carga una plantilla de integración de Autodiscovery
+  text: Configurar integraciones con Autodiscovery en Kubernetes
+- link: /contenedores/Docker/integraciones/
+  tag: Documentación
+  text: Configurar integraciones con Autodiscovery en Docker
 - link: /agent/guide/ad_identifiers/
   tag: Documentación
   text: Usa la plantilla de integración correspondiente a cada contenedor
@@ -16,37 +21,40 @@ further_reading:
 title: Variables de plantilla de Autodiscovery
 ---
 
-Utiliza las siguientes variables de plantilla al configurar Autodiscovery para asignar de manera dinámica los valores de tu contenedor:
+[Autodiscovery][1] permite establecer configuraciones estáticas para recursos dinámicos como los contenedores.
 
-| Variables de plantilla           | Descripción                                                                                                                                                                                                 |
-| --------------------------  | ---                                                                                                                                                                                                         |
-| `"%%host%%"`                | Detecta automáticamente la red. En contenedores de una sola red, devuelve la IP correspondiente.                                                                                                                   |
-| `"%%host_<NETWORK NAME>%%"` | Especifica el nombre de la red que se utilizará, en caso de que esté asociada a varias redes.                                                                                                                                      |
-| `"%%port%%"`                | Utiliza el puerto expuesto más alto **clasificado por orden numérico ascendente**.<br>Por ejemplo, devolvería `8443` si un contenedor expone los puertos `80`, `443` y `8443`.                                    |
-| `"%%port_<NUMBER_X>%%"`     | Utiliza el puerto `<NUMBER_X>` **clasificado por orden numérico ascendente**.<br>Por ejemplo, si un contenedor expone los puertos `80`, `443` y `8443`, `"%%port_0%%` se refiere al puerto `80` y `"%%port_1%%"` se refiere al `443`. |
-| `"%%port_<NAME>%%"`     | Utiliza el puerto asociado al nombre del puerto `<NAME>`.                                                                                                                                                           |
-| `"%%pid%%"`                 | Obtiene el identificador de proceso del contenedor tal y como lo devuelve `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`.                                                                                              |
-| `"%%hostname%%"`            | Obtiene el valor `hostname` de la configuración del contenedor. Solo se usa si la variable `"%%host%%"` no puede recuperar una IP fiable (por ejemplo: [modo awsvpc de ECS][1]).                                       |
-| `"%%env_<ENV_VAR>%%"`       | Utiliza el contenido de la variable de entorno `$<ENV_VAR>` **tal y como se ve en el proceso del Agent**.                                                                                                                |
-| `"%%kube_namespace%%"`      | Detecta automáticamente el espacio de nombres de Kubernetes |
-| `"%%kube_pod_name%%"`       | Detecta automáticamente el nombre del pod de Kubernetes  |
-| `"%%kube_pod_uid%%"`        | Detecta automáticamente el identificador de usuario del pod de Kubernetes   |
+Puedes utilizar la siguiente dirección variables de plantilla para asignar dinámicamente los valores de tu contenedor:
+
+| Variables de plantilla | Descripción |
+| --------------------------  | ---    |
+| `"%%host%%"`                | La IP de red del contenedor. |
+| `"%%host_<NETWORK NAME>%%"` | Cuando el contenedor está conectado a varias redes, devuelve el nombre de la red que se debe utilizar. |
+| `"%%port%%"`                | El puerto expuesto más alto **ordenado numéricamente y en orden ascendente**.<br>Por ejemplo, devuelve `8443` para un contenedor que expone los puertos `80`, `443` y `8443`. |
+| `"%%port_<NUMBER_X>%%"`     | El puerto `<NUMBER_X>` **ordenado numéricamente y en orden ascendente**.<br>Por ejemplo, si un contenedor expone los puertos `80`, `443` y `8443`, `"%%port_0%%` se refiere al puerto `80` y `"%%port_1%%"` se refiere a `443`. |
+| `"%%port_<NAME>%%"`     | El puerto asociado al nombre del puerto `<NAME>`. |
+| `"%%pid%%"`                 | El ID de proceso del contenedor devuelto por `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`. |
+| `"%%hostname%%"`            | El valor `hostname` de la configuración del contenedor. Utiliza esta variable sólo si la variable `"%%host%%"` no puede obtener una IP fiable (por ejemplo, en [modo awsvpc ECS][2]).                                       |
+| `"%%env_<ENV_VAR>%%"`       | El contenido de la variable de entorno `$<ENV_VAR>` **visto por el proceso del Agent**.  |
+| `"%%kube_namespace%%"`      | El espacio de nombres Kubernetes. |
+| `"%%kube_pod_name%%"`       | El nombre del pod Kubernetes.  |
+| `"%%kube_pod_uid%%"`        | El UID del pod Kubernetes.   |
 
 **Recurso alternativo**:
 
-* En el caso de la variable de plantilla `"%%host%%"`: si el Agent no es capaz de encontrarla, esta variable de plantilla recurre a la IP de red `bridge`.
-* En el caso de `"%%host_<NETWORK NAME>%%"`: si no se encuentra el `<NETWORK_NAME>` que se ha especificado, esta variable de plantilla actúa como `"%%host%%"`.
+* Para la variable de plantilla `"%%host%%"`: en caso de que el Agent no pueda encontrar la IP, esta variable de plantilla regresa a la IP de red `bridge`.
+* Para el `"%%host_<NETWORK NAME>%%"`: si no se encuentra el `<NETWORK_NAME>` especificado, esta variable de plantilla se comporta como `"%%host%%"`.
 
 Dependiendo de la plataforma que utilices, no todas las variables de plantilla son compatibles:
 
-| Plataforma    | Identificadores de detección automática  | Host | Puerto | Etiqueta (tag) | Pid | Variable de entorno | Nombre de host | Espacio de nombres de Kube | Nombre del pod | UID del pod |
+| Plataforma    | Identificadores de detección automática  | Host | Puerto | Etiqueta (tag) | Pid | Entorno | Nombre de host | Espacio de nombres de Kube | Nombre del pod | UID del pod |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      | ---            | ---      | ---     |
 | Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      | ❌      | ❌      | ❌      |
-| ECS con Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      | ❌      | ❌      | ❌      |
+| ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      | ❌      | ❌      | ❌      |
 | Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      | ✅      | ✅      | ✅      |
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+[1]: /es/getting_started/containers/autodiscovery
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html

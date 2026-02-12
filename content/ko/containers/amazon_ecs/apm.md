@@ -31,7 +31,7 @@ ECS 컨테이너에서 트레이스를 수집하려면 아래 설명된 대로 �
           "name": "datadog-agent",
           "image": "public.ecr.aws/datadog/agent:latest",
           "cpu": 100,
-          "memory": 256,
+          "memory": 512,
           "essential": true,
           "portMappings": [
             {
@@ -200,7 +200,7 @@ end
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
+{{< programming-lang lang="go">}}
 
 #### 시작 시간 변수
 다음으로 `<Go Startup Command>`를 대체하여 작업 정의의 `entryPoint`를 업데이트합니다. 
@@ -214,7 +214,7 @@ end
 ```
 
 #### 코드
-대신 코드를 업데이트해 트레이서가 명시적으로 호스트 이름을 설정할 수 있도록 할 수 있습니다.
+대신, 코드를 업데이트하여 트레이서가 명백하게 호스트 이름을 설정하도록 할 수 있습니다. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,7 +222,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

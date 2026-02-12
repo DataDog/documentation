@@ -1,15 +1,16 @@
 {{ $root := . }}
 {{ $saas_cost_integrations := slice
-    (dict "name" "databricks" "href" "/cloud_cost_management/saas_costs/?tab=databricks#configure-your-saas-accounts" "src" "integrations_logos/databricks_small.svg")
-    (dict "name" "confluent cloud" "href" "/cloud_cost_management/saas_costs/?tab=confluentcloud#configure-your-saas-accounts" "src" "integrations_logos/confluent-cloud_small.svg")
-    (dict "name" "mongodb" "href" "/cloud_cost_management/saas_costs/?tab=mongodb#configure-your-saas-accounts" "src" "integrations_logos/mongodb_small.svg")
-    (dict "name" "snowflake" "href" "/cloud_cost_management/saas_costs/?tab=snowflake#configure-your-saas-accounts" "src" "integrations_logos/snowflake_small.svg")
-    (dict "name" "elastic cloud" "href" "/cloud_cost_management/saas_costs/?tab=elasticcloud#configure-your-saas-accounts" "src" "integrations_logos/elastic-cloud_small.svg")
-    (dict "name" "openai" "href" "/cloud_cost_management/saas_costs/?tab=openai#configure-your-saas-accounts" "src" "integrations_logos/openai_small.svg")
-    (dict "name" "fastly" "href" "/cloud_cost_management/saas_costs/?tab=fastly#configure-your-saas-accounts" "src" "integrations_logos/fastly_small.svg")
-    (dict "name" "twilio" "href" "/cloud_cost_management/saas_costs/?tab=twilio#configure-your-saas-accounts" "src" "integrations_logos/twilio_small.svg")
+    (dict "name" "snowflake" "href" "/cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts" "src" "integrations_logos/snowflake_small.svg")
+    (dict "name" "databricks" "href" "/cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts" "src" "integrations_logos/databricks_small.svg")
+    (dict "name" "openai" "href" "/cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts" "src" "integrations_logos/openai_small.svg")
+    (dict "name" "anthropic" "href" "/cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts" "src" "integrations_logos/anthropic_small.svg")
+    (dict "name" "github" "href" "/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts" "src" "integrations_logos/github_small.svg")
+    (dict "name" "confluent cloud" "href" "/cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts" "src" "integrations_logos/confluent-cloud_small.svg")
+    (dict "name" "mongodb" "href" "/cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts" "src" "integrations_logos/mongodb_small.svg")
+    (dict "name" "elastic cloud" "href" "/cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts" "src" "integrations_logos/elastic-cloud_small.svg")
+    (dict "name" "fastly" "href" "/cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts" "src" "integrations_logos/fastly_small.svg")
+    (dict "name" "twilio" "href" "/cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts" "src" "integrations_logos/twilio_small.svg")
 }}
-
 <div class="saas-cost-integrations">
   <div class="container cards-dd">
     <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
@@ -25,7 +26,19 @@
     </div>
     <br>
     <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
-      {{ range (last 4 $saas_cost_integrations) }}
+      {{ range first 4 (after 4 $saas_cost_integrations) }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
+      {{ range after 8 $saas_cost_integrations }}
       <div class="col">
         <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">

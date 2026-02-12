@@ -16,6 +16,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
   tag: ブログ
   text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: ブログ
+  text: ネットワークとセキュリティ分析のための DNS ログの監視
 title: DNS モニタリング
 ---
 
@@ -35,7 +38,7 @@ DNS モニタリングにより提供される DNS サーバーのパフォー�
 
 ## セットアップ
 
-DNS モニタリングの使用を開始する前に、[ネットワークパフォーマンスモニタリングのセットアップ][1]を行ってください。また、最新バージョンの Agent、少なくとも Linux OS では Agent v7.23+、Windows Server では v7.28+ を使用していることを確認してください。インストールすると、ネットワークパフォーマンスモニタリング製品に **DNS** タブが表示されます。
+DNS モニタリングの使用を開始する前に、[Cloud Network Monitoring のセットアップ][1]を行ってください。また、最新バージョンの Agent、少なくとも Linux OS では Agent v7.23+、Windows Server では v7.28+ を使用していることを確認してください。インストールすると、Cloud Network Monitoring 製品に **DNS** タブが表示されます。
 
 ネットワークデバイスモニタリングをご希望の場合は、[NDM セットアップ手順][2]をご覧ください。
 
@@ -110,7 +113,7 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/network_monitoring/performance/
+[1]: /ja/network_monitoring/cloud_network_monitoring/
 [2]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /ja/network_monitoring/performance/network_analytics#table
-[4]: /ja/network_monitoring/performance/network_analytics/#recommended-queries
+[3]: /ja/network_monitoring/cloud_network_monitoring/network_analytics#table
+[4]: /ja/network_monitoring/cloud_network_monitoring/network_analytics/#recommended-queries

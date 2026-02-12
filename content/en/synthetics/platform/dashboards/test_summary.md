@@ -14,7 +14,7 @@ The [test summary dashboard][1] provides insights about your Synthetic test runs
 
 - **Synthetic monitoring & testing usage**: View a breakdown of your Synthetic test usage by environment, team, and test type.
 
-  {{< img src="synthetics/dashboards/test_summary_dashboard.png" alt="Out-of-the-box Synthetics test summary dashboard" style="width:100%" >}}
+  {{< img src="synthetics/dashboards/test_summary_dashboard.png" alt="Out-of-the-box Synthetic Monitoring test summary dashboard" style="width:100%" >}}
 
 - **Test automation**: View Synthetic test runs in your CI/CD pipelines by type and team.
 
@@ -22,7 +22,7 @@ The [test summary dashboard][1] provides insights about your Synthetic test runs
 
 - **Private locations**: View the number of Synthetic workers by private location, the average concurrency, and average number of pulled tests.
 
-  {{< img src="synthetics/dashboards/private_locations.png" alt="Private locations section of the Synthetics test summary dashboard" style="width:100%" >}}
+  {{< img src="synthetics/dashboards/private_locations.png" alt="Private locations section of the Synthetic Monitoring test summary dashboard" style="width:100%" >}}
 
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][3].

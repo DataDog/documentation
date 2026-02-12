@@ -1,8 +1,8 @@
 ---
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Service Bus のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
@@ -39,7 +39,7 @@ Azure Service Bus からメトリクスを取得すると、以下のことが�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_service_bus" >}}
+{{< get-metrics-from-git "azure-service-bus" >}}
 
 
 ### イベント

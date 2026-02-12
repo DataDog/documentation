@@ -65,14 +65,14 @@ Se añade un encabezado `sec-datadog` a todas las solicitudes realizadas por los
 {{% tab "Tests de la API de uno y varios pasos" %}}
 
 ```
-sec-Datadog: Solicitud enviada por un test de la API de Sintético de Datadog (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
 {{% /tab %}}
 {{% tab "Tests de navegador" %}}
 
 ```
-sec-Datadog: Solicitud enviada por un test de Navegador Sintético de Datadog (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
 {{% /tab %}}
@@ -88,10 +88,10 @@ Puedes aprovechar tu configuración de test de la API y del navegador en **Opcio
 
 ## Variables del navegador
 
-Cuando un robot de Datadog está representando tu aplicación, la variable `window._Datadog_SYNTHETICS_BROWSER` se configura en `true`. Para eliminar las acciones del robot de tus datos de análisis, ajusta el código de tu herramienta de análisis con el siguiente test:
+Cuando un robot de Datadog está representando tu aplicación, la variable `window._DATADOG_SYNTHETICS_BROWSER` se configura en `true`. Para eliminar las acciones del robot de tus datos de análisis, ajusta el código de tu herramienta de análisis con el siguiente test:
 
-```JavaScript
-si (window._Datadog_SYNTHETICS_BROWSER === no definido) {
+```javascript
+if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
   initializeAnalytics()
 }
 ```
@@ -104,7 +104,7 @@ Las cookies que se aplican en tu navegador incluyen `datadog-synthetics-public-i
 
 Estas cookies están disponibles para todos los pasos en Firefox. En Microsoft Edge y Google Chrome, estas cookies solo se configuran para la URL de inicio.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

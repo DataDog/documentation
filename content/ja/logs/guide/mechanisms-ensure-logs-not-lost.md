@@ -14,28 +14,28 @@ further_reading:
 title: ログの紛失を防ぐメカニズム
 ---
 
-**The Datadog Agent has several mechanisms to ensure that no logs are lost**.
+**Datadog Agent には、ログが失われないようにするための複数の仕組みがあります。**
 
-## Log rotate
+## ログローテーション
 
-When a file is rotated, the Agent keeps [tailing][1] the old file while starting to tail the newly created file in parallel.
-Although the Agent continues to tail the old file, a 60-second timeout after the log rotation is set to ensure the agent is using its resources to tail the most up-to-date files.
+ファイルがローテーションされると、Agent は古いファイルを[テイル][1]し続けながら、新しく作成されたファイルのテイルも同時に開始します。
+Agent は古いファイルをテイルし続けますが、ログローテーション後に 60 秒のタイムアウトが設定され、Agent が最新のファイルをテイルするためのリソースを確保するようになっています。
 
-## Network issues
+## ネットワークの問題
 
-### File tailing
+### ファイルのテイル
 
-The Agent stores a pointer for each tailed file. If there is a network connection issue, the Agent stops sending logs until the connection is restored and automatically picks up where it stopped to ensure no logs are lost.
+Agent はテイル対象のファイルごとにポインタを保持しています。ネットワーク接続の問題が発生した場合、Agent は接続が回復するまでログの送信を停止し、接続が復旧すると自動的に停止した箇所から再開するため、ログが失われることはありません。
 
-### Port listening
+### ポートリスニング
 
-If the Agent is listening to a TCP or UDP port and faces a network issue, the logs are stored in a local buffer until the network is available again.
-However, there are some limits for this buffer in order to avoid memory issues. New logs are dropped when the buffer is full.
+Agent が TCP や UDP ポートでログを待ち受けている場合にネットワークの問題が起きた場合、ログはネットワークが復旧するまでローカルバッファに保存されます。
+ただし、メモリの問題を回避するため、このバッファには上限があります。バッファがいっぱいになると、新しいログは破棄されます。
 
 ### コンテナログ
 
-As for files, Datadog stores a pointer for each tailed container. Therefore, in the case of network issues, it is possible for the Agent to know which logs have not been sent yet.
-However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
+ファイルの場合と同様に、Datadog はテイル対象のコンテナごとにポインタを保持しています。したがって、ネットワークの問題が発生した場合でも、どのログがまだ送信されていないかを Agent が把握できます。
+しかし、テイル対象のコンテナがネットワークが復旧する前に削除されてしまった場合、これらのログにはもうアクセスできません。
 
 {{< partial name="whats-next/whats-next.html" >}}
 

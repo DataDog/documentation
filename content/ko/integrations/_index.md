@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - integration
+  - integration setup
 aliases:
 - /ko/integrations/verisign_openhybrid/
 - /ko/integrations/snyk/
@@ -19,7 +23,7 @@ cascade:
     lang: en
     path: /integrations/azure
   algolia:
-    category: 문서
+    category: 설명서
     rank: 80
     subcategory: 통합
     tags:
@@ -29,7 +33,7 @@ cascade:
     lang: en
     path: /integrations/kubernetes_state_core
   algolia:
-    category: 문서
+    category: 설명서
     rank: 60
     subcategory: 통합
     tags:
@@ -48,7 +52,7 @@ cascade:
     lang: en
     path: /integrations/amazon_web_services
   algolia:
-    category: 문서
+    category: 설명서
     rank: 80
     subcategory: 통합
     tags:
@@ -58,7 +62,7 @@ cascade:
     lang: en
     path: /integrations/eks_fargate
   algolia:
-    category: 문서
+    category: 설명서
     rank: 60
     subcategory: 통합
     tags:
@@ -67,7 +71,7 @@ cascade:
     lang: en
     path: /integrations/win32_event_log
   algolia:
-    category: 문서
+    category: 설명서
     rank: 60
     subcategory: 통합
     tags:

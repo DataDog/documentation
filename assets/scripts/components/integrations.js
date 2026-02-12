@@ -10,6 +10,32 @@ export function initializeIntegrations() {
     let popupClosed = true;
     const container = document.querySelector('[data-ref="container"]');
 
+    // Early return if container doesn't exist to avoid unnecessary processing
+    if (!container) return;
+
+    // Cache Safari detection - this is used multiple times
+    const isSafari = navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1;
+    
+    // Cache DOM elements
+    const ref = document.querySelector('.integration-popper-button');
+    const pop = document.getElementById('integration-popper');
+    const mobileDropDown = document.querySelector('#dropdownMenuLink');
+    const controls = document.querySelector('[data-ref="controls"]');
+    const mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
+    const search = document.querySelector('[data-ref="search"]');
+    const items = window.integrations;
+    
+    // Create a Map for faster DOM element lookups
+    const domElements = new Map();
+    
+    // Pre-process integrations data
+    if (items && items.length) {
+        items.forEach(item => {
+            if (item.name) item.nameLower = item.name.toLowerCase();
+            if (item.public_title) item.publicTitleLower = item.public_title.toLowerCase();
+        });
+    }
+
     window.addEventListener('focus', () => {
         if (finderState && container) {
             container.classList.remove('find');
@@ -24,9 +50,6 @@ export function initializeIntegrations() {
         }
     });
 
-    const isSafari = navigator.userAgent.indexOf('Safari') !== -1;
-    const ref = document.querySelector('.integration-popper-button');
-    const pop = document.getElementById('integration-popper');
     if (ref && pop) {
         ref.addEventListener('click', function () {
             pop.style.display = pop.style.display === 'none' ? 'block' : 'none';
@@ -34,26 +57,13 @@ export function initializeIntegrations() {
         });
     }
 
-    const mobileDropDown = document.querySelector('#dropdownMenuLink');
-    const controls = document.querySelector('[data-ref="controls"]');
-    let filters = null;
-    const mobilecontrols = document.querySelector('[data-ref="mobilecontrols"]');
-    let mobilefilters = null;
-    const search = document.querySelector('[data-ref="search"]');
-    const items = window.integrations;
-
-    if (!container) return;
-
-    if (controls) {
-        filters = controls.querySelectorAll('[data-ref="filter"]');
-    }
-    if (mobilecontrols) {
-        mobilefilters = mobilecontrols.querySelectorAll('[data-ref="filter"]');
-    }
+    const filters = controls ? controls.querySelectorAll('[data-ref="filter"]') : null;
+    const mobilefilters = mobilecontrols ? mobilecontrols.querySelectorAll('[data-ref="filter"]') : null;
 
     const config = {
         animation: {
-            duration: 150
+            duration: 150,
+            enable: !(parseInt(window.innerWidth) <= 575)
         },
         selectors: {
             target: '[data-ref="item"]' // Query targets with an attribute selector to keep our JS and styling classes separate
@@ -66,11 +76,15 @@ export function initializeIntegrations() {
         }
     };
 
-    if (parseInt(window.innerWidth) <= 575) {
-        config['animation']['enable'] = false;
-    }
-
     const mixer = mixitup(container, config);
+
+    // Helper function to get DOM element with caching
+    function getDomElement(id) {
+        if (!domElements.has(id)) {
+            domElements.set(id, document.getElementById(`mixid_${id}`));
+        }
+        return domElements.get(id);
+    }
 
     controls.addEventListener('click', function (e) {
         handleButtonClick(e.target, filters);
@@ -105,22 +119,23 @@ export function initializeIntegrations() {
         // search only executes after user is finished typing
         clearTimeout(searchTimer);
         searchTimer = setTimeout(function () {
+            const searchValue = e.target.value.toLowerCase();
             activateButton(allBtn, filters);
-            updateData(e.target.value.toLowerCase(), true);
+            updateData(searchValue, true);
 
             if (window.location.hash && window.location.hash !== 'all') {
                 window.location.hash = '#all';
             }
 
-            updateQueryParameter('q', e.target.value.toLowerCase());
+            updateQueryParameter('q', searchValue);
 
-            if (e.target.value.length > 0 && window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+            if (searchValue.length > 0 && window._DATADOG_SYNTHETICS_BROWSER === undefined) {
                 window.DD_LOGS.logger.log(
                     'Integrations Search',
                     {
                         browser: {
                             integrations: {
-                                search: e.target.value.toLowerCase()
+                                search: searchValue
                             }
                         }
                     },
@@ -131,12 +146,9 @@ export function initializeIntegrations() {
     });
 
     function activateButton(activeButton, siblings) {
-        let button;
-        let i;
-
         if (activeButton && siblings) {
-            for (i = 0; i < siblings.length; i++) {
-                button = siblings[i];
+            for (let i = 0; i < siblings.length; i++) {
+                const button = siblings[i];
                 button.classList[button === activeButton ? 'add' : 'remove']('active');
             }
             mobileDropDown.textContent = activeButton.textContent;
@@ -151,7 +163,6 @@ export function initializeIntegrations() {
 
         const filter = button.getAttribute('data-filter');
         if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
-            // eslint-disable-line no-underscore-dangle
             window.DD_LOGS.logger.log(
                 'Integrations category selected',
                 { browser: { integrations: { category: button.innerText } } },
@@ -167,62 +178,121 @@ export function initializeIntegrations() {
         }
     }
 
-    function updateData(filter, isSearch) {
-        const show = [];
-        const hide = [];
-        const filterWords = filter.split(/\s+/);
+    // Shared function to check for matches - reduces code duplication
+    function checkMatches(item, filter, filterWords, isSearch) {
+        // Use pre-processed lowercase values
+        const name = item.nameLower || '';
+        const publicTitle = item.publicTitleLower || '';
 
-        for (let i = 0; i < window.integrations.length; i++) {
-            const item = window.integrations[i];
-            const domitem = document.getElementById(`mixid_${item.id}`);
-            const int = domitem.querySelector('.integration');
-            if (filter === 'all' || filter === '#all' || (isSearch && !filter)) {
-                if (!isSafari) {
-                    int.classList.remove('dimmer');
+        // Check for exact matches first (only full query match, not individual words)
+        const hasExactMatch = isSearch && (
+            name === filter ||
+            publicTitle === filter
+        );
+
+        // Calculate match score - count how many search terms match
+        let matchScore = 0;
+        if (isSearch) {
+            for (const word of filterWords) {
+                if (name.includes(word) || publicTitle.includes(word)) {
+                    matchScore++;
                 }
-                show.push(item);
-            } else {
-                const name = item.name ? item.name.toLowerCase() : '';
-                const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
-
-                const matchesFilter = filterWords.some(word => 
-                    (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
-                    (!isSearch && item.tags.indexOf(word.substr(1)) !== -1)
-                );
-
-                if (matchesFilter) {
-                    if (!isSafari) {
-                        int.classList.remove('dimmer');
-                    }
-                    show.push(item);
-                } else {
-                    if (!isSafari) {
-                        int.classList.add('dimmer');
-                    }
-                    hide.push(item);
+            }
+        } else {
+            // For category filters, check tags
+            for (const word of filterWords) {
+                if (item.tags && item.tags.indexOf(word.substr(1)) !== -1) {
+                    matchScore++;
                 }
             }
         }
 
-        const mixerItems = [].concat(show, hide);
+        const hasPartialMatch = matchScore > 0;
+
+        return { hasExactMatch, hasPartialMatch, matchScore };
+    }
+
+    function updateData(filter, isSearch) {
+        const exactMatches = [];
+        const partialMatches = [];
+        const hide = [];
+        const filterWords = filter.split(/\s+/);
+        const isAllFilter = filter === 'all' || filter === '#all' || (isSearch && !filter);
+
+        // Process all items in a single loop
+        for (let i = 0; i < window.integrations.length; i++) {
+            const item = window.integrations[i];
+            const domitem = getDomElement(item.id);
+            const int = domitem.querySelector('.integration');
+
+            if (isAllFilter) {
+                if (!isSafari) {
+                    int.classList.remove('dimmer');
+                }
+                exactMatches.push(item);
+                continue;
+            }
+
+            const { hasExactMatch, hasPartialMatch, matchScore } = checkMatches(item, filter, filterWords, isSearch);
+
+            if (hasExactMatch) {
+                if (!isSafari) {
+                    int.classList.remove('dimmer');
+                }
+                exactMatches.push(item);
+            } else if (hasPartialMatch) {
+                if (!isSafari) {
+                    int.classList.remove('dimmer');
+                }
+                // Store match score with the item for sorting
+                partialMatches.push({ item, matchScore });
+            } else {
+                if (!isSafari) {
+                    int.classList.add('dimmer');
+                }
+                hide.push(item);
+            }
+        }
+
+        // Sort partial matches by:
+        // 1. Non-marketplace (native) integrations first
+        // 2. Match score (highest first)
+        // 3. Marketplace integrations last
+        partialMatches.sort((a, b) => {
+            // Prioritize non-marketplace over marketplace
+            if (a.item.is_marketplace !== b.item.is_marketplace) {
+                return a.item.is_marketplace ? 1 : -1;
+            }
+            // Within same marketplace status, sort by match score
+            return b.matchScore - a.matchScore;
+        });
+        const sortedPartialMatches = partialMatches.map(m => m.item);
+
+        // Sort exact matches the same way (non-marketplace first)
+        exactMatches.sort((a, b) => {
+            if (a.is_marketplace !== b.is_marketplace) {
+                return a.is_marketplace ? 1 : -1;
+            }
+            return 0;
+        });
+
+        // Combine exact matches first, then sorted partial matches, then hidden items
+        const show = [...exactMatches, ...sortedPartialMatches];
+        const mixerItems = [...show, ...hide];
+        
         mixer.dataset(mixerItems).then(function () {
             if (isSafari) {
                 for (let i = 0; i < window.integrations.length; i++) {
                     const item = window.integrations[i];
-                    const domitem = document.getElementById(`mixid_${item.id}`);
+                    const domitem = getDomElement(item.id);
                     const int = domitem.querySelector('.integration');
-                    if (filter === 'all' || filter === '#all' || (isSearch && !filter)) {
+                    
+                    if (isAllFilter) {
                         int.classList.remove('dimmer');
                     } else {
-                        const name = item.name ? item.name.toLowerCase() : '';
-                        const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
+                        const { hasExactMatch, hasPartialMatch, matchScore } = checkMatches(item, filter, filterWords, isSearch);
 
-                        const matchesFilter = filterWords.some(word => 
-                            (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
-                            (!isSearch && item.tags.indexOf(word.substr(1)) !== -1)
-                        );
-
-                        if (matchesFilter) {
+                        if (hasExactMatch || hasPartialMatch) {
                             int.classList.remove('dimmer');
                         } else {
                             int.classList.add('dimmer');
@@ -298,19 +368,24 @@ export function initializeIntegrations() {
         triggerEvent(window, 'hashchange');
     }
 
-    const integrationTiles = document.querySelectorAll('.integration-row .integration');
-
-    integrationTiles.forEach((integration) => {
-        integration.addEventListener('mouseover', () => {
-            integration.classList.remove('hover');
-
-            if (window.innerWidth >= 576) {
-                integration.classList.add('hover');
+    // Use event delegation for hover effects instead of attaching to each tile
+    const integrationRows = document.querySelectorAll('.integration-row');
+    integrationRows.forEach(row => {
+        row.addEventListener('mouseover', (e) => {
+            const integration = e.target.closest('.integration');
+            if (integration) {
+                integration.classList.remove('hover');
+                if (window.innerWidth >= 576) {
+                    integration.classList.add('hover');
+                }
             }
         });
-
-        integration.addEventListener('mouseout', () => {
-            integration.classList.remove('hover');
+        
+        row.addEventListener('mouseout', (e) => {
+            const integration = e.target.closest('.integration');
+            if (integration) {
+                integration.classList.remove('hover');
+            }
         });
     });
 }

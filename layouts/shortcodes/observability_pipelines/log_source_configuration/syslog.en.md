@@ -21,7 +21,7 @@ destination obs_pipelines {
   http(
       url("<OPW_HOST>")
       method("POST")
-      body("<${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n")
+      body("﹤${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n")
   );
 };
 ```

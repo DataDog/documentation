@@ -1,5 +1,9 @@
 ---
 title: Estimated Usage Metrics
+further_reading:
+    - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations"
+      tag: "Blog"
+      text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 <style>tbody code {word-break: break-word !important;}</style>
@@ -56,17 +60,24 @@ Estimated usage metrics are generally available for the following usage types:
 | CWS Hosts                     | `datadog.estimated_usage.cws.hosts`, `datadog.estimated_usage.cws.hosts.by_tag` | Unique CWS hosts seen in the last hour. |
 | CWS Containers                | `datadog.estimated_usage.cws.containers`, `datadog.estimated_usage.cws.containers.by_tag` | Unique CWS containers seen in the last 5 minutes. |
 | Database Hosts                | `datadog.estimated_usage.dbm.hosts`, `datadog.estimated_usage.dbm.hosts.by_tag` | Unique DBM hosts seen in the last hour. |
-| ASM Hosts                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Unique ASM hosts seen in the last hour. |
-| ASM Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique ASM Fargate Tasks seen in the last 5 minutes. |
-| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` | Active IM users seen from (calendar) month-to-date. |
+| AAP Hosts                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Unique AAP hosts seen in the last hour. |
+| AAP Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique AAP Fargate Tasks seen in the last 5 minutes. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
-| Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
-| Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
+| Events Ingested               | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
+| Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
+| Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
+
+## Setting tags for your by_tag Estimated Usage Metrics
+To set tag breakdowns in your by_tag Estimated Usage Metrics, configure your desired tags—such as team or env—on the [Usage Attribution][6] page (If you're on a PRO plan, you can request access to this feature through your [Customer Success Manager][2]). Changes take effect at the next 00:00 UTC.
+
+{{< img src="account_management/billing/setting-eum-tags-in-ua.png" alt="Setting by_tag EUM tags in Usage Attribution" >}}
 
 ## Dashboards
 
@@ -84,8 +95,14 @@ For technical questions, contact [Datadog support][1].
 
 For billing questions, contact your [Customer Success][2] Manager.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /help/
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
+[6]: /account_management/billing/usage_attribution/
+

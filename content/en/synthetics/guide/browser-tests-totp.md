@@ -11,6 +11,9 @@ further_reading:
   - link: 'synthetics/settings/?tab=specifyvalue#global-variables'
     tag: 'Documentation'
     text: 'Learn more about global variables'
+  - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+    tag: "Blog"
+    text: "How I helped my client scale their browser tests with Datadog"
  
 ---
 
@@ -20,6 +23,10 @@ Multi-factor authentication methods such as TFA and MFA help protect your applic
 
 Datadog Synthetic MFA global variables allow you to test your application's TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
 
+**Note**: If your TOTP token works in Google Authenticator, it is likely compatible with Datadog.
+Some QR codes are limited to specific verification methods and may not work across platforms. To ensure compatibility, use a QR code or secret that follows standard TOTP protocols.
+
+
 ## Store your secret key or QR code in a global variable
 
 Create a global variable where you enter a secret key or upload a QR code from your authentication provider. In the **Global Variables** tab of your **Settings** page, click **Create Global Variable**.
@@ -27,9 +34,10 @@ Create a global variable where you enter a secret key or upload a QR code from y
 2. In **Define variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 3. Enter a **Description** for your variable (optional).
 4. Select **Tags** to associate with your variable (optional).
-5. Enter the **Secret Key** to your variable or upload a QR code image.
-6. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
-7. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
+5. Follow your authenticator app's documentation for instructions on creating a secret key or adding a new QR code.
+6. Enter the **Secret Key** to your variable or upload a QR code image.
+7. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
+8. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 

@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Continuous Testing
+description: Automate end-to-end testing with Synthetic tests in CI/CD pipelines to accelerate application development and deployment.
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'
@@ -33,10 +34,7 @@ Your Continuous Testing tests can:
 
 You can set up [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes. Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Testing Results Explorer][5]. 
 
-To improve your developer workflow with Continuous Testing, you can:
-
-* Use the [`datadog-ci` NPM package][6] to run tests directly in your CI pipeline.
-* Use the [Datadog Synthetics VS Code Integration][7] to run tests directly in your IDE.
+To improve your developer workflow with Continuous Testing, you can use the [`datadog-ci` NPM package][6] to run tests directly in your CI pipeline.
 
 Continuous Testing accelerates your organization's application development by automating end-to-end testing across the entire software lifecycle. You can run tests in local and staging environments, parallelize test runs, and integrate with CI providers.
 
@@ -78,40 +76,22 @@ To integrate with a CI provider or a collaboration tool like [Slack][28] or [Jir
 
 ## Run your Continuous Testing tests
 
-To improve your development workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test. Then run your test directly in your IDE as a developer environment.
+To improve your development workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test. 
 
 ### Running tests in the CLI
 
 Extend your use of Continuous Testing by using the [`datadog-ci` NPM package][6]. `datadog-ci` lets you execute commands from within your CI/CD scripts to test your application before deployment. You can automate blocking and rolling back changes when tests fail. Read the [`datadog-ci` Configuration page for installation and setup instructions][10].
 
-You can use `datadog-ci` to execute only those tests tagged with specific [Datadog Teams tags][25]. For example, to run all tests tagged as `team-checkout`:
+You can retrieve the command for running a specific test using `datadog-ci` from the test detail page:
 
-1. Navigate to your command line.
-2. Run the following command:
+{{< img src="continuous_testing/copy_cli_command.png" alt="Copy the CLI command for running a test from the test detail page" style="width:100%;">}}
 
-   ```
-   datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
-   ```
+1. Navigate to the [**Tests** page][19].
+2. Select a test.
+3. Look for the command in the **CI/CD Execution** section.
+4. Copy and paste the command into your command line.
 
 For more information about running the Synthetics command and using reporters, see the [Configuration documentation][11].
-
-### Running tests in your IDE
-
-Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help you:
-
-* Use a [private location][13] or [a local environment][14] to accelerate development locally.
-* Run HTTP API tests and browser tests and see their results within VS Code.
-* Test only what matters by executing relevant tests at the same time.
-
-{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
-
-### Running tests in VS Code
-
-1. Open VS Code and install the Datadog Extension from the VS Code Extensions view.
-2. Open the Datadog Synthetics extension and sign in when prompted.
-3. Select a Synthetic test to run.
-4. Set a Start URL.
-5. Run the test.
 
 ## Examine results in the Synthetic Monitoring & Testing Results Explorer
 

@@ -1,55 +1,16 @@
 ---
 app_id: papertrail
-app_uuid: 630c6ff6-e853-4ef7-8be4-371a55269208
-assets:
-  integration:
-    auto_install: true
-    events:
-      creates_events: true
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 147
-    source_type_name: PaperTrail
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - event management
 - notifications
-custom_kind: integration
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: papertrail
-integration_id: papertrail
-integration_title: Papertrail
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: papertrail
-public_title: Papertrail
-short_description: Visualiza, realiza búsquedas y discute sobre logs de Papertrail
-  en tu flujo (stream) de eventos de Datadog.
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Gestión de eventos
-  - Category::Notificaciones
-  - Offering::Integración
-  configuration: README.md#Configuración
-  description: Visualiza, realiza búsquedas y discute sobre logs de Papertrail en
-    tu flujo de eventos de Datadog.
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Papertrail
+custom_kind: integración
+description: Visualiza, realiza búsquedas y discute sobre logs de Papertrail en tu
+  flujo (stream) de eventos de Datadog.
+integration_version: 1.0.0
+media: []
+title: Papertrail
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail example" popup="true">}}
+![Ejemplo de Papertrail](images/papertrailexample.png)
 
 ## Información general
 
@@ -64,16 +25,19 @@ Utiliza Papertrail y Datadog para:
 
 Para capturar métricas de Papertrail:
 
-1. En el [visor de eventos][1] de Papertrail, guarda una búsqueda de los eventos de logs que deben ser graficados.
-2. Introduce el nombre de la búsqueda y haz clic en el botón **Guardar y configurar una alerta**.
-3. En Gráficas y métricas, elige Datadog.
-    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Notificaciones de Papertrail" popup="true">}}
+1. En el [visor de eventos](https://papertrailapp.com/events) de Papertrail, guarda una búsqueda de los evento de log que deben ser graficados.
 
-4. Elige la frecuencia de tus alertas y otros detalles.
-5. Proporciona tu clave de API Datadog, introduce el nombre elegido para tu métrica y, opcionalmente, introduce algunas etiquetas (tags) para asociar a la métrica.
-    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Notificaciones de Papertrail" popup="true">}}
+1. Ingresa el nombre de la búsqueda y haz clic en el botón **Save & Setup an Alert** (Guardar y configurar una alerta).
 
-6. Haz clic en el botón **Crear alerta**.
+1. En Gráficas y métricas, elige Datadog.
+   ![Notificaciones Papertrail](images/papertrailnotify.png)
+
+1. Elige la frecuencia de tus alertas y otros detalles.
+
+1. Proporciona tu clave de API Datadog, introduce el nombre elegido para tu métrica y, opcionalmente, introduce algunas etiquetas (tags) para asociar a la métrica.
+   ![Notificaciones Papertrail](images/papertraildetails.png)
+
+1. Haz clic en el botón **Create Alert** (Crear alerta).
 
 Papertrail actualiza Datadog según el intervalo elegido.
 
@@ -97,7 +61,4 @@ La integración de Papertrail no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][2].
-
-[1]: https://papertrailapp.com/events
-[2]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

@@ -25,7 +25,7 @@
   },
   "downtimes": {
     "name": "Downtimes",
-    "description": "[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+    "description": "[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags.\n\n**Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html)."
   },
   "embeddable-graphs": {
     "name": "Embeddable Graphs",
@@ -49,7 +49,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
@@ -57,11 +57,11 @@
   },
   "logs-indexes": {
     "name": "Logs Indexes",
-    "description": "Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).\nYou need an API and non-scoped application key with Admin rights to interact with these endpoints."
+    "description": "Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/)."
   },
   "logs-pipelines": {
     "name": "Logs Pipelines",
-    "description": "Pipelines and processors operate on incoming logs, parsing\nand transforming them into structured attributes for easier querying.\n\n- See the [pipelines configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines and processors currently configured in web UI.\n\n- Additional API-related information about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese endpoints are only available for admin users.\nMake sure to use an application key created by an admin with no applied scopes.\n\n**Grok parsing rules may effect JSON output and require\nreturned data to be configured before using in a request.**\nFor example, if you are using the data returned from a\nrequest for another request body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body data."
+    "description": "Pipelines and processors operate on incoming logs, parsing\nand transforming them into structured attributes for easier querying.\n\n- See the [pipelines configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines and processors currently configured in web UI.\n\n- Additional API-related information about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n- For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\n**Grok parsing rules may effect JSON output and require\nreturned data to be configured before using in a request.**\nFor example, if you are using the data returned from a\nrequest for another request body, and have a parsing rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces as `%{space}` to use\nin the body data."
   },
   "metrics": {
     "name": "Metrics",
@@ -69,7 +69,7 @@
   },
   "monitors": {
     "name": "Monitors",
-    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/)."
+    "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).\n\n**Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html)."
   },
   "notebooks": {
     "name": "Notebooks",
@@ -85,7 +85,7 @@
   },
   "screenboards": {
     "name": "Screenboards",
-    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
+    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead."
   },
   "security-monitoring": {
     "name": "Security Monitoring",
@@ -117,15 +117,15 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
+    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog's API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
     "name": "Tags",
-    "description": "The tag endpoint allows you to assign tags to hosts,\nfor example: `role:database`. Those tags are applied to\nall metrics sent by the host. Refer to hosts by name\n(`yourhost.example.com`) when fetching and applying\ntags to a particular host.\n\nThe component of your infrastructure responsible for a tag is identified\nby a source. For example, some valid sources include nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nRead more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/)."
+    "description": "The tag endpoint allows you to assign tags to hosts,\nfor example: `role:database`. Those tags are applied to\nall metrics sent by the host. Refer to hosts by name\n(`yourhost.example.com`) when fetching and applying\ntags to a particular host.\n\nThe component of your infrastructure responsible for a tag is identified\nby a source. For example, some valid sources include nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc. Find a complete list of source type names under [API Source Attributes](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).\n\nRead more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/)."
   },
   "timeboards": {
     "name": "Timeboards",
-    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards) instead."
+    "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead."
   },
   "usage-metering": {
     "name": "Usage Metering",

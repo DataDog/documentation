@@ -9,16 +9,18 @@ aliases:
 - /es/agent/autodiscovery/auto_conf
 - /es/agent/faq/auto_conf
 - /es/agent/guide/auto_conf
+description: Gestionar la configuración automática de servicios populares en contenedores
+  mediante plantillas de configuración automática de Autodiscovery
 further_reading:
 - link: /contenedores/Kubernetes/integraciones/
   tag: Documentación
-  text: Kubernetes y integraciones
+  text: Configurar integraciones con Autodiscovery en Kubernetes
 - link: /contenedores/Docker/integraciones/
   tag: Documentación
-  text: Docker y integraciones
-- link: /agent/guide/autodiscovery-management/
+  text: Configurar integraciones con Autodiscovery en Docker
+- link: /containers/guide/container-discovery-management/
   tag: Documentación
-  text: Autodiscovery Gestión
+  text: Gestión de detección de contenedores
 title: Configuración automática de Autodiscovery
 ---
 
@@ -55,32 +57,34 @@ Los archivos de configuración `auto_conf.yaml` cubren todos los parámetros nec
 ## Anular auto-Configuración
 Cada archivo `auto_conf.yaml` proporciona un Configuración por defecto. Para anularlo, puede añadir un Configuración personalizado en [Kubernetes annotations][50] o [Docker Labels][51].
 
-Kubernetes Las anotaciones y las etiquetas Docker tienen prioridad sobre los archivos `auto_conf.yaml`, pero los archivos `auto_conf.yaml` tienen prioridad sobre Autodiscovery Configuración establecidos en las tablas Datadog Operator y Helm. Para utilizar Datadog Operator o Helm para Configurar Autodiscovery para un integración en la tabla de esta página, debe [deshabilitar auto-Configuración](#disable-auto-Configuración).
+Kubernetes Las anotaciones y las etiquetas Docker tienen prioridad sobre los archivos `auto_conf.yaml`, pero los archivos `auto_conf.yaml` tienen prioridad sobre Autodiscovery Configuración establecidos en las tablas Datadog Operator y Helm. Para utilizar Datadog Operator o Helm para Configurar Autodiscovery para un integración en la tabla de esta página, debe [deshabilitar auto-Configuración](#disable-auto-configuration).
 
 ## Desactivar auto-Configuración
 
 Los siguientes ejemplos desactivan el auto-Configuración para Redis e Istio integraciones.
 
 {{< tabs >}}
-{{% tab "Datadog Operador" %}}
+{{% tab "Datadog Operator" %}}
 
-En su `datadog-agent.yaml`, utilice `override.nodeAgent.env` para establecer la variable `DD_IGNORE_AUTOCONF` entorno .
+En tu `datadog-agent.yaml`, utiliza `override.nodeAgent.containers.agent.env` para definir la variable de entorno `DD_IGNORE_AUTOCONF` en el contenedor `agent`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
-tipo: DatadogAgent
+kind: DatadogAgent
 metadata:
-  name: Datadog
+  name: datadog
 spec:
   global:
-    credenciales:
+    credentials:
       apiKey: <DATADOG_API_KEY>
 
   override:
-    nodoAgent:
-      env: 
-        nombre: DD_IGNORE_AUTOCONF
-        value: redisdb istio
+    nodeAgent:
+      containers: 
+        agent:
+          env:
+            - name: DD_IGNORE_AUTOCONF
+              value: "redisdb istio"
 ```
 
 A continuación, aplique el nuevo Configuración.
@@ -92,26 +96,14 @@ Añade `datadog.ignoreAutoconfig` a tu `datadog-values.yaml`:
 
 ```yaml
 datadog:
- #List of integration(s) to ignore auto_conf.yaml.
+  #List of integration(s) to ignore auto_conf.yaml.
   ignoreAutoConfig:
     - redisdb
     - istio
 ```
 {{% /tab %}}
-{{% tab "Operator" %}}
-
-Para desactivar el auto Configuración integración (s) con el Operador, añada la variable `DD_IGNORE_AUTOCONF` a su archivo `datadog-agent.yaml`:
-
-```yaml
-  anular:
-    nodoAgent:
-      env:
-        - nombre: DD_IGNORE_AUTOCONF
-          value: "redisdb istio"
-```
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-Para desactivar la(s) integración(es) de configuración automática con tu DaemonSet, añade la variable `DD_IGNORE_AUTOCONF` al manifiesto de tu Agent:
+{{% tab "Containerized Agent" %}}
+Para desactivar las integraciones con configuración automática de tu Agent contenedorizado (DaemonSet, Docker, ECS manual), agrega la variable de entorno `DD_IGNORE_AUTOCONF`:
 
 ```yaml
 DD_IGNORE_AUTOCONF="redisdb istio"

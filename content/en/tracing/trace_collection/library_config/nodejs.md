@@ -52,7 +52,8 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 `DD_TRACE_ENABLED`
 : **Configuration**: N/A<br>
 **Default**: `true`<br>
-Whether to enable dd-trace. Setting this to `false` disables all features of the library.
+Whether to enable dd-trace. Setting this to `false` disables all features of the library.<br/>
+See also [DD_APM_TRACING_ENABLED][16].
 
 `DD_TRACE_DEBUG`
 : **Configuration**: N/A<br>
@@ -76,17 +77,6 @@ Accepts a comma-delimited list of case-insensitive HTTP headers optionally mappe
 **Example**: `User-ID:userId,Request-ID`<br>
   - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
   - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
-
-`DD_TRACE_SAMPLE_RATE`
-: **Configuration**: `sampleRate`<br>
-**Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
-
-`DD_TRACE_SAMPLING_RULES`
-: **Configuration**: `samplingRules`<br>
-**Default**: `[]`<br>
-Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
 
 `DD_SERVICE_MAPPING`
 : **Configuration**: `serviceMapping`<br>
@@ -133,14 +123,6 @@ Whether to report the system's hostname for each trace. When disabled, the hostn
 : **Configuration**: `startupLogs`<br>
 **Default**: `false`<br>
 Enable tracer startup configuration and diagnostic log.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Configuration**: `spanSamplingRules`<br>
-**Default**: `[]`<br>
-Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][3].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Configuration**: N/A<br>
@@ -213,12 +195,12 @@ The port of the DogStatsD Agent that metrics are submitted to. If the [Agent con
 **Default**: 5<br>
 Remote configuration polling interval in seconds.
 
-### ASM
+### AAP
 
 `DD_APPSEC_ENABLED`
 : **Configuration**: `appsec.enabled`<br>
 **Default**: `false`<br>
-Enable Application Security Management features.
+Enable App and API Protection features.
 
 `DD_APPSEC_RULES`
 : **Configuration**: `appsec.rules`<br>
@@ -251,7 +233,7 @@ To enable DBM to APM link using tag injection, can be set to `'service'` or `'fu
 
 `DD_LOGS_INJECTION`
 : **Configuration**: `logInjection`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 Enable automatic injection of trace IDs in logs for supported logging libraries.
 
 `DD_TRACE_LOG_LEVEL`
@@ -286,17 +268,17 @@ For information about valid values and using the following configuration options
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Configuration**: `tracePropagationStyle.extract`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **Configuration**: `tracePropagationStyle`<br>
-**Default**: `Datadog,tracecontext`<br>
+**Default**: `Datadog,tracecontext,baggage`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
 
 For more examples of how to work with the library see [API documentation][2].
@@ -314,3 +296,4 @@ For more examples of how to work with the library see [API documentation][2].
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
+[16]: /tracing/trace_collection/library_config/#traces

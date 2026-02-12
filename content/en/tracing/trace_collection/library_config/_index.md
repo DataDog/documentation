@@ -1,5 +1,6 @@
 ---
 title: Configure the Datadog Tracing Library
+description: Configure Datadog tracing libraries with environment variables, runtime settings, and language-specific options for optimal APM performance.
 type: multi-code-lang
 ---
 
@@ -16,52 +17,24 @@ To instrument an application written in a language that does not yet have offici
 ## Common configuration options
 The following configuration options behave consistently across the latest versions of all Datadog SDKs, unless otherwise noted:
 
-### Traces
-
-`DD_TRACE_<INTEGRATION>_ENABLED`
-: **Default**: `true` <br>
-**Supported Input**: Boolean <br>
-**Caveats**: Not supported in Go; [Some Java integrations are disabled by default][2].<br/>
-**Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
-
-`DD_TRACE_RATE_LIMIT`
-: **Default**: `100` <br>
-**Supported Input**: A positive integer<br>
-**Caveats**: `200` is the default value of `DD_TRACE_RATE_LIMIT` in C++<br>
-**Description**: Sets the maximum number of traces to sample per second; applies only when either `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set.
-
-`DD_TRACE_HEADER_TAGS`
-: **Default**: `null` <br>
-**Supported Input**: A comma-separated string representing a list of case-insensitive HTTP headers, with an optional mapping to a custom tag name. Example: `User-Agent:my-user-agent,Content-Type`. <br>
-**Description**: Automatically apply specified HTTP headers as span tags. If a custom tag name is not specified, the tag key defaults to `http.request.headers.<normalized-header-name>` for request headers and `http.response.headers.<normalized-header-name>` for response headers.
-
-`DD_TRACE_ENABLED`
-: **Default**: `true` <br>
-**Supported Input**: Boolean <br>
-**Description**: Enables or disables sending traces from the application.
-
-`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
-: **Default**: <br>
-    ```
-    (?i)(?:(?:"|%22)?)(?:(?:old[-_]?|new[-_]?)?p(?:ass)?w(?:or)?d(?:1|2)?|pass(?:[-_]?phrase)?|secret|(?:api[-_]?|private[-_]?|public[-_]?|access[-_]?|secret[-_]?|app(?:lication)?[-_]?)key(?:[-_]?id)?|token|consumer[-_]?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|(?:bearer(?:\s|%20)+[a-z0-9._\-]+|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+/=-]|%3D|%2F|%2B)+)?|-{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY-{5}[^\-]+-{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY(?:-{5})?(?:\n|%0A)?|(?:ssh-(?:rsa|dss)|ecdsa-[a-z0-9]+-[a-z0-9]+)(?:\s|%20|%09)+(?:[a-z0-9/.+]|%2F|%5C|%2B){100,}(?:=|%3D)*(?:(?:\s|%20|%09)+[a-z0-9._-]+)?)
-    ```
-: **Supported Input**: A regex string <br>
-: **Description**: Applies a regex to redact sensitive data from query strings on incoming HTTP requests. The default regex matches various sensitive data patterns, including passwords, tokens, API keys, private keys, and authorization terms. Matches are replaced with `<redacted>`. If an empty string is passed, no obfuscation occurs. The resulting value is reported in the `http.url` tag.
-
-### Diagnostics
-
-`DD_TRACE_LOG_DIRECTORY`
-: **Default**: Varies by SDK, environment, and runtime. Please read more in the specific configuration page above for your chosen language <br>
-**Supported Input**: A valid full or relative directory path that exists on the system<br>
-**Caveats**: Not supported in Java, Node.js, Ruby, Python<br>
-**Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK falls back to its default diagnostic logging method.
-
 ### Agent
 
 `DD_TRACE_AGENT_URL`
 : **Default**: `http://localhost:8126` <br>
 **Supported Input**: A string representing an HTTP or UDS url <br>
 **Description**: The URL for connecting the tracer to the Datadog agent. Valid URL schemas include `http://` and `unix://` (UNIX Domain Sockets). This value takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set.
+
+`DD_DOGSTATSD_PORT`
+: **Default**: `8125` <br>
+**Supported Input**: Integer between 0 and 65535 <br>
+**Caveats**: Not supported in C++, Ruby, .NET<br>
+**Description**: Specifies the port number for the DogStatsD server to which runtime metrics are sent.
+
+`DD_DOGSTATSD_HOST`
+: **Default**: `localhost` <br>
+**Supported Input**: String representing a hostname or IP address <br>
+**Caveats**: Not supported in C++, Ruby, .NET<br>
+**Description**: Specifies the hostname or IP address of the DogStatsD server to which runtime metrics are sent.
 
 ### Unified Service Tagging
 
@@ -81,7 +54,140 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: A string representing an application environment name (for example, `prod`, `dev`) <br>
 **Description**: Adds an environment tag to all spans generated by the tracer instance.
 
+`DD_TAGS`
+: **Default**: `null` <br>
+**Supported Input**: A string representing key value pairs that are delimited by a colon and separated by a comma and/or a space (for example, `<key1>:<value1>, <key2>:<value2>`>) <br>
+**Description**: Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas and/or spaces.
+
+### Diagnostics
+
+`DD_TRACE_LOG_DIRECTORY`
+: **Default**: Varies by SDK, environment, and runtime. Please read more in the specific configuration page above for your chosen language <br>
+**Supported Input**: A valid full or relative directory path that exists on the system<br>
+**Caveats**: Not supported in Java, Node.js, Ruby, Python<br>
+**Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK falls back to its default diagnostic logging method.
+
+### Metrics
+
+`DD_RUNTIME_METRICS_ENABLED`
+: **Default**: `false` <br>
+**Supported Input**: Boolean (`true`/`false`) <br>
+**Caveats**: Not supported in C++ or PHP<br>
+**Description**: Enables or disables the collection of [runtime metrics][5] (such as garbage collection stats, memory usage, and thread counts) for the application.
+
+### Traces
+
+`DD_APM_TRACING_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Description**: Enables or disables sending traces from the application, without impacting other library features such as profiling, Datadog App and API Protection (AAP), Data Streams Monitoring (DSM), and more.
+
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Caveats**: Fully disables the library, including other library features, in Node.js, PHP, Ruby, .NET, and C++. Partially disables the library in Java and Python. Behaves identically to `DD_APM_TRACING_ENABLED` in Go.<br>
+**Description**: Enables or disables sending traces from the application.
+
+`DD_LOGS_INJECTION`
+: **Default**: `true` <br>
+**Supported Input**: Boolean (`true`/`false`) <br>
+**Caveats**: Not supported in C++ or Go.<br>
+**Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into JSON/structured application logs. This allows for correlation between traces and logs.
+
+`DD_TRACE_RATE_LIMIT`
+: **Default**: `100` <br>
+**Supported Input**: A positive integer<br>
+**Caveats**: `200` is the default value of `DD_TRACE_RATE_LIMIT` in C++<br>
+**Description**: Sets the maximum number of traces to sample per second; applies only when either `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set.
+
+`DD_TRACE_HEADER_TAGS`
+: **Default**: `null` <br>
+**Supported Input**: A comma-separated string representing a list of case-insensitive HTTP headers, with an optional mapping to a custom tag name. Example: `User-Agent:my-user-agent,Content-Type`. <br>
+**Description**: Automatically apply specified HTTP headers as span tags. If a custom tag name is not specified, the tag key defaults to `http.request.headers.<normalized-header-name>` for request headers and `http.response.headers.<normalized-header-name>` for response headers.
+
+
+`DD_TRACE_SAMPLE_RATE`
+: **Default**: `-1`. If unset, the tracer defers to the Datadog Agent to control sample rate. <br>
+**Supported Input**: A number between 0.0 and 1.0, inclusive. <br>
+**Caveats**: This variable is deprecated in favor of `DD_TRACE_SAMPLING_RULES`, which provides more flexible and granular sampling control.  <br>
+**Description**: Controls the trace ingestion sample rate between the Datadog Agent and the backend. Must be a number between 0.0 and 1.0, where 1.0 means all traces are sent to the backend and 0.0 means none are sent. This is precise up to 6 digits, applies globally to all traces, and does not support per-service or per-operation targeting. 
+
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `null`. If unset or no rules match, the tracer defers to the Datadog Agent to dynamically adjust sample rate across traces.  <br>
+**Supported Input**: A JSON array of [user-defined rules][6]. <br>
+**Description**: Enables fine-grained control over trace ingestion, allowing you to target specific services, operations, resources, or tagged traces. Defined by a JSON array of objects, where each object must include a `sample_rate` between 0.0 and 1.0 (inclusive), and can optionally include fields such as `service`, `name`, `resource`, `tags`, and `max_per_second`. Objects are evaluated in the order listed; the first matching object determines the trace's sample rate. For more information, see [Ingestion Mechanisms][4]. <br>
+**Examples**: <br>
+  - Sample 20% of all traces: <br>
+
+    ```
+    [{"sample_rate": 0.2}]
+    ```
+
+  - Sample 10% of traces where the service name starts with `a` and the operation name is `b`, and 20% of all others: <br>
+
+    ```
+    [{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]
+    ```
+
+  - Sample 40% of traces with the resource name `HTTP GET`:
+
+    ```
+    [{"resource": "HTTP GET", "sample_rate": 0.4}]
+    ```
+
+  - Sample 100% of traces with the tag `tier=premium`:
+
+    ```
+    [{"tags": {"tier": "premium"}, "sample_rate": 1}]
+    ```
+
+  - Sample up to 50 traces per second at a 50% rate for the service `my-service` and operation name `http.request`:
+
+    ```
+    [{"service": "my-service", "name": "http.request", "sample_rate": 0.5, "max_per_second": 50}]
+    ```
+
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: **Default**: <br>
+    ```
+    (?i)(?:(?:"|%22)?)(?:(?:old[-_]?|new[-_]?)?p(?:ass)?w(?:or)?d(?:1|2)?|pass(?:[-_]?phrase)?|secret|(?:api[-_]?|private[-_]?|public[-_]?|access[-_]?|secret[-_]?|app(?:lication)?[-_]?)key(?:[-_]?id)?|token|consumer[-_]?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|(?:bearer(?:\s|%20)+[a-z0-9._\-]+|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+/=-]|%3D|%2F|%2B)+)?|-{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY-{5}[^\-]+-{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY(?:-{5})?(?:\n|%0A)?|(?:ssh-(?:rsa|dss)|ecdsa-[a-z0-9]+-[a-z0-9]+)(?:\s|%20|%09)+(?:[a-z0-9/.+]|%2F|%5C|%2B){100,}(?:=|%3D)*(?:(?:\s|%20|%09)+[a-z0-9._-]+)?)
+    ```
+: **Supported Input**: A regex string <br>
+: **Description**: Applies a regex to redact sensitive data from query strings on incoming HTTP requests. The default regex matches various sensitive data patterns, including passwords, tokens, API keys, private keys, and authorization terms. Matches are replaced with `<redacted>`. If an empty string is passed, no obfuscation occurs. The resulting value is reported in the `http.url` tag.
+
+
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean (`true`/`false`) <br>
+**Description**: Controls whether new traces use 128-bit W3C trace IDs (32-character hexadecimal strings) or 64-bit Datadog trace IDs (16-character hexadecimal strings). The default is `true` to support W3C trace context propagation.
+
+`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean (`true`/`false`) <br>
+**Caveats**: Not supported in C++<br>
+**Description**: Controls whether 128-bit trace IDs are logged in their full 32-character format or truncated to 16 characters. Set to `false` for compatibility with systems that expect the shorter format.
+
+`DD_TRACE_CLIENT_IP_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean (`true`/`false`) <br>
+**Caveats**: Not supported in C++<br>
+**Description**: Enables or disables the automatic collection of client IP addresses from HTTP request headers. When enabled, the IP address is stored in the `http.client_ip` span tag.
+
+`DD_TRACE_EXPERIMENTAL_FEATURES_ENABLED`
+: **Default**: `null` <br>
+**Supported Input**: A comma-separated list of configuration options that support experimental features.<br>
+**Supported Values**: `all`, `DD_TAGS` (Java, .NET)<br>
+**Caveats**: Only supported in Java and .NET <br>
+**Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. You can enable all experimental features using the keyword `all`, or list individual features explicitly.
+
 ### Integrations
+
+`DD_TRACE_<INTEGRATION>_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Caveats**: Not supported in Go; [Some Java integrations are disabled by default][2].<br/>
+**Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`
 : **Default**: `400-499` <br>
@@ -116,7 +222,30 @@ The following configuration options behave consistently across the latest versio
   - `cf-connecting-ip`
   - `cf-connecting-ipv6`
 
+### Context propagation
+`DD_TRACE_BAGGAGE_MAX_ITEMS`
+: **Default**: `64` <br>
+**Supported Input**:  A positive integer <br>
+**Description**: The maximum number of key-value pairs in the baggage header.
+
+`DD_TRACE_BAGGAGE_MAX_BYTES`
+: **Default**: `8192` <br>
+**Supported Input**:  A positive integer <br>
+**Description**: The maximum number of bytes in the baggage header value. Values less than 3 bytes prevent propagation, because this is the minimum size for a valid key-value pair (for example, `k=v`).
+
+`DD_TRACE_BAGGAGE_TAG_KEYS`
+: **Default**: `user.id,session.id,account.id` <br>
+**Supported Input**:  A comma-separated string representing a list of case-sensitive baggage keys <br>
+**Caveats**: Not supported in C++ <br>
+**Description**: A comma-separated list of baggage keys that are automatically applied as span tags to the local root span. For example, a baggage key `user.id` is tagged as `baggage.user.id` <br>
+This feature only applies to baggage extracted from incoming HTTP headers. Baggage set with the baggage API is not included.
+  - To tag all baggage items, set the value to `*`. Use this with caution to avoid exposing sensitive data in tags.
+  - To disable this feature, set the value to an empty string.
+
 
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
+[4]: /tracing/trace_pipeline/ingestion_mechanisms/
+[5]: /tracing/metrics/runtime_metrics/
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#in-tracing-libraries-user-defined-rules

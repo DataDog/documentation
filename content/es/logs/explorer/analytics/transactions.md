@@ -35,7 +35,7 @@ Establecer condiciones de inicio y fin
 
 Por ejemplo, un sitio web de comercio electrónico agrupa logs a través de varias acciones del usuario, como búsqueda de catálogo, añadir al carrito y proceder al pago, para crear una vista **Transacciones** utilizando un atributo común como `requestId` o `orderId`.
 
-{{< img src="logs/explorer/aggregations_transactions.jpg" alt="El Log Explorer que muestra logs agrupados por transacciones" style="width:100%;" >}}
+{{< img src="logs/explorer/aggregations_transactions.jpg" alt="Explorador de logs en el que se muestran logs agrupados por transacciones" style="width:100%;" >}}
 
 Las transacciones admiten la visualización [Lista de agregados][1]. Al hacer clic en una transacción en la lista, se abre el panel lateral de transacciones desde el que puedes:
 
@@ -52,7 +52,7 @@ Cuando se utiliza una condición de inicio o fin para definir una transacción, 
 
 {{< img src="logs/explorer/transaction_group_side_panel.png" alt="El panel de grupo de transacción que muestra transacciones dentro del grupo seleccionado en secuencia" style="width:80%;" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

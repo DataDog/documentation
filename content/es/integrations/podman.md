@@ -17,7 +17,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
+- rastreo
 custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/podman/README.md

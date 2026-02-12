@@ -53,7 +53,8 @@ data:
   kubernetes_apiserver.yaml: |-
     init_config:
     instances:
-      - filtering_enabled: false
+      -
+        filtering_enabled: false
         unbundle_events: false
 ---
 # Source: datadog/templates/install_info-configmap.yaml
@@ -81,8 +82,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "f1dc9590-0585-41da-82a6-4aa0c49ae63b"
-  install_time: "1731489758"
+  install_id: "12d33d3c-4d68-4eac-9722-234fb146cfc1"
+  install_time: "1740515779"
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -211,7 +212,7 @@ spec:
     spec:
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -343,7 +344,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "-foreground", "--cfgpath=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -398,7 +399,7 @@ spec:
               mountPath: \\.\pipe\containerd-containerd
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -414,7 +415,7 @@ spec:
               readOnly: true
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.59.0"
+          image: "gcr.io/datadoghq/agent:7.63.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:

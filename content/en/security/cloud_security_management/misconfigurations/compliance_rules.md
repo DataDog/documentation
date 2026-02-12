@@ -1,5 +1,5 @@
 ---
-title: Manage CSM Misconfigurations Compliance Rules
+title: Manage Cloud Security Misconfigurations Compliance Rules
 aliases:
   - /security_platform/cspm/configuration_rules
   - /security/cspm/configuration_rules
@@ -9,7 +9,7 @@ aliases:
 further_reading:
   - link: "/security/cloud_security_management/misconfigurations"
     tag: "Documentation"
-    text: Getting Started with CSM Misconfigurations
+    text: Getting Started with Cloud Security Misconfigurations
   - link: "/security/cloud_security_management/misconfigurations/custom_rules/"
     tag: "Documentation"
     text: Custom Rules
@@ -18,14 +18,20 @@ further_reading:
     text: Misconfigurations Reports
 ---
 
-Cloud Security Management Misconfigurations (CSM Misconfigurations) [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
+Cloud Security Misconfigurations [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 
-The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For CSM Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
+The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For Cloud Security Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
-CSM Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
+Cloud Security Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
 
-- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an Amazon CloudFront distribution's configuration for encrypted status.
-- [**Infrastructure configuration**][5]: These checks evaluate containers and Kubernetes clusters using rules from CIS compliance benchmarks for Docker and Kubernetes, as well as Linux workloads against CIS host benchmarks for Ubuntu, Red Hat, and Amazon Linux.
+- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [CloudFront distribution should be encrypted][3] rule assesses whether an Amazon CloudFront distribution enforces HTTPS to secure communications.
+- [**Infrastructure configuration**][5] checks evaluate:
+  - **Containers and Kubernetes clusters**, using rules from CIS compliance benchmarks for Docker and Kubernetes.
+  - **Linux workloads**, using CIS host benchmarks for Linux distributions including Ubuntu, Red Hat, Amazon Linux, and AlmaLinux.
+
+    Cloud Security Misconfigurations supports a subset of the Linux distributions that the Agent supports. For more information, see [Supported Platforms][6].
+
+  {{% cloud-sec-cloud-infra %}}
 
 ## Explore default compliance rules
 
@@ -51,26 +57,6 @@ After you customize a rule, click **Update Rule** at the bottom of the page to a
 
 {{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-misconfiguration.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
 
-## Set notification targets for compliance rules
-
-You can send real-time notifications when a new misconfiguration is detected in your environment by adding notification targets. The available notification options are:
-
-- [Slack][14]
-- [Jira][15]
-- [PagerDuty][16]
-- [ServiceNow][17]
-- [Microsoft Teams][18]
-- [Webhooks][19]
-- Email
-
-On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for detailed instructions on configuring notifications for compliance rules.
-
-Alternatively, create [notification rules][21] that span across multiple compliance rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual compliance rules.
-
-**Note**: If a misconfiguration is detected for a rule with notifications enabled, the failed misconfiguration also appears on the [Signals Explorer][22].
-
-{{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="The Set severity and notifications section of the rule details page" >}}
-
 ## Create custom rules
 
 You can create custom rules to extend the rules being applied to your environment to evaluate your security posture. You can also clone the default detection rules and edit the copies (Google Cloud only). See [Custom Rules][20] for more information.
@@ -94,9 +80,10 @@ The rule deprecation process is as follows:
 
 [1]: /security/default_rules/#cat-csm-misconfigurations-cloud
 [2]: /security/detection_rules/
-[3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
+[3]: https://docs.datadoghq.com/security/default_rules/aws-cloudfront-distribution-cloudfront-distribution-should-be-encrypted/
 [4]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
+[6]: /agent/supported_platforms/?tab=linux
 [7]: /security/notifications/
 [13]: https://app.datadoghq.com/security/configuration/compliance/rules
 [14]: /integrations/slack/
@@ -107,5 +94,4 @@ The rule deprecation process is as follows:
 [19]: /integrations/webhooks/
 [20]: /security/cloud_security_management/misconfigurations/custom_rules/
 [21]: /security/notifications/rules/
-[22]: /security/cloud_security_management/misconfigurations/signals_explorer/
 [23]: /security/detection_rules/#clone-a-rule

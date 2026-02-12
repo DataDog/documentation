@@ -5,6 +5,9 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
+  - link: "https://www.datadoghq.com/blog/monitor-rust-otel/"
+    tag: "Blog"
+    text: "How to monitor your Rust applications with OpenTelemetry"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
@@ -17,9 +20,18 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
     tag: "Blog"
     text: "Manage API performance, security, and ownership with Datadog API Catalog"
+  - link: "https://www.datadoghq.com/blog/software-catalog/"
+    tag: "Blog"
+    text: "Improve developer experience and collaboration with Software Catalog"
+  - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+    tag: "Blog"
+    text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to boost your APM understanding"
+  - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+    tag: "Blog"
+    text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 
 aliases:
   - /tracing/faq/terminology
@@ -54,7 +66,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
 
-For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries. To learn more, read [Application Instrumentation][2].
+For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
 
 <div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 
@@ -116,7 +128,7 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
 [9]: /tracing/other_telemetry/connect_logs_and_traces/
-[10]: /real_user_monitoring/platform/connect_rum_and_traces
+[10]: /real_user_monitoring/correlate_with_other_telemetry/apm
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
 [13]: /tracing/services/services_map/
@@ -136,3 +148,4 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [27]: /tracing/trace_collection/single-step-apm/
 [28]: /tracing/services/resource_page/
 [29]: /tracing/troubleshooting/
+[30]: /tracing/dynamic_instrumentation/

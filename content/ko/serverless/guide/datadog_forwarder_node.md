@@ -4,15 +4,15 @@ title: Datadog 포워더를 사용하여 Node.js 서버리스 애플리케이션
 
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스 신규 사용자인 경우 <a href="/serverless/installation/nodejs">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하기 위한 지침을 따르세요.</a> Lambda에서 즉시 사용할 수 있는 기능을 제공하기 전 Datadog 포워더를 사용해 Datadog 서버리스를 설정한 경우 이 가이드를 따라 인스턴스를 유지 관리하세요.
 </div>
 
-## 전제 조건
+## 사전 필수 조건
 
 AWS Lambda 트레이스, 향상된 메트릭, 커스텀 메트릭, 로그를 수집하려면 [Datadog 포워더 Lambda 함수][2]가 필요합니다.
 
-## 설정
+## 구성
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -41,13 +41,13 @@ yarn global add @datadog/datadog-ci
 datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v <layer_version> --forwarder <forwarder_arn>
 ```
 
-플레이스홀더를 채우려면:
+자리 표시자를 채우는 방법:
 - `<functionname>` 및 `<another_functionname>`를  Lambda 함수 이름으로 교체합니다.
 - `<aws_region>`을 AWS 리전 이름으로 대체합니다.
 - `<layer_version>`을 원하는 Datadog Lambda Library 버전으로 교체합니다. 최신 버전은 `{{< latest-lambda-layer-version layer="node" >}}`입니다.
 - `<forwarder_arn>`을 포워더 ARN으로 교체합니다 ([포워더 설명서][2] 참조).
 
-예를 들면 다음과 같습니다.
+예시:
 
 ```sh
 datadog-ci lambda instrument -f my-function -f another-function -r us-east-1 -v {{< latest-lambda-layer-version layer="node" >}} --forwarder "arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder"
@@ -156,10 +156,10 @@ CDK 프로젝트에서 다음 Yarn 또는 NPM 명령을 실행하여 Datadog CDK
 
 ```sh
 #Yarn
-yarn add --dev datadog-cdk-constructs
+yarn add --dev datadog-cdk-constructs-v2
 
 #NPM
-npm install datadog-cdk-constructs --save-dev
+npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
 ### 계측
@@ -168,16 +168,16 @@ npm install datadog-cdk-constructs --save-dev
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
-import { Datadog } from "datadog-cdk-constructs";
+import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const datadog = new Datadog(this, "Datadog", {
+    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      service: "<SERVICE>",  // 선택사항
-      env: "<ENV>",  // 선택사항
+      service: "<SERVICE>",  // 선택 사항 
+      env: "<ENV>",  // 선택 사항
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
@@ -186,7 +186,7 @@ class CdkStack extends cdk.Stack {
 
 자리 표시자를 채우는 방법:
 
-- `<FORWARDER_ARN>`를 포워더 ARN으로 대체합니다 ([포워더 설명서][2] 참조).
+- `<FORWARDER_ARN>`를 포워더 ARN으로 대체합니다 ([포워더 설명서][2] 참고).
 - `<SERVICE>`와 `<ENV>`를 서비스와 환경 값으로 대체합니다. 
 
 Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog Signing Profile ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 구성][3]에 추가한 다음 매크로를 사용해야 합니다.
@@ -194,7 +194,7 @@ Lambda 함수가 코드 서명을 사용하도록 설정된 경우 Datadog Signi
 자세한 내용 및 추가 파라미터는 [Datadog CDK NPM 페이지][1]에서 확인할 수 있습니다.
 
 
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs-v2
 [2]: https://docs.datadoghq.com/ko/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
@@ -229,7 +229,7 @@ yarn add datadog-lambda-js dd-trace
   - `DD_FLUSH_TO_LOG`를 `true`로 설정합니다.
 3. 필요 시 적절한 값을 사용하여 함수에 `service`와 `env` 태그를 추가합니다.
 
-### 연결
+### 구독
 
 메트릭, 트레이스, 로그를 Datadog으로 보내려면 각 함수 로그 그룹에 Datadog 포워더 Lamda 함수를 등록합니다.
 
@@ -261,7 +261,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 
 ```
 
-사용 가능한 `RUNTIME` 옵션은: {{< latest-lambda-layer-version layer="node-versions" >}}입니다. 최신`VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다.다음 예를 참고하세요.
+사용 가능한 `RUNTIME` 옵션은: {{< latest-lambda-layer-version layer="node-versions" >}}입니다. 최신`VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다.다음 예를 참고하세요.
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
@@ -285,7 +285,7 @@ yarn add datadog-lambda-js
 
 [최신 릴리스][3]를 참고하세요.
 
-### 구성
+### 설정
 
 함수를 설정하려면 다음 단계를 따르세요.
 

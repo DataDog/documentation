@@ -1,57 +1,59 @@
 ---
-"app_id": "xmatters"
-"app_uuid": "fff150f0-a26a-48eb-a16b-21e426e6835e"
-"assets":
-  "integration":
-    "auto_install": true
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "164"
-    "source_type_name": "xMatters"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "event management"
-- "collaboration"
-- "incidents"
-- "notifications"
-"custom_kind": "integración"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "xmatters"
-"integration_id": "xmatters"
-"integration_title": "xMatters"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "xmatters"
-"public_title": "xMatters"
-"short_description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog"
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Event Management"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "xMatters"
+app_id: xmatters
+app_uuid: fff150f0-a26a-48eb-a16b-21e426e6835e
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 164
+    source_type_name: xMatters
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- event management
+- collaboration
+- incidents
+- notifications
+custom_kind: integración
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: xmatters
+integration_id: xmatters
+integration_title: xMatters
+integration_version: ''
+is_public: true
+manifest_version: 2.0.0
+name: xmatters
+public_title: xMatters
+short_description: Utiliza xMatters como canal de notificación en las alertas y eventos
+  de Datadog.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Notifications
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Utiliza xMatters como canal de notificación en las alertas y eventos
+    de Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: xMatters
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/xmatters/xmatters.png" alt="xMatters overview" popup="true">}}
+![Información general de xMatters][1]
 
 ## Información general
 
@@ -71,9 +73,9 @@ Conecta Datadog a xMatters para:
 
 Para configurar la integración de xMatters y Datadog:
 
-- Genera una [nueva clave de aplicación][1] para su uso por xMatters.
-- [Configura el flujo de trabajo de xMatters][2].
-- Configura cada uno de los webhooks de xMatters con la [integración de webhooks de Datadog][3].
+- Genera una [nueva clave de aplicación][2] para su uso por xMatters.
+- [Configura el proceso de xMatters][3].
+- Configura cada uno de los webhooks de xMatters con la [integración de webhooks de Datadog][4].
 
 ## Datos recopilados
 
@@ -91,10 +93,10 @@ La integración de xMatters no incluye ningún check de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][4].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://help.xmatters.com/integrations/#cshid=DATADOG
-[3]: https://app.datadoghq.com/account/settings#integrations/webhooks
-[4]: https://docs.datadoghq.com/help/
-
+[1]: images/xmatters.png
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://help.xmatters.com/integrations/#cshid=DATADOG
+[4]: https://app.datadoghq.com/account/settings#integrations/webhooks
+[5]: https://docs.datadoghq.com/es/help/

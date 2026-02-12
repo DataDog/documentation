@@ -1,4 +1,8 @@
 ---
+further_reading:
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations
+  tag: Blog
+  text: 'Optimización de Datadog a escala: observabilidad rentable en Zendesk'
 title: Métricas de uso estimadas
 ---
 
@@ -21,7 +25,7 @@ Datadog calcula tu uso estimado actual casi en tiempo real. Las métricas de uso
 
 Las métricas de uso estimadas suelen estar disponibles en los siguientes tipos de uso:
 
-| Tipo de uso                    | Métrica                                   | **Computar los SLO** en tus endpoints y recorridos de usuario más importantes facilita el cumplimiento de los objetivos de rendimiento de tu aplicación y, en última instancia, proporciona una experiencia de cliente coherente. |
+| Tipo de uso                    | Métrica                                   | Descripción |
 |-------------------------------|------------------------------------------| ----------- |
 | Hosts de infraestructura          | `datadog.estimated_usage.hosts`, `datadog.estimated_usage.hosts.by_tag`          | Hosts únicos vistos en la última hora. |
 | Contenedores                    | `datadog.estimated_usage.containers`, `datadog.estimated_usage.containers.by_tag`     | Contenedores únicos vistos en la última hora. |
@@ -36,7 +40,7 @@ Las métricas de uso estimadas suelen estar disponibles en los siguientes tipos 
 | Eventos de logs de seguimiento de errores    | `datadog.estimated_usage.error_tracking.logs.events` | Volumen de logs de errores incorporados en el seguimiento de errores. |
 | Logs analizados (seguridad)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | Incorporación total de logs de Cloud SIEM en bytes. |
 | APM Hosts                     | `datadog.estimated_usage.apm_hosts`, `datadog.estimated_usage.apm_hosts.by_tag` | Hosts de APM únicos vistos en la última hora. No incluye hosts de servicios de Azure App. |
-| Tramos indexados de APM             | `datadog.estimated_usage.apm.indexed_spans` | Número total de tramos (spans) indexados por filtros de retención basados en etiquetas. |
+| Tramos (spans) indexados de APM             | `datadog.estimated_usage.apm.indexed_spans` | Número total de tramos indexados por filtros de retención basados en etiquetas (tags). |
 | Bytes ingeridos desde la APM            | `datadog.estimated_usage.apm.ingested_bytes` | Volumen de tramos incorporados en bytes. |
 | Tramos ingeridos de APM            | `datadog.estimated_usage.apm.ingested_spans` | Número total de incorporación de tramos. |
 | Tareas de Fargate de la APM             | `datadog.estimated_usage.apm.fargate_tasks`, `datadog.estimated_usage.apm.fargate_tasks.by_tag` | Tareas únicas de APM Fargate vistas en los últimos 5 minutos. |
@@ -56,21 +60,28 @@ Las métricas de uso estimadas suelen estar disponibles en los siguientes tipos 
 | Hosts CWS                     | `datadog.estimated_usage.cws.hosts`, `datadog.estimated_usage.cws.hosts.by_tag` | Hosts de CWS únicos vistos en la última hora. |
 | Contenedores CWS                | `datadog.estimated_usage.cws.containers`, `datadog.estimated_usage.cws.containers.by_tag` | Contenedores de CWS únicos vistos en los últimos 5 minutos. |
 | Hosts de bases de datos                | `datadog.estimated_usage.dbm.hosts`, `datadog.estimated_usage.dbm.hosts.by_tag` | Hosts de DBM únicos vistos en la última hora. |
-| Hosts ASM                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Hosts de ASM únicos vistos en la última hora. |
-| Tareas de ASM                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Tareas de ASM Fargate únicas vistas en los últimos 5 minutos. |
-| Gestión de incidencias (usuarios activos)   | `datadog.estimated_usage.incident_management.active_users` | Usuarios activos de mensajería instantánea vistos desde el mes hasta la fecha. |
+| Hosts AAP                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Únicos hosts AAP vistos en la última hora. |
+| Tareas AAP                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Tareas únicas de AAP Fargate vistas en los últimos 5 minutos. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Modificadores de pipeline vistos desde el mes hasta la fecha. |
 | Modificadores de prueba de CI Visibility | `datadog.estimated_usage.ci_visibility.test.committers` | Modificadores de prueba vistos desde el mes hasta la fecha. |
 | Dispositivos IoT                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Dispositivos de IoT únicos vistos en la última hora. |
 | Bytes incorporados de pipelines de observabilidad | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volumen de datos incorporados por pipelines de observabilidad. |
-| Eventos personalizados                   | `datadog.estimated_usage.events.custom_events` | Volumen de eventos personalizados enviados. |
-| Eventos incorporados                        | `datadog.estimated_usage.events.ingested_events` | Volumen de datos ingeridos por eventos. |
+| Eventos personalizados                 | `datadog.estimated_usage.events.custom_events` | Volumen de eventos personalizados enviados. |
+| Eventos incorporados               | `datadog.estimated_usage.events.ingested_events` | Volumen de datos ingeridos por eventos. |
+| Committers SAS de Code Security | `datadog.estimated_usage.code_security.sast.committers` | Committers SAST vistos desde el mes (calendario) hasta la fecha. |
+| Committers SCA de Code Security  | `datadog.estimated_usage.code_security.sca.committers`  | Committers SCA vistos desde el mes (calendario) hasta la fecha.  |
+| Hosts SCA de Code Security       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Hosts SCA únicos vistos en la última hora. |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Nombres de las métricas" >}}
 
+## Configuración de etiquetas para tus métricas de uso estimado de por_etiqueta
+Para configurar desgloses de etiquetas en tus métricas de uso estimado por_etiqueta, configura etiquetas, como las de equipo o entorno, en la página de [atribución de uso][6] (si tienes un plan PRO, puedes solicitar acceso a esta función a través de tu [asesor de clientes][2]). Los cambios surtirán efecto a las 00:00 UTC.
+
+{{< img src="account_management/billing/setting-eum-tags-in-ua.png" alt="Configurar etiquetas EUM por_etiqueta en Atribución de uso" >}}
+
 ## Dashboards
 
-Se dispone de dashboards de uso estimado, que ofrece consultas útiles con estos métricas. Puede clonar estos dashboards en ayuda para empezar con el uso métricas. Para encontrar estos dashboards, navegue a [dashboards listas preestablecidas][5] y Buscar para "Uso estimado".
+Hay disponibles dashboards de uso estimado predefinidos que ofrecen consultas útiles con estas métricas. Puedes clonar estos dashboards para ayudarte a empezar con las métricas de uso. Para encontrar estos dashboards, ve a las [listas preconfiguradas de dashboards][5] y busca "Uso estimado."
 
 ## Uso con varias organizaciones
 
@@ -78,14 +89,19 @@ En las cuentas con varias organizaciones, es posible agrupar el uso estimado de 
 
 {{< img src="account_management/billing/usage-metrics-03.png" alt="Uso con varias organizaciones" >}}
 
-## Resolución de problemas
+## Solucionar problemas
 
 Si tienes alguna pregunta técnica, ponte en contacto con el [equipo de asistencia de Datadog][1].
 
 Si tienes alguna pregunta sobre facturación, ponte en contacto con tu gestor de [satisfacción al cliente][2].
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help/
 [2]: mailto:success@datadoghq.com
 [3]: /es/monitors/types/metric/?tab=threshold
 [4]: /es/logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
+[6]: /es/account_management/billing/usage_attribution/

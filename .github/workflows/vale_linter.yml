@@ -19,39 +19,41 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       with:
         persist-credentials: false
 
     - name: Clone Datadog Vale
-      uses: actions/checkout@v4
+      uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       with:
         repository: DataDog/datadog-vale
         path: datadog-vale
         persist-credentials: false
     
-    - uses: actions/setup-python@v5.1.0
+    - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
       with:
         python-version: '3.11'
-    - run: pip install vale
+    - run: pip install vale==3.9.1
 
     - name: Edit StylesPath in Vale config file
       run: sed -i 's/\.\.\/datadog-vale\/styles/datadog-vale\/styles/' .vale.ini
            
     - name: Find changed lines
       id: changed_lines
-      uses: hestonhoffman/changed-lines@v1
+      uses: hestonhoffman/changed-lines@b51e5eff3b7f56b60460c5371206e1d781ffa6ab # v1.9.0
       with:
         file_filter: '.md, .html'
-      
+  
     - name: Run vale on changed files
+      if: steps.changed_lines.outputs.changed_files
       env: 
         CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
         vale "${CHANGED_FILES}" \
           --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
-    
+
     - name: Parse Vale output
+      if: steps.changed_lines.outputs.changed_files
       env:
         CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |

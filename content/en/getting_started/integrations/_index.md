@@ -1,5 +1,6 @@
 ---
 title: Introduction to Integrations
+description: Unify metrics and logs from infrastructure using Agent-based, authentication-based, and library integrations.
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -7,6 +8,9 @@ further_reading:
   - link: '/integrations/'
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
+  - link: 'https://www.datadoghq.com/blog/1k-integrations-milestone/'
+    tag: 'Blog'
+    text: 'Scaling Datadog observability: 1,000 integrations and counting'
 ---
 
 ## Overview
@@ -31,7 +35,7 @@ The Datadog Agent package includes integrations officially supported by Datadog,
 
 ### Permissions
 
-The `manage_integrations` permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
+The Integrations Manage permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
 
 ### API and application keys
 
@@ -100,14 +104,29 @@ For example, setting `service` in your config file is the recommended [Agent set
 
 To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more, see [Unified Service Tagging][27].
 
-By default, the metrics reported by integrations include tags autodiscovered from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags that refer to the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`:
+#### Per-check tag configuration
+You can customize tag behavior for individual checks, overriding the global Agent-level settings:
+
+1. **Disable Autodiscovery tags**
+
+    By default, the metrics reported by integrations include tags automatically detected from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags associated with the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`.
+
+1. **Set tag cardinality per integration check**
+
+    You can define the level of tag cardinality (low, orchestrator, or high) on a per-check basis using the `check_tag_cardinality` parameter. This overrides the global tag cardinality setting defined in the Agent configuration.
+
 ```yaml
 init_config:
-
+# Ignores tags coming from autodiscovery
 ignore_autodiscovery_tags: true
+
+# Override global tag cardinality setting
+check_tag_cardinality: low
 
 # Rest of the config here
 ```
+
+For containerized environments, you can also set these parameters through [Kubernetes Autodiscovery annotations][47].
 
 ### Validation
 
@@ -123,15 +142,41 @@ If you set up [process collection][29], Datadog autodetects technologies running
 
 {{< img src="getting_started/integrations/ad_integrations_1.png" alt="Autodetected integrations" >}}
 
-Each integration has one of three status types:
+Each integration has one of four status types:
 
 - **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
 - **Installed**: This integration is installed and configured on a host.
 - **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
+- **Missing Data**: Integration metrics have not been detected in the last 24 hours. 
 
 ## Security practices
 
 For information on how Datadog handles your data, and other security considerations, see the [Security documentation][30].
+
+## Granular access control
+By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level.
+
+**Note**: The restricted access option is only visible if the integration supports granular access control. To verify if granular access control is supported for an integration, review that [integration's documentation][46].
+{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:70%;" >}}
+
+1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have granular access controls applied. 
+2. Click **Set Permissions**.
+3. By default, everyone in your org has full access. Click **Restrict Access**. 
+4. The dialog box updates to show that members of your organization have **Viewer** access by default.
+5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
+    **Note**: The [Integrations Manage][45] permission is also required to edit individual resources.  
+6. Click **Add**.
+7. The dialog box updates to show the updated permissions.
+8. Click **Save**. The integration page automatically refreshes with updated permissions. 
+
+**Note:** To maintain edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
+
+To restore general access to a integration resource with restricted access, follow the steps below:
+
+1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have general access restored.
+2. Click **Set Permissions**.
+3. Click **Restore Full Access**.
+4. Click **Save**. The integration page automatically refreshes with updated permissions. 
 
 ## What's next?
 
@@ -231,3 +276,5 @@ tagging
 [43]: /metrics/custom_metrics/
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /account_management/rbac/permissions/#integrations
+[46]: /integrations/
+[47]: /containers/kubernetes/integrations/#tag-cardinality

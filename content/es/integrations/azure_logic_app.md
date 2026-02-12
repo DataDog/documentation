@@ -1,28 +1,64 @@
 ---
+app_id: azure-logic-app
+app_uuid: 55fa5cbe-3eec-4be5-8210-fd805458d629
+assets:
+  dashboards:
+    azure_logic_app: assets/dashboards/azure_logic_app.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.logic_workflows.run_latency
+      metadata_path: metadata.csv
+      prefix: azure.logic_workflows
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 181
+    source_type_name: Azure Logic App
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- "cloud"
-- "configuration & deployment"
-- "network"
-- "azure"
-custom_kind: "integración"
+- nube
+- configuración y despliegue
+- network
+- azure
+custom_kind: integración
 dependencies: []
-description: "Realiza un seguimiento de flujos de trabajo de activación, latencia de acciones, acciones fallidas y mucho más."
-doc_link: "https://docs.datadoghq.com/integrations/azure_logic_app/"
+display_on_public_website: true
 draft: false
-git_integration_title: "azure_logic_app"
-has_logo: true
-integration_id: "azure-logic-app"
-integration_title: "Microsoft Azure Logic App"
-integration_version: ""
+git_integration_title: azure_logic_app
+integration_id: azure-logic-app
+integration_title: Azure Logic App
+integration_version: ''
 is_public: true
-manifest_version: "1.0"
-name: "azure_logic_app"
-public_title: "Integración de Datadog y Microsoft Azure Logic App"
-short_description: "Realiza un seguimiento de flujos de trabajo de activación, latencia de acciones, acciones fallidas y mucho más."
-version: "1.0"
+manifest_version: 2.0.0
+name: azure_logic_app
+public_title: Azure Logic App
+short_description: Logic App permite a los desarrolladores diseñar procesos que articulan
+  la intención a través de un activador y una serie de pasos.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Network
+  - Category::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Logic App permite a los desarrolladores diseñar procesos que articulan
+    la intención a través de un activador y una serie de pasos.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Logic App
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Microsoft Azure Logic App permite a los desarrolladores diseñar flujos de trabajo que articulen intenciones a través de un activador y una serie de pasos.
@@ -36,7 +72,7 @@ Obtén métricas de Azure Logic App para:
 
 ### Instalación
 
-Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requiere ningún paso de instalación adicional.
 
 ## Datos recopilados
 
@@ -52,11 +88,10 @@ La integración Azure Logic App no incluye eventos.
 
 La integración Azure Logic App no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
-[1]: https://docs.datadoghq.com/integrations/azure/
+[1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_logic_app/azure_logic_app_metadata.csv
-[3]: https://docs.datadoghq.com/help/
-
+[3]: https://docs.datadoghq.com/es/help/

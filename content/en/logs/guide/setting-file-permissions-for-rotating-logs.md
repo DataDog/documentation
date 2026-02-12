@@ -48,7 +48,7 @@ setfacl -m u:dd-agent:rx /var/log/apache
 
 ### Setting permissions for log file rotation
 
-[Setting the permissions][4] once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
+Setting the permissions once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
 
 ```shell
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -115,4 +115,3 @@ Each common off-the-shelf application will follow a similar nomenclature. The ad
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
 [2]: https://www.tecmint.com/secure-files-using-acls-in-linux
 [3]: http://xmodulo.com/configure-access-control-lists-acls-linux.html
-[4]: http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux

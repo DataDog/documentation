@@ -3,6 +3,192 @@
         {
             "name": "docs_alias",
             "file_path": "./public/search.json",
+            "schema": {
+                "fields": [
+                    {
+                        "facet": false,
+                        "index": false,
+                        "infix": false,
+                        "locale": "",
+                        "name": "category",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "content",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": true,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "distinct_base_url",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": false,
+                        "infix": false,
+                        "locale": "",
+                        "name": "full_url",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": true,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "language",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": false,
+                        "infix": false,
+                        "locale": "",
+                        "name": "objectID",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "order",
+                        "optional": true,
+                        "sort": true,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "int32"
+                    },
+                    {
+                        "facet": false,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "rank",
+                        "optional": false,
+                        "sort": true,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "int32"
+                    },
+                    {
+                        "facet": true,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "relpermalink",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "section_header",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": false,
+                        "infix": false,
+                        "locale": "",
+                        "name": "subcategory",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": true,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "tags",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string[]"
+                    },
+                    {
+                        "facet": false,
+                        "index": true,
+                        "infix": false,
+                        "locale": "",
+                        "name": "title",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    },
+                    {
+                        "facet": false,
+                        "index": false,
+                        "infix": false,
+                        "locale": "",
+                        "name": "type",
+                        "optional": true,
+                        "sort": false,
+                        "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
+                        "type": "string"
+                    }
+                ]
+            },
             "synonyms": [
                 {
                     "id": "agent",
@@ -10,11 +196,11 @@
                 },
                 {
                     "id": "azure",
-                    "synonyms": ["microsoft azure", "azure"]
+                    "synonyms": ["microsoft azure", "azure", "azure integration"]
                 },
                 {
                     "id": "gcp",
-                    "synonyms": ["gcp", "google cloud platform"]
+                    "synonyms": ["gcp", "google cloud platform", "google cloud integration", "gcp integration"]
                 },
                 {
                     "id": "aws",
@@ -66,28 +252,42 @@
                 }
             ],
             "presets": [
-                  {
-                      "name": "docs_alias_view",
-                      "search_parameters": {
-                          "query_by": "tags,title,section_header,content",
-                          "query_by_weights": "4,3,2,2",
-                          "group_by": "distinct_base_url",
-                          "group_limit": 1,
-                          "stopwords": "stopwords"
-                      }
-                  },
-                  {
-                      "name": "docs_alias_api_view",
-                      "search_parameters": {
-                          "sort_by": "rank:asc,_text_match:desc",
-                          "query_by": "tags,content,title,section_header",
-                          "group_by": "distinct_base_url",
-                          "group_limit": 1,
-                          "stopwords": "stopwords"
-                      }
-                  }
-              ]
+                {
+                    "name": "docs_alias_view",
+                    "search_parameters": {
+                        "query_by": "tags,title,section_header,content",
+                        "query_by_weights": "4,3,2,2",
+                        "group_by": "distinct_base_url",
+                        "group_limit": 1,
+                        "stopwords": "stopwords",
+                        "group_max_candidates": 1000
+                    }
+                },
+                {
+                    "name": "docs_alias_api_view",
+                    "search_parameters": {
+                        "sort_by": "rank:asc,_text_match:desc",
+                        "query_by": "tags,content,title,section_header",
+                        "group_by": "distinct_base_url",
+                        "group_limit": 1,
+                        "stopwords": "stopwords",
+                        "group_max_candidates": 1000
+                    }
+                }
+            ]
+        },
+        {
+            "name": "docs_partners_alias",
+            "file_path": "./public/partners.json",
+            "presets": [
+                {
+                    "name": "docs_partners_view",
+                    "search_parameters": {
+                        "query_by": "title,content",
+                        "sort_by": "_text_match:desc"
+                    }
+                }
+            ]
         }
     ]
 }
-

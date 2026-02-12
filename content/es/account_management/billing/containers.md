@@ -8,6 +8,8 @@ Los contenedores son compatibles con los planes Pro y Enterprise. En función de
 
 Los contenedores adicionales se cobran con un [coste extra][1] por contenedor y hora. Además, se pueden adquirir contenedores de prepago. Ponte en contacto con [Ventas][2] o con tu gestor de [satisfacción del cliente][3] para informarte sobre los contenedores para tu cuenta.
 
+Para limitar los contenedores monitorizados con Datadog, consulta [Gestión de la detección de contenedores][8].
+
 ### Kubernetes
 
 Kubernetes crea contenedores "pause" (se requiere el Agent v5.8 o posterior) para adquirir la dirección IP del pod correspondiente y configurar el espacio de nombres de red para el resto de contenedores que se unan a ese pod. Datadog no incluye ningún contenedor "pause" en tu cuota y no te cobra por ellos (para excluir este tipo de contenedores de AWS EKS es necesario el Agent v7.20 o posterior).
@@ -62,3 +64,4 @@ Si tienes preguntas sobre facturación, ponte en contacto con tu [asesor de clie
 [5]: /es/agent/kubernetes/distributions/?tab=helm#autopilot
 [6]: /es/integrations/google_kubernetes_engine/
 [7]: /es/help/
+[8]: /es/containers/guide/container-discovery-management

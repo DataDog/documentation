@@ -3,8 +3,9 @@ aliases:
 - /ko/integrations/azure_networkinterface
 categories:
 - azure
-- cloud
+- 클라우드
 - 네트워크
+custom_kind: 통합
 dependencies: []
 description: Azure Network Interface의 핵심 메트릭 추적하기.
 doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
@@ -15,7 +16,6 @@ integration_id: azure-networkinterface
 integration_title: Microsoft Azure Network Interface
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: azure_network_interface
 public_title: Datadog-Microsoft Azure Network Interface 통합
@@ -36,17 +36,17 @@ Datadog Azure 통합을 사용해 Azure Network Interface 메트릭을 수집할
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_network_interface" >}}
+{{ get-metrics-from-git "azure-networkinterface" }}
 
 
 ### 이벤트
 
 Azure Network Interface 통합에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure Network Interface 통합에는 서비스 점검이 포함되어 있지 않습니다.
 

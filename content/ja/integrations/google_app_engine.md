@@ -52,7 +52,7 @@ Google App Engine のログは Google Cloud Logging で収集され、Cloud Pub/
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_app_engine" >}}
+{{< get-metrics-from-git "google-app-engine" >}}
 
 
 ### イベント

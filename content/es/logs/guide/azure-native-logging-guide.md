@@ -3,6 +3,9 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentación
   text: Aprende a explorar tus logs
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: Guía
+  text: Enviar logs a Datadog reduciendo las tarifas de transferencia de datos
 title: Enviar logs de Azure con el recurso de Datadog
 ---
 
@@ -14,7 +17,7 @@ Utiliza esta guía para configurar y gestionar el registro directamente desde tu
 
    - [Logs de actividad](#activity-logs)
    - [Logs de recurso de Azure](#azure-resource-logs)
-   - [Logs de Azure Active Directory (Azure AD)](#azure-active-directory-azure-ad-logs)
+   - [Logs de Microsoft Entra ID](#microsoft-entra-id-logs)
 
 **Nota**: El recurso de Datadog en Azure solo está disponible para organizaciones de Datadog en el sitio US3 de Datadog. Si utilizas cualquier otro [sitio de Datadog][5], consulta la guía [Enviar logs de Azure a Datadog][6] para conocer las opciones de configuración.
 
@@ -24,7 +27,7 @@ Brinda información sobre las operaciones en tus recursos en el [plano de contro
 
 Para enviar los logs de actividad a Datadog, selecciona **Send subscription activity logs** (Enviar logs de actividad de suscripción). Si esta opción se deja sin marcar, no se enviará ninguno de los logs de actividad a Datadog.
 
-<div class="alert alert-warning">Cuando se habilita la recopilación de logs, el recurso de Datadog modifica automáticamente las configuraciones de registro de los <a href="https://learn.microsoft.com/azure/app-service/">servicios de aplicación</a>. Azure activa un <strong>reinicio</strong> para los servicios de aplicación cuando cambian sus configuraciones de registro.</div>
+<div class="alert alert-danger">Cuando se habilita la recopilación de logs, el recurso de Datadog modifica automáticamente las configuraciones de registro de los <a href="https://learn.microsoft.com/azure/app-service/">servicios de aplicación</a>. Azure activa un <strong>reinicio</strong> para los servicios de aplicación cuando cambian sus configuraciones de registro.</div>
 
 ## Logs de recursos de Azure
 
@@ -44,13 +47,13 @@ Por ejemplo, la captura de pantalla siguiente muestra una regla de etiqueta en l
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Azure US3 crea logs de recursos de Datadog " responsive="true" style="width:90%;">}}
 
-## Logs de Azure Active Directory (Azure AD)
+## Logs de Microsoft Entra ID
 
-Los logs de Azure AD contienen el historial de la actividad de inicio de sesión y un rastro de auditoría de los cambios realizados en Azure AD para un inquilino concreto. Para enviar estos logs a Datadog, primero completa el proceso para crear un recurso de Datadog. Una vez que tengas un recurso de Datadog en Azure, sigue los pasos de configuración de la guía [Datadog en el Portal de Azure][3].
+Los logs de Microsoft Entra ID contienen el historial de la actividad de inicio de sesión y una pista de auditoría de los cambios realizados en Microsoft Entra ID para un inquilino concreto. Para enviar estos logs a Datadog, primero completa el proceso para crear un recurso Datadog. Una vez que tengas un recurso Datadog en Azure, sigue los pasos de configuración de la guía [Datadog en el portal Azure][3].
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
 [2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
-[3]: https://docs.datadoghq.com/es/integrations/guide/azure-portal/#azure-active-directory-logs
+[3]: https://docs.datadoghq.com/es/integrations/guide/azure-portal/#microsoft-entra-id-logs
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [5]: /es/getting_started/site/
 [6]: /es/logs/guide/azure-logging-guide
@@ -63,6 +66,6 @@ Los logs de Azure AD contienen el historial de la actividad de inicio de sesión
 
 {{< /site-region >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -22,7 +22,7 @@ short_description: Rastrea las métricas principales de Azure App Service Enviro
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure App Service Environment es una característica de Azure App Service que proporciona un entorno totalmente aislado y dedicado para ejecutar de forma segura aplicaciones de App Service a gran escala.
@@ -33,12 +33,12 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure A
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_app_service_environment" >}}
+{{ get-metrics-from-git "azure-appserviceenvironment" }}
 
 
 ### Eventos
@@ -49,9 +49,9 @@ La integración Azure App Service Environment no incluye ningún evento.
 
 La integración Azure App Service Environment no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_service_environment/azure_app_service_environment_metadata.csv

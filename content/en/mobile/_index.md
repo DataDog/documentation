@@ -1,10 +1,14 @@
 ---
 title: Datadog Mobile App
+description: "Monitor your infrastructure on-the-go with the Datadog mobile app for iOS and Android, featuring dashboards, alerts, incidents, and on-call management."
 aliases:
 - /service_management/mobile/
 algolia:
   tags: ["Datadog mobile app", "mobile device"]
 further_reading:
+- link: "/mobile/shortcut_configurations/"
+  tag: "Documentation"
+  text: "Shortcut Configurations"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Learn about Monitors and Alerting"
@@ -17,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-getting-started/"
   tag: "Blog"
   text: "Getting started with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
+  tag: "Blog"
+  text: "Reduce your mean time to repair with the Datadog mobile app"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -31,13 +38,13 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
+SAML login requires you to set up and authenticate your SAML provider with Datadog using your default iOS/Android browser. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
 1. In the mobile app, select your data center region (for example, US1) in the upper right corner.
 2. Press the log-in button.
 3. Click the "Using Single Sign-On (SAML)?" link.
 4. Enter your company email and send the email.
-5. While on your mobile device, open the email and click on the indicated link.
+5. While on your mobile device, open the email and click on the indicated link through your default browser.
 6. Enter your org's SAML credentials to be rerouted to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
@@ -60,424 +67,262 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
 
-## Monitors
+##### Subdomain login
 
-{{< img src="service_management/mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+1. Tap subdomain and enter your custom [subdomain][29].
+2. Proceed with login steps as prompted.
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
+### Switch organizations
 
-For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. Lastly, view and run synthetic tests when viewing your synthetic monitors.
+To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**. 
 
-**Note:** To set up or edit monitors, notifications, or saved views, you need to do it in the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
+**Note**: You may need to reauthenticate when you switch organizations.
 
-## Dashboards
+### Log out
+To log out, navigate to the **Settings** page on the mobile app and click on **Log Out**. Confirm **Yes** that you are sure. 
 
-{{< img src="service_management/mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
+## On-Call
+{{< tabs >}}
+{{% tab "iOS" %}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
+{{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS on-call page showing shifts, schedules, and escalation options">}}
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android on-call page showing shifts, schedules, and escalation options">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The On-Call page provides a comprehensive view of On-Call shifts, schedules, pages, and escalation policies. You can filter the information by user, team, urgency, status, or date to quickly find relevant details. Tapping **Escalate** prompts you to confirm the escalation to the next policy level. Tapping **Declare Incident** prompts you to enter a title and provide relevant incident attributes.
+
+You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits AI SRE monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
+
+To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
 ## Incidents
 
-{{< img src="service_management/mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< tabs >}}
+{{% tab "iOS" %}}
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
+{{< img src="service_management/mobile/incident_may_2025.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/Android_Incident.png" alt="Incidents page in the Datadog On-call mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Incidents page, you can view, search, and filter all incidents that you have access to in your Datadog account to ensure response and resolution from anywhere. You can also declare and edit incidents, and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see [Datadog Incident Management][12].
 
 ### Create an incident
 
-1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the "+" button in the top right corner.
+1. Navigate to the incident list by tapping on the Incidents Tab in the bottom bar.
+2. Tap the **+** button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
-### Receive push notifications for incidents
-
-1. Navigate to **Account**.
-2. Click **Notifications**.
-3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
-5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
-6. Select your mobile device and click **Save**.
-
-For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
-
-## Widgets
-
-### Open Incidents widget
-
-{{< img src="service_management/mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
-
-View your [open incidents][12] from your mobile home screen with Datadog widgets.
-
-To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app.
-
-Also, you can customize your Open Incidents widgets by filtering on:
-
-- Organization
-- Severity levels
-- Customers impacted
-- Ordering
-
-#### Create an Open Incidents widget
-
+## Notification Center
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-1. Tap the **+** button on the top left corner of the screen.
-2. Search for "Datadog" widgets.
-3. Select your preferred size (small, medium, or large).
-4. Drag the widget to your desired, on-screen location.
-
+{{< img src="service_management/mobile/ios_notification_center.png" alt="ios Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-1. Long press on your home screen.
-2. Tap the **Widgets** button on your home screen editor. If you have app shortcuts, it might appear as only an icon on the top right corner of the bubble.
-3. Drag the widget to your desired, on-screen home screen.
-4. Resize the widget to fit your preference.
-
+{{< img src="service_management/mobile/android_notification_center.png" alt="Android Notification center in the Datadog mobile app" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Edit an Open Incidents widget
+The Notification Center lists all push notifications received so that notification context is never lost. You can filter by notification type.
+
+## Dashboards
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-1. Long press the widget to configure.
-2. Tap **Edit Widget**.
-2. Tap **Choose** next to the **Organzation** label to fetch open incidents from the selected organization.
-3. Tap **SEV-1 and SEV-2** next to the Severities label to specify severity filters.
-4. Tap **Both** next to the **Customer Impacted** label to filter on open incidents that have impacted customers.
-5. Type in the **Type additional filters** text box to specify any further filtering.
-6. Tap **Ordering** to specify the order of how incidents are listed.
-7. Tap outside of the widget to save your selection and exit the configuration screen.
-
+{{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS dashboard page showing list of dashboards with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-1. Tap the widget title to configure.
-2. Tap **Organization** to fetch open incidents from the selected organization.
-3. Tap **Severities** to specify severity filters.
-4. Tap **Customer impacted** to filter on open incidents that have impacted customers.
-5. Tap **Query** to specify any further filtering.
-6. Tap **Sorted by** to specify the order of how incidents are listed.
-7. Tap **Save** or **Apply** to save your selection and exit the configuration screen.
-8. Long press and resize the widget to fit your preference.
-
+{{< img src="service_management/mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android dashboard page showing list of dashboards with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Display Open Incidents from multiple organizations
+On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
-You can display open incidents from multiple organizations on your mobile home screen.
+**Note**: 
+- To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
+- Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
+- Not all widget types are available, which means they do not display data on the mobile app. This includes Topology Map, List Widget (all data sources), Legacy treemap widget, and SLO Summary widget.
 
-{{< tabs >}}
-{{% tab "iOS" %}}
-- Tap **Choose** next to the Organization label to fetch open incidents from the selected organization.
-
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-1. Tap the widget title to configure.
-2. From the configuration screen, tap **Organization**.
-3. Select a new organization (you may need to sign in).
-4. Size the widget to fit your preference.
-5. Tap **Save** or **Apply**.
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Delete an Open Incidents widget
+## Monitors
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Delete a widget by tapping the **-** button at the top left of the widget when editing your home screen, or by long pressing the widget and selecting **Remove Widget**.
-
+{{< img src="service_management/mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS monitors page showing list of monitors with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Delete a widget by long pressing, dragging, and dropping the widget to the **Remove** button.
-
+{{< img src="service_management/mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android monitors page showing list of monitors with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### SLOs widget
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
 
-{{< img src="service_management/mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access to previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. You can also view and run synthetic tests when viewing your synthetic monitors.
 
-View your [SLOs][15] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
+**Note**: To set up or edit monitors, notifications, or saved views, you must use the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
 
-Timeframe options are:
-- 7 days
-- 30 days
-- 90 days
-- Previous week
-- Previous month
-- Week to date
-- Month to date
-
-You can also specify a dashboard that opens by default when you tap on an SLOs widget, allowing you to quickly investigate further into your metrics.
-
-**Note**: If you do not specify a dashboard that opens by default, tapping an SLOs widget opens the Datadog app.
-
-#### Create an SLOs widget
+## Notebooks
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on your home screen.
-- Tap the "+" button on the top left corner of the screen.
-- Search for "Datadog" widgets.
-- Select your preferred size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
-- Drag the widget to your desired, on-screen location.
-
+{{< img src="service_management/mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS notebooks page showing list of notebooks with search and filter options">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Long press on your home screen.
-- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the widget to your desired, on-screen home screen.
-- Resize the widget to fit your preference. It always shows one SLO. If you size the widget to take up the width of your mobile home screen, it displays the selected SLO along with a visualized timeframe of its health.
-
+{{< img src="service_management/mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android notebooks page showing list of notebooks with search and filter options">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Edit an SLOs widget
+On the Notebooks page, you can view and search all of the notebooks that you have access to in your Datadog org, and filter them by tags. Notebook tags allow you to filter by favorites, team, and type. See [notebook tags][19] for more information.
 
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-- Long press on the widget to configure.
-- Tap "Edit Widget."
-- Tap "Choose" next to the SLO label to choose an SLO to track.
-- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe.
-- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped.
-- Tap out of the widget to validate your selection and exit the configuration screen.
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-- Tap the widget title to configure.
-- Tap "Selected SLO" to choose an SLO to track.
-- Tap "Selected Time Window" to choose the SLO timeframe.
-- Tap "Dashboard to open" to choose a dashboard that opens when the SLOs widget is tapped.
-- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
-- Long press and resize the widget to fit your preference.
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Display SLOs from multiple organizations
-
-You can display SLOs from multiple organizations on your mobile home screen.
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-All organizations you've logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-- Tap the widget title to configure.
-- From the configuration screen, tap "Organization".
-- Select a new organization (You might need to sign in).
-- Size the widget to fit your preference.
-- Tap "Save" or "Apply".
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Delete an SLOs widget
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Monitors widget
-
-{{< img src="service_management/mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
-
-View your [monitors][16] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
-
-**Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
-
-#### Create a Monitors widget
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-- Long press on the home screen.
-- Tap the "+" button on the top left corner of the screen.
-- Search for "Datadog" widgets.
-- Select your preferred size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
-- Drag the widget to your desired, on-screen location.
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-- Long press on your home screen.
-- Tap "Widgets" on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the widget to your desired, on-screen home screen.
-- Resize the widget to fit your preference. To show more saved views, increase the length of the widget on your mobile home screen.
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Edit a Monitors widget
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-- Long press on the widget to configure.
-- Tap on "Edit Widget".
-- Tap on the individual saved view cell to select and deselect.
-- Reorder the views by dragging and dropping each cell.
-- Tap out of the widget to validate your selection and exit the configuration screen.
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-- Tap on the widget title to configure.
-- Tap on "Saved Views".
-- Tap on the individual saved view cell to select and deselect.
-- Reorder the views by dragging and dropping each cell.
-- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
-- Scroll inside the widget to see more saved views. Long press and resize the widget to fit your preference.
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Display Monitors from multiple organizations
-
-You can display Monitors from multiple organizations within the same widget.
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-All organizations you've logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-- Tap the widget title to configure.
-- From the configuration screen, tap "Organization".
-- Select a new organization (you might need to sign in).
-- Edit the widget to fit your preference.
-- Tap "Save" or "Apply".
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Delete a Monitors widget
-
-{{< tabs >}}
-{{% tab "iOS" %}}
-
-Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
-
-
-{{% /tab %}}
-{{< /tabs >}}
+**Note**: To set up or edit a notebook, you need to [log in to the Datadog browser app][10]. For more information, see [Notebooks][18].
 
 ## Traces
 
-On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS traces page showing list of traces with search and filter options">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android traces page showing list of traces with search and filter options">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][16].
 
 For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
 
-## Quick actions
+**Only available on iOS**: Watchdog Insights point to latency outliers and error outliers. For more information, see [Watchdog Insights][26].
 
-{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
-Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][17] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
+## Logs
 
-## Search from home screen
+{{< tabs >}}
+{{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
+{{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS logs page showing list of logs with search and filter options">}}
 
-**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the "Search in App" button to open the search query in the in-app Dashboard List page.
+{{% /tab %}}
+{{% tab "Android" %}}
 
-## Shortcuts and Siri suggestions
+{{< img src="service_management/mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android logs page showing list of logs with search and filter options">}}
 
-**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shortcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
+{{% /tab %}}
+{{< /tabs >}}
 
-**iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an "Open AWS Overview Dashboard" shortcut, open the AWS Overview Dashboard in your mobile app at least once.
+On the Logs page, you can view and search all of the logs or flex logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][23].
 
-With the shortcut, you can access your dashboards and monitors through three key actions:
+You can also group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][22].
 
-- Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
-- Siri Voice: say your shortcut name, such as "Open AWS Overview", and Siri opens your dashboard in-app.
-- Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
+**Note**: To toggle on flex logs, navigate to the logs list and tap on the top right to select enable flex logs.
 
-{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+**Only available on iOS**: Watchdog Insights point to log anomalies and outliers. For more information, see [Watchdog Insights for Logs][25].
 
-For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][18].
 
-## Handoff
+## Services
 
-**iOS Only**: Use Apple Handoff to continue your task across Apple devices. While in use, the icon of the Datadog mobile app appears on your Mac at the left end of the Dock. Click on the icon to open your current dashboard or monitor on your Mac.
+{{< tabs >}}
+{{% tab "iOS" %}}
 
-For Handoff to work, each device must:
+{{< img src="service_management/mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS services page showing list of services with search and filter options">}}
 
-- Be signed in to iCloud with the same Apple ID
-- Have Bluetooth enabled
-- Have Wi-Fi enabled
-- Have Handoff enabled
+{{% /tab %}}
+{{% tab "Android" %}}
 
-For more information about Handoff, read the [Apple Handoff documentation][19].
+{{< img src="service_management/mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Android services page showing list of services with search and filter options">}}
 
-## Account
+{{% /tab %}}
+{{< /tabs >}}
 
-Switch organizations or log out from the Account page.
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs, and monitors associated with that service. For more information about investigative tools for your services, see [manage Software Catalog][17].
+
+## Bits AI
+
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in ios where a user asks about a service">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI chatbot interface in Android where a user asks about a service">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
+
+### Bits AI SRE
+{{< tabs >}}
+{{% tab "iOS" %}}
+
+{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Bits AI SRE investigation results displayed on an On-Call page">}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+When enabled, Bits AI SRE initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits AI SRE][28].
+
+## Frequently Asked Question
+### How do I remain logged into the mobile app?
+Upon successful authentication to the mobile app, you will remain logged in for 90 days.  
+
+**Note**: If you have notifications enabled, proactive notifications will be sent 10 days prior to token expiration.
+
+### Will I still receive notifications if I am automatically signed out?
+If you are automatically logged out during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
+
+**Note**: If you manually log out from the app, you will stop receiving notifications.
+
+### Why am I not receiving notifications?
+Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### What happens if a user is disabled?
+The mobile app token will be invalid and force the user to log out.
 
 ## Troubleshooting
 
-For help with troubleshooting, [contact Datadog support][20]. You can also send a message in the [Datadog public Slack][21] [#mobile-app][22] channel.
+For help with troubleshooting, [contact Datadog support][13]. You can also send a message in the [Datadog public Slack][14] [#mobile-app][15] channel.
 
-### Further Reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://apps.apple.com/app/datadog/id1391380318
 [2]: https://play.google.com/store/apps/details?id=com.datadog.app
@@ -491,14 +336,20 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /dashboards/
 [12]: /monitors/incident_management
-[13]: https://app.datadoghq.com/incidents/settings#Rules
-[14]: /service_management/incident_management/incident_settings/#rules
-[15]: /dashboards/widgets/slo/#setup
-[16]: /logs/explorer/saved_views/
-[17]: https://app.datadoghq.com/dashboard/lists/preset/5
-[18]: https://support.apple.com/en-us/HT209055
-[19]: https://support.apple.com/en-us/HT209455
-[20]: /help/
-[21]: https://chat.datadoghq.com/
-[22]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[23]: /tracing/trace_explorer/query_syntax/
+[13]: /help/
+[14]: https://chat.datadoghq.com/
+[15]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[16]: /tracing/trace_explorer/query_syntax/
+[17]: https://docs.datadoghq.com/software_catalog/manage/
+[18]: https://docs.datadoghq.com/notebooks/
+[19]: https://docs.datadoghq.com/notebooks/#notebook-tags
+[20]: https://docs.datadoghq.com/incident_response/on-call/
+[21]: /incident_response/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
+[23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[24]: /dashboards/configure/#configuration-actions
+[25]: /logs/explorer/watchdog_insights/
+[26]: /watchdog/insights/?tab=logmanagement
+[27]: /bits_ai/chat_with_bits_ai/
+[28]: /bits_ai/bits_ai_sre/
+[29]: /account_management/multi_organization/#custom-sub-domains

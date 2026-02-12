@@ -1,5 +1,6 @@
 ---
 title: Datadog Windows Agent User
+description: Guide to the ddagentuser account used by the Windows Agent, covering installation, permissions, security policies, and integration considerations.
 aliases:
   - /agent/faq/windows-agent-ddagent-user/
 algolia:
@@ -34,9 +35,12 @@ If a user account is specified on the command line, but this user account is not
 
 To specify the optional USERNAME and PASSWORD on the command line, pass the following properties to the `msiexec` command (The bracket `<>` characters indicate a variable that should be replaced):
 
-```shell
-msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
-```
+{{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
 Requirements:
 * The username must be 20 characters or fewer to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
@@ -63,9 +67,12 @@ If a user account is specified on the command line, but this user account is not
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 
-```shell
-msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
-```
+{{< code-block lang="powershell" >}}
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<DOMAIN>\<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+{{< /code-block >}}
 
 The `<DOMAIN>` can either be a fully-qualified domain name (in the form `mydomain.com`) or the NETBIOS name (the pre-Windows 2000 name).
 It must be separated from the `<USERNAME>` with a backslash `\`.

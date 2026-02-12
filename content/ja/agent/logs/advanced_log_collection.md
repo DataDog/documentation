@@ -259,10 +259,6 @@ spec:
 
 ## ログの機密データのスクラビング
 
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Agent を使用した Sensitive Data Scanner はプレビュー版です。詳細は<a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">ブログ記事</a>と<a href="https://docs.datadoghq.com/sensitive_data_scanner/">ドキュメント</a>をご覧ください。アクセスをリクエストするには、このフォームに記入してください。
-{{< /callout >}}
-
 編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、type に `mask_sequences` を指定します。
 
 これにより、一致したすべてのグループが `replace_placeholder` パラメーターの値に置換されます。
@@ -454,7 +450,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em><br><br>ログ収集はミリ秒単位の精度で動作します。 パターンに一致するログでも、より高い精度のログは送信されません。</div>
+<div class="alert alert-danger"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em><br><br>ログ収集はミリ秒単位の精度で動作します。 パターンに一致するログでも、より高い精度のログは送信されません。</div>
 
 その他の例:
 
@@ -564,9 +560,9 @@ spec:
           image: testApp:latest
 ```
 
-複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数で `datadog.yaml` ファイルにカスタムパターンを追加することもできます。
+自動複数行検出は、一般的な正規表現リストを使用してログとのマッチングを試みます。組み込みリストで不足している場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数を使用して `datadog.yaml` ファイルにカスタムパターンを追加することが可能です。
 
-パターンがライン一致のしきい値に一致しない場合は、より低い値の `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数を追加します。これにより、自動複数行集計が機能するためにログが一致しなければならない頻度を決定するしきい値が構成されます。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
+パターンが行一致のしきい値を満たさない場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数をより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 [1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
 

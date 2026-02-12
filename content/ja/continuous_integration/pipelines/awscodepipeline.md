@@ -14,10 +14,6 @@ further_reading:
 title: AWS CodePipeline パイプラインでトレースをセットアップする
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では 現在 CI Visibility は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 [AWS CodePipeline][1] は、フルマネージド型の継続的デリバリーサービスで、アプリケーションとインフラストラクチャーを高速かつ確実にアップデートできるよう、リリースパイプラインの自動化を支援します。
@@ -30,7 +26,7 @@ AWS CodePipeline でトレースをセットアップすると、パイプライ
 |---|---|---|
 | [部分的なリトライ][14] | 部分的なパイプライン | 部分的にリトライされたパイプラインの実行を表示します。 |
 | *[実行中のパイプライン][15] | 実行中のパイプライン | 実行中のパイプラインを表示します。キューに置かれているパイプラインや待機中のパイプラインは、Datadog で "Running" のステータスと共に表示されます。 |
-| **ログの相関付け | ログの相関付け | パイプラインとジョブスパンを相関付けして、[ジョブログの相関付け](#enable-log-correlation)を可能にします。 |
+| **ログの相関付け | ログの相関付け | パイプラインとジョブスパンを相関付けして、[ジョブログの相関付け](#collect-job-logs)を可能にします。 |
 | [承認待ち時間][17] | 承認待ち時間  | ジョブとパイプラインの相互承認の待ち時間を表示します。 |
 | [カスタムスパン][18] | カスタムスパン | パイプラインのカスタムスパンを構成します。 |
 
@@ -85,7 +81,7 @@ AWS CodePipeline でトレースをセットアップすると、パイプライ
 ### 特定のパイプラインのみ監視
 
 オプションで、Pipeline Visibility で監視するパイプラインを制限することもできます。
-これを行うには、EventBridge ルールの作成時に定義したルールイベント パターンに `detail.pipeline` フィルターを追加します。例: 
+これを行うには、EventBridge ルールの作成時に定義したルールイベント パターンに `detail.pipeline` フィルターを追加します。例:
 
 ```
  {
@@ -107,7 +103,7 @@ AWS CodePipeline でトレースをセットアップすると、パイプライ
 
 AWS CodePipeline インテグレーション は、**CodeBuild** アクションとそれぞれのジョブおよびパイプラインスパンとの相関付けをサポートしています。CodeBuild アクションに対してログ収集を有効にするには、[AWS ログ転送ガイド][16]を参照してください。
 
-<div class="alert alert-warning"><strong>注</strong>: CodeBuild アクションを対象としたログの相関付けを行うには、CodeBuild プロジェクトにデフォルトの CloudWatch ロググループおよびログストリーム名が必要です。</div>
+<div class="alert alert-danger"><strong>注</strong>: CodeBuild アクションを対象としたログの相関付けを行うには、CodeBuild プロジェクトにデフォルトの CloudWatch ロググループおよびログストリーム名が必要です。</div>
 
 <div class="alert alert-info"><strong>注</strong>: ログは CI Visibility とは別に課金されます。ログの保持、除外、インデックスの構成は、ログの設定で行います。AWS CodeBuild のログは <code>source:codebuild</code> と <code>sourcecategory:aws</code> のタグで識別できます。</div>
 

@@ -33,7 +33,7 @@ Under **Region**, select the regions you want to scan. By default, `Global` and 
 
 After you make your selections, regions are scanned automatically and the number of resources found is displayed next to the region name. You can click the **Sync** button above the **Region** section to trigger a manual scan of all selected regions.
 
-<div class="alert alert-warning">Selecting many regions may impact performance of the live scanning process.</div>
+<div class="alert alert-danger">Selecting many regions may impact performance of the live scanning process.</div>
 
 ## Filter resources
 

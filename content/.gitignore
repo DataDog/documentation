@@ -1,0 +1,18 @@
+
+# THIS IS A GENERATED FILE. Manual edits will be overwritten. 
+
+# To ignore a content file manually, add it to the .gitignore file in the root of the documentation repository: https://github.com/DataDog/documentation/blob/master/.gitignore
+
+# This file lists compiled Cdocs files to keep them out of version control. For more information, see the internal Cdocs documentation: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4898063037/Cdocs+Build
+
+/en/opentelemetry/instrument/dd_sdks/api_support.md
+/en/real_user_monitoring/correlate_with_other_telemetry/profiling/_index.md
+/en/real_user_monitoring/guide/proxy-mobile-rum-data.md
+/en/real_user_monitoring/guide/proxy-rum-data.md
+/en/session_replay/mobile/privacy_options.md
+/en/session_replay/mobile/setup_and_configuration.md
+/en/tracing/trace_collection/custom_instrumentation/server-side/_index.md
+/en/error_tracking/error_grouping.md
+/en/logs/error_tracking/error_grouping.md
+/en/real_user_monitoring/error_tracking/error_grouping.md
+/en/tracing/error_tracking/error_grouping.md

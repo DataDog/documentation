@@ -3,11 +3,12 @@
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $is_scrollable_carousel := (gt $asset_len 3)}}
 {{ $carousel_item_vertical := newScratch }}
+{{- $app_listings_bucket := cond (eq hugo.Environment "live") "dd-app-listings" "dd-app-listings-staging" -}}
 
-<div 
+<div
 @keydown.window.left="navigateCarousel('prev')"
 @keydown.window.right="navigateCarousel('next')"
-class="integrations-carousel container container p-0"
+class="integrations-carousel container p-0"
 x-data="{
     activeSlide: 0,
     scrollByHeight: 0,
@@ -74,7 +75,7 @@ x-data="{
         }
     },
     shouldShowActiveHorizontalSlide (idx) {
-        // Determine whether horizontal carousel item should be visible 
+        // Determine whether horizontal carousel item should be visible
         return idx === this.activeSlide
     },
     isActiveVertical (idx, btn) {
@@ -90,7 +91,7 @@ x-data="{
         if(this.isScrollable){
             this.scrollByHeight = this.verticalCarouselEl.children[1].offsetTop
             if(window.innerWidth < 768){
-                this.scrollByHeight = 103 
+                this.scrollByHeight = 103
             }
         }
     },
@@ -105,24 +106,24 @@ x-data="{
             <div class="carousel-items__horizontal h-100 position-relative">
                 {{ range $idx, $elm := $media }}
                 <div
-                @click="{{if not $elm.vimeo_id}}$store.integrationsModal.openModal(activeSlide){{end}}" 
-                id="carousel-item-horizontal-{{add $idx 1}}" 
-                class="carousel-item__horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}" 
+                @click="{{if not $elm.vimeo_id}}$store.integrationsModal.openModal(activeSlide){{end}}"
+                id="carousel-item-horizontal-{{add $idx 1}}"
+                class="carousel-item__horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}"
                 :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
                 x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
                 x-transition.opacity.duration.500ms>
                     {{ if eq $elm.media_type "image"}}
-                    <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
+                    <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
                     {{ else }}
                     <iframe x-ref="iframe" class="d-none" src="https://player.vimeo.com/video/{{ $elm.vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3"></iframe>
-                    <img 
+                    <img
                     x-ref="playOverlay"
-                    class="play-overlay position-relative h-100 w-100 rounded-1" 
-                    src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
+                    class="play-overlay position-relative h-100 w-100 rounded-1"
+                    src="https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}"
                     alt="{{ $elm.caption }}">
-                    <button 
+                    <button
                     @click="$store.integrationsModal.playVideo($refs)"
-                    x-ref="playBtn" 
+                    x-ref="playBtn"
                     class="play-btn rounded-circle position-absolute top-50 start-50 translate-middle">
                         <div class="play-icon position-relative"></div>
                     </button>
@@ -131,14 +132,14 @@ x-data="{
                 {{ end }}
             </div>
             {{ if gt $asset_len 1 }}
-            <button 
-            class="carousel-controller__arrow prev position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0 p-0" 
+            <button
+            class="carousel-controller__arrow prev position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0 p-0"
             @click="navigateCarousel('prev')">
                 <div class="control-arrow"></div>
                 <div class="visually-hidden">Previous</div>
             </button>
-            <button 
-            class="carousel-controller__arrow next position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0 p-0" 
+            <button
+            class="carousel-controller__arrow next position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0 p-0"
             @click="navigateCarousel('next')">
                 <div class="control-arrow"></div>
                 <div class="visually-hidden">Next</div>
@@ -146,7 +147,7 @@ x-data="{
             {{ end }}
         </div>
         {{/*  Carousel (vertical)  */}}
-        <div 
+        <div
         class="carousel-items__vertical d-none overflow-hidden h-100 d-md-block col-md-3"
         x-init="setScrollByHeight(); setActiveBtnOffsetTop()"
         x-ref="verticalCarousel"
@@ -155,39 +156,42 @@ x-data="{
                 {{ $base_idx := (sub $asset_len 4) }}
                 {{ if and (gt $idx $base_idx) $is_scrollable_carousel}}
                 {{ $carousel_item_vertical.Set "idx" (sub $idx $base_idx) }}
-                <button 
+                {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
+                <button
                 id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
                 data-index="{{ add $idx 1 }}"
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: `url('{{ $image_url }}')`}"
                 >
                 </button>
                 {{ end }}
             {{ end }}
             {{ range $idx, $elm := $media }}
             {{ $carousel_item_vertical.Add "idx" 1 }}
+            {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
             <button
             id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
             data-index="{{ add $idx 1 }}"
             class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
-            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+            :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: `url('{{ $image_url }}')`}"
             >
             </button>
             {{ end }}
             {{ range $idx, $elm := first 1 $media }}
                 {{ if $is_scrollable_carousel}}
                 {{ $carousel_item_vertical.Add "idx" 1 }}
-                <button 
+                {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
+                <button
                 id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
                 data-index="{{ add $idx 1 }}"
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+                :style="{transform: `translateY(-${scrollByHeight * 2}px)`, backgroundImage: `url('{{ $image_url }}')`}"
                 >
                 </button>
                 {{ end }}
@@ -197,9 +201,9 @@ x-data="{
     {{/*  Carousel item description  */}}
     <div class="carousel-item-descriptions p-0">
         {{ range $idx, $el := $media }}
-        <div 
+        <div
         id="carousel-item-description-{{ add $idx 1 }}"
-        class="carousel-item-description" 
+        class="carousel-item-description"
         :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
         x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
             <div class="item-counter">

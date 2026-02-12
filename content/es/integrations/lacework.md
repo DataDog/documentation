@@ -23,7 +23,7 @@ author:
 categories:
 - seguridad
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md
 display_on_public_website: true
@@ -39,7 +39,7 @@ public_title: Lacework
 short_description: Lacework es una plataforma de seguridad para todos tus entornos
   de nube
 supported_os:
-- linux
+- Linux
 - macOS
 - Windows
 tile:
@@ -60,7 +60,7 @@ tile:
   title: Lacework
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -98,7 +98,7 @@ Toda la configuración ocurre en el dashboard de Lacework. Encontrarás más det
 
 La integración de Lacework no recopila métricas.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Lacework no incluye checks de servicios.
 

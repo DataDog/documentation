@@ -12,7 +12,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/docker_metrics.png" alt="OpenTelemetry Docker metrics in a Containers dashboard" style="width:100%;" >}}
 
-To collect container metrics, configure the [Docker stats receiver][1] in your Datadog Exporter.
+To collect container metrics, configure the [Docker stats receiver][1] in your OpenTelemetry Collector and send the data using the Datadog Exporter.
 
 For more information, see the OpenTelemetry project documentation for [the Docker stats receiver][1].
 
@@ -94,6 +94,53 @@ receivers:
 
 {{< /tabs >}}
 
+## Correlate traces with container metrics
+
+To correlate traces with container metrics, both telemetry types must share common resource attributes. These attributes provide the necessary context for correlation.
+
+1. Configure [Unified Service Tagging][9] attributes.
+2. Configure the following attributes on both your traces and metrics:
+
+| Attribute                                | Value                                                          | Description                                                                                                                                                               |
+|------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `container.id` (**Required**)            | The Docker container ID.                                       | Uniquely identifies the container. Essential for correlating spans with container metrics. Without this attribute on traces, container metric views are not shown in APM. |
+| `container.name` or `k8s.container.name` | The human‑readable container name (for example, `redis-otel`). | Used as the display name in Datadog.                                                                                                                                      |
+| `k8s.pod.name`                           | The pod name (for example, `redis-otel-59c9b5c9d5-s9t2r`).     | Enables navigation between pod and container context views in Kubernetes environments.
+
+### Traces
+
+To populate these resource attributes on **traces**:
+
+- You can use a `resourcedetectionprocessor` in your Collector config:
+   ```yaml
+   processors:
+      resourcedetection:
+         detectors: ["env", "container", "k8s"]
+   service:
+      pipelines:
+         traces:
+            processors: [resourcedetection]
+
+   ```
+
+- You can add a container resource detector in your application code.  
+   For example, using Go:
+   ```go
+   // resource.WithContainer() adds container.id attribute to the trace's resource
+   res, err := resource.New(
+       ctx,
+       resource.WithContainer(),                    
+       resource.WithFromEnv(),
+       semconv.ServiceNameKey.String("calendar"),   
+   )
+   ```
+
+   See the complete example in [opentelemetry-examples][8].
+   
+### Metrics  
+   
+To populate these resource attributes on **metrics**, the `docker_stats` receiver automatically detects and adds these attributes on container metrics it emits.
+
 ## Data collected
 
 The Docker Stats receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts for use in the following views:
@@ -101,37 +148,11 @@ The Docker Stats receiver generates container metrics for the OpenTelemetry Coll
 - [Containers Overview default dashboard][6]
 - [APM Trace view][7] with container metrics
 
-**Note**: To correlate trace and container metrics, configure [Universal Service Monitoring attributes][4] for each service, and set the following resource attributes for each service: 
-  - `k8s.container.name` 
-  - `k8s.pod.name` 
-  - `container.name` 
-  - `container.id`
+Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
 
-  Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
+The following table shows the Datadog container metric names that correspond to OpenTelemetry container metric names:
 
-The following table shows what Datadog container metric names are associated with corresponding OpenTelemetry container metric names
-
-| Datadog Metric Name     | OTel Docker Stats Metric Name         | Metric Description             |
-|-------------------------|--------------------------------|----------------------|
-| `container.cpu.usage`    | `container.cpu.usage.total`       | The container total CPU Usage     |
-| `container.cpu.user`     | `container.cpu.usage.usermode`         | The container userspace CPU usage   |
-| `container.cpu.system`    | `container.cpu.usage.system`    | The container system CPU usage      |
-| `container.cpu.throttled`    | `container.cpu. throttling_data.throttled_time`      | The total cpu throttled time      |
-| `container.cpu.throttled.periods` | `container.cpu. throttling_data.throttled_periods`       | The number of periods during which the container was throttled |
-| `container.memory.usage`          | `container.memory.usage.total`      | The container total memory usage      |
-| `container.memory.kernel`         | `container.memory.active_anon`        | The container kernel memory usage     |
-| `container.memory.limit`          | `container.memory. hierarchical_memory_limit`    | The container memory limit    |
-| `container.memory.soft_limit`     | `container.memory.usage.limit`       | The container memory soft limit     |
-| `container.memory.cache`          | `container.memory.total_cache`      | The container cache usage   |
-| `container.memory.swap`           | `container.memory.total_swap`         | The container swap usage      |
-| `container.io.write`              | `container.blockio. io_service_bytes_recursive` <br>Attribute Filter operation=`write` | The number of bytes written to disks by this container         |
-| `container.io.read`               | `container.blockio. io_service_bytes_recursive` <br>Attribute Filter operation=`read`  | The number of bytes read from disks by this container          |
-| `container.io.write.operations`   | `container.blockio. io_serviced_recursive` <br>Attribute Filter operation=`write`      | The number of write operations done by this container          |
-| `container.io.read.operations`    | `container.blockio. io_serviced_recursive` <br>Attribute Filter operation=`read`       | The number of read operations done by this container           |
-| `container.net.sent`              | `container.network.io. usage.tx_bytes`      | The number of network bytes sent (per interface)    |
-| `container.net.sent.packets`      | `container.network.io. usage.tx_packets`    | The number of network packets sent (per interface)   |
-| `container.net.rcvd`              | `container.network.io. usage.rx_bytes`     | The number of network bytes received (per interface)   |
-| `container.net.rcvd.packets`      | `container.network.io. usage.rx_packets`   | The number of network packets received (per interface)    |
+{{< mapping-table resource="dockerstats.csv">}}
 
 See [OpenTelemetry Metrics Mapping][2] for more information.
 
@@ -172,3 +193,5 @@ Value: 0.170933
 [5]: /opentelemetry/guide/semantic_mapping/
 [6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [7]: /tracing/trace_explorer/trace_view/
+[8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
+[9]: /opentelemetry/mapping/semantic_mapping#unified-service-tagging

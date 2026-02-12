@@ -44,19 +44,13 @@
   box-shadow: var(--tooltip-box-shadow);
   max-width: 300px;
   width: max-content;
-  opacity: 0;
-  visibility: hidden;
+  display: none;
   transition: 
-    opacity var(--tooltip-transition-duration) ease-out,
-    visibility 0s linear var(--tooltip-transition-duration),
     width var(--tooltip-transition-duration) ease-out;
   
   &.show {
-    opacity: 1;
-    visibility: visible;
+    display: block;
     transition: 
-      opacity var(--tooltip-transition-duration) ease-out,
-      visibility 0s linear,
       width var(--tooltip-transition-duration) ease-out;
   }
 

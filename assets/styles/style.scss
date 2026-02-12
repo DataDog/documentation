@@ -32,11 +32,11 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 // page specific styles that aren't partials go here
 // partial css lives with partial
 
+@import "pages/partners";
 @import "pages/api";
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";
-@import "pages/standard-attributes";
 @import "pages/reference";
 
 // Components
@@ -66,6 +66,9 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/try-rule-cta-and-banner';
 @import 'components/try-rule-modal';
 @import 'components/learning-center-callout';
+@import 'components/expression-language';
+@import 'components/ddsql-schema';
+@import 'components/admonitions';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
@@ -76,7 +79,27 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 
 @import 'components/tooltip'; // Tooltip shortcode styles
 @import "components/multifilter-search";
+@import "components/filter-search";
 
+// UI labels
+@import "components/ui-label";
 
 // for now just include ie fixes
 @import 'ie';
+
+// Internationalized alert content overrides
+.alert-info::after {
+  content: '{{ i18n "alert_note" }}';
+}
+
+.alert-warning::after {
+  content: '{{ i18n "alert_warning" }}';
+}
+
+.alert-danger::after {
+  content: '{{ i18n "alert_caution" }}';
+}
+
+.alert-tip::after {
+  content: '{{ i18n "alert_tip" }}';
+}

@@ -5,7 +5,7 @@ aliases:
 - /mobile_testing/settings
 - /mobile_app_testing/settings
 further_reading:
-- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create a mobile test"
 - link: "/continuous_testing/cicd_integrations"
@@ -13,10 +13,6 @@ further_reading:
   text: "Run your Synthetic tests in a CI pipeline"
 ---
 {{< jqmath-vanilla >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -32,35 +28,43 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 {{% tab "Android" %}}
 
 1. Select **Android** as the OS for your mobile application.
-2. Name your mobile application.
-3. Add `env` tags as well as additional tags to your mobile application. You can use these tags to quickly filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
-4. Optionally, enter a description for your mobile application.
-5. Upload an [`.apk` file][102].
-6. Enter a name for the version of your mobile application. Optionally, select **Mark this version as latest**.
-7. Click **Create Application**.
+2. Select the framework your application is built with. Supported frameworks are native Android frameworks and React Native.
+3. Name your mobile application.
+4. Add `env` tags as well as additional tags to your mobile application. You can use these tags to filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
+5. Optionally, enter a description for your mobile application.
+6. Upload an [`.apk` file][102].
+7. Enter a name for the version of your mobile application. Optionally, select **Mark this version as latest**.
+8. Click **Create Application**.
 
 [101]: https://app.datadoghq.com/synthetics/tests
 [102]: https://developer.android.com/tools/bundletool
+
+{{< img src="mobile_app_testing/settings/mobile_app_settings_android.png" alt="Create a mobile app test with Android and Native (default) selected" height="400px" >}}
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 1. Select **iOS** as the OS for your mobile application.
-2. Name your mobile application.
-3. Add `env` tags as well as additional tags to your mobile application. You can use these tags to quickly filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
-4. Optionally, enter a description for your mobile application.
-5. Upload an `.ipa` file.
-6. Enter a name for the version of your mobile application. Optionally, select **Mark this version as latest**.
-7. Click **Create Application**.
+2. Select the framework your application is built with. Supported frameworks are native iOS frameworks and React Native.
+3. Name your mobile application.
+4. Add `env` tags as well as additional tags to your mobile application. You can use these tags to filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
+5. Optionally, enter a description for your mobile application.
+6. Upload an `.ipa` file.
+7. Enter a name for the version of your mobile application. Optionally, select **Mark this version as latest**.
+8. Click **Create Application**.
 
 [101]: https://app.datadoghq.com/synthetics/tests
+
+{{< img src="mobile_app_testing/settings/mobile_app_settings_ios.png" alt="Create a mobile app test with iOS and Native (default) selected" height="400px" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 To edit or delete a mobile application, hover over a mobile application in the **Mobile Applications List** and click on the respective icon.
 
-**Note**: Mobile Application Testing does not provide full support for Flutter applications.
+<div class="alert alert-info">
+  <strong>Note</strong>: As of July 2025, React Native applications are officially supported for Mobile Application Testing. No action is needed for React Native applications that were uploaded before official support: tests continue to run as expected. Mobile Application Testing does not provide full support for Flutter applications.
+</div>
 
 ## Manage application versions
 

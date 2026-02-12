@@ -25,6 +25,12 @@ further_reading:
   - link: https://www.datadoghq.com/blog/watchdog-live-processes/
     tag: 'Blog'
     text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
+  - link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
+    tag: "Blog"
+    text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
+  - link: "https://www.datadoghq.com/blog/cnm-network-health"
+    tag: "Blog"
+    text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
 algolia:
   tags: ['watchdog']
 cascade:

@@ -18,32 +18,31 @@ title: 위젯
 위젯은 대시보드의 구성 요소로, 인프라스트럭처 전체에서 데이터를 시각화하고 연계할 수 있도록 해줍니다.
 
 ### 그래프
-{{< whatsnext desc="Datadog 제품의 데이터를 그래프로 표시하는 일반 위젯: ">}}
+{{< whatsnext desc="Datadog 제품에서 데이터를 그래프화할 수 있는 일반 위젯: ">}}
     {{< nextlink href="/dashboards/widgets/change" 
-        img="dashboards/widgets/icons/change_light_large.png">}} 변화 {{< /nextlink >}}
+        img="dashboards/widgets/icons/change_light_large.png">}} 변경 {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
-        img="dashboards/widgets/icons/distribution_light_large.png">}} 분포{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel"
-        img="dashboards/widgets/icons/funnel_light_large.png">}} 퍼널{{< /nextlink >}}
+        img="dashboards/widgets/icons/distribution_light_large.png">}} 분배{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" 
         img="dashboards/widgets/icons/geomap_light_large.png">}} 지오맵{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
         img="dashboards/widgets/icons/heatmap_light_large.png">}} 히트맵{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
-        img="dashboards/widgets/icons/pie_light_large.png">}} 파이 차트{{< /nextlink >}}
+        img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
-        img="dashboards/widgets/icons/query-value_light_large.png">}} 쿼리 값{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} 생키{{< /nextlink >}}
+        img="dashboards/widgets/icons/query-value_light_large.png">}} 쿼리 가치{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
         img="dashboards/widgets/icons/scatter-plot_light_large.png">}} 산점도{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
         img="dashboards/widgets/icons/table_light_large.png">}} 표{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/treemap"
-        img="dashboards/widgets/icons/treemap_light_large.png">}} 트리맵{{< /nextlink >}}
+        img="dashboards/widgets/icons/treemap_light_large.png">}} 트리 맵{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries"
         img="dashboards/widgets/icons/timeseries_light_large.png">}} 시계열{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} 상위 목록{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} 와일드카드{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups
@@ -54,6 +53,26 @@ title: 위젯
         img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} 파워팩{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/split_graph"
         img="dashboards/widgets/icons/group-split_light_small.svg">}} 분할 그래프{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### 제품 분석
+{{< whatsnext desc="제품 분석 데이터 가시화: ">}}
+    {{< nextlink href="/dashboards/widgets/sankey" 
+        img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" 
+        img="dashboards/widgets/icons/funnel_light_large.png">}} 퍼널{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/retention" 
+        img="/dashboards/widgets/icons/cohort_light_small.svg">}} 보존{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### 아키텍처
+{{< whatsnext desc="인프라스트럭처 및 아키텍처 데이터 시각화: ">}}
+    {{< nextlink href="/dashboards/widgets/hostmap" 
+        img="dashboards/widgets/icons/host-map_light_large.png">}} 호스트맵{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" 
+        img="dashboards/widgets/icons/service-map_light_large.png">}} 토폴로지맵{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" 
+        img="dashboards/widgets/icons/service-summary_light_large.png">}} 서비스 요약{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### 주석 및 임베드
@@ -86,16 +105,6 @@ title: 위젯
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} 요약 모니터링{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/run_workflow" 
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} 워크플로우 실행{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### 아키텍처
-{{< whatsnext desc="인프라스트럭처 및 아키텍처 데이터 시각화: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
-        img="dashboards/widgets/icons/host-map_light_large.png">}} 호스트맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
-        img="dashboards/widgets/icons/service-map_light_large.png">}} 토폴로지맵{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
-        img="dashboards/widgets/icons/service-summary_light_large.png">}} 서비스 요약{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### 성능 및 안정성
@@ -145,7 +154,7 @@ title: 위젯
 
 ## 위젯 복사 및 붙여넣기
 
-<div class="alert alert-warning">이 기능을 사용하려면 <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>대시보드 대중 공유</code> 권한</a>이 있어야 하고<a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"> 조직 설정에서 <strong>정적 공개 데이터 공유</strong></a>를 활성화해야 합니다.</div>
+<div class="alert alert-danger">이 기능을 사용하려면 Organization Settings에서 <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a>을 활성화해야 합니다.</div>
 
 [대시보드][4], [노트북][5], [APM 서비스][6], [APM 리소스][7] 페이지에서 `Ctrl + C`(Mac의 경우 `Cmd + C`)를 사용하거나 공유 아이콘을 선택하여 위젯을 복사할 수 있습니다. 
 

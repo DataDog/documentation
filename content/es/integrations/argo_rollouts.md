@@ -43,7 +43,7 @@ draft: false
 git_integration_title: argo_rollouts
 integration_id: argo-rollouts
 integration_title: Argo Rollouts
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_rollouts
@@ -144,7 +144,7 @@ Consulta las [plantillas de integración de Autodiscovery][2] para obtener orien
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "argo_rollouts" >}}
+{{< get-metrics-from-git "argo-rollouts" >}}
 
 
 ### Eventos
@@ -152,7 +152,7 @@ Consulta las [plantillas de integración de Autodiscovery][2] para obtener orien
 La integración de Argo Rollouts no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "argo_rollouts" >}}
+{{< get-service-checks-from-git "argo-rollouts" >}}
 
 
 ## Solucionar problemas

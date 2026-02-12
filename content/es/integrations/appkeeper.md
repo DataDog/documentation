@@ -21,10 +21,10 @@ author:
   sales_email: rd-pd-1@sios.com
   support_email: rd-pd-1@sios.com
 categories:
-- AWS
+- aws
 - nube
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -58,7 +58,7 @@ tile:
   title: AppKeeper
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -102,17 +102,15 @@ Los resultados de las recuperaciones realizadas por AppKeeper aparecen en la GUI
 
 ![snapshot][6]
 
-Para obtener más información, consulta la [documentación de la integración AppKeeper][7].
-
 ## Datos recopilados
 
 ### Métricas
 
-Para ver la lista de métricas proporcionadas por esta integración, consulta [metadata.csv][8].
+Para ver la lista de métricas de esta integración, consulta [metadata.csv][7].
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
@@ -120,6 +118,5 @@ Para ver la lista de métricas proporcionadas por esta integración, consulta [m
 [4]: https://app.datadoghq.com/synthetics/list
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/synthetic_test_params.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
-[7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
-[8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
-[9]: https://docs.datadoghq.com/es/help/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
+[8]: https://docs.datadoghq.com/es/help/

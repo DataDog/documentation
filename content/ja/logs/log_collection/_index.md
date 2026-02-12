@@ -115,7 +115,7 @@ Datadog のインテグレーションとログ収集は連携しています。
 
 ## データ転送料金を削減
 
-Datadog の [Network Performance Monitoring][7] を利用して、組織内で最もスループットの高いアプリケーションを特定しましょう。サポートされているプライベート接続を通じて Datadog に接続し、データをプライベートネットワークで送信することで、パブリックインターネットを避けてデータ転送料金を削減できます。プライベートリンクに切り替えた後は、Datadog の [Cloud Cost Management][8] ツールを使って効果を確認し、クラウドコストの削減状況を監視しましょう。
+Datadog の [Cloud Network Monitoring][7] を利用して、組織内で最もスループットの高いアプリケーションを特定しましょう。サポートされているプライベート接続を通じて Datadog に接続し、データをプライベートネットワークで送信することで、パブリックインターネットを避けてデータ転送料金を削減できます。プライベートリンクに切り替えた後は、Datadog の [Cloud Cost Management][8] ツールを使って効果を確認し、クラウドコストの削減状況を監視しましょう。
 
 詳細については、[データ転送料金を削減しながら Datadog にログを送信する方法][9]をご覧ください。
 
@@ -125,7 +125,7 @@ Datadog の [Network Performance Monitoring][7] を利用して、組織内で�
 [4]: /ja/agent/kubernetes/log/#autodiscovery
 [5]: /ja/agent/docker/log/#log-integrations
 [6]: /ja/integrations/#cat-log-collection
-[7]: /ja/network_monitoring/performance/
+[7]: /ja/network_monitoring/cloud_network_monitoring/
 [8]: /ja/cloud_cost_management/
 [9]: /ja/logs/guide/reduce_data_transfer_fees/
 
@@ -148,7 +148,6 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 | サイト | タイプ        | エンドポイント                                                                  | ポート         | 説明                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。                                                    |
-| US   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Agent が PCI DSS コンプライアンスを有効にした組織へ HTTPS でログを送信するために使用します。詳しくは、[ログ管理のための PCI DSS コンプライアンス][3]を参照してください。                 |
 | US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。                                                             |
 | US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                                                                            |
 | US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                                                                             |
@@ -160,12 +159,11 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 [1]: /ja/api/latest/logs/#send-logs
 [2]: /ja/agent/logs/#send-logs-over-https
-[3]: /ja/data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
-| サイト | タイプ        | エンドポイント                                                                  | ポート | 説明                                                                                                                                                                 |
+| サイト | タイプ        | エンドポイント                                                                  | ポート | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | EU   | HTTPS       | `http-intake.logs.datadoghq.eu`                                           | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。                                                    |
 | EU   | HTTPS       | `agent-http-intake.logs.datadoghq.eu`                                     | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。                                                             |
@@ -181,7 +179,7 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< site-region region="us3" >}}
 
-| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| サイト | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
 |------|-------|---------------------------------------------                              |------|--------------------------------------------------------------------------------------------------------------------------|
 | US3  | HTTPS | `http-intake.logs.us3.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
 | US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
@@ -195,7 +193,7 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< site-region region="us5" >}}
 
-| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| サイト | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US5  | HTTPS | `http-intake.logs.us5.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
 | US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
@@ -209,12 +207,26 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< site-region region="ap1" >}}
 
-| サイト | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| サイト | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
 |------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+
+[1]: /ja/api/latest/logs/#send-logs
+[2]: /ja/agent/logs/#send-logs-over-https
+
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+
+| サイト | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
+|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
+| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
+| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
+| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
+| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
 
 [1]: /ja/api/latest/logs/#send-logs
 [2]: /ja/agent/logs/#send-logs-over-https
@@ -223,7 +235,7 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 
 {{< site-region region="gov" >}}
 
-| サイト    | タイプ  | エンドポイント                                                                  | ポート | 説明                                                                                                              |
+| サイト    | タイプ  | エンドポイント                                                                  | ポート | Description                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
 | US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
@@ -350,7 +362,11 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 この機能を使用するには、以下の属性名を使用します。
 
+<<<<<<< HEAD
 | 属性            | 説明                                                             |
+=======
+| 属性            | Description                                                             |
+>>>>>>> 37c1c0d9e6 (Translated file updates)
 |----------------------|-------------------------------------------------------------------------|
 | `logger.name`        | ロガーの名前                                                      |
 | `logger.thread_name` | 現在のスレッドの名前                                              |
@@ -368,7 +384,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 
 {{< img src="logs/explore.png" alt="ログエクスプローラーに表示されるログ" style="width:100%" >}}
 
-## その他の参考資料
+## 参考情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

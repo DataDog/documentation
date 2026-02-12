@@ -12,7 +12,7 @@
 | Category::Configuration & Deployment | Integrations that monitor platforms that can configure and deploy infrastructure. |
 | Category::Containers | Integrations that track metrics, logs, events, and traces from containers and container management technologies. |
 | Category::Cost Management | Integrations that help track and manage cloud cost. |
-| Category::Data Store | Integrations that monitor data storage solutions such as databases, clusters, data lakes, and more. |
+| Category::Data Stores | Integrations that monitor data storage solutions such as databases, clusters, data lakes, and more. |
 | Category::Developer Tools | Integrations for technologies that developers use to help build applications such as version control, CI/CD, and infrastructure as code. |
 | Category::Event Management | Integrations that send events into Datadog or query events to send into external platforms. |
 | Category::Google Cloud | Integrations that send in data from Google Cloud and its related services. |
@@ -29,7 +29,7 @@
 | Category::Metrics | Integrations that submit and query metrics from Datadog.  |
 | Category::Mobile | Integrations that monitor mobile devices and applications. |
 | Category::Network | Integrations that monitor networks and network devices. |
-| Category::Notification | Integrations for technologies that focus on notifications, for example, incident response. |
+| Category::Notifications | Integrations for technologies that focus on notifications, for example, incident response. |
 | Category::Oracle | Integrations that monitor Oracle-based technologies. |
 | Category::Orchestration | Integrations for technologies that provide orchestration for containers and more. |
 | Category::OS & System | Integrations that monitor operating systems or other low-level systems. |

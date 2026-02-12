@@ -5,17 +5,17 @@ further_reading:
   text: Datadog の Threat Intelligence
 - link: /security/application_security/
   tag: ドキュメント
-  text: Datadog Application Security Management で脅威から守る
+  text: Datadog App and API Protection で脅威から保護する
 title: Threat Intelligence
 ---
 
 ## 概要
 
-このトピックでは、Application Security Management (ASM) における[脅威インテリジェンス][1]について説明します。
+このトピックでは、App and API Protection (AAP) の [脅威インテリジェンス][1] について説明します。
 
-Datadog は、ASM 向けに組み込みの脅威インテリジェンス[データセット][1]を提供しており、これによりセキュリティ活動に対する追加の証拠が得られ、一部のビジネスロジック検出のしきい値が低減されます。
+Datadog には、AAP 向けの脅威インテリジェンス [データ セット][1] が組み込まれています。これにより、セキュリティ アクティビティに対応する際の根拠が増えるほか、一部のビジネス ロジック検知では検知しきい値が引き下げられます。
 
-さらに、ASM は *Bring Your Own Threat Intelligence* (BYOTI) をサポートしており、この機能により、ビジネス特有の脅威インテリジェンスで検出が強化されます。
+さらに AAP は、*独自の脅威インテリジェンスの持ち込み (bring your own threat intelligence)* にも対応しています。この機能により、業務固有の脅威インテリジェンスで検知結果を補強できます。
 
 ## ベストプラクティス
 
@@ -28,7 +28,7 @@ Datadog は、以下を推奨しません。
 1. セキュリティ活動に対応していない脅威インテリジェンスのトレースをブロックすること。IP アドレスの背後には多くのホストが存在する可能性があり、住宅用プロキシが検出された場合、その IP アドレスの背後にあるホストが関連する活動を行っていたことを示しますが、そのホストがマルウェアやプロキシを実行しているホストと、あなたのサービスと通信しているホストが同一であることを保証するものではありません。
 2. すべての脅威インテリジェンスカテゴリーに対してブロックを行うこと。これにより、企業の VPN からの良性のトラフィックや悪意のないトラフィックもブロックされる可能性があります。
 
-## ASM の脅威インテリジェンスのフィルタリング
+## AAP で脅威インテリジェンスを使ってフィルタリングする
 
 ユーザーは、Signal Explorer と Traces Explorer 上でファセットや検索バーを使用して脅威インテリジェンスをフィルタリングできます。
 
@@ -42,7 +42,7 @@ Datadog は、以下を推奨しません。
 
 ## Bring Your Own Threat Intelligence
 
-ASM は、Datadog リファレンステーブルに格納された脅威インテリジェンスの侵害指標を使用して、トレースの拡充と検索をサポートします。[リファレンステーブル][2]を使用すると、Datadog にすでに存在する情報とメタデータを組み合わせることができます。
+AAP は、Datadog のリファレンス テーブルに保存された脅威インテリジェンスの侵害指標 (IoC) を使って、トレースをエンリッチし、検索できるようにできます。[リファレンス テーブル][2] を使うと、メタデータを Datadog に既にある情報と組み合わせられます。
 
 ### 侵害指標をリファレンステーブルに格納
 
@@ -76,12 +76,12 @@ ip_address,additional_data,category,intention,source
 Datadog では、手動でアップロードするか、[Amazon S3、Azure Storage、Google Cloud Storage][10] から定期的にデータを取得することで参照テーブルを作成できます。
 
 注:
-- テーブルを作成してから ASM トレースのエンリッチメントが開始されるまでには、10～30 分ほどかかる場合があります。
+- テーブルを作成してから AAP トレースのエンリッチが始まるまで、10～30 分かかる場合があります。
 - プライマリキーが重複している場合、該当する行はスキップされ、そのキーに関するエラーメッセージが表示されます。
 
 新しい[リファレンステーブル][4]ページで、
 
-1. テーブルに名前を付けます。この名前は ASM の **Threat Intel** 構成で参照されます。
+1. テーブルに名前を付けます。テーブル名は AAP の **Threat Intel** 設定で参照されます。
 2. ローカルの CSV ファイルをアップロードするか、クラウドストレージバケットから CSV をインポートできます。ファイルは正規化および検証されます。
 3. テーブルスキーマをプレビューし、IP アドレスをプライマリキーとして選択します。
 
@@ -117,7 +117,7 @@ Datadog では、手動でアップロードするか、[Amazon S3、Azure Stora
 
 ### リファレンステーブルとリストを結合してトレースをフィルタリングする
 
-Datadog では、トレーステーブルをリファレンステーブルと結合することで、ASM トレースをフィルタリングできます。
+Datadog では、トレース テーブルをリファレンス テーブルと結合することで AAP トレースをフィルタリングできます。
 
 リファレンステーブルをトレースクエリと結合するには、Datadog のトレーステーブルとリファレンステーブルの関連する列に基づいて、それらのテーブルの行を結合します。トレースクエリは、両方のテーブルで一致するものがあるトレースのみを返します。
 
@@ -143,13 +143,13 @@ IP アドレスに限らず、任意のフィールドを使用できます。�
 
 ### 検出ルール用のトレースの強化
 
-トレースの強化には、侵害の兆候が ASM トレース内の `http.client_ip` キーの値と一致する場合に、ASM トレースに脅威インテリジェンス属性を含めることが含まれます。これにより、既存のファセットを使用して脅威インテリジェンスと一致するトレースを検索したり、脅威インテリジェンスを検出ルールで活用したりすることが可能になります。
+トレースのエンリッチでは、侵害指標が AAP トレース内の `http.client_ip` キーの値と一致した場合に、脅威インテリジェンスの属性が AAP トレースへ追加されます。これにより、既存の Facets を使って脅威インテリジェンス一致のトレースを検索したり、検知ルールで脅威インテリジェンスを活用したりできます。
 
 
 
 ## ユーザーインターフェイスにおける脅威インテリジェンス
 
-ASM Traces Explorer でトレースを表示すると、`@appsec` 属性の下に脅威インテリジェンスデータが表示されます。`category` 属性と `security_activity` 属性の両方が設定されています。
+AAP Traces Explorer でトレースを表示すると、`@appsec` 属性の下に脅威インテリジェンス データが表示されます。`category` と `security_activity` の属性はいずれも設定されます。
 
 {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="脅威インテリジェンスデータを含む appsec 属性の例">}}
 
@@ -165,7 +165,7 @@ ASM Traces Explorer でトレースを表示すると、`@appsec` 属性の下�
 [2]: /ja/integrations/guide/reference-tables
 [3]: /ja/security/threat_intelligence/#threat-intelligence-facets
 [4]: https://app.datadoghq.com/reference-tables/create
-[5]: https://app.datadoghq.com/security/configuration/asm/threat-intel
+[5]: https://app.datadoghq.com/security/configuration/threat-intel
 [6]: https://app.datadoghq.com/security/configuration/asm/rules/edit/kdb-irk-nua?product=appsec
 [7]: /ja/security/threat_intelligence#threat-intelligence-categories
 [8]: /ja/security/threat_intelligence#threat-intelligence-intents

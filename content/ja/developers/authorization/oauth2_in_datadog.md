@@ -11,11 +11,11 @@ title: Datadog の OAuth2
 
 このページでは、**機密**クライアントを作成した後、アプリケーションに OAuth プロトコルをエンドツーエンドで実装する方法を順を追って説明しています。
 
-{{< img src="developers/authorization/oauth_process.png" alt="A diagram explaining how the OAuth authentication process works after a user clicks the Connect Account button in an integration tile." style="width:100%;">}}
+{{< img src="developers/authorization/oauth_process.png" alt="ユーザーがインテグレーションタイルの Connect Account ボタンをクリック後、OAuth の認証プロセスがどのように動作するかを説明している図" style="width:100%;">}}
 
 ## OAuth プロトコルの実装
 
-1. Within your Datadog Partner Sandbox Account, create and configure your OAuth client in the [Developer Platform][16].
+1. Datadog Partner Sandbox アカウント内の [Developer Platform][16] で OAuth クライアントを作成し、設定します。
 
 2. ユーザーがインテグレーションをインストールした後、インテグレーションタイルの **Configure** タブにある **Connect Accounts** ボタンをクリックしてアカウントを接続することができます。
 
@@ -27,16 +27,16 @@ title: Datadog の OAuth2
 
    `code_challenge` パラメーターの導出方法については、 [PKCE](#authorization-code-grant-flow-with-pkce) のセクションを参照してください。アプリケーションは、ステップ 5 のトークンリクエストのために `code_verifier` を保存する必要があります。
 
-   - To build the URL for this GET request, use the `site` query parameter that is provided on the redirect to your `onboarding_url`. 
+   - この GET リクエストのURLを作成するには、`onboarding_url` へのリダイレクトで提供される`site` クエリパラメーターを使用します。 
    - このパラメーターは、ユーザーが Datadog インテグレーションタイルから認可を開始する場合にのみ提供されます。ユーザーが外部から認可を開始することを選択した場合のオプションについては、 [サードパーティロケーションからの認可の開始](#Initiate-authorization-from-a-third-party-location)セクションを参照してください。
-   - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as any subdomain they may be using, and is required to construct the URL for this GET request to the Authorize endpoint: `<site>/oauth2/v1/authorize?...`.
+   - `site` クエリパラメータは、認証ユーザーがいる [Datadog サイト][17] と、そのユーザーが使用しているであろうサブドメインを提供し、Authorize エンドポイントへの GET リクエストの URL を構築するために必要です。`<site>/oauth2/v1/authorize?...` 。
 
 4. ユーザーが **Authorize** をクリックすると、Datadog は認可エンドポイントに POST リクエストを作成します。ユーザーは、OAuth クライアントを設定する際に、クエリコンポーネントの認可パラメータ ー `code` で指定した `redirect_uri` にリダイレクトされます。
 
 5. `redirect_uri` から、[Datadog トークンエンドポイント][10]に POST リクエストを行い、ステップ 4 の認可コード、ステップ 3 の `code_verifier` 、OAuth クライアント ID、クライアントシークレットを含むようにします。
 
-   - To build the URL for this post request, use the `domain` query parameter that is provided on the redirect to your `redirect_uri`. 
-   - It is required to construct the URL for this POST request to the token endpoint: `https://api.<domain>/oauth2/v1/token`.
+   - この POST リクエストの URL を作成するには、`redirect_uri` へのリダイレクトで提供される`domain` クエリパラメーターを使用します。 
+   - これは、トークンのエンドポイントへの POST リクエストの URL を作成するために必要です。`https://api.<domain>/oauth2/v1/token` 
 
 6. 成功すると、レスポンス本文で `access_token` と `refresh_token` を受け取ります。アプリケーションには、`You may now close this tab` というメッセージを含む確認ページが表示されるはずです。
 
@@ -49,11 +49,11 @@ title: Datadog の OAuth2
 
    `API_KEYS_WRITE` スコープがクライアントに追加されていない場合、このステップは失敗します。このエンドポイントでは、一度だけ表示される API キーを生成し、ユーザーが Datadog アカウント内で削除しない限り、再生成することはできません。**この値は安全なデータベースまたは場所に保存してください**。
 
-OAuth クライアントの作成、テスト、公開については、[Datadog インテグレーションのための OAuth][5] を参照してください。
+OAuth クライアントの作成、テスト、公開については、[API ベースのインテグレーションを作成する][5] を参照してください。
 
 ### サードパーティロケーションからの認可の開始
 
-Users can start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url` and on redirect to the `redirect_uri`. The user's Datadog site is required to make API calls on behalf of the user and receive an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information is not provided. 
+ユーザーは、インテグレーションタイルの **Connect Accounts** をクリックすることで、Datadog の認証プロセスを開始することができます。ユーザーが Datadog の Connect Accounts をクリックすると、ユーザーの [Datadog サイト][17] に関する情報がリダイレクトで `onboarding_url` と `redirect_uri` に送信されます。ユーザーの Datadog サイトは、ユーザーの代理で API コールを行い、認証コードを受け取るために必要です。ユーザーが _インテグレーションの外部ウェブサイト_ から認証を開始する場合、ユーザーのサイト情報は提供されません。
 
 さらに、ユーザーが Datadog インテグレーションタイルから認可を開始する場合、要求されたすべてのスコープに対応する権限を持っていることが必要です。インテグレーションタイル以外の場所から認可を開始した場合、必要なすべての権限を持たないユーザーが認可を完了することがあります (ただし、インテグレーションタイルに戻ったときに適切な権限で再認可するよう促されます)。
 
@@ -61,7 +61,7 @@ Datadog は、パートナーが自社のプラットフォームからではな
 
 Datadog は、Datadog インテグレーションタイル以外のサードパーティロケーションからの認可をサポートすることを推奨していませんが、この方法を選択する場合は、すべての Datadog サイトでユーザーをサポートできることを確認し、新しい Datadog サイトが作成されるたびにサポートを継続する意思があることを確認する必要があります。これには通常、認可時にユーザーが自分のサイトをプラットフォームに手動で入力する方法を実装することが含まれます。
 
-Keep in mind that organizations may have subdomains as well (for example, https://subdomain.datadoghq.com). Subdomains should not be included in API calls, which is why using the `domain` query parameter that's returned on redirect to the `redirect_uri` is recommended when building out the URL for any API call. To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region.
+組織はサブドメインも持っている可能性があることに留意してください。 (例えば、 https://subdomain.datadoghq.com) サブドメインを API コールに含めないようにしてください。そのため、API コールの URL を作成する際、`redirect_uri` へのリダイレクト時に返される `domain` のクエリパラメータを使用することをお勧めします。ユーザーが正しいサイトで認証されていることを確認するには、常に US1 の Datadog サイト (`app.datadoghq.com`) に誘導し、そこから利用する地域を選んでもらうようにします。
 
 ## PKCE による認可コード付与フロー
 
@@ -101,7 +101,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 [2]: /ja/api/latest/scopes/
 [3]: /ja/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /ja/developers/integrations/oauth_for_integrations
+[5]: /ja/developers/integrations/api_integration
 [6]: /ja/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /ja/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

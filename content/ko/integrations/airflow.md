@@ -41,7 +41,7 @@ draft: false
 git_integration_title: airflow
 integration_id: airflow
 integration_title: Airflow
-integration_version: 5.0.1
+integration_version: 6.3.0
 is_public: true
 manifest_version: 2.0.0
 name: airflow
@@ -91,10 +91,15 @@ Datadog 에이전트는 메트릭에 더해 Airflow의 상태와 관련한 서�
 Airflow 통합이 잘 작동하도록 하려면 다음 단계를 올바로 따라야 합니다. 시작하기 전에 먼저 [Datadog 에이전트를 설치][3]하세요. 설치 버전은 `>=6.17`이나 `>=7.17`이어야 합니다. 이 버전에 StatsD/DogStatsD 매핑 기능이 포함되어 있습니다.
 
 ### 구성
-Airflow 통합에는 두 가지 형식이 있습니다. Datadog 에이전트 통합의 경우 Airflow용으로 제공된 엔드포인트로 요청을 보내 연결이 가능하고 정상 상태인지 보고합니다. Airflow StatsD의 경우 Datadog 에이전트로 메트릭을 전송하도록 Airflow를 구성하고, 이를 통해 Airflow 주석을 Datadog 주석으로 리매핑할 수 있습니다.
+Airflow 통합은 두 부분으로 나누어집니다.
+- 첫 번째 부분은 Datadog 에이전트 부분으로, Airflow가 연결 가능하고 정상 상태인지 보고하기 위해 제공된 엔드포인트에 요청을 보냅니다. 또 에이전트 통합에서 자체 메트릭을 생성하기 위해 에이전트 통합에서 Airflow로 쿼리를 보냅니다.
+- 두 번째 부분인 Airflow StatsD 부분에서는 Datadog 에이전트로 메트릭을 전송할 수 있도록 Airflow가 구성되며, 이를 통해 Airflow 주석을 Datadog 주석으로 리매핑할 수 있게 됩니다.
+
+Airflow 통합의 [메트릭](#metrics)은 에이전트와 StatsD 부분 모두에서 옵니다.
+
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "호스트" %}}
 
 #### 호스트
 
@@ -120,13 +125,13 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
 
 2. Airflow 구성 파일 `airflow.cfg`에 다음 구성을 추가해 업데이트합니다.
 
-   <div class="alert alert-warning">`statsd_datadog_enabled`를 true로 설정하지 마세요. `statsd_datadog_enabled`를 활성화하면 충돌이 발생할 수 있습니다. 문제를 예방하려면 이 변수를 `False`로 설정해야 합니다.</div>
+   <div class="alert alert-danger">`statsd_datadog_enabled`를 true로 설정하지 마세요. `statsd_datadog_enabled`를 활성화하면 충돌이 발생할 수 있습니다. 문제를 예방하려면 이 변수를 `False`로 설정해야 합니다.</div>
 
    ```conf
    [scheduler]
    statsd_on = True
    # Hostname or IP of server running the Datadog Agent
-   statsd_host = localhost  
+   statsd_host = localhost
    # DogStatsD port configured in the Datadog Agent
    statsd_port = 8125
    statsd_prefix = airflow
@@ -175,6 +180,23 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
            name: "airflow.dag.loading_duration"
            tags:
              dag_file: "$1"
+         - match: "airflow.local_task_job.task_exit.*.*.*.*"
+           name: "airflow.local_task_job.task_exit"
+           tags:
+             job_id: "$1"
+             dag_id: "$2"
+             task_id: "$3"
+             return_code: "$4"
+         - match: "airflow.dag.*.*.queue_duration"
+           name: "airflow.dag.queue_duration"
+           tags:
+             dag_id: "$1"
+             task_id: "$2"
+         - match: "airflow.dag.*.*.scheduled_duration"
+           name: "airflow.dag.scheduled_duration"
+           tags:
+             dag_id: "$1"
+             task_id: "$2"
          - match: "airflow.dagrun.*.first_task_scheduling_delay"
            name: "airflow.dagrun.first_task_scheduling_delay"
            tags:
@@ -253,13 +275,13 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
          - match: 'airflow\.ti\.start\.(.+)\.(\w+)'
            match_type: regex
            name: airflow.ti.start
-           tags: 
+           tags:
              dag_id: "$1"
              task_id: "$2"
          - match: 'airflow\.ti\.finish\.(\w+)\.(.+)\.(\w+)'
            name: airflow.ti.finish
            match_type: regex
-           tags: 
+           tags:
              dag_id: "$1"
              task_id: "$2"
              state: "$3"
@@ -276,7 +298,7 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 1. Datadog Agent에서 로그 수집은 기본적으로 비활성화되어 있으므로 `datadog.yaml` 파일에서 활성화합니다.
 
@@ -350,13 +372,13 @@ _Agent 버전 6.0 이상에서 사용 가능_
 [9]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/ko/help/
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "컨테이너화된 환경" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
 ##### Datadog 에이전트 Airflow 통합 구성
 
-컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 다음 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][1]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 | 파라미터            | 값                 |
 |----------------------|-----------------------|
@@ -366,13 +388,33 @@ _Agent 버전 6.0 이상에서 사용 가능_
 
 `url`이 내 Airflow [웹서버 `base_url`][2]과 일치하는지 확인하세요. 이는 Airflow 인스턴스에 연결할 때 사용한 URL입니다. `localhost`를 템플릿 변수 `%%host%%`로 변경하세요.
 
+Airflow의 Helm 차트를 이용하는 경우, [웹 서버를 ClusterIP 서비스로 노출][3]하며, 이 ClusterIP를 `url` 파라미터에서 사용하게 됩니다.
+
+다음은 자동탐지 주석의 예시입니다.
+
+```
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+      {
+        "airflow": {
+          "instances": ["url": "http://airflow-ui.%%kube_namespace%%.svc.cluster.local:8080"]
+        }
+      }      
+    # (...)
+```
+
 ##### Airflow를 DogStatsD에 연결
 
 Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트에 포함되어 있음)에 연결하여 메트릭을 수집하세요. 사용된 Airflow 버전에 따른 메트릭 보고서와 추가 구성 옵션에 관해 자세히 알아보려면 아래 Airflow 설명서를 참고하세요.
-- [Airflow 메트릭][3]
-- [Airflow 메트릭 구성][4]
+- [Airflow 메트릭][4]
+- [Airflow 메트릭 구성][5]
 
-**참고**: Airflow가 보고하는 StatsD 메트릭 존재 여부는 사용하는 Airflow Executor 종류에 따라 달라집니다. 예를 들어 `KubernetesExecutor`[5]의 경우 `airflow.ti_failures/successes`, `airflow.operator_failures/successes`, `airflow.dag.task.duration`이 보고되지 않습니다.
+**참고**: Airflow가 보고하는 StatsD 메트릭 존재 여부는 사용하는 Airflow Executor 종류에 따라 달라집니다. 예를 들어 `KubernetesExecutor`[6]의 경우 `airflow.ti_failures/successes`, `airflow.operator_failures/successes`, `airflow.dag.task.duration`이 보고되지 않습니다.
 
 **참고**: Airflow에 사용되는 환경 변수가 버전에 따라 다를 수 있습니다. 예를 들어 Airflow `2.0.0`에서는 환경 변수 `AIRFLOW__METRICS__STATSD_HOST`를 활용하지만 Airflow `1.10.15`에서는 `AIRFLOW__SCHEDULER__STATSD_HOST`를 사용합니다. 
 
@@ -390,21 +432,24 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
         fieldRef:
           fieldPath: status.hostIP
   ```
-호스트 엔드포인트 `AIRFLOW__SCHEDULER__STATSD_HOST`의 환경 변수는 노드의 호스트 IP 주소와 함께 제공되어 StatsD 데이터를 Airflow Pod와 같은 Pod인 Datadog 에이전트 Pod로 라우팅합니다. 이 설정을 사용하려면  에이전트의 `hostPort`인 `8125` 포트가 개방되어 있어야 하고 로컬이 아닌 StatsD 트래픽을 수락해야 합니다. 더 자세한 정보는 [쿠버네티스에서 DogStatsD 설정][6]을 참고하세요.
+호스트 엔드포인트 `AIRFLOW__SCHEDULER__STATSD_HOST`의 환경 변수는 노드의 호스트 IP 주소와 함께 제공되어 StatsD 데이터를 Airflow Pod와 같은 Pod인 Datadog 에이전트 포드로 라우팅합니다. 이 설정을 사용하려면  에이전트의 `hostPort`인 `8125` 포트가 개방되어 있어야 하고 로컬이 아닌 StatsD 트래픽을 수락해야 합니다. 더 자세한 정보는 [Kubernetes에서 DogStatsD 설정][7]을 참고하세요.
 
-그러면 StatsD 트래픽이 수신 준비가 된 상태로 Airflow 컨테이너에서 Datadog 에이전트로 이동합니다. 마지막으로 실행할 단계는 Datadog 에이전트를 적합한 `dogstatsd_mapper_profiles`로 업데이트하는 것입니다. 그러려면 [호스트 설치][7]에 있는 `dogstatsd_mapper_profiles`를 복사해 `datadog.yaml` 파일에 붙여 넣으세요. 또는 환경 변수 `DD_DOGSTATSD_MAPPER_PROFILES`에서 동급의 JSON 구성을 사용해 Datadog 에이전트를 배포하세요. 쿠버네티스의 경우 동급 환경 변수 표기는 다음과 같습니다.
+그러면 StatsD 트래픽이 수신 준비가 된 상태로 Airflow 컨테이너에서 Datadog 에이전트로 이동합니다. 마지막으로 실행할 단계는 Datadog 에이전트를 적합한 `dogstatsd_mapper_profiles`로 업데이트하는 것입니다. 그러려면 [호스트 설치][8]에 있는 `dogstatsd_mapper_profiles`를 복사해 `datadog.yaml` 파일에 붙여 넣으세요. 또는 환경 변수 `DD_DOGSTATSD_MAPPER_PROFILES`에서 동급의 JSON 구성을 사용해 Datadog 에이전트를 배포하세요. Kubernetes의 경우 동급 환경 변수 표기는 다음과 같습니다.
   ```yaml
-  env: 
+  env:
     - name: DD_DOGSTATSD_MAPPER_PROFILES
       value: >
         [{"name":"airflow","prefix":"airflow.","mappings":[{"match":"airflow.*_start","name":"airflow.job.start","tags":{"job_name":"$1"}},{"match":"airflow.*_end","name":"airflow.job.end","tags":{"job_name":"$1"}},{"match":"airflow.*_heartbeat_failure","name":"airflow.job.heartbeat.failure","tags":{"job_name":"$1"}},{"match":"airflow.operator_failures_*","name":"airflow.operator_failures","tags":{"operator_name":"$1"}},{"match":"airflow.operator_successes_*","name":"airflow.operator_successes","tags":{"operator_name":"$1"}},{"match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_runtime","tags":{"dag_file":"$1"}},{"match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","tags":{"dag_file":"$1"}},{"match":"airflow\\.dag\\.loading-duration\\.(.*)","match_type":"regex","name":"airflow.dag.loading_duration","tags":{"dag_file":"$1"}},{"match":"airflow.dagrun.*.first_task_scheduling_delay","name":"airflow.dagrun.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"match":"airflow.pool.open_slots.*","name":"airflow.pool.open_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.queued_slots.*","name":"airflow.pool.queued_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.running_slots.*","name":"airflow.pool.running_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.used_slots.*","name":"airflow.pool.used_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.starving_tasks.*","name":"airflow.pool.starving_tasks","tags":{"pool_name":"$1"}},{"match":"airflow\\.dagrun\\.dependency-check\\.(.*)","match_type":"regex","name":"airflow.dagrun.dependency_check","tags":{"dag_id":"$1"}},{"match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","match_type":"regex","name":"airflow.dag.task.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match":"airflow\\.dag_processing\\.last_duration\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_duration","tags":{"dag_file":"$1"}},{"match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","match_type":"regex","name":"airflow.dagrun.duration.success","tags":{"dag_id":"$1"}},{"match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","match_type":"regex","name":"airflow.dagrun.duration.failed","tags":{"dag_id":"$1"}},{"match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","match_type":"regex","name":"airflow.dagrun.schedule_delay","tags":{"dag_id":"$1"}},{"match":"airflow.scheduler.tasks.running","name":"airflow.scheduler.tasks.running"},{"match":"airflow.scheduler.tasks.starving","name":"airflow.scheduler.tasks.starving"},{"match":"airflow.sla_email_notification_failure","name":"airflow.sla_email_notification_failure"},{"match":"airflow\\.task_removed_from_dag\\.(.*)","match_type":"regex","name":"airflow.dag.task_removed","tags":{"dag_id":"$1"}},{"match":"airflow\\.task_restored_to_dag\\.(.*)","match_type":"regex","name":"airflow.dag.task_restored","tags":{"dag_id":"$1"}},{"match":"airflow.task_instance_created-*","name":"airflow.task.instance_created","tags":{"task_class":"$1"}},{"match":"airflow\\.ti\\.start\\.(.+)\\.(\\w+)","match_type":"regex","name":"airflow.ti.start","tags":{"dag_id":"$1","task_id":"$2"}},{"match":"airflow\\.ti\\.finish\\.(\\w+)\\.(.+)\\.(\\w+)","name":"airflow.ti.finish","match_type":"regex","tags":{"dag_id":"$1","task_id":"$2","state":"$3"}}]}]
   ```
 
+StatsD 메트릭에 비고정 태그를 추가하려면 DogStatsD 매퍼 프로파일을 사용해야 합니다. `service`와 `env` 태그를 추가하는 [매퍼 프로필 예시][9]를 참고하세요.
+
+
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
-Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [쿠버네티스(Kubernetes) 로그 수집][8]을 참고하세요.
+Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 있습니다. 이를 활성화하려면 [Kubernetes 로그 수집][10]을 참고하세요.
 
 | 파라미터      | 값                                                 |
 |----------------|-------------------------------------------------------|
@@ -412,12 +457,14 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 
 [1]: https://docs.datadoghq.com/ko/getting_started/agent/autodiscovery/?tab=docker#integration-templates
 [2]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#base-url
-[3]: https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/metrics.html
-[4]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
-[5]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
-[6]: https://docs.datadoghq.com/ko/developers/dogstatsd/?tab=kubernetes#setup
-[7]: /ko/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
-[8]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://github.com/apache/airflow/blob/main/chart/values.yaml#L1522-L1529
+[4]: https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/metrics.html
+[5]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
+[6]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
+[7]: https://docs.datadoghq.com/ko/developers/dogstatsd/?tab=kubernetes#setup
+[8]: https://docs.datadoghq.com/ko/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
+[9]: http://docs.datadoghq.com/resources/json/airflow_ust.json
+[10]: https://docs.datadoghq.com/ko/agent/kubernetes/integrations/?tab=kubernetes#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -441,6 +488,8 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 {{< get-metrics-from-git "airflow" >}}
 
 
+**참고**: `airflow.healthy`, `airflow.can_connect`, `airflow.dag.task.total_running`, `airflow.dag.task.ongoing_duration` 메트릭은 통합의 에이전트 부분에서 수집됩니다. 다른 메트릭은 StatsD에서 옵니다.
+
 ### 이벤트
 
 Airflow 점검에는 이벤트가 포함되지 않습니다.
@@ -451,7 +500,11 @@ Airflow 점검에는 이벤트가 포함되지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원 팀][6]에 문의하세요.
+### 에이전트 통합 HTTP 403 오류
+
+Airflow의 API에 인증된 요청을 보내려면 Datadog 에이전트의 파라미터를 설정해야 할 수 있습니다. [구성 옵션][6] 중에서 하나를 선택해 사용하세요.
+
+도움이 필요하신가요? [Datadog 지원팀][7]에 문의하세요.
 
 
 
@@ -460,4 +513,5 @@ Airflow 점검에는 이벤트가 포함되지 않습니다.
 [3]: https://docs.datadoghq.com/ko/agent/
 [4]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-datadog/stable/_modules/airflow/providers/datadog/hooks/datadog.html
-[6]: https://docs.datadoghq.com/ko/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/airflow/datadog_checks/airflow/data/conf.yaml.example#L84-L118
+[7]: https://docs.datadoghq.com/ko/help/

@@ -8,19 +8,21 @@ further_reading:
 - link: /tracing/glossary/
   tag: Documentación
   text: Explorar tus servicios, recursos y trazas
-- link: /tracing/trace_collection/trace_context_propagation/cpp/
+- link: /tracing/trace_collection/trace_context_propagation/
   tag: Documentación
   text: Propagación del contexto de rastreo
-title: Configuración de la biblioteca de rastreo de C++
+title: Configuración de la librería de rastreo de C++
 type: multi-code-lang
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
 
 Es recomendado utilizar `DD_SERVICE`, `DD_ENV` y `DD_VERSION` para establecer `env`, `service` y `version` para tus servicios. Consulta las recomendaciones de la documentación [etiquetado de servicios unificado][1] sobre qué valor establecer para las variables de entorno.
 
 ## Variables de entorno
 Para configurar el rastreador mediante variables de entorno, establece las variables antes de lanzar la aplicación instrumentada.
+
+### Etiquetado de servicios unificado
 
 `DD_SERVICE`
 : **Desde**: v0.1.0 <br>
@@ -36,15 +38,13 @@ Añade la etiqueta `env` con el valor especificado a todos los tramos generados.
 **Ejemplo**: `1.2.3`, `6c44da20`, `2020.02.13` <br>
 Establece la versión del servicio.
 
-`DD_TAGS`
-: **Desde**: v0.1.0 <br>
-**Ejemplo**: `team:intake,layer:api,foo:bar` <br>
-Una lista separada por comas de pares `key:value` que se añadirán a todos los tramos generados.
+### Trazas
 
-`DD_AGENT_HOST`
-: **Desde**: v0.1.0 <br>
-**Por defecto**: `localhost` <br>
-Establece el host donde se envían las trazas (el host que ejecuta el Agent). Puede ser un nombre de host o una dirección IP. Se ignora si `DD_TRACE_AGENT_URL` está configurado.
+`DD_TRACE_ENABLED`
+: **Desde**: 0.1.0 <br>
+**Por defecto**: `true` <br>
+Enviar o no trazas al Datadog Agent . <br>
+Cuando es `false`, la librería deja de enviar trazas al Datadog Agent. Sin embargo, la librería continúa generando trazas, informando la telemetría y sondeando actualizaciones de configuración remotas.
 
 `DD_TRACE_AGENT_PORT`
 : **Desde**: v0.1.0 <br>
@@ -65,20 +65,6 @@ Si [la configuración del Agent][3] establece `receiver_port` o `DD_APM_RECEIVER
 **Por defecto**: `200` <br>
 Número máximo de trazas que se permite enviar por segundo.
 
-`DD_TRACE_SAMPLE_RATE`
-: **Desde**: 0.1.0 <br>
-**Por defecto**: La frecuencia por defecto de Datadog Agent o `1.0`. <br>
-Establece la frecuencia de muestreo para todas las trazas generadas. El valor debe estar comprendido entre `0.0` y `1.0` (ambos inclusive). Por defecto, la frecuencia de muestreo se delega al Datadog Agent. Si el Datadog Agent no establece ninguna frecuencia de muestreo, el valor predeterminado es `1.0`.
-
-`DD_TRACE_SAMPLING_RULES`
-: **Desde**: v0.1.0 <br>
-**Por defecto**: `null` <br>
-**Ejemplos:**<br>
-Establece la frecuencia de muestreo en 20%: `[{"sample_rate": 0.2}]` <br>
-Establece la frecuencia de muestreo del tramo al 50% para el servicio `my-service` y el nombre de la operación `http.request`, hasta 50 trazas por segundo: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'` <br><br>
-Una matriz de objetos JSON. Cada objeto debe tener una `sample_rate`, y los campos `name` y `service` son opcionales. El valor de `sample_rate` debe estar comprendido entre 0,0 y 1,0 (ambos inclusive). Las reglas se aplican en el orden configurado para determinar la frecuencia de muestreo de la traza. <br>
-Para más información, consulta [Mecanismos de ingesta][2].<br>
-
 `DD_SPAN_SAMPLING_RULES`
 : **Versión**: v0.1.0 <br>
 **Por defecto `null`<br>
@@ -87,6 +73,58 @@ Una matriz de objetos JSON. Las reglas se aplican en el orden configurado para d
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Desde**: 0.1.0 <br>
 Apunta a un archivo JSON que contiene las reglas de muestreo del tramo. Consulta `DD_SPAN_SAMPLING_RULES` para conocer el formato de las reglas.
+
+`DD_TRACE_REPORT_HOSTNAME`
+: **Desde**: 0.1.0 <br>
+**Por defecto**: `false` <br>
+Añade la etiqueta `hostname` con el resultado de `gethostname`.
+
+`DD_TRACE_STARTUP_LOGS`
+: **Desde**: 0.1.0 <br>
+**Por defecto**: `true` <br>
+Loguear la configuración del rastreador una vez que el rastreador está completamente inicializado. <br>
+
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **Desde**: 0.1.6 <br>
+**Por defecto**: `true` <br>
+Si es `true`, el rastreador generará IDs de traza de 128 bits. <br>
+Si es `false`, el rastreador generará IDs de traza legacy de 64 bits.
+
+`DD_REMOTE_CONFIGURATION_ENABLED`
+: **Desde**: 0.2.0 <br>
+**Por defecto**: `true` <br>
+Habilita la capacidad que permite configurar de forma remota y cambiar el comportamiento del rastreador. <br>
+Si es `false`, esta función está deshabilitada. <br>
+Para más información, consulta [Configuración remota][5].
+
+`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
+: **Desde**: 0.2.0 <br>
+**Por defecto**: `5.0` <br>
+Establece la frecuencia, en segundos, con la que se consulta al Datadog Agent en busca de actualizaciones de configuración remota.
+
+`DD_TRACE_DELEGATE_SAMPLING`
+: **Versión**: 0.2.0 <br>
+**Por defecto**: `false` <br>
+Si es `true`, delega la decisión de muestreo de trazas a un servicio secundario y prefiere la decisión resultante a la suya propia, si procede.
+
+### Agent
+
+`DD_TAGS`
+: **Desde**: v0.1.0 <br>
+**Ejemplo**: `team:intake,layer:api,foo:bar` <br>
+Una lista separada por comas de pares `key:value` que se añadirán a todos los tramos generados.
+
+`DD_AGENT_HOST`
+: **Desde**: v0.1.0 <br>
+**Por defecto**: `localhost` <br>
+Establece el host donde se envían las trazas (el host que ejecuta el Agent). Puede ser un nombre de host o una dirección IP. Se ignora si `DD_TRACE_AGENT_URL` está configurado.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **Desde**: 0.1.12 <br>
+**Por defecto**: `true` <br>
+Datadog puede recopilar [información de entorno y de diagnóstico sobre tu sistema][4] para mejorar el producto. Cuando es `false`, no se recopilan datos de telemetría.
+
+### Propagación del contexto de rastreo
 
 `DD_PROPAGATION_STYLE`
 : **Desde**: 0.1.0 <br>
@@ -107,52 +145,7 @@ Cuando se establecen múltiples valores, el orden de coincidencia se basa en el 
 Lista separada por comas de los estilos de propagación a utilizar al extraer el contexto de rastreo.
 Cuando se establecen múltiples valores, el orden de coincidencia se basa en el orden de los valores.
 
-`DD_TRACE_ENABLED`
-: **Desde**: 0.1.0 <br>
-**Por defecto**: `true` <br>
-Enviar o no trazas al Datadog Agent . <br>
-Cuando es `false`, la biblioteca deja de enviar trazas al Datadog Agent. Sin embargo, la biblioteca continúa generando trazas, informando la telemetría y sondeando actualizaciones de configuración remotas.
-
-`DD_TRACE_REPORT_hostNAME`
-: **Desde**: 0.1.0 <br>
-**Por defecto**: `false` <br>
-Añade la etiqueta `hostname` con el resultado de `gethostname`.
-
-`DD_TRACE_STARTUP_LOGS`
-: **Desde**: 0.1.0 <br>
-**Por defecto**: `true` <br>
-Loguear la configuración del rastreador una vez que el rastreador está completamente inicializado. <br>
-
-`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
-: **Desde**: 0.1.6 <br>
-**Por defecto**: `true` <br>
-Si es `true`, el rastreador generará IDs de traza de 128 bits. <br>
-Si es `false`, el rastreador generará IDs de traza legacy de 64 bits.
-
-`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **Desde**: 0.1.12 <br>
-**Por defecto**: `true` <br>
-Datadog puede recopilar [información de entorno y de diagnóstico sobre tu sistema][4] para mejorar el producto. Cuando es `false`, no se recopilan datos de telemetría.
-
-`DD_REMOTE_CONFIGURATION_ENABLED`
-: **Desde**: 0.2.0 <br>
-**Por defecto**: `true` <br>
-Habilita la capacidad que permite configurar de forma remota y cambiar el comportamiento del rastreador. <br>
-Si es `false`, esta función está deshabilitada. <br>
-Para más información, consulta [Configuración remota][5].
-
-`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
-: **Desde**: 0.2.0 <br>
-**Por defecto**: `5.0` <br>
-Establece la frecuencia, en segundos, con la que se consulta al Datadog Agent en busca de actualizaciones de configuración remota.
-
-`DD_TRACE_DELEGATE_SAMPLING`
-: **Versión**: 0.2.0 <br>
-**Por defecto**: `false` <br>
-Si es `true`, delega la decisión de muestreo de trazas a un servicio secundario y prefiere la decisión resultante a la suya propia, si procede.
-
-
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

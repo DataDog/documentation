@@ -1,21 +1,11 @@
 ---
-categories:
-- configuration & deployment
-custom_kind: integration
-dependencies:
-- https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
+app_id: jenkins
+custom_kind: integración
 description: Reenvía automáticamente tus métricas, eventos y checks de servicio de
   Jenkins to Datadog.
-doc_link: https://docs.datadoghq.com/integrations/jenkins/
-git_integration_title: jenkins
-has_logo: true
-integration_title: Jenkins
-is_public: true
-name: jenkins
-public_title: Integración de Datadog y Jenkins
-short_description: Reenvía automáticamente tus métricas, eventos y servicios de Jenkins
-  checks to Datadog.
+title: Jenkins
 ---
+
 Un complemento de Jenkins para reenviar automáticamente métricas, eventos y checks de servicio a una cuenta de Datadog.
 
 ![Dashboard de Jenkins Datadog][16]
@@ -58,22 +48,25 @@ Para configurar tu complemento de Datadog, navega a la página `Manage Jenkins -
 
 ##### Reenvío HTTP
 
-1. Selecciona el botón de opción situado junto a **Use Datadog API URL and Key to report to Datadog** (Utilizar la URL y la clave de la API de Datadog para informar a Datadog) (seleccionado por defecto).
-2. Pega tu [clave de API de Datadog][4] en el cuadro de texto `API Key` de la pantalla de configuración de Jenkins. Si deseas almacenar tu clave de API con el [Gestor de credenciales][18], crea una credencial para la clave de API y selecciona esa credencial en el menú desplegable `Datadog API Key (Select from Credentials)`.
-3. Prueba tu clave de API de Datadog utilizando el botón `Test Key` en la pantalla de configuración de Jenkins justo debajo del cuadro de texto de la clave de API.
-4. (Opcional) Introduce el nombre de host del servidor Jenkins en la pestaña Advanced (Avanzado) para incluirlo con los eventos.
-5. (Opcional) Introduce tu [URL de entrada de log de Datadog][15] y selecciona "Enable Log Collection" (Activar recopilación de logs) en la pestaña Advanced (Avanzado).
-6. (Opcional) Selecciona "Enable CI Visibility" (Activar CI Visibility), configurando opcionalmente el nombre de tu instancia de CI.
-7. Guarda tu configuración.
+1. Selecciona el botón de opción situado junto a **Utilizar el sitio Datadog y la clave de API para informar a Datadog** (seleccionado por defecto).
+2. Selecciona tu [sitio Datadog][21] en el desplegable **Elegir un sitio**. 
+3. Pega tu [clave de API Datadog][4] en el cuadro de texto `API Key` de la pantalla de configuración de Jenkins. Si quieres almacenar tu clave de API utilizando el [Gestor de credenciales][18], crea una credencial para la clave de API y luego selecciónala en el desplegable `Select from credentials`.
+4. Prueba tu clave de API Datadog utilizando el botón `Test Key` de la pantalla de configuración de Jenkins, justo debajo del cuadro de texto de la clave API.
+5. (Opcional) Introduce el nombre del host que utilizas para acceder a la interfaz de usuario de Datadog (por ejemplo, `app.datadoghq.com`) en el campo `Datadog App hostname`.
+6. (Opcional) Introduce el nombre de host del servidor Jenkins en la pestaña Advanced (Avanzado) para incluirlo con el eventos.
+7. (Opcional) Introduce tu [URL de entrada de log de Datadog][15] y selecciona "Enable Log Collection" (Activar recopilación de logs) en la pestaña Advanced (Avanzado).
+8. (Opcional) Selecciona "Enable CI Visibility" (Activar CI Visibility), configurando opcionalmente el nombre de tu instancia de CI.
+9. Guarda tu configuración.
 
 ##### Reenvío de Datadog Agent
 
 1. Selecciona el botón de opción situado junto a **Use the Datadog Agent to report to Datadog** (Utilizar Datadog Agent para informar a Datadog).
 2. Especifica tu Datadog Agent `hostname` y `port`.
-3. (Opcional) Introduce el nombre de host del servidor Jenkins en la pestaña Advanced (Avanzado) para incluirlo con el eventos.
-4. (Opcional) Introduce tu puerto de recopilación de logs, configurar la [recopilación de logs](#log-collection-for-agents) en el Datadog Agent y selecciona "Enable Log Collection" (Activar la recopilación de log).
-5. (Opcional) Introduce tu puerto de recopilación de trazas (traces) y selecciona "Enable CI Visibility" (Activar CI Visibility), configurando opcionalmente el nombre de tu instancia de CI.
-6. Guarda tu configuración.
+3. (Opcional) Introduce el nombre del host que utilizas para acceder a la interfaz de usuario de Datadog (por ejemplo, `app.datadoghq.com`) en el campo `Datadog App hostname`.
+4. (Opcional) Introduce el nombre de host del servidor Jenkins en la pestaña Advanced (Avanzado) para incluirlo con el eventos.
+5. (Opcional) Introduce tu puerto de recopilación de logs, configurar la [recopilación de logs](#log-collection-for-agents) en el Datadog Agent y selecciona "Enable Log Collection" (Activar la recopilación de log).
+6. (Opcional) Introduce tu puerto de recopilación de trazas (traces) y selecciona "Enable CI Visibility" (Activar CI Visibility), configurando opcionalmente el nombre de tu instancia de CI.
+7. Guarda tu configuración.
 
 #### Script Groovy
 
@@ -82,54 +75,57 @@ Configura tu complemento de Datadog para reenviar datos a través de HTTP o DogS
 ##### Reenvío HTTP usando Groovy
 
 ```groovy
-import jenkins.model.*
+import hudson.util.Secret
+import jenkins.model.Jenkins
 import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-def j = Jenkins.getInstance()
-def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-// Si deseas utilizar la URL y clave de la API de Datadog para informar a Datadog
-d.setReportWith('HTTP')
-d.setTargetApiURL('https://api.datadoghq.com/api/')
-d.setTargetApiKey('<DATADOG_API_KEY>')
+def site = new DatadogIntakeSite(DatadogSite.US1) // pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-// Personalización, consulta la sección específica a continuación
-d.setExcluded('job1,job2')
+datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
+datadog.collectBuildLogs = true // if you want to collect logs
+datadog.enableCiVisibility = true // if you want to enable CI Visibility
 
-// Si deseas recopilar logs
-d.setLogIntakeUrl('https://http-intake.logs.datadoghq.com/v1/input/')
+// Customization, see dedicated section below
+datadog.excluded = 'job1,job2'
 
-// Guardar configuración
-d.save()
+// Save config
+datadog.save()
 ```
 
 ##### Reenvío de Datadog Agent utilizando Groovy
 
 ```groovy
-import jenkins.model.*
+import jenkins.model.Jenkins
 import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogAgentConfiguration
 
-def j = Jenkins.getInstance()
-def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-d.setReportWith('DSD')
-d.setTargetHost('localhost')
-d.setTargetPort(8125)
+def agentHost = 'localhost'
+def agentPort = 8125
+def agentLogCollectionPort = 10518
+def agentTraceCollectionPort = 8126
+datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, agentPort, agentLogCollectionPort, agentTraceCollectionPort)
 
-// Si deseas recopilar logs
-d.setTargetLogCollectionPort(10518)
-d.setCollectBuildLogs(true)
+datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
+datadog.collectBuildLogs = true // if you want to collect logs
+datadog.enableCiVisibility = true // if you want to enable CI Visibility
 
-// Si deseas activar CI Visibility
-d.setTargetTraceCollectionPort(8126)
-d.setEnableCiVisibility(true)
-d.setCiInstanceName("jenkins")
+// Customization, see dedicated section below
+datadog.excluded = 'job1,job2'
 
-// Personalización, consulta la sección específica a continuación
-d.setExcluded('job1,job2')
-
-// Guardar configuración
-d.save()
+// Save config
+datadog.save()
 ```
 
 #### Variables de entorno
@@ -139,14 +135,13 @@ Configura tu complemento de Datadog utilizando las variables de entorno con la v
 ##### Reenvío HTTP mediante variables de entorno
 
 1. Establece la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH` en `HTTP`.
-2. Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_API_URL`, que especifica el endpoint de la API de Datadog (por defecto es `https://api.datadoghq.com/api/`).
+2. Define la variable `DATADOG_JENKINS_PLUGIN_DATADOG_SITE`, que especifica el [sitio Datadog][21] (por defecto es US1).
 3. Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_API_KEY`, que especifica tu [clave de API de Datadog][4].
-4. (Opcional) Recopilación de logs
+4. (Opcional) Define la variable `DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME` con el nombre del host que utilizas para acceder a la interfaz de usuario de Datadog (por ejemplo `app.datadoghq.com`) 
+5. (Opcional) Recopilación de logs
   - Establece la variable `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` en `true` para activar la recopilación de logs (desactivada por defecto).
-  - Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL`, que especifica la URL de entrada de logs de Datadog (por defecto `https://http-intake.logs.datadoghq.com/v1/input/`).
-5. (Opcional) CI Visibility (recopilación de trazas):
+6. (Opcional) CI Visibility (recopilación de trazas):
   - Establece la variable `DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` en `true` para activar la CI Visibility (desactivada por defecto).
-  - Establece la variable `DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL`, que especifica la URL de entrada del Webhook de Datadog (por defecto es `https://webhook-intake.datadoghq.com/api/v2/webhook/`).
   - Establece la variable `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME`, que especifica el nombre de la instancia de Jenkins para CI Visibility (por defecto es `jenkins`).
 
 ##### Reenvío de Datadog Agent mediante variables de entorno 
@@ -154,11 +149,12 @@ Configura tu complemento de Datadog utilizando las variables de entorno con la v
 1. Establece la variable `DATADOG_JENKINS_PLUGIN_REPORT_WITH` en `DSD`.
 2. Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_HOST`, que especifica el host de servidor de DogStatsD (por defecto `localhost`).
 3. Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_PORT`, que especifica el puerto del servidor de DogStatsD (por defecto es `8125`).
-4. (Opcional) Recopilación de logs
+4. (Opcional) Define la variable `DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME` con el nombre del host que utilizas para acceder a la interfaz de usuario de Datadog (por ejemplo `app.datadoghq.com`)
+5. (Opcional) Recopilación de logs
    -  Habilita [recopilación de logs](#log-collection-for-agents) en el Datadog Agent.
    - Establece la variable `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` en `true` para activar la recopilación de logs (desactivada por defecto).
    - Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT`, que especifica el puerto de recopilación de logs de Datadog Agent.
-5. (Opcional) CI Visibility (recopilación de trazas):
+6. (Opcional) CI Visibility (recopilación de trazas):
    - Establece la variable `DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` en `true` para activar la CI Visibility (desactivada por defecto).
    - Establece la variable `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT`, que especifica el puerto de recopilación de trazas de Datadog Agent (por defecto `8126`).
    - Establece la variable `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME`, que especifica el nombre de la instancia de Jenkins para CI Visibility (por defecto es `jenkins`).
@@ -173,7 +169,11 @@ Las variables de entorno con el espacio de nombres `DATADOG_JENKINS_PLUGIN` tien
 
 #### Registro
 
-El registro se realiza utilizando `java.util.Logger`, que sigue las [prácticas recomendadas de registro para Jenkins][6]. Para obtener logs, sigue las instrucciones de la [documentación de registro de Jenkins][6]. Cuando agregues un registrador, todas las funciones del complemento de Datadog comienzan con `org.datadog.jenkins.plugins.datadog.` y el nombre de la función que estás buscando debería autocompletarse. En el momento de escribir esto, la única función disponible era `org.datadog.jenkins.plugins.datadog.listeners.DatadogBuildListener`.
+La generación de logs se realiza utilizando `java.util.Logger`, que sigue las [prácticas recomendadas de Jenkins para la generación de logs][6].
+
+El complemento registra automáticamente un generador de logs personalizado llamado "Datadog Plugin Logs" que escribe logs de complementos con un nivel `INFO` o superior.
+El generador de logs personalizado puede desactivarse definiendo la variable de entorno `DD_JENKINS_PLUGIN_LOG_RECORDER_ENABLED` en `false`.
+Si quieres ver logs de complementos con el máximo detalle, cambia manualmente el nivel del generador de logs personalizado a `ALL`.
 
 ## Personalización
 
@@ -244,15 +244,15 @@ Desde una página de configuración específica del trabajo:
 | Etiquetas personalizadas                           | Establecido desde un `File` en el espacio de trabajo (no compatible con trabajos de pipeline) o como texto `Properties` directamente desde la página de configuración. Si se establece, anula la configuración `Global Job Tags`. |
 | Enviar eventos de gestión de control de fuente | Presenta el `Source Control Management Events Type` de eventos y métricas (activado por defecto).                                                                                                         |
 
-### Configuración de Test Visibility
+### Configuración de Test Optimization
 
-El complemento puede automáticamente configurar Datadog [Test Visibility][19] para un trabajo o un pipeline (ve la [documentación para tu lenguaje][20] de Test Visibility para asegurarte de que el marco de tests que utilizas es compatible; también ten en cuenta que la configuración automática no es compatible para tests que se ejecutan dentro de contenedores; sigue los [pasos de instrumentación manual][20] para habilitar Test Visibility para ejecuciones de tests en contenedores).
+El complemento puede configurar automáticamente Datadog [Test Optimization[19] para un trabajo o un pipeline. Consulta la [documentación de Test Optimization para tu lenguaje][20] para asegurarte de que el marco de tests que utilizas es compatible. También ten en cuenta que la configuración automática no es compatible con tests que se ejecutan en contenedores. Para habilitar Test Optimization para ejecuciones de tests en contenedores, sigue los [pasos de instrumentación manual][20].
 
-Antes de activar Test Visibility, asegúrate de configurar el complemento para enviar datos a Datadog.
+Antes de activar Test Optimization, asegúrate de configurar correctamente el complemento para enviar datos a Datadog.
 
-Hay dos opciones para activar la configuración automática de Test Visibility:
+Existen dos opciones para activar la configuración automática de Test Optimization:
 
-1. Con la interfaz de usuario de Jenkins (disponible en el complemento v5.6.0 o más reciente): ve a la página **Configure** (Configurar) del trabajo o pipeline cuyos tests necesitan ser rastreados, marca la casilla **Enable Datadog Test Visibility** (Activar Datadog Test Visibility) en la sección **General**, y guarda los cambios. Esta opción no está disponible si estás utilizando pipelines de múltiples ramas, carpetas de organización u otros tipos de pipelines que se configuran completamente con `Jenkinsfile`.
+1. Utilizando la interfaz de usuario de Jenkins (disponible en el complemento v5.6.0 o más reciente): ve a la página **Configurar** del trabajo o pipeline cuyos tests necesitan ser rastreados, marca la casilla **Habilitar Datadog Test Optimization** en la sección **General** y guarda tus cambios. Esta opción no está disponible si se utilizan pipelines de varias bifurcaciones, carpetas de organización u otros tipos de pipelines que se configuran completamente con `Jenkinsfile`.
 2. Con el paso de pipeline de `datadog` (disponible en el complemento v5.6.2 o posterior):
 
 En los pipelines declarativos, añade el paso a un bloque de nivel superior de `options` del siguiente modo:
@@ -261,11 +261,11 @@ En los pipelines declarativos, añade el paso a un bloque de nivel superior de `
 pipeline {
     agent any
     options {
-        datadog(testVisibility: [ 
+        datadog(testOptimization: [ 
             enabled: true, 
-            serviceName: "my-service", // el nombre de servicio o biblioteca que se está probando
-            languages: ["JAVA"], // lenguajes que deben ser instrumentados (las opciones disponibles son "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
-            additionalVariables: ["my-var": "value"]  // configuración adicional del rastreador (opcional)
+            serviceName: "my-service", // the name of service or library being tested
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY", "GO")
+            additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
     stages {
@@ -281,7 +281,7 @@ pipeline {
 En los pipelines con script, envuelve la sección correspondiente con el paso `datadog` de la siguiente manera:
 
 ```groovy
-datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVA"], additionalVariables: [:] ]) {
+datadog(testOptimization: [ enabled: true, serviceName: "my-service", languages: ["JAVA"], additionalVariables: [:] ]) {
   node {
     stage('Example') {
       echo "Hello world."
@@ -290,9 +290,9 @@ datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: [
 }
 ```
 
-Los demás ajustes de `datadog`, como `collectLogs` o `tags`, pueden añadirse junto al bloque `testVisibility`.
+Los demás parámetros de `datadog`, como `collectLogs` o `tags`, pueden añadirse junto al bloque `testOptimization`.
 
-Ten en cuenta que Test Visibility es un producto independiente de Datadog que se factura por separado.
+Ten en cuenta que Test Optimization es un producto independiente de Datadog y se factura por separado.
 
 ## Datos recopilados
 
@@ -344,7 +344,7 @@ Este complemento permite filtrar eventos por el tipo de evento así como por los
 arriba. Para incluir/excluir todos los eventos del tipo de sistema o de seguridad:
 - **En la interfaz de usuario**: desactiva las casillas de verificación de estos eventos.
 - **En un script groovy**: obtén el descriptor global de Datadog y llama a `d.setEmitSystemEvents()` o `d.setEmitSecurityEvents()`.
-- **En la sección [variables de entorno](#environment-variables)**: establece las variables de entorno para los eventos de seguridad y de sistema emitidos.
+- **En la sección de [variables de entorno](#environment-variables)**: define las variables de entorno para los eventos de seguridad y de sistema emitidos.
 
 Para obtener un control más específico sobre qué eventos se envían, se proporcionan tres opciones de configuración para permitir una lista de include/exclude (incluir/excluir) separada por comas de cadenas de nombres de evento. La lista include/exclude (incluir/excluir) tiene prioridad sobre el filtrado por tipo de evento. Por ejemplo, los eventos de `security` pueden desactivarse, pero la inclusión de `UserAuthenticated` tiene prioridad, por lo que sólo se enviarán eventos de `UserAuthenticated` del tipo `security`. En la interfaz de usuario, se proporcionan cuadros de texto para las listas incluir/excluir. En un script groovy, los métodos `d.setIncludeEvents()` y `d.setExcludeEvents()` aceptan como entrada una lista de nombres de evento separada por comas, que es otro método válido de configuración. Por último, se proporcionan [variables de entorno](#environment-variables) para configurar manualmente las listas de incluir/excluir.
 
@@ -394,6 +394,7 @@ NOTA: Como se menciona en la sección [personalización del trabajo](#job-custom
 | `jenkins.plugin.failed`                | Complementos fallidos.                                                                                        | `jenkins_url`                                                              |
 | `jenkins.plugin.inactivate`            | Complementos inactivos.                                                                                      | `jenkins_url`                                                              |
 | `jenkins.plugin.withUpdate`            | Complementos con actualización.                                                                                   | `jenkins_url`                                                              |
+| `jenkins.plugin.withWarning`           | Plugins con aviso.                                                                                  | `jenkins_url`                                                              |
 | `jenkins.project.count`                | Recuento de proyectos.                                                                                         | `jenkins_url`                                                              |
 | `jenkins.queue.size`                   | Tamaño de la cola.                                                                                            | `jenkins_url`                                                              |
 | `jenkins.queue.buildable`              | Número de elementos compilables en cola.                                                                     | `jenkins_url`                                                              |
@@ -414,7 +415,7 @@ NOTA: Como se menciona en la sección [personalización del trabajo](#job-custom
 
 **Nota**: Esta configuración sólo se aplica a aquellos que utilizan la [configuración del Datadog Agent](#plugin-user-interface).
 
-1. La recopilación de logs está desactivada por defecto en el Datadog Agent , actívala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -437,6 +438,23 @@ NOTA: Como se menciona en la sección [personalización del trabajo](#job-custom
 ### Checks de servicio
 
 Crea el estado `jenkins.job.status` con las siguientes etiquetas predeterminadas: `jenkins_url`, `job`, `node`, `user_id`
+
+## Solucionar problemas
+
+### Generación de un flare de diagnóstico.
+
+El flare de diagnóstico del complemento contiene datos que pueden utilizarse para diagnosticar problemas con el complemento.
+En el momento en que se escribió esta guía, el flare incluía lo siguiente:
+- configuración de complementos en formato XML
+- resultados de verificaciones de la conectividad del complemento
+- datos de tiempo de ejecución (versiones actuales de JVM, Jenkins Core, complemento)
+- excepciones recientes ocurridas dentro del código del complemento
+- logs de complementos con un nivel `INFO` y superior, y logs recientes del controlador Jenkins
+- stacks tecnológicos actuales de los subprocesos del proceso del controlador Jenkins
+- variables de entorno que empiezan por `DD_` o `DATADOG_` (excepto claves de API o de aplicación)
+
+Para generar un flare, ve a la página `Manage Jenkins`, busca la sección `Troubleshooting` y selecciona `Datadog`.
+Haz clic en `Download Diagnostic Flare` (requiere permisos de "ADMINISTRADOR") para generar el flare.
 
 ## Rastreo de problemas
 
@@ -476,3 +494,4 @@ Consulta el [documento de desarrollo][12] para obtener consejos sobre cómo pone
 [18]: https://www.jenkins.io/doc/book/using/using-credentials/
 [19]: https://docs.datadoghq.com/es/tests/
 [20]: https://docs.datadoghq.com/es/tests/setup/
+[21]: https://docs.datadoghq.com/es/getting_started/site/#access-the-datadog-site

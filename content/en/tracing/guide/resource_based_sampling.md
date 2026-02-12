@@ -1,7 +1,8 @@
 ---
 title: Resource-based sampling
+description: Learn how to configure resource-based sampling to control trace ingestion based on specific resources and endpoints for cost optimization.
 disable_toc: false
-private: true
+site_support_id: resource_based_sampling
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
@@ -19,7 +20,7 @@ Remote configuration allows you to dynamically set ingestion [sampling rates by 
 ## Requirements
 
 - Datadog Agent [7.41.1][2] or higher.
-- [Remote Configuration][3]  enabled for your Agent.
+- [Remote Configuration][3] enabled for your Agent.
 - `APM Remote Configuration Write` [permissions][4]. If you don’t have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
 ### Tracing library version
@@ -31,7 +32,7 @@ Language  | Minimum version required
 Java      | [v1.34.0][5]
 Go        | [v1.64.0][6]
 Python    | [v.2.9.0][10]
-Ruby      | [v2.0.0][11]
+Ruby      | [v2.4.0][11]
 Node.js   | [v5.16.0][12]
 PHP       | [v1.4.0][15]
 .NET      | [v.2.53.2][13]
@@ -69,7 +70,7 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 
 [1]: /tracing/trace_pipeline/ingestion_controls#service-ingestion-summary
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
-[3]: /agent/remote_config
+[3]: /tracing/guide/remote_config/
 [4]: /account_management/rbac/permissions/
 [5]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0
 [6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1
@@ -77,7 +78,7 @@ From the **Service Ingestion Summary**, resources for which the sampling rate ar
 [8]: /tracing/trace_pipeline/ingestion_mechanisms#in-the-agent
 [9]: /tracing/trace_explorer/#live-search-for-15-minutes
 [10]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.9.0
-[11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0
+[11]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.4.0
 [12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.16.0
 [13]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.53.2
 [14]: https://github.com/DataDog/dd-trace-cpp/releases/tag/v0.2.2

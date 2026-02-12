@@ -12,7 +12,8 @@ categories:
 - cloud
 - configuration & deployment
 - developer tools
-- notification
+- notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: firefly
 integration_title: Firefly
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: firefly
 public_title: Firefly
@@ -38,7 +38,7 @@ tile:
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Developer Tools
-  - Category::Notification
+  - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -63,9 +63,10 @@ tile:
   title: Firefly
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Présentation
+## Section Overview
 Firefly est une solution de gestion de ressources cloud qui soutient vos équipes Cloud. Elle leur permet de découvrir leur empreinte cloud (AWS, GCP, Kubernetes ou encore Datadog), de transformer automatiquement les ressources en infrastructure en tant que code (IaC) et de détecter les écarts et violations de stratégie. Votre cloud conserve ainsi l'état souhaité. Grâce à Firefly, vos équipes peuvent gérer vos ressources sous la forme de code, dans l'outil IaC de leur choix. Vos ressources Datadog sont alors immuables, gérées par version, évolutives et surveillées.
 
 ### Analyse détaillée de votre cloud

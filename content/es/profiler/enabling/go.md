@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/go/
+- /es/tracing/profiler/enabling/go/
 code_lang: go
 code_lang_weight: 30
 further_reading:
@@ -17,7 +17,7 @@ title: Activación de Go Profiler
 type: multi-code-lang
 ---
 
-El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de biblioteca e ir directamente a habilitar el generador de perfiles.
+El generador de perfiles se incluye en las bibliotecas de rastreo de Datadog. Si ya estás utilizando [APM para recopilar trazas (traces)][1] para tu aplicación, puedes omitir la instalación de librería e ir directamente a habilitar el generador de perfiles.
 
 ## Requisitos
 
@@ -41,7 +41,7 @@ Para empezar a crear perfiles de aplicaciones:
     go get gopkg.in/DataDog/dd-trace-go.v1/profiler
     ```
 
-     **Nota**: El generador de perfiles está disponible en la biblioteca `dd-trace-go` para las versiones 1.23.0+.
+     **Nota**: El generador de perfiles está disponible en la librería `dd-trace-go` para las versiones 1.23.0+.
 
 3. Importa el [generador de perfiles][6] al inicio de tu aplicación:
 
@@ -106,7 +106,7 @@ También puedes establecer la configuración del generador de perfiles utilizand
 
 Por defecto, el perfil de la CPU de Go solo muestra información detallada del código Go. Si tu programa llama a código C, el tiempo de ejecución del código C se refleja en el perfil, pero los stacks de llamadas solo muestran las llamadas a la función Go.
 
-Para añadir información detallada de llamadas a la función C a los perfiles de CPU, puedes optar por utilizar la biblioteca como [ianlancetaylor/cgosymbolizer][14]. Para utilizar esta biblioteca:
+Para añadir información detallada de llamadas a la función C a los perfiles de CPU, puedes optar por utilizar la librería como [ianlancetaylor/cgosymbolizer][14]. Para utilizar esta biblioteca:
 
 1. Descarga el paquete dle sitio:
 

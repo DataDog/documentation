@@ -19,10 +19,6 @@ further_reading:
       text: "Troubleshooting Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Compatibility
 
 Supported languages:
@@ -73,17 +69,19 @@ For more information, see the [Python tracer installation documentation][1].
 {{< tabs >}}
 {{% tab "pytest" %}}
 
-To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`.
 
 {{< code-block lang="shell" >}}
-DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
+pytest --ddtrace
 {{< /code-block >}}
 
 If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
 
 {{< code-block lang="shell" >}}
-DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
+pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
+
+For additional configuration see [Configuration Settings][3].
 
 ### Adding custom tags to tests
 
@@ -120,6 +118,7 @@ Read more about custom measures in the [Add Custom Measures Guide][2].
 
 [1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=python
+[3]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "pytest-benchmark" %}}
@@ -136,17 +135,17 @@ def test_square_value(benchmark):
     assert result == 25
 ```
 
+For additional configurations, see [Configuration Settings][1].
+
+[1]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "unittest" %}}
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
 
-Make sure to specify the name of the service or library under test in the `DD_SERVICE` environment variable.
-Additionally, you may declare the environment where tests are being run in the `DD_ENV` environment variable:
-
 {{< code-block lang="shell" >}}
-DD_SERVICE=my-python-app DD_ENV=ci ddtrace-run python -m unittest
+ddtrace-run python -m unittest
 {{< /code-block >}}
 
 Alternatively, if you wish to enable `unittest` instrumentation manually, use `patch()` to enable the integration:
@@ -161,13 +160,16 @@ def test_will_pass(self):
 assert True
 {{< /code-block >}}
 
+For additional configurations, see [Configuration Settings][1].
+
+[1]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "Manual instrumentation (beta)" %}}
 
 ### Manual testing API
 
-<div class="alert alert-warning"><strong>Note</strong>: The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
+<div class="alert alert-warning">The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
 
 As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
 
@@ -366,8 +368,10 @@ if __name__ == "__main__":
     api.TestSession.finish()
 ```
 
-[1]: https://github.com/DataDog/dd-trace-py
+For additional configurations, see [Configuration Settings][2].
 
+[1]: https://github.com/DataDog/dd-trace-py
+[2]: #configuration-settings
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -375,6 +379,12 @@ if __name__ == "__main__":
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
+
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
@@ -402,6 +412,34 @@ All other [Datadog Tracer configuration][3] options can also be used.
 
 {{% ci-git-metadata %}}
 
+## Best practices
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `pytest --ddtrace`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
+
+- `pytest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
+
 ## Known limitations
 
 {{< tabs >}}
@@ -412,9 +450,13 @@ Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
 ### Parallelization
 
-Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance.
 
-The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+There are several issues when these plugins are used together with `ddtrace`, although they have been resolved for `pytest-xdist` in recent versions of `dd-trace-py` (3.12.6 and later). For example, a session, module, or suite may pass even when individual tests fail. Likewise, all the tests may pass and the suite/session/module fail. This happens because these plugins create worker subprocesses, and spans created in the parent process may not reflect the results from the child processes. For this reason, **the usage of `ddtrace` together with `pytest-forked` is not supported at the moment, while `pytest-xdist` only has support for `ddtrace>=3.12.6`.**
+
+Each worker reports test results to Datadog independently, so tests from the same module running in different processes generate separate module or suite events.
+
+The overall count of test events (and their correctness) remains unaffected. Individual session, module, or suite events can have inconsistent results with other events in the same `pytest` run (with `pytest-forked`).
 
 ### Test ordering
 

@@ -50,13 +50,13 @@ Markdown に対応するダッシュボードの説明を更新したり、[チ�
 | キーボードショートカット | 使用可能なキーボードショートカットのリストを表示します。 |
 | UTC 時間を表示 | UTC 時間とデフォルトのタイムゾーンを切り替えます。 |
 | 密度を高める | 高密度モードでは、ウィジェットの密度を高めるために、ダッシュボードにグループウィジェットが並べて表示されます。このモードは、グループウィジェットを使用するダッシュボードの大画面でデフォルトでオンになります。 |
-| TV モード | 切り替えることで、主要なパフォーマンスメトリクスを大画面やテレビに表示できます。 |
+| TV モード | キー パフォーマンス メトリクスを大型スクリーンまたは TV で表示するには、トグルを使用します。詳細は [ダッシュボード用 TV モードの使用][5] を参照してください。 |
 
 ### 通知
 
 ダッシュボードの変更通知を受信するには、通知追跡を有効にします。管理者権限に関係なく、これは組織内のどのユーザーでも有効にできます。
 
-ダッシュボードで通知が有効になると、[イベントエクスプローラー][5]でイベントが作成されます。このイベントでは、テキストの変更、ウィジェットの変更、ダッシュボードの複製、ダッシュボードの削除に関する情報が、アクションを実行したユーザーの名前とともに表示されます。以下の検索により、イベントエクスプローラーで特定のダッシュボードの変更イベントを表示します。
+ダッシュボードで通知が有効になると、[Events Explorer][6] にイベントが作成されます。このイベントには、テキストの変更、ウィジェットの変更、ダッシュボードのクローン作成、ダッシュボードの削除、および操作を実行したユーザーの名前に関する情報が含まれます。特定のダッシュボードの変更イベントを確認するには、Events Explorer で次の検索を行ってください:
 
 ```text
 tags:(audit AND dash) <DASHBOARD_NAME>
@@ -74,27 +74,27 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ### ダッシュボードを削除
 
-<div class="alert alert-warning">削除する前に、ダッシュボードのスターを解除する必要があります。</div>
+<div class="alert alert-danger">削除する前に、ダッシュボードのスターを解除する必要があります。</div>
 
-ダッシュボードを完全に削除するには、このオプションを使用します。削除したダッシュボードを復元するには、プリセットの **Recently Deleted** リストを使用します。**Recently Deleted** にあるダッシュボードは、30 日後に完全に削除されます。詳細については、[ダッシュボードリスト][6]のドキュメントを参照してください。
+このオプションを使用して、ダッシュボードを完全に削除します。削除したダッシュボードを復元するには、プリセットの **Recently Deleted** リストを使用します。**Recently Deleted** にあるダッシュボードは 30 日後に完全に削除されます。詳細については、[ダッシュボード リスト][7] のドキュメントを参照してください。
 
 ## 権限
 
-<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
+<div class="alert alert-info"><em>View</em> 制限は、有料プランをご利用の方であればリクエストに応じて個々のダッシュボードに対して利用できます。この機能を有効にするには、アカウント チームまたは <a href="/help/">Datadog サポート</a> にお問い合わせください。</div>
 
 {{< img src="dashboards/access_popup.png" alt="ダッシュボードにアクセスするためのロールを選択するためのドロップダウンメニューを備えたダイアログボックス。" style="width:70%;">}}
 
-きめ細かいアクセス制御を使用して、特定のダッシュボードを編集できる[ロール][7]を制限することができます。
+詳細なアクセス制御を使用して、特定のダッシュボードを編集できる [ロール][8] を制限します:
 1. ダッシュボードを表示中に、右上の歯車 **Configure** をクリックします。
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
 1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
+1. ドロップ ダウンを使用して、ダッシュボードを編集できるロール、チーム、またはユーザーを 1 つ以上選択します。
 1. **Add** をクリックします。
 1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
 1. **Save** をクリックします。
 
-**注:** ダッシュボードの編集アクセス権を維持するために、保存する前に、少なくとも 1 つのロールのメンバーであることを含めることがシステムから要求されます。ロールの詳細については、[RBAC ドキュメント][7]を参照してください。
+**注:** ダッシュボードの編集権限を保持するために、保存する前に、自分が所属しているロールを少なくとも 1 つ含める必要があります。ロールの詳細については、[RBAC ドキュメント][8] を参照してください。
 
 アクセスが制限されたダッシュボードのアクセス制限を解除するには、以下の手順に従ってください。
 1. ダッシュボードを表示中に、右上の歯車 **Configure** をクリックします。
@@ -104,9 +104,9 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ダッシュボードが非推奨の「読み取り専用」設定で作成された場合、アクセス制御リストにはアクセス管理 (`user_access_manage`) 権限を持つロールのリストが事前に入力されます。
 
-Terraform でダッシュボードを管理する場合、最新バージョンの Datadog Terraform プロバイダーを使用して、ダッシュボードを編集できるロールを制御することができます。詳細については、[Terraform ダッシュボードロール制限ガイド][8]を参照してください。
+Terraform でダッシュボードを管理している場合は、最新バージョンの Datadog Terraform プロバイダーを使用して、どのロールがダッシュボードを編集できるかを制御できます。詳細は、[Terraform ダッシュボード ロール制限ガイド][9] を参照してください。
 
-The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
+アクセス インジケーターは、編集が制限された各ダッシュボードの右上に表示されます。権限によって、**Gain Edit Access** または **Request Edit Access** と表示される場合があります。ダッシュボードを編集するためのアクセス権と手順を確認するには、アクセス インジケーターをクリックしてください。
 
 
 ## その他の参考資料
@@ -117,7 +117,8 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [2]: /ja/dashboards/template_variables/
 [3]: /ja/dashboards/guide/version_history/
 [4]: /ja/account_management/audit_trail/
-[5]: /ja/events/
-[6]: /ja/dashboards/list
-[7]: /ja/account_management/rbac/
-[8]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[5]: /ja/dashboards/guide/tv_mode
+[6]: /ja/events/
+[7]: /ja/dashboards/list
+[8]: /ja/account_management/rbac/
+[9]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/

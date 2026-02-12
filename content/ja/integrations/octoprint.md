@@ -24,10 +24,10 @@ author:
   sales_email: gwaldo@gmail.com
   support_email: gwaldo@gmail.com
 categories:
-- developer tools
+- 開発ツール
 - ログの収集
-- orchestration
-custom_kind: integration
+- オーケストレーション
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md
 display_on_public_website: true
@@ -104,7 +104,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSIO
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `octoprint` を探します。
 
-### Logs
+### ログ
 
 デフォルトでは、このインテグレーションは、Raspberry Pi から OctoPrint  を実行するように予め構成された [OctoPi][8] イメージを使うことを想定しています。
 

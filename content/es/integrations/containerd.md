@@ -21,9 +21,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
-- Kubernetes
-custom_kind: integration
+- rastreo
+- kubernetes
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
 display_on_public_website: true
@@ -38,25 +38,25 @@ name: containerd
 public_title: Containerd
 short_description: Seguimiento de tus métricas de Containerd con Datadog
 supported_os:
-- Linux
-- Windows
+- linux
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Categoría::Contenedores
-  - Categoría::Kubernetes
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Category::Containers
+  - Category::Kubernetes
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Seguimiento de tus métricas de Containerd con Datadog
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: Containerd
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -172,7 +172,7 @@ El check de Containerd puede recopilar eventos. Utiliza `filters` para seleccion
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 
 

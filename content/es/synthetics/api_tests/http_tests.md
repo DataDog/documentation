@@ -42,21 +42,36 @@ Los tests HTTP pueden ejecutarse tanto desde [localizaciones gestionadas](#selec
 
 ## Configuración
 
-Cuando decidas crear un test `HTTP`, define la solicitud de tu test.
+Puedes crear un test utilizando una de las siguientes opciones:
 
-### Definición de la solicitud
+   - **Crea un test a partir de una plantilla**:
 
-1. Elige el **Método HTTP** y especifica la **URL** a consultar. Los métodos disponibles son: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` y `OPTIONS`. Tanto las URL `http` como `https` son compatibles.
+     1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor. 
+     2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Definir solicitud**, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+     3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
 
-   <div class="alert alert-info">Para ver más opciones, consulta <a href=#advanced-options>Opciones avanzadas</a>.</div>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API Synthetics" video="true" >}}
 
-2. **Pon un nombre** a tu test HTTP.
+  - **Crea un test desde cero**:
 
-3. Añade **Etiquetas** (tags) `env` así como cualquier otra etiqueta a tu test HTTP. Luego, puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la [página de monitorización y tests continuos Synthetic][3].
+     1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero), selecciona el tipo de solicitud `HTTP` y especifica la **URL** a consultar. 
+        Los métodos disponibles son: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` y `OPTIONS`. Se admiten las URL `http` y `https`.
 
-   {{< img src="synthetics/api_tests/http_test_config.png" alt="Definir una solicitud HTTP" style="width:90%;" >}}
+        <div class="alert alert-info">Para ver más opciones, consulta <a href=#advanced-options>Opciones avanzadas</a>.</div>
 
-Haz clic en **Test de URL** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
+     2. **Pon un nombre** a tu test HTTP.
+
+     3. Añade **etiquetas (tags)** de entorno así como cualquier otra etiqueta a tu test HTTP. A continuación, puedes utilizar estas etiquetas para filtrar a través de tus tests Synthetic en la [página de monitorización Synthetic y tests continuos][3]. 
+
+     4. Haz clic en **Enviar** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.<br /><br>
+
+       {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Definir splicitud HTTP" style="width:90%;" >}}
+
+     5. Haz clic en **Create Test** (Crear test) para enviar tu test de API.
+
+### Fragmentos
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Opciones avanzadas
 
@@ -67,12 +82,12 @@ Haz clic en **Test de URL** para probar la configuración de la solicitud. Apare
    * **Seguir redirecciones**: Selecciona esta opción para que tu test HTTP pueda acceder a un máximo de diez redirecciones al realizar la solicitud.
    * **Ignorar error de certificado del servidor**: Selecciona esta opción para que tu test HTTP continúe con la conexión, aunque se produzcan errores al validar el certificado SSL.
    * **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.
-   * **Cabeceras de solicitud**: Define las cabeceras a añadir a tu solicitud HTTP. También puedes anular las cabeceras predeterminadas (por ejemplo, la cabecera `user-agent`).
-   * **Cookies**: Define cookies para añadir a tu solicitud HTTP. Define varias cookies utilizando el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`
+   * **Request headers** (Encabezados de la solicitud): define encabezados para añadir a tu solicitud HTTP. También puedes anular los encabezados predeterminados (por ejemplo, el encabezado `user-agent`).
+   * **Cookies**: define cookies para añadir a tu solicitud HTTP. Define varias cookies con el formato `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Autenticación" %}}
+   {{% tab "Autenticación" %}}
 
    * **Certificado de cliente**: Autentícate a través de mTLS cargando tu certificado de cliente (`.crt`) y la clave privada asociada (`.key`) en formato `PEM`. Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
@@ -81,83 +96,87 @@ Haz clic en **Test de URL** para probar la configuración de la solicitud. Apare
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
 
-   * **Autenticación básica HTTP**: Añade credenciales de autenticación básica HTTP.
-   * **Autenticación Digest**: Añade credenciales de autenticación Digest. 
-   * **NTLM**: Añade credenciales de autenticación NTLM. Esto es compatible con NTLMv2 y con NTLMv1.
+   * **HTTP Basic Auth** (Autenticación básica de HTTP): añade credenciales de autenticación básica de HTTP.
+   * **Autenticación Digest**: Añade credenciales de autenticación Digest.
+   * **NTLM**: añade credenciales de autenticación NTLM. Es compatible con NTLMv2 y NTLMv1.
    * **AWS Signature v4**: Introduce tu ID de clave de acceso y tu clave de acceso secreta. Datadog genera la firma para tu solicitud. Esta opción utiliza la implementación básica de SigV4. Las firmas específicas, como Amazon S3, no son compatibles de forma predefinida.
      Para las solicitudes de transferencia "Single Chunk" a buckets de Amazon S3, añade `x-amz-content-sha256` con el cuerpo de la solicitud codificado con sha256 como cabecera (para un cuerpo vacío: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
-   * **OAuth 2.0**: Elige entre conceder credenciales de cliente o una contraseña de propietario de recurso e introduce una URL de token de acceso. Dependiendo de tu selección, introduce un ID de cliente y un secreto o un nombre de usuario y una contraseña. En el menú desplegable, selecciona una opción para enviar el token de API como cabecera de autenticación básica o envía las credenciales de cliente en el cuerpo. También puedes proporcionar información adicional como el público, el recurso y el contexto (así como el ID de cliente y el secreto, si has seleccionado **Contraseña del propietario del recurso**).
+   * **OAuth 2.0**: Elige entre conceder credenciales de cliente o una contraseña de propietario de recurso e introduce un token de acceso URL. Dependiendo de tu selección, introduce un ID de cliente y un secreto, o un nombre de usuario y una contraseña. En el menú desplegable, selecciona una opción para enviar el token de la API como encabezado de autenticación básica o envía las credenciales del cliente en el cuerpo. Opcionalmente, puedes proporcionar información adicional como la audiencia, el recurso y el contexto (así como el ID y el secreto del cliente, si seleccionaste **Contraseña del propietario del recurso**).
 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Parámetros de consulta" %}}
+   {{% tab "Parámetros de consulta" %}}
 
    * **Codificar parámetros**: Añade el nombre y el valor de los parámetros de consulta que requieren codificación.
 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Cuerpo de la consulta" %}}
+   {{% tab "Cuerpo de la solicitud" %}}
 
    * **Tipo de cuerpo**: Selecciona el tipo de cuerpo de la solicitud (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL` o `None`) que quieres añadir a tu solicitud HTTP.
    * **Cuerpo de la solicitud**: Añade el contenido del cuerpo de tu solicitud HTTP.
        * El cuerpo de la solicitud está limitado a un tamaño máximo de 50 kilobytes para `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
        * El cuerpo de la solicitud está limitado a un archivo de 3 megabytes para `application/octet-stream`.
        * El cuerpo de la solicitud está limitado a tres archivos de 3 megabytes cada uno para `multipart/form-data`. 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Proxy" %}}
+   {{% tab "Proxy" %}}
 
-   * **URL de proxy**: Especifica la URL del proxy por el que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy URL** (URL del proxy): especifica la URL del proxy por la que debe pasar la solicitud HTTP (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Cabecera de proxy**: Añade cabeceras para incluir en la solicitud HTTP al proxy.
 
-{{% /tab %}}
+   {{% /tab %}}
 
-{{% tab "Privacidad" %}}
+   {{% tab "Privacidad" %}}
 
    * **No guardar el cuerpo de la respuesta**: Selecciona esta opción para evitar que se guarde el cuerpo de la respuesta en tiempo de ejecución. Esta opción es útil para garantizar que no se muestren datos confidenciales en los resultados del test, pero debes utilizarla con prudencia ya que puede dificultar la resolución de problemas. Para obtener recomendaciones de seguridad, consulta [Seguridad en la monitorización Synthetic][1].
 
 
 [1]: /es/data_security/synthetics
-{{% /tab %}}
+   {{% /tab %}}
 
 {{% tab "Javascript" %}}
 
-Define variables para tus tests API HTTP con JavaScript:
+Define variables para tus tests de API HTTP con JavaScript:
 
-  {{< img src="synthetics/api_tests/http_javascript.png" alt="Definir tests API HTTP con JavaScript" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/http_javascript.png" alt="Definir tests de API HTTP con Javascript" style="width:90%;" >}}
 
-{{% /tab %}}
+<div class="alert alert-info">Las capacidades de JavaScript no son compatibles con los tests de API en ubicaciones privadas de Windows.</div>
 
-{{< /tabs >}}
+   {{% /tab %}}
 
-### Definir aserciones
+   {{< /tabs >}}
+
+### Definición de aserciones
 
 Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **URL del test**, se añaden aserciones básicas de `response time`, `status code` y `header` `content-type` basadas en la respuesta obtenida. Debes definir al menos una aserción para que sea monitorizada por tu test.
 
+<div class="alert alert-info">Las secciones de aserciones de cabecera, cuerpo y JavaScript solo sirven para definir aserciones. No se pueden utilizar para realizar solicitudes HTTP adicionales.</div>
+
 | Tipo          | Operador                                                                                               | Tipo de valor                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| cuerpo          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ |
-| cabecera        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][6]_                                      |
-| tiempo de respuesta | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| código de estado   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][6]_                                                     |
+| cuerpo          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | Cadena <br> [Expresión regular][6] |
+| encabezado        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | Cadena <br> [Expresión regular][6]                                      |
+| tiempo de respuesta | `is less than`                                                                                         | _Entero (ms)_                                                  |
+| código de estado   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | Entero <br> [Expresión regular][6]                                                     |
 
 Los tests HTTP pueden descomprimir cuerpos con las siguientes cabeceras `content-encoding`: `br`, `deflate`, `gzip` y `identity`.
 
-Puedes crear hasta 20 aserciones por test API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
+Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="Definir aserciones en las que tu test HTTP tenga éxito o falle" style="width:90%;" >}}
 
 Para aplicar una lógica `OR` en una aserción, utiliza el comparador `matches regex` para definir una expresión regular con varios valores esperados, como `(200|302)`. Por ejemplo, te podría interesar que tu test HTTP tenga éxito cuando el servidor responde con un código de estado `200` o `302`. La aserción `status code` tiene éxito si el código de estado es 200 o 302. También puedes añadir la lógica `OR` en una aserción de `body` o `header`.
 
-Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud, dentro del límite de tiempo de espera establecido por el worker de Synthetics.
+Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
 
-Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparece un error `Assertions on the body/response cannot be run beyond this limit`.
+Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
 
 ### Seleccionar localizaciones
 
 Selecciona las **Localizaciones** desde donde ejecutar tu test HTTP. Los tests HTTP pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Indicar la frecuencia del test
 
@@ -169,11 +188,24 @@ Los tests HTTP se pueden ejecutar:
 
 {{% synthetics-alerting-monitoring %}}
 
+## Un clic
+
+La creación de tests de API sugiere endpoints del [Catálogo de software][17] y de los tests de API existentes para pre-rellenar tu formulario de tests con opciones relevantes.
+Utiliza las fuentes de datos existentes de Datadog, como las trazas (traces) APM, la detección de endpoints del Catálogo de software y los tests Synthetic existentes similares, creados por los usuarios.
+
+Empieza a escribir en la entrada **URL** del test de la API para obtener sugerencias de endpoints o tests similares en la monitorización Synthetic:
+
+   {{< img src="synthetics/api_tests/api-one-click.png" alt="Test de API HTTP que muestra una búsqueda GET de un test de API existente" style="width:90%;" >}}
+
+A continuación, selecciona una sugerencia para pre-rellenar la configuración de tu test (opciones y cabeceras de solicitud, autenticación y variables):
+
+   {{< img src="synthetics/api_tests/api-test-monitor-search.png" alt="Seleccionar" style="width:90%;" >}}
+
 {{% synthetics-variables %}}
 
-### Uso de variables
+### Usar variables
 
-Puedes utilizar las [variables globales definidas en la página **Parámetros**][8] en la URL, las opciones avanzadas y las aserciones de tus tests HTTP.
+Puedes utilizar las [variables globales definidas en la página **Parámetros**][11] en la URL, las opciones avanzadas y las aserciones de tus tests HTTP.
 
 Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
@@ -183,34 +215,7 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 Un test se considera `FAILED` si no satisface una o más aserciones o si la solicitud ha fallado prematuramente. En algunos casos, el test puede fallar sin comprobar las aserciones respecto al endpoint.
 
-Los errores más comunes incluyen los siguientes:
-
-`CONNREFUSED`
-: No se ha podido establecer una conexión, ya que la máquina de destino la ha rechazado continuamente.
-
-`CONNRESET`
-: El servidor remoto ha finalizado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o falla al responder, o que se haya perdido la conectividad del servidor web.
-
-`DNS`:
-No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
-
-`Error performing HTTP/2 request`
-: No se ha podido realizar la solicitud. Para obtener más información, consulta la página de [errores][16] específicos.
-
-`INVALID_REQUEST` 
-: La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
-
-`SSL`
-: No se ha podido realizar la conexión SSL. [Para obtener más información, consulta la página de errores específica][12].
-
-`TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
-  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
-
-`MALFORMED_RESPONSE` 
-: El servidor remoto ha respondido con una carga útil que no cumple con las especificaciones HTTP.
+Para obtener una lista completa de los códigos de error HTTP y SSL, consulta [Errores de tests de API][12].
 
 ## Permisos
 
@@ -220,11 +225,7 @@ Si estás utilizando la [función de rol personalizado][14], añade tu usuario a
 
 ### Restringir el acceso
 
-La restricción del acceso está disponible para clientes que utilizan [roles personalizados][15] en sus cuentas.
-
-Puedes restringir el acceso a un test HTTP en función de los roles de tu organización. Al crear un test HTTP, elige qué roles (además de tu usuario) pueden leer y escribir tu test.
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Definir permisos para tu test" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## Referencias adicionales
 
@@ -241,8 +242,9 @@ Puedes restringir el acceso a un test HTTP en función de los roles de tu organi
 [9]: /es/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /es/synthetics/guide/synthetic-test-monitors
 [11]: /es/synthetics/settings/#global-variables
-[12]: /es/synthetics/api_tests/errors/#ssl-errors
+[12]: /es/synthetics/api_tests/errors/
 [13]: /es/account_management/rbac/
 [14]: /es/account_management/rbac#custom-roles
 [15]: /es/account_management/rbac/#create-a-custom-role
 [16]: /es/synthetics/api_tests/errors/#http-errors
+[17]: /es/api_catalog

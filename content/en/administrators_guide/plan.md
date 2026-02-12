@@ -18,7 +18,7 @@ When you plan a new software installation, its crucial to understand its capabil
 
 ### Scoping exercise
 
-Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. Send your engineering organization a survey outline to size and whiteboard your needs.
+Setting a clear goal is critical for installing Datadog. However, in a practical world, it is impossible to predict everything you might need at the outset. Product engineers iterate their rollouts and systems operators control their changes, all to control risk. Implementing a large-scale Datadog installation will benefit from standard project management practices. As part of that process, there are certain Datadog elements that you should include. 
 
 **Recommendations:**   
 Start collecting and consolidating a survey of your organization early. Create a comprehensive view of your ecosystems, application languages, data storage, networking, and infrastructure.
@@ -58,7 +58,7 @@ Tags are `key:value` pairs or simple values. They add dimension to application p
 The [Getting started with tagging][2] guide is a great place to start with this topic. Here are some additional highlights:
 
 - A service is defined as a single application footprint, something that can be deployed independently.
-- Tag values must be consistent. For example  "Production" is different from "Prod".
+- Tag values must be consistent. For example, "Production" is different from "Prod".
 - Define sources of truth for dynamic tags such as code version.
 
 **Recommendations**:  
@@ -107,7 +107,7 @@ Usually, the default APM setup is sufficient for most use cases, but if, for exa
 
 ### Log Management
 
-Log Management capabilities allow you and your teams to diagnose and fix your infrastructure issues. With [Logging without Limits™][14] you can create tunable log collection patterns and  extract information from your log data into custom metrics. You can also be alerted to critical errors in your logs, without needing to index (that is, store) them.
+Log Management capabilities allow you and your teams to diagnose and fix your infrastructure issues. [Logging without Limits™][14] enables you to create tunable log collection patterns and extract information from your log data into custom metrics. You can also receive alerts about critical errors in your logs, without needing to index your logs.
 
 {{< img src="/administrators_guide/logging_without_limits.png" alt="Logging without Limits diagram" style="width:90%;">}}
 
@@ -123,7 +123,7 @@ The logging platform can be configured with many layers of logs storage. Each ha
 | [Index][18] | Yes | 3,7,15,30 days | Immediate | Volume & message count |
 | [Flex Logs][19] | Yes\* | [Storage tiers][74]  | Rapid | Retrieval volume |
 
-\* Flex Logs capability does not include monitors/alerting and Watchdog. However, you can still perform log-to-metrics on the ingestion stream before logs are indexed (in either standard or flex) and use those metrics in monitors. Correlation with other telemetry, such as  traces, is supported.
+\* Flex Logs capability does not include monitors/alerting and Watchdog. However, you can still perform log-to-metrics on the ingestion stream before logs are indexed (in either standard or flex) and use those metrics in monitors. Correlation with other telemetry, such as traces, is supported.
 
 With these base functions, you can ingest and monitor logs for some of the following use-cases:
 
@@ -170,7 +170,7 @@ Synthetic Monitoring is a full synthetic testing suite, which includes testing f
 
 - Identify the API endpoints and user journeys that are central to your business and test those frequently.
 - Develop a roadmap of business transactions to test.
-- Use Synthetics in conjunction with [APM and RUM][49].
+- Use Synthetic Monitoring in conjunction with [APM and RUM][49].
 - Review [Synthetic monitoring consumption considerations][23].
 - Reduce test maintenance by using [subtests][24].
 - Make intentional choices in test location selection. Test from where your customers actually are.     
@@ -189,7 +189,7 @@ There are different types of integrations in Datadog, and the order in which the
 | Infrastructure ([orchestration][58], [operating system][59], [network][60]) | These integrations serve as the foundational components for monitoring your infrastructure, gathering both metrics and logs.                                                                                                               |
 | Data Layers ([data stores][61], [message queues][62])      | These integrations usually query internal DB metrics tables, so this usually requires a database administrator to provide access for the Agent.                                                                                              |
 | Development ([automation][63], [languages][64], [source control][65]) | These integrations push metrics to Datadog and require configuration on their end. Some may require DogStatsD to ship metrics.                                                                                                               |
-| Security and Compliance ([Okta][66], [Open Policy Agent][67])   | These integrations enable you to verify compliance with your standards.                                                                                                     |
+| Security and Compliance ([Okta][66])   | These integrations enable you to verify compliance with your standards.                                                                                                     |
 
 **Recommendations**:
 
@@ -203,7 +203,7 @@ You've achieved some important wins and adopted best practices with APM, RUM, Sy
 
 ### Live processes 
 
-Use [Live processes][26] to view all of your running processes in one place. For example, see PID-level information of a running Apache process, to help you understand and troubleshoot transient issues. Additionally, you can query for processes running on a specific host, in a specific availability zone, or running a specific workload. [Configure][27] live processes on your hosts, containers, or AWS ECS Fargate instances to take advantage of this feature.
+Use [Live processes][26] to view all of your running processes in one place. For example, see PID-level information of a running Apache process, to help you understand and troubleshoot transient issues. Additionally, you can query for processes running on a specific host, in a specific availability zone, or running a specific workload. [Configure][27] live processes on your hosts, containers, or Amazon ECS Fargate instances to take advantage of this feature.
 
 ### Availability, latency, and SSL expiration 
 
@@ -215,17 +215,19 @@ Web servers are almost always inter-connected with other services through a netw
 
 ## Platform services
 
-Datadog infrastructure monitoring comes with  additional products that you can use to maximize observability of your environments.
+Datadog infrastructure monitoring comes with additional products that you can use to maximize observability of your environments.
 
-### Service Catalog
+### Software Catalog
 
-[Service catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
+[Software Catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
 
-Service Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
+Software Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
 
-{{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
+{{< img src="/administrators_guide/software_catalog_2.png" alt="Software Catalog home screen" style="width:90%;">}}
 
-You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.  
+You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
+
+Refer to the [Endpoints list][33] to categorize, monitor performance and reliability, and manage ownership of your API endpoints.
 
 ### Resource Catalog
 
@@ -237,10 +239,6 @@ You can use Resource Catalog in a variety of contexts, including:
 - Planning upgrades of resources that are running deprecated versions.
 - Accessing configuration information and other metadata to speed up incident response.
 - Maintaining your security posture by finding and resolving misconfigurations and vulnerabilities.
-
-### API Catalog 
-
-Use [API Catalog][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
 ### Event Management 
 
@@ -291,7 +289,7 @@ To begin mapping out your installation patterns, combine the information you gat
 |  | Dev | QA | Staging | Prod |
 | :---- | :---- | :---- | :---- | :---- |
 | **APM** | Deny/Allow | Allow | Allow | Allow |
-| **Synthetics** | Deny | Deny/Allow | Allow | Allow |
+| **Synthetic Monitoring** | Deny | Deny/Allow | Allow | Allow |
 | **Log Management** | Allow | Allow | Allow | Allow |
 | **RUM** | Deny | Deny/Allow |  Allow | Allow |
 | **DBM** | Deny/Allow | Deny/Allow | Allow | Allow |
@@ -303,7 +301,7 @@ Not every tool suits every job. Evaluate Datadog's product use cases and match t
 
 ## Summary
 
-It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the the next phases of Datadog installation: build and run.  
+It is important to develop and plan a realistic course for installing Datadog. In this section, you learned about the planning and best practices phase, setting your Datadog footprint up for success. You identified and assembled your knowledge base and team members, developed your installation models, planned optimizations, and compiled a list of best practices for core products. These foundations prepare you for the next phases of Datadog installation: build and run.  
 
 ## Next Steps
 
@@ -345,17 +343,17 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [27]: /infrastructure/process/?tab=linuxwindows\#installation
 [28]: /integrations/network/
 [29]: /network_monitoring/cloud_network_monitoring/
-[30]: /service_catalog/
-[31]: /service_management/events/
+[30]: /software_catalog/
+[31]: /events/
 [32]: /error_tracking/
-[33]: /api_catalog/
+[33]: /software_catalog/endpoints/
 [34]: /agent/fleet_automation/
-[35]: /agent/remote_config/
-[36]: /agent/remote_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
+[35]: /remote_configuration
+[36]: /remote_configuration#supported-products-and-features
 [37]: /notebooks/
 [38]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [39]: /account_management/billing/aws/#aws-resource-exclusion
-[40]: /integrations/guide/azure-portal/?tab=vmextension\#metric-collection
+[40]: /integrations/guide/azure-native-integration/#metrics-and-logs
 [41]: /administrators_guide/build
 [42]: https://drive.google.com/file/d/1yUuz6fUFkFagNi0cYkpyDa7b2sQLHKD6/view
 [43]: /integrations/ping/
@@ -364,9 +362,9 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [46]: /infrastructure/resource_catalog/
 [47]: https://www.datadoghq.com/blog/engineering/introducing-husky/
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
-[49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
+[49]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
-[51]: /tracing/guide/inferred-service-opt-in/?tab=java
+[51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
 [53]: /integrations/google_cloud_platform/
 [54]: /integrations/azure/
@@ -382,13 +380,11 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [64]: /integrations/#cat-languages
 [65]: /integrations/#cat-source-control
 [66]: /integrations/okta/
-[67]: /integrations/open_policy_agent/
 [68]: /universal_service_monitoring/
 [69]: /integrations/process/
 [70]: /developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: /synthetics/api_tests/ssl_tests/
-[72]: /service_catalog/service_definitions/
+[72]: /software_catalog/service_definitions/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
 [75]: /tracing/trace_collection/
-

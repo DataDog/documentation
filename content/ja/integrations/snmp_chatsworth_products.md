@@ -21,7 +21,7 @@ categories:
 - ネットワーク
 - notifications
 - snmp
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_chatsworth_products/README.md
 display_on_public_website: true
@@ -93,12 +93,12 @@ SNMP インテグレーションをインストールして構成するには、
 
 お役に立つドキュメント、リンクや記事:
 
-* [Monitor SNMP with Datadog][5]
+* [Datadog を使用した SNMP の監視][5]
 
 
 
-[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
-[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
-[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[1]: https://docs.datadoghq.com/ja/network_monitoring/devices/data
+[2]: https://docs.datadoghq.com/ja/network_monitoring/devices/setup
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/supported_devices/
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

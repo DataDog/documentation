@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Datadog Sites
+description: Learn about different Datadog sites for your region and security requirements, including government-compliant options.
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/dashboards-slos'
   tag: 'Learning Center'
@@ -41,8 +42,9 @@ You can identify which site you are on by matching your Datadog website URL to t
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
+| AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
 
-**Note**: To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
+To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
 
 ## SDK domains
 
@@ -56,18 +58,14 @@ Different Datadog sites may support different functionalities depending on the i
 
 For example, to see the documentation for the Datadog for Government site, select **US1-FED**.
 
-{{% site-region region="gov" %}}
-
 ## Access the Datadog for Government site
 
-The Datadog for Government site (US1-FED) is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about the Datadog for Government site's security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
-
-[1]: https://www.datadoghq.com/security/
-{{% /site-region %}}
+The Datadog for Government site (US1-FED) is Datadog's FedRAMP Moderate Authorized site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://www.datadoghq.com/security/
 [2]: /agent/configuration/dual-shipping/
 [3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

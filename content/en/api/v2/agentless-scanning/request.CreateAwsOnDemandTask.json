@@ -1,0 +1,8 @@
+{
+  "data": {
+    "attributes": {
+      "arn": "arn:aws:lambda:us-west-2:123456789012:function:my-function"
+    },
+    "type": "aws_resource"
+  }
+}

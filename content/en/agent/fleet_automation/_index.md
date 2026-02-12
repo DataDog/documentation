@@ -1,8 +1,18 @@
 ---
 title: Fleet Automation
+description: "Centrally govern and remotely manage Datadog Agents and OpenTelemetry Collectors at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
-- link: "/agent/remote_config"
+- link: https://www.datadoghq.com/blog/fleet-automation-central-configuration
+  tag: Blog
+  text: Centrally set up and scale monitoring of your infrastructure and apps with Datadog Fleet Automation
+- link: https://www.datadoghq.com/blog/manage-opentelemetry-collectors-with-datadog-fleet-automation
+  tag: Blog
+  text: Manage all your OpenTelemetry collectors with Datadog Fleet Automation
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
+- link: "/remote_configuration"
   tag: "Documentation"
   text: "Find out more about Remote Configuration"
 - link: "/infrastructure/list/#agent-configuration"
@@ -13,51 +23,81 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
-Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support your evolving observability needs.
+Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet-automation1.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
 
-With the Fleet Automation platform, you can:
-- View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
-- Send a flare from within your organization, reducing the time it takes to debug issues on an Agent.
-- Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
-- Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
+## Use cases
 
-Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
+For the following use cases, ensure your fleet of Datadog Agents and OTel Collectors are using the latest feature enhancements. With Fleet Automation, you gain the capabilities to:
+- **View the latest Agent and OTel Collector configurations** along with historical changes to help confirm deployment updates and ensure configuration consistency.
+- **Ensure your fleet of Agents and OTel Collectors are using the latest feature enhancements** by identifying and upgrading outdated versions.
+- **Configure your Datadog Agents directly from Fleet Automation**, enabling your teams to centralize setup and get visibility into your environments faster.
+- **Send a support flare remotely from the Datadog UI**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
+
+## Setup
+
+### Remotely manage your fleet
+
+Fleet Automation enables you to centrally manage Datadog Agents across all your hosts directly from the Datadog UI. With remote management, you can view the current state of every Agent, apply configuration changes, and roll out version upgrades without needing direct access to individual systems. This provides a consistent, controlled workflow for keeping your fleet secure, up to date, and aligned with your organization’s standards.
+
+- **Remotely Upgrade and Configure Agents**: For setup and enablement steps, see [Enable Remote Agent Management][3].
+- **View Agent and OTel Collector configurations**:
+  - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
+  - The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][8] in your collector configuration file.
+- **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+### Fleet Automation API
+Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][9]. 
+
+**Note**: The Fleet Automation API does not support all Datadog Agent configuration capabilities.
+
+<div class="alert alert-info">
+Remote management of Agents in containerized workloads is not supported.
+</div>
+
+
+## Observe your fleet
+
+Use the [**Fleet Automation**][1] page to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues. 
+
+For each Datadog Agent, you can see:
 - The Agent version
 - Whether the Agent has any unconfigured or misconfigured integrations
 - The services that the Agent is monitoring
 - The Agent's Remote Configuration status
 - The products that are enabled on the Agent
+- Agent Audit Trail events including configuration changes, upgrades and flares
 
-Selecting an Agent gives you more information about it, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
+For each OTel Collector, you can see:
+- The Collector version
+- The distribution of the Collector
+- The configuration YAML of the Collector
 
-{{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="An Agent's integration information" style="width:100%;" >}}
+### Examine a Datadog Agent or OpenTelemetry Collector
 
-## Configuring Fleet Automation
+Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
 
-Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agent version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
+{{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="An Agent's integration information" style="width:100%;" >}}
 
-If you're using an older Agent, you might still be able to enable the following Datadog features individually:
-- **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3].
-- **Agent configuration**: Agent version 7.39/6.39 or later is required to enable the Agent configuration tab. It is enabled by default in Agent versions 7.47.0/6.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
-- **Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49/6.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+### View Agent Audit Trail events
 
-Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
+The Audit Events tab displays Audit Trail events associated with the selected Agent.
+Use this tab to:
+- Identify configuration changes, API key updates, installs, upgrades and support flares.
+- Determine when changes were made and from where
 
-## Send a remote flare
+Audit Trail event visibility depends on your plan. When Audit Trail is enabled in your organization, you can view Agent events for up to 90 days based on your Audit Trail retention settings. If Audit Trail is not enabled in your organization, you can view the past 24 hours of events.
 
-Before you send a flare, make sure that Remote Configuration is [enabled](#configuring-fleet-automation) on the selected Agent.
+### Send a remote flare
 
-{{% remote-flare %}}
+You can send a flare from the Datadog Agent or DDOT Collector after enabling Remote Configuration on the Agent. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
 
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue.
+
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Send a remote flare" style="width:100%;" >}}
 
 ## Control access to Fleet Automation
 
@@ -65,8 +105,10 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 
 | Permission | Description |
 |--------------|---------------|
-| `API keys read`| Restricts which users can view and search Agents by API key. |
-| `Agent flare collection` | Restricts which users can remotely send flares. |
+| `API Keys Read`| Restricts which users can view and search Agents by API key. |
+| `Agent Flare Collection` | Restricts which users can remotely send flares from Fleet Automation. |
+| `Agent Upgrade` | Restricts which users have access to upgrade Agents from Fleet Automation. |
+| `Agent Configuration Management` | Restricts which users have access to configure Agents from Fleet Automation. |
 
 For information on setting up roles and permissions, see [Access Control][5].
 
@@ -76,6 +118,10 @@ For information on setting up roles and permissions, see [Access Control][5].
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/configuration/agent-configuration-files/
-[3]: /agent/remote_config#enabling-remote-configuration
+[3]: /agent/fleet_automation/remote_management/#setup
 [4]: /infrastructure/list/#agent-configuration
-[5]: https://docs.datadoghq.com/account_management/rbac/
+[5]: /account_management/rbac/
+[6]: /agent/fleet_automation/remote_management/
+[7]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[8]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
+[9]: https://docs.datadoghq.com/api/latest/fleet-automation/

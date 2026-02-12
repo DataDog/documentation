@@ -33,9 +33,9 @@ further_reading:
 - link: /integrations/
   tag: 문서
   text: Datadog의 전체 통합 목록
-- link: /tracing/guide/inferred-service-opt-in/
+- link: /tracing/services/inferred_services
   tag: 문서
-  text: 추론된 서비스 종속성(베타)
+  text: 추론된 서비스 종속성
 title: 애플리케이션 성능 모니터링(APM) 트러블슈팅
 ---
 
@@ -100,7 +100,7 @@ Datadog APM 사용 중 예측하지 못한 동작을 경험하는 경우 이 페
 - `service:test-mongodb`
 - `service:test-postgresdb`
 
-[추론된 서비스 종속성(베타)[30]를 사용할 수 있습니다. 추론된 외부 API에서는 기본 명명 규칙인 `net.peer.name`을 사용합니다(예: `api.stripe.com`, `api.twilio.com`). 추론된 데이터베이스에서는 기본 명명 규칙 `scheme db.instance`를 사용합니다.
+[추론된 서비스 종속성(평가판)[30]을 사용할 수 있습니다. 추론된 외부 API에서는 기본 명명 규칙인 `net.peer.name`을 사용합니다(예: `api.stripe.com`, `api.twilio.com`). 추론된 데이터베이스에서는 기본 명명 규칙 `scheme db.instance`를 사용합니다.
 
 또는 언어에 따라 서비스 이름을 `DD_SERVICE_MAPPING` 또는 `DD_TRACE_SERVICE_MAPPING`와 같은 환경 변수를 사용해 명명할 수도 있습니다.
 
@@ -199,7 +199,7 @@ Ruby에서는 `DD_SERVICE_MAPPING` 또는 `DD_TRACE_SERVICE_MAPPING`을 지원�
 
 - Datadog 플랫폼에서 트레이스 메트릭이 정상적으로 보고하지 않습니다.
 - Datadog 플랫폼에서 볼 수 있는 리소스 일부가 보이지 않습니다.
-- 서비스에서 트레이스를 볼 수 있으나 [Service Catalog 페이지][32]에서 이 서비스를 찾을 수 없습니다.
+- 서비스에서 트레이스가 보이지만 [Software Catalog 페이지][32]에서 이 서비스를 찾을 수 없습니다.
 
 {{% collapse-content title="데이터 볼륨 가이드라인" level="h4" %}}
 
@@ -207,7 +207,7 @@ Ruby에서는 `DD_SERVICE_MAPPING` 또는 `DD_TRACE_SERVICE_MAPPING`을 지원�
 
 Datadog에서는 40분 간격으로 다음 조합을 허용합니다.
 
-- 고유한 `environments` 및 `service` 조합 1,000개
+- 고유한 `environments` 및 `service` 조합 5,000개
 - 환경당 고유한 `second primary tag values` 30개
 - 환경 및 서비스당 고유한 `operation names` 100개
 - 환경, 서비스, 작업 이름당 고유한 `resources` 1,000개
@@ -240,9 +240,9 @@ Datadog에서는 40분 간격으로 다음 조합을 허용합니다.
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="환경은 기본값으로 설정되는 기본 태그입니다." style="width:100%;" >}}
 
-서비스는 대개 `prod`, `staging`, `dev` 등의 다중 환경에 배포됩니다. 요청 개수, 레이턴시, 오류율 같은 성능 메트릭은 여러 환경에 따라 달라집니다. 서비스 카탈로그의 환경 드롭다운 메뉴를 활용하여 **성능** 탭의 데이터를 특정한 환경 범위로 좁힐 수 있습니다.
+서비스는 일반적으로 `prod`, `staging`, `dev`와 같은 여러 환경에 배포됩니다. 요청 수, 대기 시간, 오류율과 같은 성능 메트릭은 다양한 환경에 따라 다릅니다. Software Catalog의 환경 드롭다운을 사용하면 **Performance** 탭의 데이터 범위를 특정 환경으로 지정할 수 있습니다.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="서비스 카탈로그의 `env` 드롭다운 메뉴에서 특정 환경 선택" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Software Catalog에서 `env` 드롭다운을 사용하여 특정 환경 선택" style="width:100%;" >}}
 
 서비스 개수의 과부하로 문제가 발생하는 패턴 중 하나는 서비스 이름에 환경 값을 포함하는 경우입니다. 예를 들어, `prod-web-store` 와 `dev-web-store`라는 별도의 개별 환경 두 개에서 운영되면 고유 서비스는 하나가 아니라 두 개일 수 있습니다.
 
@@ -376,6 +376,6 @@ Datadog 트레이서의 자세한 세부 사항을 캡처하려면 트레이서�
 [27]: /ko/tracing/trace_collection/library_config/
 [28]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [29]: /ko/tracing/troubleshooting/#data-volume-guidelines
-[30]: /ko/tracing/guide/inferred-service-opt-in/?tab=java
+[30]: /ko/tracing/services/inferred_services
 [31]: /ko/tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services

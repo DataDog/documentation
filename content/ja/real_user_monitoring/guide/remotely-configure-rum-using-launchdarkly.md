@@ -113,13 +113,13 @@ datadogRum.init(RUM_configuration_object)
 ```
 
 ## LaunchDarkly のコントロールを埋め込んで、ダッシュボードで直接 RUM を構成する
-If you want to change your RUM configuration directly in your Datadog application, you can embed the LaunchDarkly UI into Datadog and switch your feature flag on/off. The feature flags are set up so you can keep them off, with the default values. When you want to have higher fidelity data, you can turn on your feature flag and the values you set for the ON variation are used for the RUM initialization.
+Datadog アプリケーションで直接 RUM の構成を変更したい場合は、LaunchDarkly UI を Datadog に埋め込んで、機能フラグのオン/オフを切り替えることができます。機能フラグはデフォルト値のまま、オフにしておくことができるように設定されています。より忠実度の高いデータを取得したい場合は、機能フラグをオンにすれば、オンのバリエーションに設定した値が RUM の初期化に使用されます。
 
-LaunchDarkly's Datadog App integration embeds the feature flag management UI as a dashboard widget. You can use this widget to toggle feature flags without ever leaving Datadog. You can embed the LaunchDarkly widget within a new or existing dashboard that displays key metrics. If there is an incident or spike in errors, you can toggle the feature flag for your RUM configuration from within Datadog to begin sampling more data and ensuring your teams have access to the information they need to address and resolve your issue.
+LaunchDarkly の Datadog アプリインテグレーションは、機能フラグ管理 UI をダッシュボードウィジェットとして埋め込んでいます。このウィジェットを使用すると、Datadog を離れることなく機能フラグを切り替えることができます。主要なメトリクスを表示する新規または既存のダッシュボード内に、LaunchDarkly ウィジェットを埋め込むことができます。インシデントやエラーの急増があった場合、Datadog 内から RUM 構成の機能フラグを切り替え、より多くのデータのサンプリングを開始し、チームが問題に対処し解決するために必要な情報にアクセスできるようにすることが可能です。
 
 {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/datadog-launchdarkly-ui-widget.png" alt="Datadog と LaunchDarkly の UI インテグレーションウィジェット" style="width:100%;">}}
 
-If you need to change the values that you originally set for your configuration, you can update your flag within LaunchDarkly at any time. After you save your changes, all new flag evaluations have your updated values.
+構成に最初に設定した値を変更する必要がある場合は、いつでも LaunchDarkly 内でフラグを更新することができます。変更を保存すると、すべての新しいフラグ評価には更新された値が適用されます。
 
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}

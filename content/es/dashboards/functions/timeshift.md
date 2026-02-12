@@ -1,6 +1,9 @@
 ---
 aliases:
 - /es/graphing/functions/timeshift/
+description: Compara los valores actuales de las métricas con los datos históricos
+  mediante las funciones de cambio temporal, desplazamiento de calendario y comparación
+  basada en el tiempo.
 further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
   tag: FAQ
@@ -8,9 +11,9 @@ further_reading:
 title: Monitorización dinámica
 ---
 
-Aquí, puedes ver un conjunto de funciones del patrón `<TIMEPERIOD>_before()`. Estas funciones muestran los valores del periodo correspondiente en el gráfico. Por sí solos, pueden no ser muy útiles, pero junto con los valores actuales pueden proporcionar una visión muy práctica sobre el rendimiento de tu aplicación.
+Aquí puedes ver un conjunto de funciones que realizan un desplazamiento temporal de tus datos. Estas funciones muestran los valores del periodo correspondiente en el gráfico. Por sí solos, pueden no ser de gran valor, pero junto con los valores actuales pueden proporcionar una visión útil sobre el rendimiento de tu aplicación.
 
-## Monitorización dinámica
+## Timeshift
 
 | Función      | Descripción                                                                                    | Ejemplo                                          |
 |:--------------|:-----------------------------------------------------------------------------------------------|:-------------------------------------------------|
@@ -21,6 +24,23 @@ Por ejemplo, si deseas utilizar el patrón para comparar la carga actual del sis
 ```text
 timeshift(avg:system.load.1{*}, -1209600)
 ```
+
+## Cambio de calendario
+
+
+| Función           | Descripción                                                                                   | Ejemplo                            |
+|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
+| `calendar_shift()` | Haz un gráfico de los valores del día, semana o mes anterior a partir de la hora actual para la métrica. | `calendar_shift(<METRIC_NAME>{*}, "<TIME_SHIFT_STRING>", "<TIME_ZONE_CODE>")` |
+
+Para acceder a la función `calendar_shift()`, haz clic en el botón **Add function** (Añadir función), selecciona **Timeshift > Month before** (Desplazamiento temporal > Mes anterior). El desplazamiento de calendario te permite comparar la misma métrica a través de marcos temporales equivalentes. A continuación, se muestra un ejemplo de la métrica de coste de la nube `aws.cost.net.amortized` con el valor de calendar_shift() de hace dos semanas comparado con el valor actual.
+
+{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="Ejemplo de la función calendar_shift() utilizada para comparar el valor de la métrica `aws.cost.net.amortized ` de hace dos semanas con el valor actual" style="width:80%;" >}}
+
+Los valores válidos de `TIME_SHIFT_STRING` son números enteros negativos seguidos de "d" para días, "w" para semanas o "mo" para meses.
+Algunos ejemplos son `-1d`, `-7d`, `-1mo`, `-30d` y `-4w`.
+
+Los valores válidos de `TIME_ZONE_CODE` son los códigos de zona horaria de IANA para una ciudad específica, o `UTC`.
+Por ejemplo, `UTC`, `America/New_York`, `Europe/Paris` o `Asia/Tokyo`.
 
 ## Hora anterior
 
@@ -34,6 +54,8 @@ Este es un ejemplo de `system.load.1` con el valor `hour_before()` mostrado como
 
 ## Día anterior
 
+<div class="alert alert-warning">La función de día anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-1d".</div>
+
 | Función       | Descripción                                                          | Ejemplo                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
 | `day_before()` | Haz un gráfico de los valores de un día antes de la hora actual para la métrica. | `day_before(<METRIC_NAME>{*})` |
@@ -43,6 +65,8 @@ Este es un ejemplo de `nginx.net.connections` con el valor de `day_before()` mos
 {{< img src="dashboards/funciones/timeshift/simple_day_before_example.png" alt="Ejemplo simple de día anterior" style="width:80%;">}}
 
 ## Semana anterior
+
+<div class="alert alert-warning">La función de semana anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-7d".</div>
 
 | Función        | Descripción                                                                    | Ejemplo                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
@@ -54,6 +78,8 @@ Este es un ejemplo de `cassandra.db.read_count` con el valor de `week_before()` 
 
 ## Mes anterior
 
+<div class="alert alert-warning">La función de mes anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-1mo", "-30d" o "-4w", en función de tu caso de uso.</div>
+
 | Función         | Descripción                                                                                | Ejemplo                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
 | `month_before()` | Haz un gráfico de los valores de un mes (28 días/4 semanas) antes de la hora actual para la métrica. | `month_before(<METRIC_NAME>{*})` |
@@ -62,18 +88,6 @@ Este es un ejemplo de `aws.ec2.cpuutilization` con el valor `month_before()` mos
 
 {{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="Ejemplo simple de mes anterior" style="width:80%;">}}
 
-
-## Cambio de calendario
-
-<div class="alert alert-info">La función de cambio de calendario solo está disponible para fuentes de datos de Cloud Cost en dashboards <em>privados</em>.</div>
-
-| Función           | Descripción                                                                                   | Ejemplo                            |
-|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
-| `calendar_shift()` | Haz un gráfico de los valores del día, semana o mes anterior a partir de la hora actual para la métrica. | `calendar_shift(<METRIC_NAME>{*})` |
-
-Para acceder a la función calendar_shift(), haz clic en el botón **Add función** (Añadir función), selecciona **Timeshift > Month before** (Monitorización dinámica  > Mes anterior). El cambio de calendario te permite comparar la misma métrica en marcos temporales equivalentes. A continuación, se muestra un ejemplo de la métrica `aws.cost.net.amortized` de Cloud Cost con el valor calendar_shift() de hace dos semanas comparado con el valor actual.
-
-{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="Ejemplo de la función calendar_shift() utilizada para comparar el valor de la métrica `aws.cost.net.amortized ` de hace dos semanas con el valor actual" style="width:80%;" >}}
 
 ## Otros funciones
 
@@ -90,6 +104,6 @@ Para acceder a la función calendar_shift(), haz clic en el botón **Add funció
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

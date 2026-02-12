@@ -2,17 +2,13 @@
 title: CD Visibility Explorer Search Syntax
 description: Search all of your deployment executions.
 further_reading:
-- link: "/continuous_delivery/search"
+- link: "/getting_started/search/"
   tag: "Documentation"
-  text: "Filter and group deployments"
+  text: "Getting Started with Search in Datadog"
 - link: "/continuous_delivery/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
 CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
@@ -34,7 +30,7 @@ To combine multiple terms into a complex query, you can use any of the following
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
-| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
+| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)       | authentication AND -password |
 
 ## Further reading
 

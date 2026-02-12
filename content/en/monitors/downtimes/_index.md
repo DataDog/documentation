@@ -27,7 +27,7 @@ cascade:
 
 ## Overview
 
-Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
+Schedule downtimes for system shutdowns, offline maintenance, or upgrades without triggering your monitors. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
 
 {{< img src="/monitors/downtimes/downtime_overview.png" alt="Example of a downtime" style="width:100%;" >}}
 
@@ -35,7 +35,7 @@ Schedule downtimes for system shutdowns, off-line maintenance, or upgrades witho
 
 ### Create a downtime schedule
 
-To schedule a monitor downtime in Datadog navigate to the [**Manage Downtimes**][1] page. Then, click the **Schedule Downtime** button in the upper right.
+To schedule a monitor downtime in Datadog, navigate to the [**Manage Downtime**][1] page. Then, click the **Schedule Downtime** button in the upper right.
 
 To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
 
@@ -52,16 +52,16 @@ Search or use the dropdown menu to choose which monitors to silence. If the fiel
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
 
-Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
+Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be a maximum of 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
 [3]: /monitors/manage/#monitor-tags
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 #### Downtime scope
 Use group scope to apply additional filters to your downtime and have more control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it finds monitors that are tagged before it matches the group scope.
 
-For instance, you have a monitor that looks at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are anticipating slow requests and potential errors.
+For example, a monitor that looks at the average latency of all your services may encounter slow requests and potential errors while running an upgrade on the `web-store` service.
 
 You would like to make sure that `service:web-store` related notifications are muted and other critical alerts for the remaining services are delivered as usual. Enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
 
@@ -84,7 +84,7 @@ The Downtime scope query follows the same common [Search Syntax][3] that many ot
 #### Downtime scope limitations
 There are a few limitations that are **not supported** which include:
 
-* More than two levels of nesting, such as `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
+* More than two levels of nesting, such as `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Instead, use separate Downtimes to break down the logic.
 * Negation is only supported for key/value pairs and tags with `OR`. For example, `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, or `-service(A B)` are not supported.
 * Top level ORs are not supported. For example, `service:A OR service:B` is valid, but `service:A OR host:X` does not work. An `OR` between two different top level tags requires two separate Downtimes.
 * Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
@@ -133,7 +133,7 @@ The option to disable the first recovery notification is additive between multip
 
 ## Manage
 
-The [Manage Downtimes page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
+The [Manage Downtime page][1] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
 Use the facets panel and the search bar to filter the list on the `Creator`, the `Scope`, `Monitor Tags`, or `Active`, `Automuted`, `Recurring` parameters.
 
 {{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page" style="width:100%;">}}
@@ -148,7 +148,7 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="Monitor status graph showing state transition to alert during downtime, will not create an alert event" style="width:80%;">}}
 
-**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][11].
+**Note**: Muting or un-muting a monitor from the monitor status page does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtime][1] page or the [API][11].
 
 ### Expiration
 
@@ -193,7 +193,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [7]: /monitors/notify/#overview
 [8]: /integrations/#cat-notification
 [9]: /monitors/status/
-[10]: /service_management/events/explorer
+[10]: /events/explorer
 [11]: /api/latest/downtimes/#cancel-a-downtime
 [12]: /account_management/#preferences
 [13]: /integrations/amazon_ec2/#ec2-automuting

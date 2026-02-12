@@ -1,4 +1,5 @@
 ---
+description: 리소스가 제한된 환경에 최적화된 Datadog IoT Agent를 사용하여 IoT 디바이스 및 임베디드 애플리케이션을 모니터링하세요.
 further_reading:
 - link: /getting_started/agent/
   tag: 설명서
@@ -25,11 +26,11 @@ IoT Agent에는 다음과 같은 시스템 점검이 포함됩니다. IoT 기기
 - 임베디드 [DogStatsD][6] 서버를 사용하는 커스텀 메트릭 수집
 - [테일 파일][7], [TCP/UDP][8], [journald][9]를 사용하는 로그 수집
 
-IoT Agent에는 표준 Agent와 함께 사전 패키징된 Python 인터프리터 및 기타 통합 기능이 포함되어 있지 않습니다. 또한 APM, 실시간 프로세스 모니터링 또는 네트워크 성능 모니터링에 대한 추적도 지원하지 않습니다.
+IoT Agent에는 표준 Agent와 함께 사전 패키징된 Python 인터프리터 및 기타 통합 기능이 포함되어 있지 않습니다. 또한 APM, 실시간 프로세스 모니터링 또는 클라우드 네트워크 모니터링 추적도 지원하지 않습니다.
 
 ## 설정
 
-### 요구 사항
+### 필수 조건
 
 IoT Agent는 x64, arm64(ARMv8), ARMv7 아키텍처에서 실행 중인 Linux 기기에 DEB 및 RPM 패키지로 사용할 수 있습니다.
 
@@ -162,7 +163,7 @@ RPM 기반의 운영 체제에서 IoT Agent를 수동 설치하려면 다음 명
 
 IoT Agent는 동일한 [CLI 명령어][10]를 표준 Agent로 지원합니다.
 
-## 삭제
+## 설치 제거
 
 ```shell
 sudo apt-get remove datadog-iot-agent -y

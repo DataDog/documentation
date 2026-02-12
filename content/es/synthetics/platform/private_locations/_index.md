@@ -18,6 +18,10 @@ further_reading:
 - link: /synthetics/api_tests
   tag: Documentación
   text: Configurar un test de API
+- link: https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/
+  tag: Centro de arquitectura
+  text: Protege los datos confidenciales con los ejecutores de localización privada
+    de Synthetics
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
   tag: Sitio externo
   text: Crear y gestionar localizaciones privadas Synthetic con Terraform
@@ -29,12 +33,12 @@ title: Ejecutar tests Synthetic desde localizaciones privadas
 Las localizaciones privadas permiten **monitorizar aplicaciones internas o cualquier endpoint privado** que no resultan accesibles a través de la red pública de Internet. También pueden utilizarse para:
 
 * **Crear localizaciones de Synthetic** en áreas consideradas críticas para el desarrollo de tu negocio.
-* **Verificar el rendimiento de la aplicación en tu entorno interno de integración continua** antes de lanzar nuevas funciones a la fase de producción con [tests continuos y (CI/CD)][1].
+* **Verificar el rendimiento de la aplicación en tu entorno interno de integración continua** antes de lanzar nuevas funciones a la fase de producción con [tests continuos y (CI/CD)][28].
 * **Comparar el rendimiento de la aplicación** desde dentro y fuera de tu red interna.
 
 {{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagrama de arquitectura que muestra cómo funciona una localización privada durante la monitorización Synthetic" style="width:100%;">}}
 
-Las localizaciones privadas vienen como contenedores Docker o servicios Windows que puedes instalar en tu red privada. Después de crear e instalar una localización privada, puedes asignarle [tests Synthetic][2], como a cualquier localización gestionada.
+Las localizaciones privadas vienen como contenedores Docker o servicios de Windows que puedes instalar en tu red privada. Después de crear e instalar una localización privada, puedes asignarle [tests de Synthetic][29], como a cualquier localización gestionada.
 
 El worker de tu localización privada extrae tus configuraciones de test de los servidores de Datadog utilizando HTTPS, ejecuta el test de forma programada o bajo demanda y devuelve los resultados a los servidores de Datadog. A continuación, puedes ver los resultados de tus tests de localizaciones privadas exactamente de la misma forma que verías los tests que se ejecutan desde localizaciones gestionadas:
 
@@ -48,6 +52,14 @@ Para utilizar localizaciones privadas para [tests continuos][23], necesitas v1.2
 {{% tab "Docker" %}}
 
 Las localizaciones privadas son contenedores Docker que puedes instalar en cualquier lugar de tu red privada. Puedes acceder a la [imagen del worker de la localización privada][101] en el hub Docker. Puede ejecutarse en un sistema operativo basado en Linux o un sistema operativo Windows, si el [motor Docker][102] está disponible en tu host y puede ejecutarse en modo de contenedor Linux.**\***
+
+{{< site-region region="gov" >}}
+
+Si necesitas compatibilidad con FIPS, utiliza la [imagen compatible con FIPS][26] en el centro de Docker.
+
+[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
+
+{{< /site-region >}}
 
 **\*** **El uso y el funcionamiento de este software se rigen por el Acuerdo de licencia del usuario final, disponible [aquí][103]**.
 
@@ -72,21 +84,21 @@ Las localizaciones privadas son servicios de Windows que puedes instalar en cual
 
 **\*** **El uso y el funcionamiento de este software se rigen por el Acuerdo de licencia del usuario final, disponible [aquí][102]**.
 
-Los requisitos de esta máquina se enumeran en la tabla siguiente. Los scripts de PowerShell deben estar habilitados en el equipo en el que instalas el worker de localización privada.
+Los requisitos de esta máquina se enumeran en la tabla siguiente. Los scripts de PowerShell deben estar habilitados en el equipo en el que instalas el worker de la localización privada.
 
 | Sistema | Requisitos |
 |---|---|
-| Sistema operativo | Windows Server 2016, Windows Server 2019 o Windows 10. |
+| Sistema operativo | Windows Server 2022, Windows Server 2019, Windows Server 2016 o Windows 10. |
 | RAM | 4GB mínimo. 8GB recomendado. |
 | CPU | Procesador Intel o AMD compatible con 64 bits. Procesador de 2,8 GHz o superior recomendado. |
 
 **Nota**: Para que las localizaciones privadas de Windows ejecuten tests de navegador, los navegadores (por ejemplo, Chrome, Edge o Firefox) deben estar instalados en el ordenador Windows.
 
-Antes de utilizar el instalador MSI, debes instalar .NET versión 4.7.2 o posterior en tu ordenador.
+Debes instalar .NET versión 4.7.2 o posterior en tu ordenador antes de utilizar el instalador de MSI.
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">El cumplimiento de FIPS no es compatible con las localizaciones privadas que informan a <code>ddog-gov.com</code>. Para deshabilitar este comportamiento, utiliza la opción <a href"="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code></a>.</div>
+<div class="alert alert-warning">El cumplimiento de FIPS no es compatible con las localizaciones privadas que informan a <code>ddog-gov.com</code>. Para deshabilitar este comportamiento, utiliza la opción <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code></a>.</div>
 
 {{< /site-region >}}
 
@@ -143,6 +155,16 @@ Para extraer configuraciones de test y enviar resultados de test, el worker de l
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+| Puerto | Endpoint                                | Descripción                                                                        |
+| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ap2.datadoghq.com`  | Utilizado por la localización privada para extraer configuraciones de test y enviar resultados de test en Datadog utilizando un protocolo interno basado en el [protocolo AWS Signature versión 4][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 | Puerto | Endpoint                              | Descripción                                                    |
@@ -176,11 +198,11 @@ Ve a [**Monitorización Synthetic** > **Parámetros** > **Localizaciones privada
 Rellena la información de tu localización privada:
 
 1. Especifica el **nombre** y la **descripción** de tu localización privada.
-2. Añade cualquier **Etiqueta** que quieras asociar a tu localización privada.
+2. Añade cualquier **Etiqueta** (tag) que quieras asociar a tu localización privada.
 3. Selecciona una de tus **claves de API** actuales. Al seleccionar una clave de API, se posibilita la comunicación entre tu localización privada y Datadog. Si aún no tienes una clave de API, haz clic en **Generate API key** (Generar clave de API) para crear una en la página correspondiente. Sólo son obligatorios los campos `Name` y `API key`.
 4. Configura el acceso para tu localización privada y haz clic en **Save Location and Generate Configuration File** (Guardar localización y generar archivo de configuración). Datadog creará tu localización privada y generará el archivo de configuración asociado.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Añadir información a la localización privada" style="width:85%;">}} 
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Añadir detalles a una localización privada" style="width:85%;">}}
 
 ### Configuración de tu localización privada
 
@@ -219,7 +241,6 @@ Puedes utilizar las variables de entorno  `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY
 Inicia tu localización privada en:
 
 {{< tabs >}}
-
 {{% tab "Docker" %}}
 
 Ejecuta este comando para iniciar el worker de la localización privada montando tu archivo de configuración en el contenedor. Asegúrate de que tu archivo `<MY_WORKER_CONFIG_FILE_NAME>.json` está en `/etc/docker` y no la carpeta de inicio raíz:
@@ -228,22 +249,13 @@ Ejecuta este comando para iniciar el worker de la localización privada montando
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
-**Nota:** Si tienes direcciones IP bloqueadas reservadas, añade [funcionalidades de Linux] `NET_ADMIN`[1] a tu contenedor de localización privada.
+**Nota:** Si tienes direcciones IP bloqueadas reservadas, añade [funcionalidades de Linux] `NET_ADMIN`[26] a tu contenedor de localización privada.
 
 Este comando inicia un contenedor Docker y prepara tu localización privada para realizar tests. **Datadog recomienda ejecutar el contenedor en modo independiente con la política de reinicio adecuada.**
 
-#### Certificados raíz
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
-Puedes cargar certificados raíz personalizados en tus localizaciones privadas para que tus tests de API y de navegador realicen el enlace SSL utilizando tus propios archivos `.pem`.
-
-Cuando pongas en marcha tus contenedores de localizaciones privadas, monta los archivos de certificado `.pem` relevantes en `/etc/datadog/certs/<filename>.pem` del mismo modo que montarías un archivo de configuración de localización privada. Estos certificados se consideran CA de confianza y se utilizan en tiempo de ejecución de tests. **Nota**: Si combinas todos tus archivos `.pem` en un único archivo, el orden en el que se colocan los certificados es importante. Es necesario que el certificado intermedio preceda al certificado raíz para establecer correctamente una cadena de confianza.
-
-Para obtener más información sobre parámetros de localizaciones privadas para administradores, consulta [Configuración][2].
-
-[1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
-[2]: https://docs.datadoghq.com/es/synthetics/private_locations/configuration/#private-locations-admin
-
-{{% /tab %}}
+{{< /tab >}}
 
 {{% tab "Docker Compose" %}}
 
@@ -257,30 +269,19 @@ Para obtener más información sobre parámetros de localizaciones privadas para
             volumes:
                 - PATH_TO_PRIVATE_LOCATION_CONFIG_FILE:/etc/datadog/synthetics-check-runner.json
     ```
-    **Nota:** Si tienes IPs reservadas bloqueadas, añade las [funcionalidades de Linux][1] `NET_ADMIN` a tu contenedor de localización privada.
+    **Nota:** Si ha bloqueado IPs reservadas, añada las [Linux capacidades][26] de `NET_ADMIN` a su contenedor de ubicaciones privadas.
 
 2. Empieza tu contenedor con:
 
     ```shell
     docker-compose -f docker-compose.yml up
     ```
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
-#### Certificados raíz
-
-Puedes cargar certificados raíz personalizados en tus localizaciones privadas para que tus tests de API y de navegador realicen el enlace SSL utilizando tus propios archivos `.pem`.
-
-Cuando pongas en marcha tus contenedores de localizaciones privadas, monta los archivos de certificado `.pem` relevantes en `/etc/datadog/certs` del mismo modo que montarías un archivo de configuración de localización privada. Estos certificados se consideran CA de confianza y se utilizan en tiempo de ejecución de tests. **Nota**: Si combinas todos tus archivos `.pem` en un único archivo, el orden en el que se colocan los certificados es importante. Es necesario que el certificado intermedio preceda al certificado raíz para establecer correctamente una cadena de confianza.
-
-Para obtener más información sobre parámetros de localizaciones privadas para administradores, consulta [Configuración][2].
-
-[1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
-[2]: https://docs.datadoghq.com/es/synthetics/private_locations/configuration/#private-locations-admin
-
-{{% /tab %}}
+{{< /tab >}}
 
 {{% tab "Podman" %}}
-
-La configuración de Podman es muy similar a la de Docker, aunque necesitas definir `NET_RAW` como funcionalidad adicional para tener compatibilidad con los tests ICMP.
+La configuración de Podman es muy similar a Docker, sin embargo, debes configurar `NET_RAW` como una capacidad adicional para admitir tests de ICMP.
 
 1. Ejecuta `sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` desde el host donde se ejecuta el contenedor.
 2. Ejecuta este comando para iniciar el worker de la localización privada montando tu archivo de configuración en el contenedor. Asegúrate de que tu archivo `<MY_WORKER_CONFIG_FILE_NAME>.json` esté accesible para montarlo en el contendor:
@@ -292,9 +293,7 @@ La configuración de Podman es muy similar a la de Docker, aunque necesitas defi
    Si tienes direcciones IP reservadas bloqueadas configuradas, añade las funcionalidades de Linux `NET_ADMIN` a tu contenedor de localización privada.
 
 Este comando inicia un contenedor Podman y prepara tu localización privada para realizar tests. Datadog recomienda ejecutar el contenedor en modo independiente con la política de reinicio adecuada.
-
-
-{{% /tab %}}
+{{< /tab >}}
 
 {{% tab "Despliegue Kubernetes" %}}
 
@@ -337,7 +336,7 @@ Para desplegar el worker de localizaciones privadas de forma segura, configura y
               secretName: private-location-worker-config
     ```
 
-    **Nota:** Si tienes IPs reservadas bloqueadas, añade las [funcionalidades de Linux][1] `NET_ADMIN` a tu contenedor de localización privada.
+    **Nota:** Si tienes direcciones IP bloqueadas reservadas, añade [funcionalidades de Linux][26] `NET_ADMIN` a tu contenedor de localización privada.
 
 3. Aplica la configuración:
 
@@ -347,9 +346,9 @@ Para desplegar el worker de localizaciones privadas de forma segura, configura y
 
 Para OpenShift, ejecuta la localización privada con el SCC `anyuid`. Esto es necesario para que se ejecute tu test de navegador.
 
-[1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{% tab "Helm Chart" %}}
 
@@ -357,7 +356,7 @@ Puedes configurar variables de entorno en tus parámetros de configuración que 
 
 También puedes hacer lo siguiente:
 
-1. Añade la [localización privada Synthetics de Datadog][1] a tus repositorios Helm:
+1. Añade la [localización privada Synthetics de Datadog][2] a tus repositorios Helm:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -370,13 +369,13 @@ También puedes hacer lo siguiente:
     helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-**Nota:** Si tienes direcciones IP bloqueadas reservadas, añade [funcionalidades de Linux] `NET_ADMIN`[2] a tu contenedor de localización privada.
+**Nota:** Si tienes direcciones IP bloqueadas reservadas, añade [funcionalidades de Linux] `NET_ADMIN`[26] a tu contenedor de localización privada.
 
-[1]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
-[2]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[2]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{% tab "ECS" %}}
 
@@ -409,15 +408,14 @@ Crea una nueva definición de tarea de EC2 que coincida con lo siguiente. Sustit
     ...
 }
 ```
-
 **Notas:**
 
-- Si tienes direcciones IP reservadas bloqueadas, configura un [parámetro de Linux][1] para conceder funcionalidades `NET_ADMIN` a tus contenedores de localización privada.
+- Si tienes direcciones IP reservadas bloqueadas, configura un [parámetro de Linux][31] para conceder funcionalidades `NET_ADMIN` a tus contenedores de localización privada.
 - Si utilizas las variables de entorno `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` y `DATADOG_PRIVATE_KEY`, no es necesario incluirlas en la sección `"command": [ ]`.
 
-[1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
+[31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
-{{% /tab %}}
+{{< /tab >}}
 
 {{% tab "Fargate" %}}
 
@@ -454,7 +452,96 @@ Crea una nueva definición de tarea de Fargate que coincida con lo siguiente. Su
 
 **Nota:** Como la opción de firewall de localización privada no es compatible con AWS Fargate, no es posible configurar el parámetro `enableDefaultBlockedIpRanges` como `true`.
 
-{{% /tab %}}
+{{< /tab >}}
+
+{{% tab "Fargate con AWS Secret Manager" %}}
+
+Crea un secreto en AWS Secret Manager para almacenar toda o parte de la configuración de localización privada generada anteriormente. Ten en cuenta que la `publicKey` no puede guardarse tal cual en el archivo de configuración. Por ejemplo:
+
+```json
+{
+    "datadogApiKey": "...",
+    "id": "...",
+    "site": "...",
+    "accessKey": "...",
+    "secretAccessKey": "...",
+    "privateKey": "...",
+    "pem": "...",
+    "fingerprint": "..."
+}
+```
+
+Se requieren permisos para permitir que la definición de tarea y la instancia de AWS Fargate lean en Secret Manager. Consulta [Especificación de datos confidenciales mediante secretos de Secret Manager en Amazon ECS][25] para obtener más información.
+
+Crea una definición de tarea de Fargate que coincida con el siguiente ejemplo, sustituyendo los valores de la lista de secretos por el ARN del secreto que creaste en el paso anterior. Por ejemplo: `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
+
+Si no guardaste toda la configuración en el gestor de secretos, aún puedes pasar el valor como argumentos de cadena hardcoded.
+
+```yaml
+{
+    ...
+    "containerDefinitions": [
+        {
+            "entryPoint": [
+                "/bin/bash",
+                "-c"
+            ],
+            "command": [
+                "/home/dog/scripts/entrypoint.sh --locationID=$locationID --publicKey.fingerprint=$fingerprint"
+            ],
+            "secrets": [
+              {
+                "name": "DATADOG_ACCESS_KEY",
+                "valueFrom": "..."
+              },
+              {
+                "name": "DATADOG_API_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "fingerprint",
+                "valueFrom": "...",
+              },
+              {
+                "name": "locationID",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PUBLIC_KEY_PEM",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PRIVATE_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SECRET_ACCESS_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SITE",
+                "valueFrom": "...",
+              }
+            ],
+            ...
+            "image": "datadog/synthetics-private-location-worker:latest",
+            ...
+        }
+    ],
+    ...
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    ...
+}
+```
+
+**Nota:** Como la opción de firewall de localización privada no es compatible con AWS Fargate, no es posible configurar el parámetro `enableDefaultBlockedIpRanges` como `true`.
+
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+
+{{< /tab >}}
 
 {{% tab "EKS" %}}
 
@@ -497,7 +584,7 @@ Como Datadog ya se integra con Kubernetes y AWS, está preparado para monitoriza
               name: private-location-worker-config
     ```
 
-    **Nota:** Si tienes direcciones IP reservadas bloqueadas, configura un contexto de seguridad para conceder [funcionalidades de Linux][1] `NET_ADMIN` a tus contenedores de localización privada.
+    **Nota:** Si tienes direcciones IP reservadas bloqueadas, configura un contexto de seguridad para conceder [funcionalidades de Linux][26] `NET_ADMIN` a tus contenedores de localización privada.
 
 3. Aplica la configuración:
 
@@ -505,24 +592,25 @@ Como Datadog ya se integra con Kubernetes y AWS, está preparado para monitoriza
     kubectl apply -f private-location-worker-deployment.yaml
     ```
 
-[1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+[26]: https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities
 
-{{% /tab %}}
-{{% tab "Windows vía GUI" %}}
+{{< /tab >}}
 
-1. Descarga el archivo [`datadog-synthetics-worker-1.49.0.amd64.msi` ][101] y ejecútalo desde la máquina en la que quieres instalar la localización privada. 
+{{% tab "Windows via GUI" %}}
+
+1. Descarga el archivo [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi`][101] y ejecútalo desde la máquina en la que deseas instalar la localización privada.
 1. Haz clic en **Next** (Siguiente) en la página de bienvenida, lee el EULA y acepta los términos y condiciones. Luego, haz clic en **Next** (Siguiente).
 1. Modifica dónde se instalará la aplicación o deja la configuración predeterminada. Haz clic en **Next** (Siguiente).
 1. Para configurar tu localización Windows privada, puedes:
-   - Pegar e introducir una configuración JSON para tu worker de localización privada Synthetics de Datadog. Este archivo es generado por Datadog cuando [creas una localización privada][102].
-   - Busca o escribe una ruta de acceso a un archivo que contenga una configuración JSON para tu worker de localización privada Synthetics de Datadog.
+   - Pegar e introducir una configuración JSON para tu worker de la localización privada Synthetics de Datadog. Este archivo es generado por Datadog cuando [creas una localización privada][102].
+   - Busca o escribe una ruta de acceso a un archivo que contenga una configuración JSON para tu worker de la localización privada Synthetics de Datadog.
    - Una vez finalizada la instalación, puedes dejarla en blanco y ejecutar `C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>` en la línea de comandos Windows.
 
-   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Asistente del worker de localización privada Synthetics, instalador MSI. La opción 'Pegar en una configuración JSON' está seleccionada. Se muestra un campo de texto para esta configuración JSON." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Asistente del worker de la localización privada Synthetics, instalador MSI. La opción 'Pegar en una configuración JSON' está seleccionada. Se muestra un campo de texto para esta configuración JSON." style="width:80%;" >}}
 
 1. Puedes aplicar las siguientes opciones de configuración:
 
-   {{< img src="synthetics/private_locations/settings.png" alt="Asistente del worker de localización privada Synthetics, instalador MSI. Se muestran los parámetros de firewalls y logs." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/settings.png" alt="Asistente del worker de la localización privada Synthetics, instalador MSI. Se muestran los parámetros de firewalls y logs." style="width:80%;" >}}
 
    Aplica las reglas de firewall que necesita este programa a Windows Firewall
    : Permite que el instalador aplique reglas de firewall durante la instalación y las elimine durante la desinstalación.
@@ -531,39 +619,40 @@ Como Datadog ya se integra con Kubernetes y AWS, está preparado para monitoriza
    : Configura reglas de bloqueo para Chrome, Firefox y Edge (si están instalados) y añade reglas para bloquear rangos de direcciones IP reservadas salientes en Windows Firewall.
 
    Habilita el registro de archivos
-   : Permite que el worker de localización privada Synthetics registre archivos en el directorio de instalación.
+   : Permite que el worker de la localización privada Synthetics registre archivos en el directorio de instalación.
 
    Días de rotación de logs
    : Especifica cuántos días conservar logs antes de eliminarlos del sistema local.
 
    Verbosidad del registro
-   : Especifica la verbosidad de la consola y el registro de archivos para el el worker de localización privada Synthetics.
+   : Especifica la verbosidad de la consola y el registro de archivos para el el worker de la localización privada Synthetics.
 
-1. Haz clic en **Next** (Siguiente) y en **Install** (Instalar) para iniciar el proceso de instalación.
+1. Haz clic en **Next** (Siguiente) e **Install** (Instalar) para iniciar el proceso de instalación.
 
 Una vez completado el proceso, haz clic en **Finish** (Finalizar) en la página de finalización de la instalación.
 
-<div class="alert alert-warning">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio para iniciar el worker de localización privada Synthetics.</div>
+<div class="alert alert-danger">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio</code> para iniciar el worker de la localización privada Synthetics.</div>
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
-{{% /tab %}}
-{{% tab "Windows vía CLI" %}}
+{{< /tab >}}
 
-1. Descarga el archivo [`datadog-synthetics-worker-1.49.0.amd64.msi` ][101] y ejecútalo desde la máquina en la que quieres instalar la localización privada. 
+{{% tab "Windows via CLI" %}}
+
+1. Descarga el archivo [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi`][101] y ejecútalo desde la máquina en la que deseas instalar la localización privada.
 2. Ejecuta uno de los siguientes comandos dentro del directorio en el que descargaste el instalador.
 
    - En un terminal PowerShell:
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-1.49.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
 
    - O en un terminal de comandos:
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-1.49.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
 
 Se pueden añadir parámetros adicionales:
@@ -573,11 +662,62 @@ Se pueden añadir parámetros adicionales:
 | APPLYDEFAULTFIREWALLRULES | Aplica las reglas de firewall necesarias para el programa. | 1 | N/A | 0: Deshabilitado<br>1: Habilitado |
 | APPLYFIREWALLDEFAULTBLOCKRULES | Bloquea las direcciones IP reservadas para cada navegador que tengas instalado (Chrome, Edge y Firefox). El bloqueo de conexiones loopback no es posible en Windows Firewall. | 0 | N/A | 0: Deshabilitado<br>1: Habilitado |
 | LOGGING_ENABLED | Cuando se habilita, se configura el registro de archivos. Estos logs se almacenan en el directorio de instalación en la carpeta de logs. | 0 | `--enableFileLogging` | 0: Deshabilitado<br>1: Habilitado |
-| LOGGING_VERBOSITY | Configura la verbosidad del registro para el programa. Esto afecta a la consola y a los logs de archivo. | Esto afecta a la consola y a los logs de archivo. | `-vvv` | `-v`: Error<br>`-vvv`: Advertencia`-vvvv`: Información`vvvv`: Depurar |
+| LOGGING_VERBOSITY | Configura la verbosidad del registro para el programa. Esto afecta a la consola y a los logs de archivo. | Esto afecta a la consola y a los logs de archivo. | `-vvv` | `-v`: Error<br>`-vv`: Advertencia<br>`-vvv`: Información<br>`vvvv`: Depurar |
 | LOGGING_MAXDAYS | Número de días para conservar logs de archivo en el sistema antes de eliminarlos. Puede ser cualquier número cuando se ejecuta una instalación desatendida. | 7 | `--logFileMaxDays` | Entero |
-| WORKERCONFIG_FILEPATH | Debe cambiarse por la ruta a tu archivo de configuración JSON del worker de localización privada Synthetics. Escriba esta ruta entre comillas, si la ruta contiene espacios. | <None> | `--config` | Cadena |
+| WORKERCONFIG_FILEPATH | Debe cambiarse por la ruta a tu archivo de configuración JSON del worker de la localización privada Synthetics. Escriba esta ruta entre comillas, si la ruta contiene espacios. | <None> | `--config` | Cadena |
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Para obtener más información sobre parámetros de localizaciones privadas para administradores, consulta [Configuración][32].
+
+#### Certificados raíz
+
+Puedes cargar certificados raíz personalizados en tus localizaciones privadas para que tus tests de API y de navegador realicen el enlace SSL utilizando tus propios archivos `.pem`.
+
+{{< tabs >}}
+{{% tab "Contenedor Linux" %}}
+
+A la hora de preparar tus contenedores de localizaciones privadas, monta los archivos `.pem` de certificado correspondientes en `/etc/datadog/certs` de la misma forma que el archivo de configuración de localización privada. Estos certificados se consideran CA de confianza y se utilizan en el tiempo de ejecución de test.
+
+<div class="alert alert-info"><strong>Nota</strong>: Si combinas todos tus archivos <code>.pem</code> en un solo archivo, la secuencia de los certificados dentro del archivo es importante. Es necesario que el certificado intermedio preceda al certificado raíz para establecer correctamente una cadena de confianza.</div>
+
+{{% /tab %}}
+
+{{% tab "Windows service" %}}
+
+Para instalar certificados raíz para ubicaciones privadas en un servicio de Windows, sigue estos pasos:
+
+1. Abre la aplicación de editor del registro.
+2. Navega hasta la entrada `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\synthetics-private-location`.
+3. Crea una clave de registro llamada `Environment` con el tipo de valor `Multi-string`.
+
+<div class="alert alert-info"><strong>Nota</strong>: Tu certificado debe estar en la misma carpeta que tu servicio Synthetic Monitoring:
+por defecto: <code>C:\Program Files\Datadog-Synthetics\Synthetics</code>.</div>
+
+4. Fija el valor `NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem`
+
+   {{< img src="synthetics/private_locations/windows_pl_set_service.png" alt="Tu descripción de imagen" style="width:100%;" >}}
+
+5. Abre la aplicación de servicios y vuelve a cargar el servicio de localización privada de Datadog Synthetic Monitoring.
+
+{{% /tab %}}
+
+{{% tab "Windows standalone" %}}
+
+Para instalar certificados raíz para localizaciones privadas en un proceso independiente de Windows con `synthetics-private-location.exe`, sigue estos pasos:
+
+1. Abre el símbolo del sistema Windows o PowerShell.
+
+2. Establece la variable de entorno y llama al ejecutable.
+
+Ejemplo:
+
+```text
+set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -699,12 +839,11 @@ readinessProbe:
 ```
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
 #### Configuraciones de checks de estado adicionales
 
-<div class="alert alert-danger">Este método de añadir checks de estado de localizaciones privadas ya no es compatible. Datadog recomienda utilizar sondeos de ejecución y preparación.</div>
+<div class="alert alert-warning">Este método de añadir checks de estado de localizaciones privadas ya no es compatible. Datadog recomienda utilizar sondeos de ejecución y preparación.</div>
 
 El archivo `/tmp/liveness.date` de contenedores de localización privada se actualiza después de cada análisis que se realiza correctamente desde Datadog (por defecto, 2s). Se considera que el estado del contenedor no es adecuado si ha pasado tiempo sin realizar ningún análisis, por ejemplo: sin recuperación en el último minuto.
 
@@ -818,14 +957,13 @@ Para actualizar una localización privada existente, haga clic en el icono del *
 
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="Acceder al flujo (flow) de trabajo de una localización privada" style="width:90%;" >}}
 
-Luego, ejecuta el [comando de configuración basado en tu entorno](#install-your-private-location)
-para obtener la última versión de la imagen de la localización privada.
+A continuación, ejecuta el [comando de configuración basado en tu entorno](#install-your-private-location) para obtener la versión más reciente de la imagen de localización privada.
 
-**Nota**: Si estás utilizando `docker run` para iniciar la imagen de tu localización privada y ya has instalado la imagen de la localización privada utilizando la etiqueta (tag) `latest`, asegúrate de añadir `--pull=always` al comando `docker run` para asegurarte de que se extraiga la última versión, en lugar de depender de la versión en caché de la imagen que pueda existir localmente con la misma etiqueta `latest`.
+**Nota**: Si estás utilizando `docker run` para iniciar la imagen de tu localización privada y ya has instalado la imagen de la localización privada utilizando la etiqueta `latest`, asegúrate de añadir `--pull=always` al comando `docker run` para asegurarte de que se extraiga la última versión, en lugar de depender de la versión en caché de la imagen que pueda existir localmente con la misma etiqueta `latest`.
 
 ### Realizar un test de tu endpoint interno
 
-Una vez que al menos un worker de localización privada comienza a informar a Datadog, el estado de la localización privada aparece en verde.
+Una vez que al menos un worker de la localización privada comienza a informar a Datadog, el estado de la localización privada aparece en verde.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Localización privada informando" style="width:90%;">}}
 
@@ -845,7 +983,7 @@ Crea un test de API, de API de varios pasos o de navegador y selecciona tus **Lo
 
 {{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Asignar un test Synthetic a una localización privada" style="width:90%;">}}
 
-Utiliza localizaciones privadas de la misma forma que utilizas tus localizaciones gestionadas de Datadog: asigna [tests Synthetic][2] a localizaciones privadas, visualiza resultados de test, obtén [métricas de Synthetic][11], etc.
+Utiliza localizaciones privadas de la misma forma que utilizas tus localizaciones gestionadas de Datadog: asigna [tests de Synthetic][29] a localizaciones privadas, visualiza resultados de test, obtén [métricas de Synthetic][11], etc.
 
 ## Escalar tu localización privada
 
@@ -871,12 +1009,33 @@ Los usuarios que tienen el [rol de administrador de Datadog y el rol estándar d
 
 Si utilizas la [función de rol personalizado][21], añade tu usuario a un rol personalizado que incluya los permisos `synthetics_private_location_read` y `synthetics_private_location_write`.
 
+<div class="alert alert-warning"><strong>Nota</strong>: Si un test incluye localizaciones privadas restringidas, la actualización de test elimina dichas localizaciones de test.</div>
+
+## Restringir el acceso
+
+Utiliza el [control de acceso granular][24] para limitar quién tiene acceso a tu test en función de roles, equipos o usuarios individuales:
+
+1. Abre la sección de permisos del formulario.
+2. Haz clic en **Edit Access** (Editar acceso).
+  {{< img src="synthetics/settings/grace_2.png" alt="Establecer permisos para tu test en el formulario de configuración de Localizaciones privadas" style="width:100%;" >}}
+3. Haz clic en **Restrict Access** (Restringir el acceso).
+4. Selecciona equipos, roles o usuarios.
+5. Haz clic en **Add** (Añadir).
+6. Selecciona el nivel de acceso que deseas asociar a cada uno de ellos.
+7. Haz clic en **Done** (Listo).
+
+<div class="alert alert-info"><strong>Nota</strong>: Puedes ver los resultados de una localización privada incluso sin tener acceso a esa localización privada.</div>
+
+| Nivel de acceso | Ver instrucciones de PL | Ver métricas de PL | Utilizar PL en el test | Editar la configuración de PL  |
+| ------------ | ---------------------| --------------- | -------------- | ---------------------- |
+| Sin acceso    |                      |                 |                |                        |
+| Visor       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
+| Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/continuous_testing/cicd_integrations
-[2]: /es/synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
 [5]: /es/synthetics/private_locations/configuration/
@@ -895,3 +1054,12 @@ Si utilizas la [función de rol personalizado][21], añade tu usuario a un rol p
 [21]: /es/account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
 [23]: /es/continuous_testing/cicd_integrations/configuration
+[24]: /es/account_management/rbac/granular_access
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[26]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[27]: https://docs.datadoghq.com/es/synthetics/private_locations/configuration/#private-locations-admin
+[28]: /es/continuous_testing/cicd_integrations
+[29]: /es/synthetics/
+[30]: https://github.com/DataDog/helm-charts/tree/master/charts/synthetics-private-location
+[31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
+[32]: /es/synthetics/platform/private_locations/configuration

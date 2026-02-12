@@ -44,10 +44,10 @@ title: 変数
 | `{{last_seen_epoch}}`                              | シグナルが直近でトリガーされた時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。|
 | `{{rule_name}}`                                    | 関連するルールの名前。                                                                  |
 | `{{case_name}}`                                    | トリガーとなるルールケースの名前。                                                             |
-| `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
-| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
+| `{{events_matched}}`                               | 関連するルールにマッチしたイベントの数です。                                       |
+| `{{events_matched_per_query.<name_of_the_query>}}` | 関連するルールクエリ `<name_of_the_query>` にマッチしたイベントの数です。           |
 
-When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
+大量のログがルールにマッチする場合、そのルールのタイトルやメッセージは新たに到着するすべてのログに対してレンダリングされません。このような場合、`{{events_matched}}` および `{{events_matched_per_query.<name_of_the_query>}}` の表示値は、シグナルのサイドパネルの Overview タブに表示される値よりも小さくなる可能性があります。
 
 ### ダイナミックリンク
 
@@ -93,7 +93,7 @@ Epoch テンプレート変数は、通知内で人間が読みやすい文字�
 
 ## 属性変数
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセスできるのは<a href="#template-variables">テンプレート変数</a>のみです。属性変数はサポートされていません。
 </div>
 
@@ -101,7 +101,7 @@ HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセス�
 
 シグナルのイベント属性のリストを表示するには、シグナルのサイドパネルの **Overview** タブの下部にある **JSON** をクリックします。ルール通知にこれらのイベント属性を追加するには、構文 `{{@attribute}}` を使用します。イベント属性の内部キーにアクセスするには、JSON のドット表記を使用します (例: `{{@attribute.inner_key}})`)。
 
-If the signal's JSON does not contain an attribute that is present in the related log's JSON, use the previously outlined syntax with the attribute name from the log's JSON. This attribute is then included in both the signal's JSON and the signal notifications.
+もしシグナルの JSON に、関連するログの JSON に含まれる属性がない場合は、先述の構文をログの JSON 内の属性名と併せて使用してください。すると、この属性はシグナルの JSON とシグナル通知の両方に含まれるようになります。
 
 以下は、セキュリティシグナルに関連するイベント属性を持つ JSON オブジェクトの例です。
 
@@ -279,9 +279,9 @@ if-else ロジックで属性が値と一致するかどうかを確認します
 
 ### URL エンコード
 
-If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
+シグナル通知に URL でエンコードする必要がある情報が含まれている場合 (例えば、リダイレクトの場合)、`{{ urlencode "<variable>"}}` 構文を使います。
 
-**Example**: If your signal message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**例**: シグナルメッセージに特定のサービスにフィルタリングされたソフトウェアカタログへの URL が含まれている場合、`service` [タグ変数](#attribute-and-tag-variables)を使い、URL に `{{ urlencode "<variable>"}}` 構文を追加します。
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}

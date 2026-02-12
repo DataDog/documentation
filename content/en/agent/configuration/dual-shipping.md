@@ -1,8 +1,12 @@
 ---
 title: Dual Shipping
+description: "Configure the Datadog Agent to send metrics, logs, and traces to multiple Datadog organizations simultaneously."
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "/agent/configuration/network/"
   tag: "Guide"
   text: "Network Traffic"
@@ -11,13 +15,13 @@ further_reading:
   text: "Send logs to external destinations with Observability Pipelines"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Dual shipping can impact billing if you are sending data to multiple Datadog organizations. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>.
 </div>
 
 ## Overview
 
-This document provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics, and so on) to multiple Datadog organizations.
+This guide provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics) to multiple Datadog organizations and sites. For more information about Datadog sites, see [Getting Started with Datadog sites][3].
 
 **Note**: Use [Observability Pipelines][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
 
@@ -35,10 +39,10 @@ In `datadog.yaml`:
 
 ```yaml
 additional_endpoints:
-  "https://app.datadoghq.com":
+  "https://app.{{< region-param key="dd_site">}}":
   - apikey2
   - apikey3
-  "https://app.datadoghq.eu":
+  "https://app.<DD_SITE>": # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
   - apikey4
 ```
 
@@ -47,7 +51,7 @@ additional_endpoints:
 Requires Agent version >= 6.18 or 7.18.
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://app.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://app.<DD_SITE>\": [\"apikey4\"]}' # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
 ```
 
 ## APM
@@ -61,10 +65,10 @@ In `datadog.yaml`:
 apm_config:
   [...]
   additional_endpoints:
-    "https://trace.agent.datadoghq.com":
+    "https://trace.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://trace.agent.datadoghq.eu":
+    "https://trace.agent.<DD_SITE>": # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
     - apikey4
 ```
 
@@ -73,7 +77,7 @@ apm_config:
 Requires Agent version >= 6.19 or 7.19.
 
 ```bash
-DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.<DD_SITE>\": [\"apikey4\"]}' # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
 ```
 
 ## Continuous Profiler
@@ -88,10 +92,10 @@ In `datadog.yaml`:
 apm_config:
   [...]
   profiling_additional_endpoints:
-    "https://intake.profile.datadoghq.com/api/v2/profile":
+    "https://intake.profile.{{< region-param key="dd_site">}}/api/v2/profile":
     - apikey2
     - apikey3
-    "https://intake.profile.datadoghq.eu/api/v2/profile":
+    "https://intake.profile.<DD_SITE>/api/v2/profile": # Replace "<DD_SITE>" with your Datadog site parameter (for example, datadoghq.eu).
     - apikey4
 ```
 
@@ -100,7 +104,7 @@ apm_config:
 Requires Agent version >= 6.19 or 7.19.
 
 ```bash
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.{{< region-param key="dd_site">}}/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.<DD_SITE>/api/v2/profile\": [\"apikey4\"]}' # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
 ```
 
 **Note:** Uploads to additional endpoints for the Continuous Profiler product are done through best-effort delivery.
@@ -118,10 +122,10 @@ In `datadog.yaml`:
 process_config:
   [...]
   additional_endpoints:
-    "https://process.datadoghq.com":
+    "https://process.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://process.datadoghq.eu":
+    "https://process.<DD_SITE>": # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
     - apikey4
 ```
 
@@ -130,7 +134,7 @@ process_config:
 Requires Agent version >= 6.20 or 7.20.
 
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://process.<DD_SITE>\": [\"apikey4\"]}' # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
 ```
 
 ## Cluster Agent metrics
@@ -143,7 +147,7 @@ In Datadog `values.yaml`:
 clusterAgent:
   env:
     - name: DD_ADDITIONAL_ENDPOINTS
-      value: '{"https://app.datadoghq.com": ["apikey2"]}'
+      value: '{"https://app.{{< region-param key="dd_site">}}": ["apikey2"]}'
 ```
 ### Cluster Agent metrics provider
 
@@ -154,10 +158,10 @@ external_metrics_provider:
   endpoints:
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: https://app.datadoghq.eu
+    url: https://app.<DD_SITE>
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: https://app.datadoghq.com
+    url: https://app.<DD_SITE>
 {{< /code-block >}}
 
 ## Orchestrator
@@ -169,27 +173,26 @@ agents:
   customAgentConfig:
     process_config:
       additional_endpoints:
-        "https://process.datadoghq.com":
+        "https://process.{{< region-param key="dd_site">}}":
         - apikey2
     orchestrator_explorer:
       orchestrator_additional_endpoints:
-        "https://orchestrator.datadoghq.com":
-        - apikey2
+        "https://orchestrator.{{< region-param key="dd_site">}}":
+        - apikey3
 
 clusterAgent:
 ...
   datadog_cluster_yaml:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
-        "https://orchestrator.ddog-gov.com":
-        - apikey2
+        "https://orchestrator.<DD_SITE>": # Replace <DD_SITE> with your Datadog site parameter (for example, ddog-gov.com).
+        - apikey4
 ```
-
 
 ### Environment variable configuration
 
 ```bash
-DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.datadoghq.eu\": [\"apikey4\"]}'
+DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.<DD_SITE>\": [\"apikey4\"]}' # Replace <DD_SITE> with your Datadog site parameter (for example, ddog-gov.com).
 ```
 
 ## CI Visibility
@@ -203,17 +206,17 @@ In `datadog.yaml`:
 evp_proxy_config:
   [...]
   additional_endpoints:
-    "https://<VERSION>-app.agent.datadoghq.com":
+    "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://<VERSION>-app.agent.datadoghq.eu":
+    "https://<VERSION>-app.agent.<DD_SITE>":  # Replace <VERSION> and <DD_SITE> with your Agent version and Datadog site parameter (for example, 7-38-0 and datadoghq.eu).
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://<VERSION>-app.agent.datadoghq.eu\": [\"apikey4\"]}'
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://<VERSION>-app.agent.<DD_SITE>\": [\"apikey4\"]}'  # Replace <VERSION> and <DD_SITE> with your Agent version and Datadog site parameter (for example, 7-38-0 and datadoghq.eu).
 ```
 
 ## Logs
@@ -230,7 +233,7 @@ logs_config:
   force_use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
-    Host: "agent-http-intake.logs.datadoghq.com"
+    Host: "agent-http-intake.logs.{{< region-param key="dd_site">}}"
     Port: 443
     is_reliable: true
 ```
@@ -241,7 +244,7 @@ Requires Agent >= 6.18 or 7.18.
 
 ```bash
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -259,21 +262,21 @@ database_monitoring:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "dbm-metrics-intake.datadoghq.com"
+      Host: "dbm-metrics-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
   activity:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "dbquery-intake.datadoghq.com"
+      Host: "dbquery-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
   metrics:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "dbm-metrics-intake.datadoghq.com"
+      Host: "dbm-metrics-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
 ```
@@ -282,11 +285,11 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
-DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -304,7 +307,7 @@ network_devices:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "ndm-intake.datadoghq.com"
+      Host: "ndm-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
   snmp_traps:
@@ -312,7 +315,7 @@ network_devices:
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "ndm-intake.datadoghq.com"
+        Host: "ndm-intake.{{< region-param key="dd_site">}}"
         Port: 443
         is_reliable: true
   netflow:
@@ -320,7 +323,7 @@ network_devices:
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "ndm-intake.datadoghq.com"
+        Host: "ndm-intake.{{< region-param key="dd_site">}}"
         Port: 443
         is_reliable: true
 ```
@@ -329,7 +332,7 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -347,7 +350,7 @@ network_path:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "netpath-intake.datadoghq.com"
+      Host: "netpath-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
 ```
@@ -356,12 +359,12 @@ network_path:
 
 ```bash
 DD_NETWORK_PATH_FORWARDER_USE_HTTP=true
-DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Management Misconfigurations
+## Cloud Security Misconfigurations
 
 ### YAML configuration
 
@@ -372,7 +375,7 @@ compliance_config:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://<VERSION>-app.agent.datadoghq.eu"
+      Host: "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
       Port: 443
       is_reliable: true
 ```
@@ -381,12 +384,12 @@ compliance_config:
 
 ```bash
 DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
+DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
 ```
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Management Threats
+## Workload Protection
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -396,7 +399,7 @@ runtime_security_config:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://<VERSION>-app.agent.datadoghq.eu"
+      Host: "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
       Port: 443
       is_reliable: true
 ```
@@ -405,7 +408,7 @@ runtime_security_config:
 
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
+DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
 ```
 
 {{% agent-dual-shipping %}}
@@ -427,17 +430,17 @@ and add the relevant settings to `customAgentConfig`.
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
-      "https://app.datadoghq.com":
+      "https://app.<DD_SITE>":  # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.com).
       - apikey2
       - apikey3
-      "https://app.datadoghq.eu":
+      "https://app.<DD_SITE>":  # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
       - apikey4
 
     logs_config:
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.datadoghq.com"
+        Host: "agent-http-intake.logs.<DD_SITE>" # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.com).
         Port: 443
         is_reliable: true
 ```
@@ -446,7 +449,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 1. Create a Kubernetes secret with your environment variable configuration value from this guide:
     ```bash
-    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.<DD_SITE>": ["apikey4"]}' # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
     ```
 2. Use the [Helm chart parameters][2] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
     ```yaml
@@ -479,18 +482,19 @@ spec:
     nodeAgent:
       customConfigurations:
         datadog.yaml:
+          ## Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.com (US1) for `apikey2` and `apikey3`, and datadoghq.eu (EU) for `apikey4`).
           configData: |-
             additional_endpoints:
-              "https://app.datadoghq.com":
+              "https://app.<DD_SITE>":  
               - apikey2
               - apikey3
-              "https://app.datadoghq.eu":
+              "https://app.<DD_SITE>":  
               - apikey4
             logs_config:
               force_use_http: true
               additional_endpoints:
               - api_key: "apiKey2"
-                Host: "agent-http-intake.logs.datadoghq.com"
+                Host: "agent-http-intake.logs.<DD_SITE>"
                 Port: 443
                 is_reliable: true
 ```
@@ -499,7 +503,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 1. Create a Kubernetes secret with your environment variable configuration value from this guide:
     ```bash
-    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.<DD_SITE>": ["apikey4"]}'  # Replace <DD_SITE> with your Datadog site parameter (for example, datadoghq.eu).
     ```
 2. Use the `[key].env` parameter to reference this secret in your configuration:
     ```yaml
@@ -529,3 +533,4 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 [1]: /observability_pipelines/
 [2]: /agent/configuration/network/
+[3]: /getting_started/site/#access-the-datadog-site

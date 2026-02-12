@@ -1,5 +1,8 @@
 ---
 title: Inferred services
+description: Automatically discover service dependencies like databases and queues through outbound request analysis.
+aliases:
+  - /tracing/guide/inferred-service-opt-in
 further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
@@ -12,18 +15,21 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="Service page dependency map" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 
-Explore inferred services in the [Service Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
+Explore inferred services in the [Software Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
-
-To see inferred services, you must enable some configurations. 
-
 {{< tabs >}}
-{{% tab "Agent v7.55.1+" %}}
+{{% tab "Agent v7.60.0+" %}}
+Starting from Datadog Agent version [7.60.0][1], no manual configuration is needed to see inferred services. The required configurations—`apm_config.compute_stats_by_span_kind` and `apm_config.peer_tags_aggregation`—are enabled by default.
 
-For Datadog Agent versions [7.55.1][1] or later, add the following to your `datadog.yaml` configuration file:
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
+
+{{% /tab %}}
+{{% tab "Agent v7.55.1 - v7.59.1" %}}
+
+For Datadog Agent versions [7.55.1][1] through [7.59.1][2], add the following to your `datadog.yaml` configuration file:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -42,10 +48,11 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
 
-If you are using Helm, include these environment variables in your `values.yaml` [file][2].
+If you are using Helm, include these environment variables in your `values.yaml` [file][3].
 
 [1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.59.1
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Agent v7.50.3 - v7.54.1" %}}
 
@@ -107,13 +114,13 @@ exporters:
 **Example**: [collector.yaml][2].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.95.0
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L375-L395
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Naming inferred entities
 
-To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For example, inferred external APIs use the default naming scheme `net.peer.name` like `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
+To determine the names and types of the inferred service dependencies, Datadog uses standard span attributes and maps them to `peer.*` attributes. For example, inferred external APIs use the default naming scheme `net.peer.name` like `api.stripe.com`, `api.twilio.com`, and `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`. You can rename inferred entities by creating [renaming rules][5].
 
 ### Peer tags
 
@@ -149,7 +156,7 @@ Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
 If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
 
-**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it takes precedence over all other attributes.
 
 ## Migrate to global default service naming
 
@@ -157,14 +164,16 @@ With inferred services, service dependencies are automatically detected from exi
 
 Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
-<div class="alert alert-warning">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
+<div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 
-[1]: /service_catalog/
+[1]: /software_catalog/
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
+[5]: /tracing/services/renaming_rules/
+
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 <div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>

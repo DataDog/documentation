@@ -116,7 +116,12 @@ export function buildTOCMap() {
 export function onScroll() {
     const windowTopPosition = scrollTop(window);
     const windowHeight = window.innerHeight;
-    const localOffset = 65;
+    let localOffset = 65;
+
+    const isCustomizableDoc = document.getElementById('cdoc-selector') ? true : false;
+    if (isCustomizableDoc) {
+        localOffset += 65;
+    }
 
     const body = document.body;
     const html = document.documentElement;
@@ -141,6 +146,7 @@ export function onScroll() {
             sideNavItem.navLink.classList.remove('toc_scrolled');
 
             if (
+                windowTopPosition !== 0 &&
                 sideNavItem.header.getBoundingClientRect().top <= 0 + localOffset &&
                 (typeof nextSideNavItem === 'undefined' ||
                     nextSideNavItem.header.getBoundingClientRect().top > 0 + localOffset)
@@ -153,7 +159,7 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
-                        const header = document.getElementById(`${(decodeURI(id))}`);
+                        const header = document.getElementById(`${decodeURI(id)}`);
                         if (header && header.nodeName === 'H2') {
                             link.classList.add('toc_open');
                         }
@@ -240,5 +246,22 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-DOMReady(handleAPIPage);
+/**
+ * If Cdocs is running on this page,
+ * tell it to refresh the TOC when content changes
+ */
+if (window.clientFiltersManager) {
+    // Update the TOC after the page is initially rendered
+    // and before it is revealed
+    clientFiltersManager.registerHook('beforeReveal', buildTOCMap);
 
+    // Update the active header in the TOC after the page is revealed
+    clientFiltersManager.registerHook('afterReveal', buildTOCMap);
+    clientFiltersManager.registerHook('afterReveal', onScroll);
+
+    // Update the active header in the TOC after the page is re-rendered
+    clientFiltersManager.registerHook('afterRerender', buildTOCMap);
+    clientFiltersManager.registerHook('afterRerender', onScroll);
+}
+
+DOMReady(handleAPIPage);

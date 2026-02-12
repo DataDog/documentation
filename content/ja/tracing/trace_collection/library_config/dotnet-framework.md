@@ -59,7 +59,7 @@ type: multi-code-lang
 
 アプリケーションコードでトレーサーを構成するには、デフォルトの構成ソースから `TracerSettings` インスタンスを作成します。`Tracer.Configure()` を呼び出す前に、この `TracerSettings` インスタンスにプロパティを設定します。例:
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>注:</strong> 設定は、<code>トレーサー</code>を作成する<em>前</em>に <code>TracerSettings</code> で設定する必要があります。<code>トレーサー</code>の作成後に <code>TracerSettings</code> プロパティに加えられた変更は無視されます。
 </div>
 
@@ -242,7 +242,7 @@ Added in version `2.19.0`.<br>
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
 : トレーサーの起動中に、この構成は、トレーサーの現在のログディレクトリを使用して、指定された日数と同じかそれよりも古いログファイルを削除します。バージョン 2.19.0 で追加されました。 <br>
-**デフォルト**: `31`
+**デフォルト**: `32`
 
 `DD_TRACE_LOGGING_RATE`
 : ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。

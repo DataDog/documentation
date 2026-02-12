@@ -36,7 +36,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_search" >}}
+{{ get-metrics-from-git "azure-ai-search" }}
 
 
 ### Aide

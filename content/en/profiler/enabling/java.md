@@ -32,10 +32,15 @@ Supported operating systems:
 - Linux
 
 Minimum JDK versions:
-- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
-- Oracle JDK 8u351+, 11.0.17+, 17.0.5+
-- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
+- Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+
+- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime).
+
+**Note:** The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are **not** experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
+
+
+**Note:** The Datadog Profiler is disabled on the GraalVM compiler (JVMCI) and needs to be enabled explicitly with `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
 
 The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
@@ -150,7 +155,7 @@ When the service binary is built, you can use environment variables to enable an
 
 4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
-5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][8].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiling page][8]. If they do not, refer to the [Troubleshooting][16] guide.
 
 ### Enabling CPU profiler engine options
 
@@ -163,7 +168,7 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
-_Requires JDK 11+._
+_Please refer to the Minimum JDK version requirements for enabling DataDog profiler._
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
@@ -300,11 +305,13 @@ For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`.
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
+**Note**: Live-heap profiler is based on the Datadog Profiler library and not JFR. Live-heap profile type is not available on Windows.
+
 ### Collecting native stack traces
 
 If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
 
-<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
+<div class="alert alert-danger">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
 
 To enable native stack trace collection, understanding that it can destabilize your application, set:
 
@@ -357,3 +364,5 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/enabling/supported_versions/
 [14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
+[15]: https://docs.datadoghq.com/profiler/enabling/java/?tab=datadogprofiler#
+[16]: /profiler/profiler_troubleshooting/java/

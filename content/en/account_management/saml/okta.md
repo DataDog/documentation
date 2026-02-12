@@ -1,5 +1,6 @@
 ---
 title: Okta SAML Identity Provider Configuration
+description: Set up Okta as a SAML identity provider for Datadog with IdP and SP-initiated SSO, JIT provisioning, and role mapping configuration.
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
@@ -10,7 +11,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     In the {{< region-param key="dd_site_name" >}} site, you must manually configure the Datadog application in Okta using the <a href="/account_management/faq/okta/">legacy instructions</a>. Ignore the instructions on this page about the preconfigured Datadog application in the Okta application catalog.
 </div>
 {{% /site-region %}}
@@ -42,7 +43,7 @@ For definitions of the terms above, see the Okta [glossary][2].
 
 Set up Okta as the SAML identity provider (IdP) for Datadog with the following instructions. The setup process requires you to alternate between your Okta and Datadog accounts.
 
-### In Okta
+### Add the Datadog integration in Okta
 
 1. Log in to your Okta admin dashboard.
 1. In the left navigation, click **Applications**.
@@ -64,7 +65,7 @@ Next, download the metadata details to upload to Datadog:
 
 {{< img src="account_management/saml/okta/metadata_url.png" alt="Sign on configuration in Okta" style="width:80%;" >}}
 
-### In Datadog
+### Configure Datadog
 
 #### Upload metadata details
 
@@ -83,20 +84,20 @@ For the Datadog application to function correctly, you must activate IdP initiat
 To activate IdP initiated login, execute the following steps:
 1. Navigate to the [SAML configuration page][5].
 1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**.
-1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Take note of this company ID, as you need to enter it in Okta to finalize your configuration.
+1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Enter this value with the `/id/` prefix in Okta to finalize your configuration.
 1. Click **Save Changes**.
 
 {{< img src="account_management/saml/okta/company_id.png" alt="SAML configuration in Datadog, highlighting the company ID portion of the assertion consumer service URL" style="width:100%;" >}}
 
 Return to Okta for the next set of configuration steps.
 
-### In Okta
+### Add the company ID in Okta
 
 1. Return to the Okta admin dashboard.
 1. Select the **Sign on** tab.
 1. Click **Edit**.
 1. Scroll down to the **Advanced Sign-on Settings** section.
-1. Paste your company ID into the **Company ID** field. Your company ID should have the format `/id/xxxxx-xxxx-xxxx-xxxx-xxxxxxxxx`.
+1. Paste your full company ID including the `/id/` prefix into the **Company ID** field (`/id/XXXXXX-XXXX-XXX-XXXX-XXXXXXX`).
 1. Click **Save**.
 
 ## Service Provider (SP) initiated login

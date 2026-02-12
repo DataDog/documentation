@@ -8,7 +8,7 @@ title: Aurora 관리형 Postgres에서 데이터베이스 모니터링 설정
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">데이터베이스 모니터링은 이 사이트에서 지원되지 않습니다.</div>
+<div class="alert alert-danger">데이터베이스 모니터링은 이 사이트에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 데이터베이스 모니터링을 사용해 쿼리 메트릭, 쿼리 샘플, 실행 계획, 데이터베이스 상태, 장애 조치, 이벤트를 노출시켜 Postgres 데이터베이스를 상세히 가시화할 수 있습니다.
@@ -211,7 +211,7 @@ Aurora 호스트를 모니터링하려면 인프라스트럭처에 Datadog 에�
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>중요</strong>: 여기에서는 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 여기에서는 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 
 2. [에이전트를 다시 시작합니다][2].
@@ -267,7 +267,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
-<div class="alert alert-warning"><strong>중요</strong>: 호스트로 클러스트 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 호스트로 클러스트 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 Postgres 9.6의 경우 호스트와 포트가 지정된 인스턴스 구성에 다음 설정을 추가하세요.
 
@@ -369,7 +369,7 @@ spec:
     targetPort: 5432
     name: postgres
 ```
-<div class="alert alert-warning"><strong>중요</strong>: 여기에서는 Aurora 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 여기에서는 Aurora 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 Postgres 9.6의 경우 호스트와 포트가 지정된 인스턴스 구성에 다음 설정을 추가하세요.
 

@@ -24,7 +24,7 @@ author:
   support_email: sachin@apollographql.com
 categories:
 - キャッシュ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
 display_on_public_website: true
@@ -111,7 +111,7 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 
 6. Datadog  メトリクスエクスプローラーにアクセスし、メトリクスを確認します。メトリクスは、表示されるまでに最大 5 分かかる場合があります。
 
-### 使用方法
+### 使用状況
 
 詳細な使用方法については、[Apollo インテグレーションのドキュメント][7]を参照してください。
 

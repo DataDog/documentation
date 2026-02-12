@@ -13,9 +13,9 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: '/developers/guide/data-collection-resolution-retention/'
+    - link: '/developers/guide/data-collection-resolution/'
       tag: 'Documentation'
-      text: 'Data collection, resolution, and retention'
+      text: 'Data collection and resolution'
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
       tag: 'Blog'
       text: 'Focus on code that matters with source code previews in Continuous Profiler'
@@ -37,6 +37,18 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
       tag: 'Blog'
       text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
+    - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
+      tag: 'Blog'
+      text: 'Making profiling visualizations accessible to engineers at all levels'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiling-fourth-pillar/'
+      tag: 'Blog'
+      text: 'Why continuous profiling is the fourth pillar of observability'
+    - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+      tag: Blog
+      text: Monitor your Kubernetes operators to keep applications running smoothly
+    - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+      tag: "Blog"
+      text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 cascade:
     algolia:
         rank: 70
@@ -80,13 +92,13 @@ By default, profiles are retained for seven days, and metrics generated from pro
 
 See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
 
-{{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
+{{< img src="profiler/profile-types2.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
 
 ### Search profiles by tags
 
 [Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
-{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles4.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 

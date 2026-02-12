@@ -1,27 +1,60 @@
 ---
+app_id: azure-blob-storage
+app_uuid: 57ef97b4-651a-432d-9dc5-f56a94449d75
+assets:
+  dashboards:
+    azure_blob_storage: assets/dashboards/azure_blob_storage.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.storage_storageaccounts_blobservices.blob_count
+      metadata_path: metadata.csv
+      prefix: azure.storage_storageaccounts_blobservices
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 226
+    source_type_name: Azure Blob Storage
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - nube
 - almacenes de datos
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas clave de Azure Blob Storage.
-doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_blob_storage
-has_logo: true
 integration_id: azure-blob-storage
-integration_title: Microsoft Azure Blob Storage
+integration_title: Azure Blob Storage
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_blob_storage
-public_title: Integración de Datadog y Microsoft Azure Blob Storage
+public_title: Azure Blob Storage
 short_description: Rastrea las métricas clave de Azure Blob Storage.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas clave de Azure Blob Storage.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Blob Storage
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Blob Storage es la solución de almacenamiento de objetos de Microsoft para la nube. Blob Storage está optimizado para almacenar cantidades masivas de datos no estructurados. Obtén métricas de Azure Blob Storage para:
@@ -49,7 +82,7 @@ La integración Azure Blob Storage no incluye eventos.
 
 La integración Azure Blob Storage no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

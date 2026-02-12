@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'Azure Customer Insights.
 doc_link: https://docs.datadoghq.com/integrations/azure_customer_insights/
@@ -14,7 +15,6 @@ integration_id: azure-customerinsights
 integration_title: Microsoft Azure Customer Insights
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_customer_insights
 public_title: Intégration Datadog/Microsoft Azure Customer Insights
@@ -23,33 +23,33 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Azure Customer Insights permet aux organisations de toute taille de consolider divers jeux de données et de générer des informations et des statistiques pour bénéficier d'une vue globale sur leurs clients.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques de Customer Insights.
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
-{{< get-metrics-from-git "azure_customer_insights" >}}
+### Métriques
+{{ get-metrics-from-git "azure-customerinsights" }}
 
 
-### Aide
+### Événements
 
 L'intégration Azure Customer Insights n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Azure Customer Insights n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

@@ -6,8 +6,13 @@ const marked = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
+const oneOfLimit = 50;
 
 const supportedLangs = ['en'];
+
+// Create a renderer once so we don't recreate it on every call set paragraph tag to table-cell
+const renderer = new marked.Renderer();
+renderer.paragraph = (text) => `<p class="table-cell">${text}</p>`;
 
 /**
  * Update the menu yaml file with api
@@ -303,7 +308,7 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
             }
 
             // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
               // if we have an example use that otherwise choose the first one oneof
               if(!parentExample) {
                 if (Object.keys(value.items.oneOf).length !== 0) {
@@ -445,7 +450,7 @@ const outputValue = (value, trailingComma = false) => {
       out = `${value}`;
       break;
     case "string":
-      out = `"${value.replace(/\r?\n|\r/g, '\\n')}"`;
+      out = `"${value.replace(/\r?\n|\r/g, '\\n').replace(/^\[|\]$/g, '').replace(/^"|"$/g, '')}"`;
       break;
     default:
       out = `"${value}"`;
@@ -608,7 +613,8 @@ const filterExampleJson = (actionType, data) => {
   const requiredKeys = getInitialRequiredData(data);
 
   // just return the example in additionalProperties cases with example
-  if(data.additionalProperties && data.example) {
+  // just return the example if theres a top-level example and its response
+  if(data.additionalProperties && data.example || data.example && actionType === 'response') {
     return data.example;
   }
 
@@ -663,7 +669,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
   }
   return `
     <div class="col-4 column">
-      <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
+      <p class="key table-cell">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `.trim();
 };
@@ -697,10 +703,10 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p class="table-cell">[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 column"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
+    return `<div class="col-2 column"><p class="table-cell">${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
   }
 };
 
@@ -725,8 +731,9 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
+  const descHtml = desc ? marked.parse(desc, { renderer }).trim() : "";
   const def = (value.default) ? `<p>default: <code>${value.default}</code></p>` : '';
-  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}${def}</div>`.trim();
+  return `<div class="col-6 column">${descHtml}${def}</div>`.trim();
 };
 
 
@@ -771,7 +778,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               newRequiredFields = (value.items.required) ? value.items.required : [];
             }
             // for items -> oneOf
-            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < 20) {
+            if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
               childData = value.items.oneOf
               .map((obj, indx) => {
                 return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
@@ -794,7 +801,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if (typeof value === 'object' && "oneOf" in value) {
           // for properties -> oneOf
-          if(value.oneOf instanceof Array && value.oneOf.length < 20) {
+          if(value.oneOf instanceof Array && value.oneOf.length < oneOfLimit) {
             childData = value.oneOf
               .map((obj, indx) => {
                 return {[`Option ${indx + 1}`]: value.oneOf[indx]}
@@ -844,7 +851,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         html += `
         <div class="row ${outerRowClasses}">
           <div class="col-12 first-column">
-            <div class="row ${nestedRowClasses}">
+            <div ${parentKey ? `data-parent-field="${parentKey}"` : ""} class="row table-row ${nestedRowClasses}">
               ${fieldColumn(key, value, toggleArrow, required, parentKey)}
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
@@ -971,7 +978,8 @@ const processSpecs = (specs) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);
           const pathToJson = `./data/api/${version}/full_spec_deref.json`;
-          fs.writeFileSync(pathToJson, jsonString, 'utf8');
+          // we do not write the full spec here anymore to avoid committing to repo, see build-api-derefs.js
+          // fs.writeFileSync(pathToJson, jsonString, 'utf8');
 
           // create translation ready datafiles
           createTranslations(fileData, deref, version);
@@ -982,7 +990,8 @@ const processSpecs = (specs) => {
           const derefStripEmptyTags = lodash.cloneDeep(deref);
           derefStripEmptyTags.tags = derefStripEmptyTags.tags.filter((tag) => !tag.description.toLowerCase().includes("see api version"));
           const jsonStringStripEmptyTags = safeJsonStringify(derefStripEmptyTags, null, 2);
-          fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
+          // we do not write the full spec here anymore to avoid committing to repo, see build-api-derefs.js
+          // fs.writeFileSync(`./static/resources/json/full_spec_${version}.json`, jsonStringStripEmptyTags, 'utf8');
 
           //updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
@@ -1012,9 +1021,33 @@ const processSpecs = (specs) => {
   updateMenu(specData, specs, supportedLangs);
 };
 
+// Helper function to find spec files with fallback
+// once spec files are put in assets on a regular cadence replace this with a simple array of paths
+const findSpecFiles = () => {
+  const versions = ['v1', 'v2'];
+  const specs = [];
+
+  versions.forEach(version => {
+    const assetsPath = `./assets/api/${version}/full_spec.yaml`;
+    const dataPath = `./data/api/${version}/full_spec.yaml`;
+
+    // Try assets first, fallback to data
+    if (fs.existsSync(assetsPath)) {
+      specs.push(assetsPath);
+      console.log(`Found spec at ${assetsPath}`);
+    } else if (fs.existsSync(dataPath)) {
+      specs.push(dataPath);
+      console.log(`Fallback to spec at ${dataPath}`);
+    } else {
+      console.warn(`Warning: Could not find spec file for ${version} in either assets or data directories`);
+    }
+  });
+
+  return specs;
+};
 
 const init = () => {
-  const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
+  const specs = findSpecFiles();
   processSpecs(specs);
 };
 

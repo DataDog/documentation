@@ -1,5 +1,6 @@
 ---
 title: APM Troubleshooting
+description: Comprehensive troubleshooting guide for APM issues including trace retention, service configuration, and connection errors.
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
     - /tracing/troubleshooting/faq_apm/
@@ -30,9 +31,12 @@ further_reading:
 - link: '/integrations/'
   tag: 'Documentation'
   text: "Datadog's full list of integrations"
-- link: '/tracing/guide/inferred-service-opt-in/'
+- link: '/tracing/services/inferred_services'
   tag: 'Documentation'
-  text: 'Inferred Service dependencies (Preview)'
+  text: 'Inferred Service dependencies'
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Learning Center
+  text: Troubleshooting APM Instrumentation on a Host
 ---
 
 If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
@@ -195,7 +199,7 @@ If you encounter any of the following issues, you may be exceeding [Datadog's vo
 
 - Your trace metrics are not reporting as you would expect in the Datadog platform.
 - You are missing some of your resources that you expected to see in the Datadog platform.
-- You are seeing traces from your service but are not able to find this service on the [Service Catalog page][32].
+- You are seeing traces from your service but are not able to find this service on the [Software Catalog page][32].
 
 {{% collapse-content title="Data volume guidelines" level="h4" %}}
 
@@ -204,7 +208,7 @@ Your instrumented application can submit spans with timestamps up to 18 hours in
 Datadog accepts the following combinations for a given 40-minute interval:
 
 - 5000 unique `environments` and `service` combinations
-- 30 unique `second primary tag values` per environment
+- 100 unique `primary tag values` per additional primary tag
 - 100 unique `operation names` per environment and service
 - 1000 unique `resources` per environment, service, and operation name
 - 30 unique `versions` per environment and service
@@ -236,9 +240,9 @@ By default, the environment (`env`) is the primary tag for [Datadog APM][17].
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
 
-A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
+A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Software Catalog allows you to scope the data in the **Performance** tab to a specific environment.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Service Catalog" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Software Catalog" style="width:100%;" >}}
 
 One pattern that often leads to issues with an overwhelming number of services is including the environment value in service names. For example, you might have two unique services instead of one since they are operating in two separate environments: `prod-web-store` and `dev-web-store`.
 
@@ -246,15 +250,15 @@ Datadog recommends tuning your instrumentation by renaming your services.
 
 Trace metrics are unsampled, which means your instrumented application shows all data instead of subsections of them. The [volume guidelines](#data-volume-guidelines) are also applied.
 
-### Use the second primary tag instead of putting metric partitions or grouping variables into service names
+### Use additional primary tags instead of putting metric partitions or grouping variables into service names
 
-Second primary tags are additional tags that you can use to group and aggregate your trace metrics. You can use the dropdown to scope the performance data to a given cluster name or data center value.
+You can use additional primary tags to group and aggregate your trace metrics. Use the dropdown to scope the performance data to a given cluster name or data center value.
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-1.png" alt="Use the dropdown menu to select a specific cluster or data center value" style="width:100%;" >}}
 
-Including metric partitions or grouping variables in service names instead of applying the second primary tag unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
+Including metric partitions or grouping variables in service names instead of applying additional primary tags unnecessarily inflates the number of unique services in an account and results in potential delay or data loss.
 
-For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a second primary tag.
+For example, instead of the service `web-store`, you might decide to name different instances of a service `web-store-us-1`, `web-store-eu-1`, and `web-store-eu-2` to see performance metrics for these partitions side-by-side. Datadog recommends implementing the **region value** (`us-1`, `eu-1`, `eu-2`) as a primary tag.
 
 {{% /collapse-content %}}
 
@@ -335,7 +339,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 6. **Custom tracing code**: Custom instrumentation, configuration, and adding span tags can significantly impact trace visualizations in Datadog.
 
-7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatiblity Requirements][15], check for known issues, or recommend a version upgrades. For example:
+7. **Version information**: Knowing what language, framework, Datadog Agent, and Datadog tracer versions you are using allows Support to verify [Compatibility Requirements][15], check for known issues, or recommend a version upgrades. For example:
     
 {{% /collapse-content %}}
 
@@ -358,21 +362,21 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [13]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [14]: /tracing/custom_instrumentation/
 [15]: /tracing/compatibility_requirements/
-[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[16]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
 [17]: /tracing/guide/setting_primary_tags_to_scope/
 [18]: /tracing/trace_collection/custom_instrumentation/?tab=datadogapi
 [19]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [20]: https://app.datadoghq.com/apm/traces
 [21]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
 [22]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[23]: /developers/guide/data-collection-resolution-retention/
+[23]: /data_security/data_retention_periods/
 [24]: /tracing/metrics/metrics_namespace/
 [25]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [26]: /tracing/trace_pipeline/generate_metrics/
 [27]: /tracing/trace_collection/library_config/
 [28]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [29]: /tracing/troubleshooting/#data-volume-guidelines
-[30]: /tracing/guide/inferred-service-opt-in/?tab=java
+[30]: /tracing/services/inferred_services
 [31]: /tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
 

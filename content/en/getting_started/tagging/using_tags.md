@@ -312,7 +312,7 @@ When creating a [metric-based SLO][1], use metric tags in the SLO's success rati
 * **from** text box to limit the metric scope to only those tags.
 * **sum by** text box to create a grouped metric-based SLO that display a status percentage and remaining error budget for both the overall SLO and for each tag value.
 
-[1]: /service_management/service_level_objectives/metric/
+[1]: /service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
@@ -320,7 +320,7 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Monitor-based SLO Tags" style="width:80%;">}}
 
-[1]: /service_management/service_level_objectives/monitor/
+[1]: /service_level_objectives/monitor/
 [2]: /getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
@@ -354,6 +354,12 @@ To filter pipeline executions by tags, use the search bar or facet checkboxes. T
 {{% /tab %}}
 {{< /tabs >}}
 
+## DORA Metrics
+
+The [DORA Metrics Explorer][33] displays your DORA Metrics aggregations. To filter the displayed metrics and aggregations by tags, use the `+ Filter` button to add facets for existing tags. For querying with tags in graphs and dashboards, see [DORA Metrics Create Custom Dashboards][34].
+
+{{< img src="/dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:80%;">}}
+
 ## Developers
 
 Tags can be used in various ways with the [API][17].
@@ -380,7 +386,7 @@ See this list for links to respective sections:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/assigning_tags/
-[2]: /service_management/events/explorer
+[2]: /events/explorer
 [3]: /integrations/
 [4]: /infrastructure/hostmap/
 [5]: /infrastructure/
@@ -411,3 +417,5 @@ See this list for links to respective sections:
 [30]: /monitors/manage/#monitor-tags
 [31]: /monitors/downtimes/
 [32]: /getting_started/tagging/assigning_tags?tab=monitors
+[33]: https://app.datadoghq.com/ci/dora
+[34]: /dora_metrics/#create-custom-dashboards

@@ -19,18 +19,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       with:
           fetch-depth: 0
           persist-credentials: false
 
+    # Branch Name Validation to be run prior to workflow
+    - name: Validate branch name and set output
+      id: validate
+      env:
+        BRANCH: ${{ github.head_ref }}
+      run: |
+        BRANCH="${{ env.BRANCH }}"
+        # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
+        # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
+        if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]]; then
+          echo "valid=true" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+        else
+          echo "valid=false" >> $GITHUB_OUTPUT
+          echo "::error::Invalid branch name detected. Branch names must only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
+        fi
+
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v42
+      if: steps.validate.outputs.valid == 'true'
+      uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
 
     - name: Look for gifs
+      if: steps.validate.outputs.valid == 'true'
       env:
-        branch: ${{ github.head_ref }}
+        branch: ${{ steps.validate.outputs.branch }}
         ALL_CHANGED_FILES: ${{ steps.changed_files.outputs.all_changed_files }}
       id: comment_body
       run: |

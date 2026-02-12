@@ -66,6 +66,8 @@ tile:
   resources:
   - resource_type: blog
     url: https://www.datadoghq.com/blog/confluent-cloud-monitoring-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/
   support: README.md#Support
   title: Confluent Cloud
 ---
@@ -137,7 +139,7 @@ Confluent Cloud Connector ID を検索するには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "confluent_cloud" >}}
+{{< get-metrics-from-git "confluent-cloud" >}}
 
 
 ### イベント

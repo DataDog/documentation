@@ -1,5 +1,6 @@
 ---
 title: Agent Version differences
+description: Overview of key differences between major Datadog Agent versions, including performance improvements, new functionalities, and upgrade recommendations.
 aliases:
 - /agent/versions
 further_reading:
@@ -20,7 +21,7 @@ further_reading:
 <div class="alert alert-info"><p>
 Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
-Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization will depend on your infrastructure and your configuration management practices, but aim for monthly.</p>
+Upgrading to the latest major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization will depend on your infrastructure and your configuration management practices, but aim for monthly.</p>
 <p>
 To update the Datadog Agent core between two minor versions on a given host, run <a href="/agent/versions/upgrade_between_agent_minor_versions">the corresponding install command for your platform</a>.</p>
 <p>
@@ -67,7 +68,7 @@ The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rew
 
 **Agent v6 new functionalities**:
 
-To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation. The following are key differentiators:
+The following are key differentiators:
 
 - [Distributions metrics][5] can be performed on the server directly to calculate real, effective global percentiles.
 - [DogStatsD][3] can be used over a Unix socket instead of over UDP.
@@ -75,11 +76,12 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 - [Prometheus OpenMetrics is supported natively][7].
 - [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][8].
 
+To see all changes to the Agent, consult the [Datadog Agent Changelog][4].
 
 [1]: /agent/#agent-architecture
 [2]: /agent/configuration/agent-commands/
 [3]: /developers/dogstatsd/unix_socket/
-[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
+[4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: /metrics/types/?tab=distribution#metric-types
 [6]: /infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics

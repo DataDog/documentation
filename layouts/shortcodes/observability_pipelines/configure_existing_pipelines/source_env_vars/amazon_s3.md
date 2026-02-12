@@ -1,0 +1,11 @@
+- Amazon S3 SQS URL:
+    - The URL of the SQS queue to which the S3 bucket sends the notification events.
+    - The default environment variable is `DD_OP_SOURCE_AWS_S3_SQS_URL`
+- AWS_CONFIG_FILE path:
+	- The path to the AWS configuration file local to this node.
+    - The default environment variable is `AWS_CONFIG_FILE`.
+- AWS_PROFILE name:
+	- The name of the profile to use within these files.
+    - The default environment variable is `AWS_PROFILE`.
+- AWS S3 TLS passphrase (when enabled):
+    - The default environment variable is `DD_OP_SOURCE_AWS_S3_KEY_PASS`.

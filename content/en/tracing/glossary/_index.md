@@ -1,5 +1,6 @@
 ---
 title: APM Terms and Concepts
+description: Learn essential APM terminology including services, resources, traces, spans, instrumentation, and other key concepts for distributed tracing.
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
@@ -8,7 +9,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -39,7 +40,7 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
-| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
@@ -47,9 +48,9 @@ For additional definitions and descriptions of important APM terms such as _span
 
 ## Services
 
-After [instrumenting your application][3], the [Service Catalog][4] is your main landing page for APM data.
+After [instrumenting your application][3], the [Software Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/service_catalog.png" alt="Service Catalog" >}}
+{{< img src="tracing/visualization/software_catalog.png" alt="Software Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
@@ -61,7 +62,7 @@ The screenshot below is a microservice distributed system for an e-commerce site
 
 {{< img src="tracing/visualization/service_map.png" alt="service map" >}}
 
-All services can be found in the [Service Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
+All services can be found in the [Software Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
@@ -117,9 +118,9 @@ To learn more, read supported [propagation formats][28] for your application's l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /developers/guide/data-collection-resolution-retention/
+[2]: /developers/guide/data-collection-resolution/
 [3]: /tracing/setup/
-[4]: /tracing/service_catalog/
+[4]: /tracing/software_catalog/
 [5]: /tracing/services/services_map/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/

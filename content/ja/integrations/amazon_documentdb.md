@@ -1,9 +1,9 @@
 ---
 categories:
-- cloud
+- クラウド
 - data stores
 - aws
-- ログの収集
+- log collection
 custom_kind: integration
 dependencies: []
 description: Amazon DocumentDB のメトリクスとログを監視
@@ -42,7 +42,7 @@ Amazon DocumentDB は、MongoDB のワークロードをサポートする、高
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DocumentDB` が有効になっていることを確認します。
 2. [Datadog - Amazon DocumentDB インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -58,7 +58,7 @@ Amazon DocumentDB から S3 バケットまたは CloudWatch のいずれかに�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## 収集されるデータ
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_documentdb" >}}
@@ -70,13 +70,13 @@ AWS から取得される各メトリクスには、dbinstanceidentifier、dbclu
 
 Amazon DocumentDB インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Amazon DocumentDB インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -86,7 +86,7 @@ Amazon DocumentDB インテグレーションには、サービスのチェッ�
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-documentdb
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_documentdb/amazon_documentdb_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

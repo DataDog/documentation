@@ -1,7 +1,7 @@
 ---
 disable_sidebar: true
 title: 認可スコープ
-type: documentation
+type: api
 ---
 ## 認可スコープ
 
@@ -9,11 +9,8 @@ type: documentation
 
 アプリケーションのスコープに関するベストプラクティスは、アプリケーションが意図したとおりに機能するために必要な最小限の特権と最も制限の多いスコープを維持することです。これにより、ユーザーはアプリケーションへのきめ細かなアクセス制御が可能になり、アプリケーションがどのようにデータを使用しているかが透けて見えるようになります。たとえば、ダッシュボードのデータを読み取るだけのサードパーティアプリケーションには、組織内のユーザーを削除または管理する権限は必要ありません。
 
-Datadog では、次の 2 つの方法でスコープを使用することができます。
-- [Datadog Apps][1] の OAuth2 クライアントをスコープする
-- [アプリケーションキー][2]をスコープする
+[Datadog Apps][1] の OAuth2 クライアントでは、スコープを利用できます。
 
 {{< api-scopes >}}
 
 [1]: https://docs.datadoghq.com/ja/developers/datadog_apps/#oauth-api-access
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/

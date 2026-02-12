@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Example-Microsoft-Teams-Integration",
+      "url": "https://example.logic.azure.com/workflows/123"
+    },
+    "type": "workflows-webhook-handle"
+  }
+}

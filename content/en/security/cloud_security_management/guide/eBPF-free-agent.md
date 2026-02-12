@@ -3,7 +3,7 @@ title: Threat Detection for Linux Without eBPF Support
 disable_toc: false
 ---
 
-This guide describes how to set up the CSM Threats eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
+This guide describes how to set up the Workload Protection eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
 
 This guide also describes some advantages of the ptrace solution.
 
@@ -12,7 +12,7 @@ This guide also describes some advantages of the ptrace solution.
 
 ## Summary of Agent options
 
-CSM Threats includes two Agent options for threat detection and response:
+Workload Protection includes two Agent options for threat detection and response:
 
 - eBPF solution
 - eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).
@@ -152,7 +152,7 @@ runtime_security_config:
 Ensure you perform the following configuration requirements before deploying the Agent:
 
 1. Customize the [Agent Installation Instructions][5] before proceeding with the installation.
-2. Install/update the Agent with CSM enabled. For steps, see [Setting up Cloud Security Management on the Agent][4].
+2. Install/update the Agent with Cloud Security enabled. For steps, see [Setting up Cloud Security on the Agent][4].
 3. Specify additional configurations from the previous **eBPF-less agent setup** sections to install the custom version and enable eBPF-less mode.
 
 

@@ -45,7 +45,7 @@ El Agent es compatible de forma nativa con los proxies web tradicionales. Si nec
 
 Configura varios servidores proxy para solicitudes `https` y `http` en tu archivo de configuración `datadog.yaml` del Agent. El Agent utiliza `https` para enviar datos a Datadog, pero es probable que las integraciones utilicen `http` para recopilar métricas. Independientemente de las solicitudes que se redirijan mediante proxy, puedes activar el protocolo SSL en tu servidor proxy. A continuación, te mostramos algunos ejemplos de configuración que pueden servirte para tu archivo `datadog.yaml`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si se encuentra habilitada la recopilación de logs, asegúrate de <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">exigir</a> un transporte específico.
 Se recomienda utilizar HTTPS. En ese caso, el <code>&ltHOST&gt;:&ltPORT&gt;</code> que se utiliza para redirigir mediante proxy las métricas también se utilizará para redirigir los logs.
 Si utilizas el transporte TCP, consulta la sección <a href="/agent/logs/proxy">Proxy TCP para logs</a>.
@@ -130,7 +130,7 @@ El Agent utiliza los siguientes valores en orden de precedencia:
 
 **Agent v5**
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El <code>&ltHOST&gt;:&ltPORT&gt;</code> que se utiliza para redirigir mediante proxy las métricas NO se utilizará para redirigir los logs. Consulta la página <a href="/agent/logs/proxy">Proxy para logs</a>.
 </div>
 
@@ -425,9 +425,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
 backend datadog-api
     mode http
@@ -692,9 +692,9 @@ backend datadog-metrics
     balance roundrobin
     mode http
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
+    # server mothership metrics.agent.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_DATADOG_CERTIFICATES_CRT>
 
 backend datadog-api
     mode http
@@ -978,7 +978,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }
@@ -1092,7 +1092,7 @@ http {
         }
         location / {
             proxy_ssl_verify on;
-            proxy_pass https://haproxy-app.agent.{{< region-param key="dd_site" >}}:443/;
+            proxy_pass https://metrics.agent.{{< region-param key="dd_site" >}}:443/;
         }
     }
 }

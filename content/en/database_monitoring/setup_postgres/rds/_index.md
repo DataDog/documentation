@@ -5,6 +5,12 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
+- link: "/database_monitoring/guide/rds_autodiscovery"
+  tag: "Documenation"
+  text: "Autodiscovery for RDS"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -17,13 +23,14 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
-<div class="alert alert-info">Interested in a more streamlined setup where Datadog automatically deploys the Agent to monitor your RDS? <a href="https://forms.gle/1dyK11ubXdmKuriH7">Fill out this form</a> to share your interest.</div>
-<p></p>
+<div class="alert alert-info">
+<a href="/database_monitoring/setup_postgres/rds/quick_install">RDS Quick Install</a> is our recommended installation method for smaller environments (for example 20 database hosts) or those new to DBM and want to try it out quickly. For those managing large fleets of databases where deploying the agent via UI doesn't scale as well we recommend the standard installation, to manually manage the agent yourself or integrate with your automation practices.
+</div>
 
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Supported Agent versions
 : 7.36.1+
@@ -40,7 +47,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
+Enable **Resource Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
 
 ## Configure Postgres settings
 
@@ -54,6 +61,35 @@ Configure the following [parameters][4] in the [DB parameter group][5] and then 
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
+
+### Enable `auto_explain` (optional)
+
+By default, the agent only gathers [`EXPLAIN`][15] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][16], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
+
+<div class="alert alert-danger">
+<strong>Important:</strong> <code>auto_explain</code> produces log lines that may contain sensitive application data, similar to raw values in non-obfuscated SQL. Use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control access to the resulting plans. To restrict visibility of the log lines themselves—which are visible to all users in your Datadog organization by default—also configure <a href="/logs/guide/logs-rbac">RBAC for Logs</a>. Datadog recommends using both permissions to protect sensitive information effectively.
+</div>
+
+1. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `shared_preload_libraries`      | `pg_stat_statements,auto_explain` | Enables automatic `EXPLAIN ANALYZE` |
+| `auto_explain.log_format`       | `json` | Generates machine-readable plans |
+| `auto_explain.log_min_duration` | `1000` | Logs plans when queries exceed one second |
+| `auto_explain.log_analyze`      | `on` | Use the `ANALYZE` form of `EXPLAIN` |
+| `auto_explain.log_buffers`      | `on` | Include buffer use in plans |
+| `auto_explain.log_timing`       | `off` | Do not include timing (high overhead) |
+| `auto_explain.log_triggers`     | `on` | Include plans for trigger statement |
+| `auto_explain.log_verbose`      | `on` | Use verbose plan type |
+| `auto_explain.log_nested_statements` | `on` | Include nested statements |
+| `auto_explain.sample_rate`      | `1` | Explain all queries over duration |
+
+2. Change the `log_line_prefix` to enable richer event correlation. For more information, see the [RDS DB parameter groups][17] documentation. `auto_explain` ingestion requires this be set to `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
+
+3. To ensure your RDS instances are forwarding logs to CloudWatch and Datadog, follow the instructions for [Amazon RDS Log Collection][18].
 
 
 ## Grant the Agent access
@@ -153,6 +189,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -216,10 +254,10 @@ To monitor RDS hosts, install the Datadog Agent in your infrastructure and confi
 
 {{< tabs >}}
 {{% tab "Host" %}}
-
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
 1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+
    ```yaml
    init_config:
    instances:
@@ -228,11 +266,16 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
+       aws:
+         instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+         region: '<REGION>'
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
+
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
@@ -261,9 +304,11 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
            enabled: true
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
+
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
@@ -272,24 +317,25 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 2. [Restart the Agent][2].
 
-
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
-{{% tab "Docker" %}}
 
-To configure the Database Monitoring Agent running in a Docker container such as in ECS or Fargate, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+{{% tab "Docker" %}}
+To configure an integration for an Agent running in a Docker container such as in ECS or Fargate, you have a couple of methods available, all of which are covered in detail in the [Docker Configuration Documentation][1].
+
+The examples below show how to use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the Postgres integration.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Run the following command from your [command line][4] to start the Agent. Replace the placeholder values with those for your account and environment.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.36.1
+export DD_AGENT_VERSION=<AGENT_VERSION>
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -301,6 +347,10 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "port": 5432,
       "username": "datadog",
       "password": "<UNIQUEPASSWORD>",
+       "aws": {
+         "instance_endpoint": "<AWS_INSTANCE_ENDPOINT>",
+         "region": "<REGION>"
+       },
       "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
     }]
   }}' \
@@ -310,75 +360,152 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
 ```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
+"pg_stat_statements_view": "datadog.pg_stat_statements()",
+"pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
 ### Dockerfile
 
-Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+You can also specify labels in a `Dockerfile`, allowing you to build and deploy a custom Agent without modifying your infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.1
+FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]","tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]","aws": {"instance_endpoint": "<AWS_INSTANCE_ENDPOINT>", "region": "<REGION>"}, "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
 ```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
+"pg_stat_statements_view": "datadog.pg_stat_statements()",
+"pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][6] to provide the password as an environment variable.
 
-
-[1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/configuration/secrets-management
-[3]: /agent/faq/template_variables/
+[1]: /containers/docker/integrations/?tab=labels#configuration
+[2]: https://docs.docker.com/engine/manage-resources/labels/
+[3]: /getting_started/containers/autodiscovery/
+[4]: /containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
+[5]: /agent/configuration/secrets-management
+[6]: /agent/faq/template_variables/
 {{% /tab %}}
+
 {{% tab "Kubernetes" %}}
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring.
 
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+**Note**: Make sure [cluster checks][2] are enabled for your Datadog Cluster Agent before proceeding.
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
+Below are step-by-step instructions for configuring the Postgres integration using different Datadog Cluster Agent deployment methods.
 
-### Helm
+### Operator
 
-Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
+Using the [Operator instructions in Kubernetes and Integrations][3] as a reference, follow the steps below to set up the Postgres integration:
 
-1. Complete the [Datadog Agent installation instructions][3] for Helm.
-2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+1. Create or update the `datadog-agent.yaml` file with the following configuration:
+
     ```yaml
-    clusterAgent:
-      confd:
-        postgres.yaml: |-
-          cluster_check: true
-          init_config:
-          instances:
-          - dbm: true
-            host: <INSTANCE_ADDRESS>
-            port: 5432
-            username: datadog
-            password: 'ENC[datadog_user_database_password]'
-            tags:
-              - 'dbinstanceidentifier:<DB_INSTANCE_NAME>'
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
 
-    clusterChecksRunner:
-      enabled: true
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              postgres.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <AWS_INSTANCE_ENDPOINT>
+                  port: 5432
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  dbm: true
+                  aws:
+                    instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+                    region: <REGION>
+                  tags:
+                  - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
     ```
 
-    For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-3. Deploy the Agent with the above configuration file from the command line:
+2. Apply the changes to the Datadog Operator using the following command:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
+
+### Helm
+
+Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
+
+1. Update your `datadog-values.yaml` file (used in the Cluster Agent installation instructions) with the following configuration:
+
+    ```yaml
+    datadog:
+      clusterChecks:
+        enabled: true
+
+    clusterChecksRunner:
+      enabled: true
+
+    clusterAgent:
+      enabled: true
+      confd:
+        postgres.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <AWS_INSTANCE_ENDPOINT>
+            port: 5432
+            username: datadog
+            password: 'ENC[datadog_user_database_password]'
+            aws:
+              instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+              region: <REGION>
+            tags:
+            - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
+    ```
+
+    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
+
+    ```yaml
+    pg_stat_statements_view: datadog.pg_stat_statements()
+    pg_stat_activity_view: datadog.pg_stat_activity()
+    ```
+
+2. Deploy the Agent with the above configuration file using the following command:
+
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
@@ -387,13 +514,9 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
 </div>
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site
-[3]: /containers/kubernetes/installation/?tab=helm#installation
-
 ### Configure with mounted files
 
-To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/postgres.yaml`:
+To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container at the path: `/conf.d/postgres.yaml`:
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -404,8 +527,12 @@ instances:
     port: 5432
     username: datadog
     password: 'ENC[datadog_user_database_password]'
+    aws:
+      instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+      region: <REGION>
     tags:
-      - dbinstanceidentifier:<DB_INSTANCE_NAME>
+    - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -413,8 +540,9 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
+#### Autodiscovery annotations v2
 
 ```yaml
 apiVersion: v1
@@ -425,21 +553,28 @@ metadata:
     tags.datadoghq.com/env: '<ENV>'
     tags.datadoghq.com/service: '<SERVICE>'
   annotations:
-    ad.datadoghq.com/service.check_names: '["postgres"]'
-    ad.datadoghq.com/service.init_configs: '[{}]'
-    ad.datadoghq.com/service.instances: |
-      [
-        {
-          "dbm": true,
-          "host": "<AWS_INSTANCE_ENDPOINT>",
-          "port": 5432,
-          "username": "datadog",
-          "password": "ENC[datadog_user_database_password]",
-          "tags": [
-            "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+    ad.datadoghq.com/service.checks: |
+      {
+        "postgres": {
+          "init_config": <INIT_CONFIG>,
+          "instances": [
+            {
+              "dbm": true,
+              "host": "<AWS_INSTANCE_ENDPOINT>",
+              "port": 5432,
+              "username": "datadog",
+              "password": "ENC[datadog_user_database_password]",
+              "aws": {
+                "instance_endpoint": "<AWS_INSTANCE_ENDPOINT>",
+                "region": "<REGION>"
+              },
+              "tags": [
+                "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+              ]
+            }
           ]
         }
-      ]
+      }
 spec:
   ports:
   - port: 5432
@@ -448,21 +583,25 @@ spec:
     name: postgres
 ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+For more information, see [Autodiscovery Annotations][5].
 
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
+If you're using Postgres 9.6, add the following to the instance configuration:
+
+```json
+"pg_stat_statements_view": "datadog.pg_stat_statements()",
+"pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-The Cluster Agent automatically registers this configuration and begin running the Postgres check.
+The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][6] and declare the password using the `ENC[]` syntax.
 
-[1]: /agent/cluster_agent
-[2]: /agent/cluster_agent/clusterchecks/
-[3]: https://helm.sh
-[4]: /agent/configuration/secrets-management
+[1]: /containers/cluster_agent/setup/
+[2]: /containers/cluster_agent/clusterchecks/
+[3]: /containers/kubernetes/integrations/?tab=datadogoperator
+[4]: /containers/kubernetes/integrations/?tab=helm
+[5]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[6]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -500,3 +639,7 @@ If you have installed and configured the integrations and Agent as described and
 [12]: https://app.datadoghq.com/databases
 [13]: /integrations/amazon_rds
 [14]: /database_monitoring/troubleshooting/?tab=postgres
+[15]: https://www.postgresql.org/docs/current/sql-explain.html
+[16]: https://www.postgresql.org/docs/current/auto-explain.html
+[17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups.html
+[18]: /integrations/amazon-rds/?tab=standard#log-collection

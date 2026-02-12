@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on Codefresh Pipelines
+title: Codefresh Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/codefresh
 further_reading:
@@ -11,15 +11,11 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
-[Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications. 
+[Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications.
 
-Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
+Set up CI Visibility for Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
 
 ### Compatibility
 
@@ -29,6 +25,8 @@ Set up tracing in Codefresh to collect data on each step of your pipelines, anal
 | [Manual steps][8] | Manual steps | View manually triggered pipelines. |
 | [Parameters][9] | Parameters | Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered. |
 | [Pipeline failure reasons][10] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Filter CI Jobs on the critical path][12] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][13] | Execution time  | View the amount of time pipelines have been running jobs. |
 
 ## Configure the Datadog integration
 
@@ -61,4 +59,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [8]: /glossary/#manual-step
 [9]: /glossary/#parameter
 [10]: /glossary/#pipeline-failure
-[11]: /continuous_integration/search/#search-for-pipelines 
+[11]: /continuous_integration/search/#search-for-pipelines
+[12]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[13]: /glossary/#pipeline-execution-time

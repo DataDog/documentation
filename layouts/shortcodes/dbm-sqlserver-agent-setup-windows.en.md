@@ -6,17 +6,13 @@ Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d
 init_config:
 instances:
   - dbm: true
-    host: '<HOSTNAME>,<SQL_PORT>'
+    host: '<HOSTNAME>,<PORT>'
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    include_ao_metrics: true  # Optional: For AlwaysOn users
-    agent_jobs:               # Optional: For monitoring SQL Server Agent jobs
-      enabled: true
-      collection_interval: 15
-      history_row_limit: 10000
-    tags:  # Optional
+    # Optional: For additional tags
+    tags:  
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
@@ -45,7 +41,7 @@ The recommended ODBC driver is [Microsoft ODBC Driver][3]. Ensure the driver is 
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 18 for SQL Server}'
+driver: 'ODBC Driver 18 for SQL Server'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][6].

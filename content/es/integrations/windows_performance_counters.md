@@ -28,7 +28,7 @@ draft: false
 git_integration_title: windows_performance_counters
 integration_id: windows-performance-counters
 integration_title: Contadores de rendimiento de Windows
-integration_version: 2.1.1
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: windows_performance_counters

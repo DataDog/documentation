@@ -18,7 +18,7 @@ Open Policy Agent (OPA) provides [Rego][1], an open source policy language with 
 
 ## The template module
 
-Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. CSM Misconfigurations uses a module template like the one below to simplify writing rules:
+Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. Cloud Security Misconfigurations uses a module template like the one below to simplify writing rules:
 
 ```python
 package datadog

@@ -1,0 +1,553 @@
+{
+    "title": "CI Visibility - Critical Path",
+    "description": "Identify the CI Jobs on the critical path to reduce the duration of your CI Pipelines",
+    "widgets": [
+        {
+            "id": 3889768792556572,
+            "definition": {
+                "title": "Jobs & Stages",
+                "background_color": "vivid_green",
+                "show_title": true,
+                "type": "group",
+                "layout_type": "ordered",
+                "widgets": [
+                    {
+                        "id": 8221170896379522,
+                        "definition": {
+                            "type": "note",
+                            "content": "**Exclusive time on the critical path**: Represents the amount of time the CI runner has spent executing a specific job exclusively, excluding the execution time of other jobs that were running in parallel.\n\nIf job A is on the critical path with a duration of 100ms and runs in parallel with job B, which takes 80ms, the exclusive time for job A on the critical path would be 20ms. This means the actual improvement in pipeline duration reduction would be 20ms.\n\nMore info in [this guide](https://docs.datadoghq.com/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path).",
+                            "background_color": "white",
+                            "font_size": "14",
+                            "text_align": "left",
+                            "vertical_align": "top",
+                            "show_tick": false,
+                            "tick_pos": "50%",
+                            "tick_edge": "left",
+                            "has_padding": true
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 6,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 4478889707661814,
+                        "definition": {
+                            "title": "Total Exclusive Time of Jobs on the Critical Path",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "type": "query_value",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query2"
+                                        }
+                                    ],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query2",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "sum",
+                                                "metric": "@ci.critical_path.exclusive_time"
+                                            },
+                                            "group_by": [],
+                                            "search": {
+                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name  @duration:>0 $repository_id $git.branch -@ci.allowed_to_fail:true"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar"
+                                }
+                            ],
+                            "autoscale": true,
+                            "precision": 2
+                        },
+                        "layout": {
+                            "x": 6,
+                            "y": 0,
+                            "width": 6,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 3826279078004156,
+                        "definition": {
+                            "title": "Exclusive Time of Jobs on the Critical Path",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "show_legend": false,
+                            "type": "distribution",
+                            "xaxis": {
+                                "scale": "linear",
+                                "min": "auto",
+                                "max": "auto",
+                                "include_zero": true
+                            },
+                            "yaxis": {
+                                "scale": "linear",
+                                "min": "auto",
+                                "max": "auto",
+                                "include_zero": true
+                            },
+                            "requests": [
+                                {
+                                    "request_type": "histogram",
+                                    "query": {
+                                        "data_source": "ci_pipelines",
+                                        "name": "query1",
+                                        "indexes": [
+                                            "*"
+                                        ],
+                                        "compute": {
+                                            "aggregation": "avg",
+                                            "metric": "@ci.critical_path.exclusive_time"
+                                        },
+                                        "group_by": [],
+                                        "search": {
+                                            "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name @duration:>0  $repository_id $git.branch"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 3,
+                            "width": 12,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 1017297889184878,
+                        "definition": {
+                            "title": "Jobs on critical path",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "response_format": "scalar",
+                                    "text_formats": [],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query2",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "sum",
+                                                "metric": "@ci.critical_path.exclusive_time"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.job.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@git.repository.id",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.on_critical_path:true  @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query4",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.job.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@git.repository.id",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.on_critical_path:true  @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query3",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.job.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@git.repository.id",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                            }
+                                        }
+                                    ],
+                                    "sort": {
+                                        "count": 30000,
+                                        "order_by": [
+                                            {
+                                                "type": "formula",
+                                                "index": 0,
+                                                "order": "desc"
+                                            }
+                                        ]
+                                    },
+                                    "formulas": [
+                                        {
+                                            "alias": "Total exclusive time on critical path",
+                                            "cell_display_mode": "bar",
+                                            "formula": "query2"
+                                        },
+                                        {
+                                            "alias": "Average exclusive time on critical path",
+                                            "number_format": {
+                                                "unit": {
+                                                    "type": "canonical_unit",
+                                                    "unit_name": "second"
+                                                }
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query2 / query4"
+                                        },
+                                        {
+                                            "alias": "Rate on critical path",
+                                            "cell_display_mode": "bar",
+                                            "number_format": {
+                                                "unit": {
+                                                    "type": "canonical_unit",
+                                                    "unit_name": "percent"
+                                                }
+                                            },
+                                            "formula": "(query4 / query3) * 100"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "has_search_bar": "auto"
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 6,
+                            "width": 12,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 689096049826982,
+                        "definition": {
+                            "title": "Stages with most impactful jobs on critical path",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "response_format": "scalar",
+                                    "text_formats": [],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query2",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "sum",
+                                                "metric": "@ci.critical_path.exclusive_time"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.stage.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@git.repository.id",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.on_critical_path:true   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query4",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.stage.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@git.repository.id",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.on_critical_path:true   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch"
+                                            }
+                                        },
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query3",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "count"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.stage.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                },
+                                                {
+                                                    "facet": "@git.repository.id",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "sum",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job   @duration:>0 $env $service $ci_provider $pipeline_name $repository_id $job_name $git.branch @ci.critical_path.parallelized:true"
+                                            }
+                                        }
+                                    ],
+                                    "sort": {
+                                        "count": 20000,
+                                        "order_by": [
+                                            {
+                                                "type": "formula",
+                                                "index": 0,
+                                                "order": "desc"
+                                            }
+                                        ]
+                                    },
+                                    "formulas": [
+                                        {
+                                            "alias": "Total Exclusive Time of Jobs",
+                                            "cell_display_mode": "bar",
+                                            "formula": "query2"
+                                        },
+                                        {
+                                            "alias": "# Jobs on Critical Path",
+                                            "formula": "query4"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "has_search_bar": "auto"
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 9,
+                            "width": 12,
+                            "height": 3
+                        }
+                    },
+                    {
+                        "id": 5240662815825512,
+                        "definition": {
+                            "title": "Change of Jobs Avg Exclusive Time on the Critical Path",
+                            "title_size": "16",
+                            "title_align": "left",
+                            "type": "change",
+                            "requests": [
+                                {
+                                    "increase_good": false,
+                                    "order_by": "change",
+                                    "change_type": "absolute",
+                                    "order_dir": "desc",
+                                    "response_format": "scalar",
+                                    "formulas": [
+                                        {
+                                            "formula": "hour_before(query1)"
+                                        },
+                                        {
+                                            "formula": "query1",
+                                            "alias": "Avg Duration"
+                                        }
+                                    ],
+                                    "queries": [
+                                        {
+                                            "data_source": "ci_pipelines",
+                                            "name": "query1",
+                                            "indexes": [
+                                                "*"
+                                            ],
+                                            "compute": {
+                                                "aggregation": "avg",
+                                                "metric": "@ci.critical_path.exclusive_time"
+                                            },
+                                            "group_by": [
+                                                {
+                                                    "facet": "@ci.job.name",
+                                                    "limit": 100,
+                                                    "sort": {
+                                                        "order": "desc",
+                                                        "aggregation": "avg",
+                                                        "metric": "@ci.critical_path.exclusive_time"
+                                                    }
+                                                }
+                                            ],
+                                            "search": {
+                                                "query": "ci_level:job @ci.on_critical_path:true $env $service $ci_provider $pipeline_name $job_name  $repository_id $git.branch"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "layout": {
+                            "x": 0,
+                            "y": 12,
+                            "width": 12,
+                            "height": 3
+                        }
+                    }
+                ]
+            },
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 16
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "env",
+            "prefix": "env",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "service",
+            "prefix": "service",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "repository_id",
+            "prefix": "@git.repository.id",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "ci_provider",
+            "prefix": "@ci.provider.name",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "pipeline_name",
+            "prefix": "@ci.pipeline.name",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "job_name",
+            "prefix": "@ci.job.name",
+            "available_values": [],
+            "default": "*"
+        },
+        {
+            "name": "git.branch",
+            "prefix": "@git.branch",
+            "available_values": [],
+            "default": "*"
+        }
+    ],
+    "layout_type": "ordered",
+    "notify_list": [],
+    "template_variable_presets": [],
+    "reflow_type": "fixed"
+}

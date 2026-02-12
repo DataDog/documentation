@@ -24,8 +24,8 @@ author:
   support_email: kristiana.mitchell@contrastsecurity.com
 categories:
 - ログの収集
-- セキュリティ
-custom_kind: integration
+- security
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md
 display_on_public_website: true

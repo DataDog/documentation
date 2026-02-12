@@ -1,6 +1,6 @@
 ---
-title: Segmentation
-description: Analyze and understand specific groups or segments of your user base.
+title: Segments
+description: Analyze and understand segments of your user base.
 further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
@@ -9,54 +9,96 @@ further_reading:
 
 ## Overview
 
-Segmentation is a feature in Product Analytics that allows you to analyze and understand specific groups or segments of your user base. By segmenting your users based on various characteristics and behaviors, you can uncover valuable insights, identify trends, and make data-driven decisions to optimize your product and user experience. For example, you can segment users by purchase amount, active users in a given country, users in a trial, or users in a trial who then converted to a paying organization.
+Segmenting helps you focus on specific user groups based on characteristics or behaviors. This allows you to uncover insights, identify trends, and make data-driven decisions about your product.
+
+For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
+
+After creating a segment, you can reuse it across charts and dashboards to compare how different groups of users behave.
 
 ## Build a segment
+To create a segment:
+1. Navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and click **Create Segment**.
+   
+1. Then, select a data source:
+   - [Product Analytics data](#segment-pana): Define users based on their activity in your product.
+   - [CSV file](#segment-csv): Upload a predefined list of users.
 
-To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > User Segments][1]** from the navigation. You have two sources you can choose from when building a new segment:
+{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
-- Product Analytics data
-- External data (upload a Reference Table)
+{{% collapse-content title="Using Product Analytics data" level="h4" expanded=false id="segment-pana" %}}
 
-{{< img src="product_analytics/segmentation/segmentation-1.png" alt="Create a user segment based on Product Analytics or external data.">}}
+To create a segment using Product Analytics data:
 
-### Using Product Analytics data
+1. Select **Product Analytics** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
 
-To create a new segment using Product Analytics data:
+2. Select a **condition** for the users in the segment:
+      - **performed event(s)**
+      - **have attribute(s)**
 
-1. Choose the user attribute you want to connect your data with. In the below example, it is `usr.id`, but you can use any user attribute available, such as `usr.email` or `usr.name`.
+<div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
 
-2. Under the **Filter your segment** section, you can filter on any attribute collected by the SDK, or custom attributes you added to create a granular user segment.
+3. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
-   In the below example, the segment is filtered to all users who were on the `/cart` page and then clicked on the checkout button (and did so from Brazil):
+   In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
 
-   {{< img src="product_analytics/segmentation/segmentation-2.png" alt="Filter to all users from Brazil who were on the `/cart` page and clicked on the checkout button.">}}
+   {{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="Segment page filtered to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
 
-### Using external or third-party data
+<div class="alert" style="background: #f2ecfc">
+<h3 class="text-black">Example: See users who dropped before buying</h3>
+<p class="text-black">With the filtering and segmentation capabilities on the <strong>Users & Segments</strong> page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the <strong> Create Segment</strong> button:
+{{< img src="product_analytics/segmentation/segment_create_button_0.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
 
-To create a segment using external or third-party data:
+Or, directly click <strong>Create Segment</strong> to select your data source:
 
-1. See the [Reference Tables][2] documentation for how to upload and create a Reference Table.
-2. Make sure to properly connect the data type (for example, `usr.id`, `usr.name`, or `usr.email`) to the column name.
-3. For accuracy, ensure there is data in Product Analytics for users in the segment.
+{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
-## Leverage segments across Product Analytics
+On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new segment</a> page, add the properties specifying the users: <br>
+– who **viewed** the <code>/cart</code> page <br>
+– **then** <code> did not</code> <br>
+– perform the **action** of <code> click on CHECKOUT</code> <br>
 
-### In sankeys
+{{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
 
-In the Sankey page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Sankey diagram only for users in the "Premium users" segment.
+You can define additional attributes, such as the Device Type, to further specify your users.
+</div>
 
-{{< img src="product_analytics/segmentation/segmentation-3.png" alt="Filter down the Sankey visualization to reflect a selected segment of users.">}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Importing CSV files" level="h4" expanded=false id="segment-csv" %}}
+
+If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV file and turn it into a segment.
+
+To create a segment using an uploaded list of users from your own file:
+
+1. Select **CSV File** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
+
+2. Click **Browse files** to upload your CSV file.
+
+The file needs a column containing either user IDs or user emails so the data can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
+
+The following example maps the Product Analytics attribute `@usr.id` to the column named `id` in the CSV file.
+
+{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attributes." style="width:80%">}}
+
+{{% /collapse-content %}}
+
+## Use segments across Product Analytics
+
+### In Pathways
+Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows paths taken by the "Premium Shopist Customers" segment.
+
+{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the Premium Shopist Customers segment.">}}
 
 ### In Analytics Explorer
 
-You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium users" segment who were active in the last month, organized by the number of sessions they had.
+Filter the Analytics Explorer visualization to see how a segment uses your product. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
-{{< img src="product_analytics/segmentation/segmentation-4.png" alt="Show a list of users in the Premium users segment who were active in the last month, organized by the number of sessions they had.">}}
+{{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/segments
 [2]: /integrations/guide/reference-tables/?tab=manualupload#validation-rules
+[3]: https://app.datadoghq.com/product-analytics/profiles

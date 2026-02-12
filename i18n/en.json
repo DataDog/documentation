@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "800"
+    "other": "1,000"
   },
   "beta_sentence": {
     "other": "Beta - For support or to report any issues, contact"
@@ -241,6 +241,9 @@
   "copy": {
     "other": "Copy"
   },
+  "copied": {
+    "other": "Copied"
+  },
   "response": {
     "other": "Response"
   },
@@ -291,5 +294,23 @@
   },
   "available_for": {
     "other": "Available for"
+  },
+  "join_now": {
+    "other": "Join Now"
+  },
+  "datadog_partner_network": {
+    "other": "Datadog Partner Network Documentation"
+  },
+  "alert_note": {
+    "other": "NOTE"
+  },
+  "alert_warning": {
+    "other": "WARNING"
+  },
+  "alert_caution": {
+    "other": "CAUTION"
+  },
+  "alert_tip": {
+    "other": "TIP"
   }
 }

@@ -13,7 +13,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,7 +31,7 @@ pricing:
   short_description: プライベートオファーのプレースホルダ―
   unit_price: null
 public_title: Whisperer Advisory Services
-short_description: Datadog Advisory and Consultation services from RapDev
+short_description: RapDev による Datadog 向けアドバイザリーおよびコンサルティングサービス
 supported_os:
 - linux
 - windows
@@ -45,7 +45,7 @@ tile:
   - Category::Marketplace
   - Offering::Professional Service
   configuration: README.md#Setup
-  description: Datadog Advisory and Consultation services from RapDev
+  description: RapDev による Datadog アドバイザリー & コンサルテーションサービス
   media:
   - caption: RapDev のサービス概要
     image_url: images/rapdev_whisperer.jpg
@@ -94,4 +94,4 @@ Whisperer は 2 段階のサービスを提供しています。
 [3]: https://www.rapdev.io/#Get-in-touch
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-whisperer-advisory-services" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-whisperer-advisory-services" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

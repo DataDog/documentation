@@ -26,7 +26,7 @@ algolia:
 
 ## Overview
 
-SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to quickly pinpoint the root cause of the issue and fix it.
+SSL tests allow you to proactively monitor the validity and expiration of your SSL/TLS certificates to ensure secure connections between your key services and users. If your certificate is about to expire or becomes compromised, Datadog sends you an alert with details on the failure, allowing you to pinpoint the root cause of the issue and fix it.
 
 SSL tests can run from both [managed](#select-locations) and [private locations][1] depending on your preference for running the test from outside or inside your network. SSL tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][2].
 
@@ -48,6 +48,7 @@ You may create a test using one of the following options:
    1. Add **Advanced Options** (optional) to your test:
       * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
       * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
+      * **Fail on incomplete certificate chain**: Disables AIA fetching, causing the test to fail if any intermediate certificates are missing from the server's certificate chain.
       * **Timeout**: Specify the amount of time in seconds before the test times out.
       * **Server Name**: Specifies on which server you want to initiate the TLS handshake, allowing the server to present one of multiple possible certificates on the same IP address and TCP port number. By default, the parameter is filled by the **Host** value.
       * **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
@@ -124,25 +125,7 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-These reasons include the following:
-
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
-
-`INVALID_REQUEST`
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][10].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
+For a complete list of SSL error codes, see [API Testing Errors][10].
 
 ## Permissions
 
@@ -167,6 +150,6 @@ If you are using the [custom role feature][12], add your user to any custom role
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors
 [9]: /synthetics/settings/#global-variables
-[10]: /synthetics/api_tests/errors/#ssl-errors
+[10]: /synthetics/api_tests/errors/
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles

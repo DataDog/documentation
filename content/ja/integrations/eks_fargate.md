@@ -31,7 +31,7 @@ draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
 integration_title: Amazon EKS on AWS Fargate
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
@@ -71,7 +71,7 @@ tile:
 
 ## 概要
 
-<div class="alert alert-warning">このページでは、EKS Fargate インテグレーションについて説明します。ECS Fargate については、Datadog の <a href="http://docs.datadoghq.com/integrations/ecs_fargate">ECS Fargate インテグレーション</a>に関するドキュメントをご覧ください。
+<div class="alert alert-danger">このページでは、EKS Fargate インテグレーションについて説明します。ECS Fargate については、Datadog の <a href="http://docs.datadoghq.com/integrations/ecs_fargate">ECS Fargate インテグレーション</a>に関するドキュメントをご覧ください。
 </div>
 
 AWS Fargate 上にデプロイされている Amazon EKS は、マネージド型の Kubernetes サービスで、標準の Kubernetes 環境で展開とメンテナンスの特定の側面を自動化します。Kubernetes ノードは AWS Fargate によって管理され、ユーザーから分離されるように抽象化されています。
@@ -181,7 +181,7 @@ metadata:
 {{% tab "Datadog Operator" %}}
 ##### Datadog Operator を使用した Admission Controller
 
-<div class="alert alert-warning">この機能を使用するには、Cluster Agent v7.52.0 以降、Datadog Operator v1.7.0 以降、および <a href="https://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate インテグレーション</a>が必要です。
+<div class="alert alert-danger">この機能を使用するには、Cluster Agent v7.52.0 以降、Datadog Operator v1.7.0 以降、および <a href="https://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate インテグレーション</a>が必要です。
 </div>
 
 以下のセットアップでは、Cluster Agent が Agent サイドカーと通信するように構成し、[イベント収集][1]、[Kubernetes リソースビュー][2]、[クラスターチェック][3]などの機能にアクセスできるようにします。
@@ -357,7 +357,7 @@ Agent やそのコンテナリソースをさらに構成するには、`Datadog
 {{% tab "Helm" %}}
 ##### Helm を使用した Admission Controller
 
-<div class="alert alert-warning">この機能には、Cluster Agent v7.52.0 以降が必要です。
+<div class="alert alert-danger">この機能には、Cluster Agent v7.52.0 以降が必要です。
 </div>
 
 以下のセットアップでは、Cluster Agent が Agent サイドカーと通信するように構成し、[イベント収集][1]、[Kubernetes リソースビュー][2]、[クラスターチェック][3]などの機能にアクセスできるようにします。

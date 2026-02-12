@@ -1,7 +1,7 @@
 ---
 aliases:
-- /agent/faq/agent-s-are-no-longer-reporting-data
-- /agent/faq/common-windows-agent-installation-error-1721
+- /ko/agent/faq/agent-s-are-no-longer-reporting-data
+- /ko/agent/faq/common-windows-agent-installation-error-1721
 further_reading:
 - link: /agent/troubleshooting/hostname_containers/
   tag: 설명서

@@ -1,28 +1,56 @@
 ---
-aliases:
-- /es/integrations/azure_hdinsight
+app_id: azure-hdinsight
+app_uuid: 2b5359ca-2d39-4a43-8f8a-49ec30f6bee3
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.hdinsight_clusters.gateway_requests
+      metadata_path: metadata.csv
+      prefix: azure.hdinsight_clusters
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 294
+    source_type_name: Azure HD Insight
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - nube
 - azure
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas principales de Azure HDInsight.
-doc_link: https://docs.datadoghq.com/integrations/azure_hd_insight/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_hd_insight
-has_logo: true
 integration_id: azure-hdinsight
-integration_title: Microsoft Azure HDInsight
+integration_title: Azure HD Insight
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_hd_insight
-public_title: Integración de Datadog y Microsoft Azure HDInsight
-short_description: Rastrea las métricas principales de Azure HDInsight.
-version: '1.0'
+public_title: Azure HD Insight
+short_description: Rastrea las métricas clave de Azure HD Insight.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Categoría::Azure
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Rastrea las métricas clave de Azure HD Insight.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure HD Insight
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure HDInsight es un servicio en la nube que permite procesar de forma fácil, rápida y rentable grandes cantidades de datos.
@@ -45,11 +73,11 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure HDInsight no incluye ningún evento.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure HDInsight no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

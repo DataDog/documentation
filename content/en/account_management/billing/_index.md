@@ -1,5 +1,6 @@
 ---
 title: Billing
+description: Understand billing cycles, payment methods, usage calculations, and host counting with detailed pricing information for Datadog products.
 ---
 
 ## Overview

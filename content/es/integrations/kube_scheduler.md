@@ -24,11 +24,11 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
+- rastreo
 - Kubernetes
 - recopilación de logs
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Programador Kubernetes
-integration_version: 4.10.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kube_scheduler
@@ -65,7 +65,7 @@ tile:
   title: Programador Kubernetes
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ![Dashboard del Programador Kube][1]
@@ -114,13 +114,13 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 
 El Programador Kube no incluye eventos.
 
-### Checks de servicio
+### Checks de servicios
 {{< get-service-checks-from-git "kube_scheduler" >}}
 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_scheduler/images/kube_scheduler_screenshot.jpeg
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler

@@ -1,0 +1,73 @@
+{{ $dot := . }}
+{{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
+{{ $on_prem_actions := dict }}
+{{ $on_prem_parents := slice }}
+{{ $final_actions := dict }}
+
+{{ if lt (len $workflow_bundles) 1 }}
+  {{ $err_msg := "Could not load workflow bundles data" }}
+
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf $err_msg }}
+  {{ else }}
+    {{ errorf $err_msg }}
+  {{ end }}
+{{ end }}
+
+
+{{/* Build dict of supported actions */}}
+{{ range sort $workflow_bundles "title" }}
+    {{ $workflow_title := .title }}
+    {{ $workflow_name := .name }}
+    {{ range $action_name, $action_data := .actions }}
+        {{ if $action_data.canRunOnPremises }}
+            {{ $on_prem_actions = merge $on_prem_actions (dict $workflow_name $workflow_title) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{/* Grab parent action for each workflow name */}}
+{{ range $fqn, $title := $on_prem_actions }}
+    {{ $parts := split $fqn "." }}
+    {{ range $parts }}
+        {{ $parent_fqn := print (index $parts 0) "." (index $parts 1) "." (index $parts 2) }}
+        {{ $on_prem_parents = $on_prem_parents | append $parent_fqn | uniq }}
+    {{ end }}
+{{ end }}
+
+{{/* Match on_prem_parents to action and build final dict */}}
+{{ range sort $workflow_bundles "title" }}
+    {{ $title := .title }}
+    {{ $fqn := .name }}
+    {{ range $action_name, $action_data := .actions }}
+        {{ range $on_prem_parents}}
+            {{ if eq $fqn . }}
+                {{ $final_actions = merge $final_actions (dict $fqn $title) }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $base_url := "https://app.datadoghq.com/actions/action-catalog#" }}
+
+{{ if lt (len $final_actions) 1}}
+    {{ $err_msg := "On prem action list is empty" }}
+
+    {{ if eq hugo.Environment "development" -}}
+        {{ warnf $err_msg }}
+    {{ else }}
+        {{ errorf $err_msg }}
+    {{ end }}    
+{{ end }}
+
+{{/* Kubernetes doesnt have a parent */}}
+{{ $final_actions = merge $final_actions (dict "com.datadoghq.kubernetes" "Kubernetes") }}
+
+{{/* Final output */}}
+<p>The following integrations support private actions:</p>
+<ul>
+{{ range $fqn, $title := $final_actions -}}
+    {{ $full_url := print $base_url "/" $fqn -}}
+    <li><a href="{{ $full_url }}">{{ $title}}</a></li>
+{{ end -}}
+</ul>

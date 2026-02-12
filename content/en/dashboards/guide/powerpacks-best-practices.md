@@ -1,5 +1,6 @@
 ---
 title: Scale Graphing Expertise with Powerpacks
+description: Standardize dashboard widgets and scale monitoring expertise across teams using reusable Powerpack widget groups.
 further_reading:
 - link: "/dashboards/widgets/powerpack"
   tag: "Documentation"
@@ -19,8 +20,6 @@ further_reading:
 
 Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. They provide a scalable way to capture domain knowledge or organization-specific standards and share them throughout an organization. Using Powerpacks, you can empower dashboard creators to incorporate knowledge across technology areas into their existing dashboards without additional training.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="The configure powerpack page in the Datadog application showing a section to configure values with tags or attributes, several graphs from an example powerpack, and a menu on the right to browse other packs" style="width:100%;" >}}
-
 Powerpacks are either preset (created by Datadog) or custom (created by a user).
 
 - Preset Powerpacks provide out-of-the-box views for common monitoring patterns like performance metrics or feature usage. They are often linked to a specific product or integration (like `RUM Page Views`) and are maintained by Datadog.
@@ -28,7 +27,7 @@ Powerpacks are either preset (created by Datadog) or custom (created by a user).
  
 This guide addresses best practices for creating and sharing custom Powerpacks.
 
-## When do custom Powerpacks help?
+## When to use a custom Powerpack
 
 As an organization grows, expertise and ownership easily become distributed across multiple teams. Powerpacks work best for organizations with:
 
@@ -61,7 +60,7 @@ On-graph markers, like horizontal markers and forecast functions, can provide co
 
 Powerpacks appear in the dashboard widget tray and you can find them through keyword or tag searches. Powerpack title, description, and tags are all searchable fields and provide the easiest way for someone to find your Powerpack.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:60%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:50%;" >}}
 
 To ensure the right users find your Powerpack, include keywords your users might search (such as "performance") in the title or description, and tag key technologies.
 
@@ -73,17 +72,13 @@ Use tags to specify key technologies or search phrases for a specific pack (for 
 
 To search Powerpacks by tag in the widget tray, use `tag:search_string` syntax. 
 
-{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with tag:security" style="width:60%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with tag:security" style="width:50%;" >}}
 
 ### Make Powerpacks customizable
 
 Powerpacks are most useful when they can be customized by each team into their relevant context. Set configuration variables to allow this.
 
-The Powerpack creation modal suggests variables to add to your pack based on common filters that appear in queries. Hover over any suggested variable to see which graphs it affects. To add a variable that is not suggested, modify your graphs directly in the dashboard to use the desired variable as a filter or as a template variable.
-
-Modify the names of variables to clarify how others should use them. In the example below, `@appsec.type` is renamed `AttackType` to clarify the expected input. 
-
-{{< img src="dashboards/guide/powerpacks_best_practices/create_powerpack.png" alt="The Create Powerpack screen. Along the left, it shows Powerpack Title, and Group Title ,both entered as Application Security Overview, the Add Tags section configured with security and app, and several variables configured in the Add Variables section, including the attribute @appsec.type showing AttackType entered as its name. Below that is a section showing Add Common Filters as Variables, with several options shown and the @appsec.category:attack_attempt filter highlighted. There are several graphs along the right, and three of them are highlighted in the same color as the @appsec.category:attack_attempt filter on the left" style="width:100%;" >}}
+The Powerpack creation modal suggests variables to add to your pack based on common filters that appear in queries. Hover over any suggested variable to see which graphs it affects. To add a variable that is not suggested, modify your graphs directly in the dashboard to use the desired variable as a filter or template variable. Modify the names of variables to clarify how others should use them.
 
 Configuration variables serve two purposes. They can:
 1. Help a team scope a Powerpack to their context once, before the pack gets added to their dashboard (such as selecting a `service` to ensure a security Powerpack is relevant to the correct service).
@@ -95,7 +90,7 @@ Each Powerpack user decides whether to save a variable to their dashboard to all
 
 ### Updating a Powerpack
 
-Changes made to an existing custom Powerpack are reflected across all instances of the same Powerpack. This can simplify the process of updating duplicate content across several dashboards. Click **Edit Powerpack Layout** to edit synced Powerpack instances.
+Changes to an existing custom Powerpack are applied to all instances of that Powerpack, simplifying updates across multiple dashboards. Click **Edit Powerpack Layout** to modify synced Powerpack instances.
 
 ### Permissions
 By default, edit permissions for Powerpacks are restricted to the author. Editing permission can be modified at any time through the kebab menu in the widget tray or in the header of a Powerpack instance.

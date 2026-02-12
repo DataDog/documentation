@@ -41,7 +41,7 @@ Azure SQL Database 메트릭을 얻으면 다음을 할 수 있습니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_sql_database" >}}
+{{< get-metrics-from-git "azure-sql-database" >}}
 
 
 ### 이벤트

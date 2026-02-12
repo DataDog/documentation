@@ -1,11 +1,7 @@
 module documentation
 
-go 1.14
+go 1.24.4
 
-require (
-	github.com/DataDog/websites-modules v1.4.203 // indirect
-	github.com/DataDog/websites-sources v0.0.0-20241125134453-6f4fe0220a22 // indirect
-)
+require github.com/DataDog/websites-modules v1.4.281 // indirect
 
-// replace github.com/DataDog/websites-modules => /Users/matt.fitzsimmons/source/websites-modules
-// replace github.com/DataDog/websites-sources => /Users/brian.deutsch/dd/websites-sources
+// replace github.com/DataDog/websites-modules => /Users/lisiane.turlure/guac/websites-modules

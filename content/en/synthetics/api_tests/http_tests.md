@@ -133,9 +133,11 @@ You may create a test using one of the following options:
 
    {{% tab "Javascript" %}}
 
-   Define variables for your HTTP API tests with JavaScript:
+Define variables for your HTTP API tests with JavaScript:
 
-  {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
+
+<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
 
    {{% /tab %}}
 
@@ -144,6 +146,8 @@ You may create a test using one of the following options:
 ### Define assertions
 
 Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+
+<div class="alert alert-info">The assertions header, body, and JavaScript sections are only for defining assertions. They cannot be used to make additional HTTP requests.</div>
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -182,8 +186,8 @@ HTTP tests can run:
 
 ## One-click
 
-API test creation suggests endpoints from the [API Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, API Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Software Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
 Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
@@ -207,37 +211,7 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-The most common errors include the following:
-
-`AUTHENTICATION_ERROR`
-: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
-
-`CONNREFUSED`
-: No connection could be made because the target machine actively refused it.
-
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
-
-`Error performing HTTP/2 request`
-: The request could not be performed. See the dedicated [error][16] page for more information.
-
-`INVALID_REQUEST`
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
-
-`MALFORMED_RESPONSE`
-: The remote server responded with a payload that does not comply with HTTP specifications.
+For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
 ## Permissions
 
@@ -264,7 +238,7 @@ If you are using the [custom role feature][14], add your user to any custom role
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
 [11]: /synthetics/settings/#global-variables
-[12]: /synthetics/api_tests/errors/#ssl-errors
+[12]: /synthetics/api_tests/errors/
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role

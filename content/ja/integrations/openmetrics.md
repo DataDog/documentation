@@ -27,7 +27,7 @@ draft: false
 git_integration_title: openmetrics
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: openmetrics
@@ -65,7 +65,7 @@ tile:
 
 任意の OpenMetrics または Prometheus エンドポイントからカスタムメトリクスを抽出します。
 
-<div class="alert alert-warning">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.</div>
+<div class="alert alert-danger">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.</div>
 
 このインテグレーションは、[Prometheus エクスポジション形式][1]と [OpenMetrics 仕様標準][2]の両方に対応しています。
 

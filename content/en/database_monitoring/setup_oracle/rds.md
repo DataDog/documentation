@@ -92,7 +92,7 @@ For installation steps, see the [Agent installation instructions][8].
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][9] for all available configuration options.
 
-**Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
+**Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][11] for more details.
 
 ```yaml
 init_config:
@@ -117,16 +117,6 @@ instances:
 
 Once all Agent configuration is complete, [restart the Datadog Agent][2].
 
-### Install or verify the Oracle integration
-
-#### First-time installations
-
-On the Integrations page in Datadog, install the [Oracle integration][7] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
-
-#### Existing installations
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### Validate the setup
 
 [Run the Agent's status subcommand][3] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][5] and [Databases][4] page in Datadog to get started.
@@ -135,7 +125,7 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][9] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-danger">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
 [1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
@@ -147,6 +137,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [10]: /database_monitoring/architecture/
+[11]: /integrations/guide/oracle-check-upgrade-7.50.1/
 
 ## Further reading
 

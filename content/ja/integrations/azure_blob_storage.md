@@ -1,27 +1,60 @@
 ---
+app_id: azure-blob-storage
+app_uuid: 57ef97b4-651a-432d-9dc5-f56a94449d75
+assets:
+  dashboards:
+    azure_blob_storage: assets/dashboards/azure_blob_storage.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.storage_storageaccounts_blobservices.blob_count
+      metadata_path: metadata.csv
+      prefix: azure.storage_storageaccounts_blobservices
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 226
+    source_type_name: Azure Blob Storage
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Azure Blob Storage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_blob_storage
-has_logo: true
 integration_id: azure-blob-storage
-integration_title: Microsoft Azure Blob Storage
+integration_title: Azure Blob Storage
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_blob_storage
-public_title: Datadog-Microsoft Azure Blob Storage インテグレーション
+public_title: Azure Blob Storage
 short_description: Azure Blob Storage のキーメトリクスを追跡
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Blob Storage のキーメトリクスを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Blob Storage
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレージソリューションです。Blob ストレージは、大量の非構造化データを格納できるように最適化されています。Azure Blob Storage からメトリクスを取得すると、以下のことができます。
@@ -38,7 +71,7 @@ Azure Blob Storage は、Microsoft のクラウド用オブジェクトストレ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_blob_storage" >}}
+{{< get-metrics-from-git "azure-blob-storage" >}}
 
 
 ### イベント

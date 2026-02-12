@@ -11,9 +11,11 @@ further_reading:
 title: Desinstalar el Agent
 ---
 
-Para obtener información sobre la desinstalación del Agent de tu sistema, consulta la página [uso básico del Agent][1] correspondiente a tu sistema operativo, plataforma o herramienta de configuración.
+Para obtener información sobre cómo desinstalar el Agent de tu sistema, consulta la página [uso básico del Agent][1] correspondiente a tu sistema operativo, plataforma o herramienta de configuración.
 
-## Leer más
+{{< uninstall-agent >}}
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

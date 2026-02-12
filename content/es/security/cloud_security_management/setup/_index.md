@@ -17,106 +17,116 @@ further_reading:
 - link: /security/cloud_security_management/setup/supported_deployment_types
   tag: Documentación
   text: Tipos de despliegue compatibles
+- link: /security/guide/aws_fargate_config_guide
+  tag: Documentación
+  text: Guía de configuración de AWS Fargate para la seguridad de Datadog
 - link: /security/cloud_security_management/guide/agent_variables/
   tag: Guía
-  text: Variables de Agent de Cloud Security Management
-title: Configuración de Cloud Security Management
+  text: Variables del Agent de Cloud Security
+title: Configuración de Cloud Security
 ---
 
-Datadog proporciona un flujo de trabajo guiado para configurar [Cloud Security Management (CSM)][6]. El primer paso consiste en seleccionar las funciones que deseas activar. A continuación, sigue las instrucciones para configurar las funciones seleccionadas.
+## Información general
 
-<div class="alert alert-info">Las siguientes instrucciones se aplican únicamente a los nuevos usuarios de CSM. Si ya eres usuario y deseas activar otras funciones de CSM, consulta <a href="/security/cloud_security_management/setup/#enable-additional-features">Activar funciones adicionales</a>.</div>
+Para empezar con Cloud Security, revisa lo siguiente:
 
-1. En la página [Intro to Cloud Security Management][10] (Introducción a Cloud Security Management), haz clic en **Get Started with Cloud Security Management** (Empezando con Cloud Security Management).
-1. En la página [Features][11] (Funciones), selecciona las funciones que deseas activar.
-1. Haz clic en **Start Using Cloud Security Management** (Comenzar a usar Cloud Security Management) y confirma tus elecciones.
+- [Activar Agentless Scanning](#enable-agentless-scanning)
+- [Desplegar el Agent para una cobertura adicional](#deploy-the-agent-for-additional-coverage)
+- [Activar funciones adicionales](#enable-additional-features)
+  - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
+  - [Desplegar a través de integraciones en la nube](#deploy-via-cloud-integrations)
+- [Desactivar Cloud Security](#disable-cloud-security)
+- [Referencias adicionales](#further-reading)
 
-{{< img src="security/csm/setup/features_selection_new_user.png" alt="Página de funciones de CSM" width="100%">}} 
+## Activar Agentless Scanning
 
-Después de confirmar tus elecciones, aparece la página [Setup][3] (Configuración). Las instrucciones de la página se personalizan para que coincidan con las funciones seleccionadas. Por ejemplo, si activas **Compliance Scanning** (Escaneo de cumplimiento), solo se muestran las secciones **Cloud accounts** (Cuentas en la nube) y **Hosts and containers** (Hots y contenedores).
+La forma más sencilla de empezar con Cloud Security es [habilitar Agentless Scanning][1]. Agentless Scanning proporciona visibilidad de las vulnerabilidades que existen en tus hosts de AWS, contenedores en ejecución, funciones de Lambda y Amazon Machine Images (AMI) en ejecución, sin necesidad de instalar el Datadog Agent.
 
-La siguiente tabla muestra qué secciones aparecen en la página Configuración para cada función.
+Para obtener más información sobre Agentless Scanning, consulta [Cloud Security Agentless Scanning][2].
+
+## Desplegar el Agent para una cobertura adicional
+
+Para una cobertura más amplia y funcionalidades adicionales, despliega el Datadog Agent en tus hosts. La siguiente tabla resume las mejoras ofrecidas por los despliegues basados en el Agent. Para obtener más información, consulta [Configuración de Cloud Security en Agent][3].
 
 <table>
   <thead>
     <tr>
-      <th style="width: 50%;">Función</th>
-      <th style="width: 50%;">Página de configuración</th>
+      <th>Característica</th>
+      <th>Sin Agent</th>
+      <th>Sin Agent y despliegue basado en Agent</th>
+      <th>Despliegue basado en Agent</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>Errores de configuración</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cuentas en la nube</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts y contenedores</a></li>
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">Logs de CloudTrail</a></li>
-          <li><a href="/security/cloud_security_management/setup/source_code_integrations">Integraciones de código fuente</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Threat Detection</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts y contenedores</a></li>
-          <li><a href="/security/guide/aws_fargate_config_guide/?tab=amazonecs#cloud-security-management">Recursos serverless</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Identity Risks (CIEM)</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts/?tab=aws#set-up-cloudtrail-logs-forwarding">Logs de CloudTrail</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Host Vulnerability Management</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cuentas en la nube</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts y contenedores</a></li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>Container Vulnerability Management</td>
-      <td>
-        <ul style="font-size: 16px;">
-          <li><a href="/security/cloud_security_management/setup/cloud_accounts">Cuentas en la nube</a></li>
-          <li><a href="/security/cloud_security_management/setup/agent">Hosts y contenedores</a></li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/identity_risks">Cloud Security Identity Risks</a></strong></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/misconfigurations">Cloud Security Misconfigurations</a></strong></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">Marcas de referencia de host</a></td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/cloud_security_management/vulnerabilities">Cloud Security Vulnerabilities</a></strong></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Priorización de vulnerabilidad</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />Con contexto de tiempo de ejecución</td>
+    <td>{{< X >}}<br />Con contexto de tiempo de ejecución</td>
+  </tr>
+  <tr>
+    <td style="padding-left: 20px;">Frecuencia de actualización de vulnerabilidad</td>
+    <td>12 horas</td>
+    <td>En tiempo real</td>
+    <td>En tiempo real</td>
+  </tr>
+  <tr>
+    <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />Con información más precisa</td>
+    <td>{{< X >}}<br />Con información más precisa</td>
+  </tr>
 </table>
-
-<div class="alert alert-info">Para obtener instrucciones sobre la configuración de Agentless Scanning, consulta <a href="/security/cloud_security_management/setup/agentless_scanning">Configuración de CSM Agentless Scanning</a>.</div>
 
 ## Activar funciones adicionales
 
-Puedes activar funciones adicionales de CSM en cualquier momento volviendo a la página [Funciones][11] y haciendo clic en **Enable** (Activar) para las funciones que desees añadir. Esta página también sirve como página de estado que indica qué funciones están habilitadas, qué funciones están habilitadas pero aún no configuradas y qué funciones no están habilitadas.
+### AWS CloudTrail Logs
 
-{{< img src="security/csm/setup/features_page.png" alt="Página de funciones de CSM" width="100%">}}
+Maximiza los beneficios de [Cloud Security Identity Risks][6] con AWS CloudTrail Logs. Obtén información más detallada sobre el uso de los recursos en la nube, identificando a los usuarios y funciones con diferencias significativas entre los permisos proporcionados y aquellos utilizados. Para obtener más información, consulta [Configuración de AWS CloudTrail Logs para Cloud Security][4].
+
+### Desplegar a través de integraciones en la nube
+
+Monitoriza tu cobertura de seguridad del cumplimiento y protege tu infraestructura de nube contra ataques basados en IAM, habilitando el análisis de recursos AWS, Azure y GCP. Para obtener más información, consulta [Despliegue de Cloud Security a través de integraciones en la nube][7].
+
+## Desactivar Cloud Security
+
+Para obtener información sobre cómo desactivar Cloud Security, consulta lo siguiente:
+
+- [Desactivar Cloud Security Vulnerabilities][8]
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/cloud_security_management/setup/agent
-[2]: /es/security/cloud_security_management/setup/cloud_accounts
-[3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: /es/security/cloud_security_management/setup/agentless_scanning
-[5]: https://app.datadoghq.com/security/csm
-[6]: /es/security/cloud_security_management/
-[7]: /es/security/guide/aws_fargate_config_guide/
-[9]: https://app.datadoghq.com/security/getting-started
-[10]: https://app.datadoghq.com/security/csm/intro
-[11]: https://app.datadoghq.com/security/configuration/csm/features
-[12]: /es/security/cloud_security_management/setup/threat_detection
-[13]: /es/security/cloud_security_management/setup/identity_risks_ciem
-[14]: /es/security/cloud_security_management/setup/host_vulnerability_management
-[15]: /es/security/cloud_security_management/setup/container_vulnerability_management
+[1]: /es/security/cloud_security_management/setup/agentless_scanning/enable
+[2]: /es/security/cloud_security_management/agentless_scanning
+[3]: /es/security/cloud_security_management/setup/agent
+[4]: /es/security/cloud_security_management/setup/cloudtrail_logs
+[6]: /es/security/cloud_security_management/identity_risks
+[7]: /es/security/cloud_security_management/setup/cloud_accounts
+[8]: /es/security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
+[9]: /es/security/workload_protection/troubleshooting/threats/#disable-csm-threats
+[10]: /es/security/cloud_security_management/setup/iac_scanning

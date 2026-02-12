@@ -1,13 +1,13 @@
 ---
-description: Descubre las facetas predeterminadas que puedes utilizar para buscar
-  ejecuciones de tests en el Explorador de visibilidad de tests.
+description: Conoce las facetas predeterminadas que puedes utilizar para buscar tus
+  ejecuciones de test en Test Optimization Explorer.
 further_reading:
 - link: tests/search/
   tag: Documentación
   text: Aprende a buscar tests
 - link: tests/explorer/
   tag: Documentación
-  text: Más información sobre el Explorador de visibilidad de tests
+  text: Más información sobre Test Optimization Explorer
 title: Facetas de ejecuciones de tests
 ---
 
@@ -15,21 +15,21 @@ title: Facetas de ejecuciones de tests
 
 Las facetas son atributos y etiquetas (tags) que el usuario define a partir de sus tests. Son útiles para el análisis de datos tanto [cualitativos](#qualitative-facets) como [cuantitativos](#quantitative-measures). Las facetas permiten manipular los tests en los [monitores de tests de CI][1] y en las consultas de búsqueda que aparecen en [dashboards][2] y en [notebooks][3].
 
-[Crear facetas](#creating-facets) no es **obligatorio** para [buscar ejecuciones de tests][5]. Las capacidades de autocompletar utilizan facetas existentes, pero también se aplica cualquier entrada que coincida con las ejecuciones de tests entrantes.
+[Crear facetas](#creating-facets) no es **necesario** para buscar ejecuciones de tests. Las capacidades de autocompletar utilizan las facetas existentes, pero también se aplica cualquier entrada que coincida con las ejecuciones de test entrantes.
 
 ## Facetas comunes
 
-Ve a [**Software Delivery** (Entrega de software) > **Test Visibility** (Visibilidad de tests) > **Test Runs** (Ejecuciones de tests)][7] para acceder a la lista de facetas a la izquierda de la lista de ejecuciones de tests.
+Navega hasta [**Software Delivery** > **Test Optimization** > **Test Runs**][7] (Entrega de software > Test Optimization > Ejecuciones de test) para acceder a la lista de facetas a la izquierda de la lista de ejecuciones de test.
 
-{{< img src="/continuous_integration/facets-tests.png" text="Lista de facetas en la página Ejecuciones de tests del Explorador de visibilidad de tests" style="width:100%" >}}
+{{< img src="/continuous_integration/facets-tests.png" text="Lista de facetas en la página de ejecuciones de test en el Test Optimization Explorer" style="width:100%" >}}
 
-Puedes utilizar facetas en el Explorador de visibilidad de tests para hacer lo siguiente:
+Puedes utilizar facetas en el Test Optimization Explorer para:
 
-- [Buscar y filtrar ejecuciones de tests][5]
+- Buscar y filtrar ejecuciones de test
 - Ejecutar análisis de tests
 - Solucionar problemas una vez finalizados los tests
 
-El [Explorador de visibilidad de tests][4] incluye las siguientes facetas:
+El [Test Optimization Explorer][4] incluye las siguientes facetas predefinidas:
 
 | Faceta | Descripción |
 |---|---|
@@ -45,7 +45,7 @@ El [Explorador de visibilidad de tests][4] incluye las siguientes facetas:
 | Nombre del trabajo | El nombre del trabajo de CI. |
 | Espacio de nombres de Kubernetes | El espacio de nombres en el que se ejecuta el pod de Kubernetes. |
 | Nombre del pod de Kubernetes | El nombre del pod de Kubernetes. |
-| Etiqueta de la imagen | La etiqueta (tag) de la imagen de contenedor de Kubernetes. |
+| Etiqueta de la imagen | La etiqueta de la imagen de contenedor de Kubernetes. |
 | Nombre del contenedor | La etiqueta del nombre del contenedor de Kubernetes. |
 | Nombre de la imagen | La etiqueta del nombre de la imagen de contenedor de Kubernetes. |
 | ID del contenedor | El ID del contenedor de Kubernetes. |
@@ -61,7 +61,7 @@ El [Explorador de visibilidad de tests][4] incluye las siguientes facetas:
 | Correo electrónico del committer | El correo electrónico del committer de Git. |
 | Fecha del committer | La fecha del committer de Git. |
 | Fecha del autor | La fecha del autor de Git. |
-| Variable de entorno | El entorno en el que se ejecuta el pipeline de CI. |
+| Entorno | El entorno en el que se ejecuta el pipeline de CI. |
 | Recurso | El recurso utilizado en el pipeline de CI. |
 | Nombre de la operación | La operación realizada dentro del pipeline de CI. |
 | Tipo de error | El tipo de error encontrado durante la ejecución de CI. |
@@ -126,7 +126,7 @@ La forma más sencilla de crear una faceta es añadirla desde el panel lateral d
 
 {{< img src="tests/explorer/create_facet.png" alt="Crear una faceta a partir de una ejecución de test fallida en el panel lateral de Ejecuciones de tests" style="width:100%;">}}
 
-1. Navega hasta una ejecución de tests que te interese en el [Explorador de visibilidad de tests][4] que contenga el campo a partir del cual desees crear una faceta.
+1. Navega hasta una ejecución de test de interés en el [Test Optimization Explorer][4] que contenga el campo sobre el que crear una faceta.
 2. Selecciona la ejecución de tests de la lista para abrir el panel lateral de Ejecuciones de tests.
 3. Haz clic en el campo deseado (en la sección **Other tags** [Otras etiquetas] de una ejecución de tests) y crea una faceta a partir de allí:
 
@@ -154,6 +154,5 @@ La función de autocompletar basada en el contenido de las ejecuciones de tests 
 [2]: /es/dashboards/
 [3]: /es/notebooks/
 [4]: /es/tests/explorer
-[5]: /es/tests/search
 [6]: /es/tests/explorer/search_syntax/
 [7]: https://app.datadoghq.com/ci/test-runs

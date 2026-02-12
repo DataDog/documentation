@@ -1,25 +1,15 @@
 ---
 title: Synthetic Testing and Monitoring
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
-disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Introduction to Datadog Synthetic Monitoring"
-- link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
-  tag: "Blog"
-  text: "Monitor CDN performance within your Synthetic tests"
-- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
-  tag: "Blog"
-  text: "Best practices for monitoring static web applications"
-- link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
-  tag: "Blog"
-  text: "Improve your API test coverage with Datadog Synthetic Monitoring"
 - link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
   text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
@@ -29,17 +19,33 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to enhance your synthetic testing capabilities"
+- link: "https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/"
+  tag: "Blog"
+  text: "How to secure HTTP headers with synthetic tests"
+- link: "https://www.datadoghq.com/blog/synthetic-monitoring-updates/"
+  tag: "Blog"
+  text: "Gain key insights into user experiences faster with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/smoke-testing-synthetic-monitoring/"
+  tag: "Blog"
+  text: "How to create efficient UX smoke tests with Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
+  tag: "Blog"
+  text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
+- link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
+  tag: "Blog"
+  text: "How I helped my client scale their browser tests with Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-terraform-synthetic-testing/"
+  tag: "Blog"
+  text: "Automating your synthetic test infrastructure with Datadog Synthetic Monitoring and Terraform"
 algolia:
   tags: ['synthetics']
 cascade:
     algolia:
         rank: 70
 ---
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
-
-<br/>
-
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
@@ -68,6 +74,17 @@ Use [Synthetic browser tests][14] to monitor how your customers experience your 
 Use [Synthetic mobile application tests][21] to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
 
 {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
+
+## Create network path tests
+
+Create [Synthetic network path tests][25] from managed locations to perform TCP, UDP, and ICMP checks and visualize packet routes across global endpoints.
+
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Examples of a Synthetic TCP network test" style="width:100%;">}}
+## Test suites
+
+Use [Synthetic Test Suites][25] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
+
+{{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
 ## Launch private locations
 
@@ -98,6 +115,28 @@ Create [search queries and visualizations][20] for your Synthetic test runs or b
 Optimize your test suite by [ensuring that your application's most critical workflows are being tested][22].
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+
+## Synthetic Monitoring notifications
+
+Use and enrich Synthetic monitors to send notifications when a Synthetic Monitoring test is failing. The following features are available:
+
+Pre-filled monitor messages
+: Pre-filled monitor messages provide a structured starting point for Synthetic test alerts. Each message includes a standardized title, summary, and footer containing test metadata, making it easier to understand the alert at a glance.
+
+Template variables
+: Template variables let you inject test-specific data into monitor notifications dynamically. These variables pull from the `synthetics.attributes` object.
+
+Advanced usage
+: Advanced usage includes techniques for surfacing deeper test insights or structuring complex messages using handlebars templating.
+
+Conditional alerting
+: Conditional alerting allows you to change the content of a monitor notification based on specific test results or failure conditions.
+
+For more information, see [Synthetic Monitoring notifications][24].
+
+## Version History
+
+Use [Version History in Synthetic Monitoring][23] to run a previous version of a test, restore your test to any saved version, or clone a version to create a new Synthetic Monitoring test.
 
 ## Ready to start?
 
@@ -130,3 +169,7 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [20]: /continuous_testing/explorer/
 [21]: /mobile_testing
 [22]: /synthetics/test_coverage
+[23]: /synthetics/guide/version_history/
+[24]: /synthetics/notifications/
+[25]: /synthetics/network_path_tests/
+[25]: /synthetics/test_suites/

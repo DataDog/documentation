@@ -18,13 +18,25 @@ further_reading:
 
 ## Overview
 
-If you experience issues setting up or configuring Datadog Synthetic Monitoring, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
+Use this page to troubleshoot common issues with Datadog Synthetic Monitoring setup and configuration. For additional assistance, contact [Datadog Support][1].
+
+## Common error messages
+
+Use this table to find troubleshooting steps for common errors.
+
+| Error message                                  | See section |
+|------------------------------------------------|-------------|
+| `self-signed certificate in certificate chain` | [Private Locations → Certificates](?tab=windows#self-signed-certificate-errors) |
+| `401 Unauthorized`                           | [API and Browser Tests → Unauthorized](#api-and-browser-tests) |
+| `Element not found`                            | [Test execution → Element selection issues](#element-detection-warning-in-browser-test-steps) |
+| `Unsupported browser version`                  | [Private Locations → Browser compatibility](?tab=common#requirements-for-browser-tests-running-on-private-location) |
+
 
 ## API tests
 
 ### Network timings are varied
 
-If you see a sudden spike or overall increase in your API test [timing metrics][2], this usually indicates a bottleneck or delay in the request. For more information, see this guide on [API Test Timings and Variations][3].
+If you see a sudden spike or overall increase in your API test [timing metrics][2], this usually indicates a bottleneck or delay in the request. For more information, see [API Test Timings and Variations][3].
 
 ## Browser tests
 
@@ -32,141 +44,210 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 #### The website is not loading in the iframe
 
-After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. 
+If your website doesn't appear in the Browser Test recorder's iframe after installing the [Datadog extension][4], you may see the message `Your website does not support being loaded through an iframe`. This indicates that your application's security settings, like Content Security Policy (CSP) or related security headers like `X-Frame-Options`, prevent iframe loading.
 
-Or, if you are unable to login to your website when recording in the iframe recorder, this could mean that your application has a request that is blocked.
+Similarly, if login attempts fail during iframe recording, your application may be blocking certain requests due to CSP rules or other security configurations. In some cases, login failures can also be caused by a CSRF token issue when the login flow originates from a web application loaded within an iframe, which can result in the CSRF token being dropped.
 
-Try opening your website in a pop-up window by clicking **Open in Popup** to record your user journey.  
+**Solution**: Click **Open in Popup** to record your user journey in a separate window instead of the iframe.  
 
-#### Some applications load in the iframe but some do not
+#### Only certain applications load in the iframe
 
-This means your applications and environments have different restrictions, which causes some of them to be visualized in an iframe while the others are not viewable.
+Different applications and environments have CSP configurations and other varying security restrictions. Some allow iframe loading while others block it for security reasons.
 
-#### The "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner appears at the top of the iframe
+**Solution**: Click **Open in Popup** to record your user journey in a separate window instead of the iframe.
 
-This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop-up or change your URL to an `https` one to start recording on the page. 
+#### HTTP requests warning banner appears in iframe
 
-{{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
+This warning appears when attempting to record on an `http` page. The recorder iframe only supports `https` pages.
 
-#### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop-up
+**Solution**: Either open your page in a pop-up window or change your URL to use `https`. 
 
-After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop-up:
+#### Website fails to load and recording doesn't work in iframe or pop-up
 
-{{< img src="synthetics/recording_iframe.mp4" alt="Issues recording Browser test steps" video="true" width="100%" >}}
+If your website doesn't appear in the Browser test recorder's iframe after installing the [Datadog extension][4], and recording fails in both iframe and pop-up modes:
 
-If that happens, ensure the [Datadog extension][5] has the permissions to read and change data on the intended websites by specifying your website in the `On specific sites` section or by toggling `On all sites`:
+   {{< img src="synthetics/recording_iframe.mp4" alt="Issues recording Browser test steps" video="true" width="100%" >}}
 
-{{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true" width="100%" >}}
+   **Solution**: Verify that the [Datadog extension][5] has proper permissions by either specifying your website in the `On specific sites` section or enabling `On all sites`:
 
-#### I'm unable to record steps on my application
+   {{< img src="synthetics/extension.mp4" alt="Allowing extension to read data on all sites" video="true" width="100%" >}}
 
-Your Chrome browser might have some policies preventing the extension from performing the recording as expected. 
+#### Recording steps fails on application
 
-To find out, go to `chrome://policy` and look for any extension-related settings such as [`ExtensionSettings`][6].
+Chrome browser policies may prevent the extension from recording properly.
 
-#### I don't see the login page in the recorder
+**Solution**: Check `chrome://policy` for extension-related settings such as [`ExtensionSettings`][6] that might be blocking the recorder.
 
-By default, the iframe/pop-up of the recorder uses your own browser. This means that if you're already logged into your application, the iframe/pop-up might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
+#### Login page not visible in recorder
 
-To be able to record your steps without logging out from your application, just leverage the recorder's **incognito mode**:
+The recorder iframe/pop-up uses your current browser session by default. If you're already logged into your application, it may skip the login page and go directly to the post-login view, preventing you from recording authentication steps.
+
+**Solution**: Use the recorder's **incognito mode** to record login steps without logging out of your current session:
 
 {{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true" width="100%" >}}
 
-**Opening a pop-up window in incognito mode** allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. 
-
-This incognito pop-up window ignores your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
+**Incognito mode** creates an isolated session that ignores your browser history, cookies, and login data. This allows you to record login steps from scratch, as if visiting your website for the first time.
 
 ### Test results
 
-#### My mobile small or tablet browser test results keep failing
+#### Mobile and tablet browser tests consistently fail
 
-If your website is using **responsive** techniques, its DOM might differ a lot depending on the device your test is running on. It might use a specific DOM when running from a `Laptop Large`, and have a different architecture when running from a `Tablet` or a `Mobile Small`.  
+**Responsive** websites may have significantly different DOM structures across devices. A website's DOM on `Laptop Large` can differ greatly from `Tablet` or `Mobile Small` viewports.
 
-This means that the steps you recorded from a `Laptop Large` viewport might not be applicable to the same website accessed from a `Mobile Small`, causing your `Mobile Small` test results to fail:
+Steps recorded on `Laptop Large` may not work on smaller viewports, causing mobile and tablet tests to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
-For these types of cases, Datadog recommends creating **separate `Mobile Small` or `Tablet` specific tests** where the recorded steps match the viewport your test is set to at runtime.  
+**Solution**: Create device-specific tests where recorded steps match the target viewport.
 
-To record steps with a `Mobile Small` or `Tablet` viewport, selecting `Mobile Small` or `Tablet` in the recorder dropdown before hitting the **Start Recording** button.
+To record for mobile or tablet viewports, select `Mobile Small` or `Tablet` in the recorder dropdown before clicking **Start Recording**.
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
-Additionally, Datadog's test browsers run in **headless**, meaning Browser tests do not support some features. For example, Browser tests do not support `touch` and cannot use `touch` to detect whether the website should appear with its mobile design.
+**Note**: Browser tests run in **headless** mode and don't support certain features like `touch` events for mobile design detection.
 
-#### `None or multiple elements detected` step warning appears in browser tests
+#### Element detection warning in browser test steps
 
-One of your browser test steps is showing a `None or multiple elements detected` step warning:
+Browser Test steps may display a `None or multiple elements detected` warning:
 
 {{< img src="synthetics/step_warning.png" alt="User locator step warning" style="width:100%;" >}}
 
-This means that the user locator defined for that step is either targeting several elements, or none of them, consequently preventing the Browser test from knowing which element needs to be interacted with.   
+This indicates the user locator targets multiple elements or none at all, preventing the test from knowing which element to interact with.
 
-To fix it, go edit your recording, open the advanced options of the step that is having the issue, go to the page the step is testing, and click on `Test`. This highlights the located element or prints an error message. You can then go ahead and fix your user locator to have it match a single element of the page:
+**Solution**: Edit your recording, open the problematic step's advanced options, navigate to the test page, and click `Test`. This highlights the located element or shows an error. Adjust your user locator to target a single, unique element:
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
 
-#### I am having issues with a CSS pointer property
+#### CSS pointer property limitations
 
-Automated browsers do not support emulating the CSS `pointer` media feature. Browser tests have `pointer: none` for all tests and devices (laptop, tablet, or mobile).
+Automated browsers cannot emulate the CSS `pointer` media feature. All browser tests use `pointer: none` regardless of device type (laptop, tablet, or mobile).
 
 ### Resource duration
 
-#### A resource is of a longer duration than the actual step duration
+#### Resource duration exceeds step duration
 
-Long-loading resources may span across multiple steps. Within a test result's step, Datadog returns all resources initiated during that specific step. However, Datadog allows roughly 20 seconds for important network calls to finish. After this period, the synthetics worker proceeds to the subsequent step. The worker uses a hierarchy of timeouts, allowing it to balance speed and reliability. Because of this, Datadog does not advise using step duration to measure the speed or slowness of a web application. The step duration reflects the balanced time the worker needs to deliver a reliable result.
+Resources with long load times may span multiple test steps. Datadog returns all resources initiated during a specific step, but allows approximately 20 seconds for critical network calls to complete before proceeding to the next step.
 
-## API and browser tests
+The synthetics worker uses hierarchical timeouts to balance speed and reliability. Therefore, [step duration][14] should not be used to measure web application performance, it reflects the time needed for reliable test execution.
+
+## API and Browser Tests
 
 ### Unauthorized errors
 
-If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetic test.
+A 401 error in Synthetic Monitoring tests typically indicates authentication failure. Use the same authentication method (outside of Datadog) you normally use for the endpoint and replicate it in your Synthetic test configuration.
 
 * Is your endpoint using **header-based authentication**?
-  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser test][8].
-  * **Token based authentication**: extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser test][10] requiring the authentication token.
-  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser test][8].
+  * **Basic Authentication**: Specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser Test][8].
+  * **Token based authentication**: Extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser Test][10] requiring the authentication token.
+  * **Session based authentication**: Add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser Test][8].
   
-* Is this endpoint using **query parameters for authentication** (for example, do you need to add a specific API key in your URL parameters?)
+* Does your endpoint use **query parameter authentication** (such as adding an API key to URL parameters)?
 
-* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetic tests originate][11].
+* Does your endpoint use **IP-based authentication**? If so, allow the [Synthetic Monitoring IP ranges][11] in your firewall or security settings.
 
 ### Forbidden errors
 
-If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
+If you observe `403 Forbidden` errors returned by Synthetic Monitoring tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
 
 Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][11] are allowed as traffic sources by your firewalls.
 
 ### Missing notifications
 
-Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle such as your email address or Slack handle after a transition is generated (for example: a test going into alert or recovering from a previous alert), a notification is not sent for that transition. A notification is sent for the next transition.
+Synthetic tests do not [renotify][12] by default. If you add notification handles (email addresses or Slack handles) after a state transition occurs (such as a test entering alert or recovering), no notification is sent for that transition. Notifications are only sent for subsequent transitions.
 
 ## Mobile tests
 
 ### Unable to launch a device recording
 
-If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
+Applications with startup security checks (such as USB debugging verification) may prevent recording. Upload a version of your application without these security checks for optimal test recording. 
+
+### App functionality issues during recording and execution
+
+IOS app features may not function properly during recording or execution due to the app resigning process. This process, required for device trust, can remove essential iOS entitlements (Contacts, Camera, Keychain, Photos, Health Kit, Home Kit, etc.).
+
+**Solution**: Use Ad Hoc or Development provisioning profiles when distributing your iOS app to minimize entitlement-related issues and improve compatibility.
+
+## Network Path tests
+
+### Datadog Agent not listed as an option in Locations & Agents
+
+If you do not see the Datadog Agent listed as a selectable option during test creation, verify that you meet all prerequisites and completed the setup steps. See [Agent configuration][16] for more information.
+
+### Scheduled tests from the Datadog Agent is not running at the expected schedule
+
+In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, [increase the number of workers][17] to meet or exceed the total number of tests assigned to the Agent.
+
+### Missing test results executed from the Datadog Agent
+
+If you do not see test results in the Datadog UI, the Datadog Agent is not sending test results to the Synthetics intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
+
+If the Datadog Agent is running behind a proxy, make sure the Synthetics forwarder is configured to send traffic through the proxy, for example:
+```
+synthetics: 
+  collector: 
+    enabled: true
+synthetics.forwarder.dd_url: http://my-proxy.com:<proxy-port>
+```
+Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the Synthetics intake.
 
 ## Private locations
 
 {{< tabs >}}
 {{% tab "Common" %}}
 
-### My browser test results sometimes show `Page crashed` errors
+### Private Location unable to fetch tests due to 403 error
 
-This could uncover a resource exhaustion issue on your private location workers. Make sure your private location workers are provisioned with [sufficient memory resources][101].
+A Private Locations displays this error when it is attempting to fetch tests from Datadog:
 
-### My tests are sometimes slower to execute 
+```
+Queue error - onFetchMessagesLongPolling - Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+    at Function.QueueError.fromHTTPError (dist/build/index.js:259354:12)
+    at DatadogQueue.receiveMessages (dist/build/index.js:258914:48)
+```
 
-This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location workers are provisioned with [sufficient CPU resources][101].
+**Cause**: The log shows that the Private Location was able to successfully reach the Synthetics intake to fetch tests, but the request failed with a 403 response from Datadog due to an authentication issue. Specifically, the request signature was considered expired or not yet valid. Communication between the Private Location and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][105]) which includes a timestamp in each request, ensuring both authentication and integrity). If the system clock on the server hosting the Private Location is out of sync, the timestamp can fall outside the allowed window, and the signature validation fails.
+
+**Solution**: Ensure the server hosting the Private Location has accurate time synchronization. If NTP (Network Time Protocol) services are in use, verify that these services are correctly configured and functioning properly, and address any misconfigurations that could prevent the system clock from syncing with its time sources.
+
+### Browser tests show `Page crashed` errors
+
+Page crashes typically indicate resource exhaustion on private location workers. Ensure your private location workers have [sufficient memory resources][101].
+
+### Test execution is slower than expected
+
+Slow test execution typically indicates resource exhaustion on private location workers. Ensure your private location workers have [sufficient CPU resources][103].
 
 ### My browser tests are taking too long to run
 
-Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
+Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][101] already, reach out to [Datadog Support][104].
 
-### `TIMEOUT` errors appear in API tests executed from my private location
+### Requirements for browser tests running on private location
 
-This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
+Browser tests require elevated privileges to spawn (when the test execution starts) and kill (when the test execution ends) the browser process. If your private location is configured with a security context that restricts elevated privileges, the private location emits error logs when the Browser Test is executed. The reported logs vary based on the browser that is selected for test execution. Tests executed on Chrome/Edge report the following error:
+
+```
+Critical error in startBrowser: Failed to launch the browser process!
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+**Firefox error:**
+```
+Impossible to spawn Firefox: binary is not a Firefox executable
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+### Requirements for ICMP tests running on private location
+
+ICMP tests use the `ping` command to assess network routes and host connectivity. The `ping` command opens raw sockets to send ICMP packets and requires the `NET_RAW` capability. If your container's security context removes this capability, ICMP tests do not function properly on the private location.
+
+Additionally, `ping` requires elevated privileges to create the raw socket. The private location cannot execute ICMP tests if the private location is configured with a security context that restricts elevated privileges.
+
+### `TIMEOUT` errors in API tests from private locations
+
+`TIMEOUT` errors typically indicate your private location cannot reach the test endpoint. Verify the private location is installed on the same network as your target endpoint. Test different endpoints to determine if the issue is endpoint-specific or network-wide.
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
 
@@ -174,58 +255,117 @@ This might mean your private location is unable to reach the endpoint your API t
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [104]: /help/
+[105]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-### My private location containers sometimes get killed `OOM`
+### Resolving IPv4 forwarding issues for private location containers
 
-Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
+Private locations require access to [Datadog's Synthetic Monitoring intake endpoints][103] to pull test configurations and push test results. If IPv4 forwarding is disabled on a Linux server, the private location may lose access to the public internet and consequently cannot connect to the intake. Docker typically attempts to enable IP forwarding when a container starts, but if it remains disabled, then the container cannot reach external services like the intake. 
 
-### The `invalid mount config for type "bind": source path must be a directory` error appears when attempting to run a private location
+If this is the case, the private location reports the following:
 
-This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][102]. Ensure that the source of the bind mount is a local directory.
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+and
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+**Solution**: Ensure that `net.ipv4.ip_forward` is enabled on the host. 
+
+### Read-only root file system requirements for private location containers
+
+Private location containers need read-write access to specific folders and files for proper operation. Read-only root file systems prevent startup due to critical operations requiring write access.
+
+During startup, containers set Linux capabilities on binaries whose metadata was stripped during the build process for security. This restricts execution to the `root` user by default. Since private locations run as the `dog` user, containers must reapply permissions for proper execution. Read-only file systems prevent these permission updates, causing startup failures.
+
+### Private location containers killed by `OOM` errors
+
+Private location containers killed by `Out Of Memory` errors indicate resource exhaustion on workers. Ensure your private location containers have [sufficient memory resources][101].
+
+### `Invalid mount config` error when running private locations
+
+This error occurs when attempting to mount a single file in Windows-based containers, which is not supported. **Solution**: Ensure the bind mount source is a local directory. For more information, see the [Docker mount volume][102] documentation.
 
 [101]: /synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[103]: https://docs.datadoghq.com/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-### Restart the Synthetics Private Location Worker service without a reboot
+### Restarting Synthetics Private Location Worker service
 
-First, ensure that you installed the private location with a configuration specified at installation time. You can either use a GUI or use Windows PowerShell to restart the service.
+Ensure the private location was installed with a configuration specified at installation time. Restart the service using either GUI or PowerShell methods.
 
-#### GUI
+#### GUI method
 
-1. Open the MSI installer and search for **Services** in the **Start** menu.
-1. Start **Services** on any user account.
-1. Click **Services (Local)** and find the service called `Datadog Synthetics Private Location`.
-1. Right-click on the service found in Step 2 and choose **Restart**.
+1. Search for **Services** in the **Start** menu.
+1. Open **Services** (works on any user account).
+1. Find `Datadog Synthetics Private Location` in **Services (Local)**.
+1. Right-click the service and select **Restart**.
 
-The Synthetics Private Location Worker now runs under the **Local Service** account. To confirm this, launch Task Manager and look for the `synthetics-pl-worker` process on the **Details** tab.
+The worker runs under the **Local Service** account. Verify this by checking for the `synthetics-pl-worker` process in Task Manager's **Details** tab.
 
-#### PowerShell
+#### PowerShell method
 
-1. Start **Windows PowerShell** on any Windows account that has the rights to execute PowerShell scripts.
-1. Run the following command: `Restart-Service -Name “Datadog Synthetics Private Location”`.
+1. Open **Windows PowerShell** with script execution rights.
+1. Run: `Restart-Service -Name "Datadog Synthetics Private Location"`
 
-### Keep the Synthetics Private Location Worker running
+### Maintaining Synthetics Private Location Worker uptime
 
-First, ensure that you are logged in on the machine where the Synthetics Private Location Windows Service is installed, and you have the permissions to create scheduled tasks on the machine.
+**Prerequisites**: Log in to the machine with permissions to create scheduled tasks.
 
-If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
+**Crash recovery**: Create a Windows scheduled task that runs a PowerShell script to restart the worker if it stops running. This ensures automatic recovery after crashes.
 
-If you provided a configuration file when installing the application, a Windows service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, ensure that you can see the service running in the **Services** tool. This Windows service restarts the private location automatically.
+**Automatic startup**: If you provided a configuration file during installation, the `Datadog Synthetics Private Location` Windows service starts automatically. Verify the service is running in the **Services** tool—this service handles automatic restarts.
+
+### Self-signed certificate errors 
+
+Windows Private Locations may display this error immediately after startup:
+
+```
+Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
+Error: self-signed certificate in certificate chain
+    at Function.QueueError.fromHTTPError (dist/build/index.js:272629:12)
+    at DatadogQueue.receiveMessages (dist/build/index.js:272186:48)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Worker.fetchMessagesLongPolling (dist/build/index.js:26244:24)
+    at Worker.doOneLoop (dist/build/index.js:25810:45)
+```
+
+**Symptoms**:
+- Error messages repeat continuously in logs.
+- Certificate chains appear modified when browsing from the Windows host (for example, Datadog sites show self-signed intermediaries instead of trusted CAs).
+
+**Cause**: This error occurs when **Deep Packet Inspection (DPI)** or TLS inspection is being performed on your network traffic. DPI intercepts, decrypts, and re-encrypts SSL/TLS traffic. During this process, the private location receives a certificate chain that includes a self-signed certificate.  
+
+**Solution**:
+
+- Upload your custom self-signed [root certificates][101] to your private location.
+- Verify that your Windows Private Location logs are no longer reporting the error.
+```
+"Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
+Error: self-signed certificate in certificate chain"
+```
+
+Without bypassing TLS inspection, the Windows Private Location cannot retrieve test messages and remains in an error state.
+
+[101]: /synthetics/platform/private_locations?tab=windowsservice#root-certificates
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### I am being asked for a password for sudo/I am being asked for a password for the dog user
+### Password prompts for sudo or dog user
 
-The Private Location user (`dog`) requires `sudo` for various reasons. Typically, this user is granted certain permissions to allow `sudo` access in the process of launching the Private Location on your container. Confirm if you have a policy in place that restricts the `dog` user's ability to `sudo`, or prevents the container from launching as the `dog` user (UID 501).
+The Private Location user (`dog`) requires `sudo` access for proper operation. This user typically receives permissions during container launch. Verify that no policies restrict the `dog` user's `sudo` access or prevent the container from running as the `dog` user (UID 501).
 
-Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. Yo can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
+Additionally, Private Location versions `>v1.27` depend the `clone3` system call. Older container runtime environments (Docker versions <20.10.10) may not support `clone3` in their default `seccomp` policy. 
+
+**Solution**: Ensure your runtime's `seccomp` policy includes `clone3` by updating your runtime version, manually adding `clone3` to your policy, or using an `unconfined` seccomp policy. See [Docker's `seccomp` documentation][13] for details.
 
 ## Further reading
 
@@ -242,5 +382,8 @@ Additionally, in Private Location versions `>v1.27`, Datadog depends on the use 
 [9]: /synthetics/settings/?tab=createfromhttptest#global-variables
 [10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
-[12]: /synthetics/api_tests/?tab=httptest#configure-the-test-monitor
+[12]: /synthetics/api_tests/http_tests/?tab=requestoptions#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/
+[14]: /synthetics/guide/step-duration
+[16]: /synthetics/network_path_tests/#agent-configuration
+[17]: /network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers

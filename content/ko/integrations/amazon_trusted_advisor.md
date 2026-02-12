@@ -1,10 +1,11 @@
 ---
 categories:
 - aws
-- cloud
-- 비용 관리
+- 클라우드
+- cost management
 - 로그 수집
 - 프로비저닝
+custom_kind: 통합
 dependencies: []
 description: AWS Trusted Advisor의 핵심 메트릭을 추적합니다.
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
@@ -19,7 +20,6 @@ integration_id: ''
 integration_title: AWS Trusted Advisor
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_trusted_advisor
 public_title: Datadog-AWS Trusted Advisor 통합
@@ -40,7 +40,7 @@ AWS Trusted Advisor는 AWS 모범 사례에 따라 리소스를 프로비저닝�
 
 ### 설치
 
-아직 설정하지 않은 경우, 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 
@@ -56,12 +56,12 @@ AWS Trusted Advisor를 설정하여 S3 버킷 또는 클라우드와치(CloudWat
 
 **참고**: S3 버킷으로 로그를 전송하려면 _Target prefix_(대상 접두사)를 `amazon_trusted_advisor`로 설정합니다.
 
-#### Datadog에 로그 전송
+#### Datadog로 로그 전송
 
 1. 아직 설정하지 않은 경우 [Datadog Forwarder Lambda 함수][5]를 설정하세요.
-2. Lambda 함수를 설치한 후 AWS 콘솔에서 Amazon Trusted Advisor 로그를 포함하는 S3 버킷 또는 클라우드와치(CloudWatch) 로그 그룹에 트리거를 수동으로 추가합니다.
+2. Lambda 함수를 설치한 후 AWS 콘솔에서 AWS Trusted Advisor 로그를 포함하는 S3 버킷 또는 CloudWatch 로그 그룹에 트리거를 수동으로 추가합니다.
 
-    - [S3 버킷에 수동 트리거 추가][6]
+    - [S3 버킷에서 수동 트리거 추가][6]
     - [클라우드와치 로그 그룹에 수동 트리거 추가][7]
 
 ## 수집한 데이터
@@ -103,8 +103,8 @@ Datadog Trusted Advisor 대시보드가 [AWS Trusted Advisor 점검][9]의 모�
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-trusted-advisor
 [5]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_trusted_advisor/amazon_trusted_advisor_metadata.csv
 [9]: https://aws.amazon.com/premiumsupport/trustedadvisor
 [10]: https://docs.datadoghq.com/ko/help/

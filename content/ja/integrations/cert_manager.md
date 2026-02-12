@@ -35,7 +35,7 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 5.1.0
+integration_version: 5.3.0
 is_public: true
 manifest_version: 2.0.0
 name: cert_manager
@@ -94,7 +94,7 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "cert_manager" >}}
+{{< get-metrics-from-git "cert-manager" >}}
 
 
 ### イベント
@@ -102,7 +102,7 @@ cert_manager チェックは [Datadog Agent][3] パッケージに含まれて�
 cert_manager インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cert_manager" >}}
+{{< get-service-checks-from-git "cert-manager" >}}
 
 
 ## トラブルシューティング

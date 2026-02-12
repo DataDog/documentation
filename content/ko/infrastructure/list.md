@@ -17,7 +17,7 @@ title: 인프라스트럭처 목록
 
 ## 개요
 
-인프라스트럭처 목록을 통해 Datadog이 모니터링하는 모든 호스트와 지난 2시간(기본값)부터 최대 1주일까지의 활동을 확인할 수 있습니다. 호스트를 검색하거나 태그로 그룹화해 보세요.
+인프라스트럭처 목록으로 Datadog이 모니터링하는 모든 호스트와 지난 2시간(기본값)부터 최대 1주일까지의 활동을 확인할 수 있습니다. 호스트를 검색하거나 태그로 그룹화해 보세요. Datadog에서 [**인프라스트럭처 > 호스트**][10]로 이동하여 인프라스트럭처 목록을 확인합니다. 해당 목록은 인프라스트럭처 호스트 빌링을 추정하는 데 사용해서는 안 됩니다. 빌링 에 대한 자세한 내용은 [빌링][11] 페이지를 참조하세요.
 
 ## 호스트
 
@@ -56,6 +56,9 @@ Load 15
 Datadog 에이전트
 : 호스트에서 데이터를 수집하는 에이전트 버전
 
+OpenTelemetry
+: 호스트에서 데이터를 수집하는 OpenTelemetry 컬렉터(Collector) 버전입니다.
+
 ### 호스트네임
 
 Datadog 에이전트는 여러 종류의 소스에서 잠재 호스트 이름을 수집합니다. 자세한 내용은 [Datadog은 어떻게 에이전트 호스트 이름을 결정하나요?][1]를 참조하세요.
@@ -72,31 +75,25 @@ Datadog 에이전트는 여러 종류의 소스에서 잠재 호스트 이름을
 - [로그][5] (활성화된 경우)
 - [에이전트 설정](#agent-configuration) (활성화된 경우)
 
-{{< img src="infrastructure/index/infra-list1.png" alt="인프라스트럭처 목록 호스트 상세 내용" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list2.png" alt="인프라스트럭처 목록 호스트 세부 사항" style="width:100%;">}}
 
 #### 별칭
 
 단일 호스트에 대해 고유하게 식별할 수 있는 이름이 여러 개 있는 경우 Datadog은 호스트 이름에 대한 별칭을 생성합니다. 에이전트가 수집한 이름은 선택한 정식 이름의 별칭으로 추가됩니다. 예를 들어 EC2에서 실행 중인 단일 호스트에는 인스턴스 ID (`i-abcd1234`), 호스트 IP 주소 (`ip-192-0-0-1`)를 기반으로 EC2가 제공한 일반 호스트 이름, 내부 DNS 서버나 config-managed 호스트 파일 (`myhost.mydomain`)이 제공한 의미 있는 호스트 이름이 있을 수 있습니다.
 
-{{< img src="infrastructure/index/infra-list-alias1.png" alt="호스트 별칭" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-alias2.png" alt="호스트 별칭" style="width:100%;">}}
 
 #### 에이전트 설정
-
-{{< callout url="#" btn_hidden="true" >}}
-에이전트 설정 보기는 공개 베타 버전이며, 에이전트 버전 >= 7.39/6.39에서 사용 가능합니다.
-{{< /callout >}}
 
 에이전트는 호스트 세부 정보 패널의 `Agent Configuration` 섹션에 표시되도록 자체 설정을 Datadog으로 전송할 수 있습니다.
 
 에이전트 설정에는 민감한 정보가 제외되며, 사용자가 설정 파일이나 환경 변수를 이용해 구현한 설정만 포함합니다. 설정 변경 사항은 10분마다 업데이트됩니다. 
 
-이 기능은 기본적으로 비활성화되어 있습니다. 활성화하려면 [에이전트 설정 파일][6]에 다음 설정을 추가하세요.
+에이전트 버전 7.47.0/6.47.0 이상부터 에이전트 구성 보기가 기본적으로 활성화되어 있습니다. 에이전트 버전 7.39/6.39 이상부터는 수동으로 활성화해야 합니다.
 
-```yaml
-inventories_configuration_enabled: true
-```
-
-또는 `DD_INVENTORIES_CONFIGURATION_ENABLED=true` 환경 변수를 사용해 이 기능을 활성화할 수 있습니다.
+구성 보기를 활성화하거나 비활성화하는 방법:
+- [에이전트 설정 파일][6]에서 `inventories_configuration_enabled` 값을 `true`로 설정하여 구성 보기를 활성화하거나 `false`로 설정하여 비활성화합니다.
+- 또는 `DD_INVENTORIES_CONFIGURATION_ENABLED` 환경 변수를 사용하여 보기를 활성화 또는 비활성화할 수 있습니다.
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="에이전트 설정 보기" style="width:100%;">}}
 
@@ -113,7 +110,33 @@ Datadog에 보고하는 호스트를 JSON 형식 목록으로 보려면 다음�
 
 #### 에이전트가 없을 경우
 
-JSON을 내보내는 또 다른 방법은 에이전트가 설치되어 있지 않은 상태에서 AWS EC2 인스턴스 목록을 가져오는 것입니다. 이 인스턴스는 Datadog AWS 통합 타일에 있는 AWS 계정을 설정하면 인프라스트럭처 목록에 나타납니다. [예시 스크립트][10]를 참조하세요.
+JSON을 내보내는 또 다른 방법은 에이전트가 설치되어 있지 않은 상태에서 Amazon EC2(RDS 포함) 인스턴스 목록을 가져오는 것입니다. 이 인스턴스는 Datadog AWS 통합 타일의 AWS 계정을 설정하면 인프라스트럭처 목록에 표시됩니다. 다음의 Python3 스크립트를 참조하세요.
+
+```python
+# 3p
+import requests
+
+# stdlib
+import json
+import pprint
+import os
+
+api_key = os.environ['DD_API_KEY']
+app_key = os.environ['DD_APP_KEY']
+
+url = "https://app.datadoghq.com/reports/v2/overview?\
+window=3h&with_apps=true&with_sources=true&with_aliases=true\
+&with_meta=true&with_tags=true&api_key=%s&application_key=%s"
+
+infra = json.loads(requests.get(url %(api_key,app_key)).text)
+
+for host in infra['rows']:
+    if (('aws' in host['apps']) and ('rds' not in host['apps']) and ('agent' not in host['apps'])):
+        try:
+            print(f'HOST: {host["name"]} - TAGS: {host["tags_by_source"]}')
+        except:
+            pass
+```
 
 ## 참고 자료
 
@@ -124,8 +147,9 @@ JSON을 내보내는 또 다른 방법은 에이전트가 설치되어 있지 �
 [3]: /ko/metrics/
 [4]: /ko/infrastructure/livecontainers/?tab=helm#overview
 [5]: /ko/logs/
-[6]: /ko/agent/guide/agent-configuration-files/
+[6]: /ko/agent/configuration/agent-configuration-files/
 [7]: /ko/api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /ko/developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-[10]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
+[10]: https://app.datadoghq.com/infrastructure
+[11]: https://docs.datadoghq.com/ko/account_management/billing/

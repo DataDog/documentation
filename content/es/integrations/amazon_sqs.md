@@ -9,7 +9,7 @@ assets:
     metrics:
       check:
       - aws.sqs.sent_message_size
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.sqs.
     service_checks:
       metadata_path: assets/service_checks.json
@@ -28,7 +28,7 @@ categories:
 - metrics
 - cloud
 - log collection
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -61,8 +61,8 @@ tile:
   title: Amazon SQS
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="Dashboard de SQS" popup="true">}}
+<!--  EXTRAIDO DE https://github.com/DataDog/integrations-internal-core -->
+![SQS Dashboard][1]
 
 ## Información general
 
@@ -74,42 +74,42 @@ Habilite este integración para ver todos sus SQS métricas en Datadog.
 
 ### Instalación
 
-Si todavía no lo has hecho, configura la [integración de Amazon Web Services primero][1].
+Si todavía no lo has hecho, configura la [integración de Amazon Web Services primero][2].
 
 ### Recopilación de métricas
 
-1. En la [página de la integración AWS][2], asegúrate de que `SQS` está habilitado en la pestaña `Metric Collection`.
-2. Añade estos permisos a tu [política IAM de Datadog][3] para recopilar métricas Amazon SQS:
+1. En la [página de integración de AWS][3], asegúrate de que `SQS` está activado en la pestaña`Metric Collection`.
+2. Añade estos permisos a tu [política de IAM de Datadog][4] para recopilar métricas de Amazon SQS:
 
     - `sqs:ListQueues`: Se utiliza para enumerar colas activas.
     - `tag:GetResources`: Obtén etiquetas (tags) personalizadas aplicadas a las colas SQS.
 
-    Para obtener más información, consulta las [políticas de SQS][4] en el sitio web AWS.
+    Para obtener más información, consulta las [políticas de SQS][5] en el sitio web de AWS.
 
-3. Instale [Datadog - Amazon SQS integración][5].
+3. Instala [la integración de Datadog y Amazon SQS][6].
 
 ### Recopilación de logs
 
 #### Habilitar el registro SQS
 
-Para configurar tu ruta, consulta [Registro de llamadas a la API de Amazon SQS mediante AWS CloudTrail][6]. Cuando definas tus rutas, selecciona un bucket de S3 en el que escribir los logs:
+Para configurar tu seguimiento, consulta [Registro de llamadas a la API de Amazon SQS mediante AWS CloudTrail][6]. Cuando definas tus seguimientos, selecciona un bucket de S3 en el que escribir los logs:
 
-{{< img src="integraciones/amazon_cloudtrail/cloudtrail_logging.png" alt="Registro CloudTrail" popup="true" style="width:70%;">}}
+![Registro de CloudTrail][8]
 
 #### Enviar logs a Datadog
 
-1. Si aún no lo has hecho, configura la [función AWS Lambda de recopilación de logs de Datadog][7].
+1. Si aún no lo has hecho, configura la [función de AWS Lambda de recopilación de logs de Datadog][9].
 2. Una vez instalada la función Lambda, añade manualmente un activador en el bucket de S3 que contiene tus logs Amazon SQS en la consola de AWS. En tu Lambda, haz clic en S3 en la lista de activadores:
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="Configuración de un activador en S3" popup="true" style="width:70%;">}}
+   ![Configuración del desencadenante de S3][10]
    Configura tu activador eligiendo el bucket de S3 que contiene tus logs Amazon SQS y cambia el tipo de evento a `Object Created (All)`. A continuación, haz clic en el botón Add (Añadir).
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="Configuración de un activador Lambda en S3" popup="true" style="width:70%;">}}
+   ![Configuración del desencadenante de S3 Lambda][11]
 
-Una vez añadido el activador, utilice el [Datadog loguear Explorer][8] para ver su Logs.
+Una vez añadido el desencadenante, utiliza el [Datadog Log Explorer][12] para ver tus logs.
 
 ## Recopilación de datos
 
 ### Métricas
-{{< get-metrics-from-git "amazon_sqs" >}}
+{{< get-metrics-from-git "amazon-sqs" >}}
 
 
 A cada una de las métricas recuperadas de AWS se le asignan las mismas etiquetas que aparecen en la consola de AWS, donde se incluyen, entre otros, el nombre del host, los grupos de seguridad y más.
@@ -126,22 +126,26 @@ La integración Amazon SQS no incluye checks de servicios.
 
 La integración de Amazon SQS proporciona capacidades de monitorización listas para utilizar para monitorizar y optimizar el rendimiento.
 
-- Dashboard de Amazon SQS: Obtén información general global de tus colas SQS utilizando el [dashboard de Amazon SQS][10] predefinido.
-- recomendado Monitors: Habilite [recomendado Amazon SQS monitors][11] para detectar proactivamente los problemas y recibir alertas oportunas.
+- Dashboardde Amazon SQS: obtén una visión completa de tus colas de SQS utilizando la herramienta predefinida [dashboard de Amazon SQS][14].
+- Monitores recomendados: habilita los [monitores recomendados de Amazon SQS][15] para detectar problemas de forma proactiva y recibir alertas oportunas.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con [Soporte técnico de Datadog][12].
+¿Necesitas ayuda? Ponte en contacto con [el soporte de Datadog][16].
 
-[1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/es/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html
-[5]: https://app.datadoghq.com/integrations/amazon-sqs
-[6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
-[7]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
-[8]: https://app.datadoghq.com/logs
-[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
-[10]: https://app.datadoghq.com/dash/integration/6/aws-sqs
-[11]: https://app.datadoghq.com/monitors/recommended
-[12]: https://docs.datadoghq.com/es/help/
+[1]: images/sqsdashboard.png
+[2]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://docs.datadoghq.com/es/integrations/amazon_web_services/#installation
+[5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html
+[6]: https://app.datadoghq.com/integrations/amazon-sqs
+[7]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
+[8]: images/cloudtrail_logging.png
+[9]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[10]: images/s3_trigger_configuration.png
+[11]: images/s3_lambda_trigger_configuration.png
+[12]: https://app.datadoghq.com/logs
+[13]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_sqs/assets/metrics/metric-spec.yaml
+[14]: https://app.datadoghq.com/dash/integration/6/aws-sqs
+[15]: https://app.datadoghq.com/monitors/recommended
+[16]: https://docs.datadoghq.com/es/help/

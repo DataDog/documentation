@@ -42,7 +42,7 @@ draft: false
 git_integration_title: argo_workflows
 integration_id: argo-workflows
 integration_title: Argo Workflows
-integration_version: 2.1.0
+integration_version: 2.3.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_workflows
@@ -137,7 +137,7 @@ Argo Workflows のログは、Kubernetes を通じて、異なる Argo Workflows
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "argo_workflows" >}}
+{{< get-metrics-from-git "argo-workflows" >}}
 
 
 ### イベント
@@ -145,7 +145,7 @@ Argo Workflows のログは、Kubernetes を通じて、異なる Argo Workflows
 Argo Workflows インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "argo_workflows" >}}
+{{< get-service-checks-from-git "argo-workflows" >}}
 
 
 ## トラブルシューティング

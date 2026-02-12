@@ -1,28 +1,14 @@
 ---
+app_id: amazon_vpn
 categories:
 - aws
 - nube
 - recopilación de logs
-- la red
-custom_kind: integration
-dependencies: []
+- network
+custom_kind: integración
 description: Rastrea métricas clave de AWS VPN.
-doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
-draft: false
-git_integration_title: amazon_vpn
-has_logo: true
-integration_id: ''
-integration_title: AWS VPN
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: amazon_vpn
-public_title: Integración de AWS VPN con Datadog
-short_description: Rastrea métricas clave de AWS VPN.
-version: '1.0'
+title: AWS VPN
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 AWS VPN te permite establecer un túnel seguro y privado desde tu red o dispositivo hasta la red global de AWS.
@@ -33,12 +19,12 @@ Habilita esta integración para ver todas tus métricas de VPN en Datadog.
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Amazon Web Services][1].
+Si aún no lo has hecho, configura primero la [integración de Amazon Web Services](https://docs.datadoghq.com/integrations/amazon_web_services/).
 
 ### Recopilación de métricas
 
-1. En la [página de la integración AWS][2], asegúrate de que `VPN` está habilitado en la pestaña `Metric Collection`.
-2. Instala la [integración AWS VPN en Datadog][3].
+1. En la [página de integración de AWS](https://app.datadoghq.com/integrations/amazon-web-services), asegúrate de que `VPN` está activado en la pestaña `Metric Collection`.
+1. Instala la [integración de Datadog y AWS VPN](https://app.datadoghq.com/integrations/amazon-vpn).
 
 ### Recopilación de logs
 
@@ -50,35 +36,35 @@ Configura AWS VPN para enviar logs a un bucket de S3 o a CloudWatch.
 
 #### Enviar logs a Datadog
 
-1. Si aún no lo has hecho, configura la [función Lambda de Datadog Forwarder][4].
-2. Una vez instalada la función de Lambda, añade manualmente un activador en el bucket de S3 o en el grupo de logs de CloudWatch que contiene tus logs de AWS VPN en la consola de AWS:
+1. Si aún no lo has hecho, configura la [función Lambda del Datadog Forwarder](https://docs.datadoghq.com/logs/guide/forwarder/).
 
-    - [Añadir un activador manual en el bucket de S3][5]
-    - [Añadir un activador manual en el grupo de logs de CloudWatch][6]
+1. Una vez instalada la función de Lambda, añade manualmente un activador en el bucket de S3 o en el grupo de logs de CloudWatch que contiene tus logs de AWS VPN en la consola de AWS:
+
+   - [Añadir un activador manual en el bucket de S3](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets)
+   - [Añadir un activador manual en el CloudWatch Log Group](https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group)
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_vpn" >}}
 
+| | |
+| --- | --- |
+| **aws.vpn.tunnel_data_in** <br>(count) | El número medio de bytes que han entrado a través del túnel de VPN<br>_Se muestra como byte_ |
+| **aws.vpn.tunnel_data_in.sum** <br>(count) | El número total de bytes que han entrado a través del túnel de VPN<br>_Se muestra como byte_ |
+| **aws.vpn.tunnel_data_out** <br>(count) | El número medio de bytes que han salido a través del túnel de VPN<br>_Se muestra como byte_ |
+| **aws.vpn.tunnel_data_out.sum** <br>(count) | El número total de bytes que han salido a través del túnel de VPN<br>_Se muestra como byte_ |
+| **aws.vpn.tunnel_state** <br>(gauge) | Esta métrica es 1 cuando todos los túneles de la VPN están activos y 0 cuando todos los túneles están inactivos. Los valores entre 0 y 1 indican que algunos túneles de la VPN están activos.|
+| **aws.vpn.tunnel_state.maximum** <br>(gauge) | Esta métrica es 1 cuando cualquier túnel de la VPN está activo y 0 cuando todos los túneles están inactivos.|
+| **aws.vpn.tunnel_state.minimum** <br>(gauge) | Esta métrica es 1 cuando todos los túneles de la VPN están activos y 0 cuando alguno de ellos está inactivo.|
 
 ### Eventos
 
 La integración de AWS VPN no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración de AWS VPN no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
-
-[1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-vpn
-[4]: https://docs.datadoghq.com/es/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpn/amazon_vpn_metadata.csv
-[8]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

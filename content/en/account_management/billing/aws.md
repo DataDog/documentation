@@ -25,7 +25,7 @@ Ensure that the tags added to this section are assigned to the corresponding res
 
 You can also limit AWS metrics using the [API][4].
 
-**Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
+**Note**: Only EC2 (hosts), Lambda (active functions), CloudWatch Custom Metrics (custom metrics), and [containers][9] are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
 ### EC2
 
@@ -50,7 +50,23 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
  
 ### CloudWatch Metric Streams with Amazon Data Firehose
 
-You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. Tag filtering configured in the AWS Integration tile **also applies** to CloudWatch Metric Streams.
+
+## Check if a host is monitored by the Agent or AWS
+
+In the Infrastructure Host list:
+
+- **Monitored by AWS Integration**
+
+  If a host displays only the AWS logo, or if its metrics are limited to the `aws.*` namespace, it indicates that the host is monitored exclusively through the AWS integration.
+
+  {{< img src="account_management/billing/infra-aws.png" alt="Infrastructure Host list showing multiple hosts with only the AWS logo, indicating monitoring through the AWS integration." >}}
+
+- **Monitored by the Datadog Agent**
+
+  If a host displays the Datadog Agent logo but not the AWS logo, or if its metrics are collected from the Datadog Agent (such as `datadog.*`, `system.*`, etc.), it indicates that the host is being monitored by the Datadog Agent.
+
+  {{< img src="account_management/billing/infra-agent.png" alt="Infrastructure Host List showing a host with the Datadog Agent logo but no AWS logo, indicating monitoring through the Datadog Agent." >}}
 
 ## Troubleshooting
 
@@ -66,3 +82,4 @@ For billing questions, contact your [Customer Success][7] Manager.
 [6]: /help/
 [7]: mailto:success@datadoghq.com
 [8]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[9]: /account_management/billing/containers/

@@ -2,8 +2,9 @@
 aliases:
 - /ko/integrations/azure_hdinsight
 categories:
-- cloud
+- 클라우드
 - azure
+custom_kind: 통합
 dependencies: []
 description: 주요 Azure HDInsight 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/azure_hd_insight/
@@ -14,7 +15,6 @@ integration_id: azure-hdinsight
 integration_title: Microsoft Azure HDInsight
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: azure_hd_insight
 public_title: Datadog-Microsoft Azure HDInsight 통합
@@ -35,17 +35,17 @@ Datadog Azure 통합을 사용해 Azure HDInsight 메트릭을 수집할 수 있
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_hd_insight" >}}
+{{ get-metrics-from-git "azure-hdinsight" }}
 
 
 ### 이벤트
 
 Azure HDInsight 통합에는 이벤트가 포함되지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure HDInsight 통합에는 서비스 점검이 포함되지 않습니다.
 

@@ -9,10 +9,6 @@ further_reading:
   text: "Learn about Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog tracer to autodetect the build information.
@@ -214,6 +210,7 @@ For a comprehensive list of environment variables set by Codefresh for every bui
 | `GITHUB_HEAD_REF`          | The head ref or source branch of the pull request (only set for `pull_request` or `pull_request_target` events). For example: `feature-branch-1`. |
 | `GITHUB_REF`               | The fully-formed ref of the branch or tag that triggered the workflow. For example: `refs/heads/feature-branch-1`. |
 | `GITHUB_JOB`               | The job ID of the current job. For example: `greeting_job`.                                           |
+| `JOB_CHECK_RUN_ID`         | The check run ID of the current job. Must be set manually: `JOB_CHECK_RUN_ID: ${{ job.check_run_id }}`. |
 
 
 For a comprehensive list of environment variables set by GitHub Actions for every build, see the [official GitHub documentation][101].
@@ -231,6 +228,7 @@ For a comprehensive list of environment variables set by GitHub Actions for ever
 | `CI_PIPELINE_URL`     | The URL for the pipeline details.                                                                       |
 | `CI_PIPELINE_IID`     | The project-level IID (internal ID) of the current pipeline. Unique only within the current project.      |
 | `CI_PROJECT_PATH`     | The project namespace with the project name included.                                                     |
+| `CI_PROJECT_URL`      | The HTTP(S) address of the project.                                                                       |
 | `CI_PROJECT_DIR`      | The full path the repository is cloned to, and where the job runs from.                                   |
 | `CI_JOB_STAGE`        | The name of the job's stage.                                                                            |
 | `CI_JOB_NAME`         | The name of the job.                                                                                     |

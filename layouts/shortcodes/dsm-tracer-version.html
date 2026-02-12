@@ -1,0 +1,343 @@
+<!-- Output minimal and recommended tracer versions for DSM -->
+{{- if  not (.Get "lang") -}}{{ errorf "dsm-tracer-version shortcode error: Missing value for param 'lang': %s" .Position }}{{- end -}}
+{{- if  not (.Get "lib") -}}{{ errorf "dsm-tracer-version shortcode error: Missing value for param 'lib': %s" .Position }}{{- end -}}
+{{- if  not (.Get "type") -}}{{ errorf "dsm-tracer-version shortcode error: Missing value for param 'type': %s" .Position }}{{- end -}}
+
+<!-- Java -->
+{{- if eq (.Get "lang") "java" -}}
+<!-- Kafka (kafka-clients) -->
+  {{- if eq (.Get "lib") "kafka-clients" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.9.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.43.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- RabbitMQ (amqp-client) -->
+  {{- if eq (.Get "lib") "amqp-client" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.9.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SQS (aws-java-sdk-sqs-v1) -->
+  {{- if eq (.Get "lib") "aws-java-sdk-sqs-v1" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.27.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SQS (sqs-v2) -->
+  {{- if eq (.Get "lib") "sqs-v2" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.27.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon Kinesis (kinesis-v1) -->
+  {{- if eq (.Get "lib") "kinesis-v1" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.22.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon Kinesis (kinesis-v2) -->
+  {{- if eq (.Get "lib") "kinesis-v2" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.22.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SNS (sns-v1) -->
+  {{- if eq (.Get "lib") "sns-v1" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.31.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SNS (sns-v2) -->
+  {{- if eq (.Get "lib") "sns-v2" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.31.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Google PubSub -->
+  {{- if eq (.Get "lib") "google-pubsub" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.25.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.42.2 or later
+    {{- end -}}
+  {{- end -}}
+<!-- IBM MQ (ibmmqjmsclient) -->
+  {{- if eq (.Get "lib") "ibmmqjmsclient" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.55.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.55.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Python -->
+{{- if eq (.Get "lang") "python" -}}
+<!-- Kafka (confluent-kafka) -->
+  {{- if eq (.Get "lib") "confluent-kafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.16.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.11.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (aiokafka) -->
+  {{- if eq (.Get "lib") "aiokafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      4.1.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      4.1.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- RabbitMQ (kombu) -->
+  {{- if eq (.Get "lib") "kombu" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.6.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.6.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SQS, SNS, Kinesis (botocore) -->
+  {{- if eq (.Get "lib") "botocore" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.20.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.8.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- .NET -->
+{{- if eq (.Get "lang") "dotnet" -}}
+<!-- Kafka (confluent-kafka) -->
+  {{- if eq (.Get "lib") "confluent-kafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.28.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.41.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- RabbitMQ (rabbitmq-client) -->
+  {{- if eq (.Get "lib") "rabbitmq-client" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.28.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.37.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SQS (amazon-sqs-sdk) -->
+  {{- if eq (.Get "lib") "amazon-sqs-sdk" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.48.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.48.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SNS (amazon-sns-sdk) -->
+  {{- if eq (.Get "lib") "amazon-sns-sdk" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      3.6.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      3.6.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon Kinesis (amazon-kinesis-sdk) -->
+  {{- if eq (.Get "lib") "amazon-kinesis-sdk" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      3.7.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      3.7.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- IBM MQ (ibmmqdotnetclient) -->
+  {{- if eq (.Get "lib") "ibmmqdotnetclient" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.49.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.49.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Azure Service Bus (azure-messaging-servicebus) -->
+  {{- if eq (.Get "lib") "azure-messaging-servicebus" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.53.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.53.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Node.js -->
+{{- if eq (.Get "lang") "nodejs" -}}
+<!-- Kafka (kafkajs) -->
+  {{- if eq (.Get "lib") "kafkajs" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.39.0 or 3.26.0 or 4.5.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.25.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Confluent Kafka (confluent-kafka-javascript) -->
+  {{- if eq (.Get "lib") "confluent-kafka-javascript" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.52.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.52.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- RabbitMQ (rhea) -->
+  {{- if eq (.Get "lib") "rhea" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.3.0 or 4.27.0 or 3.48.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.3.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- RabbitMQ (amqplib) -->
+  {{- if eq (.Get "lib") "amqplib" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      3.48.0 or 4.27.0 or 5.3.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.3.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SQS (client-sqs) -->
+  {{- if eq (.Get "lib") "client-sqs" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      3.47.0 or 4.26.0 or 5.2.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.18.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon Kinesis (client-kinesis) -->
+  {{- if eq (.Get "lib") "client-kinesis" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      3.47.0 or 4.26.0 or 5.2.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.18.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Amazon SNS (client-sns) -->
+  {{- if eq (.Get "lib") "client-sns" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      3.47.0 or 4.26.0 or 5.2.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.18.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Google Pub/Sub (google-cloud-pubsub) -->
+  {{- if eq (.Get "lib") "google-cloud-pubsub" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      4.49.0 or 5.25.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.25.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- BullMQ (bullmq) -->
+  {{- if eq (.Get "lib") "bullmq" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.82.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.82.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Go -->
+{{- if eq (.Get "lang") "go" -}}
+<!-- Kafka (confluent-kafka-go) -->
+  {{- if eq (.Get "lib") "confluent-kafka-go" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.56.1
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.66.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (sarama) -->
+  {{- if eq (.Get "lib") "sarama" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.56.1
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.66.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (kafka-go) -->
+  {{- if eq (.Get "lib") "kafka-go" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.63.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.63.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Ruby -->
+{{- if eq (.Get "lang") "ruby" -}}
+<!-- Kafka (ruby-kafka) -->
+  {{- if eq (.Get "lib") "ruby-kafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.23.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.23.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (karafka) -->
+  {{- if eq (.Get "lib") "karafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.23.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.23.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

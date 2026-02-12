@@ -30,7 +30,7 @@ author:
 categories:
 - almacenes de datos
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
 display_on_public_website: true
@@ -38,7 +38,7 @@ draft: false
 git_integration_title: rethinkdb
 integration_id: rethinkdb
 integration_title: RethinkDB
-integration_version: 5.0.0
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: rethinkdb
@@ -46,27 +46,27 @@ public_title: RethinkDB
 short_description: Recopila métricas de estado, de rendimiento y otras de un clúster
   RethinkDB.
 supported_os:
-- Linux
-- macOS
-- Windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::macOS
-  - Sistema operativo compatible::Windows
-  - Categoría::Almacenes de datos
-  - Categoría::Recopilación de logs
-  - Oferta::Integración
-  configuration: README.md#Configuración
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Stores
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
   description: Recopila métricas de estado, de rendimiento y otras de un clúster RethinkDB.
   media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
+  overview: README.md#Overview
+  support: README.md#Support
   title: RethinkDB
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -124,7 +124,7 @@ Opciones de configuración.
 #### Recopilación de logs
 
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
 
     ```yaml
     logs_enabled: true

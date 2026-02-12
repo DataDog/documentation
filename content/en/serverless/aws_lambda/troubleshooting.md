@@ -31,6 +31,8 @@ See this [comparison guide][6] to understand the benefits of using the Extension
 
 To continue using the Forwarder, see this [Forwarder troubleshooting guide][8] for more help.
 
+<div class="alert alert-info">The Datadog Lambda extension enables log collection by default. If you are migrating from the Forwarder to the extension, ensure that you remove your log subscription. Otherwise, you may see duplicate logs.</div>
+
 ## Ensure the configurations are up-to-date and expected
 
 Check out the [installation guides][9] with up-to-date instructions about applications you may have configured for Datadog monitoring in the past.
@@ -67,7 +69,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
 2. Download the latest version of the [Datadog CLI](https://github.com/DataDog/datadog-ci/#how-to-install-the-cli).
 
     ```sh
-    npm install -g @datadog/datadog-ci
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
 3. Use the Serverless Flare command from the root of your project directory to automatically collect and submit data about your Lambda function to Datadog Support.
@@ -76,7 +78,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
     datadog-ci lambda flare -f <function_arn> -e <email> -c <case_id> --with-logs
     ```
 
-<div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">command documentation</a>.</div>
+<div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://docs.datadoghq.com/serverless/libraries_integrations/cli/#troubleshooting-lambda-instrumentation">command documentation</a>.</div>
 {{% /tab %}}
 {{% tab "Manually" %}}
 

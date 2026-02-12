@@ -1,5 +1,6 @@
 ---
 title: Set Primary Tags to Scope
+description: Learn how to set primary tags to scope and filter APM data across different environments, services, and versions for better organization.
 aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
@@ -67,10 +68,9 @@ Options:
 
 Environments appear at the top of APM pages. Use the `env` dropdown to scope the data displayed on the current page.
 
-## Add a second primary tag in Datadog
+## Add additional primary tags in Datadog
 
-If you need to aggregate your trace metrics across additional dimensions, we recommend setting up a second primary tag in addition to the
-default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Service Catalog Performance** tab. 
+If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Software Catalog Performance** tab. 
 
 Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
@@ -79,18 +79,19 @@ Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
 * The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
-* The second primary tag supports up to 30 unique values. See [APM Data Volume Guidelines][9] for details.
+* The additional primary tags support up to 100 unique values per tag. See [APM data volume guidelines][9] for details.
+* Additional primary tags can be host or container tags. Span-level tags added by the tracer cannot be used as primary tags.
 
 If you change a previously set primary tag, be aware of the following:
 
 * Historical APM data aggregated by the previously set tag is no longer accessible.
 * Any APM monitors scoped to the previous tag display a status of _No Data_.
 
-## Container-based second primary tags
+## Container-based additional primary tags
 
-You can index your trace metrics based on the tags derived from Docker containers and Kubernetes pod metadata on Linux-based platforms. Container-based second primary tags are available in Datadog Agent versions 7.35.0 and later.
+You can index your trace metrics based on the tags derived from Docker containers and Kubernetes pod metadata on Linux-based platforms. Container-based primary tags are available in Datadog Agent versions 7.35.0 and later.
 
-To enable container-based second primary tags, install Agent version 7.35.0 or later, update the CID stats setting as described below, and restart the Agent. The procedure for enabling depends on how you installed the Agent:
+To enable container-based primary tags, install Agent version 7.35.0 or later, update the CID stats setting as described below, and restart the Agent. The procedure for enabling depends on how you installed the Agent:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -148,9 +149,11 @@ DD_APM_FEATURES=enable_cid_stats
 {{% /tab %}}
 {{< /tabs >}}
 
-Restart the Agent. Go to the [APM Settings][6] page and select the second primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
+Restart the Agent. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
 
-Now you can filter your services in the [Service Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+Now you can filter your services in the [Software Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+
+**Note**: Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
 
 ### Custom labels as tags
 

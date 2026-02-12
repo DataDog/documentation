@@ -36,14 +36,10 @@ $screen-md-max: ($screen-lg-min - 1) !default;
   }
 
   table {
+    table-layout: fixed;
     tr {
         th:empty {
             display: none;
-        }
-
-        td {
-            word-break: break-word;
-            width: 50%;
         }
     }
   }
@@ -52,6 +48,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     tr {
       td {
         word-break: break-word;
+        width: 50%;
       }
     }
   }
@@ -781,7 +778,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 @media (max-width: 767px) {
                     opacity: 1;
                 }
-                
+
                 &.prev{
                     left: 8px;
                     .control-arrow{

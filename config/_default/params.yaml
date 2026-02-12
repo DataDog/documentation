@@ -72,8 +72,6 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    client: Client-Side
-    server: Server-Side (Auto-Instrumentation)
     android: Android
     ios: iOS
     expo: Expo
@@ -101,13 +99,15 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
-    nginx: Nginx
     native: Native
     other: Other
     linux: Linux
+    macos: macOS
     windows: Windows
+    aws-fargate: "AWS Fargate"
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
+    full_host: "Full Host"
     serverless: "Serverless"
     javascript: "JavaScript"
     swift: "Swift"
@@ -122,6 +122,27 @@ code_language_ids:
     otel: "OpenTelemetry API"
     status_legacy: "Status Page (Legacy)"
     status_page: "Status Page"
+    envoy: "Envoy"
+    httpd: "Apache HTTP Server"
+    istio: "Istio"
+    kong: "Kong"
+    nginx: "NGINX"
+    windows_iis: "Windows IIS"
+    apache: "Apache HTTP Server"
+    ibm: "IBM HTTP Server"
+    gcp-service-extensions: "GCP Service Extensions"
+    apigateway: "Amazon API Gateway"
+    real_time_rule: "Real-Time Rule"
+    scheduled_rule: "Scheduled Rule"
+    historical_job: "Historical Job"
+    kubernetes_daemonset: "Kubernetes (DaemonSet)"
+    kubernetes_gateway: "Kubernetes (Gateway)"
+    haproxy: "HAProxy"
+    traces: "Traces"
+    metrics: "Metrics"
+    logs: "Logs"    
+    topology: "Topology Map"
+    geomap: "Geomap" 
 branch: ""
 
 signupclass: sign-up-trigger
@@ -140,27 +161,44 @@ allowedRegions:
     value: us
     weight: 10
     domain: datadoghq.com
+    exact_domains:
+      - "navy.oncall.datadoghq.com"
   - name: US3
     value: us3
     weight: 13
     domain: us3.datadoghq.com
+    exact_domains:
+      - "teal.oncall.datadoghq.com"
   - name: US5
     value: us5
     weight: 15
     domain: us5.datadoghq.com
+    exact_domains:
+      - "coral.oncall.datadoghq.com"
   - name: EU
     value: eu
     weight: 20
     domain: datadoghq.eu
+    exact_domains:
+       "beige.oncall.datadoghq.eu"
   - name: AP1
     value: ap1
     weight: 25
     domain: ap1.datadoghq.com
+    exact_domains:
+      - "saffron.oncall.datadoghq.com"
+  - name: AP2
+    value: ap2
+    weight: 30
+    domain: ap2.datadoghq.com
+    exact_domains:
+      - "lava.oncall.datadoghq.com"
   - name: US1-FED
     value: gov
-    weight: 30
+    weight: 35
     domain: ddog-gov.com
-
+    exact_domains:
+      - "navy.oncall.datadoghq.com"
 
 core_product:
   value_required: false
@@ -180,7 +218,10 @@ core_product:
         - 'core_product:synthetic monitoring'
         - 'core_product:digital experience monitoring'
         - 'specific_interest:testing'
-    - name: csm
+    - name: cloud security
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: workload protection
       requires_all_keyvals:
         - 'core_product:security'
     - name: cspm
@@ -216,6 +257,90 @@ core_product:
     - name: observability pipelines
     - name: security
     - name: serverless monitoring
-    - name: service catalog
+    - name: software catalog
     - name: slos
     - name: watchdog
+
+# Unsupported sites for each product
+unsupported_sites:
+  actions: [gov]
+  adaptive_sampling: [gov]
+  agent_flare: [gov]
+  agentless_scanning: [gov] # docs page
+  agentless-scanning: [gov] # api page
+  amazon_event_bridge: [gov]
+  apm_recommendations: [gov]
+  app_builder: [gov]
+  application_security: [gov]
+  autocomplete_search: [gov]
+  azure-private-link: [us,us5,eu,gov,ap1,ap2]
+  backstage: [gov]
+  bits_ai: [gov]
+  bits_ai_sre: [gov]
+  case_management: [gov]
+  ci_visibility: [gov]
+  code_coverage: [gov]
+  code_security: [gov]
+  configuration_at_runtime: [gov]
+  containers_kubernetes_appsec: [gov]
+  continuous_delivery: [gov]
+  continuous_integration: [gov]
+  correlation: [gov] #Event management correlation
+  cloudprem: [gov]
+  data_jobs: [gov]
+  datadog_disaster_recovery: [gov]
+  ddot_collector: [gov]
+  dora_metrics: [gov]
+  dynamic_instrumentation: [gov]
+  dynamic_quotas: [gov]
+  eng_reports: [gov]
+  events_from_sns_emails: [gov]
+  exception_replay: [gov]
+  feature_flags: [gov]
+  forwarding_audit_events: [gov]
+  getting_started_feature_flags: [gov]
+  gcp-private-service-connect: [us,us3,gov,ap1,ap2]
+  google-hangouts-chat: [gov]
+  fips-compliance: [us,us3,us5,eu,ap1,ap2]
+  fips-integrations: [us,us3,us5,eu,ap1,ap2]
+  fips-proxy: [us,us3,us5,eu,ap1,ap2]
+  fleet_automation: [gov]
+  high_availability_datadog_agent: [gov]
+  iac_security: [gov]
+  incident_ai: [gov]
+  inferred_entity_remapping_rules: [gov]
+  internal_developer_portal: [gov]
+  linear: [gov]
+  live_debugger: [gov]
+  llm_observability: [gov]
+  mobile_app_testing: [gov]
+  network_config_management: [gov]
+  observability_pipelines: [gov]
+  on-call: [gov]
+  otlp_agentless: [gov]
+  overview_pages: [gov]
+  pr_gates: [gov]
+  resource_based_sampling: [gov]
+  remote_config: [gov]
+  remote_config_for_fa: [gov] #For the Guides page
+  remote_configuration: [gov]
+  roku_error_tracking: [gov]
+  roku_log_collection: [gov]
+  rum_roku: [gov]
+  safety_center: [gov]
+  scorecards: [gov]
+  self_service_actions: [gov]
+  service_remapping_rules: [gov]
+  service_override_removal: [gov]
+  snmp_profile_manager: [gov]
+  status_pages: [gov]
+  supported_deployment_types: [gov]
+  synthetics_email_validation: [gov]
+  synthetics_safari: [gov]
+  test_optimization: [gov]
+  universal_service_monitoring: [gov]
+  watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov]
+  wiz: [gov]
+  workflow-automation: [gov]
+  workflows: [gov]
+  workload_security_active_protection: [gov]

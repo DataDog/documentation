@@ -39,20 +39,20 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_service_bus" >}}
+{{< get-metrics-from-git "azure-service-bus" >}}
 
 
 ### Eventos
 
 La integración Azure Service Bus no incluye ningún evento.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Service Bus no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_service_bus/azure_service_bus_metadata.csv

@@ -1,5 +1,6 @@
 ---
-title: "Dashboards API: Migrate from is_read_only by December 13, 2024"
+title: "Dashboards API: Migrate from is_read_only"
+description: Migrate from deprecated is_read_only attribute to restricted_roles or Restriction Policies for dashboard access control.
 further_reading:
 - link: "/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/"
   tag: "Guide"
@@ -11,11 +12,11 @@ further_reading:
 
 ## Overview
 
-On **December 13, 2024**, Datadog is removing support for the `is_read_only` attribute in the Dashboards API's. For customers who manage Dashboards with the API directly, Datadog recommends that you transition to [`restricted_roles`](#migrate-to-restricted_roles) or [Restriction Policies](#restriction-policies). 
+Datadog is removing support for the `is_read_only` attribute in the Dashboards API's. For customers who manage Dashboards with the API directly, Datadog recommends that you transition to [`restricted_roles`](#migrate-to-restricted_roles) or [Restriction Policies](#restriction-policies). 
 
-## Actions to take before December 13, 2024
+## Actions to take
 
-Before December 13, 2024, migrate off of `is_read_only` to `restricted_roles` or consider participating in Preview for Restriction Policies.
+Migrate off of `is_read_only` to `restricted_roles` or consider participating in Preview for Restriction Policies.
 
 ### Migrate to `restricted_roles`
 
@@ -26,8 +27,6 @@ Migrating to `restricted_roles` can be done independently. For more information,
 ### Restriction Policies
 
 Restriction Policies for Dashboards defines the access control rules for a resource. It maps a set of relations (editor and viewer) to a set of allowed principals (roles, teams, or users). 
-
-To participate in the beta for Restriction Policies, reach out to Datadog Support or your Customer Success Manager to enable Restriction Policies for Dashboards for your organization. 
 
 If you're managing Dashboards through Terraform: 
 1. Ensure that you're using Datadog Terraform Provider v3.27.0 or higher.

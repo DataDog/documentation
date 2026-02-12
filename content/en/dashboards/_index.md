@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
     tag: "Blog"
     text: "The new Datadog dashboards experience"
+  - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+    tag: "Blog"
+    text: "Design effective executive dashboards with Datadog"
   - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
     tag: "Best Practices"
     text: "Create great integration dashboards"
@@ -45,7 +48,7 @@ Dashboards provide real-time insights into the performance and health of systems
     {{< nextlink href="/dashboards/configure" >}}Configure: Overview of the configuration options for dashboards{{< /nextlink >}}
     {{< nextlink href="/dashboards/list" >}}Dashboard List: Search, view, or create dashboards and lists{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -58,13 +61,9 @@ Dashboards provide real-time insights into the performance and health of systems
 
 ## Get started
 
-{{< whatsnext desc="See the following resources:" >}}
-   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
-   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
-{{< /whatsnext >}}
-
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu. Enter a dashboard name and choose a layout option.
+To create a dashboard: 
+1. Click **+New Dashboard** on the [Dashboard List][4] page or **New Dashboard** from the navigation menu.
+2. Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -76,6 +75,12 @@ Timeboards
 
 Screenboards
 : Dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real time or represent fixed points in the past.
+
+{{< whatsnext desc="See the following resources:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}Getting Started with Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Learning Course: Introduction to Dashboards{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/building-better-dashboards" >}}Learning Course: Building Better Dashboards{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Refresh rate
 

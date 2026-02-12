@@ -1,0 +1,2 @@
+- SentinelOne write access token:
+    - The default environment variable is `DD_OP_DESTINATION_SENTINEL_ONE_TOKEN`.

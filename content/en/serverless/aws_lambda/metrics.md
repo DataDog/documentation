@@ -35,9 +35,9 @@ Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-bo
 
 Enhanced Lambda metrics are in addition to the default [Lambda metrics][6] enabled with the AWS Lambda integration. Enhanced metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace. You can view these metrics on the [Enhanced Lambda Metrics default dashboard][7].
 
-The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags. 
+The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags.
 
-These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations. Enhanced metrics are enabled automatically with [Serverless Monitoring][1] but can be disabled by setting the `DD_ENHANCED_METRICS` environment variable to `false` on your Lambda function. 
+These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations. Enhanced metrics are enabled automatically with [Serverless Monitoring][1] but can be disabled by setting the `DD_ENHANCED_METRICS` environment variable to `false` on your Lambda function.
 
 `aws.lambda.enhanced.invocations`
 : Measures the number of times a function is invoked in response to an event or an invocation of an API call.
@@ -80,6 +80,7 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 
 `aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
+: Because there are many variations of out-of-memory errors, some cases may not be handled well despite best efforts. If you encounter such a case, create an issue in the [Datadog Lambda Extension GitHub repo][18].
 
 `aws.lambda.enhanced.cpu_total_utilization`
 : Measures the total CPU utilization of the function as a number of cores.
@@ -120,9 +121,22 @@ These metrics are [distributions][8]: you can query them using the `count`, `min
 `aws.lambda.enhanced.tmp_used`
 : Measures the space used in the /tmp directory.
 
+`aws.lambda.enhanced.fd_max`
+: Measures the total number of file descriptors available for use.
+
+`aws.lambda.enhanced.fd_use`
+: Measures the maximum number of file descriptors used over the duration of the function invocation.
+
+`aws.lambda.enhanced.threads_max`
+: Measures the total number of threads available for use.
+
+`aws.lambda.enhanced.threads_use`
+: Measures the maximum number of threads used over the duration of the function invocation.
+
 [6]: /integrations/amazon_lambda/#metric-collection
 [7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
 [8]: /metrics/distributions/
+[18]: https://github.com/DataDog/datadog-lambda-extension
 
 ## Submit custom metrics
 
@@ -295,13 +309,11 @@ namespace Example
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Submit historical metrics with the Datadog Forwarder
+### Submit historical metrics
 
-In most cases, Datadog recommends that you use the Datadog Lambda extension to submit custom metrics. However, the Lambda extension can only submit metrics with a current timestamp.
+Use the Datadog Lambda Extension to submit historical metrics. These metrics can have timestamps up to one hour in the past.
 
-To submit historical metrics, use the Datadog Forwarder. These metrics can have timestamps within the last one hour.
-
-Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the Datadog Lambda Forwarder.
+Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the latest Datadog Lambda Extension.
 
 Then, choose your runtime:
 
@@ -456,28 +468,6 @@ For example:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### Submitting many data points
-
-Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost. 
-
-You can aggregate the data points in your application to avoid the overhead. 
-
-For example, in Python:
-
-```python
-def lambda_handler(event, context):
-
-    # Inefficient when event['Records'] contains many records
-    for record in event['Records']:
-      lambda_metric("record_count", 1)
-
-    # Improved implementation
-    record_count = 0
-    for record in event['Records']:
-      record_count += 1
-    lambda_metric("record_count", record_count)
-```
-
 ### Understanding distribution metrics
 
 When Datadog receives multiple count or gauge metric points that share the same timestamp and set of tags, only the most recent one counts. This works for host-based applications because metric points get aggregated by the Datadog agent and tagged with a unique `host` tag.
@@ -488,7 +478,7 @@ Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by defaul
 
 ### Understanding your metrics usage, volume, and pricing in Datadog
 
-Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17]. 
+Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17].
 
 [9]: /logs/logs_to_metrics/
 [10]: /tracing/trace_pipeline/generate_metrics/

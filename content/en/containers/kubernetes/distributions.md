@@ -1,5 +1,6 @@
 ---
 title: Kubernetes distributions
+description: Platform-specific installation and configuration instructions for Datadog Agent on various Kubernetes distributions
 aliases:
 - /agent/kubernetes/distributions
 further_reading:
@@ -43,8 +44,6 @@ These configurations can then be customized to add any Datadog feature.
 
 No specific configuration is required.
 
-If you are using AWS Bottlerocket OS on your nodes, add the following to enable container monitoring (`containerd` check):
-
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
@@ -58,40 +57,15 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Custom `datadog-values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-      value: "containerd"
-```
 
 {{% /tab %}}
 
@@ -99,7 +73,8 @@ datadog:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS requires a specific configuration for the `Kubelet` integration due to how AKS has set up the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
+### Admission Controller
+The optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -112,16 +87,12 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    kubelet:
-      tlsVerify: false
   override:
     clusterAgent:
       containers:
@@ -141,11 +112,9 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
-  kubelet:
-    tlsVerify: false
 
 providers:
   aks:
@@ -155,16 +124,22 @@ providers:
 The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
-The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
+### Kubelet serving certificate rotation
+If your cluster, **does not** have [Kubelet serving certificate rotation][13] enabled, you must provide additional configuration to enable the Datadog Agent to connect to the Kubelet. Kubelet serving certificate rotation is enabled in Kubernetes clusters 1.27 and above on node pools updated after July 2025.
 
-### AKS Kubelet certificate
+Your nodes have this feature enabled if they have the label `kubernetes.azure.com/kubelet-serving-ca=cluster`. Verify if all of your nodes have this label by running:
 
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
+```shell
+kubectl get nodes -L kubernetes.azure.com/kubelet-serving-ca
+```
 
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
+Ensure that all your nodes show `cluster`.
+
+#### Without Kubelet serving certificate rotation
+
+If Kubelet serving certificate rotation is not enabled, provide the following additional Kubelet configuration:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -177,10 +152,9 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -197,7 +171,6 @@ spec:
             - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
               value: "true"
 ```
-
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -205,9 +178,9 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Requires supported node image version
   kubelet:
     host:
       valueFrom:
@@ -219,11 +192,77 @@ providers:
   aks:
     enabled: true
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
-Using `spec.nodeName` keeps TLS verification. In some clusters, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes, as well as Linux nodes when the cluster is set up in a Virtual Network using custom DNS. In this case, use the first AKS configuration provided: remove any settings for the Kubelet host path (which defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**. Do NOT set the Kubelet host path and `tlsVerify: false` in the same configuration.
+In these AKS node versions, the AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
+
+<div class="alert alert-info">After Kubelet serving certificate rotation is enabled in your cluster, remove this configuration.</div>
+
+When you upgrade your AKS cluster, you may see the Kubelet serving certificate rotation feature enabled for you automatically, which can negatively impact your Datadog Agent if you are using the above special configuration to reference the certificate `/etc/kubernetes/certs/kubeletserver.crt`. When Kubelet serving certificate rotation is enabled, this certificate is removed, causing:
+
+- In Datadog Operator: The Agent container shuts down in `Error`, as it cannot connect to the Kubelet, and it logs `Error while getting hostname, exiting: unable to reliably determine the host name`
+- In Helm: The Agent pod fails to start with the warning event `MountVolume.SetUp failed for volume "kubelet-ca" : hostPath type check failed: /etc/kubernetes/certs/kubeletserver.crt is not a file`
+
+In these cases, remove the additional Kubelet configurations. 
+
+As an alternative, you can also [connect to the Kubelet without TLS verification](#without-tls-verification).
+
+### Without TLS verification
+
+In some clusters, DNS resolution for `spec.nodeName` inside Pods does not work in AKS. This affects:
+ - Windows nodes
+ - Linux nodes, when the cluster is set up in a virtual network using custom DNS
+
+In this case, use the AKS configuration provided below to set `tlsVerify: false` and remove any settings for the Kubelet host path (which defaults to `status.hostIP`). **Do not set the Kubelet host path and `tlsVerify: false` in the same configuration**.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    kubelet:
+      tlsVerify: false
+  override:
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+              value: "true"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+datadog:
+  clusterName: <CLUSTER_NAME>
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  kubelet:
+    tlsVerify: false
+
+providers:
+  aks:
+    enabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -245,9 +284,10 @@ Since Agent 7.26, no specific configuration is required for GKE (whether you run
 
 GKE Autopilot requires some configuration, shown below.
 
-Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
+Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent, Process Agent and System-Probe containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
-**Note**: Cloud Network Monitoring is not supported for GKE Autopilot.
+Starting with Agent `7.65.0+` and version `3.113.0+` of the Helm chart, Datadog recommends using `datadog.kubelet.useApiServer` for the Agent to query the pod list from the API server. Avoid using the [deprecated read-only kubelet port][12].
+
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -264,6 +304,12 @@ datadog:
   # Default value is `datadoghq.com' (the US1 site)
   # Documentation: https://docs.datadoghq.com/getting_started/site/
   site: <DATADOG_SITE>
+
+  # This option uses the API server to retrieve the node-level pod list from the API server.
+  # This setting is necessary to migrate away from the deprecated read-only kubelet port.
+  # Requires Agent 7.65.0+ and Datadog Helm chart version 3.113.0+.
+  kubelet:
+    useApiServer: true
 
 agents:
   containers:
@@ -287,6 +333,13 @@ agents:
         requests:
           cpu: 100m
           memory: 200Mi
+
+    systemProbe:
+      # resources for the System Probe container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 400Mi
 
   priorityClassCreate: true
 
@@ -559,6 +612,7 @@ spec:
     kubeStateMetricsCore:
       enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -582,6 +636,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
@@ -617,3 +672,5 @@ agents:
 [9]: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
 [10]: https://cloud.google.com/kubernetes-engine/docs/how-to/autopilot-spot-pods
 [11]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes
+[12]: https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port
+[13]: https://learn.microsoft.com/en-us/azure/aks/certificate-rotation#kubelet-serving-certificate-rotation

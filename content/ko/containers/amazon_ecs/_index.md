@@ -20,6 +20,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
   tag: 블로그
   text: Datadog 클라우드 비용 관리를 통해 Kubernetes 및 ECS 지출 내역을 확인하세요.
+- link: https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/
+  tag: 아키텍처 센터
+  text: FCS Fargate와 함께 Datadog 사용
 title: Amazon ECS
 ---
 
@@ -200,9 +203,9 @@ EC2 인스턴스의 보안 그룹 설정이 APM 및 DogStatsD의 포트를 공�
 }
 {{< /highlight >}}
 
-#### 네트워크 성능 모니터링 
+#### 클라우드 네트워크 모니터링
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능은 리눅스에서만 사용할 수 있습니다.
 </div>
 
@@ -264,7 +267,7 @@ EC2 인스턴스의 보안 그룹 설정이 APM 및 DogStatsD의 포트를 공�
  ```
 #### 네트워크 경로
 
-<div class="alert alert-info">네트워크 경로 Datadog 네트워크 성능 모니터링 미리보기 중입니다. 가입하려면 Datadog 담당자에게 문의하세요.</div>
+<div class="alert alert-info">Datadog 클라우드 네트워크 모니터링용 네트워크 경로는 서비스가 일부에게만 허용됩니다. 사용해 보려면 Datadog 담당자에게 문의하세요.</div>
 
 1. ECS 클러스터에서 [네트워크 경로][31]를 활성화하려면 `datadog-agent-sysprobe-ecs.json` 파일에 다음 환경 변수를 추가하여 `system-probe` 추적 경로 모듈을 활성화합니다.
 
@@ -314,7 +317,7 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
 {{% site-region region="gov" %}}
 #### 정부용 Datadog FIPS 프록시 환경
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능은 리눅스에서만 사용할 수 있습니다.
 </div>
 

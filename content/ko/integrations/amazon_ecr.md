@@ -1,8 +1,8 @@
 ---
 categories:
-- cloud
+- 클라우드
 - aws
-custom_kind: integration
+custom_kind: 통합
 dependencies: []
 description: 주요 Amazon ECR 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_ecr/
@@ -31,7 +31,7 @@ Datadog에서 모든 ECR 메트릭을 보려면 이 통합을 활성화하세요
 
 ### 설치
 
-이미 하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
+아직 설정하지 않은 경우 먼저 [Amazon Web Services 통합][1]을 설정하세요.
 
 ### 메트릭 수집
 

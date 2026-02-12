@@ -16,10 +16,6 @@ further_reading:
 title: (レガシー) Splunk 環境で Observability Pipelines をセットアップする
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines は US1-FED Datadog サイトでは利用できません。</div>
-{{< /site-region >}}
-
 {{% observability_pipelines/legacy_warning %}}
 
 <div class="alert alert-info">Observability Pipelines は Splunk の HTTP Event Collector (HEC) プロトコルのみをサポートしています。</div>
@@ -112,8 +108,8 @@ AWS アカウントで Worker を実行するには、そのアカウントへ�
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-warning">CloudFormation のインストールは現在、Remote Configuration のみをサポートしています。</div>
-<div class="alert alert-danger">CloudFormation のインストールは、本番環境レベル以外のワークロードでのみ使用してください。</div>
+<div class="alert alert-danger">CloudFormation のインストールは現在、Remote Configuration のみをサポートしています。</div>
+<div class="alert alert-warning">CloudFormation のインストールは、本番環境レベル以外のワークロードでのみ使用してください。</div>
 
 Worker を AWS アカウントで実行するには、そのアカウントへの管理者アクセスが必要です。Worker インスタンスを実行するために次の情報を収集してください。
 * インスタンスが実行される VPC ID。
@@ -426,7 +422,7 @@ EOT
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">CloudFormation インストールは非本番環境レベルのワークロードにのみ使用してください。</div>
+<div class="alert alert-warning">CloudFormation インストールは非本番環境レベルのワークロードにのみ使用してください。</div>
 
 Worker を AWS アカウントにインストールするには、CloudFormation テンプレートを使用してスタックを作成します。
 
@@ -529,7 +525,7 @@ NLB は Terraform モジュールによってプロビジョニングされ、�
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">CloudFormation インストールは非本番環境レベルのワークロードにのみ使用してください。</div>
+<div class="alert alert-warning">CloudFormation インストールは非本番環境レベルのワークロードにのみ使用してください。</div>
 
 NLB は CloudFormation テンプレートによってプロビジョニングされ、AutoScaling グループを指すように構成されます。DNS アドレスは CloudFormation の `LoadBalancerDNS` 出力で返されます。
 {{% /tab %}}
@@ -566,7 +562,7 @@ Google GKE の場合、Datadog は SSD でバックアップされた `premium-r
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">この CloudFormation テンプレートによって作成された EBS ドライブは、それらが作成されたインスタンスのライフサイクルに関連付けられています。<strong>これは、例えば AutoScaling グループによってインスタンスが終了された場合にデータが失われることを意味します。</strong> このため、CloudFormation インストールは非本番環境レベルのワークロードにのみ使用してください。</div>
+<div class="alert alert-warning">この CloudFormation テンプレートによって作成された EBS ドライブは、それらが作成されたインスタンスのライフサイクルに関連付けられています。<strong>これは、例えば AutoScaling グループによってインスタンスが終了された場合にデータが失われることを意味します。</strong> このため、CloudFormation インストールは非本番環境レベルのワークロードにのみ使用してください。</div>
 
 デフォルトでは、各インスタンスに 288GB の EBS ドライブが割り当てられ、インスタンスの起動時に自動的にマウントおよびフォーマットされます。
 {{% /tab %}}

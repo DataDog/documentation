@@ -15,7 +15,7 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
-<div class="alert alert-warning"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
+<div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
 
 ## Overview
 
@@ -62,7 +62,7 @@ Before setting up Test Impact Analysis, you must configure [Test Optimization][4
 
 ## Configuration
 
-Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Intelligent Test Runner Activation Write` permission.
+Once you have set up your Datadog library for Test Impact Analysis, configure it from the [Test Service Settings][5] page. Enabling Test Impact Analysis requires the `Test Optimization Settings Write` permission.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Optimization Settings page" style="width:80%" >}}
 

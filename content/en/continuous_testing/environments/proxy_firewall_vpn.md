@@ -53,49 +53,46 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-us1.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
+| 443 | {{< region-param key="synthetics_tunnel_endpoint" code="true" >}}   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
 | 443 | `intake.synthetics.datadoghq.com` | Required to get the presigned URL and to trigger the Synthetic tests. |
-| 443 | `api.datadoghq.com` | Required to search for Synthetic tests, get them, and poll their results. |
+| 443 | {{< region-param key="api_endpoint" code="true" >}} | Required to search for Synthetic tests, get them, and poll their results. |
 
 {{< /site-region >}}
-
-{{< site-region region="eu" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2" >}}
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-eu1.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.datadoghq.eu` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+| 443 | {{< region-param key="synthetics_tunnel_endpoint" code="true" >}}   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
+| 443 | {{< region-param key="api_endpoint" code="true" >}} | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 **Note**: Although the tunnel service top level domain is `.com` (and not `.eu`), the endpoint is located in EU (Frankfurt AWS).
 
 {{< /site-region >}}
 
-{{< site-region region="us3" >}}
+## Using the testing tunnel with multiple environments
 
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-us3.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.us3.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+The testing tunnel can be configured to work with multiple environments, including `localhost`, by using the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. These fields allow you to substitute parts of the starting URL and resource URLs based on the provided regular expressions, enabling you to redirect requests to different environments during test execution.
 
-{{< /site-region >}}
+For example, you can reuse the test scheduled in production to run on your development environment with `startUrl` and `startUrlSubstitutionRegex`. You can also redirect requests for frontend assets to a local development environment while keeping the main page and API calls served by the production environment. This is useful for testing changes in isolation without needing to deploy the entire application.
 
-{{< site-region region="us5" >}}
+To use these options, specify the appropriate values in the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. The `startUrl` and `startUrlSubstitutionRegex` fields allow you to modify the starting URL, while the `resourceUrlSubstitutionRegexes` field allows you to modify the URLs of all subsequent resource requests.
 
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-us5.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.us5.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+For `resourceUrlSubstitutionRegexes`, specify an array of strings, each containing two parts separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL, and the second is the expression to rewrite the URL.
 
-{{< /site-region >}}
+For example:
 
-{{< site-region region="ap1" >}}
+```text
+https://prod.my-app.com/assets/(.*)|http://localhost:3000/assets/$1
+```
 
- Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-ap1.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.ap1.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+This regular expression captures the path of the resource URL and rewrites it to point to the local development environment. Given the URL `https://prod.my-app.com/assets/js/chunk-123.js`, it would rewrite it to `http://localhost:3000/assets/js/chunk-123.js`.
 
-{{< /site-region >}}
+This feature allows you to test specific parts of your application in different environments, including `localhost`, ensuring that changes are properly validated before being deployed to production.
+
+You can learn more about these options in [Testing Multiple Environments][4].
 
 ## Further reading
 
@@ -104,3 +101,4 @@ Allow **Outbound connections** for the following Datadog endpoints:
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: /continuous_testing/cicd_integrations#use-the-cli
+[4]: /continuous_testing/environments/multiple_env

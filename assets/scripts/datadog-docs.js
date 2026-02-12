@@ -6,9 +6,11 @@ import { initializeIntegrations } from './components/integrations';
 import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
+import { initCopyPageButton } from './components/copy-page-button';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
+import ExpressionLanguageEvaluator from './components/expression-language-evaluator';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -44,6 +46,8 @@ const scrollActiveNavItemToTop = () => {
 
 const doOnLoad = () => {
     window.history.replaceState({}, '', window.location.href);
+
+    initCopyPageButton();
 
     const responsiveTableElements = document.querySelectorAll('.table-responsive-container table');
 
@@ -123,37 +127,43 @@ const doOnLoad = () => {
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
     }
+
+    // Only initialize the expression language evaluator if the page contains an expression evaluator.
+    if (document.querySelector('.expression-evaluator')) {
+        new ExpressionLanguageEvaluator();
+    }
 };
 
 DOMReady(doOnLoad);
 
-function getVisibleParentPath(ancestralEl, path){
+function getVisibleParentPath(ancestralEl, path) {
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
 
-    let el = document.querySelector(`${ancestralEl} [data-path="${path}"][data-skip="false"]`)
+    let el = document.querySelector(`${ancestralEl} [data-path="${path}"]`);
     // account for preview branch name in url
-    let endIdx = env === 'preview' ? 6 : 4
+    let endIdx = env === 'preview' ? 6 : 4;
 
-    while(!el && endIdx){
-        path = path.split('/').slice(0,endIdx).join('/')
-        el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
-        endIdx -= 1
+    while (!el && endIdx) {
+        path = path.split('/').slice(0, endIdx).join('/');
+        el = document.querySelector(`${ancestralEl} [data-path="${path}"]`);
+        endIdx -= 1;
     }
-    return el
+    return el;
 }
 
 // Get sidebar
 function hasParentLi(el) {
     while (el) {
         if (el.classList) {
-            if (el.classList.contains('sidenav-nav-main')) {
+            if (el.classList.contains('sidenav-nav-js-load')) {
                 break;
             }
 
             // Add open class to li if the li has a child ul
+            const isNonMainSideNav = document.querySelector('.side .sidenav-api, .side .sidenav-partners');
             if (el.closest('li') && el.closest('li').querySelectorAll('ul').length !== 0) {
-                el.closest('li').classList.add('open');
+                el.closest('li').classList.add(isNonMainSideNav ? 'active' : 'open');
             }
 
             if (el.closest('.sub-menu') && el.closest('.sub-menu').previousElementSibling) {
@@ -167,7 +177,9 @@ function hasParentLi(el) {
 
 function getPathElement(event = null) {
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
+    const activeMenus = document.querySelectorAll(
+        '.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active'
+    );
 
     // remove active class from all sidenav links to close all open menus
     for (let i = 0; i < activeMenus.length; i++) {
@@ -177,7 +189,7 @@ function getPathElement(event = null) {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let sideNavPathElement = getVisibleParentPath('.side',path)
+    let sideNavPathElement = getVisibleParentPath('.side', path);
 
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
@@ -230,8 +242,10 @@ function getPathElement(event = null) {
 
 // remove open class from li elements and active class from <a> elements
 function closeNav() {
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
-    const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
+    const activeMenus = document.querySelectorAll(
+        '.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active'
+    );
+    const openMenus = document.querySelectorAll('.side .sidenav-nav-js-load .open, header .sidenav-nav-js-load .open');
 
     for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i].classList.remove('active');
@@ -286,8 +300,8 @@ function updateSidebar(event) {
     }
 }
 
-const sideNav = document.querySelector('.side .sidenav-nav-main');
-const mobileNav = document.querySelector('header .sidenav-nav-main');
+const sideNav = document.querySelector('.side .sidenav-nav-js-load');
+const mobileNav = document.querySelector('header .sidenav-nav-js-load');
 
 if (sideNav) {
     sideNav.addEventListener('click', navClickEventHandler);
@@ -344,6 +358,11 @@ function navClickEventHandler(event) {
     }
 }
 
+/**
+ * Determines if the link should be loaded via AJAX
+ * @param {object} element
+ * @returns boolean
+ */
 function loadViaAjax(element) {
     let hasClassLoad = false;
     let parentHasClassOpen = false;
@@ -395,6 +414,55 @@ window.addEventListener('click', (event) => {
 window.onload = function () {
     getPathElement();
     setMobileNav();
+
+    // Handle glossary anchor scrolling from search results
+    if (window.location.pathname.includes('/glossary/')) {
+        const scrollTarget = sessionStorage.getItem('glossaryScrollTarget');
+        if (scrollTarget) {
+            sessionStorage.removeItem('glossaryScrollTarget');
+            // Use requestAnimationFrame to ensure DOM is fully rendered
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(scrollTarget);
+                    if (targetElement) {
+                        const header = document.querySelector('.navbar');
+                        const glossaryNav = document.querySelector('.glossary-nav');
+                        let offset = 20;
+
+                        if (header) offset += header.offsetHeight;
+                        if (glossaryNav) offset += glossaryNav.offsetHeight;
+
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300); // Longer delay for Chrome's rendering
+            });
+        } else if (window.location.hash) {
+            // Handle direct hash navigation with Chrome-compatible timing
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const targetElement = document.getElementById(window.location.hash.substring(1));
+                    if (targetElement) {
+                        const header = document.querySelector('.navbar');
+                        const glossaryNav = document.querySelector('.glossary-nav');
+                        let offset = 20;
+
+                        if (header) offset += header.offsetHeight;
+                        if (glossaryNav) offset += glossaryNav.offsetHeight;
+
+                        const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300);
+            });
+        }
+    }
 };
 
 function replaceURL(inputUrl) {
@@ -407,11 +475,8 @@ function replaceURL(inputUrl) {
     return inputUrl.replace('https://www.docs.datadoghq.com', thisurl);
 }
 
-window.addEventListener(
-    'popstate',
-    function (event) {
-        setMobileNav();
-        closeNav();
-        getPathElement();
-    }
-);
+window.addEventListener('popstate', function (event) {
+    setMobileNav();
+    closeNav();
+    getPathElement();
+});

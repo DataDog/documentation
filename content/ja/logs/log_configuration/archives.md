@@ -44,10 +44,6 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"><em>ロール委任を使用した S3 アーカイブの設定は現在限定的に利用可能です。Datadog for Government アカウントでこの機能をリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください</em>。</div>
-{{< /site-region >}}
-
 まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
    * 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
    * 特に AWS China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。
@@ -76,7 +72,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 ### ストレージバケットを作成
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
+<div class="alert alert-danger">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -85,7 +81,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 [AWS コンソール][1]にアクセスし、アーカイブを転送する [S3 バケットを作成][2]します。
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog アーカイブは、仮想ホスト型アドレッシングに依存する S3 FIPS エンドポイントとの統合時、バケット名にドット (.) を含む場合はサポートされません。詳細は AWS のドキュメント、<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> および <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS バーチャルホスティング</a>をご参照ください。</div>
+<div class="alert alert-danger"> Datadog アーカイブは、仮想ホスト型アドレッシングに依存する S3 FIPS エンドポイントとの統合時、バケット名にドット (.) を含む場合はサポートされません。詳細は AWS のドキュメント、<a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> および <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS バーチャルホスティング</a>をご参照ください。</div>
 {{< /site-region >}}
 
 **注:**
@@ -186,7 +182,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-1. Datadog Google Cloud サービスアカウントに、アーカイブをバケットに書き込むための権限を付与します。 
+1. Datadog Google Cloud サービスアカウントに、アーカイブをバケットに書き込むための権限を付与します。
 2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
 3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
 
@@ -230,7 +226,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 最大スキャンサイズが定義されているアーカイブの場合、すべてのユーザーは、リハイドレートを開始する前にスキャンサイズを推定する必要があります。推定されたスキャンサイズがそのアーカイブで許可されているものより大きい場合、ユーザーはリハイドレートを要求する時間範囲を狭めなければなりません。時間範囲を減らすと、スキャンサイズが小さくなり、ユーザーがリハイドレートを開始できるようになります。
 
 {{< site-region region="us3" >}}
-#### ファイアウォールルール 
+#### ファイアウォールルール
 
 {{< tabs >}}
 {{% tab "Azure ストレージ" %}}
@@ -350,7 +346,7 @@ S3 バケットが SSE-S3 で暗号化されていることを確認するには
 
 3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
-既存の KSM キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
+既存の KMS キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -411,6 +407,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
+
 *Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: /ja/logs/indexes/#exclusion-filters

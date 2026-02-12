@@ -32,13 +32,21 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 
 ## 構成
 
-`WebSocket` テストの作成を選択した後、テストのリクエストを定義します。
+You may create a test using one of the following options:
 
-### リクエストを定義する
+- **Create a test from a template**:
 
-1. テストを実行する **URL** を指定します。
-2. テストで送信したい文字列を入力します。
-3. **Advanced Options** (オプション) をテストに追加します。
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
+
+- **Build a test from scratch**:
+
+    1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、`WebSocket` リクエストタイプを選択します。
+    1. テストを実行する **URL** を指定します。
+    1. テストで送信したい文字列を入力します。
+    1. **Advanced Options** (オプション) をテストに追加します。<br /><br>
 
    {{< tabs >}}
 
@@ -57,14 +65,15 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 
    {{< /tabs >}}
 
-<br/>
+</br>
 
-4. WebSocket テストに**名前**を付けます。
-5. WebSocket テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+  5. WebSocket テストに**名前**を付けます。
+  6. WebSocket テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+  7. **Send** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。
 
-{{< img src="synthetics/api_tests/websocket_test_config.png" alt="WebSocket リクエストを定義する" style="width:90%;" >}}
+     {{< img src="synthetics/api_tests/websocket_test_config_2.png" alt="WebSocket リクエストを定義する" style="width:90%;" >}}
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+  8. Click **Create Test** to submit your API test.
 
 ### スニペット
 
@@ -94,7 +103,7 @@ WebSocket テストは、ネットワークの外部または内部からのテ�
 
 WebSocket テストを実行する**ロケーション**を選択します。WebSocket テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -106,7 +115,7 @@ WebSocket テストは次の頻度で実行できます。
 
 {{% synthetics-alerting-monitoring %}}
 
-{{% synthetics-variables %}} 
+{{% synthetics-variables %}}
 
 ### 変数を使用する
 
@@ -116,7 +125,7 @@ WebSocket テストの URL、高度なオプション、アサーションで、
 
 ## テストの失敗
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが途中で失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対するアサーションをテストせずにテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
 これらの理由には以下が含まれます。
 
@@ -126,7 +135,7 @@ WebSocket テストの URL、高度なオプション、アサーションで、
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
@@ -150,11 +159,7 @@ WebSocket テストの URL、高度なオプション、アサーションで、
 
 ### アクセス制限
 
-アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
-
-組織内の役割に基づいて、WebSocket テストへのアクセスを制限することができます。WebSocket テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## その他の参考資料
 
@@ -171,4 +176,3 @@ WebSocket テストの URL、高度なオプション、アサーションで、
 [9]: /ja/synthetics/api_tests/errors/#ssl-errors
 [10]: /ja/account_management/rbac/
 [11]: /ja/account_management/rbac#custom-roles
-[12]: /ja/account_management/rbac/#create-a-custom-role

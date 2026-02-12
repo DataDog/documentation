@@ -29,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/akamai-zero-trust-application-security/
   tag: ブログ
   text: Datadog Cloud SIEM で Akamai Zero Trust と Application Security を監視する
+- link: https://www.datadoghq.com/blog/microsoft-365-detections/
+  tag: ブログ
+  text: 攻撃者が Microsoft 365 サービスを悪用する方法
 title: Cloud SIEM
 ---
 
@@ -44,7 +47,7 @@ Datadog Cloud SIEM (Security Information and Event Management) は、開発、�
 
 脅威は、Datadog 内でセキュリティシグナルとして表面化され、[セキュリティシグナルエクスプローラー][1]で収集、トリアージされます。セキュリティシグナルは、Datadog Cloud SIEM の[検出ルール][2]により生成されます。検出ルールは、すぐに使用を開始できる状態で提供され、さまざまなソースの脅威を検出します。提供された検出ルールのクローンを作成し、コンフィギュレーションを変更することや、特定のユースケースに合わせて[新しいルール][3]を作成し追加することも可能です。
 
-## 詳細はこちら
+## 開始する
 
 {{< whatsnext desc="Cloud SIEM を始めるにあたって、以下のドキュメントをご覧ください。" >}}
   {{< nextlink href="/getting_started/cloud_siem/">}}Cloud SIEM 入門ガイド{{< /nextlink >}}

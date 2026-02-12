@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/reactnative
 type: multi-code-lang
 code_lang: reactnative
-code_lang_weight: 40
+code_lang_weight: 60
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
@@ -40,22 +40,28 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 Update your initialization snippet to enable native JavaScript crash reporting:
 
 ```javascript
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<APPLICATION_ID>',
-    true,
-    true,
-    true // enable JavaScript crash reporting
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>',
+            trackInteractions: true,
+            trackResources: true,
+            trackErrors: true, // <-- Enable JavaScript Crash Reporting
+            nativeCrashReportEnabled: true, // Optional: Enable Native Crash Reporting
+        },
+        logsConfiguration: {},
+        traceConfiguration: {}
+    }
 );
-config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
 ## Get deobfuscated stack traces
 
 Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-For React Native applications, the matching of stack traces and source maps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
+For React Native applications, the matching of stack traces and source maps relies on the `debug_id`. If not available, it relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
@@ -67,6 +73,28 @@ In order to make your application's size smaller, its code is minified when it i
 To set your project up to send the symbolication files automatically, run `npx datadog-react-native-wizard`.
 
 See the wizard [official documentation][13] for options.
+
+### Use Datadog Metro Configuration
+
+Starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, the SDK exports a Datadog Metro Plugin, which attaches a unique Debug ID to your application bundle and sourcemap.
+
+Add it to your `metro.config.js` to allow for accurate symbolication of stacktraces on Datadog:
+
+```js
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const {withDatadogMetroConfig} = require('@datadog/mobile-react-native/metro');
+
+// Your configuration
+const config = mergeConfig(getDefaultConfig(__dirname), {});
+
+module.exports = withDatadogMetroConfig(config);
+```
+
+### Use the `datadog-ci react-native inject-debug-id` command
+
+As an alternative to the Metro Configuration, starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, you can use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap.
+
+Usage instructions are available on the [command documentation page][17].
 
 ### Passing options for your uploads
 
@@ -96,12 +124,7 @@ See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
+Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 To compute the size of your source maps and bundle, run the following command:
 
@@ -459,9 +482,9 @@ Find the loop on `applicationVariants` in the `android/app/build.gradle` file. I
 Inside the loop, add the following snippet:
 
 ```groovy
-        if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
-            tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
-        }
+if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
+    tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
+}
 ```
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
@@ -482,8 +505,9 @@ Inside the loop, add the following snippet:
 [9]: https://fastlane.tools/
 [10]: https://appcenter.ms/
 [11]: https://www.bitrise.io/
-[12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[12]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#xcode
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
+[17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id

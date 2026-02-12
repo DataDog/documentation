@@ -1,11 +1,13 @@
 ---
 aliases:
 - /es/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+description: Comprende cómo funcionan las operaciones primarias en los servicios y
+  cómo configurarlas para organizar adecuadamente trazas (traces) y recursos en APM.
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
-  text: Más información sobre cómo configurar el rastreo de APM con la aplicación
-- link: /tracing/service_catalog/
+  text: Aprende a configurar APM tracing con su aplicación
+- link: /tracing/software_catalog/
   tag: Documentación
   text: Descubrir y catalogar los servicios que generan informes en Datadog
 - link: /tracing/services/service_page/
@@ -22,9 +24,9 @@ title: Operaciones principales en servicios
 
 ## Servicios de APM
 
-Los servicios de APM calculan las métricas de trazas (traces) para errores, rendimiento y latencia. Estas se calculan con base en los recursos que coinciden con un único nombre de tramo (span), considerado como la operación principal. Estos métricas de servicio se utilizan en todo el producto, tanto la Página de servicios por defecto, en el Catálogo de servicios, como el Mapa de servicios.
+Los servicios de APM calculan métricas de rastreo para errores, rendimiento y latencia. Estos cálculos se basan en los recursos que coinciden con un único nombre de tramo, considerado la operación principal. Estas métricas de servicio se utilizan en todo el producto, tanto por la página de servicio por defecto en el Software Catalog y como Mapa de servicio.
 
-**Nota**: Las métricas de trazas pueden consultarse en función de su `trace.*` [espacio de nombres][1].
+**Nota**: Las métricas de rastreo pueden consultarse en función de su `trace.*` [espacio de nombres][1].
 
 ## Operaciones principales
 ### Definición
@@ -36,7 +38,7 @@ Por ejemplo, un servicio `web-store` puede tener varios endpoints instrumentados
 | Tipo de servicio           | Operación principal                                 |
 |------------------------|---------------------------------------------------|
 | web                    | `servlet.request`, `flask.request`, `web.request` |
-| db                     | `postgres.query`, `db.query`                      |
+| base de datos                     | `postgres.query`, `db.query`                      |
 | custom-instrumentation | `trace.annotation`, `method.call`                 |
 
 ### Configuración
@@ -68,7 +70,7 @@ Consulta [Instrumentación personalizada][3] a fin de obtener información detal
 
 Cuando se utiliza Datadog, el nombre de la operación de OpenTracing es un recurso y la etiqueta (tag) "component" de OpenTracing es el nombre del tramo de Datadog. Por ejemplo, para definir (en términos de OpenTracing) un tramo que tenga el recurso "/user/profile" y el nombre de tramo "http.request":
 
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
+{{< programming-lang-wrapper langs="java,python,ruby,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
 
@@ -79,7 +81,7 @@ Span span = tracer.buildSpan("http.request").start();
 try (Scope scope = tracer.activateSpan(span)) {
     span.setTag("service.name", "service_name");
     span.setTag("resource.name", "/user/profile");
-    // código que se rastrea
+    // code being traced
 } finally {
     span.finish();
 }
@@ -116,25 +118,13 @@ Para obtener más información, consulta [Configuración de Python y OpenTracing
 ```ruby
 OpenTracing.start_active_span('http.request') do |scope|
   scope.span.datadog_span.resource = '/user/profile'
-  # código que se rastrea
+  # code being traced
 end
 ```
 Para obtener más información, consulta [Configuración de Ruby y OpenTracing][1].
 
 
 [1]: /es/tracing/trace_collection/opentracing/ruby/#opentracing
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-
-
-```go
-opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
-```
-
-Para obtener más información, consulta [Configuración de Go y OpenTracing][1].
-
-
-[1]: /es/tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -143,7 +133,7 @@ Para obtener más información, consulta [Configuración de Go y OpenTracing][1]
 const span = tracer.startSpan('http.request');
 span.setTag('resource.name',  '/user/profile')
 span.setTag('span.type', 'web')
-// código que se rastrea
+// code being traced
 span.finish();
 ```
 
@@ -162,7 +152,7 @@ using OpenTracing.Util;
 using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(finishSpanOnDispose: true))
 {
     scope.Span.SetTag("resource.name", "/user/profile");
-    // código que se rastrea
+    // code being traced
 }
 
 ```
@@ -176,22 +166,22 @@ Para obtener más información, consulta [Configuración de .NET y OpenTracing][
 
 
 ```php
-// Una vez, al comienzo del index.php, justo después de la importación del cargador automático del compositor.
-// Para OpenTracing <= 1.0-beta6
+// Once, at the beginning of your index.php, right after composer's autoloader import.
+// For OpenTracing <= 1.0-beta6
 $otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
-// Para OpenTracing >= 1.0
+// For OpenTracing >= 1.0
 $otTracer = new \DDTrace\OpenTracer1\Tracer(\DDTrace\GlobalTracer::get());
-// Registrar el contenedor del rastreador global
+// Register the global tracer wrapper
  \OpenTracing\GlobalTracer::set($otTracer);
 
-// En cualquier lugar del código de la aplicación
+// Anywhere in your application code
 $otTracer = \OpenTracing\GlobalTracer::get();
 $scope = $otTracer->startActiveSpan('http.request');
 $span = $scope->getSpan();
 $span->setTag('service.name', 'service_name');
 $span->setTag('resource.name', '/user/profile');
 $span->setTag('span.type', 'web');
-// ...Utilizar OpenTracing como se espera
+// ...Use OpenTracing as expected
 $scope->close();
 ```
 
@@ -204,13 +194,13 @@ Para obtener más información, consulta [Configuración de PHP y OpenTracing][1
 
 
 ```cpp
-// Crea un tramo (span) raíz para la solicitud actual.
+// Create a root span for the current request.
 auto root_span = tracer->StartSpan("web.request");
-// Establece un nombre de recurso para el tramo (span) raíz.
+// Set a resource name for the root span.
 root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 ```
 
-Para obtener más información, consulta [Configuración de C++ y la instrumentación personalizada][1].
+Para obtener más información, consulta [Configuración de C++ e Instrumentación personalizada][1].
 
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method
@@ -218,7 +208,7 @@ Para obtener más información, consulta [Configuración de C++ y la instrumenta
 {{< /programming-lang-wrapper >}}
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,0 +1,1 @@
+To use Observability Pipelines' Amazon S3 source, you must configure a SQS queue to receive your S3 bucket notifications.

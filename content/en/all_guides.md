@@ -18,11 +18,13 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/metrics/guide" >}}<i class="icon-metric" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Metrics{{< /nextlink >}}
 {{< nextlink href="/notebooks/guide" >}}<i class="icon-notebook" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Notebooks{{< /nextlink >}}
 {{< nextlink href="/monitors/guide" >}}<i class="icon-monitor" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Alerting{{< /nextlink >}}
+{{< nextlink href="/service_level_objectives/guide" >}}<i class="icon-slos" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;SLOs{{< /nextlink >}}
+{{< nextlink href="/events/guides" >}}<i class="icon-events" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Events{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Service Management:">}}
-{{< nextlink href="/service_management/service_level_objectives/guide" >}}<i class="icon-slos" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;SLOs{{< /nextlink >}}
-{{< nextlink href="/service_management/events/guides" >}}<i class="icon-events" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Events{{< /nextlink >}}
+{{< whatsnext desc="Incident Response:">}}
+{{< nextlink href="/incident_response/incident_management/guides/" >}}<i class="icon-incidents" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Incident Management{{< /nextlink >}}
+{{< nextlink href="/incident_response/on-call/guides/" >}}<i class="icon-on-call" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;On-Call{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Infrastructure:">}}
@@ -32,29 +34,34 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/network_monitoring/devices/guide" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Device Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Application Performance:">}}{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
+{{< whatsnext desc="Application Performance:">}}
+{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
 {{< nextlink href="/database_monitoring/guide" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Database Monitoring{{< /nextlink >}}
 {{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Continuous Integration:">}}
+{{< whatsnext desc="Software Delivery:">}}
 {{< nextlink href="/continuous_integration/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CI Visibility{{< /nextlink >}}
+{{< nextlink href="/tests/guides/" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Test Optimization{{< /nextlink >}}
+{{< nextlink href="/feature_flags/guide" >}}<i class="icon-ci" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Feature Flags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Security:">}}
 {{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
-{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security Management{{< /nextlink >}}
-{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Application Security Management{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security{{< /nextlink >}}
+{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;App and API Protection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Digital Experience:">}}
 {{< nextlink href="/synthetics/guide" >}}<i class="icon-synthetics" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Synthetic Monitoring{{< /nextlink >}}
+{{< nextlink href="/continuous_testing/guide" >}}<i class="icon-continuous-testing" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Continuous Testing{{< /nextlink >}}
 {{< nextlink href="/real_user_monitoring/guide" >}}<i class="icon-rum" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Real User Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Log Management:">}}
 {{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
 {{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
+{{< nextlink href="/cloudprem/guides/" >}}<i class="icon-upload-wui" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CloudPrem{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Administration:">}}

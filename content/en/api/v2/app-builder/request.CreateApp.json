@@ -1,0 +1,270 @@
+{
+  "data": {
+    "type": "appDefinitions",
+    "attributes": {
+      "rootInstanceName": "grid0",
+      "components": [
+        {
+          "name": "grid0",
+          "type": "grid",
+          "properties": {
+            "children": [
+              {
+                "type": "gridCell",
+                "name": "gridCell0",
+                "properties": {
+                  "children": [
+                    {
+                      "name": "text0",
+                      "type": "text",
+                      "properties": {
+                        "content": "# Cat Facts",
+                        "contentType": "markdown",
+                        "textAlign": "left",
+                        "verticalAlign": "top",
+                        "isVisible": true
+                      },
+                      "events": []
+                    }
+                  ],
+                  "isVisible": "true",
+                  "layout": {
+                    "default": {
+                      "x": 0,
+                      "y": 0,
+                      "width": 4,
+                      "height": 5
+                    }
+                  }
+                },
+                "events": []
+              },
+              {
+                "type": "gridCell",
+                "name": "gridCell2",
+                "properties": {
+                  "children": [
+                    {
+                      "name": "table0",
+                      "type": "table",
+                      "properties": {
+                        "data": "${fetchFacts?.outputs?.body?.data}",
+                        "columns": [
+                          {
+                            "dataPath": "fact",
+                            "header": "fact",
+                            "isHidden": false,
+                            "id": "0ae2ae9e-0280-4389-83c6-1c5949f7e674"
+                          },
+                          {
+                            "dataPath": "length",
+                            "header": "length",
+                            "isHidden": true,
+                            "id": "c9048611-0196-4a00-9366-1ef9e3ec0408"
+                          },
+                          {
+                            "id": "8fa9284b-7a58-4f13-9959-57b7d8a7fe8f",
+                            "dataPath": "Due Date",
+                            "header": "Unused Old Column",
+                            "disableSortBy": false,
+                            "formatter": {
+                              "type": "formatted_time",
+                              "format": "LARGE_WITHOUT_TIME"
+                            },
+                            "isDeleted": true
+                          }
+                        ],
+                        "summary": true,
+                        "pageSize": "${pageSize?.value}",
+                        "paginationType": "server_side",
+                        "isLoading": "${fetchFacts?.isLoading}",
+                        "rowButtons": [],
+                        "isWrappable": false,
+                        "isScrollable": "vertical",
+                        "isSubRowsEnabled": false,
+                        "globalFilter": false,
+                        "isVisible": true,
+                        "totalCount": "${fetchFacts?.outputs?.body?.total}"
+                      },
+                      "events": []
+                    }
+                  ],
+                  "isVisible": "true",
+                  "layout": {
+                    "default": {
+                      "x": 0,
+                      "y": 5,
+                      "width": 12,
+                      "height": 96
+                    }
+                  }
+                },
+                "events": []
+              },
+              {
+                "type": "gridCell",
+                "name": "gridCell1",
+                "properties": {
+                  "children": [
+                    {
+                      "name": "text1",
+                      "type": "text",
+                      "properties": {
+                        "content": "## Random Fact\n\n${randomFact?.outputs?.fact}",
+                        "contentType": "markdown",
+                        "textAlign": "left",
+                        "verticalAlign": "top",
+                        "isVisible": true
+                      },
+                      "events": []
+                    }
+                  ],
+                  "isVisible": "true",
+                  "layout": {
+                    "default": {
+                      "x": 0,
+                      "y": 101,
+                      "width": 12,
+                      "height": 16
+                    }
+                  }
+                },
+                "events": []
+              },
+              {
+                "type": "gridCell",
+                "name": "gridCell3",
+                "properties": {
+                  "children": [
+                    {
+                      "name": "button0",
+                      "type": "button",
+                      "properties": {
+                        "label": "Increase Page Size",
+                        "level": "default",
+                        "isPrimary": true,
+                        "isBorderless": false,
+                        "isLoading": false,
+                        "isDisabled": false,
+                        "isVisible": true,
+                        "iconLeft": "angleUp",
+                        "iconRight": ""
+                      },
+                      "events": [
+                        {
+                          "variableName": "pageSize",
+                          "value": "${pageSize?.value + 1}",
+                          "name": "click",
+                          "type": "setStateVariableValue"
+                        }
+                      ]
+                    }
+                  ],
+                  "isVisible": "true",
+                  "layout": {
+                    "default": {
+                      "x": 10,
+                      "y": 134,
+                      "width": 2,
+                      "height": 4
+                    }
+                  }
+                },
+                "events": []
+              },
+              {
+                "type": "gridCell",
+                "name": "gridCell4",
+                "properties": {
+                  "children": [
+                    {
+                      "name": "button1",
+                      "type": "button",
+                      "properties": {
+                        "label": "Decrease Page Size",
+                        "level": "default",
+                        "isPrimary": true,
+                        "isBorderless": false,
+                        "isLoading": false,
+                        "isDisabled": false,
+                        "isVisible": true,
+                        "iconLeft": "angleDown",
+                        "iconRight": ""
+                      },
+                      "events": [
+                        {
+                          "variableName": "pageSize",
+                          "value": "${pageSize?.value - 1}",
+                          "name": "click",
+                          "type": "setStateVariableValue"
+                        }
+                      ]
+                    }
+                  ],
+                  "isVisible": "true",
+                  "layout": {
+                    "default": {
+                      "x": 10,
+                      "y": 138,
+                      "width": 2,
+                      "height": 4
+                    }
+                  }
+                },
+                "events": []
+              }
+            ],
+            "backgroundColor": "default"
+          },
+          "events": []
+        }
+      ],
+      "queries": [
+        {
+          "id": "92ff0bb8-553b-4f31-87c7-ef5bd16d47d5",
+          "type": "action",
+          "name": "fetchFacts",
+          "events": [],
+          "properties": {
+            "spec": {
+              "fqn": "com.datadoghq.http.request",
+              "connectionId": "5e63f4a8-4ce6-47de-ba11-f6617c1d54f3",
+              "inputs": {
+                "verb": "GET",
+                "url": "https://catfact.ninja/facts",
+                "urlParams": [
+                  {
+                    "key": "limit",
+                    "value": "${pageSize.value.toString()}"
+                  },
+                  {
+                    "key": "page",
+                    "value": "${(table0.pageIndex + 1).toString()}"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "stateVariable",
+          "name": "pageSize",
+          "properties": {
+            "defaultValue": "${20}"
+          },
+          "id": "afd03c81-4075-4432-8618-ba09d52d2f2d"
+        },
+        {
+          "type": "dataTransform",
+          "name": "randomFact",
+          "properties": {
+            "outputs": "${(() => {const facts = fetchFacts.outputs.body.data\nreturn facts[Math.floor(Math.random()*facts.length)]\n})()}"
+          },
+          "id": "0fb22859-47dc-4137-9e41-7b67d04c525c"
+        }
+      ],
+      "name": "Example Cat Facts Viewer",
+      "description": "This is a slightly complicated example app that fetches and displays cat facts"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Monitor Alerts
+description: "Troubleshoot common monitor alerting issues including state mismatches, data verification, alert conditions, and notification problems."
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
   tag: "Guide"
@@ -12,7 +13,7 @@ further_reading:
   text: Prevent alerts from monitors that were in downtime
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
-  text: Enable preconfigured alerts with recommended monitors
+  text: Enable preconfigured alerts with monitor templates
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
   text: Monitor alerts and events with OpsGenie and Datadog
@@ -24,32 +25,41 @@ further_reading:
 ## Overview
 
 This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is valid. If you suspect that your monitor's evaluations are not accurately reflecting the underlying data, use this guide to inspect your monitor and troubleshoot the following:
-- [The monitor state or status is not matching up to the evaluation](#monitor-state-and-monitor-status)
-- [Verify that the data is present](#verify-the-presence-of-data)
-- [Alert configurations](#alert-conditions)
-- [Unwanted notifications](#notification-issues)
+- [Monitor state and status behavior](#monitor-state-and-status)
+- [Data availability and evaluation issues](#data-availability-and-evaluation-issues)
+- [Alert condition configuration](#alert-conditions)
+- [Monitor groups and retention](#monitor-groups-and-retention)
+- [Notification issues](#notification-issues)
 
-## Monitor state and monitor status
+## Monitor state and status
 
-While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes:
+While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status.
 
-#### Metrics are too sparse within a metric monitor's evaluation window
+### How status is tracked
 
-If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in the `OK` state remains `OK`, and likewise with a monitor in the `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
+For both monitor evaluations and state, status is tracked by group. For a multi alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev, host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope.
 
-#### Monitor state updates due to external conditions
+### When state doesn't match evaluation
 
 The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4].
 
-#### "No Data" status using Rollup function
+## Data availability and evaluation issues
 
-If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated. 
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the datapoints being pulled in by the metric query. `N/A` groups are not included in monitors but are visible in dashboard queries.
+
+### Sparse metrics
+
+If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in the `OK` state remains `OK`, and likewise with a monitor in the `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
+
+### "No Data" status with rollup functions
+
+If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 datapoints within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
 
 For most use cases, disable the "Require Full Window" setting unless your specific scenario demands complete data for accurate evaluation. For more information, see [Rollups in monitors][21].
 
-## Verify the presence of data
+### Cloud metric delays
 
-If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. `N/A` groups are not included in monitors but are visible in dashboard queries. 
+If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to help ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
 ## Alert conditions
 
@@ -57,17 +67,15 @@ Unexpected monitor behavior can sometimes be the result of misconfigured [alert 
 
 If using recovery thresholds, check the conditions listed in the [recovery thresholds guide][8] to see if the behavior is expected.
 
-## Monitor status and groups
-
-For both monitor evaluations and state, status is tracked by group.
-
-For a multi alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev, host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope.
-
-By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
+### New group delays
 
 If you anticipate creating new monitor groups within the scope of your multi alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you avoid alerts from the expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
 
-If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
+## Monitor groups and retention
+
+By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. This retention period affects how long monitor groups remain visible and continue to be evaluated after they stop reporting data.
+
+For detailed information about monitor group persistence, including how to handle renamed or decommissioned hosts that continue appearing in alerts, see [Monitor settings changes not taking effect][9].
 
 ## Notification issues
 
@@ -77,17 +85,16 @@ If your monitor is behaving as expected, but producing unwanted notifications, t
 - For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
 - To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with [conditional variables][16].
 
-### Absent notifications
+### Missing notifications
 
 If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
 
 - Check [email preferences][17] for the recipient and ensure that `Notification from monitor alerts` is checked.
 - Check the [event stream][18] for events with the string `Error delivering notification`.
 
-### Opsgenie multi-notification
+### Opsgenie multi-notifications
 
-If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie.
-Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
+If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie. Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
 
 ## Further Reading
 

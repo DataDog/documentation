@@ -42,7 +42,7 @@ draft: false
 git_integration_title: sonarqube
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 5.1.0
+integration_version: 5.3.0
 is_public: true
 manifest_version: 2.0.0
 name: sonarqube
@@ -131,30 +131,30 @@ init_config:
     collect_default_metrics: true
 instances:
 
-  # Instancia de API web
+  # Web API instance
   - is_jmx: false
     web_endpoint: http://localhost:9000
     auth_type: basic
-    username: <username>    # Definido en la IU Web
-    password: <password>    # Definido en la IU Web
-    default_tag: component  # Opcional
-    components:             # Obligatorio
+    username: <username>    # Defined in the Web UI
+    password: <password>    # Defined in the Web UI
+    default_tag: component  # Optional
+    components:             # Required
       my-project:
         tag: project_name
 
-  # Instancia de JMX web
+  # Web JMX instance
   - is_jmx: true
     host: localhost
-    port: 10443           # Consulta sonar.web.javaAdditionalOpts en el archivo sonar.properties de SonarQube
-    user: <username>      # Definido en el archivo sonar.properties de SonarQube
-    password: <password>  # Definido en el archivo sonar.properties de SonarQube
+    port: 10443           # See sonar.web.javaAdditionalOpts in SonarQube's sonar.properties file
+    user: <username>      # Defined in SonarQube's sonar.properties file
+    password: <password>  # Defined in SonarQube's sonar.properties file
 
-  # Instancia JMX de motor de cómputo
+  # Compute Engine JMX instance
   - is_jmx: true
     host: localhost
-    port: 10444           # Consulta sonar.ce.javaAdditionalOpts en el archivo sonar.properties de SonarQube
-    user: <username>      # Definido en el archivo sonar.properties de SonarQube
-    password: <password>  # Definido en el archivo de sonar.properties
+    port: 10444           # See sonar.ce.javaAdditionalOpts in SonarQube's sonar.properties file
+    user: <username>      # Defined in SonarQube's sonar.properties file
+    password: <password>  # Defined in SonarQube's sonar.properties file
 ```
 
 **Nota**: Una vez configurada la integración, haz que SonarQube escanee al menos un proyecto para enviar métricas a Datadog.
@@ -171,7 +171,7 @@ SonarQube expone un servidor de búsqueda, que puede ser monitorizado mediante u
 
 ```yaml
 init_config:
-  # La lista de métricas a recopilar por la integración.
+  # The list of metrics to be collected by the integration.
   config:
     - include:
       domain: SonarQube
@@ -183,12 +183,12 @@ init_config:
           alias: sonarqube.search_server.my_metric
           metric_type: gauge
 instances:
-  # Buscar instancia JMX de servidor
+  # Search Server JMX instance
   - is_jmx: true
     host: localhost
-    port: 10445           # Consulta sonar.search.javaAdditionalOpts en el archivo sonar.properties de SonarQube
-    user: <username>      # Definido en el archivo sonar.properties de SonarQube
-    password: <password>  # Definido en el archivo sonar.properties de SonarQube
+    port: 10445           # See sonar.search.javaAdditionalOpts in SonarQube's sonar.properties file
+    user: <username>      # Defined in SonarQube's sonar.properties file
+    password: <password>  # Defined in SonarQube's sonar.properties file
 ```
 
 {{< tabs >}}

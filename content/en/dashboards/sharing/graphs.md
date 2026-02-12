@@ -1,5 +1,6 @@
 ---
 title: Share Graphs
+description: Generate embed codes for individual graphs and manage sharing permissions with revocation and IP restrictions.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
@@ -29,6 +30,8 @@ To share a graph:
 1. Get the embed code with the **Generate embed code** button.
 
 {{< img src="dashboards/sharing/graph_share_tab.png" alt="Share tab in a graphing editor" style="width:95%;">}}
+
+All shared graphs are listed in the [Public Sharing Settings page][10]. You can also revoke individual shared graphs or disable all shared graphs from this page.
 
 ## Revoke
 
@@ -68,3 +71,4 @@ Datadog has a [dedicated API][4] allowing you to interact with your shared graph
 [7]: /api/latest/embeddable-graphs/#get-specific-embed
 [8]: /api/latest/embeddable-graphs/#enable-embed
 [9]: /api/latest/embeddable-graphs/#revoke-embed
+[10]: https://app.datadoghq.com/organization-settings/public-sharing

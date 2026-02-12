@@ -1,12 +1,15 @@
 ---
 aliases:
-- /serverless/troubleshooting/insights/
-- /serverless/insights/
-- /serverless/guide/insights
+- /es/serverless/troubleshooting/insights/
+- /es/serverless/insights/
+- /es/serverless/guide/insights
 further_reading:
 - link: https://www.datadoghq.com/blog/serverless-insights/
   tag: Blog
   text: Lee más sobre la información de las aplicaciones serverless
+- link: https://www.datadoghq.com/blog/identifying-deprecated-lambda-functions/
+  tag: Blog
+  text: Identificar funciones obsoletas de Lambda con Datadog
 title: Advertencias de las aplicaciones serverless
 ---
 
@@ -79,11 +82,11 @@ Al menos una invocación en el intervalo seleccionado caducó. Esto ocurre cuand
 
 Más del 10 % de las invocaciones en el intervalo seleccionado estuvieron limitadas. Las limitaciones se producen cuando las aplicaciones serverless de Lambda reciben altos niveles de tráfico sin la [simultaneidad][9] adecuada.
 
-**Solución:** comprueba las [métricas de simultaneidad de Lambda][10] y confirma si `aws.lambda.concurrent_executions.maximum` se está acercando al nivel de simultaneidad de tu cuenta de AWS. Si es así, considera configurar la simultaneidad reservada o solicita un aumento de la cuota de servicio a AWS. Ten en cuenta que esto puede verse reflejado en tu factura de AWS.
+**Solución:** Comprueba las [métricas de simultaneidad de Lambda][10] y confirma si `aws.lambda.concurrent_executions.maximum` se está acercando al nivel de simultaneidad de tu cuenta de AWS. Si es así, considera configurar la simultaneidad reservada o solicita un aumento de la cuota de servicio a AWS. Ten en cuenta que esto puede verse reflejado en tu factura de AWS.
 
 ### Duración prolongada del iterador
 
-El iterador de la función tenía una duración de más de dos horas. La duración del iterador mide la duración del último registro de cada lote de registros procesados en un flujo (stream). Cuando este valor aumenta, significa que tu función no puede procesar datos lo suficientemente rápido.
+La edad del iterador de la función era demasiado alta. La edad del iterador mide la edad del último registro de cada lote de registros procesados de un stream (flujo). Cuando este valor aumenta, significa que tu función no puede procesar datos lo suficientemente rápido.
 
 **Solución:** habilita el [rastreo distribuido][7] para aislar el motivo por el cual tu función recibe tantos datos. También puedes considerar aumentar el número de fragmentos y el tamaño de lotes en el flujo del que lee tu función.
 
@@ -97,9 +100,41 @@ Ninguna invocación en el intervalo seleccionado utilizó más del 10 % de la m
 
 Se detectaron intentos de ataque dirigidos a la aplicación serverless. 
 
-**Solución:** investiga los intentos de ataque en ASM haciendo clic en el botón **Security Signals** (Señales de seguridad) para determinar cómo responder. Si es necesaria una acción inmediata, puedes bloquear la IP del ataque en WAF a través de la [integración de flujos de trabajo][11].
+**Solución:** Investiga los intentos de ataque en AAP haciendo clic en el botón **Security Signals** (Señales de seguridad) para determinar cómo responder. Si es necesaria una acción inmediata, puedes bloquear la IP atacante en tu WAF a través de la [Integración de workflows / procesos (generic)][11].
 
-## Referencias adicionales
+### Provisión insuficiente
+
+La utilización de la CPU para esta función superó el 80 % de la media. Esto significa que tu función puede obtener un mayor rendimiento de los recursos adicionales de la CPU.
+
+**Solución:** Considera aumentar la cantidad de [memoria asignada][12] en tu función Lambda. Aumentar la cantidad de memoria escala los recursos disponibles de la CPU. Ten en cuenta que esto puede afectar tu factura de AWS.
+
+### Concurrencia provisionada sobreasignada
+
+La utilización de la concurrencia provisionada de la función fue inferior al 60 %. Según AWS, [el costo de la concurrencia provisionada se optimiza mejor cuando la utilización es sistemáticamente superior al 60 %][13].
+
+**Solución:** Considera la posibilidad de disminuir la cantidad de concurrencia provisionada configurada para tu función.
+
+### Tiempo de ejecución obsoleto
+
+El tiempo de ejecución de la función[ya no es compatible][14].
+
+**Solución:** Actualiza al último tiempo de ejecución para asegurarte de que esté al día con los últimos estándares de seguridad, rendimiento y fiabilidad.
+
+### Alcanzar la duración máxima
+
+Al menos una invocación en el intervalo de tiempo seleccionado se acercó al límite máximo de duración de 15 minutos.
+
+El [rastreo distribuido][7] puede ayudarte a localizar las llamadas lentas a la API en tu aplicación.
+
+**Solución:** Las funciones de Lambda que se acercan al límite máximo de tiempo de espera de 15 minutos corren el riesgo de ser canceladas por el tiempo de ejecución de Lambda. Esto podría dar lugar a respuestas lentas o fallidas a las solicitudes entrantes. Considera la posibilidad de mejorar el rendimiento de tu función de Lambda, utilizando lambdas más pequeñas en una función step (UI) / paso (generic) o moviendo tu carga de trabajo a un entorno con un tiempo de ejecución más largo como ECS Fargate.
+
+### Se eliminan las invocaciones recursivas
+
+Las invocaciones de esta función tienen un bucle recursivo, generalmente causado por la activación recursiva entre entidades AWS (por ejemplo, Lambda -> SQS -> Lambda). Cuando esto excede tu `maxReceiveCount` (en forma predeterminada, 16), entonces se añade a este métrica. Para obtener más información, consulta [Utilizar la detección de bucles recursivos Lambda para evitar bucles infinitos][15].
+
+**Solución:** Busca llamadas recursivas en tus entidades AWS relacionadas con esta función. Busca entidades relacionadas como [SQS, SNS y S3][16].
+
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -114,3 +149,8 @@ Se detectaron intentos de ataque dirigidos a la aplicación serverless.
 [9]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 [10]: /es/integrations/amazon_lambda/#metrics
 [11]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+[12]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+[13]: https://aws.amazon.com/blogs/compute/optimizing-your-aws-lambda-costs-part-1/
+[14]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+[15]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html
+[16]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html#invocation-recursion-supported

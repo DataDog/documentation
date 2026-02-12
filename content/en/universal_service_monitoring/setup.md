@@ -1,5 +1,6 @@
 ---
 title: Setting up Universal Service Monitoring
+description: "Configure Universal Service Monitoring with Datadog Agent across different platforms including Kubernetes, Docker, ECS, and Windows environments."
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
@@ -42,6 +43,52 @@ Additional protocols and traffic encryption methods are in <a href="/universal_s
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
+
+## How USM detects service names
+
+<div class="alert alert-warning">
+Universal Service Monitoring detects service names from environment variables that exist when a process starts. USM reads these values from the operating system: from <code>/proc/PID/environ</code> on Linux, or through system APIs on Windows.
+</div>
+
+USM recognizes the following environment variables:
+- `DD_SERVICE`: Explicitly sets the service name
+- `DD_ENV`: Sets the environment tag
+- `DD_VERSION`: Sets the version tag
+- `DD_TAGS`: Additional tags; can include the `service:name` tag
+
+### Key limitation: USM and programmatically-set environment variables for APM
+
+If you set environment variables programmatically **inside your application code** (such as `System.setProperty("dd.service", "my-service")` in Java, or `Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")` in .NET), these environment variables are **not** detected by USM, even though these values work for APM tracing instrumentation.
+
+This happens because USM runs in the Datadog Agent as a separate process and only sees the environment variables that were set when your process started. Conversely, APM instrumentation libraries run inside your application process and can read runtime environment changes.
+
+**To ensure USM detection, set environment variables before the application starts**:
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+```yaml
+environment:
+  - DD_SERVICE=my-service
+  - DD_ENV=production
+```
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+```yaml
+env:
+  - name: DD_SERVICE
+    value: "my-service"
+  - name: DD_ENV
+    value: "production"
+```
+{{% /tab %}}
+{{% tab "Shell" %}}
+```bash
+export DD_SERVICE=my-service
+export DD_ENV=production
+java -jar myapp.jar
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Enabling Universal Service Monitoring
 
@@ -339,7 +386,6 @@ docker run --cgroupns host \
 -v /etc/yum/vars:/host/etc/yum/vars:ro \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
--e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -751,6 +797,18 @@ service_monitoring_config:
   process_service_inference:
     enabled: true
 ```
+
+<div class="alert alert-warning">
+<strong>Important limitation for non-IIS Windows services:</strong> Universal Service Monitoring on Windows uses Event Tracing for Windows (ETW) through the <code>Microsoft-Windows-HttpService</code> provider for HTTPS traffic monitoring. This ETW provider is only available for IIS-based services. Non-IIS services (such as custom .NET applications, Node.js servers, Java servers, or other HTTP servers running on Windows) <strong>do not support HTTPS monitoring</strong> through USM. Only plain HTTP traffic can be monitored for non-IIS Windows services.
+</div>
+
+### IIS and non-IIS service support
+
+| Service type     | HTTP traffic monitoring | HTTPS traffic monitoring |
+| ---  | ----------- | ----------- |
+| IIS services     | Supported | Supported               |
+| Non-IIS services | Supported | **Not supported** |
+
    
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
@@ -793,7 +851,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
+Universal Service Monitoring is in Preview to monitor TLS encrypted traffic from services implemented in Golang.
 </div>
 
 <strong>Note</strong>:
@@ -842,7 +900,7 @@ agents:
 {{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
+Universal Service Monitoring is in Preview to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.

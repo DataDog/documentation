@@ -1,6 +1,6 @@
 アプリケーションが setuptools でパッケージ化されている場合
 
-1. [`dd-trace` パッケージ](https://github.com/DataDog/dd-trace-go)をインストールします。
+1. [`dd-trace` パッケージ](https://github.com/DataDog/dd-trace-py)をインストールします。
 1. 最初のインポートとして `setup.py` ファイルに `import ddtrace.sourcecode.setuptools_auto` を追加します。
 1. 環境変数 `DD_MAIN_PACKAGE` にプライマリ Python パッケージの名前を設定します。
 

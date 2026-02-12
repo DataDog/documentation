@@ -8,7 +8,7 @@ title: トレーサーデバッグログ
 
 ## 自動化されたデバッグログ収集
 
-<div class="alert alert-warning">自動化されたデバッグログは、Java、.NET、Node.js、Python でサポートされています。他の言語の場合は、代わりに<a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">手動でのデバッグログ収集</a>をご利用ください。</div>
+<div class="alert alert-danger">自動化されたデバッグログは、Java、.NET、Node.js、Python でサポートされています。他の言語の場合は、代わりに<a href="/tracing/troubleshooting/tracer_debug_logs/#manual-debug-log-collection">手動でのデバッグログ収集</a>をご利用ください。</div>
 
 フレアを使用すると、機密データを除去したうえで、必要なトラブルシューティング情報 (レーサーログを含む) を Datadog サポートチームに送信できます。これは、高い CPU 使用率やメモリ使用率、スパンの欠落などの問題をトラブルシューティングする際に有用です。
 
@@ -239,7 +239,7 @@ GlobalSettings.SetDebugEnabled(true);
 
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
-バージョン `2.19.0` 以降では、`DD_TRACE_LOGFILE_RETENTION_DAYS` 設定を使うことで、起動時に現在のロギングディレクトリからログファイルを削除するようにトレーサーを構成することができます。トレーサーは指定された日数より古いログファイルと同じ年齢のログファイルを削除します。デフォルト値は `31` です。
+バージョン `2.19.0` 以降では、`DD_TRACE_LOGFILE_RETENTION_DAYS` 設定を使うことで、起動時に現在のロギングディレクトリからログファイルを削除するようにトレーサーを構成することができます。トレーサーは指定された日数より古いログファイルと同じ年齢のログファイルを削除します。デフォルト値は `32` です。
 
 .NET Tracer の構成方法の詳細については、[構成][2]セクションを参照してください。
 

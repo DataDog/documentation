@@ -71,7 +71,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "avi_vantage" >}}
+{{< get-metrics-from-git "avi-vantage" >}}
 
 
 ### Événements

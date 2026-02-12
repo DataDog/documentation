@@ -1,5 +1,6 @@
 ---
 title: Monitoring Sparse Metrics
+description: "Configure monitors for sparse or infrequent metrics using interpolation, evaluation delays, and appropriate settings to avoid unexpected results."
 further_reading:
 - link: "/api/latest/monitors/#edit-a-monitor"
   tag: "Documentation"

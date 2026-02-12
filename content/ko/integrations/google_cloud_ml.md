@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-ml
+app_uuid: ed0cf686-2653-4082-bf00-1ad5d1dcd379
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.ml.training.cpu.utilization
+      metadata_path: metadata.csv
+      prefix: gcp.ml.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 195
+    source_type_name: Google Cloud ML
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - google cloud
@@ -7,6 +27,7 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: Google Cloud 기계 학습의 주요 메트릭을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_ml/
 draft: false
 further_reading:
@@ -16,17 +37,35 @@ further_reading:
 git_integration_title: google_cloud_ml
 has_logo: true
 integration_id: google-cloud-ml
-integration_title: Google Machine Learning
+integration_title: Google Cloud ML
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_ml
-public_title: Datadog-Google Machine Learning 통합
-short_description: Google Cloud 기계 학습의 주요 메트릭을 추적합니다.
+public_title: Google Cloud ML
+short_description: 어떤 규모나 유형의 데이터에도 적합한 머신 러닝 모델을 쉽게 구축하도록 도와주는 관리 서비스
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Category:AI/ML
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 어떤 규모나 유형의 데이터에도 적합한 머신 러닝 모델을 쉽게 구축하도록 도와주는 관리 서비스
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/
+  support: README.md#Support
+  title: Google Cloud ML
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Google Cloud 기계 학습은 모든 유형의 데이터에서 규모와 상관없이 동작하는 기계 학습 모델을 쉽게 구축할 수 있도록 도와드리는 관리형 서비스입니다.
@@ -56,7 +95,7 @@ Google Cloud 기계 학습 로그는 Google Cloud Logging으로 수집하여 클
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_ml" >}}
+{{< get-metrics-from-git "google-cloud-ml" >}}
 
 
 ### 이벤트

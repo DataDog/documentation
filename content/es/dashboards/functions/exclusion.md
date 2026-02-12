@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/graphing/functions/exclusion/
+description: Excluye los valores nulos y aplica un filtrado basado en umbrales utilizando
+  funciones de sujeción y corte en las métricas.
 title: Exclusión
 ---
 
@@ -8,7 +10,7 @@ title: Exclusión
 
 | Función         | Descripción                                                    | Ejemplo                                        |
 | ---------------- | -------------------------------------------------------------- | ---------------------------------------------- |
-| `exclude_null()` | Elimina los grupos con valores de etiqueta N/A de tu gráfica o lista principal. | `exclude_null(avg:system.load.1{*} by {host})` |
+| `exclude_null()` | Elimina los grupos con valores de etiqueta (tag) N/A de tu gráfica o lista principal. | `exclude_null(avg:system.load.1{*} by {host})` |
 
 Por ejemplo, supongamos que tienes una métrica con dos etiquetas: `account` y `region`. `account` tiene tres valores posibles (`prod`, `build` y `N/A`), mientras que `region` tiene cuatro valores posibles (`us-east-1`, `us-west-1`, `eu-central-1` y `N/A`).
 
@@ -23,6 +25,10 @@ Cuando grafiques este métrica como una serie temporal, tendrás 3 x 4 = 12�
 
 Añade un valor de umbral. `clamp_min()` establece todos los puntos de datos por debajo del umbral para que sean iguales a ese valor, mientras que `clamp_max()` limita los puntos de datos por encima del umbral.
 
+Nota: `clamp_min(values, threshold)` y `clamp_max(values, threshold)` definen cualquier `NaN` en valores al `threshold`.
+
+Para evitar este comportamiento, aplica el `default_zero()` antes de la función `clamp_min()`/`clamp_max()`.
+
 ## Corte
 
 | Función       | Descripción                                     | Ejemplo                                 |
@@ -34,7 +40,7 @@ Añade un valor de umbral. `cutoff_min()` reemplaza todos los valores de métric
 
 **Consejo**: Tanto para las funciones de sujeción como de corte, puede ser útil ver el valor de umbral que has elegido. Puedes [establecer un marcador horizontal][1] en Dashboards para indicar este valor.
 
-## Otras funciones
+## Otros funciones
 
 {{< whatsnext desc="Consulta las demás funciones disponibles:" >}}
 {{< nextlink href="/dashboards/functions/arithmetic" >}}Aritmética: realiza operaciones aritméticas en la métrica. {{< /nextlink >}}

@@ -92,7 +92,7 @@ Le check Exchange est inclus avec le package de l'[Agent Datadog][1] : vous n'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "exchange_server" >}}
+{{< get-metrics-from-git "exchange-server" >}}
 
 
 ### Événements

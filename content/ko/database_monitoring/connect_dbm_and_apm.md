@@ -13,7 +13,7 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 ## 시작 전 참고 사항
 
 지원되는 데이터베이스
-: Postgres, MySQL, SQL Server, Oracle
+: Postgres, MySQL, SQL Server, Oracle, MongoDB
 
 지원되는 에이전트 버전
 : 7.46+
@@ -28,58 +28,67 @@ title: 데이터베이스 모니터링과 트레이스 상호 연결
 - `service` 모드는 서비스 이름을 전송하여 어느 서비스가 데이터베이스 부하에 기여하는지 이해할 수 있도록 해줍니다. 이는 Oracle 애플리케이션에서만 지원되는 모드입니다.
 - `disabled` 모드는 전파를 비활성화하므로 애플리케이션에서 아무 정보도 전송하지 않습니다.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL 서버 |  Oracle   |
-|:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * |    {{< X >}} ** |           |
-| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL 서버 |  Oracle   |  MongoDB   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|:----------:|
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} | {{< X >}}  |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} | {{< X >}}  |
 
 \* Aurora MySQL의 전체 전파 모드에는 버전 3이 필요합니다.
 
-\*\* SQL Server에서는 Java와 .NET 트레이서만 지원합니다.
-
 **지원되는 애플리케이션 트레이서 및 드라이버**
 
-| 언어                                 | 라이브러리 또는 프레임워크   | Postgres  |   MySQL   |     SQL 서버      |       Oracle        |
-|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
-|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
-|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} ** | `service` 모드만 |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
-|                                          | [pg][8]                | {{< X >}} |           |                     |                     |
-|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
-|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
-|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
-|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
-|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
-|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
-|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
-|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
-|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
-|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
-|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
-|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
-|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
-|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
-|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |
-|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
-|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
+| 언어                                 | 라이브러리 또는 프레임워크   | Postgres  |   MySQL   |     SQL 서버      |       Oracle        |       MongoDB        |
+|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|:--------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |                      |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |                      |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` 모드만 | `service` 모드만 |                      |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |                      |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |                      |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |                      |
+|                                          | [pg][8]                | {{< X >}} |           |                     |                     |                      |
+|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |                      |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |                      |
+|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |                      |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |                      |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |                      |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |                      |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |                      |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |                      |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |                      |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |                      |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |                      |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |                      |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |                      |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |                      |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |                      |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |                      |
+|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |                      |
+|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |                      |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |                      |
+|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |                      |
+|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |                      |
+|                                          | [mongodb][33]          |           |           |                     |                     | {{< X >}} ****       |
 
 \* [CommandType.StoredProcedure][25] 지원 안 됨
 
 \*\* 자바/.NET에 대한 전체 모드 SQL Server:
+
+<div class="alert alert-danger">해당 애플리케이션이 계측을 위해 <code>context_info</code>를 사용하면 APM 트레이서가 이를 덮어씁니다.</div>
+
   - 클라이언트가 쿼리를 발행하면 계측에서 `SET context_info` 명령을 실행하며, 데이터베이스를 추가 왕복합니다.
-  - 애플리케이션에서 `context_info`를 사용해 애플리케이션을 계측하는 경우, APM 트레이서가 재정의합니다.
   - 요구 사항:
     - 에이전트 버전 7.55.0 이상
     - Java 트레이서 버전 1.39.0 이상
     - .NET 트레이서 버전 3.3 이상
+
+\*\*\* Java용 풀 모드 Oracle:
+  - 이 계측은 `V$SESSION.ACTION`를 재정의합니다.
+  - 사전 요건: Java 트레이서 1.45 이상
+
+\*\*\*\* Service/Full mode MongoDB for Node.js:
+  - 전제 조건:
+    - Node.js 트레이서 5.37.0 이상
 
 ## 설정
 최상의 사용자 경험을 위해 다음 환경 변수가 애플리케이션에 설정되어 있는지 확인하세요.
@@ -90,35 +99,44 @@ DD_ENV=(application environment)
 DD_VERSION=(application version)
 ```
 
+Datadog은 Agent 버전 `7.63` 이상에 대해 난독화 모드를 `obfuscate_and_normalize`로 설정할 것을 권장합니다. APM Agent 구성 파일의 `apm_config` 섹션에 다음 파라미터를 추가합니다.
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
+```
+
 {{< tabs >}}
 {{% tab "Go" %}}
 
 앱 종속성을 업데이트하여 [dd-trace-go@v1.44.0][1] 이상을 포함합니다.
-```
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0
+```shell
+go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
+# go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 코드를 업데이트하여 `contrib/database/sql` 패키지를 내보내세요.
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 ```
 
 다음 메서드 중 하나를 사용해 데이터베이스 모니터링 전파를 활성화합니다.
-1. 환경 변수:
+- 환경 변수:
    `DD_DBM_PROPAGATION_MODE=full`
 
-2. 드라이버 등록 동안 코드 사용하기:
+- 드라이버 등록 동안 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull), sqltrace.WithService("my-db-service"))
    ```
 
-3. `sqltrace.Open` 코드 사용하기:
+- `sqltrace.Open` 코드 사용하기:
    ```go
-   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithServiceName("my-db-service"))
+   sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithService("my-db-service"))
 
    db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable", sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
    if err != nil {
@@ -130,22 +148,24 @@ import (
 ```go
 import (
     "database/sql"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-    sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
 )
 
 func main() {
     // 첫 번째 단계는 드라이버 등록 시 DBM 전파 모드를 설정하는 것입니다. 이는 또한
-    // sqltrace에서도 가능하니 참고하세요. 열기를 통해 기능에 대한 보다 세분화된 통제를 확인하세요.
+    // sqltrace에서도 가능하니 참고하세요. 열면 기능을 더 세부적으로 제어할 수 있습니다.
     sqltrace.Register("postgres", &pq.Driver{}, sqltrace.WithDBMPropagation(tracer.DBMPropagationModeFull))
 
-    // 열기 호출을 진행합니다.
+    // 이후에 열기 호출을 진행합니다.
     db, err := sqltrace.Open("postgres", "postgres://pqgotest:password@localhost/pqgotest?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
 
-    // 그 뒤 계속하여 평소처럼 데이터베이스 /sql 패키지와 트레이싱을 함께 사용합니다.
+    // 이후 일반 작업할 때와 마찬가지로 추적과 함께 database/sql 패키지를 사용합니다.
     rows, err := db.Query("SELECT name FROM users WHERE age=?", 27)
     if err != nil {
         log.Fatal(err)
@@ -194,7 +214,15 @@ public class Application {
 }
 ```
 
-**참고**: 준비된 문장은 `full` 모드에서 지원되지 않으며, 준비된 문장을 사용하는 모든 JDBC API 호출은 자동으로 `service` 모드로 다운그레이드됩니다. 대부분의 자바(Java) SQL 라이브러리는 기본적으로 준비된 문장을 사용하므로, **대부분의** 자바(Java) 애플리케이션은 `service` 모드만 사용할 수 있습니다.
+**트레이서 버전 1.44 이상**:
+다음 방법 중 **하나**를 사용해 준비한 Postgres 추적 명령문을 활성화합니다.
+- 시스템 속성 `dd.dbm.trace_prepared_statements=true` 설정
+- 환경 변수 `export DD_DBM_TRACE_PREPARED_STATEMENTS=true` 설정
+
+**참고**: 준비한 계측 문을 사용하면 `Application` 속성을 재정의하고 데이터베이스로 왕복 이동하게 됩니다. 이렇게 왕복 이동을 하더라도 지연 시간에 주는 영향은 미미합니다.
+
+**트레이서 버전 1.44 미만**:
+ 준비한 문은 Postgres와 MySQL의 `full` 모드에서 지원되지 않고, 준비한 문을 사용하는 JDBC API 호출 전체가 `service` 모드로 자동 다운그레이드됩니다. Java SQL 라이브러리 대부분에서 기본적으로 준비한 문을 사용하므로, **대부분**의 Java 애플리케이션에서는 `service` 모드만 사용할 수 있습니다.
 
 [1]: /ko/tracing/trace_collection/dd_libraries/java/
 [2]: /ko/tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -292,7 +320,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능이 .NET 서비스에 대해 활성화되려면 자동 계측이 필요합니다.
 </div>
 
@@ -312,7 +340,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능을 사용하려면 PHP 서비스에서 트레이서 기능이 활성화되어 있어야 합니다.
 </div>
 
@@ -414,7 +442,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="서비스 페이지에서 APM 서비스가 종속된 다운스트림 데이터베이스 호스트 시각화.">}}
 
-애플리케이션 성능 모니터링(APM) 기존 서비스 페이지에서 데이터베이스 모니터링으로 식별한 서비스의 다운스트림 데이터베이스 종속성을 바로 볼 수 있습니다. 오류 요인으로 인해 비정상적 로드가 존재하는 호스트를 빠르게 찾아낼 수 있습니다. 서비스 페이지를 보려면 [서비스 카탈로그][26]에서 해당 서비스를 클릭하여 세부 정보 패널을 연 다음 패널에서 **서비스 페이지 보기**를 클릭합니다.
+특정 서비스에 대한 APM 페이지에서 데이터베이스 모니터링에서 식별한 서비스의 직접 다운스트림 데이터베이스 종속성을 확인합니다. 가까운 곳에서 발생하는 노이즈로 인해 호스트의 부하가 불균형하게 발생하는지 빠르게 파악할 수 있습니다. 서비스 페이지를 보려면 [Software Catalog][26]에서 서비스를 클릭하여 세부 정보 패널을 연 다음 패널에서 **View Service Page**를 클릭하세요.
 
 ### 실행 계획을 이용해 트레이스에 있는 데이터베이스 쿼리에서 잠재적 최적화 방법 파악
 
@@ -458,3 +486,4 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
 [32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace
+[33]: https://github.com/mongodb/node-mongodb-native

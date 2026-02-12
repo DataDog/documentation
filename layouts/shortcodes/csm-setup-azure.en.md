@@ -2,27 +2,30 @@
 
 If you haven't already, set up the [Microsoft Azure integration][1].
 
-**Note**: To access the full set of Azure compliance rules for CSM Misconfigurations, you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the Microsoft Graph API.
+**Note**: To access the full set of Azure compliance rules—including [Identity Risks][5]—you must enable the following permissions for the [Microsoft Graph API][2].
 
-### Enable CSM for your Azure subscriptions
+- `AuditLog.Read.All`
+- `AdministrativeUnit.Read.All`
+- `Application.Read.All`
+- `Directory.Read.All`
+- `Domain.Read.All`
+- `Group.Read.All`
+- `Policy.Read.All`
+- `PrivilegedAssignmentSchedule.Read.AzureADGroup`
+- `PrivilegedEligibilitySchedule.Read.AzureADGroup`
+- `RoleManagement.Read.All`
+- `User.Read.All`
 
-Use one of the following methods to enable CSM for your Azure subscriptions:
+### Enable Cloud Security for your Azure subscriptions
 
-#### CSM Setup page
-
-1. On the [**Cloud Security Management Setup**][2] page, click **Cloud Integrations**.
+1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 2. Expand the **Azure** section.
 3. To enable resource scanning for a subscription, switch the **Resource Scanning** toggle to the on position.
-4. To create a filter that excludes certain resources from being evaluated by CSM, click the **Plus** (+) icon under **Resource Evaluation Filters (Optional)**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
+4. To create a filter that excludes certain resources from being evaluated by Cloud Security, click the **Plus** (+) icon under **Resource Evaluation Filters (Optional)**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
 5. Click **Done**.
 
-#### Azure integration page
-
-1. On the [**Azure Integration**][3] page, select an Azure app registration.
-2. Under **Resource Collection**, select **Enable Cloud Security Management**.
-3. Click **Submit Changes**.
-
 [1]: https://docs.datadoghq.com/integrations/azure
-[2]: https://app.datadoghq.com/security/configuration/csm/setup
-[3]: https://app.datadoghq.com/integrations/azure
+[2]: https://docs.datadoghq.com/integrations/guide/azure-graph-api-permissions/
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: /security/cloud_security_management/guide/resource_evaluation_filters
+[5]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks

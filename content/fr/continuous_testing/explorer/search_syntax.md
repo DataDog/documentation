@@ -1,12 +1,12 @@
 ---
 aliases:
 - /fr/synthetics/explorer/search_syntax
-description: Découvrez comment créer une requête de recherche dans l'Explorateur de
-  surveillance Synthetic et de tests en continu.
+description: Découvrir comment créer une requête de recherche dans l'Explorateur de
+  surveillance Synthetic et de tests en continu
 further_reading:
 - link: /continuous_testing/explorer
   tag: Documentation
-  text: En savoir plus sur l'explorateur de surveillance Synthetic et de tests en
+  text: En savoir plus sur l'Explorateur de surveillance Synthetic et de tests en
     continu
 title: Syntaxe de recherche
 ---

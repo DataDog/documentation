@@ -5,18 +5,21 @@ aliases:
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
-  text: "Getting started with CSM Misconfigurations"
+  text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
+- link: "https://www.datadoghq.com/blog/cloud-security-playbook/"
+  tag: "Blog"
+  text: "Securing Datadog's cloud infrastructure: Our playbook and methodology"
 ---
 
-With custom frameworks, you can define and measure compliance against your own cloud security baseline. Custom frameworks are listed on the Cloud Security Management (CSM) [Compliance][6] page, have their own real-time report and [security posture score][7], and are queryable within explorers and dashboards.
+With custom frameworks, you can define and measure compliance against your own cloud security baseline. Custom frameworks are listed on the Cloud Security [Compliance][6] page, have their own real-time report and [security posture score][7], and are queryable within explorers and dashboards.
 
-1. On the [CSM Compliance page][6], click **Create Framework**.
+1. On the [Cloud Security Compliance page][6], click **Create Framework**.
 1. Enter the following details:
     - **Framework name**: The name of your framework. Can include characters, numbers, and spaces. Must be at least five characters long.
     - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods. This value is used to query the framework in the explorer or in dashboards.
@@ -26,14 +29,14 @@ With custom frameworks, you can define and measure compliance against your own c
 
 Next, add requirements to the framework:
 
-<div class="alert alert-warning">You must add at least one requirement, control, and rule before saving the custom framework.</div>
+<div class="alert alert-danger">You must add at least one requirement, control, and rule before saving the custom framework.</div>
 
 1. Click **Add Requirement**.
 1. Enter the following details:
     - **Requirement**: A requirement acts as a control family, enabling you to add controls and associate rules with each control. Can include lowercase letters, numbers, dashes, underscores, and periods.
     - **Control**: A control represents the criteria that the requirement must meet and includes the rules associated with these criteria. Multiple rules can be included in a control. Can include lowercase letters, numbers, dashes, underscores, and periods.
 1. Click **Add Rules**.
-1. Select the cloud or infrastructure rules you want to assign to the control, then click **Add to Control**.
+1. Select the cloud or infrastructure configuration rules you want to assign to the control, then click **Add to Control**.
 1. To add additional items:
     - For additional rules, click **Add Rules**.
     - For another control, click **Add Control**.

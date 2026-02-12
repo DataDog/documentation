@@ -1,0 +1,8 @@
+{{- $resources_list := $.Site.Data.related_logs_aws_resources | default slice -}}
+{{- with $resources_list -}}
+<ul>
+{{- range $res := $resources_list  -}}
+<li>{{- $res -}}</li>
+{{- end -}}
+</ul>
+{{- end -}}

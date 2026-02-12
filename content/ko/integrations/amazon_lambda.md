@@ -7,6 +7,7 @@ categories:
 - cloud
 - log collection
 - tracing
+custom_kind: 통합
 dependencies: []
 description: 람다 실행 시간, 오류 호출 개수 등을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -27,7 +28,6 @@ integration_id: amazon-lambda
 integration_title: AWS 람다
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_lambda
 public_title: Datadog-AWS 람다 통합
@@ -36,7 +36,7 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-<div class="alert alert-warning">이 페이지는 Amazon 클라우드와치(CloudWatch)에서 AWS 람다 메트릭 수집을 위한 설명서로 제한됩니다. 실시간으로 람다 함수에서 직접 텔레메트리를 수집하기 위한 <a href="/serverless">Datadog 서버리스 설명서</a>를 참조하세요 .</div>
+<div class="alert alert-danger">이 페이지는 Amazon 클라우드와치(CloudWatch)에서 AWS 람다 메트릭 수집을 위한 설명서로 제한됩니다. 실시간으로 람다 함수에서 직접 텔레메트리를 수집하기 위한 <a href="/serverless">Datadog 서버리스 설명서</a>를 참조하세요 .</div>
 
 ## 개요
 
@@ -69,7 +69,7 @@ AWS 람다는 이벤트에 대응하기 위한 코드를 실행하고 자동으�
 
 ## 수집한 데이터
 
-<div class="alert alert-warning">AWS 람다 확장명을 사용하면 AWS에서 보고하는 <em>기간</em> 메트릭은 람다 함수가 소비하는 <em>post_runtime_extensions_duration</em> <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">보고하여 함수 반응을 반환한 뒤 활동을 수행합니다. </a>. 함수의 실제 성능을 모니터링하려면 <em>duration - post_runtime_extensions_duration</em> 또는 <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog 개선 메트릭</a> <em>aws.lambda.enhanced.runtime_duration</em>을 사용하세요.</div>
+<div class="alert alert-danger">AWS 람다 확장명을 사용하면 AWS에서 보고하는 <em>기간</em> 메트릭은 람다 함수가 소비하는 <em>post_runtime_extensions_duration</em> <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">보고하여 함수 반응을 반환한 뒤 활동을 수행합니다. </a>. 함수의 실제 성능을 모니터링하려면 <em>duration - post_runtime_extensions_duration</em> 또는 <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog 개선 메트릭</a> <em>aws.lambda.enhanced.runtime_duration</em>을 사용하세요.</div>
 
 AWS에서 검색한 각 메트릭에는 AWS 콘솔에 표시하는 동일한 태그가 할당되어 있습니다. 함수 이름, 보안-그룹 등을 포함하나 이에 제한되지 않습니다.
 
@@ -81,7 +81,7 @@ AWS에서 검색한 각 메트릭에는 AWS 콘솔에 표시하는 동일한 태
 
 AWS 람다 함수는 [Datadog 서버리스 배포 추적[9]이 활성화된 경우 AWS CloudTrail에서 람다 배포 이벤트를 수집합니다.
 
-### 서비스 검사
+### 서비스 점검
 
 AWS 람다 함수에는 서비스 점검이 포함되어 있지 않습니다.
 
@@ -124,19 +124,19 @@ AWS 람다 통합은 즉시 사용 가능한 모니터링 기능을 제공해 �
 
 
 
-[1]: /ko/integrations/amazon_web_services/
+[1]: https://app.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: /ko/integrations/amazon_web_services/#installation
+[3]: https://app.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
 [5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
-[7]: /ko/serverless
+[7]: https://app.datadoghq.com/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[9]: /ko/serverless/deployment_tracking
-[10]: /ko/serverless/enhanced_lambda_metrics/
-[11]: /ko/serverless/custom_metrics/#custom-metrics
-[12]: /ko/serverless/forwarder/
-[13]: /ko/serverless/distributed_tracing/
+[9]: https://app.datadoghq.com/serverless/deployment_tracking
+[10]: https://app.datadoghq.com/serverless/enhanced_lambda_metrics/
+[11]: https://app.datadoghq.com/serverless/custom_metrics/#custom-metrics
+[12]: https://app.datadoghq.com/serverless/forwarder/
+[13]: https://app.datadoghq.com/serverless/distributed_tracing/
 [14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
 [15]: https://app.datadoghq.com/monitors/recommended
-[16]: /ko/help/
+[16]: https://app.datadoghq.com/help/

@@ -8,12 +8,8 @@ further_reading:
   text: "Learn about Deployment Visibility"
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
-  text: "Learn how to query and visualize deployment executions"
+  text: "Learn how to query and visualize deployments"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
 CD Visibility for CI provider deployments is in Preview. If you're interested in this feature, complete the form to request access.
@@ -26,7 +22,7 @@ CD Visibility for CI provider deployments is in Preview. If you're interested in
 If you are executing deployments using a CI provider, you can monitor your deployments with Deployment Visibility. Ensure the following requirements are met:
 
 1. You are using [Pipeline Visibility][1] to monitor your CI pipelines.
-2. Your CI provider supports the **Custom tags and measures at runtime** feature, which allows you to add [user-defined text and numerical tags][2] to pipelines and jobs in Pipeline Visibility. 
+2. Your CI provider supports the **Custom tags and measures at runtime** feature, which allows you to add [user-defined text and numerical tags][2] to pipelines and jobs in Pipeline Visibility.
 3. You are executing deployments in a CI job (or a [related level][9] in your CI provider). The concept of a CI job may vary depending on your provider. For more information about how Datadog defines a CI job, see the [Terminology section][9].
 
 ## Setup
@@ -58,8 +54,8 @@ Use `--no-fail` (default: `false`) to prevent the deployment command from failin
 
 If you are using GitHub Actions as your CI provider, see the [section below][11] for additional considerations.
 
-Once you have added the command to a CI job, the [**Deployments** page][5] and the [Deployment Executions Explorer][6] populates with data after pipelines are executed.
-For more information, see [Search and Manage Deployments][7] and the [CD Visibility Explorer documentation][8].
+Once you have added the command to a CI job, the [**Deployments** page][5] and the [Deployment Executions page][6] populates with data after pipelines are executed.
+For more information, see [Explore CD Visibility Deployments][8].
 
 ### Examples
 
@@ -95,9 +91,14 @@ datadog-ci deployment mark --env prod --tags team:backend --tags reason:schedule
 
 ## Mark GitHub Actions jobs as deployments
 
-To mark GitHub jobs as deployments, `datadog-ci CLI` version `2.29.0` or higher is required.
-If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][12]),
-the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
+Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+
+<details>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+
+If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][12]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
 1. If the job name is changed using the [name property][13]:
     ```yaml
     jobs:
@@ -122,6 +123,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci deployment mark ...
     ```
+</details>
 
 ## Further reading
 

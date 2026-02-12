@@ -6,27 +6,23 @@
     (dict "href" "/continuous_integration/pipelines/circleci/" "src" "integrations_logos/circleci.png" "alt" "circleci orb")
     (dict "href" "/continuous_integration/pipelines/codefresh/" "src" "integrations_logos/codefresh_small.svg" "alt" "codefresh")
     (dict "href" "/continuous_integration/pipelines/github/" "src" "integrations_logos/github_small.svg" "alt" "github actions")
-    (dict "href" "/continuous_integration/pipelines/gitlab/" "src" "integrations_logos/gitlab_small.svg" "alt" "gitlab")
+    (dict "href" "/continuous_integration/pipelines/gitlab/" "src" "integrations_logos/gitlab-logo-100.svg" "alt" "gitlab")
     (dict "href" "/continuous_integration/pipelines/jenkins/" "src" "integrations_logos/jenkins.png" "alt" "jenkins")
     (dict "href" "/continuous_integration/pipelines/teamcity/" "src" "integrations_logos/teamcity_small.svg" "alt" "teamcity")
+    (dict "href" "/continuous_integration/pipelines/custom/" "src" "integrations_logos/docs_other_ci_providers.png" "alt" "other ci providers")
 }}
 
 <div class="ci-visibility-providers">
   <div class="container cards-dd">
-    <div class="row justify-content-center">
+    <div class="row row-cols-md-4 g-2 g-xl-3 justify-content-center">
       {{ range $index, $provider := $providers }}
-        <div class="col-md-4">
+        <div class="col">
           <a class="card h-100" href="{{ $provider.href }}">
             <div class="card-body text-center py-2 px-1 d-flex align-items-center justify-content-center">
               {{ partial "img.html" (dict "root" $root "src" $provider.src "class" "img-fluid" "alt" $provider.alt "width" "150") }}
             </div>
           </a>
         </div>
-        {{ if eq (mod (add $index 1) 3) 0 }}
-          </div>
-          <br>
-          <div class="row justify-content-center">
-        {{ end }}
       {{ end }}
     </div>
   </div>

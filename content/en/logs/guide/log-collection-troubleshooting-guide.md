@@ -1,6 +1,5 @@
 ---
 title: Log Collection Troubleshooting Guide
-
 aliases:
   - /logs/faq/log-collection-troubleshooting-guide
 further_reading:
@@ -23,37 +22,6 @@ There are a number of common issues that can get in the way when [sending new lo
 ## Restart the Agent
 
 Changes in the configuration of the `datadog-agent` won't be taken into account until you have [restarted the Agent][3].
-
-## Outbound traffic on port 10516 is blocked
-
-The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
-
-You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-For GnuTLS, run the following command:
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-And then by sending a log like the following:
-
-```text
-<API_KEY> this is a test message
-```
-
-- If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
-
-```yaml
-logs_config:
-  force_use_http: true
-```
-
-See the [HTTPS log forwarding section][4] for more information.
 
 ## Check the status of the Agent
 
@@ -222,6 +190,11 @@ To fix the error, give the Datadog Agent user read and execute permissions to th
 When collecting logs from Journald, make sure that the Datadog Agent user is added in the systemd group as shown in the [Journald integration][7].
 
 **Note**: Journald sends an empty payload if the file permissions are incorrect. Accordingly, it is not possible to raise or send an explicit error message in this case.
+
+## Batch limitation in Kinesis Firehose
+
+Datadog has an intake limit of 65,536 events per batch and recommends setting the Kinesis buffer size to 2 MiB. If your system exceeds this limit, some logs may be dropped. To reduce the number of events per batch, consider lowering the buffer size.
+
 
 ## Configuration issues
 

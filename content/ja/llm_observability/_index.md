@@ -14,10 +14,6 @@ further_reading:
 title: LLM Observability
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択されたサイト ({{< region-param key="dd_site_name" >}}) では、現時点で LLM Observability は利用できません。</div>
-{{< /site-region >}}
-
 ## 概要
 
 LLM Observability を使用すると、チャットボットなどの LLM 対応アプリケーションを監視、トラブルシューティング、および評価できます。これにより、問題の根本原因を特定し、運用パフォーマンスを監視し、LLM アプリケーションの品質・プライバシー・安全性を評価することが可能です。
@@ -67,8 +63,6 @@ LLM Observability とのインテグレーション活用
 詳細については、[自動インスツルメンテーションのドキュメント][8]を参照してください。
 
 ## 準備はいいですか？
-
-<div class="alert alert-warning">LLM Observability を使用することで、Datadog が LLM Observability の提供および改善を目的としてお客様企業のデータを OpenAI LLC と共有することを承認したものとみなされます。OpenAI は、お客様のデータをトレーニングまたはチューニング目的で使用しません。ご質問や、OpenAI に依存する機能のオプトアウトを希望される場合は、アカウント担当者までお問い合わせください。</div>
 
 [セットアップドキュメント][5]を参照して LLM アプリケーションへのインスツルメンテーション手順を確認するか、[LLM アプリケーションのトレースガイド][6]に従って [LLM Observability SDK for Python][3] を使用してトレースを生成してください。
 

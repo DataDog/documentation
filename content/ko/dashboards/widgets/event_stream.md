@@ -6,4 +6,4 @@ private: true
 title: 이벤트 스트림 위젯
 ---
 
-<div class="alert alert-warning">이벤트 스트림 위젯은 <a href="https://docs.datadoghq.com/dashboards/widgets/list/">목록 위젯</a>을 통해 지원됩니다.</div>
+<div class="alert alert-danger">이벤트 스트림 위젯은 <a href="https://docs.datadoghq.com/dashboards/widgets/list/">목록 위젯</a>을 통해 지원됩니다.</div>

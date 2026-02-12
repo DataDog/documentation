@@ -1,7 +1,7 @@
 ---
 aliases:
-- /monitors/service_level_objectives/event/
-- /monitors/service_level_objectives/metric/
+- /ko/monitors/service_level_objectives/event/
+- /ko/monitors/service_level_objectives/metric/
 description: 서비스 수준 목표 정의를 위한 메트릭 사용
 further_reading:
 - link: /metrics/

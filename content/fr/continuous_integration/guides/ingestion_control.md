@@ -4,19 +4,14 @@ description: Découvrez comment définir une ou plusieurs conditions permettant 
 further_reading:
 - link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
   tag: Blog
-  text: Simplifiez vos tests CI à l'aide de la fonctionnalité Intelligent Test Runner
-    de Datadog
+  text: Optimiser vos tests CI avec l'analyse de l'impact des tests Datadog
 - link: /continuous_integration/pipelines
   tag: Documentation
   text: En savoir plus sur Pipeline Visibility
 title: Définir les paramètres d'ingestion pour CI Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-## Présentation
+## Section Overview
 
 Les filtres d'exclusion permettent de contrôler précisément votre budget de CI Visibility en vous laissant définir une ou plusieurs conditions pour que Datadog ne traite pas certains événements.
 

@@ -46,12 +46,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
-integration_title: ElasticSearch
-integration_version: 8.0.1
+integration_title: Elasticsearch
+integration_version: 8.2.0
 is_public: true
 manifest_version: 2.0.0
 name: elastic
-public_title: ElasticSearch
+public_title: Elasticsearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
 - linux
@@ -79,13 +79,13 @@ tile:
   - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
   support: README.md#Support
-  title: ElasticSearch
+  title: Elasticsearch
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Elastic search ダッシュボード][1]
+![Elasticsearch ダッシュボード][1]
 
 ## 概要
 
@@ -121,6 +121,16 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
      ## fetch statistics from the nodes and information about the cluster health.
      #
      - url: http://localhost:9200
+
+      ## @param username - string - optional
+      ## The username to use if services are behind basic or digest auth.
+      #
+      # username: <USERNAME>
+
+      ## @param password - string - optional
+      ## The password to use if services are behind basic or NTLM auth.
+      #
+      # password: <PASSWORD>
    ```
 
    **注**:
@@ -145,7 +155,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
       - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[OpenSearch サービスリクエストの作成と署名][4]を参照してください。
       - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
       - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。
-      - Elastic Search のセキュリティ機能を有効にしている場合、API を使用して Elastic Search のインデックスを呼び出す際に、`monitor` または `manage` 権限を使用することができます。
+      - Elasticsearch でセキュリティ機能を有効にしている場合、API を使用して Elasticsearch インデックスに対する呼び出しを行う際に、`monitor` または `manage` の権限を使用できます。
       - 作成したロールに以下のプロパティを含めます。
         ```json
         name = "datadog"
@@ -166,9 +176,21 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ###### カスタムクエリ
 
-ElasticSearch とのインテグレーションでは、`custom_queries` 構成オプションを使用することで、カスタムクエリによるカスタムメトリクスの収集が可能です。
+Elasticsearch インテグレーションでは、`custom_queries` 設定オプションを使用して、カスタム クエリによるカスタム メトリクスの収集が可能です。カスタム クエリのエンドポイントは、複数のメトリクスとタグを収集できます。
 
-**注:** カスタムクエリを実行する際は、ElasticSearch のインスタンスが変更されないよう、読み取り専用アカウントを使用してください。
+各カスタム クエリには、次のパラメーターがあります:
+
+- `endpoint` (必須): クエリを送信する Elasticsearch API のエンドポイント。
+- `data_path` (必須): メトリクスの直前までの JSON パス (メトリクス自体は含まない)。ワイルドカードは使用できません。例: 親のサーキット ブレーカーのサイズをクエリし、完全なパスが `breakers.parent.estimated_size_in_bytes` の場合、`data_path` は `breakers.parent` です。
+- `columns` (必須): JSON クエリから収集するデータを表すリスト。このリストの各アイテムには次の内容が含まれます:
+   - `value_path` (必須): `data_path` からメトリクスまでの JSON パス。このパスには、文字列キーやリスト インデックスを含めることができます。例: 親のサーキット ブレーカーのサイズをクエリし、完全なパスが `breakers.parent.estimated_size_in_bytes` の場合、`value_path` は `estimated_size_in_bytes` です。
+   - `name` (必須): Datadog に送信される完全なメトリクス名。`type` を `tag` に設定した場合、このクエリで収集されるすべてのメトリクスにこの名前のタグが付与されます。
+   - `type` (任意): 送信されるデータのタイプを指定します。可能な値: `gauge`, `monotonic_count`, `rate`, `tag`。デフォルトは `gauge` です。
+- `payload` (任意): 指定した場合、GET リクエストは POST リクエストに変わります。ペイロードを伴うカスタム クエリを作成する際は、YAML フォーマットを使用し、読み取り専用ユーザーを使用してください。
+
+**注:** カスタム クエリを実行する際は、Elasticsearch インスタンスが変更されないように、読み取り専用アカウントを使用してください。
+
+例:
 
 ```yaml
 custom_queries:
@@ -204,12 +226,13 @@ custom_queries:
 
 `value_path: foo.bar.1` は値 `result1` を返します。
 
+
 ##### トレースの収集
 
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
 1. [Datadog でトレースの収集を有効にします][9]。
-2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][10]。
+2. [Elasticsearch にリクエストを送信するアプリケーションを計装する][10]。
 
 ##### ログ収集
 
@@ -527,6 +550,7 @@ Agent コンテナで必要な環境変数
 - `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
 - `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
+- `cat_allocation_stats` は **elasticsearch.disk.\*** メトリクスを送信します。
 
 ### メトリクス
 {{< get-metrics-from-git "elastic" >}}

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/php/
+- /es/tracing/profiler/enabling/php/
 code_lang: php
 code_lang_weight: 70
 further_reading:
@@ -26,7 +26,7 @@ Para obtener un resumen de las versiones mínimas y recomendadas del tiempo de e
 
 Datadog Profiler requiere al menos PHP 7.1, en Linux de 64 bits.
 
-Las compilaciones ZTS de PHP son compatibles desde la versión 0.99+ de `dd-trace-php`, mientras que las compilaciones de depuración de PHP **no** son compatibles.
+Las compilaciones ZTS de PHP son compatibles desde la versión 0.99 o posterior de `dd-trace-php`, mientras que las compilaciones de depuración de PHP **no** son compatibles.
 
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
@@ -52,21 +52,21 @@ apk add libgcc
 {{% /tab %}}
 {{< /tabs >}}
 
-Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la biblioteca `dd-trace-php`:
+Las siguientes funciones de generación de perfiles están disponibles en las siguientes versiones mínimas de la librería `dd-trace-php`:
 
 |      Función              | Versión requerida de `dd-trace-php`           |
 |---------------------------|------------------------------------------|
-| [Hotspots de código][12]       | 0.71+                                    |
-| [Perfiles de endpoint][13]  | 0.79.0+                                  |
-| [Cronología][15]            | 0.98.0+ (fase beta desde 0.89.0+)             |
+| [Hotspots de código][12]       | v0.71 o posterior                                    |
+| [Perfiles de endpoint][13]  | v0.79.0 o posterior                                  |
+| [Cronología][15]            | v0.98.0 o posterior            |
 
-Continuous Profiler no es compatible con las plataformas serverless, como AWS Lambda.
+Continuous Profiler no es compatible con algunas plataformas serverless, como AWS Lambda.
 
 ## Instalación
 
 Para empezar a crear perfiles de aplicaciones:
 
-1. Asegúrate de que Datadog Agent v6+ está instalado y en funcionamiento. Datadog recomienda utilizar [Datadog Agent v7+][2].
+1. Asegúrate de que el Datadog Agent v6 o posterior está instalado y en funcionamiento. Datadog recomienda utilizar el [Datadog Agent v7 o posterior][2].
 
 2. Descarga el script `datadog-setup.php` de la [página de versiones de GitHub][3]. La versión 0.69.0 es la primera versión del rastreador que incluye este instalador.
 

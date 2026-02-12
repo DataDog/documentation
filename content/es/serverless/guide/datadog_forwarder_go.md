@@ -3,7 +3,7 @@ title: Instrumentación de aplicaciones serverless de Go mediante el Datadog For
 ---
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/go">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes que la funcionalidad de Lambda lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 
@@ -11,7 +11,7 @@ Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverles
 
 Si todavía no lo hiciste:
 
-- Instala la [integración de AWS][1]. De esta forma, Datadog podrá ingerir las métricas de Lambda desde AWS. 
+- Instala la [integración de AWS][1]. De esta forma, Datadog podrá ingerir las métricas de Lambda desde AWS.
 - Instala la [función de Lambda del Datadog Forwarder][2], necesaria para ingerir las trazas (traces), las métricas mejoradas, las métricas personalizadas y los logs de AWS Lambda.
 
 Una vez que tengas instalada la [integración de AWS][1] y el [Datadog Forwarder][2], sigue estos pasos para instrumentar tu aplicación de modo que envíe métricas, logs y trazas a Datadog.
@@ -23,7 +23,7 @@ Una vez que tengas instalada la [integración de AWS][1] y el [Datadog Forwarder
 Ejecuta el siguiente comando para instalar la [biblioteca Lambda de Datadog][3] de forma local:
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### Instrumentar
@@ -38,12 +38,12 @@ Sigue estos pasos para instrumentar la función:
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
-3. Envuelve el controlador de tu función de Lambda con la envoltura de la biblioteca Lambda de Datadog.
+3. Envuelve el controlador de tu función de Lambda con la envoltura de la librería Lambda de Datadog.
 
     ```go
     func main() {
@@ -63,7 +63,7 @@ Sigue estos pasos para instrumentar la función:
       // Trace an HTTP request
       req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
       client := http.Client{}
-      client = *httptrace.WrapClient(&client)
+      client = httptrace.WrapClient(&client)
       client.Do(req)
 
       // Connect your Lambda logs and traces
@@ -101,7 +101,7 @@ package main
 
 import (
   "github.com/aws/aws-lambda-go/lambda"
-  "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
 )
 
 func main() {

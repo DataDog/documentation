@@ -1,11 +1,15 @@
 ---
 title: Managing Multiple-Organization Accounts
+description: Manage multiple child organizations from a parent account with separate billing, usage tracking, and access control for managed service providers.
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
   - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
   - /account_management/multi_organisations
 further_reading:
+- link: "https://docs.datadoghq.com/account_management/multi_organization/"
+  tag: "Blog"
+  text: "Best practices for managing Datadog organizations at scale"
 - link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
@@ -60,20 +64,10 @@ Onboarding a new sub-organization with a set of baseline dashboards and monitors
 The custom sub-domain feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
 
 If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
-{{% site-region region="us,us3,us5,ap1" %}}
-For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
 
-**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`. {{% /site-region %}}
+For example, the URL **https:{{< region-param key=dd_full_site >}}/event/event?id=1** is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to **https://org-a.{{< region-param key=dd_site >}}/event/event?id=1** which would automatically switch the user's context to Organization A and display the correct page.
 
-{{% site-region region="eu" %}}
-For example, the URL `https://app.datadoghq.eu/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.eu/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
-
-**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.eu/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.eu/account/settings`. {{% /site-region %}}
-
-{{% site-region region="gov" %}}
-For example, the URL `https://app.ddog-gov.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.ddog-gov.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
-
-**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.ddog-gov.com/account/settings` becomes `https://**<custom_sub-domain_name>**.ddog-gov.com/account/settings`. {{% /site-region %}}
+**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to **https:{{< region-param key=dd_full_site >}}/account/settings** becomes **https://<custom_sub-domain_name>.{{< region-param key=dd_site >}}/account/settings**.
 
 ## Set up SAML
 

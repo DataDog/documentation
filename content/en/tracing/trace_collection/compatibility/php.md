@@ -48,6 +48,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 
 | PHP Version    | Support level        | Package version |
 |:---------------|:---------------------|:----------------|
+| 8.4.x          | General Availability | > `1.5.0+`     |
 | 8.3.x          | General Availability | > `0.93.0+`     |
 | 8.2.x          | General Availability | > `0.82.0+`     |
 | 8.1.x          | General Availability | > `0.66.0+`     |
@@ -100,7 +101,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 | Module         | Versions                                | Support Type                | Instrumentation level           |
 |:---------------|:----------------------------------------|:----------------------------|:--------------------------------|
-| CakePHP        | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| CakePHP        | 2.x, 3.x, 4.x, 5.x                      | All supported PHP versions  | Framework-level instrumentation |
 | CodeIgniter    | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
 | CodeIgniter    | 3.x                                     | All supported PHP versions  | Generic web tracing             |
 | Drupal         |                                         | All supported PHP versions  | Framework-level instrumentation |
@@ -132,7 +133,7 @@ Tracing from the CLI SAPI is enabled by default. To selectively disable tracing 
 
 | Module          | Versions            | Support Type               |
 |:----------------|:--------------------|:---------------------------|
-| CakePHP Console | 2.x                 | All supported PHP versions |
+| CakePHP Console | 2.x, 3.x            | All supported PHP versions |
 | Laravel Artisan | 5.x, 8.x, 9.x, 10.x | All supported PHP versions |
 | Symfony CLI     | 4.x, 5.x, 6.x, 7.x  | All supported PHP versions |
 

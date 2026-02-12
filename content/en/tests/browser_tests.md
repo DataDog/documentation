@@ -9,14 +9,10 @@ further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"
-- link: "/real_user_monitoring/browser"
+- link: "/real_user_monitoring/application_monitoring/browser"
   tag: "Documentation"
   text: "Learn about RUM Browser Monitoring"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -42,13 +38,19 @@ RUM integration is supported for Cypress browser tests and Selenium-driven brows
 * `selenium-ruby` >= 4.0.0, `datadog-ci` >= 1.0.0.beta6
 * `browser-sdk` >= 5.15.0
 
+#### Playwright
+
+* `playwright` >= 1.38.0
+* `dd-trace-js` >= 5.46.0
+* `browser-sdk` >= 5.15.0
+
 <blockquote class="alert alert-info">
 From Browser SDK v5.0.0, enable the `allowUntrustedEvents` initialization parameter during the tests to correctly capture clicks.
 </blockquote>
 
 ## Connect browser tests and RUM
 
-If you use Cypress or Selenium to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
+If you use Cypress, Selenium, or Playwright to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
 A **Browser Sessions** tab appears in the Test Optimization test details side panel.
 
@@ -63,5 +65,5 @@ The RUM session has all the data that [RUM normally collects][3] so you can debu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/setup/
-[2]: /real_user_monitoring/browser/
-[3]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/browser/
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/

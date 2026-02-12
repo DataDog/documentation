@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a GitLab Pipeline
+title: GitLab Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -14,39 +14,48 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
-[GitLab][19] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling you to deploy applications quickly and securely.
+[GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
 
-Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
+Set up CI Visibility for GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
 ### Compatibility
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| [Running pipelines][25] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [Partial retries][20] | Partial pipelines | View partially retried pipeline executions. |
-| [Manual steps][21] | Manual steps | View manually triggered pipelines. |
-| [Queue time][22] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
+| [Manual steps][20] | Manual steps | View manually triggered pipelines. |
+| [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
 | Parameters | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
 | [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
-| [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
-| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
-| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines. |
+| [Approval wait time][22] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+| [Execution time][23] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
+| [Custom spans][25] | Custom spans | Configure custom spans for your pipelines. |
 
 The following GitLab versions are supported:
 
 - GitLab.com (SaaS)
 - GitLab >= 14.1 (self-hosted)
 - GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitLab:
+
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| Pipeline                   | Pipeline |
+| Stage                      | Stage    |
+| Job                        | Job      |
+| _Not available in Datadog_ | Script   |
 
 ## Configure the Datadog integration
 
@@ -170,7 +179,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][103] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-danger">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
+<div class="alert alert-warning">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
 
 
 Fill in the integration configuration settings:
@@ -214,7 +223,7 @@ You can test the integration with the **Test settings** button (only available w
 
 {{% tab "GitLab &lt; 13.7" %}}
 
-<div class="alert alert-warning">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
+<div class="alert alert-danger">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
 For older versions of GitLab, you can use [webhooks][101] to send pipeline data to Datadog.
 
@@ -253,42 +262,73 @@ If you are using self-hosted GitLab runners, you can correlate jobs with the inf
 
 Datadog infrastructure correlation is possible using different methods:
 
-#### Tagging runners with hostname
-
-The GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while [registering a new runner][6]. As a result, this method is only available when the runner is directly running the job.
+{{< tabs >}}
+{{% tab "Non autoscaling executors" %}}
+The GitLab runner must have a tag in the form `host:<hostname>`. Tags can be added while [registering a new runner][1]. As a result, this method is only available when the runner is directly running the job.
 
 This excludes executors that are autoscaling the infrastructure in order to run the job (such as the Kubernetes, Docker Autoscaler, or Instance executors) as it is not possible to add tags dynamically for those runners.
 
 For existing runners:
 
-{{< tabs >}}
-{{% tab "GitLab &gt;&equals; 15.8" %}}
-Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
-{{% /tab %}}
+- GitLab >= 15.8: Add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 
-{{% tab "GitLab &lt; 15.8" %}}
-Add tags by updating the runner's `config.toml`. Or add tags
-through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
-{{% /tab %}}
-{{< /tabs >}}
+- GitLab < 15.8: Add tags by updating the runner's `config.toml`. Or add tags through the UI by going to **Settings > CI/CD > Runners** and editing the appropriate runner.
 
 After these steps, CI Visibility adds the hostname to each job. To see the metrics, click on a job span in the trace view. In the drawer, a new tab named **Infrastructure** appears which contains the host metrics.
 
-#### Instance and Docker Autoscaler executors
+[1]: https://docs.gitlab.com/runner/register/
+{{% /tab %}}
 
-CI Visibility also supports Infrastructure metrics for "Instance" and "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][18].
+{{% tab "Docker Autoscaler" %}}
+CI Visibility supports Infrastructure metrics for "Docker Autoscaler" executors through log-based correlation. To enable this, make sure GitLab job logs are indexed so Datadog can link jobs to hosts, and that the logs include messages in the form `Instance <hostname> connected`. GitLab job logs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][2] filters. Users also need [log read access][3] to see the Infrastructure data in this scenario. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
 
-#### Other executors
+[1]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[2]: /logs/indexes/
+[3]: /logs/guide/logs-rbac/
+{{% /tab %}}
 
-CI Visibility does not support Infrastructure metrics for other executors such as the Kubernetes executor.
+{{% tab "Instance" %}}
+CI Visibility supports Infrastructure metrics for "Instance" executors through log-based correlation. To enable this, make sure GitLab job logs are indexed so Datadog can link jobs to hosts, and that the logs include messages in the form `Instance <hostname> connected`. GitLab job logs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][2] filters. Users also need [log read access][3] to see the Infrastructure information in this scenario. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
+
+[1]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[2]: /logs/indexes/
+[3]: /logs/guide/logs-rbac/
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+CI Visibility supports Infrastructure metrics for the Kubernetes executor. For this, it is necessary to have the Datadog Agent monitoring the Kubernetes Gitlab infrastructure. See [Install the Datadog Agent on Kubernetes][1] to install the Datadog Agent in a Kubernetes cluster.
+
+Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, see [Datadog Agent configuration template][2] and adjust the variable `min_collection_interval` to be less than 15 seconds.
+
+[1]: /containers/kubernetes/installation/?tab=datadogoperator
+[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+{{% /tab %}}
+
+{{% tab "Other executors" %}}
+CI Visibility does not support Infrastructure metrics for other executors.
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### View error messages for pipeline failures
-
-Error messages are supported for GitLab versions 15.2.0 and above.
 
 For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
+
+#### CI jobs failure analysis
+
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+
+For a full explanation, see the guide on [using CI jobs failure analysis][28].
+
+#### Errors provided by GitLab
+
+Error messages are supported for GitLab versions 15.2.0 and above.
+
+The error information provided by GitLab is stored in `error.provider_message` and `error.provider_domain` tags.
 
 The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed` error message and an `unknown` error domain.
 
@@ -344,7 +384,7 @@ To enable collection of job logs:
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -354,7 +394,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -366,13 +406,13 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][29]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
 
 For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
 
 ## View partial and downstream pipelines
 
-You can use the following filters to customize your search query in the [CI Visibility Explorer][27].
+You can use the following filters to customize your search query in the [CI Visibility Explorer][26].
 
 {{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
@@ -390,7 +430,7 @@ You can also apply these filters using the facet panel on the left hand side of 
 
 Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][28].
+The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][27].
 
 ## Further reading
 
@@ -401,7 +441,7 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [3]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.gitlab.com/runner/register/
+[6]: /logs/guide/best-practices-for-log-management/
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /logs/
@@ -413,15 +453,16 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
 [16]: /account_management/teams/
 [17]: /logs/log_configuration/processors/
-[18]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
-[19]: https://about.gitlab.com/
-[20]: /glossary/#partial-retry
-[21]: /glossary/#manual-step
-[22]: /glossary/#queue-time
-[23]: /glossary/#approval-wait-time
-[24]: /glossary/#pipeline-execution-time
-[25]: /glossary/#running-pipeline
-[26]: /glossary/#custom-span
-[27]: /continuous_integration/explorer
-[28]: /continuous_integration/search/#search-for-pipelines
-[29]: /logs/guide/best-practices-for-log-management/
+[18]: https://about.gitlab.com/
+[19]: /glossary/#partial-retry
+[20]: /glossary/#manual-step
+[21]: /glossary/#queue-time
+[22]: /glossary/#approval-wait-time
+[23]: /glossary/#pipeline-execution-time
+[24]: /glossary/#running-pipeline
+[25]: /glossary/#custom-span
+[26]: /continuous_integration/explorer
+[27]: /continuous_integration/search/#search-for-pipelines
+[28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments

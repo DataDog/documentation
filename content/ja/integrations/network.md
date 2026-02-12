@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/network/README.md
 display_on_public_website: true
@@ -29,7 +29,7 @@ draft: false
 git_integration_title: ネットワーク
 integration_id: システム
 integration_title: Network
-integration_version: 5.1.0
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: ネットワーク

@@ -102,6 +102,7 @@ import (
 func deltaSelector(kind metric.InstrumentKind) metricdata.Temporality {
     switch kind {
     case metric.InstrumentKindCounter,
+    metric.InstrumentKindGauge,
         metric.InstrumentKindHistogram,
         metric.InstrumentKindObservableGauge,
         metric.InstrumentKindObservableCounter:

@@ -1,0 +1,34 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Example-On-Call-updated",
+      "resolve_page_on_policy_end": false,
+      "retries": 0,
+      "steps": [
+        {
+          "assignment": "default",
+          "escalate_after_seconds": 3600,
+          "id": "00000000-aba1-0000-0000-000000000000",
+          "targets": [
+            {
+              "id": "string",
+              "type": "users"
+            }
+          ]
+        }
+      ]
+    },
+    "id": "ab000000-0000-0000-0000-000000000000",
+    "relationships": {
+      "teams": {
+        "data": [
+          {
+            "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
+            "type": "teams"
+          }
+        ]
+      }
+    },
+    "type": "policies"
+  }
+}

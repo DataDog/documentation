@@ -1,5 +1,6 @@
 ---
 title: RUM Performance Overview Dashboards
+description: "Visualize application performance with dashboards covering Core Web Vitals, loading times, resource performance, and mobile metrics."
 aliases:
 - '/real_user_monitoring/dashboards/performance_overview_dashboard/'
 - '/real_user_monitoring/dashboards/resources_dashboard'
@@ -20,7 +21,7 @@ further_reading:
 The web app performance dashboard offers a bird's-eye view of RUM web applications. It shows:
 
 - **Core web vitals**: 
-  For all views, three browser performance metrics are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance metrics, such as Load Time, are also available.
+  For all views, additional browser KPIs are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
 - **XHR and Fetch requests and resources**:
   For all views, identify bottlenecks when your application loads.
 - **Long tasks** : Events that block the browser's main thread for more than 50ms.
@@ -35,7 +36,7 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 The mobile app performance dashboard gives an overview of RUM mobile applications. It shows:
 
 - **Mobile vitals**:
-  For all screens, four mobile performance metrics are highlighted: slow renders, CPU ticks per seconds, frozen frames, and memory usage. Other performance metrics, such as crash-free sessions, are also available.
+  For all screens, additional mobile KPIs are highlighted: slow renders, CPU ticks per seconds, frozen frames, and memory usage. Other performance telemetry, such as crash-free sessions, is also available.
 - **Resources analysis**:
   For all screens, identify bottlenecks when your application requests content.
 - **Crashes and errors**:
@@ -67,9 +68,9 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/ios/data_collected/
 [3]: /real_user_monitoring/android/data_collected/
 [4]: /real_user_monitoring/reactnative/data_collected/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
+[5]: /real_user_monitoring/application_monitoring/flutter/data_collected/
 [6]: /data_security/real_user_monitoring/

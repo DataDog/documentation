@@ -34,19 +34,32 @@ Los tests UDP pueden ejecutarse tanto desde [localizaciones gestionadas](#select
 
 ## Configuración
 
-Cuando decidas crear un test `UDP`, define la solicitud de tu test.
+Puedes crear un test utilizando una de las siguientes opciones:
 
-### Definición de la solicitud
+   - **Crea un test a partir de una plantilla**:
 
-1. Especifica el **Host** y el **Puerto** para ejecutar tu test.
-2. Introduce la cadena que quieres enviar en tu test.
-3. Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test (opcional).
-4. **Pon un nombre** a tu test UDP.
-5. Añade **Etiquetas** (tags) `env` así como cualquier otra etiqueta a tu test UDP. Luego, puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la [página de monitorización y tests continuos Synthetic][3].
+     1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor. 
+     2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Define Request** (Definir solicitud), en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
+     3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API de Synthetics" video="true" >}}
 
-{{< img src="synthetics/api_tests/udp_test_config.png" alt="Definir la solicitud UDP" style="width:90%;" >}}
+  - **Crea un test desde cero**:
 
-Haz clic en **URL del test** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
+    1. Para crear un test desde cero, haz clic en la plantilla **+ Start from scratch** (+ Empezar desde cero) y selecciona el tipo de solicitud `UDP`.
+    1. Especifica el **Host** y el **Puerto** para ejecutar tu test.
+    1. Introduce la cadena que quieres enviar en tu test.
+    1. Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test (opcional).
+    1. **Pon un nombre** a tu test UDP.
+    1. Añade **etiquetas** de entorno así como cualquier otra etiqueta a tu test UDP. A continuación, puedes utilizar estas etiquetas para filtrar a través de tus tests de Synthetic en la [página de monitorización de Synthetic y tests continuos][3]. 
+    1. Haz clic en **Test Host* (Probar host) para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.<br /><br>
+
+       {{< img src="synthetics/api_tests/udp_test_config_2.png" alt="Definir test de UDP" style="width:90%;" >}}
+
+    8. Haz clic en **Create Test** (Crear test) para enviar tu test de API.
+
+### Fragmentos
+
+{{% synthetics-api-tests-snippets %}}
 
 ### Definición de aserciones
 
@@ -63,15 +76,15 @@ Selecciona la vista previa de la respuesta directamente o haz clic en **Nueva as
 
 Para aplicar una lógica `OR` en una aserción, utiliza los comparadores `matches regex` o `does not match regex` para definir una expresión regular con varios valores esperados para el mismo tipo de aserción, como `(0|100)`. Se considera que el resultado del test tiene éxito si el valor de respuesta de la cadena o de la aserción de la cabecera es 0 o 100.
 
-Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud, dentro del límite de tiempo de espera establecido por el worker de Synthetics.
+Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
 
-Si un test contiene una afirmación en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparece un error `Assertions on the body/response cannot be run beyond this limit`.
+Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
 
 ### Seleccionar localizaciones
 
 Selecciona las **Localizaciones** desde donde ejecutar tu test UDP. Los tests UDP pueden ejecutarse desde localizaciones gestionadas y también [privadas][1], en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### Indicar la frecuencia del test
 
@@ -85,7 +98,7 @@ Los tests UDP se pueden ejecutar:
 
 {{% synthetics-variables %}}
 
-### Uso de variables
+### Usar variables
 
 Puedes utilizar las [variables globales definidas en la página **Parámetros**][7] en la URL y las aserciones de tus tests UDP.
 
@@ -108,7 +121,7 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 `TIMEOUT`
 : La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60 segundos).
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60s).
   Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
 
@@ -120,11 +133,7 @@ Si estás utilizando la [función de rol personalizado][10], añade tu usuario a
 
 ### Restringir el acceso
 
-La restricción del acceso está disponible para clientes que utilizan [roles personalizados][11] en sus cuentas.
-
-Puedes restringir el acceso a un test UDP en función de los roles de tu organización. Al crear un test UDP, elige qué roles (además de tu usuario) pueden leer y escribir tu test.
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Definir permisos para tu test" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## Referencias adicionales
 
@@ -140,4 +149,3 @@ Puedes restringir el acceso a un test UDP en función de los roles de tu organiz
 [8]: /es/synthetics/guide/synthetic-test-monitors
 [9]: /es/account_management/rbac/
 [10]: /es/account_management/rbac#custom-roles
-[11]: /es/account_management/rbac/#create-a-custom-role

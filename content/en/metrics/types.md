@@ -14,6 +14,9 @@ further_reading:
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Learn more about DogStatsD'
+    - link: '/metrics/units'
+      tag: 'Documentation'
+      text: 'Metrics Units'
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
@@ -178,7 +181,7 @@ The Agent submits the last reported number, in this case `71.5`, as the GAUGE me
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
+For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a 10-second flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
 
 | Metric Name                                    | Value  | Datadog In-App Type |
 | ---------------------------------------------- | ------ | ------------------- |
@@ -205,7 +208,7 @@ Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distrib
 
 Like other metric types, such as GAUGE or HISTOGRAM, the DISTRIBUTION metric type has the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
 
-Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics. If you were to add percentile aggregations to your distribution metric in-app, the following five additional aggregations are available for query:
+Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics from the metric's [details sidepanel][2]. If you were to add percentile aggregations to your distribution metric in-app, the following five additional aggregations are available for query:
 
 | Metric Name                              | Value | Datadog In-app Type |
 | ---------------------------------------- | ----- | ------------------- |
@@ -221,10 +224,10 @@ That is, for a distribution metric with added percentile aggregations during a g
 
 This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics without Limits™][1].
 
-**Note**: The exclusion of tags with `!` is not accepted with this feature.
-
+**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 [1]: /metrics/metrics-without-limits/
+[2]: /metrics/summary/#metric-details-sidepanel
 {{% /tab %}}
 {{< /tabs >}}
 

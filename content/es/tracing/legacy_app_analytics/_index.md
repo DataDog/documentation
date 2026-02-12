@@ -3,22 +3,25 @@ aliases:
 - /es/tracing/visualization/search/
 - /es/tracing/trace_search_and_analytics/
 - /es/tracing/advanced_usage/
+description: Documentación de las funciones obsoletas de App Analytics con información
+  de configuración para configuraciones legacy y orientación para la migración a nuevos
+  controles de ingesta.
 title: Aplicación Analytics
 ---
 
-<div class="alert alert-danger">
-Esta página describe características obsoletas con información de configuración relevante para aplicaciones Analytics heredadas, útiles para solucionar problemas o para modificar algunas configuraciones antiguas. Para tener un control total sobre tus trazas (traces), utiliza <a href="/tracing/trace_pipeline">controles de consumo y filtros de retención</a>.
+<div class="alert alert-warning">
+Esta página describe funciones obsoletas con información de configuración relevante para App Analytics heredado, útil para solucionar problemas o para modificar algunas configuraciones antiguas. Para tener un control total sobre tus trazas (traces), en su lugar utiliza <a href="/tracing/trace_pipeline">controles de ingesta y filtros de retención</a>.
 </div>
 
-## Migración a nuevas opciones de configuración 
+##  Migrar a las nuevas opciones de configuración
 
-Ve a la [página de control del consumo][1] para ver servicios con configuraciones heredadas. Estas se marcan con el estado `legacy Setup`.
+Ve a la [página de control del consumo][1] para ver servicios con configuraciones heredadas. Estas se marcan con el estado `Legacy Setup`.
 
-Para migrar a las nuevas opciones de configuración, elimina todas las [opciones de configuración](#app-analytics-setup) de la aplicación Analytics heredadas de los servicios marcados con `legacy Setup`. A continuación, implementa el Datadog Agent y los [mecanismos de muestreo][2] de las bibliotecas de rastreo para enviar trazas.
+Para migrar a las nuevas opciones de configuración, elimina todas las [opciones de configuración](#app-analytics-setup) de App Analytics heredadas de los servicios marcados con `Legacy Setup`. A continuación, implementa el Datadog Agent y los [mecanismos de muestreo][2] de las bibliotecas de rastreo para enviar trazas.
 
-## Configuración de la aplicación Analytics
+## Configuración de App Analytics
 
-Las opciones de configuración de la aplicación Analytics se encuentran en las bibliotecas de rastreo y en el Datadog Agent. En las bibliotecas, los tramos (spans) Analytics de tus servicios se generan [automáticamente](#automatic-configuration) o [manualmente](#custom-instrumentation).
+Las opciones de configuración de App Analytics se encuentran en las bibliotecas de rastreo y en el Datadog Agent. En las bibliotecas, los tramos (spans) Analytics de tus servicios se generan [automáticamente](#automatic-configuration) o [manualmente](#custom-instrumentation).
 
 ### En bibliotecas de rastreo
 
@@ -27,15 +30,15 @@ Las opciones de configuración de la aplicación Analytics se encuentran en las 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
 
-La aplicación Analytics está disponible a partir de la versión 0.25.0 del cliente de rastreo Java. Puede habilitarse globalmente para todas las integraciones de **servidores web** con un parámetro de configuración en el cliente de rastreo:
+App Analytics está disponible a partir de la versión 0.25.0 del cliente de rastreo Java. Puede habilitarse globalmente para todas las integraciones de **servidores web** con un parámetro de configuración en el cliente de rastreo:
 
-* System Property: `-Ddd.trace.analytics.enabled=true`
+* Propiedad del sistema: `-Ddd.trace.analytics.enabled=true`
 * Variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-La aplicación Analytics está disponible a partir de la versión 0.19.0 del cliente de rastreo Python. Habilita globalmente la aplicación Analytics para todas las integraciones de **servidores web** con un parámetro de configuración en el cliente de rastreo:
+App Analytics está disponible a partir de la versión 0.19.0 del cliente de rastreo Python. Esta configuración sólo está disponible para las versiones 3.x o anteriores de ddtrace. Habilita App Analytics globalmente para todas las integraciones **web** con un parámetro de configuración en el cliente de rastreo:
 
 * Configuración del rastreador: `ddtrace.config.analytics_enabled = True`
 * Variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
@@ -43,7 +46,7 @@ La aplicación Analytics está disponible a partir de la versión 0.19.0 del cli
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-La aplicación Analytics está disponible a partir de la versión 0.19.0 del cliente de rastreo Ruby y puede habilitarse para todas las integraciones **web** con una marca global:
+App Analytics está disponible a partir de la versión 0.19.0 del cliente de rastreo Ruby y puede habilitarse para todas las integraciones **web** con una marca global.
 
 Para ello, define `DD_TRACE_ANALYTICS_ENABLED=true` en tu entorno o configura:
 
@@ -51,27 +54,28 @@ Para ello, define `DD_TRACE_ANALYTICS_ENABLED=true` en tu entorno o configura:
 Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
-* `true` permite el análisis de todos los marcos de trabajo web.
-* `false` o `nil` deshabilita Analytics, excepto para las integraciones que lo habilitan explícitamente. (Por defecto)
+* `true` permite el análisis de todos los frameworks web.
+* `false` o `nil` desactiva el análisis, excepto para integraciones que lo activan explícitamente. (Por defecto)
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-La aplicación Analytics está disponible a partir de la versión 1.11.0 del cliente de rastreo Go y puede habilitarse globalmente para todas las integraciones **web** utilizando:
+App Analytics está disponible a partir de la versión 1.11.0 del cliente de rastreo Go y puede habilitarse globalmente para todas las integraciones **web** utilizando:
 
-* la opción de inicio del rastreador [`WithAnalytics`][1], por ejemplo:
+* la opción de inicio del rastreador [`WithAnalytics`][2] ([documentación v1][1]), por ejemplo:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
   ```
 
-* a partir de la versión 1.26.0, utilizando la variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
+* a partir de la versión 1.26.0 utilizando la variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-La aplicación Analytics está disponible a partir de la versión 0.10.0 del cliente de rastreo Node.js y puede habilitarse globalmente para todas las integraciones web con un parámetro de configuración en el cliente de rastreo:
+App Analytics está disponible a partir de la versión 0.10.0 del cliente de rastreo Node.js y puede habilitarse globalmente para todas las integraciones web con un parámetro de configuración en el cliente de rastreo:
 
 ```javascript
 tracer.init({
@@ -86,9 +90,9 @@ También puedes utilizar el siguiente parámetro de configuración:
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-La aplicación Analytics está disponible a partir de la versión 1.1.0 del cliente de rastreo .NET y puede habilitarse globalmente para todas las integraciones **web** con un parámetro de configuración en el cliente de rastreo:
+App Analytics está disponible a partir de la versión 1.1.0 del cliente de rastreo .NET y puede habilitarse globalmente para todas las integraciones **web** con un parámetro de configuración en el cliente de rastreo:
 
-* Variable de entorno o parámetro de aplicación: `DD_TRACE_ANALYTICS_ENABLED=true`
+* Variable de entorno o AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 Este ajuste también se puede configurar en código:
 
@@ -99,14 +103,14 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-La aplicación Analytics está disponible a partir de la versión 0.17.0 del cliente de rastreo PHP y puede habilitarse globalmente para todas las integraciones **web** con un parámetro de configuración en el cliente de rastreo:
+App Analytics está disponible a partir de la versión 0.17.0 del cliente de rastreo PHP y puede habilitarse globalmente para todas las integraciones **web** con un parámetro de configuración en el cliente de rastreo:
 
 * Variable de entorno: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-La aplicación Analytics está disponible a partir de la versión 1.0.0 del cliente de rastreo C++ y puede habilitarse globalmente para todos los tramos de entradas de servicio, configurando la variable de entorno: `DD_TRACE_ANALYTICS_ENABLED` como `true`. **Nota**: Esta configuración también puede definirse directamente en el código:
+App Analytics está disponible a partir de la versión 1.0.0 del cliente de rastreo C++ y puede habilitarse globalmente para todos los tramos de entradas de servicio, configurando la variable de entorno: `DD_TRACE_ANALYTICS_ENABLED` como `true`. **Nota**: Esta configuración también puede definirse directamente en el código:
 
 ```csharp
 datadog::opentracing::TracerOptions tracer_options;
@@ -119,30 +123,30 @@ datadog::opentracing::TracerOptions tracer_options;
 {{< /programming-lang >}}
 {{< programming-lang lang="nginx" >}}
 
-Para habilitar la aplicación Analytics para Nginx:
+Para habilitar App Analytics para Nginx:
 
-1. Configura la variable entorno `DD_TRACE_ANALYTICS_ENABLED` como `true`.
+1. Establece la variable de entorno: `DD_TRACE_ANALYTICS_ENABLED` en `true`.
 
 2. Añade `env DD_TRACE_ANALYTICS_ENABLED;` al principio de tu archivo `nginx.conf`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### Configuración de servicios adicionales (opcional)
+#### Configurar servicios adicionales (opcional)
 
 ##### Configurar por integración
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
-Además de la configuración global, puedes habilitar o deshabilitar la aplicación Analytics para integraciones individuales mediante la siguiente configuración:
+Además de la configuración global, puedes activar o desactivar App Analytics para integraciones individualmente mediante la siguiente configuración:
 
-* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Propiedad del sistema: `-Ddd.<integration>.analytics.enabled=true`
 * Variable de entorno: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para los tramos JMS que vienen en servicios personalizados, puedes configurar lo siguiente para habilitar la totalidad del rastreo JMS en la aplicación Analytics:
+Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para los tramos de JMS que vienen en servicios personalizados, puedes configurar lo siguiente para habilitar la totalidad del rastreo de JMS en App Analytics:
 
-* System Property: `-Ddd.jms.analytics.enabled=true`
+* Propiedad del sistema: `-Ddd.jms.analytics.enabled=true`
 * Variable de entorno: `DD_JMS_ANALYTICS_ENABLED=true`
 
 Puedes encontrar los nombres de las integraciones en la [tabla de integraciones][1].
@@ -151,25 +155,25 @@ Puedes encontrar los nombres de las integraciones en la [tabla de integraciones]
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Además de la configuración global, puedes habilitar o deshabilitar la aplicación Analytics para integraciones individuales mediante la siguiente configuración:
+Además de la configuración global, puedes activar o desactivar App Analytics para integraciones individualmente mediante la siguiente configuración:
 
 * Configuración del rastreador: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
 * Variable de entorno: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para los tramos Boto que vienen en servicios personalizados, puedes configurar lo siguiente para habilitar la totalidad del rastreo Boto en la aplicación Analytics:
+Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para los tramos de Boto que vienen en servicios personalizados, puedes configurar lo siguiente para habilitar la totalidad del rastreo de Boto en App Analytics:
 
 * Configuración del rastreador: `ddtrace.config.boto.analytics_enabled = True`
 * Variable de entorno: `DD_BOTO_ANALYTICS_ENABLED=true`
 
-**Nota**: Varias integraciones requieren una configuración no estándar debido a la implementación específica de la integración del rastreador. Para ver más detalles, consulta la documentación de biblioteca en [Aplicación Analytics][1].
+**Nota**: Varias integraciones requieren una configuración no estándar debido a la implementación específica de la integración del rastreador. Para ver más detalles, consulta la documentación de biblioteca en [App Analytics][1].
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Es posible habilitar la aplicación Analytics para integraciones.
+App Analytics puede activarse para integraciones específicas.
 
-Para ello, define `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` en tu entorno o configura:
+Para ello, establece `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` en tu entorno, o configúralo con:
 
 ```ruby
 Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: true }
@@ -177,22 +181,24 @@ Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: tr
 
 Donde `integration` es el nombre de la integración. Consulta la [lista de integraciones disponibles][1].
 
-* `true` habilita Analytics para este integración, independientemente de la configuración global.
-* `false` deshabilita Analytics para este integración, independientemente de la configuración global.
-* `nil` remite a la configuración global de Analytics.
+* `true` activa el análisis para esta integración, independientemente de la configuración global.
+* `false` desactiva el análisis para esta integración, independientemente de la configuración global.
+* `nil` se remite a la configuración global para el análisis.
 
 [1]: /es/tracing/setup/ruby/#library-compatibility
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Además de la configuración global, puedes habilitar o deshabilitar la aplicación Analytics individualmente para cada integración. Como ejemplo, para configurar el paquete estándar `net/http` de la biblioteca, podrías:
+{{% tracing-go-v2 %}}
+
+Además de la configuración global, puedes habilitar o deshabilitar App Analytics individualmente para cada integración. Como ejemplo, para configurar el paquete estándar `net/http` de la biblioteca, podrías:
 
 ```go
 package main
 
 import (
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -207,9 +213,9 @@ func main() {
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Además de la configuración global, puedes habilitar o deshabilitar la aplicación Analytics para integraciones individuales.
+Además de la configuración global, puedes activar o desactivar App Analytics para cada integración particular.
 
-Por ejemplo, para habilitar la aplicación Analytics para `express`:
+Por ejemplo, para activar App Analytics para `express`:
 
 ```js
 tracer.use('express', {
@@ -223,21 +229,21 @@ Puedes encontrar los nombres de las integraciones en la [tabla de integraciones]
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-Además de la configuración global, puedes habilitar o deshabilitar la aplicación Analytics para integraciones individuales.
+Además de la configuración global, puedes activar o desactivar App Analytics para cada integración particular.
 
-* Variable de entorno o parámetro de aplicación: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* Variable de entorno o AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Or in code:
+O en código:
 
 ```csharp
 Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
 ```
 
-Por ejemplo, para habilitar la aplicación Analytics para ASP.NET MVC:
+Por ejemplo, para habilitar App Analytics para ASP.NET MVC:
 
-* Variable de entorno o parámetro de aplicación: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
+* Variable de entorno o AppSetting: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
 
-Or in code:
+O en código:
 
 ```csharp
 Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
@@ -249,11 +255,11 @@ Puedes encontrar los nombres de las integraciones en la [tabla de integraciones]
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Además de la configuración global, puedes habilitar o deshabilitar la aplicación Analytics para integraciones individuales mediante la siguiente configuración:
+Además de la configuración global, puedes activar o desactivar App Analytics para integraciones individualmente mediante la siguiente configuración:
 
 * Variable de entorno: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para los tramos Symfony que vienen en servicios personalizados, puedes configurar lo siguiente para habilitar la totalidad del rastreo Symfony en la aplicación Analytics:
+Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para los tramos de Symfony que vienen en servicios personalizados, puedes configurar lo siguiente para habilitar la totalidad del rastreo de Symfony en App Analytics:
 
 * Variable de entorno: `DD_SYMFONY_ANALYTICS_ENABLED=true`
 
@@ -269,15 +275,15 @@ Puedes encontrar los nombres de las integraciones en la [tabla de integraciones]
 {{< programming-lang lang="java" >}}
 
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
+Por defecto, App Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
 
-* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Propiedad del sistema: `-Ddd.jdbc.analytics.enabled=true`
 * Variable de entorno: `DD_JDBC_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
+Por defecto, App Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
 
 * Configuración del rastreador: `ddtrace.config.psycopg.analytics_enabled = True`
 * Variable de entorno: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
@@ -285,7 +291,7 @@ Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
+Por defecto, App Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
 
 ```ruby
 Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
@@ -294,17 +300,17 @@ Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
+Por defecto, App Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
 
 ```go
-// Registrar el controlador de bases de datos con Analytics habilitado.
+// Register the database driver with Analytics enabled.
 sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
 ```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
+Por defecto, App Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo:
 
 ```javascript
 tracer.use('mysql', {
@@ -315,11 +321,11 @@ tracer.use('mysql', {
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo, para habilitar la aplicación Analytics para ADO.NET:
+Por defecto, App Analytics no registra el rastreo de bases de datos, así que debes habilitar la recopilación manualmente para cada integración. Por ejemplo, para habilitar App Analytics para ADO.NET:
 
-* Variable de entorno o parámetro de aplicación: `DD_AdoNet_ANALYTICS_ENABLED=true`
+* Variable de entorno o AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
 
-O el código:
+O en código:
 
 ```csharp
 Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
@@ -331,11 +337,11 @@ Puedes encontrar los nombres de las integraciones en la [tabla de integraciones]
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Por defecto, la aplicación Analytics no registra el rastreo de bases de datos. Puedes habilitar o deshabilitar la aplicación Analytics para integraciones individuales utilizando la siguiente configuración:
+Por defecto, App Analytics no registra el rastreo de bases de datos. Puedes habilitar o deshabilitar App Analytics para integraciones individuales utilizando la siguiente configuración:
 
 * Variable de entorno: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para:
+Utilízala junto con la configuración global de cualquier integración que envíe servicios personalizados. Por ejemplo, para `mysqli`:
 
 * Variable de entorno: `DD_MYSQLI_ANALYTICS_ENABLED=true`
 
@@ -350,7 +356,7 @@ Puedes encontrar los nombres de las integraciones en la [tabla de integraciones]
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta (tag) `ANALYTICS_SAMPLE_RATE` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta (tag) `ANALYTICS_SAMPLE_RATE` en un tramo:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -370,7 +376,7 @@ class MyClass {
   }
 }
 ```
-**Nota:** La aplicación Analytics para tramos con [métodos de rastreo dd][1] o [anotaciones de rastreo][2] puede habilitarse configurando `-Ddd.trace-annotation.analytics.enabled=true`.
+**Nota:** App Analytics para tramos con [dd.trace.methods][1] o [anotaciones de rastreo][2] puede habilitarse configurando `-Ddd.trace-annotation.analytics.enabled=true`.
 
 
 [1]: https://docs.datadoghq.com/es/tracing/custom_instrumentation/java/#dd-trace-methods
@@ -378,7 +384,7 @@ class MyClass {
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` en un tramo:
 
 ```python
 from ddtrace import tracer
@@ -393,11 +399,11 @@ def my_method():
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta `Analytics::TAG_ENABLED` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta `Analytics::TAG_ENABLED` en un tramo:
 
 ```ruby
 Datadog::Tracing.trace('my.task') do |span|
-  # Establecer la frecuencia de muestreo de Analytics en 1.0
+  # Set the analytics sample rate to 1.0
   span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
@@ -405,18 +411,18 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-En el caso de la instrumentación personalizada, se ha añadido una etiqueta especial para habilitar la aplicación Analytics en un tramo, como puede verse a continuación:
+En el caso de la instrumentación personalizada, se ha añadido una etiqueta especial para habilitar App Analytics en un tramo, como puede verse a continuación:
 
 ```go
 span.SetTag(ext.AnalyticsEvent, true)
 ```
 
-Esto marca el tramo como un evento de aplicación Analytics.
+Esto marca el tramo como un evento de App Analytics.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta `ANALYTICS` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta `ANALYTICS` en un tramo:
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -427,7 +433,7 @@ span.setTag(ANALYTICS, true)
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta `Tags.Analytics` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta `Tags.Analytics` en un tramo:
 
 ```csharp
 using Datadog.Trace;
@@ -443,11 +449,11 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta `ANALYTICS_KEY` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta `ANALYTICS_KEY` en un tramo:
 
 ```php
 <?php
-  // ... tu tramo existente que quieres habilitar para la aplicación Analytics
+  // ... your existing span that you want to enable for App Analytics
   $span->setTag(Tag::ANALYTICS_KEY, true);
 ?>
 ```
@@ -455,7 +461,7 @@ Las aplicaciones con instrumentación personalizada pueden habilitar la aplicaci
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-Las aplicaciones con instrumentación personalizada pueden habilitar la aplicación Analytics configurando la etiqueta `analytics_event` en un tramo:
+Las aplicaciones con instrumentación personalizada pueden habilitar App Analytics configurando la etiqueta `analytics_event` en un tramo:
 
 ```cpp
 ...
@@ -463,11 +469,11 @@ Las aplicaciones con instrumentación personalizada pueden habilitar la aplicaci
 ...
 auto tracer = ...
 auto span = tracer->StartSpan("operation_name");
-// Un valor booleano verdadero habilita la aplicación Analytics para el tramo,
-// con una frecuencia de muestreo de 1.0.
+// A boolean value of true enables App Analytics for the span,
+// with a sample rate of 1.0.
 span->SetTag(datadog::tags::analytics_event, true);
-// Un doble valor entre 0.0 y 1.0 habilita la aplicación Analytics
-// y configura la frecuencia de muestreo con el valor proporcionado.
+// A double value between 0.0 and 1.0 enables App Analytics
+// and sets the sample rate to the provided value.
 span->SetTag(datadog::tags::analytics_event, 0.5);
 ```
 
@@ -476,8 +482,8 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### En el Datadog Agent
 
-<div class="alert alert-danger">
-En esta sección se describen las funciones obsoletas con información de configuración relevante para aplicaciones Analytics heredadas.
+<div class="alert alert-warning">
+Esta sección describe funciones obsoletas con información de configuración relevante para App Analytics legacy.
 </div>
 
 Para definir la frecuencia de tramos a analizar por servicio, configura lo siguiente en el archivo `datadog.yaml`:
@@ -499,18 +505,18 @@ apm_config:
     service_B|operation_name_Z: 0.01
 ```
 
-## Resolución de problemas: Límite máximo de eventos por segundo
+## Resolución de problemas: límite máximo de eventos por segundo
 
 Si encuentras el siguiente mensaje de error en tus logs del Agent, significa que tus aplicaciones están emitiendo más de los 200 eventos de rastreo por segundo permitidos por APM.
 
 ```
-Límite máximo de eventos por segundo alcanzado (actual=300,00/s, máx=200,00/s). Algunos eventos se están descartando (frecuencia de muestreo=0,54). Considere la posibilidad de ajustar las frecuencias de muestreo de eventos.
+Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
 
 ```
 
-Para aumentar el límite de frecuencia de APM para el Agent, configura el atributo `max_events_per_second` en el archivo de configuración del Agent (debajo de la sección `apm_config:` ). Para despliegues contenedorizados (por ejemplo, Docker o Kubernetes), utiliza la variable de entorno `DD_APM_MAX_EPS`.
+Para aumentar el límite de frecuencia de APM para el Agent, configura el atributo `max_events_per_second` en el archivo de configuración del Agent (debajo de la sección `apm_config:` ). Para despliegues en contenedores (por ejemplo, Docker o Kubernetes), utiliza la variable de entorno `DD_APM_MAX_EPS`.
 
-**Nota**: Aumentar el límite de la frecuencia de APM podría suponer un aumento de los costes de la aplicación Analytics.
+**Nota**: Aumentar el límite de la frecuencia de APM podría suponer un aumento de los costes de App Analytics.
 
 
 [1]: /es/tracing/trace_pipeline/ingestion_controls/

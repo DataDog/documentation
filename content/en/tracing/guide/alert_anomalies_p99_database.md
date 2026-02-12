@@ -1,5 +1,6 @@
 ---
 title: Alert on anomalous p99 latency of a database service
+description: Learn how to create monitors and alerts for anomalous p99 latency patterns in database services using APM metrics and anomaly detection.
 
 further_reading:
 - link: "/tracing/guide/week_over_week_p50_comparison/"
@@ -59,7 +60,7 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     Here you can see the current status of your monitor, mute it, or explore deeper into the specifics of a triggered alert.
 
-8. **Navigate back to the [Service Catalog][8]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
+8. **Navigate back to the [Software Catalog][8]** and from there find the service you just set the monitor on, **click into the Service Page** and there **click on the Monitor bar** under the header.
 
     Here you should **see the new monitor** alongside any other monitor set for the service and suggested monitors that are recommended to set.
 

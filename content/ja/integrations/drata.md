@@ -18,8 +18,8 @@ author:
   support_email: support@drata.com
 categories:
 - コンプライアンス
-- ログの収集
-- セキュリティ
+- log collection
+- security
 custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/drata/README.md
@@ -81,7 +81,7 @@ Drata は、企業のセキュリティ管理を継続的に監視して証拠�
 8. Drata は Datadog API からユーザーと構成データの同期を開始し、コンプライアンスモニターが失敗している場合は通知されます。
 
 
-## Agent
+## サポート
 
 ヘルプが必要ですか？[Datadog サポート][6]または [support@drata.com][7] にお問い合わせください。
 

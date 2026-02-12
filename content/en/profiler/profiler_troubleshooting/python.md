@@ -7,6 +7,9 @@ further_reading:
     - link: '/tracing/troubleshooting'
       tag: 'Documentation'
       text: 'APM Troubleshooting'
+    - link: "https://www.datadoghq.com/blog/datadog-python-memory-profiling"
+      tag: "Blog"
+      text: "Python memory profiling: Common pitfalls and how to avoid them"
 ---
 
 ## Missing profiles in the profile search page
@@ -23,6 +26,6 @@ Refer to the python APM client [troubleshooting documentation][3] for additional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: https://ddtrace.readthedocs.io/en/stable/troubleshooting.html

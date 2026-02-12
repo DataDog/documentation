@@ -1,5 +1,6 @@
 ---
 title: Agent Environment Variables
+description: Configure Datadog Agent settings using environment variables as an alternative to datadog.yaml, including naming conventions and systemd usage.
 further_reading:
   - link: "/agent/docker/#environment-variables"
     tag: "Documentation"
@@ -15,7 +16,7 @@ further_reading:
     text: "Proxy environment variables"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub repo</a>.
 </div>
 
@@ -55,7 +56,10 @@ In general, use the following rules:
       # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
+### Property definition priority
+
+- If a property is defined in both the global configuration file (`datadog.yaml`) and as an environment variable, the environment variable takes precedence.
+- Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
 
 ### Exceptions
 

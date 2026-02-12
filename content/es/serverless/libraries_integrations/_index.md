@@ -1,18 +1,19 @@
 ---
 aliases:
-- /serverless/serverless_integrations
-- /serverless/datadog_lambda_library/
-- /serverless/libraries_integrations/library/
+- /es/serverless/serverless_integrations
+- /es/serverless/datadog_lambda_library/
+- /es/serverless/libraries_integrations/library/
 title: Bibliotecas e integraciones serverless
 ---
 
 ## Integraciones de herramientas de desarrollo serverless
 
-{{< whatsnext desc="Datadog integrates with popular serverless development tools to install the Datadog Lambda extension and library to your applications automatically." >}}
-    {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Complemento de Datadog para Serverless Framework{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog Lambda CLI{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/cdk/" >}}Construcción de Datadog para AWS CDK{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Macro de Datadog Serverless para AWS SAM{{< /nextlink >}}
+{{< whatsnext desc="Datadog se integra con herramientas de desarrollo sin servidor para instalar la extensión  y la biblioteca de Datadog Lambda para tus aplicaciones automáticamente" >}}
+    {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Complemento de Datadog para un framework sin servidor{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cli/" >}}CLI de Datadog para AWS Lambda{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cli-cloud-run/" >}}CLI de Datadog para Google Cloud Run{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cdk/" >}}Constructo de Datadog para AWS CDK{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Datadog Serverless Macro para AWS SAM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Lambda Extension y Forwarder

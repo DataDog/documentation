@@ -1,5 +1,6 @@
 ---
 title: How to monitor non-static thresholds
+description: "Monitor variable thresholds using seasonal patterns, reference metrics, and composite monitors for dynamic alerting scenarios."
 further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"
@@ -49,7 +50,9 @@ The threshold displayed in the screenshot below has been configured to 0.9 to al
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
+
 {{< img src="monitors/guide/non_static_thresholds/seasonal_threshold_config.png" alt="Configuration to add week_before timeshift to metric query and set formula a/b" style="width:100%;" >}}
+
 {{% /tab %}}
 
 {{% tab "JSON Example" %}}
@@ -101,7 +104,8 @@ The first monitor tracks the total number of hits, both successes and failures. 
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
-  {{< img src="monitors/guide/non_static_thresholds/reference_total_hits.png" alt="Metric monitor configuration with formula to calculate total hits" style="width:100%;" >}}
+
+{{< img src="monitors/guide/non_static_thresholds/reference_total_hits.png" alt="Metric monitor configuration with formula to calculate total hits" style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -136,7 +140,9 @@ The second monitor calculates the error rate. Create a query on the number of er
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
-  {{< img src="monitors/guide/non_static_thresholds/reference_error_rate.png" alt="Metric monitor configuration with formula to calculate error rate" style="width:100%;" >}}
+
+{{< img src="monitors/guide/non_static_thresholds/reference_error_rate.png" alt="Metric monitor configuration with formula to calculate error rate" style="width:100%;" >}}
+
 {{% /tab %}}
 
 {{% tab "JSON Example" %}}

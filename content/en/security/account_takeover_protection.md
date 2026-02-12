@@ -4,16 +4,16 @@ disable_toc: false
 further_reading:
 - link: "security/application_security/terms/"
   tag: "Documentation"
-  text: "ASM Terms and Concepts"
-- link: "security/application_security/threats/add-user-info/?tab=set_user"
+  text: "AAP Terms and Concepts"
+- link: "security/application_security/how-it-works/add-user-info/?tab=set_user"
   tag: "Documentation"
   text: "User Monitoring and Protection"
 - link: "security/application_security/guide/"
   tag: "Documentation"
-  text: "Application Security Management Guides"
+  text: "App and API Protection Guides"
 ---
 
-ASM provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
+App and API Protection (AAP) provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
 
 ATO protection has the following benefits:
 
@@ -28,9 +28,9 @@ Account takeover occurs when an attacker gains access to a user's account creden
 
 The following tables lists the *attacker motivation by business*:
 
-| Monetary Theft                           | Reselling Accounts              |
-|------------------------------------------|---------------------------------|
-| Consumer banking apps                    | SaaS Platforms                  |
+| Monetary Theft                                 | Reselling Accounts                        |
+| ---------------------------------------------- | ----------------------------------------- |
+| Consumer banking apps                          | SaaS Platforms                            |
 | Financial service apps that issue credit cards | Consumer platforms with stored gift cards |
 
 ## Attacker strategies
@@ -54,11 +54,11 @@ Brute force
 
 ## Setting up ATO detection and prevention
 
-ASM provides managed detections of ATO attacks.
+AAP provides managed detections of ATO attacks.
 
 Effective ATO detection and prevention requires the following:
 
-1. Instrumenting your production login endpoints. This enables detection with ASM-managed rules.
+1. Instrumenting your production login endpoints. This enables detection with AAP-managed rules.
 2. Remote configuration. This enables blocking attacks and pushing remote instrumentation from the Datadog user interface.
 3. Notifications. Ensures you are notified of compromised accounts.
 4. Reviewing your first detection. Understand how automated protection fits in with your attacks and escalation requirements.
@@ -68,13 +68,15 @@ Effective ATO detection and prevention requires the following:
 
 The following user activity events are used for ATO tracking.
 
-| Enrichment              | Auto-instrumented | Use case                                     |
-|-------------------------|-------------------|----------------------------------------------|
-| `users.login.success`     | True              | Account takeover detection rule requirement       |
-| `users.login.failure`     | True              | Account takeover detection rule requirement       |
-| `users.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
+| Enrichment             | Auto-instrumented | Use case                                                                       |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
+| `users.login.success`  | True              | Account takeover detection rule requirement                                    |
+| `users.login.failure`  | True              | Account takeover detection rule requirement                                    |
+| `users.password_reset` | False             | Detection rule requirement to identify user enumeration through password reset |
 
 Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
+
+<div class="alert alert-info">You can use the <a href="https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules">Suggested Rules</a> feature to automatically analyze application traffic and propose rules to help monitor and protect login and API flows. See <a href="/security/application_security/policies/inapp_waf_rules/#suggested-rules">Suggested Rules.</a></div>
 
 For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
@@ -86,7 +88,7 @@ You are not limited to how Datadog defines these enrichments. Many platform prod
 
 ## Remote Configuration
 
-[Remote Configuration][4] enables ASM users to instrument apps with custom [business logic][5] data in near real time.
+[Remote Configuration][4] enables AAP users to instrument apps with custom [business logic][5] data in near real time.
 
 ## Notifications
 
@@ -95,7 +97,7 @@ You are not limited to how Datadog defines these enrichments. Many platform prod
 
 ## Review your first detection
 
-ASM highlights the most relevant information and suggests actions to take based on the detection type. It also indicates what actions have been taken.
+AAP highlights the most relevant information and suggests actions to take based on the detection type. It also indicates what actions have been taken.
 
 {{<img src="security/ato/review_first_detection2.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
 
@@ -125,7 +127,7 @@ Review the following sections to help you develop an incident response plan.
 
 #### Do you use authenticated scanners?
 
-Identify trusted IPs, preventing them from being automatically blocked. This step is useful for the following: 
+Identify trusted IPs, preventing them from being automatically blocked. This step is useful for the following:
 
 - Approved scanning sources that attempt to log in.
 - Corporate sites with large numbers of users behind single IP addresses.
@@ -143,9 +145,9 @@ Review the networks your customers authenticate from, such as:
 - Residential IPs
 - Data centers
 
-Understanding authentication sources can inform your blocking strategy. 
+Understanding authentication sources can inform your blocking strategy.
 
-For example, you might *not* expect customers to authenticate with your consumer application from data centers. Consequently, you might have more freedom to block the IPs associated with that data center. 
+For example, you might *not* expect customers to authenticate with your consumer application from data centers. Consequently, you might have more freedom to block the IPs associated with that data center.
 
 Nevertheless, if your customers source entirely from Mobile ISPs, you might have an impact to legitimate traffic if you block those ISPs.
 
@@ -162,15 +164,15 @@ Understanding your customers' account name structure helps you determine if atta
 
 ### Distributed attacks
 
-Blocking advanced distributed attacks is often a business decision because attacks can impact availability, user funds, and legitimate users. 
+Blocking advanced distributed attacks is often a business decision because attacks can impact availability, user funds, and legitimate users.
 
 Here are three critical components for success in mitigating these attacks:
 
-1. Proper onboarding: Are you configured for blocking with ASM?
+1. Proper onboarding: Are you configured for blocking with AAP?
 2. Proper configuration: Ensure you have correctly set client IPs and X-Forwarded-For (XFF) HTTP headers.
 3. Internal communication plans: Communication with security teams, service owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
 
-<div class="alert alert-info">Responders can identify service owners using the tags in all ASM signals.</div>
+<div class="alert alert-info">Responders can identify service owners using the tags in all AAP signals.</div>
 
 ### Know your trends
 
@@ -197,7 +199,7 @@ Many consumer applications have low occurrences of user authentication from data
 
 #### Proxies
 
-Datadog uses [Spur][8] to determine if an IP is a proxy. Datadog correlates indicators of compromise (IOCs) with account takeover attacks for faster detection with the ASM-managed account takeover rules.
+Datadog uses [Spur][8] to determine if an IP is a proxy. Datadog correlates indicators of compromise (IOCs) with account takeover attacks for faster detection with the AAP-managed account takeover rules.
 
 Datadog recommends never blocking IP addresses solely based on threat intelligence IOCs for IP addresses. See our threat intelligence [best practices][9] for details.
 
@@ -213,7 +215,7 @@ Two types of proxies are frequently seen in distributed account takeovers:
 
 Datadog uses third parties such as IPinfo and Spur to determine if an IP is a Mobile ISP.
 
-Exercise caution when blocking Mobile ISPs. Mobile ISPs use [CGNAT][10] and frequently have large numbers of phones behind each IP address. 
+Exercise caution when blocking Mobile ISPs. Mobile ISPs use [CGNAT][10] and frequently have large numbers of phones behind each IP address.
 
 #### Attacker attributes
 
@@ -228,7 +230,7 @@ Review the following best practices for protection.
 
 #### Automated protection
 
-Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies. 
+Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies.
 
 If you do not have a policy, review your existing detections and start with the suggested responses in **Signals**. Build your policy based on the most relevant actions taken over time.
 
@@ -242,21 +244,34 @@ Develop an incident response plan using the following post compromise steps:
 
 1. Monitoring compromised user accounts.
 2. Plan to invalidate credentials and contact users to update credentials.
-3. Consider blocking users using ASM.
+3. Consider blocking users using AAP.
 
 Attack motivation can influence post-compromise activity. Attackers wanting to resell accounts are unlikely to use accounts immediately after a compromise.
 Attackers attempting to access stored funds will use accounts immediately after compromise.
 
 Consider blocking compromised users in addition to blocking the attacker.
 
+To export a list of compromised or targeted users from a signal:
+
+1. Go to the notification settings in a detection rule condition. 
+2. Add a recipient and turn on _Notify for every new `@usr.id` detected_. This allows you to export the list when updates occur.
+
+{{<img src="security/application_security/threats/notify-on-update.png" alt="Notify on update toggle on detection rule editor" style="width:100%;">}}
+
+Notification targets set in the detection rule condition receive a message when new user IDs are detected. However, notification profiles monitoring these signals do not receive alerts for new user IDs.
+
+To receive targeted and compromised user IDs with a webhook, set up a webhook using the Datadog webhook integration. Include the `$SECURITY_SIGNAL_ATTRIBUTES` variable in the webhook payload. The user IDs are stored under the `@usr.id` path in the JSON payload.
+
+{{<img src="security/application_security/threats/notify-on-update-payload.png" alt="Notify on update example payload" style="width:100%;">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/
+[1]: https://docs.datadoghq.com/security/application_security/how-it-works/add-user-info/
 [2]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [3]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
-[4]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /tracing/guide/remote_config/
 [5]: https://app.datadoghq.com/security/appsec/business-logic
 [6]: https://docs.datadoghq.com/security/notifications/rules/
 [7]: https://app.datadoghq.com/integrations?category=Collaboration

@@ -14,10 +14,6 @@ further_reading:
 title: RUM으로 브라우저 테스트 계측
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
-
 ## 개요
 
 Test Visibility는 Datadog [실제 사용자 모니터링][2]과 통합되어 브라우저 테스트 심층 분석을 위한 도구를 제공합니다.

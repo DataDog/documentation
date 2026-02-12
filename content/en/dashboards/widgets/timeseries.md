@@ -37,7 +37,9 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 ## Display options
 
-Graphs can be displayed as lines, areas, and bars. Line graphs contain additional parameters:
+Graphs can be displayed as lines, areas, and bars. Datadog graphs aggregate data over [intervals][15] such as sum every hour. By default, the last incomplete time interval in a timeseries graph is shaded and labeled as "partial data".
+
+Line graphs contain additional parameters:
 
 | Parameter | Options                  |
 |-----------|--------------------------|
@@ -133,9 +135,13 @@ For more information about editing and deleting context links, see [Context Link
 
 ### Full screen
 
-In addition to the [standard full screen options][11], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+In addition to the [standard full screen options][11], you can apply quick functions, adjust the Y scale, save changes, or save as a new graph.
 
 For more information, see [Explore your data in full-screen graph mode][12].
+
+### Metrics info
+
+On a metric graph, click on the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## API
 
@@ -161,3 +167,4 @@ This widget can be used with the **[Dashboards API][13]**. See the following tab
 [12]: https://www.datadoghq.com/blog/full-screen-graphs
 [13]: /api/latest/dashboards/
 [14]: /dashboards/graphing_json/widget_json/
+[15]: /dashboards/functions/rollup/

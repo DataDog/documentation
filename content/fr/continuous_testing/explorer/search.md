@@ -6,14 +6,16 @@ description: Examinez des lots de tâches CI exécutées et corrigez le résulta
 further_reading:
 - link: /continuous_testing/explorer
   tag: Documentation
-  text: En savoir plus sur l'explorateur de surveillance Synthetic et de tests en
+  text: En savoir plus sur l'Explorateur de surveillance Synthetic et de tests en
     continu
 title: Rechercher des lots de tests
 ---
 
 ## Présentation
 
-Après avoir sélectionné un intervalle dans le menu déroulant en haut à droite, vous pouvez rechercher des lots de tâches CI en cliquant sur le type d'événement **CI Batches** dans l'[Explorateur de surveillance et de tests en continu Synthetic][1].
+Après avoir sélectionné une plage temporelle dans le menu déroulant en haut à droite, recherchez des batchs de tâches CI en cliquant sur le type d'événement **CI Batches** dans l'[Explorateur de surveillance Synthetic et de tests en continu][1].
+
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="Batchs CI dans l'Explorateur de surveillance Synthetic et de tests en continu" style="width:100%;">}}
 
 Vous pouvez utiliser des facettes pour réaliser les actions suivantes :
 

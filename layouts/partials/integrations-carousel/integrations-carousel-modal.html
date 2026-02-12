@@ -1,9 +1,11 @@
 
 {{/*  Carousel Modal  */}}
-{{ $media := .Params.tile.media | default slice}}
+{{ $media := .Params.media | default slice}}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $title := .Params.integration_title | default .Title}}
 {{ $app_id := .Params.app_id | default "" }}
+{{- $app_listings_bucket := cond (eq hugo.Environment "live") "dd-app-listings" "dd-app-listings-staging" -}}
+
 <div 
 x-data="{
     shouldShowActiveHorizontalSlide (idx) {
@@ -44,14 +46,14 @@ x-cloak x-show="$store.integrationsModal.isOpen"
                     x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
                     x-transition.opacity.duration.500ms>
                         {{ if eq $elm.media_type "image"}}
-                        <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
+                        <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.caption }}" >
                         {{ else }}
                         <iframe x-ref="iframe" class="d-none" src="https://player.vimeo.com/video/{{ $elm.vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;"></iframe>
                         <img 
                         @click="$store.integrationsModal.playVideo($refs)"
                         x-ref="playOverlay"
                         class="play-overlay position-relative h-100 w-100 rounded-1" 
-                        src="https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
+                        src="https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
                         alt="{{ $elm.caption }}">
                         <button 
                         @click="$store.integrationsModal.playVideo($refs)"
@@ -87,12 +89,13 @@ x-cloak x-show="$store.integrationsModal.isOpen"
         {{/*  ALL ITEMS  */}}
         <div class="modal-item-btns mx-auto">
             {{ range $idx, $elm := $media }}
+            {{ $image_url := printf "https://s3.amazonaws.com/%s/%s/media/%s" $app_listings_bucket $app_id (replaceRE `(./)?images/` "" $elm.image_url) }}
             <button
             id="modal-item-btn-{{ add $idx 1 }}"
             class="modal-item-btn p-0"
             :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
             @click="selectCarouselItem({{ $idx }})"
-            :style="{backgroundImage: 'url(https://s3.amazonaws.com/dd-app-listings/{{ $app_id }}/media/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
+            :style="{backgroundImage: `url('{{ $image_url }}')`}"
             >
             </button>
             {{ end }}

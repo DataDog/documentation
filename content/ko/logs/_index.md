@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logs
 aliases:
 - /ko/guides/logs/
 - /ko/en/logs
@@ -42,6 +45,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: 블로그
   text: 네트워크 및 보안 분석을 위해 DNS 로그 모니터링
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: 아키텍처 센터
+  text: Datadog를 통한 로그 관리 인덱싱 전략 가이드
+- link: https://www.datadoghq.com/blog/archive-search/
+  tag: 블로그
+  text: Datadog Archive Search로 과거 기록을 더 효과적으로 검색하세요.
 title: 로그 관리
 ---
 
@@ -56,8 +65,6 @@ title: 로그 관리
 Datadog 로그 관리나 Datadog 로그 또는 로그 수집이라고 불리는 해당 기능은 로그 수집을 인덱싱과 분리하여 이러한 제한 요소를 해소합니다. 이렇게 하면 모든 로그를 제한없이 비용 효율적으로 수집, 처리, 보관, 탐색, 모니터링할 수 있습니다(제한없는 로그 수집\*).
 
 제한없는 로그 수집\* 기능으로 [로그 탐색기][1]에서 간단한 트러블슈팅 환경을 구현하여 고객님과 팀이 인프라스트럭처 문제를 신속하게 평가 및 해결할 수 있도록 지원합니다. 감사 및 평가 중 보안 및 IT 팀을 지원하기 위한 직관적인 아카이빙 기능을 제공해 드립니다. 또한 제한없는 로그 수집* 기능은 로그 인덱싱 없이도 환경 내 보안 위협을 감지하는 [Datadog Cloud 보안 정보와 이벤트 관리(SIEM)][2]를 지원합니다.
-
-**참고**: PCI 준수 Datadog 조직을 설정하는 방법에 대한 자세한 내용을 확인하려면 [PCI DSS 준수][3]를 참조하세요.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
@@ -86,6 +93,8 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 
 [로그 탐색기][1]로 수집한 로그 탐색을 시작합니다.
 
+**팁**: Datadog 글로벌 검색에서 로그 탐색기를 열려면 <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>를 누르고 `logs`를 검색하세요.
+
 {{< img src="/logs/explore.png" alt="수집한 로그 탐색" style="width:80%;">}}
 
 - [검색][8]: 모든 로그를 검색합니다.
@@ -105,7 +114,6 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 
 [1]: /ko/logs/explorer/
 [2]: /ko/security/cloud_siem/
-[3]: /ko/data_security/pci_compliance/
 [4]: /ko/logs/log_collection/
 [5]: /ko/logs/log_configuration/
 [6]: /ko/tracing/other_telemetry/connect_logs_and_traces/

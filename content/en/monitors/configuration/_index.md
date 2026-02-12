@@ -29,9 +29,41 @@ To start configuring the monitor, complete the following:
 
 ## Define the search query
 
-To learn how to construct the search query, see the individual [monitor types][1] pages. As you define the search query, the preview graph above the search fields updates.
+To learn how to construct the search query, see the individual [monitor types][1] pages.
 
-{{< img src="/monitors/create/preview_graph_monitor.mp4" alt="Preview Graph" video=true style="width:90%;">}}
+## Preview graphs
+
+As you build or modify your query, the preview graph at the top of the configuration dynamically updates to reflect the results in real time.
+
+{{< tabs >}}
+{{% tab "Evaluated Data" %}}
+
+{{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Evaluated Data Preview Graph" style="width:100%;" >}}
+
+The Evaluation Data graph shows how your monitor would have evaluated the data using your current query and thresholds. With Evaluation Preview, you can
+- See historical state transitions (for example, `OK` → `ALERT`).
+- Understand how your monitor would have behaved.
+- Preview who would be notified (including from notification rules)
+- Quickly spot misconfigurations before saving.
+
+This feature is supported for Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability, and Deployment monitors.
+
+{{% /tab %}}
+
+{{% tab "Source Data" %}}
+
+{{< img src="/monitors/configuration/source_data_graph_high_error_rate.png" alt="Source Data Preview Graph" style="width:100%;" >}}
+
+The Source Data graph displays the raw timeseries or query output for your monitor, without any threshold evaluation or alert logic applied. This allows you to:
+
+- Visualize the underlying data that your monitor is evaluating.
+- Correlate alert state changes with actual data trends.
+- Identify anomalies, gaps, or unexpected patterns in your data before configuring alert conditions.
+
+Use the Source Data graph to ensure your query is returning the expected results and to help refine your alert thresholds and evaluation windows.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Set alert conditions
 
@@ -71,6 +103,8 @@ The figure below illustrates the difference between cumulative and rolling time 
 
 A rolling time window has a fixed size and shifts its starting point over time. Monitors can look back at the last `5 minutes`, `15 minutes`, `1 hour`, or over a custom time window of up to 1 month.
 
+**Note**: [Log monitors][6] have a maximum rolling time window of `2 days`.
+
 #### Cumulative time windows
 A cumulative time window has a fixed starting point and expands over time. Monitors support three different cumulative time windows:
 
@@ -94,7 +128,7 @@ By default, evaluation frequencies depend on the [evaluation window](#evaluation
 | 24 hours <= window < 48 hours   | 10 minutes            |
 | window >= 48 hours              | 30 minutes            |
 
-The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule. 
+The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule.
 
 For more information, see the guide on how to [Customize monitor evaluation frequencies][4].
 
@@ -123,6 +157,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 [3]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
 [4]: /monitors/guide/custom_schedules
 [5]: /monitors/guide/recovery-thresholds/
+[6]: /monitors/types/log/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
@@ -269,6 +304,8 @@ A `Multi Alert` monitor triggers individual notifications for each entity in a m
 {{< img src="/monitors/create/multi-alert.png" alt="Diagram of how monitor notifications are sent in multi alert mode" style="width:90%;">}}
 
 For example, when setting up a monitor to notify you if the P99 latency, aggregated by service, exceeds a certain threshold, you would receive a **separate** alert for each individual service whose P99 latency exceeded the alert threshold. This can be useful for identifying and addressing specific instances of system or application issues. It allows you to track problems on a more granular level.
+
+##### Notification grouping
 
 When monitoring a large group of entities, multi alerts can lead to noisy monitors. To mitigate this, customize which dimensions trigger alerts. This reduces the noise and allows you to focus on the alerts that matter most. For instance, you are monitoring the average CPU usage of all your hosts. If you group your query by `service` and `host` but only want alerts to be sent once for each `service` attribute meeting the threshold, remove the `host` attribute from your multi alert options and reduce the number of notifications that are sent.
 

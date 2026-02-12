@@ -23,16 +23,16 @@ assets:
     source_type_id: 10189
     source_type_name: Avi Vantage
   monitors:
-    Avi Vantage - Error Rate Monitor: assets/monitors/error_rate_monitor.json
+    Virtual service has a high number of errors: assets/monitors/error_rate_monitor.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- cloud
+- 클라우드
 - 네트워크
-custom_kind: integration
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
 display_on_public_website: true
@@ -40,24 +40,25 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 4.2.1
+integration_version: 5.3.0
 is_public: true
 manifest_version: 2.0.0
 name: avi_vantage
 public_title: Avi Vantage
 short_description: Avi Vantage 인스턴스의 상태와 성능을 모니터링하세요.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - "\b카테고리::클라우드"
+  - Category::Cloud
   - Category::Network
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Avi Vantage 인스턴스의 상태와 성능을 모니터링하세요.
   media: []
@@ -75,7 +76,7 @@ tile:
 
 ## 설정
 
-호스트에서 실행 중인 에이전트의 경우 다음 지침에 따라 설치하고 구성하세요. 컨테이너화된 환경의 경우 [자동탐지 통합 템플릿][2]에 다음 지침을 적용하는 방법이 안내되어 있습니다.
+아래 지침을 따라 호스트에서 실행되는 에이전트에 대해 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 이러한 지침을 적용하는 데 가이드가 필요하면 [자동탐지 통합 템플릿][2]을 참조하세요.
 
 ### 설치
 
@@ -86,16 +87,16 @@ Avi Vantage 검사는 [Datadog Agent][3] 패키지에 포함되어 있습니다.
 
 1. Agent의 설정 디렉터리 루트에 있는 `conf.d/` 폴더에서 `avi_vantage.d/conf.yaml` 파일을 편집하여 avi_vantage 성능 데이터를 수집할 수 있습니다. 사용 가능한 모든 설정 옵션은 [샘플 avi_vantage.d/conf.yaml][4]을 참조하세요.
 
-2. [에이전트를 재시작합니다][5].
+2. [에이전트를 재시작하세요][5].
 
 ### 검증
 
 [Agent의 상태 하위 명령을 실행하고][6] Checks 섹션에서 `avi_vantage`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "avi_vantage" >}}
+{{< get-metrics-from-git "avi-vantage" >}}
 
 
 ### 이벤트

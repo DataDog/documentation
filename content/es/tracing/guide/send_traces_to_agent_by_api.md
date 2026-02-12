@@ -3,6 +3,8 @@ aliases:
 - /es/api/latest/tracing/
 - /es/api/v1/tracing/
 - /es/api/v2/tracing/
+description: Aprende a enviar trazas directamente al Datadog Agent utilizando la API
+  de rastreo para integraciones personalizadas y frameworks no compatibles.
 further_reading:
 - link: /tracing/
   tag: Documentación
@@ -47,7 +49,7 @@ y cada tramo es un diccionario con `trace_id`, `span_id`, `resource` y así suce
 |------------|---------|---------------------------------------|
 | `duration`   | int64   | La duración de la solicitud en nanosegundos. |
 | `error`      | int32   | Establece este valor en 1 para indicar si se ha producido un error. Si se produce un error, debes añadir información adicional, como el mensaje de error, el tipo y la información de stack en la propiedad meta. |
-| `meta`       | objecto  | Conjunto de metadatos clave-valor. Las claves y los valores deben ser cadenas. |
+| `meta`       | objeto  | Conjunto de metadatos clave-valor. Las claves y los valores deben ser cadenas. |
 | - `<any-key>` | cadena | Propiedades adicionales para metadatos clave-valor. |
 | métricas    | objeto  | Un conjunto de metadatos clave-valor. Las claves deben ser cadenas y los valores deben ser números de coma flotante de 64 bits. |
 | - `<any-key>` | doble | Propiedades adicionales para métricas clave-valor. |
@@ -57,8 +59,8 @@ y cada tramo es un diccionario con `trace_id`, `span_id`, `resource` y así suce
 | `service`    | cadena  | El servicio que estás rastreando. El nombre de servicio no debe tener más de 100 caracteres. |
 | `span_id`    | int64   | El ID de número entero del tramo (64 bits sin signo). |
 | `start`      | int64   | La hora de inicio de la solicitud en nanosegundos desde la epoch UNIX. |
-| `trace_id`   | int64 o int128   | El ID de número entero único (64 bits sin signo o 128 bits sin signo) de la traza que contiene este tramo. |
-| `type`       | enumerado    | Tipo de solicitud. Valores de enumerado (enum) permitidos: `web`, `db`, `cache`, `custom` |
+| `trace_id`   | int64   | Los 64 bits inferiores del ID entero único para la traza que contiene este tramo. Para un ID de traza de 128 bits, configura los 64 bits superiores utilizando la etiqueta (tag) `_dd.p.tid` en formato hexadecimal en minúsculas en el campo `meta`. |
+| `type`       | enum    | Tipo de solicitud. Valores de enumerado (enum) permitidos: `web`, `db`, `cache`, `custom` |
 
 
 ### Ejemplo
@@ -153,6 +155,6 @@ Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

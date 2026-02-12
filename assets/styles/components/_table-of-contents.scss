@@ -7,7 +7,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 
 .announcement {
     .mobile-toc-toggle {
-        top: 130px;
+        top: 115px;
     }
 }
 
@@ -88,7 +88,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         @media (min-width: 991px) {
             max-width: 220px !important;
             padding-right: 20px !important;
-        }    
+        }
         @media (min-width: 1440px) {
             margin-right: -40%;
         }
@@ -207,16 +207,72 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         display: block;
     }
 
+    img {
+        position: relative;
+        top: -1px;
+    }
+
     a {
         font-size: 18px;
         &:lang(ja) {
             font-size: 16px;
 
             .toc-edit-btn img {
-                width: 35px;
+                width: 30px;
             }
         }
     }
+}
+
+.toc-copy-btn {
+    display: none;
+    @media (min-width: 991px) {
+        display: block;
+        margin-top: -1rem;
+    }
+
+    a {
+        position: relative;
+        font-size: 18px;
+        &:lang(ja) {
+            font-size: 16px;
+
+            .toc-copy-btn img {
+                width: 30px;
+            }
+        }
+    }
+
+    .copy-btn-icon-wrapper {
+        position: relative;
+        margin-right: 4px;
+        top: 5px;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+    }
+
+    #page-copied-text {
+        display: none;
+    }
+}
+
+.copy-btn-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    img {
+        opacity: inherit;
+    }
+}
+
+.copy-btn-icon__after {
+    opacity: 0;
+}
+
+.copy-btn-icon__before {
+    opacity: 1;
 }
 
 .toc-container-mobile {

@@ -6,10 +6,6 @@ further_reading:
     text: "Learn how to monitor your CI tests"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page provides information to help you troubleshot issues with Test Optimization. If you need additional help, contact [Datadog Support][2].
@@ -17,7 +13,7 @@ This page provides information to help you troubleshot issues with Test Optimiza
 ## Your tests are instrumented, but Datadog isn't showing any data
 
 1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
-2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in the [**Tests**][5] section, Git information is missing. See [Data appears in Test Runs but not Tests](#data-appears-in-test-runs-but-not-tests) to troubleshoot it.
+2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in [**Test Health**][5] when viewing the repositories list or an individual repository, Git information is missing. See [Data appears in Test Runs but not Test Health](#data-appears-in-test-runs-but-not-test-health) to troubleshoot it.
 3. If you are reporting the data through the Datadog Agent, make sure there is [network connectivity][15] from your test-running host to the Agent's host and port. Run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the tracer to verify connectivity to the Agent.
 4. If you are reporting the data directly to Datadog ("Agentless mode"), make sure there is [network connectivity][16] from the test-running hosts to Datadog's hosts. You can activate [debug mode][6] in the tracer to verify connectivity to Datadog.
 5. If you still don't see any results, [contact Support][2] for troubleshooting help.
@@ -29,9 +25,9 @@ The following aspects make a JUnit test report incorrect:
 * A timestamp of the reported tests that is older than **71 hours** before the moment the report is uploaded.
 * A testsuite without a name.
 
-## Data appears in test runs but not tests
+## Data appears in Test Runs but not Test Health
 
-If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [**Tests**][5] section.
+If you can see test results data in the **Test Runs** tab, but not in **Test Health** when viewing the repositories list or an individual repository, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in repository sections of the [**Test Health**][5] page.
 
 1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
@@ -47,6 +43,34 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    : Full (40-character long SHA1) commit hash.<br/>
    **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
+   `DD_GIT_COMMIT_AUTHOR_EMAIL` **(required)**
+   : Commit author email.<br/>
+   **Example**: `john@example.com`
+
+   `DD_GIT_COMMIT_AUTHOR_NAME`
+   : Commit author name.<br/>
+   **Example**: `John Smith`
+
+   `DD_GIT_COMMIT_AUTHOR_DATE`
+   : Commit author date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_COMMITTER_EMAIL`
+   : Commit committer email.<br/>
+   **Example**: `jane@example.com`
+
+   `DD_GIT_COMMIT_COMMITTER_NAME`
+   : Commit committer name.<br/>
+   **Example**: `Jane Smith`
+
+   `DD_GIT_COMMIT_COMMITTER_DATE`
+   : Commit committer date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_MESSAGE`
+   : Commit message.<br/>
+   **Example**: `Set release number`
+
    `DD_GIT_BRANCH`
    : Git branch being tested. Leave empty if providing tag information instead.<br/>
    **Example**: `develop`
@@ -54,34 +78,6 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    `DD_GIT_TAG`
    : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
    **Example**: `1.0.1`
-
-   `DD_GIT_COMMIT_MESSAGE`
-   : Commit message.<br/>
-   **Example**: `Set release number`
-
-   `DD_GIT_COMMIT_AUTHOR_NAME`
-   : Commit author name.<br/>
-   **Example**: `John Smith`
-
-   `DD_GIT_COMMIT_AUTHOR_EMAIL`
-   : Commit author email.<br/>
-   **Example**: `john@example.com`
-
-   `DD_GIT_COMMIT_AUTHOR_DATE`
-   : Commit author date in ISO 8601 format.<br/>
-   **Example**: `2021-03-12T16:00:28Z`
-
-   `DD_GIT_COMMIT_COMMITTER_NAME`
-   : Commit committer name.<br/>
-   **Example**: `Jane Smith`
-
-   `DD_GIT_COMMIT_COMMITTER_EMAIL`
-   : Commit committer email.<br/>
-   **Example**: `jane@example.com`
-
-   `DD_GIT_COMMIT_COMMITTER_DATE`
-   : Commit committer date in ISO 8601 format.<br/>
-   **Example**: `2021-03-12T16:00:28Z`
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
@@ -153,6 +149,32 @@ It is likely that the [test case configuration][13] is unstable because one or m
 
 The best way to fix this is to make sure that the test parameters are the same between test runs.
 
+## Session history, performance or code coverage tab only show a single execution
+
+This is likely caused by an unstable test session fingerprint. There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
+
+- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `bundle exec rspec --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `dotnet test --results-directory /var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use `DD_TEST_SESSION_NAME` to identify a group of tests. Example values for this tag include:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+## Test Impact Analysis does not show any time saved
+
+This is also caused by an unstable test session fingerprint. See the [Session history, performance or code coverage tab only show a single execution](#session-history-performance-or-code-coverage-tab-only-show-a-single-execution) section for more information.
+
+## Flaky test management tags are missing or have an unexpected order in test events
+
+When retrying a flaky test multiple times within a short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky`, or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out of order, causing the tags to not follow the logical order of events.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -160,14 +182,14 @@ The best way to fix this is to make sure that the test parameters are the same b
 [1]: https://www.jenkins.io/doc/book/system-administration/viewing-logs/
 [2]: /help/
 [3]: /continuous_integration/tests/
-[4]: https://app.datadoghq.com/ci/test-runs
-[5]: https://app.datadoghq.com/ci/test-repositories
+[4]: https://app.datadoghq.com/ci/test/runs
+[5]: https://app.datadoghq.com/ci/test/health
 [6]: /tracing/troubleshooting/tracer_debug_logs
 [7]: /continuous_integration/tests/containers/
 [8]: https://github.com/travisjeffery/timecop
 [9]: https://github.com/spulec/freezegun
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[11]: https://app.datadoghq.com/ci/settings/repository
+[11]: https://app.datadoghq.com/source-code/repositories
 [12]: /tests/test_impact_analysis/
 [13]: /tests/#parameterized-test-configurations
 [14]: /tests/#supported-features

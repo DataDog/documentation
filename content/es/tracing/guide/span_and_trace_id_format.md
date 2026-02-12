@@ -1,18 +1,20 @@
 ---
 aliases:
 - /es/tracing/faq/span_and_trace_id_format/
+description: Guía sobre los formatos de ID de traza y tramos válidos admitidos por
+  las bibliotecas de rastreo de Datadog y su correlación con los logs.
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: documentación
   text: Correlacionar logs y trazas
-title: Formatos de ID de traza y tramo
+title: Formatos de ID de traza (trace) y tramo (span)
 ---
 {{< jqmath-vanilla >}}
 
-Esta página detalla la compatibilidad de la biblioteca de rastreo de Datadog con los IDs de traza (trace) y tramo (span).
+Esta página detalla la compatibilidad de la biblioteca de rastreo de Datadog con las trazas y {{< tooltip glossary="span id" >}}s.
 
-- **IDs generados**: oor defecto, todas las bibliotecas de rastreo generan IDs de traza de 128 bits e IDs de tramo de 64 bits.
-- **IDs aceptados**: Datadog acepta IDs de traza de 128 o 64 bits, e IDs de tramo de 64 bits.
+- **ID generados**: oor defecto, todas las bibliotecas de rastreo generan ID de traza de 128 bits e ID de tramo de 64 bits.
+- **ID aceptados**: Datadog acepta ID de traza de 128 o 64 bits, e ID de tramo de 64 bits.
 
 ## Identificadores de traza de 128 bits
 
@@ -27,11 +29,11 @@ Los ID de traza de 128 bits se generan y aceptan por defecto en las últimas ver
 - [PHP][7]    
 - [C++][8]   
 
-## IDs de traza y tramo de 64 bits
+## ID de traza y tramo de 64 bits
 
-### IDs de traza
+### ID de traza
 
-Por defecto, los IDs de traza se generan como 128 bits, y se aceptan como enteros de 128 o 64 bits. Para generar IDs de traza de 64 bits, ajusta la variable de entorno `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED` en `false`.
+Por defecto, los ID de traza se generan como 128 bits, y se aceptan como enteros de 128 o 64 bits. Para generar ID de traza de 64 bits, ajusta la variable de entorno `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED` en `false`.
 
 ### IDs de tramo
 
@@ -48,7 +50,7 @@ Los ID de tramo están limitados a 64 bits en Datadog.
 | PHP        | Sin signo [1, $2^64-1$]   | Sin signo                      |
 | C++        | Sin signo [0, $2^63-1$]   | Sin signo                      |
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

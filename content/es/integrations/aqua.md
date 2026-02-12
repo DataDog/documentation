@@ -1,85 +1,33 @@
 ---
 app_id: aqua
-app_uuid: d3819b09-3e08-492f-b0f8-b0d3f53fbdf5
-assets:
-  dashboards:
-    aqua: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: aqua.running_containers
-      metadata_path: metadata.csv
-      prefix: aqua.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10042
-    source_type_name: Aqua
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Aqua
-  sales_email: oran.moshai@aquasec.com
-  support_email: oran.moshai@aquasec.com
 categories:
-- contenedores
+- rastreo
 - recopilación de logs
 - seguridad
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: aqua
-integration_id: aqua
-integration_title: Aqua
-integration_version: 1.0.0
-is_public: true
-manifest_version: 2.0.0
-name: aqua
-public_title: Aqua
-short_description: Solución de seguridad completa desde el desarrollo hasta la producción
+description: Solución de seguridad completa desde el desarrollo hasta la producción
   para contenedores y aplicaciones nativas de la nube
+integration_version: 1.0.1
+media: []
 supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Log Collection
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Configuración
-  description: Solución de seguridad completa desde el desarrollo hasta la producción
-    para contenedores y aplicaciones nativas de la nube
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Aqua
+- Linux
+- Windows
+- macOS
+title: Aqua
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-Este check monitoriza [Aqua][1].
+Este check monitoriza [Aqua](https://www.aquasec.com).
 
 El check de Aqua alerta al usuario si se alcanza una vulnerabilidad de alta gravedad total o si un contenedor se está ejecutando dentro de un host no registrado por Aqua. Aqua también envía alertas de datos sobre eventos bloqueados en tiempo de ejecución y es posible activar un webhook para escalar la infraestructura si se requieren más analizadores de Aqua.
 
 ## Configuración
 
-El check de Aqua no está incluido en el paquete del [Datadog Agent][2], por lo que es necesario instalarlo.
+El check de Aqua no está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest), por lo que es necesario instalarlo.
 
 ### Instalación
 
-Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación para instalar el check de Aqua en tu host. Para instalarlo con el Agent Docker o versiones anteriores del Agent, consulta [Uso de integraciones de la comunidad][3].
+Para el Agent v7.21 o posterior/v6.21 o posterior, sigue las instrucciones siguientes para instalar el check de Aqua en tu host. Consulta [Uso de integraciones de la comunidad](https://docs.datadoghq.com/agent/guide/use-community-integrations/) para realizar la instalación con el Docker Agent o versiones anteriores del Agent.
 
 1. Ejecuta el siguiente comando para instalar la integración del Agent:
 
@@ -87,13 +35,13 @@ Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación
    datadog-agent integration install -t datadog-aqua==<INTEGRATION_VERSION>
    ```
 
-2. Configura tu integración como si fuese una [integración][4] de base.
+1. Configura tu integración de forma similar a las [integraciones](https://docs.datadoghq.com/getting_started/integrations/) centrales.
 
 ### Configuración
 
 #### Recopilación de métricas
 
-1. Edita el archivo `aqua.d/conf.yaml` en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][5] para empezar a recopilar tus [métricas](#metrics) de Aqua. Consulta el [conf.yaml de ejemplo][6] para conocer todas las opciones de configuración disponibles.
+1. Edita el archivo `aqua.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu [directorio de configuración del Agent](https://docs.datadoghq.com/agent/faq/agent-configuration-files/#agent-configuration-directory) para comenzar a recopilar tus [métricas](#metrics) de Aqua. Consulta el [ejemplo de conf.yaml](https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
    ```yaml
    instances:
@@ -104,7 +52,7 @@ Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación
 
    Cambia los valores de los parámetros `api_user` y `password` y configúralos para tu entorno.
 
-2. [Reinicia el Agent][7].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
 
 #### Recopilación de logs
 
@@ -116,14 +64,14 @@ Hay dos tipos de logs generados por Aqua:
 Para recopilar los logs de auditoría de Aqua:
 
 1. Conéctate a tu cuenta de Aqua.
-2. Ve a la sección `Log Management` de la página `Integration`.
-3. Activa la integración del webhook.
-4. Habilítala y añade el siguiente endpoint: `{{< region-param key="http_endpoint" code="true" >}}/v1/input/<DATADOG_API_KEY>?ddsource=aqua`.
-   - Sustituye `<DATADOG_API_KEY>` por tu [clave de API Datadog][8].
+1. Ve a la sección `Log Management` de la página `Integration`.
+1. Activa la integración del webhook.
+1. Habilítala y añade el siguiente endpoint: `{{< region-param key="http_endpoint" code="true" >}}/v1/input/<DATADOG_API_KEY>?ddsource=aqua`.
+   - Sustituye `<DATADOG_API_KEY>` por tu [clave de API Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
 Para los logs de Aqua Enforcer: **Disponible para Agent 6.0 o posteriores**
 
-5. La recopilación de logs está deshabilitada por defecto en el Datadog Agent. Actívala en tu [configuración de daemonset][9]:
+5. La recopilación de logs está deshabilitada por defecto en el Datadog Agent. Habilítala en la [configuración de tu daemonset](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#log-collection):
 
    ```yaml
      # (...)
@@ -136,44 +84,39 @@ Para los logs de Aqua Enforcer: **Disponible para Agent 6.0 o posteriores**
      # (...)
    ```
 
-    Asegúrate de que el socket de Docker esté montado en el Datadog Agent. Consulta la documentación de Kubernetes para ver los [manifiestos de ejemplo][10].
+   Asegúrate de que el socket Docker está montado en el Datadog Agent. Consulta la documentación de Kubernetes para ver [manifiestos de ejemplo](https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset#installation).
 
-6. [Reinicia el Agent][7].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando `status` del Agent][11] y busca `aqua` en la sección Checks.
+[Ejecuta el subcomando `status` del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#service-status) y busca `aqua` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "aqua" >}}
 
+| | |
+| --- | --- |
+| **aqua.images** <br>(gauge) | Número de imágenes vistas por Aqua<br>_Se muestra como unidad_ |
+| **aqua.vulnerabilities** <br>(gauge) | Número y categorías de vulnerabilidades detectadas por Aqua<br>_Se muestra como caso_ |
+| **aqua.running_containers** <br>(gauge) | Número de contenedores en ejecución vistos por Aqua<br>_Se muestra como contenedor_ |
+| **aqua.audit.access** <br>(gauge) | Número de eventos de auditoría por categoría<br>_Se muestra como evento_ |
+| **aqua.scan_queue** <br>(gauge) | Número de colas de análisis por tipo<br>_Se muestra como caso_ |
+| **aqua.enforcers** <br>(gauge) | Número de ejecutores de host por estado<br>_Se muestra como host_ |
 
 ### Eventos
 
 Aqua no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "aqua" >}}
 
+**aqua.can_connect**
+
+Devuelve CRITICAL si el Agent no puede conectarse a Aqua para recopilar métricas. En caso contrario, devuelve OK.
+
+_Estados: ok, crítico_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][14].
-
-
-[1]: https://www.aquasec.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/es/getting_started/integrations/
-[5]: https://docs.datadoghq.com/es/agent/faq/agent-configuration-files/#agent-configuration-directory
-[6]: https://github.com/DataDog/integrations-extras/blob/master/aqua/datadog_checks/aqua/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/es/agent/faq/agent-commands/#start-stop-restart-the-agent
-[8]: https://app.datadoghq.com/organization-settings/api-keys
-[9]: https://docs.datadoghq.com/es/agent/kubernetes/daemonset_setup/#log-collection
-[10]: https://docs.datadoghq.com/es/agent/kubernetes/?tab=daemonset#installation
-[11]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#service-status
-[12]: https://github.com/DataDog/integrations-extras/blob/master/aqua/metadata.csv
-[13]: https://github.com/DataDog/integrations-extras/blob/master/aqua/assets/service_checks.json
-[14]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

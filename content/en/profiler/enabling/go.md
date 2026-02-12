@@ -23,7 +23,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][18].
 
-The Datadog Profiler requires Go 1.19+.
+The Datadog Profiler requires one of the latest two major Go releases. These are the major Go releases [supported by the Go project][24].
 
 For the [Trace to Profiling integration][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.51.0+.
 
@@ -38,15 +38,18 @@ To begin profiling applications:
 2. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    go get github.com/DataDog/dd-trace-go/v2/profiler
     ```
+     <div class="alert alert-info">
+      If you are using v1 of the Go tracer, 
+      see the <a href="/tracing/trace_collection/custom_instrumentation/go/migration">migration guide</a> 
+      to upgrade to v2 and for all future updates and features.
+    </div>
 
-     **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
+3. Import the [profiler][21] at the start of your application:
 
-3. Import the [profiler][6] at the start of your application:
-
-    ```Go
-    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    ```go
+    import "github.com/DataDog/dd-trace-go/v2/profiler"
     ```
 
 4. Add the following snippet to start the profiler:
@@ -78,9 +81,9 @@ To begin profiling applications:
 
 5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 
-6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][10]. If they do not, refer to the [Troubleshooting][25] guide.
 
-**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
+**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][22] and [profile types][23]. For legacy v1 documentation, view [profiler.WithProfileTypes][11] to enable additional [profile types][12].
 
 If you automatically instrument your Go application with [Orchestrion][20], it adds the continuous profiler code to your application. To enable the profiler at run time, set the environment variable `DD_PROFILING_ENABLED=true`.
 
@@ -158,3 +161,8 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [18]: /profiler/enabling/supported_versions/
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [20]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[21]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#pkg-constants
+[22]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
+[23]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType
+[24]: https://go.dev/doc/devel/release
+[25]: /profiler/profiler_troubleshooting/go/

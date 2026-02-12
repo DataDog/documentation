@@ -1,0 +1,57 @@
+{{ $dot := . }}
+<div class="rum-platforms">
+  <div class="container cards-dd">
+    <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+      <div class="col">
+        <a class="card h-100" href="/logs/log_collection/javascript">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/javascript_large.svg" "class" "img-fluid" "alt" "browser" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/logs/log_collection/android">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/android_large.svg" "class" "img-fluid" "alt" "android" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/logs/log_collection/ios">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/ios_large.svg" "class" "img-fluid" "alt" "ios" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+       <a class="card h-100" href="/logs/log_collection/flutter/">
+         <div class="card-body text-center py-2 px-1">
+           {{ partial "img.html" (dict "root" . "src" "integrations_logos/flutter_large.svg" "class" "img-fluid" "alt" "flutter" "width" "200") }}
+         </div>
+       </a>
+     </div>
+      {{/*  <br>  */}}
+      <div class="col">
+       <a class="card h-100" href="/logs/log_collection/reactnative">
+         <div class="card-body text-center py-2 px-1">
+           {{ partial "img.html" (dict "root" . "src" "integrations_logos/react-native_large.svg" "class" "img-fluid" "alt" "react native" "width" "200") }}
+         </div>
+       </a>
+     </div>
+      <div class="col">
+        <a class="card h-100" href="/logs/log_collection/roku">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/roku_large.svg" "class" "img-fluid" "alt" "Roku" "width" "200") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/logs/log_collection/kotlin_multiplatform">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/kotlin-multiplatform_large.svg" "class" "img-fluid" "alt" "Kotlin Multiplatform" "width" "200") }}
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

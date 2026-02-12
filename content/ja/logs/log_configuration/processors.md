@@ -25,6 +25,8 @@ title: プロセッサー
 
 ## 概要
 
+<div class="alert alert-info">このドキュメントで説明しているプロセッサーは、クラウドベースのログ環境に特化しています。オンプレミスのログを解析、構造化、エンリッチするには、<a href="https://docs.datadoghq.com/observability_pipelines/processors/">Observability Pipelines</a> を参照してください。</div>
+
 プロセッサーは[パイプライン][1]の中で実行され、データ構造化アクションを完了し、ログを豊かにする属性を生成します。
 
 {{< img src="logs/log_configuration/processor/processor_overview.png" alt="プロセッサー" style="width:100%" >}}
@@ -723,9 +725,9 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 
 ## トレースリマッパー
 
-アプリケーショントレースとログの間の関連付けを改善する方法は 2 つあります。
+アプリケーショントレースとログ間の関連付けを定義する方法は 2 つあります。
 
-1. [トレース ID をアプリケーションログに挿入する方法][8]のドキュメントを参照してください。セットアップの大半は、ログのインテグレーションによってデフォルトで行われます。
+1. ドキュメントの[アプリケーションログに Trace ID を挿入する方法][8]に従ってください。ログインテグレーションでは、残りのセットアップ手順が既定で自動的に処理されます。
 
 2. トレースリマッパープロセッサーを使用して、トレース ID として関連付けられるログ属性を定義します。
 
@@ -763,6 +765,185 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 {{< /tabs >}}
 
 **注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
+
+## スパンリマッパー
+
+アプリケーションスパンとログ間の関連付けを定義する方法は 2 つあります。
+
+1. ドキュメントの[アプリケーションログに Span ID を挿入する方法][8]に従ってください。ログ連携では、残りのセットアップ手順がデフォルトで自動的に処理されます。
+
+2. スパンリマッパープロセッサーを使用して、ログ属性を関連付けられた Span ID として定義します。
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+[**Pipelines** ページ][1]でスパンリマッパープロセッサーを定義します。プロセッサータイルに Span ID 属性パスを次のように入力してください。
+
+{{< img src="logs/log_configuration/processor/span_id_remapper.png" alt="Span ID プロセッサー" style="width:80%;" >}}
+
+[1]: https://app.datadoghq.com/logs/pipelines
+{{% /tab %}}
+{{% tab "API" %}}
+
+[Datadog ログパイプライン API エンドポイント][1]を使用して、以下のスパンリマッパー用 JSON ペイロードを指定します。
+
+```json
+{
+  "type": "span-id-remapper",
+  "name": "Define dd.span_id as the official span id associate to this log",
+  "is_enabled": true,
+  "sources": ["dd.span_id"]
+}
+```
+
+| パラメーター    | タイプ             | 必須 | 説明                                            |
+|--------------|------------------|----------|--------------------------------------------------------|
+| `type`       | 文字列           | はい      | プロセッサーのタイプ。                                 |
+| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                 |
+| `is_enabled` | Boolean          | いいえ       | このプロセッサーが有効かどうかを示します。デフォルトは `false` です。 |
+| `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト: `dd.trace_id`。    |
+
+[1]: /ja/api/v1/logs-pipelines/
+{{% /tab %}}
+{{< /tabs >}}
+
+**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
+
+## 配列プロセッサー
+
+配列プロセッサーを使用すると、ログ内の JSON 配列から値を抽出、集計、または変換できます。
+
+サポートされる操作には次のものがあります。 
+
+- **一致する要素から値を抽出** 
+- **配列の長さを計算** 
+- **配列に値を追加**
+
+各操作は専用のプロセッサーを通して設定します。
+
+[**Pipelines** ページ][1]で配列プロセッサーを定義してください。
+
+
+### 一致する要素から値を選択
+
+条件に一致するオブジェクトが配列内にある場合、そのオブジェクトから特定の値を抽出します。
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_select_value.png" alt="配列プロセッサー - 一致する要素から値を選択" style="width:80%;" >}}
+
+**例: 入力データ**:
+
+```json
+{
+  "httpRequest": {
+    "headers": [
+      {"name": "Referrer", "value": "https://example.com"},
+      {"name": "Accept", "value": "application/json"}
+    ]
+  }
+}
+```
+
+**設定手順:**
+
+- **Array path**: `httpRequest.headers`
+- **Condition**: `name:Referrer`
+- **Extract value of**: `value`
+- **Target attribute**: `referrer`
+
+**結果:**
+
+```json
+{
+  "httpRequest": {
+    "headers": [...]
+  },
+  "referrer": "https://example.com"
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### 配列の長さ
+
+配列の要素数を計算します。
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_length.png" alt="配列プロセッサー - 長さ" style="width:80%;" >}}
+
+**例: 入力データ**:
+
+```json
+{
+  "tags": ["prod", "internal", "critical"]
+}
+```
+
+**設定手順:**
+
+- **Array attribute**: `tags`
+- **Target attribute**: `tagCount`
+
+**結果:**
+
+```json
+{
+  "tags": ["prod", "internal", "critical"],
+  "tagCount": 3
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### 配列への追加
+
+ログ内のターゲット配列属性の末尾に属性値を追加します。
+
+**注**: ターゲット配列属性がログに存在しない場合は、自動的に作成されます。
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_append.png" alt="配列プロセッサー - 追加" style="width:80%;" >}}
+
+**例: 入力データ**:
+
+```json
+{
+  "network": {
+    "client": {
+      "ip": "198.51.100.23"
+    }
+  },
+  "sourceIps": ["203.0.113.1"]
+}
+
+```
+**設定手順:**
+
+- **Attribute to append**: `"network.client.ip"`
+- **Array attribute to append to**: `sourceIps`
+
+**結果:**
+
+```json
+{
+  "network": {
+    "client": {
+      "ip": "198.51.100.23"
+    }
+  },
+  "sourceIps": ["203.0.113.1", "198.51.100.23"]
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## その他の参考資料
 

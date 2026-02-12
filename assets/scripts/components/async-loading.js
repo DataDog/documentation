@@ -2,6 +2,7 @@ import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
 import { redirectToRegion, hideTOCItems } from '../region-redirects';
 import { initCopyCode } from './copy-code';
+import { initCopyPageButton } from './copy-page-button';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
@@ -85,10 +86,13 @@ function loadPage(newUrl) {
                 hitsContainer.classList.add("hits-container", "d-none");
                 const hits = document.createElement("div");
                 hits.setAttribute("id", "hits");
+                const hitsPartners = document.createElement("div");
+                hitsPartners.setAttribute("id", "hits-partners");
 
                 searchBoxContainer.append(searchBox);
                 searchBoxContainer.append(hitsContainer);
                 hitsContainer.append(hits);
+                hitsContainer.append(hitsPartners);
 
                 if(sidenavSearchbarMount) {
                   sidenavSearchbarMount.append(searchBoxContainer);
@@ -257,6 +261,7 @@ function loadPage(newUrl) {
             toggleMultiCodeLangNav(pageCodeLang);
             hideTOCItems(true)
             initCopyCode()
+            initCopyPageButton()
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });

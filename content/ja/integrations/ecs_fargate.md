@@ -39,7 +39,7 @@ draft: false
 git_integration_title: ecs_fargate
 integration_id: aws-fargate
 integration_title: Amazon ECS on AWS Fargate
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ecs_fargate
@@ -71,7 +71,7 @@ tile:
   - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-aws-fargate
   - resource_type: ドキュメント
-    url: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
+    url: https://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
   - resource_type: blog
     url: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
   - resource_type: blog
@@ -105,11 +105,9 @@ Datadog Agent は、ECS のタスクメタデータエンドポイントでタ�
 
 このメトリクスの収集を有効にするために必要な構成は、タスク定義内で環境変数 `ECS_FARGATE` を `"true"` にすることだけです。
 
-**注**: Network Performance Monitoring (NPM) は、ECS Fargate ではサポートされていません。
-
 ## セットアップ
 
-以下の手順では、AWS ECS Fargate 内で Datadog Container Agent をセットアップします。**注**: Fargate インテグレーションを最大限活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
+以下では、Amazon ECS Fargate で Datadog Container Agent をセットアップする手順を説明します。**注**: Fargate 連携を最大限活用するには Datadog Agent バージョン 6.1.1 以上が必要です。
 
 Datadog Agent を持たないタスクも Cloudwatch でメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent を通じて直接発送されるメトリクスより報告のレイテンシーが高くなります。
 
@@ -234,9 +232,99 @@ Resources:
 
 CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation タスク定義のドキュメント][2]をご参照ください。
 
-
 [1]: https://aws.amazon.com/cloudformation/
 [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
+{{% /tab %}}
+
+{{% tab "CDK" %}}
+##### Datadog CDK タスク定義
+
+ECS Fargate のタスク定義を構成するには、[Datadog CDK コンストラクト][1] を利用できます。`DatadogECSFargate` コンストラクトを使うと、必要な Datadog 機能に合わせてコンテナをインスツルメントできます。TypeScript、JavaScript、Python、Go に対応しています。
+
+
+"{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+以下のコンストラクト定義を、あなたの [Datadog API キー][41] で更新してください。必要に応じて `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) プロパティも指定してください。これを設定しない場合、既定は `datadoghq.com` になります。"
+
+[41]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
+
+```typescript
+const ecsDatadog = new DatadogECSFargate({
+  apiKey: <DATADOG_API_KEY>
+  site: <DATADOG_SITE>
+});
+```
+
+次に、[`FargateTaskDefinitionProps`][2] を使ってタスク定義を作成します。
+
+```typescript
+const fargateTaskDefinition = ecsDatadog.fargateTaskDefinition(
+  this,
+  <TASK_ID>,
+  <FARGATE_TASK_DEFINITION_PROPS>
+);
+```
+
+最後に、[`ContainerDefinitionOptions`][3] を追加して、ほかのアプリケーション コンテナも含めます。
+
+```typescript
+fargateTaskDefinition.addContainer(<CONTAINER_ID>, <CONTAINER_DEFINITION_OPTIONS>);
+```
+
+`DatadogECSFargate` コンストラクトのインスツルメンテーションや構文の詳細は、[Datadog ECS Fargate CDK ドキュメント][4] を参照してください。
+
+[1]: https://github.com/datadog/datadog-cdk-constructs/
+[2]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ecs.FargateTaskDefinitionProps.html
+[3]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ecs.ContainerDefinitionOptions.html
+[4]: https://github.com/DataDog/datadog-cdk-constructs/blob/main/src/ecs/fargate/README.md
+{{% /tab %}}
+
+{{% tab "Terraform" %}}
+##### Datadog Terraform タスク定義
+
+Datadog 向けにコンテナを構成するには、[Datadog ECS Fargate Terraform モジュール][1] を利用できます。この Terraform モジュールは [`aws_ecs_task_definition`][2] リソースをラップし、Datadog 向けにタスク定義を自動でインスツルメントします。入力引数は `aws_ecs_task_definition` と同じ要領で Datadog ECS Fargate Terraform モジュールに渡します。タスクの `family` と `container_definitions` は必ず指定してください。
+
+
+"{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+以下の Terraform モジュールを、あなたの [Datadog API キー][41] で更新してください。また、必要に応じて `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) 環境変数も設定してください。これを設定しない場合、既定は `datadoghq.com` になります。"
+
+[41]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
+
+```hcl
+module "ecs_fargate_task" {
+  source  = "https://registry.terraform.io/modules/DataDog/ecs-datadog/aws/latest"
+  version = "1.0.0"
+
+  # Datadog の設定
+  dd_api_key = <DATADOG_API_KEY>
+  dd_site    = <DATADOG_SITE>
+  dd_dogstatsd = {
+    enabled = true,
+  }
+  dd_apm = {
+    enabled = true,
+  }
+
+  # タスク定義の設定
+  family                   = <TASK_FAMILY>
+  container_definitions    = <CONTAINER_DEFINITIONS>
+  cpu                      = 256
+  memory                   = 512
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+}
+```
+
+最後に、`ContainerDefinitions` にほかのアプリケーション コンテナを追加し、Terraform でデプロイします。
+
+Terraform モジュールの詳細は、[Datadog ECS Fargate Terraform ドキュメント][3] を参照してください。
+
+[1]: https://registry.terraform.io/modules/DataDog/ecs-datadog/aws/latest
+[2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition
+[3]: https://registry.terraform.io/modules/DataDog/ecs-datadog/aws/latest/submodules/ecs_fargate
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -316,6 +404,43 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
 {{% /tab %}}
 
+{{% tab "CDK" %}}
+##### AWS CDK レプリカ サービス
+
+CDK コードでは、前の例で作成した `fargateTaskDefinition` リソースを、作成する `FargateService` リソースから参照できます。そのうえで、レプリカ サービスで `Cluster`、`DesiredCount`、およびアプリケーションに必要なその他のパラメータを指定します。
+
+```typescript
+const service = new ecs.FargateService(this, <SERVICE_ID>, {
+  <CLUSTER>,
+  fargateTaskDefinition,
+  desiredCount: 1
+});
+```
+
+CDK の ECS Service コンストラクトと構文の詳細は、[AWS CDK ECS Service ドキュメント][1] を参照してください。
+
+[1]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ecs.FargateService.html
+{{% /tab %}}
+
+{{% tab "Terraform" %}}
+##### AWS Terraform レプリカ サービス
+
+Terraform コードでは、前の例で作成した `aws_ecs_task_definition` リソースを、作成する `aws_ecs_service` リソース内から参照できます。そのうえで、レプリカ サービスで `Cluster`、`DesiredCount`、およびアプリケーションに必要なその他のパラメータを指定します。
+
+```hcl
+resource "aws_ecs_service" <SERVICE_ID> {
+  name            = <SERVICE_NAME>
+  cluster         = <CLUSTER_ID>
+  task_definition = module.ecs_fargate_task.arn
+  desired_count   = 1
+}
+```
+
+Terraform の ECS service モジュールと構文の詳細は、[AWS Terraform ECS service ドキュメント][1] を参照してください。
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service
+{{% /tab %}}
+
 {{< /tabs >}}
 
 Datadog API キーをシークレットとして提供するには、 [シークレットの使用](#using-secrets)を参照してください。
@@ -356,6 +481,7 @@ Docker Agent コンテナと共に使用できる環境変数については、[
 
 | 環境変数               | 説明                                    |
 |------------------------------------|------------------------------------------------|
+| `DD_TAGS`                          | タグを追加します。例: `key1:value1 key2:value2`。 |
 | `DD_DOCKER_LABELS_AS_TAGS`         | docker コンテナラベルを抽出します                |
 | `DD_CHECKS_TAG_CARDINALITY`        | タグをチェックメトリクスに追加します                      |
 | `DD_DOGSTATSD_TAG_CARDINALITY`     | タグをカスタムメトリクスに追加します                     |
@@ -545,6 +671,28 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 {{< /site-region >}}
 
 
+{{< site-region region="ap1" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "apikey": "<DATADOG_API_KEY>",
+        "Host": "http-intake.logs.ap1.datadoghq.com",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      }
+    }
+  }
+  ```
+{{< /site-region >}}
+
+
 {{< site-region region="gov" >}}
   ```json
   {
@@ -566,6 +714,175 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
   ```
 {{< /site-region >}}
 
+
+{{% collapse-content title="secretOptions を使って API キーを平文で露出させない例" level="h4" %}}
+
+{{< site-region region="us" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "Host": "http-intake.logs.datadoghq.com",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      },
+      "secretOptions": [
+      {
+        "name": "apikey",
+        "valueFrom": "<API_SECRET_ARN>"
+      }
+    ]
+   }
+  }
+  ```
+{{< /site-region >}}
+
+
+{{< site-region region="us3" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "Host": "http-intake.logs.us3.datadoghq.com",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      },
+      "secretOptions": [
+      {
+        "name": "apikey",
+        "valueFrom": "<API_SECRET_ARN>"
+      }
+    ]
+    }
+  }
+  ```
+{{< /site-region >}}
+
+
+{{< site-region region="us5" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "Host": "http-intake.logs.us5.datadoghq.com",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      },
+      "secretOptions": [
+      {
+        "name": "apikey",
+        "valueFrom": "<API_SECRET_ARN>"
+      }
+    ]
+    }
+  }
+  ```
+{{< /site-region >}}
+
+
+{{< site-region region="eu" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "Host": "http-intake.logs.datadoghq.eu",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      },
+      "secretOptions": [
+      {
+        "name": "apikey",
+        "valueFrom": "<API_SECRET_ARN>"
+      }
+    ]
+    }
+  }
+  ```
+{{< /site-region >}}
+
+
+{{< site-region region="ap1" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "Host": "http-intake.logs.ap1.datadoghq.com",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      },
+      "secretOptions": [
+      {
+        "name": "apikey",
+        "valueFrom": "<API_SECRET_ARN>"
+      }
+    ]
+    }
+  }
+  ```
+{{< /site-region >}}
+
+
+{{< site-region region="gov" >}}
+  ```json
+  {
+    "logConfiguration": {
+      "logDriver": "awsfirelens",
+      "options": {
+        "Name": "datadog",
+        "Host": "http-intake.logs.ddog-gov.datadoghq.com",
+        "dd_service": "firelens-test",
+        "dd_source": "redis",
+        "dd_message_key": "log",
+        "dd_tags": "project:fluentbit",
+        "TLS": "on",
+        "provider": "ecs"
+      },
+      "secretOptions": [
+      {
+        "name": "apikey",
+        "valueFrom": "<API_SECRET_ARN>"
+      }
+    ]
+    }
+  }
+  ```
+{{< /site-region >}}
+
+
+
+Datadog API キーをシークレットとして提供するには、 [シークレットの使用](#using-secrets)を参照してください。
+
+{{% /collapse-content %}}
 
 
 {{< site-region region="us,us3,us5,eu,ap1,gov" >}}
@@ -795,9 +1112,56 @@ Resources:
 
 CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation ドキュメント][2]をご参照ください。
 
-
 [1]: https://aws.amazon.com/cloudformation/
 [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
+{{% /tab %}}
+
+{{% tab "CDK" %}}
+##### Datadog ECS Fargate CDK コンストラクト
+
+[Datadog ECS Fargate CDK][1] コンストラクト経由でログ収集を有効にするには、以下のとおり `logCollection` プロパティを設定します:
+
+```typescript
+const ecsDatadog = new DatadogECSFargate({
+  apiKey: <DATADOG_API_KEY>,
+  site: <DATADOG_SITE>,
+  logCollection: {
+    isEnabled: true,
+  }
+});
+```
+
+[1]: https://github.com/DataDog/datadog-cdk-constructs/blob/main/src/ecs/fargate/README.md
+{{% /tab %}}
+
+{{% tab "Terraform" %}}
+##### Datadog ECS Fargate Terraform モジュール
+
+[Datadog ECS Fargate Terraform][1] モジュール経由でログ収集を有効にするには、以下のとおり `dd_log_collection` 入力引数を設定します:
+
+```hcl
+module "ecs_fargate_task" {
+  source  = "https://registry.terraform.io/modules/DataDog/ecs-datadog/aws/latest"
+  version = "1.0.0"
+
+  # Datadog の設定
+  dd_api_key = <DATADOG_API_KEY>
+  dd_site    = <DATADOG_SITE>
+  dd_log_collection = {
+    enabled = true,
+  }
+
+  # タスク定義の設定
+  family                   = <TASK_FAMILY>
+  container_definitions    = <CONTAINER_DEFINITIONS>
+  cpu                      = 256
+  memory                   = 512
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+}
+```
+
+[1]: https://registry.terraform.io/modules/DataDog/ecs-datadog/aws/latest
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -872,7 +1236,9 @@ ECS でプロセスをフィルタリングするには、`AWS Fargate` コン�
 
 Agent は、タグを自動検出して、タスク全体またはこのタスクまたはジョブ内の個別のコンテナにより送信されたすべてのデータに関連付けます。自動的に関連付けられるタグのリストは、Agent の[カーディナリティ構成][43]に基づきます。
 
-  | タグ                           | カーディナリティ  | ソース               |
+**注**: タスク定義で `env` と `service` タグを設定すると、Datadog のユニファイド サービス タギングを最大限に活用できます。手順は、ユニファイド サービス タギング ドキュメントの [完全な設定セクション][44] を参照してください。
+
+  | Tag                           | カーディナリティ  | ソース               |
   |-------------------------------|--------------|----------------------|
   | `container_name`              | 大         | ECS API              |
   | `container_id`                | 大         | ECS API              |
@@ -909,16 +1275,17 @@ ECS Fargate チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][44]
+- ブログ記事: [Datadog で AWS Fargate アプリケーションを監視する][45]
 - よくあるご質問: [ECS Fargate のインテグレーションセットアップ][12]
-- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][45]
-- ブログ記事: [AWS Fargate 監視のための主要メトリクス][46]
-- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][47]
-- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][48]
-- ブログ記事: [Graviton2 による AWS Fargate のデプロイメント][49]
-- ブログ記事: [Windows コンテナ型アプリ向けに AWS Fargate を監視する][50]
-- ブログ記事: [AWS Fargate 上で実行されるプロセスを Datadog で監視する][51]
-- ブログ記事: [AWS Batch on Fargate を Datadog で監視する][52]
+- ブログ記事: [FireLens と Datadog を使って Fargate のコンテナ ログを監視する][46]
+- ブログ記事: [AWS Fargate 監視に重要なメトリクス][47]
+- ブログ記事: [AWS Fargate ワークロードからメトリクスとログを収集する方法][48]
+- ブログ記事: [Datadog による AWS Fargate 監視][49]
+- ブログ記事: [Graviton2 搭載の AWS Fargate デプロイメント][50]
+- ブログ記事: [Windows コンテナ化アプリ向け AWS Fargate を監視する][51]
+- ブログ記事: [Datadog で AWS Fargate 上で動作するプロセスを監視する][52]
+- ブログ記事: [Fargate 上の AWS Batch を Datadog で監視する][53]
+- ドキュメント: [ECS Fargate へのプロキシ時に API Gateway のトレースを取得する][54]
 
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-metadata-endpoint.html
@@ -964,12 +1331,14 @@ ECS Fargate チェックには、イベントは含まれません。
 [41]: https://app.datadoghq.com/process
 [42]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 [43]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
-[44]: https://www.datadoghq.com/blog/monitor-aws-fargate
-[45]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
-[46]: https://www.datadoghq.com/blog/aws-fargate-metrics/
-[47]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
-[48]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
-[49]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
-[50]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/
-[51]: https://www.datadoghq.com/blog/monitor-fargate-processes/
-[52]: https://www.datadoghq.com/blog/monitor-aws-batch-on-fargate/
+[44]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/?tab=ecs#full-configuration
+[45]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[46]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[47]: https://www.datadoghq.com/blog/aws-fargate-metrics/
+[48]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+[49]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
+[50]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
+[51]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/
+[52]: https://www.datadoghq.com/blog/monitor-fargate-processes/
+[53]: https://www.datadoghq.com/blog/monitor-aws-batch-on-fargate/
+[54]: https://docs.datadoghq.com/ja/tracing/trace_collection/proxy_setup/apigateway

@@ -25,6 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - aws
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md
 display_on_public_website: true
@@ -32,9 +33,8 @@ draft: false
 git_integration_title: amazon_kafka
 integration_id: amazon-kafka
 integration_title: Amazon MSK(에이전트)
-integration_version: 4.6.0
+integration_version: 6.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_kafka
 public_title: Amazon MSK(에이전트)
@@ -50,10 +50,15 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - 제공::통합
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: Amazon MSK 클러스터 상태와 성능을 모니터링하세요.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitor-amazon-msk/
   support: README.md#Support
   title: Amazon MSK(에이전트)
 ---
@@ -63,7 +68,7 @@ tile:
 
 ## 개요
 
-Amazon Managed Streaming for Apache Kafka(MSK)는 Apache Kafka를 이용해 스트리밍 데이터를 처리하는 애플리케이션을 빌드하고 실행하기 쉽게 도와주는 전체 관리형 서비스입니다.
+Amazon Managed Streaming for Apache Kafka(MSK)는 전체 관리형 서비스로, Apache Kafka를 이용해 스트리밍 데이터를 처리하는 애플리케이션을 빌드하고 실행하기 쉽게 도와줍니다.
 
 [Datadog 에이전트](#setup) 또는 클라우드와치(CloudWatch)에서 메트릭을 수집하는 [크롤러][1]를 사용해 두 가지 방법으로 이 통합에서 메트릭을 수집할 수 있습니다.
 
@@ -79,7 +84,7 @@ Amazon Managed Streaming for Apache Kafka(MSK)는 Apache Kafka를 이용해 스�
 
 1. 이미 존재하지 않은 경우 [클라이언트 머신을 생성하세요][5].
 2. 클라이언트 머신에 권한 정책 [arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess][7]가 허용되어 있거나 동급의 [자격 증명][8]을 사용할 수 있는지 확인합니다.
-3. MSK상에서 [프로메테우스를 사용한 개방형 모니터링][9]을 활성화하여 JmxExporter 및 NodeExporter를 활성화하세요.
+3. MSK상에서 [프로메테우스를 사용한 개방형 모니터링][9]을 활성화하여 JmxExporter 및 NodeExporter를 활성화하세요.
 4. 방금 생성한 클라이언트 머신에 [Datadog 에이전트][10]를 설치하세요.
 
 ### 설정
@@ -102,17 +107,17 @@ Amazon Managed Streaming for Apache Kafka(MSK)는 Apache Kafka를 이용해 스�
 
 [에이전트의 상태 하위 명령을 실행][3]하고 점검 섹션에서 `amazon_msk`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_kafka" >}}
+{{< get-metrics-from-git "amazon-kafka" >}}
 
 
 ### 이벤트
 
 Amazon MSK 점검에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 이 통합에서 제공하는 서비스 점검 목록을 보려면 [service_checks.json][17]을 참조하세요.
 

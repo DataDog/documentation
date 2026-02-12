@@ -9,11 +9,12 @@
 
     .hits-container {
         z-index: 1;
+        filter: none;
     }
 
-    #hits {
+    #hits,
+    #hits-partners {
         margin-top: 13px;
-        filter: none;
     }
 
     .ais-SearchBox-submit {

@@ -1,4 +1,5 @@
 ---
+description: リソース制約の厳しい環境向けに最適化された Datadog IoT Agent を使って、IoT デバイスや組み込みアプリケーションを監視します。
 further_reading:
 - link: /getting_started/agent/
   tag: Documentation
@@ -10,7 +11,7 @@ title: IoT Agent
 
 Datadog IoT Agent は、IoT デバイスおよび埋め込み型アプリケーションの監視に最適化された、Agent の バージョンです。IoT Agent を使用すると、デジタルディスプレイからセキュリティデバイスまで、画像検知アルゴリズムを実行するさまざまなデバイスを監視することができます。
 
-## 機能
+## 対応能力
 
 IoT Agent には、以下のシステムチェックが含まれています。IoT デバイスのコンフィギュレーションは、ほかのタイプのホストの場合と同様です。
 
@@ -25,7 +26,7 @@ IoT Agent には、以下のシステムチェックが含まれています。I
 - 埋め込み [DogStatsD][6] サーバーを使用したカスタムメトリクスの収集
 - [ファイルテーリング][7]、[TCP/UDP][8]、[journald][9] を使用したログ収集
 
-IoT Agent には、Python インタープリターおよび標準 Agent にパッケージ化されているその他のインテグレーションは含まれません。また、APM のトレース、ライブプロセスモニタリング、ネットワークパフォーマンスモニタリングもサポートしていません。
+IoT Agent には、Python インタープリターおよび標準 Agent にパッケージ化されているその他のインテグレーションは含まれません。また、APM のトレース、ライブプロセスモニタリング、Cloud Network Monitoring もサポートしていません。
 
 ## セットアップ
 
@@ -181,7 +182,7 @@ sudo apt-get remove datadog-iot-agent -y
 sudo apt-get remove --purge datadog-iot-agent -y
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

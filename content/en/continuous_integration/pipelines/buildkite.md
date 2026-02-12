@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a Buildkite Pipeline
+title: Buildkite Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/buildkite
 further_reading:
@@ -14,15 +14,11 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 [Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
 
-Set up tracing on Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
+Set up CI Visibility for Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
 
 ### Compatibility
 
@@ -34,6 +30,17 @@ Set up tracing on Buildkite to optimize your resource usage, reduce overhead, an
 | [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
+| [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Buildkite:
+
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Pipeline                   | Build (execution of a pipeline) |
+| Job                        | Job (execution of a step)       |
 
 ## Configure the Datadog integration
 
@@ -78,9 +85,9 @@ The resulting pipeline looks like the following:
 {{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:100%;">}}
 
 Any metadata with a key starting with `dd-measures.` and containing a numerical value will be set as
-a metric tag that can be used to create numerical measures. 
+a metric tag that can be used to create numerical measures.
 
-You can use the `buildkite-agent meta-data set` command to create these tags. 
+You can use the `buildkite-agent meta-data set` command to create these tags.
 
 For example, you can measure the binary size in a pipeline with this command:
 
@@ -145,3 +152,5 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [14]: /glossary/#custom-span
 [15]: /continuous_integration/explorer
 [16]: /continuous_integration/search/#search-for-pipelines
+[17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /glossary/#pipeline-execution-time

@@ -197,7 +197,7 @@ Azure Deployment Manager は、メトリクスを報告しません。
 
 Azure Deployment Manager には、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Azure Deployment Manager には、サービスのチェック機能は含まれません。
 

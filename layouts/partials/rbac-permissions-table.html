@@ -15,7 +15,7 @@
         {{- if ne .attributes.name nil -}}
         <tr>
           <td>
-            <code>{{- .attributes.name -}}</code>
+            {{- .attributes.display_name -}}<br>(<code>{{- .attributes.name -}}</code>)
           </td>
           <td>
             {{- if ne .attributes.description_link nil -}}
@@ -49,14 +49,16 @@
     <tbody>
       <tr>
         <td>
-          <a href="/logs/guide/logs-rbac-permissions/#logs_live_tail"><code>logs_live_tail</code></a>
+          <a href="/logs/guide/logs-rbac-permissions/#logs_live_tail">Logs Live Tail</a><br>
+          (<code>logs_live_tail</code>)
         </td>
         <td>Access the live tail feature</td>
         <td class="text-nowrap">Datadog Read Only Role</td>
       </tr>
       <tr>
         <td>
-          <a href="/logs/guide/logs-rbac-permissions/#logs_read_index_data"><code>logs_read_index_data</code></a>
+          <a href="/logs/guide/logs-rbac-permissions/#logs_read_index_data">Logs Read Index Data</a>
+          (<code>logs_read_index_data</code>)
         </td>
         <td>Read a subset log data (index based)</td>
         <td class="text-nowrap">Datadog Read Only Role</td>

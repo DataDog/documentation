@@ -1,16 +1,25 @@
 ---
 aliases:
 - /ko/logs/faq/how-to-set-up-only-logs
+further_reading:
+- link: /containers/docker/log/?tab=containerinstallation
+  tag: 설명서
+  text: 도커(Docker) 로그 수집
+- link: /containers/kubernetes/log/
+  tag: 설명서
+  text: Kubenetes 로그 수집
 title: Datadog 에이전트를 로그 수집용으로만 사용
 ---
+
+<div class="alert alert-warning">인프라스트럭처 모니터링은 애플리케이션 성능 모니터링(APM) 사용의 전제 조건입니다. 애플리케이션 성능 모니터링(APM) 고객이시라면 메트릭 수집을 비활성화하지 마시기 바랍니다. 그렇지 않으면 중요한 텔레메트리 및 메트릭 수집 정보가 손실될 수 있습니다.</div>
 
 페이로드를 비활성화하려면 에이전트 v6.4 이상을 실행 중이어야 합니다. 이렇게 하면 메트릭 데이터 제출(커스텀 메트릭 포함)이 비활성화되어 호스트가 Datadog에 표시되지 않습니다. 다음 단계를 따르세요.
 
 {{< tabs >}}
-{{% tab "호스트 " %}}
+{{% tab "Host " %}}
 
 1. [datadog.yaml 구성 파일][1]을 여세요.
-2. 다음 설정으로 `enable_payloads` 속성을 추가하세요.
+2. 다음 설정을 사용하여 설정 파일의 임의 위치에 `enable_payloads`을 최상위 속성으로 추가합니다.
 
     ```yaml
     enable_payloads:
@@ -29,7 +38,13 @@ title: Datadog 에이전트를 로그 수집용으로만 사용
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 컨테이너화된 에이전트를 사용 중인 경우 에이전트 구성 후 `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, `DD_ENABLE_PAYLOADS_SKETCHES` 환경 변수를 `false`로 설정하세요.
+도커(Docker) 컨테이너화된 에이전트를 사용하는 경우 다음 환경 변수를 `false`로 설정합니다.
+- `DD_ENABLE_PAYLOADS_EVENTS`
+- `DD_ENABLE_PAYLOADS_SERIES`
+- `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`
+- `DD_ENABLE_PAYLOADS_SKETCHES`
+
+다음은 도커(Docker) 실행 명령에 해당 설정을 포함시키는 방법의 예시입니다.
 
 ```shell
 docker run -d --name datadog-agent \
@@ -51,24 +66,34 @@ docker run -d --name datadog-agent \
 ```
 
 {{% /tab %}}
-{{% tab "쿠버네티스" %}}
+{{% tab "Kubernetes" %}}
 
-쿠버네티스에서 에이전트를 배포하는 경우 에이전트 구성 후에 `DD_ENABLE_PAYLOADS_EVENTS`, `DD_ENABLE_PAYLOADS_SERIES`, `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`, `DD_ENABLE_PAYLOADS_SKETCHES` 환경 변수를 `false`로 설정하세요.
+쿠버네티스(Kubernetes)에 에이전트를 배포하는 경우 에이전트 설정과 Helm 차트에서 다음과 같이 변경합니다.
 
 ```yaml
- ## 두 번째 로그만
- datadog:
- [...]
-   env:
-      - name: DD_ENABLE_PAYLOADS_EVENTS
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SERIES
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
-        value: "false"
-      - name: DD_ENABLE_PAYLOADS_SKETCHES
-        value: "false"
+ ## Send logs only
+clusterAgent:
+  enabled: false
+datadog:
+[...]
+  processAgent:
+    enabled: false
+    containerCollection: false
+[...]
+  env:
+    - name: DD_ENABLE_PAYLOADS_EVENTS
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SERIES
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SERVICE_CHECKS
+      value: "false"
+    - name: DD_ENABLE_PAYLOADS_SKETCHES
+      value: "false"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## 참고 자료
+
+{{< partial name="whats-next/whats-next.html" >}}

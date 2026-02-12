@@ -229,7 +229,7 @@ Pour vérifier que l'intégration est correctement configurée, ajoutez `@servic
 
 [1]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/26b85b762f6a1010b6a0d49df699b6fe
 [2]: https://store.servicenow.com/
-[3]: https://docs.datadoghq.com/resources/xml/Datadog-SNow_Update_Set.xml
+[3]: https://docs.datadoghq.com/resources/xml/Datadog-Snow_Update_Set_v2.6.1.xml
 [4]: https://app.datadoghq.com/account/settings#integrations/servicenow
 [5]: https://docs.datadoghq.com/fr/help/
 [6]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html

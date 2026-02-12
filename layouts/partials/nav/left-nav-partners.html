@@ -1,0 +1,96 @@
+{{/*
+    This navigation is used on the left of the site, and is the main Partners documentation nav.
+    Looking for the header nav? see website-modules
+  */}}
+  
+  {{ $dot := . }}
+  {{ $partnersMenu := "partners" }}
+  {{ $menu := .Scratch.Get "menu" }}
+  {{ $currentPage := . }}
+
+  
+<!-- if no partners menu in other languages fallback to english -->
+{{ with index .Site.Menus $partnersMenu }}
+  {{ $dot.Scratch.Set "menu" . }}
+{{ else }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.Default.Menus $partnersMenu) }}
+{{ end }}
+{{ $menu := .Scratch.Get "menu" }}
+
+{{ $currentPage := . }}
+
+<!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
+{{ $currentEnURL := $currentPage.RelPermalink }}
+{{ if ne $currentPage.Lang "en" }}
+    {{ $currentEnURL = (strings.Replace $currentPage.RelPermalink (printf "/%s" .Lang) "") }}
+{{ end }}
+
+
+{{/*
+    build array ($engMenuChildren) of english menu items with parents from "partners.en.yaml".
+    for use in providing english names for anchoring the nav-links (.nav-link)
+*/}}
+{{ if ne $currentPage.Lang "en" }}
+{{$engMenu := (index .Sites.Default.Menus $partnersMenu) }}
+{{ range $engMenu }}
+    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/partners/") }}
+    {{ range .Children }}
+        {{ $dot.Scratch.SetInMap "engMenuChildren" .Identifier .Name }}
+    {{ end }}
+    {{ end }}
+{{ end }}
+{{ end }}
+
+{{$engMenuChildren := $dot.Scratch.Get "engMenuChildren" | default dict}}
+
+{{ $path := (printf "%s/" $.Site.Params.branch) }}
+
+{{/* account for branch name in preview site for data-path */}}
+{{ if eq $.Site.Params.environment "preview"}}
+    {{ $.Scratch.Set "branch_path" $path }}
+{{ else }}
+    {{ $.Scratch.Set "branch_path" "" }}
+{{ end }}
+
+{{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
+{{ $url_without_anchor := "" }}
+
+<ul class="list-unstyled">
+{{ range $menu }}
+    <!-- check if on /partners/ top level section page, don't generate sub anchors if true -->
+    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/partners/" ) }}
+        <li class="js-load {{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+            {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                <span>{{ .Name }}</span>
+            </a>
+            <ul class="nav">
+                {{ range .Children }}
+                    <li class="js-load row nav-item {{ if $currentPage.IsMenuCurrent $partnersMenu . }}active{{ end }}">
+                        {{$identifier := .Identifier}}
+                        {{/*
+                            lookup english equivalent of non-english menu item identifier attr.
+                            pull the name attr and plug into anchor href.
+                        */}}
+                        {{ if ne $currentPage.Lang "en" }}
+                        {{ $dot.Scratch.Set "name" (index $engMenuChildren $identifier) }}
+                        {{ end }}
+
+                        {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
+                        {{$engName := $dot.Scratch.Get "name"}}
+                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
+                          <span class="d-inline-block">{{ .Name }}</span>
+                        </a>
+                    </li>
+                {{ end }}
+            </ul>
+        </li>
+    {{ else }}
+        <li class="js-load {{ if or ($currentPage.IsMenuCurrent $partnersMenu .) ($currentPage.HasMenuCurrent $partnersMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
+                <span>{{ .Name }}</span>
+            </a>
+        </li>
+    {{ end }}
+{{ end }}
+</ul>

@@ -38,7 +38,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_load_balancer" >}}
+{{< get-metrics-from-git "azure-load-balancer" >}}
 
 
 ### Eventos
@@ -49,7 +49,7 @@ La integración Azure Load Balancer no incluye eventos.
 
 La integración Azure Load Balancer no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
 

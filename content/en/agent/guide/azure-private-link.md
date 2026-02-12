@@ -1,12 +1,8 @@
 ---
 title: Connect to Datadog over Azure Private Link
+description: Configure Azure Private Link to send telemetry to Datadog securely without using the public internet, including endpoint setup and DNS configuration.
 ---
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
-<div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
-{{% /site-region %}}
-
-{{% site-region region="us3" %}}
 [Azure Private Link][1] allows you to send telemetry to Datadog without using the public internet.
 
 Datadog exposes some of its data intake services as [Azure Private Link services][2].
@@ -38,7 +34,10 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    Select **Next: Tags** to continue.
 7. On the **Create a private endpoint** > **Tags** page, you can optionally set tags. Select **Next**.
 8. On the **Review + create** page, review your configuration settings. Then, select **Create**.
-9. After your private endpoint is created, find it in the list. Take note of this endpoint's **Private IP**, as this is used in the next section.
+9. After your private endpoint is created, find it in the list. Take note of this endpoint's **Private IP**, as this is used in the next section. The Connection Status field should be Pending.
+10. Next, Datadog's approval is necessary and manual. Reach out to Datadog Support and request approval of your private link endpoint, include your endpoint name.
+11. After Datadog Support has confirmed that the endpoint is created, confirm that it is fully working. In the Azure portal navigate to **Home > Private Endpoints**. Click the endpoint name, and confirm that the Connection Status shows **Approved**. 
+12. Navigate to **Monitoring > Metrics**. Confirm the `Bytes In` and `Bytes Out` metrics are non-zero. These metrics should also be captured by the Datadog Azure Integration as `azure.network_privateendpoints.pe_bytes_[in/out]`.
 
 ### Create a Private DNS zone
 1. In the Azure portal, go to **Private DNS zones**.
@@ -90,4 +89,3 @@ Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true"
 [1]: https://azure.microsoft.com/en-us/products/private-link
 [2]: https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview
 [3]: https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone
-{{% /site-region %}}

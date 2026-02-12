@@ -22,7 +22,7 @@ RUM Events from both of these sources are reported as coming from the same appli
   - Through *auto-instrumentation* - Some React classes and methods are modified to automate this. Auto-instrumentation for JavaScript errors, resources, and interactions can only be started from JavaScript code.
   - Through *manual instrumentation* - For example, if you want to report something that you consider an error, but which is not going to crash the app. 
 - You can share the same instance of the core SDK between native and React Native without having to initialize the SDK on both sides separately. This allows you to initialize the native SDK on either the native side or on the React Native side (by calling `DdSdkReactNative.initialize`) and have it initialized for both sides, with events appearing in the same RUM session. React Native uses the default core instance. This means that you can use *manual instrumentation* on both sides, but *auto-instrumentation* is only activated for the side that the SDK was initialized.
-- You can report Datadog RUM events or logs only after the initialization. If you have not initialized the SDK yet, events and legs are not sent.
+- You can report Datadog RUM events or logs only after the initialization. If you have not initialized the SDK yet, events and logs are not sent.
 - You cannot change the source attribute of a RUM session - all your RUM events appear under the same source.
 
 ## Monitor React Native apps with native content
@@ -126,14 +126,14 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 
 Initialize the SDK on the native side. See the official [Android][1] documentation for instructions.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/?tab=kotlin
+[1]: /real_user_monitoring/application_monitoring/android/setup/?tab=kotlin
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 Initialize the SDK on the native side. See the official [iOS][1] documentation for instructions.
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=cocoapods
+[1]: /real_user_monitoring/application_monitoring/ios/setup/?tab=cocoapods
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -316,6 +316,6 @@ RUM.Configuration(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#custom-views
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
+[1]: /real_user_monitoring/application_monitoring/react_native/setup/
+[2]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#custom-views
+[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#custom-views

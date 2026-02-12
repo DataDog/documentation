@@ -1,0 +1,6 @@
+traits:
+
+- id: rum_browser_sdk_version
+  label: "SDK version"
+  type: semver
+  internal_notes: The customer's version of the RUM browser SDK. Its value should be a semantic version represented in snake case, such as "1_2_3", "lt_1_2_3", "gt_1_2_3", "lte_1_2_3", etc.

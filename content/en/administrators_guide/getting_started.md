@@ -19,7 +19,7 @@ As you go along in this guide, you can refer to the following self-service resou
 
 * [Datadog training](#learn-datadog-basics) courses.
 * The Datadog [documentation][16], especially the [Getting started][17] pages, to familiarize yourself with the platform further.  
-* The [Datadog UI][18], which provides in-context help, information on specific configuration fields, release notes, and other resources, click the `"?"` icon throughout the app, or the bottom of the product navigation.
+* The [Datadog UI][18], which provides in-context help, information on specific configuration fields, release notes, and other resources, click the <kbd>?</kbd> icon throughout the app, or the bottom of the product navigation.
 
 {{< img src="/administrators_guide/help_center.png" alt="Screen shot of the help center in the Datadog UI" style="width:90%;">}} 
 
@@ -39,7 +39,7 @@ Get up to speed with the parts of Datadog that are most important to your use ca
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Datadog Foundation{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Tagging Best Practices{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/managing-service-catalog" >}}Managing the Service Catalog{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Managing the Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **Administrators**:
@@ -82,11 +82,11 @@ The [Datadog UI][18] is the best place to start building out your testing enviro
 
 A few examples are:
 
-* Create a [Synthetic test][14] to start testing critical business transactions on your applications.
+* Create a [Synthetic Monitoring test][14] to start testing critical business transactions on your applications.
 * Create a few [Service Level Objectives][15] (SLOs) to define targets for application performance.
 * Review the [APM Service Setup][9] page, and follow the step-by-step instructions to begin instrumenting your services.
-* Configure and test [Log Pipelines][8] to figure out how you would like to ingest different sets of logs coming from infrastructure and applications.
-* Review the [Monitor Templates][10] page to begin adding some alerts on your test environment.
+* Configure and test [Log Pipelines][8] to determine how you would like to ingest different sets of logs coming from infrastructure and applications.
+* Review the [Monitor Templates][10] page to begin adding alerts on your test environment.
 
 #### Host Agent Config Templates
 
@@ -116,7 +116,7 @@ To successfully create a new Datadog installation, review the [plan][11] page. Y
 [7]: /getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
-[10]: https://app.datadoghq.com/monitors/recommended
+[10]: https://app.datadoghq.com/monitors/templates
 [11]: /administrators_guide/plan
 [12]: /administrators_guide/plan/#resource-tagging
 [13]: https://github.com/DataDog/datadog-agent/tree/main/examples

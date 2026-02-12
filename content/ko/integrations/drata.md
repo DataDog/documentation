@@ -17,10 +17,10 @@ author:
   sales_email: sales@drata.com
   support_email: support@drata.com
 categories:
-- 준수
+- compliance
 - 로그 수집
-- 보안
-custom_kind: integration
+- security
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/drata/README.md
 display_on_public_website: true
@@ -35,15 +35,15 @@ name: drata
 public_title: Drata
 short_description: Datadog 컴플라이언스 정보를 Drata에 주입
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Compliance
   - Category::Log Collection
-  - 카테고리::보안
+  - Category::Security
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows

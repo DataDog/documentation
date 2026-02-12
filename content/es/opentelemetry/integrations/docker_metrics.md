@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/collector_exporter/docker_metrics/
+- /es/opentelemetry/collector_exporter/docker_metrics/
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentación
@@ -12,7 +12,7 @@ title: Métricas de Docker
 
 {{< img src="/opentelemetry/collector_exporter/docker_metrics.png" alt="Métricas de OpenTelemetry Docker en un dashboard de contenedores" style="width:100%;" >}}
 
-Para recopilar métricas de contenedor, configura el [receptor de Docker Stats][1] en tu Exportador de Datadog.
+Para recopilar métricas de contenedores, configura el [receptor de estadísticas de Docker][1] en tu OpenTelemetry Collector y envía los datos utilizando el Datadog Exporter.
 
 Para más información, consulta la documentación del proyecto de OpenTelemetry para [el receptor de Docker Stats][1].
 
@@ -94,10 +94,67 @@ receivers:
 
 {{< /tabs >}}
 
+## Correlacionar trazas con las métricas de contenedor 
+
+Para correlacionar trazas con las métricas de contenedor, ambos tipos de telemetría deben compartir atributos de recursos comunes. Estos atributos proporcionan el contexto necesario para la correlación.
+
+1. Configura atributos del [etiquetado de servicios unificado][9].
+2. Configura los siguientes atributos tanto en tus trazas como en las métricas:
+
+| Atributo                                | Valor                                                          | Descripción                                                                                                                                                               |
+|------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `container.id` (**Obligatorio**)            | El ID de contenedor de Docker.                                       | Identifica unívocamente el contenedor. Es esencial para correlacionar tramos con las métricas de contenedor. Sin este atributo en las trazas, las vistas de métricas de contenedor no se muestran en APM. |
+| `container.name` o `k8s.container.name` | El nombre de contenedor legible por humanos (por ejemplo, `redis-otel`). | Se utiliza como nombre visible en Datadog.                                                                                                                                      |
+| `k8s.pod.name`                           | El nombre del pod (por ejemplo, `redis-otel-59c9b5c9d5-s9t2r`).     | Permite la navegación entre las vistas de contexto de pod y contenedores en entornos de Kubernetes.
+
+### Trazas
+
+Para rellenar estos atributos de recursos en **trazas**:
+
+- Puedes utilizar `resourcedetectionprocessor` en la configuración del Collector:
+   ```yaml
+   processors:
+      resourcedetection:
+         detectors: ["env", "container", "k8s"]
+   service:
+      pipelines:
+         traces:
+            processors: [resourcedetection]
+
+   ```
+
+- Puedes añadir un detector de recursos de contenedor en el código de tu aplicación.  
+   Por ejemplo, con Go:
+   ```go
+   // resource.WithContainer() adds container.id attribute to the trace's resource
+   res, err := resource.New(
+       ctx,
+       resource.WithContainer(),                    
+       resource.WithFromEnv(),
+       semconv.ServiceNameKey.String("calendar"),   
+   )
+   ```
+
+   Consulta el ejemplo completo en [opentelemetry-examples][8].
+
+### Métricas  
+
+Para rellenar estos atributos de recursos en **métricas**, el receptor `docker_stats` detecta y añade automáticamente estos atributos en las métricas de contenedores que emite.
+
 ## Datos recopilados
 
-Consulta [asignación de métricas de OpenTelemetry][2] para obtener información sobre la recopilación de métricas de contenedor.
+El receptor de Docker Stats genera métricas de contenedor para OpenTelemetry Collector. El exportador de Datadog traduce las métricas de contenedor a sus homólogos de Datadog para usarlas en las siguientes vistas:
 
+- [Dashboard predeterminado de información general de contenedores][6]
+- [Vista de traza de APM][10] con métricas de contenedor
+
+Más información sobre [la asignación entre las convenciones semánticas de OpenTelemetry y Datadog para los atributos de recursos][5].
+
+La siguiente tabla muestra los nombres de métrica de contenedores de Datadog que corresponden a los nombres de métrica de contenedores de OpenTelemetry:
+
+{{< mapping-table resource="dockerstats.csv">}}
+
+Consulta [Asignación de métricas de OpenTelemetry][2] para obtener más información.
 
 ## Ejemplo completo de configuración
 
@@ -130,5 +187,11 @@ Value: 0.170933
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
-[2]: /es/opentelemetry/guide/metrics_mapping/#container-metrics
+[2]: /es/opentelemetry/guide/metrics_mapping/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml
+[4]: /es/universal_service_monitoring/setup/
+[5]: /es/opentelemetry/guide/semantic_mapping/
+[6]: /es/opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
+[7]: /es/tracing/trace_explorer/trace_view/
+[8]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
+[9]: /es/opentelemetry/mapping/semantic_mapping#unified-service-tagging

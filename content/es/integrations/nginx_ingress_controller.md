@@ -29,12 +29,12 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- contenedores
-- kubernetes
+- rastreo
+- Kubernetes
 - recopilación de logs
-- la red
+- network
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: nginx_ingress_controller
@@ -50,31 +50,31 @@ public_title: nginx-ingress-controller
 short_description: Monitoriza métricas del controlador de entrada de NGINX y el NGINX
   integrado.
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Category::Log Collection
-  - Category::Network
-  - Category::Orchestration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Contenedores
+  - Categoría::Kubernetes
+  - Categoría::Recopilación de logs
+  - Categoría::Red
+  - Categoría::Orquestación
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Monitoriza métricas del controlador de entrada de NGINX y el NGINX
     integrado.
   media: []
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: nginx-ingress-controller
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -100,11 +100,11 @@ Si tu Agent se está ejecutando en un host, edita el archivo `nginx_ingress_cont
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
 #### Contenedores
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 [1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
 {{% /tab %}}
@@ -146,7 +146,7 @@ Consulta el [nginx_ingress_controller.d/conf.yaml de ejemplo][5] para ver todas 
 
 #### Recopilación de logs
 
-_Disponible para las versiones >6.0 del Agent_
+_Disponible para la versión 6.0 o posteriores del Agent_
 
 La recopilación de logs está deshabilitada por defecto en el Datadog Agent. Para activarla, consulta [Recopilación de logs de Kubernetes][6].
 
@@ -161,14 +161,14 @@ Ejecuta el [subcomando de estado del Agent][7] y busca `nginx_ingress_controller
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "nginx_ingress_controller" >}}
+{{< get-metrics-from-git "nginx-ingress-controller" >}}
 
 
 ### Eventos
 
 El controlador de entrada de NGINX no incluye ningún evento.
 
-### Checks de servicio
+### Checks de servicios
 
 El controlador de entrada de NGINX no incluye ningún check de servicio.
 
