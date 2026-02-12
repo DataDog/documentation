@@ -23,12 +23,12 @@ Managed evaluations are supported for the following configurations.
 
 Custom LLM-as-a-judge evaluations are supported for the following configurations.
 
-| Evaluation       | DD-trace version | LLM Provider                                          | Applicable span |
-| ---------------- | ---------------- | ----------------------------------------------------- | --------------- |
-| [Boolean][11]    | Fully supported  | All third party LLM providers                         | All span kinds  |
-| [Score][11]      | Fully supported  | OpenAI, Azure OpenAI, Anthropic, VertexAI, AI Gateway | All span kinds  |
-| [Categorical][11]| Fully supported  | OpenAI, Azure OpenAI, Anthropic, VertexAI, AI Gateway | All span kinds  |
-| [JSON][11]       | Fully supported  | OpenAI, Azure OpenAI, Anthropic, VertexAI, AI Gateway | All span kinds  |
+| Evaluation       | DD-trace version | LLM Provider                                                      | Applicable span |
+| ---------------- | ---------------- | ----------------------------------------------------------------- | --------------- |
+| [Boolean][11]    | Fully supported  | All third party LLM providers                                     | All span kinds  |
+| [Score][11]      | Fully supported  | OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, VertexAI, AI Gateway    | All span kinds  |
+| [Categorical][11]| Fully supported  | OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, VertexAI, AI Gateway    | All span kinds  |
+| [JSON][11]       | Fully supported  | OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, VertexAI, AI Gateway    | All span kinds  |
 
 #### Template LLM-as-a-judge evaluations
 
@@ -53,4 +53,3 @@ Existing templates for custom LLM-as-a-judge evaluations are supported for the f
 [9]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#topic-relevancy
 [10]: /llm_observability/evaluations/managed_evaluations#language-mismatch
 [11]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations#define-the-evaluation-output
-
