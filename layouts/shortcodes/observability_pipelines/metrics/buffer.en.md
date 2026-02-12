@@ -1,5 +1,9 @@
 Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated. Note that `counter` metrics such as `pipelines.buffer_received_events_total` represent the count per one-second interval, not a cumulative total.
 
+**Tags**
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by sources, transforms, or destinations.
+
 #### Destination buffer metrics
 
 These metrics are specific to destination buffers, located upstream of a destination. Each destination emits its own respective buffer metrics.
