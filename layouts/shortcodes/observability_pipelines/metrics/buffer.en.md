@@ -1,4 +1,4 @@
-Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated. **Note**: `counter` metrics, such as `pipelines.buffer_received_events_total`, represent the count per second, not the cumulative total.
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated. **Note**: `counter` metrics, such as `pipelines.buffer_received_events_total`, represent the count per second and not the cumulative total, even though `total` is in the metric name.
 
 **Tags for metrics**
 - Use the `component_id` tag to filter or group by individual components.
@@ -35,12 +35,12 @@ These metrics are specific to destination buffers, located upstream of a destina
 `pipelines.buffer_discarded_events_total`
 : **Description**: Events discarded by the buffer.
 : **Metric type**: counter
-: **Additional tags**: `intentional:true` means an incoming event was dropped because the buffer was configured with the `drop newest` on full behavior, and the buffer was full. `intentional:false` means the event was dropped due to an error.
+: **Additional tags**: `intentional:true` means an incoming event was dropped because the buffer was configured to drop the newest logs when it's full. `intentional:false` means the event was dropped due to an error.
 
 `pipelines.buffer_discarded_bytes_total`
 : **Description**: Bytes discarded by the buffer.
 : **Metric type**: counter
-: **Additional tags**: `intentional:true` means an incoming event was dropped because the buffer was configured with the `drop newest` on full behavior, and the buffer was full. `intentional:false` means the event was dropped due to an error.
+: **Additional tags**: `intentional:true` means an incoming event was dropped because the buffer was configured to drop the newest logs when it's full. `intentional:false` means the event was dropped due to an error.
 
 #### Source buffer metrics
 
