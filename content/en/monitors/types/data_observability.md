@@ -146,10 +146,19 @@ The **Custom SQL** metric type tracks a custom metric value returned by a SQL qu
 
 ## Configure monitor
 
-### Select the detection method:
-You can choose between two types of detection methods:
-- **Anomaly**: Alert when the metric deviates from an expected pattern.
-- **Threshold**: Alert when the metric crosses a fixed value.
+### Detection method
+
+Select a detection method:
+
+- **Anomaly**: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts.
+- **Threshold**: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a **Critical** threshold (required) and optionally a **Warning** threshold. For more details, see [Configure Monitors](/monitors/configuration/?tab=thresholdalert#thresholds).
+
+### WHERE clause
+
+Add a **WHERE** clause to filter the data evaluated by the monitor. This is useful for monitoring specific segments of data or only recent records. For example:
+
+- `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())` — only monitor rows from the past week.
+- `region = 'US'` — only monitor data for a specific region.
 
 ### Group by
 
@@ -159,26 +168,19 @@ You can add a **Group by** clause to split a single monitor into multiple groups
 
 The default limit is 100 groups per monitor. To increase this limit, <a href="/help/">contact Support</a>.
 
+### Monitor schedule
+
+Set how often the monitor evaluates your data:
+
+- **Hourly**: The monitor runs every hour.
+- **Daily**: The monitor runs once per day.
+
 ## Set alert conditions
 
 Choose an aggregation type:
 
 - **Simple Alert**: Send a single notification when any monitored table or column meets the condition.
 - **Multi Alert**: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
-
-1. Set an alert to trigger whenever the monitored value is `above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to` a threshold that you define. For help configuring the options in this view, see [Configure Monitors](/monitors/configuration/?tab=thresholdalert#thresholds).
-1. Set a **Critical** threshold (required) and optionally a **Warning** threshold for early detection.
-1. Determine your desired behavior when data is missing, for example, `evaluate as zero`, `show NO DATA`, `show NO DATA and notify`, or `show OK`.
-
-<div class="alert alert-info">When using the <strong>Anomaly</strong> detection method, the monitor triggers based on deviation from the expected baseline. Threshold values are not required for anomaly detection. The anomaly model requires <strong>3 to 7 days</strong> to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts.</div>
-
-### No data alerts
-
-To receive a notification when Datadog stops receiving quality monitoring data for a table, set the condition to trigger on **No Data**. This is useful for detecting cases where a data warehouse connection has dropped or metadata collection has stopped.
-
-### Advanced alert conditions
-
-For more information about advanced alert options such as evaluation delay, see [Configure Monitors](/monitors/create/configuration/#advanced-alert-conditions).
 
 ### Annotate bounds
 
