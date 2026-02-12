@@ -52,7 +52,7 @@ Data Observability monitors require [Quality Monitoring](/data_observability/qua
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/data-obs/monitors) in the UI.
+To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/data-obs/monitors) in the UI then check [**New Monitor**](https://app.datadoghq.com/monitors/create/data-quality).
 
 ## Choose data to monitor
 
@@ -60,6 +60,8 @@ First, select whether you are monitoring at the **Table** or **Column** level:
 
 - **Table**: Monitor table-level metrics such as freshness, row count, or a custom SQL query result.
 - **Column**: Monitor column-level metrics such as nullness, uniqueness, cardinality, or statistical measures.
+
+{{< img src="data_observability/data_observability_monitor/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
 
 Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field. The following attributes are available:
 
@@ -71,8 +73,6 @@ Then, use the **Edit** tab to search for tables, views, or columns by typing `ke
 | Account | `account:my_account` | Match by account. |
 
 Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
-
-{{< img src="data_observability/data_observability_monitor/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:80%;" >}}
 
 **Examples:**
 
@@ -143,7 +143,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
-{{< img src="data_observability/data_observability_monitor/custom_sql_example.png" alt="Input field for custom SQL monitor creatoin." style="width:80%;" >}}
+{{< img src="data_observability/data_observability_monitor/custom_sql_example.png" alt="Input field for custom SQL monitor creatoin." style="width:60%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
