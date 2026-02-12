@@ -103,7 +103,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 ## Explore your logs
 
-Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
+Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs. For detailed information about all Log Explorer features, see the [Log Explorer documentation][16].
 
 For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Group into Patterns][17] to see which part of your service is logging the most errors.
 
@@ -112,6 +112,15 @@ For example, if you have logs flowing in from a service that you wish to examine
 Aggregate your logs into `Fields` and visualize as **Top List** to see your top logging services. Select a source, such as `info` or `warn`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
 
 {{< img src="/getting_started/logs/top-list-view-2024.png" alt="A top list in the Log Explorer">}}
+
+The Log Explorer offers many powerful features for log troubleshooting and exploration, including:
+- [Advanced search and filtering][31] with facets and queries
+- [Log Analytics][17] for grouping logs into patterns and aggregating data
+- [Visualizations][28] to display log data in various formats
+- [Saved Views][29] to save and share your search configurations
+- [Export options][30] to reuse your queries in different contexts
+
+See the [Log Explorer documentation][16] for comprehensive information about all available features.
 
 ## What's next?
 
@@ -168,3 +177,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [25]: /logs/guide/best-practices-for-log-management/
 [26]: /logs/guide/getting-started-lwl/
 [27]: /logs/guide/logs-rbac/
+[28]: /logs/explorer/visualize/
+[29]: /logs/explorer/saved_views/
+[30]: /logs/explorer/export/
+[31]: /logs/explorer/search_syntax/
