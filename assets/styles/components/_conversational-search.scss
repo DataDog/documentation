@@ -213,13 +213,13 @@ $conv-search-assistant-bg: #f4f4f5;
     height: 30px;
     padding: 0 10px;
     border-radius: 6px;
-    background: lighten($conv-search-purple, 4%);
+    background: transparent;
     border: 1px solid $conv-search-border;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 5px;
-    color: $conv-search-text-muted;
+    color: $conv-search-text;
     font-size: 12px;
     font-weight: 500;
     font-family: inherit;
@@ -228,8 +228,11 @@ $conv-search-assistant-bg: #f4f4f5;
 
     &:hover {
         background: $conv-search-surface;
-        color: $conv-search-text;
-        border-color: darken($conv-search-border, 10%);
+        border-color: $conv-search-border;
+    }
+
+    &:active {
+        background: darken($conv-search-surface, 2%);
     }
 
     svg {
@@ -589,6 +592,151 @@ $conv-search-assistant-bg: #f4f4f5;
     em {
         font-style: italic;
     }
+}
+
+// Inline source refs: normal text + clickable numbered paperclip chip
+.conv-search-source-ref-wrap {
+    position: relative;
+    display: inline;
+}
+
+.conv-search-inline-ref-text {
+    color: inherit;
+}
+
+.conv-search-source-ref-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 4px;
+    padding: 1px 6px;
+    border: 1px solid rgba($conv-search-purple, 0.28);
+    border-radius: 999px;
+    background: rgba($conv-search-purple, 0.06);
+    color: $conv-search-purple-dark;
+    cursor: pointer;
+    vertical-align: baseline;
+    font-size: 12px;
+    line-height: 1.3;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+        background: rgba($conv-search-purple, 0.1);
+        border-color: rgba($conv-search-purple, 0.42);
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($conv-search-purple, 0.45);
+        outline-offset: 1px;
+    }
+}
+
+.conv-search-source-ref-icon {
+    width: 12px;
+    height: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        width: 12px;
+        height: 12px;
+        display: block;
+    }
+}
+
+.conv-search-source-ref-number {
+    font-weight: 600;
+}
+
+.conv-search-source-tooltip {
+    position: absolute;
+    z-index: 3;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 70vw;
+    min-width: 220px;
+    max-width: 320px;
+    padding: 10px 12px;
+    border: 1px solid $conv-search-border;
+    border-radius: 10px;
+    background: $conv-search-bg;
+    box-shadow: 0 10px 24px rgba(11, 16, 32, 0.15);
+    display: none;
+
+    &.open {
+        display: block;
+    }
+
+    a {
+        color: $conv-search-purple;
+        text-decoration: none;
+        line-height: 1.45;
+        word-break: break-word;
+
+        &:hover {
+            color: $conv-search-purple-dark;
+            text-decoration: underline;
+        }
+    }
+}
+
+.conv-search-sources {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid $conv-search-border;
+}
+
+.conv-search-sources-title {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: $conv-search-text-muted;
+    letter-spacing: 0.02em;
+}
+
+.conv-search-sources-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.conv-search-source-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid $conv-search-border;
+    border-radius: 10px;
+    background: $conv-search-surface;
+    min-width: 0;
+
+    a {
+        color: $conv-search-purple;
+        text-decoration: none;
+        font-size: 13px;
+        line-height: 1.4;
+        word-break: break-word;
+
+        &:hover {
+            color: $conv-search-purple-dark;
+            text-decoration: underline;
+        }
+    }
+}
+
+.conv-search-source-card-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: rgba($conv-search-purple, 0.09);
+    color: $conv-search-purple-dark;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 // Message action buttons (thumbs up, thumbs down, copy)

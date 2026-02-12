@@ -196,6 +196,14 @@ class ConversationalSearch {
         }
 
         this.messagesContainer.addEventListener('click', (e) => {
+            const sourceRefBtn = e.target.closest('.conv-search-source-ref-btn');
+            if (sourceRefBtn && this.messagesContainer.contains(sourceRefBtn)) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleSourceTooltip(sourceRefBtn);
+                return;
+            }
+
             // Suggestion chips click handler
             const suggestionBtn = e.target.closest('.conv-search-suggestion');
             if (suggestionBtn) {
@@ -224,6 +232,13 @@ class ConversationalSearch {
                         conversation_id: this.conversationId
                     }
                 });
+            }
+        });
+
+        // Close any open source tooltips when clicking outside them
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.conv-search-source-ref-wrap')) {
+                this.closeAllSourceTooltips();
             }
         });
     }
@@ -334,6 +349,136 @@ class ConversationalSearch {
         if (force || this.isNearBottom()) {
             this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
         }
+    }
+
+    getSourceRefIconSvg() {
+        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 12.5l6.36-6.36a3.5 3.5 0 1 1 4.95 4.95l-8.48 8.49a5.5 5.5 0 0 1-7.78-7.78l8.13-8.13a1.5 1.5 0 0 1 2.12 2.12l-8.13 8.13a.5.5 0 0 0 .7.71l7.43-7.43" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+
+    closeAllSourceTooltips() {
+        const openTooltips = this.messagesContainer.querySelectorAll('.conv-search-source-tooltip.open');
+        openTooltips.forEach((tooltip) => tooltip.classList.remove('open'));
+
+        const expandedButtons = this.messagesContainer.querySelectorAll('.conv-search-source-ref-btn[aria-expanded="true"]');
+        expandedButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+    }
+
+    toggleSourceTooltip(button) {
+        const wrap = button.closest('.conv-search-source-ref-wrap');
+        if (!wrap) {
+            return;
+        }
+
+        const tooltip = wrap.querySelector('.conv-search-source-tooltip');
+        if (!tooltip) {
+            return;
+        }
+
+        const willOpen = !tooltip.classList.contains('open');
+        this.closeAllSourceTooltips();
+        if (willOpen) {
+            tooltip.classList.add('open');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    /**
+     * Render markdown with numbered reference chips and source cards.
+     */
+    renderMessageWithSources(markdownText) {
+        const html = marked.parse(markdownText);
+        const container = document.createElement('div');
+        container.innerHTML = html;
+
+        const links = Array.from(container.querySelectorAll('a[href]'));
+        if (links.length === 0) {
+            return html;
+        }
+
+        const sourceIndexByHref = new Map();
+        const sources = [];
+
+        links.forEach((link) => {
+            const href = (link.getAttribute('href') || '').trim();
+            if (!href) {
+                return;
+            }
+
+            if (!sourceIndexByHref.has(href)) {
+                sourceIndexByHref.set(href, sources.length + 1);
+                sources.push({
+                    href,
+                    label: (link.textContent || '').trim() || href
+                });
+            }
+
+            const sourceNumber = sourceIndexByHref.get(href);
+            const refWrap = document.createElement('span');
+            refWrap.className = 'conv-search-source-ref-wrap';
+
+            const refText = document.createElement('span');
+            refText.className = 'conv-search-inline-ref-text';
+            refText.textContent = (link.textContent || '').trim() || href;
+
+            const markerBtn = document.createElement('button');
+            markerBtn.type = 'button';
+            markerBtn.className = 'conv-search-source-ref-btn';
+            markerBtn.setAttribute('data-source-number', String(sourceNumber));
+            markerBtn.setAttribute('aria-label', `View source ${sourceNumber}`);
+            markerBtn.setAttribute('aria-expanded', 'false');
+            markerBtn.innerHTML = `
+                <span class="conv-search-source-ref-icon">${this.getSourceRefIconSvg()}</span>
+                <span class="conv-search-source-ref-number">[${sourceNumber}]</span>
+            `;
+
+            const sourceData = sources[sourceNumber - 1];
+            const tooltip = document.createElement('div');
+            tooltip.className = 'conv-search-source-tooltip';
+            tooltip.innerHTML = `
+                <a href="${sourceData.href}" target="_blank" rel="noopener noreferrer">${sourceData.label}</a>
+            `;
+
+            refWrap.appendChild(refText);
+            refWrap.appendChild(markerBtn);
+            refWrap.appendChild(tooltip);
+            link.replaceWith(refWrap);
+        });
+
+        const sourcesSection = document.createElement('div');
+        sourcesSection.className = 'conv-search-sources';
+
+        const sourcesTitle = document.createElement('p');
+        sourcesTitle.className = 'conv-search-sources-title';
+        sourcesTitle.textContent = 'Sources';
+        sourcesSection.appendChild(sourcesTitle);
+
+        const sourcesList = document.createElement('div');
+        sourcesList.className = 'conv-search-sources-cards';
+
+        sources.forEach((source) => {
+            const listItem = document.createElement('article');
+            listItem.className = 'conv-search-source-card';
+
+            const sourceNumber = sourceIndexByHref.get(source.href);
+            const sourceBadge = document.createElement('span');
+            sourceBadge.className = 'conv-search-source-card-number';
+            sourceBadge.textContent = `[${sourceNumber}]`;
+
+            const sourceLink = document.createElement('a');
+            sourceLink.href = source.href;
+            sourceLink.target = '_blank';
+            sourceLink.rel = 'noopener noreferrer';
+            sourceLink.textContent = source.label;
+
+            listItem.appendChild(sourceBadge);
+            listItem.appendChild(sourceLink);
+            sourcesList.appendChild(listItem);
+        });
+
+        sourcesSection.appendChild(sourcesList);
+        container.appendChild(sourcesSection);
+
+        return container.innerHTML;
     }
 
     async sendMessage() {
@@ -486,7 +631,7 @@ class ConversationalSearch {
 
             // Render markdown after streaming completes
             if (accumulatedMessage) {
-                responseContainer.innerHTML = marked.parse(accumulatedMessage);
+                responseContainer.innerHTML = this.renderMessageWithSources(accumulatedMessage);
                 this.addMessageActions(responseContainer.parentElement, query, accumulatedMessage);
                 this.scrollToBottom();
                 
@@ -528,7 +673,7 @@ class ConversationalSearch {
             }
 
             if (fullAnswer) {
-                responseContainer.innerHTML = marked.parse(fullAnswer);
+                responseContainer.innerHTML = this.renderMessageWithSources(fullAnswer);
                 this.addMessageActions(responseContainer.parentElement, query, fullAnswer);
                 
                 // Log successful response with latency and full content (fallback mode)
