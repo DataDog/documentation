@@ -14,29 +14,41 @@ When using the Datadog Lambda extension, logs are sent directly to Datadog throu
 
 <div class="alert alert-danger">Only disable CloudWatch logs for functions that are <strong>already sending logs through the Datadog Lambda extension</strong>. Verify that logs are appearing in Datadog before you disable CloudWatch Logs. If your function uses the <a href="/serverless/guide/datadog_forwarder_node">Datadog Forwarder</a> instead, migrate to the extension before disabling CloudWatch logs, as the Forwarder relies on CloudWatch to forward logs.</div>
 
+## How it works
+
+Each method below attaches an inline IAM deny policy named `DenyCloudWatchLogs` to the Lambda function's execution role. The policy denies the following actions on the function's log group:
+
+- `logs:CreateLogGroup`
+- `logs:CreateLogStream`
+- `logs:PutLogEvents`
+
+Because AWS evaluates Deny before Allow in IAM policy evaluation, this blocks CloudWatch logging even if the execution role has CloudWatch permissions from other policies.
+
+To re-enable CloudWatch logging, remove the denied log groups from the policy or delete the `DenyCloudWatchLogs` policy entirely.
+
 ## Disable CloudWatch logs
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-The [`datadog-ci lambda disable-cloudwatch`][1] command removes CloudWatch log groups for instrumented Lambda functions.
+The [`datadog-ci lambda cloudwatch disable`][1] command attaches an IAM deny policy to the execution role of each specified Lambda function, blocking CloudWatch log delivery.
 
-First, perform a dry run to preview which log groups are affected:
+First, perform a dry run to preview which functions are affected:
 
 ```bash
-datadog-ci lambda disable-cloudwatch --dry-run -f <ARN>
+datadog-ci lambda cloudwatch disable --dry-run -f <ARN>
 ```
 
 After you confirm the output, run the command without the `--dry-run` flag:
 
 ```bash
-datadog-ci lambda disable-cloudwatch -f <ARN>
+datadog-ci lambda cloudwatch disable -f <ARN>
 ```
 
 To disable CloudWatch logs for multiple functions at once, use `--functions-regex`:
 
 ```bash
-datadog-ci lambda disable-cloudwatch --functions-regex <REGEX>
+datadog-ci lambda cloudwatch disable --region <region> --functions-regex <REGEX>
 ```
 
 **Note**: This command requires valid AWS credentials configured in your environment. See the [Datadog Serverless CLI documentation][1] for setup details.
@@ -46,83 +58,140 @@ datadog-ci lambda disable-cloudwatch --functions-regex <REGEX>
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Set the `logging_config` block on your `aws_lambda_function` resource to disable CloudWatch logging:
+Add an `aws_iam_role_policy` resource that denies CloudWatch Logs actions for the function's log group:
 
 {{< code-block lang="hcl" >}}
-resource "aws_lambda_function" "example" {
-  function_name = "example"
-  # ... other configuration ...
+resource "aws_iam_role_policy" "deny_cloudwatch_logs" {
+  name = "DenyCloudWatchLogs"
+  role = aws_iam_role.lambda_execution.name
 
-  logging_config {
-    log_format = "Text"
-    log_group  = ""
-  }
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Deny"
+      Action   = ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"]
+      Resource = "arn:aws:logs:*:*:log-group:/aws/lambda/${aws_lambda_function.example.function_name}:*"
+    }]
+  })
 }
 {{< /code-block >}}
 
-Alternatively, remove the associated `aws_cloudwatch_log_group` resource if you manage it explicitly.
+Replace `aws_iam_role.lambda_execution` and `aws_lambda_function.example` with references to your own resources.
 
 {{% /tab %}}
 {{% tab "AWS CloudFormation" %}}
 
-Set the `LoggingConfig` property on your `AWS::Lambda::Function` resource:
+Add an `AWS::IAM::Policy` resource that denies CloudWatch Logs actions for the function's log group:
 
 {{< code-block lang="yaml" >}}
-Resources:
-  ExampleFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      FunctionName: example
-      # ... other configuration ...
-      LoggingConfig:
-        LogGroup: ""
+DenyCloudWatchLogsPolicy:
+  Type: AWS::IAM::Policy
+  Properties:
+    PolicyName: DenyCloudWatchLogs
+    Roles:
+      - !Ref ExampleFunctionRole
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: Deny
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${ExampleFunction}:*"
 {{< /code-block >}}
+
+Replace `ExampleFunctionRole` and `ExampleFunction` with references to your own resources.
 
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-Set the `LoggingConfig` property on your `AWS::Serverless::Function` resource:
+Add a deny policy statement to the `Policies` property of your `AWS::Serverless::Function` resource:
 
 {{< code-block lang="yaml" >}}
 Resources:
   ExampleFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: example
       # ... other configuration ...
-      LoggingConfig:
-        LogGroup: ""
+      Policies:
+        - Statement:
+            - Effect: Deny
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${ExampleFunction}:*"
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-Set the `loggingFormat` property to disable CloudWatch logging:
+Use `addToPolicy` to attach a deny statement to the function's execution role:
 
 {{< code-block lang="typescript" >}}
-import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as iam from "aws-cdk-lib/aws-iam";
 
-const fn = new lambda.Function(this, "ExampleFunction", {
-  functionName: "example",
-  // ... other configuration ...
-  loggingFormat: lambda.LoggingFormat.TEXT,
-  logGroup: "",
-});
+fn.role?.addToPolicy(new iam.PolicyStatement({
+  effect: iam.Effect.DENY,
+  actions: ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+  resources: [`arn:aws:logs:*:*:log-group:/aws/lambda/${fn.functionName}:*`],
+}));
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+Add a deny statement to `provider.iam.role.statements` in your `serverless.yml`:
+
+{{< code-block lang="yaml" >}}
+provider:
+  iam:
+    role:
+      statements:
+        - Effect: Deny
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-<FUNCTION_NAME>:*"
+{{< /code-block >}}
+
+Replace `<FUNCTION_NAME>` with the name of your function as defined in the `functions` block. By default, Serverless Framework names Lambda functions `<service>-<stage>-<functionName>`.
+
+**Note**: This applies the deny policy to the shared execution role. To disable CloudWatch logs for all functions in the service, use a wildcard:
+
+{{< code-block lang="yaml" >}}
+Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-*:*"
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "AWS Console" %}}
 
-1. Open the [Lambda console][2] and select the function.
-2. Go to **Configuration** > **Monitoring and operations tools**.
-3. Under **CloudWatch Logs**, click **Edit**.
-4. Set the system log level to disabled.
-5. Save your changes.
+1. Open the [IAM console][2] and navigate to **Roles**.
+2. Find and select the execution role for your Lambda function.
+3. Under **Permissions**, choose **Add permissions** > **Create inline policy**.
+4. Switch to the **JSON** editor and paste the following policy:
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Deny",
+         "Action": [
+           "logs:CreateLogGroup",
+           "logs:CreateLogStream",
+           "logs:PutLogEvents"
+         ],
+         "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/<FUNCTION_NAME>:*"
+       }
+     ]
+   }
+   ```
+   Replace `<FUNCTION_NAME>` with the name of your Lambda function.
+5. Click **Next**, name the policy `DenyCloudWatchLogs`, and click **Create policy**.
 
-Alternatively, delete the CloudWatch log group directly from the [CloudWatch console][3]. **Note**: Lambda recreates the log group on the next invocation unless the function's execution role no longer has `logs:CreateLogGroup` and `logs:PutLogEvents` permissions.
-
-[2]: https://console.aws.amazon.com/lambda/home
-[3]: https://console.aws.amazon.com/cloudwatch/home#logsV2:log-groups
+[2]: https://console.aws.amazon.com/iam/home
 
 {{% /tab %}}
 {{< /tabs >}}
