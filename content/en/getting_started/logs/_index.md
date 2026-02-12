@@ -103,7 +103,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 ## Explore your logs
 
-Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs. For detailed information about all Log Explorer features, see the [Log Explorer documentation][16].
+Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
 For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Group into Patterns][17] to see which part of your service is logging the most errors.
 
@@ -120,7 +120,7 @@ The Log Explorer offers many powerful features for log troubleshooting and explo
 - [Saved Views][29] to save and share your search configurations
 - [Export options][30] to reuse your queries in different contexts
 
-See the [Log Explorer documentation][16] for comprehensive information about all available features.
+For detailed information about all Log Explorer features, see the [Log Explorer documentation][16].
 
 ## What's next?
 
