@@ -160,6 +160,8 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment var
 
 To get started, follow the instructions below.
 
+**For Amazon MWAA Airflow 2.7.2, 2.8.1, and 2.9.2**: If `apache-airflow-providers-openlineage` installation fails because of dependency constraints, follow [Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2][99].
+
 1. Install `openlineage` provider by adding the following into your `requirements.txt` file:
 
     For **Airflow 2.7 or later**:
@@ -212,6 +214,7 @@ To get started, follow the instructions below.
 [8]: https://openlineage.io/docs/integrations/airflow/
 [9]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
 [10]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
+[99]: /data_observability/jobs_monitoring/airflow_mwaa_upgrade/
 
 ### Validation
 
