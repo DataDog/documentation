@@ -81,7 +81,7 @@ Use manual configuration if you prefer to set up RUM Browser monitoring independ
 
 ### Enable RUM Instrumentation on Java SDK
 
-RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK Library][5].
+RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK Library][4].
 
 RUM SDK injection is disabled by default. Enable it by exporting the following environment variables:
 
@@ -105,12 +105,12 @@ java -Ddd.rum.enabled=true \
 
 Restart your Java web application server to apply the changes.
 
-HTML documents should now contain the Datadog RUM JavaScript tag right before the closing `</head>`. You may need to clear your browser cache. You should now start receiving data for your Datadog RUM application.
+HTML documents should contain the Datadog RUM JavaScript tag right before the closing `</head>`. You may need to clear your browser cache. You should start receiving data for your Datadog RUM application.
 
-[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[1]: /tracing/trace_collection/#single-step-instrumentation-recommended
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: https://app.datadoghq.com/rum/list
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=configurationfile#configuration
+[4]: /tracing/trace_collection/library_config/java/
 
 {{% /tab %}}
 {{< /tabs >}}
