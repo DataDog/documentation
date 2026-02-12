@@ -19,11 +19,11 @@ This document goes over how to send Cloudflare Logpush logs to Observability Pip
 The following are required to send Cloudflare Logpush logs to Observability Pipelines:
 
 - A Cloudflare account with Logpush enabled.
-- A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from Cloudflare's CIDR or the public internet.
-- A DNS entry that points to your Worker's load balancer.
+- A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from Cloudflare's CIDR blocks or the public internet.
+- A DNS entry that points to your Workers' load balancer.
 - An SSL/TLS certificate for your domain. Cloudflare requires an HTTPS endpoint and does not accept HTTP.
 	- **Note**: You cannot use Cloudflare origin certificates because they are not publicly trusted.
-- If you are using a firewall in front of your Worker or Worker's load balancer, ensure you add [Cloudflare's IP addresses][1] to your allowlist.
+- If you are using a firewall in front of your Worker or Workers' load balancer, ensure you add [Cloudflare's IP addresses][1] to your allowlist.
 
 ## Set up a pipeline
 
