@@ -18,7 +18,7 @@ To select a template:
 1. In Datadog, navigate to the [LLM Observability Evaluations][11] page
 1. Click on the **Create Evaluation** button
 1. Select the template of your choice
-    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 
     * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
 1. (Optional) Select the application you would like the evaluation to run for and set any desired span filters.
@@ -126,7 +126,7 @@ You can configure toxicity evaluations to use specific categories of toxicity, l
 
 The toxicity categories in this table are informed by: [Banko et al. (2020)][6], [Inan et al. (2023)][7], [Ghosh et al. (2024)][8], [Zheng et al. (2024)][9].
 
-#### Goal Completeness
+### Goal Completeness
 
 An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluation checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
 
@@ -146,21 +146,21 @@ The span should contain meaningful `input_data` and `output_data` that represent
 
 
 
-## Tool Selection
+### Tool Selection
 
 This evaluation checks whether the agent successfully selected the appropriate tools to address the user’s request. Incorrect or irrelevant tool choices lead to wasted calls, higher latency, and failed tasks.
 
-### Evaluation Summary
+#### Evaluation Summary
 
 | **Evaluation Stage** | **Evaluation Definition** | 
 |---|---|---|
 | Evaluated on spans with tool calls | Verifies that the tools chosen by the LLM align with the user’s request and the set of available tools. Flags irrelevant or incorrect tool calls. |
 
-### Example
+#### Example
 
 {{< img src="llm_observability/evaluations/tool_selection_1.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
-### How to use
+#### How to use
 
 1. Ensure you are running `dd-trace` v3.12+.
 1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
@@ -214,22 +214,22 @@ triage_agent = Agent(
 )
 {{< /code-block >}}
 
-### Troubleshooting
+#### Troubleshooting
 
 - If you frequently see irrelevant tool calls, review your tool descriptions—they may be too vague for the LLM to distinguish.
 - Make sure you include descriptions of the tools (i.e. the quotes containing the tool description under the function name, the sdk autoparses this as the description)
 
-## Tool Argument Correctness
+### Tool Argument Correctness
 
 Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (for example, a string instead of an integer) or irrelevant values cause failures in downstream execution.
 
-### Evaluation summary
+#### Evaluation summary
 
 | **Span kind** | **Evaluation Definition** | 
 |---|---|---|
 | Evaluated on spans with tool calls | Verifies that arguments provided to a tool are correct and relevant based on the tool schema. Identifies invalid or irrelevant arguments. |
 
-### Example
+#### Example
 
 {{< img src="llm_observability/evaluations/tool_argument_correctness_1.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
@@ -237,7 +237,7 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][21]** to run this evaluation.  
 
-### How to use
+#### How to use
 <div class="alert alert-info">Tool argument correctness is only available for OpenAI and Azure OpenAI.</div>
 
 1. Install `dd-trace` v3.12+.
@@ -326,7 +326,7 @@ result = triage_agent.run_sync(
 )
 {{< /code-block >}}
 
-### Troubleshooting
+#### Troubleshooting
 - Make sure your tools use type hints—the evaluation relies on schema definitions.
 - Make sure to include a tool description (for example, the description in quotes under the function name), this is used in the auto-instrumentation process to parse the tool’s schema
 - Validate that your LLM prompt includes enough context for correct argument construction.
