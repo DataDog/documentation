@@ -1,0 +1,91 @@
+title: Troubleshooting Windows Agent Startup Failures Due to Port Conflicts
+description: Diagnose and resolve Windows Agent startup failures caused by another service binding to a required port.
+further_reading:
+	•	link: “/agent/troubleshooting/debug_mode/”
+tag: “Documentation”
+text: “Agent Debug Mode”
+
+When running the Datadog Agent on Windows, the Agent may fail to start if another process is already listening on one of the ports required by the Agent’s components. This issue commonly appears in the Windows Event Viewer or Agent logs as “address already in use” or “port already allocated”.
+
+This guide explains which ports the Agent requires, how to check whether another service is using one of those ports, and how to resolve the conflict.
+
+## Agent ports on Windows
+
+The Datadog Agent uses several local ports depending on which features are enabled.
+
+Component: DogStatsD
+Default port: 8125 UDP
+Purpose: Metrics, distributions, and custom metrics
+
+Component: Trace Agent (APM)
+Default port: 8126 TCP
+Purpose: Receiving application traces
+
+Component: Live Processes
+Default port: 6162 TCP
+Purpose: Process data collection
+
+
+If another application binds to any of these ports, the Agent will fail to start or one of its subsystems will refuse to run.
+
+Common symptoms
+
+You may see:
+	•	The Agent GUI reporting that the Datadog Agent service failed to start
+	•	Event Viewer logs showing “Only one usage of each socket address is normally permitted”
+	•	Trace or DogStatsD logs containing “bind: Address already in use”
+	•	datadog-agent.exe status showing components not running
+
+Checking for port conflicts on Windows
+
+You can use netstat or PowerShell to determine whether another process is listening on a required Agent port.
+
+Checking with netstat (Command Prompt):
+
+Use netstat to check whether another process is listening on a required Agent port:
+```
+netstat -ano | findstr :<PORT_NUMBER>
+```
+Replace <PORT_NUMBER> with the port you want to check, such as 8125, 8126, or 6162.
+
+
+If output appears, the final number on the line is the PID of the process using the port.
+
+Checking with PowerShell:
+```
+Get-NetTCPConnection -LocalPort 8126
+Get-NetUDPEndpoint -LocalPort 8125
+```
+To identify which process is using the port:
+```
+Get-Process -Id 
+```
+Resolving the port conflict
+
+Option 1: Stop or reconfigure the conflicting service
+If a non-Datadog service is using one of the Agent ports, stop the service or change its port configuration.
+
+Option 2: Change the Datadog Agent port configuration
+You can change DogStatsD or APM ports in the Agent config file located at:
+```
+C:\ProgramData\Datadog\datadog.yaml
+```
+Example to change DogStatsD port:
+```
+dogstatsd_port: 9125
+```
+Example to change the APM receiver port:
+```
+apm_config:
+receiver_port: 9126
+```
+
+Restart the Agent service after modifying configuration.
+
+
+Then verify components with:
+```
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" diagnose
+```
+
+All required subsystems should show as “Running”.
