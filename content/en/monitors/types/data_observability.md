@@ -56,16 +56,45 @@ To create a Data Observability monitor in Datadog, navigate to [**Monitors** > *
 
 {{< img src="data_observability/data_observability_monitor/full_page_do_monitor_creation.png" alt="Full flow of DO monitor creation." style="width:80%;" >}}
 
-## Select an entity type and metric type
+## Choose data to monitor
 
-First, select the **entity type** to determine whether you are monitoring at the table level or column level:
+First, select whether you are monitoring at the **Table** or **Column** level:
 
 - **Table**: Monitor table-level signals such as freshness, row count, or a custom SQL query result.
 - **Column**: Monitor column-level metrics such as nullness, uniqueness, cardinality, or statistical measures.
 
+Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field. The following attributes are available:
+
+| Filter | Example | Description |
+|---|---|---|
+| Name | `name:USERS*` | Match by name. Supports `*` wildcards. |
+| Schema | `schema:PROD` | Match by schema. |
+| Database | `database:ANALYTICS_DB` | Match by database. |
+| Account | `account:my_account` | Match by account. |
+
+Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
+
 {{< img src="data_observability/data_observability_monitor/metric_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:80%;" >}}
 
-Then, choose a metric type based on the data quality signal you want to track:
+**Examples:**
+
+| Goal | Query |
+|---|---|
+| All tables in the PROD schema, excluding temp tables | `schema:PROD AND -name:TEMP*` |
+| All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
+| Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
+
+A single monitor can track up to 5,000 tables, views, or columns. This limit cannot be increased. If your query matches more, split them across multiple monitors.
+
+Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
+
+{{< code-block lang="text" >}}
+search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
+{{< /code-block >}}
+
+## Select your metric type
+
+Choose a metric type based on the data quality signal you want to track:
 
 {{< tabs >}}
 {{% tab "Freshness" %}}
@@ -75,25 +104,10 @@ The **Freshness** metric type detects when data has not been updated within an e
 - **Table freshness** tracks the time elapsed since the table was last updated. Table freshness is not available for views or for data warehouses that do not provide updated timestamps for tables in system metadata. Use column-level freshness instead.
 - **Column freshness** tracks the most recent date seen in a datetime column.
 
-1. Select the entity type: **Table** or **Column**.
-1. Select **Freshness** as the metric type.
-1. Choose the target table or column to monitor.
-1. Select the detection method:
-    - **Anomaly**: Alert when the freshness deviates from an expected pattern.
-    - **Threshold**: Alert when the freshness crosses a fixed value.
-1. Define the expected update frequency (for example, the table should be updated at least every 6 hours).
-
 {{% /tab %}}
 {{% tab "Row Count" %}}
 
 The **Row Count** metric type tracks row count changes in your tables. Use it to detect unexpected drops or spikes in data that could indicate pipeline failures or upstream issues.
-
-1. Select **Table** as the entity type.
-1. Select **Row Count** as the metric type.
-1. Choose the target table to monitor.
-1. Select the detection method:
-    - **Anomaly**: Alert when the row count deviates from its historical baseline.
-    - **Threshold**: Alert when the row count is above or below a fixed value.
 
 {{% /tab %}}
 {{% tab "Column Metric" %}}
@@ -115,62 +129,27 @@ The **Row Count** metric type tracks row count changes in your tables. Use it to
 
 <div class="alert alert-info">Some column metrics are only available for specific column types. Numeric metrics (Percent Zero, Percent Negative, Min, Max, Mean, Standard Deviation, Sum) require numeric columns.</div>
 
-1. Select **Column** as the entity type.
-1. Select the column-level metric to track (for example, **Nullness**, **Cardinality**, **Mean**).
-1. Choose the target column to monitor.
-1. Select the detection method:
-    - **Anomaly**: Alert when the metric deviates from its historical baseline.
-    - **Threshold**: Alert when the metric crosses a fixed value.
-
 {{% /tab %}}
 {{% tab "Custom SQL" %}}
 
 The **Custom SQL** metric type tracks a custom metric value returned by a SQL query that you define. Use it when built-in metric types do not cover your use case, such as monitoring business-specific data quality rules.
 
-1. Select **Table** as the entity type.
-1. Select **Custom SQL** as the metric type.
-1. Choose the target table to monitor.
 1. Select a **model type** that describes the value returned by your query:
     - **Default**: The query returns a scalar value. Use this in most cases.
     - **Freshness**: The query returns the difference (in seconds) between the current time and the last time an event occurred.
     - **Percentage**: The query returns a percentage value between 0 and 100.
 1. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`
 1. Click **Validate** to verify your query syntax.
-1. Select the detection method:
-    - **Anomaly**: Alert when the metric deviates from an expected pattern.
-    - **Threshold**: Alert when the metric crosses a fixed value.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Select entities to monitor
+## Configure monitor
 
-After selecting a metric type, choose which tables or columns to monitor. Use the **Edit** tab to search for entities by typing `key:value` filters into the search field. The following attributes are available:
-
-| Filter | Example | Description |
-|---|---|---|
-| Name | `name:USERS*` | Match by name. Supports `*` wildcards. |
-| Schema | `schema:PROD` | Match by schema. |
-| Database | `database:ANALYTICS_DB` | Match by database. |
-| Account | `account:my_account` | Match by account. |
-
-Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
-
-**Examples:**
-
-| Goal | Query |
-|---|---|
-| All tables in the PROD schema, excluding temp tables | `schema:PROD AND -name:TEMP*` |
-| All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
-| Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
-
-A single monitor can track up to 5,000 entities. This limit cannot be increased. If your query matches more entities, split them across multiple monitors.
-
-Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
-
-{{< code-block lang="text" >}}
-search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
-{{< /code-block >}}
+### Select the detection method:
+You can choose between two types of detection methods:
+- **Anomaly**: Alert when the metric deviates from an expected pattern.
+- **Threshold**: Alert when the metric crosses a fixed value.
 
 ### Group by
 
