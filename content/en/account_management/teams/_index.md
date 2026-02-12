@@ -134,6 +134,24 @@ The following table describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
+| [Apps][21]         | Team handle                                                                      |
+| [Case Management projects][22]         | Team handle                                                                      |
+| [Connections][23]         | Team handle                                                                      |
+| [Connection Groups][24]         | Team handle                                                                      |
+| [Cross Org Connections][25]         | Team handle                                                                      |
+| [Datastores][26]         | Team handle                                                                      |
+| [Integrations][27]         | Team handle                                                                      |
+| [Logs Pipelines][28]         | Team handle                                                                      |
+| [Observability Pipelines][29]         | Team handle                                                                      |
+| [On-Cal][30] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Private Action Runner][31]         | Team handle                                                                      |
+| [Powerpacks][32]         | Team handle                                                                      |
+| [Reference tables][33]         | Team handle                                                                      |
+| [RUM apps][34]         | Team handle                                                                      |
+| [Security rules][35]         | Team handle                                                                      |
+| [Security suppressions][36]         | Team handle                                                                      |
+| [Service Level Objectives][37]         | Team handle                                                                      |
+| [Sheets][38]         | Team handle                                                                      |
 | [Dashboards][11]         | Team handle                                                                      |
 | [Resource Catalog][8]   | Team handle                                                                      |
 | [Software Catalog][12]    | Team handle                                                                      |
@@ -176,3 +194,21 @@ To customize your team, see [Team Management][3].
 [18]: https://app.datadoghq.com/data-streams
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
+[21]: https://app.datadoghq.com/app-builder/apps/list
+[22]: https://app.datadoghq.com/cases
+[23]: https://app.datadoghq.com/actions/connections
+[24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
+[25]: https://app.datadoghq.com/organization-settings/cross-org-visibility
+[26]: https://app.datadoghq.com/actions/datastores
+[27]: https://app.datadoghq.com/integrations
+[28]: https://app.datadoghq.com/logs/pipelines
+[29]: https://app.datadoghq.com/observability-pipelines
+[30]: https://app.datadoghq.com/on-call/summary
+[31]: https://demo.datadoghq.com/actions/private-action-runners
+[32]: /dashboards/widgets/powerpack/#powerpack-permissions
+[33]: https://app.datadoghq.com/reference-tables
+[34]: https://app.datadoghq.com/rum/list
+[35]: /security/detection_rules/#restrict-edit-permissions
+[36]: /security/suppressions/#restrict-edit-permissions
+[37]: https://app.datadoghq.com/slo/manage
+[38]: https://app.datadoghq.com/sheets
