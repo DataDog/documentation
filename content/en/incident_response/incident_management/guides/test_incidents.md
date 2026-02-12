@@ -19,7 +19,7 @@ further_reading:
 
 Test incidents are a type of incident designed for training, testing, and validation purposes. When enabled, test incidents allow your team to practice incident response workflows, validate automations, and familiarize new team members with your incident management process—all without impacting production analytics or triggering real notifications.
 
-Test incidents are visually distinguished by a **purple banner** and are isolated from your production incident data by default.
+Test incidents are visually distinguished by a **purple banner** and are isolated from your production incident data.
 
 ## Default behavior
 
@@ -29,17 +29,15 @@ By default, test incidents:
 - Do not execute integrations
 - Do not execute notification rules
 
-During declaration, you can optionally enable any of these behaviors if needed for your testing purposes. For example, enable "Execute integrations" when testing workflows, or enable "Include in analytics" when validating reporting.
+During declaration, you have the option to enable any of these behaviors if needed for your testing purposes. For example, enable "Execute integrations" when testing workflows, or enable "Include in analytics" when validating reporting.
 
 ## Use cases
 
-**Onboarding new responders**: Train new team members on your incident response process by declaring a test incident and assigning them as incident commander. Walk through the full lifecycle—declaration, investigation, communication, and resolution—allowing them to practice using the timeline, adding responders, and updating stakeholders.
+**Training and response drills**: Use test incidents to onboard responders and simulate realistic scenarios. Practice the full incident lifecycle, test escalation and on-call responsiveness, and evaluate team coordination, without impacting team metrics.
 
-**Testing incident automations and notifications rules**: Before deploying new [incident automations][1] or after setting up a [notification rules][2], declare a test incident that matches your automation's trigger conditions or notification rules. Verify that it executes correctly by checking the incident timeline, confirm it performs expected actions (Slack messages, task creation), and iterate on your configuration without disrupting production workflows.
+**Testing incident automations and notifications rules**: Use test incidents to verify automations and notification rules trigger correctly, execute expected actions (for example, Slack messages or task creation), and can be refined without affecting production workflows.
 
-**Validating integrations**: When configuring integrations like Jira, ServiceNow, or Slack, create a test incident to verify tickets or channels are created correctly. Check that bidirectional syncing works as expected, incident updates propagate properly to external systems, and notification formatting appears correctly.
-
-**Running incident response drills**: Use test incidents to simulate realistic scenarios. Practice escalation procedures and communication protocols, test your on-call rotation's responsiveness, evaluate team coordination, and review performance afterward without the data appearing in team metrics.
+**Validating integrations**: Create test incidents to confirm integrations (such as Jira, ServiceNow, or Slack) create and sync records correctly, propagate updates, and format notifications as expected.
 
 ## Enabling test incidents
 
