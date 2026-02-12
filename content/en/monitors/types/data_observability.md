@@ -26,6 +26,8 @@ further_reading:
 
 [Data Observability](/data_observability/) monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
+{{< img src="data_observability/data_observability_monitor/full_page_do_monitor_creation.png" alt="Full flow of DO monitor creation." style="width:80%;" >}}
+
 Data Observability monitors support the following metric types:
 
 **Table-level metric types:**
@@ -60,6 +62,8 @@ First, select the **entity type** to determine whether you are monitoring at the
 
 - **Table**: Monitor table-level signals such as freshness, row count, or a custom SQL query result.
 - **Column**: Monitor column-level metrics such as nullness, uniqueness, cardinality, or statistical measures.
+
+{{< img src="data_observability/data_observability_monitor/metric_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:80%;" >}}
 
 Then, choose a metric type based on the data quality signal you want to track:
 
@@ -172,6 +176,8 @@ search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
 
 You can add a **Group by** clause to split a single monitor into multiple groups, each evaluated independently. For example, grouping a row count monitor by a `REGION` column produces a separate alert for each geography.
 
+{{< img src="data_observability/data_observability_monitor/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
+
 The default limit is 100 groups per monitor. To increase this limit, <a href="/help/">contact Support</a>.
 
 ## Set alert conditions
@@ -197,7 +203,11 @@ For more information about advanced alert options such as evaluation delay, see 
 
 ### Annotate bounds
 
-For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
+For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time.
+
+{{< img src="data_observability/data_observability_monitor/bounds_annotation_example.png" alt="Hover menu for annotating a monitor bound." style="width:80%;" >}}
+
+On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
 
 | Annotation | Description |
 |---|---|
@@ -209,6 +219,8 @@ For monitors using the **Anomaly** detection method, you can annotate bound rang
 ## Configure notifications and automations
 
 For detailed instructions on the **Configure notifications and automations** section, see [Notifications](/monitors/notify/).
+
+{{< img src="data_observability/data_observability_monitor/configuration_example.png" alt="Input field for configuring alert logic and notification." style="width:80%;" >}}
 
 You can use the following template variables in your notification messages:
 
