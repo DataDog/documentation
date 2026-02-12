@@ -55910,11 +55910,13 @@ components:
       - start_date
       - expiration_date
       - update_date
+      - creation_date
       - enabled
       - -name
       - -start_date
       - -expiration_date
       - -update_date
+      - -creation_date
       - -enabled
       type: string
       x-enum-varnames:
@@ -55922,11 +55924,13 @@ components:
       - START_DATE
       - EXPIRATION_DATE
       - UPDATE_DATE
+      - CREATION_DATE
       - ENABLED
       - NAME_DESCENDING
       - START_DATE_DESCENDING
       - EXPIRATION_DATE_DESCENDING
       - UPDATE_DATE_DESCENDING
+      - CREATION_DATE_DESCENDING
       - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
