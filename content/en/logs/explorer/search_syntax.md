@@ -92,6 +92,16 @@ For instance, if your attribute name is **url** and you want to filter on the **
 @url:www.datadoghq.com
 ```
 
+### Reserved attributes
+
+[Reserved attributes][8] such as `host`, `source`, `status`, `service`, `trace_id`, and `message` do not require the `@` prefix. You can search these attributes directly:
+
+```
+service:web-app
+status:error
+host:i-1234567890abcdef0
+```
+
 
 **Notes**:
 
@@ -224,3 +234,4 @@ Calculated fields function like log attributes and can be used for search, aggre
 [5]: /getting_started/tagging/#tags-best-practices
 [6]: /logs/explorer/saved_views/
 [7]: /logs/explorer/facets/#facet-panel
+[8]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

@@ -189,6 +189,7 @@ For security, use a scoped API key and application key from a [service account][
 4. Click **Connect**, then go to **Tools** > **List Tools**.
 5. Check if the [available tools][20] appear.
 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

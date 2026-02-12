@@ -200,7 +200,7 @@ Ensure you add the `fips-proxy` sidecar container to your ECS task definition an
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.19",
+            "image": "datadog/fips-proxy:1.1.20",
             "portMappings": [
                 {
                     "containerPort": 9803,

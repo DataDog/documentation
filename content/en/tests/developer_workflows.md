@@ -175,4 +175,3 @@ IDE plugins and extensions are required to view your test in your IDE.
 [8]: /incident_response/case_management/view_and_manage#take-action
 [9]: https://app.datadoghq.com/cases
 [10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[11]: https://app.datadoghq.com/ci/test-repositories

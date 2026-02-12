@@ -79,20 +79,7 @@ An _experiment_ lets you systematically test your LLM application by running you
 - **task**: Defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 - **evaluator**: A function, executed on each record, that measures how well the model or agent performs. Evaluators allow you to compare the output to either the expected output or the original input.  
 
-   Datadog supports the following evaluator types:  
-   - **Boolean**: returns true or false
-   - **score**: returns a numeric value (float)
-   - **categorical**: returns a labeled category (string)
-
-   Additionally, you can also return an `EvaluatorResult` to capture more aspects of the evaluation, such as `reasoning` (`str`), `assessment` (`"pass"` or `"fail"`)
-   and `tags` (`Dict[str, str]`). The `value` field of the EvaluatorResult captures the final evaluation result, and works the same way as the previous use case.
-
 - **summary evaluators**: Optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
-
-   Datadog supports the following Summary Evaluator types:
-   - **Boolean**: returns true or false
-   - **score**: returns a numeric value (float)
-   - **categorical**: returns a labeled category (string)
 
 
 To create an experiment:
@@ -123,6 +110,17 @@ To create an experiment:
 
 ### 3. Define evaluator functions.
 
+   Datadog supports the following evaluator types:  
+   - **Boolean**: returns true or false
+   - **score**: returns a numeric value (float)
+   - **categorical**: returns a labeled category (string)
+
+   Additionally, you can also return an `EvaluatorResult` to capture more aspects of the evaluation, such as `reasoning` (`str`), `assessment` (`"pass"` or `"fail"`)
+   and `tags` (`Dict[str, str]`). The `value` field of the EvaluatorResult captures the final evaluation result, and works the same way as the previous use case.
+   
+   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
+   Evaluators can only return a string, a number, or a Boolean.
+
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
        return output_data == expected_output
@@ -145,8 +143,6 @@ To create an experiment:
            tags={"task": "judge_llm_call"},
        )
    ```
-   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
-   Evaluators can only return a string, a number, or a Boolean.
 
 ### 4. (Optional) Define summary evaluator function(s).
 
@@ -155,8 +151,13 @@ To create an experiment:
         return evaluators_results["exact_match"].count(True)
 
    ```
+
    If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
-   Summary evaluators can only return a string, a number, or a Boolean.
+   
+   Datadog supports the following Summary Evaluator types:
+   - **Boolean**: returns true or false
+   - **score**: returns a numeric value (float)
+   - **categorical**: returns a labeled category (string)
 
 ### 5. Create and run the experiment.
    ```python
