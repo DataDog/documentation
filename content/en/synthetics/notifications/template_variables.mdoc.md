@@ -1,5 +1,7 @@
 ---
 title: Synthetic Monitoring Template Variables
+aliases:
+- /synthetics/notifications/template_variables_cdocs
 content_filters:
 - trait_id: platform
   option_group_id: synthetics_test_type_options
@@ -26,31 +28,7 @@ Template variables allow you to insert dynamic values from your test results and
 <!-- Test execution -->
 {% if equals($synthetics_variables, "execution") %}
 
-### Test execution variables
-
-Path: `synthetics` (various shortcuts)
-
-Use these variables to access common test execution data such as failure messages, step counts, duration, and tags.
-
-`{{synthetics.failed_step.failure.message}}`
-: The error message (for example, `Element's content should match the given regex`).
-
-`{{synthetics.failed_step.url}}`
-: The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
-
-`{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`).
-: **Note:** Review the [conditional alerting](/synthetics/notifications/conditional_alerting/) page for an example of how to use this variable in a notification.
-
-`{{synthetics.result.step_count}}`
-: Number of steps (for example, `4`).
-
-`{{synthetics.result.duration}}`
-: Duration of the test run (in milliseconds) (for example, `9096`).
-
-`{{tags}}`
-: Lists all the tags added to the synthetics test.
-: To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
+{% partial file="synthetics/notifications/test_execution_variables.mdoc.md" /%}
 
 {% /if %}
 <!-- end Test execution -->
@@ -58,43 +36,7 @@ Use these variables to access common test execution data such as failure message
 <!-- Test metadata -->
 {% if equals($synthetics_variables, "test_metadata") %}
 
-### Test metadata
-
-Path: `synthetics.attributes`
-
-Use these variables to access test configuration and execution location information.
-
-{% tabs %}
-{% tab label="Test Info" %}
-`{{synthetics.attributes.test}}`
-: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
-
-`{{synthetics.attributes.test.name}}`
-: The name of the test
-
-`{{synthetics.attributes.test.type}}`
-: Test type (for example, `api`)
-
-`{{synthetics.attributes.test.subType}}`
-: Subtype for API tests (for example, `http`, `dns`, and `multi`)
-
-`{{synthetics.attributes.test.id}}`
-: The test's public ID (for example, `abc-def-ghi`)
-{% /tab %}
-{% tab label="Location" %}
-`{{synthetics.attributes.location}}`
-: The `location` object contains information about the location of where the test is run from
-
-`{{synthetics.attributes.location.id}}`
-: Location ID (for example, `aws:eu-central-1`)
-
-`{{synthetics.attributes.location.name}}`
-: Name of the location (for example, `Frankfurt (AWS)`)
-
-`{{synthetics.attributes.location.privateLocation}}`
-: `true` for Private Locations
-{% /tab %}
-{% /tabs %}
+{% partial file="synthetics/notifications/test_metadata.mdoc.md" /%}
 
 {% /if %}
 <!-- end Test metadata -->
@@ -150,61 +92,7 @@ Device information is not available for this test type. Device variables are onl
 <!-- Execution results -->
 {% if equals($synthetics_variables, "execution_results") %}
 
-### Execution results
-
-Path: `synthetics.attributes`
-
-Use these variables to access test execution results, status, duration, and step counts.
-
-{% tabs %}
-{% tab label="Result" %}
-`{{synthetics.attributes.result}}`
-: The `result` object contains information about the executed test run
-
-`{{synthetics.attributes.result.id}}`
-: Unique result ID
-
-`{{synthetics.attributes.result.status}}`
-: Test execution status (for example, `passed` or `failed`)
-
-`{{synthetics.attributes.result.duration}}`
-: Test duration in milliseconds
-
-`{{synthetics.attributes.result.testStartedAt}}`, `{{synthetics.attributes.result.testFinishedAt}}`, `{{synthetics.attributes.result.testTriggeredAt}}`
-: Epoch timestamps in milliseconds
-
-`{{synthetics.attributes.result.failure}}`
-: The `failure` object contains information about why the test failed
-
-`{{synthetics.attributes.result.failure.message}}`
-: The failure message
-
-`{{synthetics.attributes.result.failure.code}}`
-: The failure code
-
-For a complete list of API test error codes, see [API Testing Errors](/synthetics/api_tests/errors/). Review the [conditional alerting](/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code) page for an example of how to use the `synthetics.attributes.result.failure` variable in a notification.
-{% /tab %}
-
-<!-- Count -->
-{% tab label="Count" %}
-
-`{{synthetics.attributes.count}}`
-: The `count` object contains step statistics about the test
-
-`{{synthetics.attributes.count.steps.total}}`
-: The total number of steps
-
-`{{synthetics.attributes.count.steps.completed}}`
-: The number of steps that were run
-
-`{{synthetics.attributes.count.errors}}`
-: The total number of errors that occurred while running the test. For multistep and mobile tests, this is the number of failed steps. For browser tests, this is the sum of all browser errors.
-
-`{{synthetics.attributes.count.hops}}`
-: The number of traceroute hops for TCP and ICMP tests
-{% /tab %}
-<!-- end Count -->
-{% /tabs %}
+{% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
 
 {% /if %}
 <!-- end Execution results -->
@@ -254,52 +142,7 @@ Review the [conditional alerting](/synthetics/notifications/conditional_alerting
 <!-- Local & Global Variables -->
 {% if equals($synthetics_variables, "local_global_variables") %}
 
-### Local & Global Variables
-
-Use these variables to access locally configured variables and globally defined variables in your notifications.
-
-{% tabs %}
-{% tab label="Local" %}
-
-Path: `synthetics.attributes.result.variables.config`
-
-These are local variables configured for API tests or defined outside individual steps in step-based tests. This also includes variables created by JavaScript code execution.
-
-`{{synthetics.attributes.result.variables.config.name}}`
-: Variable name
-
-`{{synthetics.attributes.result.variables.config.type}}`
-: Variable type
-
-`{{synthetics.attributes.result.variables.config.secure}}`
-: Whether the variable value is obfuscated
-
-`{{synthetics.attributes.result.variables.config.value}}`
-: Variable value (non-obfuscated only)
-
-{% /tab %}
-{% tab label="Global" %}
-
-Path: `synthetics.attributes.result.variables.extracted`
-
-These are extracted variables whose value updates a global variable value.
-
-Available only for **successful test results** and **recovery notifications**.
-
-`{{synthetics.attributes.result.variables.extracted.id}}`
-: Global variable ID
-
-`{{synthetics.attributes.result.variables.extracted.name}}`
-: Variable name
-
-`{{synthetics.attributes.result.variables.extracted.secure}}`
-: Whether the variable value is obfuscated
-
-`{{synthetics.attributes.result.variables.extracted.val}}`
-: Variable value (note: uses `.val`, not `.value`)
-
-{% /tab %}
-{% /tabs %}
+{% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
 
 {% /if %}
 <!-- end Local & Global Variables -->
@@ -454,62 +297,4 @@ These are step execution metadata and results containing detailed information ab
 {% /if %}
 <!-- end Step -->
 
-## Step summary
-
-Path: `synthetics.attributes.result.steps`
-
-Access step data by index, name, or ID to reference specific steps in your notification messages. Use these reference methods when working with step-related variables throughout this documentation.
-
-Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
-
-You can reference steps in three ways:
-
-{% tabs %}
-{% tab label="By index" %}
-Use positive numbers to count from the beginning, or negative numbers to count from the end:
-
-`synthetics.attributes.result.steps.0`
-: First step
-
-`synthetics.attributes.result.steps.1`
-: Second step
-
-`synthetics.attributes.result.steps.-1`
-: Last step
-
-`synthetics.attributes.result.steps.-2`
-: Second to last step
-
-**Example:** `{{synthetics.attributes.result.steps.-1.status}}` returns the status of the last step.
-{% /tab %}
-
-{% tab label="By name" %}
-Use the step name in brackets:
-
-`synthetics.attributes.result.steps[Click button]`
-: References the step named "Click button"
-
-**Example:** `{{synthetics.attributes.result.steps[Click button].status}}` returns the status of the step named "Click button".
-{% /tab %}
-
-{% tab label="By ID" %}
-Use the step's unique identifier:
-
-`synthetics.attributes.result.steps.abc-def-ghi`
-: References the step with ID "abc-def-ghi"
-
-**Example:** `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` returns the status of the step with step ID "abc-def-ghi".
-{% /tab %}
-{% /tabs %}
-
-{% alert level="tip" %}
-Review the [conditional alerting](/synthetics/notifications/conditional_alerting/) page for an example of how to use the `synthetics.attributes.result.step` variable in a Slack notification based on a failed step.
-{% /alert %}
-
-### Accessing step properties
-
-Combine any reference method with a property:
-
-- `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
-- `{{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
-- `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
+{% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
