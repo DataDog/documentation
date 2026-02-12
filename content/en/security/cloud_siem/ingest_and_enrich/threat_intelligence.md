@@ -12,6 +12,8 @@ further_reading:
   text: IOC Explorer
 ---
 
+<div class="alert alert-info">This feature is not available for the Legacy product.</a></div>
+
 ## Overview
 
 Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This article explains how to extend that functionality by enriching logs with your own custom threat intelligence feeds.

@@ -5,6 +5,8 @@ type: multi-code-lang
 weight: 2
 ---
 
+<div class="alert alert-info">Scheduled Rule is not available for the Legacy product.</a></div>
+
 ## Overview
 
 Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
