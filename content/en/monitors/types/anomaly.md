@@ -180,7 +180,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 ```
 
 `query_window`
-: A timeframe like `last_4h` or `last_7d`. This parameter controls the time range of data shown in notification graphs, helping provide context around the anomaly. The `query_window` determines how much historical data appears in the visualization but does not affect alert evaluation. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window` to provide adequate context.
+: A time frame like `last_4h` or `last_7d`. This parameter controls the time range of data shown in notification graphs. The `query_window` determines how much historical data appears in the visualization but does not affect alert evaluation. Datadog recommends the `query_window` to be around five times the `alert_window` to provide additional context. **Note**: The `query_window` must be at least as large as the `alert_window`. 
 
 `metric_query`
 : A standard Datadog metric query (for example, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
