@@ -84,6 +84,8 @@ class ConversationalSearch {
         this.isLoading = false;
         this.messages = [];
         this.abortController = null;
+        this.isHomepage = document.querySelector('.kind-home') !== null;
+        this.homeAiBtnVisible = false; // tracks if the homepage "Ask AI" button is in the viewport
         
         this.init();
     }
@@ -111,6 +113,13 @@ class ConversationalSearch {
         // Inject the empty state into the messages container
         const messagesContainer = this.sidebar.querySelector('.conv-search-messages');
         this.injectEmptyState(messagesContainer);
+
+        // On the homepage, hide the floating button initially since the
+        // homepage already has a dedicated "Ask AI" button. An
+        // IntersectionObserver will show/hide it based on scroll position.
+        if (this.isHomepage) {
+            this.floatButton.classList.add('hidden');
+        }
 
         // Append to DOM
         document.body.appendChild(this.floatButton);
@@ -163,6 +172,29 @@ class ConversationalSearch {
             }
         });
 
+        // On the homepage, observe the dedicated "Ask AI" button so we
+        // reveal the floating button once it scrolls out of view.
+        if (this.isHomepage) {
+            const homeAiBtn = document.querySelector('.home-ai-btn');
+            if (homeAiBtn) {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        this.homeAiBtnVisible = entry.isIntersecting;
+                        // Only toggle when dialog is closed
+                        if (!this.isOpen) {
+                            if (entry.isIntersecting) {
+                                this.floatButton.classList.add('hidden');
+                            } else {
+                                this.floatButton.classList.remove('hidden');
+                            }
+                        }
+                    },
+                    { threshold: 0 }
+                );
+                observer.observe(homeAiBtn);
+            }
+        }
+
         this.messagesContainer.addEventListener('click', (e) => {
             // Suggestion chips click handler
             const suggestionBtn = e.target.closest('.conv-search-suggestion');
@@ -210,8 +242,14 @@ class ConversationalSearch {
         this.isOpen = false;
         this.sidebar.classList.remove('open');
         this.overlay.classList.remove('open');
-        this.floatButton.classList.remove('hidden');
         document.body.style.overflow = '';
+
+        // On the homepage, only show the floating button if the dedicated
+        // "Ask AI" button has scrolled out of view.
+        if (!this.isHomepage || !this.homeAiBtnVisible) {
+            this.floatButton.classList.remove('hidden');
+        }
+
         // Let any ongoing request continue in the background so the
         // response is still there when the user reopens the dialog.
     }
