@@ -62,7 +62,7 @@
         "json2csv": "^4.5.4",
         "lazypipe": "1.0.2",
         "lodash": "^4.17.21",
-        "marked": "^1.2.9",
+        "marked": "^17.0.1",
         "merge-stream": "2.0.0",
         "minimist": "^1.2.8",
         "mixitup": "^3.3.1",

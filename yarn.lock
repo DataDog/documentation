@@ -7667,7 +7667,7 @@ __metadata:
     json2csv: "npm:^4.5.4"
     lazypipe: "npm:1.0.2"
     lodash: "npm:^4.17.21"
-    marked: "npm:^1.2.9"
+    marked: "npm:^17.0.1"
     merge-stream: "npm:2.0.0"
     minimist: "npm:^1.2.8"
     mixitup: "npm:^3.3.1"
@@ -12504,12 +12504,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^1.2.9":
-  version: 1.2.9
-  resolution: "marked@npm:1.2.9"
+"marked@npm:^17.0.1":
+  version: 17.0.2
+  resolution: "marked@npm:17.0.2"
   bin:
-    marked: bin/marked
-  checksum: 10/ad88455b9e2f0ffc44fa3bb89efc3aed7c0cdcd3af874ebff05d86ce9fef1593ac33bb7a582cbc8925acb802bad80c4480f759e255da39f3b5a99f8759f5ce74
+    marked: bin/marked.js
+  checksum: 10/0174c9e0e338a9c4559365a1838869be3287f592fc66ef0f4f8be62839ad04ed50c993fe958800dd0d3c95cef7764d9eba0b039a8768dd2703e34c2720d6e797
   languageName: node
   linkType: hard
 
