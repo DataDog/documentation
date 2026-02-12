@@ -15,18 +15,19 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK.
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
 
 ## Prerequisites
 
 Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
+- **Datadog Node.js tracer** `dd-trace` version 5.80.0 or later
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable the feature flagging provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
@@ -239,3 +240,4 @@ console.log(details.flagMetadata); // Additional information about the evaluatio
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[2]: https://openfeature.dev/

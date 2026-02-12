@@ -783,6 +783,27 @@ components:
       required: false
       schema:
         type: string
+    NDMPageNumber:
+      description: Specific page number to return. Defaults to 0.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 0
+        example: 0
+        format: int64
+        type: integer
+    NDMPageSize:
+      description: Size for a given page. The maximum allowed value is 500. Defaults
+        to 50.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 50
+        example: 50
+        format: int64
+        type: integer
     NotificationRuleIDPathParameter:
       description: Notification Rule UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -29482,6 +29503,27 @@ components:
       x-enum-varnames:
       - USERS
       - ATTACHMENTS
+    IncidentRelationshipData:
+      description: Incident relationship data
+      properties:
+        id:
+          description: Incident identifier
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentResourceType'
+      required:
+      - type
+      - id
+      type: object
+    IncidentResourceType:
+      description: Incident resource type
+      enum:
+      - incidents
+      example: incidents
+      type: string
+      x-enum-varnames:
+      - INCIDENTS
     IncidentRespondersType:
       description: The incident responders type.
       enum:
@@ -31014,6 +31056,11 @@ components:
     InputSchemaParameters:
       description: The definition of `InputSchemaParameters` object.
       properties:
+        allowExtraValues:
+          description: The `InputSchemaParameters` `allowExtraValues`.
+          type: boolean
+        allowedValues:
+          description: The `InputSchemaParameters` `allowedValues`.
         defaultValue:
           description: The `InputSchemaParameters` `defaultValue`.
         description:
@@ -32381,6 +32428,87 @@ components:
           $ref: '#/components/schemas/Case3rdPartyTicketStatus'
       readOnly: true
       type: object
+    JiraIssueCreateAttributes:
+      description: Jira issue creation attributes
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Additional Jira fields
+          example: {}
+          type: object
+        issue_type_id:
+          description: Jira issue type ID
+          example: '10001'
+          type: string
+        jira_account_id:
+          description: Jira account ID
+          example: '1234'
+          type: string
+        project_id:
+          description: Jira project ID
+          example: '5678'
+          type: string
+      required:
+      - jira_account_id
+      - project_id
+      - issue_type_id
+      type: object
+    JiraIssueCreateData:
+      description: Jira issue creation data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueCreateAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    JiraIssueCreateRequest:
+      description: Jira issue creation request
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueCreateData'
+      required:
+      - data
+      type: object
+    JiraIssueLinkAttributes:
+      description: Jira issue link attributes
+      properties:
+        jira_issue_url:
+          description: URL of the Jira issue
+          example: https://jira.example.com/browse/PROJ-123
+          type: string
+      required:
+      - jira_issue_url
+      type: object
+    JiraIssueLinkData:
+      description: Jira issue link data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueLinkAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    JiraIssueLinkRequest:
+      description: Jira issue link request
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueLinkData'
+      required:
+      - data
+      type: object
+    JiraIssueResourceType:
+      description: Jira issue resource type
+      enum:
+      - issues
+      example: issues
+      type: string
+      x-enum-varnames:
+      - ISSUES
     JiraIssueResult:
       description: Jira issue information
       properties:
@@ -38052,6 +38180,30 @@ components:
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
       type: object
+    NotebookCreateData:
+      description: Notebook creation data
+      properties:
+        type:
+          $ref: '#/components/schemas/NotebookResourceType'
+      required:
+      - type
+      type: object
+    NotebookCreateRequest:
+      description: Notebook creation request
+      properties:
+        data:
+          $ref: '#/components/schemas/NotebookCreateData'
+      required:
+      - data
+      type: object
+    NotebookResourceType:
+      description: Notebook resource type
+      enum:
+      - notebook
+      example: notebook
+      type: string
+      x-enum-varnames:
+      - NOTEBOOK
     NotebookTriggerWrapper:
       description: Schema for a Notebook-based trigger.
       properties:
@@ -39622,6 +39774,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        cache:
+          $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessorCache'
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
@@ -39659,6 +39813,19 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDedupeProcessorCache:
+      description: Configuration for the cache used to detect duplicates.
+      properties:
+        num_events:
+          description: The number of events to cache for duplicate detection.
+          example: 5000
+          format: int64
+          maximum: 1000000000
+          minimum: 1
+          type: integer
+      required:
+      - num_events
+      type: object
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
       enum:
@@ -40941,6 +41108,8 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
       type: object
     ObservabilityPipelineMemoryBufferSizeOptions:
       description: Options for configuring a memory buffer by queue length.
@@ -40952,6 +41121,8 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
       type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
@@ -48114,6 +48285,14 @@ components:
       - id
       - type
       type: object
+    RelationshipToIncidentRequest:
+      description: Relationship to incident request
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentRelationshipData'
+      required:
+      - data
+      type: object
     RelationshipToIncidentResponderData:
       description: Relationship to impact object.
       properties:
@@ -53535,6 +53714,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration'
         detectionTolerance:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance'
+        instantaneousBaseline:
+          $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration'
         learningPeriodBaseline:
@@ -53872,6 +54053,13 @@ components:
         or credentialed API access.'
       example: true
       type: boolean
+    SecurityMonitoringRuleInstantaneousBaseline:
+      description: When set to true, Datadog uses previous values that fall within
+        the defined learning window to construct the baseline, enabling the system
+        to establish an accurate baseline more rapidly rather than relying solely
+        on gradual learning over time.
+      example: false
+      type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: 'Once a signal is generated, the signal will remain "open" if a
         case is matched at least once within
@@ -53945,7 +54133,7 @@ components:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
         instantaneousBaseline:
-          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline'
+          $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
         learningMethod:
@@ -53971,13 +54159,6 @@ components:
       - TWO_WEEKS
       - THREE_WEEKS
       - FOUR_WEEKS
-    SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline:
-      description: When set to true, Datadog uses previous values that fall within
-        the defined learning window to construct the baseline, enabling the system
-        to establish an accurate baseline more rapidly rather than relying solely
-        on gradual learning over time.
-      example: false
-      type: boolean
     SecurityMonitoringRuleNewValueOptionsLearningDuration:
       default: 0
       description: 'The duration in days during which values are learned, and after
@@ -58322,6 +58503,47 @@ components:
           $ref: '#/components/schemas/Case3rdPartyTicketStatus'
       readOnly: true
       type: object
+    ServiceNowTicketCreateAttributes:
+      description: ServiceNow ticket creation attributes
+      properties:
+        assignment_group:
+          description: ServiceNow assignment group
+          example: IT Support
+          type: string
+        instance_name:
+          description: ServiceNow instance name
+          example: my-instance
+          type: string
+      required:
+      - instance_name
+      type: object
+    ServiceNowTicketCreateData:
+      description: ServiceNow ticket creation data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTicketCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ServiceNowTicketResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    ServiceNowTicketCreateRequest:
+      description: ServiceNow ticket creation request
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTicketCreateData'
+      required:
+      - data
+      type: object
+    ServiceNowTicketResourceType:
+      description: ServiceNow ticket resource type
+      enum:
+      - tickets
+      example: tickets
+      type: string
+      x-enum-varnames:
+      - TICKETS
     ServiceNowTicketResult:
       description: ServiceNow ticket information
       properties:
@@ -72895,6 +73117,389 @@ paths:
       tags:
       - Case Management
       x-menu-order: 5
+  /api/v2/cases/{case_id}/relationships/incidents:
+    post:
+      description: Link an incident to a case
+      operationId: LinkIncident
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToIncidentRequest'
+        description: Incident link request
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Link incident to case
+      tags:
+      - Case Management
+      x-menu-order: 22
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cases/{case_id}/relationships/jira_issues:
+    delete:
+      description: Remove the link between a Jira issue and a case
+      operationId: UnlinkJiraIssue
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Remove Jira issue link from case
+      tags:
+      - Case Management
+      x-menu-order: 25
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Link an existing Jira issue to a case
+      operationId: LinkJiraIssueToCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueLinkRequest'
+        description: Jira issue link request
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Link existing Jira issue to case
+      tags:
+      - Case Management
+      x-menu-order: 24
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new Jira issue and link it to a case
+      operationId: CreateCaseJiraIssue
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueCreateRequest'
+        description: Jira issue creation request
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create Jira issue for case
+      tags:
+      - Case Management
+      x-menu-order: 23
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cases/{case_id}/relationships/notebook:
+    post:
+      description: Create a new investigation notebook and link it to a case
+      operationId: CreateCaseNotebook
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotebookCreateRequest'
+        description: Notebook creation request
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create investigation notebook for case
+      tags:
+      - Case Management
+      x-menu-order: 27
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cases/{case_id}/relationships/project:
+    patch:
+      description: Update the project associated with a case
+      operationId: MoveCaseToProject
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRelationship'
+        description: Project update request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case project
+      tags:
+      - Case Management
+      x-menu-order: 21
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cases/{case_id}/relationships/servicenow_tickets:
+    post:
+      description: Create a new ServiceNow incident ticket and link it to a case
+      operationId: CreateCaseServiceNowTicket
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNowTicketCreateRequest'
+        description: ServiceNow ticket creation request
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create ServiceNow ticket for case
+      tags:
+      - Case Management
+      x-menu-order: 26
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/cases/{case_id}/status:
     post:
       description: Update case status
@@ -86069,14 +86674,15 @@ paths:
       description: Get the list of devices.
       operationId: ListDevices
       parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
-      - description: The field to sort the devices by.
+      - $ref: '#/components/parameters/NDMPageSize'
+      - $ref: '#/components/parameters/NDMPageNumber'
+      - description: The field to sort the devices by. Defaults to `name`.
         example: status
         in: query
         name: sort
         required: false
         schema:
+          default: name
           type: string
       - description: Filter devices by tag.
         example: status:ok
