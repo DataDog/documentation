@@ -28,8 +28,7 @@ To configure your HTTP/S Server source, enter the following:
 1. Enter the identifier for your HTTP Server address. If you leave it blank, the [default](#set-secrets) is used.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
 1. Select your authorization strategy. If you selected **Basic**:
-    - Enter the identifier for your HTTP Server username. If you leave it blank, the [default](#set-secrets) is used.
-    - Enter the identifier for your HTTP Server password. If you leave it blank, the [default](#set-secrets) is used.
+    - Enter the identifiers for your HTTP Server username and password. If you leave it blank, the [default](#set-secrets) is used.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 
 ### Optional settings

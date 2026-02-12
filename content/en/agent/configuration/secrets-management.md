@@ -20,8 +20,10 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [GCP Secret Manager](#id-for-gcp)
 - [HashiCorp Vault](#id-for-hashicorp)
 - [Kubernetes Secrets](#id-for-kubernetes)
-- [File JSON](#id-for-json-yaml)
-- [File YAML](#id-for-json-yaml)
+- [Docker Secrets](#id-for-docker)
+- [File Text](#id-for-json-yaml-text)
+- [File JSON](#id-for-json-yaml-text)
+- [File YAML](#id-for-json-yaml-text)
 
 Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
@@ -780,15 +782,105 @@ override:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-json-yaml" %}}
+{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+
+**Available in Agent version 7.75+**
+
+The following Docker services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `docker.secrets` | [Docker Secrets][6001] |
+
+##### Prerequisites
+
+The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docker Compose secrets][6003]. By default, both Swarm and Compose automatically mount secrets within the container as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows).
+
+**Note**: Compose secrets can be file-based (pointing to local files) or external (referencing existing Swarm secrets).
+
+##### Configuration example
+
+Configure the Datadog Agent to use Docker Secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: docker.secrets
+
+# Reference secrets using the secret name (filename in /run/secrets)
+api_key: "ENC[dd_api_key]"
+```
+
+The ENC notation format is the secret name, which corresponds to the filename in `/run/secrets/`:
+- `ENC[api_key]` reads from `/run/secrets/api_key` (Linux) or `C:\ProgramData\Docker\secrets\api_key` (Windows)
+
+**Custom secrets path:**
+If Docker Swarm or Compose are configured to mount secrets at a different location, you can specify it like this:
+
+```yaml
+secret_backend_type: docker.secrets
+secret_backend_config:
+  secrets_path: /custom/secrets/path
+```
+
+##### Docker Swarm example
+
+[Create][6002] and use a Docker Swarm secret:
+
+```bash
+# Create the secret
+echo "<api_key_value>" | docker secret create dd_api_key -
+
+# Deploy Agent with secret mounted
+docker service create \
+  --name datadog-agent \
+  --secret dd_api_key \
+  --env DD_API_KEY="ENC[dd_api_key]" \
+  --env DD_SECRET_BACKEND_TYPE="docker.secrets" \
+  --env DD_SITE="datadoghq.com" \
+  --env DD_HOSTNAME="dd-agent" \
+  datadog/agent:latest
+```
+
+The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, and the Agent reads it using the `docker.secrets` backend.
+
+##### Docker Compose example
+
+[Create][6003] a `docker-compose.yml` with file-based secrets:
+
+```yaml
+version: '3.8'
+
+services:
+  datadog:
+    image: datadog/agent:latest
+    environment:
+      - DD_API_KEY=ENC[dd_api_key]
+      - DD_SECRET_BACKEND_TYPE=docker.secrets
+      - DD_SITE=datadoghq.com
+      - DD_HOSTNAME=dd-agent
+    secrets:
+      - dd_api_key
+
+secrets:
+  dd_api_key:
+    file: ./secrets/api_key.txt
+```
+
+The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` in the container.
+
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h4" expanded=false id="id-for-json-yaml-text" %}}
 
 | secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`file.json`           |[JSON][4001]                             |
 |`file.yaml`          |[YAML][4002]                        |                            |
+|`file.text`          |[TEXT][4003]                        |                            |
 
 ##### File permissions
-The file backend only requires **read** permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
+The file backend only requires **read** permissions for the configured JSON, YAML, or TEXT files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
 
 
 {{< tabs >}}
@@ -844,6 +936,50 @@ secret_backend_type: file.yaml
 secret_backend_config:
   file_path: /path/to/secret.yaml
 ```
+{{% /tab %}}
+
+{{% tab "TEXT File Backend" %}}
+
+**Available in Agent version 7.75+**
+
+**Note**: Each secret must be stored in its own individual text file.
+
+##### Configuration example
+
+You can use individual text files to store secrets locally.
+
+For example, with text files in `/path/to/secrets/`:
+
+`/path/to/secrets/dd_api_key` containing:
+```
+your_api_key_value
+```
+
+`/path/to/secrets/dd_app_key` containing:
+```
+your_app_key_value
+```
+
+You can use this configuration to pull secrets from them:
+
+```yaml
+# datadog.yaml
+api_key: "ENC[dd_api_key]"
+app_key: "ENC[dd_app_key]"
+
+secret_backend_type: file.text
+secret_backend_config:
+  secrets_path: /path/to/secrets
+```
+
+##### Path security:
+
+- Relative paths in `ENC[]` are resolved relative to `secrets_path` (e.g., `ENC[dd_api_key]` with `secret_path: /path/to/secrets` will resolve to `/path/to/secrets/dd_api_key`)
+- Absolute paths in `ENC[]` must be within `secrets_path` (e.g., `ENC[/path/to/secrets/dd_api_key]` with `secret_path: /path/to/secrets` will work)
+- Path traversal attempts (e.g., `ENC[../etc/passwd]`) are blocked and will fail with "path outside allowed directory"
+
+**Note:** Some tools automatically add line breaks when exporting secrets to files. See [Remove trailing line breaks](#remove-trailing-line-breaks) for how to handle this.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1442,7 +1578,7 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 This command returns whether the permissions are valid for the Agent to view this Secret.
 
-### Remove trailing line breaks
+### Remove trailing line breaks {#remove-trailing-line-breaks}
 
 Some secret management tools automatically add a line break when exporting secrets through files. You can remove these line breaks by setting `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file][8], or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments.
 
@@ -1484,12 +1620,18 @@ instances:
 <!-- File Backend Links (JSON/YAML) -->
 [4001]: https://en.wikipedia.org/wiki/JSON
 [4002]: https://en.wikipedia.org/wiki/YAML
+[4003]: https://en.wikipedia.org/wiki/TEXT
 
 <!-- GCP Secret Manager Links -->
 [5000]: https://cloud.google.com/security/products/secret-manager
 [5001]: https://cloud.google.com/docs/authentication/application-default-credentials
 [5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
 [5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
+
+<!-- Docker Secrets Links -->
+[6001]: https://docs.docker.com/engine/swarm/secrets/
+[6002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
+[6003]: https://docs.docker.com/compose/how-tos/use-secrets/
 
 <!-- Kubernetes Secrets Links -->
 [7000]: https://kubernetes.io/docs/concepts/configuration/secret/
