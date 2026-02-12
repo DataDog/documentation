@@ -1,6 +1,6 @@
 Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated. Note that `counter` metrics such as `pipelines.buffer_received_events_total` represent the count per one-second interval, not a cumulative total.
 
-### Destination buffer metrics
+#### Destination buffer metrics
 
 These metrics are specific to destination buffers, located upstream of a destination. Each destination emits its own respective buffer metrics.
 
@@ -29,14 +29,16 @@ These metrics are specific to destination buffers, located upstream of a destina
 : **Metric type**: counter
 
 `pipelines.buffer_discarded_events_total`
-: **Description**: Events discarded by the buffer. Use the `intentional` tag to filter or group by intentional or unintentional discards.
+: **Description**: Events discarded by the buffer.
 : **Metric type**: counter
+: **Additional tag**: `intentional` - `true` if events were dropped due to buffer overflow policy, `false` if due to an error.
 
 `pipelines.buffer_discarded_bytes_total`
-: **Description**: Bytes discarded by the buffer. Use the `intentional` tag to filter or group by intentional or unintentional discards.
+: **Description**: Bytes discarded by the buffer.
 : **Metric type**: counter
+: **Additional tag**: `intentional` - `true` if events were dropped due to buffer overflow policy, `false` if due to an error.
 
-### Source buffer metrics
+#### Source buffer metrics
 
 These metrics are specific to source buffers, located downstream of a source. Each source emits its own respective buffer metrics. **Note**: Source buffers are not configurable, but these metrics can help monitor backpressure as it propagates to your pipeline's source.
 
@@ -56,7 +58,7 @@ These metrics are specific to source buffers, located downstream of a source. Ea
 : **Description**: A source buffer's maximum event capacity.
 : **Metric type**: gauge
 
-### Processor buffer metrics
+#### Processor buffer metrics
 
 These metrics are specific to processor buffers, located upstream of a processor. Each processor emits its own respective buffer metrics. **Note**: Processor buffers are not configurable, but these metrics can help monitor backpressure as it propagates through your pipeline's processors.
 
@@ -76,7 +78,7 @@ These metrics are specific to processor buffers, located upstream of a processor
 : **Description**: A processor buffer's maximum event capacity.
 : **Metric type**: gauge
 
-### Deprecated buffer metrics
+#### Deprecated buffer metrics
 
 These metrics are still emitted by the Observability Pipelines Worker for backwards compatibility. Datadog recommends using the replacements when possible.
 
