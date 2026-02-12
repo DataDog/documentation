@@ -1,7 +1,5 @@
 ---
 title: Synthetic Monitoring API Template Variables
-aliases:
-- /synthetics/notifications/template_variables_api_cdocs
 content_filters:
 - trait_id: protocol
   option_group_id: synthetics_protocol_options
