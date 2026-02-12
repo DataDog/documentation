@@ -32,7 +32,7 @@ Follow the [in-app setup instructions][2] or the steps on this page to install t
 
 #### Using ROPM (recommended)
 
-`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][6]. Once your project is set up to use `ROPM`, run the following command to install the Datadog dependency:
+ROPM is a package manager for the Roku platform. If you're not already using ROPM in your Roku project, read their [Getting started guide][6]. After your project is set up to use ROPM, run the following command to install the Datadog dependency:
 
 ```shell
 ropm install datadog-roku
