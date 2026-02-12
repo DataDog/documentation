@@ -31,6 +31,7 @@ It also goes over example scripts that address common use cases, such as:
 - [Remove attributes containing null values](#remove-attributes-containing-null-values)
 - [Merge nested attributes to root level](#merge-nested-attributes-to-root-level)
 - [Serialize outbound logs in _raw format](#serialize-outbound-logs-in-_raw-format)
+- [Append tags to Datadog logs](#append-tags-to-datadog-logs)
 
 ## Decode Base64
 
@@ -466,6 +467,17 @@ This is the output of the example log after it's been processed by the custom sc
 {
    "_raw": "app_id=streaming-services level=info message.duration_ms=245 message.event_type=user_login message.ip_address=192.168.1.100 message.login_method=oauth message.result=success message.session_id=sess_abc123xyz message.user_agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\" processed_ts=2025-05-22T14:30:00Z timestamp=2019-03-12T11:30:00Z user_id=12345"
 }
+```
+
+## Append tags to Datadog logs
+
+You can use the custom processor to append tags to your Datadog logs. For example, if you want to the add the tag `system:service-mesh` to `ddtag`, use the following custom function:
+
+```
+If !exists(.ddtags) {
+  .ddtag = []
+}
+  .ddtags = push(array!(.ddtags), "system:service-mesh")
 ```
 
 ## Further reading
