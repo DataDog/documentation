@@ -7682,7 +7682,7 @@ __metadata:
     run-sequence: "npm:^2.2.1"
     safe-json-stringify: "npm:^1.2.0"
     sass: "npm:^1.72.0"
-    serialize-javascript: "npm:^2.1.2"
+    serialize-javascript: "npm:^7.0.2"
     signup-failover: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/signup-failover-v1.0.0.tgz"
     slugify: "npm:^1.6.6"
     tiny-async-pool: "npm:^1.3.0"
@@ -15434,10 +15434,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serialize-javascript@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "serialize-javascript@npm:2.1.2"
-  checksum: 10/fcb9e915c1e687b4fba46374c461de61a21461408a82b6c496a4158f5248bf3a2f1a32d1d8b96cd00c0d958427fb4661c590db74b4563e38a3122d10cb40a2a5
+"serialize-javascript@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "serialize-javascript@npm:7.0.2"
+  checksum: 10/3b826dbaca0b9799a092c370fde91c4d6fa56ec6ccd7cf4dc757ad218d37b09b528a08f7d394cb23d09ae88b336e0460fb1c98087f717e8299b366e7b0f3ba62
   languageName: node
   linkType: hard
 
