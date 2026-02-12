@@ -83,7 +83,7 @@ print(f"View dataset: {dataset.url}")
 Add production traces to datasets manually through the UI or automatically with Automations.
 
 **Manual selection (UI):**
-1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces)
+1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces) (You can also add a new Automation from [Settings > Automations](https://app.datadoghq.com/llm/settings/automations) )
 2. Find a trace you want to include in a dataset
 3. Click **Add to Dataset** 
 4. Choose an existing dataset or create a new one
@@ -91,23 +91,31 @@ Add production traces to datasets manually through the UI or automatically with 
 
 **Automatic routing (Automations):**
 
-Automations enable you to continuously route production traces to datasets based on configurable rules. This keeps your datasets current with production behavior without manual intervention.
+Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention. Automation rules apply only to new traces generated after the rule is created, not to existing historical traces. 
 
 To set up automatic dataset updates:
 1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces)
-2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications)
+2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). Example queries can be found [here]( https://docs.datadoghq.com/logs/explorer/search_syntax/)
 3. Click **Automate Query**
 4. Configure sampling rate (e.g., 10% of matching traces)
 5. Select **Add to Dataset** as the action
 6. Choose an existing dataset or create a new one
+
+After creating an automation, manage it from [**AI Observability > Settings > Automations**](https://app.datadoghq.com/llm/settings/automations):
+- **Enable/disable**: Control whether new traces are added to the dataset
+- **Edit**: Modify filters, sampling rates, or target datasets as your needs change
+- **Delete**: Remove automations that are no longer needed
+
+**Dataset limits:**
+- Datasets populated by automations are capped at 20,000 records
+- These datasets are read-only to prevent accidental modification of automated data
+- To modify records, clone the dataset first
 
 **Example use cases for Automations:**
 - Sample 10% of traces with failed evaluations to build a failure dataset
 - Collect edge cases where latency exceeds thresholds
 - Maintain a diverse dataset with stratified sampling across user segments
 - Automatically capture new failure patterns as they emerge in production
-
-This workflow is ideal for building datasets from real production examples, edge cases, or failures while maintaining dataset freshness over time.
 
 {{% /tab %}}
 
