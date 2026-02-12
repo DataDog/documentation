@@ -29,9 +29,9 @@ You must have the `apm_service_renaming_write` permission to create remapping ru
 
 ### Step 1: Select remapping action and entities to target
 
-1. In Datadog, navigate to **APM > Software Catalog > Manage > Manage Renaming Rules** and click **+ Add Rule**. 
+1. In Datadog, navigate to **APM > Software Catalog > Manage > Manage Remapping Rules** and click **+ Add Rule**. 
 
-   Alternatively, navigate to **APM > Software Catalog** and click on a service to open the service side panel. From there, click **Service Page > Service Renaming**.
+   Alternatively, navigate to **APM > Software Catalog** and click on a service to open the service side panel. From there, click **Service Page > Service Remapping**.
 
    {{< img src="tracing/services/renaming_rules/service-side-panel.png" alt="The side panel for a particular service, showing the Service Page dropdown menu with a Service Remapping option" style="width:100%;" >}}
 
@@ -52,7 +52,7 @@ You must have the `apm_service_renaming_write` permission to create remapping ru
 
 ### Step 3: Name your rule and review
 
-1. Optionally, enter a descriptive name for the renaming rule so you can identify it later.
+1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
 1. Review and save your remapping rule.
 
 <div class="alert alert-info"><ul><li>Rules are processed at intake and applied to data as it comes in.</li><li>Changes affect only spans ingested while a rule is active, and past data is not updated retroactively.</li><li>Deleting or modifying a rule stops it from applying to new data, but does not revert names on previously ingested data.</li></ul></div>
