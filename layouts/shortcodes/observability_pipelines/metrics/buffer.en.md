@@ -2,7 +2,7 @@ Use these metrics to analyze buffer performance. All metrics are emitted on a on
 
 **Tags for metrics**
 - Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by sources, transforms, or destinations.
+- Use the `component_type` tag to filter or group by sources, processors, or destinations. **Note**: For processors, use `component_type:transform`.
 
 #### Destination buffer metrics
 
