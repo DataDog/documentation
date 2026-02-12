@@ -144,6 +144,6 @@ This means that even if users open your application while offline, no data is lo
 [8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
 [10]: /error_tracking/frontend/mobile/roku
-[11]: /real_user_monitoring/error_tracking/
+[11]: /error_tracking/frontend/mobile/roku
 [101]: https://app.datadoghq.com/rum/application/create
 [201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
