@@ -26,8 +26,6 @@ further_reading:
 
 [Data Observability](/data_observability/) monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
-{{< img src="data_observability/data_observability_monitor/full_page_do_monitor_creation.png" alt="Full flow of DO monitor creation." style="width:80%;" >}}
-
 Data Observability monitors support the following metric types:
 
 **Table-level metric types:**
@@ -55,6 +53,8 @@ Data Observability monitors require [Quality Monitoring](/data_observability/qua
 ## Monitor creation
 
 To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/data-obs/monitors) in the UI.
+
+{{< img src="data_observability/data_observability_monitor/full_page_do_monitor_creation.png" alt="Full flow of DO monitor creation." style="width:80%;" >}}
 
 ## Select an entity type and metric type
 
