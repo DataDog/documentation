@@ -123,7 +123,7 @@ To create an experiment:
    - **categorical**: returns a labeled category (string)
    - **json**: returns structured data (dict)
 
-   You can also return an `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), and `tags`.
+   You can also return an `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
 
    #### Function-based evaluators
 
