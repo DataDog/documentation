@@ -23,7 +23,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 - A DNS entry that points to your Workers' load balancer or OPW server.
 - An SSL/TLS certificate for your domain. Cloudflare requires an HTTPS endpoint and does not accept HTTP.
 	- **Note**: You cannot use Cloudflare origin certificates because they are not publicly trusted.
-- If you are using a firewall in front of your Worker or Workers' load balancer, ensure you add [Cloudflare's IP addresses][1] to your allowlist.
+- If you are using a firewall in front of your Worker or Workers' load balancer, add [Cloudflare's IP addresses][1] to your allowlist.
 
 ## Set up a pipeline
 
