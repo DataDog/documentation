@@ -96,6 +96,8 @@ The `ddtrace` library includes support for the following data stores:
 | [SQLite3][43]                      | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][44]                      | >= 0.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
+ **Note**: Customers using Redis clients are recommended to use Datadog trace agent 7.76 or later. This is due to a change added in the Redis 6.0 API which allows inline credentials, which are automatically obfuscated starting in the 7.76 release.
+
 ### Library compatibility
 
 The `ddtrace` library includes support for the following libraries:

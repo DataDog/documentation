@@ -103,6 +103,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Kubernetes][71]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/k8s.io/client-go/kubernetes/v2][111]       |
 | [Memcache][73]          | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2][112]      |
 
+ **Note**: Customers using Redis clients are recommended to use Datadog trace agent 7.76 or later. This is due to a change added in the Redis 6.0 API which allows inline credentials, which are automatically obfuscated starting in the 7.76 release.
 
 Packages must be imported with:
 

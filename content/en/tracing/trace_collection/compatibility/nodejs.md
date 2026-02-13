@@ -146,6 +146,8 @@ Or, modify the `package.json` file if you typically start an application with np
 | [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
 | [Prisma][69]           | `>=6.1.0`| Fully supported |                                                  |
 
+ **Note**: Customers using Redis clients are recommended to use Datadog trace agent 7.76 or later. This is due to a change added in the Redis 6.0 API which allows inline credentials, which are automatically obfuscated starting in the 7.76 release.
+
 ### Worker compatibility
 
 | Module                               | Versions  | Support Type    | Notes                                                  |
