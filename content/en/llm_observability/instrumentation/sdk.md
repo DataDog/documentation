@@ -2093,7 +2093,6 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 `reasoning`
 : optional - _string_
 <br />A text explanation of the evaluation result.
-{{% /collapse-content %}}
 
 `metadata`
 : optional - _dictionary_
