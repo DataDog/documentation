@@ -31,17 +31,20 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 
 1. Navigate to [Observability Pipelines][2].
 1. Select a log template to create a pipeline.
-1. Select the HTTP Server source:
-  1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][3] for the defaults used.
-  1. Select your authorization strategy. If you selected **Basic**:
+1. Select the HTTP Server source.
+1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][3] for the defaults used.
+1. Select your authorization strategy. If you selected **Basic**:
     - Enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
-  1. In the **Decoding** dropdown menu, select **Bytes**.
-  1. Toggle the switch to **Enable TLS**.
-      - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
-      - The following certificate and key files are required. **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][7] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-        - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
-        - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-        - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+1. In the **Decoding** dropdown menu, select **Bytes**.
+1. Toggle the switch to **Enable TLS**.
+    - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
+    - The following certificate and key files are required.
+      - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
+      - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
+      - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+      - **Notes**:
+        - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][7] for more information.
+        - The file must be owned by the `observability-pipelines-worker` group and `observability-pipelines-worker` user, or at least readable by the group or user.
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
