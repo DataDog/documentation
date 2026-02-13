@@ -41,6 +41,8 @@ Across all cloud and SaaS providers, Datadog collects tags from the following so
 | Cloud Cost Management | Cloud Cost Aliases | Tags derived from provider cost data to simplify the cost data model, such as `aws_product` (an alias of `lineItem/ProductCode`). Additional tags that exist on both cost data and integration metrics are added, allowing cost data and usage data to be combined in Custom Allocation Rules, dashboards, and notebooks |
 | Cloud Cost Management | Cloud Cost Allocation | Tags created during [cost allocation][11] that specify the split of shared resources, such as `allocated_spend_type` |
 | Cloud Cost Management | FOCUS | Provider-agnostic tags compliant with [FOCUS][8], an open specification that normalizes cost and usage datasets across cloud vendors |
+| Datadog Integration | Integration Tiles | Tags added to the Datadog integration tile for a specific cloud account. Integration tile tags apply to all costs in that account. Requires enabling the {provider} integration for each account |
+| Datadog Host | Host Agent | Tags added to host metadata by the Datadog Agent running on the host |
 | Tag Pipelines | Rules defined by user | Tags created by applying your Tag Pipelines to cost data |
 | Custom Allocation Rules | Rules defined by user | Tags created by applying your Custom Allocation Rules to cost data (does not apply to SaaS costs) |
 
