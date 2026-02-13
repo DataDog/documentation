@@ -160,7 +160,9 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment var
 
 To get started, follow the instructions below.
 
-1. Install `openlineage` provider by adding the following into your `requirements.txt` file:
+1. **(If using Airflow 2.7.2, 2.8.1, or 2.9.2)**: MWAA default constraints pin older `apache-airflow-providers-openlineage` versions. These versions include **known issues that can degrade the Data Observability experience**. To upgrade to provider versions with these fixes, follow [Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2][11].
+
+2. Install `openlineage` provider by adding the following into your `requirements.txt` file:
 
     For **Airflow 2.7 or later**:
 
@@ -174,7 +176,7 @@ To get started, follow the instructions below.
       openlineage-airflow
       ```
 
-2. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
+3. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
 
    ```shell
    #!/bin/sh
@@ -196,9 +198,9 @@ To get started, follow the instructions below.
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
-3. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
+4. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-4. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
+5. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
    1. Configure Amazon MWAA to [send logs to CloudWatch][9].
    2. [Send the logs to Datadog][10].
 
@@ -212,6 +214,7 @@ To get started, follow the instructions below.
 [8]: https://openlineage.io/docs/integrations/airflow/
 [9]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
 [10]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
+[11]: /data_observability/jobs_monitoring/airflow_mwaa_upgrade/
 
 ### Validation
 
