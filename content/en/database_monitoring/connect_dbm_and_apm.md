@@ -192,7 +192,7 @@ You must also enable the `jdbc-datasource` [instrumentation][2].
 
 Enable the database monitoring propagation feature using **one** of the following methods:
 
-- Set the system property `dd.dbm.propagation.mode=full`
+- Set the system property `-Ddd.dbm.propagation.mode=full`
 - Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
 
 Full example:
@@ -222,7 +222,7 @@ public class Application {
 
 **Tracer versions 1.44 and above**:
 Enable the prepared statements tracing for Postgres using **one** of the following methods:
-- Set the system property `dd.dbm.trace_prepared_statements=true`
+- Set the system property `-Ddd.dbm.trace_prepared_statements=true`
 - Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
 **Note**: The prepared statements instrumentation overwrites the `Application` property with the text `_DD_overwritten_by_tracer`, and causes an extra round trip to the database. This additional round trip normally has a negligible impact on the SQL statement execution time.
