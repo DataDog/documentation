@@ -6612,6 +6612,97 @@ menu:
           - UpdateStatus
         unstable: []
         order: 4
+    - name: Create ServiceNow ticket for case
+      url: '#create-servicenow-ticket-for-case'
+      identifier: case-management-create-servicenow-ticket-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseServiceNowTicket
+        unstable:
+          - v2
+        order: 26
+    - name: Update case project
+      url: '#update-case-project'
+      identifier: case-management-update-case-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - MoveCaseToProject
+        unstable:
+          - v2
+        order: 21
+    - name: Create investigation notebook for case
+      url: '#create-investigation-notebook-for-case'
+      identifier: case-management-create-investigation-notebook-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseNotebook
+        unstable:
+          - v2
+        order: 27
+    - name: Create Jira issue for case
+      url: '#create-jira-issue-for-case'
+      identifier: case-management-create-jira-issue-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseJiraIssue
+        unstable:
+          - v2
+        order: 23
+    - name: Link existing Jira issue to case
+      url: '#link-existing-jira-issue-to-case'
+      identifier: case-management-link-existing-jira-issue-to-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkJiraIssueToCase
+        unstable:
+          - v2
+        order: 24
+    - name: Remove Jira issue link from case
+      url: '#remove-jira-issue-link-from-case'
+      identifier: case-management-remove-jira-issue-link-from-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlinkJiraIssue
+        unstable:
+          - v2
+        order: 25
+    - name: Link incident to case
+      url: '#link-incident-to-case'
+      identifier: case-management-link-incident-to-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkIncident
+        unstable:
+          - v2
+        order: 22
     - name: Update case priority
       url: '#update-case-priority'
       identifier: case-management-update-case-priority
