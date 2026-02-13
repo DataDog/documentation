@@ -10,7 +10,7 @@ further_reading:
   text: "Learn how to set up LLM Observability"
 ---
 
-Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Prompt Injection][14], [Sentiment][12], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
+Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
 
 For best practices and details on how to create LLM-as-a-judge evaluations, read [Create a custom LLM-as-a-judge evaluation][17].
 
@@ -32,7 +32,7 @@ Failure to Answer evaluations identify instances where the LLM fails to deliver 
 {{< img src="llm_observability/evaluations/failure_to_answer_6.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
-|---|---|---|
+|---|---|
 | Evaluated on Output | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
 #### Configure a Failure to Answer evaluation
@@ -56,7 +56,7 @@ Prompt Injection evaluations identify attempts by unauthorized or malicious auth
 {{< img src="llm_observability/evaluations/prompt_injection_5.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
-|---|---|---|
+|---|---|
 | Evaluated on Input | [Prompt Injection][5] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
 #### Configure a Prompt Injection evaluation
@@ -79,7 +79,7 @@ Sentiment evaluations help you understand the overall mood of the conversation, 
 {{< img src="llm_observability/evaluations/sentiment_6.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
-|---|---|---|
+|---|---|
 | Evaluated on input and output | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
 
 ### Topic Relevancy
@@ -89,7 +89,7 @@ Topic Relevancy evaluations identify and flag user inputs that deviate from the 
 {{< img src="llm_observability/evaluations/topic_relevancy_4.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
-|---|---|---|
+|---|---|
 | Evaluated on input | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the LLM application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
 
 You can provide topics for this evaluation by filling out the template and replacing `<<PLEASE WRITE YOUR TOPICS HERE>>` with your desired topics.
@@ -103,7 +103,7 @@ Toxicity evaluations evaluates each input and output prompt from the user and th
 {{< img src="llm_observability/evaluations/toxicity_5.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
-|---|---|---|
+|---|---|
 | Evaluated on input and output | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
 #### Configure a Toxicity evaluation
@@ -132,15 +132,13 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 
 {{< img src="llm_observability/evaluations/goal_completeness_2.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
-| **Evaluation Stage** | **Evaluation Definition** |
-|---|---|---|
-| Evaluated on LLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
+| Evaluation Stage | Evaluation Definition |
+|---|---|
+| Evaluated on LLM spans | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
 ##### How to Use
 
-To enable Goal Completeness evaluation, you need to instrument your application to track sessions and their completion status. This evaluation works by analyzing complete sessions to determine if all user intentions were successfully addressed.
-
-The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
+This evaluation works by analyzing a session to determine if all user intentions were successfully addressed. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
 
 The span should contain meaningful `input_data` and `output_data` that represent the final state of the session. This helps the evaluation understand the session's context and outcomes when assessing completeness.
 
@@ -152,8 +150,8 @@ This evaluation checks whether the agent successfully selected the appropriate t
 
 #### Evaluation Summary
 
-| **Evaluation Stage** | **Evaluation Definition** | 
-|---|---|---|
+| Evaluation Stage | Evaluation Definition | 
+|---|---|
 | Evaluated on spans with tool calls | Verifies that the tools chosen by the LLM align with the user’s request and the set of available tools. Flags irrelevant or incorrect tool calls. |
 
 #### Example
@@ -225,8 +223,8 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 #### Evaluation summary
 
-| **Span kind** | **Evaluation Definition** | 
-|---|---|---|
+| Span kind | Evaluation Definition | 
+|---|---|
 | Evaluated on spans with tool calls | Verifies that arguments provided to a tool are correct and relevant based on the tool schema. Identifies invalid or irrelevant arguments. |
 
 #### Example
@@ -353,3 +351,6 @@ result = triage_agent.run_sync(
 [19]: /llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
 [20]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/1-tool-selection-demo.py
 [21]: https://github.com/DataDog/llm-observability/blob/main/evaluation_examples/2-tool-argument-correctness-demo.py
+[22]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#goal-completeness
+[23]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
+[24]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-selection
