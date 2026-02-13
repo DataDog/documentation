@@ -142,6 +142,12 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Java" %}}
+| Framework                                  | Supported Versions | Tracer Version |
+|--------------------------------------------|--------------------|----------------|
+| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 1.59.0      |
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## LLM integrations
@@ -613,6 +619,43 @@ The OpenAI integration instruments the following methods, including streamed cal
 [6]: https://platform.openai.com/docs/api-reference/embeddings
 [7]: https://api-docs.deepseek.com/
 [8]: https://platform.openai.com/docs/api-reference/responses
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+The [OpenAI integration][1] provides automatic tracing for the [OpenAI Java SDK's][2] completion, chat completion, embeddings, and responses endpoints to OpenAI and Azure OpenAI.
+
+### Traced methods
+
+The OpenAI integration instruments the following methods on `OpenAIClient`, including streamed calls:
+
+- [Completions][3]:
+  - `openAiClient.completions().create()`
+  - `openAiClient.completions().createStreaming()`
+  - `openAiClient.async().completions().create()`
+  - `openAiClient.async().completions().createStreaming()`
+- [Chat completions][4]:
+  - `openAiClient.chat().completions().create()`
+  - `openAiClient.chat().completions().createStreaming()`
+  - `openAiClient.async().chat().completions().create()`
+  - `openAiClient.async().chat().completions().createStreaming()`
+- [Embeddings][5]:
+  - `openAiClient.embeddings().create()`
+  - `openAiClient.async().embeddings().create()`
+- [Responses][6]:
+  - `openAiClient.responses().create()`
+  - `openAiClient.responses().createStreaming()`
+  - `openAiClient.async().responses().create()`
+  - `openAiClient.async().responses().createStreaming()`
+
+The provider (OpenAI vs Azure OpenAI) is automatically detected based on the `baseUrl` configured in `ClientOptions`. All methods support both blocking and async (CompletableFuture-based) variants.
+
+[1]: /integrations/openai/
+[2]: https://platform.openai.com/docs/api-reference/introduction
+[3]: https://platform.openai.com/docs/api-reference/completions
+[4]: https://platform.openai.com/docs/api-reference/chat
+[5]: https://platform.openai.com/docs/api-reference/embeddings
+[6]: https://platform.openai.com/docs/api-reference/responses
 
 {{% /tab %}}
 {{< /tabs >}}
