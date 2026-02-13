@@ -145,12 +145,12 @@ const denyCloudWatchLogsPolicy = new iam.Policy(this, "DenyCloudWatchLogsPolicy"
     new iam.PolicyStatement({
       effect: iam.Effect.DENY,
       actions: ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
-      resources: [`arn:aws:logs:*:*:log-group:/aws/lambda/${fn.functionName}:*`],
+      resources: [`${myFunction.logGroup.logGroupArn}:*`],
     }),
   ],
 });
 
-denyCloudWatchLogsPolicy.attachToRole(fn.role!);
+denyCloudWatchLogsPolicy.attachToRole(myFunction.role!);
 {{< /code-block >}}
 
 {{% /tab %}}
