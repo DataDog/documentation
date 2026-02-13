@@ -98,11 +98,11 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
 To enable Agentless Scanning, use one of the following workflows:
 
 - **[Quick start](#quick-start-setup)**: Guided setup for new users using AWS CloudFormation.
-- **[Terraform](#terraform-setup)**: For AWS, Azure, and GCP using the Terraform module directly.
 - **[AWS CloudFormation](#aws-cloudformation-setup)**: For new or existing AWS accounts.
 - **[AWS CloudFormation StackSet](#aws-cloudformation-stackset-setup)**: For AWS Organizations with multiple accounts.
 - **[GCP Cloud Shell](#gcp-cloud-shell-setup)**: Recommended for GCP. Uses Google Cloud Shell to run a setup script that wraps the Terraform module.
 - **[Azure Resource Manager](#azure-resource-manager-setup)**: For new or existing Azure accounts.
+- **[Terraform](#terraform-setup)**: For AWS, Azure, and GCP using the Terraform module directly.
 
 ### Quick start
 
@@ -135,90 +135,6 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 3. Click **Replace existing template**.
 4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][14]. Paste that URL into the **Amazon S3 URL** field.
 5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
-
-{{% /collapse-content %}}
-
-<br />
-
-### Terraform
-
-The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusable configuration for installing the Datadog Agentless scanner for AWS, Azure, and GCP.
-
-{{% collapse-content title="Terraform setup guide" level="h4" id="terraform-setup" %}}
-If you've already [set up Cloud Security][10] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2], or [Azure Resource Manager][5]. This article provides detailed instructions for the Terraform approach.
-
-<div class="alert alert-info">If you're setting up Cloud Security for the first time, you can follow the <a href="#quick-start-setup">quick start workflow</a>, which uses AWS CloudFormation to enable Agentless Scanning.</div>
-
-{{< tabs >}}
-{{% tab "New AWS account" %}}
-
-1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > AWS**.
-1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
-1. Under **Choose a method for adding your AWS account**, select **Manually**.
-1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. Select the **I confirm that the Datadog IAM Role has been added to the AWS Account** checkbox.
-1. Enter the **AWS Account ID** and **AWS Role Name**.
-1. Click **Save**.
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
-
-{{% /tab %}}
-
-{{% tab "Existing AWS account" %}}
-
-1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
-1. Click the AWS account where you want to deploy the Agentless scanner to open the side panel.
-1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
-1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. Select the **I confirm the Terraform module is installed** check box.
-1. Click **Done**.
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
-
-{{% /tab %}}
-
-{{% tab "Existing Azure account" %}}
-
-1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > Azure**.
-1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the Azure account where you want to deploy the Agentless scanner.
-1. Toggle **Vulnerability Scanning** to the on position.
-1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
-1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. Click **Done**.
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme
-
-{{% /tab %}}
-
-{{% tab "Existing GCP project" %}}
-
-1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > GCP**.
-1. Expand the account containing the project where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner.
-1. Toggle **Vulnerability Scanning** to the on position.
-1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. Click **Done**.
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme
-
-{{% /tab %}}
-{{< /tabs >}}
-
-##### Update the Terraform modules version
-
-Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases).
-
-For usage examples, refer to our [Github repository](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples).
-
-[1]: /security/cloud_security_management/agentless_scanning
-[2]: #aws-cloudformation-setup
-[5]: #azure-resource-manager-setup
 
 {{% /collapse-content %}}
 
@@ -379,6 +295,90 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% /collapse-content %}}
+
+<br />
+
+### Terraform
+
+The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusable configuration for installing the Datadog Agentless scanner for AWS, Azure, and GCP.
+
+{{% collapse-content title="Terraform setup guide" level="h4" id="terraform-setup" %}}
+If you've already [set up Cloud Security][10] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2], or [Azure Resource Manager][5]. This article provides detailed instructions for the Terraform approach.
+
+<div class="alert alert-info">If you're setting up Cloud Security for the first time, you can follow the <a href="#quick-start-setup">quick start workflow</a>, which uses AWS CloudFormation to enable Agentless Scanning.</div>
+
+{{< tabs >}}
+{{% tab "New AWS account" %}}
+
+1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > AWS**.
+1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
+1. Under **Choose a method for adding your AWS account**, select **Manually**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. Select the **I confirm that the Datadog IAM Role has been added to the AWS Account** checkbox.
+1. Enter the **AWS Account ID** and **AWS Role Name**.
+1. Click **Save**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
+
+{{% /tab %}}
+
+{{% tab "Existing AWS account" %}}
+
+1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
+1. Click the AWS account where you want to deploy the Agentless scanner to open the side panel.
+1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. Select the **I confirm the Terraform module is installed** check box.
+1. Click **Done**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
+
+{{% /tab %}}
+
+{{% tab "Existing Azure account" %}}
+
+1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > Azure**.
+1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the Azure account where you want to deploy the Agentless scanner.
+1. Toggle **Vulnerability Scanning** to the on position.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. Click **Done**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme
+
+{{% /tab %}}
+
+{{% tab "Existing GCP project" %}}
+
+1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > GCP**.
+1. Expand the account containing the project where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner.
+1. Toggle **Vulnerability Scanning** to the on position.
+1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
+1. Click **Done**.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme
+
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Update the Terraform modules version
+
+Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases).
+
+For usage examples, refer to our [Github repository](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples).
+
+[1]: /security/cloud_security_management/agentless_scanning
+[2]: #aws-cloudformation-setup
+[5]: #azure-resource-manager-setup
 
 {{% /collapse-content %}}
 
