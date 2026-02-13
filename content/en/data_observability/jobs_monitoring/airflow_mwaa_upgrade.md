@@ -1,5 +1,5 @@
 ---
-title: "Upgrade OpenLineage Provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2"
+title: "Upgrade OpenLineage Provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, or 2.9.2"
 description: "Resolve dependency conflicts when installing apache-airflow-providers-openlineage on Amazon MWAA Airflow 2.7.2, 2.8.1, or 2.9.2."
 further_reading:
   - link: '/data_observability/jobs_monitoring/airflow/?tab=amazonmwaa'
