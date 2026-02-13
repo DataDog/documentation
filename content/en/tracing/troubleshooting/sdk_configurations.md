@@ -5,18 +5,18 @@ description: Use the SDK configurations view to validate setup, and troubleshoot
 
 ## Overview
 
-The **SDK configuration** view shows the active configurations of SDKs per service. Use it to:
+The SDK Configurations view shows the active configurations of SDKs per service. Configurations are automatically reported from the SDKs. Use the view to:
 
-- **Troubleshoot** instrumentation issues including where configurations are inconsistent across instances of a service.
-- **Validate** that a configuration change was deployed correctly across intended instances.
-- **Identify** the source of a configuration value so you can fix misconfigurations.
-- **Discover** available configuration options and how they are set.
+- Troubleshoot instrumentation issues, including where configurations are inconsistent across instances of a service.
+- Validate that a configuration change was deployed correctly across intended instances.
+- Identify the source of a configuration value to help fix misconfigurations.
+- Discover available configuration options and how they are set.
 
 ## Where to find it
 
-3. Open the **Service Page**.
-4. Go to **Service Config** > **SDK & Agent Configurations** tab.
-5. The **SDK Configurations** section shows the configurations for active instances of the service.
+1. Open the **Service Page**.
+1. Go to **Service Config** > **SDK & Agent Configurations** tab.
+1. The **SDK Configurations** section shows the configurations for active instances of the service.
 
 ## Configuration sources
 
@@ -30,7 +30,6 @@ The configuration source shows where a given value is configured:
 | **Local environment variable** | Set via an environment variable (or system property) in the runtime environment |
 | **Local file** | Set in a local configuration file |
 | **Default** | Default value provided by the SDK |
-
 
 ## Missing configuration data
 
