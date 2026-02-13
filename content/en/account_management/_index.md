@@ -56,7 +56,7 @@ You can manage your time zone, time format, and visual accessibility preference 
 
 #### Time format
 
-Choose whether times are displayed in 12-hour (for example, 2:30 PM) or 24-hour (for example, 14:30) format. This preference applies across the Datadog app wherever times are shown, including dashboards, monitors, logs, and other views.
+Choose whether times are shown in 12-hour or 24-hour format in Datadog (for example, “2:30 pm” or “14:30”). New accounts default to 12-hour format. Graphs and certain tabular data will continue to show in 24-hour format at all times.
 
 #### Visual accessibility
 
