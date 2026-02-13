@@ -208,7 +208,7 @@ To customize your team, see [Team Management][3].
 [32]: /dashboards/widgets/powerpack/#powerpack-permissions
 [33]: https://app.datadoghq.com/reference-tables
 [34]: https://app.datadoghq.com/rum/list
-[35]: /security/detection_rules/#restrict-edit-permissions
-[36]: /security/suppressions/#restrict-edit-permissions
+[35]: https://app.datadoghq.com/security/configuration/notification-rules
+[36]: https://app.datadoghq.com/security/configuration/suppressions
 [37]: https://app.datadoghq.com/sheets
 [38]: https://app.datadoghq.com/workflow
