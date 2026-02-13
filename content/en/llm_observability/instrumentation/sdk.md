@@ -2095,6 +2095,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 <br />A text explanation of the evaluation result.
 {{% /collapse-content %}}
 
+`metadata`
+: optional - _dictionary_
+<br />A dictionary containing arbitrary structured metadata associated with the evaluation result.
+{{% /collapse-content %}}
+
 #### Example
 
 {{< code-block lang="python" >}}
@@ -2122,7 +2127,8 @@ def llm_call():
         value=10,
         tags={"evaluation_provider": "ragas"},
         assessment="fail",
-        reasoning="Malicious intent was detected in the user instructions."
+        reasoning="Malicious intent was detected in the user instructions.",
+        metadata={"details": ["jailbreak", "SQL injection"]}
     )
 
     # joining an evaluation to a span via span ID and trace ID
@@ -2135,7 +2141,8 @@ def llm_call():
         value=10,
         tags={"evaluation_provider": "ragas"},
         assessment="fail",
-        reasoning="Malicious intent was detected in the user instructions."
+        reasoning="Malicious intent was detected in the user instructions.",
+        metadata={"details": ["jailbreak", "SQL injection"]}
     )
     return completion
 {{< /code-block >}}
@@ -2168,15 +2175,29 @@ The `evaluationOptions` object can contain the following:
 
 `metricType`
 : required - _string_
-<br />The type of the evaluation. Must be one of "categorical" or "score".
+<br />The type of the evaluation. Must be one of "categorical", "score", "boolean" or "json".
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (for categorical `metric_type`) or number (for score `metric_type`).
+<br />The value of the evaluation. Must be a string (for categorical `metric_type`), number (for score `metric_type`), boolean (for boolean `metric_type`) or a JSON object (for json `metric_type`).
 
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+{{% /collapse-content %}}
+
+`assessment`
+: optional - _string_
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the evaluation result.
+{{% /collapse-content %}}
+
+`metadata`
+: optional - _dictionary_
+<br />A JSON object containing arbitrary structured metadata associated with the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
