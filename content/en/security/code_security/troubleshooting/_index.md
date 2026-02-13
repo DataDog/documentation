@@ -230,7 +230,7 @@ If you're running a Flask application, ensure that you are calling the `ddtrace_
 ## How committers are calculated for Code Security
 A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
 
-A committer is counted toward billing if they make **at least 3 commits within a given calendar month** in repositories where Code Security is enabled.
+A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
 
 Each unique author email address counts as a separate committer. Multiple commits using the same author email count as one committer. Commits associated with different email addresses count separately.
 
