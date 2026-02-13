@@ -332,7 +332,7 @@ Image components have the following properties.
 ### General 
 
 Source
-: The image to display.<br>
+: The image to display. The supported formats are JPG, PNG, and GIF. The maximum upload size is 4 MB.<br>
 **Values**: URL or file
 
 ### Appearance
