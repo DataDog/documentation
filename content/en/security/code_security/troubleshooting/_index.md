@@ -228,7 +228,7 @@ Runtime application security data is sent with APM traces. See [APM troubleshoot
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][19].
 
 ## How committers are calculated for Code Security
-A **committer** is an active Git contributor identified through the `author_email` field in Git commit metadata.
+A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
 
 A committer is counted toward billing if they make **at least 3 commits within a given calendar month** in repositories where Code Security is enabled.
 
