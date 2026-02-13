@@ -76,3 +76,18 @@
     </div>
 </template>
 
+{{/* Reusable assistant message actions (thumbs/copy) */}}
+<template id="conv-search-actions-template">
+    <div class="conv-search-message-actions">
+        <button class="conv-search-action-btn" data-action="thumbs-up" title="Good response">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/thumbs-up.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+        </button>
+        <button class="conv-search-action-btn" data-action="thumbs-down" title="Bad response">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/thumbs-down.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+        </button>
+        <button class="conv-search-action-btn" data-action="copy" title="Copy response">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/copy.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+        </button>
+    </div>
+</template>
+
