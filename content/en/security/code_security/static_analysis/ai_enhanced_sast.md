@@ -148,7 +148,7 @@ Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal w
 
 After you create a campaign, Bits AI Dev Agent loads the findings in scope, generates patches according to your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes. **Note**: Automatic PR creation is opt-in through [Settings][11].
 
-<div class="alert alert-info">Single vulnerability fixes and batch remediation campaigns operate independently. If you generate a single fix and then create a campaign, Bits AI may duplicate the fix because campaigns do not track fixes created outside the campaign.</div>
+<div class="alert alert-info">Campaigns do not track fixes created outside the campaign. If you generate a single fix and later create a campaign, Bits AI may generate the same fix again.</div>
 
 #### View campaign progress
 
