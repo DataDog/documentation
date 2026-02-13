@@ -101,7 +101,7 @@ To enable Agentless Scanning, use one of the following workflows:
 - **[AWS CloudFormation](#aws-cloudformation-setup)**: For new or existing AWS accounts.
 - **[AWS CloudFormation StackSet](#aws-cloudformation-stackset-setup)**: For AWS Organizations with multiple accounts.
 - **[GCP Cloud Shell](#gcp-cloud-shell-setup)**: Recommended for GCP. Uses Google Cloud Shell to run a setup script that wraps the Terraform module.
-- **[Azure Resource Manager](#azure-resource-manager-setup)**: For new or existing Azure accounts.
+- **[Azure Resource Manager](#azure-resource-manager-setup)**: For new or existing Azure subscriptions.
 - **[Terraform](#terraform-setup)**: For AWS, Azure, and GCP using the Terraform module directly.
 
 ### Quick start
@@ -275,10 +275,10 @@ If you've already [set up Cloud Security][10] and want to enable [Agentless Scan
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
 
 {{% collapse-content title="Azure Resource Manager setup guide" level="h4" id="azure-resource-manager-setup" %}}
-If you've already [set up Cloud Security][10] and want to add a new Azure account or enable [Agentless Scanning][1] on an existing integrated Azure account, you can use either [Terraform][7] or Azure Resource Manager. This article provides detailed instructions for the Azure Resource Manager approach.
+If you've already [set up Cloud Security][10] and want to add a new Azure subscription or enable [Agentless Scanning][1] on an existing integrated Azure subscription, you can use either [Terraform][7] or Azure Resource Manager. This article provides detailed instructions for the Azure Resource Manager approach.
 
 {{< tabs >}}
-{{% tab "New Azure account" %}}
+{{% tab "New Azure subscription" %}}
 
 ###### Set up the Datadog Azure integration
 
@@ -289,7 +289,7 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 [1]: /integrations/guide/azure-manual-setup/?tab=azurecli
 {{% /tab %}}
 
-{{% tab "Existing Azure account" %}}
+{{% tab "Existing Azure subscription" %}}
 
 {{% csm-agentless-azure-resource-manager %}}
 
@@ -340,11 +340,11 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 
 {{% /tab %}}
 
-{{% tab "Existing Azure account" %}}
+{{% tab "Existing Azure subscription" %}}
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations > Azure**.
 1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the Azure account where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the Azure subscription where you want to deploy the Agentless scanner.
 1. Toggle **Vulnerability Scanning** to the on position.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
@@ -468,7 +468,7 @@ You can review the [setup script source][21] before running the command.
 {{% /tab %}}
 
 {{% tab "Azure Resource Manager" %}}
-To uninstall Agentless Scanning, log in to your Azure account. If you created a dedicated resource group for the Agentless scanner, delete this resource group along with the following Azure role definitions:
+To uninstall Agentless Scanning, log in to your Azure subscription. If you created a dedicated resource group for the Agentless scanner, delete this resource group along with the following Azure role definitions:
   - Datadog Agentless Scanner Role
   - Datadog Agentless Scanner Delegate Role
 
