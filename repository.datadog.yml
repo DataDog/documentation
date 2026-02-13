@@ -22,6 +22,7 @@ rules:
   - require: commit-signatures
     enforcement: warn
     excluded_emails:
+      - 'packages@datadoghq.com'
       - 'robot-guacbot-guacamole@datadoghq.com'
       - 'guacbot@users.noreply.github.com'
       - '41898282+github-actions[bot]@users.noreply.github.com'
