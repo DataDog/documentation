@@ -44,7 +44,7 @@ The following is a list of bootstrap options, their related pipeline environment
 : &nbsp;&nbsp;&nbsp;&nbsp;`api`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`address`: `"127.0.0.1:8686" # optional`
 : Note: Setting `address` is optional. It is the network address to which the API should bind. If you're running the Worker in a Docker container, bind to `0.0.0.0`. Otherwise, the API is not exposed outside of the container.
 : **Description**: Enable the Observability Pipelines Worker API so you can see the Worker's processes with the `tap` or `top` command. See [Run, tap, or top the Worker][8] for more information. If you are using the Helm charts provided when you [set up a pipeline][7], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true` in `/etc/observability-pipelines-worker/bootstrap.yaml`. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
-<br><br>See [Enable liveness and readiness probe](#enable-liveness-and-readiness-probe) on how to expose the `/health` endpoint.
+<br><br>See [Enable liveness and readiness probe](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes) on how to expose the `/health` endpoint.
 
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
