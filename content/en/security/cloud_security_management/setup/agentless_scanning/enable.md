@@ -123,7 +123,7 @@ For existing users who want to add a new AWS account or enable Agentless Scannin
 1. Click **Quick Start**. The **Features** page is displayed, showing the features included with Agentless Scanning Quick Start.
 1. Click **Start Using Cloud Security** to continue.
 1. Select the AWS region where you want to create the CloudFormation stack.
-1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Select an API key that has [Remote Configuration][3] enabled.
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
@@ -159,7 +159,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
 1. Select the AWS region where you want to create the CloudFormation stack.
-1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Select an API key that has [Remote Configuration][3] enabled.
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
@@ -173,7 +173,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 1. Click the AWS account where you want to deploy the Agentless scanner, which opens the side panel.
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
 1. In the **How would you like to set up Agentless Scanning?** section, select **CloudFormation**.
-1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Select an API key that has [Remote Configuration][3] enabled.
 1. Toggle the features you want to enable, such as **Vulnerability Management** or **Sensitive Data Scanner**.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click **Done**.
@@ -258,7 +258,7 @@ If you've already [set up Cloud Security][10] and want to enable [Agentless Scan
 1. Expand the account containing the project where you want to deploy the Agentless scanner.
 1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
-1. Select an **API key** that has [Remote Configuration][3] enabled. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
+1. Select an **API key** that has [Remote Configuration][3] enabled.
 1. Create an **Application key**.
 1. Select the **GCP projects** you want to scan.
 1. Configure the **Scanner project** (the project where the scanner will be deployed, which must be one of the selected projects) and **Scanner region**.
