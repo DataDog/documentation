@@ -4,7 +4,7 @@ description: How to disable CloudWatch Logs for Lambda functions that send logs 
 further_reading:
 - link: "/serverless/libraries_integrations/cli"
   tag: "Documentation"
-  text: "Datadog Serverless CLI"
+  text: "Datadog CLI"
 - link: "/serverless/libraries_integrations/extension"
   tag: "Documentation"
   text: "Datadog Lambda Extension"
@@ -16,7 +16,7 @@ When using the Datadog Lambda extension, logs are sent directly to Datadog throu
 
 ## How it works
 
-Each method below attaches an inline IAM deny policy named `DenyCloudWatchLogs` to the Lambda function's execution role. The policy denies the following actions on the function's log group:
+Each method below denies CloudWatch Logs actions on the Lambda function's execution role. The policy denies the following actions on the function's log group:
 
 - `logs:CreateLogGroup`
 - `logs:CreateLogStream`
@@ -24,9 +24,9 @@ Each method below attaches an inline IAM deny policy named `DenyCloudWatchLogs` 
 
 Because AWS evaluates Deny before Allow in IAM policy evaluation, this blocks CloudWatch logging even if the execution role has CloudWatch permissions from other policies.
 
-To re-enable CloudWatch logging, remove the denied log groups from the policy or delete the `DenyCloudWatchLogs` policy entirely.
+The log group ARN in the deny policy defaults to `/aws/lambda/<FUNCTION_NAME>`. If your function uses a custom log group (through `LoggingConfig`), adjust the log group ARN in the deny policy accordingly. The Datadog CLI handles this automatically.
 
-<div class="alert alert-danger">If you have multiple Lambda functions which share the same log group and execution role, applying the deny policy will affect all the functions using the execution role and log group. If you would only like to disable only a subset, consider using one log group per function.</div>
+<div class="alert alert-danger">If you have multiple Lambda functions which share the same log group and execution role, applying the deny policy affects all the functions using the execution role and log group. If you would only like to disable only a subset, consider using one log group per function.</div>
 
 ## Disable CloudWatch logs
 
@@ -53,7 +53,7 @@ To disable CloudWatch logs for multiple functions at once, use `--functions-rege
 datadog-ci lambda cloudwatch disable --region <region> --functions-regex <REGEX>
 ```
 
-**Note**: This command requires valid AWS credentials configured in your environment. See the [Datadog Serverless CLI documentation][1] for setup details.
+**Note**: This command requires valid AWS credentials configured in your environment. See the [Datadog CLI documentation][1] for setup details.
 
 [1]: /serverless/libraries_integrations/cli
 
@@ -77,7 +77,7 @@ provider:
 
 Replace `<FUNCTION_NAME>` with the name of your function as defined in the `functions` block. By default, Serverless Framework names Lambda functions `<service>-<stage>-<functionName>`.
 
-**Note**: This applies the deny policy to the shared execution role. To disable CloudWatch logs for all functions in the service, use a wildcard:
+**Note**: This adds the deny statement to the shared execution role policy rather than creating a separately named `DenyCloudWatchLogs` policy, but the effect is equivalent. To disable CloudWatch logs for all functions in the service, use a wildcard:
 
 {{< code-block lang="yaml" >}}
 Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${self:service}-${sls:stage}-*:*"
@@ -129,19 +129,28 @@ Resources:
               Resource: !Sub "arn:aws:logs:*:*:log-group:/aws/lambda/${ExampleFunction}:*"
 {{< /code-block >}}
 
+**Note**: SAM's `Policies` property creates an unnamed inline policy. To create a named `DenyCloudWatchLogs` policy, add an `AWS::IAM::Policy` resource as shown in the **AWS CloudFormation** tab.
+
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-Use `addToPolicy` to attach a deny statement to the function's execution role:
+Create a named `DenyCloudWatchLogs` inline policy and attach it to the function's execution role:
 
 {{< code-block lang="typescript" >}}
 import * as iam from "aws-cdk-lib/aws-iam";
 
-fn.role?.addToPolicy(new iam.PolicyStatement({
-  effect: iam.Effect.DENY,
-  actions: ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
-  resources: [`arn:aws:logs:*:*:log-group:/aws/lambda/${fn.functionName}:*`],
-}));
+const denyCloudWatchLogsPolicy = new iam.Policy(this, "DenyCloudWatchLogsPolicy", {
+  policyName: "DenyCloudWatchLogs",
+  statements: [
+    new iam.PolicyStatement({
+      effect: iam.Effect.DENY,
+      actions: ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+      resources: [`arn:aws:logs:*:*:log-group:/aws/lambda/${fn.functionName}:*`],
+    }),
+  ],
+});
+
+denyCloudWatchLogsPolicy.attachToRole(fn.role!);
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -206,8 +215,9 @@ After you disable CloudWatch logs, confirm that logs are still flowing to Datado
 2. In Datadog, go to the [logs explorer][4] and filter by `source:lambda` and the function name.
 3. Verify that new log entries appear.
 
-If logs from the extension are not appearing, make sure that the extension is installed and that `DD_SERVERLESS_LOGS_ENABLED` is set to `true` on the function. The default behavior is to send logs, but if one of `DD_LOGS_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` are set to `false` with the other unset, setting `DD_SERVERLESS_LOGS_ENABLED` to `true` will ensure that logs are sent.
+If logs from the extension are not appearing, make sure that the extension is installed and that `DD_SERVERLESS_LOGS_ENABLED` is set to `true` on the function. The default behavior is to send logs, but if one of `DD_LOGS_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` are set to `false` with the other unset, setting `DD_SERVERLESS_LOGS_ENABLED` to `true` ensures that logs are sent.
 
+If at some point you want to re-enable CloudWatch logging, remove the deny statement from the execution role's policy. For the Datadog CLI, run `datadog-ci lambda cloudwatch enable` with the same parameters used for the disable command.
 
 ## Further reading
 
