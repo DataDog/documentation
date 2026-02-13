@@ -2,9 +2,9 @@
 title: Bits AI Kubernetes Remediation
 description: Discover and automatically remediate Kubernetes errors with Bits AI Kubernetes Remediation
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/kubernetes-active-remediation-ai/'
+  - link: 'https://www.datadoghq.com/blog/bits-ai-kubernetes-remediation/'
     tag: 'blog'
-    text: 'Accelerate Kubernetes issue resolution with AI-powered guided remediation'
+    text: 'Troubleshoot and resolve Kubernetes issues with AI-powered guided remediation'
 ---
 
 Bits AI Kubernetes Remediation analyzes and fixes Kubernetes errors in your infrastructure.
