@@ -39873,8 +39873,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_size
       type: object
     ObservabilityPipelineElasticsearchDestination:
       description: 'The `elasticsearch` destination writes logs to an Elasticsearch
@@ -41128,8 +41126,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_size
       type: object
     ObservabilityPipelineMemoryBufferSizeOptions:
       description: Options for configuring a memory buffer by queue length.
@@ -41143,8 +41139,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_events
       type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
@@ -102552,7 +102546,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserTeamResponse'
-          description: Represents a user's association to a team
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
