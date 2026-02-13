@@ -48,6 +48,7 @@ The recommended best practice for scoping application keys is to grant your keys
 - Application owners cannot authorize an application if they are missing any required permissions, even if they scope an application key with authorization scopes that they do not have.
 - Errors due to missing permissions when writing application keys or authorizing applications display a `403 Forbidden` error. More information about various error responses can be found in the [Datadog API][4] documentation.
 - If a user's role or permissions change, authorization scopes specified for their application keys remain unchanged.
+- Newly created applicaton keys typically take a few seconds to become valid.
 
 ### Actions API access
 
