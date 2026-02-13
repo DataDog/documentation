@@ -209,6 +209,7 @@ core_product:
       requires_all_keyvals:
         - 'core_product:security'
     - name: ci-cd
+    - name: cloudcraft
     - name: cloud siem
       requires_all_keyvals:
         - 'core_product:security'
