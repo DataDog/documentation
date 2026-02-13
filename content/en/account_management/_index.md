@@ -34,7 +34,7 @@ If you log in to Datadog using Google authentication, your email address is prov
 ### Preferences
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-You can manage your timezone, time format, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page.
+You can manage your time zone, time format, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page.
 
 #### Email subscriptions
 
@@ -51,7 +51,7 @@ If you are unsure if an email digest is relevant to you, you can view an example
 
 
 {{% site-region region="gov" %}}
-You can manage your timezone, time format, and visual accessibility preference from the [**Preferences** tab][3] within the **Personal Settings** page.
+You can manage your time zone, time format, and visual accessibility preference from the [**Preferences** tab][3] within the **Personal Settings** page.
 {{% /site-region %}}
 
 #### Time format
