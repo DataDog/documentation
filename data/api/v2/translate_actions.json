@@ -1047,7 +1047,7 @@
     "request_schema_description": "Request containing the desired email domain allowlist configuration."
   },
   "CreateDORADeployment": {
-    "description": "Use this API endpoint to provide deployment data.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
+    "description": "Use this API endpoint to provide deployment data.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate\n- Failed Deployment Recovery Time",
     "summary": "Send a deployment event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
@@ -1067,36 +1067,36 @@
     "summary": "Get a deployment event"
   },
   "PatchDORADeployment": {
-    "description": "Use this API endpoint to patch a deployment event.",
+    "description": "Update a deployment's change failure status. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation.",
     "summary": "Patch a deployment event",
     "request_description": "",
     "request_schema_description": "Request to patch a DORA deployment event."
   },
   "CreateDORAFailure": {
-    "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
-    "summary": "Send a failure event",
-    "request_description": "",
-    "request_schema_description": "Request to create a DORA failure event."
-  },
-  "DeleteDORAFailure": {
-    "description": "Use this API endpoint to delete a failure event.",
-    "summary": "Delete a failure event"
-  },
-  "ListDORAFailures": {
-    "description": "Use this API endpoint to get a list of failure events.",
-    "summary": "Get a list of failure events",
-    "request_description": "",
-    "request_schema_description": "Request to get a list of failures."
-  },
-  "GetDORAFailure": {
-    "description": "Use this API endpoint to get a failure event.",
-    "summary": "Get a failure event"
-  },
-  "CreateDORAIncident": {
-    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "Use this API endpoint to provide incident data for DORA Metrics.\nNote that change failure rate and failed deployment recovery time are computed from change failures detected on deployments, not from incident events sent through this endpoint.\nTracking incidents gives a side-by-side view of how failed deployments translate into real-world incidents, including their severity and frequency.",
     "summary": "Send an incident event",
     "request_description": "",
-    "request_schema_description": "Request to create a DORA failure event."
+    "request_schema_description": "Request to create a DORA incident event."
+  },
+  "DeleteDORAFailure": {
+    "description": "Use this API endpoint to delete an incident event.",
+    "summary": "Delete an incident event"
+  },
+  "ListDORAFailures": {
+    "description": "Use this API endpoint to get a list of incident events.",
+    "summary": "Get a list of incident events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of incidents."
+  },
+  "GetDORAFailure": {
+    "description": "Use this API endpoint to get an incident event.",
+    "summary": "Get an incident event"
+  },
+  "CreateDORAIncident": {
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide incident data.\nTracking incidents gives a side-by-side view of how failed deployments translate into real-world incidents.",
+    "summary": "Send an incident event (legacy)",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA incident event."
   },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",

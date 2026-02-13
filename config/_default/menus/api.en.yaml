@@ -7759,9 +7759,9 @@ menu:
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
       generated: true
-    - name: Send an incident event
-      url: '#send-an-incident-event'
-      identifier: dora-metrics-send-an-incident-event
+    - name: Send an incident event (legacy)
+      url: '#send-an-incident-event-legacy'
+      identifier: dora-metrics-send-an-incident-event-legacy
       parent: dora-metrics
       generated: true
       params:
@@ -7770,10 +7770,10 @@ menu:
         operationids:
           - CreateDORAIncident
         unstable: []
-        order: 2
-    - name: Get a failure event
-      url: '#get-a-failure-event'
-      identifier: dora-metrics-get-a-failure-event
+        order: 28
+    - name: Get an incident event
+      url: '#get-an-incident-event'
+      identifier: dora-metrics-get-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7783,9 +7783,9 @@ menu:
           - GetDORAFailure
         unstable: []
         order: 6
-    - name: Get a list of failure events
-      url: '#get-a-list-of-failure-events'
-      identifier: dora-metrics-get-a-list-of-failure-events
+    - name: Get a list of incident events
+      url: '#get-a-list-of-incident-events'
+      identifier: dora-metrics-get-a-list-of-incident-events
       parent: dora-metrics
       generated: true
       params:
@@ -7795,9 +7795,9 @@ menu:
           - ListDORAFailures
         unstable: []
         order: 4
-    - name: Delete a failure event
-      url: '#delete-a-failure-event'
-      identifier: dora-metrics-delete-a-failure-event
+    - name: Delete an incident event
+      url: '#delete-an-incident-event'
+      identifier: dora-metrics-delete-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7807,9 +7807,9 @@ menu:
           - DeleteDORAFailure
         unstable: []
         order: 7
-    - name: Send a failure event
-      url: '#send-a-failure-event'
-      identifier: dora-metrics-send-a-failure-event
+    - name: Send an incident event
+      url: '#send-an-incident-event'
+      identifier: dora-metrics-send-an-incident-event
       parent: dora-metrics
       generated: true
       params:
