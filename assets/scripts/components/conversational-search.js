@@ -387,14 +387,23 @@ class ConversationalSearch {
      * Render markdown with numbered reference chips and source cards.
      */
     renderMessageWithSources(markdownText) {
-        const html = marked.parse(markdownText);
+        const { displayMarkdown, structuredSources } = this.extractStructuredSources(markdownText);
+        const html = marked.parse(displayMarkdown);
         const container = document.createElement('div');
         container.innerHTML = html;
 
         const links = Array.from(container.querySelectorAll('a[href]'));
-        if (links.length === 0) {
+        if (links.length === 0 && structuredSources.length === 0) {
             return html;
         }
+
+        const structuredByHref = new Map();
+        structuredSources.forEach((source, index) => {
+            const normalizedHref = this.normalizeHref(source.href);
+            if (normalizedHref && !structuredByHref.has(normalizedHref)) {
+                structuredByHref.set(normalizedHref, { ...source, order: index });
+            }
+        });
 
         const sourceIndexByHref = new Map();
         const sources = [];
@@ -405,11 +414,15 @@ class ConversationalSearch {
                 return;
             }
 
+            const normalizedHref = this.normalizeHref(href);
+            const structuredSource = normalizedHref ? structuredByHref.get(normalizedHref) : null;
+            const sourceLabel = structuredSource?.label || (link.textContent || '').trim() || href;
+
             if (!sourceIndexByHref.has(href)) {
                 sourceIndexByHref.set(href, sources.length + 1);
                 sources.push({
                     href,
-                    label: (link.textContent || '').trim() || href
+                    label: sourceLabel
                 });
             }
 
@@ -444,6 +457,21 @@ class ConversationalSearch {
             refWrap.appendChild(tooltip);
             link.replaceWith(refWrap);
         });
+
+        // Add structured sources not present as inline links, preserving source order from the model.
+        structuredSources.forEach((source) => {
+            if (!sourceIndexByHref.has(source.href)) {
+                sourceIndexByHref.set(source.href, sources.length + 1);
+                sources.push({
+                    href: source.href,
+                    label: source.label
+                });
+            }
+        });
+
+        if (sources.length === 0) {
+            return container.innerHTML;
+        }
 
         const sourcesSection = document.createElement('div');
         sourcesSection.className = 'conv-search-sources';
@@ -480,6 +508,69 @@ class ConversationalSearch {
         container.appendChild(sourcesSection);
 
         return container.innerHTML;
+    }
+
+    /**
+     * Optional machine-readable source payload expected from LLM:
+     * ```sources
+     * {"sources":[{"url":"https://...","title":"..."}]}
+     * ```
+     */
+    extractStructuredSources(markdownText) {
+        const fencedBlockRegex = /```(?:sources|docs-sources|sources-json)\s*([\s\S]*?)```/i;
+        const match = markdownText.match(fencedBlockRegex);
+        if (!match) {
+            return { displayMarkdown: markdownText, structuredSources: [] };
+        }
+
+        const parsedSources = this.parseSourcesJson(match[1]);
+        const displayMarkdown = markdownText.replace(match[0], '').trim();
+        return { displayMarkdown, structuredSources: parsedSources };
+    }
+
+    parseSourcesJson(jsonText) {
+        try {
+            const parsed = JSON.parse(jsonText.trim());
+            const candidateList = Array.isArray(parsed) ? parsed : parsed?.sources;
+            if (!Array.isArray(candidateList)) {
+                return [];
+            }
+
+            const normalized = [];
+            const seen = new Set();
+            candidateList.forEach((item) => {
+                const href = this.normalizeHref(item?.url || item?.href || item?.link || '');
+                if (!href || seen.has(href)) {
+                    return;
+                }
+
+                const label = (item?.title || item?.label || item?.name || href).toString().trim() || href;
+                seen.add(href);
+                normalized.push({ href, label });
+            });
+
+            return normalized;
+        } catch (e) {
+            console.debug('[Conversational Search] Failed to parse structured sources JSON');
+            return [];
+        }
+    }
+
+    normalizeHref(rawHref) {
+        const href = (rawHref || '').toString().trim();
+        if (!href) {
+            return '';
+        }
+
+        try {
+            const url = new URL(href, window.location.origin);
+            if (!['http:', 'https:'].includes(url.protocol)) {
+                return '';
+            }
+            return url.href;
+        } catch (e) {
+            return '';
+        }
     }
 
     async sendMessage() {
