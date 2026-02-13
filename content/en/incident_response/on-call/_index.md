@@ -25,7 +25,7 @@ Datadog On-Call integrates monitoring, paging, and incident response into one pl
 
 - **Pages** represent something to get alerted for, such as a monitor, incident, or security signal. A Page can have a status of `Triggered`, `Acknowledged`, or `Resolved`.
 - **Teams** are groups configured within Datadog to handle specific types of Pages, based on expertise and operational roles.
-- **Routing rules** allow Teams to finely adjust their reactions to specific types of incoming events. These rules can set a Page's urgency level and route Pages to different escalation policies depending on the event's metadata.
+- **Routing rules** allow Teams to finely adjust their reactions to specific types of incoming events. These rules can set a Page's urgency level, route Pages to different escalation policies depending on the event's metadata, and configure [support hours][7] to delay escalation notifications to defined time windows.
 - **Escalation policies** determine how Pages are escalated within or across Teams.
 - **Schedules** set timetables for when specific Team members are on-call to respond to Pages.
 
@@ -106,3 +106,4 @@ On-Call is a seat-based SKU. To learn more about how On-Call is billed and how t
 [4]: /account_management/rbac/#role-based-access-control
 [5]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [6]: /account_management/billing/incident_response/
+[7]: /incident_response/on-call/routing_rules#support-hours
