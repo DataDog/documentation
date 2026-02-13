@@ -50608,6 +50608,69 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+    RumCrossProductSampling:
+      description: 'Configuration for additional APM Trace data retention for sessions
+        matching this retention filter.
+
+        When a session matches the filter and is retained (based on sample_rate),
+        you can configure
+
+        what percentage of retained sessions with ingested traces should have their
+        traces indexed.'
+      properties:
+        trace_enabled:
+          description: Whether Trace cross-product sampling is enabled. When false,
+            no traces are indexed regardless of trace_sample_rate.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: 'The percentage (0-100) of retained sessions with ingested
+            traces for which traces are indexed.
+
+            For example, 25.0 means 25% of retained sessions with ingested traces
+            will have their traces indexed.'
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      type: object
+    RumCrossProductSamplingCreate:
+      description: Configuration for cross-product sampling when creating a retention
+        filter.
+      properties:
+        trace_enabled:
+          description: Whether Trace cross-product sampling is enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The percentage (0-100) of retained sessions with ingested traces
+            for which traces are indexed.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      required:
+      - trace_sample_rate
+      type: object
+    RumCrossProductSamplingUpdate:
+      description: Configuration for cross-product sampling when updating a retention
+        filter. All fields are optional for partial updates.
+      properties:
+        trace_enabled:
+          description: Whether Trace cross-product sampling is enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The percentage (0-100) of retained sessions with ingested traces
+            for which traces are indexed.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -50895,6 +50958,8 @@ components:
     RumRetentionFilterAttributes:
       description: The object describing attributes of a RUM retention filter.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSampling'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -50909,6 +50974,8 @@ components:
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSamplingCreate'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -51010,6 +51077,8 @@ components:
     RumRetentionFilterUpdateAttributes:
       description: The object describing attributes of a RUM retention filter to update.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSamplingUpdate'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
