@@ -2184,7 +2184,6 @@ The `evaluationOptions` object can contain the following:
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
-{{% /collapse-content %}}
 
 `assessment`
 : optional - _string_
