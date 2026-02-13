@@ -51,19 +51,18 @@ Custom rules only show up in the map if they are tagged in the rule editor with 
 
 This is an example of the format you need to use for tagging custom rules and the correct pairing of tactic and technique tags:
 
-- `tactic: <tactic number>-<tactic name>`
+- `tactic:<tactic number>-<tactic name>`
     - For example: `tactic:TA0001-Initial-Access`
-- `technique: <technique number>-<technique name>`
+- `technique:<technique number>-<technique name>`
     - For example: `technique:T1566-Phishing`
 
-When adding tags to custom rules, the following formatting requirements are also in place: 
+Note the following formatting details:
+- The tag prefix (`tactic` or `technique`) **must be lowercase**
+- The technique number is case insensitive
+    - For example: `TA0001` or `ta0001`
+- Dashes and underscores are interchangeable
+    - For example: `technique:T1566-Phishing` or `technique:T1566_Phishing`
 
-- The tag prefix (tactic or technique) **must be lowercase**
-- The technique ID **is case insensitive**
-    - For example: `TA0001 or T1566`
-- Dashes and underscores are **interchangeable** in the tag name
-
-    - For example: `technique:T1566-Phishing`
 **Note**: The tactic and technique need to be based on the MITRE ATT&CK version stated on the [MITRE ATT&CK Map][3] page.
 
 ## Further reading
