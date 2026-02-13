@@ -8971,6 +8971,19 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Import an incident
+      url: '#import-an-incident'
+      identifier: incidents-import-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportIncident
+        unstable:
+          - v2
+        order: 49
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type

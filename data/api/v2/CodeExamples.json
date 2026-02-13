@@ -859,6 +859,13 @@
       "description": "Create incident notification template returns \"Created\" response"
     }
   ],
+  "ImportIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Import an incident returns \"CREATED\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
