@@ -843,7 +843,7 @@ Title
 ### Appearance
 
 Width
-: Determines the width of the side panel.<br>
+: Determines the width of the side panel. A percent sign (`%`) must be included after the value.<br>
 **Value**: integer
 
 Hide Close Button
