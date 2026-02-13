@@ -2192,7 +2192,6 @@ The `evaluationOptions` object can contain the following:
 `reasoning`
 : optional - _string_
 <br />A text explanation of the evaluation result.
-{{% /collapse-content %}}
 
 `metadata`
 : optional - _dictionary_
