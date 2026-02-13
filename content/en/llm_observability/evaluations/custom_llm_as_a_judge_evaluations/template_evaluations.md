@@ -130,7 +130,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][6],
 
 An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluation checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
 
-{{< img src="llm_observability/evaluations/goal_completeness_1.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/goal_completeness_2.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | **Evaluation Stage** | **Evaluation Definition** |
 |---|---|---|
@@ -158,7 +158,7 @@ This evaluation checks whether the agent successfully selected the appropriate t
 
 #### Example
 
-{{< img src="llm_observability/evaluations/tool_selection_1.png" alt="A tool selection failure detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_selection_2.png" alt="A tool selection evaluation in LLM Observability" style="width:100%;" >}}
 
 #### How to use
 
@@ -231,7 +231,7 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 
 #### Example
 
-{{< img src="llm_observability/evaluations/tool_argument_correctness_1.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_argument_correctness_2.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
 ##### Instrumentation
 
