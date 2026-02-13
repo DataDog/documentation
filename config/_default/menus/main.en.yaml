@@ -6491,6 +6491,11 @@ menu:
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
       weight: 212
+    - name: Log Optimizer
+      url: logs/log_configuration/log_optimizer/
+      parent: log_configuration
+      identifier: log_optimizer
+      weight: 213
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
