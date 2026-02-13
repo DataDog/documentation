@@ -290,6 +290,22 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Divider" level="h3" %}}
+Divider components have the following properties.
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="File input" level="h3" %}}
 File input components have the following properties.
 
