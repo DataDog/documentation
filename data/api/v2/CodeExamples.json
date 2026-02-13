@@ -444,6 +444,11 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Create tag pipeline ruleset returns \"OK\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_1897535856",
+      "description": "Create tag pipeline ruleset with if_tag_exists returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -479,6 +484,11 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update tag pipeline ruleset returns \"OK\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_1964644735",
+      "description": "Update tag pipeline ruleset with if_tag_exists returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
