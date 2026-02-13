@@ -232,7 +232,7 @@ A **committer** is an active Git contributor identified by the `author_email` fi
 
 A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
 
-Each unique author email address counts as a separate committer. Multiple commits using the same author email count as one committer. Commits associated with different email addresses count separately.
+Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
 
 ### Which email addresses are counted as committers?
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
