@@ -19,8 +19,11 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [Azure KeyVault](#id-for-azure)
 - [GCP Secret Manager](#id-for-gcp)
 - [HashiCorp Vault](#id-for-hashicorp)
-- [File JSON](#id-for-json-yaml)
-- [File YAML](#id-for-json-yaml)
+- [Kubernetes Secrets](#id-for-kubernetes)
+- [Docker Secrets](#id-for-docker)
+- [File Text](#id-for-json-yaml-text)
+- [File JSON](#id-for-json-yaml-text)
+- [File YAML](#id-for-json-yaml-text)
 
 Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
@@ -30,7 +33,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
-**Note**: This option is not available for FIPS-enabled Agents at this time.
+**Note**: As of Agent version `7.76` and onwards, native secrets management is available for FIPS-enabled Agents.
 
 Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`.
 
@@ -111,17 +114,6 @@ secret_backend_config:
   aws_session:
     aws_region: us-east-1
 ```
-
-<!-- SECRET MANAGER LINKS -->
-[101]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
-[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
-[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
 {{% /tab %}}
 
@@ -363,16 +355,6 @@ property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
 
-[200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[201]: https://docs.aws.amazon.com/systems-manager/
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
-[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
-[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-
 {{% /collapse-content %}}
 
 
@@ -412,11 +394,11 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 api_key: "ENC[secretKeyNameInKeyVault]"
 ```
 
-[2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+
+**Available in Agent version 7.74+**
 
 The following GCP services are supported:
 
@@ -505,11 +487,6 @@ The Datadog Agent supports extracting specific keys from JSON-formatted secrets 
 - `datadog;api_key` - Extracts the `api_key` field from the `datadog` secret with an implicit `latest` version
 - `datadog;api_key;1`  - Extracts the `api_key` field from the `datadog` secret from version `1`
 
-[5000]: https://cloud.google.com/security/products/secret-manager
-[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
-[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
-[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
-
 {{% /collapse-content %}}
 
 
@@ -575,23 +552,335 @@ secret_backend_config:
     vault_aws_role: Name-of-IAM-role-attached-to-machine
     aws_region: us-east-1 // this field is optional, and will default to us-east-1 if not set
 ```
-<!-- HASHICORP LINKS -->
-[3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
-[3001]: https://developer.hashicorp.com/
-[3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
-[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+
 {{% /collapse-content %}}
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-json-yaml" %}}
+{{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
+
+**Available in Agent version 7.75+**
+
+The following Kubernetes services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `k8s.secrets` | [Kubernetes Secrets][7000] |
+
+##### Prerequisites
+
+The Kubernetes secrets backend requires:
+- **ServiceAccount credentials**: By default, uses automatically mounted ServiceAccount tokens (`automountServiceAccountToken: true`, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting)). Custom paths can be configured if needed.
+- **RBAC permissions**: The Agent's ServiceAccount must have permissions to read secrets from target namespaces
+- **Network access**: The Agent pod must be able to reach the Kubernetes API server
+
+##### RBAC setup
+
+For each namespace containing secrets, create a `Role` and `RoleBinding` using the following example using the correct namespace name:
+
+```yaml
+# Role: grants permission to read secrets
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: datadog-secret-reader
+  namespace: <target namepace> # Namespace with secrets
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+---
+# RoleBinding: grants permission to Agent's ServiceAccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: datadog-secret-access
+  namespace: <target namespace>  # Namespace with secrets
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: datadog-secret-reader
+subjects:
+- kind: ServiceAccount
+  name: <serviceaccount name>  # datadog is typically the default ServiceAccount name
+  namespace: datadog  # Where Agent runs
+```
+
+##### Configuration example
+
+{{< tabs >}}
+{{% tab "Agent YAML file" %}}
+
+Configure the Datadog Agent to use Kubernetes Secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: k8s.secrets
+
+# Reference secrets using namespace/secret-name;key format
+api_key: "ENC[secrets-prod/dd-api-key;api_key]"
+app_key: "ENC[secrets-prod/dd-api-key;app_key]"
+```
+
+The ENC notation format is `namespace/secret-name;key`:
+- `namespace`: The Kubernetes namespace containing the secret
+- `secret-name`: The name of the Secret resource
+- `key`: The specific key to extract from the Secret's data field
+
+**Example:** Given a Secret in namespace `secrets-ns`:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dd-api-key
+  namespace: secrets-ns
+data:
+  api_key: <base64-encoded-value>
+  app_key: <base64-encoded-value>
+```
+
+You can reference individual keys:
+```yaml
+api_key: "ENC[secrets-ns/dd-api-key;api_key]"
+app_key: "ENC[secrets-ns/dd-api-key;app_key]"
+```
+
+**Multi-namespace support:**
+Each secret reference can specify a different namespace (RBAC must be configured for each):
+
+```yaml
+api_key: "ENC[secrets-ns/dd-keys;api_key]"
+db_password: "ENC[secrets-shared/db-creds;password]"
+```
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Configure the Datadog Agent to use Kubernetes Secrets with Helm:
+
+```yaml
+# values.yaml
+datadog:
+  apiKey: "placeholder-will-be-overridden"
+
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_API_KEY
+    value: "ENC[secrets-ns/dd-api-key;api_key]"
+```
+
+**Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
+
+<div class="alert alert-info"> Helm does not have native <code>secretBackend.type</code> configuration. Use environment variables. </div>
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+Configure the Datadog Agent to use Kubernetes Secrets with the Datadog Operator:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: "placeholder-will-be-overridden"
+
+  override:
+    nodeAgent:
+      env:
+      - name: DD_SECRET_BACKEND_TYPE
+        value: "k8s.secrets"
+      - name: DD_API_KEY
+        value: "ENC[secrets-ns/dd-api-key;api_key]"
+```
+
+**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
+
+<div class="alert alert-info"> The Operator does not have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code>. </div>
+
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Custom path configuration
+If your setup does not follow the default locations for ServiceAccount based authentication, you can specify `token_path` and `ca_path` instead.
+
+{{< tabs >}}
+{{% tab "Agent YAML" %}}
+```yaml
+secret_backend_type: k8s.secrets
+secret_backend_config:
+  token_path: /custom/path/to/token
+  ca_path: /custom/path/to/ca.crt
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_SECRET_BACKEND_CONFIG
+    value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+```yaml
+override:
+  nodeAgent:
+    env:
+    - name: DD_SECRET_BACKEND_TYPE
+      value: "k8s.secrets"
+    - name: DD_SECRET_BACKEND_CONFIG
+      value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Custom API server configuration
+
+If your setup does not expose the default `KUBERNETES_SERVICE_HOST` and `KUBERNETES_SERVICE_PORT` environment variables, you can supply an `api_server` URL to interact with the Kubernetes REST API.
+
+{{< tabs >}}
+{{% tab "Agent YAML" %}}
+```yaml
+secret_backend_type: k8s.secrets
+secret_backend_config:
+  api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
+```
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  env:
+  - name: DD_SECRET_BACKEND_TYPE
+    value: "k8s.secrets"
+  - name: DD_SECRET_BACKEND_CONFIG
+    value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+```yaml
+override:
+  nodeAgent:
+    env:
+    - name: DD_SECRET_BACKEND_TYPE
+      value: "k8s.secrets"
+    - name: DD_SECRET_BACKEND_CONFIG
+      value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+
+**Available in Agent version 7.75+**
+
+The following Docker services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `docker.secrets` | [Docker Secrets][6001] |
+
+##### Prerequisites
+
+The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docker Compose secrets][6003]. By default, both Swarm and Compose automatically mount secrets within the container as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows).
+
+**Note**: Compose secrets can be file-based (pointing to local files) or external (referencing existing Swarm secrets).
+
+##### Configuration example
+
+Configure the Datadog Agent to use Docker Secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: docker.secrets
+
+# Reference secrets using the secret name (filename in /run/secrets)
+api_key: "ENC[dd_api_key]"
+```
+
+The ENC notation format is the secret name, which corresponds to the filename in `/run/secrets/`:
+- `ENC[api_key]` reads from `/run/secrets/api_key` (Linux) or `C:\ProgramData\Docker\secrets\api_key` (Windows)
+
+**Custom secrets path:**
+If Docker Swarm or Compose are configured to mount secrets at a different location, you can specify it like this:
+
+```yaml
+secret_backend_type: docker.secrets
+secret_backend_config:
+  secrets_path: /custom/secrets/path
+```
+
+##### Docker Swarm example
+
+[Create][6002] and use a Docker Swarm secret:
+
+```bash
+# Create the secret
+echo "<api_key_value>" | docker secret create dd_api_key -
+
+# Deploy Agent with secret mounted
+docker service create \
+  --name datadog-agent \
+  --secret dd_api_key \
+  --env DD_API_KEY="ENC[dd_api_key]" \
+  --env DD_SECRET_BACKEND_TYPE="docker.secrets" \
+  --env DD_SITE="datadoghq.com" \
+  --env DD_HOSTNAME="dd-agent" \
+  datadog/agent:latest
+```
+
+The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, and the Agent reads it using the `docker.secrets` backend.
+
+##### Docker Compose example
+
+[Create][6003] a `docker-compose.yml` with file-based secrets:
+
+```yaml
+version: '3.8'
+
+services:
+  datadog:
+    image: datadog/agent:latest
+    environment:
+      - DD_API_KEY=ENC[dd_api_key]
+      - DD_SECRET_BACKEND_TYPE=docker.secrets
+      - DD_SITE=datadoghq.com
+      - DD_HOSTNAME=dd-agent
+    secrets:
+      - dd_api_key
+
+secrets:
+  dd_api_key:
+    file: ./secrets/api_key.txt
+```
+
+The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` in the container.
+
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h4" expanded=false id="id-for-json-yaml-text" %}}
 
 | secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`file.json`           |[JSON][4001]                             |
 |`file.yaml`          |[YAML][4002]                        |                            |
+|`file.text`          |[TEXT][4003]                        |                            |
 
 ##### File permissions
-The file backend only requires **read** permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
+The file backend only requires **read** permissions for the configured JSON, YAML, or TEXT files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
 
 
 {{< tabs >}}
@@ -648,10 +937,51 @@ secret_backend_config:
   file_path: /path/to/secret.yaml
 ```
 {{% /tab %}}
-{{< /tabs >}}
 
-[4001]: https://en.wikipedia.org/wiki/JSON
-[4002]: https://en.wikipedia.org/wiki/YAML
+{{% tab "TEXT File Backend" %}}
+
+**Available in Agent version 7.75+**
+
+**Note**: Each secret must be stored in its own individual text file.
+
+##### Configuration example
+
+You can use individual text files to store secrets locally.
+
+For example, with text files in `/path/to/secrets/`:
+
+`/path/to/secrets/dd_api_key` containing:
+```
+your_api_key_value
+```
+
+`/path/to/secrets/dd_app_key` containing:
+```
+your_app_key_value
+```
+
+You can use this configuration to pull secrets from them:
+
+```yaml
+# datadog.yaml
+api_key: "ENC[dd_api_key]"
+app_key: "ENC[dd_app_key]"
+
+secret_backend_type: file.text
+secret_backend_config:
+  secrets_path: /path/to/secrets
+```
+
+##### Path security:
+
+- Relative paths in `ENC[]` are resolved relative to `secrets_path` (e.g., `ENC[dd_api_key]` with `secret_path: /path/to/secrets` will resolve to `/path/to/secrets/dd_api_key`)
+- Absolute paths in `ENC[]` must be within `secrets_path` (e.g., `ENC[/path/to/secrets/dd_api_key]` with `secret_path: /path/to/secrets` will work)
+- Path traversal attempts (e.g., `ENC[../etc/passwd]`) are blocked and will fail with "path outside allowed directory"
+
+**Note:** Some tools automatically add line breaks when exporting secrets to files. See [Remove trailing line breaks](#remove-trailing-line-breaks) for how to handle this.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 
@@ -1149,7 +1479,7 @@ The following errors indicate that something is missing in your setup.
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
 
-Datadog has a [Powershell script][1] to help you set the correct permission on your executable. Example on how to use it:
+Datadog has a [Powershell script][9] to help you set the correct permission on your executable. Example on how to use it:
 
 ```powershell
 .\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
@@ -1199,7 +1529,7 @@ To do so, follow those steps:
     sc.exe config DatadogAgent password= "a_new_password"
     ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][10] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -1217,8 +1547,8 @@ exit code:
 0
 ```
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
+[9]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
+[10]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1248,7 +1578,7 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 This command returns whether the permissions are valid for the Agent to view this Secret.
 
-### Remove trailing line breaks
+### Remove trailing line breaks {#remove-trailing-line-breaks}
 
 Some secret management tools automatically add a line break when exporting secrets through files. You can remove these line breaks by setting `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file][8], or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments.
 
@@ -1269,8 +1599,39 @@ instances:
 [1]: /agent/kubernetes/integrations/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [3]: https://docs.docker.com/engine/swarm/secrets/
-[4]: https://github.com/DataDog/datadog-secret-backend
-[5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /opentelemetry/setup/ddot_collector/
 [7]: /agent/configuration/agent-commands/#restart-the-agent
 [8]: /agent/configuration/agent-configuration-files/
+<!-- Links in tabs are scoped inside shortcodes, collapse-content links are not scoped -->
+<!-- AWS Secrets Manager and SSM Links -->
+[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+
+<!-- Azure KeyVault Links -->
+[2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+
+<!-- HashiCorp Vault Links -->
+[3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
+[3001]: https://developer.hashicorp.com/
+[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+
+<!-- File Backend Links (JSON/YAML) -->
+[4001]: https://en.wikipedia.org/wiki/JSON
+[4002]: https://en.wikipedia.org/wiki/YAML
+[4003]: https://en.wikipedia.org/wiki/TEXT
+
+<!-- GCP Secret Manager Links -->
+[5000]: https://cloud.google.com/security/products/secret-manager
+[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
+[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
+[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
+
+<!-- Docker Secrets Links -->
+[6001]: https://docs.docker.com/engine/swarm/secrets/
+[6002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
+[6003]: https://docs.docker.com/compose/how-tos/use-secrets/
+
+<!-- Kubernetes Secrets Links -->
+[7000]: https://kubernetes.io/docs/concepts/configuration/secret/

@@ -1782,7 +1782,7 @@ Attach structured prompt metadata to the LLM span so you can reproduce results, 
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#enriching-spans).
 
 #### Arguments
 
@@ -1841,15 +1841,71 @@ translation_template = PromptTemplate.from_template("Translate {text} to {langua
 chain = translation_template | llm
 {{< /code-block >}}
 
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+Use `llmobs.annotationContext({ prompt: ... }, () => { ... })` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#enriching-spans).
+
+#### Arguments
+
+{{% collapse-content title="Options" level="h4" expanded=false id="prompt-tracking-arguments" %}}
+
+`prompt`
+: required - object
+<br />An object that follows the Prompt schema below.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
+
+Supported properties:
+
+- `id` (string): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
+- `version` (string): Version tag for the prompt (for example, "1.0.0"). See [version tracking](#version-tracking) for more details.
+- `variables` (Record<string, string>): Variables used to populate the template placeholders.
+- `template` (string | List[Message]): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
+- `tags` (Record<string, string>): Tags to attach to the prompt run.
+- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+
+{{% /collapse-content %}}
+
+#### Example: single-template prompt
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+function answerQuestion(text) {
+    // Attach prompt metadata to the upcoming LLM span using LLMObs.annotation_context()
+    return llmobs.annotationContext({
+      prompt: {
+        id: "translation-template",
+        version: "1.0.0",
+        chat_template: [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
+        variables: {"lang": "fr", "text": text},
+        tags: {"team": "nlp"}
+      }
+    }, () => {
+      // Example provider call (replace with your client)
+      return openaiClient.chat.completions.create({
+          model: "gpt-4o",
+          messages: [{"role": "user", "content": f"Translate to fr: {text}"}]
+        });
+    });
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 #### Notes
 - Annotating a prompt is only available on LLM spans.
 - Place the annotation immediately before the provider call so it applies to the correct LLM span.
 - Use a unique prompt `id` to distinguish different prompts within your application.
 - Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
-- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
-
-{{% /tab %}}
-{{< /tabs >}}
+- For multiple auto-instrumented LLM calls within a block, use an annotation context to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
 
 ### Version tracking
 
@@ -1870,7 +1926,7 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 {{< tabs >}}
 {{% tab "Python" %}}
 
-#### Use case: Using a common model provider 
+#### Use case: Using a common model provider
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
 {{< code-block lang="python" >}}
@@ -1883,8 +1939,8 @@ def llm_call(prompt):
     # Annotate token metrics
     LLMObs.annotate(
         metrics={
-          "input_tokens": 50, 
-          "output_tokens": 120, 
+          "input_tokens": 50,
+          "output_tokens": 120,
           "total_tokens": 170,
           "non_cached_input_tokens": 13,  # optional
           "cache_read_input_tokens": 22,  # optional
@@ -1907,8 +1963,8 @@ def llm_call(prompt):
     # Annotate cost metrics
     LLMObs.annotate(
         metrics={
-          "input_cost": 3, 
-          "output_cost": 7, 
+          "input_cost": 3,
+          "output_cost": 7,
           "total_cost": 10,
           "non_cached_input_cost": 1,    # optional
           "cache_read_input_cost": 0.6,  # optional
@@ -1925,6 +1981,8 @@ def llm_call(prompt):
 ## Evaluations
 
 The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
+
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
@@ -2000,11 +2058,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be `categorical`, `score`, or `boolean`.
+<br />The type of the evaluation. Must be `categorical`, `score`, `boolean` or `json`.
 
 `value`
-: required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), or boolean (`metric_type==boolean`).
+: required - _string, numeric type, or dict_
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), boolean (`metric_type==boolean`), or dict (`metric_type==json`).
 
 `span`
 : optional - _dictionary_

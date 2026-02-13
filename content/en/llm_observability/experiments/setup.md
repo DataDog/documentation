@@ -12,7 +12,7 @@ If you have not already set up LLM Observability:
 1. Install Datadog's LLM Observability Python SDK:
 
    ```shell
-   pip install ddtrace>=4.1.0
+   pip install ddtrace>=4.3.0
    ```
 
 2. Enable LLM Observability:
@@ -79,23 +79,13 @@ An _experiment_ lets you systematically test your LLM application by running you
 - **task**: Defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
 - **evaluator**: A function, executed on each record, that measures how well the model or agent performs. Evaluators allow you to compare the output to either the expected output or the original input.  
 
-   Datadog supports the following evaluator types:  
-   - **Boolean**: returns true or false
-   - **score**: returns a numeric value (float)
-   - **categorical**: returns a labeled category (string)
-
 - **summary evaluators**: Optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
-
-   Datadog supports the following Summary Evaluator types:
-   - **Boolean**: returns true or false
-   - **score**: returns a numeric value (float)
-   - **categorical**: returns a labeled category (string)
 
 
 To create an experiment:
 
 
-1. Load a dataset
+### 1. Load a dataset
    ```python
    from ddtrace.llmobs import LLMObs
    from typing import Dict, Any, Optional, List
@@ -103,7 +93,7 @@ To create an experiment:
    dataset = LLMObs.pull_dataset("capitals-of-the-world")
    ```
 
-2. Define a task function that processes a single dataset record
+### 2. Define a task function that processes a single dataset record
 
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
@@ -118,7 +108,24 @@ To create an experiment:
    If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-4. Define evaluator functions.
+### 3. Define evaluators
+
+   Evaluators measure how well your model or agent performs on each record. You can define evaluators using two approaches:
+
+   - **Function-based**: Define a function that receives `input_data`, `output_data`, and `expected_output` as separate arguments. Best for one-off evaluators with straightforward logic.
+   - **Class-based**: Subclass `BaseEvaluator` for reusable evaluators with custom configuration. Class-based evaluators receive an `EvaluatorContext` object with full span context.
+
+   For detailed information on building evaluators, including the full data model reference and best practices, see the [Evaluation Developer Guide][4].
+
+   Datadog supports the following evaluator return types:
+   - **Boolean**: returns true or false
+   - **score**: returns a numeric value (float)
+   - **categorical**: returns a labeled category (string)
+   - **json**: returns structured data (dict)
+
+   You can also return an `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
+
+   #### Function-based evaluators
 
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
@@ -133,24 +140,75 @@ To create an experiment:
 
        return intersection / union
 
-   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
+   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
        fake_llm_call = "excellent"
-       return fake_llm_call
+       return EvaluatorResult(
+           value=fake_llm_call,
+           reasoning="the model explains itself",
+           assessment="pass", # or fail
+           tags={"task": "judge_llm_call"},
+       )
    ```
-   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
-   Evaluators can only return a string, a number, or a Boolean.
 
-5. (Optional) Define summary evaluator function(s).
+   #### Class-based evaluators
+
+   ```python
+   from ddtrace.llmobs import BaseEvaluator, EvaluatorContext, EvaluatorResult
+
+   class SemanticSimilarityEvaluator(BaseEvaluator):
+       def __init__(self, threshold: float = 0.8):
+           super().__init__(name="semantic_similarity")
+           self.threshold = threshold
+
+       def evaluate(self, context: EvaluatorContext) -> EvaluatorResult:
+           score = compute_similarity(context.output_data, context.expected_output)
+           return EvaluatorResult(
+               value=score,
+               reasoning=f"Similarity score: {score:.2f}",
+               assessment="pass" if score >= self.threshold else "fail",
+           )
+   ```
+
+### 4. (Optional) Define summary evaluators
+
+   Summary evaluators run after all record-level evaluators have finished, and receive the aggregated results to compute dataset-level statistics like averages or pass rates. Like record-level evaluators, you can define summary evaluators as functions or classes.
+
+   For the class-based approach using `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][4].
+
+   #### Function-based summary evaluators
 
    ```python
     def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
         return evaluators_results["exact_match"].count(True)
 
    ```
-   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
-   Summary evaluators can only return a string, a number, or a Boolean.
 
-6. Create and run the experiment.
+   Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
+
+   #### Class-based summary evaluators
+
+   ```python
+   from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
+
+   class AverageScoreEvaluator(BaseSummaryEvaluator):
+       def __init__(self, target_evaluator: str):
+           super().__init__(name="average_score")
+           self.target_evaluator = target_evaluator
+
+       def evaluate(self, context: SummaryEvaluatorContext):
+           scores = context.evaluation_results.get(self.target_evaluator, [])
+           if not scores:
+               return None
+           return sum(scores) / len(scores)
+   ```
+
+   Datadog supports the following Summary Evaluator return types:
+   - **Boolean**: returns true or false
+   - **score**: returns a numeric value (float)
+   - **categorical**: returns a labeled category (string)
+   - **json**: returns structured data (dict)
+
+### 5. Create and run the experiment.
    ```python
    experiment = LLMObs.experiment(
        name="capital-cities-test",
@@ -193,12 +251,14 @@ To create an experiment:
    results = experiment.run(raise_errors=True)
    ```
 
-7. View your experiment results in Datadog.
+### 6. Review your experiment results in Datadog.
    ```
    print(f"View experiment: {experiment.url}")
    ```
 
-### Setting up an automated experiment in CI/CD
+Note: LLM Experiments traces are retained for 90 days.
+
+### Setting up your experiment in CI/CD
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
 #### GitHub Actions
@@ -208,6 +268,7 @@ This section assumes you have completed the [setup](#setup), [projects](#create-
 
 ```python
 from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs import EvaluatorResult
 from typing import Dict, Any, Optional, List
 
 LLMObs.enable(
@@ -264,11 +325,14 @@ def overlap(
     return intersection / union
 
 
-def fake_llm_as_a_judge(
-    input_data: Dict[str, Any], output_data: str, expected_output: str
-) -> str:
+def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
     fake_llm_call = "excellent"
-    return fake_llm_call
+    return EvaluatorResult(
+        value=fake_llm_call,
+        reasoning="the model explains itself",
+        assessment="pass", # or fail
+        tags={"task": "judge_llm_call"},
+    )
 
 
 def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
@@ -320,3 +384,4 @@ jobs:
 [1]: /llm_observability/experiments/datasets
 [2]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[4]: /llm_observability/guide/evaluation_developer_guide

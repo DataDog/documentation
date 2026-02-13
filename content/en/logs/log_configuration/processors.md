@@ -13,6 +13,9 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "https://www.youtube.com/watch?v=OztSU3JzfC8&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=4&t=245s"
+  tag: "Video"
+  text: "Tips and tricks: Add business data to logs from retail endpoints"
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
@@ -1072,7 +1075,7 @@ The Decoder processor translates binary-to-text encoded string fields (such as B
 
 ## Threat intel processor
 
-Add the Threat Intel Process to evaluate logs against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+Add the Threat Intel Processor to evaluate logs against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
 
 For more information, see [Threat Intelligence][9].
 

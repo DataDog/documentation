@@ -443,8 +443,23 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_416487533",
+      "description": "Create a new dashboard with timeseries widget using order_by tags"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1259346254",
+      "description": "Create a new dashboard with timeseries widget using order_by values"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3520534424",
       "description": "Create a new dashboard with timeseries widget with custom_unit"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3631423980",
+      "description": "Create a new dashboard with timeseries widget without order_by for backward compatibility"
     },
     {
       "group": "dashboards",
@@ -888,6 +903,11 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_512760759",
+      "description": "Create a new metric SLO object using sli_specification returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_3765703239",

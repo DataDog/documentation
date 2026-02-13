@@ -14,33 +14,31 @@ further_reading:
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to improve your Incident Management'
-  - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+  - link: 'https://www.datadoghq.com/blog/mobile-incident-management-datadog/'
     tag: 'Blog'
-    text: 'More efficient pair programming with Datadog CoScreen'
+    text: 'Manage and resolve incidents on the go with the Datadog Mobile App'
   - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'
-  - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  - link: "https://www.datadoghq.com/blog/incident-response-with-datadog/"
     tag: "Blog"
-    text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+    text: "Incident Management with Datadog"
   - link: "https://www.datadoghq.com/blog/datadog-service-management/"
     tag: "Blog"
     text: "Ensure high service availability with Datadog Service Management"
-  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
+  - link: "https://www.datadoghq.com/blog/how-datadog-manages-incidents/"
     tag: "Blog"
-    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
+    text: "How we manage incidents at Datadog"
   - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
     tag: "Blog"
     text: "Unify remediation and communication with Datadog Incident Response"
 ---
 
-
-
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
 {{< /learning-center-callout >}}
 
-Datadog Incident Management helps your team members identify, mitigate, and analyze disruptions and threats to your organization's services. With Incident Management, you can design an automation-enhanced response process that helps your teams assemble around a shared framework and toolkit. You can also use incident analytics to evaluate the effectiveness of your incident response process. 
+Datadog Incident Management helps your team members identify, mitigate, and analyze disruptions and threats to your organization's services. With Incident Management, you can design an automation-enhanced response process that helps your teams assemble around a shared framework and toolkit. You can also use incident analytics to evaluate the effectiveness of your incident response process.
 
 Incidents live in Datadog alongside your metrics, traces, and logs. Your teams can declare incidents from monitor alerts, security signals, events, cases, and more. You can also configure monitors to [declare incidents automatically][30].
 
@@ -51,21 +49,42 @@ Incident Management requires no installation. Get started by taking a Learning C
 {{< whatsnext desc="Learn more about Incident Management:">}}
     {{< nextlink href="https://learn.datadoghq.com/courses/intro-to-incident-management" >}}Learn about Datadog Incident Management by working through a hands-on examples{{< /nextlink >}}
     {{< nextlink href="https://docs.datadoghq.com/getting_started/incident_management/" >}}Guided walkthrough of an Incident workflow{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/declare" >}}Declare an incident{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/investigate/declare" >}}Declare an incident{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## View your incidents
+## Billing
 
-To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents.
-- Filter your incidents through the properties listed on the left, including Status, Severity, and Time To Repair (hours).
-- Use the Search field to enter tag attributes or keywords.
-- Export your search results with the Export button at the top of the incident list.
-- Configure additional fields that appear for all incidents in [Incident Settings][2].
+Incident Management is a seat-based SKU. To learn more about how Incident Management is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
+
+## View and search for incidents
+
+To view your incidents, go to the [Incidents][1] page to see a feed of all ongoing incidents. You can filter your incidents through the properties listed on the left, export your search results, and configure additional fields that appear for all incidents in [Incident Settings][2].
+
+### Search examples
+
+Incident search uses the same event-based [search syntax][33] as Logs and Event Management. Combine `key:value` pairs with Boolean operators (`AND`, `OR`, `-`) to filter incidents.
+
+| Query | Description |
+|-------|-------------|
+| `severity:SEV-1` | Show all SEV-1 incidents |
+| `severity:(SEV-1 OR SEV-2) state:active` | Show all active SEV-1 or SEV-2 incidents |
+| `services:checkout AND -state:resolved` | Show unresolved incidents affecting the checkout service |
+| `teams:platform` | Show incidents assigned to the platform team |
+| `services:web*` | Show incidents affecting services starting with "web" |
+| `Root\ Cause\ Category:Bug ` | Show incidents with a specific root cause attribute |
+| `responder:john.smith@datadoghq.com ` | Show incidents where John Smith is a responder |
+
+### Filter and export
+
+- **Filter by properties**: Use the facet panel on the left to filter by Status, Severity, Time To Repair (hours), and other configured properties.
+- **Export search results**: Export your search results using the Export button at the top of the incident list.
+- **Save views**: Save your frequently used search queries and filters for quick access.
+
+### Mobile access
 
 You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
 {{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
-
 
 ## Describing the incident
 
@@ -107,10 +126,6 @@ Incident Management integrates with third-party applications, including:
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Zoom][24] to launch video calls for incidents.
 
-## Billing
-
-Incident Management is a seat-based SKU. To learn more about how Incident Management is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -120,11 +135,11 @@ Incident Management is a seat-based SKU. To learn more about how Incident Manage
 [3]: /mobile
 [4]: https://apps.apple.com/app/datadog/id1391380318
 [5]: https://play.google.com/store/apps/details?id=com.datadog.app
-[6]: /incident_response/incident_management/declare
+[6]: /incident_response/incident_management/investigate/declare
 [7]: /account_management/teams/
 [8]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [9]: /tracing/#2-instrument-your-application
-[10]: /incident_response/incident_management/analytics/
+[10]: /incident_response/incident_management/analytics_and_reporting/
 [11]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [12]: /integrations/pagerduty/
 [13]: /integrations/opsgenie/
@@ -134,7 +149,7 @@ Incident Management is a seat-based SKU. To learn more about how Incident Manage
 [17]: /integrations/webhooks/#sending-sms-through-twilio
 [18]: /integrations/statuspage/
 [19]: /integrations/servicenow/
-[20]: /incident_response/incident_management/describe
+[20]: /incident_response/incident_management/investigate/describe
 [21]: /coterm
 [22]: /integrations/confluence/
 [23]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
@@ -144,6 +159,7 @@ Incident Management is a seat-based SKU. To learn more about how Incident Manage
 [27]: /incident_response/on-call/
 [28]: /notebooks/
 [29]: /actions/workflows/
-[30]: /incident_response/incident_management/declare#from-a-monitor
+[30]: /incident_response/incident_management/investigate/declare#from-a-monitor
 [31]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [32]: /account_management/billing/incident_response/
+[33]: /getting_started/search/#event-based-queries

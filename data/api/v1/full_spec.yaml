@@ -4621,6 +4621,7 @@ components:
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
+      - flex_logs_starter
       - flex_stored_logs
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4705,6 +4706,7 @@ components:
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
+      - FLEX_LOGS_STARTER
       - FLEX_STORED_LOGS
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -6259,6 +6261,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - name
       - filter
@@ -6346,6 +6358,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - filter
       type: object
@@ -8080,6 +8102,7 @@ components:
       - spans
       - database_queries
       - network
+      - network_path
       example: rum
       type: string
       x-enum-varnames:
@@ -8092,6 +8115,7 @@ components:
       - SPANS
       - DATABASE_QUERIES
       - NETWORK
+      - NETWORK_PATH
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -8476,12 +8500,18 @@ components:
       - hide_query
       - hide_handles
       - hide_all
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
       - HIDE_ALL
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -8937,6 +8967,7 @@ components:
       - network-performance alert
       - cost alert
       - data-quality alert
+      - network-path alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8960,6 +8991,7 @@ components:
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
       - DATA_QUALITY_ALERT
+      - NETWORK_PATH_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -9163,6 +9195,8 @@ components:
       - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
+      - flex_logs_starter_usage
+      - flex_logs_starter_percentage
       - flex_stored_logs_usage
       - flex_stored_logs_percentage
       - functions_usage
@@ -9326,6 +9360,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
+      - FLEX_LOGS_STARTER_USAGE
+      - FLEX_LOGS_STARTER_PERCENTAGE
       - FLEX_STORED_LOGS_USAGE
       - FLEX_STORED_LOGS_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -9695,6 +9731,14 @@ components:
           type: number
         fargate_usage:
           description: The Fargate usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_percentage:
+          description: The percentage of Flex Logs Starter usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_usage:
+          description: The Flex Logs Starter usage by tags.
           format: double
           type: number
         flex_stored_logs_percentage:
@@ -11963,6 +12007,60 @@ components:
           example: UTC
           type: string
       type: object
+    SLOCountDefinition:
+      description: 'A count-based (metric) SLI specification, composed of three parts:
+        the good events formula, the total events formula,
+
+        and the underlying queries.'
+      example:
+        good_events_formula: query1 - query2
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        - data_source: metrics
+          name: query2
+          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+        total_events_formula: query1
+      properties:
+        good_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+        queries:
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          minItems: 1
+          type: array
+        total_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+      required:
+      - good_events_formula
+      - total_events_formula
+      - queries
+      type: object
+    SLOCountSpec:
+      additionalProperties: false
+      description: A metric SLI specification.
+      example:
+        count:
+          good_events_formula: query1 - query2
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          - data_source: metrics
+            name: query2
+            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+          total_events_formula: query1
+      properties:
+        count:
+          $ref: '#/components/schemas/SLOCountDefinition'
+      required:
+      - count
+      type: object
     SLOCreator:
       description: The creator of the SLO
       nullable: true
@@ -12810,8 +12908,12 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+          description: The metric query used to define a count-based SLO as the ratio
+            of good events to total events.
         sli_specification:
           $ref: '#/components/schemas/SLOSliSpec'
+          description: A generic SLI specification. This is currently used for time-slice
+            and count-based (metric) SLOs only.
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -12867,10 +12969,11 @@ components:
           type: number
       type: object
     SLOSliSpec:
-      description: A generic SLI specification. This is currently used for time-slice
-        SLOs only.
+      description: A generic SLI specification. This is used for time-slice and count-based
+        (metric) SLOs only.
       oneOf:
       - $ref: '#/components/schemas/SLOTimeSliceSpec'
+      - $ref: '#/components/schemas/SLOCountSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -14053,7 +14156,8 @@ components:
       - type
       type: object
     ServiceLevelObjectiveQuery:
-      description: 'A metric-based SLO. **Required if type is `metric`**. Note that
+      description: 'A count-based (metric) SLO query. This field is superseded by
+        `sli_specification` but is retained for backwards compatibility. Note that
         Datadog only allows the sum by aggregator
 
         to be used because this will sum up all request counts instead of averaging
@@ -17858,8 +17962,10 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
+      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access.
+        for restricting read and write access. This field is deprecated. Use the restriction
+        policies API to manage permissions.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -18493,12 +18599,18 @@ components:
       - hide_all
       - hide_query
       - hide_handles
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -21581,6 +21693,16 @@ components:
             current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ci_pipeline_indexed_spans_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
             in the current month for all organizations.
@@ -22711,6 +22833,16 @@ components:
           deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
             current date for the given org (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23855,6 +23987,16 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the
             current month for all organizations (To be deprecated on October 1st,
             2024).
+          format: int64
+          type: integer
+        ccm_spend_monitored_ent_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Enterprise in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Pro in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -26170,6 +26312,8 @@ components:
           $ref: '#/components/schemas/WidgetLineType'
         line_width:
           $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
         palette:
           description: Color palette to apply to the widget.
           type: string
@@ -26232,6 +26376,19 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    WidgetStyleOrderBy:
+      description: 'How to order series in timeseries visualizations.
+
+        - `tags`: Order series alphabetically by tag name (default behavior)
+
+        - `values`: Order series by their current metric values (typically descending)'
+      enum:
+      - tags
+      - values
+      type: string
+      x-enum-varnames:
+      - TAGS
+      - VALUES
     WidgetSummaryType:
       description: Which summary type should be used.
       enum:
@@ -32320,10 +32477,11 @@ paths:
         alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
         `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
         `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
-        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
-        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
-        documentation for more information.\n- Log monitors require an unscoped App
-        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        cloud cost: `cost alert`\n- network-path: `network-path alert`\n\n**Notes**:\n-
+        Synthetic monitors are created through the Synthetics API. See the [Synthetics
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        more information.\n- Log monitors require an unscoped App Key.\n\n#### Query
+        Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
         [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
         `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
         type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
@@ -32453,7 +32611,15 @@ paths:
         \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
         for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
         `forecast` supports `>`\n- `#` an integer or decimal number used to set the
-        threshold."
+        threshold.\n\n**Network Path Alert Query**\n\nExample: `network-path(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` The data type to monitor on - supports `netpath-path` and `netpath-hop`.\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold."
       operationId: CreateMonitor
       requestBody:
         content:
