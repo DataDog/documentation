@@ -19,7 +19,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
   tag: "Blog"
   text: "Deploy ASP.NET Core applications to Azure App Service"
-- link: "https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services"
+- link: "https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=azure-app-service#products"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
 ---

@@ -250,6 +250,53 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Date picker" level="h3" %}}
+Date picker components have the following properties.
+
+### General
+
+Label
+: The label displayed at the top of the date picker.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
+: The default date of the date picker, displayed as a UNIX timestamp in milliseconds.<br>
+**Value**: integer
+
+Allow Future Dates
+: Determines whether the date can be set after the current day's date.<br>
+**Provided values**: on, off
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: setValue<br>
+**Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays properties and values in JSON format. Values are displayed both as a UNIX timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
+
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
@@ -287,6 +334,22 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Divider" level="h3" %}}
+Divider components have the following properties.
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
+
 {{% /collapse-content %}}
 
 

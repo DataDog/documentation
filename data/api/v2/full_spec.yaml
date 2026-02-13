@@ -14335,7 +14335,7 @@ components:
                   key: cost_center
                   value: engineering
                 case_insensitivity: false
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 query: account_id:"123456789" AND service:"web-api"
               reference_table: null
           id: New Ruleset
@@ -14380,7 +14380,7 @@ components:
           example: false
           type: boolean
         mapping:
-          $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsMapping'
+          $ref: '#/components/schemas/DataAttributesRulesItemsMapping'
         metadata:
           $ref: '#/components/schemas/RulesetItemMetadata'
         name:
@@ -14395,31 +14395,6 @@ components:
       - enabled
       - name
       type: object
-    CreateRulesetRequestDataAttributesRulesItemsMapping:
-      description: The definition of `CreateRulesetRequestDataAttributesRulesItemsMapping`
-        object.
-      nullable: true
-      properties:
-        destination_key:
-          description: The `mapping` `destination_key`.
-          example: ''
-          type: string
-        if_not_exists:
-          description: The `mapping` `if_not_exists`.
-          example: false
-          type: boolean
-        source_keys:
-          description: The `mapping` `source_keys`.
-          example:
-          - ''
-          items:
-            type: string
-          type: array
-      required:
-      - destination_key
-      - if_not_exists
-      - source_keys
-      type: object
     CreateRulesetRequestDataAttributesRulesItemsQuery:
       description: The definition of `CreateRulesetRequestDataAttributesRulesItemsQuery`
         object.
@@ -14431,16 +14406,17 @@ components:
           description: The `query` `case_insensitivity`.
           type: boolean
         if_not_exists:
-          description: The `query` `if_not_exists`.
-          example: false
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `query` `if_not_exists`.
           type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
         query:
           description: The `query` `query`.
           example: ''
           type: string
       required:
       - addition
-      - if_not_exists
       - query
       type: object
     CreateRulesetRequestDataAttributesRulesItemsQueryAddition:
@@ -14474,8 +14450,12 @@ components:
             $ref: '#/components/schemas/CreateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems'
           type: array
         if_not_exists:
-          description: The `reference_table` `if_not_exists`.
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `reference_table`
+            `if_not_exists`.
           type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
         source_keys:
           description: The `reference_table` `source_keys`.
           example:
@@ -18180,6 +18160,42 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataAttributesRulesItemsIfTagExists:
+      description: The behavior when the tag already exists.
+      enum:
+      - append
+      - do_not_apply
+      - replace
+      type: string
+      x-enum-varnames:
+      - APPEND
+      - DO_NOT_APPLY
+      - REPLACE
+    DataAttributesRulesItemsMapping:
+      description: The definition of `DataAttributesRulesItemsMapping` object.
+      nullable: true
+      properties:
+        destination_key:
+          description: The `mapping` `destination_key`.
+          example: ''
+          type: string
+        if_not_exists:
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `mapping` `if_not_exists`.
+          type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
+        source_keys:
+          description: The `mapping` `source_keys`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - destination_key
+      - source_keys
+      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -31056,6 +31072,11 @@ components:
     InputSchemaParameters:
       description: The definition of `InputSchemaParameters` object.
       properties:
+        allowExtraValues:
+          description: The `InputSchemaParameters` `allowExtraValues`.
+          type: boolean
+        allowedValues:
+          description: The `InputSchemaParameters` `allowedValues`.
         defaultValue:
           description: The `InputSchemaParameters` `defaultValue`.
         description:
@@ -39852,6 +39873,8 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
+      required:
+      - max_size
       type: object
     ObservabilityPipelineElasticsearchDestination:
       description: 'The `elasticsearch` destination writes logs to an Elasticsearch
@@ -41103,6 +41126,10 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
+      required:
+      - max_size
       type: object
     ObservabilityPipelineMemoryBufferSizeOptions:
       description: Options for configuring a memory buffer by queue length.
@@ -41114,6 +41141,10 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
+      required:
+      - max_events
       type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
@@ -50240,13 +50271,13 @@ components:
                   key: abc
                   value: ww
                 case_insensitivity: false
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 query: billingcurrency:"USD" AND account_name:"SZA96462" AND billingcurrency:"USD"
               reference_table: null
             - enabled: true
               mapping:
                 destination_key: h
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 source_keys:
                 - accountname
                 - accountownerid
@@ -50266,7 +50297,7 @@ components:
                   output_key: status
                 - input_column: status_description
                   output_key: dess
-                if_not_exists: false
+                if_tag_exists: append
                 source_keys:
                 - http_status
                 - status_description
@@ -50299,13 +50330,13 @@ components:
                   key: environment
                   value: production
                 case_insensitivity: false
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 query: billingcurrency:"USD" AND account_name:"prod-account"
               reference_table: null
             - enabled: true
               mapping:
                 destination_key: team_owner
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 source_keys:
                 - account_name
                 - service
@@ -50325,7 +50356,7 @@ components:
                   output_key: status
                 - input_column: status_description
                   output_key: dess
-                if_not_exists: false
+                if_tag_exists: append
                 source_keys:
                 - http_status
                 - status_description
@@ -50350,7 +50381,7 @@ components:
                   key: cost_center
                   value: engineering
                 case_insensitivity: true
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 query: account_name:"dev-*"
               reference_table: null
             version: 1
@@ -50461,7 +50492,7 @@ components:
           example: false
           type: boolean
         mapping:
-          $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsMapping'
+          $ref: '#/components/schemas/DataAttributesRulesItemsMapping'
         metadata:
           $ref: '#/components/schemas/RulesetItemMetadata'
         name:
@@ -50476,31 +50507,6 @@ components:
       - enabled
       - name
       type: object
-    RulesetRespDataAttributesRulesItemsMapping:
-      description: The definition of `RulesetRespDataAttributesRulesItemsMapping`
-        object.
-      nullable: true
-      properties:
-        destination_key:
-          description: The `mapping` `destination_key`.
-          example: ''
-          type: string
-        if_not_exists:
-          description: The `mapping` `if_not_exists`.
-          example: false
-          type: boolean
-        source_keys:
-          description: The `mapping` `source_keys`.
-          example:
-          - ''
-          items:
-            type: string
-          type: array
-      required:
-      - destination_key
-      - if_not_exists
-      - source_keys
-      type: object
     RulesetRespDataAttributesRulesItemsQuery:
       description: The definition of `RulesetRespDataAttributesRulesItemsQuery` object.
       nullable: true
@@ -50511,16 +50517,17 @@ components:
           description: The `query` `case_insensitivity`.
           type: boolean
         if_not_exists:
-          description: The `query` `if_not_exists`.
-          example: false
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `query` `if_not_exists`.
           type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
         query:
           description: The `query` `query`.
           example: ''
           type: string
       required:
       - addition
-      - if_not_exists
       - query
       type: object
     RulesetRespDataAttributesRulesItemsQueryAddition:
@@ -50554,8 +50561,12 @@ components:
             $ref: '#/components/schemas/RulesetRespDataAttributesRulesItemsReferenceTableFieldPairsItems'
           type: array
         if_not_exists:
-          description: The `reference_table` `if_not_exists`.
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `reference_table`
+            `if_not_exists`.
           type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
         source_keys:
           description: The `reference_table` `source_keys`.
           example:
@@ -53705,6 +53716,8 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsBucketDuration'
         detectionTolerance:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsDetectionTolerance'
+        instantaneousBaseline:
+          $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptionsLearningDuration'
         learningPeriodBaseline:
@@ -54042,6 +54055,13 @@ components:
         or credentialed API access.'
       example: true
       type: boolean
+    SecurityMonitoringRuleInstantaneousBaseline:
+      description: When set to true, Datadog uses previous values that fall within
+        the defined learning window to construct the baseline, enabling the system
+        to establish an accurate baseline more rapidly rather than relying solely
+        on gradual learning over time.
+      example: false
+      type: boolean
     SecurityMonitoringRuleKeepAlive:
       description: 'Once a signal is generated, the signal will remain "open" if a
         case is matched at least once within
@@ -54115,7 +54135,7 @@ components:
         forgetAfter:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter'
         instantaneousBaseline:
-          $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline'
+          $ref: '#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline'
         learningDuration:
           $ref: '#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration'
         learningMethod:
@@ -54141,13 +54161,6 @@ components:
       - TWO_WEEKS
       - THREE_WEEKS
       - FOUR_WEEKS
-    SecurityMonitoringRuleNewValueOptionsInstantaneousBaseline:
-      description: When set to true, Datadog uses previous values that fall within
-        the defined learning window to construct the baseline, enabling the system
-        to establish an accurate baseline more rapidly rather than relying solely
-        on gradual learning over time.
-      example: false
-      type: boolean
     SecurityMonitoringRuleNewValueOptionsLearningDuration:
       default: 0
       description: 'The duration in days during which values are learned, and after
@@ -65499,13 +65512,13 @@ components:
                   key: cost_center
                   value: engineering
                 case_insensitivity: false
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 query: account_id:"123456789" AND service:"web-api"
               reference_table: null
             - enabled: true
               mapping:
                 destination_key: team_owner
-                if_not_exists: true
+                if_tag_exists: do_not_apply
                 source_keys:
                 - account_name
                 - account_id
@@ -65525,7 +65538,7 @@ components:
                   output_key: status
                 - input_column: status_description
                   output_key: dess
-                if_not_exists: false
+                if_tag_exists: append
                 source_keys:
                 - http_status
                 - status_description
@@ -65577,7 +65590,7 @@ components:
           example: false
           type: boolean
         mapping:
-          $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsMapping'
+          $ref: '#/components/schemas/DataAttributesRulesItemsMapping'
         metadata:
           $ref: '#/components/schemas/RulesetItemMetadata'
         name:
@@ -65592,31 +65605,6 @@ components:
       - enabled
       - name
       type: object
-    UpdateRulesetRequestDataAttributesRulesItemsMapping:
-      description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsMapping`
-        object.
-      nullable: true
-      properties:
-        destination_key:
-          description: The `mapping` `destination_key`.
-          example: ''
-          type: string
-        if_not_exists:
-          description: The `mapping` `if_not_exists`.
-          example: false
-          type: boolean
-        source_keys:
-          description: The `mapping` `source_keys`.
-          example:
-          - ''
-          items:
-            type: string
-          type: array
-      required:
-      - destination_key
-      - if_not_exists
-      - source_keys
-      type: object
     UpdateRulesetRequestDataAttributesRulesItemsQuery:
       description: The definition of `UpdateRulesetRequestDataAttributesRulesItemsQuery`
         object.
@@ -65628,16 +65616,17 @@ components:
           description: The `query` `case_insensitivity`.
           type: boolean
         if_not_exists:
-          description: The `query` `if_not_exists`.
-          example: false
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `query` `if_not_exists`.
           type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
         query:
           description: The `query` `query`.
           example: ''
           type: string
       required:
       - addition
-      - if_not_exists
       - query
       type: object
     UpdateRulesetRequestDataAttributesRulesItemsQueryAddition:
@@ -65671,8 +65660,12 @@ components:
             $ref: '#/components/schemas/UpdateRulesetRequestDataAttributesRulesItemsReferenceTableFieldPairsItems'
           type: array
         if_not_exists:
-          description: The `reference_table` `if_not_exists`.
+          deprecated: true
+          description: Deprecated. Use `if_tag_exists` instead. The `reference_table`
+            `if_not_exists`.
           type: boolean
+        if_tag_exists:
+          $ref: '#/components/schemas/DataAttributesRulesItemsIfTagExists'
         source_keys:
           description: The `reference_table` `source_keys`.
           example:
