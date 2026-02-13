@@ -32,6 +32,18 @@ Datadog analyzes metrics and sample data from DBM to identify your systems' high
 | **Query Regression**       | The query has seen a significant increase in total duration.                |                             |  <i class='icon-check-bold'>    |                             | <i class='icon-check-bold'> |                             |
 | **Unused Index**        | The index has not been used in any execution plans recently.                                                                                           | <i class='icon-check-bold'> |  <i class='icon-check-bold'> |                             | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
+## Take action on recommendations
+
+Datadog now provides ways to act on certain recommendations directly within Datadog.
+
+### Cancel a long running query
+
+When viewing a "Long Running Query" recommendation, you have the ability to directly cancel the query from within Datadog.
+
+See [the setup section][1] on how to enable Datadog to cancel queries in your database (Postgres only).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /database_monitoring/setup_postgres/advanced_configuration/#set-up-cancel-query-integration
