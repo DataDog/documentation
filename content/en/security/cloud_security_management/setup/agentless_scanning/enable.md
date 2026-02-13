@@ -95,8 +95,6 @@ Before setting up Agentless Scanning, ensure the following prerequisites are met
 
 ## Setup
 
-<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
-
 To enable Agentless Scanning, use one of the following workflows:
 
 - **[Quick start](#quick-start-setup)**: Guided setup for new users using AWS CloudFormation.
@@ -116,8 +114,6 @@ Designed for new users, the quick start workflow offers an efficient setup proce
 <div class="alert alert-info">This article provides instructions for the new user quick start workflow that uses AWS CloudFormation to set up Agentless Scanning.
 For existing users who want to add a new AWS account or enable Agentless Scanning on an existing integrated AWS account, see the instructions for
 <a href="#terraform-setup">Terraform</a> or <a href="#aws-cloudformation-setup">AWS CloudFormation</a>.</div>
-
-<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
 <div class="alert alert-danger">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
 
@@ -237,8 +233,6 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 
 <div class="alert alert-info">If you're setting up Cloud Security for the first time, you can follow the <a href="#quick-start-setup">quick start workflow</a>, which also uses AWS CloudFormation to enable Agentless Scanning.</div>
 
-<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
-
 <div class="alert alert-danger">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
 
 ##### Set up AWS CloudFormation
@@ -340,9 +334,7 @@ After the StackSet deploys successfully, the member accounts are configured to a
 Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script][21] that you can review, and then runs it to wrap the [Terraform Datadog Agentless Scanner module for GCP][22], making the installation process straightforward and without needing to manage Terraform directly.
 
 {{% collapse-content title="GCP Cloud Shell setup guide" level="h4" id="gcp-cloud-shell-setup" %}}
-If you've already [set up Cloud Security][10] and want to enable [Agentless Scanning][1] on an existing integrated GCP project, you can use Google Cloud Shell for a guided setup experience. This approach is recommended for GCP as it simplifies the Terraform installation by handling the configuration automatically.
-
-<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
+If you've already [set up Cloud Security][10] and want to enable [Agentless Scanning][1] on an existing integrated GCP project, you can use Google Cloud Shell for a guided setup experience.
 
 ##### Set up GCP Cloud Shell
 
@@ -368,8 +360,6 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 
 {{% collapse-content title="Azure Resource Manager setup guide" level="h4" id="azure-resource-manager-setup" %}}
 If you've already [set up Cloud Security][10] and want to add a new Azure account or enable [Agentless Scanning][1] on an existing integrated Azure account, you can use either [Terraform][7] or Azure Resource Manager. This article provides detailed instructions for the Azure Resource Manager approach.
-
-<div class="alert alert-danger">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
 {{< tabs >}}
 {{% tab "New Azure account" %}}
