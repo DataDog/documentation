@@ -1465,7 +1465,7 @@ menu:
       identifier: bits_ai_mcp_server
       parent: bits_ai
       weight: 4
-    - name: Set Up the Datadog MCP Server
+    - name: Setup
       url: bits_ai/mcp_server/setup
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
