@@ -70,7 +70,7 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add additional primary tags in Datadog
 
-If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Software Catalog Performance** tab. 
+If you need to aggregate your trace metrics across additional dimensions, Datadog recommends setting up additional primary tags in addition to the mandatory primary tag `env:<ENVIRONMENT>`. Additional primary tags are included in the price of an APM host, at no additional cost. Once configured, a second dropdown is available in the **Software Catalog Performance** tab. 
 
 Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
