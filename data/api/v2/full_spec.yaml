@@ -7283,6 +7283,51 @@ components:
         data:
           $ref: '#/components/schemas/BillingDimensionsMappingBody'
       type: object
+    BranchCoverageSummaryRequest:
+      description: Request object for getting code coverage summary for a branch.
+      properties:
+        data:
+          $ref: '#/components/schemas/BranchCoverageSummaryRequestData'
+      required:
+      - data
+      type: object
+    BranchCoverageSummaryRequestAttributes:
+      description: Attributes for requesting code coverage summary for a branch.
+      properties:
+        branch:
+          description: The branch name.
+          example: prod
+          minLength: 1
+          type: string
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+      - repository_id
+      - branch
+      type: object
+    BranchCoverageSummaryRequestData:
+      description: Data object for branch summary request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BranchCoverageSummaryRequestAttributes'
+        type:
+          $ref: '#/components/schemas/BranchCoverageSummaryRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    BranchCoverageSummaryRequestType:
+      description: JSON:API type for branch coverage summary request. The value must
+        always be `ci_app_coverage_branch_summary_request`.
+      enum:
+      - ci_app_coverage_branch_summary_request
+      example: ci_app_coverage_branch_summary_request
+      type: string
+      x-enum-varnames:
+      - CI_APP_COVERAGE_BRANCH_SUMMARY_REQUEST
     Budget:
       description: A budget.
       properties:
@@ -11738,6 +11783,51 @@ components:
       required:
       - location
       type: object
+    CommitCoverageSummaryRequest:
+      description: Request object for getting code coverage summary for a commit.
+      properties:
+        data:
+          $ref: '#/components/schemas/CommitCoverageSummaryRequestData'
+      required:
+      - data
+      type: object
+    CommitCoverageSummaryRequestAttributes:
+      description: Attributes for requesting code coverage summary for a commit.
+      properties:
+        commit_sha:
+          description: The commit SHA (40-character hexadecimal string).
+          example: 66adc9350f2cc9b250b69abddab733dd55e1a588
+          pattern: ^[a-fA-F0-9]{40}$
+          type: string
+        repository_id:
+          description: The repository identifier.
+          example: github.com/datadog/shopist
+          minLength: 1
+          type: string
+      required:
+      - repository_id
+      - commit_sha
+      type: object
+    CommitCoverageSummaryRequestData:
+      description: Data object for commit summary request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CommitCoverageSummaryRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CommitCoverageSummaryRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    CommitCoverageSummaryRequestType:
+      description: JSON:API type for commit coverage summary request. The value must
+        always be `ci_app_coverage_commit_summary_request`.
+      enum:
+      - ci_app_coverage_commit_summary_request
+      example: ci_app_coverage_commit_summary_request
+      type: string
+      x-enum-varnames:
+      - CI_APP_COVERAGE_COMMIT_SUMMARY_REQUEST
     CompletionCondition:
       description: The definition of `CompletionCondition` object.
       properties:
@@ -13248,6 +13338,123 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CoverageSummaryAttributes:
+      description: Attributes object for code coverage summary response.
+      properties:
+        codeowners:
+          additionalProperties:
+            $ref: '#/components/schemas/CoverageSummaryCodeownerStats'
+          description: Coverage statistics broken down by code owner.
+          nullable: true
+          type: object
+        evaluated_flags_count:
+          description: Total number of coverage flags evaluated.
+          example: 8
+          format: int64
+          type: integer
+        evaluated_reports_count:
+          description: Total number of coverage reports evaluated.
+          example: 12
+          format: int64
+          type: integer
+        patch_coverage:
+          description: Overall patch coverage percentage.
+          example: 70.1
+          format: double
+          nullable: true
+          type: number
+        services:
+          additionalProperties:
+            $ref: '#/components/schemas/CoverageSummaryServiceStats'
+          description: Coverage statistics broken down by service.
+          nullable: true
+          type: object
+        total_coverage:
+          description: Overall total coverage percentage.
+          example: 82.4
+          format: double
+          nullable: true
+          type: number
+      type: object
+    CoverageSummaryCodeownerStats:
+      description: Coverage statistics for a specific code owner.
+      properties:
+        evaluated_flags_count:
+          description: Number of coverage flags evaluated for the code owner.
+          example: 2
+          format: int64
+          type: integer
+        evaluated_reports_count:
+          description: Number of coverage reports evaluated for the code owner.
+          example: 4
+          format: int64
+          type: integer
+        patch_coverage:
+          description: Patch coverage percentage for the code owner.
+          example: 75.2
+          format: double
+          nullable: true
+          type: number
+        total_coverage:
+          description: Total coverage percentage for the code owner.
+          example: 88.7
+          format: double
+          nullable: true
+          type: number
+      type: object
+    CoverageSummaryData:
+      description: Data object for coverage summary response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CoverageSummaryAttributes'
+        id:
+          description: Unique identifier for the coverage summary (base64-hashed).
+          example: ZGQxMjM0NV9tYWluXzE3MDk1NjQwMDA=
+          type: string
+        type:
+          $ref: '#/components/schemas/CoverageSummaryType'
+      type: object
+    CoverageSummaryResponse:
+      description: Response object containing code coverage summary.
+      properties:
+        data:
+          $ref: '#/components/schemas/CoverageSummaryData'
+      type: object
+    CoverageSummaryServiceStats:
+      description: Coverage statistics for a specific service.
+      properties:
+        evaluated_flags_count:
+          description: Number of coverage flags evaluated for the service.
+          example: 3
+          format: int64
+          type: integer
+        evaluated_reports_count:
+          description: Number of coverage reports evaluated for the service.
+          example: 5
+          format: int64
+          type: integer
+        patch_coverage:
+          description: Patch coverage percentage for the service.
+          example: 72.3
+          format: double
+          nullable: true
+          type: number
+        total_coverage:
+          description: Total coverage percentage for the service.
+          example: 85.5
+          format: double
+          nullable: true
+          type: number
+      type: object
+    CoverageSummaryType:
+      description: JSON:API type for coverage summary response. The value must always
+        be `ci_app_coverage_summary`.
+      enum:
+      - ci_app_coverage_summary
+      example: ci_app_coverage_summary
+      type: string
+      x-enum-varnames:
+      - CI_APP_COVERAGE_SUMMARY
     Cpu:
       description: CPU usage statistics derived from historical Spark job metrics.
         Provides multiple estimates so users can choose between conservative and cost-saving
@@ -67830,6 +68037,7 @@ components:
             cloud_cost_management_write: Configure cloud cost accounts and global
               customizations. For more details, see the Cloud Cost Management docs.
             code_analysis_read: View Code Analysis.
+            code_coverage_read: View Code Coverage.
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             coterm_read: Read terminal recordings.
@@ -74582,6 +74790,121 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_filters_write
+  /api/v2/code-coverage/branch/summary:
+    post:
+      description: 'Retrieve aggregated code coverage statistics for a specific branch
+        in a repository.
+
+        This endpoint provides overall coverage metrics as well as breakdowns by service
+
+        and code owner.
+
+
+        **Note**: This endpoint requires the `code_coverage_read` permission.'
+      operationId: GetCodeCoverageBranchSummary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchCoverageSummaryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoverageSummaryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_coverage_read
+      summary: Get code coverage summary for a branch
+      tags:
+      - Code Coverage
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - code_coverage_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/code-coverage/commit/summary:
+    post:
+      description: 'Retrieve aggregated code coverage statistics for a specific commit
+        in a repository.
+
+        This endpoint provides overall coverage metrics as well as breakdowns by service
+
+        and code owner.
+
+
+        The commit SHA must be a 40-character hexadecimal string (SHA-1 hash).
+
+
+        **Note**: This endpoint requires the `code_coverage_read` permission.'
+      operationId: GetCodeCoverageCommitSummary
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommitCoverageSummaryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoverageSummaryResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal server error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_coverage_read
+      summary: Get code coverage summary for a commit
+      tags:
+      - Code Coverage
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - code_coverage_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/container_images:
     get:
       description: 'Get all Container Images for your organization.
@@ -104936,6 +105259,9 @@ tags:
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
   name: Cloudflare Integration
+- description: Retrieve and analyze code coverage data from Code Coverage. See the
+    [Code Coverage page](https://docs.datadoghq.com/code_coverage/) for more information.
+  name: Code Coverage
 - description: Manage your Datadog Confluent Cloud integration accounts and account
     resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/)
     for more information.
