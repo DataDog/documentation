@@ -142,7 +142,7 @@ Read more about sampling controls in the [Python tracing library documentation][
 {{% tab "Ruby" %}}
 **Remote configuration**
 
-Starting from version <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, for Ruby applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
+Starting from version <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, for Ruby applications, you may set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. You can also use the local configuration seen below.
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
