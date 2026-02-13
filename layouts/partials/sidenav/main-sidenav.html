@@ -4,13 +4,7 @@
     <div class="row sticky">
         <div class="col">
 
-            <div class="sidenav-header">
-                <p class="h4 text-brand-primary mb-0"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></p>
-                <button type="button" class="ask-ai-sidebar-btn" onclick="window.askDocsAI && window.askDocsAI()" title="Ask AI">
-                    <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/spark-ai.svg") }}' width="14" height="14" alt="" />
-                    <span>Ask AI</span>
-                </button>
-            </div>
+            <p class="h4 text-brand-primary"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></p>
             {{/*
                 load searchbar if not on search results page, else
                 append the searchbar asynchronously (async-loading.js)

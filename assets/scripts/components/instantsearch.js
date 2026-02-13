@@ -390,7 +390,13 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             }
         }
         else if (e.code === 'ArrowUp') {
-            if (currentSelectedIndex > 0) {
+            if (searchResultItems.length === 0) {
+                return;
+            }
+            if (currentSelectedIndex === -1) {
+                // Start keyboard navigation from the first item (Ask AI suggestion when present)
+                searchResultItems[0].classList.add('selected-item');
+            } else if (currentSelectedIndex > 0) {
                 searchResultItems[currentSelectedIndex].classList.remove('selected-item');
                 searchResultItems[currentSelectedIndex - 1].classList.add('selected-item');
             } else if (currentSelectedIndex === 0) {

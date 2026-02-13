@@ -165,21 +165,11 @@ const renderHits = (renderOptions, isFirstRender) => {
         addHitsToEmptyElements(containerDiv);
         hideOrShowElements(containerDiv);
         
-        // Auto-select first item for keyboard navigation
-        // First, clear any existing selection
+        // Keep keyboard selection opt-in: clear any stale selection on rerender,
+        // but do not auto-select an item until user presses arrow keys.
         containerDiv.querySelectorAll('.selected-item').forEach(item => {
             item.classList.remove('selected-item');
         });
-        // Select first regular search result if available, otherwise fall back to AI suggestion
-        const firstRegularItem = containerDiv.querySelector('.ais-Hits-item:not(.ais-Hits-category):not(.ais-Hits-ai-suggestion)');
-        if (firstRegularItem) {
-            firstRegularItem.classList.add('selected-item');
-        } else if (isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED) {
-            const aiSuggestion = containerDiv.querySelector('.ais-Hits-ai-suggestion');
-            if (aiSuggestion) {
-                aiSuggestion.classList.add('selected-item');
-            }
-        }
     };
 
     // Returns a bunch of <li>s

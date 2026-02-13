@@ -21,7 +21,7 @@ $conv-search-assistant-bg: #f4f4f5;
     padding: 0 16px;
     border-radius: 4px;
     background: $conv-search-purple; // Brand primary #632CA6
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.22);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -32,11 +32,12 @@ $conv-search-assistant-bg: #f4f4f5;
     font-weight: 500;
     font-family: inherit;
     box-shadow: 0 2px 12px rgba(99, 44, 166, 0.3);
-    transition: all 0.15s ease;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
     &:hover {
         background: $conv-search-purple-dark;
         box-shadow: 0 4px 16px rgba(99, 44, 166, 0.4);
+        transform: translateY(-1px);
     }
 
     &:active {
@@ -54,6 +55,7 @@ $conv-search-assistant-bg: #f4f4f5;
         flex-shrink: 0;
         filter: brightness(0) invert(1); // Make icon white
     }
+
 }
 
 // Overlay
@@ -696,9 +698,30 @@ $conv-search-assistant-bg: #f4f4f5;
 }
 
 .conv-search-sources-cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    // Subtle horizontal scrollbar styling
+    scrollbar-width: thin;
+    scrollbar-color: rgba($conv-search-text-muted, 0.4) transparent;
+
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba($conv-search-text-muted, 0.35);
+        border-radius: 999px;
+    }
 }
 
 .conv-search-source-card {
@@ -709,7 +732,10 @@ $conv-search-assistant-bg: #f4f4f5;
     border: 1px solid $conv-search-border;
     border-radius: 10px;
     background: $conv-search-surface;
-    min-width: 0;
+    min-width: 240px;
+    max-width: 320px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
 
     a {
         color: $conv-search-purple;
@@ -748,6 +774,7 @@ $conv-search-assistant-bg: #f4f4f5;
 }
 
 .conv-search-action-btn {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -770,26 +797,38 @@ $conv-search-assistant-bg: #f4f4f5;
         transform: scale(0.95);
     }
 
-    // Active state - only icon changes, not background
+    // Active state (thumbs up/down) - icon color only
     &.active {
-        color: $conv-search-purple;
+        background: rgba($conv-search-purple, 0.12);
         
-        // Still allow hover background change
         &:hover {
-            background: $conv-search-surface;
+            background: rgba($conv-search-purple, 0.18);
         }
     }
 
-    // Copied state - temporary feedback (icon only)
+    // Temporary feedback for copy action
     &.copied {
-        color: #10b981;
-        
-        &:hover {
-            background: $conv-search-surface;
+        background: rgba($conv-search-purple, 0.12);
+
+        &::after {
+            content: 'Copied!';
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            background: $conv-search-text;
+            color: $conv-search-bg;
+            font-size: 11px;
+            line-height: 1;
+            white-space: nowrap;
+            pointer-events: none;
         }
     }
 
-    svg {
+    svg,
+    img {
         width: 16px;
         height: 16px;
     }
@@ -928,57 +967,6 @@ $conv-search-assistant-bg: #f4f4f5;
 }
 
 // ============================================
-// Sidebar "Ask AI" Button (next to Datadog Docs title)
-// ============================================
-.sidenav-header {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-    margin-bottom: 16px;
-    
-    .h4 {
-        margin-bottom: 0;
-    }
-}
-
-.ask-ai-sidebar-btn {
-    display: none; // Hidden by default - shown via JS when feature flag is enabled
-    align-items: center;
-    gap: 5px;
-    padding: 3px 8px;
-    border: 1px solid rgba($conv-search-purple, 0.25);
-    border-radius: 4px;
-    background: transparent;
-    color: $conv-search-purple;
-    font-size: 11px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-    position: relative;
-    top: -1px;
-    
-    .conv-search-enabled & {
-        display: inline-flex;
-    }
-    
-    svg, img {
-        flex-shrink: 0;
-        width: 11px;
-        height: 11px;
-    }
-    
-    &:hover {
-        background: rgba($conv-search-purple, 0.08);
-        border-color: rgba($conv-search-purple, 0.4);
-    }
-    
-    &:active {
-        background: rgba($conv-search-purple, 0.12);
-    }
-}
-
-// ============================================
 // Home Page Search Row (search bar + AI button inline)
 // ============================================
 .home-search-row {
@@ -1027,22 +1015,6 @@ $conv-search-assistant-bg: #f4f4f5;
     }
 }
 
-@property --home-ai-sweep-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-}
-
-// Animate sweep angle without rotating the pseudo-element itself (prevents overflow artifacts).
-@keyframes home-ai-neon-sweep {
-    from {
-        --home-ai-sweep-angle: 0deg;
-    }
-    to {
-        --home-ai-sweep-angle: 360deg;
-    }
-}
-
 .home-ai-btn {
     $home-ai-main: rgb(79, 35, 132);
     display: none;
@@ -1060,17 +1032,16 @@ $conv-search-assistant-bg: #f4f4f5;
     font-weight: 600;
     font-family: inherit;
     letter-spacing: 0.4px;
-    text-transform: none; // Keep label casing exactly as provided in markup ("Ask AI")
     cursor: pointer;
     flex-shrink: 0;
     white-space: nowrap;
     position: relative;
     z-index: 0;
     isolation: isolate;
-    overflow: hidden; // Keep animated ring clipped to the button bounds
+    overflow: hidden;
     transition: background 0.15s ease;
 
-    // Static gradient ring on the whole border (no internal fill).
+    // Static gradient outline — contrasting purple ring (no animation)
     &::before {
         content: '';
         position: absolute;
@@ -1105,42 +1076,13 @@ $conv-search-assistant-bg: #f4f4f5;
         }
     }
 
-    // One moving highlight that travels around the full border ring.
-    &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        padding: 1px;
-        background: conic-gradient(
-            from var(--home-ai-sweep-angle),
-            rgba(139, 108, 246, 0) 0deg,
-            rgba(139, 108, 246, 0) 336deg,
-            rgba(210, 187, 255, 0.78) 346deg,
-            rgba(180, 148, 255, 0.5) 353deg,
-            rgba(139, 108, 246, 0) 360deg
-        );
-        animation: home-ai-neon-sweep 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        filter: drop-shadow(0 0 4px rgba(155, 122, 245, 0.35));
-        mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        z-index: 2;
-        pointer-events: none;
-    }
-
     .conv-search-enabled & {
         display: inline-flex;
     }
 
     span, svg, img {
         position: relative;
-        z-index: 3;
+        z-index: 1;
     }
 
     svg, img {
@@ -1156,13 +1098,6 @@ $conv-search-assistant-bg: #f4f4f5;
 
     &:active {
         background: darken($home-ai-main, 4%);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        &::after {
-            animation: none;
-            --home-ai-sweep-angle: 0deg;
-        }
     }
 }
 

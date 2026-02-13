@@ -6,7 +6,8 @@ import hljs from 'highlight.js';
 import { initializeFeatureFlags, getBooleanFlag } from 'scripts/helpers/feature-flags';
 
 const { env } = document.documentElement.dataset;
-const typesenseConfig = getConfig(env).typesense;
+const docsConfig = getConfig(env);
+const typesenseConfig = docsConfig.typesense;
 
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
@@ -695,28 +696,13 @@ class ConversationalSearch {
     }
 
     addMessageActions(messageDiv, query, response) {
-        const actionsDiv = document.createElement('div');
-        actionsDiv.className = 'conv-search-message-actions';
-        
-        // SVG icons - outline (default) and filled (active)
-        const thumbsUpOutline = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>`;
-        const thumbsUpFilled = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>`;
-        const thumbsDownOutline = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>`;
-        const thumbsDownFilled = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>`;
-        const copyOutline = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
-        const copyFilled = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
-        
-        actionsDiv.innerHTML = `
-            <button class="conv-search-action-btn" data-action="thumbs-up" data-outline="${encodeURIComponent(thumbsUpOutline)}" data-filled="${encodeURIComponent(thumbsUpFilled)}" title="Good response">
-                ${thumbsUpOutline}
-            </button>
-            <button class="conv-search-action-btn" data-action="thumbs-down" data-outline="${encodeURIComponent(thumbsDownOutline)}" data-filled="${encodeURIComponent(thumbsDownFilled)}" title="Bad response">
-                ${thumbsDownOutline}
-            </button>
-            <button class="conv-search-action-btn" data-action="copy" data-outline="${encodeURIComponent(copyOutline)}" data-filled="${encodeURIComponent(copyFilled)}" title="Copy response">
-                ${copyOutline}
-            </button>
-        `;
+        const template = document.getElementById('conv-search-actions-template');
+        if (!template) {
+            console.error('[Conversational Search] Template #conv-search-actions-template not found in DOM');
+            return;
+        }
+
+        const actionsDiv = template.content.firstElementChild.cloneNode(true);
 
         // Bind event handlers
         const buttons = actionsDiv.querySelectorAll('.conv-search-action-btn');
@@ -740,54 +726,36 @@ class ConversationalSearch {
             }
         };
 
-        // Helper to swap icon to filled/outline
-        const setButtonIcon = (btn, filled) => {
-            const icon = filled ? btn.dataset.filled : btn.dataset.outline;
-            if (icon) btn.innerHTML = decodeURIComponent(icon);
-        };
-
         switch (action) {
             case 'thumbs-up':
                 this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: 'positive' } });
                 button.classList.add('active');
-                setButtonIcon(button, true);
                 // Reset thumbs-down
                 const thumbsDown = button.parentElement.querySelector('[data-action="thumbs-down"]');
                 if (thumbsDown) {
                     thumbsDown.classList.remove('active');
-                    setButtonIcon(thumbsDown, false);
                 }
                 break;
 
             case 'thumbs-down':
                 this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: 'negative' } });
                 button.classList.add('active');
-                setButtonIcon(button, true);
                 // Reset thumbs-up
                 const thumbsUp = button.parentElement.querySelector('[data-action="thumbs-up"]');
                 if (thumbsUp) {
                     thumbsUp.classList.remove('active');
-                    setButtonIcon(thumbsUp, false);
                 }
                 break;
 
             case 'copy':
                 navigator.clipboard.writeText(response).then(() => {
                     this.logAction('Conversational Search Copy', logData);
-                    // Show copied feedback - filled icon for 3 seconds
-                    const originalTitle = button.title;
-                    const filledIcon = decodeURIComponent(button.dataset.filled);
-                    const outlineIcon = decodeURIComponent(button.dataset.outline);
-                    
-                    button.title = 'Copied!';
+                    // CSS handles visual feedback via .copied class
                     button.classList.add('copied');
-                    button.innerHTML = filledIcon;
                     
                     setTimeout(() => {
-                        button.title = originalTitle;
                         button.classList.remove('copied');
-                        button.innerHTML = outlineIcon;
-                    }, 3000);
+                    }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy:', err);
                 });
