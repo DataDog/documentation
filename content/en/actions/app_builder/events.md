@@ -32,9 +32,9 @@ In addition to working with events manually, you can use Bits AI to set up event
 App Builder provides functions for some types of app state changes. These functions are available in custom event reactions for specific components and in post-query hooks.
 
 
-fetch
+callback
 : Executes the query that you run this function on. This function is available for all components that offer the custom event reaction type.<br>
-**Example**: `query0.fetch()` executes the query named `query0`.
+**Example**: `query0.callback()` executes the query named `query0`.
 
 setIsOpen
 : Sets the status of a modal to open or closed based on the boolean value that you provide.<br>

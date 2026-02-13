@@ -60,13 +60,21 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Left Icon
+: Determines the icon displayed to the left of the button's label.<br>
+**Example values**: bell, download, folder 
+
+Right Icon
+: Determines the icon displayed to the right of the button's label<br>
+**Example values**: bell, download, folder 
+
 ### Events
 
 Event
 : **Value**: click
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Function
 : fetch<br>
@@ -76,7 +84,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -101,17 +109,37 @@ Unit
 : The unit associated with the value.<br>
 **Value**: string or expression
 
+Additional Text
+: The text that displays beneath the Value and Unit in the callout.<br>
+**Value**: string or expression
+
 ### Style
 
 Style
 : The visual style of the component.<br>
-**Provided values**: default, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green
+**Example values**: default, primary, success, warning
 
 Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
 **Provided values**: sm, md, lg, xl
 
+Centered 
+: Determines whether the text displays in the center of the callout.<br>
+**Provided values**: on, off
+
+Borderless
+: Determines whether the callout has a border.<br>
+**Provided values**: on, off
+
 ### Appearance
+
+Left Icon
+: Determines the icon displayed to the left of the callout's Value and Unit.<br>
+**Example values**: bell, download, folder
+
+Direction
+: Determines the direction of the arrow displayed to the right of the callout's Value and Unit.<br>
+**Provided values**: up, down, none
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -127,7 +155,7 @@ Is Visible
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -143,6 +171,10 @@ Checkbox components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
 Options
@@ -161,6 +193,10 @@ Options
         }
       ]}
       ```
+
+Default Is Checked
+: The default state of the checkbox. If not provided, the checkbox will be unchecked by default.<br>
+**Value**: expression
 
 ### Appearance
 
@@ -182,17 +218,18 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
-State Function
-: fetch<br>
+
+State Functions
+: fetch, setIsChecked<br>
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -210,9 +247,13 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Has Background
+: Determines whether the container has a background.<br>
+**Provided values**: on, off
+
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 ### Example
 
@@ -220,14 +261,28 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-
 {{% collapse-content title="Custom chart" level="h3" %}}
 Custom chart components have the following properties.
 
 ### General
 
+Data Sources 
+: A string representing chart data. 
+
 Vega Specification
 : A string representing a valid Vega-Lite or Vega JSON specification.
+
+Title
+: The title of the chart.<br>
+**Value**: string or expression
+
+Error Message 
+: The message displayed if the chart's code encounters an error.
+**Value**: string or expression
+
+Error Description
+: The description of the error message. 
+**Value**: string or expression
 
 ### Appearance
 
@@ -239,9 +294,13 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Show Borders 
+: Determines whether the chart displays borders on its edges.<br> 
+**Provided values**: on, off
+
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -250,13 +309,68 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Date picker" level="h3" %}}
+Date picker components have the following properties.
+
+### General
+
+Label
+: The label displayed at the top of the date picker.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
+: The default date that the date picker displays.<br>
+**Value**: integer
+
+Allow Future Dates
+: Determines whether the date can be set after the current day's date.<br>
+**Provided values**: on, off
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: fetch, setValue<br>
+**Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays properties and values in JSON format. Values are displayed both as a Unix timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
+
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
 ### General
 
-Default timeframe
+Label
+: The label that displays above the date range picker.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Timeframe
 : The default timeframe that the date picker displays.<br>
 **Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
 
@@ -272,17 +386,17 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
-State Function
-: fetch<br>
+State Functions
+: fetch, setValue<br>
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format. Values are displayed both as a Unix timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
 
 ### Example
 
@@ -327,17 +441,153 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Form" level="h3" %}}
+Form components have the following properties.
+
+### General
+
+Title
+: The title of the form.<br>
+**Value**: string or expression
+
+Default Value
+: The default value that the app populates in the form. To populate a specific field, you can use JSON notation, such as `{"org":"frontend"}` to populate the `org` field with the value `frontend`.<br>
+**Value**: string or expression
+
+### Fields
+
+Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, `text`, or `checkbox`.
+
+Fields have some or all of the following properties depending on their field type:
+
+Field Name
+: The unique identifier for a field. You can use this identifier to reference the field in an expression.<br>
+**Value**: string or expression
+
+Label
+: The label that displays above the field.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the field. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Validations
+: The rules to ensure users enter valid input. All rules must pass for validation to succeed.
+**Provided values**: pattern, minimum length, maximum length, custom rule
+
+Content
+: The content that displays in a `text` field.<br>
+**Value**: string or expression
+
+Options
+: The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
+You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
+
+Placeholder Text
+: The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
+**Value**: string or expression
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the field is visible in the form.<br>
+**Provided values**: on, off
+
+Is Required
+: Determines whether the field is required in order to submit the form.<br>
+**Provided values**: on, off
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: submit, change
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: fetch, setValue<br>
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays properties and values in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Image" level="h3" %}}
+Image components have the following properties.
+
+### General 
+
+Source
+: The image to display.<br>
+**Values**: URL or file
+
+### Appearance
+
+Fit
+: Determines the dimensions of the image within the bounds of the image component.<br>
+**Provided values**: fill, contain, cover, none
+
+Padding
+: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
+**Provided values**: none, small, medium, large
+
+Vertical Alignment
+: Determines the vertical position of the image within the bounds of the image component.<br>
+**Provided values**: align top, align center, align bottom
+
+Horizontal Alignment 
+: Determines the horizontal position of the image within the bounds of the image component.<br>
+**Provided values**: align left, align center, align right
+
+Border
+: Determines whether the image component has a visual border around its edges.<br>
+**Provided values**: on, off
+
+Transparent Background
+: Determines whether the background inside the image component is transparent.<br>
+**Provided values**: on, off
+
+Is Loading
+: Determines whether a loading icon is displayed while the image is being loaded.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
@@ -372,89 +622,7 @@ Is Loading
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
-
-{{% /collapse-content %}}
-
-
-{{% collapse-content title="Form" level="h3" %}}
-Form components have the following properties.
-
-### General
-
-Title
-: The title of the form.<br>
-**Value**: string or expression
-
-Default value
-: The default value that the app populates in the form. To populate a specific field, you can use JSON notation, such as `{"org":"frontend"}` to populate the `org` field with the value `frontend`.<br>
-**Value**: string or expression
-
-### Fields
-
-Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, or `text`.
-
-Fields have some or all of the following properties depending on their field type:
-
-Field name
-: The unique identifier for a field. You can use this identifier to reference the field in an expression.<br>
-**Value**: string or expression
-
-Label
-: The label that displays above the field.<br>
-**Value**: string or expression
-
-Content
-: The content that displays in a `text` field.<br>
-**Value**: string or expression
-
-Options
-: The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
-You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
-
-Placeholder text
-: The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
-**Value**: string or expression
-
-Is Disabled
-: Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off
-
-Is Visible
-: Determines whether the field is visible in the form.<br>
-**Provided values**: on, off
-
-Is Required
-: Determines whether the field is required in order to submit the form.<br>
-**Provided values**: on, off
-
-### Appearance
-
-Is Visible
-: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off
-
-Is Disabled
-: Applies disabled styling and removes interactions.<br>
-**Provided values**: on, off
-
-### Events
-
-Event
-: **Value**: submit, change, validate
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
-
-For more information on events, see [Events][1].
-
-### Inspect data
-
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
@@ -467,7 +635,11 @@ JSON input components have the following properties.
 Label
 : The text that displays at the top of the component.
 
-Default value
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
 : The default JSON value that the component displays.
 
 ### Appearance
@@ -475,6 +647,10 @@ Default value
 Is Read Only
 : Determines whether the component is read only.<br>
 **Provided values**: on, off
+
+Default View Mode
+: Determines whether the JSON data is displayed as raw text or as a graphical interface.<br>
+**Provided values**: raw, GUI 
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
@@ -486,17 +662,17 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
-State Function
-: fetch<br>
+State Functions
+: fetch, setValue<br>
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 {{% /collapse-content %}}
 
 
@@ -523,22 +699,20 @@ Is Visible
 ### Events
 
 Event
-: **Values**: toggleOpen, close, open
+: **Values**: toggle open, close, open
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setIsOpen<br>
+: fetch, setIsOpen<br>
 **Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 ### Example
 
@@ -554,11 +728,15 @@ Label
 : The text that displays at the top of the component.<br>
 **Value**: string or expression
 
-Default value
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
 : The default value that the app populates in the input box.<br>
 **Value**: number or expression that evaluates to a number
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -588,19 +766,17 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setValue<br>
+: fetch, setValue<br>
 **Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -617,6 +793,10 @@ Radio components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
 Options
@@ -636,7 +816,7 @@ Options
      ]}
      ```
 
-Default value
+Default Value
 : The value that is selected when the radio loads.<br>
 **Value**: string or expression
 
@@ -656,19 +836,17 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setValue<br>
+: fetch, setValue<br>
 **Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 {{% /collapse-content %}}
 
 
@@ -707,7 +885,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Relationships
 
@@ -726,11 +904,11 @@ Search components have the following properties.
 
 ### General
 
-Default value
+Default Value
 : The default value that the app populates in the search box.<br>
 **Value**: string or expression
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -738,7 +916,11 @@ Placeholder text
 
 Size
 : The scale of the search component.<br>
-**Provided values**: sm, md, lg
+**Provided values**: md, lg
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -754,19 +936,17 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setValue<br>
+: fetch, setValue<br>
 **Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -780,6 +960,10 @@ Select components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
 Placeholder text
@@ -803,12 +987,16 @@ Options
       ]}
       ```
 
-Default value
+Default Value
 : The value that is selected when the select loads.<br>
 **Value**: string or expression
 
 Is Multiselect
 : Determines whether the user can select more than one option at a time.<br>
+**Provided values**: on, off
+
+Is Clearable
+: Determines whether a user can clear selected value(s).
 **Provided values**: on, off
 
 ### Appearance
@@ -827,19 +1015,17 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setValue<br>
+: fetch, setValue<br>
 **Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -847,7 +1033,47 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Tab" level="h3" %}}
+{{% collapse-content title="Side panel" level="h3" %}}
+Side panel components have the following properties.
+
+### General 
+
+Title
+: The title for the side panel.<br>
+**Value**: string
+
+### Appearance
+
+Width
+: Determines the width of the side panel.<br>
+**Value**: integer
+
+Hide Close Button
+: Determines whether side panel displays an X to close the panel.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: toggle open, close, open
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: fetch, setIsOpen<br>
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays properties and values in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Tabs" level="h3" %}}
 
 Tab components have the following properties.
 
@@ -855,6 +1081,13 @@ Tab components have the following properties.
 
 A list of tab views. Use the **+ (plus)** to add additional views.
 
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
 
 ### Style
 
@@ -891,21 +1124,20 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setTabIndex<br>
+: fetch, setTabIndex<br>
 **Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
+
 
 {{% collapse-content title="Table" level="h3" %}}
 
@@ -914,14 +1146,22 @@ Table components have the following properties.
 ### General
 
 Title
-: A title for the table. Select **Markdown** for custom formatting.<br>
+: A title for the table. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Value**: string
 
-Data source
+Title Alignment
+: Determines the horizontal alignment of the title within the table.<br>
+**Provided values**: align left, align center, align right
+
+Data Source
 : The array of objects to display in a table.<br>
-**Values**: query, demo data, components
+**Values**: action, query, demo data, components, data transformation
 
 ### Columns
+
+Auto update columns
+: Determines whether the columns automatically update based on incoming data structure. When disabled, you can manually refresh columns.<br>
+**Provided values**: on, off
 
 Each column of data from the data source is represented here and has the following properties:
 
@@ -937,12 +1177,12 @@ Formatting
 : The type of format that the column takes on.<br>
 **Provided values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
 
-Sortable
-: Determines whether the user can sort by the column.<br>
-
 Copyable
 : Determines whether the user can click to copy the contents of the column.<br>
 **Provided values**: on, off
+
+Sortable
+: Determines whether the user can sort by the column.<br>
 
 Filterable
 : Determines whether a filter option is available for the column.<br>
@@ -952,11 +1192,11 @@ Some columns have additional properties based on their **Formatting** property.
 
 ### Pagination
 
-Has summary
+Has Summary
 : Determines whether to display a pagination summary directly above the table.<br>
 **Provided values**: on, off
 
-Page size
+Page Size
 : Number of rows per page to display.<br>
 **Value**: number or expression that evaluates to a number
 
@@ -999,6 +1239,10 @@ Disabled
 : Applies disabled styling and removes interactions.<br>
 **Provided values**: on, off
 
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
 Level
 : Controls the color of the button according to its intent.<br>
 **Provided values**: default, danger, success, warning
@@ -1022,27 +1266,27 @@ Is Loading
 : Shows a loading indicator.<br>
 **Provided values**: on, off
 
-Has text wrapping
+Has Text Wrapping
 : Determines whether cell text wraps.<br>
 **Provided values**: on, off
 
-Has subrows
+Has Subrows
 : Enables subrows for each row. Include the `subRows` property in the data source.<br>
 **Provided values**: on, off
 
-Is searchable
+Is Searchable
 : Determines whether to add a search bar to the table. <br>
 **Provided values**: on, off
 
-Show sort options
+Show Sort Options
 : Adds a **Sort** button to the table that gives users sorting options.<br>
 **Provided values**: on, off
 
-Show column options
+Show Column Options
 : Adds a **Columns** button to the table for displaying, hiding, or reorganizing table columns.<br>
 **Provided values**: on, off
 
-Has date range filter
+Has Date Range Filter
 : Adds a date range filter to the table.<br>
 **Provided values**: on, off
 
@@ -1050,10 +1294,14 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Empty State Caption
+: The text that is displayed in a column when there is no data to retrieve.<br>
+**Value**: string or expression
+
 ### Events
 
 Event
-: **Values**: pageChange, tableRowClick
+: **Values**: page change, table row click
 
 Reaction
 : **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
@@ -1070,7 +1318,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -1087,21 +1335,17 @@ Text components have the following properties.
 
 ### General
 
-Content
-: The content that the component displays.<br>
+Title
+: The text that the component displays. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Value**: string or expression
-
-Content type
-: Determines how to render the text. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
-**Provided values**: plain text, Markdown
 
 ### Appearance
 
-Text alignment
+Text Alignment
 : Determines the horizontal alignment of the text within the component.<br>
 **Provided values**: align left, align center, align right
 
-Vertical alignment
+Vertical Alignment
 : Determines the vertical alignment of the text within the component.<br>
 **Provided values**: align top, align center, align bottom
 
@@ -1111,7 +1355,7 @@ Is Visible
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Relationships
 
@@ -1130,11 +1374,15 @@ Label
 : The text that displays at the top of the component.<br>
 **Value**: string or expression
 
-Default value
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
 : The value that is selected when the text area loads.<br>
 **Value**: string or expression
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -1154,19 +1402,17 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setValue<br>
+: fetch, setValue<br>
 **Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 {{% /collapse-content %}}
 
 
@@ -1177,11 +1423,15 @@ Label
 : The text that displays at the top of the component.<br>
 **Value**: string or expression
 
-Default value
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
 : The value that is selected when the text input loads.<br>
 **Value**: string or expression
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -1201,19 +1451,17 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
-**Example**: See [events][9].
-: setValue<br>
+: fetch, setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
 
 For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
