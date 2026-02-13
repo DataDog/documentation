@@ -227,6 +227,22 @@ Runtime application security data is sent with APM traces. See [APM troubleshoot
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][19].
 
+## How are committers calculated for Code Security?
+A **committer** is an active Git contributor identified through the `author_email` field in Git commit metadata.
+
+A committer is counted toward billing if they make **at least 3 commits within a given calendar month** in repositories where Code Security is enabled.
+
+Each unique author email address counts as a separate committer. Multiple commits using the same author email count as one committer. Commits associated with different email addresses count separately.
+
+### Which email addresses are counted as committers?
+Committers are identified based on the normalized `author_email` value in Git commit metadata.
+
+Commits finalized by known GitHub system accounts such as `noreply@github.com` and `actions@github.com` are not counted.
+
+Commits using `@users.noreply.github.com` are counted unless the email corresponds to a recognized system or automation account. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit is attributable to an individual developer, it counts toward billing.
+
+If you need clarification on how committers are counted in your environment, [contact Datadog Support][1].
+
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
