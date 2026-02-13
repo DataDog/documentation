@@ -37,7 +37,7 @@ Telemetry data will not be available in the following situations:
 
 * No service instances have been active in the last 15 minutes.
 * Instrumentation telemetry has not been disabled in configuration.
-* The instrumentation telemetry intake endpoint is accessible (see Network Destinations)[3]
+* The instrumentation telemetry intake endpoint is accessible (see [Network Destinations][3])
 
 [1]: /tracing/trace_collection/runtime_config
 [2]: /agent/fleet_automation/remote_management
