@@ -37,8 +37,6 @@ Failure to Answer evaluations identify instances where the LLM fails to deliver 
 
 #### Configure a Failure to Answer evaluation
 
-<div class="alert alert-info">Datadog supports configuring Failure to Answer evaluation categories for providers and models that support structured output.</div>
-
 Datadog provides the following categories of Failure to Answer, listed in the following table. The template defaults to having `Empty Response` and `Refusal Response` marked as failing, but this can be configured to your specific use case.
 
 | Category | Description | Example(s) |
@@ -60,8 +58,6 @@ Prompt Injection evaluations identify attempts by unauthorized or malicious auth
 | Evaluated on Input | [Prompt Injection][5] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
 #### Configure a Prompt Injection evaluation
-
-<div class="alert alert-info">Datadog supports configuring Prompt Injection evaluation categories if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
 
 You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table. The template defaults to have every category flagged as a prompt injection attempt.
 
@@ -108,8 +104,6 @@ Toxicity evaluations evaluates each input and output prompt from the user and th
 
 #### Configure a Toxicity evaluation
 
-<div class="alert alert-info">Datadog supports configuring Toxicity evaluation categories for providers and models that support structured output.</div>
-
 You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table. The template defaults to have every category except profanity and user dissatisfaction selected to be flagged as toxic.
 
 | Category | Description |
@@ -136,7 +130,7 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 |---|---|
 | Evaluated on LLM spans | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
-##### How to Use
+#### How to Use
 
 This evaluation works by analyzing a session to determine if all user intentions were successfully addressed. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
 
@@ -236,7 +230,6 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][21]** to run this evaluation.  
 
 #### How to use
-<div class="alert alert-info">Tool argument correctness is only available for OpenAI and Azure OpenAI.</div>
 
 1. Install `dd-trace` v3.12+.
 1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
