@@ -58,7 +58,7 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
 
 {{% collapse-content title="Support for ESMAScript Modules (ESM)" level="h4" expanded=false id="esm-support" %}}
-Automatic instrumentation for ESM projects is supported starting from `dd-trace@>=5.38.0`. To enable automatic instrumentation in your ESM projects, use the [command-line setup](/llm_observability/instrumentation/sdk/?tab=nodejs#command-line-setup) and the following Node option when running your application:
+Automatic instrumentation for ESM projects is supported starting from `dd-trace@>=5.38.0`. To enable automatic instrumentation in your ESM projects, use the [command-line setup][1] and the following Node.js option when running your application:
 
 ```bash
 --import dd-trace/initialize.mjs
