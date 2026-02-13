@@ -439,7 +439,7 @@ The LangChain integration instruments the following methods:
 {{% tab "Node.js" %}}
 The [LangChain integration][1] provides automatic tracing for the [LangChain Node.js SDK's][2] LLM, chat model, chain, and OpenAI embeddings calls.
 
-**Package name:** `langchain`, `@langchain/openai`, `@langchain/anthropic`, and [other langchain partner packages][10]
+**Package name:** `langchain`, `@langchain/openai`, `@langchain/anthropic`, and [other langchain partner packages][7]
 **Integration name:** `langchain`
 
 ### Traced methods
