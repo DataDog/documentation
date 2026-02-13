@@ -2179,7 +2179,7 @@ The `evaluationOptions` object can contain the following:
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (for categorical `metric_type`), number (for score `metric_type`), boolean (for boolean `metric_type`) or a JSON object (for json `metric_type`).
+<br />The value of the evaluation. Must be a string (for categorical `metric_type`), number (for score `metric_type`), boolean (for boolean `metric_type`), or a JSON object (for json `metric_type`).
 
 `tags`
 : optional - _dictionary_
