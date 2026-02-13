@@ -444,6 +444,11 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Create tag pipeline ruleset returns \"OK\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_1897535856",
+      "description": "Create tag pipeline ruleset with if_tag_exists returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -479,6 +484,11 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update tag pipeline ruleset returns \"OK\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_1964644735",
+      "description": "Update tag pipeline ruleset with if_tag_exists returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -1207,6 +1217,16 @@
       "group": "observability_pipelines",
       "suffix": "",
       "description": "Create a new pipeline returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3363445359",
+      "description": "Create a pipeline with dedupe processor with cache returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_581245895",
+      "description": "Create a pipeline with dedupe processor without cache returns \"OK\" response"
     }
   ],
   "UpdatePipeline": [
@@ -1553,6 +1573,11 @@
       "group": "security_monitoring",
       "suffix": "_2323193894",
       "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3355193622",
+      "description": "Create a detection rule with detection method 'anomaly_detection' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",

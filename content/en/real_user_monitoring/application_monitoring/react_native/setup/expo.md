@@ -313,9 +313,9 @@ Then, import it before initializing the Datadog React Native SDK:
 
 ```typescript
 import './mockDatadog';
-import { DdSdkReactNative } from 'expo-datadog';
+import { CoreConfiguration } from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(/* your config */);
+const config = new CoreConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
 ```
 
@@ -461,11 +461,12 @@ The most common patterns of Expo dev server host URL are filtered by the SDK, th
 If this error occurs, add the following Resource mapper to filter out the calls:
 
 ```js
-import { DdSdkReactNativeConfiguration } from 'expo-datadog';
+import { CoreConfiguration } from 'expo-datadog';
+
 import Constants from 'expo-constants';
 
-const config = new DdSdkReactNativeConfiguration(/* your config */);
-config.resourceEventMapper = event => {
+const config = new CoreConfiguration(/* your config */);
+config.rumConfiguration.resourceEventMapper = event => {
   if (
     event.resourceContext?.responseURL ===
     `http://${Constants.expoConfig.hostUri}/logs`

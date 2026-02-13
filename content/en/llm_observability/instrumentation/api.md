@@ -419,6 +419,28 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "metric_type": "boolean",
           "label": "Topic Relevancy",
           "boolean_value": true,
+        },
+        {
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
+          "metric_type": "json",
+          "label": "Custom Evaluation",
+          "json_value": {
+            "verdict": "pass",
+            "confidence": 0.95,
+            "is_valid": true,
+            "metrics": {
+              "accuracy": 0.92,
+              "precision": 0.88
+            },
+            "passed_checks": ["coherence", "relevance", "factuality"]
+          }
         }
       ]
     }
@@ -493,6 +515,31 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "metric_type": "boolean",
           "label": "Topic Relevancy",
           "boolean_value": true,
+        },
+        {
+          "id": "abc1234-h4i5-6j78-9k01-lmn2opq3rst4",
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
+          "span_id": "20245611112024561111",
+          "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
+          "metric_type": "json",
+          "label": "Custom Evaluation",
+          "json_value": {
+            "verdict": "pass",
+            "confidence": 0.95,
+            "is_valid": true,
+            "metrics": {
+              "accuracy": 0.92,
+              "precision": 0.88
+            },
+            "passed_checks": ["coherence", "relevance", "factuality"]
+          }
         }
       ]
     }
@@ -519,11 +566,12 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
 | timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
-| metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
+| metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, `"boolean"`, or `"json"`.                          |
 | label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
 | categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
 | score_value [*required if the metric_type is "score"*]             | number              | A score value of the evaluation.                                                                       |
 | boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
+| json_value [*required if the metric_type is "json"*]               | Dict[key (string), value] | A JSON object value of the evaluation.                                                           |
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
 | reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
 | tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
@@ -532,22 +580,22 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span | [[Span](#SpanContext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
-| tag | [[Tag](#TagContext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
+| span | [[SpanContext](#spancontext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
+| tag | [[TagContext](#tagcontext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
 
 #### SpanContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span_id | string | The span ID of the span that this evaluation is associated with. |
-| trace_id | string | The trace ID of the span that this evaluation is associated with. |
+| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. |
+| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. |
 
 #### TagContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| key | string | The tag key name. This must be the same key used when setting the tag on the span.  |
-| value | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
+| key [*required*] | string | The tag key name. This must be the same key used when setting the tag on the span.  |
+| value [*required*] | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
 
 
 #### EvalMetricsRequestData

@@ -13,7 +13,7 @@ further_reading:
 
 multifiltersearch:
   headers:
-    - name: Vendor
+    - name: Vendor/Integration
       id: vendor
     - name: Config Files
       id: config_files
@@ -50,7 +50,7 @@ multifiltersearch:
       config_files: '[brocade.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml)'
     - vendor: Brother
       config_files: '[brother.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brother.yaml)'
-    - vendor: '[Chatsworth](https://docs.datadoghq.com/integrations/snmp_chatsworth_products/#overview)'
+    - vendor: '[Chatsworth](https://docs.datadoghq.com/integrations/snmp_chatsworth_products/)'
       config_files: '[chatsworth_pdu.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chatsworth_pdu.yaml)'
     - vendor: Checkpoint
       config_files: '[checkpoint.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint.yaml) <br> [checkpoint-firewall.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint-firewall.yaml)'
@@ -58,7 +58,7 @@ multifiltersearch:
       config_files: '[chrysalis.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chrysalis.yaml)'
     - vendor: '[Cisco](https://docs.datadoghq.com/integrations/snmp_cisco/)'
       config_files: '[cisco-3850.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml) <br> [cisco-csr1000v.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-csr1000v.yaml) <br> [_cisco-metadata.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-metadata.yaml) <br> [cisco_uc_virtual_machine.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_uc_virtual_machine.yaml) <br> [_cisco-voice.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-voice.yaml)'
-    - vendor: '[Cisco ACI](https://docs.datadoghq.com/integrations/cisco_aci/?tab=host)'
+    - vendor: '[Cisco ACI](https://docs.datadoghq.com/integrations/cisco_aci/)'
       config_files: '[cisco-aci.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-aci.yaml)'
     - vendor: '[Cisco ASA](https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/)'
       config_files: '[cisco-asa.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa.yaml) <br> [cisco-asa-5525.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa-5525.yaml)'
@@ -72,6 +72,8 @@ multifiltersearch:
       config_files: '[cisco-ise.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ise.yaml)'
     - vendor: Cisco ISR
       config_files: '[cisco-isr.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-isr.yaml) <br> [cisco_isr_4431.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_isr_4431.yaml)'
+    - vendor: '[Cisco Meraki](https://docs.datadoghq.com/integrations/meraki/)'
+      config_files: '[meraki-cloud-controller.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki-cloud-controller.yaml) <br> [meraki.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki.yaml)'
     - vendor: Cisco Nexus
       config_files: '[cisco-nexus.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-nexus.yaml)'
     - vendor: Cisco SB
@@ -124,8 +126,6 @@ multifiltersearch:
       config_files: '[linksys.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/linksys.yaml)'
     - vendor: McAfee
       config_files: '[mcafee-web-gateway.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/mcafee-web-gateway.yaml)'
-    - vendor: '[Meraki](https://docs.datadoghq.com/integrations/meraki/)'
-      config_files: '[meraki-cloud-controller.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki-cloud-controller.yaml) <br> [meraki.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki.yaml)'
     - vendor: Mikrotik
       config_files: '[mikrotik-router.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/mikrotik-router.yaml)'
     - vendor: Nasuni
@@ -198,6 +198,8 @@ The [generic profile][114] collects metrics for all devices not supported by a v
 
 The following vendor devices are supported with dedicated profiles.
 If a vendor or device type isn't listed, see the [Troubleshooting](#troubleshooting) section below.
+
+**Note**: Vendors with links in the **Vendor/Integration** column have dedicated integration pages with additional setup instructions, dashboards, and enhanced monitoring capabilities. All listed vendors are supported through SNMP with the configuration files shown in the **Config files** column.
 
 {{< multifilter-search >}}
 

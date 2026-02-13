@@ -65,7 +65,7 @@ The new recipient is notified immediately, and the Page continues from its curre
 1. Go to [**On-Call** > **Teams**][2].
 1. Find the Team you want to page. Select **Page**.
    {{< img src="service_management/oncall/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
-1. Enter a **Page title**. You can also select **Tags** and add more context in the **Description** field. Select **Page**.
+1. Enter a **Page title** and add more context in the **Description** field. Select **Page**.
 
 Manually paging a Team through Datadog always results in a `high` urgency Page.
 

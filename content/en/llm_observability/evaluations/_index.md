@@ -36,6 +36,10 @@ For developers building custom evaluators, see the [Evaluation Developer Guide][
 
 Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][4] and [NeMo][5].
 
+### Annotation Queues
+
+[Annotation Queues][11] provide a structured workflow for systematic human review of LLM traces.
+
 ### Sensitive Data Scanner integration
 
 In addition to evaluating the input and output of LLM requests, agents, workflows, or the application, LLM Observability integrates with [Sensitive Data Scanner][6], which helps prevent data leakage by identifying and redacting any sensitive information.
@@ -68,3 +72,5 @@ LLM Observability offers an [Export API][9] that you can use to retrieve spans f
 [8]: https://app.datadoghq.com/llm/evaluations
 [9]: /llm_observability/evaluations/export_api
 [10]: /llm_observability/guide/evaluation_developer_guide
+[11]: /llm_observability/evaluations/annotation_queues
+
