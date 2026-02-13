@@ -342,6 +342,8 @@ The name can be up to 193 characters long and may not contain contiguous or trai
 
 ## Evaluations API
 
+<div class="alert alert-info">For comprehensive examples and guidance on building custom evaluators, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+
 Use this endpoint to send evaluations associated with a given span to Datadog.
 
 Endpoint
