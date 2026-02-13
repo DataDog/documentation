@@ -234,7 +234,7 @@ A committer is counted toward billing if they make **at least three commits in a
 
 Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
 
-### Which email addresses are counted as committers?
+### How email addresses are counted as committers
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
 
 Commits finalized by known GitHub system accounts such as `noreply@github.com` and `actions@github.com` are not counted.
