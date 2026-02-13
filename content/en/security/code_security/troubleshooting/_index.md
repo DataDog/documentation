@@ -241,7 +241,7 @@ Commits finalized by known GitHub system accounts such as `noreply@github.com` a
 
 Commits using `@users.noreply.github.com` are counted unless the email corresponds to a recognized system or automation account. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit is attributable to an individual developer, it counts toward billing.
 
-If you need clarification on how committers are counted in your environment, [contact Datadog Support][1].
+For clarification on how committers are counted in your environment, [contact Datadog Support][1].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
