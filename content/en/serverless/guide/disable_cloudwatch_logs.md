@@ -26,6 +26,8 @@ Because AWS evaluates Deny before Allow in IAM policy evaluation, this blocks Cl
 
 To re-enable CloudWatch logging, remove the denied log groups from the policy or delete the `DenyCloudWatchLogs` policy entirely.
 
+<div class="alert alert-danger">If you have multiple Lambda functions which share the same log group and execution role, applying the deny policy will affect all the functions using the execution role and log group. If you would only like to disable only a subset, consider using one log group per function.</div>
+
 ## Disable CloudWatch logs
 
 {{< tabs >}}
@@ -198,13 +200,14 @@ Replace `aws_iam_role.lambda_execution` and `aws_lambda_function.example` with r
 
 ## Verify log delivery
 
-After you disable CloudWatch logs, confirm that logs are still flowing to Datadog:
+After you disable CloudWatch logs, confirm that logs are still flowing to Datadog through the extension:
 
 1. Invoke the Lambda function.
-2. In Datadog, go to [**Logs > Search**][4] and filter by `source:lambda` and the function name.
+2. In Datadog, go to the [logs explorer][4] and filter by `source:lambda` and the function name.
 3. Verify that new log entries appear.
 
-If logs are not appearing, re-enable CloudWatch logging and verify that `DD_SERVERLESS_LOGS_ENABLED` is set to `true` on the function.
+If logs from the extension are not appearing, make sure that the extension is installed and that `DD_SERVERLESS_LOGS_ENABLED` is set to `true` on the function. The default behavior is to send logs, but if one of `DD_LOGS_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` are set to `false` with the other unset, setting `DD_SERVERLESS_LOGS_ENABLED` to `true` will ensure that logs are sent.
+
 
 ## Further reading
 
