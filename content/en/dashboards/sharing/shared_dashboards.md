@@ -129,7 +129,9 @@ In the **Configure Dashboard** step, make changes to the shared dashboard.
 : The published name will replace the dashboard title on the shared dashboard. This name is also the name the shared dashboard is listed under on the Shared Dashboard list page.
 
 **Default Timeframe**
-: This sets the default timeframe for viewers of the shared dashboard. If "Allow viewers to change the timeframe" is toggled off, this is the only available timeframe. Toggling it on provides viewers with a fixed set of timeframe options to choose from, though custom timeframes and timeframe scrubbing are not supported.
+: This sets the default time frame for viewers of the shared dashboard. If **Allow viewers to change the timeframe** is toggled off, this is the only available time frame. 
+- ***Public and embedded dashboards***: Toggling this on allows viewers to choose from a fixed set of time frame options.
+- ***Invite-only shared dashboards***: Toggling this on allows viewers to choose from a fixed set of time frame options or create a custom time frame, including timeframe-scrubbing on the graph to zoom in.
 
 **Variables**
 : This setting lets users specify which template variables on the dashboard are available to viewers. Setting the same default and available value for a template variable makes it unchangeable by viewers. <br>**Note**: This applies even if the values are set to a wildcard (\*). <br><br>By default, the shared dashboard inherits the selected and available values currently used by the sharer.
@@ -153,7 +155,7 @@ The following widget types are not supported on shared dashboards. Widgets of th
 
 ### Limited timeframe options
 
-Shared dashboards support a limited number of timeframe options and do not allow timeframe scrubbing or custom timeframes.
+Public and embedded shared dashboards support a limited number of time frame options and do not allow time frame scrubbing or custom timeframes.
 
 ## Edit Shared Dashboards
 
