@@ -1,9 +1,9 @@
 ---
 core_product:
-- network performance monitoring
+- monitorización de redes en la nube
 title: flujo
 ---
-En las redes informáticas, un flujo es el camino que se toma cuando un endpoint se comunica con otro. El [mapa de red][1] de Datadog proporciona una visualización del flujo de datos de la red.
-Para obtener más información, <a href="/network_monitoring/performance/network_map/">consulta la documentación</a>.
+En las redes informáticas, un flujo es el camino seguido cuando un endpoint se comunica con otro. El [mapa de red][1] de Datadog proporciona una visualización para el flujo de datos de red.
+Para obtener más información, <a href="/network_monitoring/cloud_network_monitoring/network_map/">consulta la documentación</a>.
 
-[1]: /es/network_monitoring/performance/network_map/
+[1]: /es/network_monitoring/cloud_network_monitoring/network_map/

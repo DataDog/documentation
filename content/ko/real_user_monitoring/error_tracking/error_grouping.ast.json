@@ -1,0 +1,58 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "bdf228564adb8da0e7bd44262632570c": {
+            "string": "오류 그룹화"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "22801b6811cd4f56becf3e34251a7fff": {
+            "string": "오류가 이슈로 그룹화되는 방식을 이해합니다."
+          }
+        }
+      }}
+  },
+  "children": {
+    "listTranslationData": {
+      "1": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setup",
+                      "itemTranslationData": {
+                        "d906a44f416b2aae5ff49b9394e3d86f": {
+                          "string": "설정"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 14-15"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 14-15"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 14-15"
+      }}
+  },
+  "type": "document"}
