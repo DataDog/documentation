@@ -71,6 +71,8 @@ node --import dd-trace/initialize.mjs app.js
 # or
 NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
 ```
+
+[1]: /llm_observability/instrumentation/sdk/?tab=nodejs#command-line-setup
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support for bundled applications (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
@@ -137,8 +139,6 @@ module.exports = {
   serverExternalPackages: ['dd-trace', '<INTEGRATION_PACKAGE_NAME>'], // add any other supported integration package names here to be auto-instrumented
 }
 ```
-
-[1]: /llm_observability/instrumentation/sdk/?tab=nodejs#command-line-setup
 {{% /collapse-content %}}
 
 {{% /tab %}}
