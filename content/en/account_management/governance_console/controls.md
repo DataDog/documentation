@@ -33,7 +33,7 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
 Use the **Manual Mitigation** tab to view all detections. 
 
-{{< img src="account_management/governance_console/manual-mitigation.png" alt="The Manual Mitigation tab, showing a searchable list of detections. Each detection has three options: Delay mitigation, Ignore detection, Mitigate now." style="width:100%;" >}}
+{{< img src="account_management/governance_console/manual-mitigation-2.png" alt="The Manual Mitigation tab, showing a searchable list of detections. Each detection has three options: Delay mitigation, Ignore detection, Mitigate now." style="width:100%;" >}}
 
 Hover over each detection for options:
 - **Delay mitigation**: Delay mitigation of this asset for up to 1 week. This grants additional time for the administrator or owner to take additional actions before automated enforcement takes place.
