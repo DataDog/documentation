@@ -115,7 +115,7 @@ To get started, follow the instructions below.
 
    These file paths are relative to the Agent container. Mount the directory containing the log file into both the application and Agent containers so the Agent can access it. For details, see [Collect logs from a container local log file][9].
 
-   **Note**: Log collection requires the Datadog agent to already be installed on your Kubernetes cluster. If you haven't installed it yet, see the [Kubernetes installation documentation][8].
+   **Note**: Log collection requires the Datadog Agent to already be installed on your Kubernetes cluster. If you haven't installed it yet, see the [Kubernetes installation documentation][8].
 
    For more methods to set up log collection on Kubernetes, see the [Kubernetes and Integrations configuration section][6].
 
@@ -125,10 +125,10 @@ To get started, follow the instructions below.
 [3]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html#configuration-openlineage
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [5]: https://airflow.apache.org/docs/apache-airflow/2.9.3/configurations-ref.html#log-filename-template
-[6]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=annotations#configuration
-[7]: https://docs.datadoghq.com/integrations/airflow/?tab=containerized
-[8]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=datadogoperator#installation
-[9]: https://docs.datadoghq.com/containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
+[6]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[7]: /integrations/airflow/?tab=containerized
+[8]: /containers/kubernetes/installation/?tab=datadogoperator#installation
+[9]: /containers/kubernetes/log/?tab=datadogoperator#from-a-container-local-log-file
 
 
 ### Validation
