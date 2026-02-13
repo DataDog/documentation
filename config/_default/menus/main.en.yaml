@@ -1469,7 +1469,7 @@ menu:
       url: bits_ai/mcp_server/setup
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
-      weight: 100
+      weight: 401
     - name: Dashboards
       url: dashboards/
       pre: dashboard
