@@ -674,8 +674,9 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 1. Update the `datadog-serverless-macro` CloudFormation stack to pick up the latest version.
 2. Set the `extensionLayerVersion` parameter to the latest extension version. The latest extension version is `{{< latest-lambda-layer-version layer="extension" >}}`.
 3. Set the required parameters `site` and `apiKeySecretArn`.
-4. Remove the `forwarderArn` parameter.
-5. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
+4. Set `flushMetricsToLogs` to `false`.
+5. Remove the `forwarderArn` parameter.
+6. If you configured the Datadog AWS integration to automatically subscribe the Forwarder to Lambda log groups, disable that after you migrate _all_ the Lambda functions in that region.
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
