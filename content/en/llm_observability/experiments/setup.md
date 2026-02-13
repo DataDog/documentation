@@ -108,18 +108,24 @@ To create an experiment:
    If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-### 3. Define evaluator functions.
+### 3. Define evaluators
 
-   Datadog supports the following evaluator types:  
+   Evaluators measure how well your model or agent performs on each record. You can define evaluators using two approaches:
+
+   - **Function-based**: Define a function that receives `input_data`, `output_data`, and `expected_output` as separate arguments. Best for one-off evaluators with straightforward logic.
+   - **Class-based**: Subclass `BaseEvaluator` for reusable evaluators with custom configuration. Class-based evaluators receive an `EvaluatorContext` object with full span context.
+
+   For detailed information on building evaluators, including the full data model reference and best practices, see the [Evaluation Developer Guide][4].
+
+   Datadog supports the following evaluator return types:
    - **Boolean**: returns true or false
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
+   - **json**: returns structured data (dict)
 
-   Additionally, you can also return an `EvaluatorResult` to capture more aspects of the evaluation, such as `reasoning` (`str`), `assessment` (`"pass"` or `"fail"`)
-   and `tags` (`Dict[str, str]`). The `value` field of the EvaluatorResult captures the final evaluation result, and works the same way as the previous use case.
-   
-   Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
-   Evaluators can only return a string, a number, or a Boolean.
+   You can also return an `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
+
+   #### Function-based evaluators
 
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
@@ -144,7 +150,32 @@ To create an experiment:
        )
    ```
 
-### 4. (Optional) Define summary evaluator function(s).
+   #### Class-based evaluators
+
+   ```python
+   from ddtrace.llmobs import BaseEvaluator, EvaluatorContext, EvaluatorResult
+
+   class SemanticSimilarityEvaluator(BaseEvaluator):
+       def __init__(self, threshold: float = 0.8):
+           super().__init__(name="semantic_similarity")
+           self.threshold = threshold
+
+       def evaluate(self, context: EvaluatorContext) -> EvaluatorResult:
+           score = compute_similarity(context.output_data, context.expected_output)
+           return EvaluatorResult(
+               value=score,
+               reasoning=f"Similarity score: {score:.2f}",
+               assessment="pass" if score >= self.threshold else "fail",
+           )
+   ```
+
+### 4. (Optional) Define summary evaluators
+
+   Summary evaluators run after all record-level evaluators have finished, and receive the aggregated results to compute dataset-level statistics like averages or pass rates. Like record-level evaluators, you can define summary evaluators as functions or classes.
+
+   For the class-based approach using `BaseSummaryEvaluator`, see the [Evaluation Developer Guide][4].
+
+   #### Function-based summary evaluators
 
    ```python
     def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
@@ -152,12 +183,30 @@ To create an experiment:
 
    ```
 
-   If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
-   
-   Datadog supports the following Summary Evaluator types:
+   Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
+
+   #### Class-based summary evaluators
+
+   ```python
+   from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
+
+   class AverageScoreEvaluator(BaseSummaryEvaluator):
+       def __init__(self, target_evaluator: str):
+           super().__init__(name="average_score")
+           self.target_evaluator = target_evaluator
+
+       def evaluate(self, context: SummaryEvaluatorContext):
+           scores = context.evaluation_results.get(self.target_evaluator, [])
+           if not scores:
+               return None
+           return sum(scores) / len(scores)
+   ```
+
+   Datadog supports the following Summary Evaluator return types:
    - **Boolean**: returns true or false
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
+   - **json**: returns structured data (dict)
 
 ### 5. Create and run the experiment.
    ```python
@@ -219,7 +268,7 @@ This section assumes you have completed the [setup](#setup), [projects](#create-
 
 ```python
 from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs._experiment import EvaluatorResult
+from ddtrace.llmobs import EvaluatorResult
 from typing import Dict, Any, Optional, List
 
 LLMObs.enable(
@@ -335,3 +384,4 @@ jobs:
 [1]: /llm_observability/experiments/datasets
 [2]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
+[4]: /llm_observability/guide/evaluation_developer_guide
