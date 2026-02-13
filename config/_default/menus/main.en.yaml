@@ -5845,91 +5845,96 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_azure_event_hubs
       weight: 204
+    - name: Cloudflare Logpush
+      url: observability_pipelines/sources/cloudflare_logpush/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_cloudflare_logpush
+      weight: 205
     - name: Datadog Agent
       url: observability_pipelines/sources/datadog_agent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
-      weight: 205
+      weight: 206
     - name: Datadog Lambda Extension
       url: observability_pipelines/sources/lambda_extension/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_extension
-      weight: 206
+      weight: 207
     - name: Datadog Lambda Forwarder
       url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 207
+      weight: 208
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 208
+      weight: 209
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 209
+      weight: 210
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 210
+      weight: 211
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 211
+      weight: 212
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 212
+      weight: 213
     - name: OpenTelemetry
       url: observability_pipelines/sources/opentelemetry/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
-      weight: 213
+      weight: 214
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 214
+      weight: 215
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 215
+      weight: 216
     - name: MySQL
       url: observability_pipelines/sources/mysql/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_mysql
-      weight: 216
+      weight: 217
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 217
+      weight: 218
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 218
+      weight: 219
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 219
+      weight: 220
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 220
+      weight: 221
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 221
+      weight: 222
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
