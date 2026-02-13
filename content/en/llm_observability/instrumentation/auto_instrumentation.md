@@ -137,6 +137,8 @@ module.exports = {
   serverExternalPackages: ['dd-trace', '<INTEGRATION_PACKAGE_NAME>'], // add any other supported integration package names here to be auto-instrumented
 }
 ```
+
+[1]: /llm_observability/instrumentation/sdk/?tab=nodejs#command-line-setup
 {{% /collapse-content %}}
 
 {{% /tab %}}
