@@ -7,6 +7,16 @@ content_filters:
 - trait_id: synthetics_variables
   option_group_id: synthetics_variables_options
   label: "Variables"
+further_reading:
+- link: "/monitors/manage/"
+  tag: "Documentation"
+  text: "Learn how to manage monitors"
+- link: "/monitors/templates/"
+  tag: "Documentation"
+  text: "Learn more about monitor templates"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understanding Synthetic Monitor Alerting"
 ---
 
 ## Overview
@@ -385,11 +395,3 @@ Refer to the Protocol filter above to view variables specific to HTTP, DNS, SSL,
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 
 {% /if %}
-
-
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /synthetics/explore/results_explorer
