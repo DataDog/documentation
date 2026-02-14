@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Tags are the foundation for all Cloud Cost Management analysis and allocation. They enable you to break down spending by service, team, project, environment, or any dimension relevant to your business. Tag Pipelines enforce the use of standardized tags across your cloud resources and ensure consistent, accurate cost attribution throughout your organization.
+Tags are the foundation for all Cloud Cost Management analysis and allocation. They enable you to break down spending by service, team, project, environment, or any dimension relevant to your business. Tag Pipelines enforce the use of standardized tags across your cloud resources and help ensure consistent, accurate cost attribution throughout your organization.
 
 With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking. These standardized tags power all cost analysis capabilities, including container cost allocation, custom allocation rules, and cost recommendations.
 
@@ -44,7 +44,7 @@ Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag*
 
 {{< img src="cloud_cost/pipelines-create-ruleset.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:60%;" >}}
 
-You can organize rules and rulesets to ensure the order of execution matches your business logic.
+You can organize rules and rulesets to help ensure the order of execution matches your business logic.
 
 ### Add tag
 
@@ -52,11 +52,14 @@ Add a new tag (key + value) based on the presence of existing tags on your Cloud
 
 For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of.
 
-{{< img src="cloud_cost/pipelines-add-tag.png" alt="Add new business unit tag to resources with service:process-agent or service:process-billing." style="width:60%;" >}}
+{{< img src="cloud_cost/pipelines-add-tag-1.png" alt="Add new business unit tag to resources with service:process-agent or service:process-billing." style="width:60%;" >}}
 
 Under the **Additional options** section, you have the following options:
 
-- **Only apply if tag `{tag}` doesn't exist** - Ensures the rule only applies if the specified tag (`business-unit` in the example above) doesn't already exist.
+- **Action when tag `{tag}` exists** - Choose what to do if the specified tag (`business-unit` in the example above) already exists:
+  - **Don't apply the rule** - Skips the rule if the tag already exists, preserving the original value.
+  - **Append the tag** - Adds the new value to the existing tag without removing the original value.
+  - **Replace the tag** - Replaces the existing tag value with the new value. <div class="alert alert-warning">Replacing tags can overwrite existing data. Use this option with caution.</div>
 - **Apply case-insensitive matching to resource tags** - Enables tags defined in the `To resources with tag(s)` field and tags from the cost data to be case insensitive. For example, if resource tags from the UI are: `foo:bar` and the tag from the cost data is `Foo:bar`, then the two can be matched.
 
 ### Alias tag keys
@@ -65,11 +68,17 @@ Map existing tag values to a more standardized tag.
 
 For example, if your organization wants to use the standard `application` tag key, but several teams have a variation of that tag (like `app`, `webapp`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
 
-{{< img src="cloud_cost/pipelines-alias-tag.png" alt="Add application tag to resources with app, webapp, or apps tag." style="width:60%;" >}}
+{{< img src="cloud_cost/pipelines-alias-tag-3.png" alt="Add application tag to resources with app, webapp, or apps tag." style="width:60%;" >}}
 
 Add the application tag to resources with `app`, `webapp`, or `apps` tags. The rule stops executing for each resource after the first match is found. For example, if a resource already has an `app` tag, then the rule no longer attempts to identify a `webapp` or `apps` tag.
 
-To ensure the rule only applies if the `application` tag doesn't already exist, click the toggle in the **Additional options** section.
+Under the **Additional options** section, you have the following options:
+
+- **Action when tag `{tag}` exists** - Choose what to do if the specified tag (`application` in the example above) already exists:
+  - **Don't apply the rule** - Skips the rule if the tag already exists, preserving the original value.
+  - **Append the tag** - Adds the new value to the existing tag without removing the original value.
+  - **Replace the tag** - Replaces the existing tag value with the new value. <div class="alert alert-warning">Replacing tags can overwrite existing data. Use this option with caution.</div>
+- **Apply case-insensitive matching to resource tags** - Enables tags defined in the alias tag keys and tags from the cost data to be case insensitive. For example, if resource tags from the UI are: `app:bar` and the tag from the cost data is `App:bar`, then the two can be matched.
 
 ### Map multiple tags
 
@@ -77,13 +86,16 @@ Use [Reference Tables][2] to add multiple tags to cost data without creating mul
 
 For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags.
 
-{{< img src="cloud_cost/pipelines-map-multiple-tags.png" alt="Add account metadata like customer_name using reference tables for tag pipelines" style="width:60%;" >}}
+{{< img src="cloud_cost/pipelines-map-multiple-tags-1.png" alt="Add account metadata like customer_name using reference tables for tag pipelines" style="width:60%;" >}}
 
 Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after the first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
 
 Under the **Additional options** section, you have the following options:
 
-- **Only apply if columns don't exist** - Ensures the defined columns are only added if they do not already exist with the associated tags from the cost data.
+- **Action when column exists** - Choose what to do if the specified columns already exist:
+  - **Don't apply the rule** - Skips the rule if the columns already exist, preserving the original values.
+  - **Append the column** - Adds the new values to the existing columns without removing the original values.
+  - **Replace the column** - Replaces the existing column values with the new values. <div class="alert alert-warning">Replacing columns can overwrite existing data. Use this option with caution.</div>
 - **Apply case-insensitive matching for primary key values** - Enables case-insensitive matching between the primary key value from the reference table and the value of the tag in the cost data where the tag key matches the primary key. For example, if the primary key value pair from the UI is `foo:Bar` and the tag from the cost data is `foo:bar`, then the two can be matched.
 
 ## Reserved tags

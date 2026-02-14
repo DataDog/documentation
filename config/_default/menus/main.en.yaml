@@ -3855,7 +3855,7 @@ menu:
       identifier: cloud_cost_cost_allocation
       weight: 4
     - name: Tag Pipelines
-      url: cloud_cost_management/tags/tag_pipelines
+      url: cloud_cost_management/allocation/tag_pipelines
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_tag_pipelines
       weight: 401
