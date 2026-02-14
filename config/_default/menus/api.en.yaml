@@ -8488,6 +8488,140 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Forms
+      url: /api/latest/forms/
+      identifier: forms
+      generated: true
+    - name: Upsert and publish a form version
+      url: '#upsert-and-publish-a-form-version'
+      identifier: forms-upsert-and-publish-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertAndPublishFormVersion
+        unstable:
+          - v2
+        order: 10
+    - name: Create a form version
+      url: '#create-a-form-version'
+      identifier: forms-create-a-form-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertFormVersion
+        unstable:
+          - v2
+        order: 9
+    - name: Submit a form
+      url: '#submit-a-form'
+      identifier: forms-submit-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitForm
+        unstable:
+          - v2
+        order: 8
+    - name: Publish a form
+      url: '#publish-a-form'
+      identifier: forms-publish-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PublishForm
+        unstable:
+          - v2
+        order: 7
+    - name: Update a form
+      url: '#update-a-form'
+      identifier: forms-update-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateForm
+        unstable:
+          - v2
+        order: 5
+    - name: Get a form
+      url: '#get-a-form'
+      identifier: forms-get-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetForm
+        unstable:
+          - v2
+        order: 4
+    - name: Delete a form
+      url: '#delete-a-form'
+      identifier: forms-delete-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteForm
+        unstable:
+          - v2
+        order: 6
+    - name: Create and publish a form
+      url: '#create-and-publish-a-form'
+      identifier: forms-create-and-publish-a-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAndPublishForm
+        unstable:
+          - v2
+        order: 3
+    - name: Create a new form
+      url: '#create-a-new-form'
+      identifier: forms-create-a-new-form
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateForm
+        unstable:
+          - v2
+        order: 1
+    - name: List all forms
+      url: '#list-all-forms'
+      identifier: forms-list-all-forms
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListForms
+        unstable:
+          - v2
+        order: 2
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion

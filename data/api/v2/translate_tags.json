@@ -147,6 +147,10 @@
     "name": "Fleet Automation",
     "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
   },
+  "forms": {
+    "name": "Forms",
+    "description": "Create and manage forms for collecting data from users."
+  },
   "gcp-integration": {
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
