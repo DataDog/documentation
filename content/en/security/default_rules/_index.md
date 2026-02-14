@@ -48,6 +48,8 @@ Click the following buttons to filter the detection rules. Security detection ru
 - [Cloud Security Identity Risks][6]
 - [Attack Paths][7]
 
+visit OOTB prod broken absolute url :[broken link](https://docs.datadoghq.com/foo/bar/)
+
 [1]: /security/detection_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cloud_security_management/misconfigurations/
