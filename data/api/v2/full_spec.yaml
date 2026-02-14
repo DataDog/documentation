@@ -310,6 +310,13 @@ components:
       required: true
       schema:
         type: string
+    ConnectionGroupId:
+      description: The ID of the connection group.
+      in: path
+      name: connection_group_id
+      required: true
+      schema:
+        type: string
     ConnectionId:
       description: The ID of the action connection
       in: path
@@ -12461,6 +12468,83 @@ components:
       - connectionId
       - label
       type: object
+    ConnectionDataAttributesResponse:
+      description: Attributes of an action connection.
+      properties:
+        acting_user_can_resolve:
+          description: Indicates if the acting user can resolve the connection.
+          example: true
+          type: boolean
+        created_at:
+          description: The creation timestamp of the connection.
+          example: '1970-01-01T00:02:03.000000456Z'
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/CreatedBy'
+        description:
+          description: The description of the connection.
+          example: A test connection for AWS integrations
+          type: string
+        external_secrets_manager:
+          description: External secrets manager configuration.
+          nullable: true
+          type: object
+        integration:
+          description: Integration configuration details.
+          example:
+            credentials:
+              account_id: '123456789012'
+              role: role
+              type: AWSAssumeRole
+            type: AWS
+          type: object
+        is_favorite:
+          description: Indicates if the connection is marked as favorite.
+          example: false
+          type: boolean
+        last_updated:
+          description: The last updated timestamp of the connection.
+          example: '1970-01-01T00:02:03.000000456Z'
+          format: date-time
+          type: string
+        name:
+          description: The name of the connection.
+          example: My Connection
+          type: string
+        private_actions_runner:
+          $ref: '#/components/schemas/PrivateActionsRunner'
+        runner_id:
+          description: The ID of the runner associated with the connection.
+          type: string
+        tags:
+          description: Tags associated with the connection.
+          items:
+            type: string
+          type: array
+      required:
+      - acting_user_can_resolve
+      - integration
+      - external_secrets_manager
+      - is_favorite
+      - name
+      type: object
+    ConnectionDataResponse:
+      description: Data object for an action connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConnectionDataAttributesResponse'
+        id:
+          description: The unique identifier of the connection.
+          example: afda2727-c55e-4258-b4c6-e170c32be1dd
+          type: string
+        type:
+          $ref: '#/components/schemas/ActionConnectionDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
     ConnectionEnv:
       description: A list of connections or connection groups used in the workflow.
       properties:
@@ -12510,6 +12594,129 @@ components:
       - label
       - tags
       type: object
+    ConnectionGroupDataAttributesRequest:
+      description: Attributes for updating a connection group.
+      properties:
+        connections:
+          description: List of connection IDs associated with the connection group.
+          items:
+            type: string
+          type: array
+        description:
+          description: The description of the connection group.
+          example: An updated test connection group for AWS integrations
+          type: string
+        integration_type:
+          description: The integration type of the connection group.
+          type: string
+        name:
+          description: The name of the connection group.
+          example: My Connection Group Updated
+          type: string
+        policy_attributes:
+          description: Policy attributes for the connection group.
+          type: string
+        tag_keys:
+          description: Tag keys associated with the connection group.
+          items:
+            type: string
+          type: array
+      type: object
+    ConnectionGroupDataAttributesResponse:
+      description: Attributes of a connection group.
+      properties:
+        connections:
+          description: List of connection IDs associated with the connection group.
+          example:
+          - connection1
+          - connection2
+          items:
+            type: string
+          type: array
+        created_at:
+          description: The creation timestamp of the connection group.
+          example: '1970-01-01T00:02:03.000000456Z'
+          format: date-time
+          type: string
+        description:
+          description: The description of the connection group.
+          example: A test connection group for AWS integrations
+          type: string
+        integration_type:
+          description: The integration type of the connection group.
+          example: AWS
+          type: string
+        is_favorite:
+          description: Indicates if the connection group is marked as favorite.
+          example: false
+          type: boolean
+        last_updated_at:
+          description: The last updated timestamp of the connection group.
+          example: '1970-01-01T00:02:03.000000456Z'
+          format: date-time
+          type: string
+        name:
+          description: The name of the connection group.
+          example: My Connection Group
+          type: string
+        tag_keys:
+          description: Tag keys associated with the connection group.
+          example:
+          - env
+          - service
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - tag_keys
+      - integration_type
+      - created_at
+      - last_updated_at
+      - is_favorite
+      type: object
+    ConnectionGroupDataRequest:
+      description: Data object for updating a connection group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConnectionGroupDataAttributesRequest'
+        type:
+          $ref: '#/components/schemas/ConnectionGroupType'
+      required:
+      - type
+      type: object
+    ConnectionGroupDataResponse:
+      description: Data object for a connection group.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ConnectionGroupDataAttributesResponse'
+        id:
+          description: The unique identifier of the connection group.
+          example: afda2727-c55e-4258-b4c6-e170c32be1dd
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ConnectionGroupRelationships'
+        type:
+          $ref: '#/components/schemas/ConnectionGroupType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ConnectionGroupRelationships:
+      description: Relationships for a connection group.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/CreatedByRelationship'
+      type: object
+    ConnectionGroupType:
+      description: The definition of `ConnectionGroupType` object.
+      enum:
+      - connection_group
+      example: connection_group
+      type: string
+      x-enum-varnames:
+      - CONNECTION_GROUP
     ConnectionsPagePagination:
       description: Page-based pagination metadata.
       properties:
@@ -15285,6 +15492,37 @@ components:
           $ref: '#/components/schemas/WorkflowData'
       required:
       - data
+      type: object
+    CreatedBy:
+      description: Information about the user who created the resource.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          example: ''
+          type: string
+      required:
+      - id
+      type: object
+    CreatedByRelationship:
+      description: Relationship to the user who created the resource.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreatedByRelationshipData'
+      type: object
+    CreatedByRelationshipData:
+      description: Data for the created_by relationship.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          example: 2a10fb69-5ee6-47c8-96f5-d30e18bf883d
+          type: string
+        type:
+          description: The type of the relationship.
+          example: created_by
+          type: string
+      required:
+      - id
+      - type
       type: object
     Creator:
       description: Creator of the object.
@@ -31127,6 +31365,21 @@ components:
             type: string
           type: array
       type: object
+    IntegrationCounts:
+      description: Count of integrations by type.
+      properties:
+        filtered_count:
+          description: The filtered count of integrations.
+          format: int64
+          type: integer
+        integration_type:
+          description: The integration type.
+          type: string
+        total_count:
+          description: The total count of integrations.
+          format: int64
+          type: integer
+      type: object
     IntegrationIncident:
       description: Incident integration settings
       properties:
@@ -33325,6 +33578,42 @@ components:
           format: int64
           type: integer
       type: object
+    ListActionConnectionsResponse:
+      description: Response for listing action connections.
+      properties:
+        data:
+          description: An array of action connections.
+          items:
+            $ref: '#/components/schemas/ConnectionDataResponse'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListActionConnectionsResponseMeta'
+      required:
+      - data
+      type: object
+    ListActionConnectionsResponseMeta:
+      description: Metadata for the list connections response.
+      properties:
+        integration_counts:
+          description: Count of integrations by type.
+          items:
+            $ref: '#/components/schemas/IntegrationCounts'
+          nullable: true
+          type: array
+        total:
+          description: The total number of connections.
+          example: 1
+          format: int64
+          type: integer
+        total_filtered:
+          description: The total number of connections that match the specified filters.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - total
+      - total_filtered
+      type: object
     ListAppKeyRegistrationsResponse:
       description: A paginated list of app key registrations.
       properties:
@@ -33471,6 +33760,43 @@ components:
           $ref: '#/components/schemas/Metadata'
       required:
       - data
+      type: object
+    ListConnectionGroupsResponse:
+      description: Response for listing connection groups.
+      properties:
+        data:
+          description: An array of connection groups.
+          items:
+            $ref: '#/components/schemas/ConnectionGroupDataResponse'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListConnectionGroupsResponseMeta'
+      required:
+      - data
+      type: object
+    ListConnectionGroupsResponseMeta:
+      description: Metadata for the list connection groups response.
+      properties:
+        integration_counts:
+          description: Count of integrations by type.
+          items:
+            $ref: '#/components/schemas/IntegrationCounts'
+          nullable: true
+          type: array
+        total:
+          description: The total number of connection groups.
+          example: 1
+          format: int64
+          type: integer
+        total_filtered:
+          description: The total number of connection groups that match the specified
+            filters.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - total
+      - total_filtered
       type: object
     ListConnectionsResponse:
       example:
@@ -46136,6 +46462,16 @@ components:
           $ref: '#/components/schemas/EntityResponseDataType'
       required:
       - type
+      type: object
+    PrivateActionsRunner:
+      description: Information about the private actions runner.
+      properties:
+        id:
+          description: The unique identifier of the runner.
+          example: ''
+          type: string
+      required:
+      - id
       type: object
     ProcessSummariesMeta:
       description: Response metadata object.
@@ -64990,6 +65326,22 @@ components:
           description: The display name of the datastore.
           type: string
       type: object
+    UpdateConnectionGroupRequest:
+      description: Request for updating a connection group.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConnectionGroupDataRequest'
+      required:
+      - data
+      type: object
+    UpdateConnectionGroupResponse:
+      description: Response for updating a connection group.
+      properties:
+        data:
+          $ref: '#/components/schemas/ConnectionGroupDataResponse'
+      required:
+      - data
+      type: object
     UpdateConnectionRequest:
       example:
         data:
@@ -69610,6 +69962,126 @@ paths:
         - user_app_keys
         - service_account_write
   /api/v2/actions/connections:
+    get:
+      description: List all action connections for the organization. This endpoint
+        supports filtering by integration type, tags, environment, and search strings.
+        Pagination is supported using page size and page number parameters.
+      operationId: ListActionConnections
+      parameters:
+      - description: The number of connections to return per page.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 50
+          example: 1
+          format: int64
+          type: integer
+      - description: The page number to return.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          default: 0
+          example: 10
+          format: int64
+          type: integer
+      - description: Filter by integration type.
+        explode: true
+        in: query
+        name: filter[integration]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter by tags.
+        explode: true
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter by environment.
+        in: query
+        name: filter[environment]
+        required: false
+        schema:
+          type: string
+      - description: Filter by connection IDs.
+        explode: true
+        in: query
+        name: filter[connection_ids]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter by creator IDs.
+        explode: true
+        in: query
+        name: filter[creator_ids]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Search string to filter connections.
+        in: query
+        name: filter[search]
+        required: false
+        schema:
+          type: string
+      - description: Sort parameters.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListActionConnectionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: List action connections
+      tags:
+      - Action Connection
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create a new Action Connection. This API requires a [registered
         application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).
@@ -69649,6 +70121,178 @@ paths:
       tags:
       - Action Connection
       x-menu-order: 2
+  /api/v2/actions/connections/groups:
+    get:
+      description: List all connection groups for the organization. This endpoint
+        supports filtering by integration type, environment, connection group IDs,
+        and search strings. Pagination is supported using page size and page number
+        parameters.
+      operationId: ListConnectionGroups
+      parameters:
+      - description: The number of connection groups to return per page.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 50
+          example: 1
+          format: int64
+          type: integer
+      - description: The page number to return.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          default: 0
+          example: 10
+          format: int64
+          type: integer
+      - description: Filter by integration type.
+        explode: true
+        in: query
+        name: filter[integration]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter by environment.
+        in: query
+        name: filter[environment]
+        required: false
+        schema:
+          type: string
+      - description: Filter by connection group IDs.
+        explode: true
+        in: query
+        name: filter[connection_group_ids]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter by creator ID.
+        in: query
+        name: filter[creator_id]
+        required: false
+        schema:
+          type: string
+      - description: Filter by creator IDs.
+        explode: true
+        in: query
+        name: filter[creator_ids]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Search string to filter connection groups.
+        in: query
+        name: filter[search]
+        required: false
+        schema:
+          type: string
+      - description: Sort parameters.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConnectionGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: List connection groups
+      tags:
+      - Action Connection
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/actions/connections/groups/{connection_group_id}:
+    patch:
+      description: Update an existing connection group by ID. This endpoint allows
+        updating the name, description, tag keys, integration type, connections, and
+        policy attributes of a connection group.
+      operationId: UpdateConnectionGroup
+      parameters:
+      - $ref: '#/components/parameters/ConnectionGroupId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionGroupRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConnectionGroupResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Update a connection group
+      tags:
+      - Action Connection
+      x-menu-order: 11
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/actions/connections/{connection_id}:
     delete:
       description: Delete an existing Action Connection. This API requires a [registered
