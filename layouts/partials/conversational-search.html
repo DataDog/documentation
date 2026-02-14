@@ -1,0 +1,93 @@
+{{ $dot := . }}
+
+{{/* Conversational Search UI Templates — inert until cloned by JS */}}
+
+{{/* Main dialog structure: floating button + overlay + sidebar */}}
+<template id="conv-search-template">
+    <button class="conv-search-float-btn" aria-label="Ask AI">
+        <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/spark-ai.svg") }}' width="18" height="18" alt="" />
+        <span>Ask AI</span>
+    </button>
+
+    <div class="conv-search-overlay"></div>
+
+    <div class="conv-search-sidebar">
+        <div class="conv-search-header">
+            <div class="conv-search-title-group">
+                <span class="conv-search-title">Datadog Docs AI</span>
+                <span class="tooltip-container conv-search-info-tooltip">
+                    <button class="tooltip-trigger conv-search-info-btn" aria-describedby="tooltip-docs-ai-info">
+                        <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/info.svg") }}' width="16" height="16" alt="Info" />
+                    </button>
+                    <span id="tooltip-docs-ai-info" class="tooltip-content" role="tooltip">Your use of this AI-powered assistant is subject to our <a href="https://www.datadoghq.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Please do not submit sensitive or personal information.</span>
+                </span>
+            </div>
+            <div class="conv-search-header-actions">
+                <button class="conv-search-new" aria-label="New Question" title="New Question">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                    <span>New Question</span>
+                </button>
+                <button class="conv-search-close" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="conv-search-messages">
+            {{/* Empty state is injected here by JS from the template below */}}
+        </div>
+        <div class="conv-search-footer">
+            <div class="conv-search-input-container">
+                <textarea
+                    class="conv-search-input"
+                    placeholder="Ask a question..."
+                    rows="1"
+                ></textarea>
+                <button class="conv-search-send" aria-label="Send">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <p class="conv-search-disclaimer">AI-generated responses may be inaccurate. Verify important info.</p>
+        </div>
+    </div>
+</template>
+
+{{/* Reusable empty state — cloned for initial load and "New Question" reset */}}
+<template id="conv-search-empty-state">
+    <div class="conv-search-empty-state">
+        <div class="conv-search-empty-icon">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/spark-ai.svg") }}' width="32" height="32" alt="" />
+        </div>
+        <h3 class="conv-search-empty-title">How can I help you today?</h3>
+        <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
+        <div class="conv-search-suggestions">
+            <button class="conv-search-suggestion" data-query="How to setup LLM Observability for an existing AWS Lambda function?">How to setup LLM Observability for an existing AWS Lambda function?</button>
+            <button class="conv-search-suggestion" data-query="What is the Datadog Agent?">What is the Datadog Agent?</button>
+            <button class="conv-search-suggestion" data-query="How do I set up APM tracing step by step?">How do I set up APM tracing step by step?</button>
+        </div>
+    </div>
+</template>
+
+{{/* Reusable assistant message actions (thumbs/copy) */}}
+<template id="conv-search-actions-template">
+    <div class="conv-search-message-actions">
+        <button class="conv-search-action-btn" data-action="thumbs-up" title="Good response">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/thumbs-up.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+        </button>
+        <button class="conv-search-action-btn" data-action="thumbs-down" title="Bad response">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/thumbs-down.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+        </button>
+        <button class="conv-search-action-btn" data-action="copy" title="Copy response">
+            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/copy.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+        </button>
+    </div>
+</template>
+

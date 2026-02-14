@@ -80,6 +80,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/tooltip'; // Tooltip shortcode styles
 @import "components/multifilter-search";
 @import "components/filter-search";
+@import "components/conversational-search";
 
 // UI labels
 @import "components/ui-label";
