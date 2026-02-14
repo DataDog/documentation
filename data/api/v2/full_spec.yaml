@@ -39873,8 +39873,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_size
       type: object
     ObservabilityPipelineElasticsearchDestination:
       description: 'The `elasticsearch` destination writes logs to an Elasticsearch
@@ -41128,8 +41126,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_size
       type: object
     ObservabilityPipelineMemoryBufferSizeOptions:
       description: Options for configuring a memory buffer by queue length.
@@ -41143,8 +41139,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_events
       type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
@@ -71156,6 +71150,14 @@ paths:
   /api/v2/apm/services:
     get:
       operationId: GetServiceList
+      parameters:
+      - description: Filter services by environment. Can be set to `*` to return all
+          services across all environments.
+        in: query
+        name: filter[env]
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           content:
