@@ -57,6 +57,9 @@ The following conditional variables are available:
 | `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
 | `{{#is_renotify}}`         | The monitor is renotifying                                         |
 | `{{^is_renotify}}`         | The monitor is not renotifying.                                    |
+| `{{#if}}`                  | A variable exists and is not empty                                 |
+| `{{#unless}}`              | A variable is missing or empty (inverse of `{{#if}}`)              |
+| `{{#each}}`                | Iterates over each key-value pair in a dictionary variable         |
 
 ### Examples
 
@@ -238,6 +241,79 @@ This part is generic and sent both for the first trigger and the escalation mess
 
 This is the escalation message @dev-team@company.com
 ```
+
+{{% /tab %}}
+{{% tab "if" %}}
+
+To check if a variable exists and is not empty, use the `{{#if}}` helper:
+
+```text
+{{#if <VARIABLE>}}
+  This displays if <VARIABLE> exists and is not empty.
+{{/if}}
+```
+
+Use `{{else}}` to display an alternative message when the variable is missing or empty:
+
+```text
+{{#if host.metadata_machine}}
+  Machine type: {{host.metadata_machine}}
+{{else}}
+  Machine type is not available.
+{{/if}}
+```
+
+{{% /tab %}}
+{{% tab "unless" %}}
+
+To check if a variable is missing or empty, use the `{{#unless}}` helper (the inverse of `{{#if}}`):
+
+```text
+{{#unless <VARIABLE>}}
+  This displays if <VARIABLE> is missing or empty.
+{{/unless}}
+```
+
+For example, to send a notification when a host's machine type is unknown:
+
+```text
+{{#unless host.metadata_machine}}
+  Machine type is not available for this host. @ops-team@company.com
+{{/unless}}
+```
+
+**Note**: `{{#unless}}` does not support `{{else}}`. Use `{{#if}}` with `{{else}}` instead.
+
+{{% /tab %}}
+{{% tab "each" %}}
+
+To iterate over the key-value pairs of a dictionary variable, use the `{{#each}}` helper:
+
+```text
+{{#each <DICTIONARY_VARIABLE>}}
+  {{@key}}: {{this}}
+{{/each}}
+```
+
+Within the loop, the following variables are available:
+
+| Variable   | Description                                      |
+|------------|--------------------------------------------------|
+| `this`     | The current value being iterated over             |
+| `@key`     | The current key being iterated over               |
+| `@index`   | The current iteration index                       |
+| `@first`   | `true` if this is the first item being iterated   |
+| `@last`    | `true` if this is the last item being iterated    |
+
+You can also access fields directly from the current value. For example, to list HTTP headers from a log event:
+
+```text
+{{#each log.attributes.headers}}
+  Header {{@key}} = {{this}}
+{{/each}}
+```
+
+**Note**: In monitor messages, `{{#each}}` supports iterating over dictionaries only. List iteration is available in [Synthetic Monitoring notifications][21].
 
 {{% /tab %}}
 
@@ -715,3 +791,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [18]: /monitors/types/ci/?tab=pipelines
 [19]: /monitors/types/database_monitoring/
 [20]: /synthetics/notifications/template_variables/
+[21]: /synthetics/notifications/advanced_notifications/
