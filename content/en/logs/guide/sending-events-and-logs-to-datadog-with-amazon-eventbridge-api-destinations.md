@@ -19,18 +19,221 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 
 ### Configuration
 
-1. Follow the steps in the [Amazon Create an API destination docs][5] to add Datadog as an API destination.
-    - Use API key authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
-    - For your destination endpoint, use `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs` for logs and `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see [Reducing Data Related Risks][8].
-    - If you are utilizing the events endpoint, you need to include a `title` and `text` as `body.field` parameters in the API Destination connection. These are required values to `POST` to the events endpoint. For more information, see the [Post an event documentation][9].
+Ensure you have the correct Datadog Site selected before proceeding with the below steps.
+
+{{% site-region region="us" %}}
+
+{{% collapse-content title="To Send Logs:" level="h4" %}}
+1. Follow the steps in the [Amazon Create an API destination doc][5] to add Datadog as an API destination.
+
+a) Set the **API destination endpoint** as `https://{{% region-param key="http_endpoint" code="true" %}}/api/v2/logs`.
+
+b) Set the **HTTP method** as `POST`.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_logs_api_destination.png" alt="Your image description" style="width:100%;" >}}
+
+c) Choose **Create a new connection**.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_logs_new_connection.png" alt="Your image description" style="width:100%;" >}}
+
+d) For **Authorization type**, choose **API key**. Set the key name to `DD-API-KEY` and set your [Datadog API key][3] as the value.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_auth.png" alt="Your image description" style="width:100%;" >}}
+
+2. Once you have set up the API destination, see the Amazon documentation to [create an EventBridge rule][10], where you set Datadog as your destination.
+
+a) Under Select target(s) > Target 1 > Target Types, choose **Eventbridge API destination**.
+
+b) For API Destination, select **Use an existing API destination**.
+Choose the API Destination created in Step 1.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_logs_rule_target.png" alt="Your image description" style="width:100%;" >}}
+
+3. When logs are created that match the EventBridge rule, they will be sent via the API destination to Datadog. 
+
+4. ~5 minutes after logs are sending, the data is available in the Datadog [Logs Console][12].
+
+[1]: /integrations/amazon_event_bridge/
+[2]: https://www.datadoghq.com/free-datadog-trial/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: https://aws.amazon.com/eventbridge/
+[5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-create.html 
+[8]: /data_security/#other-sources-of-potentially-sensitive-data/
+[9]: https://docs.datadoghq.com/api/latest/events/#post-an-event
+[10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
+[11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+[12]: https://app.datadoghq.com/logs
+[13]: https://app.datadoghq.com/event/explorer
+[14]: https://console.aws.amazon.com/sqs/
+[15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_EventBus.html
+[17]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/monitoring-events.html#monitoring-events-sso
+{{% /collapse-content %}} 
+{{% collapse-content title="To Send Events:" level="h4" %}}
+1. Follow the steps in the [Amazon Create an API destination doc][5] to add Datadog as an API destination.
+
+a) Set the **API Destination endpoint** as `https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/events`.
+
+b) Set the **HTTP method** as `POST`.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_events_api_destination.png" alt="Your image description" style="width:100%;" >}}
+
+c) Choose **Create a new connection**.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_events_new_connection.png" alt="Your image description" style="width:100%;" >}}
+
+d) For **Authorization type**, choose **API key**. Set the key name to `DD-API-KEY` and set your [Datadog API key][3] as the value.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_auth.png" alt="Your image description" style="width:100%;" >}}
+
 2. Once you have set up the destination, see the Amazon documentation to [create an EventBridge rule][10], where you set Datadog as your destination.
+
+a) Under Select target(s) > Target 1 > Target Types, choose **Eventbridge API destination**.
+
+b) For API Destination, select **Use an existing API destination**.
+Choose the API Destination created in Step 1.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_events_rule_target.png" alt="Your image description" style="width:100%;" >}}
+
+
 3. Once you have set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration documentation][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][11] in your account, use this AWS CloudShell command:
 
     ```bash
     echo "test" > testfile.txt
     aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
     ```
-4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [Logs Console][12] or [Events Explorer][13], depending on which endpoint you are sending them to.
+4. ~5 minutes after events are sending, the data is available in the Datadog [Events Explorer][13].
+
+[1]: /integrations/amazon_event_bridge/
+[2]: https://www.datadoghq.com/free-datadog-trial/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: https://aws.amazon.com/eventbridge/
+[5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-create.html 
+[8]: /data_security/#other-sources-of-potentially-sensitive-data/
+[9]: https://docs.datadoghq.com/api/latest/events/#post-an-event
+[10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
+[11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+[12]: https://app.datadoghq.com/logs
+[13]: https://app.datadoghq.com/event/explorer
+[14]: https://console.aws.amazon.com/sqs/
+[15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_EventBus.html
+[17]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/monitoring-events.html#monitoring-events-sso
+
+{{% /collapse-content %}} 
+
+- For more information about the differences between logs and events, see [Reducing Data Related Risks][8].
+
+[8]: /data_security/#other-sources-of-potentially-sensitive-data/
+
+{{% /site-region %}}
+
+{{% site-region region="us3" %}}
+{{% collapse-content title="To Send Logs:" level="h4" %}}
+1. Follow the steps in the [Amazon Create an API destination doc][5] to add Datadog as an API destination.
+
+a) Set the **API destination endpoint** as `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs`.
+
+b) Set the **HTTP method** as `POST`.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_us3_logs_api_destination.png" alt="Your image description" style="width:100%;" >}}
+
+c) Choose **Create a new connection**.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_logs_new_connection.png" alt="Your image description" style="width:100%;" >}}
+
+
+d) For **Authorization type**, choose **API key**. Set the key name to `DD-API-KEY` and set your [Datadog API key][3] as the value.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_auth.png" alt="Your image description" style="width:100%;" >}}
+
+2. Once you have set up the API destination, see the Amazon documentation to [create an EventBridge rule][10], where you set Datadog as your destination.
+
+a) Under Select target(s) > Target 1 > Target Types, choose **Eventbridge API destination**.
+
+b) For API Destination, select **Use an existing API destination**.
+Choose the API Destination created in Step 1.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_us3_logs_rule_target.png" alt="Your image description" style="width:100%;" >}}
+
+3. When logs are created that match the EventBridge rule, they are sent via the API destination to Datadog. 
+
+4. ~5 minutes after logs are sending, the data is available in the Datadog [Logs Console][12].
+
+[1]: /integrations/amazon_event_bridge/
+[2]: https://www.datadoghq.com/free-datadog-trial/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: https://aws.amazon.com/eventbridge/
+[5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-create.html 
+[8]: /data_security/#other-sources-of-potentially-sensitive-data/
+[9]: https://docs.datadoghq.com/api/latest/events/#post-an-event
+[10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
+[11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+[12]: https://app.datadoghq.com/logs
+[13]: https://app.datadoghq.com/event/explorer
+[14]: https://console.aws.amazon.com/sqs/
+[15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_EventBus.html
+[17]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/monitoring-events.html#monitoring-events-sso
+{{% /collapse-content %}} 
+{{% collapse-content title="To Send Events:" level="h4" %}}
+1. Follow the steps in the [Amazon Create an API destination doc][5] to add Datadog as an API destination.
+
+a) Set the **API Destination endpoint** as `https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/events`.
+
+b) Set the **HTTP method** as `POST`.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_us3_events_api_destination.png" alt="Your image description" style="width:100%;" >}}
+
+c) Choose **Create a new connection**.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_events_new_connection.png" alt="Your image description" style="width:100%;" >}}
+
+d) For **Authorization type**, choose **API key**. Set the key name to `DD-API-KEY` and set your [Datadog API key][3] as the value.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_auth.png" alt="Your image description" style="width:100%;" >}}
+
+2. Once you have set up the destination, see the Amazon documentation to [create an EventBridge rule][10], where you set Datadog as your destination.
+
+a) Under Select target(s) > Target 1 > Target Types, choose **Eventbridge API destination**.
+
+b) For API Destination, select **Use an existing API destination**.
+Choose the API Destination created in Step 1.
+
+{{< img src="integrations/amazon_event_bridge/eventbridge_events_rule_target.png" alt="Your image description" style="width:100%;" >}}
+
+
+3. Once you have set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration documentation][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][11] in your account, use this AWS CloudShell command:
+
+    ```bash
+    echo "test" > testfile.txt
+    aws s3 cp testfile.txt s3://YOUR_BUCKET_NAME
+    ```
+4. ~5 minutes after events are sending, the data is available in the Datadog [Events Explorer][13].
+
+[1]: /integrations/amazon_event_bridge/
+[2]: https://www.datadoghq.com/free-datadog-trial/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: https://aws.amazon.com/eventbridge/
+[5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-create.html 
+[8]: /data_security/#other-sources-of-potentially-sensitive-data/
+[9]: https://docs.datadoghq.com/api/latest/events/#post-an-event
+[10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
+[11]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+[12]: https://app.datadoghq.com/logs
+[13]: https://app.datadoghq.com/event/explorer
+[14]: https://console.aws.amazon.com/sqs/
+[15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_EventBus.html
+[17]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/monitoring-events.html#monitoring-events-sso
+
+{{% /collapse-content %}} 
+
+- For more information about the differences between logs and events, see [Reducing Data Related Risks][8].
+
+[8]: /data_security/#other-sources-of-potentially-sensitive-data/
+
+{{% /site-region %}}
 
 ## Troubleshooting
 
@@ -47,12 +250,11 @@ To see more details about the payloads sent to Datadog and to view the response 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /integrations/amazon_event_bridge/
 [2]: https://www.datadoghq.com/free-datadog-trial/
 [3]: /account_management/api-app-keys/#api-keys
 [4]: https://aws.amazon.com/eventbridge/
-[5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html#eb-api-destination-create
+[5]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-create.html 
 [8]: /data_security/#other-sources-of-potentially-sensitive-data/
 [9]: https://docs.datadoghq.com/api/latest/events/#post-an-event
 [10]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
@@ -61,3 +263,5 @@ To see more details about the payloads sent to Datadog and to view the response 
 [13]: https://app.datadoghq.com/event/explorer
 [14]: https://console.aws.amazon.com/sqs/
 [15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_EventBus.html
+[17]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/monitoring-events.html#monitoring-events-sso
