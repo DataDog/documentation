@@ -11,5 +11,8 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : Read about how Database Management handles [sensitive information][101] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
+RDS Custom
+Datadog supports DBM for **some** RDS Custom configurations that make OS-level changes. This support depends on the customizations stable compatibility with DBM. 
+
 [100]: /database_monitoring/agent_integration_overhead/?tab=sqlserver
 [101]: /database_monitoring/data_collected/#sensitive-information
