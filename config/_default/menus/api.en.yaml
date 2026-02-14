@@ -7047,6 +7047,23 @@ menu:
           - GetAllCaseTypes
         unstable: []
         order: 1
+    - name: Cloud Authentication
+      url: /api/latest/cloud-authentication/
+      identifier: cloud-authentication
+      generated: true
+    - name: List AWS cloud authentication persona mappings
+      url: '#list-aws-cloud-authentication-persona-mappings'
+      identifier: cloud-authentication-list-aws-cloud-authentication-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
