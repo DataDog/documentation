@@ -27,5 +27,14 @@
 
 See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
 
+#### Kubernetes services
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates two services:
+
+- **Headless service**: Provides stable DNS names per pod and direct Pod IP resolution without load balancing. This service is for the Worker itself and is not intended for end users.
+- **Load balancer service**: Provides load balancing for both internal and external cluster communications.
+
+**Use the load balancer service** (non-headless service) to send logs to the Observability Pipelines Worker.
+
 [601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
 [602]: /observability_pipelines/configuration/update_existing_pipelines
