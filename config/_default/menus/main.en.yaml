@@ -3044,6 +3044,11 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
+    - name: Cluster 
+      url: containers/autoscaling/cluster
+      parent: containers_autoscaling
+      identifier: containers_autoscaling_cluster
+      weight: 201
     - name: Docker-based
       url: containers/docker/
       parent: containers
