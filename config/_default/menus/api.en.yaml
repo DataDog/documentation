@@ -13329,6 +13329,19 @@ menu:
       url: /api/latest/workflow-automation/
       identifier: workflow-automation
       generated: true
+    - name: Execute a workflow from a webhook
+      url: '#execute-a-workflow-from-a-webhook'
+      identifier: workflow-automation-execute-a-workflow-from-a-webhook
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExecuteWorkflowFromWebhook
+        unstable:
+          - v2
+        order: 10
     - name: Cancel a workflow instance
       url: '#cancel-a-workflow-instance'
       identifier: workflow-automation-cancel-a-workflow-instance
@@ -13377,6 +13390,19 @@ menu:
           - ListWorkflowInstances
         unstable: []
         order: 5
+    - name: Update workflow favorite status
+      url: '#update-workflow-favorite-status'
+      identifier: workflow-automation-update-workflow-favorite-status
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWorkflowFavorite
+        unstable:
+          - v2
+        order: 9
     - name: Update an existing Workflow
       url: '#update-an-existing-workflow'
       identifier: workflow-automation-update-an-existing-workflow
@@ -13425,3 +13451,16 @@ menu:
           - CreateWorkflow
         unstable: []
         order: 2
+    - name: Execute a workflow from a template
+      url: '#execute-a-workflow-from-a-template'
+      identifier: workflow-automation-execute-a-workflow-from-a-template
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExecuteWorkflowFromTemplate
+        unstable:
+          - v2
+        order: 11

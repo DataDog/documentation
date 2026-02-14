@@ -4045,6 +4045,12 @@
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
   },
+  "ExecuteWorkflowFromTemplate": {
+    "description": "Execute a headless workflow instance from a template. This endpoint creates and executes\na workflow instance based on a template configuration.\n\n**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Execute a workflow from a template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Create a Workflow",
@@ -4065,6 +4071,12 @@
     "request_description": "",
     "request_schema_description": "A request object for updating an existing workflow."
   },
+  "UpdateWorkflowFavorite": {
+    "description": "Mark a workflow as favorite or unfavorite for the authenticated user.\n\n**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Update workflow favorite status",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListWorkflowInstances": {
     "description": "List all instances of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "List workflow instances"
@@ -4082,5 +4094,11 @@
   "CancelWorkflowInstance": {
     "description": "Cancels a specific execution of a given workflow. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Cancel a workflow instance"
+  },
+  "ExecuteWorkflowFromWebhook": {
+    "description": "Execute a workflow triggered by a GitHub webhook. This endpoint validates the GitHub webhook signature\nand the GitHub user agent before executing the workflow.\n\nThis endpoint requires:\n- Valid GitHub webhook signature in the X-Hub-Signature-256 header\n- GitHub user agent in the User-Agent header\n- Valid organization ID in the orgId query parameter\n- Valid workflow ID in the path\n\n**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Execute a workflow from a webhook",
+    "request_description": "",
+    "request_schema_description": "GitHub webhook payload"
   }
 }

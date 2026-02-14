@@ -844,6 +844,14 @@ components:
         example: f9ec96b0-8c8a-4b0a-9b0a-1b2c3d4e5f6a
         format: uuid
         type: string
+    OrgIdQuery:
+      description: The organization ID
+      in: query
+      name: orgId
+      required: true
+      schema:
+        format: uuid
+        type: string
     PageNumber:
       description: Specific page number to return.
       in: query
@@ -874,6 +882,13 @@ components:
         example: 10
         format: int64
         type: integer
+    ParentId:
+      description: The ID of the parent workflow
+      in: path
+      name: parent_id
+      required: true
+      schema:
+        type: string
     ProjectIDPathParameter:
       description: Project UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -67614,6 +67629,154 @@ components:
           type: string
           writeOnly: true
       type: object
+    WorkflowFavoriteRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowFavoriteRequestData'
+      required:
+      - data
+      type: object
+    WorkflowFavoriteRequestAttributes:
+      properties:
+        favorite:
+          description: Whether to mark the workflow as favorite (true) or unfavorite
+            (false)
+          example: true
+          type: boolean
+      required:
+      - favorite
+      type: object
+    WorkflowFavoriteRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorkflowFavoriteRequestAttributes'
+        type:
+          $ref: '#/components/schemas/WorkflowFavoriteRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    WorkflowFavoriteRequestType:
+      description: The type for workflow favorite request
+      enum:
+      - workflow_favorite_request
+      example: workflow_favorite_request
+      type: string
+      x-enum-varnames:
+      - WORKFLOW_FAVORITE_REQUEST
+    WorkflowHeadlessExecutionConfig:
+      properties:
+        connections:
+          description: List of connections to use for the workflow execution
+          items:
+            $ref: '#/components/schemas/WorkflowHeadlessExecutionConnection'
+          type: array
+        inputs:
+          additionalProperties: {}
+          description: Input parameters for the workflow execution
+          example: {}
+          type: object
+      required:
+      - connections
+      - inputs
+      type: object
+    WorkflowHeadlessExecutionConnection:
+      properties:
+        connection_id:
+          description: The ID of the connection
+          example: 11111111-1111-1111-1111-111111111111
+          format: uuid
+          type: string
+        label:
+          description: The label for the connection
+          example: INTEGRATION_DATADOG
+          type: string
+      required:
+      - label
+      - connection_id
+      type: object
+    WorkflowHeadlessExecutionRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionRequestData'
+      required:
+      - data
+      type: object
+    WorkflowHeadlessExecutionRequestAttributes:
+      properties:
+        config:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionConfig'
+        template_id:
+          description: The ID of the workflow template to execute
+          example: template-789
+          type: string
+      required:
+      - template_id
+      - config
+      type: object
+    WorkflowHeadlessExecutionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionRequestAttributes'
+        id:
+          description: The ID of the parent workflow
+          example: '1234'
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionRequestType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    WorkflowHeadlessExecutionRequestType:
+      description: The type for workflow headless execution request
+      enum:
+      - workflow_headless_execution_request
+      example: workflow_headless_execution_request
+      type: string
+      x-enum-varnames:
+      - WORKFLOW_HEADLESS_EXECUTION_REQUEST
+    WorkflowHeadlessExecutionResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionResponseData'
+      required:
+      - data
+      type: object
+    WorkflowHeadlessExecutionResponseAttributes:
+      properties:
+        instance_id:
+          description: The ID of the workflow instance that was created
+          example: instance-abc
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      type: object
+    WorkflowHeadlessExecutionResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionResponseAttributes'
+        id:
+          description: The ID of the parent workflow
+          example: '1234'
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowHeadlessExecutionResponseType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    WorkflowHeadlessExecutionResponseType:
+      description: The type for workflow headless execution response
+      enum:
+      - workflow_headless_execution
+      example: workflow_headless_execution
+      type: string
+      x-enum-varnames:
+      - WORKFLOW_HEADLESS_EXECUTION
     WorkflowInstanceCreateMeta:
       description: Additional information for creating a workflow instance.
       properties:
@@ -67719,6 +67882,58 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    WorkflowWebhookExecutionResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/WorkflowWebhookExecutionResponseData'
+      required:
+      - data
+      type: object
+    WorkflowWebhookExecutionResponseAttributes:
+      properties:
+        instance_id:
+          description: The ID of the workflow instance that was created
+          example: instance-456
+          format: uuid
+          type: string
+        workflow_id:
+          description: The ID of the workflow that was executed
+          example: aa76b482-0c00-4f1c-9b63-7a20f7bf41f8
+          format: uuid
+          type: string
+      required:
+      - workflow_id
+      - instance_id
+      type: object
+    WorkflowWebhookExecutionResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WorkflowWebhookExecutionResponseAttributes'
+        id:
+          description: The unique identifier of the execution
+          example: execution-123
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowWebhookExecutionResponseType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    WorkflowWebhookExecutionResponseType:
+      description: The type for workflow webhook execution response
+      enum:
+      - workflow_webhook_execution
+      example: workflow_webhook_execution
+      type: string
+      x-enum-varnames:
+      - WORKFLOW_WEBHOOK_EXECUTION
+    WorkflowWebhookPayload:
+      additionalProperties: {}
+      description: GitHub webhook payload
+      example:
+        foo: bar
+      type: object
     WorklflowCancelInstanceResponse:
       description: Information about the canceled instance.
       properties:
@@ -104441,6 +104656,73 @@ paths:
         operator: OR
         permissions:
         - teams_read
+  /api/v2/workflow_headless/{parent_id}/instances:
+    post:
+      description: 'Execute a headless workflow instance from a template. This endpoint
+        creates and executes
+
+        a workflow instance based on a template configuration.
+
+
+        **Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ExecuteWorkflowFromTemplate
+      parameters:
+      - $ref: '#/components/parameters/ParentId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowHeadlessExecutionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowHeadlessExecutionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Execute a workflow from a template
+      tags:
+      - Workflow Automation
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - connections_resolve
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
@@ -104621,6 +104903,61 @@ paths:
         operator: OR
         permissions:
         - workflows_write
+  /api/v2/workflows/{workflow_id}/favorite:
+    put:
+      description: 'Mark a workflow as favorite or unfavorite for the authenticated
+        user.
+
+
+        **Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: UpdateWorkflowFavorite
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowFavoriteRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update workflow favorite status
+      tags:
+      - Workflow Automation
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - workflows_read
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/workflows/{workflow_id}/instances:
     get:
       description: List all instances of a given workflow. This API requires a [registered
@@ -104766,6 +105103,97 @@ paths:
         operator: OR
         permissions:
         - workflows_run
+  /api/v2/workflows/{workflow_id}/webhook:
+    post:
+      description: 'Execute a workflow triggered by a GitHub webhook. This endpoint
+        validates the GitHub webhook signature
+
+        and the GitHub user agent before executing the workflow.
+
+
+        This endpoint requires:
+
+        - Valid GitHub webhook signature in the X-Hub-Signature-256 header
+
+        - GitHub user agent in the User-Agent header
+
+        - Valid organization ID in the orgId query parameter
+
+        - Valid workflow ID in the path
+
+
+        **Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ExecuteWorkflowFromWebhook
+      parameters:
+      - $ref: '#/components/parameters/WorkflowId'
+      - $ref: '#/components/parameters/OrgIdQuery'
+      - description: GitHub webhook signature for payload validation
+        in: header
+        name: X-Hub-Signature-256
+        required: true
+        schema:
+          example: sha256=abcdef123456...
+          type: string
+      - description: Must start with "GitHub-Hookshot/"
+        in: header
+        name: User-Agent
+        required: true
+        schema:
+          example: GitHub-Hookshot/abc123
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowWebhookPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowWebhookExecutionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Execute a workflow from a webhook
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - connections_resolve
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
 security:
 - apiKeyAuth: []
   appKeyAuth: []
