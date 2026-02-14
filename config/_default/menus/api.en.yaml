@@ -11846,6 +11846,46 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Seats
+      url: /api/latest/seats/
+      identifier: seats
+      generated: true
+    - name: Assign seats to users
+      url: '#assign-seats-to-users'
+      identifier: seats-assign-seats-to-users
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AssignSeatsUser
+        unstable: []
+        order: 2
+    - name: Get users with seats
+      url: '#get-users-with-seats'
+      identifier: seats-get-users-with-seats
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSeatsUsers
+        unstable: []
+        order: 1
+    - name: Unassign seats from users
+      url: '#unassign-seats-from-users'
+      identifier: seats-unassign-seats-from-users
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnassignSeatsUser
+        unstable: []
+        order: 3
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
