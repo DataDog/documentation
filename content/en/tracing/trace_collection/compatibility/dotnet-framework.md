@@ -102,6 +102,8 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
+ **Note**: Customers using Redis clients are recommended to use Datadog trace agent 7.76 or later. This is due to a change added in the Redis 6.0 API which allows inline credentials, which are automatically obfuscated starting in the 7.76 release.
+
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
 ## Supported Datadog Agent versions

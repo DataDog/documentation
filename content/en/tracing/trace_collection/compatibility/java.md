@@ -218,6 +218,8 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Vert.x Redis Client     | 3.9-4.x  | Fully Supported | `vertx-redis-client`                                                                       |
 | Vert.x MySQL Client     | 3.9-4.x  | Fully Supported | `vertx-sql-client`																		                                                       |
 
+ **Note**: Customers using Redis clients are recommended to use Datadog trace agent 7.76 or later. This is due to a change added in the Redis 6.0 API which allows inline credentials, which are automatically obfuscated starting in the 7.76 release.
+
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
 - Apache Derby

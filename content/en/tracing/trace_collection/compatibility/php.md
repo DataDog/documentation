@@ -156,6 +156,8 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Predis                                                                  | 1.1                        | All supported PHP versions |
 | SQLSRV                                                                  | *(Any Supported PHP)*      | All supported PHP versions |
 
+ **Note**: Customers using Redis clients are recommended to use Datadog trace agent 7.76 or later. This is due to a change added in the Redis 6.0 API which allows inline credentials, which are automatically obfuscated starting in the 7.76 release.
+
 To request support for additional datastores, contact our awesome [support team][3].
 
 #### Library compatibility
