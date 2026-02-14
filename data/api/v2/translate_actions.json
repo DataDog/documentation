@@ -3000,6 +3000,22 @@
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
   },
+  "UnassignSeatsUserV2": {
+    "description": "Unassign seats from users for a product code.",
+    "summary": "Unassign seats from users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetSeatsUsersV2": {
+    "description": "Get the list of seats users assigned to a product code.",
+    "summary": "Get seats users"
+  },
+  "AssignSeatsUserV2": {
+    "description": "Assign seats to users for a product code.",
+    "summary": "Assign seats to users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListEntityRiskScores": {
     "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
     "summary": "List Entity Risk Scores"
