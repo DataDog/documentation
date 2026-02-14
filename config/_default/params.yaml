@@ -286,6 +286,7 @@ unsupported_sites:
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
+  coterm: [gov]
   cloudprem: [gov]
   data_jobs: [gov]
   datadog_disaster_recovery: [gov]
