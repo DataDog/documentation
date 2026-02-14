@@ -11846,6 +11846,270 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Security Vulnerabilities Pipelines
+      url: /api/latest/security-vulnerabilities-pipelines/
+      identifier: security-vulnerabilities-pipelines
+      generated: true
+    - name: Create a query migration job
+      url: '#create-a-query-migration-job'
+      identifier: security-vulnerabilities-pipelines-create-a-query-migration-job
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityVulnerabilitiesPipelinesQueryMigrationJob
+        unstable:
+          - v2
+        order: 19
+    - name: Update a mute rule
+      url: '#update-a-mute-rule'
+      identifier: security-vulnerabilities-pipelines-update-a-mute-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityVulnerabilitiesPipelinesMuteRule
+        unstable:
+          - v2
+        order: 16
+    - name: Partially update a mute rule
+      url: '#partially-update-a-mute-rule'
+      identifier: security-vulnerabilities-pipelines-partially-update-a-mute-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSecurityVulnerabilitiesPipelinesMuteRule
+        unstable:
+          - v2
+        order: 17
+    - name: Get a mute rule
+      url: '#get-a-mute-rule'
+      identifier: security-vulnerabilities-pipelines-get-a-mute-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityVulnerabilitiesPipelinesMuteRule
+        unstable:
+          - v2
+        order: 15
+    - name: Delete a mute rule
+      url: '#delete-a-mute-rule'
+      identifier: security-vulnerabilities-pipelines-delete-a-mute-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityVulnerabilitiesPipelinesMuteRule
+        unstable:
+          - v2
+        order: 18
+    - name: Reorder mute rules
+      url: '#reorder-mute-rules'
+      identifier: security-vulnerabilities-pipelines-reorder-mute-rules
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityVulnerabilitiesPipelinesMuteRules
+        unstable:
+          - v2
+        order: 14
+    - name: Create a mute rule
+      url: '#create-a-mute-rule'
+      identifier: security-vulnerabilities-pipelines-create-a-mute-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityVulnerabilitiesPipelinesMuteRule
+        unstable:
+          - v2
+        order: 13
+    - name: List mute rules
+      url: '#list-mute-rules'
+      identifier: security-vulnerabilities-pipelines-list-mute-rules
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityVulnerabilitiesPipelinesMuteRules
+        unstable:
+          - v2
+        order: 12
+    - name: Partially update an inbox rule
+      url: '#partially-update-an-inbox-rule'
+      identifier: security-vulnerabilities-pipelines-partially-update-an-inbox-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSecurityVulnerabilitiesPipelinesInboxRule
+        unstable:
+          - v2
+        order: 11
+    - name: Get an inbox rule
+      url: '#get-an-inbox-rule'
+      identifier: security-vulnerabilities-pipelines-get-an-inbox-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityVulnerabilitiesPipelinesInboxRule
+        unstable:
+          - v2
+        order: 10
+    - name: Reorder inbox rules
+      url: '#reorder-inbox-rules'
+      identifier: security-vulnerabilities-pipelines-reorder-inbox-rules
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityVulnerabilitiesPipelinesInboxRules
+        unstable:
+          - v2
+        order: 9
+    - name: Create an inbox rule
+      url: '#create-an-inbox-rule'
+      identifier: security-vulnerabilities-pipelines-create-an-inbox-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityVulnerabilitiesPipelinesInboxRule
+        unstable:
+          - v2
+        order: 8
+    - name: List inbox rules
+      url: '#list-inbox-rules'
+      identifier: security-vulnerabilities-pipelines-list-inbox-rules
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityVulnerabilitiesPipelinesInboxRules
+        unstable:
+          - v2
+        order: 7
+    - name: Update a due date rule
+      url: '#update-a-due-date-rule'
+      identifier: security-vulnerabilities-pipelines-update-a-due-date-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityVulnerabilitiesPipelinesDueDateRule
+        unstable:
+          - v2
+        order: 4
+    - name: Partially update a due date rule
+      url: '#partially-update-a-due-date-rule'
+      identifier: security-vulnerabilities-pipelines-partially-update-a-due-date-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSecurityVulnerabilitiesPipelinesDueDateRule
+        unstable:
+          - v2
+        order: 5
+    - name: Get a due date rule
+      url: '#get-a-due-date-rule'
+      identifier: security-vulnerabilities-pipelines-get-a-due-date-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityVulnerabilitiesPipelinesDueDateRule
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a due date rule
+      url: '#delete-a-due-date-rule'
+      identifier: security-vulnerabilities-pipelines-delete-a-due-date-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityVulnerabilitiesPipelinesDueDateRule
+        unstable:
+          - v2
+        order: 6
+    - name: Reorder due date rules
+      url: '#reorder-due-date-rules'
+      identifier: security-vulnerabilities-pipelines-reorder-due-date-rules
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityVulnerabilitiesPipelinesDueDateRules
+        unstable:
+          - v2
+        order: 2
+    - name: Create a due date rule
+      url: '#create-a-due-date-rule'
+      identifier: security-vulnerabilities-pipelines-create-a-due-date-rule
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityVulnerabilitiesPipelinesDueDateRule
+        unstable:
+          - v2
+        order: 1
+    - name: List due date rules
+      url: '#list-due-date-rules'
+      identifier: security-vulnerabilities-pipelines-list-due-date-rules
+      parent: security-vulnerabilities-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityVulnerabilitiesPipelinesDueDateRules
+        unstable:
+          - v2
+        order: 0
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner

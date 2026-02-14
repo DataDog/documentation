@@ -56169,6 +56169,787 @@ components:
       required:
       - securityTrigger
       type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleAction:
+      description: The action to apply for a due date rule.
+      properties:
+        due_time_per_severity:
+          description: The due time per severity level.
+          items:
+            $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateSeverityTime'
+          type: array
+        notify_before_due:
+          description: The duration before the due date to send a notification, in
+            ISO 8601 duration format.
+          example: P3D
+          type: string
+        reason_description:
+          description: A description of the reason for the action.
+          example: some description
+          type: string
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleCreateRequest:
+      description: Request body for creating a due date rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesPatchRequest:
+      description: Attributes for partially updating a due date rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the due date rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesRequest:
+      description: Attributes for creating a due date rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the due date rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesResponse:
+      description: Attributes of a due date rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleAction'
+        created_at:
+          description: The Unix timestamp of when the rule was created.
+          example: 100
+          format: int64
+          type: integer
+        created_by:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesUser'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        modified_at:
+          description: The Unix timestamp of when the rule was last modified.
+          example: 100
+          format: int64
+          type: integer
+        modified_by:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesUser'
+        name:
+          description: The name of the due date rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      - created_at
+      - created_by
+      - modified_at
+      - modified_by
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesUpdateRequest:
+      description: Attributes for updating a due date rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the due date rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataPatchRequest:
+      description: Data for partially updating a due date rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesPatchRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulesType'
+      required:
+      - type
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataRequest:
+      description: Data for creating a due date rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulesType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataResponse:
+      description: Data for a due date rule response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesResponse'
+        id:
+          description: The unique identifier of the due date rule.
+          example: 123e4567-e89b-12d3-a456-426655440000
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulesType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleDataUpdateRequest:
+      description: Data for updating a due date rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataAttributesUpdateRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulesType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRulePatchRequest:
+      description: Request body for partially updating a due date rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataPatchRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleResponse:
+      description: Response body for a due date rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataResponse'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRuleUpdateRequest:
+      description: Request body for updating a due date rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataUpdateRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRulesListResponse:
+      description: Response body for listing due date rules.
+      properties:
+        data:
+          description: The list of due date rules.
+          items:
+            $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleDataResponse'
+          type: array
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesDueDateRulesType:
+      description: The type of the due date rule resource.
+      enum:
+      - due_date_rules
+      example: due_date_rules
+      type: string
+      x-enum-varnames:
+      - DUE_DATE_RULES
+    SecurityVulnerabilitiesPipelinesDueDateSeverityTime:
+      description: A mapping of severity level to due time duration.
+      properties:
+        severity:
+          description: The severity level.
+          example: critical
+          type: string
+        time:
+          description: The due time duration in ISO 8601 duration format.
+          example: P1D
+          type: string
+      required:
+      - severity
+      - time
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleAction:
+      description: The action to apply for an inbox rule.
+      properties:
+        reason_description:
+          description: A description of the reason for the action.
+          example: other
+          type: string
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleCreateRequest:
+      description: Request body for creating an inbox rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleDataAttributesPatchRequest:
+      description: Attributes for partially updating an inbox rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the inbox rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleDataAttributesRequest:
+      description: Attributes for creating an inbox rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the inbox rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleDataAttributesResponse:
+      description: Attributes of an inbox rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleAction'
+        created_at:
+          description: The Unix timestamp of when the rule was created.
+          example: 100
+          format: int64
+          type: integer
+        created_by:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesUser'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        modified_at:
+          description: The Unix timestamp of when the rule was last modified.
+          example: 100
+          format: int64
+          type: integer
+        modified_by:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesUser'
+        name:
+          description: The name of the inbox rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      - created_at
+      - created_by
+      - modified_at
+      - modified_by
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleDataPatchRequest:
+      description: Data for partially updating an inbox rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataAttributesPatchRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRulesType'
+      required:
+      - type
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleDataRequest:
+      description: Data for creating an inbox rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataAttributesRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRulesType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleDataResponse:
+      description: Data for an inbox rule response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataAttributesResponse'
+        id:
+          description: The unique identifier of the inbox rule.
+          example: 123e4567-e89b-12d3-a456-426655440000
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRulesType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRulePatchRequest:
+      description: Request body for partially updating an inbox rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataPatchRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRuleResponse:
+      description: Response body for an inbox rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataResponse'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRulesListResponse:
+      description: Response body for listing inbox rules.
+      properties:
+        data:
+          description: The list of inbox rules.
+          items:
+            $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleDataResponse'
+          type: array
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesInboxRulesType:
+      description: The type of the inbox rule resource.
+      enum:
+      - inbox_rules
+      example: inbox_rules
+      type: string
+      x-enum-varnames:
+      - INBOX_RULES
+    SecurityVulnerabilitiesPipelinesMuteRuleAction:
+      description: The action to apply for a mute rule.
+      properties:
+        expire_at:
+          description: The Unix timestamp at which the mute expires.
+          example: 1700000000
+          format: int64
+          type: integer
+        reason:
+          description: The reason for muting the security issue.
+          example: pending_fix
+          type: string
+        reason_description:
+          description: A description of the reason for muting.
+          example: We are working on a fix
+          type: string
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleCreateRequest:
+      description: Request body for creating a mute rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesPatchRequest:
+      description: Attributes for partially updating a mute rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the mute rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesRequest:
+      description: Attributes for creating a mute rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the mute rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      - action
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesResponse:
+      description: Attributes of a mute rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleAction'
+        created_at:
+          description: The Unix timestamp of when the rule was created.
+          example: 100
+          format: int64
+          type: integer
+        created_by:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesUser'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        modified_at:
+          description: The Unix timestamp of when the rule was last modified.
+          example: 100
+          format: int64
+          type: integer
+        modified_by:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesUser'
+        name:
+          description: The name of the mute rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      - action
+      - created_at
+      - created_by
+      - modified_at
+      - modified_by
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesUpdateRequest:
+      description: Attributes for updating a mute rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleAction'
+        enabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        name:
+          description: The name of the mute rule.
+          example: Rule name
+          type: string
+        rule:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleCondition'
+      required:
+      - name
+      - enabled
+      - rule
+      - action
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataPatchRequest:
+      description: Data for partially updating a mute rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesPatchRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulesType'
+      required:
+      - type
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataRequest:
+      description: Data for creating a mute rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulesType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataResponse:
+      description: Data for a mute rule response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesResponse'
+        id:
+          description: The unique identifier of the mute rule.
+          example: 123e4567-e89b-12d3-a456-426655440000
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulesType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleDataUpdateRequest:
+      description: Data for updating a mute rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataAttributesUpdateRequest'
+        type:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulesType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRulePatchRequest:
+      description: Request body for partially updating a mute rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataPatchRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleResponse:
+      description: Response body for a mute rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataResponse'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRuleUpdateRequest:
+      description: Request body for updating a mute rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataUpdateRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRulesListResponse:
+      description: Response body for listing mute rules.
+      properties:
+        data:
+          description: The list of mute rules.
+          items:
+            $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleDataResponse'
+          type: array
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesMuteRulesType:
+      description: The type of the mute rule resource.
+      enum:
+      - mute_rules
+      example: mute_rules
+      type: string
+      x-enum-varnames:
+      - MUTE_RULES
+    SecurityVulnerabilitiesPipelinesQueryMigrationJobAttributesRequest:
+      description: Attributes for creating a query migration job.
+      properties:
+        migrate_all_orgs:
+          description: Whether to migrate all organizations.
+          example: false
+          type: boolean
+        migrate_all_rules:
+          description: Whether to migrate all rules.
+          example: false
+          type: boolean
+      type: object
+    SecurityVulnerabilitiesPipelinesQueryMigrationJobAttributesResponse:
+      description: Attributes of a query migration job.
+      properties:
+        migrate_all_orgs:
+          description: Whether all organizations are being migrated.
+          example: false
+          type: boolean
+        migrate_all_rules:
+          description: Whether all rules are being migrated.
+          example: false
+          type: boolean
+        status:
+          description: The status of the migration job.
+          example: completed
+          type: string
+      required:
+      - migrate_all_rules
+      - migrate_all_orgs
+      - status
+      type: object
+    SecurityVulnerabilitiesPipelinesQueryMigrationJobDataRequest:
+      description: Data for creating a query migration job.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesQueryMigrationJobAttributesRequest'
+        type:
+          description: The type of the query migration job resource.
+          enum:
+          - query_migration_job
+          example: query_migration_job
+          type: string
+          x-enum-varnames:
+          - QUERY_MIGRATION_JOB
+      required:
+      - type
+      type: object
+    SecurityVulnerabilitiesPipelinesQueryMigrationJobDataResponse:
+      description: Data for a query migration job response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesQueryMigrationJobAttributesResponse'
+        id:
+          description: The unique identifier of the migration job.
+          example: job-123
+          type: string
+        type:
+          description: The type of the query migration job resource.
+          enum:
+          - query_migration_job
+          example: query_migration_job
+          type: string
+          x-enum-varnames:
+          - QUERY_MIGRATION_JOB
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityVulnerabilitiesPipelinesQueryMigrationJobRequest:
+      description: Request body for creating a query migration job.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesQueryMigrationJobDataRequest'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesQueryMigrationJobResponse:
+      description: Response body for a query migration job.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesQueryMigrationJobDataResponse'
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesRuleCondition:
+      description: The conditions that define which security issues a rule applies
+        to.
+      properties:
+        evp_v2_query:
+          description: A v2 query string for filtering security issues.
+          example: '@remediation.is_available:true'
+          type: string
+        is_v2_source_of_truth:
+          description: Whether the v2 query is the source of truth.
+          example: false
+          type: boolean
+        issue_type:
+          description: The type of security issue.
+          example: vulnerability
+          type: string
+        query:
+          description: A legacy query string for filtering security issues.
+          example: key:val
+          type: string
+        rule_ids:
+          description: The specific rule IDs that match the condition.
+          example:
+          - rule-id-1
+          - rule-id-2
+          items:
+            type: string
+          type: array
+        rule_types:
+          description: The types of rules that match the condition.
+          example:
+          - misconfiguration
+          - attack_path
+          items:
+            type: string
+          type: array
+        severities:
+          description: The severity levels that match the condition.
+          example:
+          - low
+          - info
+          items:
+            type: string
+          type: array
+        user_query:
+          description: A user-friendly query string for filtering security issues.
+          example: fix_available:Available
+          type: string
+      type: object
+    SecurityVulnerabilitiesPipelinesRuleReorderItem:
+      description: An item in the reorder request.
+      properties:
+        id:
+          description: The unique identifier of the rule.
+          example: 123e4567-e89b-12d3-a456-426655440000
+          format: uuid
+          type: string
+        type:
+          description: The type of the rule.
+          example: mute_rules
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    SecurityVulnerabilitiesPipelinesRulesReorderRequest:
+      description: Request body for reordering rules.
+      properties:
+        data:
+          description: The ordered list of rules.
+          items:
+            $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRuleReorderItem'
+          type: array
+      required:
+      - data
+      type: object
+    SecurityVulnerabilitiesPipelinesUser:
+      description: Information about a user.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: handle for user
+          type: string
+        name:
+          description: The name of the user.
+          example: name for user
+          type: string
+      required:
+      - name
+      - handle
+      type: object
     Selectors:
       description: 'Selectors are used to filter security issues for which notifications
         should be generated.
@@ -67891,6 +68672,10 @@ components:
             security_monitoring_suppressions_write: Write Rule Suppressions.
             security_pipelines_read: View Security Pipelines.
             security_pipelines_write: Create, edit, and delete CSM Security Pipelines.
+            security_vulnerabilities_pipelines_read: View security vulnerabilities
+              pipelines rules.
+            security_vulnerabilities_pipelines_write: Create, edit, and delete security
+              vulnerabilities pipelines rules.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -95571,6 +96356,1127 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_notification_profiles_write
+  /api/v2/security/vulnerabilities/pipelines/due_date_rules:
+    get:
+      description: 'Retrieve a list of all due date rules for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ListSecurityVulnerabilitiesPipelinesDueDateRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulesListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_read
+      summary: List due date rules
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 0
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create a new due date rule for security vulnerabilities pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: CreateSecurityVulnerabilitiesPipelinesDueDateRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Create a due date rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/due_date_rules/reorder:
+    post:
+      description: 'Reorder the priority of due date rules for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ReorderSecurityVulnerabilitiesPipelinesDueDateRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRulesReorderRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulesListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Reorder due date rules
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/due_date_rules/{rule_id}:
+    delete:
+      description: 'Delete a specific due date rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: DeleteSecurityVulnerabilitiesPipelinesDueDateRule
+      parameters:
+      - description: The ID of the due date rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Delete a due date rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Retrieve a specific due date rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: GetSecurityVulnerabilitiesPipelinesDueDateRule
+      parameters:
+      - description: The ID of the due date rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_read
+      summary: Get a due date rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Partially update a specific due date rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: PatchSecurityVulnerabilitiesPipelinesDueDateRule
+      parameters:
+      - description: The ID of the due date rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRulePatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Partially update a due date rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: 'Update a specific due date rule by ID for security vulnerabilities
+        pipelines. This replaces the entire rule.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: UpdateSecurityVulnerabilitiesPipelinesDueDateRule
+      parameters:
+      - description: The ID of the due date rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesDueDateRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Update a due date rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/inbox_rules:
+    get:
+      description: 'Retrieve a list of all inbox rules for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ListSecurityVulnerabilitiesPipelinesInboxRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRulesListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_read
+      summary: List inbox rules
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create a new inbox rule for security vulnerabilities pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: CreateSecurityVulnerabilitiesPipelinesInboxRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Create an inbox rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/inbox_rules/reorder:
+    post:
+      description: 'Reorder the priority of inbox rules for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ReorderSecurityVulnerabilitiesPipelinesInboxRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRulesReorderRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRulesListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Reorder inbox rules
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/inbox_rules/{rule_id}:
+    get:
+      description: 'Retrieve a specific inbox rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: GetSecurityVulnerabilitiesPipelinesInboxRule
+      parameters:
+      - description: The ID of the inbox rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_read
+      summary: Get an inbox rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Partially update a specific inbox rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: PatchSecurityVulnerabilitiesPipelinesInboxRule
+      parameters:
+      - description: The ID of the inbox rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRulePatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesInboxRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Partially update an inbox rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 11
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/mute_rules:
+    get:
+      description: 'Retrieve a list of all mute rules for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ListSecurityVulnerabilitiesPipelinesMuteRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulesListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_read
+      summary: List mute rules
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 12
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create a new mute rule for security vulnerabilities pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: CreateSecurityVulnerabilitiesPipelinesMuteRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Create a mute rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 13
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/mute_rules/reorder:
+    post:
+      description: 'Reorder the priority of mute rules for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ReorderSecurityVulnerabilitiesPipelinesMuteRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesRulesReorderRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulesListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Reorder mute rules
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 14
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/mute_rules/{rule_id}:
+    delete:
+      description: 'Delete a specific mute rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: DeleteSecurityVulnerabilitiesPipelinesMuteRule
+      parameters:
+      - description: The ID of the mute rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Delete a mute rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 18
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Retrieve a specific mute rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: GetSecurityVulnerabilitiesPipelinesMuteRule
+      parameters:
+      - description: The ID of the mute rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_read
+      summary: Get a mute rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 15
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Partially update a specific mute rule by ID for security vulnerabilities
+        pipelines.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: PatchSecurityVulnerabilitiesPipelinesMuteRule
+      parameters:
+      - description: The ID of the mute rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRulePatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Partially update a mute rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 17
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: 'Update a specific mute rule by ID for security vulnerabilities
+        pipelines. This replaces the entire rule.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: UpdateSecurityVulnerabilitiesPipelinesMuteRule
+      parameters:
+      - description: The ID of the mute rule.
+        example: 123e4567-e89b-12d3-a456-426655440000
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesMuteRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Update a mute rule
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 16
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security/vulnerabilities/pipelines/query_migration_job:
+    post:
+      description: 'Create a new query migration job to migrate queries in security
+        vulnerabilities pipelines rules.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: CreateSecurityVulnerabilitiesPipelinesQueryMigrationJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesQueryMigrationJobRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityVulnerabilitiesPipelinesQueryMigrationJobResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_vulnerabilities_pipelines_write
+      summary: Create a query migration job
+      tags:
+      - Security Vulnerabilities Pipelines
+      x-menu-order: 19
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/vulnerable-assets:
     get:
       description: 'Get a list of vulnerable assets.
@@ -105347,6 +107253,9 @@ tags:
     See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
     information.
   name: Security Monitoring
+- description: Manage security vulnerabilities pipelines rules through the Datadog
+    API.
+  name: Security Vulnerabilities Pipelines
 - description: Create, update, delete, and retrieve sensitive data scanner groups
     and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/)
     for more information.
