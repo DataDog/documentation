@@ -8688,6 +8688,58 @@ menu:
       url: /api/latest/incidents/
       identifier: incidents
       generated: true
+    - name: Update a timestamp override for an incident
+      url: '#update-a-timestamp-override-for-an-incident'
+      identifier: incidents-update-a-timestamp-override-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentTimestampOverride
+        unstable:
+          - v2
+        order: 51
+    - name: Delete a timestamp override for an incident
+      url: '#delete-a-timestamp-override-for-an-incident'
+      identifier: incidents-delete-a-timestamp-override-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentTimestampOverride
+        unstable:
+          - v2
+        order: 52
+    - name: Create a timestamp override for an incident
+      url: '#create-a-timestamp-override-for-an-incident'
+      identifier: incidents-create-a-timestamp-override-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentTimestampOverride
+        unstable:
+          - v2
+        order: 50
+    - name: List timestamp overrides for an incident
+      url: '#list-timestamp-overrides-for-an-incident'
+      identifier: incidents-list-timestamp-overrides-for-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentTimestampOverrides
+        unstable:
+          - v2
+        order: 49
     - name: Update an incident todo
       url: '#update-an-incident-todo'
       identifier: incidents-update-an-incident-todo

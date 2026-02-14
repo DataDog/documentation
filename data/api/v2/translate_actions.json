@@ -1418,6 +1418,26 @@
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
   },
+  "ListIncidentTimestampOverrides": {
+    "description": "Get all timestamp overrides for a specific incident.",
+    "summary": "List timestamp overrides for an incident"
+  },
+  "CreateIncidentTimestampOverride": {
+    "description": "Create a new timestamp override for a specific incident.",
+    "summary": "Create a timestamp override for an incident",
+    "request_description": "",
+    "request_schema_description": "Request to create an incident timestamp override."
+  },
+  "DeleteIncidentTimestampOverride": {
+    "description": "Delete an existing timestamp override for a specific incident.",
+    "summary": "Delete a timestamp override for an incident"
+  },
+  "UpdateIncidentTimestampOverride": {
+    "description": "Update an existing timestamp override for a specific incident.",
+    "summary": "Update a timestamp override for an incident",
+    "request_description": "",
+    "request_schema_description": "Request to patch an incident timestamp override."
+  },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
     "summary": "List all AWS integrations"
