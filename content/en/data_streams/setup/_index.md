@@ -1,12 +1,8 @@
 ---
 title: Setup Data Streams Monitoring
+cascade:
+  site_support_id: data_streams_setup
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
 
 ### By language
 
