@@ -6,9 +6,6 @@ aliases:
     - /real_user_monitoring/reactnative-codepush/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/codepush
     - /real_user_monitoring/mobile_and_tv_monitoring/codepush/setup
-type: multi-code-lang
-code_lang: codepush
-code_lang_weight: 3
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
