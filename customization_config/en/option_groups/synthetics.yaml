@@ -1,0 +1,30 @@
+# Test type options for the template variables page
+synthetics_test_type_options:
+  - id: browser
+    default: true
+  - id: mobile
+  - id: multistep
+
+# Protocol options for the template variables API page
+synthetics_protocol_options:
+  - id: http
+    default: true
+  - id: dns
+  - id: ssl
+  - id: websocket
+  - id: udp
+  - id: tcp
+  - id: icmp
+  - id: grpc
+
+# Variable options used on both template variables pages
+synthetics_variables_options:
+  - id: execution
+    default: true
+  - id: test_metadata
+  - id: device_info
+  - id: execution_results
+  - id: failed_step_info
+  - id: local_global_variables
+  - id: extracted
+  - id: step
