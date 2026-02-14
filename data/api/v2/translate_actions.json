@@ -646,6 +646,12 @@
     "request_description": "Entity YAML or JSON.",
     "request_schema_description": "Create or update entity request."
   },
+  "ConvertCatalogEntities": {
+    "description": "Convert entities from one schema version to another in Software Catalog.",
+    "summary": "Convert entities between schema versions",
+    "request_description": "Entity YAML or JSON to convert.",
+    "request_schema_description": "Create or update entity request."
+  },
   "PreviewCatalogEntities": {
     "summary": "Preview catalog entities"
   },
@@ -666,6 +672,24 @@
   "DeleteCatalogKind": {
     "description": "Delete a single kind in Software Catalog.",
     "summary": "Delete a single kind"
+  },
+  "AcceptRecommendedEntities": {
+    "description": "Accept multiple recommended entities in Software Catalog in a single request.",
+    "summary": "Accept recommended entities in bulk",
+    "request_description": "List of recommended entities to accept with their schemas.",
+    "request_schema_description": "Request to accept recommended entities."
+  },
+  "DeclineRecommendedEntities": {
+    "description": "Decline multiple recommended entities in Software Catalog in a single request.",
+    "summary": "Decline recommended entities in bulk",
+    "request_description": "List of recommended entity IDs to decline.",
+    "request_schema_description": "Request to decline recommended entities."
+  },
+  "TriggerRecommendedEntities": {
+    "description": "Trigger the discovery of recommended entities in Software Catalog.",
+    "summary": "Trigger recommended entity discovery",
+    "request_description": "Optional request body for triggering recommended entity discovery.",
+    "request_schema_description": ""
   },
   "ListCatalogRelation": {
     "description": "Get a list of entity relations from Software Catalog.",
@@ -1177,6 +1201,16 @@
     "summary": "Create or update HAMR organization connection",
     "request_description": "",
     "request_schema_description": ""
+  },
+  "GetIDPConfigValue": {
+    "description": "Get a configuration value for the Internal Developer Portal (IDP).",
+    "summary": "Get Internal Developer Portal configuration"
+  },
+  "UpsertIDPConfigValue": {
+    "description": "Create or update a configuration value for the Internal Developer Portal (IDP).",
+    "summary": "Create or update IDP configuration",
+    "request_description": "Configuration value to set.",
+    "request_schema_description": "Request to set IDP configuration value."
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",

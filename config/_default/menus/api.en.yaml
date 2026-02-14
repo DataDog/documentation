@@ -12306,6 +12306,32 @@ menu:
       url: /api/latest/software-catalog/
       identifier: software-catalog
       generated: true
+    - name: Create or update IDP configuration
+      url: '#create-or-update-idp-configuration'
+      identifier: software-catalog-create-or-update-idp-configuration
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertIDPConfigValue
+        unstable:
+          - v2
+        order: 11
+    - name: Get Internal Developer Portal configuration
+      url: '#get-internal-developer-portal-configuration'
+      identifier: software-catalog-get-internal-developer-portal-configuration
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIDPConfigValue
+        unstable:
+          - v2
+        order: 10
     - name: Get a list of entity relations
       url: '#get-a-list-of-entity-relations'
       identifier: software-catalog-get-a-list-of-entity-relations
@@ -12318,6 +12344,45 @@ menu:
           - ListCatalogRelation
         unstable: []
         order: 3
+    - name: Trigger recommended entity discovery
+      url: '#trigger-recommended-entity-discovery'
+      identifier: software-catalog-trigger-recommended-entity-discovery
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - TriggerRecommendedEntities
+        unstable:
+          - v2
+        order: 9
+    - name: Decline recommended entities in bulk
+      url: '#decline-recommended-entities-in-bulk'
+      identifier: software-catalog-decline-recommended-entities-in-bulk
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeclineRecommendedEntities
+        unstable:
+          - v2
+        order: 8
+    - name: Accept recommended entities in bulk
+      url: '#accept-recommended-entities-in-bulk'
+      identifier: software-catalog-accept-recommended-entities-in-bulk
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AcceptRecommendedEntities
+        unstable:
+          - v2
+        order: 7
     - name: Delete a single kind
       url: '#delete-a-single-kind'
       identifier: software-catalog-delete-a-single-kind
@@ -12377,6 +12442,19 @@ menu:
         operationids:
           - PreviewCatalogEntities
         unstable: []
+        order: 3
+    - name: Convert entities between schema versions
+      url: '#convert-entities-between-schema-versions'
+      identifier: software-catalog-convert-entities-between-schema-versions
+      parent: software-catalog
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertCatalogEntities
+        unstable:
+          - v2
         order: 3
     - name: Create or update entities
       url: '#create-or-update-entities'
