@@ -40800,18 +40800,21 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: 'Datadog Synthetic Monitoring uses simulated user requests and browser
-    rendering to help you ensure uptime,
+- description: 'Synthetic tests use simulated requests and actions so you can monitor
+    the availability and performance of systems and applications. Datadog supports
+    the following types of synthetic tests:
 
-    identify regional issues, and track your application performance. Synthetic tests
-    come in
+    - [API tests](https://docs.datadoghq.com/synthetics/api_tests/)
 
-    two different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)
+    - [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)
 
-    and [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You
-    can use Datadog''s API to
+    - [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)
 
-    manage both test types programmatically.
+    - [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)
+
+
+    You can use the Datadog API to create, manage, and organize tests and test suites
+    programmatically.
 
 
     For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'

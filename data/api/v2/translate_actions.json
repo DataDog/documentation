@@ -3730,6 +3730,24 @@
     "request_description": "New suite details to be saved.",
     "request_schema_description": ""
   },
+  "DeleteSyntheticsTests": {
+    "summary": "Synthetics: Bulk delete tests",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateSyntheticsNetworkTest": {
+    "summary": "Synthetics: Create a Network Path test",
+    "request_description": "",
+    "request_schema_description": "Network Path test request."
+  },
+  "GetSyntheticsNetworkTest": {
+    "summary": "Synthetics: Get a Network Path test"
+  },
+  "UpdateSyntheticsNetworkTest": {
+    "summary": "Synthetics: Edit a Network Path test",
+    "request_description": "New Network Path test details to be saved.",
+    "request_schema_description": "Network Path test request."
+  },
   "PatchGlobalVariable": {
     "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
     "summary": "Patch a global variable",
