@@ -1,0 +1,9 @@
+{{- $isExpanded := default false (.Get "expanded") -}}
+<details class="simple-collapse" {{ if $isExpanded }}open{{ end }}>
+  <summary class="simple-collapse-header">
+    {{ .Get "title" }}
+  </summary>
+  <div class="simple-collapse-content">
+    {{.Inner}}
+  </div>
+</details>
