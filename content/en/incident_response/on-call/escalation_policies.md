@@ -94,6 +94,11 @@ Common use cases for paging an entire Team are:
 - Maximum number of notify targets (individuals, teams, or schedules) per escalation step: 10
 - Minimum time before escalation to the next step: one minute
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /incident_response/on-call/teams
 [2]: https://app.datadoghq.com/on-call/escalation-policies
 [3]: https://app.datadoghq.com/on-call/escalation-policies/create
+[4]: /incident_response/on-call/responding_to_pages
