@@ -6702,11 +6702,16 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_azure_aks
       weight: 302
+    - name: GCP GKE
+      url: /cloudprem/install/gcp_gke
+      parent: cloudprem_install
+      identifier: cloudprem_gcp_gke
+      weight: 303
     - name: Docker (Local)
       url: /cloudprem/install/docker
       parent: cloudprem_install
       identifier: cloudprem_docker
-      weight: 303
+      weight: 304
     - name: Ingest
       url: /cloudprem/ingest/
       parent: cloudprem
