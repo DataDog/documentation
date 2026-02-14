@@ -7535,6 +7535,36 @@ menu:
           - GetAggregatedConnections
         unstable: []
         order: 1
+    - name: Cloud Security Management
+      url: /api/latest/cloud-security-management/
+      identifier: cloud-security-management
+      generated: true
+    - name: Get related cloud logs for a resource
+      url: '#get-related-cloud-logs-for-a-resource'
+      identifier: cloud-security-management-get-related-cloud-logs-for-a-resource
+      parent: cloud-security-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRelatedCloudLogs
+        unstable:
+          - v2
+        order: 2
+    - name: Get CloudTrail query for a resource
+      url: '#get-cloudtrail-query-for-a-resource'
+      identifier: cloud-security-management-get-cloudtrail-query-for-a-resource
+      parent: cloud-security-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCloudTrailQuery
+        unstable:
+          - v2
+        order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
       identifier: cloudflare-integration

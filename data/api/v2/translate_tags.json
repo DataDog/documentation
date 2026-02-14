@@ -87,6 +87,10 @@
     "name": "Cloud Network Monitoring",
     "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/) for more information."
   },
+  "cloud-security-management": {
+    "name": "Cloud Security Management",
+    "description": "Manage and query cloud security resources and their context. These endpoints provide access to security-related information about cloud resources, including CloudTrail logs and related cloud logs for security analysis and investigation."
+  },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."

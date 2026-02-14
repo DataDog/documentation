@@ -729,6 +729,14 @@
     "request_description": "",
     "request_schema_description": "Request object to update a custom framework."
   },
+  "GetCloudTrailQuery": {
+    "description": "Get the CloudTrail query string for a given resource. This endpoint helps retrieve CloudTrail logs related to a specific cloud resource.",
+    "summary": "Get CloudTrail query for a resource"
+  },
+  "GetRelatedCloudLogs": {
+    "description": "Get the cloud logs query string for a given resource. This endpoint helps retrieve logs related to a specific cloud resource for security analysis.",
+    "summary": "Get related cloud logs for a resource"
+  },
   "GetResourceEvaluationFilters": {
     "description": "List resource filters.",
     "summary": "List resource filters"
