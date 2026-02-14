@@ -518,6 +518,17 @@ components:
         items:
           $ref: '#/components/schemas/IncidentImpactRelatedObject'
         type: array
+    IncidentImportIncludeQueryParameter:
+      description: Specifies which types of related objects should be included in
+        the response when importing an incident.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentImportRelatedObject'
+        type: array
     IncidentIncludeQueryParameter:
       description: Specifies which types of related objects should be included in
         the response.
@@ -28773,6 +28784,319 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_IMPACTS
+    IncidentImportFieldAttributes:
+      description: Dynamic fields for which selections can be made, with field names
+        as keys.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentImportFieldAttributesSingleValue'
+      - $ref: '#/components/schemas/IncidentImportFieldAttributesMultipleValue'
+    IncidentImportFieldAttributesMultipleValue:
+      description: A field with potentially multiple values selected.
+      properties:
+        value:
+          description: The multiple values selected for this field.
+          example:
+          - '1.0'
+          - '1.1'
+          items:
+            description: A value which has been selected for the parent field.
+            example: '1.1'
+            type: string
+          nullable: true
+          type: array
+      type: object
+    IncidentImportFieldAttributesSingleValue:
+      description: A field with a single value selected.
+      properties:
+        value:
+          description: The single value selected for this field.
+          example: SEV-1
+          nullable: true
+          type: string
+      type: object
+    IncidentImportRelatedObject:
+      description: Object related to an incident that can be included in the response.
+      enum:
+      - last_modified_by_user
+      - created_by_user
+      - commander_user
+      - declared_by_user
+      - incident_type
+      type: string
+      x-enum-varnames:
+      - LAST_MODIFIED_BY_USER
+      - CREATED_BY_USER
+      - COMMANDER_USER
+      - DECLARED_BY_USER
+      - INCIDENT_TYPE
+    IncidentImportRelationships:
+      description: The relationships for an incident import request.
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+        declared_by_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+      type: object
+    IncidentImportRequest:
+      description: Import request for an incident. Used to import historical incidents
+        from external systems.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentImportRequestData'
+      required:
+      - data
+      type: object
+    IncidentImportRequestAttributes:
+      description: The incident's attributes for an import request.
+      properties:
+        declared:
+          description: Timestamp when the incident was declared.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        detected:
+          description: Timestamp when the incident was detected.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentImportFieldAttributes'
+          description: A condensed view of the user-defined fields for which to create
+            initial selections.
+          example:
+            severity:
+              value: SEV-5
+            state:
+              value: active
+          type: object
+        incident_type_uuid:
+          description: A unique identifier that represents the incident type. If not
+            provided, the default incident type will be used.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        resolved:
+          description: Timestamp when the incident was resolved. Can only be set when
+            the state field is set to 'resolved'.
+          example: '2025-01-01T01:00:00Z'
+          format: date-time
+          type: string
+        title:
+          description: The title of the incident, which summarizes what happened.
+          example: Imported incident from external system
+          maxLength: 1024
+          type: string
+        visibility:
+          $ref: '#/components/schemas/IncidentImportVisibility'
+      required:
+      - title
+      type: object
+    IncidentImportRequestData:
+      description: Incident data for an import request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentImportRequestAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentImportRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentImportResponse:
+      description: Response with an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentImportResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentImportResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentImportResponseAttributes:
+      description: The incident's attributes from an import response.
+      properties:
+        archived:
+          description: Timestamp of when the incident was archived.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        case_id:
+          description: The incident case id.
+          format: int64
+          nullable: true
+          type: integer
+        created:
+          description: Timestamp when the incident was created.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        created_by_uuid:
+          description: UUID of the user who created the incident.
+          nullable: true
+          type: string
+        creation_idempotency_key:
+          description: A unique key used to ensure idempotent incident creation.
+          nullable: true
+          type: string
+        customer_impact_end:
+          description: Timestamp when customers were no longer impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impact_scope:
+          description: A summary of the impact customers experienced during the incident.
+          example: An example customer impact scope
+          nullable: true
+          type: string
+        customer_impact_start:
+          description: Timestamp when customers began being impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        declared:
+          description: Timestamp when the incident was declared.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        declared_by_uuid:
+          description: UUID of the user who declared the incident.
+          nullable: true
+          type: string
+        detected:
+          description: Timestamp when the incident was detected.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields attached to incidents.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        incident_type_uuid:
+          description: A unique identifier that represents an incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        is_test:
+          description: A flag indicating whether the incident is a test incident.
+          example: false
+          type: boolean
+        last_modified_by_uuid:
+          description: UUID of the user who last modified the incident.
+          nullable: true
+          type: string
+        modified:
+          description: Timestamp when the incident was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        non_datadog_creator:
+          $ref: '#/components/schemas/IncidentNonDatadogCreator'
+        notification_handles:
+          description: Notification handles that will be notified of the incident
+            during update.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationHandle'
+          nullable: true
+          type: array
+        public_id:
+          description: The monotonically increasing integer ID for the incident.
+          example: 1
+          format: int64
+          type: integer
+        resolved:
+          description: Timestamp when the incident's state was last changed from active
+            or stable to resolved or completed.
+          format: date-time
+          nullable: true
+          type: string
+        severity:
+          $ref: '#/components/schemas/IncidentSeverity'
+        state:
+          description: The state of the incident.
+          nullable: true
+          type: string
+        title:
+          description: The title of the incident, which summarizes what happened.
+          example: A test incident title
+          type: string
+        visibility:
+          description: The incident visibility status.
+          nullable: true
+          type: string
+      required:
+      - title
+      type: object
+    IncidentImportResponseData:
+      description: Incident data from an import response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentImportResponseAttributes'
+        id:
+          description: The incident's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentImportResponseRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentImportResponseIncludedItem:
+      description: An object related to an incident that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentUserData'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentImportResponseRelationships:
+      description: The incident's relationships from an import response.
+      properties:
+        attachments:
+          $ref: '#/components/schemas/RelationshipToIncidentAttachment'
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        declared_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        impacts:
+          $ref: '#/components/schemas/RelationshipToIncidentImpacts'
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+        integrations:
+          $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        responders:
+          $ref: '#/components/schemas/RelationshipToIncidentResponders'
+        user_defined_fields:
+          $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFields'
+      type: object
+    IncidentImportVisibility:
+      default: organization
+      description: The visibility of the incident.
+      enum:
+      - organization
+      - private
+      example: organization
+      type: string
+      x-enum-varnames:
+      - ORGANIZATION
+      - PRIVATE
     IncidentIntegrationMetadataAttributes:
       description: Incident integration metadata's attributes for a create request.
       properties:
@@ -79698,6 +80022,59 @@ paths:
         operator: OR
         permissions:
         - incident_settings_write
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/import:
+    post:
+      description: 'Import an incident from an external system. This endpoint allows
+        you to create incidents with
+
+        historical data such as custom timestamps for detection, declaration, and
+        resolution.
+
+        Imported incidents will not execute integrations or notification rules.'
+      operationId: ImportIncident
+      parameters:
+      - $ref: '#/components/parameters/IncidentImportIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentImportRequest'
+        description: Incident import payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentImportResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Import an incident
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 49
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_write
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'

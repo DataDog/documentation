@@ -1,0 +1,19 @@
+{
+  "data": {
+    "type": "incidents",
+    "attributes": {
+      "declared": "2025-01-01T00:00:00Z",
+      "detected": "2025-01-01T00:00:00Z",
+      "fields": {
+        "severity": {
+          "value": "SEV-5"
+        },
+        "state": {
+          "value": "active"
+        }
+      },
+      "title": "Example-Incident",
+      "visibility": "organization"
+    }
+  }
+}

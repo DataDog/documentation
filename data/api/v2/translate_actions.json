@@ -1314,6 +1314,12 @@
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
   },
+  "ImportIncident": {
+    "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents will not execute integrations or notification rules.",
+    "summary": "Import an incident",
+    "request_description": "Incident import payload.",
+    "request_schema_description": "Import request for an incident. Used to import historical incidents from external systems."
+  },
   "SearchIncidents": {
     "description": "Search for incidents matching a certain query.",
     "summary": "Search for incidents"
