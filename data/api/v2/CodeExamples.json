@@ -758,6 +758,20 @@
       "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
+  "CreateOrganizationHandle": [
+    {
+      "group": "google_chat_integration",
+      "suffix": "",
+      "description": "Create organization handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateOrganizationHandle": [
+    {
+      "group": "google_chat_integration",
+      "suffix": "",
+      "description": "Update organization handle returns \"OK\" response"
+    }
+  ],
   "UpdateIPAllowlist": [
     {
       "group": "ip_allowlist",

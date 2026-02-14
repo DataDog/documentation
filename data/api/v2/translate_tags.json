@@ -151,6 +151,10 @@
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
+  "google-chat-integration": {
+    "name": "Google Chat Integration",
+    "description": "Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)\ndirectly through the Datadog API."
+  },
   "high-availability-multiregion": {
     "name": "High Availability MultiRegion",
     "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."
