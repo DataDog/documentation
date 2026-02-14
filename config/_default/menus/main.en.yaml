@@ -233,6 +233,11 @@ menu:
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
       weight: 2304
+    - name: MCP Tools
+      identifier: getting_started_software_delivery_mcp_tools
+      url: getting_started/software_delivery_mcp_tools/
+      parent: getting_started_software_delivery
+      weight: 2305
     - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
