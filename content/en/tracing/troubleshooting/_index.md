@@ -302,6 +302,12 @@ There are several configuration options available to scrub sensitive data or dis
 
 This section explains how to use debug and startup logs to identify and resolve issues with your Datadog tracer.
 
+{{% collapse-content title="SDK configurations" level="h4" %}}
+
+Configuration values are automatically reported by the SDKs and can be viewed in the UI. This can be used to troubleshoot instrumentation issues caused by misconfiguration. For details, see the [SDK configurations page][34].
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Debug logs" level="h4" %}}
 
 To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or if Datadog support has recommended it for triage purposes. However, be sure to disable debug logging when you are finished testing to avoid the logging overhead it introduces.
@@ -379,4 +385,5 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [30]: /tracing/services/inferred_services
 [31]: /tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
-
+[33]: /tracing/troubleshooting/configuration_visibility/
+[34]: /tracing/troubleshooting/sdk_configurations/
