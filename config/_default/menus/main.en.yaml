@@ -7241,6 +7241,222 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
+    - name: Workload Protection
+      url: security/workload_protection/
+      pre: security-workload-security
+      parent: security_platform_heading
+      identifier: workload_protection
+      weight: 60000
+    - name: Getting started
+      url: security/workload_protection/getting_started
+      parent: workload_protection
+      identifier: workload_protection_getting_started
+      weight: 90
+    - name: Docker
+      url: security/workload_protection/getting_started/docker
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_docker
+      weight: 10
+    - name: Kubernetes
+      url: security/workload_protection/getting_started/kubernetes
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_kubernetes
+      weight: 20
+    - name: ECS (EC2 compute)
+      url: security/workload_protection/getting_started/ecs_ec2
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_ecs_ec2
+      weight: 30
+    - name: Linux (eBPF)
+      url: security/workload_protection/getting_started/linux_ebpf
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_linux_ebpf
+      weight: 40
+    - name: Linux (eBPF-less)
+      url: security/workload_protection/getting_started/linux_ebpfless
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_linux_ebpfless
+      weight: 50
+    - name: Fargate
+      url: security/workload_protection/getting_started/fargate
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_fargate
+      weight: 60
+    - name: Windows
+      url: security/workload_protection/getting_started/windows
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_windows
+      weight: 70
+    - name: Advanced configuration
+      url: security/workload_protection/getting_started/advanced_configuration
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_advanced_configuration
+      weight: 80
+    - name: Detect and Monitor
+      url: security/workload_protection/detect_and_monitor
+      parent: workload_protection
+      identifier: workload_protection_detect_and_monitor
+      weight: 91
+    - name: Agent rules
+      url: security/workload_protection/detect_and_monitor/agent_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_agent_rules
+      weight: 10
+    - name: SecL guide
+      url: security/workload_protection/detect_and_monitor/agent_rules/secl_guide
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_secl_guide
+      weight: 10
+    - name: Variables and actions
+      url: security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_variables_and_actions
+      weight: 20
+    - name: Policy management
+      url: security/workload_protection/detect_and_monitor/agent_rules/policy_management
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_policy_management
+      weight: 30
+    - name: Linux syntax
+      url: security/workload_protection/linux_expressions
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_linux_expressions
+      weight: 40
+    - name: Linux backend syntax
+      url: security/workload_protection/backend_linux
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_backend_linux
+      weight: 50
+    - name: Windows syntax
+      url: security/workload_protection/windows_expressions
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_windows_expressions
+      weight: 60
+    - name: Windows backend syntax
+      url: security/workload_protection/backend_windows
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_backend_windows
+      weight: 70
+    - name: Advanced use cases
+      url: security/workload_protection/detect_and_monitor/agent_rules/advanced_use_cases
+      parent: workload_protection_detect_and_monitor_agent_rules
+      identifier: workload_protection_detect_and_monitor_agent_rules_advanced_use_cases
+      weight: 80
+    - name: Detection rules
+      url: security/workload_protection/detect_and_monitor/detection_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_detection_rules
+      weight: 20
+    - name: Finding rules
+      url: security/workload_protection/detect_and_monitor/finding_rules
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_finding_rules
+      weight: 30
+    - name: Threat intelligence
+      url: security/workload_protection/detect_and_monitor/threat_intelligence
+      parent: workload_protection_detect_and_monitor
+      identifier: workload_protection_detect_and_monitor_threat_intelligence
+      weight: 40
+    - name: Investigate and Triage
+      url: security/workload_protection/investigate_and_triage
+      parent: workload_protection
+      identifier: workload_protection_investigate_and_triage
+      weight: 92
+    - name: Agent events
+      url: security/workload_protection/investigate_and_triage/agent_events
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_agent_events
+      weight: 10
+    - name: Signals
+      url: security/workload_protection/investigate_and_triage/security_signals
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_security_signals
+      weight: 20
+    - name: Findings
+      url: security/workload_protection/investigate_and_triage/security_findings
+      parent: workload_protection_investigate_and_triage
+      identifier: workload_protection_investigate_and_triage_security_findings
+      weight: 30
+    - name: Respond and Report
+      url: security/workload_protection/respond_and_report
+      parent: workload_protection
+      identifier: workload_protection_respond_and_report
+      weight: 93
+    - name: Detection Rules
+      url: security/workload_protection/workload_security_rules
+      parent: workload_protection
+      identifier: workload_protection_workload_security_rules
+      weight: 201
+    - name: OOTB Rules
+      url: /security/workload_protection/setup/ootb_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_ootb_rules
+      weight: 100
+    - name: Custom Rules
+      url: security/workload_protection/workload_security_rules/custom_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_custom_rules
+      weight: 101
+    - name: Investigate Security Signals
+      url: security/workload_protection/security_signals
+      parent: workload_protection
+      identifier: workload_protection_security_signals
+      weight: 202
+    - name: Investigate Agent Events
+      url: security/workload_protection/investigate_agent_events
+      parent: workload_protection
+      identifier: workload_protection_agent_events
+      weight: 203
+    - name: Creating Agent Rule Expressions
+      url: security/workload_protection/agent_expressions
+      parent: workload_protection
+      identifier: workload_protection_agent_expressions
+      weight: 204
+    - name: Writing Custom Rule Expressions
+      url: security/workload_protection/secl_auth_guide
+      parent: workload_protection_agent_expressions
+      identifier: workload_protection_secl_guide
+      weight: 1
+    - name: Linux Syntax
+      url: security/workload_protection/linux_expressions
+      parent: workload_protection_agent_expressions
+      identifier: linux_expressions
+      weight: 2
+    - name: Windows Syntax
+      url: security/workload_protection/windows_expressions
+      parent: workload_protection_agent_expressions
+      identifier: windows_expressions
+      weight: 3
+    - name: Coverage and Posture Management
+      url: security/workload_protection/inventory
+      parent: workload_protection
+      identifier: workload_protection_inventory
+      weight: 205
+    - name: Hosts and Containers
+      url: security/workload_protection/inventory/hosts_and_containers
+      parent: workload_protection_inventory
+      identifier: workload_protection_hosts_and_containers
+      weight: 1
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 2
+    - name: Coverage
+      url: security/workload_protection/inventory/coverage_map
+      parent: workload_protection_inventory
+      identifier: workload_protection_coverage_map
+      weight: 3
+    - name: Guides
+      url: security/workload_protection/guide
+      parent: workload_protection
+      identifier: workload_protection_guides
+      weight: 206
+    - name: Troubleshooting
+      url: security/workload_protection/troubleshooting/threats
+      parent: workload_protection
+      identifier: workload_protection_troubleshooting
+      weight: 206
     - name: Security Graph
       url: security/cloud_security_management/security_graph/
       parent: csm
