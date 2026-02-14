@@ -5714,6 +5714,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react
       weight: 104
+    - name: React Native
+      url: feature_flags/client/reactnative
+      parent: feature_flags_client
+      identifier: feature_flags_client_react_native
+      weight: 105
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
