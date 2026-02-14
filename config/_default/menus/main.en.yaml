@@ -4945,6 +4945,16 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Data Lakes
+      url: data_observability/quality_monitoring/data_lakes
+      identifier: data_lakes
+      parent: quality_monitoring
+      weight: 250000
+    - name: Iceberg Tables (AWS Glue)
+      url: data_observability/quality_monitoring/data_lakes/aws_glue
+      identifier: aws_glue_iceberg
+      parent: data_lakes
+      weight: 1000000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
