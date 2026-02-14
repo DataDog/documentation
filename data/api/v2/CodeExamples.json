@@ -2107,6 +2107,13 @@
       "description": "Update a team returns \"OK\" response"
     }
   ],
+  "UpdateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update a user's membership attributes on a team returns \"OK\" response"
+    }
+  ],
   "UpdateTeamPermissionSetting": [
     {
       "group": "teams",
