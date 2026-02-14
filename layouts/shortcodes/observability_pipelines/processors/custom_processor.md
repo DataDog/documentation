@@ -7,7 +7,7 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 - [Convert syslog values](#convert) to read-able values.
 - Enrich values by using [enrichment tables](#enrichment).
 - [Manipulate IP values](#ip).
-- [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
+- [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on). See [Parsing][10194] for information about regex log parsing.
 - Manipulate event [metadata](#event) and [paths](#path).
 
 See [Custom functions][10191] for the full list of available functions.
@@ -31,3 +31,4 @@ To set up this processor:
 [10191]: /observability_pipelines/processors/custom_processor#custom-functions
 [10192]: /observability_pipelines/guide/get_started_with_the_custom_processor
 [10193]: /observability_pipelines/guide/remap_reserved_attributes
+[10194]: /logs/guide/regex_log_parsing/
