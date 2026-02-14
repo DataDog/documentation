@@ -69,11 +69,11 @@ OpenTelemetry API support for logs is not available for this language. Use [Data
 {% /if %}
 {% /if %}
 
-<!-- Go, PHP, Rust have traces and metrics only -->
-{% if or(equals($prog_lang, "go"), equals($prog_lang, "php"), equals($prog_lang, "rust")) %}
+<!-- PHP has traces and metrics only -->
+{% if equals($prog_lang, "php") %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
-OpenTelemetry API support for logs is not available for this language. Use [Datadog Log Collection][210] instead.
+OpenTelemetry API support for logs is not available for PHP. Use [Datadog Log Collection][210] instead.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -811,14 +811,14 @@ Here is the minimum version required for each instrument type:
 {% if equals($platform, "logs") %}
 
 <!-- Show content only for languages that support logs -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python")) %}
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python"), equals($prog_lang, "go"), equals($prog_lang, "rust")) %}
 
 ## Overview
 
 Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
-<!-- Native implementation (.NET, Node.js) -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
+<!-- Native implementation (.NET, Node.js, Go, Rust) -->
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "go"), equals($prog_lang, "rust")) %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -850,6 +850,15 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 {% /if %}
 {% if equals($prog_lang, "python") %}
 - **Datadog SDK**: `dd-trace-py` version 3.18.0 or later.
+{% /if %}
+{% if equals($prog_lang, "go") %}
+- **Datadog SDK**: `dd-trace-go` version 2.5.0 or later.
+- **OpenTelemetry Go SDK**: `go.opentelemetry.io/otel/log` version 0.13.0 or later (provided automatically by the Datadog SDK).
+{% /if %}
+{% if equals($prog_lang, "rust") %}
+- **Datadog SDK**: `datadog-opentelemetry` crate version 0.2.1 or later.
+- **Rust**: MSRV 1.84.1 or later.
+- **OpenTelemetry Rust SDK**: The SDK provides the logs implementation automatically.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
@@ -909,6 +918,72 @@ Follow these steps to enable OTel Logs API support in your application.
     ddtrace-run python my_app.py
     ```
     When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to your OTLP destination.
+{% /if %}
+
+{% if equals($prog_lang, "go") %}
+1. Install the Datadog SDK:
+    ```sh
+    go get github.com/DataDog/dd-trace-go/v2
+    ```
+2. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+3. Initialize the logger provider in your application:
+    ```go
+    import (
+        "context"
+        "log/slog"
+        
+        "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry/log"
+        "go.opentelemetry.io/otel"
+        otellog "go.opentelemetry.io/otel/log"
+    )
+
+    // Initialize the global logger provider
+    err := log.InitGlobalLoggerProvider(context.Background())
+    if err != nil {
+        panic(err)
+    }
+
+    // Set as global logger provider
+    otel.SetLoggerProvider(log.GetGlobalLoggerProvider())
+
+    // Your application code here...
+
+    // Shutdown to flush remaining logs
+    defer log.ShutdownGlobalLoggerProvider(context.Background())
+    ```
+{% /if %}
+
+{% if equals($prog_lang, "rust") %}
+1. Add the Datadog SDK to your `Cargo.toml`:
+    ```toml
+    [dependencies]
+    datadog-opentelemetry = { version = "0.3.0", features = ["logs-grpc"] }
+    opentelemetry = { version = "0.31", features = ["logs"] }
+    opentelemetry_sdk = { version = "0.31", features = ["logs"] }
+    ```
+    **Note**: Use `features = ["logs-http"]` if you prefer HTTP/protobuf transport instead of gRPC.
+2. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+3. Initialize the logger provider in your application:
+    ```rust
+    use opentelemetry::global;
+
+    // Initialize logs with default configuration
+    let logger_provider = datadog_opentelemetry::logs().init();
+    
+    // Set as global logger provider
+    global::set_logger_provider(logger_provider.clone());
+
+    // Your application code here...
+
+    // Shutdown to flush remaining logs
+    let _ = logger_provider.shutdown();
+    ```
 {% /if %}
 
 ## Examples
@@ -1068,6 +1143,141 @@ print("Work complete.")
 ```
 {% /if %}
 
+{% if equals($prog_lang, "go") %}
+### Standard logging {% #standard-logging-go %}
+
+After the Datadog SDK is initialized, you can use the standard OpenTelemetry Logs API to emit log records.
+
+```go
+import (
+    "context"
+
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry/log"
+    "go.opentelemetry.io/otel"
+    otellog "go.opentelemetry.io/otel/log"
+)
+
+// Initialize the logger provider (typically done once at startup)
+err := log.InitGlobalLoggerProvider(context.Background())
+if err != nil {
+    panic(err)
+}
+otel.SetLoggerProvider(log.GetGlobalLoggerProvider())
+
+// Get a logger
+logger := otel.GetLoggerProvider().Logger("my-service")
+
+// Create and emit a log record
+var logRecord otellog.Record
+logRecord.SetBody(otellog.StringValue("User clicked the checkout button"))
+logRecord.SetSeverity(otellog.SeverityInfo)
+logRecord.SetSeverityText("INFO")
+logRecord.AddAttributes(
+    otellog.String("cart.id", "c-12345"),
+    otellog.String("user.id", "u-54321"),
+)
+
+logger.Emit(context.Background(), logRecord)
+```
+
+### Trace and log correlation {% #trace-log-correlation-go %}
+
+Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are automatically added to the log record.
+
+```go
+import (
+    "context"
+
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry/log"
+    "go.opentelemetry.io/otel"
+    otellog "go.opentelemetry.io/otel/log"
+    "go.opentelemetry.io/otel/trace"
+)
+
+// Initialize logger (typically done once at startup)
+err := log.InitGlobalLoggerProvider(context.Background())
+if err != nil {
+    panic(err)
+}
+otel.SetLoggerProvider(log.GetGlobalLoggerProvider())
+
+// Get tracer and logger
+tracer := otel.Tracer("my-service")
+logger := otel.GetLoggerProvider().Logger("my-service")
+
+// Start a span
+ctx, span := tracer.Start(context.Background(), "process.user.request")
+defer span.End()
+
+// Create and emit a log record that will be automatically correlated with the active span
+var logRecord otellog.Record
+logRecord.SetBody(otellog.StringValue("Processing user request for ID: 12345"))
+logRecord.SetSeverity(otellog.SeverityInfo)
+logRecord.SetSeverityText("INFO")
+
+logger.Emit(ctx, logRecord)
+```
+{% /if %}
+
+{% if equals($prog_lang, "rust") %}
+### Standard logging {% #standard-logging-rust %}
+
+After the Datadog SDK is initialized, you can use the standard OpenTelemetry Logs API to emit log records.
+
+```rust
+use opentelemetry::global;
+use opentelemetry::logs::{Logger, LogRecord, Severity};
+use opentelemetry::KeyValue;
+
+// Initialize logs (typically done once at startup)
+let logger_provider = datadog_opentelemetry::logs().init();
+global::set_logger_provider(logger_provider.clone());
+
+// Get a logger
+let logger = global::logger_provider().logger("my-service");
+
+// Emit a log record
+let mut log_record = LogRecord::default();
+log_record.set_body("User clicked the checkout button".into());
+log_record.set_severity_number(Severity::Info);
+log_record.set_severity_text("INFO");
+log_record.add_attribute(KeyValue::new("cart.id", "c-12345"));
+log_record.add_attribute(KeyValue::new("user.id", "u-54321"));
+
+logger.emit(log_record);
+```
+
+### Trace and log correlation {% #trace-log-correlation-rust %}
+
+Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are automatically added to the log record.
+
+```rust
+use opentelemetry::global;
+use opentelemetry::logs::{Logger, LogRecord, Severity};
+use opentelemetry::trace::{Tracer, TracerProvider};
+
+// Initialize logs and traces (typically done once at startup)
+let logger_provider = datadog_opentelemetry::logs().init();
+global::set_logger_provider(logger_provider.clone());
+
+// Get tracer and logger
+let tracer = global::tracer("my-service");
+let logger = global::logger_provider().logger("my-service");
+
+// Start a span
+let span = tracer.start("process.user.request");
+let _guard = span.with_current_context();
+
+// This log is automatically correlated with the active span
+let mut log_record = LogRecord::default();
+log_record.set_body("Processing user request for ID: 12345".into());
+log_record.set_severity_number(Severity::Info);
+log_record.set_severity_text("INFO");
+
+logger.emit(log_record);
+```
+{% /if %}
+
 ## Supported configuration
 
 To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
@@ -1110,6 +1320,20 @@ Your existing code that uses `logs.getLogger()` continues to work.
 The Datadog SDK programmatically configures the OTel SDK for you.
 {% /if %}
 
+{% if equals($prog_lang, "go") %}
+1. Add the Datadog SDK (`dd-trace-go/v2`) to your project and enable its instrumentation.
+2. Remove any code that manually configures the `OTLPLogExporter`. The Datadog SDK handles this configuration automatically.
+3. Remove manual `LoggerProvider` setup and replace with `log.InitGlobalLoggerProvider()`.
+4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
+{% if equals($prog_lang, "rust") %}
+1. Add the Datadog SDK (`datadog-opentelemetry`) to your project and enable its instrumentation.
+2. Remove any code that manually configures the `OTLPLogExporter`. The Datadog SDK handles this configuration automatically.
+3. Replace manual logger provider setup with `datadog_opentelemetry::logs().init()`.
+4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
 ### Existing Datadog log injection
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
@@ -1134,6 +1358,17 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {% if equals($prog_lang, "python") %}
 - Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
 - Verify `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
+{% /if %}
+{% if equals($prog_lang, "go") %}
+- Verify `DD_LOGS_OTEL_ENABLED=true` is set. Logs are disabled by default in dd-trace-go.
+- Verify the Datadog SDK is imported and initialized: `import "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry/log"`
+- Verify `log.InitGlobalLoggerProvider()` is called before using the logger.
+{% /if %}
+{% if equals($prog_lang, "rust") %}
+- Verify `DD_LOGS_OTEL_ENABLED=true` is set. Logs are disabled by default.
+- Verify that a transport feature (`logs-grpc` or `logs-http`) is enabled in your Cargo.toml file.
+- Verify `datadog_opentelemetry::logs().init()` is called before using the logger.
+- Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
 {% /if %}
 
 {% /if %}
