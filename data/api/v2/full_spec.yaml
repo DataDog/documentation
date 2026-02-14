@@ -39873,8 +39873,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_size
       type: object
     ObservabilityPipelineElasticsearchDestination:
       description: 'The `elasticsearch` destination writes logs to an Elasticsearch
@@ -41128,8 +41126,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_size
       type: object
     ObservabilityPipelineMemoryBufferSizeOptions:
       description: Options for configuring a memory buffer by queue length.
@@ -41143,8 +41139,6 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
         when_full:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
-      required:
-      - max_events
       type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
@@ -41373,6 +41367,7 @@ components:
       example: CloudTrail Account Change
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingLibrary'
+      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingCustom'
     ObservabilityPipelineOcsfMapperProcessorType:
       default: ocsf_mapper
       description: The processor type. The value should always be `ocsf_mapper`.
@@ -41382,6 +41377,116 @@ components:
       type: string
       x-enum-varnames:
       - OCSF_MAPPER
+    ObservabilityPipelineOcsfMappingCustom:
+      description: Custom OCSF mapping configuration for transforming logs.
+      properties:
+        mapping:
+          description: A list of field mapping rules for transforming log fields to
+            OCSF schema fields.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingCustomFieldMapping'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingCustomMetadata'
+        version:
+          description: The version of the custom mapping configuration.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - mapping
+      - metadata
+      - version
+      type: object
+    ObservabilityPipelineOcsfMappingCustomFieldMapping:
+      description: Defines a single field mapping rule for transforming a source field
+        to an OCSF destination field.
+      properties:
+        default:
+          description: The default value to use if the source field is missing or
+            empty.
+          example: ''
+        dest:
+          description: The destination OCSF field path.
+          example: device.type
+          type: string
+        lookup:
+          $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingCustomLookup'
+        source:
+          description: The source field path from the log event.
+          example: host.type
+        sources:
+          description: Multiple source field paths for combined mapping.
+          example:
+          - field1
+          - field2
+        value:
+          description: A static value to use for the destination field.
+          example: static_value
+      required:
+      - dest
+      type: object
+    ObservabilityPipelineOcsfMappingCustomLookup:
+      description: Lookup table configuration for mapping source values to destination
+        values.
+      properties:
+        default:
+          description: The default value to use if no lookup match is found.
+          example: unknown
+        table:
+          description: A list of lookup table entries for value transformation.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineOcsfMappingCustomLookupTableEntry'
+          type: array
+      type: object
+    ObservabilityPipelineOcsfMappingCustomLookupTableEntry:
+      description: A single entry in a lookup table for value transformation.
+      properties:
+        contains:
+          description: The substring to match in the source value.
+          example: Desktop
+          type: string
+        equals:
+          description: The exact value to match in the source.
+          example: desktop
+        equals_source:
+          description: The source field to match against.
+          example: device_type
+          type: string
+        matches:
+          description: A regex pattern to match in the source value.
+          example: ^Desktop.*
+          type: string
+        not_matches:
+          description: A regex pattern that must not match the source value.
+          example: ^Mobile.*
+          type: string
+        value:
+          description: The value to use when a match is found.
+          example: desktop
+      type: object
+    ObservabilityPipelineOcsfMappingCustomMetadata:
+      description: Metadata for the custom OCSF mapping.
+      properties:
+        class:
+          description: The OCSF event class name.
+          example: Device Inventory Info
+          type: string
+        profiles:
+          description: A list of OCSF profiles to apply.
+          example:
+          - container
+          items:
+            type: string
+          type: array
+        version:
+          description: The OCSF schema version.
+          example: 1.3.0
+          type: string
+      required:
+      - class
+      - version
+      type: object
     ObservabilityPipelineOcsfMappingLibrary:
       description: Predefined library mappings for common log formats.
       enum:

@@ -1241,6 +1241,16 @@
       "group": "observability_pipelines",
       "suffix": "",
       "description": "Validate an observability pipeline returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3024756866",
+      "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3565101276",
+      "description": "Validate an observability pipeline with OCSF mapper library mapping returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
