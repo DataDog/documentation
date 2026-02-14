@@ -2608,6 +2608,45 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 13
+    - name: Get investigation feedback
+      url: '#get-investigation-feedback'
+      identifier: security-monitoring-get-investigation-feedback
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetInvestigationFeedback
+        unstable:
+          - v2
+        order: 17
+    - name: Update investigation feedback
+      url: '#update-investigation-feedback'
+      identifier: security-monitoring-update-investigation-feedback
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateInvestigationFeedback
+        unstable:
+          - v2
+        order: 16
+    - name: Create a security signal investigation
+      url: '#create-a-security-signal-investigation'
+      identifier: security-monitoring-create-a-security-signal-investigation
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSignalInvestigation
+        unstable:
+          - v2
+        order: 15
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals

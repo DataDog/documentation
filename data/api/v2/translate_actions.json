@@ -3314,6 +3314,22 @@
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
   },
+  "CreateSignalInvestigation": {
+    "description": "Create an investigation for a security signal using AI-powered analysis.",
+    "summary": "Create a security signal investigation",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a security signal investigation."
+  },
+  "UpdateInvestigationFeedback": {
+    "description": "Provide feedback on a security signal investigation.",
+    "summary": "Update investigation feedback",
+    "request_description": "",
+    "request_schema_description": "Request body for submitting investigation feedback."
+  },
+  "GetInvestigationFeedback": {
+    "description": "Retrieve feedback for a security signal investigation.",
+    "summary": "Get investigation feedback"
+  },
   "SearchSecurityMonitoringSignals": {
     "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",
     "summary": "Get a list of security signals",
