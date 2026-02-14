@@ -2686,6 +2686,26 @@ components:
       - $ref: '#/components/schemas/SplitIntegrationUpdate'
       - $ref: '#/components/schemas/StatsigIntegrationUpdate'
       - $ref: '#/components/schemas/VirusTotalIntegrationUpdate'
+    ActionMatch:
+      properties:
+        actionFqn:
+          description: The fully qualified name of the action.
+          example: com.datadoghq.slack.send_message
+          type: string
+        description:
+          description: The description of the action.
+          example: Sends a message to a Slack channel
+          type: string
+        score:
+          description: The relevance score of the match.
+          example: 0.95
+          format: double
+          type: number
+      required:
+      - actionFqn
+      - score
+      - description
+      type: object
     ActionQuery:
       description: An action query. This query type is used to trigger an action,
         such as sending a HTTP request.
@@ -2956,6 +2976,23 @@ components:
       required:
       - id
       - base_severity
+      type: object
+    AgenticEvent:
+      properties:
+        message:
+          description: The message content.
+          example: The weather is sunny.
+          type: string
+        payload:
+          description: Additional payload data for the event.
+          type: object
+        type:
+          description: The type of agentic event.
+          example: streaming_content
+          type: string
+      required:
+      - type
+      - message
       type: object
     AlertEventAttributes:
       description: Alert event attributes.
@@ -10388,6 +10425,66 @@ components:
           example: infra_host
           type: string
       type: object
+    ChatHistoryItem:
+      properties:
+        content:
+          description: The message content.
+          example: Please add error handling
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatHistoryItemRole'
+      required:
+      - role
+      - content
+      type: object
+    ChatHistoryItemRole:
+      description: The role of the message sender.
+      enum:
+      - user
+      - assistant
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - ASSISTANT
+    ChatMessage:
+      properties:
+        chatId:
+          description: The chat ID.
+          example: chat-456
+          type: string
+        content:
+          description: The message content.
+          example: Add error handling to the workflow
+          type: string
+        id:
+          description: The message ID.
+          example: msg-123
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatMessageRole'
+        userUuid:
+          description: The UUID of the user who sent the message.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - id
+      - chatId
+      - role
+      - content
+      type: object
+    ChatMessageRole:
+      description: The role of the message sender.
+      enum:
+      - user
+      - assistant
+      - system
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
+      - ASSISTANT
+      - SYSTEM
     CircleCIAPIKey:
       description: The definition of the `CircleCIAPIKey` object.
       properties:
@@ -10526,6 +10623,18 @@ components:
       required:
       - type
       type: object
+    ClientType:
+      description: The client type for action filtering.
+      enum:
+      - workflows
+      - app_builder
+      - actions_api
+      example: workflows
+      type: string
+      x-enum-varnames:
+      - WORKFLOWS
+      - APP_BUILDER
+      - ACTIONS_API
     CloudAssetType:
       description: The cloud asset type
       enum:
@@ -15524,6 +15633,34 @@ components:
         data:
           $ref: '#/components/schemas/CsmServerlessCoverageAnalysisData'
       type: object
+    CustomAgentConversationRequest:
+      properties:
+        conversationId:
+          description: The conversation ID to continue an existing conversation.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        outputSchema:
+          description: Optional JSON schema to structure the output.
+          type: object
+        userPrompt:
+          description: The user's prompt for the conversation.
+          example: What is the weather like today?
+          type: string
+      required:
+      - userPrompt
+      type: object
+    CustomAgentConversationStreamResponse:
+      properties:
+        event:
+          $ref: '#/components/schemas/AgenticEvent'
+        id:
+          description: The conversation ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - id
+      - event
+      type: object
     CustomAttributeConfig:
       description: The definition of `CustomAttributeConfig` object.
       properties:
@@ -18293,6 +18430,100 @@ components:
       type: string
       x-enum-varnames:
       - DATATRANSFORM
+    DataTransformationContext:
+      properties:
+        contextVariables:
+          description: Available context variables for the transformation.
+          example: '{ "timestamp": 1234567890 }'
+          type: string
+        currentScript:
+          description: The current script to modify or enhance.
+          example: return data.timestamp;
+          type: string
+      required:
+      - contextVariables
+      - currentScript
+      type: object
+    DataTransformationDescriptionRequest:
+      properties:
+        actionId:
+          description: The fully qualified name (FQN) of the action.
+          example: com.datadoghq.transform.timestamp
+          type: string
+        script:
+          description: The transformation script to describe.
+          example: return new Date(data.timestamp).toISOString();
+          type: string
+      required:
+      - actionId
+      - script
+      type: object
+    DataTransformationDescriptionResponse:
+      properties:
+        details:
+          description: Detailed description of the transformation.
+          example: This transformation takes a Unix timestamp and converts it to ISO
+            8601 format using JavaScript Date object.
+          type: string
+        id:
+          description: The generation ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        summary:
+          description: A brief summary of the transformation.
+          example: Converts Unix timestamp to ISO format
+          type: string
+      required:
+      - id
+      - summary
+      - details
+      type: object
+    DataTransformationLanguage:
+      description: The programming language for the transformation.
+      enum:
+      - javascript
+      - python
+      example: javascript
+      type: string
+      x-enum-varnames:
+      - JAVASCRIPT
+      - PYTHON
+    DataTransformationRequest:
+      properties:
+        chatHistory:
+          description: Previous chat messages for iterative interaction.
+          items:
+            $ref: '#/components/schemas/ChatHistoryItem'
+          type: array
+        context:
+          $ref: '#/components/schemas/DataTransformationContext'
+        language:
+          $ref: '#/components/schemas/DataTransformationLanguage'
+        stream:
+          description: Whether to stream the response.
+          example: true
+          type: boolean
+        userPrompt:
+          description: The user's prompt describing the desired transformation.
+          example: Convert timestamp to ISO format
+          type: string
+      required:
+      - userPrompt
+      type: object
+    DataTransformationStreamResponse:
+      properties:
+        content:
+          description: The generated code or explanation chunk.
+          example: const timestamp = data.timestamp;
+          type: string
+        id:
+          description: The generation ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - id
+      - content
+      type: object
     DatabaseMonitoringTriggerWrapper:
       description: Schema for a Database Monitoring-based trigger.
       properties:
@@ -45535,6 +45766,112 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    PickActionRequest:
+      properties:
+        client:
+          $ref: '#/components/schemas/ClientType'
+        number_of_relevant_actions:
+          description: The number of relevant actions to return.
+          example: 5
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        stability:
+          $ref: '#/components/schemas/StabilityLevel'
+        user_prompt:
+          description: The user's prompt to find relevant actions.
+          example: Send a Slack message
+          type: string
+      required:
+      - user_prompt
+      - number_of_relevant_actions
+      type: object
+    PickActionResponse:
+      properties:
+        matches:
+          description: The matching actions.
+          items:
+            $ref: '#/components/schemas/ActionMatch'
+          type: array
+        request_id:
+          description: The request ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        total_matches:
+          description: The total number of matches.
+          example: 5
+          format: int64
+          type: integer
+      required:
+      - request_id
+      - matches
+      - total_matches
+      type: object
+    PickRemediationFromInvestigationRequest:
+      properties:
+        client:
+          $ref: '#/components/schemas/ClientType'
+        integrations:
+          description: List of integrations to filter actions by.
+          example:
+          - aws
+          - datadog
+          items:
+            type: string
+          type: array
+        investigation:
+          description: The investigation text to extract remediation keywords from.
+          example: High CPU usage detected on prod-server-01
+          type: string
+        number_of_keyword_variants:
+          description: The number of keyword variants to generate.
+          example: 2
+          format: int64
+          type: integer
+        number_of_relevant_actions:
+          description: The number of relevant actions to return per keyword.
+          example: 5
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        stability:
+          $ref: '#/components/schemas/StabilityLevel'
+      required:
+      - investigation
+      - number_of_relevant_actions
+      type: object
+    PickRemediationFromInvestigationResponse:
+      properties:
+        keywords_used:
+          description: The keywords generated and used for finding actions.
+          example:
+          - restart service
+          - scale resources
+          items:
+            type: string
+          type: array
+        matches:
+          description: The matching actions.
+          items:
+            $ref: '#/components/schemas/ActionMatch'
+          type: array
+        request_id:
+          description: The request ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        total_matches:
+          description: The total number of matches.
+          example: 10
+          format: int64
+          type: integer
+      required:
+      - request_id
+      - matches
+      - total_matches
+      - keywords_used
+      type: object
     Playlist:
       properties:
         data:
@@ -60330,6 +60667,20 @@ components:
       required:
       - type
       type: object
+    StabilityLevel:
+      description: The stability level for action filtering.
+      enum:
+      - UNSPECIFIED
+      - DEV
+      - BETA
+      - STABLE
+      example: STABLE
+      type: string
+      x-enum-varnames:
+      - UNSPECIFIED
+      - DEV
+      - BETA
+      - STABLE
     StartStepNames:
       description: A list of steps that run first after a trigger fires.
       example:
@@ -61381,6 +61732,18 @@ components:
           description: The `bounds` `y`.
           format: double
           type: number
+      type: object
+    StreamEventV1:
+      properties:
+        data:
+          description: The event data payload.
+          type: object
+        type:
+          description: The type of stream event.
+          example: content
+          type: string
+      required:
+      - type
       type: object
     SuiteCreateEdit:
       properties:
@@ -66193,6 +66556,13 @@ components:
       - ACTIVE
       - DEACTIVATED
       - PENDING
+    UserContext:
+      properties:
+        userInfo:
+          $ref: '#/components/schemas/UserInfo'
+      required:
+      - userInfo
+      type: object
     UserCreateAttributes:
       description: Attributes of the created user.
       properties:
@@ -66229,6 +66599,29 @@ components:
           $ref: '#/components/schemas/UserCreateData'
       required:
       - data
+      type: object
+    UserInfo:
+      properties:
+        orgName:
+          description: The organization name.
+          example: Acme Corp
+          type: string
+        userEmail:
+          description: The user's email address.
+          example: john.doe@example.com
+          type: string
+        userName:
+          description: The user's name.
+          example: John Doe
+          type: string
+        userUUID:
+          description: The user's UUID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - orgName
+      - userUUID
+      - userEmail
       type: object
     UserInvitationData:
       description: Object to create a user invitation.
@@ -67614,6 +68007,39 @@ components:
           type: string
           writeOnly: true
       type: object
+    WorkflowDescriptionRequest:
+      properties:
+        name:
+          description: The name of the workflow.
+          example: Alert Response Workflow
+          type: string
+        spec:
+          description: The workflow specification as a JSON object.
+          type: object
+      required:
+      - name
+      - spec
+      type: object
+    WorkflowDescriptionResponse:
+      properties:
+        description:
+          description: The generated workflow description.
+          example: This workflow responds to alerts by creating a ticket and notifying
+            the team.
+          type: string
+        id:
+          description: The generation ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        summary:
+          description: A brief summary of the workflow.
+          example: Alert response automation workflow
+          type: string
+      required:
+      - id
+      - description
+      - summary
+      type: object
     WorkflowInstanceCreateMeta:
       description: Additional information for creating a workflow instance.
       properties:
@@ -67679,6 +68105,41 @@ components:
           description: The total count of items.
           format: int64
           type: integer
+      type: object
+    WorkflowScaffoldAgenticStreamRequest:
+      properties:
+        chatHistory:
+          description: Previous chat messages for iterative workflow generation.
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          type: array
+        existingWorkflow:
+          description: The existing workflow specification to modify.
+          type: object
+        previousAction:
+          description: The previous action taken in the workflow generation.
+          example: created_initial_scaffold
+          type: string
+        userContext:
+          $ref: '#/components/schemas/UserContext'
+        userPrompt:
+          description: The user's prompt for generating or modifying the workflow.
+          example: Create a workflow to restart a service when CPU is high
+          type: string
+      required:
+      - userPrompt
+      type: object
+    WorkflowScaffoldAgenticStreamResponse:
+      properties:
+        event:
+          $ref: '#/components/schemas/StreamEventV1'
+        id:
+          description: The generation ID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - id
+      - event
       type: object
     WorkflowTriggerWrapper:
       description: Schema for a Workflow-based trigger.
@@ -69430,6 +69891,73 @@ paths:
         operator: OR
         permissions:
         - apps_datastore_write
+  /api/v2/actions/agents/{custom_agent_id}/conversation:
+    post:
+      description: Initiates or continues a conversation with a custom agent. Supports
+        streaming responses.
+      operationId: CreateCustomAgentConversation
+      parameters:
+      - description: The ID of the custom agent.
+        in: path
+        name: custom_agent_id
+        required: true
+        schema:
+          example: 3b796bda-b79b-477e-ae29-958473a683db
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAgentConversationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/CustomAgentConversationStreamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Create a custom agent conversation
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/actions/app_key_registrations:
     get:
       description: List App Key Registrations
@@ -104441,6 +104969,245 @@ paths:
         operator: OR
         permissions:
         - teams_read
+  /api/v2/workflow_generation/data_transformation:
+    post:
+      description: Generates data transformation code (JavaScript or Python) based
+        on user prompt and context.
+      operationId: CreateDataTransformation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataTransformationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/DataTransformationStreamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Generate data transformation code
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/workflow_generation/data_transformation/description:
+    post:
+      description: Generates a summary and detailed description for data transformation
+        code.
+      operationId: CreateDataTransformationDescription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataTransformationDescriptionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTransformationDescriptionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Generate data transformation description
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/workflow_generation/description:
+    post:
+      description: Generates a description and summary for a workflow based on its
+        specification.
+      operationId: CreateWorkflowDescription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowDescriptionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDescriptionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Generate workflow description
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/workflow_generation/pick_action:
+    post:
+      description: Finds similar actions based on a user prompt using vector search.
+      operationId: CreatePickAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickActionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickActionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Pick relevant actions
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/workflow_generation/pick_remediation_from_investigation:
+    post:
+      description: Generates keywords from an investigation and finds relevant remediation
+        actions.
+      operationId: CreatePickRemediationFromInvestigation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickRemediationFromInvestigationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickRemediationFromInvestigationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Pick remediation actions from investigation
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 14
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/workflow_generation/scaffold_agentic_stream:
+    post:
+      description: Generates or updates a workflow scaffold using agentic streaming
+        based on user prompts.
+      operationId: CreateWorkflowScaffoldAgenticStream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowScaffoldAgenticStreamRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/WorkflowScaffoldAgenticStreamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Generate workflow scaffold with agentic stream
+      tags:
+      - Workflow Automation
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
