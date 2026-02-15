@@ -24,6 +24,8 @@ cascade:
 {{< header-list header="Windows guides" >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
+    {{< nextlink href="agent/guide/windows-agent-gmsa" >}}Installing the Agent with a gMSA Account{{< /nextlink >}}
+
 {{< /header-list >}}
 
 {{< header-list header="Cloud infrastructure guides" >}}
