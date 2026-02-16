@@ -39,7 +39,7 @@ The following diagram illustrates how Agentless Scanning works:
 
     **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
-2. For serverless functions, the scanners fetch the function's code.
+2. For serverless functions (such as AWS Lambda), the scanners fetch the function's code.
 3. The scanner creates snapshots of volumes used in running VM instances. Using the snapshots or the function code, the scanner generates an SBOM (a list of packages and dependencies).
 4. The SBOM and host metadata are transmitted to Datadog. All other data — including snapshots, disk contents, and container images — remains in your infrastructure. Snapshots are deleted.
 5. Datadog uses the SBOM to identify known vulnerabilities in your resources.
