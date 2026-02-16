@@ -8,7 +8,7 @@ aliases:
 
 Agentless Scanning is supported on AWS, Azure, and GCP. Oracle Cloud Infrastructure (OCI) is not yet supported.
 
-This feature is available in all commercial Datadog data centers. GovCloud is not supported.
+This feature is available in all commercial Datadog data centers. GovCloud is not supported (requires [Remote Configuration][17], which is not available in GovCloud). Agentless Scanning is not FIPS compliant.
 
 The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
 
@@ -19,9 +19,12 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                       |
 | Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) and Customer Managed Key (CMK)                                         | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Persistent Disk Encryption, Confidential VM </br> **Note**: Encrypted - Customer Managed Encryption Key (CMEK) and Customer-Supplied Encryption Keys (CSEK) are **not** supported |
 | Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                   |
-| Serverless                                      | AWS Lambda <br> AWS Fargate for ECS                                                                                                              | To request this feature, contact [Datadog Support][16]                                                                                                                                                         | Cloud Run (container deployment type)                                                                                                                                           |
+| Serverless                                      | AWS Lambda <br> AWS Fargate for ECS                                                                                                              | Azure Container Apps and Azure Container Instances (coming ~end of March 2026). To express interest, contact [Datadog Support][16].                                                                                                                                                                         | Cloud Run (container deployment only — not from GitHub repos or inline editors)                                                                                                                                                                             |
+| Kubernetes                                      | EKS on EC2 nodes only </br> **Note**: Fargate-backed EKS nodes are **not** supported. Scans the underlying EC2 instances, not through the Kubernetes control plane. | AKS on virtual machines only </br> **Note**: AKS on Virtual Machine Scale Sets (VMSS) and AKS on ACI are **not** supported. | GKE Standard only </br> **Note**: GKE Autopilot and image streaming are **not** supported. |
 | Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                            |
-| Container Registries                            | Amazon ECR (public and private) | | Google Artifact Registry |
+| Container Registries                            | Amazon ECR (public and private): scans running container images and the last 1,000 pushed images at rest | ACR: coming ~end of March 2026 for running container images only (not at-rest registry scanning). To express interest, contact [Datadog Support][16]. | Google Artifact Registry: scans images from running workloads only (not at-rest registry scanning) |
+| Host Images                                     | AMI only | Not supported | Not supported |
+| Sensitive Data (SDS)                            | S3, RDS (private beta) | Not supported | Not supported |
 
 **Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
@@ -65,11 +68,14 @@ The following application languages and libraries are supported for vulnerabilit
 
 The following container image registries are supported for container image scans:
 
-- Amazon ECR public
-- Amazon ECR private
+| Registry | Support level | Notes |
+|----------|--------------|-------|
+| Amazon ECR (public and private) | GA | Scans running container images **and** the last 1,000 pushed images at rest (by date). This is the only registry with at-rest scanning support. |
+| Google Artifact Registry (GAR) | GA | Scans images tied to running workloads (Cloud Run, GKE) only. At-rest registry scanning is **not** supported. |
+| Azure Container Registry (ACR) | Coming ~end of March 2026 | Scans running container images from Azure Container Apps and Azure Container Instances only. At-rest registry scanning is **not** supported. To express interest, contact [Datadog Support][16]. |
 
 **Note**: Container image scanning from registry is only supported if you have installed Agentless with:
-  - Cloudformation Integrations >= v2.0.8
+  - CloudFormation Integrations >= v2.0.8
   - Terraform Agentless Module >= v0.11.7
 
 ## Container runtimes
@@ -97,3 +103,4 @@ The following container runtimes are supported:
 [14]: https://www.debian.org/security/oval/
 [15]: https://ubuntu.com/security/cve
 [16]: /help
+[17]: /remote_configuration
