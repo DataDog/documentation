@@ -103,6 +103,8 @@ Use Natural Language Queries (NLQ) to describe what you're looking for in plain 
 
 The system translates natural language input into Datadog queries and understands context such as users, actions, resources, and time ranges. It also detects relevant fields automatically — for example, "Who modified the payment dashboard last week" or "Show all role changes in the past 24 hours."
 
+{{< img src="account_management/audit_logs/audit_trail_nlq_dark.gif" alt="Natural language query in Audit Trail in dark mode" style="width:100%;" >}}
+
 ### Saved views
 
 Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Trail explorer.
