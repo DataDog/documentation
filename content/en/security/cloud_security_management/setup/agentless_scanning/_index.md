@@ -14,11 +14,20 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS, Azure, and GCP cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+
+<div class="alert alert-info">Agentless Scanning is available in all commercial Datadog data centers. It is not available for GovCloud and is not FIPS compliant.</div>
 
 ## How it works
 
-After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
+Unlike most agentless security tools that copy disk snapshots out of your environment into the vendor's infrastructure, Datadog deploys lightweight scanning infrastructure **inside your cloud account**. Snapshots are created and analyzed within your environment. Your data never leaves your account boundary.
+
+This architecture provides:
+- **Data residency**: Disk contents, container images, and sensitive data stay within your cloud account. No data crosses an account boundary into Datadog's infrastructure.
+- **Compliance**: Auditors can verify that scanning data remains within your perimeter.
+- **Least-privilege access**: Scanners only require permissions to create and read snapshots, not to exfiltrate data.
+
+After [setting up Agentless Scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. Using these snapshots, the scanners generate and transmit a list of packages to Datadog to check for vulnerabilities. When scans of a snapshot are completed, the snapshot is deleted.
 
 If you have [Cloud Security Evaluation Filters][15] configured, Agentless Scanning respects these filters and only scans resources that match the configured criteria.
 
@@ -33,13 +42,14 @@ The following diagram illustrates how Agentless Scanning works:
 2. For Lambda functions, the scanners fetch the function's code.
 3. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
 4. After the scan is complete, the list of packages and information related to collected hosts are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
-5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
+5. Using the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
 - The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
 - For AWS, scanner instances automatically scale based on workload. When there are no resources to scan, scanners scale to zero to minimize cloud provider costs.
 - The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the cloud provider API to prevent reaching any rate limit, and uses exponential backoff if needed.
+- Scanner instances are automatically rotated every 24 hours, ensuring they run the latest images.
 
 ## On-demand scanning
 
@@ -100,11 +110,20 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional cloud provider costs for running scanners and analyzing your cloud environments.
+Because Agentless Scanning runs inside your cloud account, the compute and networking costs appear on your cloud provider bill. This is the tradeoff for keeping data in your environment — unlike vendors that scan in their own infrastructure (where compute cost is bundled into the SaaS fee), you see the infrastructure cost directly.
 
-Your cloud configuration affects your cloud provider costs. Typically, using the [recommended configuration][13], these are in the range of $1 USD per scanned host per year. You should consult your cloud provider's information for exact amounts, which are subject to change without Datadog's involvement.
+The following table provides estimated monthly costs. Consult your cloud provider's pricing for exact amounts, which are subject to change without Datadog's involvement.
 
-For large cloud workloads distributed across multiple regions, Datadog recommends setting up [Agentless Scanning with Terraform][6] to avoid cross-region networking.
+| Cost component | Estimate | Notes |
+|----------------|----------|-------|
+| Fixed per scanner | ~$80 USD/mo | EC2 instance (or equivalent), VPC, and NAT gateway |
+| Per scanned host | ~$0.10 USD/mo | Data transfer (egress) for transmitting package lists |
+| Cross-account IAM roles | $0 | IAM-only, no compute cost |
+
+To reduce costs:
+- Deploy a scanner in each region where you have more than 150 hosts. A regional scanner avoids cross-region data transfer, which is more cost-effective than scanning those hosts from a remote region.
+- Use the [recommended configuration][13] with Terraform to deploy one scanner per region.
+- For large multi-region deployments, see [Deploying Agentless Scanning][16] for guidance on choosing a deployment topology.
 
 
 ## Further reading
@@ -125,3 +144,4 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration
 [14]: /api/latest/agentless-scanning/#create-aws-on-demand-task
 [15]: /security/cloud_security_management/guide/resource_evaluation_filters
+[16]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
