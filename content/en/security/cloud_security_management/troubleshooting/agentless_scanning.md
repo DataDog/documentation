@@ -15,11 +15,11 @@ If you experience issues with Agentless Scanning, use the following troubleshoot
 
 ## No results after deployment
 
-After deploying Agentless Scanning, results do not appear immediately. It may take up to 20 minutes for results to appear for the first time.
+After deploying Agentless Scanning, results do not appear immediately. First results typically appear within one hour of deployment.
 
-If no results appear after that:
+If no results appear after two hours:
 
-- Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running (for example, look for EC2 instances tagged with `DatadogAgentlessScanner:true` in AWS).
+- Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running in your cloud provider console.
 - Confirm that [Remote Configuration][3] is enabled on the API key used during setup. Scanners receive their scan instructions through Remote Configuration.
 - Check that the cloud integration is properly configured by verifying that your cloud account appears on the [Cloud Security Setup][4] page with Agentless Scanning enabled.
 
@@ -37,7 +37,7 @@ You can use tag-based filtering in the [CSM Vulnerabilities Explorer][2] to excl
 
 ## Hosts with the Datadog Agent are not scanned
 
-This is expected behavior. Agentless Scanning excludes hosts that have the Datadog Agent installed with SBOM collection enabled for [Vulnerability Management][6]. This prevents duplicate scanning.
+This is expected behavior. Agentless Scanning excludes hosts that have the Datadog Agent installed with SBOM (software bill of materials) collection enabled for [Vulnerability Management][6]. This prevents duplicate scanning.
 
 Hosts that have the Datadog Agent installed **without** SBOM collection enabled are still scanned by Agentless Scanning.
 

@@ -388,13 +388,9 @@ For usage examples, refer to our [Github repository](https://github.com/DataDog/
 
 ### Verify your setup
 
-After completing the setup, Agentless Scanning does not produce results immediately. The typical timeline is:
+After completing the setup, Agentless Scanning does not produce results immediately. First results typically appear within one hour of deployment.
 
-1. **0–15 minutes**: Cloud integration crawlers discover your resources (hosts, containers, functions).
-2. **15–30 minutes**: Scanners pick up discovered resources and begin creating snapshots. Scanners select up to 200 hosts per 15-minute cycle.
-3. **30–60 minutes**: SBOMs are generated from snapshots and transmitted to Datadog. Vulnerability results appear.
-
-<div class="alert alert-info">First results typically appear within 1 hour of deployment. If no results appear after 2 hours, see the <a href="/security/cloud_security_management/troubleshooting/agentless_scanning">Agentless Scanning troubleshooting guide</a>.</div>
+<div class="alert alert-info">If no results appear after two hours, see the <a href="/security/cloud_security_management/troubleshooting/agentless_scanning">Agentless Scanning troubleshooting guide</a>.</div>
 
 View scan results in the following locations:
 
@@ -406,14 +402,14 @@ View scan results in the following locations:
 
 {{% csm-agentless-exclude-resources %}}
 
-## Disable Agentless scanning
+## Disable Agentless Scanning
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **AWS**.
-1. If required, use filters to find the account you want to stop agentless scanning for. Click the account to open the side panel that contains its settings.
+1. If required, use filters to find the account you want to stop Agentless Scanning for. Click the account to open the side panel that contains its settings.
 1. On the **Features** tab, click **Configure Agentless Scanning** or **Manage** to open the Agentless Scanning Setup modal.
-1. Under **How would you like to set up Agentless scanning?**, click **Terraform**.
+1. Under **How would you like to set up Agentless Scanning?**, click **Terraform**.
 1. Under **Enable Features**, beside **Enable Agentless Vulnerability management**, switch the toggle to the off position.
 1. Click **Done**.
 
@@ -434,7 +430,7 @@ View scan results in the following locations:
 
 {{% tab "GCP" %}}
 1. On the [Cloud Security Setup][10] page, click **Cloud Integrations** > **GCP**.
-1. Expand the account containing the project where you want to disable Agentless scanning.
+1. Expand the account containing the project where you want to disable Agentless Scanning.
 1. Beside the **Enabled** label, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) to open the Vulnerability Scanning modal.
 1. Beside **Vulnerability Scanning**, switch the toggle to the off position.
 1. Click **Done**.
@@ -444,7 +440,7 @@ View scan results in the following locations:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Uninstall Agentless scanning
+## Uninstall Agentless Scanning
 
 {{< tabs >}}
 {{% tab "Terraform" %}}

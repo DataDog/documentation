@@ -31,11 +31,11 @@ For AWS Organizations, use a [CloudFormation StackSet][5] to deploy the delegate
 
 The following diagram illustrates cross-account scanning from a central account:
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagram of Agentless Scanning showing the Agentless scanner is deployed in a central cloud account" width="90%" >}}
 
 **If you do not want to grant cross-account permissions**, deploy a scanner in each account instead. This incurs higher costs because each scanner performs cross-region scans within its account.
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagram of Agentless Scanning showing the Agentless scanner is deployed in each cloud account" width="90%" >}}
 
 [5]: /security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup
 
@@ -59,7 +59,7 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 
 | Limit | Value |
 |-------|-------|
-| Maximum scanners per account per region | 4 (hard cap — AWS limits concurrent snapshots to 100 per account per region) |
+| Maximum scanners per account per region | 4 (hard cap — cloud providers like AWS limit concurrent snapshots to 100 per account per region) |
 | Hosts per scanner per 15-minute cycle | Up to 200 |
 | Scan interval | Every 12 hours |
 

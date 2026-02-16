@@ -10,7 +10,7 @@ Agentless Scanning is supported on AWS, Azure, and GCP. Oracle Cloud Infrastruct
 
 This feature is available in all commercial Datadog data centers. GovCloud is not supported (requires [Remote Configuration][17], which is not available in GovCloud). Agentless Scanning is not FIPS compliant.
 
-The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
+The following table provides a summary of Agentless Scanning technologies in relation to their corresponding components for each supported cloud provider:
 
 | Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             | GCP                                                                                                                                                                             |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

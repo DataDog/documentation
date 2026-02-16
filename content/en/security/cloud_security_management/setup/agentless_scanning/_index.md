@@ -33,7 +33,7 @@ If you have [Cloud Security Evaluation Filters][15] configured, Agentless Scanni
 
 The following diagram illustrates how Agentless Scanning works:
 
-{{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagram showing how Agentless scanning works" width="90%" >}}
+{{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagram showing how Agentless Scanning works" width="90%" >}}
 
 1. Datadog schedules a scan and sends which resources to scan through Remote Configuration.
 
@@ -53,7 +53,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 ## On-demand scanning
 
-By default, Agentless Scanning automatically scans your resources every 12 hours. You can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API.
+By default, Agentless Scanning automatically scans your resources every 12 hours. You can also trigger an immediate scan of a specific resource (host, container, serverless function, or cloud storage bucket) using the On-Demand Scanning API.
 
 This is useful when you need to:
 - Verify a vulnerability has been patched
@@ -92,14 +92,14 @@ When installed, the Datadog Agent offers real-time, deep visibility into risks a
 
 As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][5]. In this way, Cloud Security offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
 
-The following diagram illustrates how Agentless scanning works with existing Agent installations:
+The following diagram illustrates how Agentless Scanning works with existing Agent installations:
 
-{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with Cloud Security vulnerability management" width="90%" >}}
+{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless Scanning works when the Agent is already installed with Cloud Security vulnerability management" width="90%" >}}
 
 ## Cloud Storage scanning
 
 {{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances in Preview. To enroll, click <strong>Request Access</strong>.
+  Scanning support for Amazon S3 buckets and RDS instances is in private beta. To express interest, contact <a href="/help">Datadog Support</a>.
 {{< /callout >}}
 
 If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets.
@@ -116,9 +116,9 @@ The following table provides estimated monthly costs. Consult your cloud provide
 
 | Cost component | Estimate | Notes |
 |----------------|----------|-------|
-| Fixed per scanner | ~$80 USD/mo | EC2 instance (or equivalent), VPC, and NAT gateway |
+| Fixed per scanner | ~$80 USD/mo | VM instance (for example, EC2 in AWS), virtual network, and NAT gateway |
 | Per scanned host | ~$0.10 USD/mo | Data transfer (egress) for transmitting package lists |
-| Cross-account IAM roles | $0 | IAM-only, no compute cost |
+| Cross-account access (AWS IAM roles, Azure role assignments, or GCP service accounts) | $0 | Identity-based access only, no compute cost |
 
 To reduce costs:
 - Deploy a scanner in each region where you have more than 150 hosts. A regional scanner avoids cross-region data transfer, which is more cost-effective than scanning those hosts from a remote region.
