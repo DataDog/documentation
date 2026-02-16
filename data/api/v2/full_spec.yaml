@@ -71364,6 +71364,14 @@ paths:
   /api/v2/apm/services:
     get:
       operationId: GetServiceList
+      parameters:
+      - description: Filter services by environment. Can be set to `*` to return all
+          services across all environments.
+        in: query
+        name: filter[env]
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           content:
