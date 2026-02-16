@@ -99,7 +99,7 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured audit trail query, making it easier to explore audit events without needing to write complex syntax. To access this feature, click **Ask** in the search field.
 
-{{< img src="/account_management/audit_logs/audit_trail_nlq.mp4" alt="Natural language query in Audit Trail showing how to search for audit events using plain English phrases" video=true >}}
+{{< img src="account_management/audit_logs/audit_trail_nlq_light.gif" alt="Natural language query in Audit Trail showing how to search for audit events using plain English phrases in light mode" style="width:100%;" >}}
 
 The system translates natural language input into Datadog queries and understands context such as users, actions, resources, and time ranges. It also detects relevant fields automatically — for example, "Who modified the payment dashboard last week" or "Show all role changes in the past 24 hours."
 
