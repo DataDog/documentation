@@ -54,13 +54,13 @@ The `software-delivery` toolset includes the following tools:
 
 ## Example prompts
 
-Once connected, try prompts like:
+After you are connected, try prompts like:
 
-- "Show me all the pipelines for my commit `58b1488`."
-- "What's causing the `integration-test` job to fail on my branch?"
-- "Find active flaky tests for the checkout service sorted by failure rate."
-- "How many failed pipelines have there been in the last 2 weeks?"
-- "Show me the 95th percentile of pipeline duration grouped by pipeline name."
+- Show me all the pipelines for my commit `58b1488`.
+- What's causing the `integration-test` job to fail on my branch?
+- Find active flaky tests for the checkout service sorted by failure rate.
+- How many failed pipelines have there been in the last 2 weeks?
+- Show me the 95th percentile of pipeline duration grouped by pipeline name.
 
 ## Setup
 
