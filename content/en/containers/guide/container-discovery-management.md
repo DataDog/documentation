@@ -461,6 +461,12 @@ To exclude containers based on their pod's owner name (for example, targeting al
 container.pod.name.startsWith("my-app")
 ```
 
+To **only include** containers in a particular set of namespaces:
+
+```yaml
+!(container.pod.namespace in ["foo", "bar", "baz"])
+```
+
 ## Pod exclude configuration
 
 In **Agent v7.45+** you can set annotations on your Kubernetes pods to control Autodiscovery. Set the following annotations with the value `"true"` to add exclusion rules.

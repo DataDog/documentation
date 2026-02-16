@@ -23,9 +23,9 @@ further_reading:
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
       tag: 'Documentation'
       text: 'Slack integration with incidents'
-    - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+    - link: 'https://www.datadoghq.com/blog/mobile-incident-management-datadog/'
       tag: 'Blog'
-      text: 'More efficient pair programming with Datadog CoScreen'
+      text: 'Manage and resolve incidents on the go with the Datadog Mobile App'
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
@@ -77,7 +77,7 @@ Click **Add Video Call** to add a link to the call where discussions about the i
 
 ### Troubleshooting and updating the incident
 
-The Incident page has four main sections: _Overview_, _Timeline_, _Remediation_, and _Notifications_. Update these sections as the incident progresses to keep everyone informed of the current status.
+The Incident page has four main sections: _Overview_, _Timeline_, _Post-Incident_, and _Notifications_. Update these sections as the incident progresses to keep everyone informed of the current status.
 
 #### Overview
 
@@ -118,20 +118,20 @@ The _Timeline_ shows additions and changes to incident fields and information in
 
 You can add any Slack comment in the incident channel to the timeline so that you can consolidate important communications related to the investigation and mitigation of the incident.
 
-#### Remediation
+#### Post-Incident
 
 **Scenario:** There's a notebook on how to handle this kind of issue, which includes tasks that need to be done to fix it.
 
- In the _Remediation_ section, you can keep track of documents and tasks for investigating the issue or for post-incident remediation tasks.
+ In the _Post-Incident_ section, you can keep track of documents and tasks for investigating the issue or for post-incident remediation tasks.
 
-1. Click the **Remediation** tab.
+1. Click the **Post-Incident** tab.
 2. Click the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
 3. Add a task by adding a description of a task in the _Incident Tasks_ box, for example: `Run the steps in the notebook.`
 4. Click **Create Task**.
 5. Click **Assign To** and assign yourself the task.
 6. Click **Set Due Date** and set the date for today.
     All task additions and changes are recorded in the _Timeline_.
-    You can also add post-incident tasks in the _Remediation_ section to keep track of them.
+    You can also add post-incident tasks in the _Post-Incident_ section to keep track of them.
 
 #### Notifications
 
@@ -162,7 +162,7 @@ In the _Notifications_ section, you can send out a notification updating the sta
 
 The postmortem is generated as a Datadog Notebook or Confluence page, and it includes the timeline events and resources referenced during the investigation and remediation. This makes it easier to review and further document what caused the issue and how to prevent it in the future.
 
-If there are follow-up tasks that you and your team need to complete to ensure the issue doesn't happen again, add those and track them in the Remediation's _Incident Tasks_ section.
+If there are follow-up tasks that you and your team need to complete to ensure the issue doesn't happen again, add those and track them in the Post-Incident's _Incident Tasks_ section.
 
 {{< img src="getting_started/incident_management/generate_postmortem.png" alt="Generate Postmortem" responsive="true" style="width:80%;">}}
 ## Customizing your incident management workflow

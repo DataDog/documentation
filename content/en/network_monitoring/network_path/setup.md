@@ -242,7 +242,7 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-### Dynamic tests (Preview)
+### Dynamic tests
 
 **Prerequisites**: [CNM][1] must be enabled.
 

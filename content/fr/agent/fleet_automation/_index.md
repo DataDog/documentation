@@ -1,45 +1,73 @@
 ---
-description: Gérez centralement et administrez à distance les Agents Datadog à grande
-  échelle grâce aux vues de configuration, aux mises à niveau, à la collecte de flare
-  et à la rotation des clés d'API.
+description: Gouvernez de manière centralisée et gérez à distance les Agents Datadog
+  et les Collectors OpenTelemetry à grande échelle avec des vues de configuration,
+  des mises à niveau, la collecte de flares et la rotation de clés d'API.
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/fleet-automation-central-configuration
+  tag: Blog
+  text: Configurer de manière centralisée et mettre à l'échelle la surveillance de
+    votre infrastructure et de vos applications avec Datadog Fleet Automation
+- link: https://www.datadoghq.com/blog/manage-opentelemetry-collectors-with-datadog-fleet-automation
+  tag: Blog
+  text: Gérer tous vos collecteurs OpenTelemetry avec Datadog Fleet Automation
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centraliser et gouverner votre pipeline OpenTelemetry avec la passerelle DDOT
 - link: /remote_configuration
   tag: Documentation
   text: En savoir plus sur la configuration à distance
 - link: /infrastructure/list/#agent-configuration
   tag: Documentation
-  text: En savoir plus sur la vue de configuration de l'Agent
+  text: En savoir plus sur l'affichage de la configuration de l'Agent
 - link: https://www.datadoghq.com/blog/fleet-automation/
   tag: Blog
-  text: Contrôler de manière centralisée et gérer à distance les Agents Datadog à
-    grande échelle grâce à la solution Fleet Automation.
+  text: Gouverner de manière centralisée et gérer à distance les Agents Datadog à
+    grande échelle avec Fleet Automation
 title: Fleet Automation
 ---
 
 ## Présentation
 
-Datadog Fleet Automation vous permet de gérer centralement et d'administrer à distance les Agents Datadog à grande échelle afin de répondre à l'évolution de vos besoins en observabilité.
+Datadog Fleet Automation vous permet de gouverner de manière centralisée et de gérer à distance les Agents Datadog et les Collectors OpenTelemetry (OTel) à grande échelle pour prendre en charge vos besoins d'observabilité en constante évolution.
 
 {{< img src="/agent/fleet_automation/fleet_automation2.png" alt="La page Fleet Automation" style="width:100%;" >}}
 
 ## Cas d'utilisation
 
-Avec la plateforme Fleet Automation, vous pouvez :
-- Afficher les dernières configurations de l'Agent et les modifications historiques pour vérifier les mises à jour de déploiement et garantir la cohérence des configurations.
-- Vous assurer que l'ensemble de vos Agents utilise les dernières améliorations fonctionnelles en identifiant et en mettant à niveau les versions obsolètes de l'Agent.
-- Envoyer un flare depuis votre organisation, ce qui réduit le temps nécessaire pour déboguer les problèmes sur un Agent.
-- Aider à faire tourner les clés d'API et vous assurer que les anciennes clés puissent être désactivées sans impact en identifiant quels Agents, et combien d'Agents, utilisent une clé particulière.
+Pour les cas d'usage suivants, assurez-vous que votre parc d'Agents Datadog et de collecteurs OpenTelemetry utilise les dernières améliorations de fonctionnalités. Avec Fleet Automation, les fonctionnalités suivantes sont disponibles :
+- **Affichez les dernières configurations des Agents et des Collectors OTel** ainsi que l'historique des modifications pour confirmer les mises à jour de déploiement et garantir la cohérence de la configuration.
+- **Vérifiez que votre parc d'Agents et de Collectors OTel utilise les dernières améliorations de fonctionnalités** en identifiant et en mettant à niveau les versions obsolètes.
+- **Configurez vos Agents Datadog directement depuis Fleet Automation**, permettant à vos équipes de centraliser la configuration et d'obtenir une visibilité sur vos environnements plus rapidement.
+- **Envoyez un flare d'assistance à distance depuis l'interface Datadog**, réduisant le temps nécessaire pour déboguer les problèmes sur un Agent ou un Collector DDOT.
 
-## Configurer Fleet Automation
+## Configuration
 
-- **Mettre à niveau et configurer à distance des Agents** : pour plus d'informations sur les versions de Agent prises en charge et les étapes de configuration, consultez la section relative à [l'activation de la gestion à distance des Agents][3].
-- **Afficher la configuration de l'Agent** : la vue de configuration de l'Agent est activée par défaut dans les versions 7.47.0 ou ultérieures de l'Agent. Pour activer la configuration de l'Agent manuellement, définissez `inventories_configuration_enabled` sur `true` dans votre [fichier de configuration de l'Agent][2]. Vous pouvez également utiliser la variable d'environnement `DD_INVENTORIES_CONFIGURATION_ENABLED`.
+### Gérer votre parc à distance
+
+Fleet Automation vous permet de gérer de manière centralisée les Agents Datadog sur tous vos hosts directement depuis l'interface Datadog. Avec la gestion à distance, vous pouvez afficher l'état actuel de chaque Agent, appliquer des modifications de configuration et déployer des mises à niveau de version sans avoir besoin d'un accès direct aux systèmes individuels. Cela fournit un workflow cohérent et contrôlé pour maintenir votre parc sécurisé, à jour et aligné sur les normes de votre organisation.
+
+- **Mettre à niveau et configurer les Agents à distance** : pour les étapes de configuration et d'activation, consultez la section relative à [l'activation de la gestion à distance des Agents][3].
+- **Afficher les configurations des Agents et des Collectors OpenTelemetry** :
+  - L'affichage de la configuration de l'Agent et de Datadog Distribution of OTel Collector (DDOT) est activé par défaut dans les versions 7.47.0 ou ultérieures de l'Agent. Pour activer manuellement la configuration de l'Agent, définissez `inventories_configuration_enabled` dans votre [fichier de configuration de l'Agent][2] sur `true`. Vous pouvez également utiliser la variable d'environnement `DD_INVENTORIES_CONFIGURATION_ENABLED`.
+  - L'affichage de la configuration du Collector OpenTelemetry upstream est activé en définissant l'[extension Datadog][8] dans votre fichier de configuration du Collector.
 - **Afficher la configuration des intégrations de l'Agent** : la configuration des intégrations de l'Agent est activée par défaut dans les versions 7.49 ou ultérieures de l'Agent. Pour activer la configuration des intégrations de l'Agent manuellement, définissez `inventories_checks_configuration_enabled` sur `true` dans votre [fichier de configuration de l'Agent][2]. Vous pouvez également utiliser la variable d'environnement `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+### API Fleet Automation
+Fleet Automation fournit une API publique qui vous permet d'afficher et de gérer par programmation les Agents Datadog à grande échelle. Pour obtenir les détails complets des endpoints et des exemples d'utilisation, consultez la section [Documentation de l'API Fleet Automation][9].
+
+**Remarque** : l'API Fleet Automation ne prend pas en charge toutes les capacités de configuration de l'Agent Datadog.
+
+<div class="alert alert-info">
+La gestion à distance des Agents dans les charges de travail conteneurisées n'est pas prise en charge.
+</div>
+
 
 ## Observer votre parc
 
-Utilisez la page [**Fleet Automation**][1] pour obtenir des informations sur les hosts non surveillés, les Agents nécessitant une mise à jour ou ceux ayant des problèmes d'intégration. Pour chaque Agent, vous pouvez voir :
+Consultez la page [**Fleet Automation**][1] pour obtenir des informations sur les lacunes d'observabilité sur vos hosts, les Agents ou Collectors OpenTelemetry obsolètes et les Agents présentant des problèmes d'intégration.
+
+Pour chaque Agent Datadog, vous pouvez voir :
 - La version de l'Agent
 - Si l'Agent comporte des intégrations non configurées ou mal configurées
 - Les services surveillés par l'Agent
@@ -47,9 +75,14 @@ Utilisez la page [**Fleet Automation**][1] pour obtenir des informations sur les
 - Les produits activés sur l'Agent
 - Les événements Audit Trail de l'Agent, y compris les modifications de configuration, les mises à niveau et les flares
 
-### Examiner un Agent
+Pour chaque Collector OpenTelemetry, vous pouvez voir :
+- La version du Collector
+- La distribution du Collector
+- Le fichier YAML de configuration du Collector
 
-La sélection d'un Agent affiche des informations supplémentaires, notamment sa configuration, les intégrations connectées, les événements d'audit et un onglet d'assistance permettant d'envoyer un flare à distance.
+### Examiner un Agent Datadog ou un Collector OpenTelemetry
+
+La sélection d'un Agent Datadog ou d'un Collector OpenTelemetry vous donne plus d'informations à son sujet, notamment sa configuration, les intégrations connectées, les événements d'audit et un onglet d'assistance que vous pouvez utiliser pour envoyer un flare à distance.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="Informations sur l'intégration d'un Agent" style="width:100%;" >}}
 
@@ -63,23 +96,17 @@ La visibilité des événements Audit Trail dépend de votre offre. Lorsque Audi
 
 ### Envoyer un flare à distance
 
-Après avoir activé la configuration à distance sur un Agent, vous pouvez envoyer un flare depuis Datadog. Pour obtenir des instructions sur l'envoi d'un flare, consultez la section [Envoyer un flare depuis le site Datadog][7].
+Vous pouvez envoyer un flare depuis l'Agent Datadog ou le Collector DDOT après avoir activé la configuration à distance sur l'Agent. Pour obtenir des instructions sur l'envoi d'un flare, consultez la section [Envoyer un flare depuis le site Datadog][7].
 
 Lorsque vous contactez l'assistance Datadog avec la configuration à distance activée pour un Agent, l'équipe d'assistance peut initier un flare depuis votre environnement afin de mieux vous aider dans les plus brefs délais. Les flares fournissent à l'assistance Datadog des informations de diagnostic pour vous aider à résoudre votre problème.
 
 {{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Envoyer un flare à distance" style="width:100%;" >}}
 
-## Gestion à distance de l'Agent
-
-La gestion à distance des Agents simplifie le processus de mise à niveau de votre parc d'Agents en réduisant la nécessité de coordonner plusieurs outils de déploiement ou de gestion de configuration. Pour plus d'informations, consultez la section relative à la [gestion de l'Agent à distance][6].
-
-{{< img src="agent/fleet_automation/fleet-automation-upgrades-2.png" alt="Mettre à niveau les Agents à distance dans Fleet Automation" style="width:100%;" >}}
-
 ## Contrôler l'accès à Fleet Automation
 
 Fleet Automation est accessible à tous les utilisateurs d'une organisation Datadog. Vous pouvez contrôler l'accès à des fonctionnalités spécifiques :
 
-| Autorisation | Rôle |
+| Autorisation | Description |
 |--------------|---------------|
 | `API Keys Read`| Restreint les utilisateurs pouvant afficher et rechercher des Agents par clé d'API. |
 | `Agent Flare Collection` | Limite les utilisateurs qui peuvent envoyer des flares à distance à partir de Fleet Automation. |
@@ -99,3 +126,5 @@ Pour plus d'informations sur la configuration des rôles et des autorisations, c
 [5]: /fr/account_management/rbac/
 [6]: /fr/agent/fleet_automation/remote_management/
 [7]: /fr/agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
+[8]: https://docs.datadoghq.com/fr/opentelemetry/integrations/datadog_extension/#setup
+[9]: https://docs.datadoghq.com/fr/api/latest/fleet-automation/
