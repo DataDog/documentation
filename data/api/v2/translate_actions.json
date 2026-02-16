@@ -131,11 +131,25 @@
     "description": "Register a new App Key",
     "summary": "Register a new App Key"
   },
+  "ListActionConnections": {
+    "description": "List all action connections for the organization. This endpoint supports filtering by integration type, tags, environment, and search strings. Pagination is supported using page size and page number parameters.",
+    "summary": "List action connections"
+  },
   "CreateActionConnection": {
     "description": "Create a new Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key).",
     "summary": "Create a new Action Connection",
     "request_description": "",
     "request_schema_description": "Request used to create an action connection."
+  },
+  "ListConnectionGroups": {
+    "description": "List all connection groups for the organization. This endpoint supports filtering by integration type, environment, connection group IDs, and search strings. Pagination is supported using page size and page number parameters.",
+    "summary": "List connection groups"
+  },
+  "UpdateConnectionGroup": {
+    "description": "Update an existing connection group by ID. This endpoint allows updating the name, description, tag keys, integration type, connections, and policy attributes of a connection group.",
+    "summary": "Update a connection group",
+    "request_description": "",
+    "request_schema_description": "Request for updating a connection group."
   },
   "DeleteActionConnection": {
     "description": "Delete an existing Action Connection. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

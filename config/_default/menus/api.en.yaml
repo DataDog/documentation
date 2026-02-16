@@ -5472,6 +5472,32 @@ menu:
           - DeleteActionConnection
         unstable: []
         order: 4
+    - name: Update a connection group
+      url: '#update-a-connection-group'
+      identifier: action-connection-update-a-connection-group
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateConnectionGroup
+        unstable:
+          - v2
+        order: 11
+    - name: List connection groups
+      url: '#list-connection-groups'
+      identifier: action-connection-list-connection-groups
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListConnectionGroups
+        unstable:
+          - v2
+        order: 10
     - name: Create a new Action Connection
       url: '#create-a-new-action-connection'
       identifier: action-connection-create-a-new-action-connection
@@ -5484,6 +5510,19 @@ menu:
           - CreateActionConnection
         unstable: []
         order: 2
+    - name: List action connections
+      url: '#list-action-connections'
+      identifier: action-connection-list-action-connections
+      parent: action-connection
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListActionConnections
+        unstable:
+          - v2
+        order: 9
     - name: Register a new App Key
       url: '#register-a-new-app-key'
       identifier: action-connection-register-a-new-app-key
