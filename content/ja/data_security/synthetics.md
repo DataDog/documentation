@@ -30,7 +30,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
-{{< site-region region="us,us3,us5,gov,ap1" >}}
+{{< site-region region="us,us3,us5,gov,ap1,ap2" >}}
 
 * **Storage**: [Amazon S3 バケット][1]の暗号化
 * **Transport**: [S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
@@ -72,7 +72,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
-{{< site-region region="us,us3,us5,gov,ap1" >}}
+{{< site-region region="us,us3,us5,gov,ap1,ap2" >}}
 
 * **Storage**: [AWS][1]の暗号化。
 * **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート (API キーによる認証)、そして Datadog からストレージへの転送中の暗号化: [S3 の AWS 署名バージョン4][2]を使用。

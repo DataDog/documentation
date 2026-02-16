@@ -414,7 +414,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| パラメーター | タイプ | 説明 |
+| パラメーター | タイプ | Description |
 | --------- | ---- | ----------- |
 | `agent` | $ref | 詳細は [AgentContext](#agentcontext) をご覧ください。 |
 | `title` | 文字列 |  |
@@ -512,7 +512,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `username` | ユーザー名 |
 | `user_domain` | ユーザードメイン |
@@ -549,7 +549,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `id` | コンテナ ID |
 | `created_at` | コンテナの作成時間 |
@@ -600,7 +600,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `name` | イベント名 |
 | `category` | イベントカテゴリー |
@@ -639,7 +639,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `cause` | プロセス終了の原因 (EXITED、SIGNALED、COREDUMPED のいずれか 1 つ) |
 | `code` | プロセスの終了コード、またはプロセスを終了させたシグナルの番号 |
@@ -671,7 +671,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `path` | ファイルパス |
 | `device_path` | ファイルデバイスパス |
@@ -708,7 +708,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `path` | ファイルパス |
 | `device_path` | ファイルデバイスパス |
@@ -756,7 +756,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `id` | ルールの ID |
 | `version` | ルールのバージョン |
@@ -813,7 +813,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `pid` | プロセス ID |
 | `ppid` | 親プロセス ID |
@@ -896,7 +896,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `pid` | プロセス ID |
 | `ppid` | 親プロセス ID |
@@ -944,7 +944,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `key_name` | レジストリキー名 |
 | `key_path` | レジストリキーパス |
@@ -973,7 +973,7 @@ Windows 向けの Workload Protection イベントには、以下の JSON スキ
 
 {{< /code-block >}}
 
-| フィールド | 説明 |
+| フィールド | Description |
 | ----- | ----------- |
 | `name` | ユーザー名 |
 | `sid` | 所有者 SID |
