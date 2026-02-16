@@ -165,6 +165,8 @@ ignore:
 
 You can define [PR Gates][2] directly in the configuration file to enforce code coverage thresholds on pull requests. Gates defined in the configuration file work alongside gates configured in the [Datadog UI][2]—both sets of rules are evaluated when a PR is opened or updated.
 
+<div class="alert alert-info">If both the configuration file and the Datadog UI define gates for the same scope, the pull request must satisfy all of them. In practice, the strictest threshold applies.</div>
+
 ```yaml
 gates:
   - type: total_coverage_percentage
