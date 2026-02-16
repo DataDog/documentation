@@ -1,0 +1,176 @@
+---
+title: APM Processing Pipelines
+description: 'Transform, normalize, and enrich spans after ingestion using APM Processing Pipelines.'
+aliases:
+- /tracing/processing_pipelines/
+- /apm/processing-pipelines/
+further_reading:
+    - link: 'tracing/trace_pipeline'
+      tag: "Documentation"
+      text: 'Control trace ingestion and retention'
+    - link: 'tracing/trace_explorer/query_syntax'
+      tag: "Documentation"
+      text: 'Use Trace Explorer query syntax'
+    - link: 'tracing/metrics/metrics_namespace'
+      tag: "Documentation"
+      text: 'Learn about Trace Metrics'
+    - link: 'logs/log_configuration/pipelines'
+      tag: "Documentation"
+      text: 'Configure Log Processing Pipelines'
+---
+
+{{< img src="tracing/processing_pipelines/apm_processing_overview.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="APM Processing Pipelines Overview" >}}
+
+APM Processing Pipelines allow you to transform, normalize, and enrich spans after ingestion and before storage. Rename attributes, extract structured data, and standardize tagging across services without modifying application code.
+
+Processing Pipelines run in the Datadog backend and apply to ingested spans and their associated trace metrics.
+
+**Notes:**
+- Processing Pipelines do not modify trace sampling, retention filters, service renaming, or Sensitive Data Scanner configuration.
+- Changes apply only to newly ingested spans. Previously ingested spans are not retroactively updated.
+- Attribute changes also apply to associated [Trace Metrics][3] to maintain consistency across dashboards and monitors.
+
+Use APM Processing Pipelines for:
+- Standardizing inconsistent tag names across services.
+- Extracting attributes from URLs, SQL statements, or JSON payloads.
+- Reducing the need for custom instrumentation in application code.
+- Improving query accuracy in Trace Explorer.
+
+## How APM Processing Pipelines work
+
+Pipelines are evaluated from top to bottom.
+
+Each pipeline contains:
+- A filter query that determines which spans enter the pipeline.
+- One or more processors that transform matching spans.
+
+Only spans matching the filter query are processed. Within a pipeline, processors run sequentially in the order displayed.
+
+Reordering pipelines or processors changes processing behavior.
+
+## Create a pipeline
+
+1. Navigate to [**APM** > **Settings** > **Processing Pipelines**][1].
+2. Click **Add Pipeline**.
+3. Define a filter query using the [Trace Explorer query syntax][2].
+4. Add one or more processors.
+5. Preview matching spans in real time.
+6. Click **Save** or **Enable**.
+
+<div class="alert alert-info">
+The filter query applies to the entire pipeline. Modifying it affects all processors within the pipeline.
+</div>
+
+## Manage pipelines
+
+You can:
+- Enable or disable pipelines.
+- Reorder pipelines.
+- Edit pipelines in draft mode.
+- Restrict access using role-based access control (RBAC).
+
+Disabling a pipeline stops future matching spans from being processed.
+
+## Processors
+
+Processors define the transformations applied to spans.
+
+### Remapper processor
+
+Rename, merge, or remove span attributes.
+
+You can:
+- Rename an attribute (for example, <code>customerId</code> → <code>customer_id</code>).
+- Merge multiple attributes into a single standardized attribute.
+- Override existing attributes on conflict.
+- Preserve or remove the original attribute.
+- Delete an attribute.
+
+Certain system attributes (such as <code>service</code>, <code>resource</code>, and <code>operation</code>) cannot be remapped.
+
+<div class="alert alert-warning">
+Renaming or removing attributes used in dashboards, monitors, or retention filters may require updating those configurations.
+</div>
+
+### Parser processor
+
+Extract structured attributes from existing span attributes. Promote values from URLs, SQL statements, JSON payloads, or custom text fields into searchable attributes.
+
+Supported parsing templates include:
+- URL path
+- JSON
+- SQL
+- GROK (custom rule)
+
+#### URL path example
+
+Input:
+<pre>/fr/v1/users/1337/orders</pre>
+
+Extracted attributes:
+<pre>
+path.language: "fr"
+path.version: "v1"
+path.userid: "1337"
+</pre>
+
+#### JSON example
+
+Input:
+<pre>{"user":{"id":"u-42"},"cart":{"total":129.9,"currency":"EUR"}}</pre>
+
+Extracted attributes:
+<pre>
+user.id: "u-42"
+cart.total: 129.9
+cart.currency: "EUR"
+</pre>
+
+#### SQL example
+
+Input:
+<pre>SELECT r.id FROM user_role ur JOIN role r ON ur.role_id = r.id</pre>
+
+Extracted attributes may include:
+<pre>
+sql.operation: "SELECT"
+sql.tables: ["user_role","role"]
+</pre>
+
+#### GROK example
+
+Input:
+<pre>order=84219 status=SHIPPED user=1337 duration=482ms</pre>
+
+Example rule:
+<pre>^order=%{INT:order.id}\s+status=%{NOTSPACE:order.status}\s+user=%{INT:user.id}\s+duration=%{INT:duration.ms:int}ms$</pre>
+
+Extracted attributes:
+<pre>
+order.id: "84219"
+order.status: "SHIPPED"
+user.id: "1337"
+duration.ms: 482
+</pre>
+
+## Order of execution
+
+1. Pipelines run from top to bottom.
+2. Processors run sequentially within each pipeline.
+3. Attribute changes from one processor affect downstream processors.
+
+## Limitations
+
+APM Processing Pipelines:
+- Do not modify trace sampling behavior.
+- Do not change retention or indexing settings.
+- Do not retroactively modify previously ingested spans.
+- Do not replace Sensitive Data Scanner configuration.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/apm/settings/processing-pipelines
+[2]: /tracing/trace_explorer/query_syntax/
+[3]: /tracing/metrics/metrics_namespace/
