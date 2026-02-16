@@ -37,12 +37,20 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 
 The `software-delivery` toolset includes the following tools:
 
-| Tool | Description |
-|------|-------------|
-| `search_datadog_ci_pipeline_events` | Search CI pipeline events with filters and get details on failures, durations, and statuses. |
-| `aggregate_datadog_ci_pipeline_events` | Aggregate CI pipeline events for statistics like average durations, failure counts, and percentile analysis. |
-| `get_datadog_flaky_tests` | Find flaky tests with triage details including failure rate, category, owners, and CI impact. |
-| `aggregate_datadog_test_events` | Aggregate test events to analyze reliability and performance trends. |
+`search_datadog_ci_pipeline_events`
+: Search CI pipeline events with filters and get details on failures, durations, and statuses.
+
+`aggregate_datadog_ci_pipeline_events`
+: Aggregate CI pipeline events for statistics like average durations, failure counts, and percentile analysis.
+
+`get_datadog_flaky_tests`
+: Find flaky tests with triage details including failure rate, category, owners, and CI impact.
+
+`aggregate_datadog_test_events`
+: Aggregate test events to analyze reliability and performance trends.
+
+`search_datadog_test_events`
+: Search test events with filters and get details on them.
 
 ## Example prompts
 
