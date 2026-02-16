@@ -42,7 +42,7 @@ CloudPrem supports the following object storage types:
   {{< nextlink href="/cloudprem/install/azure_aks" >}}Install on Azure AKS{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/gcp_gke" >}}Install on GCP GKE{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/docker" >}}Install locally with Docker for testing{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/custom_k8s" >}}Install on Custom Kubernetes (manual){{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/custom_k8s" >}}Install on Kubernetes with PostgreSQL and MinIO{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://www.datadoghq.com/product-preview/cloudprem/
