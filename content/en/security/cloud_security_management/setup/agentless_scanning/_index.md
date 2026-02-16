@@ -53,7 +53,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 ## On-demand scanning
 
-By default, Agentless Scanning automatically scans your resources every 12 hours. You can also trigger an immediate scan of a specific resource (host, container, serverless function, or cloud storage bucket) using the On-Demand Scanning API.
+By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API.
 
 This is useful when you need to:
 - Verify a vulnerability has been patched
