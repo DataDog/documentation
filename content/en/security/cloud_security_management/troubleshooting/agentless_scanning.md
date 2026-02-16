@@ -15,13 +15,9 @@ If you experience issues with Agentless Scanning, use the following troubleshoot
 
 ## No results after deployment
 
-After deploying Agentless Scanning, results do not appear immediately. The expected timeline is:
+After deploying Agentless Scanning, results do not appear immediately. It may take up to 20 minutes for results to appear for the first time.
 
-1. **0–15 minutes**: Cloud integration crawlers discover your resources.
-2. **15–30 minutes**: Scanners begin creating snapshots and generating SBOMs. Each scanner processes up to 200 hosts per 15-minute cycle.
-3. **30–60 minutes**: Vulnerability results begin appearing in the [CSM Vulnerabilities Explorer][2].
-
-If no results appear after 2 hours:
+If no results appear after that:
 
 - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running (for example, look for EC2 instances tagged with `DatadogAgentlessScanner:true` in AWS).
 - Confirm that [Remote Configuration][3] is enabled on the API key used during setup. Scanners receive their scan instructions through Remote Configuration.
@@ -33,27 +29,11 @@ If your organization uses Service Control Policies (SCPs) that restrict VPC crea
 
 **Solution**: Use the **existing VPC** option during setup to deploy the scanner into an existing VPC. See the [enterprise networking considerations][5] section of the deployment guide.
 
-## Scanner capacity limits
-
-If you observe that not all hosts are scanned within a 12-hour cycle:
-
-- Each scanner processes up to 200 hosts per 15-minute cycle.
-- Each region supports a maximum of 4 scanners (limited by cloud provider concurrent snapshot quotas).
-- Scanner instances reboot every 24 hours for security updates. Pending scan queues reset during reboot, which may cause some hosts to be scanned in the next cycle.
-
-If you have more than 20,000 hosts in a single region, contact [Datadog Support][1] to discuss options such as requesting a cloud provider snapshot limit increase.
-
-<div class="alert alert-danger">Do not increase the Auto Scaling Group (ASG) desired count beyond 4 per region. Additional scanners cannot obtain snapshot capacity and automatically revert.</div>
-
 ## Scanner instances appear as vulnerable hosts
 
 Agentless scanner instances are ephemeral EC2 instances (or equivalent) that run inside your cloud account. These instances may appear in your vulnerability findings.
 
-To identify scanner instances in your vulnerability results:
-- In the [CSM Vulnerabilities Explorer][2], filter by the tag `DatadogAgentlessScanner:true`.
-- Scanner instances rotate every 24 hours and receive automatic security updates, so vulnerabilities on these instances are transient.
-
-To exclude scanner instances from your vulnerability views, add `NOT tag:DatadogAgentlessScanner:true` to your search filter.
+You can use tag-based filtering in the [CSM Vulnerabilities Explorer][2] to exclude Datadog-run scanner instances from your vulnerability views.
 
 ## Hosts with the Datadog Agent are not scanned
 

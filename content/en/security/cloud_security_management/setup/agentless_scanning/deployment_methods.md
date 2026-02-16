@@ -50,7 +50,6 @@ How you distribute scanners across regions depends on where your hosts are:
 - **Multiple regions with significant host counts**: Deploy a scanner in **each region where you have more than 150 hosts**. Each scanner scans hosts in its own region, avoiding cross-region data transfer costs.
   - **Rule of thumb**: If a region has more than 150 hosts, the egress savings from a local scanner outweigh the ~$80/mo fixed cost of running one. See [cloud service provider cost][2] for a full breakdown.
   - Regions with fewer than 150 hosts can be scanned cross-region from a nearby scanner.
-- If you use [Cloud Storage Scanning][1], deploy a scanner in any region containing a data store.
 
 Datadog automatically schedules scans to the appropriate regional scanner to minimize cross-region costs.
 
@@ -82,7 +81,6 @@ Summary of recommendations:
 
 - Use a dedicated scanner account for multi-account environments
 - Deploy a scanner in each region with more than 150 hosts
-- Deploy a scanner in any region containing a data store if using [Cloud Storage Scanning][1]
 - Use Terraform for repeatable, multi-region deployments
 
 **Note**: Only the collected list of packages and host metadata (hostnames, instance IDs) are sent to Datadog. All scanned data remains in your infrastructure.
