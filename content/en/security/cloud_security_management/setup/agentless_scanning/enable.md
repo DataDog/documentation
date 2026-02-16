@@ -151,6 +151,8 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 
 <div class="alert alert-danger">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
 
+<div class="alert alert-info">The CloudFormation template includes parameters for other Datadog features (such as Lambda Log Forwarder and Sensitive Data Scanner). If you are setting up Agentless Scanning for vulnerability management only, you can leave those parameters at their default values.</div>
+
 ##### Set up AWS CloudFormation
 
 {{< tabs >}}
@@ -302,7 +304,7 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 
 ### Terraform
 
-The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusable configuration for installing the Datadog Agentless scanner for AWS, Azure, and GCP.
+The [Terraform Datadog Agentless Scanner module][6] provides a simple and reusable configuration for installing the Datadog Agentless scanner for AWS, Azure, and GCP. Terraform is the recommended deployment method for multi-region environments because it deploys one scanner per region, avoiding cross-region networking costs. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning][24].
 
 {{% collapse-content title="Terraform setup guide" level="h4" id="terraform-setup" %}}
 If you've already [set up Cloud Security][10] and want to add a new cloud account or enable [Agentless Scanning][1] on an existing integrated cloud account, you can use either Terraform, [AWS CloudFormation][2], or [Azure Resource Manager][5]. This article provides detailed instructions for the Terraform approach.
@@ -386,7 +388,13 @@ For usage examples, refer to our [Github repository](https://github.com/DataDog/
 
 ### Verify your setup
 
-After completing the setup, you can verify that Agentless Scanning is working correctly by checking for scan results in Datadog. Results typically appear after the first scan cycle completes.
+After completing the setup, Agentless Scanning does not produce results immediately. The typical timeline is:
+
+1. **0–15 minutes**: Cloud integration crawlers discover your resources (hosts, containers, functions).
+2. **15–30 minutes**: Scanners pick up discovered resources and begin creating snapshots. Scanners select up to 200 hosts per 15-minute cycle.
+3. **30–60 minutes**: SBOMs are generated from snapshots and transmitted to Datadog. Vulnerability results appear.
+
+<div class="alert alert-info">First results typically appear within 1 hour of deployment. If no results appear after 2 hours, see the <a href="/security/cloud_security_management/troubleshooting/agentless_scanning">Agentless Scanning troubleshooting guide</a>.</div>
 
 View scan results in the following locations:
 
@@ -498,3 +506,4 @@ If you did not use a dedicated resource group, you must manually delete the scan
 [21]: https://github.com/DataDog/integrations-management/tree/main/gcp/agentless
 [22]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme
 [23]: https://ssh.cloud.google.com/cloudshell
+[24]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
