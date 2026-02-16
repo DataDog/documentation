@@ -62,7 +62,7 @@ To use the Software Delivery tools, connect to the Datadog MCP Server with the `
 https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
 ```
 
-For full setup instructions including client configuration for Cursor, Claude Code, VS Code, and other AI clients, see the [Datadog MCP Server documentation][1].
+For full setup instructions including client configuration for Cursor, Claude Code, VS Code, and other AI clients, see [Set Up the Datadog MCP Server][1].
 
 ## Further reading
 
