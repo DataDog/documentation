@@ -1,0 +1,23 @@
+{{- $mdURL := printf "%s.md" (strings.TrimRight "/" .Permalink) -}}
+<link rel="alternate" type="text/markdown" href="{{ $mdURL }}">
+<script>
+(function() {
+  var patterns = [
+    /GPTBot/i, /ChatGPT-User/i, /OAI-SearchBot/i,
+    /ClaudeBot/i, /Claude-User/i, /Claude-SearchBot/i, /anthropic-ai/i,
+    /PerplexityBot/i, /Perplexity-User/i,
+    /Google-Extended/i, /Google-CloudVertexBot/i,
+    /Amazonbot/i, /meta-externalagent/i,
+    /cohere-ai/i, /MistralAI-User/i,
+    /Bytespider/i, /CCBot/i, /DuckAssistBot/i,
+    /FirecrawlAgent/i, /Applebot-Extended/i
+  ];
+  var ua = navigator.userAgent;
+  for (var i = 0; i < patterns.length; i++) {
+    if (patterns[i].test(ua)) {
+      window.location.replace(window.location.href.split('#')[0].split('?')[0].replace(/\/+$/, '') + '.md');
+      break;
+    }
+  }
+})();
+</script>
