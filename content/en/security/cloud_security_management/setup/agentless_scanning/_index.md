@@ -20,14 +20,14 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 
 ## How it works
 
-Unlike most agentless security tools that copy disk snapshots out of your environment into the vendor's infrastructure, Datadog deploys lightweight scanning infrastructure **inside your cloud account**. Snapshots are created and analyzed within your environment. Your data never leaves your account boundary.
+Most agentless security tools copy disk snapshots out of your environment into the vendor's infrastructure for analysis. Datadog takes a different approach for the sake of data privacy: lightweight scanning infrastructure is deployed **inside your cloud account**. Scanners create snapshots of your resources and analyze them locally. Only the resulting software bill of materials (SBOM) — a list of packages and dependencies — is sent to Datadog. Your raw data, disk contents, and container images never leave your environment.
 
 This architecture provides:
-- **Data residency**: Disk contents, container images, and sensitive data stay within your cloud account. No data crosses an account boundary into Datadog's infrastructure.
+- **Data privacy**: Your disk contents, container images, and sensitive data stay within your cloud account. Only package metadata (the SBOM) is transmitted to Datadog.
+- **Data residency**: No data crosses an account boundary into Datadog's infrastructure, simplifying compliance with data sovereignty requirements.
 - **Compliance**: Auditors can verify that scanning data remains within your perimeter.
-- **Least-privilege access**: Scanners only require permissions to create and read snapshots, not to exfiltrate data.
 
-After [setting up Agentless Scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. Using these snapshots, the scanners generate and transmit a list of packages to Datadog to check for vulnerabilities. When scans of a snapshot are completed, the snapshot is deleted.
+After [setting up Agentless Scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners create snapshots of your VM instances and gather serverless function code. The scanners analyze these locally, generate an SBOM, and transmit it to Datadog to check for vulnerabilities. Snapshots are deleted after each scan completes.
 
 If you have [Cloud Security Evaluation Filters][15] configured, Agentless Scanning respects these filters and only scans resources that match the configured criteria.
 
@@ -39,10 +39,10 @@ The following diagram illustrates how Agentless Scanning works:
 
     **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
-2. For Lambda functions, the scanners fetch the function's code.
-3. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
-4. After the scan is complete, the list of packages and information related to collected hosts are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
-5. Using the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
+2. For serverless functions, the scanners fetch the function's code.
+3. The scanner creates snapshots of volumes used in running VM instances. Using the snapshots or the function code, the scanner generates an SBOM (a list of packages and dependencies).
+4. The SBOM and host metadata are transmitted to Datadog. All other data — including snapshots, disk contents, and container images — remains in your infrastructure. Snapshots are deleted.
+5. Datadog uses the SBOM to identify known vulnerabilities in your resources.
 
 **Notes**:
 - The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
