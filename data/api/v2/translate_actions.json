@@ -739,6 +739,18 @@
     "request_description": "",
     "request_schema_description": "Request object to update a resource filter."
   },
+  "GetCodeCoverageBranchSummary": {
+    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\n**Note**: This endpoint requires the `code_coverage_read` permission.",
+    "summary": "Get code coverage summary for a branch",
+    "request_description": "",
+    "request_schema_description": "Request object for getting code coverage summary for a branch."
+  },
+  "GetCodeCoverageCommitSummary": {
+    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).\n\n**Note**: This endpoint requires the `code_coverage_read` permission.",
+    "summary": "Get code coverage summary for a commit",
+    "request_description": "",
+    "request_schema_description": "Request object for getting code coverage summary for a commit."
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
