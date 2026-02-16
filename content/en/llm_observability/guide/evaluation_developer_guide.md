@@ -121,7 +121,7 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 ### LLMJudge
 
-The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Anthropic, Amazon Bedrock, and custom LLM clients with structured output formats.
+The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, and custom LLM clients with structured output formats.
 
 #### Parameters
 
@@ -130,7 +130,7 @@ The `LLMJudge` class enables automated evaluation of LLM outputs using another L
 | `user_prompt` | `str` | Yes | Prompt template with `{{field.path}}` syntax for span context injection. |
 | `system_prompt` | `str` | No | System prompt to set the judge's behavior or persona. |
 | `structured_output` | `StructuredOutput` | No | Output format specification. See [structured output types](#structured-output-types). |
-| `provider` | `str` | Conditional | LLM provider: `"openai"`, `"anthropic"`, or `"bedrock"`. Required if `client` is not provided. |
+| `provider` | `str` | Conditional | LLM provider: `"openai"`, `"azure_openai"`, `"anthropic"`, or `"bedrock"`. Required if `client` is not provided. |
 | `model` | `str` | No | Model identifier (for example, `"gpt-4o"`, `"claude-sonnet-4-20250514"`). |
 | `model_params` | `dict` | No | Additional parameters passed to the LLM API (for example, `temperature`). |
 | `client` | callable | Conditional | Custom LLM client function. Required if `provider` is not provided. |
@@ -214,6 +214,37 @@ judge = LLMJudge(
 )
 {{< /code-block >}}
 
+#### Example: Azure OpenAI
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+
+judge = LLMJudge(
+    provider="azure_openai",
+    model="gpt-4o",
+    user_prompt="Is this response factually accurate? Response: {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Whether the response is factually accurate",
+        reasoning=True,
+        pass_when=True,
+    ),
+    client_options={
+        "azure_endpoint": "https://your-resource.openai.azure.com",
+        "api_version": "2024-10-21",
+        "azure_deployment": "gpt-4o",
+    },
+)
+{{< /code-block >}}
+
+The `azure_openai` provider accepts the following `client_options`:
+
+| Option | Environment variable | Description |
+|--------|---------------------|-------------|
+| `api_key` | `AZURE_OPENAI_API_KEY` | Azure OpenAI API key. |
+| `azure_endpoint` | `AZURE_OPENAI_ENDPOINT` | Azure OpenAI endpoint URL. |
+| `api_version` | `AZURE_OPENAI_API_VERSION` | API version. Defaults to `"2024-10-21"`. |
+| `azure_deployment` | `AZURE_OPENAI_DEPLOYMENT` | Deployment name. Falls back to the `model` parameter. |
+
 #### Example: Custom LLM client
 
 {{< code-block lang="python" >}}
@@ -237,8 +268,8 @@ judge = LLMJudge(
 
 #### Key points
 
-- Requires either a `provider` (`"openai"`, `"anthropic"`, or `"bedrock"`) or a custom `client`.
-- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`). For Bedrock, configure AWS credentials through environment variables or `client_options`.
+- Requires either a `provider` (`"openai"`, `"azure_openai"`, `"anthropic"`, or `"bedrock"`) or a custom `client`.
+- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`). For Azure OpenAI, set `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`. For Bedrock, configure AWS credentials through environment variables or `client_options`.
 - Use `reasoning=True` in structured outputs to include an explanation in results.
 - Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
 
