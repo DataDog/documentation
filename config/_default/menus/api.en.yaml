@@ -7599,6 +7599,36 @@ menu:
           - ListCloudflareAccounts
         unstable: []
         order: 1
+    - name: Code Coverage
+      url: /api/latest/code-coverage/
+      identifier: code-coverage
+      generated: true
+    - name: Get code coverage summary for a commit
+      url: '#get-code-coverage-summary-for-a-commit'
+      identifier: code-coverage-get-code-coverage-summary-for-a-commit
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageCommitSummary
+        unstable:
+          - v2
+        order: 2
+    - name: Get code coverage summary for a branch
+      url: '#get-code-coverage-summary-for-a-branch'
+      identifier: code-coverage-get-code-coverage-summary-for-a-branch
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageBranchSummary
+        unstable:
+          - v2
+        order: 1
     - name: Confluent Cloud
       url: /api/latest/confluent-cloud/
       identifier: confluent-cloud
