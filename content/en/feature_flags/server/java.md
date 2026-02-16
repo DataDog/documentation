@@ -26,7 +26,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java APM Tracer**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
-- **Datadog Agent**: Version **7.x or later** with Remote Configuration enabled
+- **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
 - **Datadog API Key**: Required for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
@@ -39,25 +39,17 @@ Before you begin, make sure you've already [installed and configured the Agent](
 
 Feature flagging is integrated into the Datadog Java APM tracer. You need the tracer JAR and the OpenFeature SDK dependencies.
 
-The `dd-java-agent-feature-flagging-bootstrap` JAR contains shared interfaces that enable the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). This is a standard pattern for Java agents. Both JARs are required for feature flags to work.
-
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
 Add the following dependencies to your `build.gradle`:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
-    // Datadog Java tracer (includes feature flagging)
-    implementation 'com.datadoghq:dd-trace-api:X.X.X'
-
     // OpenFeature SDK for flag evaluation
     implementation 'dev.openfeature:sdk:1.18.2'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:X.X.X'
-
-    // Datadog Feature Flagging Bootstrap (required)
-    implementation 'com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X'
+    implementation 'com.datadoghq:dd-openfeature:1.57.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -67,17 +59,11 @@ Add the following dependencies to your `build.gradle.kts`:
 
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
-    // Datadog Java tracer (includes feature flagging)
-    implementation("com.datadoghq:dd-trace-api:X.X.X")
-
     // OpenFeature SDK for flag evaluation
     implementation("dev.openfeature:sdk:1.18.2")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:X.X.X")
-
-    // Datadog Feature Flagging Bootstrap (required)
-    implementation("com.datadoghq:dd-java-agent-feature-flagging-bootstrap:X.X.X")
+    implementation("com.datadoghq:dd-openfeature:1.57.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -87,13 +73,6 @@ Add the following dependencies to your `pom.xml`:
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <dependencies>
-    <!-- Datadog Java tracer (includes feature flagging) -->
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-trace-api</artifactId>
-        <version>X.X.X</version>
-    </dependency>
-
     <!-- OpenFeature SDK for flag evaluation -->
     <dependency>
         <groupId>dev.openfeature</groupId>
@@ -105,14 +84,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>X.X.X</version>
-    </dependency>
-
-    <!-- Datadog Feature Flagging Bootstrap (required) -->
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-java-agent-feature-flagging-bootstrap</artifactId>
-        <version>X.X.X</version>
+        <version>1.57.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
@@ -221,10 +193,13 @@ public class App {
             client = api.getClient("my-app");
             logger.info("OpenFeature provider initialized successfully");
         } catch (ProviderNotReadyError e) {
-            // Optional: Handle gracefully - app will use default flag values
-            logger.warn("Provider not ready (no tracer/configuration available), continuing with defaults", e);
+            // Handle gracefully - app will use default flag values
+            logger.warn("Provider not ready (no tracer/config available), continuing with defaults", e);
             client = api.getClient("my-app");
             logger.info("App will use default flag values until provider is ready");
+        } catch (Exception e) {
+            logger.error("Failed to initialize OpenFeature provider", e);
+            throw e;
         }
 
         // Your application code here
@@ -541,26 +516,6 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 5. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
 6. **Verify flags are published** in Datadog UI to the correct service and environment
 
-### ClassNotFoundException or NoClassDefFoundError
-
-**Problem**: Application fails to start with `ClassNotFoundException` for Datadog classes like `datadog.trace.api.featureflag.FeatureFlaggingGateway`
-
-**Cause**: Missing the bootstrap JAR dependency. The bootstrap module contains shared interfaces that allow the Datadog tracer (running in the bootstrap classloader) to communicate with the OpenFeature provider (running in the application classloader). Without it, the two components cannot interact.
-
-**Solutions**:
-1. **Add the bootstrap JAR** to your dependencies:
-   ```xml
-   <dependency>
-       <groupId>com.datadoghq</groupId>
-       <artifactId>dd-java-agent-feature-flagging-bootstrap</artifactId>
-       <version>X.X.X</version>
-   </dependency>
-   ```
-2. **Verify both dependencies are included** in your build:
-   - `dd-openfeature` (the OpenFeature provider)
-   - `dd-java-agent-feature-flagging-bootstrap` (the bootstrap module)
-3. **Check the classpath** includes both JARs in your runtime configuration
-
 ### Feature flagging system not starting
 
 **Problem**: No "Feature Flagging system starting" messages in logs
@@ -615,3 +570,5 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /remote_configuration/

@@ -343,6 +343,7 @@ var datadogAppSettings = [
   { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
   { name: 'DD_ENV', value: 'prod' }            // Replace with your environment (e.g. prod, staging)
   { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  { name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE', value: 'true' }
   // Uncomment for .NET applications
   // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
   // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
@@ -399,6 +400,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
       { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
       { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
       { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      { "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE", "value": "true" },
       // Uncomment for .NET applications
       // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
       // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
@@ -490,16 +492,13 @@ In your **App settings** in Azure, set the following environment variables on bo
 - `DD_API_KEY`: Your [Datadog API key][701]
 - `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
 - `DD_ENV`: How you want to tag your env. For example, `prod`
+- `WEBSITES_ENABLE_APP_SERVICE_STORAGE`: `true`. Setting this environment variable allows the `/home/` mount to persist and be shared with the sidecar.
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 - `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.
 
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
-
-`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
-: **Value**: `true`<br>
-Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 <details open>
 <summary>

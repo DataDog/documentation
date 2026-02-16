@@ -1,6 +1,6 @@
 ---
-title: Understanding Regular Expressions (Regex) for Log Parsing in Datadog
-description: Learn the basics of using regex for log parsing in Datadog, including usage, engine behavior, and best practices.
+title: Writing Effective Grok Parsing Rules with Regular Expressions
+description: Learn how to use regex in ingest-time Grok parsing rules, including engine behavior and best practices for reliable log parsing.
 further_reading:
 - link: "/logs/log_configuration/parsing"
   tag: "Documentation"
@@ -12,14 +12,16 @@ further_reading:
 
 ## Overview
 
-Regular expressions (regex) are a powerful way to extract structured data from unstructured logs. This guide introduces how regex works, how it is used inside Grok Parsers in Datadog, and best practices for building efficient and reliable parsing rules. This provides additional context to the [Parsing][4] and [Grok Processor][5] documentation.
+Regular expressions (regex) are a powerful way to extract structured data from unstructured logs at ingest time. This guide introduces how regex works, how it is used inside ingest-time Grok Parsers in Datadog, and best practices for building reliable parsing rules that process successfully. This provides additional context to the [Parsing][4] and [Grok Processor][5] documentation.
+
+**Note:** This guide focuses on ingest-time Grok parsing rules configured in Log Pipelines. These concepts do not apply to query-time operations.
 
 Key takeaways:
-* Regex engines evaluate left-to-right and backtrack, which can impact parsing performance in long logs
-* Excessive use of the `data` matcher can create performance issues, understand when to use it in your Grok Parser
-* Anchor and constrain your patterns explicitly (for example, use `[^}]*` instead of broad wildcards)
-* Implement custom expressions by using `%{regex("")}` in your parsing rules
-* Apply [optimized patterns](#regex-examples) for complex logs (JSON, URLs, and conditional logic)
+* Grok rules must match the entire log line to parse successfully
+* Use explicit patterns like `[^}]*` instead of broad wildcards to avoid matching issues
+* Understand when to use the `data` matcher vs. more constrained patterns
+* Implement custom expressions using `%{regex("")}` in your parsing rules
+* Apply [proven patterns](#regex-examples) for complex logs (JSON, URLs, and conditional logic)
 
 ## How regex engines evaluate matches
 
@@ -53,11 +55,11 @@ If all subexpressions match, the engine reports a successful match.
  no no no no try here → "dog" matches
 ```
 
-## Preventing performance issues caused by backtracking
+## Understanding backtracking and parsing timeouts
 
 Regex engines optimize for correctness, not speed. Backtracking occurs when the engine partially matches a pattern, then must "rewind" to reevaluate earlier characters.
 
-Backtracking can become expensive—especially with patterns that allow large, ambiguous matches (like wildcards `.*`). Poorly designed expressions can take seconds or even hours to evaluate, which is why Datadog enforces safety timeouts on parsing rules. For more information, see [ReDOS][1] or [catastrophic backtracking][2].
+When patterns allow large, ambiguous matches (like wildcards `.*`), excessive backtracking can cause parsing rules to timeout and fail. Datadog enforces safety timeouts to prevent runaway expressions from blocking log ingestion. While you can't see timeout metrics directly, following the patterns in this guide helps ensure your rules complete successfully. For more information on this behavior, see [ReDOS][1] or [catastrophic backtracking][2].
 
 ### Example
 
@@ -106,9 +108,9 @@ If you use regex inside the matcher syntax (`%{regex("")}`), the expression is e
 
 ## Understanding the data matcher
 
-The Datadog [data matcher][3] behaves like the regular expression `.*?` which uses lazy matching. `data` (`.*?`) is convenient but can be costly in long logs because:
+The Datadog [data matcher][3] behaves like the regular expression `.*?` which uses lazy matching. `data` (`.*?`) is convenient but can cause parsing issues in long logs because:
 * It triggers step-by-step expansion
-* Each expansion may cause backtracking
+* Each expansion may cause backtracking, potentially leading to timeouts
 
 ### When to use the data matcher
 
@@ -117,15 +119,15 @@ Use this matcher sparingly in Grok Parsers. Whenever possible, replace it with a
 * You need everything until the end of the log (`%{data::json}` or `%{data::keyvalue()}`)
 * You need the entire message captured without a clear endpoint (`%{data:message}`)
 
-### Using "Not Character" patterns instead of the data matcher
+### Using "Not Character" patterns for more reliable parsing
 
-A more efficient alternative to `data` is:
+A more reliable alternative to `data` is:
 
 ```
 [^<delimiter>]*
 ```
 
-This matches **everything except** a specific character and stops immediately when that character is encountered, meaning **no backtracking**.
+This matches **everything except** a specific character and stops immediately when that character is encountered, reducing the risk of timeouts.
 
 **Given log**:
 
@@ -133,19 +135,19 @@ This matches **everything except** a specific character and stops immediately wh
 Test {some id 1656165ab; more text} the rest of the log
 ```
 
-**Inefficient rule**:
+**Rule that may timeout**:
 
 ```
 rule Test \{%{data:my-attribute}} the rest of the log
 ```
 
-**Efficient rule**:
+**More reliable rule**:
 
 ```
 rule Test \{%{regex("[^}]*"):my-attribute}} the rest of the log
 ```
 
-This pattern stops as soon as it sees `}`, making it faster and more predictable.
+This pattern stops as soon as it sees `}`, making it more reliable for successful parsing.
 
 ## Regex examples
 
