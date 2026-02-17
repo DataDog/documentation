@@ -99,7 +99,7 @@ To set up automatic dataset updates:
 3. Click **Automate Query**.
 4. Configure sampling rate (for example, 10% of matching traces).
 5. Select **Add to Dataset** as the action.
-6. Choose an existing dataset or create a new one
+6. Choose an existing dataset or create a new one.
 
 After creating an automation, manage it from [**AI Observability > Settings > Automations**](https://app.datadoghq.com/llm/settings/automations):
 - **Enable/disable**: Control whether new traces are added to the dataset
