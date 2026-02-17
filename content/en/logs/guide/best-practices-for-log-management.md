@@ -187,17 +187,17 @@ Once you begin ingesting logs, an out-of-the-box [dashboard][18] summarizing you
 
 To find this dashboard, go to **Dashboards > Dashboards List** and search for [Log Management - Estimated Usage][19].
 
-### Analyze index query activity
+### Analyze Index query activity
 
 While monitoring log volume is critical for budget control, monitoring **query activity** helps you determine the actual value of your indexed data. Identifying indexes that are rarely queried allows you to optimize costs by reducing retention or moving data to Flex Logs or archives.
 
 To analyze which indexes are being actively searched:
 
 1. Navigate to the [Audit Trail]([https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&group_by=%40asset.new_value.query.indexes](https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&agg_m=count&agg_m_source=base&agg_q=%40asset.new_value.query.indexes&agg_q_source=base&agg_t=count&audit__diff=unified&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=query_table&x_missing=true&from_ts=1768733389060&to_ts=1771325389060&live=true)) (this link pre-fills the required query and grouping).
-2. **Ensure** the query is set to: 
+2. Ensure the query is set to: 
    `@evt.name:"Log Management" @action:queried`
-3. **Ensure** the **Table** visualization is selected to see a ranked list of your most (and least) used indexes over the selected timeframe (for example, **Past 1 Month**).
-4. In the **By** section, **ensure** logs are grouped by: 
+3. Ensure the **Table** visualization is selected to see a ranked list of your most (and least) used indexes over the selected timeframe
+4. In the **By** section, ensure logs are grouped by: 
    `@asset.new_value.query.indexes`
 
 ### Set up exclusion filters on high-volume logs
