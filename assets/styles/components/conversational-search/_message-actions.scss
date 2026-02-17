@@ -24,7 +24,7 @@
 
     &:hover {
         background: $conv-search-surface;
-        color: $conv-search-text;
+        color: inherit;
         border-color: rgba($conv-search-text-muted, 0.2);
     }
 
@@ -62,11 +62,14 @@
     font-weight: 500;
     line-height: 1.3;
     opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
     transition: opacity 0.15s ease, background 0.15s ease;
 
     &.feedback-success,
     &.feedback-error {
         opacity: 1;
+        animation: conv-search-feedback-reveal 0.28s ease-out;
     }
 
     &.feedback-success {
@@ -77,5 +80,30 @@
     &.feedback-error {
         color: #9f1f17;
         background: rgba(#c0392b, 0.12);
+    }
+}
+
+@keyframes conv-search-feedback-reveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateX(-4px);
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .conv-search-feedback-inline {
+        transition: none;
+    }
+
+    .conv-search-feedback-inline.feedback-success,
+    .conv-search-feedback-inline.feedback-error {
+        animation: none;
     }
 }

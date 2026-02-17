@@ -1,141 +1,62 @@
-// Inline source refs + source cards
+// Inline source references
 .conv-search-source-ref-wrap {
     position: relative;
-    display: inline;
-}
-
-.conv-search-inline-ref-text {
-    color: inherit;
+    display: inline-block;
 }
 
 .conv-search-source-ref-btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    margin-left: 4px;
-    padding: 1px 6px;
-    border: 1px solid rgba($conv-search-purple, 0.28);
-    border-radius: 999px;
-    background: rgba($conv-search-purple, 0.06);
-    color: $conv-search-purple-dark;
+    justify-content: center;
+    margin: 0 2px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.06);
+    color: #555;
     cursor: pointer;
-    vertical-align: baseline;
+    vertical-align: middle;
     font-size: 12px;
-    line-height: 1.3;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    transition: background 0.12s ease, color 0.12s ease;
 
     &:hover {
-        background: rgba($conv-search-purple, 0.1);
-        border-color: rgba($conv-search-purple, 0.42);
+        background: rgba(0, 0, 0, 0.1);
+        color: #212529;
     }
 
     &:focus-visible {
-        outline: 2px solid rgba($conv-search-purple, 0.45);
+        outline: 2px solid rgba(0, 0, 0, 0.2);
         outline-offset: 1px;
     }
 }
 
-.conv-search-source-ref-icon {
-    width: 12px;
-    height: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-        width: 12px;
-        height: 12px;
-        display: block;
-    }
-}
-
 .conv-search-source-ref-number {
-    font-weight: 600;
+    display: block;
+    text-align: center;
 }
 
 .conv-search-source-tooltip {
     position: absolute;
-    z-index: 3;
-    top: calc(100% + 8px);
+    z-index: 100;
+    top: calc(100% + 6px);
     left: 0;
-    width: 70vw;
-    min-width: 220px;
-    max-width: 320px;
-    padding: 10px 12px;
+    min-width: 180px;
+    max-width: 280px;
+    padding: 8px 10px;
     border: 1px solid $conv-search-border;
-    border-radius: 10px;
+    border-radius: 8px;
     background: $conv-search-bg;
-    box-shadow: 0 10px 24px rgba(11, 16, 32, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     display: none;
 
     &.open {
         display: block;
     }
-
-    a {
-        color: $conv-search-purple;
-        text-decoration: none;
-        line-height: 1.45;
-        word-break: break-word;
-
-        &:hover {
-            color: $conv-search-purple-dark;
-            text-decoration: underline;
-        }
-    }
-}
-
-.conv-search-sources {
-    margin-top: 16px;
-    padding-top: 10px;
-    border-top: 1px solid $conv-search-border;
-}
-
-.conv-search-sources-title {
-    margin: 0 0 10px;
-    font-size: 13px;
-    font-weight: 600;
-    color: $conv-search-text-muted;
-    letter-spacing: 0.02em;
-}
-
-.conv-search-sources-cards {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 4px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba($conv-search-text-muted, 0.4) transparent;
-
-    &::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgba($conv-search-text-muted, 0.35);
-        border-radius: 999px;
-    }
-}
-
-.conv-search-source-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 10px 12px;
-    border: 1px solid $conv-search-border;
-    border-radius: 10px;
-    background: $conv-search-surface;
-    min-width: 240px;
-    max-width: 320px;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
 
     a {
         color: $conv-search-purple;
@@ -151,16 +72,93 @@
     }
 }
 
+// Source cards section
+.conv-search-sources {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid $conv-search-border;
+}
+
+.conv-search-sources-title {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $conv-search-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.conv-search-sources-cards {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 4px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba($conv-search-text-muted, 0.3) transparent;
+
+    &::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba($conv-search-text-muted, 0.25);
+        border-radius: 999px;
+    }
+}
+
+.conv-search-source-card {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid $conv-search-border;
+    border-radius: 8px;
+    background: $conv-search-bg;
+    min-width: 0;
+    max-width: 220px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease;
+
+    &:hover {
+        border-color: rgba($conv-search-purple, 0.3);
+        box-shadow: 0 2px 6px rgba($conv-search-purple, 0.08);
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        font-size: 12px;
+        line-height: 1.35;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            color: $conv-search-purple;
+        }
+    }
+}
+
 .conv-search-source-card-number {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    padding: 1px 6px;
-    border-radius: 999px;
-    background: rgba($conv-search-purple, 0.09);
-    color: $conv-search-purple-dark;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.06);
+    color: #555;
     font-size: 12px;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 22px;
 }

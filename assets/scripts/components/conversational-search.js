@@ -376,10 +376,6 @@ class ConversationalSearch {
         }
     }
 
-    getSourceRefIconSvg() {
-        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 12.5l6.36-6.36a3.5 3.5 0 1 1 4.95 4.95l-8.48 8.49a5.5 5.5 0 0 1-7.78-7.78l8.13-8.13a1.5 1.5 0 0 1 2.12 2.12l-8.13 8.13a.5.5 0 0 0 .7.71l7.43-7.43" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    }
-
     closeAllSourceTooltips() {
         const openTooltips = this.messagesContainer.querySelectorAll('.conv-search-source-tooltip.open');
         openTooltips.forEach((tooltip) => tooltip.classList.remove('open'));
@@ -454,20 +450,13 @@ class ConversationalSearch {
             const refWrap = document.createElement('span');
             refWrap.className = 'conv-search-source-ref-wrap';
 
-            const refText = document.createElement('span');
-            refText.className = 'conv-search-inline-ref-text';
-            refText.textContent = (link.textContent || '').trim() || href;
-
             const markerBtn = document.createElement('button');
             markerBtn.type = 'button';
             markerBtn.className = 'conv-search-source-ref-btn';
             markerBtn.setAttribute('data-source-number', String(sourceNumber));
-            markerBtn.setAttribute('aria-label', `View source ${sourceNumber}`);
+            markerBtn.setAttribute('aria-label', `Source ${sourceNumber}: ${sources[sourceNumber - 1].label}`);
             markerBtn.setAttribute('aria-expanded', 'false');
-            markerBtn.innerHTML = `
-                <span class="conv-search-source-ref-icon">${this.getSourceRefIconSvg()}</span>
-                <span class="conv-search-source-ref-number">[${sourceNumber}]</span>
-            `;
+            markerBtn.innerHTML = `<span class="conv-search-source-ref-number">${sourceNumber}</span>`;
 
             const sourceData = sources[sourceNumber - 1];
             const tooltip = document.createElement('div');
@@ -476,7 +465,6 @@ class ConversationalSearch {
                 <a href="${sourceData.href}" target="_blank" rel="noopener noreferrer">${sourceData.label}</a>
             `;
 
-            refWrap.appendChild(refText);
             refWrap.appendChild(markerBtn);
             refWrap.appendChild(tooltip);
             link.replaceWith(refWrap);
@@ -502,7 +490,7 @@ class ConversationalSearch {
 
         const sourcesTitle = document.createElement('p');
         sourcesTitle.className = 'conv-search-sources-title';
-        sourcesTitle.textContent = 'Sources';
+        sourcesTitle.textContent = `Sources`;
         sourcesSection.appendChild(sourcesTitle);
 
         const sourcesList = document.createElement('div');
@@ -515,7 +503,7 @@ class ConversationalSearch {
             const sourceNumber = sourceIndexByHref.get(source.href);
             const sourceBadge = document.createElement('span');
             sourceBadge.className = 'conv-search-source-card-number';
-            sourceBadge.textContent = `[${sourceNumber}]`;
+            sourceBadge.textContent = String(sourceNumber);
 
             const sourceLink = document.createElement('a');
             sourceLink.href = source.href;
@@ -541,20 +529,57 @@ class ConversationalSearch {
      * ```
      */
     extractStructuredSources(markdownText) {
-        const fencedBlockRegex = /```(?:sources|docs-sources|sources-json)\s*([\s\S]*?)```/i;
-        const match = markdownText.match(fencedBlockRegex);
-        if (!match) {
-            return { displayMarkdown: markdownText, structuredSources: [] };
-        }
+        const sourceBlockRegex = /```(?:sources|docs-sources|sources-json|json)\s*([\s\S]*?)```/gi;
+        let displayMarkdown = markdownText;
+        let parsedSources = [];
+        const matches = [...markdownText.matchAll(sourceBlockRegex)];
 
-        const parsedSources = this.parseSourcesJson(match[1]);
-        const displayMarkdown = markdownText.replace(match[0], '').trim();
-        return { displayMarkdown, structuredSources: parsedSources };
+        matches.forEach((match) => {
+            const parsed = this.parseSourcesJson(match[1]);
+            if (parsed.length > 0) {
+                parsedSources = [...parsedSources, ...parsed];
+            }
+            // Always remove source-ish fenced blocks to avoid raw JSON showing in chat.
+            displayMarkdown = displayMarkdown.replace(match[0], '');
+        });
+
+        // Deduplicate by normalized URL while preserving first-seen order.
+        const deduped = [];
+        const seen = new Set();
+        parsedSources.forEach((source) => {
+            const normalizedHref = this.normalizeHref(source.href);
+            if (!normalizedHref || seen.has(normalizedHref)) {
+                return;
+            }
+            seen.add(normalizedHref);
+            deduped.push({ href: normalizedHref, label: source.label });
+        });
+
+        return { displayMarkdown: displayMarkdown.trim(), structuredSources: deduped };
     }
 
     parseSourcesJson(jsonText) {
+        const parseCandidates = [
+            jsonText.trim(),
+            this.relaxSourcesJson(jsonText)
+        ];
+
+        for (const candidate of parseCandidates) {
+            if (!candidate) {
+                continue;
+            }
+            const parsed = this.tryParseSourcesCandidate(candidate);
+            if (parsed.length > 0) {
+                return parsed;
+            }
+        }
+
+        return [];
+    }
+
+    tryParseSourcesCandidate(candidateText) {
         try {
-            const parsed = JSON.parse(jsonText.trim());
+            const parsed = JSON.parse(candidateText);
             const candidateList = Array.isArray(parsed) ? parsed : parsed?.sources;
             if (!Array.isArray(candidateList)) {
                 return [];
@@ -575,9 +600,25 @@ class ConversationalSearch {
 
             return normalized;
         } catch (e) {
-            console.debug('[Conversational Search] Failed to parse structured sources JSON');
             return [];
         }
+    }
+
+    relaxSourcesJson(rawJsonText) {
+        let relaxed = (rawJsonText || '').trim();
+        if (!relaxed) {
+            return '';
+        }
+
+        // Support common non-JSON LLM output variants:
+        // {sources:[ {'url':'...','title':'...'} ]}
+        relaxed = relaxed
+            .replace(/^\s*\{\s*sources\s*:/i, '{"sources":')
+            .replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":')
+            .replace(/'/g, '"')
+            .replace(/,\s*([}\]])/g, '$1');
+
+        return relaxed;
     }
 
     normalizeHref(rawHref) {
@@ -728,7 +769,9 @@ class ConversationalSearch {
                                 // Render markdown progressively (throttled)
                                 const now = Date.now();
                                 if (now - lastRenderTime > RENDER_THROTTLE) {
-                                    responseContainer.innerHTML = marked.parse(accumulatedMessage);
+                                    // Strip any sources/json fenced block so it never flashes during streaming
+                                    const streamDisplay = accumulatedMessage.replace(/```(?:sources|docs-sources|sources-json|json)[\s\S]*?(?:```|$)/gi, '').trim();
+                                    responseContainer.innerHTML = marked.parse(streamDisplay);
                                     lastRenderTime = now;
                                     this.scrollToBottom();
                                 }
@@ -1006,15 +1049,18 @@ class ConversationalSearch {
             return;
         }
 
-        feedbackEl.textContent = message;
+        // Strip classes + force reflow so the animation restarts every time
         feedbackEl.classList.remove('feedback-success', 'feedback-error');
+        void feedbackEl.offsetWidth;
+
+        feedbackEl.textContent = message;
         feedbackEl.classList.add(isError ? 'feedback-error' : 'feedback-success');
 
-        clearTimeout(feedbackEl._feedbackTooltipTimer);
-        feedbackEl._feedbackTooltipTimer = setTimeout(() => {
+        clearTimeout(feedbackEl._hideTimer);
+        feedbackEl._hideTimer = setTimeout(() => {
             feedbackEl.classList.remove('feedback-success', 'feedback-error');
             feedbackEl.textContent = '';
-        }, 2200);
+        }, 2000);
     }
 
     logAction(message, data) {

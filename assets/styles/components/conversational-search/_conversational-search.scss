@@ -1,15 +1,14 @@
-// Variables - Light Theme (Modern Chat UI - Natural text weight)
+// Variables
+// Colors: Bootstrap body-color (#212529) cascades naturally for text.
+// The site's _global.scss overrides p specifically to #4a4a4a.
+// We don't set a text color — let the cascade do its job.
 $conv-search-purple: #632CA6;
 $conv-search-purple-dark: #4f2384;
 $conv-search-purple-light: #f3eefa;
 $conv-search-bg: #ffffff;
 $conv-search-surface: #f4f4f5;
 $conv-search-border: #e4e4e7;
-$conv-search-text: #374151;  // Gray-700 - natural, readable, not heavy
-$conv-search-text-strong: #1f2937; // Gray-800 - for bold/headings
-$conv-search-text-muted: #6b7280; // Gray-500
-$conv-search-user-bg: #632CA6;
-$conv-search-assistant-bg: #f4f4f5;
+$conv-search-text-muted: #6b7280;
 
 @import "dialog";
 @import "resources";
@@ -77,7 +76,6 @@ $conv-search-assistant-bg: #f4f4f5;
 .conv-search-empty-title {
     font-size: 18px;
     font-weight: 600;
-    color: $conv-search-text;
     margin: 0 0 6px 0;
 }
 
@@ -104,7 +102,6 @@ $conv-search-assistant-bg: #f4f4f5;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 400;
-    color: $conv-search-text;
     cursor: pointer;
     transition: all 0.15s ease;
     text-align: left;
@@ -128,10 +125,11 @@ $conv-search-assistant-bg: #f4f4f5;
         
         .conv-search-message-content {
             background: $conv-search-surface;
-            color: $conv-search-text;
             border-radius: 18px 18px 4px 18px;
             max-width: 85%;
-            padding: 12px 16px;
+            padding: 10px 14px;
+            font-size: 15px;
+            line-height: 22px;
         }
     }
 
@@ -140,99 +138,44 @@ $conv-search-assistant-bg: #f4f4f5;
         
         .conv-search-message-content {
             background: transparent;
-            color: $conv-search-text;
             border-radius: 0;
             max-width: 100%;
-            padding: 8px 16px;
+            padding: 4px 0;
         }
     }
 }
 
-// SOTA Chat Typography - Natural, readable, like ChatGPT/Gemini
+// Typography baseline.
+// marked.js sometimes wraps <li> content in <p> (when LLM leaves blank lines
+// between items) and sometimes doesn't. The global p rule sets a different
+// font-size/color than body, creating visible mismatches. We normalise here
+// so every element inside the chat uses the same size, color, and line-height
+// regardless of whether marked.js emits a <p> wrapper or not.
 .conv-search-message-content {
-    font-size: 15px;
-    line-height: 1.7;
-    font-weight: normal; // Let the browser/font decide natural weight
-    color: $conv-search-text;
+    font-size: 18px;
+    line-height: 27px;
+    color: #000;
     word-break: break-word;
 
-    // Markdown styles
-    p {
-        margin: 0 0 1em;
-        
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    // Bold - only when markdown specifies
-    strong, b {
-        font-weight: 600;
-        color: $conv-search-text-strong;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        margin: 1.25em 0 0.5em;
-        font-weight: 600;
-        line-height: 1.35;
-        color: $conv-search-text-strong;
-        
-        &:first-child {
-            margin-top: 0;
-        }
-    }
-
-    h1 { font-size: 1.2em; }
-    h2 { font-size: 1.1em; }
-    h3 { font-size: 1.05em; }
-    h4 { font-size: 1em; }
-    h5, h6 { font-size: 0.95em; font-weight: 500; }
-
-    // Lists - consistent with paragraph text
-    ul, ol {
-        margin: 0.75em 0 1em;
-        padding-left: 1.75em;
-        
-        li {
-            margin: 0.35em 0;
-            line-height: 1.7;
-            
-            // Ensure list item paragraphs don't double-margin
-            > p {
-                margin: 0;
-            }
-        }
-        
-        // Style list markers subtly
-        &:not([class]) {
-            li::marker {
-                color: $conv-search-text-muted;
-            }
-        }
-    }
-
-    // Nested lists - tighter spacing
-    ul ul, ol ol, ul ol, ol ul {
-        margin: 0.25em 0 0.25em;
-    }
-
-    // Inline code - subtle, not too prominent
-    code {
-        background: rgba(0, 0, 0, 0.05);
-        padding: 0.15em 0.4em;
-        border-radius: 4px;
-        font-family: 'SF Mono', 'Roboto Mono', 'Fira Code', Consolas, monospace;
-        font-size: 0.875em;
-        font-weight: 400;
+    // Prevent the global `p { color:#4a4a4a; font-size:18px; line-height:27px }`
+    // from creating mismatches with bare <li> text.
+    p, ul, ol, li, blockquote, td, th, dd, dt {
+        font-size: inherit;
+        line-height: inherit;
         color: inherit;
     }
 
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    // Dark code blocks
     pre {
         background: #1e1e2e;
         border-radius: 10px;
         padding: 16px 18px;
         overflow-x: auto;
-        margin: 1em 0;
+        margin: 0 0 24px;
 
         code {
             background: none;
@@ -243,14 +186,13 @@ $conv-search-assistant-bg: #f4f4f5;
             color: #cdd6f4;
         }
 
-        // Highlight.js theme (Catppuccin-inspired)
         .hljs-comment,
         .hljs-quote { color: #6c7086; font-style: italic; }
-        
+
         .hljs-keyword,
         .hljs-selector-tag,
         .hljs-built_in { color: #cba6f7; }
-        
+
         .hljs-string,
         .hljs-title,
         .hljs-section,
@@ -260,86 +202,28 @@ $conv-search-assistant-bg: #f4f4f5;
         .hljs-template-variable,
         .hljs-type,
         .hljs-addition { color: #a6e3a1; }
-        
+
         .hljs-deletion,
         .hljs-selector-attr,
         .hljs-selector-pseudo,
         .hljs-meta { color: #f38ba8; }
-        
+
         .hljs-doctag,
         .hljs-attr { color: #89b4fa; }
-        
+
         .hljs-symbol,
         .hljs-bullet,
         .hljs-subst,
         .hljs-name { color: #f9e2af; }
-        
+
         .hljs-number,
         .hljs-link { color: #fab387; }
-        
+
         .hljs-class .hljs-title,
         .hljs-title.class_ { color: #f9e2af; }
-        
+
         .hljs-emphasis { font-style: italic; }
         .hljs-strong { font-weight: bold; }
-    }
-
-    blockquote {
-        margin: 1em 0;
-        padding: 0.75em 0 0.75em 1em;
-        border-left: 3px solid rgba(99, 44, 166, 0.3);
-        color: $conv-search-text-muted;
-        font-style: normal;
-        background: rgba(0, 0, 0, 0.02);
-        border-radius: 0 6px 6px 0;
-        
-        p {
-            margin: 0;
-        }
-    }
-
-    a {
-        color: $conv-search-purple;
-        text-decoration: none;
-        transition: color 0.15s ease, text-decoration 0.15s ease;
-        
-        &:hover {
-            color: $conv-search-purple-dark;
-            text-decoration: underline;
-        }
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1em 0;
-        font-size: 14px;
-
-        th, td {
-            padding: 10px 14px;
-            border: 1px solid $conv-search-border;
-            text-align: left;
-        }
-
-        th {
-            background: $conv-search-surface;
-            font-weight: 600;
-        }
-    }
-
-    hr {
-        border: none;
-        border-top: 1px solid $conv-search-border;
-        margin: 1.25em 0;
-    }
-
-    strong {
-        font-weight: 600;
-        color: $conv-search-text-strong;
-    }
-
-    em {
-        font-style: italic;
     }
 }
 
@@ -408,7 +292,6 @@ $conv-search-assistant-bg: #f4f4f5;
     font-size: 15px;
     line-height: 1.5;
     background: $conv-search-surface;
-    color: $conv-search-text;
     font-family: inherit;
     min-height: 46px;
     max-height: 120px;

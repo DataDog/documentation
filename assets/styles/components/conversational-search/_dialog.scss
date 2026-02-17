@@ -67,7 +67,7 @@
     transform: translateX(-50%) scale(0.95);
     z-index: 10000;
     width: 90vw;
-    max-width: 720px;
+    max-width: 820px;
     min-height: unquote("min(600px, 80vh)");
     max-height: unquote("min(800px, 90vh)");
     background: $conv-search-bg;
@@ -125,7 +125,6 @@
 .conv-search-title {
     font-size: 15px;
     font-weight: 600;
-    color: $conv-search-text;
     letter-spacing: -0.01em;
 }
 
@@ -207,7 +206,7 @@
 
     &:hover {
         background: $conv-search-surface;
-        color: $conv-search-text;
+        color: inherit;
     }
 
     &:focus {
@@ -227,7 +226,6 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: $conv-search-text;
     font-size: 12px;
     font-weight: 500;
     font-family: inherit;
@@ -265,7 +263,7 @@
 
     &:hover {
         background: $conv-search-surface;
-        color: $conv-search-text;
+        color: inherit;
     }
 
     svg {
