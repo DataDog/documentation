@@ -18,7 +18,7 @@ El reenvío de eventos de auditoría está en vista previa.
 
 El reenvío de eventos de auditorías te permite enviar eventos de auditorías desde Datadog a destinos personalizados como Splunk, Elasticsearch y endpoints HTTP. Los eventos de auditorías se reenvían en formato JSON. Puedes añadir hasta tres destinos para cada organización de Datadog.
 
-{{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="Sección de destinos personalizados que muestra un destino Login-Event-to-SIEM activo con 10,4 MB de eventos de auditoría estimados durante las últimas 24 horas y @action:login como consulta para filtrar". >}}
+{{< img src="/account_management/audit_logs/audit_events_forwarding.png" alt="Sección de destinos personalizados que muestra un destino Login-Event-to-SIEM activo con 10,4 MB de eventos de auditoría estimados durante las últimas 24 horas y @action:login como consulta para filtrar" >}}
 
 **Nota**: Sólo los usuarios de Datadog con el permiso `audit_trail_write` pueden crear, editar o eliminar destinos personalizados para el reenvío de eventos de auditorías.
 
