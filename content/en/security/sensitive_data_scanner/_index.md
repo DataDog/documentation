@@ -51,7 +51,16 @@ further_reading:
 
 ## Overview
 
-Sensitive data, such as credit card numbers, API keys, IP addresses, and personally identifiable information (PII) are often leaked unintentionally, which can expose your organization to security and compliance risks. Sensitive data can be found in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also be found in LLM Observability traces, exposed in code repositories, or unintentionally moved to cloud storage resources when engineering teams move their workloads to the cloud. Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data.
+Sensitive data, such as credit card numbers, API keys, IP addresses, and personally identifiable information (PII) are often leaked unintentionally, which can expose your organization to security and compliance risks. Sensitive data can be found in:
+ 
+- APM spans
+- Code repositories
+- Events from Event Management
+- LLM Observability traces
+- RUM events
+- Telemetry data, such as application logs
+
+Sensitive data can also be unintentionally moved to cloud storage resources when engineering teams move their workloads to the cloud. Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data.
 
 **Note**: Datadog's tools and policies comply with PCI v4.0. For more information, see [PCI DSS Compliance][1].
 
@@ -97,9 +106,9 @@ See [Set Up Pipelines][7] for more information.
 
 ## Scan LLM Observability data
 
-Sensitive Data Scanner can scan [Datadog LLM Observability][20] traces, including inputs and outputs from LLM applications. This helps prevent sensitive data like PII, API keys, or proprietary information from being exposed in prompts, completions, and LLM workflow metadata.
+Sensitive Data Scanner can scan [Datadog LLM Observability][20] traces, including inputs and outputs from LLM applications. This helps prevent exposing sensitive data like PII, API keys, or proprietary information in prompts, completions, and LLM workflow metadata.
 
-**Note**: LLM Observability scanning uses a managed configuration model that differs from telemetry data scanning:
+LLM Observability scanning uses a managed configuration model that differs from telemetry data scanning, where LLM Observability scanning has:
 
 - **One managed scanning group**: A default scanning group is automatically created for your organization when you first access the [LLM Observability Settings page][18]. You cannot create additional scanning groups or delete the managed group.
 - **Customizable rules**: You can modify existing rules, disable rules you don't need, or add custom scanning rules to detect additional sensitive data patterns.
@@ -132,9 +141,9 @@ See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 
 ## Scan code repositories
 
-Datadog [Secret Scanning][21] scans code repositories to detect exposed secrets in source code. Secret Scanning is powered by Sensitive Data Scanner and uses all rules from the [Secrets and credentials category][19] of the SDS library to find matches.
+Datadog [Secret Scanning][21] scans code repositories to detect exposed secrets in the source code. Secret Scanning is powered by Sensitive Data Scanner and uses all rules from the [Secrets and credentials category][19] of the SDS library to find matches.
 
-Unlike telemetry data scanning, Secret Scanning operates in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). When secrets are detected in code, findings are surfaced in the Code Security interface.
+Unlike telemetry data scanning, Secret Scanning operates in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). When secrets are detected in the code, findings are surfaced in the Code Security interface.
 
 See the [Secret Scanning documentation][21] for setup details.
 
