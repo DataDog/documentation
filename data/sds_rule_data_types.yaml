@@ -1,0 +1,31 @@
+# SDS Rule Data Type Support Metadata
+#
+# This file declares which data types each standard scanning rule supports.
+# Rules not listed here support all data types (logs, apm, rum, llm_obs).
+#
+# Only list rules with RESTRICTIONS (e.g., logs-only rules).
+
+restricted_rules:
+  # Human Name Scanner - ML-based, logs only
+  - id: xYABeGBJnxfWxnCGeRvRYc
+    name: Human Name Scanner
+    supported_data_types:
+      - logs
+    reason: "Machine learning model currently only trained for log data"
+
+  # Address Detection - ML-based, logs only
+  - id: jiNBwsmImHNiVNel5ID0Bo
+    name: Address Detection Scanner
+    supported_data_types:
+      - logs
+    reason: "Machine learning model currently only trained for log data"
+
+# Default for unlisted rules (most regex-based rules work across all data sources)
+default_supported_data_types:
+  - logs
+  - apm
+  - rum
+  - llm_obs
+  - observability_pipelines
+  - secret_scanning
+  - cloud_storage

@@ -1,0 +1,1358 @@
+{
+  "multifiltersearch": {
+    "headers": [
+      {
+        "id": "name",
+        "name": "Rule Name",
+        "filter_by": false
+      },
+      {
+        "id": "category",
+        "name": "Category",
+        "filter_by": true
+      },
+      {
+        "id": "data_types",
+        "name": "Available For",
+        "filter_by": true
+      }
+    ],
+    "data": [
+      {
+        "name": "1Password Service Account Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "AWS Access Key ID Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "AWS Secret Access Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Adafruit IO Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Adobe API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Adobe Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Adobe Client Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Adobe Refresh Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Aiven Default Service Password Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Aiven Personal Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Amazon Marketplace Web Services Auth Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Anthropic's Claude API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Asana OAuth Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Asana Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Atlassian API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Atlassian Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Atlassian Client Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Atlassian Refresh Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure API Management Direct Management Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure AppConfig Connection Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Container Registry Admin Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Container Registry Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure CosmosDB Connection Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure DevOps Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Entra ID Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure OpenAI Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure SQL Connection Password Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Search Admin Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Shared Access Signature Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Storage Account Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Azure Subscription Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Beamer API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bearer Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bitbucket Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bitbucket Client Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bitbucket OAuth Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bitbucket OAuth Refresh Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "BuildKite Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "BuildKite Cluster Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "BuildKite Unclustered Agent Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Cfx.re Server Registration Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Checkout.com API Secret Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "CircleCI Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "CircleCI Project Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Cloudflare API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Cloudflare Global API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Cloudflare Origin CA Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Contentful Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Crates.io API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Databricks Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Datadog API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Datadog Application Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Datadog Nonce Session Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Datadog OAuth Tokens Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Datadog Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discord Application OAuth Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discord Application OAuth Secret Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discord Application Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discord Bot Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discord Webhook Codes Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Docker Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Docker Organization Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Docker Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Docker Swarm Join Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Docker Swarm Unlock Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Doppler Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Dropbox Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Duffel Test Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Dynatrace Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "EasyPost API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Facebook Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Fastly API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Figma Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Flutterwave API Secret Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Frame.io Developer Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Frame.io OAuth Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Frame.io OAuth Session Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Generic JSON Web Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Github Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Github Fine-grained Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Github Refresh Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Gitlab Personal and Project Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Google API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Google Client Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Google Cloud Service Account Bound API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Google Cloud Service Account OAuth Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Google OAuth Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Grafana Cloud Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Grafana Service Account Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Heroku API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Hubspot Developer API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Hubspot Personal Access Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Hugging Face Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Instagram Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Intercom Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Ionic Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "JIRA API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "LaunchDarkly Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Lichess Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Linear API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "LinkedIn Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Mailchimp API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Mailgun API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Mailgun API Key v2 Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Mapbox Secret Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Maxmind License Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "MongoDB Atlas Database URI with Credentials Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "NPM Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Non expired Generic JSON Web Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Notion Integration Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "NuGet API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Octopus Deploy API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Okta API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "OpenAI Admin API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "OpenAI Legacy User API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "OpenAI Named Project API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "OpenAI Project API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "OpenAI Service Account API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "OpenAI User API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Oracle API Signing Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Oracle Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Oracle Auth Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Oracle Customer Secret Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "PGP Private Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "PKCS 8 Private Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "PagerDuty API Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Paypal Braintree Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Perfect Cloud API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Postman API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Pulumi Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "PyPI Upload Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "RSA Private Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "RubyGems API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "SSH Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "SendGrid API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Sentry Organization Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Sentry Personal Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Shippo API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Shippo JWT Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Shopify Access Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Shopify Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Slack Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Slack Webhook Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Snowflake Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Square Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Square OAuth Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Square Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Stripe Restricted API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Stripe Secret API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Tableau Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Telegram Bot Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Twilio API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Twilio API Secret Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Twilio Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Twilio Account String Identifier (SID) Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Twilio Auth Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Twitter Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Typeform Personal Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Vault Access Token Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Wakatime API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "WorkOS API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "xAI (Grok) API Key Scanner",
+        "category": "Credentials",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "American Express Card Scanner (1x15 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "American Express Card Scanner (4+4+4+3 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "American Express Card Scanner (4+6+5 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "American Express Card Scanner (8+7 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Diners Card Scanner (1x14 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Diners Card Scanner (4+4+4+2 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Diners Card Scanner (4+6+4 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Diners Card Scanner (8+6 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discover Card Scanner (1x16 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discover Card Scanner (2x8 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Discover Card Scanner (4x4 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "JCB Card Scanner (1x16 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "JCB Card Scanner (2x8 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "JCB Card Scanner (4x4 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Maestro Card Scanner (1x16 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Maestro Card Scanner (2x8 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Maestro Card Scanner (4x4 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "MasterCard Scanner (1x16 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "MasterCard Scanner (2x8 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "MasterCard Scanner (4x4 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Visa Card Scanner (1x16 & 1x19 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Visa Card Scanner (2x8 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Visa Card Scanner (4x4 digits)",
+        "category": "Credit Cards",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bitcoin (BTC) Wallet Address Scanner",
+        "category": "Cryptocurrency",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "ERC-20 Cryptocurrency Wallet Address Scanner",
+        "category": "Cryptocurrency",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Monero Wallet Address Scanner",
+        "category": "Cryptocurrency",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Standard Email Address Scanner",
+        "category": "Email Address",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Standard IBAN Code Scanner",
+        "category": "IBAN Code",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "IPv4 Address Scanner",
+        "category": "IP Address",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "IPv6 Address Scanner",
+        "category": "IP Address",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Standard MAC Address Scanner",
+        "category": "MAC Address",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "HTTP Basic Authentication Header Scanner",
+        "category": "Network Device Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "HTTP Cookie Scanner",
+        "category": "Network Device Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "ABA Routing Transit Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Address Detection Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "Logs (Log Management)"
+      },
+      {
+        "name": "Austria Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Austria Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Belgium National Register Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Brazilian Cadastro Nacional da Pessoa Jur\u00eddica (CNPJ) Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Brazilian Cadastro de Pessoas F\u00edsicas (CPF) Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Bulgaria Unified Civil Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Canada Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Canada Social Insurance Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "China Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "China Phone Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "China Resident Identity Card Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "China Vehicle Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "China Vehicle License Plate Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Croatia Health Insurance Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Croatia Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Cyprus Identity Card Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Cyprus Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Czechia Personal Identity Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Czechia Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Estonia Personal Identification Code Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Finland Personal Identification Code Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "France Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "France Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "France Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Germany Drivers License Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Germany Identity Card Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Germany Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Germany Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Germany Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Greece Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Greece Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Greece Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Human Name Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "Logs (Log Management)"
+      },
+      {
+        "name": "Hungary Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Hungary Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Hungary Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Ireland Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Ireland Personal Public Service Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Italy Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Italy Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Latvia Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Lithuania Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Luxembourg Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Malta Identity Card Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Netherlands Citizen Service Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Phone Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Poland Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Poland Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Portugal Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Portugal Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Romania Personal Numeric Code Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Slovakia Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Slovenia Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Slovenia Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Slovenia Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Spain Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Spain Personal Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Spain Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Sweden Coordination Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Sweden Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "Sweden Personal Identity Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "UK National Health Service Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "UK National Insurance Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "UK Unique Taxpayer Reference Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "US Driver's License Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "US Passport Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "US Social Security Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "US Tax Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "US Vehicle Identification Number Scanner",
+        "category": "Personal Identifiable Information",
+        "data_types": "All data sources"
+      },
+      {
+        "name": "HTTP(S) URL Scanner",
+        "category": "URL",
+        "data_types": "All data sources"
+      }
+    ]
+  }
+}
