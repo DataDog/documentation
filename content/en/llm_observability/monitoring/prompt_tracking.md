@@ -35,7 +35,7 @@ If you are using the LLM Observability Node.js SDK (`dd-trace` v5.83.0+), attach
 If you are using the LLM Observability API intake, submit prompt metadata to the Spans API endpoint. See the [LLM Observability HTTP API reference documentation][4].
 
 #### OpenTelemetry Instrumentation
-If you are using [OpenTelemetry instrumentation][7], you can attach prompt metadata to your LLM spans by setting the `_dd_ml_obs.prompt_tracking` attribute with a JSON string containing your prompt information.
+If you are using [OpenTelemetry instrumentation][7], you can attach prompt metadata to your LLM spans by setting the `_dd.ml_obs.prompt_tracking` attribute with a JSON string containing your prompt information.
 
 Set the attribute on any LLM span:
 
@@ -44,7 +44,7 @@ Set the attribute on any LLM span:
 ```python
 import json
 
-span.set_attribute("_dd_ml_obs.prompt_tracking", json.dumps({
+span.set_attribute("_dd.ml_obs.prompt_tracking", json.dumps({
     "name": "greeting-prompt",
     "version": "v1",
     "template": "Hello {{name}}, tell me about {{topic}}",
@@ -54,7 +54,7 @@ span.set_attribute("_dd_ml_obs.prompt_tracking", json.dumps({
 {{% /tab %}}
 {{% tab "JavaScript" %}}
 ```javascript
-span.setAttribute("_dd_ml_obs.prompt_tracking", JSON.stringify({
+span.setAttribute("_dd.ml_obs.prompt_tracking", JSON.stringify({
     name: "greeting-prompt",
     version: "v1",
     template: "Hello {{name}}, tell me about {{topic}}",
@@ -64,7 +64,7 @@ span.setAttribute("_dd_ml_obs.prompt_tracking", JSON.stringify({
 {{% /tab %}}
 {{% tab "Go" %}}
 ```go
-span.SetAttributes(attribute.String("_dd_ml_obs.prompt_tracking",
+span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
     `{"name":"greeting-prompt","version":"v1","template":"Hello {{name}}, tell me about {{topic}}","variables":{"name":"Alice","topic":"weather"}}`,
 ))
 ```
