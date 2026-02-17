@@ -52,7 +52,7 @@ dataset = LLMObs.create_dataset_from_csv(
 
 {{% tab "Manual creation" %}}
 
-Manually create a dataset, use `LLMObs.create_dataset()`:
+Manually create a dataset - use `LLMObs.create_dataset()`:
 
 ```python
 from ddtrace.llmobs import LLMObs
