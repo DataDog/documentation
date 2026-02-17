@@ -2198,6 +2198,16 @@
     "request_description": "",
     "request_schema_description": "List tags response."
   },
+  "ListInterfaceUserTags": {
+    "description": "Returns the tags associated with the specified interface.",
+    "summary": "List tags for an interface"
+  },
+  "UpdateInterfaceUserTags": {
+    "description": "Updates the tags associated with the specified interface.",
+    "summary": "Update the tags for an interface",
+    "request_description": "",
+    "request_schema_description": "Response for listing interface tags."
+  },
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"

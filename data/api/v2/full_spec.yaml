@@ -34173,6 +34173,25 @@ components:
       - data
       - meta
       type: object
+    ListInterfaceTagsResponse:
+      description: Response for listing interface tags.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListInterfaceTagsResponseData'
+      type: object
+    ListInterfaceTagsResponseData:
+      description: Response data for listing interface tags.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListTagsResponseDataAttributes'
+        id:
+          description: The interface ID
+          example: example:1.2.3.4:1
+          type: string
+        type:
+          description: The type of the resource. The value should always be tags.
+          type: string
+      type: object
     ListKindCatalogResponse:
       description: List kind response.
       properties:
@@ -87151,6 +87170,69 @@ paths:
       tags:
       - Network Device Monitoring
       x-menu-order: 5
+  /api/v2/ndm/tags/interfaces/{interface_id}:
+    get:
+      description: Returns the tags associated with the specified interface.
+      operationId: ListInterfaceUserTags
+      parameters:
+      - description: The ID of the interface for which to retrieve tags.
+        example: example:1.2.3.4:1
+        in: path
+        name: interface_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInterfaceTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List tags for an interface
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 6
+    patch:
+      description: Updates the tags associated with the specified interface.
+      operationId: UpdateInterfaceUserTags
+      parameters:
+      - description: The ID of the interface for which to update tags.
+        example: example:1.2.3.4:1
+        in: path
+        name: interface_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListInterfaceTagsResponse'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInterfaceTagsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update the tags for an interface
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 7
   /api/v2/network/connections/aggregate:
     get:
       description: Get all aggregated connections.
