@@ -1,8 +1,6 @@
 ---
 title: React Native Feature Flags
 description: Set up Datadog Feature Flags for React Native applications.
-aliases:
-  - /feature_flags/setup/reactnative/
 further_reading:
 - link: "https://openfeature.dev/docs/reference/sdks/client/web/react/"
   tag: "OpenFeature"
@@ -23,10 +21,10 @@ The Datadog Feature Flags SDK for React Native is built on [OpenFeature][1], an 
 
 ## Requirements
 
-- React Native v0.65+
-- iOS: iOS 13+
-- Android: API level 23+
-- Datadog React Native SDK (`@datadog/mobile-react-native`) must be initialized first
+- **React Native** version 0.65 or later
+- **iOS** version 13 or later
+- **Android** API level 23 or later
+- **Datadog React Native SDK** (`@datadog/mobile-react-native`) must be initialized first
 
 ## Installation
 
@@ -58,7 +56,7 @@ Install the added pod:
 
 If you use React Native version 0.68 or higher, use Java 17. If you use React Native version 0.67 or lower, use Java version 11.
 
-In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 buildscript {
@@ -416,7 +414,7 @@ await DdFlags.enable({
 ## Context attribute requirements
 
 <div class="alert alert-warning">
-Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and will be dropped from the evaluation context.
+Evaluation context attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are <strong>not supported</strong> and will be dropped from the evaluation context.
 </div>
 
 Use flat attributes in your evaluation context:
@@ -477,9 +475,9 @@ end
 
 If you see an error about Feature Flags not being initialized, verify the initialization order:
 
-1. Initialize the core Datadog SDK first (`DdSdkReactNative.initialize()` or `DatadogProvider`)
-2. Call `DdFlags.enable()` after SDK initialization
-3. Create and set the `DatadogOpenFeatureProvider` after enabling flags
+1. Initialize the core Datadog SDK first (`DdSdkReactNative.initialize()` or `DatadogProvider`).
+2. Call `DdFlags.enable()` after SDK initialization.
+3. Create and set the `DatadogOpenFeatureProvider` after enabling flags.
 
 ## Further reading
 
