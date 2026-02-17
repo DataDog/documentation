@@ -40,20 +40,20 @@ If you use Picasso, use it with the `OkHttpClient` that's been instrumented with
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val picasso = Picasso.Builder(context)
-            .downloader(OkHttp3Downloader(okHttpClient))
-            // …
-            .build()
-       Picasso.setSingletonInstance(picasso)
+   val picasso = Picasso.Builder(context)
+      .downloader(OkHttp3Downloader(okHttpClient))
+      // …
+      .build()
+   Picasso.setSingletonInstance(picasso)
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        final Picasso picasso = new Picasso.Builder(context)
-            .downloader(new OkHttp3Downloader(okHttpClient))
-            // …
-            .build();
-        Picasso.setSingletonInstance(picasso);
+   final Picasso picasso = new Picasso.Builder(context)
+      .downloader(new OkHttp3Downloader(okHttpClient))
+      // …
+      .build();
+   Picasso.setSingletonInstance(picasso);
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -65,18 +65,18 @@ If you use Retrofit, use it with the `OkHttpClient` that's been instrumented wit
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-        val retrofitClient = Retrofit.Builder()
-            .client(okHttpClient)
-            // …
-            .build()
+   val retrofitClient = Retrofit.Builder()
+      .client(okHttpClient)
+      // …
+      .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        final Retrofit retrofitClient = new Retrofit.Builder()
-            .client(okHttpClient)
-            // …
-            .build();
+   final Retrofit retrofitClient = new Retrofit.Builder()
+      .client(okHttpClient)
+      // …
+      .build();
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -96,28 +96,28 @@ RUM error event for it.
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-        class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
-                                        <Context>,
-                                        <DATABASE_NAME>,
-                                        <CursorFactory>,
-                                        <DATABASE_VERSION>,
-                                        DatadogDatabaseErrorHandler()) {
-            // …
+   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
+                                    <Context>,
+                                    <DATABASE_NAME>,
+                                    <CursorFactory>,
+                                    <DATABASE_VERSION>,
+                                    DatadogDatabaseErrorHandler()) {
+      // …
 
-        }
+   }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       public class <YourOwnSqliteOpenHelper> extends SqliteOpenHelper {
-            public <YourOwnSqliteOpenHelper>(){
-                super(<Context>,
-                      <DATABASE_NAME>,
-                      <CursorFactory>,
-                      <DATABASE_VERSION>,
-                      new DatadogDatabaseErrorHandler());
-            }
-       }
+   public class <YourOwnSqliteOpenHelper> extends SqliteOpenHelper {
+      public <YourOwnSqliteOpenHelper>(){
+            super(<Context>,
+                  <DATABASE_NAME>,
+                  <CursorFactory>,
+                  <DATABASE_VERSION>,
+                  new DatadogDatabaseErrorHandler());
+      }
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}

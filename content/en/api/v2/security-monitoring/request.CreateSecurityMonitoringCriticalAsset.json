@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "critical_assets",
+    "attributes": {
+      "query": "host:examplesecuritymonitoring",
+      "rule_query": "type:(log_detection OR signal_correlation OR workload_security OR application_security) source:cloudtrail",
+      "severity": "decrease",
+      "tags": [
+        "team:security",
+        "env:test"
+      ]
+    }
+  }
+}

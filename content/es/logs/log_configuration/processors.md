@@ -104,7 +104,7 @@ A medida que Datadog recibe logs, les coloca una marca de tiempo utilizando el v
 * `eventTime`
 * `published_date`
 
-Si tus logs tienen fechas en un atributo que no están en este lista, utiliza el procesador del reasignador de fechas de logs para definir la marca de tiempo oficial del log como su atributo de fecha:
+Si tus logs tienen fechas en un atributo que no están en este lista, utiliza el procesador de reasignación de fechas de logs para definir la marca de tiempo oficial del log como su atributo de fecha:
 
 <div class="alert alert-info">
 Los formatos de fecha reconocidos son: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (formato EPOCH en milisegundos)</a> y <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -119,12 +119,12 @@ Para ver cómo se puede analizar un formato personalizado de fecha y hora en Dat
 * Los eventos de logs pueden enviarse dentro de las 18 horas pasadas y las 2 futuras.
 * A partir de la norma ISO 8601-1:2019, el formato básico es `T[hh][mm][ss]` y el formato ampliado es `T[hh]:[mm]:[ss]`. Las versiones anteriores omitían la T (que representa la hora) en ambos formatos.
 * Si tus logs no contienen ninguno de los atributos predeterminados y no has definido su propio atributo de fecha, Datadog coloca una marca de tiempo con la fecha de recepción en los logs.
-* Si se aplican varios procesadores de reasignadores de fechas de logs a un determinado log del pipeline, se tiene en cuenta el último (según el orden del pipeline).
+* Si se aplican varios procesadores de reasignación de fechas de logs a un determinado log del pipeline, se tiene en cuenta el último (según el orden del pipeline).
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador de fechas de logs en la [página **Pipelines**][1]:
+Define el procesador de reasignación de fechas de logs en la [página **Pipelines**][1]:
 
 {{< img src="logs/log_configuration/processor/date_remapper.png" alt="Definir un atributo de fecha" style="width:80%;" >}}
 
@@ -158,7 +158,7 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 
 ## Reasignador de estados de logs
 
-Utiliza el procesador del reasignador de estados para asignar atributos como estado oficial a tus logs. Por ejemplo, añade un nivel de gravedad de log a tus logs con el reasignador de estados.
+Utiliza el procesador de reasignación de estados para asignar atributos como estado oficial a tus logs. Por ejemplo, añade un nivel de gravedad de log a tus logs con el reasignador de estados.
 
 Cada valor de estado entrante se asigna de la siguiente manera:
 
@@ -174,12 +174,12 @@ Cada valor de estado entrante se asigna de la siguiente manera:
 * Las cadenas que empiezan por **o** o **s**, o que coinciden con **OK** o **Success** (sin distinción entre mayúsculas y minúsculas) asignan a **OK**.
 * Todos los demás se asignan a **info (6)**.
 
-**Nota**: Si se aplican varios procesadores del reasignador de estados de logs al log de un pipeline, sólo se tendrá en cuenta el primero en el orden del pipeline. Además, para todos los pipelines que coinciden con el log, sólo se aplica el primer reasignador de estados encontrado (de todos los pipelines aplicables).
+**Nota**: Si se aplican varios procesadores de reasignación de estados de logs al log de un pipeline, sólo se tendrá en cuenta el primero en el orden del pipeline. Además, para todos los pipelines que coinciden con el log, sólo se aplica el primer reasignador de estados encontrado (de todos los pipelines aplicables).
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador de estados de logs en la [página **Pipelines**][1]:
+Define el procesador de reasignación de estados de logs en la [página **Pipelines**][1]:
 
 {{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Reasignación de la gravedad de logs" style="width:60%;" >}}
 
@@ -211,16 +211,16 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 
 ## Reasignador de servicios
 
-El procesador del reasignador de servicios asigna uno o más atributos a tus logs como servicio oficial.
+El procesador de reasignación de servicios asigna uno o más atributos a tus logs como servicio oficial.
 
-**Nota**: Si se aplican varios procesadores del reasignador de servicios a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
+**Nota**: Si se aplican varios procesadores de reasignación de servicios a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador de servicios de logs en la [página **Pipelines**][1]:
+Define el procesador de reasignación de servicios de logs en la [página **Pipelines**][1]:
 
-{{< img src="logs/log_configuration/processor/service_remapper.png" alt="Procesador del reasignador de servicios" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/service_remapper.png" alt="Procesador de reasignación de servicios" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -252,16 +252,16 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 
 `message` es un atributo clave en Datadog. Su valor se muestra en la columna **Contenido** de log Explorer para proporcionar contexto en el log. Puede utilizar la barra de búsqueda para encontrar un log por el mensaje log.
 
-Utiliza el procesador del reasignador de mensajes de logs para definir uno o más atributos como mensaje oficial del log. Define más de un atributo para los casos en los que los atributos no existan y haya una alternativa disponible. Por ejemplo, si los atributos de mensaje definidos son `attribute1`, `attribute2` y `attribute3`, y `attribute1` no existe, se utiliza `attribute2`. Del mismo modo, si `attribute2` no existe, se utiliza `attribute3`.
+Utiliza el procesador de reasignación de mensajes de logs para definir uno o más atributos como mensaje oficial del log. Define más de un atributo para los casos en los que los atributos no existan y haya una alternativa disponible. Por ejemplo, si los atributos de mensaje definidos son `attribute1`, `attribute2` y `attribute3`, y `attribute1` no existe, se utiliza `attribute2`. Del mismo modo, si `attribute2` no existe, se utiliza `attribute3`.
 
 Para definir los atributos de los mensajes, utiliza primero el [procesador de creación de cadenas](#string-builder-processor) para crear un nuevo atributo de cadena para cada uno de los atributos que quieras utilizar. A continuación, utiliza el reasignador de mensajes de logs para reasignar los atributos de cadena como mensaje.
 
-**Nota**: Si se aplican varios procesadores del reasignador de mensajes de logs a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
+**Nota**: Si se aplican varios procesadores de reasignación de mensajes de logs a un determinado log del pipeline, sólo se tendrá en cuenta el primero (según el orden del pipeline).
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador de mensajes de logs en la [página **Pipelines**][1]:
+Define el procesador de reasignación de mensajes de logs en la [página **Pipelines**][1]:
 
 {{< img src="logs/log_configuration/processor/message_processor.png" alt="Procesador de mensajes" style="width:80%;">}}
 
@@ -293,20 +293,34 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 
 ## Reasignador
 
-El procesador del reasignador reasigna cualquier atributo o etiqueta (tag) de origen a otro atributo u otra etiqueta de destino. Por ejemplo, reasigna `user` por `firstname` para apuntar a tus logs en el Explorador de logs:
+El procesador de reasignación reasigna cualquier atributo o etiqueta (tag) de origen a otro atributo u otra etiqueta de destino. Por ejemplo, puede reasignar el atributo `user` a `firstname` para normalizar los datos de logs en Log Explorer.
 
-Las restricciones de nombre de etiquetas/atributos se explican en la [documentación sobre atributos y etiquetas][5]. Algunas restricciones adicionales, aplicadas como `:` o `,`, no están permitidas en los nombres de etiquetas/atributos de destino.
+Si el objetivo del reasignador es un atributo, el procesador también puede intentar convertir el valor a un nuevo tipo (`String`, `Integer` o `Double`). Si la conversión no es posible, se conservan el tipo y valor originales.
 
-Si el objetivo del reasignador es un atributo, el reasignador también puede intentar convertir el valor a un nuevo tipo (`String`, `Integer` o `Double`). Si la conversión no es posible, se conserva el tipo original.
+**Nota**: El separador decimal para los valores `Double` debe ser `.`.
 
-**Nota**: El separador decimal para `Double` debe ser `.`.
+### Restricciones de denominación
+
+Los caracteres `:` y `,` no están permitidos en los nombres de atributos o etiquetas de destino. Además, los nombres de etiquetas y atributos deben seguir las convenciones descritas en [Atributos y alias][5].
+
+### Atributos reservados
+
+El procesador de reasignación **no puede utilizarse para reasignar atributos Datadog reservados**. 
+- El atributo `host` no puede reasignarse.
+- Los siguientes atributos requieren procesadores de reasignación exclusivos y no pueden reasignarse con el reasignador genérico. Para reasignar cualquiera de los atributos, utiliza en su lugar el reasignador o procesador especializado correspondiente.
+   - `message`: Reasignador de mensajes de logs
+   - `service`: Reasignador de servicios
+   - `status`: Reasignador de estados de logs
+   - `date`: Reasignador de fechas de logs
+   - `trace_id`: Reasignador de trazas (traces)
+   - `span_id`: Reasignador de tramos (spans)
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador en la [página de **Pipelines**][1]. Por ejemplo, reasigna `user` a `user.firstname`.
+Define el procesador de reasignación en la [página de **Pipelines**][1]. Por ejemplo, reasigna `user` a `user.firstname`.
 
-{{< img src="logs/log_configuration/processor/remapper.png" alt="Procesador del reasignador de atributos" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/remapper.png" alt="Procesador de reasignación de atributos" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -724,18 +738,18 @@ Utiliza el [endpoint de API de pipeline para logs de Datadog][1] con la siguient
 {{% /tab %}}
 {{< /tabs >}}
 
-## Reasignador de trazas (trace)
+## Reasignador de trazas
 
 Hay dos formas de definir la correlación entre trazas y logs de aplicaciones:
 
 1. Sigue la documentación sobre [cómo inyectar un ID de rastreo en logs de aplicaciones][8]. Por defecto, las integraciones de logs se encargan del resto de la configuración.
 
-2. Utiliza el procesador del reasignador de trazas para definir un atributo de log como su ID de rastreo asociado.
+2. Utiliza el procesador de reasignación de trazas para definir un atributo de log como su ID de rastreo asociado.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador de trazas en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de rastreo en el cuadro del procesador, de la siguiente manera:
+Define el procesador de reasignación de trazas en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de rastreo en el cuadro del procesador, de la siguiente manera:
 
 {{< img src="logs/log_configuration/processor/trace_processor.png" alt="Procesador del ID de rastreo" style="width:80%;">}}
 
@@ -773,12 +787,12 @@ Hay dos formas de definir la correlación entre tramos y logs de aplicaciones:
 
 1. Sigue la documentación sobre [cómo inyectar un ID de rastreo en logs de aplicaciones][8]. Por defecto, las integraciones de logs se encargan del resto de la configuración.
 
-2. Utiliza el procesador del reasignador de tramos para definir un atributo de log como su ID de tramo asociado.
+2. Utiliza el procesador de reasignación de tramos para definir un atributo de log como su ID de tramo asociado.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define el procesador del reasignador de tramos en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de tramo en el cuadro del procesador, de la siguiente manera:
+Define el procesador de reasignación de tramos en la [página **Pipelines**][1]. Introduce la ruta de atributo del ID de tramo en el cuadro del procesador, de la siguiente manera:
 
 {{< img src="logs/log_configuration/processor/span_id_remapper.png" alt="Procesador de ID de tramo" style="width:80%;">}}
 
@@ -1090,7 +1104,7 @@ Para obtener instrucciones detalladas de instalación, ejemplos de configuració
 [2]: /es/agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /es/logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /es/logs/log_collection/?tab=host#attributes-and-tags
+[5]: /es/logs/log_configuration/attributes_naming_convention/
 [6]: /es/logs/search_syntax/
 [7]: /es/integrations/guide/reference-tables/
 [8]: /es/tracing/other_telemetry/connect_logs_and_traces/

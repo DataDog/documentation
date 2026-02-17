@@ -46,7 +46,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 4. Click on a node and select **View related logs** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
 
-[1]: https://app.datadoghq.com/security/investigator/aws
+[1]: https://app.datadoghq.com/security/siem/investigator?provider=aws
 
 {{% /tab %}}
 
@@ -60,7 +60,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 4. Click on a node and select **View related logs** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
 
-[1]: https://app.datadoghq.com/security/investigator/gcp
+[1]: https://app.datadoghq.com/security/siem/investigator?provider=gcp
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -73,7 +73,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 4. Click on a node and select **View related logs** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
 
-[1]: https://app.datadoghq.com/security/investigator/azure
+[1]: https://app.datadoghq.com/security/siem/investigator?provider=azure
 {{% /tab %}}
 
 {{% tab "Datadog" %}}
@@ -86,7 +86,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 4. Click on a node and select **View related Audit Trail** or **View related signals** to investigate further. Use the **Search for** dropdown menu to filter by actions.
 
-[1]: https://app.datadoghq.com/security/investigator/datadog
+[1]: https://app.datadoghq.com/security/siem/investigator?provider=datadog
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -52,13 +52,13 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Updating your RUM application
 
-You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
+You can update your RUM application settings at any time. From the [Application Management][3] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
 
-To update your RUM Application:
+### Sampling rates
 
-1. Go to your RUM application from the [Application Management][3] list.
-2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
-3. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented.
+Adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented. 
+
+{{% rum-browser-auto-instrumentation-update-user-attributes %}}
 
 ## Manual configuration
 

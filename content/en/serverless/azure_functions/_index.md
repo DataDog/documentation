@@ -12,6 +12,11 @@ further_reading:
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
 
+Here is the list of supported runtimes, operating systems (OS) and hosting plans for Azure Functions monitoring:
+- **Runtimes**: .NET, Node.js, Python, Java
+- **Operating Systems (OS)**: Windows, Linux
+- **Hosting Plans**: Dedicated (App Service) Plan, Premium Plan, Consumption Plan, Flex Consumption Plan
+
 The recommended installation method depends on your Azure Function’s configuration:
 - For .NET Windows Azure Functions running on Dedicated/App Service or Premium plans: use the [Datadog .NET APM Extension][9].
 - For all other configurations (including different runtimes, operating systems, or hosting plans): Follow the instructions below to install the Serverless Compatibility Layer.
@@ -110,7 +115,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Container model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
+   If your Azure Function app uses the [legacy in-process model][3], add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
@@ -170,8 +175,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    - [Configuring the .NET Core Tracing Library][1]
    - [Configuring the .NET Framework Tracing Library][2]
 
-[1]:/tracing/trace_collection/library_config/dotnet-core
-[2]:/tracing/trace_collection/library_config/dotnet-framework
+[1]: /tracing/trace_collection/library_config/dotnet-core
+[2]: /tracing/trace_collection/library_config/dotnet-framework
+[3]: https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

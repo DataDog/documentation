@@ -2,6 +2,9 @@
 title: Calculated Fields
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+  tag: Blog
+  text: Accelerate investigations with AI-powered log parsing
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Calculated Fields Formulas"
@@ -83,14 +86,14 @@ For a complete list of supported syntax, operators, and functions, see [Formulas
 
 ### Extraction
 
-Extraction uses Grok parsing rules to capture values from raw log messages or attributes. You can use Grok rules to:
+Extraction uses Grok parsing rules to capture values from raw log messages or attributes. You can use AI-powered automatic parsing to generate Grok rules or manually define your own Grok patterns. Use Grok rules to:
 - Capture values from raw log messages.
 - Retroactively extract attributes from already indexed logs without editing pipelines.
 - Test against sample logs.
 
 For example, you can extract the first three words of a message into separate fields:
 ```
-%{WORD:first} %{WORD:second} %{WORD:third}
+%{word:first} %{word:second} %{word:third}
 ```
 
 Extraction rules are evaluated globally across all logs in your session. For more details and syntax examples, see [Extractions][4].

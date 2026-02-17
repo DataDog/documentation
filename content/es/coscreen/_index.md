@@ -2,6 +2,9 @@
 cascade:
   algolia:
     rank: 70
+description: Utiliza CoScreen para reuniones de colaboración y uso compartido de pantallas.
+  CoScreen está diseñado para casos de uso en ingeniería como la programación por
+  parejas y la gestión de incidentes.
 further_reading:
 - link: https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/
   tag: Blog
@@ -36,7 +39,7 @@ La aplicación web CoScreen tiene una funcionalidad limitada. Para aprovechar al
 {{% /tab %}}
 {{< /tabs >}}
 
-## Uso
+## Utilización
 ### Unirse a CoScreen
 
 Si te han invitado a un CoScreen, haz clic en el enlace. Puedes hacer clic en **Join from browser** (Unirse desde el navegador) para unirte a CoScreen a través de la aplicación web o puedes iniciar la aplicación de escritorio. También puedes unirte manualmente introduciendo el enlace o el ID de la reunión.
@@ -123,7 +126,7 @@ CoScreen utiliza una conexión P2P (peer-to-peer) siempre que tú y otro partici
 
  - **Infraestructura de vídeo**
 
-Los participantes colaboran a través de una infraestructura de vídeo compatible con HIPAA y de nivel empresarial con cientos de servidores que ejecutan el marco Jitsi. Todos los datos de vídeo se cifran mediante DTLS-SRTP durante la transmisión.
+Los participantes colaboran a través de una infraestructura de vídeo compatible con HIPAA y de nivel empresarial con cientos de servidores que ejecutan el framework Jitsi. Todos los datos de vídeo se cifran mediante DTLS-SRTP durante la transmisión.
 
 
  - **Almacenamiento de datos**
@@ -145,6 +148,6 @@ Para conocer todos los detalles sobre cómo CoScreen permite una colaboración s
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
-[8]: /es/sensitive_data_scanner/
-[9]: /es/service_management/incident_management/
+[8]: /es/security/sensitive_data_scanner/
+[9]: /es/incident_response/incident_management/
 [10]: https://app.datadoghq.com/incidents/settings#Integrations

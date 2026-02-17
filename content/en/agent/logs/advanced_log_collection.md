@@ -587,10 +587,10 @@ Configuration example for Linux:
 ```yaml
 logs:
   - type: file
-    path: /var/log/myapp/*.log
+    path: /var/log/myapp/log/*.log
     exclude_paths:
-      - /var/log/myapp/debug.log
-      - /var/log/myapp/trace.log
+      - /var/log/myapp/log/debug.log
+      - /var/log/myapp/log/trace.log
     service: mywebapp
     source: go
 ```

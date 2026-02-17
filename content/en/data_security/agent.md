@@ -193,6 +193,9 @@ agent diagnose show-metadata agent-telemetry
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
+| **APM**                                     |                                                                                                                        |
+| trace.enabled                               | Whether the trace-agent process is running.                                                                            |
+| trace.working                               | Whether the trace-agent process is receiving and sending traces.                                                       |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

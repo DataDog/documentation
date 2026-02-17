@@ -84,19 +84,13 @@ Follow these steps to create a new integration with Datadog.
 1. **Apply to the Datadog Partner Network.** Once accepted, a member of the Datadog Technology Partner team will reach out to schedule an introductory call.
 2. **Request a Datadog sandbox account** for development via the Datadog Partner Network portal.
 3. **Start developing your integration** using the Integration Developer Platform:
-
-   a. Define the basic details about your integration.
-
-   b. Define and write your integration code by following the instructions to create one of the following integration types:
+   1. Define the basic details about your integration.
+   1. Define and write your integration code by following the instructions to create one of the following integration types:
       - [Agent-based integration][5]
       - [API-based integration][6]   
-
-   c. Specify what type of data your integration queries or submits.
-
-   d. Create a dashboard, and optionally create monitors or security rules.
-
-   e. Fill in the remaining fields: setup and uninstallation instructions, images, support details, and other key details that help describe the value of your integration.
-
+   1. Specify what type of data your integration queries or submits.
+   1. Create a dashboard, and optionally create monitors or security rules.
+   1. Fill in the remaining fields: setup and uninstallation instructions, images, support details, and other key details that help describe the value of your integration.
 4. **Test your integration** in your Datadog sandbox account.
 5. **Submit your integration for review.**
 6. **Once approved, your integration is published.**

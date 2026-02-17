@@ -36,9 +36,5 @@ Para conectar tu cuenta de Datadog a tu cuenta de CloudCheckr:
 - Haz clic en tus extensiones de CloudCheckr.
 - Añade tus [claves de API y de aplicación de Datadog][2].
 
-## Leer más
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://spot.io/product/cloudcheckr/
 [2]: https://app.datadoghq.com/organization-settings/api-keys

@@ -28,7 +28,7 @@ further_reading:
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
-  - link: /real_user_monitoring/session_replay/mobile/setup_and_configuration#web-view-instrumentation
+  - link: /session_replay/mobile/setup_and_configuration#web-view-instrumentation
     tag: Documentation
     text: Web View Instrumentation
 ---
@@ -108,7 +108,7 @@ DatadogWebViewTracking.xcframework
 {{% /collapse-content %}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
-[2]: /real_user_monitoring/ios/
+[2]: /real_user_monitoring/application_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios
 
 {{% /tab %}}
@@ -153,7 +153,7 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
 4. Enable tracking for web views with the following code snippet:
 
    ```kotlin
-     WebViewTracking.enable(webView, allowedHosts)
+   WebViewTracking.enable(webView, allowedHosts)
    ```
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
@@ -162,11 +162,11 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
 In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
 
 ```kotlin
-    webView.settings.javaScriptEnabled = true
+webView.settings.javaScriptEnabled = true
 ```
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
-[2]: /real_user_monitoring/android/?tab=kotlin#setup
+[2]: /real_user_monitoring/application_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
 [4]: /logs/log_collection/android/?tab=kotlin#setup
 
@@ -329,15 +329,15 @@ The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the give
 4. Enable tracking for web views with the following code snippet:
 
    ```kotlin
-     // call it in Android or iOS source set, not in the common one
-     WebViewTracking.enable(webView, allowedHosts)
+   // call it in Android or iOS source set, not in the common one
+   WebViewTracking.enable(webView, allowedHosts)
    ```
 
 5. Disable tracking of web views once web view instance can be released (iOS only):
 
    ```kotlin
-     // call it in iOS source set, not in the common one
-     WebViewTracking.disable(webView, allowedHosts)
+   // call it in iOS source set, not in the common one
+   WebViewTracking.disable(webView, allowedHosts)
    ```
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expressions are allowed.
@@ -379,7 +379,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
+[1]: /session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/application_monitoring/ios/setup
 [4]: /logs/log_collection/ios

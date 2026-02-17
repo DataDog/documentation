@@ -2,9 +2,12 @@
 title: Getting Started with Feature Flags
 description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
-- link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
-  tag: 'External Site'
-  text: 'OpenFeature Web SDK documentation'
+- link: '/feature_flags/client/'
+  tag: 'Documentation'
+  text: 'Client-Side SDKs'
+- link: '/feature_flags/server/'
+  tag: 'Documentation'
+  text: 'Server-Side SDKs'
 - link: 'https://www.datadoghq.com/blog/feature-flags/'
   tag: 'Blog'
   text: 'Ship features faster and safer with Datadog Feature Flags'
@@ -17,10 +20,6 @@ further_reading:
 site_support_id: getting_started_feature_flags
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Datadog feature flags offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
@@ -32,6 +31,18 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 * **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
+
+## Feature Flags SDKs
+
+This guide uses the JavaScript browser SDK as an example. You can integrate Datadog Feature Flags into any application using one of the following SDKs:
+
+### Client-side SDKs
+
+{{< partial name="feature_flags/feature_flags_client.html" >}}
+
+### Server-side SDKs
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
 
 ## Configure your environments
 
@@ -77,7 +88,20 @@ More information about OpenFeature SDK configuration options can be found in its
 
 ### Step 2: Create a feature flag
 
-Use the [feature flags creation UI][2] to bootstrap your first feature flag. By default, the flag is disabled in all environments.
+Go to [**Create Feature Flag**][2] in Datadog and configure the following:
+
+* **Name and key**: The flag's display name and the key referenced in code
+* **Variant type**: The data type for the flag variants (Boolean, string, integer, number, or JSON)
+
+  **Note**: The <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
+* **Variant values**: The possible values the flag can return (you can add these later)
+* **Distribution channels**: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
+
+<div class="alert alert-warning">
+  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
+</div>
+
+{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
 
 ### Step 3: Evaluate the flag and write feature code
 
@@ -91,8 +115,9 @@ const client = OpenFeature.getClient();
 // If applicable, set relevant attributes on the client's global context
 // (e.g. org id, user email)
 await OpenFeature.setContext({
-   org: { id: 2 },
-   user: { id: 'user-123', email: 'user@example.com' },
+   org_id: 2,
+   user_id: 'user-123',
+   email: 'user@example.com',
    targetingKey: 'user-123',
 });
 
@@ -142,5 +167,5 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/environments
+[3]: https://app.datadoghq.com/feature-flags/settings/environments
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens

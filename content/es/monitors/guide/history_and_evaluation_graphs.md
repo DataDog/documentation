@@ -1,4 +1,7 @@
 ---
+description: Comprende la diferencia entre los gráficos Historial y Evaluación en
+  las páginas de estado del monitor y cómo solucionar problemas con los valores de
+  evaluación.
 disable_toc: false
 further_reading:
 - link: monitors/manage/status/
@@ -127,10 +130,10 @@ La evaluación del monitor `Min` toma el valor mínimo de las consultas de los �
 {{< img src="monitors/guide/history_and_evaluation_graphs/troubleshoot_formulas_multi_query.png" alt="Widget de valor de consulta que muestra dos consultas, cada una con una agregación de métrica avg, y una agregación de evaluación min" style="width:80%;" >}}
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/monitors/manage/status
+[1]: /es/monitors/status
 [2]: /es/monitors/guide/as-count-in-monitor-evaluations/
 [3]: /es/dashboards/widgets/query_value/

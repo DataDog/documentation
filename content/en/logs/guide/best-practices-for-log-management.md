@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-
+description: 'Best practices for managing and monitoring your logs efficiently in Datadog.'
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -16,6 +16,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
       tag: "Blog"
       text: "Best practices for managing Datadog organizations at scale"
+    - link: "https://www.youtube.com/watch?v=2OEzAE7c2c0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=1&pp=iAQB"
+      tag: "Video"
+      text: "Datadog Tips & Tricks: Improve log utilization with Datadog log exclusion filters"
 algolia:
   tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
@@ -224,7 +227,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [14]: https://app.datadoghq.com/logs
 [15]: /logs/explorer/search/
 [16]: /logs/indexes/#set-daily-quota
-[17]: /service_management/events/explorer/facets
+[17]: /events/explorer/facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters

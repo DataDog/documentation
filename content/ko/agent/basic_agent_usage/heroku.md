@@ -9,7 +9,9 @@ title: Datadog 헤로쿠 빌드팩
 
 ## 설치
 
-이 가이드는 이미 헤로쿠에서 애플리케이션을 실행하고 있다고 가정합니다. 헤로쿠에 애플리케이션을 배포하는 방법을 알아보려면 헤로쿠 설명서를 참조하세요.
+[Fleet Automation 인앱 설치 가이드]][33]에 따라 Heroku에 Datadog Agent를 설치합니다.
+
+이 가이드에서는 Heroku에서 애플리케이션을 이미 실행 중이라고 가정합니다. Heroku에 애플리케이션을 배포하는 방법을 알아보려면 [Heroku 설명서][34]를 참조하세요.
 
 1. [Datadog API 설정][3]으로 이동하여 Datadog API 키를 복사합니다. 환경 변수로 내보냅니다.
 
@@ -38,14 +40,14 @@ title: Datadog 헤로쿠 빌드팩
    heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
    # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
-   heroku config:add DD_DYNO_HOST=true
+   heroku config:add DD_DYNO_HOST=true -a $APPNAME
 
    # Set the DD_SITE env variable automatically
-   heroku config:add DD_SITE=$DD_SITE
+   heroku config:add DD_SITE=$DD_SITE -a $APPNAME
 
    # Add this buildpack and set your Datadog API key
-   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-   heroku config:add DD_API_KEY=$DD_API_KEY
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git -a $APPNAME
+   heroku config:add DD_API_KEY=$DD_API_KEY -a $APPNAME
 
    # Deploy to Heroku forcing a rebuild
    git commit --allow-empty -m "Rebuild slug"
@@ -102,7 +104,7 @@ git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
 
-## 구성
+## 설정
 
 위에 표시된 환경 변수 외에도 설정할 수 있는 변수가 몇 가지 더 있습니다.
 
@@ -146,6 +148,7 @@ git push heroku main
 dyno 유형에 따라 Datadog 에이전트를 비활성화하려면 [prerun.sh 스크립트](#prerun-script)에 다음 스니펫을 추가하세요(모니터링을 원하지 않는 dyno 유형에 맞게 조정).
 
 ```shell
+DYNOTYPE=${DYNO%%.*}
 # Disable the Datadog Agent based on dyno type
 if [ "$DYNOTYPE" == "run" ] || [ "$DYNOTYPE" == "scheduler" ] || [ "$DYNOTYPE" == "release" ]; then
   DISABLE_DATADOG_AGENT="true"
@@ -342,7 +345,8 @@ agent-wrapper integration install -t datadog-ping==1.0.0
 
 예를 들어 Gunicorn 통합이 `web` 유형의 dyno에서만 실행되어야 하는 경우, 사전 실행 스크립트에 다음을 추가하세요.
 
-```
+```shell
+DYNOTYPE=${DYNO%%.*}
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
@@ -375,22 +379,25 @@ fi
 ```shell
 #!/usr/bin/env bash
 
-# Disable the Datadog Agent based on dyno type
+# Heroku '$DYNO' 환경 변수에서 dyno 유형 추출 
+DYNOTYPE="${DYNO%%.*}"
+
+# dyno 유형에 따라 Datadog Agent 비활성화
 if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
-# Disable integrations based on dyno type
+# dyno 유형에 따라 통합 비활성화
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
 
-# Set app version based on HEROKU_SLUG_COMMIT
+# HEROKU_SLUG_COMMIT 기반 앱 버전 설정
 if [ -n "$HEROKU_SLUG_COMMIT" ]; then
   DD_VERSION=$HEROKU_SLUG_COMMIT
 fi
 
-# Install the "ping" community integration
+# "ping" 커뮤니티 통합 설치
 agent-wrapper integration install -t datadog-ping==1.0.0
 ```
 
@@ -636,7 +643,7 @@ APM Agent
 [15]: https://docs.datadoghq.com/ko/logs/guide/collect-heroku-logs
 [16]: https://docs.datadoghq.com/ko/logs/logs_to_metrics/
 [17]: https://docs.datadoghq.com/ko/database_monitoring/
-[18]: https://docs.datadoghq.com/ko/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
+[18]: https://docs.datadoghq.com/ko/database_monitoring/setup_postgres/heroku/
 [19]: https://docs.datadoghq.com/ko/integrations/
 [20]: https://docs.datadoghq.com/ko/getting_started/integrations/#configuring-agent-integrations
 [21]: https://docs.datadoghq.com/ko/integrations/mcache/
@@ -651,3 +658,5 @@ APM Agent
 [30]: https://github.com/DataDog/heroku-buildpack-datadog
 [31]: https://github.com/miketheman/heroku-buildpack-datadog
 [32]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=heroku
+[34]: https://devcenter.heroku.com/categories/deployment

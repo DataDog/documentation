@@ -5,6 +5,7 @@ type: multi-code-lang
 code_lang_weight: 30
 aliases:
   - /security/application_security/threats/setup/compatibility/ruby
+  - /security/application_security/enabling/compatibility/ruby
 ---
 
 ## App and API Protection capabilities support

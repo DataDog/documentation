@@ -1,5 +1,8 @@
 ---
 title: Enabling App and API Protection for Nginx
+aliases:
+  - /security/application_security/setup/standalone/nginx
+  - /security/application_security/setup/threat_detection/nginx
 further_reading:
     - link: 'https://github.com/DataDog/nginx-datadog/'
       tag: "Source Code"
@@ -25,7 +28,7 @@ Learn how to set up App and API Protection (AAP) on your NGINX proxy by selectin
 
 ### Kubernetes
 {{< appsec-integrations >}}
-{{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./ingress-controller" >}}
+{{< appsec-integration name="Ingress Controller" avatar="kubernetes" link="./ingress-controller" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources

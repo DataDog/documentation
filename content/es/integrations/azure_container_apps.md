@@ -3,7 +3,7 @@ app_id: azure-container-apps
 app_uuid: 4cfaeef2-96d5-4497-be6a-8d06169e8ddb
 assets:
   dashboards:
-    azure_container_apps: assets/dashboard/azure_container_apps.json
+    azure_container_apps: assets/dashboards/azure_container_apps.json
   integration:
     auto_install: true
     events:
@@ -37,8 +37,7 @@ is_public: true
 manifest_version: 2.0.0
 name: azure_container_apps
 public_title: Azure Container Apps
-short_description: Realice un seguimiento de las métricas clave de Azure Contenedor
-  Apps.
+short_description: Rastreo de las métricas clave de Azure Container Apps.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -48,7 +47,7 @@ tile:
   - Categoría::Contenedores
   - Offering::Integration
   configuration: README.md#Setup
-  description: Realice un seguimiento de las métricas clave de Azure Contenedor Apps.
+  description: Rastreo de las métricas clave de Azure Container Apps.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -69,7 +68,7 @@ Si aún no lo has hecho, configura primero la [integración Microsoft Azure][2].
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure-container-apps" >}}
+{{< get-metrics-from-git "azure_container_apps" >}}
 
 
 ### Eventos

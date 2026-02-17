@@ -62,4 +62,4 @@ In other words, only the one RUM mobile session is visible in Datadog and theref
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser#disable-session-replay
+[1]: /session_replay/browser#disable-session-replay

@@ -23,7 +23,7 @@ To start collecting logs from your AWS services:
 2. [Enable logging](#enable-logging-for-your-aws-service) for your AWS service (most AWS services can log to a S3 bucket or CloudWatch Log Group).
 3. [Set up the triggers](#set-up-triggers) that cause the Forwarder Lambda to execute when there are new logs to be forwarded. There are two ways to configure the triggers.
 
-**Notes**: 
+**Notes**:
    - You can use [AWS PrivateLink][2] to send your logs over a private connection.
    - CloudFormation creates an IAM policy which includes `KMS:Decrypt` for all resources, and does not align with AWS Security Hub's best practice. This permission is used to decrypt objects from KMS-encrypted S3 buckets to set up the Lambda function, and the KMS key used to encrypt the S3 buckets cannot be predicted. You can safely delete this permission after the installation finishes successfully.
 
@@ -215,13 +215,12 @@ The following sources and locations are supported:
 
 
 3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.
-   {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:90%;" >}}
-4. Enter the ARN of the Lambda created in the previous section and click **Add**.
-5. Select the services from which you'd like to collect logs and click **Save**. To stop collecting logs from a particular service, deselect the log source.
-   {{< img src="logs/aws/aws_log_setup_step2.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with one Lambda function successfully entered under Included ARNs and some of the services enabled under Log Sources" popup="true" style="width:90%;" >}}
-6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this page.
-7. To stop collecting all AWS logs, hover over a Lambda and click the Delete icon. All triggers for that function are removed.
-8. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
+4. In the **Datadog Forwarder Lambda** section, enter the ARN of the Lambda created in the previous section and click **Add**. The Lambda function appears in the table below with its name, version, and region.
+5. In the **Log Autosubscription** section, under **Log Sources**, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
+6. (Optional) In the **Log Source Tag Filters** section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected.
+7. If you have logs across multiple regions, you must create additional Lambda functions in those regions and add them in the **Datadog Forwarder Lambda** section.
+8. To stop collecting all AWS logs from a specific Lambda function, hover over the Lambda in the table and click the delete icon. All triggers for that function are removed.
+9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
 
 ### Manually set up triggers
 

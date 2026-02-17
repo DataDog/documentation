@@ -18,14 +18,14 @@ title: 메트릭
   커스텀 메트릭에 대한 파운데이션 활성화 세션을 살펴보고 등록하세요. 커스텀 알고리즘에 대한 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 성능 분포 같은 애플리케이션 KPI를 추적하는 방법을 알아보세요.
 {{< /learning-center-callout >}}
 
-이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다: 
+이 섹션에서는 Datadog 메트릭에 대한 소개 및 메트릭이 유용한 이유에 대해 설명합니다. 구체적으로 다음 주제가 포함되어 있습니다:
 
-{{< whatsnext desc="Datadog에 메트릭 제출하기" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>커스텀 메트릭 제출하기</u> - 커스텀 메트릭이 무엇인지, 어떻게 제출하는 지에 대해 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>OpenTelemetry 메트릭 전송하기</u> - Datadog Agent 또는 OpenTelemetry Collector를 설정하세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>메트릭 유형</u> - Datadog에 제출할 수 있는 메트릭 유형입니다.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>분포 메트릭</u> - 분포 메트릭과 전역적으로 정확한 백분위수에 대해 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="/metrics/units" >}}<u>메트릭 단위</u> - 메트릭과 연결될 수 있는 단위에 대해 알아보세요.{{< /nextlink >}}
+{{< whatsnext desc="Submit metrics to Datadog" >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>커스텀 메트릭 제출</u> - 커스텀 메트릭의 정의와 제출 방법에 관해 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/reference/otel_metrics" >}}<u>OpenTelemetry 메트릭 전송</u> - Datadog Agent 또는 OpenTelemetry Collector를 구성하세요{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>메트릭 유형</u> - Datadog에 제출 가능한 메트릭 유형입니다.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>배포 메트릭</u> - 배포 메트릭 및 전 세계적으로 정확한 백분위수에 관해 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>메트릭 단위</u> - 메트릭과 연결된 단위에 관해 알아보세요..{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Visualize and query your metrics" >}}
@@ -35,8 +35,8 @@ title: 메트릭
     {{< nextlink href="/metrics/nested_queries" >}}<u>중첩 쿼리</u> - 고급 쿼리 기능을 해제하기 위해 추가 집계 레이어를 적용하세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="커스텀 메트릭 볼륨 및 비용에 대한 이해와 관리" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics Without Limits™을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
+{{< whatsnext desc="Understand and manage your custom metrics volumes and costs" >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM을 사용하여 태그 구성으로 커스텀 메트릭 볼륨을 제어하는 방법을 알아보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 개요
@@ -113,7 +113,7 @@ Datadog의 [메트릭 탐색기][3], [대시보드][4] 또는 [노트북][5]를 
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="여러 급등 지점과 함께 단일 파란 선으로 표시된 지연 메트릭 시계열 그래프" >}}
 
-이 선 그래프는 사용자가 경험한 지연(밀리초 단위) Y축과 시간 X축을 보여줍니다. 
+이 선 그래프는 사용자가 경험한 지연(밀리초 단위) Y축과 시간 X축을 보여줍니다.
 
 #### 추가 시각화
 
@@ -186,7 +186,7 @@ UI에서 또는 [API][27]을 통해 중첩된 쿼리를 사용하여 시간과 �
 
 ### 메트릭에 대한 실시간 정보 보기
 
-[메트릭 요약 페이지][20]는 지정된 시간(지난 시간, 지난일, 지난주)에 Datadog에 보고된 메트릭 목록을 표시합니다. 메트릭은 메트릭 이름이나 태그로 필터링할 수 있습니다. 
+[메트릭 요약 페이지][20]는 지정된 시간(지난 시간, 지난일, 지난주)에 Datadog에 보고된 메트릭 목록을 표시합니다. 메트릭은 메트릭 이름이나 태그로 필터링할 수 있습니다.
 
 아무 메트릭 이름을 클릭하여 더 자세한 정보를 담은 상세 정보 사이드 패널을 표시합니다. 사이드 패널에 표시되는 상세 정보는 특정 메트릭에 대한 핵심 정보로 메타데이터(유형, 단위, 간격), 메트릭 개수, 보고 호스트 개수, 제출된 태그 개수, 메트릭에 제출된 모든 태그를 포함하는 표를 포함합니다. 메트릭에 제출된 태그를 확인하면 태그 설정으로 보고된 메트릭 수를 이해하는 데 도움이 됩니다. 이 수는 태그 값 조합에 따라 달라집니다.
 
@@ -196,11 +196,11 @@ UI에서 또는 [API][27]을 통해 중첩된 쿼리를 사용하여 시간과 �
 
 ## 참고 자료
 
-{{< whatsnext desc="메트릭에 대해 다음 내용도 확인하세요.">}}
+{{< whatsnext desc="To continue with metrics, check out:">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>고급 필터링</u> - 데이터를 필터링하여 반환되는 메트릭의 범위를 좁힙니다.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>분포 메트릭</u> - 전체 데이터 세트에서 글로벌 백분위수를 계산하세요.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics Without Limits™을 사용하여 태그 및 집계 설정으로 커스텀 메트릭 볼륨을 제어하는 ​​방법을 알아보세요.{{< /nextlink >}}
-    {{< nextlink href="https://dtdg.co/fe" >}}<u>기본 구축</u> - 인터랙티브 세션에 참여하여 메트릭에 대해 자세히 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>분포 메트릭</u> - 전체 데이터 세트에서 글로벌 백분위수를 계산합니다.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM을 사용하여 태그 구성으로 사용자 지정 메트릭 볼륨을 제어하는 방법을 알아보세요.{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}기반<u>활성화</u> - 대화형 세션에 참여하여 메트릭의 잠재력을 최대한 활용하세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /ko/logs

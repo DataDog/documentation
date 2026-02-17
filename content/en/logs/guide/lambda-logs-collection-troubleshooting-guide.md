@@ -12,7 +12,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][3]. 
+    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch` but you can find other possible sources in the table below.
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
 3. If logs appear in Live Tail but are missing from the Log Explorer, the discrepancy is likely due to one of the following reasons (see the [logs troubleshooting document for details][4]):
    * Your log index has exclusion filters that are actively filtering out these logs.
@@ -106,6 +106,7 @@ If Datadog fails to automatically create triggers, follow this troubleshooting c
 2. Verify that the [required permissions][10] are assigned to the integration role.
 3. If the log source is a Lambda log group, verify that the lambda function has the [extension][11] installed.
 4. If the log source is a CloudWatch log group, verify that it does not already have two subscribers (the maximum allowed).
+
 ## Check the Lambda function logs
 
 1. From the monitoring tab, click **View logs in Cloudwatch**.

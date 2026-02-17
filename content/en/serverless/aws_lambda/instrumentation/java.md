@@ -24,11 +24,22 @@ If you previously set up your Lambda functions using the Datadog Forwarder, see 
 
 If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the [special instructions to upgrade][10].
 
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
+Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}}
+
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+You can instrument your Java AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.

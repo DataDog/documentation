@@ -25,7 +25,7 @@ Send logs to Datadog from your React Native Mobile applications with [Datadog's 
 To install with NPM, run:
 
 ```sh
-   npm install @datadog/mobile-react-native
+npm install @datadog/mobile-react-native
 ```
 
 To install with Yarn, run:
@@ -43,132 +43,159 @@ Then install the added pod:
    Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
 
 2. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library, as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
+
 {{< site-region region="us" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions (such as a tap on buttons).
-    true, // track XHR resources
-    true // track errors
+    trackingConsent,
+    {
+        site: 'US1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'US1';
 ```
 {{< /site-region >}}
 {{< site-region region="us3" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions (such as a tap on buttons).
-    true, // track XHR resources
-    true // track errors
+    trackingConsent,
+    {
+        site: 'US3',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'US3';
 ```
 {{< /site-region >}}
 {{< site-region region="us5" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    trackingConsent,
+    {
+        site: 'US5',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'US5';
-
-await DdSdkReactNative.initialize(config);
 ```
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    trackingConsent,
+    {
+        site: 'EU1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'EU1';
 ```
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    trackingConsent,
+    {
+        site: 'US1_FED',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'US1_FED';
 ```
 {{< /site-region >}}
 {{< site-region region="ap1" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    trackingConsent,
+    {
+        site: 'AP1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'AP1';
 ```
 {{< /site-region >}}
 {{< site-region region="ap2" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    trackingConsent,
+    {
+        site: 'AP2',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = 'AP2';
 ```
 {{< /site-region >}}
 

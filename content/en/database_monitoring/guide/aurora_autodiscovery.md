@@ -1,6 +1,7 @@
 ---
 title: Configuring Database Monitoring for Amazon Aurora DB Clusters
-
+aliases:
+- /database_monitoring/aurora_autodiscovery
 ---
 
 This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
@@ -122,8 +123,7 @@ database_monitoring:
   autodiscovery:
     aurora:
       enabled: true
-      dbm_tag:
-        - "use_dbm:true"
+      dbm_tag: "use_dbm:true"
 ```
 
 The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.

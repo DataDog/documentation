@@ -135,24 +135,14 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
 ***OR***
 
-* _ELB-determined access through autoscaling group:_
+* _ELB-determined access:_
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`.|This opens the load balancer to incoming traffic from the Internet on a specific port.|
-|The load balancer has a listener accepting traffic on port `X`|A [listener][37] is a process that checks for connection requests, using the protocol and port that you configure|
-|The load balancer has a target group forwarding traffic to some port `Y`.|[Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
-|An autoscaling group is attached to the load balancer's target group.|-|
-|The EC2 instance is part of the autoscaling group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|This opens the EC2 instance to traffic coming from the load balancer. The security group must allow traffic from the load balancer, and thus must be open either to all IPs, all IPs in the VPC, or that specific security group.|
-
-***OR***
-
-* _ELB-determined access through target group alone:_
-
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|Criteria 1, 2 and 3 from above (_ELB-determined access through autoscaling group_) apply. |-|
-|The EC2 instance is listed as a target of the target group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|Because the instance is listed as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group allows traffic from the load balancer.|
+| A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`. | This opens the load balancer to incoming traffic from the internet on a specific port. |
+| The load balancer has a listener accepting traffic on port `X`. | A [listener][37] is a process that checks for connection requests using the protocol and port that you configure. |
+| The load balancer has a target group forwarding traffic to some port `Y`. | [Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
+| The EC2 instance is listed as a target of the target group, and has a security group with at least one rule that allows ingress traffic on port `Y` from `0.0.0.0/0`, from the VPC CIDR (for example, `10.0.0.0/8`), or from the load balancer's security group (`SG1`). | Because the instance is registered as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group must allow traffic coming from the load balancer. |
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
@@ -325,6 +315,51 @@ A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if:
 
 Explore more information about making storage buckets public [here][57].
 
+### Google Cloud Kubernetes Engine clusters
+
+A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publicly accessible if it meets **all** of the following **base criteria** AND **at least one** of the additional conditions listed below:
+
+**Base criteria (all required):**
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| Private endpoint is disabled | The cluster's [private endpoint][62] is not enabled (`enable_private_endpoint` is false), meaning the control plane has a public IP address. |
+| Public endpoint is enabled | The cluster has a public endpoint configured (`public_endpoint` is true). |
+
+**AND at least one of the following conditions:**
+
+* _Authorized networks is disabled:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| [Authorized networks][63] is not enabled. | There are no IP allowlist restrictions on who can access the cluster's control plane, allowing access from any IP address. |
+
+***OR***
+
+* _Unrestricted CIDR block allowed:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| The authorized networks configuration includes the `0.0.0.0/0` CIDR block. | This CIDR block allows access from any IP address on the internet. |
+
+***OR***
+
+* _Google Cloud external IP addresses added to authorized networks:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| Google Cloud external IP addresses are added to authorized networks (`gcpPublicCidrsAccessEnabled` is set to `true`). | This allows access from any external IP address assigned to Google Cloud VMs, meaning anyone can create a VM in Google Cloud and access the cluster's control plane. |
+
+***OR***
+
+* _Broad Google Cloud IP range allowed:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| The authorized networks configuration includes the `34.0.0.0/7` CIDR block. | This CIDR range is sometimes used to allow access from Google Cloud IP ranges and is considered publicly accessible. |
+
+**Note**: A cluster with authorized networks enabled (`{"enabled":true}`) but with an empty CIDR blocks list (`{"enabled":true, "cidr_blocks":[]}`) is **not** considered publicly accessible, as it blocks all external access to the control plane.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -390,3 +425,6 @@ Explore more information about making storage buckets public [here][57].
 [59]: https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html
 [60]: https://learn.microsoft.com/en-us/azure/aks/intro-kubernetes
 [61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
+[62]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#private_cp
+[63]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#overview
+

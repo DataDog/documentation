@@ -55,16 +55,16 @@ Data Streams Monitoring proporciona un método estandarizado para que los equipo
 
 Data Streams Monitoring instrumenta los _clientes_ de Kafka (consumidores/productores). Si puedes instrumentar tu infraestructura de clientes, puedes utilizar Data Streams Monitoring.
 
-|   | Java | Python | .NET | Node.js | Go |
-| - | ---- | ------ | ---- | ------- | -- |
-| Apache Kafka <br/>(autoalojado, Amazon MSK, Confluent Cloud o cualquier otra plataforma de alojamiento) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| Azure Service Bus | | | {{< X >}} | | |
-| Google Pub/Sub | {{< X >}} | | | {{< X >}} | |
-| IBM MQ | | | {{< X >}} | | |
-| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+|   | Java | Python | .NET | Node.js | Go | Ruby |
+| - | ---- | ------ | ---- | ------- | -- | ---- |
+| Apache Kafka <br/>(autoalojado, Amazon MSK, Confluent Cloud o cualquier otra plataforma de alojamiento) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Amazon Kinesis | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+| Amazon SNS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+| Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
+| Azure Service Bus | | | {{< X >}} | | | |
+| Google Pub/Sub | {{< X >}} | | | {{< X >}} | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | |
+| RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
 Data Streams Monitoring requiere versiones mínimas del rastreador Datadog. Para obtener más detalles, consulta cada página de configuración.
 

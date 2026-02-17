@@ -88,10 +88,6 @@ Datadog supports several advanced options specific to experimentation:
 : - Datadog highlights statistically significant results. 
   - Use this setting to specify whether an increase or decrease in this metric is desired.
 
-`Guardrail cutoffs`
-: - Use this to specify a `do no harm` threshold. 
-  - Metrics will be yellow until the confidence interval is small enough to rule out a downside risk larger than this threshold. This indicates that you should continue running your experiment to rule out an effect worse than the number entered here.
-
 `Outlier handling`
 : - Real world data often includes extreme outliers that can impact experiment results. 
   - Use this setting to set a threshold at which data is truncated. For instance, set a 99% upper bound to truncate all results at the metric’s 99th percentile.

@@ -63,7 +63,7 @@ See [Configuration](#configuration) for more advanced usage.
 
 Optionally, set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][5].
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][18] guide.
 
 If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.Profiler` object:
 
@@ -146,3 +146,4 @@ The [Getting Started with Profiler][7] guide takes a sample service with a perfo
 [15]: /profiler/profile_visualizations/#timeline-view
 [16]: /serverless/aws_lambda/profiling/
 [17]: /tracing/trace_collection/compatibility/python
+[18]: /profiler/profiler_troubleshooting/python/

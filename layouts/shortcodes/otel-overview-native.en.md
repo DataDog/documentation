@@ -12,7 +12,7 @@
 
 Send custom application {{ $signal }} into Datadog using the OpenTelemetry (OTel) {{ $signalCap }} API with the Datadog SDK (`{{ $sdk }}`).
 
-{{ if $alternative }}This is an alternative to using {{ $alternative }} and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.{{ else }}You can write code against the standard OTel interfaces whilst benefiting from all the features of the Datadog SDK.{{ end }}
+{{ if $alternative }}This is an alternative to using {{ $alternative }} and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.{{ else }}You can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.{{ end }}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 

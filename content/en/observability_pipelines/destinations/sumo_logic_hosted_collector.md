@@ -1,7 +1,13 @@
 ---
 title: Sumo Logic Hosted Collector Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Logic Hosted Collector.
 
@@ -11,11 +17,40 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/sumo_logic %}}
+<div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual value.</div>
 
-### Set the environment variables
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+
+#### Optional settings
+
+1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
+1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
+1. Enter a **host name** to override the default `host` value configured for your Sumo Logic collector's source.
+1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
+1. Click **Add Header** to add any custom header fields and values.
+{{% observability_pipelines/destination_buffer_numbered %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Sumo Logic HTTP Collector URL identifier:
+	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:   
+        - `<ENDPOINT>` is your Sumo collection endpoint.
+        - `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
+	- The default identifier is `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

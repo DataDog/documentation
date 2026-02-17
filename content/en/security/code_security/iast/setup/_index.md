@@ -11,8 +11,7 @@ aliases:
 Before setting up Runtime Code Analysis (IAST), ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
+2. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
 ## Using Datadog Tracing Libraries
 
@@ -86,6 +85,34 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   }
 ]
 ```
+
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+{{< tabs >}}
+{{% tab "Using system properties" %}}
+
+Start your Java application with the Datadog Agent and IAST enabled using system properties:
+
+```bash
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.iast.enabled=true -Ddd.apm.tracing.enabled=false -Ddd.service=<MY_SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
+```
+{{% /tab %}}
+
+{{% tab "Using environment variables" %}}
+
+Set the required environment variables:
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /security/code_security/iast/setup/
@@ -199,6 +226,18 @@ Add the following line to your container Dockerfile:
 ENV DD_IAST_ENABLED=true
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
+
 To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
@@ -280,6 +319,17 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
 [3]: /security/code_security/iast/setup/
@@ -353,6 +403,17 @@ Update your ECS task definition JSON file, by adding this in the environment sec
     "value": "true"
   }
 ]
+```
+
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 #### Third-Party Library Compatibility Note
@@ -769,26 +830,11 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level                              | Minimum Datadog Agent |
-|------------|--------------------------------------------|-----------------------|
-| `>=3.0,<4` | General Availability                       | 7.28                  |
-| `>=2.0,<3` | End of Life                                | 7.28                  |
-|    `<2`    | End of Life                                |                       |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
-|---------|-----------------------|---------|-----------------|----------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
-| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
-
+{{< partial name="trace_collection/python/supported_runtimes.html" >}}
 
 #### Web framework compatibility
 ##### Code Security Capability Notes

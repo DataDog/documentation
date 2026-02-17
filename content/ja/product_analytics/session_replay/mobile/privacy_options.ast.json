@@ -5,14 +5,14 @@
     "frontmatter": {
       "title": {
         "itemTranslationData": {
-          "e516d0bca63367c3cdea9592e5e874ce": {
+          "5616dd60a56d7707ff962e87b9fa067f": {
             "string": "モバイルセッションリプレイのプライバシーオプション"
           }
         }
       },
       "description": {
         "itemTranslationData": {
-          "44bba57ecf1000d4c26a1710931ea04a": {
+          "9a8116f7e8910bb98e4fc9efbabdc973": {
             "string": "モバイルセッションリプレイのプライバシーオプションの構成"
           }
         }
@@ -23,14 +23,14 @@
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
               "itemTranslationData": {
-                "ff298467956d0977568a022601ce36b1": {
+                "fb162115e8af8f878d9e5707abe12e1e": {
                   "string": "Mobile Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "372e351119ae0818a8d70fda6f25b76e": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "ドキュメント"
                 }
               }
@@ -40,14 +40,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
               "itemTranslationData": {
-                "4c2c25fadc44b452805930d66b92e081": {
+                "3bad2c19ca0a83a38ff776b95e1f8a4b": {
                   "string": "モバイルセッションリプレイがアプリのパフォーマンスに与える影響"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "372e351119ae0818a8d70fda6f25b76e": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "ドキュメント"
                 }
               }
@@ -57,14 +57,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
               "itemTranslationData": {
-                "e8c885469af2de3bdc7fc4a10ed7bcfb": {
+                "691d661ed1349ca1ba794d2bad6739f0": {
                   "string": "モバイルセッションリプレイの設定と構成"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "372e351119ae0818a8d70fda6f25b76e": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "ドキュメント"
                 }
               }
@@ -74,14 +74,14 @@
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
               "itemTranslationData": {
-                "2b6f1133cdf7f0450b0e81404e234b74": {
+                "bf16cd1a410957692c82abe14fad0152": {
                   "string": "モバイルセッションリプレイのトラブルシューティング"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "372e351119ae0818a8d70fda6f25b76e": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "ドキュメント"
                 }
               }
@@ -91,18 +91,27 @@
             "link": "/real_user_monitoring/session_replay",
             "text": {
               "itemTranslationData": {
-                "8ec0e8f790e9b74cb7203f0fb5efd79b": {
+                "6336fd746bcc46c6aa4d199a6266c29e": {
                   "string": "Session Replay"
                 }
               }
             },
             "tag": {
               "itemTranslationData": {
-                "372e351119ae0818a8d70fda6f25b76e": {
+                "338fba5fc2188734d593c57bde09df32": {
                   "string": "ドキュメント"
                 }
               }
             }
+          }
+        }
+      },
+      "content_filters": {
+        "listTranslationData": {
+          "0": {
+            "label": "SDK",
+            "trait_id": "platform",
+            "option_group_id": "rum_sdk_platform_options_v2"
           }
         }
       }

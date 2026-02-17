@@ -8,14 +8,14 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentación
   text: Solucionar problemas de CI Visibility
-title: Configurar el rastreo en pipelines de Codefresh
+title: Configuración de Codefresh para CI Visibility
 ---
 
 ## Información general
 
 [Codefresh][1] es una plataforma de integración y entrega continuas creada para Kubernetes que ofrece funciones de automatización que agilizan la creación, los tests y el despliegue de las aplicaciones.
 
-Configura el rastreo en Codefresh para recopilar datos en cada paso de tus pipelines, analizar cuellos de botella de rendimiento, solucionar problemas operativos y monitorizar tus procesos de despliegue.
+Configura CI Visibility para que Codefresh recopile datos en cada step (UI) / paso (generic) de tus pipelines, analice los cuellos de botella de rendimiento, resuelva los problemas operativos y monitorice tus workflows (UI) / procesos de despliegue.
 
 ### Compatibilidad
 

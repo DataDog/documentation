@@ -5,7 +5,7 @@ aliases:
     - /observability_pipelines/guide/upgrade_to_the_new_search_syntax/
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/search_syntax/"
+- link: "/observability_pipelines/search_syntax/logs/"
   tag: "Documentation"
   text: "Learn more about Observability Pipelines search syntax"
 ---
@@ -127,5 +127,5 @@ See [Reserved attributes][3] for more information.
 [1]: /observability_pipelines/install_the_worker/?tab=docker#upgrade-the-worker
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[4]: /observability_pipelines/search_syntax/#attribute-search
+[4]: /observability_pipelines/search_syntax/logs/#attribute-search
 [5]: /observability_pipelines/live_capture/

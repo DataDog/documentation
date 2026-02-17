@@ -1,8 +1,8 @@
 #### Filter query syntax
 
-Each processor has a corresponding filter query in their fields. Processors only process logs that match their filter query. And for all processors except the filter processor, logs that do not match the query are sent to the next step of the pipeline. For the filter processor, logs that do not match the query are dropped.
+Each processor has a corresponding filter query in their fields. Processors only process logs that match their filter query. And for all processors except the Filter processor, logs that do not match the query are sent to the next step of the pipeline. For the Filter processor, logs that do not match the query are dropped.
 
-The following are filter query examples:
+The following are logs filter query examples:
 
 - `NOT (status:debug)`: This filters for logs that do not have the status `DEBUG`.
 - `status:ok service:flask-web-app`: This filters for all logs with the status `OK` from your `flask-web-app` service.
@@ -13,4 +13,4 @@ The following are filter query examples:
 
 Learn more about writing filter queries in [Observability Pipelines Search Syntax][4001].
 
-[4001]: /observability_pipelines/search_syntax/
+[4001]: /observability_pipelines/search_syntax/logs/

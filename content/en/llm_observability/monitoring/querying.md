@@ -19,7 +19,7 @@ In the [LLM Observability Trace Explorer][1], choose whether to search across tr
 Some search terms are only applicable to traces. For examples, see [Trace-level queries](#trace-level-queries).
 
 ### Query by attribute
-_Span attributes_ are key-value pairs attached directly to each span. Attributes capture details about the span's execution, such as performance metrics, resource identifiers, or parameter values. 
+_Span attributes_ are key-value pairs attached directly to each span. Attributes capture details about the span's execution, such as performance metrics, resource identifiers, or parameter values.
 
 Attribute queries take the form `@key:value`. All attribute keys are prepended with `@`.
 
@@ -103,6 +103,15 @@ Use the `@meta` attribute to find spans by metadata information.
 | `@meta.model_provider:openai` | Spans or traces where the model provider is OpenAI |
 | `@meta.model_name:gpt-4.1` | Spans or traces where the model is GPT-4.1 |
 
+#### Custom metadata
+
+You can query spans and traces by [custom metadata fields][7] attached during instrumentation. Custom metadata fields are accessible under `@meta.metadata.<key>`.
+
+| Query | Match |
+| ----- | ----- |
+| `@meta.metadata.config.debug_mode:false` | Spans or traces with custom metadata field `config.debug_mode` set to `false` |
+| `@meta.metadata.job_id:job_14fb81c3` | Spans or traces with custom metadata field `job_id` set to `job_14fb81c3` |
+
 ### Trace-level queries
 
 To search traces based on attributes of its nested spans, use the `@child` attribute.
@@ -130,3 +139,4 @@ Use the `@trace` attribute to access trace-level information, such as estimated 
 [4]: /llm_observability/evaluations/submit_evaluations
 [5]: /llm_observability/terms/#span-kinds
 [6]: /tracing/trace_explorer/query_syntax/
+[7]: /llm_observability/instrumentation/sdk/#annotating-metadata

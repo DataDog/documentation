@@ -4,6 +4,7 @@ aliases:
   - /security_platform/application_security/setup_and_configure
   - /security/application_security/setup_and_configure
   - /security/application_security/setup_and_configure
+  - /security/application_security/threats/library_configuration
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"

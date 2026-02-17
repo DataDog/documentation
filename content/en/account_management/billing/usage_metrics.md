@@ -1,5 +1,9 @@
 ---
 title: Estimated Usage Metrics
+further_reading:
+    - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations"
+      tag: "Blog"
+      text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 <style>tbody code {word-break: break-word !important;}</style>
@@ -90,6 +94,10 @@ For accounts with multiple organizations, you can roll up estimated usage from c
 For technical questions, contact [Datadog support][1].
 
 For billing questions, contact your [Customer Success][2] Manager.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
 [2]: mailto:success@datadoghq.com

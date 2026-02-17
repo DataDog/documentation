@@ -1,5 +1,5 @@
 ---
-title: Agent v5 - Certificate Authority Update (2025)
+title: Agent v5 - Certificate Authority Update (2026)
 further_reading:
 - link: "/agent/guide/upgrade_agent_fleet_automation"
   tag: "Documentation"
@@ -8,42 +8,51 @@ further_reading:
 
 ## Overview
 
-In May 2026, Datadog will deploy SSL certificates signed by a new certificate authority (Sectigo Root CA). **If you are running Datadog Agent v5 (especially versions below 5.32.7)**, your Agents may lose connectivity with Datadog due to SSL certificate verification failures.
+On **April 20, 2026**, as a downstream effect of Sectigo's public root certificate migration, Datadog will deploy new SSL certificates signed by the new root certificate. **If you are running Datadog Agent v5 versions below 5.32.7**, your Agents may not recognize this new certificate root as trusted and will lose the ability to submit collected data to Datadog after this change.
 
-## What will stop working
+## What will happen
 
-Agent v5 hosts without the Datadog embedded certificate bundle will be unable to send metrics, logs, traces, and other monitoring data to Datadog. These hosts fall back to the Tornado certificate store, which will fail SSL/TLS certificate verification when attempting to connect to Datadog intake endpoints.
+Starting on **April 20, 2026**, any host running an affected Agent v5 will be unable to:
+- Send metrics, logs, traces, and other monitoring data to Datadog
+- Maintain connectivity with Datadog intake endpoints
+
+This is a result of SSL/TLS certificate verification failures when the Agent attempts to connect to Datadog.
 
 **Note**: If your Agent uses the Datadog-provided certificate bundle (typically Agent v5.32.7+) or is configured to use your operating system's certificate store, you are not affected.
 
 ## Why this happens
 
-When Agent v5's embedded certificate bundle is missing or incomplete, it falls back to the Tornado (Python web framework) certificate store. This outdated Tornado certificate store does not include the new Sectigo Root CA that will sign Datadog's certificates after May 2026, causing certificate verification to fail.
+When Agent v5's embedded certificate bundle is missing or incomplete, it falls back to the Tornado (Python web framework) certificate store. This outdated Tornado certificate store does not include the new Sectigo Root CA that will sign Datadog's certificates after April 20, 2026, causing certificate verification to fail.
 
 ## Who is affected
 
-You are affected if:
-- You are running **Datadog Agent v5**, particularly **versions below 5.32.7**
-- Your Agent installation does not include the Datadog embedded certificate bundle
-- Your Agent is not configured to use the operating system's certificate store (using `use_curl_http_client: true`)
+You are affected if you are running **Datadog Agent v5 versions earlier than 5.32.7**.
+
+You are **not** affected if:
+- Your Agent uses the Datadog-provided certificate bundle (typically Agent v5.32.7+)
+- Your Agent is configured to use the operating system's certificate store (using `use_curl_http_client: true`)
 
 ## Timeline
 
-- **June 2025 - April 2026**: Grace period to upgrade to Agent v7 or run the provided runbooks
-- **May 2026**: Datadog will deploy new certificates signed with the new Sectigo Root CA
-  - Agents that have not been updated will lose connectivity
+- **December 1st, 2025 - April 19th, 2026**: Grace period for you to take action
+- **April 20, 2026**: New certificates deployed - affected unpatched Agents will lose connectivity
 
-## Recommended solution: Upgrade to Agent v7
+## Recommended solution: Upgrade your Agent
 
 **Datadog strongly recommends upgrading to Agent v7** as the best long-term solution. Agent v7 provides:
-- Automatic certificate management (no manual intervention needed)
-- Ongoing security updates and bug fixes
-- Improved performance and new features
+- Automatic certificate management
+- Ongoing security updates and new features
 - Long-term support
 
-Agent v5 has reached end-of-life and no longer receives updates. See the [Agent upgrade documentation][1] for migration guidance.
+Alternatively, you can consider upgrading to **Agent v6**, which is unaffected by this certificate update.
+
+See the [Agent upgrade documentation][1] for migration guidance.
+
+**Note**: Agent v5 architecture depends on some upstream components that are past their end-of-life (for example, Python 2). Upgrading your hosts to Agent v7 is the recommended path forward wherever possible.
 
 ## Alternative solution: Update certificates
+
+If you are unable to upgrade to an unaffected Agent version before April 20, 2026, you can update the Agent v5 certificates without upgrading your Agent version using the automated scripts below.
 
 ### Automated solution
 
@@ -57,7 +66,7 @@ Both scripts perform the following steps automatically:
 {{< tabs >}}
 {{% tab "Linux" %}}
 #### Requirement
-- Have `curl` installed
+- Have `curl` installed.
 
 ```bash
 # Download the script
@@ -68,15 +77,20 @@ chmod +x linux.sh
 
 # Run with sudo
 sudo ./linux.sh
+
+# Optional: If your Datadog Agent is installed in a custom directory, 
+# you can specify it using the -p flag.
+# sudo ./linux.sh -p <agent_directory>
+# Default path: /opt/datadog-agent/agent
 ```
 
 {{% /tab %}}
 
 {{% tab "Windows" %}}
 #### Requirement
-- Have `wget` installed
+- PowerShell v3 or later
 
-**Note**: Windows Agent versions below v5.37.3 cannot use the OS certificate store fallback. If you are running a version below v5.37.3, Datadog recommends upgrading to Agent v7.
+**Note**: If you do not meet the PowerShell requirement, proceed with the [manual instructions](#manual-solution) below. Windows Agent versions below v5.32.3 cannot use the OS certificate store fallback. If you are running a version below v5.32.3, Datadog recommends upgrading to Agent v7.
 
 ```powershell
 # Download the script (run as Administrator)
@@ -84,6 +98,16 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/maste
 
 # Run the script
 .\windows.ps1
+
+# Optional: You can specify a custom Agent directory using 
+# either the -AgentDirectory or -p parameter.
+# .\windows.ps1 -AgentDirectory "D:\Custom\Datadog Agent"
+# .\windows.ps1 -p "D:\Custom\Datadog Agent"
+#
+# Default paths:
+# On 64-bit systems running Agent v5.12+: C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem
+# On 64-bit systems running Agent v5.11-: C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem
+# On 32-bit systems running Agent v5.11-: C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -105,9 +129,9 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/maste
 
 ## Important considerations
 
-### Operating system support
+### End-of-life operating systems
 
-The `use_curl_http_client` fallback mechanism uses your operating system's certificate store. **If your operating system is end-of-life and no longer receives security updates**, the OS certificate store may not contain the necessary certificates, and connectivity issues may persist. In this case, upgrade your OS or migrate to Agent v7.
+The `use_curl_http_client` fallback mechanism uses your operating system's certificate store. **If your operating system no longer receives security updates**, the certificate update may not resolve connectivity issues. In this case, Datadog recommends upgrading your operating system and/or migrating to Agent v7.
 
 ## Troubleshooting
 

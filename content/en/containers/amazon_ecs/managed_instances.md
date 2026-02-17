@@ -19,6 +19,10 @@ further_reading:
       text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 ---
 
+{{< callout btn_hidden="true" header="ECS Managed Instances is in Preview">}}
+Amazon ECS Managed Instances monitoring is in Preview.
+{{< /callout >}}
+
 Datadog Container Monitoring enables visibility into applications running on [Amazon ECS Managed Instances][29].
 
 ### How it works
