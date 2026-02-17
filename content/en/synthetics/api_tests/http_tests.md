@@ -280,6 +280,7 @@ The test **passes** because `status` exists and `status.indicator` is `"none"`.
 
 For more information on `should()`, see the [Chai should() documentation][23].
 
+[20]: https://www.chaijs.com/api/
 [21]: https://www.chaijs.com/api/assert/#method_include
 [22]: https://www.chaijs.com/guide/styles/#expect
 [23]: https://www.chaijs.com/guide/styles/#should
