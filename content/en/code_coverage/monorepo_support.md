@@ -141,7 +141,7 @@ gates:
         - "@DataDog/api-*"
 {{< /code-block >}}
 
-Gates defined in the YAML file work alongside gates configured in the Datadog UI. See [Configuration][8] for the full YAML gate syntax and additional examples.
+Gates defined in the YAML file and in the Datadog UI are both evaluated when a pull request is opened or updated. See [PR Gates configuration instructions][8] for the complete YAML syntax and additional examples.
 
 ### How service and code owner gates work
 
