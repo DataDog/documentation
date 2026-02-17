@@ -95,13 +95,13 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI, Azure OpenAI, Vertex AI, or Anthropic models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
 
-For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
+For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
 
 For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
@@ -251,7 +251,7 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 {{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the **Boolean** output type.
-   <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
+   <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
 
 2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
 
