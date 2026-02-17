@@ -19,7 +19,9 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
 3. **Configure notifications**.
    
-   Under **Notify users**, select your notification recipients and frequency. The notification email summarizes the control detections identified and unresolved, with a link back to the Governance Console control to review and mitigate.
+   Under **Notify users**, select your notification recipients and frequency. The notification email summarizes identified and unresolved control detections and includes a link back to the Governance Console control to review and mitigate.
+   
+
 
 4. **Configure automatic enforcement**.
 
