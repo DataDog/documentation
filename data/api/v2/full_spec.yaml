@@ -102883,7 +102883,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserTeamResponse'
-          description: Represents a user's association to a team
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
