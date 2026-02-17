@@ -82,7 +82,7 @@ print(f"View dataset: {dataset.url}")
 {{% tab "From production traces" %}}
 Add production traces to datasets manually through the UI or automatically with Automations.
 
-**Manual selection (UI):**
+**Manual selection (UI)**:
 1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces) (You can also add a new Automation from [Settings > Automations](https://app.datadoghq.com/llm/settings/automations) )
 2. Find a trace you want to include in a dataset
 3. Click **Add to Dataset** 
