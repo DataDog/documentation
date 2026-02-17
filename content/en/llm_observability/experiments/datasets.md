@@ -89,7 +89,7 @@ Add production traces to datasets manually through the UI or automatically with 
 4. Choose an existing dataset or create a new one.
 5. The trace's input, output, and metadata are automatically extracted.
 
-**Automatic routing (Automations):**
+**Automatic routing (Automations)**:
 
 Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention. Automation rules apply only to new traces generated after the rule is created, not to existing historical traces. 
 
