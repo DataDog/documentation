@@ -444,6 +444,11 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Create tag pipeline ruleset returns \"OK\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_1897535856",
+      "description": "Create tag pipeline ruleset with if_tag_exists returns \"OK\" response"
     }
   ],
   "UpdateCostAWSCURConfig": [
@@ -479,6 +484,11 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update tag pipeline ruleset returns \"OK\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_1964644735",
+      "description": "Update tag pipeline ruleset with if_tag_exists returns \"OK\" response"
     }
   ],
   "UploadCustomCostsFile": [
@@ -1200,6 +1210,13 @@
       "group": "network_device_monitoring",
       "suffix": "",
       "description": "Update the tags for a device returns \"OK\" response"
+    }
+  ],
+  "UpdateInterfaceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for an interface returns \"OK\" response"
     }
   ],
   "CreatePipeline": [
@@ -2095,6 +2112,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update a team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update a user's membership attributes on a team returns \"OK\" response"
     }
   ],
   "UpdateTeamPermissionSetting": [
