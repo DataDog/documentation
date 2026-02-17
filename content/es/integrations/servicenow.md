@@ -343,19 +343,19 @@ La [tabla de referencia][18] se rellenará con los datos de la consulta poco des
 
 ## Configuración de ITOM e ITSM
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración Case Management no es compatible con el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La integración Incident Management no es compatible con el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Las notificaciones de monitor en formato de plantilla no son compatibles con el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}

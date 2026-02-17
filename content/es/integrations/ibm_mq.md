@@ -27,7 +27,7 @@ categories:
 - recopilación de logs
 - colas de mensajes
 - la red
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: ibm_mq
 integration_id: ibm-mq
 integration_title: IBM MQ
-integration_version: 6.4.0
+integration_version: 8.2.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_mq
@@ -186,7 +186,7 @@ Cada vez que se produce una actualización del Agent, estos archivos se borran y
 
 De manera alternativa, si utilizas Linux, asegúrese de que el conector del tiempo de ejecución pueda encontrar las bibliotecas una vez instalado el Cliente de MQ. Por ejemplo, con ldconfig:
 
-Pon la localización de la biblioteca en un archivo de configuración ld.
+Pon la localización de la librería en un archivo de configuración ld.
 
 ```shell
 sudo sh -c "echo /opt/mqm/lib64 > /etc/ld.so.conf.d/mqm64.conf"
@@ -207,6 +207,13 @@ Configura la variable de entorno `MQ_FILE_PATH` de modo que apunte hacia el dire
 ### Permisos y autenticación
 
 Hay muchas formas de configurar los permisos en IBM MQ. Dependiendo de cómo funcione tu configuración, crea un usuario `datadog` dentro de MQ con permisos de solo lectura y, de manera opcional, permisos `+chg`. Se requieren permisos `+chg` para recopilar métricas de [estadísticas de cola de restablecimiento][6] (`MQCMD_RESET_Q_STATS`). Si no quieres recopilar estas métricas, puedes deshabilitar `collect_reset_queue_metrics` en la configuración. La recopilación de datos de rendimiento de las estadísticas de cola de restablecimiento también restablecerá los datos de rendimiento.
+
+El siguiente ejemplo define los permisos necesarios en el gestor de colas `QM1` para el grupo `mqclient`, el grupo que el usuario `datadog` está utilizando para ejecutar comandos. Puedes utilizar comodines para conceder permisos a varias colas a la vez.
+
+```shell
+setmqaut -m QM1 -n SYSTEM.ADMIN.COMMAND.QUEUE -t queue -g mqclient +dsp +inq +get +put
+setmqaut -m QM1 -n SYSTEM.MQEXPLORER.REPLY.MODEL -t queue -g mqclient +dsp +inq +get +put
+```
 
 **Nota**: "Queue Monitoring" (Monitorización de cola) debe estar habilitado en el servidor de MQ y configurado como mínimo en "Medium" (Intermedio). Esto se puede hacer mediante la interfaz de usuario de MQ o con un comando `mqsc` en el host del servidor:
 
@@ -233,7 +240,7 @@ All valid MQSC commands were processed.
 
 #### Host
 
-Para configurar este check para un Agent que se ejecuta en un host, haz lo siguiente:
+A fin de configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
@@ -246,23 +253,23 @@ Para configurar este check para un Agent que se ejecuta en un host, haz lo sigui
    - `port`: el puerto que IBM MQ ha expuesto.
    - `convert_endianness`: debes habilitar esta opción si tu servidor de MQ se ejecuta en AIX o IBM i.
 
-    Si utilizas una configuración de nombre de usuario y contraseña, puedes definir `username` y `password`. Si no defines ningún nombre de usuario, se utiliza el del propietario de procesos del Agent (`dd-agent`).
+   Si utilizas una configuración de nombre de usuario y contraseña, puedes definir `username` y `password`. Si no defines ningún nombre de usuario, se utiliza el del propietario de procesos del Agent (`dd-agent`).
 
-    **Nota**: El check solo monitoriza las colas que defines con el parámetro `queues`.
+   **Nota**: El check solo monitoriza las colas que defines con el parámetro `queues`.
 
-    ```yaml
-    queues:
-      - APP.QUEUE.1
-      - ADMIN.QUEUE.1
-    ```
+   ```yaml
+   queues:
+     - APP.QUEUE.1
+     - ADMIN.QUEUE.1
+   ```
 
 2. [Reinicia el Agent][2].
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+_Disponible para la versión 6.0 o posterior del Agent_
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent; habilítala en el archivo `datadog.yaml`:
+1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -287,11 +294,11 @@ _Disponible para las versiones del Agent a partir de la 6.0_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+{{% tab "Contenedores" %}}
 
-#### Contenedores
+#### En contenedores
 
-En el caso de los entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican abajo.
+En el caso de los entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 ##### Recopilación de métricas
 
@@ -303,7 +310,7 @@ En el caso de los entornos en contenedores, consulta las [Plantillas de integrac
 
 ##### Recopilación de logs
 
-_Disponible para las versiones del Agent a partir de la 6.0_
+_Disponible para la versión 6.0 o posterior del Agent_
 
 La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
 
@@ -313,8 +320,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 
 [1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/es/agent/kubernetes/log/
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 ### Validación
 
@@ -334,9 +340,10 @@ IBM MQ no incluye eventos.
 {{< get-service-checks-from-git "ibm_mq" >}}
 
 
-## Solucionar problemas
+## Resolución de problemas
 
 ### Advertencia de permiso MQRC_NOT_AUTHORIZED de las estadísticas de cola de restablecimiento
+
 Si recibes la siguiente advertencia:
 
 ```
@@ -344,34 +351,36 @@ Warning: Error getting pcf queue reset metrics for SAMPLE.QUEUE.1: MQI Error. Co
 ```
 
 Esto se debe a que el usuario `datadog` no tiene el permiso `+chg` para recopilar las métricas de cola de restablecimiento. Para solucionarlo, puedes otorgar permisos `+chg` al usuario `datadog` [mediante `setmqaut`][8] y recopilar las métricas de cola de restablecimiento, o bien puedes deshabilitar `collect_reset_queue_metrics`:
+
 ```yaml
-    collect_reset_queue_metrics: false
+collect_reset_queue_metrics: false
 ```
 
 ### Utilización de recursos elevada
+
 El check de IBM MQ realiza consultas en el servidor, y a veces estas consultas pueden ser costosas y provocar una degradación en el check.
 
 Si observas que el check tarda demasiado en ejecutarse o que consume muchos recursos de tu host,
 puedes reducir potencialmente el contexto del check al intentar lo siguiente:
 
-* Si utilizas `auto_discover_queues`, prueba usar `queue_patterns` o `queue_regex` en su lugar para descubrir solo determinadas colas. Esto es especialmente importante si tu sistema crea colas dinámicas.
-* Si utilizas el autodescubrimiento de colas con `queue_patterns` o `queue_regex`, intenta ajustar el patrón o regex para que coincida con _menos_ colas.
-* Deshabilita `auto_discover_channels` si tienes demasiados canales.
-* Deshabilita `collect_statistics_metrics`.
+- Si utilizas `auto_discover_queues`, prueba usar `queue_patterns` o `queue_regex` en su lugar para descubrir solo determinadas colas. Esto es especialmente importante si tu sistema crea colas dinámicas.
+- Si utilizas el autodescubrimiento de colas con `queue_patterns` o `queue_regex`, intenta ajustar el patrón o regex para que coincida con _menos_ colas.
+- Deshabilita `auto_discover_channels` si tienes demasiados canales.
+- Deshabilita `collect_statistics_metrics`.
 
 ### Errores en los logs
-* `Unpack for type ((67108864,)) not implemented`: si ves errores como éste y tu servidor de MQ se ejecuta en un sistema operativo de IBM, habilita `convert_endianness` y reinicia el Agent.
+
+- `Unpack for type ((67108864,)) not implemented`: si ves errores como éste y tu servidor de MQ se ejecuta en un sistema operativo de IBM, habilita `convert_endianness` y reinicia el Agent.
 
 ### Advertencias en los logs
-* `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: si ves mensajes como este, es porque la integración está intentando recopilar métricas de una cola que no existe. Esto puede deberse a una configuración incorrecta o, si utilizas `auto_discover_queues`, la integración puede descubrir una [cola dinámica][9] y luego, cuando intenta recopilar sus métricas, la cola ya no existe. En este caso, puedes mitigar el problema al definir `queue_patterns` o `queue_regex` más estrictos, o simplemente ignorar la advertencia.  
 
+- `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: si ves mensajes como este, es porque la integración está intentando recopilar métricas de una cola que no existe. Esto puede deberse a una configuración incorrecta o, si estás utilizando `auto_discover_queues`, la integración puede detectar una [cola dinámica][9] y luego, cuando intenta recopilar sus métricas, la cola ya no existe. En este caso, puedes mitigar el problema proporcionando `queue_patterns` o `queue_regex` más estrictos, o simplemente puedes ignorar la advertencia.
 
 ### Otro
 
 ¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
 
-
-## Referencias adicionales
+## Para leer más
 
 Más enlaces, artículos y documentación útiles:
 

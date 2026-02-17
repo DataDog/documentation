@@ -12,7 +12,7 @@ author:
   vendor_id: performetriks
 categories:
 - marketplace
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -79,7 +79,7 @@ tile:
   uninstallation: README.md#Desinstalación
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -107,15 +107,15 @@ Los errores de configuración de la monitorización pueden ser difíciles de det
 
 Hoy en día, todo gira en torno a la monitorización como código. Composer le permite a tu equipo almacenar parámetros de monitorización en tus repositorios de código, realizar un seguimiento de los cambios y cargar estos parámetros en entornos Datadog existentes o nuevos.
 
-## Soporte
+## Ayuda
 
 Para solicitar asistencia o funciones, ponte en contacto con Performetriks a través del siguiente canal:
 
 - Correo electrónico: [composer@performetriks.com][2]
 
-### Leer más
+### Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
 - [Almacenar y gestionar configuraciones de Datadog como código con la oferta de Performetriks en el Marketplace de Datadog][3]
 
@@ -124,4 +124,4 @@ Más enlaces, artículos y documentación útiles:
 [3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
 
 ---
-Esta aplicación está disponible a través del Marketplace y cuenta con el soporte de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">adquiere esta aplicación en el Marketplace</a>.

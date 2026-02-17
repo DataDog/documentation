@@ -120,5 +120,5 @@ You can use the `Press Key` action to select the appropriate options. For exampl
 
 [1]: https://developers.google.com/web/fundamentals/web-components/shadowdom
 [2]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#basic_usage
-[3]: /synthetics/browser_tests/actions#type-text
+[3]: /synthetics/browser_tests/test_steps#type-text
 

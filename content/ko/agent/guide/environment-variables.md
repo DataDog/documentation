@@ -15,7 +15,7 @@ further_reading:
 title: Agent  환경 변수
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Agent v5인 경우 Docker Agent GitHub 리포지토리</a>를 참조하세요.
 </div>
 

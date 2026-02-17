@@ -39,7 +39,7 @@ Para empezar, sigue las [instrucciones de instalación][1] para recopilar las m�
 
 Datadog Serverless Monitoring utiliza una biblioteca de Datadog Lambda específica del tiempo de ejecución, junto con la extensión Datadog Lambda, para enviar la telemetría de las funciones de Lambda.
 
-La extensión Datadog Lambda recopila logs a través de CloudWatch, además de trazas, métricas mejoradas y métricas personalizadas de la biblioteca de Datadog Lambda.
+La extensión Datadog Lambda recopila logs a través de CloudWatch, además de trazas, métricas mejoradas y métricas personalizadas de la librería de Datadog Lambda.
 
 ## Uso
 

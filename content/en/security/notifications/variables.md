@@ -93,7 +93,7 @@ The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, fo
 
 ## Attribute variables
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HIPAA-enabled Datadog organizations have access to only <a href="#template-variables">template variables</a> for security notifications. Attribute variables are not supported.
 </div>
 

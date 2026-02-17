@@ -8,65 +8,27 @@ further_reading:
 ---
 ## Overview
 
-[Datadog Dashboards][1] enable you to efficiently monitor your infrastructure and integrations by displaying and tracking key metrics. Datadog provides a set of out-of-the-box dashboards for many features and integrations. You can access these by viewing your [Dashboard List][12].
+This page provides steps for creating an out-of-the-box (OOTB) integration dashboard in Datadog and best practices to follow during the creation process.
 
-If you have [created a Datadog integration][2], you must create an out-of-the-box dashboard to help your integration's users more quickly find value in your integration. This guide provides steps for creating an integration dashboard and best practices to follow during the creation process.
+[Datadog Dashboards][1] enable you to monitor your infrastructure and integrations by displaying and tracking key metrics. Datadog provides a set of OOTB dashboards for many features and integrations. You can access these by viewing your [Dashboard List][12].
 
-To create a Datadog integration, see [Create an Agent Integration][2].
+If you have [created a Datadog integration][2], you must create an out-of-the-box dashboard to help your integration's users find value in your integration.
 
 ## Create an integration dashboard
 
 ### Create a dashboard
 
-In Datadog, from the [**Dashboard List**][12], click **+ New Dashboard**.
+In your Datadog sandbox, from the [**Dashboard List**][12], click **New Dashboard**.
 
 {{< img src="dashboards/create_dashboard.png" alt="Create a dashboard for your integration" width="80%">}}
 
 [Follow the best practices in this guide](#follow-dashboard-best-practices) when adding elements to your dashboard.
 
-### Export your dashboard
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-Export your dashboard to JSON by clicking the **Share** or **Configure** icon and selecting **Export dashboard JSON**.
+### Upload your dashboard
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **import dashboard** to choose from a list of available dashboards. You can select up to 10 dashboards to include with your integration.
 
 {{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="Click the Share icon and Export dashboard JSON to export your dashboard as a JSON file" width="100%">}}
 
-Name the file according to your dashboard title: for example, `your_integration_name_overview.json`.
-
-Save this file to your integration's `assets/dashboards` folder. Add the asset to your `manifest.json` file. See [Integrations Assets Reference][101] for more information about your integration's file structure and manifest file.
-
-[101]: /developers/integrations/check_references/#manifest-file
-
-{{% /tab %}}
-{{% tab "Programmatically" %}}
-
-- Ensure you have installed the [Datadog Agent Integration Developer tool][103] (`ddev`).
-- Ensure you have set an `api_key` and `app_key` for the organization that contains your dashboard in the [`ddev` configuration file][101].
-
-Run the [`ddev meta dash export` command][102] with the `--extras` or `-e` flag to export the dashboard definition: 
-
-```shell
-ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
-```
-
-Name the file according to your dashboard title.
-
-This command adds the dashboard definition to your integration's `manifest.json` file. You can find the dashboard JSON file in your integration's `assets/dashboards` folder. 
-
-**Note:** The dashboard is available at the following address `/dash/integration/<DASHBOARD_KEY>` in each region. The `<DASHBOARD_KEY>` matches what is in your dashboard's `manifest.json` file. You can swap this value when you want to add a link to another dashboard inside your dashboard.
-
-[101]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-config
-[102]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-meta-dash-export
-[103]: /developers/integrations/python/
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Open a pull request
-
-For the [`integrations-extras` GitHub repository][13] and open a pull request (PR) to add your dashboard JSON file and updated manifest file to the corresponding integration folder. Datadog reviews all `integration-extras` PRs. Once approved, Datadog merges the PR and your integration dashboard is pushed to production.
 
 ### Verify your dashboard in production
 

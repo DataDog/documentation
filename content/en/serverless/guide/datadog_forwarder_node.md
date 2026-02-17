@@ -5,7 +5,7 @@ title: Instrumenting Node.js Serverless Applications Using the Datadog Forwarder
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/nodejs">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
@@ -28,10 +28,10 @@ Install the Datadog CLI with NPM or Yarn:
 
 ```sh
 # NPM
-npm install -g @datadog/datadog-ci
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
 
 # Yarn
-yarn global add @datadog/datadog-ci
+yarn global add @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
 ```
 
 ### Instrument
@@ -254,7 +254,7 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 [Configure the layers][8] for your Lambda function using the ARN in the following format.
 
 ```
-# For us,us3,us5,eu, and ap1 regions
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
 # For us-gov regions

@@ -1,5 +1,6 @@
 ---
 title: Agent Configuration Files
+description: "Guide to Datadog Agent configuration file locations, structure, and how to configure checks and integrations."
 aliases:
   - /agent/faq/agent-configuration-files
   - /agent/guide/agent-configuration-files

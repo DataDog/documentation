@@ -53,7 +53,7 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="count unique クエリパラメーターがハイライトされた時系列グラフの構成ページ" style="width:80%;">}}
 
-<div class="alert alert-warning">ログベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。</div>
+<div class="alert alert-danger">ログベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。</div>
 
 ### ログベースのメトリクスを更新する
 

@@ -1,9 +1,9 @@
 ---
 title: Define Services And Track UI Components In Your Browser Application
-
+description: "Organize large browser applications by defining services and tracking UI components for better team ownership and troubleshooting."
 disable_toc: false
 further_reading:
-- link: "/real_user_monitoring/browser/"
+- link: "/real_user_monitoring/application_monitoring/browser/"
   tag: "Documentation"
   text: "RUM Browser Monitoring"
 ---
@@ -44,34 +44,41 @@ Once timings are captured, they are available like any auto-collected timing. Yo
 
 If your browser application uses UI components that are present across multiple pages in one application and/or across multiple applications, you can use custom instrumentation to track the usage and rendering time of these components across pages.
 
-[Generate a custom action][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both use the search box component below.
+[Generate a custom vital][7] to track the lifecycle of components across pages. Let's imagine the `/myorders` page and the `/search` page both use the search box component below.
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-autofill.jpg" alt="Generate a custom action to track the lifecycle of components across pages" style="width:30%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-autofill.jpg" alt="Generate a custom vital to track the lifecycle of components across pages" style="width:30%;">}}
 
-You can track the following milestones in the lifecycle of the search component by sending a custom action every time:
+You can track the following milestones in the lifecycle of the search component by sending a custom vital every time:
 
 - `search_component_render`: The search component renders
 - `search_component_input`: The search component gets input from the user keyboard
 - `search_component_suggestions_display`: The search component displays suggestions
 
-The custom action then automatically carries attributes for:
+The custom vital then automatically carries attributes for:
 
 - The RUM application it was used in
 - `@view`: The page it was rendered in
 - `@geo`: Geolocation information (if enabled)
 - `@session`: The session identifier of the user
 
-With custom instrumentation, the custom action can be assigned attributes for:
+For example, with custom instrumentation, the custom vital can be assigned attributes for:
 
 - The team it belongs to
 - The time it took to render
+- Additional context like suggested items
 
-```
-datadogRum.addAction('search_component_render', {
-    'team': 'Team A', // for example, 42.12
-    'time_to_full_render': 16.5, // for example, ['tomato', 'strawberries']
+```javascript
+window.DD_RUM.startDurationVital('search_component_render', {
+    context: {
+        'team': 'Team A',
+        'suggested_items': ['tomato', 'strawberries']
+    }
 })
+// ... component renders ...
+window.DD_RUM.stopDurationVital('search_component_render')
 ```
+
+The time it took to render is automatically calculated and available at `@vital.duration`.
 
 From the RUM Explorer, you can then analyze:
 
@@ -80,6 +87,8 @@ From the RUM Explorer, you can then analyze:
 - The P75 percentile for the time for the component to fully render
 
 ## Track team ownership
+
+You can use [view-based ownership][11] to automatically assign teams to RUM views based on service names, enabling teams to filter and monitor their specific areas of responsibility directly in the RUM Applications Overview page.
 
 ### Teams own a set of pages
 
@@ -102,28 +111,29 @@ Get insights into the performance or the adoption of a given team's scope by usi
    - Errors by service
    - Pageviews by service
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-5.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ### Teams own UI components
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-2.png" alt="Components can be tracked using custom actions" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-2.png" alt="Components can be tracked using custom vitals" style="width:90%;">}}
 
-Components are tracked using custom actions [mentioned above][10]:
+Components are tracked using custom vitals [mentioned above][10]:
 
-1. Add a team attribute inside the custom action definition.
-2. Track the loading time and other timings during the component's lifecycle as attributes in the custom actions.
+1. Add a team attribute inside the custom vital definition.
+2. Track the loading time and other timings during the component's lifecycle as attributes in the custom vitals.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/browser/setup/
-[3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
-[6]: /real_user_monitoring/browser/monitoring_page_performance/#overview
-[7]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
+[3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[5]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
+[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#overview
+[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#measure-component-level-performance-with-custom-vitals
+[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages
+[11]: /real_user_monitoring/ownership_of_views/

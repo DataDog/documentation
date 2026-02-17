@@ -8,7 +8,7 @@ title: プロジェクト
 ---
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
@@ -36,7 +36,7 @@ Find projects within your organization in the **Projects** view in the left navi
 
 ## Delete a project
 
-<div class="alert alert-warning">Deleted cases cannot be recovered.</div>
+<div class="alert alert-danger">Deleted cases cannot be recovered.</div>
 
 プロジェクトの削除は、プロジェクトの Settings ページから行えます。
 

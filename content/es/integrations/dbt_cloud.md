@@ -110,7 +110,7 @@ La integración de Datadog con [dbt Cloud][1] te permite recopilar y visualizar 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "dbt_cloud" >}}
+{{< get-metrics-from-git "dbt-cloud" >}}
 
 
 ### Checks de servicios

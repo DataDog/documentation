@@ -125,7 +125,7 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
 
 2. 下記のコンフィギュレーションを追加して、Airflow コンフィギュレーションファイル `airflow.cfg` を更新します。
 
-   <div class="alert alert-warning"> `statsd_datadog_enabled` を true に設定しないでください。`statsd_datadog_enabled` を有効にすると、競合が発生する可能性があります。問題を防ぐには、この変数を `False` に設定してください。</div>
+   <div class="alert alert-danger"> `statsd_datadog_enabled` を true に設定しないでください。`statsd_datadog_enabled` を有効にすると、競合が発生する可能性があります。問題を防ぐには、この変数を `False` に設定してください。</div>
 
    ```conf
    [scheduler]

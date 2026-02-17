@@ -1,5 +1,6 @@
 ---
 title: Monitoring Kafka Queues
+description: Learn how to monitor Kafka queues with APM tracing to track message processing, performance, and data flow through your messaging systems.
 
 further_reading:
 - link: "/tracing/trace_collection"

@@ -2,7 +2,7 @@
 title: Graphiques rapides
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Les graphiques rapides sont actuellement disponibles en version bêta.
 </div>
 

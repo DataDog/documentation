@@ -1,5 +1,6 @@
 ---
 title: Adjusting No Data alerts for metric Monitors
+description: "Configure No Data alerts properly for metrics with irregular reporting patterns, delays, or backfilled data from cloud integrations."
 aliases:
   - /monitors/faq/why-am-i-getting-so-many-no-data-alerts/
   - /monitors/faq/why-am-i-getting-so-many-no-data-alerts-for-my-metric-monitor/

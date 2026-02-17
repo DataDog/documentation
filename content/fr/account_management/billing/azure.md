@@ -12,7 +12,7 @@ Lʼintégration Azure collecte des métriques pour toutes les autres ressources 
 
 ## Exclure des machines virtuelles Azure
 
-Utilisez le carré d'intégration Datadog/Azure pour filtrer vos machines virtuelles surveillées par Datadog. Accédez à l'onglet Configuration et modifiez une Inscription d'application existante ou ajoutez-en une autre. Chaque filtre est contrôlé via l'option « Optionally limit metrics collection to hosts with tag: ».
+Utilisez le carré d'intégration Datadog/Azure pour filtrer vos machines virtuelles surveillées par Datadog. Accédez à l'onglet Metric Collection et modifiez une Inscription d'application existante ou ajoutez-en une autre. Chaque filtre est contrôlé via l'option « Optionally limit metrics collection to hosts with tag: ».
 
 Lorsque vous appliquez des limites à des locataires Azure existants depuis le carré d'intégration, les machines virtuelles précédemment identifiées peuvent rester dans la liste d'infrastructures jusqu'à 2 heures. Durant cette période de transition, les machines virtuelles affichent le statut `???`. Elles ne sont pas prises en compte dans votre facture.
 
@@ -38,5 +38,5 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [2]: /fr/getting_started/tagging/using_tags/#integrations
 [3]: /fr/infrastructure/
 [4]: /fr/account_management/billing/custom_metrics/?tab=countrate
-[5]: /fr/integrations/azure#configuration
+[5]: /fr/integrations/azure#data-collected
 [6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported

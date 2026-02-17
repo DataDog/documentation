@@ -101,7 +101,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 ## Real User Monitoring
 
 ### Analyse d'entonnoirs
-{{< get-metrics-from-git "grpc_check" >}}
+{{< get-metrics-from-git "grpc-check" >}}
 
 
 ### Aide
@@ -109,7 +109,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 L'intégration grpc_check n'inclut aucun événement.
 
 ### Aide
-{{< get-service-checks-from-git "grpc_check" >}}
+{{< get-service-checks-from-git "grpc-check" >}}
 
 
 ## Aide

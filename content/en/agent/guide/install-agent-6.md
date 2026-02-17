@@ -1,9 +1,9 @@
 ---
 title: Install Datadog Agent 6
 further_reading:
-- link: "/agent/basic_agent_usage/"
+- link: "agent/"
   tag: "Documentation"
-  text: "Basic Agent Usage"
+  text: "The Datadog Agent"
 private: true  
 ---
 
@@ -777,7 +777,7 @@ If the one-step installation command does not work, it's possible that your syst
 
 If CGroups are enabled, but the check is failing because of an unexpected `cgroup` directory location:
 1. Run `mount | grep "cgroup type tmpfs"` to retrieve the location of the `cgroup` directory.
-1. Replace the first occurence of `/sys/fs/cgroup` in the one-step installation command with the location of the `cgroup` directory.
+1. Replace the first occurrence of `/sys/fs/cgroup` in the one-step installation command with the location of the `cgroup` directory.
 
 ### Send custom metrics with DogStatsD
 

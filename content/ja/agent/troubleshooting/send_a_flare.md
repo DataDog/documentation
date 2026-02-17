@@ -15,7 +15,7 @@ title: Agent フレア
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Agent Flare の送信はこのサイトではサポートされていません。</div>
+<div class="alert alert-danger">Agent Flare の送信はこのサイトではサポートされていません。</div>
 {{< /site-region >}}
 
 フレアを使用すると、必要なトラブルシューティング情報を Datadog のサポートチームに送信できます。

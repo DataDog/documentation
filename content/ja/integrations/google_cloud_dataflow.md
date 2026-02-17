@@ -1,4 +1,28 @@
 ---
+app_id: google-cloud-dataflow
+app_uuid: 27fcc215-6351-4e39-8320-19fe03ed7634
+assets:
+  dashboards:
+    google_cloud_dataflow: assets/dashboards/google_cloud_dataflow.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.dataflow.job.total_vcpu_time
+      metadata_path: metadata.csv
+      prefix: gcp.dataflow.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 265
+    source_type_name: Google Cloud Dataflow
+  monitors:
+    Job backlog time is high: assets/monitors/backlog_monitor.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - google cloud
@@ -6,6 +30,7 @@ categories:
 custom_kind: インテグレーション
 dependencies: []
 description: Google Cloud Dataflow のキーメトリクスを追跡
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
 draft: false
 further_reading:
@@ -18,16 +43,33 @@ integration_id: google-cloud-dataflow
 integration_title: Google Cloud Dataflow
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 monitors:
   Job backlog time is high: assets/monitors/backlog_monitor.json
 name: google_cloud_dataflow
-public_title: Datadog-Google Cloud Dataflow インテグレーション
-short_description: Google Cloud Dataflow のキーメトリクスを追跡
+public_title: Google Cloud Dataflow
+short_description: リアル タイム処理と履歴データ処理の両方に対応し、データの変換とエンリッチメントを行うマネージド サービスです。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: リアル タイム処理と履歴データ処理の両方に対応し、データの変換とエンリッチメントを行うマネージド サービスです。
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/
+  support: README.md#Support
+  title: Google Cloud Dataflow
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Google Cloud Dataflow は、ストリーム (リアルタイム) モードとバッチ (履歴) モードのどちらでも、同等の信頼性と表現力でデータを変換し、強化することができる、フルマネージド型のサービスです。
@@ -42,7 +84,7 @@ Datadog Google Cloud インテグレーションを使用して、Google Cloud D
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### 収集データ
+### ログ収集
 
 Google Cloud Dataflow のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 

@@ -11,10 +11,10 @@ export function initializeGroupedListings() {
     const searchKeywords = url.searchParams.get('search');
     const form = document.getElementById('rules');
     let keyupTimeout;
-    let filters;
+    let filterButtons;
 
     if (controls) {
-       filters = controls.querySelectorAll('[data-ref="filter"]');
+       filterButtons = controls.querySelectorAll('[data-ref="filter"]');
     }
 
     // Returns array of results filtered by category and/or user search value
@@ -35,17 +35,12 @@ export function initializeGroupedListings() {
         return results;
     }
 
-    const activateButton = (activeButton, siblings) => {
-        if (activeButton && siblings) {
-            for (let i = 0; i < siblings.length; i++) {
-                const button = siblings[i];
-                button.classList[button.dataset.filter === activeButton.dataset.filter ? 'add' : 'remove']('active');
-            }
-        }
-
-        // enable all
-        allGroupHeaders.forEach(elm => {
-            elm.classList.add('active');
+    const setActiveCategoryFilterButton = (newCategoryFilter) => {
+        if (!filterButtons?.length) return;
+        
+        filterButtons.forEach(button => {            
+            const isActive = button.dataset.filter === newCategoryFilter;
+            button.classList.toggle('active', isActive);
         });
     }
 
@@ -103,11 +98,13 @@ export function initializeGroupedListings() {
             return;
 
         const searchValue = inputSearch.value.length >= 2 ? inputSearch.value.toLowerCase().trim() : '';
-        url.searchParams.set('category', event.target.dataset.filter)
+        const selectedCategory = event.target.dataset.filter;
+
+        url.searchParams.set('category', selectedCategory)
         window.history.pushState(null,'', url.toString())
         
-        const filtered = filterResults(event.target.dataset.filter, searchValue);
-        activateButton(event.target, filters);
+        const filtered = filterResults(selectedCategory, searchValue);
+        setActiveCategoryFilterButton(selectedCategory);
         showResults(filtered);
     }
     
@@ -154,10 +151,9 @@ export function initializeGroupedListings() {
         inputSearch.value = searchKeywords;
     }
     
-    const activeCategoryFilter = url.searchParams.get('category') || 'all';
-    const activeFilterButton = document.querySelector(`[data-filter="${activeCategoryFilter}"]`);
-    const filtered = filterResults(activeCategoryFilter, searchKeywords);
-    activateButton(activeFilterButton, filters);
+    const categoryFromUrl = url.searchParams.get('category') || 'all';
+    const filtered = filterResults(categoryFromUrl, searchKeywords);
+    setActiveCategoryFilterButton(categoryFromUrl);
     showResults(filtered);
 
 

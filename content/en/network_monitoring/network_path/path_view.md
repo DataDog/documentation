@@ -16,7 +16,7 @@ The Path View section in Network Path allows for detailed examination of a parti
 
 To access the path view page, click into a path from the [List view][2]. On this page, you have the ability to change the latency threshold colors, and view the status of each hop.
 
-{{< img src="network_performance_monitoring/network_path/path_view_3.png" alt="Path view in Network path highlighting a path selected from source to destination" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_view_4.png" alt="Path view in Network path highlighting a path selected from source to destination" >}}
 
 Click any path from the hop between the source to the destination to observe additional details such as `Hop TTL`, `Hop Latency`, and `Traversed count`. Then, click **View Device Details** to navigate to the Device details in [NDM][3] for the selected device.
 
@@ -48,7 +48,7 @@ Drag the latency reachability health bar to observe a snapshot of the end-to-end
 
 **Note**: Changing the health bar does not affect the global time range at the top of the page.
 
-{{< img src="network_performance_monitoring/network_path/latency_health_bar_2.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
+{{< img src="network_performance_monitoring/network_path/latency_health_bar_3.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
 
 ## Graphs
 
@@ -66,7 +66,7 @@ The end-to-end metrics graph presents a visual representation of both the end-to
 The hop-to-hop latency graph provides a detailed view of the latency for each hop along the path, making it easier to identify potential bottlenecks or problem areas.
 
 
-{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_2.png" alt="Path view page showing the hop-to-hop-latency graph." >}}
+{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_3.png" alt="Path view page showing the hop-to-hop-latency graph." >}}
 
 ## Further Reading
 

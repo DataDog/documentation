@@ -42,7 +42,7 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure_redis_cache" >}}
+{{< get-metrics-from-git "azure-redis-cache" >}}
 
 
 ### Eventos

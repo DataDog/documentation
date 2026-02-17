@@ -1,5 +1,6 @@
 ---
 title: Customize your visualizations with unit override
+description: Override default metric and event units to customize how data is displayed and formatted in dashboard visualizations.
 disable_toc: false
 further_reading:
 - link: "metrics/units/"

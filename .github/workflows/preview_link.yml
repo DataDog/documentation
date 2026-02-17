@@ -19,26 +19,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       with:
         fetch-depth: 0
         persist-credentials: false
 
     - name: Set up Python
-      uses: actions/setup-python@v5.1.0
+      uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
       with:
         python-version: '3.10'
     - run: pip install Mako docutils
 
+    # Branch Name Validation to be run prior to workflow
+    - name: Validate branch name and set output
+      id: validate
+      env:
+        BRANCH: ${{ github.head_ref }}
+      run: |
+        BRANCH="${{ env.BRANCH }}"
+        # Allow: letters, numbers, dots, hyphens, underscores, and forward slash
+        # This supports the required <name>/<description> format like "user.name/test-this-new-feature"
+        if [[ "$BRANCH" =~ ^[a-zA-Z0-9._/-]+$ ]] && [[ ${#BRANCH} -le 200 ]] && [[ "$BRANCH" == *"/"* ]]; then
+          echo "valid=true" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+        else
+          echo "valid=false" >> $GITHUB_OUTPUT
+          echo "::error::Invalid branch name detected. Branch names must contain a forward slash and only contain letters, numbers, dots, hyphens, underscores, and forward slashes (max 200 chars)"
+        fi
+
     - name: Find changed files
       id: changed_files
+      if: steps.validate.outputs.valid == 'true'
       uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
       with:
         include_all_old_new_renamed_files: true
 
     - name: Generate links
+      if: steps.validate.outputs.valid == 'true'
       env:
-        branch: ${{ github.head_ref }}
+        branch: ${{ steps.validate.outputs.branch }}
         DELETED_FILES: ${{ steps.changed_files.outputs.deleted_files }}
         RENAMED_FILES: ${{ steps.changed_files.outputs.renamed_files }}
         MODIFIED_FILES: ${{ steps.changed_files.outputs.modified_files }}
@@ -51,13 +70,15 @@ jobs:
         --added="${ADDED_FILES}"
 
     - name: Render template
+      if: steps.validate.outputs.valid == 'true'
       id: template
-      uses: chuhlomin/render-template@v1.9
+      uses: chuhlomin/render-template@a473db625a96c98e519d188812dc22bcaf54ffba # v1.9.0
       with:
         template: .github/preview-links-template.md
 
     - name: Find existing comment
-      uses: peter-evans/find-comment@v3.1.0
+      if: steps.validate.outputs.valid == 'true'
+      uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
       id: find_comment
       with:
         issue-number: ${{ github.event.pull_request.number }}
@@ -65,7 +86,8 @@ jobs:
         body-includes: "Preview links ("
 
     - name: Post comment
-      uses: peter-evans/create-or-update-comment@v4.0.0
+      if: steps.validate.outputs.valid == 'true'
+      uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
       with:
         issue-number: ${{ github.event.pull_request.number }}
         comment-id: ${{ steps.find_comment.outputs.comment-id }}

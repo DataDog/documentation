@@ -140,7 +140,7 @@ Cada vez que se ejecuta el comando `curl`, se envía una nueva traza a Datadog.
 
 1. En Datadog, ve a [**APM** > **Services**][3] (APM > Servicios). Deberías ver un servicio de Python llamado `hello`:
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="El Catálogo de software muestra el nuevo servicio Python." style="width:100%;" >}}
 
 1. Selecciona el servicio para ver tus métricas de rendimiento, como la latencia, el rendimiento y las tasas de error.
 1. Ve a [**APM** > **Traces**][4] (APM >Trazas). Deberías ver una traza para el servicio `hello`:
@@ -151,15 +151,15 @@ Cada vez que se ejecuta el comando `curl`, se envía una nueva traza a Datadog.
 
 ## Configuración avanzada de APM
 
-Hasta este punto, Datadog ha instrumentado automáticamente la aplicación `hello.py` mediante la instrumentación de un solo paso. Este enfoque es recomendado si deseas capturar trazas esenciales a través de bibliotecas y lenguajes comunes sin tocar código o instalar manualmente bibliotecas.
+Hasta este punto, Datadog ha instrumentado automáticamente la aplicación `hello.py` mediante la instrumentación de un solo paso. Este enfoque es recomendado si deseas capturar trazas esenciales a través de librerías y lenguajes comunes sin tocar código o instalar manualmente bibliotecas.
 
 Sin embargo, si necesitas recopilar trazas desde código personalizado o requieres un control más preciso, puedes añadir [Instrumentación personalizada][6].
 
-Para ilustrar esto, importarás la biblioteca de rastreo de Datadog Python en `hello.py` y crearás un tramo (span) y una etiqueta de tramo personalizados.
+Para ilustrar esto, importarás la librería de rastreo de Datadog Python en `hello.py` y crearás un tramo (span) y una etiqueta (tag) de tramo personalizados.
 
 Para añadir instrumentación personalizada:
 
-1. Instala la biblioteca de rastreo de Datadog:
+1. Instala la librería de rastreo de Datadog:
 
    ```shell
    pip install ddtrace

@@ -15,7 +15,7 @@ title: コンパイル済み言語のネイティブプロファイラーを有�
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> はベータ版です。Datadog では、本番環境にデプロイする前に重要でない環境でプロファイラーを評価することを推奨しています。
 </div>
 

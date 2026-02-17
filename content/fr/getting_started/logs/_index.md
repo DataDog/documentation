@@ -6,9 +6,18 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: Centre d'apprentissage
   text: Des analyses plus poussées grâce au traitement des logs
+- link: https://learn.datadoghq.com/courses/log-indexes
+  tag: Centre d'apprentissage
+  text: Gérer et surveiller les volumes de logs indexés
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: Centre d'apprentissage
+  text: Créer et gérer des pipelines de logs
+- link: https://learn.datadoghq.com/courses/integration-pipelines
+  tag: Centre d'apprentissage
+  text: Traiter les logs automatiquement avec les pipelines d'intégration
 - link: /logs/log_collection/
   tag: Documentation
-  text: Collecte de logs et intégrations
+  text: Collecte de log et intégrations
 - link: /getting_started/tagging/unified_service_tagging
   tag: Documentation
   text: Apprendre à configurer le tagging de service unifié
@@ -18,7 +27,7 @@ further_reading:
 title: Débuter avec les logs
 ---
 
-## Présentation
+## Section Overview
 
 Utilisez la fonction Datadog Log Management, également appelée logs, pour recueillir les logs issus de plusieurs sources de journalisation, comme votre serveur, votre conteneur, votre environnement Cloud, votre application ou vos processeurs et forwarders de logs existants. Avec un système de journalisation conventionnel, vous devez choisir les logs à analyser et à conserver afin de limiter les coûts. La fonctionnalité Logging without Limits* de Datadog vous permet de recueillir, traiter, archiver, explorer et surveiller vos logs sans limites de journalisation.
 
@@ -59,7 +68,7 @@ Pour commencer à recueillir des logs à partir d'un serveur :
 
     **Remarque** : si vous recueillez des logs à partir de fichiers personnalisés et avez besoin d'exemples pour les fichiers suivis, TCP/UDP, journald ou événements Windows, consultez la section [Collecte de logs personnalisés][9].
 
-### Container
+### Conteneur
 
 À partir de l'Agent Datadog v6, l'Agent peut recueillir des logs à partir de conteneurs. Chaque service de conteneurisation dispose d'instructions de configuration spécifiques en fonction de l'emplacement où l'Agent est déployé ou exécuté, ou encore de l'acheminement des logs.
 
@@ -95,13 +104,13 @@ Pour commencer à recueillir des logs à partir d'un service cloud, suivez les [
 
 Une fois qu'une source de journalisation est configurée, vos logs sont disponibles dans le [Log Explorer][16]. Cet explorateur vous permet de filtrer, d'agréger et de consulter vos logs.
 
-Par exemple, si vous souhaitez analyser en détail les logs d'un service donné, filtrez vos logs en fonction de `service`. Vous pouvez ensuite les filtrer en fonction de `status`, comme `ERROR`, puis sélectionner [Aggregate by Patterns][17] pour voir la partie de votre service qui génère le plus d'erreurs.
+Par exemple, si vous souhaitez analyser en détail les logs d'un service donné, filtrez vos logs en fonction de `service`. Vous pouvez ensuite les filtrer en fonction de `status`, comme `ERROR`, puis sélectionner [Group into Patterns][17] pour voir la partie de votre service qui génère le plus d'erreurs.
 
-{{< img src="/getting_started/logs/error-pattern.png" alt="Filtrage dans le Log Explorer par pattern d'erreur">}}
+{{< img src="/getting_started/logs/error-pattern-2024.png" alt="Filtrage dans le Log Explorer par pattern d'erreur">}}
 
-Agrégez vos logs en fonction du paramètre `Field` de `Source` et passez à l'option de visualisation **Top List** pour voir vos services qui génèrent le plus de logs. Sélectionnez une source, comme `error`, et sélectionnez **View Logs** dans le menu déroulant. Le volet latéral affiche des logs en fonction des erreurs, ce qui vous permet d'identifier rapidement les hosts et services qui nécessitent votre attention.
+Agrégerez vos logs dans des `Fields` (champs) et affichez-les sous forme de **Top List** pour identifier vos services les plus bavards. Sélectionnez une source comme `info` ou `warn`, puis choisissez **View Logs** dans le menu déroulant. Le panneau latéral affiche alors les logs classés par erreur, ce qui vous permet d'identifier rapidement les hosts et services à surveiller.
 
-{{< img src="/getting_started/logs/top-list-view.png" alt="Affichage Top List dans le Log Explorer">}}
+{{< img src="/getting_started/logs/top-list-view-2024.png" alt="Affichage Top List dans le Log Explorer">}}
 
 ## Et ensuite ?
 
@@ -111,7 +120,7 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 
 * Définissez des [attributs et alias][18] afin d'unifier votre environnement de logs.
 * Contrôlez le traitement de vos logs avec des [pipelines][19] et [processeurs][20].
-* Étant donné que la fonctionnalité Logging without Limits* dissocie l'ingestion et l'indexation de logs, vous pouvez [configurer vos logs][21] de façon à choisir ceux que vous souhaitez indexer, conserver ou archiver.
+* Grâce à Logging without Limits*, qui dissocie l'ingestion de l'indexation, vous pouvez [configurer vos logs][21] et choisir ceux à [indexer][22], [conserver][23] ou [archiver][24].
 
 ### Mise en corrélation des logs
 
@@ -120,9 +129,9 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 
 ### Guides
 
-* [Meilleures pratiques pour la solution Log Management][22]
-* Explorer en détail la fonctionnalité [Logging without Limits*][23]
-* Gérer les données de log sensibles avec les [réglages RBAC][24]
+* [Bonnes pratiques de gestion des logs][25]
+* Explorer en détail la fonctionnalité [Logging without Limits*][26]
+* Gérer les données sensibles avec les [paramètres RBAC][27]
 
 ## Pour aller plus loin
 
@@ -137,7 +146,7 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 [4]: /fr/security/cloud_siem/
 [5]: /fr/getting_started/integrations/
 [6]: /fr/agent/
-[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[7]: /fr/agent/configuration/agent-commands/#restart-the-agent
 [8]: https://app.datadoghq.com/logs/onboarding/server
 [9]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
 [10]: /fr/agent/docker/log/?tab=containerinstallation
@@ -147,11 +156,14 @@ Une fois qu'une source de journalisation est configurée et que vos logs sont di
 [14]: https://app.datadoghq.com/logs/onboarding/client
 [15]: https://app.datadoghq.com/logs/onboarding/other
 [16]: /fr/logs/explorer/
-[17]: /fr/logs/explorer/#patterns
+[17]: /fr/logs/explorer/analytics/patterns/
 [18]: /fr/logs/log_configuration/attributes_naming_convention/
 [19]: /fr/logs/log_configuration/pipelines/
 [20]: /fr/logs/log_configuration/processors/
 [21]: /fr/logs/log_configuration/
-[22]: /fr/logs/guide/best-practices-for-log-management/
-[23]: /fr/logs/guide/getting-started-lwl/
-[24]: /fr/logs/guide/logs-rbac/
+[22]: https://docs.datadoghq.com/fr/logs/log_configuration/indexes
+[23]: https://docs.datadoghq.com/fr/logs/log_configuration/flex_logs
+[24]: https://docs.datadoghq.com/fr/logs/log_configuration/archives
+[25]: /fr/logs/guide/best-practices-for-log-management/
+[26]: /fr/logs/guide/getting-started-lwl/
+[27]: /fr/logs/guide/logs-rbac/

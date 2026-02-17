@@ -17,7 +17,6 @@ cascade:
     - alerting
     - monitoring
 description: アラートプラットフォームでのモニターの作成、通知と自動化の構成、モニター管理
-disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Alerting
   tag: リリースノート
@@ -31,6 +30,9 @@ further_reading:
 - link: /api/v1/monitors/
   tag: Documentation
   text: Datadog モニター API
+- link: https://www.datadoghq.com/blog/monitor-notification-rules/
+  tag: ブログ
+  text: Datadog モニター通知ルールでモニター アラートをルーティングする
 title: モニター
 ---
 
@@ -50,9 +52,9 @@ Datadog モニターを開始する最も迅速な方法は、[推奨モニタ�
 また、ラーニングセンターのラボ環境で最初から独自のモニターを作成することもできます。または、「モニターの開始」ガイドに従ってアプリケーションにモニターを設定することもできます。
 
 {{< whatsnext desc="以下のリソースを使用してモニターを作成してください。" >}}
-{{< nextlink href="/getting_started/monitors/" >}}モニターの開始: メトリクスベースのモニターを構築する方法に関するガイド{{< /nextlink >}}
-{{< nextlink href="/monitors/types/" >}}モニターの種類からモニターを作成する{{< /nextlink >}}
-{{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}ラーニングセンター: サンドボックス環境でメトリクスベースのモニターを構築する{{< /nextlink >}}
+    {{< nextlink href="/getting_started/monitors/" >}}モニターの開始: メトリクスベースのモニターを構築する方法に関するガイド{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/" >}}モニターの種類からモニターを作成する{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}ラーニングセンター: サンドボックス環境でモニターを構築する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 集計データを分析する

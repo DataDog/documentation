@@ -54,5 +54,5 @@ When images are properly correlated, Datadog populates a version tag from the im
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/deployments/executions
-[2]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
+[2]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#correlate
 [3]: /continuous_delivery/deployments/argocd#correlate-deployments-with-ci-pipelines

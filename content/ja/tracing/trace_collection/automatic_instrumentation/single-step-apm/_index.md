@@ -24,7 +24,7 @@ Single Step Instrumentation (SSI) for APM は、Datadog Agent をインストー
 {{< tabs >}}
 {{% tab "Linux ホストまたは VM" %}}
 
-<div class="alert alert-warning">以前に Linux ホストで Single Step Instrumentation を使用していた場合は、<a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">最新バージョンにアップデート</a>してください。</div>
+<div class="alert alert-danger">以前に Linux ホストで Single Step Instrumentation を使用していた場合は、<a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">最新バージョンにアップデート</a>してください。</div>
 
 Ubuntu ホストの場合
 
@@ -368,7 +368,7 @@ Helm で Single Step Instrumentation を有効にするには
 - [.NET][34]
 - [Ruby][35]
 
-<div class="alert alert-warning">major バージョンのライブラリリリースでは後方互換性が壊れる変更が含まれる場合があるため、<code>latest</code> タグを使用する際は注意してください。</div>
+<div class="alert alert-danger">major バージョンのライブラリリリースでは後方互換性が壊れる変更が含まれる場合があるため、<code>latest</code> タグを使用する際は注意してください。</div>
 
 例えば、Java アプリケーションを自動的にインスツルメントする場合は以下のようになります。
 

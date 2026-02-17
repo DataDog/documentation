@@ -1,0 +1,152 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "09c427f36471a9777800731d4c8fba9f": {
+            "string": "Installer et configurer Mobile Session Replay"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "c11aab16f8a3104ac69f99734e4a7013": {
+            "string": "Installer et configurer Mobile Session Replay."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "/product_analytics/session_replay/mobile",
+            "text": {
+              "itemTranslationData": {
+                "ce6c3c781d75059f7fbe7186661b96e0": {
+                  "string": "Session Replay sur mobile"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/product_analytics/session_replay/mobile/app_performance",
+            "text": {
+              "itemTranslationData": {
+                "ab35b85db736ffd1e461c8485e401308": {
+                  "string": "Impact de Mobile Session Replay sur les performances des applications"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/product_analytics/session_replay/mobile/privacy_options",
+            "text": {
+              "itemTranslationData": {
+                "26506d24bb1c399504571e1615425fb5": {
+                  "string": "Options de confidentialité de Mobile Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "/product_analytics/session_replay/mobile/troubleshooting",
+            "text": {
+              "itemTranslationData": {
+                "5615d411d465239fa5a76720ca89152c": {
+                  "string": "Dépanner Mobile Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "4": {
+            "link": "/product_analytics/session_replay",
+            "text": {
+              "itemTranslationData": {
+                "ab99140e610ac1c9552fe9f07fdff5ce": {
+                  "string": "Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "content_filters": {
+        "listTranslationData": {
+          "0": {
+            "label": "SDK",
+            "trait_id": "platform",
+            "option_group_id": "rum_session_replay_sdk_options"
+          }
+        }
+      }
+    }
+  },
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+        },
+        "children": {
+          "listTranslationData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "listTranslationData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 25-26"
+      }
+    }
+  },
+  "type": "document",
+  "annotations": {
+    "listTranslationData": {}
+  },
+  "slots": {}
+}

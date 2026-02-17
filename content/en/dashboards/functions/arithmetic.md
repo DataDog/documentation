@@ -1,5 +1,6 @@
 ---
 title: Arithmetic
+description: Perform mathematical operations including absolute values, logarithms, exponents, and cumulative sums on metrics.
 aliases:
     - /graphing/functions/arithmetic/
 ---
@@ -17,6 +18,12 @@ Transforms this sine timeseries `sin{*}`:
 into this one `abs(sin{*})`:
 
 {{< img src="dashboards/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs" style="width:80%;">}}
+
+## Exponent
+
+| Function | Description                             | Example                 |
+| :----    | :-------                                | :---------              |
+| `pow()`  | Graph all combinations of metric and constant using exponentiation. | `pow(<METRIC_NAME>{*}, CONSTANT)`, `pow(<METRIC_NAME>{*}, <METRIC_NAME>{*})`, `pow(CONSTANT, <METRIC_NAME>{*})`, `pow(CONSTANT, CONSTANT)` |
 
 ## Logarithm
 

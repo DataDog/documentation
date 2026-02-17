@@ -8,65 +8,27 @@ title: インテグレーションダッシュボードの作成
 ---
 ## 概要
 
-[Datadog ダッシュボード][1]は、主要なメトリクスを表示・追跡することで、インフラストラクチャーやインテグレーションを効率的に監視することができます。Datadog は、多くの機能やインテグレーションに対して、すぐに使えるダッシュボードのセットを提供しています。これらのダッシュボードには、[ダッシュボードリスト][12]からアクセスすることができます。
+このページでは、Datadog で すぐに使える (OOTB) インテグレーション ダッシュボードを作成する手順と、作成プロセス中に従うべきベスト プラクティスを説明します。
 
-[Datadog インテグレーションを作成][2]した場合、インテグレーションのユーザーがより迅速にインテグレーションの価値を見出すことができるよう、すぐに使えるダッシュボードを作成する必要があります。このガイドでは、インテグレーションダッシュボードを作成するための手順と、作成プロセスで従うべきベストプラクティスを説明します。
+[Datadog ダッシュボード][1] は、主要なメトリクスを表示および追跡することで、インフラとインテグレーションを監視できるようにします。Datadog は多くの機能とインテグレーション向けに OOTB ダッシュボードのセットを提供しています。これらには [Dashboard List][12] を表示することでアクセスできます。
 
-Datadog インテグレーションを作成するには、[Agent インテグレーションの作成][2]を参照してください。
+すでに [Datadog のインテグレーションを作成した][2] 場合は、インテグレーションのユーザーが価値を見いだせるよう、すぐに使えるダッシュボードを作成する必要があります。
 
 ## インテグレーションダッシュボードの作成
 
 ### ダッシュボードの作成
 
-Datadog の [**Dashboard List**][12] から、**+ New Dashboard** をクリックします。
+Datadog サンドボックスで、[**Dashboard List**][12] から **New Dashboard** をクリックします。
 
 {{< img src="dashboards/create_dashboard.png" alt="インテグレーション用のダッシュボードの作成" width="80%">}}
 
 ダッシュボードに要素を追加する際は、[本ガイドのベストプラクティスに従ってください](#follow-dashboard-best-practices)。
 
-### ダッシュボードのエクスポート
-
-{{< tabs >}}
-{{% tab "UI" %}}
-
-ダッシュボードを JSON 形式でエクスポートするには、**Share** または **Configure** アイコンをクリックし、**Export dashboard JSON** を選択します。
+### ダッシュボードをアップロードする
+Integration Developer Platform 内のインテグレーションで Content タブに移動します。ここで **import dashboard** を選択し、利用可能なダッシュボードの一覧から選びます。インテグレーションに含められるダッシュボードは最大 10 個までです。
 
 {{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="共有アイコンをクリックし、Export dashboard JSON をクリックして、ダッシュボードを JSON ファイルとしてエクスポートします" width="100%">}}
 
-ダッシュボードのタイトルに従ってファイル名を付けます。例: `your_integration_name_overview.json`
-
-このファイルを、インテグレーションの `assets/dashboards` フォルダに保存します。アセットを `manifest.json` ファイルに追加します。インテグレーションのファイル構造とマニフェストファイルの詳細については、[インテグレーションアセットリファレンス][101]を参照してください。
-
-[101]: /ja/developers/integrations/check_references/#manifest-file
-
-{{% /tab %}}
-{{% tab "プログラム" %}}
-
-- [Datadog Agent Integration Developer ツール][103] (`ddev`) がインストールされていることを確認します。
-- Ensure you have set an `api_key` and `app_key` for the organization that contains your dashboard in the [`ddev` configuration file][101].
-
-[`ddev meta dash export` コマンド][102] を `--extras` または `-e` フラグを付けて実行し、ダッシュボードの定義をエクスポートします。
-
-```shell
-ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
-```
-
-ダッシュボードのタイトルに従ってファイル名を付けます。
-
-このコマンドはインテグレーションの `manifest.json` ファイルにダッシュボードの定義を追加します。ダッシュボードの JSON ファイルはインテグレーションの `assets/dashboards` フォルダにあります。
-
-**注:** ダッシュボードは各地域で `/dash/integration/<DASHBOARD_KEY>` というアドレスで利用できます。`<DASHBOARD_KEY>` はダッシュボードの `manifest.json` ファイルに記述されているものと一致します。ダッシュボードの中に別のダッシュボードへのリンクを追加したい場合は、この値を入れ替えることができます。
-
-[101]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-config
-[102]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-meta-dash-export
-[103]: /ja/developers/integrations/python/
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### プルリクエストを開く
-
-[`integrations-extras` の GitHub リポジトリ][13]については、プルリクエスト (PR) を開き、ダッシュボードの JSON ファイルと更新されたマニフェストファイルを対応するインテグレーションフォルダに追加します。Datadog はすべての `integration-extras` PR をレビューします。承認されると、Datadog は PR をマージし、インテグレーションダッシュボードは本番環境にプッシュされます。
 
 ### ダッシュボードを本番環境で検証する
 
@@ -141,7 +103,7 @@ ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
 
 -  ストリームウィジェットの幅は、読みやすさを考慮して、少なくとも 6 列、またはダッシュボードの幅の半分にする必要があります。ダッシュボードの末尾に配置すると、スクロールの妨げになりません。ストリームウィジェットを単独でグループ化し、折りたたむことができるようにすると便利です。イベントストリームは、ダッシュボードが監視するサービスがイベントを報告している場合にのみ追加します。`sources:service_name` を使用してください。
 
-   {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="An example of a stream widget in a dashboard" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="ダッシュボードのストリームウィジェットの例" width="100%">}}
 
 -  ウィジェットの種類やサイズを組み合わせて使用してみてください。ダッシュボードが可能な限り明確になるまで、視覚化やフォーマットの選択肢を探求してください。ダッシュボード全体が時系列で構成されていても問題ない場合もありますが、さまざまなタイプのウィジェットを使用することで読みやすさが向上する場合もあります。最も一般的に使用されるメトリクスウィジェットは、[時系列][4]、[クエリ値][5]、[テーブル][6]です。クエリ値ウィジェットが空白ではなく時系列の背景 (例えば、「バー」) を持つようにします。利用可能なウィジェットタイプの詳細については、[サポートされるダッシュボードウィジェットのリスト][7]を参照してください。
 
@@ -220,7 +182,7 @@ ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
     | カウント (例: エラー数) | `bars` |
     | 複数のグループまたはデフォルト | `lines` |
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

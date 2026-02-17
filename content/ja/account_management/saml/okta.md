@@ -10,7 +10,7 @@ title: Okta の SAML アイデンティティプロバイダー構成
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< region-param key="dd_site_name" >}} サイトでは、Okta アプリケーションカタログの事前構成された Datadog アプリケーションに関するこのページの指示を無視し、<a href="/account_management/faq/okta/">従来の手順</a>を使用して Okta で Datadog アプリケーションを手動で構成する必要があります。
 </div>
 {{% /site-region %}}

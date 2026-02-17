@@ -63,7 +63,7 @@ See [Configuration](#configuration) for more advanced usage.
 
 Optionally, set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][5].
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][18] guide.
 
 If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.Profiler` object:
 
@@ -110,23 +110,18 @@ enabled by default, you can turn it off by setting
 
 ### Stack V2
 
-Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on Linux.
-It enhances the performance, accuracy, and reliability of Python CPU profiling.
-The feature is enabled by default from `ddtrace` versions 2.20+ and we highly recommend
-using the most recent release of the library to benefit from latest improvements
-and bug fixes. This feature activates our new stack sampling, collection and
-export system.
+Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on
+Linux and macOS. It enhances the performance, accuracy, and reliability of
+Python CPU profiling. The feature is enabled by default from `ddtrace` versions
+2.20+. It is recommended to use the most recent release of the library to
+benefit from latest improvements and bug fixes. This feature activates a new
+stack sampling, collection, and export system.
 
-The following are known issues and missing features from Stack V2:
-
-- `gunicorn` and Stack V2 results in performance degradation of services
-- `gevent` support is lacking
-- Exception sampling is missing
-
-If you find these as a blocker for enabling Stack V2 for your services, you can
-turn it off via setting `DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other
-issue, then please proceed to escalate using appropriate support channels or
-file an issue on the [GitHub repository](https://github.com/DataDog/dd-trace-py).
+Exception sampling is missing from Stack V2. If you find this as a blocker for
+enabling Stack V2 for your services, you can turn it off by setting
+`DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other issue,
+escalate using appropriate support channels or file an issue on the
+[GitHub repository](https://github.com/DataDog/dd-trace-py).
 
 
 ## Not sure what to do next?
@@ -151,3 +146,4 @@ The [Getting Started with Profiler][7] guide takes a sample service with a perfo
 [15]: /profiler/profile_visualizations/#timeline-view
 [16]: /serverless/aws_lambda/profiling/
 [17]: /tracing/trace_collection/compatibility/python
+[18]: /profiler/profiler_troubleshooting/python/

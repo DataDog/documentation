@@ -1,5 +1,6 @@
 ---
 title: Manage Datadog with Terraform
+description: Use Terraform to manage your Datadog organization, users, roles, teams, credentials, and service accounts through infrastructure as code.
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

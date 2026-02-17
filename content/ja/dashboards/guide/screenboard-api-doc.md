@@ -5,7 +5,7 @@ aliases:
 title: スクリーンボード API
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 このエンドポイントは旧バージョンです。代わりに、 <a href="https://docs.datadoghq.com/api/v1/dashboards/">新しいダッシュボードエンドポイント</a>を使用してください。
 </div>
 

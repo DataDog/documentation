@@ -73,7 +73,7 @@ data:
             }
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>commit_metadata</code> フィールドを入力するための呼び出しは必須ではありません。このフィールドは、ペイロードを Git の情報でリッチ化するために使用します。
 Helm リポジトリを Argo CD アプリケーションのソースとして使用している場合は、この行と前の行のカンマを削除して本文を調整してください。
 </div>

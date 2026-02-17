@@ -99,7 +99,7 @@ Le nom du pilote ODBC IBM i est nécessaire pour configurer le check IBM i.
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "ibm_i" >}}
+{{< get-metrics-from-git "ibm-i" >}}
 
 
 ### Événements

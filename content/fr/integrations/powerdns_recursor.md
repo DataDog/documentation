@@ -196,7 +196,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "powerdns_recursor" >}}
+{{< get-metrics-from-git "powerdns" >}}
 
 
 ### Événements
@@ -204,7 +204,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 Le check PowerDNS n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "powerdns_recursor" >}}
+{{< get-service-checks-from-git "powerdns" >}}
 
 
 ## Dépannage

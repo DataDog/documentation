@@ -82,7 +82,7 @@ TiDB Cloud プロジェクトの Datadog インテグレーションを構成す
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "tidb_cloud" >}}
+{{< get-metrics-from-git "tidb-cloud" >}}
 
 
 ### サービスチェック

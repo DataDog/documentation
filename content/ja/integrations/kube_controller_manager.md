@@ -99,7 +99,7 @@ Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージ
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube_controller_manager" >}}
+{{< get-metrics-from-git "kube-controller-manager" >}}
 
 
 ### イベント
@@ -107,7 +107,7 @@ Kubernetes Controller Manager チェックは [Datadog Agent][3] パッケージ
 Kubernetes Controller Manager チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "kube_controller_manager" >}}
+{{< get-service-checks-from-git "kube-controller-manager" >}}
 
 
 ## トラブルシューティング

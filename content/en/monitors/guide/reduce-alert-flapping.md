@@ -1,5 +1,6 @@
 ---
 title: Reduce alert flapping
+description: "Strategies to reduce alert flapping using threshold adjustments, functions, composite monitors, and anomaly/outlier detection."
 further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"

@@ -140,7 +140,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Robust Intelli
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "robust_intelligence_ai_firewall" >}}
+{{< get-metrics-from-git "robust-intelligence-ai-firewall" >}}
 
 
 ### サービスチェック

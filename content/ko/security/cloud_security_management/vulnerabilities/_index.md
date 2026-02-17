@@ -25,7 +25,7 @@ title: 클라우드 보안 관리 취약점
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Vulnerabilities는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
+<div class="alert alert-danger">Cloud Security Management Vulnerabilities는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요

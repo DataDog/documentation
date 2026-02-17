@@ -1,5 +1,6 @@
 ---
 title: Migrating to Hourly and Monthly Usage Attribution APIs
+description: Migrate from deprecated v1 usage attribution APIs to v2 APIs with improved pagination, tag breakdown options, and JSON response format.
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

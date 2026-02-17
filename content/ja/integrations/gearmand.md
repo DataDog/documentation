@@ -26,10 +26,10 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com
+  sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- log collection
+- ログの収集
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
@@ -43,19 +43,19 @@ is_public: true
 manifest_version: 2.0.0
 name: gearmand
 public_title: Gearman
-short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
+short_description: キューにあるジョブと実行中のジョブの合計数またはタスク別の数を追跡
 supported_os:
 - linux
 - macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::ログの収集
+  - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
+  description: キューにあるジョブと実行中のジョブの合計数またはタスク別の数を追跡
   media: []
   overview: README.md#Overview
   support: README.md#Support

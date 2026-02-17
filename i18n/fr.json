@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "850"
+    "other": "1,000"
   },
   "beta_sentence": {
     "other": "Bêta : pour obtenir de l'aide ou signaler tout problème, contactez"
@@ -264,5 +264,20 @@
   },
   "source": {
     "other": "Source"
+  },
+  "available_for": {
+    "other": "Disponible pour"
+  },
+  "alert_note": {
+    "other": "REMARQUE"
+  },
+  "alert_warning": {
+    "other": "AVERTISSEMENT"
+  },
+  "alert_caution": {
+    "other": "ATTENTION"
+  },
+  "alert_tip": {
+    "other": "CONSEIL"
   }
 }

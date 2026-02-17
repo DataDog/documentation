@@ -13,14 +13,14 @@ title: Configuración de Universal Service Monitoring
 ## Versiones admitidas y compatibilidad
 
 Versión requerida del Agent 
-: Universal Service Monitoring requiere que el Datadog Agent instalado junto a tu servicio en contenedores sea al menos la versión 6.40 o 7.40. Como se indica más adelante, algunas funciones beta requieren versiones posteriores.
+: Universal Service Monitoring requiere que el Datadog Agent instalado junto a tu servicio en contenedores sea al menos la versión 6.40 o 7.40. Como se indica más adelante, algunas funciones en Vista previa requieren versiones posteriores.
 
 Plataformas Linux compatibles
 : Kernel Linux 4.14 y posterior<br/>
 CentOS o RHEL 8.0 y posterior
 
 Plataformas compatibles de Windows 
-: IIS en Windows 2012 R2 y posterior
+: Windows 2012 R2 y posterior
 
 Protocolos de capa de aplicación admitidos
 : HTTP<br/>
@@ -30,15 +30,15 @@ Limitaciones conocidas
 : Universal Service Monitoring requiere el uso de `system-probe` de Datadog, que no es compatible con Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-En <a href="/universal_service_monitoring/additional_protocols/">la fase beta privada</a> se admiten protocolos y métodos de cifrado de tráfico adicionales. Si quieres compartir plataformas y protocolos que te gustaría que fueran compatibles, <a href="/help/">ponte en contacto con soporte</a>.
+Otros protocolos y métodos de cifrado de tráfico están en <a href="/universal_service_monitoring/additional_protocols/">fase de vista previa</a>. Si quieres saber qué plataformas y protocolos te gustaría que fueran compatibles, <a href="/help/">ponte en contacto con el servicio de asistencia</a>.
 </div>
 
 ## Requisitos previos
 
 - En Linux:
     - Tu servicio se ejecuta en un contenedor.
-    - **Fase beta:** Para servicios no contenedorizados, consulta las [instrucciones aquí](#additional-configuration).
-- En Windows IIS:
+    - **En vista previa:** para servicios fuera de contenedores, consulta las [instrucciones aquí](#additional-configuration).
+- Si estás en Windows:
     - Tu servicio se ejecuta en una máquina virtual.
 - Datadog Agent se instala junto con tu servicio. _No_ es necesario instalar una biblioteca de rastreo.
 - La etiqueta `env` para el [etiquetado de servicios unificado][1] se ha aplicado a tu despliegue. Las etiquetas `service` y `version` son opcionales.
@@ -65,6 +65,20 @@ Si tu clúster está ejecutando Google Container-Optimized OS (COS), añade tamb
 providers:
   gke:
     cos: true
+```
+
+Si tu clúster utiliza la distribución Bottlerocket Linux para sus nodos, añade lo siguiente a tu archivo de valores:
+
+```
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: "system_u"
+          role: "system_r"
+          type: "spc_t"
+          level: "s0"
 ```
 
 {{% /tab %}}
@@ -325,7 +339,6 @@ docker run --cgroupns host \
 -v /etc/yum/vars:/host/etc/yum/vars:ro \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
--e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -719,14 +732,25 @@ Si utilizas equilibradores de carga con tus servicios, habilita las integracione
 **Para servicios que se ejecutan en IIS:**
 
 1. Instala [Datadog Agent ][1] (versión 6.41 o 7.41 y posteriores) con el componente del controlador de dispositivos de kernel de red activado.
-   Para el Agent versión 7.44 o anterior, debes pasar `ADDLOCAL="MainApplication,NPM"` al comando `msiexec` durante la instalación, o seleccionar **Network Performance Monitoring** al ejecutar la instalación del Agent a través de la GUI.
+   Para el Agent versión 7.44 o anterior, debes pasar `ADDLOCAL="MainApplication,NPM"` al comando `msiexec` durante la instalación, o seleccionar **Cloud Network Monitoring** al ejecutar la instalación del Agent a través de la GUI.
 
-2. Edita `C:\ProgramData\Datadog\system-probe.yaml` para establecer el indicador habilitado en `true`:
+2. Edita `C:\ProgramData\Datadog\system-probe.yaml` para definir el indicador habilitado como `true`:
 
    ```yaml
    service_monitoring_config:
      enabled: true
    ```
+**Para los que no son servicios de IIS:**
+
+La detección de servicios que no son IIS está activada por defecto a partir del Agent versión 7.57. Las versiones anteriores del Agent pueden requerir el siguiente cambio de configuración a `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
 [1]: /es/agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
 
@@ -734,11 +758,11 @@ Si utilizas equilibradores de carga con tus servicios, habilita las integracione
 
 ## Configuración adicional
 
-Los siguientes sistemas o servicios requieren configuración adicional:
+Los siguientes sistemas o servicios requieren una configuración adicional:
 
 {{< collapse-content title="Servicios no contenerizados en Linux" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring está disponible en fase <strong>beta</strong> para monitorizar servicios que ejecutan instancias bare-metal en máquinas virtuales de Linux.
+Universal Service Monitoring está disponible para monitorizar servicios que se ejecutan en bare-metal o en máquinas virtuales de Linux.
 </div>
 
 Requiere Agent versión 7.42 o posterior.
@@ -764,18 +788,18 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Monitorización de Go TLS" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring está disponible en fase <strong>beta</strong> para monitorizar tráfico cifrado de TLS desde servicios implementados en Golang.
+Universal Service Monitoring está en Vista previa para monitorizar el tráfico cifrado con TLS desde servicios implementados en Golang.
 </div>
 
 <strong>Nota</strong>:
 <br>
 <ul role="list">
-  <li>Los servidores Go HTTPS pueden actualizar el protocolo HTTP1.1 a HTTP/2, que es compatible con la versión beta privada. Ponte en contacto con tu gestor de cuenta para obtener más información.</li>
-  <li>Requiere Agent versión 7.51 o posterior.</li>
+  <li>Los servidores Go HTTPS pueden actualizar el protocolo HTTP1.1 a HTTP/2, que es compatible con la Vista previa. Contacta a tu gestor de cuenta para obtener más detalles.</li>
+  <li>Requiere el Agent versión 7.51 or posterior.</li>
 </ul>
 
 {{< tabs >}}
@@ -812,12 +836,12 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Monitorización de Node.js TLS" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring está disponible en fase <strong>beta</strong> para monitorizar solicitudes HTTP, HTTP/2 y gRPC de servicios implementados en Node.js.
+Universal Service Monitoring está en Vista previa para monitorizar solicitudes HTTP, HTTP/2 y gRPC de servicios implementados en Node.js.
 </div>
 
 Requiere Agent versión 7.54 o posterior.
@@ -856,7 +880,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Monitorización de Istio" level="h4" >}}
 
@@ -895,10 +919,11 @@ agents:
         - name: DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED
           value: "true"
 ```
+
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring puede capturar tráfico HTTP/2 y gRPC.
@@ -942,10 +967,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Monitorización de Kafka (fase beta privada)" level="h4" >}}
+{{< collapse-content title="Monitorización de Kafka (Vista previa)" level="h4" >}}
 
 <div class="alert alert-info">
-La monitorización de Kafka Monitoring está disponible en fase <strong>beta privada</strong>.
+La monitorización de Kafka está disponible en la <strong>Vista previa</strong>.
 </div>
 
 <strong>Nota</strong>:
@@ -1058,10 +1083,10 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Compatibilidad con protocolos y métodos de cifrado adicionales</strong><p>USM dispone de soporte beta para la detección de servicios en la nube y para decodificar protocolos adicionales y métodos de cifrado de tráfico. Para obtener más información y solicitar acceso a la versión beta privada, consulta </a>Detección de servicios en la nube y protocolos adicionales</a>.</p></div>
+<div class="alert alert-info"><strong>Compatibilidad con protocolos y métodos de cifrado adicionales</strong><p>USM está en la fase de vista previa para descubrir los servicios en la nube y decodificar protocolos y métodos de cifrado de tráfico adicionales. Para obtener más información y solicitar acceso a la vista previa, consulta <a href="/universal_service_monitoring/additional_protocols/">Detección de servicios en la nube y protocolos adicionales</a>.</p></div>
 
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

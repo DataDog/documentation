@@ -28,8 +28,8 @@ author:
 categories:
 - クラウド
 - ログの収集
-- トレーシング
-custom_kind: integration
+- tracing
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
 display_on_public_website: true
@@ -112,6 +112,6 @@ Hasura Cloud インテグレーションには、イベントは含まれませ�
 
 [1]: https://hasura.io/cloud/
 [2]: https://hasura.io/docs/latest/observability/integrations/datadog/
-[3]: http://app.datadoghq.com/logs
+[3]: https://app.datadoghq.com/logs
 [4]: https://docs.datadoghq.com/ja/logs/explorer/facets/#create-facets
 [5]: https://docs.datadoghq.com/ja/help/

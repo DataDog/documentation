@@ -29,10 +29,6 @@ supported_os:
 title: Adobe Experience Manager
 ---
 
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">L'intégration Adobe Experience Manager n'est pas disponible pour le <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}) que vous avez sélectionné.</div>
-{{< /site-region >}}
-
 ## Présentation
 
 Recueillez des logs Adobe Experience Manager pour suivre les erreurs, obtenir des délais de réponse et surveiller les pages Web dont les performances sont faibles.
@@ -70,10 +66,6 @@ _Disponible à partir des versions > 6.0 de l'Agent_
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
-
-## Pour aller plus loin
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory

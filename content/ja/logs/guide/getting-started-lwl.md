@@ -15,6 +15,9 @@ further_reading:
 - link: /logs/logs_to_metrics/
   tag: ドキュメント
   text: 収集されたログからメトリクスを生成する方法
+- link: https://www.datadoghq.com/blog/optimize-high-volume-logs/
+  tag: blog
+  text: 可視性を損なうことなく大量のログ データを最適化する方法
 title: Logging Without Limits™ ガイド
 ---
 

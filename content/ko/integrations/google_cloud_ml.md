@@ -95,7 +95,7 @@ Google Cloud 기계 학습 로그는 Google Cloud Logging으로 수집하여 클
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_ml" >}}
+{{< get-metrics-from-git "google-cloud-ml" >}}
 
 
 ### 이벤트

@@ -123,7 +123,7 @@ Una vez hecho esto, exporta tus logs de Google Cloud Vertex AI desde Google Clou
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_vertex_ai" >}}
+{{< get-metrics-from-git "google-cloud-vertex-ai" >}}
 
 ### Checks de servicios
 

@@ -1,7 +1,7 @@
 ---
 core_product:
 - security
-- csm
+- cloud security
 title: 제어
 ---
 

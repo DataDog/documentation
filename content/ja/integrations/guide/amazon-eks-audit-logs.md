@@ -41,7 +41,7 @@ Amazon EKS 監査ログ、Datadog AWS インテグレーション、Datadog Forw
 
 ログエクスプローラーで EKS 監査ログのみを表示するには、ログエクスプローラーの検索で `source:kubernetes.audit` をクエリするか、ファセットパネルの **Source** で `kubernetes.audit` ファセットを選択して EKS 監査ログでフィルタリングします。
 
-## Cloud SIEM
+## クラウド SIEM
 
 Datadog Cloud SIEM を使用することで、EKS クラスターに対する潜在的な構成ミスや標的型攻撃を検出することができます。
 
@@ -75,10 +75,10 @@ Cloud SIEM がセットアップされ、構成されると、ゼロから新し
 [5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /ja/security/cloud_siem/detection_rules/
+[8]: /ja/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [9]: /ja/getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
 [11]: /ja/security/default_rules/#cat-cloud-siem
 [12]: /ja/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /ja/security/cloud_siem/detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /ja/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method

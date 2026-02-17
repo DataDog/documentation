@@ -134,7 +134,7 @@ Datadog의 통합 페이지에서 조직에 대한 [Oracle 통합][7]을 설치�
 
 데이터베이스 모니터링은 Oracle 데이터베이스에 대한 커스텀 쿼리를 지원합니다. 사용 가능한 구성 옵션에 대해 자세히 알아보려면 [conf.yaml.example][9]을 참조하세요.
 
-<div class="alert alert-warning">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
+<div class="alert alert-danger">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
 
 [1]: /ko/database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent

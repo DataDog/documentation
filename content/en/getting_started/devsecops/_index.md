@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Infrastructure DevSecOps
+description: Introduction to Infrastructure DevSecOps bundles combining monitoring with Cloud Security for Pro and Enterprise tiers.
 ---
 
 This guide introduces the Infrastructure Monitoring DevSecOps bundles, with links to setup instructions to help you install and configure them.

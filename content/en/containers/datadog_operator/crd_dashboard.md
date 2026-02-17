@@ -1,5 +1,6 @@
 ---
 title: DatadogDashboard CRD
+description: Deploy and manage Datadog dashboards using the DatadogDashboard custom resource definition with the Datadog Operator
 ---
 To deploy a Datadog dashboard, you can use the Datadog Operator and `DatadogDashboard` custom resource definition (CRD).
 
@@ -9,6 +10,11 @@ To deploy a Datadog dashboard, you can use the Datadog Operator and `DatadogDash
 - [Datadog Operator][3] v0.6+
 
 ### Setup
+
+1. Run the installation command, substituting your Datadog API and application keys:
+   ```shell
+   helm install my-datadog-operator datadog/datadog-operator --set apiKey=<DATADOG_API_KEY> --set appKey=<DATADOG_APP_KEY> --set datadogDashboard.enabled=true --set datadogCRDs.crds.datadogDashboards=true
+   ```
 
 1. Create a file with the spec of your `DatadogDashboard` deployment configuration.
 

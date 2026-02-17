@@ -2,24 +2,24 @@
 further_reading:
 - link: /security/application_security/
   tag: Documentación
-  text: Application Security Management
-- link: /security/application_security/how-appsec-works
+  text: App and API Protection
+- link: /security/application_security/how-it-works
   tag: Documentación
-  text: Cómo funciona Application Security
+  text: Funcionamiento de App and API Protection
 title: Protección de funciones
 ---
 
-[Datadog Application Security Management (ASM)][2] brinda capacidad de observación de los ataques a nivel de aplicación que pretenden explotar vulnerabilidades a nivel de código, y de los agentes malintencionados que atacan los sistemas.
+[Datadog App and API Protection (AAP)][2] proporciona una visibilidad de los ataques a nivel de aplicación, que pretenden explotar vulnerabilidades a nivel de código, y de los actores maliciosos que atacan tus sistemas.
 
-ASM protege funciones escritas en Python, Node, Go, Java, y .NET. Como ASM se basa en Serverless APM, puedes configurarlo mediante la adición de una variable entorno.
+AAP asegura funciones escritas en Python, Node, Go, Java, y .NET. Como AAP está desarrollado sobre APM serverless, puedes configurarlo añadiendo una variable de entorno.
 
-ASM admite más de 130 reglas de eventos que abarcan las principales amenazas, como ataques de inyección, secuencias de comandos entre sitios, escáneres de seguridad, inclusión de archivos locales, etc. 
+AAP admite más de 130 reglas de eventos que abarcan las principales amenazas como ataques de inyección, secuencias de comandos en sitios cruzados, analizador de seguridad, inclusión de archivos locales, etc.
 
-Puedes [empezar a gestionar las amenazas a tus funciones con ASM][3] hoy mismo.
+Puedes [empezar a gestionar las amenazas a tus funciones con AAP][3] hoy mismo.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /es/security/application_security/
-[3]: /es/security/application_security/enabling/serverless/
+[3]: /es/security/application_security/serverless/

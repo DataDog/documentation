@@ -50,7 +50,7 @@ Datadog に機密データを保存するリスクを抑えるには、[機密�
 
 ## ログの削除リクエストを送信する
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 ログの削除を依頼できるのは、Datadog 管理者のみです。管理者でない場合は、管理者が削除リクエストを確認できるように、必ずリクエストに管理者を含めるようにしてください。
 </div>
 
@@ -62,7 +62,7 @@ Datadog に機密データを保存するリスクを抑えるには、[機密�
 1. 時間枠を限定した削除依頼の場合、機密データを含むログの正確な時間範囲 (エポック または UTC 形式)。
 1. 機密データがあるインデックスの名前。
 1. 以下の条件を理解していることの確認:
-   <div class="alert alert-danger">
+   <div class="alert alert-warning">
    Datadog deletes logs by time buckets, not by query scope or precise time frame. Therefore, Datadog might have to delete a larger amount of data than your exposed logs. For example. if you need to delete all error logs from <code>service:x</code> that came in between 10:00 a.m. to 12:00 p.m. from <code>index:main</code>, Datadog might have to delete all logs in that index from 1:00 a.m. to 5:00 p.m. Datadog support will work with you to ensure that only the necessary data is deleted.
    </div>
 

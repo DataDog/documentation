@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca Java para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Java para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones  | Versión mínima de rastreador Java  |
 | -------------------------------- | ----------------------------|
@@ -37,22 +37,19 @@ La versión mínima de rastreador para contar con todas las funciones de segurid
 
 ## Compatibilidad con lenguajes y marcos
 
-### Versiones compatibles de Java 
+### Versiones compatibles de Java
 El rastreador Java es compatible con la instrumentación automática para los tiempos de ejecución Oracle JDK y OpenJDK de máquinas virtuales Java.
 
 | Versiones de máquinas virtuales Java | Sistemas operativos                                                               | Nivel de compatibilidad                       | Versión del rastreador |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| v8 a v17      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Compatible                | Último         |
+| 8 a 21      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Compatible                | Último         |
 
 
 Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 
+Las versiones 22 y posteriores son compatibles como en Vista previa.
 
-
-
-
-
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
@@ -74,7 +71,7 @@ Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 | Spring Web (MVC)        | 4.0 o posterior       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring WebFlux          | 5.0 o posterior       |            |            |  {{< X >}} |
 | Tomcat                  | 5.5 o posterior       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Vert.x                  | 3.4+, 4+   |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
 **Nota**: Muchos servidores de aplicaciones son compatibles con Servlet y están cubiertos automáticamente por esa instrumentación, como por ejemplo Websphere, Weblogic y JBoss. Además, los marcos como Spring Boot (versión 3) funcionan de forma inherente, ya que suelen utilizar un servidor de aplicaciones integrado compatible, como Tomcat, Jetty o Netty.
 
@@ -158,5 +155,5 @@ Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 
 
 [1]: /es/tracing/trace_collection/compatibility/java/
-[2]: /es/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[3]: /es/security/application_security/vulnerability_management/#manage-code-level-vulnerabilities
+[2]: /es/tracing/guide/remote_config/
+[3]: /es/security/code_security/software_composition_analysis/

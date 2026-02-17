@@ -22,42 +22,42 @@ SCA aborda los siguientes riesgos asociados a las bibliotecas de código abierto
 
 Datadog SCA ayuda a automatizar los procesos de reducción de riesgos, mejorando la productividad de las siguientes maneras:
 
-- **Integración a lo largo del ciclo de vida del desarrollo:** analiza los componentes de código abierto y de terceros, desde el desarrollo hasta la producción, proporcionando un inventario detallado de bibliotecas.
+- **Integración a lo largo del ciclo de vida del desarrollo:** analiza los componentes de código abierto y de terceros, desde el desarrollo hasta la producción, proporcionando un inventario detallado de librerías.
 - **Evaluación continua:** ofrece visibilidad en tiempo real de servicios desplegados, mejorando la postura de seguridad al permitir la priorización de vulnerabilidades en entornos confidenciales.
 - **Colaboración:** rompe silos e involucra a más equipos en seguridad (DevOps, Operaciones, SREs), fomentando una cultura de colaboración.
 
 
 ## Consulta las bibliotecas utilizadas en tus servicios
 
-El inventario de bibliotecas muestra los bibliotecas y las versiones utilizadas en tus servicios y repositorios. 
+El inventario de librerías muestra los bibliotecas y las versiones utilizadas en tus servicios y repositorios.
 
-El inventario muestra todos los detalles de biblioteca utilizando varias fuentes de datos públicas (como GuardDog, NIST, osv.dev, puntuaciones OpenSSF, etc.) y privadas (incluido el grupo de Investigación de seguridad de Datadog). 
+El inventario muestra todos los detalles de librería utilizando varias fuentes de datos públicas (como GuardDog, NIST, osv.dev, puntuaciones OpenSSF, etc.) y privadas (incluido el grupo de Investigación de seguridad de Datadog).
 
-Para utilizar el inventario de bibliotecas, consulta [Bibliotecas][1] o selecciona **Security > Code Security** (Seguridad > Seguridad del código) y elige **Bibliotecas**.
+Para utilizar el inventario de librerías, consulta [Bibliotecas][1] o selecciona **Security > Code Security** (Seguridad > Seguridad del código) y elige **Bibliotecas**.
 
 En **Bibliotecas**, puedes:
 
 - Ver todas las bibliotecas utilizadas en cada uno de tus servicios.
 - Utilizar la faceta **Gravedad en Datadog** para filtrar bibliotecas según el grado de vulnerabilidad.
 - Consulta el repositorio de fuentes de cada biblioteca.
-- Consulta los detalles de biblioteca, como la versión actual utilizada en un servicio y la última versión disponible.
-- Consulta la [planilla OpenSSF][2] de la biblioteca.
+- Consulta los detalles de librería, como la versión actual utilizada en un servicio y la última versión disponible.
+- Consulta la [planilla OpenSSF][2] de la librería.
 
 
 ## Ver vulnerabilidades y riesgos en bibliotecas
 
 En el explorador de **Vulnerabilidades**, puedes ver las vulnerabilidades de las bibliotecas que estás utilizando.
 
-### Vulnerabilidades de biblioteca
+### Vulnerabilidades de librería
 
-Una vulnerabilidad de biblioteca es un fallo de seguridad en una biblioteca. 
+Una vulnerabilidad de librería es un fallo de seguridad en una biblioteca.
 
-Para ver las vulnerabilidades de tu biblioteca, consulta [Vulnerabilidades de bibliotecas][3] o ve a **Security > Code Security > Vulnerabilities > Libraries** (Seguridad > Seguridad del código > Vulnerabilidades).
+Para ver las vulnerabilidades de tu biblioteca, consulta [Vulnerabilidades de librerías][3] o ve a **Security > Code Security > Vulnerabilities > Libraries** (Seguridad > Seguridad del código > Vulnerabilidades).
 
 En **Bibliotecas**, puedes:
 
 - Utilizar **bibliotecas** para ver los diferentes tipos de vulnerabilidades.
-  - Por ejemplo, cada vulnerabilidad tiene un ID de CVE asociado, que se muestra en el explorador y en cada detalle de biblioteca. Puedes utilizar la faceta Vulnerabilidad para ordenar por ID de CVE. 
+  - Por ejemplo, cada vulnerabilidad tiene un ID de CVE asociado, que se muestra en el explorador y en cada detalle de librería. Puedes utilizar la faceta Vulnerabilidad para ordenar por ID de CVE.
 - Ver detalles de vulnerabilidad como:
   - Explicación
   - Servicio y entorno
@@ -68,9 +68,9 @@ En **Bibliotecas**, puedes:
 
 <!-- ### Riesgos de las bibliotecas
 
-Los riesgos de una biblioteca son un grupo de vulnerabilidades que no están directamente ligadas a la seguridad. Por ejemplo, la biblioteca está obsoleta, la licencia del proyecto es demasiado restrictiva o el equipo sigue prácticas recomendadas muy básicas
+Los riesgos de una biblioteca son un grupo de vulnerabilidades que no están directamente ligadas a la seguridad. Por ejemplo, la librería está obsoleta, la licencia del proyecto es demasiado restrictiva o el equipo sigue prácticas recomendadas muy básicas
 
-Para ver los riesgos de tu biblioteca, consulta [Riesgos de bibliotecas][4] o ve a **Security > Inventory  > Libraries** (Seguridad > Inventario > Bibliotecas).
+Para ver los riesgos de tu biblioteca, consulta [Riesgos de librerías][4] o ve a **Security > Inventory  > Libraries** (Seguridad > Inventario > Bibliotecas).
 
 En **Bibliotecas**, puedes:
 - En **Vista**, seleccionar **Tiempo de ejecución**, para ver los riesgos detectados en tiempo de ejecución.

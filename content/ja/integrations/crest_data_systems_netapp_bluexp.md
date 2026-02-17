@@ -143,4 +143,4 @@ Netapp BlueXP の Datadog インテグレーションで収集されるデータ
 [12]: https://docs.crestdata.ai/datadog-integrations-readme/NetApp_BlueXP.pdf
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-bluexp" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-bluexp" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

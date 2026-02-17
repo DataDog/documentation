@@ -84,6 +84,6 @@ RUM [글로벌 컨텍스트][6]를 사용하면 각 사용자의 구매량과 �
 [3]: /ko/real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
 [4]: /ko/real_user_monitoring/explorer/export/
 [5]: /ko/monitors/notify/
-[6]: /ko/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[7]: /ko/real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[6]: /ko/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[7]: /ko/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [8]: /ko/real_user_monitoring/android/mobile_vitals/

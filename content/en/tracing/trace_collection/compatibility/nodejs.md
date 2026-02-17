@@ -139,21 +139,25 @@ Or, modify the `package.json` file if you typically start an application with np
 | [mysql][35]            | `>=2`    | Fully supported |                                                  |
 | [mysql2][36]           | `>=1`    | Fully supported |                                                  |
 | [oracledb][37]         | `>=5`    | Fully supported |                                                  |
+| [opensearch][69]       | `>=1`    | Fully supported |                                                  |
 | [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
 | [redis][39]            | `>=0.12` | Fully supported |                                                  |
 | [sharedb][40]          | `>=1`    | Fully supported |                                                  |
 | [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [Prisma][69]           | `>=6.1.0`| Fully supported |                                                  |
 
 ### Worker compatibility
 
-| Module                     | Versions | Support Type    | Notes                                                  |
-| -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][43]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
-| [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
-| [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
-| [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [rhea][48]                 | `>=1`    | Fully supported |                                                        |
+| Module                               | Versions  | Support Type    | Notes                                                  |
+| --------------------------           | --------  | --------------- | ------------------------------------------------------ |
+| [@azure/service-bus][68]             | `>=7.9.2` | Fully supported |                                                        |
+| [@confluentinc/kafka-javascript][67] | `>=1`     | Fully supported |                                                        |
+| [@google-cloud/pubsub][42]           | `>=1.2`   | Fully supported |                                                        |
+| [amqp10][43]                         | `>=3`     | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
+| [amqplib][44]                        | `>=0.5`   | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
+| [generic-pool][45]                   | `>=2`     | Fully supported |                                                        |
+| [kafkajs][46]                        | `>=1.4`   | Fully supported |                                                        |
+| [rhea][48]                           | `>=1`     | Fully supported |                                                        |
 
 ### SDK compatibility
 
@@ -258,3 +262,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [64]: https://github.com/openai/openai-node
 [65]: https://github.com/dotansimha/graphql-yoga
 [66]: https://js.langchain.com/
+[67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
+[68]: https://www.npmjs.com/package/@azure/service-bus
+[69]: https://github.com/opensearch-project/opensearch-js

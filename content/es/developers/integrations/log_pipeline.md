@@ -60,7 +60,7 @@ Una vez que finalice el diseño de la integración de Datadog y se envéin los l
 
 Para obtener más información sobre cómo convertirte en socio tecnológico de Datadog y acceder a un entorno aislado (sandbox) de desarrollo de integraciones, consulta [Crear una integración][18].
 
-<div class="alert alert-warning">Para ser revisadas por el equipo de integraciones de Datadog, las integraciones de logs deben incluir recursos y contar con procesadores o facetas de pipeline.</div>
+<div class="alert alert-danger">Para ser revisadas por el equipo de integraciones de Datadog, las integraciones de logs deben incluir recursos y contar con procesadores o facetas de pipeline.</div>
 
 ### Información general de los pipelines
 

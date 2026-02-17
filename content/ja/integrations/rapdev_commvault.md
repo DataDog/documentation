@@ -51,7 +51,7 @@ pricing:
   short_description: 月額料金 (1 テラバイトあたり)
   tag: terrabyte_count
   unit_label: テラバイト
-  unit_price: 100
+  unit_price: 10.0
 public_title: Commvault
 short_description: Commvault ジョブ、ライブラリステータス、アラート、イベントの監視
 supported_os:
@@ -131,4 +131,4 @@ Rapdev Commvault インテグレーションは、Command Center から Datadog 
 ボストンより ❤️ を込めて
 *お探しのインテグレーションが見つかりませんか？組織に必要な重要な機能が欠けていますか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください。私たちがその機能を構築します！*
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-commvault" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-commvault" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

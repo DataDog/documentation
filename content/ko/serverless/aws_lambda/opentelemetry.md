@@ -28,7 +28,7 @@ OpenTelemetry API를 사용해 AWS Lambda를 계측하려면 Lambda 함수에서
 
 ### Datadog 람다 확장 프로그램{#sdk}을 통해 OpenTelemetry SDK에서 OpenTelemetry 트레이스 전송하세요.
 
-<div class="alert alert-warning">이 기능은 베타 버전입니다.</div>
+<div class="alert alert-danger">이 기능은 베타 버전입니다.</div>
 
 이 접근 방식은 [Datadog 에이전트 ][4]의 OLTP 수집과 유사합니다. 런타임에 추적 지원을 사용할 수 없는 상황(예: Rust 또는 PHP)에서는 권장됩니다.
 

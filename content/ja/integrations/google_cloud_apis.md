@@ -75,7 +75,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_apis" >}}
+{{< get-metrics-from-git "google-cloud-apis" >}}
 
 
 ### イベント

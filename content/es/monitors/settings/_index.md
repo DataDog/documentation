@@ -24,7 +24,7 @@ En la página [Configuraciones de monitor][1] puedes acceder a los siguientes te
 
 Las políticas de etiquetas de monitores te permiten aplicar la validación de datos en etiquetas y valores de etiquetas de tus monitores Datadog. Esto garantiza que las alertas se envíen a los sistemas y flujos de trabajo posteriores correctos para su clasificación y procesamiento.
 
-<div class="alert alert-warning">Una vez configuradas, las políticas de etiquetas se aplican a <strong>todos</strong> los monitores Datadog</div>
+<div class="alert alert-danger">Una vez configuradas, las políticas de etiquetas se aplican a <strong>todos</strong> los monitores Datadog</div>
 
 - Para crear un nuevo monitor, este debe adherir a las políticas de etiquetas de tu organización.
 - Los monitores existentes que infringen las políticas de etiquetas de tu organización siguen proporcionando alertas y notificaciones, pero deben actualizarse para que coincidan con las políticas de etiquetas, antes de poder modificar otros parámetros.

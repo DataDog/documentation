@@ -26,7 +26,13 @@ further_reading:
 
 If you already have data or services registered in Backstage or ServiceNow, you can import these services into Datadog directly. 
 
-## Import from Backstage
+## Entities from Backstage
+
+### Sync Backstage entities into Datadog Software Catalog 
+
+You can use the [Datadog's Backstage plugin][3] to map your [Backstage entities][4] into Datadog's Software Catalog [definition schemas][5]. The plugin supports entity filtering so you can import only entities that meet certain criteria (for example, only entities with a specific Backstage component type, like services or repositories). 
+
+### Import entity descriptor files from Backstage
 
 {{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
@@ -51,7 +57,7 @@ During import, Datadog maps Backstage data to Datadog data:
 | `spec.dependsOn` | `dependsOn` |
 | Other `spec` values | Mapped to custom tags |
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Software Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have <code>kind:component</code> or <code>kind:system</code>, the entire <code>catalog-info.yaml</code> file is rejected. Schema version v3.0 is required to use kind:system and the <code>dependsOn</code> field.
 </div>
 
@@ -83,3 +89,6 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /integrations/servicenow/#service-ingestion
+[3]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend
+[4]: https://backstage.io/docs/features/software-catalog/descriptor-format
+[5]: /internal_developer_portal/software_catalog/entity_model/

@@ -75,7 +75,7 @@ Azure 구독에는 사전 구성된 리소스 제한량이 있습니다. 예상�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_usage_and_quotas" >}}
+{{< get-metrics-from-git "azure-usage-and-quotas" >}}
 
 
 ### 이벤트

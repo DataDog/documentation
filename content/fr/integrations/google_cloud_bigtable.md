@@ -48,7 +48,7 @@ Une fois cette opération effectuée, exportez vos logs Google Bigtable depuis 
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "google_cloud_bigtable" >}}
+{{< get-metrics-from-git "google-cloud-bigtable" >}}
 
 
 ### Événements

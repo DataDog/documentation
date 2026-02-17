@@ -38,20 +38,30 @@ DNS テストは、ネットワークの外部または内部からのテスト�
 
 ## 構成
 
-`DNS` テストの作成を選択した後、テストのリクエストを定義します。
+You may create a test using one of the following options:
 
-### リクエストを定義する
+- **Create a test from a template**:
 
-1. テストでクエリする**ドメイン**を指定します (例: `www.example.com`)。
-2. 使用する **DNS サーバー** を指定します（任意）。ドメイン名または IP アドレスを使用できます。指定されていない場合、DNS テストは `8.8.8.8` を使用して解決を実行し、 `1.1.1.1` と内部 AWS DNS サーバーにフォールバックします。
-3. DNS サーバーの **ポート** を指定します（任意）。指定されていない場合、DNS サーバーのポートはデフォルトで 53 になります。
-4. テストがタイムアウトするまでの時間を秒単位で指定します (オプション)。
-5. DNS テストに**名前**を付けます。
-6. DNS テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
 
-{{< img src="synthetics/api_tests/dns_test_config_new.png" alt="DNS クエリを定義する" style="width:90%;" >}}
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+- **Build a test from scratch**:
+
+   1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、DNS リクエストタイプを選択します。
+   1. テストでクエリする**ドメイン**を指定します (例: `www.example.com`)。
+   1. 使用する **DNS サーバー** を指定します（任意）。ドメイン名または IP アドレスを使用できます。指定されていない場合、DNS テストは `8.8.8.8` を使用して解決を実行し、 `1.1.1.1` と内部 AWS DNS サーバーにフォールバックします。
+   1. DNS サーバーの **ポート** を指定します（任意）。指定されていない場合、DNS サーバーのポートはデフォルトで 53 になります。
+   1. テストがタイムアウトするまでの時間を秒単位で指定します (オプション)。
+   1. DNS テストに**名前**を付けます。
+   1. DNS テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+   1. **Test Domain** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。<br /><br>
+
+   {{< img src="synthetics/api_tests/synthetics_dns_test_domain.png" alt="DNS クエリを定義する" style="width:90%;" >}}
+
+   1. Click **Create Test** to submit your API test.
 
 ### スニペット
 
@@ -83,7 +93,7 @@ DNS テストは、ネットワークの外部または内部からのテスト�
 
 DNS テストを実行するための **Locations** を選択します。DNS テストは、パブリックドメインまたはプライベートドメインを監視するかに応じて、管理ロケーションおよび[プライベートロケーション][1]の両方から実行することができます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -95,7 +105,7 @@ DNS テストは次の頻度で実行できます。
 
 {{% synthetics-alerting-monitoring %}}
 
-{{% synthetics-variables %}} 
+{{% synthetics-variables %}}
 
 ### 変数を使用する
 
@@ -105,7 +115,7 @@ DNS テストの URL、高度なオプション、アサーションで、[**Set
 
 ## テストの失敗
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが途中で失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対するアサーションをテストせずにテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
 これらの理由には以下が含まれます。
 
@@ -115,7 +125,7 @@ DNS テストの URL、高度なオプション、アサーションで、[**Set
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `TIMEOUT`
@@ -132,11 +142,7 @@ DNS テストの URL、高度なオプション、アサーションで、[**Set
 
 ### アクセス制限
 
-アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
-
-組織内の役割に基づいて、DNS テストへのアクセスを制限することができます。DNS テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## その他の参考資料
 
@@ -153,4 +159,3 @@ DNS テストの URL、高度なオプション、アサーションで、[**Set
 [9]: /ja/synthetics/settings/#global-variables
 [10]: /ja/account_management/rbac/
 [11]: /ja/account_management/rbac#custom-roles
-[12]: /ja/account_management/rbac/#create-a-custom-role

@@ -3,6 +3,8 @@ aliases:
 - /ja/agent/guide/cluster-agent-custom-metrics-server
 - /ja/agent/cluster_agent/external_metrics
 - /ja/containers/cluster_agent/external_metrics
+description: Cluster Agent と組み合わせて Kubernetes Horizontal Pod Autoscaler を設定し、カスタムおよび外部の
+  Datadog メトリクスを利用できるようにします。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: ブログ
@@ -368,6 +370,13 @@ Datadog Cluster Agent は、自動的にそのネームスペース (`dcaautogen
 
 後で HPA を移行して `DatadogMetric` を参照するようにした場合、自動生成されたリソースは数時間後に Datadog Cluster Agent によりクリーンアップされます。
 
+オプションで、この動作を無効にするには、`DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN` を `false` に設定します。
+
+```yaml
+- name: DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN
+  value: "false"
+```
+
 ## Cluster Agent によるクエリの実行
 Cluster Agent は `DatadogMetric` オブジェクト用に 30 秒ごとにクエリを実行します。また、Cluster Agent は、実行されたメトリクスクエリを 35 件ずつグループ化します。したがって、Datadog メトリクス API に対する 1 つのリクエストには 35 件の`DatadogMetric` クエリが含まれます。
 
@@ -384,7 +393,7 @@ Cluster Agent は `DatadogMetric` オブジェクト用に 30 秒ごとにクエ
   value: "900"
 ```
 
-## トラブルシューティング
+## トラブル シューティング
 
 ### DatadogMetric のステータス
 Datadog Cluster Agent は、Datadog へのクエリの結果を反映させるために、すべての `DatadogMetric` リソースの `status` サブリソースの更新を行います。これは動作が失敗した場合に起こる状況を理解するための主な情報源となります。以下を実行してこの情報を出力することができます:
@@ -457,7 +466,7 @@ status:
         averageValue: <METRIC_VALUE>
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

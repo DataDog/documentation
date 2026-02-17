@@ -1,5 +1,6 @@
 ---
 title: CoTerm Configuration Rules
+description: "Configure CoTerm with Lua-based lints and rules to validate commands, require approvals, and control actions for specific terminal commands."
 further_reading:
 - link: "/coterm"
   tag: "documentation"
@@ -89,7 +90,7 @@ Rules are evaluated in order. CoTerm runs the actions specified for the first ru
 You can specify actions for CoTerm to take in a number of different ways. CoTerm decides which actions to take according to the following hierarchy:
 
 1. **CLI flags**: If you specify actions in CLI flags (such as `--save-level`, `--approval`), CoTerm takes only the actions specified through these CLI flags. This overrides all other configurations.
-2. **Lua configuration file**: If no CLI flags specify actions, but a Lua rule in `.ddcoterm/config.yaml` evaluates to `true`, CoTerm takes the actions specified with the first rule that evalutes to `true`. Overrides all configurations other than CLI flags.
+2. **Lua configuration file**: If no CLI flags specify actions, but a Lua rule in `.ddcoterm/config.yaml` evaluates to `true`, CoTerm takes the actions specified with the first rule that evaluates to `true`. Overrides all configurations other than CLI flags.
 3. **`process_config.default_actions`**: If no CLI flags specify actions, and no Lua rules match, CoTerm takes the actions specified in `process_config.default_actions` in `.ddcoterm/config.yaml`, if any.
 4. **Default actions**: If no CLI flags specify actions, no Lua rules match, and `process_config.default_actions` is not set, CoTerm takes the following actions: `["record", "logs", "process_info"]`.
 
@@ -125,4 +126,4 @@ All Lua snippets are executed inside a sandboxed [Luau][3] runtime. CoTerm injec
 [3]: https://luau.org/
 [4]: https://www.lua.org/pil/2.5.html
 [5]: https://www.lua.org/pil/2.1.html
-[6]: /service_management/incident_management/
+[6]: /incident_response/incident_management/

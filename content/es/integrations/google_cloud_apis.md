@@ -77,7 +77,7 @@ Si aún no lo has hecho, primero configura la [integración Google Cloud Platfor
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "google_cloud_apis" >}}
+{{< get-metrics-from-git "google-cloud-apis" >}}
 
 
 ### Eventos

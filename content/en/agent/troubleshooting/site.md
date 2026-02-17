@@ -1,5 +1,6 @@
 ---
 title: Agent Site Issues
+description: "Configure the Datadog Agent to send data to the correct Datadog site by setting the site parameter or DD_SITE environment variable."
 ---
 
 By default the Agent sends its data to Datadog US site: `app.datadoghq.com`. If your organization is on another site, you must update the `site` parameter in your [Agent main configuration file][1] or set the `DD_SITE` environment variable.

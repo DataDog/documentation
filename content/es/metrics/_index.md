@@ -20,11 +20,11 @@ title: Métricas
 Esta es una introducción a las métricas en Datadog y por qué son útiles. Esta sección incluye los siguientes temas:
 
 {{< whatsnext desc="Enviar métricas a Datadog" >}}
-    {{< nextlink href="/metrics/custom_metrics">}}<u>Enviar métricas personalizadas</u>: descubre qué son las métricas personalizadas y cómo enviarlas.{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Enviar métricas de OpenTelemetry</u>: configura el Datadog Agent o OpenTelemetry Collector.{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>Enviar métricas personalizadas</u>: conoce qué métricas personalizadas y cómo enviarlas.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/reference/otel_metrics" >}}<u>Enviar métricas de OpenTelemetry</u>: configura el Datadog Agent o OpenTelemetry Collector.{{< /nextlink >}}
     {{< nextlink href="/metrics/types" >}}<u>Tipos de métricas</u>: tipos de métricas que se pueden enviar a Datadog.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>Métricas de distribución</u>: descubre las métricas de distribución y los percentiles precisos globalmente.{{< /nextlink >}}
-    {{< nextlink href="/metrics/units" >}}<u>Unidades de métricas</u>: obtén información sobre las unidades que se pueden asociar con las métricas.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Métricas de distribución</u>: obtén información sobre las métricas de distribución y los percentiles precisos globalmente.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>Unidades de métricas</u>: obtén más información sobre las unidades que se pueden asociar con las métricas.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Visualize and query your metrics" >}}
@@ -34,8 +34,8 @@ Esta es una introducción a las métricas en Datadog y por qué son útiles. Est
     {{< nextlink href="/metrics/nested_queries" >}}<u>Consultas anidadas</u> - Aplica capas adicionales de agregación para develar capacidades de consulta avanzadas.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Conocer y gestionar tus volúmenes de métricas personalizadas y costos" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u>: conoce cómo controlar volúmenes de métricas personalizadas con etiquetas y configuraciones de agregaciones mediante Metrics without LimitsTM.{{< /nextlink >}}
+{{< whatsnext desc="Comprende y gestiona los costes y volúmenes de tus métricas personalizadas" >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u>: obtén más información sobre cómo controlar los volúmenes de métricas personalizadas con configuraciones de etiquetas mediante Metrics without LimitsTM.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Información general
@@ -195,10 +195,10 @@ Lee la [documentación de Resumen de métricas][22] para obtener más detalles.
 
 ## Referencias adicionales
 
-{{< whatsnext desc="Para seguir con las métricas, consulta:">}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtro avanzado</u>: filtra tus datos para limitar el alcance de las métricas devueltas.{{< /nextlink >}}
-    {{< nextlink href="/metrics/distributions" >}}<u>Métricas de distribución</u>: calcula los percentiles globales a lo largo de todo tu conjunto de datos.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u>: descubre cómo controlar los volúmenes de métricas personalizadas con etiquetas y configuraciones de agregación mediante Metrics without LimitsTM.{{< /nextlink >}}
+{{< whatsnext desc="Para continuar con las métricas, consulta:">}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtrado avanzado</u>: filtra tus datos para reducir el alcance de las métricas devueltas.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Métricas de distribución</u>: calcula los percentiles globales en todo el conjunto de datos.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u>: obtén información sobre cómo controlar los volúmenes de métricas personalizadas con configuraciones de etiqueta mediante Metrics without LimitsTM.{{< /nextlink >}}
     {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u>: únete a una sesión interactiva para obtener todo el potencial de las métricas.{{< /nextlink >}}
 {{< /whatsnext >}}
 

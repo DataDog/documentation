@@ -75,7 +75,7 @@ Conéctate a Prometheus para:
 
 **Nota**: Datadog recomienda utilizar el [check de OpenMetrics][1], ya que es más eficiente y es enteramente compatible con el formato de texto de Prometheus. Utiliza el check de Prometheus sólo cuando el endpoint de las métricas no es compatible con un formato de texto.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Todas las métricas recuperadas por esta integración se consideran <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">métricas personalizadas</a>.
 </div>
 

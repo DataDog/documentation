@@ -36,7 +36,7 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-<div class="alert alert-warning">이 페이지는 Amazon 클라우드와치(CloudWatch)에서 AWS 람다 메트릭 수집을 위한 설명서로 제한됩니다. 실시간으로 람다 함수에서 직접 텔레메트리를 수집하기 위한 <a href="/serverless">Datadog 서버리스 설명서</a>를 참조하세요 .</div>
+<div class="alert alert-danger">이 페이지는 Amazon 클라우드와치(CloudWatch)에서 AWS 람다 메트릭 수집을 위한 설명서로 제한됩니다. 실시간으로 람다 함수에서 직접 텔레메트리를 수집하기 위한 <a href="/serverless">Datadog 서버리스 설명서</a>를 참조하세요 .</div>
 
 ## 개요
 
@@ -69,7 +69,7 @@ AWS 람다는 이벤트에 대응하기 위한 코드를 실행하고 자동으�
 
 ## 수집한 데이터
 
-<div class="alert alert-warning">AWS 람다 확장명을 사용하면 AWS에서 보고하는 <em>기간</em> 메트릭은 람다 함수가 소비하는 <em>post_runtime_extensions_duration</em> <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">보고하여 함수 반응을 반환한 뒤 활동을 수행합니다. </a>. 함수의 실제 성능을 모니터링하려면 <em>duration - post_runtime_extensions_duration</em> 또는 <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog 개선 메트릭</a> <em>aws.lambda.enhanced.runtime_duration</em>을 사용하세요.</div>
+<div class="alert alert-danger">AWS 람다 확장명을 사용하면 AWS에서 보고하는 <em>기간</em> 메트릭은 람다 함수가 소비하는 <em>post_runtime_extensions_duration</em> <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">보고하여 함수 반응을 반환한 뒤 활동을 수행합니다. </a>. 함수의 실제 성능을 모니터링하려면 <em>duration - post_runtime_extensions_duration</em> 또는 <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog 개선 메트릭</a> <em>aws.lambda.enhanced.runtime_duration</em>을 사용하세요.</div>
 
 AWS에서 검색한 각 메트릭에는 AWS 콘솔에 표시하는 동일한 태그가 할당되어 있습니다. 함수 이름, 보안-그룹 등을 포함하나 이에 제한되지 않습니다.
 

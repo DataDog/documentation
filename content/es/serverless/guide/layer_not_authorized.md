@@ -1,7 +1,7 @@
 ---
 title: Solucionar problemas de errores de capas serverless no autorizadas
 ---
-Esta guía es una ayuda para solucionar el error de despliegue `not authorized to perform: lambda:GetLayerVersion on resource`. Este error suele producirse en las capas de la biblioteca Lambda de Datadog o en la capa de la Datadog Extension.
+Esta guía es una ayuda para solucionar el error de despliegue `not authorized to perform: lambda:GetLayerVersion on resource`. Este error suele producirse en las capas de la librería Lambda de Datadog o en la capa de la Datadog Extension.
 
 ## Regionalidad
 Las funciones de Lambda solo pueden incluir las [capas de Lambda][1] que se encuentran en la misma región que la función. Por lo general, este error se produce cuando los usuarios copian la configuración de instrumentación desde otras aplicaciones desplegadas en regiones diferentes.
@@ -10,7 +10,7 @@ Verifica que la región de la capa de Lambda y la versión de la función de Lam
 
 Para comprobar si existe una versión de la capa de Lambda, ejecuta `aws lambda get-layer-version` con credenciales de AWS válidas.
 
-Por ejemplo, para verificar la capa de la Datadog Extension y la capa de la biblioteca Node.js de Datadog, ejecuta:
+Por ejemplo, para verificar la capa de la Datadog Extension y la capa de la librería Node.js de Datadog, ejecuta:
 ```
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \

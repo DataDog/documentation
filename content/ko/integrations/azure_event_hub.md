@@ -55,7 +55,7 @@ Event Hubs에서 로그를 수집하려면 다음 프로세스를 따르세요.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_event_hub" >}}
+{{< get-metrics-from-git "azure-event-hub" >}}
 
 
 ### 이벤트

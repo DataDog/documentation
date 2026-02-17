@@ -8,7 +8,7 @@ title: Serverless y OpenTelemetry
 
 [OpenTelemetry][1] es un marco de observabilidad de código abierto que proporciona a los equipos de TI protocolos y herramientas estandarizados para recopilar y enrutar datos de telemetría.
 
-Si instrumentaste tu código de forma personalizada con la [API de OpenTelemetry][2], o si quieres escribir código de instrumentación personalizado independiente del proveedor, puedes configurarlo para que genere tramos (spans) y trazas (traces) con el estilo de Datadog. Luego, puedes procesar estos tramos y trazas con la biblioteca de rastreo de Datadog del lenguaje que utilizas y enviar los datos a Datadog.
+Si instrumentaste tu código de forma personalizada con la [API de OpenTelemetry][2], o si quieres escribir código de instrumentación personalizado independiente del proveedor, puedes configurarlo para que genere tramos (spans) y trazas (traces) con el estilo de Datadog. Luego, puedes procesar estos tramos y trazas con la librería de rastreo de Datadog del lenguaje que utilizas y enviar los datos a Datadog.
 
 ### AWS Lambda
 

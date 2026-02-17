@@ -1,4 +1,4 @@
-#### Create a storage bucket
+### Create a storage bucket
 
 1. Navigate to [Google Cloud Storage][9091].
 1. On the Buckets page, click **Create** to create a bucket for your archives..
@@ -11,10 +11,10 @@
 
 1. Create a Google Cloud Storage [service account][9092].
     - Grant the Service Account permissions to your bucket with `Storage Admin` and `Storage Object Admin` permissions.
-    - Download the JSON service account key file. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`. You reference this file when you set up the [Google Cloud Storage destination](#set-up-the-destinations) in the pipeline UI later on.
+    - If you want to authenticate with a credentials file, download the service account key file and place it under `DD_OP_DATA_DIR/config`. You reference this file when you set up the [Google Cloud Storage destination](#set-up-the-destinations) later on.
 1. Follow these [instructions][9093] to create a service account key. Choose `json` for the key type.
 
-#### Connect the storage bucket to Datadog Log Archives
+### Connect the storage bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][9094].
 1. Click **New archive**.
@@ -36,4 +36,3 @@ See the [Log Archives documentation][9096] for additional information.
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
-[9097]: /observability_pipelines/advanced_configurations/#referencing-files-in-kubernetes

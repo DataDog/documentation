@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-datastore
+app_uuid: 93acce72-3f1c-444f-8518-0f16635af95d
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.datastore.api.request_count
+      metadata_path: metadata.csv
+      prefix: gcp.datastore.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 184
+    source_type_name: Google Cloud Datastore
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - data stores
@@ -8,22 +28,39 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: Datastore 읽기/쓰기 성능, 요청, 카운트 등을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_datastore/
 draft: false
 git_integration_title: google_cloud_datastore
 has_logo: true
 integration_id: google-cloud-datastore
-integration_title: Google Datastore
+integration_title: Google Cloud Datastore
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_datastore
-public_title: Datadog-Google Datastore 통합
-short_description: Datastore 읽기/쓰기 성능, 요청, 카운트 등을 추적합니다.
+public_title: Google Cloud Datastore
+short_description: Cloud Datastore는 확장성이 뛰어난 웹 및 모바일 애플리케이션용 NoSQL 데이터베이스입니다.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Data Stores
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Category::Mobile
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Cloud Datastore는 확장성이 뛰어난 웹 및 모바일 애플리케이션용 NoSQL 데이터베이스입니다.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Datastore
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Cloud Datastore는 확장성이 뛰어난 웹 및 모바일 애플리케이션용 NoSQL 데이터베이스입니다.

@@ -1,0 +1,78 @@
+on:
+  schedule:
+    # At 07:00 on every day-of-week from Monday through Friday.
+    - cron: "0 7 * * 1-5"
+  workflow_dispatch: # allows manual trigger
+
+jobs:
+  private-action-runner-version:
+    permissions:
+      contents: write # for git push
+      id-token: write # Needed to federate tokens.
+      pull-requests: write # Action creates a PR.
+    runs-on: ubuntu-latest
+    name: Find latest private action runner version
+    steps:
+      - uses: DataDog/dd-octo-sts-action@acaa02eee7e3bb0839e4272dacb37b8f3b58ba80 # v1.0.3
+        id: octo-sts
+        with:
+          scope: DataDog/documentation
+          policy: self.bump-private-action-runner-version.create-pr
+        
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
+        with:
+          python-version: "3.11"
+      - run: pip install requests semver
+
+      - name: Find and write latest version
+        id: write-version
+        run: |
+          python local/bin/py/version_getter.py \
+          --url "https://api.datadoghq.com/api/v2/on-prem-management-service/runner/latest-image" \
+          --file-name "private_action_runner_version.json"
+
+      - name: Save modified file
+        run: |
+          mkdir -p $RUNNER_TEMP/temp
+          cp ./data/private_action_runner_version.json $RUNNER_TEMP/temp/
+
+      - name: echo new version
+        run: echo ${{ steps.write-version.outputs.new_version }}
+
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: true
+
+      - name: Restore modified file
+        run: |
+          cp $RUNNER_TEMP/temp/private_action_runner_version.json ./data/
+
+      - name: Write version
+        if: steps.write-version.outputs.new_version == 'true'
+        run: |-
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ./data/private_action_runner_version.json
+          git commit -m "(Automated) Bump private action runner version"
+          git push -f origin HEAD:refs/heads/automatic-version-update/private-action-runner
+
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        name: Propose change with latest versions
+        if: steps.write-version.outputs.new_version == 'true'
+        with:
+          github-token: ${{ steps.octo-sts.outputs.token }}
+          result-encoding: string
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "(Automated) Bump version",
+              body: "### Merge instructions\n- [x] Please merge after reviewing",
+              head: "automatic-version-update/private-action-runner",
+              base: "master",
+              maintainer_can_modify: true
+            })

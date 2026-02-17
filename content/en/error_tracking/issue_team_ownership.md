@@ -26,7 +26,7 @@ Team ownership information appears on the issue details panel when available:
 
 You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer.
 
-{{< img src="error_tracking/ownership-sidebar.png" alt="Team ownership information on sidebar" style="width:80%;" >}}
+{{< img src="error_tracking/ownership-search-bar.png" alt="Team owner filtering in the search bar" style="width:80%;" >}}
 
 ## Setup
 

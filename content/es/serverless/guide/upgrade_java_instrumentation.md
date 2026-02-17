@@ -6,13 +6,13 @@ Este documento contiene instrucciones para actualizar la instrumentación de Dat
 
 Las capas de Lambda de Datadog `dd-trace-java:5` y `Datadog-Extension:25` introducen los siguientes cambios en el proceso de configuración de la instrumentación en las funciones de Lambda para Java:
 
-1. La biblioteca [datadog-lambda-java][2] está obsoleta y no es necesaria.
+1. La librería [datadog-lambda-java][2] está obsoleta y no es necesaria.
 2. No es necesario realizar cambios en el código (como la envoltura `DDLambda`), excepto en el caso de la instrumentación personalizada.
 3. Puedes configurar Datadog mediante la integración [Datadog CI][3] y el complemento [Datadog Serverless Plugin][4].
 
 ### Actualizar
 
-1. Elimina la biblioteca `datadog-lambda-java` de `build.gradle` o `pom.xml`, puesto que ya no es necesaria.
+1. Elimina la librería `datadog-lambda-java` de `build.gradle` o `pom.xml`, puesto que ya no es necesaria.
 2. Elimina `DDLambda` y la sentencia "import" del código de tu función.
 3. Define la variable de entorno `AWS_LAMBDA_EXEC_WRAPPER` como `/opt/datadog_wrapper`.
 4. Cambia la versión de `dd-trace-java` a `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` y `Datadog-Extension` a `{{< latest-lambda-layer-version layer="extension" >}}`.

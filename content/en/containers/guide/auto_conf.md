@@ -1,5 +1,6 @@
 ---
 title: Autodiscovery Auto-Configuration
+description: Manage automatic configuration for popular containerized services using Autodiscovery auto-configuration templates
 aliases:
  - /agent/autodiscovery/auto_conf
  - /agent/faq/auto_conf

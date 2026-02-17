@@ -13,7 +13,7 @@ author:
   vendor_id: crest-data-systems
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -84,8 +84,8 @@ Datadog のモニタリング・分析プラットフォームを活用するこ
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][1]
-- Sales Email: [datadog-sales@crestdata.ai][2]
+- サポートメール: [datadog.integrations@crestdata.ai][1]
+- 営業メール: [datadog-sales@crestdata.ai][2]
 - Web サイト: [crestdata.ai][3]
 
 [1]: mailto:datadog.integrations@crestdata.ai
@@ -93,4 +93,4 @@ Datadog のモニタリング・分析プラットフォームを活用するこ
 [3]: https://www.crestdata.ai/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/cds-custom-integration-development" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/cds-custom-integration-development" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

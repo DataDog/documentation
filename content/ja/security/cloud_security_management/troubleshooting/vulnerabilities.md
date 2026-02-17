@@ -2,29 +2,29 @@
 aliases:
 - /ja/security/vulnerabilities/troubleshooting/
 further_reading:
-- link: /security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers
+- link: /infrastructure/containers/container_images/#enable-sbom-collection
   tag: ドキュメント
-  text: コンテナイメージの脆弱性のセットアップ
+  text: Cloud Security Vulnerabilities で SBOM の収集を有効にする
 - link: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts
   tag: ドキュメント
   text: ホストの脆弱性のセットアップ
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: ブログ
   text: Datadog Container Monitoring のコンテナイメージによるトラブルシューティングワークフローの強化
-title: Cloud Security Management Vulnerabilities のトラブルシューティング
+title: Cloud Security Vulnerabilities のトラブルシューティング
 ---
 
 ## 概要
 
-If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+Cloud Security Vulnerabilities に関する問題が発生した場合は、以下のトラブルシューティング ガイドラインに従ってください。さらにサポートが必要な場合は、[Datadog サポート][1]にお問い合わせください。
 
-## Error messages
+## エラーメッセージ
 
-### Disk space requirements
+### ディスク容量の要件
 
 最大のコンテナイメージのサイズに等しいディスクの空き容量があることを確認してください。この空き容量は、Datadog Agent がコンテナイメージの脆弱性をスキャンするために必要です (デフォルトでは 1 GB)。
 
-The resulting error appears as:
+表示されるエラーは次のとおりです。
 ```sh
 Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
 ```
@@ -34,26 +34,56 @@ Error: failed to check current disk usage: not enough disk space to safely colle
 - 利用可能なディスク容量を少なくとも 1 GB に増やしてください。イメージが 1 GB を超える場合は、それに応じてディスク容量を増やしてください。
 - すべてのイメージが 1 GB 未満の場合、環境変数 `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` を使用して、デフォルトの Agent 要求ディスク容量を減らすことができます (デフォルト値は 1GB です)。
 
-### Uncompressed container image layers
+### 非圧縮のコンテナ イメージ レイヤー
 
-The SBOM scan only works with uncompressed container image layers. Certain Kubernetes distributions (such as AWS EKS, minikube, and kind), configure their container runtime to discard the uncompressed layers, causing the scan to fail.
+SBOM スキャンは、非圧縮のコンテナ イメージ レイヤーに対してのみ動作します。特定の Kubernetes ディストリビューション (AWS EKS、minikube、kind など) では、コンテナ ランタイムが非圧縮レイヤーを破棄するように設定されているため、スキャンが失敗します。
 
-The resulting error appears as:
+表示されるエラーは次のとおりです。
 
 ```sh
 ERROR | (pkg/workloadmeta/collectors/internal/containerd/image_sbom_trivy.go:80 in func2) | Failed to generate SBOM for containerd image: unable to marshal report to sbom format, err: analyze error: failed to analyze layer:  : unable to get uncompressed layer
 ```
 
-The workaround for this issue is to set the configuration option `discard_unpacked_layers=false` in the containerd configuration file.
+この問題の回避策は、次の構成オプションを設定することです:
+- containerd の場合: containerd の構成ファイルで `discard_unpacked_layers=false` を設定します。
+- Helm の場合: `values.yaml` ファイルで `datadog.sbom.containerImage.uncompressedLayersSupport: true` を設定します。
+- Datadog Operator の場合: DatadogAgent CRD で `features.sbom.containerImage.uncompressedLayersSupport` を `true` に設定します。
 
-## View related metrics
+### GKE のイメージ ストリーミング
 
-1. Go to **[Metrics > Summary][4]** in Datadog.
-2. Search for the following metrics to aid in troubleshooting:
-    -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
-    -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
-    -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
-    -  `datadog.agent.export_size`: The size of the archive written on disk. 
+Datadog は、Google Kubernetes Engine (GKE) でのイメージ ストリーミングをサポートしていません。GKE でこのオプションを有効にしている場合、Agent はコンテナ SBOM を生成できません。
+
+表示されるエラーは次のとおりです。
+
+```sh
+unable to mount containerd image, err: unable to scan image named: {image-name}, image is not unpacked
+```
+
+この問題の回避策は、GKE でイメージ ストリーミングを無効にすることです。詳細は、GKE ドキュメントの [Disable Image streaming][5] セクションを参照してください。
+
+## Cloud Security Vulnerabilities を無効にする
+
+Agent の `datadog-values.yaml` ファイルで、以下の構成オプションを `false` に設定します。
+
+```
+# datadog-values.yaml ファイル
+datadog:
+  sbom:
+    containerImage:
+      enabled: false
+
+      # Google Kubernetes Engine (GKE) または Amazon Elastic Kubernetes (EKS) を使用している場合は、次の行のコメントを解除します
+      # uncompressedLayersSupport: true
+
+    # Host Vulnerability Management の有効化
+    host:
+      enabled: false
+
+    # Container Vulnerability Management の有効化
+    # Datadog Helm バージョン `>= 3.46.0` ではイメージ収集がデフォルトで有効です
+      containerImageCollection:
+        enabled: false
+```
 
 ## その他の参考資料
 
@@ -63,3 +93,4 @@ The workaround for this issue is to set the configuration option `discard_unpack
 [2]: /ja/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
+[5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

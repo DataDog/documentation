@@ -18,13 +18,31 @@ title: Buscar logs
 
 ## Información general
 
-Aunque la información de logs individualmente puede ser útil visualizada como una lista, a veces se puede acceder a información valiosa a través de la agregación. Para acceder a esta información, busca logs en el [Log Explorer][5] y visualízalos como series temporales, listas principales, mapas de árbol, gráficos circulares o tablas.
+El [Log Explorer][5] te permite buscar y ver logs individualmente como una lista. Sin embargo, las perspectivas más valiosas a menudo provienen de la agregación de logs a escala. Utilizando la función de búsqueda, puedes filtrar los logs y visualizarlos como gráficos de series temporales, listas principales, mapas de árbol, gráficos circulares o tablas para comprender mejor las tendencias, los patrones y los valores atípicos de tus datos de log.
 
-La búsqueda de Log Explorer consta de un rango temporal y una consulta de búsqueda, combinando la búsqueda de `key:value` y [texto completo][6].
+## Consultas en lenguaje natural
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+Las consultas en lenguaje natural no están disponibles en el <a href="/getting_started/site">sitio Datadog</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{% /site-region %}}
+
+<div class="alert alert-info">Las consultas en lenguaje natural (NLQ) para logs se <strong>crean con Llama</strong>.</div>
+
+Utiliza las consultas en lenguaje natural (NLQ) para describir lo que buscas en inglés sencillo. Datadog traduce automáticamente tu solicitud en una consulta estructurada de logs, lo que facilita la exploración de logs sin necesidad de escribir una sintaxis compleja. Para acceder a esta función, haz clic en **Ask** (Preguntar) en el campo de búsqueda.
+
+{{< img src="/logs/explorer/search/log_explorer_nlq.mp4" alt="Consulta en lenguaje natural en el Log Explorer que muestra cómo buscar logs usando frases en inglés sencillo" video=true >}}
+
+El sistema traduce las entradas en lenguaje natural en consultas a Datadog y entiende contextos como servicios, atributos, etiquetas y rangos temporales. También detecta automáticamente los campos relevantes y permite a los usuarios crear visualizaciones con descripciones sencillas, por ejemplo, "Los 20 principales servicios por errores" o "Mostrar errores del servicio X en las últimas 24 horas".
+
+Para desactivar NLQ, debes tener [permisos `org_management`][8]. Ve a [Organization Settings > Preferences][7] (Configuración de la organización > Preferencias) y desactiva la función de consultas en lenguaje natural.
 
 ## Consulta de búsqueda
 
-Por ejemplo, para filtrar en logs producidos por un servicio de tienda web, con un estado de error, durante los últimos quince minutos, crea una consulta personalizada como `service:payment status:error rejected` y establece el intervalo de tiempo en `Past 15 minutes`:
+Una búsqueda en el Log Explorer consiste en un intervalo de tiempo y una consulta de búsqueda, mezclando `key:value` y una [búsqueda de texto completo][6].
+
+Para filtrar en logs producidos por un servicio de tienda web, con un estado de error, durante los últimos quince minutos, crea una consulta personalizada como `service:payment status:error rejected` y establece el intervalo de tiempo en `Past 15 minutes`:
 
 {{< img src="logs/explorer/search_filter.png" alt="Crear una consulta de búsqueda en el Log Explorer que filtre los logs de error de pagos rechazados de un servicio de tienda web" style="width:100%;" >}}
 
@@ -43,7 +61,7 @@ Utiliza la función de autocompletar de la barra de búsqueda para completar tu 
 
 ### Facetas y valores de autocompletar
 
-La barra de búsqueda sugiere automáticamente facetas en función de lo que escribas. Estas facetas se muestran en el mismo orden en el que aparecen en el [panel de facetas][5]. Si una faceta tiene un nombre definido, se muestra a la derecha del desplegable. Las facetas que no están configuradas para mostrarse en el panel de facetas no se sugieren para una búsqueda.
+La barra de búsqueda sugiere automáticamente facetas en función de lo que introduzcas en la barra de búsqueda. Estas facetas se muestran en el mismo orden en que aparecen en el [panel de facetas][5]. Si una faceta tiene un nombre definido, se muestra a la derecha del menú desplegable.
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="La barra de búsqueda de logs que muestra `network` como consulta y las facetas @network.bytes_written, @network.client.ip y @network.interface como opciones para autocompletar" style="width:80%;">}}
 
@@ -96,3 +114,5 @@ Puedes interactuar con la barra de búsqueda con el ratón, así como utilizando
 [4]: /es/dashboards/guide/custom_time_frames
 [5]: /es/logs/explorer/
 [6]: /es/logs/explorer/search_syntax/#full-text-search
+[7]: https://app.datadoghq.com/organization-settings/preferences
+[8]: /es/account_management/rbac/permissions/#access-management

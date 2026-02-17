@@ -202,7 +202,7 @@ EC2 インスタンスのセキュリティグループ設定で、APM と DogSt
 
 #### ネットワークパフォーマンス監視
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 この機能は Linux でのみ利用可能です。
 </div>
 
@@ -314,7 +314,7 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 {{% site-region region="gov" %}}
 #### 行政機関の環境向けの Datadog 用 FIPSプロキシ
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 この機能は Linux でのみ利用可能です。
 </div>
 

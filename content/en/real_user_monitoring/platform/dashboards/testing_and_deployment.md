@@ -43,11 +43,11 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 The RUM Web App Deployment Tracking dashboard helps you identify when a recent deployment is causing performance issues or new errors within your application. To use this feature, make sure that you [add RUM versions to your application][4]. This dashboard shows:
 
 - **Core web vitals**:
-  For all views, three browser performance metrics are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance metrics, such as Load Time, are also available.
+  For all views, three browser KPIs are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
 - **Errors**: 
   See a count of errors, percentage of views with errors, and explore ongoing issues.
-- **Browser performance metrics**:
-  Compare performance metrics like loading time, sessions, errors, and load times across different services and versions.
+- **Browser performance telemetry**:
+Compare performance telemetry like loading time, sessions, errors, and load times across different services and versions.
 
 {{< img src="real_user_monitoring/dashboards/dashboard-deployment-web.png" alt="Out-of-the-box web deployment dashboard" style="width:100%" >}}
 
@@ -64,7 +64,7 @@ This dashboard shows:
 - **Errors**:
   Review error count by version, error rate by version, and explore ongoing errors.
 - **Mobile vitals by version**:
-  For all versions, four mobile performance metrics are highlighted: slow renders, frozen frames, application start time, and memory usage.
+  For all versions, additional mobile KPIs are highlighted: slow renders, frozen frames, application start time, and memory usage.
 
 {{< img src="real_user_monitoring/dashboards/dashboard-deployment-mobile.png" alt="Out-of-the-box mobile deployment dashboard" style="width:100%" >}}
 
@@ -75,10 +75,10 @@ For more information about the data displayed, see our documentation for each pl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
-[2]: /real_user_monitoring/browser/data_collected/
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/browser/setup/#initialization-parameters
+[4]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [5]: /real_user_monitoring/ios/data_collected/
 [6]: /real_user_monitoring/android/data_collected/
 [7]: /real_user_monitoring/reactnative/data_collected/
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
+[8]: /real_user_monitoring/application_monitoring/flutter/data_collected/

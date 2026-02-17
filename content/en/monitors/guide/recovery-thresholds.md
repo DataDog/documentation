@@ -1,5 +1,6 @@
 ---
 title: Recovery thresholds
+description: "Configure recovery thresholds to add conditions for monitor recovery from alert states and reduce alert flapping noise."
 further_reading:
 - link: "/monitors/types/metric/"
   tag: "Documentation"

@@ -79,7 +79,7 @@ tile:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_private_service_connect" >}}
+{{< get-metrics-from-git "google-cloud-private-service-connect" >}}
 
 
 ### サービスチェック

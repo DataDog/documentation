@@ -90,7 +90,7 @@ Hyper-V チェックは [Datadog Agent][2] パッケージに含まれていま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "hyperv" >}}
+{{< get-metrics-from-git "hyper-v" >}}
 
 
 ### サービスチェック

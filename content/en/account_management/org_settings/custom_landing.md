@@ -1,5 +1,6 @@
 ---
 title: Custom Organization Landing Page
+description: Set a custom dashboard as your organization's landing page to control the first impression and information users see when logging into Datadog.
 ---
 
 ## Overview
@@ -12,7 +13,7 @@ You can customize a dashboard with the information you want your users to see wh
 
 ## Set a custom landing page
 
-Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization.
+Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization. Custom landing pages are not available during free trial periods.
 
 To set a custom landing page, follow the steps below:
 

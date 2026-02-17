@@ -3,7 +3,7 @@ title: NeMo Evaluations
 aliases:
  - /llm_observability/submit_nemo_evaluations/
 further_reading:
-- link: "/llm_observability/evaluations/submit_evaluations"
+- link: "/llm_observability/evaluations/external_evaluations"
   tag: "Documentation"
   text: "Submit Evaluations"
 ---
@@ -47,7 +47,7 @@ To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo e
    In the snippet above, `span_context` is a dictionary containing `span_id` and `trace_id`.
 
 
-2. **Prepare your outputs file**. In this example, the outputs file is named `outputs.json`. 
+2. **Prepare your outputs file**. In this example, the outputs file is named `outputs.json`.
 
    {{< highlight json "hl_lines=7">}}
    [
@@ -135,7 +135,7 @@ To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo e
            continue
 
        LLMObs.submit_evaluation(
-         span_context={
+         span={
            "trace_id": meta['trace_id'],
            "span_id": meta['span_id']
          },

@@ -5,18 +5,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
   tag: Blog
   text: Monitorizar tus flujos de trabajo con los tests de API multipaso de Datadog
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: Centro de aprendizaje
-  text: Introducción a los tests Synthetic
-- link: /getting_started/synthetics/api_test
-  tag: Documentación
-  text: Comienza con los tests de API
+- link: /synthetics/guide/version_history/
+  tag: Guía
+  text: Historial de versiones de Synthetic Monitoring Monitoring
 - link: /synthetics/private_locations
   tag: Documentación
   text: Ejecutar tests de API multipaso en endpoints internos
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
-  text: Más información sobre los monitores de test sintéticos
+  text: Más información sobre los monitores de test Synthetic
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Sitio externo
   text: Crear y gestionar tests de API multipaso Synthetic con Terraform
@@ -25,7 +22,7 @@ title: Tests de API multipaso
 
 ## Información general
 
-Los test de API multipaso te permiten encadenar varias [solicitudes HTTP][1] o [solicitudes gRPC][20] a la vez para monitorizar de forma proactiva y asegurar que los recorridos más complejos de tus servicios clave estén disponibles en cualquier momento y desde cualquier lugar. Si deseas realizar solicitudes individuales a tus servicios, utiliza [Tests de API][2].
+Los tests de API multipaso te permiten encadenar varios [tests de API][1] a la vez para monitorizar proactivamente y garantizar que los sofisticados recorridos a tus servicios clave estén disponibles en cualquier momento y desde cualquier lugar. Si deseas realizar solicitudes individuales a tus servicios, utiliza [tests de API][1].
 
 Puedes hacer lo siguiente:
 
@@ -35,20 +32,20 @@ Puedes hacer lo siguiente:
 
 {{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Múltiples pasos de test en un test de API multipaso" style="width:90%;" >}}
 
-Si uno de tus servicios comienza a responder más lentamente o de una manera inesperada (por ejemplo, un cuerpo de respuesta o código de estado inesperado), tu test puede [**alertar a tu equipo**][3], [**bloquear tu pipeline de IC**][4] o incluso [**hacer retroceder el despliegue defectuoso**][4].
+Si uno de tus servicios empieza a responder más lentamente o de forma inesperada (por ejemplo, cuerpo de respuesta o código de estado inesperados), tu test puede [**alertar a tu equipo**][2], [**bloquear tu pipeline de CI**][3] o incluso [**revertir el despliegue defectuoso**][3].
 
-Los tests de API multipaso pueden ejecutarse desde Datadog [localizaciones gestionadas](#select-locations) y [localizaciones privadas][5], permitiendo **una cobertura completa de tus sistemas**, tanto externos como internos.
+Los tests de API multipaso pueden ejecutarse desde Datadog [gestionado](#select-locations) y [ubicaciones privadas][4], lo que permite **una cobertura completa de tus sistemas**, tanto externos como internos.
 
 ## Configuración
 
 ### Dale un nombre y etiqueta (tag) a tu test
 
 1. Dale un nombre a tu test de API multipaso.
-2. Añade `env` y otras etiquetas (tags) a tu test de API multipaso. Puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la página [Monitorización y tests continuos Synthetic][6].
+2. Añade `env` y otras etiquetas (tags) a tu test multipaso de API. Puedes utilizar estas etiquetas (tags) para filtrar a través de tus tests de Synthetic Monitoring en la [page (página) Synthetic Monitoring & Continuous Testing][5].
 
-### Selecciona las localizaciones
+### Seleccionar localizaciones
 
-Selecciona las **localizaciones** para tu test de API multipaso. Los tests de API multipaso pueden ejecutarse tanto desde localizaciones gestionadas como desde [localizaciones privadas][5] en función de si prefieres ejecutar el test desde fuera o desde dentro de tu red.
+Selecciona las **Localizaciones** para tu test de la API multipasos. Los tests de la API multipasos pueden ejecutarse tanto desde ubicaciones gestionadas como desde [ubicaciones privadas][4] según tu preferencia por ejecutar el test desde fuera o dentro de tu red.
 
 {{% managed-locations %}} 
 
@@ -63,23 +60,72 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 #### Define la petición
 
 1. **Dale un nombre** a tu paso.
-2. Elige un tipo de solicitud: HTTP o gRPC.
+2. Elige un tipo de solicitud:
 
    {{< tabs >}}
    {{% tab "HTTP" %}}
 
-   Consulta la [documentación de Tests HTTP][101] para crear una solicitud HTTP y añadir aserciones. Las aserciones son opcionales en los tests de API multipaso.
+   Consulta la [documentación de Tests de HTTP][101] para crear una solicitud de HTTP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de la API de varios pasos.
 
    [101]: /synthetics/api_tests/http_tests/
 
    {{% /tab %}}
    {{% tab "gRPC" %}}
 
-   Consulta la [documentación de Tests gRPC][101] para crear una solicitud gRPC y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API multipaso.
+   Consulta la [documentación de tests de gRPC][102] para crear una solicitud gRPC y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
 
-   [101]: /synthetics/api_tests/grpc_tests#define-the-request
+   [102]: /synthetics/api_tests/grpc_tests/
 
    {{% /tab %}}
+
+   {{% tab "SSL" %}}
+
+   Consulta la [Documentación de tests de SSL][103] para crear una solicitud SSL y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+
+   [103]: /synthetics/api_tests/ssl_tests/
+
+   {{% /tab %}}
+
+   {{% tab "DNS" %}}
+
+   Consulta la [Documentación de tests DNS][104] para crear una solicitud DNS y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+
+   [104]: /synthetics/api_tests/dns_tests/
+
+   {{% /tab %}}
+
+   {{% tab "WebSocket" %}}
+
+   Consulta la [Documentación de tests de WebSocket][105] para crear una solicitud WebSocket y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+
+   [105]: /synthetics/api_tests/websocket_tests/
+
+   {{% /tab %}}
+
+   {{% tab "TCP" %}}
+
+   Consulta la [documentación de tests de TCP][106] para crear una solicitud TCP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+
+   [106]: /synthetics/api_tests/tcp_tests/
+
+   {{% /tab %}}
+
+   {{% tab "UDP" %}}
+
+   Consulta la [Documentación de tests UDP][107] para crear una solicitud UDP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+
+   [107]: /synthetics/api_tests/udp_tests/
+
+   {{% /tab %}}
+
+   {{% tab "ICMP" %}}
+
+   Consulta la [Documentación de tests ICMP][108] para crear una solicitud ICMP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+
+   [108]: /synthetics/api_tests/icmp_tests/
+
+   {{% /tab %}}
+
    {{< /tabs >}}
 
 ### Añadir configuración de ejecución
@@ -115,8 +161,8 @@ Para iniciar el parseo de una variable, haz clic en **Extract a variable from re
 1. Ingresa un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres, y solo puede contener mayúsculas, números y guiones bajos.
 2. Decide si prefieres extraer la variable de los encabezados o del cuerpo de la respuesta.
 
-   * Extraer el valor del **encabezado de respuesta**: utiliza el encabezado de respuesta completa de tu solicitud de API como valor de la variable, o analízalo con una [`regex`][9].
-   * Extraer el valor del **cuerpo de respuesta**: utiliza el cuerpo de respuesta completo de tu solicitud de API como valor de la variable o analízalo con una [`regex`][9], una [`JSONPath`][7] o una [`XPath`][8].
+   * Extrae el valor del **encabezado de respuesta**: utiliza el encabezado de respuesta completa de tu solicitud de API como valor de la variable o analízala con un [`regex`][8].
+   * Extrae el valor del **cuerpo de respuesta**: utiliza el cuerpo de respuesta completo de tu solicitud de API como valor de la variable o analízalo con un [`regex`][8], un [`JSONPath`][6] o un [`XPath`][7].
 
 {{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extraer variables de solicitudes API en un test de API multipaso" style="width:90%;" >}}
 
@@ -127,7 +173,7 @@ Puedes extraer hasta diez variables por paso de test. Una vez creada, esta varia
 Los tests de API multipaso se pueden ejecutar:
 
 * **En un horario** para asegurar que tus endpoints más importantes son siempre accesibles para tus usuarios. Selecciona la frecuencia con la que deseas que Datadog ejecute tu test de API multipaso.
-* [**En tus pipelines de CI/CD**][4] para empezar a realizar envíos sin temer que un código defectuoso pueda afectar a la experiencia de tus clientes.
+* [**Dentro de tus pipelines de Continuous Integration Continuous Delivery**][3] para empezar a enviar sin temer que un código defectuoso pueda afectar a la experiencia de tus clientes.
 * **A petición** para ejecutar tus tests cuando sea más conveniente para tus equipos.
 
 {{% synthetics-alerting-monitoring %}}
@@ -140,11 +186,27 @@ Además de crear variables locales, puedes [extraer variables de cualquier paso]
 
 ### Usar variables
 
-Puedes utilizar las [variables globales definidas en la `Settings`][14] y las [variables definidas localmente](#create-local-variables) en la URL, las opciones avanzadas y las aserciones de tus tests de API.
+Puedes utilizar las [variables globales definidas en `Settings`][13] y las [variables definidas localmente](#create-local-variables) en la URL, las opciones avanzadas y las aserciones de tus tests de API.
 
 Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Uso de variables en los tests de API multipaso" video="true" width="90%" >}}
+
+### Subtests
+
+Los tests de API de varios steps (UI) / pasos (generic) admiten subtests, lo que te permite reutilizar tests de API de varios pasos existentes o extraer pasos en componentes reutilizables. Puedes anidar subtests hasta dos niveles de profundidad.
+
+Para utilizar un test de API de varios steps (UI) / pasos (generic) existente como subtest, haz clic en **Subtest**, ve a la pestaña **From Existing Test** (Desde un test existente) y selecciona un test de API de varios pasos en el menú desplegable.
+
+Para convertir pasos de tu test de API de varios steps (UI) / pasos (generic) en un subtest, haz clic en la pestaña **Extract From Steps** (Extraer de pasos), selecciona los pasos grabados que desees extraer y haz clic en **Convert to Subtest** (Convertir en subtest).
+
+{{< img src="synthetics/multistep_tests/subtest.png" alt="Interfaz de usuario para añadir un subtest a un test de API multipaso" width="60%" >}}
+
+Para sustituir una variable de subtest en un test de API multipaso, defínela en el test matriz utilizando el mismo nombre. Una variable siempre utiliza el primer valor que se le asigna.
+
+Si no necesitas ejecutar un subtest de forma independiente, puedes pausarlo. Sigue ejecutándose como parte del test de API multipaso, pero no se ejecuta por sí solo.
+
+**Nota:** Solo se pueden añadir tstes de API de varios steps (UI) / pasos (generic) como subtests. No se admite el uso de [tests de API][1] como subtests.
 
 ## Fallo del test
 
@@ -163,7 +225,7 @@ Un test se considera `FAILED` si un paso no satisface una o varias afirmaciones 
 : La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
 
 `SSL`
-: no se ha podido realizar la conexión SSL. [Consulta la página de errores dedicada para obtener más información][15].
+: La connection (conexión) de SSL no se pudo realizar. [Consulta la page (página) de error dedicado para obtener más información][14].
 
 `TIMEOUT`
 : La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
@@ -171,17 +233,17 @@ Un test se considera `FAILED` si un paso no satisface una o varias afirmaciones 
   Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración de la solicitud y de las aserciones ha alcanzado la duración máxima (30 minutos).
 
-Para pasos de HTTP, consulta [fallos comunes en pasos de HTTP][15]. Para pasos de gRPC, consulta [fallos comunes de pasos de gRPC][16].
+Para los pasos HTTP, consulta [errores comunes de step (UI) / paso (generic) de HTTP][14]. Para los pasos de gRPC, consulta [errores comunes de step (UI) / paso (generic) de gRPC][15].
 
 ## Permisos
 
-Por defecto, solo los usuarios con los roles [Datadog Admin y Datadog Standard][17] pueden crear, editar y borrar los tests de API multipaso Synthetic. Para obtener acceso a la creación, edición y eliminación de tests de API multipaso Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][17].
+De forma predeterminada, sólo los usuarios con los roles [Administrador y Estándar de Datadog][16] pueden crear, editar y eliminar tests de API multipaso Synthetic. Para obtener acceso para crear, editar y eliminar tests de API multipaso Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][16].
 
-Si estás utilizando la [función de rol personalizado][18], añade tu usuario a cualquier rol personalizado que incluya permisos para `synthetics_read` y `synthetics_write` para la monitorización Synthetic.
+Si utilizas la [función de rol personalizado][17], añade tu usuario a cualquier rol personalizado que incluya `synthetics_read` y permisos `synthetics_write` para Synthetic Monitoring.
 
 ### Restringir el acceso
 
-La restricción de acceso está disponible para los clientes que utilizan [roles personalizados][19] en sus cuentas.
+La restricción de acceso está disponible para los clientes que utilizan [roles personalizados][18] en sus cuentas.
 
 Puedes restringir el acceso a un test de API multipaso en función de los roles de tu organización. Al crear un test de API multipaso, elige qué roles (además de tu usuario) pueden leer y redactar tu test.
 
@@ -191,24 +253,22 @@ Puedes restringir el acceso a un test de API multipaso en función de los roles 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /es/synthetics/api_tests/http_tests
-[2]: /es/synthetics/api_tests/
-[3]: /es/synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
-[4]: /es/synthetics/cicd_integrations
-[5]: /es/synthetics/private_locations
-[6]: /es/synthetics/search/#search-for-tests
-[7]: https://restfulapi.net/json-jsonpath/
-[8]: https://www.w3schools.com/xml/xpath_syntax.asp
-[9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /es/monitors/notify/?tab=is_alert#configure-notifications-and-automations
-[11]: http://daringfireball.net/projects/markdown/syntax
-[12]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
-[13]: /es/synthetics/guide/synthetic-test-monitors
-[14]: /es/synthetics/settings/#global-variables
-[15]: /es/synthetics/api_tests/http_tests?tab=requestoptions#test-failure
-[16]: /es/synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
-[17]: /es/account_management/rbac/
-[18]: /es/account_management/rbac#custom-roles
-[19]: /es/account_management/rbac/#create-a-custom-role
-[20]: /es/synthetics/api_tests/grpc_tests
+[1]: /es/synthetics/api_tests/
+[2]: /es/synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
+[3]: /es/synthetics/cicd_integrations
+[4]: /es/synthetics/private_locations
+[5]: /es/synthetics/search/#search-for-tests
+[6]: https://restfulapi.net/json-jsonpath/
+[7]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[9]: /es/monitors/notify/?tab=is_alert#configure-notifications-and-automations
+[10]: http://daringfireball.net/projects/markdown/syntax
+[11]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
+[12]: /es/monitors/types/synthetic_monitoring/
+[13]: /es/synthetics/settings/#global-variables
+[14]: /es/synthetics/api_tests/http_tests?tab=requestoptions#test-failure
+[15]: /es/synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
+[16]: /es/account_management/rbac/
+[17]: /es/account_management/rbac#custom-roles
+[18]: /es/account_management/rbac/#create-a-custom-role
+[19]: /es/synthetics/api_tests/grpc_tests

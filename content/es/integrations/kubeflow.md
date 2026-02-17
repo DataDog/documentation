@@ -84,7 +84,7 @@ Este check monitoriza [Kubeflow][1] a través del Datadog Agent.
 
 ## Configuración
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta integración se publica actualmente en modo de vista previa. Su disponibilidad está sujeta a cambios en el futuro. 
 </div>
 

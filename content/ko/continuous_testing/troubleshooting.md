@@ -34,17 +34,21 @@ CI 배치
 실행 규칙
 : [실행 규칙][4]은 테스트 실패가 CI/CD 파이프라인에 미치는 영향이 가장 큰 것부터 가장 작은 것까지를 정의합니다:  `skipped`, `non_blocking`, `blocking`. 이러한 옵션은 가중치를 매겨 기본값은 가장 영향력이 큰 것으로 설정되어 있습니다. UI에서 테스트가 `skipped`로 설정되어 있고 설정 파일에서 `blocking`으로 설정되어 있으면, 테스트 실행 중에 건너뜁니다. </br><br> 테스트 속성, 글로벌 설정 파일, 개별 테스트의 재정의 파일에서 실행 규칙을 설정할 수 있습니다.
 
-## 익스플로러
+## 결과 탐색기
 
 ### CI 메타데이터가 나타나지 않음
 
-API 엔드포인트를 사용하여 CI/CD 테스트 실행을 트리거하고 있는지 확인하세요. CI Results Explorer에 CI 메타데이터를 입력하려면 Datadog의 [네이티브 통합][5] 또는 [NPM 패키지][6] 중 하나를 사용해야 합니다.
+API 엔드포인트를 사용하여 CI/CD 테스트 실행을 트리거하는지 확인하세요. Synthetic Monitoring 및 Continuous Testing Results Explorer에 CI 메타데이터를 입력하려면, Datadog의 [네이티브 통합][5] 또는 [NPM 패키지][6] 중 하나를 반드시 사용해야 합니다.
 
 ## CI/CD 파이프라인 내
 
 ### CI 파이프라인에서 테스트가 시간 초과됨
 
-가장 먼저 [글로벌 설정 파일][10]에서 어떤 실패 모드 플래그를 전달하고 있는지 확인해야 합니다. 여러 테스트가 포함된 CI 실행의 경우 일부 테스트는 [Continuous Testing 설정 페이지][9]에 정의된 병렬화 설정에 따라 대기합니다. 조직의 필요에 따라 설정과 병렬화 모두를 조정해야 할 수 있습니다.
+가장 먼저 [글로벌 설정 파일][3]에서 어떤 실패 모드 플래그를 전달하고 있는지 확인합니다. 여러 테스트가 포함된 CI 실행의 경우, 일부 테스트는 [Continuous Testing 설정 페이지][9]에 정의된 병렬화 설정에 따라 대기합니다. 조직의 필요에 따라 설정과 병렬화 모두를 조정해야 할 수 있습니다.
+
+## Synthetic Monitoring 모니터
+
+CI는 Synthetic Monitoring 모니터를 트리거하거나 모니터 평가에 통합하지 않지만, 실행에 실패하면 CI 상태가 빨간색으로 표시됩니다.
 
 ## 참고 자료
 
@@ -52,11 +56,10 @@ API 엔드포인트를 사용하여 CI/CD 테스트 실행을 트리거하고 �
 
 [1]: /ko/help/
 [2]: /ko/api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[3]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#additional-configuration
-[4]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#execution-rule
+[3]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[4]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [5]: /ko/continuous_testing/cicd_integrations
 [6]: /ko/continuous_testing/cicd_integrations#use-the-cli
 [7]: /ko/synthetics/api_tests/
 [8]: /ko/synthetics/browser_tests/?tab=requestoptions
 [9]: /ko/continuous_testing/settings
-[10]: /ko/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options

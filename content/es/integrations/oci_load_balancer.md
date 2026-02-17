@@ -128,7 +128,7 @@ Después de configurar la integración [Oracle Cloud Infrastructure][3], asegúr
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_load_balancer" >}}
+{{< get-metrics-from-git "oci-load-balancer" >}}
 
 
 ### Eventos

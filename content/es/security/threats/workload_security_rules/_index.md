@@ -3,22 +3,22 @@ aliases:
 - /es/security_platform/cloud_workload_security/workload_security_rules
 - /es/security/cloud_workload_security/workload_security_rules
 further_reading:
-- link: /security/threats/setup
+- link: /security/workload_protection/
   tag: Documentación
-  text: Configuración de CSM Threats
-- link: /security/threats/agent_expressions
+  text: Configuración de Workload Protection
+- link: /security/workload_protection/agent_expressions
   tag: Documentación
   text: Expresiones del Agent
 - link: security/threats/backend
   tag: Documentación
-  text: Eventos de CSM Threats
+  text: Eventos de Workload Protection
 - link: /security/notifications/variables/
   tag: Documentación
   text: Más información sobre las variables de notificación de seguridad
-title: Reglas de detección de CSM Threats
+title: Reglas de detección de Workload Protection
 ---
 
-En este tema, se explica cómo Cloud Security Management Threats (CSM Threats) monitoriza activamente la actividad del sistema y la evalúa en función de un conjunto de reglas predefinidas (OOTB) para detectar comportamientos sospechosos.
+En este tema, se explica cómo Workload Protection supervisa activamente la actividad del sistema y la evalúa en función de un conjunto de reglas predefinidas (OOTB) para detectar comportamientos sospechosos.
 
 ## Bloquear de forma proactiva las amenazas con Active Protection
 
@@ -26,13 +26,13 @@ Por defecto, todas las reglas de detección de amenazas de minería de criptomon
 
 [Active Protection][12] te permite bloquear y terminar proactivamente las amenazas de minería de criptomonedas identificadas por las reglas de detección de amenazas de Datadog Agent.
 
-## Construcción de las reglas de CSM Threats
+## Construcción de normas de Workload Protection
 
-Las reglas de CSM Threats constan de dos componentes diferentes: reglas de Agent y reglas de detección de amenazas.
+Las reglas de Workload Protection constan de dos componentes diferentes: reglas de Agent y reglas de detección de amenazas.
 
-- **Reglas de Agent:** las [reglas de Agent][9] se evalúan en el host del Agent. CSM Threats evalúa primero la actividad dentro del Datadog Agent con respecto a las expresiones del Agent para decidir qué actividad recopilar. Las expresiones del Agent utilizan el [Lenguaje de seguridad (SECL)][2] de Datadog.<br><br>
+- **Reglas de Agent:** las [reglas de Agent][9] se evalúan en el host del Agent. Workload Protection evalúa primero la actividad dentro de Agent con respecto a las expresiones de Agent para decidir qué actividad recopilar. Las expresiones de Agent utilizan el [Lenguaje de seguridad (SECL)][2] de Datadog.<br><br>
 
-  Por ejemplo, esta es la expresión de la *regla de Agent* `cryptominer_args`:
+  Por ejemplo, he aquí la expresión `cryptominer_args` de *regla del Agent*:
 
   ```text
   exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
@@ -52,13 +52,13 @@ Las reglas de CSM Threats constan de dos componentes diferentes: reglas de Agent
   Esta es la *regla de detección de amenazas* `Process arguments match cryptocurrency miner`. Utiliza las reglas de Agent, `cryptominer_args` y `windows_cryptominer_process`, identificadas por `@agent.rule_id`, con parámetros de expresión adicionales:
 
   ```text
-  @agent.rule_id:(cryptominer_args || windows_cryptominer_process) 
+  @agent.rule_id:(cryptominer_args || windows_cryptominer_process)
   -@process.executable.path:"/usr/bin/grep"
   ```
 
-### Pipeline de las reglas de CSM Threats
+### Pipeline de reglas de Workload Protection
 
-CSM Threats utiliza el siguiente pipeline al evaluar eventos:
+Workload Protection utiliza el siguiente pipeline al evaluar eventos:
 
 1. Las reglas de Agent evalúan la actividad del sistema en el host del Agent.
 2. Cuando la actividad coincide con una expresión de regla de Agent, el Agent genera un evento de detección y lo transmite al backend de Datadog.
@@ -68,13 +68,13 @@ CSM Threats utiliza el siguiente pipeline al evaluar eventos:
 
 El siguiente diagrama ilustra este pipeline:
 
-{{< img src="security/cws/threat_detection_pipeline_2.png" alt="Pipeline de detección de CMS Threats" style="width:100%;" >}}
+{{< img src="security/cws/threat_detection_pipeline_2.png" alt="Pipeline de detección de Workload Protection" style="width:100%;" >}}
 
 ### Ahorrar recursos mediante el diseño
 
-Las reglas de detección de CSM Threats son complejas, ya que correlacionan varios puntos de datos, a veces a través de diferentes hosts, e incluyen datos de terceros. Esta complejidad supondría una considerable demanda de recursos informáticos en el host del Agent si todas las reglas se evaluaran allí. 
+Las reglas de detección de Workload Protection son complejas, ya que correlacionan varios puntos de datos, a veces a través de diferentes hosts, e incluyen datos de terceros. Esta complejidad supondría una considerable demanda de recursos informáticos en el host del Agent si todas las reglas se evaluaran allí.
 
-Datadog resuelve este problema manteniendo ligero al Agent con solo unas pocas reglas, y procesa la mayoría de las reglas utilizando las reglas de detección de amenazas en el backend de Datadog.
+Datadog resuelve este problema manteniendo al Agent ligero con sólo unas pocas reglas y procesa la mayoría de las reglas utilizando las reglas de detección de amenazas en el backend de Datadog.
 
 Solo cuando el Agent observa un evento que coincide con sus reglas envía una detección al backend de Datadog. A continuación, el backend de Datadog evalúa la detección para determinar si cumple sus expresiones de reglas de detección de amenazas. Solo si hay una coincidencia, el backend de Datadog crea una señal.
 
@@ -87,15 +87,15 @@ Hay dos casos de uso:
 - **Crear una regla de detección de amenazas utilizando una regla de Agent existente:** para crear una regla de detección de amenazas que utilice una regla de Agent existente, solo tienes que crear una regla de detección de amenazas que haga referencia a la regla de Agent y añadir los parámetros de expresión adicionales que necesites.
 - **Crear una regla de detección de amenazas utilizando una nueva regla de Agent:** para detectar un evento que las reglas actuales de Agent no admiten, crea una regla de Agent personalizada para detectar ese evento y, luego, crea una regla de detección de amenazas personalizada que utilice la regla de Agent personalizada.
 
-Para una explicación detallada, consulta [Reglas de detección de CSM Threats][11]. 
+Para una explicación detallada, consulta [Reglas de detección de Workload Protection][11].
 
 ## Resumen de reglas de Agent
 
 Las reglas de Agent contienen [expresiones de Agent](#agent-expressions) que determinan qué actividades recopila el Agent. Un conjunto completo de reglas de Agent se denomina política. Datadog te proporciona varias [reglas de Agent predefinidas][6] impulsadas por la política predeterminada del Agent.
 
-Con la [Configuración remota][7] activada, recibirás automáticamente reglas de Agent nuevas y actualizadas de CSM Threats cuando se publiquen. Estas reglas de Agent incluidas se utilizan en las [reglas de detección predeterminadas][1].
+Con la [configuración remota][7] activada, recibirás automáticamente reglas del Agent nuevas y actualizadas de Workload Protection cuando se publiquen. Estas reglas agrupadas del Agent se utilizan en las [reglas de detección predeterminadas][1].
 
-<div class="alert alert-info">La Configuración remota para CSM Threats está en fase beta. Si tienes algún comentario o pregunta, ponte en contacto con <a href="/help">el servicio de soporte de Datadog</a>.</div>
+<div class="alert alert-info">La configuración remoto para Workload Protection está en vista previa. Si tienes algún comentario o pregunta, ponte en contacto con <a href="/help">el servicio de asistencia de Datadog</a>.</div>
 
 ### Expresiones del Agent
 
@@ -105,11 +105,11 @@ Las expresiones del Agent utilizan [el Lenguaje de seguridad (SECL) de Datadog][
 
 Para detectar cuándo se ejecuta el comando `passwd`, hay que tener en cuenta algunos atributos.
 
-En la mayoría de las distribuciones de Linux, la utilidad `passwd` se instala en `/usr/bin/passwd`. Los eventos de ejecución incluyen `exec`, `execve`, `fork` y otras llamadas al sistema. En el entorno de CSM Threats, todos estos eventos se identifican con el símbolo `exec`.
+En la mayoría de las distribuciones de Linux, la utilidad `passwd` se instala en `/usr/bin/passwd`. Los eventos de ejecución incluye `exec`, `execve`, `fork` y otras llamadas al sistema. En el entorno de Workload Protection, todos estos eventos se identifican mediante el símbolo `exec`.
 
 Si lo unimos todo, la expresión de la regla es `exec.file.path == "/usr/bin/passwd"`.
 
-La regla de comandos `passwd` ya está presente en la política predeterminada de Agent de CSM Threats. Sin embargo, las expresiones de Agent también pueden ser más avanzadas y pueden definir reglas que coincidan con los predecesores del proceso o utilizar comodines para detecciones más amplias.
+La regla de comando `passwd` ya está presente en la política del Agent de Workload Protection predeterminada. Sin embargo, las expresiones del Agent también pueden ser más avanzadas y pueden definir reglas que coincidan con ancestros de proceso o utilizar comodines para detecciones más amplias.
 
 #### Detectar cuando un proceso PHP o Nginx lanza Bash
 
@@ -117,7 +117,7 @@ Para detectar cuando un proceso PHP o Nginx lanza Bash, hay algunos atributos a 
 
 En la mayoría de las distribuciones de Linux, Bash se instala en `/usr/bin/bash`. Como en el ejemplo anterior, para detectar la ejecución, incluye `exec.file.path == "/usr/bin/bash"` en tu regla. Esto asegura que la regla está considerando la ejecución de Bash y también del Bash como proceso secundario de PHP o Nginx.
 
-El nombre de archivo de un proceso predecesor en CSM Threats es un atributo con el símbolo `process.ancestors.file.name`. Para comprobar si el predecesor es Nginx, añade `process.ancestors.file.name == "nginx"`. Dado que PHP se ejecuta como múltiples procesos, utiliza un comodín para expandir la regla a cualquier proceso con el prefijo `php`. Para comprobar si el predecesor es un proceso PHP, añade `process.ancestors.file.name =~ "php*"`. 
+El nombre de archivo de un ancestro de proceso en Workload Protection es un atributo con el símbolo `proceso.ancestors.file.name`. Para comprobar si el ancestro es Nginx, añade `proceso.ancestors.file.name == "nginx"`. Dado que PHP se ejecuta como múltiples procesos, utiliza un comodín para ampliar la regla a cualquier proceso con el prefijo `PHP`. Para comprobar si el ancestro es un proceso PHP, añade `proceso.ancestors.file.name =~ "PHP*"`. 
 
 Si lo unimos todo, la expresión de la regla es `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`.
 
@@ -130,14 +130,14 @@ Las reglas de detección que se ejecutan en el backend de Datadog después de ev
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/default_rules/#cat-workload-security
-[2]: /es/security/threats/agent_expressions
+[2]: /es/security/workload_protection/agent_expressions
 [3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /es/security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /es/security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
-[8]: /es/security/threats/security_signals
+[7]: /es/remote_configuration/
+[8]: /es/security/workload_protection/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: /es/security/threats/workload_security_rules/custom_rules
-[12]: /es/security/cloud_security_management/guide/active-protection
+[11]: /es/security/workload_protection/workload_security_rules/custom_rules
+[12]: /es/security/workload_protection/guide/active-protection

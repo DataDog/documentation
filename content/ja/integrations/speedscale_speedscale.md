@@ -15,7 +15,7 @@ categories:
 - kubernetes
 - マーケットプレイス
 - テスト
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -96,10 +96,10 @@ Speedscale のトラフィックリプレイ結果を Datadog に公開するに
 - [Datadog Marketplace で Speedscale の製品を使って Kubernetes アプリケーションのストレステストを実行する][6]
 - [Speedscale ドキュメント][3]
 
-[1]: /ja/integrations/speedscale
+[1]: https://app.datadoghq.com/integrations/speedscale
 [3]: https://docs.speedscale.com/
 [4]: https://slack.speedscale.com/
 [5]: mailto:support@speedscale.com
 [6]: https://www.datadoghq.com/blog/stress-test-kubernetes-with-speedscale/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/speedscale-speedscale" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/speedscale-speedscale" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

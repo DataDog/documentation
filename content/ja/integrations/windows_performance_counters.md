@@ -93,7 +93,7 @@ Windows パフォーマンスカウンターチェックにより収集された
 Windows パフォーマンスカウンターインテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "windows_performance_counters" >}}
+{{< get-service-checks-from-git "windows-performance-counters" >}}
 
 
 ## トラブルシューティング

@@ -118,7 +118,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "php_apcu" >}}
+{{< get-metrics-from-git "php-apcu" >}}
 
 
 ### 이벤트
@@ -126,7 +126,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 PHP APCu 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "php_apcu" >}}
+{{< get-service-checks-from-git "php-apcu" >}}
 
 
 ## 트러블슈팅

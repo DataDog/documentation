@@ -1,4 +1,7 @@
 ---
+description: Utiliza sintaxis de marcos temporales personalizados, incluidas fechas
+  fijas, fechas relativas y periodos alineados con el calendario en los dashboards
+  de Datadog.
 title: Marco temporal personalizadas
 ---
 
@@ -10,7 +13,7 @@ Muchas de las vistas de Datadog pueden ajustarse a un marco temporal específico
 
 Para incrementar por mes, día, año, hora o minuto, resalta una parte del marco temporal y utiliza las teclas `[↑]` y `[↓]`:
 
-{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" alt="Incrementar el tiempo con teclas de flechas" video="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" video="true" alt="Incrementar el tiempo con teclas de flechas"="true" width="500" >}}
 
 ## Sintaxis admitidas
 
@@ -38,7 +41,7 @@ Cualquier fecha fija puede introducirse como parte de un intervalo. Por ejemplo:
 
 ### Fechas relativas
 
-Las fechas relativas **no** se actualizan con el tiempo; se calculan cuando se introducen.
+Las fechas relativas se actualizan con el tiempo; se calculan a partir de la hora actual.
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Tipo de marco de tiempo relativo personalizado" video="true" width="500" >}}
 

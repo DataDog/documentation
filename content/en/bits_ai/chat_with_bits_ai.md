@@ -1,15 +1,21 @@
 ---
 title: Chat with Bits AI
+description: "Chat with Bits AI in Datadog and Slack to query observability data using natural language and get insights about your services."
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "bits_ai/bits_ai_sre/coordinate_incidents/"
+- link: "/incident_response/incident_management/investigate/incident_ai"
   tag: "Documentation"
-  text: "Coordinate Incidents"
+  text: "Coordinate incidents with Incident AI"
 aliases:
 - /bits_ai/getting_started/
 ---
+
+{{< callout url="#" btn_hidden="true" >}}
+Chat with Bits AI is in preview. Please reach out to your account manager if you have questions.
+{{< /callout >}}
+
 
 ## Chat in Datadog
 

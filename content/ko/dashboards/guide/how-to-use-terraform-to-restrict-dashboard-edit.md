@@ -23,7 +23,7 @@ resource "datadog_dashboard" "example" {
 
 ## 제한 정책을 사용하여 대시보드 제한
 
-<div class="alert alert-warning">제한 정책은 평가판 버전입니다. 액세스하려면 <a href="/help/">Datadog 지원팀</a> 또는 고객 성공 관리자에게 문의하세요.</div>
+<div class="alert alert-danger">제한 정책은 평가판 버전입니다. 액세스하려면 <a href="/help/">Datadog 지원팀</a> 또는 고객 성공 관리자에게 문의하세요.</div>
 
 [제한 정책][1]을 사용하면 대시보드 및 기타 리소스의 편집을 역할, 팀, 사용자, 서비스 계정을 포함한 특정 주체로 제한할 수 있습니다.
 

@@ -1,5 +1,6 @@
 ---
 title: Build Datadog Agent image
+description: Instructions for building custom Datadog Agent Docker images from source code
 aliases:
  - /agent/guide/build-container-agent
 ---

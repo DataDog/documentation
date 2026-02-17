@@ -21,7 +21,7 @@ With private locations, you have a set of out-of-the-box [metrics][1] to keep tr
 
 {{<img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location monitor list" style="width:100%;">}}
 
-In [**Synthetics Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
+In [**Synthetic Monitoring Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
 
 When you click on a private location, a panel containing **Health** and **Metadata** details appears. The table in the **Health** tab displays all reporting workers and the image version they are running. You can get a sense of how many workers you need to pull for the new image version. 
 
@@ -42,6 +42,8 @@ When you create a private location, three monitors are added to your account:
 By default, no handle is set in these monitors. To be alerted in case one of your monitors starts failing, add a handle in your monitors' [Notification section][6].
 
 Monitors in the **Monitors** tab either have a group that corresponds to your private location ID or are tagged with `location_id:<ID_OF_THE_PL>`.
+
+> **Note:** Default monitors are created **only once**, when the first private location is created. Deleting a private location and creating a new one does **not** recreate the default monitors.
 
 ## Monitor your private locations with the Datadog Agent
 

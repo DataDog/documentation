@@ -1,15 +1,22 @@
 ---
-aliases:
-- /fr/guides/billing
-- /fr/account_management/settings
-cascade:
-  algolia:
-    rank: 70
-description: Gérer votre organisation et votre compte Datadog
 title: Gestion de compte
+description: "Gérer votre organisation et votre compte Datadog"
+aliases:
+    - /guides/billing
+    - /account_management/settings
+cascade:
+    algolia:
+        rank: 70
+further_reading:
+    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+      tag: "Blog"
+      text: "Meilleures pratiques pour la gestion des organisations Datadog à grande échelle (en anglais)"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Le site gouvernemental Datadog prend uniquement en charge la connexion via le protocole SAML.</div>
+<div class="alert alert-danger">La plateforme Datadog for Government prend uniquement en charge l'authentification SAML ou l'authentification de base avec nom d'utilisateur/adresse e-mail et mot de passe. Avant de configurer l'authentification SAML, assurez-vous qu'au moins un compte avec nom d'utilisateur ou adresse e-mail et mot de passe est disponible afin de maintenir l'accès pendant le processus de configuration. Datadog recommande d'activer l'authentification multifacteur (MFA) pour les comptes avec mot de passe.
+
+Si vous avez besoin d'activer SAML pour un compte d'essai, contactez <a href="https://docs.datadoghq.com/getting_started/support/">l'assistance Datadog</a>.</div>
+
 {{< /site-region >}}
 
 ## Paramètres personnels
@@ -26,12 +33,14 @@ Si vous vous connectez à Datadog à l'aide de l'authentification Google, votre 
 
 ### Préférences
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-Vous pouvez gérer votre fuseau horaire, vos préférences d'accessibilité visuelle et vos abonnements aux services de messagerie depuis l'onglet [Preferences tab][3] de la page **Personal Settings**. 
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+Vous pouvez gérer votre fuseau horaire, vos préférences d'accessibilité visuelle et vos abonnements par e-mail à partir de l'onglet [Preferences][3] de la page **Paramètres personnels**.
 
 #### Abonnements aux services de messagerie
 
-La section E-mail subscriptions vous donne accès aux rapports suivants :
+Dans la section des abonnements par e-mail, vous avez accès aux rapports suivants :{{< site-region region="us3,us5,gov,ap1,ap2" >}}
+<div class="alert alert-danger">Les résumés par e-mail ne sont pas disponibles dans le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 * Daily Digest (Synthèse quotidienne)
 * Weekly Digest (Synthèse hebdomadaire)
@@ -56,7 +65,7 @@ L'[onglet Organizations][12] de la page **Personal Settings** répertorie toutes
 
 **Remarque** : si vous quittez une organisation, vous ne pourrez pas la rejoindre à nouveau à moins d'être invité par un administrateur de cette organisation.
 
-Pour rejoindre une organisation existante, un administrateur doit vous inviter. Vous recevrez alors un e-mail avec l'objet "You've been invited to join <Nom de l'organisation>". Cliquez sur le bouton **Join Account** de l'e-mail.
+Pour rejoindre une organisation existante, un administrateur doit vous inviter. Vous recevrez alors un e-mail avec l'objet "You've been invited to join \<Organization Name>". Cliquez sur le bouton **Join Account** de l'e-mail.
 
 Si vous êtes un administrateur d'organisation, consultez les ressources suivantes pour obtenir davantage d'informations :
 
@@ -95,13 +104,13 @@ Pour désactiver le compte Datadog de votre organisation, contactez l'[assistanc
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
 [3]: https://app.datadoghq.com/personal-settings/preferences
-[4]: /fr/account_management/users/
-[5]: /fr/account_management/saml/
-[6]: /fr/account_management/org_settings/#change-your-organization-name
-[7]: /fr/account_management/multi_organization/
-[8]: /fr/account_management/org_settings/
-[9]: /fr/integrations/github/
-[10]: /fr/help/
+[4]: /account_management/users/
+[5]: /account_management/saml/
+[6]: /account_management/org_settings/#change-your-organization-name
+[7]: /account_management/multi_organization/
+[8]: /account_management/org_settings/
+[9]: /integrations/github/
+[10]: /help/
 [11]: https://app.datadoghq.com/personal-settings/profile
 [12]: https://app.datadoghq.com/personal-settings/organizations
 [13]: https://app.datadoghq.com/personal-settings/application-keys

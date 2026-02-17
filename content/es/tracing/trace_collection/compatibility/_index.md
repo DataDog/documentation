@@ -8,7 +8,7 @@ description: null
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
-  text: Añadir la biblioteca de rastreo a tu aplicación
+  text: Añadir la librería de rastreo a tu aplicación
 title: Requisitos de compatibilidad
 type: multi-code-lang
 ---

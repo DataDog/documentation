@@ -25,7 +25,7 @@ Este check sólo se entrega con los paquetes DEB y RPM de 64 bits del Datadog Ag
 
 ### Instalación
 
-El check utiliza las marcas de tiempo proporcionadas por la biblioteca PCAP para calcular el tiempo transcurrido entre cualquier paquete saliente y el acuse de recibo TCP correspondiente. La biblioteca PCAP debe estar instalada y configurada.
+El check utiliza las marcas de tiempo proporcionadas por la librería PCAP para calcular el tiempo transcurrido entre cualquier paquete saliente y el acuse de recibo TCP correspondiente. La librería PCAP debe estar instalada y configurada.
 
 Los sistemas basados en Debian deben utilizar una de las siguientes opciones:
 

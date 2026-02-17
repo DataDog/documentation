@@ -1,11 +1,13 @@
 ---
 aliases:
 - /es/tracing/faq/span_and_trace_id_format/
+description: Guía sobre los formatos de ID de traza y tramos válidos admitidos por
+  las bibliotecas de rastreo de Datadog y su correlación con los logs.
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
   tag: documentación
   text: Correlacionar logs y trazas
-title: Formatos de ID de traza (trace) y tramo
+title: Formatos de ID de traza (trace) y tramo (span)
 ---
 {{< jqmath-vanilla >}}
 
@@ -48,7 +50,7 @@ Los ID de tramo están limitados a 64 bits en Datadog.
 | PHP        | Sin signo [1, $2^64-1$]   | Sin signo                      |
 | C++        | Sin signo [0, $2^63-1$]   | Sin signo                      |
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

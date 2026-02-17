@@ -49,7 +49,7 @@ Para más información sobre la versión de Node.js, consulta la [documentación
 
 ### Soporte técnico de sistemas operativos
 
-Los siguientes sistemas operativos tienen soporte técnico oficial de `dd-trace`. Es probable que cualquier sistema operativo que no aparezca en la lista siga funcionando, pero con algunas funciones ausentes, por ejemplo ASM, perfilado y métricas de tiempo de ejecución. Hablando en general, se brinda soporte técnico a los sistemas operativos que se mantienen activamente en el momento del lanzamiento inicial de una versión principal.
+Los siguientes sistemas operativos están admitidos oficialmente por `dd-rastrear`. Cualquier sistema operativo que no aparezca en la lista es probable que funcione, pero con algunas funciones ausentes, por ejemplo AAP, perfiles y métricas de tiempo de ejecución. En general, se admiten los sistemas operativos que se mantienen activamente en el momento del lanzamiento inicial de una versión principal.
 
 | Versión de dd-trace    | Sistema operativo      | Arquitecturas         | Versiones mínimas                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
@@ -64,7 +64,7 @@ Los siguientes sistemas operativos tienen soporte técnico oficial de `dd-trace`
 
 ## Integraciones con soporte técnico
 
-APM proporciona Instrumentación predefinida para muchos marcos de trabajo populares y bibliotecas mediante un sistema de extensiones. Para solicitar soporte técnico para un módulo que no está en la lista, contacta con nuestro impresionante [equipo de soporte técnico][3].
+APM proporciona instrumentación predefinida para muchos marcos de trabajo populares y bibliotecas mediante un sistema de extensiones. Para solicitar soporte técnico para un módulo que no está en la lista, contacta con nuestro impresionante [equipo de soporte técnico][3].
 
 Para obtener más información sobre cómo intercambiar y configurar las extensiones, restaura la [documentación de la API][5].
 
@@ -73,7 +73,7 @@ Para obtener más información sobre cómo intercambiar y configurar las extensi
 | Módulo                  | Versiones | Tipo de soporte técnico    | Notas                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][6]           | `>=2`    | Totalmente compatible |                                             |
-| [express][7]           | `>=4`    | Totalmente compatible | Compatible con Sails, Loopback y [más][8]     |
+| [express][7]           | `>=4`    | Totalmente compatible | Compatible con Sails, Loopback y otros marcos construidos sobre Express.     |
 | [fastify][9]           | `>=1`    | Totalmente compatible |                                             |
 | [graphql][10]           | `>=0.10` | Totalmente compatible | Compatible con Apollo Server y express-graphql |
 | [graphql-yoga][65]      | `>=3.6.0`| Totalmente compatible | Compatible con el ejecutor graphql-yoga v3          |
@@ -82,7 +82,7 @@ Para obtener más información sobre cómo intercambiar y configurar las extensi
 | [koa][13]               | `>=2`    | Totalmente compatible |                                            |
 | [microgateway-core][14] | `>=2.1`  | Totalmente compatible | Biblioteca de núcleo para Apigee Edge. La compatibilidad con la CLI [edgemicro][15] requiere la aplicación de parches estáticos mediante [@Datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Totalmente compatible |                                            |
-| [next][18]              | `>=9.5`  | Totalmente compatible | Consulta la nota sobre el uso de Complex framework.<br /><br />El rastreador admite las siguientes funciones de Next.js: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: no rastreado, utiliza las versiones del rastreador `4.18.0` y `3.39.0` o superiores para obtener la mejor experiencia.</li></ul> |
+| [next][18]              | `>=9.5`  | Totalmente compatible | Consulta la nota sobre [Utilización de marcos complejos](#complex-framework-usage).<br /><br />El rastreador es compatible con las siguientes funciones de Next.js: <ul><li>Independiente (`output: 'standalone'`)</li><li>Enrutador de aplicaciones</li><li>Middleware: No rastreado, utiliza las versiones del rastreador `4.18.0` y `3.39.0` o superiores para obtener la mejor experiencia.</li></ul><br /><br /><strong>Nota</strong>: Next.js está en un proceso de desarrollo muy activo y no es raro que las versiones de parches rompan la compatibilidad con dd-trace. Las automatizaciones de tests alertan a Datadog de estos problemas, pero a menudo puede llevar unos días solucionar la compatibilidad con la última versión de Next.js. |
 | [paperplane][19]        | `>=2.3`  | Totalmente compatible | No se admite en [modo sin servidor][20]     |
 | [restify][21]           | `>=3`    | Totalmente compatible |                                            |
 
@@ -98,16 +98,17 @@ Antepón a todos los comandos que ejecutes una variable entorno:
 
 ```shell
 NODE_OPTIONS='--require dd-trace/init' npm start
+```
 
-O bien, modifica el archivo `package.json` si sueles iniciar una aplicación con scripts de ejecución npm o yarn:
+O bien modifica el archivo `package.json` si sueles iniciar una aplicación con scripts de ejecución npm o yarn:
 
 ```plain
-    // comando existente
+    // existing command
     "start": "next start",
 
-    // comando sugerido
-    "start": "node --require dd-trace/initialize ./node_modules/next start",
-    "start": "NODE_OPTIONS='--require dd-trace/initialize' ./node_modules/next start",
+    // suggested command
+    "start": "node --require dd-trace/init ./node_modules/.bin/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/init' ./node_modules/.bin/next start",
 ```
 
 **Nota**: Los ejemplos anteriores utilizan Next.js, pero el mismo enfoque se aplica a otros marcos con puntos de entrada personalizados, como Nest.js. Adapta los comandos a tu marco y configuración específicos. Cualquiera de los comandos debería funcionar, pero el uso de `NODE_OPTIONS` también se aplica a cualquier proceso secundario de Node.js.
@@ -141,29 +142,32 @@ O bien, modifica el archivo `package.json` si sueles iniciar una aplicación con
 | [pg][38]               | `>=4`    | Totalmente compatible | Admite `pg-native` cuando se utiliza con `pg`         |
 | [redis][39]            | `>=0.12` | Totalmente compatible |                                                  |
 | [sharedb][40]          | `>=1`    | Totalmente compatible |                                                  |
-| [tedious][41]          | `>=1`    | Totalmente compatible | Controlador de SQL Server para `mssql` y `sequelize`    |
+| [tedioso][41]          | `>=1`    | Totalmente compatible | Controlador de SQL Server para `mssql` y `sequelize`    |
 
 ### Compatibilidad con Worker
 
-| Módulo                     | Versiones | Tipo de soporte técnico    | Notas                                                  |
-| -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `>=1.2`  | Totalmente compatible |                                                        |
-| [amqp10][43]               | `>=3`    | Totalmente compatible | Compatible con brokers AMQP 1.0 (como ActiveMQ o Apache Qpid) |
-| [amqplib][44]              | `>=0.5`  | Totalmente compatible | Compatible con brokers AMQP 0.9 (como RabbitMQ o Apache Qpid) |
-| [generic-pool][45]         | `>=2`    | Totalmente compatible |                                                        |
-| [kafkajs][46]         | `>=1.4`    | Totalmente compatible |                                                        |
-| [rhea][48]                 | `>=1`    | Totalmente compatible |                                                        |
+| Módulo                               | Versiones  | Tipo de soporte técnico    | Notas                                                  |
+| --------------------------           | --------  | --------------- | ------------------------------------------------------ |
+| [@azure/service-bus][68]             | `>=7.9.2` | Totalmente compatible |                                                        |
+| [@confluentinc/kafka-javascript][67] | `>=1`     | Totalmente compatible |                                                        |
+| [@google-cloud/pubsub][42]           | `>=1.2`   | Totalmente compatible |                                                        |
+| [amqp10][43]                         | `>=3`     | Totalmente compatible | Compatible con brokers AMQP 1.0 (como ActiveMQ o Apache Qpid) |
+| [amqplib][44]                        | `>=0.5`   | Totalmente compatible | Compatible con brokers AMQP 0.9 (como RabbitMQ o Apache Qpid) |
+| [generic-pool][45]                   | `>=2`     | Totalmente compatible |                                                        |
+| [kafkajs][46]                        | `>=1.4`   | Totalmente compatible |                                                        |
+| [rhea][48]                           | `>=1`     | Totalmente compatible |                                                        |
 
 ### Compatibilidad con SDK
 
 | Módulo             | Versiones   | Tipo de soporte técnico    | Notas                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
 | [aws-sdk][49]      | `>=2.1.35` | Totalmente compatible | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS y solicitudes genéricas. |
-| [openai][64]       | `3.x`      | Totalmente compatible |                                                        |
+| [openai][64]       | `>=3.0.0`  | Totalmente compatible |                                                        |
+| [langchain][66]      | `>=0.1.0`  | Compatibilidad parcial | Se admiten las siguientes invocaciones de flujo de trabajo: <br /><br /><ul><li>`chain.invoke` y `chain.batch`</li><li>`chat_model.invoke`</li><li>`llm.invoke`</li><li>`openaiEmbeddings.embedQuery` y `openaiEmbeddings.embedDocuments`</li></ul> |
 
 ### Compatibilidad con biblioteca Promise
 
-| Módulo           | Versiones  | Tipo de soporte ténico    |
+| Módulo           | Versiones  | Tipo de soporte técnico    |
 | ---------------- | --------- | --------------- |
 | [bluebird][50]   | `>=2`     | Totalmente compatible |
 | [promise][51]    | `>=7`     | Totalmente compatible |
@@ -188,7 +192,7 @@ O bien, modifica el archivo `package.json` si sueles iniciar una aplicación con
 
 Para más información o para debatir [deja un comentario en este tema de github][62] o [ponte en contacto con el servicio de soporte técnico][3] para seguir hablando.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -199,7 +203,6 @@ Para más información o para debatir [deja un comentario en este tema de github
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
-[8]: https://expressjs.com/en/resources/frameworks.html
 [9]: https://www.fastify.io
 [10]: https://github.com/graphql/graphql-js
 [11]: https://grpc.io/
@@ -225,7 +228,7 @@ Para más información o para debatir [deja un comentario en este tema de github
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/
@@ -256,3 +259,6 @@ Para más información o para debatir [deja un comentario en este tema de github
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [64]: https://github.com/openai/openai-node
 [65]: https://github.com/dotansimha/graphql-yoga
+[66]: https://js.langchain.com/
+[67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
+[68]: https://www.npmjs.com/package/@azure/service-bus

@@ -542,7 +542,7 @@ curl -X GET \
 
 ### 전체 매핑의 활성화/비활성화
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 매핑을 활성화하면 SAML로 로그인한 모든 사용자의 역할이 지워지고 각 SAML의 어셔션(Assertion) 값을 기반으로 역할이 재할당됩니다. 매핑 기능을 활성화하기 전에 로그인을 통해 원하는 SAML 어셔션을 수신하고 있는지 반드시 확인하시기 바랍니다.
 </div>
 

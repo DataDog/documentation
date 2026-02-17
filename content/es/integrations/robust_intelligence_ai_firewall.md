@@ -140,7 +140,7 @@ Para Agent v7.21+/v6.21+, sigue las instrucciones que se indican a continuación
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "robust_intelligence_ai_firewall" >}}
+{{< get-metrics-from-git "robust-intelligence-ai-firewall" >}}
 
 
 ### Checks de servicio

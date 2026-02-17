@@ -27,7 +27,7 @@ A partir de la versión `0.89.0`, el rastreador PHP inyecta automáticamente ide
 
 El rastreador PHP admite registradores compatibles con PSR-3, como [Monolog][4] o [Laminas Log][5].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Configura tu biblioteca de registro para que produzca logs en formato JSON de forma que:
   <ul>
     <li>No necesites <a href="/logs/log_configuration/parsing">reglas personalizadas de parseo</a>.</li>
@@ -47,7 +47,7 @@ El rastreador PHP proporciona varias formas de configurar la inyección de ident
 
 El comportamiento predeterminado del rastreador PHP es añadir todos los identificadores de correlación de trazas al contexto del log.
 
-Por ejemplo, si estás utilizando la biblioteca de [Monolog][4] en una aplicación Laravel de la siguiente manera:
+Por ejemplo, si estás utilizando la librería de [Monolog][4] en una aplicación Laravel de la siguiente manera:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -68,13 +68,13 @@ El rastreador PHP añade los identificadores de correlación de trazas disponibl
 Puedes utilizar marcadores de posición en tu mensaje para seleccionar qué identificadores de correlación de trazas se inyectan automáticamente en tus logs. El rastreador PHP admite los siguientes marcadores de posición:
 - `%dd.trace_id%`: el ID de traza
 - `%dd.span_id%`: el ID de tramo (span)
-- `%dd.service%`: el nombre de servicio 
-- `%dd.version%`: la versión de servicio 
+- `%dd.service%`: el nombre de servicio
+- `%dd.version%`: la versión de servicio
 - `%dd.env%`: el entorno de servicio
 
 Los parámetros distinguen entre mayúsculas y minúsculas y deben ir encerrados entre `%`.
 
-Por ejemplo, si estás utilizando la biblioteca de [Monolog][4] en una aplicación Laravel, puedes configurar la inyección en un mensaje de log de la siguiente manera:
+Por ejemplo, si estás utilizando la librería de [Monolog][4] en una aplicación Laravel, puedes configurar la inyección en un mensaje de log de la siguiente manera:
 
 ```php
 use Illuminate\Support\Facades\Log;
@@ -93,7 +93,7 @@ El rastreador PHP sustituye los marcadores de posición por los valores correspo
 
 ## Inyección manual
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> La función <code>\DDTrace\current_context()</code> ha sido introducida en la versión <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> y devuelve identificadores de traza decimales.
 </div>
 

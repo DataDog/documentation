@@ -4,7 +4,13 @@ aliases:
 - /es/account_management/mult_account
 - /es/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 - /es/account_management/multi_organisations
+description: Gestiona varias organizaciones secundarias desde una cuenta principal
+  con facturación independiente, rastreo del uso y control de acceso para proveedores
+  de servicios gestionados.
 further_reading:
+- link: https://docs.datadoghq.com/account_management/multi_organization/
+  tag: Blog
+  text: Prácticas recomendadas para gestionar organizaciones de Datadog a escala
 - link: /account_management/saml/
   tag: Documentación
   text: Configurar SAML para tu cuenta de Datadog
@@ -59,11 +65,21 @@ La incorporación de una nueva suborganización con un conjunto de dashboards y 
 
 La función de subdominios personalizados no está activada de forma predeterminada. Ponte en contacto con [el servicio de asistencia de Datadog][1] para activarla.
 
-Si eres miembro de varias organizaciones, los subdominios personalizados te ayudarán a identificar el origen de una alerta o notificación. Además, pueden permitirte cambiar inmediatamente a la organización asociada a ese subdominio.
+Si eres miembro de varias organizaciones, los subdominios personalizados te permiten identificar la fuente de una alerta o notificación. Además, pueden cambiarte inmediatamente a la organización asociada al subdominio.
+{{% site-region region="us,us3,us5,ap1,ap2" %}}
+Por ejemplo, la URL `https://app.datadoghq.com/event/event?id=1` está asociada a un evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog en el contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.datadoghq.com/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
 
-Por ejemplo, la URL `https://app.datadoghq.com/event/event?id=1` está asociada con un evento de la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está visualizando Datadog dentro del contexto de la Organización B, esta URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A, utilizando el [menú de configuración de la cuenta de usuario][2], y luego volver a ingresar en la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar hasta `https://org-a.datadoghq.com/event/event?id=1`, lo cual cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.datadoghq.com/account/settings` se convierte en `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`. {{% /site-region %}}
 
-**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con tu nombre de subdominio. Por ejemplo, un enlace que redirija a `https://**app**.datadoghq.com/account/settings` pasará a ser `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+{{% site-region region="eu" %}}
+Por ejemplo, la URL `https://app.datadoghq.eu/event/event?id=1` está asociada a una evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog dentro del contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.datadoghq.eu/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+
+**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.datadoghq.eu/account/settings` se convierte en `https://**<custom_sub-domain_name>**.datadoghq.eu/account/settings`. {{% /site-region %}}
+
+{{% site-region region="gov" %}}
+Por ejemplo, la URL `https://app.ddog-gov.com/event/event?id=1` está asociada a una evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog dentro del contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.ddog-gov.com/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+
+**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.ddog-gov.com/account/settings` se convierte en `https://**<custom_sub-domain_name>**.ddog-gov.com/account/settings`. {{% /site-region %}}
 
 ## Configurar SAML
 
@@ -93,7 +109,7 @@ Si ya has creado la organización secundaria y no puedes continuar, podrás inic
 
 ## Uso con varias organizaciones
 
-La organización principal puede ver el uso total y facturable de todas sus organizaciones (organizaciones secundarias y principal) al pasar sobre su nombre de usuario en la esquina inferior izquierda e ir a **Plan & Usage** (Plan y uso) > **Usage** (Uso).
+La organización matriz puede ver el uso total y facturable de todas tus organizaciones (secundarias y principales) pasando el ratón por encima de su nombre de usuario en la esquina inferior izquierda y accediendo a [**Plan & Usage** > **Usage & Cost**][11] (Plan y uso > Uso y coste).
 
 La página Usage (Uso) muestra el uso agregado de la organización principal y todas sus organizaciones secundarias. Tiene dos pestañas:
 
@@ -130,15 +146,13 @@ Estos datos se pueden guardar como un archivo CSV.
 
 En la pestaña de uso **Individual Organizations** (Organizaciones individuales), puedes ver el uso de tus organizaciones secundarias en unidades absolutas o como un porcentaje de uso total.
 
-{{< img src="account_management/multi-org-percent-billable-v2.png" alt="Porcentaje de uso individual" >}}
-
 La vista predeterminada es "Billable" (Facturables), que muestra el uso que computa para la factura final. En esta vista no se incluyen las organizaciones secundarias no sujetas a facturación, como las organizaciones de prueba, así como otros ajustes que ofrecen un resumen más preciso de qué se incluye en tu factura. Cambia a la vista "All" (Todo) para ver el uso sin procesar y sin ajustes de tu organización principal y todas las organizaciones secundarias. Ambas vistas se pueden descargar como un archivo CSV.
 
-Para ver los [detalles de uso][11] de una organización secundaria, puedes hacer clic en el nombre de esta organización.
+Para ver los [Detalles de uso][12] de una organización secundaria, puedes hacer clic en el nombre de la organización secundaria.
 
 ## Atribución de uso
 
-La organización principal puede visualizar el uso de las organizaciones secundarias mediante las claves de etiquetas (tags) existentes en la página [Asignación de uso][12]. Los administradores pueden pasar el cursor sobre su nombre de usuario, en la parte inferior izquierda, y luego ir a: `Plan & Usage`--> `Usage Attribution`.
+La organización principal puede ver el uso de las organizaciones secundarias mediante las claves de etiqueta existentes en la página [Atribución de uso][13]. Los administradores pueden pasar el ratón por encima de su nombre de usuario en la parte inferior izquierda y, a continuación, ir a: [**Plan & Usage > Usage Attribution**][14] (Plan y uso > Atribución del uso).
 
 Cuando se encuentra activada en el nivel de la organización principal, la atribución de uso muestra el uso agregado de todas las organizaciones. Esto puede resultar útil si quieres atribuir el uso de tus organizaciones secundarias a ciertos proyectos, equipos u otras agrupaciones.
 
@@ -154,7 +168,7 @@ La atribución de uso también se puede activar en el nivel de la organización 
 
 Usage Attribution (Atribución de uso) es una función avanzada incluida en el plan Enterprise. Para cualquier otro plan, ponte en contacto con tu representante de cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -168,5 +182,7 @@ Usage Attribution (Atribución de uso) es una función avanzada incluida en el p
 [8]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [9]: /es/monitors/manage/
 [10]: /es/account_management/saml/
-[11]: /es/account_management/plan_and_usage/usage_details/
-[12]: /es/account_management/billing/usage_attribution/
+[11]: https://app.datadoghq.com/billing/usage?cost_summary
+[12]: /es/account_management/plan_and_usage/usage_details/
+[13]: /es/account_management/billing/usage_attribution/
+[14]: https://app.datadoghq.com/billing/usage-attribution

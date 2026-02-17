@@ -1,5 +1,6 @@
 ---
 title: Scoping Downtime
+description: "Learn how to properly scope downtimes to target specific monitors and groups using monitor tags, group scopes, and granular filtering."
 disable_toc: false
 further_reading:
 - link: "/monitors/downtimes"

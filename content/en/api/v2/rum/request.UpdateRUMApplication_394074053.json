@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "name": "updated_rum_with_product_scales",
+      "rum_event_processing_state": "ALL",
+      "product_analytics_retention_state": "MAX"
+    },
+    "id": "abcd1234-0000-0000-abcd-1234abcd5678",
+    "type": "rum_application_update"
+  }
+}

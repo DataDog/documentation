@@ -1,4 +1,5 @@
 ---
+description: Autodiscovery를 사용하여 컨테이너화된 Kubernetes 환경에서 통합을 구성하기 위한 자세한 예시입니다.
 further_reading:
 - link: /agent/kubernetes/log/
   tag: 설명서
@@ -288,7 +289,7 @@ datadog:
           port: 6379
           password: "%%env_REDIS_PASSWORD%%"
 ```
-결과적으로 Agent는 `conf.d` 디렉토리에 위 구성을 가진 `redisdb.yaml` 파일을 포함합니다.
+결과적으로 Agent의 `conf.d` 디렉터리에 위 구성을 가진 `redisdb.yaml` 파일이 포함됩니다.
 
 **참고**: Redis 통합은 [기본 자동 구성][1]을 포함하며, 이는 Helm 값에 설정된 구성보다 우선합니다. 이 때문에 예시에서는 `datadog.ignoreAutoConfig`를 사용하여 자동 구성을 비활성화합니다.
 
@@ -420,7 +421,7 @@ Datadog Agent v7.36 이상:
 LABEL "com.datadoghq.ad.checks"='{"apache": {"instances": [{"apache_status_url": "http://%%host%%/server-status?auto", "min_collection_interval": 30}]}, "http_check":{"instances": [{"name":"my_website_1","url":"http://%%host%%/website_1","timeout":1},{"name":"my_website_2","url":"http://%%host%%/website_2","timeout":1}]}}'
 ```
 
-이전 Agent 버전:
+이전 Agent 버전:
 ```dockerfile
 LABEL "com.datadoghq.ad.check_names"='["apache", "http_check"]'
 LABEL "com.datadoghq.ad.init_configs"='[{},{}]'
@@ -616,7 +617,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-다음 모든 예에서는 [Autodiscovery 템플릿 변수][7]를 사용합니다:
+다음 모든 예시에서는 [Autodiscovery 템플릿 변수][7]를 사용합니다:
 - `%%host%%`는 컨테이너의 IP로 채워집니다.
 
 ## 참고 자료

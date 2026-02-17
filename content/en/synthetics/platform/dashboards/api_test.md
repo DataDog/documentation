@@ -14,11 +14,11 @@ The [API test performance dashboard][1] provides insights about your entire stac
 
 - **API test types**: View your network levels' average response time, latency, or lookup time, along with transaction timings and response time by location by test type.
 
-  {{< img src="synthetics/dashboards/api_test_performance_dashboard_2_2024.png" alt="Out-of-the-box Synthetics API test performance dashboard" style="width:100%" >}}
+  {{< img src="synthetics/dashboards/api_test_performance_dashboard_2_2024.png" alt="Out-of-the-box Synthetic Monitoring API test performance dashboard" style="width:100%" >}}
 
 - **Events**: View events triggered for all of your API tests and filter for specific tests using the template variables at the top of the dashboard.
   
-  {{< img src="synthetics/dashboards/api_test_performance_events_2_2024.png" alt="Events section of the Synthetics API test performance dashboard" style="width:100%" >}}
+  {{< img src="synthetics/dashboards/api_test_performance_events_2_2024.png" alt="Events section of the Synthetic Monitoring API test performance dashboard" style="width:100%" >}}
 
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][3].

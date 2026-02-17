@@ -456,7 +456,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 ### Logback を構成する
 
 {{< site-region region="us3,us5,ap1,gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、TCP エンドポイントはサポートされていません。ロギングエンドポイントのリストについては、<a href="/logs/log_collection/?tab=tcp#additional-configuration-options">ログ収集とインテグレーション</a>をご覧ください。</div>
+<div class="alert alert-danger">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、TCP エンドポイントはサポートされていません。ロギングエンドポイントのリストについては、<a href="/logs/log_collection/?tab=tcp#additional-configuration-options">ログ収集とインテグレーション</a>をご覧ください。</div>
 {{< /site-region >}}
 
 

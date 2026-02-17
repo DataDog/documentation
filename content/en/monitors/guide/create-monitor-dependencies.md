@@ -1,5 +1,6 @@
 ---
 title: Create monitor dependencies
+description: "Create alerting trees by using webhook notifications with downtime API calls to mute dependent alerts automatically."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

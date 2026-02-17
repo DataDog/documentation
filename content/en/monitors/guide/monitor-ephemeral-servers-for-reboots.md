@@ -1,5 +1,6 @@
 ---
 title: Monitor ephemeral servers for reboots
+description: "Monitor ephemeral servers for reboots using the system.uptime metric with the diff() function to distinguish new hosts from rebooted hosts."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

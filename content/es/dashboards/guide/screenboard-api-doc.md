@@ -5,7 +5,7 @@ aliases:
 title: API screenboard
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Este endpoint está obsoleto. Utiliza en su lugar el <a href="https://docs.datadoghq.com/api/v1/dashboards/">nuevo endpoint dashboard </a>.
 </div>
 

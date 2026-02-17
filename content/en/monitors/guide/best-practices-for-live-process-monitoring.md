@@ -1,5 +1,6 @@
 ---
 title: Best Practices for Live Process Monitoring
+description: "Best practices for creating reliable live process monitors including proper scoping, time frame selection, and avoiding false positives."
 ---
 
 ## Overview

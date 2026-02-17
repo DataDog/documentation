@@ -11,7 +11,7 @@ type: multi-code-lang
 ---
 
 
-<div class="alert alert-info">OpenTracing se basa en una especificación obsoleta. Si deseas instrumentar tu código con una especificación abierta, utiliza OpenTelemetry en su lugar. Prueba el soporte de fase beta para <a href="/tracing/trace_collection/otel_instrumentation/">procesar datos de la instrumentación de OpenTelemetry en bibliotecas de rastreo de Datadog</a>.</div>
+<div class="alert alert-info">La compatibilidad de OpenTracing se basa en una especificación obsoleta. Si deseas instrumentar tu código con una especificación abierta, utiliza OpenTelemetry en su lugar. Prueba <a href="/tracing/trace_collection/otel_instrumentation/">procesar datos de instrumentación de OpenTelemetry en bibliotecas de rastreo de Datadog</a>.</div>
 
 OpenTracing es compatible con el paquete `dd-trace`.
 

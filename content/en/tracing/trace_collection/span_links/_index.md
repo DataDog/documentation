@@ -1,5 +1,6 @@
 ---
 title: Span Links
+description: Correlate spans across traces and operations using OpenTelemetry span links for complex distributed system workflows.
 further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/signals/traces/#span-links'
       tag: 'Documentation'
@@ -76,10 +77,10 @@ You can view span links from the [Trace Explorer][4] in Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/php/#adding-span-links-beta
+[1]: /tracing/trace_collection/custom_instrumentation/php/#adding-span-links
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
 [3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
-[4]: /tracing/trace_explorer/trace_view/?tab=spanlinksbeta#more-information
+[4]: /tracing/trace_explorer/trace_view/?tab=spanlinks#more-information
 [5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/

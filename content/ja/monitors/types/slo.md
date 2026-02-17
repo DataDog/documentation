@@ -12,7 +12,7 @@ title: SLO アラート
 ---
 
 <div class="alert alert-info">
-This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monitor-based SLOs composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
+このモニターは、Metric-based SLO、Time Slice SLO、および以下のメトリックモニタータイプ (Metric、Integration、APM Metric、Anomaly、Forecast、Outlier Monitor) で構成された Monitor-based SLO に対して利用できます。
 </div>
 
 ## 概要
@@ -37,7 +37,7 @@ Datadog で [SLO アラート][2]を作成するには、メインナビゲー�
 
 ### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+**Configure notifications and automations** セクション (通知と自動化の構成) の詳細な手順については、[通知][5]のページをご覧ください。
 
 すべてのモニタータイプで利用可能な[標準テンプレート変数][6]に加えて、SLO アラートは以下の変数もサポートします。
 

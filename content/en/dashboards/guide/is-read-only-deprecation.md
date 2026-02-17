@@ -1,5 +1,6 @@
 ---
 title: "Dashboards API: Migrate from is_read_only"
+description: Migrate from deprecated is_read_only attribute to restricted_roles or Restriction Policies for dashboard access control.
 further_reading:
 - link: "/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/"
   tag: "Guide"

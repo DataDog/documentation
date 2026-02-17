@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a GitLab Pipeline
+title: GitLab Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -18,14 +18,14 @@ further_reading:
 
 [GitLab][18] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling automated, continuous deployment of applications with built-in security controls.
 
-Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
+Set up CI Visibility for GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
 ### Compatibility
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| [CI jobs failure analysis][28] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
+| [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
@@ -45,6 +45,17 @@ The following GitLab versions are supported:
 - GitLab.com (SaaS)
 - GitLab >= 14.1 (self-hosted)
 - GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and GitLab:
+
+| Datadog                    | GitLab   |
+|----------------------------|----------|
+| Pipeline                   | Pipeline |
+| Stage                      | Stage    |
+| Job                        | Job      |
+| _Not available in Datadog_ | Script   |
 
 ## Configure the Datadog integration
 
@@ -168,7 +179,7 @@ kubectl exec -it <task-runner-pod-name> -- \
 
 Then, configure the integration on a [project][103] by going to **Settings > Integrations > Datadog** for each project you want to instrument.
 
-<div class="alert alert-danger">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
+<div class="alert alert-warning">Due to a <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> in early versions of GitLab, the Datadog integration cannot be enabled at <strong>group or instance</strong> level on <strong>GitLab versions < 14.1</strong>, even if the option is available on GitLab's UI.</div>
 
 
 Fill in the integration configuration settings:
@@ -212,7 +223,7 @@ You can test the integration with the **Test settings** button (only available w
 
 {{% tab "GitLab &lt; 13.7" %}}
 
-<div class="alert alert-warning">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
+<div class="alert alert-danger">Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
 For older versions of GitLab, you can use [webhooks][101] to send pipeline data to Datadog.
 
@@ -269,15 +280,19 @@ After these steps, CI Visibility adds the hostname to each job. To see the metri
 {{% /tab %}}
 
 {{% tab "Docker Autoscaler" %}}
-CI Visibility supports Infrastructure metrics for "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
+CI Visibility supports Infrastructure metrics for "Docker Autoscaler" executors through log-based correlation. To enable this, make sure GitLab job logs are indexed so Datadog can link jobs to hosts, and that the logs include messages in the form `Instance <hostname> connected`. GitLab job logs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][2] filters. Users also need [log read access][3] to see the Infrastructure data in this scenario. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
 
 [1]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[2]: /logs/indexes/
+[3]: /logs/guide/logs-rbac/
 {{% /tab %}}
 
 {{% tab "Instance" %}}
-CI Visibility supports Infrastructure metrics for "Instance" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
+CI Visibility supports Infrastructure metrics for "Instance" executors through log-based correlation. To enable this, make sure GitLab job logs are indexed so Datadog can link jobs to hosts, and that the logs include messages in the form `Instance <hostname> connected`. GitLab job logs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][2] filters. Users also need [log read access][3] to see the Infrastructure information in this scenario. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
 
 [1]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[2]: /logs/indexes/
+[3]: /logs/guide/logs-rbac/
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -303,7 +318,9 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 #### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
+If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
 
 For a full explanation, see the guide on [using CI jobs failure analysis][28].
 
@@ -367,7 +384,7 @@ To enable collection of job logs:
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -377,7 +394,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-<div class="alert alert-warning">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+<div class="alert alert-danger">Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 This means that for Datadog servers to access the storage, the storage must not have network restrictions
 The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, if set, should resolve to a publicly accessible URL.</div>
 
@@ -448,3 +465,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [27]: /continuous_integration/search/#search-for-pipelines
 [28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments

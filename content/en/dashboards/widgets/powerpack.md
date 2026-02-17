@@ -1,5 +1,6 @@
 ---
 title: Powerpack Widget
+description: Create reusable widget groups to standardize dashboard layouts and scale monitoring expertise across teams.
 disable_toc: false
 further_reading:
 - link: "/dashboards/guide/powerpacks-best-practices/"

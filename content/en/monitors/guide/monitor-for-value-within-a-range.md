@@ -1,5 +1,6 @@
 ---
 title: Monitoring Ranges
+description: "Create monitors that alert when metric values fall inside or outside a specified range using mathematical formulas with absolute values."
 ---
 
 ## Overview

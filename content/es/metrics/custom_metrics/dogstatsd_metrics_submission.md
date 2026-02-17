@@ -16,36 +16,36 @@ further_reading:
 title: 'Envío de métricas: DogStatsD'
 ---
 
-Mientras que StatsD sólo acepta métricas, DogStatsD acepta los tres tipos de datos principales de Datadog: métricas, eventos y checks de servicios. Esta sección muestra los casos de uso típicos de métricas divididos por tipos de métrica e introduce las opciones [muestreo de índices](#sample-rates) y [etiquetado de métricas][metric tagging], específicas de DogStatsD.
+Mientras que StatsD solo acepta métricas, DogStatsD acepta los tres tipos de datos principales de Datadog: métricas, eventos y checks de servicios. Esta sección muestra los casos de uso típicos de métricas divididos por tipos de métrica y presenta las opciones [muestreo de índices](#sample-rates) y [etiquetado de métricas](#metric-tagging), específicas de DogStatsD.
 
-Los tipos de métricas [RECUENTO](#count), [INDICADOR](#gauge) y [CONFIGURAR](#set) son familiares para los usuarios de StatsD. `TIMER` de StatsD es un subconjunto de `HISTOGRAM` en DogStatsD. Además, puedes enviar los tipos de métricas [HISTOGRAMA](#histogram) y [DISTRIBUCIÓN](#distribution) utilizando DogStatsD.
+Los tipos de métricas [COUNT](#count), [GAUGE](#gauge) y [SET](#set) son conocidos para los usuarios de StatsD. `TIMER` de StatsD es un subconjunto de `HISTOGRAM` en DogStatsD. Además, puedes enviar los tipos de métricas [HISTOGRAM](#histogram) y [DISTRIBUTION](#distribution) utilizando DogStatsD.
 
-**Nota**: Dependiendo del método de envío utilizado, el tipo real de métrica almacenado en Datadog puede diferir del tipo de métrica de envío. Al enviar un tipo de métrica TARIFA a través de DogStatsD, la métrica aparece como INDICADOR en la aplicación, para garantizar una comparación pertinente entre los distintos Agents.
+**Nota**: Dependiendo del método de envío utilizado, el tipo real de métrica almacenado en Datadog puede diferir del tipo de métrica enviado. Al enviar un tipo de métrica RATE a través de DogStatsD, la métrica aparece como GAUGE en la aplicación, para garantizar una comparación adecuada entre los distintos Agents.
 
-## Roles
+## Funciones
 
-Después de [instalar DogStatsD][1], los siguientes roles están disponibles para enviar tus métricas a Datadog en función de tu tipo de métrica. Los roles comparten los siguientes parámetros:
+Después de [instalar DogStatsD][1], las siguientes funciones están disponibles para enviar tus métricas a Datadog, según tu tipo de métrica. Las funciones comparten los siguientes parámetros:
 
 | Parámetro        | Tipo            | Obligatorio | Descripción                                                                                                                                                                                    |
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<METRIC_NAME>`  | Cadena          | Sí      | Nombre de la métrica que se va a enviar.                                                                                                                                                                  |
 | `<METRIC_VALUE>` | Doble          | Sí      | Valor asociado a tu métrica.                                                                                                                                                             |
-| `<SAMPLE_RATE>`  | Doble          | No       | La frecuencia de muestreo que se aplicará a la métrica. Toma un valor entre `0` (se muestrea todo, por lo que no se envía nada) y `1` (sin muestreo). Para obtener más información, consulta la sección [Frecuencia de muestreo](#sample-rates). |
-| `<TAGS>`         | Lista de cadenas | No       | Un lista de etiquetas (tags) para aplicar a la métrica. Para obtener más información, consulta la sección [Etiquetado de métricas](#metric-tagging).                                                                                       |
+| `<SAMPLE_RATE>`  | Doble          | No       | La frecuencia de muestreo que se aplicará a la métrica toma un valor entre `0` (se muestrea todo, por lo que no se envía nada) y `1` (sin muestreo). Para obtener más información, consulta la sección [Frecuencia de muestreo](#sample-rates). |
+| `<TAGS>`         | Lista de cadenas | No       | Lista de etiquetas (tags) para aplicar a la métrica. Para obtener más información, consulta la sección [Etiquetado de métricas](#metric-tagging).                                                                                       |
+| `<CARDINALITY>`  | Enum            | No       | La [cardinalidad][10] de etiquetas para asignar a esta métrica.                                                                                                                               |
 
-### RECUENTO
+### COUNT
 
-`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
-: Utilizado para incrementar una métrica CUENTA. Almacenado como un tipo `RATE` en Datadog. Cada valor de la serie temporal almacenada es un delta normalizado en el tiempo del valor de la métrica durante el periodo de vaciado de StatsD.
+`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY> )`
+: Se utiliza para incrementar una métrica COUNT. Se almacena como un tipo `RATE` en Datadog. Cada valor de la serie temporal almacenada es un delta normalizado en el tiempo del valor de la métrica durante el periodo de descarga de StatsD.
 
-`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
-: Utilizado para disminuir una métrica CUENTA. Almacenado como un tipo `RATE` en Datadog. Cada valor de la serie temporal almacenada es un delta normalizado en el tiempo del valor de métrica durante el periodo de descarga de StatsD.
+`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Se utiliza para disminuir una métrica COUNT. Se almacena como un tipo `RATE` en Datadog. Cada valor de la serie temporal almacenada es un delta normalizado en el tiempo del valor de la métrica durante el periodo de descarga de StatsD.
 
-`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Utilizado para incrementar una métrica COUNT desde un `Value` arbitrario . Almacenado como un tipo `RATE` en Datadog. Cada valor de la serie temporal almacenada es un delta normalizado en el tiempo del valor de métrica durante el período de vaciado de StatsD.
-: **Nota:** `count` no es compatible con Python.
+`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Utilizado para incrementar una métrica COUNT desde un `Value` arbitrario. Almacenado como un tipo `RATE` en Datadog. Cada valor de la serie temporal almacenada es un delta normalizado en el tiempo del valor de la métrica durante el periodo de descarga de StatsD.
 
-**Nota**: El tipo de métricas `COUNT` pueden mostrar un valor decimal en Datadog, ya que se normalizan durante el intervalo de vaciado para informar unidades por segundo.
+**Nota**: El tipo de métrica `COUNT` puede mostrar un valor decimal en Datadog, ya que se normalizan durante el intervalo de vaciado para informar unidades por segundo.
 
 #### Ejemplos de códigos
 
@@ -101,7 +101,7 @@ import (
     "log"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -169,8 +169,8 @@ public class DogStatsdClient
 
             while (true)
             {
-                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"}, cardinality: Cardinality.Low);
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"}, cardinality: Cardinality.High);
                 dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
             }
@@ -195,14 +195,14 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'));
-    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
+    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'), 'low');
+    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'), 'high');
     sleep(10);
 }
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="Node.js" >}}
+{{< programming-lang lang="nodejs" >}}
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -214,22 +214,22 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
 
 {{< /programming-lang-wrapper >}}
 
-Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles en Datadog:
+Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para su representación gráfica en Datadog:
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Incremento/Reducción" >}}
 
-Debido a que el valor se envía como `COUNT`, se almacena como `RATE` en Datadog. Para obtener recuentos en bruto en Datadog, aplica una función a tu serie, como por ejemplo una [Suma acumulativa][3] o [Integral][4]:
+Debido a que el valor se envía como `COUNT`, se almacena como `RATE` en Datadog. Para obtener recuentos sin procesar en Datadog, aplica una función a tu serie, como por ejemplo una función [Suma acumulativa][3] o [Integral][4]:
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incremento/Reducción con sumas acumulativas" >}}
 
-### INDICADOR
+### GAUGE
 
-`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Almacenado como un tipo `GAUGE` en Datadog. Cada valor de la serie temporal almacenada es el último valor gauge enviado para la métrica durante el periodo de vaciado de StatsD.
+`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Almacenado como un tipo `GAUGE` en Datadog. Cada valor de la serie temporal almacenada es el último valor de medición enviado para la métrica durante el periodo de descarga de StatsD.
 
 #### Ejemplos de códigos
 
-Emite una métrica `COUNT` almacenada como métrica `GAUGE` a Datadog. Para obtener más información sobre el tipo de métrica `GAUGE`, consulta la documentación sobre [tipos de métricas][2].
+Emite una métrica `GAUGE` almacenada como métrica `GAUGE` a Datadog. Para obtener más información sobre el tipo de métrica `GAUGE`, consulta la documentación sobre [tipos de métricas][5].
 
 Ejecuta el siguiente código para enviar una métrica de DogStatsD `GAUGE` a Datadog. Recuerda `flush`/`close` el cliente cuando ya no sea necesario.
 
@@ -253,7 +253,7 @@ i = 0
 
 while(1):
   i += 1
-  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
+  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"], cardinality="low")
   time.sleep(10)
 ```
 {{< /programming-lang >}}
@@ -268,7 +268,7 @@ i = 0
 
 while true do
     i += 1
-    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
+    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'], cardinality: 'low')
     sleep 10
 end
 ```
@@ -282,7 +282,7 @@ import (
     "log"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -293,7 +293,7 @@ func main() {
     var i float64
     for true {
         i += 1
-        statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
+        statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1, CardinalityHigh)
         time.Sleep(10 * time.Second)
     }
 }
@@ -347,7 +347,7 @@ public class DogStatsdClient
 
             for (int i = 0; true; i++)
             {
-                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"}, cardinality: Cardinality.High);
                 System.Threading.Thread.Sleep(100000);
             }
         }
@@ -373,13 +373,13 @@ $statsd = new DogStatsd(
 $i = 0;
 while (TRUE) {
     $i++;
-    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
+    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'), 'low');
     sleep(10);
 }
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="Node.js" >}}
+{{< programming-lang lang="nodejs" >}}
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -400,12 +400,12 @@ Después de ejecutar el código anterior, los datos de tus métricas estarán di
 
 ### SET
 
-`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Almacenado como un tipo `GAUGE` en Datadog. Cada valor de la serie temporal almacenada es el último valor gauge enviado para la métrica durante el periodo de vaciado de StatsD.
+`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Almacenado como un tipo `GAUGE` en Datadog. Cada valor de la serie temporal almacenada es el recuento de valores únicos enviados a StatsD para una métrica durante el periodo de descarga.
 
 #### Ejemplos de códigos
 
-Emita una métrica `SET` almacenada como `GAUGE` a Datadog.
+Emite una métrica `SET` almacenada como `GAUGE` a Datadog.
 
 Ejecuta el siguiente código para enviar una métrica de DogStatsD `SET` a Datadog. Recuerda `flush`/`close` el cliente cuando ya no sea necesario.
 
@@ -456,7 +456,7 @@ import (
     "math/rand"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -548,26 +548,26 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', $i, 1, array('environment'=>'dev'), 'low');
     sleep(rand(0, 10));
 }
 ```
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para graficar en Datadog:
+Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para su representación gráfica en Datadog:
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
-### HISTOGRAMA
+### HISTOGRAM
 
-`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Debido a que se envían varias métricas, los tipos de métricas almacenadas (`GAUGE`, `RATE`) dependen de la métrica. Para obtener más información, consulta la documentación sobre [tipos de métricas HISTOGRAMA][6].
+`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Dado que se envían múltiples métricas, los tipos de métrica almacenados (`GAUGE`, `RATE`) dependen de la métrica. Consulta la documentación [tipo de métrica HISTOGRAM][6] para obtener más información.
 
 #### Configuración
 
-* Configura la agregación que se enviará a Datadog con el parámetro `histogram_aggregates` en tu [archivo de configuración de Datadog.yaml][7]. Por defecto, sólo se envían las agregaciones `max`, `median`, `avg` y `count`.
-* Configura la agregación de percentiles que se enviará a Datadog con el parámetro `histogram_percentiles` en tu [archivo de configuración de Datadog.yaml][7]. Por defecto, sólo se envía el percentil `95pc`.
+* Configura la agregación que se enviará a Datadog con el parámetro `histogram_aggregates` en tu [archivo de configuración de Datadog.yaml][7]. En forma predeterminada, solo se envían las agregaciones `max`, `median`, `avg` y `count`.
+* Configura la agregación de percentiles que se enviará a Datadog con el parámetro `histogram_percentiles` en tu [archivo de configuración de Datadog.yaml][7]. Por defecto, solo se envía el percentil `95pc`.
 
 #### Ejemplos de códigos
 
@@ -619,7 +619,7 @@ import (
     "math/rand"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -683,7 +683,7 @@ public class DogStatsdClient
 
             while (true)
             {
-                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"}, Cardinality: Cardinality.High);
                 System.Threading.Thread.Sleep(2000);
             }
         }
@@ -707,7 +707,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
+    $statsd->histogram('example_metric.histogram', rand(0, 20), 1, array('environment'=>'dev'), 'low');
     sleep(2);
 }
 ```
@@ -719,22 +719,22 @@ La instrumentación anterior genera las siguientes métricas:
 
 | Métrica                                  | Descripción                             |
 |-----------------------------------------|-----------------------------------------|
-| `example_metric.histogram.count`        | Número de veces que se ha muestreado este métrica  |
+| `example_metric.histogram.count`        | Número de veces que se ha muestreado esta métrica  |
 | `example_metric.histogram.avg`          | Promedio de los valores muestreados           |
 | `example_metric.histogram.median`       | Valor mediano muestreado                    |
 | `example_metric.histogram.max`          | Valor máximo muestreado                   |
 | `example_metric.histogram.95percentile` | Valor del percentil 95 muestreado           |
 
-Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para graficar en Datadog:
+Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para su representación gráfica en Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histograma" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
-#### TEMPORIZADOR
+#### TIMER
 
-La métrica `TIMER` en DogStatsD es una implementación del tipo de métrica `HISTOGRAM` (no confundir con los temporizadores en el StatsD estándar). Sólo mide datos de temporización: por ejemplo, la cantidad de tiempo que tarda en ejecutarse una sección de código.
+La métrica `TIMER` en DogStatsD es una implementación del tipo de métrica `HISTOGRAM` (no confundir con los temporizadores en el StatsD estándar). Solo mide datos de temporización: por ejemplo, la cantidad de tiempo que tarda en ejecutarse una sección de código.
 
-`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Debido a que se envían varias métricas, los tipos de métricas almacenadas (`GAUGE`, `RATE`) dependen de la métrica. Para obtener más información, consulta la documentación sobre [tipos de métricas HISTOGRAMA][6].
+`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Dado que se envían múltiples métricas, los tipos de métrica almacenados (`GAUGE`, `RATE`) dependen de la métrica. Consulta la documentación [tipo de métrica HISTOGRAM][6] para obtener más información.
 
 ##### Configuración
 
@@ -770,7 +770,7 @@ while(1):
   my_function()
 ```
 
-O con un gestor de contexto:
+o con un gestor de contexto:
 
 ```python
 from datadog import statsd
@@ -830,18 +830,18 @@ A medida que DogStatsD recibe los datos de métricas de temporizador, calcula la
 | `example_metric.timer.max`          | Valor máximo muestreado                   |
 | `example_metric.timer.95percentile` | Valor del percentil 95 muestreado           |
 
-DogStatsD trata a `TIMER` como una métrica `HISTOGRAM`. Tanto si utilizas el tipo de métrica `TIMER` o `HISTOGRAM`, estarás enviando los mismos datos a Datadog. Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para su representación gráfica en Datadog:
+DogStatsD trata a `TIMER` como una métrica `HISTOGRAM`. Tanto si utilizas el tipo de métrica `TIMER` como si utilizas el tipo `HISTOGRAM`, estarás enviando los mismos datos a Datadog. Después de ejecutar el código anterior, los datos de tus métricas estarán disponibles para su representación gráfica en Datadog:
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Temporizador" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUCIÓN
 
-`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)`
-: Almacenado como un tipo `DISTRIBUTION` en Datadog. Para obtener más información, consulta la [documentación Distribuciones][8] exclusiva.
+`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>, <CARDINALITY>)`
+: Almacenado como un tipo `DISTRIBUTION` en Datadog. Consulta la [Documentación de distribución][8] dedicada para obtener más información.
 
 #### Ejemplos de códigos
 
-El tipo de métrica `DISTRIBUTION` es específico de DogStatsD. Emite una métrica `DISTRIBUTION` almacenada como métrica `DISTRIBUTION` a Datadog. Para obtener más información sobre el tipo `DISTRIBUTION`, consulta la documentación sobre [tipos de métricas][6].
+El tipo de métrica `DISTRIBUTION` es específico de DogStatsD. Emite una métrica `DISTRIBUTION` almacenada como métrica `DISTRIBUTION` a Datadog. Para obtener más información sobre el tipo `DISTRIBUTION`, consulta la documentación sobre [tipos de métricas][9].
 
 Ejecuta el siguiente código para enviar una métrica de DogStatsD `DISTRIBUTION` a Datadog. Recuerda `flush`/`close` el cliente cuando ya no sea necesario.
 
@@ -873,7 +873,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
+    statsd.distribution('example_metric.distribution', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 ```
@@ -888,7 +888,7 @@ import (
     "math/rand"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -976,13 +976,13 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
+    $statsd->distribution('example_metric.distribution', rand(0, 20), 1, array('environment'=>'dev'), 'high');
     sleep(2);
 }
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="Node.js" >}}
+{{< programming-lang lang="nodejs" >}}
 ```javascript
 const tracer = require('dd-trace');
 tracer.init();
@@ -1000,25 +1000,25 @@ La instrumentación anterior calcula `sum`, `count`, `average`, `minimum`, `maxi
 
 ## Opciones de envío de métricas
 
-### Tasas de muestreo
+### Frecuencias de muestreo
 
 Debido a que la sobrecarga del envío de paquetes UDP puede ser demasiado grande para algunas rutas de código de rendimiento intensivo, los clientes DogStatsD admiten el muestreo (sólo envían métricas un porcentaje del tiempo). Es útil si muestreas muchas métricas y el cliente DogStatsD no está en el mismo host que el servidor DogStatsD. Esto ayuda a reducir el tráfico, pero se pierde precisión y granularidad.
 
-Una frecuencia de muestreo de `1` envía métricas el 100% del tiempo, mientras que una frecuencia de muestreo de `0` envía métricas el 0% del tiempo.
+Una frecuencia de muestreo de `1` envía métricas el 100 % del tiempo, mientras que una frecuencia de muestreo de `0` envía métricas el 0 % del tiempo.
 
 Antes de enviar una métrica a Datadog, DogStatsD utiliza la `<SAMPLE_RATE>` para corregir el valor de la métrica en función del tipo de métrica (para estimar el valor sin muestreo):
 
-| Tipo de métrica    | Corrección de la frecuencia de muestreo                                                                                                                                                         |
+| Tipo de métricas    | Corrección de la frecuencia de muestreo                                                                                                                                                         |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `COUNT`        | Los valores recibidos se multiplican por (`1/<SAMPLE_RATE>`). Es razonable suponer que para un punto de datos recibido, las `1/<SAMPLE_RATE>` han sido realmente muestreadas con el mismo valor. |
 | `GAUGE`        | Sin corrección. El valor recibido se mantiene tal cual.                                                                                                                               |
 | `SET`          | Sin corrección. El valor recibido se mantiene tal cual.                                                                                                                               |
-| `HISTOGRAM`    | La estadística `histogram.count` es una métrica CUENTA y recibe la corrección indicada anteriormente. Otras estadísticas son las métricas gauge y no "se corrigen".                      |
+| `HISTOGRAM`    | La estadística `histogram.count` es una métrica COUNT y recibe la corrección indicada anteriormente. Otras estadísticas son las métricas gauge y no "se corrigen".                      |
 | `DISTRIBUTION` | Los valores recibidos se cuentan (`1/<SAMPLE_RATE>`). Es razonable suponer que para un punto de datos recibido, las `1/<SAMPLE_RATE>` han sido realmente muestreadas con el mismo valor. |
 
 #### Ejemplos de códigos
 
-El siguiente código sólo envía puntos la mitad de las veces:
+El siguiente código solo envía puntos la mitad de las veces:
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -1067,7 +1067,7 @@ Añade etiquetas a cualquier métrica que envíes a DogStatsD con el parámetro 
 
 #### Ejemplos de códigos
 
-El siguiente código sólo añade las etiquetas `environment:dev` y `account:local` a la métrica  `example_metric.increment`:
+El siguiente código solo añade las etiquetas `environment:dev` y `account:local` a la métrica  `example_metric.increment`:
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -1105,17 +1105,17 @@ dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment
 El argumento `tags` puede ser una cadena:
 
 ```php
-$statsd->increment('example_metric.increment', "environment:dev,account:local");
+$statsd->increment('example_metric.increment', 1.0, "environment:dev,account:local");
 ```
 
-O una matriz:
+o una matriz:
 ```php
 <?php
-$statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
+$statsd->increment('example_metric.increment', 1.0, array('environment' => 'dev', 'account' => 'local'));
 ```
 {{< /programming-lang >}}
 
-{{< programming-lang lang="Node.js" >}}
+{{< programming-lang lang="nodejs" >}}
 ```javascript
 tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
 ```
@@ -1125,9 +1125,9 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', 
 
 #### Etiqueta de host
 
-La etiqueta de host la asigna automáticamente el Datadog Agent, agregando los métricas. Las métricas enviadas con una etiqueta de host que no coincida con el nombre de host del Agent pierden la referencia al host original. La etiqueta de host enviada anula cualquier nombre de host recopilado o configurado en el Agent.
+La etiqueta de host es asignada automáticamente por el Datadog Agent, agregando las métricas. Las métricas enviadas con una etiqueta de host que no coincida con el nombre de host del Agent pierden la referencia al host original. La etiqueta de host enviada anula cualquier nombre de host recopilado o configurado en el Agent.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1140,3 +1140,4 @@ La etiqueta de host la asigna automáticamente el Datadog Agent, agregando los m
 [7]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /es/metrics/distributions/
 [9]: /es/metrics/types/?tab=distribution#definition
+[10]: /es/containers/kubernetes/tag

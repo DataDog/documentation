@@ -4,7 +4,7 @@ app_uuid: fe1f17e3-11a4-4e44-b819-8781ebcc86f8
 assets:
   dashboards:
     Upstash-Kafka-Overview: assets/dashboards/upstash_kafka_overview.json
-    Upstash-Overview: assets/dashboards/upstash_overview.json
+    Upstash-Redis-Overview: assets/dashboards/upstash_redis_overview.json
   integration:
     auto_install: true
     configuration: {}
@@ -29,7 +29,7 @@ categories:
 - クラウド
 - ai/ml
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/upstash/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ is_public: true
 manifest_version: 2.0.0
 name: upstash
 public_title: Upstash
-short_description: Visualize metrics for databases and kafka clusters from Upstash
+short_description: Upstash のデータベースおよび Kafka クラスターのメトリクスを可視化します
 supported_os:
 - linux
 - windows
@@ -59,12 +59,12 @@ tile:
   - Category::Data Stores
   - Submitted Data Type::Metrics
   configuration: README.md#Setup
-  description: Visualize metrics for databases and kafka clusters from Upstash
+  description: Upstash のデータベースおよび Kafka クラスターのメトリクスを可視化します
   media:
-  - caption: Upstash データベースメトリクス
-    image_url: images/upstash-dashboard.png
+  - caption: Upstash Redis データベース メトリクス
+    image_url: images/upstash-redis-overview-dashboard.png
     media_type: image
-  - caption: Upstash Kafka Metrics
+  - caption: Upstash Kafka メトリクス
     image_url: images/upstash-kafka-overview-dashboard.png
     media_type: image
   overview: README.md#Overview

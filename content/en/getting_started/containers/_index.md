@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Containers
+description: Learn containerized environment monitoring with Autodiscovery and the Datadog Operator for comprehensive container management.
 ---
 
 {{< whatsnext desc=" " >}}

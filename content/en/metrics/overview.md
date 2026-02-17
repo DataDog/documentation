@@ -7,6 +7,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to unlock the full potential of metrics"
+  - link: '/metrics/units'
+    tag: 'Documentation'
+    text: 'Metrics Units'
 ---
 
 ## Overview
@@ -136,7 +139,7 @@ Use the search bar in this section to view the latest data and configuration opt
 [15]: /tracing/trace_pipeline/generate_metrics/
 [16]: /real_user_monitoring/platform/generate_metrics/
 [17]: /infrastructure/process/increase_process_retention/#generate-a-process-based-metric
-[18]: /service_management/events/guides/usage/#custom-metrics
+[18]: /events/guides/usage/#custom-metrics
 [19]: /metrics/metrics-without-limits/
 [20]: /metrics/distributions/
 [21]: /metrics/custom_metrics/historical_metrics/

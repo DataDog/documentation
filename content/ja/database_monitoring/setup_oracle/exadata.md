@@ -68,7 +68,7 @@ Agent をどこにインストールするかについては、[DBM セットア
 
 Database Monitoring は、Oracle データベースのカスタムクエリをサポートしています。使用可能な構成オプションの詳細については、[conf.yaml.example][5] を参照してください。
 
-<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
+<div class="alert alert-danger">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases

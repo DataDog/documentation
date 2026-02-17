@@ -37,7 +37,7 @@ title: Débuter avec Incident Management
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">La solution Incident Management n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La solution Incident Management n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Présentation

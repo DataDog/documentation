@@ -8,11 +8,14 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
     tag: "Blog"
     text: "Configure pipeline alerts with Datadog CI monitors"
+  - link: "/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization/"
+    tag: "Guide"
+    text: "View Continuous Testing Test Runs in Test Optimization"
 ---
 
 ## Overview
 
-The Test Optimization Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag. 
+The Test Optimization Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag.
 
 Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. Each test level represents a different level of aggregation of tests.
 
@@ -127,11 +130,11 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 [8]: https://app.datadoghq.com/notebook/list
 [9]: https://learn.microsoft.com/en-us/visualstudio/test/create-a-unit-test-project?view=vs-2022#to-create-a-unit-test-project
 [10]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
-[11]: https://github.com/DataDog/datadog-ci/blob/6de6ea3bbffa57d8576422535061ca35c759feb6/src/commands/junit/__tests__/upload.test.ts
+[11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/junit/__tests__/upload.test.ts
 [12]: /glossary/?product=ci-cd#test-service
-[13]: /glossary/?product=ci-cd#test-suite 
+[13]: /glossary/?product=ci-cd#test-suite
 [14]: /real_user_monitoring/
 [15]: /tests/flaky_test_management/early_flake_detection/
 [16]: /intelligent_test_runner/
 [17]: /tests/code_coverage/
-[18]: https://app.datadoghq.com/ci/test-runs?viz=timeseries 
+[18]: https://app.datadoghq.com/ci/test-runs?viz=timeseries

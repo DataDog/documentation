@@ -7,7 +7,7 @@ title: Agent v5의 쿠버네티스(Kubernetes) Agent 기본 사용법
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Agent v5는 최대 쿠버네티스 버전 1.8까지 지원합니다. 최신 버전의 쿠버네티스는 Datadog Agent v6를 사용해야 합니다.
 </div>
 

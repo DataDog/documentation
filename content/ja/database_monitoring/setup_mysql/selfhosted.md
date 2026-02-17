@@ -108,7 +108,6 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
@@ -141,6 +140,15 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
+
+To collect index metrics, grant the `datadog` user an additional privilege:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+Agent v7.65 以降、Datadog Agent は MySQL データベースからスキーマ情報を収集できるようになりました。この収集のために Agent に必要な権限の付与方法については、後述の [スキーマの収集][14] セクションを参照してください。
+
 
 ### ランタイムセットアップコンシューマー
 Datadogは、ランタイムで `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
@@ -302,3 +310,4 @@ Agent によってデータベースから収集されたテレメトリーに�
 [11]: https://app.datadoghq.com/databases
 [12]: /ja/database_monitoring/troubleshooting/?tab=mysql
 [13]: /ja/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[14]: /ja/database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas

@@ -25,7 +25,7 @@ further_reading:
 ---
 
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
@@ -156,7 +156,7 @@ See the standard [DaemonSet installation][1] and the [Docker Agent][2] informati
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
+<div class="alert alert-info">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
 
 In order to collect processes, the Datadog Agent must be running as a container within the task.
 
@@ -233,50 +233,46 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
 
 
 ### Optimized process collection footprint
-As of Agent v7.65.0, container and process collection run in the core Datadog Agent by default on Linux, reducing the Agent's overall footprint.
 
-For verification, you can explicitly enable this feature.
+On Linux, the Datadog Agent's overall footprint is reduced by running container and process collection in the core Datadog Agent (instead of the separate Process Agent). In Datadog Agent v7.65.0+, this is enabled by default.  **Note**: the Process Agent is still required for [Cloud Network Monitoring][14].
 
-{{< tabs >}}
-{{% tab "Helm" %}}
-Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+The Agent status for this feature is listed under the `Process Component` section, for example:
+```text
+=================
+Process Component
+=================
+
+
+  Enabled Checks: [process rtprocess]
+  System Probe Process Module Status: Not running
+  Process Language Detection Enabled: False
+
+  =================
+  Process Endpoints
+  =================
+    https://process.datadoghq.com. - API Key ending with:
+        - *****
+
+  =========
+  Collector
+  =========
+    Last collection time: 2026-01-14 10:04:49
+    Docker socket: /var/run/docker.sock
+    Number of processes: 48
+    Number of containers: 0
+    Process Queue length: 0
+    RTProcess Queue length: 0
+    Connections Queue length: 0
+    Event Queue length: 0
+    Pod Queue length: 0
+    Process Bytes enqueued: 0
+    RTProcess Bytes enqueued: 0
+    Connections Bytes enqueued: 0
+    Event Bytes enqueued: 0
+    Pod Bytes enqueued: 0
+    Drop Check Payloads: []
+    Number of submission errors: 0
 ```
-datadog:
-  processAgent:
-    runInCoreAgent: true
-```
-{{% /tab %}}
-
-{{% tab "Operator" %}}
-Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
-
-```
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-          value: "true"
-```
-{{% /tab %}}
-
-{{% tab "Linux hosted" %}}
-If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
-
-```
-process_config:
-  run_in_core_agent:
-    enabled: true
-```
-{{% /tab %}}
-{{< /tabs >}}
-
- Explicitly setting the config flag to false will cause container and process collection to run in the separate Process Agent. Note that container and process collection always run in the separate Process Agent in non-Linux environments.
-
 
 ### Process arguments scrubbing
 
@@ -422,6 +418,9 @@ Having these tags available lets you tie together APM, logs, metrics, and proces
 **Note**: This setup applies to containerized environments only.
 
 #### Rules to create custom tags
+<div class="alert alert-info">
+Requires the <code>Process Tags Read</code> and <code>Process Tag Write</code>  Datadog role permissions<br/>
+</div>
 
 You can create rule definitions to add manual tags to processes based on the command line.
 
@@ -532,4 +531,4 @@ Processes are normally collected at 10s resolution. While actively working with 
 [11]: /network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /agent/configuration/agent-commands/#restart-the-agent
 [13]: /metrics/custom_metrics/
-
+[14]: /network_monitoring/cloud_network_monitoring/

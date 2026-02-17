@@ -1,5 +1,6 @@
 ---
 title: Audit Trail Guides
+description: Comprehensive guides for tracking dashboard and monitor access patterns, configuration changes, and usage analytics with Audit Trail.
 disable_toc: false
 ---
 

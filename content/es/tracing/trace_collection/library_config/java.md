@@ -14,17 +14,17 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la biblioteca de rastreo de Java
+title: Configuración de la librería de rastreo de Java
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
 
 Todas las opciones de configuración anteriores tienen propiedades del sistema y variables de entorno equivalentes.
 Si se define el mismo tipo de clave para ambas, la configuración de propiedades del sistema tiene prioridad.
 Las propiedades del sistema se pueden establecer como marcas de máquinas virtuales Java.
 
-### Conversión entre propiedades del sistema y variables de entorno 
+### Conversión entre propiedades del sistema y variables de entorno
 A menos que se indique lo contrario, puedes convertir entre propiedades del sistema y variables de entorno utilizando las siguientes transformaciones:
 
 - Para definir una propiedad del sistema como variable de entorno, escribe el nombre de la propiedad en mayúsculas y sustitúyelo por `.` o `-` por `_`.

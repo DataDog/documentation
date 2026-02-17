@@ -1,5 +1,6 @@
 ---
 title: Why should I install the Datadog Agent on my cloud instances?
+description: Explains the benefits of installing the Datadog Agent on cloud instances, including better resolution, more metrics, integrations, and custom monitoring capabilities.
 aliases:
     - /agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
     - /integrations/faq/why-is-my-aws-error-count-metric-orders-of-magnitude-lower-in-datadog-than-cloudwatch/

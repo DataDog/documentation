@@ -620,7 +620,7 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 
 {{< site-region region="us" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 

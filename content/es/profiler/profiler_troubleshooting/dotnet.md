@@ -31,7 +31,7 @@ Si has configurado el generador de perfiles y no ves perfiles en la página de b
 
    5. Busca la entrada `#Profiler`.
 
-   6. Comprueba las siguientes líneas para asegurarte de que se ha cargado la biblioteca del generador de perfiles:
+   6. Comprueba las siguientes líneas para asegurarte de que se ha cargado la librería del generador de perfiles:
       ```
       [...] #Profiler
       [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
@@ -104,7 +104,7 @@ Si se establece en otro valor o no se establece en absoluto, el perfilador se de
 
    5. Busca la entrada `#Profiler`.
 
-   6. Comprueba las siguientes líneas para asegurarte de que se ha cargado la biblioteca del generador de perfiles:
+   6. Comprueba las siguientes líneas para asegurarte de que se ha cargado la librería del generador de perfiles:
       ```
       [...] #Profiler
       [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
@@ -169,7 +169,7 @@ El directorio de logs del generador de perfiles por defecto es `%ProgramData%\Da
 
    5. Busca la entrada `#Profiler`.
 
-   6. Comprueba las siguientes líneas para asegurarte de que se ha cargado la biblioteca del generador de perfiles:
+   6. Comprueba las siguientes líneas para asegurarte de que se ha cargado la librería del generador de perfiles:
       ```
       [...] #Profiler
       [...] PROFILER;{BD1A650D-AC5D-4896-B64F-D6FA25D6B26A};win-x64;.\Datadog.Profiler.Native.dll
@@ -227,7 +227,7 @@ Datadog no recomienda habilitar el generador de perfiles a nivel de la máquina 
 ### Contenedores Linux
 
 El valor exacto puede variar, pero el coste fijo de las sobrecargas significa que la sobrecarga relativa del generador de perfiles puede ser significativa en contenedores muy pequeños. Para evitar esta situación, el generador de perfiles está deshabilitado en contenedores que tienen menos de un núcleo. Puedes anular el umbral de un núcleo configurando la variable de entorno `DD_PROFILING_MIN_CORES_THRESHOLD` con un valor inferior a 1. Por ejemplo, un valor de `0.5` permite que el generador de perfiles se ejecute en un contenedor que tenga al menos 0,5 núcleos.
-Pero, en ese caso habrá un aumento del consumo de CPU, incluso para servicios inactivos, ya que los hilos del generador de perfiles siempre analizan los hilos de la aplicación. Cuanto menor sea el número de núcleos disponibles, más aumentará el consumo de CPU. 
+Pero, en ese caso habrá un aumento del consumo de CPU, incluso para servicios inactivos, ya que los hilos del generador de perfiles siempre analizan los hilos de la aplicación. Cuanto menor sea el número de núcleos disponibles, más aumentará el consumo de CPU.
 
 Deshabilitar el generador de perfiles de tiempo real con el parámetro `DD_PROFILING_WALLTIME_ENABLED=0` disminuye el consumo de CPU por parte del generador de perfiles. Si esto no es suficiente, aumenta los núcleos de CPU disponibles para tus contenedores.
 
@@ -236,7 +236,7 @@ Deshabilitar el generador de perfiles de tiempo real con el parámetro `DD_PROFI
 Dado que el rastreo de APM también se basa en la API de generación de perfiles CLR, si quieres dejar de recopilar perfiles .NET pero seguir recibiendo trazas (traces), configura las siguientes variables de entorno para deshabilitar únicamente la generación de perfiles.
 
 ```
- DD_PROFILING_ENABLED=0 
+ DD_PROFILING_ENABLED=0
  CORECLR_ENABLE_PROFILING=1
 ```
 

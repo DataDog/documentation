@@ -15,7 +15,7 @@ title: 에이전트 플레어
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">이 사이트에서는 Agent Flare 전송이 지원되지 않습니다.</div>
+<div class="alert alert-danger">이 사이트에서는 Agent Flare 전송이 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 플레어를 사용하면 필요한 트러블슈팅 정보를 Datadog 지원팀으로 보낼 수 있습니다.

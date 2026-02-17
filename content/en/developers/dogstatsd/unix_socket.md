@@ -38,7 +38,7 @@ To enable the Agent DogStatsD UDS:
 {{< tabs >}}
 {{% tab "Host" %}}
 
-<div class="alert alert-warning"><strong>Note</strong>: The Agent install script automatically creates the socket file with the correct permissions, and <code>use_dogstatsd: true</code> & <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> are set by default. </div>
+<div class="alert alert-warning">The Agent install script automatically creates the socket file with the correct permissions, and <code>use_dogstatsd: true</code> & <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> are set by default. </div>
 
 1. Create a socket file for DogStatsD to use as a listening socket. For example:
    ```shell

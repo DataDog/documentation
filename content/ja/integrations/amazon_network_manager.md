@@ -73,7 +73,7 @@ AWS Network Manager は、すべての AWS アカウント、リージョン、�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_network_manager" >}}
+{{< get-metrics-from-git "amazon-network-manager" >}}
 
 
 ### サービスチェック

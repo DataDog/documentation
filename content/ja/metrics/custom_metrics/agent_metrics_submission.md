@@ -1,12 +1,12 @@
 ---
+title: "メトリクスの送信: カスタム Agent チェック"
 aliases:
 - /ja/developers/metrics/agent_metrics_submission/
 - /ja/metrics/agent_metrics_submission
 further_reading:
-- link: /developers/custom_checks/write_agent_check/
-  tag: ドキュメント
-  text: Agent カスタムチェックの書き方
-title: "メトリクスの送信: \bカスタム Agent チェック"
+- link: "/developers/custom_checks/write_agent_check/"
+  tag: "ドキュメント"
+  text: "Agent カスタムチェックの書き方"
 ---
 
 関数は、[カスタム Agent チェック][1]を使用してメトリクスを送信する際に使います。[メトリクスタイプ][2]に応じ、さなざまな関数が利用できます。使用した関数により、Datadog 内に保存されるメトリクスタイプと送信時のものが異なる場合があります。

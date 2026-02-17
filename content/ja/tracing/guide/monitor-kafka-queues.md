@@ -26,7 +26,7 @@ title: Kafka キューの監視
 
 [Datadog Data Streams Monitoring][3] は、パイプラインの健全性と、システムを通過するイベントのエンドツーエンドのレイテンシーを測定するための標準的な方法を提供します。Data Streams Monitoring が提供する深い可視性により、パイプラインの遅延や遅れを引き起こしている不良のプロデューサー、コンシューマー、またはキューを正確に特定することが可能になります。ブロックされたメッセージ、ホットパーティション、オフラインのコンシューマーなど、デバッグが困難なパイプラインの問題を発見することができます。また、関連するインフラストラクチャーやアプリのチーム間でシームレスに連携することができます。
 
-{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="Data Streams Monitoring Demo" video="true">}}
+{{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb2.mp4" alt="Data Streams Monitoring のデモ" video="true">}}
 
 ### 分散型トレース
 
@@ -78,7 +78,7 @@ Kafka アプリケーションをトレースするために、Datadog は Kafka
 
 {{% tab "Java" %}}
 
-See [Java's tracer documentation][7] for configuration of Kafka.
+Kafka の設定については、[Java の tracer ドキュメント][7] を参照してください。
 
 [7]: /ja/tracing/trace_collection/compatibility/java/#networking-framework-compatibility
 
@@ -86,11 +86,11 @@ See [Java's tracer documentation][7] for configuration of Kafka.
 
 {{% tab ".NET" %}}
 
-The [Kafka .NET Client documentation][9] states that a typical Kafka consumer application is centered around a consume loop, which repeatedly calls the Consume method to retrieve records one-by-one. The `Consume` method polls the system for messages. Thus, by default, the consumer span is created when a message is returned and closed before consuming the next message. The span duration is then representative of the computation between one message consumption and the next.
+[Kafka .NET Client ドキュメント][9] によると、典型的な Kafka コンシューマー アプリケーションは Consume ループを中心とし、Consume メソッドを繰り返し呼び出してレコードを 1 つずつ取得します。`Consume` メソッドはシステムからメッセージをポーリングします。したがってデフォルトでは、コンシューマー スパンはメッセージが返されたときに作成され、次のメッセージを消費する前に終了します。スパンの長さは、あるメッセージを消費してから次のメッセージを消費するまでの処理時間を表します。
 
-When a message is not processed completely before consuming the next one, or when multiple messages are consumed at once, you can set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` in your consuming application. When this setting is `false`, the consumer span is created and immediately closed. If you have child spans to trace, follow [the headers extraction and injection documentation for .NET custom instrumentation][10] to extract the trace context.
+メッセージを完全に処理し終わる前に次のメッセージを消費する場合、または複数のメッセージを一度に消費する場合、あるいは複数のメッセージを一度に消費する場合、消費するアプリケーションで `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定することができます。この設定が `false` の場合、コンシューマースパンが作成され、すぐに閉じられます。トレースする子スパンがある場合は、[.NET カスタムインストルメンテーションのヘッダー抽出と挿入のドキュメント][10]に従って、トレースコンテキストを抽出してください。
 
-The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace context propagation API is available since [v2.7.0][12].
+.NET トレーサーは [v1.27.0][11] から Confluent.Kafka をトレースできるようになりました。トレース コンテキスト伝搬 API は [v2.7.0][12] から利用可能です。
 
 [9]: https://docs.confluent.io/kafka-clients/dotnet/current/overview.html#the-consume-loop
 [10]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
@@ -101,7 +101,7 @@ The .NET tracer allows tracing Confluent.Kafka since [v1.27.0][11]. The trace co
 
 {{% tab "Ruby" %}}
 
-The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's tracer documentation][8] to enable it.
+Kafka インテグレーションでは、`ruby-kafka` gem のトレーシング機能を提供しています。[Ruby のトレーサー ドキュメント][8] に従って有効化してください。
 
 [8]: /ja/tracing/trace_collection/dd_libraries/ruby/#kafka
 
@@ -111,7 +111,7 @@ The Kafka integration provides tracing of the `ruby-kafka` gem. Follow [Ruby's t
 
 ### Kafka のトレースを無効にする
 
-If you want to disable Kafka tracing on an application, set the appropriate [language-specific configuration][6].
+アプリケーションで Kafka トレーシングを無効にする場合は、該当する [言語固有の構成][6] を設定してください。
 
 ## 参考資料
 

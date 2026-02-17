@@ -1,5 +1,6 @@
 ---
 title: Tag Analysis
+description: Identify tags and attributes that contribute to anomalies in tracing data using automated comparison analysis.
 private: true
 further_reading:
 - link: 'tracing/trace_explorer'
@@ -12,10 +13,6 @@ further_reading:
   tag: 'Blog'
   text: "Find what's driving errors and latency with Tag Analysis"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/tag-analysis/" header="Request access to the Preview!" >}}
-Tag Analysis is in Preview. To request access, fill out this form.
-{{< /callout >}}
 
 ## Overview
 
@@ -38,6 +35,10 @@ Use Tag Analysis to answer questions such as:
 
 You can initiate Tag Analysis from several locations:
 
+- **Trace Explorer Point Plot Visualization**: Select a cluster of spans by brushing over the graph (spanning duration and time range) to define a subset of spans to compare against. The same visualization can be found in [service][3] and [resource][4] pages.
+
+{{< img src="/tracing/trace_explorer/tag_analysis/point_plot_explorer.png" alt="Trace Explorer Point plot selection" style="width:80%;" >}}
+
 - **Trace Explorer Top Metrics** (Requests, Errors and Latency): Click **Analyze** next to the Errors or Latency graphs to discover tags contributing to errors or latency.
 
 {{< img src="/tracing/trace_explorer/tag_analysis/red_metrics_entrypoint.png" alt="Analyze RED metrics" style="width:90%;" >}}
@@ -45,12 +46,6 @@ You can initiate Tag Analysis from several locations:
 -**Trace Explorer Timeseries View**: Brush over a time window to define a subset of spans. Tag Analysis compares this selection to the rest of the time range.
 
 {{< img src="/tracing/trace_explorer/tag_analysis/timeseries_entrypoint.png" alt="Analyze time range" style="width:80%;" >}}
-
-- **Trace Explorer and Service Page Point plot Graph**: Select a cluster of spans by brushing over the graph (spanning duration and time range) to define a subset of spans to compare against.
-
-{{< img src="/tracing/trace_explorer/tag_analysis/scatterplot_entrypoint.png" alt="Analyse point plot slice" style="width:80%;" >}}
-
-Click **Analyze** to see the results in the Tag Analysis side panel.
 
 ## Exploring Tag Analysis results
 
@@ -79,3 +74,5 @@ Tag Analysis results appear in a side panel and include:
 
 [1]: app.datadoghq.com/apm/traces
 [2]: /tracing/trace_explorer/trace_groups
+[3]: /tracing/services/service_page
+[4]: /tracing/services/resource_page

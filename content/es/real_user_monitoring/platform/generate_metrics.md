@@ -53,14 +53,14 @@ Para crear una métrica personalizada a partir de una consulta de búsqueda en e
 
 5. Selecciona una ruta para la agrupación en el menú desplegable situado junto a **agrupar por**. El nombre de etiqueta (tag) de la métrica es el atributo original o el nombre de etiqueta sin `@`. Por defecto, las métricas personalizadas generadas a partir de eventos RUM no contienen etiquetas, a menos que se añadan explícitamente. Puedes utilizar un atributo o dimensión de etiqueta que exista en tus eventos RUM, como `@error.source` o `env`, para crear etiquetas de métricas. 
 
-   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
+   <div class="alert alert-danger">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
 
 6. Para las métricas personalizadas creadas en sesiones y vistas, selecciona **La sesión/vista activa comienza a coincidir con la consulta** o **La sesión/vista se vuelve inactiva o se completa** para definir los criterios de coincidencia para sesiones y vistas. Para obtener más información, consulta [Añadir una métrica basada en RUM en sesiones y vistas](#add-a-rum-based-metric-on-sessions-and-views).
 
 7. Añade agregaciones de percentiles para las métricas de distribución. Puedes optar por la funcionalidad de consulta avanzada y utilizar percentiles de precisión global (como P50, P75, P90, P95 y P99).
 
-   <div class="alert alert-warning">Al habilitar la función de consulta avanzada con percentiles se generan más <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se <a href="/account_management/billing/custom_metrics/">facturan en consecuencia</a>.
+   <div class="alert alert-danger">Al habilitar la función de consulta avanzada con percentiles se generan más <a href="/metrics/custom_metrics/">métricas personalizadas</a> y se <a href="/account_management/billing/custom_metrics/">facturan en consecuencia</a>.
 
 8. Haz clic en **Crear métrica**.
 

@@ -5,7 +5,10 @@ further_reading:
 - link: "/security/sensitive_data_scanner/scanning_rules/custom_rules"
   tag: "Documentation"
   text: "Regex for custom scanning rules"
+private: true
 ---
+
+<div class="alert alert-warning">This guide has been deprecated and is no longer maintained</div>
 
 ## Overview
 

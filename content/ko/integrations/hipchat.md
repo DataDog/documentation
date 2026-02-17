@@ -43,7 +43,7 @@ Hipchat 통합에서 Datadog를 통해 알림을 Hipchat 방 또는 개별 핸�
 
 또한 `@hipchat-<CHAT_NAME>`을 사용하여 그래프를 공유하거나 HipChat 방에 모니터링 알림을 전송할 수도 있습니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 HipChat API V1 토큰을 사용 중이고 채팅 핸들에 쉼표나 대괄호와 같은 특수 문자가 포함되어 있는 경우, 핸들을 입력할 때 이스케이프 처리할 필요가 없으며 자동 완성 상자가 자동으로 처리해 줍니다.
 </div>
 

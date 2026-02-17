@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: Documentación
-  text: Opciones adicionales de configuración de la biblioteca de rastreo
+  text: Opciones adicionales de configuración de la librería de rastreo
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: Documentación
-  text: Instrucciones de configuración detalladas de la biblioteca de rastreo
+  text: Instrucciones de configuración detalladas de la librería de rastreo
 - link: /tracing/trace_collection/compatibility/go/
   tag: Documentación
   text: Marcos de Go compatibles para la instrumentación automática
@@ -17,7 +17,7 @@ further_reading:
   text: Mecanismos de ingesta
 - link: https://github.com/DataDog/dd-trace-Go
   tag: Código fuente
-  text: Repositorio de código fuente abierto de la biblioteca de rastreo
+  text: Repositorio de código fuente abierto de la librería de rastreo
 title: 'Tutorial: Activación del rastreo de una aplicación Go en el mismo host que
   el Datadog Agent'
 ---
@@ -99,7 +99,7 @@ A continuación, instala el rastreador de Go. Desde tu directorio `apm-tutorial-
 go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 {{< /code-block >}}
 
-Ahora que se ha añadido la biblioteca de rastreo a `go.mod`, activa el soporte de rastreo.
+Ahora que se ha añadido la librería de rastreo a `go.mod`, activa el soporte de rastreo.
 
 Elimina los comentarios de las siguientes importaciones en `apm-tutorial-golang/cmd/notes/main.go`:
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
@@ -197,18 +197,18 @@ Una traza `GET /notes` tiene este aspecto:
 
 ## Configuración del rastreo
 
-Puedes configurar la biblioteca de rastreo para añadir etiquetas a la telemetría que envía a Datadog. Las etiquetas ayudan a agrupar, filtrar y mostrar datos de forma significativa en dashboards y gráficos. Para añadir etiquetas, especifica las variables de entorno al ejecutar la aplicación. El proyecto `Makefile` incluye las variables de entorno `DD_ENV` , `DD_SERVICE` y `DD_VERSION`, que están configuradas para activar el [etiquetado de servicios unificado][17]:
+Puedes configurar la librería de rastreo para añadir etiquetas a la telemetría que envía a Datadog. Las etiquetas ayudan a agrupar, filtrar y mostrar datos de forma significativa en dashboards y gráficos. Para añadir etiquetas, especifica las variables de entorno al ejecutar la aplicación. El proyecto `Makefile` incluye las variables de entorno `DD_ENV` , `DD_SERVICE` y `DD_VERSION`, que están configuradas para activar el [etiquetado de servicios unificado][17]:
 
 {{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
 run: build
   DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
 {{< /code-block >}}
 
-<div class="alert alert-warning">El <code>Makefile</code> también establece la variable de entorno <code>DD_TRACE_SAMPLE_RATE</code> en <code>1</code>, que representa una frecuencia de muestreo del 100%. Una frecuencia de muestreo del 100% garantiza que todas las solicitudes al servicio de notas se envíen al backend de Datadog para su análisis y visualización a efectos de este tutorial. En una producción real o un entorno de alto volumen, no se especificaría una frecuencia tan alta. Establecer una frecuencia de muestreo alta con esta variable en la aplicación anula la configuración del Agent y resulta en un gran volumen de datos enviados a Datadog. Para la mayoría de los casos de uso, deja que el Agent determine automáticamente la frecuencia de muestreo.</div>
+<div class="alert alert-danger">El <code>Makefile</code> también establece la variable de entorno <code>DD_TRACE_SAMPLE_RATE</code> en <code>1</code>, que representa una frecuencia de muestreo del 100%. Una frecuencia de muestreo del 100% garantiza que todas las solicitudes al servicio de notas se envíen al backend de Datadog para su análisis y visualización a efectos de este tutorial. En una producción real o un entorno de alto volumen, no se especificaría una frecuencia tan alta. Establecer una frecuencia de muestreo alta con esta variable en la aplicación anula la configuración del Agent y resulta en un gran volumen de datos enviados a Datadog. Para la mayoría de los casos de uso, deja que el Agent determine automáticamente la frecuencia de muestreo.</div>
 
-Para obtener más información sobre las opciones disponibles de configuración, consulta [Configuración de la biblioteca de rastreo de Go][14].
+Para obtener más información sobre las opciones disponibles de configuración, consulta [Configuración de la librería de rastreo de Go][14].
 
-### Uso de bibliotecas de rastreo automático
+### Uso de librerías de rastreo automático
 
 Datadog dispone de varias bibliotecas completamente compatibles para Go que permiten el rastreo automático cuando se implementan en el código. En el archivo `cmd/notes/main.go`, puedes ver que las bibliotecas `go-chi`, `sql` y `http` tienen alias según las correspondientes bibliotecas de Datadog: `chitrace` `sqltrace` y `httptrace` respectivamente:
 
@@ -223,7 +223,7 @@ import (
 )
 {{< /code-block >}}
 
-En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción `WithServiceName`. Por ejemplo,  la biblioteca `chitrace` se inicializa de la siguiente manera:
+En `cmd/notes/main.go`, las bibliotecas de Datadog se inicializan con la opción `WithServiceName`. Por ejemplo,  la librería `chitrace` se inicializa de la siguiente manera:
 
 {{< code-block lang="go" filename="main.go" disable_copy="true" collapsible="true" >}}
 r := chi.NewRouter()
@@ -232,9 +232,9 @@ r.Use(chitrace.Middleware(chitrace.WithServiceName("notes")))
 r.Mount("/", nr.Register())
 {{< /code-block >}}
 
-El uso de `chitrace.WithServiceName("notes")` garantiza que todos los elementos rastreados por la biblioteca estén bajo el nombre de servicio `notes`.
+El uso de `chitrace.WithServiceName("notes")` garantiza que todos los elementos rastreados por la librería estén bajo el nombre de servicio `notes`.
 
-El archivo `main.go` contiene más ejemplos de aplicación para cada una de estas bibliotecas. Para ver una extensa lista de bibliotecas, consulta [Requisitos de compatibilidad de Go][16].
+El archivo `main.go` contiene más ejemplos de aplicación para cada una de estas bibliotecas. Para ver una extensa lista de librerías, consulta [Requisitos de compatibilidad de Go][16].
 
 ### Uso del rastreo personalizado con contexto
 
@@ -354,11 +354,11 @@ Para activar el rastreo en la aplicación de calendario, elimina los comentarios
    {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="Una gráfica de llamas para una traza distribuida." style="width:100%;" >}}
 
 Esta gráfica de llamas combina interacciones de múltiples aplicaciones:
-- El primer tramo es una solicitud POST enviada por el usuario y gestionada por el enrutador `chi` a través de la biblioteca `go-chi` compatible.
+- El primer tramo es una solicitud POST enviada por el usuario y gestionada por el enrutador `chi` a través de la librería `go-chi` compatible.
 - El segundo tramo es una función `createNote` que fue rastreada manualmente por la función `makeSpanMiddleware`. La función creó un tramo a partir del contexto de la solicitud HTTP.
-- El siguiente tramo es la solicitud enviada por la aplicación de notas utilizando la biblioteca `http` compatible y el cliente inicializado en el archivo `main.go`. Esta solicitud GET se envía a la aplicación de calendario. Los tramos de la aplicación de calendario aparecen en azul porque son servicios independientes.
+- El siguiente tramo es la solicitud enviada por la aplicación de notas utilizando la librería `http` compatible y el cliente inicializado en el archivo `main.go`. Esta solicitud GET se envía a la aplicación de calendario. Los tramos de la aplicación de calendario aparecen en azul porque son servicios independientes.
 - Dentro de la aplicación de calendario, un enrutador `go-chi` gestiona la solicitud GET y la función `GetDate` se rastrea manualmente con su propio tramo bajo la solicitud GET.
-- Por último, la llamada `db` púrpura es su propio servicio de la biblioteca `sql` compatible. Aparece en el mismo nivel que la solicitud `GET /Calendar` porque ambas son llamadas por el tramo primario `CreateNote`.
+- Por último, la llamada `db` púrpura es su propio servicio de la librería `sql` compatible. Aparece en el mismo nivel que la solicitud `GET /Calendar` porque ambas son llamadas por el tramo primario `CreateNote`.
 
 ## Solucionar problemas
 

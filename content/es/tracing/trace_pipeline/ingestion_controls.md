@@ -53,7 +53,7 @@ Con la configuración remota, no es necesario reiniciar el Agent para actualizar
 
 **Nota**: Los parámetros configurados en forma remota tienen prioridad sobre las configuraciones locales como las variables de entorno y la configuración de `datadog.yaml`.
 
-## Administrar el consumo para cada servicio en el nivel de la biblioteca
+## Administrar el consumo para cada servicio en el nivel de la librería
 
 La tabla de servicios contiene información sobre los volúmenes consumidos y la configuración del consumo, desglosada por servicio:
 
@@ -97,10 +97,10 @@ En la columna Desglose del tráfico se desglosa el destino de todas las trazas p
 El desglose se compone de las siguientes partes:
 
 - **Trazas completas consumidas** (azul): El porcentaje de las trazas consumidas por Datadog.
-- **Trazas completas no retenidas** (gris): El porcentaje de las trazas que intencionalmente no se han reenviado a Datadog desde el Agent o la biblioteca de rastreo. Esto puede ocurrir por uno de los siguientes dos motivos en función de tu configuración:
+- **Trazas completas no retenidas** (gris): El porcentaje de las trazas que intencionalmente no se han reenviado a Datadog desde el Agent o la librería de rastreo. Esto puede ocurrir por uno de los siguientes dos motivos en función de tu configuración:
 
     1. Por defecto, el [Agent distribuye una velocidad de consumo][4] a los servicios en función del tráfico del servicio.
-    2. Cuando el servicio se [configura][8] manualmente para consumir un determinado porcentaje de trazas en el nivel de la biblioteca de rastreo.
+    2. Cuando el servicio se [configura][8] manualmente para consumir un determinado porcentaje de trazas en el nivel de la librería de rastreo.
 
 - **Trazas completas descartadas por el limitador de la velocidad del rastreador** (naranja): Cuando eliges configurar manualmente la velocidad de consumo del servicio como un porcentaje con reglas para el muestreo de trazas, se habilita automáticamente un limitador de la velocidad, configurado por defecto para 100 trazas por segundo. Consulta la documentación del [limitador de la velocidad][8] para configurar manualmente esta velocidad.
 
@@ -134,7 +134,7 @@ Haz clic en **Administrar la velocidad de consumo** para obtener instrucciones s
 
 servicio{{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Cambiar la velocidad de consumo del servicio" >}}
 
-Para especificar que se envíe un porcentaje específico del tráfico de un servicio, añade una variable de entorno o un fragmento de código generado a tu configuración de la biblioteca de rastreo para ese servicio.
+Para especificar que se envíe un porcentaje específico del tráfico de un servicio, añade una variable de entorno o un fragmento de código generado a tu configuración de la librería de rastreo para ese servicio.
 
 1. Selecciona el servicio para el cual deseas cambiar el porcentaje de tramos consumidos.
 2. Selecciona el lenguaje del servicio.

@@ -2,6 +2,8 @@
 aliases:
 - /es/dashboards/reporting/
 - /es/dashboards/scheduled_reports/
+description: Envía periódicamente archivos PDF de los dashboards a direcciones de
+  correo electrónico y canales de Slack con calendarios y plazos personalizables.
 disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/dashboard-sharing/
@@ -64,11 +66,6 @@ Para añadir destinatarios de correo electrónico a tu informe, introduce tus di
 Para ver el informe antes de guardar la programación, haz clic en **Send Test Email** (Enviar correo de test). Puedes pausar la programación de un informe en cualquier momento.
 
 #### Destinatarios de Slack
-
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">Los destinatarios de Slack no son compatibles con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Para añadir destinatarios de Slack, selecciona el espacio de trabajo y el canal de Slack en los menús desplegables disponibles. Si no ves ningún espacio de trabajo de Slack disponible, asegúrate de que tienes instalada la [integración de Datadog y Slack][8]. Todos los canales públicos del espacio de trabajo de Slack deberían aparecer automáticamente en la lista. Para seleccionar un canal privado de Slack, asegúrate de invitar al bot de Datadog Slack al canal en Slack. Para enviar un mensaje de test a Slack, añade un destinatario al canal y haz clic en **Send Test Message** (Enviar mensaje de test).
 

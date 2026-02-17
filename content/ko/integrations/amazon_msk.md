@@ -67,7 +67,7 @@ S3 버킷이나 CloudWatch로 로그를 전송하도록 Amazon MSK를 구성하�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_msk" >}}
+{{< get-metrics-from-git "amazon-msk" >}}
 
 
 ### 이벤트

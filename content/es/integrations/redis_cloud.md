@@ -155,7 +155,7 @@ La integración de Redis reúne todas las métricas para bases de datos, nodos y
 
 
 ### Métricas
-{{< get-metrics-from-git "redis_cloud" >}}
+{{< get-metrics-from-git "redis-cloud" >}}
 
 
 

@@ -119,7 +119,7 @@ tritonserver --cache-config local,size=1048576
 ```
 
 Nvidia Triton también ofrece la posibilidad de exponer [métricas personalizadas][6] a través de su endpoint Openemtrics. Datadog también puede recopilar estas métricas personalizadas utilizando la opción `extra_metrics`.
-<div class="alert alert-warning">Estas métricas Nvidia Triton personalizadas se consideran métricas estándar en Datadog.</div>
+<div class="alert alert-danger">Estas métricas Nvidia Triton personalizadas se consideran métricas estándar en Datadog.</div>
 
 ### Configuración
 
@@ -134,7 +134,7 @@ Nvidia Triton también ofrece la posibilidad de exponer [métricas personalizada
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "nvidia_triton" >}}
+{{< get-metrics-from-git "nvidia-triton" >}}
 
 
 ### Eventos
@@ -142,7 +142,7 @@ Nvidia Triton también ofrece la posibilidad de exponer [métricas personalizada
 La integración Nvidia Triton no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "nvidia_triton" >}}
+{{< get-service-checks-from-git "nvidia-triton" >}}
 
 
 ### Logs

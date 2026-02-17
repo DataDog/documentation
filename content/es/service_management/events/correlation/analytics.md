@@ -8,7 +8,7 @@ title: Análisis de casos y eventos
 
 ## Información general
 
-Realiza un seguimiento de la carga de trabajo de tus equipos graficando y creando dashboards para eventos, alertas y casos. 
+Realiza un seguimiento de la carga de trabajo de los equipos mediante gráficos y la creación de dashboards de eventos, alertas y casos.
 
 
 ## Métricas de casos
@@ -16,16 +16,16 @@ Realiza un seguimiento de la carga de trabajo de tus equipos graficando y creand
 {{< img src="service_management/events/correlation/case_analytics.png" alt="Configurar análisis de casos" style="width:100%;" >}}
 
 
-Puedes consultar análisis de casos en una variedad de widgets de gráficos para analizar la productividad del equipo e identificar patrones en los problemas. Visualiza gráficos de análisis, tanto en dashboards como en notebooks. Para empezar, en la configuración del widget, selecciona **Casos**, en el menú desplegable de la fuente de datos de la sección *Grafica tus datos*.
+Puedes consultar los análisis de caso en una variedad de widgets de gráficos para analizar la productividad del equipo e identificar patrones en los problemas. Visualiza gráficos analíticos tanto en dashboards como notebooks. Para empezar, en la configuración del widget, selecciona **Cases** (Casos) en el menú desplegable de la fuente de datos en la sección *Graph your data* (Graficar tus datos).
 
 Los siguientes widgets admiten análisis de casos:
 
 - series temporales
 - lista de los principales
-- valor de consulta 
+- valor de consulta
 - tabla
-- mapa de árbol
-- gráfico circular 
+- mapa de árboles
+- gráfica circular
 - cambiar
 - lista
 
@@ -36,8 +36,8 @@ Desglosa métricas de eventos por fuente, host, servicio, etc. Averigua de dónd
 
 {{< img src="service_management/events/correlation/event_analytics.png" alt="Configurar análisis de eventos" style="width:100%;" >}}
 
-Para empezar, en la configuración del widget, selecciona **Eventos**, en el menú desplegable de la fuente de datos de la sección *Gráfica tus datos*.
+Para empezar, en la configuración del widget, selecciona **Events** (Eventos) en el menú desplegable de fuente de datos, en la sección *Graph your data* (Graficar tus datos).
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

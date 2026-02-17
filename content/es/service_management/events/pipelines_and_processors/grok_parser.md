@@ -62,7 +62,7 @@ En esta lista encontrarás todos los comparadores y filtros implementados de for
 {{< tabs >}}
 {{% tab "Comparadores" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Compara una fecha con el patrón especificado y la analiza para producir una marca de tiempo de Unix. [Consulta los ejemplos del comparador de fechas](#parsing-dates).
 
 `regex("pattern")`
@@ -189,7 +189,7 @@ En esta lista encontrarás todos los comparadores y filtros implementados de for
 : Analiza una secuencia de cadena de tokens y la devuelve como una matriz. Consulta el ejemplo de [lista a matriz](#list-to-array).
 
 `url`
-: Analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON. 
+: Analiza una URL y devuelve todos los miembros tokenizados (dominio, parámetros de consulta, puerto, etc.) en un objeto JSON.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -499,7 +499,7 @@ myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to 
 
 ### Formato Glog
 
-A veces los componentes de Kubernetes se registran en el formato `glog`; este ejemplo es del elemento del programador de Kubernetes en la biblioteca de pipelines.
+A veces los componentes de Kubernetes se registran en el formato `glog`; este ejemplo es del elemento del programador de Kubernetes en la librería de pipelines.
 
 Evento de ejemplo:
 

@@ -22,7 +22,7 @@ author:
   support_email: support@rigor.com
 categories:
 - テスト
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
 display_on_public_website: true

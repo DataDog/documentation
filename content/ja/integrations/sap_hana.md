@@ -190,7 +190,7 @@ HANA テナント、シングルテナント、システムデータベースの
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "sap_hana" >}}
+{{< get-metrics-from-git "sap-hana" >}}
 
 
 ### イベント
@@ -198,7 +198,7 @@ HANA テナント、シングルテナント、システムデータベースの
 SAP HANA には、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "sap_hana" >}}
+{{< get-service-checks-from-git "sap-hana" >}}
 
 
 ## トラブルシューティング

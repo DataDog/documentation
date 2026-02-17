@@ -3,10 +3,10 @@ aliases:
 - /ja/integrations/sumologic/
 categories:
 - notifications
-- event management
+- イベント管理
 custom_kind: integration
 dependencies: []
-description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
+description: Sumo Logic から Datadog にログを送信。Datadog の通知を Sumo Logic に送信。
 doc_link: https://docs.datadoghq.com/integrations/sumologic/
 draft: false
 git_integration_title: sumo_logic
@@ -18,7 +18,7 @@ is_public: true
 manifest_version: '1.0'
 name: sumo_logic
 public_title: Datadog-Sumo Logic インテグレーション
-short_description: Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。
+short_description: Sumo Logic から Datadog にログを送信。Datadog の通知を Sumo Logic に送信。
 version: '1.0'
 ---
 

@@ -10,16 +10,16 @@ aliases:
 - /ja/account_management/rbac/log_management
 further_reading:
 - link: /api/v2/roles/
-  tag: Documentation
+  tag: ドキュメント
   text: Roles API を使用してロールとアクセス許可を管理する
 - link: /api/v2/roles/#list-permissions
-  tag: Documentation
+  tag: ドキュメント
   text: Permission API を使用してアクセス許可を管理する
 - link: /account_management/rbac/permissions
   tag: ドキュメント
   text: 利用可能なアクセス許可の一覧
 - link: /account_management/saml/
-  tag: Documentation
+  tag: ドキュメント
   text: SAML を使用したシングルサインオンを有効にする
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
@@ -51,7 +51,7 @@ Datadog 管理者ロール
 : 請求情報へのアクセス、API キーの無効化に加えて、ユーザーの管理や[読み取り専用ダッシュボード][5]の構成が可能です。標準ユーザーを管理者に昇格させることもできます。
 
 Datadog 標準ロール
-: [ダッシュボード][5]、[モニター][6]、[イベント][7]、[ノートブック][8]など、Datadog が提供するすべてのモニタリング機能を表示および変更できます。他のユーザーをオーガニゼーションに招待することも可能です。
+: [ダッシュボード][5]、[モニター][6]、[イベント][7]、[ノートブック][11]など、Datadog が提供するすべてのモニタリング機能を表示および変更できます。他のユーザーをオーガニゼーションに招待することも可能です。
 
 Datadog 読み取り専用ロール
 : Datadog システム内での編集権限を持たないユーザーです。特定の読み取り専用ビューをクライアントと共有したり、ある部門のメンバーが他の部門外のユーザーと[ダッシュボード][5]を共有する場合に便利です。
@@ -207,3 +207,4 @@ Datadog サイトでロールを作成または更新する際、Datadog ロー�
 [8]: /ja/api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
 [10]: /ja/api/latest/roles/#create-role
+[11]: /ja/notebooks

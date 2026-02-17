@@ -5,35 +5,35 @@ aliases:
 further_reading:
 - link: /security/application_security/
   tag: ドキュメント
-  text: Datadog Application Security Management で脅威から守る
+  text: Datadog App and API Protection で脅威から保護する
 - link: /security/application_security/event_rules/
   tag: ドキュメント
   text: イベントルールの作成
 - link: /security/application_security/troubleshooting
   tag: ドキュメント
-  text: Datadog Application Security Management の一般的な問題のトラブルシューティング
+  text: Datadog App and API Protection の一般的な問題のトラブルシューティング
 - link: /security/notifications/variables/
   tag: ドキュメント
   text: セキュリティ通知変数について
 - link: /tracing/trace_explorer/query_syntax/
   tag: ドキュメント
-  text: ASM クエリを定義するための構文
+  text: AAP クエリを定義するための構文
 title: カスタム検出ルール
 ---
 
 ## 概要
 
-Application Security Management (ASM) には、本番システムに影響を与える攻撃の試み、攻撃者が見つけた脆弱性、ビジネスロジックの不正使用を捕捉することを目的とした、一連の[すぐに使える検出ルール][1]が付属しています。
+App and API Protection (AAP) には、本番システムに影響を与える攻撃の試み、攻撃者が見つけた脆弱性、ビジネスロジックの不正使用を捕捉することを目的とした、一連の[すぐに使える検出ルール][1]が付属しています。
 
 しかし、環境またはワークロードに基づいてルールをカスタマイズしたい場合もあります。例えば、ビジネスが行われていない地域から機密アクションを実行するユーザーを検出する検出ルールをカスタマイズしたいと思うかもしれません。
 
-他の例としては、内部セキュリティスキャナーを除外するようにルールをカスタマイズすることが挙げられます。ASM は、期待どおりにその活動を検出します。しかし、定期的に発生するスキャンの通知を受けたくない場合があります。
+他の例としては、内部セキュリティスキャナーを除外するようにルールをカスタマイズすることが挙げられます。AAP は、期待どおりにその活動を検出します。しかし、定期的に発生するスキャンの通知を受けたくない場合があります。
 
-このような場合、カスタム検出ルールを作成することで、そのようなイベントを除外することができます。このガイドでは、ASM のカスタム検出ルールを作成する方法を説明します。
+このような場合、カスタム検出ルールを作成することで、そのようなイベントを除外することができます。このガイドでは、AAP のカスタム検出ルールを作成する方法を説明します。
 
 ## ビジネスロジック不正使用検出ルール
 
-ASM は、ビジネスロジックの不正使用 (例えば、ブルートフォースによるパスワードのリセット) を検出するためのルールをすぐに使えるようにしています。これらのルールでは、[トレースにビジネスロジック情報を追加する][7]必要があります。
+AAP は、ビジネスロジックの不正使用 (例えば、ブルートフォースによるパスワードのリセット) を検出するためのルールをすぐに使えるようにしています。これらのルールでは、[トレースにビジネスロジック情報を追加する][7]必要があります。
 
 最近の Datadog トレーシングライブラリは、コードを変更する必要なく、ユーザーのログインやサインアップイベントを自動的に検出し、送信することを試みます。必要であれば、[ユーザーアクティビティイベントの自動追跡をオプトアウトする][8]ことができます。
 
@@ -45,13 +45,13 @@ ASM は、ビジネスロジックの不正使用 (例えば、ブルートフ�
 
 OOTB 検出ルールをカスタマイズするには、まず既存のルールを複製する必要があります。[検出ルール][2]に移動して、ルールを選択します。ルールの下までスクロールして、Clone Rule ボタンをクリックします。これで、既存のルールを編集できるようになります。
 
-### ASM クエリの定義
+### AAP クエリの定義
 
-[ASM トレースエクスプローラーと同じクエリ構文][3]を使用して、ASM クエリを構築します。たとえば、米国外からのログイン成功を監視するクエリを作成します: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`
+[AAP トレースエクスプローラーと同じクエリ構文][3]を使用して、AAP クエリを構築します。たとえば、米国外からのログイン成功を監視するクエリを作成します: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`
 
 オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各グループ化のシグナルを生成します。 通常、グループ化はエンティティ (ユーザー、IP、またはサービスなど) です。グループ化は、[クエリを結合する](#joining-queries)ためにも使用されます。
 
-プレビューセクションを使用して、検索クエリに一致する ASM トレースを確認します。また、Add Query ボタンでクエリを追加することもできます。
+プレビューセクションを使用して、検索クエリに一致する AAP トレースを確認します。また、Add Query ボタンでクエリを追加することもできます。
 
 ##### クエリを結合する
 
@@ -115,5 +115,5 @@ OOTB 検出ルールをカスタマイズするには、まず既存のルール
 [4]: /ja/monitors/notify/?tab=is_alert#integrations
 [5]: /ja/security/notifications/variables/
 [6]: /ja/security/notifications/variables/#template-variables
-[7]: /ja/security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[8]: /ja/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[7]: /ja/security/application_security/how-it-works/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /ja/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking

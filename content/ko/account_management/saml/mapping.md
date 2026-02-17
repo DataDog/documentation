@@ -38,7 +38,7 @@ Datadog를 사용해 IDP(Identity Provider) 응답의 속성을 Datadog 엔터�
 
 IDP 속성을 지정한 사용자가 로그인할 경우, 자동으로 Datadog 역할이 할당됩니다. 마찬가지로, IDP 속성이 제거된 사용자의 경우, 역할 접근 권한을 잃게 됩니다(다른 매핑으로 추가하지 않는 한).
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>중요</strong> 매칭하는 매핑이 <i>없는</i> 사용자의 경우 이전에 있었던 역할을 모두 잃고 SAML로 조직에 로그인할 수 없게 됩니다. 사용자가 로그인을 할 수 없는 상황을 피하려면 매핑을 활성화하기 전에 매핑 정의를 재확인하고 내 어설션을 다시 점검하세요.
 </div>
 

@@ -13,7 +13,7 @@ title: Static Code Analysis (SAST)
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     {{< region-param key="dd_site_name" >}} サイトでは Code Security をご利用いただけません。
 </div>
 {{% /site-region %}}

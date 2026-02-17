@@ -8,14 +8,16 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentation
   text: Learn about creating an Agent or API-based integration
-- link: /developers/integrations/oauth_for_integrations/
+- link: /developers/integrations/api_integration/
   tag: Documentation
-  text: Learn about using OAuth for integrations
+  text: Learn about using OAuth for API-based integrations
 title: Integration Assets Reference
 ---
 ## Overview
 
 This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9]. 
+
+<div class="alert alert-info">Some files apply only to legacy integrations that were <em>not</em> created using the Integration Developer Platform.</div>
 
 ## Configuration file
 
@@ -118,7 +120,7 @@ You can find the complete list of mandatory and optional attributes for the `met
 | Column name     | Mandatory or Optional | Description                                                                                                                                                                                                                                                                                                                             |
 | --------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `metric_name`   | Mandatory          | Name of the metric.                                                                                                                                                                                                                                                                                                                     |
-| `metric_type`   | Mandatory          | Type of the metric. For a list of available metric submission types, see [Metrics Types][6].                                                                                                                                                                                                                                                                                                                |
+| `metric_type`   | Mandatory          | The metric's type, which determines how Datadog processes and stores the data. For a complete list of supported types, see [Datadog in-app types][6].                                                                                                                                                                                                                                                                                                                |
 | `interval`      | Optional           | Collection interval of the metric in seconds.                                                                                                                                                                                                                                                                                            |
 | `unit_name`     | Optional           | Unit of the metric. For a complete list of supported units, see [Metrics Units][7].                                                                                                                                                                                                                                                                              |
 | `per_unit_name` | Optional           | If there is a unit sub-division, such as `request per second`.                                                                                                                                                                                                                                                                               |
@@ -127,7 +129,7 @@ You can find the complete list of mandatory and optional attributes for the `met
 | `integration`   | Mandatory          | The name of the integration that emits the metric. Must be the normalized version of the `tile.title` from the `manifest.json` file. Any character besides letters, underscores, dashes, and numbers are converted to underscores. For example: `Openstack Controller` -> `openstack_controller`, `ASP.NET` -> `asp_net`, and `CRI-o` -> `cri-o`. |
 | `short_name`    | Mandatory          | A human-readable, abbreviated version of the metric name. Do not repeat the integration name. For example, `postgresql.index_blocks_hit` should be shortened to `idx blks hit`.                                                                                                                                                                                                                                                                                                     |
 | `curated_metric`| Optional           | Marks which metrics for an integration are noteworthy for a given type (`cpu` and `memory` are both accepted). These are displayed in the UI above the other integration metrics. |
-| `sample_tags` | Optional           | List of example tags associated with the metric, separated by commas without spaces. For example, `host,region,deployment`. |
+| `sample_tags` | Optional           | List of example tags associated with the metric, separated by commas (no spaces) and enclosed in quotes. For example, `"host,region,deployment"`. |
 
 ## Further Reading
 
@@ -138,7 +140,7 @@ You can find the complete list of mandatory and optional attributes for the `met
 [3]: http://yaml-online-parser.appspot.com/
 [4]: https://docs.datadoghq.com/integrations/
 [5]: https://www.uuidgenerator.net
-[6]: https://docs.datadoghq.com/metrics/types/#metric-types
+[6]: https://docs.datadoghq.com/metrics/types/?tab=distribution#submission-types-and-datadog-in-app-types
 [7]: https://docs.datadoghq.com/metrics/units/#unit-list
 [8]: https://docs.datadoghq.com/getting_started/tagging/
 [9]: https://app.datadoghq.com/marketplace/

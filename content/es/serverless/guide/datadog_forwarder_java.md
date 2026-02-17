@@ -3,11 +3,11 @@ title: Instrumentación de aplicaciones serverless de Java mediante el Datadog F
 ---
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/java">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Algunas versiones más antiguas de <code>datadog-lambda-java</code> importan <code>log4j <=2.14.0</code> como una dependencia de transición. A continuación se incluyen las <a href="#upgrading">instrucciones de actualización</a>.
 </div>
 
@@ -21,7 +21,7 @@ Para completar la instrumentación de tu aplicación serverless con el rastreo d
 
 ### Instalar
 
-Instala la biblioteca Lambda de Datadog localmente mediante la adición de uno de los siguientes bloques de código en el archivo `pom.xml` (Maven) o `build.gradle` (Gradle). Reemplaza el parámetro `VERSION` de abajo con la última versión (sin anteponer la `v`): ![Maven Cental][4]
+Instala la librería Lambda de Datadog localmente mediante la adición de uno de los siguientes bloques de código en el archivo `pom.xml` (Maven) o `build.gradle` (Gradle). Reemplaza el parámetro `VERSION` de abajo con la última versión (sin anteponer la `v`): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
@@ -66,7 +66,7 @@ dependencies {
     DD_TRACE_ENABLED: true
     ```
 
-3. Envuelve tu función de controlador de Lambda con la envoltura de la biblioteca Lambda de Datadog.
+3. Envuelve tu función de controlador de Lambda con la envoltura de la librería Lambda de Datadog.
 
     ```java
     public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {

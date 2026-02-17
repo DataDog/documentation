@@ -59,9 +59,9 @@ Latency outliers are computed for [Core Web Vitals][4] such as First Contentful 
 In the **banner card** view, you can see:
 
 * The field name
-* The performance metric value containing the field and the baseline for the rest of the data
+* The performance telemetry value containing the field and the baseline for the rest of the data
 
-In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
+In the **full side panel**, you can see a timeseries graph about the performance telemetry with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
@@ -74,5 +74,5 @@ You can begin your investigation for the root cause of a performance issue in th
 [1]: /watchdog/insights/
 [2]: /real_user_monitoring/explorer
 [3]: /real_user_monitoring/explorer/search/#facets
-[4]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[5]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[5]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa

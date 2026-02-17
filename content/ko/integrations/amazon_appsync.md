@@ -59,7 +59,7 @@ AWS AppSync를 설정해 S3 버킷 또는 클라우드와치 중 하나에 로�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_appsync" >}}
+{{< get-metrics-from-git "amazon-appsync" >}}
 
 
 ### 이벤트

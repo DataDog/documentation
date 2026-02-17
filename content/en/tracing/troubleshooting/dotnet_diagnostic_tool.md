@@ -1,5 +1,6 @@
 ---
 title: Using the .NET diagnostic tool for troubleshooting
+description: Use the dd-dotnet diagnostic tool to troubleshoot .NET tracing setup issues and Agent connectivity problems.
 ---
 
 If your application does not produce traces as expected after installing the .NET tracer, run the diagnostic tool `dd-dotnet` described on this page for basic troubleshooting. It can help you determine issues with your setup, such as missing environment variables, incomplete installation, or an unreachable Agent.

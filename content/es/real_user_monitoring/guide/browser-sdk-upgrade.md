@@ -1,4 +1,7 @@
 ---
+description: Guía de actualización para migrar entre versiones principales de SDK
+  de navegador RUM con los últimos cambios, nuevas funciones y actualizaciones de
+  compatibilidad.
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentación
@@ -194,7 +197,7 @@ En la v5, el valor predeterminado de `sessionReplaySampleRate` es 0 en lugar de 
 
 Para promover la compatibilidad y el uso de OpenTelemetry, se han modificado los tipos de propagadores por defecto para incluir `tracecontext` además de `datadog`.
 
-**Acción a realizar**: Si aún no estás especificando el propagador deseado en el parámetro de inicialización `allowedTracingUrls`, configura los encabezados Access-Control-Allow-Headers de tu servidor para aceptar también el encabezado `traceparent`. Para obtener más información, consulta [Conectar RUM y trazas][25].
+**Acción a realizar**: Si aún no estás especificando el propagador deseado en el parámetro de inicialización `allowedTracingUrls`, configura los encabezados Access-Control-Allow-de tu servidor para aceptar también el encabezado `traceparent`. Para obtener más información, consulta [Conectar RUM y trazas][25].
 
 ### Campo del plan de sesión
 
@@ -404,10 +407,10 @@ El SDK del Navegador RUM ya no permite especificar el origen de un error recopil
 [23]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /es/help/
 [26]: /es/real_user_monitoring/browser/
-[25]: /es/real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support
+[25]: /es/real_user_monitoring/correlate_with_other_telemetry/apm#opentelemetry-support
 [27]: /es/real_user_monitoring/guide/proxy-rum-data
 [28]: /es/real_user_monitoring/browser/setup/#initialization-parameters
-[29]: /es/real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#:~:text=configure%20the%20traceContextInjection
+[29]: /es/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#:~:text=configure%20the%20traceContextInjection
 [30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
 [31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
 [32]: https://esbuild.github.io/api/#splitting

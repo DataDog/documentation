@@ -1410,7 +1410,7 @@ attributes:
   product_source:
   - icon-apm
   type: cadena
-- description: El nombre de la biblioteca o la integración que creó el tramo.
+- description: El nombre de la librería o la integración que creó el tramo.
   domain: APM básico
   name: component
   product_source:
@@ -1699,7 +1699,7 @@ further_reading:
   text: Garantizar la seguridad de los datos enviados a Datadog
 - link: /tracing/trace_collection/tracing_naming_convention/
   tag: Documentación
-  text: Semántica de etiquetas de tramo
+  text: Semántica de span tags
 title: Atributos estándar por defecto
 ---
 

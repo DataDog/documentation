@@ -12,7 +12,7 @@ author:
   vendor_id: skykit
 categories:
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -110,4 +110,4 @@ Skykit は、デジタルサイネージとワークプレイスエクスペリ�
 [4]: https://support.skykit.com/docs/getting-started-with-skykit-beam-and-datadog-dashboards
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/skykit-digital-signage-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/skykit-digital-signage-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

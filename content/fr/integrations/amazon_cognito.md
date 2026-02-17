@@ -61,7 +61,7 @@ Configurez Amazon Cognito de façon à ce que ses logs soient envoyés vers un c
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_cognito" >}}
+{{< get-metrics-from-git "amazon-cognito" >}}
 
 
 ### Événements

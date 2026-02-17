@@ -1,5 +1,6 @@
 ---
 title: Domain Allowlist
+description: Restrict email domains that can receive monitor and scheduled report notifications with domain allowlist controls.
 further_reading:
 - link: "https://app.datadoghq.com/organization-settings/domain-allowlist"
   tag: "In the app"
@@ -16,6 +17,7 @@ further_reading:
 With [Domain Allowlist][1], you can restrict the email domains that can receive notifications. The notifications in scope include all notifications from:
 - Monitors
 - Scheduled Reports
+- Events
 
 When Domain Allowlist is enabled, only email domains in your allowlist can receive notifications in scope. If you try to send a notification in scope to an email domain that is not in your allowlist, a warning appears. 
 

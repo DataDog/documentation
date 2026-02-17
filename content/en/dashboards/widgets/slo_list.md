@@ -41,6 +41,6 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
+[1]: /service_level_objectives/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

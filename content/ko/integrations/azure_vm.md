@@ -106,12 +106,12 @@ Datadog에는 [Azure 리소스 상태 API][3]에 있는 상태에 기반하여 �
 
 ## 수집한 데이터
 
-<div class="alert alert-warning"><code>azure.vm.status</code> 메트릭은 사용 종료되었으며 새 Datadog 조직에는 이 메트릭이 채워지지 않습니다. 기존 사용자의 경우 2023년 6월 1일에 이 메트릭 사용이 종료되었습니다.
+<div class="alert alert-danger"><code>azure.vm.status</code> 메트릭은 더 이상 사용되지 않으며, 새로 생성된 Datadog 조직에는 더 이상 적용되지 않습니다. 기존 사용자에게는 2023년 6월 1일부터 비활성화되었습니다. <code>azure.vm.count</code>메트릭과 관련 <code>status</code> 태그 값을 사용하여 VM의 상태를 확인하세요.
 
-문의 사항이 있을 경우 <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog 지원팀</a>에 연락하세요.</div>
+도움이 필요하시면 <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog 지원팀</a>에 문의해 주세요.</div>
 
 ### 메트릭
-{{< get-metrics-from-git "azure_vm" >}}
+{{< get-metrics-from-git "azure-vm" >}}
 
 
 ### 이벤트

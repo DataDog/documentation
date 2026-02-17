@@ -94,7 +94,7 @@ Después de configurar la integración de [Oracle Cloud  Infrastructure][2], ase
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "oci_vcn" >}}
+{{< get-metrics-from-git "oci-vcn" >}}
 
 
 ### Eventos

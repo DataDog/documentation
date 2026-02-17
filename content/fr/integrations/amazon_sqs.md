@@ -69,7 +69,7 @@ Utilisez ensuite le [Log Explorer de Datadog][8] pour visualiser vos logs.
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_sqs" >}}
+{{< get-metrics-from-git "amazon-sqs" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se verra assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

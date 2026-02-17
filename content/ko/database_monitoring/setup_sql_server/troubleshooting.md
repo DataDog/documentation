@@ -3,10 +3,6 @@ description: SQL Server에서 데이터베이스 모니터링 설정 트러블�
 title: SQL Server에서 DBM 설정 트러블슈팅
 ---
 
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
-
 이 페이지에서는 SQL Server에서 데이터베이스 모니터링을 설정하고 사용할 때 발생하는 일반적인 문제와 이를 해결하는 방법을 설명합니다. 에이전트 버전에 따라 문제 해결 방법이 다를 수 있기 때문에 Datadog에서는 안정적인 최신 에이전트 버전을 사용하고 최신 [설정 설명서][1]를 참고하기를 권장합니다.
 
 ## 일반적인 연결 문제 진단{#common-connection-issues}
@@ -29,7 +25,7 @@ SQL Server 인증은 Windows 사용자 계정 기반이 아니고 인스턴스�
 
 연결할 때 로그인 오류가 생기면 먼저 Datadog 에이전트 사용자로 인스턴스에 로그인할 수 있는지 확인하는 것이 중요합니다. 이를 확인하는 가장 쉬운 방법은 `sqlcmd`와 같은 cmd 줄을 이용하는 것입니다.
 
-예를 들면 다음과 같습니다.
+예시:
 
 ```bash
 # 이 예시에서는 SQL 인증을 사용
@@ -113,25 +109,26 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 ### SSL 공급자: 인증서 체인이 신뢰할 수 없는 인증 기관에서 발행되었음{#certificate-verify-fail}
 
-이는 최신 [MSOLEDBSQL][6] 드라이버로 업그레이드한 후 [작업을 중단하지 않는 변경][7] 때문에 발생하는 일반적인 오류입니다. 드라이버 최신 버전에서는 기본적으로 SQL 인스턴스 연결 모두가 암호화됩니다.
+#### Microsoft OLE DB Driver 2019
 
-SQL Server용 Microsoft OLE DB 드라이버 최신 버전을 사용하는 중이고 암호화된 연결이 필요한 SQL Server 인스턴스에 연결하고 싶은 경우에는 다음 방법을 이용하세요.
+이는 [`MSOLEDBSQL` 2019][6] 드라이버로 업그레이드한 후 [호환성 깨짐 변경 사항][7] 때문에 발생하는 일반적인 오류입니다. 드라이버 최신 버전에서는 기본적으로 SQL 인스턴스 연결 모두가 암호화됩니다.
+
+SQL Server용 Microsoft OLE DB Driver 최신 버전을 사용하는 중이고 암호화된 연결이 필요한 SQL Server 인스턴스에 연결하고 싶은 경우에는 다음 방법 중 하나를 따르세요.
 
 1. 클라이언트가 암호화되어 연결되도록 하기 위해 자체 서명된 인증서와 서버에서 강제 암호화 설정(AWS에서 `rds.force_ssl=1`)을 사용하고 있는 경우: 
 
-   - 클라이언트 신뢰 체인의 일부로 신뢰할 수 있는 인증서로 변경
-   - 자체 서명된 인증서를 클라이언트 측에서 신뢰할 수 있는 인증서로 추가
-   - 연결 스트링에 `TrustServerCertificate=yes;` 추가
+   - 클라이언트 신뢰 체인의 일부로 신뢰할 수 있는 인증서로 변경합니다.
+   - 자체 서명된 인증서를 클라이언트 측에서 신뢰할 수 있는 인증서로 추가합니다.
+   - 연결 문자열에 `Trust Server Certificate=True;`를 추가합니다.
 
 [Microsoft 설명서][7]에서 더 자세히 알아보세요.
 
 2. SQL Server 인스턴스에 연결할 때 암호화가 필요 없으면(AWS에서 `rds.force_ssl=0`) `Use Encryption for Data=False;`가 포함된 연결 스트링을 업데이트하세요. 다음 예를 참고하세요.
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
-      connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
+      connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
       connector: adodbapi
       adoprovider: MSOLEDBSQL19
   ```
@@ -139,7 +136,6 @@ SQL Server용 Microsoft OLE DB 드라이버 최신 버전을 사용하는 중이
 3. 기본적으로 암호화를 사용하지 않는 [MSOLEDBSQL 드라이버 2018 버전]을 설치합니다. 드라이버 설치 후 `adoprovider`를 `MSOLEDBSQL`로 업데이트합니다. 다음 예를 참고하세요. 
 
   ```yaml
-  # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
       connection_string: "Trusted_Connection=yes;"
@@ -147,7 +143,9 @@ SQL Server용 Microsoft OLE DB 드라이버 최신 버전을 사용하는 중이
       adoprovider: MSOLEDBSQL
   ```
 
-**`MSOLEDBSQL` 2019** 외 다른 드라이버를 사용한다면 이 오류는 연결 스트링에 `TrustServerCertificate=yes`를 설정해 해결할 수 있습니다. 다음은 2017 `ODBC` 드라이버의 예시입니다.
+#### 기타 Microsoft OLE DB 및 ODBC 드라이버 버전
+
+`MSOLEDBSQL` 2019 외 다른 OLE DB 드라이버를 사용한다면, 이 오류는 연결 스트링에 `TrustServerCertificate=yes`를 설정해 해결할 수 있습니다. 다음은 `ODBC` 드라이버의 예시입니다.
 
   ```yaml
   # this example uses SQL Server authentication
@@ -157,7 +155,7 @@ SQL Server용 Microsoft OLE DB 드라이버 최신 버전을 사용하는 중이
       password: <DD_AGENT_PASSWORD>
       connection_string: "TrustServerCertificate=yes;"
       connector: odbc
-      driver: '{ODBC Driver 17 for SQL Server}'
+      driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
 ### SQL Server가 'SSL Security error (18)'로 연결할 수 없음 {#ssl-security-error}
@@ -270,7 +268,7 @@ SQL Server(Linux나 Windows에서 호스팅)를 Linux 호스트에 연결하는 
         # enable the odbc connector
         connector: odbc
         # enable the ODBC driver
-        driver: ODBC Driver 13 for SQL Server
+        driver: '{ODBC Driver 13 for SQL Server}'
         username: <USERNAME>
         password: <PASSWORD>
     ```
@@ -319,6 +317,48 @@ Query Activity 이벤트와 Database Load 메트릭에서는 `user` 태그를 �
 ### "CREATE PROCEDURE" 쿼리가 많은 이유가 무엇인가요?
 
 에이전트 7.40.0 이전 버전에서 `PROCEDURE` 통계가 초과되는 버그가 있습니다. 이로 인해 데이터베이스 모니터링 Query Metrics UI에 `CREATE PROCEDURE...` 실행이 많은 것으로 나타납니다. 이 문제를 해결하려면 Datadog 에이전트를 최신 버전으로 업그레이드하세요.
+
+### SQL Server Agent 작업이 수집되지 않으며, "SELECT 권한이 'sysjobs' 개체에 대해 거부되었습니다." 오류가 발생합니다.
+
+SQL Server Agent 작업 점검에는 `msdb` 데이터베이스에 `SELECT` 권한이 필요합니다. `The SELECT permission was denied on the object 'sysjobs'` 오류가 발생하는 경우 Agent가 SQL Server 인스턴스에 연결하는 데 사용하는 사용자에게 `SELECT` 권한을 부여해야 합니다.
+
+```SQL
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
+```
+
+## 알려진 제한사항
+
+### SQL Server 2012
+
+다음 메트릭은 SQL Server 2012에서 사용할 수 없습니다.
+
+- `sqlserver.files.read_io_stall_queued`
+- `sqlserver.files.write_io_stall_queued`
+- `sqlserver.ao.quorum_type`
+- `sqlserver.ao.quorum_state`
+- `sqlserver.ao.member.type`
+- `sqlserver.ao.member.state`
+- `sqlserver.ao.member.number_of_quorum_votes`
+- `sqlserver.ao.log_send_queue_size`
+- `sqlserver.ao.log_send_rate`
+- `sqlserver.ao.redo_queue_size`
+- `sqlserver.ao.redo_rate`
+- `sqlserver.ao.low_water_mark_for_ghosts`
+- `sqlserver.ao.filestream_send_rate`
+- `sqlserver.ao.replica_status`
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.fci.status`
+- `sqlserver.fci.is_current_owner`
+- `sqlserver.latches.latch_wait_time`
+
+### SQL Server 2014
+
+다음 메트릭은 SQL Server 2014에서 사용할 수 없습니다.
+
+- `sqlserver.ao.secondary_lag_seconds`
+- `sqlserver.latches.latch_wait_time`
 
 [1]: /ko/database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication

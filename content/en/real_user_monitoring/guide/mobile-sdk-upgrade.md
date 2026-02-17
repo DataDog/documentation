@@ -1,6 +1,6 @@
 ---
 title: Upgrade RUM Mobile SDKs
-
+description: "Migration guide for upgrading between major versions of RUM, Logs, and Trace mobile SDKs with breaking changes and new features."
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -14,6 +14,519 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
+
+**Most common migrations**:
+- [**v2 to v3**](#from-v2-to-v3): Focus on Open Tracing removal and API updates
+- [**v1 to v2**](#from-v1-to-v2): Major architectural changes to modular design
+
+## From v2 to v3
+{{< tabs >}}
+{{% tab "Android" %}}
+
+The transition from version 2 to version 3 focuses on removing support for the legacy Open Tracing project, improving the stability and consistency of the SDK.
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+The migration from v2 to v3 focuses on streamlining modules, refining defaults, and improving reliability across product features.
+
+All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
+
+{{% /tab %}}
+
+{{% tab "React Native" %}}
+
+The migration from v2 to v3 focuses on aligning configuration with the v3 modular SDK behavior and consolidating configuration ownership across `CoreConfiguration`, `RumConfiguration`, `LogsConfiguration`, and `TraceConfiguration`.
+
+Please read [the MIGRATION.md guide][1] in the official React Native repository for the full list of changes.
+
+<div class="alert alert-warning">
+<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 does <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
+</div>
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Modules
+{{< tabs >}}
+{{% tab "Android" %}}
+
+<div class="alert alert-danger">
+Datadog follows Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is <code>23</code>.
+</div>
+
+**Requirements**:
+- Kotlin 1.9 is required
+- The `Open Tracing` dependency was removed because it is obsolete
+
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+Libraries continue to be modularized in v3. Adopt the following libraries:
+
+- `DatadogCore`
+- `DatadogCrashReporting`
+- `DatadogLogs`
+- `DatadogRUM`
+- `DatadogSessionReplay`
+- `DatadogTrace`
+- `DatadogWebViewTracking`
+
+<details>
+  <summary>SPM (Recommended)</summary>
+
+  ```swift
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/DataDog/dd-sdk-ios", from: "3.0.0")
+    ],
+    targets: [
+        .target(
+            ...
+            dependencies: [
+                .product(name: "DatadogCore", package: "dd-sdk-ios"),
+                .product(name: "DatadogCrashReporting", package: "dd-sdk-ios"),
+                .product(name: "DatadogLogs", package: "dd-sdk-ios"),
+                .product(name: "DatadogRUM", package: "dd-sdk-ios"),
+                .product(name: "DatadogSessionReplay", package: "dd-sdk-ios"),
+                .product(name: "DatadogTrace", package: "dd-sdk-ios"),
+                .product(name: "DatadogWebViewTracking", package: "dd-sdk-ios"),
+            ]
+        ),
+    ]
+)
+  ```
+
+</details>
+
+<details>
+  <summary>CocoaPods</summary>
+
+  ```ruby
+  pod 'DatadogCore'
+  pod 'DatadogCrashReporting'
+  pod 'DatadogLogs'
+  pod 'DatadogRUM'
+  pod 'DatadogSessionReplay'
+  pod 'DatadogTrace'
+  pod 'DatadogWebViewTracking'
+  ```
+</details>
+
+<details>
+  <summary>Carthage</summary>
+
+The `Cartfile` stays the same:
+  ```
+  github "DataDog/dd-sdk-ios"
+  ```
+
+In Xcode, you **must** link the following frameworks:
+  ```
+  DatadogInternal.xcframework
+  DatadogCore.xcframework
+  ```
+
+Then, you can select the modules you want to use:
+  ```
+  DatadogCrashReporting.xcframework
+  DatadogLogs.xcframework
+  DatadogRUM.xcframework
+  DatadogSessionReplay.xcframework
+  DatadogTrace.xcframework
+  DatadogWebViewTracking.xcframework
+  ```
+</details>
+
+{{% /tab %}}
+
+{{% tab "React Native" %}}
+
+See [the MIGRATION.md guide][1] in the official React Native repository for the recommended upgrade steps and any required dependency updates.
+
+<div class="alert alert-warning">
+<strong>Important:</strong> In v3, feature modules are only enabled if you pass their configuration during initialization (for example, RUM / Logs / Trace). If you omit a feature configuration, that feature is not initialized or enabled.
+</div>
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Required changes and API updates
+{{< tabs >}}
+{{% tab "Android" %}}
+
+### Core
+
+<div class="alert alert-info">
+<strong>Action Required:</strong> In SDK v3, the user info ID becomes mandatory, and the <code>null</code> value cannot be provided anymore.
+</div>
+
+API changes:
+
+| `2.x`                                                         | `3.0`                                                              |
+|---------------------------------------------------------------|--------------------------------------------------------------------|
+| `Datadog.setUserInfo(null, "Jane Smith", "jane@example.com")` | `Datadog.setUserInfo("user123", "Jane Smith", "jane@example.com")` |
+
+### RUM
+
+We made minor improvements to the RUM modules. They don't require significant changes to your code, but it's worth checking if you can refactor some redundant parameters.
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(`https://example.com/rum/upload`), not just the hostname:
+```kotlin
+Rum.enable(
+  RumConfiguration.Builder(...)
+      .useCustomEndpoint("https://example.com/rum/upload")
+      .build()
+)
+```
+
+API changes:
+
+| `2.x`                                                                               | `3.0`                                                                                |
+|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `DatadogRumMonitor.startResource(String, String, String,Map<String, Any?>)`         | Use `startResource` method which takes `RumHttpMethod` as `method` parameter instead |
+| `com.datadog.android.rum.GlobalRum`                                                 | `GlobalRum` object was renamed to `com.datadog.android.rum.GlobalRumMonitor`         |
+| `com.datadog.android.rum.RumMonitor.addAction()`                                    | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.startAction()`                                  | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.stopResource()`                                 | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.addError()`                                     | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.RumMonitor.addErrorWithStacktrace()`                       | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                                |
+| `com.datadog.android.rum.internal.monitor.AdvancedNetworkRumMonitor.stopResource()` | Parameter `attributes: Map<String, Any?>` is optional                                |
+
+### Logs
+
+The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(`https://example.com/logs/upload`), not just the hostname:
+```kotlin
+Logs.enable(
+  LogsConfiguration.Builder()
+      .useCustomEndpoint("https://example.com/logs/upload")
+      .build()
+)
+```
+
+### Trace
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(e.g.: `https://example.com/trace/upload`), not just the hostname, i.e:
+```kotlin
+Trace.enable(
+  TraceConfiguration.Builder()
+      .useCustomEndpoint(`https://example.com/trace/upload`)
+      .build()
+)
+```
+
+The [`Open Tracing`](https://opentracing.io/) project has been marked as archived and it is no longer supported. The `Open Tracing` dependencies on has been removed from SDK v3.
+
+The Datadog SDK already supports [`Open Telemetry`](https://opentelemetry.io/), which is the recommended way to use the tracing feature API.
+
+**Note** that the `Open Telemetry` specification library [requires](https://github.com/open-telemetry/opentelemetry-java?tab=readme-ov-file#requirements) desugaring to be enabled for projects with a `minSdk` < 26.
+
+#### Migrating tracing from `Open Tracing` to `Open Telemetry` (recommended)
+
+1. Add the `Open Telemetry` dependency to your `build.gradle.kts`:
+
+```kotlin
+implementation(project("com.datadoghq:dd-sdk-android-trace-otel:x.x.x"))
+```
+
+2. Replace the `Open Tracing` configuration:
+```kotlin
+GlobalTracer.registerIfAbsent(
+  AndroidTracer.Builder()
+    .setService(BuildConfig.APPLICATION_ID)
+    .build()
+)
+```
+
+with the `Open Telemetry` configuration:
+```kotlin
+GlobalOpenTelemetry.set(
+  DatadogOpenTelemetry(BuildConfig.APPLICATION_ID)
+)
+```
+
+To access the tracer object for manual (custom) tracing, use `io.opentelemetry.api.GlobalOpenTelemetry.get()` instead of `io.opentracing.util.GlobalTracer.get()`.
+For example:
+```kotlin
+val tracer: Tracer = GlobalOpenTelemetry
+  .get()
+  .getTracer("SampleApplicationTracer")
+
+val span = tracer
+  .spanBuilder("Executing operation")
+  .startSpan()
+
+// Code that should be instrumented
+
+span.end()
+```
+
+Refer to the official `Open Telemetry` [documentation](https://opentelemetry.io/docs/) for more details.
+
+#### Migrating tracing from `Open Tracing` to `DatadogTracing` (transition period)
+
+<div class="alert alert-danger">This option has been added for compatibility and to simplify the transition from Open Tracing to Open Telemetry, but it may not be available in future major releases. Datadog recommends using Open Telemetry as the standard for tracing tasks. However, if it is not possible to enable desugaring in your project for some reason, you can use this method.</div>
+Replace the `Open Tracing` configuration:
+```kotlin
+GlobalTracer.registerIfAbsent(
+  AndroidTracer.Builder()
+    .setService(BuildConfig.APPLICATION_ID)
+    .build()
+)
+```
+
+with the `DatadogTracing` configuration:
+```kotlin
+GlobalDatadogTracer.registerIfAbsent(
+  DatadogTracing.newTracerBuilder()
+    .build()
+)
+```
+
+For manual (custom) tracing use `com.datadog.android.trace.GlobalDatadogTracer.get()` instead of `io.opentracing.util.GlobalTracer.get()` to access the tracer object.
+For example:
+```kotlin
+val tracer = GlobalDatadogTracer.get()
+
+val span = tracer
+  .buildSpan("Executing operation")
+  .start()
+
+// Code that should be instrumented
+
+span.finish()
+```
+Refer to the Datadog [documentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/android?tab=kotlin) for more details.
+
+API changes:
+
+| `2.x`                                     | `3.0` `Open Telemetry`                     | `3.0` `Datadog API`                                     |
+|-------------------------------------------|--------------------------------------------|---------------------------------------------------------|
+| `io.opentracing.util.GlobalTracer`        | `io.opentelemetry.api.GlobalOpenTelemetry` | `com.datadog.android.trace.GlobalDatadogTracer`         |
+| `com.datadog.android.trace.AndroidTracer` | `io.opentelemetry.api.trace.Tracer`        | `com.datadog.android.trace.api.tracer.DatadogTracer`    |
+| `io.opentracing.Span`                     | `io.opentelemetry.api.trace.Span`          | `com.datadog.android.trace.api.span.DatadogSpan`        |
+| `io.opentracing.Scope`                    | `io.opentelemetry.context.Scope`           | `com.datadog.android.trace.api.scope.DatadogScope`      |
+| `io.opentracing.SpanContext`              | `io.opentelemetry.api.trace.SpanContext`   | `com.datadog.android.trace.api.span.DatadogSpanContext` |
+
+Replacement hints:
+
+| `2.x`                                         | `3.0` `Open Telemetry`                                | `3.0` `Datadog API`                               |
+|-----------------------------------------------|-------------------------------------------------------|---------------------------------------------------|
+| `AndroidTracer.Builder().build()`             |                                                       | `DatadogTracing.newTracerBuilder().build()`       |
+| `AndroidTracer.setPartialFlushThreshold(Int)` | `OtelTracerProvider.setPartialFlushThreshold()`       | `DatadogTracerBuilder.withPartialFlushMinSpans()` |
+| `io.opentracing.SpanContext.toTraceId()`      | `io.opentelemetry.api.trace.SpanContext.getTraceId()` | `DatadogSpanContext.traceId.toString()`           |
+| `io.opentracing.Span.setError()`              | `io.opentelemetry.api.trace.recordException()`        | `DatadogSpan.addThrowable()`                      |
+
+### OkHttp instrumentation
+
+The OkHttp instrumentation (`com.datadoghq:dd-sdk-android-okhttp:x.x.x`) does not require desugaring support. However, a few migration actions may be necessary.
+
+API changes:
+
+| `2.x`                                                                                                                                  | `3.0`                                       |
+|----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `TracingInterceptor(String, List<String>, TracedRequestListener,Sampler<Span>)`                                                        | Use `TracingInterceptor.Builder()` instead. |
+| `TracingInterceptor(String?,Map<String, Set<TracingHeaderType>>, TracedRequestListener, Sampler<Span>)`                                | Use `TracingInterceptor.Builder()` instead. |
+| `TracingInterceptor(String?,TracedRequestListener,Sampler<Span>)`                                                                      | Use `TracingInterceptor.Builder()` instead. |
+| `DatadogInterceptor(String?, Map<String, Set<TracingHeaderType>>,TracedRequestListener, RumResourceAttributesProvider, Sampler<Span>)` | Use `DatadogInterceptor.Builder()` instead. |
+| `DatadogInterceptor(String?,List<String>,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>)`                           | Use `DatadogInterceptor.Builder()` instead. |
+| `DatadogInterceptor(String?,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>) `                                       | Use `DatadogInterceptor.Builder()` instead. |
+
+
+### Session Replay
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(e.g.: `https://example.com/session_replay/upload`), not just the hostname, i.e:
+
+```kotlin
+SessionReplay.enable(
+  SessionReplayConfiguration.Builder(...)
+      .useCustomEndpoint("https://example.com/session_replay/upload")
+      .build()
+)
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures accurate measurement of all metrics, including application startup duration. For apps built with SwiftUI, use `@UIApplicationDelegateAdaptor` to access the `AppDelegate`.
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        service: "<service name>"
+    ),
+    trackingConsent: .granted
+)
+```
+
+**Note**: Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
+
+<div class="alert alert-info">
+<strong>Action Required:</strong> The API to set the user info requires the <code>id</code> parameter, which was optional in 2.x.
+</div>
+
+| `2.x`                               | `3.0`                              |
+|-------------------------------------|------------------------------------|
+| `Datadog.setUserInfo(id: nil, name: "Jane Smith", email: "jane@example.com")` | `Datadog.setUserInfo(id: "user123", name: "Jane Smith", email: "jane@example.com")` |
+
+### RUM
+
+RUM View-level attributes are automatically propagated to all related child events, including resources, user actions, errors, and long tasks. This ensures consistent metadata across events, making it easier to filter and correlate data on Datadog dashboards.
+
+To manage View level attributes more effectively, new APIs were added:
+- `Monitor.addViewAttribute(forKey:value:)`
+- `Monitor.addViewAttributes(_:)`
+- `Monitor.removeViewAttribute(forKey:)`
+- `Monitor.removeViewAttributes(forKeys:)`
+
+Other notable changes:
+- All Objective-C RUM APIs are included in `DatadogRUM`. The separate `DatadogObjc` module is no longer available.
+- App Hangs and Watchdog terminations are no longer reported from app extensions or widgets.
+- A new property `trackMemoryWarnings` was added to `RUM.Configuration` to report memory warnings as RUM Errors.
+
+API changes:
+
+|`2.x`|`3.0`|
+|---|---|
+|-|`RUM.Configuration.trackMemoryWarnings`|
+|`RUMView(path:attributes:)`|`RUMView(name:attributes:isUntrackedModal:)`|
+|-|`Monitor.addViewAttribute(forKey:value:)`|
+|-|`Monitor.addViewAttributes(:)`|
+|-|`Monitor.removeViewAttribute(forKey:)`|
+|-|`Monitor.removeViewAttributes(forKeys:)`|
+
+### Logs
+
+The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
+
+Additionally, all Objective-C Logs APIs are included in `DatadogLogs`. The separate `DatadogObjc` module is no longer available.
+
+### Trace
+
+Trace sampling is now deterministic when used alongside RUM. It uses the RUM `session.id` to ensure consistent sampling.
+
+Also:
+- The `Trace.Configuration.URLSessionTracking.FirstPartyHostsTracing` configuration sets sampling for all requests by default and the trace context is injected only into sampled requests.
+- All Objective-C Trace APIs are included in `DatadogTrace`. The separate `DatadogObjc` module is no longer available.
+
+**Note**: A similar configuration exists in `RUM.Configuration.URLSessionTracking.FirstPartyHostsTracing`.
+
+### Session Replay
+
+Privacy settings are more granular. The previous `defaultPrivacyLevel` parameter has been replaced with:
+- `textAndInputPrivacyLevel`
+- `imagePrivacyLevel`
+- `touchPrivacyLevel`
+
+Learn more about [privacy levels][1].
+
+API changes:
+
+|`2.x`|`3.0`|
+|---|---|
+|`SessionReplay.Configuration(replaySampleRate:defaultPrivacyLevel:startRecordingImmediately:customEndpoint:)`|`SessionReplay.Configuration(replaySampleRate:textAndInputPrivacyLevel:imagePrivacyLevel:touchPrivacyLevel:startRecordingImmediately:customEndpoint:featureFlags:)`|
+|`SessionReplay.Configuration(replaySampleRate:defaultPrivacyLevel:startRecordingImmediately:customEndpoint:)`|`SessionReplay.Configuration(replaySampleRate:textAndInputPrivacyLevel:imagePrivacyLevel:touchPrivacyLevel:startRecordingImmediately:customEndpoint:featureFlags:)`|
+
+### URLSession Instrumentation
+
+To enable URLSession Instrumentation, make sure to also enable RUM and/or Trace to report to those products respectively.
+
+Legacy delegate types have been replaced by a unified instrumentation API:
+
+|`2.x`|`3.0`|
+|---|---|
+|`DatadogURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
+|`DDURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
+|`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
+
+[1]: /session_replay/mobile/privacy_options?platform=ios
+
+{{% /tab %}}
+
+{{% tab "React Native" %}}
+
+Please read [the MIGRATION.md guide][1] in the official React Native repository.
+
+<div class="alert alert-warning">
+<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 does <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
+</div>
+
+### Configuration changes
+
+Certain configuration properties have been moved, renamed, removed, or split:
+
+| Property | New Location | Changes |
+| :--- | :--- | :--- |
+| `sampleRate` | *Removed* | Deprecated property removed. |
+| `sessionSamplingRate` | `RumConfiguration` | Moved and renamed to `sessionSampleRate`. |
+| `resourceTracingSamplingRate` | `RumConfiguration` | Moved and renamed to `resourceTraceSampleRate`. |
+| `proxyConfig` | `CoreConfiguration` | Renamed to `proxyConfiguration`. |
+| `serviceName` | `CoreConfiguration` | Renamed to `service`. |
+| `customEndpoints` | *Split* | Split into `customEndpoint` within `RumConfiguration`, `LogsConfiguration`, and `TraceConfiguration`. |
+| *(New property)* | `CoreConfiguration` | `attributeEncoders` added. |
+| *(New property)* | `RumConfiguration` | `trackMemoryWarnings` added. |
+| `nativeCrashReportEnabled` | `RumConfiguration` | Moved. |
+| `nativeViewTracking` | `RumConfiguration` | Moved. |
+| `nativeInteractionTracking` | `RumConfiguration` | Moved. |
+| `firstPartyHosts` | `RumConfiguration` | Enforced usage of `FirstPartyHost[]` type and moved. |
+| `telemetrySampleRate` | `RumConfiguration` | Moved. |
+| `nativeLongTaskThresholdMs` | `RumConfiguration` | Moved. |
+| `longTaskThresholdMs` | `RumConfiguration` | Moved. |
+| `vitalsUpdateFrequency` | `RumConfiguration` | Moved. |
+| `trackFrustrations` | `RumConfiguration` | Moved. |
+| `trackBackgroundEvents` | `RumConfiguration` | Moved. |
+| `bundleLogsWithRum` | `LogsConfiguration` | Moved. |
+| `bundleLogsWithTraces` | `LogsConfiguration` | Moved. |
+| `trackNonFatalAnrs` | `RumConfiguration` | Moved. |
+| `appHangThreshold` | `RumConfiguration` | Moved. |
+| `initialResourceThreshold` | `RumConfiguration` | Moved. |
+| `trackWatchdogTerminations` | `RumConfiguration` | Moved. |
+| `actionNameAttribute` | `RumConfiguration` | Moved. |
+| `logEventMapper` | `LogsConfiguration` | Moved. |
+| `errorEventMapper` | `RumConfiguration` | Moved. |
+| `resourceEventMapper` | `RumConfiguration` | Moved. |
+| `actionEventMapper` | `RumConfiguration` | Moved. |
+| `useAccessibilityLabel` | `RumConfiguration` | Moved. |
+| `trackInteractions` | `RumConfiguration` | Moved. |
+| `trackResources` | `RumConfiguration` | Moved. |
+| `trackErrors` | `RumConfiguration` | Moved. |
+
+### Renamed structures
+
+| `2.x` | `3.x` |
+|---|---|
+| `DdSdkConfiguration` | `CoreConfiguration` |
+
+### API updates
+
+In addition to configuration ownership changes (Core vs feature configs), several public types and APIs were renamed or relocated to match the v3 modular design. See [the MIGRATION.md guide][1] for the authoritative list and code examples.
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## From v1 to v2
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -22,9 +535,9 @@ The migration from v1 to v2 represents a migration from a monolith SDK into a mo
 
 SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+SDK v2 enables the usage of [Mobile Session Replay][2] on Android and iOS applications.
 
-[1]: /real_user_monitoring/session_replay/mobile/
+[2]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -33,9 +546,9 @@ The migration from v1 to v2 represents a migration from a monolith SDK into a mo
 
 SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+SDK v2 enables the usage of [Mobile Session Replay][3] on Android and iOS applications.
 
-[1]: /real_user_monitoring/session_replay/mobile/
+[3]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -49,6 +562,7 @@ The migration from v1 to v2 comes with improved performance and additional featu
 
 {{% /tab %}}
 {{< /tabs >}}
+
 ### Modules
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -68,7 +582,7 @@ Reference to the `com.datadoghq:dd-sdk-android` artifact should be removed from 
 
 **Note**: The Maven coordinates of all the other artifacts stay the same.
 
-<div class="alert alert-warning">v2 does not support Android API 19 (KitKat). The minimum SDK supported is now API 21 (Lollipop). Kotlin 1.7 is required. The SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
+<div class="alert alert-danger">v2 does not support Android API 19 (KitKat). The minimum SDK supported is now API 21 (Lollipop). Kotlin 1.7 is required. The SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
 
 Should you encounter an error such as the following:
 
@@ -77,7 +591,7 @@ A failure occurred while executing com.android.build.gradle.internal.tasks.Check
 Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
 ```
 
-Add the following rules to your build script (more details in the relevant [Stack Overflow issue][2]):
+Add the following rules to your build script (more details in the relevant [Stack Overflow issue][4]):
 
 ```kotlin
 dependencies {
@@ -92,10 +606,10 @@ dependencies {
 }
 ```
 
-See the [Android sample application][3] for an example of how to set up the SDK.
+See the [Android sample application][5] for an example of how to set up the SDK.
 
-[2]: https://stackoverflow.com/a/75298544
-[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
+[4]: https://stackoverflow.com/a/75298544
+[5]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -157,18 +671,18 @@ let package = Package(
 <details>
   <summary>Carthage</summary>
 
-  The `Cartfile` stays the same:
+The `Cartfile` stays the same:
   ```
   github "DataDog/dd-sdk-ios"
   ```
 
-  In Xcode, you **must** link the following frameworks:
+In Xcode, you **must** link the following frameworks:
   ```
   DatadogInternal.xcframework
   DatadogCore.xcframework
   ```
 
-  Then you can select the modules you want to use:
+Then, you can select the modules you want to use:
   ```
   DatadogLogs.xcframework
   DatadogTrace.xcframework
@@ -561,9 +1075,9 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 ### Session Replay
 
-For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][6].
 
-[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+[6]: /session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -756,9 +1270,9 @@ WebViewTracking.enable(webView: webView)
 
 ### Session Replay
 
-For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][7].
 
-[5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+[7]: /session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}

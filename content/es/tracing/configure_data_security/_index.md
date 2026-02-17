@@ -7,7 +7,7 @@ aliases:
 - /es/tracing/custom_instrumentation/agent_customization
 - /es/tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
 - /es/tracing/setup_overview/configure_data_security/
-description: Configura la biblioteca cliente o Agent para controlar la recopilación
+description: Configura la librería cliente o Agent para controlar la recopilación
   de datos confidenciales en trazas (traces).
 further_reading:
 - link: /data_security/pci_compliance/
@@ -17,7 +17,7 @@ title: Seguridad de datos
 ---
 ## Información general
 
-Las bibliotecas de rastreo de Datadog recopilan datos de una aplicación instrumentada. Esos datos se envían a Datadog como trazas (traces) y pueden contener datos confidenciales, como información de identificación personal (PII). Si estás ingiriendo datos confidenciales como trazas (traces) en Datadog, se pueden añadir remediaciones en la ingestión con [Sensitive Data Scanner][12]. También puedes configurar Datadog Agent o la biblioteca de rastreo para corregir datos confidenciales en la recopilación antes de que se envíen las trazas (traces) a Datadog.
+Las bibliotecas de rastreo de Datadog recopilan datos de una aplicación instrumentada. Esos datos se envían a Datadog como trazas (traces) y pueden contener datos confidenciales, como información de identificación personal (PII). Si estás ingiriendo datos confidenciales como trazas (traces) en Datadog, se pueden añadir remediaciones en la ingestión con [Sensitive Data Scanner][12]. También puedes configurar Datadog Agent o la librería de rastreo para corregir datos confidenciales en la recopilación antes de que se envíen las trazas (traces) a Datadog.
 
 Si las configuraciones aquí descritas no cubren tus requisitos de conformidad, ponte en contacto con [el equipo de asistencia de Datadog][1].
 
@@ -580,7 +580,7 @@ Si no deseas recopilar la cadena de consulta, establece la variable de entorno`D
 
 #### Recopilar encabezados
 
-Para recopilar etiquetas (tags) de encabezados de traza (trace), establece la variable de entorno `DD_TRACE_HEADER_TAGS` con un mapa de claves de encabezado que no distinga mayúsculas de minúsculas para etiquetar nombres. La biblioteca aplica los valores de encabezado coincidentes como etiquetas (tags) en los tramos (spans) raíz. La configuración también acepta entradas sin un nombre de etiqueta (tag) especificado, por ejemplo:
+Para recopilar etiquetas (tags) de encabezados de traza (trace), establece la variable de entorno `DD_TRACE_HEADER_TAGS` con un mapa de claves de encabezado que no distinga mayúsculas de minúsculas para etiquetar nombres. La librería aplica los valores de encabezado coincidentes como etiquetas (tags) en los tramos (spans) raíz. La configuración también acepta entradas sin un nombre de etiqueta (tag) especificado, por ejemplo:
 
 ```
 DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
@@ -623,7 +623,7 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 
 {{< site-region region="us" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El cumplimiento del estándar PCI para APM solo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 

@@ -14,14 +14,17 @@ further_reading:
   - link: '/synthetics/guide/browser-tests-passkeys'
     tag: 'Documentation'
     text: 'Learn about Passkeys in browser tests'
-  - link: '/synthetics/browser_tests/actions'
+  - link: '/synthetics/browser_tests/test_steps'
     tag: 'Documentation'
     text: 'Learn about browser test steps'
+  - link: '/synthetics/guide/kerberos-authentication/'
+    tag: 'Guide'
+    text: 'Kerberos Authentication for Synthetic Monitoring'
 ---
 
 ## Overview 
 
-<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, visit the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section</a></div>
+<div class="alert alert-info">If you are interested in testing applications sitting behind MFA, see the <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">Multi-factor authentication section.</a></div>
 
 You may need to monitor user journeys located behind a login. There are two ways to ensure that your Datadog browser tests can go through the login steps of your application to perform validation on post-login pages:
 
@@ -75,17 +78,19 @@ Depending on the type of MFA leveraged by your application, [JavaScript steps][6
 
 ## Leverage browser test configuration options
 
-The second way to ensure that your Datadog Browser tests can login into your applications is to leverage one or several of the available browser test configurations. You can indeed decide to apply:
+Alternatively, you can configure your Datadog Browser Tests to authenticate using built-in browser test configuration options. You can apply the following:
 
 - Specific headers
 - Cookies
-- Basic Auth, Digest Auth, or NTLM credentials
+- Basic Auth, Digest Auth, AWS Signature, NTLM, Kerberos, or Auth 2.0 credentials
+
+See [authentication methods][10] for more information.
 
 These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
 
-You can manually apply these configured headers, cookies, and credentials on the page you are recording from and then record steps your test performs post-login. By default, the browser test automatically passes through authentication with your specified headers, cookies, and/or credentials at execution time and then goes through all recorded steps.
+You can manually apply these headers, cookies, and credentials to the recording page, then record the steps your test performs after login. During test execution, the browser test automatically authenticates using your specified configuration and executes all recorded steps.
 
-{{< img src="synthetics/guide/app_that_requires_login/bt_adv_options.jpg" alt="Login to your app with browser test configuration options">}}
+{{< img src="synthetics/guide/app_that_requires_login/browser_test_adv_options_2.png" alt="Login to your app with browser test configuration options">}}
 
 ## Account security
 
@@ -93,7 +98,7 @@ You can manually apply these configured headers, cookies, and credentials on the
 
 Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
-Once you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and leverage them for your login steps.
+After you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and use them in your login steps.
 
 **Note:** Although Datadog global variables are securely stored and encrypted, it is strongly recommended that you use an account dedicated to testing with dummy credentials as a general testing best practice.
 
@@ -103,12 +108,13 @@ For more information about account security, see [Synthetic Monitoring Data Secu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/actions/
-[2]: /synthetics/browser_tests/actions/#subtests
+[1]: /synthetics/browser_tests/test_steps/
+[2]: /synthetics/browser_tests/test_steps/#subtests
 [3]: /synthetics/guide/identify_synthetics_bots/
 [4]: /synthetics/guide/browser-tests-passkeys
 [5]: /synthetics/guide/browser-tests-totp
-[6]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
+[6]: /synthetics/browser_tests/test_steps/#test-your-ui-with-custom-javascript
 [7]: /synthetics/settings/?tab=specifyvalue#global-variables
-[8]: /synthetics/browser_tests/actions#a-global-variable
+[8]: /synthetics/browser_tests/test_steps#a-global-variable
 [9]: /data_security/synthetics
+[10]: /synthetics/guide/authentication-protocols/?tab=basicaccess#authentication-methods

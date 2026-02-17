@@ -27,7 +27,7 @@ title: Web アプリケーションとモバイルアプリケーションのエ
 
 ## 概要
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="Error Tracking Explorer の問題の詳細画面" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -45,7 +45,7 @@ Error Tracking の主な機能は、[Error Tracking エクスプローラー][3]
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

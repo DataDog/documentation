@@ -4,6 +4,9 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentación
   text: Integración Postgres básica
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para Postgres autoalojado
 ---
 
@@ -17,14 +20,14 @@ El Agent recopila telemetría directamente de la base de datos iniciando sesión
 
 ## Antes de empezar
 
-Versiones de PostgreSQL compatibles
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+Versiones PostgreSQL soportadas
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Requisitos previos
 : Los módulos de Postgres adicionales proporcionados deben estar instalados. En la mayoría de las instalaciones, esto se incluye por defecto, pero las instalaciones menos convencionales pueden requerir una instalación adicional de tu versión del [paquete `postgresql-contrib`][1].
 
 Versiones del Agent compatibles
-: v7.36.1 o posterior
+: 7.36.1 o posteriores
 
 Impacto en el rendimiento
 : La configuración de Database Monitoring predeterminada del Agent es conservadora, pero puedes ajustar algunos parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas según tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de la consulta en la base de datos y menos del uno por ciento del uso de CPU. <br/><br/>
@@ -49,7 +52,7 @@ Configura los siguientes [parámetros][4] en el archivo `postgresql.conf` y lueg
 | `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrearán consultas como SELECT, UPDATE y DELETE. |
 | `track_io_timing` | `on` | Opcional. Habilita la recopilación de los tiempos de lectura y escritura de bloques para las consultas. |
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
@@ -132,7 +135,7 @@ SECURITY DEFINER;
 
 <div class="alert alert-info">Para la recopilación de datos o métricas personalizadas que requieren consultar tablas adicionales, es posible que tengas que conceder el permiso <code>SELECT</code> en esas tablas al usuario <code>Datadog</code>. Ejemplo: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. Para obtener más información, consulta <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">Recopilación de métricas personalizadas de PostgreSQL</a>. </div>
 
-Crea la función **en cada base de datos** para permitir al Agent recopilar explain-plans.
+Crea la función **en cada base de datos** para permitir al Agent recopilar planes de explicación.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -146,6 +149,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -156,6 +161,9 @@ LANGUAGE 'plpgsql'
 RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
+
+### Guarda tu contraseña de forma segura
+{{% dbm-secret %}}
 
 ### Verificación
 
@@ -178,6 +186,7 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
+
 {{% /tab %}}
 {{% tab "Postgres v9.6" %}}
 
@@ -201,63 +210,40 @@ psql -h localhost -U datadog postgres -A \
 
 Cuando se te pida una contraseña, utiliza la que introdujiste al crear el usuario `datadog`.
 
-## Instalación del Agent
+## Instalar el Agent
 
-Al instalar el Datadog Agent también se instala el check Postgres, necesario para Database Monitoring en Postgres. Si aún no has instalado el Agent para el host de tu base de datos Postgres, consulta las [instrucciones de instalación del Agent][8].
+Al instalar el Datadog Agent también se instala el check Postgres, necesario para Database Monitoring en Postgres.
+Si aún no has instalado el Agent, consulta las [instrucciones de instalación del Agent][8], y luego regresa aquí para continuar con las instrucciones de tu método de instalación.
 
-1. Edita el archivo `conf.d/postgres.d/conf.yaml` para que apunte a tu `host` / `port` y configura los principales para la monitorización. Para conocer todas las opciones de configuración disponibles, consulta la [muestra postgres.d/conf.yaml][9].
+Edita el archivo `conf.d/postgres.d/conf.yaml` del Agent para apuntar a la instancia Postgres que quieres monitorizar. Para ver una lista completa de las opciones de configuración, consulta el [ejemplo postgres.d/conf.yaml][9].
 
-{{< tabs >}}
-{{% tab "Postgres v10 o posterior" %}}
+```yaml
+init_config:
+instances:
+ - dbm: true
+   host: localhost
+   port: 5432
+   username: datadog
+   password: 'ENC[datadog_user_database_password]'
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: '<PASSWORD>'
-       ## Opcional: Si es necesario, conéctate a una base de datos diferente para las `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
+  ## Optional: Connect to a different database if needed for `custom_queries`
+  # dbname: '<DB_NAME>'
+```
 
-{{% /tab %}}
-{{% tab "Postgres v9.6" %}}
+**Nota**: Si su contraseña incluye caracteres especiales, enciérrala entre comillas simples.
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: '<PASSWORD>'
-       pg_stat_statements_view: datadog.pg_stat_statements()
-       pg_stat_activity_view: datadog.pg_stat_activity()
-       ## Opcional: Si es necesario, conéctate a una base de datos diferente para las `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-2. [Reinicia el Agent][10].
+[Reinicia el Agent][16] para aplicar los cambios.
 
 ### Recopilación de logs (opcional)
 
 La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no incluyen información detallada. Se recomienda hacerlo en un archivo con detalles adicionales especificados en el prefijo de la línea de logs. Para obtener más detalles, consulta la [documentación][11] de PostgreSQL sobre este tema.
 
-1. La generación de logs se configura en el archivo `/etc/postgresql/<VERSION>/main/postgresql.conf`. Para obtener resultados regulares en logs, incluidos los resultados de sentencias, descomenta los siguientes parámetros en la sección de logs:
+1. La generación de logs está configurada en el archivo `/etc/postgresql/<VERSION>/main/postgresql.conf`. Para obtener resultados regulares de logs, incluidos los resultados de sentencias, configura los siguientes parámetros en la sección de logs:
    ```conf
      logging_collector = on
-     log_directory = 'pg_log'  # directory where log files are written,
-                               # can be absolute or relative to PGDATA
-     log_filename = 'pg.log'   # log file name, can include pattern
-     log_statement = 'all'     # log all queries
-     #log_duration = on
-     log_line_prefix= '%m [%p] %d %a %u %h %c '
+     log_line_prefix = '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
      log_file_mode = 0644
+
      ## For Windows
      #log_destination = 'eventlog'
    ```
@@ -272,7 +258,7 @@ La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no i
      #log_statement = 'all'
      #log_duration = on
    ```
-3. La recopilación de logs está deshabilitada por defecto en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+3. La recopilación de logs está desactivada por omisión en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
    ```yaml
    logs_enabled: true
    ```
@@ -292,11 +278,11 @@ La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no i
    Cambia los valores de los parámetros `service` y `path` a fin de configurarlos para tu entorno. Para ver todas las opciones de configuración disponibles, consulta la [muestra postgres.d/conf.yaml][9].
 5. [Reinicia el Agent][10].
 
-### Confirmar
+### Validación
 
 [Ejecuta el subcomando de estado del Agent][13] y busca `postgres` en la sección Checks o visita la página [Bases de datos][14] para empezar.
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-postgres-agent-config-examples %}}
 
 ## Solucionar problemas
@@ -307,8 +293,7 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: https://www.postgresql.org/docs/12/contrib.html
+[1]: https://www.postgresql.org/docs/current/contrib.html
 [2]: /es/database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /es/database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
@@ -323,3 +308,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [13]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /es/database_monitoring/troubleshooting/?tab=postgres
+[16]: /es/agent/configuration/agent-commands/#restart-the-agent

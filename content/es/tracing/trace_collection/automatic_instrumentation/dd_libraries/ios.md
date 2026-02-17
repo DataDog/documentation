@@ -5,7 +5,7 @@ aliases:
 - /es/tracing/trace_collection/dd_libraries/ios
 code_lang: ios
 code_lang_weight: 90
-description: Recopila trazas de tus aplicaciones de iOS.
+description: Recopila trazas de tus aplicaciones iOS.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Código fuente
@@ -13,37 +13,26 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentación
   text: Explorar tus servicios, recursos y trazas
-title: Rastreo de aplicaciones de iOS
+title: Rastreo de aplicaciones iOS
 type: lenguaje de código múltiple
 ---
-Envía [trazas][1] a Datadog desde tus aplicaciones de iOS con [la biblioteca de rastreo del cliente `dd-sdk-ios` de Datadog][1] y aprovecha las siguientes características:
+Envía [trazas][1] a Datadog desde tus aplicaciones iOS con [la librería de rastreo del cliente `dd-sdk-ios` de Datadog][2] y aprovecha las siguientes características:
 
 * Crea [tramos (spans)][3] personalizados para las operaciones de tu aplicación.
 * Envía logs para cada tramo individualmente.
 * Utiliza los atributos predeterminados y añade atributos personalizados a cada tramo.
 * Aprovechar el uso optimizado de red con publicaciones masivas automáticas.
 
-<div class="alert alert-info"><strong>Nota</strong>: Datadog factura por la <strong>ingesta e indexación</strong> de tramos enviados desde tus aplicaciones de iOS, pero no factura  por los dispositivos subyacentes. Para obtener más información, consulta la <a href="/account_management/billing/apm_tracing_profiler/">documentación de facturación de APM</a>.</div>
+<div class="alert alert-info"><strong>Nota</strong>: Datadog factura por la <strong>ingesta e indexación</strong> de tramos enviados desde tus aplicaciones iOS, pero no factura por los dispositivos subyacentes. Para obtener más información, consulta la <a href="/account_management/billing/apm_tracing_profiler/">documentación de facturación de APM</a>.</div>
 
 ## Configuración
 
-1. Declara la biblioteca como una dependencia en función de tu gestor de paquetes:
+1. Declara la librería como una dependencia, en función de tu gestor de paquetes. Se recomienda Swift paquete Manager (SPM).
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-Puedes utilizar [CocoaPods][4] para instalar `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogTrace'
-```
-
-[4]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
-Para integrar utilizando Swift Package Manager de Apple, añade lo siguiente como dependencia a tu `Package.swift`:
+Para integrar con Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 ```
@@ -55,6 +44,17 @@ DatadogTrace
 ```
 
 {{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+Puedes utilizar [CocoaPods][4] para instalar `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogTrace'
+```
+
+[4]: https://cocoapods.org/
+
+{{% /tab %}}
 {{% tab "Carthage" %}}
 
 Puedes utilizar [Carthage][5] para instalar `dd-sdk-ios`:
@@ -62,7 +62,7 @@ Puedes utilizar [Carthage][5] para instalar `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-En Xcode, vincula los siguientes marcos de trabajo:
+En Xcode, vincula los siguientes marcos:
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
@@ -74,7 +74,7 @@ DatadogTrace.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][2]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][3] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para obtener más información sobre cómo configurar un token de cliente, consulta la [documentación sobre el token de cliente][2].
 
@@ -262,12 +262,43 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .ap2,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                        trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 Para cumplir con la normativa GDPR, el SDK requiere el valor `trackingConsent` en la inicialización.
 El valor `trackingConsent` puede ser uno de los siguientes:
 
 - `.pending`: el SDK comienza a recopilar y procesar los datos por lotes, pero no los envía a Datadog. El SDK espera al nuevo valor de consentimiento de rastreo para decidir qué hacer con los datos procesados por lotes.
 - `.granted`: el SDK comienza a recopilar los datos y los envía a Datadog.
-- `.notGranted`: el SDK no recopila ningún dato: los logs, trazas (traces) y eventos RUM no se envían a Datadog.
+- `.notGranted`: el SDK no recopila ningún dato: los logs, trazas y eventos RUM no se envían a Datadog.
 
 Para cambiar el valor del consentimiento de rastreo una vez inicializado el SDK, utiliza la llamada a la API `Datadog.set(trackingConsent:)`.
 
@@ -293,7 +324,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. El rastreador de Datadog implementa los estándares [OpenTracing][8] y [OpenTelemetry][12]. Configura y habilita el compartido OpenTracing como `Tracer.shared()`:
+3. El rastreador de Datadog implementa los estándares [OpenTracing][8] y [OpenTelemetry][12]. Configura y habilita el `Tracer`compartido OpenTracing como `Tracer.shared()`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -447,7 +478,7 @@ for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
 
 Esto define encabezados de rastreo adicionales en tu solicitud para que tu backend pueda extraer la solicitud y continuar el rastreo distribuido. Una vez finalizada la solicitud, llama a `span.finish()` dentro de un controlador de finalización. Si tu backend también está instrumentado con [Datadog APM y el rastreo distribuido][10], la totalidad de la traza frontend-backend aparece en el dashboard de Datadog.
 
-* Para que el SDK rastree automáticamente todas las solicitudes de red realizadas a la hosts dados, especifica la matriz `firstPartyhosts` durante la inicialización de Datadog, habilita `URLSessionInstrumentation` para tu tipo de delegado y transfiere la instancia de delegado a la URLSession:
+* Para que el SDK rastree automáticamente todas las solicitudes de red realizadas a la hosts dados, especifica la matriz `firstPartyHosts` durante la inicialización de Datadog, habilita `URLSessionInstrumentation` para tu tipo de delegado y transfiere la instancia de delegado a la URLSession:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -497,7 +528,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 Esto rastrea todas las solicitudes realizadas con esta `session` hasta los hosts `example.com` y `api.yourdomain.com` (por ejemplo, `https://api.yourdomain.com/v2/users` o `https://subdomain.example.com/image.png`).
 
-**Nota**: La instrumentación automática del rastreo utiliza el swizzling de `URLSession` y es opcional. Si no se especifica `firstPartyhosts`, no se aplica el swizzling.
+**Nota**: La instrumentación automática del rastreo utiliza el swizzling de `URLSession` y es opcional. Si no se especifica `firstPartyHosts`, no se aplica el swizzling.
 
 ## Recopilación de lotes
 
@@ -519,7 +550,7 @@ Los siguientes atributos de `Trace.Configuration` pueden utilizarse al crear el 
 | `bundleWithRumEnabled` | Configura como `true` para permitir que los tramos se enriquezcan con la información de la vista RUM actual. Esto te permite ver todos los tramos generados durante la vida útil de una vista específica en el Explorador RUM. |
 | `sampleRate` | Configura un valor `0-100` para definir el porcentaje de trazas a recopilar. |
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -4,7 +4,7 @@ aliases:
 - /es/tracing/setup_overview/setup/undefined
 - /es/tracing/setup_overview/setup/
 - /es/tracing/trace_collection/dd_libraries/
-title: Añadir la biblioteca de rastreo de Datadog
+title: Añadir la librería de rastreo de Datadog
 type: lenguaje de código múltiple
 ---
 

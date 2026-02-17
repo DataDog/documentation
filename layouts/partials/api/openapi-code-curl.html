@@ -21,6 +21,6 @@ curl --location 'https://api.cloudcraft.co{{ .path }}' \
 }'
 {{- end -}}
 
-{{- $p := printf "partials/api/openapi-code-curl-%s.html" .method -}}
+{{- $p := printf "api/openapi-code-curl-%s.html" .method -}}
 {{- $pr := partial $p (dict "payload" .payload "path" .path) }}
 {{- highlight (trim $pr "\n\r") "bash" -}}

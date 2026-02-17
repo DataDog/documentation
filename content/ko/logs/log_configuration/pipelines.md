@@ -41,7 +41,7 @@ Datadog는 자동으로 JSON 형식의 로그를 [파싱][1]합니다. 그런 �
 
 ## 전처리
 
-로그가 파이프라인 처리 과정에 들어가기 전 JSON 로그의 전처리가 수행됩니다. 전처리에서는 `timestamp`, `status`, `host`, `service`, `message`와 같은 예약된 속성을 기반으로 일련의 작업이 실행됩니다. JSON로그에 다른 속성 이름이 있는 경우 전ㄴ처리를 사용해 로그 속성 이름을 예약 속성 목록에 있는 이름으로 매핑할 수 있습니다.
+로그가 파이프라인 처리 과정에 들어가기 전 JSON 로그의 전처리가 수행됩니다. 전처리에서는 `timestamp`, `status`, `host`, `service`, `message`와 같은 예약된 속성을 기반으로 일련의 작업이 실행됩니다. JSON로그에 다른 속성 이름이 있는 경우 전처리를 사용해 로그 속성 이름을 예약 속성 목록에 있는 이름으로 매핑할 수 있습니다.
 
 JSON 로그전처리에는 표준 로그 전달자에 대해 작동하는 기본 설정이 함께 제공됩니다. 이 설정을 편집하여 커스텀 또는 특정 로그 전달 방식을 적용합니다.
 
@@ -94,7 +94,7 @@ Datadog 에이전트 또는 RFC5424 형식을 사용하면 로그에서 호스�
 
 **참고**: 공식 날짜가 지난 18시간 이전인 경우 Datadog는 로그 항목을 거부합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 인식되는 날짜 형식: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX(밀리초 EPOCH 형식</a>) 및 <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164입니다</a>.
 </div>
 

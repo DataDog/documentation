@@ -204,4 +204,4 @@ dbXplorer インテグレーションには、以下の 4 つのダッシュボ�
 [5]: https://www.datadoghq.com/blog/itunified-datadog-marketplace/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/itunified-ug-dbxplorer" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/itunified-ug-dbxplorer" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

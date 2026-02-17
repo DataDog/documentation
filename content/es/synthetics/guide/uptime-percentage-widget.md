@@ -9,6 +9,9 @@ further_reading:
 - link: /getting_started/synthetics/
   tag: Documentación
   text: Empezando con Synthetic Monitoring
+- link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
+  tag: Blog
+  text: Mejorar la precisión y el rendimiento de los SLOs con Datadog Synthetic Monitoring
 title: Monitorizar tiempos de actividad de sitios web con SLOs
 ---
 
@@ -18,7 +21,7 @@ Para poder cumplir los acuerdos de nivel del servicio suscritos con clientes int
 
 A continuación, te mostramos cómo lograrlo con la herramienta [Synthetic Monitoring][1] y el [widget de objetivos de nivel del servicio ][2] (SLOs). Para ello, usaremos `http://example.com/` como ejemplo.
 
-## Crear un test de Synthetics
+## Crear un test de Synthetic Monitoring
 
 Para crear un [test de API de Synthetics][3] con `http://example.com/`, consulta [Crear un test de API simple][4].
 
@@ -37,7 +40,7 @@ Al hacer clic en **Test URL** (Probar URL), se rellenan las aserciones sobre el 
 
     {{< img src="synthetics/guide/uptime_slo/slo_target.png" alt="Objetivo del SLO" >}}
 
-4. Introduce un nombre, un mensaje y las etiquetas para detallar más el SLO.
+4. Introduce un nombre, un mensaje y las etiquetas (tags) para detallar más el SLO.
 
     {{< img src="synthetics/guide/uptime_slo/slo_notif.png" alt="Notificación del SLO" >}}
 

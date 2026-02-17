@@ -5,7 +5,7 @@ private: true
 title: Dogstream
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 에이전트 5의 기능은 더 이상 사용되지 않습니다. 새로운 기능 릴리스가 중단되었습니다.
 <br>
 에이전트 버전 6을 사용할 수 있습니다! 새로운 기능을 사용하려면 <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">최신 버전으로 업그레이드</a>하세요.
@@ -62,7 +62,7 @@ Datadog 로그의 형식은 다음과 같습니다:
 
 * 모두 잘 작동할 시 `dogstream: parsing {filename} with {function name} (requested {config option text})`를 확인하세요.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 dogstreams이 작동하는지 테스트하려면 에이전트가 모니터링하도록 설정한 기존 로그 파일을 편집할 줄을 추가하지 마세요. 에이전트는 각 로그 파일의 끝 부분만 <a href="/glossary/#tail">추적</a>하므로 파일의 다른 부분에서 변경한 내용을 인식하지 못합니다.
 </div>
 

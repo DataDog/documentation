@@ -49,7 +49,7 @@ Java インテグレーションを利用して、Java アプリケーション�
 ## セットアップ
 
 ### メトリクスの収集
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 JMX チェックには、インスタンスあたり 350 メトリクスの制限が設けられています。<a href="/integrations/java/?tab=host#configuration-options">構成オプション</a>を参照してください。メトリクスの追加が必要な場合は、<a href="https://docs.datadoghq.com/help/">Datadog のサポートチーム</a>にお問い合わせください。</div>
 
 アプリケーションで [JMX][1] メトリクスが公開されている場合、Datadog Agent から軽量の Java プラグインである JMXFetch (Java 1.7 以上とのみ互換) が呼び出され、MBean サーバーに接続してアプリケーションのメトリクスを収集します。また、監視対象のインスタンスのステータスを報告するサービスチェックを送信することも可能です。このプラグインは、Agent 内で稼働する [DogStatsD][2] サーバーを使用して Datadog Agent にメトリクスを送信します。このインテグレーションでは以下の JMX メトリクスも同様に使用されます。

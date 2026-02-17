@@ -6,7 +6,7 @@ aliases:
 title: Tarification d'APM
 ---
 
-Il existe trois offres vous permettant de bénéficier de la solution APM : APM, APM Pro et APM Enterprise. Grâce à ses fonctionnalités de tracing distribué, à sa mise en corrélation fluide des traces, logs et autres données de télémétrie, ainsi qu'à ses dashboards de performance prêts à l'emploi pour vos services, APM vous permet d'analyser en détail vos applications. Le profileur continu fourni par l'offre APM Pro vous permet d'identifier les méthodes les plus lentes et les plus gourmandes en ressources, et de les agréger au niveau de vos services et endpoints, ou de les visualiser pour chaque trace distribuée. Enfin, la fonctionnalité Data Streams Monitoring (DSM) proposée dans le cadre des offres APM Pro et APM Enterprise vous aide à surveiller les performances de bout en bout de vos principaux pipelines de diffusion de données et de vos applications axées sur des événements qui reposent sur Kafka et RabbitMQ.
+La solution APM est disponible en trois niveaux : APM, APM Pro et APM Enterprise. APM vous offre une visibilité approfondie sur vos applications grâce au tracing distribué, à une corrélation fluide entre traces, logs et autres données de télémétrie, ainsi qu'à des dashboards de performance prêts à l'emploi pour votre service. Avec le Continuous Profiler inclus dans APM Enterprise, vous pouvez identifier les méthodes les plus lentes et les plus gourmandes en ressources, de façon agrégée au niveau du service et de l'endpoint, ainsi que pour chaque trace distribuée. Grâce au Data Streams Monitoring (DSM), disponible dans APM Pro et APM Enterprise, vous pouvez facilement suivre les performances de bout en bout de vos pipelines de données en streaming et de vos applications pilotées par les événements utilisant Kafka, SQS et RabbitMQ.
 
 
 | Paramètre de facturation  | Prix                                      | Spans ingérées et spans indexées                                                                 | Facturation                                                                                                                                                                                                                                                                                                                          |
@@ -46,7 +46,7 @@ Utilisation de 5 hosts APM et envoi de 30 millions de spans indexées, avec un
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
 | Hosts APM      | 5          | 31 $ par host                                                                                    | 5 * 31 $       | 155 $                  |
 | Spans indexées | 30 millions | 5 millions incluses avec 5 hosts APM. 1,70 $ par million pour 25 millions de spans indexées supplémentaires | 25 * 1,70 $    | 42,50 $                |
-| Ingested Spans | 900 Go          | 750 Go inclus avec 5 hosts APM. 0,10 $ par Go pour les 150 Go de spans ingérées supplémentaires.                                                                                 | 150 * 0,10 $      | 15 $                  |
+| Spans ingestées | 900 Go          | 750 Go inclus avec 5 hosts APM. 0,10 $ par Go pour les 150 Go de spans ingérées supplémentaires.                                                                                 | 150 * 0,10 $      | 15 $                  |
 | Total          |            |                                                                                                 | 155 $ + 42,50 $ + 15 $ | **212,50 $ par mois** |
 
 ### Hosts APM Pro, spans indexées et spans ingérées supplémentaires
@@ -76,7 +76,7 @@ Utilisation de 5 hosts APM, envoi de 20 millions de spans indexées et déploi
 
 | Unité de facturation  | Quantité   | Prix                                                                                           | Formule             | Sous-total              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
-| Hosts d'APM      | 5          | 31 $ par host                                                                                    | 5 * 31 $             | 155 $                  |
+| Hosts APM      | 5          | 31 $ par host                                                                                    | 5 * 31 $             | 155 $                  |
 | Tâches Fargate  | 20         | 2 $ par tâche                                                                                     | 20 * 2 $             | 40 $                   |
 | Spans indexées | 20 millions | 5 millions de spans indexées incluses avec les 5 hosts d'APM. 1,3 million de spans indexées incluses avec les 20 tâches Fargate. 1,70 $ par million pour les 13,7 millions de spans indexées supplémentaires. | 13,7 * 1,70 $          | 23,29 $                |
 | Total          |            |                                                                                                 | 155 $ + 40 $ + 23,29 $ | **218,29 $ par mois** |
@@ -99,7 +99,7 @@ Application 1 est exécutée sur 20 à 40 conteneurs déployés sur 4 à 8 in
 | Unité de facturation | Quantité | Prix        | Formule    | Sous-total           |
 |---------------|----------|--------------|------------|--------------------|
 | Hosts APM     | 7        | 31 $ par host | 7 * 31 $    | 217 $               |
-| Fargate Tasks | 28       | 2 $ par tâche  | 28 * 2 $    | 56 $                |
+| Tâches Fargate | 28       | 2 $ par tâche  | 28 * 2 $    | 56 $                |
 | Total         |          |              | 217 $ + 56 $ | **273 $ par mois** |
 
 **Remarque** : le nombre de conteneurs n'est pas pris en compte si l'Agent est déployé sur les instances EC2.

@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - tutorial
 aliases:
 - /es/video-categories/
 - /es/video-categories/datadog-101/
@@ -33,10 +36,12 @@ aliases:
 - /es/videos/apm
 - /es/videos/aws
 - /es/videos/host-map
+description: Accede a cursos prácticos y tutoriales para conocer las funciones de
+  la plataforma Datadog, las prácticas recomendadas y las estrategias de implementación.
 title: Centro de aprendizaje de Datadog
 ---
 
-Datadog es extensa una plataforma diseñada para que puedas entender tu infraestructura. En caso de dudas, el [Centro de aprendizaje de Datadog][1] está allí para ayudarte a sacarle el máximo partido a todo lo que te ofrece la plataforma.
+Datadog es una plataforma amplia diseñada para que puedas entender tu infraestructura. En caso de dudas, tienes el [Centro de aprendizaje de Datadog][1] para sacarle el máximo partido a todo lo que te ofrece la plataforma.
 
 Entra en [Cursos][2] para ver la lista de todos los cursos disponibles.
 

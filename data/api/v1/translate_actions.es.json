@@ -28,25 +28,25 @@
     "request_schema_description": "Clave de API Datadog."
   },
   "ListApplicationKeys": {
-    "description": "Obtén todas las claves de aplicación disponibles para tu cuenta de Datadog.",
+    "description": "Obtén todas las claves de aplicación disponibles para tu cuenta de Datadog.\nEste endpoint está desactivado para las organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Mostrar todas las claves de aplicación"
   },
   "CreateApplicationKey": {
-    "description": "Crea una clave de aplicación con un nombre determinado.",
+    "description": "Crea una clave de aplicación con un nombre determinado.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Crear una clave de aplicación",
     "request_description": "",
     "request_schema_description": "Clave de aplicación con sus metadatos asociados."
   },
   "DeleteApplicationKey": {
-    "description": "Elimina una clave de aplicación determinada.",
+    "description": "Elimina una clave de aplicación determinada.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Eliminar una clave de aplicación"
   },
   "GetApplicationKey": {
-    "description": "Obtén una clave de aplicación determinada.",
+    "description": "Obtén una clave de aplicación determinada.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Recibir una clave de aplicación"
   },
   "UpdateApplicationKey": {
-    "description": "Edita el nombre de una clave de aplicación.",
+    "description": "Edita el nombre de una clave de aplicación.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Editar una clave de aplicación.",
     "request_description": "",
     "request_schema_description": "Clave de aplicación con sus metadatos asociados."
@@ -248,7 +248,7 @@
     "summary": "Desactivar el silenciamiento de un host"
   },
   "ListHosts": {
-    "description": "Este endpoint permite buscar hosts por nombre, alias o etiqueta.\nLos hosts activos durante las últimas 3 horas se incluyen por defecto.\nEl periodo de conservación es de 7 días.\nLos resultados se paginan con un máximo de 1000 resultados a la vez.",
+    "description": "Este endpoint permite buscar hosts por nombre, alias o etiqueta.\nPor defecto, se incluyen los hosts activos en las últimas 3 horas.\nLa retención es de 7 días.\nLos resultados se paginan con un máximo de 1000 resultados a la vez.\n**Nota:** Si el host es una instancia de Amazon EC2, `id` se sustituye por `aws_id` en la respuesta.\n**Nota**: Para enriquecer los datos devueltos por este endpoint con escaneos de seguridad, consulta el nuevo endpoint [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata).",
     "summary": "Obtener todos los hosts para tu organización"
   },
   "GetHostTotals": {
@@ -256,43 +256,43 @@
     "summary": "Obtener el número total de hosts activos"
   },
   "DeleteAWSAccount": {
-    "description": "Elimina una integración AWS en Datadog que coincida con los parámetros especificados `id_de_cuenta` y `nombre_de_rol`.",
+    "description": "**Este endpoint está obsoleto; utiliza en su lugar los endpoints V2.** Elimina una integración de Datadog y AWS que coincida con los parámetros especificados `account_id` y `role_name`.",
     "summary": "Eliminar una integración AWS",
     "request_description": "Objeto de solicitud de AWS",
     "request_schema_description": "Lista de cuentas de AWS a eliminar."
   },
   "ListAWSAccounts": {
-    "description": "Enumera todas las integraciones AWS en Datadog disponibles en tu organización Datadog.",
+    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Enumera todas las integraciones de Datadogy AWS disponibles en tu organización de Datadog.",
     "summary": "Enumerar todas las integraciones AWS"
   },
   "CreateAWSAccount": {
-    "description": "Crea una integración Amazon Web Services en Datadog.\nEl uso del método `POST` actualiza la configuración de tu integración\nañadiendo tu nueva configuración a la existente en tu organización Datadog.\nÚnico ID de cuenta de AWS para la autenticación basada en roles.",
+    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Crea una integración de Datadog y Amazon Web Services.\nEl uso del método `POST` actualiza la configuración de tu integración\nal añadir tu nueva configuración a la existente en tu organización de Datadog.\nUn ID de cuenta de AWS único para la autenticación basada en roles.",
     "summary": "Crear una integración AWS",
     "request_description": "Objeto de solicitud de AWS",
     "request_schema_description": "Devuelve la cuenta de AWS asociada a esta integración."
   },
   "UpdateAWSAccount": {
-    "description": "Actualiza una integración Amazon Web Services en Datadog.",
+    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Actualiza una integración de Datadog y Amazon Web Services.",
     "summary": "Actualizar una integración AWS",
     "request_description": "Objeto de solicitud de AWS",
     "request_schema_description": "Devuelve la cuenta de AWS asociada a esta integración."
   },
   "ListAvailableAWSNamespaces": {
-    "description": "Enumera todas las reglas de espacios de nombres para una determinada integración AWS en Datadog. Este endpoint no recibe argumentos.",
+    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Enumera todas las reglas de espacio de nombres para una determinada integración de Datadog y AWS. Este endpoint no recibe argumentos.",
     "summary": "Enumerar reglas de espacios de nombres"
   },
   "DeleteAWSEventBridgeSource": {
-    "description": "Elimina una fuente Amazon EventBridge.",
+    "description": "**Este endpoint está obsoleto; utiliza en su lugar los endpoints V2.** Elimina una fuente de Amazon EventBridge.",
     "summary": "Eliminar una fuente Amazon EventBridge",
     "request_description": "Elimina la fuente Amazon EventBridge con el nombre, la región y la cuenta de AWS asociados.",
     "request_schema_description": "Objeto utilizado para eliminar una fuente EventBridge."
   },
   "ListAWSEventBridgeSources": {
-    "description": "Obtén todas las fuentes Amazon EventBridge.",
+    "description": "**Este endpoint está obsoleto; utiliza en su lugar los endpoints V2.** Obtén todas las fuentes de Amazon EventBridge.",
     "summary": "Obtener todas las fuentes Amazon EventBridge"
   },
   "CreateAWSEventBridgeSource": {
-    "description": "Crea una fuente Amazon EventBridge.",
+    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Crea una fuente de Amazon EventBridge.",
     "summary": "Crear una fuente Amazon EventBridge",
     "request_description": "Crea una fuente Amazon EventBridge para una cuenta de AWS con un nombre y una región determinados.",
     "request_schema_description": "Objeto utilizado para crear una fuente EventBridge."
@@ -314,7 +314,7 @@
     "request_schema_description": "Objetos utilizados para definir una etiqueta de filtrado de AWS."
   },
   "CreateNewAWSExternalID": {
-    "description": "Genera un nuevo ID externo de AWS para un par de ID de cuenta y nombre de rol de AWS.",
+    "description": "**Este endpoint está obsoleto; utiliza los endpoint V2 en su lugar.** Genera un nuevo ID externo de AWS para un par dado de ID de cuenta de AWS y nombre de rol.",
     "summary": "Generar un nuevo ID externo",
     "request_description": "Nombre de tu delegación de roles en Datadog.\nPara obtener más información sobre el nombre de rol de tu cuenta de AWS,\nconsulta la [información de configuración de una integración AWS en Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).",
     "request_schema_description": "Devuelve la cuenta de AWS asociada a esta integración."
@@ -342,7 +342,7 @@
     "request_schema_description": "ID de cuenta y Lambda ARN en AWS."
   },
   "ListAWSLogsServices": {
-    "description": "Obtén la lista de los servicios AWS actuales a los que Datadog ofrece la recopilación automática de logs. Utiliza los ID de servicios devueltos con el parámetro de servicios para el endpoint de recopilación de logs de servicios AWS.",
+    "description": "**Este endpoint está obsoleto; utiliza el endpoint V2 en su lugar.** Obtén la lista de servicios de AWS actuales para los que Datadog ofrece recopilación automática de logs. Utiliza los IDs de servicio devueltos con el parámetro services para el endpoint de la API Enable an AWS service log collection (Activar la recopilación de logs de servicio de AWS).",
     "summary": "Obtener la lista de los servicios listos para logs de AWS"
   },
   "EnableAWSLogServices": {
@@ -726,7 +726,7 @@
     "summary": "Consultar puntos de series temporales"
   },
   "ListMetrics": {
-    "description": "Busca métricas de las últimas 24 horas en Datadog.",
+    "description": "**Nota**: Este endpoint está obsoleto. Utiliza `/api/v2/metrics` en su lugar.\n\nBusca métricas de las últimas 24 horas en Datadog.",
     "summary": "Buscar métricas"
   },
   "AddSecurityMonitoringSignalToIncident": {
@@ -736,13 +736,13 @@
     "request_schema_description": "Atributos que describen a qué incidente añadir la señal."
   },
   "EditSecurityMonitoringSignalAssignee": {
-    "description": "Modifica el usuario que tiene asignada la evaluación de una señal de seguridad.",
+    "description": "Este endpoint está obsoleto - Modifica el asignatario de triaje de una señal de seguridad.",
     "summary": "Modificar el usuario que tiene asignada la evaluación de una señal de seguridad.",
     "request_description": "Atributos que describen la modificación de la señal.",
     "request_schema_description": "Atributos que describen una operación de actualización de asignatario a través de una señal de seguridad."
   },
   "EditSecurityMonitoringSignalState": {
-    "description": "Cambia el estado que tiene la evaluación de una señal de seguridad.",
+    "description": "Este endpoint está obsoleto - Cambia el estado de triaje de una señal de seguridad.",
     "summary": "Cambiar el estado que tiene la evaluación de una señal de seguridad",
     "request_description": "Atributos que describen la modificación de la señal.",
     "request_schema_description": "Atributos que describen el cambio de estado de un estado determinado."
@@ -934,6 +934,10 @@
     "summary": "Editar un test móvil",
     "request_description": "Nueva información detallada del test que se va a guardar.",
     "request_schema_description": "Objeto que contiene información detallada de un test móvil Synthetic."
+  },
+  "SearchTests": {
+    "description": "Busca los Synthetic tests.",
+    "summary": "Buscar Synthetic test"
   },
   "TriggerTests": {
     "description": "Activa un conjunto de tests Synthetic.",

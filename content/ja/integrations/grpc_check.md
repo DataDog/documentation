@@ -101,7 +101,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "grpc_check" >}}
+{{< get-metrics-from-git "grpc-check" >}}
 
 
 ### イベント
@@ -109,7 +109,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 grpc_check インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "grpc_check" >}}
+{{< get-service-checks-from-git "grpc-check" >}}
 
 
 ## トラブルシューティング

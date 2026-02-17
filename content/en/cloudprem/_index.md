@@ -1,31 +1,30 @@
 ---
 title: CloudPrem
 description: Learn how to deploy and manage Datadog CloudPrem, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
-private: true
+further_reading:
+- link: "https://www.datadoghq.com/blog/introducing-datadog-cloudprem/"
+  tag: "Blog"
+  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog CloudPrem"
 ---
 
-<div class="alert alert-warning">CloudPrem is in Preview.</div>
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< /callout >}}
 
-## Overview
+CloudPrem is Datadog BYOC log management solution which offers a cost-effective solution for organizations that want to keep their data in their own cloud accounts and control costs over time using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory and high-volume requirements.
 
-{{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}
-
-Datadog CloudPrem is a self-hosted log management solution that enables cost-effective log ingestion, processing, indexing, and search capabilities within your own infrastructure. Built to meet data residency, stringent security, and high-volume requirements, CloudPrem integrates with the Datadog platform to provide log analysis, visualization, and alerting — all while keeping your log data at rest within your infrastructure boundaries.
 
 ## Get started
 
-{{< whatsnext >}}
-   {{< nextlink href="/cloudprem/installation/" >}}Install CloudPrem and Send Logs with the Agent {{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingress/" >}}Configure CloudPrem Ingress{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/aws_config" >}}Configure AWS{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/processing/" >}}Configure CloudPrem Log Processing{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/cluster/" >}}Learn more about Cluster Sizing and Operations{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/architecture/" >}}Learn more about CloudPrem Architecture{{< /nextlink >}}   
-   {{< nextlink href="/cloudprem/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
+{{< whatsnext desc="Follow our guides to get CloudPrem up and running:">}}
+  {{< nextlink href="/cloudprem/introduction/" >}}What is CloudPrem?{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/quickstart/" >}}Quickstart: Run CloudPrem locally in 5 minutes{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/" >}}Installation - Deploy CloudPrem on AWS, Azure, or custom Kubernetes{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to CloudPrem{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/operate/search_logs" >}}Search Logs - Explore your logs in the Datadog Log Explorer{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/guides/" >}}Guides - Step-by-step guides for CloudPrem features and integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Further reading
 
-[1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[2]: /cloudprem/installation/
-[3]: /cloudprem/processing/
-[4]: /cloudprem/architecture/
+{{< partial name="whats-next/whats-next.html" >}}

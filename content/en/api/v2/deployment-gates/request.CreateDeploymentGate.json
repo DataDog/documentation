@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "dry_run": false,
+      "env": "production",
+      "identifier": "my-gate-1",
+      "service": "my-service"
+    },
+    "type": "deployment_gate"
+  }
+}

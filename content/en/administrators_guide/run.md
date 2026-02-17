@@ -1,6 +1,6 @@
 ---
 title: Maintaining and running your Datadog installation
-description: Keep your datadog installation running smoothly.
+description: Learn about the Run phase of using Datadog, including onboarding a new infrastructure instance, fielding technical issues, and performing administrative tasks.
 further_reading:
 - link: "getting_started/dashboards/"
   tag: "Documentation"

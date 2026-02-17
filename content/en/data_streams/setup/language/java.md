@@ -16,21 +16,22 @@ aliases:
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+* [Datadog Agent v7.34.0 or later][10]
 
 ### Supported libraries
 
-| Technology     | Library                                                                                         | Minimal tracer version | Recommended tracer version |
-|----------------|-------------------------------------------------------------------------------------------------|------------------------|-----------------------------
-| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (Lag generation is not supported for v3.7)              | 1.9.0                  | 1.43.0 or later            |
-| RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                      | 1.9.0                  | 1.42.2 or later            |
-| Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)      | 1.27.0                 | 1.42.2 or later            |
-| Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                       | 1.27.0                 | 1.42.2 or later            |
-| Amazon Kinesis | [Kinesis (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kinesis)           | 1.22.0                 | 1.42.2 or later            |
-| Amazon Kinesis | [Kinesis (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/kinesis)               | 1.22.0                 | 1.42.2 or later            |
-| Amazon SNS     | [SNS (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns)                   | 1.31.0                 | 1.42.2 or later            |
-| Amazon SNS     | [SNS (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sns)                       | 1.31.0                 | 1.42.2 or later            |
-| Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub) | 1.25.0                 | 1.42.2 or later            |
+| Technology     | Library                                                                                                                       | Minimal tracer version                                                          | Recommended tracer version                                                          |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (Lag generation is not supported for v3.7) | {{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}       |
+| RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                                                    | {{< dsm-tracer-version lang="java" lib="amqp-client" type="minimal" >}}         | {{< dsm-tracer-version lang="java" lib="amqp-client" type="recommended" >}}         |
+| Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)                                    | {{< dsm-tracer-version lang="java" lib="aws-java-sdk-sqs-v1" type="minimal" >}} | {{< dsm-tracer-version lang="java" lib="aws-java-sdk-sqs-v1" type="recommended" >}} |
+| Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                                                     | {{< dsm-tracer-version lang="java" lib="sqs-v2" type="minimal" >}}              | {{< dsm-tracer-version lang="java" lib="sqs-v2" type="recommended" >}}              |
+| Amazon Kinesis | [Kinesis (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-kinesis)                                         | {{< dsm-tracer-version lang="java" lib="kinesis-v1" type="minimal" >}}          | {{< dsm-tracer-version lang="java" lib="kinesis-v1" type="recommended" >}}          |
+| Amazon Kinesis | [Kinesis (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/kinesis)                                             | {{< dsm-tracer-version lang="java" lib="kinesis-v2" type="minimal" >}}          | {{< dsm-tracer-version lang="java" lib="kinesis-v2" type="recommended" >}}          |
+| Amazon SNS     | [SNS (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sns)                                                 | {{< dsm-tracer-version lang="java" lib="sns-v1" type="minimal" >}}              | {{< dsm-tracer-version lang="java" lib="sns-v1" type="recommended" >}}              |
+| Amazon SNS     | [SNS (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sns)                                                     | {{< dsm-tracer-version lang="java" lib="sns-v2" type="minimal" >}}              | {{< dsm-tracer-version lang="java" lib="sns-v2" type="recommended" >}}              |
+| Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub)                               | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="recommended" >}}       |
+| IBM MQ         | [IBM MQ classes for Java and JMS](https://mvnrepository.com/artifact/com.ibm.mq/com.ibm.mq.jakarta.client)                    | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}      | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}      |
 
 ### Installation
 
@@ -90,9 +91,9 @@ To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you mu
      - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
      - DD_TRACE_SQS_BODY_PROPAGATION_ENABLED: "true"
    ```
-- Ensure that you are using [Java tracer v1.44.0+][1].
+- Ensure that you are using [Java tracer v1.44.0+][11].
 
-[1]: https://github.com/DataDog/dd-trace-java/releases
+[11]: https://github.com/DataDog/dd-trace-java/releases
 {{% /tab %}}
 {{% tab "SQS v2" %}}
 Enable [Amazon SNS raw message delivery][1].
@@ -130,9 +131,9 @@ Data Streams Monitoring can collect information from your self-hosted Kafka conn
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[10]: /agent
 [2]: /tracing/trace_collection/dd_libraries/java/
-[4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: /remote_configuration
 [5]: /data_streams/manual_instrumentation/?tab=java
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget

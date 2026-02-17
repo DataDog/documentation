@@ -219,7 +219,7 @@ Datadog Agent は、クラスター内のすべての Aurora エンドポイン�
        # dbname: '<DB_NAME>'
    ```
 
-<div class="alert alert-warning"><strong>重要</strong>: ここでは、クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用してください。</div>
+<div class="alert alert-danger"><strong>重要</strong>: ここでは、クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用してください。</div>
 
 
 2. [Agent を再起動します][2]。
@@ -276,7 +276,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning"><strong>重要</strong>: クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントをホストとして使用します。</div>
+<div class="alert alert-danger"><strong>重要</strong>: クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントをホストとして使用します。</div>
 
 Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
@@ -374,7 +374,7 @@ spec:
     targetPort: 5432
     name: postgres
 ```
-<div class="alert alert-warning"><strong>重要</strong>: ここでは、Aurora クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用してください。</div>
+<div class="alert alert-danger"><strong>重要</strong>: ここでは、Aurora クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用してください。</div>
 
 複数のインスタンスを構成するには、以下の形式を使用できます。
 

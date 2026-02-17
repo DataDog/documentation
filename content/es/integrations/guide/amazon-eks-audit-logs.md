@@ -39,7 +39,7 @@ Una vez finalizada la configuración de los logs de auditoría de Amazon EKS, la
 
 **Nota**: Los logs pueden tardar unos segundos en comenzar a transmitir en Log Explorer.
 
-Para ver sólo los logs de auditoría de EKS en el Log Explorer, consulta `source:kubernetes.aduit` en la búsqueda del Log Explorer o, en **Source** (Fuente) en el panel de facetas, selecciona la faceta `kubernetes.audit` para filtrar por logs de auditoría de EKS.
+Para ver solo logs de auditoría de EKS en el Log Explorer, consulta `source:kubernetes.audit` en la búsqueda del Log Explorer o en **Source** (fuente) en el panel de facetas, y selecciona la faceta `kubernetes.audit` para filtrar por logs de auditoría de EKS.
 
 ## Cloud SIEM
 
@@ -75,10 +75,10 @@ Para crear una regla, ve a la página dentro de la aplicación [Configuración d
 [5]: /es/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /es/security/cloud_siem/log_detection_rules/
+[8]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [9]: /es/getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
 [11]: /es/security/default_rules/#cat-cloud-siem
 [12]: /es/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /es/security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method

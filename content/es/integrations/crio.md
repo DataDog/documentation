@@ -88,11 +88,11 @@ CRI-O recopila métricas del recuento y la latencia de las operaciones realizada
 La integración CRI-O en Datadog recopila el uso de CPU y de memoria del propio binario CRI-O golang.
 
 ### Métricas
-{{< get-metrics-from-git "crio" >}}
+{{< get-metrics-from-git "cri-o" >}}
 
 
 ### Checks de servicio
-{{< get-service-checks-from-git "crio" >}}
+{{< get-service-checks-from-git "cri-o" >}}
 
 
 ## Solucionar problemas

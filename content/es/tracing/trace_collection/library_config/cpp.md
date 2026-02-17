@@ -11,11 +11,11 @@ further_reading:
 - link: /tracing/trace_collection/trace_context_propagation/
   tag: Documentación
   text: Propagación del contexto de rastreo
-title: Configuración de la biblioteca de rastreo de C++
+title: Configuración de la librería de rastreo de C++
 type: multi-code-lang
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado unificado de servicios][1].
 
 Es recomendado utilizar `DD_SERVICE`, `DD_ENV` y `DD_VERSION` para establecer `env`, `service` y `version` para tus servicios. Consulta las recomendaciones de la documentación [etiquetado de servicios unificado][1] sobre qué valor establecer para las variables de entorno.
 
@@ -44,7 +44,7 @@ Establece la versión del servicio.
 : **Desde**: 0.1.0 <br>
 **Por defecto**: `true` <br>
 Enviar o no trazas al Datadog Agent . <br>
-Cuando es `false`, la biblioteca deja de enviar trazas al Datadog Agent. Sin embargo, la biblioteca continúa generando trazas, informando la telemetría y sondeando actualizaciones de configuración remotas.
+Cuando es `false`, la librería deja de enviar trazas al Datadog Agent. Sin embargo, la librería continúa generando trazas, informando la telemetría y sondeando actualizaciones de configuración remotas.
 
 `DD_TRACE_AGENT_PORT`
 : **Desde**: v0.1.0 <br>

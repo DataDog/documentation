@@ -52,7 +52,7 @@ Google Firebase のログは Google Cloud Logging で収集され、Cloud Pub/Su
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_firebase" >}}
+{{< get-metrics-from-git "google-cloud-firebase" >}}
 
 
 ### イベント

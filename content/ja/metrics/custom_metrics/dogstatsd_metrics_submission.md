@@ -32,18 +32,18 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 | `<METRIC_VALUE>` | Double          | はい      | メトリクスに関連付けられている値                                                                                                                                                             |
 | `<SAMPLE_RATE>`  | Double          | いいえ       | メトリクスに適用するサンプリングレート。`0`（全てがサンプリングされ何も送信されない）〜`1` （サンプル無し）の値を利用。詳細は、[サンプリングレートセクション](#sample-rates)をご覧ください。 |
 | `<タグ>`         | 文字列のリスト | いいえ       | メトリクスに適用するタグのリスト。詳細は、[メトリクスのタグ付け](#metric-tagging)セクションをご覧ください。                                                                                       |
+| `<CARDINALITY>`  | 列挙            | No       | このメトリクスに割り当てるタグの[カーディナリティ][10]                                                                                                                               |
 
 ### COUNT
 
-`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
+`increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY> )`
 : COUNT メトリクスをインクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
 
-`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>)`
+`decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : COUNT メトリクスをデクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
 
-`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 任意の `Value` から COUNT メトリクスをインクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
-: **注:** `count` は Python ではサポートされていません。
+`count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: 任意の `Value` を指定して COUNT メトリクスをインクリメントするために使用されます。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
 
 **注**: `COUNT` タイプのメトリクスは、フラッシュ間隔で正規化され 1 秒あたりの単位数を報告するため、Datadog 内で少数を表示できます。
 
@@ -101,7 +101,7 @@ import (
     "log"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -169,8 +169,8 @@ public class DogStatsdClient
 
             while (true)
             {
-                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"}, cardinality: Cardinality.Low);
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"}, cardinality: Cardinality.High);
                 dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
             }
@@ -195,8 +195,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'));
-    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
+    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'), 'low');
+    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'), 'high');
     sleep(10);
 }
 ```
@@ -224,8 +224,8 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
 
 ### GAUGE
 
-`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間の間にメトリクスに送信された最後のゲージ値です。
+`gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間中にそのメトリクスに対して StatsD に送信された最後のゲージ値です。
 
 #### コード例
 
@@ -253,7 +253,7 @@ i = 0
 
 while(1):
   i += 1
-  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
+  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"], cardinality="low")
   time.sleep(10)
 ```
 {{< /programming-lang >}}
@@ -268,7 +268,7 @@ i = 0
 
 while true do
     i += 1
-    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
+    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'], cardinality: 'low')
     sleep 10
 end
 ```
@@ -282,7 +282,7 @@ import (
     "log"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -293,7 +293,7 @@ func main() {
     var i float64
     for true {
         i += 1
-        statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
+        statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1, CardinalityHigh)
         time.Sleep(10 * time.Second)
     }
 }
@@ -347,7 +347,7 @@ public class DogStatsdClient
 
             for (int i = 0; true; i++)
             {
-                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"}, cardinality: Cardinality.High);
                 System.Threading.Thread.Sleep(100000);
             }
         }
@@ -373,7 +373,7 @@ $statsd = new DogStatsd(
 $i = 0;
 while (TRUE) {
     $i++;
-    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
+    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'), 'low');
     sleep(10);
 }
 ```
@@ -400,8 +400,8 @@ while(true) {
 
 ### SET
 
-`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、フラッシュ期間の間に StatsD に送信されたメトリクスの一意の値のカウントです。
+`set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、フラッシュ期間中に StatsD に送信されたメトリクスの一意の値のカウントです。
 
 #### コード例
 
@@ -456,7 +456,7 @@ import (
     "math/rand"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -548,7 +548,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('example_metric.set', $i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', $i, 1, array('environment'=>'dev'), 'low');
     sleep(rand(0, 10));
 }
 ```
@@ -561,10 +561,10 @@ while (TRUE) {
 
 ### HISTOGRAM
 
-`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。
+`histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: 複数のメトリクスが送信されるため、保存されるメトリクス タイプ (`GAUGE`, `RATE`) はメトリクスによって異なります。詳細については、[HISTOGRAM メトリクス タイプ][6]のドキュメントを参照してください。
 
-#### 構成
+#### 設定
 
 * Datadog に送信する集計を、[datadog.yaml 構成ファイル][7]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
 * Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
@@ -619,7 +619,7 @@ import (
     "math/rand"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -683,7 +683,7 @@ public class DogStatsdClient
 
             while (true)
             {
-                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"}, Cardinality: Cardinality.High);
                 System.Threading.Thread.Sleep(2000);
             }
         }
@@ -707,7 +707,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
+    $statsd->histogram('example_metric.histogram', rand(0, 20), 1, array('environment'=>'dev'), 'low');
     sleep(2);
 }
 ```
@@ -717,7 +717,7 @@ while (TRUE) {
 
 上のインスツルメンテーションは、以下のメトリクスを生成します。
 
-| メトリクス                                  | 説明                             |
+| メトリクス                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | このメトリクスがサンプリングされた回数 |
 | `example_metric.histogram.avg`          | サンプリングされた値の平均           |
@@ -733,10 +733,10 @@ while (TRUE) {
 
 DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタイプとして実装されています（標準 StatsD に含まれるタイマーと混同しないでください）。また、コードセクションの実行にかかる時間など、タイミングデータのみを測定します。
 
-`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。
+`timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
+: 複数のメトリクスが送信されるため、保存されるメトリクス タイプ (`GAUGE`, `RATE`) はメトリクスによって異なります。詳細については、[HISTOGRAM メトリクス タイプ][6]のドキュメントを参照してください。
 
-##### 構成
+##### 設定
 
 `TIMER` には、`HISTOGRAM` [コンフィギュレーション](#configuration)ルールが適用されます。
 
@@ -822,7 +822,7 @@ while (TRUE) {
 
 DogStatsD はタイマーメトリクスデータを受け取ると、レンダリング時間の統計的分布を計算し、次のメトリクスを Datadog に送信します。
 
-| メトリクス                              | 説明                             |
+| メトリクス                              | Description                             |
 |-------------------------------------|-----------------------------------------|
 | `example_metric.timer.count`        | このメトリクスがサンプリングされた回数 |
 | `example_metric.timer.avg`          | サンプリングされた値の平均時間      |
@@ -836,8 +836,8 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 ### DISTRIBUTION
 
-`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)`
-: Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションドキュメント][8]を参照してください。
+`distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>, <CARDINALITY>)`
+: Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションに関するドキュメント][8]を参照してください。
 
 #### コード例
 
@@ -873,7 +873,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
+    statsd.distribution('example_metric.distribution', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 ```
@@ -888,7 +888,7 @@ import (
     "math/rand"
     "time"
 
-    "github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/v5/statsd"
 )
 
 func main() {
@@ -976,7 +976,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
+    $statsd->distribution('example_metric.distribution', rand(0, 20), 1, array('environment'=>'dev'), 'high');
     sleep(2);
 }
 ```
@@ -1105,13 +1105,13 @@ dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment
 `tags` 引数は文字列にすることができます。
 
 ```php
-$statsd->increment('example_metric.increment', "environment:dev,account:local");
+$statsd->increment('example_metric.increment', 1.0, "environment:dev,account:local");
 ```
 
 または配列にすることができます。
 ```php
 <?php
-$statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
+$statsd->increment('example_metric.increment', 1.0, array('environment' => 'dev', 'account' => 'local'));
 ```
 {{< /programming-lang >}}
 
@@ -1127,7 +1127,7 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', 
 
 ホストタグは、メトリクスを集計する際に Datadog Agent によって自動的に割り当てられます。Agent ホスト名と一致しないホストタグ付きで送信されたメトリクスは、本来のホストを参照できなくなります。送信されたホストタグは、Agent によって収集されたホスト名や Agent で構成されたホスト名を上書きします。
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1140,3 +1140,4 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', 
 [7]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /ja/metrics/distributions/
 [9]: /ja/metrics/types/?tab=distribution#definition
+[10]: /ja/containers/kubernetes/tag

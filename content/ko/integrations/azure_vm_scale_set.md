@@ -66,7 +66,7 @@ logs:
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_vm_scale_set" >}}
+{{< get-metrics-from-git "azure-vm-scale-set" >}}
 
 
 ### 이벤트 

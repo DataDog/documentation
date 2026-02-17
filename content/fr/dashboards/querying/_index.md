@@ -47,6 +47,8 @@ Sélectionnez votre visualisation à partir des [widgets][3] disponibles.
 
 Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`. 
 
+Il est également possible de voir des indicateurs de source Datadog ou OpenTelemetry. Si votre environnement utilise les deux, vous pouvez activer le **mode sémantique** de Datadog pour [interroger simultanément des métriques issues de Datadog et d'OpenTelemetry][18] dans un même graphique.
+
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:100%;">}}
 
 Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou un [Notebook][5], ou consultez la liste des métriques sur la page [Metrics Summary][6].
@@ -58,9 +60,9 @@ La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'
 {{< img src="dashboards/querying/filter-3.png" alt="Filtrer le graphique avec le champ 'from', à l'aide de template variables et d'une logique booléenne" style="width:100%;" >}}
 
 - Utilisez le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards.
-- Filtrez de façon dynamique des requêtes grâce aux template variables. Ajoutez le caractère `$` devant la clé d'un tag pour filtrer automatiquement le graphique en fonction du tag sélectionné dans la liste déroulante des template variables. Pour en savoir plus, consultez la section [Template variables][16].
+- Filtrez de façon dynamique des requêtes grâce aux template variables. Ajoutez le caractère `$` devant la clé d'un tag pour filtrer automatiquement le graphique en fonction du tag sélectionné dans la liste déroulante des template variables. Pour en savoir plus, consultez la section [Template variables][8].
 
-Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][8].
+Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][9].
 
 ### Agréger et cumuler des données
 
@@ -72,9 +74,9 @@ La méthode d'agrégation est indiquée à côté de la liste déroulante du fil
 
 Indépendamment des options précédemment choisies, en raison des contraintes de taille physique de la fenêtre du graphique, les données font toujours l'objet d'une certaine agrégation. Si une métrique est mise à jour toutes les secondes et que vous consultez 4 heures de données, vous avez besoin d'afficher 14 400 points pour tout représenter. Chaque graphique illustre environ 300 points à la fois. Ainsi, chaque point de données affiché à l'écran représente 48 points de données.
 
-Dans la pratique, les métriques sont recueillies par l'Agent toutes les 15 à 20 secondes. Ainsi, un jour de données représente 4 320 points. Si vous représentez les données d'un jour entier sur un seul graphique, les données sont automatiquement cumulées par Datadog. Pour en savoir plus sur l'agrégation temporelle, consultez la page [Présentation des métriques][9]. Consultez la documentation sur la fonction [Rollup][10] pour en savoir plus sur les intervalles de cumul et découvrir comment Datadog effectue automatiquement un cumul des points de données.
+Dans la pratique, les métriques sont recueillies par l'Agent toutes les 15 à 20 secondes. Ainsi, un jour de données représente 4 320 points. Si vous représentez les données d'un jour entier sur un seul graphique, les données sont automatiquement cumulées par Datadog. Pour en savoir plus sur l'agrégation temporelle, consultez la page [Présentation des métriques][10]. Consultez la documentation sur la fonction [Rollup][11] pour en savoir plus sur les intervalles de cumul et découvrir comment Datadog effectue automatiquement un cumul des points de données.
 
-Pour cumuler manuellement les données, utilisez la [fonction rollup][11]. Cliquez sur l'icône Sigma pour ajouter une fonction et sélectionnez `rollup` dans le menu déroulant. Choisissez ensuite la méthode d'agrégation de vos données ainsi que l'intervalle en secondes.
+Pour cumuler manuellement les données, utilisez la [fonction rollup][12]. Cliquez sur l'icône Sigma pour ajouter une fonction et sélectionnez `rollup` dans le menu déroulant. Choisissez ensuite la méthode d'agrégation de vos données ainsi que l'intervalle en secondes.
 
 Cette requête crée une ligne unique représentant l'espace disque total disponible en moyenne sur l'ensemble des machines déployées, avec un intervalle de cumul des données de 1 minute :
 
@@ -133,15 +135,22 @@ Après la méthode d'agrégation, vous pouvez déterminer ce qui constitue une l
 
 En outre, vous pouvez cliquer sur les tags dans la liste déroulante utilisée pour [définir la métrique](#definir-la-metrique) afin de regrouper et d'agréer vos données.
 
+### Requêtes imbriquées
+
+La fonctionnalité de requêtes imbriquées de Datadog vous permet d'ajouter des niveaux supplémentaires d'agrégation temporelle et/ou spatiale sur les résultats de requêtes de métriques existantes. Cette capacité avancée permet également de calculer des percentiles ou écarts types sur les résultats agrégés de métriques de type count/rate/gauge, et d'accéder à des requêtes haute résolution sur des périodes historiques.
+
+Pour plus d'informations, consultez la documentation sur les [requêtes imbriquées][13].
+
+
 ### Créer des graphiques avancés
 
-En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Référez-vous à la [liste des fonctions disponibles][12].
+En fonction de vos besoins d'analyse, vous pouvez choisir d'appliquer d'autres fonctions mathématiques à votre requête. Vous pouvez par exemple calculer les taux et les dérivées, appliquer un lissage, et plus encore. Référez-vous à la [liste des fonctions disponibles][14].
 
 Datadog vous permet également de représenter graphiquement vos métriques, logs, traces et autres sources de données avec différentes opérations arithmétiques. Utilisez les options `+`, `-`, `/`, `*`, `min`, and `max` pour modifier les valeurs affichées sur vos graphiques. Cette syntaxe accepte à la fois des nombres entiers et des opérations arithmétiques sur plusieurs métriques.
 
 Pour représenter les métriques séparément, ajoutez une virgule (`,`). Par exemple, `a, b, c`.
 
-**Remarque** : les requêtes utilisant des virgules sont uniquement prises en charge dans les visualisations et ne fonctionnent pas sur les monitors. Utilisez des [opérateurs booléens][13] ou des opérations arithmétiques pour combiner plusieurs métriques dans un monitor.
+**Remarque** : les requêtes utilisant des virgules sont uniquement prises en charge dans les visualisations et ne fonctionnent pas sur les monitors. Utilisez des [opérateurs booléens][15] ou des opérations arithmétiques pour combiner plusieurs métriques dans un monitor.
 
 #### Opérations arithmétiques avec un entier
 
@@ -210,7 +219,7 @@ Cliquez sur **Done** pour enregistrer votre travail et quitter l'éditeur. Vous 
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Widget Série temporelle affichant les taux d'erreurs RUM avec les événements de déploiement en superposition" style="width:100%;" >}}
 
-Identifiez les corrélations avec vos événements à l'aide de la section **Event Overlays** dans l'éditeur de graphiques pour la visualisation de [Séries temporelles][15]. Dans la barre de recherche, saisissez du texte ou une requête de recherche structurée. La recherche d'événements utilise la [syntaxe de recherche de logs][14].
+Identifiez les corrélations avec vos événements à l'aide de la section **Event Overlays** dans l'éditeur de graphiques pour la visualisation de [Séries temporelles][16]. Dans la barre de recherche, saisissez du texte ou une requête de recherche structurée. La recherche d'événements utilise la [syntaxe de recherche de logs][17].
 
 La superposition d'événements prend en charge toutes les sources de données. Vous pouvez ainsi facilement mettre en corrélation les événements au sein de votre entreprise avec les données de n'importe quel service Datadog.
 
@@ -242,12 +251,14 @@ Les graphiques partagés vous permettent de visualiser des représentations d'un
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
 [7]: /fr/metrics/advanced-filtering/
-[8]: /fr/getting_started/tagging/
-[9]: /fr/metrics/#time-aggregation
-[10]: /fr/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /fr/dashboards/functions/rollup/
-[12]: /fr/dashboards/functions/#function-types
-[13]: /fr/metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /fr/logs/explorer/search_syntax/
-[15]: /fr/dashboards/widgets/timeseries/#event-overlay
-[16]: /fr/dashboards/template_variables/
+[8]: /fr/dashboards/template_variables/
+[9]: /fr/getting_started/tagging/
+[10]: /fr/metrics/#time-aggregation
+[11]: /fr/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[12]: /fr/dashboards/functions/rollup/
+[13]: /fr/metrics/nested_queries/
+[14]: /fr/dashboards/functions/#function-types
+[15]: /fr/metrics/advanced-filtering/#boolean-filtered-queries
+[16]: /fr/dashboards/widgets/timeseries/#event-overlay
+[17]: /fr/logs/explorer/search_syntax/
+[18]: /fr/metrics/open_telemetry/query_metrics

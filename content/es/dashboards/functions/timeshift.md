@@ -1,6 +1,9 @@
 ---
 aliases:
 - /es/graphing/functions/timeshift/
+description: Compara los valores actuales de las métricas con los datos históricos
+  mediante las funciones de cambio temporal, desplazamiento de calendario y comparación
+  basada en el tiempo.
 further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
   tag: FAQ
@@ -51,7 +54,7 @@ Este es un ejemplo de `system.load.1` con el valor `hour_before()` mostrado como
 
 ## Día anterior
 
-<div class="alert alert-danger">La función de día anterior está obsoleta. En su lugar, utiliza el desplazamiento del calendario con un valor de "-1d".</div>
+<div class="alert alert-warning">La función de día anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-1d".</div>
 
 | Función       | Descripción                                                          | Ejemplo                        |
 |:---------------|:---------------------------------------------------------------------|:-------------------------------|
@@ -63,7 +66,7 @@ Este es un ejemplo de `nginx.net.connections` con el valor de `day_before()` mos
 
 ## Semana anterior
 
-<div class="alert alert-danger">La función de semana anterior está obsoleta. En su lugar, utiliza el desplazamiento del calendario con un valor de "-7d".</div>
+<div class="alert alert-warning">La función de semana anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-7d".</div>
 
 | Función        | Descripción                                                                    | Ejemplo                         |
 |:----------------|:-------------------------------------------------------------------------------|:--------------------------------|
@@ -75,7 +78,7 @@ Este es un ejemplo de `cassandra.db.read_count` con el valor de `week_before()` 
 
 ## Mes anterior
 
-<div class="alert alert-danger">La función de mes anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-1mo", "-30d" o "-4w", en función de tu caso de uso.</div>
+<div class="alert alert-warning">La función de mes anterior está obsoleta. En su lugar, utiliza el desplazamiento de calendario con un valor de "-1mo", "-30d" o "-4w", en función de tu caso de uso.</div>
 
 | Función         | Descripción                                                                                | Ejemplo                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|

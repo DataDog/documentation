@@ -1,5 +1,6 @@
 ---
 title: Legacy Kubernetes versions
+description: Installation instructions and configuration for Datadog Agent on legacy Kubernetes versions prior to 1.7.6
 aliases:
     - /agent/kubernetes/legacy
     - /agent/faq/kubernetes-legacy

@@ -1,77 +1,23 @@
 ---
 app_id: census
-app_uuid: 7f4f3919-5b0a-4b4b-93e5-7f0c035f3887
-assets:
-  dashboards:
-    Census Overview: assets/dashboards/census_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check:
-      - census.syncs.rows_processed
-      - census.syncs.sync_completed
-      metadata_path: metadata.csv
-      prefix: census
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10336
-    source_type_name: Census
-  oauth: assets/oauth_clients.json
-author:
-  homepage: https://www.getcensus.com/
-  name: Census
-  sales_email: sales@getcensus.com
-  support_email: support@getcensus.com
 categories:
 - automatización
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/census/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: census
-integration_id: census
-integration_title: Census
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: census
-public_title: Census
-short_description: Envía tus métricas y eventos sincronizadas de Census a Datadog.
+description: Envía tus métricas y eventos sincronizadas de Census a Datadog.
+integration_version: 1.0.0
+media:
+- caption: Dashboard con información general de sincronización de Census
+  image_url: images/census_dashboard.png
+  media_type: imagen
 supported_os:
 - Linux
 - Windows
 - macOS
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Categoría::Automatización
-  - Oferta::Integración
-  - Tipo de datos enviados::Eventos
-  - Tipo de datos enviados::Métricas
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  configuration: README.md#Configuración
-  description: Envía tus métricas y eventos sincronizadas de Census a Datadog.
-  media:
-  - caption: Dashboard con información general de sincronización de Census
-    image_url: images/census_dashboard.png
-    media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Census
+title: Census
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-[Census][1] es una plataforma ETL inversa que convierte tu almacén de datos en un centro de operaciones comerciales y empresariales, proporcionando a los equipos datos fiables y procesables. Sincroniza datos desde una fuente auténtica, como un almacén de datos, a un sistema de acciones como la Gestión de la relación con clientes (CRM), una plataforma de publicidad u otra aplicación SaaS, para volver operativos los datos.
+[Census](https://www.getcensus.com/) es una plataforma ETL inversa que convierte tu almacén de datos en un centro de operaciones comerciales y de marketing, lo que permite a los equipos disponer de datos fiables y procesables. Sincroniza los datos de una fuente de verdad como un almacén de datos a un sistema de acciones como un CRM, una plataforma de publicidad u otra aplicación SaaS para operacionalizar los datos.
 
 Census se integra con Datadog para ofrecer a los desarrolladores la posibilidad de monitorizar sus flujos de trabajo de Census y realizar un seguimiento del número de sincronizaciones exitosas y fallidas. Esta integración envía [métricas](##metrics) y eventos a Datadog desde Census.
 
@@ -81,11 +27,11 @@ Para habilitar esta integración, se requiere una suscripción de nivel Census P
 
 ## Configuración
 
-1. Inicia sesión en tu [cuenta de Census][2].
-2. Ve al espacio de trabajo de Census que quieres conectar a tu cuenta de Datadog.
-3. Ve a la pestaña de configuración del espacio de trabajo y haz clic en **Configure** (Configurar) en el cuadro de Datadog.
-4. Haz clic en **Connect** (Conectar) para conectarte a tu cuenta de Datadog mediante OAuth2.
-5. Vuelve a Datadog y abre el dashboard Census predefinido.
+1. Inicia sesión en tu [cuenta de Census](https://app.getcensus.com/).
+1. Ve al espacio de trabajo de Census que quieres conectar a tu cuenta de Datadog.
+1. Ve a la pestaña de configuración del espacio de trabajo y haz clic en **Configure** (Configurar) en el cuadro de Datadog.
+1. Haz clic en **Connect** (Conectar) para conectarte a tu cuenta de Datadog mediante OAuth2.
+1. Vuelve a Datadog y abre el dashboard Census predefinido.
 
 ### Validación
 
@@ -94,10 +40,13 @@ Ejecuta una sincronización en tu espacio de trabajo Census y consulta las métr
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "census" >}}
 
+| | |
+| --- | --- |
+| **census.syncs.rows_processed** <br>(count) | Número de filas procesadas por una sola sincronización.<br>_Se muestra como elemento_ |
+| **census.syncs.sync_completed** <br>(count) | Número de sincronizaciones completadas.<br>_Se muestra como unidad_ |
 
-### Checks de servicios
+### Checks de servicio
 
 Census no incluye checks de servicios.
 
@@ -105,11 +54,6 @@ Census no incluye checks de servicios.
 
 Esta integración envía eventos de finalización de sincronizaciones a Datadog.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
-
-[1]: https://www.getcensus.com/
-[2]: https://app.getcensus.com/
-[3]: https://github.com/DataDog/integrations-extras/blob/master/census/metadata.csv
-[4]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

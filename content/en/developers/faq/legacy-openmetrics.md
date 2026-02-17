@@ -42,7 +42,7 @@ instances:
 
 ### Configuration
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 

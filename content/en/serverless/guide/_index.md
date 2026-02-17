@@ -18,6 +18,8 @@ cascade:
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/opentelemetry" >}}Serverless and OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/disable_serverless" >}}Disable Serverless Monitoring{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/disable_cloudwatch_logs" >}}Disable CloudWatch Logs for Lambda Functions{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure App Service and Container Apps" >}}

@@ -7,29 +7,29 @@ further_reading:
   text: Más información sobre Deployment Visibility
 - link: /continuous_delivery/explorer
   tag: Documentación
-  text: Aprende a consultar y visualizar las ejecuciones de despliegue
+  text: Aprende a consultar y visualizar los despliegues
 is_beta: true
 title: Monitorizar los despliegues de proveedores de CI
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="¡Únete a la vista previa!" >}}
-CD Visibility para despliegues de proveedor de CI está en vista previa. Si te interesa esta característica, completa el formulario para acceder.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Únete a la vista previa" >}}
+CD Visibility para los despliegues del proveedor de CI está en vista previa. Si estás interesado en esta función, completa el formulario para solicitar acceso.
 {{< /callout >}}
 
 ## Información general
 
-Se pueden realizar [Despliegues][10] en tus pipelines de integración continua (CI). En general, estos pipelines tienen un paso de despliegue que se ejecuta después que el código fuente se pruebe y la imagen esté creada.
+Los [Despliegues][10] pueden realizarse en tus pipelines de integración continua (CI). Típicamente, estos pipelines tienen un paso de despliegue que se ejecuta después de que el código fuente se testea y la imagen se construye.
 
-Si estás ejecutando despliegues mediante un proveedor de CI, puedes monitorizar tus despliegues con Deployment Visibility. Asegúrate de que se cumplan los siguientes requisitos:
+Si estás ejecutando despliegues utilizando un proveedor de CI, puedes monitorizar tus despliegues con Deployment Visibility. Asegúrate de que se cumplen los siguientes requisitos:
 
-1. Estás usando [Pipeline Visibility][1] para monitorizar tus pipelines de CI.
-2. Tu proveedor de CI admite la característica **Custom tags and measures at runtime** (Etiquetas y medidas personalizadas en el tiempo de ejecución), que te permite añadir [texto y etiquetas numéricas definidas por el usuario][2] a los pipelines y trabajos en Pipeline Visibility. 
-3. Estás ejecutando despliegues en un trabajo de CI (o un [nivel relacionado][9] en tu proveedor de CI). El concepto de un trabajo de CI puede variar según tu proveedor. Para obtener más información sobre cómo Datadog define un trabajo de Ci, consulta la [sección Terminología][9].
+1. Estás utilizando [Pipeline Visibility][1] para monitorizar tus pipelines de CI.
+2. Tu proveedor de CI admite la función **Etiquetas y medidas personalizadas en tiempo de ejecución**, que te permite añadir [etiquetas numéricas y de texto definidas por el usuario][2] a pipelines y trabajos en Pipeline Visibility.
+3. Estás ejecutando despliegues en un trabajo de CI (o un [nivel relacionado][9] en tu proveedor de CI). El concepto de un trabajo de CI puede variar dependiendo de tu proveedor. Para más información sobre cómo Datadog define un trabajo de CI, consulta la [sección Terminología][9].
 
-## Configuración
+## Configurar
 
 <div class="alert alert-info">
-La configuración requiere la CLI <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> versión </a> `2.26.0` o posterior.
+La configuración requiere la versión <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>de la CLI</code> de datadog-ci</a> `2.26.0` o posterior.
 </div>
 
 Para configurar CD Visibility, utiliza el comando `datadog-ci deployment mark` dentro del trabajo de CI que está realizando el despliegue.
@@ -55,8 +55,8 @@ Utiliza `--no-fail` (por defecto: `false`) para evitar que el comando de desplie
 
 Si estás utilizando acciones de GitHub como tu proveedor de CI, consulta la [sección siguiente][11] para consideraciones adicionales.
 
-Una vez que hayas añadido el comando a un trabajo de CI, la [página **Deployments** (Despliegues)][5] y el [Deployment Executions Explorer][6] se rellenan con datos después de que se ejecuten los pipelines.
-Para obtener más información, consulta [Buscar y gestionar despliegues][7] y la [documentación del CD Visibility Explorer][8].
+Una vez que hayas añadido el comando a un trabajo de CI, la [página **Despliegues**][5] y la [página Ejecuciones de despliegue][6] se rellenan con datos después de que se ejecuten pipelines.
+Para obtener más información, consulta [Explorar despliegues de CD Visibility][8].
 
 ### Ejemplos
 
@@ -120,7 +120,7 @@ la variable de entorno `DD_GITHUB_JOB_NAME` necesita ser expuesta, apuntando al 
         - run: datadog-ci deployment mark ...
     ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

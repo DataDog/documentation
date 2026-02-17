@@ -66,7 +66,7 @@ Datadog Azure インテグレーションを使用して、Azure Stream Analytic
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_stream_analytics" >}}
+{{ get-metrics-from-git "azure-streamanalytics" }}
 
 
 ### イベント

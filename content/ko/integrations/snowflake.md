@@ -69,7 +69,7 @@ tile:
 
 ## 개요
 
-이 검사는 Datadog Agent를 통해 [Snowflake][1]를 모니터링합니다. Snowflake는 SaaS 분석 데이터 웨어하우스이며 완전히 클라우드 인프라스트럭처에서 실행됩니다. 
+이 검사는 Datadog Agent를 통해 [Snowflake][1]를 모니터링합니다. Snowflake는 SaaS 분석 데이터 웨어하우스이며 완전히 클라우드 인프라스트럭처에서 실행됩니다.
 이 통합은 크레딧 사용량, 청구, 저장용량, 쿼리 메트릭 등을 모니터링합니다.
 
 <div class="alert alert-info"><bold>참고</bold>: 메트릭은 Snowflake에 대한 쿼리를 통해 수집됩니다. Datadog 통합으로 생성된 쿼리는 Snowflake에서 청구 가능합니다..</div>
@@ -85,7 +85,7 @@ Snowflake 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
 **참고**: Python 2를 사용하는 Datadog Agent v6에서는 Snowflake 검사를 사용할 수 없습니다. Agent v6에서 Snowflake를 사용하려면 [Datadog Agent v6에서 Python 3 사용][3]을 참조하거나 Agent v7로 업그레이드하세요.
 
 ### 구성
-<div class="alert alert-warning">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세히 알아보려면 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.</div>
+<div class="alert alert-danger">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세히 알아보려면 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.</div>
 
 1. Snowflake를 모니터링하려면 Datadog 특정 역할과 사용자를 생성하세요. Snowflake에서 다음을 실행하여 ACCOUNT_USAGE 스키마에 대한 액세스 권한이 있는 커스텀 역할을 생성합니다.
 
@@ -172,7 +172,7 @@ Snowflake 검사는 [Datadog Agent][2] 패키지에 포함되어 있습니다.
         # disable_generic_tags: true
     ```
 
-    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour. 
+    <div class="alert alert-info">In the default `conf.yaml`, the <code>min_collection_interval</code> is 1 hour.
     Snowflake metrics are aggregated by day, you can increase the interval to reduce the number of queries.<br>
     <bold>Note</bold>: Snowflake ACCOUNT_USAGE views have a <a href="https://docs.snowflake.com/en/sql-reference/account-usage.html#data-latency">known latency</a> of 45 minutes to 3 hours.</div>
 
@@ -251,7 +251,7 @@ Snowflake에서는 [프록시 구성을 위한 환경 변수][7] 설정을 권�
 
 [snowflake.d/conf.yaml][5]의 `init_config`에서 `proxy_host`, `proxy_port`, `proxy_user`, `proxy_password`를 설정할 수 있습니다.
 
-**참고**: Snowflake는 자동으로 프록시 구성 형식을 지정하고 [표준 프록시 환경 변수][8]를 설정합니다. 
+**참고**: Snowflake는 자동으로 프록시 구성 형식을 지정하고 [표준 프록시 환경 변수][8]를 설정합니다.
 이러한 변수는 Docker, ECS, Kubernetes와 같은 오케스트레이터를 포함한 통합의 모든 요청에도 영향을 미칩니다.
 
 #### Snowflake 구성에 대한 프라이빗 연결
@@ -344,7 +344,7 @@ custom_queries:
 </div>
 
 ### 메트릭
-{{< get-metrics-from-git "snowflake" >}}
+{{< get-metrics-from-git "snowflake-web" >}}
 
 
 ### 이벤트
@@ -352,12 +352,12 @@ custom_queries:
 Snowflake는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "snowflake" >}}
+{{< get-service-checks-from-git "snowflake-web" >}}
 
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][17]에 문의해 주세요. 
+도움이 필요하신가요? [Datadog 지원팀][17]에 문의해 주세요.
 
 ## 참고 자료
 

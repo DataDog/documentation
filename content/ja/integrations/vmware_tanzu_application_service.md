@@ -150,7 +150,7 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 
 メトリクスのリストは、PCF のバージョンおよびデプロイにより異なります。Datadog では、[Loggregator v2 API][19] から送信されるカウンターおよびゲージのメトリクスを収集します。デフォルトで送信されるメトリクスの一覧は、[Cloud Foundry コンポーネント メトリクス][20]を参照してください。
 
-{{< get-metrics-from-git "cloud_foundry" >}}
+{{< get-metrics-from-git "cloud-foundry" >}}
 
 ## その他の参考資料
 

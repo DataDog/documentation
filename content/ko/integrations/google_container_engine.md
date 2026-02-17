@@ -25,14 +25,14 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 본 통합은 지원 중단되었습니다. 대신 <a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">Google 쿠버네티스(Kubernetes) 엔진 통합</a> 지침을 참조하세요. 지원 중단된 메트릭에 대한 자세한 내용을 확인하려면 <a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">Google Cloud 메트릭</a> 문서를 참조하세요.
 </div>
 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_container_engine" >}}
+{{< get-metrics-from-git "google-container-engine" >}}
 
 
 ### 이벤트

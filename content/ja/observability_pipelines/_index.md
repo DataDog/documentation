@@ -32,7 +32,7 @@ title: Observability Pipelines（観測データの制御）
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">Observability Pipelines は、US1-FED Datadog サイトでは使用できません。</div>
+<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトでは使用できません。</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">

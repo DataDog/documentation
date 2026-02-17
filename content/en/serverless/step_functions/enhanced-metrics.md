@@ -2,7 +2,7 @@
 title: Enhanced metrics for AWS Step Functions
 ---
 
-In addition to [ingesting integration metrics from AWS][3], Datadog generates enhanced metrics for AWS Step Functions, similar to [enhanced metrics for AWS Lambda][1]. Enhanced Step Functions metrics are distinguished by being in the `aws.states.enhanced.*` namespace. To add enhanced metrics, follow the [AWS Step Function monitoring installation instructions][3] and ensure that `DD_ENHANCED_METRICS` is set to `true`. 
+In addition to [ingesting integration metrics from AWS][3], Datadog generates enhanced metrics for AWS Step Functions, similar to [enhanced metrics for AWS Lambda][1]. Enhanced Step Functions metrics are distinguished by being in the `aws.states.enhanced.*` namespace. To add enhanced metrics, follow the [AWS Step Function monitoring installation instructions][3] and ensure that `DD_ENHANCED_METRICS` is set to `true`.
 
 The following enhanced Step Functions metrics are available.
 
@@ -38,6 +38,12 @@ The following enhanced Step Functions metrics are available.
 
 `aws.states.enhanced.state.invocation_count`
 : Count of the number of times a state is invoked.
+
+`aws.states.enhanced.state.succeeded`
+: Count of the number of times a state has succeeded.
+
+`aws.states.enhanced.state.failed`
+: Count of the number of times a state has failed.
 
 `aws.states.enhanced.state.retry_count`
 : Gauge of the number of retries for a state.

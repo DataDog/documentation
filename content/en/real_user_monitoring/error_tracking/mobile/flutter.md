@@ -155,9 +155,9 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
+[5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/flutter-symbols
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [7]: https://docs.flutter.dev/deployment/flavors
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html

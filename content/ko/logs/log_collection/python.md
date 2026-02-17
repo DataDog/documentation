@@ -7,19 +7,19 @@ further_reading:
   text: Python으로 로그를 수집, 사용자 지정, 중앙화하는 방법 알아보기
 - link: /logs/log_configuration/processors
   tag: 설명서
-  text: 로그 처리하는 방법 배우기
+  text: 로그 처리 방법
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 파싱에 대해 알아보기
 - link: /logs/explorer/
   tag: 설명서
   text: 로그 탐색 방법 알아보기
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: 설명서
-  text: 로그 수집 트러블슈팅 가이드
+  text: 로그 수집 문제 해결 가이드
 - link: /glossary/#tail
   tag: 용어
-  text: '"tail"에 대한 용어 항목'
+  text: '"tail" 관련 용어 항목'
 title: Python 로그 수집
 ---
 
@@ -67,7 +67,7 @@ Python 로그는 트레이스백으로 인해 처리하기 복잡할 수 있습�
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-3. [에이전트를 재시작합니다][5].
+3. [Agent를 재시작합니다][5].
 4. [에이전트 상태 하위 명령][9]을 실행하고 `Checks` 섹션에서 `python`를 찾아 로그가 Datadog에 전송되었는지 확인합니다.
 
 로그가 JSON 형식이면 Datadog은 자동으로 [로그 메시지를 파싱][10]하여 로그 속성을 추출합니다. [로그 탐색기][11]로 로그를 확인하고 문제를 해결하세요.
@@ -130,7 +130,7 @@ Python 로그는 트레이스백으로 인해 처리하기 복잡할 수 있습�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/
-[2]: https://github.com/madzak/python-json-logger
+[2]: https://github.com/nhairs/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /ko/tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /ko/agent/configuration/agent-commands/

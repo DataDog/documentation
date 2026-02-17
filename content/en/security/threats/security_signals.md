@@ -37,22 +37,22 @@ You can triage a signal by assigning it to a user for further investigation. The
 ## Create a case
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Use [Case Management][6] to track, triage, and investigate security signals.
 
 1. On the [Signals Explorer][4], select a security signal.
-2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Create a case**. Alternatively, select **Add to an existing case** to add the signal to an existing case. 
+2. On the signal side panel, click the **Escalate Investigation** dropdown menu and select **Create a case**. Alternatively, select **Add to an existing case** to add the signal to an existing case.
 3. Enter a title and optional description.
 4. Click **Create Case**.
 
-## Declare an incident 
+## Declare an incident
 
 Use [Incident Management][5] to create an incident for a security signal.
 
 1. On the [Signals Explorer][4], select a security signal.
-1. On the signal side panel under *Next Steps*, click the **Show all actions** dropdown menu and select **Declare incident**. 
+1. On the signal side panel under *Next Steps*, click the **Show all actions** dropdown menu and select **Declare incident**.
 1. Alternatively, select **Add to incident** to add the signal to an existing incident.
 1. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
 4. Click **Declare Incident**.
@@ -74,9 +74,9 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 [1]: /security/notifications/rules/
 [2]: /account_management/audit_trail/events/#cloud-security-platform-events
 [3]: /account_management/rbac/permissions/#cloud-security-platform
-[4]: https://app.datadoghq.com/security?product=cws
-[5]: /service_management/incident_management/
-[6]: /service_management/case_management/
+[4]: https://app.datadoghq.com/security/workload-protection/signals
+[5]: /incident_response/incident_management/
+[6]: /incident_response/case_management/
 [7]: /security/cloud_security_management/workflows
 [8]: /service_management/workflows
 [9]: /security/workload_protection/

@@ -51,7 +51,7 @@ HTTP 요청에 대한 HMAC 서명을 생성하려면 ***Variable From Script**�
 * 변수를 정의하려면 `dd.variable.set("<variable_name>", <value>)` 또는 `dd.variable.setObfuscated("<variable_name>", <value>)`를 사용합니다.
 
 다음과 같은 헬퍼 함수에도 액세스할 수 있습니다.
-* 대부분의 [`std` 라이브러리][5]는 `std.*`로 접근할 수 있습니다. 예를 들어 `<std>/encoding/hex.ts`에 정의된 `encodeHex` 함수를 호출하려면 `std.encoding.hex.encodeHex`를 사용합니다.
+* [`std` 라이브러리][5]의 대부분은 `std.*`를 사용하여 접근할 수 있습니다. 예를 들어, `@std/encoding/hex.ts`에 정의된 `encodeHex` 함수를 호출하려면 `std.encoding.hex.encodeHex`를 사용합니다.
 * [Web Crypto API][6]와 같은 표준 JavaScript API.
 
 *참고**: 이러한 API 중 일부는 보안상의 이유로 비활성화되어 있습니다.
@@ -105,5 +105,5 @@ dd.variable.set("SIGNATURE_BASE64", std.encoding.base64.encode(rawSignature));
 [2]: /ko/synthetics/api_tests/http_tests/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /ko/synthetics/settings/?tab=specifyvalue#global-variables
-[5]: https://deno.land/std@0.206.0?doc
+[5]: https://jsr.io/@std
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Crypto

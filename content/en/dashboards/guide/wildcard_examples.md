@@ -1,5 +1,6 @@
 ---
 title: Wildcard Widget Examples
+description: Explore example visualizations and use cases for Wildcard widgets using Vega-Lite to create custom charts.
 further_reading:
 - link: "/dashboards/widgets/wildcard"
   tag: "Documentation"

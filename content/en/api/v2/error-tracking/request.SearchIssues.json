@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "query": "service:orders-* AND @language:go",
+      "from": 1671612804000,
+      "to": 1671620004000,
+      "track": "trace"
+    },
+    "type": "search_request"
+  }
+}

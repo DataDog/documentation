@@ -9,13 +9,13 @@ title: Cumplimiento del estándar PCI DSS
 ---
 
 {{% site-region region="us3,us5,eu,ap1,gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La conformidad con el PCI DSS para APM y Log Management sólo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El cumplimiento con el PCI DSS para APM y Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 
@@ -31,7 +31,7 @@ Datadog ofrece Log Management and Application Performance Monitoring (APM) confo
 
 {{% tab "Log Management" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> debe estar activado y permanecer activado para cumplir el estándar PCI DSS.
 </div>
 
@@ -43,7 +43,7 @@ Para crear una organización de Datadog que cumpla el estándar PCI, sigue estos
 
 {{% tab "APM" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> debe estar activado y permanecer activado para cumplir el estándar PCI DSS.
 </div>
 

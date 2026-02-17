@@ -38,7 +38,7 @@ Agent DogStatsD UDS を有効にするには
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-<div class="alert alert-warning"><strong>注</strong>: Agent のインストールスクリプトは自動的に適切な権限を持つソケットファイルを作成し、<code>use_dogstatsd: true</code> および <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> がデフォルトで設定されています。</div> 
+<div class="alert alert-danger"><strong>注</strong>: Agent のインストールスクリプトは自動的に適切な権限を持つソケットファイルを作成し、<code>use_dogstatsd: true</code> および <code>dogstatsd_socket: "/var/run/datadog/dsd.socket"</code> がデフォルトで設定されています。</div> 
 
 1. DogStatsD がリスニングソケットとして使用するソケットファイルを作成します。例:
    ```shell

@@ -34,7 +34,7 @@ El panel **Test** (Prueba) de la izquierda enumera las facetas predeterminadas q
 | Defectuosa | Muestra tanto un estado aprobado como de error en varias ejecuciones de prueba para el mismo commit. |
 | Tiene parámetros | Si una prueba tiene o no parámetros: `true` o `false`, respectivamente. |
 | Se considera defectuosa | Si se sabe o no que una prueba es defectuosa: `true` o `false`, respectivamente. <br><br>La ejecución de esta prueba ha fallado y la prueba se identifica como defectuosa en la rama actual o en la rama predeterminada. |
-| Lenguaje | El lenguaje de programación de la biblioteca desde la que se generó la prueba. |
+| Lenguaje | El lenguaje de programación de la librería desde la que se generó la prueba. |
 | Defectuosa por primera vez | Si esta prueba defectuosa se ha producido antes o no: `true` o `false`. <br><br>La ejecución de la prueba identifica la prueba como defectuosa en el commit. La prueba no se identificó previamente como prueba defectuosa en la rama actual o en la rama predeterminada. |
 | Regresión del rendimiento | Una ejecución de prueba se marca como regresión cuando su duración quintuplica el promedio o es mayor que la duración máxima para la misma prueba en la rama predeterminada. |
 | Media de referencia | Para la regresión de una prueba, indica la duración media de la misma prueba en la rama predeterminada calculada en función de la última semana de ejecuciones de prueba. |
@@ -46,7 +46,7 @@ El panel **Test** (Prueba) de la izquierda enumera las facetas predeterminadas q
 | Huella digital de la prueba | El identificador único de una ejecución de prueba individual. |
 | Marco de pruebas | El marco subyacente o el conjunto de herramientas utilizadas para crear y ejecutar pruebas. |
 | Comando de prueba | El comando que se utilizó para ejecutar las pruebas. |
-| Paquete de pruebas | Equivale a un módulo de pruebas. Se utiliza en las versiones anteriores de la biblioteca de pruebas de Datadog. |
+| Paquete de pruebas | Equivale a un módulo de pruebas. Se utiliza en las versiones anteriores de la librería de pruebas de Datadog. |
 | Nombre completo de la prueba | El nombre completo de la prueba. |
 | Módulo de pruebas | El módulo de la prueba, que varía en función del lenguaje:<br><br>En .NET, un módulo de pruebas agrupa todas las pruebas que se ejecutan en el mismo proyecto de pruebas unitarias.<br>En Swift, un módulo de pruebas agrupa todas las pruebas que se ejecutan para un paquete determinado.<br>En JavaScript, los módulos de pruebas se asignan de forma individual a las sesiones de prueba.<br>En Java, un módulo de pruebas agrupa todas las pruebas que se ejecutan en la misma tarea de Maven Surefire, Failsafe o Gradle Test.<br>En Python, un módulo de pruebas agrupa todas las pruebas que se ejecutan con el mismo archivo `.py` como parte de un conjunto de pruebas, el cual suele gestionarse mediante un marco como `unittest` o `pytest`.<br>En Ruby, un módulo de pruebas agrupa todas las pruebas que se ejecutan dentro del mismo archivo de prueba, el cual suele gestionarse mediante un marco como `RSpec` o `Minitest`. |
 | Rasgos de la prueba | Los rasgos de la prueba, como `category:flaky`. |
@@ -134,7 +134,7 @@ Selecciona un tipo de visualización para visualizar los resultados de los filtr
 [10]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
 [11]: https://github.com/DataDog/datadog-ci/blob/6de6ea3bbffa57d8576422535061ca35c759feb6/src/commands/junit/__tests__/upload.test.ts
 [12]: /es/glossary/?product=ci-cd#test-service
-[13]: /es/glossary/?product=ci-cd#test-suite 
+[13]: /es/glossary/?product=ci-cd#test-suite
 [14]: /es/real_user_monitoring/
 [15]: /es/tests/early_flake_detection/
 [16]: /es/intelligent_test_runner/

@@ -249,7 +249,7 @@ Le moteur d'allocations ne dépend pas du paramètre `/proc/sys/kernel/perf_even
 
 Si les moteurs de CPU ou wall clock du profileur Datadog sont activés, vous pouvez recueillir des stack traces natives. Celles-ci comprennent les composants internes des JVM, les bibliothèques natives utilisées par votre application ou par la JVM, ainsi que les appels système.
 
-<div class="alert alert-warning">Les stack traces natives ne sont pas recueillies par défaut, car elles ne permettent généralement pas d'obtenir d'informations exploitables. De plus, les stacks natives parcourues peuvent potentiellement nuire à la stabilité de l'application. Testez ce paramètre dans un environnement hors production avant de l'implémenter en production.
+<div class="alert alert-danger">Les stack traces natives ne sont pas recueillies par défaut, car elles ne permettent généralement pas d'obtenir d'informations exploitables. De plus, les stacks natives parcourues peuvent potentiellement nuire à la stabilité de l'application. Testez ce paramètre dans un environnement hors production avant de l'implémenter en production.
 
 Pour activer la collecte de stack traces natives, malgré le fait que cela puisse avoir une incidence sur la stabilité de votre application, définissez ce qui suit :
 

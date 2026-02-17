@@ -173,7 +173,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "ibm_was" >}}
+{{< get-metrics-from-git "ibm-was" >}}
 
 
 ### 이벤트
@@ -181,7 +181,7 @@ Datadog 에이전트에서 로그 수집은 기본값으로 비활성화되어 �
 IBM WAS는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "ibm_was" >}}
+{{< get-service-checks-from-git "ibm-was" >}}
 
 
 ## 트러블슈팅

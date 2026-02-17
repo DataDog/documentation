@@ -2,13 +2,6 @@
 title: Trace Qualification
 aliases:
   - /security/application_security/threats/trace_qualification
-further_reading:
-- link: "/security/application_security/"
-  tag: "Documentation"
-  text: "Protect against threats with Datadog App and API Protection"
-- link: "/security/application_security/how-it-works//"
-  tag: "Documentation"
-  text: "How App and API Protection Works"
 ---
 
 ## Overview
@@ -31,15 +24,7 @@ AAP runs qualification rules (closed-source) on every trace. There are four poss
 
 ### Trace sidepanel
 
-The qualification result can also be seen when viewing the details of an individual trace. </br>
-Example of a trace that AAP has qualified as safe:
-
-
-Example of a trace that AAP has qualified as harmful:
+The qualification result can also be seen when viewing the details of an individual trace.
 
 
 [1]: https://app.datadoghq.com/security/appsec/traces
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-

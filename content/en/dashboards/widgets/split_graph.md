@@ -1,5 +1,6 @@
 ---
 title: Split Graph Widget
+description: Break down queries across multiple tag values to identify outliers and patterns in metric performance.
 widget_type: split_group
 further_reading:
 - link: "/dashboards/guide/graphing_json/"

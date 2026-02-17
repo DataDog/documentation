@@ -10,7 +10,7 @@ disable_toc: false
 title: Configurar SCA en tus repositorios
 ---
 ## Información general
-SCA puede analizar archivos de gestión de dependencias en tus repositorios para detectar de forma estática bibliotecas de código abierto utilizadas en tu código base. SCA admite el análisis de bibliotecas en los siguientes lenguajes y archivos de bloqueo:
+SCA puede analizar archivos de gestión de dependencias en tus repositorios para detectar de forma estática bibliotecas de código abierto utilizadas en tu código base. SCA admite el análisis de librerías en los siguientes lenguajes y archivos de bloqueo:
 
 | Gestor de paquetes | Archivo de bloqueo                                 |
 |-----------------|------------------------------------------|
@@ -65,9 +65,9 @@ jobs:
         dd_site: "datadoghq.com"
 ```
 
-<!-- ### Generación de inventarios de biblioteca
+<!-- ### Generación de inventarios de librería
 
-La acción de GitHub genera un inventario de bibliotecas automáticamente, basándose en las bibliotecas declaradas en tu repositorio.
+La acción de GitHub genera un inventario de librerías automáticamente, basándose en las bibliotecas declaradas en tu repositorio.
 
 La acción de GitHub funciona para los siguientes lenguajes y archivos:
 
@@ -132,7 +132,7 @@ datadog-ci sbom upload /tmp/sbom.json
 
 ## Seleccionar tu proveedor de gestión de código fuente
 Datadog SCA admite todos los proveedores de gestión de código fuente, con compatibilidad nativa con GitHub.
-### Configurar la integración de GitHub 
+### Configurar la integración de GitHub
 Si GitHub es tu proveedor de gestión de código fuente, debes configurar la aplicación GitHub utilizando el [cuadro de la integración GitHub][7] y debes configurar la [integración del código fuente][8] para ver fragmentos de código en línea y habilitar [comentarios en las solicitudes de extracción][9].
 
 Al instalar una aplicación GitHub, se requieren los siguientes permisos para habilitar determinadas funciones:
@@ -146,7 +146,7 @@ Si estás utilizando otro proveedor de gestión de código fuente, configura SCA
 
 ## Vincular resultados a servicios y equipos de Datadog
 ### Vincular resultados a servicios
-Datadog asocia el código estático y los resultados del análisis de la biblioteca con los de servicios mediante los siguientes mecanismos:
+Datadog asocia el código estático y los resultados del análisis de la librería con los de servicios mediante los siguientes mecanismos:
 
 1. [Identificación de la localización del código asociado a un servicio mediante el Catálogo de software](#identifying-the-code-location-in-the-software-catalog)
 2. [Detección de patrones de uso de archivos en productos adicionales de Datadog.](#detecting-file-usage-patterns)
@@ -196,10 +196,10 @@ en la ruta, se selecciona el nombre de servicio más cercano al nombre del archi
 ### Vincular resultados a equipos
 
 Datadog asocia automáticamente el equipo adjunto a un servicio cuando se detecta una infracción o vulnerabilidad. Por ejemplo, si el archivo `domains/ecommerce/apps/myservice/foo.py`
-está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción 
+está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción
 detectada en este archivo.
 
-Si no se encuentran servicios o equipos, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git. 
+Si no se encuentran servicios o equipos, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git.
 
 **Nota**: Para que esta característica funcione correctamente, debes asignar con precisión tus equipos de proveedores Git a tus [equipos de Datadog][16].
 

@@ -1,5 +1,6 @@
 ---
 title: Migrating from the V1 Hourly Usage APIs to V2
+description: Learn how to migrate from V1 hourly usage endpoints to the consolidated V2 API with product families, JSON:API format, pagination, and multi-organization support.
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"

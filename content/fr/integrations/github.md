@@ -43,11 +43,11 @@ version: '1.0'
 
 ## Présentation
 
-Configurez l'intégration GitHub pour configurer GitHub Apps et GitHub Actions, sécuriser l'accès à vos référentiels et collecter des données de télémétrie avancées (comme les logs d'audit, les rapports de vulnérabilités, l'analyse des secrets et les statistiques sur les référentiels). 
+Configurez l'intégration GitHub pour configurer GitHub Apps et GitHub Actions, sécuriser l'accès à vos référentiels et collecter des données de télémétrie avancées (comme les logs d'audit, les rapports de vulnérabilités, l'analyse des secrets et les statistiques sur les référentiels).
 
 {{< img src="integrations/github/repo_configuration.png" alt="L'onglet Repository Configuration du carré d'intégration GitHub" popup="true" style="width:100%;">}}
 
-Vous pouvez utiliser l'[intégration du code source][1] de Datadog pour afficher des extraits de code dans vos stack traces, lier des stack traces au code source dans GitHub pour vos [fonctions Lambda][2], afficher les résumés des résultats de test issus des commentaires des pull requests dans [CI Visibility][3], et accéder à de multiples définitions de service dans GitHub depuis le [Service Catalog][4]. 
+Vous pouvez utiliser l'[intégration du code source][1] de Datadog pour afficher des extraits de code dans vos stack traces, lier des stack traces au code source dans GitHub pour vos [fonctions Lambda][2], afficher les résumés des résultats de test issus des commentaires des pull requests dans [CI Visibility][3], et accéder à de multiples définitions de service dans GitHub depuis le [Service Catalog][4].
 
 ## Configuration
 
@@ -86,7 +86,7 @@ Si vous avez accordé à votre application GitHub les autorisations de lecture p
 
 ### Audit Logs
 
-Les logs d'audit incluent l'ensemble des activités et des événements d'une organisation GitHub. Lors de l'installation d'une application, définissez les autorisations **Organization Administration** de sorte à accorder l'accès en lecture. Cela permet à l'application de commencer à collecter le flux d'audit de GitHub sous forme de logs pour le compte de l'organisation GitHub. 
+Les logs d'audit incluent l'ensemble des activités et des événements d'une organisation GitHub. Lors de l'installation d'une application, définissez les autorisations **Organization Administration** de sorte à accorder l'accès en lecture. Cela permet à l'application de commencer à collecter le flux d'audit de GitHub sous forme de logs pour le compte de l'organisation GitHub.
 
 Pour désactiver la collecte des logs d'audit, recherchez l'organisation correspondante dans l'onglet **Telemetery** du carré d'intégration GitHub, cliquez sur le bouton **Audit Log collection**, puis sur **Update Account**.
 
@@ -96,16 +96,14 @@ Pour en savoir plus sur les logs d'audit, consultez la documentation GitHub rela
 
 ### Métriques
 
-L'intégration GitHub collecte les métriques relatives aux alertes d'analyse du code et des secrets. Ces métriques fournissent un aperçu de l'état des alertes de l'organisation en les classant par état, référentiel et type de secret. Elles permettent également d'obtenir des informations à long terme sur les tendances des alertes et leur processus général. 
-
-{{< get-metrics-from-git "github_telemetry" >}}
+L'intégration GitHub collecte les métriques relatives aux alertes d'analyse du code et des secrets. Ces métriques fournissent un aperçu de l'état des alertes de l'organisation en les classant par état, référentiel et type de secret. Elles permettent également d'obtenir des informations à long terme sur les tendances des alertes et leur processus général.
 
 Pour commencer à collecter ces métriques, sélectionnez les autorisations appropriées pour accorder l'accès en lecture lors de l'installation de l'application. Pour désactiver la collecte des métriques d'analyse du code et des secrets, recherchez l'organisation correspondante dans l'onglet **Telemetery** du carré d'intégration, cliquez sur le bouton des sections concernées, puis sur **Update Account**.
 
 ### Événements
 
 <div class="alert alert-info">
-Suivez ces instructions pour configurer des webhooks dans GitHub et Datadog, afin de permettre l'affichage des événements dans l'Events Explorer. 
+Suivez ces instructions pour configurer des webhooks dans GitHub et Datadog, afin de permettre l'affichage des événements dans l'Events Explorer.
 </div>
 
 #### Ajouter un webhook dans GitHub
@@ -138,7 +136,7 @@ Suivez ces instructions pour configurer des webhooks dans GitHub et Datadog, afi
 1. Dans le [carré d'intégration GitHub][5], accédez à l'onglet **Webhooks**.
 2. Indiquez les référentiels et les branches que vous souhaitez surveiller pour chaque référentiel. Pour ajouter tous les référentiels d'un utilisateur ou d'une organisation, utilisez des wildcards (`*`). Vous pouvez également utiliser ces derniers pour les noms des branches. Par exemple, `dev-*` désigne toutes les branches commençant par `dev-`.
 
-   Pour recueillir tous les événements concernant la branche `master` du référentiel GitHub `DataDog/documentation`, vous pouvez saisir `DataDog/documentation` dans le champ **Repository** et `master` dans le champ **Branches**. 
+   Pour recueillir tous les événements concernant la branche `master` du référentiel GitHub `DataDog/documentation`, vous pouvez saisir `DataDog/documentation` dans le champ **Repository** et `master` dans le champ **Branches**.
 
    Pour recueillir tous les événements concernant **toutes** les branches `master` de l'organisation DataDog, saisissez `DataDog/*` dans le champ **Repository** et `master` dans le champ **Branches**.
 
@@ -147,7 +145,7 @@ Suivez ces instructions pour configurer des webhooks dans GitHub et Datadog, afi
 
 Une fois que vous avez ajouté des webhooks dans l'onglet **Webhooks** du carré d'intégration, les événements survenant dans les référentiels GitHub que vous avez indiqués commencent à apparaître dans l'[Events Explorer][11]. Pour en savoir plus, consultez la [documentation relative à l'Events Explorer][12].
 
-Pour filtrer les événements provenant de GitHub, sélectionnez **Github** dans le menu des facettes **Source** sous **Core**, ou saisissez `source:github` dans la requête de recherche. Le graphique à barres des événements s'actualise automatiquement à mesure que vous modifiez la requête de recherche. 
+Pour filtrer les événements provenant de GitHub, sélectionnez **Github** dans le menu des facettes **Source** sous **Core**, ou saisissez `source:github` dans la requête de recherche. Le graphique à barres des événements s'actualise automatiquement à mesure que vous modifiez la requête de recherche.
 
 ### Checks de service
 

@@ -20,7 +20,7 @@ title: チュートリアル - EC2 を使用した Amazon ECS 上の Java アプ
 
 ## 概要
 
-This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Container Service (ECS). In this scenario, the Datadog Agent is also installed in the cluster.
+このチュートリアルでは、AWS Elastic Container Service (ECS) 上のクラスターにインストールされたサンプル Java アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、Datadog Agent もクラスターにインストールされています。
 
 ホスト、コンテナ、クラウドインフラストラクチャー、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。例えば、コンテナや EKS を使用したチュートリアルの中には、Datadog で見られる自動インスツルメンテーションとカスタムインスツルメンテーションの違いを説明するものがあります。このチュートリアルでは、完全にカスタムインスツルメンテーションされた例までスキップします。
 
@@ -46,11 +46,11 @@ Java の一般的なトレース設定ドキュメントについては、[Java 
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-The repository contains a multi-service Java application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the application.
+リポジトリには、Docker コンテナ内で動作するようにあらかじめ構成されたマルチサービスの Java アプリが含まれています。コンテナを作成するための `docker-compose` YAML ファイルは `docker` ディレクトリに配置されています。このチュートリアルでは、アプリケーション用のコンテナをビルドする `service-docker-compose-ECS.yaml` ファイルを使用します。
 
 `notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
 
-The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT`, and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on Amazon ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
+サンプルアプリケーションはシンプルなマルチサービスの Java アプリケーションで、2 つの API (`notes` サービスと `calendar` サービス) を備えています。`notes` サービスには、メモリ内 H2 データベースに保存されたノートに対する `GET`、`POST`、`PUT`、`DELETE` のエンドポイントがあります。`calendar` サービスはリクエストを受け、ノートで使用するランダムな日付を返します。両方のアプリケーションには、それぞれ関連する Docker イメージがあり、Amazon ECS に別々のサービスとして、それぞれ独自のタスクとそれぞれのコンテナを持ってデプロイします。ECS は、ビルド後にイメージを公開するアプリケーションイメージのリポジトリである ECR からイメージを取得します。
 
 ### ECS の初期設定
 
@@ -106,7 +106,7 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 アプリケーションを起動し、トレースせずにいくつかのリクエストを送信します。アプリケーションがどのように動作するかを確認した後、トレーシングライブラリと Datadog Agent を使用してインスツルメントを行います。
 
-To start, use a terraform script to deploy to Amazon ECS:
+まずは、Terraform スクリプトを使用して Amazon ECS にデプロイします。
 
 1. `terraform/EC2/deployment` ディレクトリで、以下のコマンドを実行します。
 
@@ -173,9 +173,9 @@ Java アプリケーションが動作するようになったので、トレー
 
    これで、どちらのサービスも自動インスツルメンテーションが行われるようになります。
 
-   <div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+   <div class="alert alert-danger"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
 
-3. Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code. Add some annotations to the code to trace into some sample methods.
+3. 自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Java DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。コードにアノテーションを追加し、いくつかのサンプルメソッドにトレースします。
 
    `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java` を開きます。このサンプルには、コードにカスタムトレースを設定するさまざまな方法を示す、コメントアウトされたコードがすでに含まれています。
 
@@ -367,7 +367,7 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 アプリケーションを再デプロイし、API を実行します。
 
-1. Redeploy the application to Amazon ECS using the [same terraform commands as before](#deploy-the-application). From the `terraform/EC2/deployment` directory, run the following commands:
+1. [先ほどと同じ terraform コマンド](#deploy-the-application)を使って、Amazon ECS にアプリケーションを再デプロイしてください。`terraform/EC2/deployment` ディレクトリから、以下のコマンドを実行します。
 
    ```sh
    terraform init
@@ -403,7 +403,7 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 4. しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
 
    `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 

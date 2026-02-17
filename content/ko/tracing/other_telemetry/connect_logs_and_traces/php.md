@@ -27,7 +27,7 @@ type: multi-code-lang
 
 PHP 트레이서는 [Monolog][4] 또는 [Laminas 로그][5]와 같은 PSR-3 준수 로거를 지원합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>참고</strong>: 로깅 라이브러리를 설정하여 JSON 형식으로 로그를 생성하도록 합니다. 이렇게 하면
   <ul>
     <li><a href="/logs/log_configuration/parsing">커스텀 파싱 규칙이</a> 필요하지 않습니다.</li>
@@ -93,7 +93,7 @@ PHP 트레이서는 자리표시자를 해당 값으로 대체합니다. 예를 
 
 ## 수동 삽입
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>참고:</strong><code>\DDTrace\current_context()</code> 함수는 버전 <a href="https://github.com/Datadog/dd-추적하다-PHP/releases/태그를 설정하다/0.61.0">0.61.0</a>에 도입되었으며 10진수 트레이스 식별자를 반환합니다.
 </div>
 

@@ -42,7 +42,7 @@ Datadog Azure 통합을 사용해 Azure Key Vault 메트릭을 수집할 수 있
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_key_vault" >}}
+{{ get-metrics-from-git "azure-keyvault" }}
 
 
 ### 이벤트

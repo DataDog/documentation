@@ -52,7 +52,7 @@ Pour supprimer un index de votre organisation, cliquez sur l'icône de suppressi
 
 {{< img src="logs/indexes/delete-index.png" alt="Supprimer un index" style="width:70%;">}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Il n'est pas possible de créer un index si son nom est identique à celui d'un index supprimé. 
 </div>
 

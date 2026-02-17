@@ -65,7 +65,7 @@ tile:
 
 任意の OpenMetrics または Prometheus エンドポイントからカスタムメトリクスを抽出します。
 
-<div class="alert alert-warning">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.</div>
+<div class="alert alert-danger">All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.</div>
 
 このインテグレーションは、[Prometheus エクスポジション形式][1]と [OpenMetrics 仕様標準][2]の両方に対応しています。
 

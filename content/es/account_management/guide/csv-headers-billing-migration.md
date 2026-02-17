@@ -1,4 +1,7 @@
 ---
+description: Actualiza tu automatización para las nuevas cabeceras CSV de Plan y Uso
+  que alinearán datos de costes con visualizaciones en la aplicación a partir del
+  19 de febrero de 2024.
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación

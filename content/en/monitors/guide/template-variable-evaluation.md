@@ -1,5 +1,6 @@
 ---
 title: Template Variable Evaluation
+description: "Modify template variable output in monitor notifications using mathematical operations, functions, and string manipulation with eval syntax."
 ---
 
 In monitor notification messages, you can modify the output of template variables using the `eval` syntax, which enables several different mathematical operations and functions on template variables with a numerical or string value.

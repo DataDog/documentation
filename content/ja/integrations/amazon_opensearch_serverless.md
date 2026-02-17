@@ -76,7 +76,7 @@ Amazon OpenSearch Serverlessは、OpenSearch 向けのオンデマンドのサ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_opensearch_serverless" >}}
+{{< get-metrics-from-git "amazon-opensearch-serverless" >}}
 
 
 ### サービスチェック

@@ -1,5 +1,6 @@
 ---
 title: Graph Insights
+description: Discover potential root causes using Metric Correlations and Watchdog Explains to analyze irregular metric behavior.
 disable_toc: false
 further_reading:
 - link: "/watchdog/insights/"

@@ -53,7 +53,7 @@ pricing:
   unit_label: Terrabyte
   unit_price: 10.0
 public_title: Commvault
-short_description: Monitorizar tus trabajos, estados de bibliotecas, alertas y eventos
+short_description: Monitorizar tus trabajos, estados de librerías, alertas y eventos
   Commvault
 supported_os:
 - Linux
@@ -72,7 +72,7 @@ tile:
   - Tipo de datos enviados::Métricas
   - Tipo de datos enviados::Eventos
   configuration: README.md#Configuración
-  description: Monitorizar tus trabajos, estados de bibliotecas, alertas y eventos
+  description: Monitorizar tus trabajos, estados de librerías, alertas y eventos
     Commvault
   media:
   - caption: Dashboard de información general de Commvault
@@ -111,28 +111,28 @@ tile:
 
 Commvault simplifica la protección de datos, la recuperación cibernética y la resiliencia cibernética al realizar copias de seguridad de tus datos de diversas fuentes, incluyendo bases de datos, máquinas virtuales, aplicaciones y mucho más.
 
-La integración Rapdev Commvault te ofrece información en tiempo real de tu entorno de copias de seguridad. Esta integración te permite realizar un seguimiento de varias métricas relacionadas con trabajos en curso, bibliotecas de almacenamiento, alertas de consola y eventos. 
+La integración Rapdev Commvault te ofrece información en tiempo real de tu entorno de copias de seguridad. Esta integración te permite realizar un seguimiento de varias métricas relacionadas con trabajos en curso, bibliotecas de almacenamiento, alertas de consola y eventos.
 
-- Al extraer datos detallados sobre las alertas, te mantiene al tanto de la naturaleza, la antigüedad y el recuento total de alertas, lo que te permite responder rápidamente a cualquier problema. 
+- Al extraer datos detallados sobre las alertas, te mantiene al tanto de la naturaleza, la antigüedad y el recuento total de alertas, lo que te permite responder rápidamente a cualquier problema.
 - El aspecto de la monitorización de trabajos captura información crucial sobre cada trabajo de copia de seguridad, incluyendo el tamaño de los datos en bytes y la duración del trabajo, lo que permite optimizar el rendimiento y analizar las tendencias.
-- La monitorización de la biblioteca de almacenamiento te ofrece una visión granular de tu entorno de almacenamiento, con datos específicos sobre cada biblioteca, bytes disponibles, datos de los que se han hecho copias de seguridad en la última hora, capacidad total, espacio libre y hora de la última copia de seguridad.
+- La monitorización de la librería de almacenamiento te ofrece una visión granular de tu entorno de almacenamiento, con datos específicos sobre cada biblioteca, bytes disponibles, datos de los que se han hecho copias de seguridad en la última hora, capacidad total, espacio libre y hora de la última copia de seguridad.
 
 La integración Rapdev Commvault extrae datos desde tu Command Center hacia tu cuenta de Datadog, lo que te permite aprovechar las visualizaciones mejoradas de dashboard, la monitorización y las capacidades de alerta en Datadog.
 
 ## Agent
 Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
-- Soporte: [support@rapdev.io][4]  
-- Ventas: [sales@rapdev.io][5]  
-- Chat: [rapdev.io][6]  
+- Soporte: [support@rapdev.io][4]
+- Ventas: [sales@rapdev.io][5]
+- Chat: [rapdev.io][6]
 - Teléfono: 855-857-0222
 
-[1]: https://docs.datadoghq.com/es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory  
-[2]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/?tab=agentv6v7  
-[3]: https://docs.datadoghq.com/es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory  
-[4]: mailto:support@rapdev.io  
-[5]: mailto:sales@rapdev.io  
-[6]: https://www.rapdev.io/#Get-in-touch  
-[7]: https://documentation.commvault.com/v11/essential/4237_web_console.html 
+[1]: https://docs.datadoghq.com/es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[2]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/?tab=agentv6v7
+[3]: https://docs.datadoghq.com/es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[4]: mailto:support@rapdev.io
+[5]: mailto:sales@rapdev.io
+[6]: https://www.rapdev.io/#Get-in-touch
+[7]: https://documentation.commvault.com/v11/essential/4237_web_console.html
 
 ---
 Hecho con ❤️ en Boston

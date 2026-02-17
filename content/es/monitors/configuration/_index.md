@@ -9,9 +9,12 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentación
   text: Gestionar los monitores
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: Documentación
   text: Estado de los monitores
+- link: https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/
+  tag: Blog
+  text: Gestiona tus monitores de forma más eficaz con Datadog Teams
 title: Configurar monitores
 ---
 
@@ -22,6 +25,7 @@ Para empezar a configurar un monitor, debes hacer lo siguiente:
 * **Definir la consulta de búsqueda:** crea una consulta para contar eventos, medir métricas, agrupar por una o varias dimensiones, etc.
 * **Establecer las condiciones de alerta:** configura los umbrales de alertas y avisos, los intervalos de evaluación y las opciones de alerta avanzadas.
 * **Configurar notificaciones y automatizaciones:** escribe un título y un mensaje de notificación personalizados con variables. Elige cómo se envían las notificaciones a tus equipos (correo electrónico, Slack o PagerDuty). Incluye automatizaciones de flujo de trabajo o casos en la notificación de alerta.
+* **Define notificaciones de permisos y auditoría:** Configura controles de acceso granulares y designa roles y usuarios específicos que puedan editar un monitor. Habilita las notificaciones de auditoría para alertar si se modifica un monitor.
 
 ## Definir la consulta de búsqueda
 
@@ -51,9 +55,9 @@ La consulta devuelve una serie de puntos. Sin embargo, el monitor solo necesita 
 | min  | Si todos los puntos del intervalo de evaluación para tu consulta superan el umbral, se envía una alerta. Esta opción añade la función `min()` a la consulta de tu monitor.* |
 | sum | Si la suma de todos los puntos de la serie supera el umbral, se envía una alerta. Esta opción añade la función `sum()` a la consulta de tu monitor. |
 
-\* Estas descripciones de max y min suponen que el monitor envía una alerta cuando métrica está _por encima_ del umbral. Para los monitores que alertan cuando se está _por debajo_ del umbral, el comportamiento de max y min se invierte. Para ver más ejemplos, consulta la guía [Agregadores del monitor][5].
+\* Estas descripciones de máximo y mínimo suponen que el monitor alerta cuando la métrica está _por encima_ del umbral. Para los monitores que alertan cuando están _por debajo_ del umbral, el comportamiento de máximo y mínimo se invierte. Para obtener más ejemplos, consulta la guía [Agregadores de monitores][1].
 
-**Nota**: Pueden darse diferentes comportamientos al utilizar `as_count()`. Consulta [as_count() en las evaluaciones de los monitores][1] para obtener más información.
+**Nota**: Existen diferentes comportamientos cuando se utiliza `as_count()`. Consulta [as_count() en Evaluaciones de monitores][2] para obtener más detalles.
 
 ### Intervalo de evaluación
 
@@ -65,16 +69,18 @@ La figura a continuación ilustra la diferencia entre los intervalos continuos y
 
 #### Intervalos fijos
 
-Los intervalos fijos tienen una duración fija, pero su punto de inicio cambia con el tiempo. Los monitores permiten examinar los últimos `5 minutes`, `15 minutes` o `1 hour`, y también se pueden usar para analizar un intervalo específico.
+Una ventana temporal móvil tiene un tamaño fijo y desplaza su punto de inicio a lo largo del tiempo. Los monitores pueden retroceder hasta los últimos `5 minutes`, `15 minutes`, `1 hour` o hasta una ventana temporal personalizada de hasta 1 mes.
+
+**Nota**: Los [monitores de logs][6] tienen una ventana temporal móvil máxima de `2 days`.
 
 #### Intervalos continuos
 Un intervalo continuo tiene un punto de inicio fijo y se repite a lo largo del tiempo. Los monitores son compatibles con tres intervalos de este tipo:
 
 - `Current hour`: un intervalo de una hora como máximo que comienza en el minuto que elijas. Por ejemplo, monitoriza la cantidad de llamadas que recibe un endpoint HTTP en una hora comenzando por el minuto 0.
-- `Current day`: un intervalo con un máximo de 24 horas que empieza en la hora y el minuto que configures. Por ejemplo, crea un monitor de la [cuota de índice de logs diarios][2] para el intervalo `current day` que empieza a las 14:00 UTC.
-- `Current month`: analiza el último mes desde el primer día del mes a las 00:00 UTC. Esta opción representa un intervalo de un mes hasta la fecha y solo está disponible para los monitores de métricas.
+- `Current day`: Una ventana temporal con un máximo de 24 horas que comienza a una hora y minuto configurables de un día. Por ejemplo, monitoriza una [cuota diaria de índices de logs][3] utilizando la ventana temporal `current day` y dejando que comience a las 14:00 UTC.
+- `Current month`: Mira hacia atrás en el mes actual que comienza en un día configurable del mes a una hora y minuto configurables. Esta opción representa una ventana temporal del mes hasta la fecha y sólo está disponible para los monitores de métricas.
 
-{{< img src="/monitors/create/cumulative_window_example.png" alt="Captura de pantalla que muestra cómo se configuran los intervalos en la interfaz de Datadog. El usuario ha buscado aws.sqs.number_of_messages_received. Las opciones están configuradas para evaluar la suma (SUM) de la consulta durante el mes actual (CURRENT MONTH)." style="width:100%;">}}
+{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Captura de pantalla de la manera en la que se configura una ventana acumulada en la interfaz de Datadog. El usuario ha buscado aws.sqs.number_of_massages_received. Las opciones se configuran para evaluar la SUMA de la consulta en el MES EN CURSO." style="width:100%;">}}
 
 Un intervalo fijo se reinicia cuando se alcanza su tramo (span) temporal máximo. Por ejemplo, un intervalo fijo de `current month` se reinicia el primer día de cada mes a medianoche UTC. Alternativamente, un intervalo continuo de `current hour`, que comienza en el minuto 30, se reinicia cada hora. Por ejemplo, a las 6:30, 7:30 y 8:30.
 
@@ -86,7 +92,7 @@ Por defecto, las frecuencias de evaluación dependen del [intervalo de evaluaci�
 
 | Rangos de evaluación        | Frecuencia de evaluación  |
 |---------------------------------|-----------------------|
-| intervalo < 24 horas               | 1 minuto              |
+| intervalo < 24 horas               | 1 minuto              |
 | 24 horas <= intervalo < 48 horas   | 10 minutos            |
 | intervalo >= 48 horas              | 30 minutos            |
 
@@ -98,7 +104,7 @@ Para obtener más información, consulta la guía sobre cómo [Personalizar las 
 
 Usa los umbrales para definir un valor numérico a partir del cual se activará una alerta. En función de la métrica que elijas, el editor muestra la unidad utilizada (`byte`, `kibibyte`, `gibibyte`, etc).
 
-Datadog puede enviar dos tipos de notificaciones (alertas y avisos). Los monitores se recuperan automáticamente en función del umbral de alerta o de aviso que elijas, aunque también puedes configurar otras condiciones. Para obtener más información sobre los umbrales de recuperación, consulta [¿Qué son los umbrales de recuperación?][3]. Por ejemplo, si un monitor envía una alerta cuando la métrica supera `3` y no has definido ningún umbral de recuperación, el monitor se recuperará cuando el valor de la métrica vuelva a estar por debajo de `3`.
+Datadog dispone de dos tipos de notificaciones (alerta y advertencia). Los monitores se recuperan automáticamente en función del umbral de alerta o advertencia, pero se pueden especificar condiciones adicionales. Para obtener más información sobre los umbrales de recuperación, consulta [¿Qué son los umbrales de recuperación?][5]. Por ejemplo, si un monitor alerta cuando la métrica está por encima de `3` y no se especifican los umbrales de recuperación, el monitor se recupera una vez que el valor de la métrica vuelve a estar por debajo de `3`.
 
 | Opción                                   | Descripción                    |
 |------------------------------------------|--------------------------------|
@@ -114,17 +120,18 @@ Si modificas un umbral, la vista previa del gráfico en el editor muestra un mar
 **Nota**: Cuando introduces valores decimales para los umbrales, si el valor es `<1`, añade un `0` antes del número. Por ejemplo, usa `0.5`, no `.5`.
 
 
-[1]: /es/monitors/guide/as-count-in-monitor-evaluations/
-[2]: https://docs.datadoghq.com/es/logs/log_configuration/indexes/#set-daily-quota
-[3]: /es/monitors/guide/recovery-thresholds/
+[1]: /es/monitors/guide/monitor_aggregators/
+[2]: /es/monitors/guide/as-count-in-monitor-evaluations/
+[3]: https://docs.datadoghq.com/es/logs/log_configuration/indexes/#set-daily-quota
 [4]: /es/monitors/guide/custom_schedules
-[5]: /es/monitors/guide/monitor_aggregators/
+[5]: /es/monitors/guide/recovery-thresholds/
+[6]: /es/monitors/types/log/
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
 Una alerta de check hace un seguimiento de los estados consecutivos enviados por cada grupo de check y los compara con tus umbrales. Configura una alerta de check para:
 
-1. Activar la alerta después de un número de fallos consecutivos: `<NUMBER>` 
+1. Activa la alerta después de un número de fallos consecutivos: `<NUMBER>`
 
    Cuando se ejecuta el check, envía un estado de `OK`, `WARN` o `CRITICAL`. Elige cuántas veces tiene que darse un estado `WARN` y `CRITICAL` para que se envíe una notificación. Por ejemplo, pongamos que se produce un error puntual en tu proceso y falla la conexión. Si tienes este valor establecido como `> 1`, el fallo se ignorará, pero si el error se da más veces, se activará el envío de una notificación.
 
@@ -141,7 +148,7 @@ Consulta la documentación sobre los monitores de [check de proceso][1], [check 
 
 
 [1]: /es/monitors/types/process_check/
-[2]: /es/monitors/types/integration/?tab=checkalert#integration-status
+[2]: /es/monitors/types/integration/?tab=checkalert#integration-metric
 [3]: /es/monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
@@ -155,22 +162,6 @@ Las notificaciones en caso de que falten datos son útiles si se espera que una 
 En este caso, deberías activar el envío de notificaciones en caso de que dejen de recibirse esos datos. Las siguientes secciones te explican cómo proceder en cada caso particular.
 
 **Nota**: El monitor debe poder evaluar los datos antes de enviar una alerta sobre la falta de datos. Por ejemplo, si creas un monitor para `service:abc` y los datos de ese `service` no se están enviando, el monitor no enviará las alertas.
-
-
-{{< tabs >}}
-{{% tab "Metric-based monitors" %}}
-
-Si está Monitorización a métrica sobre un grupo de autoescalado de hosts que se detiene y se inicia automáticamente, la notificación para `no data` produce una gran cantidad de notificaciones. En este caso, no debería habilitar notificaciones para los datos que faltan. Esta opción no funciona a menos que se habilite en un momento en el que los datos hayan estado notificando durante un largo periodo.
-
-| Opción                                                     | Descripción                                                                                                                                        | Notas        |
-| ---------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| **No notificar** si faltan datos                       | No se envía notificación si faltan datos                                                                                                         | <u>Alerta simple</u>: el monitor omite las evaluaciones y permanece en verde hasta que vuelven datos que cambiarían el estado de OK. <br><u>Alerta múltiple</u>: si un grupo no comunica datos, el monitor omite las evaluaciones y eventualmente abandona el grupo. Durante este periodo, la barra de la página de resultados permanece verde. Cuando hay datos y los grupos empiezan a informar de nuevo, la barra verde muestra el estado OK y se rellena para que parezca que no ha habido interrupción.|
-| **Notificar** si faltan datos durante más de **N** minutos. | Se te notifica si faltan datos. La notificación se produce cuando no se han recibido datos durante el intervalo configurado.| Datadog recomienda fijar el intervalo de datos faltantes en al menos dos veces el periodo de evaluación. |
-
-
-{{% /tab %}}
-
-{{% tab "Other monitor types" %}}
 
 Si los datos faltan durante `N` minutos, selecciona una de estas opciones del menú desplegable:
 
@@ -195,9 +186,6 @@ Las opciones `Evaluate as zero` y `Show last known status` se muestran en funci�
 
 - **Evaluate as zero:** esta opción está disponible para monitores que utilizan consultas `Count` sin la función `default_zero()`.
 - **Show last known status:** esta opción está disponible para monitores que usan consultas distintas de `Count`, por ejemplo `Gauge`, `Rate` y `Distribution`, así como consultas `Count` con `default_zero()`.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 #### Resolución automática
 
@@ -260,13 +248,13 @@ Para obtener más información sobre las opciones de configuración para los men
 
 <div class="alert alert-info">Monitor etiquetas (tags) son independientes de etiquetas (tags) enviados por Agent o integraciones. Consulte la <a href="/monitors/manage/">documentación de gestionar monitores</a>.</div>
 
-1. Utiliza el menú desplegable **Tags** (Etiquetas) para asociar las [etiquetas][9] a tu monitor.
-1. Usa el desplegable **Teams** (Equipos) para asociar los [equipos][10] a tu monitor.
+1. Utiliza el menú desplegable **Tags** (etiquetas) para asociar [tags (etiquetas)][8] a tu monitor.
+1. Utilzae el menú desplegable **Equipos** para asociar [equipos][9] a tu monitor.
 1. Selecciona una **Priority** (Prioridad).
 
 ### Establecer la agregación de alertas
 
-Las alertas se clasifican de forma automática en función de lo que selecciones en el paso `group by` al definir tu consulta. Si la consulta no pertenece a ninguna clasificación, de forma predeterminada se clasifica como `Simple Alert`. Si la consulta pertenece a cualquier dimensión, la clasificación cambia a `Multi Alert`.
+Las alertas se agrupan automáticamente en función de la agregación seleccionada para la consulta (por ejemplo, `avg by servicio`). Si la consulta no tiene ningún agrupamiento, aparece de modo predeterminado `Simple Alert`. Si la consulta está agrupada por alguna dimensión, el agrupamiento cambia a `Multi Alert`.
 
 {{< img src="/monitors/create/notification-aggregation.png" alt="Opciones de configuración para agrupar las notificaciones del monitor" style="width:100%;">}}
 
@@ -285,6 +273,8 @@ Un monitor `Multi Alert` activa notificaciones individuales para cada entidad de
 
 Por ejemplo, al configurar un monitor para que te notifique si la latencia P99, agregada por servicio, supera un determinado umbral, recibirías una **alerta** independiente por cada servicio individual cuya latencia P99 superase el umbral de alerta. Esto puede ser útil para identificar y tratar casos específicos de problemas del sistema o de la aplicación. Te permite rastrear problemas en un nivel más detallado.
 
+##### Agrupamiento de notificaciones
+
 Cuando Monitorización de un gran grupo de entidades, las alertas múltiples pueden dar lugar a ruidos monitors. Para mitigar esto, personalice qué dimensiones activan las alertas. Esto reduce el ruido y le permite centrarse en las alertas que más importan. Por ejemplo, usted está Monitorización del uso medio de CPU de todos sus hosts. Si agrupa su consulta por `service` y `host` pero sólo desea que se envíen alertas una vez por cada atributo `service` que alcance el umbral, elimine el atributo `host` de sus opciones de multialerta y reduzca el número de notificaciones que se envían.
 
 {{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagram of how notificaciones are sent when set to specific dimensions in multi alerts" style="width:90%;">}}
@@ -293,12 +283,41 @@ Al agregar notificaciones en el modo `Multi Alert`, las dimensiones que no se ag
 
 **Nota**: Si su métrica sólo está informando por `host` sin `service` etiquetar , no es detectado por el Monitor. métricas con ambos `host` y `service` etiquetas (tags) son detectados por el Monitor.
 
-Si configuras etiquetas o dimensiones en tu consulta, los valores están disponibles para cada grupo que se evalúa en la alerta múltiple para que las notificaciones se completen con un contexto útil. Consulta las [variables de atributos y etiquetas][8] para saber cómo hacer referencia a los valores de las etiquetas en el mensaje de la notificación.
+Si configuras tags (etiquetas) o dimensiones en tu consulta, estos valores están disponibles para cada grupo evaluado en la alerta múltiple para completar dinámicamente notificaciones con un contexto útil. Consulta [Variables de atributos y tags (etiquetas)][10] para aprender a hacer referencia a los valores de las tags (etiquetas) en el mensaje de notificación.
 
 | Agrupar por                       | Modalidad de alerta única | Modalidad de alerta múltiple |
 |-------------------------------------|------------------------|-----------------------|
 | _(todo)_                      | Un único grupo activa una única notificación | N/A |
 | 1&nbsp;or&nbsp;more&nbsp;dimensions | Se envía una notificación si uno o más grupos cumplen las condiciones de la alerta | Se envía una notificación por cada grupo que cumpla las condiciones de alerta |
+
+## Permisos
+
+Todos los usuarios pueden ver todos los monitores, independientemente del equipo o rol al que estén asociados. De modo predeterminado, sólo los usuarios asociados a roles con el [Permiso de escritura de monitores][11] pueden editar monitores. Los [Roles de administrador y estándar de Datadog][12] tienen el permiso de escritura de monitores de modo predeterminado. Si tu organización utiliza [Roles personalizados][13], otros roles personalizados pueden tener el permiso de escritura de monitores. Para obtener más información sobre la configuración de RBAC para monitores y la migración de monitores de la configuración bloqueada al uso de restricciones de roles, consulta la guía sobre [Cómo configurar RBAC para monitores][14].
+
+Puedes restringir aún más tu monitor especificando un lista de [equipos][17], [roles][15] o usuarios con permiso para editarlo. De modo predeterminado, el creador del monitor tiene derechos de edición sobre el monitor. Editar incluye cualquier actualización de la configuración del monitor, eliminar el monitor y silenciar el monitor durante cualquier periodo de tiempo.
+
+**Nota**: Las limitaciones se aplican tanto en la interfaz de usuario como en la API.
+
+### Controles de acceso detallados
+
+Utiliza [controles de acceso granular][16] para limitar los equipos, funciones o usuarios que pueden editar un monitor:
+1. Al editar o configurar un monitor, busca la sección **Definir permisos y notificaciones de auditoría**.
+  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Opciones de configuración de monitores para definir permisos" style="width:70%;" >}}
+1. Haz clic en **Edit Access** (Editar acceso).
+1. Haz clic en **Restrict Access** (Restringir el acceso).
+1. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen por omisión el permiso de acceso **Viewer** (Visualización).
+1. Utiliza el menú desplegable para seleccionar uno o varios equipos, roles o usuarios que puedan editar el monitor.
+1. Haz clic en **Add** (Añadir).
+1. El cuadro de diálogo se actualiza para indicar que el rol que has seleccionado tiene el permiso **Editor** (Edición).
+1. Haz clic en **Done** (Listo).
+
+**Nota:** Para mantener tu acceso de edición al monitor, el sistema requiere que incluyas al menos un rol o equipo del que seas miembro antes de guardar.
+
+Para restablecer el acceso general a un monitor con acceso restringido, sigue los steps (UI) / pasos que se indican a continuación:
+1. Mientras visualiza un monitor, haz clic en el menú desplegable **Más**.
+1. Selecciona **Permissions** (Permisos).
+1. Haz clic en **Restore Full Access** (Restablecer acceso completo).
+1. Haz clic en **Save** (Guardar).
 
 ## Referencias adicionales
 
@@ -310,7 +329,14 @@ Si configuras etiquetas o dimensiones en tu consulta, los valores están disponi
 [4]: /es/monitors/configuration/?tabs=othermonitortypes#no-data
 [5]: /es/monitors/notify/variables/
 [6]: /es/monitors/notify/#configure-notifications-and-automations
-[7]: /es/monitors/notify/#say-whats-happening
-[8]: /es/monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
-[9]: /es/getting_started/tagging/
-[10]: /es/account_management/teams/
+[7]: /es/monitors/notify/
+[8]: /es/getting_started/tagging/
+[9]: /es/account_management/teams/
+[10]: /es/monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
+[11]: /es/account_management/rbac/permissions/#monitors
+[12]: /es/account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[13]: /es/account_management/rbac/?tab=datadogapplication#custom-roles
+[14]: /es/monitors/guide/how-to-set-up-rbac-for-monitors/
+[15]: /es/account_management/rbac/
+[16]: /es/account_management/rbac/granular_access
+[17]: /es/account_management/teams/

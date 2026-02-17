@@ -111,7 +111,7 @@ Datadog 통합을 제거하려면 다음 단계를 따르세요.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "singlestoredb_cloud" >}}
+{{< get-metrics-from-git "singlestoredb-cloud" >}}
 
 
 ### 서비스 점검

@@ -124,14 +124,6 @@ Whether to report the system's hostname for each trace. When disabled, the hostn
 **Default**: `false`<br>
 Enable tracer startup configuration and diagnostic log.
 
-`DD_SPAN_SAMPLING_RULES`
-: **Configuration**: `spanSamplingRules`<br>
-**Default**: `[]`<br>
-Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][3].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Configuration**: N/A<br>
 **Default**: N/A<br>
@@ -241,7 +233,7 @@ To enable DBM to APM link using tag injection, can be set to `'service'` or `'fu
 
 `DD_LOGS_INJECTION`
 : **Configuration**: `logInjection`<br>
-**Default**: `false`<br>
+**Default**: `true`<br>
 Enable automatic injection of trace IDs in logs for supported logging libraries.
 
 `DD_TRACE_LOG_LEVEL`

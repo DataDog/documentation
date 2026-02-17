@@ -114,7 +114,7 @@ El check de Riak CS está incluido en el paquete del [Datadog Agent][2], por lo 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "riakcs" >}}
+{{< get-metrics-from-git "riak-cs" >}}
 incluye la mayoría de las métricas de API S3, así como estadísticas de memoria. Algunas métricas han sido excluidas:
 
 - bucket*acl*(get|put)
@@ -133,7 +133,7 @@ Consulta la [lista completa de métricas disponibles][8].
 El check de Riak CS no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "riakcs" >}}
+{{< get-service-checks-from-git "riak-cs" >}}
 
 
 ## Solucionar problemas

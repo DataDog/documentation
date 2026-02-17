@@ -23,7 +23,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 통합은 더 이상 사용되지 않으며, 언제든지 지원이 중단될 수 있습니다. 대신 <a href="https://docs.datadoghq.com/통합/pingdom_v3/" class="alert-link">Datadog Pingdom V3 통합</a>을 사용하세요.
 </div>
 

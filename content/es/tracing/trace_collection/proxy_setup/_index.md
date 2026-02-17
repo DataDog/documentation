@@ -284,7 +284,7 @@ Para configurar tu frecuencia de muestreo con `DD_TRACE_SAMPLING_RULES`, utiliza
 
 ## Variables de entorno
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Las variables <code>DD_AGENT_HOST</code>, <code>DD_TRACE_AGENT_PORT</code> y <code>DD_TRACE_AGENT_URL</code> no se aplican a Envoy, ya que la dirección del Datadog Agent se configura utilizando los parámetros del <code>clúster</code>.
 </div>
 
@@ -354,7 +354,7 @@ curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/
 
 Extrae el archivo `ngx_http_datadog_module.so` del archivo .tar descargado mediante `tar` y colócalo en el directorio de módulos de NGINX, generalmente ubicado en `/usr/lib/nginx/modules`.
 
-### Configuración de NGINX con el módulo de Datadog 
+### Configuración de NGINX con el módulo de Datadog
 En la sección superior de configuración de NGINX, carga el módulo de Datadog.
 
 ```nginx
@@ -383,7 +383,7 @@ http {
 
 ### Controlador v1.10.0 o posterior
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota importante:</strong> Con el lanzamiento de <b>v1.10.0</b>, la integración OpenTracing y Datadog del controlador Ingress ha quedado obsoleta. Como alternativa, se recomienda la integración OpenTelemetry.<br><br>
   Para versiones anteriores, consulta las <a href="#controller-v190-and-older">instrucciones basadas en OpenTracing</a>.
 </div>
@@ -675,7 +675,7 @@ Dado que el servidor HTTP IHS es esencialmente una envoltura del servidor HTTP A
 
 ### Instalación
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Sólo se admite el servidor HTTP Apache v2.4.x para la arquitectura x86_64.
 </div>
 
@@ -694,7 +694,7 @@ Para instalar el módulo:
    | wget -qi -
    ```
 
-   Al descomprimir el archivo .tar, el archivo resultante es `mod_datadog.so`, la biblioteca compartida que debe
+   Al descomprimir el archivo .tar, el archivo resultante es `mod_datadog.so`, la librería compartida que debe
    ser cargada por el servidor.
 
 1. Coloca el archivo en el directorio donde HTTPd busca los módulos, normalmente `/usr/local/apache2/modules`.

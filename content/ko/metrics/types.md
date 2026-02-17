@@ -16,6 +16,9 @@ further_reading:
 - link: developers/dogstatsd
   tag: 설명서
   text: DogStatsD에 대해 자세히 알아보기
+- link: /metrics/units
+  tag: 설명서
+  text: 메트릭 단위
 - link: developers/libraries
   tag: 설명서
   text: 공식 및 커뮤니티에서 생성한 API 및 DogStatsD 클라이언트 라이브러리
@@ -41,8 +44,8 @@ Datadog에 제출된 각 메트릭에는 유형이 있습니다. 메트릭 유�
 
 - 개수(COUNT)
 - 비율(RATE)
-- 게이지(GAUGE)
-- 분포(DISTRIBUTION)
+- GAUGE
+- DISTRIBUTION
 
 **참고**: 입력 없이 Datadog에 메트릭을 제출하면 메트릭 유형은 Datadog 내에서 `Not Assigned`(으)로 표시됩니다. `Not Assigned` 메트릭 유형은 최초 메트릭 유형이 제출되기 전 또 다른 인앱 유형으로 변경될 수 없습니다.
 
@@ -158,7 +161,7 @@ Datadog API에 직접 제출된 데이터는 Datadog에서 집계하지 않습�
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-개수 메트릭을 제출한다고 가정하겠습니다. Datadog 에이전트가 실행되는 단일 호스트에서 `activeusers.basket_size`을(를) 제출합니다. 이 호스트는 플러시 시간 간격 동안 다음 값(`[1,1,1,2,2,2,3,3]`)을 내보냅니다.
+카운트 메트릭을 제출한다고 가정하겠습니다. Datadog 에이전트가 실행되는 단일 호스트에서 `notifications.sent`를 제출합니다. 이 호스트는 플러시 시간 간격 동안 다음 값(`[1,1,1,2,2,2,3,3]`)을 내보냅니다.
 
 에이전트가 단일 시간 간격에서 수신한 모든 값을 추가합니다. 그러면 개수 메트릭 값으로 이 경우 `15`, 총 수를 제출합니다.
 
@@ -179,15 +182,15 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-예를 들어 플러시 시간 간격에서 `[1,1,1,2,2,2,3,3]` 값을 보고하는 웹 서버로부터 히스토그램 메트릭 `request.response_time.histogram`을(를) 제출한다고 가정합니다. 기본적으로 에이전트는 이 시간 간격에서 이러한 값의 통계적 분포를 나태내도록 Datadog에 다음 메트릭을 제출합니다.
+예를 들어, 웹 서버에서 10초 플러시 시간 간격 동안 `[1,1,1,2,2,2,3,3]` 값을 보고하는 HISTOGRAM 메트릭 `request.response_time.histogram`을 전송한다고 가정해 보겠습니다. 기본적으로 Agent는 해당 시간 간격 동안 보고된 값들의 통계적 분포를 나타내는 다음 메트릭을 Datadog로 전송합니다.
 
 | 메트릭 이름                                    | 값  | Datadog 인앱 유형 |
 | ---------------------------------------------- | ------ | ------------------- |
-| `request.response_time.histogram.avg`          | `1.88` | 게이지(GAUGE)               |
+| `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
 | `request.response_time.histogram.count`        | `0.8`  | 비율(RATE)                |
-| `request.response_time.histogram.median`       | `2`    | 게이지(GAUGE)               |
-| `request.response_time.histogram.95percentile` | `3`    | 게이지(GAUGE)               |
-| `request.response_time.histogram.max`          | `3`    | 게이지(GAUGE)               |
+| `request.response_time.histogram.median`       | `2`    | GAUGE               |
+| `request.response_time.histogram.95percentile` | `3`    | GAUGE               |
+| `request.response_time.histogram.max`          | `3`    | GAUGE               |
 
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
@@ -196,10 +199,10 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 | 메트릭 이름                                | 값  | Datadog 인앱 유형 |
 | ------------------------------------------ | ------ | ------------------- |
-| `avg:request.response_time.distribution`   | `1.73` | 게이지(GAUGE)               |
+| `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
 | `count:request.response_time.distribution` | `11`   | 개수(COUNT)               |
-| `max:request.response_time.distribution`   | `3`    | 게이지(GAUGE)               |
-| `min:request.response_time.distribution`   | `1`    | 게이지(GAUGE)               |
+| `max:request.response_time.distribution`   | `3`    | GAUGE               |
+| `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | 개수(COUNT)               |
 
 #### 백분위수 집계 계산
@@ -210,11 +213,11 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 | 메트릭 이름                              | 값 | Datadog 인앱 유형 |
 | ---------------------------------------- | ----- | ------------------- |
-| `p50:request.response_time.distribution` | `2`   | 게이지(GAUGE)               |
-| `p75:request.response_time.distribution` | `2`   | 게이지(GAUGE)               |
-| `p90:request.response_time.distribution` | `3`   | 게이지(GAUGE)               |
-| `p95:request.response_time.distribution` | `3`   | 게이지(GAUGE)               |
-| `p99:request.response_time.distribution` | `3`   | 게이지(GAUGE)               |
+| `p50:request.response_time.distribution` | `2`   | GAUGE               |
+| `p75:request.response_time.distribution` | `2`   | GAUGE               |
+| `p90:request.response_time.distribution` | `3`   | GAUGE               |
+| `p95:request.response_time.distribution` | `3`   | GAUGE               |
+| `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
 즉, 특정 시간 간격 동안 추가 백분위수 집계를 포함하는 분포 메트릭의 경우 다음 10개 집계(`count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95` 및 `p99`)를 사용할 수 있습니다. 
 
@@ -222,8 +225,7 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 이 기능을 통해 메트릭 태깅을 관리할 수 있습니다. 호스트 수준 세분화는 필요하지 않습니다. [제한없는 메트릭 수집TM][1]에 대해 자세히 알아보세요.
 
-**참고**: `!` 포함 예외 태그는 이 기능에서 허용되지 않습니다.
-
+**참고**: 태그의 허용 목록 기반 사용자 지정에서는 태그 제외가 지원되지 않습니다. `!`로 시작하는 태그 추가는 허용되지 않습니다.
 
 [1]: /ko/metrics/metrics-without-limits/
 {{% /tab %}}
@@ -259,7 +261,7 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 | 제출 소스 | 제출 방법(python)          | 제출 유형 | Datadog 인앱 유형 |
 | ----------------- | ----------------------------------- | --------------- | ------------------- |
-| [에이전트 점검][1]  | `self.rate(...)`                    | 비율(RATE)            | 게이지(GAUGE)               |
+| [에이전트 점검][1]  | `self.rate(...)`                    | 비율(RATE)            | GAUGE               |
 | [API][2]          | `api.Metric.send(type="rate", ...)` | 비율(RATE)            | 비율(RATE)                |
 
 **참고**: DogStatsD을 통해 비율(RATE) 메트릭 유형을 제출하면 각기 다른 에이전트 간 유의미한 비교를 보장할 수 있도록 메트릭이 게이지(GAUGE) 인앱으로 나타납니다. 
@@ -274,9 +276,9 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 | 제출 소스 | 제출 방법(Python)           | 제출 유형 | Datadog 인앱 유형 |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [에이전트 점검][1]  | `self.gauge(...)`                    | 게이지(GAUGE)           | 게이지(GAUGE)               |
-| [API][2]          | `api.Metric.send(type="gauge", ...)` | 게이지(GAUGE)           | 게이지(GAUGE)               |
-| [DogStatsD][3]    | `dog.gauge(...)`                     | 게이지(GAUGE)           | 게이지(GAUGE)               |
+| [에이전트 점검][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [API][2]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
+| [DogStatsD][3]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 
 
 [1]: /ko/metrics/custom_metrics/agent_metrics_submission/?tab=gauge
@@ -289,8 +291,8 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 | 제출 소스 | 제출 방법(Python) | 제출 유형 | Datadog 인앱 유형 |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [에이전트 점검][1]  | `self.histogram(...)`      | 히스토그램(HISTOGRAM)       | 게이지(GAUGE), 비율(RATE)          |
-| [DogStatsD][2]    | `dog.histogram(...)`       | 히스토그램(HISTOGRAM)       | 게이지(GAUGE), 비율(RATE)          |
+| [에이전트 점검][1]  | `self.histogram(...)`      | HISTOGRAM       | 게이지(GAUGE), 비율(RATE)          |
+| [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | 게이지(GAUGE), 비율(RATE)          |
 
 타이머(TIMER) 메트릭을 Datadog 에이전트를 제출하는 것은 DogStatsD에서 히스토그램(HISTOGRAM) 메트릭 유형을 제출하는 것과 동일합니다(표준 StatsD의 타이머와 혼동하지 않아야 함). [DogStatsD `TIMER`][3]는 기간 동안의 데이터만을 표시합니다. 예를 들어 코드 섹션이 실행되거나 페이지를 렌더링하는 데 소요되는 시간입니다.
 
@@ -305,7 +307,7 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 
 | 제출 소스 | 제출 방법(Python) | 제출 유형 | Datadog 인앱 유형 |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [DogStatsD][1]    | `dog.distribution(...)`    | 분포(DISTRIBUTION)    | 게이지(GAUGE), 개수(COUNT)         |
+| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | 게이지(GAUGE), 개수(COUNT)         |
 
 
 [1]: /ko/metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
@@ -320,19 +322,19 @@ Datadog 에이전트가 실행되는 단일 호스트에서 게이지(GAUGE) 메
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
 | [에이전트 점검][9]  | `self.count(...)`                    | 개수(COUNT)           | 개수(COUNT)                |
 | [에이전트 점검][10] | `self.monotonic_count(...)`          | 개수(COUNT)           | 개수(COUNT)                |
-| [에이전트 점검][11] | `self.gauge(...)`                    | 게이지(GAUGE)           | 게이지(GAUGE)                |
-| [에이전트 점검][12] | `self.histogram(...)`                | 히스토그램(HISTOGRAM)       | 게이지(GAUGE), 비율(RATE)          |
-| [에이전트 점검][13] | `self.rate(...)`                     | 비율(RATE)            | 게이지(GAUGE)                |
+| [에이전트 점검][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
+| [에이전트 점검][12] | `self.histogram(...)`                | HISTOGRAM       | 게이지(GAUGE), 비율(RATE)          |
+| [에이전트 점검][13] | `self.rate(...)`                     | 비율(RATE)            | GAUGE                |
 | [API][7]          | `api.Metric.send(type="count", ...)` | 개수(COUNT)           | 개수(COUNT)                |
-| [API][7]          | `api.Metric.send(type="gauge", ...)` | 게이지(GAUGE)           | 게이지(GAUGE)                |
+| [API][7]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
 | [API][7]          | `api.Metric.send(type="rate", ...)`  | 비율(RATE)            | 비율(RATE)                 |
-| [DogStatsD][14]   | `dog.gauge(...)`                     | 게이지(GAUGE)           | 게이지(GAUGE)                |
-| [DogStatsD][15]   | `dog.distribution(...)`              | 분포(DISTRIBUTION)    | 게이지(GAUGE), 개수(COUNT)         |
+| [DogStatsD][14]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
+| [DogStatsD][15]   | `dog.distribution(...)`              | DISTRIBUTION    | 게이지(GAUGE), 개수(COUNT)         |
 | [DogStatsD][16]   | `dog.count(...)`                     | 개수(COUNT)           | 비율(RATE)                 |
 | [DogStatsD][16]   | `dog.increment(...)`                 | 개수(COUNT)           | 비율(RATE)                 |
 | [DogStatsD][16]   | `dog.decrement(...)`                 | 개수(COUNT)           | 비율(RATE)                 |
-| [DogStatsD][17]   | `dog.set(...)`                       | 설정(SET)             | 게이지(GAUGE)                |
-| [DogStatsD][18]   | `dog.histogram(...)`                 | 히스토그램(HISTOGRAM)       | 게이지(GAUGE), 비율(RATE)          |
+| [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
+| [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | 게이지(GAUGE), 비율(RATE)          |
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}

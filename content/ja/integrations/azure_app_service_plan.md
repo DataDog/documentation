@@ -66,7 +66,7 @@ If you haven't already, set up the [Microsoft Azure integration][1]. No addition
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_app_service_plan" >}}
+{{ get-metrics-from-git "azure-appserviceplan" }}
 
 
 ### イベント

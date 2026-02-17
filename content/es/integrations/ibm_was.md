@@ -174,7 +174,7 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_was" >}}
+{{< get-metrics-from-git "ibm-was" >}}
 
 
 ### Eventos
@@ -182,7 +182,7 @@ La recopilación de logs está desactivada por defecto en el Datadog Agent. Para
 IBM WAS no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "ibm_was" >}}
+{{< get-service-checks-from-git "ibm-was" >}}
 
 
 ## Solucionar problemas

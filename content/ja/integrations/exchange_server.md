@@ -117,7 +117,7 @@ Exchange チェックは [Datadog Agent][1] パッケージに含まれていま
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "exchange_server" >}}
+{{< get-metrics-from-git "exchange-server" >}}
 
 
 ### イベント

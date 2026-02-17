@@ -1,5 +1,6 @@
 ---
 title: Autodiscovery Troubleshooting
+description: "Debug Docker Agent Autodiscovery configuration issues and resolve template loading problems with configcheck commands."
 aliases:
   - /agent/autodiscovery/troubleshooting
 further_reading:

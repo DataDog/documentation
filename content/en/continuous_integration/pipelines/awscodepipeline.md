@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a AWS CodePipeline Pipeline
+title: AWS CodePipeline Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/codepipeline
 further_reading:
@@ -21,7 +21,7 @@ further_reading:
 
 [AWS CodePipeline][1] is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates.
 
-Set up tracing on AWS CodePipeline to collect data about pipeline executions, analyze performance bottlenecks or operational issues, and monitor your deployment workflows.
+Set up CI Visibility for AWS CodePipeline to collect data about pipeline executions, analyze performance bottlenecks or operational issues, and monitor your deployment workflows.
 
 ### Compatibility
 
@@ -37,6 +37,16 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 
 *AWS CodePipeline running pipelines don't have Git information until they have finished.\
 **AWS CodePipeline logs correlation is only available for AWS CodeBuild actions.
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and AWS CodePipeline:
+
+| Datadog  | AWS CodePipeline |
+|----------|------------------|
+| Pipeline | Pipeline         |
+| Stage    | Stage            |
+| Job      | Action           |
 
 ## Configure the Datadog integration
 
@@ -116,7 +126,7 @@ If you are using [Test Optimization][8] and your pipeline contains one or more [
 
 The AWS CodePipeline integration supports correlating **CodeBuild** actions with their respective job and pipeline spans. To enable log collection for your CodeBuild actions, see the [AWS log forwarding guide][16].
 
-<div class="alert alert-warning"><strong>Note</strong>: Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
+<div class="alert alert-warning">Log correlation for CodeBuild actions requires the CodeBuild project to have the default CloudWatch log group and log stream names.</div>
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for AWS CodeBuild can be identified by the `source:codebuild` and `sourcecategory:aws` tags.
 

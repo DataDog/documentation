@@ -20,11 +20,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la biblioteca de rastreo de Python
+title: Configuración de la librería de rastreo de Python
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado unificado de servicios][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [etiquetado unificado de servicios][1].
 
 Cuando se utiliza **ddtrace-run**, se pueden utilizar las siguientes [opciones de variables de entorno][2]:
 
@@ -41,7 +41,7 @@ Se recomienda utilizar `DD_ENV`, `DD_SERVICE` y `DD_VERSION` para configurar `en
 : Define el entorno de la aplicación , por ejemplo: `prod`, `pre-prod`, `staging`. Obtén más información sobre [cómo configurar tu entorno][3]. Disponible en la versión 0.38 o posterior.
 
 `DD_SERVICE`
-: El nombre de servicio que se utilizará para esta aplicación. El valor se pasa cuando se configura el middleware para integraciones de marcos web como Pylons, Flask o Django. Para rastrear sin una integración web, se recomienda definir el nombre del servicio en código ([por ejemplo, consulta estos documentos de Django][4]). Disponible en la versión 0.38 o superior.
+: El nombre de servicio que se utilizará para esta aplicación. El valor se pasa cuando se configura el middleware para integraciones de web frameworks como Pylons, Flask o Django. Para rastrear sin una integración web, se recomienda definir el nombre del servicio en código ([por ejemplo, consulta estos documentos de Django][4]). Disponible en la versión 0.38 o superior.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Por defecto**: `tracecontext,Datadog`<br>
@@ -84,7 +84,7 @@ Lista separada por comas de nombres de cabecera que se informan en el tramo raí
 
 `DD_TRACE_ENABLED`
 : **Por defecto**: `true`<br>
-Habilita la instrumentación de marcos web y bibliotecas. Cuando es `false`, el código de la aplicación no genera trazas.
+Habilita la instrumentación de web frameworks y bibliotecas. Cuando es `false`, el código de la aplicación no genera trazas.
 
 `DD_AGENT_HOST`
 : **Por defecto: `localhost` <br>
@@ -95,10 +95,10 @@ Anula la dirección del host del Trace Agent a la que el rastreador por defecto 
 Anula el puerto del Trace Agent al que el el rastreador por defecto envía trazas. Si la [configuración del Agent][13] configura `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto al predeterminado `8126`, `DD_TRACE_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
 
 `DD_TRACE_AGENT_URL`
-: La URL del Trace Agent a la que envía el rastreador. Si se define, tiene prioridad sobre el nombre del host y puerto. Admite sockets de dominio Unix (UDS), en combinación con la configuración `apm_config.receiver_socket` en tu archivo `datadog.yaml`, o la variable de entorno `DD_APM_RECEIVER_SOCKET` definida en el Datadog Agent . Por ejemplo, `DD_TRACE_AGENT_URL=http://localhost:8126` para URL HTTP y `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` para UDS. Si la [configuración del Agent][13] configura `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto al predeterminado `8126`, `DD_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él. 
+: La URL del Trace Agent a la que envía el rastreador. Si se define, tiene prioridad sobre el nombre del host y puerto. Admite sockets de dominio Unix (UDS), en combinación con la configuración `apm_config.receiver_socket` en tu archivo `datadog.yaml`, o la variable de entorno `DD_APM_RECEIVER_SOCKET` definida en el Datadog Agent . Por ejemplo, `DD_TRACE_AGENT_URL=http://localhost:8126` para URL HTTP y `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` para UDS. Si la [configuración del Agent][13] configura `receiver_port` o `DD_APM_RECEIVER_PORT` con un valor distinto al predeterminado `8126`, `DD_AGENT_PORT` o `DD_TRACE_AGENT_URL` deben coincidir con él.
 
 `DD_DOGSTATSD_URL`
-: La URL utilizada para conectarse al Datadog Agent para métricas de DogStatsD. Si se define, tiene prioridad sobre el nombre del host y puerto. Admite sockets de dominio Unix (UDS), en combinación con la configuración `dogstatsd_socket` en tu archivo `datadog.yaml`, o la variable de entorno `DD_DOGSTATSD_SOCKET` definida en el Datadog Agent . Por ejemplo, `DD_DOGSTATSD_URL=udp://localhost:8126` para URL UDP y `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` para UDS. Si la [configuración del Agent][13] configura `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto al predeterminado `8125`, la biblioteca de rastreo `DD_DOGSTATSD_URL` o `DD_DOGSTATSD_PORT` debe coincidir con él. 
+: La URL utilizada para conectarse al Datadog Agent para métricas de DogStatsD. Si se define, tiene prioridad sobre el nombre del host y puerto. Admite sockets de dominio Unix (UDS), en combinación con la configuración `dogstatsd_socket` en tu archivo `datadog.yaml`, o la variable de entorno `DD_DOGSTATSD_SOCKET` definida en el Datadog Agent . Por ejemplo, `DD_DOGSTATSD_URL=udp://localhost:8126` para URL UDP y `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` para UDS. Si la [configuración del Agent][13] configura `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto al predeterminado `8125`, la librería de rastreo `DD_DOGSTATSD_URL` o `DD_DOGSTATSD_PORT` debe coincidir con él.
 
 `DD_DOGSTATSD_HOST`
 : **Por defecto**: `localhost`<br>
@@ -106,7 +106,7 @@ Anula la dirección del host del Trace Agent a la que el rastreador por defecto 
 
 
 : **Por defecto: `8125` <br>
-Anula el puerto por defecto del Trace Agent para el envío de métricas de DogStatsD. Si la [configuración del Agent][13] configura `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto al predeterminado `8125`, `DD_DOGSTATSD_PORT` o `DD_DOGSTATSD_PORT` de la biblioteca de rastreo deben coincidir con él.
+Anula el puerto por defecto del Trace Agent para el envío de métricas de DogStatsD. Si la [configuración del Agent][13] configura `dogstatsd_port` o `DD_DOGSTATSD_PORT` con un valor distinto al predeterminado `8125`, `DD_DOGSTATSD_PORT` o `DD_DOGSTATSD_PORT` de la librería de rastreo deben coincidir con él.
 
 `DD_LOGS_INJECTION`
 : **Por defecto**: `false`<br>

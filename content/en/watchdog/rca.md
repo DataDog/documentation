@@ -1,5 +1,6 @@
 ---
 title: Watchdog RCA
+description: "Reduce mean time to recovery with Watchdog Root Cause Analysis, which automates preliminary investigations and identifies interdependencies during incident triage."
 further_reading:
 - link: "/watchdog/faq/root-cause-not-showing/"
   tag: "Documentation"

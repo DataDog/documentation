@@ -1,53 +1,53 @@
 ---
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/create-an-integration-dashboard.md
+description: Découvrez comment créer un dashboard d'intégration.
+further_reading:
+- link: /dashboards/
+  tag: Documentation
+  text: En savoir plus sur les dashboards
 title: Créer un dashboard d'intégration
 ---
 ## Présentation
 
-Grâce aux [dashboards Datadog][1], vous pouvez consulter des métriques clés et effectuer leur suivi, afin de surveiller efficacement votre infrastructure et vos intégrations. Datadog propose un ensemble de dashboards prêts à l'emploi pour de nombreuses fonctionnalités et intégrations. Pour commencer à les utiliser, consultez votre [liste de dashboards][12].
+Cette page décrit les étapes de création d'un dashboard prêt à l'emploi dans Datadog, ainsi que les bonnes pratiques à suivre pendant le processus.
 
-Si vous avez [créé une intégration Datadog][2], vous avez la possibilité de concevoir un dashboard prêt à l'emploi afin que les utilisateurs puissent comprendre en quelques secondes l'intérêt de votre intégration. Ce guide présente la procédure et les bonnes pratiques à suivre pour créer un dashboard d'intégration.
+Grâce aux [dashboards Datadog][1], vous pouvez consulter des métriques clés et effectuer leur suivi, afin de surveiller votre infrastructure et vos intégrations. Datadog propose un ensemble de dashboards prêts à l'emploi pour de nombreuses fonctionnalités et intégrations. Pour commencer à les utiliser, consultez votre [Dashboard List][12].
 
-Pour créer une intégration Datadog, consultez la section [Créer une intégration][2].
-
+Si vous avez [créé une intégration Datadog][2], vous devez créer un dashboard prêt à l'emploi pour aider les utilisateurs de votre intégration à en tirer pleinement parti.
 
 ## Créer un dashboard d'intégration
+
 ### Créer un dashboard
 
-[Créez un dashboard][12] sur la plateforme Datadog.
+Dans votre sandbox Datadog, depuis la [**liste des dashboards**][12], cliquez sur **New Dashboard**.
 
-Pour déterminer les éléments à ajouter à votre dashboard, suivez les conseils de ce guide.
+{{< img src="dashboards/create_dashboard.png" alt="Créer un dashboard pour votre intégration" width="80%">}}
 
-### Exporter votre dashboard
+[Suivez les bonnes pratiques de ce guide](#suivre-les-bonnes-pratiques-concernant-les-dashboards) lors de l'ajout d'éléments à votre dashboard.
 
-Pour exporter votre dashboard au format JSON, cliquez sur l'icône en forme d'engrenage (en haut à droite) et choisissez **Export dashboard JSON**. Attribuez un nom à votre fichier en vous basant sur le titre de votre dashboard : par exemple, `présentation_nom_intégration.json`.
+### Importer votre dashboard
+Dans votre intégration, sur la plateforme de développement d'intégrations, accédez à l'onglet Content. À partir de là, sélectionnez **import dashboard** pour choisir parmi les dashboards disponibles. Vous pouvez en inclure jusqu'à 10 avec votre intégration. 
 
-Enregistrez ce fichier dans le dossier `assets/dashboards` de votre intégration, puis ajoutez la ressource à votre fichier `manifest.json`. Consultez la section [Références pour les ressources d'intégration][11] pour en savoir plus sur la structure et le fichier manifeste de votre intégration.
+{{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="Cliquez sur l'icône de partage et Export dashboard JSON pour exporter votre dashboard au format JSON" width="100%">}}
 
-### Ouvrir une pull request
-
-Ouvrez une pull request pour ajouter le fichier JSON de votre dashboard, ainsi que le manifeste modifié, au dossier de votre intégration dans le [référentiel GitHub `integrations-extras`][13]. Datadog étudie toutes les pull requests `integration-extras` envoyées pour ce référentiel. Une fois votre pull request approuvée, Datadog l'intègre et valide la mise en ligne de votre dashboard.
 
 ### Vérifier votre dashboard en production
 
-Vérifiez d'abord dans Datadog que le carré d'intégration est `Installed`. Pour pouvoir consulter les dashboards prêts à l'emploi associés à une intégration, celle-ci doit être installée.
+Vérifiez dans Datadog que le carré d'intégration est `Installed`. Pour pouvoir consulter les dashboards prêts à l'emploi associés à une intégration, celle-ci doit être installée.
 
-Cherchez votre dashboard dans les [listes de dashboards][12]. Vérifiez que les logos s'affichent correctement sur la page de présentation, ainsi que dans le dashboard prédéfini.
+Cherchez votre dashboard sur la [page Dashboard List][12]. Vérifiez que les logos s'affichent correctement et qu'ils apparaissent dans le dashboard prédéfini.
 
 ## Suivre les bonnes pratiques concernant les dashboards
 
-Un dashboard d'intégration doit inclure les éléments suivants :
+{{< img src="developers/create-an-integration-dashboard/dashboard_best_practices_example.png" alt="Exemple de dashboard" width="100%">}}
 
-{{< img src="developers/create-an-integration-dashboard/dashboard-example.png" alt="Un exemple de dashboard" width="100%">}}
+Un dashboard d'intégration doit respecter les consignes visuelles suivantes :
 
-- Un groupe **About** qui suscite l'intérêt des utilisateurs, avec une image de bannière, un texte concis, des liens utiles et une hiérarchie typographique adéquate
-- Un groupe **Overview** succinct et annoté abordant en priorité les principales statistiques du dashboard
+- Un groupe de **résumé** qui suscite l'intérêt des utilisateurs, avec une image de bannière, un texte concis, des liens utiles et une hiérarchie typographique adéquate
+- Un groupe de **présentation** succinct et annoté abordant en priorité les principales statistiques du dashboard
 - Des titres de graphique simples et des noms de groupe dont les principaux termes commencent par une majuscule
 - Un affichage symétrique en mode Densité élevée
 - Des notes concises avec une mise en forme adéquate
 - Les mêmes codes couleur pour les groupes connexes, les notes au sein des groupes et les graphiques au sein des groupes
-
 
 ### Conseils globaux
 
@@ -57,17 +57,43 @@ Un dashboard d'intégration doit inclure les éléments suivants :
 
 -  Ajoutez un logo dans l'en-tête du dashboard. Le logo de l'intégration s'affiche automatiquement dans l'en-tête si vous avez fourni une icône et que la valeur du paramètre `integration_id` correspond au nom de l'icône.
 
--  Ajoutez à votre intégration un groupe About qui décrit brièvement son utilité et contient des liens utiles. Cette section doit contenir du texte simple, et non des données. Évitez d'afficher la section About sur toute la largeur de la page.
+-  Incluez un groupe About (de résumé) pour l'intégration, avec une description concise et des liens utiles. La section About doit contenir du contenu éditorial, et non des données. Évitez de l'afficher en pleine largeur. Vous pouvez copier le contenu de la section About dans la carte infobulle qui apparaît lorsque vous survolez le titre du dashboard.
 
 - Modifiez la section About et sélectionnez une option d'affichage pour la bannière. Vous pouvez ensuite ajouter un lien vers une image de bannière à l'aide du chemin suivant : `/static/images/integration_dashboard/votre-image.png`.
 
-- Ajoutez un groupe Overview contenant les principales métriques de votre intégration. Prenez soin de placer ce groupe en haut du dashboard. Le groupe Overview peut contenir des données.
+- Incluez un groupe **Overview** (de présentation) avec quelques-unes des métriques les plus importantes, des checks de service comme des checks d’activité ou de disponibilité, ainsi qu'un résumé des monitors si vous en avez déjà pour cette intégration. Placez le groupe Overview en haut du dashboard. Ce groupe peut contenir des données.
+
+  {{< img src="developers/create-an-integration-dashboard/about-and-overview-groups.png" alt="Exemple de section About et Overview dans un dashboard" width="100%">}}
+
+- Si la collecte de logs est activée pour l'intégration, ajoutez un groupe Logs contenant un widget chronologique avec un graphique en barres représentant les logs par statut dans le temps, ainsi qu'un flux de logs affichant ceux avec le statut `Error` ou `Critical`. **Remarque :** si ces groupes sont utilisés dans plusieurs dashboards, quel que soit le type d'intégration, envisagez de les convertir en [powerpacks][14] pour pouvoir insérer l'ensemble du groupe correctement mis en forme en quelques clics, plutôt que de recréer les mêmes widgets à chaque fois.
 
 -  Vérifiez la disposition de votre dashboard avec une largeur de 1 280 px et de 2 560 px. Ces dimensions seront respectivement utilisées pour afficher votre dashboard sur un petit ordinateur portable et sur un écran plus grand. Voici les largeurs d'écran les plus courantes pour les dashboards : 1 920, 1 680, 1 440, 2 560 et 1 280 px. Si la largeur de votre monitor est insuffisante pour l'affichage en mode Densité élevée, utilisez les commandes de zoom du navigateur pour effectuer un zoom arrière.
+
+   {{< tabs >}}
+   {{% tab "1280 pixels" %}}
+
+   {{< img src="developers/create-an-integration-dashboard/qa-widths.png" alt="Exemple de dashboard à 1280 pixels" width="80%">}}
+
+   {{% /tab %}}
+   {{% tab "2560 pixels" %}}
+
+   {{< img src="developers/create-an-integration-dashboard/qa-large-widths.png" alt="Exemple de dashboard à 2560 pixels" width="100%">}}
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ### Widgets et regroupement
 
 -  Cherchez les métriques prises en charge par l'intégration et regroupez-les au sein de catégories pertinentes. Les principales métriques de performance et la présentation de l'intégration doivent être affichées en haut de la page.
+
+   Passer d'une vue macro à une vue micro du système
+   : Pour un dashboard d'intégration de base de données, par exemple, vous pouvez regrouper les métriques des nœuds dans un premier groupe, celles des index dans un deuxième, et celles des shards dans un troisième.
+
+   Organiser les sections du système du flux amont vers le flux aval
+   : Pour un dashboard d'intégration de flux de données, par exemple, vous pouvez regrouper les métriques des producteurs dans un groupe, celles des brokers dans un autre, et celles des consommateurs dans un troisième.
+
+   Regrouper les métriques menant aux mêmes actions
+   : Vous pouvez rassembler dans un groupe les métriques d'indexation permettant d'identifier les index ou shards à optimiser, et dans un autre groupe les métriques d'utilisation des ressources (comme l'espace disque ou la mémoire) qui orientent les décisions d'allocation et de redistribution.
 
 -  Pour attribuer un titre aux sections et pour les regrouper, utilisez des widgets Groupe plutôt que des widgets Note. Pour afficher des groupes côte à côte, utilisez des groupes à largeur partielle. La majorité des dashboards doivent afficher chaque widget au sein d'un groupe.
 
@@ -77,19 +103,38 @@ Un dashboard d'intégration doit inclure les éléments suivants :
 
 -  Pour garantir une lisibilité adéquate, les widgets Flux doivent inclure au moins six colonnes, ou faire au moins la moitié de la largeur du dashboard. Placez-les à la fin d'un dashboard pour éviter de bloquer le défilement. Il est conseillé de placer les widgets Flux dans un même groupe afin de pouvoir tous les réduire. Ajoutez un flux d'événements seulement si le service surveillé par le dashboard envoie des événements. Utilisez `sources:service_name`.
 
--  Variez les types et les tailles de vos widgets. Testez différentes options de visualisation et de mise en forme jusqu'à ce que vous soyez satisfait du rendu et de la disposition de votre dashboard. Il est parfois acceptable d'ajouter exclusivement des séries temporelles à un dashboard. Le reste du temps, il est préférable d'inclure d'autres éléments pour gagner en lisibilité. Les widgets [Série temporelle][4], [Valeur de requête][5] et [Tableau][6] sont couramment utilisés pour représenter des métriques. Pour en savoir plus sur les types de widgets disponibles, consultez la [liste des widgets de dashboard pris en charge][7].
+   {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="Exemple de widget de flux dans un dashboard" width="100%">}}
+
+-  Variez les types et les tailles de vos widgets. Testez différentes options de visualisation et de mise en forme jusqu'à ce que vous soyez satisfait du rendu et de la disposition de votre dashboard. Il est parfois acceptable d'ajouter exclusivement des séries temporelles à un dashboard. Le reste du temps, il est préférable d'inclure d'autres éléments pour gagner en lisibilité. Les widgets [Série temporelle][4], [Valeur de requête][5] et [Tableau][6] sont couramment utilisés pour représenter des métriques. Veillez à ce que les widgets query value aient un arrière-plan en séries temporelles (par exemple avec des barres) plutôt qu'un fond vide. Pour en savoir plus sur les types de widgets disponibles, consultez la [liste des widgets de dashboard pris en charge][7].
 
 -  Ajustez votre dashboard de façon à ce que les moitiés gauche et droite soient symétriques en mode Densité élevée. Sur les écrans de grande taille, votre dashboard s'affiche par défaut en mode Densité élevée. Il est donc important que les liens entre les groupes soient clairs et que votre dashboard s'affiche correctement dans ce format. Pour garantir une présentation optimale, vous pouvez modifier les hauteurs des groupes d'une moitié à une autre pour équilibrer le rendu.
 
-    {{< img src="developers/create-an-integration-dashboard/symmetrical-dashboard.png" alt="Un exemple de dashboard symétrique" width="100%">}}
+   {{< tabs >}}
+   {{% tab "Perfectly symmetrical" %}}
 
--  Les [template variables][8] vous permettent d'appliquer un filtre dynamique en fonction d'un ou plusieurs widgets dans un dashboard. Elles doivent être universelles et utilisables par tous les utilisateurs et comptes tirant profit du service surveillé. Assurez-vous de définir les filtres de template variable adéquats pour les graphiques pertinents.
+   {{< img src="developers/create-an-integration-dashboard/symmetrical-dashboard.png" alt="Un exemple de dashboard symétrique" width="100%">}}
 
-    **Remarque** : ajoutez `*=scope` en tant que template variable pour permettre aux utilisateurs d'ajouter l'ensemble de leurs tags.
+   {{% /tab %}}
+   {{% tab "Close enough" %}}
+
+   {{< img src="developers/create-an-integration-dashboard/symmetrical_example_2.png" alt="Un exemple de dashboard symétrique" width="100%">}}
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+-  Les [template variables][8] permettent de filtrer dynamiquement un ou plusieurs widgets dans un dashboard. Ces template variables doivent être universelles, adaptées au type de technologie d'intégration et accessibles à tout utilisateur ou compte exploitant le service surveillé. 
+
+   | Type de technologie d'intégration | Template variable typique |
+   | - | - |
+   | Base de données | Shards |
+   | Flux de données | Consumer |
+   | Déploiement de modèle ML | Model |
+
+   Assurez-vous que tous les graphiques pertinents réagissent bien aux filtres de variables de modèle correspondants. **Remarque :** ajouter `*=scope` comme template variable permet aux utilisateurs d'accéder à tous leurs propres tags.
 
 ### Texte
 
--  Utilisez des titres de graphique concis qui commencent par les informations les plus importantes. Évitez d'utiliser des termes redondants, comme « nombre de ».
+-  Utilisez des titres de graphique concis qui commencent par l'information la plus importante. Évitez les expressions génériques comme « nombre de » et n'incluez pas le nom de l'intégration (par exemple, « Memcached Load »). 
 
     | Titre concis (conseillé) | Titre détaillé (déconseillé) |
     | - | - |
@@ -99,7 +144,9 @@ Un dashboard d'intégration doit inclure les éléments suivants :
     | Connexions au serveur - taux | Taux de connexions au serveur |
     | Charge | Charge Memcached |
 
--  Évitez de répéter le titre de groupe ou le nom d'intégration dans tous les widgets d'un groupe, surtout s'il s'agit de widgets Valeur de requête avec une unité personnalisée portant le même nom.
+-  Évitez de répéter le titre de groupe ou le nom d'intégration dans tous les widgets d'un groupe, surtout s'il s'agit de widgets Valeur de requête avec une unité personnalisée portant le même nom. Dans cet exemple, notez la répétition du mot « shards » dans chaque titre de widget du groupe nommé « Shards ».
+
+   {{< img src="developers/create-an-integration-dashboard/name-repetition.png" alt="Exemple de répétition dans un dashboard" width="100%">}}
 
 -  Pour le widget Série temporelle, utilisez toujours des [alias de formule][9].
 
@@ -117,11 +164,15 @@ Un dashboard d'intégration doit inclure les éléments suivants :
 
     {{< img src="developers/create-an-integration-dashboard/color-related-data.png" alt="Un exemple de données dans un dashboard avec un code couleur" width="100%">}}
 
+- Les visualisations comportant des seuils ou des zones claires utilisent un formatage sémantique pour les graphiques, ou un formatage personnalisé en rouge, jaune et vert pour les valeurs de requêtes.
+
 -  Utilisez des légendes lorsqu'elles sont appropriées. Elles simplifie la lecture d'un graphique et permettent d'éviter de survoler chaque série ou d'agrandir le widget. Assurez-vous d'utiliser des alias de série temporelle pour améliorer la lisibilité des légendes. Le mode Automatique masque les légendes lorsqu'il y a peu d'espace libre et les affiche lorsque cela n'encombre pas trop le dashboard.
 
     {{< img src="developers/create-an-integration-dashboard/well-named-legends.png" alt="Un exemple de légendes dans un dashboard" width="100%">}}
 
 -  Pour que les utilisateurs puissent comparer deux graphiques, assurez-vous que les axes des abscisses sont alignés. Si un seul des graphiques comporte une légende, les abscisses seront décalées. Dans ce cas, vous devez donc supprimer la légende ou l'ajouter aux deux graphiques.
+
+   {{< img src="developers/create-an-integration-dashboard/x-axes-alignment.png" alt="Exemple d'axes X mal alignés dans un dashboard" width="100%">}}
 
 -  Pour une série temporelle, choisissez un type d'affichage en fonction du type de la métrique.
 
@@ -131,9 +182,12 @@ Un dashboard d'intégration doit inclure les éléments suivants :
     | Nombre de valeurs (p. ex., nombre d'erreurs) | `bars` |
     | Plusieurs groupes ou valeur par défaut | `lines` |
 
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/dashboards/
-[2]: /fr/developers/integrations/new_check_howto/?tab=configurationtemplate
+[2]: /fr/developers/integrations/agent_integration/
 [3]: /fr/dashboards/#new-dashboard
 [4]: /fr/dashboards/widgets/timeseries/
 [5]: /fr/dashboards/widgets/query_value/
@@ -145,3 +199,4 @@ Un dashboard d'intégration doit inclure les éléments suivants :
 [11]: /fr/developers/integrations/check_references/#manifest-file
 [12]: https://app.datadoghq.com/dashboard/lists
 [13]: https://github.com/DataDog/integrations-extras
+[14]: /fr/dashboards/widgets/powerpack/

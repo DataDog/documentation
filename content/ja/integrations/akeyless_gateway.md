@@ -166,7 +166,7 @@ docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "akeyless_gateway" >}}
+{{< get-metrics-from-git "akeyless-gateway" >}}
 
 
 ### サービスチェック

@@ -15,7 +15,7 @@ title: 사용량 속성
 
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 사용량 속성은 Enterprise 요금제에 포함된 고급 기능입니다. 다른 모든 요금제의 경우 계정 담당자 또는 <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>에 문의하여 이 기능을 요청하세요.
 </div>
 

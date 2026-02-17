@@ -6,29 +6,29 @@ further_reading:
   tag: ブログ
   text: PHP ログの収集、カスタマイズ、分析方法
 - link: /logs/log_configuration/processors
-  tag: Documentation
+  tag: ドキュメント
   text: ログの処理方法
 - link: /logs/log_configuration/parsing
-  tag: Documentation
+  tag: ドキュメント
   text: パースの詳細
 - link: /logs/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: ログの調査方法
 - link: /logs/explorer/#visualize
-  tag: Documentation
+  tag: ドキュメント
   text: ログ分析の実行
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: ドキュメント
   text: ログ収集のトラブルシューティングガイド
 - link: /glossary/#tail
   tag: 用語集
-  text: 用語集 "テール" の項目
+  text: 用語集の "tail" の項目
 title: PHP ログ収集
 ---
 
 ## 概要
 
-PHP ログを Datadog に送信する場合は、ファイルにログを記録し、Datadog Agent を使用してそのファイルを[テール][14]します。このページでは、[Monolog][8]、[Zend-Log][9] および [Symfony][10] ログライブラリをセットアップする例を詳しく説明します。
+PHP ログを Datadog に送信する場合は、ファイルにログを記録し、Datadog Agent を使用してそのファイルを[追跡][14]します。このページでは、[Monolog][8]、[Zend-Log][9] および [Symfony][10] ログライブラリをセットアップする例を詳しく説明します。
 
 ## セットアップ
 
@@ -334,7 +334,7 @@ Monolog のプリプロセッサーには、単純なコールバックで、設
               arguments:  [ @session ]
               tags:
                   - { name: monolog.processor, method: processRecord }
-    ```
+    ``` 
 
 3. 生成された JSON ファイルを Datadog に[ストリーミング](#configure-the-datadog-agent)します。
 
@@ -433,7 +433,7 @@ monolog:
 {{% /tab %}}
 {{% tab "Laravel" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 関数 <code>\DDTrace\current_context()</code> は、バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> で導入されています。
 </div>
 
@@ -532,10 +532,10 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -135,7 +135,7 @@ micro、nano、small、medium、large、xlarge、2xlarge、3xlarge、4xlarge、6
 ```
 
 - **type: ri**: リザーブドインスタンスの請求オプションの値は常に `ri` です。
-- **leaseContractLenght: 数値**: インスタンスが予約されている時間の長さ。許容される値は 12 または 36 です。
+- **leaseContractLength: 数値**: インスタンスが予約されている時間の長さ。許容される値は 12 または 36 です。
 - **purchaseOption: 文字列**: インスタンスの購入オプション。許容される値は `No Upfront`、`Partial Upfront`、および `All Upfront` です。
 - **offeringClass: 文字列**: インスタンスのオファリングクラス。許容される値は `standard` と `convertible` です。
 

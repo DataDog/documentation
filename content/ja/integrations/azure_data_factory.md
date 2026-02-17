@@ -39,7 +39,7 @@ Datadog Azure インテグレーションを使用して、Data Factory から�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_data_factory" >}}
+{{ get-metrics-from-git "azure-datafactory" }}
 
 
 ### イベント

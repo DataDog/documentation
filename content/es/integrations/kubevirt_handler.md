@@ -69,7 +69,7 @@ tile:
 <!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Esta integración se encuentra en fase beta pública y debe activarse en cargas de trabajo de producción con precaución.
 </div>
 
@@ -99,7 +99,7 @@ No es necesaria ninguna instalación adicional en su servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kubevirt_handler" >}}
+{{< get-metrics-from-git "kubevirt-handler" >}}
 
 
 ### Eventos

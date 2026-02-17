@@ -31,7 +31,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
 | `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default, View Name | Mobile only |
 | `rum.measure.session` | Count of sessions | Default | Mobile & Browser |
-| `rum.measure.session.action` | Count of actions | Default, Action Type, View Name | Mobile & Browser |
+| `rum.measure.session.action` | Count of actions | Default | Mobile & Browser |
 | `rum.measure.session.crash_free` | Count of crash-free sessions | Default | Mobile only |
 | `rum.measure.session.error` | Count of errors per session (@session.error.count) | Default, Percentiles breakdown | Mobile & Browser |
 | `rum.measure.session.frustration` | Count of frustration signals | Default | Mobile & Browser |

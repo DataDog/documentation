@@ -96,7 +96,7 @@ tile:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mergify_oauth" >}}
+{{< get-metrics-from-git "mergify-oauth" >}}
 
 
 メトリクス `mergify.queue_checks_outcome` で利用可能な `outcome_type` タグは次のとおりです:

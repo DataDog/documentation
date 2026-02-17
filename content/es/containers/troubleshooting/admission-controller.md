@@ -1,4 +1,6 @@
 ---
+description: Solucionar problemas frecuentes con el Controlador de admisión y la inyección
+  de bibliotecas del Datadog Cluster Agent
 further_reading:
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
@@ -278,7 +280,7 @@ Alternativamente, para los entornos basados en Cilium, establece `flavor` en `ci
 
 ### Solucionar problemas de red para distribuciones de Kubernetes
 
-Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el trazador de Datadog.
+Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el rastreador de Datadog. El servicio del Controlador de admisión recibe tráfico en el puerto 443 y lo reenvía al pod del Cluster Agent en el puerto 8000.
 
 Según tu distribución de Kubernetes, esto puede tener algunos requisitos adicionales para tus reglas de seguridad y configuración del Controlador de admisión.
 

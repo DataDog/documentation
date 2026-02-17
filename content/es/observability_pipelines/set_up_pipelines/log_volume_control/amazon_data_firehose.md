@@ -38,9 +38,25 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+##### Requisitos previos
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Configurar el destino
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -52,7 +68,9 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
+{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
+
+Para configurar el destino, sigue las instrucciones del proveedor de nube que utilizas para archivar tus logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -96,6 +114,11 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% observability_pipelines/destination_settings/sentinelone %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/destination_settings/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
@@ -126,7 +149,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "Añadir variables de entorno" %}}
+{{% tab "Add env vars" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
@@ -134,6 +157,11 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% tab "Add hostname" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
+
+{{% /tab %}}
+{{% tab "Procesador personalizado" %}}
+
+{{% observability_pipelines/processors/custom_processor %}}
 
 {{% /tab %}}
 {{% tab "Dedupe" %}}
@@ -171,6 +199,11 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Analizar XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Cuota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -185,6 +218,20 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
+{{% collapse-content title="Asignación de bibliotecas" level="h5" expanded=false id="library_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Asignación personalizada" level="h5" expanded=false id="custom_mapping" %}}
+
+{{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
+
+{{% /collapse-content %}}
+
+{{% observability_pipelines/processors/filter_syntax %}}
+
 {{% /tab %}}
 {{% tab "Muestra" %}}
 
@@ -195,7 +242,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-<!-- {{% collapse-content title="Añadir reglas desde la biblioteca" level="h5" %}}
+{{% collapse-content title="Añadir reglas de la biblioteca" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
@@ -204,7 +251,22 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
-{{% /collapse-content %}} -->
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Dividir matriz" %}}
+
+{{% observability_pipelines/processors/split_array %}}
+
+{{% /tab %}}
+{{% tab "Procesador de etiquetas" %}}
+
+{{% observability_pipelines/processors/tags_processor %}}
+
+{{% /tab %}}
+{{% tab "Limitar" %}}
+
+{{% observability_pipelines/processors/throttle %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -214,7 +276,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% observability_pipelines/multiple_processors %}}
 
 ### Instalar el worker de Observability Pipelines
-1. Selecciona tu plataforma en el menú desplegable **Choose your installation platform** (Elige tu plataforma de instalación).
+1. Selecciona tu plataforma en el menú desplegable **Elige tu plataforma de instalación**.
 1. Ingresa la dirección de Amazon Data Firehose. El worker de Observability Pipelines escucha esta dirección y este puerto para recibir logs desde Amazon Data Firehose.
 1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta [Requisitos previos](#prerequisites).
 {{< tabs >}}
@@ -223,9 +285,19 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -279,6 +351,11 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% observability_pipelines/destination_env_vars/sentinelone %}}
 
 {{% /tab %}}
+{{% tab "Socket" %}}
+
+{{% observability_pipelines/destination_env_vars/socket %}}
+
+{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_env_vars/splunk_hec %}}
@@ -302,19 +379,9 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% observability_pipelines/install_worker/docker %}}
 
 {{% /tab %}}
-{{% tab "Amazon EKS" %}}
+{{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/install_worker/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-
-{{% observability_pipelines/install_worker/azure_aks %}}
-
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-
-{{% observability_pipelines/install_worker/google_gke %}}
+{{% observability_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
 {{% tab "Linux (APT)" %}}

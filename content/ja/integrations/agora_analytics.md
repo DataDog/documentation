@@ -33,7 +33,7 @@ author:
   support_email: support@agora.io
 categories:
 - コラボレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/agora_analytics/README.md
 display_on_public_website: true
@@ -76,7 +76,7 @@ tile:
 
 ## 概要
 
-Agora Analytics は、音声やビデオの使用状況、品質、パフォーマンスをリアルタイムに追跡し、解釈します。Analytics は、Agora の音声通話、ビデオ通話、インタラクティブライブストリーミングの拡張機能で、品質問題の特定、根本原因の特定、エンドユーザーエクスペリエンスを向上させるための問題解決に役立ちます。
+Agora Analytics は、チャット、リアルタイム音声やビデオの使用状況、品質、パフォーマンスを追跡し、解釈します。Analytics は、Agora の音声通話、ビデオ通話、インタラクティブライブストリーミング、Agora チャットの拡張機能で、品質問題の特定、根本原因の特定、エンドユーザーエクスペリエンスを向上させるための問題解決に役立ちます。
 
 このインテグレーションは、使用率、品質、パフォーマンスなどのメトリクスを Datadog アカウントに直接送信します。
 
@@ -87,8 +87,8 @@ Agora Analytics Datadog Connector の構成については、Agora Analytics イ
 ## 収集データ
 
 ### メトリクス
+{{< get-metrics-from-git "agora_analytics" >}}
 
-Agora Analytics は Datadog にメトリクスを送信します。
 
 ### イベント
 
@@ -100,7 +100,8 @@ Agora Analytics には、サービスのチェック機能は含まれません�
 
 ## Agent
 
-ヘルプが必要な場合は、[Agora サポート][2]までお問い合わせください。
+ヘルプが必要な場合は、[Agora サポート][3]までお問い合わせください。
 
 [1]: https://docs.agora.io/en/agora-analytics/analyze/video-voice-sdk/datadog-integration
-[2]: mailto:support@agora.io
+[2]: https://github.com/DataDog/integrations-extras/blob/master/agora_analytics/metadata.csv
+[3]: mailto:support@agora.io

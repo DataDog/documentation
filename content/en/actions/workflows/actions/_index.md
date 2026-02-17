@@ -1,5 +1,6 @@
 ---
 title: Actions
+description: Use generic workflow actions for logic control, data transformation, HTTP requests, and JavaScript operations in your workflows.
 disable_toc: false
 disable_sidebar: false
 type: documentation
@@ -36,4 +37,4 @@ If your use case is not covered by an integration or generic Datadog action, you
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
 
 [1]: https://forms.gle/JzPazvxXox7fvA2R8
-[2]: https://datadoghq.slack.com/
+[2]: https://chat.datadoghq.com/

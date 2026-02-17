@@ -8,7 +8,7 @@ title: Proyectos
 ---
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La gestión de casos no está disponible en el sitio {{< region-param key=dd_datacenter code="true" >}}.
 </div>
 {{% /site-region %}}
@@ -28,7 +28,7 @@ Para crear un proyecto
 
 ## Borrar un proyecto
 
-<div class="alert alert-warning">Los casos borrados no se pueden recuperar.</div>
+<div class="alert alert-danger">Los casos borrados no se pueden recuperar.</div>
 
 Puedes eliminar un proyecto desde la página de Configuración de un proyecto.
 

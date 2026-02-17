@@ -1,5 +1,10 @@
 ---
 title: Selecting the right colors for your graphs
+description: Choose appropriate colors for graph series to ensure clear data distinction and effective troubleshooting for teams.
+further_reading:
+- link: "/dashboards/guide/consistent_color_palette"
+  tag: Documentation
+  text: "Understanding Duplicate Colors in the Consistent Palette"
 ---
 
 In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively.
@@ -24,8 +29,7 @@ The Classic color palette has visual accessibility support.
 
 #### Consistent/Semantic
 
-The Consistent palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. The Consistent palette does not guarantee that adjacent data series do not use the same color, and it does not have accessibility support.
-
+The Consistent palette assigns a fixed color consistently to a series of data, based on its tav value. This makes it easier to correlate data across different charts. However, it **does not** guarantee unique colors for adjacent data series within the same widget, and it does not have accessibility support. For more information, see [Understanding Duplicate Colors in the Consistent Palette][3].
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="A color palette for the Consistent/Semantic palette." style="width:70%;" >}}
 
@@ -73,3 +77,4 @@ Datadog offers accessible color modes for graphs to cater to visual needs, inclu
 
 [1]: https://app.datadoghq.com/personal-settings/preferences
 [2]: /dashboards/guide/compatible_semantic_tags
+[3]: /dashboards/guide/consistent_color_palette

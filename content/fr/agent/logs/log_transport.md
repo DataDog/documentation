@@ -29,7 +29,7 @@ Ce mécanisme de test de la connectivité est uniquement exécuté au démarrage
 
 Pour vérifier le transport que l'Agent utilise, exécutez la [commande status de l'Agent][1].
 
-{{< img src="agent/logs/agent-status.png" alt="Commande status de l'Agent" style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Statut de l'Agent" style="width:70%;">}}
 
 **Remarques** :
 
@@ -48,7 +48,7 @@ Pour imposer le transport HTTPS avec les versions 6.14/7.14 ou ultérieures de l
 ```yaml
 logs_enabled: true
 logs_config:
-  use_http: true
+  force_use_http: true
 ```
 
 Pour envoyer des logs avec des variables d'environnement, configurez ce qui suit :
@@ -62,13 +62,13 @@ Par défaut, l'Agent Datadog utilise le port `443` pour envoyer ses logs à Data
 
 **Nous vous conseillons de transmettre les logs via HTTPS** pour effectuer la collecte de logs la plus fiable possible, car le code de statut `200` est renvoyé par le système de stockage de Datadog :
 
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Schéma du processus d'admission HTTPS"  style="width:80%;">}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Schéma du processus d'admission HTTPS" style="width:80%;">}}
 
 Avec HTTPS, l'Agent envoie les lots de logs en appliquant les limites suivantes :
 
 * Taille maximale d'un lot : 1 Mo
 * Taille maximale d'un log : 256 Ko
-* Nombre maximum de logs dans un lot : 200
+* Nombre maximum de logs dans un lot : 1 000
 
 ### Compression des logs
 
@@ -103,11 +103,13 @@ Vous pouvez également utiliser la variable d'environnement `DD_LOGS_CONFIG_BATC
 
 Lorsque les logs sont envoyés via HTTPS et doivent transiter par un proxy web, utilisez les mêmes [paramètres de proxy][3] que ceux utilisés pour l'envoi d'autres types de données.
 
-[1]: /fr/agent/guide/agent-configuration-files/
+[1]: /fr/agent/configuration/agent-configuration-files/
 [2]: /fr/agent/basic_agent_usage/#agent-overhead
-[3]: /fr/agent/proxy/
+[3]: /fr/agent/configuration/proxy/
 {{% /tab %}}
+
 {{% tab "TCP" %}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
 
 Pour imposer le transport TCP, mettez à jour le [fichier de configuration principal][1] (`datadog.yaml`) de l'Agent en indiquant :
 
@@ -123,12 +125,19 @@ Pour envoyer des logs avec des variables d'environnement, configurez ce qui suit
 
 Par défaut, l'Agent Datadog envoie ses logs à Datadog via le protocole TCP chiffré par TLS. Cela nécessite une communication sortante (sur le port `10516` pour le site américain de Datadog ou `443` pour le site européen).
 
-[1]: /fr/agent/guide/agent-configuration-files/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+L'endpoint TCP n'est pas pris en charge pour ce site.
+
+{{< /site-region >}}
+
+[1]: /fr/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **Remarque** : si vous configurez un serveur [proxy SOCKS5][2], le transport TCP est imposé, car les proxies socks5 ne sont pas encore pris en charge par le transport HTTPS avec compression.
 
 
-[1]: /fr/agent/guide/agent-commands/?tab=agentv6v7#service-status
+[1]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#service-status
 [2]: /fr/agent/logs/proxy/?tab=socks5

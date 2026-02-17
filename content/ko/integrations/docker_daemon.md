@@ -68,7 +68,7 @@ tile:
 
 **참고**: 도커(Docker) Daemon 점검은 여전히 지원되나 **에이전트 v5**에서만 동작합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <b>에이전트 v6에서 도커(Docker) 통합을 사용하려면 하단 <a href="#에이전트-v6">에이전트 v6 섹션을</a> 참조하세요.</b>
 </div>
 
@@ -193,7 +193,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 
 ## 수집한 데이터
 ### 메트릭
-{{< get-metrics-from-git "docker_daemon" >}}
+{{< get-metrics-from-git "docker" >}}
 
 
 ### 이벤트
@@ -211,7 +211,7 @@ Datadog 에이전트, Alpine Linux 기반 이미지, 버전 관리 등을 사용
 * 업데이트
 
 ### 서비스 점검
-{{< get-service-checks-from-git "docker_daemon" >}}
+{{< get-service-checks-from-git "docker" >}}
 
 
 **참고**: `docker.exit`를 사용하려면 [도커(Docker) YAML file][21] 파일에 `collect_exit_codes: true`를 추가하고 에이전트를 다시 시작합니다.

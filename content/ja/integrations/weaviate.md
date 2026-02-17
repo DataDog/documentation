@@ -22,7 +22,7 @@ assets:
     source_type_id: 10371
     source_type_name: Weaviate
   monitors:
-    node_status: assets/monitors/node_status.json
+    Weaviate Node in unhealthy state: assets/monitors/node_status.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -31,7 +31,7 @@ author:
 categories:
 - ai/ml
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weaviate/README.md
 display_on_public_website: true
@@ -39,12 +39,12 @@ draft: false
 git_integration_title: weaviate
 integration_id: weaviate
 integration_title: Weaviate
-integration_version: 2.3.3
+integration_version: 3.2.0
 is_public: true
 manifest_version: 2.0.0
 name: weaviate
 public_title: Weaviate
-short_description: Open-source vector database for building AI-powered applications.
+short_description: AI 駆動のアプリケーションを構築するためのオープン ソースのベクター データベース。
 supported_os:
 - linux
 - windows
@@ -60,7 +60,7 @@ tile:
   - Submitted Data Type::Metrics
   - Offering::Integration
   configuration: README.md#Setup
-  description: Open-source vector database for building AI-powered applications.
+  description: AI 駆動のアプリケーションを構築するためのオープン ソースのベクター データベース。
   media: []
   overview: README.md#Overview
   resources:
@@ -73,52 +73,52 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Weaviate Overview Dashboard][1]
+![Weaviate Overview ダッシュボード][1]
 
 ## 概要
 
-Weaviate is an open source, AI-native vector database that helps create AI-powered applications. With Datadog's Weaviate integration, you can:
+Weaviate は、オープン ソースで AI ネイティブなベクター データベースであり、AI 駆動のアプリケーションの作成を支援します。Datadog の Weaviate インテグレーションにより、次のことが可能です:
 
-- Monitor usage statistics (such as duration of insert, delete, and maintenance operations) to identify potential storage issues, bottlenecks, and assess the impact of data modifications on system responsiveness.
-- Track query latency, rate, and concurrent read/write requests to gain insight into the vector database's overall responsiveness and load handling capabilities.
-- Optimize write-heavy workloads with object statistics, like the average time taken for "put" (write) operations.
-- Ensure smooth and efficient data ingestion with import-related metrics that offer insights into operations like data loading process.
+- 挿入・削除・メンテナンスの各操作の所要時間などの使用状況の統計を監視し、潜在的なストレージの問題やボトルネックを特定し、データ変更がシステムの応答性に与える影響を評価します。
+- クエリ レイテンシ、レート、同時の読み取り / 書き込みのリクエストを追跡し、ベクター データベースの全体的な応答性と負荷処理能力を把握します。
+- "put" (書き込み) 操作に要する平均時間などのオブジェクトの統計情報を用いて、書き込みが多いワークロードを最適化します。
+- データ ロード プロセスなどの操作に関する洞察を提供するインポート関連のメトリクスにより、データ取り込みを円滑かつ効率的に行います。 
 
-This check monitors [Weaviate][2] through the Datadog Agent. For more information, see [Weaviate monitoring][3]. To learn more about Datadog's suite of AI integrations, see this [blog][4].
+このチェックは Datadog Agent を通じて [Weaviate][2] を監視します。詳細は [Weaviate の監視][3] を参照してください。Datadog の AI インテグレーション スイートの詳細については、こちらの [ブログ][4] を参照してください。
 
 ## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][5] for guidance on applying these instructions.
+ホスト上で実行されている Agent にこのチェックをインストールし構成するには、以下の手順に従ってください。コンテナ化された環境については、これらの手順の適用方法に関するガイダンスとして [Autodiscovery Integration Templates][5] を参照してください。
 
 ### インストール
 
-Starting from Agent release 7.47.0, the Weaviate check is included in the [Datadog Agent][3] package.
+Agent リリース 7.47.0 以降、Weaviate チェックは [Datadog Agent][3] パッケージに含まれています。
 
 **注**: この機能を使用するには、Agent v7.47.0 以上が必要です。
 
 ### 構成
 
-Weaviate can be configured to expose Prometheus-formatted metrics. The Datadog Agent can collect these metrics using the integration described below. Follow the instructions to configure data collection for your Weaviate instances. For the required configurations to expose the Prometheus metrics, see the [Monitoring][6] page in the Weaviate documentation.
+Weaviate は、Prometheus 形式のメトリクスを公開するように構成できます。Datadog Agent は、以下で説明するインテグレーションを使用して、これらのメトリクスを収集できます。Weaviate インスタンスのデータ収集を構成するには、手順に従ってください。Prometheus メトリクスを公開するために必要な構成については、Weaviate ドキュメントの [Monitoring ページ][6] を参照してください。
 
-In addition, a small subset of metrics can be collected by communicating with different [API endpoints][7]. Specifically:
+さらに、異なる [API エンドポイント][7] に通信することで、小規模なサブセットのメトリクスも収集できます。具体的には:
 - `/v1/meta`: バージョン情報
 - `/v1/nodes`: オブジェクトやシャードなどのノード固有のメトリクス
 - `/v1/.well-known/live`: HTTP レスポンスタイムとサービスの有効性
 
-**Note**: This check uses [OpenMetrics][8] for metric collection, which requires Python 3.
+**注**: このチェックはメトリクス収集に [OpenMetrics][8] を使用します。Python 3 が必要です。
 
 #### コンテナ化
 ##### メトリクスの収集
 
-Make sure that the Prometheus-formatted metrics are exposed in your Weaviate cluster. You can configure and customize this by following the instructions on the [Monitoring][6] page in the Weaviate documentation. For the Agent to start collecting metrics, the Weaviate pods need to be annotated. For more information about annotations, refer to the [Autodiscovery Integration Templates][5] for guidance. You can find additional configuration options by reviewing the [sample weaviate.d/conf.yaml][9]
+Prometheus 形式のメトリクスが Weaviate クラスタで公開されていることを確認してください。これは、Weaviate ドキュメントの [Monitoring ページ][6] の手順に従って構成とカスタマイズができます。Agent がメトリクス収集を開始するには、Weaviate の Pod にアノテーションが必要です。アノテーションの詳細については、[Autodiscovery Integration Templates][5] を参照してください。追加の構成オプションは、[weaviate.d/conf.yaml のサンプル][9] を参照してください。
 
 **注**: リストされたメトリクスは、利用可能な場合にのみ収集できます。一部のメトリクスは、特定のアクションが実行されたときにのみ生成されます。例えば、オブジェクト削除メトリクスは、オブジェクトが削除されたときにのみ公開されます。
 
 Weaviate チェックの構成で最も重要なパラメーターは以下の 2 つです。
-- `openmetrics_endpoint`: This parameter should be set to the location where the Prometheus-formatted metrics are exposed. The default port is `2112`, but it can be configured using the `PROMETHEUS_MONITORING_PORT` [environment variable][6]. In containerized environments, `%%host%%` should be used for [host autodetection][5].
-- `weaviate_api_endpoint`: This parameter is optional. By default, this parameter is set to `<hostname>:8080` and it specifies the configuration of the [RESTful API][7].
+- `openmetrics_endpoint`: このパラメータは、Prometheus 形式のメトリクスが公開されている場所に設定してください。デフォルトのポートは `2112` ですが、`PROMETHEUS_MONITORING_PORT` [環境変数][6] を使用して設定できます。コンテナ化された環境では、[ホストの自動検出][5] のために `%%host%%` を使用する必要があります。
+- `weaviate_api_endpoint`: このパラメータは任意です。デフォルトでは `<hostname>:8080` に設定され、[RESTful API][7] のエンドポイントを指定します。
 
-If authentication is required for the RESTful API endpoints, the check can be configured to provide an API key as part of the [request header][10].
+RESTful API エンドポイントで認証が必要な場合は、[リクエスト ヘッダー][10] の一部として API キーを提供するようにチェックを構成できます。
 
 
 ```yaml
@@ -148,11 +148,11 @@ spec:
 # (...)
 ```
 
-**Note**: You can set these annotations directly in your [Weaviate Helm chart][11] using `annotations` key.
+**注**: これらのアノテーションは、`annotations` キーを使って [Weaviate Helm chart][11] で直接設定できます。
 
 ### 検証
 
-[Run the Agent's status subcommand][12] and look for `weaviate` under the Checks section.
+[Agent の status サブコマンドを実行][12] し、Checks セクションの `weaviate` を探します。
 
 ## 収集データ
 
@@ -176,7 +176,7 @@ Weaviate インテグレーションには、イベントは含まれません�
 
 お役に立つドキュメント、リンクや記事:
 
-- [Integration roundup: Monitoring your AI stack][4]
+- [インテグレーション ラウンドアップ: AI スタックの監視][4]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/weaviate/images/weaviate_dashboard.png

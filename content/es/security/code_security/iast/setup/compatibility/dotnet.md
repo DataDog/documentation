@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca .NET para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería .NET para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones  | Versión mínima de rastreador .NET |
 | -------------------------------- | ----------------------------|
@@ -56,7 +56,7 @@ Son compatibles con las siguientes arquitecturas:
 
 
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)

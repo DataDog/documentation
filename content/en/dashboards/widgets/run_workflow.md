@@ -1,5 +1,6 @@
 ---
 title: Run Workflow Widget
+description: Trigger automated workflows directly from dashboards to resolve issues and maintain system health quickly.
 widget_type: run_workflow
 disable_toc: false
 further_reading:

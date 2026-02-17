@@ -1,5 +1,6 @@
 ---
 title: APM metrics sent by the Datadog Agent
+description: Reference list of all APM metrics sent by the Datadog Agent for monitoring trace processing and Agent performance.
 aliases:
     - /agent/faq/agent-apm-metrics/
     - /tracing/send_traces/agent-apm-metrics/

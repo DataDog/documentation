@@ -57,7 +57,7 @@ Después de solucionar las incompatibilidades, el comando no devolverá nada:
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
-$ 
+$
 ```
 
 Aunque `pylint` detecta cualquier problema que pueda impedir que el intérprete de Python 3 ejecute el código, no puede comprobar la validez lógica. Si realizas algún cambio en el código, recuerda ejecutar el check y validar la salida.
@@ -120,7 +120,7 @@ El método `dict.has_key()` está obsoleto en Python 2 y se ha eliminado en Pyt
 |--------------------------------------|-----------------|
 | `mydict.has_key('foo') //deprecated` | `foo in mydict` |
 
-### Cambios en la biblioteca estándar
+### Cambios en la librería estándar
 
 Python 3 cuenta con una biblioteca estándar reestructurada, en la que se han cambiado de nombre o desplazado varios módulos y funciones. La función de importar módulos trasladados mediante `six.moves` es compatible con ambas versiones de Python.
 
@@ -185,7 +185,7 @@ Para reproducir el mismo comportamiento que en Python 3 sin importar la versió
 
 ### Redondeo
 
-En Python 2, la biblioteca estándar redondea los números aritméticamente (hacia arriba si el número llega al 5). En cambio, Python 3 redondea los números en función del número par más cercano.
+En Python 2, la librería estándar redondea los números aritméticamente (hacia arriba si el número llega al 5). En cambio, Python 3 redondea los números en función del número par más cercano.
 
 #### Python 2
 
@@ -229,11 +229,11 @@ mypackage/
     foo.py
 ```
 
-Supongamos también que `math.py` cuenta con una función llamada `gcd` (que contiene matices distintos de la función `gcd` del módulo `math` de la biblioteca estándar) y quieres utilizar la función `gcd` de tu paquete local, no la de la biblioteca estándar.
+Supongamos también que `math.py` cuenta con una función llamada `gcd` (que contiene matices distintos de la función `gcd` del módulo `math` de la librería estándar) y quieres utilizar la función `gcd` de tu paquete local, no la de la librería estándar.
 
 En Python 2, si estás dentro de un paquete, los módulos propios de ese paquete tienen prioridad sobre los módulos globales. Al usar `from math import gcd`, se importa la función `gcd` de `mypackage/math.py`.
 
-En Python 3, los formatos de importación que no comienzan por `.` se interpretan como importaciones absolutas. Al utilizar `from math import gcd`, se importa la función `gcd` de la biblioteca estándar.
+En Python 3, los formatos de importación que no comienzan por `.` se interpretan como importaciones absolutas. Al utilizar `from math import gcd`, se importa la función `gcd` de la librería estándar.
 
 | Python 2               | Python 2 y 3          |
 |------------------------|-------------------------|

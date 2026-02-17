@@ -45,7 +45,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-El ejemplo anterior ilustra cómo utilizar el contexto del tramo en el paquete `log` de la biblioteca estándar. Una lógica similar puede aplicarse también a paquetes de terceros.
+El ejemplo anterior ilustra cómo utilizar el contexto del tramo en el paquete `log` de la librería estándar. Una lógica similar puede aplicarse también a paquetes de terceros.
 
 **Nota**: Si no estás utilizando una [integración de logs de Datadog][1] para analizar tus logs, las reglas personalizadas de análisis de logs deben garantizar que `dd.trace_id`, `dd.span_id`, `dd.service`, `dd.env` y `dd.version` se analizan como cadenas. Encontrarás más información en [Logs correlacionados no aparecen en el panel de ID de traza][2].
 
@@ -71,7 +71,7 @@ func main() {
     logrus.SetFormatter(&logrus.JSONFormatter{})
 
     // Add Datadog context log hook
-    logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
+    logrus.AddHook(&dd_logrus.DDContextLogHook{})
 
     // ...
 }

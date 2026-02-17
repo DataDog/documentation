@@ -3,26 +3,26 @@ description: Recopila logs desde tus aplicaciones de Android.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: Código fuente
-  text: dd-sdk-android Source code
+  text: Código fuente de dd-sdk-android
 - link: logs/explorer
   tag: Documentación
-  text: Aprende a explorar tus logs
+  text: Aprender a explorar tus logs
 title: Recopilación de logs de Android
 ---
 
 ## Información general
 
-Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de registro del cliente `dd-sdk-android-logs` de Datadog][1] y aprovecha las siguientes características:
+Envía logs a Datadog desde tus aplicaciones de Android con [la librería de registro del cliente `dd-sdk-android-logs` de Datadog][1] y aprovecha las siguientes características:
 
 * Loguear en Datadog en formato JSON de forma nativa.
-* Añadir `context` y atributos personalizados adicionales a cada log enviado.
+* Añade `context` y atributos personalizados adicionales a cada log enviado.
 * Reenviar excepciones capturadas de Java o Kotlin.
 * Registrar las direcciones IP reales de los clientes y los Agents de usuario.
-* Uso optimizado de red con envíos masivos automáticos.
+* Uso de red optimizado con envíos masivos automáticos.
 
 ## Configuración
 
-1. Añade la dependencia de Gradle declarando la biblioteca como una dependencia en el archivo `build.gradle` a nivel de módulo. Asegúrate de sustituir `x.x.x` en el siguiente ejemplo por la última versión de [dd-sdk-android-logs][2].
+1. Añade la dependencia de Gradle declarando la librería como una dependencia en el archivo `build.gradle` a nivel de módulo. Asegúrate de sustituir `x.x.x` en el siguiente ejemplo por la última versión de [dd-sdk-android-logs][2].
 
     ```groovy
     dependencies {
@@ -255,16 +255,53 @@ Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de re
    {{< /tabs >}}
    {{< /site-region >}}
 
-   Para cumplir con la normativa GDPR, el SDK requiere el valor de consentimiento de rastreo en la inicialización.
-   El consentimiento de rastreo puede ser uno de los siguientes valores:
-   * `TrackingConsent.PENDING`: el SDK comienza a recopilar y procesar en lotes los datos, pero no los envía al endpoint de recopilación
-     de datos. El SDK espera al nuevo valor de consentimiento de rastreo para decidir qué hacer con los datos por lotes.
-   * `TrackingConsent.GRANTED`: el SDK comienza a recopilar los datos y los envía al endpoint de recopilación de datos.
-   * `TrackingConsent.NOT_GRANTED`: el SDK no recopila ningún dato. No podrás enviar manualmente ningún log, traza (trace), o
-     eventos de RUM.
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.AP2)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.AP2)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-   Para actualizar el consentimiento de rastreo una vez inicializado el SDK, llama a: `Datadog.setTrackingConsent(<NEW CONSENT>)`.
-   El SDK cambia su comportamiento en función del nuevo consentimiento. Por ejemplo, si el consentimiento de rastreo actual es `TrackingConsent.PENDING` y lo actualizas a:
+   Para cumplir con la normativa GDPR, el SDK requiere el valor de consentimiento de seguimiento durante la inicialización.
+   El consentimiento de seguimiento puede ser uno de los siguientes valores:
+   * `TrackingConsent.PENDING`: el SDK comienza a recopilar y procesar en lotes los datos, pero no los envía al endpoint de recopilación
+     endpoint de recopilación. El SDK espera el nuevo valor del consentimiento de rastreo para decidir qué hacer con los datos procesados por lotes.
+   * `TrackingConsent.GRANTED`: el SDK comienza a recopilar los datos y los envía al endpoint de recopilación de datos.
+   * `TrackingConsent.NOT_GRANTED`: el SDK no recopila ningún dato. No podrás enviar manualmente ningún log, traza o
+     evento de RUM.
+
+   Para actualizar el consentimiento de seguimiento una vez inicializado el SDK, llama a: `Datadog.setTrackingConsent(<NEW CONSENT>)`.
+   El SDK cambia su comportamiento en función del nuevo consentimiento. Por ejemplo, si el consentimiento de seguimiento actual es `TrackingConsent.PENDING` y lo actualizas a:
    * `TrackingConsent.GRANTED`: el SDK envía todos los datos actuales procesados por lotes y los datos futuros directamente al endpoint de recopilación de datos.
    * `TrackingConsent.NOT_GRANTED`: el SDK borra todos los datos procesados por lotes y no recopila datos futuros.
 
@@ -276,7 +313,7 @@ Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de re
     }
    ```
 
-   Al redactar tu aplicación, puedes habilitar los logs de desarrollo invocando al método `setVerbosity`. Todos los mensajes internos de la biblioteca con una prioridad igual o superior al nivel proporcionado se loguean en Logcat de Android:
+   Al escribir tu aplicación, puedes activar los logs de desarrollo llamando al método `setVerbosity`. Todos los mensajes internos de la librería con una prioridad igual o superior al nivel proporcionado se loguean en Logcat de Android:
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```
@@ -341,10 +378,10 @@ Envía logs a Datadog desde tus aplicaciones de Android con [la biblioteca de re
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-       try { 
-           doSomething() 
+       try {
+           doSomething()
        } catch (e: IOException) {
-           logger.e("Error while doing something", e) 
+           logger.e("Error while doing something", e)
        }
    ```
    {{% /tab %}}
@@ -411,11 +448,11 @@ Los siguientes métodos en `Logger.Builder` se pueden utilizar al inicializar el
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `setNetworkInfoEnabled(true)`    | Añade el atributo `network.client.connectivity` a todos los logs. Los datos registrados por defecto son `connectivity` (`Wifi`, `3G`, `4G`...) y `carrier_name` (`AT&T - US`). `carrier_name` solo está disponible para la API de Android nivel 28+.                                     |
 | `setService(<SERVICE_NAME>)` | Establece `<SERVICE_NAME>` como valor para el [atributo estándar][6] `service` adjunto a todos los logs enviados a Datadog.                                                                                                                                                           |
-| `setLogcatlogsEnabled(true)`     | Establécelo en `true` para utilizar Logcat como registrador.                                                                                                                                                                                                                                  |
+| `setLogcatLogsEnabled(true)`     | Establécelo en `true` para utilizar Logcat como registrador.                                                                                                                                                                                                                                  |
 | `setBundleWithTraceEnabled(true)`| Establécelo en `true` (por defecto) para agrupar los logs con la traza activa en tu aplicación. Este parámetro te permite visualizar todos los logs enviados durante una traza específica utilizando el dashboard de Datadog.                                                        |
 | `setBundleWithRumEnabled(true)`| Establécelo en `true` (por defecto) para agrupar los logs con el contexto RUM actual en tu aplicación. Este parámetro te permite visualizar todos los logs enviados mientras una Vista específica está activa utilizando Datadog RUM Explorer.                                                        |
 | `setName(<LOGGER_NAME>)`   | Establece `<LOGGER_NAME>` como el valor para el atributo `logger.name` adjunto a todos los logs enviados a Datadog.                                                                                                                                                                  |
-| `setRemoteSampleRate(<SAMPLE_RATE>)`   | Establece la frecuencia de muestreo para este registrador. Todos los logs producidos por la instancia del registrador se muestrean aleatoriamente según la frecuencia de muestreo proporcionada (por defecto 1.0 = todos los logs). **Nota**: Los logs de Logcat no se muestrean.            |
+| `setRemoteSampleRate(<SAMPLE_RATE>)`   | Establece la frecuencia de muestreo para este registrador. Todos los logs producidos por la instancia del registrador se muestrean aleatoriamente según la frecuencia de muestreo proporcionada (por defecto 100f = todos los logs). **Nota**: Los logs de Logcat no se muestrean.            |
 | `build()`                        | Crea una nueva instancia del registrador con todas las opciones configuradas.                                                                                                                                                                                                                       |
 
 ### Configuración global
@@ -455,7 +492,7 @@ Para más información, consulta [Empezando con etiquetas][7].
 
 Por defecto, los siguientes atributos se añaden a todos los logs enviados por un registrador:
 
-* `http.useragent` y sus propiedades extraídas `device` y `OS` 
+* `http.useragent` y sus propiedades extraídas `device` y `OS`
 * `network.client.ip` y sus propiedades geográficas extraídas (`country`, `city`)
 
 Utiliza la función `addAttribute("<ATTRIBUTE_KEY>", "<ATTRIBUTE_VALUE>")` para añadir un atributo personalizado a todos los logs enviados por un registrador específico:
@@ -498,7 +535,7 @@ Antes de que el dato se suba a Datadog, se almacena en formato de texto en el di
 
 Si tu código base existente utiliza Timber, puedes reenviar todos esos logs a Datadog automáticamente mediante la [biblioteca dedicada][9].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

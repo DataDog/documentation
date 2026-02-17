@@ -74,7 +74,7 @@ If you haven't already, set up the [Microsoft Azure integration][1]. No addition
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_data_factory" >}}
+{{ get-metrics-from-git "azure-datafactory" }}
 
 
 ### 이벤트

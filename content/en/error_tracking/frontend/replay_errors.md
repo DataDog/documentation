@@ -50,27 +50,27 @@ Error Tracking Replay Snippets allows you to view a pixel-perfect recreation of 
    {{% tab "iOS" %}}
    Follow [these steps][4] to setup and configure your mobile application's error replay for this platform.
 
-   [4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+   [4]: /session_replay/mobile/setup_and_configuration/?tab=ios
    {{% /tab %}}
    {{% tab "Android" %}}
    Follow [these steps][5] to setup and configure your mobile application's error replay for this platform.
 
-   [5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+   [5]: /session_replay/mobile/setup_and_configuration/?tab=android
    {{% /tab %}}
    {{% tab "Kotlin Multiplatform" %}}
    Follow [these steps][6] to setup and configure your mobile application's error replay for this platform.
 
-   [6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=kotlinmultiplatform
+   [6]: /session_replay/mobile/setup_and_configuration/?tab=kotlinmultiplatform
    {{% /tab %}}
    {{% tab "React Native" %}}
    Follow [these steps][7] to setup and configure your mobile application's error replay for this platform.
 
-   [7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=reactnative
+   [7]: /session_replay/mobile/setup_and_configuration/?tab=reactnative
    {{% /tab %}}
    {{</tabs>}}
 
 ## Replay errors
-After reviewing key information about the error, such as the error message and stack trace, you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error. Scroll down below the stack trace and click on the preview of the replay to see a users actions before the error occured. 
+After reviewing key information about the error, such as the error message and stack trace, you can immediately pivot directly from the issue summary to a live reproduction of the most recent session that experienced the error. Scroll down below the stack trace and click on the preview of the replay to see a users actions before the error occurred. 
 
 {{< img src="error_tracking/error-replay.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
 

@@ -22,7 +22,7 @@ further_reading:
 title: Test Impact Analysis の概要
 ---
 
-<div class="alert alert-warning"> この機能は以前「Intelligent Test Runner」と呼ばれており、一部のタグには依然として「itr」が含まれています。</div>
+<div class="alert alert-danger"> この機能は以前「Intelligent Test Runner」と呼ばれており、一部のタグには依然として「itr」が含まれています。</div>
 
 ## 概要
 

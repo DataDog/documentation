@@ -1,5 +1,6 @@
 ---
 title: Sharing
+description: Share dashboards and graphs outside Datadog using public links, embedded code, and scheduled email reports.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs

@@ -152,7 +152,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "ibm_was" >}}
+{{< get-metrics-from-git "ibm-was" >}}
 
 
 ### Événements
@@ -160,7 +160,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 IBM WAS n'inclut aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "ibm_was" >}}
+{{< get-service-checks-from-git "ibm-was" >}}
 
 
 ## Dépannage

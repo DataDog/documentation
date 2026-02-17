@@ -42,7 +42,7 @@ orchestrion go test ./... -cover -covermode=count -coverpkg ./...
 
 3. `-coverpkg`: el análisis de cobertura de código para cada test debe configurarse para que se aplique en todas las dependencias de paquete y no sólo para el paquete que se está probando. De esta manera, si una dependencia cambia, se puede realizar un seguimiento del test afectado por este cambio. Si ejecutas el comando del test desde la raíz del proyecto (donde se encuentra el archivo go.mod), puedes utilizar el comodín `./...`. En caso contrario, deberás enumerar manualmente todas las dependencias de paquete separadas por comas (`pattern1, pattern2, pattern3, ...`). Para ello, puedes utilizar el comando `go list ./...` para obtener todos los nombres de paquete.
 
-<div class="alert alert-warning">Tener un valor -coverpkg incorrecto afecta a la capacidad de Test Impact Analysis para realizar un seguimiento correcto de la cobertura de los tests.</div>
+<div class="alert alert-danger">Tener un valor -coverpkg incorrecto afecta a la capacidad de Test Impact Analysis para realizar un seguimiento correcto de la cobertura de los tests.</div>
 
 ## Desactivar la omisión de tests específicos
 

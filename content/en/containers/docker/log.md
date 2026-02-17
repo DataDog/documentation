@@ -1,5 +1,6 @@
 ---
 title: Docker Log collection
+description: Configure log collection from applications running in Docker containers using the Datadog Agent
 aliases:
     - /logs/docker
     - /logs/languages/docker
@@ -24,6 +25,9 @@ further_reading:
     - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
+    - link: "/containers/troubleshooting/log-collection"
+      tag: "Documentation"
+      text: "Container Log Collection Troubleshooting"
 ---
 
 ## Overview
@@ -48,8 +52,8 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command for your respective operating system:
 
 ### Linux
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" code="true">}}:
+
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -66,11 +70,9 @@ docker run -d --name datadog-agent \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
            gcr.io/datadoghq/agent:latest
 ```
-{{< /site-region >}}
 
 ### Windows
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" code="true">}}:
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -84,13 +86,11 @@ docker run -d --name datadog-agent \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
 ```
-{{< /site-region >}}
 
 ### macOS
 Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resources -> File sharing.
 
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" code="true">}}:
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -106,7 +106,6 @@ docker run -d --name datadog-agent \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            gcr.io/datadoghq/agent:latest
 ```
-{{< /site-region >}}
 
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on GCR.
 
@@ -353,6 +352,10 @@ Since Agent v6.14+, the Agent collects logs for all containers (running or stopp
 
 For Kubernetes environments, see the [Kubernetes short lived container documentation][12].
 
+## Troubleshooting
+
+For troubleshooting steps, see [Container Log Collection Troubleshooting][13].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -369,3 +372,4 @@ For Kubernetes environments, see the [Kubernetes short lived container documenta
 [10]: /logs/guide/docker-logs-collection-troubleshooting-guide/
 [11]: /agent/guide/autodiscovery-management/
 [12]: /agent/kubernetes/log/?tab=daemonset#short-lived-containers
+[13]: /containers/troubleshooting/log-collection/

@@ -106,7 +106,7 @@ Google Cloud TPU のログは Google Cloud Logging で収集され、Cloud Pub/S
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_cloud_tpu" >}}
+{{< get-metrics-from-git "google-cloud-tpu" >}}
 
 
 ### イベント

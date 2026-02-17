@@ -21,7 +21,7 @@ Para instalar desde la fuente:
 
 El comando `dogwrap` mínimo válido tiene la siguiente disposición:
 
-{{< site-region region="us,gov,ap1" >}}
+{{< site-region region="us,gov,ap1,ap2" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 ```
@@ -50,7 +50,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 Con los siguientes parámetros:
 
 * `<EVENT_TITLE>`: título del evento que se mostrará en Datadog.
-* `<Datadog_API_KEY>`: [la clave de API de Datadog asociada a tu organización][2].
+* `<DATADOG_API_KEY>`: [la clave de API de Datadog asociada a tu organización][2].
 * `<COMMAND>`: comando para contener y generar eventos. Encierra tu comando llamado entre comillas para evitar que Python piense que los argumentos de la línea de comandos pertenecen al comando de Python en lugar del comando contenido.
 
 **Nota**: Utiliza el comando de ayuda de Dogwrap `dogwrap --help` para descubrir todas las opciones disponibles.

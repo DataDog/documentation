@@ -74,17 +74,17 @@ Para obtener una lista completo de las variables de entorno establecidas por Azu
 
 [101]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
 {{% /tab %}}
-{{% tab "Bitbucket Pipelines" %}}
+{{% tab "Pipelines de Bitbucket" %}}
 
 | Variable de entorno               | Descripción                                                                                                                                                      |
 |------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `BITBUCKET_BRANCH`                 | La rama fuente. Este valor sólo está disponible en las ramas. No está disponible para compilaciones contra etiquetas, o pipelines personalizados.                                         |
+| `BITBUCKET_PIPELINE_UUID`          | UUID del pipeline.                                                                                                                                        |
 | `BITBUCKET_BUILD_NUMBER`           | Identificador único de una compilación. Se incrementa con cada compilación y puede utilizarse para crear nombres de artefactos únicos.                                                |
 | `BITBUCKET_CLONE_DIR`              | La ruta absoluta del directorio en el que se clona el repositorio dentro del contenedor de Docker.                                                                |
-| `BITBUCKET_COMMIT`                 | El hash de la confirmación que inició la compilación.                                                                                                           |
-| `BITBUCKET_GIT_SSH_ORIGIN`         | Tu origen de SSH, por ejemplo: `git@bitbucket.org:/<workspace>/<repo>.git`.                                                                                       |
-| `BITBUCKET_PIPELINE_UUID`          | UUID del pipeline.                                                                                                                                        |
 | `BITBUCKET_REPO_FULL_NAME`         | El nombre completo del repositorio (todo lo que viene después de http://bitbucket.org/).                                                                             |
+| `BITBUCKET_GIT_SSH_ORIGIN`         | Tu origen de SSH, por ejemplo: `git@bitbucket.org:/<workspace>/<repo>.git`.                                                                                       |
+| `BITBUCKET_COMMIT`                 | El hash de la confirmación que inició la compilación.                                                                                                           |
+| `BITBUCKET_BRANCH`                 | La rama fuente. Este valor sólo está disponible en las ramas. No está disponible para compilaciones contra etiquetas, o pipelines personalizados.                                         |
 | `BITBUCKET_TAG`                    | La etiqueta de la confirmación que inició la compilación. Este valor sólo está disponible en etiquetas. No está disponible para compilaciones contra ramas.                                  |
 
 
@@ -194,7 +194,7 @@ Para una lista completa de las variables de entorno establecidas por Codefresh p
 [101]: https://codefresh.io/docs/docs/pipelines/variables/
 
 {{% /tab %}}
-{{% tab "GitHub Actions" %}}
+{{% tab "Acciones GitHub" %}}
 
 | Variable de entorno       | Descripción                                                                                           |
 |----------------------------|-------------------------------------------------------------------------------------------------------|

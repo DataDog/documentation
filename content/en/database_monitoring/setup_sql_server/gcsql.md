@@ -8,6 +8,12 @@ further_reading:
 - link: "/database_monitoring/guide/sql_deadlock/"
   tag: "Documentation"
   text: "Configure Deadlock Monitoring"
+- link: "/database_monitoring/guide/sql_extended_events/"
+  tag: "Documentation"
+  text: "Configure Query Completion and Query Error Collection"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -268,7 +274,7 @@ Follow the steps below to set up the SQL Server integration, using the [Operator
                   driver: 'ODBC Driver 18 for SQL Server'
                   dbm: true
                   # Optional: For additional tags
-                  tags:  
+                  tags:
                     - 'service:<CUSTOM_SERVICE>'
                     - 'env:<CUSTOM_ENV>'
                   # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
@@ -303,7 +309,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             # Optional: For additional tags
-            tags:  
+            tags:
               - 'service:<CUSTOM_SERVICE>'
               - 'env:<CUSTOM_ENV>'
             # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
@@ -338,8 +344,8 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: 'odbc'
     driver: 'ODBC Driver 18 for SQL Server'
-    # Optional: For additional tags  
-    tags: 
+    # Optional: For additional tags
+    tags:
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
     # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
@@ -350,7 +356,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 
 ```yaml

@@ -110,7 +110,7 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon_msk" >}}
+{{< get-metrics-from-git "amazon-msk" >}}
 
 
 ### イベント
@@ -118,7 +118,7 @@ Agent チェックは、Datadog Agent を通じて、Amazon Managed Streaming fo
 Amazon MSK チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "amazon_msk" >}}
+{{< get-service-checks-from-git "amazon-msk" >}}
 
 
 ## トラブルシューティング

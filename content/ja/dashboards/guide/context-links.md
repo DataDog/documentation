@@ -3,6 +3,9 @@ further_reading:
 - link: /dashboards/widgets
   tag: ドキュメント
   text: ダッシュボードウィジェット一覧
+- link: /metrics/units
+  tag: ドキュメント
+  text: メトリクス単位
 title: コンテキストリンク
 ---
 
@@ -19,9 +22,9 @@ title: コンテキストリンク
 このガイドでは、ダッシュボードにおける**コンテキストリンク**を紹介し、以下の内容について説明します。
 
 1. [コンテキストリンクの仕組みと、それを正確なニーズに適合させる方法](#introduction-to-context-links)。
-2. [Example use cases of the context links configuration](#example-use-cases).
+2. [コンテキストリンク構成の使用例](#example-use-cases)。
 
-## Introduction to context links
+## コンテキストリンクの紹介
 
 コンテキストリンクは、ダッシュボードウィジェットと Datadog の他のページ、およびワークフローに統合したサードパーティアプリケーションとの橋渡しをします。
 
@@ -35,7 +38,7 @@ title: コンテキストリンク
 
 このウィジェットには、以下のページへのリンクが含まれています。 
 
-| リンク           | 説明                                                                           |
+| リンク           | Description                                                                           |
 |----------------|---------------------------------------------------------------------------------------|
 | ホスト          | シリーズが複数のホストで構成されている場合、[ホストマップ][8]にリンクします。シリーズが 1 つのホストで構成されている場合、[ホストダッシュボード][9]にリンクします。|
 | コンテナ     | [ライブコンテナ][10]ページにリンクします。                                                |
@@ -43,7 +46,7 @@ title: コンテキストリンク
 | APM トレース     | [トレースエクスプローラー][12]にリンクする基礎となるトレースを表示するサイドパネルを開きます。|
 | RUM イベント     | [RUM エクスプローラー][13]にリンクします。                                                      |
 | プロファイル       | APM [プロファイルエクスプローラー][14]にリンクします。                                              |
-| Logs           | [ログエクスプローラー][15]にリンクする基礎となるログを表示するサイドパネルを開きます。    |
+| ログ           | [ログエクスプローラー][15]にリンクする基礎となるログを表示するサイドパネルを開きます。    |
 
 該当する場合、コンテキストリンクは以下を埋め込みます。
 
@@ -60,7 +63,7 @@ title: コンテキストリンク
 カスタムリンクを定義したり、デフォルトリンクをオーバーライドするには、**Label** フィールドにリンク名を、**URL** フィールドにリンクパスを指定します。Key-value ヘルパーを使用するには、**+ Add URL Parameter** をクリックします。
 
 
-#### Context Links variables
+#### コンテキストリンク変数
 
 {{< img src="dashboards/guide/context_links/custom-link.png" alt="URL のパラメーターに key-value のペアを設定する" style="width:75%;" >}}
 
@@ -98,7 +101,7 @@ title: コンテキストリンク
 
 #### URL エンコーディング
 
-{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Screenshot of a URL and key-value parameters" style="width:75%;" >}}
+{{< img src="dashboards/guide/context_links/url-encoding.png" alt="URL と Key-Value パラメーターのスクリーンショット" style="width:75%;" >}}
 
 Datadog は、コンテキストリンクの URL エンコーディングを処理します。
 
@@ -168,7 +171,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 {{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
-* If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable. 
+* リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **template** 変数です。
 
 {{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
@@ -208,7 +211,7 @@ Datadog で企業サイトを監視しています。[RUM][17] でユーザー�
 
 ウェブサイトでのナビゲーションが匿名の場合、ユーザーを特定するために IP アドレスをプロキシとして使用する場合があります。
 
-You would like to identify the `@session.ip` attribute from your RUM events with the `@network.client.ip` attribute from your logs. The two attributes have different names because they generally have different meanings, but in this context of authentication logs, you can identify both.
+RUM イベントの `@session.ip` 属性とログの `@network.client.ip` 属性を識別したいと思います。この 2 つの属性は一般的に異なる意味を持つため、異なる名前を持っていますが、この認証ログのコンテキストでは、両方を識別することができます。
 
 そのためには、`@network.client.ip` を元にしたフィルターに `@session.ip` を注入し、適切なフィルター `@network.client.ip:{{@session.ip.value}}` を構築します。
 
@@ -216,7 +219,7 @@ You would like to identify the `@session.ip` attribute from your RUM events with
 
 セッション IP ごと、および特定の国ごとのインサイトを表示する RUM ダッシュボードウィジェットについては、このリンクの構成に従います。
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Example URL configuration for saved views" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="保存ビューの URL 構成例" style="width:70%;">}}
 
 #### 結果
 
@@ -248,7 +251,7 @@ service:backend (env:{{$env.value}})
 
 括弧は `(env:{{$env.value}})` を `(env:*)` に変換し、コンテキストリンククエリに複数の変数を入力できるようにします。
 
-## その他の参考資料
+## 参考情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

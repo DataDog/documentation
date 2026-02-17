@@ -90,7 +90,7 @@ This feature requires RUM Flutter SDK version >= 1.4.0. See installation instruc
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
+[1]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -110,9 +110,9 @@ DdRum.stopSession()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#track-user-sessions
+[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
+[4]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#track-user-sessions
 [5]: /real_user_monitoring/reactnative/#user-information
-[6]: /real_user_monitoring/browser/
+[6]: /real_user_monitoring/application_monitoring/browser/

@@ -1,4 +1,7 @@
 ---
+description: Définissez un dashboard personnalisé comme page d'accueil de votre organisation
+  pour contrôler la première impression et les informations que les utilisateurs voient
+  lorsqu'ils se connectent à Datadog.
 title: Page d'accueil personnalisée pour une organisation
 ---
 
@@ -12,13 +15,13 @@ Vous avez la possibilité de personnaliser un dashboard en y ajoutant les inform
 
 ## Configurer une page d'accueil personnalisée
 
-Seuls les utilisateurs disposant du rôle Admin Datadog ou de l'autorisation Org Management (`org_management`) peuvent configurer une page d'accueil personnalisée pour une organisation.
+Seuls les utilisateurs ayant le rôle Admin Datadog ou l'autorisation Org Management (`org_management`) peuvent définir la page d'accueil personnalisée d'une organisation. Les pages d'accueil personnalisées ne sont pas disponibles pendant les périodes d'essai gratuit.
 
 Procédez comme suit pour configurer une page d'accueil personnalisée :
 
 1. Accédez aux [paramètres d'organisation][1].
-2. Depuis les onglets sur la gauche, sélectionnez **Preferences**.
-3. Dans la section Datadog Homepage, cliquez sur le bouton **Dashboard**.
+2. Dans les onglets à gauche, sélectionnez [**Preferences**][2].
+3. Dans la section Datadog Homepage, cliquez sur **Individual Dashboard**.
 4. Utilisez la liste déroulante pour sélectionner un dashboard.
 5. Cliquez sur le bouton **Save**.
 
@@ -29,8 +32,9 @@ Seuls les utilisateurs disposant du rôle Admin Datadog ou de l'autorisation Org
 Pour rétablir la page d'accueil par défaut de la solution APM, procédez comme suit :
 
 1. Accédez aux [paramètres d'organisation][1].
-2. Depuis les onglets sur la gauche, sélectionnez **Preferences**.
-3. Dans la section Datadog Homepage, cliquez sur le bouton **Default: APM Home**.
+2. Dans les onglets à gauche, sélectionnez [**Preferences**][2].
+3. Dans la section Datadog Homepage, cliquez sur **Default: Dashboard List**.
 4. Cliquez sur le bouton **Save**.
 
 [1]: https://app.datadoghq.com/organization-settings/
+[2]: https://app.datadoghq.com/organization-settings/preferences

@@ -78,7 +78,7 @@ Datadog 확장을 사용하여 Datadog Agent를 구성하고 Arc 서버에 배�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_arc" >}}
+{{< get-metrics-from-git "azure-arc" >}}
 
 
 ### 이벤트

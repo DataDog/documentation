@@ -33,7 +33,7 @@ Workload Protection supports the following Linux distributions:
 
 ### Cloud Security Identity Risks
 
-<div class="alert alert-info"><strong>Note</strong>: At this time, Cloud Security Identity Risks is available for AWS only.</div>
+<div class="alert alert-info">At this time, Cloud Security Identity Risks is available for AWS only.</div>
 
 To use Cloud Security Identity Risks, you must [enable resource collection for AWS][105]. If you've already done this, no additional setup is required.
 

@@ -101,7 +101,7 @@ On the Integrations page in Datadog, install the [Oracle integration][10] for yo
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][5] to learn more about the configuration options available.
 
-<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
+<div class="alert alert-danger">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases

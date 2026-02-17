@@ -1,5 +1,6 @@
 ---
 title: Monitor Quality
+description: "Identify and fix common monitor misconfigurations including high alert volumes, missing recipients, and stuck alert states."
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/monitors/quality"
@@ -16,21 +17,26 @@ The Monitor Quality feature in Datadog identifies common misconfigurations in mo
 
 ## View misconfigured monitors
 
-From the [**Manage Monitors**][8] page, click the [**Monitor Quality**][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor. 
+From the [**Manage Monitors**][8] page, click the [**Monitor Quality**][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor.
 
-Filter and view the [Monitor Quality page][7] based on the teams, creators, services, or environments to organize and manage the list. 
+Filter and view the [Monitor Quality page][7] based on the teams, creators, services, or environments to organize and manage the list.
 
 {{< img src="monitors/quality/filter_monitor_quality.png" alt="Filtering dropdown options for creators, teams, services, and env available on the Monitor Quality page" style="width:100%;" >}}
 
 ## Improve monitors and follow best practices
 
 Monitor Quality displays your monitors with the following quality issues:
+- [High volume of alerts](#high-volume-of-alerts)
 - [Muted for over 60 days](#muted-for-over-60-days)
 - [Missing recipients](#monitors-are-missing-recipients)
 - [Missing a delay](#missing-a-delay)
 - [Have misconfigured notification channels](#misconfigured-notification-channels)
 - [Composite monitors are missing constituents](#composite-monitors-are-missing-constituents)
 - [Stuck in an alert state](#stuck-in-alert-state)
+
+### High volume of alerts
+
+Monitors that trigger too frequently can lead to alert fatigue and desensitize teams to important alerts. With the Monitor Quality page, you can identify and fix monitors that are generating a high volume of alerts.
 
 ### Muted for over 60 days
 
@@ -56,7 +62,7 @@ See which monitors have misconfigured notification channels and edit them as nec
 
 ### Composite monitors are missing constituents
 
-[Composite monitors][6] evaluate the combined state of multiple sub monitors (constituents) following user-defined logic. Composite monitors that reference deleted constituents do not evaluate or notify. Identify inactive composite monitors and delete them. 
+[Composite monitors][6] evaluate the combined state of multiple sub monitors (constituents) following user-defined logic. Composite monitors that reference deleted constituents do not evaluate or notify. Identify inactive composite monitors and delete them.
 
 ### Stuck in alert state
 

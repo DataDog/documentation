@@ -5,10 +5,9 @@ private: true
 title: Dogstream
 ---
 
-<div class="alert alert-danger">
-これは、Agent 5 の非推奨の機能です。新機能のリリースは中止されました。
+<div class="alert alert-warning">
+これは Agent 5 における非推奨機能です。新機能のリリースは終了しています。
 <br>
-Agent v6 が利用可能です。<a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">最新バージョンにアップグレードすると、</a>新しい機能を利用できます。
 </div>
 
 ログファイルには、膨大な量の貴重なアプリケーションデータとビジネスデータが含まれています。
@@ -62,7 +61,7 @@ Datadog にこのメトリクスを読み取らせるには、Agent の構成フ
 
 * すべてが正常に動作していると、`dogstream: parsing {filename} with {function name} (requested {config option text})` のように表示されます。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 dogstreams が動作していることをテストする場合は、Agent の監視対象として設定したログファイルに 1 行を追加します。既存の行を編集してもテストできません。Agent は各ログファイルの末尾のみを<a href="/glossary/#tail">追跡</a>するため、ファイルの他の部分を変更しても認識されません。
 </div>
 

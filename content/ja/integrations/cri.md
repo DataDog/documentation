@@ -120,7 +120,7 @@ spec:
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
 
-## 収集されるデータ
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "cri" >}}

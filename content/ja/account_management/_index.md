@@ -9,7 +9,7 @@ description: Datadog アカウントと組織を管理する
 title: アカウントの管理
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
+<div class="alert alert-danger">Datadog for Government site では、SAML ログインのみをサポートします。</div>
 {{< /site-region >}}
 
 ## 個人設定
@@ -33,7 +33,7 @@ Google 認証を使用して Datadog にログインする場合、メールア�
 
 メールサブスクリプションでは、以下のレポートにアクセスできます。
 {{< site-region region="us3,us5,gov,ap1" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) ではメールダイジェストは利用できません。</div>
+<div class="alert alert-danger">選択したサイト ({{< region-param key="dd_site_name" >}}) ではメールダイジェストは利用できません。</div>
 {{< /site-region >}}
 
 * 1 日のダイジェスト

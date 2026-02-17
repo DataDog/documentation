@@ -15,11 +15,11 @@ Les clés d'API sont uniques à votre organisation. Une [clé d'API][1] est requ
 
 ## Clés d'application
 
-Les [clés d'application][2] sont utilisées conjointement avec la clé d'API de votre organisation afin de donner aux utilisateurs un accès complet à l'API de programmation de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées. Par défaut, elles possèdent les autorisations et les portées de cet utilisateur.
+Les [clés d'application][2], associées à la clé API de votre organisation, permettent aux utilisateurs d'accéder à l'API programmatique de Datadog. Les clés d'application sont associées au compte utilisateur qui les a créées et disposent par défaut des autorisations de l'utilisateur qui les a créées.
 
 ### Portées
 
-Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des [portées d'autorisation][3] à vos clés d'application, de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
+Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des portées d'autorisation à vos clés d'application, de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
 
 Lorsque vous appliquez des portées à des clés d'application, il est recommandé d'accorder uniquement les privilèges et les autorisations dont l'application a besoin pour fonctionner correctement. Seules les portées spécifiées par l'utilisateur sont appliquées à la clé d'application : aucune autre autorisation n'est accordée. Vous pouvez modifier la portée d'autorisation d'une clé d'application à tout moment, mais il est essentiel de réfléchir à l'impact que ces modifications auront sur le fonctionnement de votre application et les données auxquelles elle pourra accéder.
 
@@ -68,6 +68,10 @@ Pour ajouter une clé d'application Datadog, accédez à [**Organization Setting
 
 {{< img src="account_management/app-key.png" alt="Accédez à la page des clés dʼapplication de votre organisation dans Datadog" style="width:80%;" >}}
 
+{{< site-region region="ap2,gov" >}}
+<div class="alert alert-danger">Assurez-vous de stocker votre clé d'application en toute sécurité dès sa création, car le secret de la clé ne peut pas être récupéré ultérieurement.</div>
+{{< /site-region >}}
+
 **Remarques :**
 
 - Les noms de clé d'application ne peuvent pas être vides.
@@ -76,9 +80,21 @@ Pour ajouter une clé d'application Datadog, accédez à [**Organization Setting
 
 Pour supprimer une clé d'application Datadog, accédez à [**Organization Settings** > **Application Keys**][2]. Vos clés d'application s'affichent alors. Cliquez ensuite sur l'option **Revoke** en regard de la clé à révoquer. Cette option s'affiche uniquement si vous disposez de l'[autorisation][4] requise pour créer et gérer des clés d'application. Si vous êtes autorisé à gérer toutes les clés d'application de votre organisation, vous pouvez rechercher la clé à révoquer, puis cliquer sur l'option **Revoke** correspondante.
 
-## Appliquer une portée à des clés d'application
+## Propagation des clés et cohérence éventuelle
 
-Pour appliquer des [portées d'autorisation][3] à des clés d'application, créez ou modifiez une clé d'application en [envoyant une requête sur l'API Datadog][5] ou lʼIU pour créer ou modifier une clé dʼapplication. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][14] ou à un [compte de service][15]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
+Les clés API et les clés d'application de Datadog suivent un modèle de cohérence éventuelle. En raison de l'architecture distribuée du système, les mises à jour de clés, comme leur création ou révocation, peuvent prendre quelques secondes pour se propager complètement.
+
+En conséquence :
+
+- N'utilisez pas immédiatement une nouvelle clé API ou d'application dans des workflows critiques. Prévoyez quelques secondes pour sa propagation. Mettez en place une stratégie de nouvelle tentative avec backoff exponentiel court pour gérer les erreurs transitoires durant la propagation.
+- Pour vérifier si une clé API est active, utilisez l'endpoint [/api/v1/validate][18].
+- Pour vérifier si une clé d'application est active, utilisez l'endpoint `/api/v2/validate_keys` avec les bonnes paires de clés.
+
+L'utilisation d'une clé nouvellement créée avant sa propagation complète peut entraîner des erreurs d'authentification temporaires, telles que 403 Forbidden ou 401 Unauthorized.
+
+## Définir le champ d'application d'une clé d'application
+
+Pour appliquer des portées d'autorisation à des clés d'application, créez ou modifiez une clé d'application en [envoyant une requête sur l'API Datadog][5] ou lʼIU pour créer ou modifier une clé dʼapplication. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][14] ou à un [compte de service][15]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
 
 **Remarques :**
 
@@ -127,7 +143,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys
-[3]: /fr/api/latest/scopes/
 [4]: /fr/account_management/rbac/permissions
 [5]: /fr/api/latest/key-management/
 [6]: /fr/logs/log_collection/javascript/
@@ -142,3 +157,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 [15]: /fr/api/latest/service-accounts/
 [16]: /fr/help/
 [17]: /fr/account_management/org_settings/service_accounts/
+[18]: /fr/api/latest/authentication/#validate-api-key

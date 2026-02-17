@@ -25,6 +25,28 @@ APM metric monitors work like regular [metric monitors][1], but with controls ta
 
 Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed Spans. For example, use an Analytics monitor to receive alerts on a spike in slow requests.
 
+### Automatic APM monitors
+
+Automatic Monitors for APM are available to new organizations and activate as soon as the Datadog Agent is installed and spans begin flowing into Datadog. This provides immediate alerting coverage on your key services with minimal configuration, and helps you to maintain coverage without gaps.
+
+Monitors are automatically created for service entry points, which are identified by operations tagged with <code>[span.kind][6]:server</code> or `span.kind:consumer` and represent where requests enter your service. 
+
+Automatic monitors for APM include:
+
+#### Error rate threshold monitors
+
+Error rate threshold monitors are created per service entry point using APM trace metrics. These alert you when error behavior spikes and help ensure your most critical endpoints are covered by default. The default error rate is 10%, but can be configured for your environment. 
+
+#### Watchdog anomaly monitors
+
+Watchdog anomaly monitors automatically detect unusual patterns in latency, errors, and request volume (hits) for all services without requiring you to manually configure thresholds.
+
+
+**Note**: Automatic monitor creation is only available during a trial.
+
+You can view and manage all automatically created monitors on the [Monitors page][7], where they can be edited, cloned, or disabled.
+
+
 ## Monitor creation
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
@@ -73,7 +95,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 {{% /tab %}}
 {{% tab "Trace Analytics" %}}
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 Trace Analytics monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -90,7 +112,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**Note:** Analytics monitors can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).
+**Note:** Analytics monitors only evaluate spans retained by [custom retention filters][6] (not the intelligent retention filter). Additionally, spans indirectly indexed by [trace-level retention filters][7] (that is, spans that don't match the query directly but belong to traces that do) are not evaluated by trace analytics monitors.
 
 ### Select alert conditions
 
@@ -113,6 +135,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [4]: /tracing/glossary/#indexed-span
 [5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+[7]: /tracing/trace_pipeline/trace_retention/#retention-filter-types
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -131,3 +154,5 @@ For detailed instructions on the **Configure notifications and automations** sec
 [3]: /monitors/notify/
 [4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map
+[6]: /standard-attributes/?search=span.kind&product=apm
+[7]: https://app.datadoghq.com/monitors/

@@ -75,7 +75,7 @@ Sigue las instrucciones a continuación para instalar y configurar este check pa
 
 Se necesita un servidor [IBM MQ][3] para consumir mensajes de métrica de IBM ACE.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Para Linux, asegúrate de establecer la variable de entorno LD_LIBRARY_PATH como se describe en la <a href="https://docs.datadoghq.com/integrations/ibm_mq/">configuración de IBM MQ</a> antes de continuar.
 </div>
 
@@ -147,7 +147,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_ace" >}}
+{{< get-metrics-from-git "ibm-ace" >}}
 
 
 ### Eventos
@@ -155,7 +155,7 @@ No es necesaria ninguna instalación adicional en tu servidor.
 La integración de IBM ACE no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ibm_ace" >}}
+{{< get-service-checks-from-git "ibm-ace" >}}
 
 
 ### Recopilación de logs

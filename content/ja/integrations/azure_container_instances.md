@@ -70,7 +70,7 @@ Datadog Azure インテグレーションを使用して Azure Container Instanc
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_container_instances" >}}
+{{ get-metrics-from-git "azure-containerinstances" }}
 
 
 ### イベント

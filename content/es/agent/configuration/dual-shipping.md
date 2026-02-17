@@ -8,7 +8,7 @@ further_reading:
 title: Envío doble
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 El envío doble puede afectar la facturación si estás enviando datos a múltiples organizaciones de Datadog. Para obtener más información sobre cómo afecta esta configuración, contacta con el <a href="/help/">equipo de asistencia de Datadog</a>.
 </div>
 

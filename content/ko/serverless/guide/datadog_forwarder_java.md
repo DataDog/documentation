@@ -3,21 +3,21 @@ title: Datadog 포워더를 사용해 Java 서버리스 애플리케이션 계�
 ---
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installation/go">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하는 방법</a>을 따르세요. Lambda가 즉시 사용 가능한 기능을 제공하기 전에 Datadog 포워더를 사용하여 Datadog 서버리스를 설정한 경우, 이 가이드를 사용하여 인스턴스를 유지 관리하세요.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 일부 예전 버전의 <code>datadog-lambda-java</code>에서는  <code>log4j <=2.14.0</code>을 전이 종속성으로 가져옵니다. <a href="#upgrading">업그레이드 지침</a>은 아래를 참고하세요.
 </div>
 
-## 사전 필수 요건
+## 사전 필수 조건
 
 AWS Lambda 트레이스, 향상된 메트릭, 커스텀 메트릭, 로그를 수집하려면 [Datadog 포워더 Lambda 함수][2]가 필요합니다.
 
 분산 트레이싱으로 서버리스 애플리케이션을 완전히 계측하려면 Java Lamda 함수가 Java 8 Corretto(`java8.al2`), Java 11(`java11`), Java 17(`java17`) 런타임을 사용해야 합니다.
 
-## 구성
+## 설정
 
 ### 설치
 
@@ -61,9 +61,9 @@ dependencies {
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-    DD_LOGS_INJECTION: true
+    DD_LOGS_INJECTION: true # default value
     DD_JMXFETCH_ENABLED: false
-    DD_TRACE_ENABLED: true
+    DD_TRACE_ENABLED: true # default value
     ```
 
 3. Datadog Lambda 라이브러리에서 제공하는 래퍼를 사용해 Lambda 처리기 함수를 래핑합니다.

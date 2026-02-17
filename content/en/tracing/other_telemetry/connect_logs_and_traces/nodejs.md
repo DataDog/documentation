@@ -23,21 +23,56 @@ further_reading:
 
 ## Automatic injection
 
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+Enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston` when structured application loggers are used. 
+
+For older tracer versions injection can be enabled the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
 ```javascript
 // This line must come before importing the logger.
 const tracer = require('dd-trace').init({
-    logInjection: true
+    logInjection: false
 });
 ```
-
-This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
 
 If you haven't done so already, configure the Node.js tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
 experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][1] for more details).
 
 **Note**: Automatic injection only works for logs formatted as JSON.
+
+### Example with Winston and Express
+
+Here's a simple example using Winston with Express:
+
+```javascript
+// init tracer first
+require('dd-trace').init({ logInjection: true });
+
+const express = require('express');
+const { createLogger, format, transports } = require('winston');
+
+const logger = createLogger({
+  level: 'info',
+  format: format.json(),       // JSON required for auto-injection
+  transports: [new transports.Console()]
+});
+
+const app = express();
+
+app.get('/hello', (req, res) => {
+  logger.info('hello world');  
+  // dd.trace_id & dd.span_id will be auto-added
+  res.json({ ok: true });
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => logger.info(`listening on ${port}`));
+```
+
+This would return a log in the format:
+
+```
+{"dd":{"service":"minimal-nodejs-datadog-log-injection","span_id":"8985025821692657638","trace_id":"68c2114800000000669b6b6b2aaf59c9","version":"1.0.0"},"level":"info","message":"hello world"}
+```
 
 ## Manual injection
 

@@ -122,7 +122,7 @@ El nombre del controlador ODBC de IBM i es necesario para configurar el check de
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "ibm_i" >}}
+{{< get-metrics-from-git "ibm-i" >}}
 
 
 ### Eventos

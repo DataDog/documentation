@@ -1,9 +1,20 @@
 ---
+algolia:
+  tags:
+  - grok
+  - analizador grok
+  - análisis de logs
+  - Extracción de atributos
+  - Reasignación de atributos
+  - análisis
 aliases:
 - /es/logs/parsing/
 - /es/logs/processing/parsing
 description: Analizar tus logs con el procesador grok
 further_reading:
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: Centro de aprendizaje
+  text: Aprenda a crear y modificar pipelines de logs
 - link: /logs/log_configuration/processors
   tag: Documentación
   text: Aprender a procesar tus logs
@@ -15,9 +26,13 @@ further_reading:
   text: Análisis de logs - Prácticas recomendadas
 - link: /logs/logging_without_limits/
   tag: Documentación
-  text: Controlar el volumen de logs indexados por Datadog
+  text: Control del volumen de logs indexados por Datadog
 title: Análisis
 ---
+
+{{< learning-center-callout header="Try Grok parsing in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  Aprende a crear y modificar los pipelines de logs, a gestionarlos con Pipeline Scanner y a estandarizar los nombres de los atributos en todos los logs para mantener la coherencia.
+{{< /learning-center-callout >}}
 
 ## Información general
 
@@ -58,17 +73,20 @@ Después de procesar, se genera el siguiente log estructurado:
 * Debes tener nombres de regla únicos dentro del mismo analizador grok.
 * El nombre de la regla sólo debe contener: caracteres alfanuméricos, `_` y `.`. Debe comenzar con un carácter alfanumérico.
 * Las propiedades con valores nulos o vacíos no se muestran.
-* El emparejador de expresiones regulares aplica un `^` implícito, para hacer coincidir el inicio de una cadena, y un `$`, para hacer coincidir el final de la cadena.
+* Debes definir tu regla de análisis para que coincida con toda la entrada de logs, ya que cada regla se aplica desde el principio hasta el final del log.
 * Algunos logs pueden generar grandes espacios en blanco. Utiliza `\n` y `\s+` para tener en cuenta las nuevas líneas y los espacios en blanco.
 
 ### Emparejador y filtro
 
+<div class="alert alert-danger">Las funciones de análisis de Grok en <em>tiempo de consulta</em> (en <a href="/logs/workspaces/#transformation-cell">áreas de trabajo de logs</a> y en el <a href="/logs/explorer/calculated_fields/">Explorer de logs</a>) admiten un subconjunto limitado de comparadores (<strong>datos</strong>, <strong>número entero</strong>, <strong>notSpace</strong>, <strong>número</strong> y <strong>palabra</strong>) y filtros (<strong>número</strong> y <strong>número entero</strong>).<br><br>
+El siguiente conjunto completo de comparadores y filtros es específico de la función de <em>analizador Grok de</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">tiempo de ingesta</a>.</div>
+
 En esta lista encontrarás todos los emparejadores y filtros implementados de forma nativa por Datadog:
 
 {{< tabs >}}
-{{% tab "Emparejadores" %}}
+{{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Empareja una fecha con el patrón especificado y la analiza para producir una marca de tiempo Unix. [Consulta los ejemplos del emparejador de fechas](#parsing-dates).
 
 `regex("pattern")`
@@ -144,7 +162,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Empareja cualquier cadena, incluidos espacios y líneas nuevas. Equivale a `.*` en expresiones regulares. Utilízalo cuando ninguno de los patrones anteriores sea apropiado.
 
 {{% /tab %}}
-{{% tab "Filtros" %}}
+{{% tab "Filters" %}}
 
 `number`
 : Analiza una coincidencia como un número de doble precisión.
@@ -257,7 +275,7 @@ Algunos ejemplos que demuestran cómo utilizar los analizadores:
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
-### Valor clave o logfmt
+### Clave valor o logfmt
 
 Este es el filtro principal de clave-valor: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`, donde:
 
@@ -508,7 +526,7 @@ myParsingRule Los usuarios %{data:users:array("{}","-", uppercase)} se han añad
 
 ### Formato glog
 
-A veces los componentes de Kubernetes gestionan logs en el formato `glog`. Este ejemplo es del elemento del programador de Kubernetes en la biblioteca de pipelines.
+A veces los componentes de Kubernetes gestionan logs en el formato `glog`. Este ejemplo es del elemento del programador de Kubernetes en la librería de pipelines.
 
 Ejemplo de línea de log:
 
@@ -663,7 +681,7 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 
 Si tus logs contienen caracteres de control ASCII, se serializarán en el momento del consumo. Estos se pueden gestionar escapando de manera explícita del valor serializado dentro de tu analizador grok.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

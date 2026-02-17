@@ -1,5 +1,6 @@
 ---
 title: Prevent alerts from Monitors that were in downtime
+description: "Understand monitor behavior during downtimes and how to prevent recovery notifications when downtime ends or is cancelled."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"

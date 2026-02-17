@@ -1,5 +1,6 @@
 ---
 title: Autodiscovery with JMX
+description: Configure JMX-based integrations for containerized Java applications using Autodiscovery templates
 aliases:
   - /agent/guide/autodiscovery-with-jmx
 algolia:

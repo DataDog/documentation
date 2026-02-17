@@ -16,7 +16,7 @@ La creación de <a href="/tracing/trace_pipeline/trace_retention/">filtros de re
 
 En este ejemplo, las solicitudes (`merchant.store_name` y `merchant.tier`) se han añadido como etiquetas al tramo.
 
-Para comenzar a etiquetar tramos en tu aplicación, consulta la guía de [Añadir etiquetas de tramos][6].
+Para comenzar a etiquetar tramos en tu aplicación, consulta la guía de [Añadir span tagss][6].
 
 Una vez que se haya añadido una etiqueta a un tramo, busca y consulta la etiqueta en Analytics al hacer clic en la etiqueta para añadirla como [faceta][7]. Una vez hecho esto, el valor de esta etiqueta se almacena para todas las trazas nuevas y se puede utilizar en la barra de búsqueda, el panel de facetas y la consulta de la gráfica de trazas.
 

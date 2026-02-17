@@ -3,10 +3,10 @@ further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentation
   text: Cloud SIEM のデフォルト検出ルールの確認
-- link: /security/cloud_siem/investigate_security_signals
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentation
   text: セキュリティシグナルエクスプローラーについて学ぶ
-- link: /security/cloud_siem/log_detection_rules/
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
   tag: Documentation
   text: 新しい検出ルールの作成
 - link: /integrations/google_cloud_platform/#log-collection
@@ -31,7 +31,7 @@ title: Cloud SIEM のための Google Cloud 構成ガイド
 1. [Dataflow ジョブを作成して実行](#create-and-run-the-dataflow-job)します。
 1. [Cloud SIEM でセキュリティシグナルのトリアージを行う](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push サブスクリプションを使用した Google Cloud のログ収集</a>は、以下の理由で非推奨となっています。
 
@@ -147,7 +147,7 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
       **注**: 上記の URL をコピーする前に、このドキュメントページの右側にある Datadog サイトセレクタが Datadog サイトに設定されていることを確認してください。
    c. **Output deadletter Pub/Sub topic** フィールドで、Datadog API によって拒否されたメッセージを受信するために以前に作成した [追加トピック](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic)を選択します。
       d. **Temporary location** フィールドで、ストレージバケット内の一時ファイルのパスを指定します。
-1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:  
+1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:
    a. **Optional Parameters** をクリックして、追加フィールドを表示します。
    b. **Google Cloud Secret Manager ID** フィールドにシークレットのリソース名を入力します。
         リソース名を取得するには、[Secret Manager][8] の自分のシークレットに移動します。シークレットをクリックします。**Action** の下にある 3 つの点をクリックし、**Copy resource name** を選択します。
@@ -199,7 +199,7 @@ Cloud SIEM は、設定した Google Cloud の監査ログを含む、処理さ�
 [20]: https://console.cloud.google.com/dataflow/
 [21]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
 [22]: https://app.datadoghq.com/logs/
-[23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[23]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
 [25]: /ja/security/default_rules/#cat-cloud-siem
 [26]: /ja/security/detection_rules/

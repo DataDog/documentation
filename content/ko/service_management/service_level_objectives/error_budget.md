@@ -13,17 +13,17 @@ title: 오류 예산 경보
 
 SLO 오류 예산 경보는 임곗값을 기반으로 하며 SLO 오류 예산이 특정 비율만큼 소모될 시 알림을 표시합니다. 예를 들어, 7일 목표에 대한 오류 예산의 75%가 소진된 경우 알림을 표시하고, 50% 소진 시 경고가 나타나도록 할 수 있습니다(선택 사항).
 
-**참고:** 오류 예산 알림은 다음 SLO 유형에 사용할 수 있습니다.
+오류 예산 알림은 다음 SLO 유형에 사용할 수 있습니다.
 
 - [메트릭 기반 SLO][1],
-- 메트릭 모니터 유형(메트릭, 통합, APM 메트릭, 이상치, 예측, 아웃라이어 모니터)으로만 구성된 [모니터 기반 SLO][2]
+- 메트릭 모니터 유형(메트릭, 통합, APM 메트릭, 이상치, 예측 또는 아웃라이어 모니터)으로만 구성된 [모니터 기반 SLO][2]
 - [타임 슬라이스 SLO][8]
 
 *오류 예산*을 포함한 SLO 관련 주요 용어에 대한 설명은 [서비스 수준 목표(Service Level Objectives)][3]를 참고하시기 바랍니다.
 
 {{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="오류 예산 알림 설정">}}
 
-## 모니터링 생성
+## 모니터 생성
 
 1. [SLO 상태 페이지][4]로 이동하세요.
 2. 새 SLO를 만들거나 기존 SLO를 편집한 다음 **알림 저장 및 설정* 버튼을 클릭합니다. 기존 SLO의 경우 SLO 세부 정보 사이드 패널에서 **알림 설정** 버튼을 클릭하여 바로 이동할 수도 있습니다.
@@ -34,6 +34,11 @@ SLO 오류 예산 경보는 임곗값을 기반으로 하며 SLO 오류 예산�
 5. SLO 설정 페이지에서 **Create & Set Alert** 버튼을 클릭합니다.
 
 {{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="SLO 생성 및 오류 예산 알림 설정" style="width:80%;">}}
+
+### 그룹별 SLO 알림
+
+그룹이 포함된 Time Slice SLO의 경우, SLO 그룹 또는 전체 SLO를 기준으로 예산 오류 알림을 설정할 수 있습니다. 그룹을 기준으로 알림을 설정하는 경우, [알림 집계][9]를 구성하여 단순 알림 또는 다중 알림을 사용할 수 있습니다. 메트릭 및 모니터 기반 SLO의 경우 전체 SLO를 기준으로 예산 오류 알림만 설정할 수 있습니다.
+
 
 ### API 와 Terraform
 
@@ -79,3 +84,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [6]: /ko/api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
 [8]: /ko/service_management/service_level_objectives/time_slice
+[9]: /ko/monitors/configuration/#set-alert-aggregation

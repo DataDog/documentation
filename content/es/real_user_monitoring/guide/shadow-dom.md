@@ -7,7 +7,7 @@ further_reading:
 title: Enriquecer tus repeticiones de sesiones con componentes Shadow DOM
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog sólo admite Shadow DOM abierto.
 </div>
 

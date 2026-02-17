@@ -1,5 +1,6 @@
 ---
 title: Python Version Management
+description: "Configure Datadog Agent v6 to use Python 3 runtime for Agent checks and integrations instead of the default Python 2."
 further_reading:
 - link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"

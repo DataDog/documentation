@@ -25,13 +25,14 @@ It is critical for your system’s health to consistently monitor the errors col
 Error Tracking simplifies debugging by grouping thousands of similar errors into a single issue. Error Tracking enables you to:
 
 - Track, triage, and debug fatal errors
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise
+- Group similar errors into issues to identify important errors and reduce noise
 - Set monitors on error tracking events, such as high error volume or new issues
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
-- See a detailed timeline of steps a user took leading up to the error, simplifying the process to reproduce and resolve errors quickly
+- See a detailed timeline of steps a user took leading up to the error, simplifying the process to reproduce and resolve errors
 
 ## Setup
-{{< whatsnext desc="To get started with Datadog Error Tracking, see the corresponding documentation:" >}}
+{{< whatsnext desc="To get started with Datadog Error Tracking, choose one of the following setup options:" >}}
+    {{< nextlink href="agentic_onboarding/setup" >}}Agentic Onboarding (frontend only){{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/ios" >}}iOS{{< /nextlink >}}

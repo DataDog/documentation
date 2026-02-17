@@ -89,7 +89,7 @@ tile:
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-<div class="alert alert-warning">El check del Agent existente para la recopilación de métricas de JFrog ha sido sustituido por FluentD. El check del Agent está obsoleto.</div>
+<div class="alert alert-danger">El check del Agent existente para la recopilación de métricas de JFrog ha sido sustituido por FluentD. El check del Agent está obsoleto.</div>
 
 ## Información general
 
@@ -136,7 +136,7 @@ Se recomienda seguir la guía de instalación correspondiente a tu entorno:
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "jfrog_platform_self_hosted" >}}
+{{< get-metrics-from-git "jfrog-platform" >}}
 
 
 ### Eventos

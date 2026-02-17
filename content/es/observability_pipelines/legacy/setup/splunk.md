@@ -17,7 +17,7 @@ title: (LEGACY) Configurar Observability Pipelines en tu entorno Splunk
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
+<div class="alert alert-danger">Observability Pipelines no está disponible en el sitio US1-FED Datadog.</div>
 {{< /site-region >}}
 
 {{% observability_pipelines/legacy_warning %}}
@@ -112,8 +112,8 @@ Para ejecutar el Worker en su cuenta AWS, necesita acceso administrativo a esa c
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-warning">Por el momento, las instalaciones de CloudFormation solo admiten la configuración remota.</div>
-<div class="alert alert-danger">Utiliza las instalaciones de CloudFormation solo para cargas de trabajo que no sean de producción.</div>
+<div class="alert alert-danger">Por el momento, las instalaciones de CloudFormation solo admiten la configuración remota.</div>
+<div class="alert alert-warning">Utiliza las instalaciones de CloudFormation solo para cargas de trabajo que no sean de producción.</div>
 
 Para ejecutar el Worker en tu cuenta AWS, necesitas acceso administrativo a esa cuenta. Recopila la siguiente información para ejecutar las instancias del Worker:
 * El ID de VPC en el que se ejecutarán tus instancias.
@@ -429,7 +429,7 @@ EOT
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
+<div class="alert alert-warning">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
 
 Para instalar el Worker en tu cuenta AWS, utiliza la plantilla de CloudFormation para crear un stack tecnológico:
 
@@ -535,7 +535,7 @@ El módulo Terraform proporciona un balanceador de carga de red (NLB) para apunt
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
+<div class="alert alert-warning">Utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
 
 La plantilla de CloudFormation proporciona un balanceador de carga de red (NLB) para apuntar al grupo de AutoScaling. Su dirección DNS se devuelve en el resultado  Su dirección DNS se devuelve en el resultado `LoadBalancerDNS` en CloudFormation.
 {{% /tab %}}
@@ -572,7 +572,7 @@ De forma predeterminada, se asigna una unidad EBS de 288 GB a cada instancia y e
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Las unidades EBS creadas por esta plantilla de CloudFormation tienen su ciclo de vida ligado a la instancia con la que se crean. <strong>Esto conduce a la pérdida de datos si una instancia se cierra, por ejemplo por el grupo de AutoScaling.</strong> Por este motivo, utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
+<div class="alert alert-warning">Las unidades EBS creadas por esta plantilla de CloudFormation tienen su ciclo de vida ligado a la instancia con la que se crean. <strong>Esto conduce a la pérdida de datos si una instancia se cierra, por ejemplo por el grupo de AutoScaling.</strong> Por este motivo, utiliza sólo instalaciones de CloudFormation para cargas de trabajo que no sean de nivel de producción.</div>
 
 Por defecto, se asigna una unidad EBS de 288 GB a cada instancia, que se monta y formatea automáticamente al iniciar la instancia.
 {{% /tab %}}

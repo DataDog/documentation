@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Go Compile-Time Instrumentation
+description: Debug Orchestrion build issues by preserving work trees, configuring logging, and examining transformed source files.
 further_reading:
 - link: "/tracing/trace_collection/automatic_instrumentation/dd_libraries/go/"
   tag: "Documentation"
@@ -10,7 +11,7 @@ further_reading:
 
 This guide explains how to troubleshoot builds that [Orchestrion][1] manages. These procedures can help Datadog gather insights about build processes and can assist with bug reports.
 
-<div class="alert alert-warning">The generated files may contain sensitive project information, such as source code and dependency names. If sharing such information publicly is a concern, contact Datadog support to share the data privately.</div>
+<div class="alert alert-danger">The generated files may contain sensitive project information, such as source code and dependency names. If sharing such information publicly is a concern, contact Datadog support to share the data privately.</div>
 
 ## Preserving the work tree
 
@@ -42,7 +43,7 @@ Control Orchestrion's logging output using the `ORCHESTRION_LOG_LEVEL` environme
 | `DEBUG` | Detailed logging |
 | `TRACE` | Extremely detailed logging |
 
-<div class="alert alert-warning">Setting <code>ORCHESTRION_LOG_LEVEL</code> to the <code>DEBUG</code> or <code>TRACE</code> levels might have a significant impact on build performance. These settings are not recommended for normal operations.</div>
+<div class="alert alert-danger">Setting <code>ORCHESTRION_LOG_LEVEL</code> to the <code>DEBUG</code> or <code>TRACE</code> levels might have a significant impact on build performance. These settings are not recommended for normal operations.</div>
 
 ### Log file output
 

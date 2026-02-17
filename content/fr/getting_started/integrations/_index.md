@@ -9,7 +9,7 @@ further_reading:
 title: Présentation des intégrations
 ---
 
-## Présentation
+## Section Overview
 
 Ce guide décrit comment utiliser les intégrations. Si vous souhaitez découvrir comment créer une nouvelle intégration, consultez la page [Créer une nouvelle intégration][1].
 
@@ -31,7 +31,7 @@ Le package de l'Agent Datadog inclut les intégrations officiellement prises en 
 
 ### Autorisations
 
-L'autorisation `manage_integrations` est requise pour interagir avec un carré dʼintégration. Consultez la section relative aux [rôles RBAC][45] pour en savoir plus.
+La permission Integrations Manage (Gestion des intégrations) est requise pour interagir avec un carré d'intégration. Consultez la section relative aux [rôles RBAC][45] pour en savoir plus.
 
 ### Clés d'API et d'application
 
@@ -100,13 +100,26 @@ Par exemple, il est conseillé d'utiliser `service` pour la [configuration de l'
 
 Pour mieux unifier votre environnement, il est également recommandé de configurer le tag `env` dans l'Agent. Pour en savoir plus, consultez la section relative au [tagging de service unifié][27].
 
-Par défaut, les métriques transmises par les intégrations comprennent des tags découverts automatiquement dans l'environnement. Par exemple, les métriques transmises par un check Redis exécuté à l'intérieur d'un conteneur comprennent des tags associés au conteneur, tels que `image_name`. Vous pouvez désactiver ce comportement en définissant le paramètre `ignore_autodiscovery_tags` sur `true` :
+#### Configuration des tags par check
+Vous pouvez personnaliser le comportement des tags pour chaque check, en remplaçant les paramètres globaux définis au niveau de l'Agent :
+
+1. **Désactiver les balises Autodiscovery**
+
+    Par défaut, les métriques transmises par les intégrations comprennent des tags découverts automatiquement dans l'environnement. Par exemple, les métriques transmises par un check Redis exécuté à l'intérieur d'un conteneur comprennent des tags associés au conteneur, tels que `image_name`. Vous pouvez désactiver ce comportement en définissant le paramètre `ignore_autodiscovery_tags` sur `true`.
+
+1. **Définir la cardinalité des tags par check d'intégration**
+
+    Vous pouvez définir le niveau de cardinalité des tags (low, orchestrator ou high) pour chaque check individuellement à l'aide du paramètre `check_tag_cardinality`. Cela remplace le paramètre global de cardinalité des tags défini dans la configuration de l'Agent.
+
 ```yaml
 init_config:
-
+# Ignore les tags provenant de l'autodécouverte
 ignore_autodiscovery_tags: true
 
-# Insérer le reste de la configuration ici
+# Remplace le paramètre global de cardinalité des tag
+check_tag_cardinality: low
+
+# Le reste de la configuration ici
 ```
 
 ### Validation
@@ -123,15 +136,40 @@ Si vous avez configuré la [collecte de processus][29], Datadog détecte automat
 
 {{< img src="getting_started/integrations/ad_integrations_1.png" alt="Intégrations détectées automatiquement" >}}
 
-Chaque intégration possède l'un des trois statuts suivants :
+Chaque intégration possède l'un des quatre types de statut suivants :
 
 - **Detected** : la technologie s'exécute sur un host, mais l'intégration n'a pas été installée ou configurée. Pour cette raison, seule une partie des métriques est recueillie. Configurez l'intégration pour en profiter pleinement. Pour obtenir la liste des hosts qui exécutent une technologie détectée automatiquement, ouvrez le carré de l'intégration, puis sélectionnez l'onglet **Hosts**.
 - **Installed** : l'intégration est installée et configurée sur un host.
 - **Available** : cette catégorie rassemble toutes les intégrations qui ne possèdent pas le statut **Installed** ni **Detected**.
+- **Données manquantes** : aucune métrique d'intégration n'a été détectée au cours des dernières 24 heures. 
 
 ## Mesures de sécurité
 
 Pour en savoir plus sur la manière dont Datadog traite vos données et sur d'autres aspects de la sécurité, consultez notre [documentation dédiée][30].
+
+## Contrôle d'accès granulaire
+Par défaut, l'accès aux ressources d'intégration (comptes, services, webhooks) est illimité. Des contrôles d'accès granulaires peuvent être utilisés pour restreindre le comportement des utilisateurs, équipes, rôles ou de l'ensemble de votre organisation au niveau des ressources d'intégration.
+
+**Remarque** : l'option d'accès restreint n'est visible que si l'intégration prend en charge les contrôles d'accès granulaires. Pour vérifier si une intégration prend en charge les contrôles d'accès granulaires, consultez la [documentation relative à cette intégration][46].{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Contrôles d'accès granulaires" style="width:70%;" >}}
+
+1. Lorsque vous consultez une intégration, accédez à l'onglet **Configure** et repérez la ressource (compte, service, webhook) à laquelle appliquer des contrôles d'accès granulaires. 
+2. Cliquez sur **Set Permissions**.
+3. Par défaut, tous les membres de votre organisation ont un accès complet. Cliquez sur **Restrict Access**.
+4. La boîte de dialogue affiche alors les membres de votre organisation disposant de l'autorisation **Viewer** par défaut.
+5. Utilisez le menu déroulant pour sélectionner un ou plusieurs rôles, équipes ou utilisateurs autorisés à modifier le monitor.
+    **Remarque** : la permission [Integrations Manage][45] est également requise pour modifier des ressources individuelles.  
+6. Cliquez sur **Add**.
+7. La boîte de dialogue se met à jour pour afficher les autorisations mises à jour.
+8. Cliquez sur **Save**. La page d'intégration s'actualise automatiquement avec les autorisations mises à jour.
+
+**Remarque** : afin de toujours pouvoir modifier la ressource, vous devez inclure au moins un de vos rôles ou une de vos équipes avant d'enregistrer vos modifications.
+
+Pour rétablir l'accès général à une ressource d'intégration restreinte, procédez comme suit :
+
+1. Depuis l'écran de l'intégration, accédez à l'onglet **Configure** et localisez la ressource (compte, service, webhook) dont l'accès général doit être rétabli.
+2. Cliquez sur **Set Permissions**.
+3. Cliquez sur **Restore Full Access**.
+4. Cliquez sur **Save**. La page d'intégration s'actualise automatiquement avec les autorisations mises à jour.
 
 ## Et ensuite ?
 
@@ -231,3 +269,4 @@ Tags
 [43]: /fr/metrics/custom_metrics/
 [44]: /fr/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /fr/account_management/rbac/permissions/#integrations
+[46]: /fr/integrations/

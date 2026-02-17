@@ -1,5 +1,6 @@
 ---
 title: Agent Runtime Configuration Management
+description: "Dynamically change Datadog Agent configuration settings at runtime without restarting the Agent for debugging purposes."
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"

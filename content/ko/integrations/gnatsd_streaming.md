@@ -101,7 +101,7 @@ gnatsd_streaming 점검은 다른 주요 플랫폼과 모두 호환됩니다.
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "gnatsd_streaming" >}}
+{{< get-metrics-from-git "gnatsd-streaming" >}}
 
 
 Nats 스트리밍 서버 메트릭에는 "nss-cluster_id" 등의 이름이 태그됩니다.
@@ -111,7 +111,7 @@ Nats 스트리밍 서버 메트릭에는 "nss-cluster_id" 등의 이름이 태�
 결함 포용(Fault Tolerant) 그룹에서 Nats 스트리밍 서버를 실행하는 경우, 서버 상태가 `FT_STANDBY` 과 `FT_ACTIVE` 사이에서 변경되면 Nats 스트리밍 페일오버 이벤트가 실행됩니다 .
 
 ### 서비스 점검
-{{< get-service-checks-from-git "gnatsd_streaming" >}}
+{{< get-service-checks-from-git "gnatsd-streaming" >}}
 
 
 ## 트러블슈팅

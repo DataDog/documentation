@@ -1,0 +1,24 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "tags": [
+          "test:example-monitor"
+        ]
+      },
+      "name": "test rule",
+      "conditional_recipients": {
+        "conditions": [
+          {
+            "scope": "transition_type:is_alert",
+            "recipients": [
+              "slack-test-channel",
+              "jira-test"
+            ]
+          }
+        ]
+      }
+    },
+    "type": "monitor-notification-rule"
+  }
+}

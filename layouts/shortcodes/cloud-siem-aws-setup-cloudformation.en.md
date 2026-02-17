@@ -1,4 +1,4 @@
-<div class="alert alert-warning">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
+<div class="alert alert-danger">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
 
 1. Go to Datadog's [AWS integration tile][102] to install the integration.
 1. Click **Automatically Using CloudFormation**. If there is already an AWS account set up, click **Add Another Account** first.

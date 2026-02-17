@@ -144,7 +144,7 @@ Argo Rollouts のログは、Kubernetes を通じて、異なる Argo Rollouts �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "argo_rollouts" >}}
+{{< get-metrics-from-git "argo-rollouts" >}}
 
 
 ### イベント
@@ -152,7 +152,7 @@ Argo Rollouts のログは、Kubernetes を通じて、異なる Argo Rollouts �
 Argo Rollouts インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "argo_rollouts" >}}
+{{< get-service-checks-from-git "argo-rollouts" >}}
 
 
 ## トラブルシューティング

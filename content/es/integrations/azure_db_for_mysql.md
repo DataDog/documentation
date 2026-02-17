@@ -3,7 +3,7 @@ app_id: azure-db-for-mysql
 app_uuid: e0f71c73-4783-4ada-8bcf-d7f870a7b933
 assets:
   dashboards:
-    azure_db_for_mysql: assets/dashboard/azure_db_for_mysql.json
+    azure_db_for_mysql: assets/dashboards/azure_db_for_mysql.json
   integration:
     auto_install: true
     events:

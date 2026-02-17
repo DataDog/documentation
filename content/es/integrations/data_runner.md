@@ -50,7 +50,7 @@ tile:
 
 ## Información general
 
-El Data Runner es un juego en el que tu personaje busca una métrica especificada por el jugador en un entorno de biblioteca. Cuando el personaje encuentra la métrica especificada, el valor de la métrica se añade a la puntuación del jugador. Puedes añadir el Data Runner a tu dashboard de Datadog como widget.
+El Data Runner es un juego en el que tu personaje busca una métrica especificada por el jugador en un entorno de librería. Cuando el personaje encuentra la métrica especificada, el valor de la métrica se añade a la puntuación del jugador. Puedes añadir el Data Runner a tu dashboard de Datadog como widget.
 
 Esta extensión es posible gracias a las [aplicaciones Datadog][1] que amplían la interfaz de usuario con contenidos de terceros no compatibles de forma nativa. Si te interesa ampliar tu experiencia en Datadog, ya sea por negocios o por diversión, puedes [crear tu propia aplicación o juego][1].
 

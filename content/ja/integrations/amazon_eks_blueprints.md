@@ -17,11 +17,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- AWS
-- 構成 & デプロイ
-- コンテナ
-- orchestration
-custom_kind: integration
+- aws
+- 構成とデプロイ
+- incident-teams
+- オーケストレーション
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md
 display_on_public_website: true
@@ -77,7 +77,7 @@ Datadog Blueprints アドオンでは、Blueprints を使用して Amazon EKS �
 npm install @datadog/datadog-eks-blueprints-addon
 ```
 
-### 使用方法
+### 使用状況
 
 #### 既存の Kubernetes シークレットを使用する
 
@@ -128,7 +128,7 @@ new blueprints.EksBlueprint(app, { id: '<eks cluster name>', addOns}, props)
 
 #### オプション
 
-| オプション                  |説明                                          | デフォルト                       |
+| オプション                  |説明                                          | Default                       |
 |-------------------------|-----------------------------------------------------|-------------------------------|
 | `apiKey`                | Datadog API キー                                | ""                            |
 | `appKey`                | Datadog アプリキー                                | ""                            |
@@ -151,7 +151,7 @@ EKS を監視するには、以下の Datadog インテグレーションのい�
 
 - [Kubernetes][2]
 - [AWS][3]
-- [AWS EC2][4]
+- [Amazon EC2][4]
 
 [ELB][5] など、EKS で実行している他の AWS サービスのインテグレーション設定も行ってください。
 

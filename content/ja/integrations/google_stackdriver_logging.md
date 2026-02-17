@@ -47,7 +47,7 @@ Google Cloud のログは Google Cloud Logging で収集され、Cloud Pub/Sub �
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_stackdriver_logging" >}}
+{{< get-metrics-from-git "google-stackdriver-logging" >}}
 
 
 **注**: Datadog は、プレフィックス `gcp.logging.user` を使用して Google Cloud Logging の[ユーザー定義のメトリクス][4]を収集します。

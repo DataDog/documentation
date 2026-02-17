@@ -74,7 +74,7 @@ AWS 코드디플로이(CodeDeploy)를 설정하여 S3 버킷 또는 클라우드
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_codedeploy" >}}
+{{< get-metrics-from-git "amazon-codedeploy" >}}
 
 
 AWS에서 검색된 각 메트릭에는 AWS 콘솔에 나타나는 것과 동일한 태그가 할당됩니다, 호스트 이름, 보안 그룹 등을 포함하되 이에 제한되지 않습니다.

@@ -214,7 +214,7 @@ end
 ```
 
 #### 코드
-대신 코드를 업데이트해 트레이서가 명시적으로 호스트 이름을 설정할 수 있도록 할 수 있습니다.
+대신, 코드를 업데이트하여 트레이서가 명백하게 호스트 이름을 설정하도록 할 수 있습니다. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,8 +222,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {

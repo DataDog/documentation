@@ -119,7 +119,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "php_opcache" >}}
+{{< get-metrics-from-git "php-opcache" >}}
 
 
 ### 이벤트
@@ -127,7 +127,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 PHP OPcache 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "php_opcache" >}}
+{{< get-service-checks-from-git "php-opcache" >}}
 
 
 ## 트러블슈팅

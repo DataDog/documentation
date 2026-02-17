@@ -92,7 +92,7 @@ Si instalas el Datadog Agent en un entorno de dominio, consulta [los requisitos 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "active_directory" >}}
+{{< get-metrics-from-git "active-directory" >}}
 
 
 ### Eventos

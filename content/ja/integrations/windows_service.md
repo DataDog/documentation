@@ -159,7 +159,7 @@ Windows Service チェックには、メトリクスは含まれません。
 Windows Service チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "windows_service" >}}
+{{< get-service-checks-from-git "windows-service" >}}
 
 
 ## トラブルシューティング

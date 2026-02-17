@@ -31,7 +31,7 @@ title: 데이터 스트림 모니터링
 
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
    데이터 스트림 모니터링은 {{< region-param key="dd_site_name" >}} 사이트에서 이용할 수 없습니다.
 </div>
 {{% /site-region %}}

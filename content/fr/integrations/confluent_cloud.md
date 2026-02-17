@@ -73,7 +73,7 @@ Par défaut, toutes les métriques recueillies à partir de Confluent Cloud son
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "confluent_cloud" >}}
+{{< get-metrics-from-git "confluent-cloud" >}}
 
 
 ### Événements

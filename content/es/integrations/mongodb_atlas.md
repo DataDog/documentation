@@ -5,6 +5,7 @@ assets:
   dashboards:
     MongoDB-Atlas-Overview: assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
     MongoDB-Atlas-Vector-Search-Overview: assets/dashboards/MongoDB-Atlas-Vector-Search-Overview_dashboard.json
+    MongoDB-dbStats-collStats-Dashboard: assets/dashboards/MongoDB-Atlas-dbStats-collStats_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -25,14 +26,14 @@ assets:
     Read latency is higher than expected: assets/monitors/read_latency.json
     Write latency is higher than expected: assets/monitors/write_latency.json
 author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
+  homepage: https://www.mongodb.com
+  name: MongoDB
+  sales_email: field@mongodb.com
+  support_email: frank.sun@mongodb.com
 categories:
 - ia/ml
 - métricas
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md
 display_on_public_website: true
@@ -124,7 +125,7 @@ La integración MongoDB Atlas no incluye checks de servicio.
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-## Leer más
+## Referencias adicionales
 
 Más enlaces, artículos y documentación útiles:
 

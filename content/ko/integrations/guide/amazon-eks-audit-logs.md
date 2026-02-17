@@ -41,7 +41,7 @@ Amazon EKS 감사 로그, Datadog AWS 통합, Datadog Forwarder를 모두 설정
 
 Log Explorer에서 EKS 감사 로그만 보려면 Log Explorer 검색 창에 `source:kubernetes.audit`를 쿼리하거나 패싯 패널의 **Source** 아래에서 `kubernetes.audit` 패싯을 선택해 EKS 감사 로그를 필터링할 수 있습니다.
 
-## 클라우드 보안 정보와 이벤트 관리(SIEM)
+## Cloud SIEM
 
 Datadog Cloud SIEM을 사용해 EKS 클러스터에 발생할 수 있는 잠재적 구현 실수나 대상 공격을 감지할 수 있습니다.
 
@@ -75,10 +75,10 @@ Cloud SIEM을 설정하고 구성한 뒤, 새 Cloud SIEM 규칙을 처음부터 
 [5]: /ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /ko/security/cloud_siem/detection_rules/
+[8]: /ko/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [9]: /ko/getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
 [11]: /ko/security/default_rules/#cat-cloud-siem
 [12]: /ko/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /ko/security/cloud_siem/detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /ko/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method

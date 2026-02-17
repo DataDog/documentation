@@ -3,7 +3,7 @@ title: Ragas Evaluations
 aliases:
  - /llm_observability/ragas_evaluations
 further_reading:
-    - link: '/llm_observability/evaluations/submit_evaluations'
+    - link: '/llm_observability/evaluations/external_evaluations'
       tag: 'Documentation'
       text: 'Submit Evaluations'
 ---
@@ -14,7 +14,7 @@ further_reading:
 
 For a simplified setup guide, see [Ragas Quickstart][7].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog recommends that you use sampling for Ragas evaluations. These LLM-as-a-judge evaluations are powered by your LLM provider's account. Evaluations are automatically traced and sent to Datadog. These traces contain LLM spans, which may affect your LLM Observability billing. See <a href="#sampling">Sampling</a>.
 </div>
 
@@ -113,7 +113,7 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
 
 #### Sampling
 
-To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATORS_SAMPLING_RULES` environment variable. Pass in a list of arrays, each containing the following fields:
+To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EVALUATOR_SAMPLING_RULES` environment variable. Pass in a list of objects, each containing the following fields:
 
 | Field | Description | Required | Type |
 |-------|-------------|----------|------|
@@ -124,7 +124,7 @@ To enable Ragas scoring for a sampled subset of LLM calls, use the `DD_LLMOBS_EV
 In the following example, Ragas Faithfulness scoring is enabled for 50% of all `answer_question` spans. Ragas evaluations are disabled for all other spans (`"sample_rate": 0`).
 
 ```bash
-export DD_LLMOBS_EVALUATORS_SAMPLING_RULES='[
+export DD_LLMOBS_EVALUATOR_SAMPLING_RULES='[
   {
     "sample_rate": 0.5,
     "evaluator_label": "ragas_faithfulness",

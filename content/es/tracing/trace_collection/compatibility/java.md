@@ -16,9 +16,9 @@ type: lenguaje de código múltiple
 
 ## Compatibilidad
 
-La biblioteca de rastreo Datadog Java es de código abierto. Para obtener más información, consulta el [repositorio GitHub][1].
+La librería de rastreo Datadog Java es de código abierto. Para obtener más información, consulta el [repositorio GitHub][1].
 
-### Tiempos de ejecución compatibles Java 
+### Tiempos de ejecución compatibles Java
 
 El rastreador Java es compatible con la instrumentación automática para los siguientes tiempos de ejecución Oracle JDK, OpenJDK JVM, y [GraalVM](#graalvm-native-image-support).
 
@@ -77,11 +77,11 @@ Las integraciones Beta están deshabilitadas por defecto, pero pueden habilitars
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Variable de entorno: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
-`dd-java-agent` incluye soporte para rastrear automáticamente los siguientes marcos web.
+`dd-java-agent` incluye soporte para rastrear automáticamente los siguientes web frameworks.
 
-**El rastreo de marcos web proporciona:**
+**El rastreo de web frameworks proporciona:**
 
 - temporización de solicitud a respuesta HTTP
 - etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)
@@ -283,7 +283,7 @@ Las integraciones pueden habilitarse o deshabilitarse individualmente (anulando 
 
 ## Soporte de GraalVM Native Image
 
-GraalVM Native Image es una tecnología que permite compilar aplicaciones Java en ejecutables nativos. El rastreador Java de Datadog es compatible con GraalVM Native Image. Esto te permite compilar tus aplicaciones en ejecutables nativos y seguir disfrutando de las capacidades de rastreo que ofrece la biblioteca.
+GraalVM Native Image es una tecnología que permite compilar aplicaciones Java en ejecutables nativos. El rastreador Java de Datadog es compatible con GraalVM Native Image. Esto te permite compilar tus aplicaciones en ejecutables nativos y seguir disfrutando de las capacidades de rastreo que ofrece la librería.
 
 ### Requisitos
 
@@ -304,7 +304,7 @@ Para configurar el rastreador Java de Datadog con GraalVM Native Image, sigue lo
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Opcional) Habilita la integración del generador de perfiles añadiendo el siguiente argumento:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -318,7 +318,7 @@ Para configurar el rastreador Java de Datadog con Quarkus Native, sigue los paso
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Opcional) Habilita la integración del generador de perfiles añadiendo el siguiente argumento:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`.
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
@@ -350,7 +350,7 @@ Para configurar el rastreador Java de Datadog con Spring Native, sigue los pasos
      </build>
      ```
    - También puedes utilizar el comando `pack build` con la opción `--env BP_DATADOG_ENABLED=true` para habilitar el paquete de compilación Datadog.
-3. (Opcional) Habilita la integración del generador de perfiles configurando la siguiente variable de entorno:`BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’` .
+3. (Opcional) Habilita la integración del generador de perfiles configurando la siguiente variable de entorno:`BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true --enable-monitoring=jfr’` .
 
 [6]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [8]: https://github.com/paketo-buildpacks/datadog
@@ -372,10 +372,10 @@ Las versiones más antiguas del paquete de compilación Native-Image muestran la
 Cuando esta opción es `false`, pueden ocurrir excepciones como las siguientes:
 
 ```text
-Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
-com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
-No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
-as this class should be initialized at image runtime. To see how this object got 
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError:
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException:
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap
+as this class should be initialized at image runtime. To see how this object got
 instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
 ```
 

@@ -18,7 +18,7 @@ site_support_id: roku_error_tracking
 
 ## Overview
 
-Error Tracking processes errors collected from the Roku SDK. 
+Error Tracking processes errors collected from the Roku SDK.
 
 Enable Roku Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
@@ -38,7 +38,7 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Limitations
 
-Crash reporting on Roku doesn't yet support stacktraces. 
+The SDK supports stack trace in crash reporting on Roku OS 13+, while on Roku OS <13, the stack trace is empty.
 
 ## Test your implementation
 
@@ -71,9 +71,9 @@ Whenever you perform an operation that might throw an exception, you can forward
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
-[5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
 
 
 ## Further Reading

@@ -60,8 +60,8 @@ php_value datadog.service my-app
 
 ## NGINX and PHP-FPM
 
-<div class="alert alert-warning">
-<strong>Note:</strong> PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
+<div class="alert alert-danger">
+PHP-FPM does not support the value <code>false</code> in <code>env[...]</code> directives. Use <code>1</code> in place of <code>true</code> and <code>0</code> in place of <code>false</code>.
 </div>
 
 For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
@@ -332,13 +332,6 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 **Default**: `1000`<br>
 The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
 
-`DD_SPAN_SAMPLING_RULES`
-: **INI**: `datadog.span_sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
-**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
-
 ### Agent
 
 `DD_AGENT_HOST`
@@ -401,8 +394,8 @@ The `'full'` option enables connection between database spans with database quer
 
 `DD_LOGS_INJECTION`
 : **INI**: `datadog.logs_injection`<br>
-**Default**: `0`<br>
-Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+**Default**: `1`<br>
+Enables or disables automatic injection of correlation identifiers into JSON/structured application logs. Added in version `0.89.0`<br>
 See [logs correlation documentation][17] for more information.
 
 ### OpenTelemetry
@@ -603,7 +596,7 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 
 ## Map resource names to normalized URI
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
 </div>
 

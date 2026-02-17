@@ -78,7 +78,7 @@ Critical alerts는 음소거와 방해 금지를 무시합니다. Critical alert
 
 2. **Override system volume** 토글을 활성화합니다. 그러면 시스템 설정으로 이동합니다. Datadog 모바일 앱 줄에 해당 토글이 활성화되어 있는지 확인합니다.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Android에서 Datadog 모바일 앱이 Work 프로필 내에서 사용되면 시스템 볼륨이나 방해 금지 설정을 무시할 수 없습니다. 이를 해결하려면 개인 프로필에 Datadog 모바일 앱을 설치하세요.
 </div>
 

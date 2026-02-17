@@ -20,7 +20,7 @@ further_reading:
 ---
 
 
-## Default agent behavior
+## Default Agent behavior
 
 For Agent v6.19+/v7.19+, the default transport used for your logs is compressed HTTPS instead of TCP for the previous versions.
 When the Agent starts, if log collection is enabled, it runs a HTTPS connectivity test. If successful, then the Agent uses the compressed HTTPS transport, otherwise the Agent falls back to a TCP transport.
@@ -33,7 +33,7 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 
 **Notes**:
 
-* For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+.
+* For older Agent versions, TCP transport is used by default. **Datadog strongly recommends** you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+.
 * Always enforce a specific transport (either TCP or HTTPS) when using a proxy to forwards logs to Datadog
 
 ## Enforce a specific transport
@@ -67,7 +67,7 @@ By default, the Datadog Agent uses the port `443` to send its logs to Datadog ov
 Using HTTP, the Agent sends log batches with the following limits:
 
 * Maximum batch size: 1MB
-* Maximum size for a single log: 256kB
+* Maximum size for a single log: 900kB
 * Maximum number of logs in a batch: 1,000
 
 ### Log compression
@@ -109,7 +109,10 @@ When logs are sent through HTTPS, use the same [set of proxy settings][3] as the
 {{% /tab %}}
 
 {{% tab "TCP" %}}
-{{< site-region region="us,eu,us3,us5,ap1" >}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+
+{{% logs-tcp-disclaimer %}}
+
 
 To enforce TCP transport, update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 

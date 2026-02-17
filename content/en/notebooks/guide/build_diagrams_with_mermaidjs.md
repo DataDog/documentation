@@ -1,5 +1,6 @@
 ---
 title: Build diagrams with Mermaid JS
+description: "Create flowcharts, sequence diagrams, and other visual diagrams in Notebooks using Mermaid JS syntax in Markdown cells."
 disable_toc: false
 ---
 
@@ -11,7 +12,7 @@ Mermaid is a JavaScript-based tool for creating diagrams and flowcharts in Markd
 ## Setup
 
 To create a new diagram in your notebook:
-1. Add a new text cell.
+1. Add a new Markdown cell, with `/markdown` or the **Add Cell** menu.
 1. Select **Code Block** from inside the Markdown editor.
 1. Select **Mermaid-JS**.
 

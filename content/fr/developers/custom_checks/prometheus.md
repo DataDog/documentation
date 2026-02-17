@@ -58,7 +58,7 @@ instances:
 
 ### Configuration
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Vos fichiers de configuration et de check doivent porter le même nom. Si votre check s'appelle <code>moncheck.py</code>, votre fichier de configuration <em>doit</em> s'appeler <code>moncheck.yaml</code>.
 </div>
 

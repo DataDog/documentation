@@ -1,5 +1,6 @@
 ---
 title: Variables and parameters
+description: Use context variables, input parameters, output parameters, and custom variables to pass data between workflow steps.
 disable_toc: false
 aliases:
   - /service_management/workflows/actions/set_variables/
@@ -130,7 +131,7 @@ You can access a custom variable in your workflow using `{{ Variables.variableNa
 
 ### Iteration
 
-Setting a custom variable inside a **For loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a custom variable and append the data you need to it on each iteration. Outside of the loop, you can access the custom variable and handle the data you collected.
+Setting a custom variable inside a **For loop** or a **While loop** allows you store data for use outside of the loop. For example, if you're making multiple API requests inside a **For loop**, you can set a custom variable and append the data you need to it on each iteration. Outside of the loop, you can access the custom variable and handle the data you collected.
 
 To avoid a type error resulting from an undefined variable, assign a custom variable before you use it in a loop. In the example below, the custom variable `evenList` is set to an empty array before it is used in the loop.
 
@@ -144,8 +145,9 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 
 [1]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.core/com.datadoghq.core.setVariable
 [2]: /service_management/workflows/actions/flow_control#for-loop
-[3]: https://datadoghq.slack.com/
+[3]: https://chat.datadoghq.com/
 [4]: https://handlebarsjs.com/guide/expressions.html#expressions
 [5]: /service_management/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app
 [7]: /service_management/workflows/trigger/#access-the-result-of-a-child-workflow
+[8]: /service_management/workflows/expressions/#inline-javascript-expressions

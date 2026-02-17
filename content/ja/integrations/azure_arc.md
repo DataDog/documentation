@@ -78,7 +78,7 @@ Azure Arc インテグレーションを使用すると、以下のことが可�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "azure_arc" >}}
+{{< get-metrics-from-git "azure-arc" >}}
 
 
 ### イベント

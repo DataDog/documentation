@@ -90,7 +90,7 @@ Datadog で、メトリクスエクスプローラーを使用して `mesos.clus
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mesos_master" >}}
+{{< get-metrics-from-git "mesos-master" >}}
 
 
 ### イベント
@@ -98,7 +98,7 @@ Datadog で、メトリクスエクスプローラーを使用して `mesos.clus
 Mesos-master チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "mesos_master" >}}
+{{< get-service-checks-from-git "mesos-master" >}}
 
 
 ## トラブルシューティング
@@ -261,7 +261,7 @@ DC/OS を使用していない場合は、正常に実行中のアプリケー�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mesos_slave" >}}
+{{< get-metrics-from-git "mesos" >}}
 
 
 ### イベント
@@ -269,7 +269,7 @@ DC/OS を使用していない場合は、正常に実行中のアプリケー�
 Mesos スレーブチェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "mesos_slave" >}}
+{{< get-service-checks-from-git "mesos" >}}
 
 
 ## トラブルシューティング

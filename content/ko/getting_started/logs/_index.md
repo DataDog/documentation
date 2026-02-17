@@ -1,4 +1,5 @@
 ---
+description: 여러 소스에서 로그를 수집하고, 처리 및 분석하고, 이러한 로그를 추적 및 메트릭과 상호 연계하세요.
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
   tag: 학습 센터
@@ -16,10 +17,10 @@ further_reading:
   tag: 학습 센터
   text: 기본 통합 파이프라인을 사용하여 로그 처리
 - link: /logs/log_collection/
-  tag: 문서
+  tag: 설명서
   text: 로그 수집 및 통합
 - link: /getting_started/tagging/unified_service_tagging
-  tag: 문서
+  tag: 설명서
   text: 통합 서비스 태깅 설정법 알아보기
 - link: https://dtdg.co/fe
   tag: 기초 구축
@@ -133,12 +134,12 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 * [Logging without Limits*][26]에 대해 자세히 알아보기
 * [RBAC 설정][27]으로 민감한 로그 데이터 관리
 
-## 추가 읽기
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*제한없는 로그 수집(Logging without Limits™)은 Datadog, Inc.의 상표입니다.
+*Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: https://www.datadoghq.com
 [2]: /ko/tracing/other_telemetry/connect_logs_and_traces/
@@ -146,7 +147,7 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 [4]: /ko/security/cloud_siem/
 [5]: /ko/getting_started/integrations/
 [6]: /ko/agent/
-[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[7]: /ko/agent/configuration/agent-commands/#restart-the-agent
 [8]: https://app.datadoghq.com/logs/onboarding/server
 [9]: /ko/agent/logs/?tab=tailfiles#custom-log-collection
 [10]: /ko/agent/docker/log/?tab=containerinstallation

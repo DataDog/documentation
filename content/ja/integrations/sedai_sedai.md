@@ -18,7 +18,7 @@ categories:
 - notifications
 - orchestration
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -124,4 +124,4 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 [5]: mailto:support@sedai.io
 [6]: https://www.datadoghq.com/blog/autonomous-cloud-management-aws-lambda-sedai-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/sedai-sedai-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/sedai-sedai-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

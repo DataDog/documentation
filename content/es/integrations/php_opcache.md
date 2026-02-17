@@ -119,7 +119,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "php_opcache" >}}
+{{< get-metrics-from-git "php-opcache" >}}
 
 
 ### Eventos
@@ -127,7 +127,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 La integración OPcache de PHP no incluye eventos.
 
 ### Checks de servicios
-{{< get-service-checks-from-git "php_opcache" >}}
+{{< get-service-checks-from-git "php-opcache" >}}
 
 
 ## Solucionar problemas

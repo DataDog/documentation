@@ -18,7 +18,7 @@ further_reading:
   tag: Documentation
   text: Limites de débit
 title: Références sur les API
-type: documentation
+type: api
 ---
 
 {{< h2 >}}Références sur les API{{< /h2 >}}
@@ -29,17 +29,21 @@ L'API Datadog est une API HTTP REST. Elle utilise des URL orientées ressources 
 
 Authentifiez-vous auprès de l'API avec une [clé d'API][1] en utilisant l'en-tête `DD-API-KEY`. Pour certains endpoints, vous devez également utiliser une [clé d'application][2], qui repose sur l'en-tête `DD-APPLICATION-KEY`.
 
-Pour essayer l'API [![Exécution dans Postman][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+Pour essayer l'API [![Run in Postman][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa)
+
+**Remarque** : pour vous authentifier à l'API Datadog via Postman, ajoutez vos clés API et d'application Datadog aux **variables de collection** de la collection Datadog API.
 
 La section [Utiliser l'API][4] présente le fonctionnement des endpoints.
 
-**Remarque** : les exemples de code cURL supposent que vous utilisiez les coreutils GNU et BASH. Sous macOS, vous pouvez installer coreutils via le [gestionnaire de packages Homebrew][5] : `brew install coreutils`.
+**Remarques** :
+   - Ajoutez vos clés API et d'application dans l'onglet **Variables** de la collection Datadog API.
+   - Les exemples de code cURL supposent l'utilisation de BASH et des coreutils GNU. Sous macOS, vous pouvez installer coreutils avec le [gestionnaire de paquets Homebrew][5] : `brew install coreutils`.
 
 ### Bibliothèques client
 
 Par défaut, la documentation dédiée à l'API Datadog propose des exemples en cURL. Sélectionnez l'une de nos [bibliothèques client][6] officielles dans chaque endpoint pour voir des exemples de code pour cette bibliothèque. Pour installer chaque bibliothèque :
 
-{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
+{{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript,rust" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
 #### Installation
@@ -197,13 +201,44 @@ import { <VERSION> } from 'datadog-api-client';
 [1]: https://www.npmjs.com/package/@datadog/datadog-api-client
 {{< /programming-lang >}}
 
+{{< programming-lang lang="rust" >}}
+#### Installation
+Exécutez `cargo add datadog-api-client` ou ajoutez ce qui suit à `Cargo.toml` sous `[dependencies]` :
+
+```
+datadog-api-client = "0"
+```
+
+#### Utilisation
+Essayez l'extrait suivant pour valider votre clé d'API Datadog :
+```rust
+use datadog_api_client::datadog::Configuration;
+use datadog_api_client::datadogV1::api_authentication::AuthenticationAPI;
+
+#[tokio::main]
+async fn main() {
+    let configuration = Configuration::new();
+    let api = AuthenticationAPI::with_config(configuration);
+    let resp = api.validate().await;
+    if let Ok(value) = resp {
+        println!("{:#?}", value);
+    } else {
+        println!("{:#?}", resp.unwrap_err());
+    }
+}
+```
+
+[1]: https://crates.io/crates/datadog-api-client
+[2]: https://docs.rs/datadog-api-client/latest/datadog_api_client/
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 Vous pouvez également consulter directement les bibliothèques :
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-Vous cherchez à prendre en main l'application ? Consultez la documentation générale [Débuter avec Datadog][7].
+Vous préférez démarrer avec l’application ? Consultez la [documentation générale de prise en main][7] de Datadog.
 
 ## Pour aller plus loin
 

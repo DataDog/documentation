@@ -41,13 +41,13 @@ Puedes clasificar una señal asignándola a un usuario para que la investigue. E
 ## Crear un caso
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">La gestión de casos no es compatible para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La gestión de casos no es compatible para tu <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Utiliza [Gestión de casos][6] para rastrear, clasificar e investigar las señales de seguridad.
 
 1. En [Signals Explorer][4], selecciona una señal de seguridad.
-2. En el panel lateral de la señal, haz clic en el menú desplegable **Escalate Investigation** (Escalar investigación) y selecciona **Create a case** (Crear un caso). Alternativamente, selecciona **Add to an existing case** (Añadir a un caso existente) para añadir la señal a un caso existente. 
+2. En el panel lateral de la señal, haz clic en el menú desplegable **Escalate Investigation** (Escalar investigación) y selecciona **Create a case** (Crear un caso). Alternativamente, selecciona **Add to an existing case** (Añadir a un caso existente) para añadir la señal a un caso existente.
 3. Introduce un título y una descripción opcional.
 4. Haz clic en **Create case** (Crear caso).
 
@@ -77,7 +77,7 @@ Utiliza [Workflow Automation][8] para activar manualmente un flujo de trabajo pa
 [1]: /es/security/notifications/rules/
 [2]: /es/account_management/audit_trail/events/#cloud-security-platform-events
 [3]: /es/account_management/rbac/permissions/#cloud-security-platform
-[4]: https://app.datadoghq.com/security?product=cws
+[4]: https://app.datadoghq.com/security/workload-protection/signals
 [5]: /es/service_management/incident_management/
 [6]: /es/service_management/case_management/
 [7]: /es/security/cloud_security_management/workflows

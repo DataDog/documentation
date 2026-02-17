@@ -13,7 +13,7 @@ title: エラー予算アラート
 
 SLO エラーバジェットアラートは閾値に基づき、SLO のエラーバジェットの一定の割合が消費されなかったときに通知します。たとえば、対象とする 7 日間でエラーバジェットの 75% が消費されたらアラート、50% が消費されたら警告（オプション）のように設定します。
 
-**注:** エラーバジェットのアラートは、以下の SLO タイプで利用可能です。
+エラーバジェットのアラートは、以下の SLO タイプで利用可能です。
 
 - [メトリクスベースの SLO][1]、
 - [メトリクスモニタータイプ (メトリクス、インテグレーション、 APM メトリクス、異常、予測、外れ値モニター) のみで構成されるモニターベースの SLO][2]、および
@@ -34,6 +34,11 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 5. SLO 構成ページで **Create &amp; Set Alert** ボタンをクリックします。
 
 {{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="SLO を作成し、エラーバジェットアラートをセットアップする" style="width:80%;">}}
+
+### グループ付き SLO に関するアラート
+
+グループを含む Time Slice SLO の場合、SLO グループまたは SLO 全体を対象にエラーバジェットアラートを設定できます。グループを対象にアラートを設定する場合、[アラートの集約][9]を構成して、シンプルアラートまたはマルチアラートを使用することができます。メトリクスベースおよびモニターベースの SLO では、SLO 全体に対してのみエラーバジェットアラートを設定できます。
+
 
 ### API および Terraform
 
@@ -66,7 +71,7 @@ resource "datadog_monitor" "metric-based-slo" {
 }
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -79,3 +84,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [6]: /ja/api/v1/monitors/#create-a-monitor
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
 [8]: /ja/service_management/service_level_objectives/time_slice
+[9]: /ja/monitors/configuration/#set-alert-aggregation

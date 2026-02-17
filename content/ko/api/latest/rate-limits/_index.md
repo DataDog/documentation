@@ -18,7 +18,7 @@ API 속도 제한 정책 관련:
 - 이벤트 제출에 대한 속도 제한은 조직당 분당 `50,000` 이벤트입니다.
 - 엔드포인트에 대한 속도 제한은 다양하며 아래 헤더에서 자세한 내용을 확인하실 수 있습니다. 이러한 제한은 필요에 따라 연장할 수 있습니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 위의 목록은 Datadog API의 모든 속도 제한을 포함하고 있지 않습니다. 속도 제한이 발생하는 경우, 사용 중인 API와 속도 제한에 대해 <a href="https://www.datadoghq.com/support/">고객 지원팀</a>에 문의하세요.
 </div>
 

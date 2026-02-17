@@ -15,7 +15,7 @@ title: Activación del generador de perfiles nativo para lenguajes compilados
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> está en fase beta. Datadog recomienda evaluar el generador de perfiles en un entorno no sensible antes de desplegarlo en producción.
 </div>
 
@@ -43,7 +43,7 @@ Información de depuración
 
 ## Instalación
 
-El generador de perfiles puede utilizarse como un ejecutable independiente o como biblioteca. Ve a las [instrucciones de instalación de biblioteca](#library) si deseas utilizarlo como biblioteca.
+El generador de perfiles puede utilizarse como un ejecutable independiente o como biblioteca. Ve a las [instrucciones de instalación de librería](#library) si deseas utilizarlo como biblioteca.
 
 ### Independiente
 
@@ -111,9 +111,9 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 
 ### Biblioteca
 
-La biblioteca expone una API en C.
+La librería expone una API en C.
 
-1. Descarga una versión de [ddprof][2] compatible con la biblioteca (v0.8.0 o posterior) y extrar el archivo tar. Por ejemplo:
+1. Descarga una versión de [ddprof][2] compatible con la librería (v0.8.0 o posterior) y extrar el archivo tar. Por ejemplo:
 
    ```bash
    curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
@@ -154,19 +154,19 @@ La biblioteca expone una API en C.
    gcc -I/tmp/ddprof/include -L/tmp/ddprof/lib profiler_demo.c -o profiler_demo -ldd_profiling
    ```
 
-### Despliegue de la biblioteca compartida
+### Despliegue de la librería compartida
 
-La biblioteca compartida debe estar presente en la ruta de búsqueda de la biblioteca del sistema. De lo contrario, la aplicación no se iniciará. Usando el ejemplo de antes:
+La librería compartida debe estar presente en la ruta de búsqueda de la librería del sistema. De lo contrario, la aplicación no se iniciará. Usando el ejemplo de antes:
 ```bash
 ./profiler_demo
 ./profiler_demo: error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
 ```
 
-Evita esto enlazando con la biblioteca estática.
+Evita esto enlazando con la librería estática.
 
-#### Instalación de la biblioteca
+#### Instalación de la librería
 
-Añade la biblioteca a la ruta de búsqueda copiándola en cualquier directorio de búsqueda existente. Para averiguar cuáles son tus directorios de búsqueda, en sistemas Linux, ejecuta:
+Añade la librería a la ruta de búsqueda copiándola en cualquier directorio de búsqueda existente. Para averiguar cuáles son tus directorios de búsqueda, en sistemas Linux, ejecuta:
 ```bash
 ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n
 ```

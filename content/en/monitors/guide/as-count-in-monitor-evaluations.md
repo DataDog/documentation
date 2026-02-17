@@ -1,5 +1,6 @@
 ---
 title: as_count() in Monitor Evaluations
+description: "Understanding how as_count() and as_rate() modifiers affect monitor evaluations and arithmetic operations in different evaluation paths."
 aliases:
   - /monitors/guide/as-count-monitor-evaluation
 ---

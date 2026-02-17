@@ -23,9 +23,11 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
 
-The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.
+The Datadog Profiler requires at least Node.js 18.
 
 Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][8].
+
+Continuous Profiler support is in Preview for Google Cloud Run.
 
 ## Installation
 
@@ -35,7 +37,7 @@ To begin profiling applications:
 
 2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
 
-3. Enable the profiler:
+3. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -74,17 +76,13 @@ const tracer = require('dd-trace/init')
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Optional: Set up [Source Code Integration][4].
+4. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-5. A minute or two after starting your Node.js application, your profiles will appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
+5. A couple of minutes after you start your application, your profiles appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
 
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
-
-## Experiencing high overhead?
-
-Node.js 16 or higher is recommended. On earlier versions, some applications see tail latency spikes every minute while starting the next profile.
 
 ## Further Reading
 

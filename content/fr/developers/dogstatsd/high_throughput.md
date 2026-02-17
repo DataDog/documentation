@@ -83,7 +83,7 @@ with dsd:
     dsd.gauge('example_metric.gauge_2', 1001, tags=["environment:dev"])
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Par défaut, les instances de client DogStatsD Python (y compris l'instance globale <code>statsd</code>) ne peuvent pas être partagées entre des processus, mais sont thread-safe. De ce fait, le processus parent et chaque processus enfant doivent créer leurs propres instances du client, ou la mise en mémoire tampon doit être explicitement désactivée en définissant <code>disable_buffering</code> sur <code>True</code>. Consultez la documentation sur <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> pour en savoir plus.
 </div>
 
@@ -367,7 +367,7 @@ Pour éviter que l'Agent Datadog atteigne son seuil d'utilisation de la mémoire
 
 Pour limiter l'utilisation maximale de la mémoire, pensez également à réduire la mise en mémoire tampon. Le buffer principal du serveur DogStatsD dans l'Agent peut être configuré avec le champ `dogstatsd_queue_size` (depuis l'Agent Datadog 6.1.0). Sa valeur par défaut `1024` limite l'utilisation maximale de la mémoire à environ 768 Mo.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque</strong> : la réduction de la taille du buffer peut entraîner une augmentation du nombre de paquets perdus.
 </div>
 
@@ -383,7 +383,7 @@ Consultez la section suivante dédiée à la détection des salves pour découvr
 
 DogStatsD possède un mode statistique vous permettant de visualiser les métriques les plus traitées.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Remarque</strong> : l'activation du mode statistique pour les métriques peut nuire aux performances de DogStatsD.
 </div>
 

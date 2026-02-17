@@ -77,7 +77,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon_medialive" >}}
+{{< get-metrics-from-git "amazon-medialive" >}}
 
 
 ### Eventos

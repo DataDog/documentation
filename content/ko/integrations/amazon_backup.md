@@ -43,7 +43,7 @@ AWS 백업은 AWS 서비스 및 하이브리드 워크로드 전반에서 데이
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_backup" >}}
+{{< get-metrics-from-git "amazon-backup" >}}
 
 
 ### 이벤트

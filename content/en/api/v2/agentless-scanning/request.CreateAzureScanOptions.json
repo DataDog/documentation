@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "vuln_containers_os": true,
+      "vuln_host_os": true
+    },
+    "id": "12345678-90ab-cdef-1234-567890abcdef",
+    "type": "azure_scan_options"
+  }
+}

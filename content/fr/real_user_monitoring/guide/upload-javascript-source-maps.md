@@ -21,7 +21,7 @@ Si votre code source JavaScript frontend est minifié, importez vos source maps 
 
 Configurez votre bundler JavaScript de façon à ce qu'il génère des source maps lorsque vous minifiez votre code source. Ces source maps inclueront directement le code source associé dans l'attribut `sourcesContent`. 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< site-region region="us,us3,us5,eu" >}}
 Vérifiez que la taille de chaque source map, à laquelle sʼajoute la taille du fichier minifié associé, ne dépasse pas la limite de **300** Mo.
 {{< /site-region >}}
@@ -85,7 +85,7 @@ Vous trouverez un exemple ci-dessous :
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 {{< site-region region="us,us3,us5,eu" >}}
 Si le total de la taille du fichier correspondant à <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <b>la limite de **300** Mo</b>, réduisez-le en configurant votre bundler de façon à scinder le code source en plus petites parties. Pour en savoir plus, consultez <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 {{< /site-region >}}
@@ -166,7 +166,7 @@ L'exemple suivant représente une stack trace minifiée :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/#initialization-parameters
 [3]: https://docs.datadoghq.com/fr/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code

@@ -18,7 +18,7 @@ short_description: Recopila tus logs de auditoría de HSM en tu organización de
 
 ## Información general
 
-Cuando un HSM de tu cuenta recibe un comando de las herramientas de línea de comandos o de bibliotecas de software de AWS CloudHSM, registra su ejecución del comando en forma de log de auditoría. Los logs de auditoría del HSM incluyen todos los comandos de gestión iniciados por el cliente, incluidos los que crean y eliminan el HSM, los que entran y salen del HSM, y los que gestionan usuarios y claves. Estos logs proporcionan un registro fiable de las acciones que han cambiado el estado del HSM.
+Cuando un HSM de tu cuenta recibe un comando de las herramientas de línea de comandos o de librerías de software de AWS CloudHSM, registra su ejecución del comando en forma de log de auditoría. Los logs de auditoría del HSM incluyen todos los comandos de gestión iniciados por el cliente, incluidos los que crean y eliminan el HSM, los que entran y salen del HSM, y los que gestionan usuarios y claves. Estos logs proporcionan un registro fiable de las acciones que han cambiado el estado del HSM.
 
 Datadog se integra con AWS CloudHSM a través de una función de Lambda que envía logs de CloudHSM logs a la solución Log Management de Datadog.
 

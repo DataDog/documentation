@@ -100,7 +100,7 @@ SNS ne fournit pas de logs. Traitez les logs et les événements transmis via le
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "amazon_sns" >}}
+{{< get-metrics-from-git "amazon-sns" >}}
 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.

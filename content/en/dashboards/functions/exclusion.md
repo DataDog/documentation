@@ -1,5 +1,6 @@
 ---
 title: Exclusion
+description: Exclude null values and apply threshold-based filtering using clamp and cutoff functions on metrics.
 aliases:
     - /graphing/functions/exclusion/
 ---

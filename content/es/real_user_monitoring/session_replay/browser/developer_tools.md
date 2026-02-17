@@ -26,9 +26,9 @@ El botón **Herramientas de desarrollo** aparece a la derecha del botón **Compa
 
 En la pestaña **Rendimiento** se muestra una cascada de eventos (como acciones, errores, recursos y tareas prolongadas) y marcas de tiempo de una sesión.
 
-Selecciona y aplica los filtros **Red**, **Eventos** y **Tiempos** para cambiar el contexto de los recursos y tipos de evento mostrados. También puedes arrastrar y soltar los controles deslizantes de la cascada para ampliar el intervalo de tiempo.  
+Selecciona y aplica filtros como Nombre de la acción y Tipo de recurso para cambiar el contexto de los recursos y tipos de evento mostrados. También puedes arrastrar y soltar los controles deslizantes de la cascada para ampliar el intervalo de tiempo.
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-1.mp4" alt="Filtros de rendimiento" video="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-2.mp4" alt="Filtros de rendimiento" video="true" style="width:60%;">}}
 
 ### Consola
 

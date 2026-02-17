@@ -1,0 +1,19 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayLength",
+  "processors": [
+    {
+      "type": "array-processor",
+      "is_enabled": true,
+      "name": "count_tags",
+      "operation": {
+        "type": "length",
+        "source": "tags",
+        "target": "tagCount"
+      }
+    }
+  ],
+  "tags": []
+}

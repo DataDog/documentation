@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Test Impact Analysis
+description: Skip irrelevant tests using code coverage analysis to reduce CI testing time while maintaining reliability and performance.
 aliases:
 - /getting_started/intelligent_test_runner
 further_reading:
@@ -16,7 +17,7 @@ algolia:
   tags: ["test impact analysis", "intelligent test runner", "ci test", "ci tests", "flaky test", "flaky tests"]
 ---
 
-<div class="alert alert-warning"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
+<div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
 
 ## Overview
 

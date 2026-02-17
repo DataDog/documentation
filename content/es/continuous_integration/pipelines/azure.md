@@ -15,7 +15,7 @@ further_reading:
 title: Configurar el rastreo en un pipeline de Azure
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server no ofrece una compatibilidad oficial.
 </div>
 

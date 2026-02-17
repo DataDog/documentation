@@ -1,0 +1,3 @@
+- Logstash address and port:
+    - Observability Pipelines Worker は着信ログメッセージを受信するためにこのアドレス (例: `0.0.0.0:9997`) をリッスンします。
+    - `DD_OP_SOURCE_LOGSTASH_ADDRESS` として環境変数に格納されています。

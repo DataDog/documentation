@@ -38,7 +38,7 @@
     {{ $unsupported_regions = substr $unsupported_regions 0 -1 }}
     
     <div class="d-none site-region-container" data-region="{{ $unsupported_regions }}">
-        <div class="alert alert-warning">{{ $text }} ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
+        <div class="alert alert-danger">{{ $text }} ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
     </div>
 {{ end }}
 

@@ -16,7 +16,7 @@ further_reading:
 - link: "/data_security/real_user_monitoring/"
   tag: "Documentation"
   text: "RUM Data Security"
-- link: "/real_user_monitoring/session_replay/browser/privacy_options"
+- link: "/session_replay/browser/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "/security/sensitive_data_scanner/"
@@ -71,7 +71,7 @@ Sensitive Data Scanner is a stream-based, pattern matching service that you can 
 
 Logs are records produced by your systems and services and the activities that happen within them. Read about logs data security considerations, including information about how you can filter and obfuscate logs data in [Log Management Data Security][11]. 
 
-Dive deep into controlling logs data with the [Controlling sensitive logs data][12] guide and [Agent Advanced Configuration for Logs][13].
+Dive deep into controlling logs data with the [Manage Sensitive Logs Data Access][12] guide and [Agent Advanced Configuration for Logs][13].
 
 A key approach to reducing risk around logs data security is access control. Read [How to set up RBAC for Logs][14] and [Logs RBAC Permissions][15] to learn how to do this in Datadog.
 
@@ -152,7 +152,7 @@ Continuous Integration pipelines and tests
 [9]: /integrations/google_cloud_platform/
 [10]: /security/sensitive_data_scanner/
 [11]: /data_security/logs/
-[12]: /logs/guide/control-sensitive-logs-data/
+[12]: /logs/guide/manage-sensitive-logs-data-access/
 [13]: /agent/logs/advanced_log_collection
 [14]: /logs/guide/logs-rbac
 [15]: /logs/guide/logs-rbac-permissions
@@ -161,8 +161,8 @@ Continuous Integration pipelines and tests
 [18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/advanced_configuration/
-[22]: /real_user_monitoring/session_replay/browser/privacy_options
+[21]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[22]: /session_replay/browser/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/
 [25]: /tracing/glossary/

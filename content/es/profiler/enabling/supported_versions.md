@@ -4,7 +4,7 @@ further_reading:
 - link: /profiler/enabling
   tag: Documentación
   text: Habilitación del generador de perfiles
-title: Lenguaje y versiones de biblioteca de las funciones del generador de perfiles
+title: Lenguaje y versiones de librería de las funciones del generador de perfiles
 ---
 
 En las tablas siguientes se resumen las funciones disponibles para el tiempo de ejecución de cada lenguaje.
@@ -22,7 +22,7 @@ Para utilizar Datadog Profiler, utiliza al menos las versiones mínimas resumida
 |-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|
 | <strong>Versión mínima de tiempo de ejecución</strong> | [JDK 8+][17]  | Python 2.7+ | Go 1.19+ | Ruby 2.3+ | Node 14+ | .NET Core 2.1+, .NET 5+, .NET Framework 4.6.1+ | PHP 7.1+ |                 |
 | <strong>Versión completa de tiempo de ejecución</strong>       | [JDK 11+][17] | Python 3.6+ | Go 1.21+ | Ruby 3.1+ | Node 18+ |                              .NET 7+                               | PHP 8.0+ |                 |
-| <strong>Versión completa de biblioteca de rastreo</strong>        | [última][9]  |   [última][10]   | [última][11]  |  [última][12]  | [última][13]  |                              [última][14]                               | [última][15]  |  [última][16]   |
+| <strong>Versión completa de librería de rastreo</strong>        | [última][9]  |   [última][10]   | [última][11]  |  [última][12]  | [última][13]  |                              [última][14]                               | [última][15]  |  [última][16]   |
 
 ## Tipos de perfiles
 

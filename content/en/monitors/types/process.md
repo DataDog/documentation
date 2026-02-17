@@ -19,7 +19,7 @@ further_reading:
   text: "Monitor processes running on AWS Fargate with Datadog"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 

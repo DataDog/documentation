@@ -108,8 +108,8 @@ In order to run the Worker in your AWS account, you need administrative access t
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-warning">CloudFormation installs only support Remote Configuration at this time.</div>
-<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+<div class="alert alert-danger">CloudFormation installs only support Remote Configuration at this time.</div>
+<div class="alert alert-warning">Only use CloudFormation installs for non-production-level workloads.</div>
 
 In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
 * The VPC ID your instances will run in.
@@ -425,7 +425,7 @@ EOT
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+<div class="alert alert-warning">Only use CloudFormation installs for non-production-level workloads.</div>
 
 To install the Worker in your AWS Account, use the CloudFormation template to create a Stack:
 
@@ -531,7 +531,7 @@ An NLB is provisioned by the Terraform module, and provisioned to point at the i
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+<div class="alert alert-warning">Only use CloudFormation installs for non-production-level workloads.</div>
 
 An NLB is provisioned by the CloudFormation template, and is configured to point at the AutoScaling Group. Its DNS address is returned in the `LoadBalancerDNS` CloudFormation output.
 {{% /tab %}}
@@ -568,7 +568,7 @@ By default, a 288GB EBS drive is allocated to each instance, and the sample conf
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This leads to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, only use CloudFormation installs for non-production-level workloads.</div>
+<div class="alert alert-warning">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This leads to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, only use CloudFormation installs for non-production-level workloads.</div>
 
 By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted and formatted upon instance boot.
 {{% /tab %}}

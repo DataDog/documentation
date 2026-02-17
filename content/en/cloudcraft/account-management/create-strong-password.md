@@ -18,7 +18,7 @@ Cloudcraft also performs automatic throttling and temporary lockout of accounts 
 
 1. Use a password manager such as [1Password][1] or [Bitwarden][2]. They make it much easier to create and use long, complex passwords that are unique for each website you use.
 2. Subscribe to a breach notification service like [Have I Been Pwned][3] so you're notified if a service you use experiences a security breach.
-3. [Use two-factor authentication (2FA)][4]. Cloudcraft offers 2FA protection as do most services that deal with sensitive informatio.
+3. [Use two-factor authentication (2FA)][4]. Cloudcraft offers 2FA protection as do most services that deal with sensitive information.
 
 Mozilla, the company behind the web browser Firefox, has [a great article on this subject][5].
 

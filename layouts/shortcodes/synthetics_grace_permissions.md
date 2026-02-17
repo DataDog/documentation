@@ -12,7 +12,7 @@ Use [granular access control][100] to limit who has access to your test based on
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- |

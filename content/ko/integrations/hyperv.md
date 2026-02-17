@@ -90,7 +90,7 @@ Hyper-V 점검은 [Datadog Agent][2] 패키지에 포함되어 있어 서버에 
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "hyperv" >}}
+{{< get-metrics-from-git "hyper-v" >}}
 
 
 ### 서비스 점검

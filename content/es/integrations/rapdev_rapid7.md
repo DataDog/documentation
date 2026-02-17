@@ -1,6 +1,6 @@
 ---
 algolia:
-  subcategory: Integraciones de Marketplace
+  subcategory: Integraciones del Marketplace
 app_id: rapdev-rapid7
 app_uuid: 388017a0-e4cc-45ad-b038-c2141abf20c1
 assets:
@@ -33,7 +33,7 @@ categories:
 - recopilación de logs
 - marketplace
 - seguridad
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -50,28 +50,28 @@ pricing:
 - billing_type: flat_fee
   includes_assets: true
   product_id: rapid7
-  short_description: Tarifa plana para esta integración
+  short_description: Tarifa plana de esta integración
   unit_price: 500
 public_title: Rapid7
 short_description: Monitoriza tu actividad de investigación y logs de Rapid7
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
-  - Category::Marketplace
-  - Category::Security
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Events
-  - Submitted Data Type::Logs
-  configuration: README.md#Setup
+  - Categoría::Recopilación de logs
+  - Categoría::Marketplace
+  - Categoría::Seguridad
+  - Oferta::Integración
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Tipo de datos enviados::Métricas
+  - Tipo de datos enviados::Eventos
+  - Tipo de datos enviados::Logs
+  configuration: README.md#Configuración
   description: Monitoriza tu actividad de investigación y logs de Rapid7
   media:
   - caption: Investigaciones
@@ -80,13 +80,13 @@ tile:
   - caption: Estados de alto nivel
     image_url: images/rapdev_rapid7_dashboard_.png
     media_type: imagen
-  overview: README.md#Overview
-  support: README.md#Support
+  overview: README.md#Información general
+  support: README.md#Soporte
   title: Rapid7
-  uninstallation: README.md#Uninstallation
+  uninstallation: README.md#Desinstalación
 ---
 
-<!--  FUENTE https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -108,8 +108,8 @@ El recuento de logs procesados ​​por check se informa como una métrica.
 La recopilación de logs es opcional y se encuentra deshabilitada de manera predeterminada.
 Esta integración llama a la API de logs de Rapid7 para consultar todos los logs disponibles en el último intervalo de tiempo. El intervalo de tiempo predeterminado es el último minuto. Puedes especificar los [conjuntos de logs][4] como se detalla en la [Documentación de búsqueda de logs][5] de Rapid7 insightIDR para solo obtener esos logs.
 
-## Agent
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
+## Ayuda
+Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
 - Soporte: support@rapdev.io
 - Ventas: sales@rapdev.io
@@ -128,4 +128,4 @@ Hecho con ❤️ en Boston
 [5]: https://docs.rapid7.com/insightidr/log-search/
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-rapid7" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-rapid7" target="_blank">adquiere esta aplicación en el Marketplace</a>.

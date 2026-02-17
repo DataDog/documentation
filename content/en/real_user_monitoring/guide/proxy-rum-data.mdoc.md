@@ -1,5 +1,6 @@
 ---
 title: Proxy Your Browser RUM Data
+description: "Configure browser RUM data proxying with SDK source options and version-specific settings for custom network routing."
 aliases:
   - /real_user_monitoring/faq/proxy_rum_data/
 content_filters:
@@ -69,7 +70,11 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
     The intake origin for your Datadog site is `https://browser-intake-ap1-datadoghq.com`.
     {% /site-region %}
 
-    {% site-region region="fed" %}
+    {% site-region region="ap2" %}
+    The intake origin for your Datadog site is `https://browser-intake-ap2-datadoghq.com`.
+    {% /site-region %}
+
+    {% site-region region="gov" %}
     The intake origin for your Datadog site is `https://browser-intake-ddog-gov.com`.
     {% /site-region %}
 ---
@@ -215,5 +220,5 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 {% /if %}
 <!-- end SDK version <4.34.0 -->
 
-[1]: /real_user_monitoring/browser/setup/client/?tab=rum#initialization-parameters
+[1]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=rum#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840

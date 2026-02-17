@@ -52,7 +52,7 @@ php_value datadog.service my-app
 
 ### NGINX et PHP-FPM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Remarque :</strong> PHP-FPM ne prend pas en charge la valeur <code>false</code> dans les directives <code>env[...]</code>. Utilisez <code>1</code> à la place de <code>true</code> et <code>0</code> à la place de <code>false</code>.
 </div>
 
@@ -353,7 +353,7 @@ Utilisez ces noms lorsque vous définissez un paramètre pour une intégration s
 
 #### Mapper les noms de ressources à un URI normalisé
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Paramètre obsolète :</strong> À partir de la version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a>, l'ancien paramètre <code>DD_TRACE_RESOURCE_URI_MAPPING</code> est obsolète. Il continuera à fonctionner pendant un certain temps, mais nous vous conseillons vivement d'utiliser les nouveaux paramètres spécifiés dans ce paragraphe pour éviter tout problème une fois l'ancien paramètre supprimé.
 
 Notez que la configuration de l'un des paramètres suivants : <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> ou <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> activera la nouvelle approche de normalisation des ressources, et toutes les valeurs spécifiées dans <code>DD_TRACE_RESOURCE_URI_MAPPING</code> seront ignorées.

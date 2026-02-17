@@ -153,7 +153,7 @@ end
 DD_ENV=ci bundle exec rake test
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>注:</strong> `minitest/autorun` を使用する場合、`datadog/ci` が `minitest/autorun` より先に実行されるようにしてください。
 </div>
 

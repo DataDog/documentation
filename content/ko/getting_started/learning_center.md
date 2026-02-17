@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - 튜토리얼
 aliases:
 - /ko/video-categories/
 - /ko/video-categories/datadog-101/

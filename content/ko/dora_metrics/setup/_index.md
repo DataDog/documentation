@@ -8,7 +8,7 @@ further_reading:
 title: DORA 메트릭 설정
 ---
 
-<div class="alert alert-warning">DORA 메트릭은 공개 베타 버전입니다.</div>
+<div class="alert alert-danger">DORA 메트릭은 공개 베타 버전입니다.</div>
 
 ## 개요
 

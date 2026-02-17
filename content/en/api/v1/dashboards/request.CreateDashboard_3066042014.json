@@ -16,7 +16,8 @@
         "time": {
           "type": "live",
           "unit": "minute",
-          "value": 8
+          "value": 8,
+          "hide_incomplete_cost_data": true
         },
         "type": "timeseries",
         "requests": [

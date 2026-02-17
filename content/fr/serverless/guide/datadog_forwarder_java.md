@@ -1,14 +1,13 @@
 ---
-
 title: Instrumenter des applications Java sans serveur avec le Forwarder Datadog
 ---
 ## Présentation
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si vous commencez tout juste à utiliser la surveillance sans serveur Datadog, suivez plutôt les <a href="/serverless/installation/java">instructions d'instrumentation des fonctions Lambda avec l'extension Lambda Datadog</a>. Si vous avez configuré la surveillance sans serveur Datadog avec le Forwarder Datadog avant que les fonctionnalités Lambda clés en main ne soient proposées, consultez ce guide pour gérer votre instance.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Certaines anciennes versions de <code>datadog-lambda-java</code> importent <code>log4j <=2.14.0</code> en tant que dépendance transitive. Les <a href="#mise-a-niveau">instructions de mise à niveau</a> sont indiquées plus loin dans ce guide.
 </div>
 
@@ -62,9 +61,9 @@ dependencies {
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-    DD_LOGS_INJECTION: true
+    DD_LOGS_INJECTION: true # default value
     DD_JMXFETCH_ENABLED: false
-    DD_TRACE_ENABLED: true
+    DD_TRACE_ENABLED: true # default value
     ```
 
 3. Incorporez la fonction Lambda de votre gestionnaire à l'aide du wrapper fourni par la bibliothèque Lambda Datadog :

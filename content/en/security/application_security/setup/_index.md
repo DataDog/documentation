@@ -35,21 +35,35 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="NGINX" avatar="nginx" link="./nginx" >}}
   {{< appsec-integration name="Envoy" avatar="envoy" link="./envoy" >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
+  {{< appsec-integration name="HAProxy" avatar="haproxy" link="./haproxy" >}}
 {{< /appsec-integrations >}}
 
-## Cloud and Container Platforms
-
-### Kubernetes (K8s)
+## Hosts
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
+  {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
+  {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
+  {{< appsec-integration name="macOS" avatar="apple" link="./macos" >}}
+  {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
+
+## Kubernetes (K8s)
+
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Istio" avatar="istio" link="./kubernetes/istio" >}}
+  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./kubernetes/envoy-gateway" >}}
+  {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./kubernetes/gateway-api" >}}
+  {{< appsec-integration name="Ingress NGINX Controller" avatar="nginx" link="./nginx/ingress-controller" >}}
+{{< /appsec-integrations >}}
+
+## Cloud Platforms
 
 ### Amazon Web Services (AWS)
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="./aws/lambda" >}}
+  {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws/fargate" >}}
+  {{< appsec-integration name="AWS WAF" avatar="amazon-waf" link="./aws/waf" >}}
 {{< /appsec-integrations >}}
 
 ### Google Cloud Platform (GCP)
@@ -66,4 +80,3 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
 {{< /appsec-integrations >}}
-

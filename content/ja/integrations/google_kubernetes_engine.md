@@ -72,7 +72,7 @@ Google Kubernetes Engine のログは Google Cloud Logging で収集され、Clo
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google_kubernetes_engine" >}}
+{{< get-metrics-from-git "google-kubernetes-engine" >}}
 
 
 ### イベント
