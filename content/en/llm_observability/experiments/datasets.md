@@ -96,9 +96,9 @@ Automations enable you to continuously route production traces to datasets based
 To set up automatic dataset updates:
 1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces)
 2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax]( https://docs.datadoghq.com/logs/explorer/search_syntax/).
-3. Click **Automate Query**
-4. Configure sampling rate (e.g., 10% of matching traces)
-5. Select **Add to Dataset** as the action
+3. Click **Automate Query**.
+4. Configure sampling rate (for example, 10% of matching traces).
+5. Select **Add to Dataset** as the action.
 6. Choose an existing dataset or create a new one
 
 After creating an automation, manage it from [**AI Observability > Settings > Automations**](https://app.datadoghq.com/llm/settings/automations):
