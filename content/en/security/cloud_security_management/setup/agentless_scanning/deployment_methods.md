@@ -60,7 +60,6 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 | Limit | Value |
 |-------|-------|
 | Maximum scanners per account per region | 4 (hard cap — cloud providers like AWS limit concurrent snapshots to 100 per account per region) |
-| Hosts per scanner per 15-minute cycle | Up to 200 |
 | Scan interval | Every 12 hours |
 
 <div class="alert alert-danger">Do not increase the Auto Scaling Group (ASG) desired count beyond 4 scanners per region. Additional scanners cannot create snapshots due to the cloud provider's concurrent snapshot limit and automatically revert.</div>
