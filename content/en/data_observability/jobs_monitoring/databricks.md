@@ -32,10 +32,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 <div class="alert alert-danger">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
-1. As a **Databricks account admin**, login to the Databricks Account Console ([AWS][28], [Azure][29]).
-1. Click on **User Management** in the left menu. Under the **Service principals** tab, click **Add service principal**.
-
-      **IMPORTANT:** For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT currently support "Microsoft Entra ID managed" service principals.
+   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
 1. Under the **Credentials & secrets** tab, click **Generate secret**.
    1. Set **Lifetime (days)** to the maximum value allowed (730). 
    1. Click **Generate**. 
