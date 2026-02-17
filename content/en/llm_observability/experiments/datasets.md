@@ -50,7 +50,7 @@ dataset = LLMObs.create_dataset_from_csv(
 
 {{% /tab %}}
 
-{{% tab "Manual Creation" %}}
+{{% tab "Manual creation" %}}
 
 Manually create a dataset, use `LLMObs.create_dataset()`:
 
