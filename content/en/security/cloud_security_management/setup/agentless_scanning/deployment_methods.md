@@ -81,6 +81,7 @@ Summary of recommendations:
 
 - Use a dedicated scanner account for multi-account environments
 - Deploy a scanner in each region with more than 150 hosts
+- If using [Cloud Storage Scanning][1], deploy a scanner in each region that contains a data store (for example, S3 buckets or RDS instances)
 - Use Terraform for repeatable, multi-region deployments
 
 **Note**: Only the collected list of packages and host metadata (hostnames, EC2/VM/Compute Engine instance identifiers) are sent to Datadog. All scanned data remains in your infrastructure.
