@@ -14,6 +14,8 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 
 To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation.
 
+For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
+
 ## Setup
 
 To send OpenTelemetry traces to LLM Observability, configure your OpenTelemetry exporter with the following settings:
