@@ -35,11 +35,49 @@
     {{ end }}
 {{ end }}
 
-{{/* Output details/summary blocks grouped by integration */}}
+{{/* Prefixes whose sub-integrations get nested under a parent accordion */}}
+{{ $grouped_prefixes := slice "Kubernetes" "GitLab" }}
+
+{{/* Separate entries into grouped vs standalone */}}
+{{ $grouped := dict }}
+{{ $standalone := dict }}
+
 {{ range $title, $fqns := $allowlist }}
+    {{ $matched := false }}
+    {{ range $grouped_prefixes }}
+        {{ if hasPrefix $title . }}
+            {{ $existing := index $grouped . | default dict }}
+            {{ $grouped = merge $grouped (dict . (merge $existing (dict $title $fqns))) }}
+            {{ $matched = true }}
+        {{ end }}
+    {{ end }}
+    {{ if not $matched }}
+        {{ $standalone = merge $standalone (dict $title $fqns) }}
+    {{ end }}
+{{ end }}
+
+{{/* Output standalone integrations */}}
+{{ range $title, $fqns := $standalone }}
 <details>
   <summary>{{ $title }}</summary>
   <pre>{{ range $i, $fqn := $fqns }}{{ if $i }}
 {{ end }}"{{ $fqn }}"{{ end }}</pre>
 </details>
+{{ end }}
+
+{{/* Output grouped integrations under a parent accordion */}}
+{{ range $grouped_prefixes }}
+    {{ $children := index $grouped . }}
+    {{ if $children }}
+<details>
+  <summary>{{ . }}</summary>
+        {{ range $title, $fqns := $children }}
+  <details>
+    <summary>{{ $title }}</summary>
+    <pre>{{ range $i, $fqn := $fqns }}{{ if $i }}
+{{ end }}"{{ $fqn }}"{{ end }}</pre>
+  </details>
+        {{ end }}
+</details>
+    {{ end }}
 {{ end }}

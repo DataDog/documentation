@@ -262,10 +262,10 @@ From the **Private Action Runner** page in [Actions Catalog][6], you can view al
 
 To edit the allowlist for a Private Action Runner:
 
-1. Edit the `actionsAllowlist` section of the `config.yaml` file in your runner's environment and add or remove the relevant permissions.
+1. Edit the `actionsAllowlist` section of the `config.yaml` file in your runner's environment and add or remove the relevant actions.
 1. Restart the runner by restarting your container or deployment.
 
-{{% collapse-content title="Available permissions" level="p" %}}
+{{% collapse-content title="Available actions" level="p" %}}
 
 {{< partial name="actions/private_actions_allowlist.html" >}}
 
