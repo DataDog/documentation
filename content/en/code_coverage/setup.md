@@ -471,7 +471,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [2]: /account_management/rbac/permissions/#custom-roles
 [3]: /account_management/rbac/permissions/#managed-roles
 [4]: https://app.datadoghq.com/organization-settings/roles
-[5]: https://app.datadoghq.com/ci/pr-gates/rule/create
+[5]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [6]: /code_coverage/data_collected/#code-coverage-report-upload
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases

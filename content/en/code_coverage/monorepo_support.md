@@ -118,6 +118,8 @@ You can configure [PR Gates][7] to enforce coverage thresholds for specific serv
 3. In the **per service** or **per code owner** field, select one or more services or code owner teams the gate should apply to.
 4. Save the rule.
 
+{{< img src="/code_coverage/pr_gate_codeowners.png" text="Code Coverage PR gate creation page in Datadog" style="width:100%" >}}
+
 ### Using the YAML configuration file
 
 You can also define service- or code owner-scoped gates directly in your [`code-coverage.datadog.yml`][8] file using the `services` and `codeowners` fields:
@@ -140,8 +142,6 @@ gates:
 {{< /code-block >}}
 
 Gates defined in the YAML file work alongside gates configured in the Datadog UI. See [Configuration][8] for the full YAML gate syntax and additional examples.
-
-{{< img src="/code_coverage/pr_gate_codeowners.png" text="Code Coverage PR gate creation page in Datadog" style="width:100%" >}}
 
 ### How service and code owner gates work
 

@@ -187,6 +187,7 @@ Each gate has the following fields:
   - `threshold` (required): The minimum coverage percentage required (0–100).
   - `services`: (optional) List of service name patterns to scope the gate to. Use `*` as a wildcard. When specified, the gate evaluates coverage for matching services independently.
   - `codeowners`: (optional) List of code owner patterns to scope the gate to. Use `*` as a wildcard. When specified, the gate evaluates coverage for matching code owners independently.
+  - `flags`: (optional) List of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. When specified, the gate evaluates coverage for matching flags independently.
 
 ### Examples
 
@@ -248,6 +249,24 @@ gates:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+{{% collapse-content title="Gates scoped to flags" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      flags:
+        - "unit-tests"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      flags:
+        - "integration-tests"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 ## Pattern syntax
 
 Configuration options that accept file paths support three types of patterns:
@@ -292,3 +311,4 @@ Simple path prefixes without special characters are treated as prefix matches:
 
 [1]: /code_coverage/monorepo_support
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[3]: /code_coverage/flags
