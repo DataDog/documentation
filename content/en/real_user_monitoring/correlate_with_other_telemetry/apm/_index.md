@@ -660,7 +660,7 @@ Datadog uses the distributed tracing protocol and sets up the HTTP headers below
 : Generated from the Real User Monitoring SDK. Allows Datadog to generate the first span from the trace.
 
 `x-datadog-origin: rum`
-: To make sure the generated traces from Real User Monitoring don't affect your APM Index Spans counts.
+: Generated from the Real User Monitoring SDK. Allows Datadog to detect the source of the trace.
 
 `x-datadog-sampling-priority`
 : Set to `1` by the Real User Monitoring SDK if the trace was sampled, or `0` if it was not.

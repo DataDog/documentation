@@ -170,11 +170,11 @@ You can post updates if plans change or reschedule the maintenance window as nee
 
 ## Email subscriptions
 
-Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
+Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. A preferred timezone can be configured for timestamp formatting within notifications. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
-{{< img src="/service_management/status_pages/status_pages_subscription.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
+{{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
 ## Set a custom domain
 

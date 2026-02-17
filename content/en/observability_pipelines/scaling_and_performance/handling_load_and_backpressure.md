@@ -69,7 +69,7 @@ This table compares the differences between the memory and disk buffer.
 
 If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes and then sent downstream.
 
-#### Buffer metrics (when enabled)
+### Buffer metrics
 
 {{% observability_pipelines/metrics/buffer %}}
 
