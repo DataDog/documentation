@@ -83,7 +83,7 @@ print(f"View dataset: {dataset.url}")
 Add production traces to datasets manually through the UI or automatically with Automations.
 
 **Manual selection (UI)**:
-1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces) (You can also add a new Automation from [Settings > Automations](https://app.datadoghq.com/llm/settings/automations) )
+1. Navigate to [**AI Observability > Traces**][2] (You can also add a new Automation from [Settings > Automations][3] )
 2. Find a trace you want to include in a dataset.
 3. Click **Add to Dataset** .
 4. Choose an existing dataset or create a new one.
@@ -94,14 +94,14 @@ Add production traces to datasets manually through the UI or automatically with 
 Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention. Automation rules apply only to new traces generated after the rule is created, not to existing historical traces. 
 
 To set up automatic dataset updates:
-1. Navigate to [**AI Observability > Traces**](https://app.datadoghq.com/llm/traces)
-2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax]( https://docs.datadoghq.com/logs/explorer/search_syntax/).
+1. Navigate to [**AI Observability > Traces**][2]
+2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax][4].
 3. Click **Automate Query**.
 4. Configure sampling rate (for example, 10% of matching traces).
 5. Select **Add to Dataset** as the action.
 6. Choose an existing dataset or create a new one.
 
-After creating an automation, manage it from [**AI Observability > Settings > Automations**](https://app.datadoghq.com/llm/settings/automations):
+After creating an automation, manage it from [**AI Observability > Settings > Automations**][3]:
 - **Enable/disable**: Control whether new traces are added to the dataset
 - **Edit**: Modify filters, sampling rates, or target datasets as your needs change
 - **Delete**: Remove automations that are no longer needed
@@ -229,3 +229,7 @@ dataset.push()
 ```
 
 [1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
+[2]: https://app.datadoghq.com/llm/traces
+[3]: https://app.datadoghq.com/llm/settings/automations
+[4]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+
