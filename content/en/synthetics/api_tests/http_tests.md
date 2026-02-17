@@ -259,7 +259,8 @@ For example, to assert that a `status.indicator` field exists and equals a speci
 {{< code-block lang="javascript" >}}
 const response = JSON.parse(dd.response.body);
 response.status.should.exist();
-response.status.indicator.should.equal('none');
+const indicator = response.status.indicator;
+indicator.should.equal('none');
 {{< /code-block >}}
 
 Example response:
@@ -274,6 +275,7 @@ Example response:
 This assertion:
 - Parses the JSON response body
 - Verifies that the `status` property exists
+- Extracts the indicator value into a variable
 - Checks that `status.indicator` equals `"none"`
 
 The test **passes** because `status` exists and `status.indicator` is `"none"`.
