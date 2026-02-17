@@ -127,15 +127,20 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
-1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
-1. **Select and configure** the products (for example, APM, Logs, or NDM) that you want the target Agents to run.
+1. In Fleet Automation, open the [Configure Agents][16] tab and click **Configure Agents**.
+1. **Scope to the Agents to configure.** You can target a group of Agents by filtering on host information or tags.
 
-   {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Configure Agent page in the Fleet Automation product for scoping Agents that are configured in bulk." style="width:100%;" >}}
 
-1. **Review** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
-1. **Scope Agents** to deploy configuration to (for example, through tags such as host names, site, or environment).
+1. **Choose what to configure**, for example, Datadog Products or Custom Logs.
+1. Click **Next** to configure the product:
+      - For **Datadog Products**, select the products (for example, APM, Logs, or NDM) that the target Agents should run.
+      - For **Custom Logs**, add a file path. Then, add the log collection settings using the fields provided or using YAML.
+
+   {{< img src="/agent/fleet_automation/fa_log_yaml_option.png" alt="The Log configuration page in the Fleet Automation product for configuring custom log collection." style="width:80%;" >}}
+
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
-1. **Start deployment** and track progress from the Deployments page.
+1. Click **Deploy Configuration** to start the deployment and track its progress from the [Deployments page][20].
 {{% /collapse-content %}}
 
 
@@ -220,3 +225,4 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
 [18]: /agent/fleet_automation#view-agent-audit-trail-events
 [19]: /api/latest/fleet-automation/
+[20]: https://app.datadoghq.com/fleet/deployments
