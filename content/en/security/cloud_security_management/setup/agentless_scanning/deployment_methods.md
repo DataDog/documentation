@@ -65,7 +65,6 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 
 <div class="alert alert-danger">Do not increase the Auto Scaling Group (ASG) desired count beyond 4 scanners per region. Additional scanners cannot create snapshots due to the cloud provider's concurrent snapshot limit and automatically revert.</div>
 
-**Note**: Scanner instances reboot every 24 hours for security updates. Pending scan queues reset during reboot, which may cause a small number of hosts to be scanned in the next cycle instead.
 
 ### Step 4: Enterprise networking considerations
 
