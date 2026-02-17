@@ -14,7 +14,10 @@ module.exports = {
             public_key: 'bDUaL3uKrCG0033PDb6Vbi8n46mKGaMG',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
-            partnersIndex: 'docs_partners_alias'
+            partnersIndex: 'docs_partners_alias',
+            conversationAnalyticsCollection: 'docs_conversation_analytics',
+            // TODO: rotate to environment-specific scoped[documents:create] create-only keys for live/preview/dev.
+            conversationAnalyticsCreateKey: 'LtPWCLTMBxSMmM8jxYA55FlWHpgHRaA6'
         },
         imgUrl: 'https://datadog-docs.imgix.net/',
         gaTag: 'UA-21102638-5'
@@ -36,7 +39,10 @@ module.exports = {
             public_key: 'SkRUMwyAJA2FCasO0801KsABcPsmFeNV',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
-            partnersIndex: 'docs_partners_alias'
+            partnersIndex: 'docs_partners_alias',
+            conversationAnalyticsCollection: 'docs_conversation_analytics',
+            // TODO: rotate to environment-specific scoped[documents:create] create-only keys for live/preview/dev.
+            conversationAnalyticsCreateKey: 'LtPWCLTMBxSMmM8jxYA55FlWHpgHRaA6'
         },
         imgUrl: 'https://datadog-docs-staging.imgix.net/',
         gaTag: 'UA-21102638-9'
@@ -55,7 +61,10 @@ module.exports = {
             public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
-            partnersIndex: 'docs_partners_alias'
+            partnersIndex: 'docs_partners_alias',
+            conversationAnalyticsCollection: 'docs_conversation_analytics',
+            // TODO: rotate to environment-specific scoped[documents:create] create-only keys for live/preview/dev.
+            conversationAnalyticsCreateKey: 'LtPWCLTMBxSMmM8jxYA55FlWHpgHRaA6'
         },
         imgUrl: 'http://localhost:1313/',
         gaTag: 'UA-21102638-9'

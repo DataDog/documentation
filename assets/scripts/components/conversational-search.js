@@ -4,6 +4,7 @@ import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import { initializeFeatureFlags, getBooleanFlag } from 'scripts/helpers/feature-flags';
+import { trackConversationAnalytics } from '../helpers/track-conversation-analytics';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -49,8 +50,12 @@ const renderer = {
 
 marked.use({ renderer });
 
-// Conversation model ID for the docs collection
-const CONVERSATION_MODEL_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
+// Conversation model IDs for the docs collection
+const MODEL_4_1_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
+const MODEL_5_2_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-5.2';
+const DEFAULT_CONVERSATION_MODEL_ID = MODEL_4_1_ID;
+const ANALYTICS_COLLECTION_NAME = typesenseConfig.conversationAnalyticsCollection || 'docs_conversation_analytics';
+const ANALYTICS_TYPESENSE_API_KEY = typesenseConfig.conversationAnalyticsCreateKey;
 
 // Embedding field to use for semantic search
 const EMBEDDING_FIELD = 'embedding';
@@ -85,6 +90,7 @@ class ConversationalSearch {
         this.isLoading = false;
         this.messages = [];
         this.abortController = null;
+        this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false; // tracks if the homepage "Ask AI" button is in the viewport
         
@@ -133,6 +139,11 @@ class ConversationalSearch {
         this.messagesContainer = messagesContainer;
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
+        this.modelSelect = this.sidebar.querySelector('.conv-search-model-select');
+
+        if (this.modelSelect) {
+            this.modelSelect.value = DEFAULT_CONVERSATION_MODEL_ID;
+        }
     }
 
     /**
@@ -152,6 +163,19 @@ class ConversationalSearch {
         this.newChatBtn.addEventListener('click', () => this.newChat());
         this.overlay.addEventListener('click', () => this.close());
         this.sendBtn.addEventListener('click', () => this.sendMessage());
+
+        if (this.modelSelect) {
+            this.modelSelect.addEventListener('change', () => {
+                const nextModelId = this.modelSelect.value || DEFAULT_CONVERSATION_MODEL_ID;
+                if (nextModelId === this.selectedModelId) {
+                    return;
+                }
+
+                this.selectedModelId = nextModelId;
+                // Reset conversation context to avoid mixing turns across models.
+                this.newChat();
+            });
+        }
         
         this.input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -627,7 +651,7 @@ class ConversationalSearch {
         // Build query params - conversation params go in the URL
         const queryParams = new URLSearchParams({
             conversation: 'true',
-            conversation_model_id: CONVERSATION_MODEL_ID,
+            conversation_model_id: this.selectedModelId,
             q: query,
             conversation_stream: 'true'
         });
@@ -664,6 +688,7 @@ class ConversationalSearch {
             const decoder = new TextDecoder();
             let accumulatedMessage = '';
             let buffer = '';
+            let latestResults = null;
             let lastRenderTime = 0;
             const RENDER_THROTTLE = 50; // Render markdown every 50ms max
 
@@ -713,6 +738,10 @@ class ConversationalSearch {
                             if (parsed.conversation) {
                                 this.conversationId = parsed.conversation.conversation_id;
                             }
+
+                            if (Array.isArray(parsed.results)) {
+                                latestResults = parsed.results;
+                            }
                         } catch (e) {
                             // Skip malformed JSON chunks
                             console.debug('Skipping malformed chunk:', data);
@@ -738,6 +767,12 @@ class ConversationalSearch {
                         conversation_id: this.conversationId,
                         latency_ms: latency
                     }
+                });
+                this.trackResponseCompletedEvent({
+                    query,
+                    answer: accumulatedMessage,
+                    latencyMs: latency,
+                    results: latestResults
                 });
             } else {
                 responseContainer.textContent = 'No response received. Please try again.';
@@ -780,6 +815,12 @@ class ConversationalSearch {
                         latency_ms: latency
                     }
                 });
+                this.trackResponseCompletedEvent({
+                    query,
+                    answer: fullAnswer,
+                    latencyMs: latency,
+                    results: null
+                });
             } else {
                 responseContainer.textContent = 'No response received.';
             }
@@ -807,7 +848,7 @@ class ConversationalSearch {
         messageDiv.appendChild(actionsDiv);
     }
 
-    handleMessageAction(action, query, response, button) {
+    async handleMessageAction(action, query, response, button) {
         const logData = {
             conversational_search: {
                 action,
@@ -819,39 +860,161 @@ class ConversationalSearch {
 
         switch (action) {
             case 'thumbs-up':
-                this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: 'positive' } });
-                button.classList.add('active');
-                // Reset thumbs-down
-                const thumbsDown = button.parentElement.querySelector('[data-action="thumbs-down"]');
-                if (thumbsDown) {
-                    thumbsDown.classList.remove('active');
+                {
+                    const thumbsDown = button.parentElement.querySelector('[data-action="thumbs-down"]');
+                    const isUndo = button.classList.contains('active');
+                    const feedbackValue = isUndo ? null : 'thumbs_up';
+                    const feedbackResult = await this.trackFeedbackEvent(feedbackValue, query, response);
+                    if (feedbackResult.ok) {
+                        this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: isUndo ? 'cleared' : 'positive' } });
+                        if (isUndo) {
+                            button.classList.remove('active');
+                            this.showFeedbackTooltip(button, 'Feedback removed');
+                        } else {
+                            button.classList.add('active');
+                            if (thumbsDown) {
+                                thumbsDown.classList.remove('active');
+                            }
+                            this.showFeedbackTooltip(button, 'Thanks for feedback!');
+                        }
+                    } else {
+                        this.showFeedbackTooltip(button, `Something went wrong (${feedbackResult.error || 'error'})`, true);
+                    }
                 }
                 break;
 
             case 'thumbs-down':
-                this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: 'negative' } });
-                button.classList.add('active');
-                // Reset thumbs-up
-                const thumbsUp = button.parentElement.querySelector('[data-action="thumbs-up"]');
-                if (thumbsUp) {
-                    thumbsUp.classList.remove('active');
+                {
+                    const thumbsUp = button.parentElement.querySelector('[data-action="thumbs-up"]');
+                    const isUndo = button.classList.contains('active');
+                    const feedbackValue = isUndo ? null : 'thumbs_down';
+                    const feedbackResult = await this.trackFeedbackEvent(feedbackValue, query, response);
+                    if (feedbackResult.ok) {
+                        this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: isUndo ? 'cleared' : 'negative' } });
+                        if (isUndo) {
+                            button.classList.remove('active');
+                            this.showFeedbackTooltip(button, 'Feedback removed');
+                        } else {
+                            button.classList.add('active');
+                            if (thumbsUp) {
+                                thumbsUp.classList.remove('active');
+                            }
+                            this.showFeedbackTooltip(button, 'Thanks for feedback!');
+                        }
+                    } else {
+                        this.showFeedbackTooltip(button, `Something went wrong (${feedbackResult.error || 'error'})`, true);
+                    }
                 }
                 break;
 
             case 'copy':
                 navigator.clipboard.writeText(response).then(() => {
                     this.logAction('Conversational Search Copy', logData);
-                    // CSS handles visual feedback via .copied class
-                    button.classList.add('copied');
-                    
-                    setTimeout(() => {
-                        button.classList.remove('copied');
-                    }, 2000);
+                    this.showFeedbackTooltip(button, 'Copied to clipboard!');
                 }).catch(err => {
                     console.error('Failed to copy:', err);
+                    this.showFeedbackTooltip(button, 'Copy failed', true);
                 });
                 break;
         }
+    }
+
+    buildRetrievedContext(results) {
+        const hits = Array.isArray(results) && results.length > 0 && Array.isArray(results[0]?.hits)
+            ? results[0].hits
+            : [];
+
+        const topHits = hits.slice(0, 8);
+        const retrievedUrls = [];
+        const retrievedTitles = [];
+        const retrievedIds = [];
+
+        topHits.forEach((hit) => {
+            const doc = hit?.document || {};
+            if (doc.full_url) retrievedUrls.push(doc.full_url);
+            if (doc.title) retrievedTitles.push(doc.title);
+            if (doc.id || doc.objectID) retrievedIds.push(doc.id || doc.objectID);
+        });
+
+        return {
+            retrievedCount: hits.length,
+            retrievedUrls,
+            retrievedTitles,
+            retrievedIds
+        };
+    }
+
+    trackResponseCompletedEvent({ query, answer, latencyMs, results }) {
+        if (!ANALYTICS_TYPESENSE_API_KEY) {
+            return;
+        }
+
+        const context = this.buildRetrievedContext(results);
+        trackConversationAnalytics({
+            host: `${typesenseConfig.host}-1.a1.typesense.net`,
+            collection: ANALYTICS_COLLECTION_NAME,
+            apiKey: ANALYTICS_TYPESENSE_API_KEY,
+            event: {
+                event_type: 'response_completed',
+                timestamp: Math.floor(Date.now() / 1000),
+                conversation_id: this.conversationId || '',
+                model_id: this.selectedModelId,
+                query,
+                answer,
+                answer_excerpt: answer.slice(0, 280),
+                latency_ms: latencyMs,
+                retrieved_count: context.retrievedCount,
+                retrieved_urls: context.retrievedUrls,
+                retrieved_titles: context.retrievedTitles,
+                retrieved_ids: context.retrievedIds,
+                metadata_json: JSON.stringify({
+                    source: 'conv_search_ui'
+                })
+            }
+        }).catch(() => {
+            // Non-blocking telemetry path.
+        });
+    }
+
+    async trackFeedbackEvent(userFeedback, query, assistantMessage) {
+        if (!ANALYTICS_TYPESENSE_API_KEY) {
+            return { ok: false, error: 'missing_context' };
+        }
+
+        return trackConversationAnalytics({
+            host: `${typesenseConfig.host}-1.a1.typesense.net`,
+            collection: ANALYTICS_COLLECTION_NAME,
+            apiKey: ANALYTICS_TYPESENSE_API_KEY,
+            event: {
+                event_type: 'feedback_submitted',
+                timestamp: Math.floor(Date.now() / 1000),
+                conversation_id: this.conversationId || '',
+                model_id: this.selectedModelId,
+                query,
+                answer_excerpt: (assistantMessage || '').slice(0, 280),
+                user_feedback: userFeedback || '',
+                metadata_json: JSON.stringify({
+                    source: 'conv_search_ui'
+                })
+            }
+        });
+    }
+
+    showFeedbackTooltip(button, message, isError = false) {
+        const feedbackEl = button.parentElement?.querySelector('.conv-search-feedback-inline');
+        if (!feedbackEl) {
+            return;
+        }
+
+        feedbackEl.textContent = message;
+        feedbackEl.classList.remove('feedback-success', 'feedback-error');
+        feedbackEl.classList.add(isError ? 'feedback-error' : 'feedback-success');
+
+        clearTimeout(feedbackEl._feedbackTooltipTimer);
+        feedbackEl._feedbackTooltipTimer = setTimeout(() => {
+            feedbackEl.classList.remove('feedback-success', 'feedback-error');
+            feedbackEl.textContent = '';
+        }, 2200);
     }
 
     logAction(message, data) {

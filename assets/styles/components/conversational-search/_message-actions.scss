@@ -1,0 +1,81 @@
+// Message action buttons (thumbs up/down/copy) + inline status
+.conv-search-message-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.conv-search-action-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: $conv-search-text-muted;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+
+    &:hover {
+        background: $conv-search-surface;
+        color: $conv-search-text;
+        border-color: rgba($conv-search-text-muted, 0.2);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.active {
+        background: rgba($conv-search-purple, 0.11);
+        border-color: rgba($conv-search-purple, 0.35);
+
+        &:hover {
+            background: rgba($conv-search-purple, 0.15);
+        }
+
+        img,
+        svg {
+            filter: invert(20%) sepia(77%) saturate(1858%) hue-rotate(258deg) brightness(75%) contrast(96%);
+        }
+    }
+
+    svg,
+    img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.conv-search-feedback-inline {
+    margin-left: 8px;
+    min-height: 18px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.15s ease;
+
+    &.feedback-success,
+    &.feedback-error {
+        opacity: 1;
+    }
+
+    &.feedback-success {
+        color: #3d2a5a;
+        background: rgba($conv-search-purple, 0.1);
+    }
+
+    &.feedback-error {
+        color: #9f1f17;
+        background: rgba(#c0392b, 0.12);
+    }
+}

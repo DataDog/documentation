@@ -23,6 +23,12 @@
                 </span>
             </div>
             <div class="conv-search-header-actions">
+                <label class="conv-search-model-control">
+                    <select class="conv-search-model-select" aria-label="Select model">
+                        <option value="CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1" selected>[preview] GPT-4.1</option>
+                        <option value="CONVERSATION-MODEL-DOCS-OPENAI-GPT-5.2">GPT-5.2</option>
+                    </select>
+                </label>
                 <button class="conv-search-new" aria-label="New Question" title="New Question">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="1 4 1 10 7 10"></polyline>
@@ -88,6 +94,7 @@
         <button class="conv-search-action-btn" data-action="copy" title="Copy response">
             <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/copy.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
         </button>
+        <span class="conv-search-feedback-inline" aria-live="polite"></span>
     </div>
 </template>
 
