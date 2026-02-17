@@ -8,11 +8,10 @@ further_reading:
   - link: "/code_coverage/setup"
     tag: "Documentation"
     text: "Set up Code Coverage"
+  - link: "/code_coverage/flags"
+    tag: "Documentation"
+    text: "Organize coverage data with flags"
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
 
 ## Overview
 

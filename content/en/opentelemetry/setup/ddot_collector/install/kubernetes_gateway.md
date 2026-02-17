@@ -55,18 +55,103 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.160.1 or higher.
+    * Datadog Helm chart version 3.160.1+ or Datadog Operator version 1.23.0+.
     * [kubectl][4].
 * **Network**:
   {{% otel-network-requirements %}}
 
 ## Installation and configuration
 
-This guide uses the Datadog Helm chart to configure the DDOT Collector gateway. Check out all the available configurations on the [Datadog Helm chart README][8].
+This guide shows how to configure the DDOT Collector gateway using either the Datadog Operator or Helm chart.
 
 <div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
-### Deploying the gateway with a daemonset
+Choose one of the following installation methods:
+
+- **Datadog Operator**: A Kubernetes-native approach that automatically reconciles and maintains your Datadog setup. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+- **Helm chart**: A straightforward way to deploy Datadog Agent. It provides versioning, rollback, and templating capabilities, making deployments consistent and easier to replicate.
+
+### Install the Datadog Operator or Helm
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+If you haven't already installed the Datadog Operator, you can install it in your cluster using the Datadog Operator Helm chart:
+
+```shell
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+helm install datadog-operator datadog/datadog-operator
+```
+
+For more information, see the [Datadog Operator documentation][1].
+
+[1]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+If you haven't already added the Datadog Helm repository, add it now:
+
+```shell
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+```
+
+For more information about Helm configuration options, see the [Datadog Helm chart README][1].
+
+[1]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Deploying the gateway with a DaemonSet
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+To get started, enable both the gateway and the DaemonSet Collector in your `DatadogAgent` resource. This is the most common setup.
+
+Create a file named `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    # Enable the Collector in the Agent DaemonSet
+    otelCollector:
+      enabled: true
+
+    # Enable the standalone Gateway Deployment
+    otelAgentGateway:
+      enabled: true
+
+  override:
+    otelAgentGateway:
+      # Number of replicas
+      replicas: 3
+      # Control placement of gateway pods
+      nodeSelector:
+        gateway: "true"
+```
+
+Apply the configuration:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 To get started, enable both the gateway and the DaemonSet Collector in your `values.yaml` file. This is the most common setup.
 
@@ -88,6 +173,9 @@ otelAgentGateway:
     # Example selector to place gateway pods on specific nodes
     gateway: "true"
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 In this case, the daemonset Collector uses a default config that sends OTLP data to the gateway's Kubernetes service:
 
@@ -173,9 +261,52 @@ service:
 ```
 
 <div class="alert alert-tip">
-Always configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control the nodes where the gateway pods are scheduled.<br>Adjust <code>otelAgentGateway.replicas</code> (default is 1) to scale the number of gateway pods based on your needs.</div>
+<strong>For Helm users:</strong> Configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control pod placement, and adjust <code>otelAgentGateway.replicas</code> to scale the gateway.<br>
+<strong>For Operator users:</strong> Use <code>override.otelAgentGateway.affinity</code>, <code>override.otelAgentGateway.nodeSelector</code>, and <code>override.otelAgentGateway.replicas</code> for these settings.</div>
 
 ### Deploying a standalone gateway
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+If you have an existing DaemonSet deployment, you can deploy the gateway independently by disabling other components:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog-gateway
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+
+  override:
+    otelAgentGateway:
+      # Number of replicas
+      replicas: 3
+      # Control placement of gateway pods
+      nodeSelector:
+        gateway: "true"
+
+    # Disable the Agent DaemonSet
+    nodeAgent:
+      disabled: true
+    # Disable the Cluster Agent
+    clusterAgent:
+      disabled: true
+```
+
+After deploying the gateway, you must update the configuration of your existing DaemonSet Collectors to send data to the new gateway service endpoint (for example, `http://datadog-gateway-otel-agent-gateway:4318`).
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 If you have an existing DaemonSet deployment, you can deploy the gateway independently.
 
@@ -199,7 +330,83 @@ otelAgentGateway:
 
 After deploying the gateway, you must update the configuration of your existing  DaemonSet Collectors to send data to the new gateway service endpoint (for example, `http://gw-only-otel-agent-gateway:4318`).
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Customizing Collector configurations
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+You can customize the gateway Collector configuration using ConfigMaps. Create a ConfigMap with your custom configuration:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-gateway-config
+data:
+  otel-gateway-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+          http:
+            endpoint: "0.0.0.0:4318"
+    exporters:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+      sending_queue:
+        batch:
+          flush_timeout: 10s
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [datadog]
+        metrics:
+          receivers: [otlp]
+          exporters: [datadog]
+        logs:
+          receivers: [otlp]
+          exporters: [datadog]
+```
+
+Then reference it in your `DatadogAgent` resource:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+      # Reference the custom ConfigMap
+      config:
+        configMap:
+          name: otel-gateway-config
+
+  override:
+    otelAgentGateway:
+      replicas: 3
+```
+
+For multi-item ConfigMaps or inline configuration, see the [DatadogAgent examples][1].
+
+[1]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 You can override the default configurations for both the DaemonSet and gateway Collectors using the `datadog.otelCollector.config` and `otelAgentGateway.config` values, respectively.
 
@@ -255,6 +462,9 @@ otelAgentGateway:
       datadog:
         api:
           key: ${env:DD_API_KEY}
+        sending_queue:
+          batch:
+            flush_timeout: 10s
     service:
       pipelines:
         traces:
@@ -274,7 +484,124 @@ otelAgentGateway:
 If you set <code>fullnameOverride</code>, the gateway's Kubernetes service name becomes <code><fullnameOverride>-otel-agent-gateway</code>. The ports defined in <code>otelAgentGateway.ports</code> are exposed on this service. Ensure these ports match the OTLP receiver configuration in the gateway and the OTLP exporter configuration in the DaemonSet.
 </div>
 
+{{% /tab %}}
+{{< /tabs >}}
+
 The example configurations use insecure TLS for simplicity. Follow the [OTel configtls instructions][7] if you want to enable TLS.
+
+### Advanced configuration options
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+The Datadog Operator provides additional configuration options for the OTel Agent Gateway under `override.otelAgentGateway` (**NOT** `features.otelAgentGateway` except `featureGates`):
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+
+      # Feature gates for OTel collector (feature-specific configuration)
+      featureGates: "telemetry.UseLocalHostAsDefaultMetricsAddress"
+
+  override:
+    otelAgentGateway:
+      # Number of replicas
+      replicas: 3
+
+      # Node selector for pod placement
+      nodeSelector:
+        kubernetes.io/os: linux
+        gateway: "true"
+
+      # Affinity configuration
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - datadog-otel-agent-gateway
+              topologyKey: kubernetes.io/hostname
+
+      # Tolerations for tainted nodes
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "otel-gateway"
+        effect: "NoSchedule"
+
+      # Priority class for scheduling
+      priorityClassName: high-priority
+
+      # Environment variables
+      env:
+      - name: OTEL_LOG_LEVEL
+        value: "info"
+
+      # Environment variables from ConfigMaps or Secrets
+      envFrom:
+      - configMapRef:
+          name: otel-gateway-config
+
+      # Custom image (optional)
+      image:
+        name: ddot-collector
+        tag: "7.74.0"
+        pullPolicy: IfNotPresent
+
+      # Pod-level security context
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+
+      # Configure resources
+      containers:
+        otel-agent:
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+
+      # Additional labels and annotations
+      labels:
+        team: observability
+      annotations:
+        prometheus.io/scrape: "true"
+```
+
+For a complete reference of all available options, see the [DatadogAgent v2alpha1 configuration documentation][1].
+
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+For Helm-based deployments, many of these advanced configuration options can be set directly in the `values.yaml` file under the `otelAgentGateway` section. For a complete reference, see the [Datadog Helm chart README][1].
+
+[1]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Advanced use cases
 
@@ -282,7 +609,164 @@ The example configurations use insecure TLS for simplicity. Follow the [OTel con
 
 A primary use case for the gateway is tail-based sampling. To ensure that all spans for a given trace are processed by the same gateway pod, use the **load balancing exporter** in your DaemonSet Collectors. This exporter consistently routes spans based on a key, such as `traceID`.
 
-In the `values.yaml` below:
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+The DaemonSet Collector is configured with the `loadbalancing` exporter, which uses the Kubernetes service resolver to discover and route data to the gateway pods. The gateway Collector uses the `tail_sampling` processor to sample traces based on defined policies before exporting them to Datadog.
+
+**Note**: RBAC permissions are required for the k8s resolver in the loadbalancing exporter.
+
+Create a ConfigMap for the DaemonSet Collector configuration with the load balancing exporter:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-daemonset-config
+data:
+  otel-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "localhost:4317"
+    exporters:
+      loadbalancing:
+        routing_key: "traceID"
+        protocol:
+          otlp:
+            tls:
+              insecure: true
+        resolver:
+          k8s:
+            service: datadog-otel-agent-gateway
+            ports:
+              - 4317
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [loadbalancing]
+```
+
+Create a ConfigMap for the gateway Collector configuration with tail sampling:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-gateway-tailsampling-config
+data:
+  otel-gateway-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+    processors:
+      tail_sampling:
+        decision_wait: 10s
+        policies:
+          # Add your sampling policies here
+          - name: sample-errors
+            type: status_code
+            status_code:
+              status_codes: [ERROR]
+          - name: sample-slow-traces
+            type: latency
+            latency:
+              threshold_ms: 1000
+    connectors:
+      datadog/connector:
+    exporters:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+    service:
+      pipelines:
+        traces/sample:
+          receivers: [otlp]
+          processors: [tail_sampling]
+          exporters: [datadog]
+        traces:
+          receivers: [otlp]
+          exporters: [datadog/connector]
+        metrics:
+          receivers: [datadog/connector]
+          exporters: [datadog]
+```
+
+Apply the DatadogAgent configuration:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelCollector:
+      enabled: true
+      # Reference the custom DaemonSet config
+      config:
+        configMap:
+          name: otel-daemonset-config
+      # RBAC permissions for the k8s resolver
+      rbac:
+        create: true
+
+    otelAgentGateway:
+      enabled: true
+      # Reference the custom gateway config
+      config:
+        configMap:
+          name: otel-gateway-tailsampling-config
+
+  override:
+    otelAgentGateway:
+      replicas: 3
+```
+
+Create a ClusterRole for the DaemonSet to access endpoints:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: otel-collector-k8s-resolver
+rules:
+- apiGroups: [""]
+  resources: ["endpoints"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: otel-collector-k8s-resolver
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: otel-collector-k8s-resolver
+subjects:
+- kind: ServiceAccount
+  name: datadog-agent
+  namespace: default
+```
+
+<div class="alert alert-warning">
+To ensure APM Stats are calculated on 100% of your traces before sampling, the <code>datadog/connector</code> runs in a separate pipeline without the <code>tail_sampling</code> processor. The Connector can run in either the DaemonSet or the gateway layer.
+</div>
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In the configuration below:
 
 1.  The daemonset Collector (`datadog.otelCollector`) is configured with the `loadbalancing` exporter, which uses the Kubernetes service resolver to discover and route data to the gateway pods.
 2.  The gateway Collector (`otelAgentGateway`) uses the `tail_sampling` processor to sample traces based on defined policies before exporting them to Datadog.
@@ -367,9 +851,50 @@ otelAgentGateway:
 To ensure APM Stats are calculated on 100% of your traces before sampling, the <code>datadog/connector</code> runs in a separate pipeline without the <code>tail_sampling</code> processor. The Connector can run in either the DaemonSet or the gateway layer.
 </div>
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Using a custom Collector image
 
-To use a custom-built Collector image for your gateway, specify the image repository and tag under `otelAgentGateway.image`. If you need instructions on how to build the custom images, see [Use Custom OpenTelemetry Components][5].
+To use a custom-built Collector image for your gateway, specify the image repository and tag. If you need instructions on how to build the custom images, see [Use Custom OpenTelemetry Components][5].
+
+<div class="alert alert-info">
+<strong>Note:</strong> The Datadog Operator supports the following image name formats:
+<ul>
+  <li><code>name</code> - The image name (for example, <code>ddot-collector</code>)</li>
+  <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:7.74.0</code>)</li>
+  <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:7.74.0</code>)</li>
+</ul>
+The <code>registry/name</code> format (without tag in the name field) is <strong>not supported</strong> when using a separate <code>tag</code> field. Either include the full image reference with tag in the <code>name</code> field, or use the image name with a separate <code>tag</code> field.
+</div>
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+
+  override:
+    otelAgentGateway:
+      image:
+        name: <YOUR REPO>:<IMAGE TAG>
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 ```yaml
 # values.yaml
@@ -390,9 +915,83 @@ otelAgentGateway:
   config: | <YOUR CONFIG>
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Enable Autoscaling with Horizontal Pod Autoscaler (HPA)
 
-The DDOT Collector gateway supports autoscaling with the Kubernetes Horizontal Pod Autoscaler (HPA) feature. To enable HPA, configure `otelAgentGateway.autoscaling`.
+The DDOT Collector gateway supports autoscaling with the Kubernetes Horizontal Pod Autoscaler (HPA) feature.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+**Note**: The Datadog Operator does not directly manage HPA resources. You need to create the HPA resource separately and configure it to target the OTel Agent Gateway deployment.
+
+Create an HPA resource:
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: datadog-otel-agent-gateway-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: datadog-otel-agent-gateway
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  # Aim for high CPU utilization for higher throughput
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 30
+    scaleDown:
+      stabilizationWindowSeconds: 60
+```
+
+Apply the DatadogAgent configuration with resource requests/limits (required for HPA):
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+
+  override:
+    otelAgentGateway:
+      replicas: 4  # Initial replicas, HPA will override based on metrics
+      containers:
+        otel-agent:
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+To enable HPA, configure `otelAgentGateway.autoscaling`:
 
 ```yaml
 # values.yaml
@@ -427,11 +1026,195 @@ otelAgentGateway:
         stabilizationWindowSeconds: 60
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 You can use resource metrics (CPU or memory), custom metrics (Kubernetes Pod or Object), or external metrics as autoscaling inputs. For resource metrics, ensure that the [Kubernetes metrics server][9] is running in your cluster. For custom or external metrics, consider configuring the [Datadog Cluster Agent metrics provider][10].
 
 ### Deploying a multi-layer gateway
 
-For advanced scenarios, you can deploy multiple gateway layers to create a processing chain. To do this, deploy each layer as a separate Helm release, starting from the final layer and working backward.
+For advanced scenarios, you can deploy multiple gateway layers to create a processing chain.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Deploy each layer as a separate `DatadogAgent` resource, starting from the final layer and working backward.
+
+1.  **Deploy Layer 1 (Final Layer):** This layer receives from Layer 2 and exports to Datadog.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog-gw-layer-1
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+      config:
+        configMap:
+          name: gw-layer-1-config
+
+  override:
+    otelAgentGateway:
+      replicas: 3
+      nodeSelector:
+        gateway: "gw-node-1"
+
+    nodeAgent:
+      disabled: true
+    clusterAgent:
+      disabled: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gw-layer-1-config
+data:
+  otel-gateway-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+    exporters:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [datadog]
+        metrics:
+          receivers: [otlp]
+          exporters: [datadog]
+        logs:
+          receivers: [otlp]
+          exporters: [datadog]
+```
+
+2.  **Deploy Layer 2 (Intermediate Layer):** This layer receives from the DaemonSet and exports to Layer 1.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog-gw-layer-2
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelAgentGateway:
+      enabled: true
+      config:
+        configMap:
+          name: gw-layer-2-config
+
+  override:
+    otelAgentGateway:
+      replicas: 3
+      nodeSelector:
+        gateway: "gw-node-2"
+
+    nodeAgent:
+      disabled: true
+    clusterAgent:
+      disabled: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gw-layer-2-config
+data:
+  otel-gateway-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+    exporters:
+      otlp:
+        endpoint: http://datadog-gw-layer-1-otel-agent-gateway:4317
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [otlp]
+        metrics:
+          receivers: [otlp]
+          exporters: [otlp]
+        logs:
+          receivers: [otlp]
+          exporters: [otlp]
+```
+
+3.  **Deploy DaemonSet:** Configure the DaemonSet to export to Layer 2.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+
+  features:
+    otelCollector:
+      enabled: true
+      config:
+        configMap:
+          name: daemonset-layer2-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: daemonset-layer2-config
+data:
+  otel-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "localhost:4317"
+    exporters:
+      otlp:
+        endpoint: http://datadog-gw-layer-2-otel-agent-gateway:4317
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          exporters: [otlp]
+        metrics:
+          receivers: [otlp]
+          exporters: [otlp]
+        logs:
+          receivers: [otlp]
+          exporters: [otlp]
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Deploy each layer as a separate Helm release, starting from the final layer and working backward.
 
 1.  **Deploy Layer 1 (Final Layer):** This layer receives from Layer 2 and exports to Datadog.
 
@@ -552,6 +1335,9 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
                 exporters: [otlp]
     ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## View gateway pods on Fleet Automation
 
 The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
@@ -581,7 +1367,6 @@ To view your gateway pods:
 [5]: /opentelemetry/setup/ddot_collector/custom_components
 [6]: https://opentelemetry.io/docs/collector/deployment/gateway/
 [7]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/config/configtls
-[8]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [9]: http://github.com/kubernetes-sigs/metrics-server
 [10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension
