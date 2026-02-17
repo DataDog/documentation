@@ -191,7 +191,7 @@ Each gate has the following fields:
 
 ### Examples
 
-{{% collapse-content title="Basic total and patch coverage gates" level="h4" %}}
+{{% collapse-content title="Unscoped total and patch coverage gates" level="h4" %}}
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
 gates:
