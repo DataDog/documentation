@@ -178,11 +178,43 @@ If a test contains an assertion on the response body and the timeout limit is re
 {{% /tab %}}
 {{% tab "JavaScript" %}}
 
-Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.  
+Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
+
+**Note:** When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
 <div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
+#### Using dd.assert()
+
+Use `dd.assert()` for traditional assertion syntax:
+
+For example, to assert that a `status.code` field is one of several allowed values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+// Assert that the status code is 200, 210, 320, or 330
+dd.assert.include([200, 210, 320, 330], response.status.code);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "code": 200,
+    "message": "Success"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Checks that `status.code` is included in the array of allowed values (200, 210, 320, or 330)
+
+The test **passes** because `status.code` is `200`, which is included in the allowed values array.
+
+For more information on `assert.include()`, see the [Chai assert.include() documentation][21].
 
 #### Using dd.expect()
 
@@ -199,6 +231,14 @@ dd.expect(response)
   .that.matches(regex);
 {{< /code-block >}}
 
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
 This assertion:
 - Parses the JSON response body
 - Validates that the nested property `status.indicator` exists
@@ -208,32 +248,41 @@ With the regex `/^(major|critical|minor|none)$/`, the test **passes** because `s
 
 With the regex `/^(major|critical|minor)$/`, the test **fails** because `"none"` is not included in the allowed values.
 
+For more information on `expect()`, see the [Chai expect() documentation][22].
+
 #### Using dd.should
 
 Use `dd.should` to write assertions with natural language syntax:
 
+For example, to assert that a `status.indicator` field exists and equals a specific value:
+
 {{< code-block lang="javascript" >}}
 const response = JSON.parse(dd.response.body);
-dd.should.exist(response.status);
-response.status.indicator.should.be.a('string');
+response.status.should.exist();
 response.status.indicator.should.equal('none');
 {{< /code-block >}}
 
-#### Using dd.assert()
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
 
-Use `dd.assert()` for traditional assertion syntax:
+This assertion:
+- Parses the JSON response body
+- Verifies that the `status` property exists
+- Checks that `status.indicator` equals `"none"`
 
-{{< code-block lang="javascript" >}}
-const response = JSON.parse(dd.response.body);
-dd.assert.equal(dd.response.statusCode, 200);
-dd.assert.isObject(response.status);
-dd.assert.property(response, 'status');
-dd.assert.strictEqual(response.status.indicator, 'none');
-{{< /code-block >}}
+The test **passes** because `status` exists and `status.indicator` is `"none"`.
 
-For more assertion methods and syntax options, see the [Chai assertion library documentation][20].
+For more information on `should()`, see the [Chai should() documentation][23].
 
-[20]: https://www.chaijs.com/api/
+[21]: https://www.chaijs.com/api/assert/#method_include
+[22]: https://www.chaijs.com/guide/styles/#expect
+[23]: https://www.chaijs.com/guide/styles/#should
 
 {{% /tab %}}
 {{< /tabs >}}
