@@ -25,7 +25,11 @@ In addition, you can review steps that Bits took throughout the investigation an
 
 bits.md is a markdown file that provides specific context to the agent on your environment. It acts as lightweight, structured guidance to improve investigation accuracy, query construction, and terminology alignment. Include team knowledge such as tagging conventions, architectural patterns, glossary, and investigation best practices.
 
-Sample Bits.md
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+Bits.md is in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
+
+#### Sample Bits.md
 {{< code-block lang="yaml" filename="bits.md" collapsible="true" >}}
 
 ## Scope Rules
