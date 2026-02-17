@@ -20,7 +20,7 @@ You can create datasets from production data, CSV files, or manually construct t
 
 {{% tab "From CSV files" %}}
 
-Create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
+Create a dataset from a CSV file - use `LLMObs.create_dataset_from_csv()`:
 
 ```python
 # Create dataset from CSV
