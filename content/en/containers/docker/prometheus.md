@@ -266,7 +266,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
+[5]: /extend/custom_checks/prometheus/
 [6]: https://docs.datadoghq.com/agent/guide/template_variables/
 [7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [8]: https://app.datadoghq.com/metric/summary

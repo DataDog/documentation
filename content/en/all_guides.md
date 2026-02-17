@@ -10,7 +10,7 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/agent/guide" >}}<i class="icon-agent-fill" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Agent{{< /nextlink >}}
 {{< nextlink href="/integrations/guide" >}}<i class="icon-integrations" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Integrations{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide" >}}<i class="icon-open-telemetry" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;OpenTelemetry{{< /nextlink >}}
-{{< nextlink href="/developers/guide" >}}<i class="icon-dev-code" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Developers{{< /nextlink >}}
+{{< nextlink href="/extend/guide" >}}<i class="icon-dev-code" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Developers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="In the app:">}}

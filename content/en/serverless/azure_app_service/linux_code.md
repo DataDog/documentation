@@ -492,11 +492,11 @@ Share the content of the **Log stream** with [Datadog Support][9].
 
 [1]: /serverless/guide/azure_app_service_linux_code_wrapper_script
 [2]: /tracing/services/service_page/
-[3]: /developers/dogstatsd/?tab=java#dogstatsd-client
+[3]: /extend/dogstatsd/?tab=java#dogstatsd-client
 [4]: https://github.com/brightcove/hot-shots
-[5]: /developers/dogstatsd/?tab=dotnet#dogstatsd-client
-[6]: /developers/dogstatsd/?tab=php#dogstatsd-client
-[7]: /developers/dogstatsd/?tab=python#dogstatsd-client
+[5]: /extend/dogstatsd/?tab=dotnet#dogstatsd-client
+[6]: /extend/dogstatsd/?tab=php#dogstatsd-client
+[7]: /extend/dogstatsd/?tab=python#dogstatsd-client
 [8]: /profiler/
 [9]: /help
 [10]: https://app.datadoghq.com/integrations/azure

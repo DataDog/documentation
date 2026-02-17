@@ -1189,7 +1189,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 [172]: /tracing/trace_collection/trace_context_propagation/?tab=rust
 
 <!-- Metrics and logs shared -->
-[200]: /developers/dogstatsd/
+[200]: /extend/dogstatsd/
 [201]: /tracing/metrics/runtime_metrics/
 [202]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
 [203]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer

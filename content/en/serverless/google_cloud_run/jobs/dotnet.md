@@ -99,5 +99,5 @@ logger.LogInformation("Hello World!");
 [2]: /tracing/trace_collection/custom_instrumentation/dotnet/dd-api#instrument-methods-through-attributes
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-[5]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
+[5]: /extend/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples-5

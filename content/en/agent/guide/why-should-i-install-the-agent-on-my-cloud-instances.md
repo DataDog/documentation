@@ -39,7 +39,7 @@ If you use AWS, Azure, Google Cloud, or another cloud-based metrics provider, in
 
 [1]: https://github.com/DataDog/datadog-agent
 [2]: https://docs.datadoghq.com/integrations/
-[3]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent
+[3]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent
 [4]: https://docs.datadoghq.com/tracing/
-[5]: https://docs.datadoghq.com/developers/custom_checks/
+[5]: https://docs.datadoghq.com/extend/custom_checks/
 [6]: https://docs.datadoghq.com/agent/logs/?tab=tailfiles

@@ -127,13 +127,13 @@ Use the search bar in this section to view the latest data and configuration opt
 [3]: /agent/
 [4]: https://github.com/DataDog/integrations-core
 [5]: /agent/guide/integration-management/
-[6]: /developers/dogstatsd/
+[6]: /extend/dogstatsd/
 [7]: https://github.com/statsd/statsd
-[8]: /developers/custom_checks/
-[9]: /developers/custom_checks/write_agent_check/
+[8]: /extend/custom_checks/
+[9]: /extend/custom_checks/write_agent_check/
 [10]: /integrations/#cat-marketplace
 [11]: https://app.datadoghq.com/marketplace
-[12]: /developers/integrations/?tab=integrations#api-based-integrations
+[12]: /extend/integrations/?tab=integrations#api-based-integrations
 [13]: /api/latest/metrics/#submit-metrics
 [14]: /logs/log_configuration/logs_to_metrics/
 [15]: /tracing/trace_pipeline/generate_metrics/

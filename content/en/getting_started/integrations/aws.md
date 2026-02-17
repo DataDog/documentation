@@ -242,7 +242,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [19]: /integrations/system/
 [20]: /integrations/ntp/
 [21]: /integrations/
-[22]: /developers/dogstatsd/?tab=hostagent
+[22]: /extend/dogstatsd/?tab=hostagent
 [23]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [24]: https://aws.amazon.com/fargate/
 [25]: /agent/amazon_ecs/?tab=awscli

@@ -116,13 +116,13 @@ Share the content of the **Log stream** with [Datadog Support][14].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
+[1]: /extend/dogstatsd
 [2]: /getting_started/site/#access-the-datadog-site
 [3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
 [4]: /tracing/services/service_page/
 [5]: https://github.com/brightcove/hot-shots
-[6]: /developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
-[9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
-[10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
-[11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
+[6]: /extend/dogstatsd/?tab=hostagent&code-lang=dotnet#code
+[9]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent&code-lang=java
+[10]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent&code-lang=php
+[11]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent&code-lang=python
 [14]: /help

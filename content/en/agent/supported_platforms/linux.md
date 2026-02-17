@@ -150,7 +150,7 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [2]: /agent/troubleshooting/
-[3]: /developers/guide/custom-python-package/
+[3]: /extend/guide/custom-python-package/
 [4]: /integrations/
 [5]: /agent/supported_platforms/?tab=linux
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux

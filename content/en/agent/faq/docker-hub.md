@@ -20,7 +20,7 @@ To ensure that the images are not tampered with, enable content trust by setting
 [1]: /agent/docker/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://hub.docker.com/r/datadog/docker-dd-agent
-[4]: /developers/dogstatsd/
+[4]: /extend/dogstatsd/
 [5]: https://hub.docker.com/r/datadog/dogstatsd
 [6]: /agent/cluster_agent/
 [7]: https://hub.docker.com/r/datadog/cluster-agent

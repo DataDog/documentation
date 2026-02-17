@@ -5,7 +5,7 @@ description: "Graph the current status or number of results for any check perfor
 aliases:
 - /graphing/widgets/check_status/
 further_reading:
-- link: "/developers/service_checks"
+- link: "/extend/service_checks"
   tag: "Documentation"
   text: "Learn more about service checks"
 - link: "/dashboards/graphing_json/"
@@ -42,6 +42,6 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/service_checks
+[1]: /extend/service_checks
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

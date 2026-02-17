@@ -1,7 +1,7 @@
 ---
 title: Agent Integration Log Collection
 further_reading:
-- link: "/developers/integrations/agent_integration/"
+- link: "/extend/integrations/agent_integration/"
   tag: "Documentation"
   text: "Create an Agent-based Integration"
 - link: "/logs/log_configuration/processors"
@@ -215,7 +215,7 @@ If logs are not appearing in Datadog:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/agent_integration/
+[1]: /extend/integrations/agent_integration/
 [2]: /agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /logs/explorer/
 [4]: /logs/log_configuration/processors

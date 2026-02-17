@@ -232,7 +232,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/agent_integration/
+[1]: /extend/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -241,7 +241,7 @@ tagging
 [7]: /api/
 [8]: /integrations/node/
 [9]: /integrations/python/
-[10]: /developers/custom_checks/write_agent_check/
+[10]: /extend/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /agent/guide/integration-management/
@@ -252,9 +252,9 @@ tagging
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
-[22]: /developers/integrations/check_references/#param-specification
+[22]: /extend/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /developers/custom_checks/write_agent_check/#updating-the-collection-interval
+[24]: /extend/custom_checks/write_agent_check/#updating-the-collection-interval
 [25]: /getting_started/tagging/
 [26]: /getting_started/agent/#setup
 [27]: /getting_started/tagging/unified_service_tagging/

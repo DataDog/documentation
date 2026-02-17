@@ -166,7 +166,7 @@ Navigate to the [Monitors List][23] in the app to get started. To learn more, re
 [14]: /synthetics/
 [15]: https://app.datadoghq.com/synthetics/tests
 [16]: https://www.datadoghq.com/product/platform/integrations/
-[17]: /developers/integrations/
+[17]: /extend/integrations/
 [18]: https://app.datadoghq.com/integrations
 [19]: /integrations/
 [20]: /dashboards/

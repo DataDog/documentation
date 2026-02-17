@@ -421,6 +421,6 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 [9]: /tracing/setup/
-[10]: /developers/dogstatsd/
-[11]: /developers/community/libraries/
+[10]: /extend/dogstatsd/
+[11]: /extend/community/libraries/
 [12]: /metrics/dogstatsd_metrics_submission/#host-tag

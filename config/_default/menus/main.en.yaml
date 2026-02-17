@@ -925,138 +925,138 @@ menu:
       parent: otel_reference
       weight: 1104
     - name: Developers
-      url: developers/
+      url: extend/
       pre: dev-code
       identifier: dev_tools
       parent: essentials_heading
       weight: 70000
     - name: Authorization
-      url: developers/authorization/
+      url: extend/authorization/
       parent: dev_tools
       identifier: dev_tools_authorization
       weight: 1
     - name: OAuth2 in Datadog
-      url: developers/authorization/oauth2_in_datadog/
+      url: extend/authorization/oauth2_in_datadog/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_in_datadog
       weight: 101
     - name: Authorization Endpoints
-      url: developers/authorization/oauth2_endpoints/
+      url: extend/authorization/oauth2_endpoints/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_endpoints
       weight: 102
     - name: DogStatsD
-      url: developers/dogstatsd/
+      url: extend/dogstatsd/
       parent: dev_tools
       identifier: dev_tools_dogstatsd
       weight: 2
     - name: Datagram Format
       identifier: dev_tools_dogstatsd_datagram_format
-      url: developers/dogstatsd/datagram_shell
+      url: extend/dogstatsd/datagram_shell
       parent: dev_tools_dogstatsd
       weight: 201
     - name: Unix Domain Socket
       identifier: dev_tools_dogstatsd_unix_socket
-      url: /developers/dogstatsd/unix_socket
+      url: /extend/dogstatsd/unix_socket
       parent: dev_tools_dogstatsd
       weight: 202
     - name: High Throughput Data
       identifier: dev_tools_dogstatsd_high_throughput
-      url: developers/dogstatsd/high_throughput/
+      url: extend/dogstatsd/high_throughput/
       parent: dev_tools_dogstatsd
       weight: 203
     - name: Data Aggregation
       identifier: dev_tools_dogstatsd_data_agregation
-      url: developers/dogstatsd/data_aggregation/
+      url: extend/dogstatsd/data_aggregation/
       parent: dev_tools_dogstatsd
       weight: 204
     - name: DogStatsD Mapper
       identifier: dev_tools_dogstatsd_mapper
-      url: developers/dogstatsd/dogstatsd_mapper/
+      url: extend/dogstatsd/dogstatsd_mapper/
       parent: dev_tools_dogstatsd
       weight: 205
     - name: Custom Checks
-      url: developers/custom_checks/
+      url: extend/custom_checks/
       parent: dev_tools
       identifier: custom_checks
       weight: 3
     - name: Writing a Custom Agent Check
       identifier: dev_tools_write_agent_check
-      url: developers/custom_checks/write_agent_check/
+      url: extend/custom_checks/write_agent_check/
       parent: custom_checks
       weight: 301
     - name: Writing a Custom OpenMetrics Check
       identifier: dev_tools_custom_checks_prometheus
-      url: developers/custom_checks/prometheus/
+      url: extend/custom_checks/prometheus/
       parent: custom_checks
       weight: 302
     - name: Integrations
-      url: developers/integrations/
+      url: extend/integrations/
       parent: dev_tools
       identifier: dev_tools_integrations
       weight: 4
     - name: Build an Integration with Datadog
       identifier: dev_tools_integrations_build
-      url: developers/integrations/build_integration/
+      url: extend/integrations/build_integration/
       parent: dev_tools_integrations
       weight: 401
     - name: Create an Agent-based Integration
       identifier: dev_tools_integrations_agent
-      url: developers/integrations/agent_integration/
+      url: extend/integrations/agent_integration/
       parent: dev_tools_integrations
       weight: 402
     - name: Create an API-based Integration
       identifier: dev_tools_integrations_api
-      url: developers/integrations/api_integration/
+      url: extend/integrations/api_integration/
       parent: dev_tools_integrations
       weight: 403
     - name: Create a Log Pipeline
       identifier: dev_tools_integrations_log
-      url: developers/integrations/log_pipeline/
+      url: extend/integrations/log_pipeline/
       parent: dev_tools_integrations
       weight: 404
     - name: Integration Assets Reference
       identifier: dev_tools_integrations_check_references
-      url: developers/integrations/check_references/
+      url: extend/integrations/check_references/
       parent: dev_tools_integrations
       weight: 405
     - name: Build a Marketplace Offering
-      url: developers/integrations/marketplace_offering/
+      url: extend/integrations/marketplace_offering/
       parent: dev_tools_integrations
       identifier: dev_tools__integrations_marketplace_offering
       weight: 406
     - name: Create an Integration Dashboard
       identifier: dev_tools_integrations_dashboard
-      url: developers/integrations/create-an-integration-dashboard
+      url: extend/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
       weight: 407
     - name: Create a Monitor Template
       identifier: dev_tools_integrations_monitor_template
-      url: developers/integrations/create-an-integration-monitor-template
+      url: extend/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
       weight: 408
     - name: Create a Cloud SIEM Detection Rule
       identifier: dev_tools_integrations_cloud_siem_detection_rule
-      url: developers/integrations/create-a-cloud-siem-detection-rule
+      url: extend/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 409
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
-      url: developers/integrations/python/
+      url: extend/integrations/python/
       parent: dev_tools_integrations
       weight: 410
     - name: Service Checks
-      url: developers/service_checks/
+      url: extend/service_checks/
       parent: dev_tools
       identifier: dev_tools_service_check
       weight: 6
     - name: "Submission - Agent Check "
-      url: developers/service_checks/agent_service_checks_submission/
+      url: extend/service_checks/agent_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_agent_check
       weight: 601
     - name: Submission - DogStatsD
-      url: developers/service_checks/dogstatsd_service_checks_submission/
+      url: extend/service_checks/dogstatsd_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_dogstatsd
       weight: 602
@@ -1101,17 +1101,17 @@ menu:
       identifier: ide_plugins_vscode
       weight: 702
     - name: Community
-      url: developers/community/
+      url: extend/community/
       parent: dev_tools
       identifier: dev_community
       weight: 8
     - name: Libraries
       identifier: dev_community_libraries
-      url: developers/community/libraries/
+      url: extend/community/libraries/
       parent: dev_community
       weight: 801
     - name: Guides
-      url: developers/guide/
+      url: extend/guide/
       parent: dev_tools
       identifier: dev_tools_guides
       weight: 9

@@ -280,7 +280,7 @@ For help troubleshooting the Agent:
 [18]: https://app.datadoghq.com/account/settings/agent/latest
 [19]: /agent/configuration/agent-commands/#agent-status-and-information
 [20]: https://app.datadoghq.com/event/explorer
-[21]: /developers/service_checks/#visualize-your-service-check-in-datadog
+[21]: /extend/service_checks/#visualize-your-service-check-in-datadog
 [22]: https://app.datadoghq.com/metric/summary
 [23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [24]: /getting_started/tagging/
@@ -291,7 +291,7 @@ For help troubleshooting the Agent:
 [29]: /infrastructure/process/?tab=linuxwindows#introduction
 [30]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host
 [31]: /agent/logs/advanced_log_collection/
-[32]: /developers/dogstatsd/?tab=hostagent
+[32]: /extend/dogstatsd/?tab=hostagent
 [33]: /agent/configuration/agent-commands/
 [34]: /agent/configuration/agent-commands/#start-the-agent
 [35]: /agent/configuration/agent-commands/#stop-the-agent

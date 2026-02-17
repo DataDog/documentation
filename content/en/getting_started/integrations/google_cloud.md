@@ -482,7 +482,7 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [29]: https://www.datadoghq.com/blog/datadog-google-security-command-center/
 [30]: https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/
 [31]: /agent/
-[32]: /developers/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
+[32]: /extend/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
 [33]: /integrations/gke/?tab=standard
 [34]: /integrations/
 [35]: /tracing/

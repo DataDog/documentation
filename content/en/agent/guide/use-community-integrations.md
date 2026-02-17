@@ -7,7 +7,7 @@ further_reading:
   - link: "/agent/troubleshooting/"
     tag: "Documentation"
     text: "Agent Troubleshooting"
-  - link: "/developers/integrations/agent_integration"
+  - link: "/extend/integrations/agent_integration"
     tag: "Documentation"
     text: "Create a New Integration"
 ---

@@ -162,7 +162,7 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [7]: /profiler/enabling/
 [8]: /agent/logs/proxy/
 [9]: /events/explorer/
-[10]: /developers/dogstatsd/
+[10]: /extend/dogstatsd/
 [11]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [12]: /libraries/
 [13]: /integrations/guide/cluster-monitoring-vmware-tanzu/#installation
