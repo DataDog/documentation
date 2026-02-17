@@ -113,6 +113,15 @@ Aggregate your logs into `Fields` and visualize as **Top List** to see your top 
 
 {{< img src="/getting_started/logs/top-list-view-2024.png" alt="A top list in the Log Explorer">}}
 
+The Log Explorer offers the following features for log troubleshooting and exploration:
+- [Advanced search and filtering][31] with facets and queries
+- [Log Analytics][17] for grouping logs into patterns and aggregating data
+- [Visualizations][28] to display log data in various formats
+- [Saved Views][29] to save and share your search configurations
+- [Export options][30] to reuse your queries in different contexts
+
+For detailed information about all Log Explorer features, see the [Log Explorer documentation][16].
+
 ## What's next?
 
 Once a logging source is configured, and your logs are available in the Log Explorer, you can begin to explore a few other areas of log management.
@@ -168,3 +177,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [25]: /logs/guide/best-practices-for-log-management/
 [26]: /logs/guide/getting-started-lwl/
 [27]: /logs/guide/logs-rbac/
+[28]: /logs/explorer/visualize/
+[29]: /logs/explorer/saved_views/
+[30]: /logs/explorer/export/
+[31]: /logs/explorer/search_syntax/

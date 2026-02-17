@@ -1982,6 +1982,8 @@ def llm_call(prompt):
 
 The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
 
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
 - _Direct span reference_ - Join an evaluation using the span's unique trace ID and span ID combination.
@@ -2091,6 +2093,10 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 `reasoning`
 : optional - _string_
 <br />A text explanation of the evaluation result.
+
+`metadata`
+: optional - _dictionary_
+<br />A dictionary containing arbitrary structured metadata associated with the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
@@ -2120,7 +2126,8 @@ def llm_call():
         value=10,
         tags={"evaluation_provider": "ragas"},
         assessment="fail",
-        reasoning="Malicious intent was detected in the user instructions."
+        reasoning="Malicious intent was detected in the user instructions.",
+        metadata={"details": ["jailbreak", "SQL injection"]}
     )
 
     # joining an evaluation to a span via span ID and trace ID
@@ -2133,7 +2140,8 @@ def llm_call():
         value=10,
         tags={"evaluation_provider": "ragas"},
         assessment="fail",
-        reasoning="Malicious intent was detected in the user instructions."
+        reasoning="Malicious intent was detected in the user instructions.",
+        metadata={"details": ["jailbreak", "SQL injection"]}
     )
     return completion
 {{< /code-block >}}
@@ -2166,15 +2174,27 @@ The `evaluationOptions` object can contain the following:
 
 `metricType`
 : required - _string_
-<br />The type of the evaluation. Must be one of "categorical" or "score".
+<br />The type of the evaluation. Must be one of "categorical", "score", "boolean" or "json".
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (for categorical `metric_type`) or number (for score `metric_type`).
+<br />The value of the evaluation. Must be a string (for categorical `metric_type`), number (for score `metric_type`), boolean (for boolean `metric_type`), or a JSON object (for json `metric_type`).
 
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment`
+: optional - _string_
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the evaluation result.
+
+`metadata`
+: optional - _dictionary_
+<br />A JSON object containing arbitrary structured metadata associated with the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
