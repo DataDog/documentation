@@ -60,10 +60,10 @@ The Datadog infrastructure has the following default configurations for metric r
 - Maximum disk usage ratio: 0.8
 - Maximum in-memory buffer size: 15 MB
 
-#### Planning buffer capacity
+<!-- #### Planning buffer capacity
 To estimate required buffer capacity during an outage, use the metric: `datadog.agent.retry_queue_duration.bytes_per_sec`
 
-This metric  can be used to estimate disk requirements based on expected outage duration and is available by default when on-disk buffering is enabled.
+This metric  can be used to estimate disk requirements based on expected outage duration and is available by default when on-disk buffering is enabled. -->
 
 #### Restart and shutdown behavior 
 During Agent restart:
@@ -76,8 +76,8 @@ During Agent shutdown:
 - Payloads in retry queues are not flushed
 
 
-#### Dropped metrics  
-The Agent reports the number of dropped metric points to the customer’s Datadog organization.`(WHICH METRIC CAN THEY USE TO SEE THIS?)`
+<!-- #### Dropped metrics  
+The Agent reports the number of dropped metric points to the customer’s Datadog organization.`(WHICH METRIC CAN THEY USE TO SEE THIS?)` -->
 
 ## Logs 
 ### Logs retry strategy
@@ -122,48 +122,6 @@ On restart, the Agent resumes reading from the position recorded in the registry
     - Buffer limited to 100 log lines
     - Logs are sent line by line
     - TCP is still used by some EU1 charts `(SHOULD THIS BE INCLUDED IN THE PUBLIC FACING DOC?)`
-
-
-### Monitoring log retries and data loss
-The Logs Agent exposes telemetry metrics for monitoring buffer health, performance, and potential data loss.
-Telemetry is available:
-  - In Agent metrics
-  - In the `telemetry.log` file included in an Agent flare
-
-
-Buffer Health and Data Loss
-: `logs.bytes_missed`: Bytes lost before consumption
-: `logs.dropped`: Total logs dropped per destination 
-
-Performance and latency
-: `logs.sender_latency`: HTTP sender latency histogram (ms)
-: `logs.retry_count`: Total retried payloads
-: `logs.network_errors`: Total network errors
-
-Throughput and volume
-: `logs.decoded`: Total decoded logs
-: `logs.processed`: Total processed logs
-: `logs.sent`: Total sent logs
-: `logs.bytes_sent`: Bytes sent before encoding 
-: `logs.encoded_bytes_sent`: Bytes sent after encoding
-
-Connection health
-: `logs_client_http_destination__idle_ms`: Time spent idle (ms) by sender
-: `logs_client_http_destination__in_use_ms`: Time spent sending (ms) by sender
-
-Data loss & errors
-: `logs_client_http_destination__payloads_dropped`: Payloads  dropped due to unrecoverable errors
-: `logs_client_http_destination__send`: Send attempts by `endpoint_host` and error type
-
-HTTP Response health
-: `logs.destination_http_resp`: HTTP responses by status_code and url
-
-Buffer capacity and utilization
-: `logs_component_utilization__ratio`: Utilization ratio (0-1) by component name and instance
-: `logs_component_utilization__items`: Items in buffer/queue by component name and instance
-: `logs_component_utilization__bytes`: Bytes in buffer/queue by component name and instance
-
-
 
 ### Dual shipping
 When dual shipping is enabled:
