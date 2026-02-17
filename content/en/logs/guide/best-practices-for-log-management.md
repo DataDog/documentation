@@ -38,6 +38,7 @@ This guide also goes through how to monitor your log usage by:
 - [Alerting on unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
 - [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
 - [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
+- [Monitor which indexes are queried actively](#Monitor-which-indexes-are-queried-actively)
 
 If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
 
@@ -187,7 +188,7 @@ Once you begin ingesting logs, an out-of-the-box [dashboard][18] summarizing you
 
 To find this dashboard, go to **Dashboards > Dashboards List** and search for [Log Management - Estimated Usage][19].
 
-### Analyze Index query activity
+### Monitor which indexes are queried actively
 
 While monitoring log volume is critical for budget control, monitoring **query activity** helps you determine the actual value of your indexed data. Identifying indexes that are rarely queried allows you to optimize costs by reducing retention or moving data to Flex Logs or archives.
 
