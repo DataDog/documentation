@@ -9999,6 +9999,30 @@ menu:
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
       generated: true
+    - name: Update the tags for an interface
+      url: '#update-the-tags-for-an-interface'
+      identifier: network-device-monitoring-update-the-tags-for-an-interface
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateInterfaceUserTags
+        unstable: []
+        order: 7
+    - name: List tags for an interface
+      url: '#list-tags-for-an-interface'
+      identifier: network-device-monitoring-list-tags-for-an-interface
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInterfaceUserTags
+        unstable: []
+        order: 6
     - name: Update the tags for a device
       url: '#update-the-tags-for-a-device'
       identifier: network-device-monitoring-update-the-tags-for-a-device

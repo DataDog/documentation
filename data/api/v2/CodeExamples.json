@@ -1212,6 +1212,13 @@
       "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
+  "UpdateInterfaceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for an interface returns \"OK\" response"
+    }
+  ],
   "CreatePipeline": [
     {
       "group": "observability_pipelines",
