@@ -158,7 +158,7 @@ For the following message structure:
 }
 ```
 
-- Use `outer_key.inner_key` to see the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
 {{% observability_pipelines/processors/filter_syntax %}}

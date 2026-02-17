@@ -55,8 +55,8 @@ To set up the processor:
 }
 ```
 
-- Use `outer_key.inner_key` to see the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
 ##### Add additional keywords
 
@@ -115,8 +115,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 }
 ```
 
-- Use `outer_key.inner_key` to see the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
+- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
+- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
 {{% /collapse-content %}}
 
