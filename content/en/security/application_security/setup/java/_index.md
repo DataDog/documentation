@@ -5,6 +5,11 @@ aliases:
   - /security/application_security/getting_started/java
   - /security/application_security/threats/setup/threat_detection/java
   - /security/application_security/threats_detection/java
+  - /security/application_security/setup/threat_detection/java
+  - /security/application_security/setup/standalone/java
+  - /security/application_security/enabling/tracing_libraries/threat_detection/java
+  - /security/application_security/enabling/java
+  - /security/application_security/threats/setup/standalone/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"

@@ -24,7 +24,7 @@ further_reading:
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
 
-For more information about how private actions work, see the full [overview page][17].
+For more information about how private actions work, see the full [overview page][16].
 
 ## Supported private actions
 
@@ -43,14 +43,12 @@ In addition, the host must have the following:
 
 ## Set up a private action runner
 
-From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], click **New Private Action Runner**. The installation steps differ depending on whether you want to install the runner for App Builder, Workflow Automation, or both App Builder and Workflow Automation.
+### Set up from Datadog
 
-{{% collapse-content title="Both App Builder and Workflow Automation" level="p" %}}
-1. Enter a name for your runner.
-1. Click **Both**.
-1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
+1. Go to [**Actions Catalog**][6] > **Private Action Runners**, and click **New Private Action Runner**.
+1. Enter a name for your runner and select the allowed actions.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`.
+1. Deploy your runner by following the steps for your container platform:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -73,12 +71,11 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 {{% tab "Kubernetes" %}}
 1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Confirm that you have installed `kubectl` on your machine: run `kubectl version` and verify that there is output.
+1. Confirm that you have installed `helm` on your machine: run `helm version` and verify that there is output.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
-    1. Create a `values.yaml` file.
     1. Add the **Private Action Runner** to your Helm repositories.
     1. Install the Helm chart.
 1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
@@ -86,93 +83,110 @@ From the **Private Action Runner** page in [Workflow Automation][6] or [App Buil
 
 {{% /tab %}}
 {{< /tabs >}}
-{{% /collapse-content %}}
 
-{{% collapse-content title="App Builder" level="p" %}}
-1. Enter a name for your runner.
-1. Click **App Builder**.
-1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
+### Set up programmatically
+
+As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using your [API key][19] and [Application key][20]. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows.
+
+To set up the runner programmatically:
+1. Provide your Datadog API and App keys through the `DD_API_KEY` and `DD_APP_KEY` environment variables.
+2. Pass the `--with-api-key` flag to the runner container.
+
+The runner uses these credentials to register itself with your Datadog organization and assign the App key author as the runner editor.
+
+#### Example commands
+
+Use the following commands to create an auto-enrollment script that can be rerun for automated deployments. After the runner enrolls successfully, it appears on the **Private Action Runners** page.
+
+Before running the commands, update the following values:
+- `RUNNER_NAME`: A unique name for your runner.
+- `DD_BASE_URL`: Your Datadog site URL (for example, `https://app.datadoghq.com`).
+- `./config`: The path to your runner configuration directory.
+- (Optional) Image version: The container image tag to use for the runner.
+
 {{< tabs >}}
 {{% tab "Docker" %}}
-1. Click **Docker**.
-1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
 
-   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+```bash
+export DD_API_KEY="<YOUR_API_KEY>"
+export DD_APP_KEY="<YOUR_APP_KEY>"
 
+docker run -d \
+  -e DD_BASE_URL=<YOUR_DD_SITE> \
+  -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
+  -e DD_API_KEY="$DD_API_KEY" \
+  -e DD_APP_KEY="$DD_APP_KEY" \
+  -e RUNNER_NAME=<YOUR_RUNNER_NAME> \
+  -e 'ACTIONS_ALLOWLIST=com.datadoghq.http.request' \
+  -v ./config:/etc/dd-action-runner/config \
+  gcr.io/datadoghq/private-action-runner:v1.17.1 \
+  --with-api-key
+```
 
 {{% /tab %}}
 
 {{% tab "Docker Compose" %}}
-1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
-1. Replace `./config` with the path to the directory you created for the runner configuration.
-1. Run `docker compose up -d`.
 
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
+Create a `docker-compose.yaml` file with the following content. For more information, see the [official Compose documentation][101].
+
+```yaml
+# docker-compose.yaml
+version: '3.8'
+services:
+  private-runner:
+    image: gcr.io/datadoghq/private-action-runner:v1.17.1
+    command: ["--with-api-key"]
+    environment:
+      DD_API_KEY: ${DD_API_KEY}
+      DD_APP_KEY: ${DD_APP_KEY}
+      DD_BASE_URL: <YOUR_DD_SITE>
+      DD_PRIVATE_RUNNER_CONFIG_DIR: /etc/dd-action-runner/config
+      RUNNER_NAME: my-compose-runner
+      RUNNER_MODES: pull
+      ACTIONS_ALLOWLIST: "com.datadoghq.http.request"
+    volumes:
+      - "./config:/etc/dd-action-runner/config"
+```
+
+Run with:
+```bash
+export DD_API_KEY="<YOUR_API_KEY>"
+export DD_APP_KEY="<YOUR_APP_KEY>"
+
+DD_API_KEY=$DD_API_KEY DD_APP_KEY=$DD_APP_KEY docker compose up -d
+```
 
 [101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
-1. Follow the instructions provided in the app to:
-    1. Enroll the runner and generate the config.
-    1. Create a `values.yaml` file.
-    1. Add the **Private Action Runner** to your Helm repositories.
-    1. Install the Helm chart.
-1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
 
+1. Generate the runner configuration:
 
-{{% /tab %}}
-{{< /tabs >}}
+```bash
+export DD_API_KEY="<YOUR_API_KEY>"
+export DD_APP_KEY="<YOUR_APP_KEY>"
 
-{{% /collapse-content %}}
+docker run \
+  -e DD_BASE_URL=<YOUR_DD_SITE> \
+  -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
+  -e DD_API_KEY="$DD_API_KEY" \
+  -e DD_APP_KEY="$DD_APP_KEY" \
+  -e RUNNER_NAME="my-runner" \
+  -e 'ACTIONS_ALLOWLIST=com.datadoghq.http.request' \
+  -v ./config:/etc/dd-action-runner/config \
+  gcr.io/datadoghq/private-action-runner:v1.17.1 \
+  --with-api-key --enroll -f helm-values > values.yaml
+```
 
-{{% collapse-content title="Workflow Automation" level="p" %}}
-1. Enter a name for your runner.
-1. Click **Workflows**.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
-{{< tabs >}}
-{{% tab "Docker" %}}
-1. Click **Docker**.
-1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
+2. Deploy the Helm chart:
 
-   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
-{{% /tab %}}
-
-{{% tab "Docker Compose" %}}
-1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
-1. Replace `./config` with the path to the directory you created for the runner configuration.
-1. Run `docker compose up -d`.
-
-   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
-
-[101]: https://docs.docker.com/compose/compose-application-model/
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
-1. Follow the instructions provided in the app to:
-    1. Enroll the runner and generate the config.
-    1. Create a `values.yaml` file.
-    1. Add the **Private Action Runner** to your Helm repositories.
-    1. Install the Helm chart.
-1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
+```bash
+helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
+```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-{{% /collapse-content %}}
 
 When you see the **Ready to use** status, you can create a new connection for the runner or see it on the **Private Action Runners** page:
 - To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
@@ -182,7 +196,7 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 
 ## Manage access
 
-Use [role-based access control (RBAC)][18] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][19].
+Use [role-based access control (RBAC)][17] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][18].
 
 You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include **Viewer**, **Contributor**, and **Editor**.
 
@@ -214,17 +228,17 @@ Editor
 Before you can use an action runner, you must pair it with one or more connections.
 
 To pair a runner to a connection:
-1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
+1. From the [Workflow Automation][7] or [App Builder][8] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
-1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][10].
+1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][9].
 
 ## Use a private action
 
-To use a private action in your [Workflow Automation][11] workflow or [App Builder][12] app:
+To use a private action in your [Workflow Automation][10] workflow or [App Builder][11] app:
 
 {{% collapse-content title="Workflow Automation" level="p" %}}
-1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
+1. From the [Workflow Automation][10] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][12].
 1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Enter a name for the step.
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
@@ -232,7 +246,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 {{% /collapse-content %}}
 
 {{% collapse-content title="App Builder" level="p" %}}
-1. From the [App Builder][12] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][15].
+1. From the [App Builder][11] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][14].
 1. Click **New Query** and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your query.
@@ -242,7 +256,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 ### Edit connections or delete runners
 
-From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
+From the **Private Action Runner** page in [Actions Catalog][6], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
 
 ### Change the allowlist of a runner
 
@@ -433,16 +447,17 @@ To edit the allowlist for a Private Action Runner:
 [3]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.jenkins
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.temporal
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.http
-[6]: https://app.datadoghq.com/workflow/private-action-runners
-[7]: https://app.datadoghq.com/app-builder/private-action-runners
-[8]: https://app.datadoghq.com/workflow/connections
-[9]: https://app.datadoghq.com/app-builder/connections
-[10]: /actions/private_actions/private_action_credentials
-[11]: https://app.datadoghq.com/workflow/
-[12]: https://app.datadoghq.com/app-builder/
-[13]: /service_management/workflows/build
-[14]: /service_management/app_builder/build
-[15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
-[17]: /actions/private_actions/
-[18]: /account_management/rbac/
-[19]: /account_management/rbac/permissions/#app-builder--workflow-automations
+[6]: https://app.datadoghq.com/actions/action-catalog
+[7]: https://app.datadoghq.com/workflow/connections
+[8]: https://app.datadoghq.com/app-builder/connections
+[9]: /actions/private_actions/private_action_credentials
+[10]: https://app.datadoghq.com/workflow/
+[11]: https://app.datadoghq.com/app-builder/
+[12]: /service_management/workflows/build
+[13]: /service_management/app_builder/build
+[14]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[16]: /actions/private_actions/
+[17]: /account_management/rbac/
+[18]: /account_management/rbac/permissions/#app-builder--workflow-automations
+[19]: /account_management/api-app-keys/#api-keys
+[20]: /account_management/api-app-keys/#application-keys

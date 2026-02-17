@@ -1,7 +1,13 @@
 ---
 title: Syslog Destinations
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' syslog destinations to send logs to rsyslog or syslog-ng.
 
@@ -26,22 +32,51 @@ The rsyslog and syslog-ng destinations match these log fields to the following S
 | log["host"]     | HOSTNAME     | `NIL`                      |
 | log["timestamp"]| TIMESTAMP    | Current UTC time.          |
 
-The following destination settings are optional:
+<div class="alert alert-danger">Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
-    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+To set up the syslog destination in the UI:
 
-### Set the environment variables
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+
+#### Optional settings
+
+##### Enable TLS
+
+Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
+- Enter the identifier for your syslog key pass. If you leave it blank, the [default](#set-secrets) is used.
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+
+##### Wait time for TCP keepalive probes
+
+Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- rsyslog or syslog-ng endpoint URL identifier:
+	- References the address and port to which Observability Pipelines Worker sends logs. For example, `127.0.0.1:9997`.
+	- The default identifier is `DESTINATION_SYSLOG_ENDPOINT_URL`.
+- rsyslog or syslog-ng TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_SYSLOG_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 

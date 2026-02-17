@@ -9,7 +9,7 @@ further_reading:
   text: ログの分析方法
 - link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
   tag: ブログ
-  text: Filter and correlate logs dynamically using Subqueries
+  text: Subqueries を使ってログを動的にフィルタリングし、相関付ける
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: ブログ
   text: ネットワークとセキュリティ分析のための DNS ログの監視
@@ -18,11 +18,13 @@ title: ログをパターンにグループ化する
 
 ## 概要
 
-インデックス化されたログを **Patterns** で集計する場合、類似した構造を持つ `message` を持つログは、まとめてグループ化されます。オプションで 1～3 つのファセットフィールドを選択すると、ログをグループに事前集計してから、そのグループ内でパターンを検出することができます。
+デフォルトでは、 **Log Patterns** が `message` フィールドで類似した値を持つログをクラスター化し、結果を `Status` と `Service` でグループ化します。 
+
+クラスター化や結果のグループ化に使うログ属性は、別のものを選択できます。
 
 **Patterns** ビューは、他の問題を見落とす原因となるノイズの多いエラーパターンを検出し、フィルターするのに便利です。パターン検出は、10,000 のログサンプルに基づいています。ログの特定のサブセットに限定したパターンを見るために、検索を絞り込むことができます。
 
-{{< img src="logs/explorer/aggregations_patterns.png" alt="ログをパターン別に分類して表示するログエクスプローラー" style="width:90%;" >}}
+{{< img src="logs/explorer/pattern_cluster.png" alt="パターンでグループ化されたログを表示する Log Explorer" style="width:90%;" >}}
 
 パターンは、[リスト][1]の視覚化をサポートします。リスト内のパターンをクリックすると、パターンのサイドパネルが開き、次のことができます。
 

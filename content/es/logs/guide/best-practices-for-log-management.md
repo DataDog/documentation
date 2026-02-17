@@ -2,6 +2,12 @@
 algolia:
   tags:
   - Uso de logs
+  - grok
+  - analizador de grok
+  - análisis de logs
+  - Extracción de atributos
+  - Reasignación de atributos
+  - análisis
 aliases:
 - /es/logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -14,6 +20,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-management-policies/
   tag: Blog
   text: Cómo implementar las políticas de gestión de logs con tus equipos
+- link: https://www.datadoghq.com/blog/volkswagen-organizations/
+  tag: Blog
+  text: Mejores prácticas para gestionar organizaciones de Datadog a escala
 title: Prácticas recomendadas para la gestión de logs
 ---
 
@@ -39,7 +48,7 @@ Si quieres transformar tus logs u ocultar datos confidenciales en tus logs antes
 
 ### Configurar varios índices para la segmentación de logs
 
-Configura varios índices si quieres segmentar tus logs para diferentes periodos de conservación o cuotas diarias, monitorización del uso y facturación. 
+Configura varios índices si deseas segmentar tus logs para diferentes periodos de retención o cuotas diarias, monitorización de uso y facturación.
 
 Por ejemplo, si tienes logs que sólo deben conservarse durante 7 días, mientras que otros deben conservarse durante 30 días, utiliza varios índices para separar los logs según los dos periodos de conservación.
 
@@ -55,11 +64,15 @@ Para configurar varios índices:
 
 Establecer cuotas diarias en tus índices puede ayudar a evitar excesos en la facturación cuando se añaden nuevos orígenes de logs o si un desarrollador cambia involuntariamente los niveles de gestión de logs al modo de depuración. Consulta [Alerta de índices que alcanzan su cuota diaria](#alert-on-indexes-reaching-their-daily-quota) para conocer cómo configurar una monitorización que avise cuando se alcanza un porcentaje de la cuota diaria dentro de las últimas 24 horas.
 
+### Configurar el almacenamiento para una retención prolongada
+
+Si deseas retener logs durante un tiempo prolongado mientras mantienes velocidades de consulta similares a las de la indexación estándar, configura [Flex Logs][30]. Este nivel es el más adecuado para logs, que requiere una retención más prolongada y ocasionalmente necesita consultas urgentes. Flex Logs desvincula los costos de almacenamiento de los de cálculo, por lo que puedes retener de forma rentable más logs durante más tiempo sin sacrificar la visibilidad. Los logs que deben consultarse con frecuencia deben almacenarse en índices estándar.
+
 ### Crear varios archivos para el almacenamiento a largo plazo
 
 Si quieres almacenar tus logs durante periodos de tiempo más prolongados, configura [Archivos de logs][2] para enviar tus logs a un sistema optimizado para el almacenamiento, como Amazon S3, Azure Storage o Google Cloud Storage. Cuando quieras utilizar Datadog para analizar esos logs, utiliza [Log Rehydration][3]TM para recuperar esos logs de nuevo en Datadog. Con varios archivos, puedes segmentar logs por motivos de cumplimiento y mantener un control sobre los costes de recuperación.
 
-#### Configurar el tamaño máximo de análisis para gestionar recuperaciones costosas
+#### Configura el tamaño máximo de escaneado para gestionar las costosas rehidrataciones
 
 Establece un límite para el volumen de logs que pueden recuperarse al mismo tiempo. Al configurar un archivo, puedes definir el volumen máximo de datos de logs que se pueden analizar para su recuperación. Para obtener más información, consulta [Definir el tamaño máximo de análisis][4].
 
@@ -108,7 +121,7 @@ Crea un monitor para la detección de anomalías a fin de alertar sobre cualquie
 1. Ve a [Monitors > New Monitor (Monitores > Nuevo monitor)][13] y selecciona **Anomaly** (Anomalía).
 2. En la sección **Define the metric** (Definir la métrica), selecciona la métrica `datadog.estimated_usage.logs.ingested_events`.
 3. En el campo **from** (de), añade la etiqueta (tag) `datadog_is_excluded:false` para monitorizar los logs indexados y no los consumidos.
-4. En el campo **sum by** (sumar por), añade las etiquetas (tags) `service` y `datadog_index` para recibir una notificación si un servicio específico se dispara o deja de enviar logs en cualquier índice.
+4. En el campo **sum by** (sumar por), añade las etiquetas `service` y `datadog_index` para recibir una notificación si un servicio específico se dispara o deja de enviar logs en cualquier índice.
 5. Configura las condiciones de alerta para que coincidan con tu caso de uso. Por ejemplo, configura el monitor para que alerte si los valores evaluados están fuera de un rango esperado.
 6. Añade un título para la notificación y un mensaje con instrucciones para actuar. Por ejemplo, esta es una notificación con enlaces contextuales:
     ```text
@@ -116,7 +129,7 @@ Crea un monitor para la detección de anomalías a fin de alertar sobre cualquie
 
     1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
     2. [Add an exclusion filter on the noisy pattern](https://app.datadoghq.com/logs/pipelines/indexes)
-    ``` 
+    ```
 7. Haz clic en **Create** (Crear).
 
 ### Alerta cuando un volumen de logs indexados supera un umbral especificado
@@ -124,11 +137,11 @@ Crea un monitor para la detección de anomalías a fin de alertar sobre cualquie
 Configura un monitor para alertar si un volumen de logs indexados en cualquier contexto de tu infraestructura (por ejemplo, `service`, `availability-zone`, etc.) está aumentando inesperadamente.
 
 1. Ve al [Explorador de logs][14].
-2. Introduce una [consulta de búsqueda][15] que incluya el nombre del índice (por ejemplo, `index:main`) para capturar el volumen de logs que deseas monitorizar.
-3. Haz clic en la flecha hacia abajo situada junto a **Download as CSV** (Descargar como CSV) y selecciona **Create monitor** (Crear monitor).
-4. Añade etiquetas (tags) (por ejemplo, servicios `host, `, etc.) al campo **group by** (agrupar por).
+2. Introduce una [consulta de búsqueda][15] que incluya el nombre del índice (por ejemplo, `index:main`) para capturar el volumen de logs que quieres monitorizar.
+3. Haz clic en **More...** (Más) y selecciona **Create monitor** (Crear monitor).
+4. Añade etiquetas (por ejemplo, servicios `host, `, etc.) al campo **group by** (agrupar por).
 5. Completa **Alert threshold** (Umbral de alerta) para tu caso de uso. Opcionalmente, completa **Warning threshold** (Umbral de alerta).
-6. Añade un título para la notificación, por ejemplo: 
+6. Añade un título de notificación, por ejemplo:
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
@@ -140,7 +153,7 @@ Configura un monitor para alertar si un volumen de logs indexados en cualquier c
 
 #### Alerta sobre el volumen de logs indexados desde principios de mes
 
-Aprovecha la métrica `datadog.estimated_usage.logs.ingested_events` filtrada en `datadog_is_excluded:false` para contar sólo los logs indexados y el [intervalo acumulativo del monitor de métricas][28] para monitorizar el recuento desde principios de mes. 
+Aproveche la métrica `datadog.estimated_usage.logs.ingested_events` filtrada en `datadog_is_excluded:false` para contar solo los logs indexados y la [ventana acumulativa de monitor (noun) de métricas][28] para monitorizar el número desde principios de mes.
 
 {{< img src="logs/guide/monthly_usage_monitor.png" alt="Configurar un monitor para alertar del recuento de logs indexados desde principios de mes" style="width:70%;">}}
 
@@ -148,16 +161,20 @@ Aprovecha la métrica `datadog.estimated_usage.logs.ingested_events` filtrada en
 
 [Establece una cuota diaria][16] en los índices para evitar indexar más de un número determinado de logs al día. Si un índice tiene una cuota diaria, Datadog recomienda que se configure el [monitor que notifica sobre el volumen de ese índice](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) para alertar cuando se alcance el 80% de esta cuota en las últimas 24 horas.
 
-Se genera un evento cuando se alcanza la cuota diaria. Por defecto, estos eventos tienen la etiqueta (tag) `datadog_index` con el nombre del índice. Por lo tanto, cuando se genere este evento, puedes [crear una faceta][17] en la etiqueta (tag) `datadog_index`, de modo que puedas utilizar `datadog_index` en el paso `group by` para configurar un monitor de alerta múltiple.
+Se genera un evento cuando se alcanza la cuota diaria. Estos eventos tienen la tag (etiqueta) `datadog_index` que incluye el nombre del índice. Por lo tanto, cuando se haya generado este evento, puedes [crear una faceta][17] en la tag (etiqueta) `datadog_index`, de modo que puedas utilizar `datadog_index` en el step (UI) / paso (generic) `group by` para configurar un monitor (noun) de varias alertas.
 
 Para configurar un monitor que alerte cuando se alcanza la cuota diaria para un índice:
 
 1. Ve a [Monitors > New Monitor (Monitores > Nuevo monitor)][13] y selecciona **Event** (Evento).
-2. Introduce `source:datadog "daily quota reached"` en la sección **Define the search query** (Definir la consulta de búsqueda).
-3. Añade `datadog_index` al campo **group by** (agrupar por). Se actualiza automáticamente a `datadog_index(datadog_index)`. La etiqueta (tag) `datadog_index(datadog_index)` sólo está disponible cuando ya se ha generado un evento. 
-4. En la sección **Set alert conditions** (Establecer condiciones de alerta), selecciona `above or equal to` e introduce `1` para **Alert threshold** (Umbral de alerta).
-5. Añade un título de notificación y un mensaje en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones). El botón **Multi Alert** (Alerta múltiple) se selecciona automáticamente porque el monitor está agrupado por `datadog_index(datadog_index)`.
-6. Haz clic en **Save** (Guardar).
+2. Introduce: `source (fuente):datadog datadog_index:* "daily quota reached"` en la sección **Define the search query** (Definir la consulta de búsqueda). Incluye `datadog_index:*` para asegurarte de que solo se seleccionen los eventos relacionados con el índice.
+3. En el campo **Count of** (Número de), añade `datadog_index` para agrupar por índice. Esto actualiza la consulta de modo que se lea `Show Count of * by datadog_index (datadog_index)`.
+4. Para **Evaluate the query over** (Evaluar la consulta sobre), selecciona **current day** (día actual). Para **Starting at** (Iniciar a las), selecciona la hora a la que se reinician los índices. Esto mantiene el monitor (noun) en estado de alerta hasta el reinicio de la cuota. Este es un ejemplo de cómo se ve la consulta de búsqueda cuando se define en Datadog:
+   {{< img src="logs/guide/daily_quota_notification_search_query.png" alt="La configuración de la alerta de Datadog sobre la consulta de búsqueda que alcanzó la cuota de índice" style="width:100%;">}}
+5. En la sección **Set alert conditions** (Establecer condiciones de alerta), selecciona `above or equal to` e introduce `1` para **Alert threshold** (Umbral de alerta).
+6. Añade un título de notificación y un mensaje en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones). El botón **Multi Alert** (Alerta múltiple) se selecciona automáticamente porque el monitor está agrupado por `datadog_index(datadog_index)`.
+7. Haz clic en **Save** (Guardar).
+
+**Nota**: La tag (etiqueta) `datadog_index(datadog_index)` solo está disponible cuando ya se ha generado un evento.
 
 Este es un ejemplo del aspecto de la notificación en Slack:
 
@@ -183,7 +200,7 @@ Incluso si utilizas filtros de exclusión, puedes visualizar tendencias y anomal
 
 ### Habilitar Sensitive Data Scanner para la detección de información de identificación personal (PII)
 
-Si quieres evitar fugas de datos y limitar los riesgos de incumplimiento, utiliza Sensitive Data Scanner para identificar, etiquetar y, opcionalmente, ocultar o aplicar hash a los datos confidenciales. Por ejemplo, puedes buscar números de tarjetas de crédito, números de cuentas bancarias y claves de API en tus logs, tramos (spans) APM y eventos RUM. Consulta [Sensitive Data Scanner][23] para conocer cómo configurar las reglas de escaneo a fin de determinar qué datos se analizarán. 
+Si deseas evitar fugas de datos y limitar los riesgos de incumplimiento, utiliza Sensitive Data Scanner para identificar, etiquetar y, opcionalmente, redactar o aplicar hash a los datos confidenciales. Por ejemplo, puedes buscar números de tarjetas de crédito, números de ruta bancaria y claves de API en tus logs, spans (tramos) de APM y eventos de RUM. Consulta [Sensitive Data Scanner][23] para saber cómo configurar reglas de análisis para determinar qué datos analizar.
 
 **Nota**: [Sensitive Data Scanner][24] es un producto que se factura por separado.
 
@@ -193,7 +210,7 @@ Si quieres ver las actividades de los usuarios, como quién ha cambiado las opci
 
 **Nota**: [Audit Trail][27] es un producto que se factura por separado.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -219,10 +236,11 @@ Si quieres ver las actividades de los usuarios, como quién ha cambiado las opci
 [20]: /es/logs/log_configuration/indexes/#exclusion-filters
 [21]: /es/logs/explorer/analytics/patterns
 [22]: /es/logs/log_configuration/logs_to_metrics/
-[23]: /es/sensitive_data_scanner/
+[23]: /es/security/sensitive_data_scanner/
 [24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
 [25]: /es/account_management/audit_trail/events/
 [26]: /es/account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
 [28]: /es/monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /es/observability_pipelines/
+[30]: /es/logs/log_configuration/flex_logs/

@@ -126,4 +126,4 @@ All Lua snippets are executed inside a sandboxed [Luau][3] runtime. CoTerm injec
 [3]: https://luau.org/
 [4]: https://www.lua.org/pil/2.5.html
 [5]: https://www.lua.org/pil/2.1.html
-[6]: /service_management/incident_management/
+[6]: /incident_response/incident_management/

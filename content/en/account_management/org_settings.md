@@ -145,10 +145,6 @@ The session duration can be configured within the following limits:
 
 #### Idle time session duration configuration
 
-<div class="alert alert-info">
-  This feature is available in preview.
-</div>
-
 Users with the `Org Management` permission can enable or disable the idle time session timeout for their organization. When enabled, users are automatically signed out after 30 minutes of inactivity. The setting applies to all new web sessions created after you change it, and for all users, regardless of their role in the organization. It doesn’t apply to Datadog mobile application sessions.
 
 {{< img src="account_management/org_settings/idle_session_timeout.png" alt="Idle Session Timeout Setting" style="width:70%;" >}}
@@ -168,7 +164,7 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [9]: /account_management/rbac/
 [10]: /remote_configuration#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
-[12]: /service_management/events/guides/email/
+[12]: /events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview
 [14]: /account_management/safety_center
 [15]: /account_management/org_settings/oauth_apps

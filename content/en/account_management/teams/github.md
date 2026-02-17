@@ -5,6 +5,9 @@ further_reading:
     - link: '/integrations/github/'
       tag: 'Documentation'
       text: 'GitHub integration'
+    - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
+      tag: Blog
+      text: Keep service ownership up to date with Datadog Teams' GitHub integration
 ---
 
 ## Overview

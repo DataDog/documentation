@@ -357,7 +357,7 @@ Since this feature is enabled by default, you can deploy a minimal DatadogAgent 
 
 #### Prerequisites
 
-1. Helm chart version >= `3.150.0`
+1. Helm chart version >= `3.152.0`
 1. Datadog Agent >= `v7.69`
 
 #### General setup

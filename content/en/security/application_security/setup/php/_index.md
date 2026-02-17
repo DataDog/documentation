@@ -6,6 +6,9 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/php
   - /security/application_security/threats_detection/php
   - /security/application_security/setup/aws/fargate/php
+  - /security/application_security/setup/threat_detection/php
+  - /security/application_security/setup/standalone/php
+  - /security/application_security/enabling/compatibility/php
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 
@@ -22,6 +25,11 @@ aliases:
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
+{{< /appsec-integrations >}}
+
+### AWS
+{{< appsec-integrations >}}
+{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
 {{< /appsec-integrations >}}
 
 ### Google Cloud Platform

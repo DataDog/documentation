@@ -37,7 +37,7 @@ To correlate OpenTelemetry traces and logs in Datadog, you must:
 
 - **Send Logs to Datadog**: Your logs, enriched with trace context, must be collected and sent to Datadog.
 
-#### 1. Inject trace context into your logs
+### 1. Inject trace context into your logs
 
 The following examples for Go and Java use logging bridges. These bridges intercept logs from common logging libraries (such as `zap` and `Logback`), convert them into the OpenTelemetry log data model, and forward them to the OpenTelemetry SDK. This process automatically enriches the logs with the active trace context.
 

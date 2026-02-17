@@ -122,7 +122,7 @@ You can set scopes for both out-of-the-box and custom rules. When you add a scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services/scorecard
-[2]: /service_management/service_level_objectives/
+[2]: /service_level_objectives/
 [3]: https://app.datadoghq.com/monitors/templates
 [4]: /tracing/services/deployment_tracking/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/

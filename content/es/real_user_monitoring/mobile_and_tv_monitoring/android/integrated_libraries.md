@@ -2,6 +2,8 @@
 aliases:
 - /es/real_user_monitoring/android/integrated_libraries/
 - /es/real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/android
+description: Integra bibliotecas populares de Android como Coil, OkHttp y Retrofit
+  con RUM para monitorizar automáticamente las solicitudes de red y la carga de imágenes.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: Código fuente
@@ -29,7 +31,7 @@ Si utilizas Jetpack Compose en tu aplicación, consulta la [biblioteca dedicada 
 
 ## RxJava
 
-Si utilizas RxJava en tu aplicación, consulta [la librería dedicada de RxJava][8] de Datadog.
+Si utilizas RxJava en tu aplicación, consulta [la biblioteca dedicada de RxJava][8] de Datadog.
 
 ## Picasso
 

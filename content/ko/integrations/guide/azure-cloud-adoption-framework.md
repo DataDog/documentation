@@ -11,7 +11,7 @@ title: Datadog를 사용하는 Azure Cloud Adoption Framework
 
 ## 개요
 
-Datadog는 Azure Cloud Adoption Framework로 온프레미스 또는 다른 클라우드 환경에서 새로운 클라우드로 안전하면서도 신속하게 마이그레이션할 수 있도록 도와줍니다.
+Azure의 Cloud Adoption Framework와 Datadog를 함께 사용하면 온프레미스 또는 기타 클라우드 환경에서 새로운 클라우드 환경으로 안전하고 빠르게 마이그레이션할 수 있습니다.
 
 다음을 할 수 있습니다.
 

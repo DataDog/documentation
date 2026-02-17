@@ -2,6 +2,9 @@
 title: Code Security
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: https://www.datadoghq.com/blog/code-security-secret-scanning
   tag: Blog
   text: Detect and block exposed credentials with Datadog Secret Scanning

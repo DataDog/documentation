@@ -1,6 +1,18 @@
 ---
+algolia:
+  tags:
+  - JMX
+  - Métriques JMX
+  - Web Logic manquant
+  - Limite JMX
+  - Cassandra
+  - Kafka
+  - Tomcat
+  - Weblogic
 aliases:
 - /fr/agent/guide/autodiscovery-with-jmx
+description: Configurer des intégrations basées sur JMX pour les applications Java
+  conteneurisées à l'aide de modèles Autodiscovery
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
@@ -73,7 +85,7 @@ kind: Pod
 metadata:
   name: <POD_NAME>
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "<INTEGRATION_NAME>": {
           "init_config": {
@@ -89,7 +101,7 @@ metadata:
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
       # (...)
       env:
         - name: POD_IP
@@ -109,7 +121,7 @@ spec:
 
 Dans cet exemple :
 - `<POD_NAME>` est le nom de votre pod.
-- `<CONTAINER_IDENTIFIER>` correspond au conteneur souhaité dans votre pod.
+- `<CONTAINER_NAME>` correspond au conteneur souhaité dans votre pod.
 - `<INTEGRATION_NAME>` est le nom de l'intégration JMX souhaitée. Référez-vous à la liste des [intégrations JMX disponibles] (#integrations-JMX-disponibles).
 - Définissez `<JMX_PORT>` comme vous le souhaitez, en veillant à ce quʼil y ait une correspondance entre les annotations et `JAVA_OPTS`.
 
@@ -168,7 +180,7 @@ spec:
 Si vous devez collecter d'autres métriques à partir de ces intégrations, ajoutez-les à la section `init_config` :
 
 ```yaml
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
   {
     "<INTEGRATION_NAME>": {
       "init_config": {
@@ -217,7 +229,7 @@ Ce fichier de configuration doit inclure `ad_identifiers` :
 
 ```yaml
 ad_identifiers:
-  - "<SHORT_IMAGE>"
+  - <CONTAINER_IMAGE>
 
 init_config:
   is_jmx: true
@@ -229,7 +241,7 @@ instances:
     port: "<JMX_PORT>"
 ```
 
-Remplacez `<SHORT_IMAGE>` par le nom dʼimage court du conteneur de votre choix. Par exemple, lʼimage de conteneur `gcr.io/CompanyName/my-app:latest` a pour nom dʼimage court `my-app`. Lorsque lʼAgent Datadog découvre ce conteneur, il établit la configuration JMX comme décrit dans ce fichier.
+Remplacez `<CONTAINER_IMAGE>` par le nom d'image court du conteneur souhaité. Par exemple, l'image de conteneur `gcr.io/CompanyName/my-app:latest` a un nom d'image court `my-app`. Lorsque l'Agent Datadog découvre ce conteneur, il configure JMX comme décrit dans ce fichier.
 
 Vous pouvez également spécifier [des identifiants personnalisés pour vos conteneurs][4] et y faire référence si vous ne souhaitez pas vous baser sur le nom court de l'image.
 
@@ -258,7 +270,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - "<SHORT_IMAGE>"
+              - <CONTAINER_IMAGE>
 
             init_config:
               is_jmx: true
@@ -278,7 +290,7 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |
       ad_identifiers:
-        - "<SHORT_IMAGE>"
+        - <CONTAINER_IMAGE>
 
       init_config:
         is_jmx: true
@@ -292,7 +304,7 @@ datadog:
 {{% tab "Custom image" %}}
 Si vous ne pouvez pas monter ces fichiers dans le conteneur de lʼAgent (par exemple, sur Amazon ECS), vous pouvez créer une image Docker de lʼAgent contenant les fichiers de configuration souhaités.
 
-Par exemple :
+Exemple :
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:latest-jmx

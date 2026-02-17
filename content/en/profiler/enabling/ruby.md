@@ -54,7 +54,7 @@ To begin profiling applications:
     ```
 3. Install the gems with `bundle install`.
 
-4. Enable the profiler:
+4. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -107,7 +107,7 @@ end
 
 6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
+7. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][26] guide.
 
 ## Configuration
 
@@ -174,3 +174,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
 [24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
 [25]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[26]: /profiler/profiler_troubleshooting/ruby/

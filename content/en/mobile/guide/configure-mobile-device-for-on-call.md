@@ -2,7 +2,7 @@
 title: Set Up Your Mobile Device for Datadog On-Call
 description: "Configure your mobile device for reliable on-call notifications with critical alerts, Do Not Disturb bypass, and telephony contact setup."
 further_reading:
-- link: "https://docs.datadoghq.com/service_management/on-call/"
+- link: "https://docs.datadoghq.com/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
 - link: "https://docs.datadoghq.com/service_management/mobile/"
@@ -94,7 +94,7 @@ You can override your device's system volume and Do Not Disturb mode for both pu
 
 4. In order to override system volume, tap the **Override system volume** and allow **Mode access** in System Settings to toggle on **Override system volume**.
 
-5. On web, set up notifciation preferences for **High Urgency Notifications** and/or **Low Urgency Notifications**.
+5. On web, set up notification preferences for **High Urgency Notifications** and/or **Low Urgency Notifications**.
 
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
@@ -213,4 +213,4 @@ For help with troubleshooting, [contact Datadog support][2]. You can also send a
 [2]: /help/
 [3]: https://chat.datadoghq.com/
 [4]: https://datadoghq.slack.com/archives/C0114D5EHNG
-[5]: /service_management/on-call/
+[5]: /incident_response/on-call/

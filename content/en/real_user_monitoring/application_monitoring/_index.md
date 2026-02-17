@@ -10,7 +10,7 @@ aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/setup/
 - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
 further_reading:
-- link: '/real_user_monitoring/session_replay/browser/'
+- link: '/session_replay/browser/'
   tag: 'Documentation'
   text: 'Session Replay'
 ---

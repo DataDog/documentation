@@ -1,82 +1,29 @@
 ---
 app_id: boundary
-app_uuid: 61898266-9c80-442d-89d3-22e7aeeafb94
-assets:
-  dashboards:
-    Boundary Overview: assets/dashboards/boundary_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: boundary.worker.proxy.websocket.active_connections
-      metadata_path: metadata.csv
-      prefix: boundary.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10280
-    source_type_name: Boundary
-  monitors:
-    Number of active connections is too high: assets/monitors/active_connections.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - Configuración e implementación
 - recopilación de logs
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/boundary/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: boundary
-integration_id: boundary
-integration_title: Boundary
-integration_version: 3.2.0
-is_public: true
-manifest_version: 2.0.0
-name: boundary
-public_title: Boundary
-short_description: Monitorización de controladores y trabajadores de Boundary.
+description: Monitorización de controladores y trabajadores de Boundary.
+integration_version: 4.0.0
+media: []
 supported_os:
 - linux
 - Windows
 - MacOS
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Configuration & Deployment
-  - Category::Log Collection
-  - Offering::Integration
-  configuration: README.md#Instalación
-  description: Monitorización de controladores y trabajadores de Boundary.
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Boundary
+title: Boundary
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Este check monitoriza [Boundary][1] a través del Datadog Agent. La versión mínima compatible de Boundary es `0.8.0`.
+Este check monitoriza [Boundary](https://www.boundaryproject.io) a través del Datadog Agent . La versión mínima compatible de Boundary es `0.8.0`.
 
 ## Configuración
 
-Sigue las instrucciones que figuran a continuación para instalar y configurar este check para un Agent que se ejecuta en un host. Para entornos contenedorizados, consulta las [plantillas de integración de Autodiscovery][2] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las instrucciones siguientes para instalar y configurar este check para un Agent que se ejecute en un host. Para entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de estas instrucciones.
 
 ### Instalación
 
-El check de Boundary está incluido en el paquete del [Datadog Agent][3].
+El check de Boundary está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest).
 No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
@@ -118,57 +65,79 @@ controller {
 
 #### Datadog Agent
 
-1. Edita el archivo `boundary.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent para comenzar a recopilar tus datos de rendimiento de boundary. Consulta el [ejemplo de boundary.d/conf.yaml][4] para conocer todas las opciones disponibles de configuración.
+1. Edita el archivo `boundary.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent para empezar a recopilar tus datos de rendimiento de Boundary. Consulta el [ejemplo boundary.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/boundary/datadog_checks/boundary/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-2. [Reinicia el Agent][5].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][6] y busca `boundary` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent] (https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `boundary` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "boundary" >}}
 
+| | |
+| --- | --- |
+| **boundary.cluster.client.grpc.request_duration_seconds.bucket** <br>(count) | Histograma de latencias de solicitudes gRPC entre el clúster y cualquiera de sus clientes.<br>_Se muestra en segundos_ |
+| **boundary.cluster.client.grpc.request_duration_seconds.count** <br>(count) | Histograma de latencias de solicitudes gRPC entre el clúster y cualquiera de sus clientes.<br>_Se muestra en segundos_ |
+| **boundary.cluster.client.grpc.request_duration_seconds.sum** <br>(count) | Histograma de latencias de solicitudes gRPC entre el clúster y cualquiera de sus clientes.<br>_Se muestra en segundos_ |
+| **boundary.controller.api.http.request_duration_seconds.bucket** <br>(count) | Histograma de latencias de solicitudes HTTP.<br>_Se muestra en segundos_ |
+| **boundary.controller.api.http.request_duration_seconds.count** <br>(count) | Histograma de latencias de solicitudes HTTP.<br>_Se muestra en segundos_ |
+| **boundary.controller.api.http.request_duration_seconds.sum** <br>(count) | Histograma de latencias de solicitudes HTTP.<br>_Se muestra en segundos_ |
+| **boundary.controller.api.http.request_size_bytes.bucket** <br>(count) | Histograma del tamaño de las solicitudes HTTP.<br>_Se muestra en bytes_ |
+| **boundary.controller.api.http.request_size_bytes.count** <br>(count) | Histograma del tamaño de las solicitudes HTTP.<br>_Se muestra en bytes_ |
+| **boundary.controller.api.http.request_size_bytes.sum** <br>(count) | Histograma del tamaño de las solicitudes HTTP.<br>_Se muestra en bytes_ |
+| **boundary.controller.api.http.response_size_bytes.bucket** <br>(count) | Histograma de tamaños de respuesta para respuestas HTTP.<br>_Se muestra en bytes_ |
+| **boundary.controller.api.http.response_size_bytes.count** <br>(count) | Histograma de tamaños de respuesta para respuestas HTTP.<br>_Se muestra en bytes_ |
+| **boundary.controller.api.http.response_size_bytes.sum** <br>(count) | Histograma de tamaños de respuesta para respuestas HTTP.<br>_Se muestra en bytes_ |
+| **boundary.controller.cluster.grpc.request_duration_seconds.bucket** <br>(count) | Histograma de latencias de solicitudes gRPC.<br>_Se muestra en segundos_ |
+| **boundary.controller.cluster.grpc.request_duration_seconds.count** <br>(count) | Histograma de latencias de solicitudes gRPC.<br>_Se muestra en segundos_ |
+| **boundary.controller.cluster.grpc.request_duration_seconds.sum** <br>(count) | Histograma de latencias de solicitudes gRPC.<br>_Se muestra en segundos_ |
+| **boundary.worker.proxy.http.write_header_duration_seconds.bucket** <br>(count) | Histograma del tiempo transcurrido desde que se establece la conexión TLS hasta que se escribe la primera cabecera http desde el servidor.<br>_Se muestra en segundos_ |
+| **boundary.worker.proxy.http.write_header_duration_seconds.count** <br>(count) | Histograma del tiempo transcurrido desde que se establece la conexión TLS hasta que se escribe la primera cabecera http desde el servidor.<br>_Se muestra en segundos_ |
+| **boundary.worker.proxy.http.write_header_duration_seconds.sum** <br>(count) | Histograma del tiempo transcurrido desde que se establece la conexión TLS hasta que se escribe la primera cabecera http desde el servidor.<br>_Se muestra en segundos_ |
+| **boundary.worker.proxy.websocket.active_connections** <br>(gauge) | Recuento de conexiones proxy de websocket abiertas (a workers de Boundary).<br>_Se muestra como conexión_ |
+| **boundary.worker.proxy.websocket.received_bytes.count** <br>(count) | Recuento de bytes recibidos para conexiones proxy de websocket de workers.<br>_Se muestra en bytes_ |
+| **boundary.worker.proxy.websocket.sent_bytes.count** <br>(count) | Recuento de bytes enviados para conexiones proxy de websocket de workers.<br>_Se muestra en bytes_ |
 
 ### Eventos
 
 La integración de Boundary no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "boundary" >}}
 
+**boundary.openmetrics.health**
+
+Devuelve `CRITICAL` si el Agent no puede conectarse al endpoint de OpenMetrics, en caso contrario devuelve `OK`.
+
+_Estados: ok, crítico_
+
+**boundary.controller.health**
+
+Devuelve `CRITICAL` si el Agent no puede conectarse al endpoint de estado del controlador, `WARNING` si el controlador ha recibido una señal de apagado, de lo contrario devuelve `OK`.
+
+_Estados: ok, advertencia, crítico_
 
 ### Recopilación de logs
 
-1. La recopilación de logs está desactivada en forma predeterminada en el Datadog Agent. Actívala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada por defecto en el Datadog Agent. Actívala en tu archivo `datadog.yaml`:
 
-    ```yaml
-    logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
-2. Para empezar a recopilar tus logs de Boundary, añade este bloque de configuración a tu archivo `boundary.d/conf.yaml`:
+1. Para empezar a recopilar tus logs de Boundary, añade este bloque de configuración a tu archivo `boundary.d/conf.yaml`:
 
-    ```yaml
-    logs:
-       - type: file
-         source: boundary
-         path: /var/log/boundary/events.ndjson
-    ```
+   ```yaml
+   logs:
+      - type: file
+        source: boundary
+        path: /var/log/boundary/events.ndjson
+   ```
 
-   Cambia el valor del parámetro `path` en función de tu entorno. Consulta el [archivo de ejemplo `boundary.d/conf.yaml`][4] para ver todas las opciones disponibles de configuración.
+   Cambia el valor del parámetro `path` en función de tu entorno. Consulta el [ejemplo de archivo `boundary.d/conf.yaml`](https://github.com/DataDog/integrations-core/blob/master/boundary/datadog_checks/boundary/data/conf.yaml.example)para conocer todas las opciones de configuración disponibles.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
-
-[1]: https://www.boundaryproject.io
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://github.com/DataDog/integrations-core/blob/master/boundary/datadog_checks/boundary/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/boundary/metadata.csv
-[8]: https://github.com/DataDog/integrations-core/blob/master/boundary/assets/service_checks.json
-[9]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

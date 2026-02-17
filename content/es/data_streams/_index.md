@@ -63,7 +63,7 @@ Data Streams Monitoring instrumenta los _clientes_ de Kafka (consumidores/produc
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 | Azure Service Bus | | | {{< X >}} | | | |
 | Google Pub/Sub | {{< X >}} | | | {{< X >}} | | |
-| IBM MQ | | | {{< X >}} | | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
 Data Streams Monitoring requiere versiones mínimas del rastreador Datadog. Para obtener más detalles, consulta cada página de configuración.

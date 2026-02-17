@@ -1,6 +1,8 @@
 ---
 title: Identifying Databases for Database Monitoring
 description: Understand how to identify your databases and hosts for DBM
+aliases:
+- /database_monitoring/database_identifier
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

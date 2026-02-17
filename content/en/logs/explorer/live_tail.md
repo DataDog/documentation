@@ -14,6 +14,9 @@ further_reading:
     - link: 'logs/explorer/#list-of-logs'
       tag: 'Documentation'
       text: 'The list view of logs'
+    - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+      tag: "Blog"
+      text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 ## Overview

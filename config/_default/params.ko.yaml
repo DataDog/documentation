@@ -3,7 +3,7 @@ announcement_banner:
   external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
   mobile_message: Read the State of Containers and Serverless Report!
 disclaimer: 이 페이지는 아직 한국어로 제공되지 않습니다. 번역 작업 중입니다. <br>현재 번역 프로젝트에 대한 질문이나 피드백이 있으신
-  경우<a href="https://docs.datadoghq.com/fr/help/"> 언제든지 연락주시기 바랍니다.</a>
+  경우<a href="https://docs.datadoghq.com/ko/help/"> 언제든지 연락주시기 바랍니다.</a>
 meta_description: 클라우드 스케일 모니터링의 선두주자, Datadog
 meta_title: Datadog로 시작하기
 site_name: Datadog 인프라스트럭처 및 응용 프로그램 모니터링

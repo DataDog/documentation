@@ -100,7 +100,7 @@ For more information, see the [Quick Graphs][7] documentation.
 [5]: /metrics/introduction/#space-aggregation
 [6]: /dashboards/querying/#advanced-graphing
 [7]: /dashboards/guide/quick-graphs/
-[8]: /service_management/incident_management/
+[8]: /incident_response/incident_management/
 [9]: /monitors/
 [10]: /dashboards/
 [11]: /account_management/rbac/permissions/#access-management

@@ -1,7 +1,13 @@
 ---
 title: CrowdStrike Next-Gen SIEM Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs to CrowdStrike Next-Gen SIEM.
 
@@ -13,21 +19,56 @@ Set up the CrowdStrike NG-SIEM destination and its environment variables when yo
 
 To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker later on.
 
-1. Select **JSON** or **Raw** encoding in the dropdown menu.
-1. Optionally, enable compressions and select an algorithm (**gzip** or **zlib**) in the dropdown menu.
-1. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][4] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+<div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the TLS pass key. Do <b>not</b> enter the actual values.</div>
 
-### Set the environment variables
+1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#set-secrets) is used.
+1. Select **JSON** or **Raw** encoding in the dropdown menu.
+
+#### Optional settings
+
+##### Enable compressions
+
+1. Toggle the switch to **Enable compressions**.
+1. Select an algorithm (**gzip** or **zlib**) in the dropdown menu.
+
+##### Enable TLS
+
+Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.
+**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][4] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+
+- Enter the identifier for your CrowdStrike NG-SIEM key pass. If you leave it blank, the [default](#set-secrets) is used.
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- CrowdStrike NG-SIEM endpoint URL identifier:
+	- In your secrets manager, do **not** include the suffix `/services/collector` in the URL. The URL must follow this format: `https://<your_instance_id>.ingest.us-1.crowdstrike.com`.
+	- The default identifier is `DESTINATION_CROWDSTRIKE_NEXT_GEN_SIEM_ENDPOINT_URL`.
+- CrowdStrike NG-SIEM token identifier:
+	- The default identifier is `DESTINATION_CROWDSTRIKE_NEXT_GEN_SIEM_TOKEN`.
+- CrowdStrike NG-SIEM TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_CROWDSTRIKE_NEXT_GEN_SIEM_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

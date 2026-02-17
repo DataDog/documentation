@@ -5,7 +5,13 @@ further_reading:
 - link: "/observability_pipelines/guide/remap_reserved_attributes/"
   tag: "documentation"
   text: "Remap reserved attributes"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 {{% observability_pipelines/processors/custom_processor %}}
 

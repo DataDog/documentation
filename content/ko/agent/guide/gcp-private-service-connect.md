@@ -1,4 +1,6 @@
 ---
+description: 공용 인터넷을 사용하지 않고 Datadog로 원격 분석을 비공개로 보내도록 Google Cloud Private Service
+  Connect 엔드포인트 및 DNS 영역을 구성합니다.
 further_reading:
 - link: /integrations/google_cloud_platform/
   tag: 설명서
@@ -8,10 +10,6 @@ further_reading:
   text: AWS PrivateLink를 통해 Datadog에 연결
 title: Google Cloud Private Service Connect로 Datadog 연결하기
 ---
-
-{{% site-region region="us,us3,gov,ap1" %}}
-<div class="alert alert-danger">선택한 Datadog 사이트에서는 이 기능이 지원되지 않습니다.</div>
-{{% /site-region %}}
 
 {{% site-region region="us5" %}}
 [Google Cloud Private Service Connect][1](PSC)를 사용하면 공용 인터넷을 통하지 않고도 Datadog로 텔레메트리를 전송할 수 있습니다.
@@ -102,12 +100,12 @@ trace.agent.us5.datadoghq.com. 300 IN  A       10.1.0.9
 | 로그(에이전트)           | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-agent-intake-psc` | `agent-http-intake.logs.us5.datadoghq.com` |
 | 로그(사용자 HTTP 수집) | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-intake-psc` | `http-intake.logs.us5.datadoghq.com` |
 | API | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-api-psc` | `api.us5.datadoghq.com` |
-| 메트릭 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-metrics-agent-psc` | `agent.us5.datadoghq.com` |
+| Metrics | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-metrics-agent-psc` | `agent.us5.datadoghq.com` |
 | 컨테이너 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-orchestrator-psc` | `orchestrator.us5.datadoghq.com` |
 | 프로세스 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-process-psc` | `process.us5.datadoghq.com` |
 | 프로파일링 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-http-profile-psc` | `intake.profile.us5.datadoghq.com` |
 | 트레이스 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-trace-edge-psc` | `agent.us5.datadoghq.com` |
-| 데이터베이스 모니터링 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.us5.datadoghq.com` |
+| Database Monitoring | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.us5.datadoghq.com` |
 | 원격 설정 | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-fleet-psc` | `config.us5.datadoghq.com` |
 
 
@@ -120,7 +118,7 @@ trace.agent.us5.datadoghq.com. 300 IN  A       10.1.0.9
 {{% site-region region="eu" %}}
 PSC([Private Service Connect][1])를 사용하면 공용 인터넷을 통하지 않고도 Datadog로 텔레메트리를 전송할 수 있습니다.
 
-Datadog에서는 데이터 수집 서비스의 일부를 Google Cloud Platform에 PSC [_게시된 서비스_][2]로 노출시킵니다. 이를 [게시된 서비스 표](#published-services)에서 볼 수 있습니다.
+Datadog는 [게시된 서비스 표](#published-services-1)에서 볼 수 있듯이 Google Cloud Platform에서 데이터 수집 서비스 중 일부를 PSC [_published services_][2]로 노출합니다.
 
 각 Datadog 수집 서비스에 프라이빗 IP 주소를 노출하도록 각 PSC 엔드포인트를 구성할 수 있습니다. 이 IP 주소는 트래픽을 Datadog 백엔드로 라우팅합니다. 그 후 각 엔드포인트에서 해당되는 DNS 이름으로 재정의하도록 Google Cloud [_Private DNS Zone_][3]을 구성할 수 있습니다.
 
@@ -135,7 +133,7 @@ Datadog에서는 데이터 수집 서비스의 일부를 Google Cloud Platform�
    {{< img src="agent/guide/psc/connect-endpoint-eu1.png" alt="'Google Cloud 콘솔의 'Connect endpoint' 페이지 스크린샷" >}}
 
    - **Target** 아래에서 _Published service_를 선택합니다.
-   - **Target service**에 사용하고자 하는 Datadog 수집 서비스의 _PSC 대상 이름_을 입력합니다. [게시된 서비스 표](#published-services)에서 내 PCS 대상 이름을 찾을 수 있습니다.
+   - **Target service**에 사용하려는 Datadog 수집 서비스에 해당하는 _PSC 대상 이름_을 입력합니다. PSC 대상 이름은 [게시된 서비스 표](#published-services-1)에서 찾을 수 있습니다.
    - **Endpoint name**에는 엔드포인트에 사용할 고유 식별자를 입력합니다. `datadog-<SERVICE>`를 사용할 수 있습니다(예 `datadog-metrics`).
    - **Network**와 **Subnetwork**에서는 엔드포인트에를 게시할 네트워크와 하부 네트워크를 선택합니다.
    - **IP address**에서는 드롭다운 메뉴에서 _Create IP address_를 선택하여 엔드포인트 전용 서브넷에 내부 IP를 생성합니다. 이 IP를 선택하세요.
@@ -153,7 +151,7 @@ Datadog에서는 데이터 수집 서비스의 일부를 Google Cloud Platform�
 
    - **Zone type** 아래에서 _Private_을 선택합니다.
    - **Zone name**에는 내 영역을 설명하는 이름을 입력합니다.
-   - **DNS name**에 사용하고자 하는 Datadog 수집 서비스의 _프라이빗 DNS 이름_을 입력합니다. [게시된 서비스 표](#published-services)에서 내 DNS 이름을 찾을 수 있습니다.
+   - **DNS name**에 사용하려는 Datadog 수집 서비스에 해당하는 _비공개 DNS 이름_을 입력합니다. DNS 이름은 [게시된 서비스 표](#published-services-1)에서 찾을 수 있습니다.
 3. 그 후 엔드포인트 IP를 가리키는 `A` 레코드를 생성합니다.  내가 생성한 영역의 _Zone details_ 페이지에서 **Add record set**을 클릭합니다.
    {{< img src="agent/guide/psc/create-record-eu1.png" alt="Google Cloud 콘솔의 'Create record set' 페이지 스크린샷" >}}
 
@@ -169,8 +167,8 @@ Datadog에서는 데이터 수집 서비스의 일부를 Google Cloud Platform�
 
 | DNS 이름 | 리소스 레코드 유형 | IPv4 주소 |
 | -------- |----------------------| ------------ |
-| `(apex)` | A                    | 메트릭 엔드포인트 IP 주소ㅗ |
-| `*`      | A                    | 메트릭 엔드포인트 IP 주소ㅗ |
+| `(apex)` | A                    | 메트릭 엔드포인트 IP 주소 |
+| `*`      | A                    | 메트릭 엔드포인트 IP 주소 |
 | `trace`  | A                    | 트레이스 엔드포인트 IP 주소 |
 
 **참고**: 이 영역에는 내 메트릭 엔드포인트의 IP 주소를 가리키는 와일드카드(`*`) 레코드가 필요합니다. Datadog 에이전트에서는 (`<version>-app.agent.`{{< region-param key="dd_site" code="true" >}}) 형식으로 버저닝된 엔드포인트를 사용해 텔레메트리를 전송하기 때문입니다.
@@ -207,12 +205,12 @@ trace.agent.datadoghq.eu. 300 IN  A       10.1.0.9
 | 로그(에이전트)           | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-logs-agent-intake-psc` | `agent-http-intake.logs.datadoghq.eu` |
 | 로그(사용자 HTTP 수집) | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-logs-intake-psc` | `http-intake.logs.datadoghq.eu` |
 | API | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-api-psc` | `api.datadoghq.eu` |
-| 메트릭 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-metrics-agent-psc` | `agent.datadoghq.eu` |
+| Metrics | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-metrics-agent-psc` | `agent.datadoghq.eu` |
 | 컨테이너 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-orchestrator-psc` | `orchestrator.datadoghq.eu` |
 | 프로세스 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-process-psc` | `process.datadoghq.eu` |
 | 프로파일링 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-logs-http-profile-psc` | `intake.profile.datadoghq.eu` |
 | 트레이스 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-trace-edge-psc` | `agent.datadoghq.eu` |
-| 데이터베이스 모니터링 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.datadoghq.eu` |
+| Database Monitoring | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.datadoghq.eu` |
 | 원격 설정 | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-fleet-psc` | `config.datadoghq.eu` |
 
 

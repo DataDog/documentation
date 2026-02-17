@@ -1,12 +1,10 @@
 ---
-title: Engineering Reports
-aliases:
-- /software_catalog/eng_reports
+title: Engineering Report
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
-- link: "service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
 - link: "software_catalog/scorecards/"
@@ -28,7 +26,11 @@ Managers and directors who oversee multiple teams can filter reports by [team hi
 
 {{< img src="tracing/internal_developer_portal/team-hierarchy-filter-with-report.png" alt="The DORA report with a filter dropdown showing a hierarchical team structure and a subset of subteams selected" style="width:100%;" >}}
 
-{{< whatsnext desc="Explore the following reports:" >}}
+Datadog's IDP supports two types of reports:
+- **Out-of-the-box (OOTB) Engineering Reports**: Reports designed by Datadog that let you assess engineering metrics across your organization
+- [**Custom Reports**][2]: Any Datadog Dashboards that your organization has added to your IDP Overview Page
+
+{{< whatsnext desc="Explore the following OOTB Engineering Reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
     {{< nextlink href="/software_catalog/eng_reports/scorecards_performance" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
     {{< nextlink href="/software_catalog/eng_reports/dora_metrics" >}}DORA Metrics: Software development velocity and stability metrics broken down by services and teams.{{< /nextlink >}}
@@ -39,4 +41,5 @@ Managers and directors who oversee multiple teams can filter reports by [team hi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/teams/manage/#subteams-hierarchical-teams
+[2]: /internal_developer_portal/eng_reports/custom_reports
 

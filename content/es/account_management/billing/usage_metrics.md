@@ -1,4 +1,8 @@
 ---
+further_reading:
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations
+  tag: Blog
+  text: 'Optimización de Datadog a escala: observabilidad rentable en Zendesk'
 title: Métricas de uso estimadas
 ---
 
@@ -90,6 +94,10 @@ En las cuentas con varias organizaciones, es posible agrupar el uso estimado de 
 Si tienes alguna pregunta técnica, ponte en contacto con el [equipo de asistencia de Datadog][1].
 
 Si tienes alguna pregunta sobre facturación, ponte en contacto con tu gestor de [satisfacción al cliente][2].
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help/
 [2]: mailto:success@datadoghq.com

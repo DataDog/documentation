@@ -57,9 +57,12 @@ External Provider Status monitors the following third-party providers:
 | Braintree | `api.braintreegateway.com` |
 | Cloudflare | `*.cloudflare.com` |
 | Databricks | `*.cloud.databricks.com` |
+| Datadog (US1) | `api.datadoghq.com` |
 | Facebook | `graph.facebook.com` |
 | GitHub | `api.github.com` |
 | GitLab | `*.gitlab.com` |
+| Google Gemini | `generativelanguage.googleapis.com` |
+| Google Maps | `maps.googleapis.com` |
 | HubSpot | `api.hubspot.com`, `api.hubapi.com` |
 | Intercom | `api.intercom.io` |
 | LaunchDarkly | `app.launchdarkly.com` |
