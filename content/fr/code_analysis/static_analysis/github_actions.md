@@ -28,10 +28,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -57,7 +57,6 @@ Vous pouvez définir les paramètres suivants pour Static Analysis.
 | `enable_performance_statistics` | Récupérer les statistiques de temps d'exécution pour les fichiers analysés.                                                                                                   | Non      | `false`         |
 | `debug`      | Permet à l'analyseur d'afficher des logs supplémentaires utiles pour le debugging. Pour activer, définir sur `yes`.                                                                  | Non      | `no`            |
 | `subdirectory` | Un pattern de sous-répertoire ou glob (ou patterns de sous-répertoires délimités par des espaces) auquel l'analyse doit être limitée. Par exemple : "src" ou "src packages". | `false` |                 |
-| `architecture` | L'architecture CPU à utiliser pour l'analyseur. Les valeurs prises en charge sont `x86_64` et `aarch64`.                                                              | Non      | `x86_64`        |
 | `diff_aware` | Activer le [mode d'analyse différentielle][5].                                                                                                                   | Non      | `true`          |
 | `secrets_enabled` | Activer la détection de secrets (en bêta privée)                                                                                                              | Non      | `false`         |
 
@@ -65,11 +64,6 @@ Vous pouvez définir les paramètres suivants pour Static Analysis.
 
 1. L'analyse différentielle analyse uniquement les fichiers modifiés par un commit lors de l'analyse des branches de fonctionnalité. L'analyse différentielle est activée par défaut. Pour désactiver l'analyse différentielle, définir le paramètre `diff_aware` de l'action GitHub sur `false`.
 2. L'analyse de secrets est en bêta privée. Pour activer l'analyse de secrets, contactez votre responsable de la réussite client Datadog.
-
-### Entrées obsolètes
-Les entrées d'action suivantes sont obsolètes et n'ont plus aucun effet. Leur transmission émettra un avertissement.
-* `dd_service`
-* `dd_env`
 
 ## Personnaliser les règles
 

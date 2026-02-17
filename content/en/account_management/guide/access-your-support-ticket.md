@@ -16,7 +16,7 @@ To create a new support ticket, click on the appropriate Site link and click **S
 
 {{< whatsnext desc="Support page by Datadog site:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
-    {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
+    {{< nextlink href="https://govsupport.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< img src="/account_management/guide/access_your_support_ticket/support_page.png" alt="Datadog Support landing page" style="width:100%;" >}}
@@ -40,7 +40,7 @@ If you have opened at least one Datadog support ticket, follow this process to a
 
 {{< whatsnext desc="Support Page by Datadog Site:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
-    {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
+    {{< nextlink href="https://govsupport.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Password requirements

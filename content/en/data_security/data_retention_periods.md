@@ -123,8 +123,8 @@ attributes:
        - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: |
-       - **NetFlow**: 30 days
-       - **SNMP traps**: 15 days
+       - **NetFlow**: 15, 30, 60, or 90 days, determined by customer plan
+       - **SNMP traps**: Determined by customer plan, default to 15 days
   - product: Cloud Network Monitoring
     data_type: |
        - **Network traffic**: 14 days

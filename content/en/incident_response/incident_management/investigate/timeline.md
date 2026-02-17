@@ -25,7 +25,7 @@ Each cell has its own content type that indicates the kind of information the ce
 | Responder note     | A note manually written by an incident responder. Responder notes have the following sub-types:<br>- *Graph*: The responder note contains one or more Datadog graphs<br>- *Link*: The responder note contains a hyperlink<br>- *Code*: The responder note contains text wrapped in Markdown syntax for code blocks
 | Incident update    | Any changes made to an incident's properties (including status and severity) or its impact.
 | Integration update | Any changes made through the Incident Management product's [integrations][1].
-| Task               | Any changes made to incident tasks in the Remediation section of the Incident Details page.
+| Task               | Any changes made to incident tasks in the Post-Incident section of the Incident Details page.
 | Notification sent  | An update when a manual notification is sent by an incident responder.
 
 ### Responder notes

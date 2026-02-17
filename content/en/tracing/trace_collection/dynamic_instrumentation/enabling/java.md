@@ -103,6 +103,10 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][6] for information about adding instrumentations and browsing and indexing the data.
 
+## Limitations
+
+- On JDK 18 and below, classes compiled with the `-parameters` flag may fail to instrument with the error message "Method Parameters detected". Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
