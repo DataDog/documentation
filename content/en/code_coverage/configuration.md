@@ -163,7 +163,7 @@ ignore:
 
 ## PR Gates
 
-You can define [PR Gates][2] directly in the configuration file to enforce code coverage thresholds on pull requests. Gates defined in the configuration file work alongside gates configured in the [Datadog UI][2]—both sets of rules are evaluated when a PR is opened or updated.
+You can define [PR Gates][2] in the configuration file to enforce code coverage thresholds on pull requests. If gates are also configured in the [Datadog UI][2], Datadog evaluates both the configuration file rules and the UI rules when a PR is opened or updated.
 
 <div class="alert alert-info">If both the configuration file and the Datadog UI define gates for the same scope, the pull request must meet every defined threshold.</div>
 
@@ -181,13 +181,13 @@ gates:
 Each gate has the following fields:
 
 - `type` (required): The type of coverage gate. Supported values:
-  - `total_coverage_percentage`: Enforces a minimum overall coverage percentage for the repository (or scoped services/code owners).
-  - `patch_coverage_percentage`: Enforces a minimum coverage percentage on code changed in the pull request.
-- `config` (required): Gate configuration options.
-  - `threshold` (required): The minimum coverage percentage required (0–100).
-  - `services`: (optional) List of service name patterns to scope the gate to. Use `*` as a wildcard. When specified, the gate evaluates coverage for matching services independently.
-  - `codeowners`: (optional) List of code owner patterns to scope the gate to. Use `*` as a wildcard. When specified, the gate evaluates coverage for matching code owners independently.
-  - `flags`: (optional) List of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. When specified, the gate evaluates coverage for matching flags independently.
+  - `total_coverage_percentage`: The minimum overall coverage percentage for the repository (or for the scoped services or code owners).
+  - `patch_coverage_percentage`: The minimum coverage percentage on code changed in the pull request.
+- `config` (required): Gate configuration options. Supported values:
+  - `threshold` (required): The minimum coverage percentage (0-100).
+  - `services`: (optional) A list of service name patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching service.
+  - `codeowners`: (optional) A list of code owner patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching code owner.
+  - `flags`: (optional) A list of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching flag.
 
 ### Examples
 
