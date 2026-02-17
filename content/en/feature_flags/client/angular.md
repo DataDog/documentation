@@ -158,13 +158,14 @@ await OpenFeature.setContext({
 The OpenFeature Angular SDK provides two main ways to work with feature flags:
 
 1. **Structural Directives** - For template-based conditional rendering
-2. **FeatureFlagService** - For programmatic access with Observables or Signals
+2. **FeatureFlagService** - For programmatic access with **Observables** or **Signals**
 
 ### Boolean flags
 
 Use Boolean flags for on/off or true/false conditions.
 
-{{% collapse-content title="Structural directive" level="h4" expanded=false id="boolean-structural-directive" %}}
+{{< tabs >}}
+{{% tab "Structural directive" %}}
 {{< code-block lang="html" >}}
 <div
   *booleanFeatureFlag="'isFeatureEnabled'; default: true; domain: 'userDomain'; else: booleanFeatureElse; initializing: booleanFeatureInitializing; reconciling: booleanFeatureReconciling"
@@ -175,9 +176,9 @@ Use Boolean flags for on/off or true/false conditions.
 <ng-template #booleanFeatureInitializing> This is shown when the feature flag is initializing. </ng-template>
 <ng-template #booleanFeatureReconciling> This is shown when the feature flag is reconciling. </ng-template>
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Observables" level="h4" expanded=false id="boolean-observables" %}}
+{{% tab "Observables" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
@@ -199,9 +200,9 @@ export class MyComponent {
   isFeatureEnabled$ = this.flagService.getBooleanDetails('my-feature', false);
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Angular Signals" level="h4" expanded=false id="boolean-signals" %}}
+{{% tab "Signals" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -222,13 +223,15 @@ export class MyComponent {
   isFeatureEnabled = toSignal(this.flagService.getBooleanDetails('my-feature', false));
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### String flags
 
 Use string flags to select between multiple variants or configuration strings.
 
-{{% collapse-content title="Structural directive" level="h4" expanded=false id="string-structural-directive" %}}
+{{< tabs >}}
+{{% tab "Structural directive" %}}
 {{< code-block lang="html" >}}
 <div
   *stringFeatureFlag="'themeColor'; value: 'dark'; default: 'light'; domain: 'userDomain'; else: stringFeatureElse; initializing: stringFeatureInitializing; reconciling: stringFeatureReconciling"
@@ -239,9 +242,9 @@ Use string flags to select between multiple variants or configuration strings.
 <ng-template #stringFeatureInitializing> This is shown when the feature flag is initializing. </ng-template>
 <ng-template #stringFeatureReconciling> This is shown when the feature flag is reconciling. </ng-template>
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Observables" level="h4" expanded=false id="string-observables" %}}
+{{% tab "Observables" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
@@ -261,9 +264,9 @@ export class MyComponent {
   currentTheme$ = this.flagService.getStringDetails('theme', 'light');
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Angular Signals" level="h4" expanded=false id="string-signals" %}}
+{{% tab "Signals" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -282,13 +285,15 @@ export class MyComponent {
   currentTheme = toSignal(this.flagService.getStringDetails('theme', 'light'));
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Number flags
 
 Use number flags for numeric values such as limits, percentages, or multipliers.
 
-{{% collapse-content title="Structural directive" level="h4" expanded=false id="number-structural-directive" %}}
+{{< tabs >}}
+{{% tab "Structural directive" %}}
 {{< code-block lang="html" >}}
 <div
   *numberFeatureFlag="'discountRate'; value: 10; default: 5; domain: 'userDomain'; else: numberFeatureElse; initializing: numberFeatureInitializing; reconciling: numberFeatureReconciling"
@@ -299,9 +304,9 @@ Use number flags for numeric values such as limits, percentages, or multipliers.
 <ng-template #numberFeatureInitializing> This is shown when the feature flag is initializing. </ng-template>
 <ng-template #numberFeatureReconciling> This is shown when the feature flag is reconciling. </ng-template>
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Observables" level="h4" expanded=false id="number-observables" %}}
+{{% tab "Observables" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
@@ -321,9 +326,9 @@ export class MyComponent {
   maxItems$ = this.flagService.getNumberDetails('max-items', 10);
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Angular Signals" level="h4" expanded=false id="number-signals" %}}
+{{% tab "Signals" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -342,13 +347,15 @@ export class MyComponent {
   maxItems = toSignal(this.flagService.getNumberDetails('max-items', 10));
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Object flags
 
 Use object flags for structured configuration data.
 
-{{% collapse-content title="Structural directive" level="h4" expanded=false id="object-structural-directive" %}}
+{{< tabs >}}
+{{% tab "Structural directive" %}}
 {{< code-block lang="html" >}}
 <div
   *objectFeatureFlag="'userConfig'; value: { theme: 'dark' }; default: { theme: 'light' }; domain: 'userDomain'; else: objectFeatureElse; initializing: objectFeatureInitializing; reconciling: objectFeatureReconciling"
@@ -361,9 +368,9 @@ Use object flags for structured configuration data.
 <ng-template #objectFeatureInitializing> This is shown when the feature flag is initializing. </ng-template>
 <ng-template #objectFeatureReconciling> This is shown when the feature flag is reconciling. </ng-template>
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Observables" level="h4" expanded=false id="object-observables" %}}
+{{% tab "Observables" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
@@ -383,9 +390,9 @@ export class MyComponent {
   config$ = this.flagService.getObjectDetails<{ timeout: number }>('api-config', { timeout: 5000 });
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
 
-{{% collapse-content title="FeatureFlagService with Angular Signals" level="h4" expanded=false id="object-signals" %}}
+{{% tab "Signals" %}}
 {{< code-block lang="typescript" >}}
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -404,7 +411,8 @@ export class MyComponent {
   config = toSignal(this.flagService.getObjectDetails<{ timeout: number }>('api-config', { timeout: 5000 }));
 }
 {{< /code-block >}}
-{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Additional options
 
