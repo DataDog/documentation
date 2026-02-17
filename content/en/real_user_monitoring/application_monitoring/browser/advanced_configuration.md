@@ -1660,13 +1660,13 @@ This approach uses a build plugin to inject source code context into your bundle
 
 #### Prerequisites and supported setups
 
-- **Separated bundles**: Each microfrontend has its own bundle with distinct file paths
-- **Supported bundler**: A bundler [supported by the Datadog build plugins](https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage)
+- **Separated bundles**: Each microfrontend has its own bundle with distinct file paths, for example, using [module federation][21].
+- **Supported bundler**: A bundler [supported by the Datadog build plugins][22]
 - **Browser SDK**: Browser SDK version v6.27.0 or higher
 
 #### Setup guide
 
-**Step 1 - Configure the build plugin for each microfrontend**
+**Step 1 - Configure the [build plugin][23] for each micro frontend**
 
 In each microfrontend's build configuration, enable source code context injection:
 
@@ -1674,20 +1674,20 @@ In each microfrontend's build configuration, enable source code context injectio
 {{% tab "Webpack" %}}
 
 ```javascript
-const { DatadogWebpackPlugin } = require('@datadog/webpack-plugin');
+const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
-  plugins: [
-    new DatadogWebpackPlugin({
-      rum: {
-        enable: true,
-        sourceCodeContext: {
-          service: 'foo-microfrontend',
-          version: process.env.APP_VERSION || '1.0.0',
-        }
-      }
-    })
-  ]
+    plugins: [
+        new datadogWebpackPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
 };
 ```
 
@@ -1698,17 +1698,80 @@ module.exports = {
 import { datadogVitePlugin } from '@datadog/vite-plugin';
 
 export default {
-  plugins: [
-    datadogVitePlugin({
-      rum: {
-        enable: true,
-        sourceCodeContext: {
-          service: 'foo-microfrontend',
-          version: process.env.APP_VERSION || '1.0.0',
-        }
-      }
-    })
-  ]
+    plugins: [
+        datadogVitePlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+};
+```
+
+{{% /tab %}}
+{{% tab "esbuild" %}}
+
+```javascript
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+    plugins: [
+        datadogEsbuildPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+});
+```
+
+{{% /tab %}}
+{{% tab "Rollup" %}}
+
+```javascript
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+    plugins: [
+        datadogRollupPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
+};
+```
+
+{{% /tab %}}
+{{% tab "Rspack" %}}
+
+```javascript
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+    plugins: [
+        new datadogRspackPlugin({
+            rum: {
+                enable: true,
+                sourceCodeContext: {
+                    service: 'foo-microfrontend',
+                    version: process.env.APP_VERSION || '1.0.0'
+                }
+            }
+        })
+    ]
 };
 ```
 
@@ -1796,7 +1859,7 @@ datadogRum.init({
 ```
 
 {{% /tab %}}
-  {{% tab "CDN async" %}}
+{{% tab "CDN async" %}}
 
 
 ```javascript
@@ -1821,7 +1884,7 @@ window.DD_RUM.onReady(function() {
 ```
 
 {{% /tab %}}
-  {{% tab "CDN sync" %}}
+{{% tab "CDN sync" %}}
 
 
 ```javascript
@@ -1881,3 +1944,6 @@ Some events cannot be attributed to an origin because they do not have an associ
 [18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
 [20]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[21]: https://module-federation.io/
+[22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
+[23]: https://github.com/DataDog/build-plugins
