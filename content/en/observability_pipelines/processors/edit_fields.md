@@ -15,7 +15,7 @@ products:
 
 ## Overview
 
-The remap processor can add, drop, or rename fields within your individual log data. Use this processor to enrich your logs with additional context, remove low-value fields to reduce volume, and standardize naming across important attributes. Select **add field**, **drop field**, or **rename field** in the dropdown menu to get started.
+The Edit Fields processor can add, drop, or rename fields within your individual log data. Use this processor to enrich your logs with additional context, remove low-value fields to reduce volume, and standardize naming across important attributes. Select **add field**, **drop field**, or **rename field** in the dropdown menu to get started.
 
 See the [Remap Reserved Attributes][1] guide on how to use the Edit Fields processor to remap attributes.
 

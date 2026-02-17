@@ -46,11 +46,11 @@ To add a custom parsing rule:
 1. If you want to create a custom rule, select **Custom** and then enter the `source`. The parsing rules are applied to logs with that `source`.
 1. Enter log samples to test the parsing rules.
 1. Enter the rules for parsing the logs. See [Parsing][1] for more information on writing parsing rules with Datadog Grok patterns.<br>**Note**: The `url`, `useragent`, and `csv` filters are not available.
-1. Click **Advanced Settings** if you want to add helper rules. See [Using helper rules to factorize multiple parsing rules][2] for more information.
+1. Click **Advanced Settings** if you want to add helper rules. See [Using helper rules to reuse common patterns][2] for more information.
 1. Click **Add Rule**.
 
 [1]: /logs/log_configuration/parsing/
-[2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-factorize-multiple-parsing-rules
+[2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
 
 {{% observability_pipelines/processors/filter_syntax %}}
 

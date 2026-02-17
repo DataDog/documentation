@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use this processor to add a field name and value of an environment variable to the log message.
+Use this processor to add an environment variable field name and value to the log message.
 
 ## Setup
 
