@@ -135,7 +135,7 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 |---|---|
 | Evaluated on LLM spans | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
-#### How to Use
+#### Configure a Goal Completeness evaluation
 
 This evaluation works by analyzing a session to determine if all user intentions were successfully addressed. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
 
@@ -147,17 +147,13 @@ The span should contain meaningful `input_data` and `output_data` that represent
 
 This evaluation checks whether the agent successfully selected the appropriate tools to address the user’s request. Incorrect or irrelevant tool choices lead to wasted calls, higher latency, and failed tasks.
 
-#### Evaluation Summary
-
 | Evaluation Stage | Evaluation Definition | 
 |---|---|
 | Evaluated on spans with tool calls | Verifies that the tools chosen by the LLM align with the user’s request and the set of available tools. Flags irrelevant or incorrect tool calls. |
 
-#### Example
-
 {{< img src="llm_observability/evaluations/tool_selection_2.png" alt="A tool selection evaluation in LLM Observability" style="width:100%;" >}}
 
-#### How to use
+#### Configure a Tool Selection evaluation
 
 1. Ensure you are running `dd-trace` v3.12+.
 1. Instrument your agent with available tools. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
@@ -220,26 +216,20 @@ triage_agent = Agent(
 
 Even if the right tool is selected, the arguments passed to it must be valid and contextually relevant. Incorrect argument formats (for example, a string instead of an integer) or irrelevant values cause failures in downstream execution.
 
-#### Evaluation summary
-
 | Span kind | Evaluation Definition | 
 |---|---|
 | Evaluated on spans with tool calls | Verifies that arguments provided to a tool are correct and relevant based on the tool schema. Identifies invalid or irrelevant arguments. |
 
-#### Example
-
 {{< img src="llm_observability/evaluations/tool_argument_correctness_2.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
 
-##### Instrumentation
-
-This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][21]** to run this evaluation.  
-
-#### How to use
+#### Configure a Tool Argument Correctness evaluation
 
 1. Install `dd-trace` v3.12+.
 1. Instrument your agent with available tools that require arguments. The example below uses Pydantic AI Agents SDK to illustrate how tools are made available to the agent and to the evaluation:
 
 Enable the ToolArgumentCorrectness evaluation in the Datadog UI by [creating a new evaluation][18] or [editing an existing evaluation][19].
+
+This evaluation is supported in `dd-trace` v3.12+. The example below uses the OpenAI Agents SDK to illustrate how tools are made available to the agent and to the evaluation. See the **[complete code and packages required][21]** to run this evaluation.  
 
 {{< code-block lang="python" >}}
 import os
