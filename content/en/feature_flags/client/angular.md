@@ -21,8 +21,8 @@ The Datadog Feature Flags SDK for Angular is built on [OpenFeature][1], an open 
 
 ## Requirements
 
-* ES2015-compatible web browser (Chrome, Edge, Firefox, etc)
-* Angular version 16+
+* **Angular** version 16 or later
+* **ECMAScript 2015-compatible web browser** such as Chrome, Edge, or Firefox
 
 ## Installation
 
@@ -138,7 +138,7 @@ const provider = new DatadogProvider({
 export class AppModule {}
 ```
 
-### Updating the evaluation context
+### Update the evaluation context
 
 To update the evaluation context after initialization (for example, when a user logs in), use `OpenFeature.setContext()`:
 
@@ -162,7 +162,7 @@ The OpenFeature Angular SDK provides two main ways to work with feature flags:
 
 ### Boolean flags
 
-Use boolean flags for on/off or true/false conditions.
+Use Boolean flags for on/off or true/false conditions.
 
 {{% collapse-content title="Structural directive" level="h4" expanded=false id="boolean-structural-directive" %}}
 {{< code-block lang="html" >}}
@@ -408,7 +408,7 @@ export class MyComponent {
 
 ### Additional options
 
-#### Opting-out of automatic re-rendering
+#### Disable automatic re-rendering
 
 By default, directives re-render when the flag value changes or the context changes. You can disable this behavior:
 
@@ -429,7 +429,7 @@ const flag$ = this.flagService.getBooleanDetails('my-flag', false, 'my-domain', 
 });
 {{< /code-block >}}
 
-#### Consuming evaluation details
+#### Consume evaluation details
 
 You can access the evaluation details in your templates:
 
@@ -444,7 +444,7 @@ You can access the evaluation details in your templates:
 </ng-template>
 {{< /code-block >}}
 
-When the expected flag value is omitted, the template will always be rendered. This can be used to just render the flag value or details without conditional rendering:
+When the expected flag value is omitted, the template is always rendered. This can be used to only render the flag value or details without conditional rendering:
 
 {{< code-block lang="html" >}}
 <div *stringFeatureFlag="'themeColor'; default: 'light'; let value;">
