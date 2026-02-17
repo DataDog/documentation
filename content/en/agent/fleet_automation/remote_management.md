@@ -135,7 +135,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 1. **Choose what to configure**, for example, Datadog Products or Custom Logs.
 1. Click **Next** to configure the product:
       - For **Datadog Products**, select the products (for example, APM, Logs, or NDM) that the target Agents should run.
-      - For **Custom Logs**, add a file path. Then, add the log collection settings using the fields provided or using YAML.
+      - For **Custom Logs**, add a file path. Then, add the log collection settings using the fields provided or using the YAML editor.
 
    {{< img src="/agent/fleet_automation/fa_log_yaml_option.png" alt="The Log configuration page in the Fleet Automation product for configuring custom log collection." style="width:80%;" >}}
 
