@@ -1647,9 +1647,128 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 ## Micro frontend
 
-Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace. To use it, you must be able to extract service and version properties from your application's file paths and filenames.
+The RUM Browser SDK supports micro frontend architectures by attributing events to specific micro frontends using `service` and `version` attributes. A single RUM SDK instance runs at the shell level, with events segmented by `service` and `version` so teams can filter dashboards, set alerts, and track performance per micro frontend.
 
-### How to use it
+Datadog provides two approaches for attributing RUM events to micro frontends:
+
+1. **Automatic attribution (beta)**: Uses a build plugin that injects source code context, eliminating manual stack trace parsing
+2. **Manual attribution**: Uses the `beforeSend` callback to parse stack traces and extract service information
+
+### Automatic service and version attribution (beta)
+
+This approach uses a build plugin to inject source code context into your bundles, which the RUM SDK automatically reads to enrich events with the correct `service` and `version`.
+
+#### Prerequisites and supported setups
+
+- **Separated bundles**: Each microfrontend has its own bundle with distinct file paths
+- **Supported bundler**: A bundler [supported by the Datadog build plugins](https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage)
+- **Browser SDK**: Browser SDK version v6.27.0 or higher
+
+#### Setup guide
+
+**Step 1 - Configure the build plugin for each microfrontend**
+
+In each microfrontend's build configuration, enable source code context injection:
+
+{{< tabs >}}
+{{% tab "Webpack" %}}
+
+```javascript
+const { DatadogWebpackPlugin } = require('@datadog/webpack-plugin');
+
+module.exports = {
+  plugins: [
+    new DatadogWebpackPlugin({
+      rum: {
+        enable: true,
+        sourceCodeContext: {
+          service: 'foo-microfrontend',
+          version: process.env.APP_VERSION || '1.0.0',
+        }
+      }
+    })
+  ]
+};
+```
+
+{{% /tab %}}
+{{% tab "Vite" %}}
+
+```javascript
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+
+export default {
+  plugins: [
+    datadogVitePlugin({
+      rum: {
+        enable: true,
+        sourceCodeContext: {
+          service: 'foo-microfrontend',
+          version: process.env.APP_VERSION || '1.0.0',
+        }
+      }
+    })
+  ]
+};
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Step 2 - Setup the Browser SDK at the shell level**
+
+[Set up Browser Monitoring][4] in your shell application (main entry point).
+
+**Step 3 - Enable source code context**
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+  ...,
+  enableExperimentalFeatures: ['source_code_context']
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+         ...,
+         enableExperimentalFeatures: ['source_code_context']
+    });
+});
+```
+
+{{% /tab %}}
+  {{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && window.DD_RUM.init({
+  ...,
+  enableExperimentalFeatures: ['source_code_context']
+});
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources) with `service` and `version` from the context map. Events that don't match any micro frontend fall back to the shell-level service and version.
+
+#### Event type coverage
+
+- Errors
+- Custom actions
+- XHR and Fetch resources
+- Long animation frame
+- Views
+
+### Manual service and version attribution
 
 In the `beforeSend` property, you can override the service and version properties. To help you identify where the event originated, use the `context.handlingStack` property.
 
@@ -1727,14 +1846,14 @@ window.DD_RUM && window.DD_RUM.init({
 {{% /tab %}}
 {{< /tabs >}}
 
-Any query done in the RUM Explorer can use the service attribute to filter events.
+The regular expression must match your application's file path structure. Adjust the pattern to extract service and version from your bundle URLs. Any query in the RUM Explorer can use the service attribute to filter events.
 
-### Limitations
+#### Limitations
 
-Some events cannot be attributed to an origin, therefore they do not have an associated handling stack. This includes:
+Some events cannot be attributed to an origin because they do not have an associated handling stack:
 
 - Action events collected automatically
-- Resource events other than XHR and Fetch.
+- Resource events other than XHR and Fetch
 - View events (but you can [override default RUM view names][20] instead)
 - CORS and CSP violations
 
