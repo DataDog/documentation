@@ -24,7 +24,7 @@ With routing rules, you can define granular logic to control how alerts reach yo
   - After hours, route critical alerts to paging, and non-critical alerts to chat.
 
 - Delay escalation outside of support hours:
-  - Define [support hours](#support-hours) on an escalation policy action to snooze notifications until the next active window.
+  - Define [support hours](#support-hours) on an escalation policy action to postpone notifications until the next active window.
   - For example, a Page that arrives at 2:00 AM on Saturday creates a case immediately, but does not notify responders until 9:00 AM on Monday.
 
 - Use Dynamic Urgency to automatically detect urgency from the monitor alert:
@@ -61,7 +61,7 @@ Routing rules use [Datadog query syntax][3] and support multiple `if/else` condi
 
 ## Support hours
 
-Support hours let you define time windows during which an escalation policy actively notifies responders. When a Page arrives outside of support hours, Datadog creates the Page immediately but **snoozes** the escalation policy until the next active support hours window. After the snooze period ends, the escalation policy begins executing normally.
+Support hours let you define time windows during which an escalation policy actively notifies responders. When a Page arrives outside of support hours, Datadog creates the Page immediately but **postpones** the escalation policy until the next active support hours window. After the postponement period ends, the escalation policy begins executing normally.
 
 ### How support hours work
 
@@ -69,7 +69,7 @@ Support hours let you define time windows during which an escalation policy acti
 1. Routing rules are evaluated from top to bottom to find a matching rule.
 1. The matching rule's escalation policy action checks the current time against the configured support hours:
    - **Inside support hours**: The escalation policy executes immediately and responders are notified.
-   - **Outside support hours**: The Page is created and the escalation policy is snoozed. Datadog records a timeline entry on the Page indicating the snooze. When support hours resume, the escalation policy begins executing.
+   - **Outside support hours**: The Page is created and the escalation policy is postponed. Datadog records a timeline entry on the Page indicating the postponement. When support hours resume, the escalation policy begins executing.
 
 ### Support hours compared to time restrictions
 
@@ -78,7 +78,7 @@ Routing rules support two types of time-based controls. They serve different pur
 | Feature | What it controls | Behavior outside the time window |
 |---------|-----------------|----------------------------------|
 | **Time restrictions** | When the routing rule **evaluates** | The rule is skipped and the next rule is tried. No Page is created by this rule. |
-| **Support hours** | When the escalation policy **notifies responders** | The Page is created immediately, but notifications are snoozed until the next active window. |
+| **Support hours** | When the escalation policy **notifies responders** | The Page is created immediately, but notifications are postponed until the next active window. |
 
 For example, if your team handles priority 2 alerts and wants to track all alerts but only page responders during business hours, use **support hours**. If your team should not handle certain alerts at all outside of business hours (and another rule or team should handle them instead), use **time restrictions**.
 
@@ -105,7 +105,7 @@ Set a single restriction window:
 - **End day**: Friday, **End time**: 17:00:00
 - **Time zone**: `America/New_York`
 
-Pages that arrive outside this window (for example, at 2:00 AM on Saturday) are snoozed until 9:00 AM on the following Monday.
+Pages that arrive outside this window (for example, at 2:00 AM on Saturday) are postponed until 9:00 AM on the following Monday.
 
 #### Example: Split shift (mornings and afternoons)
 
@@ -119,7 +119,7 @@ Define two restriction windows to cover non-contiguous hours:
 - **Start day**: Monday, **Start time**: 14:00:00
 - **End day**: Friday, **End time**: 18:00:00
 
-Pages that arrive between 12:00 PM and 2:00 PM are snoozed until the afternoon window opens.
+Pages that arrive between 12:00 PM and 2:00 PM are postponed until the afternoon window opens.
 
 ## Best practices
 
