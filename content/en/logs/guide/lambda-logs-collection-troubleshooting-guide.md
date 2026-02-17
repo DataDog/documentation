@@ -12,7 +12,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch` but you can find other possible sources in the table below.
+    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch`.
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
 3. If logs appear in Live Tail but are missing from the Log Explorer, the discrepancy is likely due to one of the following reasons (see the [logs troubleshooting document for details][4]):
    * Your log index has exclusion filters that are actively filtering out these logs.
@@ -22,14 +22,14 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 ## Check the Lambda function Permissions
 
-Permission issues may also be impacting the ability of the forwarder to access log sources. The lambda function uses a resource-based policy (unrelated to the Datadog Integration Role policy) to grant access log sources.
+Permission issues may also be impacting the ability of the forwarder to access log sources. The lambda function uses a resource-based policy (unrelated to the Datadog Integration Role policy) to grant access to log sources.
 
 Verify the forwarder's policy by running the following command:
    ```
    get-policy command aws lambda get-policy --function-name <FUNCTION_NAME>
    ```
 
-This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function. 
+This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function.
 
 <div class="alert alert-danger">
 The Action and Resource elements in the policy document **must exactly match** the specifications in the <a href="/logs/guide/forwarder/?tab=cloudformation#permissions">Datadog Forwarder permissions</a>.
@@ -45,7 +45,7 @@ The Action and Resource elements in the policy document **must exactly match** t
 
     {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
-3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function: 
+3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function:
     * invocations
     * errors
     * logs
@@ -55,7 +55,7 @@ The Action and Resource elements in the policy document **must exactly match** t
 
 ### Viewing Lambda metrics in Datadog
 
-If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag: 
+If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag:
 
 | Metric                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
@@ -98,10 +98,6 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 If Datadog fails to automatically create triggers, follow this troubleshooting checklist:
 
-1. Verify the Forwarder ARN is added in the Log Collection tab of the AWS Integration
-2. Verify the [required permissions][10] have been added to the integration role
-3. If the log source is a Lambda log group, verify if the lambda function has the [extension][11] installed
-4. If the log source is a CloudWatch log group, ensure it does not already have the maximum number of subscribers (2)
 1. Verify that the Forwarder ARN appears in the Log Collection tab of the AWS Integration.
 2. Verify that the [required permissions][10] are assigned to the integration role.
 3. If the log source is a Lambda log group, verify that the lambda function has the [extension][11] installed.
@@ -126,23 +122,22 @@ The lambda forwarder uses the following [environment variables][12] to filter lo
 * INCLUDE_AT_MATCH
 * EXCLUDE_AT_MATCH
 
-You can search for these variables in the forwarder's DEBUG logs, it indicates whether or not certain logs are discarded due to the filter.  
+You can search for these variables in the forwarder's DEBUG logs, which indicates whether or not certain logs are discarded due to the filter.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/help
-[2]: https://docs.datadoghq.com/logs/live_tail/#live-tail-view
+[1]: /help
+[2]: /logs/live_tail/#live-tail-view
 [3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
-[4]: https://docs.datadoghq.com/logs/troubleshooting/
-[5]: https://docs.datadoghq.com/logs/guide/forwarder/?tab=cloudformation#permissions
+[4]: /logs/troubleshooting/
+[5]: /logs/guide/forwarder/?tab=cloudformation#permissions
 [6]: https://console.aws.amazon.com/lambda/home
-[7]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
-[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
-[9]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
-[10]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
-[11] https://docs.datadoghq.com/serverless/libraries_integrations/extension/
-[12] https://docs.datadoghq.com/logs/guide/forwarder/?tab=cloudformation#log-filtering-optional
-
+[7]: /integrations/amazon_lambda/?tab=awsconsole#metrics
+[8]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[9]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
+[10]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[11]: /serverless/libraries_integrations/extension/
+[12]: /logs/guide/forwarder/?tab=cloudformation#log-filtering-optional
