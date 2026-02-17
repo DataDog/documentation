@@ -388,9 +388,9 @@ For usage examples, refer to our [Github repository](https://github.com/DataDog/
 
 ### Verify your setup
 
-After completing the setup, Agentless Scanning does not produce results immediately. First results typically appear within one hour of deployment.
+After completing the setup, Agentless Scanning does not produce results immediately. First results typically appear within 20 minutes of deployment. In rare cases, such as IAM configuration issues, it can take up to 2 hours.
 
-<div class="alert alert-info">If no results appear after two hours, see the <a href="/security/cloud_security_management/troubleshooting/agentless_scanning">Agentless Scanning troubleshooting guide</a>.</div>
+<div class="alert alert-info">If no results appear after 2 hours, see the <a href="/security/cloud_security_management/troubleshooting/agentless_scanning">Agentless Scanning troubleshooting guide</a>.</div>
 
 View scan results in the following locations:
 

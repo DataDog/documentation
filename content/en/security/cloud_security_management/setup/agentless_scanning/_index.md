@@ -53,14 +53,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 ## On-demand scanning
 
-By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API.
-
-This is useful when you need to:
-- Verify a vulnerability has been patched
-- Get immediate results for newly deployed resources
-- Validate security posture before production deployment
-
-For more information, see the [On-Demand Scanning API documentation][14].
+By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API. For more information, see the [On-Demand Scanning API documentation][14].
 
 ## What data is sent to Datadog
 The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
