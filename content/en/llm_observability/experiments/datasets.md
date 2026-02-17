@@ -18,7 +18,7 @@ You can create datasets from production data, CSV files, or manually construct t
 
 {{< tabs >}}
 
-{{% tab "From CSV Files" %}}
+{{% tab "From CSV files" %}}
 
 Create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
 
