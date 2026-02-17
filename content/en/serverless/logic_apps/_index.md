@@ -1,5 +1,5 @@
 ---
-title: Serverless Monitoring for Azure Logic Apps
+title: Serverless Monitoring for Azure Logic Apps (Preview)
 further_reading:
   - link: "/serverless/logic_apps/installation"
     tag: "Documentation"
@@ -9,16 +9,15 @@ further_reading:
     text: "Troubleshoot Serverless Monitoring for Azure Logic Apps"
 ---
 
-Azure Logic Apps is a serverless orchestration service that lets developers create and manage multi-step application workflows in Azure. Datadog provides Azure Logic Apps tracing and logs through the collection of Azure diagnostic logs.
+Azure Logic Apps is a serverless orchestration service that lets developers create and manage multi-step application workflows in Azure. Datadog provides Azure Logic Apps tracing and enhanced metrics through the collection of Azure diagnostic logs.
+
+{{< img src="serverless/logic_apps/logic_apps_trace_example.png" alt="An Azure Logic Apps trace." style="width:100%;" >}}
 
 ### How it works
-Datadog Azure Logic Apps Monitoring uses Azure diagnostic logs sent through the [Datadog Azure Automated Log Forwarding][2]. This service runs in your Azure environment and automatically forwards logs from new Logic Apps to Datadog, providing tracing and log correlation.
-
-### Monitor the overall health of Logic Apps in the Serverless view
-The Serverless view shows key data for your Logic Apps in one place to provide a snapshot of the health of your workflows. You can access a detailed view of each Logic App to see all associated logs and traces within a certain time frame and set monitors for problematic executions.
+Datadog Azure Logic Apps Monitoring uses Azure diagnostic logs sent through the [Datadog Azure Automated Log Forwarding][2]. This service runs in your Azure environment and automatically forwards logs to Datadog. Once the logs reaches Datadog backend, traces and enhanced metrics are generated automatically.
 
 ### Visualize Azure Logic Apps execution traces
-When [Logic Apps tracing is enabled][1], you can view end-to-end traces for a single Logic App execution and its associated logs, errors, and metadata. These traces enable you to identify issues in your workflow logic and reproduce bugs.
+These traces enable you to identify issues and bugs in your Azure Logic Apps workflow.
 
 To get started, follow the [installation instructions][1].
 

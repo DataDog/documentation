@@ -15,7 +15,6 @@ Azure Logic Apps is a fully managed service, and the Datadog Agent cannot be dir
 Datadog collects Logic Apps logs through [Azure Automated Log Forwarding][1]. This service automatically configures diagnostic settings for new Logic Apps to forward logs to Datadog. Datadog uses these ingested logs to generate traces for your Logic App executions.
 
 ## Prerequisites
-- The [Datadog Azure integration][3] must be configured
 - The [Azure Automated Log Forwarding][1] service must be installed
 
 ## Setup
@@ -24,7 +23,7 @@ Datadog collects Logic Apps logs through [Azure Automated Log Forwarding][1]. Th
 
 Follow the instructions in the [Azure Automated Log Forwarding guide][1] to install the service. Once installed, all new Logic Apps will automatically have log forwarding configured to send diagnostic logs to Datadog.
 
-**Note**: The Azure Automated Log Forwarding service creates a diagnostic setting named `datadog_log_forwarding_` on each Logic App. This setting captures workflow execution logs and forwards them to Datadog.
+**Note**: The Azure Automated Log Forwarding service creates a diagnostic setting named `datadog_log_forwarding_<ID>` on each Logic App. This setting captures workflow execution logs and forwards them to Datadog.
 
 ### 2. Configure tags (optional but recommended)
 
@@ -38,7 +37,7 @@ Add `service` and `env` tags to your Logic Apps to organize and filter your work
 
 {{< img src="serverless/logic_apps/tags_configuration.png" alt="Azure Logic App tags configuration showing env and service tags" style="width:100%;" >}}
 
-The `env` tag is required to see traces in Datadog and defaults to `dev` if not set. The `service` tag defaults to the Logic App's name if not set.
+The `env` tag is required to see traces in Datadog and defaults to `dev` if not set. The `service` tag defaults to the Logic App's workflow name if not set.
 
 ### 3. Invoke the workflow
 
@@ -50,7 +49,7 @@ Use Live Search in Datadog APM to verify that traces are being received:
 
 1. Navigate to [APM > Traces][4] in Datadog
 2. Use the query `operation_name:azure.logicapps` to filter for Logic Apps traces
-3. Live Search returns all spans without sampling, so you should see your executions immediately after they complete
+3. Live Search returns all spans without sampling, so you should see your executions after they complete
 
 {{< img src="serverless/logic_apps/apm_live_search.png" alt="Datadog APM Live Search showing azure.logicapps traces" style="width:100%;" >}}
 
@@ -61,7 +60,7 @@ Use Live Search in Datadog APM to verify that traces are being received:
 To control which traces are retained beyond the default live search period, add a retention filter:
 
 1. In Datadog, search for **Retention Filters** (use Cmd+K and type "retention filters")
-2. Click **New Retention Filter**
+2. Click **Add Retention Filter**
 3. Set the filter query to `operation_name:azure.logicapps`
 4. Add any additional filters for your service, such as `service:<SERVICE_NAME>` and `env:<ENV_NAME>`
 5. Configure the retention rate based on your needs
@@ -94,7 +93,7 @@ See [Log Indexes][6] for more information.
 
 ## See your Logic App metrics, logs, and traces in Datadog
 
-After invoking your Logic App, go to the [**Serverless app**][2] in Datadog. Search for `service:<YOUR_LOGIC_APP_NAME>` to see the relevant logs and traces associated with that Logic App. If you set the `service` tag on your Logic App to a custom value, search for `service:<CUSTOM_VALUE>`.
+After invoking your Logic App, go to the [**Serverless app**][2] in Datadog. Search for `service:<CUSTOM_VALUE>` to see the relevant logs and traces associated with that Logic App. If you set the `service` tag on your Logic App to a custom value, search for `service:<CUSTOM_VALUE>`.
 
 If you cannot see your traces, see [Troubleshooting][7].
 
