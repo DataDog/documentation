@@ -1,5 +1,5 @@
 ---
-title: Developer Guides
+title: Extending Datadog Guides
 aliases:
     - /developers/guide/
 
@@ -9,7 +9,7 @@ cascade:
     algolia:
         rank: 20
         category: Guide
-        subcategory: Developer Guides
+        subcategory: Extending Datadog Guides
 ---
 
 {{< whatsnext desc="General:" >}}

@@ -13,7 +13,7 @@ Custom checks, also known as custom Agent checks, enable you to collect metrics 
 
 ### Should you write a custom Agent check or an integration?
 
-Use custom checks to collect metrics from custom applications or unique systems. However, if you are trying to gather metrics from a generally available application, public service, or open source project, Datadog recommends that you [create a full-fledged Agent integration][2]. For more information about deciding how to send your data, see [Developers][3]. To learn how to write an integration, see [Creating New Integrations][2].
+Use custom checks to collect metrics from custom applications or unique systems. However, if you are trying to gather metrics from a generally available application, public service, or open source project, Datadog recommends that you [create a full-fledged Agent integration][2]. For more information about deciding how to send your data, see [Extend Datadog][3]. To learn how to write an integration, see [Creating New Integrations][2].
 
 ## Getting started
 

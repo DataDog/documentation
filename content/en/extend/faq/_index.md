@@ -1,5 +1,5 @@
 ---
-title: Developers FAQ
+title: Extending Datadog FAQ
 aliases:
   - /developers/faq/
   - /developers/faq/hubot-script-request-snapshots-in-chat-using-the-datadog-api

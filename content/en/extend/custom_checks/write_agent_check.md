@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/extend/"
   tag: "Documentation"
-  text: "Developing on Datadog"
+  text: "Extending Datadog"
 ---
 
 ## Overview

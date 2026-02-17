@@ -1,6 +1,6 @@
 ---
-title: Developers
-description: Learn how to develop an integration on Datadog.
+title: Extend Datadog
+description: Learn how to extend Datadog.
 aliases:
 - /developers/
 - /developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog
@@ -24,7 +24,7 @@ cascade:
 
 ## Overview
 
-The Developers section contains reference materials for developing on Datadog. You may want to develop on Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. See the table of [commonly requested technologies](#commonly-requested-technologies) to find the product or integration that may fulfill your needs.
+This section contains reference materials for extending Datadog. You may want to extend Datadog if there is data you want to see in the product that you are not seeing. If this is the case, Datadog may already support the technology you need. See the table of [commonly requested technologies](#commonly-requested-technologies) to find the product or integration that may fulfill your needs.
 
 ## Commonly requested technologies
 

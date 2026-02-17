@@ -924,7 +924,7 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
-    - name: Developers
+    - name: Extend Datadog
       url: extend/
       pre: dev-code
       identifier: dev_tools
