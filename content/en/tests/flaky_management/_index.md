@@ -23,7 +23,7 @@ The [Flaky Tests Management][1] page provides a centralized view to track, triag
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create cases and Jira issues to track work toward fixes.
 
-{{< img src="tests/flaky_management.png" alt="Overview of the Flaky Tests Management UI" style="width:100%;" >}}
+{{< img src="tests/flaky_management-2.png" alt="Overview of the Flaky Tests Management UI" style="width:100%;" >}}
 
 ## Change a flaky test's status
 
@@ -42,9 +42,9 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
 
-1. Click the **Policies** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][13] in Software Delivery settings.
+1. Click the **Policy Settings** button at the upper right of the Flaky Management page. You can also navigate to [**Flaky Test Policies**][13] in Software Delivery settings.
 2. Search for and select the repository you want to configure. This opens the **Edit Policies** flyout.
-    {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
+    {{< img src="tests/flaky-policies-3.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
 
 3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
    <table>
@@ -160,7 +160,7 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
 
-{{< img src="tests/bits_ai_flaky_test_fixes.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
+{{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
 
 ### Setup
 
@@ -199,7 +199,7 @@ Set up notifications to track changes to your flaky tests. Whenever a user or a 
 
 Notifications are not sent immediately; they are batched every few minutes to reduce noise.
 
-{{< img src="tests/flaky_management_notifications_settings.png" alt="Notifications settings UI" style="width:100%;" >}}
+{{< img src="tests/flaky_management_notifications_settings-2.png" alt="Notifications settings UI" style="width:100%;" >}}
 
 ## Compatibility
 

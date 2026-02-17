@@ -6612,6 +6612,97 @@ menu:
           - UpdateStatus
         unstable: []
         order: 4
+    - name: Create ServiceNow ticket for case
+      url: '#create-servicenow-ticket-for-case'
+      identifier: case-management-create-servicenow-ticket-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseServiceNowTicket
+        unstable:
+          - v2
+        order: 26
+    - name: Update case project
+      url: '#update-case-project'
+      identifier: case-management-update-case-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - MoveCaseToProject
+        unstable:
+          - v2
+        order: 21
+    - name: Create investigation notebook for case
+      url: '#create-investigation-notebook-for-case'
+      identifier: case-management-create-investigation-notebook-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseNotebook
+        unstable:
+          - v2
+        order: 27
+    - name: Create Jira issue for case
+      url: '#create-jira-issue-for-case'
+      identifier: case-management-create-jira-issue-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseJiraIssue
+        unstable:
+          - v2
+        order: 23
+    - name: Link existing Jira issue to case
+      url: '#link-existing-jira-issue-to-case'
+      identifier: case-management-link-existing-jira-issue-to-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkJiraIssueToCase
+        unstable:
+          - v2
+        order: 24
+    - name: Remove Jira issue link from case
+      url: '#remove-jira-issue-link-from-case'
+      identifier: case-management-remove-jira-issue-link-from-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlinkJiraIssue
+        unstable:
+          - v2
+        order: 25
+    - name: Link incident to case
+      url: '#link-incident-to-case'
+      identifier: case-management-link-incident-to-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkIncident
+        unstable:
+          - v2
+        order: 22
     - name: Update case priority
       url: '#update-case-priority'
       identifier: case-management-update-case-priority
@@ -7507,6 +7598,36 @@ menu:
         operationids:
           - ListCloudflareAccounts
         unstable: []
+        order: 1
+    - name: Code Coverage
+      url: /api/latest/code-coverage/
+      identifier: code-coverage
+      generated: true
+    - name: Get code coverage summary for a commit
+      url: '#get-code-coverage-summary-for-a-commit'
+      identifier: code-coverage-get-code-coverage-summary-for-a-commit
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageCommitSummary
+        unstable:
+          - v2
+        order: 2
+    - name: Get code coverage summary for a branch
+      url: '#get-code-coverage-summary-for-a-branch'
+      identifier: code-coverage-get-code-coverage-summary-for-a-branch
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageBranchSummary
+        unstable:
+          - v2
         order: 1
     - name: Confluent Cloud
       url: /api/latest/confluent-cloud/
@@ -9878,6 +9999,30 @@ menu:
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
       generated: true
+    - name: Update the tags for an interface
+      url: '#update-the-tags-for-an-interface'
+      identifier: network-device-monitoring-update-the-tags-for-an-interface
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateInterfaceUserTags
+        unstable: []
+        order: 7
+    - name: List tags for an interface
+      url: '#list-tags-for-an-interface'
+      identifier: network-device-monitoring-list-tags-for-an-interface
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInterfaceUserTags
+        unstable: []
+        order: 6
     - name: Update the tags for a device
       url: '#update-the-tags-for-a-device'
       identifier: network-device-monitoring-update-the-tags-for-a-device

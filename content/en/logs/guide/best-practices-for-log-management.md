@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-
+description: 'Best practices for managing and monitoring your logs efficiently in Datadog.'
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
@@ -16,6 +16,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
       tag: "Blog"
       text: "Best practices for managing Datadog organizations at scale"
+    - link: "https://www.youtube.com/watch?v=2OEzAE7c2c0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=1&pp=iAQB"
+      tag: "Video"
+      text: "Datadog Tips & Tricks: Improve log utilization with Datadog log exclusion filters"
 algolia:
   tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---

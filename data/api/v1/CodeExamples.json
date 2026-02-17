@@ -905,6 +905,11 @@
   "CreateSLO": [
     {
       "group": "service_level_objectives",
+      "suffix": "_512760759",
+      "description": "Create a new metric SLO object using sli_specification returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
       "suffix": "_3765703239",
       "description": "Create a time-slice SLO object returns \"OK\" response"
     },

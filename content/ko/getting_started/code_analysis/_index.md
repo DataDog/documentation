@@ -91,8 +91,6 @@ GitHub 리포지토리를 사용하는 경우, [GitHub 통합][103]을 설정하
 
 Datadog에 결과를 업로드하려면 [Datadog API 키 및 애플리케이션 키][110]가 있어야 합니다. 
 
-`dd_service` 필드에 서비스 또는 라이브러리 이름을 지정합니다(예: `shopist`).
-
 ### GitHub 작업
 
 CI 워크플로의 일부로 Static Analysis 및 Software Composition Analysis 스캔을 실행하도록 GitHub 작업을 구성할 수 있습니다.
@@ -110,15 +108,13 @@ jobs:
     name: Datadog Static Analyzer
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: Check code meets quality and security standards
       id: datadog-static-analysis
-      uses: DataDog/datadog-static-analyzer-github-action@v1
+      uses: DataDog/datadog-static-analyzer-github-action@v3
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
         dd_site: datadoghq.com
         cpu_count: 2
 ```
@@ -136,15 +132,13 @@ jobs:
     name: Datadog SBOM Generation and Upload
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: Check imported libraries are secure and compliant
       id: datadog-software-composition-analysis
       uses: DataDog/datadog-sca-github-action@main
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
         dd_site: datadoghq.com
 ```
 
@@ -177,7 +171,7 @@ mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 /usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # 결과 업로드
-datadog-ci sarif upload /tmp/report.sarif --service "shopist" --env "ci"
+datadog-ci sarif upload /tmp/report.sarif
 ```
 
 #### Software Composition Analysis
@@ -207,7 +201,7 @@ chmod 755 /osv-scanner/osv-scanner
 /osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
 # 결과 업로드
-datadog-ci sbom upload --service "shopist" --env "ci" /tmp/sbom.json
+datadog-ci sbom upload /tmp/sbom.json
 ```
 
 본 스크립트를 구성한 후 기본 브랜치에서 리포지토리 분석을 실행합니다. 그러면 **Repositories** 페이지에 결과가 표시되기 시작합니다.

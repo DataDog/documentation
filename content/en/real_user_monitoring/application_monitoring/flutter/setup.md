@@ -103,8 +103,8 @@ These constraints are usually held in your `android/app/build.gradle` file, or i
 For Web, add the following to your `index.html` under the `head` tag:
 
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_logs_cdn_path >}}"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_rum_cdn_path >}}"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_logs_cdn_path >}}" crossorigin></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_rum_cdn_path >}}" crossorigin></script>
 ```
 
 This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchronous CDN-delivered version of the Browser SDK is the only version supported by the Datadog Flutter Plugin.
