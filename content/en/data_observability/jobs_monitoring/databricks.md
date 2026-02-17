@@ -35,7 +35,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. As a **Databricks account admin**, login to the Databricks Account Console ([AWS][28], [Azure][29]).
 1. Click on **User Management** in the left menu. Under the **Service principals** tab, click **Add service principal**.
 
-      **Note**: If you use Databricks on Azure, select Databricks Managed when you add the service principal. 
+      **IMPORTANT:** For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT currently support "Microsoft Entra ID managed" service principals.
 1. Under the **Credentials & secrets** tab, click **Generate secret**.
    1. Set **Lifetime (days)** to the maximum value allowed (730). 
    1. Click **Generate**. 
