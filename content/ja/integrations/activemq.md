@@ -1,54 +1,111 @@
 ---
 app_id: activemq
+app_uuid: ab0b15e8-b7ae-4570-bde2-433a079cdb83
+assets:
+  dashboards:
+    activemq: assets/dashboards/activemq_dashboard.json
+    artemis: assets/dashboards/artemis_dashboard.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - activemq.queue.size
+      - activemq.artemis.queue.message_count
+      metadata_path: metadata.csv
+      prefix: activemq.
+    process_signatures:
+    - activemq
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 40
+    source_type_name: ActiveMQ
+  monitors:
+    Host is running out of disk space: assets/monitors/activemq_artemis_high_disk_store.json
+    Number of unrouted messages is high: assets/monitors/activemq_artemis_unrouted_messages.json
+  saved_views:
+    activemq_processes: assets/saved_views/activemq_processes.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - log collection
 - message queues
-custom_kind: integration
-description: ブローカーやキュー、プロデューサー、コンシューマーなどのメトリクスを収集します。
-further_reading:
-- link: 'https://www.datadoghq.com/blog/activemq-architecture-and-metrics '
-  tag: ブログ
-  text: ActiveMQ のアーキテクチャと主要メトリクス
-- link: 'https://www.datadoghq.com/blog/monitor-activemq-metrics-performance '
-  tag: ブログ
-  text: ActiveMQ ブログ
+custom_kind: インテグレーション
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: activemq
+integration_id: activemq
+integration_title: ActiveMQ
 integration_version: 5.0.0
-media: []
+is_public: true
+manifest_version: 2.0.0
+name: activemq
+public_title: ActiveMQ
+short_description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
 supported_os:
 - linux
 - windows
 - macos
-title: ActiveMQ
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::Message Queues
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
+  support: README.md#Support
+  title: ActiveMQ
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+
+
 ## 概要
 
-ActiveMQ チェックは、ブローカー、キュー、プロデューサー、コンシューマーなどのメトリクスを収集します。
+ActiveMQ チェックは、ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集します。
 
-**注:** このチェックは ActiveMQ Artemis (将来の ActiveMQ バージョン `6`) もサポートしており、メトリクスは `activemq.artemis` ネームスペースで報告されます。このインテグレーションが提供するメトリクスの一覧は、[metadata.csv](https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv) を参照してください。
+**注:** このチェックは ActiveMQ Artemis (今後の ActiveMQ バージョン `6`) もサポートし、`activemq.artemis` ネームスペースのメトリクスを報告します。このインテグレーションで提供されるメトリクスのリストについては、 [metadata.csv][1] をご参照ください。
 
-**注:** ActiveMQ バージョンが 5.8.0 より古い場合は、[Agent 5.10.x リリース時のサンプル ファイル](https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example) を参照してください。
+**注**: バージョン 5.8.0 以前の ActiveMQ を実行している場合は、[Agent 5.10.x リリースのサンプルファイル][2]を参照してください。
 
 ## セットアップ
 
 ### インストール
 
-Agent の ActiveMQ チェックは [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) パッケージに含まれているため、ActiveMQ ノードに追加でインストールする必要はありません。
+Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含まれています。ActiveMQ ノードに追加でインストールする必要はありません。
 
-このチェックは、[JMXFetch](https://github.com/DataDog/jmxfetch) を利用して JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各ノードに JVM が必要です。Datadog では Oracle 提供の JVM の使用を推奨しています。
+チェックは、[JMXFetch][4] を使って JMX からメトリクスを収集します。Agent が JMXFetch を実行できるように、各ノードで JVM が必要です。Datadog は、Oracle が提供する JVM の使用を推奨しています。
 
-### 設定
+### 構成
 
 {{< tabs >}}
-
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 #### ホスト
 
-ホスト上で稼働している Agent 向けにこのチェックを設定するには、次の手順を行います。
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. **ActiveMQ サーバーで [JMX Remote が有効](https://activemq.apache.org/jmx.html) になっていることを確認してください。**
-
-1. Agent が ActiveMQ に接続できるように設定します。[Agent の構成ディレクトリ](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) 直下の `conf.d/` フォルダーにある `activemq.d/conf.yaml` を編集してください。利用可能な設定オプションの全一覧は、[activemq.d/conf.yaml のサンプル](https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example) を参照してください。デフォルトで収集されるメトリクスは、[`metrics.yaml` ファイル](https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml) に記載されています。
+1. **ActiveMQ サーバーで [JMX Remote が有効になっている][1]ことを確認します。**
+2. ActiveMQ に接続するように Agent を構成します。[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダーの `activemq.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル activemq.d/conf.yaml][3] を参照してください。デフォルトで収集されるメトリクスのリストについては、[`metrics.yaml` ファイル][4]を参照してください。
 
    ```yaml
    init_config:
@@ -63,19 +120,19 @@ Agent の ActiveMQ チェックは [Datadog Agent](https://app.datadoghq.com/acc
        name: activemq_instance
    ```
 
-1. [Agent を再起動](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) してください。
+3. [Agent を再起動します][5]。
 
 ##### ログ収集
 
-_Agent バージョン >6.0 で利用可能_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Datadog Agent ではログ収集がデフォルトで無効になっているため、`datadog.yaml` ファイルで有効化してください:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-1. ActiveMQ のログ収集を開始するには、`activemq.d/conf.yaml` ファイルに次の設定ブロックを追加します:
+2. ActiveMQ のログ収集を開始するには、次のコンフィギュレーションブロックを `activemq.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -89,15 +146,19 @@ _Agent バージョン >6.0 で利用可能_
        service: "<SERVICE_NAME>"
    ```
 
-1. [Agent を再起動](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) してください。
+3. [Agent を再起動します][5]。
 
+[1]: https://activemq.apache.org/jmx.html
+[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
+[4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
-コンテナ化環境の場合は、以下のパラメーターの適用方法について [Autodiscovery インテグレーション テンプレート](https://docs.datadoghq.com/containers/guide/autodiscovery-with-jmx/?tab=containeragent) を参照してください。
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 ##### メトリクスの収集
 
@@ -109,86 +170,156 @@ _Agent バージョン >6.0 で利用可能_
 
 ##### ログ収集
 
-_Agent バージョン >6.0 で利用可能_
+_Agent バージョン 6.0 以降で利用可能_
 
-Datadog Agent では、ログ収集はデフォルトで無効になっています。有効化するには、[Kubernetes ログ収集](https://docs.datadoghq.com/agent/kubernetes/log/) を参照してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
 | パラメーター      | 値                                                  |
 | -------------- | ------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "activemq", "service": "<YOUR_APP_NAME>"}` |
 
+[1]: https://docs.datadoghq.com/ja/containers/guide/autodiscovery-with-jmx/?tab=containeragent
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ### 検証
 
-[Agent の status サブコマンドを実行](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) し、出力の Checks セクションに `activemq` が表示されていることを確認してください。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `activemq` を探します。
 
 ## 収集データ
 
 ### メトリクス
-
-| | |
-| --- | --- |
-| **activemq.artemis.address.bytes_per_page** <br>(gauge) | (Artemis のみ) このアドレスにおける 1 ページあたりの使用バイト数。<br>_表示単位: byte_ |
-| **activemq.artemis.address.number_of_messages** <br>(rate) | (Artemis のみ) 配信中のメッセージを含む、キュー上のメッセージ合計。<br>_表示単位: message_ |
-| **activemq.artemis.address.pages_count** <br>(gauge) | (Artemis のみ) このアドレスで使用されているページ数。<br>_表示単位: page_ |
-| **activemq.artemis.address.routed_messages** <br>(rate) | (Artemis のみ) 1 つ以上のバインディングにルーティングされたメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.artemis.address.size** <br>(gauge) | (Artemis のみ) このアドレスにバインドされている全キューが使用している推定バイト数。ページングやブロッキング制御に使用されます。<br>_表示単位: byte_ |
-| **activemq.artemis.address.unrouted_messages** <br>(rate) | (Artemis のみ) どのバインディングにもルーティングされなかったメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.artemis.address_memory_usage** <br>(gauge) | (Artemis のみ) ブローカー上の全アドレスにおける、インメモリ メッセージの使用メモリ量。<br>_表示単位: byte_ |
-| **activemq.artemis.address_memory_usage_pct** <br>(gauge) | (Artemis のみ) ブローカー上の全アドレスの使用メモリ量を、global-max-size に対する割合で表したもの。<br>_表示単位: percent_ |
-| **activemq.artemis.connection_count** <br>(gauge) | (Artemis のみ) このサーバーに接続しているクライアント数。<br>_表示単位: connection_ |
-| **activemq.artemis.disk_store_usage_pct** <br>(gauge) | (Artemis のみ) ディスク ストアの総使用量の割合。<br>_表示単位: percent_ |
-| **activemq.artemis.max_disk_usage** <br>(gauge) | (Artemis のみ) ディスク使用率の上限(%)。<br>_表示単位: percent_ |
-| **activemq.artemis.queue.consumer_count** <br>(gauge) | (Artemis のみ) このキューからメッセージを消費しているコンシューマー数。|
-| **activemq.artemis.queue.max_consumers** <br>(gauge) | (Artemis のみ) このキューで同時に許可されるコンシューマー数の上限。|
-| **activemq.artemis.queue.message_count** <br>(gauge) | (Artemis のみ) 現在このキューに存在するメッセージ数 (スケジュール済み、ページング中、配信中を含む) (レート)。<br>_表示単位: message_ |
-| **activemq.artemis.queue.messages_acknowledged** <br>(rate) | (Artemis のみ) キュー作成以降、このキューで ACK されたメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.artemis.queue.messages_added** <br>(rate) | (Artemis のみ) キュー作成以降、このキューに追加されたメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.artemis.queue.messages_expired** <br>(rate) | (Artemis のみ) キュー作成以降、このキューで期限切れになったメッセージ数(レート)。<br>_表示単位: message_ |
-| **activemq.artemis.queue.messages_killed** <br>(rate) | (Artemis のみ) キュー作成以降、最大配信試行回数を超えたために削除されたメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.artemis.total_connection_count** <br>(rate) | (Artemis のみ) サーバー起動以降、このサーバーに接続したクライアント数 (レート)。<br>_表示単位: connection_ |
-| **activemq.artemis.total_consumer_count** <br>(rate) | (Artemis のみ) サーバー上の全キューでメッセージを消費しているコンシューマー数 (レート)。|
-| **activemq.artemis.total_message_count** <br>(rate) | (Artemis のみ) サーバー上の全キューに存在するメッセージ数 (レート)。<br>_表示単位: connection_ |
-| **activemq.artemis.total_messages_acknowledged** <br>(rate) | (Artemis のみ) サーバー起動以降、全キューで ACK されたメッセージ数 (レート)。<br>_表示単位: connection_ |
-| **activemq.artemis.total_messages_added** <br>(rate) | (Artemis のみ) サーバー起動以降、このサーバーに送信されたメッセージ数 (レート)。<br>_表示単位: connection_ |
-| **activemq.broker.memory_pct** <br>(gauge) | 使用中メモリの割合。<br>_表示単位: percent_ |
-| **activemq.broker.store_pct** <br>(gauge) | 使用中ストアの割合。<br>_表示単位: percent_ |
-| **activemq.broker.temp_pct** <br>(gauge) | 使用中の一時領域の割合。<br>_表示単位: percent_ |
-| **activemq.queue.avg_enqueue_time** <br>(gauge) | メッセージがキューに滞留していた時間 (ms) の平均。<br>_表示単位: millisecond_ |
-| **activemq.queue.consumer_count** <br>(gauge) | 接続中のコンシューマー数。|
-| **activemq.queue.dequeue_count** <br>(gauge) | デキューされているメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.queue.dispatch_count** <br>(gauge) | ディスパッチされているメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.queue.enqueue_count** <br>(gauge) | エンキューされているメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.queue.expired_count** <br>(gauge) | 期限切れになっているメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.queue.in_flight_count** <br>(gauge) | 処理中 (in flight) のメッセージ数 (レート)。<br>_表示単位: message_ |
-| **activemq.queue.max_enqueue_time** <br>(gauge) | メッセージがキューに滞留していた時間 (ms) の最大値。<br>_表示単位: millisecond_ |
-| **activemq.queue.memory_pct** <br>(gauge) | 現在使用中のメモリの割合。<br>_表示単位: percent_ |
-| **activemq.queue.min_enqueue_time** <br>(gauge) | メッセージがキューに滞留していた時間 (ms) の最小値。<br>_表示単位: millisecond_ |
-| **activemq.queue.producer_count** <br>(gauge) | 接続中のプロデューサー数。|
-| **activemq.queue.size** <br>(gauge) | キューに残っているメッセージ数。<br>_表示単位: message_ |
+{{< get-metrics-from-git "activemq" >}}
+ActiveMQ Artemis フレーバーに関連付けられたメトリクスは、メトリクス名に `artemis` が含まれています。その他すべては ActiveMQ "classic" に報告されます。
 
 ### イベント
 
 ActiveMQ チェックには、イベントは含まれません。
 
-### サービス チェック
+### サービスチェック
+{{< get-service-checks-from-git "activemq" >}}
 
-**activemq.can_connect**
-
-監視対象の ActiveMQ インスタンスに Agent が接続できず、メトリクスを収集できない場合は `CRITICAL` を返します。メトリクスが 1 つも収集できない場合は `WARNING`、それ以外は `OK` です。
-
-_ステータス: ok, critical, warning_
 
 ## トラブルシューティング
 
-お困りの場合は、[Datadog サポート](https://docs.datadoghq.com/help/) までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
-役立つドキュメント、リンク、記事:
+お役に立つドキュメント、リンクや記事:
 
-- [ActiveMQ のアーキテクチャと主要メトリクス](https://www.datadoghq.com/blog/activemq-architecture-and-metrics)
-- [ActiveMQ のメトリクスとパフォーマンスを監視する](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance)
+- [ActiveMQ のアーキテクチャとキーメトリクス][7]
+- [ActiveMQ のメトリクスとパフォーマンスの監視][8]
+
+
+
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
+## ActiveMQ XML インテグレーション
+
+## 概要
+
+ActiveMQ XML からメトリクスをリアルタイムで取得して、
+
+- ActiveMQ XML の状態を視覚化して監視します。
+- ActiveMQ XML のフェイルオーバーやイベントの通知を受けます。
+
+## セットアップ
+
+### インストール
+
+ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれているので、サーバーに別途インストールする必要はありません。
+
+### 構成
+
+ホスト上で実行されている Agent に対してこのチェックを構成するには、以下の手順に従ってください。コンテナ環境については、[コンテナ化](#containerized)セクションを参照してください。
+
+<!-- xxx tabs xxx -->
+<!-- xxx tab "Host" xxx -->
+
+#### ホスト
+
+ホストで実行中の Agent に対してこのチェックを構成するには
+
+1. ご使用の統計 `url` で、[Agent のコンフィギュレーションディレクトリ][9]のルートにある `conf.d/` フォルダーの `activemq_xml.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル activemq_xml.d/conf.yaml][10] を参照してください。
+
+   **注**: ActiveMQ XML インテグレーションでは[カスタムメトリクス][11]を送信することができますが、これはお客様の[請求][12]に影響します。デフォルトでは、メトリクス数は 350 に制限されています。メトリクスの追加が必要な場合は、[Datadog のサポートチーム][6]にお問い合わせください。
+
+2. [Agent を再起動します][13]。
+
+##### ログ収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. ActiveMQ のログ収集を開始するには、次のコンフィギュレーションブロックを `activemq_xml.d/conf.yaml` または `activemq.d/conf.yaml` ファイルに追加します。
+
+   ```yaml
+   logs:
+     - type: file
+       path: "<ACTIVEMQ_BASEDIR>/data/activemq.log"
+       source: activemq
+       service: "<SERVICE_NAME>"
+     - type: file
+       path: "<ACTIVEMQ_BASEDIR>/data/audit.log"
+       source: activemq
+       service: "<SERVICE_NAME>"
+   ```
+
+3. [Agent を再起動します][13]。
+
+<!-- xxz tab xxx -->
+<!-- xxx tab "コンテナ化" xxx -->
+
+#### コンテナ化
+
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][14]のガイドを参照してください。
+
+<!-- xxz tab xxx -->
+<!-- xxz tabs xxx -->
+
+### 検証
+
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `activemq_xml` を検索します。
+
+## 収集データ
+
+### メトリクス
+{{< get-metrics-from-git "activemq-xml" >}}
+
+
+### イベント
+
+ActiveMQ XML チェックには、イベントは含まれません。
+
+### サービスチェック
+
+ActiveMQ XML チェックには、サービスのチェック機能は含まれません。
+
+## トラブルシューティング
+
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+
+## その他の参考資料
+
+- [ActiveMQ のメトリクスとパフォーマンスの監視][8]
+
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv
+[2]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://github.com/DataDog/jmxfetch
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/
+[7]: https://www.datadoghq.com/blog/activemq-architecture-and-metrics
+[8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[10]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/datadog_checks/activemq_xml/data/conf.yaml.example
+[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
+[12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
+[13]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[14]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

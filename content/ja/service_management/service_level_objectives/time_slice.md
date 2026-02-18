@@ -6,9 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/define-and-manage-slos/
   tag: ブログ
   text: Datadog で SLO を管理するためのベスト プラクティス
-- link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
-  tag: ブログ
-  text: Improve SLO accuracy and performance with Datadog Synthetic Monitoring
 title: Time Slice SLO
 ---
 

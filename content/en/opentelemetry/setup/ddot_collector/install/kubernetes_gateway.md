@@ -742,10 +742,7 @@ metadata:
   name: otel-collector-k8s-resolver
 rules:
 - apiGroups: [""]
-  resources: ["endpoints"] # for v0.139.0 and before
-  verbs: ["get", "watch", "list"]
-- apiGroups: ["discovery.k8s.io"]
-  resources: ["endpointslices"] # for v0.140.0 and after
+  resources: ["endpoints"]
   verbs: ["get", "watch", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -788,10 +785,7 @@ datadog:
       create: true
       rules:
         - apiGroups: [""]
-          resources: ["endpoints"] # for v0.139.0 and before
-          verbs: ["get", "watch", "list"]
-        - apiGroups: ["discovery.k8s.io"]
-          resources: ["endpointslices"] # for v0.140.0 and after
+          resources: ["endpoints"]
           verbs: ["get", "watch", "list"]
     config: |
       receivers:

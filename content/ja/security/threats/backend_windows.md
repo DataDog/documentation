@@ -1,14 +1,14 @@
 ---
-description: Workload Protection Windows バックエンドイベントの JSON スキーマドキュメント
+description: CSM Threats Windows バックエンドイベントの JSON スキーマドキュメント
 disable_edit: true
-title: Workload Protection Windows イベント形式
+title: CSM Threats Windows イベント形式
 ---
 <!-- https://github.com/DataDog/datadog-agent から取得 --> 
 
 
 <!-- このファイルは自動生成されています。scripts/templates フォルダーにあるファイルを編集してください -->
 
-Windows 向けの Workload Protection イベントには、以下の JSON スキーマがあります:
+Windows 向けの CSM Threats イベントには、以下の JSON スキーマがあります:
 
 
 {{< code-block lang="json" collapsible="true" filename="BACKEND_EVENT_JSON_SCHEMA" >}}

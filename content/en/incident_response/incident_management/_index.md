@@ -14,21 +14,21 @@ further_reading:
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to improve your Incident Management'
-  - link: 'https://www.datadoghq.com/blog/mobile-incident-management-datadog/'
+  - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
     tag: 'Blog'
-    text: 'Manage and resolve incidents on the go with the Datadog Mobile App'
+    text: 'More efficient pair programming with Datadog CoScreen'
   - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'
-  - link: "https://www.datadoghq.com/blog/incident-response-with-datadog/"
+  - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
     tag: "Blog"
-    text: "Incident Management with Datadog"
+    text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
   - link: "https://www.datadoghq.com/blog/datadog-service-management/"
     tag: "Blog"
     text: "Ensure high service availability with Datadog Service Management"
-  - link: "https://www.datadoghq.com/blog/how-datadog-manages-incidents/"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
     tag: "Blog"
-    text: "How we manage incidents at Datadog"
+    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
   - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
     tag: "Blog"
     text: "Unify remediation and communication with Datadog Incident Response"
