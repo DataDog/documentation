@@ -75,7 +75,7 @@
         "prefix": ";;version",
         "body": [
             "<!-- Version must meet ${1:version} -->",
-            "{% if semverIsAtLeast($${2:trait_id}, \"${1:version}\") %}",
+            "{% if semverIsAtLeast($${2:semver_trait_id}, \"${1:version}\") %}",
             "${3:Content shown if version is met}",
             "{% /if %}",
             "<!-- ends  ${1:version} -->"
