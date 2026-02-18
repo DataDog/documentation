@@ -21,7 +21,7 @@ Datadog collects Logic Apps logs through [Azure Automated Log Forwarding][1]. Th
 
 ### 1. Install Datadog Azure Automated Log Forwarding
 
-Follow the instructions in the [Azure Automated Log Forwarding guide][1] to install the service. Once installed, all new Logic Apps will automatically have log forwarding configured to send diagnostic logs to Datadog.
+Follow the instructions in the [Azure Automated Log Forwarding guide][1] to install the service and setup tags for filtering the intended resource logs. Once installed, all new Logic Apps will automatically have log forwarding configured to send diagnostic logs to Datadog.
 
 **Note**: The Azure Automated Log Forwarding service creates a diagnostic setting named `datadog_log_forwarding_<ID>` on each Logic App. This setting captures workflow execution logs and forwards them to Datadog.
 
