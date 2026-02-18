@@ -122,7 +122,7 @@ aws ecs create-service --cluster <CLUSTER_NAME> \
 
 ### Metrics collection
 
-To enable integrations, add Docker Label Annotations to your application containers in the ECS task definition.
+To enable integrations, add Docker label annotations to your application containers in the ECS task definition.
 
 #### Add an integration
 
@@ -203,7 +203,7 @@ aws ecs update-service --cluster <CLUSTER_NAME> \
 #### Examples
 
 {{< tabs >}}
-{{% tab "Redis - Web UI" %}}
+{{% tab "AWS Console" %}}
 Use the following table to enter the Docker labels with the [AWS Web Console][1] for a Redis container:
 
 | Key                           | Value                                  |
@@ -214,8 +214,8 @@ Use the following table to enter the Docker labels with the [AWS Web Console][1]
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
-{{% tab "Redis - AWS CLI" %}}
-Use the following JSON under `containerDefinitions` to create a Redis container through the [AWS CLI][1]:
+{{% tab "AWS CLI" %}}
+Use the following JSON under `containerDefinitions` to configure a Redis container with Docker labels through the [AWS CLI][1]:
 
 ```json
 {
