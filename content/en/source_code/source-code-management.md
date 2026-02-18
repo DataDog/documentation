@@ -96,7 +96,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

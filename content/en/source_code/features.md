@@ -232,8 +232,8 @@ To disable PR comments for Test Optimization, go to the [Test Optimization Advan
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]: /source_code/source-code-manager/
+[10]: /source_code/source-code-management/

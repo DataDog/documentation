@@ -41,11 +41,11 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 {{% sci-docker %}}
 
-#### Option 2: Datadog Tracing Library
+#### Option 2: Datadog tracing library
 
 {{% sci-dd-tracing-library %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -53,15 +53,15 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
-#### Option 1: Datadog Tooling
+#### Option 1: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: Datadog Tracing Library
+#### Option 2: Datadog tracing library
 
 {{% sci-dd-tracing-library %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -69,11 +69,11 @@ If you are using Serverless, you have three options depending on your serverless
 
 If you are using a host, you have two options.
 
-#### Option 1: Datadog Tracing Library
+#### Option 1: Datadog tracing library
 
 {{% sci-dd-tracing-library %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -96,11 +96,11 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 {{% sci-docker %}}
 
-#### Option 2: Setuptools or Unified Python Project Settings File
+#### Option 2: Setuptools or unified Python project settings file
 
 {{% sci-dd-setuptools-unified-python %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -111,15 +111,15 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
-#### Option 1: Datadog Tooling
+#### Option 1: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: Setuptools or Unified Python Project Settings File
+#### Option 2: Setuptools or unified Python project settings file
 
 {{% sci-dd-setuptools-unified-python %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -127,11 +127,11 @@ If you are using Serverless, you have three options depending on your serverless
 
 If you are using a host, you have two options.
 
-#### Option 1: Setuptools or Unified Python Project Settings File
+#### Option 1: Setuptools or unified Python project settings file
 
 {{% sci-dd-setuptools-unified-python %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -155,7 +155,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 {{% sci-microsoft-sourcelink %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -163,7 +163,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
-#### Option 1: Datadog Tooling
+#### Option 1: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
@@ -171,7 +171,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 {{% sci-microsoft-sourcelink %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -183,7 +183,7 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 {{% sci-microsoft-sourcelink %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -209,7 +209,7 @@ If you are using Docker containers, you have three options: using a bundler plug
 
 {{% sci-docker %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -221,11 +221,11 @@ If you are using Serverless, you have several options depending on your serverle
 
 {{% sci-dd-tags-bundled-node-js %}}
 
-#### Option 2: Datadog Tooling
+#### Option 2: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 3: `DD_GIT_*` Environment Variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -237,7 +237,7 @@ For host-based environments, you have two options based on your build and deploy
 
 {{% sci-dd-tags-bundled-node-js %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -254,7 +254,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 {{% sci-docker-ddtags %}}
 
-#### Option 2: `DD_TAGS` Environment Variable
+#### Option 2: `DD_TAGS` environment variable
 
 {{% sci-dd-tags-env-variable %}}
 
@@ -262,11 +262,11 @@ If you are using Docker containers, you have two options: using Docker or config
 
 If you are using Serverless, you have two options depending on your serverless application's setup.
 
-#### Option 1: Datadog Tooling
+#### Option 1: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: `DD_TAGS` Environment Variable
+#### Option 2: `DD_TAGS` environment variable
 
 {{% sci-dd-tags-env-variable %}}
 
@@ -289,7 +289,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 {{% sci-docker %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -297,11 +297,11 @@ If you are using Docker containers, you have two options: using Docker or config
 
 If you are using Serverless, you have two options depending on your serverless application's setup.
 
-#### Option 1: Datadog Tooling
+#### Option 1: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -324,7 +324,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 {{% sci-docker %}}
 
-#### Option 2: `DD_GIT_*` Environment Variables
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -349,7 +349,7 @@ If your build process is executed in CI within a Docker container, perform the f
    !.git/refs
    ```
 
-2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
+2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is run.
 
    ```
    COPY .git ./.git
@@ -359,7 +359,7 @@ If your build process is executed in CI within a Docker container, perform the f
 
 For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

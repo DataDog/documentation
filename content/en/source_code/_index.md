@@ -11,11 +11,12 @@ Datadog's Source Code Integration allows you to connect your Git repositories to
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
-## Setup and Features
+## Setup and features
 
 {{< whatsnext desc="For setup and features of source code integration, see the following pages:" >}}
     {{< nextlink href="source_code/source-code-management" >}}Source Code Management provider integrations{{< /nextlink >}}
-    {{< nextlink href="source_code/service-tagging" >}}Service mapping configuration{{< /nextlink >}}
+    {{< nextlink href="source_code/service-mapping" >}}Service mapping
+  and telemetry tagging{{< /nextlink >}}
     {{< nextlink href="source_code/resource-mapping" >}}Kubernetes resource mapping{{< /nextlink >}}
     {{< nextlink href="source_code/features" >}}Features of source code integration{{< /nextlink >}}
 {{< /whatsnext >}}
