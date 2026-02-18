@@ -44,6 +44,7 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/jobs_monitoring/kubernetes" >}}Spark on Kubernetes{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/glue" >}}AWS Glue Jobs{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/openlineage" >}}Custom Jobs using OpenLineage{{< /nextlink >}}
 {{< /whatsnext >}}
 
