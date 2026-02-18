@@ -87,7 +87,7 @@ The Logs Agent has the following default retry configurations:
 
 Retries continue until the logs intake endpoint becomes available.
 
-### Log buffering mechanism and limits
+### Log buffering mechanisms and limits
 #### Back pressure and consumption
 The Logs Agent is designed to guarantee log delivery during transmission. When a payload fails to send, the Agent applies back pressure and stops reading from the log source.
 
@@ -152,7 +152,7 @@ The APM intake has the following default configurations:
 
 Retry behavior and retriable status codes are not configurable.
 
-### APM buffering mechanism and limits
+### APM buffering mechanisms and limits
 
 #### In-memory queues
 The Agent compresses and stores failed APM payloads in memory. The Agent then drops these failed payloads when queues are full.
