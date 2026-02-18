@@ -13,17 +13,13 @@ further_reading:
   text: "Datadog Extension for Cursor"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
 This page explains how to set up and configure the Datadog MCP Server, which lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 ## Client compatibility
 
 The following AI clients are known to be compatible with the Datadog MCP Server.
 
-<div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+<div class="alert alert-info">Additional supported clients may become available.</div>
 
 | Client | Developer | Notes |
 |--------|------|------|
@@ -51,7 +47,7 @@ To install the extension:
    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **MCP** tab.
    - VS Code: Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 2. Install the Datadog extension following [these instructions][14]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.
-3. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
+3. Sign in to your Datadog account.
     {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
 4. **Restart the IDE.**
 5. Confirm the Datadog MCP Server is available and the [tools][20] are listed in your IDE:

@@ -16,10 +16,6 @@ further_reading:
   text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
 ## Overview
 
 The [Datadog MCP Server][1] enables AI agents to access your Software Delivery data through the [Model Context Protocol (MCP)][2]. The `software-delivery` toolset provides tools for interacting with [CI Visibility][3] and [Test Optimization][4] directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
