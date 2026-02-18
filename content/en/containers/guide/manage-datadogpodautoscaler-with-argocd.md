@@ -397,6 +397,10 @@ kubectl apply -f argocd/root-app.yaml
 
 ArgoCD now monitors your Git repository and automatically deploys all Applications in the correct order based on sync waves.
 
+### Enable autoscaling on the cluster in Datadog
+
+Navigate to the [autoscaling settings page](https://app.datadoghq.com/orchestration/scaling/settings) in the Datadog UI to enable autoscaling for the cluster.
+
 ### Verify sync wave progression
 
 Watch ArgoCD Applications synchronize in order:
