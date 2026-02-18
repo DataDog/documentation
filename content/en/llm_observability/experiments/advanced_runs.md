@@ -67,7 +67,7 @@ At the **Record** level, evaluations and metrics are computed as:
 
 #### Searching and filtering
 
-To filter by evaluations or metrics for multiple runs, use `@multi_run_avg` for score-based evaluations, or `@multi-run-mode` for categorical evaluations.
+To filter by evaluations or metrics for multiple runs, use `@multi_run_avg` for score-based evaluations, or `@multi_run_mode` for categorical evaluations.
 
 For example:
 
