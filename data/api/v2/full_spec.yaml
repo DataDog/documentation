@@ -54699,6 +54699,39 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleSort:
+      description: The sort parameters used for querying security monitoring rules.
+      enum:
+      - name
+      - creation_date
+      - update_date
+      - enabled
+      - type
+      - highest_severity
+      - source
+      - -name
+      - -creation_date
+      - -update_date
+      - -enabled
+      - -type
+      - -highest_severity
+      - -source
+      type: string
+      x-enum-varnames:
+      - NAME
+      - CREATION_DATE
+      - UPDATE_DATE
+      - ENABLED
+      - TYPE
+      - HIGHEST_SEVERITY
+      - SOURCE
+      - NAME_DESCENDING
+      - CREATION_DATE_DESCENDING
+      - UPDATE_DATE_DESCENDING
+      - ENABLED_DESCENDING
+      - TYPE_DESCENDING
+      - HIGHEST_SEVERITY_DESCENDING
+      - SOURCE_DESCENDING
     SecurityMonitoringRuleTestPayload:
       description: Test a rule.
       oneOf:
@@ -97251,6 +97284,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: Attribute used to sort rules. Prefix with `-` to sort in descending
+          order.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSort'
       responses:
         '200':
           content:
