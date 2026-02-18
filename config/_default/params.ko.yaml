@@ -1,7 +1,9 @@
 announcement_banner:
-  desktop_message: Read the 2025 State of Containers and Serverless Report!
-  external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
-  mobile_message: Read the State of Containers and Serverless Report!
+  desktop_message: "<span>Join Datadog at DASH—coming to NYC June 9-10. Register now for Super Early Bird savings of $700 until March 31</span>"
+  mobile_message: "<span>Join us at DASH—June 9-10. Save $700 until March 31</span>"
+  background_color: "#000000"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 disclaimer: 이 페이지는 아직 한국어로 제공되지 않습니다. 번역 작업 중입니다. <br>현재 번역 프로젝트에 대한 질문이나 피드백이 있으신
   경우<a href="https://docs.datadoghq.com/ko/help/"> 언제든지 연락주시기 바랍니다.</a>
 meta_description: 클라우드 스케일 모니터링의 선두주자, Datadog
