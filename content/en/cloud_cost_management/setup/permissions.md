@@ -16,6 +16,8 @@ further_reading:
 
 Cloud Cost Management (CCM) uses two permissions to control access to cost data and settings. Configure these permissions through [Role Based Access Control (RBAC)][1] to manage who can view cost data and who can modify CCM configurations.
 
+CCM also supports [Data Access Control](#data-access-control) to further restrict cost data by tags.
+
 ## Available permissions
 
 | Permission | Description |
