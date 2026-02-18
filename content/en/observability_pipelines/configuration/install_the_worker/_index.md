@@ -612,7 +612,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 - `api.{{< region-param key="dd_site" >}}`
 - `config.{{< region-param key="dd_site" >}}`
 - `http-intake.{{< region-param key="dd_site" >}}`
-- `install.{{< region-param key="dd_site" >}}`
+- `keys.datadoghq.com`
 
 {{% /tab %}}
 {{% tab "Linux" %}}
