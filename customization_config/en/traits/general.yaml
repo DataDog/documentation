@@ -4,6 +4,11 @@ traits:
   type: text
   internal_notes: Do not use for frameworks like Next or React Native. Instead, use `platform`.
 
+- id: product
+  label: Product
+  type: text
+  internal_notes: The Datadog product that the customer is using. For example, Error Tracking can be used with APM, RUM, and Logs, so an Error Tracking page might use a Product filter with those options.
+
 - id: protocol
   label: Protocol
   type: text
@@ -42,3 +47,8 @@ traits:
   label: "Source"
   type: text
   internal_notes: The source of a software library that the customer is trying to use in their code, such as an SDK. This is most often a package manager like NPM. But it could also have a more general value, like "CDN" or "GitHub".
+
+- id: api_type
+  label: "API"
+  type: text
+  internal_notes: The instrumentation API type, such as OpenTelemetry API or Datadog native API.

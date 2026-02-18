@@ -11,10 +11,10 @@ further_reading:
 - link: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/android/'
   tag: 'Documentation'
   text: 'Android Trace SDK'
-- link: '/tracing/trace_collection/custom_instrumentation/ios/otel/'
+- link: '/tracing/trace_collection/custom_instrumentation/client-side/ios/otel/'
   tag: 'Documentation'
   text: 'OpenTelemetry for iOS'
-- link: '/tracing/trace_collection/custom_instrumentation/android/otel/'
+- link: '/tracing/trace_collection/custom_instrumentation/client-side/android/otel/'
   tag: 'Documentation'
   text: 'OpenTelemetry for Android'
 ---
@@ -55,7 +55,7 @@ Use the [manual context propagation][1] (see step 8) to inject trace headers int
 Use [OkHttp parent span helpers][1] (see step 10 on the linked page) or [OpenTelemetry addParentSpan][2] to link spans across threads.
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/?tab=kotlin#okhttp
-[2]: /tracing/trace_collection/custom_instrumentation/android/otel/?tab=kotlin
+[2]: /tracing/trace_collection/custom_instrumentation/client-side/android/otel/?tab=kotlin
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -174,8 +174,8 @@ The following sampling rate parameters control different aspects of data collect
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ios
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android
-[3]: /tracing/trace_collection/custom_instrumentation/ios/otel
-[4]: /tracing/trace_collection/custom_instrumentation/android/otel
+[3]: /tracing/trace_collection/custom_instrumentation/client-side/ios/otel
+[4]: /tracing/trace_collection/custom_instrumentation/client-side/android/otel
 [5]: https://github.com/DataDog/dd-sdk-ios/blob/develop/DatadogTrace/Sources/TraceConfiguration.swift#L32
 [6]: https://github.com/DataDog/dd-sdk-ios/blob/develop/DatadogTrace/Sources/TraceConfiguration.swift#L106
 [7]: https://www.w3.org/TR/trace-context/#sampled-flag
