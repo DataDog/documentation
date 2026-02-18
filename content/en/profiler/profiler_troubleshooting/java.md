@@ -32,13 +32,7 @@ Datadog CPU profiling is scheduled through perf events and is more accurate than
 | **Datadog** (default in v1.7.0+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_CPU_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.cpu.enabled=true` | `datadog.ExecutionSample` | Default on Linux |
 | **JFR** | `DD_PROFILING_DDPROF_CPU_ENABLED=false` | `-Ddd.profiling.ddprof.cpu.enabled=false` | `jdk.ExecutionSample` | To switch from Datadog to JFR (v1.7.0+) |
 
-### Linux settings
 
-The CPU engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
-
-```shell
-sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
-```
 
 ## Wallclock
 
@@ -70,8 +64,8 @@ The JFR-based allocation profiling engine:
 | Engine | Environment Variable | System Property |
 |--------|---------------------|-----------------|
 | **Datadog** (default) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_ALLOC_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.alloc.enabled=true` |
-| **JFR** | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
-
+| **JFR** (Java 8) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
+| **JFR** (Java 16) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationSample` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationSample` |
 
 **Note**: On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications. Alternatively for JFR, you can enable the following events in your `jfp` override template file 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
@@ -157,12 +151,12 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Reduce overhead from default setup
 
-If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
+If the default setup overhead is not acceptable, you can use profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
 
 - Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
 
-To use the minimal configuration ensure you have `dd-java-agent` version `0.70.0` then change your service invocation to the following:
+To use the minimal configuration change your service ensure you have a recent version of java tracer, then change the service invocation to the following:
 
 ```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
@@ -175,7 +169,7 @@ If you want more granularity in your profiling data, you can specify the `compre
 - Reduces sampling threshold to 10ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Enables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
 
-To use the comprehensive configuration ensure you have `dd-trace-java` version `0.70.0` then change your service invocation to the following:
+To use the comprehensive configuration ensure you have a recent version of java tracer, change your service invocation to the following:
 
 ```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
@@ -353,35 +347,11 @@ To improve CPU profile quality, set the value to `2` or lower:
 sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 ```
 
-## OpenJ9 JVM crashes
 
-The profiler is disabled by default on OpenJ9 due to potential JVM crashes caused by a JVMTI implementation issue. If you are not experiencing crashes and want to enable the profiler:
 
-```shell
-export DD_PROFILING_DDPROF_ENABLED=true
-```
 
-or:
 
-```
--Ddd.profiling.ddprof.enabled=true
-```
-
-## GraalVM compiler (JVMCI)
-
-The Datadog profiler is disabled by default on the GraalVM compiler. To enable it:
-
-```shell
-export DD_PROFILING_DDPROF_ENABLED=true
-```
-
-or:
-
-```
--Ddd.profiling.ddprof.enabled=true
-```
-
-## Advanced profiler engine configuration
+## Summary - Advanced profiler engine configuration
 
 The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
@@ -396,7 +366,7 @@ The following settings allow fine-grained control over the profiler engines. The
 
 ## JDK Mission Control (JMC) event reference
 
-If you are analyzing profiles with JDK Mission Control, the following table provides a quick reference for events emitted by the profiler. For detailed information about each profile type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
+If you are analyzing profiles with JDK Mission Control, the following table provides a quick reference for events emitted by the profiler. 
 
 | Profile type | JFR event | Datadog event |
 |--------------|-----------|---------------|
@@ -404,6 +374,14 @@ If you are analyzing profiles with JDK Mission Control, the following table prov
 | Wallclock | - | `datadog.MethodSample` |
 | Allocation | `jdk.ObjectAllocationInNewTLAB`, `jdk.ObjectAllocationOutsideTLAB` | `datadog.ObjectAllocationInNewTLAB`, `datadog.ObjectAllocationOutsideTLAB` |
 | Live heap | - | `datadog.HeapLiveObject` |
+
+### Advanced Linux settings for CPU profiles
+
+The CPU profiler engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
+
+```shell
+sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
+```
 
 ## Further Reading
 
