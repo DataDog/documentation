@@ -50,10 +50,11 @@ const renderer = {
 
 marked.use({ renderer });
 
-// Conversation model IDs for the docs collection
+// Conversation model IDs
 const MODEL_4_1_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
 const MODEL_5_2_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-5.2';
-const DEFAULT_CONVERSATION_MODEL_ID = MODEL_4_1_ID;
+const DEFAULT_CONVERSATION_MODEL_ID = MODEL_5_2_ID;
+const USE_LEGACY_MODEL_FLAG_KEY = 'docs_conv_search_use_gpt_4_1';
 const ANALYTICS_COLLECTION_NAME = typesenseConfig.conversationAnalyticsCollection || 'docs_conversation_analytics';
 const ANALYTICS_TYPESENSE_API_KEY = typesenseConfig.conversationAnalyticsCreateKey;
 
@@ -92,14 +93,23 @@ class ConversationalSearch {
         this.abortController = null;
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.isHomepage = document.querySelector('.kind-home') !== null;
-        this.homeAiBtnVisible = false; // tracks if the homepage "Ask AI" button is in the viewport
-        
+        this.homeAiBtnVisible = false;
+
         this.init();
+        this.resolveModelFromFlag();
     }
 
     init() {
         this.createElements();
         this.bindEvents();
+    }
+
+    resolveModelFromFlag() {
+        initializeFeatureFlags().then((client) => {
+            if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
+                this.selectedModelId = MODEL_4_1_ID;
+            }
+        }).catch(() => {});
     }
 
     createElements() {
@@ -139,11 +149,6 @@ class ConversationalSearch {
         this.messagesContainer = messagesContainer;
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
-        this.modelSelect = this.sidebar.querySelector('.conv-search-model-select');
-
-        if (this.modelSelect) {
-            this.modelSelect.value = DEFAULT_CONVERSATION_MODEL_ID;
-        }
     }
 
     /**
@@ -164,19 +169,6 @@ class ConversationalSearch {
         this.overlay.addEventListener('click', () => this.close());
         this.sendBtn.addEventListener('click', () => this.sendMessage());
 
-        if (this.modelSelect) {
-            this.modelSelect.addEventListener('change', () => {
-                const nextModelId = this.modelSelect.value || DEFAULT_CONVERSATION_MODEL_ID;
-                if (nextModelId === this.selectedModelId) {
-                    return;
-                }
-
-                this.selectedModelId = nextModelId;
-                // Reset conversation context to avoid mixing turns across models.
-                this.newChat();
-            });
-        }
-        
         this.input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
