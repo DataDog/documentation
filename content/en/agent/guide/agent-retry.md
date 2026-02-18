@@ -32,9 +32,9 @@ The Agent retries failed metric payloads in the following scenarios:
 - HTTP `4xx` responses (_see note for exceptions_)
 - HTTP `5xx` responses
 
-<div class="alert alert-info"> For <code>4xx</code> responses, the Agent does not retry requests with status codes <code>400</code>, <code>403</code>, <code>413</code>.</div>
+<div class="alert alert-info"> For <code>4xx</code> responses, the Agent does not retry requests with status codes <code>400</code>, <code>403</code>, or <code>413</code>.</div>
 
-Requests that return a `404` response are retried because they often indicate a configuration or availability issue that could be resolved. For example, a `404` response can occur when an endpoint does not exist in a given Datadog region or proxy.
+Requests that return a `404` response are retried because they often indicate a configuration or availability issue that could be resolved.
 
 Retries use an [exponential backoff strategy][2] with randomized jitter and using these default configurations:
 - Base backoff time: 2 seconds
@@ -51,7 +51,7 @@ The Agent also supports an optional [on-disk retry buffer][4]. If you enable thi
     - In-memory payloads (newest first)
     - On-disk payloads (newest first)
 
-    This prioritization helps ensure that the Agent sends recent and live metrics before it backfills older data.
+This prioritization helps ensure that the Agent sends recent and live metrics before it backfills older data.
 
 #### Buffer configurations
 The Datadog infrastructure has the following default configurations for metric retry buffering:
@@ -159,14 +159,14 @@ The Agent compresses and stores failed APM payloads in memory. The Agent then dr
 #### Traces
   - Configurable using `apm_config.trace_writer.queue_size`
   - Default calculation:
-     - `max(1, max_memory / max_payload_size)`
-     - Typically defaults to **163 payloads**
+     - `int(max(1, max memory / max payload size))`
+     - Example: `int(max(1, (500 * 1024 * 1024) / 3200000)) = 163`
 
 #### Stats
   - Configurable using `apm_config.stats_writer.queue_size`
   - Default calculation:
-     - `max(1, max_memory / payload_size)`
-     - Typically defaults to **174 payloads**
+     - `int(max(1, max memory / payload size))`
+     - Example: `int(max(1, (250 * 1024 * 1024) / 1500000)) = 174`
 
 ### Advanced shipping configuration
 #### Dual shipping
