@@ -112,7 +112,7 @@ What actions you take depend on each of the attack surfaces:
 - **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII, and limit access to necessary services.
 - **Unauthenticated endpoint:** If the endpoint is not intentionally public, enforce authentication and update service configurations.
 
-#### Source Code (Static Endpoint Discovery)
+#### Static Endpoint Discovery
 
 <div class="alert alert-info">Static Endpoint Discovery is in Preview.</div>
 
@@ -120,9 +120,9 @@ What actions you take depend on each of the attack surfaces:
 <div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-The **Source Code** data source shows API endpoints discovered directly from your source code, without requiring runtime traffic. This complements runtime-based discovery by surfacing endpoints earlier in the development lifecycle, including endpoints that may not receive live traffic.
+The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development lifecycle, including endpoints that may not receive live traffic.
 
-This feature requires the [Source Code Integration][15] configured with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
+To use this data source, configure the [Source Code Integration][15] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
 
 | Language | Framework |
 |----------|-----------|
@@ -131,7 +131,7 @@ This feature requires the [Source Code Integration][15] configured with GitHub, 
 | Go       | Beego, Chi, Echo, Fiber, Gin, Gorilla Mux, fasthttp, go-zero |
 | C#       | ASP.NET Core MVC |
 
-To filter for these endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and every 4 hours. Discovered endpoints expire after 12 hours if they are not re-discovered by a subsequent scan.
+To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on a 4-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
 
 ### Processing sensitive data
 
