@@ -19,7 +19,7 @@ For an overview on AI Guard, see [AI Guard][13].
 
 ## Setup
 
-Complete the following steps in order to set up AI Guard:
+Complete the following steps to set up AI Guard:
 
 ### 1. Check prerequisites
 
@@ -51,7 +51,7 @@ If you don't use the Datadog Agent, the AI Guard evaluator API still works, but 
 
 ### 4. Install the tracer library {#install-tracer}
 
-To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent (from step 3) to send data to Datadog.
+To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent to send data to Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
