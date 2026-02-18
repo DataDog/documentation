@@ -1,30 +1,30 @@
 ---
-title: Enable Data Jobs Monitoring for Glue Jobs (AWS Glue)
-description: "Monitor AWS Glue Jobs with Data Jobs Monitoring."
+title: "Enable Data Observability: Jobs Monitoring for AWS Glue"
+description: "Enable Data Observability: Jobs Monitoring for AWS Glue jobs with Datadog."
 is_beta: true
 private: true
 further_reading:
   - link: '/data_jobs'
     tag: 'Documentation'
-    text: 'Data Jobs Monitoring'
+    text: 'Data Observability: Jobs Monitoring'
   - link: '/integrations/amazon-web-services/'
     tag: 'Documentation'
     text: 'AWS Integration'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for AWS Glue is in Preview" >}}
-To try the preview for Glue Jobs monitoring, follow the setup instructions below.
+{{< callout url="#" btn_hidden="true" header="Data Observability: Jobs Monitoring for AWS Glue is in Preview" >}}
+To try the preview for Glue jobs monitoring, follow the setup instructions below.
 {{< /callout >}}
 
 ## Overview
 
-The AWS Glue integration connects Datadog to your AWS Glue environment. Use it to monitor AWS Glue jobs.
+[Data Observability: Jobs Monitoring][6] gives visibility into the performance and reliability of your AWS Glue jobs.
 
 ## Prerequisites
 
 Before you begin, make sure you have:
 
-- An AWS account with Glue Jobs you want to monitor.
+- An AWS account with Glue jobs you want to monitor.
 - The [Datadog AWS integration][1] configured for the account.
 - IAM permissions to modify the Datadog role's policies.
 
@@ -81,12 +81,11 @@ The Data Observability crawler requires additional permissions to monitor Glue j
 }
 ```
 
-Some of the permissions mentioned refer to monitoring Iceberg tables in Glue.
-More details on the datasets related IAM permissions can be found here (TODO: link once other PR is merged).
+Some of these permissions are related to monitoring Iceberg tables in Glue. For more details on dataset-related IAM permissions, see the [AWS Glue Data Quality Monitoring documentation][7].
 
 ## Configure the crawler
 
-1. Select the AWS regions where your Glue jobs are located
+1. Select the AWS regions where your Glue jobs are located.
 2. Enable the **Job Monitoring** toggle.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
@@ -97,28 +96,28 @@ More details on the datasets related IAM permissions can be found here (TODO: li
 
 1. Follow [these steps][5] to send AWS logs from CloudWatch to Datadog.
 2. Manually configure triggers in **AWS CloudWatch** to capture AWS Glue logs.
-By default, Glue logs are stored in the following log groups:
+   By default, Glue logs are stored in the following log groups:
    - `/aws-glue/jobs/error`
    - `/aws-glue/jobs/output`
    - `/aws-glue/jobs/logs-v2`
 
-3. When logs are ingested into **Datadog**, the CloudWatch log group name is mapped to the `host` attribute in Datadog Logs.
+3. **Note**: After logs are ingested into Datadog, the CloudWatch log group name maps to the `host` attribute in Datadog Logs.
 4. Create a Log Index that includes logs where the `host` attribute matches:
    - `/aws-glue/jobs/error`
    - `/aws-glue/jobs/output`
    - `/aws-glue/jobs/logs-v2`
 
-This ensures the logs are searchable and available under the **Glue** tab in **Data Jobs Monitoring**.
+This helps ensure the logs are searchable and available under the **Glue** tab in **Data Observability: Jobs Monitoring**.
 
 ## (Optional) Configure Glue metrics
 
-Enable [Glue Integration][4] tile for Glue metrics collection.
-Metrics will be present within **Data Jobs Monitoring**.
+Enable the [Glue Integration][4] tile for Glue metrics collection.
+Metrics should be available under the **Glue** job tab in **Data Observability: Jobs Monitoring**.
 
 ## Next steps
 
-Crawler runs every few minutes.
-In Datadog, view the [Data Jobs Monitoring][6] page to see a list of your Glue job runs after the setup.
+The crawler runs every few minutes.
+In Datadog, view the [Data Observability: Jobs Monitoring][6] page to see a list of your Glue job runs after setup.
 
 ## Further reading
 
@@ -126,8 +125,8 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of your Glue j
 
 [1]: /integrations/amazon-web-services/
 [2]: https://app.datadoghq.com/datasets/settings/integrations
-[3]: https://docs.aws.amazon.com/glue/latest/dg/security_iam_id-based-policy-examples.html
 [4]: /integrations/amazon-glue/
-[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole
+[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole
 [6]: https://app.datadoghq.com/data-jobs/
+[7]: /data_observability/quality_monitoring/data_lakes/aws_glue/?tab=specificdatabases#optional-restrict-access-to-specific-databases-and-tables
 
