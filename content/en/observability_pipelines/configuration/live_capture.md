@@ -30,6 +30,18 @@ Only users with the `Observability Pipelines Live Capture Write` permission can 
 
 Admins have read and write permissions by default. Standard users only have read permission by default. See [Access Control][2] for more information about default Datadog roles and how to create custom roles.
 
+### Add domains to allowlist for firewalls
+
+If you are using a firewall, you must add these domains to the allowlist:
+
+- api.{{< region-param key="dd_site" >}}
+- obpipeline-intake.{{< region-param key="dd_site" >}}
+- config.{{< region-param key="dd_site" >}}
+- http-intake.{{< region-param key="dd_site" >}}
+- install.{{< region-param key="dd_site" >}}
+- yum.datadoghq.com
+- keys.datadoghq.com
+
 ## Capture events
 
 1. Navigate to [Observability Pipelines][3].
