@@ -122,7 +122,7 @@ What actions you take depend on each of the attack surfaces:
 
 The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development lifecycle, including endpoints that may not receive live traffic.
 
-To use this data source, configure the [Source Code Integration][15] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
+To use this data source, configure the [Source Code Integration][16] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
 
 | Language | Framework |
 |----------|-----------|
@@ -186,6 +186,8 @@ Authentication is determined by:
 - The presence of `Authorization`, `Token` or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
+- Custom [Endpoint Tagging][15] rules that you configured
+
 
 When the type of authentication is available, Datadog reports it in a header through the **Authentication Method** facet.
 
@@ -198,6 +200,19 @@ When the type of authentication is available, Datadog reports it in a header thr
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
+#### Custom Authentication support
+
+Custom authentication detection is possible by configuring [Endpoint Tagging Rules][15]. These rules require the following minimum tracer versions:
+
+|Technology| Minimum tracer version |
+|----------|------------------------|
+|Java      | v1.55.0                |
+|.NET      | Coming Soon            |
+|Node.js   | v5.76.0                |
+|Python    | v3.17.0                |
+|Ruby      | v2.23.0                |
+|PHP       | v1.15.0                |
+|Golang    | v2.4.0                 |
 
 ## Services
 
@@ -275,4 +290,5 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [12]: /security/application_security/policies/custom_rules/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
 [14]: https://app.datadoghq.com/security/appsec/policies/scanners
-[15]: /integrations/guide/source-code-integration/
+[15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
+[16]: /integrations/guide/source-code-integration/

@@ -5151,16 +5151,6 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
-    - name: Session Level Evaluations
-      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_session
-      weight: 40003
-    - name: Agent Evaluations
-      url: llm_observability/evaluations/managed_evaluations/agent_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_agent
-      weight: 40004
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -5729,6 +5719,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react
       weight: 104
+    - name: React Native
+      url: feature_flags/client/reactnative
+      parent: feature_flags_client
+      identifier: feature_flags_client_react_native
+      weight: 105
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
