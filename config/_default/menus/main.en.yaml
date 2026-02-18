@@ -233,6 +233,11 @@ menu:
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
       weight: 2304
+    - name: MCP Tools
+      identifier: getting_started_software_delivery_mcp_tools
+      url: getting_started/software_delivery_mcp_tools/
+      parent: getting_started_software_delivery
+      weight: 2305
     - name: Synthetic Monitoring and Testing
       identifier: getting_started_synthetics
       url: getting_started/synthetics/
@@ -4945,6 +4950,16 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Data Lakes
+      url: data_observability/quality_monitoring/data_lakes
+      identifier: data_lakes
+      parent: quality_monitoring
+      weight: 250000
+    - name: Iceberg Tables (AWS Glue)
+      url: data_observability/quality_monitoring/data_lakes/aws_glue
+      identifier: aws_glue_iceberg
+      parent: data_lakes
+      weight: 1000000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
@@ -5136,16 +5151,6 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
-    - name: Session Level Evaluations
-      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_session
-      weight: 40003
-    - name: Agent Evaluations
-      url: llm_observability/evaluations/managed_evaluations/agent_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_agent
-      weight: 40004
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -5714,6 +5719,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react
       weight: 104
+    - name: React Native
+      url: feature_flags/client/reactnative
+      parent: feature_flags_client
+      identifier: feature_flags_client_react_native
+      weight: 105
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -8931,6 +8941,11 @@ menu:
       url: account_management/governance_console/
       parent: account_management
       weight: 8
+    - name: Controls
+      identifier: account_management_governance_console_controls
+      url: account_management/governance_console/controls 
+      parent: account_management_governance_console
+      weight: 801
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/

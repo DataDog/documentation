@@ -91,6 +91,10 @@
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
   },
+  "code-coverage": {
+    "name": "Code Coverage",
+    "description": "Retrieve and analyze code coverage data from Code Coverage. See the [Code Coverage page](https://docs.datadoghq.com/code_coverage/) for more information."
+  },
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
