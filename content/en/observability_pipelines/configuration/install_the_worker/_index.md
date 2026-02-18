@@ -163,6 +163,13 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
 
+#### Kubernetes services created
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
+
+- A headless service to provide stable DNS names and Direct Pod IP resolution for the Worker.
+- A non-headless service for you to address the Worker and load balance traffic for internal and external cluster communications.
+
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
@@ -348,6 +355,13 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
+
+#### Kubernetes services created
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
+
+- A headless service to provide stable DNS names and Direct Pod IP resolution for the Worker.
+- A non-headless service for you to address the Worker and load balance traffic for internal and external cluster communications.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
