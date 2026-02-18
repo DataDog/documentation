@@ -655,7 +655,7 @@ The list below gives the supported encoding values. If you provide an unsupporte
  * `utf-16-be` - UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
  * `shift-jis` - Shift-JIS (Datadog Agent **v6.34/v7.34**)
 
-<div class="alert alert-warning"><strong>Edge case:</strong> Changing the <code>encoding</code> for a file that the Agent is <em>already tailing</em> can cause garbled characters (mojibake). The Agent resumes reading from the last byte offset, which may no longer align to valid character boundaries after an encoding change. To resolve this, rotate or replace the log file so the Agent starts tailing a new file that uses the correct encoding, or otherwise ensure the Agent restarts tailing from the beginning of a file that uses the new encoding.</div>
+<div class="alert alert-warning"><strong>Edge case:</strong> Changing the <code>encoding</code> of a file the Agent is <em>already tailing</em> can produce garbled characters (mojibake). The Agent resumes from the previous byte offset, which may not align with character boundaries after an encoding change. To fix this, rotate the log file, replace it, or restart tailing from the beginning of a file that uses the new encoding. Doing so helps the Agent start with the correct encoding.</div>
 
 Configuration example:
 
