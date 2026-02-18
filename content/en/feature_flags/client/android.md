@@ -21,7 +21,7 @@ This page describes how to instrument your Android or Android TV application wit
 
 The Datadog Feature Flags SDK uses the industry-standard [OpenFeature](https://openfeature.dev/) API, giving you a vendor-neutral, future-proof integration that follows community-driven standards.
 
-<div class="alert alert-info">For most applications, the OpenFeature API is the right choice. If you have advanced requirements—such as multiple independent evaluation contexts in the same app—see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a> at the end of this guide.</div>
+<div class="alert alert-info">For most applications, the OpenFeature API is the right choice. If you have advanced requirements see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a> at the end of this guide.</div>
 
 ## Getting started
 
@@ -153,7 +153,7 @@ OpenFeatureAPI.setEvaluationContext(
 )
 {{< /code-block >}}
 
-<div class="alert alert-info">All attribute values must use <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored in <code>SharedPreferences</code>.</div>
+<div class="alert alert-info">All attribute values must use <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example in <code>SharedPreferences</code>.</div>
 
 ## Evaluate flags
 
@@ -310,7 +310,6 @@ For most applications, the OpenFeature API described above is the recommended ap
 
 **Use FlagsClient directly only if you:**
 
-- Require **multiple independent evaluation contexts** in the same app (for example, different contexts for different users in a multi-user app)
 - Want to work with **native Kotlin types** directly (`JSONObject` instead of `Value.Structure`)
 - Need **fine-grained control** over client lifecycle and configuration per instance
 
