@@ -15,7 +15,12 @@ further_reading:
 
 ## Overview
 
-This guide describes the behavior of the Datadog Agent when it fails to send an HTTP request to Datadog intake endpoints. It covers retry behavior, buffering mechanisms and limits, and data drop conditions for the **Metrics**, **Logs**, and **APM** intakes. 
+This guide describes the Datadog Agent's behavior when it fails to send HTTP requests to the **Metrics**, **Logs**, and **APM** intake endpoints. 
+
+Follow this guide to learn how the Agent addresses:
+- Retry strategies and backoff behavior
+- Buffering mechanisms and limits
+- Data drop conditions and loss scenarios 
 
 <div class="alert alert-info">In this guide, a failed HTTP request is defined as any request that does not result in a <code>2xx</code> HTTP response.</div>
 
@@ -24,34 +29,29 @@ This guide describes the behavior of the Datadog Agent when it fails to send an 
 ### Metrics retry strategy
 The Agent retries failed metric payloads in the following scenarios:
 - Network timeouts
-- HTTP `4xx` and `5xx` responses
+- HTTP `4xx` responses (_see note for exceptions_)
+- HTTP `5xx` responses
 
-The Agent **does not retry** requests that return the following status codes: 
-- `400`
-- `403`
-- `413`
+<div class="alert alert-info"> For <code>4xx</code> responses, the Agent does not retry requests with status codes <code>400</code>, <code>403</code>, <code>413</code>.</div>
 
-Requests that return a `404` response are retried because they can occur when an endpoint does not exist in a given Datadog region or proxy.
+Requests that return a `404` response are retried because they often indicate a configuration or availability issue that could be resolved. For example, a `404` response can occur when an endpoint does not exist in a given Datadog region or proxy.
 
-Retries use an [exponential backoff strategy][2] with random jitter. These are the default configurations:
+Retries use an [exponential backoff strategy][2] with randomized jitter and using these default configurations:
 - Base backoff time: 2 seconds
 - Maximum backoff time: [64 seconds][3]
 - Maximum backoff reached after 6 retries
 
 ### Metrics buffering and queueing logic
-When a metric fails to send to the Datadog intake, it is compressed and stored in an in-memory retry buffer. The default maximum size is 15MB and is configurable using the `forwarder_retry_queue_payloads_max_size` configuration setting.
+When the Agent fails to send a metric to the Datadog intake, it compresses and stores this metric in an in-memory retry buffer. The default maximum size for this retry payload is 15MB, but you can configure this using the `forwarder_retry_queue_payloads_max_size` setting.
 
-The Agent supports an optional [on-disk retry buffer][4], and when enabled: 
-1. The Agent fills the in-memory buffer first
-1. After the in-memory buffer is full:
-    - Older payloads are evicted from memory
-    - Evicted payloads are serialized to disk
-1. New payloads continue to be accepted
-1. The Agent retries payloads in the following order:
+The Agent also supports an optional [on-disk retry buffer][4]. If you enable this setting: 
+1. First, the Agent fills the in-memory buffer until it is full
+1. Then, the Agent evicts older payloads from memory and serializes them to disk
+1. Finally, the Agent retries payloads in the following order:
     - In-memory payloads (newest first)
     - On-disk payloads (newest first)
 
-    This prioritization helps ensure that recent and live metrics are sent before backfilling older data.
+    This prioritization helps ensure that the Agent sends recent and live metrics before it backfills older data.
 
 #### Default Datadog infrastructure configuration
 The Datadog infrastructure has the following default configurations for metric retry buffering:
@@ -60,16 +60,14 @@ The Datadog infrastructure has the following default configurations for metric r
 - Maximum in-memory buffer size: 15 MB
 
 #### Restart and shutdown behavior
-During Agent restart:
-- In-memory payloads are lost
-- On-disk payloads are preserved and resent
-- Payloads are written to disk only after the in-memory buffer is full, so metrics in memory may be lost during restart
+During restart, the Agent:
+- Drops in-memory payloads
+- Preserves and resends on-disk payloads
 
-During Agent shutdown:
-- Only in-flight requests are flushed
-- Payloads in retry queues (both in-memory and on-disk) are not flushed
+During shutdown, the Agent:
+- Flushes in-flight requests
+- Does not flush payloads in retry queues (both in-memory and on-disk)
 
-[1]: https://github.com/DataDog/datadog-agent/blob/d2b37a761068c211a2494c728bc70e726eadc1b8/pkg/forwarder/transaction/transaction.go#L346-L366
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
 [4]: https://docs.datadoghq.com/agent/configuration/network/#data-buffering
@@ -78,22 +76,18 @@ During Agent shutdown:
 
 {{% tab "Logs" %}}
 ### Logs retry strategy
-The Logs Agent retries failed HTTP requests indefinitely using [exponential backoff][2] with random jitter for `4xx` responses, excluding:
-  - `400`
-  - `401`
-  - `403`
-  - `413`
+The Logs Agent retries failed HTTP requests indefinitely using [exponential backoff][2] with randomized jitter for `4xx` responses.
 
-The logs retry default configurations are:
+<div class="alert alert-info"> The Logs Agent <strong>does not retry</strong> requests with status codes <code>400</code>, <code>401</code>, <code>403</code>, <code>413</code>.</div>
+
+The Logs Agent has the following default retry configurations:
   - Base backoff time: 2 seconds
   - Maximum backoff time: 120 seconds
 
-Retries continue until the intake endpoint becomes available.
+Retries continue until the logs intake endpoint becomes available.
 
 ### Log consumption
-The Logs Agent is designed to guarantee log delivery during transmission. When a payload fails to send:
-  - The Agent applies back pressure
-  - The Agent stops reading from the log source
+The Logs Agent is designed to guarantee log delivery during transmission. When a payload fails to send, the Agent applies back pressure and stops reading from the log source.
 
 When the intake becomes available, the Agent resumes reading from the last known position.
 
@@ -106,27 +100,27 @@ The Logs Agent maintains a registry that tracks log sources and current read off
 
 The Agent flushes the registry to disk every second (this is not configurable) and reloads when the Agent restarts.
 
-On restart, the Agent resumes reading from the position recorded in the registry. A small number of duplicate logs may occur if the Agent sent a payload before flushing the registry.
+On restart, the Agent resumes reading from the position recorded in the registry. A small number of duplicate logs may occur if the Agent sends a payload before flushing the registry.
 
 ### Log buffering limits
 - HTTP logs:
-    - Up to ~20 MB of compressed payloads are stored in memory
+    - The Agent stores up to ~20 MB of compressed payloads in memory
     - Not configurable
 
 - TCP logs:
-    - The buffer limit is 100 log lines
+    - Buffer limit: 100 log lines
     - The Agent sends logs line by line
 
 ### Dual shipping
-When dual shipping is enabled:
+When you enable dual shipping:
   - The Agent sends logs to the first available endpoint
-  - The Agent drops payloads for any endpoint that fails 
+  - The Agent drops payloads for any endpoint that fails
   - Log consumption continues as long as at least one endpoint succeeds
 
 #### Reliable mode
-When `is_reliable` is enabled for an endpoint:
+When you enable `is_reliable` for an endpoint:
   - The Agent treats all reliable endpoints with equal priority
-  - The Agent stops sending logs if all reliable endpoints are unavailable 
+  - The Agent stops sending logs if all reliable endpoints are unavailable
   - Unreliable endpoints:
       - Receive data only when at least one reliable endpoint is available
       - Have lower priority than reliable endpoints
@@ -143,7 +137,7 @@ When `is_reliable` is enabled for an endpoint:
 ### APM retry behavior
 The Agent retries failed APM payloads using [exponential backoff][2].
 
-A failed request is defined as:
+A failed APM request includes the following:
   - Network connectivity errors
   - HTTP `408` responses
   - HTTP `5xx` responses
@@ -170,26 +164,30 @@ The Agent compresses and stores failed APM payloads in memory. The Agent then dr
      - Typically defaults to **174 payloads**
 
 ### Dual shipping
-When dual shipping is enabled for the APM intake, each endpoint has an independent sender and queue.
+When you enable dual shipping for the APM intake, each endpoint has an independent sender and queue.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/d2b37a761068c211a2494c728bc70e726eadc1b8/pkg/forwarder/transaction/transaction.go#L346-L366
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
 [4]: https://docs.datadoghq.com/agent/configuration/network/#data-buffering
 {{% /tab %}}
+{{< /tabs >}}
 
-{{% tab "Processes" %}}
 ## Additional payload types
 ### Processes
 
-The Process Agent buffers check results before forwarding them using the metrics forwarder.
+<div class="alert alert-info"> Downstream delivery for Processes uses the <strong>metrics forwarder</strong>. The retry behavior is consistent with <a href="#metrics-retry-strategy"> metrics </a>, except that on-disk buffering is not supported.
+</div>
 
-The process payload buffers approximately 30 minutes of process data by default, based on:
+Before forwarding check results, the Process Agent uses a queue to store these results. The Process payload buffers approximately 30 minutes of data by default, based on:
   - `DefaultProcessQueueSize` = 256
   - `DefaultProcessQueueBytes` = 60 MB
 
+With Agent versions 7.39 or earlier:
+- The above limits apply to a combination of Process and Connections (CNM) payloads
+- The Process and Connections (CNM) payloads use a single queue
+
 Starting with Agent version 7.39:
-  - The Process and Network (CNM) payloads use separate queues
+  - The Process and Connections (CNM) payloads use separate queues
   - The Agent can buffer approximately 40 minutes of process data with default settings
 
 ```sh
@@ -203,13 +201,7 @@ DefaultProcessQueueSize = 256
 // Allow buffering up to 60 megabytes of payload data in total
 DefaultProcessQueueBytes = 60 * 1000 * 1000
 ```
-<div class="alert alert-info"> Downstream delivery for Processes uses the <strong>metrics forwarder</strong>, and retry behavior is consistent with <a href="#metrics-retry-strategy"> metrics </a>, except that on-disk buffering is not supported.
-</div>
 
-[1]: https://github.com/DataDog/datadog-agent/blob/d2b37a761068c211a2494c728bc70e726eadc1b8/pkg/forwarder/transaction/transaction.go#L346-L366
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
 [4]: https://docs.datadoghq.com/agent/configuration/network/#data-buffering
-
-{{% /tab %}}
-{{< /tabs >}}
