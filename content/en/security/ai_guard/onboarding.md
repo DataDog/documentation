@@ -19,7 +19,9 @@ For an overview on AI Guard, see [AI Guard][13].
 
 ## Setup
 
-### Prerequisites
+Complete the following steps to set up AI Guard:
+
+### 1. Check prerequisites
 
 Before you set up AI Guard, ensure you have everything you need:
 - While AI Guard is in Preview, Datadog needs to enable a backend feature flag for each organization in the Preview. Contact [Datadog support][1] with one or more Datadog organization names and regions to enable it.
@@ -27,7 +29,7 @@ Before you set up AI Guard, ensure you have everything you need:
   - To create an application key, you need the **AI Guard Evaluate** permission.
   - To make a restricted dataset that [limits access to AI Guard spans](#limit-access), you need the **User Access Manage** permission.
 
-### Usage limits {#usage-limits}
+#### Usage limits
 
 The AI Guard evaluator API has the following usage limits:
 - 1 billion tokens evaluated per day.
@@ -35,32 +37,62 @@ The AI Guard evaluator API has the following usage limits:
 
 If you exceed these limits, or expect to exceed them soon, contact [Datadog support][1] to discuss possible solutions.
 
-### Create API and application keys {#create-keys}
+### 2. Create API and application keys {#create-keys}
 
 To use AI Guard, you need at least one API key and one application key set in your Agent services, usually using environment variables. Follow the instructions at [API and Application Keys][2] to create both.
 
 When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope.
 
-### Set up a Datadog Agent {#agent-setup}
+### 3. Set up the Datadog Agent {#agent-setup}
 
 Datadog SDKs use the [Datadog Agent][4] to send AI Guard data to Datadog. The Agent must be running and accessible to the SDK for you to see data in Datadog.
 
 If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.
 
-### Create a custom retention filter {#retention-filter}
+### 4. Install the tracer library {#install-tracer}
 
-To ensure no AI Guard evaluations are dropped, create a custom [retention filter][5] for AI Guard-generated spans:
+To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent to send data to Datadog.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Install dd-trace-py v3.18.0 or later:
+
+```shell
+pip install ddtrace>=3.18.0
+```
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+Install dd-trace-js v5.69.0 or later:
+
+```shell
+npm install dd-trace@^5.69.0
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][1] to add the tracer to your application.
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+{{% tab "Ruby" %}}
+Install dd-trace-rb v2.25.0 or later:
+
+```shell
+gem install ddtrace -v '>= 2.25.0'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### 5. Create a custom retention filter {#retention-filter}
+
+To view AI Guard evaluations in Datadog, create a custom [retention filter][5] for AI Guard-generated spans. Follow the linked instructions to create a retention filter with the following settings:
 - **Retention query**: `resource_name:ai_guard`
 - **Span rate**: 100%
 - **Trace rate**: 100%
 
-### Limit access to AI Guard spans {#limit-access}
+### 6. (Optional) Limit access to AI Guard spans {#limit-access}
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-Data Access Controls is in Limited Availability. To enroll, <a href="https://help.datadoghq.com/">contact Datadog support</a>.
-{{< /callout >}}
-
-To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
+To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 
 ## Use the AI Guard API {#api}
 
@@ -71,6 +103,15 @@ AI Guard provides a single JSON:API endpoint:
 `POST {{< region-param key=dd_api >}}/api/v2/ai-guard/evaluate`
 
 <div class="alert alert-info">The endpoint URL varies by region. Ensure you're using the correct Datadog site for your organization.</div>
+
+Configure the following environment variables:
+
+| Variable              | Value                    |
+| :-------------------- | :----------------------- |
+| `DD_AI_GUARD_ENABLED` | `true`                   |
+| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
+| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
+| `DD_TRACE_ENABLED`    | `true`                   |
 
 #### REST API examples {#api-examples}
 {{% collapse-content title="Generic API example" level="h4" expanded=false id="generic-api-example" %}}
@@ -320,20 +361,11 @@ Example:
 
 ### Use an SDK to create REST API calls {#sdks}
 
-SDK instrumentation allows you to set up and monitor AI Guard activity in real time.
-
-To use the SDK, ensure the following environment variables are configured:
-
-| Variable              | Value                    |
-| :-------------------- | :----------------------- |
-| `DD_AI_GUARD_ENABLED` | `true`                   |
-| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
-| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
-| `DD_TRACE_ENABLED`    | `true`                   |
+Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real time in Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Beginning with [dd-trace-py v3.18.0][1], a new Python SDK has been introduced. This SDK provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
+The Python SDK ([dd-trace-py v3.18.0][1] or later) provides a streamlined interface for invoking the REST API directly from Python code. The following examples demonstrate its usage:
 
 <div class="alert alert-info">
 Starting with dd-trace-py v3.18.0, the Python SDK uses the standardized common message format.
@@ -414,7 +446,7 @@ result = client.evaluate(
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.18.0
 {{% /tab %}}
 {{% tab "Javascript" %}}
-Starting with [dd-trace-js v5.69.0][1], a new JavaScript SDK is available. This SDK offers a simplified interface for interacting with the REST API directly from JavaScript applications.
+The JavaScript SDK ([dd-trace-js v5.69.0][1] or later) offers a simplified interface for interacting with the REST API directly from JavaScript applications.
 
 The SDK is described in a dedicated [TypeScript][2] definition file. For convenience, the following sections provide practical usage examples:
 
@@ -467,7 +499,7 @@ const result = await tracer.aiguard.evaluate([
 [2]: https://github.com/DataDog/dd-trace-js/blob/master/index.d.ts
 {{% /tab %}}
 {{% tab "Java" %}}
-Beginning with [dd-trace-java v1.54.0][1], a new Java SDK is available. This SDK provides a streamlined interface for directly interacting with the REST API from Java applications.
+The Java SDK ([dd-trace-java v1.54.0][1] or later) provides a streamlined interface for directly interacting with the REST API from Java applications.
 
 The following sections provide practical usage examples:
 
@@ -493,6 +525,25 @@ The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
 - `reason`: natural language summary of the decision.
 
+#### Example: Evaluate a user prompt with content parts {#java-example-evaluate-user-prompt-content-parts}
+
+For multi-modal inputs, you can pass a list of content parts instead of a string. This is useful when including images or other media:
+
+```java
+import datadog.trace.api.aiguard.AIGuard;
+
+// Evaluate a user prompt with both text and image content
+final AIGuard.Evaluation evaluation = AIGuard.evaluate(
+    Arrays.asList(
+        AIGuard.Message.message("system", "You are an AI Assistant"),
+        AIGuard.Message.message("user", Arrays.asList(
+            AIGuard.ContentPart.text("What is in this image?"),
+            AIGuard.ContentPart.imageUrl("data:image/jpeg;base64,...")
+        ))
+    )
+);
+```
+
 #### Example: Evaluate a tool call {#java-example-evaluate-tool-call}
 
 Like evaluating user prompts, the method can also be used to evaluate tool calls:
@@ -516,7 +567,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 [1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.54.0
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Starting with [dd-trace-rb v2.25.0][1], a new Ruby SDK is available. This SDK offers a simplified interface for interacting with the REST API directly from JavaScript applications.
+The Ruby SDK ([dd-trace-rb v2.25.0][1] or later) offers a simplified interface for interacting with the REST API directly from Ruby applications.
 
 The following sections provide practical usage examples:
 
@@ -549,13 +600,13 @@ result = Datadog::AIGuard.evaluate(
 )
 ```
 
-[1]: https://github.com/DataDog/dd-trace-rb/releases
+[1]: https://github.com/DataDog/dd-trace-rb/releases/tag/v2.25.0
 {{% /tab %}}
 {{< /tabs >}}
 
 ## View AI Guard data in Datadog {#in-datadog}
 
-After AI Guard is enabled in your Datadog org and you've instrumented your code using one of the [SDKs](#sdks) (Python, JavaScript, or Java), you can view your data in Datadog on the [AI Guard page][6].
+After completing the [setup steps](#setup) and using an [SDK](#sdks) to instrument your code, you can view your data in Datadog on the [AI Guard page][6].
 
 <div class="alert alert-info">You can't see data in Datadog for evaluations performed directly using the REST API.</div>
 
@@ -579,51 +630,90 @@ Follow the instructions to create a new [metric monitor][11].
 
 ## AI Guard security signals {#security-signals}
 
-AI Guard security signals provide visibility into threats and attacks detected by AI Guard in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][14] and integrate seamlessly with Datadog's security monitoring workflows.
+AI Guard security signals provide visibility into threats and attacks AI Guard detects in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][14] and integrate with Datadog's security monitoring workflows.
 
-### Understanding AI Guard signals
+### Understand AI Guard signals
 
-AI Guard security signals are created when Datadog detects a threat based on a configured detection rule. When threats such as prompt injection, jailbreaking, or tool misuse are detected according to your detection rules, security signals appear in the Datadog Security Signals explorer. These signals can provide:
+Datadog creates AI Guard security signals when it detects a threat based on a configured detection rule. Signals indicating threats such as prompt injection, jailbreaking, or tool misuse appear in the Datadog Security Signals explorer. These signals can provide:
 
 - **Threat detection**: Attack context based on your configured detection rules
 - **Action insights**: Blocked or allowed actions information according to your rule settings
 - **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
 - **Custom runbooks**: Custom remediation guidance and response procedures for specific threat scenarios
 
-### Creating detection rules
+### Create detection rules
 
-You can create custom detection rules using the AI Guard detection rule explorer. Custom detection rules generate security signals based on AI Guard evaluations. Currently, only *threshold-based rules* are supported.
+You can create custom detection rules by defining thresholds for when you want to receive notifications; for example, more than 5 `DENY` actions in 10 minutes. When AI Guard evaluations exceed those thresholds, it generates security signals.
 
 To create AI Guard detection rules:
-1. GO to the [AI Guard detection rule explorer][17].
-2. Define your threshold conditions. For example, more than 5 `DENY` actions in 10 minutes.
-3. Set severity levels and notification preferences.
-4. Configure signal metadata and tags.
-
-{{< img src="security/ai_guard/ai_guard_detection_rules.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+1. In Datadog, go to the [AI Guard detection rule explorer][17], then click **New Rule**.
+   {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+1. Under **Define Search Queries**, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
+   <table>
+     <thead>
+       <tr>
+         <th>Tag</th>
+         <th>Description</th>
+         <th>Possible values</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td><code>@ai_guard.action</code></td>
+         <td>Filter by AI Guard's evaluation result</td>
+         <td><code>ALLOW</code> or <code>DENY</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.attack_categories</code></td>
+         <td>Target specific attack types</td>
+         <td>
+           <ul>
+             <li><code>jailbreak</code></li>
+             <li><code>indirect-prompt-injection</code></li>
+             <li><code>destructive-tool-call</code></li>
+             <li><code>denial-of-service-tool-call</code></li>
+             <li><code>security-exploit</code></li>
+             <li><code>authority-override</code></li>
+             <li><code>role-play</code></li>
+             <li><code>instruction-override</code></li>
+             <li><code>obfuscation</code></li>
+             <li><code>system-prompt-extraction</code></li>
+             <li><code>data-exfiltration</code></li>
+           </ul>
+         </td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.blocked</code></td>
+         <td>Filter based on whether an action in the trace was blocked</td>
+         <td><code>true</code> or <code>false</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.tools</code></td>
+         <td>Filter by specific tool names involved in the evaluation</td>
+         <td><code>get_user_profile</code>, <code>user_recent_transactions</code>, etc.</td>
+       </tr>
+     </tbody>
+   </table>
+1. Under **Define Rule Conditions**, define your threshold conditions, set severity levels, choose who should get notifications for new signals and how often, and choose security responses to take.
+1. Under **Describe your Playbook**, customize the notification and define tags to send with the signals.
 
 For more comprehensive detection rule capabilities, see [detection rules][15].
 
-#### Available AI Guard tags for detection rules
+### Investigate signals
 
-When creating detection rules, you can use the following AI Guard attributes to filter and target specific threat patterns:
+To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
+- [Application and API Protection Security Signals explorer][18]
+- [Cloud SIEM Security Signals explorer][16] 
+  
+  In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
 
-- **@ai_guard.action**: Filter by AI Guard's evaluation result (`ALLOW` or `DENY`)
-- **@ai_guard.attack_categories**: Target specific attack types such as `jailbreak`, `indirect-prompt-injection`, `destructive-tool-call`, `denial-of-service-tool-call`, `security-exploit`, `authority-override`, `role-play`, `instruction-override`, `obfuscation`, `system-prompt-extraction`, or `data-exfiltration`
-- **@ai_guard.blocked**: Filter based on whether an action in the trace was blocked (`true` or `false`)
-- **@ai_guard.tools**: Filter by specific tool names involved in the evaluation (for example, `get_user_profile`, `user_recent_transactions`)
-
-### Investigating signals
-
-To view and investigate AI Guard security signals, you can access signals through the [Application and API Protection Security Signals explorer][18] or [Cloud SIEM Security Signals explorer][16] and correlate with other security events. When using the Cloud SIEM Security Signals explorer, make sure to check the **AAP** checkbox filter to view AI Guard signals.
-
-The Security Signals explorer allows you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
+The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.datadoghq.com/
+[1]: /help
 [2]: /account_management/api-app-keys/
 [3]: /account_management/api-app-keys/#scopes
 [4]: /agent/?tab=Host-based
@@ -640,4 +730,4 @@ The Security Signals explorer allows you to filter, prioritize, and investigate 
 [15]: /security/detection_rules/
 [16]: https://app.datadoghq.com/security/siem/signals
 [17]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
-[18]: https://app.datadoghq.com/security/appsec/signals
+[18]: https://app.datadoghq.com/security/ai-guard/signals

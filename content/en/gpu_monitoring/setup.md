@@ -18,7 +18,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 
 #### Minimum version requirements
 
-- **Datadog Agent**: v7.72.2
+- **Datadog Agent**: v7.74
 - **Operating system**: Linux
    - (Optional) For advanced eBPF metrics, Linux kernel version 5.8
 - **NVIDIA driver**: version 450.51
@@ -28,7 +28,7 @@ If using Kubernetes, the following additional requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a uniform Kubernetes cluster or non-Kubernetes environment
+## Set up GPU Monitoring on a non-Kubernetes environment or uniform Kubernetes cluster
 
 The following instructions are the basic steps to set up GPU Monitoring in the following environments:
 - In a Kubernetes cluster where **all** nodes have GPU devices

@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you want to update source and destination environment variables, you need to manually update the Worker with the new values.
+For existing pipelines in Observability Pipelines, you can update and deploy changes for source settings, destination settings, and processors in the Observability Pipelines UI. But if you are using environment variables and want to update source and destination environment variables, you must manually update the Worker with the new values.
 
 This document goes through updating the pipeline in the UI. You can also use the [update a pipeline][2] API or [datadog_observability_pipeline][3] Terraform resource to update existing pipelines.
 
@@ -18,9 +18,10 @@ This document goes through updating the pipeline in the UI. You can also use the
 1. Click **Edit Pipeline** in the top right corner.
 1. Make changes to the pipeline.
 	- If you are updating the source or destination settings shown in the tiles, or updating and adding processors, make the changes and then click **Deploy Changes**.
-	- To update source or destination environment variables, click **Go to Worker Installation Steps** and see [Update source or destination variables](#update-source-or-destination-variables) for instructions.
+	- To update source or destination environment variables, click **Go to Worker Installation Steps** and see [Update source or destination environment variables](#update-source-or-destination-environment-variables) for instructions.
+1. If you updated secret identifiers or environment variables, restart the Worker.
 
-### Update source or destination variables
+### Update source or destination environment variables
 
 On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.

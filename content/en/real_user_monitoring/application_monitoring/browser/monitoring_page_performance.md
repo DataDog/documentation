@@ -163,7 +163,8 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 
 ### Measure component-level performance with custom vitals
 
-Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction. **Note**: Custom vital names can't contain spaces or special characters.
+Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction. **Note**: Custom vital names must contain only letters, digits, or the characters `- _ . @ $`.
+
 
 #### Start and stop duration measurements
 
