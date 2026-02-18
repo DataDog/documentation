@@ -20,7 +20,7 @@ You can create datasets from production data, CSV files, or manually construct t
 
 {{% tab "From CSV files" %}}
 
-Create a dataset from a CSV file - use `LLMObs.create_dataset_from_csv()`:
+To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
 
 ```python
 # Create dataset from CSV
@@ -52,7 +52,7 @@ dataset = LLMObs.create_dataset_from_csv(
 
 {{% tab "Manual creation" %}}
 
-Manually create a dataset - use `LLMObs.create_dataset()`:
+To manually create a dataset, use `LLMObs.create_dataset()`:
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -83,10 +83,10 @@ print(f"View dataset: {dataset.url}")
 Add production traces to datasets manually through the UI or automatically with Automations.
 
 **Manual selection (UI)**:
-1. Navigate to [**AI Observability > Traces**][2] (You can also add a new Automation from [Settings > Automations][3] )
+1. Navigate to [**AI Observability > Traces**][2]. You can also add a new Automation from [Settings > Automations][3].
 2. Find a trace you want to include in a dataset.
-3. Click **Add to Dataset** .
-4. Choose an existing dataset or create a new one.
+3. Click **Add to Dataset**.
+4. Choose an existing dataset or create a dataset.
 5. The trace's input, output, and metadata are automatically extracted.
 
 **Automatic routing (Automations)**:
@@ -94,31 +94,33 @@ Add production traces to datasets manually through the UI or automatically with 
 Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention. Automation rules apply only to new traces generated after the rule is created, not to existing historical traces. 
 
 To set up automatic dataset updates:
-1. Navigate to [**AI Observability > Traces**][2]
+1. Navigate to [**AI Observability > Traces**][2].
 2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax][4].
 3. Click **Automate Query**.
 4. Configure sampling rate (for example, 10% of matching traces).
 5. Select **Add to Dataset** as the action.
-6. Choose an existing dataset or create a new one.
+6. Choose an existing dataset or create a dataset.
 
 After creating an automation, manage it from [**AI Observability > Settings > Automations**][3]:
-- **Enable/disable**: Control whether new traces are added to the dataset
-- **Edit**: Modify filters, sampling rates, or target datasets as your needs change
-- **Delete**: Remove automations that are no longer needed
+- **Enable/disable**: Control whether new traces are added to the dataset.
+- **Edit**: Modify filters, sampling rates, or target datasets as your needs change.
+- **Delete**: Remove automations that are no longer needed.
 
 **Dataset limits:**
-- Datasets populated by automations are capped at 20,000 records
-- These datasets are read-only to prevent accidental modification of automated data
-- To modify records, clone the dataset first
+- Datasets populated by automations are capped at 20,000 records.
+- These datasets are read-only to prevent accidental modification of automated data.
+- To modify records, clone the dataset first.
 
 **Example use cases for Automations:**
-- Sample 10% of traces with failed evaluations to build a failure dataset
-- Collect edge cases where latency exceeds thresholds
-- Maintain a diverse dataset with stratified sampling across user segments
-- Automatically capture new failure patterns as they emerge in production
+- Sample 10% of traces with failed evaluations to build a failure dataset.
+- Collect edge cases where latency exceeds thresholds.
+- Maintain a diverse dataset with stratified sampling across user segments.
+- Automatically capture new failure patterns as they emerge in production.
 
+[2]: https://app.datadoghq.com/llm/traces
+[3]: https://app.datadoghq.com/llm/settings/automations
+[4]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ### Retrieving a dataset
@@ -229,7 +231,4 @@ dataset.push()
 ```
 
 [1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
-[2]: https://app.datadoghq.com/llm/traces
-[3]: https://app.datadoghq.com/llm/settings/automations
-[4]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 
