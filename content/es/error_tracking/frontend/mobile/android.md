@@ -346,7 +346,7 @@ Para permitir que el SDK Android comience a enviar datos:
 {{% tab "Kotlin" %}}
 ```kotlin
     val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
+      .trackUserInteractions()
       .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
       .useViewTrackingStrategy(strategy)
       .build()
@@ -357,7 +357,7 @@ Para permitir que el SDK Android comience a enviar datos:
 {{% tab "Java" %}}
 ```java
     RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
+      .trackUserInteractions()
       .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
       .useViewTrackingStrategy(strategy)
       .build();
@@ -422,7 +422,7 @@ Para habilitar los informes de ANR, añade lo siguiente a tu configuración de R
 {{% tab "Kotlin" %}}
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold)
     .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
     .useViewTrackingStrategy(strategy)
@@ -433,7 +433,7 @@ Rum.enable(rumConfig)
 {{% tab "Java" %}}
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold)
     .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
     .useViewTrackingStrategy(strategy)

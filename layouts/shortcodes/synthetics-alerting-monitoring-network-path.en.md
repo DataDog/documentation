@@ -9,6 +9,10 @@ When you set the alert conditions to: `An alert is triggered if any assertion fa
 * At least one location was in failure (at least one assertion failed) during the last *X* minutes;
 * At one moment during the last *X* minutes, at least *n* locations were in failure.
 
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
+
 ### Configure the test monitor
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
@@ -75,4 +79,5 @@ For more information, see [Synthetic Monitoring notifications][103].
 [101]: /monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [102]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [103]: /synthetics/notifications/
+[104]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
 [104]: http://daringfireball.net/projects/markdown/syntax

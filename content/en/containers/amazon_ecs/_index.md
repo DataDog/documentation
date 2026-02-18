@@ -291,8 +291,6 @@ If you already have a task definition, update your file to include the following
  ```
 #### Network Path
 
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
-
 1. To enable [Network Path][31] on your ECS clusters, enable the `system-probe` traceroute module by adding the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
 
    ```json

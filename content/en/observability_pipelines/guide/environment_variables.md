@@ -1,6 +1,8 @@
 ---
 title: Environment Variables
 disable_toc: false
+aliases:
+    - /observability_pipelines/environment_variables/
 ---
 
 ## Overview
