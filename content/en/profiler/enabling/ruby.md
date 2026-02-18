@@ -54,7 +54,7 @@ To begin profiling applications:
     ```
 3. Install the gems with `bundle install`.
 
-4. Enable the profiler:
+4. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}

@@ -529,16 +529,21 @@ Push events (spans and metrics) for an experiment.
 
 #### Object: Metric
 
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `span_id` | string | Associated span ID. |
-| `metric_type` | string | Metric type. One of: `score`, `categorical`. |
-| `timestamp_ms` | number | UNIX timestamp in milliseconds. |
-| `label` | string | Metric label (evaluator name). |
-| `score_value` | number | Score value (when `metric_type` is `score`). |
-| `categorical_value` | string | Categorical value (when `metric_type` is `categorical`). |
-| `metadata` | json | Arbitrary key-value metadata associated with the metric. |
-| `error.message` | string | Optional error message for the metric. |
+| Field               | Type     | Description                                              |
+|---------------------|----------|----------------------------------------------------------|
+| `span_id`           | string   | Associated span ID.                                      |
+| `metric_type`       | string   | Metric type. One of: `score`, `categorical`, `boolean`, `json`. |
+| `timestamp_ms`      | number   | UNIX timestamp in milliseconds.                          |
+| `label`             | string   | Metric label (evaluator name).                           |
+| `score_value`       | number   | Score value (when `metric_type` is `score`).             |
+| `categorical_value` | string   | Categorical value (when `metric_type` is `categorical`). |
+| `boolean_value`     | boolean  | Boolean value (when `metric_type` is `boolean`).         |
+| `json_value`        | json     | JSON value (when `metric_type` is `json`).               |
+| `metadata`          | json     | Arbitrary key-value metadata associated with the metric. |
+| `error.message`     | string   | Optional error message for the metric.                   |
+| `reasoning`         | string   | Optional explanation for the metric.                     |
+| `assessment`        | string   | Optional assessment. One of: `pass`, `fail`.             |
+| `tags`              | []string | Tags to associate with the metric.                       |
 
 **Response**
 

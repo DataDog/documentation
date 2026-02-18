@@ -73,7 +73,7 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 [1]: /tracing/
 [2]: /universal_service_monitoring/
 [3]: /tracing/services/inferred_services/
-[4]: /tracing/guide/service_overrides/#remove-service-overrides
+[4]: /tracing/guide/service_overrides/
 [5]: /software_catalog/endpoints/
 [6]: https://app.datadoghq.com/software?lens=performance
 [7]: /tracing/guide/configuring-primary-operation/

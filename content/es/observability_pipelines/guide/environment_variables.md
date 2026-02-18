@@ -1,4 +1,6 @@
 ---
+aliases:
+- /es/observability_pipelines/environment_variables/
 disable_toc: false
 title: Variables de entorno
 ---

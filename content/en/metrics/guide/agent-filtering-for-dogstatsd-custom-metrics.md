@@ -1,6 +1,6 @@
 
 ---
-title: Agent-Side Filtering for DogStatsD Custom Metrics 
+title: Agent-Side Filtering for Custom Metrics
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"
@@ -20,12 +20,12 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/" btn_hidden="true" header="false" >}}
-Agent-side filtering for DogStatsD custom metrics is in Preview.
+Agent-side filtering for custom metrics is in Preview.
 {{< /callout >}} 
 
 ## Overview
 
-Agent-side filtering enables you to filter out unused or unwanted DogStatsD custom metrics directly at the Datadog Agent, before sending them to Datadog. This can significantly reduce both indexed and ingested custom metric volume.
+Agent-side filtering enables you to filter out unused or unwanted custom metrics (both from DogStatsD and Agent integrations) directly at the Datadog Agent, before sending them to Datadog. This can significantly reduce both indexed and ingested custom metric volume.
 
 Filtering is performed at the Agent level but centrally managed through the Datadog UI, giving teams full visibility and control. You can create, update, and manage filtering policies in Datadog, streamlining metric governance while maintaining transparency.
 
@@ -33,7 +33,9 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Prerequisites
 
-- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended).
+- Upgrade to Datadog Agent v7.67.0 or higher.
+    - Using v7.70.0 or higher is recommended to filter DogStastD metrics. 
+    - Using v7.74.0 or higher is required for Agent Integration metrics.
 - With [`org_management`][2] permissions, enable [Remote Configuration][3] for your organization.
 - With [`api_keys_write`][4] permissions, enable the [Remote Configuration capability on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, restart your Agents for the change to take effect.
 
@@ -41,9 +43,9 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Create a metric filtering policy
 
-You can create a metric filtering policy from the [Metrics Settings page][6] or the [Metrics Summary page][7].
+You can create a metric filtering policy from the [Metrics Settings page][7] or the [Metrics Summary page][6].
 
-Metric filtering policies are applied to all Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
+Metric filtering policies are applied to all Agents v7.67.0+ (v7.74.0+ for Agent Integration metrics) with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
 
 Policy updates are deployed to Agents in 1-2 minutes.
 
@@ -70,7 +72,7 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 5. Review the **Metrics to Filter**. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
 6. Click **Save and Filter**.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/create_policy_from_metric_query.mp4" alt="Creating a metric filtering policy from a metric query" video="true" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_from_metric_query.mp4" alt="Creating a metric filtering policy from a metric query" video="true" >}}
 
 {{% /tab %}}
 {{% tab "From the policy editor" %}}
@@ -81,7 +83,7 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 4. Enter a metric query in the **Metrics to Filter** field, or select metrics individually from the dropdown. Click `X` on the right side of any row to remove a metric from the list.
 5. Click **Save and Filter**.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/create_policy_with_policy_editor.mp4" alt="Creating a metric filtering policy from the policy editor" video="true" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_with_policy_editor.mp4" alt="Creating a metric filtering policy from the policy editor" video="true" >}}
 
 {{% /tab %}}
 {{% tab "From CSV upload" %}}
@@ -94,7 +96,7 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 6. Review the metrics listed. Click `X` on the right side of any row to remove a metric from the list. If needed, upload additional CSV files, or add metrics through the **Metrics to Filter** field.
 7. Click **Save and Filter**.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/create_policy_with_csv_upload.mp4" alt="Creating a metric filtering policy with a CSV file upload" video="true" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/create_policy_with_csv_upload.mp4" alt="Creating a metric filtering policy with a CSV file upload" video="true" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -111,7 +113,7 @@ You can edit a metric filtering policy from the [Metrics Settings page][1] or th
    - If you choose to upload a CSV, select the file and click **Open**.
 4. Click **Save and Filter**.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/edit_policy_from_metrics_settings.mp4" alt="Editing a metric filtering policy from the Metrics Settings page" video="true" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/edit_policy_from_metrics_settings.mp4" alt="Editing a metric filtering policy from the Metrics Settings page" video="true" >}}
 
 ### From the Metrics Summary page
 
@@ -127,7 +129,7 @@ Edit a metric filtering policy from the Metrics Summary page using any of the fo
 5. Review the **Metrics to Filter** and **Existing metrics in policy** lists. Click `X` on the right side of any row to remove a metric from the list, or click `+ Include More Metrics` to add metrics to the list.
 6. Click **Save and Filter**.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/edit_policy_with_metric_query.mp4" alt="Editing a metric filtering policy with a metric query" video="true" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/edit_policy_with_metric_query.mp4" alt="Editing a metric filtering policy with a metric query" video="true" >}}
 
 {{% /tab %}}
 {{% tab "From the policy editor" %}}
@@ -158,21 +160,21 @@ You can view all your policies and filtered metrics from the [Metrics Settings p
 
 **Click on the [settings button][1]**: 
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/settings_from_summary.png" alt="The settings button on the metric summary page" style="width:100%;" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/settings_from_summary.png" alt="The settings button on the metric summary page" style="width:100%;" >}}
 
 **Click on Metrics in the navigation bar** and go straight to settings:
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/settings_from_nav.png" alt="The settings option from the expanded Metrics panel in Datadog" style="width:100%;" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/settings_from_nav.png" alt="The settings option from the expanded Metrics panel in Datadog" style="width:100%;" >}}
 
 ### View all policies
 
-Select the **Policies** tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+Select the **Policies** tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
 
 Click on any metric filtering policy to open its detail view for edits or deletion.
 
 ### View all filtered metrics
 
-Select the **Filtered Metrics** tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+Select the **Filtered Metrics** tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
 
 Click on a filtered metric's attached policies in the **ATTACHED POLICIES** column for edits or deletion.
 
@@ -183,11 +185,11 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 1. Click on the metric filtering policy to delete.
 2. Select **Delete** in the top-right corner of the page.
 
-{{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/delete_policy.png" alt="The delete policy button on a metric filtering policy detail view" style="width:100%;" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/delete_policy.png" alt="The delete policy button on a metric filtering policy detail view" style="width:100%;" >}}
 
 ## Manage metric filtering policies through the API
 
-<div class="alert alert-danger">These endpoints are subject to change while Agent-side filtering for DogStatsD custom metrics is in Preview.</div>
+<div class="alert alert-danger">These endpoints are subject to change while Agent-side filtering for custom metrics is in Preview.</div>
 
 These endpoints require a valid Datadog API key and application key. See [Getting started][8] in the API Reference for more information.
 
@@ -381,7 +383,7 @@ This initial preview release includes the following limitations:
 
 - A maximum of 10,000 metric names can be filtered out.
 - Resource usage impact on the Agent is limited to up to 10MB of memory (RSS), and no increase to CPU usage.
-- Only DogStatsD metrics are supported.
+- Only custom metrics received from either DogStatsD or Agent integrations are supported.
 
 ## Further reading
 

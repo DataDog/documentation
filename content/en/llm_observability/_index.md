@@ -36,6 +36,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-abuse-ai-infrastructure/"
   tag: "Blog"
   text: "Abusing AI infrastructure: How mismanaged credentials and resources expose LLM applications"
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
+  tag: "Blog"
+  text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
 ---
 
 {{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
