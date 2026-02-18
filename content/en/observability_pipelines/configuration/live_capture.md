@@ -34,13 +34,13 @@ Admins have read and write permissions by default. Standard users only have read
 
 If you are using a firewall, you must add these domains to the allowlist:
 
-- api.{{< region-param key="dd_site" >}}
-- obpipeline-intake.{{< region-param key="dd_site" >}}
-- config.{{< region-param key="dd_site" >}}
-- http-intake.{{< region-param key="dd_site" >}}
-- install.{{< region-param key="dd_site" >}}
-- yum.datadoghq.com
-- keys.datadoghq.com
+- `api.{{< region-param key="dd_site" >}}`
+- `obpipeline-intake.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `install.{{< region-param key="dd_site" >}}`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
 
 ## Capture events
 
