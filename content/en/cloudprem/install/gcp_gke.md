@@ -1,8 +1,21 @@
-# CloudPrem on Google Kubernetes Engine (GKE)
+---
+title: CloudPrem on Google Kubernetes Engine (GKE)
+further_reading:
+- link: "/cloudprem/configure/ingress/"
+  tag: "Documentation"
+  text: "Configure CloudPrem Ingress"
+- link: "/cloudprem/ingest/"
+  tag: "Documentation"
+  text: "Configure Log Ingestion"
+---
 
-This guide walks you through deploying Datadog CloudPrem on Google Kubernetes Engine (GKE).
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< /callout >}}
 
 ## Overview
+
+This installation setup walks you through deploying Datadog CloudPrem on Google Kubernetes Engine (GKE).
 
 CloudPrem on GKE uses the following Google Cloud services:
 - **Google Kubernetes Engine (GKE)**: Container orchestration platform for running CloudPrem components
@@ -12,25 +25,25 @@ CloudPrem on GKE uses the following Google Cloud services:
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+Before you begin, confirm you have:
 
 1. **Google Cloud CLI** installed and configured
-   ```bash
+   ```shell
    gcloud version
    ```
 
 2. **kubectl** installed
-   ```bash
+   ```shell
    kubectl version --client
    ```
 
 3. **Helm 3.x** installed
-   ```bash
+   ```shell
    helm version
    ```
 
 4. **GCP Project** with billing enabled
-   ```bash
+   ```shell
    gcloud config set project YOUR_PROJECT_ID
    ```
 
@@ -44,38 +57,30 @@ Before you begin, ensure you have:
    - APP Key: https://app.datadoghq.com/organization-settings/application-keys
 
 7. **APIs Enabled**:
-   ```bash
+   ```shell
    gcloud services enable container.googleapis.com \
      compute.googleapis.com \
      sqladmin.googleapis.com \
      storage.googleapis.com
    ```
 
-## Architecture
+## Installation steps
 
-CloudPrem consists of several components:
-- **Control Plane** (1 replica): Manages cluster coordination and job scheduling
-- **Metastore** (2+ replicas): Handles metadata operations for indexes and splits
-- **Indexer** (2+ replicas): Ingests and indexes telemetry data
-- **Searcher** (2+ replicas): Executes search queries on indexed data
-- **Janitor** (1 replica): Performs garbage collection and maintenance tasks
+### Step 1: Set environment variables
 
-## Installation Steps
+Set the following environment variables to simplify subsequent commands and reduce copy-paste errors.
 
-### Step 1: Set Environment Variables
-
-```bash
+```
 export PROJECT_ID="your-gcp-project-id"
 export REGION="us-central1"
 export CLUSTER_NAME="cloudprem-cluster"
-export DATADOG_SITE="datadoghq.com"  # or datadoghq.eu, us3.datadoghq.com, us5.datadoghq.com
+export DATADOG_SITE="{{< region-param key=dd_site >}}"  # your selected Datadog site
 ```
-
-### Step 2: Create GKE Cluster
+### Step 2: Create GKE cluster
 
 Create a GKE cluster with Workload Identity enabled:
 
-```bash
+```shell
 gcloud container clusters create ${CLUSTER_NAME} \
   --region ${REGION} \
   --node-locations ${REGION}-a,${REGION}-b,${REGION}-c \
@@ -91,33 +96,34 @@ gcloud container clusters create ${CLUSTER_NAME} \
   --release-channel stable
 ```
 
-**Cluster sizing recommendations**:
+{{% collapse-content title="Cluster sizing recommendations" level="h4" %}}
 - **Small (Dev/Test)**: 3 nodes, n1-standard-4 (~100GB/day)
 - **Medium (Production)**: 5 nodes, n1-standard-8 (~500GB/day)
 - **Large (Enterprise)**: 7+ nodes, n1-standard-16 (~1TB+/day)
+{{% /collapse-content %}}
 
 Get cluster credentials:
-```bash
+```shell
 gcloud container clusters get-credentials ${CLUSTER_NAME} --region ${REGION}
 ```
 
 Install GKE auth plugin:
-```bash
+```shell
 gcloud components install gke-gcloud-auth-plugin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 ```
 
 Verify cluster access:
-```bash
+```shell
 kubectl cluster-info
 kubectl get nodes
 ```
 
-### Step 3: Create Cloud Storage Bucket
+### Step 3: Create Cloud Storage bucket
 
 Create a GCS bucket for CloudPrem data storage:
 
-```bash
+```shell
 export BUCKET_NAME="cloudprem-data-${PROJECT_ID}"
 
 gsutil mb -p ${PROJECT_ID} \
@@ -127,15 +133,15 @@ gsutil mb -p ${PROJECT_ID} \
 ```
 
 Verify bucket creation:
-```bash
+```shell
 gsutil ls -L gs://${BUCKET_NAME}
 ```
 
-### Step 4: Create Cloud SQL PostgreSQL Instance
+### Step 4: Create Cloud SQL PostgreSQL instance
 
 Create a Cloud SQL PostgreSQL instance for metadata storage:
 
-```bash
+```shell
 # Generate a secure password
 export DB_PASSWORD=$(openssl rand -base64 32)
 echo "Database password: ${DB_PASSWORD}"
@@ -153,22 +159,22 @@ gcloud sql instances create cloudprem-postgres \
   --backup
 ```
 
-This will take 5-10 minutes. Wait for the instance to be ready:
+This can take a few minutes. Wait for the instance to be ready:
 
-```bash
+```shell
 gcloud sql instances describe cloudprem-postgres \
   --format="value(state)"
 # Should output: RUNNABLE
 ```
 
 Create the CloudPrem database:
-```bash
+```shell
 gcloud sql databases create cloudprem \
   --instance=cloudprem-postgres
 ```
 
 Get the connection details:
-```bash
+```shell
 export DB_CONNECTION_NAME=$(gcloud sql instances describe cloudprem-postgres \
   --format="value(connectionName)")
 export DB_PUBLIC_IP=$(gcloud sql instances describe cloudprem-postgres \
@@ -179,7 +185,7 @@ echo "Public IP: ${DB_PUBLIC_IP}"
 ```
 
 Authorize GKE nodes to connect to Cloud SQL:
-```bash
+```shell
 # Get GKE node external IPs
 export NODE_IPS=$(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | tr ' ' ',')
 
@@ -193,7 +199,7 @@ gcloud sql instances patch cloudprem-postgres \
 
 Create a GCP service account for CloudPrem:
 
-```bash
+```shell
 export SERVICE_ACCOUNT_NAME="cloudprem-sa"
 
 gcloud iam service-accounts create ${SERVICE_ACCOUNT_NAME} \
@@ -203,7 +209,7 @@ gcloud iam service-accounts create ${SERVICE_ACCOUNT_NAME} \
 
 Grant necessary IAM roles:
 
-```bash
+```shell
 # Cloud SQL Client role
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
   --member="serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com" \
@@ -217,7 +223,7 @@ gsutil iam ch \
 
 Create Kubernetes namespace and service account:
 
-```bash
+```shell
 kubectl create namespace datadog-cloudprem
 
 kubectl create serviceaccount cloudprem-ksa \
@@ -230,18 +236,18 @@ kubectl annotate serviceaccount cloudprem-ksa \
 
 Bind GCP service account to Kubernetes service account:
 
-```bash
+```shell
 gcloud iam service-accounts add-iam-policy-binding \
   ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com \
   --role=roles/iam.workloadIdentityUser \
   --member="serviceAccount:${PROJECT_ID}.svc.id.goog[datadog-cloudprem/cloudprem-ksa]"
 ```
 
-### Step 6: Create Kubernetes Secrets
+### Step 6: Create Kubernetes secrets
 
 Create secret for Datadog API keys:
 
-```bash
+```shell
 kubectl create secret generic datadog-secret \
   --from-literal=api-key='YOUR_DATADOG_API_KEY' \
   --from-literal=app-key='YOUR_DATADOG_APP_KEY' \
@@ -250,12 +256,9 @@ kubectl create secret generic datadog-secret \
 
 Create secret for PostgreSQL connection:
 
-**Important**: The password must be URL-encoded. Use Python or online tools to encode special characters:
-- `/` → `%2F`
-- `+` → `%2B`
-- `=` → `%3D`
+<div class="alert alert-danger">The password must be URL-encoded. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
 
-```bash
+```shell
 # URL-encode the password first
 # Example: if password is "abc/def+ghi=" it becomes "abc%2Fdef%2Bghi%3D"
 
@@ -268,7 +271,7 @@ kubectl create secret generic cloudprem-metastore-config \
 
 Add the Datadog Helm repository:
 
-```bash
+```shell
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
@@ -345,7 +348,7 @@ quickwit:
 
 Install CloudPrem:
 
-```bash
+```shell
 helm install cloudprem datadog/cloudprem \
   --namespace datadog-cloudprem \
   --values values.yaml \
@@ -353,13 +356,13 @@ helm install cloudprem datadog/cloudprem \
   --wait
 ```
 
-### Step 8: Install Datadog Agent (Optional but Recommended)
+### Step 8: Install Datadog Agent (Recommended)
 
 Install the Datadog Agent to collect metrics from CloudPrem components and send them to Datadog.
 
 Create a separate namespace for the Datadog Agent:
 
-```bash
+```shell
 kubectl create namespace datadog
 
 # Copy the API key secret to the datadog namespace
@@ -464,7 +467,7 @@ clusterChecksRunner:
 
 Install the Datadog Agent:
 
-```bash
+```shell
 helm install datadog-agent datadog/datadog \
   --namespace datadog \
   --values datadog-agent-values.yaml \
@@ -474,7 +477,7 @@ helm install datadog-agent datadog/datadog \
 
 Verify the Datadog Agent is running:
 
-```bash
+```shell
 kubectl get pods -n datadog
 ```
 
@@ -495,7 +498,7 @@ dogstatsdServer:
 
 Upgrade CloudPrem with the new configuration:
 
-```bash
+```shell
 helm upgrade cloudprem datadog/cloudprem \
   --namespace datadog-cloudprem \
   --values values.yaml \
@@ -504,15 +507,15 @@ helm upgrade cloudprem datadog/cloudprem \
 
 Verify the DogStatsD configuration:
 
-```bash
+```shell
 kubectl get pod -n datadog-cloudprem -l app.kubernetes.io/component=metastore -o jsonpath='{.items[0].spec.containers[0].env[?(@.name=="CP_DOGSTATSD_SERVER_HOST")].value}'
 # Should output: datadog-agent.datadog.svc.cluster.local
 ```
 
-### Step 9: Verify Deployment
+### Step 9: Verify deployment
 
 Check pod status:
-```bash
+```shell
 kubectl get pods -n datadog-cloudprem
 ```
 
@@ -530,29 +533,27 @@ cloudprem-searcher-1                   1/1     Running   0          5m
 ```
 
 Check services:
-```bash
+```shell
 kubectl get svc -n datadog-cloudprem
 ```
 
 Check metastore logs for successful database connection:
-```bash
+```shell
 kubectl logs -n datadog-cloudprem -l app.kubernetes.io/component=metastore --tail=50
 ```
 
 You should see log entries indicating successful cluster joining and split operations, with no connection errors.
 
 Verify reverse connection to Datadog:
-```bash
+```shell
 kubectl logs -n datadog-cloudprem -l app.kubernetes.io/component=control-plane --tail=50 | grep -i "reverse connection\|datadog"
 ```
 
-## Configuration
-
-### Scaling
+## Configure scaling
 
 Scale indexers and searchers based on your data volume:
 
-```bash
+```shell
 # Scale indexers
 kubectl scale statefulset cloudprem-indexer \
   -n datadog-cloudprem \
@@ -564,97 +565,11 @@ kubectl scale statefulset cloudprem-searcher \
   --replicas=4
 ```
 
-
-## Monitoring
-
-CloudPrem sends its own metrics to Datadog. Monitor CloudPrem health in your Datadog account.
-
-## Troubleshooting
-
-### Pods Not Starting
-
-**Check pod events:**
-```bash
-kubectl describe pod -n datadog-cloudprem <pod-name>
-```
-
-**Common issues:**
-- Insufficient resources: Check node capacity with `kubectl describe nodes`
-- Image pull errors: Verify network connectivity and image availability
-- Secret not found: Verify secrets exist with `kubectl get secrets -n datadog-cloudprem`
-
-### Metastore Connection Errors
-
-**Error**: `failed to connect to metastore: connection error: pool timed out`
-
-**Solution**: Verify Cloud SQL authorized networks include GKE node IPs:
-```bash
-gcloud sql instances describe cloudprem-postgres \
-  --format="value(settings.ipConfiguration.authorizedNetworks)"
-```
-
-Update authorized networks if needed:
-```bash
-export NODE_IPS=$(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | tr ' ' ',')
-gcloud sql instances patch cloudprem-postgres \
-  --authorized-networks=${NODE_IPS} \
-  --quiet
-```
-
-**Error**: `failed to connect to metastore: invalid port number`
-
-**Solution**: Ensure the password in the metastore URI is URL-encoded. Special characters must be escaped:
-```bash
-# Correct format
-postgresql://postgres:abc%2Fdef%2Bghi%3D@IP:5432/cloudprem
-
-# Incorrect format (will fail)
-postgresql://postgres:abc/def+ghi=@IP:5432/cloudprem
-```
-
-### Storage Access Issues
-
-**Error**: `failed to write to GCS bucket`
-
-**Solution**: Verify service account has correct permissions:
-```bash
-gsutil iam get gs://${BUCKET_NAME}
-```
-
-Grant permissions if missing:
-```bash
-gsutil iam ch \
-  serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com:objectAdmin \
-  gs://${BUCKET_NAME}
-```
-
-### Workload Identity Issues
-
-**Error**: `could not generate access token`
-
-**Solution**: Verify Workload Identity binding:
-```bash
-# Check service account annotation
-kubectl get serviceaccount cloudprem-ksa -n datadog-cloudprem -o yaml | grep iam.gke.io
-
-# Verify IAM binding
-gcloud iam service-accounts get-iam-policy \
-  ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com
-```
-
-Re-create binding if needed:
-```bash
-gcloud iam service-accounts add-iam-policy-binding \
-  ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com \
-  --role=roles/iam.workloadIdentityUser \
-  --member="serviceAccount:${PROJECT_ID}.svc.id.goog[datadog-cloudprem/cloudprem-ksa]"
-```
-
-## Uninstalling
+## Uninstall
 
 To completely remove CloudPrem:
 
-```bash
+```shell
 # Uninstall Helm release
 helm uninstall cloudprem --namespace datadog-cloudprem
 
@@ -678,26 +593,25 @@ gcloud container clusters delete ${CLUSTER_NAME} \
   --quiet
 ```
 
-## Best Practices
+## Best practices
 
-1. **Use Workload Identity** instead of service account keys for better security
-2. **Enable Cloud SQL backups** for disaster recovery
-3. **Use regional GKE clusters** for high availability
-4. **Monitor disk usage** on indexer nodes and enable auto-scaling
-5. **Set up alerts** in Datadog for CloudPrem component health
-6. **Use private GKE clusters** for enhanced security in production
-7. **Regularly update** CloudPrem to the latest version for bug fixes and features
-8. **Test scaling** in a staging environment before production changes
+- **Use Workload Identity** instead of service account keys for better security.
+- **Enable Cloud SQL backups** for disaster recovery.
+- **Use regional GKE clusters** for high availability.
+- **Monitor disk usage** on indexer nodes and enable auto-scaling.
+- **Set up alerts** in Datadog for CloudPrem component health.
+- **Use private GKE clusters** for enhanced security in production.
+- **Regularly update** CloudPrem to the latest version for bug fixes and features.
+- **Test scaling** in a staging environment before production changes.
+- **Store the database password** in Secret Manager and use External Secrets Operator (ESO) or the Secrets Store CSI Driver to provide the password to metastore pods.
 
-## Next Steps
+## Next steps
 
 - Configure your applications to send telemetry to CloudPrem
 - Set up dashboards in Datadog to monitor CloudPrem performance
 - Review CloudPrem logs and metrics in your Datadog account
 - Plan capacity based on your data volume
 
-## Support
+## Further reading
 
-For issues or questions:
-- Datadog Support: https://help.datadoghq.com/
-- CloudPrem Documentation: https://docs.datadoghq.com/cloudprem/
+{{< partial name="whats-next/whats-next.html" >}}

@@ -8,6 +8,9 @@ further_reading:
 - link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
+- link: "/cloudprem/operate/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting CloudPrem"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
@@ -16,13 +19,13 @@ further_reading:
 
 ## Overview
 
-This guide walks you through the process of installing CloudPrem on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
+This documentation walks you through the process of installing CloudPrem on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
 
-This setup is ideal for environments where you manage your own infrastructure or don't use a major cloud provider's managed services. The guide assumes that PostgreSQL and MinIO are already deployed and accessible from your Kubernetes cluster.
+This setup is ideal for environments where you manage your own infrastructure or don't use a major cloud provider's managed services.
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+Before you begin, confirm you have:
 
 - **kubectl** installed and configured to access your Kubernetes cluster
   ```shell
@@ -117,7 +120,7 @@ If successful, the command lists the contents of your MinIO bucket.
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
 
-   <div class="alert alert-warning">If your password contains special characters, URL-encode them first. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
+   <div class="alert alert-danger">If your password contains special characters, URL-encode them first. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
 
    ```shell
    kubectl create secret generic cloudprem-metastore-uri \
@@ -134,7 +137,7 @@ If successful, the command lists the contents of your MinIO bucket.
    --from-literal AWS_SECRET_ACCESS_KEY="<MINIO_SECRET_KEY>"
    ```
 
-1. Customize the Helm chart
+1. Customize the Helm chart:
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the service account, ingress setup, resource requests and limits, and more.
 
@@ -145,7 +148,7 @@ If successful, the command lists the contents of your MinIO bucket.
    helm show values datadog/cloudprem
    ```
 
-   Here is an example of a `datadog-values.yaml` file with overrides for a vanilla Kubernetes setup with MinIO:
+   The following is an example `datadog-values.yaml` file with overrides for a vanilla Kubernetes setup with MinIO:
 
    {{< code-block lang="yaml" filename="datadog-values.yaml">}}
 # Datadog configuration
@@ -258,7 +261,7 @@ janitor:
    - `<BUCKET_NAME>`: The name of your MinIO bucket (for example, `cloudprem`)
    - `<MINIO_ENDPOINT>`: The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 
-1. Install or upgrade the Helm chart
+1. Install or upgrade the Helm chart:
 
    ```shell
    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
@@ -307,54 +310,6 @@ Verify that indexers can write to MinIO by checking indexer logs:
 kubectl logs -n <NAMESPACE_NAME> -l app.kubernetes.io/component=indexer --tail=50
 ```
 
-## Troubleshooting
-
-### Metastore cannot connect to PostgreSQL
-
-**Error**: `failed to connect to metastore: connection error: pool timed out`
-
-**Solution**: Verify that PostgreSQL is reachable from the cluster:
-```shell
-kubectl run psql-client \
-  --rm -it \
-  --image=bitnami/postgresql:latest \
-  --command -- psql "host=<HOST> port=<PORT> dbname=<DATABASE> user=<USERNAME> password=<PASSWORD>"
-```
-
-Common causes:
-- PostgreSQL is not accessible from the cluster network
-- Firewall rules are blocking the connection
-- Incorrect host, port, or credentials in the `cloudprem-metastore-uri` secret
-
-**Error**: `failed to connect to metastore: invalid port number`
-
-**Solution**: Ensure the password in the metastore URI is URL-encoded. Special characters must be escaped:
-```
-# Correct format
-postgresql://user:abc%2Fdef%2Bghi%3D@host:5432/cloudprem
-
-# Incorrect format (will fail)
-postgresql://user:abc/def+ghi=@host:5432/cloudprem
-```
-
-### Storage access issues
-
-**Error**: `failed to put object` or `NoSuchBucket`
-
-**Solution**: Verify MinIO connectivity and credentials:
-```shell
-kubectl run minio-client \
-  --rm -it \
-  --image=minio/mc:latest \
-  --command -- bash -c "mc alias set myminio <MINIO_ENDPOINT> <ACCESS_KEY> <SECRET_KEY> && mc ls myminio/<BUCKET_NAME>"
-```
-
-Common causes:
-- MinIO endpoint is not reachable from the cluster
-- Incorrect access key or secret key
-- The bucket does not exist
-- `force_path_style_access` is not set to `true` in the storage configuration
-
 ## Uninstall
 
 To uninstall CloudPrem:
@@ -363,7 +318,7 @@ To uninstall CloudPrem:
 helm uninstall <RELEASE_NAME> -n <NAMESPACE_NAME>
 ```
 
-To also remove the namespace and associated secrets:
+Additionally, to remove the namespace and associated secrets:
 
 ```shell
 kubectl delete namespace <NAMESPACE_NAME>
