@@ -255,3 +255,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [28]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [29]: /observability_pipelines/
 [30]: /logs/log_configuration/flex_logs/
+[31]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&group_by=%40asset.new_value.query.indexes](https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&agg_m=count&agg_m_source=base&agg_q=%40asset.new_value.query.indexes&agg_q_source=base&agg_t=count&audit__diff=unified&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=query_table&x_missing=true&from_ts=1768733389060&to_ts=1771325389060&live=true
