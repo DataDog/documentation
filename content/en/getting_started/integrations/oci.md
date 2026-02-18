@@ -36,11 +36,11 @@ You must also:
 - Be logged into the tenancy you want to integrate
 - Have the Home Region selected in the OCI console
 
+**Note**: The OCI integration is restricted to one integration per tenancy. All OCI Commercial regions (in the OC1 realm) that existed as of January 1, 2026 are supported.
+
 ### In Datadog
 
-A [Datadog account][1] with permissions to create API and application keys.
-
-**Note**: The OCI integration is restricted to one integration per tenancy. All OCI Commercial regions (in the OC1 realm) that existed as of January 1, 2026 are supported.
+A [Datadog account][1] with [permissions to create API and application keys][30].
 
 {{% /collapse-content %}}
 
@@ -206,3 +206,4 @@ Need help? Contact [Datadog support][28].
 [27]: /integrations/guide/oci-integration-troubleshooting
 [28]: /help/
 [29]: https://app.datadoghq.com/dash/integration/31744/oci-gpu-overview
+[30]: /account_management/rbac/permissions/#api-and-application-keys
