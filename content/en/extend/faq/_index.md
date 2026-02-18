@@ -26,7 +26,7 @@ cascade:
 
 [1]: /extend/faq/use-our-webhook-integration-to-create-a-trello-card/
 [2]: /extend/faq/how-to-post-appdynamics-events-to-datadog/
-[3]: /extend/faq/data-aggregation-with-dogstatsd-threadstats/
+[3]: /extend/dogstatsd/data_aggregation/
 [4]: /extend/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats/
 [5]: /extend/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script/
 [6]: /extend/faq/is-it-possible-to-integrate-with-thousandeyes/

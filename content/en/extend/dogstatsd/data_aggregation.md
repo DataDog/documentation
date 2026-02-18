@@ -3,6 +3,7 @@ title: DogStatsD Data Aggregation
 description: Learn how the DogStatsD server aggregates your data before sending it to Datadog
 aliases:
     - /developers/faq/data-aggregation-with-dogstatsd-threadstats
+    - /extend/faq/data-aggregation-with-dogstatsd-threadstats
     - /developers/dogstatsd/data_aggregation/
 further_reading:
     - link: 'extend/dogstatsd'
