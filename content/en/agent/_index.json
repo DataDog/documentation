@@ -1,0 +1,1100 @@
+{
+  "frontmatter": {
+    "aliases": [
+      "/agent/faq/agent-check-directory-structure",
+      "/agent/faq/install-core-extra",
+      "/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs",
+      "/agent/faq/the-datadog-agent-for-logs-or-traces-only",
+      "/agent/basic_agent_usage/",
+      "/guides/basic_agent_usage/",
+      "/agent/faq/where-is-the-configuration-file-for-the-agent/",
+      "/agent/faq/log-location"
+    ],
+    "cascade": [
+      {
+        "_target": {
+          "lang": "en",
+          "path": "/agent/basic_agent_usage/chef"
+        },
+        "tags": [
+          "uninstall"
+        ]
+      },
+      {
+        "_target": {
+          "lang": "en",
+          "path": "/infrastructure/**/*"
+        },
+        "algolia": {
+          "rank": 80,
+          "tags": [
+            "agent"
+          ]
+        }
+      }
+    ],
+    "description": "Install and configure the Agent to collect data",
+    "further_reading": [
+      {
+        "link": "/logs/",
+        "tag": "Documentation",
+        "text": "Collect your logs"
+      },
+      {
+        "link": "/infrastructure/process/",
+        "tag": "Documentation",
+        "text": "Collect your processes"
+      },
+      {
+        "link": "/tracing/",
+        "tag": "Documentation",
+        "text": "Collect your traces"
+      },
+      {
+        "link": "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/",
+        "tag": "Documentation",
+        "text": "Why install the Agent on cloud instances?"
+      },
+      {
+        "link": "https://www.datadoghq.com/blog/dont-fear-the-agent/",
+        "tag": "Blog",
+        "text": "Don't fear the Agent"
+      }
+    ],
+    "title": "Agent"
+  },
+  "content": [
+    {
+      "tText": "\n\u003cdiv class=\"alert alert-info\"\u003e\nAgent v7 is available. \u003ca href=\"/agent/versions/upgrade_to_agent_v7\"\u003eUpgrade to the newest version\u003c/a\u003e to benefit from all new functionality.\n\u003c/div\u003e\n\n## Overview\n\nThe Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].\n\n\u003cbr\u003e\n\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "partial"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "name"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "platforms/platforms.html"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tScParam": "links"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "platforms"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n\n\u003cdiv class=\"alert alert-info\"\u003e\u003cp\u003e\nDatadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. \u003c/p\u003e\n\u003cp\u003e\nUpgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes.\u003c/p\u003e\n\u003cp\u003e \u003cem\u003eIt is recommended to fully install the Agent.\u003c/em\u003e However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE, and Ubuntu. This package is used in containerized environments where DogStatsD runs as a sidecar or environments running a DogStatsD server without full Agent functionality.\u003c/p\u003e\n\u003c/div\u003e\n\n## Managing the Agent\n\n### Managing the Agent with Fleet Automation (recommended)\n[Fleet Automation][15] is the primary, in-app workflow for installing, upgrading, configuring, and troubleshooting the Datadog Agent at scale.\n\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "img"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "src"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/basic_agent_usage/basic_agent_2_july_25.png"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tScParam": "alt"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamValTranslatable": "The Fleet Automation view that allows you to centrally manage your Datadog Agents in one place."
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tScParam": "style"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "width:100%;"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n\n\n- **View configuration \u0026 history**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.\n- **[Upgrade outdated Agents][13]**: Trigger remote upgrades for your Agents to keep your fleet updated in a few clicks.\n- **[Send a flare for support][14]**: From the Support tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.\n- **Audit API-key usage**: Identify which Agents are using a specific API key and rotate keys safely.\n\n\n### Datadog Agent Manager GUI\n\n\u003cdiv class=\"alert alert-info\"\u003eThe Agent GUI is not supported on 32-bit Windows platforms.\u003c/div\u003e\n\nUse the Datadog Agent Manager GUI to:\n- View the status information for your Agent\n- View all running checks\n- View the Agent log\n- Edit the Agent configuration file (`datadog.yaml`)\n- Add or edit Agent checks\n- Send flares\n\nThe Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5002`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.\n\nYou can change the GUI's default port in your `datadog.yaml` configuration file. To disable the GUI, set the port's value to `-1`. On Linux, the GUI is disabled by default.\n\nGUI requirements:\n- Cookies must be enabled in your browser. The GUI generates and saves a token in your browser, which is used for authenticating all communications with the GUI server.\n- To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.\n- For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the host where the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.\n\n### Command-line interface\n\nFrom Agent 6 and later, the Agent command-line interface is based on subcommands. For a full list of Agent subcommands, see [Agent Commands][2].\n\n## Getting further with the Datadog Agent\n\n### Update the Agent\n\nTo manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding installation command for your platform][7].\n\n**Note**: If you want to manually update one specific Agent integration, see the [Integration Management guide][8].\n\n### Configuration files\n\nSee the [Agent configuration files documentation][9].\n\n### Datadog site\n\nEdit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site` parameter (defaults to `datadoghq.com`).\n\n```yaml\nsite: "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "region-param"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "key"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "dd_site"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n```\n\n**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.\n\n### Log location\n\nSee the [Agent log files documentation][12].\n\n## Agent overhead\n\nAn example of the Datadog Agent resource consumption is below. Tests were made on an Amazon EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.\nEnabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.\n\n* Agent Test version: 7.34.0\n* CPU: ~ 0.08% of the CPU used on average\n* Memory: ~ 130MB of RAM used (RSS memory)\n* Network bandwidth: ~ 140 B/s ▼ | 800 B/s ▲\n* Disk:\n  * Linux 830MB to 880MB depending on the distribution\n  * Windows: 870MB\n\n**Log Collection**:\n\nThe results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.\n\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "tabs"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tLeftDelimScWithMarkup": "{{%"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "tab"
+    },
+    {
+      "tGap": " \""
+    },
+    {
+      "tScParamValTranslatable": "HTTP compression level 6"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tRightDelimScWithMarkup": "%}}"
+    },
+    {
+      "tText": "\n\n* Agent Test version: 6.15.0\n* CPU: ~ 1.5% of the CPU used on average\n* Memory: ~ 95MB of RAM used.\n* Network bandwidth: ~ 14 KB/s ▲\n\n"
+    },
+    {
+      "tLeftDelimScWithMarkup": "{{%"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "tab"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScWithMarkup": "%}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tLeftDelimScWithMarkup": "{{%"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "tab"
+    },
+    {
+      "tGap": " \""
+    },
+    {
+      "tScParamValTranslatable": "HTTP compression level 1"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tRightDelimScWithMarkup": "%}}"
+    },
+    {
+      "tText": "\n\n* Agent Test version: 6.15.0\n* CPU: ~ 1% of the CPU used on average\n* Memory: ~ 95MB of RAM used.\n* Network bandwidth: ~ 20 KB/s ▲\n\n"
+    },
+    {
+      "tLeftDelimScWithMarkup": "{{%"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "tab"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScWithMarkup": "%}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tLeftDelimScWithMarkup": "{{%"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "tab"
+    },
+    {
+      "tGap": " \""
+    },
+    {
+      "tScParamValTranslatable": "HTTP Uncompressed"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tRightDelimScWithMarkup": "%}}"
+    },
+    {
+      "tText": "\n\n* Agent Test version: 6.15.0\n* CPU: ~ 0.7% of the CPU used on average\n* Memory: ~ 90MB of RAM used (RSS memory)\n* Network bandwidth: ~ 200 KB/s ▲\n \n"
+    },
+    {
+      "tLeftDelimScWithMarkup": "{{%"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "tab"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScWithMarkup": "%}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "tabs"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n\n\n## Additional resources\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "whatsnext"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "desc"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamValTranslatable": "This section includes the following topics:"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/kubernetes"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eKubernetes\u003c/u\u003e: Install and configure the Datadog Agent on Kubernetes."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/cluster_agent"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eCluster Agent\u003c/u\u003e: Install and configure the Cluster Agent for Kubernetes, a version of the Datadog Agent built to efficiently gather monitoring data from across an orchestrated cluster."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/amazon_ecs"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eAmazon ECS\u003c/u\u003e: Install and configure the Datadog Agent on Amazon ECS."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "integrations/ecs_fargate/"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eAWS Fargate\u003c/u\u003e: Install and configure the Datadog Agent with Amazon ECS on AWS Fargate"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/iot"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eIoT\u003c/u\u003e: Install and configure the Datadog IoT Agent, a version of the Datadog Agent optimized for monitoring IoT devices and embedded applications."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/logs"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eLog Collection\u003c/u\u003e: Enable and configure log collection in the Datadog Agent."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/configuration/proxy"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eProxy\u003c/u\u003e: If your network configuration restricts outbound traffic, use a proxy for Agent traffic."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/versions/"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eVersions\u003c/u\u003e: Agent 7 is the latest major version of the Datadog Agent. Learn about changes between major Agent versions and how to upgrade."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/troubleshooting"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eTroubleshooting\u003c/u\u003e: Find troubleshooting information for the Datadog Agent."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/guide"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eGuides\u003c/u\u003e: These are in-depth, step-by-step tutorials for using the Agent."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/agent/security"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eSecurity\u003c/u\u003e: Information on the main security capabilities and features available to customers to ensure their environment is secure."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tIndentation": "  "
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "href"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "/getting_started/observability_pipelines"
+    },
+    {
+      "tGap": "\""
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\u003cu\u003eConfigure Observability Pipelines and Datadog\u003c/u\u003e: Deploy the Observability Pipelines Worker as an aggregator to collect, transform, and route all of your logs and metrics to any destination."
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "nextlink"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScClose": "/"
+    },
+    {
+      "tScName": "whatsnext"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n\n## Further Reading\n\n"
+    },
+    {
+      "tLeftDelimScNoMarkup": "{{\u003c"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScName": "partial"
+    },
+    {
+      "tGap": " "
+    },
+    {
+      "tScParam": "name"
+    },
+    {
+      "tGap": "=\""
+    },
+    {
+      "tScParamVal": "whats-next/whats-next.html"
+    },
+    {
+      "tGap": "\" "
+    },
+    {
+      "tRightDelimScNoMarkup": "\u003e}}"
+    },
+    {
+      "tText": "\n\n[1]: https://github.com/DataDog/datadog-agent\n[2]: /agent/configuration/agent-commands/\n[6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport\n[7]: https://app.datadoghq.com/account/settings/agent/latest\n[8]: /agent/guide/integration-management/\n[9]: /agent/configuration/agent-configuration-files/\n[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file\n[11]: /getting_started/site/\n[12]: /agent/configuration/agent-log-files/\n[13]: /agent/fleet_automation/remote_management/#remotely-upgrade-your-agents\n[14]: /agent/troubleshooting/send_a_flare/?tab=agent#send-a-flare-from-the-datadog-site\n[15]: /agent/fleet_automation\n"
+    }
+  ]
+}
