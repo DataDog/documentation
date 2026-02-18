@@ -572,31 +572,6 @@ sudo yum install --only-upgrade observability-pipelines-worker
 {{% /tab %}}
 {{< /tabs >}}
 
-## Add domains to firewall allowlist
-
-If you are using a firewall, these domains must be added to the allowlist:
-
-{{< tabs >}}
-{{% tab "Docker and Kubernetes" %}}
-
-- `api.{{< region-param key="dd_site" >}}`
-- `config.{{< region-param key="dd_site" >}}`
-- `http-intake.{{< region-param key="dd_site" >}}`
-- `install.{{< region-param key="dd_site" >}}`
-
-{{% /tab %}}
-{{% tab "Linux" %}}
-
-- `api.{{< region-param key="dd_site" >}}`
-- `config.{{< region-param key="dd_site" >}}`
-- `http-intake.{{< region-param key="dd_site" >}}`
-- `install.{{< region-param key="dd_site" >}}`
-- `yum.datadoghq.com`
-- `keys.datadoghq.com`
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Uninstall the Worker
 
 If you want to uninstall the Worker, run the following commands:
@@ -626,6 +601,31 @@ sudo apt-get remove --purge observability-pipelines-worker
 ## Index your Worker logs
 
 Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
+## Add domains to firewall allowlist
+
+If you are using a firewall, these domains must be added to the allowlist:
+
+{{< tabs >}}
+{{% tab "Docker and Kubernetes" %}}
+
+- `api.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `install.{{< region-param key="dd_site" >}}`
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+- `api.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `install.{{< region-param key="dd_site" >}}`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
