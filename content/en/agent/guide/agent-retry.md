@@ -1,6 +1,5 @@
 ---
 title: Agent Retry and Buffering Logic
-private: true
 further_reading:
 - link: "agent/remote_config/?tab=configurationyamlfile"
   tag: "Documentation"
@@ -15,12 +14,12 @@ further_reading:
 
 ## Overview
 
-This guide describes the Datadog Agent's behavior when it fails to send HTTP requests to the **Metrics**, **Logs**, **APM**, and **Processes** intake endpoints. 
+This guide describes the Datadog Agent's behavior when it fails to send HTTP requests to the **Metrics**, **Logs**, **APM**, and **Processes** intake endpoints.
 
 Follow this guide to learn how the Agent addresses:
 - Retry strategies and backoff behavior
 - Buffering mechanisms and limits
-- Data drop conditions and loss scenarios 
+- Data drop conditions and loss scenarios
 
 <div class="alert alert-info">In this guide, a failed HTTP request is defined as any request that does not result in a <code>2xx</code> HTTP response.</div>
 
@@ -45,10 +44,10 @@ Retries use an [exponential backoff strategy][2] with randomized jitter and usin
 ### Metrics buffering mechanisms and limits
 When the Agent fails to send a metric to the Datadog intake, it compresses and stores this metric in an in-memory retry buffer. The default maximum size for this retry payload is 15MB, but you can configure this using the `forwarder_retry_queue_payloads_max_size` setting.
 
-The Agent also supports an optional [on-disk retry buffer][4]. If you enable this setting: 
-1. First, the Agent fills the in-memory buffer until it is full
-1. Then, the Agent evicts older payloads from memory and serializes them to disk
-1. Finally, the Agent retries payloads in the following order:
+The Agent also supports an optional [on-disk retry buffer][4]. If you enable this setting, the Agent: 
+1. Fills the in-memory buffer until it is full
+1. Evicts older payloads from memory and serializes them to disk
+1. Retries payloads in the following order:
     - In-memory payloads (newest first)
     - On-disk payloads (newest first)
 
