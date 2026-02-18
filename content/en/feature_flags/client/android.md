@@ -21,7 +21,7 @@ This page describes how to instrument your Android or Android TV application wit
 
 The Datadog Feature Flags SDK uses the industry-standard [OpenFeature](https://openfeature.dev/) API, giving you a vendor-neutral, future-proof integration that follows community-driven standards.
 
-<div class="alert alert-info">For most applications, the OpenFeature API is the right choice. If you have advanced requirements see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a> at the end of this guide.</div>
+<div class="alert alert-info">For most applications, the OpenFeature API is the right choice. If you need multiple independent evaluation contexts in the same app, see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a> at the end of this guide.</div>
 
 ## Getting started
 
@@ -124,15 +124,7 @@ OpenFeatureAPI.setProviderAndWait(provider)
 
 <div class="alert alert-info">The OpenFeature provider wraps a Datadog <code>FlagsClient</code> internally. This is an implementation detail—once set up, you interact exclusively through the standard OpenFeature API.</div>
 
-You can also create named providers for different contexts:
-
-{{< code-block lang="kotlin" >}}
-val checkoutProvider = FlagsClient.Builder("checkout")
-    .build()
-    .asOpenFeatureProvider()
-
-OpenFeatureAPI.setProviderAndWait(checkoutProvider)
-{{< /code-block >}}
+<div class="alert alert-warning">The OpenFeature Kotlin SDK uses a single global provider and evaluation context. If you need multiple independent evaluation contexts in the same app (for example, for different users in a multi-user app), see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a>.</div>
 
 ## Set the evaluation context
 
@@ -310,6 +302,7 @@ For most applications, the OpenFeature API described above is the recommended ap
 
 **Use FlagsClient directly only if you:**
 
+- Require **multiple independent evaluation contexts** in the same app (for example, different contexts for different users in a multi-user app)
 - Want to work with **native Kotlin types** directly (`JSONObject` instead of `Value.Structure`)
 - Need **fine-grained control** over client lifecycle and configuration per instance
 
