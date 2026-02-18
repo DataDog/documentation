@@ -4,7 +4,6 @@ import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import { initializeFeatureFlags, getBooleanFlag } from 'scripts/helpers/feature-flags';
-import { trackConversationAnalytics } from '../helpers/track-conversation-analytics';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -55,8 +54,6 @@ const MODEL_4_1_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
 const MODEL_5_2_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-5.2';
 const DEFAULT_CONVERSATION_MODEL_ID = MODEL_5_2_ID;
 const USE_LEGACY_MODEL_FLAG_KEY = 'docs_conv_search_use_gpt_4_1';
-const ANALYTICS_COLLECTION_NAME = typesenseConfig.conversationAnalyticsCollection || 'docs_conversation_analytics';
-const ANALYTICS_TYPESENSE_API_KEY = typesenseConfig.conversationAnalyticsCreateKey;
 
 // Embedding field to use for semantic search
 const EMBEDDING_FIELD = 'embedding';
@@ -721,7 +718,6 @@ class ConversationalSearch {
             const decoder = new TextDecoder();
             let accumulatedMessage = '';
             let buffer = '';
-            let latestResults = null;
             let lastRenderTime = 0;
             const RENDER_THROTTLE = 50; // Render markdown every 50ms max
 
@@ -774,9 +770,6 @@ class ConversationalSearch {
                                 this.conversationId = parsed.conversation.conversation_id;
                             }
 
-                            if (Array.isArray(parsed.results)) {
-                                latestResults = parsed.results;
-                            }
                         } catch (e) {
                             // Skip malformed JSON chunks
                             console.debug('Skipping malformed chunk:', data);
@@ -796,18 +789,10 @@ class ConversationalSearch {
                 this.logAction('Conversational Search Response', {
                     conversational_search: {
                         action: 'response_received',
-                        query,
-                        response: accumulatedMessage, // Full AI response
                         response_length: accumulatedMessage.length,
                         conversation_id: this.conversationId,
                         latency_ms: latency
                     }
-                });
-                this.trackResponseCompletedEvent({
-                    query,
-                    answer: accumulatedMessage,
-                    latencyMs: latency,
-                    results: latestResults
                 });
             } else {
                 responseContainer.textContent = 'No response received. Please try again.';
@@ -838,23 +823,14 @@ class ConversationalSearch {
                 responseContainer.innerHTML = this.renderMessageWithSources(fullAnswer);
                 this.addMessageActions(responseContainer.parentElement, query, fullAnswer);
                 
-                // Log successful response with latency and full content (fallback mode)
                 const latency = Date.now() - startTime;
                 this.logAction('Conversational Search Response', {
                     conversational_search: {
                         action: 'response_received',
-                        query,
-                        response: fullAnswer, // Full AI response
                         response_length: fullAnswer.length,
                         conversation_id: this.conversationId,
                         latency_ms: latency
                     }
-                });
-                this.trackResponseCompletedEvent({
-                    query,
-                    answer: fullAnswer,
-                    latencyMs: latency,
-                    results: null
                 });
             } else {
                 responseContainer.textContent = 'No response received.';
@@ -883,156 +859,48 @@ class ConversationalSearch {
         messageDiv.appendChild(actionsDiv);
     }
 
-    async handleMessageAction(action, query, response, button) {
-        const logData = {
-            conversational_search: {
-                action,
-                query,
-                response_length: response.length,
-                conversation_id: this.conversationId
-            }
-        };
-
+    handleMessageAction(action, query, response, button) {
         switch (action) {
             case 'thumbs-up':
-                {
-                    const thumbsDown = button.parentElement.querySelector('[data-action="thumbs-down"]');
-                    const isUndo = button.classList.contains('active');
-                    const feedbackValue = isUndo ? null : 'thumbs_up';
-                    const feedbackResult = await this.trackFeedbackEvent(feedbackValue, query, response);
-                    if (feedbackResult.ok) {
-                        this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: isUndo ? 'cleared' : 'positive' } });
-                        if (isUndo) {
-                            button.classList.remove('active');
-                            this.showFeedbackTooltip(button, 'Feedback removed');
-                        } else {
-                            button.classList.add('active');
-                            if (thumbsDown) {
-                                thumbsDown.classList.remove('active');
-                            }
-                            this.showFeedbackTooltip(button, 'Thanks for feedback!');
-                        }
-                    } else {
-                        this.showFeedbackTooltip(button, `Something went wrong (${feedbackResult.error || 'error'})`, true);
-                    }
-                }
-                break;
-
             case 'thumbs-down':
                 {
-                    const thumbsUp = button.parentElement.querySelector('[data-action="thumbs-up"]');
+                    const opposite = action === 'thumbs-up' ? 'thumbs-down' : 'thumbs-up';
+                    const oppositeBtn = button.parentElement.querySelector(`[data-action="${opposite}"]`);
                     const isUndo = button.classList.contains('active');
-                    const feedbackValue = isUndo ? null : 'thumbs_down';
-                    const feedbackResult = await this.trackFeedbackEvent(feedbackValue, query, response);
-                    if (feedbackResult.ok) {
-                        this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: isUndo ? 'cleared' : 'negative' } });
-                        if (isUndo) {
-                            button.classList.remove('active');
-                            this.showFeedbackTooltip(button, 'Feedback removed');
-                        } else {
-                            button.classList.add('active');
-                            if (thumbsUp) {
-                                thumbsUp.classList.remove('active');
-                            }
-                            this.showFeedbackTooltip(button, 'Thanks for feedback!');
-                        }
+
+                    if (isUndo) {
+                        button.classList.remove('active');
+                        this.showFeedbackTooltip(button, 'Feedback removed');
                     } else {
-                        this.showFeedbackTooltip(button, `Something went wrong (${feedbackResult.error || 'error'})`, true);
+                        button.classList.add('active');
+                        if (oppositeBtn) oppositeBtn.classList.remove('active');
+                        this.showFeedbackTooltip(button, 'Thanks for feedback!');
                     }
+
+                    this.logAction('Conversational Search Feedback', {
+                        conversational_search: {
+                            action: 'feedback',
+                            feedback: isUndo ? 'cleared' : (action === 'thumbs-up' ? 'positive' : 'negative'),
+                            conversation_id: this.conversationId
+                        }
+                    });
                 }
                 break;
 
             case 'copy':
                 navigator.clipboard.writeText(response).then(() => {
-                    this.logAction('Conversational Search Copy', logData);
+                    this.logAction('Conversational Search Copy', {
+                        conversational_search: {
+                            action: 'copy',
+                            conversation_id: this.conversationId
+                        }
+                    });
                     this.showFeedbackTooltip(button, 'Copied to clipboard!');
-                }).catch(err => {
-                    console.error('Failed to copy:', err);
+                }).catch(() => {
                     this.showFeedbackTooltip(button, 'Copy failed', true);
                 });
                 break;
         }
-    }
-
-    buildRetrievedContext(results) {
-        const hits = Array.isArray(results) && results.length > 0 && Array.isArray(results[0]?.hits)
-            ? results[0].hits
-            : [];
-
-        const topHits = hits.slice(0, 8);
-        const retrievedUrls = [];
-        const retrievedTitles = [];
-        const retrievedIds = [];
-
-        topHits.forEach((hit) => {
-            const doc = hit?.document || {};
-            if (doc.full_url) retrievedUrls.push(doc.full_url);
-            if (doc.title) retrievedTitles.push(doc.title);
-            if (doc.id || doc.objectID) retrievedIds.push(doc.id || doc.objectID);
-        });
-
-        return {
-            retrievedCount: hits.length,
-            retrievedUrls,
-            retrievedTitles,
-            retrievedIds
-        };
-    }
-
-    trackResponseCompletedEvent({ query, answer, latencyMs, results }) {
-        if (!ANALYTICS_TYPESENSE_API_KEY) {
-            return;
-        }
-
-        const context = this.buildRetrievedContext(results);
-        trackConversationAnalytics({
-            host: `${typesenseConfig.host}-1.a1.typesense.net`,
-            collection: ANALYTICS_COLLECTION_NAME,
-            apiKey: ANALYTICS_TYPESENSE_API_KEY,
-            event: {
-                event_type: 'response_completed',
-                timestamp: Math.floor(Date.now() / 1000),
-                conversation_id: this.conversationId || '',
-                model_id: this.selectedModelId,
-                query,
-                answer,
-                answer_excerpt: answer.slice(0, 280),
-                latency_ms: latencyMs,
-                retrieved_count: context.retrievedCount,
-                retrieved_urls: context.retrievedUrls,
-                retrieved_titles: context.retrievedTitles,
-                retrieved_ids: context.retrievedIds,
-                metadata_json: JSON.stringify({
-                    source: 'conv_search_ui'
-                })
-            }
-        }).catch(() => {
-            // Non-blocking telemetry path.
-        });
-    }
-
-    async trackFeedbackEvent(userFeedback, query, assistantMessage) {
-        if (!ANALYTICS_TYPESENSE_API_KEY) {
-            return { ok: false, error: 'missing_context' };
-        }
-
-        return trackConversationAnalytics({
-            host: `${typesenseConfig.host}-1.a1.typesense.net`,
-            collection: ANALYTICS_COLLECTION_NAME,
-            apiKey: ANALYTICS_TYPESENSE_API_KEY,
-            event: {
-                event_type: 'feedback_submitted',
-                timestamp: Math.floor(Date.now() / 1000),
-                conversation_id: this.conversationId || '',
-                model_id: this.selectedModelId,
-                query,
-                answer_excerpt: (assistantMessage || '').slice(0, 280),
-                user_feedback: userFeedback || '',
-                metadata_json: JSON.stringify({
-                    source: 'conv_search_ui'
-                })
-            }
-        });
     }
 
     showFeedbackTooltip(button, message, isError = false) {

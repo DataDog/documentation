@@ -123,9 +123,10 @@
 }
 
 .conv-search-title {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 14px;
+    font-weight: 500;
+    color: #71717a;
+    letter-spacing: 0.01em;
 }
 
 .conv-search-info-tooltip {
@@ -161,7 +162,7 @@
         }
 
         img {
-            opacity: 0.45;
+            opacity: 0.3;
             transition: opacity 0.15s ease;
         }
     }
