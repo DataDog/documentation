@@ -27,7 +27,7 @@ Partners see each customer's organizations and the parent/child relationships wi
 
 ## Supported features
 
-While partners can view consolidated cost and usage data, there are several features available to direct customers that are not supported when viewing from a partner admin org. The following table describes, for each feature in Plan & Usage, which users have access.
+While partners can view consolidated cost and usage data, there are several features available to direct customers that are not supported when viewing from a partner admin org. The following table lists each feature in Plan & Usage and describes which users have access.
 
 | Feature                                                             | Supported for Direct Customers | Supported for Partners |
 |---------------------------------------------------------------------|--------------------------------|------------------------|
