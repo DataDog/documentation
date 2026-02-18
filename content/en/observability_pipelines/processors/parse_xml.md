@@ -54,7 +54,7 @@ To set up this processor:
     - If **Booleans** is selected, `true` and `false` are parsed as Booleans.
     - If **Nulls** is selected, the string `null` is parsed as null.
 
-##### Path notation example {#path-notation-example-parse-xml}
+### Path notation example {#path-notation-example-parse-xml}
 
 For the following message structure:
 
@@ -75,7 +75,7 @@ For the following message structure:
 - Use `outer_key.inner_key` to see the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
 
-##### Always use text key example
+### Always use text key example
 
 If **Always use text key** is selected, the text key is the default (`value`), and you have the following XML:
 
@@ -97,7 +97,7 @@ The XML is converted to:
 }
 ```
 
-##### Text key example
+### Text key example
 
 If the key is `text` and you have the following XML:
 
@@ -119,7 +119,7 @@ The XML is converted to:
 }
 ```
 
-##### Attribute prefix example
+### Attribute prefix example
 
 If you enable **Include XML attributes**, the attribute is added as a prefix to each XML attribute. For example, if the attribute prefix is `@` and you have the following XML:
 

@@ -24,14 +24,14 @@ Click **Manage mappings**. This opens a modal:
 
 {{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
 
-#### Add a mapping
+### Add a mapping
 
 1. Select the log type in the dropdown menu.
 1. Define a [filter query](#filter-query-syntax). Only logs that match the specified filter query are remapped. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
 1. Review the sample source log and the resulting OCSF output.
 1. Click **Save Mapping**.
 
-#### Library mappings
+### Library mappings
 
 These are the library mappings available:
 

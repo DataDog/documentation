@@ -46,13 +46,13 @@ To set up the quota processor:
    1. If you select **send events to overflow destination**, an overflow destination is added with the following cloud storage options: **Amazon S3**, **Azure Blob**, and **Google Cloud**.
    1. Select the cloud storage you want to send overflow logs to. See the setup instructions for your cloud storage: [Amazon S3][2], [Azure Blob Storage][3], or [Google Cloud Storage][4].
 
-#### Examples
+### Examples
 
-##### Partition example
+#### Partition example
 
 Use **Partition by** if you want to set a quota on a specific service or region. For example, if you want to set a quota for 10 events per day and group the events by the `service` field, enter `service` into the **Partition by** field.
 
-##### Example for the "ignore when missing" option
+#### Example for the "ignore when missing" option
 
 Select **Ignore when missing** if you want the quota applied only to events that match the partition. For example, if the Worker receives the following set of events:
 
@@ -73,7 +73,7 @@ The quota is applied to the two sets of logs and not to the last three events.
 
 If the **Ignore when missing** is not selected, the quota is applied to all five events.
 
-##### Overrides example
+#### Overrides example
 
 If you are partitioning by `service` and have two services: `a` and `b`, you can use overrides to apply different quotas for them. For example, if you want `service:a` to have a quota limit of 5,000 bytes and `service:b` to have a limit of 50 events, the override rules look like this:
 

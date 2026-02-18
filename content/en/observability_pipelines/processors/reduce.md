@@ -24,7 +24,7 @@ To set up the reduce processor:
    - Select the merge strategy in the **Apply** dropdown menu. This is the strategy used to combine events. See the [Merge strategies](#merge-strategies) section for descriptions of the available strategies.
    - Click **Add Merge Strategy** to add additional strategies.
 
-##### Merge strategies
+### Merge strategies
 
 These are the available merge strategies for combining log events.
 
