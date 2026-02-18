@@ -21,7 +21,7 @@ See the [Remap Reserved Attributes][1] guide on how to use the Edit Fields proce
 
 ## Setup
 
-##### Add field
+### Add field
 Use **add field** to append a new key-value field to your log.
 
 To set up the add field processor:
@@ -29,7 +29,7 @@ To set up the add field processor:
 1. Enter the field and value you want to add. To specify a nested field for your key, use the [path notation](#path-notation-example-remap): `<OUTER_FIELD>.<INNER_FIELD>`. All values are stored as strings.
     **Note**: If the field you want to add already exists, the Worker throws an error and the existing field remains unchanged.
 
-##### Drop field
+### Drop field
 
 Use **drop field** to drop a field from logging data that matches the filter you specify below. It can delete objects, so you can use the processor to drop nested keys.
 
@@ -38,7 +38,7 @@ To set up the drop field processor:
 1. Enter the key of the field you want to drop. To specify a nested field for your specified key, use the [path notation](#path-notation-example-remap): `<OUTER_FIELD>.<INNER_FIELD>`.
     **Note**: If your specified key does not exist, your log is unimpacted.
 
-##### Rename field
+### Rename field
 
 Use **rename field** to rename a field within your log.
 
@@ -48,7 +48,7 @@ To set up the rename field processor:
 1. In the **Target field**, enter the name you want the source field to be renamed to. To specify a nested field for your specified key, use the [path notation](#path-notation-example-remap): `<OUTER_FIELD>.<INNER_FIELD>`.<br>**Note**: If the target field you specify already exists, the Worker throws an error and does not overwrite the existing target field.
 1. Optionally, check the **Preserve source tag** box if you want to retain the original source field and duplicate the information from your source key to your specified target key. If this box is not checked, the source key is dropped after it is renamed.
 
-##### Path notation example {#path-notation-example-remap}
+### Path notation example {#path-notation-example-remap}
 
  For the following message structure:
 

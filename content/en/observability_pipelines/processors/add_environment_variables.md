@@ -22,7 +22,7 @@ To set up this processor:
 1. Enter the environment variable name.
 1. Click **Add Environment Variable** if you want to add another environment variable.
 
-##### Blocked environment variables
+### Blocked environment variables
 
 Environment variables that match any of the following patterns are blocked from being added to log messages because the environment variable could contain sensitive data.
 
@@ -44,7 +44,7 @@ Environment variables that match any of the following patterns are blocked from 
 
 The environment variable is matched to the pattern and not the literal word. For example, `PASSWORD` blocks environment variables like `USER_PASSWORD` and `PASSWORD_SECRET` from getting added to the log messages.
 
-##### Allowlist
+### Allowlist
 
 After you have added processors to your pipeline and clicked **Next: Install**, in the **Add environment variable processor(s) allowlist** field, enter a comma-separated list of environment variables you want to pull values from and use with this processor.
 
