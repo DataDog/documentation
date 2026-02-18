@@ -37,7 +37,7 @@ To set up the processor:
 1. Optionally, add a description for the rule.
 1. Click **Save**.
 
-##### Path notation example {#path-notation-example-lib}
+### Path notation example {#path-notation-example-lib}
 
  For the following message structure:
 
@@ -58,7 +58,7 @@ To set up the processor:
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-##### Add additional keywords
+### Add additional keywords
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
@@ -97,7 +97,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 1. Optionally, add a description for the rule.
 1. Click **Add Rule**.
 
-##### Path notation example {#path-notation-example-custom}
+### Path notation example {#path-notation-example-custom}
 
  For the following message structure:
 

@@ -50,13 +50,13 @@ Click **Manage arrays to split** to add an array to split or edit an existing ar
 - If you have not created any arrays yet, enter the array parameters as described in the [Add a new array](#add-a-new-array) section below.
 - If you have already created arrays, click on the array's row in the table to edit or delete it. Use the search bar to find a specific array, and then select the array to edit or delete it. Click **Add Array to Split** to add a new array.
 
-##### Add a new array
+### Add a new array
 
 1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Enter the path to the array field. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-split-array) below.
 1. Click **Save**.
 
-##### Split array example
+### Split array example
 
 This is an example event:
 
@@ -140,7 +140,7 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
 }
 ```
 
-##### Path notation example {#path-notation-example-split-array}
+### Path notation example {#path-notation-example-split-array}
 
 For the following message structure:
 
