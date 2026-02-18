@@ -205,6 +205,7 @@ DefaultProcessQueueBytes = 60 * 1000 * 1000
 ```
 <div class="alert alert-info"> Downstream delivery for Processes uses the <strong>metrics forwarder</strong>, and retry behavior is consistent with <a href="#metrics-retry-strategy"> metrics </a>, except that on-disk buffering is not supported.
 </div>
+
 [1]: https://github.com/DataDog/datadog-agent/blob/d2b37a761068c211a2494c728bc70e726eadc1b8/pkg/forwarder/transaction/transaction.go#L346-L366
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
