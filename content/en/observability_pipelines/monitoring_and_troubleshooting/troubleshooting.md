@@ -60,6 +60,31 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
+## Identify Workers that are running on multiple clusters in a container
+
+If you want to identify Workers that are running on multiple clusters in a container, in the Helm chart:
+
+1. Set [`POD_NAME`][21].
+    ```yaml
+    args:
+      - name: POD_NAME
+        valueFrom:
+         fieldRef:
+            fieldPath: metadata.name
+    ```
+1. Configure [`export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}"`][22].
+    ```yaml
+    args:
+      - >
+        export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}";
+        exec /usr/bin/observability-pipelines-worker run
+
+      - name: POD_NAME
+        valueFrom:
+         fieldRef:
+            fieldPath: metadata.name
+    ```
+
 ## Worker logs issues
 
 ### No Worker logs in Log Explorer
@@ -189,3 +214,5 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [18]: /observability_pipelines/guide/environment_variables/
 [19]: /remote_configuration/#security-considerations
 [20]: /help/
+[21]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L156C3-L159C33
+[22]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L136-L142
