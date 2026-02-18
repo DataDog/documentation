@@ -31,14 +31,14 @@ While partners can view consolidated cost and usage data, there are several feat
 
 | Feature                                                             | Supported for Direct Customers | Supported for Partners |
 |---------------------------------------------------------------------|--------------------------------|------------------------|
-| Cost summary                                                        | ✓                              | ✓                      |
-| Projected costs                                                     | ✓                              | ✓                      |
-| Usage summary                                                       | ✓                              | ✓                      |
-| Cost & usage API endpoints (for all features supported in the UI)   | ✓                              | ✓                      |
-| Cost & usage attribution                                            | ✓                              | ❌                      |
-| Product-specific usage tables (for example: custom metrics or logs) | ✓                              | ❌                      |
-| Datadog costs in Cloud Cost Management                              | ✓                              | ❌                      |
-| Plan, Billing History, and Usage Notifications tabs                 | ✓                              | ❌                      |
+| Cost summary                                                        | {{< X >}}                      | {{< X >}}              |
+| Projected costs                                                     | {{< X >}}                      | {{< X >}}              |
+| Usage summary                                                       | {{< X >}}                      | {{< X >}}              |
+| Cost & usage API endpoints (for all features supported in the UI)   | {{< X >}}                      | {{< X >}}              |
+| Cost & usage attribution                                            | {{< X >}}                      |                        |
+| Product-specific usage tables (for example: custom metrics or logs) | {{< X >}}                      |                        |
+| Datadog costs in Cloud Cost Management                              | {{< X >}}                      |                        |
+| Plan, Billing History, and Usage Notifications tabs                 | {{< X >}}                      |                        |
 
 ## Partner experience by page
 
