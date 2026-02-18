@@ -60,6 +60,7 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 3. Create a Datadog application key.
 4. Enable or disable logs using the toggle.
 5. Click **Create OCI Stack**. This opens the Oracle Resource Manager in the OCI console to complete deployment.
+
    **Note**: Deploy this stack only once per tenancy.
 
 ### Deploy the QuickStart ORM stack
@@ -68,16 +69,16 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 2. Leave the option to use custom Terraform providers unchecked.
 3. Use the default working directory, or optionally choose a different one.
 4. Click **Next**.
-5. Leave the `(Optional) Choose specific subnet(s)` section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.
+5. Leave the **(Optional) Choose specific subnet(s)** section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.
    
    **Advanced option**: To use existing subnets (maximum of one per OCI region), provide the subnet OCIDs (one per line, without commas). Format: `ocid1.subnet.oc[0-9].*`. Example: `ocid1.subnet.oc1.iad.abcedfgh`.
-   If using existing subnets, ensure each VCN has HTTP egress through NAT Gateway, a Service Gateway for "All Services In Oracle Services Network", appropriate route table rules, and security rules for HTTP requests.
+   If you're using existing subnets, ensure each VCN has HTTP egress through NAT Gateway, a Service Gateway for "All Services In Oracle Services Network", appropriate route table rules, and security rules for HTTP requests.
 
-6. Leave the `(Optional) Choose a User` section blank. QuickStart creates a new User and Group in your current OCI Identity Domain, simplifying IAM setup.
+6. Leave the **(Optional) Choose a User** section blank. QuickStart creates a new Group and User in your current OCI Identity Domain, simplifying IAM setup.
    
-   **Advanced option**: To use an existing User and Group, provide both the **Group ID** and **User ID** OCIDs. The user must be a member of the specified group.
+   **Advanced option**: To use an existing Group and User, provide both the **Group ID** and **User ID** OCIDs. The user must be a member of the specified group.
 
-7. Leave the `(Optional) Advanced configuration` section blank for most use cases.
+7. Leave the **(Optional) Advanced configuration** section blank for most use cases.
    
    **Advanced options**:
    - **Compartment**: Specify an existing compartment for Datadog-created resources (default creates a new "Datadog" compartment).
@@ -96,7 +97,7 @@ Wait up to 10 minutes for data to start being collected, and then view `oci.*` m
 
 {{< img src="getting_started/integrations/oci/oci-dashboard.png" alt="The OCI overview dashboard in Datadog with various metrics and graphs from Oracle Cloud Infrastructure services">}}
 
-<div class="alert alert-warning">OCI function metrics (<code>oci.faas</code> namespace) and container instance metrics (<code>oci_computecontainerinstance</code> namespace) are in Preview.</div>
+<div class="alert alert-info">OCI function metrics (<code>oci.faas</code> namespace) and container instance metrics (<code>oci_computecontainerinstance</code> namespace) are in Preview.</div>
 
 ## Configuration
 
@@ -116,12 +117,12 @@ Use the **Metric collection** and **Log collection** tabs to configure which met
 - **Include** or **exclude** specific compartments based on `key:value` format compartment tags. For example:
    - `datadog:monitored,env:prod*` includes compartments if **either** of these tags is present.
    - `!env:staging,!testing` excludes compartments only if **both** tags are present.
-   - `datadog:monitored,!region:us-phoenix-1` includes compartments that both have the tag `datadog:monitored` and do not have the tag `region:us-phoenix-1`.
+   - `datadog:monitored,!region:us-phoenix-1` includes compartments that **both have** the tag `datadog:monitored` **and do not have** the tag `region:us-phoenix-1`.
 - **Enable** or **disable** collection for specific OCI services.
 
 **Notes**:
 - After modifying tags in OCI, it may take up to 15 minutes for the changes to appear in Datadog.
-- In OCI, tags are not inherited by child compartments; each compartment must be tagged individually.
+- In OCI, child compartments do not inherit tags; you must tag each compartment individually.
 
 ### Resource collection
 
@@ -141,7 +142,7 @@ While the OCI integration automatically collects service-level metrics through O
 
 The Agent installs with a single command for most operating systems, including Oracle Linux. See the [Agent installation page][9] for instructions, or read [why you should install the Agent on cloud instances][13] for more details on the benefits.
 
-### Using the Datadog Agent with OCI Kubernetes Engine (OKE)
+### Use the Datadog Agent with OCI Kubernetes Engine (OKE)
 
 For containerized environments on OKE, you can use the [Datadog Agent for Kubernetes][14]. Use the dedicated Kubernetes documentation to deploy the Agent in your OKE cluster and collect metrics, logs, and traces from your containerized applications.
 
