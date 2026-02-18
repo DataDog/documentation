@@ -108,8 +108,8 @@ node --require dd-trace/init app.js
 
 Las aplicaciones ECMAScript Modules (ESM) requieren un argumento _adicional_ de la línea de comandos. Añade este argumento independientemente de cómo se importe e inicialice el rastreador:
 
-- **Node.js < v20.6:** `--loader dd-rastrear/loader-hook.mjs`
-- **Node.js >= v20.6:** `--import dd-rastrear/register.js`
+- **Node.js < v20.6:** `--loader dd-trace/loader-hook.mjs`
+- **Node.js >= v20.6:** `--import dd-trace/register.js`
 
 Por ejemplo, en Node.js 22, si inicializas el rastreador utilizando la opción uno de las anteriores, lo iniciarías así:
 
@@ -117,7 +117,7 @@ Por ejemplo, en Node.js 22, si inicializas el rastreador utilizando la opción u
 node --import dd-trace/register.js app.js
 ```
 
-También puede combinarse con el argumento de línea de comandos `--require dd-rastrear/init` (opción dos):
+También puede combinarse con el argumento de línea de comandos `--require dd-trace/init` (opción dos):
 
 ```sh
 node --import dd-trace/register.js --require dd-trace/init app.js

@@ -18,6 +18,8 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 
 Processor groups are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
+**Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
+
 Select a processor in the left navigation menu to see more information about it.
 
 ## Processors
@@ -89,7 +91,7 @@ You can organize your processors into logical groups to help you manage them. Ea
 
 Processor groups and the processors within each group are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To change the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
-**Note**: There is a limit of 10 processor groups for a pipeline canvas. For example, if you have a dual ship pipeline, where there are two destinations and each destination has its own set of processor groups, the combined number of processor groups from both sets is limited to 10.
+**Note**: There is a limit of 25 processor groups for a pipeline canvas. For example, if you have a dual ship pipeline, where there are two destinations and each destination has its own set of processor groups, the combined number of processor groups from both sets is limited to 10.
 
 ## Further Reading
 
