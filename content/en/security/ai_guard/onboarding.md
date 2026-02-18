@@ -92,11 +92,7 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 
 ### 6. (Optional) Limit access to AI Guard spans {#limit-access}
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-Data Access Controls is in Limited Availability. To enroll, <a href="/help">contact Datadog support</a>.
-{{< /callout >}}
-
-To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
+To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 
 ## Use the AI Guard API {#api}
 
@@ -734,4 +730,4 @@ The Security Signals explorers allow you to filter, prioritize, and investigate 
 [15]: /security/detection_rules/
 [16]: https://app.datadoghq.com/security/siem/signals
 [17]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
-[18]: https://app.datadoghq.com/security/appsec/signals
+[18]: https://app.datadoghq.com/security/ai-guard/signals
