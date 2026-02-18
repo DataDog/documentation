@@ -13,10 +13,10 @@ If you experience issues setting up or configuring Datadog Experiments, use this
 
 ### Why are experiment results not showing up?
 
-There are several reasons why experiment results might not show up when you first launch an experiment, this guide gives a step by step process for spotting issues and resolving them.
+There are several reasons why experiment results might not show up when you first launch an experiment, this guide gives a step-by-step process for spotting and resolving issues.
 
 #### Why am I not seeing any experiment exposures?
-The first thing to check is that your experiment is actually being evaluated. To start, navigate to the flag page by clicking on “Go to Flag”. This modal will also tell you which environment the experiment is associated with:
+The first thing to check is that your experiment is actually being evaluated. To start, navigate to the flag page by clicking “Go to Flag”. This modal will also tell you which environment the experiment is associated with:
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_link.png" alt="Link to flag" style="width:90%;" >}}
 
@@ -26,7 +26,7 @@ On this page you can see how much traffic is hitting your flag in real time. Mak
 
 If you’re not seeing any exposures, make sure that the flag is enabled in the appropriate environment. You can manage environments on the [environments page](https://app.datadoghq.com/feature-flags/settings/environments).
 
-Once you’ve validated that the flag is being evaluated in the appropriate environment, confirm that traffic is hitting the experiment’s targeting rule on the waterfall page:
+If the flag is indeed being evaluated in the appropriate environment, confirm that traffic is hitting the experiment targeting rule within the waterfall:
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="Flag waterfall" style="width:90%;" >}}
 
@@ -35,14 +35,13 @@ If you are not seeing any traffic going to the experiment’s targeting rule, ch
 2. Are the filters in the experiment targeting rule being met?
 3. What is the traffic allocation set to?
 
-Once you have confirmed that you are seeing experiment exposures, the next step is to check if the assigned users have associated metric events.
-
 #### Why are my metric values all zero?
-Hover over the experiment score card to see how many users are in each variant of your experiment, the total metric value across all users, and the average user-level metric value:
+
+Once you have confirmed that you are seeing experiment exposures, the next step is to check if the assigned users have associated metric events. Hover over the experiment scorecard to see how many users are in each variant of your experiment, the total metric value across users, and the average user-level metric value:
 
 {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="Metric tooltip" style="width:90%;" >}}
 
-If a metric is zero, first check that the metric event is firing at all. You can see this on the metric edit page:
+If a metric is zero, first check that the metric event is firing. You can confirm this on the metric edit page:
 
 {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="Metric edit page" style="width:90%;" >}}
 
@@ -50,7 +49,7 @@ For Datadog to include a metric event in experiment results, two criteria must b
 1. The event must be from a user with at least one experiment exposure event
 2. The event must occur after the user’s first experiment exposure
 
-Metrics are associated with exposures by matching the exposure’s subject with the attribute defined on the subject types page (typically `@usr.id`). You can see a list of recently exposed subjects on the Flags & Exposures page by clicking **View Exposure Logs**:
+Metrics are associated with exposures by matching the exposure’s subject with the attribute defined on the subject types page (typically `@usr.id`). You can see a list of recently exposed subjects on the Flags & Exposures tab by clicking **View Exposure Logs**:
 
 {{< img src="/product_analytics/experiment/troubleshooting_exposure_log.png" alt="Exposures log" style="width:90%;" >}}
 
@@ -66,6 +65,6 @@ From here you can inspect individual sessions and check if your metric event is 
 
 {{< img src="/product_analytics/experiment/troubleshooting_inspect_session.png" alt="Exposures log" style="width:90%;" >}}
 
-<div class="alert alert-info"> If your metric has outlier handling enabled and you have a very small set of users with metric events, it’s possible that the outlier threshold can be zero, setting all user metric values to zero. To test this, try removing outlier handling on the metric edit page.</div>
+<div class="alert alert-info"> If your metric has outlier handling enabled and you have a very small set of users with metric events, it’s possible for the outlier threshold to be zero, truncating all user metric values to zero. To test this, try removing outlier handling on the metric edit page.</div>
 
 [1]: /help
