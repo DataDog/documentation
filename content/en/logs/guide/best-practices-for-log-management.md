@@ -37,8 +37,8 @@ This guide also goes through how to monitor your log usage by:
 
 - [Alerting on unexpected log traffic spikes](#alert-on-unexpected-log-traffic-spikes)
 - [Alerting on indexed logs when the volume passes a specified threshold](#alert-when-an-indexed-log-volume-passes-a-specified-threshold)
+- [Monitoring which indexes are queried actively](#monitor-which-indexes-are-queried-actively)
 - [Setting up exclusion filters on high-volume logs](#set-up-exclusion-filters-on-high-volume-logs)
-- [Monitor which indexes are queried actively](#monitor-which-indexes-are-queried-actively)
 
 If you want to transform your logs or redact sensitive data in your logs before they leave your environment, see how to [aggregate, process, and transform your log data with Observability Pipelines][29].
 
@@ -190,15 +190,15 @@ To find this dashboard, go to **Dashboards > Dashboards List** and search for [L
 
 ### Monitor which indexes are queried actively
 
-While monitoring log volume is critical for budget control, monitoring **query activity** helps you determine the actual value of your indexed data. Identifying indexes that are rarely queried allows you to optimize costs by reducing retention or moving data to Flex Logs or archives.
+Monitoring **query activity** helps you evaluate the value of your indexed data and optimize costs. For example, you can identify indexes that are rarely queried to reduce retention or move data to Flex Logs or archives.
 
-To analyze which indexes are being actively searched:
+To analyze which indexes are actively queried:
 
-1. Navigate to the [Audit Trail]([https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&group_by=%40asset.new_value.query.indexes](https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40action%3Aqueried&agg_m=count&agg_m_source=base&agg_q=%40asset.new_value.query.indexes&agg_q_source=base&agg_t=count&audit__diff=unified&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=query_table&x_missing=true&from_ts=1768733389060&to_ts=1771325389060&live=true)) (this link pre-fills the required query and grouping).
-2. Ensure the query is set to: 
+1. Navigate to the [Audit Trail][X]. This link pre-fills the required query and grouping.
+2. Verify that the query is set to:
    `@evt.name:"Log Management" @action:queried`
-3. Ensure the **Table** visualization is selected to see a ranked list of your most (and least) used indexes over the selected timeframe
-4. In the **By** section, ensure logs are grouped by: 
+3. Select the **Table** visualization to view a ranked list of the most and least used indexes for the selected timeframe.
+4. In the **By** section, group logs by:
    `@asset.new_value.query.indexes`
 
 ### Set up exclusion filters on high-volume logs
