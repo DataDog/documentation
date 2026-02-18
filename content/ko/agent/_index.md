@@ -4,6 +4,7 @@ aliases:
 - /ko/agent/faq/install-core-extra
 - /ko/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
 - /ko/agent/faq/the-datadog-agent-for-logs-or-traces-only
+- /ko/agent/basic_agent_usage/
 cascade:
 - _target:
     path: /agent/basic_agent_usage/chef
