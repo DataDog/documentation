@@ -120,7 +120,7 @@ What actions you take depend on each of the attack surfaces:
 <div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development lifecycle, including endpoints that may not receive live traffic.
+The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
 
 To use this data source, configure the [Source Code Integration][16] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
 
