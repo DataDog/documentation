@@ -62,9 +62,14 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 
 ## Identify Workers that are running on multiple clusters in a container
 
-If you want to identify Workers that are running on multiple clusters in a container, in the Helm chart:
+If you want to identify Workers that are running on multiple clusters in a container:
 
-1. Set [`POD_NAME`][21].
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
+In the Helm chart:
+
+1. Set [`POD_NAME`][1].
     ```yaml
     args:
       - name: POD_NAME
@@ -72,7 +77,7 @@ If you want to identify Workers that are running on multiple clusters in a conta
          fieldRef:
             fieldPath: metadata.name
     ```
-1. Configure [`export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}"`][22].
+1. Configure [`export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}"`][2].
     ```yaml
     args:
       - >
@@ -84,6 +89,26 @@ If you want to identify Workers that are running on multiple clusters in a conta
          fieldRef:
             fieldPath: metadata.name
     ```
+
+[1]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L156C3-L159C33
+[2]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L136-L142
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Set the `VECTOR_HOSTNAME` environment variable when running the Worker:
+
+```bash
+docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+  -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+  -e VECTOR_HOSTNAME=<UNIQUE_HOSTNAME> \
+  datadog/observability-pipelines-worker run
+```
+
+Replace `<UNIQUE_HOSTNAME>` with a unique name for your Worker instance.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Worker logs issues
 
