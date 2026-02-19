@@ -3890,6 +3890,54 @@ menu:
           - PatchGlobalVariable
         unstable: []
         order: 20
+    - name: 'Synthetics: Edit a Network Path test'
+      url: '#synthetics-edit-a-network-path-test'
+      identifier: synthetics-synthetics-edit-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSyntheticsNetworkTest
+        unstable: []
+        order: 60
+    - name: 'Synthetics: Get a Network Path test'
+      url: '#synthetics-get-a-network-path-test'
+      identifier: synthetics-synthetics-get-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsNetworkTest
+        unstable: []
+        order: 55
+    - name: 'Synthetics: Create a Network Path test'
+      url: '#synthetics-create-a-network-path-test'
+      identifier: synthetics-synthetics-create-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsNetworkTest
+        unstable: []
+        order: 50
+    - name: 'Synthetics: Bulk delete tests'
+      url: '#synthetics-bulk-delete-tests'
+      identifier: synthetics-synthetics-bulk-delete-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsTests
+        unstable: []
+        order: 65
     - name: 'Synthetics: Edit a test suite'
       url: '#synthetics-edit-a-test-suite'
       identifier: synthetics-synthetics-edit-a-test-suite
@@ -7046,6 +7094,23 @@ menu:
         operationids:
           - GetAllCaseTypes
         unstable: []
+        order: 1
+    - name: Cloud Authentication
+      url: /api/latest/cloud-authentication/
+      identifier: cloud-authentication
+      generated: true
+    - name: List AWS cloud authentication persona mappings
+      url: '#list-aws-cloud-authentication-persona-mappings'
+      identifier: cloud-authentication-list-aws-cloud-authentication-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSCloudAuthPersonaMappings
+        unstable:
+          - v2
         order: 1
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
@@ -11900,6 +11965,46 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Seats
+      url: /api/latest/seats/
+      identifier: seats
+      generated: true
+    - name: Assign seats to users
+      url: '#assign-seats-to-users'
+      identifier: seats-assign-seats-to-users
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AssignSeatsUser
+        unstable: []
+        order: 2
+    - name: Get users with seats
+      url: '#get-users-with-seats'
+      identifier: seats-get-users-with-seats
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSeatsUsers
+        unstable: []
+        order: 1
+    - name: Unassign seats from users
+      url: '#unassign-seats-from-users'
+      identifier: seats-unassign-seats-from-users
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnassignSeatsUser
+        unstable: []
+        order: 3
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
