@@ -5206,11 +5206,16 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
+    - name: Advanced Experiment Runs
+      url: llm_observability/experiments/advanced_runs 
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_advanced_runs
+      weight: 504
     - name: Experiments API
       url: llm_observability/experiments/api
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
-      weight: 504
+      weight: 505
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
