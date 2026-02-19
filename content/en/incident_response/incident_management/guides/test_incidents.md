@@ -17,9 +17,9 @@ further_reading:
 
 {{< img src="/incident_response/incident_management/guides/test_incidents/example_test_incident.png" alt="Example of a test incident with a purple banner" style="width:100%;" >}}
 
-Test incidents are a type of incident designed for training, testing, and validation purposes. When enabled, test incidents allow your team to practice incident response workflows, validate automations, and familiarize new team members with your incident management process—all without impacting production analytics or triggering real notifications.
+Test incidents are incidents used for training, testing, and validation. They allow your team to practice incident response workflows, validate automations, and onboard new team members without impacting production analytics or triggering real notifications.
 
-Test incidents are visually distinguished by a **purple banner** and are isolated from your production incident data.
+Test incidents display a **purple banner** and are isolated from production incident data.
 
 ## Default behavior
 
@@ -35,15 +35,15 @@ During declaration, you have the option to enable any of these behaviors if need
 
 **Training and response drills**: Use test incidents to onboard responders and simulate realistic scenarios. Practice the full incident lifecycle, test escalation and on-call responsiveness, and evaluate team coordination, without impacting team metrics.
 
-**Testing incident automations and notifications rules**: Use test incidents to verify automations and notification rules trigger correctly, execute expected actions (for example, Slack messages or task creation), and can be refined without affecting production workflows.
+**Testing incident automations and notifications rules**: Use test incidents to verify that automations and notification rules trigger correctly, execute expected actions (such as sending Slack messages or creating tasks), and can be refined without affecting production workflows.
 
-**Validating integrations**: Create test incidents to confirm integrations (such as Jira, ServiceNow, or Slack) create and sync records correctly, propagate updates, and format notifications as expected.
+**Validating integrations**: Create test incidents to confirm that integrations (such as Jira, ServiceNow, or Slack) create and sync records correctly, propagate updates, and format notifications as expected.
 
 ## Enabling test incidents
 
-<div class="alert alert-danger">Only users with the appropriate Datadog administrative permissions can enable test incidents. After it's enabled, any user with the <strong>Incidents Write</strong> permission can declare test incidents</div>
+<div class="alert alert-danger">Only users with the appropriate Datadog administrative permissions can enable test incidents. After test incidents are enabled, any user with the <strong>Incidents Write</strong> permission can declare them.</div>
 
-Test incidents must be enabled before use. To enable them:
+Test incidents must be enabled before use. To enable:
 
 1. Navigate to [**Incidents** > **Settings** > **Information**][3]
 2. Scroll to the **Test incidents** section
