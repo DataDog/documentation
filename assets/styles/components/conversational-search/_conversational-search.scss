@@ -15,19 +15,17 @@ $conv-search-text-muted: #6b7280;
 @import "message-actions";
 @import "home-ask-ai";
 
-// Messages Container
 .conv-search-messages {
     position: relative;
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    padding: 20px 24px;
+    padding: 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 
-    // Subtle scroll fade at both edges
-    --fade: 8px;
+    --fade: 10px;
     mask-image:
         linear-gradient(to bottom, transparent, black var(--fade),
                          black calc(100% - var(--fade)), transparent);
@@ -35,9 +33,8 @@ $conv-search-text-muted: #6b7280;
         linear-gradient(to bottom, transparent, black var(--fade),
                          black calc(100% - var(--fade)), transparent);
 
-    // Custom scrollbar
     &::-webkit-scrollbar {
-        width: 6px;
+        width: 5px;
     }
 
     &::-webkit-scrollbar-track {
@@ -45,11 +42,11 @@ $conv-search-text-muted: #6b7280;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $conv-search-border;
+        background: rgba(0, 0, 0, 0.08);
         border-radius: 3px;
 
         &:hover {
-            background: $conv-search-text-muted;
+            background: rgba(0, 0, 0, 0.15);
         }
     }
 }
@@ -61,83 +58,96 @@ $conv-search-text-muted: #6b7280;
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 24px;
-    text-align: center;
+    padding: 32px 40px;
 }
 
 .conv-search-empty-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, $conv-search-purple-light 0%, lighten($conv-search-purple-light, 3%) 100%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $conv-search-purple-light;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
-    
+    margin-bottom: 20px;
+
     svg, img {
-        width: 32px;
-        height: 32px;
-        // Colorize the black SVG to match the purple theme
+        width: 24px;
+        height: 24px;
         filter: invert(18%) sepia(80%) saturate(3000%) hue-rotate(260deg) brightness(80%) contrast(95%);
     }
 }
 
 .conv-search-empty-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
+    letter-spacing: -0.02em;
     margin: 0 0 6px 0;
 }
 
 .conv-search-empty-subtitle {
     font-size: 14px;
-    color: $conv-search-text-muted;
-    margin: 0 0 24px 0;
+    color: #374151;
+    margin: 0 0 28px 0;
 }
 
 .conv-search-suggestions {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    max-width: 500px;
-    margin-top: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
 }
 
 .conv-search-suggestion {
-    display: block;
-    padding: 10px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
     background: transparent;
     border: 1px solid $conv-search-border;
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: 10px;
+    font-size: 13.5px;
     font-weight: 400;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.18s ease;
     text-align: left;
     font-family: inherit;
-    line-height: 1.4;
-    
+    line-height: 1.45;
+    color: #374151;
+
+    svg {
+        flex-shrink: 0;
+        color: #374151;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
+    }
+
     &:hover {
-        border-color: rgba($conv-search-purple, 0.4);
-        background: rgba($conv-search-purple, 0.04);
+        border-color: rgba($conv-search-purple, 0.35);
+        background: rgba($conv-search-purple, 0.025);
         color: $conv-search-purple;
+
+        svg {
+            opacity: 1;
+            transform: translateX(0);
+            color: $conv-search-purple;
+        }
     }
 }
 
-// Messages - ChatGPT/Gemini style
 .conv-search-message {
     display: flex;
     flex-direction: column;
-    
+
     &-user {
         align-items: flex-end;
-        
+
         .conv-search-message-content {
             background: $conv-search-surface;
             border-radius: 18px 18px 4px 18px;
-            max-width: 85%;
-            padding: 10px 14px;
+            max-width: 80%;
+            padding: 10px 16px;
             font-size: 15px;
             line-height: 22px;
         }
@@ -145,7 +155,7 @@ $conv-search-text-muted: #6b7280;
 
     &-assistant {
         align-items: stretch;
-        
+
         .conv-search-message-content {
             background: transparent;
             border-radius: 0;
@@ -164,11 +174,10 @@ $conv-search-text-muted: #6b7280;
 .conv-search-message-content {
     font-size: 18px;
     line-height: 27px;
-    color: #000;
+    color: #1a1a1a;
     word-break: break-word;
+    letter-spacing: -0.006em;
 
-    // Prevent the global `p { color:#4a4a4a; font-size:18px; line-height:27px }`
-    // from creating mismatches with bare <li> text.
     p, ul, ol, li, blockquote, td, th, dd, dt {
         font-size: inherit;
         line-height: inherit;
@@ -179,29 +188,29 @@ $conv-search-text-muted: #6b7280;
         margin-bottom: 0;
     }
 
-    // Dark code blocks
     pre {
-        background: #1e1e2e;
+        background: rgba(0, 0, 0, 0.025);
         border-radius: 10px;
-        padding: 16px 18px;
+        padding: 14px 16px;
         overflow-x: auto;
-        margin: 0 0 24px;
+        margin: 12px 0 16px;
 
         code {
             background: none;
             padding: 0;
             border-radius: 0;
             font-size: 13px;
-            line-height: 1.65;
-            color: #cdd6f4;
+            line-height: 1.7;
+            color: #374151;
+            letter-spacing: -0.01em;
         }
 
         .hljs-comment,
-        .hljs-quote { color: #6c7086; font-style: italic; }
+        .hljs-quote { color: #177500; font-style: italic; }
 
         .hljs-keyword,
         .hljs-selector-tag,
-        .hljs-built_in { color: #cba6f7; }
+        .hljs-built_in { color: #a90d91; }
 
         .hljs-string,
         .hljs-title,
@@ -211,26 +220,26 @@ $conv-search-text-muted: #6b7280;
         .hljs-template-tag,
         .hljs-template-variable,
         .hljs-type,
-        .hljs-addition { color: #a6e3a1; }
+        .hljs-addition { color: #c41a16; }
 
         .hljs-deletion,
         .hljs-selector-attr,
         .hljs-selector-pseudo,
-        .hljs-meta { color: #f38ba8; }
+        .hljs-meta { color: #633820; }
 
         .hljs-doctag,
-        .hljs-attr { color: #89b4fa; }
+        .hljs-attr { color: #836c28; }
 
         .hljs-symbol,
         .hljs-bullet,
         .hljs-subst,
-        .hljs-name { color: #f9e2af; }
+        .hljs-name { color: #3f6e75; }
 
         .hljs-number,
-        .hljs-link { color: #fab387; }
+        .hljs-link { color: #1c01ce; }
 
         .hljs-class .hljs-title,
-        .hljs-title.class_ { color: #f9e2af; }
+        .hljs-title.class_ { color: #3f6e75; }
 
         .hljs-emphasis { font-style: italic; }
         .hljs-strong { font-weight: bold; }
@@ -256,12 +265,11 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
-// Footer (input + disclaimer)
 .conv-search-footer {
     background: $conv-search-bg;
     flex-shrink: 0;
-    padding: 4px 0 0;
-    border-radius: 0 0 12px 12px;
+    padding: 6px 0 0;
+    border-radius: 0 0 16px 16px;
 
     @media (max-height: 600px) {
         position: sticky;
@@ -274,7 +282,6 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
-// Unified pill — textarea + send button live together
 .conv-search-input-container {
     display: flex;
     align-items: flex-end;
@@ -282,19 +289,19 @@ $conv-search-text-muted: #6b7280;
     margin: 0 16px;
     padding: 8px 8px 8px 18px;
     background: $conv-search-surface;
-    border: 1.5px solid $conv-search-border;
-    border-radius: 16px;
+    border: 1px solid $conv-search-border;
+    border-radius: 14px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &:focus-within {
-        border-color: rgba($conv-search-purple, 0.45);
-        box-shadow: 0 0 0 3px rgba($conv-search-purple, 0.06);
+        border-color: rgba($conv-search-purple, 0.4);
+        box-shadow: 0 0 0 3px rgba($conv-search-purple, 0.05);
     }
 }
 
 .conv-search-disclaimer {
     margin: 0;
-    padding: 6px 20px 14px;
+    padding: 6px 20px 12px;
     font-size: 12px;
     color: $conv-search-text-muted;
     text-align: center;
@@ -324,8 +331,8 @@ $conv-search-text-muted: #6b7280;
 }
 
 .conv-search-send {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 10px;
     background: $conv-search-purple;
     border: none;
@@ -335,7 +342,7 @@ $conv-search-text-muted: #6b7280;
     justify-content: center;
     color: white;
     flex-shrink: 0;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
 
     &:hover:not(:disabled) {
         background: $conv-search-purple-dark;
@@ -346,7 +353,7 @@ $conv-search-text-muted: #6b7280;
     }
 
     &:disabled {
-        opacity: 0.4;
+        opacity: 0.35;
         cursor: not-allowed;
     }
 

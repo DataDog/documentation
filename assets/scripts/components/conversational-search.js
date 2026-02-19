@@ -366,29 +366,43 @@ class ConversationalSearch {
     }
 
     closeAllSourceTooltips() {
-        const openTooltips = this.messagesContainer.querySelectorAll('.conv-search-source-tooltip.open');
-        openTooltips.forEach((tooltip) => tooltip.classList.remove('open'));
-
-        const expandedButtons = this.messagesContainer.querySelectorAll('.conv-search-source-ref-btn[aria-expanded="true"]');
-        expandedButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+        this.messagesContainer.querySelectorAll('.conv-search-source-tooltip.open').forEach((tooltip) => {
+            tooltip.classList.remove('open');
+            tooltip.removeAttribute('style');
+        });
+        this.messagesContainer.querySelectorAll('.conv-search-source-ref-btn[aria-expanded="true"]').forEach((btn) => {
+            btn.setAttribute('aria-expanded', 'false');
+        });
     }
 
     toggleSourceTooltip(button) {
         const wrap = button.closest('.conv-search-source-ref-wrap');
-        if (!wrap) {
-            return;
-        }
+        if (!wrap) return;
 
         const tooltip = wrap.querySelector('.conv-search-source-tooltip');
-        if (!tooltip) {
-            return;
-        }
+        if (!tooltip) return;
 
         const willOpen = !tooltip.classList.contains('open');
         this.closeAllSourceTooltips();
+
         if (willOpen) {
             tooltip.classList.add('open');
             button.setAttribute('aria-expanded', 'true');
+            this.repositionTooltip(tooltip);
+        }
+    }
+
+    repositionTooltip(tooltip) {
+        const dialogRect = this.sidebar.getBoundingClientRect();
+        const tipRect = tooltip.getBoundingClientRect();
+
+        if (tipRect.left < dialogRect.left + 8) {
+            tooltip.style.left = '0';
+            tooltip.style.transform = 'none';
+        } else if (tipRect.right > dialogRect.right - 8) {
+            tooltip.style.left = 'auto';
+            tooltip.style.right = '0';
+            tooltip.style.transform = 'none';
         }
     }
 
@@ -402,7 +416,7 @@ class ConversationalSearch {
      */
     renderMessageWithSources(markdownText) {
         const { displayMarkdown, sources } = this.extractSources(markdownText);
-        const html = marked.parse(displayMarkdown);
+        const html = this.inlineRefChips(marked.parse(displayMarkdown));
 
         const container = document.createElement('div');
         container.innerHTML = html;
@@ -410,7 +424,7 @@ class ConversationalSearch {
         if (sources.length > 0) {
             const byNumber = new Map();
             sources.forEach((s) => byNumber.set(s.number, s));
-            this.replaceRefNumbers(container, byNumber);
+            this.attachTooltips(container, byNumber);
             container.appendChild(this.buildSourceCards(sources));
         }
 
@@ -418,58 +432,9 @@ class ConversationalSearch {
     }
 
     /**
-     * Walk DOM text nodes and replace [N] tokens with interactive chips.
-     * Skips content inside <pre>/<code> so code blocks stay intact.
-     */
-    replaceRefNumbers(container, sourcesByNumber) {
-        const refPattern = /\[\d{1,3}\]/;
-
-        const walker = document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT,
-            {
-                acceptNode(node) {
-                    let el = node.parentNode;
-                    while (el && el !== container) {
-                        const tag = el.tagName;
-                        if (tag === 'PRE' || tag === 'CODE') {
-                            return NodeFilter.FILTER_REJECT;
-                        }
-                        el = el.parentNode;
-                    }
-                    return refPattern.test(node.textContent)
-                        ? NodeFilter.FILTER_ACCEPT
-                        : NodeFilter.FILTER_REJECT;
-                }
-            }
-        );
-
-        const textNodes = [];
-        while (walker.nextNode()) textNodes.push(walker.currentNode);
-
-        textNodes.forEach((textNode) => {
-            const frag = document.createDocumentFragment();
-            textNode.textContent.split(/(\[\d{1,3}\])/).forEach((part) => {
-                const m = part.match(/^\[(\d{1,3})\]$/);
-                if (m) {
-                    const num = parseInt(m[1], 10);
-                    const source = sourcesByNumber.get(num);
-                    if (source) {
-                        frag.appendChild(this.createRefChip(num, source));
-                        return;
-                    }
-                }
-                if (part) frag.appendChild(document.createTextNode(part));
-            });
-            textNode.parentNode.replaceChild(frag, textNode);
-        });
-    }
-
-    /**
-     * String-based pass that converts [N] tokens to numbered badge chips
-     * during streaming — before the sources block is available. Code
-     * blocks (<pre>, <code>) are left untouched. The chips are inert
-     * (no tooltip) until the final renderMessageWithSources pass.
+     * String-based pass that converts [N] tokens to numbered badge chips.
+     * Used during streaming (inert chips) AND final render (same DOM,
+     * tooltips attached separately). Code blocks are left untouched.
      */
     inlineRefChips(html) {
         return html.replace(
@@ -484,25 +449,25 @@ class ConversationalSearch {
         );
     }
 
-    createRefChip(number, source) {
-        const wrap = document.createElement('span');
-        wrap.className = 'conv-search-source-ref-wrap';
+    /**
+     * Walk existing chips produced by inlineRefChips and attach tooltip
+     * spans with source URLs. Runs only on the final render pass.
+     */
+    attachTooltips(container, sourcesByNumber) {
+        container.querySelectorAll('.conv-search-source-ref-btn[data-source-number]').forEach((btn) => {
+            const num = parseInt(btn.dataset.sourceNumber, 10);
+            const source = sourcesByNumber.get(num);
+            if (!source) return;
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'conv-search-source-ref-btn';
-        btn.setAttribute('data-source-number', String(number));
-        btn.setAttribute('aria-label', `Source ${number}: ${source.label}`);
-        btn.setAttribute('aria-expanded', 'false');
-        btn.innerHTML = `<span class="conv-search-source-ref-number">${number}</span>`;
+            btn.setAttribute('aria-label', `Source ${num}: ${source.label}`);
+            btn.setAttribute('aria-expanded', 'false');
 
-        const tooltip = document.createElement('div');
-        tooltip.className = 'conv-search-source-tooltip';
-        tooltip.innerHTML = `<a href="${source.href}" target="_blank" rel="noopener noreferrer">${source.label}</a>`;
+            const tooltip = document.createElement('span');
+            tooltip.className = 'conv-search-source-tooltip';
+            tooltip.innerHTML = `<a href="${source.href}" target="_blank" rel="noopener noreferrer">${source.label}</a>`;
 
-        wrap.appendChild(btn);
-        wrap.appendChild(tooltip);
-        return wrap;
+            btn.parentNode.appendChild(tooltip);
+        });
     }
 
     buildSourceCards(sources) {
@@ -541,70 +506,85 @@ class ConversationalSearch {
     }
 
     /**
-     * Extract the ```sources … ``` JSON block, strip it from display
-     * markdown, and return parsed source objects with number/href/label.
+     * Extract sources from the LLM response and strip them from display.
+     *
+     * Primary format — pipe-delimited (fast, streamable):
+     *   [sources]
+     *   1 | Page Title | https://docs.datadoghq.com/...
+     *
+     * Fallback — legacy ```sources``` JSON block.
      */
     extractSources(markdownText) {
-        const sourceBlockRegex = /```(?:sources|docs-sources|sources-json|json)\s*([\s\S]*?)```/gi;
+        const markerIdx = markdownText.indexOf('[sources]');
+
+        if (markerIdx !== -1) {
+            const displayMarkdown = markdownText.slice(0, markerIdx).trim();
+            const sources = this.parseSourceLines(markdownText.slice(markerIdx + 9));
+            return { displayMarkdown, sources };
+        }
+
+        // Fallback: legacy JSON ```sources``` block
+        const jsonRe = /```(?:sources|docs-sources|sources-json|json)\s*([\s\S]*?)```/gi;
         let displayMarkdown = markdownText;
         let sources = [];
-        const matches = [...markdownText.matchAll(sourceBlockRegex)];
 
-        matches.forEach((match) => {
-            const parsed = this.parseSourcesJson(match[1]);
-            if (parsed.length > 0) sources = [...sources, ...parsed];
+        for (const match of markdownText.matchAll(jsonRe)) {
+            const parsed = this.parseJsonSources(match[1]);
+            if (parsed.length > 0) sources = parsed;
             displayMarkdown = displayMarkdown.replace(match[0], '');
-        });
+        }
 
-        sources.forEach((s, i) => {
-            if (!s.number) s.number = i + 1;
-        });
+        // Strip incomplete blocks or partial markers still streaming
+        displayMarkdown = displayMarkdown
+            .replace(/```(?:sources|docs-sources|sources-json|json)[\s\S]*$/gi, '')
+            .replace(/\[sources?\]?\s*$/i, '');
 
+        sources.forEach((s, i) => { if (!s.number) s.number = i + 1; });
         return { displayMarkdown: displayMarkdown.trim(), sources };
     }
 
-    parseSourcesJson(jsonText) {
-        for (const candidate of [jsonText.trim(), this.relaxSourcesJson(jsonText)]) {
-            if (!candidate) continue;
-            const parsed = this.tryParseSourcesCandidate(candidate);
-            if (parsed.length > 0) return parsed;
+    parseSourceLines(text) {
+        const sources = [];
+        const lineRe = /^(\d+)\s*\|\s*(.+?)\s*\|\s*(\S+)\s*$/;
+
+        for (const raw of text.split('\n')) {
+            const m = raw.trim().match(lineRe);
+            if (!m) continue;
+            const href = this.normalizeHref(m[3]);
+            if (!href) continue;
+            sources.push({ number: parseInt(m[1], 10), href, label: m[2].trim() });
         }
-        return [];
+        return sources;
     }
 
-    tryParseSourcesCandidate(candidateText) {
+    parseJsonSources(jsonText) {
         try {
-            const parsed = JSON.parse(candidateText);
+            const relaxed = jsonText.trim()
+                .replace(/^\s*\{\s*sources\s*:/i, '{"sources":')
+                .replace(/([{,]\s*)([a-zA-Z_]\w*)\s*:/g, '$1"$2":')
+                .replace(/'/g, '"')
+                .replace(/,\s*([}\]])/g, '$1');
+
+            const parsed = JSON.parse(relaxed);
             const list = Array.isArray(parsed) ? parsed : parsed?.sources;
             if (!Array.isArray(list)) return [];
 
             const out = [];
             const seen = new Set();
             list.forEach((item, i) => {
-                const href = this.normalizeHref(item?.url || item?.href || item?.link || '');
+                const href = this.normalizeHref(item?.url || item?.href || '');
                 if (!href || seen.has(href)) return;
                 seen.add(href);
-
-                const label = (item?.title || item?.label || item?.name || href).toString().trim() || href;
-                const number = typeof item?.number === 'number' ? item.number : i + 1;
-                out.push({ number, href, label });
+                out.push({
+                    number: typeof item?.number === 'number' ? item.number : i + 1,
+                    href,
+                    label: (item?.title || item?.label || href).toString().trim()
+                });
             });
             return out;
         } catch {
             return [];
         }
-    }
-
-    relaxSourcesJson(rawJsonText) {
-        let relaxed = (rawJsonText || '').trim();
-        if (!relaxed) return '';
-
-        relaxed = relaxed
-            .replace(/^\s*\{\s*sources\s*:/i, '{"sources":')
-            .replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":')
-            .replace(/'/g, '"')
-            .replace(/,\s*([}\]])/g, '$1');
-        return relaxed;
     }
 
     normalizeHref(rawHref) {

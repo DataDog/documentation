@@ -8,7 +8,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 0 1px;
+    margin: 0 2px;
     min-width: 20px;
     height: 20px;
     padding: 0 5px;
@@ -44,8 +44,7 @@
     position: absolute;
     z-index: 100;
     top: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     min-width: 180px;
     max-width: 280px;
     padding: 8px 12px;
@@ -77,15 +76,14 @@
 @keyframes conv-search-tooltip-in {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(2px);
+        transform: translateY(2px);
     }
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 }
 
-// Source cards section
 .conv-search-sources {
     margin-top: 20px;
     padding-top: 0;
@@ -140,7 +138,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
 
-        // Stretched link — makes the entire card clickable
         &::after {
             content: '';
             position: absolute;

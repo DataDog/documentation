@@ -3,8 +3,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 4px;
-    margin-top: 8px;
+    gap: 2px;
+    margin-top: 6px;
 }
 
 .conv-search-action-btn {
@@ -12,32 +12,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     padding: 0;
-    border: 1px solid transparent;
+    border: none;
     border-radius: 6px;
     background: transparent;
-    color: $conv-search-text-muted;
+    color: rgba($conv-search-text-muted, 0.6);
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
 
     &:hover {
         background: $conv-search-surface;
-        color: inherit;
-        border-color: rgba($conv-search-text-muted, 0.2);
+        color: $conv-search-text-muted;
     }
 
     &:active {
-        transform: scale(0.95);
+        transform: scale(0.92);
     }
 
     &.active {
-        background: rgba($conv-search-purple, 0.11);
-        border-color: rgba($conv-search-purple, 0.35);
+        background: rgba($conv-search-purple, 0.08);
+        color: $conv-search-purple;
 
         &:hover {
-            background: rgba($conv-search-purple, 0.15);
+            background: rgba($conv-search-purple, 0.12);
         }
 
         img,
@@ -48,8 +47,8 @@
 
     svg,
     img {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
 }
 
