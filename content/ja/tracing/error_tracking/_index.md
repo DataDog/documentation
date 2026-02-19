@@ -21,7 +21,7 @@ title: バックエンドサービスのエラー追跡
 
 ## 概要
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

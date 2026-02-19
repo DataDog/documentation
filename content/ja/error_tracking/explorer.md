@@ -9,7 +9,7 @@ title: Error Tracking Explorer
 
 ## 概要
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="Error Tracking Explorer における Issue の詳細" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview.png" alt="Error Tracking Explorer における Issue の詳細" style="width:100%;" >}}
 
 Error Tracking Explorer では、Issue の表示、フィルタリング、調査が行えます。Issue とは、同じバグに紐づく類似エラーをまとめたグループです。Datadog は、エラー タイプ、エラー メッセージ、スタック トレースなどの属性をもとに各エラーのフィンガープリントを計算して Issue を作成します。フィンガープリントが同じエラーは、同一の Issue としてグループ化されます。
 

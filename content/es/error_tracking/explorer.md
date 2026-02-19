@@ -9,7 +9,7 @@ title: Explorador de Error Tracking
 
 ## Información general
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="Detalles de un incidente en el Explorador de Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview.png" alt="Detalles de un incidente en el Explorador de Error Tracking" style="width:100%;" >}}
 
 El Explorador de Error Tracking permite ver, filtrar e investigar incidentes. Un incidente es un grupo de errores similares relacionados con el mismo fallo. Datadog crea incidentes contando una huella digital por cada error, utilizando algunos de sus atributos como el tipo de error, el mensaje de error o la traza (trace) de stack tecnológico. Los errores con la misma huella digital se agrupan en el mismo incidente.
 
