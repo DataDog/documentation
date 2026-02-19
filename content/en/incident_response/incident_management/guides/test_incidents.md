@@ -45,10 +45,10 @@ During declaration, you have the option to enable any of these behaviors if need
 
 Test incidents must be enabled before use. To enable:
 
-1. Navigate to [**Incidents** > **Settings** > **Information**][3]
-2. Scroll to the **Test incidents** section
-3. Toggle the setting to **Enabled** for your incident type
-4. Click **Save Changes**
+1. Navigate to [**Incidents** > **Settings** > **Information**][3].
+2. Scroll to the **Test incidents** section.
+3. Toggle the setting to **Enabled**.
+4. Click **Save Changes**.
 
 ## Declaring a test incident
 
