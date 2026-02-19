@@ -5,6 +5,9 @@ aliases:
     - /llm_observability/submit_evaluations
     - /llm_observability/evaluations/submit_evaluations
 further_reading:
+    - link: '/llm_observability/guide/evaluation_developer_guide'
+      tag: 'Documentation'
+      text: 'Learn about building custom evaluators'
     - link: '/llm_observability/setup/sdk'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Python'
@@ -36,6 +39,8 @@ Evaluation labels must be unique for a given LLM application (<code>ml_app</code
 ## Submitting external evaluations with the SDK
 
 The LLM Observability SDK provides the methods `LLMObs.submit_evaluation()` and `LLMObs.export_span()` to help your traced LLM application submit external evaluations to LLM Observability. See the [Python][3] or [Node.js][4] SDK documentation for more details.
+
+<div class="alert alert-info">For building reusable, class-based evaluators with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 ### Example
 
@@ -70,7 +75,7 @@ def llm_call():
 
 ## Submitting external evaluations with the API
 
-You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
+You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
 
 To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation.
 
@@ -118,4 +123,4 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
 [2]: /llm_observability/setup/api/?tab=model#evaluations-api
 [3]: /llm_observability/setup/sdk/python/#evaluations
 [4]: /llm_observability/setup/sdk/nodejs/#evaluations
-[5]: /llm_observability/instrumentation/otel_instrumentation
+[5]: /llm_observability/guide/evaluation_developer_guide

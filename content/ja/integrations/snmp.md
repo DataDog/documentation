@@ -49,7 +49,7 @@ draft: false
 git_integration_title: snmp
 integration_id: snmp
 integration_title: SNMP
-integration_version: 10.0.0
+integration_version: 10.1.0
 is_public: true
 manifest_version: 2.0.0
 name: snmp

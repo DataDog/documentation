@@ -10,6 +10,9 @@ further_reading:
 - link: '/real_user_monitoring/application_monitoring/browser/setup/server'
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
+- link: '/tracing/trace_collection/single-step-apm/'
+  tag: 'Documentation'
+  text: 'Single Step APM Instrumentation'
 ---
 
 ## Overview
@@ -32,23 +35,53 @@ The Java SDK works by monitoring your servlet API (which handles web requests an
   - WebLogic 12+
   - WebSphere AS 8+ / Open Liberty 17+
 
-### SDK requirements
-- Java SDK installed using either:
-  - [Automatic instrumentation][1] (SSI)
-  - [Manual Java SDK installation][2]
+## Setup
 
-### Datadog configuration
+Choose your preferred setup method:
+
+{{< tabs >}}
+{{% tab "Single-Step Instrumentation (Recommended)" %}}
+
+Enables RUM Browser monitoring with [Single Step Instrumentation (SSI)][2].
+When you run the Agent installation with RUM enabled, Datadog:
+- Loads the Java SDK into your Java applications through SSI
+- Creates a RUM application for you
+- Configures the Java SDK with the required RUM environment variables
+
+**This approach requires no code changes and no manual web server configuration.**
+
+1. Go to the [**Agent Installation**][1] page.
+2. Select your platform (for example, Linux).
+3. In the **Customize your observability coverage** section, enable **Real User Monitoring** under **Application Observability**.
+
+   A RUM application is automatically created for you when you enable this option.
+
+4. Copy the generated installation command and run it on your host.
+5. Restart your Java servlet-based application.
+
+
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
+[2]: /tracing/trace_collection/single-step-apm/
+
+{{% /tab %}}
+{{% tab "Manual Configuration" %}}
+
+Use manual configuration if you prefer to set up RUM Browser monitoring independently, or if SSI is not available for your environment.
+
+### Prerequisites
+
+- Java SDK installed and loaded using either:
+  - [Single Step Instrumentation][1] (SSI)
+  - [Manual Java SDK installation][2]
 - RUM application [created in Datadog][3]
 - Configuration values ready:
   - `clientToken`
-  - `applicationId` 
+  - `applicationId`
   - `remoteConfigurationId`
 
-## Configuration
+### Enable RUM instrumentation on the Java SDK
 
-### Enable RUM injection
-
-RUM SDK injection for Java web application servers can be configured using the usual Java tracing configuration methods. For more information, see [Configuring the Java SDK Library][5].
+RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK Library][4].
 
 RUM SDK injection is disabled by default. Enable it by exporting the following environment variables:
 
@@ -72,11 +105,19 @@ java -Ddd.rum.enabled=true \
 
 Restart your Java web application server to apply the changes.
 
-HTML documents should now contain the Datadog RUM JavaScript tag right before the closing `</head>`. You may need to clear your browser cache. You should now start receiving data for your Datadog RUM application.
+HTML documents should contain the Datadog RUM JavaScript tag right before the closing `</head>`. You may need to clear your browser cache. You should start receiving data for your Datadog RUM application.
 
-### Configuration options
+[1]: /tracing/trace_collection/#single-step-instrumentation-recommended
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[3]: https://app.datadoghq.com/rum/list
+[4]: /tracing/trace_collection/library_config/java/
 
-Here are all the configuration options related to RUM SDK injection:
+{{% /tab %}}
+{{< /tabs >}}
+
+## Configuration options
+
+Here are all the configuration options related for enabling RUM on the Java SDK:
 
 | Property | Environment variable | Value | Requirement |
 |----------|---------------------|-------|-------------|
@@ -112,8 +153,3 @@ DEBUG datadog.trace.api.Config - New instance: Config{..., rumEnabled=true, rumI
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
-[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-[3]: https://app.datadoghq.com/rum/list
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=configurationfile#configuration

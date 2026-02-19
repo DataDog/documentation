@@ -29,7 +29,8 @@ On the [SLO status page][5], click **+ New SLO**. Then select, [**By Count**][6]
 
 ### Define queries
 
-1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly. For more information, see [Querying][9] documentation. 
+1. There are two queries to define: **Sum of the good events** and **Sum of the bad events**. <br>These are used to calculate the SLI, which is defined as the ratio of good events to the number of good and bad events combined.<br> <div class="alert alert-danger">Total events queries are a legacy SLO definition. While you can modify SLOs that use total events through the UI and API, to create a total events query, you must use the API. </div>
+Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly. For more information, see [Querying][9].
 1. Use the `FROM` field to include or exclude specific groups using tags.
 1. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][7].
 1. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
@@ -49,7 +50,7 @@ By grouping these SLIs you can visualize each individual group's status, good re
 
 {{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="metric-based SLO group results" >}}
 
-By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
+By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph.
 
 ### Set your SLO targets
 
