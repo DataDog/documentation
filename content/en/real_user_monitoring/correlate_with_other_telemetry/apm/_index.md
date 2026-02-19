@@ -202,7 +202,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable `RUM` with the `urlSessionTracking` option and `firstPartyHostsTracing` parameter:
+2. Enable `RUM` and URLSession instrumentation with the `urlSessionTracking` configuration and `firstPartyHostsTracing` parameter:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -218,30 +218,29 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         )
     )
     ```
+    
+   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-3. Enable URLSession instrumentation for your `SessionDelegate` type, which conforms to `URLSessionDataDelegate` protocol:
+   Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
+
+3. _(Optional)_ For detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your `SessionDelegate` type:
     ```swift
-    URLSessionInstrumentation.enable(
+    URLSessionInstrumentation.enableDurationBreakdown(
         with: .init(
             delegateClass: <YourSessionDelegate>.self
         )
     )
-    ```
 
-4. Initialize URLSession as stated in [Setup][1]:
-    ```swift
-    let session =  URLSession(
+    let session = URLSession(
         configuration: ...,
         delegate: <YourSessionDelegate>(),
         delegateQueue: ...
     )
     ```
 
-   By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
+   **Note**: Distributed tracing works automatically, but trace timings are more accurate after enabling `URLSessionInstrumentation`.
 
-   Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
-
-5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+4. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
      To keep 100% of backend traces:
     ```swift
