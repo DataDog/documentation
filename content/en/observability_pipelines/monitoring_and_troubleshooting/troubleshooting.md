@@ -60,9 +60,9 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
-## Identify Workers that are running on multiple clusters in a container
+## Identify Workers using pod and cluster names
 
-If you want to identify Workers that are running on multiple clusters in a container:
+By default, a Worker's hostname is the machine's hostname, such as `COMP-JLXPKWTGJF`. If you run your pipeline across multiple clusters or containers, assign a unique hostname for your Workers using the pod name and the cluster name so you can easily identify your Workers. To do that:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
