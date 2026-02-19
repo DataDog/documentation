@@ -195,7 +195,7 @@ network_devices:
 
 ### Override interface speed
 
-By default, the SNMP check reports interface speed as detected from the device. If the physical port speed differs from the actual circuit bandwidth—for example, a 1 Gbps physical port provisioned for a 50 Mbps circuit—you can override the inbound and outbound speed for specific interfaces using `interface_configs`.
+By default, the SNMP check reports interface speed as detected from the device. If the physical port speed differs from the actual circuit bandwidth, for example, a 1 Gbps physical port provisioned for a 50 Mbps circuit, you can override the inbound and outbound speed for specific interfaces using `interface_configs`.
 
 Add `interface_configs` to your instance configuration in `snmp.d/conf.yaml`:
 
