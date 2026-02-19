@@ -17,13 +17,23 @@ $conv-search-text-muted: #6b7280;
 
 // Messages Container
 .conv-search-messages {
+    position: relative;
     flex: 1;
-    min-height: 0;  // Critical for flex item to shrink and scroll properly
+    min-height: 0;
     overflow-y: auto;
     padding: 20px 24px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    // Scroll-fade: soft gradient at top/bottom hints at overflow
+    --fade-size: 36px;
+    mask-image:
+        linear-gradient(to bottom, transparent, black var(--fade-size),
+                         black calc(100% - var(--fade-size)), transparent);
+    -webkit-mask-image:
+        linear-gradient(to bottom, transparent, black var(--fade-size),
+                         black calc(100% - var(--fade-size)), transparent);
 
     // Custom scrollbar
     &::-webkit-scrollbar {
