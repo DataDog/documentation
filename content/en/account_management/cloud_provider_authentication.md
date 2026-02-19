@@ -65,7 +65,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - The `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
 
-Setting up cloud-provider based authentication for AWS involves two parts: 
+Setting up cloud-provider based authentication for AWS involves two parts:
 1. [Configuring your AWS identity mapping in Datadog](#configure-aws-identity-mapping-in-datadog)
 2. [Updating your Terraform provider configuration](#update-your-terraform-provider-configuration)
 
@@ -229,7 +229,7 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 Cloud-based authentication for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
 **Requirements**:
-- The latest version of the Datadog Agent.
+- The version `7.78.0` or later of the Datadog Agent.
 - The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - The `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
