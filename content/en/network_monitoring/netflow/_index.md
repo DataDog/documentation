@@ -243,7 +243,7 @@ NetFlow data is retained for 30 days by default, with options for 15, 30, 60, an
 
 ## Limit flow volume per flush interval
 
-To help control NetFlow volume (and associated cost), you can configure the Agent to cap the number of flow records submitted during each flush interval (the period during which flows are aggregated before being forwarded to Datadog).
+To control NetFlow volume and associated costs, configure the Agent to cap the number of flow records submitted per flush interval. The flush interval is the period during which flows are aggregated before being forwarded to Datadog.
 
 When this limit is enabled, the Agent retains only the **top flows by byte count** up to the configured maximum, and drops lower-volume flows for that flush interval.
 
