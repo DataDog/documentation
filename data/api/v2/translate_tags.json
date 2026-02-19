@@ -79,6 +79,10 @@
     "name": "Case Management Type",
     "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "change-management": {
+    "name": "Change Management",
+    "description": "View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
   "cloud-authentication": {
     "name": "Cloud Authentication",
     "description": "Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API."

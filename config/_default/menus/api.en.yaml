@@ -7095,6 +7095,88 @@ menu:
           - GetAllCaseTypes
         unstable: []
         order: 1
+    - name: Change Management
+      url: /api/latest/change-management/
+      identifier: change-management
+      generated: true
+    - name: Update a change request decision
+      url: '#update-a-change-request-decision'
+      identifier: change-management-update-a-change-request-decision
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChangeRequestDecision
+        unstable:
+          - v2
+        order: 5
+    - name: Delete a change request decision
+      url: '#delete-a-change-request-decision'
+      identifier: change-management-delete-a-change-request-decision
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteChangeRequestDecision
+        unstable:
+          - v2
+        order: 6
+    - name: Create a change request branch
+      url: '#create-a-change-request-branch'
+      identifier: change-management-create-a-change-request-branch
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChangeRequestBranch
+        unstable:
+          - v2
+        order: 4
+    - name: Update a change request
+      url: '#update-a-change-request'
+      identifier: change-management-update-a-change-request
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChangeRequest
+        unstable:
+          - v2
+        order: 3
+    - name: Get a change request
+      url: '#get-a-change-request'
+      identifier: change-management-get-a-change-request
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChangeRequest
+        unstable:
+          - v2
+        order: 2
+    - name: Create a change request
+      url: '#create-a-change-request'
+      identifier: change-management-create-a-change-request
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChangeRequest
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
