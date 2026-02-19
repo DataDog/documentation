@@ -258,7 +258,7 @@ network_devices:
     aggregator_max_flows_per_flush_interval: 10000
 ```
 
-With this configuration, the Agent submits at most 10,000 NetFlow records per flush interval (5 minutes by default), prioritizing the highest-volume flows and dropping the rest.
+With this configuration, the Agent submits at most 10,000 NetFlow records per flush interval (5 minutes by default). The Agent prioritizes the highest-volume flows and drops the rest.
 
 
 ### Estimating daily volume
