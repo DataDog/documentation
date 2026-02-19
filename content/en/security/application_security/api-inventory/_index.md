@@ -131,7 +131,7 @@ To use this data source, configure the [Source Code Integration][16] with GitHub
 | Go       | Beego, Chi, Echo, Fiber, Gin, Gorilla Mux, fasthttp, go-zero |
 | C#       | ASP.NET Core MVC |
 
-To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on a 4-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
+To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on a 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
 
 ### Processing sensitive data
 
