@@ -44,7 +44,7 @@ The migration follows a six-step wizard-style process in the Datadog UI. Complet
 
    - **Use the matching team**: Map to the existing Datadog team with the same handle.
    - **Map with another Datadog team**: Choose a different Datadog team from the list.
-   - **Create a new team**: Enter a team name when prompted. Datadog builds the team using the structure and members from your OpsGenie team.
+   - **Create a team**: Enter a team name when prompted. Datadog builds the team using the structure and members from your OpsGenie team.
 
    {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="UI for mapping an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
 
@@ -96,10 +96,10 @@ The following table shows how OpsGenie resources map to Datadog On-Call resource
 |---|---|---|
 | Teams | Teams | Name-based matching or manual mapping |
 | Users | Users | Email-based automatic matching with manual override |
-| Escalation Policies | Escalation Policies | Rules are converted to steps; delays are converted from OpsGenie intervals to seconds |
-| Schedules | Schedules | Rotations become layers (reversed order); time restrictions and timezones are preserved |
-| Rotation participants (user-type) | Schedule layer members | Only user-type participants are supported |
-| Time restrictions | Layer restrictions | Both daily and weekday-and-time-of-day types are supported |
+| Escalation Policies | Escalation Policies | Rules are converted to steps; delays are converted from OpsGenie intervals to seconds. |
+| Schedules | Schedules | Rotations become layers (reversed order); time restrictions and timezones are preserved. |
+| Rotation participants (user-type) | Schedule layer members | Only user-type participants are supported. |
+| Time restrictions | Layer restrictions | Both daily and weekday-and-time-of-day types are supported. |
 | Repeat count | Policy retries | Direct mapping |
 | Close alert after all | Resolve page on policy end | Direct mapping |
 
@@ -114,9 +114,9 @@ The following table shows how OpsGenie resources map to Datadog On-Call resource
 
 Before relying on migrated resources for production incidents:
 
-- **Verify schedule coverage**: Check that all migrated schedules have proper coverage with no gaps. Navigate to [On-Call Schedules][3] and review each schedule's timeline.
+- **Verify schedule coverage**: Check that all migrated schedules have proper coverage with no gaps. Go to [On-Call Schedules][3] and review each schedule's timeline.
 
-- **Test escalation policies**: Send test pages to verify that escalation policies escalate correctly and notify the right people. Use the [Manual Page][4] feature to send test pages.
+- **Test escalation policies**: Send test pages to verify that escalation policies escalate correctly and notify the right people. Use the [Manual Page][4] feature to do this.
 
 - **Check user mappings**: Verify that all users are correctly mapped and can receive notifications through their preferred channels (email, SMS, push, voice).
 
@@ -130,7 +130,7 @@ Before relying on migrated resources for production incidents:
 
 If the OpsGenie import option does not appear during team setup:
 
-1. Verify the [OpsGenie integration][1] is configured in Datadog.
+1. Verify that the [OpsGenie integration][1] is configured in Datadog.
 1. Verify that at least one account is configured in the integration tile.
 1. Confirm you have the required `on_call_write` and `teams_manage` permissions.
 
@@ -147,7 +147,7 @@ If OpsGenie users are not automatically matched to Datadog users:
 If migrated schedule rotations do not match your OpsGenie schedules:
 
 1. Check that all rotation participants are user-type (not team-type or escalation-type).
-1. Verify timezones are correctly configured in both OpsGenie and Datadog.
+1. Verify that timezones are correctly configured in both OpsGenie and Datadog.
 1. Review time restrictions to confirm they were migrated correctly.
 
 ### Escalation policy not saving
