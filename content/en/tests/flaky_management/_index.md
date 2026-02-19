@@ -164,6 +164,7 @@ For Bits AI to create a fix, the flaky test must meet the following criteria:
 - **Failure rate**: At least 5%
 - **Wasted time**: At least 2 hours
 - **Failed pipelines**: At least 2 pipelines
+- **Branch**: Must flake in the default branch
 
 {{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
 
