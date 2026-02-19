@@ -18,9 +18,9 @@ cascade:
         subcategory: Incident Management Guides
 ---
 
-{{< whatsnext desc="Guides:" >}}
+{{< header-list header="General guides" >}}
     {{< nextlink href="incident_response/incident_management/guides/test_incidents" >}}Using test incidents for training and testing{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< /header-list >}}
 
 
 ## Further reading
