@@ -431,6 +431,39 @@ class ConversationalSearch {
         return container.innerHTML;
     }
 
+    injectCodeCopyButtons(container) {
+        const tpl = document.getElementById('conv-search-actions-template');
+        const tplCopyBtn = tpl?.content?.querySelector('.conv-search-action-btn[data-action="copy"]');
+        const copySrc = tplCopyBtn?.querySelector('.copy-icon')?.getAttribute('src') || '/images/svg-icons/copy.svg';
+        const checkSrc = tplCopyBtn?.querySelector('.check-icon')?.getAttribute('src') || '/images/svg-icons/check-light.svg';
+
+        container.querySelectorAll('pre').forEach((pre) => {
+            if (pre.querySelector('.conv-search-code-copy')) return;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'conv-search-code-copy';
+            btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML =
+                `<img class="copy-icon" src="${copySrc}" width="14" height="14" alt="" />` +
+                `<img class="check-icon" src="${checkSrc}" width="14" height="14" alt="" style="display:none" />`;
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const code = pre.querySelector('code');
+                const text = code ? code.textContent : pre.textContent;
+                navigator.clipboard.writeText(text).catch(() => {});
+                const copyIcon = btn.querySelector('.copy-icon');
+                const checkIcon = btn.querySelector('.check-icon');
+                copyIcon.style.display = 'none';
+                checkIcon.style.display = 'block';
+                setTimeout(() => {
+                    copyIcon.style.display = 'block';
+                    checkIcon.style.display = 'none';
+                }, 1200);
+            });
+            pre.appendChild(btn);
+        });
+    }
+
     /**
      * String-based pass that converts [N] tokens to numbered badge chips.
      * Used during streaming (inert chips) AND final render (same DOM,
@@ -496,8 +529,15 @@ class ConversationalSearch {
             link.rel = 'noopener noreferrer';
             link.textContent = source.label;
 
+            const arrow = document.createElement('span');
+            arrow.className = 'conv-search-source-card-arrow';
+            arrow.innerHTML =
+                '<svg class="static" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+                '<svg class="hover" viewBox="0 0 24 24" fill="none" stroke="#632CA6" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+
             card.appendChild(badge);
             card.appendChild(link);
+            card.appendChild(arrow);
             cards.appendChild(card);
         });
 
@@ -733,6 +773,7 @@ class ConversationalSearch {
                                     // Strip any sources/json fenced block so it never flashes during streaming
                                     const streamDisplay = accumulatedMessage.replace(/```(?:sources|docs-sources|sources-json|json)[\s\S]*?(?:```|$)/gi, '').trim();
                                     responseContainer.innerHTML = this.inlineRefChips(marked.parse(streamDisplay));
+                                    this.injectCodeCopyButtons(responseContainer);
                                     lastRenderTime = now;
                                     this.scrollToBottom();
                                 }
@@ -754,6 +795,7 @@ class ConversationalSearch {
             // Render markdown after streaming completes
             if (accumulatedMessage) {
                 responseContainer.innerHTML = this.renderMessageWithSources(accumulatedMessage);
+                this.injectCodeCopyButtons(responseContainer);
                 this.addMessageActions(responseContainer.parentElement, query, accumulatedMessage);
                 this.scrollToBottom();
                 
@@ -794,6 +836,7 @@ class ConversationalSearch {
 
             if (fullAnswer) {
                 responseContainer.innerHTML = this.renderMessageWithSources(fullAnswer);
+                this.injectCodeCopyButtons(responseContainer);
                 this.addMessageActions(responseContainer.parentElement, query, fullAnswer);
                 
                 const latency = Date.now() - startTime;
@@ -861,7 +904,10 @@ class ConversationalSearch {
                 break;
 
             case 'copy':
-                navigator.clipboard.writeText(response).then(() => {
+                {
+                    navigator.clipboard.writeText(response).catch(() => {
+                        this.showFeedbackTooltip(button, 'Copy failed', true);
+                    });
                     this.logAction('Conversational Search Copy', {
                         conversational_search: {
                             action: 'copy',
@@ -869,9 +915,18 @@ class ConversationalSearch {
                         }
                     });
                     this.showFeedbackTooltip(button, 'Copied to clipboard!');
-                }).catch(() => {
-                    this.showFeedbackTooltip(button, 'Copy failed', true);
-                });
+
+                    const copyIcon = button.querySelector('.copy-icon');
+                    const checkIcon = button.querySelector('.check-icon');
+                    if (copyIcon && checkIcon) {
+                        copyIcon.style.display = 'none';
+                        checkIcon.style.display = 'block';
+                        setTimeout(() => {
+                            copyIcon.style.display = 'block';
+                            checkIcon.style.display = 'none';
+                        }, 1200);
+                    }
+                }
                 break;
         }
     }

@@ -71,8 +71,8 @@
         <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
         <div class="conv-search-suggestions">
             <button class="conv-search-suggestion" data-query="What is the Datadog Agent?"><span>What is the Datadog Agent?</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-            <button class="conv-search-suggestion" data-query="How do I instrument a Python app with ddtrace for APM?"><span>How do I instrument a Python app with ddtrace for APM?</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-            <button class="conv-search-suggestion" data-query="How do I configure the Agent to collect logs from a Docker container?"><span>How do I configure the Agent to collect logs from a Docker container?</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <button class="conv-search-suggestion" data-query="How to define a Datadog monitor in Terraform (example)?"><span>How to define a Datadog monitor in Terraform (example)?</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <button class="conv-search-suggestion" data-query="Which OpenTelemetry semantic conventions should I use for LLM traces in Datadog?"><span>Which OpenTelemetry semantic conventions should I use for LLM traces in Datadog?</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
         </div>
     </div>
 </template>
@@ -87,7 +87,8 @@
             <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/thumbs-down.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
         </button>
         <button class="conv-search-action-btn" data-action="copy" title="Copy response">
-            <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/copy.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+            <img class="copy-icon" src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/copy.svg") }}' width="16" height="16" alt="" aria-hidden="true" />
+            <img class="check-icon" src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/check-light.svg") }}' width="16" height="16" alt="" aria-hidden="true" style="display:none" />
         </button>
         <span class="conv-search-feedback-inline" aria-live="polite"></span>
     </div>

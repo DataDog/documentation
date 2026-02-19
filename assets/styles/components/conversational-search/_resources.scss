@@ -90,22 +90,17 @@
 }
 
 .conv-search-sources-title {
-    margin: 0 0 8px;
-    font-size: 11px;
+    margin: 0 0 6px;
+    font-size: 10px;
     font-weight: 500;
     color: rgba($conv-search-text-muted, 0.7);
     letter-spacing: 0.03em;
 }
 
 .conv-search-sources-cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 6px;
-    flex-wrap: wrap;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
 .conv-search-source-card {
@@ -113,20 +108,27 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 5px 10px 5px 6px;
-    border: 1px solid $conv-search-border;
-    border-radius: 999px;
+    padding: 5px 8px 5px 5px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 8px;
     background: $conv-search-bg;
     min-width: 0;
-    max-width: 260px;
-    flex: 0 0 auto;
     cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    transition: color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
 
     &:hover {
-        border-color: rgba($conv-search-purple, 0.3);
-        background: rgba($conv-search-purple, 0.03);
-        box-shadow: 0 1px 4px rgba($conv-search-purple, 0.06);
+        color: $conv-search-purple;
+        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.35);
+
+        .conv-search-source-card-number {
+            background: rgba($conv-search-purple, 0.1);
+            color: $conv-search-purple;
+        }
+
+        .conv-search-source-card-arrow {
+            .static { display: none; }
+            .hover { display: flex; }
+        }
     }
 
     a {
@@ -146,6 +148,19 @@
     }
 }
 
+.conv-search-source-card-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+    .hover { display: none; }
+
+    svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
 .conv-search-source-card-number {
     display: flex;
     align-items: center;
@@ -154,10 +169,11 @@
     min-width: 20px;
     height: 20px;
     padding: 0 5px;
-    border-radius: 999px;
+    border-radius: 4px;
     background: rgba(0, 0, 0, 0.06);
     color: #555;
     font-size: 11px;
     font-weight: 600;
     line-height: 20px;
+    transition: background 0.15s ease, color 0.15s ease;
 }

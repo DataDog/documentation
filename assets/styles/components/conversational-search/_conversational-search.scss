@@ -189,9 +189,12 @@ $conv-search-text-muted: #6b7280;
     }
 
     pre {
-        background: rgba(0, 0, 0, 0.025);
-        border-radius: 10px;
-        padding: 14px 16px;
+        position: relative;
+        background: #fff;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        border-top: 3px solid rgba(119, 0, 255, 0.3);
+        padding: 10px;
         overflow-x: auto;
         margin: 12px 0 16px;
 
@@ -243,6 +246,38 @@ $conv-search-text-muted: #6b7280;
 
         .hljs-emphasis { font-style: italic; }
         .hljs-strong { font-weight: bold; }
+    }
+}
+
+.conv-search-code-copy {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    cursor: pointer;
+    opacity: 1;
+    transition: background 0.15s ease;
+
+    img {
+        opacity: 0.4;
+        transition: opacity 0.15s ease;
+    }
+
+    &:hover {
+        background: #f5f5f5;
+
+        img {
+            opacity: 0.7;
+        }
     }
 }
 
