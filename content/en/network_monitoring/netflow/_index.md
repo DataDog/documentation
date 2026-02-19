@@ -271,7 +271,7 @@ For example, with `10,000` flows per flush and a 5-minute flush interval:
 
 `10,000 * (1440 / 5) = 2,880,000 flows/day`
 
-### What to expect
+### Expected behavior
 
 - **Top talkers are prioritized:** This is best for workflows focused on high-volume traffic (for example, bandwidth drivers and noisy links).
 - **Reduced visibility for low-volume flows:** Lower-traffic source/destination pairs may not appear when the cap is reached.
