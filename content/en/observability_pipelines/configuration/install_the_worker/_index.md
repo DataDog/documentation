@@ -167,7 +167,8 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 
 When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
 
-- A headless service to provide stable DNS names and Direct Pod IP resolution for the Worker.
+- A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
+  This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
 - A non-headless service for you to address the Worker and load balance traffic for internal and external cluster communications.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
