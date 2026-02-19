@@ -279,7 +279,7 @@ For example, with `10,000` flows per flush and a 5-minute flush interval:
 
 ### Monitoring truncation
 
-When flow limiting is enabled, the Agent emits metrics you can use to understand how much data is being kept vs dropped:
+When flow limiting is enabled, the Agent emits metrics you can use to understand how much data is being kept versus dropped:
 
 - `ndm.flow_truncation.flows_total`
 - `ndm.flow_truncation.flows_kept`
