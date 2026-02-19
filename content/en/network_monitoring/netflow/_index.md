@@ -248,8 +248,10 @@ To control NetFlow volume and associated costs, configure the Agent to cap the n
 When this limit is enabled, the Agent retains only the **top flows by byte count** up to the configured maximum, and drops lower-volume flows for that flush interval.
 
 ### Configuration
+
 **Note**: Requires Agent version `7.75.1` or later.
-Set `network_devices.netflow.aggregator_max_flows_per_flush_interval` in your `datadog.yaml`:
+
+Configure the following in your `datadog.yaml`:
 
 ```yaml
 network_devices:
@@ -259,7 +261,6 @@ network_devices:
 ```
 
 With this configuration, the Agent submits at most 10,000 NetFlow records per flush interval (5 minutes by default). The Agent prioritizes the highest-volume flows and drops the rest.
-
 
 ### Estimating daily volume
 
