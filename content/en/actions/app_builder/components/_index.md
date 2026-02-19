@@ -272,9 +272,6 @@ Is Visible
 Event
 : **Value**: change
 
-Reaction
-: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
-
 State Functions
 : setValue<br>
 **Example**: See [events][9].
@@ -905,9 +902,6 @@ Hide Close Button
 
 Event
 : **Values**: toggle open, close, open
-
-Reaction
-: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : setIsOpen<br>
