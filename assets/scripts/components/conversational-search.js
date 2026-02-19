@@ -394,235 +394,209 @@ class ConversationalSearch {
 
     /**
      * Render markdown with numbered reference chips and source cards.
+     *
+     * The LLM embeds [N] markers inline and appends a ```sources``` JSON
+     * block mapping each number to a URL + title. We parse the sources,
+     * swap [N] text nodes for clickable chips, and append a source-card
+     * strip at the bottom.
      */
     renderMessageWithSources(markdownText) {
-        const { displayMarkdown, structuredSources } = this.extractStructuredSources(markdownText);
+        const { displayMarkdown, sources } = this.extractSources(markdownText);
         const html = marked.parse(displayMarkdown);
+
         const container = document.createElement('div');
         container.innerHTML = html;
 
-        const links = Array.from(container.querySelectorAll('a[href]'));
-        if (links.length === 0 && structuredSources.length === 0) {
-            return html;
+        if (sources.length > 0) {
+            const byNumber = new Map();
+            sources.forEach((s) => byNumber.set(s.number, s));
+            this.replaceRefNumbers(container, byNumber);
+            container.appendChild(this.buildSourceCards(sources));
         }
-
-        const structuredByHref = new Map();
-        structuredSources.forEach((source, index) => {
-            const normalizedHref = this.normalizeHref(source.href);
-            if (normalizedHref && !structuredByHref.has(normalizedHref)) {
-                structuredByHref.set(normalizedHref, { ...source, order: index });
-            }
-        });
-
-        const sourceIndexByHref = new Map();
-        const sources = [];
-
-        links.forEach((link) => {
-            const href = (link.getAttribute('href') || '').trim();
-            if (!href) {
-                return;
-            }
-
-            const normalizedHref = this.normalizeHref(href);
-            const structuredSource = normalizedHref ? structuredByHref.get(normalizedHref) : null;
-            const sourceLabel = structuredSource?.label || (link.textContent || '').trim() || href;
-
-            if (!sourceIndexByHref.has(href)) {
-                sourceIndexByHref.set(href, sources.length + 1);
-                sources.push({
-                    href,
-                    label: sourceLabel
-                });
-            }
-
-            const sourceNumber = sourceIndexByHref.get(href);
-            const refWrap = document.createElement('span');
-            refWrap.className = 'conv-search-source-ref-wrap';
-
-            const markerBtn = document.createElement('button');
-            markerBtn.type = 'button';
-            markerBtn.className = 'conv-search-source-ref-btn';
-            markerBtn.setAttribute('data-source-number', String(sourceNumber));
-            markerBtn.setAttribute('aria-label', `Source ${sourceNumber}: ${sources[sourceNumber - 1].label}`);
-            markerBtn.setAttribute('aria-expanded', 'false');
-            markerBtn.innerHTML = `<span class="conv-search-source-ref-number">${sourceNumber}</span>`;
-
-            const sourceData = sources[sourceNumber - 1];
-            const tooltip = document.createElement('div');
-            tooltip.className = 'conv-search-source-tooltip';
-            tooltip.innerHTML = `
-                <a href="${sourceData.href}" target="_blank" rel="noopener noreferrer">${sourceData.label}</a>
-            `;
-
-            refWrap.appendChild(markerBtn);
-            refWrap.appendChild(tooltip);
-            link.replaceWith(refWrap);
-        });
-
-        // Add structured sources not present as inline links, preserving source order from the model.
-        structuredSources.forEach((source) => {
-            if (!sourceIndexByHref.has(source.href)) {
-                sourceIndexByHref.set(source.href, sources.length + 1);
-                sources.push({
-                    href: source.href,
-                    label: source.label
-                });
-            }
-        });
-
-        if (sources.length === 0) {
-            return container.innerHTML;
-        }
-
-        const sourcesSection = document.createElement('div');
-        sourcesSection.className = 'conv-search-sources';
-
-        const sourcesTitle = document.createElement('p');
-        sourcesTitle.className = 'conv-search-sources-title';
-        sourcesTitle.textContent = `Sources`;
-        sourcesSection.appendChild(sourcesTitle);
-
-        const sourcesList = document.createElement('div');
-        sourcesList.className = 'conv-search-sources-cards';
-
-        sources.forEach((source) => {
-            const listItem = document.createElement('article');
-            listItem.className = 'conv-search-source-card';
-
-            const sourceNumber = sourceIndexByHref.get(source.href);
-            const sourceBadge = document.createElement('span');
-            sourceBadge.className = 'conv-search-source-card-number';
-            sourceBadge.textContent = String(sourceNumber);
-
-            const sourceLink = document.createElement('a');
-            sourceLink.href = source.href;
-            sourceLink.target = '_blank';
-            sourceLink.rel = 'noopener noreferrer';
-            sourceLink.textContent = source.label;
-
-            listItem.appendChild(sourceBadge);
-            listItem.appendChild(sourceLink);
-            sourcesList.appendChild(listItem);
-        });
-
-        sourcesSection.appendChild(sourcesList);
-        container.appendChild(sourcesSection);
 
         return container.innerHTML;
     }
 
     /**
-     * Optional machine-readable source payload expected from LLM:
-     * ```sources
-     * {"sources":[{"url":"https://...","title":"..."}]}
-     * ```
+     * Walk DOM text nodes and replace [N] tokens with interactive chips.
+     * Skips content inside <pre>/<code> so code blocks stay intact.
      */
-    extractStructuredSources(markdownText) {
+    replaceRefNumbers(container, sourcesByNumber) {
+        const refPattern = /\[\d{1,3}\]/;
+
+        const walker = document.createTreeWalker(
+            container,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode(node) {
+                    let el = node.parentNode;
+                    while (el && el !== container) {
+                        const tag = el.tagName;
+                        if (tag === 'PRE' || tag === 'CODE') {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        el = el.parentNode;
+                    }
+                    return refPattern.test(node.textContent)
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            }
+        );
+
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        textNodes.forEach((textNode) => {
+            const frag = document.createDocumentFragment();
+            textNode.textContent.split(/(\[\d{1,3}\])/).forEach((part) => {
+                const m = part.match(/^\[(\d{1,3})\]$/);
+                if (m) {
+                    const num = parseInt(m[1], 10);
+                    const source = sourcesByNumber.get(num);
+                    if (source) {
+                        frag.appendChild(this.createRefChip(num, source));
+                        return;
+                    }
+                }
+                if (part) frag.appendChild(document.createTextNode(part));
+            });
+            textNode.parentNode.replaceChild(frag, textNode);
+        });
+    }
+
+    createRefChip(number, source) {
+        const wrap = document.createElement('span');
+        wrap.className = 'conv-search-source-ref-wrap';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'conv-search-source-ref-btn';
+        btn.setAttribute('data-source-number', String(number));
+        btn.setAttribute('aria-label', `Source ${number}: ${source.label}`);
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = `<span class="conv-search-source-ref-number">${number}</span>`;
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'conv-search-source-tooltip';
+        tooltip.innerHTML = `<a href="${source.href}" target="_blank" rel="noopener noreferrer">${source.label}</a>`;
+
+        wrap.appendChild(btn);
+        wrap.appendChild(tooltip);
+        return wrap;
+    }
+
+    buildSourceCards(sources) {
+        const section = document.createElement('div');
+        section.className = 'conv-search-sources';
+
+        const title = document.createElement('p');
+        title.className = 'conv-search-sources-title';
+        title.textContent = 'Sources';
+        section.appendChild(title);
+
+        const cards = document.createElement('div');
+        cards.className = 'conv-search-sources-cards';
+
+        sources.forEach((source) => {
+            const card = document.createElement('article');
+            card.className = 'conv-search-source-card';
+
+            const badge = document.createElement('span');
+            badge.className = 'conv-search-source-card-number';
+            badge.textContent = String(source.number);
+
+            const link = document.createElement('a');
+            link.href = source.href;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = source.label;
+
+            card.appendChild(badge);
+            card.appendChild(link);
+            cards.appendChild(card);
+        });
+
+        section.appendChild(cards);
+        return section;
+    }
+
+    /**
+     * Extract the ```sources … ``` JSON block, strip it from display
+     * markdown, and return parsed source objects with number/href/label.
+     */
+    extractSources(markdownText) {
         const sourceBlockRegex = /```(?:sources|docs-sources|sources-json|json)\s*([\s\S]*?)```/gi;
         let displayMarkdown = markdownText;
-        let parsedSources = [];
+        let sources = [];
         const matches = [...markdownText.matchAll(sourceBlockRegex)];
 
         matches.forEach((match) => {
             const parsed = this.parseSourcesJson(match[1]);
-            if (parsed.length > 0) {
-                parsedSources = [...parsedSources, ...parsed];
-            }
-            // Always remove source-ish fenced blocks to avoid raw JSON showing in chat.
+            if (parsed.length > 0) sources = [...sources, ...parsed];
             displayMarkdown = displayMarkdown.replace(match[0], '');
         });
 
-        // Deduplicate by normalized URL while preserving first-seen order.
-        const deduped = [];
-        const seen = new Set();
-        parsedSources.forEach((source) => {
-            const normalizedHref = this.normalizeHref(source.href);
-            if (!normalizedHref || seen.has(normalizedHref)) {
-                return;
-            }
-            seen.add(normalizedHref);
-            deduped.push({ href: normalizedHref, label: source.label });
+        sources.forEach((s, i) => {
+            if (!s.number) s.number = i + 1;
         });
 
-        return { displayMarkdown: displayMarkdown.trim(), structuredSources: deduped };
+        return { displayMarkdown: displayMarkdown.trim(), sources };
     }
 
     parseSourcesJson(jsonText) {
-        const parseCandidates = [
-            jsonText.trim(),
-            this.relaxSourcesJson(jsonText)
-        ];
-
-        for (const candidate of parseCandidates) {
-            if (!candidate) {
-                continue;
-            }
+        for (const candidate of [jsonText.trim(), this.relaxSourcesJson(jsonText)]) {
+            if (!candidate) continue;
             const parsed = this.tryParseSourcesCandidate(candidate);
-            if (parsed.length > 0) {
-                return parsed;
-            }
+            if (parsed.length > 0) return parsed;
         }
-
         return [];
     }
 
     tryParseSourcesCandidate(candidateText) {
         try {
             const parsed = JSON.parse(candidateText);
-            const candidateList = Array.isArray(parsed) ? parsed : parsed?.sources;
-            if (!Array.isArray(candidateList)) {
-                return [];
-            }
+            const list = Array.isArray(parsed) ? parsed : parsed?.sources;
+            if (!Array.isArray(list)) return [];
 
-            const normalized = [];
+            const out = [];
             const seen = new Set();
-            candidateList.forEach((item) => {
+            list.forEach((item, i) => {
                 const href = this.normalizeHref(item?.url || item?.href || item?.link || '');
-                if (!href || seen.has(href)) {
-                    return;
-                }
+                if (!href || seen.has(href)) return;
+                seen.add(href);
 
                 const label = (item?.title || item?.label || item?.name || href).toString().trim() || href;
-                seen.add(href);
-                normalized.push({ href, label });
+                const number = typeof item?.number === 'number' ? item.number : i + 1;
+                out.push({ number, href, label });
             });
-
-            return normalized;
-        } catch (e) {
+            return out;
+        } catch {
             return [];
         }
     }
 
     relaxSourcesJson(rawJsonText) {
         let relaxed = (rawJsonText || '').trim();
-        if (!relaxed) {
-            return '';
-        }
+        if (!relaxed) return '';
 
-        // Support common non-JSON LLM output variants:
-        // {sources:[ {'url':'...','title':'...'} ]}
         relaxed = relaxed
             .replace(/^\s*\{\s*sources\s*:/i, '{"sources":')
             .replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":')
             .replace(/'/g, '"')
             .replace(/,\s*([}\]])/g, '$1');
-
         return relaxed;
     }
 
     normalizeHref(rawHref) {
         const href = (rawHref || '').toString().trim();
-        if (!href) {
-            return '';
-        }
+        if (!href) return '';
 
         try {
             const url = new URL(href, window.location.origin);
-            if (!['http:', 'https:'].includes(url.protocol)) {
-                return '';
-            }
+            if (!['http:', 'https:'].includes(url.protocol)) return '';
             return url.href;
-        } catch (e) {
+        } catch {
             return '';
         }
     }
