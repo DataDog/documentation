@@ -25,30 +25,62 @@ further_reading:
 
 Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix.
 
-<!-- Test execution -->
-{% if equals($synthetics_variables, "execution") %}
+<!-- Test results -->
+{% if equals($synthetics_variables, "test_results") %}
+
+This section covers two categories of variables:
+
+- [Test execution variables](#test-execution-variables): Shortcuts for commonly used values such as failure messages, step counts, duration, and tags.
+- [Execution results](#execution-results): The full result object with status, timestamps, failure codes, and step counts.
 
 {% partial file="synthetics/notifications/test_execution_variables.mdoc.md" /%}
 
-{% /if %}
-<!-- end Test execution -->
-
-<!-- Test metadata -->
-{% if equals($synthetics_variables, "test_metadata") %}
-
-{% partial file="synthetics/notifications/test_metadata.mdoc.md" /%}
+{% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
 
 {% /if %}
-<!-- end Test metadata -->
+<!-- end Test results -->
 
-<!-- Device info -->
-{% if equals($synthetics_variables, "device_info") %}
+<!-- Test info -->
+{% if equals($synthetics_variables, "test_info") %}
 
-### Device information
+### Test metadata
 
+Path: `synthetics.attributes`
+
+Use these variables to access test configuration and execution location information.
+
+{% tabs %}
+{% tab label="Test Info" %}
+`{{synthetics.attributes.test}}`
+: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
+
+`{{synthetics.attributes.test.name}}`
+: The name of the test
+
+`{{synthetics.attributes.test.type}}`
+: Test type (for example, `api`)
+
+`{{synthetics.attributes.test.subType}}`
+: Subtype for API tests (for example, `http`, `dns`, and `multi`)
+
+`{{synthetics.attributes.test.id}}`
+: The test's public ID (for example, `abc-def-ghi`)
+{% /tab %}
+{% tab label="Location" %}
+`{{synthetics.attributes.location}}`
+: The `location` object contains information about the location of where the test is run from
+
+`{{synthetics.attributes.location.id}}`
+: Location ID (for example, `aws:eu-central-1`)
+
+`{{synthetics.attributes.location.name}}`
+: Name of the location (for example, `Frankfurt (AWS)`)
+
+`{{synthetics.attributes.location.privateLocation}}`
+: `true` for Private Locations
+{% /tab %}
+{% tab label="Device" %}
 Path: `synthetics.attributes.device`
-
-Use these variables to access device information for Browser and Mobile tests.
 
 {% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
 {% alert level="info" %}
@@ -85,20 +117,14 @@ Device information is not available for this test type. Device variables are onl
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (for example, `android`, `ios`)
 {% /if %}
+{% /tab %}
+{% /tabs %}
 
 {% /if %}
-<!-- end Device info -->
+<!-- end Test info -->
 
-<!-- Execution results -->
-{% if equals($synthetics_variables, "execution_results") %}
-
-{% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
-
-{% /if %}
-<!-- end Execution results -->
-
-<!-- Failed step info -->
-{% if equals($synthetics_variables, "failed_step_info") %}
+<!-- Step details -->
+{% if equals($synthetics_variables, "step_details") %}
 
 ### Failed step information
 
@@ -136,20 +162,6 @@ Review the [conditional alerting](/synthetics/notifications/conditional_alerting
 
 {% /if %}
 
-{% /if %}
-<!-- end Failed step info -->
-
-<!-- Local & Global Variables -->
-{% if equals($synthetics_variables, "local_global_variables") %}
-
-{% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
-
-{% /if %}
-<!-- end Local & Global Variables -->
-
-<!-- Extracted -->
-{% if equals($synthetics_variables, "extracted") %}
-
 ### Extracted variable values
 
 Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
@@ -177,19 +189,12 @@ For information on how to access the `<step-index>`, see the step summary sectio
 
 {% /if %}
 
-{% /if %}
-<!-- end Extracted -->
-
-<!-- Step -->
-{% if equals($synthetics_variables, "step") %}
-
 ### Step execution details
 
 Path: `synthetics.attributes.variables.extracted`
 
 These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
 
-<!-- Alert for single-step API tests about step execution details -->
 {% if not(or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep"))) %}
 {% alert level="info" %}
 **Note:** Step execution details are only available for Multistep API, Browser, and Mobile tests. Select one of these test types to see step execution variables.
@@ -295,6 +300,14 @@ These are step execution metadata and results containing detailed information ab
 {% /tabs %}
 
 {% /if %}
-<!-- end Step -->
+<!-- end Step details -->
+
+<!-- Variables -->
+{% if equals($synthetics_variables, "variables") %}
+
+{% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
+
+{% /if %}
+<!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}

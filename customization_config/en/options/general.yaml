@@ -451,29 +451,17 @@ options:
 - label: Multistep API
   id: multistep
 
-- label: Test execution
-  id: execution
+- label: Test info
+  id: test_info
 
-- label: Test Metadata
-  id: test_metadata
+- label: Test results
+  id: test_results
 
-- label: Device Information
-  id: device_info
+- label: Step details
+  id: step_details
 
-- label: Execution Results
-  id: execution_results
-
-- label: Failed Step Information
-  id: failed_step_info
-
-- label: Local & Global Variables
-  id: local_global_variables
-
-- label: Extracted
-  id: extracted
-
-- label: Step
-  id: step
+- label: Variables
+  id: variables
 
 - label: DNS
   id: dns

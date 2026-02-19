@@ -19,12 +19,8 @@ synthetics_protocol_options:
 
 # Variable options used on both template variables pages
 synthetics_variables_options:
-  - id: execution
+  - id: test_results
     default: true
-  - id: test_metadata
-  - id: device_info
-  - id: execution_results
-  - id: failed_step_info
-  - id: local_global_variables
-  - id: extracted
-  - id: step
+  - id: test_info
+  - id: step_details
+  - id: variables

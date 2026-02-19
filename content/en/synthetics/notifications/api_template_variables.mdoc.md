@@ -282,40 +282,26 @@ Use the filters above to view variables by protocol type and variable category.
 
 {% /if %}
 
-<!-- Test execution variables -->
-{% if equals($synthetics_variables, "execution") %}
+<!-- Test results variables -->
+{% if equals($synthetics_variables, "test_results") %}
 
 {% partial file="synthetics/notifications/test_execution_variables.mdoc.md" /%}
-
-{% /if %}
-
-<!-- Test metadata variables -->
-{% if equals($synthetics_variables, "test_metadata") %}
-
-{% partial file="synthetics/notifications/test_metadata.mdoc.md" /%}
-
-{% /if %}
-
-<!-- Device information variables -->
-{% if equals($synthetics_variables, "device_info") %}
-
-### Device Information Variables
-
-**Note:** Device information is not applicable to API tests. This section is relevant for Browser and Mobile tests only.
-
-{% /if %}
-
-<!-- Execution results variables -->
-{% if equals($synthetics_variables, "execution_results") %}
 
 {% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
 
 {% /if %}
 
-<!-- Failed step information variables -->
-{% if equals($synthetics_variables, "failed_step_info") %}
+<!-- Test info variables -->
+{% if equals($synthetics_variables, "test_info") %}
 
-### Failed Step Information Variables
+{% partial file="synthetics/notifications/test_metadata.mdoc.md" /%}
+
+{% /if %}
+
+<!-- Step details variables -->
+{% if equals($synthetics_variables, "step_details") %}
+
+### Failed step information
 
 **Applies to:** Multistep API tests
 
@@ -330,29 +316,13 @@ The `{{synthetics.failed_step}}` object provides a shortcut to the step that cau
 `{{synthetics.failed_step.url}}`
 : Maps to `{{synthetics.attributes.result.steps.<step-index>.url}}`
 
-{% /if %}
-
-<!-- Local & Global variables -->
-{% if equals($synthetics_variables, "local_global_variables") %}
-
-{% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
-
-{% alert level="tip" %}
-Review the [advanced notifications](/synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification) page for an example of how to use local variables in a notification.
-{% /alert %}
-
-{% /if %}
-
-<!-- Extracted variables -->
-{% if equals($synthetics_variables, "extracted") %}
-
-### Extracted Variables
+### Extracted variables
 
 Path: `synthetics.attributes.variables.extracted`
 
 These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
 
-**General Step Properties:**
+**General step properties:**
 
 `synthetics.attributes.variables.extracted.steps.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
@@ -375,7 +345,7 @@ These are step execution metadata and results containing detailed information ab
 `synthetics.attributes.variables.extracted.steps.type`
 : Type of step being executed
 
-**Multistep API Tests:**
+**Multistep API tests:**
 
 `synthetics.attributes.variables.extracted.name`
 : Step name
@@ -383,15 +353,21 @@ These are step execution metadata and results containing detailed information ab
 `synthetics.attributes.variables.extracted.type`
 : Step type
 
-**Protocol-Specific Variables:**
+**Protocol-specific variables:**
 
 Refer to the Protocol filter above to view variables specific to HTTP, DNS, SSL, WebSocket, UDP, TCP, ICMP, or gRPC tests.
 
+{% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
+
 {% /if %}
 
-<!-- Step variables -->
-{% if equals($synthetics_variables, "step") %}
+<!-- Variables -->
+{% if equals($synthetics_variables, "variables") %}
 
-{% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
+{% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
+
+{% alert level="tip" %}
+Review the [advanced notifications](/synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification) page for an example of how to use local variables in a notification.
+{% /alert %}
 
 {% /if %}
