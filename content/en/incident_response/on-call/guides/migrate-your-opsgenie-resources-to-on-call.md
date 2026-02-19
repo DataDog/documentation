@@ -24,6 +24,21 @@ By importing only current, relevant OpsGenie data, you avoid bringing outdated o
 1. Configure the [OpsGenie integration][1] in Datadog and connect a valid account.
 1. Confirm that your Datadog user account has `on_call_write` and `teams_manage` permissions.
 
+## What gets migrated
+
+The following table shows how OpsGenie resources map to Datadog On-Call resources:
+
+| OpsGenie resource | Datadog resource | Notes |
+|---|---|---|
+| Teams | Teams | Name-based matching or manual mapping |
+| Users | Users | Email-based automatic matching with manual override |
+| Escalation Policies | Escalation Policies | Rules are converted to steps; delays are converted from OpsGenie intervals to seconds |
+| Schedules | Schedules | Rotations become layers (reversed order); time restrictions and timezones are preserved |
+| Rotation participants (user-type) | Schedule layer members | Only user-type participants are supported |
+| Time restrictions | Layer restrictions | Both daily and weekday-and-time-of-day types are supported |
+| Repeat count | Policy retries | Direct mapping |
+| Close alert after all | Resolve page on policy end | Direct mapping |
+
 ## Migration steps
 
 The migration follows a six-step wizard-style process in the Datadog UI. Complete all steps in order within the same migration wizard.
@@ -88,27 +103,10 @@ If the escalation policy references OpsGenie schedules, Datadog automatically mi
 
 1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. Datadog creates the escalation policy under your On-Call team.
 
-## What gets migrated
-
-The following table shows how OpsGenie resources map to Datadog On-Call resources:
-
-| OpsGenie resource | Datadog resource | Notes |
-|---|---|---|
-| Teams | Teams | Name-based matching or manual mapping |
-| Users | Users | Email-based automatic matching with manual override |
-| Escalation Policies | Escalation Policies | Rules are converted to steps; delays are converted from OpsGenie intervals to seconds |
-| Schedules | Schedules | Rotations become layers (reversed order); time restrictions and timezones are preserved |
-| Rotation participants (user-type) | Schedule layer members | Only user-type participants are supported |
-| Time restrictions | Layer restrictions | Both daily and weekday-and-time-of-day types are supported |
-| Repeat count | Policy retries | Direct mapping |
-| Close alert after all | Resolve page on policy end | Direct mapping |
-
-
 ## Known limitations
 
-- **Escalation conditions**: Only `if-not-acked` escalation conditions are supported. The `if-not-closed` condition is not supported.
+- **Escalation conditions**: Only `if-not-acked` escalation conditions are supported. The `if-not-closed` condition is not supported and is not migrated.
 - **Rotation participants**: Only user-type rotation participants are supported. Team-type and escalation-type participants are not migrated.
-- **No bulk migration**: Each team, escalation policy, and schedule must be migrated individually through the UI wizard.
 
 ## Validation and testing
 
@@ -116,7 +114,7 @@ Before relying on migrated resources for production incidents:
 
 - **Verify schedule coverage**: Check that all migrated schedules have proper coverage with no gaps. Go to [On-Call Schedules][3] and review each schedule's timeline.
 
-- **Test escalation policies**: Send test pages to verify that escalation policies escalate correctly and notify the right people. Use the [Manual Page][4] feature to send test pages.
+- **Test escalation policies**: Use the [Manual Page][4] feature to send a test page and verify that escalation policies escalate correctly and notify the right people.
 
 - **Check user mappings**: Verify that all users are correctly mapped and can receive notifications through their preferred channels (email, SMS, push, voice).
 
@@ -138,7 +136,7 @@ If the OpsGenie import option does not appear during team setup:
 
 If OpsGenie users are not automatically matched to Datadog users:
 
-1. Verify that the email addresses in OpsGenie match the email addresses in Datadog exactly.
+1. Verify that email addresses match exactly between OpsGenie and Datadog.
 1. Confirm that the Datadog users are active.
 1. If automatic matching fails, map users manually or invite them to Datadog.
 
