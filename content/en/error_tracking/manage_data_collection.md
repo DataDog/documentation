@@ -35,6 +35,27 @@ Each error event is checked against the rules in order. The event is processed o
 
 **Note:** Error events that get accepted by a rule might still be excluded from Error Tracking if they lack the [required attributes][2].
 
+### Using multiple rules
+
+Multiple rules let you include errors from specific sources while excluding others. Because rules are evaluated in order and stop at the first match, you can create layered filtering logic.
+
+For example, suppose you want to:
+- Track all production errors, except those from `service:internal-tools`
+- Also track staging errors, but only for `service:payments`
+
+You would configure the following rules:
+
+| Order | Inclusion filter | Exclusion filter |
+|-------|-----------------|------------------|
+| 1 | `env:prod` | `service:internal-tools` |
+| 2 | `env:staging service:payments` | (none) |
+
+With these rules:
+- An error with `env:prod service:checkout` matches Rule 1, has no exclusion match → **included**
+- An error with `env:prod service:internal-tools` matches Rule 1, matches the exclusion filter → **excluded**
+- An error with `env:staging service:payments` does not match Rule 1, matches Rule 2 → **included**
+- An error with `env:staging service:checkout` does not match Rule 1 or Rule 2 → **excluded**
+
 ### Evaluation order
 
 Rules are evaluated in order, with the evaluation stopping at the first matching rule. The priority of the rules and their nested filters depends on their order in the list.
