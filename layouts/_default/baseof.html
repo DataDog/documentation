@@ -39,6 +39,9 @@
 
 <body
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
+  {{- with partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
+  <div style="display:none" class="exclude-from-md">For a plain-text version of this page, see: {{ . }}</div>
+  {{- end -}}
 
   <div class="greyside">
     <div class="container container__content h-100">
@@ -59,9 +62,6 @@
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
         <div class='{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}'
           id="mainContent">
-          {{- with partialCached "page-agent-hint.html" (dict "ctx" $ctx) $ctx.RelPermalink -}}
-          <div style="display:none" class="exclude-from-md">For a plain-text version of this page, see: {{ . }}</div>
-          {{- end -}}
           {{ block "main" . }}{{ end }}
           {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
         </div>
