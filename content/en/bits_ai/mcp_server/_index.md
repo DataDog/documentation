@@ -63,9 +63,9 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
-- `https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
-- `https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
-- `https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
+- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
 
 ## Available tools
 

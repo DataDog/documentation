@@ -37,7 +37,7 @@ The following AI clients are compatible with the Datadog MCP Server.
 
  For Claude Code, run (use the endpoint shown above for your site):
   ```bash
-  claude mcp add --transport http datadog-mcp {{< region-param key="https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp" code="true" >}}
+  claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
   ```
 
 
@@ -71,13 +71,18 @@ The following instructions are for all [MCP-compatible clients][21]. For Cursor 
 {{% tab "Remote authentication" %}}
 This method uses the MCP specification's [Streamable HTTP][1] transport mechanism to connect to the MCP Server.
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][2]. The endpoint updates automatically based on the site selected in the region selector at the top of the documentation.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][2]. For example, if you're using `app.datadoghq.com` to access Datadog, use the endpoint for the US1 site.
 
 If your organization uses a [custom sub-domain][3], use the endpoint that corresponds to your regional Datadog site.
 
-**MCP Server endpoint:**
-
-`https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp`
+| Datadog Site | MCP Server Endpoint |
+|--------|------|
+| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
+| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
 
 ### Example configurations
 
