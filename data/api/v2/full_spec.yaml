@@ -32171,6 +32171,53 @@ components:
             type: string
           type: array
       type: object
+    Integration:
+      description: Integration resource object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IntegrationAttributes'
+        id:
+          description: The unique identifier of the integration.
+          example: calico
+          type: string
+        links:
+          $ref: '#/components/schemas/IntegrationLinks'
+        type:
+          $ref: '#/components/schemas/IntegrationType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    IntegrationAttributes:
+      description: Attributes for an integration.
+      properties:
+        categories:
+          description: List of categories associated with the integration.
+          example:
+          - Category::Kubernetes
+          - Category::Log Collection
+          items:
+            type: string
+          type: array
+        description:
+          description: A description of the integration.
+          example: Calico is a networking and network security solution for containers.
+          type: string
+        installed:
+          description: Whether the integration is installed.
+          example: true
+          type: boolean
+        title:
+          description: The name of the integration.
+          example: calico
+          type: string
+      required:
+      - title
+      - description
+      - categories
+      - installed
+      type: object
     IntegrationIncident:
       description: Incident integration settings
       properties:
@@ -32276,6 +32323,14 @@ components:
         value:
           $ref: '#/components/schemas/AnyValue'
       type: object
+    IntegrationLinks:
+      description: Links for the integration resource.
+      properties:
+        self:
+          description: Link to the integration resource.
+          example: /integrations?integrationId=calico
+          type: string
+      type: object
     IntegrationMonitor:
       description: Monitor integration settings
       properties:
@@ -32377,6 +32432,15 @@ components:
             type: string
           type: object
       type: object
+    IntegrationType:
+      default: integration
+      description: Integration resource type.
+      enum:
+      - integration
+      example: integration
+      type: string
+      x-enum-varnames:
+      - INTEGRATION
     InterfaceAttributes:
       description: The interface attributes
       properties:
@@ -35009,6 +35073,17 @@ components:
       required:
       - data
       - meta
+      type: object
+    ListIntegrationsResponse:
+      description: Response containing information about multiple integrations.
+      properties:
+        data:
+          description: Array of integration objects.
+          items:
+            $ref: '#/components/schemas/Integration'
+          type: array
+      required:
+      - data
       type: object
     ListInterfaceTagsResponse:
       description: Response for listing interface tags.
@@ -84623,6 +84698,25 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integrations:
+    get:
+      operationId: ListIntegrations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIntegrationsResponse'
+          description: Successful Response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Integrations
+      tags:
+      - Integrations
+      x-menu-order: 1
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -107763,6 +107857,10 @@ tags:
     and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
     for more information.
   name: Incidents
+- description: 'The Integrations API is used to list available integrations
+
+    and retrieve information about their installation status.'
+  name: Integrations
 - description: Manage your Jira Integration. Atlassian Jira is a project management
     and issue tracking tool for teams to coordinate work and handle tasks efficiently.
   name: Jira Integration

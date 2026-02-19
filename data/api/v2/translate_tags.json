@@ -183,6 +183,10 @@
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
+  "integrations": {
+    "name": "Integrations",
+    "description": "The Integrations API is used to list available integrations\nand retrieve information about their installation status."
+  },
   "jira-integration": {
     "name": "Jira Integration",
     "description": "Manage your Jira Integration. Atlassian Jira is a project management and issue tracking tool for teams to coordinate work and handle tasks efficiently."
