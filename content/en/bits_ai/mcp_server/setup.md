@@ -91,7 +91,7 @@ If your organization uses a [custom sub-domain][3], use the endpoint that corres
     "mcpServers": {
       "datadog": {
         "type": "http",
-        "url": "{{< region-param key="https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp" code="true" >}}"
+        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
       }
     }
   }
@@ -159,7 +159,7 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "{{< region-param key="mcp_server_endpoint" code="true" >}}",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
       "headers": {
           "DD_API_KEY": "<YOUR_API_KEY>",
           "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
