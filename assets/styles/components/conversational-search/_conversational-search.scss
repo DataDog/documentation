@@ -26,14 +26,14 @@ $conv-search-text-muted: #6b7280;
     flex-direction: column;
     gap: 20px;
 
-    // Scroll-fade: soft gradient at top/bottom hints at overflow
-    --fade-size: 36px;
+    // Subtle scroll fade at both edges
+    --fade: 8px;
     mask-image:
-        linear-gradient(to bottom, transparent, black var(--fade-size),
-                         black calc(100% - var(--fade-size)), transparent);
+        linear-gradient(to bottom, transparent, black var(--fade),
+                         black calc(100% - var(--fade)), transparent);
     -webkit-mask-image:
-        linear-gradient(to bottom, transparent, black var(--fade-size),
-                         black calc(100% - var(--fade-size)), transparent);
+        linear-gradient(to bottom, transparent, black var(--fade),
+                         black calc(100% - var(--fade)), transparent);
 
     // Custom scrollbar
     &::-webkit-scrollbar {
@@ -256,37 +256,45 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
-// Footer (input + disclaimer) - sticky on small screens
+// Footer (input + disclaimer)
 .conv-search-footer {
     background: $conv-search-bg;
     flex-shrink: 0;
+    padding: 4px 0 0;
     border-radius: 0 0 12px 12px;
-    
-    // On small vertical screens (near or below modal min-height), make footer sticky
+
     @media (max-height: 600px) {
         position: sticky;
         bottom: 0;
         z-index: 10;
     }
-    
-    // Mobile full-screen mode
+
     @media (max-width: 640px) {
         border-radius: 0;
     }
 }
 
-// Input Container
+// Unified pill — textarea + send button live together
 .conv-search-input-container {
     display: flex;
     align-items: flex-end;
     gap: 8px;
-    padding: 16px 20px 8px;
+    margin: 0 16px;
+    padding: 8px 8px 8px 18px;
+    background: $conv-search-surface;
+    border: 1.5px solid $conv-search-border;
+    border-radius: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+        border-color: rgba($conv-search-purple, 0.45);
+        box-shadow: 0 0 0 3px rgba($conv-search-purple, 0.06);
+    }
 }
 
-// Disclaimer
 .conv-search-disclaimer {
     margin: 0;
-    padding: 0 20px 14px;
+    padding: 6px 20px 14px;
     font-size: 12px;
     color: $conv-search-text-muted;
     text-align: center;
@@ -296,16 +304,15 @@ $conv-search-text-muted: #6b7280;
 .conv-search-input {
     flex: 1;
     resize: none;
-    border: 1px solid $conv-search-border;
-    border-radius: 12px;
-    padding: 12px 16px;
+    border: none;
+    border-radius: 0;
+    padding: 4px 0;
     font-size: 15px;
     line-height: 1.5;
-    background: $conv-search-surface;
+    background: transparent;
     font-family: inherit;
-    min-height: 46px;
+    min-height: 24px;
     max-height: 120px;
-    transition: border-color 0.15s ease;
 
     &::placeholder {
         color: $conv-search-text-muted;
@@ -313,14 +320,13 @@ $conv-search-text-muted: #6b7280;
 
     &:focus {
         outline: none;
-        border-color: $conv-search-purple;
     }
 }
 
 .conv-search-send {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     background: $conv-search-purple;
     border: none;
     cursor: pointer;
@@ -340,13 +346,13 @@ $conv-search-text-muted: #6b7280;
     }
 
     &:disabled {
-        opacity: 0.5;
+        opacity: 0.4;
         cursor: not-allowed;
     }
 
     svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
     }
 }
 
