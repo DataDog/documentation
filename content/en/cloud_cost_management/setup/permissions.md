@@ -14,7 +14,9 @@ further_reading:
 
 ## Overview
 
-Cloud Cost Management (CCM) uses two permissions to control access to cost data and settings. Configure these permissions through [Role Based Access Control (RBAC)][1] to manage who can view cost data and who can modify CCM configurations.
+Permissions control what actions a user can take in Datadog. Users are assigned to roles, and each role has a set of permissions that determines what that user can see and do.
+
+Cloud Cost Management (CCM) uses two permissions to control access to cost data and settings. Assign these permissions to roles through [Role Based Access Control (RBAC)][1] to manage who can view cost data and who can modify CCM configurations.
 
 CCM also supports [Data Access Control](#data-access-control) to further restrict cost data by tags.
 
@@ -45,7 +47,7 @@ The table below shows the required permissions for each CCM page and related fea
 | Monitors (external)                           | Required to create CCM monitors                  | N/A                                               |
 | Service Catalog (external)                    | Required to view cost data                       | N/A                                               |
 | Resource Catalog (external)                   | Required to view cost data                       | N/A                                               |
-| API Queries for Cost Data                     | Required to query cost data via API              | N/A                                               |
+| API Queries for Cost Data                     | Required to query cost data through the API      | N/A                                               |
 
 ## Data access control
 
