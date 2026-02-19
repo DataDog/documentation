@@ -9512,6 +9512,22 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Integrations
+      url: /api/latest/integrations/
+      identifier: integrations
+      generated: true
+    - name: List Integrations
+      url: '#list-integrations'
+      identifier: integrations-list-integrations
+      parent: integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIntegrations
+        unstable: []
+        order: 1
     - name: Jira Integration
       url: /api/latest/jira-integration/
       identifier: jira-integration
