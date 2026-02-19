@@ -137,9 +137,9 @@ module:
       target: static
     - source: layouts
       target: layouts
-      files:
-        - '! shortcodes/.cdocs_temp/*'
-        - '! shortcodes/mdoc/*'
+      excludeFiles:
+        - 'shortcodes/.cdocs_temp/*'
+        - 'shortcodes/mdoc/*'
     - source: data
       target: data
     - source: static
