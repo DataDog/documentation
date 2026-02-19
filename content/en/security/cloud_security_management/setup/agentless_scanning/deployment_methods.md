@@ -91,4 +91,4 @@ Summary of recommendations:
 [1]: /security/cloud_security_management/agentless_scanning#cloud-storage-scanning
 [2]: /security/cloud_security_management/agentless_scanning#cloud-service-provider-cost
 [3]: /security/cloud_security_management/setup/agentless_scanning/enable
-[4]: /security/cloud_security_management/setup/agentless_scanning/enable#terraform-setup
+[4]: /security/cloud_security_management/setup/agentless_scanning/enable#setup

@@ -19,6 +19,6 @@ Complete the following steps to enable Agentless Scanning for your Azure subscri
 1. Select the subscription and the resource group in which the Agentless scanners are to be deployed. Datadog recommends that you deploy the Datadog Agentless Scanner in a dedicated resource group.
 1. In **Subscriptions to scan**, select all the subscriptions you want to scan.
 1. Enter your **Datadog API Key**, select your **Datadog Site**, and fill out the remainder of the form.
-1. Click on **Review + create**.
+1. Click **Review + create**.
 
 [1010]: https://app.datadoghq.com/security/configuration/csm/setup
