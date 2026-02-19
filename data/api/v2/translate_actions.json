@@ -671,6 +671,38 @@
     "description": "Get a list of entity relations from Software Catalog.",
     "summary": "Get a list of entity relations"
   },
+  "CreateChangeRequest": {
+    "description": "Create a new change request.",
+    "summary": "Create a change request",
+    "request_description": "Change request payload.",
+    "request_schema_description": "Request object to create a change request."
+  },
+  "GetChangeRequest": {
+    "description": "Get the details of a change request by its ID.",
+    "summary": "Get a change request"
+  },
+  "UpdateChangeRequest": {
+    "description": "Update the properties of a change request.",
+    "summary": "Update a change request",
+    "request_description": "Change request update payload.",
+    "request_schema_description": "Request object to update a change request."
+  },
+  "CreateChangeRequestBranch": {
+    "description": "Create a new branch in a repository for a change request.",
+    "summary": "Create a change request branch",
+    "request_description": "Branch creation payload.",
+    "request_schema_description": "Request object to create a branch for a change request."
+  },
+  "DeleteChangeRequestDecision": {
+    "description": "Delete a decision from a change request.",
+    "summary": "Delete a change request decision"
+  },
+  "UpdateChangeRequestDecision": {
+    "description": "Update a decision on a change request, such as approving or declining it.",
+    "summary": "Update a change request decision",
+    "request_description": "Decision update payload.",
+    "request_schema_description": "Request object to update a change request decision."
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nMultiple events can be sent in an array (up to 1000).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.\nThe duration between the event start and end times cannot exceed 1 year.",
     "summary": "Send pipeline event",
