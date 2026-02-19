@@ -260,7 +260,6 @@ network_devices:
 
 With this configuration, the Agent submits at most 10,000 NetFlow records per flush interval (5 minutes by default), prioritizing the highest-volume flows and dropping the rest.
 
-**Requirements:** Agent version **7.75.1** or later.
 
 ### Estimating daily volume
 
