@@ -10,10 +10,6 @@ further_reading:
     text: "Datadog Software Catalog"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
-
 ## Overview
 
 For large monorepos containing multiple projects or components, or where multiple teams collaborate, viewing code coverage data for the entire repository may not provide actionable insights. Code Coverage supports splitting coverage data by services and code owners, allowing you to:
@@ -115,7 +111,7 @@ On the Branch overview, Pull Request details, and Commit details pages in [Code 
 
 You can configure [PR Gates][7] to enforce coverage thresholds for specific services or code owners.
 
-### Creating a service or code owner-specific gate
+### Using the Datadog UI
 
 1. Navigate to [PR Gates rule creation][3].
 2. Configure the coverage threshold (total or patch coverage).
@@ -123,6 +119,29 @@ You can configure [PR Gates][7] to enforce coverage thresholds for specific serv
 4. Save the rule.
 
 {{< img src="/code_coverage/pr_gate_codeowners.png" text="Code Coverage PR gate creation page in Datadog" style="width:100%" >}}
+
+### Using the YAML configuration file
+
+You can also define service- or code owner-scoped gates directly in your [`code-coverage.datadog.yml`][8] file using the `services` and `codeowners` fields:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      services:
+        - "*"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
+      codeowners:
+        - "@DataDog/backend-team"
+        - "@DataDog/api-*"
+{{< /code-block >}}
+
+Gates defined in the YAML file and in the Datadog UI are both evaluated when a pull request is opened or updated. See [PR Gates configuration instructions][8] for the complete YAML syntax and additional examples.
 
 ### How service and code owner gates work
 
@@ -228,4 +247,5 @@ Confirm that:
 [4]: /service_catalog/service_definition_api/
 [5]: https://app.datadoghq.com/ci/code-coverage
 [6]: /code_coverage/configuration
-[7]: /pr_gates
+[7]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[8]: /code_coverage/configuration#pr-gates

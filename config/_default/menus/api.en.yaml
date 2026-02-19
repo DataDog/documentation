@@ -3890,6 +3890,54 @@ menu:
           - PatchGlobalVariable
         unstable: []
         order: 20
+    - name: 'Synthetics: Edit a Network Path test'
+      url: '#synthetics-edit-a-network-path-test'
+      identifier: synthetics-synthetics-edit-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSyntheticsNetworkTest
+        unstable: []
+        order: 60
+    - name: 'Synthetics: Get a Network Path test'
+      url: '#synthetics-get-a-network-path-test'
+      identifier: synthetics-synthetics-get-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsNetworkTest
+        unstable: []
+        order: 55
+    - name: 'Synthetics: Create a Network Path test'
+      url: '#synthetics-create-a-network-path-test'
+      identifier: synthetics-synthetics-create-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsNetworkTest
+        unstable: []
+        order: 50
+    - name: 'Synthetics: Bulk delete tests'
+      url: '#synthetics-bulk-delete-tests'
+      identifier: synthetics-synthetics-bulk-delete-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsTests
+        unstable: []
+        order: 65
     - name: 'Synthetics: Edit a test suite'
       url: '#synthetics-edit-a-test-suite'
       identifier: synthetics-synthetics-edit-a-test-suite
@@ -6612,6 +6660,97 @@ menu:
           - UpdateStatus
         unstable: []
         order: 4
+    - name: Create ServiceNow ticket for case
+      url: '#create-servicenow-ticket-for-case'
+      identifier: case-management-create-servicenow-ticket-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseServiceNowTicket
+        unstable:
+          - v2
+        order: 26
+    - name: Update case project
+      url: '#update-case-project'
+      identifier: case-management-update-case-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - MoveCaseToProject
+        unstable:
+          - v2
+        order: 21
+    - name: Create investigation notebook for case
+      url: '#create-investigation-notebook-for-case'
+      identifier: case-management-create-investigation-notebook-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseNotebook
+        unstable:
+          - v2
+        order: 27
+    - name: Create Jira issue for case
+      url: '#create-jira-issue-for-case'
+      identifier: case-management-create-jira-issue-for-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCaseJiraIssue
+        unstable:
+          - v2
+        order: 23
+    - name: Link existing Jira issue to case
+      url: '#link-existing-jira-issue-to-case'
+      identifier: case-management-link-existing-jira-issue-to-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkJiraIssueToCase
+        unstable:
+          - v2
+        order: 24
+    - name: Remove Jira issue link from case
+      url: '#remove-jira-issue-link-from-case'
+      identifier: case-management-remove-jira-issue-link-from-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnlinkJiraIssue
+        unstable:
+          - v2
+        order: 25
+    - name: Link incident to case
+      url: '#link-incident-to-case'
+      identifier: case-management-link-incident-to-case
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkIncident
+        unstable:
+          - v2
+        order: 22
     - name: Update case priority
       url: '#update-case-priority'
       identifier: case-management-update-case-priority
@@ -6955,6 +7094,105 @@ menu:
         operationids:
           - GetAllCaseTypes
         unstable: []
+        order: 1
+    - name: Change Management
+      url: /api/latest/change-management/
+      identifier: change-management
+      generated: true
+    - name: Update a change request decision
+      url: '#update-a-change-request-decision'
+      identifier: change-management-update-a-change-request-decision
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChangeRequestDecision
+        unstable:
+          - v2
+        order: 5
+    - name: Delete a change request decision
+      url: '#delete-a-change-request-decision'
+      identifier: change-management-delete-a-change-request-decision
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteChangeRequestDecision
+        unstable:
+          - v2
+        order: 6
+    - name: Create a change request branch
+      url: '#create-a-change-request-branch'
+      identifier: change-management-create-a-change-request-branch
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChangeRequestBranch
+        unstable:
+          - v2
+        order: 4
+    - name: Update a change request
+      url: '#update-a-change-request'
+      identifier: change-management-update-a-change-request
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChangeRequest
+        unstable:
+          - v2
+        order: 3
+    - name: Get a change request
+      url: '#get-a-change-request'
+      identifier: change-management-get-a-change-request
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChangeRequest
+        unstable:
+          - v2
+        order: 2
+    - name: Create a change request
+      url: '#create-a-change-request'
+      identifier: change-management-create-a-change-request
+      parent: change-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChangeRequest
+        unstable:
+          - v2
+        order: 1
+    - name: Cloud Authentication
+      url: /api/latest/cloud-authentication/
+      identifier: cloud-authentication
+      generated: true
+    - name: List AWS cloud authentication persona mappings
+      url: '#list-aws-cloud-authentication-persona-mappings'
+      identifier: cloud-authentication-list-aws-cloud-authentication-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSCloudAuthPersonaMappings
+        unstable:
+          - v2
         order: 1
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
@@ -7507,6 +7745,36 @@ menu:
         operationids:
           - ListCloudflareAccounts
         unstable: []
+        order: 1
+    - name: Code Coverage
+      url: /api/latest/code-coverage/
+      identifier: code-coverage
+      generated: true
+    - name: Get code coverage summary for a commit
+      url: '#get-code-coverage-summary-for-a-commit'
+      identifier: code-coverage-get-code-coverage-summary-for-a-commit
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageCommitSummary
+        unstable:
+          - v2
+        order: 2
+    - name: Get code coverage summary for a branch
+      url: '#get-code-coverage-summary-for-a-branch'
+      identifier: code-coverage-get-code-coverage-summary-for-a-branch
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageBranchSummary
+        unstable:
+          - v2
         order: 1
     - name: Confluent Cloud
       url: /api/latest/confluent-cloud/
@@ -9244,6 +9512,22 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Integrations
+      url: /api/latest/integrations/
+      identifier: integrations
+      generated: true
+    - name: List Integrations
+      url: '#list-integrations'
+      identifier: integrations-list-integrations
+      parent: integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIntegrations
+        unstable: []
+        order: 1
     - name: Jira Integration
       url: /api/latest/jira-integration/
       identifier: jira-integration
@@ -9878,6 +10162,30 @@ menu:
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
       generated: true
+    - name: Update the tags for an interface
+      url: '#update-the-tags-for-an-interface'
+      identifier: network-device-monitoring-update-the-tags-for-an-interface
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateInterfaceUserTags
+        unstable: []
+        order: 7
+    - name: List tags for an interface
+      url: '#list-tags-for-an-interface'
+      identifier: network-device-monitoring-list-tags-for-an-interface
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListInterfaceUserTags
+        unstable: []
+        order: 6
     - name: Update the tags for a device
       url: '#update-the-tags-for-a-device'
       identifier: network-device-monitoring-update-the-tags-for-a-device
@@ -11755,6 +12063,46 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
+    - name: Seats
+      url: /api/latest/seats/
+      identifier: seats
+      generated: true
+    - name: Assign seats to users
+      url: '#assign-seats-to-users'
+      identifier: seats-assign-seats-to-users
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AssignSeatsUser
+        unstable: []
+        order: 2
+    - name: Get users with seats
+      url: '#get-users-with-seats'
+      identifier: seats-get-users-with-seats
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSeatsUsers
+        unstable: []
+        order: 1
+    - name: Unassign seats from users
+      url: '#unassign-seats-from-users'
+      identifier: seats-unassign-seats-from-users
+      parent: seats
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnassignSeatsUser
+        unstable: []
+        order: 3
     - name: Sensitive Data Scanner
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner

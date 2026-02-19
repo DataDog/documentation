@@ -17,10 +17,11 @@ aliases:
 
 ### Supported libraries
 
-| Technology     | Library                                             | Minimal tracer version                                                 | Recommended tracer version                                                 |
-|----------------|-----------------------------------------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| Kafka          | [ruby-kafka](https://github.com/zendesk/ruby-kafka) | {{< dsm-tracer-version lang="ruby" lib="ruby-kafka" type="minimal" >}} | {{< dsm-tracer-version lang="ruby" lib="ruby-kafka" type="recommended" >}} |
-| Kafka          | [karafka](https://karafka.io/docs/)                 | {{< dsm-tracer-version lang="ruby" lib="karafka" type="minimal" >}}    | {{< dsm-tracer-version lang="ruby" lib="karafka" type="recommended" >}}    |
+| Technology     | Library                                             | Minimum library version | Minimal tracer version                                                 | Recommended tracer version                                                 |
+|----------------|-----------------------------------------------------|-------------------------|------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| Kafka          | [ruby-kafka](https://github.com/zendesk/ruby-kafka) | 0.7.10                  | {{< dsm-tracer-version lang="ruby" lib="ruby-kafka" type="minimal" >}} | {{< dsm-tracer-version lang="ruby" lib="ruby-kafka" type="recommended" >}} |
+| Kafka          | [karafka](https://karafka.io/docs/)                 | 2.3.0                   | {{< dsm-tracer-version lang="ruby" lib="karafka" type="minimal" >}}    | {{< dsm-tracer-version lang="ruby" lib="karafka" type="recommended" >}}    |
+| Kafka          | [waterdrop](https://karafka.io/docs/#waterdrop)| 2.8.8                  | {{< dsm-tracer-version lang="ruby" lib="karafka" type="minimal" >}}    | {{< dsm-tracer-version lang="ruby" lib="karafka" type="recommended" >}}    |
 
 
 ### Installation

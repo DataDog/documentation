@@ -86,6 +86,8 @@ After setting up your pipeline using the API or Terraform, follow the instructio
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
 [3]: /observability_pipelines/guide/environment_variables/
@@ -157,7 +159,9 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
+**Notes**:
+- If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
@@ -209,6 +213,8 @@ Follow the steps below if you want to use the one-line installation script to in
 
 See [Update Existing Pipelines][4] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
 [3]: /observability_pipelines/guide/environment_variables/
@@ -235,6 +241,8 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 [1]: /observability_pipelines/configuration/update_existing_pipelines/
 
@@ -274,6 +282,8 @@ After you set up your source, destinations, and processors on the Build page of 
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
@@ -343,7 +353,9 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart.
+**Notes**:
+- If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
@@ -378,6 +390,8 @@ Follow the steps below if you want to use the one-line installation script to in
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 [2]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [3]: /observability_pipelines/configuration/secrets_management
@@ -410,6 +424,8 @@ See [Set Up the Worker in ECS Fargate][1] for instructions.
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 [1]: /observability_pipelines/configuration/update_existing_pipelines/
 [2]: https://app.datadoghq.com/organization-settings/remote-config/setup
@@ -472,6 +488,8 @@ If you prefer not to use the one-line installation script for Linux, follow thes
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
@@ -526,6 +544,8 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
@@ -551,7 +571,6 @@ sudo yum install --only-upgrade observability-pipelines-worker
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Uninstall the Worker
 
@@ -582,6 +601,31 @@ sudo apt-get remove --purge observability-pipelines-worker
 ## Index your Worker logs
 
 Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
+## Add domains to firewall allowlist
+
+If you are using a firewall, these domains must be added to the allowlist:
+
+{{< tabs >}}
+{{% tab "Docker and Kubernetes" %}}
+
+- `api.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `keys.datadoghq.com`
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+- `api.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `install.{{< region-param key="dd_site" >}}`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 

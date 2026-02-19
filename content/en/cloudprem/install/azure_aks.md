@@ -5,10 +5,11 @@ aliases:
 description: Learn how to install and configure CloudPrem on Azure AKS
 ---
 
-## Overview
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
+
+## Overview
 
 This document walks you through the process of configuring your Azure environment and installing CloudPrem on Azure AKS.
 

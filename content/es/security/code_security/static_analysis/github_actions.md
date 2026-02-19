@@ -26,10 +26,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -55,17 +55,11 @@ Puedes configurar los siguientes parámetros para Static Code Analysis.
 | `enable_performance_statistics` | Obtener las estadísticas de tiempo de ejecución de los archivos analizados.                                                                                                   | No      | `false`         |
 | `debug`      | Permite al analizador imprimir logs adicionales útiles para la depuración. Para activarlo, establece `yes`.                                                                  | No      | `no`            |
 | `subdirectory` | Un patrón de subdirectorio o glob (o patrones de subdirectorio delimitados por espacios) al que debe limitarse el análisis. Por ejemplo: "src" o "paquetes src". | `false` |                 |
-| `architecture` | La arquitectura de CPU a utilizar para el analizador. Los valores admitidos son `x86_64` y `aarch64`.                                                              | No      | `x86_64`        |
 | `diff_aware` | Activa el [modo de escaneo diferenciado][5].                                                                                                                   | No      | `true`          |
 
 ### Notas
 
 1. El análisis diferenciado sólo analiza los archivos modificados por una confirmación cuando se analizan ramas de características. Esta opción está activada por defecto. Para desactivar el análisis diferenciado, establece el parámetro de la acción de GitHub `diff_aware` en `false`.
-
-### Entradas obsoletas
-Las siguientes entradas de acción han sido obsoletas y ya no tienen ningún efecto. Si se introducen, se emitirá una advertencia.
-* `dd_service`
-* `dd_env`
 
 ## Personalización de las reglas
 

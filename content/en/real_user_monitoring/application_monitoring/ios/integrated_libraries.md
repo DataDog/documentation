@@ -15,31 +15,31 @@ This page lists integrated libraries you can use for iOS and tvOS applications.
 
 ## Alamofire
 
-Starting from version `2.5.0`, the RUM iOS SDK can automatically track [Alamofire][1] requests.
+Starting from version `3.7.0`, the RUM iOS SDK automatically tracks [Alamofire][1] requests after you enable RUM with `urlSessionTracking` configuration.
 
 1. Configure RUM monitoring by following the [Setup][2] guide.
-2. Enable `URLSessionInstrumentation` for `Alamofire.SessionDelegate`:
+2. _(Optional)_ For **detailed timing breakdown** (DNS resolution, SSL handshake, time to first byte, connection time, download duration), enable `URLSessionInstrumentation` for `Alamofire.SessionDelegate`:
 
 ```swift
 import Alamofire
 import DatadogRUM
 
-URLSessionInstrumentation.enable(with: .init(delegateClass: Alamofire.SessionDelegate.self))
+URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: Alamofire.SessionDelegate.self))
 ```
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track network requests][4].
 
 ## Apollo GraphQL
 
-Starting from version `2.5.0`, the RUM iOS SDK can automatically track [Apollo GraphQL][3] requests.
+Starting from version `3.7.0`, the RUM iOS SDK automatically tracks [Apollo GraphQL][3] requests after you enable RUM with `urlSessionTracking` configuration.
 
 1. Configure RUM monitoring by following the [Setup][2] guide.
-2. Enable `URLSessionInstrumentation` for `Apollo.URLSessionClient`:
+2. _(Optional)_ For **detailed timing breakdown** (DNS resolution, SSL handshake, time to first byte, connection time, download duration), enable `URLSessionInstrumentation` for `Apollo.URLSessionClient`:
 
 ```swift
 import Apollo
 import DatadogRUM
 
-URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionClient.self))
+URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
 
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
@@ -48,22 +48,24 @@ For more advanced Apollo integration using the Datadog Apollo interceptor, see t
 
 ## SDWebImage
 
-Starting from version `2.5.0`, the RUM iOS SDK can automatically track [SDWebImage][5] requests.
+Starting from version `3.7.0`, the RUM iOS SDK automatically tracks [SDWebImage][5] requests after you enable RUM with `urlSessionTracking` configuration.
 
 1. Configure RUM monitoring by following the [Setup][2] guide.
-2. Enable `URLSessionInstrumentation` for `SDWebImageDownloader`:
+2. _(Optional)_ For **detailed timing breakdown** (DNS resolution, SSL handshake, time to first byte, connection time, download duration), enable `URLSessionInstrumentation` for `SDWebImageDownloader`:
 
 ```swift
 import SDWebImage
 import DatadogRUM
 
-URLSessionInstrumentation.enable(with: .init(delegateClass: SDWebImageDownloader.self as! URLSessionDataDelegate.Type))
+URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: SDWebImageDownloader.self as! URLSessionDataDelegate.Type))
 ```
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
 
 ## OpenAPI Generator
 
-Starting from version `2.5.0`, the RUM iOS SDK can automatically track [OpenAPI Generator][6] requests.
+Starting from version `3.7.0`, the RUM iOS SDK automatically tracks [OpenAPI Generator][6] requests after you enable RUM with `urlSessionTracking` configuration.
+
+For **detailed timing breakdown** (DNS resolution, SSL handshake, time to first byte, connection time, download duration), follow these steps:
 
 1. Configure RUM monitoring by following the [Setup][2] guide.
 2. Create a dummy `URLSessionDataDelegate`.
@@ -84,7 +86,7 @@ let delegate = EmptySessionDelegate()
 let urlSession = URLSession(configuration: .default, delegate: delegate, delegateQueue: nil)
 
 // Enable instrumentation for your delegate class
-URLSessionInstrumentation.enable(with: .init(delegateClass: EmptySessionDelegate.self))
+URLSessionInstrumentation.enableDurationBreakdown(with: .init(delegateClass: EmptySessionDelegate.self))
 
 // Create transport with `.buffered` processing mode (required for proper instrumentation)
 let transport = URLSessionTransport(configuration: .init(

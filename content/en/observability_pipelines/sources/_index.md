@@ -30,45 +30,47 @@ These are the available sources:
 - [Amazon Data Firehose][2]
 - [Amazon S3][3]
 - [Azure Event Hubs][4]
-- [Datadog Agent][5]
-- [Filebeat][6]
-- [Fluentd and Fluent Bit][7]
-- [Google Pub/Sub][8]
-- [HTTP Client][9]
-- [HTTP Server][10]
-- [Kafka][11]
-- [Lambda Extension][12]
-- [Lambda Forwarder][13]
-- [Logstash][14]
-- [MySQL][15]
-- [OpenTelemetry][16]
-- [Socket][17]
-- [Splunk HTTP Event Collector (HEC)][18]
-- [Splunk Heavy or Universal Forwarders (TCP)][19]
-- [Sumo Logic Hosted Collector][20]
-- [Syslog][21]
+- [Cloudflare Logpush][5]
+- [Datadog Agent][6]
+- [Filebeat][7]
+- [Fluentd and Fluent Bit][8]
+- [Google Pub/Sub][9]
+- [HTTP Client][10]
+- [HTTP Server][11]
+- [Kafka][12]
+- [Lambda Extension][13]
+- [Lambda Forwarder][14]
+- [Logstash][15]
+- [MySQL][16]
+- [OpenTelemetry][17]
+- [Socket][18]
+- [Splunk HTTP Event Collector (HEC)][19]
+- [Splunk Heavy or Universal Forwarders (TCP)][20]
+- [Sumo Logic Hosted Collector][21]
+- [Syslog][22]
 
 [1]: /observability_pipelines/sources/akamai_datastream/
 [2]: /observability_pipelines/sources/amazon_data_firehose/
 [3]: /observability_pipelines/sources/amazon_s3/
 [4]: /observability_pipelines/sources/azure_event_hubs/
-[5]: /observability_pipelines/sources/datadog_agent/
-[6]: /observability_pipelines/sources/filebeat/
-[7]: /observability_pipelines/sources/fluent/
-[8]: /observability_pipelines/sources/google_pubsub/
-[9]: /observability_pipelines/sources/http_client/
-[10]: /observability_pipelines/sources/http_server/
-[11]: /observability_pipelines/sources/kafka/
-[12]: /observability_pipelines/sources/lambda_extension/
-[13]: /observability_pipelines/sources/lambda_forwarder/
-[14]: /observability_pipelines/sources/logstash/
-[15]: /observability_pipelines/sources/mysql/
-[16]: /observability_pipelines/sources/opentelemetry/
-[17]: /observability_pipelines/sources/socket/
-[18]: /observability_pipelines/sources/splunk_hec/
-[19]: /observability_pipelines/sources/splunk_tcp/
-[20]: /observability_pipelines/sources/sumo_logic/
-[21]: /observability_pipelines/sources/syslog/
+[5]: /observability_pipelines/sources/cloudflare_logpush/
+[6]: /observability_pipelines/sources/datadog_agent/
+[7]: /observability_pipelines/sources/filebeat/
+[8]: /observability_pipelines/sources/fluent/
+[9]: /observability_pipelines/sources/google_pubsub/
+[10]: /observability_pipelines/sources/http_client/
+[11]: /observability_pipelines/sources/http_server/
+[12]: /observability_pipelines/sources/kafka/
+[13]: /observability_pipelines/sources/lambda_extension/
+[14]: /observability_pipelines/sources/lambda_forwarder/
+[15]: /observability_pipelines/sources/logstash/
+[16]: /observability_pipelines/sources/mysql/
+[17]: /observability_pipelines/sources/opentelemetry/
+[18]: /observability_pipelines/sources/socket/
+[19]: /observability_pipelines/sources/splunk_hec/
+[20]: /observability_pipelines/sources/splunk_tcp/
+[21]: /observability_pipelines/sources/sumo_logic/
+[22]: /observability_pipelines/sources/syslog/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
