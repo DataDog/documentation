@@ -1,8 +1,6 @@
 ---
 title: IaC Security Rules
 type: iac_security
-cascade:
-  - disable_edit: true
 further_reading:
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"

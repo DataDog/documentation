@@ -91,6 +91,10 @@
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
   },
+  "code-coverage": {
+    "name": "Code Coverage",
+    "description": "Retrieve and analyze code coverage data from Code Coverage. See the [Code Coverage page](https://docs.datadoghq.com/code_coverage/) for more information."
+  },
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
@@ -306,6 +310,10 @@
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
+  },
+  "seats": {
+    "name": "Seats",
+    "description": "The seats API allows you to view, assign, and unassign seats for your organization."
   },
   "security-monitoring": {
     "name": "Security Monitoring",

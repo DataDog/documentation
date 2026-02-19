@@ -61,12 +61,13 @@ Explore reports
 Get started with Cloud Security Vulnerabilities and cover your infrastructure in minutes, using:
 - [Agentless Scanning][11]
 - [Unified Datadog Agent][12]
+- [CI/CD Container Image Scanning][21]
 
-You can also use both deployment methods to use the unified Datadog Agent where you already have it deployed, and Agentless elsewhere.
+You can also use multiple deployment methods together: use the unified Datadog Agent where you already have it deployed, Agentless elsewhere, and CI/CD scanning to catch vulnerabilities before production.
 
-After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour. 
+After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour.
 
-Use these tables to decide which solution to start with: 
+Use these tables to decide which solution to start with:
 | Feature                                   | Agentless                                     | Unified Datadog Agent          |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
 | Time to deploy across your infrastructure | Minutes                                       | Hours to weeks                 |
@@ -136,6 +137,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[21]: /security/cloud_security_management/setup/ci_cd
 
 ## Further reading
 
