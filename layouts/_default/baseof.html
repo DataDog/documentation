@@ -28,6 +28,10 @@
   {{- if and (ne $.Params.disable_opengraph_meta_tags true) .File -}}
     {{- partial "meta.html" . -}}
   {{- end -}}
+  {{- $mdURL := partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
+  {{- with $mdURL -}}
+  <meta name="plaintext-source" content="{{ . }}">
+  {{- end -}}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
@@ -55,6 +59,9 @@
       <div class="mainContent-wrapper order-2 order-lg-0 col-12 {{ if eq .Params.disable_sidebar true }}col-lg-9{{ else }}col-lg-7{{ end }} main">
         <div class='{{ if and (eq $.Section "integrations") (eq $.Kind "page") }}integrations-single{{ end }}'
           id="mainContent">
+          {{- with partialCached "page-agent-hint.html" (dict "ctx" $ctx) $ctx.RelPermalink -}}
+          <div style="display:none">For a plain-text version of this page, see: {{ . }}</div>
+          {{- end -}}
           {{ block "main" . }}{{ end }}
           {{ partial "page-edit.html" (dict "ctx" $ctx "type" "contribute") }}
         </div>
