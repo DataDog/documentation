@@ -15,7 +15,9 @@ This guide helps you choose the right deployment topology for Agentless Scanning
 
 ## Choose your deployment topology
 
-### Step 1: Single account or multiple accounts?
+### Step 1: How many cloud accounts are you scanning?
+
+AWS accounts, Azure subscriptions, or GCP projects.
 
 {{< tabs >}}
 {{% tab "Single account" %}}
@@ -44,14 +46,13 @@ The following diagram illustrates cross-account scanning from a central account:
 
 ### Step 2: Regional distribution
 
-How you distribute scanners across regions depends on where your hosts are:
+A single scanner can scan hosts in any region, including regions other than its own. Cross-region scanning incurs data transfer costs, so the decision of where to deploy additional scanners depends on how many hosts you have in each region.
 
-- **Single region (or one dominant region)**: Deploy a scanner in that region. If you have fewer than ~150 hosts, a single scanner handles everything.
-- **Multiple regions with significant host counts**: Deploy a scanner in **each region where you have more than 150 hosts**. Each scanner scans hosts in its own region, avoiding cross-region data transfer costs.
-  - **Rule of thumb**: If a region has more than 150 hosts, the egress savings from a local scanner outweigh the ~$80/mo fixed cost of running one. See [cloud service provider cost][2] for a full breakdown.
-  - Regions with fewer than 150 hosts can be scanned cross-region from a nearby scanner.
+- **Fewer than ~150 hosts total across all regions**: A single scanner in one region is the most cost-effective setup. The cross-region data transfer costs for scanning remote hosts are lower than the ~$80/mo fixed cost of running an additional scanner.
+- **More than ~150 hosts in a specific region**: Deploy a dedicated scanner in that region. At this threshold, the egress savings from scanning locally outweigh the cost of running the scanner. See [cloud service provider cost][2] for a full breakdown.
+- **Multiple regions above the threshold**: Deploy a scanner in each region that exceeds ~150 hosts. Regions below the threshold can be scanned cross-region from the nearest scanner.
 
-Datadog automatically schedules scans to the appropriate regional scanner to minimize cross-region costs.
+Datadog automatically routes scans to the appropriate regional scanner to minimize cross-region costs.
 
 ### Step 3: Scanner capacity limits
 
@@ -71,16 +72,11 @@ By default, the scanner creates a new VPC during deployment. If your organizatio
 
 <div class="alert alert-info">If your deployment fails due to SCP violations, the existing VPC option is likely the solution. See the <a href="/security/cloud_security_management/setup/agentless_scanning/enable">setup instructions</a> for your cloud provider and deployment method.</div>
 
-## Recommended configuration
-
-To manage costs while ensuring reliable scans every 12 hours, Datadog recommends setting up Agentless Scanning with [Terraform][4] as the default deployment method. Terraform deploys one scanner per region, which avoids cross-region networking costs.
-
-Summary of recommendations:
+## Summary
 
 - Use a dedicated scanner account for multi-account environments
 - Deploy a scanner in each region with more than 150 hosts
 - If using [Cloud Storage Scanning][1], deploy a scanner in each region that contains a data store (for example, S3 buckets or RDS instances)
-- Use Terraform for repeatable, multi-region deployments
 
 **Note**: Only the collected list of packages and host metadata (hostnames, EC2/VM/Compute Engine instance identifiers) are sent to Datadog. All scanned data remains in your infrastructure.
 
