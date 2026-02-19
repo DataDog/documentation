@@ -159,7 +159,12 @@ You can choose preferred tags from any of your existing cost data tags, includin
 
 ## Edit tag descriptions
 
-You can add or edit descriptions for any tag in the Tag Explorer to provide context about what a tag represents and how it should be used. Click on a tag's description field to modify it, or use AI to automatically generate a description. Updated descriptions are visible to all members of your organization.
+You can add or edit descriptions for any tag in the Tag Explorer to provide context about what a tag represents and how it should be used. Click on a tag's description field to modify it, or use AI to automatically generate a description.
+
+Tag descriptions are visible to all members of your organization and appear in the following locations:
+
+- **Tag Explorer**: Descriptions are displayed in the tag table alongside each tag key.
+- **Group-by selectors**: When selecting tags to group by across Cloud Cost Management, descriptions appear in the dropdown menu to help users choose the right tag.
 
 ## Further reading
 
