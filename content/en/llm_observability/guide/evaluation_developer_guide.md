@@ -314,7 +314,7 @@ experiment.run()
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `eval_name` | `str` | The name of the LLM-as-Judge evaluator as configured in the Datadog UI. |
+| `eval_name` | `str` | The name of the LLM-as-a-judge evaluator as configured in Datadog. |
 | `transform_fn` | `Optional[Callable]` | A function that maps an `EvaluatorContext` to a dict of template variable values. |
 
 {{< code-block lang="python" >}}
