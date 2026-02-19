@@ -248,7 +248,7 @@ To help control NetFlow volume (and associated cost), you can configure the Agen
 When this limit is enabled, the Agent retains only the **top flows by byte count** up to the configured maximum, and drops lower-volume flows for that flush interval.
 
 ### Configuration
-
+**Note**: Requires Agent version `7.75.1` or later.
 Set `network_devices.netflow.aggregator_max_flows_per_flush_interval` in your `datadog.yaml`:
 
 ```yaml
