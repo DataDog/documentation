@@ -44,7 +44,7 @@ Require a full window of data
 
 The monitor shows `No Data`, and when you graph the metric, no data appears.
 
-#### Methods to verify
+#### Verify whether data exists
 1. Identify the metric (such as AWS metric or custom metric).
 2. Graph it in a notebook or dashboard.
 3. Scope to the correct timeframe.
@@ -53,10 +53,10 @@ The monitor shows `No Data`, and when you graph the metric, no data appears.
 #### Understanding (no groups found) vs. No Data
 While they look similar, `(no groups found)` is specific to multi alert monitors (grouped by a tag). It indicates that the monitor has no active entities to evaluate, whereas `No Data` refers to the metric itself being empty and is controlled by your monitor's [On Missing Data](#enabling-no-data-notifications) settings.
 
-`(no groups found)` typically occurs if:
+`(no groups found)` typically occurs in the following cases:
 
 - New Setup: The monitor has received no data for any groups since creation.
-- Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory.
+- Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. Different types of groups have different retention periods:
   - **Standard Monitors**: Groups age out after 24 hours.
   - **Host/Service Checks**: Groups age out after 48 hours.
   - **Custom**: This can be extended up to 72 hours through the **On Missing Data** setting.
@@ -73,12 +73,12 @@ Data exists but doesn't appear consistently or arrives late.
 2. Observe the frequency and consistency of data points.
 
 #### Possible solutions
-- Enable **"Do not require a full window of data for evaluation"** in [Metric monitor Advanced Options][6].
+- In [Metric monitor Advanced Options][6], enable the **"Do not require a full window of data for evaluation"** setting.
 - Increase the evaluation window to capture more data points.
 - Add an evaluation delay to account for data ingestion delays.
 - For aggregations like `avg`, `min`, and `max`, consider a larger timeframe.
 
-For more information, see [Adjusting No Data alerts for metric monitors][2].
+To learn how to apply these changes, see [Adjusting No Data alerts for metric monitors][2].
 
 {{% /collapse-content %}}
 
@@ -96,7 +96,7 @@ If you use rollups in your monitor query, add an evaluation delay at least equal
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Tags with N/A values" level="h3" %}}
+{{% collapse-content title="Tags contain N/A values" level="h3" %}}
 
 The monitor shows `No Data`, but data exists in dashboards.
 
@@ -132,15 +132,15 @@ Review both your data history and whether any manual rollups are present in your
 
 {{% collapse-content title="Arithmetic with NaN values" level="h3" %}}
 
-A monitor with arithmetic (`a / b`) shows `No Data`. **Note**: This behavior is specific to monitor evaluations. Graphs may display 0 values in the same scenarios.
+A monitor evaluation with arithmetic (`a / b`) shows `No Data`, or a graph displays 0 values.
 
 #### Why this happens
-If any part of an arithmetic expression is NaN, the entire expression becomes NaN and won't evaluate. For example:
+If any part of an arithmetic expression is NaN (Not a Number, which can happen in cases like trying to divide by zero), the entire expression becomes NaN and won't evaluate. For example:
 - Expression: `a + b`.
 - If `a` is NaN, then `a + b` is NaN.
 - The monitor won't evaluate.
 
-<div class="alert alert-info">The exception is that queries using `as_count()` return 0 for missing values instead of NaN. For more information, see the <a href="/monitors/guide/as-count-in-monitor-evaluations/">as_count() documentation</a>.</div>
+<div class="alert alert-info">The exception is that queries using <code>as_count()</code> return 0 for missing values instead of NaN. For more information, see the <a href="/monitors/guide/as-count-in-monitor-evaluations/">as_count() documentation</a>.</div>
 
 #### How to troubleshoot
 1. Create a notebook or dashboard.
@@ -151,9 +151,9 @@ If any part of an arithmetic expression is NaN, the entire expression becomes Na
 {{% /collapse-content %}}
 
 
-## Monitor does not alert on No Data
+## Troubleshoot No Data alerts
 
-You expect a `No Data` alert but don't receive one. Make sure you have the required settings:
+If you expect a `No Data` alert but don't receive one, make sure you have the required settings:
 1. **Notify if data is missing** must be enabled.
 2. **Notification message** must:
    - Apply to all state changes (without conditional blocks), or
@@ -166,11 +166,11 @@ If your monitor has the correct settings but still isn't alerting as expected, c
 - Notification message uses conditional blocks that exclude `No Data`.
 - Monitor has `notify_no_data` disabled.
 
-## Enabling No Data notifications
+## Enable No Data notifications
 
-1. **Notify on No Data** setting must be enabled.
-2. **No Data timeframe** should be at least 2x the evaluation window.
-3. **Notification message** must either:
+1. Enable the **Notify on No Data** setting.
+2. Set the **No Data timeframe** to at least 2x the evaluation window.
+3. Set the **Notification message** to either:
    - Apply to all state changes (no conditional blocks), or
    - Use the `{{#is_no_data}}` template variable.
 
@@ -185,7 +185,7 @@ If <code>notify_no_data</code> is <code>true</code> but <code>no_data_timeframe<
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/guide/new-group-delay/
+[1]: /monitors/configuration/#new-group-delay
 [2]: /monitors/guide/adjusting-no-data-alerts-for-metric-monitors/
 [3]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows
 [4]: /monitors/guide/as-count-in-monitor-evaluations/
