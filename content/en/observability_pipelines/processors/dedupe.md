@@ -33,7 +33,7 @@ The default cache size is 5,000 messages (recommended). The cached messages are 
 
 **Notes**:
 - Increasing the cache size increases memory usage.
-- The cache is backed by a LRU cache with a size based on the configured cache size.
+- The cache is backed by a LRU cache, where the LRU cache size is the same as the configured cache size.
 - Since the cache is not shared between Workers, only duplicated events processed by the same Worker are dropped.
 
 ### Path notation example
