@@ -13,11 +13,11 @@ further_reading:
 
 ## Overview
 
-Follow this migration workflow to rebuild your OpsGenie on-call structure in Datadog, team by team. This migration tool reuses your existing OpsGenie schedules and escalation policies as building blocks, so you can review, map, and customize each resource before it goes live.
+Follow this migration workflow to rebuild your OpsGenie on-call structure in Datadog, team by team. The migration tool reuses your existing OpsGenie schedules and escalation policies as building blocks, so you can review, map, and customize each resource before it goes live.
 
 By importing only current, relevant OpsGenie data, you avoid bringing legacy clutter into Datadog and start with a concise, maintainable configuration.
 
-**Note**: This is not a bulk migration tool. You select and map individual teams, escalation policies, schedules, and users through a wizard-style UI workflow.
+**Note**: This is not a bulk migration tool. You select and map individual teams, escalation policies, schedules, and users through a wizard-style workflow.
 
 ## Prerequisites
 
@@ -26,13 +26,13 @@ By importing only current, relevant OpsGenie data, you avoid bringing legacy clu
 
 ## Migration steps
 
-The migration follows a six-step wizard-style process in the Datadog web UI. Complete all steps in order within the same migration wizard.
+The migration follows a six-step wizard-style process in the Datadog UI. Complete all steps in order within the same migration wizard.
 
 ### Select team to migrate
 
 1. Go to the [On-Call Teams list][2] and select **Add Team to On-Call** > **Import team from OpsGenie**.
 1. Select your OpsGenie account's region from the dropdown (if you have multiple regions configured). Datadog loads all your OpsGenie teams in a searchable, paginated list.
-1. Select the team to migrate and select **Next**. A preview pane shows the team's members and settings.
+1. Select the team to migrate, then select **Next**. A preview pane shows the team's members and settings.
 
 {{< img src="service_management/oncall/import-opsgenie-team.png" alt="UI that lists OpsGenie teams and shows a preview of the selected team" style="width:95%;" >}}
 
@@ -46,7 +46,7 @@ The migration follows a six-step wizard-style process in the Datadog web UI. Com
    - **Map with another Datadog team**: Choose a different Datadog team from the list.
    - **Create a new team**: Enter a team name when prompted. Datadog builds the team using the structure and members from your OpsGenie team.
 
-{{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="UI for mapping OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
+   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="UI for mapping an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
 
 1. When the mapping is correct, select **Next**.
 
@@ -65,34 +65,34 @@ Datadog automatically matches OpsGenie users to Datadog users by email address. 
 - Invite them to Datadog (the migration wizard sends an email invitation)
 - Exclude them if they no longer need access
 
-**Note**: You cannot proceed to save the escalation policy until all users are either mapped to Datadog users or explicitly excluded.
+**Note**: You cannot save the escalation policy until all users are mapped, invited, or explicitly excluded.
 
-### Migrate referenced schedules
+### Review migrated schedules
 
 If the escalation policy references OpsGenie schedules, Datadog automatically migrates them to Datadog On-Call. The migration includes:
 
-- **Rotations**: Converted to Datadog schedule layers (in reversed order)
-- **Participants**: User participants are automatically matched to Datadog users
-- **Time restrictions**: Both `time-of-day` and `weekday-and-time-of-day` restrictions are preserved
-- **Timezones**: Timezone configuration is preserved
+- **Rotations**: Converted to Datadog schedule layers (in reversed order).
+- **Participants**: User participants are automatically matched to Datadog users.
+- **Time restrictions**: Both `time-of-day` and `weekday-and-time-of-day` restrictions are preserved.
+- **Timezones**: Timezone configuration is preserved.
 
 **Note**: Only user-type rotation participants are supported. Team-type and escalation-type participants are not migrated.
 
 ### Review and save
 
-1. Review the migrated escalation policy in an editable form. You can modify:
+1. Review the migrated escalation policy. You can modify the following fields:
    - Escalation step delays
    - Notification targets (users, teams, and schedules)
    - Retry behavior
    - Auto-resolution settings
 
-1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. The escalation policy is created under your Datadog On-Call team.
+1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. Datadog creates the escalation policy under your On-Call team.
 
 ## What gets migrated
 
 The following table shows how OpsGenie resources map to Datadog On-Call resources:
 
-| OpsGenie Resource | Datadog Resource | Notes |
+| OpsGenie resource | Datadog resource | Notes |
 |---|---|---|
 | Teams | Teams | Name-based matching or manual mapping |
 | Users | Users | Email-based automatic matching with manual override |
@@ -106,7 +106,7 @@ The following table shows how OpsGenie resources map to Datadog On-Call resource
 
 ## Known limitations
 
-- **Escalation conditions**: Only `if-not-acked` escalation conditions are supported. The `if-not-closed` condition is not supported and is not migrated.
+- **Escalation conditions**: Only `if-not-acked` escalation conditions are supported. The `if-not-closed` condition is not supported.
 - **Rotation participants**: Only user-type rotation participants are supported. Team-type and escalation-type participants are not migrated.
 - **No bulk migration**: Each team, escalation policy, and schedule must be migrated individually through the UI wizard.
 
@@ -116,7 +116,7 @@ Before relying on migrated resources for production incidents:
 
 - **Verify schedule coverage**: Check that all migrated schedules have proper coverage with no gaps. Navigate to [On-Call Schedules][3] and review each schedule's timeline.
 
-- **Test escalation policies**: Send test pages to verify that escalation policies escalate correctly and notify the right people. You can use the [Manual Page][4] feature to send test pages.
+- **Test escalation policies**: Send test pages to verify that escalation policies escalate correctly and notify the right people. Use the [Manual Page][4] feature to send test pages.
 
 - **Check user mappings**: Verify that all users are correctly mapped and can receive notifications through their preferred channels (email, SMS, push, voice).
 
@@ -139,7 +139,7 @@ If the OpsGenie import option does not appear during team setup:
 If OpsGenie users are not automatically matched to Datadog users:
 
 1. Verify that the email addresses in OpsGenie match the email addresses in Datadog exactly.
-1. Confirm that the Datadog users are active and not deactivated.
+1. Confirm that the Datadog users are active.
 1. If automatic matching fails, map users manually or invite them to Datadog.
 
 ### Schedule rotations not matching
