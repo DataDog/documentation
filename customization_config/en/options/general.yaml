@@ -460,7 +460,7 @@ options:
 - label: Step details
   id: step_details
 
-- label: Variables
+- label: Local & Global
   id: variables
 
 - label: DNS
