@@ -43,10 +43,9 @@ Datadog's Power BI integration helps data teams make changes to their data platf
 #### Enable API and admin API access for security group in Power BI Admin
 
 1. Go to the Power BI Admin portal.
-2. In Tenant settings, go to **Developer settings**.
-3. Enable **Allow service principals to use Power BI APIs** for your security group.
-4. In Tenant settings, find **Admin API settings**.
-5. Enable the following for your security group:
+2. In Tenant settings, enable **Service principals can call Fabric APIs** for your security group.
+3. In Tenant settings, find **Admin API settings**.
+4. Enable the following for your security group:
    - **Allow service principals to use read-only admin APIs**
    - **Enhance admin APIs responses with detailed metadata**
    - **Enhance admin APIs responses with DAX and mashup expressions**
