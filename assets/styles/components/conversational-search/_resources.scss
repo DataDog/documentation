@@ -1,14 +1,14 @@
-// Inline source references
+// Inline reference chips
 .conv-search-source-ref-wrap {
     position: relative;
-    display: inline-block;
+    display: inline;
 }
 
 .conv-search-source-ref-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 0 2px;
+    margin: 0 1px;
     min-width: 20px;
     height: 20px;
     padding: 0 5px;
@@ -44,18 +44,20 @@
     position: absolute;
     z-index: 100;
     top: calc(100% + 6px);
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     min-width: 180px;
     max-width: 280px;
-    padding: 8px 10px;
+    padding: 8px 12px;
     border: 1px solid $conv-search-border;
-    border-radius: 8px;
+    border-radius: 10px;
     background: $conv-search-bg;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
     display: none;
 
     &.open {
         display: block;
+        animation: conv-search-tooltip-in 0.15s ease-out;
     }
 
     a {
@@ -72,64 +74,61 @@
     }
 }
 
+@keyframes conv-search-tooltip-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 // Source cards section
 .conv-search-sources {
-    margin-top: 14px;
-    padding-top: 10px;
-    border-top: 1px solid $conv-search-border;
+    margin-top: 20px;
+    padding-top: 0;
 }
 
 .conv-search-sources-title {
     margin: 0 0 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: $conv-search-text-muted;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba($conv-search-text-muted, 0.7);
+    letter-spacing: 0.03em;
 }
 
 .conv-search-sources-cards {
     display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 4px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: rgba($conv-search-text-muted, 0.3) transparent;
+    gap: 6px;
+    flex-wrap: wrap;
+    scrollbar-width: none;
 
     &::-webkit-scrollbar {
-        height: 4px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: rgba($conv-search-text-muted, 0.25);
-        border-radius: 999px;
+        display: none;
     }
 }
 
 .conv-search-source-card {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 10px;
+    padding: 5px 10px 5px 6px;
     border: 1px solid $conv-search-border;
-    border-radius: 8px;
+    border-radius: 999px;
     background: $conv-search-bg;
     min-width: 0;
-    max-width: 220px;
+    max-width: 260px;
     flex: 0 0 auto;
-    scroll-snap-align: start;
-    transition: border-color 0.12s ease, box-shadow 0.12s ease;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 
     &:hover {
         border-color: rgba($conv-search-purple, 0.3);
-        box-shadow: 0 2px 6px rgba($conv-search-purple, 0.08);
+        background: rgba($conv-search-purple, 0.03);
+        box-shadow: 0 1px 4px rgba($conv-search-purple, 0.06);
     }
 
     a {
@@ -141,8 +140,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
 
-        &:hover {
-            color: $conv-search-purple;
+        // Stretched link — makes the entire card clickable
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
         }
     }
 }
@@ -152,13 +154,13 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    min-width: 22px;
-    height: 22px;
+    min-width: 20px;
+    height: 20px;
     padding: 0 5px;
-    border-radius: 5px;
+    border-radius: 999px;
     background: rgba(0, 0, 0, 0.06);
     color: #555;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    line-height: 22px;
+    line-height: 20px;
 }

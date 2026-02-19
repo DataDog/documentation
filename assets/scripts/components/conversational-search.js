@@ -465,6 +465,25 @@ class ConversationalSearch {
         });
     }
 
+    /**
+     * String-based pass that converts [N] tokens to numbered badge chips
+     * during streaming — before the sources block is available. Code
+     * blocks (<pre>, <code>) are left untouched. The chips are inert
+     * (no tooltip) until the final renderMessageWithSources pass.
+     */
+    inlineRefChips(html) {
+        return html.replace(
+            /(<pre[\s\S]*?<\/pre>|<code[\s\S]*?<\/code>)|(\[(\d{1,3})\])/gi,
+            (match, codeBlock, _ref, num) => {
+                if (codeBlock) return codeBlock;
+                return '<span class="conv-search-source-ref-wrap">'
+                    + `<button type="button" class="conv-search-source-ref-btn" data-source-number="${num}">`
+                    + `<span class="conv-search-source-ref-number">${num}</span>`
+                    + '</button></span>';
+            }
+        );
+    }
+
     createRefChip(number, source) {
         const wrap = document.createElement('span');
         wrap.className = 'conv-search-source-ref-wrap';
@@ -733,7 +752,7 @@ class ConversationalSearch {
                                 if (now - lastRenderTime > RENDER_THROTTLE) {
                                     // Strip any sources/json fenced block so it never flashes during streaming
                                     const streamDisplay = accumulatedMessage.replace(/```(?:sources|docs-sources|sources-json|json)[\s\S]*?(?:```|$)/gi, '').trim();
-                                    responseContainer.innerHTML = marked.parse(streamDisplay);
+                                    responseContainer.innerHTML = this.inlineRefChips(marked.parse(streamDisplay));
                                     lastRenderTime = now;
                                     this.scrollToBottom();
                                 }
