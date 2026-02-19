@@ -74,7 +74,7 @@ Configuring sampling based on specific attributes, such as sampling 100% of sess
 
 During live outages, incidents, or bug investigations, and for customers that are not yet on [RUM without Limits][2] you can increase client-side (head-based) sampling to collect 100% of your sessions to ensure nothing is missed, or to have more examples of a particular issue.
 
-You can only change the **head-based** sampling rate from the Datadog UI if you use the [**server-side injection method**][17] to add the Browser RUM SDK to your web application. To do this, [modify the sampling rate][15] on the SDK Configuration page.
+You can only change the **head-based** sampling rate from the Datadog UI if you use the [**server-side injection method**][17] to add the Browser RUM SDK to your web application. To do this, [modify the sampling rate][17] on the SDK Configuration page.
 
 {{< img src="/real_user_monitoring/browser/browser-change-sampling.png" alt="Session Sampling and Session Replay Sampling sliders visible from the RUM SDK Configuration page." style="width:100%;" >}}
 
