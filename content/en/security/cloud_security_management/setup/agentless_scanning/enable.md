@@ -138,8 +138,7 @@ Quick Start uses AWS CloudFormation to deploy Agentless Scanning with all Cloud 
 
 Use CloudFormation if you already have an AWS account integrated with Datadog and want to enable Agentless Scanning, or if you want to add a new AWS account.
 
-{{< tabs >}}
-{{% tab "New AWS account" %}}
+##### New AWS account
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
@@ -148,12 +147,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[3]: /remote_configuration
-
-{{% /tab %}}
-
-{{% tab "Existing AWS account" %}}
+##### Existing AWS account
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. Click the AWS account where you want to deploy the Agentless scanner, which opens the side panel.
@@ -166,9 +160,6 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [3]: /remote_configuration
-
-{{% /tab %}}
-{{< /tabs >}}
 
 {{% /collapse-content %}}
 
@@ -222,8 +213,7 @@ After the StackSet deploys, the member accounts are configured to allow cross-ac
 
 The [Terraform Datadog Agentless Scanner module][6] provides a reusable configuration for installing the Datadog Agentless scanner. Terraform is the recommended deployment method for multi-region environments. It deploys one scanner per region, which avoids cross-region networking costs. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning][24]. For usage examples including multi-region configurations, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
-{{< tabs >}}
-{{% tab "New AWS account" %}}
+##### New AWS account
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
@@ -233,12 +223,7 @@ The [Terraform Datadog Agentless Scanner module][6] provides a reusable configur
 1. Enter the **AWS Account ID** and **AWS Role Name**.
 1. Click **Save**.
 
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
-
-{{% /tab %}}
-
-{{% tab "Existing AWS account" %}}
+##### Existing AWS account
 
 1. On the [Cloud Security Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. Click the AWS account where you want to deploy the Agentless scanner to open the side panel.
@@ -250,9 +235,6 @@ The [Terraform Datadog Agentless Scanner module][6] provides a reusable configur
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
-
-{{% /tab %}}
-{{< /tabs >}}
 
 {{% /collapse-content %}}
 
@@ -280,24 +262,17 @@ After completing any of the setup methods above, see [Verify your setup](#verify
 
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
 
-{{< tabs >}}
-{{% tab "New Azure subscription" %}}
+##### New Azure subscription
 
-##### Set up the Datadog Azure integration
+Set up the [Datadog Azure integration][1] first, then follow the steps below.
 
-Follow the instructions for setting up the [Datadog Azure integration][1].
+{{% csm-agentless-azure-resource-manager %}}
+
+##### Existing Azure subscription
 
 {{% csm-agentless-azure-resource-manager %}}
 
 [1]: /integrations/guide/azure-manual-setup/?tab=azurecli
-{{% /tab %}}
-
-{{% tab "Existing Azure subscription" %}}
-
-{{% csm-agentless-azure-resource-manager %}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 <br />
 
