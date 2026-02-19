@@ -52,6 +52,7 @@ Test incidents must be enabled before use. To enable:
 
 ## Declaring a test incident
 <div class="alert alert-danger">After test incidents are enabled, any user with the <strong>Incidents Write</strong> permission can declare them.</div>
+
 ### From the Incidents page
 
 1. Navigate to the [Incidents page][4].
