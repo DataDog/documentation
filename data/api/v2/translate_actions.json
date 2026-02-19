@@ -709,6 +709,10 @@
     "request_description": "",
     "request_schema_description": "The request for a tests search."
   },
+  "ListAWSCloudAuthPersonaMappings": {
+    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
+    "summary": "List AWS cloud authentication persona mappings"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
@@ -2198,6 +2202,16 @@
     "request_description": "",
     "request_schema_description": "List tags response."
   },
+  "ListInterfaceUserTags": {
+    "description": "Returns the tags associated with the specified interface.",
+    "summary": "List tags for an interface"
+  },
+  "UpdateInterfaceUserTags": {
+    "description": "Updates the tags associated with the specified interface.",
+    "summary": "Update the tags for an interface",
+    "request_description": "",
+    "request_schema_description": "Response for listing interface tags."
+  },
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
@@ -3012,6 +3026,22 @@
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
   },
+  "UnassignSeatsUser": {
+    "description": "Unassign seats from users for a product code.",
+    "summary": "Unassign seats from users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetSeatsUsers": {
+    "description": "Get the list of users assigned seats for a product code.",
+    "summary": "Get users with seats"
+  },
+  "AssignSeatsUser": {
+    "description": "Assign seats to users for a product code.",
+    "summary": "Assign seats to users",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListEntityRiskScores": {
     "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
     "summary": "List Entity Risk Scores"
@@ -3741,6 +3771,24 @@
     "summary": "Synthetics: Edit a test suite",
     "request_description": "New suite details to be saved.",
     "request_schema_description": ""
+  },
+  "DeleteSyntheticsTests": {
+    "summary": "Synthetics: Bulk delete tests",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateSyntheticsNetworkTest": {
+    "summary": "Synthetics: Create a Network Path test",
+    "request_description": "",
+    "request_schema_description": "Network Path test request."
+  },
+  "GetSyntheticsNetworkTest": {
+    "summary": "Synthetics: Get a Network Path test"
+  },
+  "UpdateSyntheticsNetworkTest": {
+    "summary": "Synthetics: Edit a Network Path test",
+    "request_description": "New Network Path test details to be saved.",
+    "request_schema_description": "Network Path test request."
   },
   "PatchGlobalVariable": {
     "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",

@@ -23,7 +23,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 - A DNS entry that points to your Workers' load balancer or OPW server.
 - An SSL/TLS certificate for your domain. Cloudflare requires an HTTPS endpoint and does not accept HTTP.
 	- **Note**: You cannot use Cloudflare origin certificates because they are not publicly trusted.
-- If you are using a firewall in front of your Worker or Workers' load balancer, add [Cloudflare's IP addresses][1] to your allowlist.
+- If you are using a firewall in front of your Worker or load balancer, add [Cloudflare's IP addresses][1] to your allowlist.
 
 ## Set up a pipeline
 
@@ -44,7 +44,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
       - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
       - **Notes**:
         - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][7] for more information.
-        - The file must be owned by the `observability-pipelines-worker` group and `observability-pipelines-worker` user, or at least readable by the group or user.
+        - The file must be readable by the `observability-pipelines-worker` group and user.
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
