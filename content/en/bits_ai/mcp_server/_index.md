@@ -39,16 +39,14 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 
 ## Disclaimers
-
-- The Datadog MCP Server is not supported for production use during the Preview.
-- Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
+- The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 
 ## Requirements
 
-Datadog users must have the `Incidents Read` [permission][18] to use the MCP Server.
+Datadog users must have the `MCP Read`[permission][18] to use the MCP Server for read-access and `MCP Write`[permission][18] for write access.
 
 For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
 
@@ -65,9 +63,9 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
+- `https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
+- `https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
+- `https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
 
 ## Available tools
 
@@ -345,7 +343,7 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [1]: https://modelcontextprotocol.io/
 [15]: /api/latest/events/
 [16]: /account_management/audit_trail/
-[18]: /account_management/rbac/permissions/#case-and-incident-management
+[18]: /account_management/rbac/permissions/#mcp
 [19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [20]: /synthetics/
 [21]: /continuous_integration/

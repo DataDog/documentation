@@ -13,21 +13,17 @@ further_reading:
   text: "Datadog Extension for Cursor"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
-This page explains how to set up and configure the Datadog MCP Server, which lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
+This page explains how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage and use platform features directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 ## Client compatibility
 
-The following AI clients are known to be compatible with the Datadog MCP Server.
+The following AI clients are compatible with the Datadog MCP Server.
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
 | Client | Developer | Notes |
 |--------|------|------|
-| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
+| [Cursor][8] | Cursor | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Claude Code][5] | Anthropic | |
 | [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 | [Codex CLI][7] | OpenAI | |
@@ -36,6 +32,14 @@ The following AI clients are known to be compatible with the Datadog MCP Server.
 | [Kiro][22] | Amazon | |
 | [Kiro CLI][10] | Amazon | |
 | [Cline][17] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+
+## Connect in Claude Code
+
+ For Claude Code, run (use the endpoint shown above for your site):
+  ```bash
+  claude mcp add --transport http datadog-mcp {{< region-param key="https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp" code="true" >}}
+  ```
+
 
 ## Connect in Cursor and VS Code
 
@@ -67,27 +71,15 @@ The following instructions are for all [MCP-compatible clients][21]. For Cursor 
 {{% tab "Remote authentication" %}}
 This method uses the MCP specification's [Streamable HTTP][1] transport mechanism to connect to the MCP Server.
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][2]. For example, if you're using `app.datadoghq.com` to access Datadog, use the endpoint for the US1 site.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][2]. The endpoint updates automatically based on the site selected in the region selector at the top of the documentation.
 
-If your organization uses a [custom sub-domain][3], use the endpoint that corresponds to your regional Datadog site. For example, if your custom sub-domain is `myorg.datadoghq.com`, use the US1 endpoint.
+If your organization uses a [custom sub-domain][3], use the endpoint that corresponds to your regional Datadog site.
 
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
+**MCP Server endpoint:**
+
+`https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp`
 
 ### Example configurations
-
-These examples are for the US1 site:
-
-* **Command line**: For Claude Code, run:
-  ```bash
-  claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
-  ```
 
 * **Configuration file**: Edit the configuration file for your AI agent:
   * Codex CLI: `~/.codex/config.toml`
@@ -99,7 +91,7 @@ These examples are for the US1 site:
     "mcpServers": {
       "datadog": {
         "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+        "url": "{{< region-param key="https://mcp.{{< region-param key="dd_site" code="true" >}}/api/unstable/mcp-server/mcp" code="true" >}}"
       }
     }
   }
@@ -167,7 +159,7 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+      "url": "{{< region-param key="mcp_server_endpoint" code="true" >}}",
       "headers": {
           "DD_API_KEY": "<YOUR_API_KEY>",
           "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
