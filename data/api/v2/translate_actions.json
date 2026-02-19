@@ -744,13 +744,13 @@
     "request_schema_description": "Request object to update a resource filter."
   },
   "GetCodeCoverageBranchSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\n**Note**: This endpoint requires the `code_coverage_read` permission.",
+    "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a branch."
   },
   "GetCodeCoverageCommitSummary": {
-    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).\n\n**Note**: This endpoint requires the `code_coverage_read` permission.",
+    "description": "Retrieve aggregated code coverage statistics for a specific commit in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.\n\nThe commit SHA must be a 40-character hexadecimal string (SHA-1 hash).",
     "summary": "Get code coverage summary for a commit",
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."

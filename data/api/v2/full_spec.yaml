@@ -75251,10 +75251,7 @@ paths:
 
         This endpoint provides overall coverage metrics as well as breakdowns by service
 
-        and code owner.
-
-
-        **Note**: This endpoint requires the `code_coverage_read` permission.'
+        and code owner.'
       operationId: GetCodeCoverageBranchSummary
       requestBody:
         content:
@@ -75310,10 +75307,7 @@ paths:
         and code owner.
 
 
-        The commit SHA must be a 40-character hexadecimal string (SHA-1 hash).
-
-
-        **Note**: This endpoint requires the `code_coverage_read` permission.'
+        The commit SHA must be a 40-character hexadecimal string (SHA-1 hash).'
       operationId: GetCodeCoverageCommitSummary
       requestBody:
         content:
