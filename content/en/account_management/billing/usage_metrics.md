@@ -71,6 +71,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
 | Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
 | Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
+| Code Security Secret Scanning Committers  | `datadog.estimated_usage.code_security.secrets.committers`  | Secret Scanning committers seen from (calendar) month-to-date.  |
+| Code Security IaC Committers  | `datadog.estimated_usage.code_security.iac.committers`  | Infrastructure as Code (IaC) committers seen from (calendar) month-to-date.  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 

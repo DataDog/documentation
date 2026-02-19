@@ -95,6 +95,14 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
 
+### Natural language queries
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured audit trail query, making it easier to explore audit events without needing to write complex syntax.
+
+The system translates natural language input into Datadog queries and understands context such as users, actions, resources, and time ranges. It also detects relevant fields automatically, for example, "Who modified the payment dashboard last week" or "Show all role changes in the past 24 hours."
+
+{{< img src="account_management/audit_logs/audit_trail_nlq_light.mp4" alt="Natural language query in Audit Trail showing how to search for audit events using plain English phrases" video=true >}}
+
 ### Saved views
 
 Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Trail explorer.
