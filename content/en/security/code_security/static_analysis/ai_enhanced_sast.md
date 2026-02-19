@@ -124,7 +124,7 @@ Datadog SAST uses the [Bits AI Dev Agent][10] to generate code fixes for vulnera
 
 To view and remediate vulnerabilities:
 
-1. In Datadog, navigate to [**Security** > **Code Security** > **Vulnerabilities**][6], and select **Static Code (SAST)** on the left-hand side.
+1. In Datadog, navigate to [**Security** > **Code Security** > **Vulnerabilities**][6], and select **Static Code (SAST)** on the left sidebar.
 1. Select a vulnerability to open a side panel with details about the finding and the affected code.
 1. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
 
@@ -148,7 +148,12 @@ Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal w
 
 After you create a campaign, Bits AI Dev Agent loads the findings in scope, generates patches according to your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes. **Note**: Automatic PR creation is opt-in through [Settings][11].
 
-<div class="alert alert-info">Campaigns do not track fixes created outside the campaign. If you generate a single fix and later create a campaign, Bits AI may generate the same fix again.</div>
+<div class="alert alert-info">
+<ul>
+  <li>Automatic PR creation is disabled by default. Enable it in <a href="https://app.datadoghq.com/code/settings">Settings</a>.</li>
+  <li>Campaigns do not track fixes created outside the campaign. If you generate a single fix and later create a campaign, Bits AI may generate the same fix again.</li>
+</ul>
+</div>
 
 #### View campaign progress
 
