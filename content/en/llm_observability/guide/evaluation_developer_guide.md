@@ -310,7 +310,7 @@ experiment.run()
 
 ### Using managed evaluators
 
-`RemoteEvaluator` lets you reference a [custom LLM-as-a-judge evaluation configured in the Datadog UI][5] by name, and run it as part of a local experiment. This allows you to reuse your production evaluators in offline experiments without reimplementing the evaluation logic in Python.
+`RemoteEvaluator` lets you reference a [custom LLM-as-a-judge evaluation][5] configured in the Datadog UI by name, and run it as part of a local experiment. This allows you to reuse your production evaluators in offline experiments without reimplementing the evaluation logic in Python.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
