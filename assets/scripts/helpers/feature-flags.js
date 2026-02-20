@@ -28,6 +28,7 @@ export const initializeFeatureFlags = () => {
     initializationPromise = (async () => {
         const rumUser = window.DD_RUM?.getUser?.();
         const targetingKey = rumUser?.id || rumUser?.device_id;
+        console.log('targetingKey: feature-flags.js', targetingKey);
 
         await OpenFeature.setProviderAndWait(
             new DatadogProvider({
