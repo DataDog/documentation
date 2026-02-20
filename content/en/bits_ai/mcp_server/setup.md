@@ -30,7 +30,7 @@ To install the extension:
 
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **MCP** tab.
 2. Install the Datadog extension following [these instructions](/developers/ide_plugins/vscode/?tab=cursor#installation). If you have the extension installed already, make sure it's the latest version, as new features are released regularly.
-3. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
+3. Sign in to your Datadog account.
    {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
 4. **Restart the IDE.**
 5. Confirm the Datadog MCP Server is available and the [tools](/bits_ai/mcp_server#available-tools) are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
@@ -170,7 +170,7 @@ To install the extension:
 
 1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
 2. Install the Datadog extension following [these instructions](/developers/ide_plugins/vscode/?tab=cursor#installation). If you have the extension installed already, make sure it's the latest version.
-3. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
+3. Sign in to your Datadog account.
 4. **Restart the IDE.**
 5. Confirm the Datadog MCP Server is available and the [tools](/bits_ai/mcp_server#available-tools) are listed: Open the chat panel, select agent mode, and click the **Configure Tools** button.
    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
@@ -280,15 +280,6 @@ For security, use a scoped API key and application key from a [service account][
 
 [1]: /account_management/api-app-keys/
 [2]: https://github.com/modelcontextprotocol/inspector
-[3]: https://www.anthropic.com/claude-code
-[4]: https://claude.ai/download
-[5]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
-[6]: https://www.cursor.com/
-[7]: https://github.com/block/goose
-[8]: https://kiro.dev/cli/
-[9]: https://code.visualstudio.com/
-[10]: https://cline.bot/
 [11]: /bits_ai/mcp_server#available-tools
-[12]: https://kiro.dev/
 [13]: /account_management/org_settings/service_accounts/
 [14]: https://modelcontextprotocol.io/specification/draft/basic/authorization

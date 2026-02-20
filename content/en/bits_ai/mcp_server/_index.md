@@ -42,7 +42,7 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 ## Requirements
 
-Datadog users must have the `MCP Read`[permission][18] to use the MCP Server for read-access and `MCP Write`[permission][18] for write access.
+Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access and `MCP Write` [permission][18] for write access.
 
 For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
 
@@ -57,7 +57,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup) only). For example:
 
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
@@ -330,7 +330,7 @@ You can view information about calls made by MCP Server tools in Datadog's [Audi
 
 ## Feedback
 
-The Datadog MCP Server is under significant development. During the Preview, use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
+The Datadog MCP Server is under significant development. Use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
 
 ## Further reading
 
