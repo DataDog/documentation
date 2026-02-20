@@ -367,7 +367,9 @@ Refer to the Protocol filter above to view variables specific to HTTP, DNS, SSL,
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
 
 {% alert level="tip" %}
-Review the [advanced notifications](/synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification) page for an example of how to use local variables in a notification.
+Review the [advanced notifications][1] page for an example of how to use local variables in a notification.
 {% /alert %}
 
 {% /if %}
+
+[1]: /synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification

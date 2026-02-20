@@ -17,7 +17,7 @@ Use these variables to access common test execution data such as failure message
 
 `{{synthetics.attributes.result.response.statusCode}}`
 : The HTTP status code (for example, `403`).
-: **Note:** Review the [conditional alerting](/synthetics/notifications/conditional_alerting/) page for an example of how to use this variable in a notification.
+: **Note:** Review the [conditional alerting][1] page for an example of how to use this variable in a notification.
 
 `{{synthetics.result.step_count}}`
 : Number of steps (for example, `4`).
@@ -28,3 +28,5 @@ Use these variables to access common test execution data such as failure message
 `{{tags}}`
 : Lists all the tags added to the synthetics test.
 : To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
+
+[1]: /synthetics/notifications/conditional_alerting/

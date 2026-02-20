@@ -126,6 +126,11 @@ Device information is not available for this test type. Device variables are onl
 <!-- Step details -->
 {% if equals($synthetics_variables, "step_details") %}
 
+This section covers step-level variables organized by category:
+
+- [Failed step information](#failed-step-information): Shortcuts for the step that caused a test failure.
+- [Step execution details](#step-execution-details): Metadata and results for each step, including extracted variable values.
+
 ### Failed step information
 
 Path: `synthetics.failed_step`
@@ -142,50 +147,15 @@ Failed step information is only available for Multistep API, Browser, and Mobile
 `{{synthetics.failed_step}}`
 : The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly.
 
-{% table %}
-* Shortcut {% colspan=2 %}
-* Test Type
-* Maps To
----
-* `{{synthetics.failed_step.name}}` {% colspan=2 %}
-* Multistep API
-* `{{synthetics.attributes.result.steps.<step-index>.name}}`
----
-* `{{synthetics.failed_step.description}}` {% colspan=2 %}
-* Browser, Mobile
-* `{{synthetics.attributes.result.steps.<step-index>.description}}`
-{% /table %}
+`{{synthetics.failed_step.name}}`
+: Multistep API shortcut for `{{synthetics.attributes.result.steps.<step-index>.name}}`
+
+`{{synthetics.failed_step.description}}`
+: Browser, Mobile shortcut for `{{synthetics.attributes.result.steps.<step-index>.description}}`
 
 {% alert level="tip" %}
-Review the [conditional alerting](/synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut) page for an example of how to use the `synthetics.failed_step.description` shortcut variable in a Browser Test notification.
+Review the [conditional alerting][1] page for an example of how to use the `synthetics.failed_step.description` shortcut variable in a Browser Test notification.
 {% /alert %}
-
-{% /if %}
-
-### Extracted variable values
-
-Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
-
-{% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
-{% alert level="info" %}
-**Note:** Extracted variable values at the step level are only available for Browser and Mobile tests. Select **Browser** or **Mobile** from the Test Type dropdown to see these variables.
-{% /alert %}
-{% /if %}
-
-{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
-
-These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
-
-For information on how to access the `<step-index>`, see the step summary section.
-
-`synthetics.attributes.result.steps.<step-index>.extractedValue.name`
-: Variable name
-
-`synthetics.attributes.result.steps.<step-index>.extractedValue.secure`
-: Whether the variable value is obfuscated
-
-`synthetics.attributes.result.steps.<step-index>.extractedValue.value`
-: Variable value (if step was successful)
 
 {% /if %}
 
@@ -280,7 +250,30 @@ These are step execution metadata and results containing detailed information ab
 `synthetics.attributes.variables.extracted.type`
 : Step type
 
-*Note: Follow regular API fields per subType*
+{% /if %}
+{% /tab %}
+
+{% tab label="Extracted values" %}
+Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
+
+{% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
+{% alert level="info" %}
+Extracted variable values are only available for Browser and Mobile tests. Select **Browser** or **Mobile** from the Test Type dropdown to see these variables.
+{% /alert %}
+{% /if %}
+{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
+These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
+
+For information on how to access the `<step-index>`, see the step summary section.
+
+`synthetics.attributes.result.steps.<step-index>.extractedValue.name`
+: Variable name
+
+`synthetics.attributes.result.steps.<step-index>.extractedValue.secure`
+: Whether the variable value is obfuscated
+
+`synthetics.attributes.result.steps.<step-index>.extractedValue.value`
+: Variable value (if step was successful)
 {% /if %}
 {% /tab %}
 
@@ -311,3 +304,5 @@ These are step execution metadata and results containing detailed information ab
 <!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
+
+[1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut

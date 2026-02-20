@@ -52,8 +52,10 @@ Use the step's unique identifier:
 {% /tabs %}
 
 {% alert level="tip" %}
-Review the [conditional alerting](/synthetics/notifications/conditional_alerting/) page for an example of how to use the `synthetics.attributes.result.step` variable in a Slack notification based on a failed step.
+Review the [conditional alerting][1] page for an example of how to use the `synthetics.attributes.result.step` variable in a Slack notification based on a failed step.
 {% /alert %}
+
+[1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step
 
 ### Accessing step properties
 

@@ -35,7 +35,7 @@ Use these variables to access test execution results, status, duration, and step
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
 
-For a complete list of API test error codes, see [API Testing Errors](/synthetics/api_tests/errors/). Review the [conditional alerting](/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code) page for an example of how to use the `synthetics.attributes.result.failure` variable in a notification.
+For a complete list of API test error codes, see [API Testing Errors][1]. Review the [conditional alerting][2] page for an example of how to use the `synthetics.attributes.result.failure` variable in a notification.
 {% /tab %}
 
 <!-- Count -->
@@ -58,3 +58,6 @@ For a complete list of API test error codes, see [API Testing Errors](/synthetic
 {% /tab %}
 <!-- end Count -->
 {% /tabs %}
+
+[1]: /synthetics/api_tests/errors/
+[2]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code
