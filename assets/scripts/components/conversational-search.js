@@ -91,6 +91,7 @@ class ConversationalSearch {
         this.messages = [];
         this.abortController = null;
         this.userCancelledRequest = false;
+        this.hasLoggedFirstOpen = false;
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
@@ -163,7 +164,7 @@ class ConversationalSearch {
     }
 
     bindEvents() {
-        this.floatButton.addEventListener('click', () => this.open());
+        this.floatButton.addEventListener('click', () => this.open('floating_button'));
         this.closeBtn.addEventListener('click', () => this.close());
         this.newChatBtn.addEventListener('click', () => this.newChat());
         this.overlay.addEventListener('click', () => this.close());
@@ -260,7 +261,17 @@ class ConversationalSearch {
         });
     }
 
-    open() {
+    open(trigger = 'entry_button') {
+        if (!this.hasLoggedFirstOpen) {
+            this.logAction('Conversational Search Open', {
+                conversational_search: {
+                    action: 'open_first_time',
+                    trigger
+                }
+            });
+            this.hasLoggedFirstOpen = true;
+        }
+
         this.isOpen = true;
         this.sidebar.classList.add('open');
         this.overlay.classList.add('open');
@@ -799,21 +810,19 @@ class ConversationalSearch {
                 {
                     const opposite = action === 'thumbs-up' ? 'thumbs-down' : 'thumbs-up';
                     const oppositeBtn = button.parentElement.querySelector(`[data-action="${opposite}"]`);
-                    const isUndo = button.classList.contains('active');
+                    const alreadyActive = button.classList.contains('active');
 
-                    if (isUndo) {
-                        button.classList.remove('active');
-                        this.showFeedbackTooltip(button, 'Feedback removed');
-                    } else {
-                        button.classList.add('active');
-                        if (oppositeBtn) oppositeBtn.classList.remove('active');
-                        this.showFeedbackTooltip(button, 'Thanks for feedback!');
-                    }
+                    // Keep feedback idempotent: second click on same choice does nothing.
+                    if (alreadyActive) return;
+
+                    button.classList.add('active');
+                    if (oppositeBtn) oppositeBtn.classList.remove('active');
+                    this.showFeedbackTooltip(button, 'Thanks for feedback!');
 
                     this.logAction('Conversational Search Feedback', {
                         conversational_search: {
                             action: 'feedback',
-                            feedback: isUndo ? 'cleared' : (action === 'thumbs-up' ? 'positive' : 'negative'),
+                            feedback: action === 'thumbs-up' ? 'positive' : 'negative',
                             conversation_id: this.conversationId
                         }
                     });
@@ -875,20 +884,29 @@ class ConversationalSearch {
     }
 
     logAction(message, data) {
+        const conversationalSearchData = {
+            docs_ai: true,
+            ...(data?.conversational_search || {})
+        };
+        const payload = {
+            ...data,
+            conversational_search: conversationalSearchData
+        };
+
         // Always log to console for debugging in dev/preview
-        console.log('[Conversational Search] Action:', message, data);
+        console.log('[Conversational Search] Action:', message, payload);
 
         if (window.DD_LOGS?.logger) {
-            console.log('DD_LOGS.logger found, logging message:', message, data);
-            window.DD_LOGS.logger.info(message, data, 'info');
+            console.log('DD_LOGS.logger found, logging message:', message, payload);
+            window.DD_LOGS.logger.info(message, payload, 'info');
         } else {
-            console.warn('DD_LOGS.logger not found, could not log message:', message, data);
+            console.warn('DD_LOGS.logger not found, could not log message:', message, payload);
         }
         
         if (window.DD_RUM) {
-            window.DD_RUM.addAction('conversational_search_action', data.conversational_search);
+            window.DD_RUM.addAction('conversational_search_action', conversationalSearchData);
         } else {
-            console.warn('DD_RUM not found, could not send RUM action:', data.conversational_search);
+            console.warn('DD_RUM not found, could not send RUM action:', conversationalSearchData);
         }
     }
 }
@@ -907,9 +925,9 @@ function initConversationalSearch() {
 }
 
 // Open the modal and send a query (for external use)
-function askDocsAI(query) {
+function askDocsAI(query, options = {}) {
     if (IS_CONVERSATIONAL_SEARCH_ENABLED && conversationalSearchInstance) {
-        conversationalSearchInstance.open();
+        conversationalSearchInstance.open(options.source || 'entry_button');
         if (query && query.trim()) {
             conversationalSearchInstance.input.value = query;
             // Small delay to ensure modal is fully open

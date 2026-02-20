@@ -11,6 +11,21 @@ initializeFeatureFlags().then((client) => {
     IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
 });
 
+const logDocsAIEvent = (message, payload) => {
+    const eventPayload = {
+        docs_ai: true,
+        ...payload
+    };
+
+    if (window.DD_LOGS?.logger) {
+        window.DD_LOGS.logger.info(message, { docs_ai_event: eventPayload }, 'info');
+    }
+
+    if (window.DD_RUM) {
+        window.DD_RUM.addAction('docs_ai_search_action', eventPayload);
+    }
+};
+
 const setAskAISuggestionContent = (contentElement, query) => {
     if (!contentElement) return;
     const trimmedQuery = query?.trim() || '';
@@ -161,8 +176,14 @@ const renderHits = (renderOptions, isFirstRender) => {
                 e.preventDefault();
                 const queryItem = aiLink.closest('.ais-Hits-ai-suggestion');
                 const query = queryItem?.dataset?.query || '';
+                logDocsAIEvent('Docs AI Search Suggestion Click', {
+                    action: 'search_suggestion_clicked',
+                    source: 'searchbar_dropdown',
+                    query,
+                    query_length: query.length
+                });
                 if (window.askDocsAI) {
-                    window.askDocsAI(query);
+                    window.askDocsAI(query, { source: 'search_suggestion' });
                 }
             }
         });
