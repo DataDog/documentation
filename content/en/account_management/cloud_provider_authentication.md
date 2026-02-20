@@ -232,7 +232,7 @@ Cloud-based authentication for the Agent allows you to authenticate your Agent u
 - Version `7.78.0` or later of the Datadog Agent.
 - The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
-- The `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
+- Your account has the `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
 
 Setting up cloud-based authentication for the Agent involves two parts:
 1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
