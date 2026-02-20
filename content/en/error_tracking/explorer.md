@@ -98,7 +98,7 @@ Click on any issue to open the issue panel and see more information about it.
 
 The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand its lifecycle: first and last occurrence dates, total count, as well as the count over time for the given issue.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
 
 The information shown in the issue panel varies depending on the error source. For example, an issue created from APM errors shows the error span tags, such as the resource or operation name, with direct access to the related trace or to logs that are linked to it.
 

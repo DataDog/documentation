@@ -44,7 +44,7 @@ Cliquez sur un problème pour l'examiner plus en détail dans un volet dédié.
 
 Les principales informations dont vous avez besoin pour dépanner un problème se trouvent dans la partie supérieure du volet. Elles vous permettent de comprendre son cycle de vie : première et dernière occurrence, nombre total d'occurrences et évolution du nombre d'occurrences au fil du temps.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Le bas du volet relatif aux problèmes du suivi des erreurs proposant des exemples d'erreurs" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Le bas du volet relatif aux problèmes du suivi des erreurs proposant des exemples d'erreurs" style="width:80%;" >}}
 
 Les informations affichées dans le volet relatif aux problèmes varient en fonction de la source de l'erreur. Par exemple, un problème créé à partir d'erreurs de l'APM affiche les tags de span de l'erreur, comme le nom de la ressource ou de l'opération, avec un accès direct à la trace ou aux logs associés.
 

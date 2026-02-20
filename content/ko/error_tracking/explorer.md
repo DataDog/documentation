@@ -44,7 +44,7 @@ title: 오류 추적 탐색기
 
 문제를 해결할 때 필요한 높은 수준의 세부 정보는 패널 상단에서 찾을 수 있습니다. 여기에서 특정 이슈의 최초 및 마지막 발생 날짜, 총 횟수, 시간 경과에 따른 횟수 등 수명 주기를 이해할 수 있습니다.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="오류 샘플을 제공하는 오류 추적 이슈 패널의 하단 부분" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="오류 샘플을 제공하는 오류 추적 이슈 패널의 하단 부분" style="width:80%;" >}}
 
 이슈 패널에 표시되는 정보는 오류 원인에 따라 다릅니다. 예를 들어 애플리케이션 성능 모니터링(APM) 오류에서 생성된 이슈에는 리소스 또는 작업 이름과 같은 오류 스팬(span) 태그 가 표시되며, 관련 트레이스 또는 연결된 로그에 직접 액세스할 수 있습니다.
 

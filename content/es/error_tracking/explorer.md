@@ -98,7 +98,7 @@ Haz clic en cualquier incidente para abrir el panel de incidentes y ver más inf
 
 Los detalles claros que necesitas para solucionar un incidente se encuentran en la parte superior del panel. Desde allí, podrás entender su ciclo de vida: las fechas del primero y el último caso, el recuento total, así como el recuento a lo largo del tiempo para el incidente en cuestión.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Parte inferior del panel de incidentes de Error Tracking que ofrece ejemplos de error" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Parte inferior del panel de incidentes de Error Tracking que ofrece ejemplos de error" style="width:80%;" >}}
 
 La información mostrada en el panel de incidentes varía en función de la fuente del error. Por ejemplo, un incidente creado a partir de errores APM muestra etiquetas del tramo de error, como el recurso o el nombre de la operación, con acceso directo a la traza relacionada o a los logs vinculados a ella.
 
