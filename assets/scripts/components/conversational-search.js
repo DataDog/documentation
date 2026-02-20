@@ -54,6 +54,7 @@ const MODEL_4_1_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
 const MODEL_5_2_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-5.2';
 const DEFAULT_CONVERSATION_MODEL_ID = MODEL_5_2_ID;
 const USE_LEGACY_MODEL_FLAG_KEY = 'docs_conv_search_use_gpt_4_1';
+const feedbackHideTimers = new WeakMap();
 
 // Embedding field to use for semantic search
 const EMBEDDING_FIELD = 'embedding';
@@ -78,7 +79,8 @@ const typesenseClient = new Typesense.Client({
         }
     ],
     apiKey: typesenseConfig.public_key,
-    connectionTimeoutSeconds: 10
+    // Streaming conversational responses can legitimately take longer.
+    connectionTimeoutSeconds: 45
 });
 
 class ConversationalSearch {
@@ -88,6 +90,7 @@ class ConversationalSearch {
         this.isLoading = false;
         this.messages = [];
         this.abortController = null;
+        this.userCancelledRequest = false;
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
@@ -286,6 +289,7 @@ class ConversationalSearch {
     newChat() {
         // Abort any ongoing request
         if (this.abortController) {
+            this.userCancelledRequest = true;
             this.abortController.abort();
             this.abortController = null;
         }
@@ -643,6 +647,7 @@ class ConversationalSearch {
         if (!query || this.isLoading) return;
 
         this.isLoading = true;
+        this.userCancelledRequest = false;
         this.input.value = '';
         this.input.style.height = 'auto';
         this.sendBtn.disabled = true;
@@ -656,7 +661,7 @@ class ConversationalSearch {
         try {
             await this.streamConversation(query, responseContainer);
         } catch (error) {
-            if (error.name === 'AbortError') {
+            if (error.name === 'AbortError' && this.userCancelledRequest) {
                 responseContainer.textContent = 'Request cancelled.';
             } else {
                 console.error('Conversational search error:', error);
@@ -666,6 +671,7 @@ class ConversationalSearch {
             this.isLoading = false;
             this.sendBtn.disabled = false;
             this.abortController = null;
+            this.userCancelledRequest = false;
             this.input.focus();
         }
     }
@@ -689,168 +695,80 @@ class ConversationalSearch {
             ]
         };
 
-        // Build query params - conversation params go in the URL
-        const queryParams = new URLSearchParams({
-            conversation: 'true',
+        // Use the Typesense client for streaming so node failover uses configured HA nodes.
+        const commonSearchParams = {
+            conversation: true,
             conversation_model_id: this.selectedModelId,
             q: query,
-            conversation_stream: 'true'
-        });
+            conversation_stream: true
+        };
 
         // Add conversation_id for follow-up questions
         if (this.conversationId) {
-            queryParams.set('conversation_id', this.conversationId);
+            commonSearchParams.conversation_id = this.conversationId;
         }
 
-        // Build the URL for streaming
-        const host = `${typesenseConfig.host}-1.a1.typesense.net`;
-        const url = `https://${host}/multi_search?${queryParams.toString()}`;
+        let accumulatedMessage = '';
+        let lastRenderTime = 0;
+        const RENDER_THROTTLE = 50; // Render markdown every 50ms max
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/event-stream',
-                'X-TYPESENSE-API-KEY': typesenseConfig.public_key
-            },
-            body: JSON.stringify(searchBody),
-            signal: this.abortController.signal
+        responseContainer.innerHTML = '';
+
+        const response = await typesenseClient.apiCall.post('/multi_search', searchBody, commonSearchParams, {}, {
+            abortSignal: this.abortController.signal,
+            isStreamingRequest: true,
+            streamConfig: {
+                onChunk: (chunk) => {
+                    if (chunk?.conversation_id && !this.conversationId) {
+                        this.conversationId = chunk.conversation_id;
+                    }
+
+                    if (chunk?.message !== undefined) {
+                        accumulatedMessage += chunk.message;
+
+                        const now = Date.now();
+                        if (now - lastRenderTime > RENDER_THROTTLE) {
+                            const { displayMarkdown, sources } = this.extractSources(accumulatedMessage);
+                            responseContainer.innerHTML = this.inlineRefChips(marked.parse(displayMarkdown));
+                            if (sources.length > 0) {
+                                responseContainer.appendChild(this.buildSourceCards(sources));
+                            }
+                            this.injectCodeCopyButtons(responseContainer);
+                            lastRenderTime = now;
+                            this.scrollToBottom();
+                        }
+                    }
+                },
+                onError: (error) => {
+                    console.error('Typesense streaming error:', error);
+                }
+            }
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Typesense error:', errorText);
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
+        if (finalConversationId) {
+            this.conversationId = finalConversationId;
         }
 
-        // Stream the SSE response
-        if (response.body) {
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let accumulatedMessage = '';
-            let buffer = '';
-            let lastRenderTime = 0;
-            const RENDER_THROTTLE = 50; // Render markdown every 50ms max
+        // Render markdown after streaming completes
+        if (accumulatedMessage) {
+            responseContainer.innerHTML = this.renderMessageWithSources(accumulatedMessage);
+            this.injectCodeCopyButtons(responseContainer);
+            this.addMessageActions(responseContainer.parentElement, query, accumulatedMessage);
+            this.scrollToBottom();
 
-            responseContainer.innerHTML = '';
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                buffer += decoder.decode(value, { stream: true });
-                
-                // Process complete SSE lines
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || ''; // Keep incomplete line in buffer
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const data = line.slice(6).trim();
-                        
-                        // Check for end of stream
-                        if (data === '[DONE]') {
-                            continue;
-                        }
-
-                        try {
-                            const parsed = JSON.parse(data);
-                            
-                            // Extract conversation_id from first chunk
-                            if (parsed.conversation_id && !this.conversationId) {
-                                this.conversationId = parsed.conversation_id;
-                            }
-
-                            // Streaming chunks have incremental message content
-                            if (parsed.message !== undefined) {
-                                accumulatedMessage += parsed.message;
-                                
-                                // Render markdown progressively (throttled)
-                                const now = Date.now();
-                                if (now - lastRenderTime > RENDER_THROTTLE) {
-                                    const { displayMarkdown, sources } = this.extractSources(accumulatedMessage);
-                                    responseContainer.innerHTML = this.inlineRefChips(marked.parse(displayMarkdown));
-                                    if (sources.length > 0) {
-                                        responseContainer.appendChild(this.buildSourceCards(sources));
-                                    }
-                                    this.injectCodeCopyButtons(responseContainer);
-                                    lastRenderTime = now;
-                                    this.scrollToBottom();
-                                }
-                            }
-
-                            // Final chunk contains full conversation object
-                            if (parsed.conversation) {
-                                this.conversationId = parsed.conversation.conversation_id;
-                            }
-
-                        } catch (e) {
-                            // Skip malformed JSON chunks
-                            console.debug('Skipping malformed chunk:', data);
-                        }
-                    }
+            // Log successful response with latency and full content
+            const latency = Date.now() - startTime;
+            this.logAction('Conversational Search Response', {
+                conversational_search: {
+                    action: 'response_received',
+                    response_length: accumulatedMessage.length,
+                    conversation_id: this.conversationId,
+                    latency_ms: latency
                 }
-            }
-
-            // Render markdown after streaming completes
-            if (accumulatedMessage) {
-                responseContainer.innerHTML = this.renderMessageWithSources(accumulatedMessage);
-                this.injectCodeCopyButtons(responseContainer);
-                this.addMessageActions(responseContainer.parentElement, query, accumulatedMessage);
-                this.scrollToBottom();
-                
-                // Log successful response with latency and full content
-                const latency = Date.now() - startTime;
-                this.logAction('Conversational Search Response', {
-                    conversational_search: {
-                        action: 'response_received',
-                        response_length: accumulatedMessage.length,
-                        conversation_id: this.conversationId,
-                        latency_ms: latency
-                    }
-                });
-            } else {
-                responseContainer.textContent = 'No response received. Please try again.';
-            }
+            });
         } else {
-            // Fallback for browsers that don't support streaming
-            const text = await response.text();
-            const lines = text.split('\n');
-            let fullAnswer = '';
-
-            for (const line of lines) {
-                if (line.startsWith('data: ') && line.slice(6).trim() !== '[DONE]') {
-                    try {
-                        const parsed = JSON.parse(line.slice(6));
-                        if (parsed.message) {
-                            fullAnswer += parsed.message;
-                        }
-                        if (parsed.conversation_id) {
-                            this.conversationId = parsed.conversation_id;
-                        }
-                    } catch (e) {
-                        // Skip malformed lines
-                    }
-                }
-            }
-
-            if (fullAnswer) {
-                responseContainer.innerHTML = this.renderMessageWithSources(fullAnswer);
-                this.injectCodeCopyButtons(responseContainer);
-                this.addMessageActions(responseContainer.parentElement, query, fullAnswer);
-                
-                const latency = Date.now() - startTime;
-                this.logAction('Conversational Search Response', {
-                    conversational_search: {
-                        action: 'response_received',
-                        response_length: fullAnswer.length,
-                        conversation_id: this.conversationId,
-                        latency_ms: latency
-                    }
-                });
-            } else {
-                responseContainer.textContent = 'No response received.';
-            }
+            responseContainer.textContent = 'No response received. Please try again.';
         }
     }
 
@@ -944,11 +862,17 @@ class ConversationalSearch {
         feedbackEl.textContent = message;
         feedbackEl.classList.add(isError ? 'feedback-error' : 'feedback-success');
 
-        clearTimeout(feedbackEl._hideTimer);
-        feedbackEl._hideTimer = setTimeout(() => {
+        const existingHideTimer = feedbackHideTimers.get(feedbackEl);
+        if (existingHideTimer) {
+            clearTimeout(existingHideTimer);
+        }
+
+        const hideTimer = setTimeout(() => {
             feedbackEl.classList.remove('feedback-success', 'feedback-error');
             feedbackEl.textContent = '';
+            feedbackHideTimers.delete(feedbackEl);
         }, 2000);
+        feedbackHideTimers.set(feedbackEl, hideTimer);
     }
 
     logAction(message, data) {

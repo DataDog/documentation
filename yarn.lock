@@ -6031,17 +6031,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.0":
-  version: 1.7.7
-  resolution: "axios@npm:1.7.7"
-  dependencies:
-    follow-redirects: "npm:^1.15.6"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10/7f875ea13b9298cd7b40fd09985209f7a38d38321f1118c701520939de2f113c4ba137832fe8e3f811f99a38e12c8225481011023209a77b0c0641270e20cde1
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.6.8":
   version: 1.7.2
   resolution: "axios@npm:1.7.2"
@@ -7774,8 +7763,8 @@ __metadata:
     tiny-async-pool: "npm:^1.3.0"
     tomlify-j0.4: "npm:^3.0.0"
     traverse: "npm:0.6.8"
-    typesense: "npm:^1.8.2"
-    typesense-instantsearch-adapter: "npm:^2.8.0"
+    typesense: "npm:^3.0.1"
+    typesense-instantsearch-adapter: "npm:^2.9.0"
     typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v2.0.0.tgz"
     yaml-lint: "npm:^1.7.0"
   languageName: unknown
@@ -17019,14 +17008,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-instantsearch-adapter@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "typesense-instantsearch-adapter@npm:2.8.0"
+"typesense-instantsearch-adapter@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "typesense-instantsearch-adapter@npm:2.9.0"
   dependencies:
-    typesense: "npm:^1.7.2"
+    typesense: "npm:^2.1.0-1"
   peerDependencies:
-    "@babel/runtime": ^7.17.2
-  checksum: 10/eeb57f5c9481c15d7833c8ce2cc495b3a91f4673b442131c1ed57a5c2b3dffc3382589ff0fb3ebd0ac450054e18c2b30b18fcdd09630df4ee8cc7c88ee3be3dd
+    "@babel/runtime": ^7.24.1
+  checksum: 10/10629e318052c6aca9b7a3dfdd0b4a9231b6fb219028363bf6a6a621f33551948041852304de0b4d0021cb97c8c2ff59c4d3e5c3092539c3b160c0aa1e0bed9e
   languageName: node
   linkType: hard
 
@@ -17044,15 +17033,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense@npm:^1.7.2, typesense@npm:^1.8.2":
-  version: 1.8.2
-  resolution: "typesense@npm:1.8.2"
+"typesense@npm:^2.1.0-1":
+  version: 2.1.0
+  resolution: "typesense@npm:2.1.0"
   dependencies:
-    axios: "npm:^1.6.0"
+    axios: "npm:^1.8.4"
     loglevel: "npm:^1.8.1"
+    tslib: "npm:^2.6.2"
   peerDependencies:
     "@babel/runtime": ^7.23.2
-  checksum: 10/a9630454078a2071022914bb79a56c1bf568c8f478d55e28f8e3884237c0c51b828c2728e8ae30f12cb5fe4c3468e5cb0e0caf6627ba0e4732d315c6705766ca
+  checksum: 10/f49050a398201b1b2cc4fb803195bf7e23f28563d6c20b8bec37cce974a9f98cf446d0c45ae37a7af9151ab5140c6f66da10c06d01a56dd8991ad77794bdd93b
   languageName: node
   linkType: hard
 

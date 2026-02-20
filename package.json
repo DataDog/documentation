@@ -80,8 +80,8 @@
         "tiny-async-pool": "^1.3.0",
         "tomlify-j0.4": "^3.0.0",
         "traverse": "0.6.8",
-        "typesense": "^1.8.2",
-        "typesense-instantsearch-adapter": "^2.8.0",
+        "typesense": "^3.0.1",
+        "typesense-instantsearch-adapter": "^2.9.0",
         "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v2.0.0.tgz",
         "yaml-lint": "^1.7.0"
     },
