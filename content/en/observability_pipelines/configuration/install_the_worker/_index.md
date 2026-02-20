@@ -169,7 +169,8 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 
 - A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
   This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
-- A non-headless service for you to address the Worker and load balance traffic for internal and external cluster communications.
+- A ClusterIP service that provides a single virtual IP and DNS name for the Worker.  
+  This enables load balancing across Worker Pods for internal cluster traffic.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
