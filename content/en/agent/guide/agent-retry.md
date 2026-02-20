@@ -101,7 +101,6 @@ The Logs Agent is designed to guarantee log delivery during transmission. When a
 
 #### Log buffer limits
 - HTTP logs:
-    - The Agent stores up to ~20 MB of compressed payloads in memory
     - Not configurable
 
 - TCP logs:
