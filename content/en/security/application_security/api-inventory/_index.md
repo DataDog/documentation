@@ -112,6 +112,27 @@ What actions you take depend on each of the attack surfaces:
 - **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII, and limit access to necessary services.
 - **Unauthenticated endpoint:** If the endpoint is not intentionally public, enforce authentication and update service configurations.
 
+#### Static Endpoint Discovery
+
+<div class="alert alert-info">Static Endpoint Discovery is in Preview.</div>
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
+The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
+
+To use this data source, configure the [Source Code Integration][16] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
+
+| Language | Framework |
+|----------|-----------|
+| Python   | FastAPI   |
+| Java     | Spring    |
+| Go       | Beego, Chi, Echo, Fiber, Gin, Gorilla Mux, fasthttp, go-zero |
+| C#       | ASP.NET Core MVC |
+
+To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
+
 ### Processing sensitive data
 
 [App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
@@ -270,3 +291,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
 [14]: https://app.datadoghq.com/security/appsec/policies/scanners
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
+[16]: /integrations/guide/source-code-integration/

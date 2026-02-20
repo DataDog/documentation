@@ -79,6 +79,10 @@
     "name": "Case Management Type",
     "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "change-management": {
+    "name": "Change Management",
+    "description": "View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
   "cloud-authentication": {
     "name": "Cloud Authentication",
     "description": "Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API."
@@ -178,6 +182,10 @@
   "incidents": {
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
+  },
+  "integrations": {
+    "name": "Integrations",
+    "description": "The Integrations API is used to list available integrations\nand retrieve information about their installation status."
   },
   "jira-integration": {
     "name": "Jira Integration",
@@ -281,7 +289,7 @@
   },
   "roles": {
     "name": "Roles",
-    "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
+    "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).\n\nRoles can also be managed in bulk through the Datadog UI, which provides\nthe capability to assign a single permission to multiple roles simultaneously."
   },
   "rum-audience-management": {
     "name": "Rum Audience Management",
