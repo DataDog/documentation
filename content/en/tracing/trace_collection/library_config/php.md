@@ -26,6 +26,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 The PHP tracer can be configured using environment variables and INI settings.
 
 INI settings can be configured globally, for example, in the `php.ini` file, or for a specific web server or virtual host.

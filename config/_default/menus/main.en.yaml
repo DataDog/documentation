@@ -4470,6 +4470,11 @@ menu:
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
       weight: 1603
+    - name: SDK Configurations
+      url: tracing/troubleshooting/sdk_configurations
+      identifier: tracing_troubleshooting_sdk_configurations
+      parent: tracing_troubleshooting
+      weight: 1604
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits

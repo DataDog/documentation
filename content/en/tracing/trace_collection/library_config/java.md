@@ -20,6 +20,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 All configuration options below have system property and environment variable equivalents.
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
