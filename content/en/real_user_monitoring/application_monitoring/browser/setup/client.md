@@ -358,7 +358,7 @@ After completing initialization, confirm that the SDK is sending data to Datadog
 
 #### View your data in Datadog
 
-After the SDK sends its first events, your application’s status changes from **Pending** to active on the [**Digital Experience > RUM Applications**][1] page. This typically takes under two minutes.
+After the SDK sends its first events, your application's status changes from **Pending** to active on the [**Digital Experience > RUM Applications**][1] page. This typically takes under two minutes.
 
 From there:
 - See a summary of what the SDK collects automatically in [Data Collected][8].
