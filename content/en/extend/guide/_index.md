@@ -22,7 +22,7 @@ cascade:
     {{< nextlink href="extend/guide/query-the-infrastructure-list-via-the-api">}}Query the Infrastructure List with the API{{< /nextlink >}}
     {{< nextlink href="getting_started/api/">}}Using Postman With Datadog APIs{{< /nextlink >}}
     {{< nextlink href="extend/guide/calling-on-datadog-s-api-with-the-webhooks-integration">}}Calling on Datadog's API with the Webhooks Integration{{< /nextlink >}}
-    {{< nextlink href="extend/guide/dogshell-quickly-use-datadog-s-api-from-terminal-shell">}}Dogshell{{< /nextlink >}}
+    {{< nextlink href="extend/guide/dogshell">}}Dogshell{{< /nextlink >}}
     {{< nextlink href="extend/guide/dogwrap">}}Call commands and generate events from their results.{{< /nextlink >}}
     {{< nextlink href="extend/guide/query-data-to-a-text-file-step-by-step">}}Query data to a text file, step by step{{< /nextlink >}}
     {{< nextlink href="extend/guide/custom-python-package">}}Adding a custom Python package to the Agent{{< /nextlink >}}
