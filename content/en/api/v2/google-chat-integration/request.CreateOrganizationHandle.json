@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Example-Google-Chat-Integration",
+      "space_resource_name": "spaces/AAQA-zFIks8"
+    }
+  },
+  "type": "google-chat-organization-handle"
+}
