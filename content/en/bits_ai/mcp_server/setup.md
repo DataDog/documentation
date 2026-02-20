@@ -43,20 +43,13 @@ You can connect Claude Code to the Datadog MCP Server using remote authenticatio
 
 **Remote authentication**
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][site]. For example, if you're using `app.datadoghq.com`, use the US1 endpoint.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][site]. The endpoint updates automatically based on the site selected in the region selector at the top of the documentation.
 
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
+**MCP Server endpoint:** `{{< region-param key="mcp_server_endpoint" code="true" >}}`
 
-* **Command line**: Run (use the endpoint for your site from the table above):
+* **Command line**: Run (use the endpoint for your site from above):
   ```bash
-  claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
+  claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" code="true" >}}
   ```
 
 * **Configuration file**: Add to `~/.claude.json`:
@@ -65,7 +58,7 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
     "mcpServers": {
       "datadog": {
         "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+        "url": "{{< region-param key="mcp_server_endpoint" code="true" >}}"
       }
     }
   }
@@ -131,18 +124,18 @@ Claude Desktop has limited support for remote authentication. Use **local binary
 
 {{% tab "Codex" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][site]. For example, for US1 use `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`. See the endpoint table in the [Claude Code](#claude-code) tab for all sites.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][site]. The endpoint updates automatically based on the site selected in the region selector at the top of the documentation: `{{< region-param key="mcp_server_endpoint" code="true" >}}`
 
 Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site.
 
-Example JSON-style configuration (US1):
+Example configuration:
 
 ```json
 {
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      "url": "{{< region-param key="mcp_server_endpoint" code="true" >}}"
     }
   }
 }
@@ -174,16 +167,7 @@ The following clients can connect to the Datadog MCP Server: [Goose][9], [Kiro][
 
 **Remote authentication**
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][site]:
-
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][site]. The endpoint updates automatically based on the site selected in the region selector at the top of the documentation: `{{< region-param key="mcp_server_endpoint" code="true" >}}`
 
 Add the Datadog MCP Server to your client's configuration using the HTTP transport and the endpoint above. Example config file locations:
 
@@ -192,14 +176,14 @@ Add the Datadog MCP Server to your client's configuration using the HTTP transpo
 | Gemini CLI | `~/.gemini/settings.json` |
 | Kiro CLI | `~/.kiro/settings/mcp.json` |
 
-Example JSON configuration (US1):
+Example configuration:
 
 ```json
 {
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      "url": "{{< region-param key="mcp_server_endpoint" code="true" >}}"
     }
   }
 }
@@ -255,7 +239,7 @@ The MCP Server uses OAuth 2.0 for [authentication][auth]. If you cannot go throu
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+      "url": "{{< region-param key="mcp_server_endpoint" code="true" >}}",
       "headers": {
           "DD_API_KEY": "<YOUR_API_KEY>",
           "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
@@ -274,7 +258,7 @@ For security, use a scoped API key and application key from a [service account][
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
-3. For **URL**, enter the MCP Server endpoint for your regional Datadog site (for example, for US1: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`). See the endpoint table in the tabs above for other sites.
+3. For **URL**, enter the MCP Server endpoint for your regional Datadog site: `{{< region-param key="mcp_server_endpoint" code="true" >}}` (updates based on the region selector at the top of the documentation).
 4. Click **Connect**, then go to **Tools** > **List Tools**.
 5. Check if the [available tools][20] appear.
 
