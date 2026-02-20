@@ -1,16 +1,16 @@
 ---
 aliases:
 - /fr/security/cloud_security_management/agentless_scanning/compatibility
-title: Compatibilité du scanning sans Agent
+title: Compatibilité d'Agentless Scanning
 ---
 
 ## Disponibilité
 
-Le scanning sans Agent est pris en charge sur AWS, Azure et GCP. Oracle Cloud Infrastructure (OCI) n'est pas encore pris en charge.
+Agentless Scanning est pris en charge sur AWS, Azure et GCP. Oracle Cloud Infrastructure (OCI) n'est pas encore pris en charge.
 
 Cette fonctionnalité est disponible dans tous les datacenters commerciaux Datadog. GovCloud n'est pas pris en charge.
 
-Le tableau suivant fournit un résumé des technologies de scanning sans Agent par rapport à leurs composants correspondants pour chaque fournisseur de cloud pris en charge :
+Le tableau suivant fournit un résumé des technologies de Agentless Scanning par rapport à leurs composants correspondants pour chaque fournisseur de cloud pris en charge :
 
 | Composant                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             | GCP                                                                                                                                                                             |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -68,7 +68,7 @@ Les registres d'images de conteneur suivants sont pris en charge pour les scans 
 - Amazon ECR public
 - Amazon ECR privé
 
-**Remarque** : le scanning d'images de conteneur à partir du registre n'est pris en charge que si vous avez installé le scanning sans Agent avec :
+**Remarque** : le scanning d'images de conteneur à partir du registre n'est pris en charge que si vous avez installé Agentless Scanning avec :
   - Cloudformation Integrations >= v2.0.8
   - Terraform Agentless Module >= v0.11.7
 
@@ -79,7 +79,7 @@ Les runtimes de conteneur suivants sont pris en charge :
 - containerd : v1.5.6 ou version ultérieure
 - Docker
 
-**Remarque pour les observations de conteneur** : le scanning sans Agent nécessite des couches d'images de conteneur non compressées. Comme solution de contournement, vous pouvez définir l'option de configuration `discard_unpacked_layers=false` dans le fichier de configuration de containerd.
+**Remarque pour les observations de conteneur** : Agentless Scanning nécessite des couches d'images de conteneur non compressées. Comme solution de contournement, vous pouvez définir l'option de configuration `discard_unpacked_layers=false` dans le fichier de configuration de containerd.
 
 [1]: https://secdb.alpinelinux.org/
 [2]: https://packages.wolfi.dev/os/security.json

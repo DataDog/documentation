@@ -6,22 +6,22 @@ further_reading:
 - link: /security/vulnerabilities
   tag: Documentation
   text: En savoir plus sur les vulnérabilités de Cloud Security
-title: Scanning sans Agent Cloud Security
+title: Agentless Scanning Cloud Security
 ---
 
 ## Section Overview
 
-Le scanning sans Agent offre une visibilité sur les vulnérabilités qui existent dans votre infrastructure cloud, sans nécessiter l'installation de l'Agent Datadog. Datadog recommande d'activer le scanning sans Agent comme première étape pour obtenir une visibilité complète sur vos ressources cloud, puis d'installer l'Agent Datadog sur vos ressources principales au fil du temps pour un contexte de sécurité et d'observabilité plus approfondi. 
+Agentless Scanning offre une visibilité sur les vulnérabilités qui existent dans votre infrastructure cloud, sans nécessiter l'installation de l'Agent Datadog. Datadog recommande d'activer Agentless Scanning comme première étape pour obtenir une visibilité complète sur vos ressources cloud, puis d'installer l'Agent Datadog sur vos ressources principales au fil du temps pour un contexte de sécurité et d'observabilité plus approfondi. 
 
 ## Fonctionnement
 
-Après avoir [configuré le scanning sans Agent][1] pour vos ressources, Datadog planifie des scans automatisés toutes les 12 heures via la [Configuration à distance][2]. Lors d'un cycle de scan, les scanners sans Agent recueillent les dépendances du code Lambda et créent des instantanés de vos instances de VM. Avec ces instantanés, les scanners sans Agent scannent, génèrent et transmettent une liste de paquets à Datadog pour rechercher les vulnérabilités, ainsi que les dépendances du code Lambda. Lorsque les scans d'un instantané sont terminés, l'instantané est supprimé. Aucune information confidentielle ou personnelle privée n'est jamais transmise en dehors de votre infrastructure. 
+Après avoir [configuré Agentless Scanning][1] pour vos ressources, Datadog planifie des scans automatisés toutes les 12 heures via la [Configuration à distance][2]. Lors d'un cycle de scan, les Agentless scanners recueillent les dépendances du code Lambda et créent des instantanés de vos instances de VM. Avec ces instantanés, les Agentless scanners scannent, génèrent et transmettent une liste de paquets à Datadog pour rechercher les vulnérabilités, ainsi que les dépendances du code Lambda. Lorsque les scans d'un instantané sont terminés, l'instantané est supprimé. Aucune information confidentielle ou personnelle privée n'est jamais transmise en dehors de votre infrastructure. 
 
-Si vous avez configuré des [filtres d'évaluation Cloud Security][15], le scanning sans Agent respecte ces filtres et scanne uniquement les ressources qui correspondent aux critères configurés.
+Si vous avez configuré des [filtres d'évaluation Cloud Security][15], Agentless Scanning respecte ces filtres et scanne uniquement les ressources qui correspondent aux critères configurés.
 
-Le diagramme suivant illustre le fonctionnement du scanning sans Agent :
+Le diagramme suivant illustre le fonctionnement d'Agentless Scanning :
 
-{{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagramme montrant le fonctionnement du scanning sans Agent" width="90%" >}}
+{{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagramme montrant le fonctionnement d'Agentless Scanning" width="90%" >}}
 
 1. Datadog planifie un scan et envoie les ressources à scanner via la Configuration à distance.
 
@@ -40,7 +40,7 @@ Le diagramme suivant illustre le fonctionnement du scanning sans Agent :
 
 ## Scanning à la demande
 
-Par défaut, le scanning sans Agent scanne automatiquement vos ressources toutes les 12 heures. Vous pouvez également déclencher un scan immédiat d'une ressource spécifique (host, conteneur, fonction Lambda ou compartiment S3) à l'aide de l'API de scanning à la demande.
+Par défaut, Agentless Scanning scanne automatiquement vos ressources toutes les 12 heures. Vous pouvez également déclencher un scan immédiat d'une ressource spécifique (host, conteneur, fonction Lambda ou compartiment S3) à l'aide de l'API de scanning à la demande.
 
 Cela est utile lorsque vous devez :
 - Vérifier qu'une vulnérabilité a été corrigée
@@ -50,7 +50,7 @@ Cela est utile lorsque vous devez :
 Pour plus d'informations, consultez la [documentation de l'API de scanning à la demande][14].
 
 ## Données envoyées à Datadog
-Le scanner sans Agent utilise le format [cycloneDX][3] d'OWASP pour transmettre une liste de paquets à Datadog. Aucune information confidentielle ou personnelle privée n'est jamais transmise en dehors de votre infrastructure.
+Agentless scanner utilise le format [cycloneDX][3] d'OWASP pour transmettre une liste de paquets à Datadog. Aucune information confidentielle ou personnelle privée n'est jamais transmise en dehors de votre infrastructure.
 
 Datadog n'envoie **pas** :
 - Les configurations des systèmes et paquets
@@ -73,15 +73,15 @@ Pour atténuer davantage ce risque, Datadog met en œuvre les mesures de sécuri
 - L'accès aux instances de scanner est étroitement contrôlé par l'utilisation de groupes de sécurité. Aucun accès entrant au scanner n'est autorisé, limitant ainsi la possibilité de compromettre l'instance.
 - Aucune information confidentielle ou personnelle privée n'est jamais transmise en dehors de votre infrastructure.
 
-## Scanning sans Agent avec des installations existantes de l'Agent
+## Agentless Scanning avec des installations existantes de l'Agent
 
 Lorsqu'il est installé, l'Agent Datadog offre une visibilité approfondie en temps réel sur les risques et vulnérabilités qui existent dans vos charges de travail cloud. Il est recommandé d'installer complètement l'Agent Datadog.
 
-Par conséquent, le scanning sans Agent exclut de ses scans les ressources sur lesquelles l'Agent Datadog est installé et configuré pour la [gestion des vulnérabilités][5]. De cette manière, Cloud Security offre une visibilité complète de votre paysage de risques sans annuler les avantages reçus de l'installation de l'Agent Datadog avec la gestion des vulnérabilités.
+Par conséquent, Agentless Scanning exclut de ses scans les ressources sur lesquelles l'Agent Datadog est installé et configuré pour la [gestion des vulnérabilités][5]. De cette manière, Cloud Security offre une visibilité complète de votre paysage de risques sans annuler les avantages reçus de l'installation de l'Agent Datadog avec la gestion des vulnérabilités.
 
-Le diagramme suivant illustre le fonctionnement du scanning sans Agent avec des installations existantes de l'Agent :
+Le diagramme suivant illustre le fonctionnement d'Agentless Scanning avec des installations existantes de l'Agent :
 
-{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagramme montrant le fonctionnement du scanning sans Agent lorsque l'Agent est déjà installé avec la gestion des vulnérabilités Cloud Security" width="90%" >}}
+{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagramme montrant le fonctionnement d'Agentless Scanning lorsque l'Agent est déjà installé avec la gestion des vulnérabilités Cloud Security" width="90%" >}}
 
 ## Scanning du stockage cloud
 
@@ -90,17 +90,17 @@ Le diagramme suivant illustre le fonctionnement du scanning sans Agent avec des 
 
 Si vous avez activé le [Sensitive Data Scanner][8], vous pouvez cataloguer et classifier les données sensibles dans vos compartiments Amazon S3.
 
-Le Sensitive Data Scanner recherche les données sensibles en déployant des [scanners sans Agent][1] dans vos environnements cloud. Ces instances de scanning récupèrent une liste de tous les compartiments S3 via la [Configuration à distance][10], et ont des instructions définies pour scanner les fichiers texte, tels que les CSV et JSON au fil du temps. Le Sensitive Data Scanner exploite l'ensemble de sa [bibliothèque de règles][11] pour trouver des correspondances. Lorsqu'une correspondance est trouvée, l'emplacement de la correspondance est envoyé à Datadog par l'instance de scanning. Les magasins de données et leurs fichiers sont uniquement lus dans votre environnement : aucune donnée sensible n'est renvoyée à Datadog. 
+Le Sensitive Data Scanner recherche les données sensibles en déployant des [Agentless scanners][1] dans vos environnements cloud. Ces instances de scanning récupèrent une liste de tous les compartiments S3 via la [Configuration à distance][10], et ont des instructions définies pour scanner les fichiers texte, tels que les CSV et JSON au fil du temps. Le Sensitive Data Scanner exploite l'ensemble de sa [bibliothèque de règles][11] pour trouver des correspondances. Lorsqu'une correspondance est trouvée, l'emplacement de la correspondance est envoyé à Datadog par l'instance de scanning. Les magasins de données et leurs fichiers sont uniquement lus dans votre environnement : aucune donnée sensible n'est renvoyée à Datadog. 
 
 En plus d'afficher les correspondances de données sensibles, le Sensitive Data Scanner fait apparaître tous les problèmes de sécurité détectés par [Cloud Security][9] affectant les magasins de données sensibles. Vous pouvez cliquer sur n'importe quel problème pour poursuivre le triage et la remédiation dans Cloud Security.
 
 ## Coût du fournisseur de services cloud
 
-Lors de l'utilisation du scanning sans Agent, des coûts supplémentaires du fournisseur de cloud s'appliquent pour l'exécution des scanners et le scanning de vos environnements cloud.
+Lors de l'utilisation d'Agentless Scanning, des coûts supplémentaires du fournisseur de cloud s'appliquent pour l'exécution des scanners et le scanning de vos environnements cloud.
 
 Votre configuration cloud affecte les coûts de votre fournisseur de cloud. Généralement, en utilisant la [configuration recommandée][13], ceux-ci se situent dans la fourchette de 1 USD par host scanné par an. Vous devez consulter les informations de votre fournisseur de cloud pour connaître les montants exacts, qui sont susceptibles de changer sans l'intervention de Datadog.
 
-Pour les charges de travail cloud volumineuses réparties sur plusieurs régions, Datadog recommande de configurer le [scanning sans Agent avec Terraform][6] pour éviter la mise en réseau inter-régions.
+Pour les charges de travail cloud volumineuses réparties sur plusieurs régions, Datadog recommande de configurer le [Agentless Scanning avec Terraform][6] pour éviter la mise en réseau inter-régions.
 
 
 ## Pour aller plus loin
