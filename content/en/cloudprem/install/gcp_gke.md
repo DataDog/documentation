@@ -52,9 +52,7 @@ Before you begin, confirm you have:
    - `roles/iam.serviceAccountAdmin` (Service Account Admin)
    - `roles/compute.admin` (Compute Admin)
 
-6. **Datadog API and APP Keys**:
-   - API Key: https://app.datadoghq.com/organization-settings/api-keys
-   - APP Key: https://app.datadoghq.com/organization-settings/application-keys
+6. **[Create or retrieve your API key][1]**.
 
 7. **APIs Enabled**:
    ```shell
@@ -70,13 +68,14 @@ Before you begin, confirm you have:
 
 Set the following environment variables to simplify subsequent commands and reduce copy-paste errors.
 
-```
+```shell
 export PROJECT_ID="your-gcp-project-id"
 export REGION="us-central1"
 export CLUSTER_NAME="cloudprem-cluster"
-export DATADOG_SITE="{{< region-param key=dd_site >}}"  # your selected Datadog site
+export DATADOG_SITE="datadoghq.com"  # or datadoghq.eu, us3.datadoghq.com, us5.datadoghq.com
 export BUCKET_NAME="${PROJECT_ID}-cloudprem"
 ```
+
 ### Step 2: Create GKE cluster
 
 Create a GKE cluster with Workload Identity enabled:
@@ -228,7 +227,7 @@ gcloud iam service-accounts add-iam-policy-binding \
 
 ### Step 6: Create Kubernetes secrets
 
-Create secret for Datadog API keys:
+Create secret for Datadog API key:
 
 ```shell
 kubectl create secret generic datadog-secret \
@@ -260,10 +259,12 @@ helm repo update
 
 Create a `values.yaml` file:
 
+Set your [Datadog site][2] to {{< region-param key="dd_site" code="true" >}}.
+
 ```yaml
 # Datadog configuration
 datadog:
-   # The Datadog [site](https://docs.datadoghq.com/getting_started/site/) to connect to. Defaults to `datadoghq.com`.
+   # The Datadog site to connect to. Defaults to `datadoghq.com`.
    # site: datadoghq.com
    # The name of the existing Secret containing the Datadog API key. The secret key name must be `api-key`.
    apiKeyExistingSecret: datadog-secret
@@ -354,7 +355,7 @@ helm install cloudprem datadog/cloudprem \
   --values values.yaml \
 ```
 
-### Step 7: Add internal GCE ingress
+### Step 8: Add internal GCE ingress
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -381,7 +382,7 @@ spec:
 kubectl apply -f ingress-values.yaml
 ```
 
-### Step 8: Install Datadog Agent (Recommended)
+### Step 9: Install Datadog Agent (Recommended)
 
 Install the Datadog Agent to collect metrics from CloudPrem components and send them to Datadog.
 
@@ -397,10 +398,6 @@ kubectl get secret datadog-secret -n datadog-cloudprem -o yaml | \
 ```
 
 Install Datadog operator:
-
-```bash
-
-```
 
 ```yaml
 # Datadog Agent Helm Values for GKE Autopilot
@@ -473,7 +470,7 @@ kubectl get pod -n datadog-cloudprem -l app.kubernetes.io/component=metastore -o
 # Should output: datadog-agent.datadog.svc.cluster.local
 ```
 
-### Step 9: Verify deployment
+### Step 10: Verify deployment
 
 Check pod status:
 ```shell
@@ -548,3 +545,6 @@ gcloud container clusters delete ${CLUSTER_NAME} \
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
