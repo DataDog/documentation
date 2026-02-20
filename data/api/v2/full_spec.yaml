@@ -103337,7 +103337,7 @@ paths:
       summary: Get the on-demand concurrency cap
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 41
       x-permission:
         operator: OR
         permissions:
@@ -103365,7 +103365,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 40
       x-permission:
         operator: OR
         permissions:
@@ -103399,10 +103399,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Create a test suite'
+      summary: Create a test suite
       tags:
       - Synthetics
-      x-menu-order: 30
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -103437,17 +103437,17 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Bulk delete suites'
+      summary: Bulk delete suites
       tags:
       - Synthetics
-      x-menu-order: 40
+      x-menu-order: 70
       x-permission:
         operator: OR
         permissions:
         - synthetics_write
   /api/v2/synthetics/suites/search:
     get:
-      description: Search for Synthetics suites.
+      description: Search for test suites.
       operationId: SearchSuites
       parameters:
       - description: The search query.
@@ -103506,10 +103506,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Search Synthetics suites
+      summary: Search test suites
       tags:
       - Synthetics
-      x-menu-order: 20
+      x-menu-order: 55
       x-permission:
         operator: OR
         permissions:
@@ -103544,10 +103544,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: 'Synthetics: Get a suite'
+      summary: Get a suite
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 60
       x-permission:
         operator: OR
         permissions:
@@ -103588,10 +103588,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Edit a test suite'
+      summary: Edit a test suite
       tags:
       - Synthetics
-      x-menu-order: 35
+      x-menu-order: 65
       x-permission:
         operator: OR
         permissions:
@@ -103631,10 +103631,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Bulk delete tests'
+      summary: Bulk delete tests
       tags:
       - Synthetics
-      x-menu-order: 65
+      x-menu-order: 90
       x-permission:
         operator: OR
         permissions:
@@ -103668,10 +103668,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Create a Network Path test'
+      summary: Create a Network Path test
       tags:
       - Synthetics
-      x-menu-order: 50
+      x-menu-order: 75
       x-permission:
         operator: OR
         permissions:
@@ -103713,10 +103713,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: 'Synthetics: Get a Network Path test'
+      summary: Get a Network Path test
       tags:
       - Synthetics
-      x-menu-order: 55
+      x-menu-order: 80
       x-permission:
         operator: OR
         permissions:
@@ -103763,10 +103763,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Edit a Network Path test'
+      summary: Edit a Network Path test
       tags:
       - Synthetics
-      x-menu-order: 60
+      x-menu-order: 85
       x-permission:
         operator: OR
         permissions:
@@ -103822,7 +103822,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:

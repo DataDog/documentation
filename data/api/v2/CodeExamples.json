@@ -2056,25 +2056,25 @@
       "description": "Update status page returns \"OK\" response"
     }
   ],
-  "SetOnDemandConcurrencyCap": [
-    {
-      "group": "synthetics",
-      "suffix": "",
-      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
-    }
-  ],
   "CreateSyntheticsNetworkTest": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Synthetics: Create a Network Path test returns \"OK\" response"
+      "description": "Create a Network Path test returns \"OK\" response"
     }
   ],
   "CreateSyntheticsSuite": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Synthetics: Create a test suite returns \"OK\" response"
+      "description": "Create a test suite returns \"OK\" response"
+    }
+  ],
+  "SetOnDemandConcurrencyCap": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
   "AddTeamHierarchyLink": [

@@ -1034,7 +1034,7 @@
   "UpdateMobileTest": [
     {
       "group": "synthetics",
-      "suffix": "",
+      "suffix": "_477498912",
       "description": "Edit a Mobile test returns \"OK\" response"
     }
   ],
