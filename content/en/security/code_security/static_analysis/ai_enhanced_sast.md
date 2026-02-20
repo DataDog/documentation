@@ -146,7 +146,7 @@ Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal w
 - **PR grouping options**: How Bits AI should group findings into pull requests (for example, one PR per repository, file, or finding). You can also limit the number of open PRs and the number of findings per PR.
 - **Custom instructions** (optional): Additional guidance for how Bits AI should generate fixes, such as changelog requirements or pull request title formatting.
 
-After you create a campaign, Bits AI Dev Agent loads the findings in scope, generates patches according to your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes. **Note**: Automatic PR creation is opt-in through [Settings][11].
+After you create a campaign, Bits AI Dev Agent loads the in-scope findings, generates patches based on your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes.
 
 <div class="alert alert-info">
 <ul>
