@@ -98,7 +98,7 @@ After you are connected, try prompts like:
 - Review error traces for my `customer-support-bot` app over the past week. Summarize the most common failure patterns, how often they occur, and recommend which ones to fix first.
 - Find traces where my agent's responses were flagged by evaluations as low quality. Look at the inputs and outputs, then suggest specific changes to my system prompt to improve response quality.
 - Look at recent agent traces for my app and find cases where the agent looped more than necessary. Analyze the decision-making at each step and suggest how to improve my tool descriptions to reduce unnecessary tool calls.
-- A user reported a bad response. Here's the trace ID: `abc123`. Walk me through exactly what happened — what the user asked, what the agent did at each step, and where things went wrong. Suggest a code fix.
+- A user reported a bad response. Here's the trace ID: `trace-123`. Walk me through exactly what happened — what the user asked, what the agent did at each step, and where things went wrong. Suggest a code fix.
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
 - Summarize experiment `exp-456` and identify the top 5 lowest-scoring events. For each, show the input, output, and which evaluations failed.
