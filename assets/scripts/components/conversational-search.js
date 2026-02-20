@@ -531,9 +531,7 @@ class ConversationalSearch {
 
             const arrow = document.createElement('span');
             arrow.className = 'conv-search-source-card-arrow';
-            arrow.innerHTML =
-                '<svg class="static" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
-                '<svg class="hover" viewBox="0 0 24 24" fill="none" stroke="#632CA6" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+            arrow.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>';
 
             card.appendChild(badge);
             card.appendChild(link);
@@ -770,9 +768,11 @@ class ConversationalSearch {
                                 // Render markdown progressively (throttled)
                                 const now = Date.now();
                                 if (now - lastRenderTime > RENDER_THROTTLE) {
-                                    // Strip any sources/json fenced block so it never flashes during streaming
-                                    const streamDisplay = accumulatedMessage.replace(/```(?:sources|docs-sources|sources-json|json)[\s\S]*?(?:```|$)/gi, '').trim();
-                                    responseContainer.innerHTML = this.inlineRefChips(marked.parse(streamDisplay));
+                                    const { displayMarkdown, sources } = this.extractSources(accumulatedMessage);
+                                    responseContainer.innerHTML = this.inlineRefChips(marked.parse(displayMarkdown));
+                                    if (sources.length > 0) {
+                                        responseContainer.appendChild(this.buildSourceCards(sources));
+                                    }
                                     this.injectCodeCopyButtons(responseContainer);
                                     lastRenderTime = now;
                                     this.scrollToBottom();
