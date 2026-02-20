@@ -35559,7 +35559,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 16
+      x-menu-order: 12
       x-permission:
         operator: OR
         permissions:
@@ -35587,7 +35587,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 24
       x-permission:
         operator: OR
         permissions:
@@ -35710,7 +35710,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-permission:
         operator: OR
         permissions:
@@ -35758,7 +35758,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 25
+      x-menu-order: 26
       x-permission:
         operator: OR
         permissions:
@@ -35834,7 +35834,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
-      x-menu-order: 11
+      x-menu-order: 3
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -35894,7 +35894,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 31
+      x-menu-order: 35
       x-permission:
         operator: OR
         permissions:
@@ -36116,7 +36116,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -36180,7 +36180,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -36283,7 +36283,7 @@ paths:
       summary: Get a browser test
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -36347,7 +36347,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -36420,7 +36420,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 10
       x-permission:
         operator: OR
         permissions:
@@ -36475,7 +36475,7 @@ paths:
       summary: Get a browser test result
       tags:
       - Synthetics
-      x-menu-order: 13
+      x-menu-order: 11
       x-permission:
         operator: OR
         permissions:
@@ -36597,7 +36597,7 @@ paths:
     get:
       description: 'Get the detailed configuration associated with
 
-        a Synthetic Mobile test.'
+        a Synthetic mobile test.'
       operationId: GetMobileTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -36634,16 +36634,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Get a Mobile test
+      summary: Get a mobile test
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
         - synthetics_read
     put:
-      description: Edit the configuration of a Synthetic Mobile test.
+      description: Edit the configuration of a Synthetic mobile test.
       operationId: UpdateMobileTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -36697,11 +36697,11 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: Edit a Mobile test
+      summary: Edit a mobile test
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -36782,7 +36782,7 @@ paths:
       summary: Search Synthetic tests
       tags:
       - Synthetics
-      x-menu-order: 34
+      x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
@@ -36822,7 +36822,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
@@ -36862,7 +36862,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -36910,7 +36910,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 30
+      x-menu-order: 15
       x-permission:
         operator: OR
         permissions:
@@ -36957,7 +36957,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 28
+      x-menu-order: 4
       x-permission:
         operator: OR
         permissions:
@@ -37021,7 +37021,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -37087,7 +37087,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 30
+      x-menu-order: 36
       x-permission:
         operator: OR
         permissions:
@@ -37158,7 +37158,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -37211,7 +37211,7 @@ paths:
       summary: Get an API test result
       tags:
       - Synthetics
-      x-menu-order: 12
+      x-menu-order: 9
       x-permission:
         operator: OR
         permissions:
@@ -37272,7 +37272,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -37306,7 +37306,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 18
+      x-menu-order: 19
       x-permission:
         operator: OR
         permissions:
@@ -37358,7 +37358,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 18
       x-permission:
         operator: OR
         permissions:

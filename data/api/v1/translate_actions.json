@@ -926,12 +926,12 @@
     "request_schema_description": "Object containing details about a Synthetic mobile test."
   },
   "GetMobileTest": {
-    "description": "Get the detailed configuration associated with\na Synthetic Mobile test.",
-    "summary": "Get a Mobile test"
+    "description": "Get the detailed configuration associated with\na Synthetic mobile test.",
+    "summary": "Get a mobile test"
   },
   "UpdateMobileTest": {
-    "description": "Edit the configuration of a Synthetic Mobile test.",
-    "summary": "Edit a Mobile test",
+    "description": "Edit the configuration of a Synthetic mobile test.",
+    "summary": "Edit a mobile test",
     "request_description": "New test details to be saved.",
     "request_schema_description": "Object containing details about a Synthetic mobile test."
   },

@@ -3889,10 +3889,10 @@ menu:
         operationids:
           - PatchGlobalVariable
         unstable: []
-        order: 20
-    - name: 'Synthetics: Edit a Network Path test'
-      url: '#synthetics-edit-a-network-path-test'
-      identifier: synthetics-synthetics-edit-a-network-path-test
+        order: 45
+    - name: Edit a Network Path test
+      url: '#edit-a-network-path-test'
+      identifier: synthetics-edit-a-network-path-test
       parent: synthetics
       generated: true
       params:
@@ -3901,10 +3901,10 @@ menu:
         operationids:
           - UpdateSyntheticsNetworkTest
         unstable: []
-        order: 60
-    - name: 'Synthetics: Get a Network Path test'
-      url: '#synthetics-get-a-network-path-test'
-      identifier: synthetics-synthetics-get-a-network-path-test
+        order: 85
+    - name: Get a Network Path test
+      url: '#get-a-network-path-test'
+      identifier: synthetics-get-a-network-path-test
       parent: synthetics
       generated: true
       params:
@@ -3913,10 +3913,10 @@ menu:
         operationids:
           - GetSyntheticsNetworkTest
         unstable: []
-        order: 55
-    - name: 'Synthetics: Create a Network Path test'
-      url: '#synthetics-create-a-network-path-test'
-      identifier: synthetics-synthetics-create-a-network-path-test
+        order: 80
+    - name: Create a Network Path test
+      url: '#create-a-network-path-test'
+      identifier: synthetics-create-a-network-path-test
       parent: synthetics
       generated: true
       params:
@@ -3925,10 +3925,10 @@ menu:
         operationids:
           - CreateSyntheticsNetworkTest
         unstable: []
-        order: 50
-    - name: 'Synthetics: Bulk delete tests'
-      url: '#synthetics-bulk-delete-tests'
-      identifier: synthetics-synthetics-bulk-delete-tests
+        order: 75
+    - name: Bulk delete tests
+      url: '#bulk-delete-tests'
+      identifier: synthetics-bulk-delete-tests
       parent: synthetics
       generated: true
       params:
@@ -3937,10 +3937,10 @@ menu:
         operationids:
           - DeleteSyntheticsTests
         unstable: []
-        order: 65
-    - name: 'Synthetics: Edit a test suite'
-      url: '#synthetics-edit-a-test-suite'
-      identifier: synthetics-synthetics-edit-a-test-suite
+        order: 90
+    - name: Edit a test suite
+      url: '#edit-a-test-suite'
+      identifier: synthetics-edit-a-test-suite
       parent: synthetics
       generated: true
       params:
@@ -3949,10 +3949,10 @@ menu:
         operationids:
           - EditSyntheticsSuite
         unstable: []
-        order: 35
-    - name: 'Synthetics: Get a suite'
-      url: '#synthetics-get-a-suite'
-      identifier: synthetics-synthetics-get-a-suite
+        order: 65
+    - name: Get a suite
+      url: '#get-a-suite'
+      identifier: synthetics-get-a-suite
       parent: synthetics
       generated: true
       params:
@@ -3961,10 +3961,10 @@ menu:
         operationids:
           - GetSyntheticsSuite
         unstable: []
-        order: 25
-    - name: Search Synthetics suites
-      url: '#search-synthetics-suites'
-      identifier: synthetics-search-synthetics-suites
+        order: 60
+    - name: Search test suites
+      url: '#search-test-suites'
+      identifier: synthetics-search-test-suites
       parent: synthetics
       generated: true
       params:
@@ -3973,10 +3973,10 @@ menu:
         operationids:
           - SearchSuites
         unstable: []
-        order: 20
-    - name: 'Synthetics: Bulk delete suites'
-      url: '#synthetics-bulk-delete-suites'
-      identifier: synthetics-synthetics-bulk-delete-suites
+        order: 55
+    - name: Bulk delete suites
+      url: '#bulk-delete-suites'
+      identifier: synthetics-bulk-delete-suites
       parent: synthetics
       generated: true
       params:
@@ -3985,10 +3985,10 @@ menu:
         operationids:
           - DeleteSyntheticsSuites
         unstable: []
-        order: 40
-    - name: 'Synthetics: Create a test suite'
-      url: '#synthetics-create-a-test-suite'
-      identifier: synthetics-synthetics-create-a-test-suite
+        order: 70
+    - name: Create a test suite
+      url: '#create-a-test-suite'
+      identifier: synthetics-create-a-test-suite
       parent: synthetics
       generated: true
       params:
@@ -3997,7 +3997,7 @@ menu:
         operationids:
           - CreateSyntheticsSuite
         unstable: []
-        order: 30
+        order: 50
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
@@ -4009,7 +4009,7 @@ menu:
         operationids:
           - SetOnDemandConcurrencyCap
         unstable: []
-        order: 11
+        order: 40
     - name: Get the on-demand concurrency cap
       url: '#get-the-on-demand-concurrency-cap'
       identifier: synthetics-get-the-on-demand-concurrency-cap
@@ -4021,7 +4021,7 @@ menu:
         operationids:
           - GetOnDemandConcurrencyCap
         unstable: []
-        order: 10
+        order: 41
     - name: Edit a global variable
       url: '#edit-a-global-variable'
       identifier: synthetics-edit-a-global-variable
@@ -4069,7 +4069,7 @@ menu:
         operationids:
           - CreateGlobalVariable
         unstable: []
-        order: 19
+        order: 18
     - name: Get all global variables
       url: '#get-all-global-variables'
       identifier: synthetics-get-all-global-variables
@@ -4081,7 +4081,7 @@ menu:
         operationids:
           - ListGlobalVariables
         unstable: []
-        order: 18
+        order: 19
     - name: Pause or start a test
       url: '#pause-or-start-a-test'
       identifier: synthetics-pause-or-start-a-test
@@ -4093,7 +4093,7 @@ menu:
         operationids:
           - UpdateTestPauseStatus
         unstable: []
-        order: 6
+        order: 16
     - name: Get an API test result
       url: '#get-an-api-test-result'
       identifier: synthetics-get-an-api-test-result
@@ -4105,7 +4105,7 @@ menu:
         operationids:
           - GetAPITestResult
         unstable: []
-        order: 12
+        order: 9
     - name: Get an API test's latest results summaries
       url: '#get-an-api-tests-latest-results-summaries'
       identifier: synthetics-get-an-api-tests-latest-results-summaries
@@ -4117,7 +4117,7 @@ menu:
         operationids:
           - GetAPITestLatestResults
         unstable: []
-        order: 14
+        order: 8
     - name: Edit a test
       url: '#edit-a-test'
       identifier: synthetics-edit-a-test
@@ -4129,7 +4129,7 @@ menu:
         operationids:
           - UpdateTest
         unstable: []
-        order: 30
+        order: 36
     - name: Patch a Synthetic test
       url: '#patch-a-synthetic-test'
       identifier: synthetics-patch-a-synthetic-test
@@ -4141,7 +4141,7 @@ menu:
         operationids:
           - PatchTest
         unstable: []
-        order: 5
+        order: 16
     - name: Get a test configuration
       url: '#get-a-test-configuration'
       identifier: synthetics-get-a-test-configuration
@@ -4153,7 +4153,7 @@ menu:
         operationids:
           - GetTest
         unstable: []
-        order: 28
+        order: 4
     - name: Fetch uptime for multiple tests
       url: '#fetch-uptime-for-multiple-tests'
       identifier: synthetics-fetch-uptime-for-multiple-tests
@@ -4165,7 +4165,7 @@ menu:
         operationids:
           - FetchUptimes
         unstable: []
-        order: 30
+        order: 15
     - name: Trigger tests from CI/CD pipelines
       url: '#trigger-tests-from-ci/cd-pipelines'
       identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -4177,7 +4177,7 @@ menu:
         operationids:
           - TriggerCITests
         unstable: []
-        order: 7
+        order: 13
     - name: Trigger Synthetic tests
       url: '#trigger-synthetic-tests'
       identifier: synthetics-trigger-synthetic-tests
@@ -4189,7 +4189,7 @@ menu:
         operationids:
           - TriggerTests
         unstable: []
-        order: 8
+        order: 14
     - name: Search Synthetic tests
       url: '#search-synthetic-tests'
       identifier: synthetics-search-synthetic-tests
@@ -4201,8 +4201,8 @@ menu:
         operationids:
           - SearchTests
         unstable: []
-        order: 34
-    - name: Edit a Mobile test
+        order: 5
+    - name: Edit a mobile test
       url: '#edit-a-mobile-test'
       identifier: synthetics-edit-a-mobile-test
       parent: synthetics
@@ -4213,8 +4213,8 @@ menu:
         operationids:
           - UpdateMobileTest
         unstable: []
-        order: 3
-    - name: Get a Mobile test
+        order: 16
+    - name: Get a mobile test
       url: '#get-a-mobile-test'
       identifier: synthetics-get-a-mobile-test
       parent: synthetics
@@ -4225,7 +4225,7 @@ menu:
         operationids:
           - GetMobileTest
         unstable: []
-        order: 9
+        order: 7
     - name: Create a mobile test
       url: '#create-a-mobile-test'
       identifier: synthetics-create-a-mobile-test
@@ -4261,7 +4261,7 @@ menu:
         operationids:
           - GetBrowserTestResult
         unstable: []
-        order: 13
+        order: 11
     - name: Get a browser test's latest results summaries
       url: '#get-a-browser-tests-latest-results-summaries'
       identifier: synthetics-get-a-browser-tests-latest-results-summaries
@@ -4273,7 +4273,7 @@ menu:
         operationids:
           - GetBrowserTestLatestResults
         unstable: []
-        order: 15
+        order: 10
     - name: Edit a browser test
       url: '#edit-a-browser-test'
       identifier: synthetics-edit-a-browser-test
@@ -4285,7 +4285,7 @@ menu:
         operationids:
           - UpdateBrowserTest
         unstable: []
-        order: 4
+        order: 16
     - name: Get a browser test
       url: '#get-a-browser-test'
       identifier: synthetics-get-a-browser-test
@@ -4297,7 +4297,7 @@ menu:
         operationids:
           - GetBrowserTest
         unstable: []
-        order: 10
+        order: 6
     - name: Create a browser test
       url: '#create-a-browser-test'
       identifier: synthetics-create-a-browser-test
@@ -4321,7 +4321,7 @@ menu:
         operationids:
           - UpdateAPITest
         unstable: []
-        order: 3
+        order: 16
     - name: Get an API test
       url: '#get-an-api-test'
       identifier: synthetics-get-an-api-test
@@ -4333,7 +4333,7 @@ menu:
         operationids:
           - GetAPITest
         unstable: []
-        order: 9
+        order: 6
     - name: Create an API test
       url: '#create-an-api-test'
       identifier: synthetics-create-an-api-test
@@ -4357,7 +4357,7 @@ menu:
         operationids:
           - CreateTest
         unstable: []
-        order: 31
+        order: 35
     - name: Get the list of all Synthetic tests
       url: '#get-the-list-of-all-synthetic-tests'
       identifier: synthetics-get-the-list-of-all-synthetic-tests
@@ -4369,7 +4369,7 @@ menu:
         operationids:
           - ListTests
         unstable: []
-        order: 11
+        order: 3
     - name: Get the default locations
       url: '#get-the-default-locations'
       identifier: synthetics-get-the-default-locations
@@ -4393,7 +4393,7 @@ menu:
         operationids:
           - UpdatePrivateLocation
         unstable: []
-        order: 25
+        order: 26
     - name: Get a private location
       url: '#get-a-private-location'
       identifier: synthetics-get-a-private-location
@@ -4405,7 +4405,7 @@ menu:
         operationids:
           - GetPrivateLocation
         unstable: []
-        order: 24
+        order: 25
     - name: Delete a private location
       url: '#delete-a-private-location'
       identifier: synthetics-delete-a-private-location
@@ -4441,7 +4441,7 @@ menu:
         operationids:
           - ListLocations
         unstable: []
-        order: 26
+        order: 24
     - name: Get details of batch
       url: '#get-details-of-batch'
       identifier: synthetics-get-details-of-batch
@@ -4453,7 +4453,7 @@ menu:
         operationids:
           - GetSyntheticsCIBatch
         unstable: []
-        order: 16
+        order: 12
     - name: Tags
       url: /api/latest/tags/
       identifier: tags
@@ -9512,22 +9512,6 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Integrations
-      url: /api/latest/integrations/
-      identifier: integrations
-      generated: true
-    - name: List Integrations
-      url: '#list-integrations'
-      identifier: integrations-list-integrations
-      parent: integrations
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListIntegrations
-        unstable: []
-        order: 1
     - name: Jira Integration
       url: /api/latest/jira-integration/
       identifier: jira-integration
