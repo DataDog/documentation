@@ -70,6 +70,19 @@
         "description": "Markdoc if tag with equals condition"
     },
 
+    "Version": {
+        "scope": "markdoc",
+        "prefix": ";;version",
+        "body": [
+            "<!-- Version must meet ${1:version} -->",
+            "{% if semverIsAtLeast($${2:semver_trait_id}, \"${1:version}\") %}",
+            "${3:Content shown if version is met}",
+            "{% /if %}",
+            "<!-- ends  ${1:version} -->"
+        ],
+        "description": "Show content that meets a semantic version"
+    },
+
     "Image": {
         "scope": "markdoc",
         "prefix": ";;image",
@@ -81,7 +94,7 @@
 
     "Video": {
         "scope": "markdoc",
-        "prefix": ";;;video",
+        "prefix": ";;video",
         "body": ["{% img src=\"${1:path/to/video.mp4}\" alt=\"${2:Descriptive video alt text}\" video=\"true\" /%}"],
         "description": "Markdoc video tag using img with video attribute"
     },
