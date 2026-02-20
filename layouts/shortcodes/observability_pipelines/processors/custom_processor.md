@@ -7,7 +7,7 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 - [Convert syslog values](#convert) to read-able values.
 - Enrich values by using [enrichment tables](#enrichment).
 - [Manipulate IP values](#ip).
-- [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on). See [Parsing][10194] for information about regex log parsing.
+- [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on). See [Writing Effective Grok Parsing Rules with Regular Expressions][10194] for information.
 - Manipulate event [metadata](#event) and [paths](#path).
 
 See [Custom functions][10191] for the full list of available functions.

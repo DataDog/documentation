@@ -4,7 +4,7 @@ disable_toc: false
 further_reading:
 - link: "/logs/guide/regex_log_parsing/"
   tag: "guide"
-  text: "Parsing logs with regex"
+  text: "Writing Effective Grok Parsing Rules with Regular Expressions"
 products:
 - name: Logs
   icon: logs
