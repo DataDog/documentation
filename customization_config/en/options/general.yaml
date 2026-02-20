@@ -37,6 +37,9 @@ options:
 - label: API
   id: api
 
+- label: APM
+  id: apm
+
 - label: Authentication
   id: auth
 
@@ -361,6 +364,9 @@ options:
 - label: Ruby
   id: ruby
 
+- label: RUM
+  id: rum
+
 - label: Rust
   id: rust
 
@@ -370,11 +376,17 @@ options:
 - label: Serilog
   id: serilog
 
+- label: Server
+  id: server
+
 - label: Serverless Framework
   id: serverless_framework
 
 - label: Sharded Cluster
   id: sharded_cluster
+
+- label: Show all
+  id: show_all
 
 - label: Splunk HEC
   id: splunk_hec

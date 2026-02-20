@@ -122,9 +122,121 @@ aws ecs create-service --cluster <CLUSTER_NAME> \
 
 ### Metrics collection
 
-Docker labels are not supported for ECS Managed Instances. To provide a custom integration configuration, you must mount a configuration file directly onto the Datadog Agent container.
+To enable integrations, add Docker label annotations to your application containers in the ECS task definition.
 
-**Example**: Setting up a Datadog Agent with custom configuration files mounted
+#### Add an integration
+
+##### Update the task definition
+
+{{< tabs >}}
+{{% tab "AWS Console" %}}
+
+1. Log in to your [AWS Web Console][1] and navigate to the ECS section.
+2. Choose the cluster the Datadog Agent is running on.
+3. Click the **Tasks** tab, then click the **Task definition** name containing the Datadog Agent container.
+4. Click the **Create new revision** button.
+5. Select the application container you want to monitor and click **Edit**.
+6. Under **Docker labels**, add the following:
+
+| Key                           | Value                                           |
+|-------------------------------|-------------------------------------------------|
+| com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
+| com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
+| com.datadoghq.ad.init_configs | `[{}]`                                          |
+
+7. Click the **Update** button, then click the **Create** button.
+
+[1]: https://aws.amazon.com/console
+{{% /tab %}}
+{{% tab "AWS CLI" %}}
+
+Add `dockerLabels` to your application container in the task definition JSON, then register the new revision using the [AWS CLI][1]:
+
+```json
+{
+  "containerDefinitions": [
+    {
+      "name": "<APP_CONTAINER_NAME>",
+      "dockerLabels": {
+        "com.datadoghq.ad.instances": "[{\"host\": \"%%host%%\", \"port\": <PORT_NUMBER>}]",
+        "com.datadoghq.ad.check_names": "[\"<CHECK_NAME>\"]",
+        "com.datadoghq.ad.init_configs": "[{}]"
+      }
+    }
+  ]
+}
+```
+
+```bash
+aws ecs register-task-definition --cli-input-json file://<path-to-task-definition.json>
+```
+
+[1]: https://aws.amazon.com/cli
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Update the service
+
+{{< tabs >}}
+{{% tab "AWS Console" %}}
+
+1. Within the cluster, click the **Services** tab, then click the **Service Name**.
+2. Click the **Update** button.
+3. For **Task Definition**, choose the latest **Revision** from the dropdown menu.
+4. Click the **Update Service** button.
+
+{{% /tab %}}
+{{% tab "AWS CLI" %}}
+
+Use the [AWS CLI][1] to update the service with the new task definition revision:
+
+```bash
+aws ecs update-service --cluster <CLUSTER_NAME> \
+--service <SERVICE_NAME> \
+--task-definition <TASK_DEFINITION_ARN>
+```
+
+[1]: https://aws.amazon.com/cli
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Examples
+
+{{< tabs >}}
+{{% tab "AWS Console" %}}
+Use the following table to enter the Docker labels with the [AWS Web Console][1] for a Redis container:
+
+| Key                           | Value                                  |
+|-------------------------------|----------------------------------------|
+| com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": 6379}]` |
+| com.datadoghq.ad.check_names  | `["redisdb"]`                          |
+| com.datadoghq.ad.init_configs | `[{}]`                                 |
+
+[1]: https://aws.amazon.com/console
+{{% /tab %}}
+{{% tab "AWS CLI" %}}
+Use the following JSON under `containerDefinitions` to configure a Redis container with Docker labels through the [AWS CLI][1]:
+
+```json
+{
+  "name": "redis",
+  "image": "redis:latest",
+  "essential": true,
+  "dockerLabels": {
+    "com.datadoghq.ad.instances": "[{\"host\": \"%%host%%\", \"port\": 6379}]",
+    "com.datadoghq.ad.check_names": "[\"redisdb\"]",
+    "com.datadoghq.ad.init_configs": "[{}]"
+  }
+}
+```
+
+[1]: https://aws.amazon.com/cli
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Alternative: Mount a configuration file
+
+To provide a custom integration configuration, you can also mount a configuration file directly onto the Datadog Agent container.
 
 Create the following file structure:
 ```

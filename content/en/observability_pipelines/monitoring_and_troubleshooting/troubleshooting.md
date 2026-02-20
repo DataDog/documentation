@@ -134,6 +134,8 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 
 The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
 
+**Note**: See [Add domains to firewall allowlist][23] for the list of domains that must be added to your allowlist if you are using a firewall.
+
 ### Too many files error
 
 If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
@@ -183,9 +185,10 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [12]: https://app.datadoghq.com/logs
 [13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
-[15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-liveness-and-readiness-probe
+[15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes
 [16]: /observability_pipelines/sources/#tls-certificates
 [17]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [18]: /observability_pipelines/guide/environment_variables/
 [19]: /remote_configuration/#security-considerations
 [20]: /help/
+[23]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist

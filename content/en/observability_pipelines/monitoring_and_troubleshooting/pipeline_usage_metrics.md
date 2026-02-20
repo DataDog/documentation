@@ -36,29 +36,29 @@ Observability Pipelines ingested bytes
 ## Host metrics
 
 Uptime
-: **Metrics**: `pipelines.host.uptime`
+: **Metric**: `pipelines.host.uptime`
 : **Description:** The amount of time since the host was started, in seconds.
 
 Bytes in
-: **Metrics**: `pipelines.host.network_receive_bytes_total`
+: **Metric**: `pipelines.host.network_receive_bytes_total`
 : **Description:** The number of bytes received by the host on all interfaces. Use the `device` tag to filter per interface, for example `device:eth0`.
 
 Bytes out
-: **Metrics**: `pipelines.host.network_transmit_bytes_total`
+: **Metric**: `pipelines.host.network_transmit_bytes_total`
 : **Description:** The number of bytes sent by the host on all interfaces. Use the `device` tag to filter per interface.
 
 ## Process metrics
 
 Uptime
-: **Metrics**: `pipelines.uptime_seconds`
+: **Metric**: `pipelines.uptime_seconds`
 : **Description:** The amount of time since the Worker process was started, in seconds.
 
 CPU usage
-: **Metrics**: `pipelines.cpu_usage_seconds_total`
+: **Metric**: `pipelines.cpu_usage_seconds_total`
 : **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
 
 Memory usage
-: **Metrics**: `pipelines.resident_memory_used_bytes`
+: **Metric**: `pipelines.resident_memory_used_bytes`
 : **Description:** The amount of RSS memory used by the Worker process in bytes.
 
 ## Component metrics
