@@ -31,7 +31,7 @@ title: 백엔드 서비스 오류 추적
 
 (선택 사항) 스택 트레이스에서 코드 스니펫을 확인하려면 [GitHub 통합][4]을 설정하세요.
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="스택 트레이스의 인라인 코드 스니펫" style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="스택 트레이스의 인라인 코드 스니펫" style="width:70%;" >}}
 
 리포지토리 설정을 시작하려면 [소스 코드 통합 문서][6]를 참조하세요.
 
