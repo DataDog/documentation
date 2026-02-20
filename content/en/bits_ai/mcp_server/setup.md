@@ -237,18 +237,18 @@ Example JSON configuration (US1):
 
 | Client | Developer | Notes |
 |--------|------|------|
-| [Cursor](https://www.cursor.com/) | Cursor | Datadog [Cursor & VS Code extension](#cursor) recommended. |
-| [Claude Code](https://www.anthropic.com/claude-code) | Anthropic | |
-| [Claude Desktop](https://claude.ai/download) | Anthropic | Limited support for remote authentication. Use [local binary authentication](#claude-desktop) as needed. |
-| [Codex CLI](https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started) | OpenAI | |
-| [VS Code](https://code.visualstudio.com/) | Microsoft | Datadog [Cursor & VS Code extension](#vs-code) recommended. |
-| [Goose](https://github.com/block/goose), [Kiro](https://kiro.dev/), [Kiro CLI](https://kiro.dev/cli/), [Cline](https://cline.bot/) | Various | See the **Other** tab above. Use local binary authentication for Cline if remote auth is unreliable. |
+| [Cursor][8] | Cursor | Datadog [Cursor & VS Code extension](#cursor) recommended. |
+| [Claude Code][5] | Anthropic | |
+| [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](#claude-desktop) as needed. |
+| [Codex CLI][7] | OpenAI | |
+| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#vs-code) recommended. |
+| [Goose][9], [Kiro][22], [Kiro CLI][10], [Cline][17] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote auth is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
 ### Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication](https://modelcontextprotocol.io/specification/draft/basic/authorization). If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key](/account_management/api-app-keys/) as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
+The MCP Server uses OAuth 2.0 for [authentication][auth]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][3] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
 
 {{< code-block lang="json" >}}
 {
@@ -265,19 +265,34 @@ The MCP Server uses OAuth 2.0 for [authentication](https://modelcontextprotocol.
 }
 {{< /code-block >}}
 
-For security, use a scoped API key and application key from a [service account](/account_management/org_settings/service_accounts/) that has only the required permissions.
+For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
 
 ### Test access to the MCP Server
 
-1. Install the [MCP inspector](https://github.com/modelcontextprotocol/inspector), a developer tool for testing and debugging MCP servers.
+1. Install the [MCP inspector][4], a developer tool for testing and debugging MCP servers.
    ```bash
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
 3. For **URL**, enter the MCP Server endpoint for your regional Datadog site (for example, for US1: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`). See the endpoint table in the tabs above for other sites.
 4. Click **Connect**, then go to **Tools** > **List Tools**.
-5. Check if the [available tools](/bits_ai/mcp_server#available-tools) appear.
+5. Check if the [available tools][20] appear.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[3]: /account_management/api-app-keys/
+[4]: https://github.com/modelcontextprotocol/inspector
+[5]: https://www.anthropic.com/claude-code
+[6]: https://claude.ai/download
+[7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
+[8]: https://www.cursor.com/
+[9]: https://github.com/block/goose
+[10]: https://kiro.dev/cli/
+[11]: https://code.visualstudio.com/
+[17]: https://cline.bot/
+[20]: /bits_ai/mcp_server#available-tools
+[22]: https://kiro.dev/
+[23]: /account_management/org_settings/service_accounts/
+[auth]: https://modelcontextprotocol.io/specification/draft/basic/authorization
