@@ -71,9 +71,14 @@ The JFR-based allocation profiling engine:
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ```
+#Java8
 jdk.ObjectAllocationInNewTLAB#enabled=true
 jdk.ObjectAllocationOutsideTLAB#enabled=true
+
+#Java16
+jdk.ObjectAllocationSample#enabled=true
 ```
+
 
 ## Live heap profiling
 
@@ -96,7 +101,11 @@ The live-heap profiler engine:
 ## Heap Profiling
 <div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 
-To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
+To enable the heap profiler, start your application with one of the following:
+
+| Environment Variable | System Property |
+|---------------------|-----------------|
+| `DD_PROFILING_HEAP_ENABLED=true` | `-Ddd.profiling.heap.enabled=true` |
 
 Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
 
@@ -109,22 +118,15 @@ jdk.OldObjectSample#enabled=true
 
 <div class="alert alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
 
-To enable the heap histogram metrics, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable.
+To enable the heap histogram metrics, start your application with one of the following:
+
+| Environment Variable | System Property |
+|---------------------|-----------------|
+| `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` | `-Ddd.profiling.heap.histogram.enabled=true` |
 
 
-## Collecting native stack traces
 
-If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include:
-- JVM internals
-- Native libraries used by your application or the JVM
-- Syscalls
-
-| Configuration | Environment Variable | System Property |
-|---------------|---------------------|-----------------|
-| **Enable** | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_CSTACK=dwarf` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.cstack=dwarf` |
-
-<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</div>
-### GraalVM native-image
+## GraalVM native-image
 
 For applications compiled as GraalVM native images, see [Enabling the Profiler for GraalVM Native Image][3].
 
@@ -339,19 +341,6 @@ Below are basic troubleshooting steps for resolving those issues:
     ```
     DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
     ```
-## Linux-specific: Degraded CPU profile quality
-
-On Linux, the profiler uses perf events for accurate CPU sampling. If the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler falls back to a less accurate sampling method.
-
-To improve CPU profile quality, set the value to `2` or lower:
-
-```shell
-sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
-```
-
-
-
-
 
 ## Summary - Advanced profiler engine configuration
 
