@@ -49,7 +49,6 @@
       {{ end }}
     {{ end }}
     {{- if not $page -}}
-      {{ warnf "Integration page for '%s' not found in get-metrics-from-git shortcode." $int_name }}
     {{- else -}}
       <!-- We find and use the metrics from the integration page markdown -->
       {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
