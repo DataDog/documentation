@@ -49,7 +49,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 1. If you have multiple regions configured, select your OpsGenie account's region from the dropdown. 
 1. Datadog loads all your OpsGenie teams in a searchable, paginated list. Select the team to migrate, then select **Next**. A preview pane shows the team's members and settings.
 
-{{< img src="service_management/oncall/import-opsgenie-team.png" alt="UI that lists OpsGenie teams and shows a preview of the selected team" style="width:95%;" >}}
+{{< img src="service_management/oncall/import-opsgenie-team.png" alt="OpsGenie team list with a preview pane showing the selected team's members and settings" style="width:95%;" >}}
 
 **Note**: If a team was previously imported, Datadog indicates this.
 
@@ -61,7 +61,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
    - Map to a different Datadog team that you select.
    - Create a new team. Enter a team name to create a Datadog team based on the structure and members of the OpsGenie team.
 
-   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="UI for mapping an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
+   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="Mapping options for assigning an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
 
 1. When the mapping is correct, select **Next**.
 
@@ -70,7 +70,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 1. Browse your OpsGenie escalation policies. You can filter policies by team.
 1. Select an escalation policy to import. The wizard displays the full policy details, including rules, recipients, and schedules.
 
-{{< img src="service_management/oncall/import-opsgenie-escalation-policy.png" alt="UI for selecting an OpsGenie escalation policy to migrate" style="width:95%;" >}}
+{{< img src="service_management/oncall/import-opsgenie-escalation-policy.png" alt="OpsGenie escalation policy list with policy details shown for the selected policy" style="width:95%;" >}}
 
 ### Step 4: Map users
 
@@ -90,8 +90,6 @@ If the escalation policy references OpsGenie schedules, Datadog automatically mi
 - **Participants**: Automatically matched to Datadog users.
 - **Time restrictions**: `time-of-day` and `weekday-and-time-of-day` restrictions are preserved.
 - **Time zones**: Time zone configuration is preserved.
-
-**Note**: Only user-type rotation participants are supported. Team-type and escalation-type participants are not migrated.
 
 ### Step 6: Review and save
 
@@ -134,14 +132,14 @@ If OpsGenie users are not automatically matched to Datadog users:
 
 1. Verify that email addresses match exactly between OpsGenie and Datadog.
 1. Confirm that the Datadog users are active.
-1. If automatic matching fails, map users manually or invite them to Datadog.
+1. If automatic matching still fails, add users manually or invite them to Datadog.
 
 ### Schedule rotations not matching
 
 If migrated schedule rotations do not match your OpsGenie schedules:
 
 1. Check that all rotation participants are user-type (not team-type or escalation-type).
-1. Verify that timezones are correctly configured in both OpsGenie and Datadog.
+1. Verify that time zones are correctly configured in both OpsGenie and Datadog.
 1. Review time restrictions to confirm they were migrated correctly.
 
 ### Escalation policy not saving
@@ -151,7 +149,7 @@ If the escalation policy fails to save:
 1. Confirm all users are mapped or excluded (no pending invites).
 1. Verify all referenced schedules were created successfully.
 1. Check that all escalation step delays meet the minimum requirement (one minute).
-1. Confirm you have the `on_call_write` permission.
+1. Confirm you have the `on_call_write` and `teams_manage` permissions.
 
 ## Further reading
 
