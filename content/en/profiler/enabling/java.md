@@ -34,7 +34,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Exception profiling
 - I/O profiling
 
-**Note**: On Linux, the Datadog profiler engine (ddprof) provides the full set of profile types.
+**Note**: On Linux, the Datadog profiler engine provides the full set of profile types.
 
 | JDK Version | CPU | Wallclock | Allocation | Live Heap |
 |-------------|:---:|:---------:|:----------:|:---------:|
