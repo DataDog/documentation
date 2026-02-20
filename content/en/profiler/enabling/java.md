@@ -32,6 +32,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Allocations
 - Live heap (memory leak detection)
 - Exception profiling
+- I/O profiling
 
 **Note**: On Linux, the Datadog profiler engine (ddprof) provides the full set of profile types.
 
@@ -48,7 +49,9 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 **Available profile types**:
 - CPU
 - Allocations
-
+- I/O profiling
+- Exception
+- Live heap (on Linux)
 **Minimum JDK Versions**:
 
 | JDK Distribution | Minimum Version | Notes |
