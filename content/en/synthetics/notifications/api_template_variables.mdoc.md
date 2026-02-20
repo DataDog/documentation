@@ -493,26 +493,11 @@ These variables are available for all API test protocols.
 <!-- Step details variables -->
 {% if equals($synthetics_variables, "step_details") %}
 
-### Failed step information
-
-**Applies to:** Multistep API tests
-
-The `{{synthetics.failed_step}}` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly.
-
-`{{synthetics.failed_step.name}}`
-: Maps to `{{synthetics.attributes.result.steps.<step-index>.name}}`
-
-`{{synthetics.failed_step.failure.message}}`
-: Maps to `{{synthetics.attributes.result.steps.<step-index>.failure.message}}`
-
-`{{synthetics.failed_step.url}}`
-: Maps to `{{synthetics.attributes.result.steps.<step-index>.url}}`
-
 ### Extracted variables
 
 Path: `synthetics.attributes.variables.extracted`
 
-These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
+These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available for successful test results and can only be used in Recovery notifications.
 
 **General step properties:**
 
@@ -536,18 +521,6 @@ These are step execution metadata and results containing detailed information ab
 
 `synthetics.attributes.variables.extracted.steps.type`
 : Type of step being executed
-
-**Multistep API tests:**
-
-`synthetics.attributes.variables.extracted.name`
-: Step name
-
-`synthetics.attributes.variables.extracted.type`
-: Step type
-
-**Protocol-specific variables:**
-
-Refer to the Protocol filter above to view variables specific to HTTP, DNS, SSL, WebSocket, UDP, TCP, ICMP, or gRPC tests.
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 
