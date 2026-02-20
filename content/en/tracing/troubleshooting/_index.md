@@ -302,12 +302,6 @@ There are several configuration options available to scrub sensitive data or dis
 
 This section explains how to use debug and startup logs to identify and resolve issues with your Datadog tracer.
 
-{{% collapse-content title="SDK configurations" level="h4" %}}
-
-Configuration values are automatically reported by the SDKs and can be viewed in the UI. This can be used to troubleshoot instrumentation issues caused by misconfiguration. For details, see the [SDK configurations page][33].
-
-{{% /collapse-content %}}
-
 {{% collapse-content title="Debug logs" level="h4" %}}
 
 To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or if Datadog support has recommended it for triage purposes. However, be sure to disable debug logging when you are finished testing to avoid the logging overhead it introduces.
@@ -319,6 +313,12 @@ These logs can surface instrumentation errors or integration-specific errors. Fo
 {{% collapse-content title="Startup logs" level="h4" %}}
 
 During startup, Datadog tracing libraries emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible. Some languages require these startup logs to be enabled with the environment variable `DD_TRACE_STARTUP_LOGS=true`. For more information, see the [Startup logs][3].
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="SDK configurations" level="h4" %}}
+
+Configuration values are automatically reported by the SDKs and can be viewed in the UI. This can be used to troubleshoot instrumentation issues caused by misconfiguration. For details, see the [SDK configurations page][33].
 
 {{% /collapse-content %}}
 
