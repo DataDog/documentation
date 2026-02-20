@@ -24,16 +24,16 @@ The configuration source shows where a given value is configured:
 
 | Source | Description |
 |--------|-------------|
-| **Remote Configuration at Runtime** | Set via the Datadog UI using [Configuration at Runtime][1] |
+| **Remote Configuration at Runtime** | Set through the Datadog UI using [Configuration at Runtime][1] |
 | **Code** | Set in application code |
 | **Remote Fleet Automation** | Applied remotely at the host level through [Fleet Automation][2] |
-| **Local environment variable** | Set via an environment variable (or system property) in the runtime environment |
+| **Local environment variable** | Set through an environment variable (or system property) in the runtime environment |
 | **Local file** | Set in a local configuration file |
 | **Default** | Default value provided by the SDK |
 
 ## Missing configuration data
 
-Telemetry data will not be available in the following situations:
+Telemetry data is not available in the following situations:
 
 * No service instances have been active in the last 15 minutes.
 * Instrumentation telemetry has been disabled in configuration.
