@@ -81,8 +81,9 @@ Datadog recommends the decentralized approach of deploying the Workers as close 
 - Minimizes cross-region or cross-datacenter network transit
 - Avoids potential performance issues related to inter-region or inter-account data transfer
 - Helps reduce data transfer costs by keeping processing local to the data sources
+- Reduces log delivery latency by processing data at the source before forwarding
 
-A centralized deployment runs Workers in a single location, aggregating data from multiple regions, clusters, or datacenters. This approach works best for lower data volumes or when network peering already exists. Be aware that high-volume data transfers across regions or accounts may incur additional costs.
+A centralized deployment runs Workers in a single location, aggregating data from multiple regions, clusters, or datacenters. A single pool of Workers can receive data from multiple Kubernetes clusters or AWS accounts. This approach works best for lower data volumes or when network peering already exists between those environments. Be aware that high-volume data transfers across regions or accounts may incur additional costs.
 
 A hybrid model is a good compromise between the decentralized and centralized approaches, particularly for large wide-spread infrastructure deployments. For example, if you have six regions and in each region you have 10 Kubernetes clusters, rather than:
 
