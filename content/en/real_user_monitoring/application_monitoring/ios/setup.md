@@ -47,7 +47,14 @@ Before you begin, ensure you have:
 
 ## Setup
 
-To start sending RUM data from your iOS or tvOS application to Datadog:
+**Choose your setup method:**
+
+- **[Agentic Onboarding (in Preview)][14]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **Manual setup** (below): Follow the instructions to manually add and configure the RUM SDK in your iOS application.
+
+### Manual setup
+
+To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
 
 ### Step 1 - Add the iOS SDK as a dependency
 
@@ -428,14 +435,16 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 {{% /tab %}}
 {{% /tabs %}}
 
-#### Enable `URLSessionInstrumentation`
+Network requests are automatically tracked after you enable RUM with `urlSessionTracking` configuration.
 
-To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
+#### (Optional) Enable detailed timing breakdown
+
+To capture additional detailed network timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-URLSessionInstrumentation.enable(
+URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(
         delegateClass: <YourSessionDelegate>.self
     )
@@ -553,3 +562,4 @@ See [Supported versions][9] for a list of operating system versions and platform
 [11]: /real_user_monitoring/ios/web_view_tracking/
 [12]: /real_user_monitoring/ios/data_collected/
 [13]: https://app.datadoghq.com/rum/application/
+[14]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring

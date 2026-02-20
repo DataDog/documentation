@@ -2,7 +2,7 @@
 title: Graph historical SLO data on Dashboards
 description: Display historical SLO data on dashboards using SLO widgets and timeseries visualizations for performance tracking.
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Learn more about Service Level Objectives"
 - link: "/dashboards/widgets/slo"
@@ -51,5 +51,5 @@ For SLOs that have [status corrections][2], you can enable or disable correction
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/sharing/scheduled_reports/
-[2]: /service_management/service_level_objectives/#slo-status-corrections
-[3]: /service_management/service_level_objectives/#configuration
+[2]: /service_level_objectives/#slo-status-corrections
+[3]: /service_level_objectives/#configuration

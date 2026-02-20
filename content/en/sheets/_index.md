@@ -10,6 +10,10 @@ further_reading:
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/">}}
+Create flexible spreadsheets: built to let you start from scratch, build models, track operations, and more.
+{{< /callout >}}
+
 ## Overview
 
 Sheets is a spreadsheet tool that you can populate with Datadog data, enabling you to perform complex analysis and build reports without requiring technical expertise. It allows teams to use familiar spreadsheet functions like lookups, pivot tables, and calculations on Datadog data, so you don't have to export and use another tool with stale data.
@@ -69,6 +73,10 @@ After you have your pivot table, you can click **Show Graphs** and add up to six
 
 ## Supported data sources
 
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+If you want to query data sources not yet available, use this form to submit your request.
+{{< /callout >}}
+
 Create tables and analyze the data pulled from the following data sources:
 
 | Data Source          | Product page       |
@@ -79,10 +87,11 @@ Create tables and analyze the data pulled from the following data sources:
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Database Queries     | [Database Monitoring][16] |
 | Events               | [Event Management][14] |
-| Infrastructure       | [DDSQL Editor][6] |
+| Infrastructure       | [Host List][6] |
 | LLM Observability    | [LLM Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
+| Product Analytics    | [Product Analytics Events][20] |
 | Real User Monitoring | [RUM Explorer][8]  |
 | Reference Tables     | [Reference Tables][9] |
 | Security Findings    | [Cloud Security][12] |
@@ -121,7 +130,7 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [3]: /sheets/functions_operators
 [4]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
 [5]: https://app.datadoghq.com/cost
-[6]: https://app.datadoghq.com/ddsql/editor
+[6]: https://app.datadoghq.com/infrastructure/
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: https://app.datadoghq.com/rum/sessions
 [9]: https://app.datadoghq.com/reference-tables
@@ -135,3 +144,4 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [17]: https://app.datadoghq.com/ci/pipelines
 [18]: https://app.datadoghq.com/apm/traces
 [19]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
+[20]: https://app.datadoghq.com/product-analytics/events

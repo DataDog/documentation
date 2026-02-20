@@ -75,7 +75,7 @@ To set up Datadog APM without needing to modify your application's code or the d
 1. Run the installation command:
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:4 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
  
     Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][7], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
@@ -208,6 +208,17 @@ To add custom instrumentation:
 
 1. Notice that the custom `quote` span tag displays on the **Info** tab.
 
+## What's next?
+
+After you set up tracing and your application is sending data to Datadog, explore additional APM features:
+
+### Software Catalog
+
+[Software Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
+
+### Trace ingestion and retention
+
+Control costs and manage data volume by configuring [ingestion controls][11] and [retention filters][12]. Ingestion controls let you customize sampling rates at the Datadog Agent or tracing library level, while retention filters determine which spans are indexed for search and analytics.
 
 ## Further reading
 
@@ -221,3 +232,7 @@ To add custom instrumentation:
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[9]: /internal_developer_portal/software_catalog/
+[10]: /internal_developer_portal/software_catalog/entity_model/
+[11]: /tracing/trace_pipeline/ingestion_controls/
+[12]: /tracing/trace_pipeline/trace_retention/

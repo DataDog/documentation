@@ -311,6 +311,81 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 ]
 ```
 
+### Windows containers
+
+Windows containers running on ECS do not have direct access to the EC2 instance metadata endpoint by default. Use one of the following methods to set `DD_AGENT_HOST` with the EC2 private IP address.
+
+#### ECS container metadata file
+
+The ECS container metadata file provides the host private IP address without additional network configuration. In the container's `entryPoint`, read the metadata file and set `DD_AGENT_HOST`. Substitute `<Windows Startup Command>` with your application's startup command:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$env:DD_AGENT_HOST = (Get-Content -Path $env:ECS_CONTAINER_METADATA_FILE -Raw | ConvertFrom-Json).HostPrivateIPv4Address; <Windows Startup Command>"
+]
+```
+
+For IIS applications using the .NET Framework tracer, write the value to a [`datadog.json` configuration file][7] and restart IIS. Adjust the `datadog.json` path to match your application's root directory:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$private_ip = (Get-Content -Path $env:ECS_CONTAINER_METADATA_FILE -Raw | ConvertFrom-Json).HostPrivateIPv4Address; Set-Content -Path 'C:\\inetpub\\wwwroot\\datadog.json' -Value \"{ `\"DD_AGENT_HOST`\": `\"$private_ip`\" }\"; net stop /y was; net start w3svc; C:\\ServiceMonitor.exe w3svc"
+]
+```
+
+#### Alternative: EC2 metadata endpoint
+
+If the ECS container metadata file is not available, configure network routes within the container to access the EC2 metadata endpoint (`169.254.169.254`) and the ECS credentials endpoint (`169.254.170.2`).
+
+Add the bootstrap script and `DD_AGENT_HOST` assignment to the container's `entryPoint`. Substitute `<Windows Startup Command>` with your application's startup command:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop; $ifIndex = (Get-NetAdapter -InterfaceDescription 'Hyper-V Virtual Ethernet*' | Sort-Object | Select ifIndex).ifIndex; New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; $env:DD_AGENT_HOST = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content; <Windows Startup Command>"
+]
+```
+
+For IIS applications using the .NET Framework tracer, write the value to a [`datadog.json` configuration file][7] and restart IIS. Adjust the `datadog.json` path to match your application's root directory:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop; $ifIndex = (Get-NetAdapter -InterfaceDescription 'Hyper-V Virtual Ethernet*' | Sort-Object | Select ifIndex).ifIndex; New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; $private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content; Set-Content -Path 'C:\\inetpub\\wwwroot\\datadog.json' -Value \"{ `\"DD_AGENT_HOST`\": `\"$private_ip`\" }\"; net stop /y was; net start w3svc; C:\\ServiceMonitor.exe w3svc"
+]
+```
+
+Alternatively, add the full startup logic to a `.ps1` file and reference it in your Dockerfile. The following example includes IIS configuration:
+
+```powershell
+$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop
+$ifIndex = (Get-NetAdapter -InterfaceDescription "Hyper-V Virtual Ethernet*" | Sort-Object | Select ifIndex).ifIndex
+New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue
+New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue
+$private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content
+Set-Content -Path "C:\inetpub\wwwroot\datadog.json" -Value "{ `"DD_AGENT_HOST`": `"$private_ip`" }"
+net stop /y was
+net start w3svc
+C:\ServiceMonitor.exe w3svc
+```
+
+```dockerfile
+ENTRYPOINT ["powershell.exe", "C:\\app\\startup.ps1"]
+```
+
+**Note**: The EC2 metadata endpoint examples use IMDSv1. If your instances require IMDSv2, replace the `Invoke-WebRequest` call with a token-based request:
+
+```powershell
+$token = (Invoke-WebRequest -UseBasicParsing -Method PUT -Uri 'http://169.254.169.254/latest/api/token' -Headers @{'X-aws-ec2-metadata-token-ttl-seconds'='21600'}).Content
+$private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4' -Headers @{'X-aws-ec2-metadata-token'=$token}).Content
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -321,3 +396,4 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 [4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
 [5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
 [6]: /containers/amazon_ecs/?tab=awscli#setup
+[7]: /tracing/trace_collection/library_config/dotnet-framework/#optional-configuration

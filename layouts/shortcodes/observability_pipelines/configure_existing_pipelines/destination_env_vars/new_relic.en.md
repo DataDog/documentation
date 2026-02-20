@@ -1,4 +1,4 @@
 - New Relic account ID:
-	- Stored in the environment variable `DD_OP_DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+	- The default environment variable is `DD_OP_DESTINATION_NEW_RELIC_ACCOUNT_ID`.
 - New Relic license:
-	- Stored in the environment variable `DD_OP_DESTINATION_NEW_RELIC_LICENSE_KEY`.
+	- The default environment variable is `DD_OP_DESTINATION_NEW_RELIC_LICENSE_KEY`.

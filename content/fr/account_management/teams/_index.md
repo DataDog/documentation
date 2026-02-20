@@ -12,10 +12,6 @@ Utilisez les équipes pour associer des ressources telles que des dashboards, se
 
 L'appartenance à une équipe est flexible. Les utilisateurs peuvent rejoindre des équipes, être ajoutés par d'autres membres ou par un administrateur. Un utilisateur peut appartenir à plusieurs équipes.
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Profitez de l'aperçu !" >}}
-  L'intégration GitHub pour les équipes est disponible en préversion.
-{{< /callout >}}
-
 ## Configuration
 
 ### Navigation

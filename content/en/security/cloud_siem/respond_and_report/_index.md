@@ -10,6 +10,10 @@ further_reading:
   text: "Measure and optimize security team efficiency with Cloud SIEM security operational metrics"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Workflow Automation is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Datadog Security Orchestration, Automation, and Response (SOAR) helps you orchestrate security operations, investigate signals, and remediate threats using [Workflow Automation][1]. For example, you can [run a workflow][2] to:

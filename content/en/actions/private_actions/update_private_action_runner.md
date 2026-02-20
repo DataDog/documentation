@@ -55,7 +55,7 @@ Navigate to the directory containing your `docker-compose.yaml` file.
 services:
   private-actions-runner:
     image: gcr.io/datadoghq/private-action-runner:{{< private-action-runner-version "private-action-runner" >}}
-    cpus: 25
+    cpus: 0.25
     mem_limit: 1g
     deploy:
       replicas: 1

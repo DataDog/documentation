@@ -61,6 +61,7 @@ La biblioteca Lambda de Datadog y las bibliotecas de rastreo para Python y Node.
   - EventBridge
   - DynamoDB
   - S3
+  - Step Functions
 - Rastreo de decenas de bibliotecas de [Python][3] y [Node.js][4] adicionales listas para usar.
 
 En el caso de las aplicaciones serverless de Python y Node.js, Datadog recomienda [instalar bibliotecas de rastreo de Datadog][5].

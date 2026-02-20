@@ -28,4 +28,4 @@
 파이프라인 구성을 변경하고 싶으면 [기존 파이프라인 업데이트][602]을 참고하세요.
 
 [601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
-[602]: /ko/observability_pipelines/update_existing_pipelines
+[602]: /ko/observability_pipelines/configuration/update_existing_pipelines

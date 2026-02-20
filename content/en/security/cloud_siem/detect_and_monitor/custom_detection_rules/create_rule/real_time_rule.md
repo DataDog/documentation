@@ -343,4 +343,4 @@ In the **Preview detection** section, check the steps, transitions, and time win
 
 {{% cloud_siem/create_suppression %}}
 
-[1]: https://app.datadoghq.com/security/rules/new
+[1]: https://app.datadoghq.com/security/siem/rules/new

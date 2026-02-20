@@ -1,4 +1,6 @@
 ---
+description: Datadog Agent を設定し、TCP および SOCKS5 プロキシ経由でログを送信するとともに、HAProxy と NGINX
+  の詳細な設定例を参照します。
 further_reading:
 - link: /logs/
   tag: ドキュメント
@@ -12,7 +14,9 @@ further_reading:
 title: TCP Agent のログ用プロキシ
 ---
 
-{{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
+{{% logs-tcp-disclaimer %}}
+
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 <div class="alert alert-danger">
     TCP は {{< region-param key="dd_site_name" >}} サイトでは利用できません。詳細については<a href="/help/">サポート</a>にお問い合わせください。
 </div>
@@ -294,7 +298,7 @@ stream {
 {{% /site-region %}}
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

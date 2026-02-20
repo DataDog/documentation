@@ -52,10 +52,6 @@ If you use an application key tied to a user to enable SCIM and that user leaves
 
 To avoid losing access to your data, Datadog strongly recommends that you create a [service account][6] dedicated to SCIM. Within that service account, create an application key to use in the SCIM integration.
 
-## Email verification
-
-Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the invite link shared by email. The link is active for 2 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

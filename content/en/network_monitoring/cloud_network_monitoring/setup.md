@@ -20,9 +20,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cnm-kubernetes-egress/"
       tag: "Blog"
       text: "How Datadog Cloud Network Monitoring helps you move to a deny-by-default network egress policy at scale"
-
-      
-
+    - link: "/network_monitoring/cloud_network_monitoring/glossary"
+      tag: "Doc"
+      text: "CNM Terms and Concepts"
 ---
 
 Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -264,7 +264,7 @@ agents:
         seLinuxOptions:
           user: "system_u"
           role: "system_r"
-          type: "spc_t"
+          type: "super_t"
           level: "s0"
 ```
 

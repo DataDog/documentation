@@ -5,7 +5,7 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "/cloud_cost_management/tags/tag_pipelines"
+- link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Tag Pipelines"
 - link: "/cloud_cost_management/tags/tag_explorer"
@@ -88,7 +88,7 @@ For example, a tag `Team:Engineering-Services` appears as `team:engineering-serv
 
 ## Override tag value normalization
 
-Turn on **Tag Normalization** in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. For now, the tag normalization will only apply to user-defined tags from cloud costs and not for tags outputted from Tag Pipelines. For all new users, the Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically. To backfill normalized tags for a longer period up to 15 months, contact [Datadog support][13].
+Turn on **Tag Normalization** in the Tag Pipelines page to normalize all cost tag values to match the Metrics normalization. From the example above, you would see `team:engineering-services` everywhere. Tag normalization applies to user-defined tags from cloud costs. Tags created by Tag Pipelines are not normalized. For Azure, the `consumedservice` out-of-the-box tag is also normalized to lowercase. For all new users, the Tag Normalization toggle is enabled by default, with normalized tag values backfilled for the past 3 months automatically. To backfill normalized tags for a longer period up to 15 months, contact [Datadog support][13].
 
 Tag normalization allows you to:
 - View, filter and group Cost Recommendations and cost data with the same tag values
@@ -132,7 +132,7 @@ Other tag sources (such as AWS Organization tags, integration tile tags, and sim
 [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
 [2]: /cloud_cost_management/container_cost_allocation
 [3]: /cloud_cost_management/setup/aws/#aws-resource-tags
-[4]: /cloud_cost_management/tags/tag_pipelines
+[4]: /cloud_cost_management/allocation/tag_pipelines
 [5]: /cloud_cost_management/tags/tag_explorer
 [6]: /cloud_cost_management/allocation/custom_allocation_rules
 [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html

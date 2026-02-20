@@ -1,29 +1,62 @@
 ---
+app_id: google-cloud-firestore
+app_uuid: 16876032-6aa7-44a6-bc39-4c6d9a7f90c7
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.firestore.document.write_count
+      metadata_path: metadata.csv
+      prefix: gcp.firestore.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 268
+    source_type_name: Google Cloud Firestore
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - data stores
 - google cloud
 - ログの収集
 - モバイル
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
-description: Google Cloud Firestore のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_firestore/
+display_on_public_website: true
 draft: false
 git_integration_title: google_cloud_firestore
-has_logo: true
 integration_id: google-cloud-firestore
 integration_title: Google Cloud Firestore
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_firestore
-public_title: Datadog-Google Cloud Firestore インテグレーション
-short_description: Google Cloud Firestore のキーメトリクスを追跡
-version: '1.0'
+public_title: Google Cloud Firestore
+short_description: Firebase と Google Cloud が提供する、モバイルと Web とサーバー開発向けの柔軟でスケーラブルなデータベースです。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Data Stores
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Category::Mobile
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Firebase と Google Cloud が提供する、モバイルと Web とサーバー開発向けの柔軟でスケーラブルなデータベースです。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Firestore
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Google Cloud Firestore は、Firebase と Google Cloud Platform によるモバイル、Web、およびサーバー開発に対応した柔軟で拡張性の高いデータベースです。
@@ -36,7 +69,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### 収集データ
+### ログ収集
 
 Google Cloud Firestore のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
@@ -50,7 +83,7 @@ Google Cloud Firestore のログは Google Cloud Logging で収集され、Cloud
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-cloud-firestore" >}}
+{{< get-metrics-from-git "google_cloud_firestore" >}}
 
 
 ### イベント

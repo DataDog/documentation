@@ -86,6 +86,15 @@
       1.42.2 or later
     {{- end -}}
   {{- end -}}
+<!-- IBM MQ (ibmmqjmsclient) -->
+  {{- if eq (.Get "lib") "ibmmqjmsclient" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.55.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.55.0 or later
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 <!-- Python -->
@@ -97,6 +106,15 @@
     {{- end -}}
     {{- if eq (.Get "type") "recommended" -}}
       2.11.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (aiokafka) -->
+  {{- if eq (.Get "lib") "aiokafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      4.1.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      4.1.0 or later
     {{- end -}}
   {{- end -}}
 <!-- RabbitMQ (kombu) -->
@@ -206,6 +224,15 @@
       5.52.0 or later
     {{- end -}}
   {{- end -}}
+<!-- RabbitMQ (rhea) -->
+  {{- if eq (.Get "lib") "rhea" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.3.0 or 4.27.0 or 3.48.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.3.0 or later
+    {{- end -}}
+  {{- end -}}
 <!-- RabbitMQ (amqplib) -->
   {{- if eq (.Get "lib") "amqplib" -}}
     {{- if eq (.Get "type") "minimal" -}}
@@ -251,6 +278,15 @@
       5.25.0 or later
     {{- end -}}
   {{- end -}}
+<!-- BullMQ (bullmq) -->
+  {{- if eq (.Get "lib") "bullmq" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      5.82.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      5.82.0 or later
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
 <!-- Go -->
@@ -271,6 +307,37 @@
     {{- end -}}
     {{- if eq (.Get "type") "recommended" -}}
       1.66.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (kafka-go) -->
+  {{- if eq (.Get "lib") "kafka-go" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.63.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.63.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Ruby -->
+{{- if eq (.Get "lang") "ruby" -}}
+<!-- Kafka (ruby-kafka) -->
+  {{- if eq (.Get "lib") "ruby-kafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.23.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.23.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- Kafka (karafka) -->
+  {{- if eq (.Get "lib") "karafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      2.23.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      2.23.0 or later
     {{- end -}}
   {{- end -}}
 {{- end -}}

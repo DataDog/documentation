@@ -33,22 +33,69 @@ further_reading:
 
 ## Overview
 
-The Datadog Docker Agent is a version of the [Datadog Agent][1] that supports Docker, containerd, and Podman runtimes. For supported Docker versions, see [Supported Platforms][35].
+The Datadog Docker Agent is a version of the [Datadog Agent][1] that supports Docker, containerd, and Podman runtimes. For supported Docker versions, see [Supported Platforms][2].
 
 ## Install the Datadog Docker Agent
-Follow the [in-app installation flow in Datadog][34].
+Follow the [in-app installation flow in Datadog][3]. This is the recommended flow, which helps you create your `docker run` command with your API key, the required minimum configurations, and toggles for various Datadog features.
 
 {{< img src="/agent/basic_agent_usage/agent_install_docker.png" alt="In-app installation steps for the Datadog Agent on Docker." style="width:90%;">}}
 
+## Manually run the Datadog Docker Agent
+
+The Fleet Automation flow helps configure your Datadog Agent container with Datadog's recommended instructions. To configure this manually, see the examples below.
+
+Use the following command to run the Agent as a Docker container once on each host you want to monitor. Replace `<DATADOG_API_KEY>` with your Datadog API key and `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+```shell
+docker run -d --cgroupns host --pid host --name dd-agent \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -e DD_SITE=<DATADOG_SITE> \
+  -e DD_API_KEY=<DATADOG_API_KEY> \
+  gcr.io/datadoghq/agent:7
+```
+{{% /tab %}}
+{{% tab "Windows" %}}
+The Datadog Agent is supported on Windows Server 2019 (LTSC) and Windows Server 2022 (LTSC). The following PowerShell command runs the Datadog Agent container:
+
+```powershell
+docker run -d --name dd-agent `
+  -v \\.\pipe\docker_engine:\\.\pipe\docker_engine `
+  -e DD_SITE=<DATADOG_SITE> `
+  -e DD_API_KEY=<DATADOG_API_KEY> `
+  gcr.io/datadoghq/agent:7
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: For Docker Compose, see [Compose and the Datadog Agent][4]. For deploying the Agent in Podman, see the instructions in [Using the Docker integration with Podman container runtime][5].
+
 ## Integrations
 
-After the Datadog Docker Agent is up and running, you can [configure Datadog integrations][12] to collect metrics and logs automatically from your application containers. Datadog's [Container Autodiscovery][36] enables you to define monitoring configuration for dynamic resources in containerized systems.
+After the Datadog Docker Agent is up and running, you can [configure Datadog integrations][6] to collect metrics and logs automatically from your application containers. Datadog's [Container Autodiscovery][7] enables you to define monitoring configuration for dynamic resources in containerized systems.
 
 ## Configuration options for the Datadog Docker Agent
 
-In a non-containerized environment, configuration options for the Datadog Agent are set in [`datadog.yaml`][13]. For the Datadog Docker Agent, you can set `datadog.yaml` configuration options through environment variables.
+### Container registries
+
+Images are available for 64-bit x86 and Arm v8 architectures. Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
+
+| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
+| ------------------------ | ---------------------- | -------------------- | ----------------- |
+| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
+
+By default, the above instructions pull the image from Google Artifact Registry (`gcr.io/datadoghq`). If Google Artifact Registry is not accessible in your deployment region, use another registry.
+
+If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
+
+<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ### Environment variables
+
+In a non-containerized environment, configuration options for the Datadog Agent are set in [`datadog.yaml`][8]. For the Datadog Docker Agent, you can set `datadog.yaml` configuration options through environment variables.
 
 #### Global options
 
@@ -80,7 +127,7 @@ In a non-containerized environment, configuration options for the Datadog Agent 
 : The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks), the `collector-queue` component may fall behind and fail the health check. You can increase the number of runners to run checks in parallel.
 
 `DD_APM_ENABLED`
-: Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][14].
+: Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][9].
 
 `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION`
 : In some environments, the initial logs from hosts might not include the correct tags. If you're missing tags on new hosts in your logs, include this environment variable and set it to `"10m"`.
@@ -98,24 +145,24 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 `DD_PROXY_NO_PROXY`
 : A space-separated list of URLs for which no proxy should be used.
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][15].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][10].
 
 #### Optional collection Agents
 
 Optional collection Agents are disabled by default for security or performance reasons. Use these environment variables to enable them:
 
 `DD_APM_NON_LOCAL_TRAFFIC`
-: Allow non-local traffic when [tracing from other containers][16].
+: Allow non-local traffic when [tracing from other containers][11].
 
 `DD_LOGS_ENABLED`
-: Enable [log collection][17] with the Logs Agent.
+: Enable [log collection][12] with the Logs Agent.
 
 `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED`
-: Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available.
+: Enable [live process collection][13] with the Process Agent. The [live container view][14] is already enabled by default if the Docker socket is available.
 
 #### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][20]:
+Send custom metrics with [the StatsD protocol][15]:
 
 `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`
 : Listen to DogStatsD packets from other containers (required to send custom metrics).
@@ -137,11 +184,11 @@ Send custom metrics with [the StatsD protocol][20]:
 
 `DD_USE_DOGSTATSD`
 : Enable or disable sending custom metrics from the DogStatsD library.
-Learn more about [DogStatsD over Unix Domain Sockets][21].
+Learn more about [DogStatsD over Unix Domain Sockets][16].
 
 #### Tagging
 
-As a best practice, Datadog recommends using [unified service tagging][22] when assigning tags.
+As a best practice, Datadog recommends using [unified service tagging][17] when assigning tags.
 
 Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher. To extract even more tags, use the following options:
 
@@ -154,11 +201,11 @@ Datadog automatically collects common tags from Docker, Kubernetes, ECS, Swarm, 
 `DD_COLLECT_EC2_TAGS`
 : Extract custom EC2 tags without using the AWS integration.
 
-See the [Docker Tag Extraction][23] documentation to learn more.
+See the [Docker Tag Extraction][18] documentation to learn more.
 
 #### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][24].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][19].
 
 #### Ignore containers
 
@@ -188,7 +235,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 `DD_AC_EXCLUDE`
 : **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"`, `image:.*` (**Note**: This variable is only honored for Autodiscovery.)
 
-Additional examples are available on the [Container Discover Management][25] page.
+Additional examples are available on the [Container Discovery Management][20] page.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -218,7 +265,7 @@ Additional examples are available on the [Container Discover Management][25] pag
 
 ## Commands
 
-See the [Agent Commands guides][26] to discover all the Docker Agent commands.
+See the [Agent Commands guides][21] to discover all the Docker Agent commands.
 
 ## Data collected
 
@@ -228,17 +275,17 @@ By default, the Docker Agent collects metrics with the following core checks. To
 
 | Check       | Metrics       |
 |-------------|---------------|
-| Container   | [Metrics][27]
-| CPU         | [System][28]  |
-| Disk        | [Disk][29]    |
-| Docker      | [Docker][30]  |
-| File Handle | [System][28]  |
-| IO          | [System][28]  |
-| Load        | [System][28]  |
-| Memory      | [System][28]  |
-| Network     | [Network][31] |
-| NTP         | [NTP][32]     |
-| Uptime      | [System][28]  |
+| Container   | [Metrics][22]
+| CPU         | [System][23]  |
+| Disk        | [Disk][24]    |
+| Docker      | [Docker][25]  |
+| File Handle | [System][23]  |
+| IO          | [System][23]  |
+| Load        | [System][23]  |
+| Memory      | [System][23]  |
+| Network     | [Network][26] |
+| NTP         | [NTP][27]     |
+| Uptime      | [System][23]  |
 
 ### Events
 
@@ -254,35 +301,37 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 ## Uninstall Single Step APM Instrumentation
 
-If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][33] to uninstall APM Instrumentation.
+If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][28] to uninstall APM Instrumentation.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[12]: /agent/docker/integrations/
-[13]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[14]: /agent/docker/apm/
-[15]: /agent/configuration/proxy/#agent-v6
-[16]: /agent/docker/apm/#tracing-from-other-containers
-[17]: /agent/docker/log/
-[18]: /infrastructure/process/
-[19]: /infrastructure/livecontainers/
-[20]: /developers/dogstatsd/
-[21]: /developers/dogstatsd/unix_socket/
-[22]: /getting_started/tagging/unified_service_tagging/
-[23]: /agent/docker/tag/
-[24]: /agent/configuration/secrets-management/?tab=linux
-[25]: /agent/guide/autodiscovery-management/
-[26]: /agent/configuration/agent-commands/
-[27]: /integrations/container/
-[28]: /integrations/system/#metrics
-[29]: /integrations/disk/#metrics
-[30]: /agent/docker/data_collected/#metrics
-[31]: /integrations/network/#metrics
-[32]: /integrations/ntp/#metrics
-[33]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure
-[34]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
-[35]: /agent/supported_platforms/?tab=cloudandcontainers
-[36]: /getting_started/containers/autodiscovery
+[2]: /agent/supported_platforms/?tab=cloudandcontainers
+[3]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[4]: /containers/guide/compose-and-the-datadog-agent/
+[5]: /containers/guide/podman-support-with-docker-integration/
+[6]: /containers/docker/integrations/
+[7]: /getting_started/containers/autodiscovery
+[8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[9]: /containers/docker/apm/
+[10]: /agent/configuration/proxy/#agent-v6
+[11]: /containers/docker/apm/?tab=linux#tracing-from-other-containers
+[12]: /containers/docker/log/
+[13]: /infrastructure/process/
+[14]: /infrastructure/livecontainers/
+[15]: /developers/dogstatsd/
+[16]: /developers/dogstatsd/unix_socket/
+[17]: /getting_started/tagging/unified_service_tagging/?tab=docker
+[18]: /containers/docker/tag
+[19]: /agent/configuration/secrets-management/?tab=linux
+[20]: /containers/guide/container-discovery-management/?tab=containerizedagent
+[21]: /agent/configuration/agent-commands/
+[22]: /integrations/container/
+[23]: /integrations/system/#metrics
+[24]: /integrations/disk/#metrics
+[25]: /containers/docker/data_collected/#metrics
+[26]: /integrations/network/#metrics
+[27]: /integrations/ntp/#metrics
+[28]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/docker/#remove-single-step-apm-instrumentation-from-your-agent

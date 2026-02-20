@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "filter": "@severity:(critical OR high)",
+      "page": {
+        "limit": 1
+      }
+    }
+  }
+}

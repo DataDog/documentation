@@ -20,6 +20,9 @@ further_reading:
   tag: Blog
   text: Cómo Datadog Cloud Network Monitoring te ayuda a pasar a una política de salida
     de red de denegación por defecto a escala
+- link: /network_monitoring/cloud_network_monitoring/glossary
+  tag: Doc
+  text: Términos y conceptos CNM
 title: Configuración de Cloud Network Monitoring
 ---
 
@@ -92,7 +95,7 @@ Cloud Network Monitoring admite el uso de los siguientes sistemas de aprovisiona
 - Chef v12.7 o posterior: Consulta la [receta de Datadog Chef][12]
 - Ansible v2.6 o posterior: Consulta el [rol Ansible de Datadog][13]
 
-## Configuración
+## Instalación
 
 Cloud Network Monitoring está diseñado para analizar el tráfico _entre_ endpoints de red y asignar dependencias de red. Datadog recomienda instalar CNM en un subconjunto significativo de tu infraestructura y en un **_mínimo de 2 hosts_** para maximizar el valor.
 

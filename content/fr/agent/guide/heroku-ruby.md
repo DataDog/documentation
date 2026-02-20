@@ -1,4 +1,7 @@
 ---
+description: Guide pas à pas pour déployer et instrumenter une application Ruby on
+  Rails sur Heroku avec Datadog afin de collecter des métriques, des logs, des traces
+  et des données d'intégration.
 further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: Documentation
@@ -73,20 +76,20 @@ Pour identifier votre compte, Datadog utilise une clé d'API. [Connectez-vous à
 Déployez ensuite l'Agent Datadog sur votre application. Ce guide tire profit du [buildpack Heroku Datadog][10]. Pour en savoir plus sur les [buildpacks Heroku][11] et sur leur utilité, référez-vous à la documentation Heroku officielle.
 
 ```shell
-# Activer les métadonnées Heroku Labs Dyno pour définir automatiquement la variable d'environnement HEROKU_APP_NAME
+# Enable Heroku Labs Dyno Metadata to set HEROKU_APP_NAME env variable automatically
 heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
-# Définir le hostname dans Datadog sur appname.dynotype.dynonumber pour garantir la continuité des métriques
+# Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
 heroku config:add DD_DYNO_HOST=true
 
-# Définir le site Datadog (par exemple, us5.datadoghq.com) 
+# Set your Datadog site (for example, us5.datadoghq.com) 
 heroku config:add DD_SITE=$DD_SITE
 
-# Ajouter ce buildpack et définir la clé d'API Datadog
+# Add this buildpack and set your Datadog API key
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
 heroku config:add DD_API_KEY=$DD_API_KEY
 
-# Déployer sur Heroky pour forcer un rebuild
+# Deploy to Heroku forcing a rebuild
 git commit --allow-empty -m "Rebuild slug"
 git push heroku main
 ```
@@ -150,7 +153,7 @@ Migrating to CreateWidgets (20140707111715)
 
 Vous pouvez alors visualiser l'endpoint `/widgets` de votre application qui utilise cette base de données.
 
-Pour activer l'intégration Datadog/Postgres, récupérez les identifiants de connexion à la base de données depuis Heroku. Exécutez la commande suivante à partir du terminal `psql` : 
+Pour activer l'intégration Postgres Datadog, récupérer les identifiants de la base de données depuis Heroku. Exécuter la commande suivante depuis le terminal `psql`
 
 ```shell
 heroku pg:credentials:url DATABASE -a $APPNAME
@@ -161,7 +164,7 @@ Créez un dossier `datadog/conf.d` à la racine de votre application :
 
 ```shell
 cd ruby-getting-started
-# Créer le dossier pour la configuration des intégrations dans le code de votre application
+# Create the folder for the integrations configuration in your application code
 mkdir -p datadog/conf.d/
 ```
 
@@ -171,11 +174,11 @@ Créez un fichier de configuration `postgres.yaml` en remplaçant votre host, no
 init_config:
 
 instances:
-  - host: <VOTRE HOSTNAME>
-    port: <VOTRE PORT>
-    username: <VOTRE NOM D'UTILISATEUR>
-    password: <VOTRE MOT DE PASSE>
-    dbname: <NOM DE VOTRE BDD>
+  - host: <YOUR HOSTNAME>
+    port: <YOUR PORT>
+    username: <YOUR USERNAME>
+    password: <YOUR PASSWORD>
+    dbname: <YOUR DBNAME>
     ssl: True
 ```
 
@@ -184,15 +187,15 @@ Au lieu de mettre à jour manuellement votre configuration, vous pouvez faire ap
 ```bash
 #!/usr/bin/env bash
 
-# Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnement de l'application Heroku
+# Update the Postgres configuration from above using the Heroku application environment variable
 if [ -n "$DATABASE_URL" ]; then
   POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
   if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
-    sed -i "s/<VOTRE HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE NOM D'UTILISATEUR>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE MOT DE PASSE>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<VOTRE PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
-    sed -i "s/<NOM DE VOTRE BDD>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR USERNAME>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR DBNAME>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
   fi
 fi
 ```
@@ -201,7 +204,7 @@ Effectuez le déploiement sur Heroku :
 
 ```shell
 git add .
-git commit -m "Activer l'intégration postgres"
+git commit -m "Enable postgres integration"
 git push heroku main
 ```
 
@@ -283,23 +286,23 @@ Créez un fichier de configuration intitulé `/datadog/conf.d/redisdb.yaml` à l
 init_config:
 
 instances:
-  - host: <VOTRE_HOST_REDIS>
-    password: <VOTRE_MOTDEPASSE_REDIS>
-    port: <VOTRE_PORT_REDIS>
+  - host: <YOUR_REDIS_HOST>
+    password: <YOUR_REDIS_PASSWORD>
+    port: <YOUR_REDIS_PORT>
 ```
 
 Au lieu de mettre à jour manuellement votre configuration, vous pouvez faire appel aux variables d'environnement Heroku pour configurer votre intégration Redis et utiliser le [script de pré-exécution][14] pour remplacer ces valeurs avant le lancement de l'Agent Datadog :
 
-```shell
+```bash
 #!/usr/bin/env bash
 
-# Mettre à jour la configuration Redis ci-dessus à l'aide des variables d'environnement de l'application Heroku
+# Update the Redis configuration from above using the Heroku application environment variable
 if [ -n "$REDIS_URL" ]; then
   REDISREGEX='rediss?://([^:]*):([^@]+)@([^:]+):([^/]+)$'
   if [[ $REDIS_URL =~ $REDISREGEX ]]; then
-    sed -i "s/<VOTRE_HOST_REDIS>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
-    sed -i "s/<VOTRE_MOT_DE_PASSE_REDIS>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
-    sed -i "s/<VOTRE_PORT_REDIS>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
+    sed -i "s/<YOUR_REDIS_HOST>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
+    sed -i "s/<YOUR_REDIS_PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
+    sed -i "s/<YOUR_REDIS_PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/redisdb.d/conf.yaml"
   fi
 fi
 ```
@@ -415,7 +418,7 @@ Effectuez le déploiement sur Heroku :
 
 ```shell
 git add .
-git commit -m "Activer l'intégration sidekiq"
+git commit -m "Enable sidekiq integration"
 git push heroku main
 ```
 
@@ -452,10 +455,10 @@ Créez un fichier de configuration intitulé `/datadog/conf.d/mcache.yaml` à la
 
 ```yaml
 instances:
-  - url: <VOTRE_HOST_MCACHE>
-    port: <VOTRE_PORT_MCACHE>
-    username: <VOTRE_NOM_UTILISATEUR_MCACHE>
-    password: <VOTRE_MOT_DE_PASSE_MCACHE>
+  - url: <YOUR_MCACHE_HOST>
+    port: <YOUR_MCACHE_PORT>
+    username: <YOUR_MCACHE_USERNAME>
+    password: <YOUR_MCACHE_PASSWORD>
 ```
 
 Au lieu de mettre à jour manuellement votre configuration, vous pouvez faire appel aux variables d'environnement Heroku pour configurer votre intégration Memcached et utiliser le [script de pré-exécution][14] pour remplacer ces valeurs avant le lancement de l'Agent Datadog :
@@ -463,15 +466,15 @@ Au lieu de mettre à jour manuellement votre configuration, vous pouvez faire ap
 ```bash
 #!/usr/bin/env bash
 
-# Mettre à jour la configuration Memcached ci-dessus à l'aide des variables d'environnement de l'application Heroku
+# Update the Memcached configuration from above using the Heroku application environment variable
 if [ -n "$MEMCACHEDCLOUD_SERVERS" ]; then
   MCACHEREGEX='([^:]+):([^/]+)$'
   if [[ $MEMCACHEDCLOUD_SERVERS =~ $MCACHEREGEX ]]; then
-    sed -i "s/<VOTRE_HOST_MCACHE>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
-    sed -i "s/<VOTRE_PORT_MCACHE>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+    sed -i "s/<YOUR_MCACHE_HOST>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+    sed -i "s/<YOUR_MCACHE_PORT>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
   fi
-  sed -i "s/<VOTRE_NOM_UTILISATEUR_MCACHE>/${MEMCACHEDCLOUD_USERNAME}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
-  sed -i "s/<VOTRE_MOT_DE_PASSE_MCACHE>/${MEMCACHEDCLOUD_PASSWORD}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+  sed -i "s/<YOUR_MCACHE_USERNAME>/${MEMCACHEDCLOUD_USERNAME}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+  sed -i "s/<YOUR_MCACHE_PASSWORD>/${MEMCACHEDCLOUD_PASSWORD}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
 fi
 ```
 
@@ -479,7 +482,7 @@ Effectuez le déploiement sur Heroku :
 
 ```shell
 git add .
-git commit -m "Activer l'intégration memcached "
+git commit -m "Enable memcached integration"
 git push heroku main
 ```
 
@@ -525,7 +528,7 @@ Collector
 
 Pour bénéficier d'un tracing distribué depuis votre application Ruby Heroku, activez l'instrumentation.
 
-Vérifiez que vous êtes dans le dossier avec le code de l'application :
+Assurez-vous d'être dans le dossier contenant le code de l'application :
 
 ```shell
 cd ruby-getting-started
@@ -561,7 +564,7 @@ Validez vos modifications et envoyez-les à Heroku :
 
 ```shell
 git add .
-git commit -m "Activer le tracing distribué"
+git commit -m "Enable distributed tracing"
 git push heroku main
 ```
 
@@ -615,22 +618,22 @@ Accédez à la [section des traces de l'APM][19] pour visualiser vos traces :
 
 {{< img src="agent/guide/heroku_ruby/traces.png" alt="Traces de l'application Ruby dans Datadog" >}}
 
-Accédez à la [liste des services][20] pour afficher tous les services de votre application ainsi que la vue associée :
+Accédez au [Software Catalog][20] pour voir tous vos services d'application et votre vue de service d'application :
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Vue de la liste des services dans Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Vue des services de l'application Ruby dans Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Software Catalog dans Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Page de détails du service de l'application Ruby dans Datadog" >}}
 
 ## Logs
 
 Ensuite, activez les logs en configurant un drain de logs Heroku.
 
-Lorsque vous utilisez un drain de logs, tous les logs sont transmis à Datadog à partir de la même `ddsource` (généralement `heroku`), pour qu'il n'y ait pas de parsing automatique des logs avec des intégrations autres que Heroku.
+Lorsque vous utilisez un drain de logs, tous les logs arrivent dans Datadog à partir de la même `ddsource` (généralement `heroku`), pour qu'il n'y ait pas de parsing automatque des logs en utilisant les intégrations autres que Heroku.
 
 ### Génération de vos logs Rails
 
-Pour configurer vos logs Rails, Datadog recommande l'utilisation de Lograge. Pour cet exemple d'application, appliquez une configuration permettant de mettre en corrélation les logs et les traces.
+Pour configurer vos logs Rails, Datadog recommande l'utilisation de Lograge. Pour un exemple d'application, configurez-la de façon à mettre en corrélation les logs et les traces.
 
-Vérifiez que vous êtes dans le dossier avec le code de l'application :
+Assurez-vous d'être dans le dossier contenant le code de l'application :
 ```shell
 cd ruby-getting-started
 ```
@@ -647,7 +650,7 @@ Installez le gem avec `bundle install` :
 bundle install
 ```
 
-Pour configurer Lograge, créez un fichier `config/initializers/lograge.rb` et ajoutez-y ce qui suit :
+Pour configurer Lograge, créez un fichier appelé `config/initializers/lograge.rb` et ajoutez ce qui suit :
 
 ```ruby
 Rails.application.configure do
@@ -657,7 +660,7 @@ Rails.application.configure do
   # Indique de se connecter au format JSON
   config.lograge.formatter = Lograge::Formatters::Json.new
 
-  ## Désactive la coloration des logs
+  ## Désactive la coloration du log
   config.colorize_logging = false
 
   # Journalisation dans STDOUT
@@ -668,9 +671,9 @@ Rails.application.configure do
     correlation = Datadog::Tracing.correlation
 
     {
-      # Ajoute des ID sous forme de tags dans la sortie des logs
+      # Ajoute des ID sous forme de tags vers la sortie de log
       :dd => {
-        # Pour garantir un certain niveau de précision pendant la sérialisation JSON, utilisez des chaînes pour les grands nombres
+        # Pour préserver la précision pendant la sérialisation JSON, utilisez les chaînes pour les grands nombres
         :trace_id => correlation.trace_id.to_s,
         :span_id => correlation.span_id.to_s,
         :env => correlation.env.to_s,
@@ -688,13 +691,13 @@ Effectuez le déploiement sur Heroku :
 
 ```shell
 git add .
-git commit -m "Ajout de lograge"
+git commit -m "Add lograge"
 git push heroku main
 ```
 
-### Configuration d'un drain de logs Heroku
+### Configuration d'un drain de log Heroku
 
-Heroku possède un routeur de logs natif désigné par le terme « drain de logs ». Il recueille les logs à partir de l'ensemble des dynos exécutés dans votre application et les envoie à Heroku. Parmi ces logs figurent les logs d'application, les logs du routeur Heroku et les logs des dynos système Heroku. Vous pouvez configurer le drain de logs pour acheminer ces logs vers Datadog. Le drain de logs envoie les logs système Heroku à Datadog à partir de `ddsource=heroku`.
+Heroku dispose d'un routeur de logs natif appelé log drain, qui collecte les logs de tous les dynos exécutés dans votre application et les envoie à Heroku. Les logs incluent les logs de votre application, les logs du routeur Heroku et les logs système des dynos Heroku. Vous pouvez configurer le log drain pour acheminer ces logs vers Datadog. Le log drain envoie les logs système Heroku à Datadog depuis `ddsource=heroku`.
 
 {{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Vue des logs Heroku" >}}
 
@@ -703,9 +706,9 @@ La configuration du drain de logs Heroku permet également d'envoyer à Datadog 
 Pour configurer le drain de logs Heroku depuis un terminal, exécutez ce qui suit :
 
 ```shell
-export APPNAME=<NOM_DE_VOTRE_APPLICATION>
-export DD_ENV=<ENVIRONNEMENT_DE_VOTRE_APPLICATION> # example: production, staging
-export DD_SERVICE=<NOM_DE_VOTRE_SERVICE>
+export APPNAME=<YOUR_APPLICATION_NAME>
+export DD_ENV=<YOUR_APPLICATION_ENVIRONMENT> # example: production, staging
+export DD_SERVICE=<YOUR_SERVICE_NAME>
 
 heroku drains:add "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=$DD_API_KEY&ddsource=heroku&env=$DD_ENV&service=$DD_SERVICE&host=${APPNAME}.web.1" -a $APPNAME
 ```
@@ -733,13 +736,13 @@ Comme vous pouvez le voir, les logs de routeur Heroku sont automatiquement pars�
 
 Vous pouvez générer une métrique de latence reposant sur ces paramètres parsés.
 
-Accédez à Logs -> Generate Metrics, puis cliquez sur le bouton + New Metric :
+Accédez à Logs -> Generate Metrics et cliquez sur le bouton « + New Metric » :
 
 {{< img src="agent/guide/heroku_ruby/new_custom_metric.png" alt="Nouvelle métrique basée sur des logs" >}}
 
 Définissez la requête `Source:heroku` pour filtrer tous les logs Heroku. Sélectionnez la mesure `Duration`. En outre, il paraît intéressant de pouvoir regrouper cette métrique en fonction de `appname`, `dyno`, `dynotype` et `@http.status_code`. Gardez à l'esprit que les métriques générées par le parsing des logs sont considérées comme des métriques custom. Nous vous recommandons de générer du trafic vers votre application pour obtenir un certain volume d'entrées de log.
 
-Pour finir, attribuez un nom à votre métrique et cliquez sur **Create Metric** :
+Pour finir, ajoutez un nom à votre métrique et cliquez sur **Create Metric** :
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="Création d'une nouvelle métrique basée sur des logs" >}}
 
@@ -774,13 +777,13 @@ Suivez les étapes détaillées dans la section précédente pour générer des 
 
 #### Corrélation des logs et des traces
 
-Si vous suivez les instructions de configuration ci-dessus, les logs envoyés à partir du drain de logs Heroku sont mis en corrélation avec les traces.
+Si vous suivez les instructions de configuration ci-dessus, les logs envoyés depuis le log drain Heroku sont corrélés aux traces.
 
 <div class="alert alert-info">
-<strong>Remarque</strong> : les logs système et sur le routeur Heroku sont générés par Heroku. La mise en corrélation des traces est impossible.
+<strong>Remarque</strong> : Le routeur Heroku et les logs système sont générés par Heroku, et leur corrélation avec les traces est impossible.
 </div>
 
-Vous pouvez vérifier que la configuration ne comporte aucune erreur en accédant à la [vue des logs][24]. Les logs de l'application Rails devraient afficher la trace pertinente corrélée :
+Vous pouvez vérifier que la configuration est une réussite en naviguant vers la [Vue des logs][24] pour voir que les logs de l'application Rails possèdent leur trace en corrélation :
 
 {{< img src="agent/guide/heroku_ruby/log_trace_correlation.png" alt="Corrélation des logs et des traces" >}}
 
@@ -799,13 +802,13 @@ heroku ps:exec -a $APPNAME
 
 # Establishing credentials... done
 # Connecting to web.1 on ⬢ ruby-heroku-datadog...
-# DD_API_KEY environment variable not set. Run: heroku config:add DD_API_KEY=<votre clé API>
+# DD_API_KEY environment variable not set. Run: heroku config:add DD_API_KEY=<your API key>
 #The Datadog Agent has been disabled. Unset the DISABLE_DATADOG_AGENT or set missing environment variables.
 
 ~ $
 ```
 
-Vous pouvez ignorer les avertissements concernant la configuration manquante de `DD_API_KEY`. Il s'agit du comportement attendu. En effet, [Heroku ne définit pas de variables de configuration pour la session SSH][26]. Toutefois, le processus de l'Agent Datadog parvient à y accéder.
+Vous pouvez ignorer les avertissements indiquant que `DD_API_KEY` n'est pas définie. C'est normal. La raison est qu'[Heroku ne définit pas les variables de configuration pour la session SSH elle-même][26], mais le processus de l'Agent Datadog a pu accéder à ces variables.
 
 Une fois la session SSH ouverte, exécutez la commande de statut Datadog :
 
@@ -855,7 +858,7 @@ Agent (v7.27.0)
 [17]: https://elements.heroku.com/addons/memcachedcloud
 [18]: https://docs.datadoghq.com/fr/getting_started/tagging/unified_service_tagging/
 [19]: https://app.datadoghq.com/apm/traces
-[20]: https://app.datadoghq.com/apm/services
+[20]: https://app.datadoghq.com/services
 [21]: https://devcenter.heroku.com/articles/log-runtime-metrics/
 [22]: https://app.datadoghq.com/logs/livetail
 [23]: https://devcenter.heroku.com/articles/log-runtime-metrics#cpu-load-averages

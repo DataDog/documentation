@@ -67,8 +67,8 @@ App and API Protection (AAP)
 : - [Protect][34]: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
-: - Configuration at runtime (Preview): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
-: - [Remotely set Agent sampling rate][35] (Preview): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+: - Configuration at runtime: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
+: - [Remotely set Agent sampling rate][35]: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 [Dynamic Instrumentation][36]
 : - Send critical metrics, traces, and logs from your live applications with no code changes.
@@ -85,6 +85,9 @@ Observability Pipelines
 
 Private action runner
 : - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
+
+Feature Flags
+: - Deliver flag configurations (targeting and assignment rules) to server-side SDKs for synchronous variant assignment based on evaluation context. See [Feature Flags][48] for more information.
 
 ## Security considerations
 
@@ -115,6 +118,7 @@ Enabling Remote Configuration impacts the following products. Each product defin
 | Network Device Monitoring (NDM) | `NDM_DEVICE_PROFILES_VIEW`<br>`NDM_DEVICE_PROFILES_EDIT` |
 | Container Autoscaling | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ` |
 | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46]. |
+| Feature Flags | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>For more information, see [Feature Flags][48]. |
 
 ## Enable Remote Configuration
 
@@ -136,6 +140,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
+| Feature Flags | [Server-Side Feature Flags](/feature_flags/server/) |
 
 ## Best practices
 
@@ -201,3 +206,4 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [45]: /account_management/rbac/permissions/#app-builder--workflow-automation
 [46]: /account_management/rbac/permissions/#serverless
 [47]: /containers/autoscaling
+[48]: /feature_flags/

@@ -5,6 +5,9 @@ aliases:
 - /es/security_platform/cloud_siem/
 - /es/security/cloud_siem/security_home/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
+  tag: Blog
+  text: 'Datadog Cloud SIEM: Impulsar la innovación en las operaciones de seguridad'
 - link: https://www.datadoghq.com/blog/track-issues-datadog-case-management/
   tag: Blog
   text: Supervisa, clasifica y asigna problemas con Datadog Case Management
@@ -50,7 +53,7 @@ further_reading:
   text: 'Monitorización de Amazon SES: Detectar campañas de phishing en la nube'
 - link: https://www.datadoghq.com/blog/detection-as-code-cloud-siem/
   tag: Blog
-  text: Crea, prueba y escala detecciones como código con Datadog Cloud SIEM
+  text: Construye, test, y escala detecciones como código con Datadog Cloud SIEM
 title: Cloud SIEM
 ---
 
@@ -264,7 +267,7 @@ Ve qué reglas son las más ruidosas calculando el porcentaje de señales que se
 
 [1]: https://securitylabs.datadoghq.com/
 [2]: https://www.datadoghq.com/product/cloud-siem/
-[3]: https://app.datadoghq.com/security/home?
+[3]: https://app.datadoghq.com/security/siem/home?
 [4]: /es/getting_started/security/cloud_siem/
 [5]: /es/security/cloud_siem/investigate_security_signals/#case-management
 [6]: /es/logs/log_configuration/indexes

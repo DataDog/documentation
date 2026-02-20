@@ -57,10 +57,10 @@ instances:
       - kong_stream_status: stream.status
 ```
 
-### 構成
+### 設定
 
 <div class="alert alert-danger">
-構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
+構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前に<em>しなければなりません</em>。
 </div>
 
 Openmetrics チェックの構成は、標準の [Agent チェック][5]とほぼ同じです。主な違いは、`check.yaml` ファイルに変数 `openmetrics_endpoint` を入れることです。`conf.d/kong.yaml` は以下のようになります。
@@ -263,7 +263,7 @@ Openmetrics で利用できるすべてのコンフィギュレーションオ�
 `exclude_labels`
 : `exclude_labels` は、除外するラベルの配列です。除外されるラベルは、メトリクスの送信時にタグとして追加されません。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

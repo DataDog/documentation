@@ -11,6 +11,11 @@ To deploy a Datadog dashboard, you can use the Datadog Operator and `DatadogDash
 
 ### Setup
 
+1. Run the installation command, substituting your Datadog API and application keys:
+   ```shell
+   helm install my-datadog-operator datadog/datadog-operator --set apiKey=<DATADOG_API_KEY> --set appKey=<DATADOG_APP_KEY> --set datadogDashboard.enabled=true --set datadogCRDs.crds.datadogDashboards=true
+   ```
+
 1. Create a file with the spec of your `DatadogDashboard` deployment configuration.
 
    **Example**:

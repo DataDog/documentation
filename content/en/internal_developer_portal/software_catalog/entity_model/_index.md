@@ -60,6 +60,8 @@ algolia:
 
 Software Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services.
 
+{{< img src="/tracing/internal_developer_portal/entity-model-flow-chart.png" alt="A flow chart showing how components of Software Catalog connect with each other and with your cloud environment " style="width:100%;" >}}
+
 ## Supported versions
 
 Datadog supports four versions of the definition schema:
@@ -597,5 +599,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
-[21]: /dora_metrics/setup/deployments?tab=apmdeploymenttracking#handling-multiple-services-in-the-same-repository
+[21]: /dora_metrics/setup/#handling-multiple-services-in-the-same-repository
 [22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

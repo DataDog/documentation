@@ -59,9 +59,9 @@ Pour commencer, vous pouvez configurer l'analyse statique sur la page [**Code An
 ## Intégrer l'analyse statique dans le cycle de développement de vos logiciels
 
 ### Fournisseurs de CI
-{{< whatsnext desc="Vous pouvez exécuter une analyse statique sur n'importe quel fournisseur de plateforme CI de votre choix. Consultez la documentation spécifique au fournisseur pour configurer l'analyse statique dans vos pipelines CI :">}}
-    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{{< /nextlink >}}
+{{< whatsnext desc="Vous pouvez exécuter une analyse statique sur n'importe quel fournisseur de plateforme CI de votre choix. Consultez la documentation spécifique au fournisseur pour configurer l'analyse statique dans vos pipelines CI :">}}
+    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Autres fournisseurs de CI{{< /nextlink >}}
 {{< /whatsnext >}}
 

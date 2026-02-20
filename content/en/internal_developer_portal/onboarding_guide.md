@@ -19,6 +19,9 @@ further_reading:
   - link: '/internal_developer_portal/eng_reports/'
     tag: 'Documentation'
     text: 'Engineering Reports'
+  - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
+    tag: Blog
+    text: Keep service ownership up to date with Datadog Teams' GitHub integration
 ---
 
 ## Overview

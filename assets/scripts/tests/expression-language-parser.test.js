@@ -818,6 +818,45 @@ describe('ExpressionLanguageParser', () => {
     });
   });
 
+  describe('isDefined function', () => {
+    test('should return true for defined variables', () => {
+      const parser = new ExpressionLanguageParser();
+      parser.evaluate('x = 5');
+
+      const result = parser.evaluate('isDefined(x)');
+      expect(result.success).toBe(true);
+      expect(result.result).toBe('True');
+    });
+
+    test('should return false for undefined variables', () => {
+      const parser = new ExpressionLanguageParser();
+
+      const result = parser.evaluate('isDefined(undefinedVar)');
+      expect(result.success).toBe(true);
+      expect(result.result).toBe('False');
+    });
+
+    test('should return true for built-in variables', () => {
+      const parser = new ExpressionLanguageParser();
+
+      const result = parser.evaluate('isDefined(myString)');
+      expect(result.success).toBe(true);
+      expect(result.result).toBe('True');
+    });
+
+    test('should work in conditional expressions', () => {
+      const parser = new ExpressionLanguageParser();
+
+      const result1 = parser.evaluate('isDefined(myString) && len(myString) > 0');
+      expect(result1.success).toBe(true);
+      expect(result1.result).toBe('True');
+
+      const result2 = parser.evaluate('isDefined(notDefined) || mySequence[0] == 1');
+      expect(result2.success).toBe(true);
+      expect(result2.result).toBe('True');
+    });
+  });
+
   describe('Simulator Mode', () => {
     let parser;
 

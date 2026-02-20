@@ -57,8 +57,8 @@ Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments
 2. If you are using your own WebGL template, or have added a new WebGL template, modify it to include the Datadog Browser SDK delivered by CDN.
 
   ```html
-  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
-  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum-slim.js"></script>
+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js" crossorigin></script>
+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum-slim.js" crossorigin></script>
   ```
 
 ### Specify application details in the UI

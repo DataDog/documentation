@@ -5,6 +5,9 @@ algolia:
   - proveedor de identidad
   - IdP
   - Okta
+description: Sincroniza usuarios y equipos desde Okta a Datadog utilizando SCIM para
+  el aprovisionamiento automatizado de usuarios, la gestión de equipos y el control
+  de acceso.
 further_reading:
 - link: /account_management/scim/
   tag: Documentación

@@ -3,6 +3,8 @@ aliases:
 - /ja/api/latest/tracing/
 - /ja/api/v1/tracing/
 - /ja/api/v2/tracing/
+description: カスタム インテグレーションやサポート対象外のフレームワーク向けの tracing API を使用して、トレースを Datadog Agent
+  に直接送信する方法を説明します。
 further_reading:
 - link: /tracing/
   tag: ドキュメント
@@ -43,13 +45,13 @@ trace1 = [ span, span2, span3 ]
 
 <div class="alert alert-info">Datadog トレーシングライブラリは、64 ビットおよび 128 ビットのトレースを両方サポートしています。詳しくは、<a href="/tracing/guide/span_and_trace_id_format/">トレースとスパン ID のフォーマット</a>をご覧ください。</div>
 
-| フィールド      | タイプ    | 説明                           |
+| フィールド      | 型    | Description                           |
 |------------|---------|---------------------------------------|
 | `duration`   | int64   | リクエストの処理時間 (ナノ秒単位)。 |
 | `error`      | int32   | エラーが発生したことを示すには、この値を 1 に設定します。エラーが発生した場合は、エラーメッセージ、タイプ、スタックなどの追加情報を meta プロパティで渡す必要があります。 |
-| `meta`       | オブジェクト  | キー/値メタデータのセット。キーと値は文字列でなければなりません。 |
+| `meta`       | object  | キー/値メタデータのセット。キーと値は文字列でなければなりません。 |
 | - `<any-key>` | 文字列 | キー値メタデータの追加のプロパティ。 |
-| モニター    | オブジェクト  | キー/値メタデータのセット。キーは文字列、値は 64 ビット浮動小数点数でなければなりません。 |
+| モニター    | object  | キー/値メタデータのセット。キーは文字列、値は 64 ビット浮動小数点数でなければなりません。 |
 | - `<any-key>` | double | キー値メトリクスの追加のプロパティ。 |
 | name       | 文字列  | スパン名。スパン名の長さは、最大 100 文字です。 |
 | `parent_id`  | int64   | 親スパンの整数ID。 |
@@ -89,7 +91,7 @@ trace1 = [ span, span2, span3 ]
 {{< /code-block >}}
 
 
-## 応答
+## レスポンス
 
 200
 : OK
@@ -153,6 +155,6 @@ Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

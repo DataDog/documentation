@@ -27,7 +27,14 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 ## Setup
 
-To start sending RUM data from your Android or Android TV application to Datadog:
+**Choose your setup method:**
+
+- **[Agentic Onboarding (in Preview)][18]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your Android application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **Manual setup** (below): Follow the instructions to manually add and configure the RUM SDK in your Android application.
+
+### Manual setup
+
+To send RUM data from your Android or Android TV application to Datadog, complete the following steps.
 
 ### Step 1 - Declare the Android SDK as a dependency
 
@@ -410,12 +417,12 @@ To enable the Android SDK to start sending data:
 {{% tab "Kotlin" %}}
 
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
 ```
 
 {{% /tab %}}
@@ -423,12 +430,12 @@ To enable the Android SDK to start sending data:
 {{% tab "Java" %}}
 
 ```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
 ```
 
 {{% /tab %}}
@@ -523,15 +530,15 @@ To filter out specific errors reported by `DatadogInterceptor`, you can configur
    {{% tab "Kotlin" %}}
 
    ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-        .setErrorEventMapper { errorEvent ->
-            if (errorEvent.shouldBeDiscarded()) {
-                null
-            } else {
-                errorEvent
-            }
-    }
-    .build();
+   val rumConfig = RumConfiguration.Builder(applicationId)
+       .setErrorEventMapper { errorEvent ->
+           if (errorEvent.shouldBeDiscarded()) {
+               null
+           } else {
+               errorEvent
+           }
+       }
+       .build();
    ```
 
    {{% /tab %}}
@@ -637,3 +644,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [15]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
 [16]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [17]: https://square.github.io/okhttp/features/interceptors/
+[18]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring

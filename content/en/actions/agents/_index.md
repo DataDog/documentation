@@ -11,7 +11,7 @@ further_reading:
   text: "What are AI agents and how do they work?"
 ---
 
-{{< callout url="https://app.datadoghq.com/actions/agents" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
 Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 

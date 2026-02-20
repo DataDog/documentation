@@ -10,7 +10,7 @@ title: Migración a las características de eventos nuevas
 ---
 
 <div class="alert alert-danger">
-El flujo de eventos y los monitores de eventos heredados de Datadog se retirarán el <strong>30 de junio de 2022</strong>. Datadog está migrando a todos los clientes a una experiencia de eventos nueva y mejorada. Esta página contiene información importante sobre esta migración. Antes de la fecha de retiro, sigue los pasos de esta página para asegurarte de que tus visualizaciones y monitores de eventos existentes sigan funcionando de manera correcta.</div>
+El flujo de eventos y los monitores de eventos heredados de Datadog vencen el <strong>30 de junio de 2022</strong>. Datadog está migrando a todos los clientes a una experiencia de eventos nueva y mejorada. Esta página contiene información importante sobre esta migración. Antes de la fecha de vencimiento, sigue los pasos de esta página para asegurarte de que tus visualizaciones y monitores de eventos existentes siguen funcionando correctamente.</div>
 
 
 ## ¿Por qué cambiar las características de eventos?
@@ -104,7 +104,7 @@ Algunos valores de estado han cambiado:
 | Estado heredado | Estado nuevo |
 |---------------|------------|
 | success (correcto)       | ok (correcto)         |
-| warning (advertencia)       | warn (advertencia)       |
+| advertencia       | warn (advertencia)       |
 | info (información)          | info (información)       |
 | error         | error      |
 
@@ -189,14 +189,14 @@ Los monitores de eventos heredados no admiten el rollup de cardinalidad.
 : Sintaxis nueva </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/service_management/events/explorer
 [2]: /es/service_management/events/explorer/analytics
-[3]: service_management/events/usage/#custom-metrics
+[3]: /es/service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /es/service_management/events/guides/new_events_sources/
 [6]: /es/help/

@@ -9,6 +9,10 @@ further_reading:
   text: "How App and API Protection Works"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 [Datadog App and API Protection (AAP)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.
 
 AAP secures functions written in Python, Node, Go, Java, and .NET. Because AAP is built on top of Serverless APM, you can set it up by adding an environment variable.

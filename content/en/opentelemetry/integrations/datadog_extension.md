@@ -14,8 +14,6 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The Datadog Extension is in Preview.</div>
-
 As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector.
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly within Datadog on the [Infrastructure List][2] and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
@@ -87,6 +85,7 @@ service:
 | `hostname` | Custom hostname for the Collector | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint | `localhost:9875` |
 | `http.path` | HTTP server path for metadata | `/metadata` |
+| `deployment_type` | Deployment type for the Collector. One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
 | `proxy_url` | HTTP proxy URL for outbound requests | - |
 | `timeout` | Timeout for HTTP requests | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification | `false` |

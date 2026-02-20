@@ -153,10 +153,6 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 
 {{< get-metrics-from-git "cloud-foundry">}}
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: /integrations/guide/pivotal-cloud-foundry-manual-setup
 [3]: /integrations/faq/pivotal_architecture

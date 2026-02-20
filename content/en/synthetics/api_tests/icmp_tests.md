@@ -108,10 +108,7 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-These reasons include the following:
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
+For a complete list of error codes, see [API Testing Errors][11].
 
 ## Permissions
 
@@ -137,3 +134,4 @@ If you are using the [custom role feature][10], add your user to any custom role
 [8]: /synthetics/settings/#global-variables
 [9]: /account_management/rbac/
 [10]: /account_management/rbac#custom-roles
+[11]: /synthetics/api_tests/errors/#icmp-errors

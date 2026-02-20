@@ -59,6 +59,21 @@ Notifications can be sent to individuals and teams through email, Slack, Jira, P
 
 {{% notifications-integrations %}}
 
+#### Create a webhook for security automation
+
+You can use webhooks to send alerts to other platforms, such as SOAR. To set up a webhook:
+
+1. Navigate to the [Webhooks][4] integration.
+1. Click **+ New** in the **Webhooks** section.
+1. Enter a name for the webhook.
+1. Enter the webhook URL.
+1. In the **Payload** section, select **Security Signal**.
+  {{< img src="security/security_signal_payload.png" alt="The webhooks signal security payload" style="width:100%;" >}}
+1. See the [Webhooks integration][5] documentation for more information on adding variables, custom variables, custom headers, and encoding as a form.
+1. Click **Save**.
+
+To use the webhook, add `@webhook-<WEBHOOK_NAME>` to the rule's notification section.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -66,3 +81,5 @@ Notifications can be sent to individuals and teams through email, Slack, Jira, P
 [1]: /security/notifications/variables/
 [2]: /security/detection_rules/#creating-and-managing-detection-rules
 [3]: /security/notifications/rules/
+[4]: https://app.datadoghq.com/integrations/webhooks
+[5]: /integrations/webhooks/

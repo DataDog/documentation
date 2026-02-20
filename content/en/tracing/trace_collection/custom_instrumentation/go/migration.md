@@ -4,9 +4,9 @@ description: 'Upgrade your Go tracer from v1 to v2.'
 aliases:
   - /tracing/trace_collection/custom_instrumentation/opentracing/go
 further_reading:
-    - link: 'tracing/trace_collection/custom_instrumentation/go/dd-api'
+    - link: 'tracing/trace_collection/custom_instrumentation/server-side'
       tag: 'Documentation'
-      text: 'Get started with v1 of the Go Tracer'
+      text: 'Custom Instrumentation for Go'
 ---
 
 ## Overview

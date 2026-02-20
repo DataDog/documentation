@@ -59,7 +59,7 @@ Programa un tiempo de inactividad en función de una o varias [etiquetas de moni
 
 [3]: /es/monitors/manage/#monitor-tags
 {{% /tab %}}
-{{% /tabs %}}
+{{< /tabs >}}
 
 #### Contexto del tiempo de inactividad
 Utiliza el contexto de grupo para aplicar filtros adicionales a tu tiempo de inactividad y tener un mayor control sobre los monitores que quieres silenciar. El contexto de grupo de un tiempo de inactividad se empareja con el objetivo específico del monitor. Si seleccionas varios monitores utilizando etiquetas de monitor, se buscarán los monitores etiquetados antes del emparejamiento con el contexto de grupo.
@@ -109,7 +109,7 @@ Los tiempos de inactividad recurrentes son útiles para los periodos de mantenim
 Cuando finaliza un único tiempo de inactividad de un tiempo de inactividad recurrente, se cancela el único tiempo de inactividad y se crea un nuevo tiempo de inactividad con las mismas restricciones, y horas de inicio y fin actualizadas. <br>
 **Nota**: El creador original se asocia a todos los tiempos de inactividad recién creados.
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas fuera del horario laboral y durante el fin de semana" style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt= "Configuración de tiempos de inactividad utilizando un cronograma recurrente para silenciar las alertas fuera del horario laboral y durante el fin de semana" style="width:100%;" >}}
 
 Utiliza [reglas de recurrencia][4] (RRULE) para definir los cronogramas de los tiempos de inactividad. Utiliza el [generador de reglas RRULE][5] oficial como herramienta para generar reglas recurrentes. Un caso de uso común consiste en utilizar las reglas RRULE para definir tiempos de inactividad para días específicos del mes, por ejemplo, el tercer lunes de cada mes. Para ver más casos de uso de recurrencias, consulta la guía para [suprimir alertas con tiempos de inactividad][6].
 
@@ -149,7 +149,7 @@ El historial de tiempos de inactividad se puede ver en la página [Estado del mo
 
 Los monitores activan eventos cuando cambian entre los siguientes estados posibles: `ALERT` `WARNING` , `RESOLVED` y `NO DATA`. Cuando un monitor está silenciado o tiene un tiempo de inactividad programado, las transiciones de `RESOLVED` a otro estado **no** activan eventos o notificaciones.
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Gráfico de estado de un monitor que muestra que la alerta de transición de estado durante el tiempo de inactividad no crea un evento de alerta" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Gráfico de estado de un monitor que muestra que la alerta de transición de estado durante el tiempo de inactividad no crea un evento de alerta"  style="width:80%;">}}
 
 **Nota**: Silenciar o anular el silenciamiento de un monitor desde la página de estado del monitor no elimina los tiempos de inactividad programados asociados al monitor. Para editar o eliminar un  tiempo de inactividad, utiliza la página [Gestionar tiempo de inactividad][1] o la [API][11].
 

@@ -32,8 +32,6 @@ Quieres monitorizar la tasa de error, pero solo si hay al menos 15 entradas. En 
 
 ```((a/b)*100)*is_greater(b,15)```
 
-{{< img src="/monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts/error_rate_min_threshold.png" alt="Configuración del monitor que muestra el cálculo de tasa de error con un umbral de solicitud mínimo de 15 solicitudes" style="width:100%;" >}}
-
 La función `is_greater` funciona del siguiente modo:
 - Devuelve `1` cuando el número de `trace.rack.requests` es superior a 15
 - Devuelve `0` cuando el número de `trace.rack.requests` es igual o inferior a 15

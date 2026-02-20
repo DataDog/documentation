@@ -1,6 +1,12 @@
 ---
 title: Teams
 description: Organize team assets, filter Datadog experiences, and manage team membership with team handles, notifications, and resource associations.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
+    tag: Blog
+    text: Keep service ownership up to date with Datadog Teams' GitHub integration
+
 ---
 
 ## Overview
@@ -10,15 +16,11 @@ Use Teams to link resources such as dashboards, services, monitors, and incident
 
 Team membership is flexible. Users can join teams, be added by other members, or be added by an administrator. Users can belong to multiple teams.
 
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" header="Join the Preview!">}}
-  Github Integration for Teams is in Preview.
-{{< /callout >}}
-
 ## Setup
 
 ### Navigation
 
-Access the team directory page from [Organization Settings][1] or by navigating to [**Service Management > Teams**][2]. The [team directory page][1] lists all teams within your organization.
+Access the team directory page from [Organization Settings][1] or by navigating to [**Teams**][2]. The [team directory page][1] lists all teams within your organization.
 
 ### Create team
 
@@ -130,19 +132,37 @@ From the team filter:
 
 The following table describes the products in which you can use the team filter:
 
-| Product List Page       | Filter basis                                                                     |
-|-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][11]         | Team handle                                                                      |
-| [Resource Catalog][8]   | Team handle                                                                      |
-| [Software Catalog][12]    | Team handle                                                                      |
-| [Incidents][13]          | Team handle                                                                      |
-| [Monitors][14]          | Team handle                                                                      |
-| [APM Error Tracking][15] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
-| [Logs Error Tracking][16] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
-| [Service Level Objectives][17] | Team handle                                                                 |
-| [Data Streams Monitoring][18]  | Team handle                                                                 |
-| [Synthetic Tests][19]          | Team handle                                                                 |
-| [Notebooks][20]          | Team handle                                                                      |
+| Product List Page              | Filter basis                                                                       |
+|--------------------------------|------------------------------------------------------------------------------------|
+| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Apps][21]                     | Team handle                                                                        |
+| [Case Management projects][22] | Team handle                                                                        |
+| [Connections][23]              | Team handle                                                                        |
+| [Connection Groups][24]        | Team handle                                                                        |
+| [Cross Org Connections][25]    | Team handle                                                                        |
+| [Datastores][26]               | Team handle                                                                        |
+| [Data Streams Monitoring][18]  | Team handle                                                                        |
+| [Dashboards][11]               | Team handle                                                                        |
+| [Incidents][13]                | Team handle                                                                        |
+| [Integrations][27]             | Team handle                                                                        |
+| [Logs Error Tracking][16]      | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Logs Pipelines][28]           | Team handle                                                                        |
+| [Monitors][14]                 | Team handle                                                                        |
+| [Notebooks][20]                | Team handle                                                                        |
+| [Observability Pipelines][29]  | Team handle                                                                        |
+| [On-Call][30]                  | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Powerpacks][32]               | Team handle                                                                        |
+| [Private Action Runner][31]    | Team handle                                                                        |
+| [Reference tables][33]         | Team handle                                                                        |
+| [Resource Catalog][8]          | Team handle                                                                        |
+| [RUM apps][34]                 | Team handle                                                                        |
+| [Security rules][35]           | Team handle                                                                        |
+| [Security suppressions][36]    | Team handle                                                                        |
+| [Service Level Objectives][17] | Team handle                                                                        |
+| [Sheets][37]                   | Team handle                                                                        |
+| [Software Catalog][12]         | Team handle                                                                        |
+| [Synthetic Tests][19]          | Team handle                                                                        |
+| [Workflows][38]                | Team handle                                                                        |
 
 
 ## Permissions
@@ -159,11 +179,11 @@ To customize your team, see [Team Management][3].
 [3]: /account_management/teams/manage/
 [4]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [5]: /dashboards/#dashboard-details
-[6]: /service_management/incident_management/
+[6]: /incident_response/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[8]: /infrastructure/resource_catalog/
+[8]: https://app.datadoghq.com/infrastructure/catalog
 [9]: /tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
-[10]: /service_management/service_level_objectives/#slo-tags
+[10]: /service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services
 [13]: https://app.datadoghq.com/incidents
@@ -174,3 +194,21 @@ To customize your team, see [Team Management][3].
 [18]: https://app.datadoghq.com/data-streams
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
+[21]: https://app.datadoghq.com/app-builder/apps/list
+[22]: https://app.datadoghq.com/cases
+[23]: https://app.datadoghq.com/actions/connections
+[24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
+[25]: https://app.datadoghq.com/organization-settings/cross-org-visibility
+[26]: https://app.datadoghq.com/actions/datastores
+[27]: https://app.datadoghq.com/integrations
+[28]: https://app.datadoghq.com/logs/pipelines
+[29]: https://app.datadoghq.com/observability-pipelines
+[30]: https://app.datadoghq.com/on-call/summary
+[31]: https://app.datadoghq.com/actions/private-action-runners
+[32]: /dashboards/widgets/powerpack/#powerpack-permissions
+[33]: https://app.datadoghq.com/reference-tables
+[34]: https://app.datadoghq.com/rum/list
+[35]: https://app.datadoghq.com/security/configuration/notification-rules
+[36]: https://app.datadoghq.com/security/configuration/suppressions
+[37]: https://app.datadoghq.com/sheets
+[38]: https://app.datadoghq.com/workflow

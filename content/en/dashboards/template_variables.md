@@ -6,6 +6,12 @@ aliases:
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 - link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
   tag: "Blog"
   text: "Use associated template variables to refine your dashboards"

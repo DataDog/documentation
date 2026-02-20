@@ -336,7 +336,8 @@ val strategy = ActivityViewTrackingStrategy(
         }
 
         override fun getViewName(component: Activity): String? = null
-    })
+    }
+)
 ```
    
 **Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
@@ -392,14 +393,14 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 To modify some attributes in your RUM events, or to drop some of the events entirely before batching, provide an implementation of `EventMapper<T>` when initializing the RUM Kotlin Multiplatform SDK:
 
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-    // ...
-    .setErrorEventMapper(rumErrorEventMapper)
-    .setActionEventMapper(rumActionEventMapper)
-    .setResourceEventMapper(rumResourceEventMapper)
-    .setViewEventMapper(rumViewEventMapper)
-    .setLongTaskEventMapper(rumLongTaskEventMapper)
-    .build()
+val rumConfig = RumConfiguration.Builder(applicationId)
+  // ...
+  .setErrorEventMapper(rumErrorEventMapper)
+  .setActionEventMapper(rumActionEventMapper)
+  .setResourceEventMapper(rumResourceEventMapper)
+  .setViewEventMapper(rumViewEventMapper)
+  .setLongTaskEventMapper(rumLongTaskEventMapper)
+  .build()
 ```
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:

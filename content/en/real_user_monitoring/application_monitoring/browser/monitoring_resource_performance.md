@@ -22,6 +22,32 @@ The RUM Browser SDK collects resources and assets for every RUM view (page load)
 
 RUM Resources inherit from all the context related to the active RUM View at the time of collection.
 
+## Early data collection
+The `trackEarlyRequests` SDK init parameter allows you to capture:
+
+* Unhandled rejections and uncaught exception errors when the SDK is first evaluated.
+* XHR and Fetch requests regardless of SDK loading status.
+
+
+To enable early data collection, set `trackEarlyRequests` to `true` in your Browser SDK initialization script. This feature requires Browser SDK v6.21.0+.
+
+<div class="alert alert-danger">
+  If you are using <code>beforeSend</code> with <code>trackEarlyRequests</code> enabled, properties associated with the request can be undefined. 
+</div>
+
+  For example:
+
+  ```javascript
+window.DD_RUM.init({
+    ...
+    beforeSend(event, eventContext) {
+      if (event.type === 'resource' && event.resource.type === 'xhr') {
+        eventContext.xhr.response // This might now break because `eventContext.xhr` is not necessarily defined
+      }
+    }
+})
+```
+
 ## Link RUM Resources to APM traces
 
 To get even more complete, end-to-end visibility into requests as they move across layers of your stack, connect your RUM data with corresponding backend traces. This enables you to:

@@ -1,6 +1,6 @@
 ---
 core_product:
-- network performance monitoring
+- クラウドネットワークモニタリング
 title: NetFlow
 ---
 [NetFlow][1] は、IP ネットワークのトラフィックがインターフェイスに出入りする際に収集するネットワークプロトコルシステムです。1996 年にシスコ社によって発表されました。

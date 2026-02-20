@@ -185,11 +185,13 @@ spec:
     - name: dd-csi-volume-dsd
       csi:
         driver: k8s.csi.datadoghq.com
+        readOnly: true
         volumeAttributes:
           type: DSDSocket
     - name: dd-csi-volume-apm-dir
       csi:
         driver: k8s.csi.datadoghq.com
+        readOnly: true
         volumeAttributes:
           type: APMSocketDirectory
 ```
@@ -209,6 +211,7 @@ For example:
 ```yaml
 csi:
     driver: k8s.csi.datadoghq.com
+    readOnly: true
     volumeAttributes:
         type: APMSocket
 name: datadog-apm
@@ -225,7 +228,7 @@ For example:
 ```yaml
 csi:
     driver: k8s.csi.datadoghq.com
-    readOnly: false
+    readOnly: true
     volumeAttributes:
         type: APMSocketDirectory
 name: datadog
@@ -240,6 +243,7 @@ For example:
 ```yaml
 csi:
     driver: k8s.csi.datadoghq.com
+    readOnly: true
     volumeAttributes:
         type: DSDSocket
 name: datadog-dsd
@@ -256,7 +260,7 @@ For example:
 ```yaml
 csi:
     driver: k8s.csi.datadoghq.com
-    readOnly: false
+    readOnly: true
     volumeAttributes:
         type: DSDSocketDirectory
 name: datadog
