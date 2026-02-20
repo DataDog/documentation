@@ -15,18 +15,13 @@ The IOC Explorer is in Preview.
 
 ## Overview
 
-Indicators of Compromise (IOC) are evidence that your systems have experienced a security breach. With the [IOC Explorer][1], you can view more details about compromises, and see related signals and logs.
+Indicators of Compromise (IOC) is evidence that your systems have experienced a security breach. Via the [IOC Explorer][1], more details about compromises and related signals and logs can be viewed.
 
 {{< img src="security/security_monitoring/ioc_explorer.png" alt="The IOC Explorer, showing an IP address that has been flagged as an indicator of compromise" style="width:100%;" >}}
 
 ## Prerequisites
 
-To view data in the IOC Explorer, all of the following must be true:
-- Your organization must subscribe to Cloud SIEM.
-- The indicator of compromise must be in a threat feed that was available to Datadog at the time of the log acquisition.
-  - For more information on the threat intelligence feeds the IOC Explorer displays content from, see [Threat intelligence sources][2].
-- A log that has a matching entity in threat intelligence must be acquired.
-- The time frame for the Explorer is fixed to the last 30 days. The log must be from within that time frame.
+To view data in the IOC Explorer, all of the following must be true: your organization must subscribe to Cloud SIEM, the indicator of compromise must be in a threat feed that was available to Datadog at the time of the log acquisition (for more information on the threat intelligence feeds the IOC Explorer displays content from, see [Threat intelligence sources][2]), a log that has a matching entity in threat intelligence must be acquired, and the time frame for the Explorer is fixed to the last thirty days (the log must be from within that time frame).
 
 ## Use the IOC Explorer
 
