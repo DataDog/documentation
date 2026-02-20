@@ -53,8 +53,6 @@ For installation steps, see the [Agent installation instructions][9].
 
 ### Configure the Agent
 
-Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][3].
-
 You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
 
 {{< tabs >}}
@@ -62,7 +60,7 @@ You must configure the Agent for each Real Application Cluster (RAC) node, becau
 ```yaml
 init_config:
 instances:
-  - server: '<HOSTNAME_1>:<PORT>'
+  - server: '<RAC_NODE_1>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: 'ENC[datadog_user_database_password]'
@@ -71,7 +69,7 @@ instances:
       - rac_cluster:<CLUSTER_NAME>
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-  - server: '<HOSTNAME_2>:<PORT>'
+  - server: '<RAC_NODE_2>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: 'ENC[datadog_user_database_password]'
@@ -89,7 +87,7 @@ The Agent connects only to the root multitenant container database (CDB). It que
 ```yaml
 init_config:
 instances:
-  - server: '<HOSTNAME_1>:<PORT>'
+  - server: '<RAC_NODE_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle DB service name
     username: 'datadog'
     password: 'ENC[datadog_user_database_password]'
@@ -98,7 +96,7 @@ instances:
       - rac_cluster:<CLUSTER_NAME>
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-  - server: '<HOSTNAME_2>:<PORT>'
+  - server: '<RAC_NODE_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle DB service name
     username: 'datadog'
     password: 'ENC[datadog_user_database_password]'
@@ -108,10 +106,9 @@ instances:
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
-The Agent connects only to CDB. It queries the information about PDBs while connected to CDB. Don't create connections to individual PDBs.
 
 Set the `rac_cluster` configuration parameter to the name of your RAC cluster or some user friendly alias. The `rac_cluster` filter helps you select all RAC nodes in the [DBM Oracle Database Overview dashboard][4]. You can set an additional filter for the database of interest.
 
