@@ -155,13 +155,13 @@ The Agent compresses and stores failed APM payloads in memory. The Agent drops t
   - Configurable using `apm_config.trace_writer.queue_size`
   - Default calculation:
      - `int(max(1, max memory / max payload size))`
-     - Example: `int(max(1, (500 * 1024 * 1024) / 3200000)) = 163`
+     - Example: `int(max(1, (500 * 1024 * 1024) / 3200000)) = 163` [payloads][6]
 
 #### Stats
   - Configurable using `apm_config.stats_writer.queue_size`
   - Default calculation:
      - `int(max(1, max memory / payload size))`
-     - Example: `int(max(1, (250 * 1024 * 1024) / 1500000)) = 174`
+     - Example: `int(max(1, (250 * 1024 * 1024) / 1500000)) = 174` [payloads][7]
 {{% /collapse-content %}}
 
 {{% collapse-content title="Advanced shipping configuration" level="h4" expanded=false %}}
@@ -174,7 +174,7 @@ When you enable dual shipping for the APM intake, each endpoint has an independe
 ## Processes
 {{% collapse-content title="Processes retry strategy" level="h4" expanded=false %}}
 
-The Process Agent uses the **metrics forwarder** for downstream delivery. The retry behavior follows the same strategy as the metric intake, using an [exponential backoff strategy][2] with the following default configurations:
+The Agent retries failed processes requests using an [exponential backoff strategy][2]. The Agent uses the same default retry configurations as the metrics intake:
 - Base backoff time: 2 seconds
 - Maximum backoff time: [64 seconds][3]
 - Maximum backoff time is reached after 6 retries
@@ -216,3 +216,5 @@ With checks running every 10 seconds, these settings buffer approximately 30 min
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
 [4]: https://docs.datadoghq.com/agent/configuration/network/#data-buffering
 [5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go#L34-L36
+[6]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/trace.go#L107-L116
+[7]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/stats.go#L73-L83
