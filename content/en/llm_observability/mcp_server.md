@@ -97,6 +97,26 @@ After you are connected, try prompts like:
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
 - Summarize experiment `exp-456` and identify the top 5 lowest-scoring events. For each, show the input, output, and which evaluations failed.
 
+## Combine with other Datadog tools
+
+The `core` toolset included in the setup URL gives your AI agent access to additional Datadog tools that pair naturally with LLM Observability analysis.
+
+### Export analysis to Datadog Notebooks
+
+The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. Instead of losing insights in ephemeral chat, you can export findings into a collaborative, shareable notebook that lives in Datadog alongside your traces and experiments.
+
+Notebooks support markdown, live graphs, and log streams — so an exported analysis becomes a living document your team can review, comment on, and revisit as your application evolves.
+
+Try prompts like:
+
+- Analyze experiment `exp-456`, identify the worst-performing dimensions, and export a summary report to a Datadog Notebook with a breakdown by evaluation scores.
+- Review error traces for my `customer-support-bot` over the past week and create a Datadog Notebook with the findings, including common failure patterns and recommended fixes.
+
+For custom visualizations that go beyond standard Datadog widgets — like comparison charts or quadrant plots — Notebooks also render [Mermaid diagrams][4] natively:
+
+- Analyze experiment `exp-456`, compare the `accuracy` scores across each prompt version, and export the results to a Datadog Notebook that includes a Mermaid bar chart of the average score for each version.
+- Analyze experiment `exp-456` and export a Datadog Notebook that plots each prompt version on a Mermaid quadrant chart with `relevance` on one axis and `accuracy` on the other. Identify which versions are underperforming on both dimensions.
+
 ## Setup
 
 To use the LLM Observability tools, connect to the Datadog MCP Server with the `llmobs` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your Datadog site:
@@ -113,3 +133,5 @@ For full setup instructions including client configuration for Cursor, Claude Co
 
 [1]: /bits_ai/mcp_server/setup/
 [2]: /llm_observability/
+[3]: /notebooks/
+[4]: /notebooks/guide/build_diagrams_with_mermaidjs/
