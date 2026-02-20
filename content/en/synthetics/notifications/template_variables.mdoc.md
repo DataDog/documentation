@@ -226,6 +226,9 @@ These are step execution metadata and results containing detailed information ab
 
 `synthetics.attributes.variables.extracted.description`
 : Step description
+
+`synthetics.attributes.variables.extracted.warnings`
+: List of warnings, each containing `.message` (the warning message) and `.type` (the warning type: `invalid_config`, `user_locator`, or `unable_to_compute_tti`)
 {% /if %}
 
 {% if equals($platform, "mobile") %}
@@ -239,6 +242,9 @@ These are step execution metadata and results containing detailed information ab
 
 `synthetics.attributes.variables.extracted.description`
 : Step description
+
+`synthetics.attributes.variables.extracted.warnings`
+: List of warnings, each containing `.message` (the warning message) and `.type` (the warning type)
 {% /if %}
 
 {% if equals($platform, "multistep") %}
