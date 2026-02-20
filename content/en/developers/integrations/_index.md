@@ -32,7 +32,7 @@ Correlate your data with user observability data
 : Use Datadog to increase the value of your platform by allowing customers to see the data from your platform alongside the rest of their technology stack.
 
 Decrease mean-time-to-resolution (MTTR) for customers 
-: When a customer's account is enriched with data from an integration, they are able to see a broader view of their entire stack, allowing them to debug and remediate issues more quickly. 
+: When a customer's account is enriched with data from an integration, they are able to see a broader view of their entire stack, allowing them to debug and remediate issues sooner.
 
 Increase adoption and visibility 
 : Native functionality for Datadog reduces friction to adoption, and displaying a tile on the [Integrations page][2] or the [Marketplace page][3] provides visibility to all Datadog customers.
@@ -52,7 +52,7 @@ Integration tiles are a component of integrations at Datadog.
 All official integrations must include the following:
 
 - **Telemetry**: Your integration must send at least one type of observability data (metrics, logs, traces, or events) to Datadog.
-- **Out-of-the-box dashboard**: A pre-built dashboard that visualizes the data your integration sends. See [Create an integration dashboard][10].
+- **Out-of-the-box dashboard**: A prebuilt dashboard that visualizes the data your integration sends. See [Create an integration dashboard][10].
 - **Tile images**: Screenshots or diagrams that appear on your tile in the Integrations or Marketplace page. See [Build an integration][11] for details.
 
 Depending on what your integration does, the following are also required:
@@ -112,7 +112,7 @@ Marketplace offerings are ideal for:
 * System integrators with specialized Datadog product expertise.
 * Partners offering professional services to enhance Datadog adoption.
 
-## Go-to-Market (GTM) opportunities
+## Go-to-market (GTM) opportunities
 
 Datadog offers GTM support. Reach out to your partner manager to learn more.
 
