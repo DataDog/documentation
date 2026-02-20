@@ -131,7 +131,16 @@ Claude Desktop has limited support for remote authentication. Use **local binary
 
 {{% tab "Codex" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site](/getting_started/site/). For example, for US1 use `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`. See the endpoint table in the [Claude Code](#claude-code) tab for all sites.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site](/getting_started/site/):
+
+| Datadog Site | MCP Server Endpoint |
+|--------|------|
+| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
+| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
+| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
 
 Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site.
 
@@ -233,22 +242,9 @@ Example JSON configuration (US1):
 {{% /tab %}}
 {{< /tabs >}}
 
-### Supported clients
-
-| Client | Developer | Notes |
-|--------|------|------|
-| [Cursor][8] | Cursor | Datadog [Cursor & VS Code extension](#cursor) recommended. |
-| [Claude Code][5] | Anthropic | |
-| [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](#claude-desktop) as needed. |
-| [Codex CLI][7] | OpenAI | |
-| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#vs-code) recommended. |
-| [Goose][9], [Kiro][22], [Kiro CLI][10], [Cline][17] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote auth is unreliable. |
-
-<div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
-
 ### Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication][auth]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][3] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
+The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
 
 {{< code-block lang="json" >}}
 {
@@ -265,34 +261,34 @@ The MCP Server uses OAuth 2.0 for [authentication][auth]. If you cannot go throu
 }
 {{< /code-block >}}
 
-For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
+For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
 ### Test access to the MCP Server
 
-1. Install the [MCP inspector][4], a developer tool for testing and debugging MCP servers.
+1. Install the [MCP inspector][2], a developer tool for testing and debugging MCP servers.
    ```bash
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
 3. For **URL**, enter the MCP Server endpoint for your regional Datadog site (for example, for US1: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`). See the endpoint table in the tabs above for other sites.
 4. Click **Connect**, then go to **Tools** > **List Tools**.
-5. Check if the [available tools][20] appear.
+5. Check if the [available tools][11] appear.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /account_management/api-app-keys/
-[4]: https://github.com/modelcontextprotocol/inspector
-[5]: https://www.anthropic.com/claude-code
-[6]: https://claude.ai/download
-[7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
-[8]: https://www.cursor.com/
-[9]: https://github.com/block/goose
-[10]: https://kiro.dev/cli/
-[11]: https://code.visualstudio.com/
-[17]: https://cline.bot/
-[20]: /bits_ai/mcp_server#available-tools
-[22]: https://kiro.dev/
-[23]: /account_management/org_settings/service_accounts/
-[auth]: https://modelcontextprotocol.io/specification/draft/basic/authorization
+[1]: /account_management/api-app-keys/
+[2]: https://github.com/modelcontextprotocol/inspector
+[3]: https://www.anthropic.com/claude-code
+[4]: https://claude.ai/download
+[5]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
+[6]: https://www.cursor.com/
+[7]: https://github.com/block/goose
+[8]: https://kiro.dev/cli/
+[9]: https://code.visualstudio.com/
+[10]: https://cline.bot/
+[11]: /bits_ai/mcp_server#available-tools
+[12]: https://kiro.dev/
+[13]: /account_management/org_settings/service_accounts/
+[14]: https://modelcontextprotocol.io/specification/draft/basic/authorization
