@@ -12,11 +12,15 @@ The SDK Configurations view shows the active configurations of SDKs per service.
 - Identify the source of a configuration value to help fix misconfigurations.
 - Discover available configuration options and how they are set.
 
-## Where to find it
+## Access SDK configurations
 
-1. Open the **Service Page**.
+To view SDK configurations for a service:
+
+1. Navigate to [**APM** > **Services**][5].
+1. Open the **Service Page** for your service.
 1. Go to **Service Config** > **SDK & Agent Configurations** tab.
-1. The **SDK Configurations** section shows the configurations for active instances of the service.
+
+The **SDK Configurations** section displays configurations for active instances of the service.
 
 ## Configuration sources
 
@@ -35,12 +39,13 @@ The configuration source shows where a given value is configured:
 
 Telemetry data is not available in the following situations:
 
-* No service instances have been active in the last 15 minutes.
-* Instrumentation telemetry has been disabled in configuration.
-* The instrumentation telemetry intake endpoint is not accessible (see [Network Destinations][3]).
-* The service name is manually set on spans (a [Service Override][4]).
+- No service instances have been active in the last 15 minutes.
+- Instrumentation telemetry has been disabled in configuration.
+- The instrumentation telemetry intake endpoint is not accessible (see [Network Destinations][3]).
+- The service name is manually set on spans (a [Service Override][4]).
 
 [1]: /tracing/trace_collection/runtime_config
 [2]: /agent/fleet_automation/remote_management
 [3]: /agent/configuration/network/#destinations
 [4]: /tracing/guide/base_service/#service-overrides
+[5]: https://app.datadoghq.com/software
