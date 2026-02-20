@@ -29,7 +29,12 @@ To set up the Deduplicate processor:
 
 #### Cache size
 
-The default cache size is 5,000 messages (recommended). The cached messages are kept in memory to determine if the incoming messages are duplicates. You can increase the cache size to fit your needs. **Note**: Increasing the cache size increases memory usage.
+The default cache size is 5,000 messages (recommended). The cached messages are kept in memory to determine if the incoming messages are duplicates. You can increase the cache size to fit your needs.
+
+**Notes**:
+- Increasing the cache size increases memory usage.
+- The cache is backed by a LRU cache, where the LRU cache size is the same as the configured cache size.
+- Since the cache is not shared between Workers, only duplicated events processed by the same Worker are dropped.
 
 ### Path notation example
 
