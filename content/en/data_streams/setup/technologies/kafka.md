@@ -99,6 +99,25 @@ See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5], [.NET]
 
 {{% data_streams/monitoring-kafka-pipelines %}}
 
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% data_streams/dsm-confluent-connectors %}}
+
+#### Self-hosted Kafka connectors
+
+_Requirements_: [`dd-trace-java` v1.44.0+][15]
+
+<div class="alert alert-info">This feature is in Preview.</div>
+
+Data Streams Monitoring can collect information from your self-hosted Kafka connectors. In Datadog, these connectors are shown as services connected to Kafka topics. Datadog collects throughput to and from all Kafka topics. Datadog does not collect connector status or sinks and sources from self-hosted Kafka connectors.
+
+##### Setup
+
+1. Ensure that the Datadog Agent is running on your Kafka Connect workers.
+2. Ensure that [`dd-trace-java`][16] is installed on your Kafka Connect workers.
+3. Modify your Java options to include `dd-trace-java` on your Kafka Connect worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
+
 [1]: /agent
 [2]: /data_streams/setup/language/java
 [3]: /data_streams/setup/language/go
@@ -113,3 +132,5 @@ See setup instructions for [Java][2], [Go][3], [Node.js][4], [Python][5], [.NET]
 [12]: /integrations/confluent_cloud/
 [13]: /integrations/kafka/?tab=host#kafka-consumer-integration
 [14]: /data_streams/setup/language/ruby
+[15]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.44.0
+[16]: https://github.com/DataDog/dd-trace-java

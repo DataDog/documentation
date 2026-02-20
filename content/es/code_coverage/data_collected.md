@@ -11,10 +11,6 @@ further_reading:
 title: Datos recopilados sobre Code Coverage
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage está en vista previa. Este producto sustituye a la función de <a href="https://docs.datadoghq.com/tests/code_coverage">cobertura de código</a> de Test Optimization, que queda obsoleta. Rellena el formulario para solicitar acceso al nuevo producto de Code Coverage.
-{{< /callout >}}
-
 ## Integración del proveedor de código fuente
 
 Los datos exactos que recibe Datadog dependen de tu tipo de proveedor de códigos fuente:

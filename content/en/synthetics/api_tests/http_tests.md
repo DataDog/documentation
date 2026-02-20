@@ -149,6 +149,9 @@ Assertions define what an expected test result is. After you click **Test URL**,
 
 <div class="alert alert-info">The assertions header, body, and JavaScript sections are only for defining assertions. They cannot be used to make additional HTTP requests.</div>
 
+{{< tabs >}}
+{{% tab "Response Assertions" %}}
+
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ |
@@ -167,6 +170,125 @@ To perform `OR` logic in an assertion, use the `matches regex` comparator to def
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
 If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
+[4]: https://restfulapi.net/json-jsonpath/
+[5]: https://www.w3schools.com/xml/xpath_syntax.asp
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+
+Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
+
+**Note:** When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+
+{{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
+
+<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
+#### Using dd.assert()
+
+Use `dd.assert()` for traditional assertion syntax:
+
+For example, to assert that a `status.code` field is one of several allowed values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+// Assert that the status code is 200, 210, 320, or 330
+dd.assert.include([200, 210, 320, 330], response.status.code);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "code": 200,
+    "message": "Success"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Checks that `status.code` is included in the array of allowed values (200, 210, 320, or 330)
+
+The test **passes** because `status.code` is `200`, which is included in the allowed values array.
+
+For more information on `assert.include()`, see the [Chai assert.include() documentation][21].
+
+#### Using dd.expect()
+
+Use `dd.expect()` for assertions with nested property validation.
+
+For example, to assert that a `status.indicator` field matches one of several expected values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+const regex = /^(major|critical|minor|none)$/;
+
+dd.expect(response)
+  .to.have.nested.property('status.indicator')
+  .that.matches(regex);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+This assertion:
+- Parses the JSON response body
+- Validates that the nested property `status.indicator` exists
+- Checks that the value matches the regex pattern (one of: `major`, `critical`, `minor`, or `none`)
+
+With the regex `/^(major|critical|minor|none)$/`, the test **passes** because `status.indicator` is `"none"`, which matches the pattern.
+
+With the regex `/^(major|critical|minor)$/`, the test **fails** because `"none"` is not included in the allowed values.
+
+For more information on `expect()`, see the [Chai expect() documentation][22].
+
+#### Using dd.should
+
+Use `dd.should` to write assertions with natural language syntax:
+
+For example, to assert that a `status.indicator` field exists and equals a specific value:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+response.status.should.exist();
+const indicator = response.status.indicator;
+indicator.should.equal('none');
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Verifies that the `status` property exists
+- Extracts the indicator value into a variable
+- Checks that `status.indicator` equals `"none"`
+
+The test **passes** because `status` exists and `status.indicator` is `"none"`.
+
+For more information on `should()`, see the [Chai should() documentation][23].
+
+[20]: https://www.chaijs.com/api/
+[21]: https://www.chaijs.com/api/assert/#method_include
+[22]: https://www.chaijs.com/guide/styles/#expect
+[23]: https://www.chaijs.com/guide/styles/#should
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Select locations
 
@@ -230,9 +352,6 @@ If you are using the [custom role feature][14], add your user to any custom role
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: https://restfulapi.net/json-jsonpath/
-[5]: https://www.w3schools.com/xml/xpath_syntax.asp
-[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables

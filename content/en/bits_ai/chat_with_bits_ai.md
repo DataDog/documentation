@@ -5,7 +5,7 @@ further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "/incident_response/incident_management/incident_ai"
+- link: "/incident_response/incident_management/investigate/incident_ai"
   tag: "Documentation"
   text: "Coordinate incidents with Incident AI"
 aliases:
@@ -31,7 +31,7 @@ When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anoma
 
 ### In the chat panel
 
-To open the chat panel in the app, click **Bits AI** at the bottom-left corner of the navigation menu, or use `Cmd + /` to show or hide the chat panel.
+To open the chat panel in the app, click **Bits AI** at the bottom-left corner of the navigation menu, or use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> to show or hide the chat panel.
 
 Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 

@@ -58,12 +58,15 @@
 		</div>
 		<div class="col-12 mt-1">
 			{{ $rule_category := (index .Params.rule_category 0)}}
+			{{ $source := .Params.source }}
 			{{ $view_findings_text := "View Signals"}}
 
 			{{ if eq $rule_category "CSM Identity Risks"}}
 				{{ $view_findings_text = "View Identity Risks"}}
 			{{ else if strings.Contains $rule_category "CSM Misconfigurations"}}
 				{{ $view_findings_text = "View Misconfigurations"}}
+			{{ else if (and (eq $rule_category "Workload Protection") (eq $source "workload-activity")) }}
+				{{ $view_findings_text = "View Findings"}}
 			{{ end }}
 			
 			{{ with .Params.view_rule_url }}

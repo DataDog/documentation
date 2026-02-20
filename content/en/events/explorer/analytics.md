@@ -2,9 +2,17 @@
 title: Analytics
 aliases:
 - /service_management/events/explorer/analytics/
+further_reading:
+- link: "/account_management/audit_trail/"
+  tag: "Documentation"
+  text: "Audit Trail"
 ---
 
 ## Overview
+
+<div class="alert alert-info">
+The Events Explorer is not designed as a comprehensive audit tool. To track user activity, API requests, configuration changes, and resource modifications for auditing, compliance, or security use cases, use <a href="/account_management/audit_trail/">Audit Trail</a>.
+</div>
 
 Event Analytics extends the Events Explorer page with views, data aggregation, and grouping capabilities for troubleshooting and monitoring. You can control:
 
@@ -26,4 +34,7 @@ Use the query to control what's displayed in your Events Analytics:
     {{< img src="service_management/events/explorer/time-interval.png" alt="Shows the list of possible time intervals, including the default, 5 seconds." style="width:100%;" >}}
 4. Choose to display either the top or bottom values according to the selected measure.
     {{< img src="service_management/events/explorer/display-values.png" alt="Choose to display the values from the top or from the bottom." style="width:100%;" >}}
-    
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
