@@ -41,7 +41,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the Datadog user
 
-{{% dbm-create-oracle-user %}}
+{{% dbm-oracle-create-user-tabs %}}
 
 ### Grant the user access to the database
 
@@ -94,38 +94,13 @@ For installation steps, see the [Agent installation instructions][8].
 
 ### Configure the Agent
 
-Download the wallet zip file from the Oracle Cloud and unzip it.
-
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][11] for all available configuration options.
 
 **Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][13] for more details.
 
-Set the `protocol` and `wallet` configuration parameters.
+{{% dbm-oracle-agent-config-tabs %}}
 
-```yaml
-init_config:
-instances:
-  - server: '<HOST_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
-    username: 'datadog'
-    password: 'ENC[datadog_user_database_password]'
-    protocol: TCPS
-    wallet: <YOUR_WALLET_DIRECTORY>
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-  - server: '<HOST_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
-    username: 'datadog'
-    password: 'ENC[datadog_user_database_password]'
-    protocol: TCPS
-    wallet: <YOUR_WALLET_DIRECTORY>
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-```
+{{% dbm-oracle-wallet-config %}}
 
 After all Agent configuration is complete, [restart the Datadog Agent][4].
 
