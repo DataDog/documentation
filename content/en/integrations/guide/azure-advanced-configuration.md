@@ -130,7 +130,7 @@ The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` U
 The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder (see the [sample `config_template.yaml` file][101] for all available configuration options).
 
 <div class="alert alert-info">
-You can reuse the configuration of an existing Agent:
+To reuse the configuration of an existing Agent:
 
    1. Remove any extra installation artifacts or files from the existing Agent's <code>%ProgramData%\Datadog</code> folder so that it only contains the <code>datadog.yaml</code> file and <code>conf.d</code> folder with your integration configurations.
    1. Save the sanitized <code>%ProgramData%\Datadog</code> folder as a ZIP file.
@@ -200,7 +200,7 @@ This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder (see the [sample `config_template.yaml` file][201] for all available configuration options).
 
 <div class="alert alert-info">
-You can reuse the configuration of an existing Agent by saving its <code>/etc/datadog-agent</code> folder as a ZIP file:
+To reuse the configuration of an existing Agent by saving its <code>/etc/datadog-agent</code> folder as a ZIP file:
 
 <code>zip -r datadog_config.zip /etc/datadog-agent</code>.
 </div>
