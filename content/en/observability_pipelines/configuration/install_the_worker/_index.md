@@ -148,7 +148,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
         - See [Environment Variables][4] for a list of source environment variables.
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
+        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`
         - See [Environment Variables][4] for a list of destination environment variables.
 
     **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
@@ -312,21 +312,6 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
- 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	--set <SOURCE_ENV_VARIABLES> \
-	--set <DESTINATION_ENV_VARIABLES> \
-	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-	datadog/observability-pipelines-worker
-    ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
 1. If you are using:
     - **Secrets Management**:
     1. See [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
@@ -338,7 +323,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         --set datadog.pipelineId=<PIPELINE_ID> \
         datadog/observability-pipelines-worker
         ```
-    - **Environment variables**: Run this command to install the Worker:
+    - **Environment variables**: Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
         ```shell
         helm upgrade --install opw \
         -f values.yaml \
@@ -348,6 +333,10 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         --set <DESTINATION_ENV_VARIABLES> \
         --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
         datadog/observability-pipelines-worker
+        ```
+        **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+        ```
+        --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
         ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
