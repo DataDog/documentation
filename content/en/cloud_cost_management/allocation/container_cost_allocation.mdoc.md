@@ -288,7 +288,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 |---:|---:|---|---|
 | CPU | {% x/ %} | {% x/ %} | {% x/ %} |
 | Memory | {% x/ %} | {% x/ %} | {% x/ %} |
-| {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles." %} Persistent volumes {% /tooltip %} | {% x/ %} |  |  |
+| {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod life cycles." %} Persistent volumes {% /tooltip %} | {% x/ %} |  |  |
 | {% tooltip contents="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." %} Managed service fees {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | ECS costs | {% x/ %} | N/A | N/A |
 | Data transfer costs | {% x/ %} | Limited* | Limited* |
