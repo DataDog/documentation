@@ -1,0 +1,5 @@
+cloud_cost_provider_options:
+  - id: aws
+    default: true
+  - id: azure
+  - id: google

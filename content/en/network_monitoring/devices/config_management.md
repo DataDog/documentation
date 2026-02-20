@@ -5,6 +5,7 @@ further_reading:
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
+site_support_id: network_config_management
 ---
 
 <div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>

@@ -322,7 +322,7 @@ HTTP requests can decompress bodies with the following `content-encoding` header
 
 - If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+You can create up to 25 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
 
 {{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 

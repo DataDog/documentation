@@ -21,8 +21,9 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [HashiCorp Vault](#id-for-hashicorp)
 - [Kubernetes Secrets](#id-for-kubernetes)
 - [Docker Secrets](#id-for-docker)
-- [File JSON](#id-for-json-yaml)
-- [File YAML](#id-for-json-yaml)
+- [File Text](#id-for-json-yaml-text)
+- [File JSON](#id-for-json-yaml-text)
+- [File YAML](#id-for-json-yaml-text)
 
 Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
@@ -870,15 +871,16 @@ The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-json-yaml" %}}
+{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h4" expanded=false id="id-for-json-yaml-text" %}}
 
 | secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
 |`file.json`           |[JSON][4001]                             |
 |`file.yaml`          |[YAML][4002]                        |                            |
+|`file.text`          |[TEXT][4003]                        |                            |
 
 ##### File permissions
-The file backend only requires **read** permissions for the configured JSON or YAML files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
+The file backend only requires **read** permissions for the configured JSON, YAML, or TEXT files. These permissions must be granted to the local Datadog Agent user (`dd-agent` on Linux, `ddagentuser` on Windows).
 
 
 {{< tabs >}}
@@ -934,6 +936,50 @@ secret_backend_type: file.yaml
 secret_backend_config:
   file_path: /path/to/secret.yaml
 ```
+{{% /tab %}}
+
+{{% tab "TEXT File Backend" %}}
+
+**Available in Agent version 7.75+**
+
+**Note**: Each secret must be stored in its own individual text file.
+
+##### Configuration example
+
+You can use individual text files to store secrets locally.
+
+For example, with text files in `/path/to/secrets/`:
+
+`/path/to/secrets/dd_api_key` containing:
+```
+your_api_key_value
+```
+
+`/path/to/secrets/dd_app_key` containing:
+```
+your_app_key_value
+```
+
+You can use this configuration to pull secrets from them:
+
+```yaml
+# datadog.yaml
+api_key: "ENC[dd_api_key]"
+app_key: "ENC[dd_app_key]"
+
+secret_backend_type: file.text
+secret_backend_config:
+  secrets_path: /path/to/secrets
+```
+
+##### Path security:
+
+- Relative paths in `ENC[]` are resolved relative to `secrets_path` (e.g., `ENC[dd_api_key]` with `secret_path: /path/to/secrets` will resolve to `/path/to/secrets/dd_api_key`)
+- Absolute paths in `ENC[]` must be within `secrets_path` (e.g., `ENC[/path/to/secrets/dd_api_key]` with `secret_path: /path/to/secrets` will work)
+- Path traversal attempts (e.g., `ENC[../etc/passwd]`) are blocked and will fail with "path outside allowed directory"
+
+**Note:** Some tools automatically add line breaks when exporting secrets to files. See [Remove trailing line breaks](#remove-trailing-line-breaks) for how to handle this.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1532,7 +1578,7 @@ kubectl auth can-i get secret/database-secret -n database --as system:serviceacc
 
 This command returns whether the permissions are valid for the Agent to view this Secret.
 
-### Remove trailing line breaks
+### Remove trailing line breaks {#remove-trailing-line-breaks}
 
 Some secret management tools automatically add a line break when exporting secrets through files. You can remove these line breaks by setting `secret_backend_remove_trailing_line_break: true` in [the datadog.yaml configuration file][8], or use the environment variable `DD_SECRET_BACKEND_REMOVE_TRAILING_LINE_BREAK` to do the same, especially in containerized environments.
 
@@ -1574,6 +1620,7 @@ instances:
 <!-- File Backend Links (JSON/YAML) -->
 [4001]: https://en.wikipedia.org/wiki/JSON
 [4002]: https://en.wikipedia.org/wiki/YAML
+[4003]: https://en.wikipedia.org/wiki/TEXT
 
 <!-- GCP Secret Manager Links -->
 [5000]: https://cloud.google.com/security/products/secret-manager
