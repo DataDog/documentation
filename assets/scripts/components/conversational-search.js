@@ -50,10 +50,10 @@ const renderer = {
 marked.use({ renderer });
 
 // Conversation model IDs
-const MODEL_4_1_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
-const MODEL_5_2_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-5.2';
-const DEFAULT_CONVERSATION_MODEL_ID = MODEL_5_2_ID;
-const USE_LEGACY_MODEL_FLAG_KEY = 'docs_conv_search_use_gpt_4_1';
+const CONV_MODEL_DOCS_PREVIEW = 'docs-ai-conv-model-v1-preview';
+const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
+const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
+const USE_LEGACY_MODEL_FLAG_KEY = 'DOCS_AI_USE_LEGACY_MODEL';
 const feedbackHideTimers = new WeakMap();
 
 // Embedding field to use for semantic search
@@ -108,7 +108,7 @@ class ConversationalSearch {
     resolveModelFromFlag() {
         initializeFeatureFlags().then((client) => {
             if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
-                this.selectedModelId = MODEL_4_1_ID;
+                this.selectedModelId = CONV_MODEL_DOCS_PREVIEW;
             }
         }).catch(() => {});
     }
@@ -718,7 +718,7 @@ class ConversationalSearch {
             if (error.name === 'AbortError' && this.userCancelledRequest) {
                 responseContainer.textContent = 'Request cancelled.';
             } else {
-                console.error('Conversational search error:', error);
+                this.logError('Conversational Search Response Error', error);
                 responseContainer.textContent = 'Sorry, something went wrong. Please try again.';
             }
         } finally {
@@ -793,7 +793,7 @@ class ConversationalSearch {
                     }
                 },
                 onError: (error) => {
-                    console.error('Typesense streaming error:', error);
+                    this.logError('Conversational Search Streaming Error', error);
                 }
             }
         });
@@ -932,6 +932,7 @@ class ConversationalSearch {
     logAction(message, data) {
         const conversationalSearchData = {
             docs_ai: true,
+            model_id: this.selectedModelId,
             ...(data?.conversational_search || {})
         };
         const payload = {
@@ -939,7 +940,6 @@ class ConversationalSearch {
             conversational_search: conversationalSearchData
         };
 
-        // Always log to console for debugging in dev/preview
         console.log('[Conversational Search] Action:', message, payload);
 
         if (window.DD_LOGS?.logger) {
@@ -948,11 +948,29 @@ class ConversationalSearch {
         } else {
             console.warn('DD_LOGS.logger not found, could not log message:', message, payload);
         }
-        
+
         if (window.DD_RUM) {
             window.DD_RUM.addAction('conversational_search_action', conversationalSearchData);
-        } else {
-            console.warn('DD_RUM not found, could not send RUM action:', conversationalSearchData);
+        }
+    }
+
+    logError(message, error) {
+        const errorData = {
+            docs_ai: true,
+            model_id: this.selectedModelId,
+            conversation_id: this.conversationId,
+            error_message: error?.message || String(error),
+            error_name: error?.name || 'Error'
+        };
+
+        console.error('[Conversational Search] Error:', message, errorData);
+
+        if (window.DD_LOGS?.logger) {
+            window.DD_LOGS.logger.error(message, { conversational_search: errorData }, 'error');
+        }
+
+        if (window.DD_RUM) {
+            window.DD_RUM.addError(new Error(message), { conversational_search: errorData });
         }
     }
 }
