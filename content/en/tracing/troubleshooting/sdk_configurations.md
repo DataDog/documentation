@@ -36,8 +36,8 @@ The configuration source shows where a given value is configured:
 Telemetry data will not be available in the following situations:
 
 * No service instances have been active in the last 15 minutes.
-* Instrumentation telemetry has not been disabled in configuration.
-* The instrumentation telemetry intake endpoint is accessible (see [Network Destinations][3]).
+* Instrumentation telemetry has been disabled in configuration.
+* The instrumentation telemetry intake endpoint is not accessible (see [Network Destinations][3]).
 * The service name is manually set on spans (a [Service Override][4]).
 
 [1]: /tracing/trace_collection/runtime_config
