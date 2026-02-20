@@ -733,7 +733,6 @@ class ConversationalSearch {
                             if (sources.length > 0) {
                                 responseContainer.appendChild(this.buildSourceCards(sources));
                             }
-                            this.injectCodeCopyButtons(responseContainer);
                             lastRenderTime = now;
                             this.scrollToBottom();
                         }

@@ -2,7 +2,7 @@ import { getConfig } from '../helpers/getConfig';
 import instantsearch from 'instantsearch.js';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import { configure, searchBox, index } from 'instantsearch.js/es/widgets';
-import { searchbarHits } from './instantsearch/searchbarHits';
+import { searchbarHits, updateAskAISuggestionElement } from './instantsearch/searchbarHits';
 import { searchpageHits } from './instantsearch/searchpageHits';
 import { customPagination } from './instantsearch/customPagination';
 import { debounce } from '../utils/debounce';
@@ -485,19 +485,8 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         // Instantly update "Ask AI about" text as user types (don't wait for search results)
         aisSearchBoxInput.addEventListener('input', () => {
             const query = aisSearchBoxInput.value.trim();
-            const aiContent = document.querySelector('.ais-Hits-ai-suggestion .ask-ai-content');
             const aiSuggestion = document.querySelector('.ais-Hits-ai-suggestion');
-            if (aiContent) {
-                if (query) {
-                    aiContent.innerHTML = `Ask AI about <span class="ask-ai-query">"${query.replace(/</g, '&lt;').replace(/>/g, '&gt;')}"</span>`;
-                } else {
-                    aiContent.innerHTML = `Ask AI anything`;
-                }
-            }
-            // Also update the data-query attribute for Enter key handling
-            if (aiSuggestion) {
-                aiSuggestion.dataset.query = query;
-            }
+            updateAskAISuggestionElement(aiSuggestion, query);
         });
 
         // Pages that aren't homepage or search page need to move the searchbar on mobile

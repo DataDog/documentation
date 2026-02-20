@@ -250,7 +250,8 @@
             width: 13px;
             height: 13px;
             flex-shrink: 0;
-            color: #632CA6;
+            // Recolor the image asset to match Ask AI purple.
+            filter: brightness(0) saturate(100%) invert(24%) sepia(50%) saturate(1727%) hue-rotate(251deg) brightness(90%) contrast(91%);
         }
         
         .ask-ai-content {

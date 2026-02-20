@@ -5,28 +5,69 @@ import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 import { initializeFeatureFlags, getBooleanFlag } from '../../helpers/feature-flags';
 
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
+const ASK_AI_ICON_SRC = '/images/svg-icons/spark-ai.svg';
 
 initializeFeatureFlags().then((client) => {
     IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
 });
 
-// Generate the "Ask AI" suggestion HTML
-const generateAskAISuggestion = (query) => {
+const setAskAISuggestionContent = (contentElement, query) => {
+    if (!contentElement) return;
     const trimmedQuery = query?.trim() || '';
-    const contentText = trimmedQuery
-        ? `Ask AI about <span class="ask-ai-query">"${trimmedQuery}"</span>`
-        : `Ask AI anything`;
-    
-    return `
-        <li class="ais-Hits-item ais-Hits-ai-suggestion" data-query="${trimmedQuery.replace(/"/g, '&quot;')}">
-            <a href="#" class="ask-docs-ai-link">
-                <svg class="ask-ai-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-                </svg>
-                <p class="ask-ai-content">${contentText}</p>
-            </a>
-        </li>
-    `;
+    contentElement.replaceChildren();
+    if (!trimmedQuery) {
+        contentElement.textContent = 'Ask AI anything';
+        return;
+    }
+
+    contentElement.appendChild(document.createTextNode('Ask AI about '));
+    const queryElement = document.createElement('span');
+    queryElement.className = 'ask-ai-query';
+    queryElement.textContent = `"${trimmedQuery}"`;
+    contentElement.appendChild(queryElement);
+};
+
+export const updateAskAISuggestionElement = (suggestionElement, query) => {
+    if (!suggestionElement) return;
+    const trimmedQuery = query?.trim() || '';
+    suggestionElement.dataset.query = trimmedQuery;
+    setAskAISuggestionContent(suggestionElement.querySelector('.ask-ai-content'), trimmedQuery);
+};
+
+const createAskAISuggestionElement = (query) => {
+    const item = document.createElement('li');
+    item.className = 'ais-Hits-item ais-Hits-ai-suggestion';
+
+    const link = document.createElement('a');
+    link.href = '#';
+    link.className = 'ask-docs-ai-link';
+
+    const icon = document.createElement('img');
+    icon.className = 'ask-ai-icon';
+    icon.src = ASK_AI_ICON_SRC;
+    icon.width = 14;
+    icon.height = 14;
+    icon.alt = '';
+
+    const content = document.createElement('p');
+    content.className = 'ask-ai-content';
+
+    link.appendChild(icon);
+    link.appendChild(content);
+    item.appendChild(link);
+
+    updateAskAISuggestionElement(item, query);
+    return item;
+};
+
+const renderAskAISuggestion = (aiList, query) => {
+    if (!aiList) return;
+    const existingSuggestion = aiList.querySelector('.ais-Hits-ai-suggestion');
+    if (existingSuggestion) {
+        updateAskAISuggestionElement(existingSuggestion, query);
+        return;
+    }
+    aiList.replaceChildren(createAskAISuggestionElement(query));
 };
 
 const updateNoHitsState = (container, numHits) => {
@@ -38,9 +79,7 @@ const updateNoHitsState = (container, numHits) => {
 const ensureConvSearchFlag = (state) => {
     if (!IS_CONVERSATIONAL_SEARCH_ENABLED || !state?.isDocsContainer) return;
     const aiList = state.container.querySelector('#ais-Hits-ai-list');
-    if (aiList) {
-        aiList.innerHTML = generateAskAISuggestion(state.query) || '';
-    }
+    renderAskAISuggestion(aiList, state.query);
     updateNoHitsState(state.container, state.numHits);
 };
 
@@ -129,14 +168,16 @@ const renderHits = (renderOptions, isFirstRender) => {
         });
     };
 
-    const handleNRender = (containerDiv, allJoinedListItemsArray, numHits, aiSuggestionHTML, isDocsContainer) => {
+    const handleNRender = (containerDiv, allJoinedListItemsArray, numHits, currentQuery, isDocsContainer) => {
         // On non-first renders, add organized hits to applicable divs
         const addHitsToEmptyElements = (container) => {
             // Add AI suggestion first (only for docs container)
             if (isDocsContainer) {
                 const aiList = container.querySelector('#ais-Hits-ai-list');
-                if (aiList) {
-                    aiList.innerHTML = aiSuggestionHTML || '';
+                if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
+                    renderAskAISuggestion(aiList, currentQuery);
+                } else if (aiList) {
+                    aiList.replaceChildren();
                 }
             }
             
@@ -232,10 +273,6 @@ const renderHits = (renderOptions, isFirstRender) => {
     // Use the live input value (not results.query which lags due to debounce) to avoid text flicker
     const liveInput = document.querySelector('.ais-SearchBox-input');
     const currentQuery = liveInput ? liveInput.value.trim() : (results?.query || '');
-    const aiSuggestionHTML =
-        isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED
-            ? generateAskAISuggestion(currentQuery)
-            : null;
     ensureConvSearchFlag({ container, query: currentQuery, numHits: hits.length, isDocsContainer });
 
     // Remove null from array
@@ -257,7 +294,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     if (isFirstRender) {
         handleFirstRender(container, isDocsContainer);
     } else {
-        handleNRender(container, allJoinedListItemsHTML, hits.length, aiSuggestionHTML, isDocsContainer);
+        handleNRender(container, allJoinedListItemsHTML, hits.length, currentQuery, isDocsContainer);
     }
 };
 
