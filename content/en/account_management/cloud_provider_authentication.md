@@ -30,7 +30,7 @@ Cloud-based authentication lets you authenticate the Datadog Terraform provider 
 
 During the preview period, AWS is the only supported cloud provider.
 
-Cloud-based authentication is available for:
+Cloud-based authentication is available for the following:
 - **Terraform provider**: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account
 - **Datadog Agent**: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys
 
@@ -63,7 +63,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 **Requirements**:
 - Datadog Terraform provider version 3.70 or later.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
-- The `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
+- Your account has the `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
 
 Setting up cloud-provider based authentication for AWS involves two parts:
 1. [Configuring your AWS identity mapping in Datadog](#configure-aws-identity-mapping-in-datadog)
@@ -229,7 +229,7 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 Cloud-based authentication for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
 **Requirements**:
-- The version `7.78.0` or later of the Datadog Agent.
+- Version `7.78.0` or later of the Datadog Agent.
 - The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - The `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
@@ -242,7 +242,7 @@ Setting up cloud-based authentication for the Agent involves two parts:
 
 <div class="alert alert-info">For intake mapping to work, your AWS account <strong>must be integrated</strong> with Datadog through the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog-AWS integration</a>. If an AWS account is not integrated, the authentication flow cannot verify the caller, and mapping fails.</div>
 
-First, configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike persona mapping used for Terraform, intake mapping only requires an ARN pattern—no Datadog account identifier is needed because the Agent authenticates to send data rather than perform user actions.
+First, configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike the persona mapping used for Terraform, intake mapping only requires an ARN pattern. No Datadog account identifier is needed, because the Agent authenticates to send data rather than perform user actions.
 
 If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
 
