@@ -159,7 +159,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 ### Within the Profiling page
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience.gif" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
-The Profiling page found in the top bar navigaito, lets you analyze profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found thorugh the top bar navigation, lets you analyze profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Focus on views**: Choose the views you'd like to analyze.
 2. **Select a measurement**: Pick a Core Web Vital, custom vital, or RUM action to dive into.
