@@ -219,7 +219,35 @@ class ConversationalSearch {
                 e.preventDefault();
                 e.stopPropagation();
                 this.toggleSourceTooltip(sourceRefBtn);
+
+                const sourceNumber = sourceRefBtn.dataset.sourceNumber;
+                const tooltip = sourceRefBtn.parentNode?.querySelector('.conv-search-source-tooltip a');
+                this.logAction('Conversational Search Source Ref Click', {
+                    conversational_search: {
+                        action: 'source_ref_click',
+                        source_number: sourceNumber ? parseInt(sourceNumber, 10) : null,
+                        source_url: tooltip?.href || null,
+                        source_title: tooltip?.textContent || null,
+                        conversation_id: this.conversationId
+                    }
+                });
                 return;
+            }
+
+            // Source card click handler
+            const sourceCard = e.target.closest('.conv-search-source-card');
+            if (sourceCard && this.messagesContainer.contains(sourceCard)) {
+                const cardLink = sourceCard.querySelector('a');
+                const badge = sourceCard.querySelector('.conv-search-source-card-number');
+                this.logAction('Conversational Search Source Card Click', {
+                    conversational_search: {
+                        action: 'source_card_click',
+                        source_number: badge ? parseInt(badge.textContent, 10) : null,
+                        source_url: cardLink?.href || null,
+                        source_title: cardLink?.textContent || null,
+                        conversation_id: this.conversationId
+                    }
+                });
             }
 
             // Suggestion chips click handler
@@ -298,6 +326,13 @@ class ConversationalSearch {
     }
 
     newChat() {
+        this.logAction('Conversational Search New Chat', {
+            conversational_search: {
+                action: 'new_chat',
+                conversation_id: this.conversationId
+            }
+        });
+
         // Abort any ongoing request
         if (this.abortController) {
             this.userCancelledRequest = true;
@@ -466,10 +501,11 @@ class ConversationalSearch {
                 const code = pre.querySelector('code');
                 const text = code ? code.textContent : pre.textContent;
                 navigator.clipboard.writeText(text).catch(() => {});
-                this.logAction('Conversational Search Copy Snippet', {
+                this.logAction('Conversational Search Copy', {
                     conversational_search: {
-                        action: 'copy_snippet',
-                        snippet_length: text?.length || 0,
+                        action: 'copy',
+                        copy_type: 'snippet',
+                        content_length: text?.length || 0,
                         conversation_id: this.conversationId
                     }
                 });
@@ -830,6 +866,7 @@ class ConversationalSearch {
                         conversational_search: {
                             action: 'feedback',
                             feedback: action === 'thumbs-up' ? 'positive' : 'negative',
+                            response_content: response,
                             conversation_id: this.conversationId
                         }
                     });
@@ -841,10 +878,11 @@ class ConversationalSearch {
                     navigator.clipboard.writeText(response).catch(() => {
                         this.showFeedbackTooltip(button, 'Copy failed', true);
                     });
-                    this.logAction('Conversational Search Copy Full Response', {
+                    this.logAction('Conversational Search Copy', {
                         conversational_search: {
-                            action: 'copy_full_response',
-                            response_length: response?.length || 0,
+                            action: 'copy',
+                            copy_type: 'full_response',
+                            content_length: response?.length || 0,
                             conversation_id: this.conversationId
                         }
                     });
