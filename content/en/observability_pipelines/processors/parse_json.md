@@ -62,10 +62,10 @@ This output contains the `message` field with the parsed JSON:
 ## Setup
 
 To set up this processor:
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified filter query are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 2. Enter the name of the field you want to parse JSON on.<br>**Note**: The parsed JSON overwrites what was originally contained in the field.
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/
 
 ## Further reading
 

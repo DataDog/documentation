@@ -16,7 +16,7 @@ The reduce processor groups multiple log events into a single log, based on the 
 ## Setup
 
 To set up the reduce processor:
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. Reduced logs and logs that do not match the filter query are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified filter query are processed. Reduced logs and logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 2. In the **Group By** section, enter the field you want to group the logs by.
 3. Click **Add Group by Field** to add additional fields.
 4. In the **Merge Strategy** section:
@@ -44,4 +44,4 @@ These are the available merge strategies for combining log events.
 | Shortest array | Keeps the shortest array that was received.                                                                        |
 | Sum            | Sums all numeric values that were received.                                                                        |
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/

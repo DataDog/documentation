@@ -32,7 +32,7 @@ See [Parsing][1] for more information on Datadog's Grok patterns.
 
 ## Setup
 
-To set up the grok parser, define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+To set up the grok parser, define a **filter query**. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][3] for more information.
 
 To test log samples for out-of-the-box rules:
 1. Click the **Preview Library Rules** button.
@@ -51,8 +51,7 @@ To add a custom parsing rule:
 
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
-
-{{% observability_pipelines/processors/filter_syntax %}}
+[3]: /observability_pipelines/search_syntax/logs/
 
 ## Further reading
 

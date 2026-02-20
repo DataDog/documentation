@@ -27,7 +27,7 @@ Click **Manage mappings**. This opens a modal:
 ### Add a mapping
 
 1. Select the log type in the dropdown menu.
-1. Define a [filter query](#filter-query-syntax). Only logs that match the specified filter query are remapped. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
+1. Define a filter query. Only logs that match the specified filter query are remapped. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Review the sample source log and the resulting OCSF output.
 1. Click **Save Mapping**.
 
@@ -57,7 +57,7 @@ When you set up a custom mapping, if you try to close or exit the modal, you are
 To set up a custom mapping:
 
 1. Optionally, add a name for the mapping. The default name is `Custom Authentication`.
-1. Define a [filter query](#filter-query-syntax). Only logs that match the specified filter query are remapped. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a filter query. Only logs that match the specified filter query are remapped. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Select the OCSF event category from the dropdown menu.
 1. Select the OCSF event class from the dropdown menu.
 1. Enter a log sample so that you can reference it when you add fields.
@@ -82,5 +82,4 @@ To set up a custom mapping:
 
 {{% /collapse-content %}}
 
-{{% observability_pipelines/processors/filter_syntax %}}
-
+[1]: /observability_pipelines/search_syntax/logs/

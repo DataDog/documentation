@@ -17,7 +17,7 @@ The Sensitive Data Scanner processor scans logs to detect and redact or hash sen
 
 To set up the processor:
 
-1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query.
+1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query. See [Search Syntax][1] for more information.
 1. Click **Add Scanning Rule**.
 1. Select one of the following:
 
@@ -120,4 +120,4 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% /collapse-content %}}
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/
