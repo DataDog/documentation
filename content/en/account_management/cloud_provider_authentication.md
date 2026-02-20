@@ -315,9 +315,9 @@ curl -X DELETE "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aw
 
 After you configure the intake mapping, update your Agent configuration to use cloud-based authentication.
 
-#### Basic configuration
+#### Global configuration
 
-Add the `delegated_auth` section to your `datadog.yaml` file:
+Add the `delegated_auth` section to your `datadog.yaml` file to enable cloud-based authentication for all Agent data:
 
 ```yaml
 delegated_auth:
@@ -328,29 +328,47 @@ To get your `org_uuid`, call this endpoint, or click the link (requires an activ
 
 The Agent auto-detects if it runs in an AWS environment and uses the available AWS credentials.
 
-#### Specify the cloud provider explicitly
-
-To explicitly configure AWS as your authentication provider:
-
-```yaml
-delegated_auth:
-  org_uuid: <YOUR_ORG_UUID>
-  provider: aws
-```
-
 #### Provider-specific options
 
-For AWS-specific configuration options, use the `aws` subsection:
+To explicitly configure AWS as your authentication provider and specify provider-specific options, use the `provider` and `aws` subsections:
 
 ```yaml
 delegated_auth:
   org_uuid: <YOUR_ORG_UUID>
-  provider: aws
+  provider: aws  # Optional: auto-detects if omitted
   aws:
-    region: <AWS_REGION>
+    region: <AWS_REGION>  # Optional: auto-detects from IMDS if omitted or uses global STS
 ```
 
 Replace `<AWS_REGION>` with the AWS region to use for STS authentication (for example, `us-east-1`).
+
+#### Per-product configuration
+
+You can enable delegated authentication for specific Agent products independently. This is useful when you want to send different data types to different Datadog organizations, or when you only want to use cloud-based authentication for specific products.
+
+To enable delegated authentication for logs only:
+
+```yaml
+logs_config:
+  delegated_auth:
+    org_uuid: <YOUR_ORG_UUID>
+```
+
+To use different organizations for different products:
+
+```yaml
+delegated_auth:
+  org_uuid: <YOUR_GLOBAL_ORG_UUID>
+  provider: aws
+  aws:
+    region: <AWS_REGION>
+
+logs_config:
+  delegated_auth:
+    org_uuid: <YOUR_LOGS_ORG_UUID>
+```
+
+<div class="alert alert-info">Provider-specific settings (such as <code>provider</code> and <code>aws</code>) are only configured in the global <code>delegated_auth</code> section. Per-product sections only support <code>org_uuid</code>.</div>
 
 #### Fallback behavior
 
