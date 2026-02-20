@@ -122,13 +122,7 @@ When you enable dual shipping:
   - The Agent drops payloads for any endpoint that fails
   - Log consumption continues as long as at least one endpoint succeeds
 
-#### Reliable mode
-When you enable `is_reliable` for an endpoint:
-  - The Agent treats all reliable endpoints with equal priority
-  - The Agent stops sending logs if all reliable endpoints are unavailable
-  - Unreliable endpoints:
-      - Receive data only when at least one reliable endpoint is available
-      - Have lower priority than reliable endpoints
+For the Agent logic when `is_reliable` is enabled, see [Logs Dual Shipping][8].
 
 {{% /collapse-content %}}
 
@@ -218,3 +212,4 @@ With checks running every 10 seconds, these settings buffer approximately 30 min
 [5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go#L34-L36
 [6]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/trace.go#L107-L116
 [7]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/stats.go#L73-L83
+[8]: https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm#environment-variable-configuration-6
