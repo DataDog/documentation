@@ -18,7 +18,7 @@ further_reading:
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Agentless Scanning runs entirely within your infrastructure — only the list of installed packages (SBOM) and host metadata is sent to Datadog. Your raw data, disk contents, and container images stay in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
 
-Setup takes approximately 10-15 minutes per cloud account:
+Setup takes approximately 30 minutes per cloud account:
 
 1. Verify prerequisites below.
 1. Choose your cloud provider and deployment method.
@@ -33,7 +33,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
 - **[API and Application Keys](/account_management/api-app-keys/)**:
   - An [API key](/account_management/api-app-keys/#api-keys) with Remote Configuration enabled is required for scanners to report scan results to Datadog.
   - An [Application key](/account_management/api-app-keys/#application-keys) with either **Integrations Manage** or **Org Management** permissions is required to enable scanning features through the Datadog API.
-- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are applied automatically during installation. They follow the principle of least privilege, limited to the minimum required for scanning.<br><br>
+- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are applied automatically during installation — listed below for transparency.<br><br>
   {{< collapse-content title="AWS scanning permissions" level="h5" >}}
   <p>Scanning permissions:</p>
   <ul>
@@ -333,7 +333,7 @@ After completing any of the setup methods above, see [Verify your setup](#verify
 
 ### Verify your setup
 
-After completing the setup, Agentless Scanning takes time to produce initial results. The first scan cycle takes approximately 20 minutes to complete.
+After completing the setup, Agentless Scanning takes time to produce initial results. The first scan cycle takes approximately 30 minutes to complete.
 
 <div class="alert alert-info">If no results appear after 2 hours, see the <a href="/security/cloud_security_management/troubleshooting/agentless_scanning">Agentless Scanning troubleshooting guide</a>.</div>
 
@@ -342,24 +342,6 @@ View scan results in the following locations:
 - **For host and container vulnerabilities**: [CSM Vulnerabilities Explorer][15]. To view only vulnerabilities detected by Agentless Scanning, use the filter `origin:"Agentless scanner"` in the search bar.
 - **For Lambda vulnerabilities**: [Code Security (SCA) Explorer][16].
 - **For sensitive data findings**: [Sensitive Data Scanner][17].
-
-## Updating your deployment
-
-### Update the CloudFormation stack
-
-Datadog recommends updating the CloudFormation stack regularly to get access to new features and bug fixes as they are released.
-
-1. Log in to your AWS console and go to the CloudFormation Stacks page.
-1. Expand the parent **DatadogIntegration** stack to reveal its nested sub-stacks. Select the **DatadogIntegration-DatadogAgentlessScanning-...** sub-stack, click **Update**, then click **Update nested stack**.
-1. Click **Replace existing template**.
-1. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][14]. Paste that URL into the **Amazon S3 URL** field.
-1. Click **Next** to advance through the next several pages without modifying them, then submit the form.
-
-### Update the Terraform module
-
-Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases).
-
-For usage examples, see the [GitHub repository](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples).
 
 ## Disable Agentless Scanning
 
@@ -450,7 +432,6 @@ If you did not use a dedicated resource group, you must manually delete the scan
 [3]: /remote_configuration
 [12]: /security/cloud_security_management/agentless_scanning
 [20]: /security/cloud_security_management/agentless_scanning#cloud-service-provider-cost
-[14]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
 [15]: https://app.datadoghq.com/security/csm/vm
 [16]: https://app.datadoghq.com/security/code-security/sca
 [17]: https://app.datadoghq.com/sensitive-data-scanner/storage

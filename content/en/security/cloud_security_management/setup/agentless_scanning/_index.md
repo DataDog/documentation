@@ -31,6 +31,8 @@ After [setting up Agentless Scanning][1] for your resources, Datadog schedules a
 
 If you have [Cloud Security Evaluation Filters][15] configured, Agentless Scanning respects these filters and only scans resources that match the configured criteria.
 
+<div class="alert alert-info">Agentless Scanning excludes resources that have the Datadog Agent installed.</div>
+
 The following diagram illustrates how Agentless Scanning works:
 
 {{< img src="/security/agentless_scanning/how_agentless_works.png" alt="Diagram showing how Agentless Scanning works" width="90%" >}}
@@ -45,15 +47,11 @@ The following diagram illustrates how Agentless Scanning works:
 5. Datadog uses the SBOM to identify known vulnerabilities in your resources.
 
 **Notes**:
-- The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
+- The scanner operates as a separate virtual machine within your infrastructure, ensuring minimal impact on existing systems and resources.
 - For AWS, scanner instances automatically scale based on workload. When there are no resources to scan, scanners scale to zero to minimize cloud provider costs.
 - The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the cloud provider API to prevent reaching any rate limit, and uses exponential backoff if needed.
 - Scanner instances are automatically rotated every 24 hours, ensuring they run the latest images.
-
-## On-demand scanning
-
-By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API. For more information, see the [On-Demand Scanning API documentation][14].
 
 ## What data is sent to Datadog
 The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
@@ -63,43 +61,6 @@ Datadog does **not** send:
 - Encryption keys and certificates
 - Logs and Audit Trails
 - Sensitive business data
-
-## Security considerations
-
-Because the scanner instances grant [permissions][4] to create and copy snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users.
-
-To further mitigate this risk, Datadog implements the following security measures:
-
-- The Datadog scanner operates _within_ your infrastructure, ensuring that all data, including snapshots and list of packages, remain isolated and secure.
-- All data transmission between the scanner and Datadog is encrypted using industry standard protocols (such as HTTPS) to ensure data confidentiality and integrity.
-- The Datadog scanner operates under the principle of least privilege. This means that it is granted only the minimum permissions necessary to perform its intended functions effectively.
-- Datadog carefully reviews and limits the permissions granted to the scanner to ensure that it can conduct scans without unnecessary access to sensitive data or resources.
-- Unattended security updates are enabled on Datadog's scanner instances. This feature automates the process of installing critical security patches and updates without requiring manual intervention.
-- The Datadog scanner instances are automatically rotated every 24 hours. This rotation ensures that the scanner instances are continually updated with the latest Ubuntu images.
-- Access to the scanner instances is tightly controlled through the use of security groups. No inbound access to the scanner is allowed, restricting possibility to compromise the instance.
-- No confidential or private personal information is ever transmitted outside of your infrastructure.
-
-## Agentless Scanning with existing Agent installations
-
-When installed, the Datadog Agent offers real-time, deep visibility into risks and vulnerabilities that exist in your cloud workloads. It is recommended to fully install the Datadog Agent.
-
-As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][5]. In this way, Cloud Security offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
-
-The following diagram illustrates how Agentless Scanning works with existing Agent installations:
-
-{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless Scanning works when the Agent is already installed with Cloud Security vulnerability management" width="90%" >}}
-
-## Cloud Storage scanning
-
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in private beta. To express interest, contact <a href="/help">Datadog Support</a>.
-{{< /callout >}}
-
-If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets.
-
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
-
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security.
 
 ## Cloud service provider cost
 
@@ -118,6 +79,30 @@ To reduce costs:
 - Use the [recommended configuration][13] with Terraform to deploy one scanner per region.
 - For large multi-region deployments, see [Deploying Agentless Scanning][16] for guidance on choosing a deployment topology.
 
+## Security considerations
+
+Scanner instances require [permissions][4] to create and copy snapshots and describe volumes. Datadog advises restricting access to these instances to administrative users.
+
+- Scanner permissions follow the principle of least privilege, limited to the minimum required for scanning.
+- All data transmission between the scanner and Datadog is encrypted with HTTPS.
+- Unattended security updates are enabled, and instances are automatically rotated every 24 hours.
+- No inbound access to scanner instances is allowed (security group restricted).
+
+## Cloud Storage scanning
+
+{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in private beta. To express interest, contact <a href="/help">Datadog Support</a>.
+{{< /callout >}}
+
+If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets.
+
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security.
+
+## On-demand scanning
+
+By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API. For more information, see the [On-Demand Scanning API documentation][14].
 
 ## Further reading
 
