@@ -26,7 +26,7 @@ and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 
-### Step 2 - Specify application details in Datadog
+### Step 2 - Specify application details in the UI
 
 1. Navigate to [**Digital Experience** > **Add an Application**][5].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.

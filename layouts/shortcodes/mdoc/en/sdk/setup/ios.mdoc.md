@@ -16,7 +16,7 @@ Before you begin, ensure you have:
 
 **Choose your setup method:**
 
-- **[Agentic Onboarding (in Preview)][14]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **[Agentic Onboarding (in Preview)][16]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
 - **Manual setup** (below): Follow the instructions to manually add and configure the RUM SDK in your iOS application.
 
 ### Manual setup
@@ -579,4 +579,5 @@ See [Supported versions][9] for a list of operating system versions and platform
 [13]: https://app.datadoghq.com/rum/application/
 [14]: /error_tracking/
 [15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
+[16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 

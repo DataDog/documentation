@@ -88,7 +88,7 @@ You can control the data your application sends to Datadog RUM during instrument
 
 ### Setting tracking consent
 
-In order to be compliant with data protection and privacy policies, the Datadog Unity SDK requires setting a tracking consent value.
+To be compliant with data protection and privacy policies, the Datadog Unity SDK requires setting a tracking consent value.
 
 The `trackingConsent` setting can be one of the following values:
 
@@ -96,7 +96,7 @@ The `trackingConsent` setting can be one of the following values:
   * `TrackingConsent.Granted`: The Unity SDK starts collecting the data and sends it to Datadog.
   * `TrackingConsent.NotGranted`: The Unity SDK does not collect any data. No logs are sent to Datadog.
 
-Before Datadog sends any data, we need to confirm the user's `Tracking Consent`. This is set to `TrackingConsent.Pending` during initialization,
+Before Datadog sends any data, confirm the user's `Tracking Consent`. This is set to `TrackingConsent.Pending` during initialization,
 and needs to be set to `TrackingConsent.Granted` before Datadog sends any information.
 
 ```csharp

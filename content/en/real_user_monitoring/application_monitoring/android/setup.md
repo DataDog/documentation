@@ -42,7 +42,7 @@ further_reading:
       <strong
         ><a
           href="/real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring"
-          >Agentic Onboarding</a
+          >Agentic Onboarding (in Preview)</a
         ></strong
       >: Use AI coding agents (Cursor, Claude Code) to automatically instrument
       your application with one prompt. The agent detects your project structure

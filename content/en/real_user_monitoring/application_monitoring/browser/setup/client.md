@@ -69,19 +69,17 @@ further_reading:
           href="/real_user_monitoring/application_monitoring/browser/setup/server"
           >Server-side auto-instrumentation</a
         ></strong
-      >
-      (RUM only): Automatically inject the RUM SDK into HTML responses through
-      your web server or proxy.
+      >: Automatically inject the RUM SDK into HTML responses through your web
+      server or proxy.
     </li>
     <li>
       <strong
         ><a
           href="/real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring"
-          >Agentic Onboarding</a
+          >Agentic Onboarding (in Preview)</a
         ></strong
-      >
-      (RUM only): Use AI coding agents (Cursor, Claude Code) to automatically
-      instrument your application with one prompt.
+      >: Use AI coding agents (Cursor, Claude Code) to automatically instrument
+      your application with one prompt.
     </li>
     <li>
       <strong>Manual client-side setup</strong> (below): Manually add the SDK to

@@ -178,8 +178,11 @@ further_reading:
   </h3>
   <ol>
     <li>
-      Navigate to [<strong>Digital Experience</strong> &gt;
-      <strong>Add an Application</strong>][4].
+      Navigate to
+      <a href="https://app.datadoghq.com/rum/application/create"
+        ><strong>Digital Experience</strong> &gt;
+        <strong>Add an Application</strong></a
+      >.
     </li>
     <li>
       Select <code>Kotlin Multiplatform</code> as the application type and enter
@@ -189,15 +192,23 @@ further_reading:
     <li>
       To disable automatic user data collection for either client IP or
       geolocation data, uncheck the boxes for those settings. For more
-      information, see [RUM Kotlin Multiplatform Data Collected][5].
+      information, see
+      <a
+        href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected"
+        >RUM Kotlin Multiplatform Data Collected</a
+      >.
     </li>
   </ol>
   <div class="alert alert-info">
     <p>
       If you've purchased Error Tracking as a standalone product (without RUM),
-      navigate to [<strong>Error Tracking</strong> &gt;
-      <strong>Settings</strong> &gt; <strong>Browser and Mobile</strong> &gt;
-      <strong>Add an Application</strong>][6] instead.
+      navigate to
+      <a href="https://app.datadoghq.com/error-tracking/settings/setup/client"
+        ><strong>Error Tracking</strong> &gt; <strong>Settings</strong> &gt;
+        <strong>Browser and Mobile</strong> &gt;
+        <strong>Add an Application</strong></a
+      >
+      instead.
     </p>
   </div>
   <p>
@@ -252,7 +263,7 @@ further_reading:
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">8</span><span class="n">b73df0d</span><span class="p">-</span><span class="m">3404</span><span class="p">-</span><span class="m">4</span><span class="n">cdb</span><span class="p">-</span><span class="n">b71b</span><span class="p">-</span><span class="n">fad7e3749d94</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="n">d8deec66</span><span class="p">-</span><span class="m">6560</span><span class="p">-</span><span class="m">4</span><span class="n">c82</span><span class="p">-</span><span class="m">80</span><span class="n">be</span><span class="p">-</span><span class="m">624</span><span class="n">de404ad24</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>

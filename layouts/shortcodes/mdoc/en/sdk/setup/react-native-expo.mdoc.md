@@ -135,7 +135,7 @@ Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `D
 
 ### User interactions tracking
 
-Datadog recommends set up interaction tracking by using the Datadog React Native Babel Plugin (`@datadog/mobile-react-native-babel-plugin`). This plugin automatically enriches React components with contextual metadata, improving interaction tracking accuracy and enabling a range of configuration options.
+Datadog recommends setting up interaction tracking by using the Datadog React Native Babel Plugin (`@datadog/mobile-react-native-babel-plugin`). This plugin automatically enriches React components with contextual metadata, improving interaction tracking accuracy and enabling a range of configuration options.
 
 To install with npm, run:
 

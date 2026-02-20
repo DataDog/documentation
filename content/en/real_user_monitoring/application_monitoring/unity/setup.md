@@ -376,8 +376,8 @@ further_reading:
   <h2 id="using-datadog">Using Datadog</h2>
   <h3 id="setting-tracking-consent">Setting tracking consent</h3>
   <p>
-    In order to be compliant with data protection and privacy policies, the
-    Datadog Unity SDK requires setting a tracking consent value.
+    To be compliant with data protection and privacy policies, the Datadog Unity
+    SDK requires setting a tracking consent value.
   </p>
   <p>
     The <code>trackingConsent</code> setting can be one of the following values:
@@ -398,7 +398,7 @@ further_reading:
     </li>
   </ul>
   <p>
-    Before Datadog sends any data, we need to confirm the user's
+    Before Datadog sends any data, confirm the user's
     <code>Tracking Consent</code>. This is set to
     <code>TrackingConsent.Pending</code> during initialization, and needs to be
     set to <code>TrackingConsent.Granted</code> before Datadog sends any

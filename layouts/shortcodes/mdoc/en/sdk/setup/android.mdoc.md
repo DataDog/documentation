@@ -11,7 +11,7 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 
 **Choose your setup method:**
 
-- **[Agentic Onboarding][19]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **[Agentic Onboarding (in Preview)][19]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
 - **Manual setup** (below): Follow the step-by-step instructions to manually add and configure the SDK.
 
 ### Step 1 - Declare the Android SDK as a dependency

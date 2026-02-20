@@ -76,8 +76,8 @@ site_support_id: rum_roku
     Make sure you have a <code>roku_modules/datadogroku</code> subfolder in both
     the <code>components</code> and <code>source</code> folders of your project.
   </p>
-  <h3 id="step-2--specify-application-details-in-datadog">
-    Step 2 - Specify application details in Datadog
+  <h3 id="step-2--specify-application-details-in-the-ui">
+    Step 2 - Specify application details in the UI
   </h3>
   <ol>
     <li>

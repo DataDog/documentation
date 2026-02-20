@@ -540,7 +540,7 @@ further_reading:
   <p>
     Use
     <a
-      href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html"
+      href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html"
       ><code>RumUserActionDetector</code></a
     >
     to track user taps that happen in a given Widget tree:
@@ -582,7 +582,7 @@ further_reading:
   <p>
     Alternatively, you can enclose any Widget tree with a
     <a
-      href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html"
+      href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html"
       ><code>RumUserActionAnnotation</code></a
     >, which uses the provided description when reporting user actions detected
     in the child tree, without changing the Semantics of the tree.

@@ -143,7 +143,11 @@ title: Client SDK Setup
     Follow the instructions below to install and configure the Datadog SDK for
     your platform.
   </p>
-  <div class="cdoc__toggleable" data-description="SDK is Browser" data-if="0">
+  <div
+    class="cdoc__toggleable"
+    data-description="SDK is Browser"
+    data-if="5436"
+  >
     <p>
       This page describes how to instrument your web applications with the
       Datadog Browser SDK. The Browser SDK supports
@@ -163,18 +167,16 @@ title: Client SDK Setup
             href="/real_user_monitoring/application_monitoring/browser/setup/server"
             >Server-side auto-instrumentation</a
           ></strong
-        >
-        (RUM only): Automatically inject the RUM SDK into HTML responses through
-        your web server or proxy.
+        >: Automatically inject the RUM SDK into HTML responses through your web
+        server or proxy.
       </li>
       <li>
         <strong
           ><a
             href="/real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring"
-            >Agentic Onboarding</a
+            >Agentic Onboarding (in Preview)</a
           ></strong
-        >
-        (RUM only): Use AI coding agents (Cursor, Claude Code) to automatically
+        >: Use AI coding agents (Cursor, Claude Code) to automatically
         instrument your application with one prompt.
       </li>
       <li>
@@ -779,7 +781,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="1"
+    data-if="5437"
   >
     <p>
       This page describes how to instrument your applications for
@@ -795,14 +797,14 @@ title: Client SDK Setup
       The Datadog Android SDK supports Android 6.0+ (API level 23) and Android
       TV.
     </p>
-    <h2 id="setup">Setup</h2>
+    <h2 id="setup-2">Setup</h2>
     <p><strong>Choose your setup method:</strong></p>
     <ul>
       <li>
         <strong
           ><a
             href="/real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring"
-            >Agentic Onboarding</a
+            >Agentic Onboarding (in Preview)</a
           ></strong
         >: Use AI coding agents (Cursor, Claude Code) to automatically
         instrument your application with one prompt. The agent detects your
@@ -2110,7 +2112,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2"
+    data-if="5438"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -2127,12 +2129,13 @@ title: Client SDK Setup
       <li>iOS 11.0+ or tvOS 11.0+ deployment target</li>
       <li>A Datadog account with RUM or Error Tracking enabled</li>
     </ul>
-    <h2 id="setup">Setup</h2>
+    <h2 id="setup-3">Setup</h2>
     <p><strong>Choose your setup method:</strong></p>
     <ul>
       <li>
         <strong
-          ><a href="/error_tracking/"
+          ><a
+            href="/real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring"
             >Agentic Onboarding (in Preview)</a
           ></strong
         >: Use AI coding agents (Cursor, Claude Code) to automatically
@@ -2302,7 +2305,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h3 id="step-2--specify-application-details-in-the-ui">
+    <h3 id="step-2--specify-application-details-in-the-ui-2">
       Step 2 - Specify application details in the UI
     </h3>
     <ol>
@@ -2873,7 +2876,7 @@ title: Client SDK Setup
         >Set tracking consent documentation</a
       >.
     </p>
-    <h4 id="sample-session-rates">Sample session rates</h4>
+    <h4 id="sample-session-rates-2">Sample session rates</h4>
     <p>
       To control the data your application sends to Datadog RUM, you can specify
       a sampling rate for RUM sessions while
@@ -2938,7 +2941,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h4 id="set-tracking-consent--gdpr-compliance">
+    <h4 id="set-tracking-consent--gdpr-compliance-2">
       Set tracking consent (GDPR compliance)
     </h4>
     <p>
@@ -3266,7 +3269,7 @@ title: Client SDK Setup
         >Client token documentation</a
       >.
     </p>
-    <h2 id="sending-data-when-device-is-offline">
+    <h2 id="sending-data-when-device-is-offline-2">
       Sending data when device is offline
     </h2>
     <p>
@@ -3300,7 +3303,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="3"
+    data-if="5439"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3312,7 +3315,7 @@ title: Client SDK Setup
       >
       for specific steps.
     </p>
-    <h2 id="setup">Setup</h2>
+    <h2 id="setup-4">Setup</h2>
     <h3 id="step-1--specify-application-details-in-the-ui">
       Step 1 - Specify application details in the UI
     </h3>
@@ -3524,7 +3527,9 @@ title: Client SDK Setup
         If you are only using Logs, initialize the library with a client token.
       </li>
     </ul>
-    <h3 id="step-3--initialize-the-library">Step 3 - Initialize the library</h3>
+    <h3 id="step-3--initialize-the-library-2">
+      Step 3 - Initialize the library
+    </h3>
     <p>
       You can initialize the library using one of two methods in your
       <code>main.dart</code> file.
@@ -3594,7 +3599,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h4 id="sample-session-rates">Sample session rates</h4>
+    <h4 id="sample-session-rates-3">Sample session rates</h4>
     <p>
       To control the data your application sends to Datadog RUM, you can specify
       a sampling rate for RUM sessions while initializing the Flutter RUM SDK.
@@ -3623,7 +3628,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h4 id="set-tracking-consent--gdpr-compliance">
+    <h4 id="set-tracking-consent--gdpr-compliance-3">
       Set tracking consent (GDPR compliance)
     </h4>
     <p>
@@ -3819,7 +3824,7 @@ title: Client SDK Setup
     <p>
       Use
       <a
-        href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html"
+        href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html"
         ><code>RumUserActionDetector</code></a
       >
       to track user taps that happen in a given Widget tree:
@@ -3861,7 +3866,7 @@ title: Client SDK Setup
     <p>
       Alternatively, you can enclose any Widget tree with a
       <a
-        href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html"
+        href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html"
         ><code>RumUserActionAnnotation</code></a
       >, which uses the provided description when reporting user actions
       detected in the child tree, without changing the Semantics of the tree.
@@ -3903,7 +3908,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h2 id="sending-data-when-device-is-offline">
+    <h2 id="sending-data-when-device-is-offline-3">
       Sending data when device is offline
     </h2>
     <p>
@@ -3928,7 +3933,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="4"
+    data-if="5440"
   >
     <p>
       The minimum supported version for the React Native SDK is React Native
@@ -3996,7 +4001,7 @@ title: Client SDK Setup
               </div>
             </div>
           </div>
-          <h3 id="android">Android</h3>
+          <h3 id="android-2">Android</h3>
           <p>
             If you use a React Native version strictly over 0.67, make sure to
             use Java version 17. If you use React Native version equal or below
@@ -4042,7 +4047,7 @@ title: Client SDK Setup
             top-level <code>build.gradle</code> file. Datadog recommends using a
             React Native version that's actively supported.
           </p>
-          <h3 id="step-2--specify-application-details-in-the-ui">
+          <h3 id="step-2--specify-application-details-in-the-ui-3">
             Step 2 - Specify application details in the UI
           </h3>
           <ol>
@@ -4415,7 +4420,7 @@ title: Client SDK Setup
               </div>
             </div>
           </div>
-          <h4 id="sample-session-rates">Sample session rates</h4>
+          <h4 id="sample-session-rates-4">Sample session rates</h4>
           <p>
             To control the data your application sends to Datadog RUM, you can
             specify a sampling rate for RUM sessions while
@@ -4425,7 +4430,7 @@ title: Client SDK Setup
             as a percentage between 0 and 100. You can specify the rate with the
             <code>config.sessionSamplingRate</code> parameter.
           </p>
-          <h4 id="set-tracking-consent--gdpr-compliance">
+          <h4 id="set-tracking-consent--gdpr-compliance-4">
             Set tracking consent (GDPR compliance)
           </h4>
           <p>
@@ -4565,7 +4570,7 @@ title: Client SDK Setup
           role="tabpanel"
           title="Expo"
         >
-          <h3 id="step-1--install-the-sdk">Step 1 - Install the SDK</h3>
+          <h3 id="step-1--install-the-sdk-2">Step 1 - Install the SDK</h3>
           <p>
             The RUM React Native SDK supports Expo and Expo Go. To use it,
             install <code>expo-datadog</code> and
@@ -4610,7 +4615,7 @@ title: Client SDK Setup
               </div>
             </div>
           </div>
-          <h3 id="step-2--specify-application-details-in-the-ui">
+          <h3 id="step-2--specify-application-details-in-the-ui-4">
             Step 2 - Specify application details in the UI
           </h3>
           <ol>
@@ -4652,7 +4657,7 @@ title: Client SDK Setup
               >Client Token documentation</a
             >.
           </p>
-          <h3 id="step-3--initialize-the-library-with-application-context">
+          <h3 id="step-3--initialize-the-library-with-application-context-2">
             Step 3 - Initialize the library with application context
           </h3>
           <p>Add the following code snippet to your initialization file:</p>
@@ -4731,7 +4736,7 @@ title: Client SDK Setup
               </div>
             </div>
           </div>
-          <h4 id="sample-session-rates">Sample session rates</h4>
+          <h4 id="sample-session-rates-5">Sample session rates</h4>
           <p>
             To control the data your application sends to Datadog RUM, you can
             specify a sampling rate for RUM sessions. To set this rate, use the
@@ -4811,10 +4816,10 @@ title: Client SDK Setup
             <code>DATADOG_SITE</code> to the host of your Datadog site (for
             example, <code>datadoghq.com</code>).
           </p>
-          <h3 id="user-interactions-tracking">User interactions tracking</h3>
+          <h3 id="user-interactions-tracking-2">User interactions tracking</h3>
           <p>
-            Datadog recommends set up interaction tracking by using the Datadog
-            React Native Babel Plugin
+            Datadog recommends setting up interaction tracking by using the
+            Datadog React Native Babel Plugin
             (<code>@datadog/mobile-react-native-babel-plugin</code>). This
             plugin automatically enriches React components with contextual
             metadata, improving interaction tracking accuracy and enabling a
@@ -4879,7 +4884,7 @@ title: Client SDK Setup
             tracks interactions on standard React Native components. No
             additional code changes are required for basic usage.
           </p>
-          <h3 id="codepush-integration--optional">
+          <h3 id="codepush-integration--optional-2">
             CodePush integration (optional)
           </h3>
           <p>
@@ -4901,7 +4906,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="5"
+    data-if="5441"
   >
     <p>
       This page describes how to instrument your applications for
@@ -4917,7 +4922,7 @@ title: Client SDK Setup
       The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21)
       and iOS v12+.
     </p>
-    <h2 id="setup">Setup</h2>
+    <h2 id="setup-5">Setup</h2>
     <h3 id="step-1--declare-the-kotlin-multiplatform-sdk-as-a-dependency">
       Step 1 - Declare the Kotlin Multiplatform SDK as a dependency
     </h3>
@@ -5063,8 +5068,11 @@ title: Client SDK Setup
     </h3>
     <ol>
       <li>
-        Navigate to [<strong>Digital Experience</strong> &gt;
-        <strong>Add an Application</strong>][4].
+        Navigate to
+        <a href="https://app.datadoghq.com/rum/application/create"
+          ><strong>Digital Experience</strong> &gt;
+          <strong>Add an Application</strong></a
+        >.
       </li>
       <li>
         Select <code>Kotlin Multiplatform</code> as the application type and
@@ -5074,15 +5082,23 @@ title: Client SDK Setup
       <li>
         To disable automatic user data collection for either client IP or
         geolocation data, uncheck the boxes for those settings. For more
-        information, see [RUM Kotlin Multiplatform Data Collected][5].
+        information, see
+        <a
+          href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected"
+          >RUM Kotlin Multiplatform Data Collected</a
+        >.
       </li>
     </ol>
     <div class="alert alert-info">
       <p>
         If you've purchased Error Tracking as a standalone product (without
-        RUM), navigate to [<strong>Error Tracking</strong> &gt;
-        <strong>Settings</strong> &gt; <strong>Browser and Mobile</strong> &gt;
-        <strong>Add an Application</strong>][6] instead.
+        RUM), navigate to
+        <a href="https://app.datadoghq.com/error-tracking/settings/setup/client"
+          ><strong>Error Tracking</strong> &gt; <strong>Settings</strong> &gt;
+          <strong>Browser and Mobile</strong> &gt;
+          <strong>Add an Application</strong></a
+        >
+        instead.
       </p>
     </div>
     <p>
@@ -5137,7 +5153,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">559395</span><span class="n">d8</span><span class="p">-</span><span class="n">b365</span><span class="p">-</span><span class="m">430</span><span class="n">b</span><span class="p">-</span><span class="m">8</span><span class="n">d81</span><span class="p">-</span><span class="m">03</span><span class="n">e00349e20c</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">282</span><span class="n">e453f</span><span class="p">-</span><span class="m">1</span><span class="n">c66</span><span class="p">-</span><span class="m">46</span><span class="n">c8</span><span class="p">-</span><span class="m">9</span><span class="n">b47</span><span class="p">-</span><span class="n">e97d6ffe6768</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5231,7 +5247,7 @@ title: Client SDK Setup
       >
       to enable automatic tracking of all your views.
     </p>
-    <h3 id="set-tracking-consent--gdpr-compliance">
+    <h3 id="set-tracking-consent--gdpr-compliance-5">
       Set tracking consent (GDPR compliance)
     </h3>
     <p>
@@ -5365,7 +5381,7 @@ title: Client SDK Setup
       You can view error details and attributes including JSON in the
       <a href="/real_user_monitoring/explorer/">RUM Explorer</a>.
     </p>
-    <h2 id="sending-data-when-device-is-offline">
+    <h2 id="sending-data-when-device-is-offline-4">
       Sending data when device is offline
     </h2>
     <p>
@@ -5389,7 +5405,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="6"
+    data-if="5442"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5405,7 +5421,7 @@ title: Client SDK Setup
       The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and
       higher.
     </p>
-    <h2 id="setup">Setup</h2>
+    <h2 id="setup-6">Setup</h2>
     <h3 id="step-1--declare-the-sdk-as-a-dependency">
       Step 1 - Declare the SDK as a dependency
     </h3>
@@ -5445,8 +5461,8 @@ title: Client SDK Setup
       both the <code>components</code> and <code>source</code> folders of your
       project.
     </p>
-    <h3 id="step-2--specify-application-details-in-datadog">
-      Step 2 - Specify application details in Datadog
+    <h3 id="step-2--specify-application-details-in-the-ui-5">
+      Step 2 - Specify application details in the UI
     </h3>
     <ol>
       <li>
@@ -5495,7 +5511,9 @@ title: Client SDK Setup
         >Client Token documentation</a
       >.
     </p>
-    <h3 id="step-3--initialize-the-library">Step 3 - Initialize the library</h3>
+    <h3 id="step-3--initialize-the-library-3">
+      Step 3 - Initialize the library
+    </h3>
     <p>
       In the initialization snippet, set an environment name. For more
       information, see
@@ -5533,7 +5551,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h4 id="sample-session-rates">Sample session rates</h4>
+    <h4 id="sample-session-rates-6">Sample session rates</h4>
     <p>
       To control the data your application sends to Datadog RUM, you can specify
       a sampling rate for RUM sessions while
@@ -5624,7 +5642,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h2 id="sending-data-when-device-is-offline">
+    <h2 id="sending-data-when-device-is-offline-5">
       Sending data when device is offline
     </h2>
     <p>
@@ -5648,7 +5666,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="7"
+    data-if="5443"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5672,7 +5690,7 @@ title: Client SDK Setup
       Datadog RUM to monitor its performance, create a ticket with
       <a href="/help/">Datadog support</a>.
     </p>
-    <h3 id="step-1--install-the-sdk">Step 1 - Install the SDK</h3>
+    <h3 id="step-1--install-the-sdk-3">Step 1 - Install the SDK</h3>
     <ol>
       <li>
         <p>
@@ -5771,7 +5789,7 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
-    <h3 id="step-2--specify-application-details-in-the-ui">
+    <h3 id="step-2--specify-application-details-in-the-ui-6">
       Step 2 - Specify application details in the UI
     </h3>
     <ol>
@@ -6010,8 +6028,8 @@ title: Client SDK Setup
     <h2 id="using-datadog">Using Datadog</h2>
     <h3 id="setting-tracking-consent">Setting tracking consent</h3>
     <p>
-      In order to be compliant with data protection and privacy policies, the
-      Datadog Unity SDK requires setting a tracking consent value.
+      To be compliant with data protection and privacy policies, the Datadog
+      Unity SDK requires setting a tracking consent value.
     </p>
     <p>
       The <code>trackingConsent</code> setting can be one of the following
@@ -6034,7 +6052,7 @@ title: Client SDK Setup
       </li>
     </ul>
     <p>
-      Before Datadog sends any data, we need to confirm the user's
+      Before Datadog sends any data, confirm the user's
       <code>Tracking Consent</code>. This is set to
       <code>TrackingConsent.Pending</code> during initialization, and needs to
       be set to <code>TrackingConsent.Granted</code> before Datadog sends any
@@ -6196,7 +6214,7 @@ title: Client SDK Setup
       staging.api.example.com and prod.api.example.com, but not
       news.example.com.
     </p>
-    <h2 id="sending-data-when-device-is-offline">
+    <h2 id="sending-data-when-device-is-offline-6">
       Sending data when device is offline
     </h2>
     <p>
@@ -6219,7 +6237,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"3"},"4":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"4"},"5":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"5"},"6":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"6"},"7":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"7"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"5436":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"5436"},"5437":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"5437"},"5438":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"5438"},"5439":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"5439"},"5440":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"5440"},"5441":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"5441"},"5442":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"5442"},"5443":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"5443"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 
