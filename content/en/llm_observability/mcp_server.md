@@ -2,15 +2,9 @@
 title: LLM Observability MCP Tools
 description: "Connect AI agents to your LLM Observability traces and experiments using the Datadog MCP Server."
 further_reading:
-- link: "bits_ai/mcp_server/setup"
-  tag: "Documentation"
-  text: "Datadog MCP Server Setup"
 - link: "bits_ai/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "llm_observability/"
-  tag: "Documentation"
-  text: "LLM Observability"
 ---
 
 ## Overview
@@ -108,7 +102,7 @@ After you are connected, try prompts like:
 To use the LLM Observability tools, connect to the Datadog MCP Server with the `llmobs` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your Datadog site:
 
 ```text
-https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,llmobs
+https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=llmobs,core
 ```
 
 For full setup instructions including client configuration for Cursor, Claude Code, VS Code, and other AI clients, see [Set Up the Datadog MCP Server][1].
