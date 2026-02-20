@@ -18,7 +18,7 @@ further_reading:
 Datadog Cloud Cost Management (CCM) automatically allocates the costs of your cloud clusters to individual services and workloads running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
 Clouds
-: CCM allocates costs of your AWS, Azure, or Google host instances. A host is a computer (such as an EC2 instance in AWS, a virtual machine in Azure, or a Compute Engine instance in Google Cloud) that is listed in your cloud provider's cost and usage report and may be running Kubernetes pods.
+: CCM allocates costs of your AWS, Azure, or Google host instances. A host is a computer (such as an EC2 instance in AWS, a VM in Azure, or a Compute Engine instance in Google Cloud) that is listed in your cloud provider's cost and usage report and may be running Kubernetes pods.
 
 Resources
 : CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods.
@@ -395,12 +395,16 @@ The following list of out-of-the-box tags are applied to cost metrics associated
 In addition, some Kubernetes pod tags that are common between all pods on the same node are also applied.
 
 {% /if %}
-<!-- Azure -->
-{% if equals($platform, "azure") %}
 
+{% if or(equals($platform, "google"), equals($platform, "azure")) %}
 ### Kubernetes
 
 In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
+
+{% /if %}
+
+<!-- Azure -->
+{% if equals($platform, "azure") %}
 
 | Out-of-the-box tag                         | Description                                                                                                                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
@@ -416,10 +420,6 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 {% /if %}
 <!-- Google -->
 {% if equals($platform, "google") %}
-
-### Kubernetes
-
-In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
 
 | Out-of-the-box tag                         | Description                                                                                                                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
