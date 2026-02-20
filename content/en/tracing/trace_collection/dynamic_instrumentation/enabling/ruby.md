@@ -24,7 +24,7 @@ Dynamic Instrumentation for Ruby has the following requirements:
 
 - **Ruby version**: Ruby 2.6 or higher
 - **Ruby implementation**: Only MRI (CRuby) is supported. JRuby and other Ruby implementations are not supported.
-- **Web framework**: Only Rack-based applications are currently supported (including Rails, Sinatra, and other Rack-compatible frameworks).
+- **Web framework**: Only Rack-based applications are currently supported (including Rails, Sinatra, and other Rack-compatible frameworks). Background processes and jobs (including Sidekiq, Resque, etc.) are not yet supported.
 - **Environment**: `RAILS_ENV` or `RACK_ENV` must be set to `production`. Development environments are not supported.
 
 ## Installation
