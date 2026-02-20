@@ -94,7 +94,7 @@ Realiza un seguimiento de los incidentes, asígnalos a los miembros del equipo c
 
 Haz clic en cualquier incidente para abrir el panel de incidentes y ver más información sobre este.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Parte superior del panel de incidentes de Tracking que ofrece una vista resumida del incidente" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Parte superior del panel de incidentes de Tracking que ofrece una vista resumida del incidente" style="width:80%;" >}}
 
 Los detalles claros que necesitas para solucionar un incidente se encuentran en la parte superior del panel. Desde allí, podrás entender su ciclo de vida: las fechas del primero y el último caso, el recuento total, así como el recuento a lo largo del tiempo para el incidente en cuestión.
 
@@ -110,7 +110,7 @@ Ver un nuevo incidente en cuanto se produce te da la oportunidad de identificarl
 
 Puedes exportar directamente tu consulta de búsqueda desde el Explorador para crear un monitor de Error Tracking en el contexto relacionado:
 
-{{< img src="/error_tracking/create-monitor.mp4" alt="Exportar tu consulta de búsqueda a un monitor de Error Tracking" video=true >}}
+{{< img src="/error_tracking/create-monitor-2.mp4" alt="Exportar tu consulta de búsqueda a un monitor de Error Tracking" video=true >}}
 
 ## Referencias adicionales
 

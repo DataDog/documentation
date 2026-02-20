@@ -40,7 +40,7 @@ La fonctionnalité Suivi des erreurs indexe automatiquement une liste prédéfin
 
 Cliquez sur un problème pour l'examiner plus en détail dans un volet dédié.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Le haut du volet relatif aux problèmes du suivi des erreurs proposant une vue résumée du problème" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Le haut du volet relatif aux problèmes du suivi des erreurs proposant une vue résumée du problème" style="width:80%;" >}}
 
 Les principales informations dont vous avez besoin pour dépanner un problème se trouvent dans la partie supérieure du volet. Elles vous permettent de comprendre son cycle de vie : première et dernière occurrence, nombre total d'occurrences et évolution du nombre d'occurrences au fil du temps.
 
@@ -56,7 +56,7 @@ En étant informé d'un nouveau problème dès qu'il se présente, vous avez la 
 
 Chaque événement généré reçoit automatiquement les tags de version, de service et d'environnement pour vous permettre de contrôler avec précision les problèmes pour lesquels vous souhaitez recevoir une alerte. Vous pouvez exporter votre requête de recherche directement depuis l'explorateur afin de créer un monitor d'événement correspondant :
 
-{{< img src="real_user_monitoring/error_tracking/export_to_monitor.mp4" alt="Exporter votre requête de recherche vers un monitor du suivi des erreurs" video=true >}}
+{{< img src="error_tracking/create-monitor-2.mp4" alt="Exporter votre requête de recherche vers un monitor du suivi des erreurs" video=true >}}
 
 ## Pour aller plus loin
 

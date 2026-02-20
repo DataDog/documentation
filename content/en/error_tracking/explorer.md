@@ -94,7 +94,7 @@ Track and assign issues to yourself or the most knowledgeable team members, and 
 
 Click on any issue to open the issue panel and see more information about it.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Upper part of the Error Tracking issue panel offering a summarized view of the issue" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Upper part of the Error Tracking issue panel offering a summarized view of the issue" style="width:80%;" >}}
 
 The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand its lifecycle: first and last occurrence dates, total count, as well as the count over time for the given issue.
 
@@ -110,7 +110,7 @@ Seeing a new issue as soon as it happens gives you the chance to proactively ide
 
 You can directly export your search query from the explorer to create an Error Tracking Monitor on the related scope:
 
-{{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
+{{< img src="/error_tracking/create-monitor-2.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
 
 ## Further Reading
 

@@ -40,7 +40,7 @@ title: 오류 추적 탐색기
 
 이슈를 클릭하면 이슈 패널이 열리고 해당 이슈에 대한 자세한 정보를 확인할 수 있습니다.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="문제에 대한 요약 보기를 제공하는 오류 추적 이슈 패널의 상단 부분" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="문제에 대한 요약 보기를 제공하는 오류 추적 이슈 패널의 상단 부분" style="width:80%;" >}}
 
 문제를 해결할 때 필요한 높은 수준의 세부 정보는 패널 상단에서 찾을 수 있습니다. 여기에서 특정 이슈의 최초 및 마지막 발생 날짜, 총 횟수, 시간 경과에 따른 횟수 등 수명 주기를 이해할 수 있습니다.
 
@@ -56,7 +56,7 @@ title: 오류 추적 탐색기
 
 생성된 각 이벤트에는 버전, 서비스 및 환경에 태그가 지정되어 알림을 받고자 하는 이슈를 세밀하게 제어할 수 있습니다. 탐색기에서 검색 쿼리를 직접 내보내 관련 범위에 대한 이벤트 모니터를 만들 수 있습니다:
 
-{{< img src="real_user_monitoring/error_tracking/export_to_monitor.mp4" alt="검색 쿼리를 오류 추적 모니터로 내보내기" video=true >}}
+{{< img src="error_tracking/create-monitor-2.mp4" alt="검색 쿼리를 오류 추적 모니터로 내보내기" video=true >}}
 
 ## 참고 자료
 
