@@ -466,6 +466,13 @@ class ConversationalSearch {
                 const code = pre.querySelector('code');
                 const text = code ? code.textContent : pre.textContent;
                 navigator.clipboard.writeText(text).catch(() => {});
+                this.logAction('Conversational Search Copy Snippet', {
+                    conversational_search: {
+                        action: 'copy_snippet',
+                        snippet_length: text?.length || 0,
+                        conversation_id: this.conversationId
+                    }
+                });
                 const copyIcon = btn.querySelector('.copy-icon');
                 const checkIcon = btn.querySelector('.check-icon');
                 copyIcon.style.display = 'none';
@@ -834,9 +841,10 @@ class ConversationalSearch {
                     navigator.clipboard.writeText(response).catch(() => {
                         this.showFeedbackTooltip(button, 'Copy failed', true);
                     });
-                    this.logAction('Conversational Search Copy', {
+                    this.logAction('Conversational Search Copy Full Response', {
                         conversational_search: {
-                            action: 'copy',
+                            action: 'copy_full_response',
+                            response_length: response?.length || 0,
                             conversation_id: this.conversationId
                         }
                     });
