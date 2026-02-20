@@ -90,15 +90,7 @@ Scanner instances require [permissions][4] to create and copy snapshots and desc
 
 ## Cloud Storage scanning
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in private beta. To express interest, contact <a href="/help">Datadog Support</a>.
-{{< /callout >}}
-
-If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets.
-
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
-
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security.
+You can enable [Sensitive Data Scanner][8] for your Agentless Scanning resources during deployment or after setup. Sensitive Data Scanner catalogs and classifies sensitive data in your cloud storage (such as Amazon S3 buckets). Data stores and their files are only read in your environment — no sensitive data is sent to Datadog.
 
 ## On-demand scanning
 

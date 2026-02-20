@@ -100,9 +100,18 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
   </ul>
   {{< /collapse-content >}}
 
-<div class="alert alert-info"><strong>Deploying across multiple accounts or regions?</strong> Before starting setup, review the <a href="/security/cloud_security_management/setup/agentless_scanning/deployment_methods">deployment topology guide</a> to plan your scanner placement. This helps you choose between single-account and cross-account scanning and determine which regions need dedicated scanners.</div>
-
 ## Setup
+
+### Step 1: Plan your deployment
+
+- **Single account**: Deploy a scanner directly in that account.
+- **Multiple accounts**: Use a dedicated scanner account and cross-account roles so one scanner can reach all target accounts.
+- **Regional placement**: A single scanner can scan hosts across regions. Add a dedicated scanner in any region with more than ~150 hosts to avoid cross-region data transfer costs.
+- **Cloud Storage Scanning**: If enabled, deploy a scanner in each region that contains a data store (for example, S3 buckets or RDS instances).
+
+For a detailed walkthrough, see the [deployment topology guide](/security/cloud_security_management/setup/agentless_scanning/deployment_methods).
+
+### Step 2: Deploy
 
 Select your cloud provider to see the available setup methods. If you are setting up Agentless Scanning across multiple cloud providers, complete the setup for each provider independently.
 
