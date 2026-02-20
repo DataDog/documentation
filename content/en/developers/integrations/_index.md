@@ -52,16 +52,16 @@ Integration tiles are a component of integrations at Datadog.
 All official integrations must include the following:
 
 - **Telemetry**: Your integration must send at least one type of observability data (metrics, logs, traces, or events) to Datadog.
-- **Out-of-the-box dashboard**: A pre-built dashboard that visualizes the data your integration sends. See [Create a dashboard][link].
-- **Tile images**: Screenshots or diagrams that appear on your tile in the Integrations or Marketplace page. See [Tile requirements][link].
+- **Out-of-the-box dashboard**: A pre-built dashboard that visualizes the data your integration sends. See [Create an integration dashboard][10].
+- **Tile images**: Screenshots or diagrams that appear on your tile in the Integrations or Marketplace page. See [Build an integration][11] for details.
 
 Depending on what your integration does, the following are also required:
 
-| Integration type               | Additional requirement           |
-|--------------------------------|----------------------------------|
-| API-based integrations         | [OAuth 2.0 authentication][link] |
-| Log integrations               | [Log pipeline][link]             |
-| Integrations that send metrics | [Recommended Monitor][link]      |
+| Integration type               | Additional requirement         |
+|--------------------------------|--------------------------------|
+| API-based integrations         | [OAuth 2.0 authentication][12] |
+| Log integrations               | [Log pipeline][13]             |
+| Integrations that send metrics | [Recommended Monitor][14]      |
 
 ## Getting started
 
@@ -129,3 +129,8 @@ Datadog offers GTM support. Reach out to your partner manager to learn more.
 [7]: https://docs.datadoghq.com/account_management/users/#add-new-members-and-manage-invites
 [8]: https://docs.datadoghq.com/getting_started/site/
 [9]: https://docs.datadoghq.com/help/
+[10]: /developers/integrations/create-an-integration-dashboard/
+[11]: /developers/integrations/build_integration/
+[12]: /developers/integrations/api_integration/#implement-oauth
+[13]: /developers/integrations/log_pipeline/
+[14]: /developers/integrations/create-an-integration-monitor-template/
