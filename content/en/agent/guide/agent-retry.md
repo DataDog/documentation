@@ -1,5 +1,6 @@
 ---
 title: Agent Retry and Buffering Logic
+description: Follow this guide to learn how the Agent addresses retry strategies and backoff behavior, buffering mechanisms and limits, data drop conditions and loss scenarios.
 further_reading:
 - link: "agent/remote_config/?tab=configurationyamlfile"
   tag: "Documentation"
@@ -13,22 +14,19 @@ further_reading:
 ---
 ## Overview
 
-This guide describes the Datadog Agent's behavior when it fails to send HTTP requests to the **Metrics**, **Logs**, **APM**, and **Processes** intake endpoints.
+This guide describes the Datadog Agent's behavior when it fails to send HTTP requests to the Metrics, Logs, APM, and Processes intake endpoints.
 
-Follow this guide to learn how the Agent addresses:
-- Retry strategies and backoff behavior
-- Buffering mechanisms and limits
-- Data drop conditions and loss scenarios
-
-All retry strategies use exponential backoff with randomized jitter. See the <a href="https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go">backoff implementation</a> for details.
+All retry strategies use exponential backoff with randomized jitter. See the [backoff implementation][2] for details.
 
 <div class="alert alert-info"> A failed HTTP request in this guide refers to any request that does not result in a <code>2xx</code> HTTP response. </div>
 
 
-## Metrics
-{{% collapse-content title="Metrics retry strategy" level="h4" expanded=false %}}
+{{< tabs >}}
+{{% tab "Metrics" %}}
 
-The Agent retries failed HTTP requests using an [exponential backoff strategy][2]. The Agent uses the following default retry configurations for the metrics intake:
+### Metrics retry strategy
+
+The Agent retries failed HTTP requests using an exponential backoff strategy. The Agent uses the following default retry configurations for the metrics intake:
 - Base backoff time: 2 seconds
 - Maximum backoff time: [64 seconds][3]
 - Maximum backoff time is reached after 6 retries
@@ -42,9 +40,9 @@ The Agent retries failed requests for the following scenarios:
 <br>
 Requests that return a <code>404</code> response are retried because they often indicate a configuration or availability issue that could be resolved.
 </div>
-{{% /collapse-content %}}
 
-{{% collapse-content title="Metrics buffering mechanisms and limits" level="h4" expanded=false %}}
+
+### Metrics buffering mechanisms and limits
 
 When the Agent fails to send a metric to the Datadog intake, it compresses and stores this metric in an in-memory retry buffer. See [Buffer configurations](#buffer-configurations) for the available settings.
 
@@ -52,8 +50,8 @@ The Agent also supports an optional [on-disk retry buffer][4]. If you enable thi
 1. Fills the in-memory buffer until it is full
 1. Evicts older payloads from memory and serializes them to disk
 1. Retries payloads in the following order:
-    - In-memory payloads (newest first)
-    - On-disk payloads (newest first)
+    1. In-memory payloads (newest first)
+    1. On-disk payloads (newest first)
 
 This prioritization helps ensure that the Agent sends recent and live metrics before it backfills older data.
 
@@ -75,22 +73,23 @@ During shutdown, the Agent:
 - Flushes in-flight requests
 - Does not flush payloads in retry queues (both in-memory and on-disk)
 
-{{% /collapse-content %}}
 
-## Logs 
-{{% collapse-content title="Logs retry strategy" level="h4" expanded=false %}}
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
+[4]: /agent/configuration/network/#data-buffering
+{{% /tab %}}
 
-The Logs Agent retries failed HTTP requests indefinitely using an [exponential backoff strategy][2]. The Agent uses the following default retry configurations for the logs intake:
+{{% tab "Logs" %}}
+### Logs retry strategy
+
+The Logs Agent retries failed HTTP requests indefinitely using an exponential backoff strategy. The Agent uses the following default retry configurations for the logs intake:
   - Base backoff time: 2 seconds
   - Maximum backoff time: 120 seconds
 
 The Agent retries failed log payloads until the logs intake endpoint becomes available.
 
 <div class="alert alert-info"> The Logs Agent <strong>does not retry</strong> requests with status codes <code>400</code>, <code>401</code>, <code>403</code>, <code>413</code>.</div>
-{{% /collapse-content %}}
 
-
-{{% collapse-content title="Logs buffering mechanisms and limits" level="h4" expanded=false %}}
+### Logs buffering mechanisms and limits
 
 #### Backpressure and consumption
 The Logs Agent is designed to guarantee log delivery during transmission. When a payload fails to send, the Agent applies backpressure and stops reading from the log source. When the intake becomes available, the Agent resumes reading from the last known position.
@@ -111,23 +110,24 @@ The Logs Agent is designed to guarantee log delivery during transmission. When a
 The Logs Agent maintains a registry that tracks log sources and current read offsets. The Agent flushes the registry to disk every second and reloads it when the Agent restarts. This process is not configurable.
 
 On restart, the Agent resumes reading from the position recorded in the registry. A small number of duplicate logs may occur if the Agent sends a payload before flushing the registry.
-{{% /collapse-content %}}
 
-{{% collapse-content title="Advanced shipping configuration" level="h4" expanded=false %}}
+### Advanced shipping configuration
 
 #### Dual shipping
-When you enable dual shipping:
+When you enable [dual shipping][9]:
   - The Agent sends logs to the first available endpoint
   - The Agent drops payloads for any endpoint that fails
   - Log consumption continues as long as at least one endpoint succeeds
 
 For the Agent logic when `is_reliable` is enabled, see [Logs Dual Shipping][8].
 
-{{% /collapse-content %}}
+[8]: https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm#environment-variable-configuration-6
+[9]: /agent/configuration/dual-shipping/?tab=helm&site=us
+{{% /tab %}}
 
-## APM
-{{% collapse-content title="APM retry strategy" level="h4" expanded=false %}}
-The Agent retries failed APM requests using an [exponential backoff strategy][2]. The Agent uses the following default retry configurations for the APM intake:
+{{% tab "APM" %}}
+### APM retry strategy
+The Agent retries failed APM requests using an exponential backoff strategy. The Agent uses the following default retry configurations for the APM intake:
   - Base backoff time: 2 seconds
   - Maximum backoff time: 10 seconds
 
@@ -137,9 +137,8 @@ The Agent retries failed requests for the following scenarios:
   - HTTP `5xx` responses
 
 <div class="alert alert-info"> You <strong>cannot configure</strong> the retry behavior and retriable status codes for APM.</div>
-{{% /collapse-content %}}
 
-{{% collapse-content title="APM buffering mechanisms and limits" level="h4" expanded=false %}}
+### APM buffering mechanisms and limits
 
 #### In-memory queues
 The Agent compresses and stores failed APM payloads in memory. The Agent drops these failed payloads when queues are full.
@@ -155,29 +154,32 @@ The Agent compresses and stores failed APM payloads in memory. The Agent drops t
   - Default calculation:
      - `int(max(1, max memory / payload size))`
      - Example: `int(max(1, (250 * 1024 * 1024) / 1500000)) = 174` [payloads][7]
-{{% /collapse-content %}}
 
-{{% collapse-content title="Advanced shipping configuration" level="h4" expanded=false %}}
+### Advanced shipping configuration
 
 #### Dual shipping
-When you enable dual shipping for the APM intake, each endpoint has an independent sender and queue.
+When you enable [dual shipping][9] for the APM intake, each endpoint has an independent sender and queue.
 
-{{% /collapse-content %}}
 
-## Processes
-{{% collapse-content title="Processes retry strategy" level="h4" expanded=false %}}
+[6]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/trace.go#L107-L116
+[7]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/stats.go#L73-L83
+[9]: /agent/configuration/dual-shipping/?tab=helm&site=us
+{{% /tab %}}
 
-The Agent retries failed processes requests using an [exponential backoff strategy][2]. The Agent uses the same default retry configurations as the metrics intake:
+{{% tab "Processes" %}}
+### Processes retry strategy
+
+The Agent retries failed processes requests using an exponential backoff strategy. The Agent uses the same default retry configurations as the metrics intake:
 - Base backoff time: 2 seconds
 - Maximum backoff time: [64 seconds][3]
 - Maximum backoff time is reached after 6 retries
 
 **Key difference from Metrics**: On-disk buffering is not supported for Processes.
 
-See the [Metrics retry strategy](#metrics-retry-strategy) for complete details on retry scenarios and exceptions.
-{{% /collapse-content %}}
+See the Metrics retry strategy for complete details on retry scenarios and exceptions.
 
-{{% collapse-content title="Processes buffering mechanisms and limits" level="h4" expanded=false %}}
+
+### Processes buffering mechanisms and limits
 
 The Process Agent uses the **metrics forwarder** for downstream delivery. Before forwarding check results, the Process Agent stores them in an in-memory queue.
 
@@ -203,12 +205,13 @@ With checks running every 10 seconds, these settings buffer approximately 30 min
 - Each payload type has independent buffer limits
 - Approximately 40 minutes of process data can be buffered with default settings
 
-{{% /collapse-content %}}
+
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
+[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go#L34-L36
+{{% /tab %}}
+{{< /tabs >}}
+
 
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/util/backoff/backoff.go#L47
-[4]: https://docs.datadoghq.com/agent/configuration/network/#data-buffering
-[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go#L34-L36
-[6]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/trace.go#L107-L116
-[7]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/stats.go#L73-L83
-[8]: https://docs.datadoghq.com/agent/configuration/dual-shipping/?tab=helm#environment-variable-configuration-6
+
+
