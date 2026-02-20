@@ -5,6 +5,12 @@ further_reading:
 - link: "bits_ai/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
+- link: "/llm_observability/experiments"
+  tag: "Documentation"
+  text: "Set up and use LLM Observability Experiments"
+- link: "/llm_observability/monitoring"
+  tag: "Documentation"
+  text: "Monitor your application with LLM Observability"
 ---
 
 ## Overview
