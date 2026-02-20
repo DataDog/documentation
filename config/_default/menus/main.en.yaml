@@ -4928,6 +4928,11 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
+    - name: Business Transaction Tracking
+      url: data_streams/business_transaction_tracking
+      identifier: data_streams_business_transaction_tracking
+      parent: data_streams
+      weight: 6
     - name: Data Observability Overview
       url: data_observability/
       pre: data-observability-wui
