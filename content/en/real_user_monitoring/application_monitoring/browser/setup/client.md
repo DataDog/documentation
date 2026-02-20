@@ -350,10 +350,10 @@ After completing initialization, confirm that the SDK is sending data to Datadog
    ```javascript
    DD_RUM.getInternalContext()
    ```
-   If the SDK is initialized, this returns an object containing your `application_id` and `session_id`. If it returns `undefined`, the SDK hasn’t initialized — check that your init snippet runs before this console call and that `clientToken` and `applicationId` are correct.
+   If the SDK is initialized, this returns an object containing your `application_id` and `session_id`. If it returns `undefined`, the SDK hasn't initialized. Confirm that your init snippet runs before this console call and that `clientToken` and `applicationId` are correct.
 
-4. In the **Network** tab, filter requests by `rum` or `browser-intake`. You should see POST requests to the Datadog intake endpoint after interacting with the page (clicking, navigating). If you don’t see these requests:
-   - Confirm that `site` matches your Datadog organization’s site (for example, `datadoghq.eu` for EU customers).
+4. In the **Network** tab, filter requests by `rum` or `browser-intake`. You should see POST requests to the Datadog intake endpoint after interacting with the page (clicking, navigating). If you don't see these requests:
+   - Confirm that `site` matches your Datadog organization's site (for example, `datadoghq.eu` for EU customers).
    - Check whether your Content Security Policy blocks requests to `*.datadoghq.com` or `*.browser-intake-datadoghq.com`. See [CSP configuration][6] for the required directives.
 
 #### View your data in Datadog
