@@ -23,7 +23,7 @@ title: Suivi des erreurs pour les services backend
 
 ## Présentation
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

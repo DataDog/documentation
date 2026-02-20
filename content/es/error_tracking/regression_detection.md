@@ -33,7 +33,7 @@ El estado de un problema aparece en cualquier lugar donde se pueda ver, como en 
 ## Historial de problemas
 Mira un historial de la actividad de tu problema con la **Escala de tiempo de la actividad**. En el panel de detalles de cualquier problema de rastreo de errores, mira la escala de tiempo de la actividad haciendo clic en la pestaña **Actividad**. 
 
-{{< img src="error_tracking/issue-status-history.png" alt="La escala de tiempo de la actividad en el problema de rastreo de errores" style="width:80%;" >}}
+{{< img src="error_tracking/issue-status-history-3.png" alt="La escala de tiempo de la actividad en el problema de rastreo de errores" style="width:80%;" >}}
 
 ## Referencias adicionales
 

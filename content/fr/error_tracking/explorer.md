@@ -9,7 +9,7 @@ title: Error Tracking Explorer
 
 ## Présentation
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Les détails dʼun problème dans lʼError Tracking Explorer" style="width:100%;" >}}
 
 L'Explorateur de suivi des erreurs vous permet d'afficher, de filtrer et d'analyser des problèmes dans Datadog. Un problème est un groupe d'erreurs similaires liées au même bug. Les problèmes sont automatiquement créés en calculant une empreinte pour chaque erreur à l'aide de certains de ses attributs, tels que le type d'erreur, le message d'erreur ou la stack trace. Les erreurs qui partagent la même empreinte sont regroupées dans le même problème.
 

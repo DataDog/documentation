@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 The Error Tracking Explorer allows you to view, filter, and investigate issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 
@@ -46,7 +46,7 @@ Order issues in the list using one of these options:
 
 ### Facets
 
-{{< img src="/error_tracking/facets-panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
+{{< img src="/error_tracking/facets-panel-2.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
@@ -66,7 +66,7 @@ Click the Edit icon to see the list of available facets that you can show or hid
 
 In addition to error events, Error Tracking offers issue level filters to refine the list of displayed issues.
 
-{{< img src="error_tracking/issue-level-filters.png" alt="Issue level filters in Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/issue-level-filters-2.png" alt="Issue level filters in Error Tracking" style="width:100%;" >}}
 
 #### Sources
 

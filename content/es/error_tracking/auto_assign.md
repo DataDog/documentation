@@ -40,7 +40,7 @@ Cuando se produce un error, Auto Assign:
 
 Puedes ver los desarrolladores asignados directamente dentro de cada incidencia en Datadog. En caso necesario, siempre es posible la reasignación manual para anular la asignación automática.
 
-{{< img src="error_tracking/ownership-details.png" alt="Información de la propiedad del equipo en los detalles de la incidencia" style="width:80%;" >}}
+{{< img src="error_tracking/ownership-details-2.png" alt="Información de la propiedad del equipo en los detalles de la incidencia" style="width:80%;" >}}
 
 # Configuración
 

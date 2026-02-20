@@ -9,7 +9,7 @@ title: 오류 추적 탐색기
 
 ## 개요
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
 
 오류 추적 탐색기를 사용하면 이슈를 확인하고, 필터링하고, 조사할 수 있습니다. 이슈는 동일한 버그와 관련된 유사한 오류의 그룹입니다. Datadog에서는 오류 유형, 오류 메시지 또는 스택 추적과 같은 일부 속성을 사용하여 각 오류에 대한 지문을 계산하여 이슈를 만듭니다. 동일한 지문을 가진 오류는 동일한 이슈에 함께 그룹화됩니다.
 

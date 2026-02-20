@@ -73,7 +73,7 @@ El seguimiento de errores de fragmentos de repeticiones te permite ver una recre
 ## Repetición de errores
 Después de revisar la información clave sobre el error, como el mensaje de error y la traza (trace) de stack tecnológico, puedes pasar directamente del resumen del problema a una reproducción en directo de la sesión más reciente en la que se produjo el error. Desplázate hacia abajo, debajo de la traza de stack tecnológico, y haz clic en la vista previa de la reproducción para ver las acciones de un usuario antes de que se produjera el error. 
 
-{{< img src="error_tracking/error-replay.png" alt="Seguimiento de errores de fragmentos de repeticiones" style="width:90%" >}}
+{{< img src="error_tracking/error-replay-2.png" alt="Seguimiento de errores de fragmentos de repeticiones" style="width:90%" >}}
 
 ## Referencias adicionales
 
