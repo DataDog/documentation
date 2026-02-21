@@ -62,7 +62,7 @@ The Datadog Agent has the following default configurations for metric retry buff
 - Maximum disk usage ratio: 0.8
 - Maximum in-memory buffer size: 15 MB
 
-You can configure the default maximum in-memory buffer size using the `forwarder_retry_queue_payloads_max_size` setting.
+You can configure the default maximum in-memory buffer size using the `forwarder_retry_queue_payloads_max_size` [setting][4].
 
 #### Restart and shutdown behavior
 During restart, the Agent:
