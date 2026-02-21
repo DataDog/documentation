@@ -12,10 +12,8 @@ The Python function action lets you write custom Python scripts for data transfo
 
 The Python function action runs in a restricted execution environment with the following characteristics:
 
-- Python version: 3.12.8
-- Available libraries: In addition to the Python standard library, the following packages are available:
-  - `rsa` (version 4.9)
-  - `python-dateutil` (version 2.8.2)
+{{< python-action-libraries-table >}}
+
 - Network access: Restricted
 
 ## Script structure

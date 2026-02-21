@@ -1,0 +1,30 @@
+{{- $python_libs := site.Data.python_action_libs -}} {{- if not $python_libs -}} {{- $err_msg := "Could not load Python
+action libraries data" -}} {{- if eq hugo.Environment "development" -}} {{- warnf $err_msg -}} {{- else -}} {{- errorf
+$err_msg -}} {{- end -}} {{- end -}} {{- if $python_libs -}}
+<p>Python version: <strong>{{ $python_libs.python_version }}</strong></p>
+
+<p>The following Python packages are available in addition to the standard library:</p>
+
+<div class="table-responsive-container">
+    <div class="table-scroll">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Package</th>
+                    <th>Version</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{- range $python_libs.libraries -}}
+                <tr>
+                    <td><a href="{{ .pypi_url }}" target="_blank" rel="noopener">{{ .name }}</a></td>
+                    <td><code>{{ .version }}</code></td>
+                    <td>{{ .note }}</td>
+                </tr>
+                {{- end -}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{- end -}}
