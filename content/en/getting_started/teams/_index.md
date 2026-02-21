@@ -34,7 +34,7 @@ Think of Teams as the place where you can answer, operationally:
 - *How does ownership roll up (team to org unit / platform group)?*
 - *Who has access, or can grant access, to this resource?*
 
-## Before you start: assess your existing sources of team data
+## Before you start: Assess your existing sources of team data
 
 You move faster (and avoid rework) if you inventory your sources first. In practice, admins commonly pull "team truth" from a mix of identity, collaboration, and operational tools.
 
@@ -44,16 +44,16 @@ The following sources are some of the most common. For each source, trace it ups
 
 These sources answer "who is in which group, today?". Often the best source for joiners/leavers and for permissioning purposes.
 
-- Okta / Entra groups / other IdP
+- Okta, Entra groups, or other IdP
 - Workday / Rippling / other HR system
-- Spreadsheet / notepad / slide (when everything else failed, this is what you use to track how people work)
+- Spreadsheet, notepad, or slide (when everything else failed, this is what you use to track how people work in practice)
 
 ### Ownership sources (code and service accountability)
 
 These sources answer "who owns this service?":
 
 - GitHub teams and CODEOWNERS file
-- Backstage / Port / Cortex
+- Backstage, Port, or Cortex
 - Internal ownership registries or catalogs
 
 **Things to note:**
@@ -66,7 +66,7 @@ These sources answer "who owns this service?":
 These sources drive workflow impact:
 
 - On-call tools such as PagerDuty or OpsGenie, incident response (ServiceNow), alert routing
-- Slack/MS Teams channels, email lists
+- Slack or MS Teams channels, email lists
 
 ## How Datadog Teams fits into a multi-source reality
 
@@ -85,11 +85,11 @@ Datadog supports managing or syncing Teams data through:
 
 Below is how to choose, with the tradeoffs that usually matter.
 
-### Option A: IdP-driven sync (Okta/Entra)
+### Option A: IdP-driven sync (Okta or Entra)
 
 Use IdP-driven sync when:
 
-- Your top priority is automated and accurate membership life cycle (joiners/leavers)
+- Your top priority is automated and accurate membership life cycle (joiners and leavers)
 - You want IT or platform to "own membership hygiene" centrally
 - You can map groups to real teams without exploding your team list
 
@@ -109,7 +109,7 @@ Important notes:
 
 Use SAML mapping when:
 
-- You already have SAML configured for log in
+- You already have SAML configured for login
 - You want team assignment to happen as part of authentication-based provisioning
 - You need a low-effort way to start without building custom sync or asking another team in your org to help you set up
 
@@ -127,13 +127,13 @@ Use GitHub when:
 - CODEOWNERS is your best ownership signal and you want Datadog to reflect it
 - You care about hierarchy and nested teams
 
-In Datadog's [GitHub provisioning flow][5] you can choose between Team enrichment only (link existing teams) or full provisioning and membership management (create teams in Datadog based on the existing Teams in GitHub) while preserving hierarchy, membership, and use CODEOWNERS for richer ownership signals.
+In Datadog's [GitHub provisioning flow][5], you can choose between two modes. Team enrichment only links existing teams. Full provisioning and membership management creates teams in Datadog based on the existing teams in GitHub, preserving hierarchy and membership. Both modes can use CODEOWNERS for richer ownership signals.
 
 What to watch:
 
 - GitHub teams often diverge from actual org structure due to stale membership or ad-hoc team creation.
   - You can use the "partial selection" flow to indicate which parts of your GitHub org you want to provision into Datadog.
-- GitHub-based membership usually reflects engineering reality, not necessarily HR/IT life cycle reality.
+- GitHub-based membership usually reflects engineering reality, not necessarily HR or IT life cycle reality.
 
 **Best use:** make GitHub your authority for **code ownership and hierarchy**, while another system remains the authority for identity life cycle.
 
@@ -159,8 +159,8 @@ Pick a path that matches your *current* reality. You can change later, but start
 
 Choose this if you want a clean membership life cycle first.
 
-1. Sync or map teams from Okta/Entra/SAML (membership baseline).
-2. Treat membership as managed-avoid manual overrides that get reverted.
+1. Sync or map teams from Okta, Entra, or SAML (membership baseline).
+2. Treat membership as managed—avoid manual overrides that get reverted.
 3. Add GitHub connections for ownership enrichment (CODEOWNERS, repo signals) after the team list is stable.
 
 **Why this works:** you stabilize "who is on the team" first, then layer "what they own."
