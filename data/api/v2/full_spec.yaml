@@ -31631,6 +31631,9 @@ components:
       properties:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
+        version:
+          description: Version of the incident trigger.
+          type: string
       type: object
     IncidentTriggerWrapper:
       description: Schema for an Incident-based trigger.
