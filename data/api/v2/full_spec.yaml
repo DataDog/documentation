@@ -26519,6 +26519,24 @@ components:
       required:
       - data
       type: object
+    FormTrigger:
+      description: Trigger a workflow from a Form.
+      properties:
+        formId:
+          description: The form UUID.
+          example: ''
+          type: string
+      type: object
+    FormTriggerWrapper:
+      description: Schema for a Form-based trigger.
+      properties:
+        formTrigger:
+          $ref: '#/components/schemas/FormTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - formTrigger
+      type: object
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -66456,6 +66474,7 @@ components:
       - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
       - $ref: '#/components/schemas/DatastoreTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
+      - $ref: '#/components/schemas/FormTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
