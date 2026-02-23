@@ -70,10 +70,10 @@ spec:
   override:
     clusterAgent:
       image:
-        name: registry.datadoghq.com/cluster-agent:latest
+        name: gcr.io/datadoghq/cluster-agent:latest
     nodeAgent:
       image:
-        name: registry.datadoghq.com/agent:latest
+        name: gcr.io/datadoghq/agent:latest
       extraConfd:
         configMap:
           name: datadog-checks
@@ -181,10 +181,10 @@ spec:
   override:
     clusterAgent:
       image:
-        name: registry.datadoghq.com/cluster-agent:latest
+        name: gcr.io/datadoghq/cluster-agent:latest
     nodeAgent:
       image:
-        name: registry.datadoghq.com/agent:latest
+        name: gcr.io/datadoghq/agent:latest
       extraConfd:
         configMap:
           name: datadog-checks

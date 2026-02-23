@@ -196,7 +196,7 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
      serviceAccountName: datadog-agent
      containers:
        - name: datadog-agent
-         image: 'registry.datadoghq.com/agent:latest'
+         image: 'gcr.io/datadoghq/agent:latest'
          ...
      volumeMounts:
        ...
@@ -212,10 +212,10 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
      serviceAccountName: datadog-agent
      containers:
        - name: datadog-agent
-         image: 'registry.datadoghq.com/agent:latest'
+         image: 'gcr.io/datadoghq/agent:latest'
          ...
        - name: system-probe
-         image: 'registry.datadoghq.com/agent:latest'
+         image: 'gcr.io/datadoghq/agent:latest'
          imagePullPolicy: Always
          securityContext:
            capabilities:
@@ -396,7 +396,7 @@ docker run --cgroupns host \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
-registry.datadoghq.com/agent:latest
+gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
