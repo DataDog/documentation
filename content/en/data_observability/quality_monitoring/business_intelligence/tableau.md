@@ -49,7 +49,7 @@ When your Tableau account is successfully connected, Datadog syncs and automatic
 
 Initial syncs may take up to several hours depending on the size of your Tableau deployment.
 
-After syncing, you can explore your Tableau assets and their upstream dependencies in the [Data Observability Explorer][5].
+After syncing, you can explore your Tableau assets and their upstream dependencies in the [Data Observability Catalog][5].
 
 ## Further reading
 

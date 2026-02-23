@@ -69,7 +69,7 @@ When your Power BI account is successfully connected, Datadog syncs and automati
 
 Initial syncs may take up to several hours depending on the size of your Power BI deployment.
 
-After syncing, you can explore your Power BI assets and their upstream dependencies in the [Data Observability Explorer][2].
+After syncing, you can explore your Power BI assets and their upstream dependencies in the [Data Observability Catalog][2].
 
 ## Further reading
 
