@@ -15,6 +15,10 @@ further_reading:
 
 ## Overview
 
+{{< callout url="#" btn_hidden="true" header="Preview Feature">}}
+LLM Observability MCP Tools are in Preview.
+{{< /callout >}}
+
 The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
 
 ## Use cases
