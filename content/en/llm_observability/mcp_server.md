@@ -23,9 +23,9 @@ The [Datadog MCP Server][1] enables AI agents to access your [LLM Observability]
 
 ## Use cases
 
-The LLM Observability MCP tools unlock AI-assisted workflows for:
+The LLM Observability MCP tools enable AI-assisted workflows for:
 
-- **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then drill into span hierarchies and content to identify failures.
+- **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then examine span hierarchies and content to identify failures.
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
@@ -38,7 +38,7 @@ The `llmobs` toolset includes the following tools:
 ### Trace and span tools
 
 `search_llmobs_spans`
-: Search for spans matching filters or a raw query. Entry point for trace analysis — use it to find traces before drilling in with other tools.
+: Search for spans matching filters or a raw query.
 
 `get_llmobs_trace`
 : Get the full structure of a trace as a span hierarchy tree, including span counts by kind, error indicators, and total duration.
@@ -82,7 +82,7 @@ The `llmobs` toolset includes the following tools:
 1. **Search**: Use `search_llmobs_spans` to find traces by ML app, status, span kind, or custom tags.
 2. **Visualize**: Use `get_llmobs_trace` to see the full span hierarchy tree.
 3. **Inspect**: Use `get_llmobs_span_details` to get metadata, timing, and evaluations for specific spans.
-4. **Read content**: Use `get_llmobs_span_content` to retrieve the actual input/output, messages, or documents.
+4. **Read content**: Use `get_llmobs_span_content` to retrieve the actual I/O, messages, or documents.
 5. **Debug errors**: Use `find_llmobs_error_spans` to locate all errors in a trace with propagation context.
 6. **Expand**: Use `expand_llmobs_spans` to load children of collapsed spans for deeper exploration.
 7. **Agent review**: Use `get_llmobs_agent_loop` to see the step-by-step execution flow of an agent span.
@@ -102,7 +102,7 @@ After you are connected, try prompts like:
 - Review error traces for my `customer-support-bot` app over the past week. Summarize the most common failure patterns, how often they occur, and recommend which ones to fix first.
 - Find traces where my agent's responses were flagged by evaluations as low quality. Look at the inputs and outputs, then suggest specific changes to my system prompt to improve response quality.
 - Look at recent agent traces for my app and find cases where the agent looped more than necessary. Analyze the decision-making at each step and suggest how to improve my tool descriptions to reduce unnecessary tool calls.
-- A user reported a bad response. Here's the trace ID: `trace-123`. Walk me through exactly what happened — what the user asked, what the agent did at each step, and where things went wrong. Suggest a code fix.
+- A user reported a bad response. Here's the trace ID: `trace-123`. Walk me through exactly what happened: what the user asked, what the agent did at each step, and where things went wrong. Suggest a code fix.
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
 - Summarize experiment `exp-456` and identify the top 5 lowest-scoring events. For each, show the input, output, and which evaluations failed.
@@ -113,16 +113,14 @@ The `core` toolset included in the setup URL gives your AI agent access to addit
 
 ### Export analysis to Datadog Notebooks
 
-The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. Instead of losing insights in ephemeral chat, you can export findings into a collaborative, shareable notebook that lives in Datadog alongside your traces and experiments.
-
-Notebooks support markdown, live graphs, and log streams — so an exported analysis becomes a living document your team can review, comment on, and revisit as your application evolves.
+The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. You can export findings from agent chats into a collaborative, shareable notebook that lives in Datadog alongside your traces and experiments.
 
 Try prompts like:
 
 - Analyze experiment `exp-456`, identify the worst-performing dimensions, and export a summary report to a Datadog Notebook with a breakdown by evaluation scores.
 - Review error traces for my `customer-support-bot` over the past week and create a Datadog Notebook with the findings, including common failure patterns and recommended fixes.
 
-For custom visualizations that go beyond standard Datadog widgets — like comparison charts or quadrant plots — Notebooks also render [Mermaid diagrams][4] natively:
+For custom visualizations that go beyond standard Datadog widgets, like comparison charts or quadrant plots, Notebooks also render [Mermaid diagrams][4] natively. Try prompts like:
 
 - Analyze experiment `exp-456`, compare the `accuracy` scores across each prompt version, and export the results to a Datadog Notebook that includes a Mermaid bar chart of the average score for each version.
 - Analyze experiment `exp-456` and export a Datadog Notebook that plots each prompt version on a Mermaid quadrant chart with `relevance` on one axis and `accuracy` on the other. Identify which versions are underperforming on both dimensions.
