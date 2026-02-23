@@ -1,6 +1,6 @@
 ---
 title: Issue Team Ownership
-description: Automatically assign issues to teams based on Git CODEOWNERS files or the team attribute.
+description: Automatically assign issues to teams based on service owners, Git CODEOWNERS files or the team attribute.
 further_reading:
 - link: '/error_tracking/auto_assign/'
   tag: 'Documentation'
