@@ -35,11 +35,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración de la biblioteca de rastreo de .NET Framework
+title: Configuración de la librería de rastreo de .NET Framework
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][4].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][4].
 
 {{< img src="tracing/dotnet/dotnet_framework_configuration.png" alt="Establecer precedencia de la configuración del rastreador .NET Framework" style="width:100%" >}}
 
@@ -59,7 +59,7 @@ Para configurar el rastreador utilizando variables de entorno, configura las var
 
 Para configurar el rastreador en el código de la aplicación, crea una instancia `TracerSettings` a partir de las fuentes de configuración predeterminadas. Define las propiedades de esta instancia `TracerSettings` antes de llamar a `Tracer.Configure()`. Por ejemplo:
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Los parámetros deben configurarse en <code>TracerSettings</code> (Parámetros del rastreador) <em>antes</em> de crear el <code>rastreador</code>. Los cambios realizados en las propiedades de <code>TracerSettings</code> después de crear el <code>rastreador</code> se ignoran.
 </div>
 
@@ -262,7 +262,7 @@ Las siguientes variables de configuración están disponibles **sólo** cuando s
 : **Propiedad TracerSettings**: `TraceEnabled`<br>
 Habilita o deshabilita toda la instrumentación. Los valores válidos son: `true` o `false`.<br>
 **Por defecto**: `true`
-**Nota**: Configurar la variable de entorno como `false` deshabilita completamente la biblioteca del cliente, que no puede habilitarse con otros métodos de configuración. Si se configura como `false`, con otro método de configuración (no una variable de entorno), la biblioteca del cliente se sigue cargando, pero no se generarán trazas.
+**Nota**: Configurar la variable de entorno como `false` deshabilita completamente la librería del cliente, que no puede habilitarse con otros métodos de configuración. Si se configura como `false`, con otro método de configuración (no una variable de entorno), la librería del cliente se sigue cargando, pero no se generarán trazas.
 
 `DD_DBM_PROPAGATION_MODE`
 : Permite la vinculación entre los datos enviados desde APM y el producto de Database Monitoring cuando se define como`service` o `full`. La opción `service` permite la conexión entre servicios DBM y APM. La opción `full` permite la conexión entre tramos de bases de datos y eventos de consulta de bases de datos. Disponible para Postgres y MySQL.<br>

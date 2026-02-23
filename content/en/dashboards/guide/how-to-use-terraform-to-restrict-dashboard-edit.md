@@ -1,5 +1,6 @@
 ---
 title: How to use Terraform to restrict the editing of a dashboard
+description: Use the restricted_roles attribute in Terraform to control dashboard editing permissions for specific user roles.
 aliases:
   - /dashboards/faq/how-to-use-terraform-to-restrict-dashboards
   - /dashboards/guide/how-to-use-terraform-to-restrict-dashboards
@@ -23,7 +24,7 @@ resource "datadog_dashboard" "example" {
 
 ## Restricting a dashboard using a restriction policy
 
-<div class="alert alert-warning">Restriction policies are in Preview. Contact <a href="/help/">Datadog Support</a> or your Customer Success Manager for access.</div>
+<div class="alert alert-danger">Restriction policies are in Preview. Contact <a href="/help/">Datadog Support</a> or your Customer Success Manager for access.</div>
 
 [Restriction Policies][1] allow you to restrict the editing of dashboards and other resources to specific principals, including roles, teams, users, and service accounts.
 

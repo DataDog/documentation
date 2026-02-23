@@ -4,14 +4,14 @@ disable_toc: false
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 ---
+## Overview
 SCA can detect vulnerabilities that affect open source libraries running in your services based on Datadog's application telemetry.
 
 Before setting up runtime detection, ensure the following prerequisites are met:
 
-1. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service.
-2. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-3. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-4. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page for each AAP product.
+1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
+2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
+3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page for each AAP product.
 
 ## Software Composition Analysis enablement types
 
@@ -143,6 +143,9 @@ java -javaagent:dd-java-agent.jar \
 
    {{< /tabs >}}
 
+## Data Retention
+
+Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
 [1]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/java
 [2]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/

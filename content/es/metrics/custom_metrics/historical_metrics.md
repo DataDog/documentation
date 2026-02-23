@@ -20,7 +20,7 @@ title: Consumo de métricas históricas
 {{< jqmath-vanilla >}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">La ingesta de métricas históricas no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">La ingesta de métricas históricas no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
 ## Información general
@@ -41,7 +41,7 @@ Con el consumo de métricas históricas habilitado, si envías varios valores co
 
 Puedes empezar a consumir valores de métricas históricas habilitando el consumo de métricas históricas en la página [Resumen de métricas][1] para los tipos de métricas *Count, Rate y Gauge*.
 
-**Nota**: La ingesta de métricas históricas no está disponible para las métricas de distribución ni para las métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como los registros).
+**Nota**: La ingesta de métricas históricas no está disponible para las métricas de distribución ni para las métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como los logs).
 
 ## Configuración
 
@@ -77,7 +77,7 @@ Con la API, puedes enviar valores de métricas con marcas de tiempo históricas 
 {{< programming-lang lang="Python">}}
 ```python
 """
-El envío de métricas devuelve la respuesta "Payload accepted"
+Submit metrics returns "Payload accepted" response
 """
 
 from datetime import datetime
@@ -97,7 +97,7 @@ body = MetricPayload(
             points=[
                 MetricPoint(
 
-                    """ Añadir marca de tiempo histórica aquí """
+                    """ Add historical timestamp here """
                     timestamp=int(datetime.now().timestamp()),
                     """ *********************** """
 
@@ -125,7 +125,7 @@ with ApiClient(configuration) as api_client:
 
 {{< programming-lang lang="java" >}}
 ```java
-// El envío de métricas devuelve la respuesta "Payload accepted"
+// Submit metrics returns "Payload accepted" response
 import com.datadog.api.client.ApiClient;
 import com.datadog.api.client.ApiException;
 import com.datadog.api.client.v2.api.MetricsApi;
@@ -154,7 +154,7 @@ public class Example {
                             Collections.singletonList(
                                 new MetricPoint()
 
-                                    //Añadir marca de tiempo histórica aquí
+                                    //Add historical timestamp here
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
                                     //***********************
 
@@ -180,7 +180,7 @@ public class Example {
 
 {{< programming-lang lang="go" >}}
 ```go
-// El envío de métricas devuelve la respuesta "Carga útil aceptada"
+// Submit metrics returns "Payload accepted" response
 
 package main
 
@@ -203,7 +203,7 @@ func main() {
                 Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
                 Points: []datadogV2.MetricPoint{
                     {   
-                        //Añadir marca de tiempo histórica aquí
+                        //Add historical timestamp here
                         Timestamp: datadog.PtrInt64(time.Now().Unix()),
                         //***********************
 
@@ -238,7 +238,7 @@ func main() {
 
 {{< programming-lang lang="ruby" >}}
 ```ruby
-# El envío de métricas devuelve la respuesta "Carga útil aceptada"
+# Submit metrics returns "Payload accepted" response
 
 require "datadog_api_client"
 api_instance = DatadogAPIClient::V2::MetricsAPI.new
@@ -251,7 +251,7 @@ body = DatadogAPIClient::V2::MetricPayload.new({
       points: [
         DatadogAPIClient::V2::MetricPoint.new({
 
-          #Añadir marca de tiempo histórica aquí 
+          #Add historical timestamp here  
           timestamp: Time.now.to_i,
           #***********************  
 
@@ -274,7 +274,7 @@ p api_instance.submit_metrics(body)
 {{< programming-lang lang="typescript" >}}
 ```typescript
 /**
- * El envío de métricas devuelve la respuesta "Carga útil aceptada"
+ * Submit metrics returns "Payload accepted" response
  */
 
 import { client, v2 } from "@datadog/datadog-api-client";
@@ -290,7 +290,7 @@ const params: v2.MetricsApiSubmitMetricsRequest = {
         type: 0,
         points: [
           {
-            //Añadir marca de tiempo histórica aquí
+            //Add historical timestamp here
             timestamp: Math.round(new Date().getTime() / 1000),
             //***********************
 
@@ -321,11 +321,11 @@ apiInstance
 
 {{< programming-lang lang="curl" >}}
 ```shell
-## Puntos dinámicos
-# Datos posteriores a las series temporales que pueden representarse gráficamente en dashboards Datadog.
-# Variables de plantilla
+## Dynamic Points
+# Post time-series data that can be graphed on Datadog’s dashboards.
+# Template variables
 export NOW="$(date +%s)"
-# Comando Curl 
+# Curl command
 curl -X POST "https://api.datadoghq.com/api/v2/series" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -338,7 +338,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "type": 0,
       "points": [
         {
-            # Añadir marca de tiempo histórica aquí
+            # Add historical timestamp here
           "timestamp": 1636629071,
             # ***********************
 
@@ -462,7 +462,7 @@ El siguiente ejemplo supone:
 - 720 horas en el mes (30 días)
 - Coste de métrica personalizada de 5 $ por cada 100 métricas
 
-$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
 Realiza un seguimiento de tus métricas históricas indexadas en la sección Resumen de uso, de la página [Plan y uso][4].
 

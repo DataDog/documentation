@@ -4,9 +4,9 @@ aliases:
 - /es/tests/guides/add_custom_metrics/
 description: Aprende a personalizar medidas en tus tests.
 further_reading:
-- link: /continuous_integration/tests
+- link: /tests
   tag: Documentación
-  text: Más información sobre Visibilidad de tests
+  text: Más información sobre Test Optimization
 - link: /monitors/types/ci
   tag: Documentación
   text: Más información sobre los monitores de CI
@@ -15,7 +15,7 @@ title: Añadir medidas personalizadas a los tests
 
 ## Información general
 
-Antes de empezar, asegúrate de que la [Visibilidad de tests][1] ya esté configurada para tu lenguaje. En esta guía se explica cómo personalizar medidas y añadirlas a los tests.
+Antes de empezar, asegúrate de que [Test Optimization][1] ya está configurado para tu lenguaje. En esta guía se explica cómo personalizar medidas y añadirlas a los tests.
 
 ## Añadir la medida personalizada a un test
 
@@ -28,7 +28,7 @@ Añade la medida personalizada a tu test. La página de instrumentación nativa 
   it('sum function can sum', () => {
     const testSpan = require('dd-trace').scope().active()
     testSpan.setTag('test.memory.rss', process.memoryUsage().rss)
-    // el test continúa normalmente
+    // test continues normally
     // ...
   })
 ```
@@ -37,19 +37,19 @@ Añade la medida personalizada a tu test. La página de instrumentación nativa 
 
 {{% tab "Java" %}}
 
-Para añadir métricas personalizadas, incluye la biblioteca [`opentracing-util`][1] como dependencia en tiempo de compilación en tu proyecto.
+Para añadir métricas personalizadas, incluye la librería [`opentracing-util`][1] como dependencia en tiempo de compilación en tu proyecto.
 
 ```java
 import io.opentracing.Span;
 import io.opentracing.util.GlobalTracer;
 
 // ...
-// dentro de tu test
+// inside your test
 final Span span = GlobalTracer.get().activeSpan();
 if (span != null) {
   span.setTag("test.memory.usage", 1e8);
 }
-// el test continúa normalmente
+// test continues normally
 // ...
 ```
 
@@ -63,12 +63,12 @@ if (span != null) {
 from ddtrace import tracer
 import os, psutil
 
-# Declara `ddspan` como el argumento de tu test
+# Declare `ddspan` as argument to your test
 def test_simple_case(ddspan):
-    # Establece tus etiquetas (tags)
+    # Set your tags
     process = psutil.Process()
     ddspan.set_tag("test.memory.rss", process.memory_info().rss)
-    # el test continúa normalmente
+    # test continues normally
     # ...
 ```
 
@@ -77,12 +77,12 @@ def test_simple_case(ddspan):
 {{% tab ".NET" %}}
 
 ```csharp
-// dentro de tu test
-var scope = Tracer.Instance.ActiveScope; // desde Datadog.Trace;
+// inside your test
+var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
 if (scope != null) {
     scope.Span.SetTag("test.memory.usage", 1e8);
 }
-// el test continúa normalmente
+// test continues normally
 // ...
 ```
 
@@ -90,13 +90,26 @@ if (scope != null) {
 
 {{% tab "Ruby" %}}
 
-```Ruby
-require 'Datadog/ci'
+```ruby
+require 'datadog/ci'
 
-# dentro de tu test
-Datadog::CI.active_test&amp;.set_tag('test.memory.usage', 1e8)
-# el test continúa normalmente
+# inside your test
+Datadog::CI.active_test&.set_tag('test.memory.usage', 1e8)
+# test continues normally
 # ...
+```
+
+{{% /tab %}}
+
+{{% tab "Swift" %}}
+
+```swift
+import DatadogSDKTesting
+
+// inside your test
+DDTest.current?.setTag(key: "test.memory.usage", value: 1e8)
+// test continues normally
+// ...
 ```
 
 {{% /tab %}}
@@ -147,11 +160,11 @@ Recibe una alerta si el valor de tu medida supera o no un umbral determinado med
 
 Por ejemplo, puedes utilizar este tipo de alerta para saber que el uso de memoria ha alcanzado un umbral determinado.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/continuous_integration/tests/
+[1]: /es/tests/
 [2]: https://app.datadoghq.com/ci/test-runs
 [3]: /es/dashboards
 [4]: /es/notebooks

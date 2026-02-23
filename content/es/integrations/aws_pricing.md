@@ -21,7 +21,7 @@ author:
   sales_email: tsein@brightcove.com
   support_email: tsein@brightcove.com
 categories:
-- AWS
+- aws
 - nube
 - gestión de costes
 custom_kind: integración
@@ -61,7 +61,7 @@ tile:
   title: AWS Pricing
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -97,15 +97,15 @@ Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucci
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "aws-pricing" >}}
+{{< get-metrics-from-git "aws_pricing" >}}
 
 
 ### Eventos
 
 AWS Pricing no incluye eventos.
 
-### Checks de servicio
-{{< get-service-checks-from-git "aws-pricing" >}}
+### Checks de servicios
+{{< get-service-checks-from-git "aws_pricing" >}}
 
 
 ## Solucionar problemas

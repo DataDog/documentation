@@ -1,5 +1,6 @@
 ---
 title: Notification Message Best Practices
+description: "Best practices for writing clear, actionable monitor notification messages with variables, conditional logic, and structured templates."
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -71,7 +72,7 @@ These variables allow you to tailor the notification message by implementing bra
 
 {{< code-block lang="text" >}}
 {{#is_exact_match "role.name" "network"}}
-  # The content displays if the host triggering the alert contains `network` in the role name, and only notifes @network-team@company.com.
+  # The content displays if the host triggering the alert contains `network` in the role name, and only notifies @network-team@company.com.
   @network-team@company.com
 {{/is_exact_match}}
 {{< /code-block >}}

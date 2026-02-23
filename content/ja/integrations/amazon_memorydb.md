@@ -27,7 +27,7 @@ categories:
 - クラウド
 - モニター
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -82,7 +82,7 @@ Amazon MemoryDB for Redis は、高いインメモリパフォーマンスと複
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-memorydb" >}}
+{{< get-metrics-from-git "amazon_memorydb" >}}
 
 
 ### イベント
@@ -101,7 +101,7 @@ Amazon MemoryDB インテグレーションには、サービスのチェック�
 
 お役に立つドキュメント、リンクや記事:
 
-- [Monitor Amazon MemoryDB with Datadog][6]
+- [Datadog で Amazon MemoryDB を監視する][6]
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

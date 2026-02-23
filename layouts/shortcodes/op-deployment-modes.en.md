@@ -1,4 +1,4 @@
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Remote configuration for Observability Pipelines is in private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> or your Customer Success Manager for access.
 </div>
 

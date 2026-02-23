@@ -1,5 +1,6 @@
 ---
 title: Monitor Settings
+description: "Configure organization settings, tag policies, notification rules, and manage deleted monitors through the Monitor Settings page."
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -42,7 +43,7 @@ The setting applies to **all** Monitor alert notifications, as it's an org-wide 
 
 Monitor tag policies allow you to enforce data validation on tags and tag values on your Datadog monitors. This ensures that alerts are sent to the correct downstream systems and workflows for triage and processing.
 
-<div class="alert alert-warning">After set up, tag policies apply to <strong>all</strong> Datadog monitors</div>
+<div class="alert alert-danger">After set up, tag policies apply to <strong>all</strong> Datadog monitors</div>
 
 - To create a new monitor, it must adhere to your organization's tag policies.
 - Existing monitors that violate your organization's tag policies continue to provide alerts and notifications, but must be updated to match the tag policies before you can modify other settings.

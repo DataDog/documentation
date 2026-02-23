@@ -3,7 +3,7 @@ title: Azure 비공개 링크를 통해 Datadog에 연결
 ---
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
-<div class="alert alert-warning">선택한 Datadog 사이트에서는 이 기능이 지원되지 않습니다.</div>
+<div class="alert alert-danger">선택한 Datadog 사이트에서는 이 기능이 지원되지 않습니다.</div>
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}

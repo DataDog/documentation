@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers
+description: Step-by-step tutorial to enable distributed tracing for a Python application and Datadog Agent running in separate containers.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
@@ -157,7 +158,7 @@ Add the Datadog Agent in the services section of the `docker/containers/exercise
    ```yaml
      datadog:
        container_name: dd-agent
-       image: "gcr.io/datadoghq/agent:latest"
+       image: "registry.datadoghq.com/agent:latest"
        environment:
           - DD_API_KEY=<DD_API_KEY>
           - DD_SITE=datadoghq.com  # Default. Change to eu.datadoghq.com, us3.datadoghq.com, us5.datadoghq.com as appropriate for your org

@@ -1,6 +1,6 @@
 ---
 algolia:
-  subcategory: Integraciones de Marketplace
+  subcategory: Integraciones del Marketplace
 app_id: rapdev-snmp-trap-logs
 app_uuid: 754df420-1cf8-4742-b98c-9d3a76f83c41
 assets:
@@ -14,9 +14,9 @@ author:
   vendor_id: rapdev
 categories:
 - marketplace
-- la red
+- network
 - snmp
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,22 +33,22 @@ pricing:
 - billing_type: flat_fee
   includes_assets: true
   product_id: snmp-trap-logs
-  short_description: Tarifa plana para esta integración
+  short_description: Tarifa plana de esta integración
   unit_price: 1000
 public_title: SNMP Trap Logs
 short_description: Convierte mensajes de trampas SNMP en logs de Datadog
 supported_os:
-- linux
+- Linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Marketplace
-  - Category::Network
-  - Category::SNMP
-  - Supported OS::Linux
-  - Submitted Data Type::Logs
-  - Offering::Integration
-  configuration: README.md#Setup
+  - Categoría::Marketplace
+  - Categoría::Red
+  - Categoría::SNMP
+  - Sistema operativo compatible::Linux
+  - Tipo de datos enviados::Logs
+  - Oferta::Integración
+  configuration: README.md#Configuración
   description: Convierte mensajes de trampas SNMP en logs de Datadog
   media:
   - caption: RapDev SNMP Trap Logs
@@ -63,16 +63,16 @@ tile:
   - caption: Dashboard de log de trampas SNMP
     image_url: images/4.png
     media_type: imagen
-  overview: README.md#Overview
+  overview: README.md#Información general
   resources:
   - resource_type: Blog
     url: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
-  support: README.md#Support
+  support: README.md#Soporte
   title: SNMP Trap Logs
-  uninstallation: README.md#Uninstallation
+  uninstallation: README.md#Desinstalación
 ---
 
-<!--  FUENTE https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 ## Información general
 El paquete de RapDev SNMP Trap Logs permite convertir mensajes de trampas SNMP en logs de Datadog para miles de dispositivos SNMP diferentes. Hemos recopilado tantos archivos MIB como pudimos y los hemos convertido a un formato que permite la traducción de mensajes de trampas SNMP en mensajes de log legibles para humanos.
 
@@ -80,9 +80,9 @@ Este paquete cuenta con un script de instalación a fin de configurar Logstash c
 
 Para obtener una lista de todas las MIBs que se incluyen con este paquete, consulta el [archivo mib_yamls.txt][4].
 
-## Compatibilidad
+## Ayuda
 
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
+Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
 - Correo electrónico: [support@rapdev.io][7]
 - Chat: [rapdev.io][3]
@@ -90,7 +90,7 @@ Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto c
 
 ### Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
 - [Monitorizar y diagnosticar problemas de rendimiento de la red con trampas SNMP][8]
 
@@ -108,4 +108,4 @@ Hecho con ❤️ en Boston
 [7]: mailto:support@rapdev.io
 [8]: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">adquiere esta aplicación en el Marketplace</a>.

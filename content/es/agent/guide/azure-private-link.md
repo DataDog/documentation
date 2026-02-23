@@ -1,19 +1,17 @@
 ---
+description: Configura Azure Private Link para enviar telemetría a Datadog de forma
+  segura sin utilizar la Internet pública, incluida la configuración del endpoint
+  y la configuración de DNS.
 title: Conectarse a Datadog a través de Azure Private Link
 ---
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
-<div class="alert alert-warning">Esta función no es compatible con el sitio de Datadog seleccionado.</div>
-{{% /site-region %}}
-
-{{% site-region region="us3" %}}
 [Azure Private Link][1] te permite enviar telemetría a Datadog sin utilizar la Internet pública.
 
 Datadog expone parte de sus servicios de consumo de datos como [servicios de Azure Private Link][2].
 
 Puedes configurar Azure Private Link para exponer una dirección IP privada por cada servicio de consumo de Datadog. Esta dirección IP enruta el tráfico al backend de Datadog. A continuación, puedes configurar una [zona DNS privada][3] de Azure para anular los nombres DNS correspondientes a los productos de cada endpoint consumido.
 
-## Configuración
+## Instalación
 
 ### Conexión de un endpoint
 
@@ -38,7 +36,10 @@ Puedes configurar Azure Private Link para exponer una dirección IP privada por 
    Selecciona **Next: Tags** (Siguiente: Etiquetas (tags)) para continuar.
 7. En la página **Create a private endpoint** > **Tags** (Crear un endpoint privado > Etiquetas), puedes configurar opcionalmente etiquetas. Selecciona **Next** (Siguiente).
 8. En la página **Review + create** (Revisar + crear), revisa tus configuraciones. A continuación, selecciona **Create** (Crear).
-9. Una vez creado tu endpoint privado, búscalo en lista. Toma nota de la dirección **IP privada** de este endpoint, ya que se utilizará en la siguiente sección.
+9. Una vez creado su endpoint privado, búscalo en la lista. Toma nota de la **Private IP** (IP privada) de este endpoint, ya que se utiliza en la siguiente sección. El campo Estado de connection (conexión) debe ser Pendiente.
+10. A continuación, es necesaria la aprobación manual de Datadog. Ponte en contacto con el servicio de asistencia de Datadog y solicita la aprobación de tu endpoint de enlace privado, incluye el nombre de tu endpoint.
+11. Después de que Datadog Support haya confirmado que se ha creado el endpoint, confirma que funciona correctamente. En el portal Azure, ve a **Home > Private Endpoints** (Página principal > Endpoint privado). Haz clic en el nombre del endpoint y confirma que el estado de connection (conexión) muestra **Approved** (Aprobado). 
+12. Ve a **Monitoring > Metrics** (Monitorización > Métricas). Confirma que las métricas `Bytes In` y `Bytes Out` son distintas de cero. Estas métricas también deben ser capturadas por Datadog Azure Integration como `azure.network_privateendpoints.pe_bytes_[in/out]`.
 
 ### Creación de una zona DNS privada
 1. En el portal Azure, ve a **Private DNS zones** (Zonas DNS privadas).
@@ -90,4 +91,3 @@ Crea una zona DNS privada para el `agent.`{{< region-param key="dd_site" code="t
 [1]: https://azure.microsoft.com/en-us/products/private-link
 [2]: https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview
 [3]: https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone
-{{% /site-region %}}

@@ -73,7 +73,7 @@ Prometheus를 연결해 다음을 수행할 수 있습니다.
 
 **참고**: Datadog은 더 효율적이고 Prometheus 텍스트 형식을 완벽하게 지원하는 [OpenMetrics 점검][1] 사용을 권장합니다. 메트릭 엔드포인트가 텍스트 형식을 지원하지 않는 경우에만 Prometheus 점검을 사용하세요.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 통합을 통해 검색된 모든 메트릭은 <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">커스텀 메트릭</a>으로 지정됩니다.
 </div>
 

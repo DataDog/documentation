@@ -4,6 +4,9 @@ aliases:
 - /es/account_management/mult_account
 - /es/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 - /es/account_management/multi_organisations
+description: Gestiona varias organizaciones secundarias desde una cuenta principal
+  con facturación independiente, rastreo del uso y control de acceso para proveedores
+  de servicios gestionados.
 further_reading:
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: Blog
@@ -63,7 +66,7 @@ La incorporación de una nueva suborganización con un conjunto de dashboards y 
 La función de subdominios personalizados no está activada de forma predeterminada. Ponte en contacto con [el servicio de asistencia de Datadog][1] para activarla.
 
 Si eres miembro de varias organizaciones, los subdominios personalizados te permiten identificar la fuente de una alerta o notificación. Además, pueden cambiarte inmediatamente a la organización asociada al subdominio.
-{{% site-region region="us,us3,us5,ap1" %}}
+{{% site-region region="us,us3,us5,ap1,ap2" %}}
 Por ejemplo, la URL `https://app.datadoghq.com/event/event?id=1` está asociada a un evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog en el contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.datadoghq.com/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
 
 **Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.datadoghq.com/account/settings` se convierte en `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`. {{% /site-region %}}

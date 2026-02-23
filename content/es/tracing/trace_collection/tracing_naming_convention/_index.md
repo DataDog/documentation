@@ -9,20 +9,20 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentación
   text: Aprender a explorar tus trazas
-title: Semántica de etiquetas de tramo
+title: Semántica de span tags
 ---
 
 ## Información general
 
-Las [bibliotecas de rastreo de Datadog][1] proporcionan compatibilidad predefinida para instrumentar una variedad de bibliotecas.
+Las [bibliotecas de rastreo de Datadog][1] proporcionan compatibilidad predefinida para instrumentar una variedad de librerías.
 Estas instrumentaciones generan tramos (spans) para representar unidades lógicas de trabajo en sistemas distribuidos.
 Cada tramo (span) consta de [etiquetas (tags) de tramo][2] para proporcionar información adicional sobre la unidad de trabajo que se realiza en el sistema. Las convenciones de nomenclatura describen el nombre y el contenido que puedes utilizar en eventos de tramo.
 
-<div class="alert alert-info">Para encontrar una lista completa de todas las etiquetas de tramo, atributos reservados y convenciones de nomenclatura, consulta <a href="/standard-attributes/?product=apm">Atributos estándar por defecto.</a></div>
+<div class="alert alert-info">Para encontrar una lista completa de todas las span tags, atributos reservados y convenciones de nomenclatura, consulta <a href="/standard-attributes/?product=apm">Atributos estándar por defecto.</a></div>
 
 ## Convenciones de nomenclatura de etiqueta de tramo
 
-Existe una gran variedad de etiquetas de tramo para describir el trabajo que se realiza en el sistema. Por ejemplo, existen etiquetas de tramo para describir los siguientes ámbitos:
+Existe una gran variedad de span tags para describir el trabajo que se realiza en el sistema. Por ejemplo, existen span tags para describir los siguientes ámbitos:
 
 - **Reservados**: atributos que siempre están presentes en todos los tramos.
 - **Principal**: instrumentación utilizada y el tipo de operación.
@@ -37,21 +37,21 @@ Para más información, consulta [Atributos estándar por defecto][6].
 
 ## Etiquetas de tramo y atributos de tramo
 
-Las etiquetas de tramo y los atributos de tramo son conceptos similares, pero distintos:
+Las span tags y los atributos de tramo son conceptos similares, pero distintos:
 
-- Las [etiquetas de tramo](#span-tags) son el contexto alrededor del tramo.
+- Las [span tags](#span-tags) son el contexto alrededor del tramo.
 - Los [atributos de tramo](#span-attributes) son el contenido del tramo.
 
 ### Etiquetas de tramo
 
-Las etiquetas de tramo son el contexto que rodea al tramo. Algunos ejemplos son:
+Las span tags son el contexto que rodea al tramo. Algunos ejemplos son:
 
 - **Etiquetas de host**: `hostname`, `availability-zone`, `cluster-name`
 - **Etiquetas de contenedor**: `container_name`, `kube_deployment`, `pod_name`
 
 Las etiquetas suelen enriquecerse a partir de otras fuentes de datos, como etiquetas procedentes de host, contenedor o catálogo de servicios. Estas etiquetas se añaden al tramo para describir el contexto. Por ejemplo, las etiquetas pueden describir las propiedades de host y contenedor de las que procede el tramo, o las propiedades de servicio de las que se emite el tramo.
 
-Para encontrar etiquetas de tramo en Datadog, ve a la pestaña **Infrastructure** (Infraestructura) en el panel lateral Trace (traza):
+Para encontrar span tags en Datadog, ve a la pestaña **Infrastructure** (Infraestructura) en el panel lateral Trace (traza):
 
 {{< img src="/tracing/attributes/span-tags.png" alt="Etiquetas de tramo en la pestaña Infraestructura." style="width:100%;" >}}
 

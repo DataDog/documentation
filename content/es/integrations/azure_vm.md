@@ -106,7 +106,7 @@ Para crear monitores de métricas que se puedan silenciar automáticamente, aseg
 
 ## Datos recopilados
 
-<div class="alert alert-warning">La métrica <code>azure.vm.status</code> está obsoleta y no se completa para organizaciones de Datadog recientemente creadas. Para los usuarios existentes, esta métrica se desactivó el 1 de junio de 2023. Usa la métrica <code>azure.vm.count</code> y sus valores de etiqueta <code>estado</code> asociados para determinar el estado de tus máquinas virtuales.
+<div class="alert alert-danger">La métrica <code>azure.vm.status</code> está obsoleta y no se completa para organizaciones de Datadog recientemente creadas. Para los usuarios existentes, esta métrica se desactivó el 1 de junio de 2023. Usa la métrica <code>azure.vm.count</code> y sus valores de etiqueta <code>estado</code> asociados para determinar el estado de tus máquinas virtuales.
 
 Para cualquier pregunta, contacta con el <a href="https://docs.datadoghq.com/help/" target="_blank">soporte de Datadog</a>.</div>
 

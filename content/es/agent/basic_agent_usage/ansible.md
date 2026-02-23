@@ -80,7 +80,7 @@ La colección de Datadog se ha probado en CentOS, Debian, Rocky Linux, openSUSE,
 
 Si necesitas ayuda, puedes crear un ticket en el repositorio GitHub de `ansible-collections` o puedes ponerte en contacto con el [servicio de asistencia de Datadog][1].
 
-## Notas sobre la versión
+## Notas de publicación
 
 Puedes seguir los cambios en el archivo [CHANGELOG][2].
 

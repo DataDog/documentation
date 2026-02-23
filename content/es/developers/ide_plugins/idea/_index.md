@@ -21,7 +21,7 @@ title: Plugin de Datadog para entornos de desarrollo integrados de JetBrains
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     La extensión de Datadog para IDEs de JetBrains no es compatible con tu <a href="/getting_started/site">sitio de Datadog seleccionado</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}

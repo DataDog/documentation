@@ -1,9 +1,10 @@
 ---
 title: Datadog 포워더를 사용하여 Go 서버리스 애플리케이션 계측하기
 ---
+
 ## 개요
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installation/go">Datadog Lambda 확장을 사용해 Lambda 함수를 계측하는 방법</a>을 따르세요. Lambda가 즉시 사용 가능한 기능을 제공하기 전에 Datadog 포워더를 사용하여 Datadog 서버리스를 설정한 경우, 이 가이드를 사용하여 인스턴스를 유지 관리하세요.
 </div>
 
@@ -23,7 +24,7 @@ Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installat
 다음 명령을 실행해 [Datadog Lamda 라이브러리][3]를 로컬에 설치합니다:
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### 계측
@@ -31,16 +32,16 @@ go get github.com/DataDog/datadog-lambda-go
 다음 단계에 따라 함수를 계측합니다:
 
 1. 환경 변수 `DD_FLUSH_TO_LOG`와 `DD_TRACE_ENABLED`를 `true`로 설정합니다.
-2. Lamda 함수 처리기가 표시되는 파일에서 필요한 패키지를 가져옵니다.
+2. Lambda 함수 핸들러를 정의하는 파일에서 필수 패키지를 가져옵니다. {{% tracing-go-v2 %}}
 
     ```go
     package main
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+      ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
 3. Datadog Lamda 라이브러리에서 제공하는 래퍼를 사용해 Lamda 함수 처리기를 래핑합니다.
@@ -63,7 +64,7 @@ go get github.com/DataDog/datadog-lambda-go
       // Trace an HTTP request
       req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
       client := http.Client{}
-      client = *httptrace.WrapClient(&client)
+      client = httptrace.WrapClient(&client)
       client.Do(req)
 
       // Connect your Lambda logs and traces
@@ -77,9 +78,9 @@ go get github.com/DataDog/datadog-lambda-go
     }
     ```
 
-### 연결
+### 구독
 
-메트릭, 트레이스, 로그를 Datadog으로 보내려면 각 함수 로그 그룹에서 Datadog 포워더 Lamda 함수를 연결하세요. 
+메트릭, 트레이스, 로그를 Datadog로 보내려면 각 함수 로그 그룹에서 Datadog 포워더 Lamda 함수를 연결하세요. 
 
 1. [아직 설치하지 않았다면 Datadog 포워더를 설치하세요][2].
 2. [Datadog 포워더를 함수의 로그 그룹에 연결][4]합니다.
@@ -148,3 +149,4 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [5]: /ko/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [6]: https://app.datadoghq.com/functions
 [7]: /ko/serverless/custom_metrics?tab=go
+[8]: /ko/tracing/trace_collection/custom_instrumentation/go/migration

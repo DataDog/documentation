@@ -1,49 +1,66 @@
 ---
-title: Taux
 aliases:
-  - /fr/graphing/functions/rate/
+- /fr/graphing/functions/rate/
+description: Calculer les taux, les dérivées et les différences temporelles pour analyser
+  les changements de métrique par seconde, minute ou heure.
+further_reading:
+- link: /monitors/guide/alert-on-no-change-in-value/
+  tag: Documentation
+  text: Alerte en cas d'absence de changement d'une valeur
+title: Taux
 ---
+
 ## Par seconde
 
-| Fonction       | Description                                                | Exemple                        |
+| Fonction       | Rôle                                                | Exemple                        |
 |:---------------|:-----------------------------------------------------------|:-------------------------------|
-| `per_second()` | Crée un graphique illustrant le taux de variation de la métrique par seconde. | `per_second(<NOM_MÉTRIQUE>{*})` |
+| `per_second()` | Crée un graphique illustrant le taux de variation de la métrique par seconde. | `per_second(<METRIC_NAME>{*})` |
 
 ## Par minute
 
-| Fonction       | Description                                                | Exemple                        |
+| Fonction       | Rôle                                                | Exemple                        |
 |:---------------|:-----------------------------------------------------------|:-------------------------------|
-| `per_minute()` | Crée un graphique illustrant le taux de variation de la métrique par minute. | `per_minute(<NOM_MÉTRIQUE>{*})` |
+| `per_minute()` | Crée un graphique illustrant le taux de variation de la métrique par minute. | `per_minute(<METRIC_NAME>{*})` |
 
 ## Par heure
 
-| Fonction     | Description                                              | Exemple                      |
+| Fonction     | Rôle                                              | Exemple                      |
 |:-------------|:---------------------------------------------------------|:-----------------------------|
-| `per_hour()` | Crée un graphique illustrant le taux de variation de la métrique par heure. | `per_hour(<NOM_MÉTRIQUE>{*})` |
+| `per_hour()` | Crée un graphique illustrant le taux de variation de la métrique par heure. | `per_hour(<METRIC_NAME>{*})` |
 
-## Durée du delta
+## Différence temporelle
 
-| Fonction | Description                                                    | Exemple                |
+| Fonction | Rôle                                                    | Exemple                |
 |:---------|:---------------------------------------------------------------|:-----------------------|
-| `dt()`   | Crée un graphique illustrant la différence temporelle en secondes entre les points envoyés. | `dt(<NOM_MÉTRIQUE>{*})` |
+| `dt()`   | Crée un graphique illustrant la différence temporelle en secondes entre les points envoyés. | `dt(<METRIC_NAME>{*})` |
 
-## Valeur du delta
+La fonction dt() renvoie une seule série temporelle quel que soit le nombre de groupes impliqués. Dans cette série temporelle unique, elle prend en compte la différence temporelle de tous les points soumis à travers les différents groupes.
 
-| Fonction | Description                    | Exemple                  |
+## Différence de valeur
+
+| Fonction | Rôle                    | Exemple                  |
 |:---------|:-------------------------------|:-------------------------|
-| `diff()` | Crée un graphique illustrant le delta de la métrique. | `diff(<NOM_MÉTRIQUE>{*})` |
+| `diff()` | Crée un graphique illustrant le delta de la métrique. | `diff(<METRIC_NAME>{*})` |
 
-## Valeur du delta monotone
+Calcule la différence entre chaque intervalle sur une base par intervalle. Par exemple, une métrique soumet des points de données avec un intervalle de 15 secondes, le modificateur `diff()` l'afficherait sur un taux de 15 secondes. **Remarque :** le calcul est effectué après l'application de l'agrégation temporelle et avant que l'agrégation spatiale n'ait lieu.
 
-| Fonction           | Description                                                                     | Exemple                            |
+## Différence monotone
+
+| Fonction           | Rôle                                                                     | Exemple                            |
 |:-------------------|:--------------------------------------------------------------------------------|:-----------------------------------|
-| `monotonic_diff()` | Représente le delta de la métrique, tout comme `diff()`, mais uniquement si le delta est positif. | `monotonic_diff(<NOM_MÉTRIQUE>{*})` |
+| `monotonic_diff()` | Représente le delta de la métrique, tout comme `diff()`, mais uniquement si le delta est positif. | `monotonic_diff(<METRIC_NAME>{*})` |
 
 ## Dérivée
 
-| Fonction       | Description                                   | Exemple                        |
+| Fonction       | Rôle                                   | Exemple                        |
 |:---------------|:----------------------------------------------|:-------------------------------|
-| `derivative()` | Crée un graphique illustrant la dérivée (diff/dt) de la métrique. | `derivative(<NOM_MÉTRIQUE>{*})` |
+| `derivative()` | Crée un graphique illustrant la dérivée (diff/dt) de la métrique. | `derivative(<METRIC_NAME>{*})` |
+
+## Débit
+
+| Fonction       | Rôle                                                                                                                                        | Exemple                          |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| `throughput()` | Convertit une série temporelle en un taux par seconde, en divisant chaque valeur par le nombre de secondes dans le bucket temporel pour produire la valeur par seconde. | `throughput(<METRIC_NAME>{*})` |
 
 ## Autres fonctions
 
@@ -59,3 +76,7 @@ aliases:
     {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}

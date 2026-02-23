@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/guide/community-integrations-installation-with-docker-agent
+description: Guía de instalación y configuración para integraciones desarrolladas
+  por la comunidad y Marketplace con el Datadog Agent en distintos entornos.
 further_reading:
 - link: /agent/troubleshooting/
   tag: Documentación
@@ -31,16 +33,16 @@ En las versiones 7.21/6.21 del Agent (y posteriores):
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
+    **Nota**: Si es necesario, añade `sudo -u dd-agent` al comando de instalación.
+
    La versión de una integración puede consultarse en el log de cambios correspondiente en el repositorio de integraciones Github.
 2. Configura tu integración como si fuese una [integración][1] de base.
 3. [Reinicia el Agent][2].
 
-**Nota**: Si fuera necesario, antepón `sudo -u dd-agent` al comando de instalación.
-
 [1]: /es/getting_started/integrations/
 [2]: /es/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Contenerizado" %}}
+{{% tab "Contenedores" %}}
 
 Para utilizar una integración de la comunidad o el mercado en un entorno contenerizado debes crear una imagen personalizada que incluya la integración comunitaria que quieras.
 
@@ -48,12 +50,12 @@ Utiliza el siguiente Dockerfile para crear una versión personalizada del Agent 
 
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
-RUN datadog-agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
+RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-El comando `datadog-agent integration install` (ejecutado dentro de Docker) emite la siguiente advertencia inofensiva: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. Puedes ignorar esta advertencia.
+El comando `agent integration install` (ejecutado dentro de Docker) emite la siguiente advertencia inofensiva: `Error loading config: Config File "datadog" Not Found in "[/etc/datadog-agent]": warn`. Puedes ignorar esta advertencia.
 
-Si utilizas Kubernetes, actualiza tu chart de Helm o tu configuración de operador Datadog para extraer tu imagen personalizada.
+Si utilizas Kubernetes, actualiza tu gráfico de Helm o tu configuración de operador Datadog para extraer tu imagen personalizada.
 
 Utiliza [Autodiscovery][1] para activar y configurar la integración.
 
@@ -88,7 +90,7 @@ Si tu sitio restringe el acceso a la red, asegúrate de haber añadido todos los
 
 <br>
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

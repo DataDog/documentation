@@ -20,11 +20,11 @@ further_reading:
 - link: /opentelemetry/interoperability/environment_variable_support
   tag: Documentación
   text: Configuraciones de variables de entorno de OpenTelemetry
-title: Configuración del rastreo de bibliotecas de PHP
+title: Configuración del rastreo de librerías de PHP
 type: lenguaje de código múltiple
 ---
 
-Después de configurar la biblioteca de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la biblioteca de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][1].
+Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [etiquetado de servicios unificado][1].
 
 El rastreador PHP puede configurarse mediante variables de entorno y parámetros INI.
 
@@ -34,45 +34,47 @@ Los parámetros INI pueden configurarse globalmente, por ejemplo, en el archivo 
 
 ## Apache
 
-Para Apache con php-fpm, utiliza la directiva `env` de tu archivo de configuración`www.conf`, para configurar el rastreador PHP, por ejemplo:
+Para Apache con PHP-FPM, utiliza la directiva `env[]` en tu archivo de configuración `www.conf` para configurar el rastreador PHP. Por ejemplo:
 
 ```
-; Ejemplo de transferencia de la variable de entorno de host SOME_ENV
-; al proceso PHP como DD_Agent_host
-env[DD_Agent_host] = $SOME_ENV
-; Ejemplo de transferencia del valor 'my-app' al proceso PHP
-; como DD_SERVICE
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
+env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
 env[DD_SERVICE] = my-app
-; O utilizando la configuración INI equivalente
+; Or using the equivalent INI setting
 php_value datadog.service my-app
 ```
 
-También puedes utilizar [`SetEnv`][2] en la configuración del servidor, el host virtual host, el directorio o el archivo `.htaccess`.
+**Nota:** En forma predeterminada, PHP-FPM no hereda variables de entorno del sistema host cuando `clear_env=yes` se configura en `www.conf`. Si necesitas utilizar variables de entorno configuradas en host, debes definirlas explícitamente utilizando la directiva `env[]`.
 
-``text
-# En la configuración de un host virtual como variable de entorno 
+Para Apache sin PHP-FPM (configuraciones mod_php), puedes configurar variables de entorno directamente en la configuración del servidor, el host virtual, el directorio o el archivo `.htaccess` utilizando [`SetEnv`][2]:
+
+```text
+# In a virtual host configuration as an environment variable
 SetEnv DD_TRACE_DEBUG 1
-# En la configuración de un host virtual como parámetro INI
-php_value Datadog.servicio my-app
+# In a virtual host configuration as an INI setting
+php_value datadog.service my-app
 ```
 
 ## NGINX y PHP-FPM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> PHP-FPM no admite el valor <code>falso</code> en las directivas <code>env[...]</code>. Utiliza <code>1</code> en lugar de <code>verdadero</code> y <code>0</code> en lugar de <code>false</code>.
 </div>
 
 Para NGINX, utiliza la directiva `env` del archivo `www.conf` de php-fpm, por ejemplo:
 
 ```
-; Ejemplo de transferencia de la variable de entorno de host SOME_ENV
-; al proceso PHP como DD_AGENT_HOST
-env[DD_Agent_host] = $SOME_ENV
-; Ejemplo de transferencia del valor 'my-app' al proceso PHP
-; como DD_SERVICE
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
+env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
 env[DD_SERVICE] = my-app
-; O utilizando la configuración INI equivalente
-php_value [datadog.service] = my-app
+; Or using the equivalent INI setting
+php_value[datadog.service] = my-app
 ```
 
 **Nota**: Si has habilitado APM para tu servidor NGINX, asegúrate de haber configurado correctamente el parámetro `opentracing_fastcgi_propagate_context` para que el rastreo distribuido funcione correctamente. Para obtener más detalles, consulta la [configuración de APM NGINX][3].
@@ -106,12 +108,13 @@ Define la versión de una aplicación en trazas y logs, por ejemplo: `1.2.3`, `6
 **Por defecto**: `null`<br>
 El nombre por defecto de la aplicación.
 
-### Trazas
+### Trazas (traces)
 
 `DD_TRACE_ENABLED`
-: **INI**: `datadog.trace.enabled`<br>
-**Por defecto**: `1`<br>
-Habilita el rastreador globalmente.
+: **INI**: `Datadog.rastrear.enabled`<br>
+**Predeterminado**: `1`<br>
+Habilita el rastreador globalmente.<br/>
+Consulta también [DD_APM_TRACING_ENABLED][21].
 
 `DD_PRIORITY_SAMPLING`
 : **INI**: `datadog.priority_sampling`<br>
@@ -162,13 +165,13 @@ La URL del Agent tiene prioridad sobre `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT`. 
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
-**Por defecto**: `0`<br>
-Descarga automáticamente el rastreador cuando todos los tramos están cerrados. Se configura en `1` junto con `DD_TRACE_GENERATE_ROOT_SPAN=0` para rastrear [procesos de ejecución prolongada][14].
+**Predeterminado**: `0` (`1` en el entorno de CLI)<br>
+Vacía automáticamente el rastreador cuando se cierran todos los tramos (spans); configura en `1` junto con `DD_TRACE_GENERATE_ROOT_SPAN=0` para rastrear [procesos de ejecución prolongada][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
-**Por defecto**: `0`<br>
-Habilita el rastreo de scripts PHP desde la CLI. Consulta [Rastreo de scripts CLI][15].
+**Predeterminado**: `1`<br>
+Habilita el rastreo de scripts PHP desde la CLI. Configura [Rastreo de scripts CLI][15].
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -272,12 +275,6 @@ Funciona para Linux. Configúralo como `true` para conservar las capacidades en 
 **Por defecto**: `true`<br>
 Habilita la asignación de nombres basada en rutas para las solicitudes del servidor HTTP. Configúralo como `true` para utilizar el formato de nombres de recurso del tramo raíz específico de la integración. Cuando es `false`, se utilizan el método y la ruta HTTP. Añadido en la versión `0.89.0`.
 
-`DD_TRACE_SAMPLE_RATE`
-: **INI**: `datadog.trace.sample_rate`<br>
-**Por defecto**: `-1`<br>
-La frecuencia de muestreo para las trazas, un número entre `0.0` y `1.0`. El valor por defecto de `-1` cede el control del muestreo al Datadog Agent .<br>
-**Nota**: `DD_TRACE_SAMPLE_RATE` queda obsoleto en favor de `DD_TRACE_SAMPLING_RULES`.<br>
-
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Por defecto**: `0`<br>
@@ -318,9 +315,9 @@ Una lista separada por comas de los parámetros de consulta que se recopilarán 
 Habilita la recopilación de IP del lado del cliente. Añadido en la versión `0.84.0`.
 
 `DD_TRACE_CLIENT_IP_HEADER`
-: **INI**: `datadog.trace.client_ip_header`<br>
-**Por defecto**: `null`<br>
-La cabecera de IP para utilizar en la recopilación de IP del cliente, por ejemplo: `x-forwarded-for`. Añadido en la versión `0.84.0` (`0.76.0`, cuando se utiliza ASM).
+: **INI**: `Datadog.rastrear.client_ip_header`<br>
+**Predeterminado**: `null`<br>
+El encabezado de IP a utilizar para la recopilación de IP del cliente, por ejemplo: `x-forwarded-for`. Añadido en la versión `0.84.0` (`0.76.0` cuando se utiliza AAP).
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
@@ -329,16 +326,6 @@ La cabecera de IP para utilizar en la recopilación de IP del cliente, por ejemp
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
 Expresión regular utilizada para ofuscar la cadena de consultas incluida como parte de la URL. Esta expresión también se utiliza en el proceso para ocultar datos HTTP POST. Añadido en la versión `0.76.0`.
-
-`DD_TRACE_SAMPLING_RULES`
-: **INI**: `datadog.trace.sampling_rules`<br>
-**Por defecto**: `null`<br>
-Una cadena codificada en JSON para configurar la frecuencia de muestreo. Por ejemplo: Configura la frecuencia de muestreo en 20%: `'[{"sample_rate": 0.2}]'`. Configura la frecuencia de muestreo en 10% para los servicios que empiezan por 'a' y los nombres de tramos que empiezan por 'b', y configura la frecuencia de muestreo en 20% para todos los demás servicios: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`. (Consulta [Nombres de integraciones](#integration-names)). El objeto JSON **debe** ir rodeado de comillas simples (`'`) para evitar problemas con el escape del carácter de comillas dobles (`"`). La coincidencia de servicios tiene en cuenta `DD_SERVICE_MAPPING` (a partir de la versión `0.90.0`). El nombre y el servicio deben ser una expresión regular válida. Las reglas que no son expresiones regulares válidas se ignoran.
-
-`DD_TRACE_SAMPLING_RULES_FORMAT`
-: **INI**: `datadog.trace.sampling_rules_format`<br>
-**Por defecto**: `glob`<br>
-Regula el formato (`regex` o `glob`) utilizado para las reglas de muestreo definidas por `DD_TRACE_SAMPLING_RULES`. Añadido en la versión `0.98.0` y obsoleto a partir de la versión `1.0.0`.
 
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`<br>
@@ -443,6 +430,11 @@ Si se habilita la recopilación de datos del endpoint en los perfiles. Añadido 
 Habilita el tipo de perfil de tamaño de asignación y bytes de asignación. Añadido en la versión `0.88.0`. Cuando se detecta un JIT activo, la generación de perfiles de asignación se desactiva para la versión PHP `8.0.0` -`8.1.20` y `8.2.0`-`8.2.7`, debido a una limitación del ZendEngine.<br>
 **Nota**: Esto sustituye a la variable de entorno `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` (parámetro INI`datadog.profiling.experimental_allocation_enabled`), que estaba disponible a partir de `0.84`. Si ambas están configuradas, ésta tiene prioridad.
 
+`DD_PROFILING_ALLOCATION_SAMPLING_DISTANCE`
+: **INI**: `Datadog.profiling.allocation_sampling_distance`.
+**Predeterminado**: `4194304` (4 MB)<br>
+Configura la distancia de muestreo para las asignaciones. Cuanto mayor sea la distancia de muestreo, menos muestras se crearán y menor será la sobrecarga. Añadido en la versión `1.9.0`.
+
 `DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
 : **INI**: `datadog.profiling.experimental_features_enabled`. INI disponible a partir de `0.96.0`.<br>
 **Por defecto**: `0`<br>
@@ -479,6 +471,11 @@ Configura la distancia de muestreo para las excepciones. Cuanto mayor sea la dis
 Habilita el tipo de perfil de línea de tiempo. Añadido en la versión `0.89.0`.<br><br>
 **Nota**: Sustituye a la variable de entorno`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` (parámetro INI`datadog.profiling.experimental_timeline_enabled`), que estaba disponible a partir de `0.89` (por defecto `0`). Si ambas están activadas, ésta tiene prioridad.
 
+`DD_PROFILING_EXPERIMENTAL_IO_ENABLED`
+: **INI**: `Datadog.profiling.experimental_io_enabled`. INI disponible desde `1.7.2`.<br>
+**Predeterminado**: `1`<br>
+Habilita el tipo de perfil de E/S. Añadido como beta en la versión `1.7.2`.
+
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI disponible a partir de `0.82.0`.<br>
 **Por defecto**: `off`<br>
@@ -486,27 +483,29 @@ Define el nivel de log del generador de perfiles. Los valores aceptables son `of
 
 ### Propagación del contexto de rastreo
 
-Consulta [Propagación del contexto de rastreo][11] para obtener información sobre cómo configurar la biblioteca de rastreo PHP para extraer e inyectar cabeceras para propagar el contexto de rastreo distribuido.
+Consulta [Propagación del contexto de rastreo][11] para obtener información sobre cómo configurar la librería de rastreo PHP para extraer e inyectar cabeceras para propagar el contexto de rastreo distribuido.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **INI**: `datadog.trace.propagation_style_inject`<br>
-**Por defecto**: `Datadog,tracecontext`<br>
-Estilos de propagación para utilizar al inyectar cabeceras de rastreo. Si se utilizan varios estilos, sepáralos con comas. Los estilos compatibles son:
+: **INI**: `Datadog.rastrear.propagation_style_inject`<br>
+**Predeterminado**: `Datadog,tracecontext,baggage`<br>
+Estilos de propagación a utilizar al insertar encabezados de rastreo. Si utilizas varios estilos, sepárelos con comas. Los estilos admitidos son:
 
   - [tracecontext][10]
   - [b3multi][7]
   - [cabecera simple B3][8]
   - Datadog
+  - [Equipaje] [22]
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **INI**: `datadog.trace.propagation_style_extract`<br>
-**Por defecto**: `Datadog,tracecontext,b3multi,B3 single header`<br>
-Estilos de propagación para utilizar al extraer cabeceras de rastreo. Si se utilizan varios estilos, sepáralos con comas. Los estilos compatibles son:
+: **INI**: `Datadog.rastrear.propagation_style_extract`<br>
+**Predeterminado**: `Datadog,tracecontext,b3multi,B3 single header,baggage`<br>
+Estilos de propagación a utilizar al extraer los encabezados de rastreo. Si utilizas varios estilos, sepárelos con comas. Los estilos admitidos son:
 
   - [tracecontext][10]
   - [b3multi][7]
   - [cabecera simple B3][8]
   - Datadog
+  - [Equipaje] [22]
 
 ### Integraciones
 
@@ -531,10 +530,10 @@ Habilita las retrollamadas de instrumentación de los ganchos de acción de Word
 **Por defecto**: `DD_SERVICE`<br>
 El nombre del servicio informado por defecto para solicitudes OpenAI.
 
-`DD_OPENAI_LOGS_ENABLED` (beta)
-: **INI**: `datadog.openai.logs_enabled`<br>
-**Por defecto**: `false`<br>
-Habilita la recopilación de avisos y finalizaciones en forma de logs. Puedes ajustar la tasa de avisos y finalizaciones recopilados utilizando la configuración de la tasa de muestreo que se describe a continuación.
+`DD_OPENAI_LOGS_ENABLED`
+: **INI**: `Datadog.openai.logs_enabled`<br>
+**Predeterminado**: `false`<br>
+Habilita la recopilación de avisos y finalizaciones como logs. Puedes ajustar la tasa de avisos y finalizaciones recopilados utilizando la configuración de la tasa de muestreo que se describe a continuación.
 
 `DD_OPENAI_METRICS_ENABLED`
 : **INI**: `datadog.openai.metrics_enabled`<br>
@@ -542,10 +541,10 @@ Habilita la recopilación de avisos y finalizaciones en forma de logs. Puedes aj
 Habilita la recopilación de métricas de OpenAI.<br>
 Si el Datadog Agent está configurado para utilizar un nombre de host o puerto StatsD no predeterminado, utiliza `DD_DOGSTATSD_URL` para configurar la recopilación de métricas de OpenAI.
 
-`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
-: **INI**: `datadog.openai.span_char_limit`<br>
-**Por defecto**: `128`<br>
-Configura el número máximo de caracteres para los siguientes datos dentro de las etiquetas de tramos:
+`DD_OPENAI_SPAN_CHAR_LIMIT`
+: **INI**: `Datadog.openai.span_char_limit`<br>
+**Predeterminado**: `128`<br>
+Configura el número máximo de caracteres para los siguientes datos en etiquetas (tags) de tramos (spans):
 
   - Entradas de avisos y finalizaciones
   - Entradas de mensajes y finalizaciones
@@ -553,15 +552,15 @@ Configura el número máximo de caracteres para los siguientes datos dentro de l
 
 Los textos que superan el número máximo de caracteres se truncan hasta el límite de caracteres y se añade `...` al final.
 
-`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
-: **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
-**Por defecto**: `1.0`<br>
-Configura la tasa de muestreo para la recopilación de avisos y finalizaciones como etiquetas de tramos.
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE`
+: **INI**: `Datadog.openai.span_prompt_completion_sample_rate`<br>
+**Predeterminado**: `1.0`<br>
+Configura la tasa de muestreo para la recopilación de avisos y finalizaciones como etiquetas (tags) de tramos (spans) .
 
-`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
-: **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
-**Por defecto**: `0.1`<br>
-Configura la tasa de muestreo para la recopilación de avisos y finalizaciones en forma de logs.
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE`
+: **INI**: `Datadog.openai.log_prompt_completion_sample_rate`<br>
+**Predeterminado**: `0.1`<br>
+Configura la tasa de muestreo para la recopilación de avisos y finalizaciones como logs.
 
 #### Nombres de integraciones
 
@@ -604,7 +603,7 @@ Al definir la configuración específica de una integración, utiliza el nombre,
 
 ## Asignar nombres de recursos a URI normalizados
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Ten en cuenta que al configurar cualquiera de los siguientes: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> y <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> se optará por el nuevo enfoque de normalización de recursos y cualquier valor en <code>DD_TRACE_RESOURCE_URI_MAPPING</code> será ignorado.
 </div>
 
@@ -658,7 +657,7 @@ Esta configuración es un CSV de patrones que pueden contener el comodín `*`. P
 
 Los patrones pueden aplicarse a una parte de un fragmento específico. Por ejemplo `path/*-fix` normalizaría la URL `/some/path/changing-fix/nested` a `/some/path/?-fix/nested`
 
-Ten en cuenta que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` sólo se aplica a las solicitudes entrantes (por ejemplo, los marcos web), mientras que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` sólo se aplica a las solicitudes salientes (por ejemplo, las solicitudes `curl` y `guzzle`).
+Ten en cuenta que `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` sólo se aplica a las solicitudes entrantes (por ejemplo, los web frameworks), mientras que `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` sólo se aplica a las solicitudes salientes (por ejemplo, las solicitudes `curl` y `guzzle`).
 
 ##### Restricciones `open_basedir`
 
@@ -688,3 +687,5 @@ Cuando la aplicación se ejecuta en un contenedor Docker, la ruta `/proc/self` t
 [18]: /es/tracing/trace_collection/otel_instrumentation/php/
 [19]: /es/tracing/trace_collection/compatibility/php/
 [20]: /es/opentelemetry/interoperability/environment_variable_support
+[21]: /es/tracing/trace_collection/library_config/#traces
+[22]: https://www.w3.org/TR/baggage/

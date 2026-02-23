@@ -50,8 +50,8 @@ tile:
   title: Rollbar
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/rollbar/rollbar_error.png" alt="Evento de error de Rollbar" popup="true">}}
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
+![Evento de error de Rollbar][1]
 
 ## Información general
 
@@ -69,7 +69,7 @@ Conecta Rollbar con Datadog para:
 
 ### Instalación
 
-1. Ve al [cuadro de la integración Rollbar][1] y haz clic en **Install Integration** (Instalar integración).
+1. Navega hasta el [cuadro de integración de Rollbar][2] y haz clic en **Install Integration** (Instalar integración).
 2. En el cuadro de la integración, haz clic para elegir una clave de API existente o para crear una nueva para esta integración.
 
 ### Configuración
@@ -79,12 +79,12 @@ En Rollbar, la configuración se lleva a cabo por proyecto.
 1. En Rollbar, ve a la página de Proyectos.
 2. Haz clic en el botón más **[ + \]** para añadir una integración a tu proyecto.
 
-   {{< img src="/integrations/rollover/rollover_project.png" alt="Página de proyectos de Rollbar" style="width:100%" >}}
+   ![Página del proyecto de Rollbar][3]
 
 3. Elige Datadog en la lista.
 4. Copia tu clave de API Key del cuadro de tu integración Rollbar en Datadog y pégala en el cuadro de la clave de API en Rollbar.
 
-Ahora, haz clic en el botón **Send Test Notification** (Enviar notificación de test) para asegurarte de que todo está configurado correctamente. Después de hacer clic, deberías ver un evento de Rollbar en el [Explorador de eventos][2].
+Ahora, haz clic en el botón **Send Test Notification** (Enviar notificación de test) para asegurarte de que todo está configurado correctamente. Después de hacer clic, deberías ver un evento de Rollbar en el [Events Explorer][4].
 
 ## Datos recopilados
 
@@ -102,8 +102,10 @@ La integración Rollbar no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/rollbar
-[2]: https://app.datadoghq.com/event/explorer
-[3]: https://docs.datadoghq.com/es/help/
+[1]: images/rollbar_error.png
+[2]: https://app.datadoghq.com/account/settings#integrations/rollbar
+[3]: images/rollover_project.png
+[4]: https://app.datadoghq.com/event/explorer
+[5]: https://docs.datadoghq.com/es/help/

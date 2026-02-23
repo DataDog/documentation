@@ -1,5 +1,6 @@
 ---
 title: Introduction to Integrations
+description: Unify metrics and logs from infrastructure using Agent-based, authentication-based, and library integrations.
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -7,6 +8,9 @@ further_reading:
   - link: '/integrations/'
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
+  - link: 'https://www.datadoghq.com/blog/1k-integrations-milestone/'
+    tag: 'Blog'
+    text: 'Scaling Datadog observability: 1,000 integrations and counting'
 ---
 
 ## Overview
@@ -104,11 +108,11 @@ To better unify your environment, it is also recommended to configure the `env` 
 You can customize tag behavior for individual checks, overriding the global Agent-level settings:
 
 1. **Disable Autodiscovery tags**
-    
+
     By default, the metrics reported by integrations include tags automatically detected from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags associated with the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`.
 
 1. **Set tag cardinality per integration check**
-    
+
     You can define the level of tag cardinality (low, orchestrator, or high) on a per-check basis using the `check_tag_cardinality` parameter. This overrides the global tag cardinality setting defined in the Agent configuration.
 
 ```yaml
@@ -121,6 +125,8 @@ check_tag_cardinality: low
 
 # Rest of the config here
 ```
+
+For containerized environments, you can also set these parameters through [Kubernetes Autodiscovery annotations][47].
 
 ### Validation
 
@@ -271,3 +277,4 @@ tagging
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /account_management/rbac/permissions/#integrations
 [46]: /integrations/
+[47]: /containers/kubernetes/integrations/#tag-cardinality

@@ -65,7 +65,7 @@ tile:
 
 OpenMetrics 또는 Prometheus 엔드포인트에서 커스텀 메트릭을 추출합니다.
 
-<div class="alert alert-warning">본 통합으로 수집한 모든 메트릭은 <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">커스텀 메트릭</a>으로 간주됩니다.</div>
+<div class="alert alert-danger">본 통합으로 수집한 모든 메트릭은 <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">커스텀 메트릭</a>으로 간주됩니다.</div>
 
 본 통합은 [Prometheus 익스포전 형식][1]과 [OpenMetrics 사양][2] 모두와 호환됩니다.
 

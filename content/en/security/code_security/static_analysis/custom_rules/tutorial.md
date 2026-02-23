@@ -1,6 +1,6 @@
 ---
 description: Learn how to define a custom rule within Datadog.
-title: Static Code Analysis Custom Rule Tutorial
+title: Static Code Analysis Custom Rule Creation Tutorial
 ---
 
 

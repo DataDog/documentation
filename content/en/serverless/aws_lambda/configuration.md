@@ -41,6 +41,11 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Instrument AWS Lambda with the OpenTelemetry API](#instrument-aws-lambda-with-the-opentelemetry-api)
+- [Using Datadog Lambda Extension v67+](#using-datadog-lambda-extension-v67)
+- [Configure Auto-linking for DynamoDB PutItem](#configure-auto-linking-for-dynamodb-putitem)
+- [Visualize and model AWS services correctly](#visualize-and-model-aws-services-by-resource-name)
+- [Send logs to Observability Pipelines](#send-logs-to-observability-pipelines)
+- [Reload API key secret periodically](#reload-api-key-secret-periodically)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -273,6 +278,8 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
+To collect payloads from AWS services, see [Capture Requests and Responses from AWS Services][54].
+
 
 
 ## Collect traces from non-Lambda resources
@@ -481,7 +488,7 @@ Set the environment variable `DD_TRACE_ENABLED` to `false` on your Lambda functi
 
 If you are using the [Lambda extension][2] to collect traces and logs, Datadog automatically adds the AWS Lambda request ID to the `aws.lambda` span under the `request_id` tag. Additionally, Lambda logs for the same request are added under the `lambda.request_id` attribute. The Datadog trace and log views are connected using the AWS Lambda request ID.
 
-If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]).
+If you are using the [Forwarder Lambda function][4] to collect traces and logs, `dd.trace_id` is automatically injected into logs (enabled by default with the environment variable `DD_LOGS_INJECTION`). The Datadog trace and log views are connected using the Datadog trace ID. This feature is supported for most applications using a popular runtime and logger (see the [support by runtime][24]).
 
 If you are using a runtime or custom logger that isn't supported, follow these steps:
 - When logging in JSON, you need to obtain the Datadog trace ID using `dd-trace` and add it to your logs under the `dd.trace_id` field:
@@ -627,17 +634,9 @@ If your Lambda functions are configured to use code signing, you must add Datado
 
 Datadog's Signing Profile ARN:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
-```
-{{< /site-region >}}
 
 
 ## Migrate to the Datadog Lambda extension
@@ -722,6 +721,81 @@ You can use this approach if, for example, your code has already been instrument
 
 To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][48] for more details.
 
+## Using Datadog Lambda Extension v67+
+Version 67+ of [the Datadog Extension][53] is optimized to significantly reduce cold start duration.
+To use the optimized extension, set the `DD_SERVERLESS_APPSEC_ENABLED` environment variable to `false`.
+When the `DD_SERVERLESS_APPSEC_ENABLED` environment variable is set to `true`, the Datadog Extension defaults to the fully compatible older version. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][54] and tagging your issue with `version/next`.
+
+## Configure Auto-linking for DynamoDB PutItem
+_Available for Python and Node.js runtimes_.
+When segments of your asynchronous requests cannot propagate trace context, Datadog's [Span Auto-linking][55] feature automatically detects linked spans. 
+To enable Span Auto-linking for [DynamoDB Change Streams][56]' `PutItem` operation, configure primary key names for your tables.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+ddtrace.config.botocore['dynamodb_primary_key_names_for_tables'] = {
+    'table_name': {'key1', 'key2'},
+    'other_table': {'other_key'},
+}
+```
+{{% /tab %}}
+{{% tab "Node.js" %}}
+```js
+// Initialize the tracer with the configuration
+const tracer = require('dd-trace').init({
+  dynamoDb: {
+    tablePrimaryKeys: {
+      'table_name': ['key1', 'key2'],
+      'other_table': ['other_key']
+    }
+  }
+})
+```
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+```sh
+export DD_BOTOCORE_DYNAMODB_TABLE_PRIMARY_KEYS='{
+    "table_name": ["key1", "key2"],
+    "other_table": ["other_key"]
+}'
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+This enables DynamoDB `PutItem` calls to be instrumented with span pointers. Many DynamoDB API calls do not include the item's primary key fields as separate values, so they need to be provided to the tracer separately. The configuration above is structured as a dictionary (`dict`) or object keyed by the table names as strings (`str`). Each value is the set of primary key field names (as strings) for the associated table. The set can have exactly one or two elements, depending on the table's primary key schema.
+
+## Visualize and model AWS services by resource name
+
+These versions of the [Node.js][50], [Python][51], and [Java][52] Lambda layers released changes to correctly name, model and visualize AWS managed services. 
+
+Service names reflect the actual AWS resource name rather than only the AWS service:
+* `aws.lambda` → `[function_name]`
+* `aws.dynamodb` → `[table_name]`
+* `aws.sns` → `[topic_name]`
+* `aws.sqs` → `[queue_name]`
+* `aws.kinesis` → `[stream_name]`
+* `aws.s3` → `[bucket_name]`
+* `aws.eventbridge` → `[event_name]`
+
+You may prefer the older service representation model if your dashboards and monitors rely on the legacy naming convention. To restore the previous behavior, set the environment var: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
+
+The updated service modeling configuration is recommended.
+
+## Send logs to Observability Pipelines
+
+{{% observability_pipelines/lambda_extension_source %}}
+
+See [Send Datadog Lambda Extension Forwarder Logs to Observability Pipelines][58] for more information.
+
+## Reload API key secret periodically
+
+If you specify the Datadog API key using `DD_API_KEY_SECRET_ARN`, you can also set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to periodically reload the secret. For example, if you set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, then the secret is reloaded when the API key is needed to send data, and it has been more than 43200 seconds since the last load.
+
+Example use case: For security, every day (86400 seconds), the API key is rotated and the secret is updated to the new key, and the old API key is kept valid for another day as a grace period. In this case, you can set `DD_API_KEY_SECRET_RELOAD_INTERVAL` to `43200`, so the API key is reloaded during the grace period of the old key.
+
+This is available for version 88+ of the Datadog Lambda Extension.
+
 ## Troubleshoot
 
 If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][39].
@@ -780,4 +854,12 @@ If you have trouble configuring your installations, set the environment variable
 [47]: /logs/
 [48]: /tracing/trace_collection/otel_instrumentation/
 [49]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-
+[50]: https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.127.0
+[51]: https://github.com/DataDog/datadog-lambda-python/releases/tag/v8.113.0
+[52]: https://github.com/DataDog/datadog-lambda-java/releases/tag/v24
+[53]: https://github.com/DataDog/datadog-lambda-extension
+[54]: https://github.com/DataDog/datadog-lambda-extension/issues
+[55]: /serverless/aws_lambda/distributed_tracing/#span-auto-linking
+[56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+[57]: /tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
+[58]: /observability_pipelines/sources/lambda_extension/

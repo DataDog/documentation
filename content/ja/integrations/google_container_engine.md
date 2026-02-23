@@ -25,7 +25,7 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 このインテグレーションは非推奨です。代わりに、<a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">Google Kubernetes Engine インテグレーション</a>のドキュメントをご覧ください。非推奨のメトリクスについては、<a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">Google Cloud のメトリクス</a>のドキュメントを参照してください。
 </div>
 

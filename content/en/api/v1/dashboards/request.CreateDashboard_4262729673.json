@@ -14,7 +14,8 @@
           "sum"
         ],
         "time": {
-          "live_span": "5m"
+          "live_span": "5m",
+          "hide_incomplete_cost_data": true
         },
         "type": "timeseries",
         "requests": [

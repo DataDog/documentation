@@ -4,6 +4,9 @@ description: After starting to ingest costs in Cloud Cost Management, set up bud
 aliases:
 - /cloud_cost_management/budgets/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
@@ -34,7 +37,7 @@ To create a basic budget:
    - **Budget Name**: Enter a name for your budget.
    - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
    - **End Date**: Set an end date for the budget (can be in the future).
-   - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
+   - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, Oracle Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
 1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the **copy** button.
@@ -61,7 +64,7 @@ To create a hierarchical budget:
    - **Budget Name**: Enter a name for your budget.
    - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
    - **End Date**: Set an end date for the budget (can be in the future).
-   - **Scope to Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
+   - **Scope to Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, Oracle Cloud, or other SaaS (including Datadog or custom costs).
    - **Parent Level**: Select the parent-level tag.
    - **Child Level**: Select child-level tag.
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
@@ -124,7 +127,12 @@ You can add a budget to dashboards in two ways:
 
   {{< img src="cloud_cost/budgets/budgets-widgets.png" alt="Search and add the Budget Summary widget from any dashboard"  style="width:100%;">}}
 
+## Create an alert for your budget
+
+Learn how to [create a budget-based monitor][2].
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
+[2]: /cloud_cost_management/cost_changes/monitors/

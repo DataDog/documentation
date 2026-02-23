@@ -72,7 +72,7 @@ For example, if the **UserId** username style is used and the Git author usernam
 the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11],
 and can be modified in the VCS Root settings.
 
-<div class="alert alert-danger"><strong>Note:</strong> The Git author email is used for
+<div class="alert alert-warning"><strong>Note:</strong> The Git author email is used for
 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">billing</a> purposes,
 therefore there might be cost implications when username styles not providing email
 (<strong>UserId</strong> or <strong>Author Name</strong>) are used. <a href="https://docs.datadoghq.com/help/" target="_blank">Reach out to the Datadog support team</a> if you have any questions about your use case.

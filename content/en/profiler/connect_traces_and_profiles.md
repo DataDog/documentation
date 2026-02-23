@@ -40,7 +40,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#requirements">use the Datadog profiler</a> instead of Java Flight Recorder (JFR).
 </div>
 
@@ -125,7 +125,7 @@ With the span timeline view, you can:
 - Isolate time-consuming methods
 - Sort out complex interactions between threads
 - Surface runtime activity that impacted the request
-- Leverage [Automated Analysis][1] to highlight performance issues directly in the view, such as oversized thread pools or GC contention
+- Use [Automated Analysis][1] to highlight performance issues directly in the view, such as oversized thread pools or GC contention
 
 [1]: /profiler/automated_analysis/
 

@@ -1,5 +1,6 @@
 ---
 title: Rate
+description: Calculate rates, derivatives, and time differences to analyze metric changes per second, minute, or hour.
 aliases:
     - /graphing/functions/rate/
 further_reading:

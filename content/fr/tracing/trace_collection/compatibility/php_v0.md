@@ -6,7 +6,7 @@ further_reading:
   text: Instrumenter votre application
 title: (Obsolète) Exigences de compatibilité PHP
 ---
-<div class="alert alert-warning">Cette documentation concerne le traceur PHP v0.x. Si vous recherchez la documentation du traceur PHP v1.x, consultez la dernière documentation la plus récente relative aux <a href="/tracing/trace_collection/compatibility/php/">exigences de compatibilité PHP</a>.</div>
+<div class="alert alert-danger">Cette documentation concerne le traceur PHP v0.x. Si vous recherchez la documentation du traceur PHP v1.x, consultez la dernière documentation la plus récente relative aux <a href="/tracing/trace_collection/compatibility/php/">exigences de compatibilité PHP</a>.</div>
 
 ## Politique de prise en charge du runtime pour PHP
 

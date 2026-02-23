@@ -24,7 +24,7 @@ title: Instrumentación personalizada de iOS y tvOS con la API de OpenTelemetry
 
 ## Rastreo de aplicaciones iOS con OpenTelemetry
 
-1. Declara la biblioteca como una dependencia en función de tu gestor de paquetes:
+1. Declara la librería como una dependencia en función de tu gestor de paquetes:
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -70,7 +70,7 @@ DatadogTrace.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Inicializa la biblioteca con el contexto de tu aplicación y tu [token de cliente de Datadog][9]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][10] para configurar la biblioteca `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
+2. Inicializa la librería con el contexto de tu aplicación y tu [token de cliente de Datadog][9]. Por razones de seguridad, debes utilizar un token de cliente: no puedes utilizar [claves de API de Datadog][10] para configurar la librería `dd-sdk-ios`, ya que estarían expuestas del lado del cliente en el código de bytes IPA de la aplicación iOS.
 
 Para más información sobre cómo configurar un token de cliente, consulta la [documentación sobre tokens de cliente][11].
 

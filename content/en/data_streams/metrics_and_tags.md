@@ -4,12 +4,19 @@ aliases:
   - "/data_streams/guide/metrics-and-tags"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 This document discusses the following Data Streams Monitoring metrics and their tags:
 
 - `data_streams.latency`
 - `data_streams.kafka.lag_seconds`
 - `data_streams.kafka.lag_messages`
 - `data_streams.sqs.dead_letter_queue.messages`
+- `data_streams.payload_size`
 
 ### data_streams.latency
 
@@ -134,6 +141,10 @@ This metric represents the lag (in offsets) between the last produce and consume
 `consumer_group`
 : The Kafka consumer group.
 
+### data_streams.payload_size
+
+This metric is a distribution metric representing the message size distribution in bytes of messages going through the Data Streams.
+The tags are the same as for the `data_streams.latency` metric.
 
 ### data_streams.sqs.dead_letter_queue.messages
 

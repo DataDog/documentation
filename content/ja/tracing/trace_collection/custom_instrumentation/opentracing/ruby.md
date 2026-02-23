@@ -10,7 +10,7 @@ title: Ruby OpenTracing インスツルメンテーション
 type: multi-code-lang
 ---
 
-<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/ruby/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータを処理する</a>ためのベータサポートをお試しください。</div>
+<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/ruby/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータ処理</a>をお試しください。</div>
 
 OpenTracing で Datadog をセットアップするには、詳細について Ruby [OpenTracing のクイックスタート][1]を参照してください。
 

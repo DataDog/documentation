@@ -22,7 +22,7 @@ title: Información sobre amenazas
 {{< product-availability >}}
 
 ## Información general
-La información sobre amenazas es información sobre reputación que ayuda a los responsables a tomar decisiones informadas sobre ataques y riesgos. 
+La información sobre amenazas es información sobre reputación que ayuda a los responsables a tomar decisiones informadas sobre ataques y riesgos.
 
 Datadog clasifica los indicadores de información sobre amenazas comerciales, de código abierto y propias en categorías e intenciones. La información sobre amenazas se actualiza al menos una vez al día, por fuente. Estos datos se utilizan para enriquecer logs y trazas (traces) con información de reputación relevante.
 
@@ -52,7 +52,7 @@ Con la información sobre amenazas, la reputación es clave, pero debe examinars
 
 La información sobre amenazas utilizada por las [reglas de detección][1] debe hacer referencia a las claves de Datadog, como categoría (`@threat_intel.results.category`) e intención (`@threat_intel.results.intention`). No deben utilizarse otras claves.
 
-## Transparencia en la información sobre amenazas 
+## Transparencia en la información sobre amenazas
 
 Datadog garantiza la transparencia proporcionando enlaces externos a fuentes externas de información sobre amenazas asociadas a una detección. La información sobre amenazas clasificada por Datadog se ingiere en la plataforma Datadog para su enriquecimiento y para la detección. Datadog no envía datos de clientes a fuentes de información sobre amenazas.
 
@@ -60,11 +60,11 @@ Las detecciones y enriquecimientos son accesibles en la interfaz de usuario y el
 
 ## Facetas de la información sobre amenazas
 
-Las fuentes, categorías e intenciones están disponibles como facetas y filtros en los exploradores de productos relevantes. 
+Las fuentes, categorías e intenciones están disponibles como facetas y filtros en los exploradores de productos relevantes.
 
 ### Fuentes de información sobre amenazas
 
-| Origen | Categoría | Casos de uso de fuentes | Productos primarios | 
+| Origen | Categoría | Casos de uso de fuentes | Productos primarios |
 |--------|------------|-----------|------------------|
 | Investigación de amenazas Datadog| analizadores, exploits | Honeypots centrados en amenazas específicas del software | ASM y CWS |
 | [Spur](https://spur.us/) | residential_proxy | Proxies asociados al relleno de credenciales y el fraude | ASM y Cloud SIEM |
@@ -79,7 +79,7 @@ Las fuentes, categorías e intenciones están disponibles como facetas y filtros
 |----------|----------|--------------|----------|------------------|
 | residential_proxy | sospechoso | Direcciones IP | Reputación del relleno de credenciales y el fraude | ASM y Cloud SIEM |
 | botnet_proxy | sospechoso | Direcciones IP | Reputación por formar parte de una red de bots y contribuir a ataques distribuidos | ASM y Cloud SIEM |
-| malware | malicioso | versiones de bibliotecas de aplicación, hashes de archivos | Paquetes maliciosos y comunicación con pools de minería| CWS |
+| malware | malicioso | versiones de librerías de aplicación, hashes de archivos | Paquetes maliciosos y comunicación con pools de minería| CWS |
 | analizador | sospechoso | Direcciones IP | Reputación de los analizadores | ASM y Cloud SIEM |
 | hosting_proxy | sospechoso | Direcciones IP | IP de centros de datos con reputación de abuso, como por ejemplo para ataques distribuidos de relleno de credenciales | ASM y Cloud SIEM |
 | Tor | sospechoso | Direcciones IP  | Infracciones de políticas corporativas por actividad de usuario | ASM y Cloud SIEM |
@@ -88,19 +88,19 @@ Las fuentes, categorías e intenciones están disponibles como facetas y filtros
 | Intención | Caso de uso |
 |--------|----------|
 | benigno | VPN corporativas y enriquecimiento informativo |
-| sospechoso | Baja reputación | 
-| malicioso | Reputación maliciosa | 
+| sospechoso | Baja reputación |
+| malicioso | Reputación maliciosa |
 
 
 ## Tipos de entidades
-| Tipo de entidad | Ejemplo | Casos prácticos | 
+| Tipo de entidad | Ejemplo | Casos prácticos |
 |-------------|---------|-----------------------------|
-| Direcciones IP | 128.66.0.1 | Identificar direcciones IP asociadas a ataques, mando y control, y actividad de análisis | 
+| Direcciones IP | 128.66.0.1 | Identificar direcciones IP asociadas a ataques, mando y control, y actividad de análisis |
 | dominios | example.com, subdomain.example.com | Dominios asociados a usos maliciosos. A menudo utilizados con malware como mando y control. |
 | versiones de paquetes de aplicaciones | (example_package, 1.0.0) | Identificar paquetes maliciosos descargados de PyPi |
 | hashes de archivos [SHA1, SHA256]. | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identificar un archivo distinto asociado a un programa malicioso o comprometido |</br>
 
-**Nota**: Las fuentes y categorías de información sobre amenazas no son configurables en este momento. 
+**Nota**: Las fuentes y categorías de información sobre amenazas no son configurables en este momento.
 
 ## Referencias adicionales
 

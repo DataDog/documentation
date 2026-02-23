@@ -15,10 +15,11 @@ Network Device Monitoring no incluye ningún eventos.
 
 ## Métricas
 
-Network Device Monitoring envía métricas especificados en el espacio de nombres `snmp.*`. Las métricas recopiladas están determinadas por el `[configured profile]`.
-Si las métricas que quieres no están en la siguiente lista, busca el OID y su nombre en la [base de datos de referencia global de OID][1] para añadir a tus perfiles.
+Network Device Monitoring envía las métricas especificadas en el espacio de nombres `snmp.*`. Las métricas recopiladas vienen determinadas por el [perfil configurado][2].
+Si las métricas que buscas no se encuentran en la siguiente lista, busca el OID y su nombre en la [base de datos de referencia global de OID][1] para añadirlos a tus perfiles.
 
 {{< get-metrics-from-git "snmp" >}}
 
 
 [1]: http://oidref.com
+[2]: /es/network_monitoring/devices/profiles

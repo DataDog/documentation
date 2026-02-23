@@ -5,8 +5,12 @@ title: (レガシー) ネットワーキング
 ---
 
 {{< site-region region="gov" >}}
-Observability Pipelines は、US1-FED Datadog サイトでは利用できません。このガイドは、大規模な本番環境レベルのデプロイメント向けです。
+<div class="alert alert-danger">Observability Pipelines は、US1-FED Datadog サイトでは利用できません。</div>
 {{< /site-region >}}
+
+<div class="alert alert-info">
+このガイドは、大規模な本番環境レベルのデプロイメント向けです。
+</div>
 
 ## ネットワークトポロジー
 

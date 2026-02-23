@@ -1,5 +1,6 @@
 ---
 title: Docker Tag Extraction
+description: Configure automatic tag extraction from Docker container labels and environment variables
 aliases:
 - /agent/docker/tag
 further_reading:

@@ -50,7 +50,7 @@ To create a notification rule, specify the conditions under which the rule shoul
    - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.
 1. Click **Add Recipient**.
 1. Specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notification channels][2] for more information.
-1. If you chose **Signal** in step 3, to test notifications for this rule, click **Test Notifications**.</br >**Note**: Testing notifications isn't available for finding notifications.
+1. To send test notifications for this rule, click **Test Notifications**.
   1. In the modal, select the security products you want to test.
   1. Click **Run Test**.
 1. Click **Save**.

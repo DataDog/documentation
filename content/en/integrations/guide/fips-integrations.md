@@ -49,7 +49,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 | Zookeeper               | The `use_tls` option must be enabled through the integration configuration.                                                                                  |
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Configuring the <strong>IIS integration<strong> to query remote systems is discouraged. It relies on a Windows API for cryptography, which Datadog cannot control.
 </div>
 

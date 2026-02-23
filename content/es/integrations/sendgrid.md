@@ -77,7 +77,7 @@ Twilio SendGrid es una plataforma de correo electrónico que las empresas utiliz
 2. Abre el menú desplegable **Settings** (Configuración).
 3. Haz clic en **API Keys** (Claves de API).
 4. Haz clic en **Create API Key** (Crear clave API) en la parte superior derecha.
-5. Rellena el _Nombre de la clave de API_. Selecciona **Full Access** (Acceso total) o, para acceso restringido,  **Stats** - **Read Access** and **User Account** - **Read Access** (Estadísticas - Acceso de lectura y Cuenta de usuario - Acceso de lectura).
+5. Rellena el campo _API Key Name_ (Nombre de la clave de API). Selecciona **Full Access** (Acceso total) o, para acceso restringido, **Stats** - **Global Stats**, **Stats** - **Stats Overview** (Estadísticas - Estadísticas globales, Estadísticas - Resumen de estadísticas) y **User Account** - **Timezone** (Cuenta de usuario - Zona horaria).
 6. Copia la clave de API en un lugar seguro. La clave de API será necesaria cuando configures la integración de SendGrid en la interfaz de usuario de Datadog.
 
 ### Configuración

@@ -146,14 +146,16 @@ O bien modifica el archivo `package.json` si sueles iniciar una aplicación con 
 
 ### Compatibilidad con Worker
 
-| Módulo                     | Versiones | Tipo de soporte técnico    | Notas                                                  |
-| -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `>=1.2`  | Totalmente compatible |                                                        |
-| [amqp10][43]               | `>=3`    | Totalmente compatible | Compatible con brokers AMQP 1.0 (como ActiveMQ o Apache Qpid) |
-| [amqplib][44]              | `>=0.5`  | Totalmente compatible | Compatible con brokers AMQP 0.9 (como RabbitMQ o Apache Qpid) |
-| [generic-pool][45]         | `>=2`    | Totalmente compatible |                                                        |
-| [kafkajs][46]         | `>=1.4`    | Totalmente compatible |                                                        |
-| [rhea][48]                 | `>=1`    | Totalmente compatible |                                                        |
+| Módulo                               | Versiones  | Tipo de soporte técnico    | Notas                                                  |
+| --------------------------           | --------  | --------------- | ------------------------------------------------------ |
+| [@azure/service-bus][68]             | `>=7.9.2` | Totalmente compatible |                                                        |
+| [@confluentinc/kafka-javascript][67] | `>=1`     | Totalmente compatible |                                                        |
+| [@google-cloud/pubsub][42]           | `>=1.2`   | Totalmente compatible |                                                        |
+| [amqp10][43]                         | `>=3`     | Totalmente compatible | Compatible con brokers AMQP 1.0 (como ActiveMQ o Apache Qpid) |
+| [amqplib][44]                        | `>=0.5`   | Totalmente compatible | Compatible con brokers AMQP 0.9 (como RabbitMQ o Apache Qpid) |
+| [generic-pool][45]                   | `>=2`     | Totalmente compatible |                                                        |
+| [kafkajs][46]                        | `>=1.4`   | Totalmente compatible |                                                        |
+| [rhea][48]                           | `>=1`     | Totalmente compatible |                                                        |
 
 ### Compatibilidad con SDK
 
@@ -190,7 +192,7 @@ O bien modifica el archivo `package.json` si sueles iniciar una aplicación con 
 
 Para más información o para debatir [deja un comentario en este tema de github][62] o [ponte en contacto con el servicio de soporte técnico][3] para seguir hablando.
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -258,3 +260,5 @@ Para más información o para debatir [deja un comentario en este tema de github
 [64]: https://github.com/openai/openai-node
 [65]: https://github.com/dotansimha/graphql-yoga
 [66]: https://js.langchain.com/
+[67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
+[68]: https://www.npmjs.com/package/@azure/service-bus

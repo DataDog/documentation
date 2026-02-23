@@ -1,5 +1,6 @@
 ---
 title: Datadog-Heroku Buildpack troubleshooting
+description: "Debug Heroku deployments using Datadog buildpack with the agent-wrapper command, custom metrics testing, and log collection."
 aliases:
   - /agent/faq/heroku-troubleshooting/
 ---

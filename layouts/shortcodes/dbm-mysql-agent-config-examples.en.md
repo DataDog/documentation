@@ -67,7 +67,22 @@ instances:
 
 ### Collecting schemas
 
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option.
+<div class="alert alert-danger">Datadog Agent v7.65+ is required for MySQL schema collection.</div>
+
+To enable this feature, use the `collect_schemas` option. See the sample [mysql.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example) for more details.
+
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: localhost
+    port: 3306
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    collect_schemas:
+      enabled: true
+```
+**Note**: For Agent v7.68 and below, use `schemas_collection` instead of `collect_schemas`.
 
 **Note**: To collect schemas for a table, MySQL requires that the Datadog Agent has SELECT access for it. This is a [MySQL-enforced restriction](https://dev.mysql.com/doc/refman/8.4/en/information-schema-introduction.html#information-schema-privileges). Without SELECT access, the table will not appear in metadata queries.
 

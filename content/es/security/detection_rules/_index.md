@@ -23,44 +23,68 @@ products:
   name: Cloud SIEM
   url: /security/cloud_siem/
 - icon: cloud-security-management
-  name: Cloud Security Management
+  name: Cloud Security
   url: /security/cloud_security_management/
 - icon: app-sec
-  name: Application Security Management
+  name: App and API Protection
   url: /security/application_security/
+- icon: cloud-security-management
+  name: Workload Protection
+  url: /security/workload_protection/
 title: Reglas de detección
 ---
 
 {{< product-availability >}}
 
-Las reglas de detección definen una lógica condicional que se aplica a todas las configuraciones de logs y de la nube. Cuando al menos un caso definido en una regla coincide durante un periodo determinado, se genera una señal de seguridad. Puedes ver estas señales en el [Signals Explorer][1].
+Las reglas de detección definen una lógica condicional que se aplica a todas las configuraciones de logs y de la nube. Cuando al menos un caso definido en una regla coincide durante un periodo determinado, se genera una señal de seguridad. Puedes ver estas señales en el [Explorador de señales][1].
 
 ## Reglas de detección predefinidas
 
-Datadog ofrece [reglas de detección predefinidas][2] para detectar técnicas de ataque y posibles errores de configuración. Cuando se publican nuevas reglas de detección, se importan automáticamente a tu cuenta, a tu biblioteca de Application Security Management y al Agent, según tu configuración.
+Datadog ofrece [reglas de detección predefinidas][2] para detectar técnicas de ataque y posibles errores de configuración. Cuando se publican nuevas reglas de detección, se importan automáticamente a tu cuenta, a tu biblioteca de App and API Protection y al Agent, según tu configuración.
 
 Las reglas predefinidas están disponibles para los siguientes productos de seguridad:
 
 - [Cloud SIEM][3] utiliza la detección de logs para analizar logs ingeridos en tiempo real.
-- Cloud Security Management (CSM):
-    - [CSM Misconfigurations][4] utiliza reglas de detección de configuración en la nube y configuración de infraestructura para escanear el estado de tu entorno en la nube.
-    - [CSM Threats][5] utiliza las reglas de Datadog Agent y de detección para Monitor y evaluar activamente la actividad del sistema.
-    - [CSM Identity Risks][6] utiliza reglas de detección para detectar riesgos basados en IAM en tu infraestructura en la nube.
-- [Application Security Management][7] (ASM) aprovecha Datadog [APM][8], el [Datadog Agent ][9] y las reglas de detección para detectar amenazas en tu entorno de aplicación.
+- Cloud Security:
+    - [Cloud Security Misconfigurations][4] utiliza reglas de detección de configuración en la nube y configuración de infraestructura para analizar el estado de tu entorno en la nube.
+    - [Cloud Security Identity Risks][6] utiliza reglas de detección para detectar riesgos basados en IAM en tu infraestructura de nube.
+- [Workload Protection][5] utiliza las reglas del Agent y de detección para monitorizar activamente y evaluar la actividad del sistema.
+- [App and API Protection][7] (AAP) aprovecha Datadog [APM][8], el [Datadog Agent][9] y las reglas de detección para detectar amenazas en el entorno de tu aplicación.
 
-## Normas de detección beta
+## Mapa de MITRE ATT&CK
+
+{{< product-availability names="Cloud SIEM,App and API Protection,Workload Protection" >}}
+
+MITRE ATT&CK es un marco que ayuda a las organizaciones a comprender cómo actúan los ciberatacantes. Mapea lo siguiente:
+
+- **Táctica:** el "por qué" de un ataque. Son los objetivos generales, como obtener acceso inicial, ejecutar código malicioso o robar datos.
+- **Técnicas:** el "cómo" de un ataque. Son las acciones específicas que realiza un atacante para lograr una táctica, como utilizar el phishing para entrar en un sistema o explotar una vulnerabilidad en el software.
+
+Mediante el mapeo de tácticas y técnicas, MITRE ATT&CK proporciona a los equipos de seguridad un lenguaje común para comunicar las amenazas y preparar mejor las defensas.
+
+Para utilizar el mapa de ATT&CK de MITRE, haz lo siguiente:
+
+1. Abrir reglas de detección en [SIEM][16] o [Workload Protection][17].
+2. Selecciona el mapa **MITRE ATT&CK**.
+3. Selecciona uno o varios productos en el filtro <i class="icon-filter"></i>.
+4. Revisa el mapa para ver lo siguiente:
+   - Evaluar la cobertura: determina qué técnicas de ataque están bien cubiertas y cuáles están poco vigiladas.
+   - Priorizar la creación de reglas: centrarse en la creación de reglas de detección para técnicas con baja o nula cobertura.
+   - Racionalización de la gestión de reglas: gestionar y actualizar las reglas de detección, asegurándote de que se ajustan a la información sobre amenazas más reciente.
+El mapa de ATT&CK de MITRE está disponible en SIEM o Workload Protection, pero puedes seleccionar Application and API Protection en el filtro. Application and API Protection se incluye en el mapa de MITRE ATT&CK para una cobertura de seguridad integral.
+## Reglas de detección beta
 
 El equipo de investigación de seguridad de Datadog añade continuamente nuevas reglas de detección de seguridad predefinidas. Aunque el objetivo es ofrecer detecciones de alta calidad con el lanzamiento de integraciones u otras nuevas funciones, a menudo es necesario observar el rendimiento de la detección a escala antes de poner la regla a disposición general. De este modo, el equipo de investigación de seguridad de Datadog dispone del tiempo necesario para perfeccionar o eliminar las posibilidades de detección que no cumplan nuestras normas.
 
 ## Reglas de detección personalizadas
 
-Puede haber situaciones en las que debes personalizar una regla según tu entorno o carga de trabajo. Por ejemplo, si usas ASM, es posible que desees personalizar una regla de detección que detecte a los usuarios que realizan acciones confidenciales desde una geolocalización en la que no opera tu empresa.
+Puede haber situaciones en las que necesites personalizar una regla según tu entorno o carga de trabajo. Por ejemplo, si utilizas AAP, es posible que quieras personalizar una regla de detección que detecte a los usuarios que realizan acciones confidenciales desde una geolocalización en la que no opera tu empresa.
 
 Para [crear reglas personalizadas](#create-detection-rules), puedes clonar las reglas por defecto y editar las copias, o crear tus propias reglas desde cero.
 
 ## Buscar y filtrar reglas de detección
 
-Para ver las reglas de detección predefinidas y personalizadas en Datadog, ve a la página [**Security Settings**][10] (Configuración de seguridad). Las reglas aparecen en páginas separadas para cada producto (Application Security, Cloud Security Management y Cloud SIEM).
+Para ver las reglas de detección predefinidas y personalizadas en Datadog, ve a la página [**Parámetros de seguridad**][10]. Las reglas aparecen en páginas separadas para cada producto (Application Security, Cloud Security Management y Cloud SIEM).
 
 Para buscar y filtrar las reglas, utiliza el cuadro de búsqueda y las facetas para consultar por valor. Por ejemplo, para mostrar solo las reglas de un tipo de regla determinado, pasa el ratón por encima del tipo de regla y selecciona `only`. También puedes filtrar por facetas como `source` y `severity` al investigar y clasificar las incidencias entrantes.
 
@@ -73,9 +97,9 @@ Para crear una regla de detección personalizada, haz clic en el botón **New Ru
 Para obtener instrucciones detalladas, consulta los siguientes artículos:
 
 - [Cloud SIEM][11]
-- [ASM][12]
-- [CSM Misconfigurations][13]
-- [CSM Threats][14]
+- [AAP][12]
+- [Cloud Security Misconfigurations][13]
+- [Workload Protection][14]
 
 ## Gestionar las reglas de detección
 
@@ -109,13 +133,36 @@ Para eliminar una regla personalizada, haz clic en el menú vertical de tres pun
 
 **Nota**: Solo puedes eliminar reglas personalizadas. Para eliminar una regla predeterminada, debes [desactivarla](#enable-or-disable-rules).
 
+### Consultar el historial de versiones de una regla
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="Historial de versiones de un compromiso de token de acceso GitHub OAuth" style="width:80%;" >}}
+
+Utiliza el historial de versiones de reglas para:
+- Consulta las versiones anteriores de una regla de detección y entiende los cambios a lo largo del tiempo.
+- Descubre quién realizó los cambios para mejorar la colaboración.
+- Compara versiones con diferencias para analizar las modificaciones y el impacto de los cambios.
+
+Para ver el historial de versiones de una regla:
+1. Ve a la página [Parámetros de seguridad][15]. En el panel de navegación izquierdo:
+    - Para AAP: Haz clic en **App and API Protection** y luego en **Detection Rules** (Reglas de detección).
+    - Para Cloud Security: Haz clic en **Cloud Security** y luego en **Threat Detection Rules** (Reglas de detección de amenazas).
+    - Para Cloud SIEM: Haz clic en **Cloud SIEM** y luego en **Detection Rules** (Reglas de detección).
+1. Haz clic en la regla que te interese.
+1. En el editor de reglas, haz clic en **Version History** (Historial de versiones) para ver los cambios anteriores.
+1. Haz clic en una versión concreta para ver los cambios realizados.
+1. Haz clic en **Open Version Comparison** (Abrir comparación de versiones) para ver los cambios entre versiones.
+1. Selecciona las dos versiones que quieres comparar.
+    - Los datos resaltados en rojo indican datos modificados o eliminados.
+    - Los datos resaltados en verde indican los datos añadidos.
+1. Haz clic en **Unified** (Unificado) si quieres ver la comparación en el mismo panel.
+
 ### Restringir permisos de edición
 
 {{% security-products/detection-rules-granular-access %}}
 
 ### Ver las señales generadas
 
-Para ver las señales de seguridad de una regla en el [Signals Explorer][1], haz clic en el menú vertical de tres puntos y selecciona **View generated signals** (Ver señales generadas). Esto es útil cuando se correlacionan señales a través de múltiples fuentes por regla, o cuando se completa una auditoría de reglas.
+Para ver las señales de seguridad de una regla en el [Explorador de señales][1], haz clic en el menú vertical de tres puntos y selecciona **View generated signals** (Ver señales generadas). Esto es útil cuando se correlacionan señales a través de múltiples fuentes por regla, o cuando se completa una auditoría de reglas.
 
 ### Exportar una regla como JSON
 
@@ -129,7 +176,7 @@ El proceso de obsolescencia de las reglas es el siguiente:
 
 1. La regla incluye una advertencia con la fecha de obsolescencia. En la interfaz de usuario, la advertencia se muestra en la:
     - Sección **Rule Details > Playbook** (Detalles de la regla > Guía) del panel lateral de señales
-    - Panel lateral de configuraciones erróneas (solo CSM Misconfigurations)
+    - Panel lateral de Misconfigurations (sólo Cloud Security Misconfigurations)
     - [Editor de reglas][10] para esa regla específica
 2. Una vez que la regla se vuelve obsoleta, transcurre un periodo de 15 meses antes de que se elimine la regla. Esto se debe al periodo de conservación de señales de 15 meses. Durante este tiempo, puedes volver a habilitar la regla [clonando la regla][2](#clone-a-rule) en la interfaz de usuario.
 3. Una vez eliminada la regla, ya no podrás clonarla ni volver a activarla.
@@ -142,13 +189,16 @@ El proceso de obsolescencia de las reglas es el siguiente:
 [2]: /es/security/default_rules/
 [3]: /es/security/cloud_siem/
 [4]: /es/security/cloud_security_management/misconfigurations/
-[5]: /es/security/threats/
+[5]: /es/security/workload_protection/
 [6]: /es/security/cloud_security_management/identity_risks/
 [7]: /es/security/application_security/
 [8]: /es/tracing/
 [9]: /es/agent/
 [10]: https://app.datadoghq.com/security/configuration/
-[11]: /es/security/cloud_siem/log_detection_rules/
-[12]: /es/security/application_security/threats/custom_rules/
+[11]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/
+[12]: /es/security/application_security/policies/custom_rules/
 [13]: /es/security/cloud_security_management/misconfigurations/custom_rules
-[14]: /es/security/threats/workload_security_rules?tab=host#create-custom-rules
+[14]: /es/security/workload_protection/workload_security_rules?tab=host#create-custom-rules
+[15]: https://app.datadoghq.com/security/configuration/
+[16]: https://app.datadoghq.com/security/rules
+[17]: https://app.datadoghq.com/security/workload-protection/detection-rules

@@ -18,9 +18,9 @@ Une session correspond à une visite de votre application Web ou mobile par un u
 
 Une session expire au bout de 15 minutes d'inactivité, et est limitée à 4 heures au total. Au bout de 4 heures, une nouvelle session est automatiquement créée.
 
-## Quelle est la durée des enregistrements Session Replay ?
+## Quelle est la durée des enregistrements de Session Replay ?
 
-La durée des enregistrements Session Replay varie selon la longueur de la session. Par exemple, si vos enregistrements ne durent qu'entre cinq et huit secondes, cela signifie que l'utilisateur a terminé sa session après cette durée.
+Les enregistrements Session Replay peuvent varier en fonction de la durée de la session. Par exemple, si vous observez des Session Replays courts de 5 à 8 secondes, cela signifie que l'utilisateur a terminé sa session après 5 à 8 secondes.
 
 ## Quelles sont les données recueillies par les solutions RUM et Session Replay de Datadog ?
 
@@ -50,8 +50,16 @@ L'abonnement aux solutions **Browser RUM et Session Replay** vous permet d'util
 
 - Pour désactiver la capture des enregistrements de session, consultez la [documentation relative à Session Replay][1].
 
+## Quel est l'impact des webviews dans les applications mobiles sur les enregistrements de session et la facturation ?
+
+Lorsqu'une application mobile contient des webviews et que vous avez instrumenté à la fois vos applications web et mobiles avec les SDK Datadog, un pont est créé. Tous les événements enregistrés par le SDK Browser sur l'application web chargée via la webview sont transmis au SDK Mobile. Ces événements sont associés à la session démarrée sur l'application mobile.
+
+En d'autres termes, seule la session mobile du RUM est visible sur Datadog et c'est donc la seule qui soit facturable.
+
+{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="Si vous avez instrumenté vos applications web et mobiles avec les SDK Datadog, seule la session mobile est facturée." >}}
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/session_replay/#how-do-you-disable-session-replay
+[1]: /fr/real_user_monitoring/session_replay/browser#disable-session-replay

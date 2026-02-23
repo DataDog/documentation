@@ -1,5 +1,6 @@
 ---
 title: Embeddable Graphs with Template Variables
+description: Create embeddable timeseries graphs with template variables using the Datadog API for external website integration.
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
     - /dashboards/faq/embeddable-graphs-with-template-variables/

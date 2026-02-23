@@ -1,9 +1,10 @@
 ---
 title: Getting Started with Browser Tests
+description: Create Datadog browser tests to monitor user journeys across devices and browsers. Record test scenarios, set up alerts, and validate business transactions.
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Getting Started with Synthetic Browser Testing'
 - link: '/synthetics/browser_tests'
   tag: 'Documentation'
   text: 'Learn more about browser tests'

@@ -16,7 +16,7 @@ assets:
     events:
       creates_events: true
     metrics:
-      check: datadog.marketplace.crest_data_systems.ivanti.uem
+      check: datadog.marketplace.crest_data_systems_ivanti_uem
       metadata_path: metadata.csv
       prefix: crest_data_systems
     service_checks:
@@ -50,7 +50,7 @@ name: crest_data_systems_ivanti_uem
 pricing:
 - billing_type: tag_count
   includes_assets: true
-  metric: datadog.marketplace.crest_data_systems.ivanti.uem
+  metric: datadog.marketplace.crest_data_systems_ivanti_uem
   product_id: ivanti-uem
   short_description: Devices(Endpoints) あたり/月。
   tag: デバイス
@@ -128,4 +128,4 @@ Ivanti UEM は、組織内のエンドポイント管理を簡素化および合
 [10]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [11]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-ivanti-uem" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-ivanti-uem" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

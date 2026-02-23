@@ -8,7 +8,7 @@ further_reading:
   text: Instrucciones detalladas de configuración de bibliotecas de rastreo
 - link: /tracing/trace_collection/compatibility/java/
   tag: Documentación
-  text: Marcos de trabajo compatibles Java para la instrumentación automática
+  text: Frameworks compatibles Java para la instrumentación automática
 - link: /tracing/trace_collection/custom_instrumentation/java/
   tag: Documentación
   text: Configuración manual de trazas (traces) y tramos (spans)
@@ -112,7 +112,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
    De este modo, la aplicación se instrumenta automáticamente con servicios Datadog.
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-warning">Los indicadores de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos ajenos a este tutorial. Para obtener información sobre lo que debes utilizar en tu entorno real, lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
 
 3. El [Etiquetado unificado de servicios][10] identifica servicios rastreados en diferentes versiones y entornos de despliegue, para que puedan correlacionarse en Datadog y puedas utilizarlos para buscar y filtrar. Las tres variables de entorno utilizadas para el etiquetado unificado de servicios son `DD_SERVICE`, `DD_ENV` y `DD_VERSION`. Para las aplicaciones desplegadas con Docker, estas variables de entorno pueden añadirse en el archivo Docker o en el archivo `docker-compose`.
    Para este tutorial, el archivo `all-docker-compose.yaml` ya tiene definidas estas variables de entorno:
@@ -327,7 +327,7 @@ El rastreo de una única aplicación es un buen comienzo, pero el verdadero valo
 
 El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que devuelve una fecha aleatoria cada vez que se invoca. El endpoint `POST` de la aplicación de notas tiene un segundo parámetro de consulta llamado `add_date`. Cuando se configura en `y`, la aplicación de notas llama a la aplicación de calendario para obtener una fecha y añadirla a una nota.
 
-1. Configura la aplicación de calendario para el rastreo añadiendo `dd-java-agent` al comando de inicio en el archivo Docker, como hiciste anteriormente para la aplicación de notas. Abre `calendar/dockerfile.calendar.maven` y comprueba que ya está descargando `dd-java-agent`:
+1. Configura la aplicación de calendario para el rastreo añadiendo `dd-java-agent` al comando de inicio en el archivo Docker, como hiciste anteriormente para la aplicación de notas. Abre `calendar/Dockerfile.calendar.maven` y comprueba que ya está descargando `dd-java-agent`:
 
    ```
    RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -339,7 +339,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que de
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Nuevamente, las marcas, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-warning">Nuevamente, los indicadores, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos ajenos a este tutorial. Para obtener información sobre qué utilizar en tu entorno real, lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
 
 3. Abre `docker/all-docker-compose.yaml` y descomenta las variables de entorno del servicio `calendar` para configurar el host del Agent y las etiquetas de servicio unificadas para la aplicación y para Docker:
 

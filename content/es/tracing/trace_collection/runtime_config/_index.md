@@ -10,7 +10,7 @@ title: Configuración en tiempo de ejecución
 
 ## Información general
 
-La configuración en tiempo de ejecución te permite modificar la configuración de la biblioteca APM desde la interfaz de usuario Datadog, sin necesidad de reiniciar tu aplicación o servicio. No necesitas esperar a un nuevo despliegue o a un cambio de código para actualizar tu configuración. En su lugar, actualízala inmediatamente mediante la configuración en tiempo de ejecución.
+La configuración en tiempo de ejecución te permite modificar la configuración de la librería APM desde la interfaz de usuario Datadog, sin necesidad de reiniciar tu aplicación o servicio. No necesitas esperar a un nuevo despliegue o a un cambio de código para actualizar tu configuración. En su lugar, actualízala inmediatamente mediante la configuración en tiempo de ejecución.
 
 {{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Consulta el Catálogo de servicios para utilizar la configuración en tiempo de ejecución." video="true" style="width:100%;">}}
 
@@ -33,7 +33,7 @@ Para realizar cambios en la configuración de un servicio en tiempo de ejecució
 1. Cambia las opciones de configuración, según sea necesario. Para obtener más detalles, consulta las [opciones de configuración compatibles](#supported-configuration-options).
 1. Haz clic en **Apply Configuration** (Aplicar configuración).
 
-En **Active Library Configuration** (Configuración de biblioteca activa), puedes ver qué opciones están configuradas para este servicio y el entorno seleccionado:
+En **Active Library Configuration** (Configuración de librería activa), puedes ver qué opciones están configuradas para este servicio y el entorno seleccionado:
 
 {{< img src="/tracing/runtime_config/active-library-config.png" alt="Desde la pestaña Guía para la configuración, puedes ver la configuración de tu biblioteca activa." style="width:100%;">}}
 
@@ -47,7 +47,7 @@ Las siguientes opciones son compatibles con la configuración en tiempo de ejecu
 
 | Opción                                                                                                                                 | Java      | JavaScript              | Python   | .NET      | Ruby      | Go        | C++ |
 |----------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------------------|----------|-----------|-----------|-----------|-|
-| <h5>Frecuencia de muestreo personalizada</h5> Define una frecuencia de muestreo global para la biblioteca utilizando `DD_TRACE_SAMPLE_RATE`.                                  | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.4.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` | `0.2.0+` |
+| <h5>Frecuencia de muestreo personalizada</h5> Define una frecuencia de muestreo global para la librería utilizando `DD_TRACE_SAMPLE_RATE`.                                  | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.4.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` | `0.2.0+` |
 | <h5>Inyección de logs</h5> Inyecta automáticamente identificadores de correlación de rastreo para correlacionar logs y trazas, habilitando `DD_LOGS_INJECTION`. | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.6.0+` | `2.33.0+` | `1.13.0+` |           | |
 | </h5>Etiquetas de cabeceras HTTP</h5> Añada valores de cabeceras HTTP como etiquetas en trazas, utilizando `DD_TRACE_HEADER_TAGS`.                                        | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.6.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` | |
 | Etiquetas de tramos personalizadas</h5> Añade las etiquetas especificadas a cada tramo, utilizando `DD_TAGS`.                                                              | `1.31.0+` | `4.23.0+` `3.44.0+`     | `2.5.0+` | `2.44.0+` |           | `1.59.0+` | `0.2.0+` |

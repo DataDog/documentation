@@ -53,27 +53,34 @@ tile:
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-Integrarse con Microsoft Teams para:
+Integración con Microsoft Teams para:
+
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
 - Recibir notificaciones de alertas en Datadog y eventos en Microsoft Teams.
 - Gestionar las incidencias desde Microsoft Teams.
 - Silenciar los monitores activados directamente desde Microsoft Teams.
-  {{< /site-region >}}
-  {{< site-region region="gov" >}}
+{{< /site-region >}}
+
+
+{{< site-region region="gov" >}}
 - Recibir notificaciones de alertas en Datadog y eventos en Microsoft Teams.
 - Silenciar los monitores activados directamente desde Microsoft Teams.
-  {{< /site-region >}}
+{{< /site-region >}}
+
+
 
 {{< site-region region="gov" >}}
 **Nota**: Aunque tu cuenta de Datadog esté alojada en el entorno seguro US1-FED, es tu responsabilidad gestionar la seguridad de tu entorno Microsoft Teams, incluyendo el acceso, los permisos y la protección de los datos.
 {{< /site-region >}}
 
+
 ## Configuración
 
 {{< tabs >}}
 
-{{% tab "Aplicación Datadog (recomendado)" %}}
+{{% tab "Datadog App (Recommended)" %}}
 
 ### Enviar notificaciones de monitor a un canal de Microsoft Teams
 
@@ -83,12 +90,17 @@ Conecta tu inquilino de Microsoft a Datadog.
 2. Haz clic en **Add Tenant** (Agregar inquilino), que te redirigirá a Microsoft.
 3. Sigue las instrucciones y haz clic en **OK** (Aceptar).
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-Asegúrate de haber añadido la aplicación Datadog a todos los equipos en los que quieras recibir notificaciones de Datadog .
+
+Teams{{< site-region region="us,us3,us5,eu,ap1" >}}
+Asegúrate de haber añadido la aplicación Datadog a todos los Teams en los que desees recibir notificaciones de Datadog.
 {{< /site-region >}}
+
+
 {{< site-region region="gov" >}}
-Asegúrate de haber añadido la aplicación Datadog para el Gobierno a todos los equipos en los que quieras recibir notificaciones de Datadog .
+Asegúrate de haber añadido la aplicación Datadog for Government a todos los Teams en los que desees recibir notificaciones de Datadog.
 {{< /site-region >}}
+
+
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
@@ -98,6 +110,8 @@ Asegúrate de haber añadido la aplicación Datadog para el Gobierno a todos los
 4. En el modal que se abre, selecciona el canal principal del equipo donde debe añadirse la aplicación. Haz clic en **Go** (Listo) para completar la instalación.
    {{< /site-region >}}
 
+
+
 {{< site-region region="gov" >}}
 
 1. Abre Microsoft Teams.
@@ -106,12 +120,17 @@ Asegúrate de haber añadido la aplicación Datadog para el Gobierno a todos los
 4. En el modal que se abre, selecciona el canal principal del equipo donde debe añadirse la aplicación. Haz clic en **Go** (Listo) para completar la instalación.
    {{< /site-region >}}
 
+
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
-{{< img src="integrations/microsoft_teams/microsoft_teams_add_app_to_team.png" alt="Microsoft Teams Añadir aplicación al equipo" >}}
+{{< img src="integrations/microsoft_teams/microsoft_teams_add_app_to_team.png" alt="Microsoft Teams añade la aplicación a Teams" >}}
 {{< /site-region >}}
+
+
 {{< site-region region="gov" >}}
-{{< img src="integrations/microsoft_teams/microsoft_teams_add_gov_app_to_team.png" alt="Microsoft Teams Añadir aplicación al equipo" >}}
+{{< img src="integrations/microsoft_teams/microsoft_teams_add_gov_app_to_team.png" alt="Microsoft Teams añade la aplicación a Teams" >}}
 {{< /site-region >}}
+
 
 Una vez que el bot se haya añadido al equipo, configura el gestor de notificaciones en Datadog.
 
@@ -129,58 +148,62 @@ Para obtener más información, consulta la [entrada de blog][3] de Microsoft.
 
 Para migrar todos los gestores de notificaciones que utilizan actualmente los conectores de Office 365 legacy a integraciones Datadog basadas en inquilinos:
 
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
 1. Sigue los [pasos de configuración](#setup) para conectar tu inquilino de Microsoft a Datadog.
 2. Añade la aplicación Datadog a todos los equipos en los que tengas configurado un conector legacy de Office 365.
-3. Para cada gestor de un conector de notificaciones legacy en el [cuadro de la integración Microsoft Teams][1]:
+3. Para cada gestión de conector de notificación heredada en el [Ícono de integración de Microsoft Teams ][861]:
    1. En el inquilino configurado, haz clic en **Add Handle** (Añadir gestor).
    2. Asigna al nuevo gestor el mismo nombre que el gestor del conector. Por ejemplo, si el gestor del conector legacy se llama `channel-123`, crea un nuevo gestor en la configuración del inquilino con el nombre `channel-123`.
    3. Selecciona el equipo y el canal elegidos en los menús desplegables a los que el gestor del conector legacy enviaba el mensaje y haz clic en **Save** (Guardar). Este nuevo gestor anula el gestor del conector legacy existente.
 
-[1]: https://app.datadoghq.com/integrations/microsoft-teams
+[861]: https://app.datadoghq.com/integrations/microsoft-teams
 
 {{< /site-region >}}
+
+
 
 {{< site-region region="gov" >}}
 
 1. Sigue los [pasos de configuración](#setup) para conectar tu inquilino de Microsoft a Datadog.
 2. Añade la aplicación Datadog para el Gobierno a todos los equipos en los que tengas configurado un conector legacy de Office 365.
-3. Para cada gestor de un conector de notificaciones legacy en el [cuadro de la integración Microsoft Teams][1]:
+3. Para cada gestión de conector de notificación heredada en el [Ícono de integración de Microsoft Teams][871]:
    1. En el inquilino configurado, haz clic en **Add Handle** (Añadir gestor).
    2. Asigna al nuevo gestor el mismo nombre que el gestor del conector. Por ejemplo, si el gestor del conector legacy se llama `channel-123`, crea un nuevo gestor en la configuración del inquilino con el nombre `channel-123`.
    3. Selecciona el equipo y el canal elegidos en los menús desplegables a los que el gestor del conector legacy enviaba el mensaje y haz clic en **Save** (Guardar). Este nuevo gestor anula el gestor del conector legacy existente.
 
-[1]: https://app.datadoghq.com/integrations/microsoft-teams
+[871]: https://app.datadoghq.com/integrations/microsoft-teams
 
 {{< /site-region >}}
 
+
 ### Utilización
 
-Desde un monitor Datadog, envía una notificación a Microsoft Teams utilizando la [función `@-notification`][1]. Envía la notificación a la dirección `@teams-<HANDLE>`, sustituyendo `<HANDLE>` por el nombre de tu gestor de Microsoft Teams. Para silenciar un monitor activado desde Microsoft Teams, haz clic en **Mute Monitor** (Silenciar Monitor), selecciona la **Duración del silencio** y haz clic en **Mute** (Silenciar).
+Desde un monitor de Datadog, envía una notificación a Microsoft Teams utilizando la función [`@-notification` ][4]. Envía la notificación a la dirección `@teams-<HANDLE>`, sustituyendo `<HANDLE>` por el nombre de tu administrador de Microsoft Teams. Para silenciar un monitor activado desde Microsoft Teams, haz clic en **Silenciar monitor**, selecciona una **Duración del silencio** y haz clic en **Silenciar**.
 
 #### Menciones de usuarios
 
 Las menciones de usuarios te permiten notificar a usuarios específicos de tus canales de Microsoft Teams cuando se activan las alertas de monitor. Esto ayuda a garantizar que se notifiquen los eventos importantes a las personas adecuadas. Para mencionar a un usuario específico, sigue los pasos que se indican a continuación para encontrar su nombre principal de usuario (UPN).
 
-**Sintaxis: `<at>{User Principal Name}</at>`
+**Sintaxis**: `<at>{User Principal Name}</at>`
 
 **Ejemplo**: `<at>user@microsoft.com</at>`
 
 **Ejemplo de notificación completa**: `@Teams-CHANNEL_NAME <at>user@microsoft.com</at> <at>another.user@microsoft.com</at>`
 
-**Para encontrar el nombre principal de usuario (UPN) de un usuario:**
+**Para encontrar el nombre de usuario principal (UPN) de un usuario:**
 
 1. **Método 1 (sólo funciona si el UPN coincide con el correo electrónico):**
    - En Microsoft Teams, haz clic en la foto de perfil o en el nombre del usuario para abrir su tarjeta de contacto.
    - El correo electrónico que aparece en el campo `Chat` suele ser el UPN. Si difieren, utiliza el método 2 a continuación.
 
 2. **Método 2 (funciona siempre, pero requiere permisos de Azure Portal):**
-   - Inicia sesión en el [Microsoft Azure Portal][4].
+   - Inicia sesión en el [Microsoft Azure Portal][5].
    - Ve a `Microsoft Entra ID` > `Manage` > `Users`.
    - Localiza al usuario en la lista y copia su UPN de la columna `User principal name`.
 
-Datadog recomienda probar tus notificaciones de monitor para garantizar una entrega fiable. Para obtener instrucciones, consulta [Probar notificaciones][5].
+Datadog recomienda hacer un test de tus notificaciones de monitor para garantizar una entrega fiable. Consulta [test de notificaciones][6] para obtener instrucciones.
 
 #### Dashboards
 
@@ -191,19 +214,23 @@ Para compartir un widget de dashboard en Teams:
 1. En Datadog, pasa el ratón por encima del widget de dashboard y pulsa `CMD + C` o `CTRL + C`, o haz clic en el botón **Copy** (Copiar) del menú compartir.
 2. Pega el enlace en Teams.
 
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 {{< img src="integrations/microsoft_teams/dashboard_share.png" alt="Compartir un widget de dashboard en Microsoft Teams">}}
 {{< /site-region >}}
+
+
 
 {{< site-region region="gov" >}}
 {{< img src="integrations/microsoft_teams/dashboard_share_gov.png" alt="Compartir un widget de dashboard en Microsoft Teams">}}
 {{< /site-region >}}
 
+
 ### Limitar el acceso de edición
 
 Por defecto, todos los usuarios tienen acceso completo a los inquilinos de Microsoft Teams conectados.
 
-Utiliza el [control de acceso granular][6] para limitar los roles que pueden editar un inquilino específico:
+Utiliza [Control de acceso granular][8] para limitar los roles que pueden editar un inquilino específico:
 
 1. Mientras visualizas un inquilino, haz clic en el icono de engranaje de la esquina superior derecha para abrir el menú de configuración.
 2. Selecciona **Permissions** (Permisos).
@@ -223,18 +250,21 @@ Si tienes acceso de edición, puedes restablecer el acceso general a un inquilin
 
 Para editar los permisos de los inquilinos a través de la API:
 
-1. Ve al [cuadro de la integración Microsoft Teams][1].
+1. Ve al [Ícono de integración de Microsoft Teams ][4].
 2. Haz clic en la pestaña **Inquilinos**.
 3. Copia el ID de inquilino mostrado para el inquilino seleccionado.
-4. Utiliza la [API de políticas de restricción][7], donde el tipo de recurso es `integration-account` y el ID es `microsoft-Teams:<tenant_id>`.
+4. Utiliza la [API de políticas de restricción][9], donde el tipo de recurso es `integration-account` y el id es `microsoft-Teams:<tenant_id>`.
 
-[1]: https://app.datadoghq.com/integrations/microsoft-teams
+
+[1]: https://docs.datadoghq.com/es/monitors/notifications/#notification
 [2]: https://learn.microsoft.com/en-us/microsoftteams/m365-custom-connectors#update-connectors-url
 [3]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
-[4]: https://portal.azure.com
-[5]: https://docs.datadoghq.com/es/monitors/notify/#test-notifications
-[6]: https://docs.datadoghq.com/es/account_management/rbac/granular_access/
-[7]: https://docs.datadoghq.com/es/api/latest/restriction-policies/
+[4]: https://app.datadoghq.com/integrations/microsoft-teams
+[5]: https://portal.azure.com
+[6]: https://docs.datadoghq.com/es/monitors/notify/#test-notifications
+[7]: https://docs.datadoghq.com/es/dashboards/scheduled_reports/
+[8]: https://docs.datadoghq.com/es/account_management/rbac/granular_access/
+[9]: https://docs.datadoghq.com/es/api/latest/restriction-policies/
 {{% /tab %}}
 
 {{% tab "Microsoft Workflows Webhooks" %}}
@@ -326,7 +356,7 @@ Desde un monitor Datadog, envía una notificación a Microsoft Teams utilizando 
 
 Las menciones de usuarios te permiten notificar a usuarios específicos de tus canales de Microsoft Teams cuando se activan las alertas de monitor. Esto ayuda a garantizar que se notifiquen los eventos importantes a las personas adecuadas. Para mencionar a un usuario específico, sigue los pasos que se indican a continuación para encontrar su nombre principal de usuario (UPN).
 
-**Sintaxis: `<at>{User Principal Name}</at>`
+**Sintaxis**: `<at>{User Principal Name}</at>`
 
 **Ejemplo**: `<at>user@microsoft.com</at>`
 
@@ -343,7 +373,7 @@ Las menciones de usuarios te permiten notificar a usuarios específicos de tus c
    - Ve a `Microsoft Entra ID` > `Manage` > `Users`.
    - Localiza al usuario en la lista y copia su UPN de la columna `User principal name`.
 
-<div class="alert alert-warning">Las menciones de usuarios NO son compatibles con los identificadores de webhooks de Workflows publicados como usuario (para canales privados). Incluir una mención de usuario al publicar un webhook de Workflows como usuario fallará. Para incluir menciones de usuarios utilizando webhooks de Workflows debes utilizar el Flow Bot.</div>
+<div class="alert alert-danger">Las menciones de usuarios NO son compatibles con los identificadores de webhooks de Workflows publicados como usuario (para canales privados). Incluir una mención de usuario al publicar un webhook de Workflows como usuario fallará. Para incluir menciones de usuarios utilizando webhooks de Workflows debes utilizar el Flow Bot.</div>
 
 Datadog recomienda probar tus notificaciones de monitor para garantizar una entrega fiable. Para obtener instrucciones, consulta [Probar notificaciones][6].
 
@@ -400,33 +430,37 @@ Para obtener más información, consulta la [entrada de blog][2] de Microsoft.
 
 Para migrar todos los gestores de notificaciones que utilizan actualmente los conectores de Office 365 legacy a la integración de Datadog basada en inquilinos:
 
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
-1. Sigue los [pasos de configuración][2] para conectar tu inquilino de Microsoft a Datadog.
+1. Sigue los [pasos de configuración][992] para conectar tu inquilino de Microsoft a Datadog.
 2. Añade la aplicación Datadog a todos los equipos en los que tengas configurado un conector legacy de Office 365.
-3. Para cada gestor de un conector de notificaciones legacy en el [cuadro de la integración Microsoft Teams][1]:
+3. Para cada gestor de conector de notificación heredada en el [Ícono de integración de Microsoft Teams ][991]:
    1. En el inquilino configurado, haz clic en **Add Handle** (Añadir gestor).
    2. Asigna al nuevo gestor el mismo nombre que el gestor del conector. Por ejemplo, si el gestor del conector legacy se llama `channel-123`, crea un nuevo gestor en la configuración del inquilino con el nombre `channel-123`.
    3. Selecciona el equipo y el canal elegidos en los menús desplegables a los que el gestor del conector legacy enviaba el mensaje y haz clic en **Save** (Guardar). Este nuevo gestor anula el gestor del conector legacy existente.
 
-[1]: https://app.datadoghq.com/integrations/microsoft-teams
-[2]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
+[991]: https://app.datadoghq.com/integrations/microsoft-teams
+[992]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
 
 {{< /site-region >}}
+
+
 
 {{< site-region region="gov" >}}
 
-1. Sigue los [pasos de configuración][2] para conectar tu inquilino de Microsoft a Datadog.
+1. Sigue los [pasos de configuración][982] para conectar tu inquilino de Microsoft a Datadog.
 2. Añade la aplicación Datadog para el Gobierno a todos los equipos en los que tengas configurado un conector legacy de Office 365.
-3. Para cada gestor de un conector de notificaciones legacy en el [cuadro de la integración Microsoft Teams][1]:
+3. Para cada gestor de conector de notificación heredada en el [Ícono de integración de Microsoft Teams][981]:
    1. En el inquilino configurado, haz clic en **Add Handle** (Añadir gestor).
    2. Asigna al nuevo gestor el mismo nombre que el gestor del conector. Por ejemplo, si el gestor del conector legacy se llama `channel-123`, crea un nuevo gestor en la configuración del inquilino con el nombre `channel-123`.
    3. Selecciona el equipo y el canal elegidos en los menús desplegables a los que el gestor del conector legacy enviaba el mensaje y haz clic en **Save** (Guardar). Este nuevo gestor anula el gestor del conector legacy existente.
 
-[1]: https://app.datadoghq.com/integrations/microsoft-teams
-[2]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
+[981]: https://app.datadoghq.com/integrations/microsoft-teams
+[982]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
 
 {{< /site-region >}}
+
 
 ### Migrar conectores legacy a la integración de webhooks de Microsoft Workflows
 
@@ -467,6 +501,7 @@ Los gestores de notificaciones legacy no se ven afectados por la nueva configura
 {{% /tab %}}
 {{< /tabs >}}
 
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
 ## Datadog Incident Management en Microsoft Teams
@@ -483,18 +518,22 @@ En primer lugar, instala la aplicación Datadog en Microsoft Teams:
 
 A continuación, conecta tu inquilino de Microsoft a Datadog:
 
-1. En Datadog, ve al [cuadro de la integración Microsoft Teams][3].
+1. En Datadog, ve al [Ícono de integración de Microsoft Teams][121].
 2. Haz clic en **Add Tenant** (Agregar inquilino), que te redirigirá a Microsoft.
 3. Sigue las instrucciones y haz clic en **OK** (Aceptar).
 
 
 ### Concesión de permisos adicionales
-Algunas funciones de Datadog Incident Management necesitan permiso para realizar acciones en tu inquilino, como por ejemplo, crear un nuevo
-canal para un incidente. Para conceder el consentimiento de administrador de todo el inquilino, se necesita una persona autorizada para hacerlo
-en nombre de la organización Microsoft, como un usuario con el rol *Administrador global*. Consulta la [documentación de Microsoft Entra ID][5] para obtener más
-información sobre quién puede conceder el consentimiento de administrador de todo el inquilino a la aplicación Datadog.
+Algunas funciones de Incident Management de Datadog necesitan permiso para realizar acciones en tu inquiino, por ejemplo, crear un nuevo
+canal para un incident (incidente). Para otorgar el consentimiento de administrador en todo el inquilino, se necesita una persona autorizada para otorgarlo en nombre de la organización Microsoft, como por ejemplo, un usuario con el rol de *Administrador global*.
+Consulta la [documentación de Microsoft Entra ID][122] para obtener más
+información sobre quién puede otorgar el consentimiento de administrador a la aplicación Datadog.
 
-Puedes elegir conceder a Datadog permisos de aplicación y delegados o sólo permisos delegados. El uso de permisos de aplicación y delegados es fácil de configurar, mientras que el uso de permisos delegados te ofrece un control más preciso de la aplicación Datadog en tu inquilino. Para obtener más información, consulta la [Documentación general sobre permisos y consentimientos de Microsoft][11].
+Puedes elegir conceder a Datadog permisos de aplicación y delegados o sólo permisos delegados. El uso de permisos de aplicación y delegados es fácil de configurar, mientras que el uso de permisos delegados te ofrece un control más preciso sobre la aplicación Datadog en tu inquilino. Para obtener más información, consulta [Documentación general sobre permisos y consentimiento de Microsoft][123].
+
+[121]: https://app.datadoghq.com/integrations/microsoft-teams
+[122]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
+[123]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
 
 {{< tabs >}}
 
@@ -566,21 +605,21 @@ Para conectar tu cuenta desde Microsoft Teams:
 
 4. El bot de Datadog responderá con instrucciones sobre cómo conectar tus cuentas. Haz clic en **Connect Datadog Account** (Conectar cuenta Datadog).
 5. El bot de Datadog te enviará un mensaje con un enlace para conectar tus cuentas. Haz clic en el enlace y sigue las instrucciones.
-6. Se te redirigirá de nuevo al [cuadro de la integración Microsoft Teams][3]. 
-7. Crea una clave de aplicación haciendo clic en **Create** (Crear) en el mensaje del [cuadro de la integración Microsoft Teams][3].
+6. Se te redirigirá de nuevo al [Ícono de integración de Microsoft Teams][303].
+7. Crea una clave de aplicación haciendo clic en **Crear** en el  [Ícono de integración de Microsoft Teams][303].
 
 También puedes conectar tus cuentas desde Datadog:
 
-1. En Datadog, ve al [cuadro de la integración Microsoft Teams][3].
+1. En Datadog, ve al [Ícono de integración de Microsoft Teams][303].
 2. Haz clic en **Connect** (Conectar) en el inquilino que aparece en la lista.
 3. Sigue las instrucciones y haz clic en **OK** (Aceptar).
-4. En el [cuadro de la integración Microsoft Teams][3], crea una clave de aplicación haciendo clic en **Create** (Crear) en el mensaje anterior.
+4. Desde el [Ícono de integración de Microsoft Teams][303], crea una clave de aplicación haciendo clic en **Crear** en el aviso anterior.
 
 {{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_datadog_v2.png" alt="Conectar cuentas desde el cuadro de la integración Microsoft Teams" >}}
 
 ### Uso del incidente
 
-#### Incidencias
+#### Incidentes
 
 Para declarar una nueva incidencia desde Microsoft Teams:
 
@@ -589,8 +628,6 @@ Para declarar una nueva incidencia desde Microsoft Teams:
 3. Aparece una tarjeta adaptable. Haz clic en el botón **Declare Incident** (Declarar incidente) para abrir la pestaña Datadog y declarar un incidente.
 
 Un usuario debe conectar su cuenta Microsoft Teams a su cuenta Datadog para declarar un incidente.
-
-Cuando se crea una nueva incidencia, se crea un equipo correspondiente denominado `incident-(unique number ID)`.
 
 Para actualizar una incidencia, sigue un procedimiento similar al de creación en proceso:
 
@@ -621,7 +658,7 @@ Una vez instalada la aplicación de Microsoft Teams, puedes ir a la página **In
 
 #### Cómo crear un canal de incidencias:
 
-1. Ve a [Configuración de incidentes][4].
+1. Ve a [Configuración de incidentes][304].
 2. En la sección Microsoft Teams, selecciona tu inquilino de Microsoft Teams conectado.
 3. Activa **Automatically create a Microsoft Teams channel for every incident** (Crear automáticamente un canal de Microsoft Teams para cada incidencia).
 4. Selecciona el equipo en el que deseas crear automáticamente nuevos canales.
@@ -629,18 +666,19 @@ Una vez instalada la aplicación de Microsoft Teams, puedes ir a la página **In
 
 {{< img src="integrations/microsoft_teams/ms_teams_incident_updates_v2.png" alt="Configuración del canal de actualización de incidentes de Microsoft Teams." >}}
 
-[1]: https://docs.datadoghq.com/es/monitors/notifications/#notification
-[2]: https://docs.datadoghq.com/es/help/
-[3]: https://app.datadoghq.com/integrations/microsoft-teams
-[4]: https://app.datadoghq.com/incidents/settings#Integrations
-[5]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
-[6]: https://learn.microsoft.com/en-us/graph/permissions-reference
-[7]: https://docs.datadoghq.com/es/dashboards/scheduled_reports/
-[8]: https://learn.microsoft.com/en-us/microsoftteams/app-permissions#what-can-apps-do-in-teams
-[9]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
-[10]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
-[11]: https://learn.microsoft.com/en-us/graph/permissions-overview
+[301]: https://docs.datadoghq.com/es/monitors/notifications/#notification
+[302]: https://docs.datadoghq.com/es/help/
+[303]: https://app.datadoghq.com/integrations/microsoft-teams
+[304]: https://app.datadoghq.com/incidents/settings#Integrations
+[305]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
+[306]: https://learn.microsoft.com/en-us/graph/permissions-reference
+[307]: https://docs.datadoghq.com/es/dashboards/scheduled_reports/
+[308]: https://learn.microsoft.com/en-us/microsoftteams/app-permissions#what-can-apps-do-in-teams
+[309]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
+[3010]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
+[3011]: https://learn.microsoft.com/en-us/graph/permissions-overview
 {{< /site-region >}}
+
 
 ## Datos recopilados
 
@@ -658,7 +696,7 @@ La integración Microsoft Teams no incluye checks de servicios.
 
 ## Permisos
 
-La integración Microsoft Teams recibe los siguientes permisos para los equipos a los que se ha añadido. Para obtener más información, consulta la [referencia de los permisos de Microsoft App][1].
+La integración de Microsoft Teams recibe los siguientes permisos para Teams al que se ha añadido. Para obtener más información, consulta [Referencia de permisos de la aplicación de Microsoft][978].
 
 | Descripción del permiso                                                                                                                                                                    | Motivo de la solicitud                                                                               |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -669,68 +707,69 @@ La integración Microsoft Teams recibe los siguientes permisos para los equipos 
 | Enviar mensajes y notificaciones en un canal o chat.                                                                                                                                     | Enviar notificaciones de Datadog a los objetivos configurados.                                            |
 | Acceder a la información de este equipo o chat, como el nombre del equipo o chat, la lista de canales, y la nómina (incluidos los nombres y direcciones de correo electrónico de los miembros del equipo o chat), y utilizarlos para ponerte en contacto con ellos. | Permitir a los usuarios configurar las notificaciones de Microsoft Teams y flujos de trabajo dentro de Datadog.        |
 
+
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
-Se necesitan permisos adicionales para utilizar las funciones de Incident Management en la integración Microsoft Teams. Estos deben ser autorizados por un usuario con permisos para todo el inquilino (consulta [Gestión de incidencias de Datadog en Microsoft Teams: configuración de la cuenta](#account-setup) para obtener instrucciones detalladas).
-Para obtener más información sobre estos permisos, consulta la [referencia de los permisos de Microsoft Graph][6].
+Se necesitan permisos adicionales para utilizar las funciones de Incident Management en la integración de Microsoft Teams. Estos deben ser autorizados por un usuario con permisos para todo el inquilino (consulta [Managment Incident de Datadog en Microsoft Teams: Configuración de la cuenta](#account-setup) para obtener instrucciones detalladas).
+Para obtener más información sobre estos permisos, consulta la [Referencia de permisos de Microsoft Graph][976].
 {{< tabs >}}
 {{% tab "Using Application Permissions" %}}
 <table>
   <tr>
-    <td style="width:40%;"><strong>API / Nombre de permisos</strong></td>
+    <td style="width:40%;"><strong>API/Nombre de permisos</strong></td>
     <td style="width:15%;"><strong>Tipo</strong></td>
     <td><strong>Motivo de la solicitud</strong></td>
   </tr>
   <tr>
     <td style="width:40%;"><code>Channel.Create</code></td>
-    <td style="width:15%;">De aplicación y delegadas</td>
-    <td>Crea canales para gestionar y corregir incidentes utilizando Datadog Incident Management.</td>
+    <td style="width:15%;">Aplicación y delegado</td>
+    <td>Crear canales para administrar y corregir incidentes mediante Datadog Incident Management.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>Channel.Delete.All</code></td>
-    <td style="width:15%;">De aplicación y delegado</td>
-    <td>Archiva automáticamente canales de incidentes después de un periodo de tiempo especificado.</td>
+    <td style="width:15%;">Aplicación y delegado</td>
+    <td>Autoarchivo de canales de incidentes después de un periodo especificado.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>ChannelMessage.Read.All</code></td>
-    <td style="width:15%;">De aplicación y delegado</td>
-    <td>Sincroniza automáticamente mensajes de línea de tiempo con la línea de tiempo del incidente desde un canal de incidentes.</td>
+    <td style="width:15%;">Aplicación y delegado</td>
+    <td>Sincronizar automáticamente mensajes de línea temporal en la línea temporal del incidente desde un canal de incidentes.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>ChannelSettings.ReadWrite.All</code></td>
-    <td style="width:15%;">De aplicación y delegado</td>
-    <td>Crea y modifica canales para corregir incidentes utilizando Datadog Incident Management.</td>
+    <td style="width:15%;">Aplicación y delegado</td>
+    <td>Crear y modificar canales para corregir incidentes usando Datadog Incident Management.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>Directory.Read.All</code>,<code>GroupMember.Read.All</code></td>
-    <td style="width:15%;">De aplicación</td>
-    <td>Proporciona sugerencias para autocompletar nombres de equipos y canales para la configuración de Datadog Incident Management.</td>
+    <td style="width:15%;">Aplicación</td>
+    <td>Ofrece sugerencias para autocompletar el nombre del equipo o el canal en la configuración de Datadog Incident Management.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>TeamsTab.Create</code></td>
-    <td style="width:15%;">De aplicación y delegado</td>
-    <td>Crea una pestaña en un equipo para la aplicación Datadog (este permiso es necesario para una próxima experiencia de declaración de incidentes de Microsoft Teams).</td>
+    <td style="width:15%;">Aplicación y delegado</td>
+    <td>Crear una pestaña en un equipo para la aplicación de Datadog (este permiso es obligatorio para una experiencia de declaración de incidente de Microsoft Teams futura).</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>OnlineMeetings.ReadWrite</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Crea automáticamente una reunión en un equipo para la aplicación Datadog (este permiso es necesario para una próxima experiencia de declaración de incidentes de Microsoft Teams).</td>
+    <td>Crear automáticamente en un equipo para la aplicación de Datadog (este permiso es obligatorio para una experiencia de declaración de incidente de Microsoft Teams futura).</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>TeamsAppInstallation.
     ReadWriteSelfForTeam</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Permite que la aplicación Datadog compruebe si se trata del miembro de un equipo.</td>
+    <td>Permite la aplicación de Datadog para comprobar si es miembro de un equipo.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>TeamsTab.Read.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Comprueba si se creó una pestaña de Datadog en un canal (este permiso es necesario para una próxima experiencia de declaración de incidentes de Microsoft Teams).</td>
+    <td>Comprueba si una pestaña de Datadog ha sido creada en un canal (este permiso es obligatorio para una experiencia de declaración de incidente de Microsoft Teams futura).</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>User.Read</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Proporciona información acerca del usuario que inició sesión para conectar una cuenta de Microsoft Teams con una cuenta de Datadog correspondiente.</td>
+    <td>Ofrece detalles sobre el usuario registrado para conectar una cuenta de Microsoft Teams con una cuenta de Datadog correspondiente.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>User.Read.All</code></td>
@@ -740,63 +779,64 @@ Para obtener más información sobre estos permisos, consulta la [referencia de 
   <tr>
     <td style="width:40%;"><code>Team.ReadBasic.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Muestra los equipos cuyas cuentas de servicio son miembros en la página de parámetros de incidentes.</td>
+    <td>Muestra los equipos de los que es miembro la cuenta de servicio en la página de configuración del incidente.</td>
   </tr>
 </table>
 {{% /tab %}}
 
 {{% tab "Using Delegated Permissions" %}}
+
 <table>
   <tr>
-    <td style="width:40%;"><strong>API / Nombre de permisos</strong></td>
+    <td style="width:40%;"><strong>API/Nombre de permisos</strong></td>
     <td style="width:15%;"><strong>Tipo</strong></td>
     <td><strong>Motivo de la solicitud</strong></td>
   </tr>
   <tr>
     <td style="width:40%;"><code>Channel.Create</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Crea canales para gestionar y corregir incidentes utilizando Datadog Incident Management.</td>
+    <td>Crear canales para administrar y corregir incidentes mediante Datadog Incident Management.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>Channel.Delete.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Archiva automáticamente canales de incidentes después de un periodo de tiempo especificado.</td>
+    <td>Autoarchivar canales de incidentes después de un periodo especificado.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>ChannelMessage.Read.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Sincroniza automáticamente mensajes de línea de tiempo con la línea de tiempo del incidente desde un canal de incidentes.</td>
+    <td>Sincroniza automáticamente mensajes de línea temporal en la línea temporal del incidente desde un canal de incidente.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>ChannelSettings.ReadWrite.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Crea y modifica canales para corregir incidentes utilizando Datadog Incident Management.</td>
+    <td>Crear y modificar canales para corregir incidentes mediante Datadog Incident Management.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>TeamsTab.Create</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Crea una pestaña en un equipo para la aplicación Datadog (este permiso es necesario para una próxima experiencia de declaración de incidentes de Microsoft Teams).</td>
+    <td>Crear una pestaña en un equipo para la aplicación de Datadog (este permiso es obligatorio para una experiencia de declaración de incidente de Microsoft Teams futura).</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>OnlineMeetings.ReadWrite</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Crea automáticamente una reunión en un equipo para la aplicación Datadog (este permiso es necesario para una próxima experiencia de declaración de incidentes de Microsoft Teams).</td>
+    <td>Crear automáticamente una reunión en un equipo para la aplicación de Datadog (este permiso es obligatorio para una experiencia de declaración de incidente de Microsoft Teams futura).</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>TeamsAppInstallation.
     ReadWriteSelfForTeam</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Permite que la aplicación Datadog compruebe si se trata del miembro de un equipo.</td>
+    <td>Permite que la aplicación de Datadog compruebe si es miembro de un equipo.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>TeamsTab.Read.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Comprueba si se creó una pestaña de Datadog en un canal (este permiso es necesario para una próxima experiencia de declaración de incidentes de Microsoft Teams).</td>
+    <td>Comprueba si una pestaña de Datadog ha sido creada en un canal (este permiso es obligatorio para una experiencia de declaración de incidente de Microsoft Teams futura).</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>User.Read</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Proporciona información acerca del usuario que inició sesión para conectar una cuenta de Microsoft Teams con una cuenta de Datadog correspondiente.</td>
+    <td>Ofrece detalles sobre el usuario registrado para conectar una cuenta de Microsoft Teams con una cuenta de Datadog correspondiente.</td>
   </tr>
   <tr>
     <td style="width:40%;"><code>User.Read.All</code></td>
@@ -806,26 +846,26 @@ Para obtener más información sobre estos permisos, consulta la [referencia de 
   <tr>
     <td style="width:40%;"><code>Team.ReadBasic.All</code></td>
     <td style="width:15%;">Delegado</td>
-    <td>Muestra los equipos cuyas cuentas de servicio son miembros en la página de parámetros de incidentes.</td>
+    <td>Muestra los equipos de los que es miembro la cuenta de servicio en la página de configuración del incidente.</td>
   </tr>
 </table>
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
-[1]: https://docs.datadoghq.com/es/monitors/notifications/#notification
-[2]: https://docs.datadoghq.com/es/help/
-[3]: https://app.datadoghq.com/integrations/microsoft-teams
-[4]: https://app.datadoghq.com/incidents/settings#Integrations
-[5]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
-[6]: https://learn.microsoft.com/en-us/graph/permissions-reference
-[7]: https://docs.datadoghq.com/es/dashboards/scheduled_reports/
-[8]: https://learn.microsoft.com/en-us/microsoftteams/app-permissions#what-can-apps-do-in-teams
-[9]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
-[10]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
+[971]: https://docs.datadoghq.com/es/monitors/notifications/#notification
+[972]: https://docs.datadoghq.com/es/help/
+[973]: https://app.datadoghq.com/integrations/microsoft-teams
+[974]: https://app.datadoghq.com/incidents/settings#Integrations
+[975]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
+[976]: https://learn.microsoft.com/en-us/graph/permissions-reference
+[977]: https://docs.datadoghq.com/es/dashboards/scheduled_reports/
+[978]: https://learn.microsoft.com/en-us/microsoftteams/app-permissions#what-can-apps-do-in-teams
+[979]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
+[9710]: https://devblogs.microsoft.com/microsoft365dev/retirement-of-office-365-connectors-within-microsoft-teams/
 
 {{< /site-region >}}
+
 
 ## Solucionar problemas
 
@@ -838,6 +878,7 @@ Sigue los siguientes pasos para configurar nuevos conectores de canal:
 2. Después de que el paso de configuración 3 te redirija a Datadog desde la página de MS Teams, abre una nueva pestaña e inicia sesión en Datadog con tu SSO. A continuación, realiza el paso de configuración 4 por separado.
 
 ### ¿Por qué no aparece mi equipo en el cuadro de la integración?
+
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 Si añadieras el bot al equipo antes de añadir el inquilino a Datadog, entonces a Datadog se le pasaría el evento de unirse al equipo al no saber que el equipo existe.
@@ -856,11 +897,13 @@ Puedes tratar de:
 3. Ve a pestaña con la etiqueta **Apps** (Aplicaciones).
 4. Haz clic en los tres puntos situados junto a la aplicación Datadog.
 5. Haz clic en **Remove** (Eliminar).
-6. Vuelve a añadir la aplicación Datadog siguiendo los [pasos de configuración][1].
+6. Vuelve a añadir la aplicación Datadog siguiendo los [pasos de configuración][951].
 
-[1]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
+[951]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup
 
 {{< /site-region >}}
+
+
 
 {{< site-region region="gov" >}}
 Si añadieras el bot al equipo antes de añadir el inquilino a Datadog, entonces a Datadog se le pasaría el evento de unirse al equipo al no saber que el equipo existe.
@@ -879,15 +922,17 @@ Puedes tratar de:
 3. Ve a pestaña con la etiqueta **Apps** (Aplicaciones).
 4. Haz clic en los tres puntos situados junto a la aplicación Datadog para el Gobierno.
 5. Haz clic en **Remove** (Eliminar).
-6. Vuelve a añadir la aplicación Datadog para el Gobierno siguiendo los [pasos de configuración][1].
+6. Vuelva a añadir la aplicación Datadog for Government siguiendo los [pasos de configuración][941].
 
-[1]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup&site=gov
+[941]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=datadogapprecommended#setup&site=gov
 
 {{< /site-region >}}
 
+
 ### ¿El bot admite canales privados?
 
-Debido a las limitaciones de los canales privados en [Microsoft Teams][2], los canales privados no son compatibles con el bot. Si quieres enviar notificaciones a canales privados, consulta [Webhooks de Microsoft Workflows][3].
+Debido a las limitaciones de los canales confidenciales en [Microsoft Teams][1], el bot no admite canales confidenciales. Si deseas enviar notificaciones a canales confidenciales, consulta [Microsoft Workflows Webhooks][2].
+
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 
@@ -897,9 +942,11 @@ Sí, puedes incluir varias menciones de usuarios en una sola notificación para 
 
 **Ejemplo**: `@Teams-handle <at>user1@microsoft.com</at> <at>user2@microsoft.com</at> <at>user3@microsoft.com</at>`
 
-<div class="alert alert-warning">Cuando se incluyen diferentes menciones de usuarios en una notificación y una de ellas no es válida, los usuarios válidos seguirán recibiendo notificaciones, pero las menciones de usuarios no válidas pueden hacer que las menciones aparezcan desordenadas.</div>
+<div class="alert alert-danger">Cuando se incluyen diferentes menciones de usuarios en una notificación y una de ellas no es válida, los usuarios válidos seguirán recibiendo notificaciones, pero las menciones de usuarios no válidas pueden hacer que las menciones aparezcan desordenadas.</div>
 
 {{< /site-region >}}
+
+
 
 {{< site-region region="gov" >}}
 
@@ -907,6 +954,7 @@ Sí, puedes incluir varias menciones de usuarios en una sola notificación para 
 
 Actualmente, la aplicación Datadog para el Gobierno solo es compatible con los clientes de Datadog US1-FED que intentan conectarse a su inquilino `commercial` de Microsoft Teams. Los inquilinos GCC y GCC High no son compatibles con la aplicación.
 {{< /site-region >}}
+
 
 ### ¿Por qué no funciona una función de incidentes cuando se utilizan permisos delegados?
 En primer lugar, asegúrate de que el usuario de la cuenta de servicio es miembro del equipo en el que se utiliza la función.
@@ -918,17 +966,17 @@ Por último, es posible que el token del usuario delegado haya caducado o haya s
 
 ### ¿Por qué se me pide que compruebe la configuración de mi aplicación cuando intento declarar un incidente?
 Para utilizar la nueva experiencia de declaración de incidentes, asegúrate de lo siguiente:
-- La versión de tu aplicación es 3.1.23 o posterior. Consulta las instrucciones para [actualizar la versión de la aplicación][4].
+- La versión de tu aplicación es 3.1.23 o superior. Consulta las instrucciones para [actualizar la versión de la aplicación][3].
 - Si utilizas permisos de aplicación, asegúrate de haber concedido el permiso de aplicación `TeamsTab.Create` 
 - Si utiliza permisos delegados, asegúrate de haber concedido los permisos delegados `TeamsTab.Create` y `TeamsTab.Read.All`.
 - Si estás utilizando permisos delegados, asegúrate de que la cuenta de servicio es miembro del equipo en el que estás ejecutando el comando `@Datadog incident (incidente)`.
 
 También puedes utilizar la nueva experiencia de declaración de incidentes haciendo clic en el signo `+` en la parte superior de un canal y buscando la aplicación Datadog.
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia técnica de Datadog][4].
 
-[1]: https://learn.microsoft.com/en-us/microsoftteams/app-permissions#what-can-apps-do-in-teams
-[2]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
-[3]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=microsoftworkflowswebhooks#what-are-microsoft-workflows-webhooks
-[4]: https://support.microsoft.com/en-us/office/update-an-app-in-microsoft-teams-3d53d136-5c5d-4dfa-9602-01e6fdd8015b
-[5]: https://docs.datadoghq.com/es/help/
+
+[1]: https://learn.microsoft.com/en-us/microsoftteams/private-channels#private-channel-limitations
+[2]: https://docs.datadoghq.com/es/integrations/microsoft_teams/?tab=microsoftworkflowswebhooks#what-are-microsoft-workflows-webhooks
+[3]: https://support.microsoft.com/en-us/office/update-an-app-in-microsoft-teams-3d53d136-5c5d-4dfa-9602-01e6fdd8015b
+[4]: https://docs.datadoghq.com/es/help/

@@ -2,12 +2,6 @@
 title: トラブルシューティング
 ---
 
-{{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
-Case Management は現在、{{< region-param key=dd_datacenter code="true" >}} サイトでは利用できません。
-</div>
-{{% /site-region %}}
-
 ## 概要
 
 このガイドは、Case Management のサードパーティインテグレーションに関する問題を解決するためのものです。問題が解決しない場合は、[Datadog サポート][1]までお問い合わせください。
@@ -16,7 +10,7 @@ Case Management は現在、{{< region-param key=dd_datacenter code="true" >}} �
 
 カスタムフィールドを持つ Jira 課題タイプ、プライベート Jira プロジェクト、およびオンプレミス Jira インスタンスはサポートされていません。同期による Jira チケットの自動作成に問題がある場合は、次のセクションを参照してください。
 
-### 構成
+### 設定
 
 1. Jira プロジェクトが Jira インテグレーション構成画面のドロップダウンに反映されない場合は、`manage_integrations` 権限があるか確認してください。
 

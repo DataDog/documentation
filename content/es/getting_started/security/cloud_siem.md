@@ -8,6 +8,9 @@ aliases:
 - /es/security_platform/cloud_siem/getting_started/
 - /es/security/cloud_siem/getting_started/
 - /es/getting_started/cloud_siem
+description: Aprende a configurar Cloud SIEM de Datadot para la detección de amenazas
+  en tiempo real. Configura la ingesta de logs, activa las reglas de detección y explora
+  las señales de seguridad para una monitorización exhaustiva.
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-cloud-siem
   tag: Centro de aprendizaje
@@ -112,8 +115,12 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 
 ## Fase 4: Personalización
 
-1. Configura [reglas de supresión][23] para reducir el ruido. 
+1. Configura [reglas de supresión][23] para reducir el ruido.
 2. Crea [reglas de detección personalizadas][24]. Lee las [prácticas recomendadas para crear reglas de detección][25].
+
+## Desactivar Cloud SIEM
+
+Ponte en contacto con [soporte][26] para desactivar Cloud SIEM.
 
 ## Referencias adicionales
 
@@ -127,20 +134,21 @@ Después de mover el índice a la primera posición, revisa la configuración y 
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
-[9]: https://app.datadoghq.com/security/content-packs
+[9]: https://app.datadoghq.com/security/siem/content-packs
 [10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /es/security/default_rules/#cat-cloud-siem-log-detection
 [13]: /es/security/detection_rules/
-[14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[15]: /es/security/cloud_siem/investigate_security_signals
+[14]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[15]: /es/security/cloud_siem/triage_and_investigate/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /es/security/notifications/rules/
 [18]: https://app.datadoghq.com/security/configuration/reports
-[19]: https://app.datadoghq.com/security/investigator/
-[20]: /es/security/cloud_siem/investigator
+[19]: https://app.datadoghq.com/security/siem/investigator/
+[20]: /es/security/cloud_siem/triage_and_investigate/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /es/dashboards/#overview
-[23]: /es/security/cloud_siem/detection_rules/?tab=threshold#advanced-options
-[24]: /es/security/cloud_siem/detection_rules/
+[23]: /es/security/suppressions/
+[24]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[26]: /es/help/

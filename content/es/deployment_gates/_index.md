@@ -19,7 +19,7 @@ title: Puertas de despliegue
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Las puertas de despliegue no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
+<div class="alert alert-danger">Las puertas de despliegue no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
 {{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}

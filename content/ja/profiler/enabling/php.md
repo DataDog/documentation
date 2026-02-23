@@ -15,7 +15,7 @@ further_reading:
   text: プロファイラの使用中に発生する問題を修正
 - link: https://www.datadoghq.com/blog/php-exception-profiling/
   tag: ブログ
-  text: Why care about exception profiling in PHP?
+  text: PHP で例外プロファイリングを行うべき理由
 title: PHP プロファイラーの有効化
 type: multi-code-lang
 ---
@@ -26,7 +26,7 @@ type: multi-code-lang
 
 Datadog Profiler を使用するには、64 ビットの Linux で、少なくとも PHP 7.1 が必要です。
 
-PHP ZTS builds are supported since `dd-trace-php` version 0.99+, while PHP debug builds are **not** supported.
+PHP ZTS ビルドは `dd-trace-php` バージョン 0.99 以降でサポートされていますが、PHP デバッグ ビルドは **サポートされていません**。
 
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
@@ -52,27 +52,27 @@ apk add libgcc
 {{% /tab %}}
 {{< /tabs >}}
 
-The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
+`dd-trace-php` ライブラリで次のプロファイリング機能を利用するには、以下の最小バージョンが必要です:
 
-|      機能              | Required `dd-trace-php` version          |
+|      機能              | 必要な `dd-trace-php` バージョン          |
 |---------------------------|------------------------------------------|
 | [Code Hotspots][12]       | 0.71+                                    |
 | [Endpoint Profiling][13]  | 0.79.0+                                  |
-| [Timeline][15]            | 0.98.0+ (beta since 0.89.0+)             |
+| [タイムライン][15]            | 0.98.0+            |
 
-Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
+Continuous Profiler は、AWS Lambda などの一部のサーバーレスプラットフォームには対応していません。
 
 ## インストール
 
 アプリケーションのプロファイリングを開始するには
 
-1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
+1. Datadog Agent v6 以上がインストールされ、稼働していることを確認してください。Datadog は [Datadog Agent v7+][2] の使用を推奨しています。
 
 2. [GitHub リリースページ][3]から `datadog-setup.php` スクリプトをダウンロードします。バージョン 0.69.0 は、このインストーラーを含む最初のトレーサーのリリースです。
 
 3. トレーサーとプロファイラーの両方をインストールするために、例えば `php datadog-setup.php --enable-profiling` のようにインストーラーを実行します。このスクリプトは対話型で、検出された PHP の位置のどれにインストールするかを尋ねます。スクリプトの最後には、今後の使用のために非対話型バージョンのコマンド引数を出力します。
 
-4. Configure the profiler using config mode through the `datadog-setup.php`:
+4. `datadog-setup.php` の config モードを使用してプロファイラを設定します:
 
     ```
     # `datadog.profiling.enabled` is not required for v0.82.0+.
@@ -86,10 +86,10 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
     php hello.php
     ```
 
-    Apache, PHP-FPM and other servers require a restart after changing the INI
-settings.
+    Apache、PHP-FPM などのサーバーは、INI 設定を変更した後に再起動が
+必要です。
 
-    See the [configuration docs][4] for more INI settings.
+    詳細な INI 設定については [構成ドキュメント][4] を参照してください。
 
 5. リクエストを受け取ってから 1～2 分後、[APM > Profiler ページ][5]にプロファイルが表示されます。
 

@@ -6,16 +6,23 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"
+- link: "https://www.datadoghq.com/blog/network-path/"
+  tag: "Blog"
+  text: "Identify slowdowns across your entire network with Datadog Network Path"
+- link: "network_monitoring/network_path/glossary"
+  tag: "Documentation"
+  text: "Network Path terms and concepts"
+- link: "/monitors/types/network_path/"
+  tag: "Documentation"
+  text: Network Path Monitor
 ---
-
-<div class="alert alert-info">Network Path is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
 
 ## Overview
 
 Network Path illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a path from a source to its destination, as depicted in the `source` and `destination` facet panel.
 
 
-{{< img src="network_performance_monitoring/network_path/network_path_default_view_3.png" alt="The Network Path default view, showing the path from source to destination" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_view_4.png" alt="Path view in Network path highlighting a path selected from source to destination" >}}
 
 ## How it works
 
@@ -24,8 +31,6 @@ Datadog performs a `traceroute` at the host level to illustrate the packet's jou
 The following diagram depicts the typical flow of a network path from a source (Host) to its destination.
 
 {{< img src="network_performance_monitoring/network_path/network_path_diagram.png" alt="Diagram of how Network path works" >}}
-
-**Note**: By default, Datadog executes a `traceroute` every five minutes.
 
 ## Next steps
 

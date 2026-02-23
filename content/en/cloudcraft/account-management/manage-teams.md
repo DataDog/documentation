@@ -77,7 +77,7 @@ Next, you need to give your team a name and set its visibility. A **Visible** te
 
 {{< img src="cloudcraft/account-management/manage-teams/create-new-team-settings.png" alt="Screenshot of a team creation interface in Cloudcraft with options for team visibility and roles." responsive="true" style="width:100%;">}}
 
-Before creating the team, you can also check the **Cross-organizational** box to make this a cross-organizational team, which are teams with members that are automatically added to all other teams in your organization. An example of cross-organizational team woul be a central security management team, which need visibility into all of the individual teams.
+Before creating the team, you can also check the **Cross-organizational** box to make this a cross-organizational team, which are teams with members that are automatically added to all other teams in your organization. An example of cross-organizational team would be a central security management team, which need visibility into all of the individual teams.
 
 Unless they are already a member of another team, cross-organizational members inherit their cross-organizational roles.
 

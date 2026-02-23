@@ -41,7 +41,7 @@ draft: falso
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 4.6.0
+integration_version: 4.7.0
 is_public: verdadero
 manifest_version: 2.0.0
 name: cisco_aci
@@ -177,7 +177,7 @@ Para encontrar perfiles de proveedores específicos compatibles con esta integra
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cisco-aci" >}}
+{{< get-metrics-from-git "cisco_aci" >}}
 
 
 ### Eventos
@@ -185,7 +185,7 @@ Para encontrar perfiles de proveedores específicos compatibles con esta integra
 El check de Cisco ACI envía fallas de inquilino como eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "cisco-aci" >}}
+{{< get-service-checks-from-git "cisco_aci" >}}
 
 
 ## Solucionar problemas

@@ -25,7 +25,7 @@ Datadog's Software Catalog offers powerful dependency mapping capabilities to he
 
 ## Automatic dependency mapping and entity discovery
 
-- **Automatic discovery:** By default, Software Catalog includes all discovered services from APM, USM, and RUM. When you instrument additional applications across your environments, their dependencies are automatically added to the Catalog.
+- **Automatic discovery:** By default, Software Catalog includes all discovered entities from APM, USM, and RUM. When you instrument additional applications across your environments, their dependencies are automatically added to the Catalog.
 
 - **Telemetry integration:** Software Catalog auto-detects dependency relationships using application telemetry collected by APM, USM, and RUM, providing teams with real-time insights into service relationships and performance impacts.
 

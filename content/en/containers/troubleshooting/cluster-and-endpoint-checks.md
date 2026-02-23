@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Cluster and Endpoint Checks
+description: Troubleshoot issues with cluster checks and endpoint checks dispatched by the Datadog Cluster Agent
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -34,7 +35,7 @@ In this case, the leader Pod is `cluster-agent-rhttz`. If the Pod is deleted or 
 To ensure a configuration (static or Autodiscovered) is picked up by the Cluster Agent, use the `configcheck` command in the leader Cluster Agent:
 
 ```text
-# kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
+# kubectl exec <CLUSTER_AGENT_POD_NAME> -- agent configcheck
 ...
 === http_check cluster check ===
 Source: kubernetes-services
@@ -61,7 +62,7 @@ The `clusterchecks` command allows you to inspect the state of the dispatching l
 - Which checks are dispatched on each node.
 
 ```text
-# kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
+# kubectl exec <CLUSTER_AGENT_POD_NAME> -- agent clusterchecks
 
 === 3 node-agents reporting ===
 Name                                            Running checks
@@ -98,7 +99,7 @@ In this case, this configuration is dispatched to the `default-pool-bce5cd34-ttw
 The Agent `configcheck` command should show the instance, with the `cluster-checks` source:
 
 ```text
-# kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
+# kubectl exec <NODE_AGENT_POD_NAME> -- agent configcheck
 ...
 === http_check check ===
 Source: cluster-checks
@@ -124,7 +125,7 @@ The Instance ID matches the one you had earlier.
 The Agent `status` command should show the check instance running and reporting successfully.
 
 ```text
-# kubectl exec <NODE_AGENT_POD_NAME> agent status
+# kubectl exec <NODE_AGENT_POD_NAME> -- agent status
 ...
     http_check (3.1.1)
     ------------------
@@ -147,7 +148,7 @@ Troubleshooting endpoint checks is similar to [troubleshooting cluster checks](#
 The Agent `configcheck` command shows the instance, with the `endpoints-checks` source:
 
 ```shell
-# kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
+# kubectl exec <NODE_AGENT_POD_NAME> -- agent configcheck
 ...
 === nginx check ===
 Configuration provider: endpoints-checks
@@ -176,7 +177,7 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 The Agent `status` command should show the check instance running and reporting successfully.
 
 ```shell
-# kubectl exec <NODE_AGENT_POD_NAME> agent status
+# kubectl exec <NODE_AGENT_POD_NAME> -- agent status
 ...
     nginx (4.0.0)
     -------------
@@ -194,7 +195,7 @@ The Agent `status` command should show the check instance running and reporting 
 The Cluster Agent `clusterchecks` command shows the instance(s), with the `kubernetes-endpoints` source:
 
 ```shell
-# kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
+# kubectl exec <CLUSTER_AGENT_POD_NAME> -- agent clusterchecks
 ...
 ===== 3 Pod-backed Endpoints-Checks scheduled =====
 

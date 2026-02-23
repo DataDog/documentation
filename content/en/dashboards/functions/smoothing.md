@@ -1,5 +1,6 @@
 ---
 title: Smoothing
+description: Reduce noise in metric data using autosmooth, exponentially weighted moving averages, median filters, and weighted functions.
 aliases:
     - /graphing/functions/smoothing/
 ---

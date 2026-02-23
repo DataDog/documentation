@@ -60,7 +60,13 @@ Workload Protection supports the following Linux distributions:
 
 ## Deploy the Agent
 
-You can enable Workload Protection on the Datadog Agent using [multiple tools and systems][6].
+You can enable Workload Protection on the Datadog Agent using [multiple tools and systems][6]:
+
+- [Kubernetes][8]
+- [Docker][9]
+- [ECS EC2][10]
+- [Windows][11]
+- [Linux][12]
 
 ## Workload Protection Agent variables
 
@@ -71,5 +77,10 @@ The Datadog Agent has several [environment variables][7] that can be enabled for
 [3]: /agent/remote_config/?tab=configurationyamlfile
 [6]: /security/workload_protection/setup/agent
 [7]: /security/workload_protection/setup/agent_variables
+[8]: /security/workload_protection/setup/agent/kubernetes
+[9]: /security/workload_protection/setup/agent/docker
+[10]: /security/workload_protection/setup/agent/ecs_ec2
+[11]: /security/workload_protection/setup/agent/windows
+[12]: /security/workload_protection/setup/agent/linux
 [8]: /security/workload_protection/guide/ebpf-free-agent
 [9]: /security/workload_protection/troubleshooting/threats

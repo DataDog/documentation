@@ -1,5 +1,6 @@
 ---
 title: Mobile Device Widgets
+description: "Add Datadog widgets to your mobile home screen or lock screen for quick access to SLOs, incidents, dashboards, monitors, and on-call information."
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: "Blog"
@@ -30,6 +31,8 @@ Add widgets on your home screen to quickly access real-time critical information
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Widgets refresh every 30 minutes. Manually trigger refresh by tapping on timeframe located at top left of the widget.
 
 ### Incident widgets
 View your [open incidents][1] from your mobile home screen with Datadog widgets. To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app.
@@ -355,7 +358,7 @@ You can customize your On-Call pages widgets by filtering on:
 ## Lock screen widgets
 {{< img src="service_management/mobile/lockscreen_widget_may_2025.png" alt="Configured lock screen widgets displayed on iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-Lock screen widgets for monitors, SLOs, incidents, and dashboards are supported on iOS.
+Lock screen widgets for On-Call, Monitors, SLOs, Incidents, and Dashboards are supported on iOS.
 
 1. Long press on your lock screen.
 2. Tap **Customize**, then **Lock Screen**.
@@ -376,4 +379,4 @@ Lock screen widgets for monitors, SLOs, incidents, and dashboards are supported 
 [2]: /dashboards/widgets/slo/#setup
 [3]: /monitors/
 [4]: /dashboards/
-[5]: /service_management/on-call/
+[5]: /incident_response/on-call/

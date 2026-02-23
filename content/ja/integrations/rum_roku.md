@@ -12,7 +12,7 @@ categories:
 - モニター
 - ネットワーク
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_roku/README.md
 display_on_public_website: true
@@ -53,15 +53,15 @@ tile:
 
 ## 概要
 
-With the Datadog [Roku integration][1], you can spend less time triaging issues and more time releasing new features by:
+Datadog [Roku インテグレーション][1]を利用することで、問題のトリアージに費やす時間を減らし、新機能のリリースにより多くの時間を充てられます。たとえば、次のような操作が可能になります。
 
-- Debugging the root cause of slow performance issues and application crashes, network requests, or large media files
-- Improving application responsiveness, setting up service level indicators (SLIs), and diagnosing issues with out-of-the-box dashboards and real-time metrics
+- パフォーマンス低下の問題、アプリケーションのクラッシュ、ネットワークリクエスト、大容量メディアファイルの根本原因をデバッグできます
+- アプリケーションの応答性を向上させ、サービスレベルインジケータ (SLI) を設定し、すぐに使えるダッシュボードとリアルタイムメトリクスで問題を診断できます
 - 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
 ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
 
-- Analyzing critical user experience data such as screen engagement by demographics, version releases, or any custom attributes, to reach your business KPIs
+- デモグラフィック別、バージョンリリース別、その他のカスタム属性別の画面エンゲージメントなど、重要なユーザーエクスペリエンスデータを分析して、ビジネス KPI 達成に役立てることができます
 - カスタマイズ可能なアナリティクスと地理的マップによりユーザー行動傾向を把握
 
 アプリケーションのエンドツーエンドの健全性を監視します。
@@ -74,25 +74,25 @@ With the Datadog [Roku integration][1], you can spend less time triaging issues 
 
 ### RUM イベントの収集
 
-To start collecting Real User Monitoring events from your application, see [Roku Monitoring][2]. Additionally, you can [Connect RUM and Traces][3].
+アプリケーションからリアルユーザーモニタリングのイベント収集を開始するには、[Roku モニタリング][2]を参照してください。また、[RUM とトレースを接続][3]することもできます。
 
 ### ログの収集
 
-To start forwarding your Roku application's logs to Datadog, see [Roku Log Collection][4].
+Roku アプリケーションのログを Datadog に転送するには、[Roku ログ収集][4]をご覧ください。
 
 ## 収集データ
 
 ### メトリクス
 
-The Roku integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5].
+Roku インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
 
 ### イベント
 
-For more information about events and attributes, see [RUM Roku Data Collected][6].
+イベントや属性の詳細については、[RUM Roku データ収集][6]を参照してください。
 
 ### サービスチェック
 
-The Roku integration does not include any service checks.
+Roku インテグレーションにはサービスチェックは含まれません。
 
 ## トラブルシューティング
 
@@ -102,8 +102,8 @@ The Roku integration does not include any service checks.
 
 お役に立つドキュメント、リンクや記事:
 
-- [RUM Roku Channel Monitoring][2] documentation
-- [Monitor your Roku channels with Datadog RUM][8] blog post
+- [RUM Roku チャンネルモニタリング][2]ドキュメント
+- [Datadog RUM で Roku チャンネルをモニタリング][8]ブログ記事
 
 [1]: https://app.datadoghq.com/integrations/rum-roku
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/roku/

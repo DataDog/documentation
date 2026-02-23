@@ -256,7 +256,7 @@ Snowflake 웹 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ## 에이전트 점검: Snowflake
 
-<div class="alert alert-danger">Snowflake 에이전트 점검은 더 이상 지원되지 않으며, 추가 기능을 사용하고 Snowflake로의 API 통화량을 줄이려면 새로운 Snowflake 통합으로 전환하는 것이 좋습니다.</div>
+<div class="alert alert-warning">Snowflake 에이전트 점검은 더 이상 지원되지 않으며, 추가 기능을 사용하고 Snowflake로의 API 통화량을 줄이려면 새로운 Snowflake 통합으로 전환하는 것이 좋습니다.</div>
 
 ## 에이전트: 개요
 
@@ -277,7 +277,7 @@ Snowflake 점검은 [Datadog Agent][16] 패키지에 포함되어 있습니다.
 
 ### 에이전트: 설정
 
-<div class="alert alert-warning">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세한 내용은 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.
+<div class="alert alert-danger">Snowflake에서는 `SYSADMIN`과 같은 대체 역할에 권한을 부여할 것을 권장합니다. 자세한 내용은 <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN 역할</a> 제어를 참고하세요.
 
 1. Snowflake를 모니터링하려면 Datadog 특정 역할과 사용자를 생성하세요. Snowflake에서 다음을 실행하여 ACCOUNT_USAGE 스키마에 대한 액세스 권한이 있는 커스텀 역할을 생성합니다.
 

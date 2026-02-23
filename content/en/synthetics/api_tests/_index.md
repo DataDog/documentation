@@ -5,18 +5,12 @@ aliases:
   - /synthetics/uptime_check
   - /synthetics/api_test
 further_reading:
-- link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
-  tag: 'Blog'
-  text: 'Introducing Datadog Synthetic Monitoring'
-- link: 'https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/'
-  tag: 'Blog'
-  text: 'Improve your API test coverage with Datadog Synthetic Monitoring'
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
 - link: 'https://www.datadoghq.com/blog/monitor-apis-with-datadog'
   tag: 'Blog'
   text: 'Monitor your workflows with Datadog SSL, TLS, and Multistep API tests'
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
-  tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
 - link: '/getting_started/synthetics/api_test'
   tag: 'Documentation'
   text: 'Get started with API tests'

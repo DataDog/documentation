@@ -21,10 +21,6 @@ Lambda 関数は、トラフィックが増加すると多数の同時実行環�
 
 分布はデフォルトで `avg`、`sum`、`max`、`min`、`count` の集計を提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、また[タグの管理][3]も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][4]の両方で `avg` を使用します。カウントメトリクスタイプの分布を監視するには、[時間集計と空間集計][4]の両方で `sum` を使用します。時間・空間集計がどのように機能するかは、ガイド[グラフへのクエリ][5]を参照してください。
 
-### 履歴メトリクスの送信
-
-履歴メトリクス (過去 20 分以内のタイムスタンプのみ許可) を送信するには、[Datadog Forwarder](#with-the-datadog-forwarder) を使用する必要があります。[Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)は、StatsD プロトコルの制限により、現在のタイムスタンプを持つメトリクスしか送信できません。
-
 ### 多くのデータポイントを送信する
 
 Forwarder を使用して、同じメトリクスと同じタグのセットに対して多くのデータポイントを送信する場合、例えば大きな `for` ループの内部では、Lambda に顕著なパフォーマンスの影響があり、CloudWatch のコストにも影響が出る可能性があります。アプリケーション内でデータポイントを集計することで、オーバーヘッドを回避することができます。
@@ -123,19 +119,19 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
 
-// statsd クライアントビルダーをインポートする
+// StatsD クライアント ビルダーをインポート
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
 
-    // statsd クライアントのインスタンスを作成する
+    // StatsD クライアントを初期化
     private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
 
     @Override
     public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
 
-        // ディストリビューションメトリクスを送信する
+        // ディストリビューション メトリクスを送信
         Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
 
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
@@ -256,7 +252,7 @@ async function myHandler(event, context) {
         'order:online'              // 2 番目のタグ
     );
 
-    // 過去 20 分以内のタイムスタンプでメトリクスを送信します
+    // 過去 20 分以内のタイムスタンプでメトリクスを送信します 
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // メトリクス名
         12.45,                      // メトリクス値
@@ -380,7 +376,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 
 これには、[Datadog IAM ポリシー][10]で次の AWS アクセス許可が必要です。
 
-| AWS アクセス許可            | 説明                                                 |
+| AWS アクセス許可            | Description                                                 |
 | ------------------------- | ----------------------------------------------------------- |
 | `logs:DescribeLogGroups`  | 使用可能なロググループを一覧表示します。                                  |
 | `logs:DescribeLogStreams` | グループで使用可能なログストリームを一覧表示します。                     |

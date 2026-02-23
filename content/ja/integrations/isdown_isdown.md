@@ -11,7 +11,7 @@ author:
   support_email: support@isdown.app
   vendor_id: isdown
 categories:
-- マーケットプレイス
+- marketplace
 - notifications
 custom_kind: integration
 dependencies: []
@@ -30,10 +30,10 @@ pricing:
 - billing_type: flat_fee
   includes_assets: true
   product_id: isdown
-  short_description: Monitor outages of all your external services in Datadog
-  unit_price: 89
+  short_description: Datadog で最大 70 社のクラウド ベンダーのステータス ページを監視します。リアルタイムの障害情報とヘルス ダッシュボードを提供します。
+  unit_price: 99
 public_title: IsDown
-short_description: Connect the status pages from all your cloud providers to Datadog
+short_description: Datadog でクラウド ベンダーのステータス ページをまとめて接続/監視できます。リアルタイムの障害情報とヘルス ダッシュボードを提供します。
 supported_os:
 - linux
 - windows
@@ -48,9 +48,9 @@ tile:
   - Category::Marketplace
   - Category::Notifications
   configuration: README.md#Setup
-  description: Connect the status pages from all your cloud providers to Datadog
+  description: Datadog でクラウド ベンダーのステータス ページをまとめて接続/監視できます。リアルタイムの障害情報とヘルス ダッシュボードを提供します。
   media:
-  - caption: IsDown と Datadog フロー
+  - caption: IsDown と Datadog Flow
     image_url: images/isdown_datadog_flow.jpg
     media_type: image
   - caption: IsDown ダッシュボード
@@ -73,29 +73,29 @@ tile:
 
 ## 概要
 
-[IsDown][1] is a status page aggregator and outage monitoring tool that helps businesses monitor their dependencies. Using IsDown, provide your team with real-time monitoring and instant notifications for outages in all your tools and cloud providers. IsDown monitors more than 3100 status pages.
+[IsDown][1] は、依存先サービスを監視したい企業向けの、ステータス ページ集約/障害監視ツールです。IsDown を利用すると、利用中のツールやクラウド プロバイダー全体に対して、リアルタイムのベンダー監視と障害の即時通知をチームに提供できます。IsDown は 3100 を超えるステータス ページを監視しています。
 
-Through the [out-of-the-box integration][3], you can receive alerts from third-party dependencies in Datadog, monitor business critical services, and understand the frequency of outages all within the out-of-the-box dashboard.
+[すぐに使えるインテグレーション][3] を通じて、Datadog でサード パーティーの依存サービスからのアラートを受信し、ビジネス上重要なサービスを監視しつつ、障害の発生頻度をすぐに使えるダッシュボード上で把握できます。
 
-### All-in-one monitoring
-Monitor all official status pages and your own services in Datadog, streamlining the process and keeping your team updated in real-time on essential service health.
+### 一元的な監視
+公式のステータス ページと自社サービスを Datadog でまとめて監視し、運用を効率化しながら、重要サービスの健全性をリアルタイムでチームに共有できます。
 
-### Instant outage alerts
-IsDown instantly alerts when there is an outage, enabling quicker response times and reducing the downtime's impact on your business operations.
+### 即時の障害アラート
+障害が発生すると IsDown が即座にアラートを通知するため、対応を迅速化でき、ダウンタイムによる業務への影響を抑えられます。
 
-### Customizable monitoring
-Monitor only the vital services and components of third party dependencies, ensuring you receive relevant outage notifications and avoid unneeded alerts.
+### カスタマイズ可能な監視
+サード パーティー依存サービスのうち、重要なサービス/コンポーネントだけを監視することで、必要な障害通知だけを受け取り、不要なアラートを避けられます。
 
-### 10 minute setup
-Seamlessly integrate with Datadog. Choose the services to monitor, connect to Datadog, and immediately have access to all your cloud providers' statuses and outages.
+### 10 分でセットアップ
+Datadog とシームレスに連携できます。監視対象のサービスを選択し Datadog に接続するだけで、利用中のクラウド プロバイダーのステータスや障害情報にすぐアクセスできます。
 
-Check out the [IsDown Datadog integration][4] for more information.
+詳細は [IsDown と Datadog のインテグレーション][4] を参照してください。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のいずれかのチャンネルから IsDown にお問い合わせください。
 
-- Email: [support@isdown.app][2]
+- メール: [support@isdown.app][2]
 - Web アプリのチャットサポート
 
 
@@ -103,5 +103,6 @@ Check out the [IsDown Datadog integration][4] for more information.
 [2]: mailto:support@isdown.app
 [3]: https://app.datadoghq.com/integrations/isdown
 [4]: https://isdown.app/datadog-integration
+
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/isdown-isdown" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/isdown-isdown" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

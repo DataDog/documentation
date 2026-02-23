@@ -41,7 +41,7 @@ Para empezar, consulta la documentación de [instrumentación en un solo paso][1
 Para instrumentar automáticamente tu aplicación con bibliotecas de Datadog:
 
 1. [Instala y configura el Agent](#install-and-configure-the-agent).
-2. [Añade la biblioteca de rastreo de Datadog a tu código](#instrument-your-application).
+2. [Añade la librería de rastreo de Datadog a tu código](#instrument-your-application).
 
 ### Instalación y configuración del Agent
 
@@ -94,7 +94,7 @@ Configura tu aplicación para enviar trazas utilizando una de los siguientes bib
 
 <br>
 
-Para instrumentar una aplicación escrita en un lenguaje que no tiene compatibilidad con la biblioteca oficial, consulta la lista de [bibliotecas de rastreo comunitarias][1].
+Para instrumentar una aplicación escrita en un lenguaje que no tiene compatibilidad con la librería oficial, consulta la lista de [bibliotecas de rastreo comunitarias][1].
 
 [1]: /es/developers/community/libraries/#apm-tracing-client-libraries
 [8]: /es/agent/configuration/agent-configuration-files/#agent-main-configuration-file

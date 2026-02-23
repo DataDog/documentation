@@ -1,5 +1,6 @@
 ---
 title: How to monitor non-static thresholds
+description: "Monitor variable thresholds using seasonal patterns, reference metrics, and composite monitors for dynamic alerting scenarios."
 further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"

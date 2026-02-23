@@ -1,5 +1,6 @@
 ---
 title: Enable RUM on Your Shopify Store
+description: "Set up RUM monitoring on Shopify stores to track customer interactions, performance, and conversion rates for e-commerce optimization."
 private: true
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
@@ -10,7 +11,7 @@ further_reading:
   text: 'Alerting With Conversion Rates'
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <a href="https://www.shopify.com/plus/upgrading-to-checkout-extensibility">Shopify's Checkout Extensibility</a> is not supported with RUM tracking. If this feature is critical for your business needs, create a ticket with <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 </div>
 
@@ -66,8 +67,8 @@ making data-driven decisions to improve your store
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code
-[3]: /real_user_monitoring/session_replay/browser/
+[3]: /session_replay/browser/
 [5]: /real_user_monitoring/platform/generate_metrics/
 

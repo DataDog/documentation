@@ -28,7 +28,7 @@ Créez une variable globale et ajoutez-y votre clé de secret ou un code QR four
 5. Saisissez la **clé du secret** de votre variable ou importez une image de code QR.
 6. Cliquez sur **+ Generate** pour créer un TOTP. Vous pouvez copier le mot de passe généré à l'aide de l'icône **Copier**.
 7. Sous **Permissions settings**, limitez l'accès à votre variable à certains rôles de votre organisation. Pour en savoir plus sur les rôles, consultez la [documentation relative au RBAC][1].
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 La fonctionnalité de restriction d'accès RBAC aux variables globales est disponible en version bêta. Pour en bénéficier, contactez <a href="https://docs.datadoghq.com/help/">l'assistance Datadog</a>.</div>
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Créer un token MFA" style="width:100%;" >}}

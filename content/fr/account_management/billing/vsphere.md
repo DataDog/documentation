@@ -1,9 +1,10 @@
 ---
 title: Facturation de l'intégration vSphere
 ---
+
 ## Présentation
 
-Datadog facture chaque Agent installé sur un serveur vCenter et chaque machine virtuelle surveillée.
+Datadog facture chaque Agent installé sur un serveur vCenter ainsi que chaque VM et host ESXi surveillés.
 
 ## Exclusion des VM vSphere
 

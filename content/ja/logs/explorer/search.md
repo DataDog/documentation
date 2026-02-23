@@ -17,13 +17,31 @@ title: ログを検索
 
 ## 概要
 
-個々のログからの情報はリストとして視覚化すると便利ですが、集計することで価値ある情報にアクセスできる場合もあります。この情報にアクセスするには、[ログエクスプローラー][5]でログを検索し、時系列、トップリスト、ツリーマップ、円グラフまたはテーブルとして表示します。
+[Logs Explorer][5] を使用すると、個々のログをリストとして検索・表示できます。ただし、最も価値のあるインサイトはログを大規模に集約することで得られることが多いです。検索機能を使用してログをフィルタリングし、時系列チャート、トップ リスト、ツリー マップ、円グラフ、またはテーブルとして可視化することで、ログ データ全体のトレンド、パターン、外れ値を把握できます。
 
-ログエクスプローラーの検索は、時間範囲と検索クエリからなり、`key:value` 検索と[全文検索][6]が混在しています。
+## 自然言語クエリ
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+Natural Language Queries は <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では利用できません。
+</div>
+{{% /site-region %}}
+
+<div class="alert alert-info">Logs 用 Natural Language Queries (NLQ) は <strong>Llama を使用して構築されています</strong>。</div>
+
+Natural Language Queries (NLQ) を使用すると、探している内容を平易な英語で記述できます。Datadog がリクエストを自動的に構造化されたログ クエリへ変換するため、複雑な構文を記述せずにログを探索できます。この機能にアクセスするには、検索フィールドの **Ask** をクリックします。
+
+{{< img src="/logs/explorer/search/log_explorer_nlq.mp4" alt="Logs Explorer で自然言語クエリを使用して、平易な英語のフレーズでログを検索する方法を示す" video=true >}}
+
+システムは自然言語の入力を Datadog クエリに変換し、サービス、属性、タグ、時間範囲などのコンテキストを理解します。また、関連フィールドを自動的に検出し、「Top 20 services by errors」や「Show errors from service X in the past 24 hours」のような簡単な説明から可視化を作成できます。
+
+NLQ を無効にするには [`org_management` permissions][8] が必要です。[Organization Settings > Preferences][7] に移動し、Natural Language Queries 機能をオフに切り替えてください。
 
 ## 検索クエリ
 
-例えば、過去 15 分間に Web ストアサービスがエラーステータスで生成したログをフィルタリングするには、`service:payment status:error rejected` のようなカスタムクエリを作成し、時間範囲を `Past 15 minutes` に設定します。
+Log Explorer の検索は時間範囲と検索クエリで構成され、`key:value` と [全文検索][6] を組み合わせて使用します。
+
+Web ストア サービスが生成したログのうちステータスが error のものを過去 15 分間でフィルタリングするには、`service:payment status:error rejected` のようなカスタム クエリを作成し、時間範囲を `Past 15 minutes` に設定します。
 
 {{< img src="logs/explorer/search_filter.png" alt="ログエクスプローラーで、Web ストアサービスの支払い拒否のエラーログをフィルターする検索クエリを作成する" style="width:100%;" >}}
 
@@ -42,7 +60,7 @@ title: ログを検索
 
 ### ファセットと値のオートコンプリート
 
-検索バーは、検索バーに入力された内容に基づきファセットを自動で提案します。これらのファセットは、[ファセットパネル][5]内での位置と同じ順番で表示されます。ファセットの表示名が定義されている場合は、ドロップダウンメニューの右側に表示されます。ファセットパネルに表示されるように設定されていないファセットは、検索時に自動提案されません。
+検索バーは入力内容に基づいてファセットを自動提案します。これらのファセットは [ファセット パネル][5] での配置順と同じ順序で表示されます。ファセットに表示名が定義されている場合、その名前はドロップダウン メニューの右側に表示されます。
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="クエリとして `network` が、オートコンプリートのオプションとしてファセット @network.bytes_written、@network.client.ip、@network.interface が表示されているログ検索バー" style="width:80%;">}}
 
@@ -95,3 +113,5 @@ title: ログを検索
 [4]: /ja/dashboards/guide/custom_time_frames
 [5]: /ja/logs/explorer/
 [6]: /ja/logs/explorer/search_syntax/#full-text-search
+[7]: https://app.datadoghq.com/organization-settings/preferences
+[8]: /ja/account_management/rbac/permissions/#access-management

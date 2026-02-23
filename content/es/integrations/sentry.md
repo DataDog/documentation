@@ -19,7 +19,7 @@ categories:
 - collaboration
 - issue tracking
 - event management
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,7 +31,8 @@ is_public: true
 manifest_version: 2.0.0
 name: sentry
 public_title: Sentry
-short_description: Consulta las excepciones de Sentry en tu flujo de eventos de Datadog.
+short_description: Consulta las excepciones de Sentry en tu flujo (stream) de eventos
+  de Datadog.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -40,63 +41,104 @@ tile:
   - Category::Issue Tracking
   - Category::Event Management
   - Offering::Integration
-  configuration: README.md#Setup
+  configuration: README.md#Configuración
   description: Consulta las excepciones de Sentry en tu flujo de eventos de Datadog.
   media: []
-  overview: README.md#Overview
+  overview: README.md#Información general
   resources:
   - resource_type: blog
     url: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/
-  support: README.md#Troubleshooting
+  support: README.md#Solucionar problemas
   title: Sentry
 ---
 
-<!--  FUENTE https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/sentry/sentry.png" alt="Evento de Sentry" popup="true">}}
-
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-Sentry proporciona monitorización del rendimiento de aplicaciones y seguimiento de errores basados en la nube y autoalojados que ayudan a los equipos de software a ver con mayor claridad, resolver más rápido y aprender de manera continua. 
+Sentry ha dejado obsoletas las integraciones de webhooks legacy y ahora recomienda utilizar **integraciones internas de Sentry** con webhooks para reenviar eventos a sistemas externos.
 
-La integración de Sentry de Datadog reenvía de manera automática los eventos de Sentry al flujo de eventos de Datadog, lo que te permite buscar y comentar errores y correcciones de fallos, y correlacionar los errores de Sentry con métricas y datos de tus demás sistemas.
+Para reenviar eventos a Datadog, debes configurar una integración de webhook directamente en Sentry. Esta configuración permite a Sentry enviar eventos a un endpoint público de tu elección compatible con tu organización.
+
+Encontrarás más información e instrucciones de configuración en [la documentación oficial de Sentry][1].
+
+Puedes encontrar la URL de admisión de Datadog (para logs o eventos) en la [documentación de la API Datadog][2] o en la configuración de la cuenta Datadog.
+
+## Webhooks legacy
+
+Si anteriormente configuraste la integración de webhooks legacy de Sentry, esta puede seguir funcionando por ahora. Sin embargo, **todas las nuevas configuraciones de webhooks deben utilizar las integraciones internas de Sentry** de ahora en adelante.
 
 ## Configuración
 
-### Instalación
+### Configuración
 
-Configuración de la integración de Sentry:
+## Paso 1: Desplegar el Webhook Forwarder
 
-1. Inicia sesión en Sentry.
-2. Dirígete a **Settings > Projects** (Configuración > Proyectos) y selecciona el proyecto adecuado.
-3. En el lado izquierdo, selecciona **Legacy Integrations** (Integraciones heredadas).
-4. Desplázate hasta **Webhooks integration** (Integración de webhooks), haz clic en el control deslizante para activarla y, a continuación, haz clic en **Configure Plugin** (Configurar complemento).
-5. En **Callback URLs'** (URLs de devolución de llamada), ingresa la URL de devolución de llamada que se copió del cuadro de la integración.
-6. Haz clic en **Save changes** (Guardar cambios).
-7. Si es necesario, habilita la integración al hacer clic en **Enable Plugin** (Habilitar complemento).
+Los webhooks de Sentry no pueden incluir cabeceras personalizadas. Debes desplegar un pequeño servicio en tu infraestructura que:
 
-De manera predeterminada, Sentry envía un ping al webhook con datos de eventos cada vez que hay una excepción nueva (en lugar de una instancia nueva de una excepción ya registrada). Si quieres activadores diferentes (o adicionales), puedes configurarlos en la sección de alertas de la configuración de tu proyecto.
+- Acepte POST de webhooks entrantes de Sentry
+- Añada las cabeceras de autenticación necesarias
+- Reenvíe la carga útil a tu destino
 
-### Añadir un nombre de host a los errores (opcional)
+Para obtener más información, consulta la [documentación oficial de Sentry][1].
 
-En ocasiones, el nombre del servidor que informa Sentry puede no coincidir con el nombre de host que reconoce Datadog. A fin de solucionarlo, establece un valor personalizado para la etiqueta (tag) `server_name`, que se adjunta a cada evento.
+## Paso 2: Crear una integración interna en Sentry
 
-Para usar un nombre de host diferente y conservar el valor `server_name` predeterminado de Sentry, establece una etiqueta `hostname` en tus eventos. Consulta la documentación de Sentry sobre la [Personalización de etiquetas][1] para tu lenguaje específico.
+1. Ve a **Configuración > Configuración del desarrollador > Integraciones internas**.
 
-## Solucionar problemas
+2. Haz clic en **Create New Internal Integration** (Crear nueva integración interna).
 
-### No se muestran los errores de Sentry en Datadog
+3. Rellena:
 
-Si no se muestran los errores de Sentry en Datadog, es probable que no se esté activando el webhook de Sentry. Esto podría deberse a las siguientes situaciones:
+   - **Nombre**: Reenviador de alertas
+   - **URL del webhook**: La URL pública de tu servicio desplegado
+   - Activar una **acción de reglas de alerta**
 
-**Las alertas solo se envían cuando se activa una regla**:<br>
-Por ejemplo, si la condición de la regla es «cuando se produce un evento por primera vez», no se envía una alerta hasta que se genera un problema nuevo. Según la cantidad de problemas únicos que reciba tu proyecto, esto puede llevar cierto tiempo.
+4. Definir permisos:
 
-**La integración de notificaciones se encuentra deshabilitada**:<br>
-Asegúrate de que la integración de notificaciones se encuentre habilitada en las acciones de la regla, ya sea como servicio específico o en «todos los servicios habilitados».
+   - **Problemas y eventos**: Leer
+   - **Alertas**: Leer
 
-## Referencias adicionales
+5. Habilitar activadores de webhooks:
 
-- [Corrección de errores colaborativa con la integración de Sentry de Datadog][2]
+   - `issue`
+   - `error`
 
-[1]: https://docs.sentry.io/platforms/java/enriching-events/tags/
-[2]: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/
+6. Haz clic en **Save** (Guardar).
+
+7. Opcionalmente, genera un token si tu proxy admite la autenticación basada en token.
+
+## Paso 3: Crear una regla de alerta
+
+1. Ve a **Configuración del proyecto > Alertas > Alertas de problemas**.
+
+2. Crea una nueva regla de alerta:
+
+   - **CUANDO**: Se crea un nuevo problema
+   - (Opcional) Añadir filtros
+   - **LUEGO**: Enviar una notificación utilizando tu integración interna
+   - Definir la frecuencia y el intervalo de notificación, según sea necesario
+
+3. Utiliza la opción **Enviar notificación de test** para verificar la configuración.
+
+## Paso 4: Confirmar recepción
+
+Una vez configurado:
+
+- Monitoriza tu sistema de destino para buscar las alertas reenviadas.
+- Confirma que la estructura y el contenido de la carga útil coinciden con las expectativas.
+- Utiliza los logs de tu proxy para depurar problemas de entrega.
+
+Si no aparecen las alertas:
+
+- Asegúrate de que tu proxy es accesible desde la Internet pública.
+- Comprueba que las cabeceras de autenticación se están añadiendo correctamente.
+- Revisa los logs de webhooks de Sentry en **Configuración del desarrollador > Integraciones internas > Tu integración > Logs**.
+
+## Soporte
+
+Si tienes preguntas o problemas para configurar la integración de webhooks de Sentry, ponte en contacto directamente con el servicio de asistencia de Sentry:  
+[https://support.sentry.io][3]
+
+[1]: https://docs.sentry.io/organization/integrations/integration-platform/webhooks/
+[2]: https://docs.datadoghq.com/es/api/latest/logs/#send-logs
+[3]: https://support.sentry.io

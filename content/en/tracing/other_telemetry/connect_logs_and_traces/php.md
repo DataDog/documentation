@@ -23,11 +23,11 @@ further_reading:
 
 ## Automatic injection
 
-Starting in version `0.89.0`, the PHP tracer automatically injects trace correlation identifiers into application logs. To enable automatic injection, set the environment variable `DD_LOGS_INJECTION` (INI setting `datadog.logs_injection`) to `true`.
+Starting in version `1.12.0`, the PHP tracer automatically injects trace correlation identifiers into application logs. To enable automatic injection for older tracer versions, set the environment variable `DD_LOGS_INJECTION` (INI setting `datadog.logs_injection`) to `true`.
 
 The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Laminas Log][5].
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Set up your logging library to produce logs in JSON format so that:
   <ul>
     <li>You don't need <a href="/logs/log_configuration/parsing">custom parsing rules</a>.</li>
@@ -93,7 +93,7 @@ The PHP tracer replaces the placeholders with the corresponding values. For exam
 
 ## Manual injection
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Note:</strong> The function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> and returns decimal trace identifiers.
 </div>
 

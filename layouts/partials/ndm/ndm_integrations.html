@@ -1,0 +1,47 @@
+{{ $root := . }}
+{{ $ndm_integrations := slice
+  (dict "name" "cisco" "href" "/integrations/snmp_cisco/" "src" "integrations_logos/cisco_small.svg")
+  (dict "name" "fortinet-fortigate" "href" "/integrations/snmp-fortinet/" "src" "integrations_logos/snmp-fortinet_small.svg")
+  (dict "name" "hpe-procurve" "href" "/integrations/snmp-aruba/" "src" "integrations_logos/snmp-aruba_small.svg")
+  (dict "name" "juniper" "href" "/integrations/snmp-juniper/" "src" "integrations_logos/snmp-juniper_small.svg")
+  (dict "name" "palo alto" "href" "/integrations/pan-firewall/" "src" "integrations_logos/palo-alto-panorama_small.svg")
+}}
+<div class="ndm-integrations">
+  <div class="container cards-dd">
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range first 4 $ndm_integrations }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range first 4 (after 4 $ndm_integrations) }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3">
+      {{ range after 8 $ndm_integrations }}
+      <div class="col">
+        <a class="card h-100" href="{{ .href }}">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
+          </div>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

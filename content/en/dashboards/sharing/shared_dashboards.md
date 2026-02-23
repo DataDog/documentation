@@ -1,5 +1,6 @@
 ---
 title: Shared Dashboards
+description: Create public, invite-only, and embedded dashboards for external access with customizable timeframes and variables.
 aliases:
     - /graphing/faq/is-there-a-way-to-share-graphs
     - /graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
@@ -34,6 +35,8 @@ All shared dashboards in the organization and their public access settings are l
 **Note**: When the shared dashboards feature is disabled, dashboards are no longer publicly accessible. However, their configurations remain viewable and editable. This feature operates independently of the `Active` or `Paused` status of individual dashboards, even `Active` shared dashboards become publicly inaccessible.
 
 Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
+
+Viewers of Shared Dashboards see all telemetry data displayed in the Dashboard in accordance to the [creator's permissions][4]. Review your dashboard content before sharing to ensure no sensitive or confidential data is exposed.
 
 ## Share states
 
@@ -154,7 +157,7 @@ Shared dashboards support a limited number of timeframe options and do not allow
 
 ## Edit Shared Dashboards
 
-<div class="alert alert-warning">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
+<div class="alert alert-danger">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
 
 To make a change to the share type, configuration, or recipients of a shared dashboard:
 
@@ -178,3 +181,4 @@ View all shared dashboards in your organization and your settings on the [Shared
 [1]: /dashboards/#refresh-rate
 [2]: https://app.datadoghq.com/dashboard/shared
 [3]: https://app.datadoghq.com/organization-settings/public-sharing
+[4]: /account_management/rbac/data_access/#dashboards-and-notebooks

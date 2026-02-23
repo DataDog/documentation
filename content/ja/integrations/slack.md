@@ -43,7 +43,7 @@ Slack を Datadog に接続し、次の方法でチームのコラボレーシ�
 {{% tab "Datadog for Slack" %}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     <a href="https://www.datadoghq.com/blog/datadog-slack-app/">Datadog for Slack</a> は {{< region-param key="dd_site_name" >}} サイトでは利用できません。US1-FED サイトの Slack に通知を送信するには、Slack webhook (レガシー) を使用してください。
 </div>
 {{% /site-region %}}

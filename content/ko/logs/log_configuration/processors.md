@@ -684,8 +684,7 @@ Lookup 프로세서는 다음 작업을 수행합니다:
 
   * 선택적으로 매핑 테이블에서 값을 찾지 못하면 참조 테이블의 값으로 대상 속성을 생성합니다. [참조 테이블][101]의 값은 **참조 테이블** 탭 에서 선택할 수 있습니다.
 
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="조회 프로세서" 
-    style="width:80%;">}}
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="조회 프로세서" style="width:80%;">}}
 
 
 [101]: /ko/integrations/guide/reference-tables/

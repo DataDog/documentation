@@ -53,9 +53,9 @@ type: lenguaje de código múltiple
 
 ### Tiempos de ejecución de .NET Framework compatibles
 
-El rastreador de .NET es compatible con la instrumentación en .NET Framework desde 4.6.1 en adelante.
+El rastreador .NET es compatible con la instrumentación en .NET Framework desde 4.6.1 en adelante.
 
-Para ver una lista completa de las compatibilidades de la arquitectura de la biblioteca y del procesador de Datadog .NET Framework (incluyendo las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
+Para ver la lista completa de los requisitos de compatibilidad para las bibliotecas .NET Framework y de la arquitectura de procesadores de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
 
 ## Para instalar y empezar a utilizar
 
@@ -63,8 +63,8 @@ Para ver una lista completa de las compatibilidades de la arquitectura de la bib
     Para configurar Datadog APM en AWS Lambda, consulta el <strong><a href="/tracing/serverless_functions/">rastreo de funciones serverless</a></strong>en Azure App Service y también el <strong><a href="/serverless/azure_app_services/">rastreo en Azure App Service</a></strong>.
 </div>
 
-<div class="alert alert-warning">
- <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación. 
+<div class="alert alert-danger">
+ <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de generación de perfiles CLR de .NET. Esta API sólo permite un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecuta sólo una solución APM en tu entorno de aplicación.
 </div>
 
 ### Instalación
@@ -77,19 +77,19 @@ Antes de empezar, asegúrate de haber [instalado y configurado el Agent][12].
 
 ### Instalación del rastreador
 
-Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la biblioteca de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
+Después de instalar y configurar tu Datadog Agent, el siguiente paso es añadir la librería de rastreo directamente en la aplicación para instrumentarla. Consulta más bibliografía con [información sobre la compatibilidad][1].
 
-Instala el rastreador de .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
+Instala el rastreador .NET de Datadog en toda la máquina para que se instrumenten todos los servicios de la máquina, o puedes instalarlo aplicación por aplicación para que los desarrolladores gestionen la instrumentación a través de las dependencias de la aplicación. Para ver más instrucciones sobre la instalación en toda la máquina, haz clic en la pestaña de Windows. Para ver más instrucciones sobre la instalación aplicación por aplicación, haz clic en la pestaña de NuGet.
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-Para instalar el rastreador de .NET en toda la máquina:
+Para instalar el rastreador .NET en toda la máquina:
 
-1. Descarga el [instalador MSI del rastreador de .NET][1]. Selecciona el instalador MSI que corresponda a la arquitectura del sistema operativo (x64 ó x86).
+1. Descarga el [instalador de .NET Tracer MSI][1]. Utiliza el instalador MSI x64 si estás ejecutando Windows de 64 bits; éste puede instrumentar tanto aplicaciones de 64 bits como de 32 bits. Elige el instalador x86 sólo si estás ejecutando Windows de 32 bits. A partir de la versión 3.0.0, sólo se proporciona el instalador x64, ya que no admitimos sistemas operativos de 32 bits.
 
-2. Ejecuta el instalador MSI del rastreador de .NET con privilegios administrativos.
+2. Ejecuta el instalador MSI del rastreador .NET con privilegios administrativos.
 
 También puedes aplicar un script para la configuración del MSI ejecutando lo siguiente en PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
@@ -98,11 +98,11 @@ También puedes aplicar un script para la configuración del MSI ejecutando lo s
 
 {{% tab "NuGet" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Nota:</strong> Esta instalación no instrumenta aplicaciones que se ejecutan en IIS. En el caso de aplicaciones que se ejecutan en IIS, sigue el proceso de Windows para la instalación en toda la máquina.
 </div>
 
-Para instalar el rastreador de .NET aplicación por aplicación:
+Para instalar el rastreador .NET aplicación por aplicación:
 
 1. Añade el [paquete NuGet][1] `Datadog.Trace.Bundle` a tu aplicación.
 
@@ -114,7 +114,7 @@ Para instalar el rastreador de .NET aplicación por aplicación:
 
 ### Activación del rastreador para tu servicio
 
-Para activar el rastreador de .NET para tu servicio, configura las variables de entorno necesarias y reinicia la aplicación.
+Para activar el rastreador .NET para tu servicio, configura las variables de entorno necesarias y reinicia la aplicación.
 
 Para obtener más información sobre los diferentes métodos de configurar variables de entorno, consulta [Proceso de configuración de variables de entorno](#configuring-process-environment-variables).
 
@@ -124,7 +124,7 @@ Para obtener más información sobre los diferentes métodos de configurar varia
 
 #### Internet Information Services (IIS)
 
-1. El instalador MSI del rastreador de .NET añade todas las variables de entorno necesarias. No necesitas configurar ninguna variable de entorno.
+1. El instalador MSI del rastreador .NET añade todas las variables de entorno necesarias. No necesitas configurar ninguna variable de entorno.
 
 2. Para instrumentar aplicaciones alojadas en IIS automáticamente, ejecuta los siguientes comandos como administrador para detener e reiniciar IIS completamente:
 
@@ -134,20 +134,21 @@ Para obtener más información sobre los diferentes métodos de configurar varia
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-   <div class="alert alert-warning">
+   <div class="alert alert-danger">
      <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
-#### Servicios que no se encuentran en IIS
+#### Servicios fuera de IIS
 
-<div class="alert alert-info">Cuando inicias v2.14.0, no necesitas configurar <code>COR_PROFILER</code>, si ya has instalado el rastreador utilizando el MSI.</div>
+<div class="alert alert-danger">
+ <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar el .NET biblioteca en <em>cualquier</em>.NET proceso que se inicie con estas variables entorno configuradas. Debe limitar Instrumentación sólo a las aplicaciones que necesitan ser instrumentadas. <strong>No configure estas variables entorno de forma global, ya que esto provocaría la instrumentación de <em>todas</em> las aplicaciones .NET procesos en host.</strong>
+</div>
 
 1. Configura las siguientes variables de entorno, obligatorias para la instrumentación automática, a fin de adjuntarlas a tu aplicación:
 
    ```
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. En el caso de aplicaciones y servicios de Windows independientes, debes reiniciar la aplicación manualmente.
 
@@ -158,17 +159,16 @@ Para obtener más información sobre los diferentes métodos de configurar varia
 Sigue las instrucciones Readme (Léeme) del paquete, también disponibles en el repositorio [`dd-trace-dotnet`][1].
 En el [repositorio][2], también hay ejemplos de Docker disponibles.
 
-
-
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
 [2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### Visualización en directo de tus datos
 
-Después de activar el rastreador de .NET para tu servicio:
+Después de activar el rastreador .NET para tu servicio:
 
 1. Reinicia tu servicio.
 
@@ -178,27 +178,28 @@ Después de activar el rastreador de .NET para tu servicio:
 
 ## Configuración
 
-Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][4].
+Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][4].
 
 ## Instrumentación personalizada
 
-Tu configuración de la instrumentación personalizada depende de tu instrumentación automática e incluye pasos adicionales que dependen del método:
+La instrumentación personalizada depende de tu instrumentación automática e incluye pasos adicionales según el método:
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-<div class="alert alert-warning">
-  <strong>Nota:</strong> Si estás utilizando la instrumentación automática y la personalizada, debes mantener sincronizadas las versiones del paquete (por ejemplo: MSI y NuGet).
+<div class="alert alert-danger">
+<strong>Nota:</strong> A partir de la versión 3.0.0, la instrumentación personalizada requiere el uso de la instrumentación automática. Debes intentar mantener sincronizadas las versiones automáticas y personalizadas del paquete de instrumentación (por ejemplo: MSI y NuGet) y asegurarte de no mezclar versiones principales de paquetes.
 </div>
 
 Para utilizar la instrumentación personalizada en tu aplicación .NET:
 
-1. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
-2. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos (spans).
-
+1. Instrumenta tu aplicación utilizando la instrumentación automática.
+2. Añade el [paquete NuGet][1] `Datadog.Trace` a tu aplicación.
+3. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos (spans).
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
+
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
@@ -215,11 +216,11 @@ Para obtener más información sobre cómo añadir tramos y etiquetas (tags) par
 
 ## Configuración de variables de entorno para procesos
 
-Para adjuntar la instrumentación automática a tu servicio, debes configurar las variables de entorno obligatorias antes de iniciar la aplicación. Consulta la sección [Activar el rastreador para tu servicio](#enable-the-tracer-for-your-service) para identificar las variables de entorno que debes configurar, dependiendo del método que has utilizado para instalar el rastreador de .NET y sigue los siguientes ejemplos para configurar las variables de entorno correctamente, según el entorno de tu servicio instrumentado.
+Para adjuntar la instrumentación automática a tu servicio, debes configurar las variables de entorno obligatorias antes de iniciar la aplicación. Consulta la sección [Activar el rastreador para tu servicio](#enable-the-tracer-for-your-service) para identificar las variables de entorno que debes configurar, dependiendo del método que has utilizado para instalar el rastreador .NET y sigue los siguientes ejemplos para configurar las variables de entorno correctamente, según el entorno de tu servicio instrumentado.
 
-### Windows
-
-<div class="alert alert-info">Cuando inicias v2.14.0, no necesitas configurar <code>COR_PROFILER</code>, si ya has instalado el rastreador utilizando el MSI.</div>
+<div class="alert alert-danger">
+ <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar el .NET biblioteca en <em>cualquier</em>.NET proceso que se inicie con estas variables entorno configuradas. Debe limitar Instrumentación sólo a las aplicaciones que necesitan ser instrumentadas. <strong>No configure estas variables entorno de forma global, ya que esto provocaría la instrumentación de <em>todas</em> las aplicaciones .NET procesos en host.</strong>
+</div>
 
 #### Servicios de Windows
 
@@ -231,7 +232,6 @@ En el Editor de registro, crea un valor de cadena múltiple llamado `Environment
 
 ```text
 COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Uso del Editor de registro para crear variables de entorno para un servicio de Windows" >}}
@@ -241,8 +241,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value 'COR_ENABLE_PROFILING=1'
 ```
 {{% /tab %}}
 
@@ -271,12 +270,10 @@ Una vez instalado el MSI, no es necesaria ninguna configuración adicional para 
 Para instrumentar una aplicación de consola automáticamente, antes de iniciar tu aplicación configura las variables de entorno desde un archivo de lote:
 
 ```bat
-rem Configura variables de entorno
+rem Set required environment variables
 SET COR_ENABLE_PROFILING=1
-rem Excepto v2.14.0 o superior y que se haya instalado el rastreador con el MSI
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
-rem Configura variables de entorno de Datadog adicionales
+rem (Optionally) Set additional Datadog environment variables, for example:
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 
@@ -284,7 +281,7 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

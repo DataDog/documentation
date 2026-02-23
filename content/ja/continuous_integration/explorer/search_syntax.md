@@ -1,6 +1,9 @@
 ---
 description: CI Visibility Explorer でパイプライン実行のすべてを検索する方法を説明します。
 further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 - link: /continuous_integration/search
   tag: ドキュメント
   text: パイプラインをフィルターおよびグループ化する
@@ -50,6 +53,8 @@ title: CI Visibility Explorer の検索構文
 * `web*` は、`web` で始まるすべてのログメッセージに一致します。
 * `*web` は、`web` で終わるすべてのログメッセージに一致します。
 
+**注**: ワイルドカードはダブルクォーテーションの外側でのみワイルドカードとして機能します。たとえば、`@ci.pipeline.name:"*test*"` は名前に文字列 `*test*` を含むパイプラインに一致しますが、`@ci.pipeline.name:*test*` は名前に文字列 `test` を含むパイプラインに一致します。
+
 ワイルドカード検索は、この構文でタグや属性 (ファセット化されていないものも含む) 内で機能します。
 
 ### ワイルドカードを検索
@@ -72,7 +77,7 @@ title: CI Visibility Explorer の検索構文
 
 タグが[タグのベストプラクティス][5]に従わず、`key:value` 構文も使用していない場合は、`tags:<MY_TAG>` の検索クエリを使用します。
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

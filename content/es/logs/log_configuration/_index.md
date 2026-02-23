@@ -6,7 +6,7 @@ description: Procesa, mejora, controla y gestiona tus logs desde la página de c
 further_reading:
 - link: /data_security/pci_compliance/
   tag: Documentación
-  text: Configura una organización de Datadog que cumpla con la normativa PCI
+  text: Cumplimiento del estándar PCI DSS
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: Blog
   text: Más información sobre Logging without Limits*
@@ -25,8 +25,6 @@ title: Configuración de log
 ## Información general
 
 Datadog Logging without Limits* desacopla la ingestión y la indexación de logs. Elige qué logs indexar y conservar, o archivar, y gestiona la configuración y los controles a nivel general desde la página de configuración de log en [**Logs > Pipelines**][1].
-
-**Nota**: Consulta [Cumplimiento de PCI DSS][2] para obtener información sobre configurar una organización de Datadog que cumpla con PCI.
 
 ## Opciones de configuración
 

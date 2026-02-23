@@ -2,17 +2,20 @@
 aliases:
 - /es/agent/cluster_agent/clusterchecksrunner
 - /es/containers/cluster_agent/clusterchecksrunner
+description: Configura ejecutores de checks de clústeres exclusivos para escalar checks
+  de clústeres y endpoints en entornos Kubernetes.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
-  text: Presentación del Datadog Cluster Agent
+  text: Introducción al Datadog Cluster Agent
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: Blog
-  text: Autoescalar sus cargas de trabajo Kubernetes con cualquier métrica Datadog
+  text: Escala automáticamente tus cargas de trabajo de Kubernetes con cualquier métrica
+    de Datadog
 - link: /containers/cluster_agent/clusterchecks/
   tag: Documentación
-  text: Checks de clúster (Cluster Checks)
-title: Cluster Check Runners
+  text: Checks de clústeres
+title: Ejecutores de checks de clúster
 ---
 
 El Cluster Agent puede enviar dos tipos de checks: [checks de endpoint][1] y [checks de clúster][2]. Los checks son ligeramente diferentes. 

@@ -4,7 +4,7 @@ disable_sidebar: true
 title: Oracle の設定
 ---
 
-## Supported Oracle versions
+## サポートされている Oracle バージョン
 
 |            | Self-Hosted | RDS       | RAC       | エクサデータ   | 自律型データベース | Automatic Storage Management |
 |------------|-------------|-----------|-----------|-----------|---------------------|------------------------------|
@@ -14,12 +14,12 @@ title: Oracle の設定
 | Oracle 19c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
 | Oracle 21c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
 
-## Supported architectures
-- Multi-tenant (CDB/PDB)
+## サポートされているアーキテクチャ
+- マルチテナント (CDB/PDB)
 - Non-CDB
 
 ## セットアップ
-For setup instructions, select your hosting type:
+セットアップ手順については、ホスティングタイプを選択してください:
 {{< partial name="dbm/dbm-setup-oracle" >}}
 
 [1]: https://app.datadoghq.com/integrations

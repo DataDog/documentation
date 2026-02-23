@@ -54,7 +54,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: Blog
   text: Prácticas recomendadas para la monitorización de aplicaciones web estáticas
-- link: /real_user_monitoring/browser/data_collected/
+- link: /real_user_monitoring/application_monitoring/browser/data_collected/
   tag: Documentación
   text: Datos del navegador de RUM recopilados
 - link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
@@ -64,8 +64,8 @@ title: RUM y Session Replay
 ---
 
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
-Descubre cómo crear acciones de usuarios personalizadas que se adapten a necesidades empresariales específicas, lo que permite un seguimiento preciso del comportamiento de los usuarios.
+{{< learning-center-callout header="Únete a una sesión de capacitación web" hide_image="true" btn_title="Inscríbete" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  Descubre cómo crear acciones de usuarios personalizadas que se adapten a necesidades empresariales específicas, lo que permite un seguimiento preciso del comportamiento de los usuarios.
 {{< /learning-center-callout >}}
 
 ## ¿Qué es Real User Monitoring?
@@ -101,21 +101,21 @@ Selecciona un tipo de aplicación para empezar a recopilar datos de RUM:
 
 La siguiente tabla muestra las funcionalidades de RUM compatibles con cada plataforma:
 
-| Función                               | Navegador | Android | iOS |   Flutter   | React Native | Roku | Notas |
-| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
-| Enviar logs a Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Rastreo distribuido de solicitudes de red | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | El **SDK de Datadog Roku** sólo puede rastrear algunos tipos de solicitudes HTTP. |
-| Rastrear vistas y acciones (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - Todas las acciones rastreadas en **Flutter Web** se registran como `custom`<br> - **Roku** sólo admite el rastreo manual de acciones. |
-| Seguimiento de marcadores de funciones y seguimiento de versiones | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Seguimiento de errores y asignación de orígenes | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Sólo parcialmente compatible con **React Native** |
-| Seguimiento de fallos, simbolización y desofuscación | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Detener sesiones (monitorización de quioscos) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Rastrear eventos en vistas web |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Monitorizar indicadores vitales específicos de plataformas | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Seguimiento global de contexto/atributo en logs  | {{< X >}} |  |  |  |  |  |  |
-| Rastreo del lado del cliente |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
-| Señales de frustración | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Compatible sólo parcialmente con todos los dispositivos **móviles** y **Roku** |
+| Función                               | Navegador | Android | iOS |   Flutter   | React Native | Roku | KMP | Unidad |  Notas |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-----|-------|--------|
+| Enviar logs a Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Rastreo distribuido de solicitudes de red | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** solo puede rastrear algunos tipos de solicitudes HTTP.<br> - **Unity** utiliza una envoltura alrededor de `UnityWebRequest` para realizar el seguimiento de las solicitudes. |
+| Rastrear vistas y acciones (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - Todas las acciones seguidas en **Flutter Web** se registran como `custom`. <br> - **Roku** y **Unity** solo admiten el seguimiento manual de acciones. |
+| Seguimiento de marcadores de funciones y seguimiento de versiones | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
+| Seguimiento de errores y asignación de orígenes | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Solo parcialmente compatible con **React Native**. |
+| Seguimiento de fallos, simbolización y desofuscación | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |  |
+| Detener sesiones (monitorización de quioscos) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}}  |  |
+| Rastrear eventos en vistas web |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
+| Monitorizar indicadores vitales específicos de plataformas | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
+| Seguimiento global de contexto/atributo en logs  | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
+| Rastreo del lado del cliente |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |  |  |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | Session Replay de **Flutter** está en vista previa. |
+| Señales de frustración | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | Solo parcialmente compatible con todos los dispositivos **móviles** y **Roku**. |
 
 ## Endpoints compatibles para dominios de SDK
 
@@ -126,14 +126,14 @@ El tráfico de todos los SDK de Datadog se transmite a través de SSL (443 por d
 | US1  | `https://browser-intake-datadoghq.com`        |
 | US3  | `https://browser-intake-us3-datadoghq.com`    |
 | US5  | `https://browser-intake-us5-datadoghq.com`    |
-| EU1  | `https://browser-intake-datadoghq.eu`         |
+| UE1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
 ## Explorar RUM de Datadog
 
-Accede a RUM yendo a [**Experiencia digital > Resumen del rendimiento**][1].
+Accede a RUM yendo a [**Digital Experience > Performance Summary** (Experiencia digital > Resumen del rendimiento)][1].
 
 Selecciona una aplicación en la barra de navegación superior o sigue las instrucciones de configuración de [navegador][15] o [móvil][16] para añadir tu primera aplicación.
 
@@ -149,7 +149,7 @@ Selecciona una aplicación en la barra de navegación superior o sigue las instr
 
 La página [Resumen de monitorización del rendimiento de RUM][1] proporciona información relevante y procesable para aplicaciones web y móviles. Obtén una experiencia personalizada para cada plataforma que te ayudará a:
 
-- **Centrarse en datos clave** por plataforma, como la latencia de la interfaz de usuario para web o móvil.
+- **Centrarte en datos clave** por plataforma, como la latencia de la interfaz de usuario para fallos web o móviles.
 - **Monitorizar el estado de las aplicaciones** a través de KPIs conocidos, como Core Web Vitals para aplicaciones web o la tasa de cuelgues para iOS, para evaluar la fiabilidad de las aplicaciones.
 - **Analizar en detalle las investigaciones directamente** desde los widgets interactivos sin salir de la página
 
@@ -235,7 +235,7 @@ Debes tener acceso de edición para restaurar el acceso general a una aplicació
 [4]: /es/monitors/types/real_user_monitoring/
 [5]: /es/real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /es/real_user_monitoring/error_tracking/
-[7]: /es/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[7]: /es/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /es/real_user_monitoring/ios/mobile_vitals/
 [9]: /es/real_user_monitoring/android/mobile_vitals/
 [10]: /es/real_user_monitoring/ios/web_view_tracking/
@@ -243,7 +243,7 @@ Debes tener acceso de edición para restaurar el acceso general a una aplicació
 [12]: /es/real_user_monitoring/session_replay/browser/
 [13]: /es/real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /es/real_user_monitoring/session_replay/browser/developer_tools/
-[15]: /es/real_user_monitoring/browser/setup/
-[16]: /es/real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /es/real_user_monitoring/application_monitoring/browser/setup/
+[16]: /es/real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /es/account_management/rbac/

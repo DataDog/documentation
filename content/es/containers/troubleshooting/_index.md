@@ -42,7 +42,7 @@ Comprueba que lo siguiente es cierto:
 
 Hay dos [variables de entorno][8] que pueden afectar a la recopilación de logs y de qué contenedores:
 
-- Establece `DD_logs_ENABLED` en `true` para recopilar logs.
+- Establece `DD_LOGS_ENABLED` en `true` para recopilar logs.
 - Además, establece `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` en `true` para recopilar todos los logs de todos los contenedores.
 
 Para excluir logs (y otras funciones) de la recopilación, consulta la [Guía de Gestión de detección de contenedores][11].
@@ -99,7 +99,16 @@ A continuación, en tu pod de nodo del Agent, ejecuta el comando `agent status` 
 
 En los servicios gestionados como Azure Kubernetes Service (AKS) y Google Kubernetes Engine (GKE), el usuario no puede acceder a los componentes del plano de control. Como resultado, no es posible ejecutar los checks de `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` o `etcd` en estos entornos.
 
+## ECS Fargate
 
+### Windows Agent se detiene al iniciarse el servicio
+
+```text
+[ENTRYPOINT][ERROR] Could not start the service: The service did not respond to the start or control request in a timely fashion.
+. Error: [1053 (0x41d)]
+```
+
+Para evitar este error, asegúrate de haber realizado una reserva de **unidades de CPU** de al menos `512` para el Datadog Agent.
 
 # Solucionar problemas de los datos solicitados por el soporte de Datadog
 
@@ -150,9 +159,10 @@ $ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
 $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: https://docs.datadoghq.com/es/containers/docker/?tab=standard
 [2]: https://docs.datadoghq.com/es/containers/amazon_ecs/?tab=awscli

@@ -1,5 +1,6 @@
 ---
 title: Tutorial - Enabling Tracing for a Go Application on the Same Host as the Datadog Agent
+description: Step-by-step tutorial to enable distributed tracing for a Go application running on the same host as the Datadog Agent.
 
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
@@ -209,7 +210,7 @@ run: build
   DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
 {{< /code-block >}}
 
-<div class="alert alert-warning">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
+<div class="alert alert-danger">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
 For more information on available configuration options, see [Configuring the Go Tracing Library][14].
 

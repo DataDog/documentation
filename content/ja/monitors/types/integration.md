@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 title: インテグレーションモニター
@@ -31,7 +31,7 @@ Datadog で[インテグレーションモニター][2]を作成するには
 
 [メトリクスモニター][3]ドキュメントの手順に従って、インテグレーションメトリクスモニターを作成します。モニタータイプにインテグレーションメトリクスを選択すると、[モニターの管理][4] ページで、確実にインテグレーションモニタータイプのファセットでモニターを選択できるようになります。
 
-**Note**: To configure an integration monitor, ensure that the integration submits metrics or service checks.
+**注**: インテグレーション モニターを設定するには、そのインテグレーションがメトリクスまたはサービス チェックを送信していることを確認してください。
 
 #### チェックを選択する
 
@@ -72,7 +72,7 @@ Datadog で[インテグレーションモニター][2]を作成するには
     何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
 
 
-[1]: /ja/monitors/manage/status
+[1]: /ja/monitors/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
@@ -98,14 +98,14 @@ Datadog で[インテグレーションモニター][2]を作成するには
 
 #### 通知
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][9] page.
+**Configure notifications and automations** セクションの詳細な手順については、[通知][9] ページを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/
-[2]: https://app.datadoghq.com/monitors#create/integration
+[2]: https://app.datadoghq.com/monitors/create/integration
 [3]: /ja/monitors/types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /ja/monitors/configuration/#advanced-alert-conditions

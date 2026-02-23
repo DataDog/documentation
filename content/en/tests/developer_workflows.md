@@ -16,7 +16,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
-- link: "/service_management/case_management"
+- link: "/incident_response/case_management"
   tag: "Documentation"
   text: "Learn about Case Management"
 ---
@@ -34,7 +34,7 @@ These features are available for all Test Optimization customers, and they do no
 
 ## Test summaries in GitHub pull requests
 
-Datadog integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions, and code coverage changes.
+Test Optimization integrates with GitHub to show summaries of test results directly in your pull request comments. Each summary contains an overview of the tests executions, flakiness information, and error messages for failed tests.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
@@ -55,7 +55,7 @@ You can enable test summaries in pull requests with the following steps:
 
 {{< img src="ci/enable-settings-github-comments.png" alt="The Test Optimization Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
 
-Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled repository.
+Comments only appear on pull requests that have run at least one test for an enabled repository.
 
 ## Create and open GitHub issues
 
@@ -171,8 +171,7 @@ IDE plugins and extensions are required to view your test in your IDE.
 [4]: /integrations/github/
 [5]: /continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
-[7]: /service_management/case_management/settings/#jira
-[8]: /service_management/case_management/view_and_manage#take-action
+[7]: /incident_response/case_management/settings/#jira
+[8]: /incident_response/case_management/view_and_manage#take-action
 [9]: https://app.datadoghq.com/cases
 [10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[11]: https://app.datadoghq.com/ci/test-repositories

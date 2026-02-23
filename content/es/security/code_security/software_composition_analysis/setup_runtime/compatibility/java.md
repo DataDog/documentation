@@ -7,7 +7,7 @@ type: lenguaje de código múltiple
 
 ## Funciones de seguridad de las aplicaciones
 
-Las siguientes funciones de seguridad de las aplicaciones son compatibles con la biblioteca Java para la versión de rastreador especificada:
+Las siguientes funciones de seguridad de las aplicaciones son compatibles con la librería Java para la versión de rastreador especificada:
 
 | Función de seguridad de las aplicaciones  | Versión mínima de rastreador Java  |
 | -------------------------------- | ----------------------------|
@@ -37,7 +37,7 @@ La versión mínima de rastreador para contar con todas las funciones de segurid
 
 ## Compatibilidad con lenguajes y marcos
 
-### Versiones compatibles de Java 
+### Versiones compatibles de Java
 El rastreador Java es compatible con la instrumentación automática para los tiempos de ejecución Oracle JDK y OpenJDK de máquinas virtuales Java.
 
 | Versiones de máquinas virtuales Java | Sistemas operativos                                                               | Nivel de compatibilidad                       | Versión del rastreador |
@@ -52,7 +52,7 @@ Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 
 
 
-### Compatibilidad con marcos web
+### Compatibilidad con web frameworks
 
 - Detalles de una solicitud HTTP originada por un atacante
 - Etiquetas (tags) para la solicitud HTTP (código de estado, método, etc.)

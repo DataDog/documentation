@@ -8,12 +8,17 @@ further_reading:
   - link: "/metrics/custom_metrics/dogstatsd_metrics_submission/"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
+  - link: "/metrics/open_telemetry/otlp_metric_types/"
+    tag: "Documentation"
+    text: "OTLP Metric Types"
 ---
 ## Overview
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
 
-Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2]. 
+Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2].
+
+If you use OpenTelemetry, OTLP Histogram metrics are mapped to Datadog distributions by default. See [OTLP Metric Types][5] for details on this mapping and available configuration options.
 
 Distributions provide enhanced query functionality and configuration options that aren't offered with other metric types (count, rate, gauge, histogram):
 * **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
@@ -92,7 +97,7 @@ You can similarly create a metric-based SLO using threshold queries:
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
 2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the "count values..." aggregator.
 3. Specify a threshold value and comparison operator.
-{{< img src="metrics/distributions/threshold_SLO.jpg" alt="Threshold Queries for SLOs" style="width:80%;">}}
+{{< img src="metrics/distributions/threshold_SLO.png" alt="Threshold Queries for SLOs" style="width:80%;">}}
 
 ## Customize tagging
 
@@ -130,3 +135,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [3]: https://app.datadoghq.com/event/explorer
 [4]: https://app.datadoghq.com/metric/summary
+[5]: /metrics/open_telemetry/otlp_metric_types/

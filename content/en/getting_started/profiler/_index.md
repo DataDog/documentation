@@ -1,5 +1,6 @@
 ---
 title: Getting Started with the Continuous Profiler
+description: Learn profiling fundamentals, identify performance bottlenecks, and optimize code using flame graphs and CPU usage analysis.
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling

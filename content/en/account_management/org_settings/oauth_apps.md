@@ -1,5 +1,6 @@
 ---
 title: OAuth Apps
+description: Manage and monitor OAuth applications in your organization, including permissions, user access, and application status controls.
 further_reading:
 - link: "/account_management/org_settings/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Examples
+description: "Learn how to configure Datadog downtimes for common use cases including weekend schedules, business hours, and advanced maintenance using RRULE patterns."
 aliases:
 - /monitors/guide/suppress-alert-with-downtimes
 further_reading:

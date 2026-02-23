@@ -113,12 +113,21 @@ To use Autodiscovery with Network Device Monitoring:
 
 2. Edit the [`datadog.yaml`][8] Agent configuration file to include all the subnets for Datadog to scan. The following sample config provides required parameters, default values, and examples for Autodiscovery.
 
+3. Optionally, enable [de-duplication][11] of devices during Autodiscovery of the Agent. This feature is disabled by default and requires Agent version `7.67+`.
+
+   ```yaml
+   network_devices:
+     autodiscovery:
+       use_deduplication: true
+   ```
+
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
 
 ```yaml
 network_devices:
   autodiscovery:
+    ## use_deduplication - boolean - optional - default: false
     workers: 100  # number of workers used to discover devices concurrently
     discovery_interval: 3600  # interval between each autodiscovery in seconds
     loader: core  # use core check implementation of SNMP integration. recommended
@@ -130,16 +139,16 @@ network_devices:
         port: 161
         community_string: '***'  # enclose with single quote
         tags:
-        - "key1:val1"
-        - "key2:val2"
+          - "key1:val1"
+          - "key2:val2"
       - network_address: 10.20.0.0/24
         loader: core
         snmp_version: 2
         port: 161
         community_string: '***'
         tags:
-        - "key1:val1"
-        - "key2:val2"
+          - "key1:val1"
+          - "key2:val2"
 ```
 
 {{% /tab %}}
@@ -149,6 +158,7 @@ network_devices:
 ```yaml
 network_devices:
   autodiscovery:
+    ## use_deduplication - boolean - optional - default: false
     workers: 100  # number of workers used to discover devices concurrently
     discovery_interval: 3600  # interval between each autodiscovery in seconds
     loader: core  # use core check implementation of SNMP integration. recommended
@@ -183,6 +193,25 @@ network_devices:
 
 **Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][9]
 
+### Override interface speed
+
+By default, the SNMP check reports interface speed as detected from the device. If the physical port speed differs from the actual circuit bandwidth, for example, a 1 Gbps physical port provisioned for a 50 Mbps circuit, you can override the inbound and outbound speed for specific interfaces using `interface_configs`.
+
+Add `interface_configs` to your instance configuration in `snmp.d/conf.yaml`:
+
+```yaml
+instances:
+  - ip_address: '1.2.3.4'
+    community_string: 'sample-string'
+    interface_configs:
+      - match_field: name      # match by interface name or ifIndex
+        match_value: eth0      # case-sensitive
+        in_speed: 50000000     # inbound speed in bytes per second (50 Mbps)
+        out_speed: 50000000    # outbound speed in bytes per second (50 Mbps)
+```
+
+For all available `interface_configs` options, see the [sample snmp.d/conf.yaml][4].
+
 ## Validation
 
 [Run the Agent's status subcommand][10] and look for `snmp` under the Checks section.
@@ -202,3 +231,4 @@ network_devices:
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L4036

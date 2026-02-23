@@ -292,7 +292,7 @@ El argumento opcional de la función acepta una matriz de nombres de estilos de 
 
 {{% collapse-content title="RabbitMQ" level="h4" %}}
 
-El SDK PHP APM admite el rastreo automático de la biblioteca (versión 0.87.0 o posterior) `php-amqplib/php-amqplib`. Sin embargo, es posible que en algunos casos tu rastreo distribuido esté desconectado. Por ejemplo, cuando se leen mensajes de una cola distribuida utilizando el método `basic_get` fuera de una traza existente, es necesario añadir un rastreo personalizado alrededor del procesamiento de la llamada `basic_get` y del mensaje correspondiente:
+El SDK PHP APM admite el rastreo automático de la librería (versión 0.87.0 o posterior) `php-amqplib/php-amqplib`. Sin embargo, es posible que en algunos casos tu rastreo distribuido esté desconectado. Por ejemplo, cuando se leen mensajes de una cola distribuida utilizando el método `basic_get` fuera de una traza existente, es necesario añadir un rastreo personalizado alrededor del procesamiento de la llamada `basic_get` y del mensaje correspondiente:
 
 ```php
 // Crear una traza alrededor
@@ -629,7 +629,7 @@ Cuando el SDK Datadog está configurado con el formato Ninguno para la extracci�
 
 ### Bagaje
 
-_Actualmente disponible en Python y Node.js. Para otros lenguajes, ponte en contacto con el [servicio de asistencia][11]_ 
+_Actualmente disponible en Python y Node.js. Para otros lenguajes, ponte en contacto con el [servicio de asistencia][11]_
 
 Por defecto, el Bagaje se propaga automáticamente a través de una solicitud distribuida utilizando las [cabeceras compatibles con W3C][10] de OpenTelemetry. Para desactivar el bagaje, define [DD_TRACE_PROPAGATION_STYLE][12] como `datadog,tracecontext`.
 

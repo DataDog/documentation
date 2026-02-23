@@ -1,5 +1,6 @@
 ---
 title: APM Terms and Concepts
+description: Learn essential APM terminology including services, resources, traces, spans, instrumentation, and other key concepts for distributed tracing.
 aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name

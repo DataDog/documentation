@@ -119,7 +119,7 @@ CREATE USER datadog IDENTIFIED BY &password ;
 
 Oracle Agent conf 파일 `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`을 생성합니다. 사용 가능한 설정 옵션은 [샘플 conf 파일][4]을 참조하세요.
 
-**참고:** `7.53.0` 이하 Agent 릴리스의 설정 하위 디렉터리는 `oracle-dbm.d`입니다.
+**참고:** `7.50.1`과 `7.53.0`사이의 Agent 릴리스에 대한 구성 하위 디렉터리는 `oracle-dbm.d`입니다. 자세한 내용은 [Agent 7.50.1 이상 버전에서 Oracle 통합 구성][10]을 참고하세요.
 
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}
@@ -159,16 +159,6 @@ Agent는 루트 다중 테넌트 컨테이너 데이터베이스(CDB)에만 연�
 
 에이전트 설정이 모두 완료되면 [Datadog 에이전트를 다시 시작][9]하세요.
 
-### Oracle 통합 설치 또는 확인
-
-#### 최초 설치
-
-Datadog의 Integrations 페이지에서 조직에 대한 [Oracle 통합][7]을 설치합니다. 그러면 Oracle 데이터베이스의 성능을 모니터링할 수 있는 [Oracle 대시보드][2]가 계정에 설치됩니다.
-
-#### 기존 설치
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### 설정 확인 
 
 [Agent의 상태 하위 명령을 실행][8]하고 **Checks** 섹션에서 `oracle`을 찾습니다. 시작하려면 Datadog의 [대시보드][2] 및 [데이터베이스][3] 페이지로 이동하세요.
@@ -177,7 +167,7 @@ Datadog의 Integrations 페이지에서 조직에 대한 [Oracle 통합][7]을 �
 
 데이터베이스 모니터링은 Oracle 데이터베이스에 대한 커스텀 쿼리를 지원합니다. 사용 가능한 설정 옵션에 대해 자세히 알아보려면 [conf.yaml.example][4]을 참조하세요.
 
-<div class="alert alert-warning">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
+<div class="alert alert-danger">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
@@ -188,6 +178,7 @@ Datadog의 Integrations 페이지에서 조직에 대한 [Oracle 통합][7]을 �
 [7]: https://app.datadoghq.com/integrations/oracle
 [8]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [9]: /ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ko/integrations/guide/oracle-check-upgrade-7.50.1/
 
 ## 참고 자료
 

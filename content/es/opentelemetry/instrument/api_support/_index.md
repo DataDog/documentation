@@ -31,9 +31,9 @@ Las bibliotecas de rastreo de Datadog proporcionan una implementación de la [AP
 Al [instrumentar tu código con las API de OpenTelemetry][2], tu código:
 
 - Se mantiene libre de llamadas de API específicas del proveedor.
-- No depende de bibliotecas de rastreo de Datadog en tiempo de compilación (sólo en tiempo de ejecución).
+- No depende de librerías de rastreo de Datadog en tiempo de compilación (sólo en tiempo de ejecución).
 
-Sustituye el SDK de OpenTelemetry por la biblioteca de rastreo de Datadog en la aplicación instrumentada. Las trazas producidas por tu código en ejecución pueden ser procesadas, analizadas y monitorizadas junto con las trazas de Datadog y en los productos propiedad de Datadog como [Continuous Profiler][3], [Data Streams Monitoring][4], [App and API Protection][5] y [Live Processes][6].
+Sustituye el SDK de OpenTelemetry por la librería de rastreo de Datadog en la aplicación instrumentada. Las trazas producidas por tu código en ejecución pueden ser procesadas, analizadas y monitorizadas junto con las trazas de Datadog y en los productos propiedad de Datadog como [Continuous Profiler][3], [Data Streams Monitoring][4], [App and API Protection][5] y [Live Processes][6].
 
 Para más información, sigue el enlace correspondiente a tu lenguaje:
 

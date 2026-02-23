@@ -1,6 +1,6 @@
 ---
 algolia:
-  subcategory: Integraciones de Marketplace
+  subcategory: Integraciones del Marketplace
 app_id: rapdev-backup
 app_uuid: f0a2c15e-9c53-4645-aedc-5a28af130308
 assets:
@@ -26,7 +26,7 @@ author:
   vendor_id: rapdev
 categories:
 - marketplace
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +40,7 @@ legal_terms:
 manifest_version: 2.0.0
 name: rapdev_backup
 pricing:
-- billing_type: tarifa_plana
+- billing_type: flat_fee
   includes_assets: true
   product_id: copia de seguridad
   short_description: Tarifa plana para integraciones
@@ -55,7 +55,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Marketplace
+  - Categoría::Marketplace
   - Oferta::Integración
   - Sistema operativo compatible::Linux
   - Sistema operativo compatible::Windows
@@ -70,7 +70,7 @@ tile:
   uninstallation: README.md#Desinstalación
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/marketplace -->
 
 
 ## Información general
@@ -85,7 +85,7 @@ de una cuenta de Datadog,. Esa copia de seguridad se puede almacenar en un equip
 
 Esta integración no incluye métricas.
 
-### Checks de servicio
+### Checks de servicios
 
 Esta integración tiene el check de servicio `rapdev.backup.can_connect` que devuelve `OK` si el Agent puede comunicarse con la API Datadog, de lo contrario informa `CRITICAL`. 
 
@@ -93,8 +93,8 @@ Esta integración tiene el check de servicio `rapdev.backup.can_connect` que dev
 
 Esta integración no incluye eventos.
 
-## Agent
-Para obtener asistencia o realizar solicitudes de funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
+## Ayuda
+Para solicitar asistencia o funciones, ponte en contacto con RapDev.io a través de los siguientes canales:
 
 - Soporte: support@rapdev.io
 - Ventas: sales@rapdev.io
@@ -118,4 +118,4 @@ Hecho con ❤️ en Boston
 [10]: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html
 
 ---
-Esta aplicación está disponible a través de Marketplace y cuenta con el respaldo de un socio tecnológico de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-backup" target="_blank">Haz clic aquí</a> para adquirir esta aplicación.
+Esta aplicación está disponible a través del Marketplace Datadog y cuenta con el respaldo de un socio tecnológico de Datadog. Para utilizarla, <a href="https://app.datadoghq.com/marketplace/app/rapdev-backup" target="_blank">adquiere esta aplicación en el Marketplace</a>.

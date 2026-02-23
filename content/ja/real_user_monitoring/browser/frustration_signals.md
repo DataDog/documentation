@@ -147,7 +147,7 @@ Frustration Count
 
 セッションがライブの場合、情報を取得しているため、バナーにタイムラインと異なる数値が反映されることがあります。
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 フィードバックの提供や機能リクエストの提出は、<a href="/help/">Datadog サポート</a>にご連絡ください。
 </div>
 

@@ -16,7 +16,7 @@ further_reading:
   tag: Guía
   text: Haz gráficos de datos históricos de SLO en dashboards
 title: Widget de series temporales
-widget_type: timeseries
+widget_type: series temporales
 ---
 
 La visualización de series temporales te permite mostrar la evolución de una o varias métricas, eventos de log o tramos indexados a lo largo del tiempo. El intervalo de tiempo depende de lo que se seleccione en [timeboard][1] o [screenboard][2]:
@@ -38,10 +38,12 @@ La visualización de series temporales te permite mostrar la evolución de una o
 
 ## Opciones de visualización
 
-Los gráficos pueden mostrarse como líneas, áreas y barras. Los gráficos de líneas contienen parámetros adicionales:
+Los gráficos pueden mostrarse como líneas, áreas y barras. Los gráficos de Datadog agregan datos sobre [intervalos][15] como la suma cada hora. Por defecto, el último intervalo de tiempo incompleto en un gráfico de series temporales aparece sombreado y etiquetado como "datos parciales".
 
-| Parámetro | Opciones               |
-|-----------|-----------------------|
+Los gráficos de líneas contienen parámetros adicionales:
+
+| Parámetro | Opciones                  |
+|-----------|--------------------------|
 | Estilo     | Sólido, discontinuo o punteado |
 | Trazos    | Normal, fino o grueso   |
 
@@ -52,9 +54,13 @@ Para todos los tipos de gráficos, Datadog ofrece varias opciones de color para 
 | Paleta     | Descripción                                                                                                 |
 |-------------|-------------------------------------------------------------------------------------------------------------|
 | Clásico     | Los colores simples azul claro, azul oscuro, morado claro, morado, amarillo claro y amarillo (los colores se repiten).    |
-| Uniforme | Mediante un conjunto de 16 colores, aplica un color uniforme para cada serie de datos en todos los widgets para cada grupo de etiqueta. |
+| Uniforme | Mediante un conjunto de 16 colores, aplica un color uniforme para cada serie de datos en todos los widgets para cada grupo de etiquetas (tag). |
 
 Para los gráficos de líneas, se pueden asignar paletas específicas a diferentes métricas separando las consultas en JSON. Para obtener más información, consulta la guía de [Selección de los colores adecuados para tus gráficos][6].
+
+### Clasificación
+
+Ordena el gráfico por **Etiquetas** o por **Valores** para ordenar leyendas de series temporales y gráficos anidados. Esto sólo ordena la visualización del gráfico y no afecta a la consulta. Activa la opción **Invertir** para ordenar por orden alfabético inverso o por valores descendentes.
 
 ### Alias de métricas
 
@@ -118,7 +124,7 @@ Puedes añadir leyendas configurables a tus tableros seleccionando una de las si
 * Automático (por defecto)
 * Compacto
 * Ampliado: columnas configurables para valor, media, suma, mín. y máx.
-* Ninguna
+* Ninguno
 
 Para timeboards, las leyendas se muestran automáticamente cuando un dashboard se ajusta a L o XL.
 
@@ -130,9 +136,13 @@ Para obtener más información sobre la edición y eliminación de enlaces conte
 
 ### Pantalla completa
 
-Además de las [opciones estándar de pantalla completa][11], puedes aplicar funciones rápidas, comparar con periodos anteriores, ajustar la escala Y, guardar los cambios o guardarlos como un nuevo gráfico.
+Además de las [opciones estándar de pantalla completa][11], puedes aplicar funciones rápidas, ajustar la escala Y, guardar los cambios o guardarlos como un nuevo gráfico.
 
 Para obtener más información, consulta [Explorar tus datos en modo de gráfico a pantalla completa][12].
+
+### Información de las métricas
+
+En el gráfico de una métrica, haz clic en el menú contextual (tres puntos verticales) para ver la opción **Metrics Info** (Información de la métrica). Esta acción abre un panel con una descripción de la métrica. Al hacer clic en el nombre de la métrica en este panel, se abre la métrica en la página de resumen de métricas para su posterior análisis o edición.
 
 ## API
 
@@ -140,11 +150,11 @@ Este widget se puede utilizar con la **[API de dashboards][13]**. Consulta la si
 
 {{< dashboards-widgets-api >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/dashboards/#timeboards
+[1]: /es/dashboards/#get-started
 [2]: /es/dashboards/#screenboards
 [3]: /es/dashboards/querying/
 [4]: /es/tracing/trace_explorer/query_syntax/#search-bar
@@ -158,3 +168,4 @@ Este widget se puede utilizar con la **[API de dashboards][13]**. Consulta la si
 [12]: https://www.datadoghq.com/blog/full-screen-graphs
 [13]: /es/api/latest/dashboards/
 [14]: /es/dashboards/graphing_json/widget_json/
+[15]: /es/dashboards/functions/rollup/

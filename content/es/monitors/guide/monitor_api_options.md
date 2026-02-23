@@ -1,4 +1,7 @@
 ---
+description: Referencia completa para las opciones de configuración de la API monitores
+  (noun), incluidos los parámetros comunes, los permisos, las alertas de anomalías
+  y las alertas de métricas.
 title: Opciones de la API Monitor
 ---
 
@@ -30,17 +33,9 @@ title: Opciones de la API Monitor
 
 ### Opciones de permisos
 
-- **`locked`** Un booleano que indica si los cambios en este monitor deberían restringirse al creador o a usuarios con el permiso de gestión de organización (`org_management`). Por defecto: **False**. **Obsoleto: utiliza `restricted_roles` en su lugar.**
-- **`restricted_roles`** Una matriz que enumera los UUID de los roles que pueden editar el monitor. La edición del monitor incluye actualizaciones de la configuración del monitor, la eliminación del monitor y el silenciamiento del monitor durante cualquier periodo. Los UUID de los roles pueden obtenerse de la [API de roles][1]. `restricted_roles` es el sucesor de `locked`.
+- **`restricted_roles`** Una matriz que enumera los UUID de los roles que pueden editar el monitor. La edición del monitor incluye las actualizaciones en la configuración del monitor, la eliminación del monitor y el silenciamiento del monitor durante cualquier periodo de tiempo. Los UUID de los roles pueden obtenerse de la [API de roles][1].
 
-**Nota:** No establezcas los parámetros `locked` y `restricted_roles` en el mismo monitor. Si se establecen ambos, se aplica el parámetro más restrictivo. Cualquier rol establecido en `restricted_roles` se considera más restrictivo que `locked:true`.
-
-Los siguientes ejemplos demuestran cómo interactúan los parámetros `locked` y `restricted_roles`:
-- Si un monitor está configurado en `locked:false` y `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, se aplica el parámetro `restricted_roles`.
-- Si un monitor está configurado en `locked:true` y `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]`, se aplica el parámetro `restricted_roles`.
-- Si un monitor se establece en `locked:true` y no se establece ningún parámetro `"restricted_roles"`, se aplica el parámetro `locked:true`.
-
-Para obtener más información sobre la configuración de RBAC para monitores y la migración de monitores de la configuración bloqueada al uso de restricciones de rol, consulta la [guía dedicada][2].
+**Nota:** Ahora puedes configurar permisos en monitores basados en [equipos][4] y usuarios, además de roles, con [políticas de restricción][5]. Para obtener más información sobre la restricción de permisos para monitores, consulte la [guía específica][2].
 
 ## Opciones de anomalía
 
@@ -91,3 +86,5 @@ Ejemplo: `{"metric": "count","type": "count","groupBy": "core_service"}`
 [1]: /es/api/latest/roles/
 [2]: /es/monitors/guide/how-to-set-up-rbac-for-monitors/
 [3]: /es/monitors/guide/recovery-thresholds/
+[4]: /es/account_management/teams/
+[5]:/es/api/latest/restriction-policies/

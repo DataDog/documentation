@@ -28,7 +28,7 @@ AWS Step Functions로 시각적 워크플로우를 사용하여 분산 애플리
 
 이 통합을 활성화하면 Datadog에서 모든 Step Functions 메트릭을 볼 수 있습니다.
 
-<div class="alert alert-warning">Datadog의 기본 AWS Step Function 모니터링 기능은 공개 베타 버전으로 제공됩니다. Step Functions를 향상된 메트릭 및 트레이스로 계측하려면 <a href="https://docs.datadoghq.com/serverless/step_functions">서버리스 문서<a>를 참조하세요.</div>
+<div class="alert alert-danger">Datadog의 기본 AWS Step Function 모니터링 기능은 공개 베타 버전으로 제공됩니다. Step Functions를 향상된 메트릭 및 트레이스로 계측하려면 <a href="https://docs.datadoghq.com/serverless/step_functions">서버리스 문서<a>를 참조하세요.</div>
 
 ## 설정
 
@@ -65,7 +65,7 @@ Step Functions용 ​​Datadog APM 또는 AWS X-Ray를 통해 트레이스 수�
 
 #### AWS Step Functions용 ​​Datadog APM을 통해 추적 활성화
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 이 기능은 공개 베타 버전입니다.
 </div>
 AWS Step Functions에 대한 분산 추적을 활성화하려면 [서버리스 문서][9]의 설치 지침을 참조하세요.
@@ -75,7 +75,7 @@ AWS Step Functions에 대한 분산 추적을 활성화하려면 [서버리스 �
 #### AWS X-Ray를 통한 추적 활성화
 
 
-<div class="alert alert-warning">이 옵션은 <a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">AWS Step Functions에 대한 향상된 메트릭</a>을 수집하지 않습니다. 이러한 메트릭의 경우 <a href="https://docs.datadoghq.com/serverless/step_functions">AWS Step Functions용 Datadog APM</a>을 통해 추적을 활성화해야 합니다.</div>
+<div class="alert alert-danger">이 옵션은 <a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">AWS Step Functions에 대한 향상된 메트릭</a>을 수집하지 않습니다. 이러한 메트릭의 경우 <a href="https://docs.datadoghq.com/serverless/step_functions">AWS Step Functions용 Datadog APM</a>을 통해 추적을 활성화해야 합니다.</div>
 
 AWS X-Ray를 통해 AWS Step Functions에서 트레이스를 수집하려면 다음을 수행합니다.
 

@@ -26,7 +26,7 @@ categories:
 - クラウド
 - セキュリティ
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -117,4 +117,4 @@ Blink の詳細については、[Blink ドキュメント][3]を参照してく
 [8]: mailto:support@blinkops.com
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/blink-blink" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/blink-blink" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

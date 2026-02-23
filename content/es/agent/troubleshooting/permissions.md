@@ -68,7 +68,7 @@ ls -al /opt/datadog-agent/run
 Si el propietario del archivo **NO** es `dd-agent`, ejecuta el siguiente comando para solucionarlo:
 
 ```text
-chown dd-agent -R /opt/datadog-agent/run
+sudo chown -R dd-agent:dd-agent /opt/datadog-agent/run
 ```
 
 Después de realizar este cambio, el [comando de inicio del Agent][5] debería poder iniciar el Agent correctamente. Si el problema persiste a pesar de haber seguido estos pasos, ponte en contacto con [el equipo de asistencia de Datadog][6] para obtener más información.
@@ -95,16 +95,20 @@ Si no puedes utilizar `try_sudo`, puedes ejecutar el Agent como `root`, como sol
 <div class="alert alert-info">Ejecutar un daemon de proceso como <code>raíz</code> no es la práctica recomendada en Linux. El Agent es de código abierto y puede auditarse a través del <a href="https://github.com/DataDog/datadog-agent">repositorio de GitHub</a>.</div>
 
 Para ejecutar el Agent como `root`:
-1. [Detén el Agent][9]
+1. [Detener el Agent][9]
 2. Abre `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` y cambia el atributo `user` en `[Service]`
-3. [Inicia el Agent][10]
+3. [Iniciar el Agent][10]
 
 Consulta los siguientes temas de GitHub para obtener más información y otros métodos posibles para capturar esta métrica en máquinas Linux.
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
-## Leer más
+## Problemas de permisos al ejecutar el Agent como daemon del sistema en MacOS
+
+Si instalaste el Agent como un daemon de inicio para todo el sistema utilizando las opciones `DD_SYSTEMDAEMON_INSTALL` y `DD_SYSTEMDAEMON_USER_GROUP`, comprueba que el usuario y el grupo que utilizaste para `DD_SYSTEMDAEMON_USER_GROUP` son válidos y tienen los permisos adecuados.
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

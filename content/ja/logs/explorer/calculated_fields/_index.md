@@ -7,8 +7,14 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログエクスプローラー
+- link: https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/
+  tag: ブログ
+  text: 計算フィールドによるクエリ時のログの変換と強化
 title: 計算されたフィールド
 ---
+
+
+<div class="alert alert-info">構文、演算子、関数については、<a href="/logs/explorer/calculated_fields/expression_language">Expression Language</a> を参照してください</div>
 
 ## 概要
 
@@ -50,14 +56,13 @@ Log Explorer で計算フィールドを作成するには、**Add** メニュ�
 
 ### 計算フィールドの定義
 
-
-{{< img src="logs/explorer/calculated_fields/define_calculated_field.png" alt="スループット用の計算フィールド。network.bytes 属性を期間属性で割る式" style="width:50%;" >}}
+{{< img src="logs/explorer/calculated_fields/define_a_calculated_field.png" alt="スループット用の計算フィールド。firstName 属性と lastName 属性を連結する式" style="width:70%;" >}}
 
 #### 名前
 
-計算フィールドの目的を明確に示すわかりやすい名前を設定します。 例えば、ユーザーの姓と名の両方を大文字にして 1 つのフィールドに結合することが目的である場合、計算フィールドの名前として `formatted_name` を使用できます。その後 `Bob Smith` というユーザーのログをフィルタリングするには、クエリを更新して `#formatted_name:"Bob Smith"` を含めます。
+計算フィールドの目的を明確に示すわかりやすい名前を設定します。例えば、ユーザーの姓と名を組み合わせて 1 つのフィールドにする場合、計算フィールドに `fullName` という名前を付けることができます。
 
-**注:** 検索、集計、または他の計算フィールド定義で計算フィールドを参照するには、`#` プレフィックスを使用する必要があります。
+`Pinkie Smith` という名前のユーザーのログを抽出するには、クエリに計算フィールド名 `#fullName:"Pinkie Smith"` を含めます。**注:** 検索、集計、または他の計算フィールド定義で計算フィールドを参照するには、`#` プレフィックスを使用する必要があります。
 
 #### 計算式
 
@@ -73,7 +78,7 @@ Log Explorer で計算フィールドを作成するには、**Add** メニュ�
 - 計算フィールド用の列を **[List][8]** の可視化に含めます。 タイトルには # プレフィックスが含まれます。
 - ログサイドパネル内の別のセクションに計算フィールドを表示します。
 
-計算フィールドはログ属性のように機能し、検索、集計、可視化、さらに他の計算フィールドの定義に使用できます。計算フィールド名を参照する際には、# プレフィックスを忘れずに付けてください。
+計算フィールドはログ属性のように機能し、検索、集計、可視化、さらには他の計算フィールドの定義にも使用できます。計算フィールド名を参照する際は、`#` プレフィックスを忘れずに使用してください。
 
 {{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Log Explorer で結果をフィルタリングするために使用される request_duration という計算フィールド" style="width:100%;" >}}
 

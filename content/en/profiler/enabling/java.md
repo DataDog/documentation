@@ -34,7 +34,9 @@ Supported operating systems:
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
 - Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+
-- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
+- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime).
+
+**Note:** The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are **not** experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true` or `DD_PROFILING_DDPROF_ENABLED=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
 
@@ -57,7 +59,7 @@ Minimum JDK versions:
 - Azul Zulu 8 (version 1.8.0.212/8u212+), 11+
 - GraalVM 17+ - both, JIT and AOT (native-image) versions
 
-Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
+Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, 17, 21, and 25 of the Long Term Support JDK.
 
 Additional requirements for profiling [Trace to Profiling integration][12]:
  - OpenJDK 17.0.5+ and `dd-trace-java` version 1.17.0+
@@ -102,8 +104,6 @@ To begin profiling applications:
    ```
    {{% /tab %}}
    {{< /tabs >}}
-
-   **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
    {{< tabs >}}
@@ -153,7 +153,7 @@ When the service binary is built, you can use environment variables to enable an
 
 4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
-5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][8].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiling page][8]. If they do not, refer to the [Troubleshooting][16] guide.
 
 ### Enabling CPU profiler engine options
 
@@ -269,7 +269,7 @@ or:
 
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
--Ddd.profiling.ddprof.alloc.enabled=true # this is the default in v1.17.0+
+-Ddd.profiling.ddprof.alloc.enabled=true # this is the default in v1.28.0+ on OpenJDK 21.0.3+
 ```
 
 For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`.
@@ -303,11 +303,13 @@ For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`.
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
+**Note**: Live-heap profiler is based on the Datadog Profiler library and not JFR. Live-heap profile type is not available on Windows.
+
 ### Collecting native stack traces
 
 If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
 
-<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
+<div class="alert alert-danger">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
 
 To enable native stack trace collection, understanding that it can destabilize your application, set:
 
@@ -361,3 +363,4 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 [13]: /profiler/enabling/supported_versions/
 [14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
 [15]: https://docs.datadoghq.com/profiler/enabling/java/?tab=datadogprofiler#
+[16]: /profiler/profiler_troubleshooting/java/

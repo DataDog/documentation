@@ -12,24 +12,33 @@ further_reading:
 - link: /metrics/volume/
   tag: Documentación
   text: Gestión del volumen de métricas
-title: Prácticas recomendadas para la gobernanza de métricas personalizadas
+- link: https://www.datadoghq.com/blog/custom-metrics-governance/
+  tag: Blog
+  text: Prácticas recomendadas para governance (UI) / gobernanza (generic) de métricas
+    personalizadas de extremo a extremo
+- link: https://www.datadoghq.com/blog/govern-custom-metrics/
+  tag: Blog
+  text: Guía del ingeniero de FinOps para la gobernanza de métricas personalizadas
+title: Prácticas recomendadas para la governance (UI) / gobernanza (generic) de métricas
+  personalizadas
 ---
 
 ## Información general
 
 Las aplicaciones basadas en la nube pueden generar grandes cantidades de datos y grandes costes de observabilidad, lo que obliga a las organizaciones a reducir esta partida presupuestaria. Para reducir los costes de observabilidad, muchos equipos recurren a recopilar menos métricas; sin embargo, para los equipos centralizados de SRE y observabilidad, una gobernanza eficaz de métricas personalizadas debería aumentar la eficiencia de la monitorización en lugar de recortar la visibilidad por completo.
 
-Esta guía proporciona las mejores prácticas para gestionar sus métricas personalizadas volúmenes a través de los tres componentes clave de una gobernanza eficaz de métricas: **Visibilidad y atribución**, **Gobierno accionable métricas personalizadas Accionable**, y **Monitorización y Prevención**. Aprenda a utilizar las herramientas disponibles en Datadog para mantener una observabilidad rentable de estos componentes clave:
+En esta guía se proporcionan las prácticas recomendadas para gestionar tus volúmenes de métricas personalizadas a través de los tres componentes clave de una governance (UI) / gobernanza (generic) de métricas eficaz: **Visibility and Attribution** (Visibilidad y atribución), **Actionable Custom Metrics Governance** (Governance (UI) / gobernanza (generic) de métricas personalizadas accionables) y **Monitoring and Prevention** (Monitorización y prevención). Aprende a utilizar las herramientas disponibles en Datadog para mantener una observabilidad rentable de estos componentes clave:
 - [Encontrar y comprender tu uso y costes de métricas](#visibility-and-attribution)
 - [Identificar tus principales generadores de costes](#account-level-visibility)
 - [Atribuir tus principales generadores de costes a los equipos o servicios responsables de ellos](#team-level-visibility-and-attribution)
 - [Reducir los costes de las métricas menos valiosas y no utilizadas](#value-based-metrics-governance)
 - [Monitorizar y controlar el uso antes de incurrir en excesos de facturación](#monitoring-and-prevention)
 
+Eche un vistazo a esta [explicación interactiva][17] de las herramientas de governance (UI) / gobernanza (generic) de métricas personalizadas de Datadog. 
 
 ## Requisitos previos
 
-<div class="alert alert-warning">Algunas funciones del producto requieren acceso de administrador.</div>
+<div class="alert alert-danger">Algunas funciones del producto requieren acceso de administrador.</div>
 
 {{< whatsnext desc="Esta guía asume que comprendes los siguientes conceptos de las métricas personalizadas:" >}}
     {{< nextlink href="/metrics/custom_metrics/" >}}qué se considera una métrica personalizada{{< /nextlink >}}
@@ -45,28 +54,25 @@ Consulta los pasos de esta sección para revisar el uso mensual de métrica de t
 
 ### Visibilidad a nivel de cuenta
 
-<div class="alert alert-warning">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog</a> para acceder a la página Plan y uso.</div>
+<div class="alert alert-danger">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog </a> para acceder a la page (página) Plan y Uso.</div>
 
 El [Plan y uso][1] te proporciona un resumen predefinido (OOTB) del uso mensual facturable de las métricas personalizadas de tu cuenta con información detallada sobre tus costes, tasa de consumo y nombres de métrica personalizada principal.
 
    1. En la página [Plan y uso][2], desplázate hasta la sección *Usage Summary* (Resumen de uso).
    1. Haz clic en la pestaña **Custom Metrics** (Métricas personalizadas) para ver el uso facturable de las métricas personalizadas de tu organización, las tendencias de uso y los nombres de métrica personalizada principal.
-   1. Desplázate hacia abajo hasta *Top Custom Metrics for \<MONTH YEAR\>* (Métricas personalizadas principales para \<MONTH YEAR\>) para ver los nombres de métrica principal con su porcentaje de contribución a tus costes de métricas personalizadas.
+   1. Desplázate hacia abajo a las *Métricas personalizadas principales para \<MONTH YEAR\>*, para ver los nombres de métricas principales con su porcentaje de contribución a tus costos de métricas personalizadas.
 
-Saber qué métricas son las que más contribuyen al uso y los costes mensuales de tu cuenta es el punto de partida recomendado para utilizar [Metrics without LimitsTM][4]. Con este conocimiento, puedes encontrar el origen de estos envíos de métricas, ya sea por equipos, servicio, organización u otro atributo de etiqueta.
-Además, revisa la información de [Atribución de uso][3] para obtener un desglose total del uso facturable de tu cuenta por claves de etiqueta. A partir de aquí, puedes identificar tus mayores generadores de costes por etiquetas, como equipo, servicio o aplicación. 
+Saber qué métricas son las que más contribuyen al consumo y a los costos mensuales de tu cuenta es el punto de partida recomendado para utilizar [Metrics without LimitsTM][4]. Con este conocimiento, puedes buscar la source (fuente) de estos envíos de métricas ya sea por equipos, servicio, organización u otro atributo de tag (etiqueta).
+
+Además, revisa la información de [Atribución de uso][3] para obtener un desglose total del consumo facturable de tu cuenta por claves de tags (etiquetas). A partir de aquí, puedes identificar tus principales generadores de costos por tags (etiquetas), como equipo, servicio o aplicación. 
 
 **Nota**: La atribución de uso es una función avanzada incluida en el plan Enterprise. Para el resto de planes, ponte en contacto con tu representante de cuenta o con el asesor de clientes para solicitar esta función.
 
-#### métrica-nivel de visibilidad
+#### Visibilidad de nivel de métricas
 
-{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
-métricas personalizadas etiquetas (tags) Cardinality Explorer está en vista previa. Utilice este formulario para solicitar acceso hoy mismo.
-{{< /callout >}} 
+{{< img src="metrics/tagsexplorer.png" alt="Explorer de cardinalidad de tags (etiquetas) de métricas personalizadas para un pico de nombre de métrica" style="width:80%;">}}
 
-{{< img src="métricas/tagsexplorer.png" alt="métricas personalizadas etiquetas (tags) Cardinality Explorer for a spiking métrica name" style="width:80%;">}}
-
-Una vez que haya identificado qué nombres de métrica están incrementando el consumo mensual y los costes de su cuenta, puede navegar hasta el panel lateral de detalles de métrica para ver el métricas personalizadas etiquetas (tags) Cardinality Explorer. Esto le muestra qué claves de etiquetar están haciendo que la cardinalidad de un métrica'particular se dispare. Cualquier clave etiquetar spammy o sin límites con grandes incrementos en el número de valores únicos etiquetar son la causa probable. Exclúyalas con métricas without LimitsTM para conseguir un ahorro de costes inmediato.
+Una vez que hayas identificado los nombres de las métricas que aumentan el consumo y los costos mensuales de tu cuenta, puedes ir al panel lateral de detalles de la métrica para ver el Explorer de cardinalidad de las tags (etiquetas) de métricas personalizadas. Esto te muestra qué claves de tags (etiquetas) están haciendo que la cardinalidad de una métrica en particular aumente. Cualquier clave de etiqueta no deseada o sin límites con grandes aumentos en el número de valores de etiqueta únicos es la causa probable. Exclúyelas utilizando Metrics without LimitsTM para conseguir un ahorro inmediato de costos.
 
 ### Visibilidad y atribución a nivel de equipo
 
@@ -75,15 +81,15 @@ La visibilidad a nivel de equipo permite a los administradores de cuentas respon
 Los equipos pueden tener un conocimiento limitado de los costes de métrica y etiquetas que envían. Esto hace que los equipos estén menos motivados para controlar su uso o incluso limitar su crecimiento. Es crucial que todos tengan visibilidad de su uso y se sientan capacitados para asumir la responsabilidad de gestionar esos volúmenes y los costes asociados.
 
 #### Encontrar el origen de tus métricas personalizadas más grandes
-<div class="alert alert-warning">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog</a> para acceder a la página Plan y uso.</div>
+<div class="alert alert-danger">Debes tener el <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">rol de administrador de Datadog </a> para acceder a la page (página) Plan y Uso.</div>
 
-{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navega a Resumen de métricas desde la página Plan y uso y por la tabla Métricas personalizadas principales" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Ve al Resumen de métricas desde la página Plan y uso y por la tabla Métricas personalizadas principales" style="width:90%;" >}}
 
 Para identificar qué equipo o servicio es responsable de tus nombres de métrica personalizadas principales:
 
 1. En la página [Plan y uso][2], desplázate hasta la sección *Usage Summary* (Resumen de uso).
 1. Haz clic en la pestaña **Custom Metrics** (Métricas personalizadas) para ver el uso facturable, las tendencias de uso y los nombres de métricas personalizada principales de tu organización.
-1. Debajo de la tabla para *Top métricas personalizadas para <MONTH YEAR>*, haga clic en el icono para **Ver en métricas Resumen** para la parte superior métrica personalizada. Esto te lleva a la página *métricas Resumen* con el panel lateral de detalles métrica abierto. 
+1. Debajo de la tabla de *Métricas personalizadas principales para <MONTH YEAR>*, haz clic en el icono para **See in Metrics Summary** (Ver en resumen de métricas) para la métrica personalizada principal. Esto te llevará a la page (página) *Resumen de métricas* con el panel lateral de detalles de métricas abierto. 
 1. En el panel lateral, desplázate hasta la sección *Tags* (Etiquetas) para ver las etiquetas asociadas, como equipos y servicio.
 
 #### Ver las métricas personalizadas de tu equipo
@@ -98,7 +104,7 @@ Todos los usuarios de tu organización pueden ver en tiempo real el uso estimado
 
 Con la Gestión de volumen de métricas, puedes identificar las métricas más grandes de tu organización, así como los nombres de métrica con picos de volumen (probables culpables de cualquier exceso inesperado).
 
-{{< img src="métricas/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="métricas Volume Management page" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="Page (página) de gestión de volumen de métricas" style="width:90%;" >}}
 
 Para más información, consulta la documentación de [Gestión del volumen de métricas][8].
 
@@ -106,7 +112,7 @@ Para más información, consulta la documentación de [Gestión del volumen de m
 
 Una gobernanza eficaz de métricas personalizadas debería aumentar la eficiencia de la monitorización. Una vez que comprendas cuál es tu uso y atribuyas el uso a su origen, toma medidas para reducir tus métricas. 
 
-En esta sección, conocerá las medidas que puede tomar para maximizar el ROI y el valor que obtiene de su gasto en observabilidad sin sacrificar la visibilidad en la que confía activamente su equipo.
+En esta sección, conocerás las medidas que puedes tomar para maximizar la rentabilidad y el valor que obtienes de tu gasto en observabilidad sin sacrificar la visibilidad en la que confía activamente tu equipo.
 
 ### Metrics without LimitsTM
 
@@ -114,11 +120,11 @@ En esta sección, conocerá las medidas que puede tomar para maximizar el ROI y 
 
 Reduce tus volúmenes de métricas personalizadas indexados en cualquier nombre de métrica estableciendo una configuración de etiqueta que te gustaría preservar para la consulta. Reduce tu coste y preserva la precisión matemática de tus métricas configuradas (todo dentro de la plataforma sin cambios a nivel de código).
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Ejemplo de uso de la Gestión del volumen de métricas y Metrics without LimitsTM para reducir el volumen al limitar la lista de permitidos mediante la configuración de etiquetas" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Ejemplo del uso de la gestión de volumen de métricas y Metrics without LimitsTM para reducir el volumen mediante la limitación de la lista permitida a través de la configuración de tags (etiquetas)" style="width:80%;" >}}
 
 Con Metrics without LimitsTM, Datadog proporciona automáticamente lo siguiente:
-- Configuraciones actualizadas de etiquetas recomendadas (basadas en nuestros conocimientos sobre consultas inteligentes) para ayudar a maximizar el ROI y el valor que obtienes de tu gasto en observabilidad.
-- Información de consulta inteligente que calcula y analiza continuamente todas las interacciones de los usuarios (tanto dentro de la aplicación como a través de la API) en cualquier consulta enviada a  para que sus configuraciones de   sean siempre relevantes. métricas enviadas a Datadog para que las configuraciones de recomendado etiquetar sean siempre relevantes.
+- Configuraciones de tags (etiquetas) recomendadas y actualizadas basadas en las tags (etiquetas) consultadas activamente y en las etiquetas utilizadas en los activos (gracias a nuestra información de consulta inteligente) para ayudarte a maximizar la rentabilidad y el valor que obtienes de tu gasto en observabilidad.
+- Información de consulta inteligente que calcula y analiza continuamente todas las interacciones de los usuarios (tanto dentro de la aplicación como a través de la API) en cualquier métrica enviada a Datadog para que las configuraciones de tags (etiquetas) recomendadas sean siempre relevantes.
 - Posibilidad de deshacer los cambios en cualquier momento para obtener una visibilidad completa de todos los datos enviados originalmente.
 
 Como parte de las prácticas recomendadas de gobernanza de métricas de Datadog, empieza por utilizar Metrics without Limits en tus [Métricas personalizadas principales](#identify-metrics-that-have-the-biggest-impact-on-monthly-bill).
@@ -136,46 +142,62 @@ tags:audit "Queryable tag configuration"
 
 {{< img src="/metrics/guide/custom_metrics_governance/metrics_rbac_audit_trail_query.png" alt="Event Explorer con la consulta de seguimiento de auditoría de métricas" style="width:90%;" >}}
 
-### Reducir los costes de las métricas no consultadas
+### Reducir los costos de las métricas no consultadas y no utilizadas
 
-Para asegurarse de que no está eliminando una visibilidad valiosa a la vez que reduce costes, debe diferenciar entre las consultas activas métricas en los que confía su equipo de los métricas que no se consultan en ninguna parte de la plataforma Datadog ni a través de la API. Datadog La información de consulta inteligente de métrica calcula y analiza continuamente todas las interacciones de los usuarios (en Datadog o a través de la API) en cualquier para ayuda identificar los datos menos valiosos y no utilizados. métricas.
+#### Métricas no consultadas
 
-Identifique toda la lista de su organización de no consultados métricas en los últimos 30, 60 ó 90 días: 
-1. En la [métricas Página de resumen][6], busque la faceta **Actividad de la consulta** en el lado izquierdo. Seleccione el periodo de tiempo que le interese (30, 60 o 90 días).
-2. Busca la faceta **Configuration** (Configuración) en el lado izquierdo y selecciona **All Tags** (Todas las etiquetas). La combinación de estas dos facetas te proporciona una lista de métricas personalizadas no consultadas que aún no se han configurado y de las que puedes obtener un ahorro inmediato.
-3. Revisa la tabla resultante de nombres de métricas. ¿Existen patrones o se envían desde un servicio específico? Busca etiquetas asociadas a estas métricas no consultadas.
-4. (Opcional) Para exportar esta lista, haz clic en **Export as CSV** (Exportar como CSV) encima de la tabla de métrica.
+Para asegurarte de que no estés eliminando una visibilidad valiosa a la vez que reduces costos, utiliza la faceta **Query Activity** (Actividad de consulta). Esto te permite diferenciar las métricas consultadas activamente en las que confía tu equipo de las métricas que no se consultan en ninguna parte de Datadog ni a través de la API. La información de consulta inteligente de Datadog calcula y analiza continuamente todas las interacciones de los usuarios (en Datadog o a través de la API) en cualquier métrica para ayudar a identificar las métricas no consultadas.
 
-   Después de identificar las métricas que tus desarrolladores no necesitan, puedes reducir de forma segura los volúmenes de métricas personalizadas y reducir los costes de estas métricas no utilizadas con Metrics without LimitsTM.
+**Nota**: Las métricas no consultadas pueden utilizarse en consultas sobre activos (dashboards, notebooks, monitores y SLOs). Se considera que no se han consultado si el activo no se ha utilizado en el plazo establecido.
 
-{{< img src="métricas/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="The Configurar métricas drop menu with the Manage etiquetas (tags) selection highlighted" style="width:90%;" >}}
+#### Métricas no utilizadas
 
-5. En la parte superior de la [métricas Página de resumen][6], haga clic en el **Configurar métricas** menú desplegable.
-6. Selecciona **Manage tags** (Gestionar etiquetas) para abrir el [modal de configuración de Etiqueta de Metrics without LimitsTM][13] para configurar múltiples métricas en bloque.
-7. Especifica el prefijo de espacio de nombres de las métricas que deseas configurar.
-8. Selecciona **Include tags...** (Incluir etiquetas) y deja vacía la lista de etiquetas permitidas.
+También puedes reducir costos, sin efectos secundarios no deseados, utilizando la [faceta Activos relacionados][16]. Esto te permite identificar las métricas que no están siendo utilizadas por ninguno de tus activos (dashboards, notebooks, monitores y SLOs). Esto te permite tomar decisiones informadas sobre las configuraciones de tus métricas.
+
+#### Identificar todas las métricas no consultadas y no utilizadas
+
+Utiliza la [faceta Activos relacionados][16] para obtener visibilidad de las métricas que no se utilizan en Datadog, lo que puede ayudarte a reducir costos sin romper accidentalmente ningún activo. Esta faceta te permite ver qué métricas se utilizan en tus dashboards, notebooks, monitores y SLOs, lo que te permite tomar decisiones informadas sobre tus configuraciones de métricas.
+
+Identifica toda la lista de métricas no consultadas y no utilizadas de tu organización:
+
+1. En la [page (página) Resumen de métricas][6], busca la faceta **Query Activity** (Actividad de la consulta) del lado izquierdo. Selecciona el periodo de tiempo que te interese (30, 60 o 90 días).
+2. Busca la faceta **Related Assets** (Activos relacionados) del lado izquierdo y selecciona **Not used in any asset** (No utilizado en ningún activo).
+3. Busca la faceta **Configuration** (Configuración) del lado izquierdo y selecciona **All Tags** (Todas las etiquetas). La combinación de estas tres facetas te proporciona una lista de todas las métricas que no se consultan ni se utilizan en tus activos y que aún no tienen una configuración de tag (etiqueta) personalizada.
+
+4. Revisa la tabla resultante de nombres de métricas. ¿Existen patrones o se envían desde un servicio específico? Busca etiquetas asociadas a estas métricas no consultadas.
+5. (Opcional) Para exportar esta lista, haz clic en **Export as CSV** (Exportar como CSV) encima de la tabla de métrica.
+
+   Después de identificar las métricas que tus desarrolladores no necesitan, puedes reducir de forma segura los volúmenes de métricas personalizadas y los costos asociados de estas métricas no utilizadas con Metrics without LimitsTM. 
+
+{{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="El menú desplegable Configurar métricas con la selección Gestionar tags (etiquetas) resaltadas" style="width:90%;" >}}
+
+6. En la parte superior de la [Page (página) Resumen de métricas][6], haz clic en el menú desplegable **Configurar métricas**.
+7. Selecciona **Manage tags** (Gestionar etiquetas) para abrir el [modal de configuración de Etiqueta de Metrics without LimitsTM][13] para configurar múltiples métricas en bloque.
+8. Especifica el prefijo de espacio de nombres de las métricas que deseas configurar.
+9. Deja seleccionado **Include tags** (Incluir etiquetas). Esto incluye todas las tags (etiquetas) que se han consultado activamente en tus activos (dashboards, notebooks, monitores y SLOs), en el Explorer de métricas o a través de la API.
+10. Haz clic en **Save** (Guardar).
 
 Según la información sobre consultas inteligentes de Datadog en miles de clientes de métricas personalizadas, hemos comprobado que el uso de **Metrics without LimitsTM** en métricas no consultadas puede reducir el uso medio de las métricas personalizadas del cliente en hasta un 70 %**.
 
 ### Comprender la utilidad relativa de tus métricas
 
-Aunque no se haya consultado una métrica en los últimos 30 días, es posible que tus equipos sigan sacando provecho de ella para la gestión de incidencias y la corrección de interrupciones. Por el contrario, tus equipos podrían estar infrautilizando las métricas existentes y consultadas activamente. Por tanto, comprender la utilidad relativa de tus métricas es el siguiente paso recomendado en tu flujo de trabajo de gobernanza.
+Aunque una métrica no se haya consultado en los últimos 30, 60 o 90 días, tu equipo podría seguir obteniendo valor de ella para la gestión de incident (incidente) y la corrección de interrupciones. Por el contrario, tu equipo podría estar infrautilizando las métricas existentes consultadas activamente. Así que entender la utilidad relativa de tus métricas es el siguiente step (UI) / paso (generic) recomendado en tu workflow (UI) / proceso (generic) de governance (UI) / gobernanza (generic). 
 
-Metrics without LimitsTM de Datadog es un conjunto de funciones que también te proporcionan información OOTB para evaluar el valor de tus métricas consultadas activamente con [Activos relacionados con métricas][15]. Un activo relacionado con métricas hace referencia a cualquier activo de Datadog, como dashboard, notebook, monitor o SLO que consulte una métrica en concreto. Utiliza la popularidad y cantidad de activos relacionados para evaluar la utilidad de la métrica dentro de tu organización, lo que te permitirá tomar decisiones basadas en datos. Comprende mejor cómo tu equipo puede utilizar las métricas existentes para obtener más valor de tu gasto en observabilidad.
+Metrics without LimitsTM de Datadog es un conjunto de funciones que también te proporcionan información predefinida para evaluar el valor de tus métricas consultadas activamente con el panel lateral [Activos relacionados con métricas][15]. Un activo relacionado con las métricas hace referencia a cualquier activo de Datadog, como un dasboard, notebook, monitor (noun) o SLO que consulte una métrica concreta. Utiliza la columna **Tags** (Etiquetas) para identificar qué etiquetas específicas se utilizan en los activos, asegurándote de mantener tu visibilidad al optimizar con Metrics without LimitsTM. Utiliza la popularidad y la cantidad de activos relacionados para evaluar la utilidad de las métricas en tu organización, lo que permite tomar decisiones basadas en datos. Comprende mejor cómo tu equipo puede utilizar las métricas existentes para obtener más valor de tu gasto en observabilidad. 
 
-{{< img src="métricas/related_assets_2025-01-27.png" alt="métrica detail side panel showing the Related Assets section. The example métrica is applied to three dashboards" style="width:100%;" >}}
+{{< img src="metrics/related_assets_08_05_2025.png" alt="Panel lateral del detalle de las métricas en las que se muestra la sección Activos relacionados. El ejemplo de métrica se aplica a tres dashboards" style="width:100%;" >}}
 
-Para ver los activos relacionados de métricas:
+Para ver los activos relacionados de una métrica:
 1. Haz clic en el nombre de métrica para abrir tu panel lateral de detalles.
 1. Desplázate hasta la sección del panel lateral titulada **Related Assets** (Activos relacionados).
-1. Haga clic en el botón desplegable para ver el tipo de activo relacionado que le interesa (dashboards, monitores, notebooks, SLOs). Puede utilizar la barra Buscar para validar activos específicos.
+1. Haz clic en el botón desplegable para ver el tipo de activo relacionado que te interesa (dashboards, monitores, notebooks, SLOs). Puedes utilizar la barra de búsqueda para validar activos específicos.
 
 
 ## Monitorización y prevención
 En esta sección, aprenderás cómo: 
 - Alertar de excesos y picos repentinos en el uso general de las métricas personalizadas de tu cuenta
 - Predecir el crecimiento futuro de métricas y alertar sobre cualquier desviación global inesperada
-- Alerta cuando la cardinalidad de un determinado métrica supera un umbral definido por el usuario o presenta picos anómalos.
+- Alertar cuando la cardinalidad de una determinada métrica supera un umbral definido por el usuario o tiene picos anómalos.
 Una vez que conozcas el uso de métricas de tu cuenta y los equipos responsables de esos costes, crea monitores para que te avise cuando el uso de tus métricas personalizadas supere un determinado umbral. Recibe alertas cuando se produzcan picos en el uso de métricas personalizadas, de modo que puedas evitar picos involuntarios en la facturación.
 
 Datadog ofrece métricas OOTB que miden [el uso estimado de métricas personalizadas][15]. Puedes utilizar estas métricas en tus visualizaciones de dashboard y alertas de monitor. 
@@ -203,9 +225,9 @@ Después de recibir una alerta, utiliza la página de gestión de volumen de mé
 ## Resumen de prácticas recomendadas
 
 1. Comienza por identificar los nombres más importantes de métrica (tu tabla de métricas personalizadas principales o la página de volumen de métricas) y utiliza Metrics without LimitsTM para optimizar estas métricas principales al volumen más rentable.
-1. Utiliza la página de gestión de volúmenes de métricas para atribuir los picos de uso de métricas personalizadas existentes a los nombres de métricas principales que los causan.
-1. Para ahorrar costes de forma inmediata, identifica tus métricas personalizadas y utiliza Metrics without LimitsTM para configurar estas métricas con configuraciones de etiqueta vacía.
-1. Controla monitores para el uso de tus métricas personalizadas mediante cualquiera de tus métricas de uso personalizas estimadas y OOTB de Datadog.
+2. Utiliza la página de gestión de volúmenes de métricas para atribuir los picos de uso de métricas personalizadas existentes a los nombres de métricas principales que los causan.
+3. Para ahorrar costes de forma inmediata, identifica tus métricas personalizadas y utiliza Metrics without LimitsTM para configurar estas métricas con configuraciones de etiqueta vacía.
+4. Controla monitores para el uso de tus métricas personalizadas mediante cualquiera de tus métricas de uso personalizas estimadas y OOTB de Datadog.
 
 ## Referencias adicionales
 
@@ -224,5 +246,7 @@ Después de recibir una alerta, utiliza la página de gestión de volumen de mé
 [11]: /es/account_management/audit_trail/
 [12]: https://app.datadoghq.com/event/explorer
 [13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
-[14]: https://docs.datadoghq.com/es/metrics/metrics-without-limits/#configuration-of-tags
+[14]: https://docs.datadoghq.com/es/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
 [15]: /es/metrics/summary/#metrics-related-assets
+[16]: /es/metrics/summary/#facet-panel
+[17]: https://tour.datadoghq.com/psl/swa0y11

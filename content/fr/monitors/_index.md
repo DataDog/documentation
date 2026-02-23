@@ -1,76 +1,93 @@
 ---
+algolia:
+  tags:
+  - monitors
+  - alerts
 aliases:
 - /fr/guides/monitors/
 - /fr/guides/monitoring/
 - /fr/guides/alerting/
 - /fr/guides/monitors/the-conditions
-description: Créez des monitors, informez vos équipes dès que nécessaire et gérez
-  vos monitors grâce à la plateforme d'alertes
-disable_sidebar: true
+- /fr/monitoring
+cascade:
+  algolia:
+    rank: 70
+    tags:
+    - alertes
+    - alerter
+    - surveillance
+description: Créez des monitors, configurez des notifications et des automations,
+  et gérez vos monitors à l'aide de la plateforme d'alertes
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Alerting
   tag: Notes de version
   text: Découvrez les dernières versions des alertes Datadog (connexion à l'application
     requise).
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Participer à une session interactive sur la création de monitors efficaces
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: Blog
   text: 'Monitoring 101 : définir des alertes pertinentes'
 - link: /api/v1/monitors/
   tag: Documentation
   text: API Monitors Datadog
-title: Alertes
+- link: https://www.datadoghq.com/blog/monitor-notification-rules/
+  tag: Blog
+  text: Acheminer vos alertes de monitor grâce aux règles de notification des monitors
+    Datadog
+title: Monitors
 ---
 
-## Présentation
+## Section Overview
 
-Pour surveiller l'ensemble de votre infrastructure depuis un seul endroit, vous devez recevoir des notifications lorsque des modifications critiques se produisent. Datadog vous permet de créer des monitors qui vérifient activement vos métriques, les disponibilités de vos intégrations, les endpoints réseau, et plus encore.
+Les Monitors Datadog offrent une visibilité essentielle sur votre infrastructure, permettant une détection proactive et une réponse en temps réel aux problèmes de performance et aux interruptions de service. En configurant des monitors pour suivre des métriques et seuils clés, les organisations reçoivent des alertes immédiates et peuvent résoudre les problèmes avant qu'ils n'affectent les utilisateurs ou ne provoquent des pannes.
 
-Configurez des monitors, informez vos équipes et gérez les alertes d'un simple coup d'œil sur la plateforme d'alertes.
+Surveillez les changements critiques en vérifiant les métriques, la disponibilité des intégrations et les points de terminaison réseau grâce à la plateforme d'alertes. Avec les monitors de Datadog, vous pouvez :
+- Simplifier les processus de surveillance et de réponse
+- Améliorer l'efficacité opérationnelle
+- Optimiser les performances
 
-**Remarque** : consultez et recherchez vos monitors sur votre appareil mobile grâce à l'[application mobile Datadog][1], disponible sur l'[App Store d'Apple][2] et le [Google Play Store][3].
+## Prise en main
 
-## Créer des monitors
+La façon la plus rapide de commencer avec les monitors de Datadog est d'utiliser les [monitors recommandés][1], une collection de monitors préconfigurés par Datadog et ses partenaires d'intégration.
 
-{{< img src="/monitors/create.png" alt="Créer un monitor" style="width:90%;">}}
+Vous pouvez aussi créer vos propres monitors à partir de zéro dans des environnements de test dans le Learning Center, ou directement dans votre application en suivant le guide « Débuter avec les monitors ».
 
-[Configurez des monitors][4] : créez des monitors qui surveillent des métriques, des événements, des logs, la disponibilité d'intégrations, des endpoints réseau, et plus encore.
-
-## Informer vos équipes
-
-{{< img src="/monitors/notify.png" alt="Envoyer des notifications lorsqu'un monitor génère des alertes" style="width:90%;">}}
-
-[Notifications des monitors][5] : configurez des notifications lors de la création de monitors pour prévenir votre équipe en cas de problème. Transmettez les notifications aux personnes adéquates, tirez profit des template variables pour inclure des informations détaillées et joignez des snapshots aux alertes envoyées par e-mail ou via Slack. Créez des [downtimes][6] pour désactiver les alertes lors de la maintenance de votre application.
-
-## Gérer les monitors
-
-{{< img src="/monitors/manage.png" alt="Gérer les alertes de tous les monitors" style="width:90%;">}}
-
-[Gérez les monitors][7] : modifiez, dupliquez, supprimez, désactivez et rétablissez des monitors depuis une interface unique. Pour vous concentrer sur les alertes prioritaires, utilisez la recherche à facettes avancée. Parcourez les détails des monitors et étudiez l'évolution des alertes sur la page Monitor Status.
-
-## Consulter et rechercher des monitors sur des appareils mobiles
-
-[Monitors adaptés aux appareils mobiles sous iOS et Android][8] : consultez, désactivez et réactivez des monitors depuis n'importe quel appareil iOS ou Android grâce à l'[application mobile Datadog][1], disponible sur l'[App Store d'Apple][2] et le [Google Play Store][3]. Saisissez des requêtes dans la barre de recherche pour filtrer les monitors en temps réel. Utilisez des [vues enregistrées de monitor][9] pour accéder en quelques secondes à un ensemble de monitors sur votre appareil mobile.
-
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors sur l'application mobile">}}
-
-## Autres sections
-
-{{< whatsnext desc=" ">}}
-    {{< nextlink href="/monitors/service_level_objectives" >}}<u>Service Level Objectives</u> : créez, modifiez ou visualisez vos SLO grâce à des métriques ou des monitors Datadog existants{{< /nextlink >}}
-    {{< nextlink href="/monitors/incident_management" >}}<u>Gestion des incidents</u> : déclarez et gérez des incidents.{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide" >}}<u>Guides</u> : articles d'aide supplémentaires à propos des monitors et des alertes{{< /nextlink >}}
+{{< whatsnext desc="Utilisez les ressources suivantes pour créer un monitor :" >}}
+    {{< nextlink href="/getting_started/monitors/" >}}Débuter avec les monitors : guide de création d'un monitor basé sur une métrique{{< /nextlink >}}
+    {{< nextlink href="/monitors/types/" >}}Créer un monitor à partir des types de monitors{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}Learning Center : créer un monitor dans un environnement de test{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Analyser les données agrégées
+
+Les données doivent être bien comprises, granulaires, étiquetées par périmètre et durables. Utilisez différents types de données pour les alertes et le diagnostic, en fonction du niveau d'urgence. Instrumentez toutes vos applications et collectez un maximum de données pertinentes pour une observabilité complète des systèmes complexes.
+
+Mesurez la santé de vos applications et l'état de votre infrastructure avec Datadog. Utilisez les données de l'ensemble de la plateforme Datadog pour créer des alertes sur les problèmes potentiels.
+
+## Déclencher des alertes pertinentes
+
+Configurez les [notifications de monitor][2] pour tenir votre équipe informée des problèmes et fournir des indications de dépannage. Dirigez les notifications vers les bonnes personnes, utilisez des variables de modèle pour inclure des détails, et joignez des captures d'écran lors de l'envoi des alertes par email ou Slack.
+
+Réduisez la fatigue liée aux alertes afin que les équipes puissent se concentrer sur leur résolution lorsqu'elles comptent vraiment. Créez des [périodes de silence][3] pour désactiver temporairement les alertes pendant les phases de maintenance.
+
+## Et ensuite ?
+
+Les monitors et les alertes sont des outils essentiels pour garantir la fiabilité, les performances et la disponibilité des systèmes informatiques et des applications. Ils permettent de maintenir l'efficacité opérationnelle, d'améliorer l'expérience utilisateur et de limiter les risques en assurant une détection et une réponse rapides aux problèmes avant qu'ils ne s'aggravent.
+1. [Programmer des périodes de silence pour désactiver les monitors][4]
+1. [Organiser et gérer les monitors][5]
+1. [Analyser les alertes via la page de statut][6] 
+1. [Corriger les monitors mal configurés via la page Qualité des monitors][7]
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/mobile
-[2]: https://apps.apple.com/app/datadog/id1391380318
-[3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: /fr/monitors/create
-[5]: /fr/monitors/notify
-[6]: /fr/monitors/notify/downtimes
-[7]: /fr/monitors/manage
-[8]: /fr/mobile/?tab=ios#monitors
-[9]: /fr/monitors/manage/search/#saved-view
+[1]: https://app.datadoghq.com/monitors/recommended
+[2]: /fr/monitors/notify
+[3]: /fr/monitors/downtimes
+[4]: /fr/monitors/downtimes/?tab=bymonitorname
+[5]: /fr/monitors/manage
+[6]: /fr/monitors/status/status_page
+[7]: /fr/monitors/quality/

@@ -9,7 +9,7 @@ further_reading:
 - link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Data Security"
-- link: "/real_user_monitoring/session_replay/browser/privacy_options/"
+- link: "/session_replay/browser/privacy_options/"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
@@ -139,22 +139,22 @@ See [privacy options specific to Session Replay][19].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /real_user_monitoring/browser/setup/#configuration
+[2]: /real_user_monitoring/application_monitoring/browser/setup/#configuration
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [5]: /real_user_monitoring/explorer/search/
-[6]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[6]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [7]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [8]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[10]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[9]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
+[10]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
 [11]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
 [12]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[13]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [14]: /help/
 [15]: /account_management/rbac/permissions/#real-user-monitoring
-[16]: /real_user_monitoring/session_replay/privacy_options#override-an-html-element
+[16]: /session_replay/browser/privacy_options/#override-an-html-element
 [17]: /security/sensitive_data_scanner/
 [18]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[19]: /real_user_monitoring/session_replay/browser/privacy_options
+[19]: /session_replay/browser/privacy_options
 [20]: https://www.datadoghq.com/private-beta/product-analytics/

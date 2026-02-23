@@ -2,10 +2,10 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: Documentación
-  text: Opciones adicionales de configuración de la biblioteca de rastreo
+  text: Opciones adicionales de configuración de la librería de rastreo
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: Documentación
-  text: Instrucciones de configuración detalladas de la biblioteca de rastreo
+  text: Instrucciones de configuración detalladas de la librería de rastreo
 - link: /tracing/trace_collection/compatibility/java/
   tag: Documentación
   text: Marcos de Java compatibles para la instrumentación automática
@@ -14,13 +14,13 @@ further_reading:
   text: Configuración manual de trazas y tramos
 - link: https://github.com/DataDog/dd-trace-java
   tag: Código fuente
-  text: Repositorio de código fuente abierto de la biblioteca de rastreo
+  text: Repositorio de código fuente abierto de la librería de rastreo
 - link: /containers/cluster_agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Datadog Cluster Agent
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
-  text: Uso de la inyección de biblioteca para instrumentar automáticamente y rastrear
+  text: Uso de la inyección de librería para instrumentar automáticamente y rastrear
     tus aplicaciones de Kubernetes con Datadog APM
 title: 'Tutorial: Activación del rastreo para una aplicación Java con el Controlador
   de admisión'
@@ -54,7 +54,7 @@ git clone https://github.com/DataDog/springblog.git
 
 El repositorio contiene una aplicación Java multiservicio preconfigurada para ejecutarse dentro de Docker y Kubernetes. La aplicación de ejemplo es una aplicación Spring básica que utiliza REST.
 
-## Inicio y ejecución de la aplicación de ejemplo 
+## Inicio y ejecución de la aplicación de ejemplo
 
 1. Cambia al subdirectorio `/k8s` en el repositorio springblog:
    {{< code-block lang="shell" >}}
@@ -93,15 +93,15 @@ Una vez que tengas tu aplicación en funcionamiento, instruméntala con el Contr
 
 1. Instala el [Datadog Cluster Agent][5].
 2. Añade [etiquetas (tags) de servicio unificado][6] en la definición del pod.
-3. [Anota][7] tu pod para la inyección de la biblioteca.
+3. [Anota][7] tu pod para la inyección de la librería.
 4. [Etiqueta][8] tu pod para ordenar al Controlador de admisión (Admission Controller) de Datadog que mute el pod.
 
-No es necesario añadir la biblioteca de rastreo porque se inyecta automáticamente. Todavía no necesitas volver a desplegar tu aplicación. Esta sección del tutorial te guía a través de proceso para añadir variables de Datadog y desplegar una nueva imagen o versión de tu aplicación.
+No es necesario añadir la librería de rastreo porque se inyecta automáticamente. Todavía no necesitas volver a desplegar tu aplicación. Esta sección del tutorial te guía a través de proceso para añadir variables de Datadog y desplegar una nueva imagen o versión de tu aplicación.
 
 1. Desde el subdirectorio `k8s`, utiliza el siguiente comando para instalar el Datadog Cluster Agent, especificando el archivo de configuración `values-with-lib-inj.yaml` y tu [clave de API de Datadog](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
-    <div class="alert alert-warning">Para obtener información más detallada, lee <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Instalación del Datadog Agent en Kubernetes con Helm</a></div>
+    <div class="alert alert-danger">Para obtener información más detallada, lee <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Instalación del Datadog Agent en Kubernetes con Helm</a></div>
 
 2. Puedes comprobar que el Datadog Cluster Agent se está ejecutando con el siguiente comando:
    {{< code-block lang="shell" >}}
@@ -128,7 +128,7 @@ labels:
 annotations:
   admission.datadoghq.com/java-lib.version: "latest"{{< /code-block >}}
 
-    Esta anotación especifica la última versión de la biblioteca de rastreo de Java. También puedes hacer referencia a una versión específica de biblioteca, como `"v1.5.0"`.
+    Esta anotación especifica la última versión de la librería de rastreo de Java. También puedes hacer referencia a una versión específica de librería, como `"v1.5.0"`.
 
     La definición final del pod debería parecerse al siguiente extracto. Consulta también el [archivo YAML][10] completo en el repositorio de ejemplo. Las instrucciones que has añadido para instrumentar la aplicación están resaltadas:
 
@@ -220,7 +220,7 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-8. Comprueba que la biblioteca de rastreo de Datadog se inyecta en el pod al controlar los logs del pod. Por ejemplo:
+8. Comprueba que la librería de rastreo de Datadog se inyecta en el pod al controlar los logs del pod. Por ejemplo:
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
@@ -252,7 +252,7 @@ Limpia tu entorno con el siguiente comando:
 kubectl delete -f depl-with-lib-inj.yaml
 {{< /code-block >}}
 
-La inyección de biblioteca con el Controlador de admisión (Admission Controller) simplifica la instrumentación del servicio, permitiéndote ver trazas de APM sin cambiar o reconstruir tu aplicación. Para obtener más información, lee [la inyección de biblioteca de Datadog][12].
+La inyección de librería con el Controlador de admisión (Admission Controller) simplifica la instrumentación del servicio, permitiéndote ver trazas de APM sin cambiar o reconstruir tu aplicación. Para obtener más información, lee [la inyección de librería de Datadog][12].
 
 ## Solucionar problemas
 Si no recibes trazas como esperabas, configura el modo de depuración para el rastreador de Java. Para obtener más información, lee [Activar el modo de depuración][13].

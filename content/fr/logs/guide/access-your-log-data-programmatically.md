@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/search_syntax/
   tag: Documentation
   text: En savoir plus sur la syntaxe de l'API Logs Search
-
 title: Programmation de l'accès aux données de log à l'aide de l'API Logs Search
 ---
 
@@ -443,18 +442,6 @@ Les paramètres `from` and `to` peuvent être définis sur les valeurs suivantes
 }
 ```
 
-Le fuseau horaire peut être défini en précisant un décalage (par exemple, UTC +3) ou une zone régionale (par exemple, Europe/Paris). Si vous précisez à la fois un décalage et une zone, le décalage est prioritaire. Il doit être exprimé en secondes.
-
-```javascript
-{
-  "options": {
-    "timeOffset": -1000,
-    "timezone": "Europe/Paris"
-  }
-}
-```
-
-
 ### Pagination
 
 Pour récupérer une liste de logs comportant plus de `1000` logs (soit la [limite maximale](#restriction-du-nombre-de-resultats-recuperes)), utilisez la fonctionnalité de pagination.
@@ -553,4 +540,4 @@ La réponse renvoie les deux prochains résultats, à savoir l'utilisateur `joe`
 [2]: /fr/account_management/api-app-keys/#api-keys
 [3]: /fr/account_management/api-app-keys/#application-keys
 [4]: https://curl.haxx.se/download.html
-[5]: /fr/account_management/rbac/permissions/?tab=ui#log-data-access
+[5]: /fr/logs/explorer/search_syntax/

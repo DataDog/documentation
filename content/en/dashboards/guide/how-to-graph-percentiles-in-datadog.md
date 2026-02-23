@@ -1,5 +1,6 @@
 ---
 title: How to graph percentiles in Datadog?
+description: Submit histogram data through DogStatsD to generate percentile metrics including 95th, 50th percentiles, avg, max, and count.
 aliases:
   - /graphing/faq/how-to-graph-percentiles-in-datadog
   - /graphing/guide/how-to-graph-percentiles-in-datadog

@@ -36,7 +36,7 @@ author:
 categories:
 - data stores
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -122,8 +122,8 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- Support Email: [datadog.integrations@crestdata.ai][9]
-- Sales Email: [datadog-sales@crestdata.ai][10]
+- サポートメール: [datadog.integrations@crestdata.ai][9]
+- 営業メール: [datadog-sales@crestdata.ai][10]
 - Web サイト: [crestdata.ai][3]
 - よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
@@ -138,4 +138,4 @@ tile:
 [9]: mailto:datadog.integrations@crestdata.ai
 [10]: mailto:datadog-sales@crestdata.ai
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-aiqum" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-aiqum" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

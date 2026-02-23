@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md
 title: (レガシー) Ruby アプリケーションのトレース
 ---
-<div class="alert alert-warning">このドキュメントは <code>ddtrace</code> gem v1.x 向けです。<code>datadog</code> gem v2.0 以降をお使いの場合は、最新の <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">Ruby アプリケーションのトレース</a> のドキュメントを参照してください。</div>
+<div class="alert alert-danger">このドキュメントは <code>ddtrace</code> gem v1.x 向けです。<code>datadog</code> gem v2.0 以降をお使いの場合は、最新の <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">Ruby アプリケーションのトレース</a> のドキュメントを参照してください。</div>
 
 `ddtrace` は、Datadog の Ruby 用トレースクライアントです。Web サーバー、データベース、マイクロサービスを通過するリクエストを追跡するために使用されるため、開発者はボトルネックや面倒なリクエストを高度に把握できます。
 

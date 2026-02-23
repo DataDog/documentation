@@ -8,6 +8,9 @@ cascade:
     rank: 70
 description: Database Monitoring について学び、始めましょう
 further_reading:
+- link: https://www.datadoghq.com/blog/database-monitoring-recommendations/
+  tag: ブログ
+  text: Database Monitoring 推奨事項でデータベース ホストとクエリ パフォーマンスを改善する
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
   tag: ブログ
   text: データベースのパフォーマンスを監視、視覚化する

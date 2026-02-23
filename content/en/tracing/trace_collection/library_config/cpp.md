@@ -17,6 +17,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, `service` and `version` for your services. Refer to the [Unified Service Tagging][1] docummentation recommendations on which value to set for environment variables.
 
 ## Environment variables
@@ -65,11 +67,6 @@ If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` t
 : **Since**: 0.1.0 <br>
 **Default**: `200` <br>
 Maximum number of traces allowed to be submitted per second.
-
-`DD_SPAN_SAMPLING_RULES`
-: **Version**: v0.1.0 <br>
-**Default**: `null`<br>
-A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between `0.0` and `1.0` (inclusive).
 
 `DD_SPAN_SAMPLING_RULES_FILE`
 : **Since**: 0.1.0 <br>
@@ -154,5 +151,5 @@ When multiple values are given, the order of matching is based on the order of v
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /agent/configuration/network/#configure-ports
 [4]: /tracing/configure_data_security#telemetry-collection
-[5]: /agent/remote_config
+[5]: /remote_configuration
 [6]: /tracing/trace_collection/library_config/#traces

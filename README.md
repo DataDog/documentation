@@ -4,7 +4,7 @@ Welcome to the Datadog documentation repository. The markdown stored in this rep
 
 ## Contribute to the docs
 
-Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request in this repo for the documentation team to review
+Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request (PR) in this repo for the Documentation team to review. The Documentation team is added as a PR reviewer automatically.
 
 Most pages on the documentation site feature an **Edit** button that sends you to the source file in this repo. You can make an edit straight from the GitHub website!
 
@@ -43,7 +43,7 @@ Make sure all files are lowercase. Macs are case-insensitive when creating links
 
 ## Releasing
 
-Merging to `master` triggers an automatic deployment. This process typically begins within 10 minutes and usually takes around 35 minutes to complete, though these times may vary. 
+Merging to `master` triggers an automatic deployment. This process typically begins within 10 minutes and usually takes around 35 minutes to complete, though these times may vary.
 
 ## How to add a new integration
 

@@ -37,17 +37,17 @@ name: concourse_ci
 public_title: Concourse-CI
 short_description: Recopila métricas emitidas desde Concourse CI.
 supported_os:
-- linux
-- windows
-- macos
+- Linux
+- Windows
+- macOS
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Automation
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
+  - Categoría::Automatización
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::Windows
+  - Sistema operativo compatible::macOS
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Recopila métricas emitidas desde Concourse CI.
   media: []
@@ -90,7 +90,7 @@ Metric Emitter (Datadog):
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "concourse-ci" >}}
+{{< get-metrics-from-git "concourse_ci" >}}
 
 
 ### Eventos

@@ -24,9 +24,11 @@ Al habilitar Session Replay para móviles puedes enmascarar automáticamente los
 
 ## Configuración
 
-<div class="alert alert-warning"><code>defaultPrivacyLevel</code> y <code>mask-user-input</code> están disponibles en el SDK v3.6.0 o posterior.</div>
+<div class="alert alert-danger"><code>defaultPrivacyLevel</code> y <code>mask-user-input</code> están disponibles en el SDK v3.6.0 o posterior.</div>
 
 Para habilitar tus parámetros de privacidad, configura `defaultPrivacyLevel` como `mask`, `mask-user-input` o `allow` en tu configuración de JavaScript.
+
+**Nota:** Si no se especifica la configuración de privacidad al activar la reproducción de la sesión, `mask` se activa en forma predeterminada.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -53,22 +55,21 @@ Después de actualizar tu configuración, puedes anular elementos de tus documen
 
 La configuración de `defaultPrivacyLevel` con el modo `mask` enmascara todo el texto HTML, las entradas de los usuarios, las imágenes, los enlaces y los [atributos `data-*`][1]. El texto de tu aplicación se sustituye por `X`, convirtiendo la página en un wireframe.
 
-{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Modo máscara" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Modo de enmascaramiento" style="width:100%;">}}
 
-**Nota:** Por defecto, `mask` es la configuración de privacidad cuando se habilita Session Replay.
 **Nota**: Los datos enmascarados no se almacenan en los servidores de Datadog.
 
 ### Enmascarar el modo de entrada del usuario
 
 Enmascara la mayoría de los campos de formulario, como las entradas, las áreas de texto y los valores de las casillas de verificación, al tiempo que registra el resto del texto tal cual aparece. Las entradas se sustituyen por tres asteriscos (`***`) y las áreas de texto se ocultan con caracteres `x` que conservan el espacio.
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="Enmascarar el modo de entrada del usuario" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/browser-privacy-mask-input.png" alt="Enmascarar el modo de entrada de usuario" style="width:100%;">}}
 
 ### Permitir modo
 
 Registra todo desenmascarado.
 
-{{< img src="real_user_monitoring/session_replay/allow.png" alt="Permitir modo" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/browser-privacy-allow-all.png" alt="Permitir modo" style="width:100%;">}}
 
 ## Opciones de privacidad
 
@@ -113,8 +114,6 @@ En este ejemplo de repetición de sesión, el nombre de usuario en la navegació
 
 {{< img src="real_user_monitoring/session_replay/hidden.png" alt="Ejemplo de modo oculto para ofuscar un nombre de usuario" style="width:60%;">}}
 
-
-
 ### Anular el nombre de la acción
 
 Para ocultar el nombre predeterminado de la acción y actualizar la convención de nomenclatura de acciones individuales, configura la anulación de los nombres de tus acciones individuales.
@@ -134,7 +133,7 @@ Datadog está trabajando para añadir más funciones de privacidad a RUM y Sessi
 
 </div>
 
-## Referencias adicionales
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 

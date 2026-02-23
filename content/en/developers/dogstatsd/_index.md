@@ -20,6 +20,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
       tag: "Blog"
       text: "Monitor your Linux web apps on Azure App Service with Datadog"
+    - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+      tag: "Blog"
+      text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
@@ -33,13 +36,17 @@ Any compliant StatsD client works with DogStatsD and the Agent, but does not inc
 
 **Note**: DogStatsD does NOT implement timers from StatsD as a native metric type (though it does support them through [histograms][2]).
 
-DogStatsD is available on Docker Hub and GCR:
+DogStatsD is available on the Datadog Container Registry, GAR, ECR, Azure ACR, and Docker Hub:
 
-| Docker Hub                                       | GCR                                                       |
-|--------------------------------------------------|-----------------------------------------------------------|
-| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+| Registry                   | Image                                   |
+| -------------------------- | --------------------------------------- |
+| Datadog Container Registry | [registry.datadoghq.com/dogstatsd][33]  |
+| Google Artifact Registry   | [gcr.io/datadoghq/dogstatsd][4]         |
+| Amazon ECR                 | [public.ecr.aws/datadog/dogstatsd][34]  |
+| Azure ACR                  | datadoghq.azurecr.io/dogstatsd          |
+| Docker Hub                 | [hub.docker.com/r/datadog/dogstatsd][3] |
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you use the Datadog Container Registry or a cloud-provider registry instead. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ## How it works
 
@@ -93,29 +100,12 @@ docker run -d --cgroupns host \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [UNIX domain socket][1].
 
-#### Origin detection over UDP
-
-Origin detection is supported in Agent v6.10.0+, and allows DogStatsD to detect where the container metrics come from and automatically tag metrics. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
-
-The following tags are added for [Docker][3]. It is important to note that [cardinality][4] is a key concept when it comes to billing.
-
-Origin detection in non-Kubernetes environments is based on an extension of the DogStatsD protocol in [Datagram Format and Shell Usage][2]. To enable the feature in the Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
-
-<div class="alert alert-warning">
-  By default, origin detection is enabled in all DogStatsD clients, but it is not enabled by default in the Datadog Agent. To disable origin detection in a client, see the documentation for the specific DogStatsD library you're using.
-</div>
-
-**Note**: Origin detection is not supported for Fargate environments.
-
 [1]: /developers/dogstatsd/unix_socket/
-[2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
-[3]: /containers/docker/tag/
-[4]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
@@ -174,48 +164,10 @@ With this, any pod running your application is able to send DogStatsD metrics wi
 
 **Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, see [unified service tagging][4].
 
-#### Origin detection over UDP
-
-Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
-
-The following tags are added for [Kubernetes][8]. It is important to note that [cardinality][9] is a key concept when it comes to billing.
-
-1. To activate origin detection, add the `global.originDetectionUnified.enabled` setting to your `datadog-agent.yaml` manifest:
-
-    ```yaml
-    global:
-        originDetectionUnified:
-            enabled: true
-    ```
-
-**Notes**: 
-* An alternative to UDP is [UNIX Domain Sockets][5].
-* Origin detection with UDP can use the pod ID as the entity ID.
-
-To use pod ID as the entity ID, add the following lines to your application manifest:
-
-```yaml
-env:
-    - name: DD_ENTITY_ID
-      valueFrom:
-          fieldRef:
-              fieldPath: metadata.uid
-```
-
-To set [tag cardinality][6] for the metrics collected using origin detection, set the setting `features.dogstatsd.tagCardinality` to either `low` (default), `orchestrator` or `high`.
-
-**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][7].
-
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
-[6]: /getting_started/tagging/assigning_tags/#environment-variables
-[7]: /metrics/custom_metrics/
-[8]: /containers/kubernetes/tag/
-[9]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
-
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -258,6 +210,76 @@ To gather custom metrics with [DogStatsD][1] with helm:
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 {{% /tab %}}
 {{< /tabs >}}
+
+### Origin detection
+
+Datadog Agent v6.10.0 supports _origin detection_, which allows DogStatsD to detect where the container metrics come from and automatically tag metrics. When origin detection is enabled, all metrics received through UDP are tagged by the same pod 
+tags as Autodiscovery metrics.
+
+#### In a DogStatsD client
+
+Origin detection is enabled by default in all DogStatsD clients.  
+
+To **disable** origin detection in a client, perform one of the following actions:
+- Set the environment variable `DD_ORIGIN_DETECTION_ENABLED=false` 
+- Configure the DogStatsD library to disable origin detection. For instructions, see the [documentation for your specific DogStatsD library][10].
+
+#### In the Datadog Agent
+Origin detection is not enabled by default in the Datadog Agent. To **enable** origin detection in the Datadog Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
+
+Set [`shareProcessNamespace:true` in the pod spec][12] to assist the Agent for origin detection on EKS Fargate.
+
+#### How origins are detected
+
+Origin detection can be achieved in a number of ways. Origin detection through cgroups is enabled by default. Origin detection over UDP or `DD_EXTERNAL_ENV` requires configuration.
+
+{{< tabs >}}
+{{% tab "Cgroups" %}}
+On Linux, the container ID can be extracted from `procfs` entries related to `cgroups`. The client reads from `/proc/self/cgroup` or `/proc/self/mountinfo` to attempt to parse the container ID. 
+
+In cgroup v2, the container ID can be inferred by resolving the cgroup path from `/proc/self/cgroup`, combining it with the cgroup mount point from `/proc/self/mountinfo`. The resulting directory's inode is sent to the Datadog Agent. If the Datadog Agent is on the same node as the client, this information can be used to identify the pod's UID.
+{{% /tab %}}
+
+{{% tab "UDP" %}}
+To enable origin detection over UDP, add the following lines to your application manifest:
+
+```yaml
+env:
+- name: DD_ENTITY_ID
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.uid
+```
+
+The DogStatsD client attaches an internal tag, `entity_id`. The value of this tag is the content of the `DD_ENTITY_ID` environment variable, which is the pod's UID. 
+
+<div class="alert alert-info">For UDP, <code>pod_name</code> tags are not added by default to avoid creating too many <a href="/metrics/custom_metrics/">custom metrics</a>.</div>
+{{% /tab %}}
+
+{{% tab "DD_EXTERNAL_ENV" %}}
+Add the following label to your pod:
+
+```
+admission.datadoghq.com/enabled: "true"
+```
+
+If your pod has this label, the [Admissions Controller][1] injects an environment variable, `DD_EXTERNAL_ENV`. The value of this variable is sent in a field with the metric, which can be used by the Datadog Agent to determine the metric's origin.
+
+[1]: /containers/cluster_agent/admission_controller
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Tag cardinality
+
+Read [Assigning Tags: Tags Cardinality][11] for more information about tag cardinality.
+
+##### Globally
+
+You can specify tag cardinality globally by setting the `DD_CARDINALITY` environment variable, or by passing a `'cardinality'` field to the constructor. 
+
+##### Per metric
+
+You can specify tag cardinality per metric by passing the value in the `cardinality` parameter. Valid values for this parameter are `"none"`, `"low"`, `"orchestrator"` or `"high"`.
 
 ### DogStatsD client
 
@@ -356,7 +378,7 @@ options = {
 initialize(**options)
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. See the documentation on <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> for more details.
 </div>
 
@@ -514,10 +536,10 @@ For the full list of optional parameters, see the [dogstatsd-ruby repo][1] on Gi
 
 The Go client has multiple options for configuring the behavior of your client.
 
-| Parameter                     | Type            | Description                                                                  |
-| ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
-| `WithNamespace()`             | String          | Configure a namespace to prefix to all metrics, events, and service checks.  |
-| `WithTags()`                  | List of strings | Global tags applied to every metric, event, and service check.               |
+| Parameter         | Type            | Description                                                                 |
+| ----------------- | --------------- | --------------------------------------------------------------------------- |
+| `WithNamespace()` | String          | Configure a namespace to prefix to all metrics, events, and service checks. |
+| `WithTags()`      | List of strings | Global tags applied to every metric, event, and service check.              |
 
 For all available options, see [Datadog's GoDoc][1].
 
@@ -529,23 +551,23 @@ For all available options, see [Datadog's GoDoc][1].
 As of v2.10.0 the recommended way to instantiate the client is with the NonBlockingStatsDClientBuilder. You
 can use the following builder methods to define the client parameters.
 
-| Builder Method                               | Type           | Default   | Description                                                                         |
-| -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
-| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                     |
-| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                        |
-| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                             |
-| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.                |
-| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                        |
-| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                           |
-| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                         |
-| `entityID(String val)`                       | String         | null      | Entity ID for origin detection.                                                   |
-| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                  |
-| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maximum packet size; 8192 over UDS, 1432 for UDP.                               |
-| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.           |
-| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.               |
-| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                    |
-| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                                |
-| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only.  |
+| Builder Method                               | Type           | Default   | Description                                                                        |
+| -------------------------------------------- | -------------- | --------- | ---------------------------------------------------------------------------------- |
+| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                    |
+| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                       |
+| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                            |
+| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.               |
+| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                       |
+| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                          |
+| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                        |
+| `entityID(String val)`                       | String         | null      | Entity ID for origin detection.                                                    |
+| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                 |
+| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maximum packet size; 8192 over UDS, 1432 for UDP.                              |
+| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.          |
+| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.              |
+| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                   |
+| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                               |
+| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only. |
 
 For more information, search the Java DogStatsD [package][1] for the NonBlockingStatsDClient Class and NonBlockingStatsDClientBuilder Class. Make sure you view the version that matches your client release.
 
@@ -554,12 +576,14 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parameter     | Type            | Default     | Description                                                                                                                                                                                            |
-| ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `host`        | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
-| `port`        | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |
-| `socket_path` | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
-| `global_tags` | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable.                                    |
+| Parameter          | Type            | Default     | Description                                                                                                                                                                                            |
+| ------------------ | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `host`             | String          | `localhost` | The host of your DogStatsD server. If this is not set the Agent looks at the `DD_AGENT_HOST` or `DD_DOGSTATSD_URL` environment variable.                                                               |
+| `port`             | Integer         | `8125`      | The port of your DogStatsD server. If this is not set, the Agent looks at the `DD_DOGSTATSD_PORT` or `DD_DOGSTATSD_URL` environment variable.                                                          |
+| `socket_path`      | String          | `null`      | The path to the DogStatsD UNIX domain socket (overrides `host` and `port`). This is only supported with Agent v6+. If this is not set, the Agent looks at the `DD_DOGSTATSD_URL` environment variable. |
+| `global_tags`      | List of Strings | `null`      | Tags to apply to all metrics, events, and service checks. The `@dd.internal.entity_id` tag is appended to global_tags from the `DD_ENTITY_ID` environment variable.                                    |
+| `origin_detection` | Boolean         | True        | Should origin detection fields be added to each metric?                                                                                                                                                |
+| `container_id`     | String          | `null`      | A container id to tag all metrics with for origin detection.                                                                                                                                           |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
@@ -570,6 +594,8 @@ For more information, search the Java DogStatsD [package][1] for the NonBlocking
 | `StatsdPort`       | Integer         | `8125`      | The port of the targeted StatsD server.                              |
 | `Prefix`           | String          | `null`      | Prefix to apply to every metric, event, and service check.           |
 | `ConstantTags`     | List of strings | `null`      | Global tags to be applied to every metric, event, and service check. |
+| `OriginDetection`  | Bool            | True        | Should origin detection fields be added to each metric?              |
+| `ContainerID`      | String          | `null`      | A container id to tag all metrics with for origin detection.         |
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -580,7 +606,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -590,12 +616,17 @@ If you're interested in learning more about the datagram format used by DogStats
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/etsy/statsd
+[1]: https://github.com/statsd/statsd
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /metrics/custom_metrics/
-[6]: /service_management/events/guides/dogstatsd/
+[6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /developers/dogstatsd/datagram_shell/
+[10]: /developers/community/libraries/
+[11]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+[12]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
+[33]: https://registry.datadoghq.com/v2/dogstatsd/tags/list
+[34]: https://gallery.ecr.aws/datadog/dogstatsd

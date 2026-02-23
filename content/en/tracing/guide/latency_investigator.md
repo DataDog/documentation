@@ -1,5 +1,6 @@
 ---
 title: APM Investigator
+description: Use APM Investigator to analyze performance issues and investigate latency patterns across your distributed services.
 private: true
 further_reading:
 - link: "/tracing/"

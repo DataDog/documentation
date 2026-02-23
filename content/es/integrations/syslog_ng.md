@@ -18,18 +18,14 @@ public_title: Integración de Datadog y Syslog-ng
 short_description: Configura Syslog-ng para recopilar logs de tus hosts, contenedores
   y servicios.
 supported_os:
-- Linux
-- Windows
+- linux
+- windows
 title: Syslog-ng
 ---
 
 ## Información general
 
 Configura Syslog-ng para recopilar logs de tus hosts, contenedores y servicios.
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">La recopilación de logs de <code>syslog-ng</code> no está disponible para el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Configuración
 
@@ -97,7 +93,7 @@ Configura Syslog-ng para recopilar logs de tus hosts, contenedores y servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][2].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][2].
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 [2]: /es/help/

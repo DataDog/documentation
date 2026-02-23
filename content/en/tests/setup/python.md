@@ -169,7 +169,7 @@ For additional configurations, see [Configuration Settings][1].
 
 ### Manual testing API
 
-<div class="alert alert-warning"><strong>Note</strong>: The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
+<div class="alert alert-warning">The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
 
 As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
 
@@ -452,11 +452,11 @@ Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
 Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][1] or [`pytest-forked`][2]) create one session event for each parallelized instance.
 
-There are several issues when these plugins are used together with `ddtrace`. For example, a session, module, or suite may pass even when individual tests fail. Likewise, all the tests may pass and the suite/session/module fail. This happens because these plugins create worker subprocesses, and spans created in the parent process may not reflect the results from the child processes. For this reason, **the usage of `ddtrace` together with `pytest-xdist` and `pytest-forked` is not supported at the moment.**
+There are several issues when these plugins are used together with `ddtrace`, although they have been resolved for `pytest-xdist` in recent versions of `dd-trace-py` (3.12.6 and later). For example, a session, module, or suite may pass even when individual tests fail. Likewise, all the tests may pass and the suite/session/module fail. This happens because these plugins create worker subprocesses, and spans created in the parent process may not reflect the results from the child processes. For this reason, **the usage of `ddtrace` together with `pytest-forked` is not supported at the moment, while `pytest-xdist` only has support for `ddtrace>=3.12.6`.**
 
 Each worker reports test results to Datadog independently, so tests from the same module running in different processes generate separate module or suite events.
 
-The overall count of test events (and their correctness) remains unaffected. Individual session, module, or suite events can have inconsistent results with other events in the same `pytest` run.
+The overall count of test events (and their correctness) remains unaffected. Individual session, module, or suite events can have inconsistent results with other events in the same `pytest` run (with `pytest-forked`).
 
 ### Test ordering
 

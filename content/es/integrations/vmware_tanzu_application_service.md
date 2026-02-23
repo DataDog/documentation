@@ -3,10 +3,10 @@ aliases:
 - /es/integrations/cloud_foundry/
 - /es/integrations/pivotal_platform/
 categories:
-- suministración
+- aprovisionamiento
 - configuración y despliegue
-- recopilación de log
-custom_kind: integration
+- recopilación de logs
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: Realiza un seguimiento del estado de tus máquinas virtuales de VMware
@@ -16,13 +16,13 @@ doc_link: /integrations/vmware_tanzu_application_service/
 further_reading:
 - link: https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/
   tag: Blog
-  text: Monitorización de Pivotal Platform con Datadog
+  text: Monitorización de plataforma Pivotal con Datadog
 - link: /integrations/guide/application-monitoring-vmware-tanzu/
-  tag: documentation
-  text: Datadog Application Monitoring para VMware Tanzu
+  tag: documentación
+  text: Monitorización de aplicaciones de Datadog para VMware Tanzu
 - link: /integrations/guide/cluster-monitoring-vmware-tanzu/
-  tag: documentation
-  text: Datadog Cluster Monitoring para VMware Tanzu
+  tag: documentación
+  text: Monitorización de clústeres de Datadog para VMware Tanzu
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
@@ -64,11 +64,11 @@ cf restage <YOUR_APP>
 
 El Datadog Trace Agent (APM) está activado por defecto. Obtén más información sobre la configuración para tu lenguaje específico en [Configuración del APM][6] y [Configuración de perfiles][7].
 
-#### Móvil
+#### Recopilación de logs
 
 {{% site-region region="us3" %}}
 
-La recopilación de log no es compatible con este sitio.
+La recopilación de logs no es compatible con este sitio.
 
 {{% /site-region %}}
 
@@ -97,7 +97,7 @@ La siguiente tabla describe los parámetros anteriores y cómo pueden utilizarse
 | Parámetro                 | Descripción                                                                                                                                |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `DD_LOGS_ENABLED`         | Selecciona `true` para activar la recopilación de log de Datadog Agent.                                                                                      |
-| `DD_ENABLE_checks`        | Establece en `false` para desactivar la recopilación de métricas de sistema del Agent a través de checks centrales.                                                       |
+| `DD_ENABLE_CHECKS`        | Establece en `false` para desactivar la recopilación de métricas de sistema del Agent a través de checks centrales.                                                       |
 | `STD_LOG_COLLECTION_PORT` | Debe utilizarse cuando se recopilan logs de `stdout` o `stderr`. Redirige el flujo (stream) `stdout` o `stderr` al valor de puerto local correspondiente. |
 | `LOGS_CONFIG`             | Utiliza esta opción para configurar el Agent escuche en un puerto TCP local y establece el valor de los parámetros `service` y `source`.          |
 
@@ -120,7 +120,7 @@ Si la conexión no se establece y no se inicia la recopilación de log, aparecer
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="No se puede obtener un evento en Datadog con el título Endpoint de log - La recopilación de log no ha iniciado y hay un mensaje que indica que una conexión TCP no se pudo establecer" >}}
 
-### Etiquetas
+### Etiquetas (Tags)
 
 Para añadir etiquetas (tags) personalizadas a tu aplicación, establece la variable de entorno `DD_TAGS` a través del archivo `manifest.yml` o del comando de la CLI CF:
 
@@ -136,7 +136,7 @@ cf restage <YOUR_APP>
 
 {{% /site-region %}}
 
-### Parámetros de organización
+### DogStatsD
 
 Puedes utilizar [DogStatsD][10] para enviar métricas de aplicación personalizadas a Datadog. Consulta [Envío de métrica: DogStatsD][11] para obtener más información. Existe un lista de [bibliotecas de DogStatsD][12] compatible con una amplia gama de aplicaciones.
 
@@ -155,10 +155,6 @@ El Datadog Firehose Nozzle solo recopila CounterEvents (como métricas, no event
 Tu lista específica de métricas puede variar en función de la versión de PCF y el despliegue. Datadog recopila métricas de recuento y gauge emitidas desde [Loggregator v2 API][19]. Consulta [Métricas de Cloud Foundry Component][20] para ver una lista de métricas emitidas por defecto.
 
 {{< get-metrics-from-git "cloud-foundry">}}
-
-## Leer más
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: /es/integrations/guide/pivotal-cloud-foundry-manual-setup

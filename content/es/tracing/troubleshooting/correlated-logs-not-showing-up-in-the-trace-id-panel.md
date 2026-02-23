@@ -9,7 +9,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Documentación
   text: Facilita la solución de problemas con una correlación entre productos
-title: Los logs correlacionados no aparecen en el panel de ID de traza
+title: Los logs correlacionados no aparecen en el panel de ID de rastreo
 ---
 
 ## Información general
@@ -31,7 +31,7 @@ En algunos casos, la sección **Logs** del panel de traza puede aparecer vacía.
 
 ## Opciones de infraestructura
 
-Si la sección **Log** está vacía para las opciones `host`, `container_id`, o `pod_name`, navega hasta el [Log Explorer][2] y asegúrate de que se cumplan las siguientes condiciones:
+Si la sección **Log** está vacía para las opciones `host`, `container_id`, o `pod_name`, navega hasta el [Explorador de logs][2] y asegúrate de que se cumplan las siguientes condiciones:
 
 1. Los logs se envían desde el host/contenedor/pod que emitió la traza.
 2. Hay logs para ese host dentro del marco temporal de la traza.
@@ -47,11 +47,11 @@ Si la sección **Log** está vacía para la opción `trace_id`, asegúrate de qu
    {{< tabs >}}
    {{% tab "JSON logs" %}}
 
-   Para logs JSON, los pasos 1 y 2 son automáticos. El rastreador inyecta los IDs de [traza][1] y [tramo][2] en logs, que son reasignados automáticamente por los [reasignadores de atributos reservados][3].
+   Para logs JSON, los pasos 1 y 2 son automáticos. El rastreador inyecta los ID de [traza][1] y [tramo][2] en logs, que son reasignados automáticamente por los [reasignadores de atributos reservados][3].
 
    Si este proceso no funciona como se espera, asegúrate de que el nombre del atributo de logs que contiene el ID de traza es `dd.trace_id` y comprueba que el atributo está correctamente configurado en la sección [atributos reservados][4] de ID de traza.
 
-   {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="El preprocesamiento de la página de logs JSON con la sección de ID de traza resaltada" >}}
+{{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="El preprocesamiento de la página de logs JSON con la sección de ID de traza resaltada" >}}
 
 [1]: /es/tracing/glossary/#trace
 [2]: /es/tracing/glossary/#spans
@@ -64,7 +64,7 @@ Si la sección **Log** está vacía para la opción `trace_id`, asegúrate de qu
 
    Este ejemplo muestra el pipeline de integración de Java:
 
-   {{< img src="tracing/solucionar problemas/tracing_java_traceid_remapping.png" alt="El pipeline de log de Java con el reasignador de ID de traza resaltado" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="Pipeline de logs Java con el reasignador de ID de rastreo resaltado" style="width:90%;">}}
 
    Es posible que el formato de log no sea reconocido por el pipeline de integración. En este caso, clona el pipeline y sigue la [guía para solucionar problemas de parseo][2] para asegurarte de que el pipeline acepta el formato de log.
 
@@ -75,7 +75,7 @@ Si la sección **Log** está vacía para la opción `trace_id`, asegúrate de qu
 
    En el caso de logs sin procesar, en el que no se utiliza una integración para recopilar los logs:
 
-   1. Asegúrate de que la regla de parseo personalizada extrae los IDs de [traza][1] y [tramo][2] como una cadena, como en el siguiente ejemplo:
+   1. Asegúrate de que la regla de parseo personalizada extrae los ID de [traza][1] y [tramo][2] como una cadena, como en el siguiente ejemplo:
 
       {{< img src="tracing/troubleshooting/tracing_custom_parsing.png" alt="Un parseo personalizado con el ID de traza resaltado en el log de ejemplo, regla de parseo y secciones de extracción" style="width:90%;">}}
 
@@ -84,16 +84,16 @@ Si la sección **Log** está vacía para la opción `trace_id`, asegúrate de qu
 [1]: /es/tracing/glossary/#trace
 [2]: /es/tracing/glossary/#spans
 [3]: /es/logs/log_configuration/processors/#trace-remapper
-   {{% /tab %}}
-   {{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
-Una vez que los IDs estén correctamente inyectados y reasignados a tus logs, podrás ver los logs correlacionados con la traza en el panel de traza.
+Una vez que los ID estén correctamente inyectados y reasignados a tus logs, podrás ver los logs correlacionados con la traza en el panel de traza.
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="Una página de traza que muestra la sección de logs con los logs correlacionados" style="width:90%;">}}
 
-**Nota**: Los IDs de traza y los IDs de tramo no se muestran en tus logs o atributos de logs en la interfaz de usuario.
+**Nota**: Los ID de traza y los ID de tramo no se muestran en tus logs o atributos de logs en la interfaz de usuario.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

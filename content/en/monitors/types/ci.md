@@ -1,5 +1,6 @@
 ---
 title: CI/CD & Test Monitor
+description: "Monitor CI pipelines, tests, and CD deployments with alerts on failures, performance regressions, and code coverage metrics."
 aliases:
 - /monitors/monitor_types/ci_pipelines/
 - /monitors/create/types/ci_pipelines/
@@ -36,7 +37,7 @@ CI/CD and Test monitors allow you to visualize CI/CD data and set up alerts on i
 
 To create a new monitor, navigate to **Monitors > New Monitor > CI/CD & Tests**.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI/CD & Test monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info">There is a default limit of 1000 CI/CD & Test monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
 Choose one of the monitor types:
 
@@ -70,7 +71,7 @@ You can create CI Pipeline monitors using formulas and functions. This can be us
 The following example is of a pipeline error rate monitor using a formula that calculates the ratio of "number of failed pipeline events" (`ci.status=error`) over "number of total pipeline events" (no filter), grouped by `ci.pipeline.name` (to be alerted once per pipeline). To learn more, see the [Functions Overview][2].
 {{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:1000%;" >}}
 
-<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
+<div class="alert alert-info">Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
 [1]: /continuous_integration/pipelines/custom_commands/
 [2]: /dashboards/functions/#overview
@@ -155,7 +156,7 @@ The following example demonstrates a deployment error rate monitor. It uses a fo
 
 {{< img src="monitors/monitor_types/cd_deployments/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:100%;" >}}
 
-<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
+<div class="alert alert-info">Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
 
 [1]: /dashboards/functions/#overview
 {{% /tab %}}

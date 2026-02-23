@@ -1,15 +1,15 @@
 ---
 further_reading:
-- link: /security/threats/workload_security_rules
+- link: /security/workload_protection/workload_security_rules
   tag: Documentación
-  text: Gestión de las reglas de CSM Threats
-- link: /security/threats/agent_expressions
+  text: Gestión de las reglas de Workload Protection
+- link: /security/workload_protection/agent_expressions
   tag: Documentación
   text: Sintaxis de expresiones del Agent
-title: Directrices para la escritura de reglas personalizadas de CSM Threats
+title: Directrices para la redacción de reglas personalizadas de Workload Protection
 ---
 
-En algún momento, es posible que quieras escribir tus propias [reglas personalizadas de Cloud Security Management Threats (CSM Threats)][1]. Cuando escribas tus propias reglas, hay algunas estrategias que puedes utilizar para optimizar la eficiencia.
+En algún momento, es posible que desees escribir tus propias [reglas personalizadas de Workload Protection Agent ][1]. Cuando escribas tus propias reglas, hay algunas estrategias que puedes utilizar para optimizar la eficiencia.
 
 ## Atributos
 
@@ -31,7 +31,7 @@ Utiliza los comodines (`*`) con cuidado. Por ejemplo, no utilices nunca `open.fi
 
 ## Aprobadores y descartadores
 
-CSM Threats utiliza el concepto de aprobadores y descartadores para filtrar eventos que no deberían activar ninguna regla en una política. Los aprobadores y descartadores permiten o deniegan eventos sólo a nivel de política. No actúan sobre reglas individuales.
+Workload Protection utiliza el concepto de aprobadores y descartadores para filtrar eventos que no deberían activar ninguna regla en una política. Los aprobadores y descartadores permiten o deniegan eventos solo a nivel de las políticas. No actúan sobre reglas individuales.
 
 Los aprobadores actúan como una lista de permisos a nivel del kernel en el Datadog Agent. Por ejemplo, la apertura de un archivo específico podría ser un aprobador en el evento `open` , mientras que los eventos `open` en archivos sin aprobadores serían filtrados. Del mismo modo, los descartadores actúan como una lista de denegaciones en el Agent. Los descartadores filtran intencionalmente los eventos que nunca pueden coincidir con una regla. El Agent aprende qué eventos filtrar con descartadores durante el tiempo de ejecución.
 
@@ -45,5 +45,5 @@ Los aprobadores suelen ser más potentes y preferibles. Con los aprobadores, el 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/threats/workload_security_rules
-[2]: /es/security/threats/agent_expressions/#operators
+[1]: /es/security/workload_protection/workload_security_rules
+[2]: /es/security/workload_protection/agent_expressions/#operators

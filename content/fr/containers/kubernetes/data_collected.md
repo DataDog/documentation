@@ -24,15 +24,17 @@ further_reading:
 title: Données Kubernetes recueillies
 ---
 
-Cette page répertorie les données recueillies par l'Agent Datadog lorsqu'il est déployé sur un cluster Kubernetes.
+Cette page répertorie les données recueillies par l’Agent Datadog lorsqu’il est déployé sur un cluster Kubernetes. Les métriques recueillies peuvent varier en fonction de la version de Kubernetes utilisée.
 
-Les métriques recueillies peuvent varier en fonction de la version de Kubernetes utilisée.
+**Remarque** : pour les conteneurs Windows, consultez la section [Métriques limitées pour les déploiements sous Windows][7].
 
 ## Métriques
 
 ### Kubernetes
 
 {{< get-metrics-from-git "kubernetes" >}}
+
+**Remarque** : pour en savoir plus sur les métriques `kubernetes.cpu.*`, consultez la section [Différences entre les métriques `kubernetes.cpu.*` et `container.cpu.*`][8].
 
 ### Kubelet
 
@@ -178,3 +180,5 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 [4]: /fr/integrations/kube_metrics_server
 [5]: /fr/integrations/kube_scheduler
 [6]: /fr/integrations/kubernetes_state_core/
+[7]: /fr/agent/troubleshooting/windows_containers/#limited-metrics-for-windows-deployments
+[8]: /fr/containers/faq/cpu-usage-metrics

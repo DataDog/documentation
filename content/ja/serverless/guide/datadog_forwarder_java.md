@@ -3,11 +3,11 @@ title: Datadog Forwarder を使用した Java サーバーレスアプリケー�
 ---
 ## 概要
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/java">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 <code>datadog-lambda-java</code> の一部の古いバージョンでは、推移的依存関係として <code>log4j <=2.14.0</code> をインポートします。<a href="#upgrading">アップグレードの手順</a>は以下の通りです。
 </div>
 
@@ -17,7 +17,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用している必要があります。
 
-## 構成
+## 設定
 
 ### インストール
 
@@ -61,9 +61,9 @@ dependencies {
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-    DD_LOGS_INJECTION: true
+    DD_LOGS_INJECTION: true # default value
     DD_JMXFETCH_ENABLED: false
-    DD_TRACE_ENABLED: true
+    DD_TRACE_ENABLED: true # default value
     ```
 
 3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda ハンドラー関数をラップします。
@@ -100,7 +100,7 @@ Java Lambda 関数コールドスタートに Datadog モニターを作成す�
 - ソース: `runtime:java*` および `cold_start:true`
 - アラートグループ: 各 `function_arn` に対し個別のアラートをトリガーするマルチアラート
 
-### タグ
+### Tag
 
 オプションではありますが、Datadog ではサーバーレスアプリケーションに予約タグ `env`、`service`、`version` を付けることを推奨しています。予約タグの詳細については、[統合サービスタグ付けのドキュメント][8]を参照してください。
 

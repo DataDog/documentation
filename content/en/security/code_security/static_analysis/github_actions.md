@@ -7,7 +7,7 @@ title: Static Code Analysis and GitHub Actions
 ---
 ## Overview
 
-Run a [Datadog Static Code Analysis][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
+Run a [Datadog Static Code Analysis][1] job as an action in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
 invokes it against your codebase, and uploads the results to Datadog.
 
 ## Workflow
@@ -25,10 +25,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -39,7 +39,11 @@ jobs:
 
 You **must** set your Datadog API and application keys as [secrets in your GitHub repository][4] whether at the organization or repository level. Ensure that you add the `code_analysis_read` scope to your Datadog application key. For more information, see [API and Application Keys][2].
 
-Make sure to replace `dd_site` with the Datadog site you are using[3].
+Make sure to replace `dd_site` with the [Datadog site you are using][3].
+
+<div id="unsupported-trigger" class="alert alert-danger">
+Running a Datadog Static Code Analysis job as an action only supports the <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, etc.) are not supported.
+</div>
 
 ## Inputs
 
@@ -54,17 +58,11 @@ You can set the following parameters for Static Code Analysis.
 | `enable_performance_statistics` | Get the execution time statistics for analyzed files.                                                                                                   | No      | `false`         |
 | `debug`      | Lets the analyzer print additional logs useful for debugging. To enable, set to `yes`.                                                                  | No      | `no`            |
 | `subdirectory` | A subdirectory pattern or glob (or space-delimited subdirectory patterns) that the analysis should be limited to. For example: "src" or "src packages". | `false` |                 |
-| `architecture` | The CPU architecture to use for the analyzer. Supported values are `x86_64` and `aarch64`.                                                              | No      | `x86_64`        |
 | `diff_aware` | Enable [diff-aware scanning mode][5].                                                                                                                   | No      | `true`          |
 
 ### Notes
 
 1. Diff-aware scanning only scans the files modified by a commit when analyzing feature branches. Diff-aware is enabled by default. To disable diff-aware scanning, set the GitHub action `diff_aware` parameter to `false`.
-
-### Deprecated Inputs
-The following action inputs have been deprecated and no longer have any effect. Passing these in will emit a warning.
-* `dd_service`
-* `dd_env`
 
 ## Customizing rules
 

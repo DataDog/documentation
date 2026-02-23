@@ -1,0 +1,13 @@
+{{- $client := .Get 0 -}}
+{{- $version := "" -}}
+{{- with site.Data.private_action_runner_version -}}
+  {{- range $product := . -}}
+    {{- if eq $product.client $client -}}
+      {{- $version = replaceRE "^[^0-9]*" "" $product.version -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq (len $version) 0 -}}
+  {{- warnf "could not retrieve version for %q" $client -}}
+{{- end -}}
+{{- print $version -}}

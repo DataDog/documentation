@@ -1,5 +1,6 @@
 ---
 title: Further Configure the Datadog Agent on Kubernetes
+description: Additional configuration options for APM, logs, processes, events, and other capabilities after installing the Datadog Agent
 aliases:
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection

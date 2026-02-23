@@ -22,23 +22,12 @@ La biblioteca `dd-sdk-ios` es compatible con todas las versiones de iOS 11 o pos
 
 ## Configuración
 
-1. Declara la biblioteca como una dependencia en función de tu Pack Manager:
+1. Declara la biblioteca como una dependencia dependiente de tu gestor de paquete. Se recomienda el gestor de paquete Swift.
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-Puedes utilizar [CocoaPods][6] para instalar `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogLogs'
-```
-
-[6]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
-Para integrar utilizando Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
+Para integrar con Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 ```
@@ -48,6 +37,17 @@ En tu proyecto, vincula las siguientes bibliotecas:
 DatadogCore
 DatadogLogs
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+Puedes utilizar [CocoaPods][6] para instalar `dd-sdk-ios`:
+```
+pod 'DatadogCore'
+pod 'DatadogLogs'
+```
+
+[6]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -86,7 +86,7 @@ Datadog.initialize(
         clientToken: "<client token>",
         env: "<environment>",
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -121,7 +121,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .eu1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -157,7 +157,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us3,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -195,7 +195,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us5,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -233,7 +233,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us1_fed,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -271,7 +271,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .ap1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 
@@ -295,12 +295,50 @@ configuration.site = [DDSite ap1];
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+import DatadogLogs
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .ap2,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+
+Logs.enable()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+
+[DDLogs enable];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 Para cumplir con la normativa GDPR, el SDK requiere el valor `trackingConsent` en la inicialización.
 El valor `trackingConsent` puede ser uno de los siguientes:
 
 - `.pending`: el SDK comienza a recopilar y procesar los datos por lotes, pero no los envía a Datadog. El SDK espera al nuevo valor de consentimiento de rastreo para decidir qué hacer con los datos procesados por lotes.
 - `.granted`: el SDK comienza a recopilar los datos y los envía a Datadog.
-- `.notGranted`: el SDK no recopila ningún dato: los logs, trazas (traces) y eventos RUM no se envían a Datadog.
+- `.notGranted`: el SDK no recopila ningún dato: los logs, trazas y eventos RUM no se envían a Datadog.
 
 Para cambiar el valor del consentimiento de rastreo una vez inicializado el SDK, utiliza la llamada a la API `Datadog.set(trackingConsent:)`.
 
@@ -311,7 +349,7 @@ El SDK cambia su comportamiento según el nuevo valor. Por ejemplo, si el consen
 
 Antes de que los datos se carguen en Datadog, se almacenan en texto claro en el directorio de caché (`Library/Caches`) de tu [entorno de prueba de aplicaciones][6]. El directorio de caché no puede ser leído por ninguna otra aplicación instalada en el dispositivo.
 
-Al redactar tu aplicación, habilita los logs de desarrollo para loguear en consola todos los mensajes internos del SDK con una prioridad igual o superior al nivel proporcionado.
+Al redactar tu aplicación, habilita los logs de desarrollo para registrar en consola todos los mensajes internos del SDK con una prioridad igual o superior al nivel proporcionado.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -326,7 +364,8 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Configurar el `Logger`:
+3. Configura el `Logger`: <br>
+**Nota**: Debes crear el registrador *después* de llamar a `Logs.enable()`.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -473,13 +512,29 @@ Utiliza el método `addAttribute(forKey:value:)` para añadir un atributo person
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// Esto añade un atributo "device-model" con un valor de cadena
+// This adds an attribute "device-model" with a string value for this logger instance.
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Los atributos pueden añadirse globalmente en todas las instancias de logs (por ejemplo: nombre del servicio, entorno) utilizando:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This adds an attribute "device-model" with a string value in all Logs instances.
+Logs.addAttribute(forKey: "device-model", value: UIDevice.current.model)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -493,7 +548,7 @@ Utiliza el método `removeAttribute(forKey:)` para eliminar un atributo personal
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// Esto elimina el atributo "device-model" de todos los logs enviados en el futuro.
+// This removes the attribute "device-model" from all further logs sent from this logger instance.
 logger.removeAttribute(forKey: "device-model")
 ```
 {{% /tab %}}
@@ -504,7 +559,23 @@ logger.removeAttribute(forKey: "device-model")
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+Para eliminar un atributo global de todas las instancias de logs:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This removes the attribute "device-model" from all further logs sent from all logger instances.
+Logs.removeAttribute(forKey: "device-model")
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs removeAttributeForKey:@"device-model"];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -7,7 +7,7 @@ title: Utilisation de base de l'Agent Kubernetes dans l'Agent v5
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard Kubernetes" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 L'Agent Datadog v5 est pris en charge jusqu'à la version 1.8 de Kubernetes. Pour la version la plus récente de Kubernetes, utilisez l'Agent Datadog v6.
 </div>
 

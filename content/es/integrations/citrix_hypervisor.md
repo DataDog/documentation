@@ -35,25 +35,25 @@ draft: false
 git_integration_title: citrix_hypervisor
 integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
-integration_version: 5.1.0
+integration_version: 5.1.1
 is_public: true
 manifest_version: 2.0.0
 name: citrix_hypervisor
 public_title: Citrix Hypervisor
 short_description: Monitoriza el estado y el rendimiento de un host de Citrix Hypervisor.
 supported_os:
-- linux
-- macos
-- windows
+- Linux
+- macOS
+- Windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Cloud
-  - Category::Log Collection
-  - Offering::Integration
+  - Sistema operativo compatible::Linux
+  - Sistema operativo compatible::macOS
+  - Sistema operativo compatible::Windows
+  - Categoría::Nube
+  - Categoría::Recopilación de logs
+  - Oferta::Integración
   configuration: README.md#Configuración
   description: Monitoriza el estado y el rendimiento de un host de Citrix Hypervisor.
   media: []
@@ -65,7 +65,7 @@ tile:
   title: Citrix Hypervisor
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
+<!--  FUENTE https://github.com/DataDog/integrations-core -->
 
 
 ## Información general
@@ -98,7 +98,7 @@ La integración de Citrix Hypervisor requiere un usuario con acceso de [`read-on
 
 _Disponible para la versión 6.0 o posteriores del Agent_
 
-1. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada por defecto en el Datadog Agent. Actívala en `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -122,24 +122,24 @@ _Disponible para la versión 6.0 o posteriores del Agent_
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "citrix-hypervisor" >}}
+{{< get-metrics-from-git "citrix_hypervisor" >}}
 
 
 ### Eventos
 
 La integración de Citrix Hypervisor no incluye eventos.
 
-### Checks de servicio
-{{< get-service-checks-from-git "citrix-hypervisor" >}}
+### Checks de servicios
+{{< get-service-checks-from-git "citrix_hypervisor" >}}
 
 
 ## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
 
-## Leer más
+## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
 - [Monitorizar el rendimiento de Citrix Hypervisor con Datadog][11]
 

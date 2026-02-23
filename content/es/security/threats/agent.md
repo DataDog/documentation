@@ -37,7 +37,7 @@ Los operadores SECL se utilizan para combinar atributos de evento en una expresi
 
 | Operador SECL         | Tipos            |  Definición                              | Versión del Agent |
 |-----------------------|------------------|------------------------------------------|---------------|
-| `==`                  | Proceso          | Igual                                    | 7.27          |
+| `==`                  | Process          | Igual                                    | 7.27          |
 | `!=`                  | Archivo             | No es igual                                | 7.27          |
 | `>`                   | Archivo             | Mayor                                  | 7.27          |
 | `>=`                  | Archivo             | Mayor o igual                         | 7.27          |
@@ -65,7 +65,7 @@ En las expresiones SECL pueden utilizarse patrones o expresiones regulares. Pued
 
 | Formato           |  Ejemplo             | Campos admitidos   | Versión del Agent |
 |------------------|----------------------|--------------------|---------------|
-| `~"pattern"`     | `~"httpd.*"`         | Todas                | 7.27          |
+| `~"pattern"`     | `~"httpd.*"`         | Todos                | 7.27          |
 | `r"regexp"`      | `r"rc[0-9]+"`        | Todos excepto `.path` | 7.27          |
 
 Los patrones de los campos `.path` se utilizarán como Glob. `*` coincidirá con archivos y carpetas del mismo nivel. `**`, introducido en 7.34, puede utilizarse al final de una ruta para que coincida con todos los archivos y subcarpetas.
@@ -88,6 +88,6 @@ Las expresiones SECL admiten varias plataformas. Puedes utilizar la documentaci�
 * [Linux][2]
 * [Windows][3]
 
-[1]: /es/security/threats/workload_security_rules/custom_rules
+[1]: /es/security/workload_protection/workload_security_rules/custom_rules
 [2]: /es/security/threats/linux_expressions
 [3]: /es/security/threats/windows_expressions

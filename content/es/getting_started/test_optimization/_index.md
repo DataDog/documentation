@@ -12,6 +12,8 @@ algolia:
   - Tramos de tests
 aliases:
 - /es/getting_started/test_visibility
+description: Comprende el rendimiento de los tests e identifica tests fallidos, regresiones
+  en el rendimiento y fallos en entornos CI.
 further_reading:
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: Blog

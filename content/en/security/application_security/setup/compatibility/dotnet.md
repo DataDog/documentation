@@ -5,6 +5,7 @@ type: multi-code-lang
 code_lang_weight: 10
 aliases:
   - /security/application_security/threats/setup/compatibility/dotnet
+  - /security/application_security/enabling/compatibility/dotnet
 ---
 
 ## App and API Protection capabilities support
@@ -105,4 +106,4 @@ Integrations to **User Authentication Frameworks provides:**
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /tracing/guide/remote_config

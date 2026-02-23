@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Monitors
+description: Create metric monitors with threshold alerts and custom notifications to proactively track system health and performance issues.
 aliases:
   - /getting_started/application/monitors
 further_reading:
@@ -24,7 +25,7 @@ further_reading:
 
 With Datadog alerting, you have the ability to create monitors that actively check metrics, integration availability, network endpoints, and more. Use monitors to draw attention to the systems that require observation, inspection, and intervention.
 
-This page is an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, a metric monitor can alert you when disk space is low. 
+This page is an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, a metric monitor can alert you when disk space is low.
 
 This guide covers:
 - Monitor creation and configuration
@@ -38,6 +39,20 @@ Before getting started, you need a Datadog account linked to a host with the Dat
 
 To verify that the Datadog Agent is running, check that your [Infrastructure List][4] in Datadog is populated.
 
+## Instant monitoring for new organizations
+
+<div class="alert alert-info">Automatic Monitors are available to <strong>new</strong> organizations and activate after the Datadog Agent is installed.</div>
+
+When you install the Datadog Agent, Datadog automatically detects your stack and creates a tailored set of **baseline monitors**. This gives you instant coverage with no setup.
+
+Automatic Monitors can include:
+- Host-level monitors (CPU and memory utilization)
+- Kubernetes monitors (pod restarts, node health)
+- APM monitors (error rates or latency per service)
+
+You can view these monitors immediately on the Datadog [**Monitors**][17] page.
+From there, you can edit, clone, or disable them like any other monitor.
+
 ## Create a monitor
 
 To create a monitor, navigate to **[Monitors > New Monitor][5]** and select **Metric**.
@@ -48,7 +63,7 @@ The main components of monitor configuration are:
 
 - **Choose the detection method**: How are you measuring what will be alerted on? Are you concerned about a metric value crossing a threshold, a change in a value crossing a threshold, an anomalous value, or something else?
 - **Define the metric**: What value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
-- **Set the alert conditions**: When does an engineer need to be woken up? 
+- **Set the alert conditions**: When does an engineer need to be woken up?
 - **Configure notifications and automations**: What information needs to be in the alert?
 - **Define permissions and audit notifications**: Who has access to these alerts, and who should be notified if the alert is modified?
 
@@ -144,5 +159,6 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /service_management/workflows/
-[15]: /service_management/case_management/
+[15]: /incident_response/case_management/
 [16]: /account_management/teams/
+[17]: https://app.datadoghq.com/monitors/manage

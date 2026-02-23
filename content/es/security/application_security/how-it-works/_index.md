@@ -33,9 +33,7 @@ Si tu servicio se ejecuta en <a href="/agent/remote_config/#enabling-remote-conf
 
 ## Compatibilidad
 
-Para que la protección de aplicaciones y API de Datadog sea compatible con tu configuración de Datadog, debes tener APM activado y [enviar traces (trazas) a Datadog][6]. La protección de aplicaciones y API utiliza las mismas bibliotecas que APM, por lo que no es necesario desplegar ni mantener otra biblioteca. 
-
-Los steps (UI) / pasos (generic) para activar la protección de aplicaciones y API de Datadog son específicos de cada lenguaje de ejecución. Check si tu lenguaje es compatible con los requisitos previos de protección de aplicaciones y API de cada producto.
+App and API Protection utiliza las mismas bibliotecas que APM, por lo que no es necesario desplegar y mantener otra biblioteca. Los pasos para activar Datadog App and API Protection son específicos de cada lenguaje de ejecución. Consulta las [guías de configuración de App and API Protection][6] para comprobar si tu lenguaje es compatible.
 
 ## Monitorización serverless
 
@@ -124,7 +122,7 @@ La protección de aplicaciones y API de Datadog identifica las cargas útiles de
 [3]: /es/tracing/services/service_page/#security
 [4]: /es/tracing/trace_explorer/trace_view/?tab=security#more-information
 [5]: /es/security/code_security/software_composition_analysis/
-[6]: /es/tracing/trace_collection/
+[6]: /es/security/application_security/setup/
 [8]: /es/security/application_security/serverless/
 [9]: /es/tracing/trace_pipeline/trace_retention/
 [10]: /es/tracing/configure_data_security/?tab=http

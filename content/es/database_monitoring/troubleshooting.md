@@ -19,11 +19,11 @@ Para solucionar los problemas de configuración de bases de datos, utiliza la p�
 En este momento, los parámetros de Bind Query sin procesar están ofuscados para Query Samples y Explain Plans, y se sustituyen por un carácter `?`.
 
 
-### Límite de hosts de DBM
+### Límite de instancia de DBM
 
 Dependiendo de lo complejas que sean las bases de datos que se están monitorizando, la presencia de demasiados hosts de DBM en un Agent podría sobrecargar el Agent y provocar retrasos en la recopilación de datos. Si el Agent se sobrecarga, es posible que aparezcan advertencias como `Job loop stopping due to check inactivity in the Agent logs`.
 
-Se recomienda tener un único monitor del Datadog Agent, como máximo 10 hosts de DBM. Si tienes más de 10 hosts de DBM, deberías considerar repartirlos en varios Datadog Agents.
+Se recomienda tener un único monitor del Datadog Agent con 30 instancias de base de datos como máxico. Si tienes más de 30 instancias de bases de datos, deberías repartirlas entre varios Datadog Agents.
 
 
 ### No hay datos de DBM visibles en Datadog: ¿Problemas de conexión?
@@ -33,21 +33,21 @@ Si crees que tu configuración es correcta, pero no estás viendo datos en tus p
 1. Prueba la conectividad TCP en los endpoints de recopilación de DBM:
 
 ```
-telnet dbm-metrics-intake.datadoghq.com 443
-telnet dbquery-intake.datadoghq.com 443
+telnet dbm-metrics-intake.{{< region-param key="dd_site" code="true" >}} 443
+telnet dbquery-intake.{{< region-param key="dd_site" code="true" >}} 443
 ```
 
 2. Prueba publicar una carga útil vacía con una clave de API no válida en ambos endpoints de DBM.
 Estos comandos deberían fallar con el código HTTP `403: Forbidden`.
 
 ```
-curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
+curl -vvv -X POST "https://dbm-metrics-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/databasequery" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: NONE" \
 -d "[{}]"
 
-curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
+curl -vvv -X POST "https://dbquery-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/databasequery" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: NONE" \

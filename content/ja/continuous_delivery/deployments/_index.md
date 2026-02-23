@@ -30,7 +30,7 @@ CD Visibility は現在プレビュー版です。この機能にご興味があ
     {{< nextlink href="continuous_delivery/deployments/ciproviders" >}}CI プロバイダー (GitLab、Jenkins、CircleCI など){{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-warning">サポートされていないプロバイダーをご利用の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">このフォームに記入してサポートをリクエストしてください</a>。</div>
+<div class="alert alert-danger">サポートされていないプロバイダーをご利用の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">このフォームに記入してサポートをリクエストしてください</a>。</div>
 
 ## デプロイメントデータの使用
 

@@ -4,6 +4,7 @@ algolia:
   - 상태 페이지
 aliases:
 - /ko/agent/guide/agent-status-page
+description: Datadog Agent 상태 페이지를 읽고 해석하여 문제를 해결하는 방법과 Agent 상태를 모니터링하는 방법을 알아보세요.
 further_reading:
 - link: /agent/troubleshooting/
   tag: 설명서
@@ -112,7 +113,7 @@ title: 에이전트 상태 페이지
 | Histogram Buckets      | 전송된 히스토그램 버킷 수                            |
 | Average Execution Time | 인스턴스 실행 평균 시간                      |
 | Last Run               | 마지막 점검 실행 동안의 수                            |
-| Total                  | 에이전트의 가장 최근 실행 또는 재시작 이후 총수 |
+| 총계                  | 에이전트의 가장 최근 실행 또는 재시작 이후 총수 |
 
 ### 구성 오류
 

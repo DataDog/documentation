@@ -5,6 +5,10 @@ aliases:
 - /es/continuous_integration/tests/code_coverage/
 description: Aprende a informar y utilizar la cobertura de código en Datadog.
 further_reading:
+- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
+  tag: Blog
+  text: Soluciona los problemas más rápidamente con la integración del código source
+    (fuente) de GitLab en Datadog
 - link: /tests
   tag: Documentación
   text: Más información sobre Test Optimization
@@ -15,7 +19,7 @@ title: Code Coverage en Datadog
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-Datadog está creando un nuevo producto dedicado a la cobertura de código. Apúntate a la versión preliminar.
+Esta función de Test Optimization estará obsoleta y será sustituida por un nuevo producto exclusivo para la <a href="https://docs.datadoghq.com/code_coverage/">cobertura de código</a>. Inscríbete para la vista previa.
 {{< /callout >}}
 
 ## Información general
@@ -37,8 +41,8 @@ Asegúrate de que [Test Optimization][1] ya está configurado para tu lenguaje.
 * `cucumber-js>=7.0.0`.
 * `vitest>=2.0.0`.
 
-<div class="alert alert-warning">
-  <strong>Nota</strong>: El rastreador de DataDog no genera cobertura de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
+<div class="alert alert-danger">
+  <strong>Nota</strong>: El rastreador de DataDog no genera cobertura de código. Si tus tests se ejecutan con la cobertura de código habilitada, <code>dd-trace</code> lo informa de modo automático en la tag (etiqueta) <code>test.code_coverage.lines_pct</code> para tus sesiones de test.
 </div>
 
 #### Mocha/Cucumber-js
@@ -106,6 +110,8 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 Cuando la cobertura del código está disponible, el rastreador de Datadog (v2.31.0 o posterior) informa de ella en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
 
 Si utilizas [Coverlet][1] para calcular la cobertura del código, indica la ruta del archivo de informe en la variable de entorno `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` al ejecutar `dd-trace`. El archivo de informe debe estar en los formatos OpenCover o Cobertura. Alternativamente, puedes activar el cálculo de cobertura de código integrado en el rastreador de Datadog con la variable de entorno `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
+
+**Nota**: `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` solo se utiliza cuando el comando instrumentado por `dd-trace (traza) ci run` es `dotnet test`, `dotnet vstest` o `vstest.console`. Por ejemplo, los resultados de la variable se ignoran cuando se ejecuta `dd-trace ci run -- coverlet TestAssembly.dll --target dotnet --targetargs "test TestAssembly.dll"`.
 
 ### Opciones avanzadas
 
@@ -286,8 +292,8 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 * `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
-<div class="alert alert-warning">
- <strong>Nota</strong>: Datadog biblioteca no genera la cobertura total del código. Si sus pruebas se ejecutan con la cobertura de código activada, <code>Datadog-ci-rb informa de ello en</code> <code>test.code_coverage.lines_pct</code> etiquetar para sus sesiones de prueba automáticamente.
+<div class="alert alert-danger">
+  <strong>Nota</strong>: La biblioteca de DataDog no genera cobertura total de código. Si tus tests se con la cobertura de código habilitada, <code>datadog-ci-rb</code> lo informa de modo automático en la tag (etiqueta) <code>test.code_coverage.lines_pct</code> para tus sesiones de test.
 </div>
 
 Si tu proyecto tiene configurado [simplecov][1], la biblioteca satadog-ci-rb lo instrumenta e informa los datos de cobertura a Datadog automáticamente bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
@@ -303,8 +309,8 @@ Esta función está activada por defecto. Utiliza la variable de entorno `DD_CIV
 
 * `go test -cover`
 
-<div class="alert alert-warning">
-  <strong>Nota</strong>: La biblioteca de DataDog no genera cobertura total de código. Si tus tests se ejecutan con la cobertura de código activada, <code>dd-trace-go</code> lo informa en la etiqueta <code>test.code_coverage.lines_pct</code> para tus sesiones de tests automáticamente.
+<div class="alert alert-danger">
+  <strong>Nota</strong>: La biblioteca de DataDog no genera cobertura total de código. Si tus tests se ejecutan con la cobertura de código habilitada, <code>dd-trace-go</code> lo informa de modo automático en la tag (etiqueta) <code>test.code_coverage.lines_pct</code> para tus sesiones de test.
 </div>
 
 Si tus tests se ejecutan con el indicador `-cover`, la biblioteca de Datadog lo instrumenta y automáticamente reporta los datos de cobertura a Datadog bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.

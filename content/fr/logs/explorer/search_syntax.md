@@ -43,7 +43,7 @@ Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser 
 
 ## Recherche en texte intégral 
 
-<div class="alert alert-warning">La fonction de recherche en texte intégral est uniquement disponible dans Log Management et fonctionne dans les requêtes de monitor, de dashboard et de notebook. La syntaxe de recherche en texte intégral ne peut pas être utilisée pour définir des filtres d'index, d'archivage, de pipeline de logs, de réhydratation, ni dans Live Tail (suivi en direct). </div>
+<div class="alert alert-danger">La fonction de recherche en texte intégral est uniquement disponible dans Log Management et fonctionne dans les requêtes de monitor, de dashboard et de notebook. La syntaxe de recherche en texte intégral ne peut pas être utilisée pour définir des filtres d'index, d'archivage, de pipeline de logs, de réhydratation, ni dans Live Tail (suivi en direct). </div>
 
 Utilisez la syntaxe `*:search_term` pour effectuer une recherche en texte intégral sur tous les attributs de logs, y compris le message de log.
 
@@ -72,7 +72,7 @@ Utilisez la syntaxe `*:search_term` pour effectuer une recherche en texte intég
 
 Les caractères suivants, considérés comme spéciaux : `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#`, ainsi que les espaces, doivent être échappés à l'aide du caractère `\`. 
 - `/` n'est pas considéré comme un caractère spécial et n'a pas besoin d'être échappé.
-- `@` ne peut pas être utilisé dans les requêtes de recherche dans Logs Explorer, car il est réservé à la [recherche d'attributs](#recherche-d-attributs).
+- `@` ne peut pas être utilisé dans les requêtes de recherche dans Logs Explorer, car il est réservé à la [recherche d'attributs](#attributes-search).
 
 Il n'est pas possible de rechercher des caractères spéciaux dans un message de log. Il est possible de rechercher des caractères spéciaux lorsqu'ils se trouvent dans un attribut.
 
@@ -94,7 +94,7 @@ Par exemple, si le nom de votre attribut est **url** et que vous souhaitez filtr
 
 1. Vous n'avez **pas** besoin de définir une facette pour rechercher des attributs et des tags.
 
-2. Les recherches d'attributs sont sensibles à la casse. Utilisez la [recherche en texte intégral](#recherche-en-texte-integral) pour obtenir des résultats insensibles à la casse. Une autre option consiste à utiliser le filtre `lowercase` avec votre parser Grok lors de l'analyse pour obtenir des résultats insensibles à la casse pendant la recherche.
+2. Les recherches d'attributs sont sensibles à la casse. Utilisez la [recherche en texte intégral](#full-text-search) pour obtenir des résultats insensibles à la casse. Une autre option consiste à utiliser le filtre `lowercase` avec votre parser Grok lors de l'analyse pour obtenir des résultats insensibles à la casse pendant la recherche.
 
 3. Lorsque vous recherchez une valeur d'attribut qui contient des caractères spéciaux, vous devez utiliser des caractères d'échappement ou des guillemets.
     - Par exemple, pour un attribut `my_attribute` ayant pour valeur `hello:world`, recherchez `@my_attribute:hello\:world` ou `@my_attribute:"hello:world"`.
@@ -124,7 +124,7 @@ La fonction `CIDR()` prend en charge les notations CIDR IPv4 et IPv6, et fonctio
 
 ## Les wildcards
 
-Vous pouvez utiliser des caractères génériques dans la recherche en texte libre. Toutefois, cela ne recherche que les termes présents dans le message de log, c'est-à-dire le texte de la colonne `content` dans Log Explorer. Référez-vous à la rubrique [Recherche en texte intégral](#recherche-en-texte-integral) si vous souhaitez rechercher une valeur dans un attribut de log.
+Vous pouvez utiliser des caractères génériques dans la recherche en texte libre. Toutefois, cela ne recherche que les termes présents dans le message de log, c'est-à-dire le texte de la colonne `content` dans Log Explorer. Référez-vous à la rubrique [Recherche en texte intégral](#full-text-search) si vous souhaitez rechercher une valeur dans un attribut de log.
 
 ### Wildcard pour plusieurs caractères
 
@@ -159,7 +159,7 @@ Lorsque vous recherchez une valeur d'attribut ou de tag qui contient des caract�
 
 ## Valeurs numériques
 
-Pour effectuer une recherche sur un attribut numérique, commencez par [l’ajouter comme facette][2]. Vous pourrez ensuite utiliser des opérateurs numériques (`<`, `>`, `<=` ou `>=`) pour effectuer une recherche sur ces facettes numériques.
+Pour effectuer une recherche sur un attribut numérique, commencez par [l'ajouter comme facette][2]. Vous pourrez ensuite utiliser des opérateurs numériques (`<`, `>`, `<=` ou `>=`) pour effectuer une recherche sur ces facettes numériques.
 Par exemple, récupérez tous les logs dont le temps de réponse dépasse 100 ms avec :
 <p> </p>
 

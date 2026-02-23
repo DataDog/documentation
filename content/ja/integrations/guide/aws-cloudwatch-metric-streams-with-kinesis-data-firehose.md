@@ -22,7 +22,7 @@ Amazon CloudWatch メトリクスストリームと Amazon Data Firehose を使�
    - オプションで、ストリーミングするためのネームスペースまたはメトリクスの限定されたセットを指定します。
 2. メトリクスストリームを作成すると、Datadog はストリーミングされたメトリクスの受信をすぐに開始し、追加の構成を必要とせずにそれらを Datadog サイトに表示します。
 
-<div class="alert alert-danger">AWS インテグレーションタイルで構成されたネームスペースフィルタリングは、CloudWatch メトリクスストリームには<b>適用されません</b>。詳細は以下をご覧ください。</div>
+<div class="alert alert-warning">AWS インテグレーションタイルで構成されたネームスペースフィルタリングは、CloudWatch メトリクスストリームには<b>適用されません</b>。詳細は以下をご覧ください。</div>
 
 ### メトリクスストリーミングと API ポーリングの比較 {#streaming-vs-polling}
 

@@ -33,7 +33,7 @@ Notifications are a key component of monitors that keep your team informed of is
 
 This approach helps ensure your monitor titles and messages are clear, actionable, and tailored to your audience's needs.
 - **Unique titles**: Add a unique title to your monitor (this is required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. You can use [tag variables][3] to enhance specificity.
-- **Message field**: The message field supports standard [Markdown formatting][4] and [variables][5]. Use [conditional variables][6] to modulate the notification text sent to different contacts with [@notifications](#notifications).
+- **Message field**: The message field supports standard [Markdown formatting][4] and [variables][5]. Use [conditional variables][6] to modulate the notification text sent to different contacts with [@notifications](#notifications). Use [synthetics template variables][23] to enrich the alert message with synthetics failure context. 
 
 {{% collapse-content title="Example monitor message" level="h4" expanded=false %}}
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
@@ -111,7 +111,7 @@ When an incident is created from a monitor, the incident's [field values][13] ar
 
 Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
 
-<div class="alert alert-warning">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
+<div class="alert alert-danger">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
 
@@ -217,7 +217,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration
-[2]: /service_management/case_management/create_case/#automatic-case-creation
+[2]: /incident_response/case_management/create_case/#automatic-case-creation
 [3]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/
@@ -228,8 +228,8 @@ Message variables auto-populate with a randomly selected group based on the scop
 [10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [11]: /service_management/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
-[13]: /service_management/incident_management/incident_settings/property_fields
-[14]: /service_management/incident_management/notification
+[13]: /incident_response/incident_management/setup_and_configuration/property_fields
+[14]: /incident_response/incident_management/notification
 [15]: /monitors/notify/variables/?tab=is_renotify#examples
 [16]: /monitors/settings/#tag-policies
 [17]: /account_management/teams/
@@ -238,3 +238,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [20]: /monitors/configuration/
 [21]: /monitors/guide/recovery-thresholds/
 [22]: /monitors/notify/notification_rules
+[23]: /synthetics/notifications/template_variables/

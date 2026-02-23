@@ -1,22 +1,16 @@
 ---
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
 - link: /api/latest/synthetics/#create-an-api-test
   tag: API
   text: プログラムによる API テストの作成
 - link: /synthetics/api_tests
   tag: ドキュメント
   text: シングル API テストの詳細
-- link: /synthetics/multistep
-  tag: Documentation
-  text: マルチステップ API テストの詳細
 - link: /getting_started/synthetics/private_location
   tag: ドキュメント
   text: プライベートロケーションの詳細
 - link: /continuous_testing/cicd_integrations/
-  tag: ドキュメント
+  tag: Documentation
   text: CI/CD パイプラインから Synthetic テストをトリガーする方法を学ぶ
 - link: /synthetics/guide/identify_synthetics_bots
   tag: ドキュメント
@@ -212,7 +206,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 Datadog の [APM と Synthetic モニタリングのインテグレーション][14]を使用して、**Traces** タブでテスト実行から生成されたトレースを確認して、失敗したテスト実行の根本原因にアクセスします。
 
-## その他の参考資料
+## 関連資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

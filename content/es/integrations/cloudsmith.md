@@ -1,129 +1,128 @@
 ---
 app_id: cloudsmith
-app_uuid: 92b5a159-e5e9-4e38-a4d4-b987cd03b7a1
-assets:
-  dashboards:
-    Cloudsmith: assets/dashboards/cloudsmith_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: cloudsmith.bandwidth_used
-      metadata_path: metadata.csv
-      prefix: cloudsmith.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10208
-    source_type_name: Cloudsmith
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Cloudsmith
-  sales_email: ccarey@cloudsmith.io
-  support_email: ccarey@cloudsmith.io
 categories:
 - nube
 - métricas
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cloudsmith
-integration_id: cloudsmith
-integration_title: Cloudsmith
-integration_version: 0.0.2
-is_public: true
-manifest_version: 2.0.0
-name: cloudsmith
-public_title: Cloudsmith
-short_description: Monitorizar las métricas de Cloudsmith
+description: Monitorización del uso, rendimiento, eventos de seguridad y actividad
+  de usuario de Cloudsmith con métricas y alertas detalladas
+media:
+- caption: 'Cloudsmith: dashboard'
+  image_url: images/Cloudsmith_example.png
+  media_type: imagen
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Metrics
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Configuración
-  description: Monitorizar las métricas de Cloudsmith
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Cloudsmith
+title: Cloudsmith
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-Este check monitoriza [Cloudsmith][1] a través del Datadog Agent.
-- Monitoriza el almacenamiento, el ancho de banda y el uso de tokens en tu cuenta de Cloudsmith.
+Cloudsmith es una plataforma de gestión de paquetes nativa en la nube totalmente gestionada, utilizada para almacenar, gestionar y distribuir de forma segura artefactos de software para equipos de DevOps. Es compatible con los principales formatos, incluidos Docker, npm, Maven, Python, RubyGems, etc., con control de acceso, aplicación de políticas y auditoría de nivel empresarial.
 
+Esta integración mejora la visibilidad de tu organización de Cloudsmith recopilando datos de observabilidad en tiempo real y mostrándolos en la plataforma de Datadog. Teams puede monitorizar el uso de recursos, reforzar el cumplimiento de la seguridad y auditar la actividad de los usuarios, directamente desde los dashboards y monitores de Datadog.
+
+La integración recopila datos de las API de Cloudsmith y los asigna a los siguientes tipos de telemetría de Datadog:
+
+- **Métricas**: uso de almacenamiento y ancho de banda, actividad de tokens y métricas de usuarios activos.
+- **Eventos**: detección de vulnerabilidades de seguridad, actividad de logs de auditoría, infracciones de las políticas de licencias y vulnerabilidades, resúmenes de miembros y snapshots de uso de cuotas.
+- **Checks de servicio**: estado del consumo de cuotas y conectividad de la API.
+
+Con esta integración, los clientes obtienen una capacidad de observación centralizada de su infraestructura de paquetes de Cloudsmith, lo que les ayuda a cumplir las normativas, solucionar problemas más rápidamente y optimizar la planificación de recursos.
 
 ## Configuración
 
-El check de Cloudsmith no está incluido en el paquete del [Datadog Agent][2], por lo que es necesario instalarlo.
+La comprobación de Cloudsmith no está incluida en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest), por lo que es necesario instalarlo.
 
 ### Instalación
 
-Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación para instalar el check de Cloudsmith en tu host. Para instalarlo con el Agent Docker o versiones anteriores del Agent, consulta [Uso de integraciones de la comunidad][3].
+Para Agent v7.21+/v6.21+, sigue las instrucciones a continuación para instalar el check de Cloudsmith en tu host. Consulta [Use Community Integrations](https://docs.datadoghq.com/agent/guide/use-community-integrations/) para instalar con el Docker Agent o versiones anteriores de Agent.
 
 1. Ejecuta el siguiente comando para instalar la integración del Agent:
 
    ```shell
-   datadog-agent integration install -t datadog-cloudsmith==<INTEGRATION_VERSION>
+   datadog-agent integration install -t datadog-cloudsmith==1.1.0
    ```
 
-2. Configura tu integración como si fuese una [integración][4] de base.
+1. Configura tu integración de forma similar a las [integraciones] centrales (https://docs.datadoghq.com/getting_started/integrations/).
 
 ### Configuración
 
-1. Edita el archivo `cloudsmith.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent, para empezar a recopilar los datos de rendimiento de tu Cloudsmith. Para conocer todas las opciones de configuración disponibles, consulta el [cloudsmith.d/conf.yaml de ejemplo][5].
+1. Edita el archivo `cloudsmith.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para empezar a recopilar tus datos de rendimiento de Cloudsmith. Consulta el [cloudsmith.d/conf.yaml](https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/datadog_checks/cloudsmith/data/conf.yaml.example de ejemplo) para ver todas las opciones de configuración disponibles.
 
-2. [Reinicia el Agent][6].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecute el subcomando de estado de Agent][7] y busque `cloudsmith` en la sección checks sección.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `cloudsmith` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cloudsmith" >}}
 
+| | |
+| --- | --- |
+| **cloudsmith.storage_used** <br>(gauge) | El porcentaje de almacenamiento utilizado<br>_Se muestra en porcentaje_. |
+| **cloudsmith.bandwidth_used** <br>(gauge) | El porcentaje de ancho de banda utilizado<br>_Se muestra en porcentaje_ |
+| **cloudsmith.token_count** <br>(gauge) | El número de tokens de una organización<br>_Se muestra como elemento_ |
+| **cloudsmith.token_bandwidth_total** <br>(gauge) | El ancho de banda total utilizado por los tokens<br>_Se muestra como byte_ |
+| **cloudsmith.token_download_total** <br>(gauge) | El total de descargas utilizadas por los tokens<br>_Se muestra como elemento_ |
+| **cloudsmith.storage_used_bytes** <br>(gauge) | La cantidad de almacenamiento utilizado en bytes<br>_Se muestra como byte_ |
+| **cloudsmith.bandwidth_used_bytes** <br>(gauge) | La cantidad de ancho de banda utilizado en bytes<br>_Se muestra como byte_ |
+| **cloudsmith.member.active** <br>(gauge) | El número de miembros activos en la organización<br>_Se muestra como elemento_ |
+| **cloudsmith.license_policy_violation.count** <br>(gauge) | El número de violaciones de la política de licencias<br>_Se muestra como elemento_ |
+| **cloudsmith.vulnerability_policy_violation.count** <br>(gauge) | El número de violaciones de la política de vulnerabilidad<br>_Se muestra como elemento_ |
+| **cloudsmith.member.has_2fa.count** <br>(gauge) | El número de miembros con 2FA activado<br>_Se muestra como elemento_ |
+| **cloudsmith.member.saml.count** <br>(gauge) | El número de miembros que iniciaron sesión con SAML<br>_Se muestra como elemento_ |
+| **cloudsmith.member.password.count** <br>(gauge) | El número de miembros que se conectaron con la contraseña<br>_Se muestra como elemento_ |
+| **cloudsmith.member.owner.count** <br>(gauge) | El número de usuarios con rol 'Propietario'<br>_Se muestra como elemento_ |
+| **cloudsmith.member.manager.count** <br>(gauge) | El número de usuarios con rol 'Administrador'<br>_Se muestra como elemento_ |
+| **cloudsmith.member.readonly.count** <br>(gauge) | El número de usuarios con rol 'Solo lectura'<br>_Se muestra como elemento_ |
+| **cloudsmith.member.admin.count** <br>(gauge) | El número de usuarios con rol 'Admin'<br>_Se muestra como elemento_ |
+| **cloudsmith.bandwidth_plan_limit_bytes** <br>(gauge) | El límite de ancho de banda en bytes definido por el plan<br>_Se muestra como byte_ |
+| **cloudsmith.bandwidth_plan_limit_gb** <br>(gauge) | El límite de ancho de banda en gigabytes definido por el plan<br>_Se muestra como byte_ |
+| **cloudsmith.bandwidth_used_gb** <br>(gauge) | El ancho de banda utilizado en gigabytes<br>_Se muestra como byte_ |
+| **cloudsmith.storage_plan_limit_bytes** <br>(gauge) | El límite de almacenamiento en bytes definido por el plan<br>_Se muestra como byte_ |
+| **cloudsmith.storage_plan_limit_gb** <br>(gauge) | El límite de almacenamiento en gigabytes definido por el plan<br>_Se muestra como byte_ |
+| **cloudsmith.storage_used_gb** <br>(gauge) | El almacenamiento utilizado en gigabytes<br>_Se muestra como byte_ |
+| **cloudsmith.storage_configured_bytes** <br>(gauge) | El almacenamiento configurado en bytes, incluido el plan y el exceso<br>_Se muestra como byte_ |
+| **cloudsmith.storage_configured_gb** <br>(gauge) | El almacenamiento configurado en gigabytes, incluido el plan y el exceso<br>_Se muestra como byte_ |
+| **cloudsmith.bandwidth_configured_gb** <br>(gauge) | El ancho de banda configurado en gigabytes, incluido el plan y el exceso<br>_Se muestra como byte_ |
+| **cloudsmith.bandwidth_configured_bytes** <br>(gauge) | El ancho de banda configurado en bytes, incluido el plan y el exceso<br>_Se muestra como byte_ |
+
+### Checks de servicio
+
+**cloudsmith.storage**
+
+Devuelve `CRITICAL` si el uso es superior al 85 %, `WARNING` si el uso es superior al 75 %, en caso contrario devuelve `OK`.
+
+_Estados: ok, warning, critical, unknown_
+
+**cloudsmith.bandwidth**
+
+Devuelve `CRITICAL` si el uso es superior al 85 %, `WARNING` si el uso es superior al 75 %, en caso contrario devuelve `OK`
+
+_Estados: ok, warning, critical, unknown_
+
+**cloudsmith.can_connect**
+
+Devuelve CRITICAL si el Agent no puede conectarse a Cloudsmith para recopilar métricas, en caso contrario devuelve `OK`
+
+_Estados: ok, critical_
 
 ### Eventos
 
-Todos los eventos relacionados con Cloudsmith que se recopilan aparecen en el flujo de eventos de Datadog con la propiedad `source:cloudsmith`. Se recopilan cada cinco minutos para reducir la cantidad de solicitudes enviadas a la API de Cloudsmith.
+Todos los eventos recopilados relacionados con Cloudsmith aparecen en Datadog Event Explorer con la etiqueta `source (fuente):cloudsmith`. Los eventos se recopilan cada cinco minutos para reducir el número de solicitudes enviadas a la API de Cloudsmith.
 
-Existen dos tipos de eventos:
+Hay varios tipos de eventos disponibles:
 
-- Evento de exploración de seguridad
 - Evento de logs de auditoría
+- Evento de exploración de seguridad
+- Evento de violación de la política de vulnerabilidad
+- Acto de violación de la política de licencias
+- Resumen de los miembros de la organización
+- Resumen de cuotas (uso bruto)
 
-Son accesibles con las claves de agregación: `@aggregation_key:audit_log` y `@aggregation_key:vulnerabilities`.
+## Soporte
 
-## Solucionar problemas
-
-¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Cloudsmith][10].
-
-[1]: https://cloudsmith.com
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/es/getting_started/integrations/
-[5]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/datadog_checks/cloudsmith/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/metadata.csv
-[9]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/assets/service_checks.json
-[10]: https://help.cloudsmith.io/docs/contact-us#live-chat-via-intercom
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Cloudsmith](https://support.cloudsmith.com/hc/en-us).

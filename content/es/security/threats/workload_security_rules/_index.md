@@ -3,7 +3,7 @@ aliases:
 - /es/security_platform/cloud_workload_security/workload_security_rules
 - /es/security/cloud_workload_security/workload_security_rules
 further_reading:
-- link: /security/threats/setup
+- link: /security/workload_protection/
   tag: Documentación
   text: Configuración de Workload Protection
 - link: /security/workload_protection/agent_expressions
@@ -135,7 +135,7 @@ Las reglas de detección que se ejecutan en el backend de Datadog después de ev
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /es/security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /es/security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
+[7]: /es/remote_configuration/
 [8]: /es/security/workload_protection/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules

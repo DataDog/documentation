@@ -1,17 +1,14 @@
 ---
+description: Crea tests de API en Datadog para monitorizar tus endpoints de forma
+  proactiva. Crea tests de API de uno o varios pasos con aserciones, configura alertas
+  y soluciona problemas.
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: Centro de aprendizaje
-  text: Introducción a los tests Synthetic
 - link: /api/latest/synthetics/#create-an-api-test
   tag: API
   text: Crear un test de API mediante programación
 - link: /synthetics/api_tests
   tag: Documentación
   text: Más información sobre los tests de API únicos
-- link: /synthetics/multistep
-  tag: Documentación
-  text: Más información sobre los tests de API multipasos
 - link: /getting_started/synthetics/private_location
   tag: Documentación
   text: Más información sobre las localizaciones privadas
@@ -24,7 +21,7 @@ further_reading:
   text: Descubre cómo identificar los bots Synthetic de los tests de API
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
-  text: Más información sobre los monitores de tests Synthetic
+  text: Más información sobre los monitores de test Synthetic
 title: Empezando con los tests de API
 ---
 

@@ -110,6 +110,8 @@ The table lists the applied sampling rates by resource of the service.
 
 **Note**: If the service is not making sampling decisions, the service's resources will be collapsed under the `Resources not making sampling decisions` row.
 
+**Note**: On short time frames (1-4 hours), the Effective Sampling Rate may display below 100% even when configured at 100%. This is expected behavior due to statistical calculations that need more datapoints to converge. All traces are still being captured correctly. For the most accurate display, view sampling rates over longer time periods.
+
 #### Ingestion Reasons and sampling decision makers
 
 Explore the **Ingestion reasons breakdown** to see which mechanisms are responsible for your service ingestion. Each ingestion reason relates to one specific [ingestion mechanism][11]. After changing your service ingestion configuration, you can observe the increase or decrease of ingested bytes and spans in this timeseries graph based on the past hour of ingested data.
@@ -247,7 +249,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 
 [1]: /tracing/metrics/metrics_namespace/
 [2]: https://app.datadoghq.com/apm/traces/ingestion-control
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /tracing/guide/remote_config
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces
 [6]: /tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
@@ -258,7 +260,7 @@ To phrase it another way, Datadog uses the following precedence rules:
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /agent/remote_config/#enabling-remote-configuration
+[14]: /remote_configuration#enabling-remote-configuration
 [15]: /tracing/trace_pipeline/metrics#what-is-the-sampling-service
 [17]: /tracing/trace_pipeline/adaptive_sampling/
 [18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level

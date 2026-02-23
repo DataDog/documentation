@@ -21,7 +21,7 @@ Este artículo explica por qué y cómo se realiza la agregación de tus datos.
 
 La agregación mejora el rendimiento al reducir el número de llamadas a la API, cada una de las cuales requiere un cierto tiempo.
 
-Considera una [métrica COUNT (Recuento)][3] que se incrementa 1.000 veces (1 cada vez) en un corto periodo de tiempo. En lugar de realizar 1.000 llamadas a la API por separado, el servidor de DogStatsD las agrega en unas pocas llamadas a la API. Dependiendo de la situación (consulta a continuación), la biblioteca puede enviar, por ejemplo, 1 punto de datos con un valor 1.000 o X puntos de datos agregados con un valor acumulado de 1.000.
+Considera una [métrica COUNT (Recuento)][3] que se incrementa 1.000 veces (1 cada vez) en un corto periodo de tiempo. En lugar de realizar 1.000 llamadas a la API por separado, el servidor de DogStatsD las agrega en unas pocas llamadas a la API. Dependiendo de la situación (consulta a continuación), la librería puede enviar, por ejemplo, 1 punto de datos con un valor 1.000 o X puntos de datos agregados con un valor acumulado de 1.000.
 
 ## ¿Cómo se realiza la agregación con el servidor de DogStatsD?
 
@@ -29,7 +29,7 @@ Considera una [métrica COUNT (Recuento)][3] que se incrementa 1.000 veces (1 ca
 
 **Nota**: Con el protocolo StatsD, el cliente de StatsD no envía métricas con marcas de tiempo. La marca de tiempo se añade en el momento del vaciado. Así que, para un vaciado que ocurre a las 10:00:10, todos los datos recibidos por el servidor de [DogStatsD][2] (incorporado en el Datadog Agent) entre las 10:00:00 y las 10:00:10 se agrupan en un único punto de datos que recibe las 10:00:00 como marca de tiempo.
 
-## Reglas de agregación por tipo de métrica 
+## Reglas de agregación por tipo de métrica
 
 Entre todos los valores recibidos durante el mismo intervalo de vaciado, el valor agregado enviado depende del [tipo de métrica][4]:
 
