@@ -3722,31 +3722,36 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_setup
       weight: 2
+    - name: Permissions
+      url: cloud_cost_management/setup/permissions
+      parent: cloud_cost_setup
+      identifier: cloud_cost_permissions
+      weight: 201
     - name: AWS
       url: cloud_cost_management/setup/aws/
       parent: cloud_cost_setup
       identifier: cloud_cost_aws
-      weight: 101
+      weight: 202
     - name: Azure
       url: cloud_cost_management/setup/azure/
       parent: cloud_cost_setup
       identifier: cloud_cost_azure
-      weight: 102
+      weight: 203
     - name: Google Cloud
       url: cloud_cost_management/setup/google_cloud/
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
-      weight: 103
+      weight: 204
     - name: Oracle
       url: cloud_cost_management/setup/oracle/
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
-      weight: 104
+      weight: 205
     - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 105
+      weight: 206
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
@@ -3796,27 +3801,7 @@ menu:
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 110
-    - name: Datadog Costs
-      url: cloud_cost_management/datadog_costs
-      parent: cloud_cost
-      identifier: cloud_cost_datadog_costs
-      weight: 2
-    - name: Planning
-      url: cloud_cost_management/planning
-      parent: cloud_cost
-      identifier: cloud_cost_planning
-      weight: 5
-    - name: Budgets
-      url: cloud_cost_management/planning/budgets
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_budgets
-      weight: 501
-    - name: Commitment Programs
-      url: cloud_cost_management/planning/commitment_programs
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_commitment_programs
-      weight: 502
+      weight: 207
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost
@@ -3838,7 +3823,7 @@ menu:
       identifier: cloud_cost_cost_allocation
       weight: 4
     - name: Tag Pipelines
-      url: cloud_cost_management/tags/tag_pipelines
+      url: cloud_cost_management/allocation/tag_pipelines
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_tag_pipelines
       weight: 401

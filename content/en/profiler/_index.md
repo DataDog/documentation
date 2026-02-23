@@ -10,9 +10,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Continuous Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: '/developers/guide/data-collection-resolution/'
       tag: 'Documentation'
       text: 'Data collection and resolution'
@@ -58,13 +58,13 @@ algolia:
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
 
-</br>
+<br>
 
 Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
 
 ### Low impact in production
 
-Continuous profiler runs in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
+Continuous Profiler runs in production across all services by using technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
 ## Getting started
 
