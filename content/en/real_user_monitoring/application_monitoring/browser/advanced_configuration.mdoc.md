@@ -1713,9 +1713,9 @@ window.DD_RUM && window.DD_RUM.init({
 {% /if %}
 
 
-The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources) with `service` and `version` from the context map.
+The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources, long tasks, vitals) with `service` and `version` from the context map.
 
-{% alert type="warning" %}
+{% alert level="warning" %}
 Events that don't match any micro frontend fall back to the shell-level service and version.
 {% /alert %}
 
