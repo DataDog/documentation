@@ -37,13 +37,13 @@ Events Forwarding supports the following data types:
 
 Each data type requires specific permissions to create and manage forwarding rules:
 
-| Data Type | Read Permission | Write Permission |
-|-----------|----------------|------------------|
-| Logs | [`logs_read_data`][1] | [`logs_write_forwarding_rules`][1] |
-| Audit Logs | [`audit_logs_read`][1] | [`audit_logs_write`][1] |
-| Spans | [`apm_read`][1] | [`apm_pipelines_write`][1] |
-| Security Signals | [`security_monitoring_signals_read`][1] | [`security_monitoring_signals_write`][1] |
-| Cloud Workload Security Events | [`security_monitoring_signals_read`][1] | [`security_monitoring_cws_agent_rules_write`][1] |
+| Data Type | Permission |
+|-----------|------------|
+| Logs | [`logs_write_forwarding_rules`][1] |
+| Audit Logs | [`audit_logs_write`][1] |
+| Spans | [`apm_pipelines_write`][1] |
+| Security Signals | [`security_monitoring_signals_write`][1] |
+| Cloud Workload Security Events | [`security_monitoring_cws_agent_rules_write`][1] |
 
 ## Set up events forwarding
 
