@@ -2,6 +2,7 @@
 title: Live Call Routing
 aliases:
 - /service_management/on-call/triggering_pages/live_call_routing/
+- /incident_response/on-call/triggering_pages/live_call_routing/
 further_reading:
 - link: '/incident_response/On-Call/'
   tag: 'Documentation'
