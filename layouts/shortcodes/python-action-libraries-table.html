@@ -1,6 +1,13 @@
-{{- $python_libs := site.Data.python_action_libs -}} {{- if not $python_libs -}} {{- $err_msg := "Could not load Python
-action libraries data" -}} {{- if eq hugo.Environment "development" -}} {{- warnf $err_msg -}} {{- else -}} {{- errorf
-$err_msg -}} {{- end -}} {{- end -}} {{- if $python_libs -}}
+{{- $python_libs := site.Data.python_action_libs -}}
+{{- if not $python_libs -}}
+  {{- $err_msg := "Could not load Python action libraries data" -}}
+  {{- if eq hugo.Environment "development" -}}
+    {{- warnf $err_msg -}}
+  {{- else -}}
+    {{- errorf $err_msg -}}
+  {{- end -}}
+{{- end -}}
+{{- if $python_libs -}}
 <p>Python version: <strong>{{ $python_libs.python_version }}</strong></p>
 
 <p>The following Python packages are available in addition to the standard library:</p>
