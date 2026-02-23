@@ -20,7 +20,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
+After you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### Click
 
@@ -59,7 +59,7 @@ Datadog records steps you perform on your application, such as uploading, and a 
 
 ### Drag and drop
 
-Datadog records drag and drop interactions you perform on your application as a step. A drag and drop interaction is billed as a single step in your browser test.
+Datadog records drag and drop interactions you perform on your application as a step.
 
 Common use cases include:
 - Dragging a widget into a dashboard
@@ -74,7 +74,7 @@ To record a drag and drop step, start the recorder and perform the drag and drop
 
 After recording, you can review and edit the drag source element, drop target element, interaction points, and timing settings.
 
-For complex applications or non-native drag and drop implementations, see [Drag and drop](#drag-and-drop-1) in the Manually added steps section.
+For complex applications or non-native drag and drop implementations, see [drag and drop](#drag-and-drop-1) in the Manually added steps section.
 
 <!-- TODO: Confirm whether drag and drop is available in GovCloud before publishing -->
 
@@ -254,8 +254,8 @@ Create this interaction step to simulate dragging an element from one location t
 
 Each drag and drop step includes the following options:
 
-* **Drag Step Target Element**: The element to be dragged.
-* **Drop Step Target Element**: The element that receives the drop.
+* **Drag step target element**: The element to be dragged.
+* **Drop step target element**: The element that receives the drop.
 * **User Specified Locator** (optional): Override the detected element with a custom CSS or XPath selector. This is recommended in the following cases:
   * **Ghost preview or drag overlay**: Some libraries create a floating clone of the dragged element. The recorder may capture this ghost element as the drop target. Because the worker does not physically move the mouse during execution, the test may attempt to drag to the ghost preview instead of the real container, resulting in inconsistent or failing steps. Manually edit the drop target to select the actual container element, or use a custom selector.
   * **Nested DOM structures**: Draggable or droppable logic may be attached to a parent element while the cursor detects a deeply nested child. Some libraries prevent event bubbling or rely on specific classes or custom attributes, which can cause the recorder to capture the wrong element. Inspect the DOM and select the correct parent element. Look for library-defined classes or attributes that identify valid drag or drop targets.
