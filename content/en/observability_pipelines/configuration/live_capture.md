@@ -5,7 +5,16 @@ further_reading:
 - link: "/observability_pipelines/set_up_pipelines/"
   tag: "Documentation"
   text: "Set up pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -45,8 +54,8 @@ If you want to use Live Capture and are using a firewall, you must add these dom
 1. Click **Capture**.
 1. **Optional configurations**:
     <div class="alert alert-info">Optional configurations are only available if all of your active Workers are versions 2.11 or later.</a></div>
-    
-    1. Enter a query to specify which events you want to capture. See [filter query](#filter-query-syntax) for more information.
+
+    1. Enter a query to specify which events you want to capture. For more information, see [Search Syntax for Logs][4] or [Search Syntax for Metrics][5].
     1. Enter a capture duration (in seconds or minutes) for how long you want events to be captured.
         - Minimum duration (default if no duration is specified): 30 seconds
         - Maximum duration: 300 seconds (5 minutes)
@@ -57,8 +66,6 @@ If you want to use Live Capture and are using a firewall, you must add these dom
     - Data highlighted in red indicates data that was modified or dropped.
     - Data highlighted in green indicates data that was added.
 
-{{% observability_pipelines/processors/filter_syntax %}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -66,3 +73,5 @@ If you want to use Live Capture and are using a firewall, you must add these dom
 [1]: /account_management/rbac/permissions/#observability-pipelines
 [2]: /account_management/rbac/
 [3]: https://app.datadoghq.com/observability-pipelines
+[4]: /observability_pipelines/search_syntax/logs
+[5]: /observability_pipelines/search_syntax/metrics
