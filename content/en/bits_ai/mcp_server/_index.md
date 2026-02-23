@@ -480,43 +480,43 @@ Retrieves all network interfaces for a specific device.
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
 
-### `onboarding_browser`
+### `browser_onboarding`
 *Toolset: **onboarding***\
 Guides you through onboarding Browser RUM to Datadog.
 
 - Help me set up Browser RUM monitoring for my web application.
 
-### `onboarding_devices`
+### `devices_onboarding`
 *Toolset: **onboarding***\
 Guides you through onboarding devices to Datadog monitoring.
 
 - Help me set up device monitoring in Datadog.
 
-### `onboarding_kubernetes`
+### `kubernetes_onboarding`
 *Toolset: **onboarding***\
 Guides you through onboarding Kubernetes clusters to Datadog.
 
 - Help me set up Datadog monitoring for my Kubernetes cluster.
 
-### `onboarding_llmobs`
+### `llm_observability_onboarding `
 *Toolset: **onboarding***\
 Guides you through onboarding LLM Observability in Datadog.
 
 - Help me set up LLM Observability for my AI application.
 
-### `onboarding_test_optimization`
+### `test_optimization_onboarding`
 *Toolset: **onboarding***\
 Guides you through onboarding Test Optimization in Datadog.
 
 - Help me set up Test Optimization for my CI pipeline.
 
-### `onboarding_serverless`
+### `serverless_onboarding`
 *Toolset: **onboarding***\
 Guides you through onboarding serverless applications to Datadog.
 
 - Help me monitor my AWS Lambda functions with Datadog.
 
-### `onboarding_source_maps`
+### `source_map_uploads `
 *Toolset: **onboarding***\
 Guides you through uploading source maps for RUM error mapping.
 
