@@ -76,7 +76,9 @@ You can programmatically assign team ownership at the time an error is raised by
 
 **APM and Logs**
 
-Set the `team` attribute directly on the span or log:
+Set the `team` attribute directly on the span or log.
+
+For example :
 
 ```python
 span.set_tag("team", "payments-backend")
@@ -88,7 +90,7 @@ span.setTag("team", "payments-backend");
 
 **RUM**
 
-Set the `context.team` attribute on the RUM event:
+Set the `team` attribute on the RUM event:
 
 ```javascript
 datadogRum.addError(error, { team: 'payments-frontend' });
