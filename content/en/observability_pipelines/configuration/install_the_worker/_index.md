@@ -175,6 +175,7 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 #### LoadBalancer service
 
 If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name.  For example, Amazon EKS with the [AWS Load Balancer Controller][9] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
+
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
@@ -366,8 +367,14 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 
 When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
 
-- A headless service to provide stable DNS names and Direct Pod IP resolution for the Worker.
-- A non-headless service for you to address the Worker and load balance traffic for internal and external cluster communications.
+- A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
+  This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
+- A ClusterIP service that provides a single virtual IP and DNS name for the Worker.  
+  This enables load balancing across Worker Pods for internal cluster traffic.
+
+#### LoadBalancer service
+
+If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name.  For example, Amazon EKS with the [AWS Load Balancer Controller][8] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
@@ -376,6 +383,7 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 [5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 [7]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
+[8]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 {{% /tab %}}
 {{% tab "Linux" %}}
