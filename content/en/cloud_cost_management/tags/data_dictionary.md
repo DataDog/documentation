@@ -326,6 +326,28 @@ multifiltersearch:
       description: GCP Committed Use Discount ID
       example: "1234567890123456789"
     
+    # Oracle Cloud Provider-Specific
+    - tag_name: compartment_id
+      source: Oracle Cloud
+      type: Bill Column
+      description: OCI compartment OCID — a logical container for organizing and isolating cloud resources
+      example: "ocid1.compartment.oc1..aaaa..."
+    - tag_name: compartment_name
+      source: Oracle Cloud
+      type: Bill Column
+      description: The display name of the OCI compartment
+      example: "production-compartment"
+    - tag_name: tenancy_name
+      source: Oracle Cloud
+      type: Bill Column
+      description: The OCI tenancy name (root compartment)
+      example: "MyCompany"
+    - tag_name: dd_resource_key
+      source: Oracle Cloud
+      type: Resource
+      description: Canonical Cloud Resource Identifier (CCRID) used to correlate OCI resources with Datadog observability data
+      example: "oci://iaas/instances/ocid1.instance..."
+
     # Amazon ECS Provider-Specific
     - tag_name: ecs_cluster_name
       source: Amazon ECS
@@ -398,7 +420,7 @@ Filter by **Source** to see tags from specific systems (like Datadog Enrichment 
 
 Cloud Cost Management automatically enriches your cost data with tags from multiple sources:
 
-- **Cloud Cost Management**: [FOCUS](https://focus.finops.org/) standard fields that normalize cost data across providers, container allocation tags, and aliases that simplify the cost data model
+- **Cloud Cost Management**: [FOCUS](https://focus.finops.org/) standard fields that normalize cost data across providers. FOCUS tags are applied when the underlying billing data from a provider supports them, so not every FOCUS field is available from every provider. Container allocation tags and aliases that simplify the cost data model are also included.
 - **Datadog Enrichment**: Tags from Datadog Agent, APM Service Catalog, integration tiles, and Data Observability
 - **Kubernetes Enrichment**: Tags from Kubernetes clusters, pods, deployments, and persistent volumes monitored with Datadog
 - **Provider-Specific**: Native tags from AWS, Azure, Google Cloud, Oracle Cloud, Amazon ECS, and SaaS providers like Confluent Cloud, Databricks, Snowflake, and MongoDB
@@ -407,6 +429,15 @@ Cloud Cost Management automatically enriches your cost data with tags from multi
 - **Custom Costs**: User-defined tags from CSV files uploaded to Cloud Cost Management
 
 Use these tags to allocate costs, create reports, build dashboards, and track spending by team, service, or environment in [Tag Explorer][1], cost analytics, and other Cloud Cost Management views.
+
+## Tag normalization
+
+Cloud Cost Management normalizes tag keys and values when ingesting cost data:
+
+- **Keys**: Lowercased; leading non-letter characters dropped; special characters and spaces replaced with `_`; consecutive underscores collapsed to one
+- **Values**: Consecutive whitespace collapsed to a single space; unsupported characters replaced with `_`
+
+For details and the optional normalization toggle, see [Tags][2].
 
 ## Field reference
 
@@ -417,4 +448,5 @@ Use these tags to allocate costs, create reports, build dashboards, and track sp
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/tags
+[2]: /cloud_cost_management/tags/
 
