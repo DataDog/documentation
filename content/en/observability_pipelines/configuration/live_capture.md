@@ -63,10 +63,14 @@ If you want to use Live Capture and are using a firewall, you must add these dom
         - Maximum duration: 300 seconds (5 minutes)
     1. Select which Workers you want to capture events from. If no Workers are selected, a random Worker is chosen.
 1. Click **Capture** to start capturing events.<br>**Note**: It might take up to 60 seconds for captured events to appear in the UI. Captured data is visible to all users with view access, and is stored in the Datadog Platform for 72 hours.
-1. After the capture is complete, click a specific capture event to see the data that was received and sent out. You can also search for specific events in the search bar. Use the dropdown menu next to the search bar to show events based on status (`MODIFIED`, `UNMODIFIED`, `DROPPED`, and `REDUCED`).
+1. After the capture is complete:
+    1. Click a specific captured event to see the data that was received and sent out. You can also search for specific events in the search bar. Use the dropdown menu next to the search bar to show events based on status (`MODIFIED`, `UNMODIFIED`, `DROPPED`, and `REDUCED`).
     - **Capture N** is the capture request number. For example, Capture N is `1` for the first capture and `6` for the sixth capture.
     - Data highlighted in red indicates data that was modified or dropped.
     - Data highlighted in green indicates data that was added.
+    1. Click **View Logs** to see the Worker logs for the capture.
+1. To see other captures for the same component, click **Captures** on the top right of the side panel.
+1. You can filter captures by capture event ID, filter query, pipeline version, or status (`in_progress` or `completed`).
 
 ## Further reading
 
