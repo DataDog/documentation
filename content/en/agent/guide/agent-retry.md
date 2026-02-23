@@ -143,12 +143,6 @@ The Agent retries failed requests for the following scenarios:
 #### In-memory queues
 The Agent compresses and stores failed APM payloads in memory. The Agent drops these failed payloads when queues are full.
 
-#### Traces
-  - Configurable using `apm_config.trace_writer.queue_size`
-  - Default calculation:
-     - `int(max(1, max memory / max payload size))`
-     - Example: `int(max(1, (500 * 1024 * 1024) / 3200000)) = 163` [payloads][6]
-
 #### Stats
   - Configurable using `apm_config.stats_writer.queue_size`
   - Default calculation:
