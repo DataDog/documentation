@@ -4975,6 +4975,16 @@ menu:
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: ELT Integrations
+      url: data_observability/quality_monitoring/elt
+      identifier: elt_integrations
+      parent: quality_monitoring
+      weight: 275000
+    - name: Fivetran
+      url: data_observability/quality_monitoring/elt/fivetran
+      identifier: elt_integrations_fivetran
+      parent: elt_integrations
+      weight: 1000000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
