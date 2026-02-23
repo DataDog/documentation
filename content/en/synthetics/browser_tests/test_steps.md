@@ -67,14 +67,13 @@ Common use cases include:
 - Moving a card into a group
 - Rearranging notebook elements
 
-<!-- TODO: Add video of drag and drop recording in browser test -->
-{{< img src="synthetics/browser_tests/drag_and_drop_step.mp4" alt="Drag and drop step recorded in a browser test" video="true" width="70%" >}}
+{{< img src="synthetics/browser_tests/drag_and_drop.mp4" alt="Drag and drop step recorded in a browser test" video="true" width="90%" >}}
 
 To record a drag and drop step, start the recorder and perform the drag and drop action in your application. The recorder detects the drag source and drop target and creates a single **Drag and Drop** step.
 
 After recording, you can review and edit the drag source element, drop target element, interaction points, and timing settings.
 
-For complex applications or non-native drag and drop implementations, see [drag and drop](#drag-and-drop-1) in the Manually added steps section.
+For complex applications or non-native drag and drop implementations, see [drag and drop](#drag-and-drop-1) in the manually added steps section.
 
 <!-- TODO: Confirm whether drag and drop is available in GovCloud before publishing -->
 
@@ -249,38 +248,26 @@ Create this interaction step to simulate dragging an element from one location t
 4. Select the element to drag.
 5. Select the element to drop onto.
 
-<!-- TODO: Add screenshot of drag and drop manual step configuration -->
-{{< img src="synthetics/browser_tests/drag_and_drop_manual_step.png" alt="Drag and drop manual interaction step configuration" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/drag_and_drop_manual_step.mp4" alt="Drag and drop manual interaction step configuration" video="true" width="90%" >}}
 
-Each drag and drop step includes the following options:
+**Step options**
 
-* **Drag step target element**: The element to be dragged.
-* **Drop step target element**: The element that receives the drop.
-* **User Specified Locator** (optional): Override the detected element with a custom CSS or XPath selector. This is recommended in the following cases:
-  * **Ghost preview or drag overlay**: Some libraries create a floating clone of the dragged element. The recorder may capture this ghost element as the drop target. Because the worker does not physically move the mouse during execution, the test may attempt to drag to the ghost preview instead of the real container, resulting in inconsistent or failing steps. Manually edit the drop target to select the actual container element, or use a custom selector.
-  * **Nested DOM structures**: Draggable or droppable logic may be attached to a parent element while the cursor detects a deeply nested child. Some libraries prevent event bubbling or rely on specific classes or custom attributes, which can cause the recorder to capture the wrong element. Inspect the DOM and select the correct parent element. Look for library-defined classes or attributes that identify valid drag or drop targets.
-  * **Drop target detected as the dragged element**: In some cases, the same element is recorded as both the drag target and the drop target. If this happens, manually edit the drop target and select the intended destination element.
-* **Interaction Point**: Defines where on the element the drag or drop occurs. Options: **Center** (default) or **Offset (Top-Left)**.
-* **Delay before drag**: Time between pressing the mouse button and starting to move.
-* **Delay before drop**: Time between reaching the target element and releasing the mouse button. Adjusting timing can improve reliability in complex or animated interfaces.
+| Option | Description |
+|--------|-------------|
+| **User Specified Locator** (optional) | A custom CSS or XPath selector when the recorder picks the wrong element. See [When to use a custom locator](#when-to-use-a-custom-locator-optional) below. |
+| **Interaction Point** | Where on the element the action occurs: **Center** (default) or **Offset (Top-Left)**. |
+| **Delay before drag** | Pause between mouse press and start of drag. |
+| **Delay before drop** | Pause after reaching the drop target before release. Increase for animated or complex UIs. |
 
-**Note**: Some applications create the draggable element only after you hover over another element. Confirm this is not the case and add a **Hover** step before the drag and drop step if needed.
+#### When to use a custom locator (optional)
 
-**Native vs. custom drag and drop**
+Use **User Specified Locator** for the following scenarios:
 
-Applications implement drag and drop in two ways:
+* **Ghost or overlay elements**: Your app shows a floating copy of the dragged item (for example, a drag preview). The recorder may target that copy instead of the real drop zone. Edit the drop target to the actual container or enter a custom selector.
+* **Deep or nested elements**: The draggable/droppable behavior is on a parent, but the recorder picked a child. Inspect the page and choose the parent element that has the right classes or attributes.
+* **Same element for drag and drop**: The recorder used one element as both drag source and drop target. Edit the drop target and select the real destination element.
 
-* **Native HTML5 drag and drop**: Uses standard browser drag events such as `dragstart`, `dragover`, and `drop`.
-* **Custom mouse-based implementation**: Simulates drag and drop using pointer events such as `mousedown`, `mousemove`, and `mouseup`. Commonly used by libraries such as dnd-kit.
-
-The drag and drop step supports both approaches. For custom mouse-based implementations, target detection may be less reliable. In these cases, review the selected elements, interaction points, and timing configuration so the test accurately reproduces real user behavior.
-
-**Best practices**
-
-* Review recorded steps before saving using the step replayer.
-* Use stable CSS or XPath selectors when possible.
-* Adjust timing settings to reduce flakiness.
-* Add a **Hover** step before the drag and drop step if your application creates the draggable element only after a hover interaction.
+**Note**: If the draggable element only appears after hovering on another element, add a **Hover** step before the drag and drop step.
 
 #### Scroll
 
