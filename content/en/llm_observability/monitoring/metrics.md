@@ -47,7 +47,7 @@ After you instrument your application with LLM Observability, you can access LLM
 ### LLM cost metrics
 
 <div class="alert alert-info">
-The unit for estimated cost metrics for LLM Observability is in `nanodollars`.
+The unit for estimated cost metrics for LLM Observability is <strong>nanodollars</strong>.
 </div>
 
 | Metric Name | Description | Metric Type | Tags |
