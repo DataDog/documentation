@@ -17,13 +17,13 @@ further_reading:
 
 ## Overview
 
-[Synthetic Monitoring][1] notifications alert your team when a test fails and recover when it passes. The simplest notification requires no setup, Datadog pre-fills each alert with the test name, failing locations, and a link to the result.
+Customize your alerts in [Synthetic Monitoring][1] to give on-call responders meaningful context. Synthetic Monitoring's message templating system lets you enrich alerts with test details, extract data from test results, and route notifications conditionally based on the failure.
 
 <div class="alert alert-info">Synthetic Monitoring notifications are not supported in your <a href="https://docs.datadoghq.com/continuous_testing/">Continuous Testing CI/CD pipelines.</a></div>
 
 ## Pre-filled monitor messages
 
-Synthetic Monitoring provides pre-filled messages with metadata such as:
+Synthetic Monitoring provides pre-filled messages with no setup required; each alert includes the test name, failing locations, a link to the result, and metadata such as:
 
 - Test name
 - Monitor ID
@@ -35,7 +35,7 @@ These values appear automatically in most notification channels without any conf
 
 {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
-To include additional test result data beyond the defaults, use Handlebars templates in your monitor message.
+To include additional test result data beyond the defaults, use handlebar formatting in your monitor message.
 
 {{< collapse-content title="Pre-filled examples by test type" level="h4" >}}
 
@@ -174,9 +174,19 @@ Loop through all steps in a browser or mobile test and display variables extract
 
 ## Display custom notifications message
 
+Synthetic Monitoring notifications support the ability to display **only the custom notification message** in alert notifications, hiding all default enriched content such as query details, tags, screenshots, and footers.
+
+By default, all monitors include enriched details in the alert message. This may include:
+
+- Test metadata
+- Failing step information
+- Screenshots
+- Tags
+- Links to Datadog resources
+
 ### Notification presets
 
-Datadog adds enriched content to notifications by default—test metadata, screenshots, failing step details, and notification handles. Use presets to control which content appears:
+Use presets to control which content appears:
 
 <table style="table-layout: fixed;">
   <thead>
@@ -194,7 +204,7 @@ Datadog adds enriched content to notifications by default—test metadata, scree
     </tr>
     <tr>
       <td style="width: 120px;"><code>hide_handles</code></td>
-      <td>All enriched data, but no <code>@notification</code> handles (for example, <code>@slack-channel</code>)</td>
+      <td>All enriched data, but hides <code>@notification</code> handles (for example, <code>@slack-channel</code>)</td>
       <td>Prevents duplicate pages when a channel is already notified at the monitor level</td>
     </tr>
     <tr>
