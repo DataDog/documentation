@@ -498,12 +498,6 @@ Guides you through onboarding Kubernetes clusters to Datadog.
 
 - Help me set up Datadog monitoring for my Kubernetes cluster.
 
-### `onboarding_ecs`
-*Toolset: **onboarding***\
-Guides you through onboarding Amazon ECS to Datadog monitoring.
-
-- Help me monitor my ECS containers with Datadog.
-
 ### `onboarding_llmobs`
 *Toolset: **onboarding***\
 Guides you through onboarding LLM Observability in Datadog.
