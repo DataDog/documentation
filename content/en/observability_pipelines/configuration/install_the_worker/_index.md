@@ -183,6 +183,7 @@ If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions
 [6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 [8]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
+[9]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 {{% /tab %}}
 {{% tab "Linux" %}}
