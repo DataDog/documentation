@@ -36,13 +36,17 @@ Any compliant StatsD client works with DogStatsD and the Agent, but does not inc
 
 **Note**: DogStatsD does NOT implement timers from StatsD as a native metric type (though it does support them through [histograms][2]).
 
-DogStatsD is available on Docker Hub and GCR:
+DogStatsD is available on the Datadog Container Registry, GAR, ECR, Azure ACR, and Docker Hub:
 
-| Docker Hub                                       | GCR                                                       |
-|--------------------------------------------------|-----------------------------------------------------------|
-| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+| Registry                   | Image                                   |
+| -------------------------- | --------------------------------------- |
+| Datadog Container Registry | [registry.datadoghq.com/dogstatsd][33]  |
+| Google Artifact Registry   | [gcr.io/datadoghq/dogstatsd][4]         |
+| Amazon ECR                 | [public.ecr.aws/datadog/dogstatsd][34]  |
+| Azure ACR                  | datadoghq.azurecr.io/dogstatsd          |
+| Docker Hub                 | [hub.docker.com/r/datadog/dogstatsd][3] |
 
-<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you use the Datadog Container Registry or a cloud-provider registry instead. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ## How it works
 
@@ -96,7 +100,7 @@ docker run -d --cgroupns host \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [UNIX domain socket][1].
@@ -532,10 +536,10 @@ For the full list of optional parameters, see the [dogstatsd-ruby repo][1] on Gi
 
 The Go client has multiple options for configuring the behavior of your client.
 
-| Parameter                     | Type            | Description                                                                  |
-| ----------------------------- | --------------- | ---------------------------------------------------------------------------- |
-| `WithNamespace()`             | String          | Configure a namespace to prefix to all metrics, events, and service checks.  |
-| `WithTags()`                  | List of strings | Global tags applied to every metric, event, and service check.               |
+| Parameter         | Type            | Description                                                                 |
+| ----------------- | --------------- | --------------------------------------------------------------------------- |
+| `WithNamespace()` | String          | Configure a namespace to prefix to all metrics, events, and service checks. |
+| `WithTags()`      | List of strings | Global tags applied to every metric, event, and service check.              |
 
 For all available options, see [Datadog's GoDoc][1].
 
@@ -547,23 +551,23 @@ For all available options, see [Datadog's GoDoc][1].
 As of v2.10.0 the recommended way to instantiate the client is with the NonBlockingStatsDClientBuilder. You
 can use the following builder methods to define the client parameters.
 
-| Builder Method                               | Type           | Default   | Description                                                                         |
-| -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
-| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                     |
-| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                        |
-| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                             |
-| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.                |
-| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                        |
-| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                           |
-| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                         |
-| `entityID(String val)`                       | String         | null      | Entity ID for origin detection.                                                   |
-| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                  |
-| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maximum packet size; 8192 over UDS, 1432 for UDP.                               |
-| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.           |
-| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.               |
-| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                    |
-| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                                |
-| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only.  |
+| Builder Method                               | Type           | Default   | Description                                                                        |
+| -------------------------------------------- | -------------- | --------- | ---------------------------------------------------------------------------------- |
+| `prefix(String val)`                         | String         | null      | The prefix to apply to all metrics, events, and service checks.                    |
+| `hostname(String val)`                       | String         | localhost | The host name of the targeted StatsD server.                                       |
+| `port(int val)`                              | Integer        | 8125      | The port of the targeted StatsD server.                                            |
+| `constantTags(String... val)`                | String varargs | null      | Global tags to be applied to every metric, event, and service check.               |
+| `blocking(boolean val)`                      | Boolean        | false     | The type of client to instantiate: blocking vs non-blocking.                       |
+| `socketBufferSize(int val)`                  | Integer        | -1        | The size of the underlying socket buffer.                                          |
+| `enableTelemetry(boolean val)`               | Boolean        | false     | Client telemetry reporting.                                                        |
+| `entityID(String val)`                       | String         | null      | Entity ID for origin detection.                                                    |
+| `errorHandler(StatsDClientErrorHandler val)` | Integer        | null      | Error handler in case of an internal client error.                                 |
+| `maxPacketSizeBytes(int val)`                | Integer        | 8192/1432 | The maximum packet size; 8192 over UDS, 1432 for UDP.                              |
+| `processorWorkers(int val)`                  | Integer        | 1         | The number of processor worker threads assembling buffers for submission.          |
+| `senderWorkers(int val)`                     | Integer        | 1         | The number of sender worker threads submitting buffers to the socket.              |
+| `poolSize(int val)`                          | Integer        | 512       | Network packet buffer pool size.                                                   |
+| `queueSize(int val)`                         | Integer        | 4096      | Maximum number of unprocessed messages in the queue.                               |
+| `timeout(int val)`                           | Integer        | 100       | the timeout in milliseconds for blocking operations. Applies to unix sockets only. |
 
 For more information, search the Java DogStatsD [package][1] for the NonBlockingStatsDClient Class and NonBlockingStatsDClientBuilder Class. Make sure you view the version that matches your client release.
 
@@ -624,3 +628,5 @@ If you're interested in learning more about the datagram format used by DogStats
 [10]: /developers/community/libraries/
 [11]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
 [12]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
+[33]: https://registry.datadoghq.com/v2/dogstatsd/tags/list
+[34]: https://gallery.ecr.aws/datadog/dogstatsd

@@ -1,30 +1,5 @@
 ---
 app_id: gatekeeper
-app_uuid: 9c48b05d-ee74-4557-818e-14456c6f427b
-assets:
-  dashboards:
-    Gatekeeper base dashboard: assets/dashboards/gatekeeper_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: gatekeeper.constraints
-      metadata_path: metadata.csv
-      prefix: gatekeeper.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10148
-    source_type_name: Gatekeeper
-  logs:
-    source: gatekeeper
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Comunidad
-  sales_email: ara.pulido@datadoghq.com
-  support_email: ara.pulido@datadoghq.com
 categories:
 - nube
 - conformidad
@@ -32,51 +7,22 @@ categories:
 - rastreo
 - seguridad
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: gatekeeper
-integration_id: gatekeeper
-integration_title: Gatekeeper
+description: Integración de Gatekeeper
 integration_version: 1.0.0
-is_public: true
-manifest_version: 2.0.0
-name: gatekeeper
-public_title: Gatekeeper
-short_description: Integración de Gatekeeper
+media: []
 supported_os:
 - Linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Categoría::Nube
-  - Categoría::Cumplimiento
-  - Categoría::Configuración y despliegue
-  - Categoría::Contenedores
-  - Categoría::Seguridad
-  - Sistema operativo compatible::Linux
-  - Oferta::Integración
-  configuration: README.md#Configuración
-  description: Integración de Gatekeeper
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Gatekeeper
+title: Gatekeeper
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-Este check recopila métricas de [OPA Gatekeeper][1].
+Este check recopila métricas de [OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper).
 
-![Dashboard de información general de Gatekeeper][2]
+![Dashboard de información general de Gatekeeper](https://raw.githubusercontent.com/DataDog/integrations-extras/master/gatekeeper/images/gatekeeper_dashboard.png)
 
 ## Configuración
 
-Sigue las instrucciones que se indican a continuación con el fin de instalar y configurar este check para un Agent que se ejecuta en un clúster de Kubernetes. También consulta las [plantillas de integración de Autodiscovery][3] para obtener orientación sobre la aplicación de estas instrucciones.
+Sigue las instrucciones a continuación para instalar y configurar este check para un Agent que se ejecute en un clúster de Kubernetes. Consulta también las [plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de estas instrucciones.
 
 ### Instalación
 
@@ -93,28 +39,31 @@ RUN agent integration install -r -t datadog-gatekeeper==<INTEGRATION_VERSION>
 
 Para instalar el check de Gatekeeper en tu clúster de Kubernetes:
 
-1. Instala el [kit de herramientas para desarrolladores][4].
-2. Clona el repositorio `integrations-extras`:
+1. Instala el [kit de herramientas para desarrolladores](https://docs.datadoghq.com/developers/integrations/python/).
+
+1. Clona el repositorio `integrations-extras`:
 
    ```shell
    git clone https://github.com/DataDog/integrations-extras.git.
    ```
 
-3. Actualiza la configuración de `ddev` con la ruta de `integrations-extras/`:
+1. Actualiza la configuración de `ddev` con la ruta de `integrations-extras/`:
 
    ```shell
    ddev config set repos.extras ./integrations-extras
    ```
 
-4. Para crear el paquete de `gatekeeper`, ejecuta:
+1. Para crear el paquete de `gatekeeper`, ejecuta:
 
    ```shell
    ddev -e release build gatekeeper
    ```
 
-5. [Descarga el manifiesto del Agent para instalar el Datadog Agent como DaemonSet][5].
-6. Crea dos `PersistentVolumeClaim`, uno para el código de checks y otro para la configuración.
-7. Añádelos como volúmenes a tu plantilla de pods del Agent y úsalos para los checks y configuración:
+1. [Descarga el manifiesto del Agent para instalar el Datadog Agent como DaemonSet](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile).
+
+1. Crea dos `PersistentVolumeClaim`, uno para el código de checks y otro para la configuración.
+
+1. Añádelos como volúmenes a tu plantilla de pods del Agent y úsalos para los checks y configuración:
 
    ```yaml
         env:
@@ -138,67 +87,91 @@ Para instalar el check de Gatekeeper en tu clúster de Kubernetes:
             claimName: agent-conf-claim
    ```
 
-8. Despliega el Datadog Agent en tu clúster de Kubernetes:
+1. Despliega el Datadog Agent en tu clúster de Kubernetes:
 
    ```shell
    kubectl apply -f agent.yaml
    ```
 
-9. Copia el archivo .whl del artefacto de la integración en tus nodos de Kubernetes o súbelo a una URL pública.
+1. Copia el archivo .whl del artefacto de la integración en tus nodos de Kubernetes o súbelo a una URL pública.
 
-10. Ejecuta el siguiente comando para instalar la rueda de integraciones con el Agent:
+1. Ejecuta el siguiente comando para instalar la rueda de integraciones con el Agent:
 
-    ```shell
-    kubectl exec ds/datadog -- agent integration install -w <PATH_OF_GATEKEEPER_ARTIFACT_>/<GATEKEEPER_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   kubectl exec ds/datadog -- agent integration install -w <PATH_OF_GATEKEEPER_ARTIFACT_>/<GATEKEEPER_ARTIFACT_NAME>.whl
+   ```
 
-11. Ejecuta los siguientes comandos para copiar los checks y la configuración en los PVCs correspondientes:
+1. Ejecuta los siguientes comandos para copiar los checks y la configuración en los PVCs correspondientes:
 
-    ```shell
-    kubectl exec ds/datadog -- sh
-    # cp -R /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/* /checksd
-    # cp -R /etc/datadog-agent/conf.d/* /confd
-    ```
+   ```shell
+   kubectl exec ds/datadog -- sh
+   # cp -R /opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/* /checksd
+   # cp -R /etc/datadog-agent/conf.d/* /confd
+   ```
 
-12. Reinicia los pods del Datadog Agent.
+1. Reinicia los pods del Datadog Agent.
 
 ### Configuración
 
-1. Edita el archivo `gatekeeper/conf.yaml`, en la carpeta `/confd` que has añadido al pod del Agent para empezar a recopilar tus datos de rendimiento de Gatekeeper. Consulta el [gatekeeper/conf.yaml de ejemplo][6] para conocer todas las opciones de configuración disponibles.
+1. Edita el archivo `gatekeeper/conf.yaml`, en la carpeta `/confd` que añadiste al pod del Agent para empezar a recopilar los datos de rendimiento de tu gatekeeper. Ve el [gatekeeper/conf.yaml de ejemplo](https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/datadog_checks/gatekeeper/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-2. [Reinicia el Agent][7].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][8] y busca `gatekeeper` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `gatekeeper` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "gatekeeper" >}}
 
+| | |
+| --- | --- |
+| **gatekeeper.audit.duration.seconds.sum** <br>(count) | Latencia de la operación de auditoría en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.audit.duration.seconds.count** <br>(count) | Latencia de la operación de auditoría en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.audit.last_run_time** <br>(gauge) | Marca de tiempo de la última operación de auditoría|
+| **gatekeeper.constraint_template_ingestion.duration.seconds.sum** <br>(count) | Distribución del tiempo que se tardó en ingerir una plantilla de restricciones en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.constraint_template_ingestion.duration.seconds.count** <br>(count) | Distribución del tiempo que se tardó en ingerir una plantilla de restricciones en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.constraint_template_ingestion.count** <br>(count) | Número total de acciones de ingesta de plantillas de restricciones|
+| **gatekeeper.violations** <br>(gauge) | Número total de infracciones por restricción|
+| **gatekeeper.constraints** <br>(gauge) | Número actual de restricciones conocidas|
+| **gatekeeper.constraint_templates** <br>(gauge) | Número de plantillas de restricciones observadas|
+| **gatekeeper.request.duration.seconds.sum** <br>(count) | \[Obsoleto desde Gatekeeper v3.4.0\] El tiempo de respuesta en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.request.duration.seconds.count** <br>(count) | \[Obsoleto desde Gatekeeper v3.4.0\] El tiempo de respuesta en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.request.count** <br>(count) | \[Obsoleto desde Gatekeeper v3.4.0\] Número total de solicitudes que se dirigen al webhook|
+| **gatekeeper.sync** <br>(gauge) | Número total de recursos de cada tipo que se almacenan en caché|
+| **gatekeeper.sync.duration.seconds.sum** <br>(count) | Latencia de la operación de sincronización en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.sync.duration.seconds.count** <br>(count) | Latencia de la operación de sincronización en segundos<br>_Se muestra como segundo_ |
+| **gatekeeper.sync.last_run_time** <br>(gauge) | Marca de tiempo de la última operación de sincronización|
+| **gatekeeper.watch.intended** <br>(gauge) | El número total de Grupos/Versiones/Tipos que el gestor de vigilancia tiene instrucciones de vigilar.|
+| **gatekeeper.watch.watched** <br>(gauge) | El número total de Grupos/Versiones/Tipos vigilados actualmente por el gestor de vigilancia.|
+| **gatekeeper.validation.request.count** <br>(count) | Número de solicitudes enviadas al webhook de validación|
+| **gatekeeper.validation.request.duration.seconds.sum** <br>(count) | El tiempo de respuesta en segundo<br>_Se muestra como segundo_ |
+| **gatekeeper.validation.request.duration.seconds.count** <br>(count) | El tiempo de respuesta en segundo<br>_Se muestra como segundo_ |
+| **gatekeeper.mutator.ingestion.count** <br>(count) | Número total de acciones de ingesta de Mutator|
+| **gatekeeper.mutator.ingestion.duration.seconds.sum** <br>(count) | La distribución de las duraciones de ingesta de Mutator<br>_Se muestra como segundo_ |
+| **gatekeeper.mutator.ingestion.duration.seconds.count** <br>(count) | La distribución de las duraciones de ingesta de Mutator<br>_Se muestra como segundo_ |
+| **gatekeeper.mutators** <br>(gauge) | Número actual de objetos de Mutator|
+| **gatekeeper.mutator.conflicting.count** <br>(gauge) | Número actual de objetos de Mutator en conflicto|
 
 ### Eventos
 
 Gatekeeper no incluye eventos.
 
-### Checks de servicios
-{{< get-service-checks-from-git "gatekeeper" >}}
+### Checks de servicio
 
+**gatekeeper.prometheus.health**
+
+Devuelve `CRITICAL` si el agent no consigue conectarse al endpoint de métricas de Prometheus, en caso contrario, devuelve `OK`.
+
+_Estados: ok, critical_
+
+**gatekeeper.health**
+
+Devuelve `CRITICAL` si el agent no consigue conectar con el endpoint de estado del gatekeeper, `OK` si devuelve 200, `WARNING` en caso contrario.
+
+_Estados: ok, warning, critical_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
-
-
-[1]: https://github.com/open-policy-agent/gatekeeper
-[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gatekeeper/images/gatekeeper_dashboard.png
-[3]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[4]: https://docs.datadoghq.com/es/developers/integrations/python/
-[5]: https://docs.datadoghq.com/es/agent/kubernetes/daemonset_setup/?tab=k8sfile
-[6]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/datadog_checks/gatekeeper/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/metadata.csv
-[10]: https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/assets/service_checks.json
-[11]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).
