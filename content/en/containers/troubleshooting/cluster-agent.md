@@ -126,7 +126,10 @@ The Datadog Operator may fail its health checks in some deployments. If this hap
 }
 ```
 
-When this occurs, increasing the `maximumGoroutines` setting in the Operator’s `values.yaml` file can resolve the issue. In this example, `maximumGoroutines: 600` would solve the issue. 
+To resolve this, increase the `maximumGoroutines` setting in the Operator's `datadog-values.yaml` file to a value above the reported goroutine count:
+```yaml
+maximumGoroutines: 600
+```
 
 ## Node Agent
 
