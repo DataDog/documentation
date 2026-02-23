@@ -86,7 +86,7 @@ To get started with On-Call, [onboard an On-Call Team][1] and ensure that all Te
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/incident_response/on-call/teams">}}<u>Onboard a Team</u>: Create a new On-Call Team, add an existing Datadog Team to On-Call, or import a team from PagerDuty.{{< /nextlink >}}
-  {{< nextlink href="/incident_response/on-call/pages">}}<u>Pages</u>: Trigger a Page through monitors, incidents, security signals, or manually; acknowledge, reassign, resolve, or promote an active Page to a formal incident.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/pages">}}<u>Pages</u>: Trigger Pages from monitors, incidents, security signals, and other sources. Acknowledge, reassign, or resolve Pages, or promote them to incidents.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>Escalation Policies</u>: Define steps for how a Page is sent to different schedules. {{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>Schedules</u>: Define timetables for Team members' on-call rotations.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/profile_settings">}}<u>Profile Settings</u>: Configure your contact methods and notification preferences to ensure you receive timely and effective Pages.{{< /nextlink >}}
