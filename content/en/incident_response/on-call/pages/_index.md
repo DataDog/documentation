@@ -104,21 +104,22 @@ To acknowledge a Page:
 
 The Page status changes to `Acknowledged`.
 
-{{< img src="service_management/oncall/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:80%;" >}}
+{{< img src="service_management/oncall/on-call-page-side-panel.png" alt="An On-Call Page side panel showing the page status, urgency, responder, and service, with Next Steps buttons to Acknowledge, Reassign, Resolve, or Declare Incident" style="width:70%;" >}}
 
 ### Reassign a Page
 
 Reassign a Page if it was routed to the wrong person or Team, or if you need to transfer ownership to someone better positioned to respond. Reassigning keeps the full Page history intact.
 
-{{< img src="service_management/oncall/on-call-reassign-page.png" alt="The Reassign Page modal with a toggle to reassign to a Team or User, a team selection dropdown, and an optional comment field" style="width:80%;" >}}
-
 To reassign a Page:
 
 1. Click the Page to open its side panel.
-1. Under **Next Steps**, select **Reassign**.
+1. Under **Next Steps**, select **Reassign**. This opens a **Reassign Page** modal.
+
+   {{< img src="service_management/oncall/on-call-reassign-page.png" alt="The Reassign Page modal with a toggle to reassign to a Team or User, a team selection dropdown, and an optional comment field" style="width:60%;" >}}
+
 1. Select the user or Team to reassign to.
 1. Optionally, add a comment explaining the handoff.
-1. Confirm the reassignment.
+1. Click **Reassign**.
 
 The new recipient is notified immediately.
 
@@ -139,13 +140,14 @@ If the Page was triggered by a monitor, it resolves automatically when the monit
 
 If a Page requires cross-team coordination, stakeholder communication, or formal tracking, promote it to an incident. This creates an incident in [Incident Management][6] with the Page context pre-filled.
 
-{{< img src="service_management/oncall/on-call-declare-incident-demo.png" alt="The Declare Incident modal pre-filled with the Page title and summary, with fields for incident type, severity level, incident commander, and team" style="width:100%;" >}}
-
 To declare an incident:
 
 1. Click the Page to open its side panel.
 1. Under **Next Steps**, select **Declare Incident**.
 1. Review and adjust the pre-filled details as needed.
+
+   {{< img src="service_management/oncall/on-call-declare-incident-demo.png" alt="The Declare Incident modal pre-filled with the Page title and summary, with fields for incident type, severity level, incident commander, and team" style="width:100%;" >}}
+
 1. Select **Declare Incident** to confirm.
 
 For guidance on incident severity levels and responder roles, see [Incident Management][6].
@@ -154,7 +156,7 @@ For guidance on incident severity levels and responder roles, see [Incident Mana
 
 The Page timeline is an activity log that records when the Page was triggered, who was notified, and how escalation progressed. You can add your own comments to provide context for other responders.
 
-{{< img src="service_management/oncall/on-call-timeline-demo.png" alt="The Timeline section of an On-Call Page showing a comment input field and a chronological log of events including the Page trigger, notifications sent, and acknowledgment" style="width:100%;" >}}
+{{< img src="service_management/oncall/on-call-timeline-demo.png" alt="The Timeline section of an On-Call Page showing a comment input field and a chronological log of events including the Page trigger, notifications sent, and acknowledgment" style="width:60%;" >}}
 
 Use comments to:
 - Document what you've already investigated or ruled out
