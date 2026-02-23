@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Events Forwarding allows you to forward various types of security and observability data from Datadog to custom destinations such as Splunk, Elasticsearch, and HTTP endpoints. This enables security teams to centralize their workflows by routing relevant events to third-party SIEMs, data lakes, or internal tools.
+Events Forwarding sends logs, audit logs, security spans, security signals, and cloud workload security events from Datadog to custom destinations such as Splunk, Elasticsearch, and HTTP endpoints. Use Events Forwarding to route security and observability data to third-party SIEMs, data lakes, or internal tools.
 
 Events Forwarding supports the following data types:
 
@@ -35,7 +35,7 @@ Events Forwarding supports the following data types:
 
 ### Permissions
 
-Each data type requires specific permissions to create and manage forwarding rules:
+Forwarding rules require data-type-specific permissions. The following table lists the required permission for each data type.
 
 | Data Type | Permission |
 |-----------|------------|
@@ -72,7 +72,7 @@ The following destination types are available for all data types:
 - **Splunk** - Forward events using Splunk's HTTP Event Collector (HEC).
 - **Elasticsearch** - Send events to an Elasticsearch cluster with configurable index rotation.
 
-For logs, additional destinations are also supported: **Microsoft Sentinel** and **Google Chronicle**. See [Forwarding Logs to Custom Destinations][2] for setup details.
+For logs, these destinations are also supported: **Microsoft Sentinel** and **Google Chronicle**. See [Forwarding Logs to Custom Destinations][2] for setup details.
 
 ## Monitoring
 
