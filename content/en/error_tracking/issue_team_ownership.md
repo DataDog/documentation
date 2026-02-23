@@ -1,6 +1,6 @@
 ---
 title: Issue Team Ownership
-description: Automatically assign issues to teams based on Git CODEOWNERS files.
+description: Automatically assign issues to teams based on Git CODEOWNERS files or the team attribute.
 further_reading:
 - link: '/error_tracking/auto_assign/'
   tag: 'Documentation'
@@ -15,6 +15,7 @@ further_reading:
 Issue Team Ownership automates your triaging work by assigning issues to the right teams. Your team owns an issue if it is either:
 - code owner of the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
 - owner of the service where the issue happens.
+- identified by the `team` attribute set on the error event at runtime.
 
 **Note**: Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
 
@@ -68,6 +69,32 @@ In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your tea
 {{< img src="error_tracking/team-github-connection.jpg" alt="Linking GitHub teams to Datadog teams" style="width:80%;" >}}
 
 **Note**: Issue Team Ownership only supports GitHub.
+
+### Set the team attribute at runtime
+
+You can programmatically assign team ownership at the time an error is raised by setting the `team` attribute to a Datadog team handle.
+
+The value must be a string matching the handle of an existing Datadog team.
+
+**APM and Logs**
+
+Set the `team` attribute directly on the span or log:
+
+```python
+span.set_tag("team", "payments-backend")
+```
+
+```java
+span.setTag("team", "payments-backend");
+```
+
+**RUM**
+
+Set the `context.team` attribute on the RUM event:
+
+```javascript
+datadogRum.addError(error, { team: 'payments-frontend' });
+```
 
 ## Configuration
 
