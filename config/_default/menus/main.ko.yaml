@@ -2496,6 +2496,11 @@ menu:
       identifier: oncall_live_call_routing
       parent: oncall_triggering_pages
       weight: 201
+    - name: Cross-org Paging
+      url: service_management/on-call/cross_org_paging
+      identifier: oncall_cross_org_paging
+      parent: oncall_triggering_pages
+      weight: 202
     - name: Routing Rules
       url: service_management/on-call/routing_rules/
       parent: oncall

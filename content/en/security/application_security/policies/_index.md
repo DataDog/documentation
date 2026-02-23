@@ -9,7 +9,7 @@ If your service is running [an Agent with Remote Configuration enabled and a tra
 
 App and API Protection (AAP) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
-## Prerequisites 
+## Prerequisites
 
 To use protection capabilities with your service:
 
@@ -27,7 +27,7 @@ From there, all AAP-protected services block incoming requests performed by the 
 
 ## Respond to threats in real time by automating attacker blocking
 
-In addition to manually blocking attackers, you can configure automation rules to have AAP automatically block attackers that are flagged in Security Signals. 
+In addition to manually blocking attackers, you can configure automation rules to have AAP automatically block attackers that are flagged in Security Signals.
 
 To get started, navigate to **Security > App and API Protection > Protection > [Detection Rules][14]**. You can create a new rule or edit an existing rule with type _App and API Protection_. For example, you can create a rule to trigger `Critical` severity signals when Credential Stuffing attacks are detected, and automatically block the associated attackers' IP addresses for 30 minutes.
 
@@ -54,11 +54,11 @@ Because AAP is aware of an application's routes, protection can be applied granu
 
 ### How In-App WAF blocks security traces
 
-In addition to the `monitoring` and `disabled` modes offered for each of the 130+ In-App WAF rules, rules also have `blocking` mode. Each rule specifies conditions on the incoming request to define what the library considers suspicious. When a given rule pattern matches an ongoing HTTP request, the request is blocked by the library. 
+In addition to the `monitoring` and `disabled` modes offered for each of the 130+ In-App WAF rules, rules also have `blocking` mode. Each rule specifies conditions on the incoming request to define what the library considers suspicious. When a given rule pattern matches an ongoing HTTP request, the request is blocked by the library.
 
-Managed policies define the mode in which each of the In-App WAF rules behave on match: `monitoring`, `blocking`, or `disabled`. Because it has the full context of your applications, AAP knows which rules to apply to protect your applications while limiting the number of false positives. 
+Managed policies define the mode in which each of the In-App WAF rules behave on match: `monitoring`, `blocking`, or `disabled`. Because it has the full context of your applications, AAP knows which rules to apply to protect your applications while limiting the number of false positives.
 
-For fine-grained control, you can clone a Datadog managed policy or create a custom policy and set the mode to meet your needs. If you set the policy to `auto-updating`, your applications are protected by the latest detections rolled out by Datadog. You also have the option to pin a policy to a specific version of the ruleset. 
+For fine-grained control, you can clone a Datadog managed policy or create a custom policy and set the mode to meet your needs. If you set the policy to `auto-updating`, your applications are protected by the latest detections rolled out by Datadog. You also have the option to pin a policy to a specific version of the ruleset.
 
 As In-App WAF rules are toggled between modes, the changes are reflected in near real-time for services with [Remote Configuration enabled][2]. For other services, you can update the policy on the [In-App WAF page][9] and then [define In-App WAF rules][10] for the change in behavior to be applied.
 
@@ -70,7 +70,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 ### Configure In-App WAF
 
-1. [**Enable Remote Configuration**][2] so that your AAP-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
+1. [**Enable Remote Configuration**][2] so that your AAP-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure.
 
 2. **Associate your AAP/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > App and API Protection > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
@@ -88,7 +88,7 @@ The default HTTP response status code while serving the deny page to attackers i
 
 You can optionally mask the fact that the attacker has been detected and blocked by overriding the response code to be `200 OK` or `404 NOT FOUND` when the deny page is served.
 
-You can also optionally redirect attackers to a custom deny page and away from your critical services and infrastructure. Specify a redirect URL and the type of redirect, for example permanent (`301` response code) or temporary (`302` response code). 
+You can also optionally redirect attackers to a custom deny page and away from your critical services and infrastructure. Specify a redirect URL and the type of redirect, for example permanent (`301` response code) or temporary (`302` response code).
 
 ### Disable protection across all services (Disabling protection mode)
 
@@ -100,7 +100,7 @@ As important as it is for you to be able to apply protection granularly and redu
 [2]: /tracing/guide/remote_config
 [3]: /agent/versions/upgrade_between_agent_minor_versions
 [4]: /security/application_security/how-it-works/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
-[5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal
+[5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&view=signal
 [6]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [7]: https://app.datadoghq.com/security/appsec/denylist
 [8]: https://app.datadoghq.com/security/appsec/passlist

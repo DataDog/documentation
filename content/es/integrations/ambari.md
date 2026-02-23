@@ -1,91 +1,41 @@
 ---
 app_id: ambari
-app_uuid: 081f9cd9-a86a-4cea-ae5b-b4f7e163f413
-assets:
-  dashboards:
-    Ambari base dashboard: assets/dashboards/base_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: ambari.cpu.cpu_user
-      metadata_path: metadata.csv
-      prefix: ambari.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10064
-    source_type_name: Ambari
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - recopilación de logs
-- la red
+- network
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ambari
-integration_id: ambari
-integration_title: Ambari
-integration_version: 6.1.0
-is_public: true
-manifest_version: 2.0.0
-name: ambari
-public_title: Ambari
-short_description: Obtener métricas por host o servicio para todos los clústeres gestionados
+description: Obtener métricas por host o servicio para todos los clústeres gestionados
   de Ambari
+integration_version: 6.1.0
+media: []
 supported_os:
-- linux
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Log Collection
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Obtener métricas por host o servicio para todos los clústeres gestionados
-    de Ambari
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Ambari
+- Linux
+- macOS
+title: Ambari
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Este check monitoriza [Ambari][1] a través del Datadog Agent.
+Este check monitoriza [Ambari](https://ambari.apache.org) a través del Datadog Agent.
 
 ## Configuración
 
 ### Instalación
 
-El check de Ambari está incluido en el paquete del [Datadog Agent][2], por lo que no necesitas instalar nada más en tu servidor.
+El check de Ambari se incluye en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest). No es necesaria ninguna instalación adicional en tu servidor.
 
 ### Configuración
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
-#### Host
+#### host
 
 Para configurar este check para un Agent que se ejecuta en un host:
 
 ##### Recopilación de métricas
 
-1. Edita el archivo `ambari.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent, para empezar a recopilar los datos de rendimiento de tu Ambari. Para conocer todas las opciones de configuración disponibles, consulta el [ambari.d/conf.yaml de ejemplo][1].
+1. Edita el archivo `ambari.d/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent para empezar a recopilar tus datos de rendimiento de Ambari. Ve el [ambari.d/conf.yaml de ejemplo](https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
    ```yaml
    init_config:
@@ -97,44 +47,43 @@ Para configurar este check para un Agent que se ejecuta en un host:
      - url: localhost
    ```
 
-2. [Reinicia el Agent][2].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones 6.0 o posteriores del Agent_
 
-1. La recopilación de logs está deshabilitada por defecto en el Datadog Agent. Actívala en tu archivo `datadog.yaml`:
+1. La recopilación de logs está desactivada por defecto en el Datadog Agent. Actívala en tu archivo `datadog.yaml`:
 
-    ```yaml
-    logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
-2. Edita tu `ambari.d/conf.yaml` y quita los comentarios de las líneas `logs` de la parte inferior. Actualiza `path` con la ruta correcta a tus archivos de logs de Ambari.
+1. Edita tu `ambari.d/conf.yaml` y quita los comentarios de las líneas `logs` de la parte inferior. Actualiza `path` con la ruta correcta a tus archivos de logs de Ambari.
 
-    ```yaml
-      logs:
-        - type: file
-          path: /var/log/ambari-server/ambari-alerts.log
-          source: ambari
-          service: ambari
-          log_processing_rules:
-              - type: multi_line
-                name: new_log_start_with_date
-                # 2019-04-22 15:47:00,999
-                pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-      ...
-    ```
+   ```yaml
+     logs:
+       - type: file
+         path: /var/log/ambari-server/ambari-alerts.log
+         source: ambari
+         service: ambari
+         log_processing_rules:
+             - type: multi_line
+               name: new_log_start_with_date
+               # 2019-04-22 15:47:00,999
+               pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+     ...
+   ```
 
-3. [Reinicia el Agent][2].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Contenedorizado" %}}
+
+{{% tab "Containerized" %}}
 
 #### En contenedores
 
-Para entornos en contenedores, consulta las [plantillas de integración de Autodiscovery][1] para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
+Para entornos en contenedores, consulta las [Plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/) para obtener orientación sobre la aplicación de los parámetros que se indican a continuación.
 
 ##### Recopilación de métricas
 
@@ -146,22 +95,21 @@ Para entornos en contenedores, consulta las [plantillas de integración de Autod
 
 ##### Recopilación de logs
 
-_Disponible para la versión 6.0 o posteriores del Agent_
+_Disponible para las versiones 6.0 o posteriores del Agent_
 
-La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Para habilitarla, consulta [Recopilación de logs de Kubernetes][2].
+La recopilación de logs está desactivada por defecto en el Datadog Agent. Para activarla, consulta [Recopilación de logs de Kubernetes](https://docs.datadoghq.com/agent/kubernetes/log/).
 
 | Parámetro      | Valor                                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "ambari", "service": "<SERVICE_NAME>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date","pattern":"\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}}` |
 
-[1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/log/
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][3] y busca `ambari` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `ambari` en la sección Checks.
 
 ## Datos recopilados
 
@@ -172,30 +120,64 @@ Esta integración recopila para cada host de cada clúster las siguientes métri
 - el disco
 - la memoria
 - la carga
-- la red
+- red
 - el proceso
 
 Si se habilita la recopilación de métricas de servicio con `collect_service_metrics`, esta integración recopila para cada componente de servicio incluido las métricas con encabezados en la lista de inclusión.
 
 ### Métricas
-{{< get-metrics-from-git "ambari" >}}
 
+| | |
+| --- | --- |
+| **ambari.boottime** <br>(gauge) | Tiempo de arranque del host.<br>_Se muestra en milisegundos_ |
+| **ambari.cpu.cpu_idle** <br>(gauge) | CPU inactiva del host.<br>_Se muestra en porcentaje_ |
+| **ambari.cpu.cpu_nice** <br>(gauge) | CPU activa de host.<br>_Se muestra como porcentaje_ |
+| **ambari.cpu.cpu_num** <br>(gauge) | CPU inactiva de host.|
+| **ambari.cpu.cpu_system** <br>(gauge) | CPU del sistema de host.<br>_Se muestra en porcentaje_ |
+| **ambari.cpu.cpu_user** <br>(gauge) | CPU de usuario de host.<br>_Se muestra en porcentaje_ |
+| **ambari.cpu.cpu_wio** <br>(gauge) | CPU del host en espera de E/S.<br>_Se muestra en porcentaje_ |
+| **ambari.disk.disk_free** <br>(gauge) | Espacio libre en disco.<br>_Se muestra como byte_ |
+| **ambari.disk.disk_total** <br>(gauge) | Tamaño total del disco.<br>_Se muestra como byte_ |
+| **ambari.disk.read_bytes** <br>(gauge) | Bytes de lectura.<br>_Se muestra como byte_ |
+| **ambari.disk.read_count** <br>(gauge) | Recuento de lectura.|
+| **ambari.disk.read_time** <br>(gauge) | Tiempo de lectura del disco.<br>_Se muestra en milisegundos_ |
+| **ambari.disk.write_bytes** <br>(gauge) | Bytes de escritura.<br>_Se muestra como byte_ |
+| **ambari.disk.write_count** <br>(gauge) | Recuento de escrituras.|
+| **ambari.disk.write_time** <br>(gauge) | Tiempo de escritura en disco.<br>_Se muestra en milisegundos_ |
+| **ambari.load_fifteen** <br>(gauge) | Carga quince.<br>_Se muestra como porcentaje_ |
+| **ambari.load_five** <br>(gauge) | Carga Cinco.<br>_Se muestra como porcentaje_ |
+| **ambari.load_one** <br>(gauge) | Carga uno.<br>_Se muestra como porcentaje_ |
+| **ambari.memory.mem_cached** <br>(gauge) | Memoria caché.<br>_Se muestra como byte_ |
+| **ambari.memory.mem_free** <br>(gauge) | Memoria libre.<br>_Se muestra como byte_ |
+| **ambari.memory.mem_shared** <br>(gauge) | Memoria compartida.<br>_Se muestra como byte_ |
+| **ambari.memory.mem_total** <br>(gauge) | Memoria total<br>_Se muestra como byte_ |
+| **ambari.memory.swap_free** <br>(gauge) | Intercambio libre<br>_Se muestra como byte_ |
+| **ambari.memory.swap_total** <br>(gauge) | Intercambio total<br>_Se muestra como byte_ |
+| **ambari.network.bytes_in** <br>(gauge) | Bytes de red entrantes.<br>_Se muestra como byte_ |
+| **ambari.network.bytes_out** <br>(gauge) | Bytes de red salientes.<br>_Se muestra como byte_ |
+| **ambari.network.pkts_in** <br>(gauge) | Paquetes de red entrantes.<br>_Se muestra como byte_ |
+| **ambari.network.pkts_out** <br>(gauge) | Paquetes de red salientes.<br>_Se muestra como byte_ |
+| **ambari.process.proc_run** <br>(gauge) | Ejecución de proceso.|
+| **ambari.process.proc_total** <br>(gauge) | Total de proceso.|
 
 ### Eventos
 
 Ambari no incluye ningún evento.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "ambari" >}}
 
+**ambari.can_connect**
+
+Devuelve `OK` si el clúster es accesible, `CRITICAL` en caso contrario.
+
+_Estados: ok, critical_
+
+**ambari.state**
+
+Devuelve `OK` si el servicio está instalado o en ejecución, `WARNING` si el servicio se está deteniendo o desinstalando, `CRITICAL` si el servicio está desinstalado o detenido.
+
+_Estados: ok, warning, critical_
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
-
-
-
-[1]: https://ambari.apache.org
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

@@ -10,13 +10,13 @@ further_reading:
 
 ## Overview
 
-The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces any optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
+The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces Datadog's OOTB provisioning and performance optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
 
 ## Breakdown your infrastructure by cluster, host, or device
 
-First select how you want to understand your GPU fleet using the toggle that groups your fleet by Kubernetes cluster, host (node), or GPU device:
+First select how you want to understand your GPU fleet using the toggle that groups your fleet by Kubernetes cluster (only available for Kubernetes users), Host (Node), or GPU device:
 
-{{< img src="gpu_monitoring/fleet_toggle.png" alt="Toggle for GPU fleet page that groups table results by Kubernetes Cluster, Host or Device." style="width:90%;" >}}
+{{< img src="gpu_monitoring/fleet-toggle-2.png" alt="Toggle for GPU fleet page that groups table results by Kubernetes Cluster, Host or Device." style="width:90%;" >}}
 
 Your selection is used to populate the resulting table. If you select _Cluster_ or _Host_, you can click on the **`>`** button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
 
@@ -32,14 +32,49 @@ You can also **Search** or **Group** by other tags in the fields shown below. Fo
 
 **Note**: You can only **Group by** one additional tag.
 
-{{< img src="gpu_monitoring/filters_and_groupings.png" alt="The menu for filtering and grouping in the GPU Fleet page" style="width:90%;" >}}
+{{< img src="gpu_monitoring/filters_and_groupings-2.png" alt="The menu for filtering and grouping in the GPU Fleet page" style="width:90%;" >}}
 
-Below the search and filtering fields, Datadog provides preset filters that allow you to instantly identify optimization opportunities for clusters, hosts, and devices with: 
+## Use-case driven views
+Datadog guides you through your provisioning and performance optimization workflows by providing two dedicated use-case driven views. 
 
-- CPU saturation
-- Ineffective devices (the streaming multiprocessor on the device is active less than 50% of the time)
-- Inefficient devices (only if you've enabled System Probe; this shows devices where the GPU core utilization is less than 50%)
-- Inactive devices (both the streaming multiprocessor and graphics engine are active less than 1% of the time)
+### Provisioning
+The Provisioning tab shows key recommendations and metrics insights for allocating and managing your capacity. 
+
+{{< img src="gpu_monitoring/provisioning-tab.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
+
+OOTB recommendations: 
+- Datadog proactively detects thermal throttling or hardware defects and instantly recommends remediation based on hardware errors like ECC/XID errors.
+- Datadog detects whether inactive devices should be provisioned to avoid having devices sit idle.
+
+Metrics relevant for your provisioning workflow: 
+- ECC and XID Error Count
+- Graphics Activity
+- SM Activity
+- GPU Memory
+- Allocated Devices
+- Active Devices
+- Idle Cost
+
+### Performance
+The Performance tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
+
+{{< img src="gpu_monitoring/performance-tab.png" alt="The Performance use-case driven view" style="width:90%;" >}}
+
+OOTB recommendations: 
+- If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and recommends solutions.
+- If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations for tuning workloads to get more value out of their capacity.
+
+Metrics relevant for your performance workflow: 
+- ECC and XID Error Count
+- Graphics Activity
+- SM Activity
+- GPU Memory
+- Effective Devices
+- Power
+- Temperature
+- PCIe RX
+- PCIe Tx
+- CPU Utilization
 
 ## Summary Graph
 
@@ -48,7 +83,7 @@ After toggling Cluster, Host, or Device, the **Summary Graph** displays key reso
 {{% collapse-content title="See the full list of GPU metrics" level="h4" expanded=false id="gpu-metrics-table" %}}
 | Metric                | Definition                                                              | Metric Name                                    |
 | ----------------------| ------------------------------------------------------------------------| --------------------------------------------- |
-| Core Utilization      | (Only available with System Probe enabled) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization.| `gpu_core_utilization`  
+| Core Utilization      | (Only available with System Probe enabled for advanced eBPF metrics) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization.| `gpu_core_utilization`  
 | Memory Utilization    | GPU Memory used / GPU Memory limit for GPU processes. | `gpu_memory_utilization`
 | PCIe Throughput       | Bytes received and bytes transmitted through PCI from the GPU device per second. | `gpu.pci.throughput.rx`,`gpu.pci.throughput.tx` 
 | Graphics Activity     | Percentage of time that the graphics engine was active. | `gpu.gr_engine_active`

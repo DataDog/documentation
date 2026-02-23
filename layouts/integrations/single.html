@@ -24,7 +24,7 @@
     {{/* "We don't want to do this on integration guides/faqs for now" */}}
     {{- if and ($further_reading) (eq .Params.custom_kind "integration") -}}
 
-    <h2>Further Reading</h2>
+    <h2 id="{{ anchorize "further-reading" }}">Further Reading</h2>
         {{- partial "whats-next/whats-next.html" . -}}
     {{- end -}}
 

@@ -5,6 +5,11 @@ aliases:
   - /security/application_security/getting_started/java
   - /security/application_security/threats/setup/threat_detection/java
   - /security/application_security/threats_detection/java
+  - /security/application_security/setup/threat_detection/java
+  - /security/application_security/setup/standalone/java
+  - /security/application_security/enabling/tracing_libraries/threat_detection/java
+  - /security/application_security/enabling/java
+  - /security/application_security/threats/setup/standalone/java
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -32,7 +37,7 @@ further_reading:
   {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Container Platforms
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
@@ -41,7 +46,17 @@ further_reading:
 ### AWS
 {{< appsec-integrations >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
-{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/setup/aws/lambda/" >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/java" >}}
+{{< /appsec-integrations >}}
+
+### Google Cloud Platform
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/java" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+{{< appsec-integrations >}}
+{{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="../azure/app-service/?tab=java" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources

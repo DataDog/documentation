@@ -159,6 +159,6 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /service_management/workflows/
-[15]: /service_management/case_management/
+[15]: /incident_response/case_management/
 [16]: /account_management/teams/
 [17]: https://app.datadoghq.com/monitors/manage

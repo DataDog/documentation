@@ -13,12 +13,12 @@ Operations Monitoring is in Preview.
 
 ## Overview
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-1-temp.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
-In Datadog RUM, a feature represents a major user-facing area of your application like checkout, login, or search. Each feature includes operations, which are the critical technical steps that make the experience work. 
+In Datadog RUM, a feature represents a major user-facing area of your application like checkout, login, or search. Each feature includes operations, which are the critical technical steps that make the experience work.
 
 - Business teams use **features** to track and improve user conversion.
-- Engineering teams use **operations** to monitor and minimize technical failures that impact key user moments. 
+- Engineering teams use **operations** to monitor and minimize technical failures that impact key user moments.
 
 For example, the checkout experience of an e-commerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After the SDK has been instrumented, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
 
@@ -39,6 +39,7 @@ The following table shows additional example features and their associated featu
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
   - [Kotlin Multiplatform (1.4.0)][4]
+  - [React Native (3.0.0)][5]
 
 ## Setup
 
@@ -58,7 +59,7 @@ enableExperimentalFeatures: ["feature_operation_vital"], // you need to have thi
 })
 
 startFeatureOperation: (
-name: string, 
+name: string,
 options?: {
  operationKey?: string,
  context?: Context,
@@ -89,7 +90,20 @@ RUMMonitor.shared().startFeatureOperation(
 )
 ```
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+```javascript
+DdRum.startFeatureOperation(
+	name: string,
+	operationKey?: string,
+	attributes?: Record<string, any>
+)
+
+```
+{{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
 
 ### Stop an operation with success
 
@@ -105,7 +119,7 @@ enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to b
 })
 
 succeedFeatureOperation: (
-name: string, 
+name: string,
 options?: {
  operationKey?: string,
  context?: Context,
@@ -138,7 +152,21 @@ RUMMonitor.shared().succeedFeatureOperation(
 ```
 
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+```javascript
+DdRum.succeedFeatureOperation(
+	name: string,
+	operationKey?: string,
+	attributes?: Record<string, any>
+)
+```
+
+{{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-warning">The <code>operationKey</code> must be the same in the start and end Operation event.</div>
 
 ### Stop an operation with failure
 
@@ -155,7 +183,7 @@ enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to b
 
 GlobalRumMonitor.get().failFeatureOperation: (
 name: string, 
-failureReason: FailureReason, //'error' | 'abandoned' | 'timeout'| 'other'
+failureReason: FailureReason, //'error' | 'abandoned' | 'other'
 options?: {
  operationKey?: string,
  context?: Context,
@@ -171,7 +199,7 @@ options?: {
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-	reason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
+	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, .other
 	attributes: Map<String, Any?>
 )
 ```
@@ -184,11 +212,25 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+```javascript
+DdRum.failFeatureOperation(
+	name: string,
+	operationKey?: string,
+	reason: FeatureOperationFailure, // 'ERROR' | 'ABANDONED' | 'OTHER'
+	attributes: Record<string, any>
+)
+
+```
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Parallelization
@@ -198,7 +240,7 @@ You may have cases where users are starting several feature operations in parall
 
 ## Monitor your availability on Datadog
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
 After you've configured the SDK APIs, you can monitor your operations by navigating to **RUM > Performance Monitoring > Operations**.
 
@@ -213,7 +255,7 @@ Both metrics are retained for 15 months, and include several dimensions:
 
 - `operation.name`, which is defined on the client side
 - `operation.status`, which is either a success or failure
-- `operation.failure_reason`, which can be an error, or abandoned, or timeout, or other
+- `operation.failure_reason`, which can be an error, or abandoned, or other
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
 
@@ -240,4 +282,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [2]: https://github.com/DataDog/dd-sdk-android/releases/tag/3.1.0
 [3]: https://github.com/DataDog/dd-sdk-ios/releases/tag/3.1.0
 [4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/releases/tag/1.4.0
-[5]: /real_user_monitoring/rum_without_limits/
+[5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0

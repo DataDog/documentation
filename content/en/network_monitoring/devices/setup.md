@@ -66,7 +66,10 @@ To begin monitoring your network devices, enable SNMP monitoring using one of th
 : Configure SNMP monitoring using Autodiscovery.
 
 [Ping][5]
-: Additionally, SNMP supports enabling ping on your devices.
+: Configure the SNMP check to send ICMP pings to your devices.
+
+[Syslog][22]
+: Configure your devices to send Syslog messages.
 
 [VPN Monitoring][21]
 : Configure VPN monitoring to start monitoring your devices' VPN tunnels.
@@ -148,3 +151,4 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [19]: /network_monitoring/devices/troubleshooting
 [20]: /integrations/guide/high_availability
 [21]: /network_monitoring/devices/vpn_monitoring
+[22]: /network_monitoring/devices/syslog

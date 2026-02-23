@@ -4,88 +4,121 @@
   "attributes": {
     "frontmatter": {
       "title": {
-        "ast-str-b62f1162-1bff-4465-a001-a5e6a114c8c7": {
-          "string": "モバイルセッションリプレイのプライバシーオプション"
+        "itemTranslationData": {
+          "5616dd60a56d7707ff962e87b9fa067f": {
+            "string": "モバイルセッションリプレイのプライバシーオプション"
+          }
         }
       },
       "description": {
-        "ast-str-1075f136-3c58-4b63-9ab3-e7e9d7c33f4f": {
-          "string": "モバイルセッションリプレイのプライバシーオプションの構成"
+        "itemTranslationData": {
+          "9a8116f7e8910bb98e4fc9efbabdc973": {
+            "string": "モバイルセッションリプレイのプライバシーオプションの構成"
+          }
         }
       },
       "further_reading": {
-        "translationListData": {
+        "listTranslationData": {
           "0": {
             "link": "/real_user_monitoring/session_replay/mobile",
             "text": {
-              "ast-str-554c7c0f-2ec8-4333-92d7-98380b943dfd": {
-                "string": "Mobile Session Replay"
+              "itemTranslationData": {
+                "fb162115e8af8f878d9e5707abe12e1e": {
+                  "string": "Mobile Session Replay"
+                }
               }
             },
             "tag": {
-              "ast-str-b68dc5d4-e923-4037-b1bb-9235db0dcf67": {
-                "string": "ドキュメント"
+              "itemTranslationData": {
+                "338fba5fc2188734d593c57bde09df32": {
+                  "string": "ドキュメント"
+                }
               }
             }
           },
           "1": {
             "link": "/real_user_monitoring/session_replay/mobile/app_performance",
             "text": {
-              "ast-str-0ca51e64-ea05-4c21-8c45-d06646c6346f": {
-                "string": "モバイルセッションリプレイがアプリのパフォーマンスに与える影響"
+              "itemTranslationData": {
+                "3bad2c19ca0a83a38ff776b95e1f8a4b": {
+                  "string": "モバイルセッションリプレイがアプリのパフォーマンスに与える影響"
+                }
               }
             },
             "tag": {
-              "ast-str-7d320255-ecda-4fd0-aee6-723b15f023ea": {
-                "string": "ドキュメント"
+              "itemTranslationData": {
+                "338fba5fc2188734d593c57bde09df32": {
+                  "string": "ドキュメント"
+                }
               }
             }
           },
           "2": {
             "link": "/real_user_monitoring/session_replay/mobile/setup_and_configuration",
             "text": {
-              "ast-str-a09b4acf-a362-42ce-9eab-b0dc82050248": {
-                "string": "モバイルセッションリプレイの設定と構成"
+              "itemTranslationData": {
+                "691d661ed1349ca1ba794d2bad6739f0": {
+                  "string": "モバイルセッションリプレイの設定と構成"
+                }
               }
             },
             "tag": {
-              "ast-str-9a557a23-7752-4cce-9f1d-a6f9ac923741": {
-                "string": "ドキュメント"
+              "itemTranslationData": {
+                "338fba5fc2188734d593c57bde09df32": {
+                  "string": "ドキュメント"
+                }
               }
             }
           },
           "3": {
             "link": "/real_user_monitoring/session_replay/mobile/troubleshooting",
             "text": {
-              "ast-str-bb966d34-8c5f-4826-905c-c6d71db4d2f7": {
-                "string": "モバイルセッションリプレイのトラブルシューティング"
+              "itemTranslationData": {
+                "bf16cd1a410957692c82abe14fad0152": {
+                  "string": "モバイルセッションリプレイのトラブルシューティング"
+                }
               }
             },
             "tag": {
-              "ast-str-7bd87fc2-1907-41bc-945b-146121ac07f3": {
-                "string": "ドキュメント"
+              "itemTranslationData": {
+                "338fba5fc2188734d593c57bde09df32": {
+                  "string": "ドキュメント"
+                }
               }
             }
           },
           "4": {
             "link": "/real_user_monitoring/session_replay",
             "text": {
-              "ast-str-d0da3c02-16da-4d40-91e4-f08cbea2faa5": {
-                "string": "Session Replay"
+              "itemTranslationData": {
+                "6336fd746bcc46c6aa4d199a6266c29e": {
+                  "string": "Session Replay"
+                }
               }
             },
             "tag": {
-              "ast-str-b8ce4c09-28a9-4b98-a446-b15620b73544": {
-                "string": "ドキュメント"
+              "itemTranslationData": {
+                "338fba5fc2188734d593c57bde09df32": {
+                  "string": "ドキュメント"
+                }
               }
             }
+          }
+        }
+      },
+      "content_filters": {
+        "listTranslationData": {
+          "0": {
+            "label": "SDK",
+            "trait_id": "platform",
+            "option_group_id": "rum_sdk_platform_options_v2"
           }
         }
       }
     }
   },
   "children": {
-    "translationListData": {
+    "listTranslationData": {
       "0": {
         "$$mdtype": "Node",
         "inline": false,
@@ -93,12 +126,12 @@
           "file": "real_user_monitoring/session_replay/mobile/privacy_options.mdoc.md"
         },
         "children": {
-          "translationListData": {}
+          "listTranslationData": {}
         },
         "type": "tag",
         "tag": "partial",
         "annotations": {
-          "translationListData": {
+          "listTranslationData": {
             "0": {
               "type": "attribute",
               "name": "file",
@@ -113,7 +146,7 @@
   },
   "type": "document",
   "annotations": {
-    "translationListData": {}
+    "listTranslationData": {}
   },
   "slots": {}
 }

@@ -1,12 +1,11 @@
 ---
 title: Configuration at Runtime
+site_support_id: configuration_at_runtime
 further_reading:
 - link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
-
-<div class="alert alert-info">This feature is in Preview.</div>
 
 ## Overview
 

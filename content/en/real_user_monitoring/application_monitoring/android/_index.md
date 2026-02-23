@@ -18,7 +18,7 @@ further_reading:
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
 
-The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV. It works for Android apps written using Java or Kotlin.
+The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV. It works for Android apps written using Java or Kotlin.
 
 ## Start monitoring Android applications
 
@@ -27,6 +27,7 @@ To get started with RUM for Android, create an application and configure the And
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/setup">}}<u>Setup</u>: Learn how to set up the Android SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/error_tracking">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/android/application_launch_monitoring">}}<u>Application Launch Monitoring</u>: Measure Android mobile application launch performance, including the time to initial display and time to full display.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/monitoring_app_performance">}}<u>Monitoring App Performance</u>: Monitor view timings to understand your app's performance from a user's perspective. {{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/mobile_vitals">}}<u>Data Collected</u>: Review data that the Android SDK collects.{{< /nextlink >}}

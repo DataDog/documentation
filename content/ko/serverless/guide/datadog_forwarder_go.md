@@ -24,7 +24,7 @@ Datadog 서버리스를 처음 사용하신다면 <a href="/serverless/installat
 다음 명령을 실행해 [Datadog Lamda 라이브러리][3]를 로컬에 설치합니다:
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### 계측
@@ -39,7 +39,7 @@ go get github.com/DataDog/datadog-lambda-go
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
+      ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
       "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
       httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
@@ -64,7 +64,7 @@ go get github.com/DataDog/datadog-lambda-go
       // Trace an HTTP request
       req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
       client := http.Client{}
-      client = *httptrace.WrapClient(&client)
+      client = httptrace.WrapClient(&client)
       client.Do(req)
 
       // Connect your Lambda logs and traces

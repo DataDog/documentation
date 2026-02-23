@@ -139,16 +139,16 @@ Cuando se activa esta función, los usuarios con el permiso `Modify Index` puede
 Los usuarios con el permiso `Org Management` pueden configurar una duración máxima de sesión para tu organización. La duración se aplica a todas las nuevas sesiones web creadas después de cambiarla, para todos los usuarios, independientemente de su rol en la organización. No se aplica a sesiones de aplicaciones móviles de Datadog.
 
 La duración de la sesión puede configurarse dentro de los siguientes límites:
-{{% site-region region="gov" %}}
 - **Duración mínima:** 1 hora
-- **Duración máxima:** 12 horas
-{{% /site-region %}}
-{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
-- **Duración mínima:** 1 hora
-- **Duración máxima:** 720 horas (30 días)
-{{% /site-region %}}
+- **Duración máxima:** {{< region-param key=org_management_max_session_duration >}}
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Configuración de una duración máxima de sesión" style="width:70%;" >}}
+
+#### Configuración de la duración de la sesión de tiempo de inactividad
+
+Los usuarios con el permiso `Org Management` pueden activar o desactivar el tiempo de espera de inactividad de sesión de tu organización. Cuando se activa, la sesión de los usuarios se cierra automáticamente después de 30 minutos de inactividad. La configuración se aplica a todas las sesiones web nuevas creadas después de cambiarla y para todos los usuarios, independientemente de sus roles en la organización. No se aplica a las sesiones de aplicaciones móviles de Datadog.
+
+{{< img src="account_management/org_settings/idle_session_timeout.png" alt="Configuración del tiempo de inactividad de la sesión inactiva" style="width:70%;" >}}
 
 ## Referencias adicionales
 
@@ -165,7 +165,7 @@ La duración de la sesión puede configurarse dentro de los siguientes límites:
 [9]: /es/account_management/rbac/
 [10]: /es/remote_configuration#how-it-works
 [11]: /es/account_management/api-app-keys/#client-tokens
-[12]: /es/service_management/events/guides/email/
+[12]: /es/events/guides/email/
 [13]: /es/synthetics/settings/?tab=specifyvalue#overview
 [14]: /es/account_management/safety_center
 [15]: /es/account_management/org_settings/oauth_apps

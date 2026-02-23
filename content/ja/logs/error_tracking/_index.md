@@ -23,7 +23,7 @@ title: ログのエラー追跡
 
 {{% error-tracking-description %}}
 
-Error Tracking の主な機能は、[Error Tracking Explorer][3] のドキュメントで確認することができます。Datadog でログ用の Error Tracking Explorer を表示するには、[**Logs** > **Error Tracking**][1] に移動します。
+Error Tracking の主な機能は、[Error Tracking Explorer][3] のドキュメントで確認することができます。Datadog でログ用の Error Tracking Explorer を表示するには、[**Error Tracking**][1] に移動します。
 
 ## セットアップ
 
@@ -38,6 +38,6 @@ Error Tracking の主な機能は、[Error Tracking Explorer][3] のドキュメ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs/error-tracking
+[1]: https://app.datadoghq.com/error-tracking
 [2]: /ja/logs/log_collection
 [3]: /ja/error_tracking/explorer

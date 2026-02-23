@@ -6,6 +6,9 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/python
   - /security/application_security/threats_detection/python
   - /security/application_security/setup/aws/fargate/python
+  - /security/application_security/setup/threat_detection/python
+  - /security/application_security/setup/standalone/python
+  - /security/application_security/enabling/python
 further_reading:
 - link: "/security/application_security/how-it-works/add-user-info/?tab=python"
   tag: "Documentation"
@@ -33,7 +36,7 @@ further_reading:
   {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Container Platforms
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
@@ -42,7 +45,17 @@ further_reading:
 ### AWS
 {{< appsec-integrations >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
-{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="/security/application_security/setup/aws/lambda/" >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/python" >}}
+{{< /appsec-integrations >}}
+
+### Google Cloud Platform
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/python" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+{{< appsec-integrations >}}
+{{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="../azure/app-service/?tab=nodenetphppython" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources

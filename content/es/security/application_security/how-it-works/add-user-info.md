@@ -2,6 +2,7 @@
 aliases:
 - /es/security_platform/application_security/add-user-info
 - /es/security/application_security/add-user-info
+- /es/security/application_security/threats/add-user-info/
 title: Monitorización y protección de usuarios
 ---
 
@@ -270,7 +271,7 @@ Para más información y opciones, consulta [la documentación del rastreador de
 
 {{< programming-lang lang="python" >}}
 
-A partir de dd-trace-py v3.7, puedes utilizar el nuevo SDK del rastreador Python para realizar un seguimiento de los usuarios y los eventos de usuario.
+A partir de dd-trace-py v3.7, puedes utilizar el nuevo SDK del rastreador Python para rastrear usuarios y eventos de usuario.
 
 En versiones anteriores, puedes monitorizar solicitudes autenticadas añadiendo información del usuario a la traza con la función `set_user` proporcionada por el paquete del rastreador Python.
 

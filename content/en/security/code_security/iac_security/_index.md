@@ -15,6 +15,12 @@ further_reading:
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
+  - link: "/pr_gates/"
+    tag: "Documentation"
+    text: "PR Gates"
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
 ---
 
 Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform and Kubernetes configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. Supported file types include standalone Terraform files, local modules, and Kubernetes manifests.
@@ -30,6 +36,12 @@ IaC Security integrates with your repositories to continuously scan for misconfi
 ### Review and fix violations in pull requests
 
 When a pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [Pull Request Comments][5].
+
+### Automatically block risky changes with PR Gates
+
+Use [PR Gates][11] to enforce security standards on infrastructure-as-code changes before they're merged. Datadog scans the IaC changes in each pull request, identifies any vulnerabilities above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
+
+By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][12].
 
 ### View and filter findings
 
@@ -86,3 +98,5 @@ Exclusions are managed through a configuration file or inline comments in your I
 [8]: /security/automation_pipelines/mute
 [9]: https://app.datadoghq.com/integrations/github/
 [10]: /security/automation_pipelines/
+[11]: /pr_gates/
+[12]: /pr_gates/setup

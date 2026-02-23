@@ -43,9 +43,9 @@ You can edit, clone, or delete your saved actions from the Action Catalog.
 
 To find a saved action:
 1. In Datadog, navigate to the [**Action Catalog**][2].
-1. Click **Saved Actions**. 
+1. Click **Saved Actions**.
 1. Browse through the list of saved actions or use the search bar to search for actions by name. Hover over the saved action you'd like to edit, clone, or delete.
-1. Click **Manage Saved Actions**. 
+1. Click **Manage Saved Actions**.
 1. Select the icon to edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}}, clone {{< img src="icons/clone.png" inline="true" style="width:14px;">}}, or delete {{< img src="icons/delete.png" inline="true" style="width:14px;">}} the saved action.
 
 ## Further Reading
@@ -56,4 +56,4 @@ To find a saved action:
 
 [1]: https://app.datadoghq.com/app-builder/apps/list
 [2]: https://app.datadoghq.com/actions/action-catalog
-[3]: https://datadoghq.slack.com/
+[3]: https://chat.datadoghq.com/

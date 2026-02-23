@@ -32,12 +32,42 @@ Usa esta guía a fin de configurar de manera manual la [integración de Azure co
 
 ## Configuración
 
+{{% collapse-content title="Permisos necesarios para la configuración de la integración" level="h4" expanded=false id="required-permissions" %}}
+
+#### En Azure
+
+Tu usuario de Microsoft Entra ID necesita los siguientes permisos:
+
+##### Permiso para crear un registro de aplicación
+
+**Una** de las siguientes condiciones debe ser cierta para el usuario:
+
+- `Users can register applications` se ha fijado en `Yes`
+- El usuario tiene el rol de [desarrollador de aplicaciones][17]
+
+##### Roles administrativos en tus suscripciones
+
+Dentro de las suscripciones que deseas monitorizar, debes tener:
+
+- El rol de **Propietario**
+- Tanto los roles **Contributor** como **User Access Admin**.
+
+##### Permiso para añadir y conceder consentimiento para permisos de Graph API
+
+El [rol de administrador privilegiado][15] contiene los permisos necesarios.
+
+#### En Datadog
+
+El `Datadog Admin Role`, o cualquier otro rol con el permiso `azure_configurations_manage`.
+
+{{% /collapse-content %}} 
+
 ### Integración a través de la CLI de Azure
 
 Para integrar Datadog con Azure mediante la CLI de Azure, Datadog recomienda usar [Azure Cloud Shell][7].
 
 {{< tabs >}}
-{{% tab "CLI de Azure" %}}
+{{% tab "Azure CLI" %}}
 
 En primer lugar, inicia sesión en la cuenta de Azure que quieres integrar con Datadog:
 
@@ -90,7 +120,7 @@ az account management-group entities list --query "[?inheritedPermissions!='noac
 - Une los IDs y crea la entidad de servicio. Puedes ejecutar este comando para crear un usuario y asignar roles a cada grupo de gestión o suscripción.
 
 [1]: https://app.datadoghq.com/integrations/azure
-[2]: https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest
+[2]: https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest
 {{% /tab %}}
 {{% tab "CLI de Azure clásica" %}}
 
@@ -151,7 +181,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
    **Nota**: La selección de región, suscripción y grupo de recursos solo define dónde se despliega esta plantilla. No tiene ningún efecto en las suscripciones que monitoriza Datadog.
 
-5. Haz clic en **Next** (Siguiente).
+5. Haz clic en **Siguiente**.
 
 6. Selecciona la opción _Create new_ (Crear nuevo) en **Service principal type** (Tipo de entidad de servicio). 
 7. Haz clic en el enlace **Change selection** (Cambiar selección) en **Service principal** (Entidad de servicio).
@@ -171,65 +201,64 @@ Aparece un formulario para crear un registro de aplicaciones nuevo:
 
     **Nota**: Si has elegido monitorizar suscripciones individuales en lugar de un grupo de gestión, selecciona las suscripciones a monitorizar en el menú desplegable **Subscriptions to monitor** (Suscripciones a monitorizar).
 
-13. Selecciona tu sitio de Datadog, así como cualquier otra opción de configuración de la integración, como filtros de host y si quieres recopilar recursos para [Cloud Security Management][17].
+13. Selecciona tu sitio de Datadog, así como cualquier otra opción de configuración de la integración, como filtros de host y si deseas recopilar recursos para [Cloud Security][17].
 
 14. Haz clic en **Review + create** (Revisar + crear) y, a continuación, en **Create** (Crear).
 
-15. Una vez que se complete el despliegue, haz clic en **Done** (Listo) en la página de la integración de Azure en Datadog para actualizar la lista y revisar el registro de aplicaciones recientemente añadido.
+15. Una vez finalizado el despliegue, haz clic en **Done** (Hecho) en la página de integración de Azure en Datadog para actualizar la lista y revisar el registro de la aplicación recién añadida.
 
 [17]: /es/security/cloud_security_management/
 {{% /tab %}}
 {{% tab "Manual" %}}
 
-1. [Crea un registro de aplicaciones](#creating-the-app-registration) en tu Active Directory y pasa las credenciales correctas a Datadog.
-2. [Otorga a la aplicación acceso de lectura](#giving-read-permissions-to-the-application) a cualquier suscripción que quieras monitorizar.
+1. [Crea un registro de aplicación](#create-an-app-registration) en tu Active Directory.
+2. [Otorga a la aplicación acceso de lectura](#give-read-permissions-to-the-application) a las suscripciones que desees monitorizar.
+3. [Configura las credenciales de la aplicación](#complete-the-integration) en Datadog.
 
-#### Crear el registro de aplicaciones
+#### Crear un registro de aplicación
 
-1. En **Azure Active Directory**, dirígete a **App Registrations** (Registros de apliaciones) y haz clic en **New registration** (Registro nuevo).
-2. Ingresa lo siguiente y haz clic en el botón **Create** (Crear). El nombre y la URL de inicio de sesión no se usan, pero son necesarios para el proceso de configuración.
+1. En **Microsoft Entra ID**, ve a **App registrations** (Registros de aplicaciones).
+2. Haz clic en **New registration** (Nuevo registro).
+3. Proporciona un nombre y confirma que los **Supported account types** (Tipos de cuenta admitidos) están configuradod en `Accounts in this organizational directory only`.
+4. Haz clic en **Register** (Registrar).
 
-    - Nombre: `Datadog Auth`
-    - Tipos de cuentas admitidos: `Accounts in this organizational directory only (Datadog)` (Solo cuentas en este directorio organizacional [Datadog])
-    - URI de redireccionamiento: {{< region-param key="dd_full_site" code="true" >}}
+{{< img src="integrations/guide/azure_manual_setup/azure_app_registration.png" alt="La pantalla en el portal de Azure para el registro de una aplicación" popup="true" style="width:80%;" >}}
 
-{{< img src="integrations/guide/azure_manual_setup/Azure_create_ad.png" alt="Creación de aplicaciones en Azure" popup="true" style="width:80%;" >}}
+#### Dar permisos de lectura a la aplicación
 
-#### Otorgar permisos de lectura a la aplicación
+1. Asigna el acceso a nivel de suscripción individual o de grupo de gestión. 
+   - Para asignar el acceso a nivel de suscripción, ve a **Subscriptions** (Suscripciones) a través del cuadro de búsqueda o de la barra lateral izquierda.
+   - Para asignar el acceso a nivel de grupo de gestión, ve a **Management Groups** (Grupos de gestión) y selecciona el grupo de gestión que contiene el conjunto de suscripciones a monitorizar.<br />
+   **Nota**: La asignación de acceso a nivel de grupo de gestión significa que cualquier nueva suscripción que se añada al grupo será detectada y supervisada automáticamente por Datadog.
 
-1. Para asignar acceso a nivel de suscripción individual, dirígete a **Subscriptions** (Suscripciones) a través del cuadro de búsqueda o la barra lateral izquierda.
-
-{{< img src="integrations/guide/azure_manual_setup/subscriptions_icon.png" alt="Icono de suscripciones" popup="true" style="width:25%">}}
-
-Para asignar acceso a nivel de grupo de gestión, dirígete a **Management Groups** (Grupos de gestión) y selecciona el grupo de gestión que contiene el conjunto de suscripciones que quieres monitorizar.
-**Nota**: Asignar acceso a nivel de grupo de gestión significa que Datadog detectará y monitorizará de manera automática cualquier suscripción nueva que se añada al grupo.
-
-{{< img src="integrations/guide/azure_manual_setup/azure_management_groups_icon.png" alt="Icono de grupos de gestión" popup="true" style="width:25%">}}
-
-A fin de configurar la monitorización para todo el inquilino, asigna acceso al **Tenant Root Group** (Grupo raíz de inquilinos).
-
-2. Haz clic en la suscripción que quieras monitorizar.
-3. Selecciona **Access control (IAM)** (Control de acceso [IAM]) en el menú de suscripción y haz clic en **Add** > **Add role assignment** (Añadir > Añadir asignación de rol):
+2. Haz clic en la suscripción o grupo de gestión que desees monitorizar.
+3. Selecciona **Access control (IAM)** (Control de acceso (IAM)) en el menú de suscripción y haz clic en **Add role assignment** (Añadir asignación de roles):
 
     {{< img src="integrations/guide/azure_manual_setup/azure-add-role.png" alt="Añadir asignación de rol" popup="true" style="width:80%">}}
 
-4. En **Role** (Rol), selecciona **Monitoring Reader** (Lector de monitorización). En **Select** (Seleccionar), elige el nombre de la aplicación que acabas de crear:
+4. En la pestaña **Role** (Rol), selecciona **Reader** (Lector). 
+5. En la pestaña **Members** (Miembros), haz clic en **Select members** (Seleccionar miembros).
+6. Introduce la aplicación creada en la sección [crear un registro de aplicación](#create-an-app-registration).
+7. Haz clic en **Review + assign** (Revisar + asignar) para completar la creación.
+8. Repite este proceso para las suscripciones o grupos de gestión adicionales que desees monitorizar con Datadog.
 
-5. Haz clic en **Save** (Guardar).
-6. Repite este proceso para cualquier suscripción adicional que quieras monitorizar con Datadog.
-**Nota**: Los usuarios de Azure Lighthouse pueden añadir suscripciones desde inquilinos de clientes.
-
-**Nota**: Se deben habilitar los diagnósticos para que las máquinas virtuales (VMs) desplegadas en ARM recopilen métricas; consulta [Habilitar diagnósticos][11].
+**Notas**: 
+   - Los usuarios de Azure Lighthouse pueden añadir suscripciones de arrendatarios de clientes.
+   - Los diagnósticos deben estar habilitados para que las máquinas virtuales desplegadas en ARM recopilen métricas, consulta [Habilitar diagnósticos][11].
 
 #### Completar la integración
 
-1. En **App Registrations** (Registros de aplicaciones), selecciona la aplicación que creaste, copia el **Application ID** (ID de aplicación) y el **Tenant ID** (ID de inquilino), y pega los valores en el [cuadro de integración de Azure con Datadog][10] en **Client ID** (ID de cliente) y **Tenant ID** (ID de inquilino).
+1. En **App Registrations** (Registros de aplicaciones), selecciona la aplicación que creaste, copia el **Application (client) ID** (ID de aplicación (cliente)) y el **Directory (tenant) ID** (ID de directorio (inquilino)), y pega los valores en el [cuadro de integración de Azure con Datadog][10] en **Client ID** (ID de cliente) y **Tenant ID** (ID de inquilino).
 2. Para la misma aplicación, dirígete a **Manage** > **Certificates and secrets** (Gestionar > Certificados y secretos).
-3. Añade un **Client Secret** (Secreto de cliente) nuevo llamado `datadogClientSecret`, selecciona un período de tiempo para **Expires** (Expira) y haz clic en **Add** (Añadir):
+3. Haz clic en **+ New client secret**: (+ Nuevo secreto de cliente):
+   1. Opcionalmente, proporciona una descripción.
+   2. Selecciona un plazo de expiración en el campo **Expires** (Expiración).
+   3. Haz clic en **Add** (Añadir).
 
-    {{< img src="integrations/guide/azure_manual_setup/Azure_client_secret.png" alt="Secreto de cliente de Azure" popup="true" style="width:80%">}}
+    {{< img src="integrations/guide/azure_manual_setup/add_client_secret.png" alt="Secreto de cliente de Azure" popup="true" style="width:80%">}}
 
-4. Cuando se muestre el valor de clave, copia y pega el valor en el [cuadro de integración de Azure con Datadog][10] en **Client Secret** (Secreto de cliente) y haz clic en **Install Integration** (Instalar integración) o **Update Configuration** (Actualizar configuración).
+4. Cuando se muestre el valor de la clave, copia y pega el valor en el [cuadro de integración de Datadog y Azure][10] en **Client Secret** (Secreto de cliente).
+5. Haz clic en **Create Configuration** (Crear configuración).
 
 **Nota**: Las actualizaciones de la configuración de Azure pueden tardar hasta 20 minutos en reflejarse en Datadog.
 
@@ -256,10 +285,10 @@ Una vez que se haya configurado la integración, Datadog comienza a ejecutar una
 
 Cuando se detectan errores críticos, la integración de Azure genera eventos en el explorador de eventos de Datadog y los vuelve a publicar cada cinco minutos. Puedes configurar un monitor de eventos para que se active cuando se detecten estos eventos y notifique al equipo correspondiente.
 
-Datadog ofrece un monitor recomendado que puedes usar como plantilla para comenzar. Para usar el monitor recomendado:
+Datadog proporciona una plantilla de monitor para ayudarte a empezar. Para utilizar la plantilla de monitor:
 
-1. En Datadog, dirígete a **Monitors** -> **New Monitor** (Monitores -> Monitor nuevo) y selecciona la pestaña [Recommended Monitors][8] (Monitores recomendados).
-2. Selecciona el monitor recomendado que se denomina `[Azure] Integration Errors` ([Azure] Errores de integración).
+1. En Datadog, ve a **Monitors** (Monitores) y haz clic en **Browse Templates** (Buscar plantillas).
+2. Busca y selecciona la plantilla de monitor titulada [Errores de integración de [Azure]][8].
 3. Realiza las modificaciones que quieras en la consulta de búsqueda o en las condiciones de alerta. De manera predeterminada, el monitor se activa cuando se detecta un error nuevo y se resuelve cuando no se ha detectado el error durante los últimos 15 minutos.
 4. Actualiza los mensajes de notificación y notificación nueva según lo consideres. Ten en cuenta que los eventos en sí contienen información relevante sobre el evento y se incluyen en la notificación de manera automática. Esto incluye información detallada sobre el contexto, la respuesta a errores y los pasos comunes para solucionarlos.
 5. [Configura notificaciones][9] a través de tus canales preferidos (correo electrónico, Slack, PagerDuty u otros) para asegurarte de que tu equipo esté alerta sobre los problemas que afectan la recopilación de datos de Azure.
@@ -279,7 +308,7 @@ Puedes usar la extensión de Azure para instalar el Datadog Agent en VMs de Wind
 2. En la barra lateral izquierda, en **Settings** (Configuración), selecciona **Extensions + applications (Extensiones + aplicaciones).
 3. Haz clic en **+ Add** (+ Añadir).
 4. Busca y selecciona la extensión `Datadog Agent`.
-5. Haz clic en **Next** (Siguiente).
+5. Haz clic en **Siguiente**.
 6. Ingresa tu [clave de API de Datadog][2] y [sitio de Datadog][1], y haz clic en **OK** (Aceptar).
 
 Para instalar el Agent en función del sistema operativo o herramienta de CI y CD, consulta las [instrucciones de instalación del Datadog Agent][3].
@@ -318,8 +347,10 @@ Consulta la [guía de registro de Azure][5] para configurar el reenvío de logs 
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [5]: /es/logs/guide/azure-logging-guide
 [6]: /es/integrations/guide/azure-native-manual-setup/
-[7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
-[8]: https://app.datadoghq.com/monitors/recommended
+[7]: https://learn.microsoft.com/azure/cloud-shell/get-started/
+[8]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [9]: /es/monitors/notify/#configure-notifications-and-automations
-[12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
+[12]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [13]: /es/integrations/guide/azure-native-manual-setup/
+[15]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
+[17]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer

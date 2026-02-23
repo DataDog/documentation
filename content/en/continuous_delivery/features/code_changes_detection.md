@@ -70,13 +70,12 @@ To confirm that the setup is valid, select your GitHub App in the [GitHub integr
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-<div class="alert alert-danger">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
 
-After your organization has access, follow the [GitLab installation guide][1].
+Follow the [in-app onboarding][1] to set up the GitLab Source Code integration.
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
-[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+[1]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}

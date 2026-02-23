@@ -2,6 +2,7 @@
 aliases:
 - /ja/account_management/saml/azure/
 - /ja/account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
+description: Datadog のシングル サインオン認証用の SAML アイデンティティ プロバイダーとして Microsoft Entra ID を構成する。
 further_reading:
 - link: /account_management/saml/
   tag: ドキュメント
@@ -40,7 +41,7 @@ Datadog ボタンまたはリンクで SSO を使用している場合は、サ�
 
 2. Microsoft Entra ID で、アプリケーションの SSO Configuration セクションに移動し、**Show advanced URL settings** をチェックして、シングル サインオン URL を追加します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,6 +1,5 @@
 ---
 title: Database Monitoring Guides
-
 private: true
 disable_toc: true
 cascade:

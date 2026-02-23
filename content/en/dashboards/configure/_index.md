@@ -50,7 +50,7 @@ Click **Configure** to open a menu of configuration options available for your d
 | Include Flex Logs | Control whether widgets search [Flex Logs][3] or [Standard Indexed][4] logs. Switch between recent and historical data without editing individual widgets. This is a user-level preference that persists across sessions for this dashboard. |
 | Increase density | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
 | Keyboard&nbsp;shortcuts | View a list of available keyboard shortcuts. |
-| Pause Auto-Refresh | Pause automatic refresh for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |
+| Pause Auto-Refresh | Pause automatic refresh by default for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |
 | TV Mode | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
 | Version history | Preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][6]. |
 | View audit events | See who is using this dashboard within your organization. As an individual, you can see a stream of your own actions. For more information, see [Datadog Audit Trail][7]. |
@@ -67,13 +67,15 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ### Copy, import, or export dashboard JSON
 
-Copy, import, or export a dashboard's JSON using the export icon (upper right) with the following options:
+Copy, import, or export a dashboard's JSON by clicking the **Configure** icon (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Copy&nbsp;dashboard&nbsp;JSON   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
 | Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
+
+Options for copying or exporting the JSON can also be accessed from the **Share** icon in the upper right.
 
 ### Delete dashboard
 

@@ -21,8 +21,6 @@ El producto Log Management es compatible con múltiples [entornos y formatos][1]
 
 ## Seguridad de la información
 
-El Datadog Agent envía logs a Datadog a través de HTTPS o a través de una conexión TCP con cifrado TLS en el puerto 10516, lo que requiere una comunicación saliente (consulta [Transporte de logs del Agent][2]).
-
 Datadog utiliza un cifrado simétrico en reposo (AES-256) para los logs indexados. Los logs indexados se eliminan de la plataforma Datadog una vez que su periodo de conservación expira, según lo que hayas definido.
 
 ## Filtrar logs
@@ -45,8 +43,6 @@ Sensitive Data Scanner también está disponible como [procesador][8] en [Observ
 
 Todos los endpoints de envío de logs están cifrados. Los siguientes endpoints heredados siguen siendo compatibles:
 
-* `tcp-encrypted-intake.logs.datadoghq.com`
-* `lambda-tcp-encrypted-intake.logs.datadoghq.com`
 * `gcp-encrypted-intake.logs.datadoghq.com`
 * `http-encrypted-intake.logs.datadoghq.com`
 

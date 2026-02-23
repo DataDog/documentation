@@ -69,13 +69,14 @@ The following profiling features are available in the following minimum versions
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+ (and 3.19.0+ for outgoing HTTP requests longer than 50 ms in beta and thread start/end events)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
+| [Memory Leak investigation][15] | 3.33.0+      | .NET 6+ (in preview)  |
 
 - Allocations and Lock Contention profiling for .NET Framework requires that the Datadog Agent and the profiled applications are running on the same machine.
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
 - Allocations and Live Heap profiling are available in .NET 10. For other previous versions of .NET, the statistical distribution of allocations sampling might not be accurate, so expect larger objects to be represented more often
 - Continuous Profiler is not supported for AWS Lambda.
 - Continuous Profiler does not support ARM64.
- 
+
 <div class="alert alert-danger">
   <strong>Note:</strong> Unlike APM, Continuous Profiler is not activated by default when the APM package is installed. You must explicitly enable it for the applications you want to profile.
 </div>
@@ -99,11 +100,11 @@ You can install the Datadog .NET Profiler machine-wide so that any services on t
 1. With [Single Step APM Instrumentation][1], there is nothing else to install. Go to [Enabling the Profiler](#enabling-the-profiler) to see how to activate the profiler for an application.
 
 <div class="alert alert-danger">
-  <strong>Note:</strong> If APM was already manually installed, you must uninstall it by removing the following environment variables:<br /> 
+  <strong>Note:</strong> If APM was already manually installed, you must uninstall it by removing the following environment variables:<br />
   - <code>CORECLR_ENABLE_PROFILING</code><br />
   - <code>CORECLR_PROFILER</code><br />
   - <code>CORECLR_PROFILER_PATH</code><br />
-  - The value that points to <code>Datadog.Linux.ApiWrapper.x64.so</code> in <code>LD_PRELOAD</code><br /><br /> 
+  - The value that points to <code>Datadog.Linux.ApiWrapper.x64.so</code> in <code>LD_PRELOAD</code><br /><br />
   For example, if you are setting these environment variables in your dockerfile for a service, you should remove them to avoid conflicts with Single Step Instrumentation.
   If these environment variables are still set, the corresponding previously installed version is silently used instead of the one installed with Single Step Instrumentation.
 </div>
@@ -228,9 +229,13 @@ To install the .NET Profiler per-webapp:
 
 4. For standalone applications, manually restart the application as you normally would.
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -282,9 +287,13 @@ To install the .NET Profiler per-webapp:
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
@@ -350,9 +359,13 @@ To install the .NET Profiler per-webapp:
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "Windows Standalone applications" %}}
@@ -389,9 +402,13 @@ To install the .NET Profiler per-webapp:
    REM start the application here
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
@@ -470,6 +487,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables Live Heap profiling (in Preview). Defaults to `false`.  |
 | `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disables Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
 | `DD_PROFILING_HTTP_ENABLED` | Boolean        | If set to `true`, enables outgoing HTTP request profiling used in Timeline user interface. Defaults to `false`.  |
+| `DD_PROFILING_HEAPSNAPSHOT_ENABLED` | Boolean        | If set to `true`, enables the regular generation of a heap snapshot when an increase in memory consumption is detected. This is used in the [Memory Leak user interface][15]. Defaults to `false`.  |
 
 
 <div class="alert alert-danger">
@@ -493,3 +511,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
+[15]: /profiler/guide/solve-memory-leaks/

@@ -24,11 +24,11 @@ El [Log Explorer][5] te permite buscar y ver logs individualmente como una lista
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-Las consultas en lenguaje natural no está disponible en el <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).
+Las consultas en lenguaje natural no están disponibles en el <a href="/getting_started/site">sitio Datadog</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">Las consultas en lenguaje natural (NLQ) para logs están <strong>creadas con Llama</strong>.</div>
+<div class="alert alert-info">Las consultas en lenguaje natural (NLQ) para logs se <strong>crean con Llama</strong>.</div>
 
 Utiliza las consultas en lenguaje natural (NLQ) para describir lo que buscas en inglés sencillo. Datadog traduce automáticamente tu solicitud en una consulta estructurada de logs, lo que facilita la exploración de logs sin necesidad de escribir una sintaxis compleja. Para acceder a esta función, haz clic en **Ask** (Preguntar) en el campo de búsqueda.
 

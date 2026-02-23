@@ -316,7 +316,7 @@ Si utilizas un host, tienes dos opciones: utilizar Microsoft SourceLink o config
 
 Si utilizas contenedores de Docker, tienes varias opciones: utilizar un complemento si tu aplicación está empaquetada, utilizar Docker, o configurar tu aplicación con variables de entorno `DD_GIT_*`.
 
-##### Opción 1: Complemento empaquetador
+##### Opción 1: complemento empaquetador
 
 {{% sci-dd-tags-bundled-node-js %}}
 
@@ -332,7 +332,7 @@ Si utilizas contenedores de Docker, tienes varias opciones: utilizar un compleme
 
 Si estás utilizando Serverless, tienes varias opciones dependiendo de la configuración de tu aplicación serverless.
 
-##### Opción 1: Complemento empaquetador
+##### Opción 1: complemento empaquetador
 
 {{% sci-dd-tags-bundled-node-js %}}
 
@@ -348,7 +348,7 @@ Si estás utilizando Serverless, tienes varias opciones dependiendo de la config
 
 Para entornos basados en host, tienes dos opciones basadas en tu configuración de compilación y despliegue.
 
-##### Opción 1: Complemento empaquetador
+##### Opción 1: complemento empaquetador
 
 {{% sci-dd-tags-bundled-node-js %}}
 
@@ -429,7 +429,7 @@ Si utilizas un host, configura tu aplicación con variables de entorno `DD_GIT_*
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">Se requiere la biblioteca del cliente PHP versión 1.2.0 o posterior.</div>
+<div class="alert alert-info">Se requiere la versión 1.13.0 o posterior de la biblioteca cliente de PHP o 1.2.0 o posterior si solo se utiliza el rastreo sin la creación de perfiles.</div>
 
 #### Contenedores
 
@@ -593,6 +593,16 @@ Para más información, consulta la [documentación de Dynamic Instrumentation][
 
 ### Comentarios en solicitudes pull
 
+<div class="alert alert-warning">
+  Los comentarios PR no son compatibles en solicitudes de incorporación de cambios en repositorios públicos o en solicitudes de incorporación de cambios que se dirijan a una rama de destino en un repositorio diferente de la rama source (fuente) (es decir, repositorios bifurcados que intentan fusionarse en el repositorio principal).
+</div>
+
+Los comentarios PR son comentarios automáticos añadidos por las [integraciones de gestión de código de source (fuente)][10] de Datadog para informar a los desarrolladores de los problemas detectados en sus cambios de código y, en ciertos casos, sugerir correcciones.
+
+Hay un máximo de 31 comentarios únicos por RP en cualquier momento para reducir el ruido y el desorden. Estos comentarios incluyen:
+* Siempre se publica un comentario resumen para ofrecer una visión de alto nivel de todos los problemas que Datadog ha detectado en el PR. Este comentario es editado por Datadog a medida que nuevas confirmaciones añadidas al PR cambian los resultados.
+* Cuando proceda, se publicarán hasta 30 comentarios en línea sobre las líneas de código específicas que hayan provocado una infracción. Si se introducen más de 30 infracciones en la diferencia del PR, se publican las 30 infracciones de mayor gravedad.
+
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
 Los comentarios de solicitud pull están habilitados por defecto cuando se accede por primera vez a CI Visibility si la integración con GitHub o GitLab está instalada correctamente. Estas integraciones publican un comentario resumiendo los trabajos fallidos detectados en tu solicitud pull.
@@ -646,3 +656,4 @@ Para desactivar los comentarios en solicitudes pull para Test Optimization, ve a
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /es/tracing/error_tracking/
 [9]: /es/tracing/trace_collection/dd_libraries/
+[10]: #source-code-management-providers

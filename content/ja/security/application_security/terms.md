@@ -81,7 +81,7 @@ Datadog ライブラリ
 : [脅威インテリジェンス][16]を参照してください。
 
 不審な攻撃者
-: フラグが立てられた IP の前段階。不審な IP は、攻撃トラフィックの最低限のしきい値を満たしているため、不審として分類されますが、フラグのしきい値には達していません。しきい値はユーザーによる構成はできません。 
+: フラグが立てられた IP の前段階。不審な IP は、攻撃トラフィックの最低限のしきい値を満たしているため、不審として分類されますが、フラグのしきい値には達していません。しきい値はユーザーによる構成はできません。
 : [Attacker Explorer][17] を参照してください。
 
 フラグが立てられた攻撃者
@@ -137,7 +137,7 @@ Datadog ライブラリ
 [10]: /ja/security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /ja/security/application_security/threats/inapp_waf_rules
-[13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
+[13]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&view=signal
 [14]: /ja/security/application_security/threats/add-user-info/
 [15]: /ja/security/application_security/threats/trace_qualification/
 [16]: /ja/security/application_security/threats/threat-intelligence/

@@ -22,3 +22,9 @@ Guide:
 eci: 
 # Emerging Cloud Integrations team
 - integrations-internal-core/oracle_cloud_infrastructure/**/*
+
+cdocs:
+- customization_config/
+- content/en/**/*.mdoc.md
+- layouts/shortcodes/**/*.mdoc.md
+- content/.gitignore

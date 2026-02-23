@@ -63,4 +63,4 @@ When an organization exceeds a threshold, pending execution requests queue up to
 
 [1]: /service_management/workflows/actions/flow_control/#for-loop
 [2]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-workflow
-[9]: https://datadoghq.slack.com/
+[9]: https://chat.datadoghq.com/

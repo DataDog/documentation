@@ -1,0 +1,112 @@
+{
+  "title": "Example-Dashboard",
+  "description": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "title": "Log Count by Service and Source",
+        "type": "geomap",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "data_source": "rum",
+                "name": "query1",
+                "search": {
+                  "query": "@type:session"
+                },
+                "indexes": [
+                  "*"
+                ],
+                "compute": {
+                  "aggregation": "count"
+                },
+                "group_by": []
+              }
+            ],
+            "conditional_formats": [
+              {
+                "comparator": ">",
+                "value": 1000,
+                "palette": "white_on_green"
+              }
+            ],
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "sort": {
+              "count": 250,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            }
+          },
+          {
+            "response_format": "event_list",
+            "query": {
+              "data_source": "logs_stream",
+              "query_string": "",
+              "indexes": [],
+              "storage": "hot"
+            },
+            "columns": [
+              {
+                "field": "@network.client.geoip.location.latitude",
+                "width": "auto"
+              },
+              {
+                "field": "@network.client.geoip.location.longitude",
+                "width": "auto"
+              },
+              {
+                "field": "@network.client.geoip.country.iso_code",
+                "width": "auto"
+              },
+              {
+                "field": "@network.client.geoip.subdivision.name",
+                "width": "auto"
+              }
+            ],
+            "style": {
+              "color_by": "status"
+            },
+            "text_formats": [
+              {
+                "match": {
+                  "type": "is",
+                  "value": "error"
+                },
+                "palette": "white_on_red"
+              }
+            ]
+          }
+        ],
+        "style": {
+          "palette": "hostmap_blues",
+          "palette_flip": false
+        },
+        "view": {
+          "focus": "NORTH_AMERICA"
+        }
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 12,
+        "height": 6
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "ordered",
+  "notify_list": [],
+  "reflow_type": "fixed",
+  "tags": []
+}

@@ -186,7 +186,6 @@ Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metric
 
 ```yaml
 init_config:
-
 instances:
   - dbm: true
     host: '<AWS_INSTANCE_ENDPOINT>'
@@ -200,12 +199,33 @@ instances:
       region: <AWS_REGION>
 ```
 
-[Restart the Agent][3] to start sending MySQL metrics to Datadog.
+If you want to authenticate with IAM, specify the `region` and `instance_endpoint` parameters, and set `managed_authentication.enabled` to `true`.
+
+**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: '<AWS_INSTANCE_ENDPOINT>'
+    port: <PORT>
+    username: datadog
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+      region: <AWS_REGION>
+      managed_authentication:
+        enabled: true
+```
+
+For information on configuring IAM authentication on your RDS instance, see [Connecting with Managed Authentication][3].
+
+[Restart the Agent][4] to start sending MySQL metrics to Datadog.
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /database_monitoring/guide/managed_authentication/?tab=mysql#configure-iam-authentication
+[4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -236,7 +256,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "region": "<AWS_REGION>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -244,7 +264,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

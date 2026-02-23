@@ -17,6 +17,11 @@ further_reading:
   text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
+{{< callout url=https://www.datadoghq.com/product-preview/hostmap
+ btn_hidden="false" header="Join the Preview!">}}
+A new Host Map experience is in Preview. Use this form to request early access to the new features.
+{{< /callout >}}
+
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="Example heatmap graph visualization" style="width:100%;">}}
 
 The heatmap widget shows metrics aggregated across multiple tags. Use heatmap widgets to visualize OpenTelemetry histograms, distribution metrics, high resolution and data display.

@@ -71,11 +71,11 @@ logger.info "Hello World!"
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="ruby" function="true" %}}
+{{% serverless-init-env-vars-sidecar language="ruby" function="true" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 

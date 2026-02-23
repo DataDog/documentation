@@ -1,6 +1,9 @@
 ---
 aliases:
 - /es/monitors/faq/how-can-i-export-alert-history
+description: Descarga el historial de alertas de monitor como archivos CSV a través
+  de los datos de monitor por horas de los últimos 6 meses (solo el sitio Datadog
+  US).
 title: Exportar alertas de monitor a CSV
 ---
 
@@ -34,7 +37,7 @@ hour,host_name,alert_name,user,cnt
 ```
 {{< /site-region >}}
 
-{{< site-region region="eu,gov,us3,us5,ap1" >}}
+{{< site-region region="eu,gov,us3,us5,ap1,ap2" >}}
 
 Esta función no es compatible.
 

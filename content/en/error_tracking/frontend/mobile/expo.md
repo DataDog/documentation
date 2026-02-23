@@ -105,23 +105,26 @@ Example with React Navigation:
 Add the following code to your initialization file to set up Error Tracking:
 
 ```js
-import { DdSdkReactNative, DdSdkReactNativeConfiguration } from 'expo-datadog';
+import { CoreConfiguration } from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new CoreConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<APPLICATION_ID>',
-    true, // track user interactions (set to false if using Error Tracking only)
-    true, // track XHR resources (set to false if using Error Tracking only)
-    true  // track errors
-);
-
-// Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
-config.site = 'US1';
-// Optional: Enable or disable native crash reports.
-config.nativeCrashReportEnabled = true;
-// Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-config.sessionSamplingRate = 80;
+    trackingConsent,
+    {
+        site: 'US1', // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+            sessionSampleRate: 80, // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+            nativeCrashReportEnabled: true // Optional: Enable or disable native crash reports.
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+)
 
 await DdSdkReactNative.initialize(config);
 ```
@@ -311,9 +314,16 @@ if (__DEV__) {
     DdRum.addTiming = emptyAsyncFunction;
 
     DdSdkReactNative.initialize = emptyAsyncFunction;
-    DdSdkReactNative.setUser = emptyAsyncFunction;
-    DdSdkReactNative.setAttributes = emptyAsyncFunction;
+    DdSdkReactNative.setUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.clearUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.addUserExtraInfo = emptyAsyncFunction;
+    DdSdkReactNative.clearAllData = emptyAsyncFunction;
+    DdSdkReactNative.addAttributes = emptyAsyncFunction;
+    DdSdkReactNative.removeAttributes = emptyAsyncFunction;
     DdSdkReactNative.setTrackingConsent = emptyAsyncFunction;
+    DdSdkReactNative.setAccountInfo = emptyAsyncFunction;
+    DdSdkReactNative.addAccountExtraInfo = emptyAsyncFunction;
+    DdSdkReactNative.clearAccountInfo = emptyAsyncFunction;
 }
 ```
 
@@ -321,9 +331,9 @@ Then, import it before initializing the Datadog React Native SDK:
 
 ```typescript
 import './mockDatadog';
-import { DdSdkReactNative } from 'expo-datadog';
+import { CoreConfiguration, DdSdkReactNative } from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(/* your config */);
+const config = new CoreConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
 ```
 
