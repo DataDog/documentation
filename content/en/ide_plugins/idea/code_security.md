@@ -1,6 +1,8 @@
 ---
 title: Code Security
 type: documentation
+aliases:
+- '/developers/ide_plugins/idea/code_security/'
 further_reading:
 - link: "/security/code_security/"
   tag: "Documentation"

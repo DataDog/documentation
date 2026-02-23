@@ -1,6 +1,8 @@
 ---
 title: Logs
 type: documentation
+aliases:
+- '/developers/ide_plugins/idea/logs/'
 further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
