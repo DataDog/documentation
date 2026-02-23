@@ -333,7 +333,12 @@ experiment.run()
 
 #### Mapping dataset data to prompt variables with `transform_fn`
 
-When you configure an LLM-as-judge in the Datadog UI, the [prompt template uses variables][6] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps `input_data` → `span_input`, `output_data` → `span_output`, and `expected_output` → `meta.expected_output`. If your dataset records have a different structure — for example, `input_data` is a dict with multiple keys — provide a `transform_fn` to control exactly which values are sent for each template variable:
+When you configure an LLM-as-a-judge in the Datadog UI, the [prompt template uses variables][6] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps the following:
+- `input_data` → `span_input`
+- `output_data` → `span_output`
+- `expected_output` → `meta.expected_output`
+
+If your dataset records have a different structure—for example, `input_data` is a dict with multiple keys—provide a `transform_fn` to control exactly which values are sent for each template variable:
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import RemoteEvaluator, EvaluatorContext
