@@ -72,7 +72,9 @@ Before you start configuring Datadog On-Call, review the concept of [Teams][4]. 
 
 After reviewing the team model and mapping your existing assets, you're ready to configure Datadog On-Call to reflect your desired structure.
 
-<div class="alert alert-info">If you're migrating from PagerDuty, Datadog provides a <a href="/incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call">dedicated migration tool</a> that can help you selectively import schedules and escalation policies. Use it during setup to reduce manual effort and avoid migrating unused configurations.</div>
+<div class="alert alert-info">
+If you're migrating from PagerDuty or OpsGenie, use the <a href="/incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call">PagerDuty migration tool</a> or the <a href="/incident_response/on-call/guides/migrate-your-opsgenie-resources-to-on-call">OpsGenie migration tool</a> during setup to selectively import schedules and escalation policies and avoid migrating unused configurations.
+</div>
 
 During setup, be sure to:
 

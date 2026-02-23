@@ -101,11 +101,6 @@ Allocations
 : The number of heap allocations made by each function, including allocations which were subsequently freed.<br />
 _Requires: Python 3.5+_
 
-Thrown Exceptions
-: The number of caught or uncaught exceptions raised by each function, as well as their type.<br />
-_Requires: Python 3.7+, POSIX platform_
-
-
 [1]: /profiler/enabling/python/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -298,4 +293,3 @@ CPU Time (eBPF)
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-

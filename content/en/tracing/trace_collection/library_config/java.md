@@ -20,6 +20,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 All configuration options below have system property and environment variable equivalents.
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
@@ -332,6 +334,11 @@ When set to `true` db spans get assigned the instance name as the service name
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
 
+`dd.dbm.propagation.mode`
+: **Environment Variable**: `DD_DBM_PROPAGATION_MODE` <br>
+**Default**: `null`<br>
+When set to `service` or `full`, enables Database Monitoring and APM correlation. For more information, see [Correlate Database Monitoring and Traces][23].
+
 ### AAP
 
 `dd.appsec.enabled`
@@ -347,7 +354,7 @@ For more information, see [Enabling AAP for Java][19].
 **Environment Variable**: `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Environment Variable (Deprecated)**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
-By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data.
 
 `dd.trace.http.client.error.statuses`
 : **Environment Variable**: `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`<br>
@@ -687,3 +694,4 @@ Deprecated since version 1.9.0
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
 [21]: /tracing/trace_collection/library_config/#traces
 [22]: /profiler/
+[23]: /database_monitoring/connect_dbm_and_apm/?tab=java

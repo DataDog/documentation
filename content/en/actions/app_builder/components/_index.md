@@ -389,6 +389,56 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Image" level="h3" %}}
+Image components have the following properties.
+
+### General 
+
+Source
+: The image to display. The supported formats are JPG, PNG, and GIF. The maximum upload size is 4 MB.<br>
+**Values**: URL or file
+
+### Appearance
+
+Fit
+: Determines the dimensions of the image within the bounds of the image component.<br>
+**Provided values**: fill, contain, cover, none
+
+Padding
+: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
+**Provided values**: none, small, medium, large
+
+Vertical Alignment
+: Determines the vertical position of the image within the bounds of the image component.<br>
+**Provided values**: align top, align center, align bottom
+
+Horizontal Alignment 
+: Determines the horizontal position of the image within the bounds of the image component.<br>
+**Provided values**: align left, align center, align right
+
+Border
+: Determines whether the image component has a visual border around its edges.<br>
+**Provided values**: on, off
+
+Transparent Background
+: Determines whether the background inside the image component is transparent.<br>
+**Provided values**: on, off
+
+Is Loading
+: Determines whether a loading icon is displayed while the image is being loaded.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Integration logo" level="h3" %}}
 Integration logo components have the following properties.
 
@@ -891,6 +941,46 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Side panel" level="h3" %}}
+Side panel components have the following properties.
+
+### General 
+
+Title
+: The title for the side panel.<br>
+**Value**: string
+
+### Appearance
+
+Width
+: Determines the width of the side panel. A percent sign (`%`) must be included after the value.<br>
+**Value**: integer
+
+Hide Close Button
+: Determines whether side panel displays an X to close the panel.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: toggle open, close, open
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: setIsOpen<br>
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays properties and values in JSON format.
+
 {{% /collapse-content %}}
 
 

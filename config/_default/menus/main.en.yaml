@@ -128,10 +128,15 @@ menu:
       url: getting_started/integrations/google_cloud/
       weight: 1203
       parent: getting_started_integrations
+    - name: OCI
+      identifier: getting_started_with_oci
+      url: getting_started/integrations/oci/
+      weight: 1204
+      parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 1204
+      weight: 1205
       parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
@@ -2563,17 +2568,22 @@ menu:
       url: incident_response/incident_management/post_incident
       parent: incidents
       identifier: post_incident
-      weight: 6
+      weight: 3
     - name: Follow-ups
       url: incident_response/incident_management/post_incident/follow-ups
       parent: post_incident
       identifier: post_incident_follow_ups
-      weight: 601
+      weight: 301
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
       identifier: analytics_and_reporting
-      weight: 8
+      weight: 4
+    - name: Guides
+      url: incident_response/incident_management/guides/
+      parent: incidents
+      identifier: incidents_guides
+      weight: 5
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
@@ -3869,21 +3879,6 @@ menu:
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
       weight: 402
-    - name: AWS
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 101
-    - name: Azure
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=azure
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 102
-    - name: Google Cloud
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=google
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 103
     - name: BigQuery Costs
       url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
@@ -4460,6 +4455,11 @@ menu:
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
       weight: 1603
+    - name: SDK Configurations
+      url: tracing/troubleshooting/sdk_configurations
+      identifier: tracing_troubleshooting_sdk_configurations
+      parent: tracing_troubleshooting
+      weight: 1604
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
@@ -4950,6 +4950,16 @@ menu:
       identifier: bigquery
       parent: data_warehouses
       weight: 3000000
+    - name: Data Lakes
+      url: data_observability/quality_monitoring/data_lakes
+      identifier: data_lakes
+      parent: quality_monitoring
+      weight: 250000
+    - name: Iceberg Tables (AWS Glue)
+      url: data_observability/quality_monitoring/data_lakes/aws_glue
+      identifier: aws_glue_iceberg
+      parent: data_lakes
+      weight: 1000000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
@@ -5141,16 +5151,6 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40002
-    - name: Session Level Evaluations
-      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_session
-      weight: 40003
-    - name: Agent Evaluations
-      url: llm_observability/evaluations/managed_evaluations/agent_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_agent
-      weight: 40004
     - name: Template Evaluations
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
       parent: llm_obs_custom_llm_as_a_judge_evaluations
@@ -5201,11 +5201,16 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
+    - name: Advanced Experiment Runs
+      url: llm_observability/experiments/advanced_runs 
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_advanced_runs
+      weight: 504
     - name: Experiments API
       url: llm_observability/experiments/api
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
-      weight: 504
+      weight: 505
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
@@ -5719,6 +5724,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react
       weight: 104
+    - name: React Native
+      url: feature_flags/client/reactnative
+      parent: feature_flags_client
+      identifier: feature_flags_client_react_native
+      weight: 105
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -6707,11 +6717,21 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_azure_aks
       weight: 302
+    - name: GCP GKE
+      url: /cloudprem/install/gcp_gke
+      parent: cloudprem_install
+      identifier: cloudprem_gcp_gke
+      weight: 303
     - name: Docker (Local)
       url: /cloudprem/install/docker
       parent: cloudprem_install
       identifier: cloudprem_docker
-      weight: 303
+      weight: 304
+    - name: Custom Kubernetes
+      url: /cloudprem/install/custom_k8s
+      parent: cloudprem_install
+      identifier: cloudprem_custom_k8s
+      weight: 305
     - name: Ingest
       url: /cloudprem/ingest/
       parent: cloudprem
@@ -8936,6 +8956,11 @@ menu:
       url: account_management/governance_console/
       parent: account_management
       weight: 8
+    - name: Controls
+      identifier: account_management_governance_console_controls
+      url: account_management/governance_console/controls 
+      parent: account_management_governance_console
+      weight: 801
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
