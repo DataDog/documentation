@@ -125,3 +125,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 {{% /collapse-content %}}
 
 {{% observability_pipelines/processors/filter_syntax %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
