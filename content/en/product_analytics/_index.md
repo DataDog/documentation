@@ -25,8 +25,12 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 - [Track key user behavior patterns](#track-key-user-behavior-patterns)
 - [Visualize the most and least interacted with buttons on a given page](#visualize-the-most-and-least-interacted-with-buttons-on-a-given-page)
 
-## Getting started
 
+## Getting started
+### Prerequisites
+Product Analytics uses the same SDKs and configuration as RUM. You must first [instrument your application to start collecting RUM data][18].
+
+### Enable Product Analytics
 To start using Product Analytics, enable it for each application where you want to monitor user behavior:
 
 1. Select the application you want to monitor from the [Application Management][9] list.
@@ -131,3 +135,4 @@ Suppose you want to make changes to your application interface but want to first
 [15]: /real_user_monitoring/application_monitoring/ios
 [16]: /real_user_monitoring/application_monitoring/android
 [17]: /product_analytics/agentic_onboarding
+[18]: /real_user_monitoring/#get-started
