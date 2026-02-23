@@ -1,6 +1,6 @@
 ---
 title: Looker
-description: Connect Looker to Datadog Data Observability to view end-to-end lineage from warehouse tables to dashboards and Looks.
+description: Connect Looker to Datadog Data Observability to view column-level lineage from warehouse tables to Looker explore fields, dashboards, and Looks.
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
@@ -12,7 +12,7 @@ further_reading:
 Datadog's Looker integration helps data teams make changes to their data platform without breaking dashboards and Looks, and identify unused content to remove. When Datadog connects, it:
 
 - Pulls metadata from your Looker instance, including projects, models, explores, views, dashboards, Looks, and folders
-- Automatically generates lineage between warehouse tables and columns and downstream Looker explores, dashboards, and Looks
+- Automatically generates column-level lineage between warehouse columns and downstream explore and view fields, dashboards, and Looks
 
 ## Connect Looker
 
@@ -34,7 +34,7 @@ To connect Looker to Datadog:
 
 ## What's next
 
-When your Looker instance is successfully connected, Datadog syncs every 60 minutes and automatically derives lineage from warehouse tables and columns to Looker explores, dashboards, and Looks.
+When your Looker instance is successfully connected, Datadog syncs every 60 minutes and automatically derives column-level lineage from warehouse columns to Looker explore and view fields, dashboards, and Looks.
 
 Initial syncs may take up to several hours depending on the size of your Looker deployment.
 
@@ -46,4 +46,4 @@ After syncing, you can explore your Looker assets and their upstream dependencie
 
 [1]: https://cloud.google.com/looker/docs/api-auth
 [2]: https://app.datadoghq.com/integrations/looker
-[3]: https://app.datadoghq.com/datasets/catalog
+[3]: https://app.datadoghq.com/data-obs/catalog
