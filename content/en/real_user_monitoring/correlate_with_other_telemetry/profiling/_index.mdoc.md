@@ -157,7 +157,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_action_panel.png" alt="Browser profiling tab in the Action panel." style="width:100%;" /%}
 
 ### Within the Profiling page
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience.gif" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience.mp4" alt="Browser profiling event waterfall example within the Optimization page." video="true" style="width:100%;" /%}
 
 The Profiling page, found thorugh the top bar navigation, lets you analyze profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
