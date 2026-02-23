@@ -4965,6 +4965,11 @@ menu:
       identifier: business_intelligence_integrations
       parent: quality_monitoring
       weight: 300000
+    - name: Looker
+      url: data_observability/quality_monitoring/business_intelligence/looker
+      identifier: business_intelligence_integrations_looker
+      parent: business_intelligence_integrations
+      weight: 500000
     - name: Tableau
       url: data_observability/quality_monitoring/business_intelligence/tableau
       identifier: business_intelligence_integrations_tableau
