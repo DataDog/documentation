@@ -11,60 +11,81 @@ further_reading:
 
 If you experience issues setting up or configuring Datadog Experiments, use this page to start troubleshooting. If you continue to have trouble, [contact Datadog Support][1].
 
-### Experiment results not showing up
+## Experiment results do not appear
+If experiment results are missing after you first launch an experiment, follow these steps to find and resolve this issue.
 
-There are several reasons why experiment results might not show up when you first launch an experiment. This guide walks you through a step-by-step process for spotting and resolving issues.
+<!-- WHAT IS THE DIFFERENCE BETWEEN: 
+- "experiment is being evaluated", 
+- "seeing any exposures", AND 
+- "how much traffic is hitting your flag". 
 
-#### Missing experiment exposures
-The first thing to check is that your experiment is being evaluated. Navigate to the flag page by clicking **Go to Flag**. This modal will also tell you which environment the experiment is associated with:
+ARE THEY ALL SAYING THE SAME THING? 
+ARE THESE THREE DIFFERENT THINGS? 
+-->
+
+### Step 1 - Check for missing experiment exposures
+First, check that your experiment is being evaluated: 
+
+1. On the [Experiment][2] page, select the desired experiment
+
+2. Hover over the Feature Flag and make note of the **Environment** in which the experiment is running. Then click **Go to Flag**.
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_link.png" alt="Link to flag" style="width:90%;" >}}
 
-On this page, you can see how much traffic is hitting your flag in real time. Confirm you are viewing the same environment that your experiment is associated with.
+3. On the resulting page, confirm the **Environment** matches the one from the previous step. Then, see how much traffic is hitting your flag in real time.
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic.png" alt="Flag traffic chart" style="width:90%;" >}}
 
-If you’re not seeing any exposures, make sure that the flag is enabled in the appropriate environment. You can manage environments on the [environments page](https://app.datadoghq.com/feature-flags/settings/environments).
+4. If you’re not seeing any exposures, make sure that the flag is enabled in the appropriate environment. You can manage environments on the [environments page][3].
 
-If the flag is indeed being evaluated in the appropriate environment, confirm that traffic is hitting the experiment targeting rule within the waterfall:
+5. If the flag is being evaluated in the appropriate environment, confirm that traffic is hitting the experiment targeting rule within the waterfall:
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="Flag waterfall" style="width:90%;" >}}
 
-If you are not seeing any traffic going to the experiment’s targeting rule, check the following:
-1. Are there targeting rules above the experiment that are removing all of the experiment’s traffic?
-2. Are the filters in the experiment targeting rule being met?
-3. What is the traffic allocation set to?
+6. If you are not seeing any traffic going to the experiment’s targeting rule, confirm:
+    1. If there are targeting rules above the experiment that are removing all of the experiment’s traffic
+    2. If the filters in the experiment targeting rules are being met
+    3. What the traffic allocation is set to
 
-#### Metric values showing as zero
+### Step 2 - Check metric values showing as zero
 
-Once you have confirmed that you are seeing experiment exposures, the next step is to check if the assigned users have associated metric events. Hover over the experiment scorecard to see how many users are in each variant of your experiment, the total metric value across users, and the average user-level metric value:
+After you confirm that you are seeing experiment exposures, check if the assigned users have associated metric events. 
+
+1. Hover over the experiment scorecard to see how many users are in each variant of your experiment, the total metric value across users, and the average user-level metric value: (<!-- WHICH OF THESE ARE REFERENCED IN THE IMAGE? -->)
 
 {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="Metric tooltip" style="width:90%;" >}}
 
-If a metric is zero, first check that the metric event is firing. You can confirm this on the metric edit page:
+2. If a metric is zero, first confirm on the metric edit page that the metric event is firing.
 
 {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="Metric edit page" style="width:90%;" >}}
 
-For Datadog to include a metric event in experiment results, two criteria must be met:
-1. The event must be from a user with at least one experiment exposure event
-2. The event must occur after the user’s first experiment exposure
+<div class="alert alert-info"> A metric event must meet two criteria for Datadog to include it in experiment results:
 
-Metrics are associated with exposures by matching the exposure’s subject with the attribute defined on the subject types page (typically `@usr.id`). You can see a list of recently exposed subjects on the Flags & Exposures tab by clicking **View Exposure Logs**:
+<ol>
+<li> The event must be from a user with at least one experiment exposure event </li>
+<li> The event must occur after the user’s first experiment exposure </li>
+</ol>
+</div>
+
+3. Click **View Exposure Logs** on the Flags & Exposures tab to see a list of recently exposed subjects. Metrics are associated with exposures by matching the exposure’s subject with the attribute defined on the subject types page (typically `@usr.id`).
 
 {{< img src="/product_analytics/experiment/troubleshooting_exposure_log.png" alt="Exposures log" style="width:90%;" >}}
 
-The subject column shows what is passed in as `targetingKey` to the SDK. If this is not the same value as the subject type’s attribute (for example, `@usr.id`), the experiment analysis will not find any metric events associated with that exposure.
+4. The subject column shows what is passed in as `targetingKey` to the SDK. If this is not the same value as the subject type’s attribute (for example, `@usr.id`), the experiment analysis will not find any metric events associated with that exposure.
 
-Once you have confirmed that the subject key matches your subject type attribute, check individual sessions from the experiment by adding the following filter on the [event stream page](https://app.datadoghq.com/product-analytics/events):
+5. After you have confirmed that the subject key matches your subject type attribute, check individual sessions from the experiment by adding the following filter on the [event stream page][4]:
 
 ```@feature_flags.<flag-key>:<variant-value>```
 
 {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="Event stream filtered by feature flag" style="width:90%;" >}}
 
-From here, you can inspect individual sessions and check whether your metric event is firing. Events that occur before the feature flag is evaluated are not included in experiment results.
+6. Then, inspect individual sessions and check whether your metric event is firing. Events that occur before the feature flag is evaluated are not included in experiment results.
 
 {{< img src="/product_analytics/experiment/troubleshooting_inspect_session.png" alt="Individual session inspection" style="width:90%;" >}}
 
-<div class="alert alert-info"> If your metric has outlier handling enabled and you have a very small set of users with metric events, it’s possible for the outlier threshold to be zero, truncating all user metric values to zero. To test this, try removing outlier handling on the metric edit page.</div>
+<div class="alert alert-info"> If your metric has outlier handling enabled and you have a very small set of users with metric events, it’s possible for the outlier threshold to be zero, truncating all user metric values to zero. To test this, try removing outlier handling on the metric edit page. </div>
 
 [1]: /help
+[2]: https://app.datadoghq.com/product-analytics/experiments
+[3]: https://app.datadoghq.com/feature-flags/settings/environments
+[4]: https://app.datadoghq.com/product-analytics/events
