@@ -57,7 +57,7 @@ secret_backend_config:
 | [**Cluster Agent**](/containers/cluster_agent/) | Collects cluster-level Kubernetes data. Enabled by default in Helm and Operator deployments. | Yes | 7.77+ |
 | [**DDOT Collector**](/opentelemetry/setup/ddot_collector/) | The Datadog Distribution of OpenTelemetry collector. | Transparent — resolved values are synced from the core Agent automatically via config-sync. No separate configuration needed. | 7.70+ |
 
-<div class="alert alert-info">Native secrets fetching is the recommended approach for managing secrets in the Datadog Agent. If your deployment includes Agent processes or versions that do not support it, use <a href="#option-2-using-the-built-in-script-for-kubernetes-and-docker">Option 2</a> or <a href="#option-3-creating-a-custom-executable">Option 3</a> for those configurations.</div>
+<div class="alert alert-info">Native secrets fetching is the recommended approach for managing secrets in the Datadog Agent. If your deployment includes other Agent processes or versions that do not support it, use <a href="#option-2-using-the-built-in-script-for-kubernetes-and-docker">Option 2</a> or <a href="#option-3-creating-a-custom-executable">Option 3</a> for those configurations.</div>
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
