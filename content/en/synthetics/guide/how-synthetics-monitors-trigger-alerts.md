@@ -189,6 +189,7 @@ The following example demonstrates how a 95.83% global uptime is calculated.
    Time in Alert = 15 minutes
    Global Uptime = ((360 - 15) / 360) × 100 = 95.83%
    ```
+<div class="alert alert-info">Muting a Synthetics monitor only silences notifications - the test continues to run on schedule, so Global Uptime is not affected. Pausing a Synthetics test stops executions entirely, which does impact Global Uptime since no results are generated during that time.</div>
 
 ## Monitor status reference
 
