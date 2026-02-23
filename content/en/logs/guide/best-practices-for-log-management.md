@@ -195,14 +195,9 @@ Monitoring **query activity** helps you evaluate the value of your indexed data 
 To analyze which indexes are actively queried:
 
 1. Navigate to the [Audit Trail][31]. This link pre-fills the required query and grouping.
-2. Verify that the query is set to:
-
-   `@evt.name:"Log Management" @action:queried`
-
+2. Verify that the query is set to `@evt.name:"Log Management" @action:queried`.
 3. Select the **Table** visualization to view a ranked list of the most and least used indexes for the selected time frame.
-4. In the **By** section, group logs by:
-
-   `@asset.new_value.query.indexes`
+4. In the **By** section, group logs by `@asset.new_value.query.indexes`.
 
 ### Set up exclusion filters on high-volume logs
 
