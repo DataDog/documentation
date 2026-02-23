@@ -48,8 +48,7 @@
         {{ $page = .GetPage (print "/integrations/" $int_name ".md") }}
       {{ end }}
     {{ end }}
-    {{- if not $page -}}
-    {{- else -}}
+    {{- if $page -}}
       <!-- We find and use the metrics from the integration page markdown -->
       {{- $pattern := `(?s)### Metrics\n(.*?)(#{2,3}\s)` -}}
       {{- $matches := findRE $pattern $page.RawContent 1 -}}
