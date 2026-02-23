@@ -74,8 +74,6 @@ In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your tea
 
 You can programmatically assign team ownership at the time an error is raised by setting the `team` attribute to a Datadog team handle.
 
-The value must be a string matching the handle of an existing Datadog team.
-
 **APM and Logs**
 
 Set the `team` attribute directly on the span or log:
