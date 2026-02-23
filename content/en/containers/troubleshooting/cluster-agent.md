@@ -111,9 +111,9 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# agent status
       Service Checks: 3, Total Service Checks: 2193
 [...]
 ```
-## Datadog Operator
+### Datadog Operator health check failures
 
-The Datadog Operator may fail its health checks in some deployments. If this happens, the debug logs display a message similar to the following error: 
+If you use the Datadog Operator to manage your Cluster Agent deployment, the Operator may fail its health checks. If this happens, the debug logs display a message similar to the following error:
 
 ```text
 {
