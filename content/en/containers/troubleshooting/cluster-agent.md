@@ -19,7 +19,6 @@ further_reading:
 This document contains troubleshooting information for the following components:
 
 - [Datadog Cluster Agent](#datadog-cluster-agent)
-- [Datadog Operator](#datadog-operator)
 - [Node Agent](#node-agent)
 
 ## Datadog Cluster Agent
