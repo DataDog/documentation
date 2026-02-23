@@ -48,7 +48,7 @@ Instrumentation starts when the application is launched.
    ```
 2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
    ```
-   NODE_OPTIONS: '--require=/@datadog/serverless-compat/init --require=dd-trace/init'
+   NODE_OPTIONS='--require=dd-trace/init'
    ```
 
 {{% /tab %}}

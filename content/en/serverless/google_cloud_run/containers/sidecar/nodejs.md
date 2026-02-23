@@ -18,7 +18,7 @@ further_reading:
 
 1. **Install the Datadog Node.js tracer**.
 
-   1. In your main application, add `dd-trace-js`.
+   1. In your main application, install the `dd-trace` package.
 
       {{< code-block lang="shell" disable_copy="false" >}}
 npm install dd-trace
