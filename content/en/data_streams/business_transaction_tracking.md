@@ -35,6 +35,9 @@ Data Streams Monitoring (DSM) extracts transaction IDs from sync (like HTTP requ
    {{< img src="data_streams/btt-configure-verify.png" alt="The Configure and Verify Checkpoints modal at step 2. Two services are listed with Needs Configuration status: transaction-generator with a start checkpoint, and transaction-queuer with a queuer-in checkpoint. Each service displays a DD_DATA_STREAMS_TRANSACTION_EXTRACTORS environment variable to copy into the service deployment." style="width:100%;" >}}
    Click <span class="ui">Done</span>.
 
+
+After you create a pipeline, you can view its detail page to monitor SLO breaches, success rate, and latency, and explore SLO-breaching transaction IDs.
+
 {{< img src="data_streams/btt-outcome.png" alt="A transaction pipeline detail page showing Summary, Monitors, and Breached Transactions sections. The Summary section displays three graphs: Transactions by Status (successful vs. breached), Success Rate, and Latency percentiles over time. The Monitors section shows one alert-status monitor for breached transactions. The Breached Transactions section lists transaction IDs with their start time, duration, and pathway from start to finish." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/data-streams/transactions
