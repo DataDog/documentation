@@ -105,7 +105,7 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
     | Rol | Ruta | Descripción |
     | ------------- | ----------- | ----------- |
     | [Administrador de Dataflow][12] | `roles/dataflow.admin` | Permitir que esta cuenta de servicio realice tareas administrativas de Dataflow.
-    | [Trabajador de Dataflow][13] | `roles/dataflow.worker` | Permitir que esta cuenta de servicio realice operaciones de trabajo de Dataflow. 
+    | [Trabajador de Dataflow][13] | `roles/dataflow.worker` | Permitir que esta cuenta de servicio realice operaciones de trabajo de Dataflow.
     | [Visor Pub/Sub][14] | `roles/pubsub.viewer` | Permitir a esta cuenta de servicio ver mensajes de la suscripción Pub/Sub con tus logs de Google Cloud
     | [Suscriptor Pub/Sub][15] | `roles/pubsub.subscriber` | Permitir a esta cuenta de servicio consumir mensajes de la suscripción Pub/Sub con tus logs de Google Cloud
     | [Publicador de Pub/Sub][16] | `roles/pubsub.publisher` | Permitir que esta cuenta de servicio publique mensajes fallidos en una suscripción separada, lo que permite analizar o reenviar logs
@@ -140,16 +140,16 @@ El comportamiento predeterminado para los trabajadores de pipeline de Dataflow e
 1. Selecciona un endpoint regional.
 1. En el menú desplegable **Dataflow template** (Plantilla de Dataflow), selecciona **Pub/Sub to Datadog** (Pub/Sub a Datadog).
 1. En la sección **Required Parameters** (Parámetros requeridos):
-      a. En el menú desplegable **Pub/Sub input subscription** (Suscripción de entrada Pub/Sub), selecciona la suscripción predeterminada que se creó anteriormente al crear un nuevo [sistema Pub/Sub](#create-a-google-cloud-publishsubscription-pubsub-system).  
+      a. En el menú desplegable **Pub/Sub input subscription** (Suscripción de entrada Pub/Sub), selecciona la suscripción predeterminada que se creó anteriormente al crear un nuevo [sistema Pub/Sub](#create-a-google-cloud-publishsubscription-pubsub-system).
       b. Introduce lo siguiente en el campo **Datadog Logs API URL** (URL de la API de logs de Datadog):
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
-      **Nota**: Asegúrate de que el selector de sitio de Datadog situado a la derecha de esta página de documentación está configurado en tu sitio de Datadog antes de copiar la URL anterior.  
+      **Nota**: Asegúrate de que el selector de sitio de Datadog situado a la derecha de esta página de documentación está configurado en tu sitio de Datadog antes de copiar la URL anterior.
       c. En el campo **Output deadletter Pub/Sub topic**, selecciona el [tema adicional](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que creaste anteriormente para recibir mensajes rechazados por la API de Datadog.
       d. Especifica una ruta para los archivos temporales en tu bucket de almacenamiento en el campo **Temporary location** (Localización temporal).
-1. Si anteriormente [creaste un secreto en Secret Manager](#create-a-secret-in-secret-manager) para tu valor de clave de API de Datadog: 
-    a. Haz clic en **Optional Parameters** (Parámetros opcionales) para ver los campos adicionales.  
+1. Si anteriormente [creaste un secreto en Secret Manager](#create-a-secret-in-secret-manager) para tu valor de clave de API de Datadog:
+    a. Haz clic en **Optional Parameters** (Parámetros opcionales) para ver los campos adicionales.
     b. Introduce el nombre del recurso del secreto en el campo **Google Cloud Secret Manager ID**.
         Para obtener el nombre del recurso, ve a tu secreto en [Secret Manager][8]. Haz clic en tu secreto. Haz clic en los tres puntos bajo **Action** (Acción) y selecciona **Copy resource name**(Copiar nombre de recurso).
     c. Introduce `SECRET_MANAGER` en el campo **Source of the API key passed** (Fuente de la clave de API pasada).
@@ -201,7 +201,7 @@ Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados,
 [20]: https://console.cloud.google.com/dataflow/
 [21]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
 [22]: https://app.datadoghq.com/logs/
-[23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[23]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
 [25]: /es/security/default_rules/#cat-cloud-siem
 [26]: /es/security/detection_rules/

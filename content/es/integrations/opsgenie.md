@@ -22,7 +22,7 @@ Crea alertas en Opsgenie utilizando `@opsgenie-{service-name}`:
 - Al tomar una snapshot
 - Cuando se activa una alerta de métrica
 
-## Configuración
+## Instalación
 
 ### Configuración
 
@@ -31,7 +31,7 @@ Crea alertas en Opsgenie utilizando `@opsgenie-{service-name}`:
 1. Inicia sesión en tu cuenta de Opsgenie y ve a la page (página) [Integraciones de Opsgenie](https://app.opsgenie.com/settings/integration/integration-list).
 1. Busca Datadog y haz clic en cuadro.
 1. Completa el Nombre de la integración y, si lo deseas, configura el Equipo asignado.
-1. Después de hacer clic en **Enviar**, permanece en la page (página) y guarda la clave de API de la integración recién creada. La necesitarás para finalizar la configuración.
+1. Después de hacer clic en **Enviar**, permanece en la page (página) y guarda la clave de API de la integración recién creada. La necesitarás para finalizar la instalación.
 1. Añade más integraciones de Datadog en Opsgenie yendo a la page (página) [Integraciones de Opsgenie](https://app.opsgenie.com/settings/integration/integration-list) y repitiendo los pasos anteriores.
 
 #### Registra las integraciones que has realizado en Opsgenie en Datadog

@@ -14,6 +14,9 @@ further_reading:
 - link: "/database_monitoring/guide/sql_extended_events/"
   tag: "Documentation"
   text: "Configure Query Completion and Query Error Collection"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -224,7 +227,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_endpoint": "<INSTANCE_ENDPOINT>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.

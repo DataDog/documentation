@@ -19,7 +19,7 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
-Learn how to set up App and API Protection (AAP) on your Kubernetes services by selecting the service's programming language.
+Learn how to set up App and API Protection (AAP) on your Kubernetes clusters by selecting the Kubernetes integration that suits you best.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>
@@ -27,24 +27,11 @@ Learn how to set up App and API Protection (AAP) on your Kubernetes services by 
 </div>
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python/kubernetes" >}}
-  {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs/kubernetes" >}}
-  {{< appsec-integration name="Java" avatar="java" link="/security/application_security/setup/java/kubernetes" >}}
-  {{< appsec-integration name="Go" avatar="go" link="/security/application_security/setup/go" >}}
-  {{< appsec-integration name="Ruby" avatar="ruby" link="/security/application_security/setup/ruby/kubernetes" >}}
-  {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/setup/dotnet/kubernetes" >}}
-  {{< appsec-integration name="PHP" avatar="php" link="/security/application_security/setup/php/kubernetes" >}}
+  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
+  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./envoy-gateway" >}}
+  {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./gateway-api" >}}
+  {{< appsec-integration name="Ingress NGINX Controller" avatar="nginx" link="../nginx/ingress-controller" >}}
 {{< /appsec-integrations >}}
-
-## Proxies
-
-{{< appsec-integrations >}}
-  {{< appsec-integration name="NGINX" avatar="nginx" link="/security/application_security/setup/nginx/kubernetes" >}}
-  {{< appsec-integration name="Envoy" avatar="envoy" link="/security/application_security/setup/envoy" >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="/security/application_security/setup/istio" >}}
-{{< /appsec-integrations >}}
-
-
 
 ## Further Reading
 

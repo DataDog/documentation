@@ -80,7 +80,7 @@ This widget can be used with the **[Dashboards API][3]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
+[1]: /service_level_objectives/
 [2]: /dashboards/template_variables/
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

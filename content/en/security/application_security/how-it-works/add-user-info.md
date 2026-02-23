@@ -3,6 +3,7 @@ title: User Monitoring and Protection
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
+  - /security/application_security/threats/add-user-info/
 ---
 
 ## Overview

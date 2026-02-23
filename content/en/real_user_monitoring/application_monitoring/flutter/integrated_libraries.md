@@ -216,7 +216,49 @@ final datadogConfig = DatadogConfiguration(
     );
 ```
 
+## Dio
 
+<div class="alert alert-info">
+For most Dio setups, use Datadog Tracking Http Client instead of the specialized Dio interceptor. Only use the Dio interceptor if you're using a non-standard Dio <code>HttpClientAdapter</code> that cannot be tracked by Datadog Tracking Http Client.
+</div>
+
+Datadog provides [`datadog_dio`][6] for use with the [Dio Flutter package][7]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
+
+### Setup
+
+Add `datadog_dio` to your `pubspec.yaml` or by running `flutter pub add datadog_dio` from your terminal:
+
+```yaml
+dependencies:
+  # Other dependencies
+  datadog_dio: ^1.0.0
+```
+
+To use this plugin, call `addDatadogInterceptor` at the end of your Dio initialization:
+
+```dart
+import 'package:datadog_dio/datadog_dio.dart'
+
+// Initialize Datadog - be sure to set the [DatadogConfiguration.firstPartyHosts] member
+// Enable Datadog Distributed Tracing
+final config = DatadogConfiguration(
+  // ...
+  firstPartyHosts = ['localhost']
+)
+
+// Create our Dio client
+final dio = Dio()
+  // Dio configuration...
+  ..addDatadogInterceptor(DatadogSdk.instance);
+```
+
+Calling `addDatadogInterceptor` adds the Datadog interceptor as the first interceptor in your list. This ensures all network requests from Dio are sent to Datadog, since other interceptors may not forward information down the chain. Call `addDatadogInterceptor` after completing all other Dio configuration.
+
+### Use with other Datadog Network Tracking
+
+To track all network requests, including those made by `dart:io` and widgets like `NetworkImage`, use `datadog_tracking_http_client` to capture these requests. However, depending on your setup, the global override method used in `enableHttpTracking` may cause resources to be double reported (once by the global override and once by the Dio interceptor)
+
+To avoid this, use the `ignoreUrlPatterns` parameter when calling `enableHttpTracking` to ignore requests made by your Dio client.
 
 ## Further Reading
 
@@ -232,3 +274,4 @@ final datadogConfig = DatadogConfiguration(
 [8]: https://pub.dev/packages/webview_flutter
 [9]: https://pub.dev/packages/flutter_inappwebview
 [10]: /real_user_monitoring/application_monitoring/web_view_tracking?tab=flutter
+[11]: https://pub.dev/packages/datadog_dio

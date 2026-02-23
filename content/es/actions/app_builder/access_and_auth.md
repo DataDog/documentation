@@ -37,7 +37,7 @@ Cuando ejecutas una aplicación, el usuario de la cuenta de servicio resuelve la
 
 1. Haz clic en el icono de engranaje (**Settings** [ajustes]).
 1. Selecciona en **Manage app identity** (Gestionar identidad de la aplicación).
-1. Haz clic en tu cuenta de servicio junto a **Run As** (Ejecutar como).
+1. Haz clic en tu cuenta de servicio junto a *Run As** (Ejecutar como).
 
 #### Eliminar una cuenta de servicio asociada a una aplicación
 
@@ -119,8 +119,11 @@ App Builder proporciona los siguientes permisos para cada aplicación:
 Viewer (Visor)
 : Ejecuta y visualiza la aplicación
 
+Colaborador
+: Editar, ejecutar y ver la aplicación
+
 Editor
-: Edita, ejecuta y visualiza la aplicación
+: Editar, ejecutar, visualizar, publicar y eliminar la aplicación
 
 Para restringir el acceso a la aplicación, realiza los siguientes pasos en el lienzo de la aplicación:
 1. Ve a la vista de edición detallada de la aplicación a la cual quieres restringir el acceso.

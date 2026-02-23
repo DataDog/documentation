@@ -143,7 +143,7 @@ You can add identifier tags to connections. The tagging rules for connections ar
 
 ## Connection groups
 
-You can create groups of connections so that your workflows and apps can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
+You can create groups of connections so that your workflows and apps can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group).
 
 You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.
 
@@ -206,7 +206,7 @@ To delete a connection group:
 [8]: /service_management/workflows/actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /actions/connections/http/
-[11]: https://datadoghq.slack.com/
+[11]: https://chat.datadoghq.com/
 [12]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection
 [13]: /getting_started/tagging/
 [14]: https://app.datadoghq.com/app-builder/

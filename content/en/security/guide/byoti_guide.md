@@ -2,6 +2,9 @@
 title: Bring Your Own Threat Intelligence
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"

@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/agent/cluster_agent/commands
+description: Datadog Cluster Agent のコマンド ライン インターフェイスと環境変数に関するリファレンス ガイドです。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: ブログ
@@ -169,7 +170,7 @@ Datadog からのメトリクスの問い合わせに使用するウィンドウ
 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
 : init コンテナのメモリリクエストと制限を構成します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

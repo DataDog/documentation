@@ -20,6 +20,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 All configuration options below have system property and environment variable equivalents.
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
@@ -64,7 +66,8 @@ See also [DD_APM_TRACING_ENABLED][21].
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
 **Default**: `null`<br>
-Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`
+Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`<br>
+**Note**: Don't rely on `dd.trace.config` as the only mechanism to enable or disable SDK-dependent products (for example, Profiler and Dynamic Instrumentation). Instead, use the corresponding system properties or environment variables (or `application_monitoring.yaml` for Single Step Instrumentation). 
 
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
@@ -210,7 +213,8 @@ When `true`, debug mode for the Datadog Java Tracer is enabled.
 `datadog.slf4j.simpleLogger.jsonEnabled`
 : **Environment Variable**: Not available<br>
 **Default**: `false`<br>
-When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.
+When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.<br>
+**Note**: This setting is specific to the embedded SLF4J simple logger and does not support environment variables. `dd.log.format.json` is the preferred configuration option.
 
 `dd.trace.servlet.principal.enabled`
 : **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
@@ -246,6 +250,11 @@ Request path | Resource path
 `/admin/index.jsp` | `/admin-page`
 `/admin/user/12345/delete` | `/admin/user`
 `/user/12345` | `/user/?`
+
+`dd.trace.http.client.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_CLIENT_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP client request paths to custom resource names. Uses the same format as `dd.trace.http.server.path-resource-name-mapping`, but applies to HTTP client spans instead of server spans.
 
 `dd.trace.status404rule.enabled`
 : **Environment Variable**: `DD_TRACE_STATUS404RULE_ENABLED`<br>
@@ -325,6 +334,11 @@ When set to `true` db spans get assigned the instance name as the service name
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
 
+`dd.dbm.propagation.mode`
+: **Environment Variable**: `DD_DBM_PROPAGATION_MODE` <br>
+**Default**: `null`<br>
+When set to `service` or `full`, enables Database Monitoring and APM correlation. For more information, see [Correlate Database Monitoring and Traces][23].
+
 ### AAP
 
 `dd.appsec.enabled`
@@ -340,7 +354,7 @@ For more information, see [Enabling AAP for Java][19].
 **Environment Variable**: `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Environment Variable (Deprecated)**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
-By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data.
 
 `dd.trace.http.client.error.statuses`
 : **Environment Variable**: `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`<br>
@@ -363,6 +377,18 @@ A range of errors can be accepted. By default, gRPC status codes 1 to 16 are rep
 A range of errors can be accepted. By default, gRPC status codes 2 to 16 are reported as errors for gRPC servers. This configuration overrides that. Ex. `dd.grpc.server.error.statuses=2-4,7-10`
 
 ### Logs
+
+`dd.log.level`
+: **Environment Variable**: `DD_LOG_LEVEL`<br>
+**Default**: `INFO`<br>
+Sets the internal log level for the Datadog Java Tracer. Valid values: `DEBUG`, `INFO`, `WARN`, `ERROR`.<br>
+Available since version 1.36.0
+
+`dd.log.format.json`
+: **Environment Variable**: `DD_LOG_FORMAT_JSON`<br>
+**Default**: `false`<br>
+When `true`, outputs Datadog Java Tracer logs in a JSON format compatible with the Datadog Logs UI.<br>
+Available since version 1.58.0
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
@@ -668,3 +694,4 @@ Deprecated since version 1.9.0
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
 [21]: /tracing/trace_collection/library_config/#traces
 [22]: /profiler/
+[23]: /database_monitoring/connect_dbm_and_apm/?tab=java

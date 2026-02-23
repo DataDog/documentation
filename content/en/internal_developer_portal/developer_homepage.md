@@ -59,7 +59,15 @@ Each PR includes:
 - **Status** (Open / Draft / Merged)  
 - **Assignee / Reviewer**  
 
-If your organization hasn't configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub Integration tile][1]. To read PRs from GitHub, this integration requires the following permissions: **Members: Read**, **Metadata: Read**, **Pull Requests: Read**, and **Pull Requests: Read**.
+If your organization hasn't configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub Integration tile][1]. To read PRs from GitHub, this integration requires the following permissions: 
+- Members: Read
+- Metadata: Read
+- Pull Requests: Read
+- Contents: Read
+- Statuses: Read
+- Checks: Read
+
+If you have multiple GitHub orgs connected within Datadog, users must have the Datadog Integrations Read Permissions to toggle between orgs.
 
 
 ## Further reading

@@ -59,7 +59,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
 </script>
@@ -72,7 +72,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js','DD_LOGS')
 </script>
@@ -85,7 +85,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
 </script>
@@ -98,7 +98,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
 </script>
@@ -111,7 +111,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
 </script>
@@ -124,7 +124,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
 </script>
@@ -137,7 +137,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
 </script>
@@ -157,7 +157,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -167,7 +168,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -177,7 +179,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -187,7 +190,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -197,7 +201,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -207,7 +212,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -217,7 +223,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -226,7 +233,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {{% /tab %}}
 {{< /tabs >}}
 
-### Step 3 - Initialize the Browser SDK
+### Step 3 - Initialize the Logs Browser SDK
 
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all logs are captured correctly.
 
@@ -254,8 +261,8 @@ datadogLogs.init({
 
 ```javascript
 <script>
-  window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
+  window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
       clientToken: '<CLIENT_TOKEN>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
@@ -272,7 +279,7 @@ datadogLogs.init({
 
 ```javascript
 <script>
-    window.DD_RUM && window.DD_RUM.init({
+    window.DD_LOGS && window.DD_LOGS.init({
       clientToken: '<CLIENT_TOKEN>',
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/

@@ -16,6 +16,7 @@ With Risk Insights, you can:
 
 - Explore entities, filtering them by attributes such as [risk score severity](#risk-scoring) and configuration risks.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
+- Configure notifications so you can address risky entities as they emerge.
 - Triage relevant items in bulk.
 - Take mitigation steps such as creating a global suppression or creating a case for an entity.
 
@@ -49,9 +50,22 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 {{< img src="security/entities/entities-next-steps2.png" alt="The available next steps for an entity as shown in the entity side panel" style="width:80%;" >}}
 
+## Configure notifications for Risk Insights
+
+You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
+
+1. Navigate to the **Create a new Risk Insight notification** page. There are two ways to do this:
+   - In Datadog, go to the [Risk Insights Explorer][4], then click **Create Notification Rule**.
+   - In Datadog, go to **Cloud SIEM** > [**Settings**][7]. Under **Products**, in the **Cloud SIEM** section, click **Risk Insights**; then, under **Notification rules**, click **New notification rule**.
+1. Under **Define entity attributes**, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside **Entities matching**, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
+   <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
+1. Under **Set notification conditions**, specify the risk score threshold to trigger notifications for.
+1. Under **Configure notification**, enter a name for the notification, and recipients to send it to.
+   - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
+
 ## Risk scoring
 
-An entity's risk score approximates the entity's risk level over the past 14 days of activity. 
+An entity's risk score approximates the entity's risk level over the past 14 days of activity.
 
 The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired.
 
@@ -87,6 +101,7 @@ The severity threshold of an entity is calculated by adding up the score impact 
 [1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
-[4]: https://app.datadoghq.com/security/entities
+[4]: https://app.datadoghq.com/security/siem/risk-insights
 [5]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
 [6]: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
+[7]: https://app.datadoghq.com/security/configuration/siem/risk-insights

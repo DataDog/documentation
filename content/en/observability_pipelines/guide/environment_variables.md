@@ -1,6 +1,8 @@
 ---
 title: Environment Variables
 disable_toc: false
+aliases:
+    - /observability_pipelines/environment_variables/
 ---
 
 ## Overview
@@ -39,6 +41,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Logstash
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
+### OpenTelemetry
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
+
 ### Socket
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -74,13 +79,13 @@ Some Observability Pipelines components require setting up environment variables
 ### Amazon Security Lake
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
-### Chronicle
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
-
 ### CrowdStrike NG-SIEM
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
-### Datadog
+### Datadog Logs
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+### Datadog Metrics
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Archives
@@ -91,8 +96,17 @@ Some Observability Pipelines components require setting up environment variables
 ### Elasticsearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
+### Google Pub/Sub
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
+
+### Google SecOps
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
 ### HTTP Client
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}
+
+### Kafka
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
 
 ### Microsoft Sentinel
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}

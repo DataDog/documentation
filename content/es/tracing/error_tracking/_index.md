@@ -28,7 +28,7 @@ title: Seguimiento de errores para servicios de backend
 
 ## Configuración
 
-El seguimiento de errores está disponible para todos los idiomas que admite APM y no requiere el uso de un SDK diferente.
+Error Tracking está disponible para todos los lenguajes compatibles con APM. No requiere un SDK adicional ni cambios de configuración.
 
 Opcionalmente, para ver fragmentos de código en trazas (traces) de stack tecnológico, configura la [integración de GitHub][4].
 
@@ -38,7 +38,7 @@ Para empezar a configurar tu repositorio, consulta la [documentación sobre la i
 
 ## Uso de los atributos de tramos (spans) para realizar el seguimiento de tramos de errores
 
-Los rastreadores de Datadog recopilan errores a través de las integraciones y de la instrumentación manual del código fuente de tus servicios backend. Un tramo de error debe contener los [atributos de tramo][1] `error.stack`, `error.message` y `error.type` para ser rastreado. Si un error se notifica varias veces dentro de un servicio, sólo se conserva el error más destacado.
+Los rastreadores de Datadog recopilan errores a través de las integraciones y de la instrumentación manual del código fuente de tus servicios backend. Un tramo de error debe contener los [atributos de tramo][1] `error.stack`, `error.message` y `error.type` para ser rastreado. Si un error se notifica varias veces dentro de un servicio, solo se conserva el error más destacado.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Gráfica de llamas con errores." style="width:100%;" >}}
 

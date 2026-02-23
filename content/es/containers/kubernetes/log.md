@@ -4,18 +4,21 @@ aliases:
 description: Configura la recopilación de logs de las aplicaciones en contenedores
   que se ejecutan en Kubernetes utilizando el Datadog Agent
 further_reading:
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitorizar logs de Amazon EKS en Fargate con Datadog
 - link: /agent/kubernetes/apm/
   tag: Documentación
   text: Recopilar tus trazas (traces) de aplicaciones
 - link: /agent/kubernetes/prometheus/
   tag: Documentación
-  text: Recopila tus métricas de Prometheus
+  text: Recopilar tus métricas de Prometheus
 - link: /agent/kubernetes/integrations/
   tag: Documentación
-  text: Recopila las métricas de tus aplicaciones y logs automáticamente
+  text: Recopilar las métricas de tus aplicaciones y logs automáticamente
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limita la recopilación de datos solo a un subconjunto de contenedores
+  text: Limitar la recopilación de datos a un subconjunto de contenedores
 - link: /agent/kubernetes/tag/
   tag: Documentación
   text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor

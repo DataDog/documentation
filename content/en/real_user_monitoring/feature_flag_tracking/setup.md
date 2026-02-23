@@ -192,20 +192,20 @@ Initialize Amplitude's SDK and create an inspector reporting feature flag evalua
 For more information about initializing Amplitude's SDK, see Amplitude's [Android SDK documentation][1].
 
 ```kotlin
-  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
-    override fun track(exposure: Exposure) {
-        // Send the feature flag when Amplitude reports the exposure
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(
-            exposure.flagKey,
-            exposure.variant.orEmpty()
-        )
-    }
+internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+  override fun track(exposure: Exposure) {
+      // Send the feature flag when Amplitude reports the exposure
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(
+          exposure.flagKey,
+          exposure.variant.orEmpty()
+      )
   }
+}
 
-  // In initialization:
-  val config = ExperimentConfig.Builder()
-      .exposureTrackingProvider(DatadogExposureTrackingProvider())
-      .build()
+// In initialization:
+val config = ExperimentConfig.Builder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider())
+    .build()
 ```
 
 [1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
@@ -271,11 +271,11 @@ For more information about initializing the ConfigCat Swift (iOS) SDK, see Confi
 When initializing the ConfigCat Android SDK, subscribe to the `flagEvaluated` event and report feature flag evaluations to Datadog:
 
 ```java
-  ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.hooks().addOnFlagEvaluated(details -> {
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
-    });
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+  options.hooks().addOnFlagEvaluated(details -> {
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(details.key, details.value);
   });
+});
 ```
 
 For more information about initializing the ConfigCat Android SDK, see ConfigCat's [Android SDK documentation][1].
@@ -803,23 +803,23 @@ Initialize Split's SDK and create an inspector reporting feature flag evaluation
 For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
 
 ```kotlin
-  internal class DatadogSplitImpressionListener : ImpressionListener {
-    override fun log(impression: Impression) {
-        // Send the feature flag when Split reports the impression
-        GlobalRumMonitor.get().addFeatureFlagEvaluation(
-            impression.split(),
-            impression.treatment()
-        )
-    }
-    override fun close() {
-    }
+internal class DatadogSplitImpressionListener : ImpressionListener {
+  override fun log(impression: Impression) {
+      // Send the feature flag when Split reports the impression
+      GlobalRumMonitor.get().addFeatureFlagEvaluation(
+          impression.split(),
+          impression.treatment()
+      )
   }
+  override fun close() {
+  }
+}
 
-  // In initialization:
-  val apikey = BuildConfig.SPLIT_API_KEY
-  val config = SplitClientConfig.builder()
-      .impressionListener(DatadogSplitImpressionListener())
-      .build()
+// In initialization:
+val apikey = BuildConfig.SPLIT_API_KEY
+val config = SplitClientConfig.builder()
+    .impressionListener(DatadogSplitImpressionListener())
+    .build()
 ```
 
 

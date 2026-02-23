@@ -3,7 +3,7 @@ app_id: azure-datafactory
 app_uuid: b85b780d-5e7f-4406-b2e6-d958445cb4f6
 assets:
   dashboards:
-    azure_data_factory: assets/dashboard/azure_data_factory.json
+    azure_data_factory: assets/dashboards/azure_data_factory.json
   integration:
     auto_install: true
     events:
@@ -69,12 +69,12 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Data Fa
 
 ### Instalación
 
-Si aún no lo ha hecho, configure [Microsoft Azure integración][1]. No se requiere ningún paso de instalación adicional.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requiere ningún paso de instalación adicional.
 
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-datafactory" }}
+{{< get-metrics-from-git "azure_data_factory" >}}
 
 
 ### Eventos

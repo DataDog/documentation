@@ -14,6 +14,9 @@ further_reading:
 - link: "/database_monitoring/guide/sql_extended_events/"
   tag: "Documentation"
   text: "Configure Query Completion and Query Error Collection"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -287,7 +290,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<AZURE_ENDPOINT_ADDRESS>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.

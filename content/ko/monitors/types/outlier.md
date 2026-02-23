@@ -5,15 +5,18 @@ aliases:
 - /ko/monitors/create/types/outlier/
 description: 다른 그룹과 다르게 행동하는 그룹 멤버에 대한 알림
 further_reading:
+- link: https://www.datadoghq.com/blog/outlier-detection-algorithms-at-datadog
+  tag: 블로그
+  text: 'Datadog에서 이상치 감지: 알고리즘 살펴보기'
 - link: /monitors/notify/
   tag: 설명서
-  text: Configure your monitor notifications
-- link: /monitors/downtimes/
-  tag: 설명서
-  text: Schedule a downtime to mute a monitor
-- link: /monitors/manage/status/
+  text: 모니터 알림 설정
+- link: /모니터/상태/
   tag: 설명서
   text: 모니터 상태 확인
+- link: /watchdog/insights/
+  tag: 설명서
+  text: Watchdog Insights의 이상치 감지
 title: 이상치 모니터
 ---
 
@@ -21,11 +24,9 @@ title: 이상치 모니터
 
 이상치 탐지는 특정 그룹이 동료 그룹과 다르게 행동하는 경우를 감지할 수 있는 알고리즘 기능입니다. 예를 들어 풀의 한 웹 서버가 비정상적인 수의 요청을 처리하고 있거나 한 AWS 가용성 영역에서 다른 서버보다 훨씬 더 많은 500개 오류가 발생하고 있음을 탐지할 수 있습니다.
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="이상치 메트릭 알림" style="width:80%;">}}
-
 ## 모니터 생성
 
-Datadog에서 [이상치 모니터][1]를 생성하려면 기본 탐색(*Monitors --> New Monitor --> Outlier*)을 사용합니다.
+Datadog에서 이상치 모니터를 생성하려면 [**Monitors > New Monitor > Outlier**][1]로 이동하세요.
 
 ### 메트릭 정의
 
@@ -36,7 +37,7 @@ Datadog에서 [이상치 모니터][1]를 생성하려면 기본 탐색(*Monitor
 ### 경고 조건 설정
 
 * 각 이상치 `<GROUP>`에 대해 별도의 알림을 트리거합니다.
-* 과거 `5 minutes`, `15 minutes`, `1 hour` 등 또는 `custom`으로 1분에서 24시간 사이의 값을 설정합니다.
+* 지난 `5 minutes`, `15 minutes`, `1 hour` 등 또는 `custom`을 사용해 1분에서 1년 사이의 값을 설정합니다.
 * `MAD`, `DBSCAN`, `scaledMAD`, 또는 `scaledDBSCAN` 알고리즘을 사용합니다.
 * 허용 오차: `0.33`, `1.0`, `3.0` 등
 * %: `10`, `20`, `30` 등 (`MAD` 알고리즘에만 해당)
@@ -73,15 +74,15 @@ DBSCAN의 구현은 초기 임계값을 곱하여 DBSCAN의 거리 매개변수 
 **파라미터**<br>
 이상치 모니터에 MAD를 사용하려면 `tolerance`및 `%` 파라미터를 설정합니다.
 
-허용 오차는 점이 이상치으로 간주되기 위해 중앙값에서 떨어져야 하는 편차 수를 지정합니다. 이 파라미터는 예상되는 데이터 변동성에 따라 조정되어야 합니다. 예를 들어, 데이터가 일반적으로 작은 범위의 값 내에 있으면 이 값도 작아야 합니다. 그렇지 않고 점들이 크게 달라질 수 있는 경우 더 높은 척도를 설정하여 변동성이 허위 긍정을 트리거하지 않도록 합니다.
+허용 오차는 한 지점이 중앙값에서 얼마나 벗어나야(그룹과는 무관하게) 이상치로 간주되는지를 나타내는 편차 개수를 의미합니다. 이 파라미터는 데이터의 예상 변동성에 따라 조정해야 합니다. 예를 들어, 데이터가 일반적으로 작은 값 범위 내에 있는 경우 허용 오차는 작아야 합니다. 반대로, 점의 변동 폭이 큰 경우, 변동성으로 인해 오탐이 발생하지 않도록 더 높은 척도를 설정해야 합니다.
 
-백분율은 계열에서 이상치로 간주되는 점의 백분율을 나타냅니다. 이 백분율을 초과하면 전체 계열이 이상치로 표시됩니다.
+백분율은 그룹 내 이상치로 간주되는 데이터 포인트의 백분율을 나타냅니다. 이 백분율을 초과하면 그룹 전체가 이상치로 표시됩니다.
 
 [1]: https://en.wikipedia.org/wiki/Median_absolute_deviation
 {{% /tab %}}
 {{% tab "Scaled" %}}
 
-DBSCAN 및 MAD에는 확장 버전(scaledDBSCAN 및 scaledMAD)이 있습니다. 대부분의 상황에서 확장된 알고리즘은 일반 알고리즘과 동일하게 동작합니다. 그러나 DBSCAN/MAD 알고리즘이 밀접하게 클러스터된 메트릭 그룹 내에서 이상치를 식별하고, 메트릭 전체 크기에 따라 이상치 탐지 알고리즘을 확장하려는 경우 확장된 알고리즘을 사용하세요.
+DBSCAN 및 MAD에는 확장 버전(scaledDBSCAN 및 scaledMAD)이 있습니다. 대부분의 상황에서 확장된 알고리즘은 일반 알고리즘과 동일하게 동작합니다. 그러나 DBSCAN/MAD 알고리즘이 밀접하게 클러스터된 메트릭 그룹 내에서 이상치를 식별하고, 메트릭 전체 크기에 따라 이상치 탐지 알고리즘을 확장하려는 경우 확장된 알고리즘을 사용하세요.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -92,7 +93,7 @@ DBSCAN 및 MAD에는 확장 버전(scaledDBSCAN 및 scaledMAD)이 있습니다. 
 
 다음 이미지에서는 호스트 그룹이 버퍼를 함께 플러시하는 반면, 한 호스트는 약간 나중에 버퍼를 플러시합니다. DBSCAN은 이를 이상치로 선택하지만 MAD는 그렇지 않습니다. 그룹 동기화는 동시에 다시 시작되는 호스트의 아티팩트일 뿐이므로 MAD가 더 나을 수 있습니다. 반면 플러시된 버퍼 대신 메트릭이 호스트 간에 동기화되어야 하는 예약된 작업을 나타낼 경우 DBSCAN을 사용하는 것이 더 좋습니다.
 
-{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="이상치 플러싱" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="이상치 플러싱" style="width:80%;">}}
 
 ### 고급 알림 조건
 
@@ -100,7 +101,7 @@ DBSCAN 및 MAD에는 확장 버전(scaledDBSCAN 및 scaledMAD)이 있습니다. 
 
 ### 알림
 
-**Say what's happening** 및 **Notify your team** 섹션에 대한 자세한 지침은 [알림][4] 페이지를 참조하세요.
+**Configure notifications and automations** 섹션에 대한 자세한 가이드는 [Notifications][4] 페이지를 참고하세요.
 
 ## API
 
@@ -116,9 +117,9 @@ DBSCAN 및 MAD에는 확장 버전(scaledDBSCAN 및 scaledMAD)이 있습니다. 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/outlier
+[1]: https://app.datadoghq.com/monitors/create/outlier
 [2]: /ko/monitors/types/metric/#define-the-metric
 [3]: /ko/monitors/configuration/#advanced-alert-conditions
 [4]: /ko/monitors/notify/
 [5]: /ko/api/v1/monitors/#create-a-monitor
-[6]: /ko/monitors/manage/status/#settings
+[6]: /ko/monitors/status/#settings

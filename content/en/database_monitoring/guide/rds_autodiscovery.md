@@ -1,6 +1,7 @@
 ---
 title: Configuring Database Monitoring for Amazon RDS DB Instances
-
+aliases:
+- /database_monitoring/rds_autodiscovery
 ---
 
 This guide assumes you have configured Database Monitoring for your Amazon RDS [Postgres][1] or [MySQL][11] databases.

@@ -63,8 +63,8 @@ At the top of the query editor:
 
 Datadog automatically creates a visualization based on your query.
 
-<div class="alert alert-info">
-<strong>Tip:</strong> Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to auto-select a chart type based on your query, add or edit encodings, or rotate axes/switch chart types.
+<div class="alert alert-tip">
+Use the Command Palette (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) to auto-select a chart type based on your query, add or edit encodings, or rotate axes/switch chart types.
 </div>
 
 {{% collapse-content title="Guided example of Auto-generate" level="h4" expanded=false %}}

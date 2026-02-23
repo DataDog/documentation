@@ -1,3 +1,5 @@
 - Fluent socket address and port:
     - The Observability Pipelines Worker listens on this address for incoming log messages.
-    - Stored in the environment variable  `DD_OP_SOURCE_FLUENT_ADDRESS`.
+    - The default environment variable is `DD_OP_SOURCE_FLUENT_ADDRESS`.
+- Fluent Bit TLS passphrase (when enabled):
+    - The default environment variable is `DD_OP_SOURCE_FLUENT_KEY_PASS`.

@@ -121,10 +121,12 @@ Para obtener más información, consulta la [visita guiada del producto de 30 se
 - [Runtime Code Analysis (IAST)][29] para identificar vulnerabilidades en el código de origen dentro de tus servicios
 - [Secret Scanning][30] para identificar y validar secretos filtrados (en Vista previa)
 
-Code Security ayuda a los equipos a implementar DevSecOps en toda la organización:
+Con las integraciones de IDE, los comentarios de las solicitudes pull y las puertas de Continuous Integration Continuous Delivery, Code Security ayuda a los equipos a implementar DevSecOps en toda la organización:
 - **Desarrolladores:** detección temprana de vulnerabilidades, mejoras en la calidad del código, desarrollo más rápido, ya que los desarrolladores pasan menos tiempo depurando y parcheando.
 - **Administradores de seguridad:** postura de seguridad mejorada, gestión de parches mejorada en respuesta a alertas tempranas de vulnerabilidad y monitorización del cumplimiento.
-- **Ingenieros de fiabilidad del sitio (SRE):** checks de seguridad automatizados en todo el flujo de trabajo de CI/CD, cumplimiento de la seguridad y resiliencia del sistema. SAST reduce la sobrecarga manual de los SRE y garantiza que cada versión se someta a tests exhaustivos para detectar vulnerabilidades.
+- **Ingenieros de fiabilidad del sitio (SRE):** checks de seguridad automatizadas a través del proceso de Continuous Integration Continuous Delivery, cumplimiento de la seguridad y resistencia del sistema. Las pruebas de seguridad de aplicaciones estáticas (SAST) reducen la sobrecarga manual de los SRE y garantiza que cada versión se someta a tests exhaustivos para detectar vulnerabilidades.  
+
+{{< img src="code_security/gitlab_integration_light.png" alt="Un resultado de pruebas de seguridad de aplicaciones estáticas (SAST) en un resultado de GitLab" width="100%">}}
 
 ## Cloud Security
 
@@ -139,11 +141,6 @@ Para empezar a utilizar Datadog Security, ve a la página [**Seguridad** > **Con
 ##  App and API Protection
 
 [App and API Protection (AAP)][1] de Datadog proporciona una observabilidad de los ataques a nivel de aplicación, cuyo objetivo es explotar vulnerabilidades a nivel de código, como Server-Side-Request-Forgery (SSRF), Inyección SQL, Log4Shell y Reflected Cross-Site-Scripting (XSS). AAP aprovecha [Datadog APM][2], el [Datadog Agent][3] y las reglas de detección en la aplicación para detectar amenazas en el entorno de tu aplicación. Para obtener más información, consulta la [visita guiada] del producto (https://www.datadoghq.com/guided-tour/security/application-security-management/).
-
-Además de la detección de amenazas, Datadog proporciona la detección de vulnerabilidades de código y biblioteca de extremo a extremo, desde el desarrollo hasta la producción con [Code Security][20], que incluye las siguientes funciones:
-- [Static Code Analysis (SAST)][21] para identificar problemas de seguridad y calidad en el código de origen
-- [Software Composition Analysis (SCA)][22] para identificar dependencias de código abierto tanto en tus repositorios como en tus servicios
-- [Runtime Code Analysis (IAST)][23] para detectar vulnerabilidades a nivel de código en tus servicios
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="Panel de señales de seguridad en Datadog, que muestra flujos de ataque y gráficas de llamas" width="75%">}}
 
@@ -160,9 +157,9 @@ Además de la detección de amenazas, Datadog proporciona la detección de vulne
 
 [Sensitive Data Scanner][24] puede ayudar a prevenir fugas de datos confidenciales y limitar los riesgos de incumplimiento detectando, clasificando y, opcionalmente, redactando los datos confidenciales. Puede analizar en busca de datos confidenciales en tus datos de telemetría, como logs de aplicación, tramos (spans) APM, eventos RUM y eventos de Event Management. También puede analizar en busca de información confidencial en tus recursos de almacenamiento en la nube.
 
-Después de configurar [Sensitive Data Scanner][25],, utiliza la página de resumen para ver detalles de los problemas identificados en datos confidenciales, para que puedas clasificarlos, investigarlos y solucionarlos.
+Después de [configurar Sensitive Data Scanner][25], utiliza la página de resultados para ver los detalles de los resultados de datos confidenciales que se han identificado, de modo que puedas clasificar, investigar y corregir los resultados.
 
-{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="Página de resumen que muestra información general de los problemas de confidencialidad desglosados por prioridad" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="Página de resumen que muestra información general sobre hallazgos de información confidencial, desglosados por prioridad" style="width:100%;" >}}
 
 ## Referencias adicionales
 

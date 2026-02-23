@@ -8,6 +8,10 @@ aliases:
   - /security/threats/security_profiles
   - /security/threats/runtime_anomaly_detection
   - /security/threats/
+further_reading:
+  - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
+    tag: "Blog"
+    text: "Turn fragmented runtime signals into coherent attack stories with Datadog Workload Protection"
 cascade:
 - _target:
     path: /security/workload_protection/agent_expressions
@@ -87,6 +91,10 @@ Datadog is introducing a new feature called Active Protection to address the cry
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Workload Protection detection rules{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/
 [2]: /agent/

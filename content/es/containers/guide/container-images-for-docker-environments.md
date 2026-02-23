@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/agent/guide/container-images-for-docker-environments
+description: Descripción general de las imágenes de contenedores de Datadog disponibles
+  para entornos de Docker en diferentes registros
 further_reading:
 - link: /agent/docker/
   tag: Documentación
@@ -28,13 +30,13 @@ Si utilizas Docker, hay varias imágenes de contenedor disponibles a través de 
 
 
 [1]: /es/agent/docker/
-[2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[2]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/agent
 [3]: /es/developers/dogstatsd/
-[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/dogstatsd
+[4]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/dogstatsd
 [5]: /es/agent/cluster_agent/
-[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/cluster-agent
+[6]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/cluster-agent
 [7]: /es/getting_started/synthetics/private_location/
-[8]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker
+[8]: https://console.cloud.google.com/artifacts/docker/datadoghq/us/gcr.io/synthetics-private-location-worker
 {{% /tab %}}
 {{% tab "ECR" %}}
 
@@ -61,7 +63,7 @@ Si utilizas Docker, hay varias imágenes de contenedor disponibles a través de 
 
 Si necesitas usar Docker Hub, consulta [Docker Hub][1].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

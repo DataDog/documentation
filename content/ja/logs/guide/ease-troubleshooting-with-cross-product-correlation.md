@@ -6,7 +6,7 @@ further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces
   tag: ドキュメント
   text: ログとトレースの接続
-- link: /real_user_monitoring/platform/connect_rum_and_traces/
+- link: /real_user_monitoring/correlate_with_other_telemetry/apm/
   tag: ドキュメント
   text: RUM およびセッションリプレイとトレースの接続
 - link: /synthetics/apm/
@@ -66,39 +66,9 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 
 #### NGINX
 
-##### OpenTracing のセットアップ
+NGINX のログとトレースを関連付けるには、トレース ID が含まれるように NGINX の `log_format` を設定し、ログからその ID を解析するための Datadog パイプラインを設定する必要があります。
 
-[NGINX トレースインテグレーション][5]を参照。
-
-##### ログのトレース ID の挿入
-
-トレース ID は、`opentelemetry_trace_id` という変数に保存されます。NGINX コンフィギュレーションファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログフォーマットを更新します。
-
-```conf
-http {
-  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
-          '$status $body_bytes_sent "$http_referer" '
-          '"$http_user_agent" "$http_x_forwarded_for" ';
-
-  access_log /var/log/nginx/access.log;
-}
-```
-
-##### パイプラインでトレース ID をパース
-
-1. NGINX パイプラインのクローンを作成します。
-
-2. 最初の [grok parser][6] をカスタマイズします。
-   - **Parsing rules** で、パースルールを以下と置き換えます。
-   ```text
-   access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
-   ```
-   - **Helper Rules** の **Advanced settings** で、行を追加します。
-   ```text
-   _trace_id %{notSpace:dd.trace_id:nullIf("-")}
-   ```
-
-3. `dd.trace_id` 属性で [トレース ID リマッパー][7]を追加します。
+完全なエンドツーエンドのセットアップ手順については、[NGINX のインスツルメンテーション][20]を参照してください。
 
 ### データベースログの相関付け
 
@@ -219,7 +189,7 @@ APM と Synthetic Monitoring のインテグレーションにより、テスト
 
 詳しくは [Synthetic テストとトレースの接続][19]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -235,10 +205,11 @@ APM と Synthetic Monitoring のインテグレーションにより、テスト
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /ja/logs/log_collection/javascript/
 [12]: /ja/account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /ja/real_user_monitoring/browser/setup/#initialization-parameters
+[13]: /ja/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
-[16]: /ja/real_user_monitoring/platform/connect_rum_and_traces
+[16]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm
 [17]: /ja/synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /ja/synthetics/apm
+[20]: /ja/tracing/trace_collection/proxy_setup/nginx

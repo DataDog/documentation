@@ -18,6 +18,9 @@ further_reading:
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
+    - link: "/security/application_security/guide/standalone_application_security"
+      tag: "Documentation"
+      text: "Standalone App and API Protection"
 ---
 
 The Datadog nginx tracing module has experimental support for threat detection and blocking.
@@ -34,8 +37,8 @@ The Datadog nginx tracing module has experimental support for threat detection a
    [nginx documentation][3].
 2. Update your nginx tracing library module to at least version 1.2.0. Visit
    the [GitHub releases page][2] and select the artifact named according to the
-   pattern `ngx_http_datadog_module-appsec-&lt;amd64/arm64&gt;-&lt;nginx
-   version&gt;.so.tgz`. Note that this artifact includes `appsec` in the name.
+   pattern `ngx_http_datadog_module-appsec-<amd64/arm64>-<nginx
+   version>.so.tgz`. **Note**: This artifact includes `appsec` in the name.
 3. Enable App and API Protection in the nginx configuration.
    Do the following:
    * Define one or more thread pools with the [`thread_pool`][4] directive.
@@ -67,8 +70,7 @@ If you want to use App and API Protection without APM tracing functionality, you
 1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
 2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products.
 
-For more details, see [Standalone App and API Protection][standalone_billing_guide].
-[standalone_billing_guide]: /security/application_security/guide/standalone_application_security/
+For more details, see [Standalone App and API Protection][7].
 
 ## Further Reading
 
@@ -80,3 +82,4 @@ For more details, see [Standalone App and API Protection][standalone_billing_gui
 [4]: https://nginx.org/en/docs/ngx_core_module.html#thread_pool
 [5]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_appsec_enabled-appsec-builds
 [6]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_waf_thread_pool_name-appsec-builds
+[7]: /security/application_security/guide/standalone_application_security/

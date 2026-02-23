@@ -200,10 +200,6 @@ If you are using the CDN async or CDN sync setup for [Real User Monitoring][6] o
 script-src https://www.datadoghq-browser-agent.com
 ```
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /getting_started/tagging/unified_service_tagging

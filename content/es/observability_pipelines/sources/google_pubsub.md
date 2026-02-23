@@ -15,4 +15,8 @@ Selecciona y configura esta fuente cuando [configures un pipeline][1]. La siguie
 
 {{% observability_pipelines/source_settings/google_pubsub %}}
 
-[1]: /es/observability_pipelines/set_up_pipelines/
+## Configurar las variables de entorno
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
+
+[1]: /es/observability_pipelines/configuration/set_up_pipelines/

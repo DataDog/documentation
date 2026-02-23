@@ -112,14 +112,7 @@ The example code creates the following action event:
 }
 ```
 
-If an event or a request goes beyond any of the following limitations, it is rejected by the Datadog intake.
-
-| Property                                 | Limitation   |
-| ---------------------------------------- | ------------ |
-| Maximum number of attributes per event   | 256          |
-| Maximum attribute depth per event        | 20           |
-| Maximum event size                       | 256 KB       |
-| Maximum intake payload size              | 5 MB         |
+If an event or a request goes beyond any of the [listed RUM technical limitations][16], it is rejected by the Datadog intake.
 
 ## "Customer data exceeds the recommended threshold" warning
 
@@ -160,3 +153,4 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [13]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /real_user_monitoring/guide/debug-symbols
+[16]: /real_user_monitoring/#technical-limitations

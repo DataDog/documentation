@@ -13,7 +13,9 @@ further_reading:
   text: "Collect your traces"
 ---
 
-{{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
+{{% logs-tcp-disclaimer %}}
+
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 <div class="alert alert-danger">
     TCP is not available for the {{< region-param key="dd_site_name" >}} site. Contact <a href="/help/">support</a> for more information.
 </div>

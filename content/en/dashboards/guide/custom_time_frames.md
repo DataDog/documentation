@@ -39,7 +39,7 @@ Any fixed date can be entered as part of a range. For example:
 
 ### Relative dates
 
-Relative dates **do not** update over time; they are calculated when entered.
+Relative dates update over time; they are calculated from the current time.
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
 

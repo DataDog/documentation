@@ -88,6 +88,40 @@ The [Apps tab][14] in **Personal Settings** allows you to manage apps that have 
 
 When you hover over an app, the option to enable or disable it appears on the right of the app listing.
 
+#### Email verification
+Verify your email address for enhanced account security and access to additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
+
+- **Google login users** are automatically verified during their first login.
+- **Password-based users** verify their email when setting their password for the first time.
+- **SAML users** must manually verify their email through Datadog.
+
+After being verified, you gain access to:
+- The ability to **log out of all active web sessions** across devices, ensuring security in case of credential compromise.
+- The ability to **view and switch between organizations** outside of your current org hierarchy.
+
+Unverified users can still access Datadog, but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
+
+#### Verify your email
+
+To verify your email:
+1. Navigate to your **Profile Settings**.
+2. Click on **Verify Account**.
+3. Enter the **verification code** sent to your registered email.
+4. Click **Submit** to complete the verification process.
+
+#### Log out of all active web sessions
+
+To log out of all active web sessions:
+Logging out of all active web sessions logs you out of all current sessions across devices, including the one you're using.
+
+
+To log out of all active sessions:
+1. Go to **Personal Settings**.
+2. Click **Log Out of All Web Sessions**.
+3. Confirm the action.
+
+After confirming, you are logged out from all devices and need to log back in.
+
 ## Appearance
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.

@@ -5,6 +5,7 @@ type: multi-code-lang
 code_lang_weight: 10
 aliases:
   - /security/application_security/threats/setup/compatibility/dotnet
+  - /security/application_security/enabling/compatibility/dotnet
 ---
 
 ## App and API Protection capabilities support

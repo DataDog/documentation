@@ -38,9 +38,9 @@ Within your integration in the Integration Developer Platform, navigate to the C
 
 ## Verify your detection rule in production
 
-To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and Cloud SIEM must be enabled. 
+To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and Cloud SIEM must be enabled.
 
-1. Find your detection rule in the [Detection Rules list][2], and click to expand it. 
+1. Find your detection rule in the [Detection Rules list][2], and click to expand it.
 2. Ensure that its logos render correctly.
 3. Verify that the rule is enabled.
 
@@ -68,7 +68,7 @@ This error means that the JSON located at `<FILE_PATH>` is considered invalid JS
 ```
 partnerRuleId is empty for rule name="<RULE_NAME>" - partnerRuleId=<NEW_RULE_ID> is available
 ```
-A `partnerRuleId` is required for each rule and is missing. Use the generated `<NEW_RULE_ID>`. 
+A `partnerRuleId` is required for each rule and is missing. Use the generated `<NEW_RULE_ID>`.
 
 ```
 partnerRuleId=<RULE_ID> is in the incorrect format for rule name="<RULE_NAME>", it must follow the format=^[a-z0-9]{3}-[a-z0-9]{3}-[a-z0-9]{3}$ - partnerRuleId=<NEW_RULE_ID> is available
@@ -130,9 +130,9 @@ Reach out to Datadog to address the issue.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name 
+[2]: https://app.datadoghq.com/security/siem/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name
 [3]: https://docs.datadoghq.com/developers/integrations/agent_integration/
-[4]: https://app.datadoghq.com/security/rules/new?product=siem
-[5]: https://github.com/DataDog/integrations-extras 
+[4]: https://app.datadoghq.com/security/siem/rules/new?product=siem
+[5]: https://github.com/DataDog/integrations-extras
 [6]: https://github.com/DataDog/marketplace
 [7]: https://docs.datadoghq.com/security/cloud_siem/detection_rules

@@ -35,6 +35,8 @@ apk add libgcc
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Datadog CLI" %}}
@@ -84,11 +86,11 @@ logInfo('Hello World!');
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="php" %}}
+{{% serverless-init-env-vars-sidecar language="php" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -97,4 +99,4 @@ logInfo('Hello World!');
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
 [3]: /developers/dogstatsd/?tab=php#install-the-dogstatsd-client
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples-5

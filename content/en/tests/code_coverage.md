@@ -6,6 +6,9 @@ aliases:
 - /continuous_integration/integrate_tests/code_coverage/
 - /continuous_integration/tests/code_coverage/
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: "/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"
@@ -14,9 +17,9 @@ further_reading:
   text: "Learn about CI Monitors"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-This Test Optimization feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
-{{< /callout >}}
+<div class="alert alert-warning">
+This Test Optimization feature is legacy. Use the new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product instead.
+</div>
 
 ## Overview
 

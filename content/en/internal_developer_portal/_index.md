@@ -2,6 +2,12 @@
 title: Internal Developer Portal
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
+- link: 'https://app.datadoghq.com/idp/get-started'
+  tag: 'App'
+  text: 'Exploring IDP in Datadog'
 - link: "getting_started/internal_developer_portal/"
   tag: "Documentation"
   text: "Getting Started with Internal Developer Portal"
@@ -20,6 +26,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/internal-developer-portal/"
   tag: "Blog"
   text: "Ship software quickly and confidently with Datadog IDP"
+- link: "https://www.datadoghq.com/blog/datadog-backstage-plugin/"
+  tag: "Blog"
+  text: "Sync your Backstage catalog with Datadog IDP"
+- link: "https://www.datadoghq.com/blog/idp-campaigns/"
+  tag: "Blog"
+  text: "Coordinate large-scale engineering initiatives with IDP Campaigns"
 ---
 
 {{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
@@ -62,14 +74,10 @@ Use [Datadog Teams][6] to enable team-based features in IDP:
 
 - Track your teams in Datadog and automatically sync with your external sources of truth 
 - Assign teams as owners of services and other entities 
-- Create hierarchies to have parent-child relationships between your teams
+- Create [hierarchies][8] to have parent-child relationships between your teams
 - Filter views by teams throughout IDP (for example, in Software Catalog, Scorecards, and Engineering Reports)
 
-If your organization manages team structure in GitHub, join the preview for GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
-
-{{< callout url="https://www.datadoghq.com/product-preview/github-integration-for-teams/" d_target="#signupModal" btn_hidden="false" header="Join the preview for GitHub Integration for Teams" >}}
-{{< /callout >}}
-
+If your organization manages team structure in GitHub, use GitHub Integration for Teams to automatically sync GitHub teams to Datadog.
 
 ## Further reading
 
@@ -82,3 +90,4 @@ If your organization manages team structure in GitHub, join the preview for GitH
 [5]: /getting_started/internal_developer_portal/
 [6]: /account_management/teams/
 [7]: https://www.datadoghq.com/knowledge-center/platform-engineering/
+[8]: /account_management/teams/manage/#subteams-hierarchical-teams
