@@ -1779,7 +1779,7 @@ The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/F
 Events that don't match any micro frontend fall back to the shell-level service and version.
 </div>
 
-**Step 4 - Explore micro frontend data in Datadog**
+**[Step 4 - Explore micro frontend data in Datadog](#explore-micro-frontend-data-in-datadog)**
 
 ### Manual service and version attribution
 
