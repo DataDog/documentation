@@ -30,18 +30,21 @@ menu:
     - name: Software Delivery
       identifier: software_delivery_heading
       weight: 10000000
+    - name: Developer Integrations
+      identifier: developer_integrations_heading
+      weight: 11000000
     - name: Security
       identifier: security_platform_heading
-      weight: 11000000
+      weight: 12000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 12000000
+      weight: 13000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 13000000
+      weight: 14000000
     - name: Administration
       identifier: administration_heading
-      weight: 14000000
+      weight: 15000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -3754,31 +3757,36 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_setup
       weight: 2
+    - name: Permissions
+      url: cloud_cost_management/setup/permissions
+      parent: cloud_cost_setup
+      identifier: cloud_cost_permissions
+      weight: 201
     - name: AWS
       url: cloud_cost_management/setup/aws/
       parent: cloud_cost_setup
       identifier: cloud_cost_aws
-      weight: 101
+      weight: 202
     - name: Azure
       url: cloud_cost_management/setup/azure/
       parent: cloud_cost_setup
       identifier: cloud_cost_azure
-      weight: 102
+      weight: 203
     - name: Google Cloud
       url: cloud_cost_management/setup/google_cloud/
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
-      weight: 103
+      weight: 204
     - name: Oracle
       url: cloud_cost_management/setup/oracle/
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
-      weight: 104
+      weight: 205
     - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 105
+      weight: 206
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
@@ -3794,61 +3802,46 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
       weight: 103
+    - name: Anthropic
+      url: cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_anthropic
+      weight: 104
     - name: GitHub
       url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
-      weight: 104
+      weight: 105
     - name: Confluent Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 105
+      weight: 106
     - name: MongoDB
       url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 106
+      weight: 107
     - name: Elastic Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 107
+      weight: 108
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 108
+      weight: 109
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 109
+      weight: 110
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 110
-    - name: Datadog Costs
-      url: cloud_cost_management/datadog_costs
-      parent: cloud_cost
-      identifier: cloud_cost_datadog_costs
-      weight: 2
-    - name: Planning
-      url: cloud_cost_management/planning
-      parent: cloud_cost
-      identifier: cloud_cost_planning
-      weight: 5
-    - name: Budgets
-      url: cloud_cost_management/planning/budgets
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_budgets
-      weight: 501
-    - name: Commitment Programs
-      url: cloud_cost_management/planning/commitment_programs
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_commitment_programs
-      weight: 502
+      weight: 207
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost
@@ -5779,6 +5772,32 @@ menu:
       parent: feature_flags
       identifier: feature_flags_guide
       weight: 9
+    - name: Source Code Integration
+      url: source_code/
+      pre: dev-code
+      identifier: source_code_integration
+      parent: developer_integrations_heading
+      weight: 90000
+    - name: Source Code Management Providers
+      url: source_code/source-code-management/
+      parent: source_code_integration
+      identifier: sci_source_code_management
+      weight: 1
+    - name: Service Mapping
+      url: source_code/service-mapping/
+      parent: source_code_integration
+      identifier: sci_service_mapping
+      weight: 2
+    - name: Resource Mapping
+      url: source_code/resource-mapping/
+      parent: source_code_integration
+      identifier: sci_resource_mapping
+      weight: 3
+    - name: Features
+      url: source_code/features/
+      parent: source_code_integration
+      identifier: sci_features
+      weight: 4
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
