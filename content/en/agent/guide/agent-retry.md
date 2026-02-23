@@ -154,7 +154,7 @@ The Agent compresses and stores failed APM payloads in memory. The Agent drops t
 When you enable [dual shipping][9] for the APM intake, each endpoint has an independent sender and queue.
 
 
-[6]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/trace.go#L107-L116
+
 [7]: https://github.com/DataDog/datadog-agent/blob/7.43.1/pkg/trace/writer/stats.go#L73-L83
 [9]: /agent/configuration/dual-shipping/?tab=helm&site=us
 {{% /tab %}}
