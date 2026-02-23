@@ -33,6 +33,13 @@ services:
 ignore:
   - "test/**/*"
   - "**/*.pb.go"
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 85
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
 ```
 
 ## Services configuration
@@ -154,6 +161,112 @@ ignore:
 ```
 {{% /collapse-content %}}
 
+## PR Gates
+
+You can define [PR Gates][2] in the configuration file to enforce code coverage thresholds on pull requests. If gates are also configured in the [Datadog UI][2], Datadog evaluates both the configuration file rules and the UI rules when a PR is opened or updated.
+
+<div class="alert alert-info">If both the configuration file and the Datadog UI define gates for the same scope, the pull request must meet every defined threshold.</div>
+
+```yaml
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 85
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
+```
+
+Each gate has the following fields:
+
+- `type` (required): The type of coverage gate. Supported values:
+  - `total_coverage_percentage`: The minimum overall coverage percentage for the repository (or for the scoped services or code owners).
+  - `patch_coverage_percentage`: The minimum coverage percentage on code changed in the pull request.
+- `config` (required): Gate configuration options. Supported values:
+  - `threshold` (required): The minimum coverage percentage (0-100).
+  - `services`: (optional) A list of service name patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching service.
+  - `codeowners`: (optional) A list of code owner patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching code owner.
+  - `flags`: (optional) A list of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching flag.
+
+### Examples
+
+{{% collapse-content title="Unscoped total and patch coverage gates" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Gates scoped to services" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: backend-api
+    paths:
+      - backend/api/**
+  - id: frontend-web
+    paths:
+      - frontend/**
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      services:
+        - "*"
+
+  - type: total_coverage_percentage
+    config:
+      threshold: 85
+      services:
+        - "backend-api"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Gates scoped to code owners" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 95
+      codeowners:
+        - "@DataDog/backend-team"
+        - "@DataDog/api-*"
+
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      codeowners:
+        - "@DataDog/frontend-team"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Gates scoped to flags" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      flags:
+        - "unit-tests"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      flags:
+        - "integration-tests"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 ## Pattern syntax
 
 Configuration options that accept file paths support three types of patterns:
@@ -197,3 +310,5 @@ Simple path prefixes without special characters are treated as prefix matches:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /code_coverage/monorepo_support
+[2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[3]: /code_coverage/flags

@@ -1,6 +1,10 @@
 ---
 title: Sensitive Data Scanner Processor
 disable_toc: false
+further_reading:
+- link: "/logs/guide/regex_log_parsing/"
+  tag: "guide"
+  text: "Writing Effective Grok Parsing Rules with Regular Expressions"
 products:
 - name: Logs
   icon: logs
@@ -17,7 +21,7 @@ The Sensitive Data Scanner processor scans logs to detect and redact or hash sen
 
 To set up the processor:
 
-1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query.
+1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query. See [Search Syntax][1] for more information.
 1. Click **Add Scanning Rule**.
 1. Select one of the following:
 
@@ -62,17 +66,15 @@ To set up the processor:
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
-1. Navigate to your [pipeline][1].
+1. Navigate to your [pipeline][2].
 1. In the Sensitive Data Scanner processor with the rule you want to edit, click **Manage Scanning Rules**.
 1. Toggle **Use recommended keywords** if you want the rule to use them. Otherwise, add your own keywords to the **Create keyword dictionary** field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. Click **Update**.
 
-[1]: https://app.datadoghq.com/observability-pipelines
-
 {{% /collapse-content %}}
 {{% collapse-content title="Add a custom rule" level="h5" %}}
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.
+1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid. See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -120,4 +122,10 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% /collapse-content %}}
 
-{{% observability_pipelines/processors/filter_syntax %}}
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/search_syntax/logs/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /logs/guide/regex_log_parsing/

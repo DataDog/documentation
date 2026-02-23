@@ -812,12 +812,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
-
-{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}}
-
-Table functions are used to query Logs and Metrics
+Table functions are used to query logs, metrics, and other unstructured data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>

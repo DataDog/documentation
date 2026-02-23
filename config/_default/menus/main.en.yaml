@@ -131,10 +131,15 @@ menu:
       url: getting_started/integrations/google_cloud/
       weight: 1203
       parent: getting_started_integrations
+    - name: OCI
+      identifier: getting_started_with_oci
+      url: getting_started/integrations/oci/
+      weight: 1204
+      parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 1204
+      weight: 1205
       parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
@@ -2566,17 +2571,22 @@ menu:
       url: incident_response/incident_management/post_incident
       parent: incidents
       identifier: post_incident
-      weight: 6
+      weight: 3
     - name: Follow-ups
       url: incident_response/incident_management/post_incident/follow-ups
       parent: post_incident
       identifier: post_incident_follow_ups
-      weight: 601
+      weight: 301
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
       identifier: analytics_and_reporting
-      weight: 8
+      weight: 4
+    - name: Guides
+      url: incident_response/incident_management/guides/
+      parent: incidents
+      identifier: incidents_guides
+      weight: 5
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
@@ -3872,21 +3882,6 @@ menu:
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
       weight: 402
-    - name: AWS
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 101
-    - name: Azure
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=azure
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 102
-    - name: Google Cloud
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=google
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 103
     - name: BigQuery Costs
       url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
@@ -4463,6 +4458,11 @@ menu:
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
       weight: 1603
+    - name: SDK Configurations
+      url: tracing/troubleshooting/sdk_configurations
+      identifier: tracing_troubleshooting_sdk_configurations
+      parent: tracing_troubleshooting
+      weight: 1604
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
@@ -5204,11 +5204,16 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
+    - name: Advanced Experiment Runs
+      url: llm_observability/experiments/advanced_runs 
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_advanced_runs
+      weight: 504
     - name: Experiments API
       url: llm_observability/experiments/api
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
-      weight: 504
+      weight: 505
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
@@ -6741,11 +6746,21 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_azure_aks
       weight: 302
+    - name: GCP GKE
+      url: /cloudprem/install/gcp_gke
+      parent: cloudprem_install
+      identifier: cloudprem_gcp_gke
+      weight: 303
     - name: Docker (Local)
       url: /cloudprem/install/docker
       parent: cloudprem_install
       identifier: cloudprem_docker
-      weight: 303
+      weight: 304
+    - name: Custom Kubernetes
+      url: /cloudprem/install/custom_k8s
+      parent: cloudprem_install
+      identifier: cloudprem_custom_k8s
+      weight: 305
     - name: Ingest
       url: /cloudprem/ingest/
       parent: cloudprem
@@ -6882,36 +6897,41 @@ menu:
       parent: security_platform
       identifier: security_threat_intelligence
       weight: 6
+    - name: Events Forwarding
+      url: security/events_forwarding
+      parent: security_platform
+      identifier: security_events_forwarding
+      weight: 7
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 7
+      weight: 8
     - name: Access Control
       url: security/access_control
       parent: security_platform
       identifier: security_access_control
-      weight: 8
+      weight: 9
     - name: Account Takeover Protection
       url: security/account_takeover_protection
       parent: security_platform
       identifier: security_ato_protection
-      weight: 9
+      weight: 10
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 11
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 12
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 12
+      weight: 13
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
