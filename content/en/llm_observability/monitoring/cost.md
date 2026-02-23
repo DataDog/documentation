@@ -38,7 +38,7 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
 ## Metrics
-You can find cost metrics in [LLM Observability Metrics][5]. The unit for LLM Observability estimated cost metrics are in `nanodollars`. 
+You can find cost metrics in [LLM Observability Metrics][5]. The unit for LLM Observability estimated cost metrics is **nanodollars**. 
 
 The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
@@ -49,7 +49,7 @@ The cost metrics include a `source` tag to indicate where the value originated:
 View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features:
 - A high-level overview of your LLM usage over time including **Total Cost**, **Cost Change**, **Total Tokens**, and **Token Change**
 - **Breakdown by Token Type**: A breakdown of token usage, along with associated costs
-- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions ( powered by [Prompt Tracking][6])
+- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
 - **Most Expensive LLM Calls**: A list of your most expensive requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
