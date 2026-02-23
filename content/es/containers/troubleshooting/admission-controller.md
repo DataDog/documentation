@@ -1,4 +1,6 @@
 ---
+description: Solucionar problemas frecuentes con el Controlador de admisión y la inyección
+  de bibliotecas del Datadog Cluster Agent
 further_reading:
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: Blog
@@ -8,7 +10,7 @@ further_reading:
   text: Controlador de admisión del Cluster Agent
 - link: /tracing/trace_collection/library_injection_local/?tab=kubernetes
   tag: Documentación
-  text: Inyección de librería de Kubernetes
+  text: Inyección de biblioteca de Kubernetes
 title: Solucionar problemas del Controlador de admisión
 ---
 
@@ -26,7 +28,7 @@ Por lo tanto, **el Controlador de admisión no muta los pods existentes dentro d
 ### Labels (etiquetas) y anotaciones
 El Cluster Agent responde a las labels y anotaciones del pod creado; **no** responde a la carga de trabajo (Despliegue, DaemonSet, CronJob, etc.) que creó ese pod. Asegúrate de que tu plantilla de pod hace referencia a esto.
 
-Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de librería][3]:
+Por ejemplo, la siguiente plantilla establece la [label para la configuración de APM][2] y la [anotación para la inyección de biblioteca][3]:
 
 ```yaml
 apiVersion: apps/v1
@@ -34,7 +36,7 @@ kind: Deployment
 metadata:
   name: example-deployment
 spec:
-  #(...)
+  #(...)  
   template:
     metadata:
       labels:
@@ -217,7 +219,7 @@ datadog:
 <TIMESTAMP> | CLUSTER | DEBUG | (pkg/clusteragent/admission/controllers/webhook/controller_base.go:176 in processNextWorkItem) | Webhook datadog-webhook reconciled successfully
 ```
 
-Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión según las [instrucciones de configuración][1].
+Si no ves que el webhook `datadog-webhook` se ha conciliado correctamente, asegúrate de que has habilitado correctamente el Controlador de admisión según las [instrucciones de configuración][1]. 
 
 ### Validar inyección
 
@@ -272,13 +274,13 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`.
+Establece `flavor` en `kubernetes` para crear un recurso de `NetworkPolicy`. 
 
 Alternativamente, para los entornos basados en Cilium, establece `flavor` en `cilium` para crear un recurso de `CiliumNetworkPolicy`.
 
 ### Solucionar problemas de red para distribuciones de Kubernetes
 
-Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el trazador de Datadog.
+Cuando se crea un pod, el clúster de Kubernetes envía una solicitud desde el plano de control a `datadog-webhook`, a través del servicio, y finalmente al pod del Cluster Agent. Esta solicitud requiere conectividad de entrada desde el plano de control al nodo en el que se encuentra el Cluster Agent, a través de su puerto del Controlador de admisión (`8000`). Una vez resuelta esta solicitud, el Cluster Agent muta tu pod para configurar la conexión de red para el rastreador de Datadog. El servicio del Controlador de admisión recibe tráfico en el puerto 443 y lo reenvía al pod del Cluster Agent en el puerto 8000.
 
 Según tu distribución de Kubernetes, esto puede tener algunos requisitos adicionales para tus reglas de seguridad y configuración del Controlador de admisión.
 

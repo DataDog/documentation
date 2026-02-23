@@ -13,6 +13,10 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview
@@ -56,7 +60,7 @@ Adjust the slider or enter a specific percentage in the input box for Session Sa
 
 ### NGINX stops responding
 
-Since the module is in Preview, it's possible NGINX may stop serving requests, particularly after installation. If you experience this issue, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
+If NGINX stops serving requests, specifically after installation, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
 
 - Your NGINX configuration file
 - Any relevant error logs

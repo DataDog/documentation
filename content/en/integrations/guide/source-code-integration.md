@@ -201,7 +201,7 @@ If you are using a host, you have two options.
 
 #### Containers
 
-If you are using Docker containers, you have three options: using Docker, using the Datadog tracing library, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: using Docker, using Setuptools, or configuring your application with `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
 
@@ -310,7 +310,7 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 #### Containers
 
-If you are using Docker containers, you have several options: using a plugin if your application is bundled, using Docker, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: using a bundler plugin, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
 ##### Option 1: Bundler plugin
 
@@ -394,7 +394,7 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 
 #### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
+If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
 
@@ -429,7 +429,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 
 #### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with  `DD_GIT_*` environment variables.
+If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
 
 ##### Option 1: Docker
 
@@ -468,7 +468,158 @@ If your build process is executed in CI within a Docker container, perform the f
 
 ### Configure telemetry tagging
 
-For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
+For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit.
+
+## Kubernetes source code and resource mapping
+
+Datadog's Source Code and resource mapping allow you to connect cluster resources to the source code
+that was used to deploy them, using Kubernetes annotations.
+
+`origin.datadoghq.com/location` contains different content depending on how the resources were deployed.
+
+{{< tabs >}}
+{{% tab "Raw Kubernetes YAML" %}}
+If you deployed resources using `kubectl`, use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+	"repo": {
+		"url": "<repo URL>",
+		"targetRevision": "<SHA for commit being deployed>",
+		"path": "<file path of the resource>"
+	}
+}
+```
+
+{{% /tab %}}
+{{% tab "Helm chart" %}}
+If you deployed resources using `helm`, the annotation format you need to use depends on how `helm install` was invoked.
+There are six possible ways to do it:
+
+{{% collapse-content title="Chart reference" level="h4" expanded=false id="chart-reference" %}}
+
+Use this option when the chart is stored in the git repo in unpacked form.
+
+Use the installation command `helm install <release> <chart/path>`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "repoURL": "<repo where the chart and values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"],
+    "chartPath": "<chart/path> relative to <repoURL>"
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Path to a packaged chart" level="h4" expanded=false id="path-to-chart" %}}
+
+Use this option when the chart is stored in the git repo in the form of an archive.
+
+Use the installation command `helm install <release> <chart/path/arch-x.y.z.tgz>`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "repoURL": "<repo where the chart and values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"],
+    "chartPath": "<chart/path/arch-x.y.z.tgz relative to repoURL>"
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Path to an unpacked chart directory" level="h4" expanded=false id="path-to-unpacked-chart" %}}
+
+Use this option when the chart is stored somewhere in the current git repo and unpacked during the installation.
+
+Use the installation command `helm install <release> <unpacked/path/dir>`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL of the chart>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"],
+    "chartPath": "<unpacked/path/dir relative to repoURL>"
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Absolute URL" level="h4" expanded=false id="absolute-url" %}}
+
+Use the installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL in the format https://example.com/charts/nginx-1.2.3.tgz>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"]
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Chart reference and repo URL" level="h4" expanded=false id="chart-reference-and-repo" %}}
+
+Use the installation command `helm install --repo https://example.com/charts/ mynginx nginx`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL in the format https://example.com/charts/nginx>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"]
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="OCI registries" level="h4" expanded=false id="oci-registries" %}}
+
+Use the installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL in the format oci://example.com/charts/nginx>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of `values.yaml` files relative to <repoURL>"]
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Usage
 

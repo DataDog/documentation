@@ -94,6 +94,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -193,7 +195,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_id": "<INSTANCE_ID>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -201,7 +203,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

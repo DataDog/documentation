@@ -58,7 +58,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="How to schedule Agent upgrades (in Preview)" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 

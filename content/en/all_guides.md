@@ -61,6 +61,7 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< whatsnext desc="Log Management:">}}
 {{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
 {{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
+{{< nextlink href="/cloudprem/guides/" >}}<i class="icon-upload-wui" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;CloudPrem{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Administration:">}}

@@ -14,7 +14,7 @@ There are two types of PR comments:
 - **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available).
         
     {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". The comment suggests replacing the code os.system(command) with os.system(shlex.quote(command)) to sanitize the process call." style="width:100%;" >}}
-- **Summary comment**: Combines all findings from Datadog into a single comment. 
+- **Summary comment**: Combines all findings from Datadog into a single comment. This comment appears only if your PR contains issues requiring attention. After those findings are addressed, the comment is automatically edited to confirm that your PR is now clear.
   
     {{< img src="/code_security/github_summary_comment_injections_light.png" alt="A Datadog bot has posted a summary comment on a GitHub pull request. The comment has a \"Warnings\" section that lists four critical code vulnerabilities, such as SQL and command injections, with links to the specific files and lines of code." style="width:100%;" >}}
 

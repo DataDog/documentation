@@ -16,7 +16,7 @@ The Live Debugger enables you to add logpoints—auto-expiring, non-breaking bre
 ## Live Debugger tab
 The **Live Debugger** tab in the Datadog tool window shows the current session, its logpoints, and the data captured by the selected logpoint:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab-v2.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
 The panel has three sections: 
 

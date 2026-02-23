@@ -97,11 +97,11 @@ También puedes hacer clic para activar la recopilación de métricas personaliz
 6. Opcionalmente, haz clic en el conmutador de recopilación de recursos para desactivar la recopilación de información de configuración de tus recursos de Azure.
 7. Habilita la recopilación de logs para establecer y configurar los servicios y parámetros de diagnóstico necesarios para reenviar logs a Datadog:
    1. Si ya existe un reenviador de logs en el inquilino, se modifica para ampliar su alcance. Los ajustes modificados se aplican tanto a las suscripciones o grupos de gestión existentes como a los recién seleccionados.
-   2. Si estás creando un nuevo reenviador de log:
-      1. Introduce un nombre de grupo de recursos para almacenar el plano de control del reenviador de log 
+   2. Si estás creando un nuevo reenviador de logs:
+      1. Introduce un nombre de grupo de recursos para almacenar el plano de control del reenviador de logs
       2. Selecciona una suscripción de plano de control para la orquestación de reenvío de logs (LFO).
       3. Selecciona una región para el plano de control.<br>
-   **Nota**: Los campos de nombre de grupo de recursos, suscripción del plano de control y región solo aparecen al crear un nuevo reenviador de log.
+   **Nota**: Los campos de nombre de grupo de recursos, suscripción del plano de control y región solo aparecen al crear un nuevo reenviador de logs.
    3. Opcionalmente, abre **Log filtering options** (Opciones de filtrado de logs) para filtrar logs por etiquetas, o aplicar filtros para información específica (como PII) usando expresiones regulares.
 
    Consulta la [sección de Arquitectura][34] de la guía de reenvío automatizado de logs para obtener más información sobre esta arquitectura.
@@ -134,17 +134,16 @@ Sigue estos pasos para desplegar la integración de Datadog y Azure a través de
    - App Service Plans
    - Container Apps
 
-También puedes hacer clic para activar la recopilación de métricas personalizadas de [Azure Application Insights][101] y desactivar la recopilación de métricas de uso.
-
+   También puedes hacer clic para activar la recopilación de métricas personalizadas de [Azure Application Insights][101] y desactivar la recopilación de métricas de uso.
 4. Opcionalmente, haz clic en el conmutador de recopilación de recursos para desactivar la recopilación de información de configuración de tus recursos de Azure.
 5. Configurar la recopilación de logs:
-   a. Si ya existe un reenviador de log en el inquilino, amplía su alcance para incluir las nuevas suscripciones o grupos de gestión.
-   b. Si estás creando un nuevo reenviador de log:
-      a. Introduce un nombre de grupo de recursos para almacenar el plano de control del reenviador de log.
-      b. Selecciona una suscripción de plano de control para la orquestación de reenvío de logs (LFO).
-      c. Selecciona una región para el plano de control.
-   Consulta la [sección de Arquitectura][102] de la guía de reenvío automatizado de logs para obtener más información sobre esta arquitectura.
+   - Si ya existe un reenviador de logs en el inquilino, amplía su alcance para incluir las nuevas suscripciones o grupos de gestión.
+   - Si estás creando un nuevo reenviador de logs:
+     1. Introduce un nombre de grupo de recursos para almacenar el plano de control del reenviador de logs.
+     1. Selecciona una suscripción de plano de control para la orquestación de reenvío de logs (LFO).
+     1. Selecciona una región para el plano de control.
 
+   Consulta la [sección de Arquitectura][102] de la guía de reenvío automatizado de logs para obtener más información sobre esta arquitectura.
 6. Copia y ejecuta el comando en **Initialize and apply the Terraform** (Inicializar y aplicar el Terraform).
 
 [100]: https://app.datadoghq.com/integrations/azure/

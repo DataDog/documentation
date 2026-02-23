@@ -1,12 +1,7 @@
 ---
 disable_toc: false
-products:
-- icon: logs
-  name: Logs
 title: Enviar logs de Azure Event Hubs a Observability Pipelines
 ---
-
-{{< product-availability >}}
 
 ## Información general
 
@@ -162,7 +157,7 @@ Selecciona tu plataforma.
     1.  Para **Kafka SASL Password** (Contraseña SASL de Kafka), introduce la cadena de conexión completa entre comillas (`"`). Por ejemplo, `"Endpoint=sb://<NAMESPACE>.servicebus.windows.net/;SharedAccessKeyName=<PolicyName>;SharedAccessKey=<Key>"`.
         - Esta es la **cadena de conexión primaria** en las [políticas de acceso compartido] de tu instancia de Event Hub(#configure-shared-access-policy).
     1. Introduce tu contraseña TLS de Kafka.
-        - Esta es la **clave primaria** en las [políticas de acceso compartido] de tu instancia de Event Hub(#configure-shared-access-policy).
+        - Esta es la **clave principal** en las [políticas de acceso compartido] de tu instancia de Event Hub (#configure-shared-access-policy).
     {{< img src="observability_pipelines/sources/kafka_env_vars_vm.png" alt="La página de instalación con valores de ejemplo para las variables de entorno de Kafka" style="width:60%;" >}}
 
 {{% /tab %}}

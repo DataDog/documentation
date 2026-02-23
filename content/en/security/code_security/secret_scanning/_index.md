@@ -37,6 +37,6 @@ Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and incl
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: /security/code_security/static_analysis/setup
 [3]: /security/sensitive_data_scanner/
-[4]: /security/sensitive_data_scanner/scanning_rules/library_rules/#secrets-and-credentials
+[4]: /security/sensitive_data_scanner/scanning_rules/library_rules/?category=Secrets+and+credentials#overview
 [5]: /security/code_security/secret_scanning/github_actions
 [6]: /security/code_security/secret_scanning/generic_ci_providers

@@ -16,7 +16,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentación
   text: Más información sobre el Explorador RUM
-- link: /real_user_monitoring/session_replay
+- link: /session_replay/
   tag: Documentación
   text: Más información sobre Session Replay
 title: Señales de frustración
@@ -167,6 +167,6 @@ Para hacernos llegar tus comentarios o solicitar una función, ponte en contacto
 [5]: /es/dashboards/
 [6]: /es/monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /es/real_user_monitoring/session_replay/browser/
+[8]: /es/session_replay/browser/
 [9]: /es/monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

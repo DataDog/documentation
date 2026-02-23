@@ -1,5 +1,6 @@
 ---
 title: Event Management Triage Inbox
+site_support_id: case_management
 aliases:
 - /service_management/events/triage_inbox/
 further_reading:
