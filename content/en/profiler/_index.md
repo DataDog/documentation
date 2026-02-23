@@ -64,7 +64,7 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 ### Low impact in production
 
-Continuous profiler runs in production across all services by using technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
+Continuous Profiler runs in production across all services by using technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
 
 ## Getting started
 
