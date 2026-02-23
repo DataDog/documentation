@@ -9,6 +9,7 @@
 {{- end -}}
 {{- if $python_libs -}}
 <ul>
+  <li>Network access: Restricted</li>
   <li>Python version: <strong>{{ $python_libs.python_version }}</strong></li>
   <li>
     Available libraries: In addition to the Python standard library, the following packages are available:
@@ -36,6 +37,5 @@
       </div>
     </div>
   </li>
-  <li>Network access: Restricted</li>
 </ul>
 {{- end -}}
