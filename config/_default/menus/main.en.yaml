@@ -2596,7 +2596,7 @@ menu:
       parent: oncall_pages
       weight: 1
     - name: Cross-org Paging
-      url: incident_response/on-call/pages/cross_org_paging
+      url: incident_response/on-call/pages/cross_org_paging/
       identifier: oncall_cross_org_paging
       parent: oncall_pages
       weight: 2
