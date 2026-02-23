@@ -27,3 +27,7 @@ cascade:
 {{< whatsnext desc="PostgreSQL guides:" >}}
     {{< nextlink href="database_monitoring/guide/pg15_upgrade" >}}Upgrading to PostgreSQL 15 and higher{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="ClickHouse guides:" >}}
+    {{< nextlink href="database_monitoring/guide/clickhouse" >}}Setting Up Database Monitoring for ClickHouse{{< /nextlink >}}
+{{< /whatsnext >}}
