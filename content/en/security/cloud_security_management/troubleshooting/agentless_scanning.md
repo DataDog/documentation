@@ -31,19 +31,25 @@ If your organization uses Service Control Policies (SCPs) that restrict VPC crea
 
 ## Scanner instances appear as vulnerable hosts
 
-Agentless scanner instances are ephemeral EC2 instances (or equivalent) that run inside your cloud account. These instances may appear in your vulnerability findings.
+Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed within your cloud account to perform scans. Because they run a standard operating system image (for example, the latest Ubuntu LTS), they may appear in vulnerability findings related to OS packages.
 
-You can use tag-based filtering in the [CSM Vulnerabilities Explorer][2] to exclude Datadog-run scanner instances from your vulnerability views.
+These findings reflect vulnerabilities identified in the underlying OS image and do not indicate a misconfiguration of your environment.
+
+If desired, you can use tag-based filtering in the [CSM Vulnerabilities Explorer][2] to exclude Datadog-managed scanner instances from your vulnerability views.
 
 ## Hosts with the Datadog Agent are not scanned
 
 This is expected behavior. Agentless Scanning excludes hosts that have the Datadog Agent installed with [Vulnerability Management][6] features enabled. This prevents duplicate scanning.
 
-Hosts that have the Datadog Agent installed **without** SBOM collection enabled are still scanned by Agentless Scanning.
+Hosts that have the Datadog Agent installed **without** Vulnerability Management features enabled are still scanned by Agentless Scanning.
 
-## Cross-region scanning costs are higher than expected
+## Understanding cross-region scanning costs
 
-If your cloud provider bill shows high cross-region data transfer costs, deploy additional scanners in regions with high host counts. Datadog recommends deploying a scanner in each region with more than 150 hosts. See [Deploying Agentless Scanning][7] for a complete deployment topology guide.
+In some deployments, cross-region data transfer may contribute to cloud provider network costs, depending on how scanners and resources are distributed across regions.
+
+To optimize traffic locality, consider deploying scanners in regions with a significant number of hosts. As a general guideline, Datadog recommends deploying a scanner in each region with more than 150 hosts.
+
+See [Deploying Agentless Scanning][7] for detailed guidance on recommended deployment topologies.
 
 ## GovCloud and FIPS
 
@@ -58,5 +64,5 @@ Agentless Scanning is not available in GovCloud because it requires [Remote Conf
 [3]: /remote_configuration
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#step-4-enterprise-networking-considerations
-[6]: https://app.datadoghq.com/security/csm/vm
+[6]: /security/cloud_security_management/vulnerabilities
 [7]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods

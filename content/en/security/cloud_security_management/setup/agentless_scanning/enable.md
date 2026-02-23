@@ -250,8 +250,6 @@ After completing any of the setup methods above, see [Verify your setup](#verify
 - **Existing Azure subscription?** Use [Azure Resource Manager](#azure-resource-manager-setup) or [Terraform](#azure-terraform-setup).
 - **Multiple subscriptions?** Use [Terraform](#azure-terraform-setup) for repeatable, multi-subscription deployments.
 
-<div class="alert alert-info">Azure Cloud Shell support is not available.</div>
-
 {{% collapse-content title="Azure Resource Manager" level="h3" id="azure-resource-manager-setup" %}}
 
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
@@ -351,6 +349,10 @@ View scan results in the following locations:
 - **For host and container vulnerabilities**: [CSM Vulnerabilities Explorer][15]. To view only vulnerabilities detected by Agentless Scanning, use the filter `origin:"Agentless scanner"` in the search bar.
 - **For Lambda vulnerabilities**: [Code Security (SCA) Explorer][16].
 - **For sensitive data findings**: [Sensitive Data Scanner][17].
+
+### Exclude resources from scans
+
+To exclude specific hosts, containers, or functions from scans, see [Resource Evaluation Filters](/security/cloud_security_management/guide/resource_evaluation_filters).
 
 ## Disable Agentless Scanning
 
