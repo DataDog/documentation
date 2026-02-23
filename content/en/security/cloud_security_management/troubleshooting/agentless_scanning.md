@@ -37,7 +37,7 @@ You can use tag-based filtering in the [CSM Vulnerabilities Explorer][2] to excl
 
 ## Hosts with the Datadog Agent are not scanned
 
-This is expected behavior. Agentless Scanning excludes hosts that have the Datadog Agent installed with SBOM (software bill of materials) collection enabled for [Vulnerability Management][6]. This prevents duplicate scanning.
+This is expected behavior. Agentless Scanning excludes hosts that have the Datadog Agent installed with [Vulnerability Management][6] features enabled. This prevents duplicate scanning.
 
 Hosts that have the Datadog Agent installed **without** SBOM collection enabled are still scanned by Agentless Scanning.
 
