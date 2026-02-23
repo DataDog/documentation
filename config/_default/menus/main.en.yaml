@@ -30,18 +30,21 @@ menu:
     - name: Software Delivery
       identifier: software_delivery_heading
       weight: 10000000
+    - name: Developer Integrations
+      identifier: developer_integrations_heading
+      weight: 11000000
     - name: Security
       identifier: security_platform_heading
-      weight: 11000000
+      weight: 12000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 12000000
+      weight: 13000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 13000000
+      weight: 14000000
     - name: Administration
       identifier: administration_heading
-      weight: 14000000
+      weight: 15000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -128,10 +131,15 @@ menu:
       url: getting_started/integrations/google_cloud/
       weight: 1203
       parent: getting_started_integrations
+    - name: OCI
+      identifier: getting_started_with_oci
+      url: getting_started/integrations/oci/
+      weight: 1204
+      parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 1204
+      weight: 1205
       parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
@@ -2563,17 +2571,22 @@ menu:
       url: incident_response/incident_management/post_incident
       parent: incidents
       identifier: post_incident
-      weight: 6
+      weight: 3
     - name: Follow-ups
       url: incident_response/incident_management/post_incident/follow-ups
       parent: post_incident
       identifier: post_incident_follow_ups
-      weight: 601
+      weight: 301
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
       identifier: analytics_and_reporting
-      weight: 8
+      weight: 4
+    - name: Guides
+      url: incident_response/incident_management/guides/
+      parent: incidents
+      identifier: incidents_guides
+      weight: 5
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
@@ -3744,31 +3757,36 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_setup
       weight: 2
+    - name: Permissions
+      url: cloud_cost_management/setup/permissions
+      parent: cloud_cost_setup
+      identifier: cloud_cost_permissions
+      weight: 201
     - name: AWS
       url: cloud_cost_management/setup/aws/
       parent: cloud_cost_setup
       identifier: cloud_cost_aws
-      weight: 101
+      weight: 202
     - name: Azure
       url: cloud_cost_management/setup/azure/
       parent: cloud_cost_setup
       identifier: cloud_cost_azure
-      weight: 102
+      weight: 203
     - name: Google Cloud
       url: cloud_cost_management/setup/google_cloud/
       parent: cloud_cost_setup
       identifier: cloud_cost_google_cloud
-      weight: 103
+      weight: 204
     - name: Oracle
       url: cloud_cost_management/setup/oracle/
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
-      weight: 104
+      weight: 205
     - name: SaaS Integrations
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 105
+      weight: 206
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
@@ -3784,61 +3802,46 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
       weight: 103
+    - name: Anthropic
+      url: cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_anthropic
+      weight: 104
     - name: GitHub
       url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
-      weight: 104
+      weight: 105
     - name: Confluent Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 105
+      weight: 106
     - name: MongoDB
       url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 106
+      weight: 107
     - name: Elastic Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 107
+      weight: 108
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 108
+      weight: 109
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 109
+      weight: 110
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
       identifier: cloud_cost_custom
-      weight: 110
-    - name: Datadog Costs
-      url: cloud_cost_management/datadog_costs
-      parent: cloud_cost
-      identifier: cloud_cost_datadog_costs
-      weight: 2
-    - name: Planning
-      url: cloud_cost_management/planning
-      parent: cloud_cost
-      identifier: cloud_cost_planning
-      weight: 5
-    - name: Budgets
-      url: cloud_cost_management/planning/budgets
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_budgets
-      weight: 501
-    - name: Commitment Programs
-      url: cloud_cost_management/planning/commitment_programs
-      parent: cloud_cost_planning
-      identifier: cloud_cost_planning_commitment_programs
-      weight: 502
+      weight: 207
     - name: Tags
       url: cloud_cost_management/tags
       parent: cloud_cost
@@ -3860,7 +3863,7 @@ menu:
       identifier: cloud_cost_cost_allocation
       weight: 4
     - name: Tag Pipelines
-      url: cloud_cost_management/tags/tag_pipelines
+      url: cloud_cost_management/allocation/tag_pipelines
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_tag_pipelines
       weight: 401
@@ -3869,21 +3872,6 @@ menu:
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_container_cost_allocation
       weight: 402
-    - name: AWS
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=aws/
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_aws
-      weight: 101
-    - name: Azure
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=azure
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_azure
-      weight: 102
-    - name: Google Cloud
-      url: cloud_cost_management/allocation/container_cost_allocation/?tab=google
-      parent: cloud_cost_container_cost_allocation
-      identifier: cloud_cost_container_cost_allocation_google
-      weight: 103
     - name: BigQuery Costs
       url: cloud_cost_management/allocation/bigquery
       parent: cloud_cost_cost_allocation
@@ -4460,6 +4448,11 @@ menu:
       identifier: tracing_troubleshooting_connection_errors
       parent: tracing_troubleshooting
       weight: 1603
+    - name: SDK Configurations
+      url: tracing/troubleshooting/sdk_configurations
+      identifier: tracing_troubleshooting_sdk_configurations
+      parent: tracing_troubleshooting
+      weight: 1604
     - name: Agent Rate Limits
       url: tracing/troubleshooting/agent_rate_limits
       identifier: tracing_troubleshooting_rate_limits
@@ -5201,11 +5194,16 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
+    - name: Advanced Experiment Runs
+      url: llm_observability/experiments/advanced_runs 
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_advanced_runs
+      weight: 504
     - name: Experiments API
       url: llm_observability/experiments/api
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
-      weight: 504
+      weight: 505
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
@@ -5719,6 +5717,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_react
       weight: 104
+    - name: React Native
+      url: feature_flags/client/reactnative
+      parent: feature_flags_client
+      identifier: feature_flags_client_react_native
+      weight: 105
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -5769,6 +5772,32 @@ menu:
       parent: feature_flags
       identifier: feature_flags_guide
       weight: 9
+    - name: Source Code Integration
+      url: source_code/
+      pre: dev-code
+      identifier: source_code_integration
+      parent: developer_integrations_heading
+      weight: 90000
+    - name: Source Code Management Providers
+      url: source_code/source-code-management/
+      parent: source_code_integration
+      identifier: sci_source_code_management
+      weight: 1
+    - name: Service Mapping
+      url: source_code/service-mapping/
+      parent: source_code_integration
+      identifier: sci_service_mapping
+      weight: 2
+    - name: Resource Mapping
+      url: source_code/resource-mapping/
+      parent: source_code_integration
+      identifier: sci_resource_mapping
+      weight: 3
+    - name: Features
+      url: source_code/features/
+      parent: source_code_integration
+      identifier: sci_features
+      weight: 4
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -6707,11 +6736,21 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_azure_aks
       weight: 302
+    - name: GCP GKE
+      url: /cloudprem/install/gcp_gke
+      parent: cloudprem_install
+      identifier: cloudprem_gcp_gke
+      weight: 303
     - name: Docker (Local)
       url: /cloudprem/install/docker
       parent: cloudprem_install
       identifier: cloudprem_docker
-      weight: 303
+      weight: 304
+    - name: Custom Kubernetes
+      url: /cloudprem/install/custom_k8s
+      parent: cloudprem_install
+      identifier: cloudprem_custom_k8s
+      weight: 305
     - name: Ingest
       url: /cloudprem/ingest/
       parent: cloudprem
@@ -6848,36 +6887,41 @@ menu:
       parent: security_platform
       identifier: security_threat_intelligence
       weight: 6
+    - name: Events Forwarding
+      url: security/events_forwarding
+      parent: security_platform
+      identifier: security_events_forwarding
+      weight: 7
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 7
+      weight: 8
     - name: Access Control
       url: security/access_control
       parent: security_platform
       identifier: security_access_control
-      weight: 8
+      weight: 9
     - name: Account Takeover Protection
       url: security/account_takeover_protection
       parent: security_platform
       identifier: security_ato_protection
-      weight: 9
+      weight: 10
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 11
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 12
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 12
+      weight: 13
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem

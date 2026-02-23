@@ -33,14 +33,14 @@ crane copy <REGISTRY>/<SOURCE_IMAGE>:<IMAGE_TAG> <REGISTRY>/<DEST_IMAGE>:<IMAGE_
 
 You can use the `-n` flag to avoid overwriting an existing tag in the destination registry.
 
-For example, to copy the default images needed for the Datadog Operator from Docker Hub to a private registry:
+For example, to copy the default images needed for the Datadog Operator to a private registry:
 ```shell
 AGENT_VERSION=<AGENT_IMAGE_TAG>
 OPERATOR_VERSION=<OPERATOR_IMAGE_TAG>
 REGISTRY=<REGISTRY_URL>
-crane copy gcr.io/datadoghq/operator:$OPERATOR_VERSION $REGISTRY/operator:$OPERATOR_VERSION
-crane copy gcr.io/datadoghq/agent:$AGENT_VERSION $REGISTRY/agent:$AGENT_VERSION
-crane copy gcr.io/datadoghq/cluster-agent:$AGENT_VERSION $REGISTRY/cluster-agent:$AGENT_VERSION
+crane copy registry.datadoghq.com/operator:$OPERATOR_VERSION $REGISTRY/operator:$OPERATOR_VERSION
+crane copy registry.datadoghq.com/agent:$AGENT_VERSION $REGISTRY/agent:$AGENT_VERSION
+crane copy registry.datadoghq.com/cluster-agent:$AGENT_VERSION $REGISTRY/cluster-agent:$AGENT_VERSION
 ```
 
 ## How to use a private registry

@@ -6,6 +6,8 @@ type: multi-code-lang
 
 This page describes configuration options that behave consistently across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
 
+{{% apm-config-visibility %}}
+
 For configuration options specific to your programming language, choose your language from the options below:
 
 {{< partial name="apm/apm-compatibility.html" >}}
