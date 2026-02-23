@@ -76,4 +76,4 @@ After syncing, you can explore your Power BI assets and their upstream dependenc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/power-bi
-[2]: https://app.datadoghq.com/datasets/catalog
+[2]: https://app.datadoghq.com/data-obs/catalog
