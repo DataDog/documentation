@@ -47,7 +47,7 @@ If you want to use Live Capture and are using a firewall, you must add these dom
     <div class="alert alert-info">Optional configurations are only available if all of your active Workers are versions 2.11 or later.</a></div>
     
     1. Enter a query to specify which events you want to capture. See [filter query](#filter-query-syntax) for more information.
-    1. Enter a capture duration (in seconds or minutes) for how long you want events to be captured for.
+    1. Enter a capture duration (in seconds or minutes) for how long you want events to be captured.
         - Minimum duration (default if no duration is specified): 30 seconds
         - Maximum duration: 300 seconds (5 minutes)
     1. Select which Workers you want to capture events from. If no Workers are selected, a random Worker is chosen.
