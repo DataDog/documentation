@@ -1,6 +1,6 @@
 ---
-title: Chat with Bits AI
-description: "Chat with Bits AI in Datadog and Slack to query observability data using natural language and get insights about your services."
+title: Bits Assistant
+description: "Use Bits Assistant in Datadog to explore and act on your observability data using natural language."
 further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
@@ -13,29 +13,29 @@ aliases:
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-Chat with Bits AI is in preview. Please reach out to your account manager if you have questions.
+Bits Assistant is in preview. Reach out to your account manager if you have questions.
 {{< /callout >}}
 
 
-## Chat in Datadog
+## Bits Assistant in Datadog
 
-Bits AI supports natural language querying for logs, APM traces, infrastructure data, cloud cost, and RUM. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
+Bits Assistant brings conversational AI to Datadog, enabling you to explore and act on your observability data using natural language. Query logs, metrics, traces, dashboards, monitors, infrastructure, and more—all from a single intelligent interface.
 
-You can ask Bits AI questions such as:
+You can ask Bits Assistant questions such as:
 - `Who is on call for example-service?`
 - `Find me the example-service dashboard.`
 - `What is going on with example-service?`
 - `Are there any issues with example-service's dependencies?`
 
-When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
+When relevant to your query, Bits Assistant surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-### In the chat panel
+### In Datadog
 
-To open the chat panel in the app, click **Bits AI** at the bottom-left corner of the navigation menu, or use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> to show or hide the chat panel.
+To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, click **Bits AI** in the left-side navigation panel, or use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
-Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
+Some responses from Bits Assistant include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 
-{{< img src="bits_ai/getting_started/chat_panel_star_service.png" alt="Bits AI chat panel with example question of 'How do I star a service' and Bits AI's answer" style="width:90%;">}}
+{{< img src="bits_ai/getting_started/bits_assistant_panel.png" alt="Bits Assistant side panel showing example prompts including 'What can you do?', 'Summarize any current high-severity incidents', and 'Look up documentation related to the current page'" style="width:40%;">}}
 
 ### On the mobile app
 
