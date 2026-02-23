@@ -12,9 +12,7 @@ The Python function action lets you write custom Python scripts for data transfo
 
 The Python function action runs in a restricted execution environment with the following characteristics:
 
-{{< python-action-libraries-table >}}
-
-- Network access: Restricted
+{{< workflow-python-action-characteristics >}}
 
 ## Script structure
 
