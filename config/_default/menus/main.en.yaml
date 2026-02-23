@@ -6868,36 +6868,41 @@ menu:
       parent: security_platform
       identifier: security_threat_intelligence
       weight: 6
+    - name: Events Forwarding
+      url: security/events_forwarding
+      parent: security_platform
+      identifier: security_events_forwarding
+      weight: 7
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 7
+      weight: 8
     - name: Access Control
       url: security/access_control
       parent: security_platform
       identifier: security_access_control
-      weight: 8
+      weight: 9
     - name: Account Takeover Protection
       url: security/account_takeover_protection
       parent: security_platform
       identifier: security_ato_protection
-      weight: 9
+      weight: 10
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 11
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 11
+      weight: 12
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 12
+      weight: 13
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
