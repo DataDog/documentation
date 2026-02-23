@@ -139,7 +139,6 @@ The Agent retries failed requests for the following scenarios:
 <div class="alert alert-info"> You <strong>cannot configure</strong> the retry behavior and retriable status codes for APM.</div>
 
 ### APM buffering mechanisms and limits
-
 #### In-memory queues
 The Agent compresses and stores failed APM payloads in memory. The Agent drops these failed payloads when queues are full.
 
