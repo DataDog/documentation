@@ -187,7 +187,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 The size limit is approximately `4MB`. The most common cause for this error is extremely large tags.
 Use the `--dry-run` option to see the traced command's contents before sending it to Datadog.
 
-### Github Actions custom commands not appearing in Datadog
+### GitHub Actions custom commands not appearing in Datadog
 
 Older versions of the datadog-ci CLI may require additional setup:
 
