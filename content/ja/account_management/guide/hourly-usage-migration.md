@@ -1,4 +1,6 @@
 ---
+description: V1 の hourly usage エンドポイントから、プロダクト ファミリー、JSON:API 形式、ページネーション、複数組織対応を備えた統合
+  V2 API へ移行する方法を学びます。
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: ドキュメント
@@ -160,7 +162,7 @@ v2 API では、製品ファミリーと使用タイプという概念が導入�
 * 製品はパス `hosts` の要素です。
 * 時間的な境界は、パラメーター `start_hr` と `end_hr` で制御されます。
 
-#### 応答
+#### レスポンス
 
 ```json
 {
@@ -204,7 +206,7 @@ v2 API では、製品ファミリーと使用タイプという概念が導入�
 * 製品は、クエリパラメーター `filter[product_families]=infra_hosts` として渡されます。
 * 時間的な境界は、パラメーター `filter[timestamp][start]` と `filter[timestamp][end]` によって制御されます。
 
-#### 応答
+#### レスポンス
 
 ```json
 {
@@ -307,7 +309,7 @@ END
 
 v2 API では、1 回のリクエストで全地域の子組織の使用量データを取得することができます。子組織のデータをリクエストするには、パラメーター `filter[include_descendants]` を使用します。
 
-### その他の参考資料
+### 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

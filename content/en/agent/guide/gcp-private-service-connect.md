@@ -10,10 +10,6 @@ further_reading:
       text: 'Connect to Datadog over AWS PrivateLink'
 ---
 
-{{% site-region region="us,us3,gov,ap1,ap2" %}}
-<div class="alert alert-danger">This feature is not supported for the selected Datadog site.</div>
-{{% /site-region %}}
-
 {{% site-region region="us5" %}}
 [Google Cloud Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 

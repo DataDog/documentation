@@ -8,7 +8,7 @@ further_reading:
     - link: '/product_analytics/'
       tag: Documentation
       text: Product Analytics
-    - link: 'real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session'
+    - link: 'real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session'
       tag: Documentation
       text: Set user sessions
 ---
@@ -165,8 +165,9 @@ Top list
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/retention-analysis
-[2]: /real_user_monitoring/browser/data_collected/#view-attributes
-[3]: /real_user_monitoring/browser/data_collected/#action-timing-metrics
-[4]: /real_user_monitoring/browser/advanced_configuration#user-session
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/#view-attributes
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#action-timing-metrics
+[4]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session
 [5]: /help
 [6]: https://app.datadoghq.com/product-analytics/segments
+real_user_monitoring/application_monitoring

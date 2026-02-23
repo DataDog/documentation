@@ -30,8 +30,6 @@ You want to monitor the error rate, but only if there are at least 15 entries. I
 
 ```((a/b)*100)*is_greater(b,15)```
 
-{{< img src="/monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts/error_rate_min_threshold.png" alt="Monitor configuration showing error rate calculation with minimum request threshold of 15 requests" style="width:100%;" >}}
-
 The `is_greater` function works as follows:
 - Returns `1` when the number of `trace.rack.requests` exceeds 15
 - Returns `0` when the number of `trace.rack.requests` is 15 or less

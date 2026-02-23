@@ -5,7 +5,7 @@ algolia:
   - atribución de costes
 aliases:
 - /es/account_management/billing/advanced_usage_reporting/
-- /es/account_management/billing/custom_usage_reporitng/
+- /es/account_management/billing/custom_usage_reporting/
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación

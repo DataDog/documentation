@@ -151,4 +151,4 @@ You can restrict access on a specific workflow either from the workflow list pag
 [6]: /service_management/workflows/connections/
 [7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
-[9]: https://datadoghq.slack.com/
+[9]: https://chat.datadoghq.com/

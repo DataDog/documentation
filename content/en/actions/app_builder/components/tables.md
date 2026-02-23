@@ -36,7 +36,7 @@ To add a search bar to your table, under **Appearance**, enable the **Is Searcha
 
 One common use case is filtering a table component using the value in a text input component.
 
-For example, if you want to list your dashboards in a table that you can filter using a text input component, you could do the following: 
+For example, if you want to list your dashboards in a table that you can filter using a text input component, you could do the following:
 
 1. Add a new query using the **+** button.
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
@@ -54,7 +54,7 @@ You can type text into the text input component and the rows of table are filter
 
 Another common use case is filtering a table using a select component.
 
-For example, if you want to list your dashboards in a table that you can filter using a select component, you could do the following: 
+For example, if you want to list your dashboards in a table that you can filter using a select component, you could do the following:
 
 1. Add a new query using the **+** button.
 1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
@@ -89,9 +89,9 @@ If you need the original, untransformed query result, you can reference it as `$
 
 ## Server-side filtering
 
-In some cases, you might want to filter values server-side and issue new requests when the user enters a value in an input such as a text input component. 
+In some cases, you might want to filter values server-side and issue new requests when the user enters a value in an input such as a text input component.
 
-In this case, you can enable server-side filtering by editing the query directly. 
+In this case, you can enable server-side filtering by editing the query directly.
 
 For example, in the [GitHub PR pipeline][4] blueprint, the `listOpenedPulls` query has an input that gets the following URL:
 
@@ -156,7 +156,7 @@ In the table, the **User** column fills with an avatar and GitHub username for e
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][0].
 
-[0]: https://datadoghq.slack.com/
+[0]: https://chat.datadoghq.com/
 [1]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=pagerduty_oncall_manager&viewMode=preview
 [2]: /service_management/app_builder/components/tables/#filtering-with-a-text-input
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer

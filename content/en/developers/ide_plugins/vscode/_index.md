@@ -53,7 +53,7 @@ The extension includes these features:
 
 - [**Exception Replay**](#exception-replay): Debug your production code.
 
-- [**Fix in Chat**](?tab=cursor#fix-in-chat): (Cursor only) Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
+- [**Fix in Chat**](?tab=cursor#fix-in-chat): Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
@@ -204,18 +204,9 @@ Select a stack trace frame and inspect the values of all the variables that Data
 
 ## Fix in Chat
 
-{{< tabs >}}
-{{% tab "VS Code" %}}
-This extension feature is not supported in VS Code.
-{{% /tab %}}
-
-{{% tab "Cursor" %}}
 The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
 
 {{< img src="/developers/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Using Fix in Chat to fix an inline code error" style="width:100%" video=true >}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## License
 

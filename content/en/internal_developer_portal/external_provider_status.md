@@ -46,23 +46,33 @@ To receive notifications for external provider degradations:
 External Provider Status monitors the following third-party providers:
 
 
-| External provider | API monitored |  
-|----------|--------------------|
+| External Provider | API monitored |  
+|----------|--------------------| 
+| Adyen | `*.adyenpayments.com` |
 | Amplitude | `api.amplitude.com` |
-| Atlassian | `*.atlassian.net` |
+| Anthropic | `api.anthropic.com` |
+| Atlassian | `*.atlassian.net`, `*.atlassian.com` |
 | Auth0 | `*.auth0.com` |
-| Binance | `api.binance.com` |
+| Azure DevOps | `dev.azure.com` |
 | Braintree | `api.braintreegateway.com` |
-| Cloudflare | `api.cloudflare.com` |
-| Confluent | `api.confluent.cloud`, `api.telemetry.confluent.cloud` |
+| Cloudflare | `*.cloudflare.com` |
 | Databricks | `*.cloud.databricks.com` |
+| Datadog (US1) | `api.datadoghq.com` |
 | Facebook | `graph.facebook.com` |
 | GitHub | `api.github.com` |
+| GitLab | `*.gitlab.com` |
+| Google Gemini | `generativelanguage.googleapis.com` |
+| Google Maps | `maps.googleapis.com` |
+| HubSpot | `api.hubspot.com`, `api.hubapi.com` |
 | Intercom | `api.intercom.io` |
+| LaunchDarkly | `app.launchdarkly.com` |
 | Mapbox | `api.mapbox.com` |
 | Mixpanel | `api.mixpanel.com` |
+| Okta | `*.okta.com` |
 | OpenAI | `*.openai.com` |
 | PagerDuty | `api.pagerduty.com` |
+| PayPal | `*.paypal.com` |
+| Salesforce | `*.salesforce.com` |
 | SendGrid | `*.sendgrid.com` |
 | ServiceNow | `*.service-now.com` |
 | Slack | `*.slack.com` |
@@ -74,6 +84,7 @@ External Provider Status monitors the following third-party providers:
 | X | `api.twitter.com` |
 | Zendesk | `*.zendesk.com` |
 | Zoom | `api.zoom.us` |
+
 ### AWS services
 
 External Provider Status monitors the following AWS services through endpoints matching `*.amazonaws.com`:

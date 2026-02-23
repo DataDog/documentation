@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/getting_started/tracing/distributed-tracing
+description: 애플리케이션 성능 모니터링(APM)을 설정하여 병목 현상을 파악하고 문제를 해결하며 트레이스를 Datadog에 전송하세요.
 further_reading:
 - link: /tracing/
   tag: 설명서
@@ -74,7 +75,7 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 1. 설치 명령을 실행하세요
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:4 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
 
     `<YOUR_DD_API_KEY>`를 [Datadog API 키][2]로 변경하고, `<YOUR_DD_SITE>`를 [Datadog 사이트][7]로 변경하며, `<AGENT_ENV>`를 에이전트가 설치된 환경으로 변경하세요(예: `development`).

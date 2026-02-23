@@ -460,7 +460,7 @@ The following example assumes:
 - 720 hours in the month (30 days)
 - Custom metric cost of $5 per 100 metrics
 
-$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 

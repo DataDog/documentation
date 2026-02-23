@@ -180,6 +180,32 @@ A custom endpoint for sending RUM data.
 **Default**: `20.0`
 The sampling rate for telemetry data, such as errors and debug logs.
 
+## Tracking from background isolates
+
+Starting with v3, Datadog Flutter SDK is capable of monitoring from multiple isolates, but monitoring must be initialized from the background isolate:
+
+When initializing your background isolate, call `DatadogSdk.instance.attachToBackgroundIsolate`. For example:
+
+```dart
+Future<void> _spawnIsolate() async {
+    final receivePort = ReceivePort();
+    receivePort.listen((message) {
+      //
+    });
+    await Isolate.spawn(_backgroundWork, receivePort.sendPort);
+  }
+
+void _backgroundWork(SendPort port) async {
+  await DatadogSdk.instance.attachToBackgroundIsolate();
+
+  // Your background work
+}
+```
+
+`attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call will silently fail and tracking will not be available.
+
+If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` will automatically start tracking resources from the calling isolate.  However, using `Client` from the `http` package or `Dio` will require you re-initialize HTTP tracking for those packages from the background isolate.
+
 ## Automatically track resources
 
 Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
@@ -200,6 +226,10 @@ In order to enable Datadog [Distributed Tracing][13], you must set the `DatadogC
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
 - `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
+
+### Track resources from other packages
+
+While `Datadog Tracking HTTP Client` can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
 
 ## Enrich user sessions
 
@@ -422,7 +452,7 @@ To enable the collection of Flutter-specific performance metrics, set `reportFlu
 
 ## OpenTelemetry setup
 
-The [Datadog Tracking HTTP Client][10] package and [gRPC Interceptor][19] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
+All of Datadog's automatic network tracking packages ([Datadog Tracking HTTP Client][10], [gRPC Interceptor][19], [GQL Link][20], and [Dio Interceptor][21]) support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
 
 ### Datadog header generation
 
@@ -473,7 +503,7 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [6]: https://github.com/openzipkin/b3-propagation#single-headers
 [7]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [8]: https://www.w3.org/TR/trace-context/#tracestate-header
-[9]: /real_user_monitoring/browser/frustration_signals/
+[9]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
 [10]: https://pub.dev/packages/datadog_tracking_http_client
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
@@ -484,3 +514,6 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [18]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=flutter
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
+[20]: https://pub.dev/packages/datadog_gql_link
+[21]: https://pub.dev/packages/datadog_dio
+[22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries

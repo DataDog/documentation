@@ -7,16 +7,24 @@ further_reading:
 - link: logs/explorer/analytics
   tag: 설명서
   text: 로그 분석 방법 알아보기
+- link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
+  tag: 블로그
+  text: Subqueries로 로그를 동적으로 필터링하고 상호 연관성 파악
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: 블로그
+  text: 네트워크 및 보안 분석에 대한 DNS 모니터링
 title: 로그를 패턴으로 그룹화
 ---
 
 ## 개요
 
-**패턴**별로 인덱싱된 로그를 집계할 때 유사한 구조와 `message`를 가진 로그가 함께 그룹화됩니다. 선택적으로 그룹 내에서 패턴이 감지되기 전에 1~3개의 패싯 필드를 선택하여 로그를 그룹으로 사전 집계합니다.
+기본적으로 **Log Patterns**는 `message` 필드에 유사한 값을 갖는 로그를 클러스터링하고 결과를 `Status` 및 `Service`로 그룹화합니다.
+
+클러스터링 또는 그룹화 결과에 다양한 로그 속성을 선택할 수 있습니다.
 
 **패턴** 보기는 다른 문제를 놓칠 수 있는 시끄러운 오류 패턴을 감지하고 필터링하는 데 유용합니다. 패턴 감지는 10,000개의 로그 샘플을 기반으로 합니다. 특정 로그 하위 집합으로 제한된 패턴을 보려면 검색을 세분화하세요.
 
-{{< img src="logs/explorer/aggregations_patterns.png" alt="패턴별로 그룹화된 로그를 표시하는 로그 탐색기" style="width:90%;" >}}
+{{< img src="logs/explorer/pattern_cluster.png" alt="패턴별로 그룹화된 로그를 보여주는 Log Explorer" style="width:90%;" >}}
 
 패턴은 [목록][1] 시각화를 지원합니다. 목록에서 패턴을 클릭하면 다음을 수행할 수 있는 패턴 측면 패널이 열립니다.
 

@@ -2,40 +2,63 @@
 aliases:
 - /fr/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
 - /fr/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
+description: Utiliser l'attribut restricted_roles dans Terraform pour contrôler les
+  autorisations de modification de dashboard pour des rôles d'utilisateur spécifiques.
 title: Utiliser Terraform pour restreindre la modification d'un dashboard
 ---
 
 
-## Introduction
+## Restreindre un dashboard en utilisant l'attribut restricted_roles
 
-Auparavant, pour restreindre la modification d'un dashboard créé et géré par [Terraform][1], vous deviez utiliser l'attribut `is_read_only`. Avec cet attribut, seuls le créateur ou les utilisateurs de votre organisation disposant de l'autorisation Access Management (`user_access_manage`) pouvaient modifier le dashboard en question. Désormais, grâce au nouvel attribut `restricted_roles`, vous pouvez énumérer les rôles de votre organisation autorisés de modifier le dashboard.
+L'attribut `restricted_roles` peut être utilisé pour restreindre la modification du dashboard à des rôles spécifiques. Le champ prend une liste d'ID de rôles et autorise tous les utilisateurs associés.
 
-## Restreindre la modification d'un dashboard
+Exemple d'utilisation :
 
-Si vous utilisez déjà l'attribut `is_read_only` dans votre définition, cette configuration continue à être valable tant que vos utilisateurs consultent et utilisent la liste de rôles. Pour synchroniser correctement vos définitions Terraform avec l'interface de l'application Datadog, suivez les étapes ci-dessous :
+```hcl
+resource "datadog_dashboard" "example" {
+  title         = "Example dashboard"
+  restricted_roles = ["<role_id_1>", "<role_id_2>"]
+}
+```
 
-1. Installez la version 3.1.0 ou une version ultérieure du fournisseur Terraform Datadog.
+**Remarque** : l'attribut `is_read_only` est obsolète. Il est recommandé d'utiliser l'attribut `restricted_roles` ou les politiques de restriction pour gérer l'accès à vos dashboards.
 
-2. Obtenez l'UUID des rôles que vous souhaitez autoriser. Pour ce faire, récupérer les UUID depuis l'[API Roles][2] ou la page Roles, ou indiquez l'ID des rôles tel que défini dans Terraform pour les [rôles gérés][3].
+## Restreindre un dashboard en utilisant une politique de restriction
 
-3. Remplacez l'attribut `is_read_only` par `restricted_roles` dans les définitions de vos dashboards :
+<div class="alert alert-danger">Les politiques de restriction sont en préversion. Contactez l'<a href="/help/">assistance Datadog</a> ou votre Customer Success Manager pour y accéder.</div>
 
-{{< img src="dashboards/guide/terraform_is_read_only_definition.png" alt="Dashboards en lecture seule" style="width:80%;">}}
+Les [politiques de restriction][1] vous permettent de restreindre la modification de dashboards et d'autres ressources à des principaux spécifiques, notamment les rôles, les équipes, les utilisateurs et les comptes de service.
 
-{{< img src="dashboards/guide/terraform_restricted_role_definition.png" alt="Dashboards avec une restriction basée sur les rôles" style="width:80%;">}}
+Exemple d'utilisation :
 
-## Problèmes courants
+```hcl
+resource "datadog_dashboard" "example" {
+  title         = "Example dashboard"
+  # Do not use restricted_roles or is_read_only attributes
+}
 
-### L'attribut `is_read_only` est toujours activé pour mon dashboard
+resource "datadog_restriction_policy" "example" {
+ resource_id = "dashboard:${datadog_dashboard.example.id}"
+  bindings {
+     principals = ["org:<org_id>"]
+     relation = "viewer"
+  }
+  bindings {
+     principals = ["role:<role_id_1>", "role:<role_id_2>"]
+     relation = "editor"
+  }
+}
+```
 
-Cette configuration est toujours valable. Chaque exécution Terraform détecte les modifications apportées à l'accès basé sur les rôles ou la lecture seule, et vous prévient si l'attribut `is_read_only` a été modifié.
+Les ID de rôles peuvent être récupérés depuis l'[API Roles][2], l'[interface utilisateur Roles][5], ou en utilisant l'ID de rôle défini dans Terraform pour les ressources [datadog_role][3].
 
-### Terraform indique que `is_read_only` a été supprimé
+L'ID d'organisation peut être obtenu depuis la requête [API GET /api/v2/current_user][4]. Trouvez-le dans le champ `data.relationships.org.data.id`.
 
-Terraform génère cet avertissement car votre navigateur remplace l'ancien flag d'autorisation par le nouveau flag, avec un schéma d'autorisations plus avancé. Si vous installez la version 3.1.0 ou une version ultérieure de Terraform, vous aurez accès aux nouveaux champs de restriction des rôles.
 
-Cette modification mineure n'a aucune incidence sur les fonctionnalités ni sur les paramètres de sécurité des dashboards. Lorsque vous appliquez votre nouvelle configuration Terraform, elle remplace la configuration d'origine avec l'attribut `is_read_only`.
 
-[1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard
+
+[1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/restriction_policy
 [2]: /fr/api/latest/roles/#list-roles
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
+[4]: https://app.datadoghq.com/api/v2/current_user
+[5]: https://app.datadoghq.com/organization-settings/roles

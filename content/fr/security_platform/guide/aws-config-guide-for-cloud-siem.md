@@ -88,7 +88,7 @@ Cloud SIEM applique des règles de détection à l'ensemble des logs traités. 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Log%20Detection%22
+[1]: https://app.datadoghq.com/security/signals?query=%40workflow.rule.type%3A%22Log%20Detection%22
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/fr/getting_started/integrations/aws/
 [4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=roledelegation#manual
@@ -96,7 +96,7 @@ Cloud SIEM applique des règles de détection à l'ensemble des logs traités. 
 [6]: https://console.aws.amazon.com/lambda/home
 [7]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
 [8]: https://docs.datadoghq.com/fr/logs/explorer/
-[9]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[9]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [10]: https://docs.datadoghq.com/fr/security_platform/explorer/
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
 [12]: https://docs.datadoghq.com/fr/security_platform/default_rules/#cat-cloud-siem

@@ -35,4 +35,4 @@ Product Analytics collects contextual information by default. You can also add a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/explorer
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context

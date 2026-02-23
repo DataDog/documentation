@@ -1,4 +1,7 @@
 ---
+description: Configura los ajustes de Datadog Agent utilizando variables de entorno
+  como alternativa a datadog.yaml, incluidas las convenciones de nomenclatura y el
+  uso de systemd.
 further_reading:
 - link: /agent/docker/#environment-variables
   tag: Documentación
@@ -16,7 +19,7 @@ title: Variables de entorno del Agent
 ---
 
 <div class="alert alert-danger">
-En el Agent v5, consulta el <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">repositorio GitHub del Docker Agent</a>.
+Para Agent v5, consulta el <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">repositorio de GitHub del Docker Agent</a>.
 </div>
 
 ## Información general
@@ -105,7 +108,7 @@ A partir del Agent v7.45, el servicio del Agent de Datadog (unidad`datadog-agent
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
-  DD_TAGS=env:dev,service:foo
+  DD_TAGS=env:dev service:foo
   ```
 3. Reinicia el servicio para que se apliquen los cambios
 

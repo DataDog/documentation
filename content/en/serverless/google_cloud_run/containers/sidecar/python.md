@@ -37,6 +37,8 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
 
    {{% tab "Datadog CLI" %}}
@@ -97,11 +99,11 @@ logger.info('Hello world!')
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="python" %}}
+{{% serverless-init-env-vars-sidecar language="python" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -111,4 +113,4 @@ logger.info('Hello world!')
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5

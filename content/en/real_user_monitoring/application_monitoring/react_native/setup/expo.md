@@ -27,7 +27,9 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the React Native SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your Expo applications for [Real User Monitoring (RUM)][1] with the React Native SDK. RUM includes Error Tracking capabilities for crash reporting and error analysis.
+
+**Note:** If you've purchased Error Tracking as a standalone product (without RUM), see the [Error Tracking Expo setup documentation][2] instead.
 
 The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-datadog` and `@datadog/mobile-react-native`.
 
@@ -51,7 +53,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 ### Track view navigation
 
-To see RUM or Error Tracking sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+To see RUM sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
 
 #### Manual tracking
 
@@ -99,32 +101,69 @@ In this Datadog example project, View Tracking is achieved through `@datadog/mob
 Add the following code snippet to your initialization file:
 
 ```js
-import { DdSdkReactNative, DdSdkReactNativeConfiguration } from 'expo-datadog';
+import {
+    SdkVerbosity,
+    DatadogProvider,
+    DatadogProviderConfiguration,
+    RumConfiguration,
+    LogsConfiguration,
+    TraceConfiguration
+} from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>', 
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions such as tapping on a button. You can use the 'accessibilityLabel' element property to give the tap action a name, otherwise the element type is reported.
-    true, // track XHR resources.
-    true // track errors.
+    // Optional: Configure the Datadog Site to target. Default is 'US1'.
+    site: 'US1',
+    // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+    service: 'com.example.reactnative',
+    // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+    verbosity: SdkVerbosity.WARN,
+    // Enable RUM
+    rumConfiguration: {
+        // Required: RUM Application ID
+        applicationId: '<APPLICATION_ID>',
+        // Track user interactions (set to false if using Error Tracking only)
+        trackInteractions: true,
+        // Track XHR resources (set to false if using Error Tracking only)
+        trackResources: true,
+        // Track errors
+        trackErrors: true,
+        // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+        sessionSampleRate: 80,
+        // Optional: Enable or disable native crash reports.
+        nativeCrashReportEnabled: true,
+        // Optional: Sample tracing integrations for network calls between your app and your backend 
+        // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+        // the APM view. Default is 20%).
+        // You need to specify the hosts of your backends to enable tracing with these backends
+        resourceTraceSampleRate: 80,
+        firstPartyHosts: [
+            { 
+                match: 'example.com', 
+                propagatorTypes: [
+                    PropagatorType.DATADOG,
+                    PropagatorType.TRACECONTEXT
+                ]
+            }
+        ]
+    },
+    // Enable Logs with default configuration
+    logsConfiguration: {},
+    // Enable Trace with default configuration
+    traceConfiguration: {}
 );
-// Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
-config.site = 'US1';
-// Optional: Enable or disable native crash reports.
-config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-config.sessionSamplingRate = 80;
-// Optional: Sample tracing integrations for network calls between your app and your backend, for example: 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%.
-// You need to specify the hosts of your backends to enable tracing with these backends.
-config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // Matches 'example.com' and subdomains like 'api.example.com'.
-// Optional: Let the Datadog SDK print internal logs above or equal to the provided level. Default is undefined, which means no logs.
-config.verbosity = SdkVerbosity.WARN;
 
-await DdSdkReactNative.initialize(config);
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
 
-// Once the Datadog SDK is initialized, you need to setup view tracking in order to see data in the RUM dashboard.
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
 #### Sample session rates
@@ -133,9 +172,7 @@ To control the data your application sends to Datadog RUM, you can specify a sam
 
 ### Upload source maps on EAS builds
 
-<div class="alert alert-info"><p>If you have not enabled Crash Reporting, you can skip this step.<p></div>
-
-Add `expo-datadog` to your plugins in the `app.json` file:
+To enable crash reporting and error symbolication, add `expo-datadog` to your plugins in the `app.json` file:
 
 ```json
 {
@@ -161,7 +198,33 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
-For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][5].
+#### Configure source maps for accurate symbolication
+
+**Option A: Use Datadog Metro plugin (recommended)**
+
+Starting from `@datadog/mobile-react-native@2.10.0` and `@datadog/datadog-ci@v3.13.0`, add the Datadog Metro Plugin to your `metro.config.js`:
+
+```js
+const { getDatadogExpoConfig } = require("@datadog/mobile-react-native/metro");
+const config = getDatadogExpoConfig(__dirname);
+module.exports = config;
+```
+
+**Option B: Manual Debug ID injection**
+
+Alternatively, use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap. See the [command documentation][5] for usage instructions.
+
+#### Add git repository data (EAS only)
+
+If you're using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files:
+
+```json
+{
+    "cli": {
+        "requireCommit": true
+    }
+}
+```
 
 ## Tracking Expo Router screens
 
@@ -229,10 +292,17 @@ if (__DEV__) {
     DdRum.stopResource = emptyAsyncFunction;
     DdRum.addError = emptyAsyncFunction;
     DdRum.addTiming = emptyAsyncFunction;
+    DdRum.getCurrentSessionId = emptyAsyncFunction;
 
     DdSdkReactNative.initialize = emptyAsyncFunction;
-    DdSdkReactNative.setUser = emptyAsyncFunction;
-    DdSdkReactNative.setAttributes = emptyAsyncFunction;
+    DdSdkReactNative.setUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.addUserExtraInfo = emptyAsyncFunction;
+    DdSdkReactNative.clearUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.removeUserInfo = emptyAsyncFunction;
+    DdSdkReactNative.addAttributes = emptyAsyncFunction;
+    DdSdkReactNative.removeAttributes = emptyAsyncFunction;
+    DdSdkReactNative.addAttribute = emptyAsyncFunction;
+    DdSdkReactNative.removeAttribute = emptyAsyncFunction;
     DdSdkReactNative.setTrackingConsent = emptyAsyncFunction;
 }
 ```
@@ -241,18 +311,143 @@ Then, import it before initializing the Datadog React Native SDK:
 
 ```typescript
 import './mockDatadog';
-import { DdSdkReactNative } from 'expo-datadog';
+import { CoreConfiguration } from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(/* your config */);
+const config = new CoreConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
+```
+
+### User interactions tracking
+
+Datadog recommends set up interaction tracking by using the Datadog React Native Babel Plugin (`@datadog/mobile-react-native-babel-plugin`). This plugin automatically enriches React components with contextual metadata, improving interaction tracking accuracy and enabling a range of configuration options.
+
+#### Installation
+
+To install with NPM, run:
+
+```sh
+npm install @datadog/mobile-react-native-babel-plugin
+```
+
+To install with Yarn, run:
+
+```sh
+yarn add @datadog/mobile-react-native-babel-plugin
+```
+
+#### Configure Babel
+
+Add the plugin to your Babel configuration file (`babel.config.js`, `.babelrc`, or similar):
+
+```js
+module.exports = {
+  presets: ["babel-preset-expo"],
+  plugins: ['@datadog/mobile-react-native-babel-plugin']
+};
+```
+
+#### Basic usage
+
+Once the plugin is installed and configured, it automatically tracks interactions on standard React Native components. No additional code changes are required for basic usage.
+
+#### Configuration options
+
+You can customize the plugin's behavior to match your application's needs:
+
+```js
+module.exports = {
+  presets: ["babel-preset-expo"],
+  plugins: [
+    [
+      '@datadog/mobile-react-native-babel-plugin',
+      {
+        sessionReplay: {
+          // Enable SVG tracking for Session Replay (default: false)
+          svgTracking: true
+        },
+        components: {
+          // Use component content as action name (default: true)
+          useContent: true,
+          // Prefix actions with component name (default: true)
+          useNamePrefix: true,
+        },
+      },
+    ],
+  ],
+};
+```
+#### Tracking custom components
+
+For custom components, you can configure specific tracking behavior:
+
+```js
+module.exports = {
+  presets: ["babel-preset-expo"],
+  plugins: [
+    [
+      '@datadog/mobile-react-native-babel-plugin',
+      {
+        components: {
+          tracked: [
+            {
+              name: 'CustomButton',
+              // Prop your component uses as content (if available)
+              // When not set, the plugin tries to find the most likely match
+              contentProp: 'label',
+              handlers: [{event: 'onPress', action: 'TAP'}],
+            },
+            {
+              name: 'CustomInput',
+              handlers: [{event: 'onFocus', action: 'TAP'}],
+            },
+          ],
+        },
+      },
+    ],
+  ],
+};
+```
+
+#### Custom action names
+
+You can specify custom action names for components using the `actionNameAttribute` configuration:
+
+```js
+module.exports = {
+  presets: ["babel-preset-expo"],
+  plugins: [
+    [
+      '@datadog/mobile-react-native-babel-plugin',
+      {
+        actionNameAttribute: 'data-dd-action-name',
+      },
+    ],
+  ],
+};
+```
+
+Then use it in your components:
+
+```jsx
+<Button data-dd-action-name="checkout-button" onPress={handleCheckout}>
+  Complete Purchase
+</Button>
 ```
 
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the events are first stored on the local device in batches. 
+The React Native SDK ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the React Native SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old to ensure the React Native SDK does not use too much disk space.
+
+## Sending data when device is offline
+
+RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the events are first stored on the local device in batches.
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
+
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Troubleshooting
@@ -264,11 +459,12 @@ The most common patterns of Expo dev server host URL are filtered by the SDK, th
 If this error occurs, add the following Resource mapper to filter out the calls:
 
 ```js
-import { DdSdkReactNativeConfiguration } from 'expo-datadog';
+import { CoreConfiguration } from 'expo-datadog';
+
 import Constants from 'expo-constants';
 
-const config = new DdSdkReactNativeConfiguration(/* your config */);
-config.resourceEventMapper = event => {
+const config = new CoreConfiguration(/* your config */);
+config.rumConfiguration.resourceEventMapper = event => {
   if (
     event.resourceContext?.responseURL ===
     `http://${Constants.expoConfig.hostUri}/logs`
@@ -284,10 +480,10 @@ config.resourceEventMapper = event => {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /error_tracking/
+[2]: /error_tracking/frontend/mobile/expo/
 [3]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
 [4]: /real_user_monitoring/application_monitoring/react_native/setup/expo#initialize-the-library-with-application-context
-[5]: /real_user_monitoring/error_tracking/mobile/expo/
+[5]: /real_user_monitoring/error_tracking/mobile/expo/#use-the-datadog-ci-react-native-inject-debug-id-command
 [6]: https://expo.github.io/router/docs/
 [7]: https://docs.expo.dev/development/introduction/
 [8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to

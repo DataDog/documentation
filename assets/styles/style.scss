@@ -81,6 +81,8 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "components/multifilter-search";
 @import "components/filter-search";
 
+// UI labels
+@import "components/ui-label";
 
 // for now just include ie fixes
 @import 'ie';

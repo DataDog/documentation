@@ -12,8 +12,7 @@ further_reading:
 title: PHP 互換性要件
 type: multi-code-lang
 ---
-<div class="alert alert-info">This documentation is for the PHP tracer v1.x. If you are looking for the PHP tracer v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
-</a> documentation.</div>
+<div class="alert alert-info">このドキュメントは PHP tracer v1.x 用です。PHP tracer v0.x のドキュメントをお探しの場合は、最新の <a href="/tracing/trace_collection/compatibility/php_v0/">PHP 互換性要件</a> のドキュメントをご覧ください。</div>
 
 ## PHP APM のランタイムサポートポリシー
 
@@ -24,29 +23,30 @@ Datadog APM for PHP は、ホスト OS や PHP ランタイム、特定の PHP �
 
 #### サポートレベル
 
-| **レベル**                                              | **サポート内容**                                                                                                                                                          |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートチームにお問い合わせください][2]。                                                             |
-| <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
-| <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                                                    |
-| <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                                              |
-| <span id="support-legacy">レガシー</span>                |  レガシーな実装。機能は限定されますが、メンテナンスは提供されません。[特別なご要望がある場合は、サポートチームにお問い合わせください。 |
-| <span id="support-eol">サポート終了 (EOL)</span>        |  サポートなし。このバージョンはまだ使用可能ですが、バグ修正は提供されません。                                                                                                  |
+| **レベル**                                              | **サポート内容**                                                                                                                         |
+|--------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">非対応</span>      | 実装していません。[特別なご要望はカスタマーサポートチームにお問い合わせください][2]。                                                              |
+| <span id="support-beta">Preview</span>                 | 初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。 |
+| <span id="support-ga">一般提供 (GA)</span> | 全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                 |
+| <span id="support-maintenance">メンテナンス</span>      | 既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                            |
+| <span id="support-legacy">レガシー</span>                | レガシーな実装。機能は限定されますが、メンテナンスは提供されません。[特別なご要望がある場合は、サポートチームにお問い合わせください。           |
+| <span id="support-eol">サポート終了 (EOL)</span>        | サポートなし。このバージョンはまだ使用可能ですが、バグ修正は提供されません。                                                                     |
 
 
 PHP APM supports the following PHP versions (both ZTS and NTS):
 
 <div class="alert alert-info">
-<strong>Note:</strong>
-PHP 5.x is not supported starting version 1.0.0. If you are using PHP 5, you can still use the PHP tracer up to version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0">0.99</a>.
+<strong>注:</strong>
+PHP 5.x は バージョン 1.0.0 以降 サポート対象外です。PHP 5 を使用している場合は、PHP トレーサーは バージョン <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0">0.99</a> までは引き続き利用できます。
 <br>
-If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
+アプリケーションで PHP 5.x を利用していて、ビジネス上重要な機能の追加を希望される場合は、<a href="https://www.datadoghq.com/support/">Datadog Support</a> までご連絡ください。
 <br>
-It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0+.
+PHP は、特に 8.0 以上 の <a href="https://www.php.net/supported-versions">公式にサポートされているバージョン</a> を使用することを推奨します。
 </div>
 
 | PHP バージョン    | サポートレベル        | パッケージバージョン |
 |:---------------|:---------------------|:----------------|
+| 8.4.x          | 一般提供 | > `1.5.0+`     |
 | 8.3.x          | 一般提供 | > `0.93.0+`     |
 | 8.2.x          | 一般提供 | > `0.82.0+`     |
 | 8.1.x          | 一般提供 | > `0.66.0+`     |
@@ -99,7 +99,7 @@ Datadog はデフォルトで、**すべての PHP Web フレームワークを�
 
 | モジュール         | バージョン                                | サポートの種類                | インスツルメンテーションレベル           |
 |:---------------|:----------------------------------------|:----------------------------|:--------------------------------|
-| CakePHP        | 2.x                                     | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| CakePHP        | 2.x, 3.x, 4.x, 5.x                      | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | CodeIgniter    | 2.x                                     | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | CodeIgniter    | 3.x                                     | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
 | Drupal         |                                         | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
@@ -112,27 +112,28 @@ Datadog はデフォルトで、**すべての PHP Web フレームワークを�
 | Magento        | 2                                       | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | Neos Flow      | 1.1                                     | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
 | Phalcon        | 1.3、3.4                                | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
-| RoadRunner     | 2.x                                     | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| RoadRunner     | {{< tooltip text="SDK" tooltip="RoadRunner は 2 種類の バージョニング スキームを使用しています。SDK コンポーネントには セマンティック バージョニング (3.x)、サーバーには カレンダー バージョニング (2024.x) を使用します。互換性を確認する場合は SDK のバージョンを参照してください。" >}} 2.x, 3.x                           | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | Slim           | 2.x、3.x、4.x                           | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | WordPress      | 4.x、5.x、6.x                           | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
-| Yii            | 1.1、2.0                                | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Yii            | 2.0                                     | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | Zend Framework | 1.12, 1.21                              | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | Zend Framework | 2.x                                     | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
 
 このリストにウェブフレームワークがない場合でも、トレーサーの最新リリースではそのまま使用できます。
 
+
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
 #### CLI ライブラリの互換性
 
-デフォルトで、CLI SAPI からのトレースは無効になっています。PHP CLI スクリプトのトレースを有効にするには、`DD_TRACE_CLI_ENABLED=true` とします。
+CLI SAPI からのトレーシングはデフォルトで有効です。特定の PHP CLI スクリプトのトレーシングを無効化するには、`DD_TRACE_CLI_ENABLED=false` を設定します。
 
 | モジュール          | バージョン            | サポートの種類               |
 |:----------------|:--------------------|:---------------------------|
-| CakePHP Console | 2.x                 | サポートされているすべての PHP バージョン |
+| CakePHP Console | 2.x、3.x            | サポートされているすべての PHP バージョン |
 | Laravel Artisan | 5.x、8.x、9.x、10.x | サポートされているすべての PHP バージョン |
-| Symfony CLI     | 4.x、5.x、6.x       | サポートされているすべての PHP バージョン |
+| Symfony CLI     | 4.x, 5.x, 6.x, 7.x  | サポートされているすべての PHP バージョン |
 
 追加 CLI ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
@@ -163,18 +164,11 @@ Datadog is continuously adding more support for in-depth tracing for PHP web-fra
 | Curl              | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
 | Guzzle            | 5.x, 6.x, 7.x              | サポートされているすべての PHP バージョン |
 | Laravel Queue     | Laravel 対応バージョン | サポートされているすべての PHP バージョン |
-| [OpenAI][11]      | OpenAI supported versions  | サポートされているすべての PHP バージョン |
+| [OpenAI][11]      | OpenAI サポート対象バージョン  | サポートされているすべての PHP バージョン |
+| Symfony Messenger | 4.4, 5.x, 6.x, 7.x         | サポートされているすべての PHP バージョン |
 
 
 ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
-
-#### PHP 5 の深いコールスタック
-
-コールスタックは PHP 5 のみに限定されます。詳細は[深いコールスタックのトラブルシューティングページ][5]を参照してください。 
-
-### ジェネレータ
-
-[ジェネレータ][6]のインスツルメントは、PHP 5 および PHP 7 ではサポートされていません。
 
 ### PCNTL
 
@@ -190,8 +184,6 @@ Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcnt
 [2]: https://www.datadoghq.com/support/
 [3]: /ja/help
 [4]: https://pecl.php.net/package/mongo
-[5]: /ja/tracing/troubleshooting/php_5_deep_call_stacks
-[6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
 [9]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration

@@ -31,26 +31,47 @@ The following table shows feature compatibility across different setups:
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [LLM Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Trace metrics are calculated on the backend based on ingested spans that have passed through sampling, not on 100% of local traces before sampling." >}}) |
-| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
+| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
+| [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
 | [Continuous Profiler][12] | {{< X >}} | | | |
-| [Data Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
+| [Data Observability: Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
+## API support
+
+Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
+
+| Language | Traces API | Metrics API | Logs API |
+| :--- | :---: | :---: | :---: |
+| [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
+| [PHP][37] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+
 ## More details
+
+### LLM Observability
+
+OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) are automatically converted into LLM Observability traces. To disable this conversion, see [Disabling LLM Observability conversion][38].
 
 ### Runtime metrics
 
-Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1] specification.
+- **Datadog SDK setups**: Emit [Runtime Metrics][23] using DogStatsD (UDP port 8125). Ensure DogStatsD is enabled in your Datadog Agent.
+- **OpenTelemetry SDK setups**: Follow the [OpenTelemetry Runtime Metrics][1] specification and are typically sent using OTLP (port 4317/4318).
 
 ### Real User Monitoring (RUM)
 
@@ -76,7 +97,9 @@ While the OpenTelemetry Collector can be deployed in many environments, certain 
 
 When using Datadog and OpenTelemetry together, Datadog recommends the following best practices to ensure optimal performance and to avoid potential issues:
 
-- **Avoid mixed instrumentation**: Do not use both a Datadog SDK and an OpenTelemetry SDK to instrument the same application, as this leads to undefined behavior.
+- **Avoid mixed instrumentation**: In most cases, you should not use both a Datadog SDK and an OpenTelemetry SDK in the same application, as this leads to undefined behavior.
+  - **Exception**: Support for some languages, such as Python, requires both the Datadog SDK and the OpenTelemetry SDK to be installed.
+  - Always follow the specific [language-specific instrumentation documentation][8] to ensure you are using the correct and supported setup.
 - **Avoid Agent and separate Collector on same host**: Do not run the Datadog Agent and a separate OpenTelemetry Collector on the same host, as this may cause issues. However, you can run Agents and Collectors on different hosts within the same fleet.
 
 ## Further reading
@@ -112,3 +135,12 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [27]: /tracing/trace_collection/
 [28]: /opentelemetry/setup/agentless
 [29]: /opentelemetry/setup/ddot_collector
+[30]: /infrastructure/list/
+[31]: /opentelemetry/instrument/api_support/dotnet/
+[32]: /opentelemetry/instrument/api_support/python/
+[33]: /opentelemetry/instrument/api_support/nodejs/
+[34]: /opentelemetry/instrument/api_support/java/
+[35]: /opentelemetry/instrument/api_support/go/
+[36]: /opentelemetry/instrument/api_support/ruby/
+[37]: /opentelemetry/instrument/api_support/php/
+[38]: /llm_observability/instrumentation/otel_instrumentation/

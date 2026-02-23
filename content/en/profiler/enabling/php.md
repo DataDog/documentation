@@ -59,6 +59,7 @@ The following profiling features are available in the following minimum versions
 | [Trace to Profiling integration][12] | 0.89.0+                           |
 | [Endpoint Profiling][13]             | 0.79.0+                         |
 | [Timeline][15]                       | 0.98.0+                         |
+| [Source Code Integration][16]        | 1.13.0+                         |
 
 Continuous Profiler is not supported on some serverless platforms, such as AWS Lambda.
 
@@ -108,7 +109,9 @@ To begin profiling applications:
         with datadog-profiling v1.13.0, Copyright Datadog, by Datadog
     ```
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+6. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
+
+7. A couple of minutes after receiving a request, your profiles appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][17] guide.
 
 ## Not sure what to do next?
 
@@ -128,3 +131,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
 [15]: /profiler/profile_visualizations/#timeline-view
+[16]: /integrations/guide/source-code-integration/?tab=php
+[17]: /profiler/profiler_troubleshooting/php/

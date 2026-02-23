@@ -119,8 +119,11 @@ App Builder provides the following permissions for each app:
 Viewer
 : Run and view the app
 
-Editor
+Contributor
 : Edit, run, and view the app
+
+Editor
+: Edit, run, view, publish, and delete the app.
 
 To restrict access to the app, perform the following steps in the app canvas:
 1. Navigate to the detailed editing view for the app you want to restrict access to.
@@ -138,7 +141,7 @@ To restrict access to the app, perform the following steps in the app canvas:
 [2]: /account_management/org_settings/service_accounts#permissions
 [3]: /account_management/rbac/?tab=datadogapplication#role-based-access-control
 [5]: https://app.datadoghq.com/app-builder/
-[6]: https://datadoghq.slack.com/
+[6]: https://chat.datadoghq.com/
 [7]: /account_management/audit_trail/#overview
 [8]: /actions/connections/
 [9]: /actions/workflows/

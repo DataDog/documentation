@@ -27,19 +27,25 @@ Both can be set up independently, but it is recommended to first set up the conv
 
 ## Prerequisites
 
- - The [Amazon Web Services integration][1] is setup.
- - Metrics, and Logs collection are enabled on the [AWS WAF integration][2]. 
+- The [Amazon Web Services integration][1] is set up.
+- The following permissions are enabled for the [AWS Resource Collection][7]:
+  - `wafv2:GetWebACL`
+  - `wafv2:ListResourcesForWebACL`
+  - `wafv2:ListWebACLs`
+  - `wafv2:GetIPSet`
+  - `wafv2:ListIPSets`
+ - Metrics, and Logs collection are enabled on the [AWS WAF integration][2]. Note that only logs sent to an S3 bucket are collected by the AWS WAF integration.
  - A [Connection][3] is created with the AWS account hosting the AWS WAF used for blocking.
 
 ## Convert AWS WAF logs to traces
 
-First, **enable** the conversion of logs to traces on the [Settings page][4]. 
+First, **enable** the conversion of logs to traces on the [Settings page][4].
 
 Then, ensure the web ACLs table contains request metrics as well as logs and traces.
 
 Security traces are reported in the [AAP Traces Explorer][5] with service name `aws.waf`.
 
-## Block with AWS WAF IPsets 
+## Block with AWS WAF IPsets
 
 To block attackers, Datadog needs to manage a dedicated IPset. This IPset must be referenced by the web ACL with a rule in blocking mode.
 
@@ -47,8 +53,8 @@ Multiple web ACLs can be set up in the same or in different AWS accounts. A [Con
 
 Ensure the AWS role attached to the [Connection][3] has the following permissions:
 
- - `GetIPSet`
- - `UpdateIPSet`
+ - `wafv2:GetIPSet`
+ - `wafv2:UpdateIPSet`
 
 {{< tabs >}}
 {{% tab "Setup with Terraform" %}}
@@ -60,44 +66,44 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
      ip_address_version = "IPV4"
      scope              = "CLOUDFRONT"
      addresses          = []
-   
+
      lifecycle {
        # The addresses are managed by the Datadog Application Security product.
        ignore_changes = [addresses]
      }
    }
-   
+
    # Add a blocking rule to your existing web ACL resource
    resource "aws_wafv2_web_acl" "EdgeWAF" {
      name  = "EdgeWAF"
      description = "undefined"
      scope = "CLOUDFRONT"
-   
+
      default_action {
        allow {}
      }
-   
+
      rule {
        name     = "BlockedIPs"
        priority = 0
-   
+
        action {
          block {}
        }
-   
+
        statement {
          ip_set_reference_statement {
            arn = aws_wafv2_ip_set."Datadog-blocked-ipv4s".arn
          }
        }
-   
+
        visibility_config {
          cloudwatch_metrics_enabled = true
          metric_name                = "Datadog-blocked-ipv4s"
          sampled_requests_enabled   = true
        }
      }
-   
+
      visibility_config {
        cloudwatch_metrics_enabled = true
        metric_name                = "EdgeWAF"
@@ -119,3 +125,4 @@ After setup is complete, click **Block New Attackers** on the App & API Protecti
 [4]: https://app.datadoghq.com/security/configuration/asm/setup
 [5]: https://app.datadoghq.com/security/appsec/traces?query=service%3Aaws.waf
 [6]: https://app.datadoghq.com/security/appsec/denylist
+[7]: /integrations/amazon-web-services/#resource-collection

@@ -32,7 +32,7 @@ algolia:
 
 This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see the installation instructions below or [follow the instructions in the app][1].
 
-See [Supported Platforms][15] for the complete list of supported Linux distributions and versions.
+See [Supported Platforms][15] for the complete list of supported Windows versions.
 
 ## Installation
 
@@ -281,7 +281,7 @@ After configuration is complete, [restart the Agent][11].
 [12]: http://127.0.0.1:5002
 [13]: /agent/guide/python-3/
 [14]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
-[15]: https://docs.datadoghq.com/agent/supported_platforms/?tab=linux
+[15]: https://docs.datadoghq.com/agent/supported_platforms/?tab=windows
 [16]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [17]: /agent/faq/windows-agent-ddagent-user/
 [18]: https://docs.datadoghq.com/agent/troubleshooting/

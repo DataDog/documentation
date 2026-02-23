@@ -25,7 +25,7 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 Install the [Datadog Lambda library][3] locally by running the following command:
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### Instrument
@@ -40,7 +40,7 @@ Follow these steps to instrument the function:
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
+      ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
       "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
       httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
@@ -65,7 +65,7 @@ Follow these steps to instrument the function:
       // Trace an HTTP request
       req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
       client := http.Client{}
-      client = *httptrace.WrapClient(&client)
+      client = httptrace.WrapClient(&client)
       client.Do(req)
 
       // Connect your Lambda logs and traces
@@ -103,7 +103,7 @@ package main
 
 import (
   "github.com/aws/aws-lambda-go/lambda"
-  "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
 )
 
 func main() {
@@ -116,7 +116,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   ddlambda.Metric(
     "coffee_house.order_value", // Metric name
     12.45, // Metric value
-    "product:latte", "order:online" // Associated tags
+    "product:latte", "order:online", // Associated tags
   )
 
   // Submit a custom metric with timestamp

@@ -123,7 +123,7 @@ Last Browser Version
 ### Account profiles 
 The Account Profiles page surfaces a list of the organizations interacting with your application.
 
-{{< img src="product_analytics/account_profileui.png" alt="A view of the User profiles page." style="width:80%;" >}}
+{{< img src="product_analytics/account_profile_ui3.png" alt="A view of the User profiles page." style="width:80%;" >}}
 
 Each profile includes four default attributes to help you identify and track account activity over time. These default attributes are:
 - `account_id`
@@ -137,11 +137,6 @@ You can customize the Account Profiles page to include additional attributes, gi
 
 ## Use custom attributes to enrich profiles
 
-{{< callout url="#" header="Join the Preview!" btn_hidden="true">}}
-  Custom Attributes for User & Account Profiles is in Preview.
-{{< /callout >}} 
-
-
 ### How to configure custom attributes using integrations 
 
 Use integrations or reference tables to automatically import custom attribute data into profiles. This data is synced on a regular schedule, reflecting the latest values from the source system to ensure that profiles remain up-to-date and accurate.
@@ -150,7 +145,7 @@ On the [Integrations page][4], you can explore the integrations that are compati
 
 On this same page, you can select the [Custom Attributes][5] tab to view imported attributes for user and account profiles.
 
-{{< img src="product_analytics/integration_page3.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
+{{< img src="product_analytics/integration_page5.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
 To import attibutes from a reference table or from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to: 
 
@@ -160,17 +155,17 @@ To import attibutes from a reference table or from an integration such as Salesf
 
 1. Choose a **source of the data** to be imported.
 
-{{< img src="product_analytics/choose_integration.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
+{{< img src="product_analytics/choose_integration1.png" alt="Choose a source of the data to be imported." style="width:80%;" >}}
 
 
-2. Select the **table** containing the desired user data, then select the **join keys** to merge the table with your profiles.
+2. Select the **table** containing the desired user data.
 
-{{< img src="product_analytics/add_table_and_key.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/add_table_and_key3.png" alt="select the data to be merged with your profiles." style="width:80%;" >}}
 
 
-3. Choose which **attributes from the reference table or integration** to add to your profiles.
+3. Select the **join keys** to merge the table with your profiles. Then, choose which **attributes from the reference table or integration** to add to your profiles.
 
-{{< img src="product_analytics/select_integration_attributes.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
+{{< img src="product_analytics/select_integration_attributes4.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
 
 
 <br>
@@ -186,8 +181,8 @@ You can filter these custom attributes throughout the product analytics platform
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
-[3]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration/?tab=npm#identify-account
+[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#identify-account
 [4]: https://app.datadoghq.com/product-analytics/integrations
 [5]: https://app.datadoghq.com/product-analytics/integrations/custom-attributes
 [6]: https://app.datadoghq.com/product-analytics/segments

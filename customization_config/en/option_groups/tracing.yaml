@@ -1,0 +1,19 @@
+# Custom Instrumentation option groups
+
+custom_instrumentation_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: node_js
+  - id: go
+  - id: ruby
+  - id: dot_net
+  - id: php
+  - id: cpp
+  - id: rust
+  - id: elixir
+
+custom_instrumentation_api_options:
+  - id: otel_api
+    default: true
+  - id: dd_api

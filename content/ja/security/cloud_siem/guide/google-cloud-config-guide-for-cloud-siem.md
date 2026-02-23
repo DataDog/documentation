@@ -147,7 +147,7 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
       **注**: 上記の URL をコピーする前に、このドキュメントページの右側にある Datadog サイトセレクタが Datadog サイトに設定されていることを確認してください。
    c. **Output deadletter Pub/Sub topic** フィールドで、Datadog API によって拒否されたメッセージを受信するために以前に作成した [追加トピック](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic)を選択します。
       d. **Temporary location** フィールドで、ストレージバケット内の一時ファイルのパスを指定します。
-1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:  
+1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:
    a. **Optional Parameters** をクリックして、追加フィールドを表示します。
    b. **Google Cloud Secret Manager ID** フィールドにシークレットのリソース名を入力します。
         リソース名を取得するには、[Secret Manager][8] の自分のシークレットに移動します。シークレットをクリックします。**Action** の下にある 3 つの点をクリックし、**Copy resource name** を選択します。
@@ -199,7 +199,7 @@ Cloud SIEM は、設定した Google Cloud の監査ログを含む、処理さ�
 [20]: https://console.cloud.google.com/dataflow/
 [21]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
 [22]: https://app.datadoghq.com/logs/
-[23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[23]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
 [25]: /ja/security/default_rules/#cat-cloud-siem
 [26]: /ja/security/detection_rules/

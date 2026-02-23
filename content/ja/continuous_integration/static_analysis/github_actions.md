@@ -46,10 +46,10 @@ jobs:
     name: Datadog Static Analyzer
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Check code meets quality standards
         id: datadog-static-analysis
-        uses: DataDog/datadog-static-analyzer-github-action@v1
+        uses: DataDog/datadog-static-analyzer-github-action@v3
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
@@ -65,8 +65,6 @@ Static Analysis に以下のパラメーターを設定することができま�
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `dd_api_key` | Datadog API キー。このキーは [Datadog 組織][1]によって作成され、[シークレット][2]として保存する必要があります。         | はい     |                 |
 | `dd_app_key` | Datadog アプリケーションキー。このキーは [Datadog 組織][1]によって作成され、[シークレット][2]として保存する必要があります。 | はい     |                 |
-| `dd_service` | 結果のタグ付けを希望するサービス。                                                                             | はい     |                 |
-| `dd_env`     | 結果をタグ付けしたい環境。Datadog は、この入力値として `ci` を使用することを推奨します。              | ✕      | `none`          |
 | `dd_site`    | 情報を送信する [Datadog サイト][3]。                                                                              | ✕      | `datadoghq.com` |
 
 [1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/

@@ -22,29 +22,9 @@ To install from source:
 
 The minimum valid `dogwrap` command has the following layout:
 
-{{< site-region region="us,gov,ap1,ap2" >}}
 ```bash
-dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY>{{< region-param key=dogwrap_site_flag >}} "<COMMAND>"
 ```
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-```bash
-dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us3 "<COMMAND>"
-```
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-```bash
-dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us5 "<COMMAND>"
-```
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-```bash
-dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
-```
-{{< /site-region >}}
 
 **Note**: The `dogwrap` command sends data to the US Datadog site by default. If you need to send data to another site, you must include the `-s` option specifying a target site, such as `eu`, `us3`, `us5`, etc.
 

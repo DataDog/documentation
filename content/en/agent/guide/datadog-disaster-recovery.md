@@ -1,5 +1,6 @@
 ---
 title: Datadog Disaster Recovery
+site_support_id: datadog_disaster_recovery
 private: true
 further_reading:
 - link: "agent/remote_config/?tab=configurationyamlfile"

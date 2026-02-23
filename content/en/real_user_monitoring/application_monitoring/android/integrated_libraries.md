@@ -40,20 +40,20 @@ If you use Picasso, use it with the `OkHttpClient` that's been instrumented with
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val picasso = Picasso.Builder(context)
-            .downloader(OkHttp3Downloader(okHttpClient))
-            // …
-            .build()
-       Picasso.setSingletonInstance(picasso)
+   val picasso = Picasso.Builder(context)
+      .downloader(OkHttp3Downloader(okHttpClient))
+      // …
+      .build()
+   Picasso.setSingletonInstance(picasso)
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        final Picasso picasso = new Picasso.Builder(context)
-            .downloader(new OkHttp3Downloader(okHttpClient))
-            // …
-            .build();
-        Picasso.setSingletonInstance(picasso);
+   final Picasso picasso = new Picasso.Builder(context)
+      .downloader(new OkHttp3Downloader(okHttpClient))
+      // …
+      .build();
+   Picasso.setSingletonInstance(picasso);
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -65,18 +65,18 @@ If you use Retrofit, use it with the `OkHttpClient` that's been instrumented wit
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-        val retrofitClient = Retrofit.Builder()
-            .client(okHttpClient)
-            // …
-            .build()
+   val retrofitClient = Retrofit.Builder()
+      .client(okHttpClient)
+      // …
+      .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        final Retrofit retrofitClient = new Retrofit.Builder()
-            .client(okHttpClient)
-            // …
-            .build();
+   final Retrofit retrofitClient = new Retrofit.Builder()
+      .client(okHttpClient)
+      // …
+      .build();
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -96,54 +96,35 @@ RUM error event for it.
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-        class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
-                                        <Context>,
-                                        <DATABASE_NAME>,
-                                        <CursorFactory>,
-                                        <DATABASE_VERSION>,
-                                        DatadogDatabaseErrorHandler()) {
-            // …
+   class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
+                                    <Context>,
+                                    <DATABASE_NAME>,
+                                    <CursorFactory>,
+                                    <DATABASE_VERSION>,
+                                    DatadogDatabaseErrorHandler()) {
+      // …
 
-        }
+   }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       public class <YourOwnSqliteOpenHelper> extends SqliteOpenHelper {
-            public <YourOwnSqliteOpenHelper>(){
-                super(<Context>,
-                      <DATABASE_NAME>,
-                      <CursorFactory>,
-                      <DATABASE_VERSION>,
-                      new DatadogDatabaseErrorHandler());
-            }
-       }
+   public class <YourOwnSqliteOpenHelper> extends SqliteOpenHelper {
+      public <YourOwnSqliteOpenHelper>(){
+            super(<Context>,
+                  <DATABASE_NAME>,
+                  <CursorFactory>,
+                  <DATABASE_VERSION>,
+                  new DatadogDatabaseErrorHandler());
+      }
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Apollo (GraphQL)
 
-If you use Apollo, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-   ```kotlin
-        val apolloClient = ApolloClient.builder()
-            .okHttpClient(okHttpClient)
-            .serverUrl(<APOLLO_SERVER_URL>)
-            .build()
-   ```
-{{% /tab %}}
-{{% tab "Java" %}}
-   ```java
-        ApolloClient apolloClient = new ApolloClient.builder()
-            .okHttpClient(okHttpClient)
-            .serverUrl(<APOLLO_SERVER_URL>)
-            .build();
-   ```
-{{% /tab %}}
-{{< /tabs >}}
+If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for Apollo][11] and [andndroid advanced network configuration][12].
 
 ## Android TV (Leanback)
 
@@ -167,3 +148,5 @@ If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions f
 [8]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rx
 [9]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rum-coroutines
 [10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
+[11]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-apollo
+[12]: /real_user_monitoring/application_monitoring/android/advanced_configuration?tab=kotlin#apollo-instrumentation

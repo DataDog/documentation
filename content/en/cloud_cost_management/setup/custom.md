@@ -39,12 +39,13 @@ All line items must meet the following requirements and include the [properties 
 - All required column names (CSV) or property names (JSON) are [PascalCased][5]. For example, you must use `"ProviderName"`, not `"providername"` or `"ProviderNAME"`.
 - All column names (CSV) and values or property names (JSON) and values have a maximum of 1,000 characters.
 - NULL or blank ("") parameter values are not accepted.
+- Cost data that contains future dates are not accepted.
 
 Additionally, all dates are transformed into UTC timestamps. For example, "2024-01-01" becomes "2024-01-01 00:00:00".
 
 ## Setup
 
-To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
+To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, Google Cloud, or Oracle Cloud, even if your custom costs are not related to any of these cloud providers. This configuration is required to enable the Custom Costs feature.
 
 ### Collect the required fields
 

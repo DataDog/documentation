@@ -182,10 +182,24 @@ Para más información sobre el uso de variables en la grabación del test del n
 
 Puedes personalizar las condiciones de alerta para definir las circunstancias en las que quieres que un test envíe una alerta de notificación.
 
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Regla para las alertas de un test de navegador" style="width:80%" >}}
+{{< img src="synthetics/browser_tests/alerting_rules_2.png" alt="Regla de alerta de test de navegador" style="width:80%" >}}
 
-* Se activa una alerta si cualquier aserción falla durante `X` minutos desde cualquier localización `n` de `N`. Esta regla para alertas permite especificar durante cuánto tiempo y en cuántas localizaciones debe fallar un test antes de que se active la notificación.
-* Reintenta `X` veces antes de que la localización se marque como fallida. Esto permite definir cuántos fallos de tests consecutivos deben producirse para que una localización se considere fallida. Por defecto, hay una espera de 300 ms antes de reintentar un test que ha fallado. Este intervalo puede configurarse con la [API][6].
+#### Regla de alerta
+
+Se activa una alerta si cualquier aserción falla durante `X` minutos desde cualquier localización `n` de `N`. Esta regla para alertas permite especificar durante cuánto tiempo y en cuántas localizaciones debe fallar un test antes de que se active la notificación.
+
+Solo se activa una alerta si se cumplen estas dos condiciones:
+
+- Al menos una ubicación presentó falloa (al menos una aserción falló) durante los últimos X minutos;
+- En un momento dado durante los últimos X minutos, al menos `N` ubicaciones estaban en fallo.
+
+En caso de fallo, reintenta `X` veces antes de que la ubicación se marque como fallida. Esto permite definir cuántos fallos de test consecutivos deben producirse para que una ubicación se considere fallida. Por defecto, hay una espera de `300ms` antes de reintentar un test que ha fallado. Este intervalo se puede configurar con la [API][6].
+
+#### Reintento rápido
+
+Cuando un test falla, el reintento rápido te permite reintentar el test X veces después de Y ms antes de marcarlo como fallido. Personalizar el intervalo de reintento ayuda a reducir los falsos positivos y mejora la precisión de las alertas.
+
+Dado que el tiempo de actividad de la ubicación se calcula en función del resultado final del test una vez completados los reintentos, los intervalos de reintentos rápidos afectan directamente a lo que aparece en el gráfico de tiempo de actividad total. El tiempo de actividad total se calcula en función de las condiciones de alerta configuradas, y las notificaciones se envían en función del tiempo de actividad total.
 
 ### Configurar el monitor de tests
 
