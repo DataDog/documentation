@@ -91,11 +91,17 @@ DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level job -
 
 To create a measure, click the gear icon next to a measures name on the [Pipeline Executions page][4] and click **Create Measure**.
 
-## Limitations
+## Troubleshooting
+
+### Limitations
 
 - The maximum amount of tags that can be added to a pipeline or job is 100.
 - The maximum amount of measures that can be added to a pipeline or job is 100.
 - The maximum length of a tag or measure is 300 characters (key + value).
+
+### GitHub Actions custom commands not appearing in Datadog
+
+Older versions of the datadog-ci CLI may require additional setup:
 
 <details>
 <summary><strong>For datadog-ci versions prior to 4.1.1 in GitHub Actions</strong></summary>
