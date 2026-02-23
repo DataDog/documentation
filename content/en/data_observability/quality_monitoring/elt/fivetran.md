@@ -14,7 +14,7 @@ Datadog's Fivetran integration helps data teams understand how data flows from e
 - Pulls metadata from your Fivetran account, including connectors, groups, and schema mappings
 - Automatically generates column-level lineage between source system tables and destination warehouse tables across all active connectors
 
-Supported destination platforms include Snowflake, BigQuery, Databricks, Redshift, PostgreSQL, MySQL, Oracle, Teradata, Athena, Cassandra, DB2, and Hive.
+Lineage is derived for all [supported data warehouse destinations][4].
 
 ## Connect Fivetran
 
@@ -39,12 +39,13 @@ When your Fivetran account is successfully connected, Datadog syncs every 60 min
 
 Initial syncs may take up to several hours depending on the number of connectors and schemas in your Fivetran account.
 
-After syncing, you can explore your Fivetran-sourced tables and their upstream dependencies in the [Data Observability Explorer][3].
+After syncing, you can explore your Fivetran-sourced tables and their upstream dependencies in the [Data Observability Catalog][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://fivetran.com/docs/rest-api/faq/get-your-api-key
+[1]: https://fivetran.com/docs/rest-api/getting-started
 [2]: https://app.datadoghq.com/integrations/fivetran
 [3]: https://app.datadoghq.com/datasets/catalog
+[4]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses
