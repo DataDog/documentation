@@ -3802,36 +3802,41 @@ menu:
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_openai
       weight: 103
+    - name: Anthropic
+      url: cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+      parent: cloud_cost_saas_cost_integrations
+      identifier: cloud_cost_saas_cost_integrations_anthropic
+      weight: 104
     - name: GitHub
       url: cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_github
-      weight: 104
+      weight: 105
     - name: Confluent Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=confluentcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_confluentcloud
-      weight: 105
+      weight: 106
     - name: MongoDB
       url: cloud_cost_management/setup/saas_costs/?tab=mongodb#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_mongodb
-      weight: 106
+      weight: 107
     - name: Elastic Cloud
       url: cloud_cost_management/setup/saas_costs/?tab=elasticcloud#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_elasticcloud
-      weight: 107
+      weight: 108
     - name: Fastly
       url: cloud_cost_management/setup/saas_costs/?tab=fastly#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_fastly
-      weight: 108
+      weight: 109
     - name: Twilio
       url: cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations
       identifier: cloud_cost_saas_cost_integrations_twilio
-      weight: 109
+      weight: 110
     - name: Custom
       url: cloud_cost_management/setup/custom
       parent: cloud_cost_setup
