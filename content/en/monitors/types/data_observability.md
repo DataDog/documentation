@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-[Data Observability](/data_observability/) monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
+[Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
 Data Observability monitors support the following metric types:
 
@@ -43,18 +43,17 @@ Data Observability monitors support the following metric types:
 | Percent Negative | Tracks the percentage of negative values. |
 | Min / Max / Mean / Sum / Standard Deviation | Tracks statistical measures across column values. |
 
-Where possible, Datadog collects metrics such as row count and freshness from system metadata (for example, `INFORMATION_SCHEMA`). When system metadata is not available for a given metric, the monitor pushes down a query directly to the warehouse to compute the value.
+Datadog collects metrics such as row count and freshness from warehouse system metadata (for example, `INFORMATION_SCHEMA`) when available. This avoids running a query against your warehouse and reduces compute costs. Not all warehouses expose system metadata. For metrics that cannot be collected from system metadata, the monitor runs a query directly against your warehouse to compute the value.
 
-Data Observability monitors require [Quality Monitoring](/data_observability/quality_monitoring/) to be set up with at least one supported data warehouse (for example, [Snowflake](/data_observability/quality_monitoring/data_warehouses/snowflake/), [Databricks](/data_observability/quality_monitoring/data_warehouses/databricks/), or [BigQuery](/data_observability/quality_monitoring/data_warehouses/bigquery/)).
+Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Quality**](https://app.datadoghq.com/monitors/create/data-quality).
+To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**][6].
 
 ## Choose data to monitor
 
 First, select whether you are monitoring at the **Table** or **Column** level:
-
 
 {{< img src="data_observability/data_observability_monitor/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
 
@@ -87,7 +86,7 @@ search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
 
 ## Select your metric type
 
-Choose a metric type based on the data quality signal you want to track:
+Choose a metric type based on the data quality signal you want to track. Each monitor tracks one metric type.
 
 {{< tabs >}}
 {{% tab "Freshness" %}}
@@ -150,7 +149,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 Select a detection method:
 
 - **Anomaly**: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts.
-- **Threshold**: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a **Critical** threshold (required) and optionally a **Warning** threshold. For more details, see [Configure Monitors](/monitors/configuration/?tab=thresholdalert#thresholds).
+- **Threshold**: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a **Critical** threshold (required) and optionally a **Warning** threshold. For more details, see [Configure Monitors][7].
 
 ### WHERE clause
 
@@ -165,7 +164,7 @@ You can add a **Group by** clause to split a single monitor into multiple groups
 
 {{< img src="data_observability/data_observability_monitor/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
 
-The default limit is 100 groups per monitor. To increase this limit, [contact Support](/help).
+The default limit is 100 groups per monitor. To increase this limit, [contact Support][8].
 
 ### Monitor schedule
 
@@ -176,9 +175,7 @@ Set how often the monitor evaluates your data:
 
 ## Configure notifications and automations
 
-For detailed instructions on the **Configure notifications and automations** section, see [Notifications](/monitors/notify/).
-
-{{< img src="data_observability/data_observability_monitor/configuration_example.png" alt="Input field for configuring alert logic and notification." style="width:80%;" >}}
+For detailed instructions on the **Configure notifications and automations** section, see [Notifications][9].
 
 You can use the following template variables in your notification messages:
 
@@ -293,3 +290,12 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /data_observability/
+[2]: /data_observability/quality_monitoring/
+[3]: /data_observability/quality_monitoring/data_warehouses/snowflake/
+[4]: /data_observability/quality_monitoring/data_warehouses/databricks/
+[5]: /data_observability/quality_monitoring/data_warehouses/bigquery/
+[6]: https://app.datadoghq.com/monitors/create/data-quality
+[7]: /monitors/configuration/?tab=thresholdalert#thresholds
+[8]: /help/
+[9]: /monitors/notify/
