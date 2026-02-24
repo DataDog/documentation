@@ -273,6 +273,50 @@ judge = LLMJudge(
 - Use `reasoning=True` in structured outputs to include an explanation in results.
 - Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
 
+#### Publishing an LLMJudge to Datadog
+
+Use `publish()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without rebuilding the configuration in the UI.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `ml_app` | `str` | The LLM application name. Required. |
+| `eval_name` | `Optional[str]` | The evaluator name in Datadog. If omitted, the SDK uses `LLMJudge.name`. |
+| `variable_mapping` | `Optional[dict[str, str]]` | Remaps `{{...}}` variables in the user prompt before publishing (for example, `{"input_data": "span_input"}`). |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs._evaluators import BooleanStructuredOutput, LLMJudge
+
+LLMObs.enable(
+    ml_app="my-ml-app",
+    api_key="<DD_API_KEY>",
+    app_key="<DD_APP_KEY>",
+)
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    system_prompt="You are a helpful evaluator.",
+    user_prompt=(
+        "Does the output correctly answer the question?\n"
+        "Input: {{input_data}}\n"
+        "Output: {{output_data}}"
+    ),
+    structured_output=BooleanStructuredOutput("correctness", pass_when=True),
+    name="my-correctness-judge",
+)
+
+result = judge.publish(
+    ml_app="my-ml-app",
+    variable_mapping={"input_data": "span_input", "output_data": "span_output"},
+)
+print(result["ui_url"])
+{{< /code-block >}}
+
+`publish()` returns `{"ui_url": "..."}`, which links to the evaluator in Datadog.
+
+<div class="alert alert-info"><ul><li>Published evaluators are always created or updated as drafts. Activate them from the Datadog UI to run them in production.</li><li><code>variable_mapping</code> applies only to the <code>user_prompt</code>. The <code>system_prompt</code> is published as-is.</li></ul></div>
+
 ### Built-in evaluators
 
 The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
@@ -464,7 +508,7 @@ experiment.run()
 
 ## Using evaluators in production
 
-<div class="alert alert-info">To evaluate production traces without code changes, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
+<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
 
 To submit evaluations from your application code, construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
@@ -563,8 +607,8 @@ The metric type is set when submitting an evaluation (through `submit_evaluation
 Evaluation labels must follow these conventions:
 
 - Must start with a letter
-- Must only contain ASCII alphanumerics or underscores
-- Other characters, including spaces, are converted to underscores
+- Must only contain ASCII alphanumerics, underscores, or hyphens
+- Spaces and other unsupported characters are converted to underscores
 - Unicode is not supported
 - Must not exceed 200 characters (fewer than 100 is preferred)
 - Must be unique for a given LLM application (`ml_app`) and organization
