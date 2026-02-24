@@ -6946,6 +6946,11 @@ components:
           type: string
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        connection_string_key:
+          description: Name of the environment variable or secret that holds the Azure
+            Storage connection string.
+          example: AZURE_STORAGE_CONNECTION_STRING
+          type: string
         container_name:
           description: The name of the Azure Blob Storage container to store logs
             in.
@@ -38211,6 +38216,16 @@ components:
           description: Azure AD client ID used for authentication.
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
           type: string
+        client_secret_key:
+          description: Name of the environment variable or secret that holds the Azure
+            AD client secret.
+          example: AZURE_CLIENT_SECRET
+          type: string
+        dce_uri_key:
+          description: Name of the environment variable or secret that holds the Data
+            Collection Endpoint (DCE) URI.
+          example: DCE_URI
+          type: string
         dcr_immutable_id:
           description: The immutable ID of the Data Collection Rule (DCR).
           example: dcr-uuid-1234
@@ -40142,6 +40157,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the Firehose
+            delivery stream address.
+          example: FIREHOSE_ADDRESS
+          type: string
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
         id:
@@ -40354,6 +40374,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonS3SourceType'
+        url_key:
+          description: Name of the environment variable or secret that holds the S3
+            bucket URL.
+          example: S3_BUCKET_URL
+          type: string
       required:
       - id
       - type
@@ -40483,6 +40508,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the CloudPrem
+            endpoint URL.
+          example: CLOUDPREM_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: cloud-prem-destination
@@ -40753,6 +40783,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the CrowdStrike
+            endpoint URL.
+          example: CROWDSTRIKE_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: crowdstrike-ngsiem-destination
@@ -40767,6 +40802,11 @@ components:
           type: array
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the CrowdStrike
+            API token.
+          example: CROWDSTRIKE_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType'
       required:
@@ -41269,6 +41309,8 @@ components:
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationAuth'
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
@@ -41277,6 +41319,11 @@ components:
           type: string
         data_stream:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationDataStream'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Elasticsearch
+            endpoint URL.
+          example: ELASTICSEARCH_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -41312,6 +41359,27 @@ components:
       - V6
       - V7
       - V8
+    ObservabilityPipelineElasticsearchDestinationAuth:
+      description: 'Authentication settings for the Elasticsearch destination.
+
+        When `strategy` is `basic`, use `username_key` and `password_key` to reference
+        credentials stored in environment variables or secrets.'
+      properties:
+        password_key:
+          description: Name of the environment variable or secret that holds the Elasticsearch
+            password (used when `strategy` is `basic`).
+          example: ELASTICSEARCH_PASSWORD
+          type: string
+        strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuthStrategy'
+        username_key:
+          description: Name of the environment variable or secret that holds the Elasticsearch
+            username (used when `strategy` is `basic`).
+          example: ELASTICSEARCH_USERNAME
+          type: string
+      required:
+      - strategy
+      type: object
     ObservabilityPipelineElasticsearchDestinationDataStream:
       description: Configuration options for writing to Elasticsearch Data Streams
         instead of a fixed index.
@@ -41523,6 +41591,11 @@ components:
     ObservabilityPipelineEnrichmentTableReferenceTable:
       description: Uses a Datadog reference table to enrich logs.
       properties:
+        app_key_key:
+          description: Name of the environment variable or secret that holds the Datadog
+            application key used to access the reference table.
+          example: DD_APP_KEY
+          type: string
         columns:
           description: List of column names to include from the reference table. If
             not provided, all columns are included.
@@ -41609,6 +41682,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Fluent Bit receiver.
+          example: FLUENT_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -41640,6 +41718,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Fluent receiver.
+          example: FLUENT_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -41666,10 +41749,11 @@ components:
       x-enum-varnames:
       - FLUENTD
     ObservabilityPipelineGcpAuth:
-      description: GCP credentials used to authenticate with Google Cloud Storage.
+      description: Google Cloud credentials used to authenticate with Google Cloud
+        Storage.
       properties:
         credentials_file:
-          description: Path to the GCP service account key file.
+          description: Path to the Google Cloud service account key file.
           example: /var/secrets/gcp-credentials.json
           type: string
       required:
@@ -41824,6 +41908,11 @@ components:
           type: string
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineGoogleChronicleDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Google
+            Chronicle endpoint URL.
+          example: CHRONICLE_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: google-chronicle-destination
@@ -41873,7 +41962,7 @@ components:
       description: 'The `google_cloud_storage` destination stores logs in a Google
         Cloud Storage (GCS) bucket.
 
-        It requires a bucket name, GCP authentication, and metadata fields.
+        It requires a bucket name, Google Cloud authentication, and metadata fields.
 
 
         **Supported pipeline types:** logs'
@@ -41976,6 +42065,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Google
+            Cloud Pub/Sub endpoint URL.
+          example: GCP_PUBSUB_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: google-pubsub-destination
@@ -41989,7 +42083,7 @@ components:
             type: string
           type: array
         project:
-          description: The GCP project ID that owns the Pub/Sub topic.
+          description: The Google Cloud project ID that owns the Pub/Sub topic.
           example: my-gcp-project
           type: string
         tls:
@@ -42047,7 +42141,7 @@ components:
           example: google-pubsub-source
           type: string
         project:
-          description: The GCP project ID that owns the Pub/Sub subscription.
+          description: The Google Cloud project ID that owns the Pub/Sub subscription.
           example: my-gcp-project
           type: string
         subscription:
@@ -42086,6 +42180,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationAuthStrategy'
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationCompression'
+        custom_key:
+          description: Name of the environment variable or secret that holds a custom
+            header value (used with custom auth strategies).
+          example: HTTP_AUTH_CUSTOM_HEADER
+          type: string
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationEncoding'
         id:
@@ -42100,10 +42199,30 @@ components:
           items:
             type: string
           type: array
+        password_key:
+          description: Name of the environment variable or secret that holds the password
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_PASSWORD
+          type: string
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer
+            token (used when `auth_strategy` is `bearer`).
+          example: HTTP_AUTH_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationType'
+        uri_key:
+          description: Name of the environment variable or secret that holds the HTTP
+            endpoint URI.
+          example: HTTP_DESTINATION_URI
+          type: string
+        username_key:
+          description: Name of the environment variable or secret that holds the username
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_USERNAME
+          type: string
       required:
       - id
       - type
@@ -42167,13 +42286,28 @@ components:
       properties:
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientSourceAuthStrategy'
+        custom_key:
+          description: Name of the environment variable or secret that holds a custom
+            header value (used with custom auth strategies).
+          example: HTTP_AUTH_CUSTOM_HEADER
+          type: string
         decoding:
           $ref: '#/components/schemas/ObservabilityPipelineDecoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the HTTP
+            endpoint URL to scrape.
+          example: HTTP_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: http-client-source
+          type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_PASSWORD
           type: string
         scrape_interval_secs:
           description: The interval (in seconds) between HTTP scrape requests.
@@ -42187,8 +42321,18 @@ components:
           type: integer
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer
+            token (used when `auth_strategy` is `bearer`).
+          example: HTTP_AUTH_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientSourceType'
+        username_key:
+          description: Name of the environment variable or secret that holds the username
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_USERNAME
+          type: string
       required:
       - id
       - type
@@ -42226,18 +42370,38 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the HTTP server.
+          example: HTTP_SERVER_ADDRESS
+          type: string
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceAuthStrategy'
+        custom_key:
+          description: Name of the environment variable or secret that holds a custom
+            header value (used with custom auth strategies).
+          example: HTTP_AUTH_CUSTOM_HEADER
+          type: string
         decoding:
           $ref: '#/components/schemas/ObservabilityPipelineDecoding'
         id:
           description: Unique ID for the HTTP server source.
           example: http-server-source
           type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password
+            (used when `auth_strategy` is `plain`).
+          example: HTTP_AUTH_PASSWORD
+          type: string
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceType'
+        username_key:
+          description: Name of the environment variable or secret that holds the username
+            (used when `auth_strategy` is `plain`).
+          example: HTTP_AUTH_USERNAME
+          type: string
       required:
       - id
       - type
@@ -42271,6 +42435,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        bootstrap_servers_key:
+          description: Name of the environment variable or secret that holds the Kafka
+            bootstrap servers list.
+          example: KAFKA_BOOTSTRAP_SERVERS
+          type: string
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationCompression'
         encoding:
@@ -42403,6 +42572,16 @@ components:
       properties:
         mechanism:
           $ref: '#/components/schemas/ObservabilityPipelineKafkaSaslMechanism'
+        password_key:
+          description: Name of the environment variable or secret that holds the SASL
+            password.
+          example: KAFKA_SASL_PASSWORD
+          type: string
+        username_key:
+          description: Name of the environment variable or secret that holds the SASL
+            username.
+          example: KAFKA_SASL_USERNAME
+          type: string
       type: object
     ObservabilityPipelineKafkaSaslMechanism:
       description: SASL mechanism used for Kafka authentication.
@@ -42421,6 +42600,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        bootstrap_servers_key:
+          description: Name of the environment variable or secret that holds the Kafka
+            bootstrap servers list.
+          example: KAFKA_BOOTSTRAP_SERVERS
+          type: string
         group_id:
           description: Consumer group ID used by the Kafka client.
           example: consumer-group-0
@@ -42475,6 +42659,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Logstash receiver.
+          example: LOGSTASH_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -42652,6 +42841,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        account_id_key:
+          description: Name of the environment variable or secret that holds the New
+            Relic account ID.
+          example: NEW_RELIC_ACCOUNT_ID
+          type: string
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
@@ -42666,6 +42860,11 @@ components:
           items:
             type: string
           type: array
+        license_key_key:
+          description: Name of the environment variable or secret that holds the New
+            Relic license key.
+          example: NEW_RELIC_LICENSE_KEY
+          type: string
         region:
           $ref: '#/components/schemas/ObservabilityPipelineNewRelicDestinationRegion'
         type:
@@ -42911,6 +43110,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationAuth'
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
@@ -42919,6 +43120,11 @@ components:
           type: string
         data_stream:
           $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestinationDataStream'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the OpenSearch
+            endpoint URL.
+          example: OPENSEARCH_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: opensearch-destination
@@ -43628,6 +43834,11 @@ components:
       properties:
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the syslog
+            server endpoint URL.
+          example: SYSLOG_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: rsyslog-destination
@@ -43673,6 +43884,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the syslog receiver.
+          example: SYSLOG_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44149,6 +44365,11 @@ components:
           type: array
         region:
           $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestinationRegion'
+        token_key:
+          description: Name of the environment variable or secret that holds the SentinelOne
+            API token.
+          example: SENTINELONE_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestinationType'
       required:
@@ -44189,6 +44410,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the socket
+            address (host:port).
+          example: SOCKET_ADDRESS
+          type: string
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
@@ -44323,6 +44549,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the socket.
+          example: SOCKET_ADDRESS
+          type: string
         framing:
           $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
         id:
@@ -44571,6 +44802,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Splunk
+            HEC endpoint URL.
+          example: SPLUNK_HEC_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44592,6 +44828,11 @@ components:
         sourcetype:
           description: The Splunk sourcetype to assign to log events.
           example: custom_sourcetype
+          type: string
+        token_key:
+          description: Name of the environment variable or secret that holds the Splunk
+            HEC token.
+          example: SPLUNK_HEC_TOKEN
           type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationType'
@@ -44628,6 +44869,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the HEC API.
+          example: SPLUNK_HEC_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44662,6 +44908,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Splunk TCP receiver.
+          example: SPLUNK_TCP_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44697,6 +44948,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Sumo
+            Logic HTTP endpoint URL.
+          example: SUMO_LOGIC_ENDPOINT_URL
+          type: string
         header_custom_fields:
           description: A list of custom headers to include in the request to Sumo
             Logic.
@@ -44778,6 +45034,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Sumo Logic receiver.
+          example: SUMO_LOGIC_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44810,6 +45071,11 @@ components:
       properties:
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the syslog-ng
+            server endpoint URL.
+          example: SYSLOG_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: syslog-ng-destination
@@ -44855,6 +45121,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the syslog-ng receiver.
+          example: SYSLOG_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44971,6 +45242,11 @@ components:
         key_file:
           description: Path to the private key file associated with the TLS client
             certificate. Used for mutual TLS authentication.
+          type: string
+        key_pass_key:
+          description: Name of the environment variable or secret that holds the passphrase
+            for the private key file.
+          example: TLS_KEY_PASSPHRASE
           type: string
       required:
       - crt_file
