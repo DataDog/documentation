@@ -69,7 +69,7 @@ If you want to use Live Capture and are using a firewall, you must add these dom
     - Data highlighted in red indicates data that was modified or dropped.
     - Data highlighted in green indicates data that was added.
     1. Click **View Logs** to see the Worker logs for the capture.
-1. To see other captures for the same component, click **Captures** on the top right of the side panel.
+1. To see other captures for the same component, click **Captures** on the top left of the side panel.
 1. You can filter captures by capture event ID, filter query, pipeline version, or status (`in_progress` or `completed`).
 
 ## Further reading
