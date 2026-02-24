@@ -165,15 +165,17 @@ After you save, Datadog begins syncing your information schema and query history
 
 ## Snowflake Tasks and Snowpipes
 
-Datadog supports monitoring Snowflake Tasks and Snowpipes through the integration.
+Datadog derives lineage from Snowflake Tasks and Snowpipes through the integration.
 
-**Snowflake Tasks**: Datadog tracks task run history and surfaces task executions as jobs, allowing you to monitor success rates, durations, and failures alongside the tables they write to.
+**Snowflake Tasks**: Datadog parses task definitions to extract task-to-task dependencies and lineage from tasks to their destination tables.
 
-**Snowpipes**: Datadog tracks pipe activity and derives lineage from external stages to their destination Snowflake tables, giving you visibility into continuously ingested data.
+**Snowpipes**: Datadog parses pipe definitions to derive lineage from the source stage to the destination Snowflake table.
 
 The `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup is required for both features.
 
 <div class="alert alert-info">Snowflake Tasks traces are in preview. Contact your account representative to enable this feature.</div>
+
+When enabled, each DAG run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. Find them in **APM** > **Trace Explorer** filtered by `operation_name:snowflake.task`.
 
 ## Network requirements
 
