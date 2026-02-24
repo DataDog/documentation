@@ -85,7 +85,7 @@ What each metric measures:
 * `system.mem.pagefile.used` = Current Commit Charge (memory committed by all processes, not pagefile usage)  
 * `system.mem.pagefile.free` = Available Commit (remaining commit capacity, not free pagefile space)
 
-## Paging File Metrics by Agent Version
+## Paging file metrics by Agent version
 
 {{< tabs >}}
 {{% tab "Agent 7.76 and later (recommended)" %}}
