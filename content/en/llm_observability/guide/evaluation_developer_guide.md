@@ -277,11 +277,11 @@ judge = LLMJudge(
 
 Use `publish()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without rebuilding the configuration in the UI.
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `ml_app` | `str` | The LLM application name. Required. |
-| `eval_name` | `Optional[str]` | The evaluator name in Datadog. If omitted, the SDK uses `LLMJudge.name`. |
-| `variable_mapping` | `Optional[dict[str, str]]` | Remaps `{{...}}` variables in the user prompt before publishing (for example, `{"input_data": "span_input"}`). |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `ml_app` | `str` | Yes | The LLM application name. |
+| `eval_name` | `Optional[str]` | No | The evaluator name in Datadog. If omitted, the SDK uses `LLMJudge.name`. |
+| `variable_mapping` | `Optional[dict[str, str]]` | No | Remaps `{{...}}` variables in the user prompt before publishing (for example, `{"input_data": "span_input"}`). |
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
