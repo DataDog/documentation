@@ -159,10 +159,6 @@ To configure the Snowflake integration in Datadog:
 4. Turn on **Enable Data Observability for Snowflake tables**.
 5. Click **Save & Test**.
 
-## Next steps
-
-After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
-
 ## Snowflake Tasks and Snowpipes
 
 Datadog derives lineage from Snowflake Tasks and Snowpipes through the integration.
@@ -176,6 +172,10 @@ The `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup is requ
 <div class="alert alert-info">Snowflake Tasks traces are in preview. Contact your account representative to enable this feature.</div>
 
 When enabled, each DAG run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. Find them in **APM** > **Trace Explorer** filtered by `operation_name:snowflake.task`.
+
+## Next steps
+
+After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
 
 ## Further reading
 
