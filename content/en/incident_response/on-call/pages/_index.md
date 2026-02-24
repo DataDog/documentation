@@ -91,7 +91,7 @@ To receive Page notifications in Slack, see [Routing Rules][4].
 
 Go to [**On-Call** > **Pages**][7] to view all active and historical Pages. Click a Page to open its side panel and take action, or select the checkbox next to one or more Pages to bulk-edit them.
 
-{{< img src="service_management/oncall/on-call-pages-tab.png" alt="The On-Call Pages list view with sub-tabs for Active, Triggered, Acknowledged, Resolved, and All, and a table showing each page's name, status, Team, responders, and creation date" style="width:100%;" >}}
+{{< img src="service_management/oncall/on-call-pages-list.png" alt="The On-Call Pages list view with sub-tabs for Active, Triggered, Acknowledged, Resolved, and All, and a table showing each page's name, status, Team, responders, and creation date" style="width:100%;" >}}
 
 ### Acknowledge a Page
 
