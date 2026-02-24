@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This guide clarifies Windows memory metrics and provides a comprehensive mapping between Datadog system metrics, Live Processes metrics, and native Windows Performance Counters. Windows offers multiple memory metrics that serve different monitoring purposes—from tracking physical RAM usage to understanding virtual memory allocation and commit charges.
+Windows offers multiple memory metrics that serve different monitoring purposes—from tracking physical RAM usage to understanding virtual memory allocation and commit charges.
 
 Use this guide to:
 - Understand the key differences between physical memory, virtual memory, commit charge, and commit limit
@@ -51,7 +51,7 @@ Virtual Memory
 
 The following table shows which Datadog metrics to use for monitoring specific Windows memory types. For example, to monitor physical RAM usage, use `system.mem.total`, `system.mem.usable`, or `system.processes.mem.rss`. To track commit charge (private bytes), use `system.mem.committed` or `system.processes.mem.vms`.
 
-The table also includes corresponding Live Processes metrics and native Windows Performance Counters for cross-reference when troubleshooting or correlating data across different monitoring tools.
+Use the Live Processes metrics and native Windows Performance Counters columns to cross-reference data when troubleshooting or correlating across different monitoring tools.
 
 | Memory Type | Description | Datadog System Metric | Live Processes Metric | Windows Performance Counter |
 | :---- | :---- | :---- | :---- | :---- |
@@ -64,7 +64,7 @@ The table also includes corresponding Live Processes metrics and native Windows 
 
 The following screenshots show how memory values displayed in Windows Process Explorer correspond to the metrics in the table above. The highlighted columns in Process Explorer show the Working Set (physical memory), Private Bytes (commit charge), and Virtual Size metrics that map to Datadog's system metrics and Live Processes view.
 
-{{< img src="metrics/guide/windows_memory_metrics_in_datadog/windows_process_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="The Windows Process Explorer with the agent.exe properties expanded. The Private Bytes value is mapped to system.processes.mem.vms, and the Working Set value is mapped to system.processes.mem.rss" >}}
+{{< img src="metrics/guide/windows_memory_metrics_in_datadog/windows_process_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="The Windows Process Explorer with the agent.exe properties expanded" caption="The Private Bytes value is mapped to system.processes.mem.vms, and the Working Set value is mapped to system.processes.mem.rss" >}}
 
 {{< img src="metrics/guide/windows_memory_metrics_in_datadog/windows_system_information.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="The Memory tab of the System Information panel. Under Commit Charge, the Current value is mapped to system.mem.pagefile.used and system.swap.used, and the Limit value is mapped to system.swap.total and system.mem.pagefile. Under Physical Memory, the Total value is mapped to system.mem.total, the Available value is mapped to system.mem.available, and the Cache WS value is mapped to system.mem.cached" >}}
 
@@ -81,9 +81,9 @@ Based on these definitions, the `system.mem.pagefile.*` metrics measure committe
 
 What each metric measures:
 
-* system.mem.pagefile.total \= Commit Limit (the maximum commit charge, not the pagefile size)  
-* system.mem.pagefile.used \= Current Commit Charge (memory committed by all processes, not pagefile usage)  
-* system.mem.pagefile.free \= Available Commit (remaining commit capacity, not free pagefile space)
+* `system.mem.pagefile.total` = Commit Limit (the maximum commit charge, not the pagefile size)  
+* `system.mem.pagefile.used` = Current Commit Charge (memory committed by all processes, not pagefile usage)  
+* `system.mem.pagefile.free` = Available Commit (remaining commit capacity, not free pagefile space)
 
 ## Recommended: Paging file metrics (Agent 7.76+)
 
@@ -98,9 +98,9 @@ Agent versions `7.76` and later have the following metrics available for monitor
 | `system.paging.pct_free` | The percentage of pagefile that is not used. |
 | `system.paging.free` | The amount of pagefile that is not used in bytes. |
 
-### For Agent versions 7.75 and previous
+### For Agent versions 7.75 and earlier
 
-If you're using an Agent version previous to 7.76, the total size of all paging files (pagefile.sys) can be calculated with the following formula (open the [Metric Explorer][4] to try it out):
+If you are using an Agent version earlier than 7.76, the total size of all paging files (pagefile.sys) can be calculated with the following formula (open the [Metric Explorer][4] to try it out):
 
 ```
 system.mem.pagefile.total - system.mem.total
