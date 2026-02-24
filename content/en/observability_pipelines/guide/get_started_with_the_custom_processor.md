@@ -284,7 +284,7 @@ Tags are used to correlate logs with other telemetry and services. They are stor
 
 #### Input
 
-In this example, the sample log contains a `ddtags` array and you want to add the `service` field as a tag. 
+In this example, the sample log contains a `ddtags` array, and you want to add the `service` field as a tag. 
 
 ```json
 {
@@ -307,12 +307,12 @@ In this example, the sample log contains a `ddtags` array and you want to add th
 #### Custom function to convert the `service` attribute to a tag
 
 ```yaml
-# First, check if the attribute 'ddtags' exists, you can replace 'ddtags' with the name of any array
+# First, check if the attribute 'ddtags' exists. You can replace 'ddtags' with the name of any array
 if !exists(.ddtags) {
     .ddtags = []
 }
 
-# This checks if 'service' exists, then adds the templatized value of service as a tag. Also, converts the service value to a string
+# This example checks if 'service' exists, then adds the templatized value of service as a tag. Also, it converts the service value to a string
 if exists(.service) {
   .ddtags = push(array!(.ddtags), "service:" + to_string!({{.service}}) )
 }
@@ -342,7 +342,7 @@ if exists(.service) {
 
 #### Input
 
-. In this example, the sample log contains the `ddtags` array and you want to create a tag called `"system:service-mesh"` and append it to the array.
+In this example, the sample log contains the `ddtags` array, and you want to create a tag called `"system:service-mesh"` and append it to the array.
 
 ```json
 {
@@ -365,7 +365,7 @@ if exists(.service) {
 #### Custom function to create and add the `system` tag
 
 ```yaml
-# First, check if the attribute 'ddtags' exists, you can replace 'ddtags' with the name of any array
+# First, check if the attribute 'ddtags' exists. You can replace 'ddtags' with the name of any array
 if !exists(.ddtags) {
     .ddtags = []
 }
