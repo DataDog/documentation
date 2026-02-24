@@ -12,4 +12,5 @@ disable_toc: true
     {{< nextlink href="/incident_response/on-call/guides/migrate-your-pagerduty-resources-to-on-call" >}}Migrate PagerDuty resources to Datadog On-Call{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/guides/migrate-your-opsgenie-resources-to-on-call" >}}Migrate OpsGenie resources to Datadog On-Call{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/guides/offboarding-teams-and-users" >}}Offboard teams and users from Datadog On-Call{{< /nextlink >}}
+    {{< nextlink href="/incident_response/on-call/guides/modify-on-call-rotations" >}}Modify on-call rotations for temporary leave and rotation changes{{< /nextlink >}}
 {{< /whatsnext >}}
