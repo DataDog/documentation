@@ -27,24 +27,24 @@ Product Analytics helps you gain insight into user behavior and make data-driven
 
 
 ## Getting started
-To start using Product Analytics, [instrument your application](#instrument-your-application) and then [enable the feature](#enable-product-analytics) in Datadog. 
+To start using Product Analytics for an application, [instrument your application](#instrument-your-application) and then [enable the feature](#enable-product-analytics) for it in Datadog. 
 
-**Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and data is retained for 15 months by default. See [Datadog's data retention periods][1] for more information.
+**Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
 
 ### Instrument your application
 If you do not have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
 
 ### Enable Product Analytics
-To enable Product Analytics for each application where you want to monitor user behavior:
+For each application you want to monitor user behavior for, enable Product Analytics:
 
-1. Select the application you want to monitor from the [Application Management][9] list.
+1. In Datadog, go to **Digital Experience** > **Real User Monitoring** > [**Manage Applications**][9]. In the list of applications under **Active**, select the application you want to monitor.
 2. Under PRODUCT SETTINGS, click **Product Analytics**.
 3. Click the **Enable** button.
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
 ## Understanding your data
-Product Analytics is built on three levels of user data (Sessions, Views, and Actions) collected by RUM. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19].
+Product Analytics is built on three levels of user data RUM collects: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19].
 
 **Sessions**
 : A single user's complete journey through your application, from the moment they open it to when they leave.
@@ -59,7 +59,7 @@ Product Analytics is built on three levels of user data (Sessions, Views, and Ac
 Each Product Analytics feature provides context about your users' journeys.
 
 ### Understand product adoption
-The [Home][3] page gives you a bird's-eye view of your users' activity and a pulse on your product's adoption. This is where you most often land when accessing Product Analytics.
+The [Home][3] page gives you a bird's-eye view of your users' activity and your product's adoption. This is where you most often land when accessing Product Analytics.
 
 {{< img src="/product_analytics/pana_home_page.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
@@ -72,7 +72,7 @@ By default, this page displays the `active users`, `page views`, and `average ti
 : Visualize the split between desktop and mobile usage, spot which versions are in use, and identify what can be deprecated.
 
 [Engagement](https://app.datadoghq.com/product-analytics/engagement-and-features)
-: Understand how users are engaging with your product and answer questions such as how long users are staying on pages and what their top actions are. 
+: Understand how users are engaging with your product, answering questions such as how long users are staying on pages, and what their top actions are. 
 
 [Traffic](https://app.datadoghq.com/product-analytics/traffic-and-acquisition)
 : See bounce rates, top traffic sources, and where your growth is really coming from.
@@ -94,18 +94,18 @@ Each chart type provides a different view into the user's journey:
 : Visualize all user journeys across your application to analyze the critical path.
 
 [Funnel][4]
-: Track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance or measure how adding new steps to a workflow impacts drop-off rate.
+: Track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. <br> For example, you can see if customers drop off at a certain point due to poor website performance, or measure how adding new steps to a workflow impacts drop-off rate.
 
 [Retention][2]
 : Measure how often users are successfully returning to a page or action to gain insights into overall user satisfaction.
 
 [Analytics][13]
-: Aggregates view data to show how your product is being used.
+: Aggregates usage data to show how users engage with your product.
 
 <br>
 
 ### Track key user behavior patterns
-Use the [Users & Segments][6] section to group your users based on shared characteristics. For example, if you notice users are adding items to their cart but not checking out, create a segment for those users and send them a nudge email to complete their purchase.
+Use [Users & Segments][6] to group your users based on shared characteristics. For example, if you notice users are adding items to their cart but not checking out, create a segment for those users and send them a nudge email to complete their purchase.
 
 {{< img src="/product_analytics/segmentation/userprofiles_pana-ga.png" alt="See individual profiles of users and create a segment from these profiles.">}}
 
@@ -115,10 +115,10 @@ Use the following features to inform your product change decisions, such as chan
 {{< img src="/product_analytics/pana_session_replay_page.png" alt="Capture and replay your users' browsing experience to inform your product design decisions.">}}
 
 [Session replay][11] 
-: Capture and replay the web browsing or mobile app experience of your users. <br><br>This is beneficial for _error identification_, _reproduction_, and _resolution_, and provides insights into your application's usage patterns and design pitfalls.
+: Capture and replay your users' web browsing or mobile app experience.<br><br>This is beneficial for error identification, reproduction, and resolution, and provides insights into your application's usage patterns and design pitfalls.
 
 [Heatmaps][10]
-: Visualize your users' interactions overlaid on Session Replay data. Product Analytics has three types of heatmaps: Click maps, Top elements, Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights into optimizing your user experience.
+: Visualize your users' interactions overlaid on Session Replay data. Product Analytics has three types of heatmaps: Click maps, Top elements, and Scroll maps. <br><br> Use heatmaps to review complex data at a glance, gaining insights into optimizing your user experience.
 
 [Playlist][12]
 : Create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][12].
