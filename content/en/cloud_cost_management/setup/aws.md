@@ -109,9 +109,7 @@ Enter the following details for your Cost and Usage Report:
 
 ### Copy generated Terraform HCL and apply changes
 
-In the Datadog setup UI, follow the instructions in the **Apply Terraform Configuration** step.
-
-Address any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+In the Datadog setup UI, follow the instructions in the **Apply Terraform Configuration** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
 
 {{% /tab %}}
 
