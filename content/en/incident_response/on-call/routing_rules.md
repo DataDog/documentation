@@ -11,7 +11,7 @@ aliases:
 
 ## Overview
 
-Routing rules determine how alerts are directed within your team. Instead of sending all alerts through a single escalation policy, you can create rules that route alerts based on priority, tags, monitor status, time of day, and more.
+Routing rules determine how alerts are directed within your team. Instead of sending all alerts through a single escalation policy, you can create rules that route alerts based on metadata such as priority, tags, monitor status, or time of day.
 
 ## Create a routing rule
 
@@ -22,10 +22,10 @@ To create a routing rule:
 1. Go to [**On-Call** > **Teams**][1] and select a team.
 1. Find the **Page Routing** section and click **Edit**. The **Configure Page Routing** window opens.
  
-   {{< img src="service_management/oncall/configure-page-routing.png" alt="The Configure Page Routing window in Datadog On-Call, showing routing condition fields and target configuration options" style="width:100%;" >}}
+   {{< img src="service_management/oncall/configure-page-routing2.png" alt="The Configure Page Routing window in Datadog On-Call, showing routing condition fields and target configuration options" style="width:100%;" >}}
 
-1. Click **Add Conditions** to add a routing condition.
-1. Define conditions using the [routing rule syntax](#routing-rule-syntax).
+1. Click **Add Conditions** to add a routing rule. 
+1. Define a match query using the [routing rule syntax](#routing-rule-syntax).
 1. Optionally, configure [support hours](#support-hours):
 
    1. Toggle on **Use support hours**.
@@ -34,11 +34,11 @@ To create a routing rule:
 
    {{< img src="service_management/oncall/page-routing-support-hours.png" alt="The support hours configuration panel on a routing condition, showing time interval fields and the option to hold escalation policy notifications outside support hours" style="width:60%;" >}}
 
-1. Under **Set targets**, click **Add** and select a target type:
-   - **Page escalation policy**: Select an escalation policy and set the urgency to `DYNAMIC` (based on alert status), `HIGH`, or `LOW`.
+1. Under **Set targets**, click **Add** and select a target type. The target type determines what happens when the rule matches:
+   - **Page escalation policy**: Select an [escalation policy][3] and set the urgency to `DYNAMIC` (based on alert status), `HIGH`, or `LOW`.
    - **Send Slack message** (Preview): Select a Slack workspace and channel.
    - **Send Microsoft Teams message** (Preview): Select a Teams tenant, team, and channel.
-   - **Run Workflow** (Preview): Select an existing workflow.
+   - **Run Workflow** (Preview): Select an existing [Workflow][4].
 
 1. Add more rules as needed, and click **Save**.
 
@@ -73,13 +73,15 @@ When a routing rule includes support hours, Datadog compares the current time to
 
   Add one interval: select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
 
+  {{< img src="service_management/oncall/support-hours-biz.png" alt="The support hours pop-up modal with a time interval defined for 9 a.m. to 5 p.m. Monday through Friday" style="width:60%;" >}}
+
 - Create a split support shift (mornings and afternoons):
 
-  Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m, both with Monday through Friday selected. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
+  Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m., both with Monday through Friday selected. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
 
 **Note**: These examples assume the **Outside support hours, hold escalation policy notifications until the next window** toggle is enabled.
 
-## Send Pages to Slack or Microsoft Teams
+### Pages in Slack and Microsoft Teams
 
 {{< img src="service_management/oncall/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams" style="width:100%;" >}}
 
@@ -124,3 +126,5 @@ When a Page is acknowledged or resolved in Slack or Teams, Datadog updates the o
 
 [1]: https://app.datadoghq.com/on-call/teams
 [2]: /tracing/trace_explorer/query_syntax/
+[3]: /incident_response/on-call/escalation_policies/
+[4]: /actions/workflows/
