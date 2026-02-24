@@ -173,30 +173,7 @@ Set how often the monitor evaluates your data:
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
 
-## Configure notifications and automations
-
-For detailed instructions on the **Configure notifications and automations** section, see [Notifications][9].
-
-You can use the following template variables in your notification messages:
-
-| Variable            | Description                                    |
-|---------------------|------------------------------------------------|
-| `{{database.name}}` | The database containing the affected table.    |
-| `{{schema.name}}`   | The schema containing the affected table.      |
 | `{{table.name}}`    | The name of the affected table.                |
-| `{{column.name}}`   | The name of the affected column (column-level monitors only). |
-| `{{threshold}}`     | The alert threshold value.                     |
-| `{{value}}`         | The current value that triggered the alert.    |
-
-The following additional variables are available for **Anomaly** detection monitors:
-
-| Variable            | Description                                    |
-|---------------------|------------------------------------------------|
-| `{{observed}}`      | The actual observed value of the metric.       |
-| `{{predicted}}`     | The expected value based on the historical baseline. |
-| `{{upper_bound}}`   | The upper confidence bound of the prediction.  |
-| `{{lower_bound}}`   | The lower confidence bound of the prediction.  |
-
 ### Set alert conditions
 
 Choose an aggregation type:
@@ -297,4 +274,3 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 [6]: https://app.datadoghq.com/monitors/create/data-quality
 [7]: /monitors/configuration/?tab=thresholdalert#thresholds
 [8]: /help/
-[9]: /monitors/notify/
