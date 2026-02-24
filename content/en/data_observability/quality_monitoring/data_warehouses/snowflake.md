@@ -159,7 +159,7 @@ To configure the Snowflake integration in Datadog:
 4. Turn on **Enable Data Observability for Snowflake tables**.
 5. Click **Save & Test**.
 
-## Snowflake Tasks and Snowpipes
+## Snowflake tasks and Snowpipes
 
 Datadog derives lineage from Snowflake tasks and Snowpipes by parsing their SQL definitions.
 - For tasks, this includes task-to-task dependencies and lineage to destination tables.
