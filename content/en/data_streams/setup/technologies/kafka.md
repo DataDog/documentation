@@ -79,7 +79,7 @@ title: Data Streams Monitoring for Kafka
   </tbody>
 </table>
 
-<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring Boot:</strong> Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x. To use a version of kafka-clients greater than 3.7, override <code>kafka.version</code> in your build configuration. See the <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">Spring Kafka documentation</a> for instructions.</div>
+<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring:</strong> Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x, which does not support lag generation. To use a version of kafka-clients greater than 3.7, override <code>kafka.version</code> in your build configuration. See the <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">Spring Kafka documentation</a> for instructions.</div>
 
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
