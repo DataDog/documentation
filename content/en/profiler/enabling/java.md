@@ -34,7 +34,6 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Exception profiling
 - I/O profiling
 
-**Note**: On Linux, the Datadog profiler engine provides the full set of profile types.
 
 | JDK Version | CPU | Wallclock | Allocation | Live Heap |
 |-------------|:---:|:---------:|:----------:|:---------:|
@@ -51,8 +50,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Allocations
 - I/O profiling
 - Exception
-- Live heap (on Linux)
-**Minimum JDK Versions**:
+
 
 | JDK Distribution | Minimum Version | Notes |
 |------------------|-----------------|-------|
@@ -65,6 +63,8 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 {{< /tabs >}}
 
 - All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
+
+- Java Profiler is not currently supported on serverless environments 
 
 ## Installation
 
