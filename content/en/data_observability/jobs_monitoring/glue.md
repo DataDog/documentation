@@ -1,5 +1,5 @@
 ---
-title: "Enable Data Observability: Jobs Monitoring for AWS Glue"
+title: "Jobs Monitoring for AWS Glue"
 description: "Enable Data Observability: Jobs Monitoring for AWS Glue jobs with Datadog."
 is_beta: true
 private: true
