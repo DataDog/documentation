@@ -28,10 +28,6 @@
   {{- if and (ne $.Params.disable_opengraph_meta_tags true) .File -}}
     {{- partial "meta.html" . -}}
   {{- end -}}
-  {{- $mdURL := partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
-  {{- with $mdURL -}}
-  <meta name="plaintext-source" content="{{ . }}">
-  {{- end -}}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 {{- $customClass := $.Params.customclass -}}
