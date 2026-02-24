@@ -327,7 +327,6 @@ The following table summarizes which Browser Test step types are supported by st
 | Extract from email body  | Not supported yet        |
 | Go to email link         | Not supported yet        |
 | Upload files             | Not supported yet        |
-| Assert natural language  | Not supported yet        |
 
 ## Permissions
 
