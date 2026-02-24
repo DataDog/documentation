@@ -46,7 +46,7 @@ To create a routing rule:
 
 Routing rules use [Datadog query syntax][2] and support multiple `if/else` conditions.
 
-<div class="alert alert-warning">Routing rule syntax is case-sensitive. For example, <code>tags.env:Prod</code> does not match <code>tags.env:prod</code>.</div>
+<div class="alert alert-info">Routing rule syntax is case-sensitive. For example, <code>tags.env:Prod</code> does not match <code>tags.env:prod</code>.</div>
 
 **Supported attributes:**
 
