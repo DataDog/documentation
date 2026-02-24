@@ -743,7 +743,10 @@ class ConversationalSearch {
                     per_page: 15,
                     exclude_fields: EMBEDDING_FIELD,
                     filter_by: 'language:en',
-                    query_by: EMBEDDING_FIELD,
+                    // hybrid search with embedding and text
+                    query_by: `${EMBEDDING_FIELD},title,section_header,content`,
+                    rerank_hybrid_matches: true, // use Reciprocal Rank Fusion to rerank hybrid matches
+                    vector_query: "embedding:([], alpha: 0.8)",
                     prefix: false // Required for remote embedders
                 }
             ]
