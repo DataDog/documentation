@@ -56,6 +56,13 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Guides
+
+{{< whatsnext desc="Guides for getting the most out of Quality Monitoring:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/guides/tuning_monitors" >}}Tuning Monitors{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/guides/model_training_periods" >}}Model Training Periods{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

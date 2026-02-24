@@ -4983,6 +4983,21 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
+    - name: Guides
+      url: data_observability/quality_monitoring/guides
+      identifier: quality_monitoring_guides
+      parent: quality_monitoring
+      weight: 400000
+    - name: Tuning Monitors
+      url: data_observability/quality_monitoring/guides/tuning_monitors
+      identifier: quality_monitoring_guides_tuning_monitors
+      parent: quality_monitoring_guides
+      weight: 1000000
+    - name: Model Training Periods
+      url: data_observability/quality_monitoring/guides/model_training_periods
+      identifier: quality_monitoring_guides_model_training_periods
+      parent: quality_monitoring_guides
+      weight: 2000000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
