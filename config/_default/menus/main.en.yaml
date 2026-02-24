@@ -5009,6 +5009,21 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
+    - name: Event Types and Lifecycle
+      url: data_observability/jobs_monitoring/openlineage/event_types/
+      identifier: openlineage_event_types
+      parent: openlineage_integrations
+      weight: 2000000
+    - name: Supported Facets
+      url: data_observability/jobs_monitoring/openlineage/facets/
+      identifier: openlineage_facets
+      parent: openlineage_integrations
+      weight: 3000000
+    - name: Integrations and Dataset Naming
+      url: data_observability/jobs_monitoring/openlineage/integrations_and_naming/
+      identifier: openlineage_integrations_and_naming
+      parent: openlineage_integrations
+      weight: 4000000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
