@@ -18,7 +18,7 @@ title: Data Streams Monitoring for Kafka
   <tbody>
     <tr>
       <td><a href="/data_streams/java">Java</a></td>
-      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7)</td>
+      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7*)</td>
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}</td>
     </tr>
@@ -78,6 +78,8 @@ title: Data Streams Monitoring for Kafka
     </tr>
   </tbody>
 </table>
+
+<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring Boot:</strong> Spring Boot 3.3.x uses spring-kafka 3.2.x, which pulls in kafka-clients 3.7.x by default. This means lag generation metrics are not available for Spring Boot 3.3.x applications unless you override the Kafka client version. To fix this, set <code>kafka.version</code> to <code>3.8.1</code> or later in your build configuration. See the <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">Spring Kafka documentation</a> for details.</div>
 
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
