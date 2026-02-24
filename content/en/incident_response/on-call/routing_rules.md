@@ -71,7 +71,7 @@ When a routing rule includes support hours, Datadog compares the current time to
 
 - Set support hours to standard business hours (Monday–Friday, 9 a.m.–5 p.m.):
 
-  Add one interval. Select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
+  Add one interval: select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
 
 - Create a split support shift (mornings and afternoons):
 
