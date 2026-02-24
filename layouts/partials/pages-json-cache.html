@@ -1,8 +1,8 @@
 {{- $url := "https://docs.datadoghq.com/pages.json" -}}
 
 {{- $res := resources.GetRemote $url -}}
-{{- with $res.Err -}}
-  {{- errorf "Failed to fetch remote JSON %s: %s" $url . -}}
+{{- if not $res -}}
+  {{- errorf "Failed to fetch remote JSON: %s" $url -}}
 {{- end -}}
 
 {{- $pages := $res | transform.Unmarshal -}}
