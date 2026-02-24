@@ -12,8 +12,8 @@ further_reading:
     text: 'AWS Integration'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Data Observability: Jobs Monitoring for AWS Glue is in Preview" >}}
-To try the preview for Glue jobs monitoring, follow the setup instructions below.
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Data Observability: Jobs Monitoring for AWS Glue is in Preview. To join the Preview, follow the steps on this page.
 {{< /callout >}}
 
 ## Overview
