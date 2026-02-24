@@ -163,6 +163,18 @@ To configure the Snowflake integration in Datadog:
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
 
+## Snowflake Tasks and Snowpipes
+
+Datadog supports monitoring Snowflake Tasks and Snowpipes through the integration.
+
+**Snowflake Tasks**: Datadog tracks task run history and surfaces task executions as jobs, allowing you to monitor success rates, durations, and failures alongside the tables they write to.
+
+**Snowpipes**: Datadog tracks pipe activity and derives lineage from external stages to their destination Snowflake tables, giving you visibility into continuously ingested data.
+
+The `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup is required for both features.
+
+<div class="alert alert-info">Snowflake Tasks traces are in preview. Contact your account representative to enable this feature.</div>
+
 ## Network requirements
 
 If your Snowflake account restricts network access by IP, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to your network policy allowlist.
