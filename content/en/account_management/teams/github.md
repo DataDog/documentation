@@ -64,25 +64,18 @@ For example, assume that user B is a member of team A in GitHub. The following s
 
 ## Deleting teams
 
-The GitHub automatic connection only manages resources that it created. 
+Deleting a GitHub team does not delete the corresponding Datadog Team. Instead, Datadog:
+- Removes all synced members from the Datadog Team.
+- Removes the connection between the Datadog Team and the deleted GitHub team.
+- Removes any hierarchical links (parent/child relationships) that were synced from GitHub.
 
-If a team was created manually in Datadog and later linked to a GitHub team, deleting that GitHub team does not delete the Datadog Team.
+The Datadog Team itself remains and can continue to be managed independently.
 
-However, if a team was originally created by the automatic GitHub sync, and that GitHub team is deleted, Datadog also deletes the corresponding team to maintain consistency.
-
-### Examples
-The following examples show the different results when deleting teams that were created in Datadog versus GitHub. 
-
-Team created in Datadog:
-1. An admin creates Team A in Datadog.
-1. Team A is linked to a GitHub team.
+### Example
+1. Team A exists in GitHub and is synced to Datadog (either auto-created or manually linked).
 1. Team A is deleted in GitHub.
-1. Team A remains in Datadog, but is not linked to any GitHub team.
-
-Team created automatically from GitHub:
-1. In Datadog, Team B is created automatically from GitHub.
-1. Team B is deleted in GitHub.
-1. Team B is automatically deleted in Datadog.
+1. In Datadog, Team A's synced members, GitHub connection, and hierarchical links are removed.
+1. Team A remains in Datadog and can be managed independently.
 
 ## Further reading
 
