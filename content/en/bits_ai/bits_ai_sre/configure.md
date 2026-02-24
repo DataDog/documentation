@@ -44,7 +44,7 @@ Bits AI SRE integrates with Confluence to:
 To set up Bits AI SRE to use Confluence:
 
 1. Connect your Confluence Cloud account by following the instructions in the [Confluence integration tile][7].
-1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. If you don't enable account crawling, Bits can still use Confluence to inform its investigation plan.
+1. Optionally, enable account access for Bits AI to make Confluence a data source within Bits' chat interface. If you don't enable account access for Bits AI, Bits can still use Confluence to inform its investigation plan.
 1. Add a link to a Confluence page in your monitor's message. Bits reads the page to extract Datadog telemetry links and other context when forming its investigation plan.
 1. You can view all connected Confluence accounts on the [Bits Settings page][4].
 
