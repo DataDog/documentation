@@ -70,7 +70,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 1. Browse your OpsGenie escalation policies. You can filter policies by team.
 1. Select an escalation policy to import. The wizard displays the full policy details, including rules, recipients, and schedules.
 
-{{< img src="service_management/oncall/import-opsgenie-escalation-policy-2.png" alt="OpsGenie escalation policy list with policy details shown for the selected policy" style="width:95%;" >}}
+{{< img src="service_management/oncall/import-opsgenie-escalation-policy.png" alt="OpsGenie escalation policy list with policy details shown for the selected policy" style="width:95%;" >}}
 
 ### Step 4: Map users
 
