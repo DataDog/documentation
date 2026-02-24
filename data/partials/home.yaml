@@ -143,6 +143,10 @@ nav_sections:
         link: tests/
         icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests
+      - title: Code Coverage
+        link: code_coverage/
+        icon: ci
+        desc: Visualize coverage data trends and block PR merges based on coverage thresholds
       - title: Security
         link: security/
         icon: security-platform

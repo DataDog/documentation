@@ -5,17 +5,16 @@ further_reading:
 - link: /incident_response/on-call/
   tag: Documentación
   text: Datadog On-Call
-private: true
 title: Búsquedas entre organizaciones
 ---
 
 <div class="alert alert-info">
-Las búsquedas entre organizaciones está en versión preliminar y solo es compatible con flujos de trabajo automatizados (por ejemplo: alertas de monitor, reglas de notificación de incidentes). Las búsquedas a través de la interfaz de usuario o la API de Datadog se limita a organizaciones y centros de datos locales.
+Las búsquedas entre organizaciones están en vista previa y solo son compatibles con flujos de trabajo automatizados, como alertas de monitor, reglas de notificación de incidentes. Las búsquedas a través de la interfaz de usuario o la API de Datadog se limitan a organizaciones y centros de datos locales.
 </div>
 
 ## Información general
 
-Las búsquedas entre organizaciones permite a los usuarios activar automáticamente alertas para equipos de On-Call que se encuentran en otras organizaciones o centros de datos de Datadog. Las búsquedas entre organizaciones es útil cuando la configuración operativa u organizativa abarca varias organizaciones o centros de datos de Datadog, y se busca centralizar la respuesta a incidentes en una única organización. 
+Las búsquedas entre organizaciones permiten a los usuarios activar automáticamente alertas para equipos de On-Call que se encuentran en otras organizaciones o centros de datos de Datadog. Las búsquedas entre organizaciones son útiles cuando la configuración operativa u organizativa abarca varias organizaciones o centros de datos de Datadog, y se busca centralizar la respuesta a incidentes en una única organización. 
 
 Con las búsquedas entre organizaciones, puedes:
 
@@ -66,7 +65,7 @@ High memory usage detected on backend services. @oncall-core-infra
 
 Cuando se activa una alerta, Datadog detecta que el gestor es externo, y la búsqueda se dirige a la organización de destino correcta utilizando las credenciales de la cuenta de servicio almacenada.
 
-## Limitaciones 
+## Limitaciones
 - La búsqueda manual (por ejemplo, a través de la API o la interfaz de usuario web) no es compatible entre organizaciones. La búsqueda manual solo es compatible dentro de tu organización o centro de datos actual.
 - Los enlaces de las notificaciones entre organizaciones (por ejemplo, las URL de monitores o incidentes apuntan a la organización de origen. Es posible que no se resuelvan correctamente en la interfaz de usuario de la organización de destino.
 - La sincronización de gestores se realiza periódicamente. Los cambios en los equipos de ON-Call de la organización de destino pueden tardar en propagarse.

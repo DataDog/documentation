@@ -58,11 +58,14 @@ And the library supports the following runtimes:
 
 ### Supported frameworks
 
+**Note:** Tornado support is available starting in ddtrace Python version 4.4.
+
 | Framework | Versions   | Threat Detection supported? | Threat Protection supported? |
 |-----------|------------|-----------------------------|------------------------------|
 | Django    | 2.2        | {{< X >}}                   | {{< X >}}                    |
 | FastAPI   | 0.86       | {{< X >}}                   | {{< X >}}                    |
 | Flask     | 1.1        | {{< X >}}                   | {{< X >}}                    |
+| Tornado   | 6.3        | {{< X >}}                   | {{< X >}}                    |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>

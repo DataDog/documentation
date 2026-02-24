@@ -169,10 +169,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
-{{% tab "AWS CDK" %}}
-{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
-{{% /tab %}}
-
 {{% tab "AWS SAM" %}}
 
 The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
@@ -235,6 +231,10 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
 {{% /tab %}}
 
 {{% tab "Container Image" %}}

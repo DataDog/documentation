@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Requirements
 
@@ -102,6 +102,10 @@ Configure Dynamic Instrumentation using the following environment variables:
 ## What to do next
 
 See [Dynamic Instrumentation][6] for information about adding instrumentations and browsing and indexing the data.
+
+## Limitations
+
+- On JDK 18 and below, classes compiled with the `-parameters` flag may fail to instrument with the error message "Method Parameters detected". Spring 6+, Spring Boot 3+, and Scala use this flag by default.
 
 ## Further reading
 

@@ -20,17 +20,27 @@ Set up the Datadog Metrics destination and its environment variables when you [s
 
 ### Set up the destination
 
-Optionally, toggle **Buffering Options** to configure how events are buffered before being sent.
-**Note**: Buffering options is in {{< tooltip glossary="preview" case="title" >}}. Contact your account manager to request access.
+#### Optional settings
 
-- If disabled, the buffer holds a maximum of 500 events. Events beyond this limit are dropped.
-- If enabled:
-  - Select the buffer type you want to set (Memory or Disk).
-  - Enter the buffer size and select the unit.
+{{% observability_pipelines/destination_buffer %}}
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+There are no secret identifiers for this destination.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

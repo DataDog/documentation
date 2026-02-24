@@ -17,364 +17,289 @@ Utilisez le SDK de collecte de logs à partir des navigateurs afin d'envoyer des
 - Transmettre les erreurs frontend
 - Enregistrer l'adresse IP et le user agent réels du client
 - Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
+- Utilisation dans les environnements Worker et Service Worker.
 
-## Implémentation
+**Remarques** :
 
-**Token client Datadog** : pour des raisons de sécurité, les [clés d'API][1] ne peuvent pas être utilisées pour configurer la le SDK de collecte de logs à partir des navigateurs, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs depuis un navigateur Web, vous devez utiliser un [token client][2]. Consultez la [documentation relative aux tokens client][2] pour en savoir plus.
-
-**SDK Datadog de collecte de logs à partir des navigateurs** : configurez le SDK via [NPM](#npm) ou utilisez les extraits de code [CDN asynchrone](#cdn-asynchrone) ou [CDN synchrone](#cdn-synchrone) dans le tag head.
-
-**Navigateurs pris en charge** : le SDK Browser prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles, y compris IE11. Consultez le tableau des [navigateurs pris en charge][4].
-
-### Choisir la bonne méthode d'installation
-
-| Méthode d'installation        | Cas d'utilisation                                                                                                                                                                                                                                                                                                                                                                   |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npm (node package manager) | Cette méthode est recommandée pour les applications Web modernes. Le SDK de collecte de logs à partir des navigateurs est inclus dans le package avec le reste de votre code JavaScript frontend. Les performances de chargement des pages ne sont pas affectées. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK. **Remarque :** si vous avez recours au SDK RUM, il est recommandé d'utiliser une version correspondante. |
-| CDN asynchrone                  | Cette méthode est recommandée pour les applications Web devant satisfaire des objectifs de performance. Le SDK de collecte de logs à partir des navigateurs est chargé à partir de notre CDN de façon asynchrone : ainsi, le téléchargement du SDK n'affecte pas les performances de chargement des pages. Le SDK peut toutefois omettre les erreurs, les ressources et les actions utilisateur déclenchées avant l'initialisation du SDK.                                                  |
-| CDN synchrone                   | Cette méthode est recommandée pour recueillir tous les événements RUM. Le SDK de collecte de logs à partir des navigateurs est chargé à partir de notre CDN de façon synchrone : ainsi, le SDK est chargé en premier et recueille toutes les erreurs, ressources et actions utilisateur. Cette méthode peut avoir un impact sur les performances de chargement des pages.                                                                                                      |
-
-### NPM
-
-Après avoir ajouté [`@datadog/browser-logs`][3] à votre fichier `package.json`, lancez la bibliothèque avec :
-
-```javascript
-import { datadogLogs } from '@datadog/browser-logs'
-
-datadogLogs.init({
-  clientToken: '<TOKEN_CLIENT_DATADOG>',
-  site: '<SITE_DATADOG>',
-  forwardErrorsToLogs: true,
-  sessionSampleRate: 100,
-})
-```
-
-### CDN asynchrone
-
-Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{{<region-param key="dd_site_name">}}** :
-
-{{< site-region region="us" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog</title>
-      <script>
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js','DD_LOGS')
-      window.DD_LOGS.onReady(function() {
-          window.DD_LOGS.init({
-            clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'datadoghq.com',
-            forwardErrorsToLogs: true,
-            sessionSampleRate: 100,
-          })
-        })
-      </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="ap1" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog</title>
-      <script>
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
-            clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'ap1.datadoghq.com',
-            forwardErrorsToLogs: true,
-            sessionSampleRate: 100,
-          })
-        })
-      </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog</title>
-      <script>
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js','DD_LOGS')
-      window.DD_LOGS.onReady(function() {
-          window.DD_LOGS.init({
-            clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'datadoghq.eu',
-            forwardErrorsToLogs: true,
-            sessionSampleRate: 100,
-          })
-        })
-      </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog</title>
-      <script>
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js','DD_LOGS')
-      window.DD_LOGS.onReady(function() {
-          window.DD_LOGS.init({
-            clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'us3.datadoghq.com',
-            forwardErrorsToLogs: true,
-            sessionSampleRate: 100,
-          })
-        })
-      </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog</title>
-      <script>
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js','DD_LOGS')
-      window.DD_LOGS.onReady(function() {
-          window.DD_LOGS.init({
-            clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'us5.datadoghq.com',
-            forwardErrorsToLogs: true,
-            sessionSampleRate: 100,
-          })
-        })
-      </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer des logs à Datadog</title>
-      <script>
-      (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-      })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v5.js','DD_LOGS')
-      window.DD_LOGS.onReady(function() {
-          window.DD_LOGS.init({
-            clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'ddog-gov.com',
-            forwardErrorsToLogs: true,
-            sessionSampleRate: 100,
-          })
-        })
-      </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-
-
-**Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
-
-### CDN synchrone
-
-Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK au début de la section head de vos pages. Pour le site **{{<region-param key="dd_site_name">}}** :
-
-{{< site-region region="us" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
-    <script>
-      window.DD_LOGS &&
-        window.DD_LOGS.init({
-          clientToken: '<DATADOG_CLIENT_TOKEN>',
-          site: 'datadoghq.com',
-          forwardErrorsToLogs: true,
-          sessionSampleRate: 100,
-        })
-    </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="ap1" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
-    <script>
-      window.DD_LOGS &&
-        DD_LOGS.init({
-          clientToken: '<DATADOG_CLIENT_TOKEN>',
-          site: 'ap1.datadoghq.com',
-          forwardErrorsToLogs: true,
-          sessionSampleRate: 100,
-        })
-    </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
-    <script>
-      window.DD_LOGS &&
-        window.DD_LOGS.init({
-          clientToken: '<DATADOG_CLIENT_TOKEN>',
-          site: 'datadoghq.eu',
-          forwardErrorsToLogs: true,
-          sessionSampleRate: 100,
-        })
-    </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
-    <script>
-      window.DD_LOGS &&
-        window.DD_LOGS.init({
-          clientToken: '<DATADOG_CLIENT_TOKEN>',
-          site: 'us3.datadoghq.com',
-          forwardErrorsToLogs: true,
-          sessionSampleRate: 100,
-        })
-    </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
-    <script>
-      window.DD_LOGS &&
-        window.DD_LOGS.init({
-          clientToken: '<DATADOG_CLIENT_TOKEN>',
-          site: 'us5.datadoghq.com',
-          forwardErrorsToLogs: true,
-          sessionSampleRate: 100,
-        })
-    </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
-```html
-<html>
-  <head>
-    <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
-    <script>
-      window.DD_LOGS &&
-        window.DD_LOGS.init({
-          clientToken: '<DATADOG_CLIENT_TOKEN>',
-          site: 'ddog-gov.com',
-          forwardErrorsToLogs: true,
-          sessionSampleRate: 100,
-        })
-    </script>
-  </head>
-</html>
-```
-{{</ site-region>}}
-
-**Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
-
-### TypeScript
-
-Les types sont compatibles avec TypeScript >= 3.8.2. Pour les versions antérieures, importez les sources JS et utilisez des variables globales pour éviter tout problème de compilation :
-
-```typescript
-import '@datadog/browser-logs/bundle/datadog-logs'
-
-window.DD_LOGS.init({
-  clientToken: '<TOKEN_CLIENT>',
-  site: '<SITE_DATADOG>',
-  forwardErrorsToLogs: true,
-  sessionSampleRate: 100,
-})
-```
+- **Indépendant du SDK du RUM** : Le Browser Logs SDK peut être utilisé sans le RUM SDK.
+- **Environnements Worker** : le le SDK de collecte de logs à partir des navigateurs fonctionne dans les environnements Worker et Service Worker en utilisant les mêmes méthodes de configuration. Toutefois, les logs envoyés depuis les environnements Worker n'incluent pas automatiquement les informations de session.
 
 ## Configuration
 
-### Intégration de CSP
+### Étape 1 - Créer un token client
 
-Si vous utilisez l'intégration CSP (stratégie de sécurité de contenu) de Datadog sur votre site, consultez [la section RUM de la documentation relative à CSP][14] pour connaître les étapes de configuration.
+Dans Datadog, accédez à [**Organization Settings > New Client Tokens**][1]
 
-### Paramètres d'initialisation
+**Environnements pris en charge** : le SDK de collecte de logs à partir des navigateurs prend en charge tous les navigateurs de bureau et mobiles modernes, ainsi que les environnements Worker et Service Worker. Consultez le tableau des [navigateurs pris en charge][4].
 
-Les paramètres suivants peuvent être utilisés pour configurer l'envoi des logs à Datadog avec le SDK Datadog de collecte de logs à partir des navigateurs :
+<div class="alert alert-info">Pour des raisons de sécurité, les <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">clés d'API</a> ne peuvent pas être utilisées pour configurer le SDK de collecte de logs à partir des navigateurs, car elles seraient exposées côté client dans le code JavaScript. Pour recueillir des logs à partir de navigateurs Web, un <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">token client</a> doit être utilisé.</div> 
 
-| Paramètre                  | Type                                                                      | Obligatoire | Valeur par défaut         | Description                                                                                                                                                                           |
-|----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `clientToken`              | Chaîne                                                                    | Oui      |                 | Un [token client Datadog][2].                                                                                                                                                          |
-| `site`                     | Chaîne                                                                    | Oui      | `datadoghq.com` | Le [paramètre du site Datadog de votre organisation][9].                                                                                                                                 |
-| `service`                  | Chaîne                                                                    | Non       |                 | Le nom de service de votre application. Il doit respecter les [exigences de la syntaxe des tags][7].                                                                                             |
-| `env`                      | Chaîne                                                                    | Non       |                 | L'environnement de l'application, par exemple prod, pre-prod, staging, etc. Il doit respecter les [exigences de la syntaxe des tags][7].                                                    |
-| `version`                  | Chaîne                                                                    | Non       |                 | La version de l'application, par exemple 1.2.3, 6c44da20, 2020.02.13, etc. Il doit respecter les [exigences de la syntaxe des tags][7].                                                    |
-| `forwardErrorsToLogs`      | Booléen                                                                   | Non       | `true`          | Définissez ce paramètre sur `false` pour désactiver l'envoi des logs console.error, des exceptions non interceptées et des erreurs réseau à Datadog.                                                                              |
-| `forwardConsoleLogs`       | `"all"` ou un tableau composé des valeurs `"log"` `"debug"` `"info"` `"warn"` `"error"`      | Non       | `[]`            | Permet de transmettre les logs `console.*` à Datadog. Utilisez `"all"` pour transmettre tous les logs ou définissez un tableau composé des noms de l'API console pour n'en transmettre qu'une partie.                                                |
-| `forwardReports`           | `"all"` ou un tableau composé des valeurs `"intervention"` `"deprecation"` `"csp_violation"` | Non       | `[]`            | Permet de transmettre les rapports de l'[API Reporting][8] à Datadog. Utilisez `"all"` pour transmettre tous les rapports ou définissez un tableau composé des types de rapports pour n'en transmettre qu'une partie.                                       |
-| `sampleRate`               | Nombre                                                                    | Non       | `100`           | **Obsolète** - voir `sessionSampleRate`.                                                                                                                                             |
-| `sessionSampleRate`        | Nombre                                                                    | Non       | `100`           | Le pourcentage de sessions à surveiller : `100` (toutes les sessions) et `0` (aucune session). Seules les sessions surveillées envoient des logs.                                                                                    |
-| `trackingConsent`          | `"granted"` ou `"not-granted"`                                            | Non       | `"granted"`     | Définir l'état initial du consentement au suivi de l'utilisateur. Voir [Consentement au suivi de l'utilisateur][15].                                                                                                         |
-| `silentMultipleInit`       | Booléen                                                                   | Non       |                 | Permet d'empêcher le logging des erreurs lorsqu'il y a plusieurs init.                                                                                                                                    |
-| `proxy`                    | Chaîne                                                                    | Non       |                 | URL de proxy facultative (exemple : www.proxy.com/chemin). Consultez le [guide complet de configuration d'un proxy][6] pour en savoir plus.                                                                        |
-| `telemetrySampleRate`      | Nombre                                                                    | Non       | `20`            | Les données de télémétrie (comme les erreurs et logs de debugging) à propos de l'exécution du SDK sont envoyées à Datadog afin de détecter et de résoudre les problèmes potentiels. Définissez ce paramètre sur `0` pour désactiver la collecte de télémétrie. |
-| `storeContextsAcrossPages` | Booléen                                                                   | Non       |                 | Stocker le contexte global et le contexte utilisateur dans `localStorage` pour les préserver tout au long de la navigation utilisateur. Consultez la section [Cycle de vie des contexts][11] pour en savoir plus et connaître les limitations spécifiques.          |
-| `allowUntrustedEvents`     | Booléen                                                                   | Non       |                 | Autoriser l'enregistrement des [événements non fiables][13], par exemple lors des tests automatisés de l'interface utilisateur.                                                                                                           |
+### Étape 2 - Installer le SDK de collecte de logs à partir des navigateurs
 
+Choisissez la méthode d'installation pour le SDK Browser. 
 
-Options qui doivent avoir une configuration correspondante lors de l'utilisation du SDK `RUM` :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
-| Paramètre                              | Type    | Obligatoire | Valeur par défaut | Description                                                                                                                                                              |
-|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `trackSessionAcrossSubdomains`         | Booléen | Non       | `false` | Préserver la session pour tous les sous-domaines d'un même site.                                                                                                                |
-| `useSecureSessionCookie`               | Booléen | Non       | `false` | Utiliser un cookie de session sécurisé. Ce paramètre désactive les logs envoyés sur des connexions non sécurisées (connexions non HTTPS).                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | Booléen | Non       | `false` | Utiliser un cookie de session intersite sécurisé partitionné. Cela permet l'exécution du SDK logs lorsque le site est chargé à partir d'un autre site (iframe). Implique l'utilisation de `useSecureSessionCookie`. |
-| `useCrossSiteSessionCookie`            | Booléen | Non       | `false` | **Obsolète**, voir `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
+Pour les applications Web modernes, Datadog recommande d'effectuer l'installation via Node Package Manager (npm). Le SDK Browser est regroupé avec le reste de votre code JavaScript frontend. Il n'a aucun impact sur les performances de chargement de page. Toutefois, le SDK peut ne pas capturer les erreurs ou logs de console qui surviennent son initialisation. Datadog recommande d'utiliser une version correspondante avec le SDK de collecte de logs à partir des navigateurs.
+
+Ajoutez [`@datadog/browser-logs`][13] à votre fichier `package.json`. Par exemple, si vous utilisez npm cli.  
+
+[13]: https://www.npmjs.com/package/@datadog/browser-logs
+
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
+
+Les applications Web avec des objectifs de performance doivent effectuer l'installation via CDN async. Le SDK Browser se charge de manière asynchrone depuis le CDN de Datadog, ce qui garantit qu'il n'a pas d'impact sur les performances de chargement de page. Toutefois, le SDK peut ne pas capturer les erreurs ou logs de console qui surviennent avant son initialisation.  
+
+Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML que vous souhaitez surveiller dans votre application.
+
+{{< site-region region="us" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v6.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
+
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
+
+Pour recueillir tous les événements, vous devez effectuer l'installation via CDN sync. Le SDK Browser se charge de manière synchrone depuis le CDN de Datadog, ce qui garantit que le SDK se charge en premier et recueille toutes les erreurs, ressources et actions utilisateur. Cette méthode peut avoir un impact sur les performances de chargement de page.  
+
+Ajoutez le snippet de code généré dans la balise head (devant toute autre balise de script) de chaque page HTML que vous souhaitez surveiller dans votre application. Le fait de placer la balise de script plus haut et de la charger de manière synchrone garantit que Datadog RUM peut recueillir toutes les données de performance et erreurs.
+
+{{< site-region region="us" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/eu/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"
+    type="text/javascript">
+</script>
+```
+
+{{< /site-region >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Étape 3 - Initialiser le SDK de collecte de logs à partir des navigateurs
+
+Le SDK doit être initialisé dès que possible dans le cycle de vie de l'application. Cela garantit que tous les logs sont capturés correctement.
+
+Dans le snippet d'initialisation, définissez le jeton client et le site. Consultez la liste complète des [paramètres d'initialisation][4].
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+
+datadogLogs.init({
+  clientToken: '<CLIENT_TOKEN>',
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
+  forwardErrorsToLogs: true,
+  sessionSampleRate: 100,
+});
+
+```
+
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
+
+```javascript
+<script>
+  window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
+      clientToken: '<CLIENT_TOKEN>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: '<DATADOG_SITE>',
+      forwardErrorsToLogs: true,
+      sessionSampleRate: 100,
+    });
+  })
+</script>
+```
+
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
+
+```javascript
+<script>
+    window.DD_LOGS && window.DD_LOGS.init({
+      clientToken: '<CLIENT_TOKEN>',
+      // `site` refers to the Datadog site parameter of your organization
+      // see https://docs.datadoghq.com/getting_started/site/
+      site: '<DATADOG_SITE>',
+      forwardErrorsToLogs: true,
+      sessionSampleRate: 100,
+    });
+</script>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Configurer le consentement au suivi (conformité RGPD)
+
+Pour être conforme au RGPD, au CCPA et aux réglementations similaires, le SDK RUM Browser vous permet de fournir la [valeur de consentement au suivi lors de l'initialisation][5].
+
+#### Configurer la stratégie de sécurité du contenu (CSP)
+
+Si vous utilisez l'intégration Datadog Content Security Policy (CSP) sur votre site, consultez [la documentation CSP][6] pour les étapes de configuration supplémentaires.
+
+### Étape 4 - Visualiser vos données
+
+Maintenant que vous avez terminé la configuration de base pour Logs, votre application recueille des logs de navigateurs et vous pouvez commencer à surveiller et déboguer les problèmes en temps réel.
+
+Visualisez les logs dans le [Log Explorer][7].
 
 ## Utilisation
 
@@ -382,11 +307,12 @@ Options qui doivent avoir une configuration correspondante lors de l'utilisation
 
 Une fois le SDK Datadog de collecte de logs à partir des navigateurs lancé, envoyez une entrée de log personnalisée directement à Datadog avec l'API :
 
-```
+```typescript
 logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
 ```
 
-#### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -394,7 +320,8 @@ import { datadogLogs } from '@datadog/browser-logs'
 datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
-#### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -404,13 +331,17 @@ window.DD_LOGS.onReady(function () {
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-#### CDN synchrone
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Résultats
 
@@ -455,13 +386,14 @@ Le backend Datadog ajoute d'autres champs, notamment :
 
 ### Suivi des erreurs
 
-Le SDK Datadog de collecte des logs à partir des navigateurs permet d'effectuer un suivi manuel des erreurs à l'aide du paramètre facultatif `error` (Disponible à partir de la v4.36.0 du SDK). Lorsqu'une instance d'une [erreur JavaScript][10] est spécifiée, le SDK extrait les informations pertinentes (type, message, stack trace) de l'erreur.
+Le SDK de collecte de logs à partir des navigateurs de Datadog permet un suivi manuel des erreurs en utilisant le paramètre `error` facultatif (disponible dans le SDK v4.36.0+). Lorsqu'une instance d'une [erreur JavaScript][8] est fournie, le SDK extrait les informations pertinentes (type, message, trace de pile) de l'erreur.
 
-```
-logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
+```typescript
+logger.{debug|info|warn|error}(message: string, messageContext?: Context, error?: Error)
 ```
 
-#### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -475,7 +407,8 @@ try {
 }
 ```
 
-#### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 try {
@@ -491,7 +424,8 @@ try {
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-#### CDN synchrone
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 try {
@@ -504,6 +438,9 @@ try {
 ```
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Résultats
 
@@ -529,50 +466,52 @@ Les résultats sont les mêmes que vous utilisiez NPM, CDN asynchrone ou CDN syn
 
 Le SDK Datadog de collecte de logs à partir des navigateurs ajoute des raccourcis de fonctions (`.debug`, `.info`, `.warn`, `.error`) aux loggers pour plus de simplicité. Une fonction de logger générique est également disponible pour exposer le paramètre `status` :
 
-```
-log (message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
+```typescript
+log(message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
 ```
 
-#### NPM
-
-Pour NPM, utilisez :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.logger.log(<MESSAGE>,<ATTRIBUTS_JSON>,<STATUT>,<ERREUR>);
+datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
 
-#### CDN asynchrone
-
-Pour CDN asynchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function() {
-  window.DD_LOGS.logger.log(<MESSAGE>,<ATTRIBUTS_JSON>,<STATUT>,<ERREUR>);
+  window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 })
 ```
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-#### CDN synchrone
-
-Pour CDN synchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
-window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<ATTRIBUTS_JSON>,<STATUT>,<ERREUR>);
+window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
+
+**Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Placeholders
 
 Les placeholders dans les exemples ci-dessus sont décrits plus bas :
 
-| Placeholder         | Description                                                                             |
+| Placeholder         | Rôle                                                                             |
 | ------------------- | --------------------------------------------------------------------------------------- |
 | `<MESSAGE>`         | Le message de votre log qui est complètement indexé par Datadog.                               |
-| `<ATTRIBUTS_JSON>` | Un objet JSON valide qui comprend tous les attributs joints au `<MESSAGE>`.         |
-| `<STATUT>`          | Le statut de votre log. Les valeurs de statut acceptées sont `debug`, `info`, `warn` ou `error`. |
-| `<ERREUR>`           | Une instance d'un objet [error JavaScript][10].                                         |
+| `<JSON_ATTRIBUTES>` | Un objet JSON valide qui comprend tous les attributs joints au `<MESSAGE>`.         |
+| `<STATUS>`          | Le statut de votre log. Les valeurs de statut acceptées sont `debug`, `info`, `warn` ou `error`. |
+| `<ERROR>`           | Une instance d'un objet [erreur JavaScript][8].                                         |
 
 ## Utilisation avancée
 
@@ -580,11 +519,23 @@ Les placeholders dans les exemples ci-dessus sont décrits plus bas :
 
 Si vos logs recueillis à partir des navigateurs contiennent des informations confidentielles que vous souhaitez censurer, configurez le SDK Browser pour nettoyer les séquences sensibles en utilisant le rappel `beforeSend` à l'initialisation du collecteur de logs.
 
-La fonction de rappel `beforeSend` vous permet d'accéder à chaque log recueilli par le SDK Browser avant qu'il ne soit envoyé à Datadog. De plus, vous pouvez modifier les propriétés de votre choix.
+La fonction de rappel `beforeSend` peut être invoquée avec deux arguments : l'événement `log` et `context`. Cette fonction vous donne accès à chaque log recueilli par le SDK Browser avant son envoi à Datadog, et vous permet d'utiliser le contexte pour ajuster les propriétés de log. Le contexte contient des informations supplémentaires liées à l'événement, mais pas nécessairement incluses dans l'événement. Vous pouvez généralement utiliser ces informations pour [enrichir][11] votre événement ou le [rejeter][12].
+
+```javascript
+function beforeSend(log, context)
+```
+
+Voici les valeurs possibles pour `context` :
+
+| Valeur | Type de données | Cas d'utilisation |
+|-------|---------|------------|
+| `isAborted` | Booléen | Pour les événements de type log réseau, cette propriété indique si la requête ayant échoué a été annulée par l'application. Dans ce cas, vous pouvez choisir de ne pas envoyer l'événement s'il a été volontairement interrompu. |
+| `handlingStack` | Chaîne | Une trace de pile indiquant où l'événement de log a été traité. Cela peut être utilisé pour identifier depuis quel [micro-frontend][9] le log a été envoyé. |
 
 Pour censurer des adresses e-mail dans les URL de votre application Web :
 
-#### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -599,7 +550,8 @@ datadogLogs.init({
 });
 ```
 
-#### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function() {
@@ -614,7 +566,10 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-#### CDN synchrone
+**Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
+
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_LOGS &&
@@ -628,9 +583,14 @@ window.DD_LOGS &&
     });
 ```
 
+**Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 Les propriétés suivantes sont automatiquement recueillies par le SDK et peuvent contenir des informations sensibles :
 
-| Attribut       | Type   | Description                                                                                      |
+| Attribut       | Type   | Rôle                                                                                      |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
 | `view.url`      | Chaîne | L'URL de la page Web active.                                                                  |
 | `view.referrer` | Chaîne | L'URL de la page Web précédente à partir de laquelle l'utilisateur a accédé à la page actuelle. |
@@ -644,7 +604,8 @@ La fonction de rappel `beforeSend` vous permet également de supprimer un log av
 
 Pour supprimer des erreurs réseau avec le code 404 :
 
-#### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -661,7 +622,8 @@ datadogLogs.init({
 });
 ```
 
-#### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function() {
@@ -678,7 +640,10 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-#### CDN synchrone
+**Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
+
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_LOGS &&
@@ -693,6 +658,11 @@ window.DD_LOGS &&
         ...
     });
 ```
+
+**Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Définir plusieurs loggers
 
@@ -720,7 +690,8 @@ Une fois votre logger créé, accédez-y dans n'importe quelle partie de votre c
 getLogger(name: string)
 ```
 
-##### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous les autres loggers :
 
@@ -743,7 +714,8 @@ const signupLogger = datadogLogs.getLogger('signupLogger')
 signupLogger.info('Test sign up completed')
 ```
 
-##### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous les autres loggers :
 
@@ -753,7 +725,7 @@ window.DD_LOGS.onReady(function () {
     level: 'info',
     handler: 'http',
     context: { env: 'staging' }
-  )
+  })
 })
 ```
 
@@ -768,7 +740,8 @@ window.DD_LOGS.onReady(function () {
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-##### CDN synchrone
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous les autres loggers :
 
@@ -786,12 +759,15 @@ Vous pouvez ensuite l'utiliser dans une autre partie du code avec :
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Remplacer le contexte
 
@@ -812,7 +788,8 @@ Une fois le SDK Browser Datadog lancé, vous pouvez :
 > - `setGlobalContextProperty` au lieu de `addLoggerGlobalContext`
 > - `removeGlobalContextProperty` au lieu de `removeLoggerGlobalContext`
 
-##### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 Pour NPM, utilisez :
 
@@ -834,7 +811,8 @@ datadogLogs.clearGlobalContext()
 datadogLogs.getGlobalContext() // => {}
 ```
 
-##### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 Pour CDN asynchrone, utilisez :
 
@@ -870,7 +848,8 @@ window.DD_LOGS.onReady(function () {
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-##### CDN synchrone
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 Pour CDN synchrone, utilisez :
 
@@ -892,6 +871,9 @@ window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
 
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Contexte utilisateur
 
 Le SDK Datadog de collecte de logs fournit des fonctions pratiques pour associer un `User` aux logs générés.
@@ -904,7 +886,8 @@ Le SDK Datadog de collecte de logs fournit des fonctions pratiques pour associer
 
 **Remarque** : le contexte utilisateur est appliqué avant le contexte global. Par conséquent, chaque propriété utilisateur incluse dans le contexte global remplacera le contexte utilisateur lors de la génération des logs.
 
-##### NPM
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 Pour NPM, utilisez :
 
@@ -922,7 +905,8 @@ datadogLogs.clearUser()
 datadogLogs.getUser() // => {}
 ```
 
-##### CDN asynchrone
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 Pour CDN asynchrone, utilisez :
 
@@ -958,7 +942,8 @@ window.DD_LOGS.onReady(function () {
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-##### CDN synchrone
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 Pour CDN synchrone, utilisez :
 
@@ -980,24 +965,115 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
 
-#### Cycle de vie des contextes
+{{% /tab %}}
+{{< /tabs >}}
 
-Par défaut, le contexte global et le contexte utilisateur sont stockés dans la mémoire de la page actuelle. Ainsi, les contextes ne sont pas :
+#### Contexte de compte
 
-- conservés après une actualisation complète de la page ;
-- partagés avec plusieurs onglets ou fenêtres d'une même session.
+Le SDK de collecte de logs de Datadog fournit des fonctions pratiques pour associer un `Account` aux logs générés.
 
-Pour ajouter les contextes à tous les événements d'une session, ils doivent être joints à chaque page.
+- Définissez le compte pour tous vos loggers avec l'API `setAccount (newAccount: Account)`.
+- Ajoutez ou modifiez une propriété de compte pour tous vos loggers avec l'API `setAccountProperty (key: string, value: any)`.
+- Obtenez le compte actuellement stocké avec l'API `getAccount ()`.
+- Supprimez une propriété de compte avec l'API `removeAccountProperty (key: string)`.
+- Effacez toutes les propriétés de compte existantes avec l'API `clearAccount ()`.
 
-Depuis le lancement de l'option de configuration `storeContextsAcrossPages`, avec la version 4.49.0 du SDK Browser, ces contextes peuvent être stockés dans [`localStorage`][12]. Ainsi :
+**Remarque** : le contexte du compte est appliqué avant le contexte global. Par conséquent, chaque propriété de compte incluse dans le contexte global remplacera le contexte du compte lors de la génération des logs.
 
-- Les contextes sont conservés après une actualisation complète.
-- Les contextes sont synchronisés entre les onglets ouverts avec la même origine.
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+datadogLogs.setAccount({ id: '1234', name: 'My Company Name' })
+datadogLogs.setAccountProperty('type', 'premium')
+datadogLogs.getAccount() // => {id: '1234', name: 'My Company Name', type: 'premium'}
+
+datadogLogs.removeAccountProperty('type')
+datadogLogs.getAccount() // => {id: '1234', name: 'My Company Name'}
+
+datadogLogs.clearAccount()
+datadogLogs.getAccount() // => {}
+```
+
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
+
+```javascript
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setAccount({ id: '1234', name: 'My Company Name' })
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setAccountProperty('type', 'premium')
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getAccount() // => {id: '1234', name: 'My Company Name', type: 'premium'}
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.removeAccountProperty('type')
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getAccount() // => {id: '1234', name: 'My Company Name'}
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.clearAccount()
+})
+
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getAccount() // => {}
+})
+```
+
+**Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
+
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
+
+```javascript
+window.DD_LOGS && window.DD_LOGS.setAccount({ id: '1234', name: 'My Company Name' })
+
+window.DD_LOGS && window.DD_LOGS.setAccountProperty('type', 'premium')
+
+window.DD_LOGS && window.DD_LOGS.getAccount() // => {id: '1234', name: 'My Company Name', type: 'premium'}
+
+window.DD_LOGS && window.DD_LOGS.removeAccountProperty('type')
+
+window.DD_LOGS && window.DD_LOGS.getAccount() // => {id: '1234', name: 'My Company Name'}
+
+window.DD_LOGS && window.DD_LOGS.clearAccount()
+
+window.DD_LOGS && window.DD_LOGS.getAccount() // => {}
+```
+
+**Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Cycle de vie du contexte
+
+Par défaut, les contextes sont stockés dans la mémoire de la page actuelle, ce qui signifie qu'ils ne sont pas :
+
+- conservés après une actualisation complète de la page
+- partagés sur divers onglets ou diverses fenêtres de la même session
+
+Pour les ajouter à tous les événements de la session, ils doivent être joints à chaque page.
+
+Avec l'introduction de l'option de configuration `storeContextsAcrossPages` dans la version v4.49.0 du SDK Browser, ces contextes peuvent être stockés dans [`localStorage`][9], ce qui permet les comportements suivants :
+
+- Les contextes sont préservés après une actualisation complète
+- Les contextes sont synchronisés entre les onglets ouverts depuis la même origine
 
 Toutefois, cette fonctionnalité possède certaines **limites** :
 
-- Il n'est pas recommandé de définir des informations personnelles avec ces contextes, car les données stockées dans `localStorage` sont conservées après la fin de la session utilisateur.
-- Cette fonctionnalité n'est pas compatible avec les options `trackSessionAcrossSubdomains`, car les données de `localStorage` sont uniquement partagées avec les ressources ayant la même origine (login.site.com ≠ app.site.com).
+- Il n'est pas conseillé de définir des informations personnelles identifiables (ou Personable Identifiable Information - PII) dans ces contextes, car les données stockées dans `localStorage` sont conservées après la fin de la session de l'utilisateur.
+- Cette fonctionnalité n'est pas compatible avec les options de `trackSessionAcrossSubdomains` car les données de `localStorage` ne sont partagées qu'avec la même origine (login.site.com ≠ app.site.com).
 - `localStorage` est limité à 5 MiB par origine. Ainsi, les données spécifiques à une application, les contextes Datadog et les autres données tierces stockées en `localStorage` doivent respecter cette limite pour éviter tout problème.
 
 #### Contexte du logger
@@ -1007,9 +1083,8 @@ Une fois votre logger créé, vous pouvez :
 - Définir l'intégralité du contexte pour votre logger avec l'API `setContext (context: object)`.
 - Ajouter un contexte à votre logger avec l'API `setContextProperty (key: string, value: any)` :
 
-##### NPM
-
-Pour NPM, utilisez :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -1019,9 +1094,8 @@ datadogLogs.setContext("{'env': 'staging'}")
 datadogLogs.setContextProperty('referrer', document.referrer)
 ```
 
-##### CDN asynchrone
-
-Pour CDN asynchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -1035,9 +1109,8 @@ window.DD_LOGS.onReady(function () {
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-##### CDN synchrone
-
-Pour CDN synchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.setContext("{'env': 'staging'}")
@@ -1047,47 +1120,50 @@ window.DD_LOGS && window.DD_LOGS.setContextProperty('referrer', document.referre
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Filtrer par statut
 
 Une fois le SDK Browser Datadog lancé, définissez le niveau de log minimum pour votre logger avec l'API :
 
-```
+```typescript
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
 ```
 
 Seuls les logs avec un statut égal ou supérieur au niveau indiqué sont envoyés.
 
-#### NPM
-
-Pour NPM, utilisez :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.logger.setLevel('<NIVEAU>')
+datadogLogs.logger.setLevel('<LEVEL>')
 ```
 
-#### CDN asynchrone
-
-Pour CDN asynchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function () {
-  window.DD_LOGS.logger.setLevel('<NIVEAU>')
+  window.DD_LOGS.logger.setLevel('<LEVEL>')
 })
 ```
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-#### CDN synchrone
-
-Pour CDN synchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
-window.DD_LOGS && window.DD_LOGS.logger.setLevel('<NIVEAU>')
+window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Modifier la destination
 
@@ -1097,44 +1173,47 @@ Par défaut, les loggers créés par le SDK Browser Datadog envoient les logs à
 - Envoyer les logs uniquement à la `console`
 - Ne pas envoyer les logs (`silent`)
 
-```
-setHandler (handler?: 'http' | 'console' | 'silent' | Array<gestionnaire>)
+```typescript
+setHandler (handler?: 'http' | 'console' | 'silent' | Array<handler>)
 ```
 
-#### NPM
-
-Pour NPM, utilisez :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.logger.setHandler('<GESTIONNAIRE>')
-datadogLogs.logger.setHandler(['<GESTIONNAIRE_1>', '<GESTIONNAIRE_2>'])
+datadogLogs.logger.setHandler('<HANDLER>')
+datadogLogs.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
-#### CDN asynchrone
+{{% /tab %}}
 
-Pour CDN asynchrone, utilisez :
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function () {
-  window.DD_LOGS.logger.setHandler('<GESTIONNAIRE>')
-  window.DD_LOGS.logger.setHandler(['<GESTIONNAIRE_1>', '<GESTIONNAIRE_2>'])
+  window.DD_LOGS.logger.setHandler('<HANDLER>')
+  window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 })
 ```
 
 **Remarque** : les premiers appels d'API doivent être wrappés dans le callback `window.DD_LOGS.onReady()`. De cette façon, le code est uniquement exécuté une fois le SDK entièrement chargé.
 
-#### CDN synchrone
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 Pour CDN synchrone, utilisez :
 
 ```javascript
-window.DD_LOGS && window.DD_LOGS.logger.setHandler('<GESTIONNAIRE>')
-window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<GESTIONNAIRE_1>', '<GESTIONNAIRE_2>'])
+window.DD_LOGS && window.DD_LOGS.logger.setHandler('<HANDLER>')
+window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 **Remarque** : le check `window.DD_LOGS` permet d'éviter tout problème si le chargement du SDK échoue.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Consentement au suivi de lʼutilisateur
 
@@ -1147,16 +1226,15 @@ Le paramètre dʼinitialisation `trackingConsent` peut prendre l'une des valeurs
 
 Pour modifier la valeur de consentement au suivi après l'initialisation du SDK de collecte de logs, utilisez l'appel d'API `setTrackingConsent()`. Le SDK de collecte de logs modifie son comportement en tenant compte de la nouvelle valeur.
 
-* lorsque la valeur passe de `"granted"` à `"not-granted"`, la session de logs sʼarrête et les données ne sont plus envoyées à Datadog.
-* lorsque la valeur passe de `"not-granted"` à `"granted"`, une nouvelle session de logs est créée si aucune autre session préalable nʼest active. La collecte de données reprend alors.
+- lorsque la valeur passe de `"granted"` à `"not-granted"`, la session de logs sʼarrête et les données ne sont plus envoyées à Datadog.
+- lorsque la valeur passe de `"not-granted"` à `"granted"`, une nouvelle session de logs est créée si aucune autre session préalable nʼest active. La collecte de données reprend alors.
 
 Cet état n'est pas synchronisé entre les onglets ni conservé entre les navigations. Il est de votre responsabilité de fournir la décision de l'utilisateur lors de l'initialisation du SDK de collecte de logs ou en utilisant `setTrackingConsent()`.
 
 Lorsque `setTrackingConsent()` est utilisé avant `init()`, la valeur fournie est prioritaire sur le paramètre d'initialisation.
 
-#### NPM
-
-Pour NPM, utilisez :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -1171,9 +1249,8 @@ acceptCookieBannerButton.addEventListener('click', function() {
 });
 ```
 
-#### CDN asynchrone
-
-Pour CDN asynchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function() {
@@ -1190,9 +1267,8 @@ acceptCookieBannerButton.addEventListener('click', () => {
 });
 ```
 
-#### CDN synchrone
-
-Pour CDN synchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.init({
@@ -1205,19 +1281,21 @@ acceptCookieBannerButton.addEventListener('click', () => {
 });
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Accéder au contexte interne
 
 Une fois le SDK Datadog de collecte de logs à partir des navigateurs initialisé, vous pouvez accéder au contexte interne du SDK et ainsi récupérer le `session_id`.
 
-```
+```typescript
 getInternalContext (startTime?: 'number' | undefined)
 ```
 
 Vous pouvez utiliser le paramètre `startTime` pour obtenir le contexte d'un moment précis. Si ce paramètre n'est pas fourni, le contexte actuel est renvoyé.
 
-#### NPM
-
-Pour NPM, utilisez :
+{{< tabs >}}
+{{% tab "NPM" %}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -1225,9 +1303,9 @@ import { datadogLogs } from '@datadog/browser-logs'
 datadogLogs.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 ```
 
-#### CDN asynchrone
+{{% /tab %}}
 
-Pour CDN asynchrone, utilisez :
+{{% tab "CDN asynchrone" %}}
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -1235,28 +1313,24 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-#### CDN synchrone
-
-Pour CDN synchrone, utilisez :
+{{% /tab %}}
+{{% tab "CDN synchrone" %}}
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 <!-- Remarque : toutes les URL doivent être absolues -->
 
-[1]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#client-tokens
-[3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
-[5]: https://docs.datadoghq.com/fr/real_user_monitoring/guide/enrich-and-control-rum-data/
-[6]: https://docs.datadoghq.com/fr/real_user_monitoring/faq/proxy_rum_data/
-[7]: https://docs.datadoghq.com/fr/getting_started/tagging/#define-tags
-[8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
-[9]: https://docs.datadoghq.com/fr/getting_started/site/
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[11]: https://docs.datadoghq.com/fr/logs/log_collection/javascript/#contexts-life-cycle
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[14]: /fr/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[15]: #user-tracking-consent
+[1]: https://app.datadoghq.com/organization-settings/client-tokens
+[4]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-logs.LogsInitConfiguration.html
+[5]: /fr/logs/log_collection/javascript/#user-tracking-consent
+[6]: /fr/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[7]: /fr/logs/explorer/
+[8]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
+[9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+[11]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[12]: /fr/real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event

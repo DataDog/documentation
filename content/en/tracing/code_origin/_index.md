@@ -54,6 +54,8 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 |---|---|
 | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers |
 
+**Limitation:** On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+
 {{% /tab %}}
 
 {{% tab "Python" %}}
@@ -153,7 +155,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/services/service_page/
 [3]: /tracing/services/resource_page/
-[4]: /developers/ide_plugins/
+[4]: /ide_plugins/
 [5]: /dynamic_instrumentation/
 [6]: /tracing/trace_collection/
 [7]: /integrations/guide/source-code-integration/

@@ -93,12 +93,6 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
-
-{{< /site-region >}}
-
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
@@ -111,7 +105,7 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant.{{< /site-region >}} |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions 1.32.0 and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. **Note**: Windows Private Locations do not support FIPS-compliant encryption. If FIPS compliance is required, use the Linux containerized deployment.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 

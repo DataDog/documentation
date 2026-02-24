@@ -27,6 +27,11 @@ aliases:
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
 {{< /appsec-integrations >}}
 
+### AWS
+{{< appsec-integrations >}}
+{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
+{{< /appsec-integrations >}}
+
 ### Google Cloud Platform
 {{< appsec-integrations >}}
 {{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/php" >}}

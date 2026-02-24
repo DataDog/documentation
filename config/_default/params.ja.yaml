@@ -1,7 +1,9 @@
 announcement_banner:
-  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability Platforms
-  mobile_message: Leader in the Gartner® Magic Quadrant™
-  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
+  desktop_message: "<span>Join Datadog at DASH—coming to NYC June 9-10. Register now for Super Early Bird savings of $700 until March 31</span>"
+  mobile_message: "<span>Join us at DASH—June 9-10. Save $700 until March 31</span>"
+  background_color: "#000000"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。<br>翻訳に関してご質問やご意見ございましたら、<a href="https://docs.datadoghq.com/ja/help/">お気軽にご連絡ください</a>。
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
 meta_title: Datadogを始めてみましょう

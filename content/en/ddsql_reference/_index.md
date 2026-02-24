@@ -256,7 +256,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `DATE_BIN(interval stride, timestamp source, timestamp origin)` | timestamp                             | Aligns a timestamp (source) to buckets of even length (stride). Returns the start of the bucket containing the source, calculated as the largest timestamp that is less than or equal to source and is a multiple of stride lengths from origin. |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.                                                                                                                        |
 | `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
-| `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current query.                                                                                                                                  |
+| `NOW()`                                          | timestamp                             | Returns the current UTC timestamp at the start of the current query.                                                                                                                              |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                                                                                                                                      |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found.                                                                                         |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter.                                                                                                                       |
@@ -443,6 +443,7 @@ Supported extraction units:
 | `day`             | `timestamp` / `interval` | day of the month                             |
 | `dow`             | `timestamp`              | day of the week `1` (Monday) to `7` (Sunday) |
 | `doy`             | `timestamp`              | day of the year (`1` - `366`)                |
+| `epoch`           | `timestamp` / `interval` | seconds since 1970-01-01 00:00:00 UTC (for timestamps), or total number of seconds (for intervals) |
 | `hour`            | `timestamp` / `interval` | hour of the day (`0` - `23`)                 |
 | `minute`          | `timestamp` / `interval` | minute of the hour (`0` - `59`)              |
 | `second`          | `timestamp` / `interval` | second of the minute (`0` - `59`)            |
@@ -458,6 +459,27 @@ SELECT
   EXTRACT(year FROM purchase_date) AS purchase_year
 FROM
   sales
+{{< /code-block >}}
+
+{{< code-block lang="sql" >}}
+-- Get the Unix epoch of a timestamp
+SELECT EXTRACT(epoch FROM TIMESTAMP '2021-01-01 00:00:00+00')
+-- Returns: 1609459200
+{{< /code-block >}}
+
+{{< code-block lang="sql" >}}
+-- Get the total seconds in an interval
+SELECT EXTRACT(epoch FROM INTERVAL '1 day 2 hours')
+-- Returns: 93600
+{{< /code-block >}}
+
+{{< code-block lang="sql" >}}
+-- Calculate how many seconds ago each event occurred
+SELECT
+  event_time,
+  EXTRACT(epoch FROM now()) - EXTRACT(epoch FROM event_time) AS seconds_ago
+FROM
+  events
 {{< /code-block >}}
 
 ### `TO_TIMESTAMP`
@@ -790,12 +812,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
-
-{{< callout url="https://www.datadoghq.com/product-preview/logs-metrics-support-in-ddsql-editor/" >}}
-Querying Logs and Metrics through DDSQL is in Preview. Use this form to request access.
-{{< /callout >}}
-
-Table functions are used to query Logs and Metrics
+Table functions are used to query logs, metrics, and other unstructured data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>

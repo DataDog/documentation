@@ -85,6 +85,7 @@ service:
 | `hostname` | Custom hostname for the Collector | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint | `localhost:9875` |
 | `http.path` | HTTP server path for metadata | `/metadata` |
+| `deployment_type` | Deployment type for the Collector. One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
 | `proxy_url` | HTTP proxy URL for outbound requests | - |
 | `timeout` | Timeout for HTTP requests | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification | `false` |

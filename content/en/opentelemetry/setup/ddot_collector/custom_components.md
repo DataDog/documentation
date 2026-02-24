@@ -148,10 +148,6 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
            endpoint: "0.0.0.0:4317"
 
    processors:
-     batch:
-       send_batch_max_size: 1000
-       send_batch_size: 100
-       timeout: 10s
      # Rename system.cpu.usage to system.cpu.usage_time
      metricstransform:
        transforms:
@@ -164,6 +160,11 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
        api:
          site: ${env:DD_SITE}
          key: ${env:DD_API_KEY}
+       sending_queue:
+         batch:
+           flush_timeout: 10s
+           min_size:  100
+           max_size: 1000
 
    connectors:
      datadog/connector:
@@ -173,15 +174,15 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
      pipelines:
        traces:
          receivers: [otlp]
-         processors: [infraattributes, batch]
+         processors: [infraattributes]
          exporters: [datadog, datadog/connector]
        metrics:
          receivers: [otlp, datadog/connector, prometheus]
-         processors: [metricstransform, infraattributes, batch]
+         processors: [metricstransform, infraattributes]
          exporters: [datadog]
        logs:
          receivers: [otlp]
-         processors: [infraattributes, batch]
+         processors: [infraattributes]
          exporters: [datadog]
    ```
 2. Run the DDOT Collector (Agent) using the following Docker command.

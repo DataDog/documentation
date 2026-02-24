@@ -115,7 +115,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Container model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
+   If your Azure Function app uses the [legacy in-process model][3], add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
@@ -175,8 +175,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    - [Configuring the .NET Core Tracing Library][1]
    - [Configuring the .NET Framework Tracing Library][2]
 
-[1]:/tracing/trace_collection/library_config/dotnet-core
-[2]:/tracing/trace_collection/library_config/dotnet-framework
+[1]: /tracing/trace_collection/library_config/dotnet-core
+[2]: /tracing/trace_collection/library_config/dotnet-framework
+[3]: https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

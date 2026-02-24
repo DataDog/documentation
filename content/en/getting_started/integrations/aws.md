@@ -225,7 +225,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [3]: /api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
-[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws_account
 [6]: /integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
 [8]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -242,7 +242,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [19]: /integrations/system/
 [20]: /integrations/ntp/
 [21]: /integrations/
-[22]: /developers/dogstatsd/?tab=hostagent
+[22]: /extend/dogstatsd/?tab=hostagent
 [23]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [24]: https://aws.amazon.com/fargate/
 [25]: /agent/amazon_ecs/?tab=awscli

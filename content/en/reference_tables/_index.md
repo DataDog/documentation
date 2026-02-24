@@ -6,6 +6,9 @@ aliases:
   - /logs/guide/reference-tables/
   - /integrations/guide/reference-tables
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Use the lookup processor to enrich logs from a Reference Table"
@@ -21,9 +24,9 @@ further_reading:
 - link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
   tag: "Documentation"
   text: "Use Reference Tables to add multiple tags to cost data"
-- link: "/metrics/composite_metrics_queries/"
+- link: "/metrics/reference_table_joins_with_metrics/"
   tag: "Documentation"
-  text: "Learn about composite metrics queries"
+  text: "Learn about Reference Table joins with metrics"
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'

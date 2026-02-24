@@ -4,19 +4,19 @@ aliases:
 further_reading:
 - link: /logs/guide/logs-rbac-permissions/
   tag: 설명서
-  text: 로그 BRAC 권한에 대해 자세히 보기
+  text: 로그 RBAC 권한에 대해 자세히 보기
 - link: /api/latest/logs-restriction-queries/
   tag: API
   text: 로그 제한 쿼리
 - link: /account_management/rbac/permissions/#log-management
   tag: 설명서
   text: Datadog 역할 권한 허용
-title: 로그의 BRAC 설정하는 방법
+title: 로그의 RBAC 설정하는 방법
 ---
 
 ## 개요
 
-대부분의 조직에서 규제 준수나 개인 정보 보호를 위해 로그에 [스크러빙][1]을 하거나 액세스를 제어해야 하는 민감한 정보를 포함하는 경우가 많습니다. BRAC(역할 기반 액세스 제어)를 사용하면 특정 로그와 기능에 권한이 있는 인원만 액세스할 수 있도록 하여 사용자 액세스 권한을 효율적으로 관리할 수 있습니다. 이 가이드에서는 Datadog에서 BRAC을 설정하는 상세한 방법을 설명합니다. 특히 커스텀 역할을 생성하고 권한을 적절히 할당하는 방법을 중점적으로 살펴봅니다.
+대부분의 조직에서 규제 준수나 개인 정보 보호를 위해 로그에 [스크러빙][1]을 하거나 액세스를 제어해야 하는 민감한 정보를 포함하는 경우가 많습니다. RBAC(역할 기반 액세스 제어)를 사용하면 특정 로그와 기능에 권한이 있는 인원만 액세스할 수 있도록 하여 사용자 액세스 권한을 효율적으로 관리할 수 있습니다. 이 가이드에서는 Datadog에서 RBAC을 설정하는 상세한 방법을 설명합니다. 특히 커스텀 역할을 생성하고 권한을 적절히 할당하는 방법을 중점적으로 살펴봅니다.
 
 이 가이드에서는 다음 주제를 다룹니다.
 
@@ -65,7 +65,7 @@ Datadog API를 사용하고자 하는 경우, Admin 사용자에게 API 키와 �
 
 ### 권한 ID 얻기
 
-**참고**: 이 섹션은 BRAC 설정을 할 때 Datadog API를 사용할 경우에만 필요합니다.
+**참고**: 이 섹션은 RBAC 설정을 할 때 Datadog API를 사용할 경우에만 필요합니다.
 
 Datadog API를 사용하고자 하는 경우, [권한 API][11]를 사용해 모든 기존 권한을 받으세요. 권한에 맞는 역할을 부여하는 작업에는 권한 ID가 필요합니다. 
 **참고**: 권한 ID는 선택한 Datadog 사이트 ({{< region-param key="dd_site_name" >}})에 따라 변합니다.
