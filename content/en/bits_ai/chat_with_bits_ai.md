@@ -31,6 +31,8 @@ When relevant to your query, Bits Assistant surfaces faulty deployments, Watchdo
 
 ### Web Application
 
+The **Bits Assistant Access** permission is required to use this feature.
+
 To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, click **Bits AI** in the left-side navigation panel, or use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
 Some responses from Bits Assistant include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
