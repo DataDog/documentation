@@ -71,11 +71,7 @@ If you enable disk buffering for destinations, you must enable Kubernetes [persi
 
 ### Buffer metrics
 
-Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
-
-**Tags for metrics**
-- Use the `component_id` tag to filter or group by individual components.
-- Use the `component_type` tag to filter or group by sources, processors, or destinations. **Note**: For processors, use `component_type:transform`.
+{{% observability_pipelines/metrics/buffer/intro %}}
 
 #### Source buffer metrics
 
