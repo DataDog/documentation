@@ -95,18 +95,19 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI, Azure OpenAI, Vertex AI, or Anthropic models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, Anthropic, or Amazon Bedrock models, configure [Structured Output](#structured-output).
 
-For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
+For Anthropic or Amazon Bedrock models, you can alternatively configure [Keyword Search Output](#keyword-search-output).
 
 For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
    - **Score**: Numeric ratings (for example, a 1–5 scale for helpfulness)
    - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
+   - **JSON**: JSON allows free form schemas
 
 2. Optionally, select **Enable Reasoning**. This configures the LLM judge to provide a short justification for its decision (for example, why a score of 8 was given). Reasoning helps you understand how and why evaluations are made, and is particularly useful for auditing subjective metrics like tone, empathy, or helpfulness. Adding reasoning can also [make the LLM judge more accurate](https://arxiv.org/abs/2504.00050).
 
@@ -127,6 +128,7 @@ For the **Categorical** output type:
 - Add or remove categories by editing the JSON schema.
 - Edit category names.
 - Edit the `description` field of categories to further explain what they mean in the context of your evaluation.
+
 
 An example schema for a categorical evaluation:
 
@@ -176,6 +178,52 @@ An example schema for a categorical evaluation:
 }
 ```
 {{% /tab %}}
+{{% tab "JSON" %}}
+For the **JSON** output type, define a free form JSON schema to capture complex, structured evaluation outputs.
+
+An example schema for a JSON evaluation:
+
+```
+{
+    "name": "json_eval",
+    "schema": {
+        "type": "object",
+        "required": [
+            "result",
+            "reasoning"
+        ],
+        "properties": {
+            "result": {
+                "type": "object",
+                "description": "The structured evaluation result",
+                "properties": {
+                    "is_compliant": {
+                        "type": "boolean",
+                        "description": "Whether the response meets compliance requirements"
+                    },
+                    "confidence_score": {
+                        "type": "number",
+                        "description": "Confidence level of the evaluation from 0 to 1"
+                    },
+                    "issue_count": {
+                        "type": "integer",
+                        "description": "Number of issues identified in the response"
+                    }
+                },
+                "required": ["is_compliant", "confidence_score", "issue_count"],
+                "additionalProperties": false
+            },
+            "reasoning": {
+                "type": "string",
+                "description": "Describe the reasoning behind your evaluation"
+            }
+        },
+        "additionalProperties": false
+    },
+    "strict": true
+}
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -193,6 +241,9 @@ Define numerical thresholds to determine passing performance.
 {{% tab "Categorical" %}}
 Select the categories that should map to a passing state. For example, if you have the categories `Excellent`, `Good`, and `Poor`, where only `Poor` should correspond to a failing state, select `Excellent` and `Good`.
 {{% /tab %}}
+{{% tab "JSON" %}}
+Assessment Criteria is not currently available for JSON evaluations.
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -200,7 +251,7 @@ Select the categories that should map to a passing state. For example, if you ha
 
 {{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the **Boolean** output type.
-   <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
+   <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
 
 2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
 

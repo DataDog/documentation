@@ -8,6 +8,9 @@ further_reading:
   - link: "/code_coverage/configuration"
     tag: "Documentation"
     text: "Configure Code Coverage"
+  - link: "/code_coverage/flags"
+    tag: "Documentation"
+    text: "Organize coverage data with flags"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
@@ -15,10 +18,6 @@ further_reading:
     tag: "Documentation"
     text: "Learn how Code Coverage supports large monorepos"
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
 
 Setting up Code Coverage involves the following steps:
 
@@ -91,9 +90,12 @@ Navigate to [Roles settings][4], click `Edit` on the role you need, add the `Cod
 
 ## PR Gates
 
-If you wish to gate on PR coverage, configure PR Gates rules in Datadog.
+If you wish to gate on PR coverage, you can configure PR Gates rules in one of two ways:
 
-Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
+- **Datadog UI**: Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
+- **YAML configuration file**: Define gates in your [`code-coverage.datadog.yml`][14] file. This allows you to manage gates as code alongside your repository.
+
+Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][14] for YAML gate syntax and examples.
 
 ## Upload code coverage reports
 
@@ -377,6 +379,15 @@ test:
 </code>
 </pre>
 {{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+<code class="language-yaml" data-lang="yaml">
+- script: datadog-ci coverage upload --format=clover coverage/clover.xml
+  displayName: 'Upload coverage to Datadog'
+  env:
+    DD_API_KEY: $(DD_API_KEY)
+    DD_SITE: 'datadoghq.com'
+</code>
+{{% /tab %}}
 {{< /tabs >}}
 
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
@@ -460,7 +471,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [2]: /account_management/rbac/permissions/#custom-roles
 [3]: /account_management/rbac/permissions/#managed-roles
 [4]: https://app.datadoghq.com/organization-settings/roles
-[5]: https://app.datadoghq.com/ci/pr-gates/rule/create
+[5]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [6]: /code_coverage/data_collected/#code-coverage-report-upload
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
@@ -469,3 +480,4 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider
 [13]: https://hub.docker.com/r/datadog/ci
+[14]: /code_coverage/configuration#pr-gates

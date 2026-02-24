@@ -63,7 +63,7 @@ const config = new DatadogProviderConfiguration(
 
 Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-For React Native applications, the matching of stack traces and source maps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
+For React Native applications, the matching of stack traces and source maps relies on the `debug_id`. If not available, it relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
@@ -512,5 +512,5 @@ if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
-[17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
+[17]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/react-native#inject-debug-id
 [18]: /error_tracking/frontend/mobile/expo/

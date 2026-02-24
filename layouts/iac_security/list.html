@@ -278,7 +278,7 @@
                             {{ $pad.SetInMap "filters" "Providers" (union (index ($pad.Get "filters") "Providers") (slice .Params.meta.cloud_provider)) }}
                             {{ $pad.SetInMap "filters" "Platforms" (union (index ($pad.Get "filters") "Platforms") (slice .Params.meta.platform)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
-                            {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW" "INFO") }}
+                            {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW") }}
                             {{/*  
                                 build object of arrays with unique cloud provider for each ruleset header (.set-header )
                                 cloudProvidersByRuleset: {

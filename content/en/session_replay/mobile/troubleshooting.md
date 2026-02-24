@@ -2,6 +2,8 @@
 title: Troubleshooting Mobile Session Replay
 description: How to troubleshoot Mobile Session Replay.
 aliases:
+  - /real_user_monitoring/session_replay/mobile/troubleshooting
+  - /product_analytics/session_replay/mobile/troubleshooting
 further_reading:
     - link: '/session_replay/mobile'
       tag: Documentation

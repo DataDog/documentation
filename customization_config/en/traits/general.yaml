@@ -4,6 +4,11 @@ traits:
   type: text
   internal_notes: Do not use for frameworks like Next or React Native. Instead, use `platform`.
 
+- id: product
+  label: Product
+  type: text
+  internal_notes: The Datadog product that the customer is using. For example, Error Tracking can be used with APM, RUM, and Logs, so an Error Tracking page might use a Product filter with those options.
+
 - id: protocol
   label: Protocol
   type: text

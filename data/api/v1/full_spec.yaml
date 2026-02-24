@@ -12007,6 +12007,60 @@ components:
           example: UTC
           type: string
       type: object
+    SLOCountDefinition:
+      description: 'A count-based (metric) SLI specification, composed of three parts:
+        the good events formula, the total events formula,
+
+        and the underlying queries.'
+      example:
+        good_events_formula: query1 - query2
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        - data_source: metrics
+          name: query2
+          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+        total_events_formula: query1
+      properties:
+        good_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+        queries:
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          minItems: 1
+          type: array
+        total_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+      required:
+      - good_events_formula
+      - total_events_formula
+      - queries
+      type: object
+    SLOCountSpec:
+      additionalProperties: false
+      description: A metric SLI specification.
+      example:
+        count:
+          good_events_formula: query1 - query2
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          - data_source: metrics
+            name: query2
+            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+          total_events_formula: query1
+      properties:
+        count:
+          $ref: '#/components/schemas/SLOCountDefinition'
+      required:
+      - count
+      type: object
     SLOCreator:
       description: The creator of the SLO
       nullable: true
@@ -12854,8 +12908,12 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+          description: The metric query used to define a count-based SLO as the ratio
+            of good events to total events.
         sli_specification:
           $ref: '#/components/schemas/SLOSliSpec'
+          description: A generic SLI specification. This is currently used for time-slice
+            and count-based (metric) SLOs only.
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -12911,10 +12969,11 @@ components:
           type: number
       type: object
     SLOSliSpec:
-      description: A generic SLI specification. This is currently used for time-slice
-        SLOs only.
+      description: A generic SLI specification. This is used for time-slice and count-based
+        (metric) SLOs only.
       oneOf:
       - $ref: '#/components/schemas/SLOTimeSliceSpec'
+      - $ref: '#/components/schemas/SLOCountSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -14097,7 +14156,8 @@ components:
       - type
       type: object
     ServiceLevelObjectiveQuery:
-      description: 'A metric-based SLO. **Required if type is `metric`**. Note that
+      description: 'A count-based (metric) SLO query. This field is superseded by
+        `sli_specification` but is retained for backwards compatibility. Note that
         Datadog only allows the sum by aggregator
 
         to be used because this will sum up all request counts instead of averaging
@@ -15896,6 +15956,8 @@ components:
       - grpcMetadata
       - grpcProto
       - connection
+      - multiNetworkHop
+      - jitter
       example: statusCode
       type: string
       x-enum-varnames:
@@ -15918,6 +15980,8 @@ components:
       - GRPC_METADATA
       - GRPC_PROTO
       - CONNECTION
+      - MULTI_NETWORK_HOP
+      - JITTER
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -18301,16 +18365,18 @@ components:
       - WEBSOCKET
       - GRPC
     SyntheticsTestDetailsType:
-      description: Type of the Synthetic test, either `api` or `browser`.
+      description: Type of the Synthetic test.
       enum:
       - api
       - browser
       - mobile
+      - network
       type: string
       x-enum-varnames:
       - API
       - BROWSER
       - MOBILE
+      - NETWORK
     SyntheticsTestDetailsWithoutSteps:
       description: Object containing details about your Synthetic test, without test
         steps.
@@ -26113,8 +26179,8 @@ components:
       description: Used for fixed span times, such as 'March 1 to March 7'.
       properties:
         from:
-          description: Start time in seconds since epoch.
-          example: 1712080128
+          description: Start time in milliseconds since epoch.
+          example: 1712080128000
           format: int64
           minimum: 0
           type: integer
@@ -26122,8 +26188,8 @@ components:
           description: Whether to hide incomplete cost data in the widget.
           type: boolean
         to:
-          description: End time in seconds since epoch.
-          example: 1712083128
+          description: End time in milliseconds since epoch.
+          example: 1712083128000
           format: int64
           minimum: 0
           type: integer
@@ -35493,7 +35559,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 16
+      x-menu-order: 12
       x-permission:
         operator: OR
         permissions:
@@ -35521,7 +35587,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 24
       x-permission:
         operator: OR
         permissions:
@@ -35644,7 +35710,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 24
+      x-menu-order: 25
       x-permission:
         operator: OR
         permissions:
@@ -35692,7 +35758,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 25
+      x-menu-order: 26
       x-permission:
         operator: OR
         permissions:
@@ -35768,7 +35834,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
-      x-menu-order: 11
+      x-menu-order: 3
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -35828,7 +35894,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 31
+      x-menu-order: 35
       x-permission:
         operator: OR
         permissions:
@@ -36050,7 +36116,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -36114,7 +36180,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -36217,7 +36283,7 @@ paths:
       summary: Get a browser test
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 6
       x-permission:
         operator: OR
         permissions:
@@ -36281,7 +36347,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -36354,7 +36420,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 10
       x-permission:
         operator: OR
         permissions:
@@ -36409,7 +36475,7 @@ paths:
       summary: Get a browser test result
       tags:
       - Synthetics
-      x-menu-order: 13
+      x-menu-order: 11
       x-permission:
         operator: OR
         permissions:
@@ -36531,7 +36597,7 @@ paths:
     get:
       description: 'Get the detailed configuration associated with
 
-        a Synthetic Mobile test.'
+        a Synthetic mobile test.'
       operationId: GetMobileTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -36568,16 +36634,16 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Get a Mobile test
+      summary: Get a mobile test
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 7
       x-permission:
         operator: OR
         permissions:
         - synthetics_read
     put:
-      description: Edit the configuration of a Synthetic Mobile test.
+      description: Edit the configuration of a Synthetic mobile test.
       operationId: UpdateMobileTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -36631,11 +36697,11 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: Edit a Mobile test
+      summary: Edit a mobile test
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -36716,7 +36782,7 @@ paths:
       summary: Search Synthetic tests
       tags:
       - Synthetics
-      x-menu-order: 34
+      x-menu-order: 5
       x-permission:
         operator: OR
         permissions:
@@ -36756,7 +36822,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 14
       x-permission:
         operator: OR
         permissions:
@@ -36796,7 +36862,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 7
+      x-menu-order: 13
       x-permission:
         operator: OR
         permissions:
@@ -36844,7 +36910,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 30
+      x-menu-order: 15
       x-permission:
         operator: OR
         permissions:
@@ -36891,7 +36957,7 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 28
+      x-menu-order: 4
       x-permission:
         operator: OR
         permissions:
@@ -36955,7 +37021,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -37021,7 +37087,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 30
+      x-menu-order: 36
       x-permission:
         operator: OR
         permissions:
@@ -37092,7 +37158,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 8
       x-permission:
         operator: OR
         permissions:
@@ -37145,7 +37211,7 @@ paths:
       summary: Get an API test result
       tags:
       - Synthetics
-      x-menu-order: 12
+      x-menu-order: 9
       x-permission:
         operator: OR
         permissions:
@@ -37206,7 +37272,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 16
       x-permission:
         operator: OR
         permissions:
@@ -37240,7 +37306,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 18
+      x-menu-order: 19
       x-permission:
         operator: OR
         permissions:
@@ -37292,7 +37358,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 18
       x-permission:
         operator: OR
         permissions:
@@ -40740,18 +40806,21 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: 'Datadog Synthetic Monitoring uses simulated user requests and browser
-    rendering to help you ensure uptime,
+- description: 'Synthetic tests use simulated requests and actions so you can monitor
+    the availability and performance of systems and applications. Datadog supports
+    the following types of synthetic tests:
 
-    identify regional issues, and track your application performance. Synthetic tests
-    come in
+    - [API tests](https://docs.datadoghq.com/synthetics/api_tests/)
 
-    two different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)
+    - [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)
 
-    and [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You
-    can use Datadog''s API to
+    - [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)
 
-    manage both test types programmatically.
+    - [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)
+
+
+    You can use the Datadog API to create, manage, and organize tests and test suites
+    programmatically.
 
 
     For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'

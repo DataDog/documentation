@@ -92,8 +92,6 @@ aliases:
   - /tracing/trace_collection/custom_instrumentation/elixir
   # Swift alias
   - /tracing/trace_collection/custom_instrumentation/swift
-  # Go migration alias
-  - /tracing/trace_collection/custom_instrumentation/go/migration
   # Index aliases for old URL structures
   - /tracing/trace_collection/custom_instrumentation/dd_libraries/
   - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/

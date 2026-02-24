@@ -168,6 +168,7 @@ content/en/containers/datadog_operator/data_collected.md
 content/en/containers/datadog_operator/secret_management.md
 content/en/containers/guide/v2alpha1_migration.md
 content/en/containers/datadog_operator/kubectl_plugin.md
+content/en/containers/datadog_operator/migration.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
@@ -269,6 +270,7 @@ Makefile.config
 data/permissions.json
 data/agent_config.json
 data/workflow_bundles.json
+data/python_action_libs.json
 
 agent_config_types_list.txt
 

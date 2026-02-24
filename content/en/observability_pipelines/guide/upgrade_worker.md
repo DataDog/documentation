@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements and fixes for Worker versions 2.7 to 2.11.
+description: Learn about new features, enhancements and fixes for Worker versions 2.7 to 2.13.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,102 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.13.1
+
+To upgrade to Worker version 2.13.1:
+
+- Docker: Run the `docker pull` command for the [2.13.1 image][22].
+- Kubernetes: See the [Helm chart][2].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.13.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.13.1`.
+
+Worker version 2.13.1 gives you access to the following:
+
+#### Fixes
+
+- All processors have been updated to gracefully handle incorrect filter query syntax.
+
+---
+
+## Worker version 2.13.0
+
+To upgrade to Worker version 2.13.0:
+
+- Docker: Run the `docker pull` command for the [2.13.0 image][23].
+- Kubernetes: See the [Helm chart][2].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.13.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.13.0`.
+
+Worker version 2.13.0 gives you access to the following:
+
+#### New features
+
+- [Custom Processor][24] for metrics: Use VRL to transform metric events.
+- [Secrets Management][31]: Observability Pipelines can retrieve secrets using Datadog Secrets Management.
+- [Live capture][25] is available for metrics pipelines.
+- The [Enrichment Tables][28] processor can use datasets in Reference Tables.
+
+#### Enhancements
+
+- [Disk buffers][26] have been updated to drop logs when the buffer is full.
+- The Dedupe processor has been updated with a configurable cache size.
+- The Datadog Agent source has been updated with configurable request timeouts.
+- Source buffers have been updated to record the utilization level of the buffer with these metrics:
+    - `source_buffer_max_byte_size`
+    - `source_buffer_max_event_size`
+    - `source_buffer_utilization`
+    - `source_buffer_utilization_level`
+- Processor buffers have been updated to record the utilization level of the buffers with these metrics:
+    - `transform_buffer_max_byte_size`
+    - `transform_buffer_max_event_size`
+    - `transform_buffer_utilization`
+    - `transform_buffer_utilization_level`
+- The TLS implementation has been updated to store credentials in FIPS-compliant PEM format.
+
+#### Fixes
+
+- Live Capture has been updated and bugs have been fixed.
+- The Search Syntax bug with handling hyphenated segments has been fixed.
+- The syslog source in UDP mode emits the standard `component_received` metrics, like how it does with TCP mode:
+    - `component_received_events_total`
+    - `component_received_event_bytes_total`
+    - `component_received_bytes_total`
+
+---
+
+## Worker version 2.12.0
+
+To upgrade to Worker version 2.12.0:
+
+- Docker: Run the `docker pull` command for the [2.12.0 image][27].
+- Kubernetes: See the [Helm chart][2].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.12.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.12.0`.
+
+Worker version 2.12.0 gives you access to the following:
+
+#### New features
+
+- [HTTP destination][29] for metrics pipelines: Routes metrics to an HTTP client endpoint.
+- [MySQL Source][30]: Sends logs from a MySQL database to Observability Pipelines.
+
+#### Enhancements
+
+- The HTTP Client source and destination have been updated so you can set a custom authorization strategy.
+- The metrics filter processor was updated to filter metrics on `kind` and `value`.
+- Processor groups that route and process only targeted events have been updated to reduce processing overhead.
+- The Datadog Agent source has been updated to support timeouts, incrementing the `component_timed_out_events_total` and `component_timed_out_requests_total` metrics.
+
+#### Fixes
+
+- The Amazon S3 destination has been updated to ensure the `message` field is always a string, JSON-encoding it if necessary.
+- A Worker bug has been fixed to ensure Worker logs are reported correctly.
+- The `hostname` is renamed to `host` when sending logs to Datadog Archives.
+- For metrics sources, Workers have been updated to use their own copy of the Datadog key for authentication, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
+- The Worker uses proxy settings configured with environment variables (for example, the `DD_PROXY_HTTPS` environment variable) or in the bootstrap file when it publishes events to Live Capture.
+
+---
 
 ## Worker Version 2.11.0
 
@@ -62,6 +158,11 @@ Worker version 2.10.0 gives you access to the following:
     - The `parse_aws_alb_log` function has been updated with an optional `strict_mode` parameter.
         - When `strict_mode` is set to `false`, the parser ignores any newly added or trailing fields in AWS ALB logs, instead of failing.
         - Defaults to `true` to preserve current behavior.
+    - [Metrics pipelines][32]:
+        - [Datadog Agent source][33]: Send metrics from the Datadog Agent to Observability Pipelines for processing.
+        - [Filter processor][35]: Filter the metrics you want to process.
+        - [Tag processor][36]: Include or exclude specific tags in your metrics.
+        - [Datadog Metrics destination][34]: Send your processed metrics Datadog.
 
 #### Enhancements
 
@@ -215,3 +316,18 @@ Worker version 2.7.0 gives you access to the following:
 [19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#component-buffers
 [20]: /observability_pipelines/processors/sample/#group-by-example
 [21]: /observability_pipelines/destinations/elasticsearch/#set-up-the-destination
+[22]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.1
+[23]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.0
+[24]: /observability_pipelines/processors/custom_processor
+[25]: /observability_pipelines/configuration/live_capture/
+[26]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[27]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.12.0
+[28]: /observability_pipelines/processors/enrichment_table/
+[29]: /observability_pipelines/destinations/http_client/
+[30]: /observability_pipelines/sources/mysql/
+[31]: /observability_pipelines/configuration/secrets_management
+[32]: /observability_pipelines/configuration/set_up_pipelines/?tab=metrics#set-up-a-pipeline-in-the-ui
+[33]: /observability_pipelines/sources/datadog_agent/?tab=metrics
+[34]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
+[35]: /observability_pipelines/processors/filter/?tab=metrics
+[36]: /observability_pipelines/processors/tag_control/metrics
