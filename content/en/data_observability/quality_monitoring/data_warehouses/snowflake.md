@@ -177,10 +177,6 @@ The `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup is requ
 
 When enabled, each DAG run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. Find them in **APM** > **Trace Explorer** filtered by `operation_name:snowflake.task`.
 
-## Network requirements
-
-If your Snowflake account restricts network access by IP, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to your network policy allowlist.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
