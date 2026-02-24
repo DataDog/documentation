@@ -356,6 +356,90 @@ bootstrap:
 
 {{% /collapse-content %}}
 
+## Use Kubernetes Secrets as environment variables
+
+If you deploy the Worker on Kubernetes, you can store sensitive values in a [Kubernetes Secret][6] and inject them as environment variables into the Worker pod. This uses Kubernetes-native functionality rather than the Worker's built-in secrets management backends.
+
+**Note**: The Worker receives values injected this way as standard environment variables at pod startup.
+
+#### Create a Kubernetes Secret
+
+Create a manifest for a Kubernetes Secret containing the environment variables for your pipeline:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: op-secrets
+type: Opaque
+stringData:
+  DD_API_KEY: <api_key>
+  <SOURCE_OR_DESTINATION_ENV_VAR>: <value>
+```
+
+Replace `<SOURCE_OR_DESTINATION_ENV_VAR>` and `<value>` with the environment variable names and values for your pipeline's source and destinations. See [Environment Variables][7] for a list of available variables.
+
+Apply the Secret to your cluster:
+
+```shell
+kubectl apply -f secret.yaml
+```
+
+#### Configure the Helm chart to use the Secret
+
+{{< tabs >}}
+{{% tab "All key-value pairs" %}}
+
+To inject all key-value pairs from the Secret as environment variables, add an `envFrom` entry to your `values.yaml` file:
+
+```yaml
+envFrom:
+  - secretRef:
+      name: op-secrets
+```
+
+Then install the Worker. Because `DD_API_KEY` is provided by the Secret, omit `--set datadog.apiKey`:
+
+```shell
+helm upgrade --install opw \
+  -f values.yaml \
+  --set datadog.pipelineId=<PIPELINE_ID> \
+  datadog/observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{% tab "Individual keys" %}}
+
+To reference specific keys from the Secret, add `env` entries with `valueFrom.secretKeyRef` to your `values.yaml` file:
+
+```yaml
+env:
+  - name: DD_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: op-secrets
+        key: DD_API_KEY
+  - name: <SOURCE_OR_DESTINATION_ENV_VAR>
+    valueFrom:
+      secretKeyRef:
+        name: op-secrets
+        key: <SOURCE_OR_DESTINATION_ENV_VAR>
+```
+
+Then install the Worker. Because `DD_API_KEY` is provided by the Secret, omit `--set datadog.apiKey`:
+
+```shell
+helm upgrade --install opw \
+  -f values.yaml \
+  --set datadog.pipelineId=<PIPELINE_ID> \
+  datadog/observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For more information, see the Kubernetes documentation on [distributing credentials to a container][8].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -365,3 +449,6 @@ bootstrap:
 [3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
 [4]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [5]: https://developer.hashicorp.com/
+[6]: https://kubernetes.io/docs/concepts/configuration/secret/
+[7]: /observability_pipelines/guide/environment_variables/
+[8]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables
