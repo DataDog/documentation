@@ -32,6 +32,8 @@ To start using Product Analytics for an application, [instrument your applicatio
 **Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
 
 ### Instrument your application
+Instrumentation connects your application to Datadog so it can start collecting user activity data. If RUM is already configured, no additional instrumentation is required for Product Analytics.
+
 If you do not have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
 
 ### Enable Product Analytics
@@ -43,19 +45,19 @@ For each application you want to monitor user behavior for, enable Product Analy
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
-## Understanding your data
+## Understand your data
 Product Analytics is built on three levels of user data RUM collects: Sessions, Views, and Actions. For a full breakdown of RUM event types, see [Understanding the RUM Event Hierarchy][19].
 
 **Sessions**
-: A single user's complete journey through your application, from the moment they open it to when they leave.
+: A session is a single user's complete journey through your application, from the moment they open it to when they leave.
 
 **Views**
-: Each page or screen a user visits within a session.
+: A view represents each page or screen a user visits within a session.
 
 **Actions**
-: Something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**. 
+: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**. 
 
-## Navigating the Product Analytics UI
+## Navigate the Product Analytics UI
 Each Product Analytics feature provides context about your users' journeys.
 
 ### Understand product adoption
@@ -78,7 +80,7 @@ By default, this page displays the `active users`, `page views`, and `average ti
 : See bounce rates, top traffic sources, and where your growth is really coming from.
 
 [Performance](https://app.datadoghq.com/product-analytics/performance)
-: View top errors and frustrations, and see exactly which views they impact.
+: View the most common errors and frustrations, and see exactly which views they impact.
 
 <br>
 
