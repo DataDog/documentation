@@ -28,7 +28,7 @@ further_reading:
 
 {{< product-availability >}}
 
-You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2]. For details, see [Case Management integration with third-party ticketing tools][3].
+You can use [Datadog Case Management][1] to manage tickets in third-party tools like [Jira][2] and [ServiceNow][21]. For details, see [Case Management integration with third-party ticketing tools][3].
 
 This page discusses using Datadog Security with Datadog Case Management for ticketing management.
 
@@ -46,9 +46,9 @@ Case Management is supported for all security products that use signals or findi
 Open any signal or finding in these products or do a bulk selection of findings in the explorers, and use the **Create Ticket** button to create a case in Datadog.
 
 
-## Bidirectional ticket syncing with Jira
+## Bidirectional ticket syncing
 
-Bidirectional syncing enables you to update Jira tickets automatically when changes occur in Datadog, and update some Datadog information when changes occur in Jira.
+Bidirectional syncing enables you to update tickets automatically when changes occur in Datadog, and update some Datadog information when changes occur in your ticketing tool.
 
 ### Supported products
 
@@ -67,15 +67,19 @@ Bidirectional syncing is supported for the following Code and Cloud Security fin
 
 ### Single source of truth
 
-Bidirectional syncing with Jira enables you to sync Jira tickets with Datadog cases. However, Datadog is the single source of truth for issue detection and resolution.
+Bidirectional syncing enables you to sync tickets with Datadog cases. However, Datadog is the single source of truth for issue detection and resolution.
 
-A Datadog finding's related Jira ticket can be closed manually. However, the Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction ensures that a finding is not closed and removed when someone closes a related Jira ticket.
+A Datadog finding's related ticket can be closed manually. However, the Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction ensures that a finding is not closed and removed when someone closes a related ticket.
 
 Closing a Datadog case without remediation does not close the finding either.
 
-Remediation of the finding in Datadog or defining an exception by [muting the finding][14] are the only ways to close a finding. After the finding is remediated, its related cases and Jira tickets are closed.
+Remediation of the finding in Datadog or defining an exception by [muting the finding][14] are the only ways to close a finding. After the finding is remediated, its related cases and tickets are closed.
 
 ### Set up bidirectional syncing
+
+{{< tabs >}}
+
+{{% tab "Jira" %}}
 
 The following steps set up bidirectional syncing with Jira and verify that setup is successful.
 
@@ -100,6 +104,46 @@ You are ready to start creating bidirectional Case Management tickets.
 
 If you do not see the **Case Management  <-> Jira Integration** section, ensure that you have completed the prerequisites.
 
+[2]: /integrations/jira/
+[3]: /incident_response//case_management/notifications_integrations/#third-party-tickets
+[8]: /integrations/jira/#configure-a-jira-webhook
+[9]: /incident_response/case_management/projects/
+[20]: /security/ticketing_integrations/#supported-products
+
+{{% /tab %}}
+
+{{% tab "ServiceNow" %}}
+
+The following steps set up bidirectional syncing with ServiceNow and verify that setup is successful.
+
+1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
+   1. The [Datadog ServiceNow integration][21].
+   2. A [new Case Management project][9]. A project is a container object that holds a set of cases.
+   3. The [ServiceNow integration is configured within the project][3].
+      1. Go to **Settings > Integrations > ServiceNow**.
+      2. Enter your **Instance name** (your ServiceNow subdomain) and **Assignment group**.
+      3. Enable the **Sync data between Case Management and ServiceNow** option.
+      4. Complete the remaining settings, and then click **Save changes**.
+2. Verify that bidirectional Case Management integration with ServiceNow is working:
+   1. Open [any product supporting bidirectional ticket syncing][20].
+   2. Open any Security finding.
+   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
+   4. Click the **ServiceNow** tab.
+   5. Verify that the **Case Management <-> ServiceNow Integration** section exists and bidirectional sync is enabled.
+
+You are ready to start creating bidirectional Case Management tickets.
+
+If you do not see the **Case Management <-> ServiceNow Integration** section, ensure that you have completed the prerequisites.
+
+[3]: /incident_response//case_management/notifications_integrations/#third-party-tickets
+[9]: /incident_response/case_management/projects/
+[20]: /security/ticketing_integrations/#supported-products
+[21]: /integrations/servicenow/
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ### Create bidirectional tickets
 
 The following steps create a bidirectional ticket for a Security finding.
@@ -107,7 +151,7 @@ The following steps create a bidirectional ticket for a Security finding.
 1. Open [any product supporting bidirectional ticket syncing][20].
 2. Open any Security finding.
 3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
-4. Create ticket for any third-party tool supported (see sections below)
+4. Create a ticket for any third-party tool supported (see sections below).
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
 1. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
@@ -119,11 +163,28 @@ The following steps create a bidirectional ticket for a Security finding.
 3. To add more fields to the Jira ticket Datadog creates, use **Add Optional Field** to add the fields.
 4. Click **Create Ticket**.
 
-Notes:
+**Notes**:
 - Bidirectional sync with Jira is available for certain Jira ticket attributes, such as status, assignee, and comments, but not all Jira fields are available.
 {{% /collapse-content %}}
 
+{{% collapse-content title="ServiceNow ticket" level="h4" expanded=false %}}
+1. Click the **ServiceNow** tab. You can use a new or existing ticket.
+2. In **Case Management <-> ServiceNow Integration**, complete the following settings:
+   1. **Case Management project:** select a Case Management project that has [ServiceNow integration enabled][3].
+   2. **Instance:** select the ServiceNow instance where you want the ticket created.
+   3. **Assignment group:** select the ServiceNow group to assign the ticket to.
+3. Click **Create Ticket**.
+
+**Notes**:
+- Bidirectional sync with ServiceNow syncs status, priority, and comments between Datadog and ServiceNow.
+- Only ServiceNow incident URLs are supported. Problem and change request URLs are not accepted.
+{{% /collapse-content %}}
+
 ### Manage bidirectional Case Management tickets
+
+{{< tabs >}}
+
+{{% tab "Jira" %}}
 
 Existing bidirectional Jira tickets are listed in the finding's **Ticketing** or **Next Steps** sections.
 
@@ -141,9 +202,23 @@ Closed Jira tickets are green.
 
 In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
+{{% /tab %}}
+
+{{% tab "ServiceNow" %}}
+
+Existing bidirectional ServiceNow tickets are listed in the finding's **Ticketing** or **Next Steps** sections.
+
+Hover over the ServiceNow ticket to see its details, including status, priority, and a timeline of changes synced between ServiceNow and Datadog.
+
+In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 #### Automatic detachment and ticket opening/closing
 
-Archiving a case does not delete related Jira tickets, but deleting a case project detaches all tickets from related Security findings.
+Archiving a case does not delete related tickets, but deleting a case project detaches all tickets from related Security findings.
 
 Detaching a ticket from a Security finding does not delete it.
 
@@ -190,3 +265,4 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [18]: /api/latest/security-monitoring/#create-jira-issues-for-security-findings
 [19]: /api/latest/security-monitoring/#attach-security-findings-to-a-jira-issue
 [20]: /security/ticketing_integrations/#supported-products
+[21]: /integrations/servicenow/
