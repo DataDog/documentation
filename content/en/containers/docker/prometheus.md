@@ -48,7 +48,7 @@ docker run -d --cgroupns host \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -60,7 +60,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -69,7 +69,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -208,14 +208,14 @@ docker run -d --cgroupns host \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
     {{% /tab %}}
     {{% tab "Windows" %}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-    gcr.io/datadoghq/agent:latest \
+    registry.datadoghq.com/agent:latest \
     -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
     {{% /tab %}}
