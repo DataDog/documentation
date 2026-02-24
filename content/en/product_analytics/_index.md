@@ -32,7 +32,7 @@ To start using Product Analytics for an application, [instrument your applicatio
 **Note**: Product Analytics uses the same SDKs and configuration as [Real User Monitoring (RUM)][18], and retains data for 15 months by default. See [Datadog's data retention periods][1] for more information.
 
 ### Instrument your application
-Instrumentation connects your application to Datadog so it can start collecting user activity data. If RUM is already configured, no additional instrumentation is required for Product Analytics.
+Instrumentation connects your application to Datadog so it can start collecting user activity data. If RUM is already configured, you do not need to instrument your application again for Product Analytics.
 
 If you do not have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
 
