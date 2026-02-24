@@ -165,7 +165,7 @@ Datadog derives lineage from Snowflake Tasks and Snowpipes by parsing their SQL 
 
 <div class="alert alert-info">Snowflake Tasks traces are in preview. Contact your account representative to enable this feature.</div>
 
-When enabled, each DAG run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. Find them in **APM** > **Trace Explorer** filtered by `operation_name:snowflake.task`.
+When enabled, each DAG run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. Find them in **APM** > **Trace Explorer** filtered by `operation_name:snowflake.task` for individual task spans, or `operation_name:snowflake.task_graph` for the top-level DAG span.
 
 ## Next steps
 
