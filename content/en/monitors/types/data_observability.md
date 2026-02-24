@@ -49,7 +49,7 @@ Data Observability monitors require [Quality Monitoring](/data_observability/qua
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/data-obs/monitors) in the UI then check [**New Monitor**](https://app.datadoghq.com/monitors/create/data-quality).
+To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Quality**](https://app.datadoghq.com/monitors/create/data-quality).
 
 ## Choose data to monitor
 
