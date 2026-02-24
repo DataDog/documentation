@@ -247,7 +247,6 @@ Observed value {{observed}} is within the expected range.
 
 ## Example monitors
 
-To create any of the examples below, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
 
 {{< tabs >}}
 {{% tab "Row count drop" %}}
