@@ -42,18 +42,19 @@ PR Gates allow you to control software security and quality by configuring rules
 
 {{< img src="pr_gates/setup/sca_3.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
-PR Gates, similar to [Datadog Monitors][9], consume data and findings output by compatible Datadog products and apply conditions to these findings to determine if a PR meets your organizational standards. To prevent unnecessary impact on your developers' velocity, PR Gates only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure PR Gates to block on Critical-severity code vulnerabilities, PR Gates fails and blocks the PR only if a developer introduces a new Critical code vulnerability as part of that PR.
+PR Gates, similar to [Datadog Monitors][1], consume data and findings output by compatible Datadog products and apply conditions to these findings to determine if a PR meets your organizational standards. To prevent unnecessary impact on your developers' velocity, PR Gates only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure PR Gates to block on Critical-severity code vulnerabilities, PR Gates fails and blocks the PR only if a developer introduces a new Critical code vulnerability as part of that PR.
 
-You can configure PR Gates rules for the following categories. Please note that the compatible product must be running on your desired repositories before PR Gates can begin taking action on the relevant PRs: 
+You can configure PR Gates rules for the following categories. Please note that the compatible product must be running on your desired repositories before PR Gates can begin taking action on the relevant PRs:
 
 | Source type     | Condition types |
 | --- | ----------- |
-| [**Static Code Analysis (SAST)**][1] | - Code vulnerabilities<br/> - Code quality violations |
-| [**Software Composition Analysis**][2] | - Library vulnerabilities<br/> - Library license violations |
-| [**Code Coverage**][3] | - Total code coverage<br/> - Patch code coverage |
-| [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities |
+| [**Static Code Analysis (SAST)**][2] | - Code vulnerabilities<br/> - Code quality violations |
+| [**Software Composition Analysis**][3] | - Library vulnerabilities<br/> - Library license violations |
+| [**Code Coverage**][4] | - Total code coverage<br/> - Patch code coverage |
+| [**Infrastructure as Code Scanning**][5] | - IaC vulnerabilities |
+| [**New Flaky Tests**][6] | - New Flaky Tests detected |
 
-After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
+After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][7] or [Azure DevOps Source Code integration][8]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
 <div class="alert alert-warning">
   PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
@@ -91,13 +92,20 @@ You can create rules to block code changes from being merged when a pull request
 {{< img src="pr_gates/setup/iac.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
+{{% tab "New Flaky Tests" %}}
+You can create a rule to block code changes that are introducing new flaky tests. Flaky tests are tests that both pass and fail with the same code.
+
+{{< img src="pr_gates/setup/new-flaky-tests-pr-gate.png" alt="A PR Gate rule that fails one or more flaky tests are introduced" style="width:80%" >}}
+
+
+{{% /tab %}}
 {{< /tabs >}}
 
-To create a PR Gate rule, see the [Setup documentation][7]. 
+To create a PR Gate rule, see the [Setup documentation][9].
 
 ## Manage rules
 
-You can manage and update PR Gates rules on the [**PR Gates Rules**][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
+You can manage and update PR Gates rules on the [**PR Gates Rules**][10] page. Improve your security and quality practices based on your project requirements and risk tolerances.
 
 You can see all of the rules defined by the organization.
 
@@ -107,12 +115,13 @@ You can see all of the rules defined by the organization.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/code_security/static_analysis
-[2]: /security/code_security/software_composition_analysis
-[3]: /code_coverage/
-[4]: /security/code_security/iac_security/
-[5]: /integrations/github/
-[6]: /integrations/azure_devops_source_code/
-[7]: /pr_gates/setup/
-[8]: https://app.datadoghq.com/ci/pr-gates
-[9]: /monitors/
+[1]: /monitors/
+[2]: /security/code_security/static_analysis
+[3]: /security/code_security/software_composition_analysis
+[4]: /code_coverage/
+[5]: /security/code_security/iac_security/
+[6]: /tests
+[7]: /integrations/github/
+[8]: /integrations/azure_devops_source_code/
+[9]: /pr_gates/setup/
+[10]: https://app.datadoghq.com/ci/pr-gates
