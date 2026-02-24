@@ -73,7 +73,7 @@ For example, different services may emit `http.route`, `http.path`, or `http.tar
 
 ### Parser processor
 
-The Parser processor extracts structured attributes from existing span attribute values using [Grok parsing rules][4]. Unlike the Remapper, the Parser creates new attributes based on parsed content. Use it to transform semi-structured text stored in span attributes into searchable, structured attributes. To rename or consolidate attribute keys, use the [Remapper processor](#remapper-processor) instead.
+The Parser processor extracts structured attributes from existing span attribute values using [Grok parsing rules][4]. It uses the same Grok syntax as [Log Management parsing][4], including all matchers and filters. Unlike the Remapper, the Parser creates new attributes based on parsed content. Use it to transform semi-structured text stored in span attributes into searchable, structured attributes. To rename or consolidate attribute keys, use the [Remapper processor](#remapper-processor) instead.
 
 To configure Grok parsing rules:
 
