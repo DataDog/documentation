@@ -18,41 +18,90 @@ Datadog は、使用する言語に関係なく、Agent および API からメ�
 この方法では、PowerShell スクリプトを実行しているシステムに Agent をインストールする必要はありません。POST リクエストを行う際には、API キーとアプリケーションキーを明示的に渡す必要があります。
 
 ```powershell
-# PSVersion 4.0 を備えた Windows Server 2012 R2 でテスト
+# このスクリプトは PowerShell から Datadog v2 API にカスタム メトリクスを送信します。
+# Windows 10 Pro (version 10.0.1945) と PSVersion 5.1 (Build 19041, Revision 5486) で動作確認済み
 
-function unixTime() {
-  Return (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
+function Send-DatadogMetric {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$MetricName,
+
+        [Parameter(Mandatory=$true)]
+        [int]$MetricValue,
+
+        [Parameter(Mandatory=$false)]
+        [string[]]$Tags = @()
+    )
+
+    # ==================================
+    # 1) Datadog API キー (v2) の設定
+    # ================================== 
+    # - $url: メトリクス データを Datadog に送信するための API エンドポイント。
+    # 既定では US1 データ センター向けに設定されています。別のリージョンで運用している場合は、
+    # 利用しているリージョンに合わせてこの URL を更新してください:
+    #     * EU:         https://api.datadoghq.eu/api/v2/series
+    #     * US3:        https://api.us3.datadoghq.com/api/v2/series
+    #     * US5:        https://api.us5.datadoghq.com/api/v2/series
+    #     * AP1:        https://api.ap1.datadoghq.com/api/v2/series
+    #     * AP2:        https://api.ap2.datadoghq.com/api/v2/series
+    #     * US1-FED:    https://api.ddog-gov.com/api/v2/series
+    $api_key = "<DATADOG_API_KEY>"          # 有効な API キーを指定してください
+    $app_key = "<DATADOG_APPLICATION_KEY>"  # 有効なアプリケーション キーを指定してください
+    $url     = "https://api.datadoghq.com/api/v2/series" # US1 向けの既定エンドポイント。利用している Datadog データ センターに合わせて更新してください
+
+    # ==================================
+    # 2) リクエスト ヘッダー
+    # ==================================
+    $headers = @{
+        "DD-API-KEY"         = $api_key
+        "DD-APPLICATION-KEY" = $app_key
+        "Content-Type"       = "application/json"
+    }
+
+    # ==================================
+    # 3) v2 用の JSON ペイロードを作成
+    # ==================================
+    # 現在時刻 (epoch 秒)
+    $currentTime = [int](Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
+
+
+    # /api/v2/series エンドポイント向けのボディ
+    $body = @{
+        "series" = @(
+            @{
+                "metric" = $MetricName
+                "points" = @(
+                    @{
+                        "timestamp" = $currentTime
+                        "value"     = $MetricValue
+                    }
+                )
+                "type"  = 1                 # (1) count, (2) rate, (3) gauge を指定
+                "tags"  = $Tags             # オプション: タグの配列を指定します
+            }
+        )
+    }
+
+    # ハッシュ テーブルを JSON に変換
+    $jsonBody = $body | ConvertTo-Json -Depth 5 -Compress
+
+    # ==================================
+    # 4) POST リクエストを送信
+    # ==================================
+    $response = Invoke-RestMethod -Method Post -Uri $url -Headers $headers -Body $jsonBody
+
+    Write-Host "Datadog 応答: $($response | ConvertTo-Json -Depth 5)"
 }
 
-function postMetric($metric,$tags) {
-  $currenttime = unixTime
-  $host_name = $env:COMPUTERNAME #オプションのパラメーター
 
-  # JSONを構築
-  $points = ,@($currenttime, $metric.amount)
-  $post_obj = [pscustomobject]@{"series" = ,@{"metric" = $metric.name;
-      "points" = $points;
-      "type" = "gauge";
-      "host" = $host_name;
-      "tags" = $tags}}
-  $post_json = $post_obj | ConvertTo-Json -Depth 5 -Compress
-  # DD API への POST
-  $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
-}
-
-# Datadog アカウント、API 情報、オプションのパラメーター
-$app_key = "<DATADOG_アプリケーションキー>" #有効なアプリキーを指定します
-$api_key = "<DATADOG_API_キー>" #有効な API キーを指定します
-$url_base = "https://app.datadoghq.com/"
-$url_signature = "api/v2/series"
-$url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
-$tags = "[env:test]" #オプションのパラメーター
-
-# Datadog に送信するものを選択します。この例では、プロセス "mmc" によって開かれたハンドルの数が送信されています
-$metric_ns = "ps1." # 目的のメトリクスネームスペース
-$temp = Get-Process mmc
-$metric = @{"name"=$metric_ns + $temp.Name; "amount"=$temp.Handles}
-postMetric($metric)($tags) # メトリクスをパラメーターとして postMetric() に渡します
+# ----------------------------
+# 使用例:
+# ----------------------------
+# "my.custom.metric" というカスタム count メトリクスを値 42 で送信し、
+# タグとして "env:test" と "version:1.0"、さらに host を付与します。
+Send-DatadogMetric -MetricName "my.custom.metric" `
+                   -MetricValue 42 `
+                   -Tags @("env:test","version:1.0", "host:$env:COMPUTERNAME")
 ```
 
 ## DogStatsD で PowerShell を使用してメトリクスを送信する

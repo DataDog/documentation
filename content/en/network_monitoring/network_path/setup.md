@@ -60,9 +60,11 @@ Agent `v7.59+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     # max_ttl: 30 # max traderoute TTL, default is 30
+     # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -104,9 +106,11 @@ Agent `v7.72+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     # max_ttl: 30 # max traderoute TTL, default is 30
+     # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
+     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -147,9 +151,11 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key2:tag_value2"
             min_collection_interval: 120 # set min_collection_interval at the instance level
           ## optional configs:
-          # max_ttl: 30 # max traderoute TTL, default is 30
+          # max_ttl: 30 # max traceroute TTL, default is 30
           # timeout: 1000 # timeout in milliseconds per hop, default is 1s
           # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+          # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+          # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
           # more endpoints
           - hostname: 1.1.1.1 # endpoint hostname or IP

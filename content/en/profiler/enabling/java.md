@@ -59,7 +59,7 @@ Minimum JDK versions:
 - Azul Zulu 8 (version 1.8.0.212/8u212+), 11+
 - GraalVM 17+ - both, JIT and AOT (native-image) versions
 
-Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
+Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, 17, 21, and 25 of the Long Term Support JDK.
 
 Additional requirements for profiling [Trace to Profiling integration][12]:
  - OpenJDK 17.0.5+ and `dd-trace-java` version 1.17.0+
@@ -104,8 +104,6 @@ To begin profiling applications:
    ```
    {{% /tab %}}
    {{< /tabs >}}
-
-   **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
 3. Enable the profiler by setting `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` so you can filter and group your profiles across these dimensions:
    {{< tabs >}}
@@ -271,7 +269,7 @@ or:
 
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
--Ddd.profiling.ddprof.alloc.enabled=true # this is the default in v1.17.0+
+-Ddd.profiling.ddprof.alloc.enabled=true # this is the default in v1.28.0+ on OpenJDK 21.0.3+
 ```
 
 For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`.

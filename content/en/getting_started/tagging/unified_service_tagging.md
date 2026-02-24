@@ -406,7 +406,7 @@ To form a single point of configuration for all telemetry emitted directly from 
       **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
 [1]: /tracing/setup/
-[2]: /developers/dogstatsd/
+[2]: /extend/dogstatsd/
    {{% /tab %}}
 
    {{% tab "Logs" %}}
