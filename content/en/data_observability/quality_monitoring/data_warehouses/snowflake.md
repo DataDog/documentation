@@ -161,7 +161,11 @@ To configure the Snowflake integration in Datadog:
 
 ## Snowflake Tasks and Snowpipes
 
-Datadog derives lineage from Snowflake Tasks and Snowpipes by parsing their SQL definitions. For Tasks, this includes task-to-task dependencies and lineage to destination tables. For Snowpipes, Datadog derives lineage from the source stage to the destination table. Both features require the `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup.
+Datadog derives lineage from Snowflake tasks and Snowpipes by parsing their SQL definitions.
+- For tasks, this includes task-to-task dependencies and lineage to destination tables.
+- For Snowpipes, Datadog derives lineage from the source stage to the destination table.
+
+Both features require the `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup.
 
 <div class="alert alert-info">Snowflake Tasks traces are in preview. Contact your account representative to enable this feature.</div>
 
