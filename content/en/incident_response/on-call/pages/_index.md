@@ -25,7 +25,7 @@ This guide explains how to trigger, acknowledge, reassign, and resolve Pages.
 
 A Page is sent to a Team and routed through its escalation policies and schedules. After your Team is [onboarded to Datadog On-Call][1], you can start paging it.
 
-### Trigger Pages from notifications
+### Trigger Pages from monitors
 
 Send a Page by mentioning a Team's handle with `oncall-` prepended. For example, to send a Page to the Checkout Operations Team (`@checkout-operations`), mention `@oncall-checkout-operations`.
 
