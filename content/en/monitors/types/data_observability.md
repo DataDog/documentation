@@ -167,7 +167,7 @@ You can add a **Group by** clause to split a single monitor into multiple groups
 
 {{< img src="data_observability/data_observability_monitor/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
 
-The default limit is 100 groups per monitor. To increase this limit, <a href="/help/">contact Support</a>.
+The default limit is 100 groups per monitor. To increase this limit, [contact Support](/help).
 
 ### Monitor schedule
 
