@@ -28,7 +28,7 @@ Use pipelines to:
 - Consolidate inconsistent keys into a single canonical attribute
 - Extract structured data from string values
 
-Processing Pipelines run in the Datadog backend and apply only to newly ingested spans. Each pipeline contains a filter query that defines which spans enter the pipeline, and one or more processors that define how matching spans are transformed. Pipelines are evaluated in order from top to bottom.
+Processing Pipelines run in the Datadog backend and apply only to newly ingested spans. Each pipeline contains a filter query that defines which spans enter the pipeline, and one or more processors that define how to transform matching spans. It evaluates pipelines in order from top to bottom.
 
 ## Create a pipeline
 
@@ -36,7 +36,7 @@ To create a pipeline:
 
 1. Navigate to [**APM > Settings > Pipelines**][1].
 2. Click **Add Pipeline**.
-3. Define a filter query using [query syntax][2]. Only spans matching this filter are processed by the pipeline.
+3. Define a filter query using [query syntax][2]. The pipeline only processes spans matching this filter.
 4. Name the pipeline.
 5. Click **Enable**.
 
