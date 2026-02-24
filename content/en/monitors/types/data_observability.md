@@ -53,7 +53,7 @@ To create a Data Observability monitor in Datadog, navigate to [**Monitors** > *
 
 ## Choose data to monitor
 
-First, select whether you are monitoring at the **Table** or **Column** level:
+First, select whether to monitor the **Table** or **Column** level:
 
 {{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
 
