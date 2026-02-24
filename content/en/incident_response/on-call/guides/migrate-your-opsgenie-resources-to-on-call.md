@@ -49,7 +49,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 1. If you have multiple regions configured, select your OpsGenie account's region from the dropdown. 
 1. Datadog loads all your OpsGenie teams in a searchable, paginated list. Select the team to migrate, then select **Next**. A preview pane shows the team's members and settings.
 
-{{< img src="service_management/oncall/import-opsgenie-team.png" alt="OpsGenie team list with a preview pane showing the selected team's members and settings" style="width:95%;" >}}
+{{< img src="service_management/oncall/import-opsgenie-team-2.png" alt="OpsGenie team list with a preview pane showing the selected team's members and settings" style="width:95%;" >}}
 
 **Note**: If a team was previously imported, Datadog indicates this.
 
@@ -61,7 +61,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
    - Map to a different Datadog team that you select.
    - Create a new team. Enter a team name to create a Datadog team based on the structure and members of the OpsGenie team.
 
-   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="Mapping options for assigning an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
+   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team-2.png" alt="Mapping options for assigning an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
 
 1. When the mapping is correct, select **Next**.
 
@@ -70,7 +70,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 1. Browse your OpsGenie escalation policies. You can filter policies by team.
 1. Select an escalation policy to import. The wizard displays the full policy details, including rules, recipients, and schedules.
 
-{{< img src="service_management/oncall/import-opsgenie-escalation-policy.png" alt="OpsGenie escalation policy list with policy details shown for the selected policy" style="width:95%;" >}}
+{{< img src="service_management/oncall/import-opsgenie-escalation-policy-2.png" alt="OpsGenie escalation policy list with policy details shown for the selected policy" style="width:95%;" >}}
 
 ### Step 4: Map users
 
