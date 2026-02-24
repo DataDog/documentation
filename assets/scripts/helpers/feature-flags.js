@@ -23,6 +23,31 @@ const getRumTargetingKey = () => {
     }
 };
 
+/**
+ * Check if the visitor is a logged-in Datadog user via the corpsite /locate
+ * endpoint, which returns `user_status: true` when the global `dogwebu`
+ * cookie is present on `.datadoghq.com`.
+ *
+ * The result is cached as a singleton promise so multiple callers share one
+ * network request.
+ */
+let datadogUserPromise = null;
+
+export const fetchDatadogUserStatus = () => {
+    if (datadogUserPromise) return datadogUserPromise;
+
+    const locateUrl = window.location.hostname === 'docs.datadoghq.com'
+        ? 'https://www.datadoghq.com/locate'
+        : 'https://corpsite-staging.datadoghq.com/locate';
+
+    datadogUserPromise = fetch(locateUrl, { credentials: 'include' })
+        .then((res) => res.json())
+        .then((data) => !!data.user_status)
+        .catch(() => false);
+
+    return datadogUserPromise;
+};
+
 export const initializeFeatureFlags = () => {
     if (initializationPromise) return initializationPromise;
 
@@ -59,23 +84,32 @@ export const initializeFeatureFlags = () => {
     return initializationPromise;
 };
 
-// Blocking enrichment: wait a short time for RUM and set context before returning.
+// Blocking enrichment: wait a short time for RUM, fetch /locate user status
+// in parallel, then set the combined context for flag evaluation.
 const enrichContextWithRum = async () => {
+    const userStatusPromise = fetchDatadogUserStatus();
+
     const maxRetries = 30;
     const retryDelayMs = 100;
+    let targetingKey = null;
 
     for (let retries = 0; retries < maxRetries; retries++) {
-        const targetingKey = getRumTargetingKey();
+        targetingKey = getRumTargetingKey();
 
         if (targetingKey) {
             console.log('[Flags] RUM context found, updating flags context.', targetingKey);
-            // This triggers a re-evaluation of flags with the RUM-derived targeting key.
-            await OpenFeature.setContext({ targetingKey });
-            return;
+            break;
         }
         console.log('[Flags] RUM context not found, retrying...', retries);
         await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
     }
+
+    const isDatadogUser = await userStatusPromise;
+
+    const context = { isDatadogUser };
+    if (targetingKey) context.targetingKey = targetingKey;
+
+    await OpenFeature.setContext(context);
 };
 
 export const getBooleanFlag = (client, key, defaultValue = false) => 

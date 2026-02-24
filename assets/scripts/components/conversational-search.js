@@ -3,7 +3,7 @@ import Typesense from 'typesense';
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
-import { initializeFeatureFlags, getBooleanFlag } from 'scripts/helpers/feature-flags';
+import { initializeFeatureFlags, getBooleanFlag, fetchDatadogUserStatus } from 'scripts/helpers/feature-flags';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -12,8 +12,18 @@ const typesenseConfig = docsConfig.typesense;
 let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
 
-initializeFeatureFlags().then((client) => {
+initializeFeatureFlags().then(async (client) => {
     IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
+
+    // Auto-enable for logged-in Datadog users (dogwebu cookie via /locate).
+    // The promise is already resolved at this point (fetched during FF init).
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED) {
+        const isDatadogUser = await fetchDatadogUserStatus();
+        if (isDatadogUser) {
+            IS_CONVERSATIONAL_SEARCH_ENABLED = true;
+        }
+    }
+
     console.log("FLAG INITIALIZED: IS_CONVERSATIONAL_SEARCH_ENABLED", IS_CONVERSATIONAL_SEARCH_ENABLED);
     if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
         document.body.classList.add('conv-search-enabled');
