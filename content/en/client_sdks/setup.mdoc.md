@@ -11,27 +11,27 @@ content_filters:
 Follow the instructions below to install and configure the Datadog SDK for your platform.
 
 <!-- Browser -->
-{% if equals($sdk, "browser") %}
+{% if equals($platform, "browser") %}
 {% partial file="sdk/setup/browser.mdoc.md" /%}
 {% /if %}
 
 <!-- Android -->
-{% if equals($sdk, "android") %}
+{% if equals($platform, "android") %}
 {% partial file="sdk/setup/android.mdoc.md" /%}
 {% /if %}
 
 <!-- iOS -->
-{% if equals($sdk, "ios") %}
+{% if equals($platform, "ios") %}
 {% partial file="sdk/setup/ios.mdoc.md" /%}
 {% /if %}
 
 <!-- Flutter -->
-{% if equals($sdk, "flutter") %}
+{% if equals($platform, "flutter") %}
 {% partial file="sdk/setup/flutter.mdoc.md" /%}
 {% /if %}
 
 <!-- React Native -->
-{% if equals($sdk, "react_native") %}
+{% if equals($platform, "react_native") %}
 
 The minimum supported version for the React Native SDK is React Native v0.65+. Compatibility with older versions is not guaranteed out-of-the-box.
 
@@ -51,16 +51,16 @@ The minimum supported version for the React Native SDK is React Native v0.65+. C
 {% /if %}
 
 <!-- Kotlin Multiplatform -->
-{% if equals($sdk, "kotlin_multiplatform") %}
+{% if equals($platform, "kotlin_multiplatform") %}
 {% partial file="sdk/setup/kotlin-multiplatform.mdoc.md" /%}
 {% /if %}
 
 <!-- Roku -->
-{% if equals($sdk, "roku") %}
+{% if equals($platform, "roku") %}
 {% partial file="sdk/setup/roku.mdoc.md" /%}
 {% /if %}
 
 <!-- Unity -->
-{% if equals($sdk, "unity") %}
+{% if equals($platform, "unity") %}
 {% partial file="sdk/setup/unity.mdoc.md" /%}
 {% /if %}
