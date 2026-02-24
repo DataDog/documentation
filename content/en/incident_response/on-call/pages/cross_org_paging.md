@@ -2,6 +2,7 @@
 title: Cross-org Paging
 aliases:
 - /service_management/on-call/cross_org_paging/
+- /incident_response/on-call/cross_org_paging/
 further_reading:
 - link: '/incident_response/on-call/'
   tag: 'Documentation'

@@ -2563,21 +2563,21 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Trigger a Page
-      url: incident_response/on-call/triggering_pages/
+    - name: Pages
+      url: incident_response/on-call/pages/
       parent: oncall
-      identifier: oncall_triggering_pages
+      identifier: oncall_pages
       weight: 2
     - name: Live Call Routing
-      url: incident_response/on-call/triggering_pages/live_call_routing
+      url: incident_response/on-call/pages/live_call_routing/
       identifier: oncall_live_call_routing
-      parent: oncall_triggering_pages
-      weight: 201
+      parent: oncall_pages
+      weight: 1
     - name: Cross-org Paging
-      url: incident_response/on-call/cross_org_paging
+      url: incident_response/on-call/pages/cross_org_paging/
       identifier: oncall_cross_org_paging
-      parent: oncall_triggering_pages
-      weight: 202
+      parent: oncall_pages
+      weight: 2
     - name: Routing Rules
       url: incident_response/on-call/routing_rules/
       parent: oncall
