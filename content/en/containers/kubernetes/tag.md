@@ -111,6 +111,14 @@ Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. 
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
+Starting with Agent v7.77+, tag annotations support [Autodiscovery template variables][5] for dynamic tagging based on runtime metadata. With the exception of `%%env_<VAR>%%`, all template variables are supported.
+
+```yaml
+annotations:
+  ad.datadoghq.com/tags: '{"pod_ip":"%%host%%","pod_name":"%%kube_pod_name%%","namespace":"%%kube_namespace%%"}'
+  ad.datadoghq.com/nginx.tags: '{"container_port":"%%port_80%%"}'
+```
+
 ## Tag extraction
 
 Starting in version 7.64+, the Agent and Cluster Agent can be configured to collect labels and annotations from Kubernetes resources and use them as tags from a common configuration. Datadog recommends using the following options to ensure consistent reporting across the Agent's core tagging, the Cluster Agent's KSM reporting, and both Agents' Orchestrator Explorer reporting:
@@ -951,3 +959,4 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /account_management/billing/custom_metrics
 [4]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+[5]: /containers/guide/template_variables/

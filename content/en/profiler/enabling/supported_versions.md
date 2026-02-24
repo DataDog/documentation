@@ -31,7 +31,7 @@ The following table shows profile type availability by language. For optimal per
 | <div style="width:150px"><div>    |                     [Java][1]                     | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------------------------------------------------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
 | {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  | {{< tooltip glossary="preview" case="title" >}} |
-| {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   |                 {{< X >}}                 | Python 3.7+ | | | | {{< X >}} | {{< X >}}  | |
+| {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   |                 {{< X >}}                 | | | | | {{< X >}} | {{< X >}}  | |
 | {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   |                [JDK 11+][17]                 | Python 3.6+ | {{< X >}} | {{< X >}} | | {{< tooltip glossary="preview" case="title" >}}<br>.NET 6+ <br>(.NET 10 recommended)| {{< X >}} | {{< tooltip glossary="preview" case="title" >}} |
 | {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK 11+][17] | Python 3.6+ | {{< X >}} | {{< tooltip glossary="preview" case="title" >}}<br>Ruby 3.1+<br>Not yet compatible with Ruby 4 | {{< X >}} | {{< tooltip glossary="preview" case="title" >}}<br>.NET 7+ <br>(.NET 10 recommended) | | {{< tooltip glossary="preview" case="title" >}} |
 | {{< ci-details title="Wall time" >}}The elapsed time spent in each function/method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function/method is running.{{< /ci-details >}}   |                 {{< X >}}                 | {{< X >}} | | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
@@ -74,4 +74,3 @@ The following table outlines additional profiling features by language. For full
 [19]: /profiler/connect_traces_and_profiles/#endpoint-profiling
 [20]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
 [21]: https://go.dev/doc/devel/release
-
