@@ -95,7 +95,7 @@ Go to [**On-Call** > **Pages**][7] to view all active and historical Pages. Clic
 
 ### Acknowledge a Page
 
-Acknowledging a Page signals that you're actively working on it and stops the escalation policy from notifying the next tier of responders. If you begin investigating without acknowledging, escalation continues and additional responders may be paged.
+Acknowledging a Page signals that you're actively working on it and stops the escalation policy from notifying the next tier of responders. If you do not acknowledge the Page, escalation continues and additional responders may be paged.
 
 To acknowledge a Page:
 
@@ -108,7 +108,7 @@ The Page status changes to `Acknowledged`.
 
 ### Reassign a Page
 
-Reassign a Page if it was routed to the wrong person or Team, or if you need to transfer ownership to someone better positioned to respond. Reassigning keeps the full Page history intact.
+Reassign a Page if it was routed to the wrong person or Team, or if you need to transfer ownership to someone better positioned to respond. When you reassign a Page, the Page history remains intact.
 
 To reassign a Page:
 
