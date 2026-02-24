@@ -49,7 +49,7 @@ Data Observability monitors require [Quality Monitoring][2] to be set up with at
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**][6].
+To create a Data Observability monitor in Datadog, navigate to [**Data Observability** > **Monitors** > **New Monitor**][6] or [**Monitors** > **New Monitor** > **Data Observability**][6]. To view all existing Data Observability monitors, see the [Data Observability Monitors page][7].
 
 ## Choose data to monitor
 
@@ -149,7 +149,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 Select a detection method:
 
 - **Anomaly**: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts.
-- **Threshold**: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a **Critical** threshold (required) and optionally a **Warning** threshold. For more details, see [Configure Monitors][7].
+- **Threshold**: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a **Critical** threshold (required) and optionally a **Warning** threshold. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
 
@@ -164,7 +164,7 @@ You can add a **Group by** clause to split a single monitor into multiple groups
 
 {{< img src="monitors/monitor_types/data_observability/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
 
-The default limit is 100 groups per monitor. To increase this limit, [contact Support][8].
+The default limit is 100 groups per monitor. To increase this limit, [contact Support][9].
 
 ### Monitor schedule
 
@@ -173,7 +173,6 @@ Set how often the monitor evaluates your data:
 - **Hourly**: The monitor runs every hour.
 - **Daily**: The monitor runs once per day.
 
-| `{{table.name}}`    | The name of the affected table.                |
 ### Set alert conditions
 
 Choose an aggregation type:
@@ -272,5 +271,6 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 [4]: /data_observability/quality_monitoring/data_warehouses/databricks/
 [5]: /data_observability/quality_monitoring/data_warehouses/bigquery/
 [6]: https://app.datadoghq.com/monitors/create/data-quality
-[7]: /monitors/configuration/?tab=thresholdalert#thresholds
-[8]: /help/
+[7]: https://app.datadoghq.com/data-obs/monitors
+[8]: /monitors/configuration/?tab=thresholdalert#thresholds
+[9]: /help/
