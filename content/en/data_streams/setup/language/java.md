@@ -33,7 +33,7 @@ aliases:
 | Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub)                               | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="recommended" >}}       |
 | IBM MQ         | [IBM MQ classes for Java and JMS](https://mvnrepository.com/artifact/com.ibm.mq/com.ibm.mq.jakarta.client)                    | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}      | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}      |
 
-<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring:</strong> Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x, which does not support lag generation. To use a version of kafka-clients greater than 3.7, override <code>kafka.version</code> in your build configuration. See the <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">Spring Kafka documentation</a> for instructions.</div>
+<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring:</strong> Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x, which does not support lag generation. To resolve this, <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">update your kafka-clients version</a> above 3.7.</div>
 
 ### Installation
 
