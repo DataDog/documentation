@@ -10,6 +10,7 @@ further_reading:
   text: "Coordinate incidents with Incident AI"
 aliases:
 - /bits_ai/getting_started/
+- /bits_ai/chat_with_bits_ai
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
