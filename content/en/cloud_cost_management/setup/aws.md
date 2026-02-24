@@ -78,20 +78,17 @@ Enter the following details for your Cost and Usage Report:
 
 {{% tab "Terraform" %}}
 
-// image
+{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
 
 ### Select the resources to create
 
-The generated Terraform code can be modified in three ways depending on your existing AWS resources:
+The Terraform configuration supports three setups depending on your existing AWS resources:
 
 * **New setup**: Select **Create Cost and Usage Report** to create both the report and its S3 bucket
 * **Existing bucket**: Select **Create Cost and Usage Report** and unselect **Create S3 Bucket** to use an existing S3 bucket
-* **Existing bucket and report**: Unselect **Create Cost and Usage Report** and **Create S3 Bucket** to use an existing report and S3 Bucket
+* **Existing bucket and report**: Unselect **Create Cost and Usage Report** and **Create S3 Bucket** to use an existing report and S3 bucket
 
-**Note**:
-- If you choose to use an existing bucket, take note of the following message before applying your changes:
-
-// image
+**Note**: If using an existing bucket, verify that AWS has permission to write CURs to it. If not, you may need to update your bucket's policy.
 
 ### Configure the Cost and Usage Report settings
 
@@ -112,8 +109,9 @@ Enter the following details for your Cost and Usage Report:
 
 ### Copy generated Terraform HCL and apply changes
 
-Follow the instructions in Step 3: **Apply Terraform Configuration**.
-Address any issues that appear while running terraform plan or terraform apply before returning to CCM to confirm account creation.
+In the Datadog setup UI, follow the instructions in the **Apply Terraform Configuration** step.
+
+Address any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
 
 {{% /tab %}}
 
