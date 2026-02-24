@@ -86,8 +86,16 @@ export const initializeFeatureFlags = () => {
 
 // Blocking enrichment: wait a short time for RUM, fetch /locate user status
 // in parallel, then set the combined context for flag evaluation.
+// If /locate resolves before RUM and the user is a Datadog user, we break
+// early so conversational search can appear without the full RUM wait.
 const enrichContextWithRum = async () => {
-    const userStatusPromise = fetchDatadogUserStatus();
+    let locateResolved = false;
+    let isDatadogUser = false;
+
+    fetchDatadogUserStatus().then((val) => {
+        locateResolved = true;
+        isDatadogUser = val;
+    });
 
     const maxRetries = 30;
     const retryDelayMs = 100;
@@ -95,16 +103,24 @@ const enrichContextWithRum = async () => {
 
     for (let retries = 0; retries < maxRetries; retries++) {
         targetingKey = getRumTargetingKey();
-
         if (targetingKey) {
-            console.log('[Flags] RUM context found, updating flags context.', targetingKey);
+            console.log('[Flags] RUM context found.', targetingKey);
             break;
         }
+
+        if (locateResolved && isDatadogUser) {
+            console.log('[Flags] Datadog user detected via /locate, skipping remaining RUM retries.');
+            break;
+        }
+
         console.log('[Flags] RUM context not found, retrying...', retries);
         await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
     }
 
-    const isDatadogUser = await userStatusPromise;
+    // Ensure /locate has settled if it hasn't yet.
+    if (!locateResolved) {
+        isDatadogUser = await fetchDatadogUserStatus();
+    }
 
     const context = { isDatadogUser };
     if (targetingKey) context.targetingKey = targetingKey;
