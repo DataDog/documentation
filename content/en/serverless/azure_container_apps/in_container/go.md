@@ -80,5 +80,5 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
-[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=go#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5

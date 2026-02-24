@@ -149,6 +149,8 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment var
 
 ### Setup
 
+<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: MWAA default constraints pin older <code>apache-airflow-providers-openlineage` versions</code>. These versions include known issues that can degrade the Data Observability experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/"> Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
+
 To get started, follow the instructions below.
 
 1. Install `openlineage` provider by adding the following into your `requirements.txt` file:
@@ -157,7 +159,7 @@ To get started, follow the instructions below.
     apache-airflow-providers-openlineage
     ```
 
-2. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
+1. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
 
    ```shell
    #!/bin/sh
@@ -179,11 +181,11 @@ To get started, follow the instructions below.
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
-3. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
+1. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-4. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
-   1. Configure Amazon MWAA to [send logs to CloudWatch][8].
-   2. [Send the logs to Datadog][9].
+1. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
+   1. Configure Amazon MWAA to [send logs to CloudWatch][9].
+   2. [Send the logs to Datadog][10].
 
 [1]: https://github.com/apache/airflow/releases/tag/2.7.0
 [2]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html
@@ -192,8 +194,10 @@ To get started, follow the instructions below.
 [5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
 [6]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 [7]: https://app.datadoghq.com/data-jobs/
-[8]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
-[9]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
+[8]: https://openlineage.io/docs/integrations/airflow/
+[9]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
+[10]: /integrations/amazon_web_services/?tab=roledelegation#log-collection
+[11]: /data_observability/jobs_monitoring/airflow_mwaa_upgrade/
 
 ### Validation
 
