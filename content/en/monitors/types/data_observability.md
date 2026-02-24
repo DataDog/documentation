@@ -55,8 +55,6 @@ To create a Data Observability monitor in Datadog, navigate to [**Monitors** > *
 
 First, select whether you are monitoring at the **Table** or **Column** level:
 
-- **Table**: Monitor table-level metrics such as freshness, row count, or a custom SQL query result.
-- **Column**: Monitor column-level metrics such as nullness, uniqueness, cardinality, or statistical measures.
 
 {{< img src="data_observability/data_observability_monitor/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
 
