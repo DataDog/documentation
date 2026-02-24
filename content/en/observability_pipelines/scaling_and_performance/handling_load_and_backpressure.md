@@ -71,7 +71,7 @@ If you enable disk buffering for destinations, you must enable Kubernetes [persi
 
 ### Buffer metrics
 
-{{% observability_pipelines/metrics/buffer/intro %}}
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
 
 #### Source buffer metrics
 

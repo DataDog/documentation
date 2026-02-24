@@ -1,1 +1,0 @@
-Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
