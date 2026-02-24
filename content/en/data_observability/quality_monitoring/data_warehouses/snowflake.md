@@ -19,6 +19,7 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
+- If your Snowflake account restricts network access by IP, the Datadog webhook IPs added to your network policy allowlist. For the list of IPs, see the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Snowflake
 
@@ -162,10 +163,6 @@ To configure the Snowflake integration in Datadog:
 ## Next steps
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
-
-## Network requirements
-
-If your Snowflake account restricts network access by IP, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to your network policy allowlist.
 
 ## Further reading
 
