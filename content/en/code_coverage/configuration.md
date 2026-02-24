@@ -267,6 +267,30 @@ gates:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+{{% collapse-content title="Excluding with negation" level="h4" %}}
+Use the `!` prefix to exclude specific services, code owners, or flags from a gate. For example, to enforce coverage on all services except experimental ones, and on all flags except nightly tests:
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      services:
+        - "*"
+        - "!experimental-*"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      flags:
+        - "*"
+        - "!nightly-*"
+      codeowners:
+        - "@DataDog/*"
+        - "!@DataDog/prototyping"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 ## Pattern syntax
 
 Configuration options that accept file paths support three types of patterns:
