@@ -52,7 +52,7 @@ Click **Manage arrays to split** to add an array to split or edit an existing ar
 
 ### Add a new array
 
-1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Enter the path to the array field. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-split-array) below.
 1. Click **Save**.
 
@@ -161,4 +161,4 @@ For the following message structure:
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/

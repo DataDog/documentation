@@ -111,32 +111,8 @@ Proactively manage and optimize your cloud spending by creating a [Cloud Cost Mo
 Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, Amazon ECS, Azure, and Google Cloud. You can gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
 ## Permissions
-Two permissions are available:
-1. Cloud Cost Management Read (`cloud_cost_management_read`)
-2. Cloud Cost Management Write (`cloud_cost_management_write`)
 
-The table below describes the impact of these permissions in both Cloud Cost Management and related pages.
-
-| Page/Functionality                            | Cloud Cost Management Read Permission       | Cloud Cost Management Write Permission            |
-|-----------------------------------------------|---------------------------------------------|---------------------------------------------------|
-| CCM Summary Page                              | Permission Required                         | N/A                                               |
-| CCM Containers Page                           | Permission Required                         | N/A                                               |
-| CCM Recommendations Page                      | Permission Required                         | N/A                                               |
-| CCM Explorer Page                             | Permission Required                         | N/A                                               |
-| CCM Plan Page                                 | Permission Required                         | Permission Required to modify or create Budgets   |
-| CCM Settings Page - Custom Costs              | Permission Required                         | Permission Required to upload custom costs        |
-| CCM Settings Page - Tag Pipelines             | Permission Required                         | Permission Required to create tag pipelines       |
-| CCM Settings Page - SaaS Integrations         | Permission Required                         | Permission Required to enable integration for CCM |
-| CCM Settings Page - Accounts                  | Permission Required                         | Permission Required to modify or create accounts  |
-| CCM Settings Page - Configure Recommendations | Permission Required                         | Permission Required to customize recommendations  |
-| Dashboards/Notebooks (external)               | Permission Required to create and view data | N/A                                               |
-| Monitors (external)                           | Permission Required to create CCM monitors  | N/A                                               |
-| Service Catalog (external)                    | Permission Required to view cost data       | N/A                                               |
-| Resource Catalog (external)                   | Permission Required to view cost data       | N/A                                               |
-| API Queries for Cost Data                     | Permission Required                         | N/A                                               |
-
-### Data access control preview
-More granular tag-level restrictions are available as part of the [Data Access Control Preview][6]. To request preview access, fill out [this form][7].
+Cloud Cost Management uses two permissions to control access: `cloud_cost_management_read` for viewing cost data and `cloud_cost_management_write` for modifying configurations. See the [Permissions documentation][9] for a detailed breakdown of requirements by page.
 
 ## Review data history
 
@@ -163,3 +139,4 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 [6]: /account_management/rbac/data_access/
 [7]: https://www.datadoghq.com/product-preview/data-access-control/
 [8]: /cloud_cost_management/datadog_costs
+[9]: /cloud_cost_management/permissions

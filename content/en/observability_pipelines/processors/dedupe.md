@@ -17,7 +17,7 @@ The Deduplicate processor removes copies of data to reduce volume and noise. It 
 
 To set up the Deduplicate processor:
 
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified filter query are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. In the **Type of deduplication** dropdown menu, select whether you want to `Match` on or `Ignore` the fields specified below.
     - If `Match` is selected, then after a log passes through, future logs that have the same values for all of the fields you specify below are removed.
     - If `Ignore` is selected, then after a log passes through, future logs that have the same values for all of their fields, *except* the ones you specify below, are removed.
@@ -57,4 +57,4 @@ For the following message structure:
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/

@@ -47,7 +47,9 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/jobs_monitoring/openlineage" >}}Custom Jobs using OpenLineage{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
 {{< whatsnext desc="Track downstream impact in these BI tools:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/looker" >}}Looker{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
