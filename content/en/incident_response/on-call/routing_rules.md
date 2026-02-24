@@ -35,12 +35,12 @@ To create a routing rule:
    {{< img src="service_management/oncall/page-routing-support-hours.png" alt="The support hours configuration panel on a routing condition, showing time interval fields and the option to hold escalation policy notifications outside support hours" style="width:60%;" >}}
 
 1. Under **Set targets**, click **Add** and select a target type:
-   - **Page escalation policy**: Select an escalation policy and set the urgency to **Dynamic** (based on alert status), **High**, or **Low**.
+   - **Page escalation policy**: Select an escalation policy and set the urgency to `DYNAMIC` (based on alert status), `HIGH`, or `LOW`.
    - **Send Slack message** (Preview): Select a Slack workspace and channel.
    - **Send Microsoft Teams message** (Preview): Select a Teams tenant, team, and channel.
    - **Run Workflow** (Preview): Select an existing workflow.
 
-1. Add more rules as needed.
+1. Add more rules as needed, and click **Save**.
 
 ### Routing rule syntax
 
@@ -59,13 +59,13 @@ Routing rules use [Datadog query syntax][2] and support multiple `if/else` condi
 
 ### Support hours
 
-Support hours define when an escalation policy is allowed to notify responders.
+Support hours define when an escalation policy can notify responders.
 
-When a routing rule includes support hours, Datadog compares the current time to the configured intervals:
-- **Inside support hours**: The escalation policy runs immediately and notifies responders.
+When a routing rule includes support hours, Datadog compares the current time to the configured intervals and proceeds as follows:
+- **Inside support hours**: Datadog runs the escalation policy immediately and notifies responders.
 - **Outside support hours**:
-  - If **Outside support hours, hold escalation policy notifications until the next window** is enabled, Datadog creates the Page immediately but postpones escalation policy notifications until the next support window begins. Datadog also adds a timeline entry to record the delay.
-  - If this option is disabled, Datadog skips the routing rule and does not create a Page. It then evaluates the next matching rule instead.
+  - If **Outside support hours, hold escalation policy notifications until the next window** is enabled, Datadog creates the Page immediately but postpones escalation policy notifications until the next support window begins. Datadog adds a timeline entry to record the delay.
+  - If this option is disabled, Datadog skips the routing rule and does not create a Page. It then evaluates the next matching rule.
 
 #### Example support hour configurations
 
@@ -75,7 +75,7 @@ When a routing rule includes support hours, Datadog compares the current time to
 
 - Create a split support shift (mornings and afternoons):
 
-  Add two intervals, both with Monday through Friday selected: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
+  Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m, both with Monday through Friday selected. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
 
 **Note**: These examples assume the **Outside support hours, hold escalation policy notifications until the next window** toggle is enabled.
 
@@ -102,9 +102,9 @@ When a Page is acknowledged or resolved in Slack or Teams, Datadog updates the o
 - **Delay escalation outside of support hours:**
   - Define [support hours](#support-hours) on a routing condition to hold escalation policy notifications until the next active window.
 
-- **Use Dynamic urgency to set urgency based on the monitor's alert status:** 
-  - If the monitor alert has `warn` status, set urgency to `low`.
-  - If the monitor alert has `error` status, set urgency to `high`.
+- **Use `DYNAMIC` urgency to set urgency based on monitor alert status:** 
+  - If the monitor alert has `warn` status, set urgency to `LOW`.
+  - If the monitor alert has `error` status, set urgency to `HIGH`.
 
   Urgency determines how responders are notified based on their notification preferences.
 
