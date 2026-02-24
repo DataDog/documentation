@@ -140,7 +140,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
-{{< img src="data_observability/data_observability_monitor/custom_sql_example.png" alt="Input field for custom SQL monitor creatoin." style="width:60%;" >}}
+{{< img src="data_observability/data_observability_monitor/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
