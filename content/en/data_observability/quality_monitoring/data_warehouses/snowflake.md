@@ -163,6 +163,10 @@ To configure the Snowflake integration in Datadog:
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
 
+## Network requirements
+
+If your Snowflake account restricts network access by IP, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to your network policy allowlist.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
