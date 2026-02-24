@@ -10,11 +10,28 @@ further_reading:
     - link: '/synthetics/multistep'
       tag: 'Documentation'
       text: 'Multistep API Tests'
+products:
+- name: Browser Tests
+  url: /synthetics/browser_tests/
+  icon: browser
+- name: Multistep API Tests
+  url: /synthetics/multistep/
+  icon: synthetics
+- name: Mobile App Testing
+  url: /synthetics/mobile_app_testing/
+  icon: mobile
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
-This guide describes how to implement conditional logic in Synthetic tests using subtests and step execution options. Patterns covered include if/else-style flows, element state-based logic, and always-run cleanup steps.
+Conditional branching allows your Synthetic Monitoring tests to adapt to different application states and execute different paths based on runtime conditions. Instead of following a single linear sequence, a test can decide which steps to run, skip, or continue after failures.
+
+This guide covers three patterns using subtests and step execution options:
+- If this step fails, continue to next step
+- If this step succeeds, stop this test and mark it as passed
+- Always run this step
 
 ## Run different test paths based on application state
 
@@ -33,7 +50,9 @@ To set up this pattern:
 5. Enable **If this step fails, continue to next step** on the journey B subtest as well.
 6. Order the subtests so the test runs journey A first, then journey B. Whichever condition matches runs to completion; the other subtest fails silently and the test continues.
 
-For more information on subtest configuration options, see [Subtests][1].
+{{< img src="synthetics/guide/conditional_logic/subtests.png" alt="Subtest configuration showing if/else step execution options" style="width:60%;" >}}
+
+For more information on subtest configuration options, see [subtests][1].
 
 ## Interact with the first available element
 
@@ -52,6 +71,8 @@ To set up this pattern:
 4. Add a follow-up step or subtest that tries the next option (for example, a different size or product).
 5. If the UI has filters or search, add steps that narrow the page to available items first so the locator targets only the correct elements.
 
+{{< img src="synthetics/guide/conditional_logic/if_this_step_fails.png" alt="Step advanced options showing User Specified Locator and allow failure settings" style="width:60%;" >}}
+
 ## Always run cleanup steps
 
 Use this pattern when certain steps must run at the end of a test regardless of whether earlier steps passed or failed, such as logging out, releasing resources, or capturing error state.
@@ -62,7 +83,9 @@ To set up this pattern:
 2. In the subtest's advanced options, enable **Always run this step**.
 3. Save the test. The cleanup subtest runs even when earlier steps have failed.
 
-For more information, see [Set execution behavior][2].
+{{< img src="synthetics/guide/conditional_logic/always_run_step.png" alt="Subtest advanced options with Always run this step enabled" style="width:60%;" >}}
+
+For more information, see [set execution behavior][2].
 
 ## Further Reading
 
