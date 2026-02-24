@@ -735,19 +735,12 @@ class ConversationalSearch {
         this.abortController = new AbortController();
         const startTime = Date.now();
 
-        // Build the search body - only collection-specific params go here
+        // Build the search body - use preset from typesense.config.json
         const searchBody = {
             searches: [
                 {
                     collection: typesenseConfig.docsIndex,
-                    per_page: 15,
-                    exclude_fields: EMBEDDING_FIELD,
-                    filter_by: 'language:en',
-                    // hybrid search with embedding and text
-                    query_by: `${EMBEDDING_FIELD},title,section_header,content`,
-                    rerank_hybrid_matches: true, // use Reciprocal Rank Fusion to rerank hybrid matches
-                    vector_query: "embedding:([], alpha: 0.8)",
-                    prefix: false // Required for remote embedders
+                    preset: 'docs_ai_search_preset'
                 }
             ]
         };

@@ -275,6 +275,20 @@
                         "group_max_candidates": 1000,
                         "exclude_fields": "embedding"
                     }
+                },
+                {
+                    "name": "docs_ai_search_preset",
+                    "search_parameters": {
+                        "query_by": "embedding,title,section_header,content",
+                        "vector_query": "embedding:([], k:100, alpha: 0.45)",
+                        "group_by": "distinct_base_url",
+                        "group_limit": 5,
+                        "per_page": 20,
+                        "filter_by": "language:en",
+                        "rerank_hybrid_matches": true,
+                        "prefix": false,
+                        "exclude_fields": "embedding"
+                    }
                 }
             ]
         },

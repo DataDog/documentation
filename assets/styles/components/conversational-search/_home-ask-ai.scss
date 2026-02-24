@@ -9,6 +9,8 @@
     .nav-search-wrapper {
         flex: 0 1 auto;
         width: 100%;
+        position: relative;
+        z-index: 2;
     }
 
     .searchbox-container {
