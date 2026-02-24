@@ -30,7 +30,7 @@ You can also use field-based partitioning, such as `service`, `env`, `status`. E
 
 To set up the quota processor:
 1. Enter a name for the quota processor.
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are counted towards the daily limit.
+1. Define a **filter query**. Only logs that match the specified filter query are counted towards the daily limit. See [Search Syntax][6] for more information.
     - Logs that match the quota filter and are within the daily quota are sent to the next step in the pipeline.
     - Logs that do not match the quota filter are sent to the next step of the pipeline.
 1. In the **Unit for quota** dropdown menu, select if you want to measure the quota by the number of `Events` or by the `Volume` in bytes.
@@ -87,5 +87,4 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 [3]: /observability_pipelines/destinations/azure_storage/
 [4]: /observability_pipelines/destinations/google_cloud_storage/
 [5]: /help/
-
-{{% observability_pipelines/processors/filter_syntax %}}
+[6]: /observability_pipelines/search_syntax/logs/

@@ -7936,9 +7936,9 @@ menu:
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
       generated: true
-    - name: Send an incident event
-      url: '#send-an-incident-event'
-      identifier: dora-metrics-send-an-incident-event
+    - name: Send an incident event (legacy)
+      url: '#send-an-incident-event-legacy'
+      identifier: dora-metrics-send-an-incident-event-legacy
       parent: dora-metrics
       generated: true
       params:
@@ -7947,10 +7947,10 @@ menu:
         operationids:
           - CreateDORAIncident
         unstable: []
-        order: 2
-    - name: Get a failure event
-      url: '#get-a-failure-event'
-      identifier: dora-metrics-get-a-failure-event
+        order: 28
+    - name: Get an incident event
+      url: '#get-an-incident-event'
+      identifier: dora-metrics-get-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7960,9 +7960,9 @@ menu:
           - GetDORAFailure
         unstable: []
         order: 6
-    - name: Get a list of failure events
-      url: '#get-a-list-of-failure-events'
-      identifier: dora-metrics-get-a-list-of-failure-events
+    - name: Get a list of incident events
+      url: '#get-a-list-of-incident-events'
+      identifier: dora-metrics-get-a-list-of-incident-events
       parent: dora-metrics
       generated: true
       params:
@@ -7972,9 +7972,9 @@ menu:
           - ListDORAFailures
         unstable: []
         order: 4
-    - name: Delete a failure event
-      url: '#delete-a-failure-event'
-      identifier: dora-metrics-delete-a-failure-event
+    - name: Delete an incident event
+      url: '#delete-an-incident-event'
+      identifier: dora-metrics-delete-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7984,9 +7984,9 @@ menu:
           - DeleteDORAFailure
         unstable: []
         order: 7
-    - name: Send a failure event
-      url: '#send-a-failure-event'
-      identifier: dora-metrics-send-a-failure-event
+    - name: Send an incident event
+      url: '#send-an-incident-event'
+      identifier: dora-metrics-send-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -8665,6 +8665,82 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Google Chat Integration
+      url: /api/latest/google-chat-integration/
+      identifier: google-chat-integration
+      generated: true
+    - name: Update organization handle
+      url: '#update-organization-handle'
+      identifier: google-chat-integration-update-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get organization handle
+      url: '#get-organization-handle'
+      identifier: google-chat-integration-get-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Delete organization handle
+      url: '#delete-organization-handle'
+      identifier: google-chat-integration-delete-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Create organization handle
+      url: '#create-organization-handle'
+      identifier: google-chat-integration-create-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get all organization handles
+      url: '#get-all-organization-handles'
+      identifier: google-chat-integration-get-all-organization-handles
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrganizationHandles
+        unstable: []
+        order: 1
+    - name: Get space information by display name
+      url: '#get-space-information-by-display-name'
+      identifier: google-chat-integration-get-space-information-by-display-name
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSpaceByDisplayName
+        unstable: []
+        order: 1
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
@@ -9148,6 +9224,19 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Import an incident
+      url: '#import-an-incident'
+      identifier: incidents-import-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportIncident
+        unstable:
+          - v2
+        order: 49
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
