@@ -35,7 +35,7 @@ To start using Product Analytics, [instrument your application](#instrument-your
 If you do not have an application set up in Datadog yet, create one for your platform ([browser][14], [iOS][15], or [Android][16]) or use your [coding assistant][17].
 
 ### Enable Product Analytics
-Enable Product Analytics for each application where you want to monitor user behavior:
+To enable Product Analytics for each application where you want to monitor user behavior:
 
 1. Select the application you want to monitor from the [Application Management][9] list.
 2. Under PRODUCT SETTINGS, click **Product Analytics**.
