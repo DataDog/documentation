@@ -33,7 +33,7 @@ aliases:
 | Google PubSub  | [Google Cloud Pub/Sub](https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub)                               | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="minimal" >}}       | {{< dsm-tracer-version lang="java" lib="google-pubsub" type="recommended" >}}       |
 | IBM MQ         | [IBM MQ classes for Java and JMS](https://mvnrepository.com/artifact/com.ibm.mq/com.ibm.mq.jakarta.client)                    | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="minimal" >}}      | {{< dsm-tracer-version lang="java" lib="ibmmqjmsclient" type="recommended" >}}      |
 
-<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring Boot:</strong> Spring Boot 3.3.x uses spring-kafka 3.2.x, which pulls in kafka-clients 3.7.x by default. This means lag generation metrics are not available for Spring Boot 3.3.x applications unless you override the Kafka client version. To fix this, set <code>kafka.version</code> to <code>3.8.1</code> or later in your build configuration. See the <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">Spring Kafka documentation</a> for details.</div>
+<div class="alert alert-warning"><strong>*kafka-clients v3.7 and Spring Boot:</strong> Spring Boot 3.3.x uses spring-kafka 3.2.x, which pulls in kafka-clients 3.7.x by default. To use a version of kafka-clients greater than 3.7, override <code>kafka.version</code> in your build configuration. See the <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">Spring Kafka documentation</a> for instructions.</div>
 
 ### Installation
 
