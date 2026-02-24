@@ -95,8 +95,6 @@ Processing Pipelines run at a specific point in the span processing life cycle:
 4. Retention filters and metrics from spans are computed.
 5. Spans are stored and indexed.
 
-Reordering pipelines or processors changes processing behavior.
-
 ## Preprocessed attributes
 
 Datadog preprocesses some span attributes before pipelines run. For example, [Quantization of APM Data][5] normalizes resource names by default and cannot be disabled. You can define additional pipelines if you need further customization of these attributes.
