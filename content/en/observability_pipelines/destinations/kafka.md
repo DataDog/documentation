@@ -129,11 +129,11 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 {{% observability_pipelines/metrics/component %}}
 
-#### Buffer metrics (when enabled)
+### Buffer metrics (when enabled)
 
 {{% observability_pipelines/metrics/buffer/destinations %}}
 
-##### Deprecated buffer metrics
+#### Deprecated buffer metrics
 
 {{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 

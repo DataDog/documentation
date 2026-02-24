@@ -114,19 +114,19 @@ Utilization
 
 {{% observability_pipelines/metrics/buffer/intro %}}
 
-#### Source buffer metrics
+### Source buffer metrics
 
 {{% observability_pipelines/metrics/buffer/sources %}}
 
-#### Processor buffer metrics
+### Processor buffer metrics
 
 {{% observability_pipelines/metrics/buffer/processors %}}
 
-#### Destination buffer metrics
+### Destination buffer metrics
 
 {{% observability_pipelines/metrics/buffer/destinations %}}
 
-#### Deprecated buffer metrics
+### Deprecated buffer metrics
 
 {{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
