@@ -28,14 +28,14 @@ For base setup steps, see [Enable Data Observability: Jobs Monitoring for Apache
 
 The following table shows the default versions pinned by MWAA constraints and the recommended upgrade versions for each Airflow version:
 
-| Package | Airflow 2.7.2 (default / upgrade) | Airflow 2.8.1 (default / upgrade) | Airflow 2.9.2 (default / upgrade) |
+| Package | Airflow 2.7.2 | Airflow 2.8.1 | Airflow 2.9.2 |
 |---|---|---|---|
-| `apache-airflow-providers-openlineage` | Default: 1.1.0 <br/>Upgrade: **1.14.0** - [Datadog-patched wheel][6] | Default: 1.4.0 <br/>Upgrade: **1.14.0** | Default: 1.8.0  <br/>Upgrade:**2.2.0** |
-| `apache-airflow-providers-common-sql` | Default: 1.7.2 <br/>Upgrade: no change | Default: 1.10.0 <br/>Upgrade: **1.20.0** | Default: 1.14.0 <br/>Upgrade: **1.21.0** |
-| `apache-airflow-providers-common-compat` | Default: n/a <br/>Upgrade: **1.2.2** - [Datadog-patched wheel][7] | Default: n/a <br/>Upgrade: **1.2.1** | Default: n/a <br/>Upgrade: **1.4.0** |
-| `openlineage-integration-common` | Default: 1.3.1 <br/>Upgrade: **1.24.2** | Default: 1.7.0 <br/>Upgrade: **1.24.2** | Default: 1.16.0 <br/>Upgrade: **1.31.0** |
-| `openlineage-python` | Default: 1.3.1 <br/>Upgrade: **1.24.2** | Default: 1.7.0 <br/>Upgrade: **1.24.2** | Default: 1.16.0 <br/>Upgrade: **1.31.0** |
-| `openlineage-sql` | Default: 1.3.1 <br/>Upgrade: **1.24.2** | Default: 1.7.0 <br/>Upgrade: **1.24.2** | Default: 1.16.0 <br/>Upgrade: **1.31.0** |
+| `apache-airflow-providers-openlineage` | Default: 1.1.0 <br/> Upgrade: **1.14.0** - [Datadog-patched wheel][6] | Default: 1.4.0 <br/> Upgrade: **1.14.0** | Default: 1.8.0  <br/> Upgrade:**2.2.0** |
+| `apache-airflow-providers-common-sql` | Default: 1.7.2 <br/> Upgrade: no change | Default: 1.10.0 <br/> Upgrade: **1.20.0** | Default: 1.14.0 <br/> Upgrade: **1.21.0** |
+| `apache-airflow-providers-common-compat` | Default: n/a <br/> Upgrade: **1.2.2** - [Datadog-patched wheel][7] | Default: n/a <br/> Upgrade: **1.2.1** | Default: n/a <br/> Upgrade: **1.4.0** |
+| `openlineage-integration-common` | Default: 1.3.1 <br/> Upgrade: **1.24.2** | Default: 1.7.0 <br/> Upgrade: **1.24.2** | Default: 1.16.0 <br/> Upgrade: **1.31.0** |
+| `openlineage-python` | Default: 1.3.1 <br/> Upgrade: **1.24.2** | Default: 1.7.0 <br/> Upgrade: **1.24.2** | Default: 1.16.0 <br/> Upgrade: **1.31.0** |
+| `openlineage-sql` | Default: 1.3.1 <br/> Upgrade: **1.24.2** | Default: 1.7.0 <br/> Upgrade: **1.24.2** | Default: 1.16.0 <br/> Upgrade: **1.31.0** |
 
 ## Update constraints and requirements
 
