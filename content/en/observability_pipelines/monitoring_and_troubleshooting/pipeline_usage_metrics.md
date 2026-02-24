@@ -110,10 +110,30 @@ Utilization
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
-## Buffer metrics (when buffering is enabled)
+## Buffer metrics (when enabled)
 
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
 
-{{% observability_pipelines/metrics/buffer %}}
+**Tags for metrics**
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
+
+#### Source buffer metrics
+
+{{% observability_pipelines/metrics/buffer/sources %}}
+
+#### Processor buffer metrics
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
+#### Destination buffer metrics
+
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
+
 
 ## Further reading
 

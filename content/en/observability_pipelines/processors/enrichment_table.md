@@ -179,7 +179,7 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 - `component_id=<processor_id>`
 - `buffer_id=enrichment_table_buffer`
 
-{{% observability_pipelines/metrics/buffer %}}
+{{% observability_pipelines/metrics/buffer/processors %}}
 
 #### Reference Table metrics
 
