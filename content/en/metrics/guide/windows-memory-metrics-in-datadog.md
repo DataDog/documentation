@@ -53,12 +53,12 @@ The following table shows which Datadog metrics to use for monitoring specific W
 
 Use the Live Processes metrics and native Windows Performance Counters columns to cross-reference data when troubleshooting or correlating across different monitoring tools.
 
-| Memory Type | Description | Datadog System Metric | Live Processes Metric | Windows Performance Counter |
+| Memory Type | Datadog System Metric | Live Processes Metric | Windows Performance Counter |
 | :---- | :---- | :---- | :---- | :---- |
-| Physical Memory | Actual physical RAM. Known as RSS or "working set". | `system.mem.total` `system.mem.usable` `system.mem.pct_usable` `system.mem.used` `system.mem.shared` `system.processes.mem.rss` | RSS Memory RSS Memory % | `\Memory\Available Bytes` `\Process()\Working Set` `\Process()\Working Set - Private` |
-| Commit Charge | Total of all memory that must be backed by RAM or the paging files. Known as "private bytes" | `system.mem.pagefile.*` `system.swap.*` `system.mem.committed` `system.processes.mem.vms` | N/A | `\Memory\Committed Bytes` `\Process()\Private Bytes` |
-| Commit Limit | The system-wide max commit charge, it is the sum of the capacity of the paging files and physical RAM | `system.mem.pagefile.total` `system.swap.total` | N/A | `\Memory\Commit Limit` |
-| Virtual Memory | Amount of virtual address space being used by a process. |  | Virtual Memory | `\Process()\Virtual Bytes` |
+| Physical Memory | `system.mem.total` `system.mem.usable` `system.mem.pct_usable` `system.mem.used` `system.mem.shared` `system.processes.mem.rss` | RSS Memory RSS Memory % | `\Memory\Available Bytes` `\Process()\Working Set` `\Process()\Working Set - Private` |
+| Commit Charge | `system.mem.pagefile.*` `system.swap.*` `system.mem.committed` `system.processes.mem.vms` | N/A | `\Memory\Committed Bytes` `\Process()\Private Bytes` |
+| Commit Limit | `system.mem.pagefile.total` `system.swap.total` | N/A | `\Memory\Commit Limit` |
+| Virtual Memory |  | Virtual Memory | `\Process()\Virtual Bytes` |
 
 ### Example: Windows Process Explorer
 
@@ -85,7 +85,10 @@ What each metric measures:
 * `system.mem.pagefile.used` = Current Commit Charge (memory committed by all processes, not pagefile usage)  
 * `system.mem.pagefile.free` = Available Commit (remaining commit capacity, not free pagefile space)
 
-## Recommended: Paging file metrics (Agent 7.76+)
+## Paging File Metrics by Agent Version
+
+{{< tabs >}}
+{{% tab "Agent 7.76 and later (recommended)" %}}
 
 **Datadog recommends upgrading to Agent version 7.76 or later** to access clearer, more accurately named paging file metrics. Unlike the `system.mem.pagefile.*` metrics (which actually measure commit charge), these metrics directly monitor your pagefile.sys usage.
 
@@ -98,7 +101,8 @@ Agent versions `7.76` and later have the following metrics available for monitor
 | `system.paging.pct_free` | The percentage of pagefile that is not used. |
 | `system.paging.free` | The amount of pagefile that is not used in bytes. |
 
-### For Agent versions 7.75 and earlier
+{{% /tab %}}
+{{% tab "Agent 7.75 and earlier" %}}
 
 If you are using an Agent version earlier than 7.76, the total size of all paging files (pagefile.sys) can be calculated with the following formula (open the [Metric Explorer][4] to try it out):
 
@@ -111,6 +115,10 @@ The following performance counters can also be collected through the Windows Per
 * `\Paging File()% Usage`   
 * `\Paging File()% Usage Peak`
 
+[4]: https://app.datadoghq.com/metric/explorer?graph_layout=stacked&split_mode=single&state=H4sIAAAAAAAACl2RXYrDMAyE76LHxZSk7bbUV1mKMbGcCvyTWk4hDbn7oqTtwr5Jw-fRSJ7hgYUpJ9Cwb_ZH07amaUFBX-xwY9A_Mzj0lKiu0AyVakDQAGorDdNT-vb0UWygXgwD-iriNAhQKSJjIWRQUPA-ItdtQEEecmI0Ppdo63_2Pm6VoMlG8RJpkpjOVms4j6UTOWIt1L3fTKDBPnrNE1eMu24YdyNjmb8WWK4KZNgY7Ob7av6sl-tyXQTjIVA1jiImuZPgH7XLyVO_GgSKVEG3jQLOpcqlcnFYQIND7mD1krV8WVeYgasVrj2fm_3hdDgf28O3AkzurV0uL62gL8g3E7OTLTmQo9SDgsGOjA60t4FxUeApVCyviJ_I5kFP8_6EPATiCssvmYyBFvkBAAA&paused=false#N4Ig7glgJg5gpgFxALlAGwIYE8D2BXJVEADxQEYAaELcqyKBAC1pEbghkcLIF8qo4AMwgA7CAgg4RKUAiwAHOChASAtnADOcAE4RNIKtrgBHPJoQaUAbVBGN8qVoD6gnNtUZCKiOq279VKY6epbINiAiGOrKQdpYZAYgUJ4YThr42gDGSsgg6gi6mZaBZnHKGABuMMgaWBoIcKoAdOrN8hjwwmhwTQg4CBhowABUPCB8oJHRubFYAEyJyQNpGdnK+YXFILPlVTV1Dc2tvf2DI2M8ALpUru54mKHht6r3GDGl8QAEALSfswtXKj1LDdGQgdrdBANZRQHAwJyZB4aCCZRJoURwJxyRTKdLoqBojFOehMZQiNweNDjfgQeyYLBYhQ5EDokRKK48PggOniADCUmEMBQInuaB4QA
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -119,4 +127,4 @@ The following performance counters can also be collected through the Windows Per
 [1]: https://learn.microsoft.com/windows/win32/memory/memory-performance-information
 [2]: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-memorystatus
 [3]: https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getperformanceinfo
-[4]: https://app.datadoghq.com/metric/explorer?graph_layout=stacked&split_mode=single&state=H4sIAAAAAAAACl2RXYrDMAyE76LHxZSk7bbUV1mKMbGcCvyTWk4hDbn7oqTtwr5Jw-fRSJ7hgYUpJ9Cwb_ZH07amaUFBX-xwY9A_Mzj0lKiu0AyVakDQAGorDdNT-vb0UWygXgwD-iriNAhQKSJjIWRQUPA-ItdtQEEecmI0Ppdo63_2Pm6VoMlG8RJpkpjOVms4j6UTOWIt1L3fTKDBPnrNE1eMu24YdyNjmb8WWK4KZNgY7Ob7av6sl-tyXQTjIVA1jiImuZPgH7XLyVO_GgSKVEG3jQLOpcqlcnFYQIND7mD1krV8WVeYgasVrj2fm_3hdDgf28O3AkzurV0uL62gL8g3E7OTLTmQo9SDgsGOjA60t4FxUeApVCyviJ_I5kFP8_6EPATiCssvmYyBFvkBAAA&start=1770236374135&end=1770239974135&paused=false#N4Ig7glgJg5gpgFxALlAGwIYE8D2BXJVEADxQEYAaELcqyKBAC1pEbghkcLIF8qo4AMwgA7CAgg4RKUAiwAHOChASAtnADOcAE4RNIKtrgBHPJoQaUAbVBGN8qVoD6gnNtUZCKiOq279VKY6epbINiAiGOrKQdpYZAYgUJ4YThr42gDGSsgg6gi6mZaBZnHKGABuMMgaWBoIcKoAdOrN8hjwwmhwTQg4CBhowABUPCB8oJHRubFYAEyJyQNpGdnK+YXFILPlVTV1Dc2tvf2DI2M8ALpUru54mKHht6r3GDGl8QAEALSfswtXKj1LDdGQgdrdBANZRQHAwJyZB4aCCZRJoURwJxyRTKdLoqBojFOehMZQiNweNDjfgQeyYLBYhQ5EDokRKK48PggOniADCUmEMBQInuaB4QA
+
