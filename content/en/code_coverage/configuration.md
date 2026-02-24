@@ -285,9 +285,6 @@ gates:
       flags:
         - "*"
         - "!nightly-*"
-      codeowners:
-        - "@DataDog/*"
-        - "!@DataDog/prototyping"
 {{< /code-block >}}
 {{% /collapse-content %}}
 
