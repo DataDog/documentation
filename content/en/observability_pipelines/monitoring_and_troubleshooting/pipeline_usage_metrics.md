@@ -65,6 +65,9 @@ Memory usage
 
 These metrics are available for sources, processors, and destinations.
 
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
+
 Events in
 : **Metric**: `pipelines.component_received_events_total`
 : **Description**: The number of events received by the component.
@@ -129,7 +132,6 @@ Utilization
 ### Deprecated buffer metrics
 
 {{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
-
 
 ## Further reading
 

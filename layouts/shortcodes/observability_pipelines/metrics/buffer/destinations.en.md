@@ -1,5 +1,8 @@
 These metrics are specific to destination buffers, located upstream of a destination. Each destination emits its own respective buffer metrics.
 
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the destination type, such as `datadog_logs` for the Datadog Logs destination.
+
 `pipelines.buffer_size_events`
 : **Description**: Number of events in a destination's buffer.
 : **Metric type**: gauge

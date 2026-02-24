@@ -164,7 +164,7 @@ Common issues and fixes:
 
 See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
 
-#### Component metrics
+### Component metrics
 
 {{% observability_pipelines/metrics/component %}}
 
