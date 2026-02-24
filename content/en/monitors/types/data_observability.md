@@ -55,7 +55,7 @@ To create a Data Observability monitor in Datadog, navigate to [**Monitors** > *
 
 First, select whether you are monitoring at the **Table** or **Column** level:
 
-{{< img src="data_observability/data_observability_monitor/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
+{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Input field for selecting entity type and inputting a query" style="width:60%;" >}}
 
 Then, use the **Edit** tab to search for tables, views, or columns by typing `key:value` filters into the search field. The following attributes are available:
 
@@ -137,7 +137,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
-{{< img src="data_observability/data_observability_monitor/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
+{{< img src="monitors/monitor_types/data_observability/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -162,7 +162,7 @@ Add a **WHERE** clause to filter the data evaluated by the monitor. This is usef
 
 You can add a **Group by** clause to split a single monitor into multiple groups, each evaluated independently. For example, grouping a row count monitor by a `REGION` column produces a separate alert for each geography.
 
-{{< img src="data_observability/data_observability_monitor/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
+{{< img src="monitors/monitor_types/data_observability/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
 
 The default limit is 100 groups per monitor. To increase this limit, [contact Support][8].
 
@@ -242,7 +242,6 @@ Observed value {{observed}} is within the expected range.
 
 ## Example monitors
 
-
 {{< tabs >}}
 {{% tab "Row count drop" %}}
 
@@ -273,9 +272,9 @@ Detect when a column's null percentage exceeds normal levels, which may indicate
 
 ## Annotate bounds
 
-For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time.
+For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. Unlike infrastructure metrics, data quality metrics are often business-specific, so use annotations to teach the model what behavior is normal for your data.
 
-{{< img src="data_observability/data_observability_monitor/bounds_annotation_example.png" alt="Hover menu for annotating a monitor bound." style="width:80%;" >}}
+{{< img src="/monitors/monitor_types/data_observability/annotate_bounds.png" alt="Hover menu for annotating a monitor bound." style="width:90%;" >}}
 
 On a monitor's status page, click **Annotate Bounds**, select a time range on the chart, and choose one of the following annotations:
 
