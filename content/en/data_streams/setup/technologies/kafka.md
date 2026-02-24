@@ -18,7 +18,7 @@ title: Data Streams Monitoring for Kafka
   <tbody>
     <tr>
       <td><a href="/data_streams/java">Java</a></td>
-      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7<sup><a href="#kafka-37-spring">1</a></sup>)</td>
+      <td><a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients">kafka-clients</a> (Lag generation is not supported for v3.7*)</td>
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="java" lib="kafka-clients" type="recommended" >}}</td>
     </tr>
@@ -79,7 +79,7 @@ title: Data Streams Monitoring for Kafka
   </tbody>
 </table>
 
-<sup>1</sup> <span id="kafka-37-spring">Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x, which does not support lag generation. To resolve this, <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">update your kafka-clients version</a> above 3.7.</span>
+*Spring Boot 3.3.x and spring-kafka 3.2.x use kafka-clients 3.7.x, which does not support lag generation. To resolve this, <a href="https://docs.spring.io/spring-kafka/reference/appendix/override-boot-dependencies.html">update your kafka-clients version</a> to 3.8.0 or newer.</span>
 
 <div class="alert alert-info"><a href="https://kafka.apache.org/documentation/streams/">Kafka Streams</a> is partially supported for Java, and can lead to latency measurements being missed.</div>
 
