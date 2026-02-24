@@ -73,14 +73,16 @@ span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
 
 The following fields are supported in the prompt tracking JSON:
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | string | Prompt name or identifier |
-| `version` | string | User-supplied version tag |
-| `id` | string | Unique identifier for the prompt |
-| `template` | string | Template string (for single-template prompts) |
-| `chat_template` | array | List of `{"role": "...", "content": "..."}` message templates |
-| `variables` | object | Template variable substitutions |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `template` | string | Yes (or `chat_template`) | Template string for single-message prompts |
+| `chat_template` | array | Yes (or `template`) | List of `{"role": "...", "content": "..."}` message templates |
+| `id` | string | No | Unique identifier for the prompt. Defaults to `{ml_app}_unnamed-prompt` if omitted |
+| `name` | string | No | Prompt name. Used as a fallback for `id` if `id` is omitted |
+| `version` | string | No | User-supplied version tag |
+| `variables` | object | No | Template variable substitutions |
+| `rag_context_variables` | array of strings | No | Names of variables in `variables` that contain RAG context (ground truth). Used by RAG evaluators |
+| `rag_query_variables` | array of strings | No | Names of variables in `variables` that contain the user query. Used by RAG evaluators |
 
 <div class="alert alert-info">If you are using prompt templates, LLM Observability can automatically attach version information based on prompt content.</div>
 
