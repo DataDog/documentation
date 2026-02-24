@@ -1,6 +1,6 @@
 ---
 title: Business Transaction Tracking
-description: Monitoring transaction processing with Data Streams Monitoring's Business Transaction Tracking
+description: Monitor individual transaction processing across synchronous and asynchronous systems with Data Streams Monitoring's Business Transaction Tracking.
 ---
 
 {{< callout url=https://www.datadoghq.com/product-preview/business-transaction-tracking/
@@ -17,14 +17,13 @@ With DSM's transaction tracking, you can:
 - Detect SLO breaches, stuck transactions, and dropped transactions
 - Identify transactions breaching SLAs to notify and compensate customers
 - Generate transaction ID reports to meet regulatory requirements
-- Troubleshoot by inspecting example delayed, stuck, or dropped transaction IDs  
-in APM, logs, or internal databases  
+- Troubleshoot by inspecting example delayed, stuck, or dropped transaction IDs in APM, logs, or internal databases  
 
 Data Streams Monitoring (DSM) extracts transaction IDs from sync (like HTTP request/response) and async (like Kafka produced/consumed) message headers. When an individual transaction's ID is available in headers across all services with a checkpoint, DSM can follow the transaction across these services until its completion.
 
 ## Create a transaction pipeline
 
-1. Navigate to [<span class="ui">Data Streams Monitoring > Transactions</span>][1]. You must [complete the form][2] to access this page.g
+1. Navigate to [<span class="ui">Data Streams Monitoring > Transactions</span>][1]. You must [complete the form][2] to access this page.
 1. Select <span class="ui">Create Transaction Pipeline</span>.
 1. In the modal, define:
    - <span class="ui">Pipeline Name</span>: A name for your pipeline
