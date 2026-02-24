@@ -50,7 +50,8 @@ The sections below provide instructions for completing each page of the template
 
 {{< img src="logs/guide/azure-automated-log-forwarding/deployment_basics.png" alt="The Basics page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
 
-3. Click **Next**.
+3. (Optional) When you deploy the Azure Log Forwarding ARM template, it forwards logs from all Azure resources to Datadog. To forward logs only from resources with specific tags, configure filtering at the resource level and fill in the **Resource Tag Filters** parameter. This parameter accepts a comma-separated list of tags in `key:value` format to limit which resources' logs are collected.
+4. Click **Next**.
 
 ### Datadog configuration
 
