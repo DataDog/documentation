@@ -3,7 +3,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 import { getConfig } from './getConfig';
 
 const rawEnv = document.documentElement.dataset?.env || 'preview';
-// TODO: Remove this once development is complete
+// TODO: Remove this once Feature Flag Rollout is complete
 const env = rawEnv === 'development' ? 'preview' : rawEnv; 
 const config = getConfig(env);
 
