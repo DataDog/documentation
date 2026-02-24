@@ -1,8 +1,8 @@
 ---
 title: Client SDK Setup
 content_filters:
-  - trait_id: sdk
-    option_group_id: sdk_platform_options
+  - trait_id: platform
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
 

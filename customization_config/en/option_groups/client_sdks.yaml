@@ -1,4 +1,4 @@
-sdk_platform_options:
+client_sdk_platform_options:
   - id: browser
     default: true
   - id: android
@@ -9,7 +9,7 @@ sdk_platform_options:
   - id: roku
   - id: unity
 
-sdk_product_options:
+client_sdk_product_options:
   - id: rum
     default: true
   - id: error_tracking

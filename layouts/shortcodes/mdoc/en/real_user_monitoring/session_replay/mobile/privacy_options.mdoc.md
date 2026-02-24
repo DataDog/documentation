@@ -9,7 +9,7 @@ content_filters:
 
 ## Overview
 
-Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
+Session Replay provides privacy controls to help ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
 
 Default privacy options for Session Replay protect end user privacy and prevent sensitive organizational information from being collected.
 
