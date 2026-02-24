@@ -77,7 +77,7 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 If your GitLab Self-Managed instance is hosted on an internal/private network but exposed through a public DNS alias (recommended), configure the integration using the public hostname, then <a href="/help">contact Datadog Support</a> with both the public hostname and the internal hostname to enable hostname aliasing.
 </div>
 
