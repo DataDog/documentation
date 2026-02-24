@@ -55,5 +55,5 @@ Ensure that your On-Call Team members have set up their [Profile Settings][8].
 [4]: https://app.datadoghq.com/on-call/
 [5]: /incident_response/on-call/escalation_policies
 [6]: /incident_response/on-call/schedules
-[7]: /incident_response/on-call/pages
+[7]: /incident_response/on-call/triggering_pages/
 [8]: /incident_response/on-call/profile_settings

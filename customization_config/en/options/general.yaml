@@ -37,6 +37,9 @@ options:
 - label: API
   id: api
 
+- label: APM
+  id: apm
+
 - label: Authentication
   id: auth
 
@@ -346,6 +349,9 @@ options:
 - label: Ruby
   id: ruby
 
+- label: RUM
+  id: rum
+
 - label: Rust
   id: rust
 
@@ -355,11 +361,17 @@ options:
 - label: Serilog
   id: serilog
 
+- label: Server
+  id: server
+
 - label: Serverless Framework
   id: serverless_framework
 
 - label: Sharded Cluster
   id: sharded_cluster
+
+- label: Show all
+  id: show_all
 
 - label: Splunk HEC
   id: splunk_hec
@@ -432,3 +444,15 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- label: OpenTelemetry
+  id: otel_api
+
+- label: Datadog
+  id: dd_api
+
+- label: C++
+  id: cpp
+
+- label: Elixir
+  id: elixir

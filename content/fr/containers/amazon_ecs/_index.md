@@ -295,8 +295,6 @@ Si vous disposez déjà d'une définition de tâche, modifiez votre fichier de f
  ```
 #### Chemin réseau
 
-<div class="alert alert-info">Network Path pour Datadog Cloud Network Monitoring est en disponibilité limitée. Contactez votre représentant Datadog pour vous inscrire.</div>
-
 1. Pour activer [Network Path][31] sur vos clusters ECS, activez le module traceroute `system-probe` en ajoutant la variable d'environnement suivante dans votre fichier `datadog-agent-sysprobe-ecs.json` :
 
    ```json

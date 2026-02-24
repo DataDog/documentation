@@ -112,13 +112,34 @@ Toggle the switch to **Enable TLS** if your organization requires secure connect
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### Set environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- (Optional) Google Pub/Sub endpoint URL identifier:
+	- By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
+	- If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][1] for more information. Enter the configured endpoint URL into your secrets manager.
+	- The default identifier is `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
+- Google Pub/Sub TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_GCP_PUBSUB_KEY_PASS`.
+
+[1]: https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 #### Optional alternative Pub/Sub endpoints
 
 {{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 

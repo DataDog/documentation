@@ -24,9 +24,23 @@ Set up the Datadog Metrics destination and its environment variables when you [s
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+There are no secret identifiers for this destination.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

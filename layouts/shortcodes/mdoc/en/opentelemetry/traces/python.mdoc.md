@@ -3,7 +3,7 @@ This partial contains Python traces content for the OTel API.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Setup
+## Setup {% #setup-otel-python %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -11,7 +11,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 2. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
-### Creating custom spans
+### Creating custom spans {% #creating-custom-spans-otel-python %}
 
 To create custom spans within an existing trace context:
 
@@ -27,7 +27,7 @@ def do_work():
         # When the 'with' block ends, the span is automatically closed
 ```
 
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-otel-python %}
 
 To access the currently active span, use the `get_current_span()` function:
 
@@ -38,7 +38,7 @@ current_span = trace.get_current_span()
 # enrich 'current_span' with information
 ```
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-otel-python %}
 
 Add attributes to a span to provide additional context or metadata:
 
@@ -50,7 +50,7 @@ current_span = trace.get_current_span()
 current_span.set_attribute("attribute_key1", 1)
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-otel-python %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 2.9.0 or higher.
@@ -65,7 +65,7 @@ span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two",
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-otel-python %}
 
 To record exceptions, use the `record_exception` API:
 

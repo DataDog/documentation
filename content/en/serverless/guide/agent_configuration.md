@@ -106,7 +106,7 @@ Send custom metrics with [the StatsD protocol][5]:
 
 [4]: https://docs.datadoghq.com/tracing/troubleshooting/agent_rate_limits/#max-connection-limit
 
-[5]: /developers/dogstatsd/
+[5]: /extend/dogstatsd/
 
 [6]: /agent/configuration/proxy/#agent-v6
 

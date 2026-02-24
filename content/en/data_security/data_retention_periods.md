@@ -12,7 +12,7 @@ further_reading:
 algolia:
   tags: ['data retention']
 filter_all: All
-content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
+content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/extend/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
 attributes:
   - product: APM
     data_type: |
@@ -123,8 +123,8 @@ attributes:
        - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: |
-       - **NetFlow**: 30 days
-       - **SNMP traps**: 15 days
+       - **NetFlow**: 15, 30, 60, or 90 days, determined by customer plan
+       - **SNMP traps**: Determined by customer plan, default to 15 days
   - product: Cloud Network Monitoring
     data_type: |
        - **Network traffic**: 14 days
