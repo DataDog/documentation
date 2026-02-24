@@ -61,7 +61,7 @@ Datadog supports the following features for the SCM providers listed below. See 
 Repositories from GitHub instances are supported for GitHub.com, GitHub Enterprise Cloud (SaaS), and GitHub Enterprise Server (On-Prem). For GitHub Enterprise Server, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 If your GitHub Enterprise Server instance is hosted on an internal/private network but exposed through a public DNS alias (recommended), configure the integration using the public hostname, then <a href="/help">contact Datadog Support</a> with both the public hostname and the internal hostname to enable hostname aliasing.
 </div>
 
