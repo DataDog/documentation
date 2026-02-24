@@ -2,11 +2,29 @@
 title: Configure integrations and settings
 ---
 
+Set up integrations to:
+- [Enable Bits to read from and write to third-party systems](#integrate-with-third-party-observability-and-scm-platforms)
+- [Send investigation findings to ITSM and collaboration platforms](#configure-where-bits-sends-investigation-findings)
+- [Pull context from knowledge bases](#configure-knowledge-base-integrations)
+
+## Integrate with third-party observability and SCM platforms
+
+Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, and Sentry to pull in observability data and source code as part of its investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies a problem fixable in code. 
+
+### GitHub
+To configure GitHub:
+1. Install the [GitHub integration][13]. 
+1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+Certain third-party integrations Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
+
 ## Configure where Bits sends investigation findings
 
 By default, all investigations are listed on the [Bits AI Investigations][1] page.
 
-For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has `@slack`, `@case`, or `@oncall` [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below. 
+For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has `@slack`, `@teams`, `@case`, or `@oncall` [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below. 
 
 
 ### Slack
@@ -15,6 +33,10 @@ For monitor alert investigations, a summary of the findings is available on the 
 1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
 1. Lastly, go to [**Bits AI SRE** > **Settings** > **Integrations**][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
    <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
+
+### Microsoft Teams
+1. [Connect your Microsoft tenant to Datadog][12].
+1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel.
 
 ### Datadog Case Management
 
@@ -47,15 +69,6 @@ To set up Bits AI SRE to use Confluence:
 1. Optionally, enable account crawling to make Confluence a data source within Bits' chat interface. If you don't enable account crawling, Bits can still use Confluence to inform its investigation plan.
 1. Add a link to a Confluence page in your monitor's message. Bits reads the page to extract Datadog telemetry links and other context when forming its investigation plan.
 1. You can view all connected Confluence accounts on the [Bits Settings page][4].
-
-### Best practices: Optimize Bits' understanding of your knowledge
-
-Help Bits interpret and act on your documentation by following these best practices:
-- Include relevant Datadog telemetry links in your Confluence pages. Bits queries these links to extract information for its investigation.
-- Provide clear, step-by-step instructions for resolving monitor issues. Bits follows these instructions precisely, so being specific leads to more accurate outcomes.
-- Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
-
-<div class="alert alert-tip">The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.</div>
 
 ## Configure permissions
 
@@ -101,7 +114,18 @@ You can monitor user-initiated actions with [Audit Trail][11]. Events are sent w
 - A user enables or disables automatic investigations for a monitor
 - A user modifies the monitor rate limit
 
+## Actions
 
+Bits AI SRE provides three [Actions][15]: 
+- Trigger Investigation
+- Get Investigation
+- List Investigations
+
+These Actions can be used to build Workflows, Agents, and Apps tailored to your use case.
+
+## API
+
+You can trigger and retrieve investigation details programmatically [via API][16]. 
 
 [1]: https://app.datadoghq.com/bits-ai/investigations
 [2]: /monitors/notify
@@ -114,3 +138,8 @@ You can monitor user-initiated actions with [Audit Trail][11]. Events are sent w
 [9]: /bits_ai/bits_ai_sre/investigate_issues#manually-start-an-investigation
 [10]: https://app.datadoghq.com/bits-ai/settings/rate-limits
 [11]: /account_management/audit_trail/events/#bits-ai-sre
+[12]: /integrations/microsoft-teams/?tab=datadogapprecommended
+[13]: /integrations/guide/source-code-integration/?tab=githubsaasonprem#links-to-git-providers--code-snippets
+[14]: /integrations/guide/source-code-integration/?tab=githubsaasonprem#tag-your-apm-telemetry-with-git-information
+[15]: /actions/workflows/actions/
+[16]: /api/latest/?tab=java
