@@ -181,4 +181,5 @@ After you save, Datadog begins syncing your information schema and query history
 
 [1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
+[3]: https://app.datadoghq.com/apm/traces
 [3]: https://app.datadoghq.com/datasets/settings/integrations
