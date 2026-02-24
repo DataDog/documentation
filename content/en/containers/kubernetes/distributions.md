@@ -547,10 +547,10 @@ spec:
   override:
     clusterAgent:
       image:
-        name: registry.datadoghq.com/cluster-agent:latest
+        name: gcr.io/datadoghq/cluster-agent:latest
     nodeAgent:
       image:
-        name: registry.datadoghq.com/agent:latest
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
         - key: node-role.kubernetes.io/controlplane
           operator: Exists

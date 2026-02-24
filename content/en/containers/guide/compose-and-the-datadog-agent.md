@@ -64,7 +64,7 @@ instances:
 The `Dockerfile` is used to instruct Docker compose to build a Datadog Agent image including the `redisdb.yaml` file at the right location:
 
 ```
-FROM registry.datadoghq.com/agent:latest
+FROM gcr.io/datadoghq/agent:latest
 ADD conf.d/redisdb.yaml /etc/datadog-agent/conf.d/redisdb.yaml
 ```
 
