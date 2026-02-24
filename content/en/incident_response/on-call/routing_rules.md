@@ -11,134 +11,116 @@ aliases:
 
 ## Overview
 
-With routing rules, you can define granular logic to control how alerts reach your team. Instead of sending alerts through a single escalation policy, you can create flexible, condition-based rules to route them based on priority, time of day, tags, and more.
+Routing rules determine how alerts are directed within your team. Instead of sending all alerts through a single escalation policy, you can create rules that route alerts based on priority, tags, monitor status, time of day, and more.
 
-## Routing rules examples
+## Create a routing rule
 
-- Route alerts by priority:
-  - Send **priority 1** alerts to your primary escalation policy.
-  - Send **priority 2–4** alerts to Slack or Microsoft Teams.
+Rules are evaluated from top to bottom. The last rule must be a fallback that routes all unmatched alerts to an escalation policy.
 
-- Route alerts by time of day:
-  - During business hours, route alerts to an escalation policy.
-  - After hours, route critical alerts to paging, and non-critical alerts to chat.
+To create a routing rule:
 
-- Delay escalation outside of support hours:
-  - Define [support hours](#support-hours) on an escalation policy action to postpone notifications until the next active window.
-  - For example, a Page that arrives at 2:00 AM on Saturday creates a case immediately, but does not notify responders until 9:00 AM on Monday.
+1. Go to [**On-Call** > **Teams**][1] and select a team.
+1. Find the **Page Routing** section and click **Edit**. The **Configure Page Routing** window opens.
+ 
+   {{< img src="service_management/oncall/configure-page-routing.png" alt="The Configure Page Routing window in Datadog On-Call, showing routing condition fields and target configuration options" style="width:100%;" >}}
 
-- Use Dynamic Urgency to automatically detect urgency from the monitor alert:
-  - `warn` status ➝ low urgency
-  - `alert` status ➝ high urgency
+1. Click **Add Conditions** to add a routing condition.
+1. Define conditions using the [routing rule syntax](#routing-rule-syntax).
+1. Optionally, configure [support hours](#support-hours):
 
-  The urgency of a page determines how end users are notified, based on their preferences. <br><br>
+   1. Toggle on **Use support hours**.
+   1. Click **Add** to add a time interval. For each interval, select a time zone and the days of the week, then set the start and end time.
+   1. Optionally, enable the **Outside support hours, hold escalation policy notifications until the next window** toggle.
 
-- Trigger workflows (coming soon): Use routing rules to trigger automated workflows in response to matching alerts.
+   {{< img src="service_management/oncall/page-routing-support-hours.png" alt="The support hours configuration panel on a routing condition, showing time interval fields and the option to hold escalation policy notifications outside support hours" style="width:60%;" >}}
 
-## Send Pages to Slack or Microsoft Teams
-{{< img src="service_management/oncall/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams." style="width:100%;" >}}
+1. Under **Set targets**, click **Add** and select a target type:
+   - **Page escalation policy**: Select an escalation policy and set the urgency to **Dynamic** (based on alert status), **High**, or **Low**.
+   - **Send Slack message** (Preview): Select a Slack workspace and channel.
+   - **Send Microsoft Teams message** (Preview): Select a Teams tenant, team, and channel.
+   - **Run Workflow** (Preview): Select an existing workflow.
 
-When you route Pages to Slack or Microsoft Teams, Datadog sends a notification to the configured channel and creates a corresponding Page object in the On-Call platform. From Slack, team members can use interactive buttons to acknowledge, resolve, escalate, or declare an incident. This streamlines incident response without leaving the chat environment.
+1. Add more rules as needed.
 
-{{< img src="service_management/oncall/page_representation_in_slack.png" alt="A sample Page rendered in Slack." style="width:70%;" >}}
+### Routing rule syntax
 
-When a Page is acknowledged or resolved in Slack, Datadog updates the original notification in place, without sending additional messages. This keeps responders focused by reducing noise and showing the current Page status directly in the original thread.
+Routing rules use [Datadog query syntax][2] and support multiple `if/else` conditions.
 
-## Routing rule syntax
-
-Routing rules use [Datadog query syntax][3] and support multiple `if/else` conditions. Rules are evaluated from top to bottom, and the final rule must act as a fallback that routes all unmatched alerts to an escalation policy.
-
-<div class="alert alert-danger">Routing rule syntax is case-sensitive. For example, `tags.env:Prod` will not match `tags.env:prod`.</div>
+<div class="alert alert-warning">Routing rule syntax is case-sensitive. For example, <code>tags.env:Prod</code> does not match <code>tags.env:prod</code>.</div>
 
 **Supported attributes:**
 
-| Attribute      | Description                                                                 | Example                                 |
-|----------------|-----------------------------------------------------------------------------|-----------------------------------------|
-| `tags`         | Tags on the incoming alert                                                  | `tags.env:prod`                         |
+| Attribute      | Description                                                                 | Example                               |
+|----------------|-----------------------------------------------------------------------------|---------------------------------------|
+| `tags`         | Tags on the incoming alert                                                  | `tags.env:prod`                       |
 | `groups`       | Monitor group names                                                         | `groups.service:checkout-service`     |
-| `priority`     | Monitor priority (1–5)                                                      | `priority:(1 OR 2)`                     |
-| `alert_status` | Monitor status (`error`, `warn`, `success`)                                 | `alert_status:(error OR warn)`          |
+| `priority`     | Monitor priority (1–5)                                                      | `priority:(1 OR 2)`                   |
+| `alert_status` | Monitor status (`error`, `warn`, `success`)                                 | `alert_status:(error OR warn)`        |
 
-## Support hours
+### Support hours
 
-Support hours let you define time windows during which an escalation policy actively notifies responders. When a Page arrives outside of support hours, Datadog creates the Page immediately but **postpones** the escalation policy until the next active support hours window. After the postponement period ends, the escalation policy begins executing normally.
+Support hours define when an escalation policy is allowed to notify responders.
 
-### How support hours work
+When a routing rule includes support hours, Datadog compares the current time to the configured intervals:
+- **Inside support hours**: The escalation policy runs immediately and notifies responders.
+- **Outside support hours**:
+  - If **Outside support hours, hold escalation policy notifications until the next window** is enabled, Datadog creates the Page immediately but postpones escalation policy notifications until the next support window begins. Datadog also adds a timeline entry to record the delay.
+  - If this option is disabled, Datadog skips the routing rule and does not create a Page. It then evaluates the next matching rule instead.
 
-1. An alert triggers a Page to an On-Call team.
-1. Routing rules are evaluated from top to bottom to find a matching rule.
-1. The matching rule's escalation policy action checks the current time against the configured support hours:
-   - **Inside support hours**: The escalation policy executes immediately and responders are notified.
-   - **Outside support hours**: The Page is created and the escalation policy is postponed. Datadog records a timeline entry on the Page indicating the postponement. When support hours resume, the escalation policy begins executing.
+#### Example support hour configurations
 
-### Support hours compared to time restrictions
+- Set support hours to standard business hours (Monday–Friday, 9 a.m.–5 p.m.):
 
-Routing rules support two types of time-based controls. They serve different purposes:
+  Add one interval. Select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
 
-| Feature | What it controls | Behavior outside the time window |
-|---------|-----------------|----------------------------------|
-| **Time restrictions** | When the routing rule **evaluates** | The rule is skipped and the next rule is tried. No Page is created by this rule. |
-| **Support hours** | When the escalation policy **notifies responders** | The Page is created immediately, but notifications are postponed until the next active window. |
+- Create a split support shift (mornings and afternoons):
 
-For example, if your team handles priority 2 alerts and wants to track all alerts but only page responders during business hours, use **support hours**. If your team should not handle certain alerts at all outside of business hours (and another rule or team should handle them instead), use **time restrictions**.
+  Add two intervals, both with Monday through Friday selected: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
 
-<div class="alert alert-warning">You cannot configure both time restrictions and support hours on the same routing rule. Use one or the other.</div>
+**Note**: These examples assume the **Outside support hours, hold escalation policy notifications until the next window** toggle is enabled.
 
-### Configure support hours
+## Send Pages to Slack or Microsoft Teams
 
-To add support hours to a routing rule's escalation policy action, configure a time zone and one or more time windows (restrictions).
+{{< img src="service_management/oncall/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams" style="width:100%;" >}}
 
-Each support hours configuration includes:
-- **Time zone**: An IANA time zone (for example, `America/New_York`, `Europe/Paris`, or `Asia/Tokyo`).
-- **Restrictions**: One or more time windows that define when the escalation policy is active. Each restriction specifies:
-  - A **start day** and **start time**
-  - An **end day** and **end time**
+When you route Pages to Slack or Microsoft Teams, Datadog sends a notification to the configured channel and creates a Page. Team members can use buttons to acknowledge, escalate, or resolve the Page.
 
-Times use the `HH:MM:SS` format (for example, `09:00:00` for 9:00 AM).
+{{< img src="service_management/oncall/page_representation_in_slack.png" alt="A Page notification in Slack with buttons to acknowledge, escalate, or resolve" style="width:70%;" >}}
 
-If multiple restriction windows are defined, the escalation policy is active if the current time matches **any** of the windows.
+When a Page is acknowledged or resolved in Slack or Teams, Datadog updates the original notification in place, without sending additional messages. This minimizes notification volume and keeps the current Page status visible in the original thread.
 
-#### Example: Business hours only (Monday through Friday, 9 AM to 5 PM)
+## Routing rule examples
 
-Set a single restriction window:
-- **Start day**: Monday, **Start time**: 09:00:00
-- **End day**: Friday, **End time**: 17:00:00
-- **Time zone**: `America/New_York`
+- **Route alerts by priority:**
+  - Send **priority 1** alerts to your primary escalation policy.
+  - Send **priority 2–4** alerts to Slack or Microsoft Teams.
 
-Pages that arrive outside this window (for example, at 2:00 AM on Saturday) are postponed until 9:00 AM on the following Monday.
+- **Route alerts by time of day:**
+  - During business hours, route alerts to an escalation policy.
+  - Outside business hours, route critical alerts to an escalation policy and non-critical alerts to a Slack or Teams channel.
 
-#### Example: Split shift (mornings and afternoons)
+- **Delay escalation outside of support hours:**
+  - Define [support hours](#support-hours) on a routing condition to hold escalation policy notifications until the next active window.
 
-Define two restriction windows to cover non-contiguous hours:
+- **Use Dynamic urgency to set urgency based on the monitor's alert status:** 
+  - If the monitor alert has `warn` status, set urgency to `low`.
+  - If the monitor alert has `error` status, set urgency to `high`.
 
-**Window 1:**
-- **Start day**: Monday, **Start time**: 09:00:00
-- **End day**: Friday, **End time**: 12:00:00
-
-**Window 2:**
-- **Start day**: Monday, **Start time**: 14:00:00
-- **End day**: Friday, **End time**: 18:00:00
-
-Pages that arrive between 12:00 PM and 2:00 PM are postponed until the afternoon window opens.
+  Urgency determines how responders are notified based on their notification preferences.
 
 ## Best practices
 
-- Balance visibility with urgency:
+- **Balance visibility with urgency:**
   - Use paging and escalation policies for critical alerts that require immediate action.
   - Use Slack or Teams for lower-severity issues that need awareness but don't warrant an on-call response.
 
-- Use support hours to protect responders from off-hours notifications:
-  - For non-critical alerts, configure support hours to match your team's working hours. Pages are tracked immediately but responders are only notified during active windows.
-  - For critical alerts that require immediate attention regardless of time, do **not** set support hours on the escalation policy.
-
-- Choose between time restrictions and support hours based on your routing needs:
-  - Use **time restrictions** when a different routing rule or team should handle the alert outside of business hours.
-  - Use **support hours** when your team should own the alert at all times but only page responders during defined hours.
+- **Use support hours to protect responders from off-hours notifications:**
+  - For non-critical alerts, configure support hours to match your team's working hours. Datadog creates the Page immediately but only notifies responders during active windows.
+  - For critical alerts that require immediate attention regardless of time, do not configure support hours on the routing rule.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/on-call/teams
-[2]: https://app.datadoghq.com/on-call/teams
-[3]: /tracing/trace_explorer/query_syntax/
+[1]: https://app.datadoghq.com/on-call/teams
+[2]: /tracing/trace_explorer/query_syntax/
