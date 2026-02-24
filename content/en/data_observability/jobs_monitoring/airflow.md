@@ -149,17 +149,17 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment var
 
 ### Setup
 
+<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: MWAA default constraints pin older <code>apache-airflow-providers-openlineage` versions</code>. These versions include known issues that can degrade the Data Observability experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/"> Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
+
 To get started, follow the instructions below.
 
-1. **(If using Airflow 2.7.2, 2.8.1, or 2.9.2)**: MWAA default constraints pin older `apache-airflow-providers-openlineage` versions. These versions include **known issues that can degrade the Data Observability experience**. To upgrade to provider versions with these fixes, follow [Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2][11].
-
-2. Install `openlineage` provider by adding the following into your `requirements.txt` file:
+1. Install `openlineage` provider by adding the following into your `requirements.txt` file:
 
     ```text
     apache-airflow-providers-openlineage
     ```
 
-3. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
+1. Configure `openlineage` provider. The simplest option is to set the following environment variables in your [Amazon MWAA start script][3]:
 
    ```shell
    #!/bin/sh
@@ -181,9 +181,9 @@ To get started, follow the instructions below.
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
-4. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
+1. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-5. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
+1. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
    1. Configure Amazon MWAA to [send logs to CloudWatch][9].
    2. [Send the logs to Datadog][10].
 
