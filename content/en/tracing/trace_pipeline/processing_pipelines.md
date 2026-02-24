@@ -51,13 +51,13 @@ From the [Pipelines][1] page, you can:
 - Edit pipelines in draft mode
 - Restrict access with [RBAC][3]
 
-Disabling a pipeline stops it from processing newly ingested spans. Previously stored spans are not retroactively modified.
+Disabling a pipeline stops it from processing newly ingested spans. It does not retroactively modify previously stored spans.
 
 {{< img src="/tracing/processing_pipelines/manage_pipelines.png" alt="The Processing Pipelines list showing three active pipelines with their filter queries and management controls" style="width:100%;">}}
 
 ## Processors
 
-Processors define the transformations applied to matching spans. Within a pipeline, processors run sequentially. Attribute changes from one processor are available to all downstream processors in the same pipeline.
+Processors define the transformations applied to matching spans. Within a pipeline, processors run sequentially. Attribute changes from one processor apply to all downstream processors in the same pipeline. To add a processor, expand a pipeline and click **Add Processor**.
 
 <div class="alert alert-info">Processors can only be applied to <a href="/tracing/trace_explorer/span_tags_attributes/">span attributes, not span tags</a>.</div>
 
@@ -65,7 +65,7 @@ Processors define the transformations applied to matching spans. Within a pipeli
 
 The Remapper processor renames, merges, or removes span attributes to enforce consistent attribute naming across services. It modifies attribute keys, but *does not* extract new data from attribute values. To extract data from values, use the [Parser processor](#parser-processor).
 
-The system attributes `env`, `service`, `resource_name`, `operation_name`, and `@duration` cannot be remapped. If you rename or remove attributes used in dashboards, monitors, or retention filters, update those configurations accordingly.
+The system attributes `env`, `service`, `resource_name`, `operation_name`, and `@duration` cannot be remapped. If you rename or remove attributes used in dashboards, monitors, or retention filters, update the affected dashboards, monitors, and retention filters accordingly.
 
 For example, different services may emit `http.route`, `http.path`, or `http.target` for the same logical field. Use the Remapper to map all three to `http.route` so that every matching span contains a single, standardized attribute.
 
@@ -99,7 +99,7 @@ Reordering pipelines or processors changes processing behavior.
 
 ## Preprocessed attributes
 
-Some span attributes are automatically preprocessed by Datadog before pipelines run. For example, [Quantization of APM Data][5] normalizes resource names by default and cannot be disabled. You can define additional pipelines if you need further customization of these attributes.
+Datadog preprocesses some span attributes before pipelines run. For example, [Quantization of APM Data][5] normalizes resource names by default and cannot be disabled. You can define additional pipelines if you need further customization of these attributes.
 
 ## Further reading
 
