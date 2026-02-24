@@ -29,7 +29,7 @@ You can ask Bits Assistant questions such as:
 
 When relevant to your query, Bits Assistant surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-### In Datadog
+### Web Application
 
 To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, click **Bits AI** in the left-side navigation panel, or use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
@@ -37,13 +37,11 @@ Some responses from Bits Assistant include a **suggestions** button. Clicking it
 
 {{< img src="bits_ai/getting_started/bits_assistant_panel.png" alt="Bits Assistant side panel showing example prompts including 'What can you do?', 'Summarize any current high-severity incidents', and 'Look up documentation related to the current page'" style="width:40%;">}}
 
-### On the mobile app
+### Mobile Application
 
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
-Click Bits AI on the mobile app to access the same querying features available on the browser.
-
-## Querying in Slack
+## Bits Assistant in Slack
 
 1. [Connect your Datadog account to your Slack workspace][1].
 1. In Slack, use the `/dd connect` command to display a list of accounts to connect to.
