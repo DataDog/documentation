@@ -29574,6 +29574,19 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_ATTACHMENTS
+    IncidentCondition:
+      description: A condition evaluated against incident tags.
+      properties:
+        tags:
+          description: Tags that must match for the condition to pass.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - tags
+      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -31407,6 +31420,32 @@ components:
           $ref: '#/components/schemas/RelationshipToIncidentResponders'
         user_defined_fields:
           $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFields'
+      type: object
+    IncidentScheduleTrigger:
+      description: Trigger a workflow from an Incident Schedule. The workflow must
+        be published.
+      properties:
+        incidentType:
+          description: Incident type filter for the schedule.
+          type: string
+        rrule:
+          description: Recurrence rule expression for scheduling.
+          example: ''
+          type: string
+        tagCondition:
+          $ref: '#/components/schemas/IncidentCondition'
+      required:
+      - rrule
+      type: object
+    IncidentScheduleTriggerWrapper:
+      description: Schema for an Incident Schedule-based trigger.
+      properties:
+        incidentScheduleTrigger:
+          $ref: '#/components/schemas/IncidentScheduleTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - incidentScheduleTrigger
       type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
@@ -67307,6 +67346,7 @@ components:
       - $ref: '#/components/schemas/FormTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
+      - $ref: '#/components/schemas/IncidentScheduleTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
       - $ref: '#/components/schemas/NotebookTriggerWrapper'
       - $ref: '#/components/schemas/OnCallTriggerWrapper'
