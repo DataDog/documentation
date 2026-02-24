@@ -76,10 +76,6 @@ These permissions are needed for the following reasons:
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
-## Network requirements
-
-If your Databricks workspace restricts network access by IP, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to the allowlist.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

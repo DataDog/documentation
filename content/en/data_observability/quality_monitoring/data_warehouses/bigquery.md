@@ -100,10 +100,6 @@ Once the service account has been created and the necessary roles and APIs have 
 
 After you configure the integration, Datadog begins syncing your information schema and query history in the background. Initial syncs can take several hours depending on the size of your BigQuery deployment.
 
-## Network requirements
-
-If your Google Cloud project restricts network access by IP, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to the allowlist.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
