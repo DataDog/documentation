@@ -1,9 +1,6 @@
 ---
 title: Data Observability Monitor
 description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses."
-aliases:
-  - /monitors/monitor_types/data_observability
-  - /monitors/create/types/data_observability/
 further_reading:
   - link: "/data_observability/"
     tag: "Documentation"
