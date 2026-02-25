@@ -89,9 +89,16 @@ In the Helm chart:
          fieldRef:
             fieldPath: metadata.name
     ```
+    - If you want to override the `CLUSTER_NAME`, set the [`CLUSTER_NAME`][3] environment variable in the Helm chart.
+      ```
+      env:
+        - name: CLUSTER_NAME
+          value: "my-cluster"
+      ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L156C3-L159C33
 [2]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L136-L142
+[3]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L154-L155
 
 {{% /tab %}}
 {{% tab "Docker" %}}
