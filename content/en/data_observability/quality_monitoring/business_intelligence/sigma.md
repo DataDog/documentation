@@ -37,7 +37,7 @@ When your Sigma account is successfully connected, Datadog syncs and automatical
 
 Initial syncs may take up to several hours depending on the size of your Sigma deployment.
 
-After syncing, you can explore your Sigma assets and their upstream dependencies in the [Data Observability Explorer][4].
+After syncing, you can explore your Sigma assets and their upstream dependencies in the [Data Observability Catalog][4].
 
 ## Further reading
 
@@ -46,4 +46,4 @@ After syncing, you can explore your Sigma assets and their upstream dependencies
 [1]: https://help.sigmacomputing.com/reference/generate-client-credentials
 [2]: https://app.datadoghq.com/integrations/sigma-computing
 [3]: https://help.sigmacomputing.com/docs/region-warehouse-and-feature-support#supported-cloud-platforms-and-regions
-[4]: https://app.datadoghq.com/datasets/catalog
+[4]: https://app.datadoghq.com/data-obs/catalog
