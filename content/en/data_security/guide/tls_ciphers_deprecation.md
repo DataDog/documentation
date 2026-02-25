@@ -4,7 +4,7 @@ title: TLS cipher suite deprecation
 
 ## Overview
 
-TLS is a security protocol that protects web traffic by providing confidentiality and integrity of data in transit. During a TLS session, both parties agree on a cipher suite that dictates the cryptographic algorithms used.
+TLS is a security protocol that protects web traffic by providing confidentiality and integrity of data in transit between clients and servers. During a TLS session, both parties agree on a cipher suite that dictates which cryptographic algorithms to use.
 
 Datadog uses a modern cryptographic engine that requires specific cipher suite configurations.
 
