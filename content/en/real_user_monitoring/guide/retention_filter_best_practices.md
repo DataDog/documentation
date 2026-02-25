@@ -102,6 +102,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Sessions with replays | `@session.has_replay:true` | Keep sessions with a replay to ensure the system does not discard any sessions with session replays available. | 100% |
 | Sessions with errors | `@type:error` | A default filter that can be applied to retain all sessions that contain at least 1 error. | 100% |
 | Sessions with crashes | `@type:error @error.is_crash:true` | A filter that can be applied to retain all sessions that ended with a crash. | 100% |
+| Sessions with specific views | `@type:view @view.name:XXXXX` | A filter that can be applied to retain all sessions with a view that is critical to monitor. | %100 |
 | Sessions | `@type:session` | A default filter, placed last in the list, to apply to all sessions, which allows you to retain or discard a percentage of them. | Variable |
 | App versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. | 100% |
 | Environments | `@type:session environment:stage` | When collecting sessions from various build types or environments, ensure you capture at least 100% of sessions from staging environments, while collecting a smaller percentage from dev/test environments. | 100% |
