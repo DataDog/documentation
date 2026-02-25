@@ -67,7 +67,7 @@ Below are Datadog's tagging requirements:
 
     Other special characters are converted to underscores.
 
-    **Note**: Some cross-product exceptions exist. For example, when `env` is set at the Agent level, trace, metrics, and log data can include an environment name that begins with a digit. While this is known behavior, using tags that don't follow standard naming conventions can increase tag cardinality. Non-standard tags (such as numeric prefixes) can potentially impact data volume limits, especially for tracing data. Follow the standard tag naming rule when possible.
+    **Note**: Some cross-product exceptions exist. For example, when `env` is set at the Agent level, environment names that begin with a digit are accepted for metrics, traces, and logs. Non-standard tags may cause compatibility issues or unexpected behavior across Datadog products. Follow standard tag naming conventions when possible.
 
 2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
