@@ -120,6 +120,7 @@ Method
 | filter[from] | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time minus 15 minutes. |
 | filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time. |
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
+| include_attachments | boolean | Whether to retrieve truncated input and output content. Defaults to True. |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
 | page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
 
@@ -291,6 +292,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | Field | Type | Description |
 |-------|------|-------------|
 | time_offset | integer | The time offset (in seconds) to apply to the query. |
+| include_attachments | boolean | Whether to retrieve truncated input and output content. Defaults to True. |
 
 ### PageQuery
 
@@ -343,6 +345,26 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 |------------|-------------------------------|--------------------------------------------|
 | content        | string                        | The body of the message. |
 | role        | string                        | The role of the entity. |
+| tool_calls        | [[ToolCall](#toolcall)]                     | List of tool calls made in this message. |
+| tool_results        | [[ToolResults](#toolresult)]                     | List of tool execution results in this message. |
+
+### ToolCall
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| name        | string                        | The name of the tool being called. |
+| arguments        | Dict[key (string), any]                         | The arguments passed to the tool. |
+| tool_id        | string                        | Unique identifier for this tool call. |
+| type        | string                        | The type of tool call. |
+
+### ToolResult
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| name        | string                        | The name of the tool that was called. |
+| result        | string                        | The result returned by the tool. |
+| tool_id        | string                        | Unique identifier matching the corresponding tool call. |
+| type        | string                        | The type of tool result. |
 
 ### ToolDefinition
 
