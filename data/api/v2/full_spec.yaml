@@ -510,6 +510,34 @@ components:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
         type: array
+    GoogleChatHandleIdPathParameter:
+      description: Your organization handle ID.
+      in: path
+      name: handle_id
+      required: true
+      schema:
+        type: string
+    GoogleChatOrganizationBindingIdPathParameter:
+      description: Your organization binding ID.
+      in: path
+      name: organization_binding_id
+      required: true
+      schema:
+        type: string
+    GoogleChatOrganizationDomainNamePathParameter:
+      description: The Google Chat domain name.
+      in: path
+      name: domain_name
+      required: true
+      schema:
+        type: string
+    GoogleChatOrganizationSpaceDisplayNamePathParameter:
+      description: The Google Chat space display name.
+      in: path
+      name: space_display_name
+      required: true
+      schema:
+        type: string
     IncidentIDPathParameter:
       description: The UUID of the incident.
       in: path
@@ -533,6 +561,17 @@ components:
       schema:
         items:
           $ref: '#/components/schemas/IncidentImpactRelatedObject'
+        type: array
+    IncidentImportIncludeQueryParameter:
+      description: Specifies which related object types to include in the response
+        when importing an incident.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: '#/components/schemas/IncidentImportRelatedObject'
         type: array
     IncidentIncludeQueryParameter:
       description: Specifies which types of related objects should be included in
@@ -6918,6 +6957,11 @@ components:
           type: string
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        connection_string_key:
+          description: Name of the environment variable or secret that holds the Azure
+            Storage connection string.
+          example: AZURE_STORAGE_CONNECTION_STRING
+          type: string
         container_name:
           description: The name of the Azure Blob Storage container to store logs
             in.
@@ -18337,20 +18381,20 @@ components:
       - finished_at
       type: object
     DORADeploymentPatchRemediation:
-      description: Remediation details for the deployment.
+      description: Remediation details for the deployment. Optional, but required
+        to calculate failed deployment recovery time.
       properties:
         id:
-          description: The ID of the remediation action.
+          description: The ID of the remediation deployment. Required when the failed
+            deployment must be linked to a remediation deployment.
           example: eG42zNIkVjM
           type: string
         type:
           $ref: '#/components/schemas/DORADeploymentPatchRemediationType'
-      required:
-      - id
-      - type
       type: object
     DORADeploymentPatchRemediationType:
-      description: The type of remediation action taken.
+      description: The type of remediation action taken. Required when the failed
+        deployment must be linked to a remediation deployment.
       enum:
       - rollback
       - rollforward
@@ -18554,13 +18598,13 @@ components:
           type: array
       type: object
     DORAFailureFetchResponse:
-      description: Response for fetching a single failure event.
+      description: Response for fetching a single incident event.
       properties:
         data:
           $ref: '#/components/schemas/DORAIncidentObject'
       type: object
     DORAFailureRequest:
-      description: Request to create a DORA failure event.
+      description: Request to create a DORA incident event.
       properties:
         data:
           $ref: '#/components/schemas/DORAFailureRequestData'
@@ -18568,16 +18612,16 @@ components:
       - data
       type: object
     DORAFailureRequestAttributes:
-      description: Attributes to create a DORA failure event.
+      description: Attributes to create a DORA incident event.
       properties:
         custom_tags:
           $ref: '#/components/schemas/DORACustomTags'
         env:
-          description: Environment name that was impacted by the failure.
+          description: Environment name that was impacted by the incident.
           example: staging
           type: string
         finished_at:
-          description: Unix timestamp when the failure finished. It must be in nanoseconds,
+          description: Unix timestamp when the incident finished. It must be in nanoseconds,
             milliseconds, or seconds.
           example: 1693491984000000000
           format: int64
@@ -18585,16 +18629,16 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Failure ID. Must be 16-128 characters and contain only alphanumeric
+          description: Incident ID. Must be 16-128 characters and contain only alphanumeric
             characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
             -, _, ., :).
           type: string
         name:
-          description: Failure name.
+          description: Incident name.
           example: Webserver is down failing all requests.
           type: string
         services:
-          description: Service names impacted by the failure. If possible, use names
+          description: Service names impacted by the incident. If possible, use names
             registered in the Service Catalog. Required when the team field is not
             provided.
           example:
@@ -18603,11 +18647,11 @@ components:
             type: string
           type: array
         severity:
-          description: Failure severity.
+          description: Incident severity.
           example: High
           type: string
         started_at:
-          description: Unix timestamp when the failure started. It must be in nanoseconds,
+          description: Unix timestamp when the incident started. It must be in nanoseconds,
             milliseconds, or seconds.
           example: 1693491974000000000
           format: int64
@@ -18634,7 +18678,7 @@ components:
       - attributes
       type: object
     DORAFailureResponse:
-      description: Response after receiving a DORA failure event.
+      description: Response after receiving a DORA incident event.
       properties:
         data:
           $ref: '#/components/schemas/DORAFailureResponseData'
@@ -18642,10 +18686,10 @@ components:
       - data
       type: object
     DORAFailureResponseData:
-      description: Response after receiving a DORA failure event.
+      description: Response after receiving a DORA incident event.
       properties:
         id:
-          description: The ID of the received DORA failure event.
+          description: The ID of the received DORA incident event.
           example: 4242fcdd31586083
           type: string
         type:
@@ -18655,7 +18699,7 @@ components:
       type: object
     DORAFailureType:
       default: dora_failure
-      description: JSON:API type for DORA failure events.
+      description: JSON:API type for DORA incident events.
       enum:
       - dora_failure
       example: dora_failure
@@ -18663,7 +18707,7 @@ components:
       x-enum-varnames:
       - DORA_FAILURE
     DORAFailuresListResponse:
-      description: Response for the list failures endpoint.
+      description: Response for the list incidents endpoint.
       example:
         data:
         - attributes:
@@ -18797,7 +18841,7 @@ components:
             from: '2025-01-01T00:00:00Z'
             limit: 100
             query: service:(shopist OR api-service) env:production team:backend
-            sort: -started_at
+            sort: -finished_at
             to: '2025-01-31T23:59:59Z'
           type: dora_deployments_list_request
       properties:
@@ -18828,7 +18872,7 @@ components:
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
-          example: -started_at
+          example: -finished_at
           type: string
         to:
           description: Maximum timestamp for requested events.
@@ -18864,7 +18908,7 @@ components:
       x-enum-varnames:
       - DORA_DEPLOYMENTS_LIST_REQUEST
     DORAListFailuresRequest:
-      description: Request to get a list of failures.
+      description: Request to get a list of incidents.
       example:
         data:
           attributes:
@@ -18881,7 +18925,7 @@ components:
       - data
       type: object
     DORAListFailuresRequestAttributes:
-      description: Attributes to get a list of failures.
+      description: Attributes to get a list of incidents.
       properties:
         from:
           description: Minimum timestamp for requested events.
@@ -26519,6 +26563,24 @@ components:
       required:
       - data
       type: object
+    FormTrigger:
+      description: Trigger a workflow from a Form.
+      properties:
+        formId:
+          description: The form UUID.
+          example: ''
+          type: string
+      type: object
+    FormTriggerWrapper:
+      description: Schema for a Form-based trigger.
+      properties:
+        formTrigger:
+          $ref: '#/components/schemas/FormTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - formTrigger
+      type: object
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -28487,6 +28549,206 @@ components:
       type: string
       x-enum-varnames:
       - GLOBAL_VARIABLES
+    GoogleChatAppNamedSpaceResponse:
+      description: Response with Google Chat space information.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatAppNamedSpaceResponseData'
+      required:
+      - data
+      type: object
+    GoogleChatAppNamedSpaceResponseAttributes:
+      description: Google Chat space attributes.
+      properties:
+        display_name:
+          description: Google space display name.
+          example: Fake Space Name
+          maxLength: 255
+          type: string
+        organization_binding_id:
+          description: Organization binding ID.
+          example: 2f18a894-adb5-4c53-8248-39fd3f5386a5
+          maxLength: 255
+          type: string
+        resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+        space_uri:
+          description: Google space URI.
+          example: https://chat.google.com/room/AAAAAAAAA
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatAppNamedSpaceResponseData:
+      description: Google Chat space data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatAppNamedSpaceResponseAttributes'
+        id:
+          description: The ID of the Google Chat space.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/GoogleChatAppNamedSpaceType'
+      type: object
+    GoogleChatAppNamedSpaceType:
+      default: google-chat-app-named-space
+      description: Google Chat space resource type.
+      enum:
+      - google-chat-app-named-space
+      example: google-chat-app-named-space
+      type: string
+      x-enum-varnames:
+      - GOOGLE_CHAT_APP_NAMED_SPACE_TYPE
+    GoogleChatCreateOrganizationHandleRequest:
+      description: Create organization handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatCreateOrganizationHandleRequestData'
+        type:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleType'
+      required:
+      - type
+      - data
+      type: object
+    GoogleChatCreateOrganizationHandleRequestAttributes:
+      description: Organization handle attributes for a create request.
+      properties:
+        name:
+          description: Organization handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        space_resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+      required:
+      - name
+      - space_resource_name
+      type: object
+    GoogleChatCreateOrganizationHandleRequestData:
+      description: Organization handle data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatCreateOrganizationHandleRequestAttributes'
+      required:
+      - attributes
+      type: object
+    GoogleChatOrganizationHandleResponse:
+      description: Organization handle for monitor notifications to a Google Chat
+        space within a Google organization.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleResponseData'
+      required:
+      - data
+      type: object
+    GoogleChatOrganizationHandleResponseAttributes:
+      description: Organization handle attributes.
+      properties:
+        name:
+          description: Organization handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        space_display_name:
+          description: Google space display name.
+          example: Fake Space Name
+          maxLength: 255
+          type: string
+        space_resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatOrganizationHandleResponseData:
+      description: Organization handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleResponseAttributes'
+        id:
+          description: The ID of the organization handle.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleType'
+      type: object
+    GoogleChatOrganizationHandleType:
+      default: google-chat-organization-handle
+      description: Organization handle resource type.
+      enum:
+      - google-chat-organization-handle
+      example: google-chat-organization-handle
+      type: string
+      x-enum-varnames:
+      - GOOGLE_CHAT_ORGANIZATION_HANDLE_TYPE
+    GoogleChatOrganizationHandlesResponse:
+      description: List of organization handles for monitor notifications to Google
+        Chat spaces within a Google organization.
+      properties:
+        data:
+          description: An array of organization handles.
+          example:
+          - attributes:
+              name: general-handle
+              space_display_name: General
+              space_resource_name: spaces/AAAAAAAAA
+            id: 596da4af-0563-4097-90ff-07230c3f9db3
+            type: google-chat-organization-handle
+          - attributes:
+              name: general-handle-2
+              space_display_name: General2
+              space_resource_name: spaces/BBBBBBBBB
+            id: 596da4af-0563-4097-90ff-07230c3f9db4
+            type: google-chat-organization-handle
+          items:
+            $ref: '#/components/schemas/GoogleChatOrganizationHandleResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    GoogleChatUpdateOrganizationHandleRequest:
+      description: Update organization handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatUpdateOrganizationHandleRequestData'
+        type:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleType'
+      required:
+      - type
+      - data
+      type: object
+    GoogleChatUpdateOrganizationHandleRequestAttributes:
+      description: Organization handle attributes for an update request.
+      properties:
+        name:
+          description: Organization handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        space_resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatUpdateOrganizationHandleRequestData:
+      description: Organization handle data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatUpdateOrganizationHandleRequestAttributes'
+      required:
+      - attributes
+      type: object
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -29817,6 +30079,321 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_IMPACTS
+    IncidentImportFieldAttributes:
+      description: Dynamic fields for which selections can be made, with field names
+        as keys.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentImportFieldAttributesSingleValue'
+      - $ref: '#/components/schemas/IncidentImportFieldAttributesMultipleValue'
+    IncidentImportFieldAttributesMultipleValue:
+      additionalProperties: false
+      description: A field with potentially multiple values selected.
+      properties:
+        value:
+          description: The multiple values selected for this field.
+          example:
+          - '1.0'
+          - '1.1'
+          items:
+            description: A value which has been selected for the parent field.
+            example: '1.1'
+            type: string
+          nullable: true
+          type: array
+      type: object
+    IncidentImportFieldAttributesSingleValue:
+      additionalProperties: false
+      description: A field with a single value selected.
+      properties:
+        value:
+          description: The single value selected for this field.
+          example: SEV-1
+          nullable: true
+          type: string
+      type: object
+    IncidentImportRelatedObject:
+      description: Object related to an incident that can be included in the response.
+      enum:
+      - last_modified_by_user
+      - created_by_user
+      - commander_user
+      - declared_by_user
+      - incident_type
+      type: string
+      x-enum-varnames:
+      - LAST_MODIFIED_BY_USER
+      - CREATED_BY_USER
+      - COMMANDER_USER
+      - DECLARED_BY_USER
+      - INCIDENT_TYPE
+    IncidentImportRelationships:
+      description: The relationships for an incident import request.
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+        declared_by_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+      type: object
+    IncidentImportRequest:
+      description: Import request for an incident. Used to import historical incidents
+        from external systems.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentImportRequestData'
+      required:
+      - data
+      type: object
+    IncidentImportRequestAttributes:
+      description: The incident's attributes for an import request.
+      properties:
+        declared:
+          description: Timestamp when the incident was declared.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        detected:
+          description: Timestamp when the incident was detected.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentImportFieldAttributes'
+          description: A condensed view of the user-defined fields for which to create
+            initial selections.
+          example:
+            severity:
+              value: SEV-5
+            state:
+              value: active
+          type: object
+        incident_type_uuid:
+          description: A unique identifier that represents the incident type. If not
+            provided, the default incident type is used.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        resolved:
+          description: Timestamp when the incident was resolved. Can only be set when
+            the state field is set to 'resolved'.
+          example: '2025-01-01T01:00:00Z'
+          format: date-time
+          type: string
+        title:
+          description: The title of the incident that summarizes what happened.
+          example: Imported incident from external system
+          maxLength: 1024
+          type: string
+        visibility:
+          $ref: '#/components/schemas/IncidentImportVisibility'
+      required:
+      - title
+      type: object
+    IncidentImportRequestData:
+      description: Incident data for an import request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentImportRequestAttributes'
+        relationships:
+          $ref: '#/components/schemas/IncidentImportRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentImportResponse:
+      description: Response with an incident.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentImportResponseData'
+        included:
+          description: Included related resources that the user requested.
+          items:
+            $ref: '#/components/schemas/IncidentImportResponseIncludedItem'
+          readOnly: true
+          type: array
+      required:
+      - data
+      type: object
+    IncidentImportResponseAttributes:
+      description: The incident's attributes from an import response.
+      properties:
+        archived:
+          description: Timestamp when the incident was archived.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        case_id:
+          description: The incident case ID.
+          format: int64
+          nullable: true
+          type: integer
+        created:
+          description: Timestamp when the incident was created.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          readOnly: true
+          type: string
+        created_by_uuid:
+          description: UUID of the user who created the incident.
+          nullable: true
+          type: string
+        creation_idempotency_key:
+          description: A unique key used to ensure idempotent incident creation.
+          nullable: true
+          type: string
+        customer_impact_end:
+          description: Timestamp when customers were no longer impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        customer_impact_scope:
+          description: A summary of the impact customers experienced during the incident.
+          example: An example customer impact scope
+          nullable: true
+          type: string
+        customer_impact_start:
+          description: Timestamp when customers began to be impacted by the incident.
+          format: date-time
+          nullable: true
+          type: string
+        declared:
+          description: Timestamp when the incident was declared.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        declared_by_uuid:
+          description: UUID of the user who declared the incident.
+          nullable: true
+          type: string
+        detected:
+          description: Timestamp when the incident was detected.
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          nullable: true
+          type: string
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IncidentFieldAttributes'
+          description: A condensed view of the user-defined fields attached to incidents.
+          example:
+            severity:
+              type: dropdown
+              value: SEV-5
+          type: object
+        incident_type_uuid:
+          description: A unique identifier that represents an incident type.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        is_test:
+          description: A flag indicating whether the incident is a test incident.
+          example: false
+          type: boolean
+        last_modified_by_uuid:
+          description: UUID of the user who last modified the incident.
+          nullable: true
+          type: string
+        modified:
+          description: Timestamp when the incident was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        non_datadog_creator:
+          $ref: '#/components/schemas/IncidentNonDatadogCreator'
+        notification_handles:
+          description: Notification handles that are notified of the incident during
+            update.
+          items:
+            $ref: '#/components/schemas/IncidentNotificationHandle'
+          nullable: true
+          type: array
+        public_id:
+          description: The monotonically increasing integer ID for the incident.
+          example: 1
+          format: int64
+          type: integer
+        resolved:
+          description: Timestamp when the incident's state was last changed from active
+            or stable to resolved or completed.
+          format: date-time
+          nullable: true
+          type: string
+        severity:
+          $ref: '#/components/schemas/IncidentSeverity'
+        state:
+          description: The state of the incident.
+          nullable: true
+          type: string
+        title:
+          description: The title of the incident that summarizes what happened.
+          example: A test incident title
+          type: string
+        visibility:
+          description: The incident visibility status.
+          nullable: true
+          type: string
+      required:
+      - title
+      type: object
+    IncidentImportResponseData:
+      description: Incident data from an import response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentImportResponseAttributes'
+        id:
+          description: The incident's ID.
+          example: 00000000-0000-0000-1234-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentImportResponseRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentType'
+      required:
+      - id
+      - type
+      type: object
+    IncidentImportResponseIncludedItem:
+      description: An object related to an incident that is included in the response.
+      oneOf:
+      - $ref: '#/components/schemas/IncidentUserData'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentImportResponseRelationships:
+      description: The incident's relationships from an import response.
+      properties:
+        attachments:
+          $ref: '#/components/schemas/RelationshipToIncidentAttachment'
+        commander_user:
+          $ref: '#/components/schemas/NullableRelationshipToUser'
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        declared_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        impacts:
+          $ref: '#/components/schemas/RelationshipToIncidentImpacts'
+        incident_type:
+          $ref: '#/components/schemas/RelationshipToIncidentType'
+        integrations:
+          $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        responders:
+          $ref: '#/components/schemas/RelationshipToIncidentResponders'
+        user_defined_fields:
+          $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFields'
+      type: object
+    IncidentImportVisibility:
+      default: organization
+      description: The visibility of the incident.
+      enum:
+      - organization
+      - private
+      example: organization
+      type: string
+      x-enum-varnames:
+      - ORGANIZATION
+      - PRIVATE
     IncidentIntegrationMetadataAttributes:
       description: Incident integration metadata's attributes for a create request.
       properties:
@@ -32171,6 +32748,53 @@ components:
             type: string
           type: array
       type: object
+    Integration:
+      description: Integration resource object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IntegrationAttributes'
+        id:
+          description: The unique identifier of the integration.
+          example: calico
+          type: string
+        links:
+          $ref: '#/components/schemas/IntegrationLinks'
+        type:
+          $ref: '#/components/schemas/IntegrationType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    IntegrationAttributes:
+      description: Attributes for an integration.
+      properties:
+        categories:
+          description: List of categories associated with the integration.
+          example:
+          - Category::Kubernetes
+          - Category::Log Collection
+          items:
+            type: string
+          type: array
+        description:
+          description: A description of the integration.
+          example: Calico is a networking and network security solution for containers.
+          type: string
+        installed:
+          description: Whether the integration is installed.
+          example: true
+          type: boolean
+        title:
+          description: The name of the integration.
+          example: calico
+          type: string
+      required:
+      - title
+      - description
+      - categories
+      - installed
+      type: object
     IntegrationIncident:
       description: Incident integration settings
       properties:
@@ -32276,6 +32900,14 @@ components:
         value:
           $ref: '#/components/schemas/AnyValue'
       type: object
+    IntegrationLinks:
+      description: Links for the integration resource.
+      properties:
+        self:
+          description: Link to the integration resource.
+          example: /integrations?integrationId=calico
+          type: string
+      type: object
     IntegrationMonitor:
       description: Monitor integration settings
       properties:
@@ -32377,6 +33009,15 @@ components:
             type: string
           type: object
       type: object
+    IntegrationType:
+      default: integration
+      description: Integration resource type.
+      enum:
+      - integration
+      example: integration
+      type: string
+      x-enum-varnames:
+      - INTEGRATION
     InterfaceAttributes:
       description: The interface attributes
       properties:
@@ -35009,6 +35650,17 @@ components:
       required:
       - data
       - meta
+      type: object
+    ListIntegrationsResponse:
+      description: Response containing information about multiple integrations.
+      properties:
+        data:
+          description: Array of integration objects.
+          items:
+            $ref: '#/components/schemas/Integration'
+          type: array
+      required:
+      - data
       type: object
     ListInterfaceTagsResponse:
       description: Response for listing interface tags.
@@ -37890,6 +38542,16 @@ components:
           description: Azure AD client ID used for authentication.
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
           type: string
+        client_secret_key:
+          description: Name of the environment variable or secret that holds the Azure
+            AD client secret.
+          example: AZURE_CLIENT_SECRET
+          type: string
+        dce_uri_key:
+          description: Name of the environment variable or secret that holds the Data
+            Collection Endpoint (DCE) URI.
+          example: DCE_URI
+          type: string
         dcr_immutable_id:
           description: The immutable ID of the Data Collection Rule (DCR).
           example: dcr-uuid-1234
@@ -39821,6 +40483,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the Firehose
+            delivery stream address.
+          example: FIREHOSE_ADDRESS
+          type: string
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
         id:
@@ -40033,6 +40700,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonS3SourceType'
+        url_key:
+          description: Name of the environment variable or secret that holds the S3
+            bucket URL.
+          example: S3_BUCKET_URL
+          type: string
       required:
       - id
       - type
@@ -40162,6 +40834,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the CloudPrem
+            endpoint URL.
+          example: CLOUDPREM_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: cloud-prem-destination
@@ -40432,6 +41109,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the CrowdStrike
+            endpoint URL.
+          example: CROWDSTRIKE_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: crowdstrike-ngsiem-destination
@@ -40446,6 +41128,11 @@ components:
           type: array
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the CrowdStrike
+            API token.
+          example: CROWDSTRIKE_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationType'
       required:
@@ -40948,6 +41635,8 @@ components:
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationAuth'
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
@@ -40956,6 +41645,11 @@ components:
           type: string
         data_stream:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationDataStream'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Elasticsearch
+            endpoint URL.
+          example: ELASTICSEARCH_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -40991,6 +41685,27 @@ components:
       - V6
       - V7
       - V8
+    ObservabilityPipelineElasticsearchDestinationAuth:
+      description: 'Authentication settings for the Elasticsearch destination.
+
+        When `strategy` is `basic`, use `username_key` and `password_key` to reference
+        credentials stored in environment variables or secrets.'
+      properties:
+        password_key:
+          description: Name of the environment variable or secret that holds the Elasticsearch
+            password (used when `strategy` is `basic`).
+          example: ELASTICSEARCH_PASSWORD
+          type: string
+        strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuthStrategy'
+        username_key:
+          description: Name of the environment variable or secret that holds the Elasticsearch
+            username (used when `strategy` is `basic`).
+          example: ELASTICSEARCH_USERNAME
+          type: string
+      required:
+      - strategy
+      type: object
     ObservabilityPipelineElasticsearchDestinationDataStream:
       description: Configuration options for writing to Elasticsearch Data Streams
         instead of a fixed index.
@@ -41202,6 +41917,11 @@ components:
     ObservabilityPipelineEnrichmentTableReferenceTable:
       description: Uses a Datadog reference table to enrich logs.
       properties:
+        app_key_key:
+          description: Name of the environment variable or secret that holds the Datadog
+            application key used to access the reference table.
+          example: DD_APP_KEY
+          type: string
         columns:
           description: List of column names to include from the reference table. If
             not provided, all columns are included.
@@ -41288,6 +42008,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Fluent Bit receiver.
+          example: FLUENT_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -41319,6 +42044,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Fluent receiver.
+          example: FLUENT_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -41345,10 +42075,11 @@ components:
       x-enum-varnames:
       - FLUENTD
     ObservabilityPipelineGcpAuth:
-      description: GCP credentials used to authenticate with Google Cloud Storage.
+      description: Google Cloud credentials used to authenticate with Google Cloud
+        Storage.
       properties:
         credentials_file:
-          description: Path to the GCP service account key file.
+          description: Path to the Google Cloud service account key file.
           example: /var/secrets/gcp-credentials.json
           type: string
       required:
@@ -41503,6 +42234,11 @@ components:
           type: string
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineGoogleChronicleDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Google
+            Chronicle endpoint URL.
+          example: CHRONICLE_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: google-chronicle-destination
@@ -41552,7 +42288,7 @@ components:
       description: 'The `google_cloud_storage` destination stores logs in a Google
         Cloud Storage (GCS) bucket.
 
-        It requires a bucket name, GCP authentication, and metadata fields.
+        It requires a bucket name, Google Cloud authentication, and metadata fields.
 
 
         **Supported pipeline types:** logs'
@@ -41655,6 +42391,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Google
+            Cloud Pub/Sub endpoint URL.
+          example: GCP_PUBSUB_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: google-pubsub-destination
@@ -41668,7 +42409,7 @@ components:
             type: string
           type: array
         project:
-          description: The GCP project ID that owns the Pub/Sub topic.
+          description: The Google Cloud project ID that owns the Pub/Sub topic.
           example: my-gcp-project
           type: string
         tls:
@@ -41726,7 +42467,7 @@ components:
           example: google-pubsub-source
           type: string
         project:
-          description: The GCP project ID that owns the Pub/Sub subscription.
+          description: The Google Cloud project ID that owns the Pub/Sub subscription.
           example: my-gcp-project
           type: string
         subscription:
@@ -41765,6 +42506,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationAuthStrategy'
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationCompression'
+        custom_key:
+          description: Name of the environment variable or secret that holds a custom
+            header value (used with custom auth strategies).
+          example: HTTP_AUTH_CUSTOM_HEADER
+          type: string
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationEncoding'
         id:
@@ -41779,10 +42525,30 @@ components:
           items:
             type: string
           type: array
+        password_key:
+          description: Name of the environment variable or secret that holds the password
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_PASSWORD
+          type: string
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer
+            token (used when `auth_strategy` is `bearer`).
+          example: HTTP_AUTH_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationType'
+        uri_key:
+          description: Name of the environment variable or secret that holds the HTTP
+            endpoint URI.
+          example: HTTP_DESTINATION_URI
+          type: string
+        username_key:
+          description: Name of the environment variable or secret that holds the username
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_USERNAME
+          type: string
       required:
       - id
       - type
@@ -41846,13 +42612,28 @@ components:
       properties:
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientSourceAuthStrategy'
+        custom_key:
+          description: Name of the environment variable or secret that holds a custom
+            header value (used with custom auth strategies).
+          example: HTTP_AUTH_CUSTOM_HEADER
+          type: string
         decoding:
           $ref: '#/components/schemas/ObservabilityPipelineDecoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the HTTP
+            endpoint URL to scrape.
+          example: HTTP_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: http-client-source
+          type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_PASSWORD
           type: string
         scrape_interval_secs:
           description: The interval (in seconds) between HTTP scrape requests.
@@ -41866,8 +42647,18 @@ components:
           type: integer
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer
+            token (used when `auth_strategy` is `bearer`).
+          example: HTTP_AUTH_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientSourceType'
+        username_key:
+          description: Name of the environment variable or secret that holds the username
+            (used when `auth_strategy` is `basic`).
+          example: HTTP_AUTH_USERNAME
+          type: string
       required:
       - id
       - type
@@ -41905,18 +42696,38 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the HTTP server.
+          example: HTTP_SERVER_ADDRESS
+          type: string
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceAuthStrategy'
+        custom_key:
+          description: Name of the environment variable or secret that holds a custom
+            header value (used with custom auth strategies).
+          example: HTTP_AUTH_CUSTOM_HEADER
+          type: string
         decoding:
           $ref: '#/components/schemas/ObservabilityPipelineDecoding'
         id:
           description: Unique ID for the HTTP server source.
           example: http-server-source
           type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password
+            (used when `auth_strategy` is `plain`).
+          example: HTTP_AUTH_PASSWORD
+          type: string
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceType'
+        username_key:
+          description: Name of the environment variable or secret that holds the username
+            (used when `auth_strategy` is `plain`).
+          example: HTTP_AUTH_USERNAME
+          type: string
       required:
       - id
       - type
@@ -41950,6 +42761,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        bootstrap_servers_key:
+          description: Name of the environment variable or secret that holds the Kafka
+            bootstrap servers list.
+          example: KAFKA_BOOTSTRAP_SERVERS
+          type: string
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationCompression'
         encoding:
@@ -42082,6 +42898,16 @@ components:
       properties:
         mechanism:
           $ref: '#/components/schemas/ObservabilityPipelineKafkaSaslMechanism'
+        password_key:
+          description: Name of the environment variable or secret that holds the SASL
+            password.
+          example: KAFKA_SASL_PASSWORD
+          type: string
+        username_key:
+          description: Name of the environment variable or secret that holds the SASL
+            username.
+          example: KAFKA_SASL_USERNAME
+          type: string
       type: object
     ObservabilityPipelineKafkaSaslMechanism:
       description: SASL mechanism used for Kafka authentication.
@@ -42100,6 +42926,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        bootstrap_servers_key:
+          description: Name of the environment variable or secret that holds the Kafka
+            bootstrap servers list.
+          example: KAFKA_BOOTSTRAP_SERVERS
+          type: string
         group_id:
           description: Consumer group ID used by the Kafka client.
           example: consumer-group-0
@@ -42154,6 +42985,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Logstash receiver.
+          example: LOGSTASH_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -42331,6 +43167,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        account_id_key:
+          description: Name of the environment variable or secret that holds the New
+            Relic account ID.
+          example: NEW_RELIC_ACCOUNT_ID
+          type: string
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
@@ -42345,6 +43186,11 @@ components:
           items:
             type: string
           type: array
+        license_key_key:
+          description: Name of the environment variable or secret that holds the New
+            Relic license key.
+          example: NEW_RELIC_LICENSE_KEY
+          type: string
         region:
           $ref: '#/components/schemas/ObservabilityPipelineNewRelicDestinationRegion'
         type:
@@ -42590,6 +43436,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationAuth'
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
@@ -42598,6 +43446,11 @@ components:
           type: string
         data_stream:
           $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestinationDataStream'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the OpenSearch
+            endpoint URL.
+          example: OPENSEARCH_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: opensearch-destination
@@ -43307,6 +44160,11 @@ components:
       properties:
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the syslog
+            server endpoint URL.
+          example: SYSLOG_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: rsyslog-destination
@@ -43352,6 +44210,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the syslog receiver.
+          example: SYSLOG_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -43828,6 +44691,11 @@ components:
           type: array
         region:
           $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestinationRegion'
+        token_key:
+          description: Name of the environment variable or secret that holds the SentinelOne
+            API token.
+          example: SENTINELONE_TOKEN
+          type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestinationType'
       required:
@@ -43868,6 +44736,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the socket
+            address (host:port).
+          example: SOCKET_ADDRESS
+          type: string
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
@@ -44002,6 +44875,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the socket.
+          example: SOCKET_ADDRESS
+          type: string
         framing:
           $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
         id:
@@ -44250,6 +45128,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Splunk
+            HEC endpoint URL.
+          example: SPLUNK_HEC_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44271,6 +45154,11 @@ components:
         sourcetype:
           description: The Splunk sourcetype to assign to log events.
           example: custom_sourcetype
+          type: string
+        token_key:
+          description: Name of the environment variable or secret that holds the Splunk
+            HEC token.
+          example: SPLUNK_HEC_TOKEN
           type: string
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationType'
@@ -44307,6 +45195,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the HEC API.
+          example: SPLUNK_HEC_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44341,6 +45234,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Splunk TCP receiver.
+          example: SPLUNK_TCP_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44376,6 +45274,11 @@ components:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the Sumo
+            Logic HTTP endpoint URL.
+          example: SUMO_LOGIC_ENDPOINT_URL
+          type: string
         header_custom_fields:
           description: A list of custom headers to include in the request to Sumo
             Logic.
@@ -44457,6 +45360,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Sumo Logic receiver.
+          example: SUMO_LOGIC_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44489,6 +45397,11 @@ components:
       properties:
         buffer:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
+        endpoint_url_key:
+          description: Name of the environment variable or secret that holds the syslog-ng
+            server endpoint URL.
+          example: SYSLOG_ENDPOINT_URL
+          type: string
         id:
           description: The unique identifier for this component.
           example: syslog-ng-destination
@@ -44534,6 +45447,11 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the syslog-ng receiver.
+          example: SYSLOG_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
@@ -44650,6 +45568,11 @@ components:
         key_file:
           description: Path to the private key file associated with the TLS client
             certificate. Used for mutual TLS authentication.
+          type: string
+        key_pass_key:
+          description: Name of the environment variable or secret that holds the passphrase
+            for the private key file.
+          example: TLS_KEY_PASSPHRASE
           type: string
       required:
       - crt_file
@@ -66381,6 +67304,7 @@ components:
       - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
       - $ref: '#/components/schemas/DatastoreTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
+      - $ref: '#/components/schemas/FormTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
@@ -79636,7 +80560,9 @@ paths:
 
         - Change Lead Time
 
-        - Change Failure Rate'
+        - Change Failure Rate
+
+        - Failed Deployment Recovery Time'
       operationId: CreateDORADeployment
       requestBody:
         content:
@@ -79789,7 +80715,9 @@ paths:
         permissions:
         - dora_metrics_read
     patch:
-      description: Use this API endpoint to patch a deployment event.
+      description: Update a deployment's change failure status. Use this to mark a
+        deployment as a change failure or back to stable. You can optionally include
+        remediation details to enable failed deployment recovery time calculation.
       operationId: PatchDORADeployment
       parameters:
       - description: The ID of the deployment event.
@@ -79831,181 +80759,15 @@ paths:
         - dora_metrics_write
   /api/v2/dora/failure:
     post:
-      description: 'Use this API endpoint to provide failure data.
+      description: 'Use this API endpoint to provide incident data for DORA Metrics.
 
+        Note that change failure rate and failed deployment recovery time are computed
+        from change failures detected on deployments, not from incident events sent
+        through this endpoint.
 
-        This is necessary for:
-
-        - Change Failure Rate
-
-        - Time to Restore'
+        Tracking incidents gives a side-by-side view of how failed deployments translate
+        into real-world incidents, including their severity and frequency.'
       operationId: CreateDORAFailure
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DORAFailureRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DORAFailureResponse'
-          description: OK
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DORAFailureResponse'
-          description: OK - but delayed due to incident
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JSONAPIErrorResponse'
-          description: Bad Request
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-      summary: Send a failure event
-      tags:
-      - DORA Metrics
-      x-codegen-request-body-name: body
-      x-menu-order: 2
-  /api/v2/dora/failure/{failure_id}:
-    delete:
-      description: Use this API endpoint to delete a failure event.
-      operationId: DeleteDORAFailure
-      parameters:
-      - description: The ID of the failure event to delete.
-        in: path
-        name: failure_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '202':
-          description: Accepted
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JSONAPIErrorResponse'
-          description: Bad Request
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Delete a failure event
-      tags:
-      - DORA Metrics
-      x-menu-order: 7
-      x-permission:
-        operator: OR
-        permissions:
-        - dora_metrics_write
-  /api/v2/dora/failures:
-    post:
-      description: Use this API endpoint to get a list of failure events.
-      operationId: ListDORAFailures
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DORAListFailuresRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DORAFailuresListResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JSONAPIErrorResponse'
-          description: Bad Request
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Get a list of failure events
-      tags:
-      - DORA Metrics
-      x-codegen-request-body-name: body
-      x-menu-order: 4
-      x-permission:
-        operator: OR
-        permissions:
-        - dora_metrics_read
-  /api/v2/dora/failures/{failure_id}:
-    get:
-      description: Use this API endpoint to get a failure event.
-      operationId: GetDORAFailure
-      parameters:
-      - description: The ID of the failure event.
-        in: path
-        name: failure_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DORAFailureFetchResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JSONAPIErrorResponse'
-          description: Bad Request
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Get a failure event
-      tags:
-      - DORA Metrics
-      x-codegen-request-body-name: body
-      x-menu-order: 6
-      x-permission:
-        operator: OR
-        permissions:
-        - dora_metrics_read
-  /api/v2/dora/incident:
-    post:
-      deprecated: true
-      description: '**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure`
-        instead.
-
-
-        Use this API endpoint to provide failure data.
-
-
-        This is necessary for:
-
-        - Change Failure Rate
-
-        - Time to Restore'
-      operationId: CreateDORAIncident
       requestBody:
         content:
           application/json:
@@ -80042,6 +80804,168 @@ paths:
       - DORA Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
+  /api/v2/dora/failure/{failure_id}:
+    delete:
+      description: Use this API endpoint to delete an incident event.
+      operationId: DeleteDORAFailure
+      parameters:
+      - description: The ID of the incident event to delete.
+        in: path
+        name: failure_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete an incident event
+      tags:
+      - DORA Metrics
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
+  /api/v2/dora/failures:
+    post:
+      description: Use this API endpoint to get a list of incident events.
+      operationId: ListDORAFailures
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAListFailuresRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailuresListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a list of incident events
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+  /api/v2/dora/failures/{failure_id}:
+    get:
+      description: Use this API endpoint to get an incident event.
+      operationId: GetDORAFailure
+      parameters:
+      - description: The ID of the incident event.
+        in: path
+        name: failure_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureFetchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get an incident event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_read
+  /api/v2/dora/incident:
+    post:
+      deprecated: true
+      description: '**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure`
+        instead.
+
+
+        Use this API endpoint to provide incident data.
+
+        Tracking incidents gives a side-by-side view of how failed deployments translate
+        into real-world incidents.'
+      operationId: CreateDORAIncident
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAFailureRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAFailureResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send an incident event (legacy)
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 28
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -82005,6 +82929,59 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/import:
+    post:
+      description: 'Import an incident from an external system. This endpoint allows
+        you to create incidents with
+
+        historical data such as custom timestamps for detection, declaration, and
+        resolution.
+
+        Imported incidents do not execute integrations or notification rules.'
+      operationId: ImportIncident
+      parameters:
+      - $ref: '#/components/parameters/IncidentImportIncludeQueryParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentImportRequest'
+        description: Incident import payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentImportResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Import an incident
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 49
+      x-permission:
+        operator: AND
+        permissions:
+        - incident_write
+      x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/search:
     get:
       description: Search for incidents matching a certain query.
@@ -83442,6 +84419,183 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
+  /api/v2/integration/google-chat/organizations/app/named-spaces/{domain_name}/{space_display_name}:
+    get:
+      description: Get the resource name and organization binding ID of a space in
+        the Datadog Google Chat integration.
+      operationId: GetSpaceByDisplayName
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationDomainNamePathParameter'
+      - $ref: '#/components/parameters/GoogleChatOrganizationSpaceDisplayNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatAppNamedSpaceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get space information by display name
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles:
+    get:
+      description: Get a list of all organization handles from the Datadog Google
+        Chat integration.
+      operationId: ListOrganizationHandles
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandlesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all organization handles
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+    post:
+      description: Create an organization handle in the Datadog Google Chat integration.
+      operationId: CreateOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleChatCreateOrganizationHandleRequest'
+        description: Organization handle payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create organization handle
+      tags:
+      - Google Chat Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles/{handle_id}:
+    delete:
+      description: Delete an organization handle from the Datadog Google Chat integration.
+      operationId: DeleteOrganizationHandle
+      parameters:
+      - description: Your organization binding ID.
+        in: path
+        name: organization_binding_id
+        required: true
+        schema:
+          type: string
+      - description: Your organization handle ID.
+        in: path
+        name: handle_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete organization handle
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+    get:
+      description: Get an organization handle from the Datadog Google Chat integration.
+      operationId: GetOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      - $ref: '#/components/parameters/GoogleChatHandleIdPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get organization handle
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+    patch:
+      description: Update an organization handle from the Datadog Google Chat integration.
+      operationId: UpdateOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      - $ref: '#/components/parameters/GoogleChatHandleIdPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleChatUpdateOrganizationHandleRequest'
+        description: Organization handle payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update organization handle
+      tags:
+      - Google Chat Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 1
   /api/v2/integration/jira/accounts:
     get:
       description: Get all Jira accounts for the organization.
@@ -84623,6 +85777,25 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integrations:
+    get:
+      operationId: ListIntegrations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIntegrationsResponse'
+          description: Successful Response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Integrations
+      tags:
+      - Integrations
+      x-menu-order: 1
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -87310,8 +88483,11 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: (Preview) Filter custom metrics that have or have not been queried
-          in the past 30 days.
+      - description: '(Preview) Filter custom metrics that have or have not been queried
+          in the specified window[seconds].
+
+          If no window is provided or the window is less than 2 hours, a default of
+          2 hours will be applied.'
         example: true
         in: query
         name: filter[queried]
@@ -103240,7 +104416,7 @@ paths:
       summary: Get the on-demand concurrency cap
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 41
       x-permission:
         operator: OR
         permissions:
@@ -103268,7 +104444,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 11
+      x-menu-order: 40
       x-permission:
         operator: OR
         permissions:
@@ -103302,10 +104478,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Create a test suite'
+      summary: Create a test suite
       tags:
       - Synthetics
-      x-menu-order: 30
+      x-menu-order: 50
       x-permission:
         operator: OR
         permissions:
@@ -103340,17 +104516,17 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Bulk delete suites'
+      summary: Bulk delete suites
       tags:
       - Synthetics
-      x-menu-order: 40
+      x-menu-order: 70
       x-permission:
         operator: OR
         permissions:
         - synthetics_write
   /api/v2/synthetics/suites/search:
     get:
-      description: Search for Synthetics suites.
+      description: Search for test suites.
       operationId: SearchSuites
       parameters:
       - description: The search query.
@@ -103409,10 +104585,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: Search Synthetics suites
+      summary: Search test suites
       tags:
       - Synthetics
-      x-menu-order: 20
+      x-menu-order: 55
       x-permission:
         operator: OR
         permissions:
@@ -103447,10 +104623,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: 'Synthetics: Get a suite'
+      summary: Get a suite
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 60
       x-permission:
         operator: OR
         permissions:
@@ -103491,10 +104667,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Edit a test suite'
+      summary: Edit a test suite
       tags:
       - Synthetics
-      x-menu-order: 35
+      x-menu-order: 65
       x-permission:
         operator: OR
         permissions:
@@ -103534,10 +104710,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Bulk delete tests'
+      summary: Bulk delete tests
       tags:
       - Synthetics
-      x-menu-order: 65
+      x-menu-order: 90
       x-permission:
         operator: OR
         permissions:
@@ -103571,10 +104747,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Create a Network Path test'
+      summary: Create a Network Path test
       tags:
       - Synthetics
-      x-menu-order: 50
+      x-menu-order: 75
       x-permission:
         operator: OR
         permissions:
@@ -103616,10 +104792,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_read
-      summary: 'Synthetics: Get a Network Path test'
+      summary: Get a Network Path test
       tags:
       - Synthetics
-      x-menu-order: 55
+      x-menu-order: 80
       x-permission:
         operator: OR
         permissions:
@@ -103666,10 +104842,10 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: 'Synthetics: Edit a Network Path test'
+      summary: Edit a Network Path test
       tags:
       - Synthetics
-      x-menu-order: 60
+      x-menu-order: 85
       x-permission:
         operator: OR
         permissions:
@@ -103725,7 +104901,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:
@@ -107732,6 +108908,14 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/google_cloud_platform
   name: GCP Integration
+- description: 'Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)
+
+    directly through the Datadog API.'
+  externalDocs:
+    description: For more information about the Datadog Google Chat integration, see
+      the integration page.
+    url: https://docs.datadoghq.com/integrations/google-hangouts-chat/
+  name: Google Chat Integration
 - description: 'Configure High Availability Multi-Region (HAMR) connections between
     Datadog organizations.
 
@@ -107763,6 +108947,10 @@ tags:
     and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
     for more information.
   name: Incidents
+- description: 'The Integrations API is used to list available integrations
+
+    and retrieve information about their installation status.'
+  name: Integrations
 - description: Manage your Jira Integration. Atlassian Jira is a project management
     and issue tracking tool for teams to coordinate work and handle tasks efficiently.
   name: Jira Integration

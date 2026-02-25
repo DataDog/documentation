@@ -1,0 +1,14 @@
+{{- $ctx := .ctx -}}
+{{- $mdURL := "" -}}
+
+{{- $rel := $ctx.RelPermalink -}}
+{{- if and $rel (ne $rel "/") -}}
+{{- $trimmed := strings.TrimRight "/" $rel | strings.TrimLeft "/" -}}
+{{- $candidate := printf "https://docs.datadoghq.com/%s.md" $trimmed -}}
+{{- $pages := partialCached "pages-json-cache.html" "pages.json" -}}
+{{- if index $pages $candidate -}}
+{{- $mdURL = $candidate -}}
+{{- end -}}
+{{- end -}}
+
+{{- return $mdURL -}}

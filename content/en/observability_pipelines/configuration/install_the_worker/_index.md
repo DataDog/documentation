@@ -148,7 +148,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
         - See [Environment Variables][4] for a list of source environment variables.
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
+        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`
         - See [Environment Variables][4] for a list of destination environment variables.
 
     **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
@@ -167,6 +167,19 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
 
+#### Kubernetes services created
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
+
+- A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
+  This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
+- A ClusterIP service that provides a single virtual IP and DNS name for the Worker.  
+  This enables load balancing across Worker Pods for internal cluster traffic.
+
+#### LoadBalancer service
+
+If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][9] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
+
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
@@ -175,6 +188,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 [8]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
+[9]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -312,21 +326,6 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
- 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	--set <SOURCE_ENV_VARIABLES> \
-	--set <DESTINATION_ENV_VARIABLES> \
-	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-	datadog/observability-pipelines-worker
-    ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
 1. If you are using:
     - **Secrets Management**:
     1. See [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
@@ -338,7 +337,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         --set datadog.pipelineId=<PIPELINE_ID> \
         datadog/observability-pipelines-worker
         ```
-    - **Environment variables**: Run this command to install the Worker:
+    - **Environment variables**: Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
         ```shell
         helm upgrade --install opw \
         -f values.yaml \
@@ -348,6 +347,10 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         --set <DESTINATION_ENV_VARIABLES> \
         --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
         datadog/observability-pipelines-worker
+        ```
+        **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+        ```
+        --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
         ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
@@ -361,6 +364,19 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
 
+#### Kubernetes services created
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
+
+- A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
+  This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
+- A ClusterIP service that provides a single virtual IP and DNS name for the Worker.  
+  This enables load balancing across Worker Pods for internal cluster traffic.
+
+#### LoadBalancer service
+
+If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][8] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
+
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
@@ -368,6 +384,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 [7]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
+[8]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 {{% /tab %}}
 {{% tab "Linux" %}}

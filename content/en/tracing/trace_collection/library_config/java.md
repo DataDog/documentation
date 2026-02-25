@@ -20,6 +20,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 All configuration options below have system property and environment variable equivalents.
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
@@ -678,9 +680,9 @@ Deprecated since version 1.9.0
 [6]: /agent/configuration/network/#configure-ports
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [8]: /tracing/configure_data_security/#telemetry-collection
-[9]: /developers/dogstatsd/#setup
+[9]: /extend/dogstatsd/#setup
 [10]: /agent/docker/#dogstatsd-custom-metrics
-[11]: /developers/dogstatsd/
+[11]: /extend/dogstatsd/
 [12]: /agent/amazon_ecs/#create-an-ecs-task
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
