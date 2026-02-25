@@ -13,7 +13,7 @@ Use cases:
 - Track changes in token usage and cost over time to proactively guard against higher bills in the future
 - Correlate LLM cost with overall application performance, model versions, model providers, and prompt details in a single view
 
-## Set up monitoring costs
+## Setting up cost monitoring 
 
 Datadog provides two ways to monitor your LLM costs:
 - [Automatic](#automatic): Use [supported LLM providers'](#supported-providers) public pricing rates
