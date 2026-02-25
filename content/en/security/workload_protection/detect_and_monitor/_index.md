@@ -35,7 +35,7 @@ Datadog solves this problem by keeping the Agent lightweight with highly efficie
 - Write custom agent rules
 - Deploy custom and default agent rules using [Policies][9]
 - Leverage variables to built complex detections based on state machines
-- Configure actions to collect additional telemetry (like file hashes) or take proactive remediation steps to protect your infrastructure
+- Configure actions to collect additional telemetry (like file hashes)
 
 ## Detection rules
 

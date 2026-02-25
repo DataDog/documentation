@@ -10,26 +10,6 @@ title: Creating Agent Rule Expressions
 <!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->
 
 
-## Create custom rules using the Assisted rule creator
-
-The **Assisted rule creator** option helps you create the Agent and dependent detection rules together, and ensures that the Agent rule is referenced in the detection rules. Using this tool is faster than the advanced method of creating the Agent and detection rules separately.
-
-For details, see [Creating Custom Detection Rules][1].
-
-## Agent expression syntax
-Cloud Security Management Threats (CSM Threats) first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. This portion of a CSM Threats rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
-
-{{< code-block lang="javascript" >}}
-<event-type>.<event-attribute> <operator> <value> [<operator> <event-type>.<event-attribute>] ...
-
-{{< /code-block >}}
-
-Using this format, an example rule for a Linux system looks like this:
-
-{{< code-block lang="javascript" >}}
-open.file.path == "/etc/shadow" && process.file.path not in ["/usr/sbin/vipw"]
-
-{{< /code-block >}}
 
 ## Operators
 SECL operators are used to combine event attributes together into a full expression. The following operators are available:
