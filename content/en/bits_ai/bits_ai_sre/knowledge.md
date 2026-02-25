@@ -16,10 +16,10 @@ As a best practice, add runbooks or step-by-step troubleshooting instructions to
 - **Confluence integration**: Bits AI SRE integrates with **Confluence** to find relevant documentation and runbooks. When you link a Confluence page in a monitor message, Bits reads the page during the investigation, extracts telemetry links, follows documented troubleshooting steps, where possible, and incorporates remediation guidance into its suggestions. 
 
 <div class="alert alert-tip">Help Bits interpret and act on your documentation by following these best practices:
-- Include relevant Datadog telemetry links in your Confluence pages. Bits queries these links to extract information for its investigation.
-- Provide clear, step-by-step instructions for resolving monitor issues. Bits follows these instructions precisely, so being specific leads to more accurate outcomes.
-- Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
-The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.</div>
+<br> - Include relevant Datadog telemetry links in your Confluence pages. Bits queries these links to extract information for its investigation.
+<br> - Provide clear, step-by-step instructions for resolving monitor issues. Bits follows these instructions precisely, so being specific leads to more accurate outcomes.
+<br> - Document the services or systems involved in detail. Bits uses this information to understand the environment and guide investigations effectively.
+<br> The more precisely your Confluence page matches the issue at hand, the more helpful Bits can be.</div>
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
@@ -106,7 +106,7 @@ If the conclusion was inaccurate, provide Bits with the correct root cause, high
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
-Every piece of feedback you rovide creates a **memory**. Bits uses these memories to improve future investigations by recalling past corrections in similar contexts, reusing effective queries, recognizing recurring failure patterns, or improving prioritization of investigative steps. Over time, this allows Bits to adapt to your environment and become more accurate and efficient with each investigation. 
+Every piece of feedback you provide creates a **memory**. Bits dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits to adapt to your environment, becoming more accurate and efficient with each investigation. 
 
 To manage memories—including viewing and deleting them—navigate to the **Memories** column of the [Monitor Management][1] page.
 
