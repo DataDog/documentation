@@ -216,7 +216,7 @@ Arrays are ordered collections of values that all share the same data type. Ever
 
 ### Array literals
 
-Use the `ARRAY[...]` syntax to construct an array literal. The array's type is automatically inferred from the values.
+Use the `ARRAY[value1, value2, ...]` syntax to construct an array literal. The array's type is automatically inferred from the values.
 
 {{< code-block lang="sql" >}}
 SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits;  -- VARCHAR array
