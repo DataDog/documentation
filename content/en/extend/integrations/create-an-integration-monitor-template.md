@@ -50,6 +50,10 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 
 See the following best practices for your monitor template's title and description:
 
+{{< callout type="info" >}}
+Well-written titles and descriptions help users quickly understand whether a monitor is relevant to their environment. Follow these guidelines to create effective monitor templates.
+{{< /callout >}}
+
 #### Write a title for your monitor template
 
 The title allows users to understand the underlying failure mode the alert is covering.
