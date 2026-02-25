@@ -124,7 +124,11 @@ For the most consistent upgrade experience, Datadog recommends managing upgrades
 Remotely upgrade the SDKs that power APM, Profiler, Dynamic Instrumentation, and more. Request access to join the preview.
 {{< /callout >}}
 
-Fleet Automation can centrally manage upgrades to the SDKs that power APM, Continuous Profiler, Dynamic Instrumentation, and more. Keeping SDK version up-to-date enables your services to benefit from the latest features, performance improvements, bug fixes, and security updates.
+Fleet Automation can centrally manage remote upgrades to the SDKs that power APM, Continuous Profiler, Dynamic Instrumentation, and more. Keeping your services' SDK versions up to date lets you benefit from the latest features, performance improvements, bug fixes, and security updates.
+
+<div class="alert alert-info">
+Scheduling SDK upgrades is not supported.
+</div>
 
 **Requirements:**
 
