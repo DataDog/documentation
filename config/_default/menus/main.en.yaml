@@ -7941,22 +7941,22 @@ menu:
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
       weight: 1001
-    - name: Browser Test
+    - name: Browser
       url: synthetics/notifications/template_variables/browser/
       parent: synthetics_notifications_template_variables
       identifier: synthetics_notifications_template_variables_browser
       weight: 100101
-    - name: Mobile Test
+    - name: Mobile
       url: synthetics/notifications/template_variables/mobile/
       parent: synthetics_notifications_template_variables
       identifier: synthetics_notifications_template_variables_mobile
       weight: 100102
-    - name: Multistep API Test
+    - name: Multistep API
       url: synthetics/notifications/template_variables/multistep/
       parent: synthetics_notifications_template_variables
       identifier: synthetics_notifications_template_variables_multistep
       weight: 100103
-    - name: API Test
+    - name: API
       url: synthetics/notifications/template_variables/api/
       parent: synthetics_notifications_template_variables
       identifier: synthetics_notifications_template_variables_api

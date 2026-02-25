@@ -1,5 +1,9 @@
 ---
 title: Browser test template variables
+content_filters:
+- trait_id: synthetics_variables
+  option_group_id: synthetics_variables_options
+  label: "Variables"
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
@@ -14,11 +18,25 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your Browser test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
+Template variables allow you to insert dynamic values from your browser test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
+
+<!-- Test results -->
+{% if equals($synthetics_variables, "test_results") %}
+
+This section covers two categories of variables:
+
+- [Test execution variables](#test-execution-variables): Shortcuts for commonly used values such as failure messages, step counts, duration, and tags.
+- [Execution results](#execution-results): The full result object with status, timestamps, failure codes, and step counts.
 
 {% partial file="synthetics/notifications/test_execution_variables.mdoc.md" /%}
 
 {% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
+
+{% /if %}
+<!-- end Test results -->
+
+<!-- Test info -->
+{% if equals($synthetics_variables, "test_info") %}
 
 ### Test metadata
 
@@ -80,6 +98,17 @@ Path: `synthetics.attributes.device`
 : Browser type (for example, `chrome`)
 {% /tab %}
 {% /tabs %}
+
+{% /if %}
+<!-- end Test info -->
+
+<!-- Step details -->
+{% if equals($synthetics_variables, "step_details") %}
+
+This section covers step-level variables organized by category:
+
+- [Failed step information](#failed-step-information): Shortcuts for the step that caused a test failure.
+- [Step execution details](#step-execution-details): Metadata and results for each step, including extracted variable values.
 
 ### Failed step information
 
@@ -168,7 +197,7 @@ These are step execution metadata and results containing detailed information ab
 {% tab label="Extracted values" %}
 Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
-These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
+These are the actual variable values that a step captured during test execution. For example, if you have a browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
 
 For information on how to access the `<step-index>`, see the step summary section.
 
@@ -197,7 +226,16 @@ For information on how to access the `<step-index>`, see the step summary sectio
 {% /tab %}
 {% /tabs %}
 
+{% /if %}
+<!-- end Step details -->
+
+<!-- Variables -->
+{% if equals($synthetics_variables, "variables") %}
+
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
+
+{% /if %}
+<!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 

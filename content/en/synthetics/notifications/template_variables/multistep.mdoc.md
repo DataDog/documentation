@@ -1,5 +1,9 @@
 ---
 title: Multistep API test template variables
+content_filters:
+- trait_id: synthetics_variables
+  option_group_id: synthetics_variables_options
+  label: "Variables"
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
@@ -14,11 +18,25 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your Multistep API test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
+Template variables allow you to insert dynamic values from your multistep API test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
+
+<!-- Test results -->
+{% if equals($synthetics_variables, "test_results") %}
+
+This section covers two categories of variables:
+
+- [Test execution variables](#test-execution-variables): Shortcuts for commonly used values such as failure messages, step counts, duration, and tags.
+- [Execution results](#execution-results): The full result object with status, timestamps, failure codes, and step counts.
 
 {% partial file="synthetics/notifications/test_execution_variables.mdoc.md" /%}
 
 {% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
+
+{% /if %}
+<!-- end Test results -->
+
+<!-- Test info -->
+{% if equals($synthetics_variables, "test_info") %}
 
 ### Test metadata
 
@@ -58,10 +76,21 @@ Use these variables to access test configuration and execution location informat
 {% /tab %}
 {% tab label="Device" %}
 {% alert level="info" %}
-Device information is not available for Multistep API tests. Device variables are only available for **Browser** and **Mobile** tests.
+Device information is not available for multistep API tests. Device variables are only available for **Browser** and **Mobile** tests.
 {% /alert %}
 {% /tab %}
 {% /tabs %}
+
+{% /if %}
+<!-- end Test info -->
+
+<!-- Step details -->
+{% if equals($synthetics_variables, "step_details") %}
+
+This section covers step-level variables organized by category:
+
+- [Failed step information](#failed-step-information): Shortcuts for the step that caused a test failure.
+- [Step execution details](#step-execution-details): Metadata and results for each step.
 
 ### Failed step information
 
@@ -110,6 +139,15 @@ These are step execution metadata and results containing detailed information ab
 `synthetics.attributes.variables.extracted.type`
 : Step type
 
+{% /if %}
+<!-- end Step details -->
+
+<!-- Variables -->
+{% if equals($synthetics_variables, "variables") %}
+
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
+
+{% /if %}
+<!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
