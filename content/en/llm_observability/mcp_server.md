@@ -127,13 +127,104 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 
 ## Setup
 
-To use the LLM Observability tools, connect to the Datadog MCP Server with the `llmobs` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your Datadog site:
+To use the LLM Observability tools, connect to the Datadog MCP Server with the `llmobs` toolset enabled.
+
+<div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/bits_ai/mcp_server/setup/">Set Up the Datadog MCP Server</a>.</div>
+
+Add the `toolsets=llmobs,core` query parameter to the MCP Server endpoint for your [Datadog site][5]:
 
 ```text
-https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=llmobs,core
+https://mcp.<DD_SITE>/api/unstable/mcp-server/mcp?toolsets=llmobs,core
 ```
 
-For full setup instructions including client configuration for Cursor, Claude Code, VS Code, and other AI clients, see [Set Up the Datadog MCP Server][1].
+For example:
+- **US1**: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core`
+- **EU1**: `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=llmobs,core`
+
+{{< tabs >}}
+{{% tab "Remote authentication" %}}
+
+This method uses the MCP specification's [Streamable HTTP][6] transport.
+
+**Claude Code (command line)**:
+
+```bash
+claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
+```
+
+**Configuration file** (Codex CLI, Gemini CLI, Kiro CLI, or any MCP-compatible client):
+
+```json
+{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
+    }
+  }
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Local binary authentication" %}}
+
+This method uses the MCP specification's [stdio][7] transport. Use this if direct remote authentication is not available for you.
+
+1. Install the Datadog MCP Server binary:
+
+    ```bash
+    curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
+    ```
+
+    This installs the binary to `~/.local/bin/datadog_mcp_cli`.
+
+2. Run `datadog_mcp_cli login` to complete the OAuth login flow.
+
+3. Configure your AI client. For Claude Code, add this to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
+
+    ```json
+    {
+      "mcpServers": {
+        "datadog": {
+          "type": "stdio",
+          "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
+          "args": [],
+          "env": {}
+        }
+      }
+    }
+    ```
+
+    Or run:
+
+    ```bash
+    claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Authentication
+
+The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the OAuth flow, provide a Datadog [API key and application key][8] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+
+{{< code-block lang="json" >}}
+{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core",
+      "headers": {
+          "DD_API_KEY": "<YOUR_API_KEY>",
+          "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
+      }
+    }
+  }
+}
+{{< /code-block >}}
+
+For security, use a scoped API key and application key from a [service account][9] that has only the required permissions.
 
 ## Further reading
 
@@ -143,3 +234,8 @@ For full setup instructions including client configuration for Cursor, Claude Co
 [2]: /llm_observability/
 [3]: /notebooks/
 [4]: /notebooks/guide/build_diagrams_with_mermaidjs/
+[5]: /getting_started/site/
+[6]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
+[7]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
+[8]: /account_management/api-app-keys/
+[9]: /account_management/org_settings/service_accounts/
