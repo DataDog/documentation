@@ -105,6 +105,6 @@ logger.info("Hello world!")
 [2]: /tracing/trace_collection/custom_instrumentation/python/dd-api?tab=decorator
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[5]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[5]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
 

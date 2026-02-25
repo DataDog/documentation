@@ -190,10 +190,10 @@ nav_sections:
         link: data_security/
         icon: security-lock
         desc: Learn how Datadog protects your data
-      - title: Developers
-        link: developers/
+      - title: Extend Datadog
+        link: extend/
         icon: dev-code
-        desc: Develop on the Datadog platform
+        desc: Extend the Datadog platform
       - title: Partners
         link: partners/
         icon: colab
