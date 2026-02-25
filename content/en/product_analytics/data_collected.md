@@ -34,10 +34,10 @@ There are additional [measurements and attributes specific to a given event type
 
 | Event Type | Retention | Description |
 |------------|-----------|-------------|
-| Session | 15 months | A session represents a real user journey through your application. It begins when a user opens the application and remains active as long as the user stays active. All events generated during the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. |
-| View | 15 months | A view represents a unique page or screen a user visits within a session. On browser, a view is created each time a user visits a page. On mobile, a view corresponds to a screen or screen segment. All events generated while a user is on a view share the same `view.id` attribute. |
+| Session | 15 months | A session represents a real user journey through your application. It begins when a user opens the application and remains open as long as the user is active. All events generated during the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. |
+| View | 15 months | A view represents a unique page or screen a user visits within a session. In a browser, a view is created each time a user visits a page. On mobile, a view corresponds to a screen or screen segment. All events generated while a user is on a view share the same `view.id` attribute. |
 | Action | 15 months | An action represents user activity in your application, such as a click, tap, swipe, or scroll. Actions are automatically collected by the SDK. Each action is attached to the view it was generated in with a unique `action.id`. |
-| Labeled Action | 15 months | A labeled action is a named label applied to an autocaptured action using [Action Management][1]. Labeled actions allow you to organize and analyze specific user interactions without writing code. |
+| Labeled Action | 15 months | A labeled action is a custom name applied to an autocaptured action using [Action Management][1]. Labeled actions allow you to organize and analyze specific user interactions without writing code. |
 
 ## Default attributes
 
