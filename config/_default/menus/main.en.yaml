@@ -2527,11 +2527,16 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 207
+    - name: Variables
+      url: incident_response/incident_management/setup_and_configuration/variables
+      parent: incidents_settings
+      identifier: incidents_settings_variables
+      weight: 208
     - name: Integrations
       url: incident_response/incident_management/setup_and_configuration/integrations
       parent: incidents_settings
       identifier: incidents_integrations
-      weight: 208
+      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
