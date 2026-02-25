@@ -144,9 +144,9 @@ For example:
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
 
-This method uses the MCP specification's [Streamable HTTP][6] transport.
+This method uses the MCP specification's [Streamable HTTP][1] transport.
 
-**Claude Code (command line)**:
+**Claude Code** (command line):
 
 ```bash
 claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
@@ -165,11 +165,12 @@ claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unsta
 }
 ```
 
+[1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
 {{% /tab %}}
 
 {{% tab "Local binary authentication" %}}
 
-This method uses the MCP specification's [stdio][7] transport. Use this if direct remote authentication is not available for you.
+This method uses the MCP specification's [stdio][2] transport. Use this if direct remote authentication is not available for you.
 
 1. Install the Datadog MCP Server binary:
 
@@ -181,7 +182,7 @@ This method uses the MCP specification's [stdio][7] transport. Use this if direc
 
 2. Run `datadog_mcp_cli login` to complete the OAuth login flow.
 
-3. Configure your AI client. For Claude Code, add this to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
+3. Configure your AI client. For Claude Code, add the following code to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
 
     ```json
     {
@@ -202,12 +203,13 @@ This method uses the MCP specification's [stdio][7] transport. Use this if direc
     claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
     ```
 
+[2]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Authentication
 
-The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the OAuth flow, provide a Datadog [API key and application key][8] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the OAuth flow, provide a Datadog [API key and application key][6] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
 
 {{< code-block lang="json" >}}
 {
@@ -224,7 +226,7 @@ The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the O
 }
 {{< /code-block >}}
 
-For security, use a scoped API key and application key from a [service account][9] that has only the required permissions.
+For security, use a scoped API key and application key from a [service account][7] that has only the required permissions.
 
 ## Further reading
 
@@ -235,7 +237,5 @@ For security, use a scoped API key and application key from a [service account][
 [3]: /notebooks/
 [4]: /notebooks/guide/build_diagrams_with_mermaidjs/
 [5]: /getting_started/site/
-[6]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
-[7]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
-[8]: /account_management/api-app-keys/
-[9]: /account_management/org_settings/service_accounts/
+[6]: /account_management/api-app-keys/
+[7]: /account_management/org_settings/service_accounts/
