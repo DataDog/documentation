@@ -20,6 +20,10 @@ This page covers:
 - [Sending a flare from the Datadog site](#send-a-flare-from-the-datadog-site) using Remote Configuration.
 - [Manual submission](#manual-submission).
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">On US1-FED, only <a href="#manual-submission">manual flare submission</a> is supported.</div>
+{{< /site-region >}}
+
 A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings. If APM is enabled, the flare includes [tracer debug logs][4] when available.
 
 The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
