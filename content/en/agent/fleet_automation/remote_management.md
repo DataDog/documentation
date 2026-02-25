@@ -151,7 +151,7 @@ In the preview, scheduled upgrades of SDKs is not supported.
 
    {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="UI showing the Upgrade Agents tab with the Upgrade Now button." style="width:100%;" >}}
 
-1. **Select the SDK language and version**. Only one language SDK can be upgraded at a time.
+1. Select the **SDK language** and **version**. You can update one language SDK at a time.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-language.png" alt="Select the language and version to upgrade to." style="width:100%;" >}}
 
