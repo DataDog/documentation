@@ -9002,8 +9002,8 @@ menu:
       parent: account_management
       weight: 7
     - name: Teams and Access
-      identifier: account_management_access_overview
-      url: account_management/access_overview/
+      identifier: account_management_teams_access
+      url: account_management/teams/access_overview/
       parent: account_management_teams
       weight: 701
     - name: Team Management
