@@ -26,7 +26,7 @@ If your LLM requests involve any of the [listed supported providers](#supported-
 - The model provider's public pricing rates
 
 ### Manual
-To manually supply cost information, follow the instrumentation steps described in the [SDK Reference][2] or [API][3].
+To manually supply cost information, follow the instrumentation steps described in the [SDK Reference][2] or [API][3]. When setting your costs up manually (e.g. setting `total_cost`), the unit must be in dollar units; however, the unit will be stored as nanodollars.
 
 <div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
