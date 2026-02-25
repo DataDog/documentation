@@ -11100,6 +11100,30 @@ menu:
       url: /api/latest/product-analytics/
       identifier: product-analytics
       generated: true
+    - name: Compute timeseries analytics
+      url: '#compute-timeseries-analytics'
+      identifier: product-analytics-compute-timeseries-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsTimeseries
+        unstable: []
+        order: 3
+    - name: Compute scalar analytics
+      url: '#compute-scalar-analytics'
+      identifier: product-analytics-compute-scalar-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsScalar
+        unstable: []
+        order: 2
     - name: Send server-side events
       url: '#send-server-side-events'
       identifier: product-analytics-send-server-side-events
