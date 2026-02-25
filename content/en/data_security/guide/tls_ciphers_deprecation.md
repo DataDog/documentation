@@ -12,6 +12,8 @@ Datadog uses a modern cryptographic engine that requires specific cipher suite c
 
 ## Disabled cipher suites
 
+Datadog has disabled support for the following cipher suites, which are considered weak under modern security standards.
+
 ### Effective April 1, 2024
 
 As of **April 1, 2024**, Datadog does not support the following cipher suites across its public-facing applications. Clients using these cipher suites receive connection error messages.
@@ -79,7 +81,13 @@ Datadog accepts the following cipher suites for {{< region-param key="dd_site_na
 
 Datadog's systems require TLS 1.2. Compatible clients can negotiate other cipher suites, but specific client-side configurations may alter this behavior.
 
-To test your client, connect to [tls-config-test.datadoghq.com][3], which is configured with the target ciphers. Alternatively, use the [How's My SSL? API][1] to check the cipher suites your client supports. For additional questions, contact [Datadog support][2].
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+
+The Datadog Agent uses only the accepted cipher suites and does not require any updates. Weak cipher usage typically comes from custom integrations, scripts, or older HTTP clients such as certain versions of Windows PowerShell or Ruby.
+
+{{< /site-region >}}
+
+To test your client, connect to [tls-config-test.datadoghq.com][3], which is configured with the target ciphers. Alternatively, use the [How's My SSL? API][1] to check the cipher suites your client supports. For assistance identifying where you are using weak ciphers to connect to Datadog, contact [Datadog support][2].
 
 
 [1]: https://www.howsmyssl.com/s/api.html
