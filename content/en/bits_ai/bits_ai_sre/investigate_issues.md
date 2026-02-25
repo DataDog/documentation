@@ -7,10 +7,11 @@ aliases:
 
 ## Start a Bits AI SRE investigation
 
-You can start a Bits AI SRE investigation from:
+You can launch a Bits AI SRE investigation from several entry points:
+
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
-  - [**Automatic**](#enable-automatic-investigations): Configure monitors so that whenever they alert, Bits launches an investigation
+  - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
 - [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages) (Preview)
 - [APM latency Watchdog stories](#apm-latency-watchdog-stories) (Preview)
 - [General prompt](#general-prompt) (Preview)
@@ -58,11 +59,9 @@ On a Watchdog APM latency story, click **Investigate with Bits AI SRE**.
 Starting Bits AI SRE investigations from chat prompts is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-Click on [New Investigation][16] and describe the issue you want to troubleshoot. 
-
-Include as much relevant context as possible:
-- Observed symptoms (errors, latency, missing data, etc.), including any links to Datadog telemetry that indicate this
-- Relevant tags such as service, application, or environment 
+Click on [New Investigation][16] and describe the issue you want to troubleshoot. Include as much relevant context as possible:
+- Observed symptoms (e.g., errors, latency) including any links to Datadog telemetry that indicate this
+- Relevant tags such as service, application, or environment that isolate the issue
 - A time window (default is past 4 hours)
 
 The more specific your prompt, the more accurate and useful the investigation will be.
@@ -74,7 +73,7 @@ Good examples:
 Bad example: 
 - App is slow. What’s wrong?
 
-You can also trigger an investigation directly from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits automatically uses the entire thread as investigation context.
+You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits automatically uses the entire thread as investigation context.
 
 ### Enable automatic investigations
 
@@ -104,7 +103,7 @@ Bits is able to run investigations on the following monitor types:
   - Synthetics API and Browser tests (Preview)
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits AI SRE investigations from Synthetic tests are now in Preview. Click <strong>Request Access</strong> to join the Preview program.
+Starting Bits AI SRE investigations from Synthetic tests is now in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 ## How Bits AI SRE investigates
@@ -122,9 +121,9 @@ Bits uses the following data sources during investigations:
 - APM traces
 - Logs
 - Dashboards
-- [Source code][17] (GitHub only)
 - Events
 - [Change Tracking][4]
+- [Source code][17] (GitHub only)
 - Watchdog
 - Real User Monitoring
 - Network Path
@@ -132,29 +131,25 @@ Bits uses the following data sources during investigations:
 - Continuous Profiler
 
 #### Third-party integrations
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Certain third-party integrations are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
 - Grafana
 - Dynatrace
 - Sentry
 - Splunk
 - ServiceNow
-- Confluence 
+- Confluence
+
+{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+A subset of third-party integrations are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 ### Investigation display modes
-While an investigation is in progress, Bits records every step it takes—including how it reasons through the evidence—in the **Agent Trace** view. After the investigation concludes, you can switch to the **Investigation** view to see a structured tree visualization of the investigative path.
+There are two display modes: Investigation and Agent Trace.
 
-### Best practices: Add investigation context to your monitors {#best-practices}
-Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
+While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the **Agent Trace** view. This provides a real-time, detailed record of the agent’s reasoning process.
 
-- **Include Datadog telemetry links**: Add at least one helpful telemetry link in the monitor message. Think about the first place you'd normally look in Datadog when this monitor triggers. Some examples include a dashboard, logs, traces, or a notebook with helpful widgets. Because these links are user-defined, you have control over what Bits reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
+Once the investigation is complete, you can switch to the **Investigation** view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
 
-- **Add service scoping**: For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service.
-
-   {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
-
-For additional suggestions on how to optimize investigations, see [Knowledge][9].
+For best practices on how to optimize investigations, see [Knowledge][9].
 
 ## Reports
 
