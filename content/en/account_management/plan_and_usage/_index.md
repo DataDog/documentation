@@ -30,6 +30,8 @@ If your organization has access to product trials, users can manage their trials
 
 If no product trials are available, the **Trial Management** tab is not displayed for administrator users.
 
+<div class="alert alert-info">This tab only displays self-service trials that users can start themselves. Sales-led trials initiated by Datadog account representatives are not included.</div>
+
 {{< img src="account_management/plan_and_usage/trial-management-tab.png" alt="Trial Management tab showing available trials, and active and past trials with end dates" >}}
 
 From the **Trial Management** tab, you can start new available trials and view your active and past trials. The tab displays each trial's end date and includes links to each trial product and its documentation.
