@@ -100,7 +100,7 @@ The following is a list of bootstrap options, their related pipeline environment
 
 ## Enable the health check endpoint and the liveness and readiness probes
 
-Configure your load balancer's health check with the `/heath` endpoint to check that the Worker is up and running.
+Configure your load balancer's health check with the `/health` endpoint to check that the Worker is up and running.
 
 For Kubernetes, the liveness and readiness probes are already enabled in the [helm chart][9] and [values.yaml][10] file.
 
@@ -109,7 +109,7 @@ For other installations such as VM-based ones, you must set `DD_OP_API_ENABLED` 
 ```
 api:
   enabled: true
-  address: "0.0.0.0.1:8686"
+  address: "0.0.0.0:8686"
 ```
 
 ## Further reading

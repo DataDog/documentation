@@ -87,6 +87,8 @@ After setting up your pipeline using the API or Terraform, follow the instructio
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
 [3]: /observability_pipelines/guide/environment_variables/
@@ -148,7 +150,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
         - See [Environment Variables][4] for a list of source environment variables.
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[2].value='https://hec.splunkcloud.com:8088' \`
+        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`
         - See [Environment Variables][4] for a list of destination environment variables.
 
     **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
@@ -159,11 +161,26 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
+**Notes**:
+- If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
+
+#### Kubernetes services created
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
+
+- A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
+  This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
+- A ClusterIP service that provides a single virtual IP and DNS name for the Worker.  
+  This enables load balancing across Worker Pods for internal cluster traffic.
+
+#### LoadBalancer service
+
+If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][9] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
@@ -173,6 +190,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 [8]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
+[9]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -211,6 +229,8 @@ Follow the steps below if you want to use the one-line installation script to in
 
 See [Update Existing Pipelines][4] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
 [3]: /observability_pipelines/guide/environment_variables/
@@ -237,6 +257,8 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 [1]: /observability_pipelines/configuration/update_existing_pipelines/
 
@@ -279,6 +301,8 @@ After you set up your source, destinations, and processors on the Build page of 
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: /observability_pipelines/configuration/secrets_management
@@ -307,21 +331,6 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
- 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	--set <SOURCE_ENV_VARIABLES> \
-	--set <DESTINATION_ENV_VARIABLES> \
-	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-	datadog/observability-pipelines-worker
-    ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
 1. If you are using:
     - **Secrets Management**:
     1. See [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
@@ -333,7 +342,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         --set datadog.pipelineId=<PIPELINE_ID> \
         datadog/observability-pipelines-worker
         ```
-    - **Environment variables**: Run this command to install the Worker:
+    - **Environment variables**: Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
         ```shell
         helm upgrade --install opw \
         -f values.yaml \
@@ -344,15 +353,34 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
         --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
         datadog/observability-pipelines-worker
         ```
+        **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+        ```
+        --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
+        ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart.
+**Notes**:
+- If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
+
+#### Kubernetes services created
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates:
+
+- A headless Service (`clusterIP: None`) that exposes the individual Worker Pods using DNS.  
+  This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
+- A ClusterIP service that provides a single virtual IP and DNS name for the Worker.  
+  This enables load balancing across Worker Pods for internal cluster traffic.
+
+#### LoadBalancer service
+
+If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][8] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
@@ -361,6 +389,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 [7]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
+[8]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -382,6 +411,8 @@ Follow the steps below if you want to use the one-line installation script to in
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 [2]: https://app.datadoghq.com/organization-settings/remote-config/setup
@@ -415,6 +446,8 @@ See [Set Up the Worker in ECS Fargate][1] for instructions.
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 [1]: /observability_pipelines/configuration/update_existing_pipelines/
 [2]: https://app.datadoghq.com/organization-settings/remote-config/setup
@@ -477,6 +510,8 @@ If you prefer not to use the one-line installation script for Linux, follow thes
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
@@ -531,6 +566,8 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
@@ -556,7 +593,6 @@ sudo yum install --only-upgrade observability-pipelines-worker
 
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Uninstall the Worker
 
@@ -587,6 +623,31 @@ sudo apt-get remove --purge observability-pipelines-worker
 ## Index your Worker logs
 
 Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+
+## Add domains to firewall allowlist
+
+If you are using a firewall, these domains must be added to the allowlist:
+
+{{< tabs >}}
+{{% tab "Docker and Kubernetes" %}}
+
+- `api.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `keys.datadoghq.com`
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+- `api.{{< region-param key="dd_site" >}}`
+- `config.{{< region-param key="dd_site" >}}`
+- `http-intake.{{< region-param key="dd_site" >}}`
+- `install.{{< region-param key="dd_site" >}}`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 

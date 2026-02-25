@@ -64,6 +64,7 @@ Estimated usage metrics are generally available for the following usage types:
 | AAP Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique AAP Fargate Tasks seen in the last 5 minutes. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
+| Code Coverage Committers | `datadog.estimated_usage.code_coverage.committers` | Code coverage committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
