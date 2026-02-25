@@ -48,5 +48,5 @@ Revoking a user's OAuth access to an application removes all access to that appl
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /account_management/rbac/permissions/#general-permissions
 [3]: /account_management/rbac/?tab=datadogapplication#custom-role
-[4]: /developers/ui_extensions/
-[5]: /developers/ui_extensions/#oauth-api-access
+[4]: /extend/ui_extensions/
+[5]: /extend/ui_extensions/#oauth-api-access

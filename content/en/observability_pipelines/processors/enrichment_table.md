@@ -73,7 +73,7 @@ In Datadog's Snowflake integration documentation, see [Reference Tables][3] for 
 To set up the Enrichment Table processor:
 
 1. Click **Add enrichment**.
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified filter query are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][8] for more information.
 1. In the **Set lookup mapping** section, select the type of lookup dataset you want to use.
   {{< tabs >}}
   {{% tab "Reference Table" %}}
@@ -197,8 +197,6 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
 
-{{% observability_pipelines/processors/filter_syntax %}}
-
 [1]: /reference_tables/?tab=cloudstorage
 [2]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
 [3]: /integrations/snowflake-web/#reference-tables
@@ -206,3 +204,4 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 [5]: /help/
 [6]: /integrations/databricks/?tab=useaserviceprincipalforoauth#reference-table-configuration
 [7]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
+[8]: /observability_pipelines/search_syntax/logs/

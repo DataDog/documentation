@@ -72,7 +72,7 @@ You can create a pipeline with one of the following methods:
 [3]: /observability_pipelines/sources/
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/
-[6]: /observability_pipelines/search_syntax/logs/
+[11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
