@@ -130,11 +130,11 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 1. In Fleet Automation, open the [Configure Agents][16] tab and click **Configure Agents**.
 1. **Scope the configuration to the target Agents.** You can target a group of Agents by filtering on host information or tags.
 
-   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Configure Agent page in the Fleet Automation product for scoping Agents that are configured in bulk." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Scope this configuration step in Fleet Automation's Configure Agents workflow, showing filters for environment, operating system, and hostname, a list of 33 Agents included in scope, and a Configuration Summary panel on the right." style="width:100%;" >}}
 
 1. **Select the products** (for example, APM, Logs, or NDM) that the target Agents should run.
 
-   {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="Select which product to enable." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="The Select products to configure step in Fleet Automation's Configure Agents workflow, showing product tiles grouped under Core Observability (Infrastructure Monitoring, Log Management, APM) and Additional Observability (Live Process Monitoring, Cloud Network Monitoring, Network Device Monitoring)." style="width:100%;" >}}
 
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. Click **Deploy Configuration** to start the deployment and track its progress from the [Deployments page][10].
