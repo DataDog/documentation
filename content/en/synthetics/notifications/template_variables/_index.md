@@ -1,7 +1,7 @@
 ---
 title: Synthetic Monitoring Template Variables
 aliases:
-- /synthetics/notifications/template_variables_cdocs
+- /synthetics/notifications/template_variables
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
