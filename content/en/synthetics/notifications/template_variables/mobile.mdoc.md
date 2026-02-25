@@ -1,5 +1,5 @@
 ---
-title: Mobile test template variables
+title: Mobile testing template variables
 content_filters:
 - trait_id: synthetics_variables
   option_group_id: synthetics_variables_options
@@ -19,6 +19,10 @@ further_reading:
 ## Overview
 
 Template variables allow you to insert dynamic values from your mobile test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
+
+{% alert level="info" %}
+Use the filter above to view variables by category.
+{% /alert %}
 
 <!-- Test results -->
 {% if equals($synthetics_variables, "test_results") %}
@@ -118,9 +122,6 @@ Use these variables to access information about the step that caused a test fail
 
 `{{synthetics.failed_step}}`
 : The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly.
-
-`{{synthetics.failed_step.name}}`
-: Shortcut for `{{synthetics.attributes.result.steps.<step-index>.name}}`
 
 `{{synthetics.failed_step.description}}`
 : Shortcut for `{{synthetics.attributes.result.steps.<step-index>.description}}`

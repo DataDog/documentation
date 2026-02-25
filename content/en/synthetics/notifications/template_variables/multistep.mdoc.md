@@ -1,5 +1,5 @@
 ---
-title: Multistep API test template variables
+title: Multistep API testing template variables
 content_filters:
 - trait_id: synthetics_variables
   option_group_id: synthetics_variables_options
@@ -19,6 +19,10 @@ further_reading:
 ## Overview
 
 Template variables allow you to insert dynamic values from your multistep API test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
+
+{% alert level="info" %}
+Use the filter above to view variables by category.
+{% /alert %}
 
 <!-- Test results -->
 {% if equals($synthetics_variables, "test_results") %}

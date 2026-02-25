@@ -1,5 +1,5 @@
 ---
-title: API test template variables
+title: API testing template variables
 content_filters:
 - trait_id: protocol
   option_group_id: synthetics_protocol_options
