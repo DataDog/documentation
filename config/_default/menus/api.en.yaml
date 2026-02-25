@@ -7181,6 +7181,45 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an AWS cloud authentication persona mapping
+      url: '#get-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-get-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an AWS cloud authentication persona mapping
+      url: '#delete-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-delete-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Create an AWS cloud authentication persona mapping
+      url: '#create-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-create-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 3
     - name: List AWS cloud authentication persona mappings
       url: '#list-aws-cloud-authentication-persona-mappings'
       identifier: cloud-authentication-list-aws-cloud-authentication-persona-mappings
