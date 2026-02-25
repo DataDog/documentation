@@ -1,12 +1,20 @@
-# Overview
+---
+title: TLS cipher suite deprecation
+---
 
-**Transport Layer Security (TLS)** is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. During the establishment of a TLS session, both parties agree on a cipher suite which dictates the cryptographic algorithms used to secure the communication.
+## Overview
 
-As part of its ongoing commitment to the security and protection of its customer's data, Datadog is rolling out a more modern cryptographic engine across its systems which imposes some changes to the configurations it can accept.
+TLS is a security protocol that protects web traffic by providing confidentiality and integrity of data in transit. During a TLS session, both parties agree on a cipher suite that dictates the cryptographic algorithms used.
 
-Beginning **April 1st, 2024**, Datadog disabled support for the following cipher suites across its public-facing applications. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
+Datadog uses a modern cryptographic engine that requires specific cipher suite configurations.
 
-## Disabled Cipher Suites
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+
+## Disabled cipher suites
+
+### Effective April 1, 2024
+
+As of **April 1, 2024**, Datadog does not support the following cipher suites across its public-facing applications. Clients using these cipher suites receive connection error messages.
 
 | Code       | IANA Name                                |
 |------------|------------------------------------------|
@@ -17,9 +25,9 @@ Beginning **April 1st, 2024**, Datadog disabled support for the following cipher
 | 0x00,0x3C   | TLS_RSA_WITH_AES_128_CBC_SHA256          |
 | 0x00,0x3D   | TLS_RSA_WITH_AES_256_CBC_SHA256          |
 
-Beginning **September 1, 2026**, Datadog will disable support for the following additional cipher suites:
+### Effective September 1, 2026
 
-## Cipher Suites Disabled September 1, 2026
+Beginning **September 1, 2026**, Datadog will disable support for the following additional cipher suites:
 
 | Code       | IANA Name                                | OpenSSL Name           |
 |------------|------------------------------------------|------------------------|
@@ -30,9 +38,13 @@ Beginning **September 1, 2026**, Datadog will disable support for the following 
 | 0x00,0x35   | TLS_RSA_WITH_AES_256_CBC_SHA             | AES256-SHA             |
 | 0x00,0x2F   | TLS_RSA_WITH_AES_128_CBC_SHA             | AES128-SHA             |
 
-After this date, the following cipher suites will be accepted:
+{{< /site-region >}}
 
-## Accepted Cipher Suites
+## Accepted cipher suites
+
+{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+
+Effective September 1, 2026, Datadog will accept only the following cipher suites:
 
 | Code       | IANA Name                                       |
 |------------|-------------------------------------------------|
@@ -48,9 +60,11 @@ After this date, the following cipher suites will be accepted:
 | 0x13,0x02   | TLS_AES_256_GCM_SHA384                        |
 | 0x13,0x03   | TLS_CHACHA20_POLY1305_SHA256                  |
 
-This change does not impact Datadog for Government site for which the accepted cipher suites remain the following:
+{{< /site-region >}}
 
-## Accepted Cipher Suites (Datadog for Government)
+{{< site-region region="gov" >}}
+
+Datadog accepts the following cipher suites for {{< region-param key="dd_site_name" >}}:
 
 | Code       | IANA Name                                |
 |------------|------------------------------------------|
@@ -59,9 +73,13 @@ This change does not impact Datadog for Government site for which the accepted c
 | 0xC0,0x2B   | TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256  |
 | 0xC0,0x2C   | TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384  |
 
-# Client Compatibility
+{{< /site-region >}}
 
-Datadog's systems already require the use of **TLS 1.2** and compatible clients will be able to negotiate other cipher suites. However, specific client-side configurations may alter this behavior. Use the client of your choice to connect to [tls-config-test.datadoghq.com][3] which is configured with the target ciphers, or use [How's my SSL? API][1] to check the cipher suites it supports. For any additional questions, reach out to [Datadog support][2].
+## Client compatibility
+
+Datadog's systems require TLS 1.2. Compatible clients can negotiate other cipher suites, but specific client-side configurations may alter this behavior.
+
+To test your client, connect to [tls-config-test.datadoghq.com][3], which is configured with the target ciphers. Alternatively, use the [How's My SSL? API][1] to check the cipher suites your client supports. For additional questions, contact [Datadog support][2].
 
 
 [1]: https://www.howsmyssl.com/s/api.html
