@@ -14,6 +14,12 @@ further_reading:
   - link: "/security/cloud_security_management/agentless_scanning"
     tag: "Documentation"
     text: "Cloud Security Agentless Scanning"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/update"
+    tag: "Documentation"
+    text: "Updating Agentless Scanning"
+  - link: "/security/cloud_security_management/troubleshooting/agentless_scanning"
+    tag: "Documentation"
+    text: "Troubleshooting Agentless Scanning"
 ---
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Agentless Scanning runs entirely within your infrastructure — only the list of installed packages (SBOM) and host metadata is sent to Datadog. Your raw data, disk contents, and container images stay in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].

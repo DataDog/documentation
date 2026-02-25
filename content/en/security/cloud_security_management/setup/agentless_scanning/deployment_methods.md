@@ -9,6 +9,9 @@ further_reading:
   - link: "/security/cloud_security_management/setup/agentless_scanning/enable"
     tag: "Documentation"
     text: "Enabling Agentless Scanning"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/update"
+    tag: "Documentation"
+    text: "Updating Agentless Scanning"
 ---
 
 This guide helps you choose the right deployment topology for Agentless Scanning based on your cloud environment. For setup instructions, see [Enabling Agentless Scanning][3].

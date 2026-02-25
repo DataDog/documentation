@@ -10,6 +10,12 @@ further_reading:
   - link: "/security/sensitive_data_scanner/setup/cloud_storage"
     tag: "Documentation"
     text: "Set up Sensitive Data Scanner for Cloud Storage"
+  - link: "/security/cloud_security_management/setup/agentless_scanning/update"
+    tag: "Documentation"
+    text: "Updating Agentless Scanning"
+  - link: "/security/cloud_security_management/troubleshooting/agentless_scanning"
+    tag: "Documentation"
+    text: "Troubleshooting Agentless Scanning"
 ---
 
 ## Overview
