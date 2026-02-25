@@ -113,3 +113,5 @@ phrase:
       dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
     - src: "content/en/agent/_index.json"
       dst: "content/{lang}/agent/_index.json"
+    - src: "content/en/test-phrase/_index.md"
+      dst: "content/{lang}/test-phrase/_index.md"
