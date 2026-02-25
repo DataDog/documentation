@@ -745,6 +745,20 @@
     "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
     "summary": "List AWS cloud authentication persona mappings"
   },
+  "CreateAWSCloudAuthPersonaMapping": {
+    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
+    "summary": "Create an AWS cloud authentication persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
+  },
+  "DeleteAWSCloudAuthPersonaMapping": {
+    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
+    "summary": "Delete an AWS cloud authentication persona mapping"
+  },
+  "GetAWSCloudAuthPersonaMapping": {
+    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
+    "summary": "Get an AWS cloud authentication persona mapping"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
