@@ -464,5 +464,163 @@
       },
       "html": "<div class=\"\"><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Hash of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Name of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">owner</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Owner of an application key.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
     }
+  },
+  "RevokeClientToken": {
+    "responses": {
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "hash": "1234567890abcdef1234567890abcdef123"
+      },
+      "json": {
+        "hash": "1234567890abcdef1234567890abcdef123"
+      },
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">hash&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Hash value of the client token to revoke.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+    }
+  },
+  "CreateClientToken": {
+    "responses": {
+      "200": {
+        "json": {
+          "created_at": "2024-03-15T10:30:00.000000+00:00",
+          "created_by_handle": "user@example.com",
+          "created_by_uuid": "00000000-0000-0000-0000-000000000000",
+          "disabled_at": "2024-03-20T10:30:00.000000+00:00",
+          "disabled_by": "integer",
+          "disabled_by_handle": "user@example.com",
+          "hash": "1234567890abcdef1234567890abcdef123",
+          "modified_by": "integer",
+          "name": "Example Client Token",
+          "org_id": 12345,
+          "origin_urls": [
+            "https://example.com"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_at</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">date-time</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Creation timestamp of the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_by_handle</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Handle of the user who created the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_by_uuid</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">uuid</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">UUID of the user who created the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">disabled_at</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">date-time</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Timestamp when the client token was disabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">disabled_by</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">ID of the user who disabled the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">disabled_by_handle</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Handle of the user who disabled the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The hash value of the client token. This is the secret token value that should be\nused in your browser or mobile application.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">modified_by</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">ID of the user who last modified the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Name of the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">org_id</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Organization ID associated with the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">origin_urls&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of allowed origin URLs for browser-based applications. Requests from URLs\nnot in this list will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "name": "Example Client Token",
+        "origin_urls": [
+          "https://example.com"
+        ]
+      },
+      "json": {
+        "name": "Example Client Token",
+        "origin_urls": [
+          "https://example.com"
+        ]
+      },
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Name of the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">origin_urls&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of allowed origin URLs for browser-based applications. Requests from URLs\nnot in this list will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+    }
+  },
+  "UpdateClientToken": {
+    "responses": {
+      "200": {
+        "json": {
+          "created_at": "2024-03-15T10:30:00.000000+00:00",
+          "created_by_handle": "user@example.com",
+          "created_by_uuid": "00000000-0000-0000-0000-000000000000",
+          "disabled_at": "2024-03-20T10:30:00.000000+00:00",
+          "disabled_by": "integer",
+          "disabled_by_handle": "user@example.com",
+          "hash": "1234567890abcdef1234567890abcdef123",
+          "modified_by": "integer",
+          "name": "Example Client Token",
+          "org_id": 12345,
+          "origin_urls": [
+            "https://example.com"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_at</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">date-time</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Creation timestamp of the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_by_handle</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Handle of the user who created the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">created_by_uuid</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">uuid</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">UUID of the user who created the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">disabled_at</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">date-time</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Timestamp when the client token was disabled.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">disabled_by</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">ID of the user who disabled the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">disabled_by_handle</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Handle of the user who disabled the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">hash</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The hash value of the client token. This is the secret token value that should be\nused in your browser or mobile application.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">modified_by</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">ID of the user who last modified the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Name of the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">org_id</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Organization ID associated with the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">origin_urls&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of allowed origin URLs for browser-based applications. Requests from URLs\nnot in this list will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "hash": "1234567890abcdef1234567890abcdef123",
+        "name": "Updated Client Token Name"
+      },
+      "json": {
+        "hash": "1234567890abcdef1234567890abcdef123",
+        "name": "Updated Client Token Name",
+        "origin_urls": [
+          "https://example.com"
+        ]
+      },
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">hash&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Hash value of the client token to update.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">name&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">New name for the client token.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">origin_urls</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">New list of allowed origin URLs. If provided, this will replace the existing list.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+    }
   }
 }

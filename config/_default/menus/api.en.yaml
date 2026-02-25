@@ -1096,6 +1096,71 @@ menu:
       url: /api/latest/key-management/
       identifier: key-management
       generated: true
+    - name: Update personal access token
+      url: '#update-personal-access-token'
+      identifier: key-management-update-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePersonalAccessToken
+        unstable:
+          - v2
+        order: 2
+    - name: Get personal access token
+      url: '#get-personal-access-token'
+      identifier: key-management-get-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPersonalAccessToken
+        unstable:
+          - v2
+        order: 3
+    - name: Revoke personal access token
+      url: '#revoke-personal-access-token'
+      identifier: key-management-revoke-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevokePersonalAccessToken
+        unstable:
+          - v2
+        order: 1
+    - name: Create personal access token
+      url: '#create-personal-access-token'
+      identifier: key-management-create-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePersonalAccessToken
+        unstable:
+          - v2
+        order: 5
+    - name: List personal access tokens
+      url: '#list-personal-access-tokens'
+      identifier: key-management-list-personal-access-tokens
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPersonalAccessTokens
+        unstable:
+          - v2
+        order: 4
     - name: Edit an application key owned by current user
       url: '#edit-an-application-key-owned-by-current-user'
       identifier: key-management-edit-an-application-key-owned-by-current-user
@@ -1156,6 +1221,45 @@ menu:
           - ListCurrentUserApplicationKeys
         unstable: []
         order: 5
+    - name: Update client token
+      url: '#update-client-token'
+      identifier: key-management-update-client-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - UpdateClientToken
+        unstable:
+          - v1
+        order: 2
+    - name: Create client token
+      url: '#create-client-token'
+      identifier: key-management-create-client-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - CreateClientToken
+        unstable:
+          - v1
+        order: 3
+    - name: Revoke client token
+      url: '#revoke-client-token'
+      identifier: key-management-revoke-client-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - RevokeClientToken
+        unstable:
+          - v1
+        order: 1
     - name: Edit an application key
       url: '#edit-an-application-key'
       identifier: key-management-edit-an-application-key
