@@ -48372,6 +48372,430 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    ProductAnalyticsAnalyticsQuery:
+      description: The analytics query definition containing a base query, compute
+        rule, and optional grouping.
+      properties:
+        audience_filters:
+          $ref: '#/components/schemas/ProductAnalyticsAudienceFilters'
+        compute:
+          $ref: '#/components/schemas/ProductAnalyticsCompute'
+        group_by:
+          description: Group-by rules for segmenting results.
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsGroupBy'
+          type: array
+        indexes:
+          description: Restrict the query to specific indexes. Max 1 entry.
+          items:
+            type: string
+          maxItems: 1
+          type: array
+        query:
+          $ref: '#/components/schemas/ProductAnalyticsBaseQuery'
+      required:
+      - query
+      - compute
+      type: object
+    ProductAnalyticsAnalyticsRequest:
+      description: Request for computing analytics results (scalar or timeseries).
+      example:
+        data:
+          attributes:
+            from: 1771232048460
+            query:
+              compute:
+                aggregation: count
+              query:
+                data_source: product_analytics
+                search:
+                  query: '@type:view'
+            to: 1771836848262
+          type: formula_analytics_extended_request
+      properties:
+        data:
+          $ref: '#/components/schemas/ProductAnalyticsAnalyticsRequestData'
+      required:
+      - data
+      type: object
+    ProductAnalyticsAnalyticsRequestAttributes:
+      description: Attributes for an analytics request.
+      properties:
+        enforced_execution_type:
+          $ref: '#/components/schemas/ProductAnalyticsExecutionType'
+        from:
+          description: Start time in epoch milliseconds. Must be less than `to`.
+          example: 1771232048460
+          format: int64
+          type: integer
+        query:
+          $ref: '#/components/schemas/ProductAnalyticsAnalyticsQuery'
+        request_id:
+          description: Optional request ID for multi-step query continuation.
+          type: string
+        to:
+          description: End time in epoch milliseconds.
+          example: 1771836848262
+          format: int64
+          type: integer
+      required:
+      - from
+      - to
+      - query
+      type: object
+    ProductAnalyticsAnalyticsRequestData:
+      description: Data object for an analytics request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProductAnalyticsAnalyticsRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ProductAnalyticsAnalyticsRequestType'
+      required:
+      - type
+      - attributes
+      type: object
+    ProductAnalyticsAnalyticsRequestType:
+      description: The resource type for analytics requests.
+      enum:
+      - formula_analytics_extended_request
+      example: formula_analytics_extended_request
+      type: string
+      x-enum-varnames:
+      - FORMULA_ANALYTICS_EXTENDED_REQUEST
+    ProductAnalyticsAudienceAccountSubquery:
+      description: An account-based audience query.
+      properties:
+        name:
+          description: Name of this query, referenced in the formula.
+          example: ''
+          type: string
+        query:
+          description: Search query for filtering accounts.
+          type: string
+      required:
+      - name
+      type: object
+    ProductAnalyticsAudienceFilters:
+      description: Audience filter definitions for targeting specific user segments.
+      properties:
+        accounts:
+          description: Account audience queries.
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsAudienceAccountSubquery'
+          type: array
+        formula:
+          description: Boolean formula combining audience queries by name.
+          example: u
+          type: string
+        segments:
+          description: Segment audience queries.
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsAudienceSegmentSubquery'
+          type: array
+        users:
+          description: User audience queries.
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsAudienceUserSubquery'
+          type: array
+      type: object
+    ProductAnalyticsAudienceSegmentSubquery:
+      description: A segment-based audience query.
+      properties:
+        name:
+          description: Name of this query, referenced in the formula.
+          example: ''
+          type: string
+        segment_id:
+          description: UUID of the segment to filter by.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - name
+      - segment_id
+      type: object
+    ProductAnalyticsAudienceUserSubquery:
+      description: A user-based audience query.
+      properties:
+        name:
+          description: Name of this query, referenced in the formula.
+          example: u
+          type: string
+        query:
+          description: Search query for filtering users.
+          example: '*'
+          type: string
+      required:
+      - name
+      type: object
+    ProductAnalyticsBaseQuery:
+      description: 'A query definition discriminated by the `data_source` field.
+
+        Use `product_analytics` for standard event queries, or
+
+        `product_analytics_occurrence` for occurrence-filtered queries.'
+      oneOf:
+      - $ref: '#/components/schemas/ProductAnalyticsEventQuery'
+      - $ref: '#/components/schemas/ProductAnalyticsOccurrenceQuery'
+    ProductAnalyticsCompute:
+      description: A compute rule for aggregating data.
+      properties:
+        aggregation:
+          description: The aggregation function (count, cardinality, avg, sum, min,
+            max, etc.).
+          example: count
+          type: string
+        interval:
+          description: Time bucket size in milliseconds. Required for timeseries queries.
+          example: 3600000
+          format: int64
+          type: integer
+        metric:
+          description: The metric to aggregate on. Required for non-count aggregations.
+          example: '@session.time_spent'
+          type: string
+      required:
+      - aggregation
+      type: object
+    ProductAnalyticsEventQuery:
+      description: A standard Product Analytics event query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/ProductAnalyticsEventQueryDataSource'
+        search:
+          $ref: '#/components/schemas/ProductAnalyticsEventSearch'
+      required:
+      - data_source
+      - search
+      type: object
+    ProductAnalyticsEventQueryDataSource:
+      description: The data source identifier.
+      enum:
+      - product_analytics
+      example: product_analytics
+      type: string
+      x-enum-varnames:
+      - PRODUCT_ANALYTICS
+    ProductAnalyticsEventSearch:
+      description: Search parameters for an event query.
+      properties:
+        query:
+          description: The search query using Datadog search syntax.
+          example: '@type:view'
+          type: string
+      type: object
+    ProductAnalyticsExecutionType:
+      description: Override the query execution strategy.
+      enum:
+      - simple
+      - background
+      - trino-multistep
+      - materialized-view
+      type: string
+      x-enum-varnames:
+      - SIMPLE
+      - BACKGROUND
+      - TRINO_MULTISTEP
+      - MATERIALIZED_VIEW
+    ProductAnalyticsGroupBy:
+      description: A group-by rule for segmenting results by facet values.
+      properties:
+        facet:
+          description: The facet to group by.
+          example: '@view.name'
+          type: string
+        limit:
+          description: Maximum number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        should_exclude_missing:
+          default: false
+          description: Exclude results with missing facet values.
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/ProductAnalyticsGroupBySort'
+        source:
+          description: The source for audience-filter-based group-by.
+          type: string
+      required:
+      - facet
+      type: object
+    ProductAnalyticsGroupBySort:
+      description: Sort configuration for group-by results.
+      properties:
+        aggregation:
+          description: The aggregation function to sort by.
+          example: count
+          type: string
+        metric:
+          description: The metric to sort by.
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      type: object
+    ProductAnalyticsInterval:
+      description: An interval definition in a timeseries response.
+      properties:
+        milliseconds:
+          format: int64
+          type: integer
+        start_time:
+          format: int64
+          type: integer
+        times:
+          items:
+            format: int64
+            type: integer
+          type: array
+        type:
+          type: string
+      type: object
+    ProductAnalyticsOccurrenceFilter:
+      description: Filter for occurrence-based queries.
+      properties:
+        meta:
+          additionalProperties:
+            type: string
+          description: Additional metadata.
+          type: object
+        operator:
+          description: Comparison operator (=, >=, <=, >, <).
+          example: '>='
+          type: string
+        value:
+          description: The occurrence count threshold as a string.
+          example: '1'
+          type: string
+      required:
+      - operator
+      - value
+      type: object
+    ProductAnalyticsOccurrenceQuery:
+      description: A Product Analytics occurrence-filtered query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/ProductAnalyticsOccurrenceQueryDataSource'
+        search:
+          $ref: '#/components/schemas/ProductAnalyticsOccurrenceSearch'
+      required:
+      - data_source
+      - search
+      type: object
+    ProductAnalyticsOccurrenceQueryDataSource:
+      description: The data source identifier for occurrence queries.
+      enum:
+      - product_analytics_occurrence
+      example: product_analytics_occurrence
+      type: string
+      x-enum-varnames:
+      - PRODUCT_ANALYTICS_OCCURRENCE
+    ProductAnalyticsOccurrenceSearch:
+      description: Search parameters for an occurrence query.
+      properties:
+        occurrences:
+          $ref: '#/components/schemas/ProductAnalyticsOccurrenceFilter'
+        query:
+          description: The search query using Datadog search syntax.
+          example: '@type:action'
+          type: string
+      type: object
+    ProductAnalyticsResponseMeta:
+      description: Metadata for a Product Analytics query response.
+      properties:
+        request_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/ProductAnalyticsResponseMetaStatus'
+      type: object
+    ProductAnalyticsResponseMetaStatus:
+      enum:
+      - done
+      - running
+      - timeout
+      type: string
+      x-enum-varnames:
+      - DONE
+      - RUNNING
+      - TIMEOUT
+    ProductAnalyticsScalarColumn:
+      description: A column in a scalar response.
+      properties:
+        meta:
+          $ref: '#/components/schemas/ProductAnalyticsScalarColumnMeta'
+        name:
+          description: Column name (facet name for group-by, or "query").
+          type: string
+        type:
+          $ref: '#/components/schemas/ProductAnalyticsScalarColumnType'
+        values:
+          description: Column values.
+          items: {}
+          type: array
+      type: object
+    ProductAnalyticsScalarColumnMeta:
+      properties:
+        unit:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsUnit'
+          nullable: true
+          type: array
+      type: object
+    ProductAnalyticsScalarColumnType:
+      description: Column type.
+      enum:
+      - number
+      - group
+      type: string
+      x-enum-varnames:
+      - NUMBER
+      - GROUP
+    ProductAnalyticsScalarResponse:
+      description: Response for a scalar analytics query.
+      properties:
+        data:
+          $ref: '#/components/schemas/ProductAnalyticsScalarResponseData'
+        meta:
+          $ref: '#/components/schemas/ProductAnalyticsResponseMeta'
+      type: object
+    ProductAnalyticsScalarResponseAttributes:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsScalarColumn'
+          type: array
+      type: object
+    ProductAnalyticsScalarResponseData:
+      description: Data object for a scalar response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProductAnalyticsScalarResponseAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ProductAnalyticsScalarResponseType'
+      type: object
+    ProductAnalyticsScalarResponseType:
+      enum:
+      - scalar_response
+      type: string
+      x-enum-varnames:
+      - SCALAR_RESPONSE
+    ProductAnalyticsSerie:
+      description: A series in a timeseries response.
+      properties:
+        group_tags:
+          items:
+            type: string
+          type: array
+        query_index:
+          format: int64
+          type: integer
+        unit:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsUnit'
+          type: array
+      type: object
     ProductAnalyticsServerSideEventError:
       description: Error details.
       properties:
@@ -48479,6 +48903,75 @@ components:
           type: string
       required:
       - id
+      type: object
+    ProductAnalyticsTimeseriesResponse:
+      description: Response for a timeseries analytics query.
+      properties:
+        data:
+          $ref: '#/components/schemas/ProductAnalyticsTimeseriesResponseData'
+        meta:
+          $ref: '#/components/schemas/ProductAnalyticsResponseMeta'
+      type: object
+    ProductAnalyticsTimeseriesResponseAttributes:
+      properties:
+        intervals:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsInterval'
+          type: array
+        series:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsSerie'
+          type: array
+        times:
+          description: Timestamps for each data point (epoch milliseconds).
+          items:
+            format: int64
+            type: integer
+          type: array
+        values:
+          description: Values for each series at each time point.
+          items:
+            items:
+              format: double
+              nullable: true
+              type: number
+            type: array
+          type: array
+      type: object
+    ProductAnalyticsTimeseriesResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProductAnalyticsTimeseriesResponseAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ProductAnalyticsTimeseriesResponseType'
+      type: object
+    ProductAnalyticsTimeseriesResponseType:
+      enum:
+      - timeseries_response
+      type: string
+      x-enum-varnames:
+      - TIMESERIES_RESPONSE
+    ProductAnalyticsUnit:
+      description: A unit definition for metric values.
+      properties:
+        family:
+          example: time
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          example: nanosecond
+          type: string
+        plural:
+          type: string
+        scale_factor:
+          format: double
+          type: number
+        short_name:
+          type: string
       type: object
     Project:
       description: A Project
@@ -93230,6 +93723,77 @@ paths:
       - Rum Audience Management
       x-menu-order: 1
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/product-analytics/analytics/scalar:
+    post:
+      description: 'Compute scalar analytics results for Product Analytics data.
+
+        Returns aggregated values (counts, averages, percentiles) optionally grouped
+        by facets.'
+      operationId: QueryProductAnalyticsScalar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductAnalyticsAnalyticsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsScalarResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Compute scalar analytics
+      tags:
+      - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_read
+  /api/v2/product-analytics/analytics/timeseries:
+    post:
+      description: 'Compute timeseries analytics results for Product Analytics data.
+
+        Returns time-bucketed values for charts and trend analysis.
+
+        The `compute.interval` field (milliseconds) is required for time bucketing.'
+      operationId: QueryProductAnalyticsTimeseries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductAnalyticsAnalyticsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsTimeseriesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Compute timeseries analytics
+      tags:
+      - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - rum_apps_read
   /api/v2/product-analytics/users/event_filtered_query:
     post:
       description: Query users filtered by both user properties and event platform
