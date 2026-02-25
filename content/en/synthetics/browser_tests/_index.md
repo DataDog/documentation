@@ -326,9 +326,9 @@ The following table summarizes which Browser Test step types are supported by st
 
 ### Debugger permission
 
-In order to be as close as possible to a full Synthetic Monitoring test run, some steps like JavaScript-based steps or keystroke simulations require the debugger permission to be replayed.
+To be as close as possible to a full Synthetic Monitoring test run, some steps like JavaScript-based steps or keystroke simulations require the debugger permission to be replayed.
 
-The first time the extension is updated to a version requiring debugger permission, you'll see a permission request and the extension is disabled until you approve it:
+The first time the extension is updated to a version requiring debugger permission, a permission request appears and the extension is disabled until you approve it:
 {{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
 <p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
 
