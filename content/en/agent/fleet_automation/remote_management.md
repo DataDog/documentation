@@ -154,7 +154,7 @@ Scheduling SDK upgrades is not supported.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-hosts.png" alt="Service selection screen with filtering options to narrow the list of services to upgrade." style="width:100%;" >}}
 
-1. **Review the deployment plan** and click **Upgrade Hosts** to start the upgrade.
+1. Review the deployment plan and click **Upgrade Hosts** to start the upgrade.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-plan.png" alt="Deployment plan view showing the list of services staged for SDK upgrade." style="width:100%;" >}}
 
