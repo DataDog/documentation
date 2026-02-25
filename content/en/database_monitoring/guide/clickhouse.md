@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This feature is in preview. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. Contact your Datadog representative or support to enable this feature.
+This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. Contact your Datadog representative or support to enable this feature.
 </div>
 
 Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into your ClickHouse clusters by collecting query metrics, live query samples, and completed query records to help you resolve issues and optimize query performance across your entire fleet.
@@ -157,6 +157,10 @@ Grant `REMOTE` permissions to allow cross-replica querying:
 GRANT REMOTE ON *.* TO datadog;
 ```
 
+<div class="alert alert-info">
+The <code>REMOTE</code> privilege is required because the Agent uses ClickHouse's <code>clusterAllReplicas()</code> table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution — it does <strong>not</strong> grant access to any additional databases or tables beyond what was explicitly granted above. The <code>ON *.*</code> syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
+</div>
+
 #### Step 2: Configure the Agent
 
 For ClickHouse Cloud, the Agent connects to the service endpoint directly. Data is collected at the service level (aggregate across all replicas), not per individual node.
@@ -269,7 +273,7 @@ tags:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `database_identifier.template` | string | `$server:$port:$db` | Template for the unique database identifier. Supports variables: `$server`, `$port`, `$db`, and any custom tag keys. |
+| `database_identifier.template` | string | `$server:$port` | Template for the unique database identifier. Supports variables: `$server`, `$port`, and any custom tag keys (for example, `$env`, `$region`). Unlike other database integrations, ClickHouse connects at the cluster or service level rather than to a specific database, so `$server` and `$port` are the natural differentiators. Use custom tags to distinguish instances across environments: `$env-$server:$port`. |
 
 ### Query metrics
 
