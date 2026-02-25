@@ -160,6 +160,7 @@ Scheduling SDK upgrades is not supported.
 
 1. **Restart the services** to complete the upgrade.  The SDKs will be updated the next time the services on the hosts are restarted.
 
+[1]: https://app.datadoghq.com/fleet/agent-upgrades
 {{% /collapse-content %}}
 
 ## Configure Datadog Agents
