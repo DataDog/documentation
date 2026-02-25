@@ -134,6 +134,8 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
 1. **Select the products** (for example, APM, Logs, or NDM) that the target Agents should run.
 
+   {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="Select which product to enable." style="width:100%;" >}}
+
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. Click **Deploy Configuration** to start the deployment and track its progress from the [Deployments page][10].
 {{% /collapse-content %}}
