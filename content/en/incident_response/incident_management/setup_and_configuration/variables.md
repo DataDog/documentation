@@ -44,7 +44,7 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.scope_of_impact}}` | A list of the impact descriptions. |
 | `{{incident.customer_impact_start}}` | The start time of the impact. If multiple impacts were added, this is the earliest start time. |
 | `{{incident.customer_impact_end}}` | The end time of the impact. If multiple impacts were added, this is the latest end time. |
-| `{{incident.customer_impact_duration}}` | The total amount of time across all impacts. |
+| `{{incident.customer_impact_duration}}` | The total duration of the impacts,  from `customer_impact_start` to `customer_impact_end`. |
 | `{{incident.commander}}` | The incident commander's name. If the user has no name, this is their email. If they have no email, this is their handle. |
 | `{{incident.commander_name}}` | The incident commander's name. |
 | `{{incident.commander_handle}}` | The incident commander's handle. |
@@ -66,7 +66,7 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.zoom_link}}` | A Markdown link to the Zoom meeting. The display text is `Zoom Meeting {id}`. |
 
 ## AI variables
-<div class="alert alert-danger">AI variables are not supported in US1-FED.</div>
+{{< site-region region="gov" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 AI variables are available in notification and postmortem templates. Your organization must have AI enabled.
 
