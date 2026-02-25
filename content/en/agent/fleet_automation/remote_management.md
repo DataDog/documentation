@@ -128,7 +128,7 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. In Fleet Automation, open the [Configure Agents][16] tab and click **Configure Agents**.
-1. **Scope to the Agents to configure.** You can target a group of Agents by filtering on host information or tags.
+1. **Scope the configuration to the target Agents.** You can target a group of Agents by filtering on host information or tags.
 
    {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Configure Agent page in the Fleet Automation product for scoping Agents that are configured in bulk." style="width:100%;" >}}
 
