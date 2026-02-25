@@ -154,12 +154,12 @@ For more information, see the [Parallelization documentation][18].
 [4]: /mobile_app_testing/
 [5]: /synthetics/explorer?track=synbatch
 [6]: /continuous_testing/cicd_integrations/configuration/?tab=npm
-[7]: /developers/ide_plugins/
+[7]: /ide_plugins/
 [8]: https://datadoghq.com
 [9]: /getting_started/synthetics/browser_test/#create-a-browser-test
 [10]: /continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
 [11]: /continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
-[12]: /developers/ide_plugins/vscode/
+[12]: /ide_plugins/vscode/
 [13]: /getting_started/synthetics/private_location/
 [14]: /continuous_testing/environments/
 [15]: /continuous_testing/explorer/?tab=testruns#create-a-search-query

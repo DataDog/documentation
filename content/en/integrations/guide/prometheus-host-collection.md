@@ -10,7 +10,7 @@ further_reading:
     - link: 'tracing'
       tag: 'Documentation'
       text: 'Collect your traces'
-    - link: developers/prometheus
+    - link: extend/prometheus
       tag: 'Documentation'
       text: 'Write your own custom Prometheus Check'
 ---
@@ -131,7 +131,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
+[5]: /extend/custom_checks/prometheus/
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /getting_started/tagging/
 [8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
