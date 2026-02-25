@@ -12,9 +12,9 @@ You can launch a Bits AI SRE investigation from several entry points:
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
-- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages) (Preview)
-- [APM latency Watchdog stories](#apm-latency-watchdog-stories) (Preview)
-- [General prompt](#general-prompt) (Preview)
+- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages) 
+- [APM latency Watchdog stories](#apm-latency-watchdog-stories)
+- [General prompt](#general-prompt)
 
 ### Manually start an investigation
 
@@ -130,7 +130,7 @@ Bits uses the following data sources during investigations:
 - Database Monitoring
 - Continuous Profiler
 
-<div class="alert alert-tip">**Add service scoping**: For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>
+<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>
 
 #### Third-party integrations
 - Grafana
@@ -144,14 +144,15 @@ Bits uses the following data sources during investigations:
 A subset of third-party integrations are in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
+For best practices on maximizing the effectiveness of investigations, see [Knowledge][9].
+
 ### Investigation display modes
-There are two display modes: Investigation and Agent Trace.
+There are two display modes: Agent Trace and Investigation.
 
 While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the **Agent Trace** view. This provides a real-time, detailed record of the agent’s reasoning process.
 
 Once the investigation is complete, you can switch to the **Investigation** view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
 
-For best practices on how to optimize investigations, see [Knowledge][9].
 
 ## Reports
 
