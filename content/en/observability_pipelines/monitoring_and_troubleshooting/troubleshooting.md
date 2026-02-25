@@ -60,62 +60,36 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
-## Identify Workers using pod and cluster names
+## Use Pod and cluster names to identify Workers in a Kubernetes environment
 
-By default, a Worker's hostname is the machine's hostname, such as `COMP-JLXPKWTGJF`. If you run your pipeline across multiple clusters or containers, assign a unique hostname for your Workers using the pod name and the cluster name so you can easily identify your Workers. To do that:
-
-{{< tabs >}}
-{{% tab "Kubernetes" %}}
+By default, a Worker's hostname is the machine's hostname, such as `COMP-JLXPKWTGJF`. If you run your pipeline across multiple clusters or containers, assign each Worker a unique hostname based on the Pod name and cluster name to make them easier to identify.
 
 In the Helm chart:
-
-1. Set [`POD_NAME`][1].
+1. Configure the environment variable [`POD_NAME`][1] to be automatically set to the Pod's name.
     ```yaml
-    args:
+    env:
       - name: POD_NAME
         valueFrom:
          fieldRef:
             fieldPath: metadata.name
     ```
-1. Configure [`export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}"`][2].
+1. Set the [`CLUSTER_NAME`][3] environment variable in the Helm chart.
+    ```
+    env:
+      - name: CLUSTER_NAME
+        value: "<MY_CLUSTER_NAME>"
+    ```
+1. To assign unique Worker names, configure [`VECTOR_HOSTNAME`][2] to the `POD_NAME` and `CLUSTER_NAME`.
     ```yaml
     args:
       - >
         export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}";
         exec /usr/bin/observability-pipelines-worker run
-
-      - name: POD_NAME
-        valueFrom:
-         fieldRef:
-            fieldPath: metadata.name
     ```
-    - If you want to override the `CLUSTER_NAME`, set the [`CLUSTER_NAME`][3] environment variable in the Helm chart.
-      ```
-      env:
-        - name: CLUSTER_NAME
-          value: "my-cluster"
-      ```
 
 [1]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L156C3-L159C33
 [2]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L136-L142
 [3]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L154-L155
-
-{{% /tab %}}
-{{% tab "Docker" %}}
-
-Set the `VECTOR_HOSTNAME` environment variable when running the Worker:
-
-```bash
-docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
-  -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
-  -e VECTOR_HOSTNAME=<UNIQUE_HOSTNAME> \
-  datadog/observability-pipelines-worker run
-```
-
-Replace `<UNIQUE_HOSTNAME>` with a unique name for your Worker instance.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Worker logs issues
 
