@@ -30,7 +30,7 @@ Datadog provides a range of features for controlling which users can see and int
 | Personalized Team Views | Filter information in Datadog by Team, without revoking access. | See supported products [here][4] | [Team filter][8] |
 | Team-based Restriction Policies | Restrict editing access to Teams with the `team:` tag. | Preview; supported for [Monitors][9] and [Dashboards][10] | Available for Preview orgs |
 | Team Tag Enforcement Policies | Set Team tag requirements for any newly created monitors. | Supported for [Monitors][11] | [Monitors Tag Policy][12] |
-| Team-linked Roles | Roles can be assigned to a Team, so all members receive the Role including all included Permissions and Access granted | Preview; not scoped to products; team members inherit the role and anything related. | Available for Preview orgs |
+| Team-linked Roles | Assign roles to a Team. All Team members receive the Role, including Role permissions and any granted access. | Preview | Available for Preview orgs |
 
 ## Further reading
 
