@@ -95,7 +95,7 @@ You can create rules to block code changes from being merged when a pull request
 {{% tab "New Flaky Tests" %}}
 You can create a rule to block code changes that are introducing new flaky tests. Flaky tests are tests that both pass and fail with the same code.
 
-{{< img src="pr_gates/setup/new-flaky-tests-pr-gate.png" alt="A PR Gate rule that fails one or more flaky tests are introduced" style="width:80%" >}}
+{{< img src="pr_gates/setup/new-flaky-tests-pr-gate.png" alt="A PR Gate rule that fails if one or more flaky tests are introduced" style="width:80%" >}}
 
 
 {{% /tab %}}
