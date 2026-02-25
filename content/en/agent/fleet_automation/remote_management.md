@@ -144,7 +144,7 @@ Scheduling SDK upgrades is not supported.
 
 1. From the **Upgrade Agents** tab in Fleet Automation, click **Upgrade Now**.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="UI showing the Upgrade Agents tab with the Upgrade Now button." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrade Agents tab with the Upgrade Now button highlighted." style="width:100%;" >}}
 
 1. Select the **SDK language** and **version**. You can update one language SDK at a time.
 
