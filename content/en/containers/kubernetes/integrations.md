@@ -22,7 +22,7 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
-- link: "https://www.youtube.com/watch?v=nuxmVf9ByE0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=1&t=2s"
+- link: "https://www.youtube.com/watch?v=nuxmVf9ByE0"
   tag: "Video"
   text: "Datadog Tips & Tricks: How to write annotations in Kubernetes with JSON for Datadog Autodiscovery"
 ---
