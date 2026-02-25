@@ -142,7 +142,7 @@ Scheduling SDK upgrades is not supported.
 
 {{% collapse-content title="How to upgrade SDKs remotely" level="h4" expanded=false id="upgrade-sdks-steps" %}}
 
-1. From the **Upgrade Agents** tab in Fleet Automation, click **Upgrade Now**.
+1. In Fleet Automation, open the [Upgrade Agents][1] tab and click **Upgrade Now**.
 
    {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrade Agents tab with the Upgrade Now button highlighted." style="width:100%;" >}}
 
