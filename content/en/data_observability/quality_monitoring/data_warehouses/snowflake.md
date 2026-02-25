@@ -19,6 +19,7 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
+- If your Snowflake account restricts network access by IP, the Datadog webhook IPs added to your network policy allowlist. For the list of IPs, see the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Snowflake
 
@@ -159,6 +160,22 @@ To configure the Snowflake integration in Datadog:
 4. Turn on **Enable Data Observability for Snowflake tables**.
 5. Click **Save & Test**.
 
+## Snowflake tasks and Snowpipes
+
+Datadog derives lineage from Snowflake tasks and Snowpipes by parsing their SQL definitions.
+- For tasks, this includes task-to-task dependencies and lineage to destination tables.
+- For Snowpipes, Datadog derives lineage from the source stage to the destination table.
+
+Both features require the `GRANT MONITOR EXECUTION ON ACCOUNT` permission granted during setup.
+
+<div class="alert alert-info">Snowflake tasks traces are in preview. Contact your account representative to enable this feature.</div>
+
+When enabled, each task graph run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. To find them:
+1. In Datadog, go to **APM** > [**Trace Explorer**][4].
+2. Filter the Explorer:
+   - For the top-level task graph span, filter by `operation_name:snowflake.task_graph`
+   - For individual task spans, filter by `operation_name:snowflake.task`
+
 ## Next steps
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
@@ -170,3 +187,4 @@ After you save, Datadog begins syncing your information schema and query history
 [1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
 [3]: https://app.datadoghq.com/datasets/settings/integrations
+[4]: https://app.datadoghq.com/apm/traces

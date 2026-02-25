@@ -932,139 +932,139 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
-    - name: Developers
-      url: developers/
+    - name: Extend Datadog
+      url: extend/
       pre: dev-code
       identifier: dev_tools
       parent: essentials_heading
       weight: 70000
     - name: Authorization
-      url: developers/authorization/
+      url: extend/authorization/
       parent: dev_tools
       identifier: dev_tools_authorization
       weight: 1
     - name: OAuth2 in Datadog
-      url: developers/authorization/oauth2_in_datadog/
+      url: extend/authorization/oauth2_in_datadog/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_in_datadog
       weight: 101
     - name: Authorization Endpoints
-      url: developers/authorization/oauth2_endpoints/
+      url: extend/authorization/oauth2_endpoints/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_endpoints
       weight: 102
     - name: DogStatsD
-      url: developers/dogstatsd/
+      url: extend/dogstatsd/
       parent: dev_tools
       identifier: dev_tools_dogstatsd
       weight: 2
     - name: Datagram Format
       identifier: dev_tools_dogstatsd_datagram_format
-      url: developers/dogstatsd/datagram_shell
+      url: extend/dogstatsd/datagram_shell
       parent: dev_tools_dogstatsd
       weight: 201
     - name: Unix Domain Socket
       identifier: dev_tools_dogstatsd_unix_socket
-      url: /developers/dogstatsd/unix_socket
+      url: /extend/dogstatsd/unix_socket
       parent: dev_tools_dogstatsd
       weight: 202
     - name: High Throughput Data
       identifier: dev_tools_dogstatsd_high_throughput
-      url: developers/dogstatsd/high_throughput/
+      url: extend/dogstatsd/high_throughput/
       parent: dev_tools_dogstatsd
       weight: 203
     - name: Data Aggregation
       identifier: dev_tools_dogstatsd_data_agregation
-      url: developers/dogstatsd/data_aggregation/
+      url: extend/dogstatsd/data_aggregation/
       parent: dev_tools_dogstatsd
       weight: 204
     - name: DogStatsD Mapper
       identifier: dev_tools_dogstatsd_mapper
-      url: developers/dogstatsd/dogstatsd_mapper/
+      url: extend/dogstatsd/dogstatsd_mapper/
       parent: dev_tools_dogstatsd
       weight: 205
     - name: Custom Checks
-      url: developers/custom_checks/
+      url: extend/custom_checks/
       parent: dev_tools
       identifier: custom_checks
       weight: 3
     - name: Writing a Custom Agent Check
       identifier: dev_tools_write_agent_check
-      url: developers/custom_checks/write_agent_check/
+      url: extend/custom_checks/write_agent_check/
       parent: custom_checks
       weight: 301
     - name: Writing a Custom OpenMetrics Check
       identifier: dev_tools_custom_checks_prometheus
-      url: developers/custom_checks/prometheus/
+      url: extend/custom_checks/prometheus/
       parent: custom_checks
       weight: 302
     - name: Integrations
-      url: developers/integrations/
+      url: extend/integrations/
       parent: dev_tools
       identifier: dev_tools_integrations
       weight: 4
     - name: Build an Integration with Datadog
       identifier: dev_tools_integrations_build
-      url: developers/integrations/build_integration/
+      url: extend/integrations/build_integration/
       parent: dev_tools_integrations
       weight: 401
     - name: Create an Agent-based Integration
       identifier: dev_tools_integrations_agent
-      url: developers/integrations/agent_integration/
+      url: extend/integrations/agent_integration/
       parent: dev_tools_integrations
       weight: 402
     - name: Create an API-based Integration
       identifier: dev_tools_integrations_api
-      url: developers/integrations/api_integration/
+      url: extend/integrations/api_integration/
       parent: dev_tools_integrations
       weight: 403
     - name: Create a Log Pipeline
       identifier: dev_tools_integrations_log
-      url: developers/integrations/log_pipeline/
+      url: extend/integrations/log_pipeline/
       parent: dev_tools_integrations
       weight: 404
     - name: Integration Assets Reference
       identifier: dev_tools_integrations_check_references
-      url: developers/integrations/check_references/
+      url: extend/integrations/check_references/
       parent: dev_tools_integrations
       weight: 405
     - name: Build a Marketplace Offering
-      url: developers/integrations/marketplace_offering/
+      url: extend/integrations/marketplace_offering/
       parent: dev_tools_integrations
       identifier: dev_tools__integrations_marketplace_offering
       weight: 406
     - name: Create an Integration Dashboard
       identifier: dev_tools_integrations_dashboard
-      url: developers/integrations/create-an-integration-dashboard
+      url: extend/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
       weight: 407
     - name: Create a Monitor Template
       identifier: dev_tools_integrations_monitor_template
-      url: developers/integrations/create-an-integration-monitor-template
+      url: extend/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
       weight: 408
     - name: Create a Cloud SIEM Detection Rule
       identifier: dev_tools_integrations_cloud_siem_detection_rule
-      url: developers/integrations/create-a-cloud-siem-detection-rule
+      url: extend/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 409
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
-      url: developers/integrations/python/
+      url: extend/integrations/python/
       parent: dev_tools_integrations
       weight: 410
     - name: Service Checks
-      url: developers/service_checks/
+      url: extend/service_checks/
       parent: dev_tools
       identifier: dev_tools_service_check
       weight: 6
     - name: "Submission - Agent Check "
-      url: developers/service_checks/agent_service_checks_submission/
+      url: extend/service_checks/agent_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_agent_check
       weight: 601
     - name: Submission - DogStatsD
-      url: developers/service_checks/dogstatsd_service_checks_submission/
+      url: extend/service_checks/dogstatsd_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_dogstatsd
       weight: 602
@@ -1073,56 +1073,21 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Plugins
-      url: developers/ide_plugins/
-      parent: dev_tools
-      identifier: ide_plugins
-      weight: 7
-    - name: JetBrains IDEs
-      url: developers/ide_plugins/idea/
-      parent: ide_plugins
-      identifier: ide_plugins_idea
-      weight: 701
-    - name: Error Tracking
-      url: developers/ide_plugins/idea/error_tracking/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_error_tracking
-      weight: 7011
-    - name: Logs
-      url: developers/ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 7012
-    - name: Live Debugger
-      url: developers/ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 7013
-    - name: Code Security
-      url: developers/ide_plugins/idea/code_security/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_code_security
-      weight: 7014
-    - name: VS Code & Cursor
-      url: developers/ide_plugins/vscode/
-      parent: ide_plugins
-      identifier: ide_plugins_vscode
-      weight: 702
     - name: Community
-      url: developers/community/
+      url: extend/community/
       parent: dev_tools
       identifier: dev_community
-      weight: 8
+      weight: 7
     - name: Libraries
       identifier: dev_community_libraries
-      url: developers/community/libraries/
+      url: extend/community/libraries/
       parent: dev_community
-      weight: 801
+      weight: 701
     - name: Guides
-      url: developers/guide/
+      url: extend/guide/
       parent: dev_tools
       identifier: dev_tools_guides
-      weight: 9
+      weight: 8
     - name: Administrator's Guide
       url: administrators_guide/
       pre: organization
@@ -1468,9 +1433,9 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
-    - name: Chat with Bits AI
-      url: bits_ai/chat_with_bits_ai
-      identifier: bits_ai_chat_with_bits_ai
+    - name: Bits Assistant
+      url: bits_ai/bits_assistant
+      identifier: bits_ai_bits_assistant
       parent: bits_ai
       weight: 3
     - name: MCP Server
@@ -2598,21 +2563,21 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Trigger a Page
-      url: incident_response/on-call/triggering_pages/
+    - name: Pages
+      url: incident_response/on-call/pages/
       parent: oncall
-      identifier: oncall_triggering_pages
+      identifier: oncall_pages
       weight: 2
     - name: Live Call Routing
-      url: incident_response/on-call/triggering_pages/live_call_routing
+      url: incident_response/on-call/pages/live_call_routing/
       identifier: oncall_live_call_routing
-      parent: oncall_triggering_pages
-      weight: 201
+      parent: oncall_pages
+      weight: 1
     - name: Cross-org Paging
-      url: incident_response/on-call/cross_org_paging
+      url: incident_response/on-call/pages/cross_org_paging/
       identifier: oncall_cross_org_paging
-      parent: oncall_triggering_pages
-      weight: 202
+      parent: oncall_pages
+      weight: 2
     - name: Routing Rules
       url: incident_response/on-call/routing_rules/
       parent: oncall
@@ -3107,71 +3072,76 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
       weight: 401
+    - name: Migrate to the Datadog Operator
+      url: containers/kubernetes/migration
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_datadog_operator_migration
+      weight: 402
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 402
+      weight: 403
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 403
+      weight: 404
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 404
+      weight: 405
     - name: App and API Protection
       url: containers/kubernetes/appsec/
       parent: containers_kubernetes
       identifier: containers_kubernetes_appsec
-      weight: 405
+      weight: 406
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 406
+      weight: 407
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 407
+      weight: 408
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 408
+      weight: 409
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 409
+      weight: 410
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 410
+      weight: 411
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 411
+      weight: 412
     - name: kubectl Plugin
       url: containers/kubernetes/kubectl_plugin
       parent: containers_kubernetes
       identifier: containers_kubernetes_kubectlplugin
-      weight: 412
+      weight: 413
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 413
+      weight: 414
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 414
+      weight: 415
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -3242,26 +3212,31 @@ menu:
       identifier: containers_datadog_operator
       parent: containers
       weight: 8
+    - name: Migrate to the Datadog Operator
+      url: containers/datadog_operator/migration
+      parent: containers_datadog_operator
+      identifier: containers_datadog_operator_migration
+      weight: 801
     - name: Advanced Install
       url: containers/datadog_operator/advanced_install
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
-      weight: 801
+      weight: 802
     - name: Configuration
       url: containers/datadog_operator/config
       identifier: containers_datadog_operator_configuration
       parent: containers_datadog_operator
-      weight: 802
+      weight: 803
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 803
+      weight: 804
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 804
+      weight: 805
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
@@ -4208,21 +4183,26 @@ menu:
       parent: tracing_trace_pipeline
       identifier: tracing_adaptive_sampling
       weight: 403
+    - name: Processing Pipelines
+      url: tracing/trace_pipeline/processing_pipelines/
+      parent: tracing_trace_pipeline
+      identifier: tracing_processing_pipelines
+      weight: 404
     - name: Generate Metrics
       url: tracing/trace_pipeline/generate_metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_generate_metrics
-      weight: 404
+      weight: 405
     - name: Trace Retention
       url: tracing/trace_pipeline/trace_retention/
       parent: tracing_trace_pipeline
       identifier: tracing_retention
-      weight: 405
+      weight: 406
     - name: Usage Metrics
       url: tracing/trace_pipeline/metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_metrics
-      weight: 406
+      weight: 407
     - name: Correlate Traces with Other Telemetry
       url: tracing/other_telemetry/
       parent: tracing
@@ -4911,6 +4891,11 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
+    - name: Business Transaction Tracking
+      url: data_streams/business_transaction_tracking
+      identifier: data_streams_business_transaction_tracking
+      parent: data_streams
+      weight: 6
     - name: Data Observability Overview
       url: data_observability/
       pre: data-observability-wui
@@ -5803,6 +5788,42 @@ menu:
       parent: source_code_integration
       identifier: sci_features
       weight: 4
+    - name: IDE Plugins
+      url: ide_plugins/
+      pre: ide
+      parent: developer_integrations_heading
+      identifier: ide_plugins
+      weight: 100000
+    - name: JetBrains IDEs
+      url: ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
+      weight: 1
+    - name: Error Tracking
+      url: ide_plugins/idea/error_tracking/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_error_tracking
+      weight: 101
+    - name: Logs
+      url: ide_plugins/idea/logs/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_logs
+      weight: 102
+    - name: Live Debugger
+      url: ide_plugins/idea/live_debugger/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_debugger
+      weight: 103
+    - name: Code Security
+      url: ide_plugins/idea/code_security/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_code_security
+      weight: 104
+    - name: VS Code & Cursor
+      url: ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
+      weight: 2
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines

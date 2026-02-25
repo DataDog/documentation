@@ -76,6 +76,43 @@ Enter the following details for your Cost and Usage Report:
 
 {{% /tab %}}
 
+{{% tab "Terraform" %}}
+
+{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
+
+### Select the resources to create
+
+The Terraform configuration supports three setups depending on your existing AWS resources:
+
+* **New setup**: Select **Create Cost and Usage Report** to create both the report and its S3 bucket
+* **Existing bucket**: Select **Create Cost and Usage Report** and unselect **Create S3 Bucket** to use an existing S3 bucket
+* **Existing bucket and report**: Unselect **Create Cost and Usage Report** and **Create S3 Bucket** to use an existing report and S3 bucket
+
+**Note**: If using an existing bucket, verify that AWS has permission to write CURs to it. If not, you may need to update your bucket's policy.
+
+### Configure the Cost and Usage Report settings
+
+Enter the following details for your Cost and Usage Report:
+
+* **Bucket Name**: The S3 bucket name where the report files are stored.
+* **Bucket Region**: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
+* **Export Path Prefix**: The S3 path prefix where report files are stored.
+  * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
+* **Export Name**: The name of your Cost and Usage Report.
+
+**Note**:
+- These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
+- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][101].
+
+[100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
+[101]: /help/
+
+### Copy generated Terraform HCL and apply changes
+
+In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform Configuration** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+
+{{% /tab %}}
+
 {{% tab "Manual" %}}
 
 {{< img src="cloud_cost/setup/aws_manual_setup.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
