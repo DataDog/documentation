@@ -13,6 +13,10 @@ further_reading:
 
 The BigQuery integration connects Datadog to your Google Cloud project to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
 
+## Prerequisites
+
+If your Google Cloud project restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+
 ## Configure the BigQuery integration in Datadog
 
 To configure the BigQuery integration in Datadog:

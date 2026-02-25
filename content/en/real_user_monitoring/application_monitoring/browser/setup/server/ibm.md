@@ -13,6 +13,10 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview

@@ -11,7 +11,7 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
-- link: "/developers/ide_plugins/idea/live_debugger/"
+- link: "/ide_plugins/idea/live_debugger/"
   tag: "Documentation"
   text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
@@ -29,7 +29,7 @@ further_reading:
 
 Live Debugger lets you inspect application behavior in real time, directly in running services, without redeploying code or interrupting execution.
 
-Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state at specific points in the code. This includes variable values, method inputs, and execution context. Live Debugger is well suited for diagnosing issues in production or other long-running environments.
+Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state at specific points in the code. This includes variable values, method parameters, and execution context. Live Debugger is well suited for diagnosing issues in production or other long-running environments.
 
 Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
@@ -58,7 +58,7 @@ The enablement method depends on your tracer version, see the table below for de
 |---|---|---|
 | **How to Enable** | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.9.0<br>[PHP][10] ≥ 1.5.0<br>[Go][22] ≥ 2.2.3 (or 1.74.6) |
+| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.24.0<br>[PHP][10] ≥ 1.5.0<br>[Go][22] ≥ 2.2.3 (or 1.74.6) |
 
 To enable Live Debugger in-app, navigate to the Live Debugger **Settings** page, select the desired service, and toggle
 it to **Enabled**.
@@ -108,7 +108,7 @@ Live Debugger.
 
 <div class="alert alert-info">
 <b>Rather debug in your IDE?</b>
-Try using Live Debugger directly from JetBrains! <a href="/developers/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
+Try using Live Debugger directly from JetBrains! <a href="/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
 
 ### Creating and using a Debug Session
 

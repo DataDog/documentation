@@ -93,7 +93,7 @@ Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datado
 
 - **Hot Libraries:**
 Libraries from services that are alive for more than 2 hours.
-  - **When vulnerabilities are auto-closed by Datadog:** After 1 hour, if they are not detected again and the service is running on all environments where the vulnerability was detected.
+  - **When vulnerabilities are auto-closed by Datadog:** After 1 day, if they are not detected again and the service is running on all environments where the vulnerability was detected.
 
 - **Lazy Libraries:**
 Libraries that are loaded more than 1 hour after the service has started.

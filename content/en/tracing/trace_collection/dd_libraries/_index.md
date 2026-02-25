@@ -68,7 +68,7 @@ Set up your application to send [traces][2] using one of the following official 
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
 
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
+[1]: /extend/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/glossary/#trace
 [8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [9]: /tracing/serverless_functions/
