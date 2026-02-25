@@ -2,14 +2,14 @@
 title: Configure integrations and settings
 ---
 
-Set up integrations to:
-- [Enable Bits to read from and write to third-party systems](#integrate-with-third-party-observability-and-scm-platforms)
-- [Send investigation findings to ITSM and collaboration platforms](#configure-where-bits-sends-investigation-findings)
-- [Pull context from knowledge bases](#configure-knowledge-base-integrations)
+Set up integrations to extend Bits’ capabilities:
+- [Integrate with third-party observability and SCM platforms] to enrich investigations with external telemetry and code context(#integrate-with-third-party-observability-and-scm-platforms)
+- [Send investigation findings to ITSM and collaboration platforms]to streamline incident response (#send-investigation-findings-to-ITSM-and-collaboration-platforms)
+- [Pull context from knowledge bases] to incorporate runbooks and documentation into investigations(#pull-context-from-knowledge-bases)
 
 ## Integrate with third-party observability and SCM platforms
 
-Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, and Sentry to pull in observability data and source code as part of its investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies a problem fixable in code. 
+Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, and Sentry to incorporate observability data and source code into investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies an issue that can be resolved in code.
 
 ### GitHub
 To configure GitHub:
@@ -17,10 +17,10 @@ To configure GitHub:
 1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Certain third-party integrations Preview. Click <strong>Request Access</strong> to join the Preview program.
+A subset of third-party integrations is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-## Configure where Bits sends investigation findings
+## Send investigation findings to ITSM and collaboration platforms
 
 By default, all investigations are listed on the [Bits AI Investigations][1] page.
 
@@ -36,7 +36,7 @@ For monitor alert investigations, a summary of the findings is available on the 
 
 ### Microsoft Teams
 1. [Connect your Microsoft tenant to Datadog][12].
-1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel.
+1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications. 
 
 ### Datadog Case Management
 
@@ -57,7 +57,7 @@ Datadog On-Call is a paging solution that unifies monitoring, paging, and incide
 
 To set up On-Call, in your monitor, go to **Configure notifications and automations** and add the `@oncall-{team}` handle. Bits' findings can then appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
 
-## Configure knowledge base integrations
+## Pull context from knowledge bases
 
 Bits AI SRE integrates with Confluence to:
 - Find relevant documentation and runbooks to support its monitor alert investigations
