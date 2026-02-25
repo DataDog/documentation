@@ -270,7 +270,6 @@ unsupported_sites:
   agentless-scanning: [gov] # api page
   amazon_event_bridge: [gov]
   apm_recommendations: [gov]
-  app_builder: [gov]
   application_security: [gov]
   autocomplete_search: [gov]
   azure-private-link: [us,us5,eu,gov,ap1,ap2]
@@ -342,6 +341,5 @@ unsupported_sites:
   universal_service_monitoring: [gov]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov]
   wiz: [gov]
-  workflow-automation: [gov]
   workflows: [gov]
   workload_security_active_protection: [gov]
