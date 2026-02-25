@@ -8,7 +8,7 @@ further_reading:
 - link: "bits_ai/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "developers/ide_plugins/vscode/?tab=cursor"
+- link: "ide_plugins/vscode/?tab=cursor"
   tag: "Documentation"
   text: "Datadog Extension for Cursor"
 ---

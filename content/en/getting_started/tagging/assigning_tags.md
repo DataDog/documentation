@@ -217,7 +217,7 @@ services:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
-    image: 'gcr.io/datadoghq/agent:latest'
+    image: 'registry.datadoghq.com/agent:latest'
     deploy:
       restart_policy:
         condition: on-failure
@@ -421,6 +421,6 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [7]: /agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [8]: /agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 [9]: /tracing/setup/
-[10]: /developers/dogstatsd/
-[11]: /developers/community/libraries/
+[10]: /extend/dogstatsd/
+[11]: /extend/community/libraries/
 [12]: /metrics/dogstatsd_metrics_submission/#host-tag
