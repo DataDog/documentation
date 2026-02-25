@@ -882,11 +882,16 @@ menu:
       parent: otel_guides
       weight: 1002
       identifier: otel_guides_otlp_histogram_heatmaps
+    - name: Instrument Unsupported Runtimes
+      url: /opentelemetry/guide/instrument_unsupported_runtimes
+      parent: otel_guides
+      weight: 1003
+      identifier: otel_guides_instrument_unsupported_runtimes
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 1003
+      weight: 1004
     - name: Migrate to OTel Collector v0.120.0+
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
