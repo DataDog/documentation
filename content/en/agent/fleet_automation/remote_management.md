@@ -130,7 +130,7 @@ Fleet Automation can centrally manage remote upgrades to the SDKs that power APM
 Scheduling SDK upgrades is not supported.
 </div>
 
-**Requirements:**
+### Requirements
 
 - **Single Step Instrumentation (SSI)**
   You must already be instrumenting services with [Single Step Instrumentation (SSI)][20].
