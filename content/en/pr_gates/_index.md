@@ -120,7 +120,7 @@ You can see all of the rules defined by the organization.
 [3]: /security/code_security/software_composition_analysis
 [4]: /code_coverage/
 [5]: /security/code_security/iac_security/
-[6]: /tests
+[6]: /tests/flaky_management
 [7]: /integrations/github/
 [8]: /integrations/azure_devops_source_code/
 [9]: /pr_gates/setup/
