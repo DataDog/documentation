@@ -17,6 +17,9 @@ further_reading:
   - link: '/data_observability/jobs_monitoring/openlineage/integrations_and_naming/'
     tag: 'Documentation'
     text: 'Integrations and Dataset Naming'
+  - link: '/data_observability/jobs_monitoring/openlineage/custom_events/'
+    tag: 'Documentation'
+    text: 'Building Custom OpenLineage Events'
 ---
 
 <div class="alert alert-info"> Custom jobs using OpenLineage is in Preview.</div>
@@ -167,3 +170,4 @@ For the full list of supported facets, see [Supported Facets][6]. For integratio
 [5]: /data_observability/jobs_monitoring/openlineage/event_types/
 [6]: /data_observability/jobs_monitoring/openlineage/facets/
 [7]: /data_observability/jobs_monitoring/openlineage/integrations_and_naming/
+[8]: /data_observability/jobs_monitoring/openlineage/custom_events/

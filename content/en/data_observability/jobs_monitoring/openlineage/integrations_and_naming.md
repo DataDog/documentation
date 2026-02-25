@@ -1,6 +1,6 @@
 ---
 title: Integrations and Dataset Naming
-description: "Supported OpenLineage integrations, dataset naming conventions for lineage correlation, and how to build custom OpenLineage events."
+description: "Supported OpenLineage integrations, dataset naming conventions for lineage correlation, and how Datadog connects jobs to datasets."
 further_reading:
   - link: "/data_observability/jobs_monitoring/openlineage/"
     tag: "Documentation"
@@ -11,6 +11,9 @@ further_reading:
   - link: "/data_observability/jobs_monitoring/openlineage/facets/"
     tag: "Documentation"
     text: "Supported Facets"
+  - link: "/data_observability/jobs_monitoring/openlineage/custom_events/"
+    tag: "Documentation"
+    text: "Building Custom OpenLineage Events"
 ---
 
 ## Overview
@@ -18,6 +21,10 @@ further_reading:
 Datadog processes OpenLineage events from several supported integrations. Consistent dataset naming across integrations is what enables Datadog to connect outputs from one job to inputs of another, forming the lineage graph.
 
 ## Supported integrations
+
+### Job instrumentation
+
+These integrations instrument job orchestrators and execution engines, emitting OpenLineage events that track job runs and data flow.
 
 {{< tabs >}}
 {{% tab "Apache Spark" %}}
@@ -44,22 +51,46 @@ Datadog processes OpenLineage events from several supported integrations. Consis
 - **Hierarchy**: dbt jobs create `dbt.project` and `dbt.account` parent nodes automatically
 
 {{% /tab %}}
+{{< /tabs >}}
+
+### Data store integrations
+
+These integrations capture metadata from data platforms through integration-specific facets. The metadata enriches dataset nodes in the lineage graph with platform-specific details.
+
+{{< tabs >}}
 {{% tab "BigQuery" %}}
 
 - **Emitted facets**: `bigqueryJob` (run), `bigqueryTable` (dataset), `sql`, `externalQuery`
 - **Product**: BigQuery tables appear as dataset nodes; BigQuery jobs appear with query details
 
 {{% /tab %}}
+{{% tab "Snowflake" %}}
+
+- **Emitted facets**: `snowflakeQuery` (run), `snowflakeTable` (dataset), `snowflakeColumnMetrics` (dataset)
+- **Product**: Snowflake tables with ownership, description, tags, and column-level metrics
+
+{{% /tab %}}
+{{% tab "Trino" %}}
+
+- **Emitted facets**: `trino_query_context`, `sql`
+- **Product**: Trino query execution tracking with freshness metrics
+
+{{% /tab %}}
+{{% tab "Apache Iceberg" %}}
+
+- **Emitted facets**: `icebergTable`, `icebergTableMetadata`, `icebergScanReport` (input), `icebergCommitReport` (output)
+- **Product**: Iceberg table metadata and read/write statistics
+
+{{% /tab %}}
+{{% tab "Tableau" %}}
+
+- **Emitted facets**: `tableauDashboard` (dataset)
+- **Product**: Tableau dashboards connected to upstream data sources in the lineage graph
+
+{{% /tab %}}
 {{< /tabs >}}
 
-### Additional integrations
-
-| Integration | Emitted Facets | What Shows in Datadog |
-|---|---|---|
-| **Snowflake** | `snowflakeQuery` (run), `snowflakeTable` (dataset), `snowflakeColumnMetrics` (dataset) | Snowflake tables with ownership, description, tags, and column-level metrics |
-| **Trino** | `trino_query_context`, `sql` | Trino query execution tracking with freshness metrics |
-| **Tableau** | `tableauDashboard` (dataset) | Tableau dashboards connected to upstream data sources in the lineage graph |
-| **Apache Iceberg** | `icebergTable`, `icebergTableMetadata`, `icebergScanReport` (input), `icebergCommitReport` (output) | Iceberg table metadata and read/write statistics |
+If your platform isn't listed here, you can [build custom OpenLineage events][2] to send lineage data to Datadog.
 
 ## Dataset naming conventions
 
@@ -175,187 +206,9 @@ Datadog recognizes datasets from the following platforms based on the dataset `n
 | **ETL / Integration** | Fivetran |
 | **File Systems** | Local filesystem, Remote filesystem |
 
-## Building custom OpenLineage events
-
-If your job platform or data store isn't natively supported by an OpenLineage integration, you can build and send your own OpenLineage events. Datadog processes them and creates lineage, metrics, and spans just like events from supported integrations.
-
-### Checklist
-
-Before building custom events, ensure:
-
-- **Consistent naming**: Use the same `namespace` + `name` across all events referencing the same dataset.
-- **Namespace format**: Follow `scheme://authority` (for example, `myplatform://host:port`).
-- **Include `jobType` facet**: So Datadog can classify the job node in the lineage graph.
-- **Send START and COMPLETE/FAIL**: For full run monitoring and APM span generation.
-- **Same `run.runId`**: Use the same UUID across all events for one run.
-- **Set `producer`**: A URI identifying your system (for example, `https://github.com/my-org/my-scheduler`).
-- **Include facets on COMPLETE**: `schema`, `outputStatistics`, and `columnLineage` maximize product value.
-
-### Example: Custom job platform
-
-{{< tabs >}}
-{{% tab "START event" %}}
-
-{{< code-block lang="json" >}}
-{
-  "eventTime": "2025-01-15T10:00:00.000Z",
-  "eventType": "START",
-  "producer": "https://github.com/my-org/my-custom-scheduler",
-  "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json#/$defs/RunEvent",
-  "run": {
-    "runId": "550e8400-e29b-41d4-a716-446655440000"
-  },
-  "job": {
-    "namespace": "my-custom-scheduler",
-    "name": "daily_data_sync",
-    "facets": {
-      "jobType": {
-        "_producer": "https://github.com/my-org/my-custom-scheduler",
-        "_schemaURL": "https://openlineage.io/spec/facets/2-0-2/JobTypeJobFacet.json#/$defs/JobTypeJobFacet",
-        "processingType": "BATCH",
-        "integration": "CUSTOM",
-        "jobType": "JOB"
-      }
-    }
-  },
-  "inputs": [
-    {
-      "namespace": "myplatform://internal-db.corp.example.com:5432",
-      "name": "source_db.public.customers"
-    }
-  ],
-  "outputs": []
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "COMPLETE event" %}}
-
-{{< code-block lang="json" >}}
-{
-  "eventTime": "2025-01-15T10:05:00.000Z",
-  "eventType": "COMPLETE",
-  "producer": "https://github.com/my-org/my-custom-scheduler",
-  "schemaURL": "https://openlineage.io/spec/2-0-2/OpenLineage.json#/$defs/RunEvent",
-  "run": {
-    "runId": "550e8400-e29b-41d4-a716-446655440000"
-  },
-  "job": {
-    "namespace": "my-custom-scheduler",
-    "name": "daily_data_sync",
-    "facets": {
-      "jobType": {
-        "_producer": "https://github.com/my-org/my-custom-scheduler",
-        "_schemaURL": "https://openlineage.io/spec/facets/2-0-2/JobTypeJobFacet.json#/$defs/JobTypeJobFacet",
-        "processingType": "BATCH",
-        "integration": "CUSTOM",
-        "jobType": "JOB"
-      },
-      "sql": {
-        "_producer": "https://github.com/my-org/my-custom-scheduler",
-        "_schemaURL": "https://openlineage.io/spec/facets/1-0-1/SQLJobFacet.json#/$defs/SQLJobFacet",
-        "query": "INSERT INTO target_db.public.customers_snapshot SELECT * FROM source_db.public.customers"
-      }
-    }
-  },
-  "inputs": [
-    {
-      "namespace": "myplatform://internal-db.corp.example.com:5432",
-      "name": "source_db.public.customers",
-      "facets": {
-        "schema": {
-          "_producer": "https://github.com/my-org/my-custom-scheduler",
-          "_schemaURL": "https://openlineage.io/spec/facets/1-1-1/SchemaDatasetFacet.json#/$defs/SchemaDatasetFacet",
-          "fields": [
-            {"name": "customer_id", "type": "INT"},
-            {"name": "name", "type": "VARCHAR"},
-            {"name": "email", "type": "VARCHAR"}
-          ]
-        }
-      },
-      "inputFacets": {
-        "inputStatistics": {
-          "_producer": "https://github.com/my-org/my-custom-scheduler",
-          "_schemaURL": "https://openlineage.io/spec/facets/1-0-2/InputStatisticsInputDatasetFacet.json#/$defs/InputStatisticsInputDatasetFacet",
-          "rowCount": 100000,
-          "size": 52428800
-        }
-      }
-    }
-  ],
-  "outputs": [
-    {
-      "namespace": "myplatform://target-db.corp.example.com:5432",
-      "name": "target_db.public.customers_snapshot",
-      "facets": {
-        "schema": {
-          "_producer": "https://github.com/my-org/my-custom-scheduler",
-          "_schemaURL": "https://openlineage.io/spec/facets/1-1-1/SchemaDatasetFacet.json#/$defs/SchemaDatasetFacet",
-          "fields": [
-            {"name": "customer_id", "type": "INT"},
-            {"name": "name", "type": "VARCHAR"},
-            {"name": "email", "type": "VARCHAR"}
-          ]
-        },
-        "columnLineage": {
-          "_producer": "https://github.com/my-org/my-custom-scheduler",
-          "_schemaURL": "https://openlineage.io/spec/facets/1-1-0/ColumnLineageDatasetFacet.json#/$defs/ColumnLineageDatasetFacet",
-          "fields": {
-            "customer_id": {
-              "inputFields": [{"namespace": "myplatform://internal-db.corp.example.com:5432", "name": "source_db.public.customers", "field": "customer_id"}]
-            },
-            "name": {
-              "inputFields": [{"namespace": "myplatform://internal-db.corp.example.com:5432", "name": "source_db.public.customers", "field": "name"}]
-            },
-            "email": {
-              "inputFields": [{"namespace": "myplatform://internal-db.corp.example.com:5432", "name": "source_db.public.customers", "field": "email"}]
-            }
-          }
-        }
-      },
-      "outputFacets": {
-        "outputStatistics": {
-          "_producer": "https://github.com/my-org/my-custom-scheduler",
-          "_schemaURL": "https://openlineage.io/spec/facets/1-0-2/OutputStatisticsOutputDatasetFacet.json#/$defs/OutputStatisticsOutputDatasetFacet",
-          "rowCount": 100000,
-          "size": 52428800
-        }
-      }
-    }
-  ]
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### What Datadog creates from custom events
-
-Even with an unknown platform or integration, Datadog creates:
-
-| Feature | What You Get | Required Facets |
-|---|---|---|
-| **Lineage graph nodes** | Job and dataset nodes (generic icons) | `jobType`, inputs/outputs |
-| **Lineage edges** | Connections between jobs and datasets | Consistent `namespace` + `name` |
-| **Column-level lineage** | Field-level data flow tracking | `columnLineage` on outputs |
-| **APM spans** | Job execution spans with duration and error status | START + COMPLETE/FAIL events |
-| **Data quality metrics** | `row_count`, `bytes`, `freshness` time-series | `dataQualityMetrics`, `outputStatistics` |
-| **Column metrics** | `nullness`, `uniqueness` per column | `dataQualityMetrics.columnMetrics` |
-| **Query logs** | Masked SQL with query signatures | `sql` facet (on COMPLETE) |
-| **Schema in catalog** | Dataset field definitions | `schema` facet |
-| **Ownership** | Team/person attribution | `ownership` facet |
-| **Error tracking** | Error spans with stack traces | `errorMessage` facet (on FAIL) |
-
-### Connecting custom platforms to supported platforms
-
-A common pattern is a custom job platform that reads from or writes to supported data stores. For example, a custom scheduler that reads from PostgreSQL and writes to Snowflake:
-
-{{< img src="data_observability/openlineage/12_custom_platform.png" alt="Diagram showing a custom scheduler job reading from PostgreSQL and writing to Snowflake, with standard naming conventions for the supported platforms." style="width:50%;" >}}
-
-In this case, use the **standard naming conventions** for the supported platforms (PostgreSQL, Snowflake) and your own namespace for any custom datasets. The supported-platform datasets receive full platform-specific features (icons, hierarchy, native metrics), while the custom job still gets lineage, spans, and metrics.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openlineage.io/docs/spec/naming
+[2]: /data_observability/jobs_monitoring/openlineage/custom_events/
