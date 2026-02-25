@@ -130,6 +130,8 @@ Bits uses the following data sources during investigations:
 - Database Monitoring
 - Continuous Profiler
 
+<div class="alert alert-tip">**Add service scoping**: For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>
+
 #### Third-party integrations
 - Grafana
 - Dynatrace
