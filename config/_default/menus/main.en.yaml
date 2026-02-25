@@ -4183,21 +4183,26 @@ menu:
       parent: tracing_trace_pipeline
       identifier: tracing_adaptive_sampling
       weight: 403
+    - name: Processing Pipelines
+      url: tracing/trace_pipeline/processing_pipelines/
+      parent: tracing_trace_pipeline
+      identifier: tracing_processing_pipelines
+      weight: 404
     - name: Generate Metrics
       url: tracing/trace_pipeline/generate_metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_generate_metrics
-      weight: 404
+      weight: 405
     - name: Trace Retention
       url: tracing/trace_pipeline/trace_retention/
       parent: tracing_trace_pipeline
       identifier: tracing_retention
-      weight: 405
+      weight: 406
     - name: Usage Metrics
       url: tracing/trace_pipeline/metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_metrics
-      weight: 406
+      weight: 407
     - name: Correlate Traces with Other Telemetry
       url: tracing/other_telemetry/
       parent: tracing
@@ -4999,6 +5004,11 @@ menu:
       identifier: jobs_monitoring_dataproc
       parent: data_jobs
       weight: 600000
+    - name: AWS Glue
+      url: data_observability/jobs_monitoring/glue
+      identifier: jobs_monitoring_glue
+      parent: data_jobs
+      weight: 650000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
@@ -5189,21 +5199,26 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 505
+    - name: MCP Server
+      url: llm_observability/mcp_server
+      parent: llm_obs
+      identifier: llm_obs_mcp_server
+      weight: 6
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 6
+      weight: 7
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 7
+      weight: 8
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 9
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5687,26 +5702,31 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_android
       weight: 101
+    - name: Angular
+      url: feature_flags/client/angular
+      parent: feature_flags_client
+      identifier: feature_flags_client_angular
+      weight: 102
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 102
+      weight: 103
     - name: JavaScript
       url: feature_flags/client/javascript
       parent: feature_flags_client
       identifier: feature_flags_client_javascript
-      weight: 103
+      weight: 104
     - name: React
       url: feature_flags/client/react
       parent: feature_flags_client
       identifier: feature_flags_client_react
-      weight: 104
+      weight: 105
     - name: React Native
       url: feature_flags/client/reactnative
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
-      weight: 105
+      weight: 106
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
