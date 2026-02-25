@@ -15189,6 +15189,75 @@ components:
         id:
           $ref: '#/components/schemas/ApiID'
       type: object
+    CreateOrUpdateWidgetRequestAttributes:
+      properties:
+        definition:
+          $ref: '#/components/schemas/Definition'
+          description: The widget definition including type, title, and configuration.
+        tags:
+          description: User-defined tags for organizing the widget.
+          items:
+            type: string
+          title: Tags
+          type: array
+      required:
+      - definition
+      title: CreateOrUpdateWidgetRequestAttributes
+      type: object
+    CreateOrUpdateWidgetRequestJSONAPIRequestDocument:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateOrUpdateWidgetRequestResourceObjectRequest'
+        errors:
+          items:
+            $ref: '#/components/schemas/WidgetErrorInput'
+          title: Errors
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/WidgetResourceObjectInput'
+          title: Included
+          type: array
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+      required:
+      - data
+      title: CreateOrUpdateWidgetRequestJSONAPIRequestDocument
+      type: object
+    CreateOrUpdateWidgetRequestResourceObjectRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateOrUpdateWidgetRequestAttributes'
+        id:
+          title: Id
+          type: string
+        lid:
+          title: Lid
+          type: string
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/WidgetRelationshipObjectInput'
+          title: Relationships
+          type: object
+        type:
+          example: ''
+          title: Type
+          type: string
+      required:
+      - type
+      - attributes
+      title: CreateOrUpdateWidgetRequestResourceObjectRequest
+      type: object
     CreatePageRequest:
       description: Full request to trigger an On-Call Page.
       example:
@@ -19701,6 +19770,38 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    Definition:
+      additionalProperties: {}
+      description: The definition of a widget, including its type and configuration.
+      example:
+        requests:
+        - queries:
+          - data_source: metrics
+            name: query1
+            query: avg:system.cpu.user{*}
+          response_format: timeseries
+        time:
+          type: live
+          unit: day
+          value: 30
+        title: My Timeseries Widget
+        type: timeseries
+      properties:
+        title:
+          description: The display title of the widget.
+          example: My Widget
+          maxLength: 100
+          minLength: 1
+          title: Title
+          type: string
+        type:
+          $ref: '#/components/schemas/WidgetType'
+          description: The type of the widget (for example, cloud_cost_summary, query_table).
+      required:
+      - type
+      - title
+      title: Definition
+      type: object
     Degradation:
       properties:
         data:
@@ -22638,6 +22739,36 @@ components:
       required:
       - retryStrategy
       - fallbackStepName
+      type: object
+    ErrorLinks:
+      properties:
+        about:
+          $ref: '#/components/schemas/ErrorLinksAbout'
+      required:
+      - about
+      title: ErrorLinks
+      type: object
+    ErrorLinksAbout:
+      example: ''
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: About
+    ErrorSource:
+      description: 'An object containing references to the primary source of the error.
+
+        See: https://jsonapi.org/format/#error-objects'
+      properties:
+        header:
+          title: Header
+          type: string
+        parameter:
+          title: Parameter
+          type: string
+        pointer:
+          title: Pointer
+          type: string
+      title: ErrorSource
       type: object
     Escalation:
       description: Represents an escalation policy step.
@@ -33953,6 +34084,9 @@ components:
       - name
       - type
       type: object
+    JSONAPIAttributes:
+      title: JSONAPIAttributes
+      type: object
     JSONAPIErrorItem:
       description: API error response body
       properties:
@@ -34930,6 +35064,40 @@ components:
       required:
       - name
       type: object
+    LinkObject:
+      description: 'A JSON:API "link object"
+
+        See: https://jsonapi.org/format/#auto-id--link-objects'
+      properties:
+        describedby:
+          title: Describedby
+          type: string
+        href:
+          example: ''
+          title: Href
+          type: string
+        hreflang:
+          items:
+            type: string
+          title: Hreflang
+          type: array
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        rel:
+          title: Rel
+          type: string
+        title:
+          title: Title
+          type: string
+        type:
+          title: Type
+          type: string
+      required:
+      - href
+      title: LinkObject
+      type: object
     Links:
       description: The JSON:API links related to pagination.
       properties:
@@ -34958,6 +35126,41 @@ components:
       - first
       - last
       type: object
+    LinksDescribedBy:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: Describedby
+    LinksFirst:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: First
+    LinksLast:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: Last
+    LinksNext:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: Next
+    LinksPrev:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: Prev
+    LinksRelated:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: Related
+    LinksSelf:
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/LinkObject'
+      title: Self
     ListAPIsResponse:
       description: Response for `ListAPIs`.
       properties:
@@ -50247,6 +50450,13 @@ components:
           description: Relationship type.
           type: string
       type: object
+    RelationshipObjectOutputData:
+      oneOf:
+      - $ref: '#/components/schemas/ResourceIdentifierObject'
+      - items:
+          $ref: '#/components/schemas/ResourceIdentifierObject'
+        type: array
+      title: Data
     RelationshipToIncident:
       description: Relationship to incident.
       properties:
@@ -51026,6 +51236,44 @@ components:
       type: string
       x-enum-varnames:
       - CSM_RESOURCE_FILTER
+    ResourceIdentifierObject:
+      description: 'A JSON:API "resource identifier object"
+
+        See: https://jsonapi.org/format/#document-resource-identifier-objects'
+      properties:
+        id:
+          example: ''
+          title: Id
+          type: string
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        type:
+          example: ''
+          title: Type
+          type: string
+      required:
+      - type
+      - id
+      title: ResourceIdentifierObject
+      type: object
+    ResourceObjectInputAttributes:
+      oneOf:
+      - $ref: '#/components/schemas/ResourceObjectInputAttributesOneOf'
+      - $ref: '#/components/schemas/JSONAPIAttributes'
+      title: Attributes
+    ResourceObjectInputAttributesOneOf:
+      additionalProperties: {}
+      type: object
+    ResourceObjectOutputAttributes:
+      oneOf:
+      - $ref: '#/components/schemas/ResourceObjectOutputAttributesOneOf'
+      - $ref: '#/components/schemas/JSONAPIAttributes'
+      title: Attributes
+    ResourceObjectOutputAttributesOneOf:
+      additionalProperties: {}
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -70259,6 +70507,73 @@ components:
       - FRIDAY
       - SATURDAY
       - SUNDAY
+    WidgetErrorInput:
+      description: 'A JSON:API "error object".
+
+        See: https://jsonapi.org/format/1.0/#error-objects'
+      properties:
+        code:
+          title: Code
+          type: string
+        detail:
+          title: Detail
+          type: string
+        id:
+          title: Id
+          type: string
+        links:
+          $ref: '#/components/schemas/ErrorLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        source:
+          $ref: '#/components/schemas/ErrorSource'
+        status:
+          title: Status
+          type: string
+        title:
+          title: Title
+          type: string
+      title: Error
+      type: object
+    WidgetExperienceType:
+      description: Widget experience types that differentiate between the products
+        using the specific widget.
+      enum:
+      - ccm_reports
+      - logs_reports
+      - csv_reports
+      - product_analytics
+      example: ccm_reports
+      title: WidgetExperienceType
+      type: string
+      x-enum-varnames:
+      - CCM_REPORTS
+      - LOGS_REPORTS
+      - CSV_REPORTS
+      - PRODUCT_ANALYTICS
+    WidgetLinks:
+      description: 'A JSON:API "links" member
+
+        See: https://jsonapi.org/format/#document-links'
+      properties:
+        describedBy:
+          $ref: '#/components/schemas/LinksDescribedBy'
+        first:
+          $ref: '#/components/schemas/LinksFirst'
+        last:
+          $ref: '#/components/schemas/LinksLast'
+        next:
+          $ref: '#/components/schemas/LinksNext'
+        prev:
+          $ref: '#/components/schemas/LinksPrev'
+        related:
+          $ref: '#/components/schemas/LinksRelated'
+        self:
+          $ref: '#/components/schemas/LinksSelf'
+      title: Links
+      type: object
     WidgetLiveSpan:
       description: The available timeframes depend on the widget you are using.
       enum:
@@ -70295,6 +70610,265 @@ components:
       - PAST_SIX_MONTHS
       - PAST_ONE_YEAR
       - ALERT
+    WidgetRelationshipObjectInput:
+      description: 'A JSON:API "relationship object".
+
+        See: https://jsonapi.org/format/#document-resource-object-relationships
+
+
+        (When including relationships in models, you probably want Relationship, not
+        this.)'
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipObjectOutputData'
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+      title: RelationshipObject
+      type: object
+    WidgetRelationshipObjectOutput:
+      description: 'A JSON:API "relationship object".
+
+        See: https://jsonapi.org/format/#document-resource-object-relationships
+
+
+        (When including relationships in models, you probably want Relationship, not
+        this.)'
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipObjectOutputData'
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+      title: RelationshipObject
+      type: object
+    WidgetResourceObjectInput:
+      description: 'A JSON:API resource object.
+
+        See: https://jsonapi.org/format/#document-resource-objects'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceObjectInputAttributes'
+        id:
+          example: ''
+          title: Id
+          type: string
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/WidgetRelationshipObjectInput'
+          title: Relationships
+          type: object
+        type:
+          example: ''
+          title: Type
+          type: string
+      required:
+      - id
+      - type
+      title: ResourceObject
+      type: object
+    WidgetResourceObjectOutput:
+      description: 'A JSON:API resource object.
+
+        See: https://jsonapi.org/format/#document-resource-objects'
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ResourceObjectOutputAttributes'
+        id:
+          example: ''
+          title: Id
+          type: string
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/WidgetRelationshipObjectOutput'
+          title: Relationships
+          type: object
+        type:
+          example: ''
+          title: Type
+          type: string
+      required:
+      - id
+      - type
+      title: ResourceObject
+      type: object
+    WidgetSchemaAttributes:
+      properties:
+        created_at:
+          description: ISO 8601 timestamp of when the widget was created.
+          example: ''
+          title: Created At
+          type: string
+        definition:
+          $ref: '#/components/schemas/Definition'
+          description: The widget definition including type, title, and configuration.
+        is_favorited:
+          deprecated: true
+          description: 'Deprecated: this field is not functional and always returns
+            False.'
+          example: false
+          title: Is Favorited
+          type: boolean
+        modified_at:
+          description: ISO 8601 timestamp of when the widget was last modified.
+          example: ''
+          title: Modified At
+          type: string
+        tags:
+          description: User-defined tags for organizing widgets.
+          example:
+          - ''
+          items:
+            type: string
+          title: Tags
+          type: array
+      required:
+      - definition
+      - tags
+      - is_favorited
+      - created_at
+      - modified_at
+      title: WidgetSchemaAttributes
+      type: object
+    WidgetSchemaJSONAPIDocument:
+      properties:
+        data:
+          $ref: '#/components/schemas/WidgetSchemaResource'
+        errors:
+          items:
+            $ref: '#/components/schemas/WidgetErrorInput'
+          title: Errors
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/WidgetResourceObjectOutput'
+          title: Included
+          type: array
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+      required:
+      - data
+      title: WidgetSchemaJSONAPIDocument
+      type: object
+    WidgetSchemaJSONAPIListDocument:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WidgetSchemaResource'
+          title: Data
+          type: array
+        errors:
+          items:
+            $ref: '#/components/schemas/WidgetErrorInput'
+          title: Errors
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/WidgetResourceObjectOutput'
+          title: Included
+          type: array
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+      required:
+      - data
+      title: WidgetSchemaJSONAPIListDocument
+      type: object
+    WidgetSchemaResource:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WidgetSchemaAttributes'
+        id:
+          example: ''
+          title: Id
+          type: string
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        meta:
+          additionalProperties: true
+          title: Meta
+          type: object
+        relationships:
+          additionalProperties:
+            $ref: '#/components/schemas/WidgetRelationshipObjectOutput'
+          title: Relationships
+          type: object
+        type:
+          example: ''
+          title: Type
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      title: WidgetSchemaResource
+      type: object
+    WidgetType:
+      description: 'Widget types that are allowed to be stored as individual records
+        in the ''widget'' PG table.
+
+
+        This is not a complete list of dashboards/notebooks widget types.'
+      enum:
+      - bar_chart
+      - change
+      - cloud_cost_summary
+      - cohort
+      - funnel
+      - geomap
+      - list_stream
+      - query_table
+      - query_value
+      - retention_curve
+      - sankey
+      - sunburst
+      - timeseries
+      - toplist
+      - treemap
+      example: bar_chart
+      title: WidgetType
+      type: string
+      x-enum-varnames:
+      - BAR_CHART
+      - CHANGE
+      - CLOUD_COST_SUMMARY
+      - COHORT
+      - FUNNEL
+      - GEOMAP
+      - LIST_STREAM
+      - QUERY_TABLE
+      - QUERY_VALUE
+      - RETENTION_CURVE
+      - SANKEY
+      - SUNBURST
+      - TIMESERIES
+      - TOPLIST
+      - TREEMAP
     WorkflowData:
       description: Data related to the workflow.
       properties:
@@ -108291,6 +108865,177 @@ paths:
         operator: OR
         permissions:
         - teams_read
+  /api/v2/widgets/{experience_type}:
+    get:
+      description: Search and list widgets for a given experience type. Supports filtering
+        by widget type, creator, title, and tags, as well as sorting and pagination.
+      operationId: SearchWidgetsApiV2WidgetsExperienceTypeGet
+      parameters:
+      - description: The experience type for the widget.
+        example: ccm_reports
+        in: path
+        name: experience_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/WidgetExperienceType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WidgetSchemaJSONAPIListDocument'
+          description: Successful Response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Search widgets
+      tags:
+      - Widgets
+      x-menu-order: 4
+    post:
+      description: Create a new widget for a given experience type.
+      operationId: CreateWidgetApiV2WidgetsExperienceTypePost
+      parameters:
+      - description: The experience type for the widget.
+        example: ccm_reports
+        in: path
+        name: experience_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/WidgetExperienceType'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateWidgetRequestJSONAPIRequestDocument'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WidgetSchemaJSONAPIDocument'
+          description: Successful Response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create a widget
+      tags:
+      - Widgets
+      x-menu-order: 5
+  /api/v2/widgets/{experience_type}/{uuid}:
+    delete:
+      description: Soft-delete a widget by its UUID for a given experience type.
+      operationId: DeleteWidgetApiV2WidgetsExperienceTypeUuidDelete
+      parameters:
+      - description: The UUID of the widget.
+        in: path
+        name: uuid
+        required: true
+        schema:
+          format: uuid
+          title: Uuid
+          type: string
+      - description: The experience type for the widget.
+        example: ccm_reports
+        in: path
+        name: experience_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/WidgetExperienceType'
+      responses:
+        '204':
+          description: Successful Response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete a widget
+      tags:
+      - Widgets
+      x-menu-order: 3
+    get:
+      description: Retrieve a widget by its UUID for a given experience type.
+      operationId: GetWidgetApiV2WidgetsExperienceTypeUuidGet
+      parameters:
+      - description: The UUID of the widget.
+        in: path
+        name: uuid
+        required: true
+        schema:
+          format: uuid
+          title: Uuid
+          type: string
+      - description: The experience type for the widget.
+        example: ccm_reports
+        in: path
+        name: experience_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/WidgetExperienceType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WidgetSchemaJSONAPIDocument'
+          description: Successful Response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a widget
+      tags:
+      - Widgets
+      x-menu-order: 1
+    put:
+      description: Update a widget by its UUID for a given experience type. This performs
+        a full replacement of the widget definition.
+      operationId: UpdateWidgetApiV2WidgetsExperienceTypeUuidPut
+      parameters:
+      - description: The UUID of the widget.
+        in: path
+        name: uuid
+        required: true
+        schema:
+          format: uuid
+          title: Uuid
+          type: string
+      - description: The experience type for the widget.
+        example: ccm_reports
+        in: path
+        name: experience_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/WidgetExperienceType'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateWidgetRequestJSONAPIRequestDocument'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WidgetSchemaJSONAPIDocument'
+          description: Successful Response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update a widget
+      tags:
+      - Widgets
+      x-menu-order: 2
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
@@ -109337,6 +110082,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
+- description: Manage widgets for experience types such as CCM cost reports.
+  name: Widgets
 - description: Datadog Workflow Automation allows you to automate your end-to-end
     processes by connecting Datadog with the rest of your tech stack. Build workflows
     to auto-remediate your alerts, streamline your incident and security processes,
