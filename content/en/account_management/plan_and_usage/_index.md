@@ -26,7 +26,7 @@ Your account billing history is available from the **Billing History** tab in th
 
 ## Trial management
 
-If your organization has access to product trials, users can manage their trials from the **Trial Management** tab in the [Plan & Usage section][2]. Product trials allow you to try out new products for a limited time without incurring costs. There will be no charge during the free trial period, but you will be charged for any post-trial usage.
+If your organization has access to product trials, users can manage their trials from the **Trial Management** tab in the [Plan & Usage section][2]. Product trials let you try out new products for a limited time without incurring costs. There is no charge during the free trial period, but you are charged for any post-trial usage.
 
 If no product trials are available, the **Trial Management** tab is not displayed for administrator users.
 
@@ -36,7 +36,7 @@ If no product trials are available, the **Trial Management** tab is not displaye
 
 From the **Trial Management** tab, you can start new available trials and view your active and past trials. The tab displays each trial's end date and includes links to each trial product and its documentation.
 
-Usage data for trial products appears in the **Usage & Cost** tab. You are not billed for this usage, but it represents what the product would have cost with no trial. Usage metrics from trial products are marked with an indicator icon.
+Usage data for trial products appears in the **Usage & Cost** tab. You are not billed for this usage, but it represents the estimated cost if no trial were active. Usage metrics from trial products are marked with an indicator icon.
 
 {{< img src="account_management/plan_and_usage/trial-management-usage.png" width="70%" alt="Usage & Cost section showing a trial product metric with an indicator icon and tooltip explaining the estimated cost" >}}
 
