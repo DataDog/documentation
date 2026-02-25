@@ -158,19 +158,23 @@ Common issues and fixes:
 - No logs are arriving
 	- In your Google Pub/Sub destination setup, double-check the topic name, project, and Pub/Sub endpoint (global vs regional).
 
-## How the destination works
+## Metrics
 
 ### Worker health metrics
 
 See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
 
-#### Component metrics
+### Component metrics
 
 {{% observability_pipelines/metrics/component %}}
 
-#### Buffer metrics (when buffering is enabled)
+### Buffer metrics (when enabled)
 
-{{% observability_pipelines/metrics/buffer %}}
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ### Event batching
 
