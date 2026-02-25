@@ -48,7 +48,7 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 ## Requirements
 
-Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read-access and `MCP Write` [permission][18] for write access.
+Datadog users must have the `MCP Read` and/or `MCP Write` [permissions][18] to use the MCP server.
 
 For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
 
