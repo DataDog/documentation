@@ -133,8 +133,10 @@ Scheduling SDK upgrades is not supported.
 ### Requirements
 
 - **Single Step Instrumentation (SSI)**
+
   You must already be instrumenting services with [Single Step Instrumentation (SSI)][20].
 - **Linux or Windows VMs**
+
   Supported only for services running on **Linux or Windows VMs**. Remotely upgrading SDKs in containerized or Kubernetes environments is not supported.
 
 ### How to upgrade SDKs remotely
