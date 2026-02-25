@@ -1,14 +1,5 @@
 ---
-title: Synthetic Monitoring Template Variables
-aliases:
-- /synthetics/notifications/template_variables_cdocs
-content_filters:
-- trait_id: platform
-  option_group_id: synthetics_test_type_options
-  label: "Test Type"
-- trait_id: synthetics_variables
-  option_group_id: synthetics_variables_options
-  label: "Variables"
+title: Mobile test template variables
 further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
@@ -23,25 +14,11 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix.
-
-<!-- Test results -->
-{% if equals($synthetics_variables, "test_results") %}
-
-This section covers two categories of variables:
-
-- [Test execution variables](#test-execution-variables): Shortcuts for commonly used values such as failure messages, step counts, duration, and tags.
-- [Execution results](#execution-results): The full result object with status, timestamps, failure codes, and step counts.
+Template variables allow you to insert dynamic values from your Mobile test results and configuration into notification messages. These variables are accessed using the `synthetics.attributes` prefix.
 
 {% partial file="synthetics/notifications/test_execution_variables.mdoc.md" /%}
 
 {% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
-
-{% /if %}
-<!-- end Test results -->
-
-<!-- Test info -->
-{% if equals($synthetics_variables, "test_info") %}
 
 ### Test metadata
 
@@ -82,12 +59,6 @@ Use these variables to access test configuration and execution location informat
 {% tab label="Device" %}
 Path: `synthetics.attributes.device`
 
-{% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
-{% alert level="info" %}
-Device information is not available for this test type. Device variables are only available for **Browser** and **Mobile** tests.
-{% /alert %}
-{% /if %}
-{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
 `{{synthetics.attributes.device}}`
 : The `device` object contains information about the device on which the test is run on
 
@@ -102,34 +73,13 @@ Device information is not available for this test type. Device variables are onl
 
 `{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
 : Screen resolution dimensions
-{% /if %}
-{% if equals($platform, "browser") %}
-
-**Browser-specific:**
-
-`{{synthetics.attributes.device.browser.type}}`
-: Browser type (for example, `chrome`)
-{% /if %}
-{% if equals($platform, "mobile") %}
 
 **Mobile-specific:**
 
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (for example, `android`, `ios`)
-{% /if %}
 {% /tab %}
 {% /tabs %}
-
-{% /if %}
-<!-- end Test info -->
-
-<!-- Step details -->
-{% if equals($synthetics_variables, "step_details") %}
-
-This section covers step-level variables organized by category:
-
-- [Failed step information](#failed-step-information): Shortcuts for the step that caused a test failure.
-- [Step execution details](#step-execution-details): Metadata and results for each step, including extracted variable values.
 
 ### Failed step information
 
@@ -137,39 +87,24 @@ Path: `synthetics.failed_step`
 
 Use these variables to access information about the step that caused a test failure.
 
-{% if not(or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep"))) %}
-{% alert level="info" %}
-Failed step information is only available for Multistep API, Browser, and Mobile tests.
-{% /alert %}
-{% /if %}
-{% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
-
 `{{synthetics.failed_step}}`
 : The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly.
 
 `{{synthetics.failed_step.name}}`
-: Multistep API shortcut for `{{synthetics.attributes.result.steps.<step-index>.name}}`
+: Shortcut for `{{synthetics.attributes.result.steps.<step-index>.name}}`
 
 `{{synthetics.failed_step.description}}`
-: Browser, Mobile shortcut for `{{synthetics.attributes.result.steps.<step-index>.description}}`
+: Shortcut for `{{synthetics.attributes.result.steps.<step-index>.description}}`
 
 {% alert level="tip" %}
-Review the [conditional alerting][1] page for an example of how to use the `synthetics.failed_step.description` shortcut variable in a Browser Test notification.
+Review the [conditional alerting][1] page for an example of how to use the `synthetics.failed_step.description` shortcut variable in a notification.
 {% /alert %}
-
-{% /if %}
 
 ### Step execution details
 
 Path: `synthetics.attributes.variables.extracted`
 
 These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
-
-{% if not(or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep"))) %}
-{% alert level="info" %}
-**Note:** Step execution details are only available for Multistep API, Browser, and Mobile tests. Select one of these test types to see step execution variables.
-{% /alert %}
-{% /if %}
 
 {% tabs %}
 {% tab label="General steps" %}
@@ -194,44 +129,6 @@ These are step execution metadata and results containing detailed information ab
 `synthetics.attributes.variables.extracted.steps.type`
 : Type of step being executed
 
-{% if equals($platform, "browser") %}
-**Browser-specific:**
-
-`{{synthetics.attributes.result.startUrl}}`
-: URL from test configuration
-
-`synthetics.attributes.variables.extracted.apiTest.request`
-: API test request configuration (only for "Run API Test" steps where `type` is `runApiTest`)
-
-`synthetics.attributes.variables.extracted.apiTest.result`
-: API test result data (similar to `attributes.result` for API tests)
-
-`synthetics.attributes.variables.extracted.assertionResult.expected`
-: Expected value for assertions
-
-`synthetics.attributes.variables.extracted.assertionResults.checkType`
-: Type of assertion check
-
-`synthetics.attributes.variables.extracted.assertionResults.actual`
-: Actual value found during assertion
-
-`synthetics.attributes.variables.extracted.browserErrors`
-: List of browser errors encountered
-
-`synthetics.attributes.variables.extracted.timings.firstByte`
-: Time to first byte
-
-`synthetics.attributes.variables.extracted.timings.tcp`
-: TCP connection timing
-
-`synthetics.attributes.variables.extracted.description`
-: Step description
-
-`synthetics.attributes.variables.extracted.warnings`
-: List of warnings, each containing `.message` (the warning message) and `.type` (the warning type: `invalid_config`, `user_locator`, or `unable_to_compute_tti`)
-{% /if %}
-
-{% if equals($platform, "mobile") %}
 **Mobile-specific:**
 
 `synthetics.attributes.variables.extracted.application.versionId`
@@ -245,30 +142,12 @@ These are step execution metadata and results containing detailed information ab
 
 `synthetics.attributes.variables.extracted.warnings`
 : List of warnings, each containing `.message` (the warning message) and `.type` (the warning type)
-{% /if %}
-
-{% if equals($platform, "multistep") %}
-**Multistep-specific:**
-
-`synthetics.attributes.variables.extracted.name`
-: Step name
-
-`synthetics.attributes.variables.extracted.type`
-: Step type
-
-{% /if %}
 {% /tab %}
 
 {% tab label="Extracted values" %}
 Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
-{% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
-{% alert level="info" %}
-Extracted variable values are only available for Browser and Mobile tests. Select **Browser** or **Mobile** from the Test Type dropdown to see these variables.
-{% /alert %}
-{% /if %}
-{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
-These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
+These are the actual variable values that a step captured during test execution. For example, if you have a Mobile test step that extracts a value into a variable, this is where you access that extracted value.
 
 For information on how to access the `<step-index>`, see the step summary section.
 
@@ -280,7 +159,6 @@ For information on how to access the `<step-index>`, see the step summary sectio
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.value`
 : Variable value (if step was successful)
-{% /if %}
 {% /tab %}
 
 {% tab label="Sub-tests" %}
@@ -298,16 +176,7 @@ For information on how to access the `<step-index>`, see the step summary sectio
 {% /tab %}
 {% /tabs %}
 
-{% /if %}
-<!-- end Step details -->
-
-<!-- Variables -->
-{% if equals($synthetics_variables, "variables") %}
-
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
-
-{% /if %}
-<!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 

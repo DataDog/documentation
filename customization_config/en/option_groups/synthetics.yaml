@@ -1,10 +1,3 @@
-# Test type options for the template variables page
-synthetics_test_type_options:
-  - id: browser
-    default: true
-  - id: mobile
-  - id: multistep
-
 # Protocol options for the template variables API page
 synthetics_protocol_options:
   - id: http
@@ -17,7 +10,7 @@ synthetics_protocol_options:
   - id: icmp
   - id: grpc
 
-# Variable options used on both template variables pages
+# Variable options used on the API template variables page
 synthetics_variables_options:
   - id: test_results
     default: true

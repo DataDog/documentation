@@ -7902,15 +7902,30 @@ menu:
       identifier: synthetics_notifications
       weight: 10
     - name: Template Variables
-      url: synthetics/notifications/template_variables
+      url: synthetics/notifications/template_variables/
       parent: synthetics_notifications
-      identifier: synthetics_notifications_template_variables_cdocs
+      identifier: synthetics_notifications_template_variables
       weight: 1001
-    - name: API Template Variables
-      url: synthetics/notifications/api_template_variables
-      parent: synthetics_notifications_template_variables_cdocs
-      identifier: synthetics_notifications_template_variables_api_cdocs
+    - name: Browser Test
+      url: synthetics/notifications/template_variables/browser/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_browser
       weight: 100101
+    - name: Mobile Test
+      url: synthetics/notifications/template_variables/mobile/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_mobile
+      weight: 100102
+    - name: Multistep API Test
+      url: synthetics/notifications/template_variables/multistep/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_multistep
+      weight: 100103
+    - name: API Test
+      url: synthetics/notifications/template_variables/api/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_api
+      weight: 100104
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications

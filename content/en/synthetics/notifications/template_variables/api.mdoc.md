@@ -1,9 +1,9 @@
 ---
-title: Synthetic Monitoring API Template Variables
+title: API test template variables
 content_filters:
 - trait_id: protocol
   option_group_id: synthetics_protocol_options
-  label: "Protocol"
+  label: "Test type"
 - trait_id: synthetics_variables
   option_group_id: synthetics_variables_options
   label: "Variables"
