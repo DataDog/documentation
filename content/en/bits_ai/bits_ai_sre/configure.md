@@ -9,7 +9,7 @@ Set up integrations to extend Bits’ capabilities:
 
 ## Integrate with third-party observability and SCM platforms
 
-Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, and Sentry to incorporate observability data and source code into investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies an issue that can be resolved in code.
+Bits AI SRE integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for the Bits Dev Agent to generate a code fix when Bits AI SRE identifies an issue that can be resolved in code.
 
 ### GitHub
 To configure GitHub:
@@ -59,6 +59,7 @@ To set up On-Call, in your monitor, go to **Configure notifications and automati
 
 ## Pull context from knowledge bases
 
+### Confluence
 Bits AI SRE integrates with Confluence to:
 - Find relevant documentation and runbooks to support its monitor alert investigations
 - Let you interact with your Confluence content directly through chat
