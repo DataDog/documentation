@@ -1366,7 +1366,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {% /if %}
 {% if equals($prog_lang, "rust") %}
 - Verify `DD_LOGS_OTEL_ENABLED=true` is set. Logs are disabled by default.
-- Verify that a transport feature (`logs-grpc` or `logs-http`) is enabled in your Cargo.toml file.
+- Verify that a transport feature (`logs-grpc` or `logs-http`) is enabled in your `Cargo.toml` file.
 - Verify `datadog_opentelemetry::logs().init()` is called before using the logger.
 - Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
 {% /if %}
