@@ -139,11 +139,6 @@ Scheduling SDK upgrades is not supported.
 
   Supported only for services running on **Linux or Windows VMs**. Remotely upgrading SDKs in containerized or Kubernetes environments is not supported.
 
-### How to upgrade SDKs remotely
-
-<div class="alert alert-info">
-In the preview, scheduled upgrades of SDKs is not supported.
-</div>
 
 {{% collapse-content title="How to upgrade SDKs remotely" level="h4" expanded=false id="upgrade-sdks-steps" %}}
 
