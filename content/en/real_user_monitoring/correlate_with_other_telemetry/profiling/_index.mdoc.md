@@ -141,6 +141,32 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 ## Explore profiling
 
+### Within the Sessions Explorer
+
+Profiling data is captured on long tasks and rolls up to actions, views, vitals, and sessions. Use `@profiling.has_profile` to filter to profiled events and understand what code ran and how it affected the user's experience. This is available for sessions, views, actions, vitals, and long tasks.
+- **View panel**: Profiling data in a new tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_view_panel.png" alt="Browser profiling tab in the View panel." style="width:100%;" /%}
+
+- **Long Task panel**: Profiling data in the performance tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
+
+- **Vitals panel**: Profiling data in a new tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_vitals_panel.png" alt="Browser profiling tab in the Vitals panel." style="width:100%;" /%}
+
+- **Action panel**: Profiling data in a new tab.
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_action_panel.png" alt="Browser profiling tab in the Action panel." style="width:100%;" /%}
+
+### Within the Profiling page
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_exprience.mp4" alt="Browser profiling event waterfall example within the Optimization page." video="true" style="width:100%;" /%}
+
+The Profiling page, found thorugh the top bar navigation, lets you analyze profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+
+1. **Focus on views**: Choose the views you'd like to analyze.
+2. **Select a measurement**: Pick a Core Web Vital, custom vital, or RUM action to dive into.
+3. **Refine your selection**: Narrow to the most relevant slice of data by percentile or time range so you focus on the worst-performing or most critical segment.
+4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first.
+5. **View the flame graph**: Explore the call hierarchy to see how those functions relate and where time is spent across the stack.
+
 ### Within the Optimization page
 
 The **Optimization page** surfaces profiling data in several contexts:
@@ -152,12 +178,6 @@ The **Optimization page** surfaces profiling data in several contexts:
 - Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Click one of these long task events to open a Long Task view panel with detailed profiling data. Use this panel to identify blocking functions, trace their call stacks, and understand how script execution contributes to poor responsiveness.
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
-
-
-### Within the Sessions Explorer
-You can also find profiling data when reviewing individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user's experience.
-
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
 
 {% /if %}
 <!-- end Browser -->

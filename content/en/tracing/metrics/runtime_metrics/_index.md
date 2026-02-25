@@ -298,7 +298,7 @@ Each supported language collects a set of runtime metrics that provide insights 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /developers/dogstatsd/#setup
+[2]: /extend/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
-[7]: /developers/dogstatsd/unix_socket/
+[7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file

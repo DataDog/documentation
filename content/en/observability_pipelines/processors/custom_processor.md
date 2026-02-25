@@ -5,6 +5,9 @@ further_reading:
 - link: "/observability_pipelines/guide/remap_reserved_attributes/"
   tag: "documentation"
   text: "Remap reserved attributes"
+- link: "/logs/guide/regex_log_parsing/"
+  tag: "guide"
+  text: "Writing Effective Grok Parsing Rules with Regular Expressions"
 products:
 - name: Logs
   icon: logs
@@ -24,12 +27,12 @@ Use this processor with Vector Remap Language (VRL) to modify and enrich your lo
 - [Convert syslog values](#convert) to read-able values.
 - Enrich values by using [enrichment tables](#enrichment).
 - [Manipulate IP values](#ip).
-- [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
+- [Parse](#parse) values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on). See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
 - Manipulate event [paths](#path).
 
-See [Custom functions][1] for the full list of available functions.
+See [Custom functions](#custom-functions) for the full list of available functions.
 
-See [Remap Reserved Attributes][2] on how to use the Custom Processor to manually and dynamically remap attributes.
+See [Remap Reserved Attributes][1] on how to use the Custom Processor to manually and dynamically remap attributes.
 
 ## Setup
 
@@ -41,15 +44,11 @@ To set up this processor:
 ### Add a function
 
 1. Enter a name for your custom processor.
-1. Add your script to modify your logs using [custom functions][1]. You can also click **Autofill with Example** and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][3] for more information.
+1. Add your script to modify your logs using [custom functions][1]. You can also click **Autofill with Example** and select one of the common use cases to get started. Click the copy icon for the example script and paste it into your script. See [Get Started with the Custom Processor][2] for more information.
 1. Optionally, check **Drop events on error** if you want to drop events that encounter an error during processing.
 1. Enter a sample log event.
 1. Click **Run** to preview how the functions process the log. After the script has run, you can see the output for the log.
 1. Click **Save**.
-
-[1]: /observability_pipelines/processors/custom_processor#custom-functions
-[2]: /observability_pipelines/guide/remap_reserved_attributes
-[3]: /observability_pipelines/guide/get_started_with_the_custom_processor
 
 ## Custom functions
 
@@ -77,3 +76,7 @@ To set up this processor:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/guide/remap_reserved_attributes
+[2]: /observability_pipelines/guide/get_started_with_the_custom_processor
+[3]: /logs/guide/regex_log_parsing/
