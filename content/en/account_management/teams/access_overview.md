@@ -25,11 +25,11 @@ Datadog provides a range of features for controlling which users can see and int
 | Feature | Description | Availability | Documentation |
 |---------|-------------|--------------|---------------|
 | Data Access Control policies | Restrict datasets to specific Teams. | See supported products [here][1]. | [Data Access Control][2] |
-| Hierarchical Team Access | Nest teams within each other. Sub-teams inherit roles and permissions granted to their parent teams as well as access granted to restricted datasets or resources. | [Dataset access][3] and [Resource access][4] | [Hierarchical Teams][5] |
+| Hierarchical Team Access | Nest teams within each other. Sub-teams inherit roles and permissions granted to their parent teams as well as access granted to restricted datasets or resources. | [Dataset access][3] and [resource access][4] | [Hierarchical Teams][5] |
 | Individual Resource Restrictions | Restrict access to specific Dashboards and/or Monitors to specific members of a Team. | See supported products [here][4]. | [Granular Access Control][7] |
 | Personalized Team Views | Filter information in Datadog by Team, without revoking access. | See supported products [here][4] | [Team filter][8] |
 | Team-based Restriction Policies | Restrict editing access to Teams with the `team:` tag. | Preview; supported for [Monitors][9] and [Dashboards][10] | Available for Preview orgs |
-| Team Tag Enforcement Policies | Set Team tag requirements for any newly created monitors. | Supported for [Monitors][11] | [Monitors Tag Policy][12] |
+| Team Tag Enforcement Policies | Set Team tag requirements for any newly created monitors. | Supported for [Monitors][9] | [Monitors Tag Policy][12] |
 | Team-linked Roles | Assign roles to a Team. All Team members receive the Role, including Role permissions and any granted access. | Preview | Available for Preview orgs |
 
 ## Further reading
@@ -45,5 +45,4 @@ Datadog provides a range of features for controlling which users can see and int
 [8]: /account_management/teams/#team-filter
 [9]: /monitors/
 [10]: /dashboards/
-[11]: /monitors/settings/#tag-policies
 [12]: /monitors/settings/#tag-policies
