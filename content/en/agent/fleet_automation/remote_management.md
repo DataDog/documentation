@@ -158,7 +158,7 @@ Scheduling SDK upgrades is not supported.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-plan.png" alt="Deployment plan view showing the list of services staged for SDK upgrade." style="width:100%;" >}}
 
-1. **Restart the services** to complete the upgrade.  The SDKs will be updated the next time the services on the hosts are restarted.
+1. Restart the services to start using the upgraded SDKs.
 
 [1]: https://app.datadoghq.com/fleet/agent-upgrades
 {{% /collapse-content %}}
