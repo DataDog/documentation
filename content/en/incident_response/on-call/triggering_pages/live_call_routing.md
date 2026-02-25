@@ -96,7 +96,7 @@ In voicemail routing, callers are prompted to leave a message. The message is tr
 
 If your route isn't accepting calls:
 - Confirm the route is set to active.
-- Confirm that provisioning is complete. If provisioning is still in progress, contact [Datadog Support](mailto:support@datadoghq.com).
+- Confirm that provisioning is complete. If provisioning is still in progress, contact [Datadog Support][1].
 - Verify the phone number is correctly configured for this route.
 
 ### Keypad problems
@@ -121,3 +121,5 @@ If a voicemail is left but no page is created:
 - Verify the On-Call team assigned to the route has an active escalation policy.
 - Confirm that team members have notification preferences configured to receive pages.
 - Check that the voicemail recording completed successfully. Callers who hang up before the beep may not leave a recording that the system can process.
+
+[1]: /help/
