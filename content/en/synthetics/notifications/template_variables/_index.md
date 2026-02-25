@@ -20,12 +20,9 @@ Template variables allow you to insert dynamic values from your test results and
 
 Select your test type to view the available template variables:
 
-- **[Browser test template variables][1]**: Variables for browser tests, including browser-specific device info, step details, and extracted values.
-- **[Mobile test template variables][2]**: Variables for mobile tests, including mobile platform info and application version details.
-- **[Multistep API test template variables][3]**: Variables for multistep API tests, including step name and type fields.
-- **[API test template variables][4]**: Variables for single-step API tests, with protocol-specific fields for HTTP, DNS, SSL, WebSocket, UDP, TCP, ICMP, and gRPC.
-
-[1]: /synthetics/notifications/template_variables/browser/
-[2]: /synthetics/notifications/template_variables/mobile/
-[3]: /synthetics/notifications/template_variables/multistep/
-[4]: /synthetics/notifications/template_variables/api/
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="synthetics/notifications/template_variables/browser/" >}}Browser test template variables{{< /nextlink >}}
+    {{< nextlink href="synthetics/notifications/template_variables/mobile/" >}}Mobile test template variables{{< /nextlink >}}
+    {{< nextlink href="synthetics/notifications/template_variables/multistep/" >}}Multistep API test template variables{{< /nextlink >}}
+    {{< nextlink href="synthetics/notifications/template_variables/api/" >}}API test template variables{{< /nextlink >}}
+{{< /whatsnext >}}
