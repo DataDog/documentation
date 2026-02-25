@@ -150,7 +150,7 @@ Scheduling SDK upgrades is not supported.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-language.png" alt="Select the language and version to upgrade to." style="width:100%;" >}}
 
-1. **Select the hosts on which you want to upgrade the selected SDK**. You can target a group by filtering on host information or tags.
+1. Select the hosts on which you want to upgrade the selected SDK. You can target a group by filtering on host information or tags.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-hosts.png" alt="Service selection screen with filtering options to narrow the list of services to upgrade." style="width:100%;" >}}
 
