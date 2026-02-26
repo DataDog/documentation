@@ -62,11 +62,7 @@ span.set_tag("team", "payments-backend")
 
 **Logs**
 
-Set the `team` attribute on the log:
-
-```python
-logger.error("Payment processing failed", extra={"team": "payments-backend"})
-```
+Set the `team` attribute on the log. See the [Log Collection documentation][4] for details on adding attributes to your logs.
 
 **RUM**
 
@@ -119,3 +115,4 @@ Issue Team Ownership is enabled by default for all services once the setup requi
 [1]: /integrations/guide/source-code-integration
 [2]: /integrations/github/
 [3]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[4]: /logs/log_collection/
