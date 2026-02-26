@@ -53,7 +53,6 @@ After clicking **Select Scopes**, choose the scopes for the token. Scopes are gr
 
 **Notes:**
 
-- Token names must be unique within your account.
 - PATs have a minimum expiration of 24 hours and a maximum of one year from creation.
 - All PATs require at least one scope. There is no concept of an unscoped PAT.
 
@@ -115,13 +114,13 @@ You can update the name and scopes of an existing PAT. You cannot modify the TTL
 PATs use an identifiable format that supports secret scanning and key management:
 
 ```
-ddpat_<KEY_UUID>_<SECRET>_<CHECKSUM>
+ddpat_<ALIAS>_<SECRET><CHECKSUM>
 ```
 
 | Component | Description |
 |-----------|-------------|
 | `ddpat_` | Prefix identifying the credential as a Personal Access Token |
-| `<KEY_UUID>` | The UUID of the token, for identification and management |
+| `<ALIAS>` | Base62-encoded token identifier, derived from the token UUID |
 | `<SECRET>` | 32-byte randomly generated secret |
 | `<CHECKSUM>` | CRC32 checksum following the GitHub checksum standard |
 
@@ -151,13 +150,11 @@ Manage PATs programmatically through the Datadog API:
 
 | Operation | Endpoint |
 |-----------|----------|
-| List your PATs | `GET /api/v2/current_user/pats` |
-| Create a PAT | `POST /api/v2/current_user/pats` |
-| Get a specific PAT | `GET /api/v2/current_user/pats/<PAT_ID>` |
-| Update a PAT | `PATCH /api/v2/current_user/pats/<PAT_ID>` |
-| Revoke a PAT | `DELETE /api/v2/current_user/pats/<PAT_ID>` |
-
-Administrator endpoints are available at `/api/v2/pats` for managing tokens across the organization.
+| List PATs | `GET /api/v2/personal_access_tokens` |
+| Create a PAT | `POST /api/v2/personal_access_tokens` |
+| Get a specific PAT | `GET /api/v2/personal_access_tokens/<PAT_ID>` |
+| Update a PAT | `PATCH /api/v2/personal_access_tokens/<PAT_ID>` |
+| Revoke a PAT | `DELETE /api/v2/personal_access_tokens/<PAT_ID>` |
 
 For the full API reference, see [Key Management][6].
 
