@@ -14,14 +14,14 @@ further_reading:
 
 ## Overview
 
-To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below. Either modify the previously used [Task Definition file][3] and [register your updated Task Definition][4]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
+To collect traces from your ECS containers, update the task definitions for both your Agent and your application container as described below. You can either modify the previously used [task definition file][3] and [register your updated task definition][4], or you can edit the task definition directly from the Amazon Web UI.
 
 Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
 
-There are two main options for APM connectivity, Unix Domain Socket (UDS) and the TCP/IP method of fetching the Host IP Address from the AWS Instance Metadata Service (IMDS). Datadog recommends to use the UDS option as it is the most resource efficient, does not require modifying your startup parameters nor require access to IMDS, and has the same setup per language.
+There are two options for APM connectivity: Unix Domain Socket (UDS) and the TCP/IP method of fetching the Host IP Address from the AWS Instance Metadata Service (IMDS). Datadog recommends using the UDS option as it is the most resource efficient, requires neither access to IMDS nor modifying your startup parameters, and has the same setup per language.
 
 The TCP/IP strategy should be used:
-- In Windows based environments as UDS is not supported
+- In Windows-based environments as UDS is not supported
 - If you change the `user` of the Datadog Agent container from the default root user
 - For security requirements if you cannot use [ECS Host Volumes][6] in your application containers
 
@@ -30,9 +30,9 @@ The TCP/IP strategy should be used:
 {{< tabs >}}
 {{% tab "Unix Domain Socket (UDS)" %}}
 ### Unix domain socket (UDS)
-To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][1] with the configuration below.
+To collect all traces from your running ECS containers, update your Agent's task definition from the [original ECS Setup][1] with the configuration below.
 
-Use [datadog-agent-ecs-apm-uds.json][2] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `mountPoints` and `volumes` to configure the `dd-sockets` mount. This mounts the source path of the underlying host `/var/run/datadog` into the Agent container.
+Use [datadog-agent-ecs-apm-uds.json][2] as a reference point for the required base configuration. In the task definition for Datadog Agent container, set the `mountPoints` and `volumes` to configure the `dd-sockets` mount. This mounts the source path of the underlying host `/var/run/datadog` into the Agent container.
 
 ```json
 {
@@ -70,9 +70,9 @@ The Datadog Agent will maintain socket files defaulting `/var/run/datadog/apm.so
 {{% tab "TCP" %}}
 
 ### TCP/IP
-1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][1] with the configuration below.
+1. To collect all traces from your running ECS containers, update your Agent's task definition from the [original ECS Setup][1] with the configuration below.
 
-    Use [datadog-agent-ecs-apm.json][2] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
+    Use [datadog-agent-ecs-apm.json][2] as a reference point for the required base configuration. In the task definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
 
     ```json
     {
@@ -117,7 +117,7 @@ The Datadog Agent will maintain socket files defaulting `/var/run/datadog/apm.so
 {{< /tabs >}}
 
 
-If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][4]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
+If you are updating a local file for your Agent's task definition, [register your updated task definition][4]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
 
 ## Configure your application container to submit traces to Datadog Agent
 
@@ -126,11 +126,11 @@ Follow the [setup instructions for installing the Datadog tracing library][2] fo
 
 ### Provide the UDS configuration
 
-The recommended strategy is to configure your application to communicate over the Unix Domain Socket (UDS) that the Datadog Agent is maintaining. If you are using the TCP/IP method proceed instead to the [Providing the Private IP Address](#provide-the-private-ip-address-for-the-ec2-instance) steps.
+The recommended strategy is to configure your application to communicate over the Unix Domain Socket (UDS) that the Datadog Agent is maintaining. If you are using the TCP/IP method instead, proceed to [Providing the Private IP Address](#provide-the-private-ip-address-for-the-ec2-instance).
 
-To configure this in your application's Task Definition:
-- Mirror the `dd-sockets` approach from the Datadog Agent
-- Provide the environment variables `DD_TRACE_AGENT_URL` and `DD_DOGSTATSD_URL` to target the sockets
+To configure this in your application's task definition:
+- Mirror the `dd-sockets` approach from the Datadog Agent.
+- Provide the environment variables `DD_TRACE_AGENT_URL` and `DD_DOGSTATSD_URL` to target the sockets.
 
 ```json
 {
@@ -171,10 +171,10 @@ To configure this in your application's Task Definition:
 
 **Note:** The `DD_DOGSTATSD_URL` is only necessary if you are submitting custom DogStatsD metrics or [Runtime Metrics][5].
 
-Once deployed the Application container and Datadog Agent container will share the `sourcePath` typed volume at `/var/run/datadog` and can communicate through the sockets in this folder.
+Once deployed, the Application container and Datadog Agent container will share the `sourcePath` typed volume at `/var/run/datadog` and can communicate through the sockets in this folder.
 
 ### Provide the private IP address for the EC2 instance
-If not using UDS, provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
+If you are not using UDS, provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
 Use one of the following methods to dynamically get the private IP address:
 
@@ -199,9 +199,9 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-t
 {{% /tab %}}
 {{% tab "ECS container metadata file" %}}
 
-The [Amazon's ECS container metadata file][1] allows discovery of the private IP address without making a request to IMDS. To get the private IP address for each host first turn on [Amazon ECS Container metadata][2]. Once enabled on your host the containers will have access to JSON formatted metadata file located at the path stored in the `ECS_CONTAINER_METADATA_FILE` environment variable.
+The [Amazon's ECS container metadata file][1] allows discovery of the private IP address without making a request to IMDS. To get the private IP address for each host, first turn on [Amazon ECS Container metadata][2]. Once enabled on your host, the containers will have access to the JSON formatted metadata file located at the path stored in the `ECS_CONTAINER_METADATA_FILE` environment variable.
 
-This file can be read and the value of the `HostPrivateIPv4Address` can be used as the IP address.
+This file can be read, and the value of the `HostPrivateIPv4Address` can be used as the IP address.
 
 {{< code-block lang="curl" >}}
 cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
