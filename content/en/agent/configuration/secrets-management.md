@@ -51,11 +51,11 @@ secret_backend_config:
 
 | Agent process | Description  | Version |
 |---|---|---|
-| [**Datadog Agent**](/agent/) | The main Agent process. | 7.70+ |
-| [**DogStatsD**](/developers/dogstatsd/) | Receives custom metrics from applications. Typically runs as part of the main Agent. | 7.70+ |
-| [**Trace Agent**](/tracing/) | Collects APM traces. Typically runs as part of the main Agent. | 7.70+ |
-| [**Cluster Agent**](/containers/cluster_agent/) | Collects cluster-level Kubernetes data. Enabled by default in Helm and Operator deployments. | 7.77+ |
-| [**DDOT Collector**](/opentelemetry/setup/ddot_collector/) | The Datadog Distribution of OpenTelemetry collector.<br />Resolved values are synced from the core Agent automatically using config-sync, with no separate configuration needed. | 7.70+ |
+| [**Datadog Agent**](/agent/) | The core Agent that powers Infrastructure Monitoring and Log Management. Runs on every host, VM, and container node. | 7.70+ |
+| [**DogStatsD**](/developers/dogstatsd/) | Ingests custom metrics submitted by your applications. Typically runs as part of the Datadog Agent. | 7.70+ |
+| [**APM (Trace Agent)**](/tracing/) | Powers Application Performance Monitoring (APM) by collecting traces and profiles from your applications. Typically runs as part of the Datadog Agent. | 7.70+ |
+| [**Cluster Agent**](/containers/cluster_agent/) | Powers Kubernetes and Container Monitoring at the cluster level. Enabled by default in Helm and Operator deployments. | 7.77+ |
+
 
 <div class="alert alert-info">Native secrets fetching is the recommended approach for managing secrets in the Datadog Agent. If your deployment includes other Agent processes or versions that do not support it, use <a href="#option-2-using-the-built-in-script-for-kubernetes-and-docker">Option 2</a> or <a href="#option-3-creating-a-custom-executable">Option 3</a> for those configurations.</div>
 
