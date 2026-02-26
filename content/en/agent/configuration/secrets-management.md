@@ -57,7 +57,7 @@ secret_backend_config:
 | [**Container Monitoring** (Cluster Agent)](/containers/cluster_agent/) | Powers Kubernetes and Container Monitoring at the cluster level. Enabled by default in Helm and Operator deployments. | 7.77+ |
 
 
-<div class="alert alert-info">Native secrets fetching is the recommended approach for managing secrets in the Datadog Agent. If your deployment includes other Agent processes or versions that do not support it, use <a href="#option-2-using-the-built-in-script-for-kubernetes-and-docker">Option 2</a> or <a href="#option-3-creating-a-custom-executable">Option 3</a> for those configurations.</div>
+<div class="alert alert-info">Datadog recommends native secrets fetching for managing secrets in the Datadog Agent. If your deployment includes other Agent processes or versions that do not support native secrets fetching, use <a href="#option-2-using-the-built-in-script-for-kubernetes-and-docker">Option 2</a> or <a href="#option-3-creating-a-custom-executable">Option 3</a> for those configurations.</div>
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
