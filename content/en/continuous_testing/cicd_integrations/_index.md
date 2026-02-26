@@ -41,13 +41,13 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
 
 ## Integrations
 
-With Continuous Testing and CI/CD, you can run Continuous Testing tests in any CI platform provider of choice. See the documentation for information about the following integrations:
+With Continuous Testing and CI/CD, you can run Continuous Testing tests in any CI platform provider of choice. For information on the following integrations:
 
 {{< partial name="continuous_testing/ct-cicd-integrations.html" >}}
 
 <br>
 
-Or, read more about the [Datadog CI NPM package][3].
+Or, read more about the [Datadog CI NPM package configuration][3].
 
 ## Use the CLI
 

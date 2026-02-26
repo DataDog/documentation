@@ -36,7 +36,7 @@ Parallel tests are tests that run simultaneously in your [continuous integration
 
 {{< img src="continuous_testing/parallelization_explained.png" alt="A diagram that explains the benefits of parallelization vs. sequential test runs" style="width:100%;">}}
 
-With parallelization you can:
+Use parallelization to:
 
 * Reduce pipeline duration and ship new features faster
 * Increase development confidence and speed of delivery
