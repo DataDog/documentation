@@ -16,7 +16,7 @@ The Datadog Admin Role is the highest-privileged managed role within a Datadog o
 - Billing and usage oversight
 - Governance and compliance configuration
 
-The Admin role is a managed role, which means it has the following properties:
+The Admin Role is a managed role, which means it has the following properties:
 - It is provided out-of-the-box (OOTB) in every Datadog organization.
 - It automatically receives new permissions when new Datadog features are released.
 - It inherits all permissions from lower-privilege managed roles (Standard and Read-Only).
@@ -109,7 +109,7 @@ The following permissions are assigned to the Datadog Admin Role by default. The
 
 ## API access to the Datadog Admin Role
 
-Datadog provides a public REST API that allows organizations to programmatically view and adjust many security-related configurations associated with the Datadog Admin Role. The calling API key must have sufficient RBAC permissions (typically Admin-level access).
+Datadog provides a public REST API that allows organizations to programmatically view and adjust many security-related configurations associated with the Datadog Admin Role. The calling API key must have sufficient RBAC permissions (typically administrator-level access).
 
 API access enables customers to implement automation, governance workflows, and policy-as-code controls.
 
@@ -119,7 +119,7 @@ All API requests require the following:
 - API key: Identifies the organization
 - Application key: Scoped to a user and governed by RBAC permissions
 
-The API follows Datadog RBAC exactly as the UI does. If a key does not have Admin permissions, it cannot modify Admin-level settings.
+The API follows Datadog RBAC exactly as the UI does. If a key does not have admin permissions, it cannot modify admin-level settings.
 
 ### Manage the Datadog Admin Role through the API
 
@@ -139,7 +139,7 @@ This endpoint allows organizations to:
 
 #### Add or remove users from the Datadog Admin Role
 
-User role assignments (including Admin membership) can be managed through the API:
+User role assignments (including admin membership) can be managed through the API:
 {{< code-block lang="shell">}}
 curl -X PATCH "https://api.datadoghq.com/api/v2/users/<user_id>" \
  -H "DD-API-KEY: <api_key>" \
@@ -159,11 +159,11 @@ curl -X PATCH "https://api.datadoghq.com/api/v2/users/<user_id>" \
 This endpoint enables:
 - Automated access reviews
 - Just-in-time elevation workflows
-- Removal of Admin access during offboarding
+- Removal of administrator access during offboarding
 
 #### Manage API and application keys
 
-Datadog Admin users can create, rotate, or delete API and Application keys through the API.
+Datadog administrators can create, rotate, or delete API and Application keys through the API.
 
 ##### Create an application key
 {{< code-block lang="shell">}}
@@ -218,11 +218,11 @@ Several authentication and identity settings must be managed through the Datadog
 - Password complexity policy
 - SAML configuration
 
-Typically, administrators manage these controls within Datadog organization settings in the UI or through your identity provider (for example, Okta or Azure AD).
+Typically, administrators manage these controls within the Datadog organization settings in the UI or through their identity provider (for example, Okta or Azure AD).
 
 ## Security considerations
 
-The Admin role can perform the following sensitive actions:
+The Datadog Admin role can perform the following sensitive actions:
 - Delete telemetry and monitoring data
 - Modify ingestion and retention policies
 - Control billing and subscription settings
