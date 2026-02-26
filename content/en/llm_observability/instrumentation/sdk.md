@@ -403,7 +403,7 @@ Span kinds are required, and are specified on the `options` object passed to the
 
 ### Automatic function argument/output/name capturing
 
-`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for TypeScript) tries to automatically capture inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
+`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for TypeScript) tries to automatically capture inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Enriching spans](#enriching-spans). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -1016,7 +1016,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% tab "Python" %}}
 To trace an embedding operation, use the function decorator `LLMObs.embedding()`.
 
-**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
+**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify embedding inputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1057,7 +1057,7 @@ def perform_embedding():
 {{% tab "Node.js" %}}
 To trace an embedding operation, specify the span kind as `embedding`, and optionally specify arguments on the options object.
 
-**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
+**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify embedding inputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1103,7 +1103,7 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 {{% tab "Python" %}}
 To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators.retrieval()`.
 
-**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
+**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify retrieval outputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1144,7 +1144,7 @@ def get_relevant_docs(question):
 
 To trace a retrieval span, specify the span kind as `retrieval`, and optionally specify the following arguments on the options object.
 
-**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
+**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify retrieval outputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1164,7 +1164,7 @@ To trace a retrieval span, specify the span kind as `retrieval`, and optionally 
 
 #### Example
 
-The following also includes an example of annotating a span. See [Annotating a span](#annotating-a-span) for more information.
+The following also includes an example of annotating a span. See [Enriching spans](#enriching-spans) for more information.
 
 {{< code-block lang="javascript" >}}
 function getRelevantDocs (question) {
@@ -1782,7 +1782,7 @@ Attach structured prompt metadata to the LLM span so you can reproduce results, 
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#annotating-a-span).
+Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Enriching spans](#enriching-spans).
 
 #### Arguments
 
@@ -1841,15 +1841,71 @@ translation_template = PromptTemplate.from_template("Translate {text} to {langua
 chain = translation_template | llm
 {{< /code-block >}}
 
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+Use `llmobs.annotationContext({ prompt: ... }, () => { ... })` to attach prompt metadata before the LLM call. For more details on span annotation, see [Enriching spans](#enriching-spans).
+
+#### Arguments
+
+{{% collapse-content title="Options" level="h4" expanded=false id="prompt-tracking-arguments" %}}
+
+`prompt`
+: required - object
+<br />An object that follows the Prompt schema below.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Prompt structure" level="h4" expanded=false id="prompt-structure" %}}
+
+Supported properties:
+
+- `id` (string): Logical identifier for this prompt. Should be unique per `ml_app`. Defaults to `{ml_app}-unnamed_prompt`
+- `version` (string): Version tag for the prompt (for example, "1.0.0"). See [version tracking](#version-tracking) for more details.
+- `variables` (Record<string, string>): Variables used to populate the template placeholders.
+- `template` (string | List[Message]): Template string with placeholders (for example, `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` objects.
+- `tags` (Record<string, string>): Tags to attach to the prompt run.
+- `contextVariables` (string[]): Variable keys that contain ground-truth/context content. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+- `queryVariables` (string[]): Variable keys that contain the user query. Used for [hallucination detection](/llm_observability/evaluations/managed_evaluations/?tab=openai#hallucination).
+
+{{% /collapse-content %}}
+
+#### Example: single-template prompt
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+function answerQuestion(text) {
+    // Attach prompt metadata to the upcoming LLM span using LLMObs.annotation_context()
+    return llmobs.annotationContext({
+      prompt: {
+        id: "translation-template",
+        version: "1.0.0",
+        chat_template: [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
+        variables: {"lang": "fr", "text": text},
+        tags: {"team": "nlp"}
+      }
+    }, () => {
+      // Example provider call (replace with your client)
+      return openaiClient.chat.completions.create({
+          model: "gpt-4o",
+          messages: [{"role": "user", "content": f"Translate to fr: {text}"}]
+        });
+    });
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 #### Notes
 - Annotating a prompt is only available on LLM spans.
 - Place the annotation immediately before the provider call so it applies to the correct LLM span.
 - Use a unique prompt `id` to distinguish different prompts within your application.
 - Keep templates static by using placeholder syntax (like `{{variable_name}}`) and define dynamic content in the `variables` section.
-- For multiple auto-instrumented LLM calls within a block, use `LLMObs.annotation_context(prompt=...)` to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
-
-{{% /tab %}}
-{{< /tabs >}}
+- For multiple auto-instrumented LLM calls within a block, use an annotation context to apply the same prompt metadata across calls. See [Annotating auto-instrumented spans](#annotating-auto-instrumented-spans).
 
 ### Version tracking
 
@@ -1870,7 +1926,7 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 {{< tabs >}}
 {{% tab "Python" %}}
 
-#### Use case: Using a common model provider 
+#### Use case: Using a common model provider
 Datadog supports common model providers such as OpenAI, Azure OpenAI, Anthropic, and Google Gemini. When using these providers, you only need to annotate your LLM request with `model_name`, `model_provider`, and token usage. Datadog automatically calculates the estimated cost based on the provider's pricing.
 
 {{< code-block lang="python" >}}
@@ -1883,8 +1939,8 @@ def llm_call(prompt):
     # Annotate token metrics
     LLMObs.annotate(
         metrics={
-          "input_tokens": 50, 
-          "output_tokens": 120, 
+          "input_tokens": 50,
+          "output_tokens": 120,
           "total_tokens": 170,
           "non_cached_input_tokens": 13,  # optional
           "cache_read_input_tokens": 22,  # optional
@@ -1907,8 +1963,8 @@ def llm_call(prompt):
     # Annotate cost metrics
     LLMObs.annotate(
         metrics={
-          "input_cost": 3, 
-          "output_cost": 7, 
+          "input_cost": 3,
+          "output_cost": 7,
           "total_cost": 10,
           "non_cached_input_cost": 1,    # optional
           "cache_read_input_cost": 0.6,  # optional
@@ -1925,6 +1981,8 @@ def llm_call(prompt):
 ## Evaluations
 
 The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
+
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
@@ -2000,11 +2058,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be `categorical`, `score`, or `boolean`.
+<br />The type of the evaluation. Must be `categorical`, `score`, `boolean` or `json`.
 
 `value`
-: required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), or boolean (`metric_type==boolean`).
+: required - _string, numeric type, or dict_
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), boolean (`metric_type==boolean`), or dict (`metric_type==json`).
 
 `span`
 : optional - _dictionary_
@@ -2035,6 +2093,10 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 `reasoning`
 : optional - _string_
 <br />A text explanation of the evaluation result.
+
+`metadata`
+: optional - _dictionary_
+<br />A dictionary containing arbitrary structured metadata associated with the evaluation result.
 {{% /collapse-content %}}
 
 #### Example
@@ -2064,7 +2126,8 @@ def llm_call():
         value=10,
         tags={"evaluation_provider": "ragas"},
         assessment="fail",
-        reasoning="Malicious intent was detected in the user instructions."
+        reasoning="Malicious intent was detected in the user instructions.",
+        metadata={"details": ["jailbreak", "SQL injection"]}
     )
 
     # joining an evaluation to a span via span ID and trace ID
@@ -2077,7 +2140,8 @@ def llm_call():
         value=10,
         tags={"evaluation_provider": "ragas"},
         assessment="fail",
-        reasoning="Malicious intent was detected in the user instructions."
+        reasoning="Malicious intent was detected in the user instructions.",
+        metadata={"details": ["jailbreak", "SQL injection"]}
     )
     return completion
 {{< /code-block >}}
@@ -2110,15 +2174,27 @@ The `evaluationOptions` object can contain the following:
 
 `metricType`
 : required - _string_
-<br />The type of the evaluation. Must be one of "categorical" or "score".
+<br />The type of the evaluation. Must be one of "categorical", "score", "boolean" or "json".
 
 `value`
 : required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (for categorical `metric_type`) or number (for score `metric_type`).
+<br />The value of the evaluation. Must be a string (for categorical `metric_type`), number (for score `metric_type`), boolean (for boolean `metric_type`), or a JSON object (for json `metric_type`).
 
 `tags`
 : optional - _dictionary_
 <br />A dictionary of string key-value pairs that users can add as tags regarding the evaluation. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment`
+: optional - _string_
+<br />An assessment of this evaluation. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the evaluation result.
+
+`metadata`
+: optional - _dictionary_
+<br />A JSON object containing arbitrary structured metadata associated with the evaluation result.
 {{% /collapse-content %}}
 
 #### Example

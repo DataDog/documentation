@@ -22,6 +22,7 @@ CloudPrem is Datadog BYOC log management solution which offers a cost-effective 
   {{< nextlink href="/cloudprem/install/" >}}Installation - Deploy CloudPrem on AWS, Azure, or custom Kubernetes{{< /nextlink >}}
   {{< nextlink href="/cloudprem/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to CloudPrem{{< /nextlink >}}
   {{< nextlink href="/cloudprem/operate/search_logs" >}}Search Logs - Explore your logs in the Datadog Log Explorer{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/guides/" >}}Guides - Step-by-step guides for CloudPrem features and integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

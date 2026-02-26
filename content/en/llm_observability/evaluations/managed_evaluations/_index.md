@@ -47,7 +47,10 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
+LLM Observability does not support [data residency][2] for OpenAI.
+
 [1]: https://app.datadoghq.com/llm/settings/integrations
+[2]: https://platform.openai.com/docs/guides/your-data#which-models-and-features-are-eligible-for-data-residency
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
@@ -91,9 +94,15 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 1. Select **Connect** on the Amazon Bedrock tile.
 1. Follow the instructions on the tile.
 
-{{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="The Amazon Bedrock configuration tile in LLM Observability. Lists instructions for configuring Amazon Bedrock." style="width:100%;" >}}
+   {{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="The Amazon Bedrock configuration tile in LLM Observability. Lists instructions for configuring Amazon Bedrock." style="width:100%;" >}}
+
+4. Be sure to configure the **Invoke models from Amazon Bedrock** role to run evaluations. More details about the InvokeModel action can be found in the [Amazon Bedrock API reference documentation][2].
+
+
+   {{< img src="llm_observability/configuration/amazon-bedrock-tile-step-2.png" alt="The second step in configuring Amazon Bedrock requiring users to add permissions to the integration account." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
+[2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
 {{% /tab %}}
 
 {{% tab "GCP Vertex AI" %}}
@@ -117,7 +126,6 @@ Connect Vertex AI to LLM Observability with your Google Cloud Platform account. 
 
 {{% tab "AI Gateway" %}}
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you only connect to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
-<div class="alert alert-info">This feature is in Private Preview. Contact your account team for access.</div>
 
 Your AI Gateway must be compatible with the [OpenAI API specification][2].
 
@@ -131,7 +139,7 @@ Connect your AI Gateway to LLM Observability with your base URL, API key, and he
    - Provide your base URL.
    - Provide your API key and optionally any headers.
 
-{{< img src="llm_observability/configuration/ai-gateway-tile-2.png" alt="The AI Gateway configuration tile in LLM Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
+{{< img src="llm_observability/configuration/ai-gateway-tile-3.png" alt="The AI Gateway configuration tile in LLM Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/api-reference/introduction

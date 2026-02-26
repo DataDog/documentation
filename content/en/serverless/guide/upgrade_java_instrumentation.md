@@ -22,6 +22,6 @@ Datadog Lambda layers `dd-trace-java:5` and `Datadog-Extension:25` introduce the
 [2]: https://github.com/DataDog/datadog-lambda-java
 [3]: /serverless/installation/java/?tab=datadogcli
 [4]: /serverless/installation/java/?tab=serverlessframework
-[5]: /developers/dogstatsd/?tab=hostagent&code-lang=java
+[5]: /extend/dogstatsd/?tab=hostagent&code-lang=java
 [6]: /serverless/custom_metrics/?code-lang=java#with-the-datadog-lambda-extension
 [7]: /serverless/custom_metrics#understanding-distribution-metrics

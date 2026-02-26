@@ -143,6 +143,10 @@ nav_sections:
         link: tests/
         icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests
+      - title: Code Coverage
+        link: code_coverage/
+        icon: ci
+        desc: Visualize coverage data trends and block PR merges based on coverage thresholds
       - title: Security
         link: security/
         icon: security-platform
@@ -186,10 +190,10 @@ nav_sections:
         link: data_security/
         icon: security-lock
         desc: Learn how Datadog protects your data
-      - title: Developers
-        link: developers/
+      - title: Extend Datadog
+        link: extend/
         icon: dev-code
-        desc: Develop on the Datadog platform
+        desc: Extend the Datadog platform
       - title: Partners
         link: partners/
         icon: colab

@@ -2,6 +2,7 @@
 title: Anomalies Page
 aliases:
 - /cloud_cost_management/reporting/anomalies
+- /cloud_cost_management/anomalies
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

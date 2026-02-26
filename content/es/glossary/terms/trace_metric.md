@@ -16,7 +16,7 @@ Las métricas de traza se pueden exportar a un dashboard desde la página de **S
 Las métricas de traza son útiles para la monitorización. Los monitores de APM se pueden configurar en la página de [Monitores nuevos][3], [Servicio][4] o [Recurso][5]. Un conjunto de monitores sugeridos se encuentra disponible en la página de [Servicio][4] o [Recurso][5].
 
 
-[1]: /es/developers/guide/data-collection-resolution-retention/
+[1]: /es/extend/guide/data-collection-resolution/
 [2]: https://app.datadoghq.com/metric/summary
 [3]: https://app.datadoghq.com/monitors
 [4]: /es/tracing/services/service_page/

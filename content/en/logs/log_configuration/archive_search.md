@@ -14,12 +14,12 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No re-indexing, no delays. Instantly access years of data when you need it.
+Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
 {{< /callout >}}
 
 ## Overview
 
-Archive Search lets you query logs directly from long-term object storage archives, without indexing them in advance. Use Archive Search for **immediate access to archived logs**, for investigations, audits, or troubleshooting beyond your indexing retention period.
+Archive Search lets you query logs directly from long-term object storage archives, without rehydrating them in advance. Use Archive Search for **immediate access to archived logs**, for investigations, audits, or troubleshooting beyond your indexing retention period.
 
 Archive Search differs from Rehydration by streaming results in real time as data is scanned, rather than running as a background batch job. It's more cost-effective, charging only for the scan itself with the first 100,000 logs retained temporarily at no cost, and faster.
 
@@ -27,7 +27,7 @@ When you launch a search:
 
 * Logs stream into a dedicated results page.
 * Up to **100,000 logs** are retained for **24 hours**.
-* You can optionally **index results** before or after the search to keep them longer and make them available throughout Datadog.
+* You can optionally **Rehydrate results** before or after the search to keep them longer and make them available throughout Datadog.
 
 This feature supports logs archived through:
 
@@ -60,6 +60,8 @@ Before using Archive Search:
 
 ### Permissions
 
+Running an **Archive Search** requires the **`logs_write_historical_views`** permission. It is a **global** permission, but users can only search logs from archives for which they also have the **Logs Read Archive** permission.
+
 Archive Search results are visible to all users in your organization who have access to the Archive Search feature. However, **restriction queries**, such as log security filters and data restrictions configured in Datadog, are still enforced on the result page and apply to all users. This means each user may only see logs they are authorized to view based on organization-wide permissions and filters.
 
 For more information on access controls and log security, see [How to Set Up RBAC for Logs][6].
@@ -70,28 +72,30 @@ For more information on access controls and log security, see [How to Set Up RBA
 2. Select an Archive and time range.
 3. Enter a query, such as `user_id:abc123`.
 4. (Optional) Rename the search.
-5. (Optional) Enable indexing before launching the search.
+5. Under **Mode**, choose the kind of search you want to perform.
+   - Choose **Search** to limit your search to the last 100,000 logs from the last 24 hours.
+   - Choose **Search & Rehydration** to specify your own volume and time limit for your search.
 6. Click **Search**.
 
-Logs stream into the results page in real time. A progress bar shows scan status, and you can stop the search at any time.
+Logs stream into the results page in real time. A progress bar shows scan status, and you can cancel the search at any time.
 
 ## Query preview
 
-When you create or configure a search, Datadog downloads a small sample (up to 1,000 logs) from the selected archive and time range.
+When you perform a search, Datadog downloads a small sample (up to 1,000 logs) from the selected archive and time range.
 Use this preview to verify query syntax, inspect log structure, and adjust filters.
 
 **Note**: The preview sample may not include logs that match your query. It is for validation and exploration only.
 
 ## View and retain results
 
-By default, you are charged only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly in Archive Search results pages, where you can click on any log to see its full details and context. After 24 hours, results expire automatically.
+By default, you are charged only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly from the Archive Search results page, where you can click on any log to see its full details and context. After 24 hours, results expire automatically.
 
 To retain more data or access logs in other Datadog products, choose one of the following:
 
-- **Index before launch**:
+- **Rehydrate before launch**:
   Retain more than 100,000 logs, set a custom retention period (for example, 7, 15, or 30 days), and access results across the platform immediately.
-- **Index after completion**:
-  During the 24-hour window, you can index results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
+- **Rehydrate after completion**:
+  During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
 
 ## Analyze results
 
@@ -104,8 +108,7 @@ While Archive Search provides access to archived logs, it has limited analytical
 - **No aggregations or analytics**: You cannot run aggregations, create visualizations, or perform advanced analytics directly on Archive Search results.
 - **Results page only**: Archive Search results are only available in the dedicated results page and cannot be queried from other parts of the Datadog platform (such as Dashboards, Notebooks, or Log Explorer).
 
-To enable full analytics and platform-wide visibility, you need to index the search results (either before launching the search or after completion within the 24-hour window). When indexed, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
-
+To enable full analytics and platform-wide visibility, you need to rehydrate the search results (either before launching the search or after completion within the 24-hour window). When rehydrated, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
 
 ## Manage searches
 
@@ -113,7 +116,7 @@ To enable full analytics and platform-wide visibility, you need to index the sea
 
 From the [**Archive Search list view**][5], you can:
 
-- **Stop** a running search: preserves logs already retrieved.
+- **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
 ## Search performance and scan volume
@@ -121,8 +124,16 @@ From the [**Archive Search list view**][5], you can:
 Archive Search scans archived log files within the selected time range. **Scan volume** is the total size of those files read during the query. Large scan volumes can increase search time and cost.
 
 To improve query performance and reduce scan volume:
-- Narrow the time range and use selective filters.
-- Administrators with **Logs Write Archives** permission can set maximum log limits and available retention durations.
+- Narrow the time range.
+- Administrators with **Logs Write Archives** permission can set maximum scan size per Archive.
+
+### Default limit for Rehydration of Results
+
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Archive Search * across teams. Click **Settings** to configure:
+
+- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+
+- **Rehydration retention periods**: Choose which retention periods are available when creating Archive Search. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ## Cloud-specific permissions
 

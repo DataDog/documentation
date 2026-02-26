@@ -49,7 +49,7 @@ Los dashboards proporcionan información en tiempo real sobre el rendimiento y e
     {{< nextlink href="/dashboards/configure" >}}Configuración: Información general sobre las opciones de configuración de dashboards{{< /nextlink >}}
     {{< nextlink href="/dashboards/list" >}}Lista de dashboards: Búsqueda, visualización o creación de dashboards y listas{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Variable de plantilla: Filtrado dinámico de widgets en un dashboard{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/datadog_clipboard/" >}}Portapapeles de Datadog{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/datadog_clipboard/" >}}Portapapeles de Datadog{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Gestión de dashboards mediante programación{{< /nextlink >}}
 {{< /whatsnext >}}
 
