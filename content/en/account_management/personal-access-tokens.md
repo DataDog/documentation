@@ -32,7 +32,7 @@ With PATs, you can:
 
 ## Prerequisites
 
-- A Datadog account with the `user_app_keys` permission to create your own PATs.
+- A Datadog user account with the `user_app_keys` permission to create your own PATs.
 - To manage PATs for other users in the organization, you need the `org_app_keys_write` permission.
 
 ## Create a Personal Access Token
@@ -41,13 +41,9 @@ With PATs, you can:
 2. Click **+ New Access Token**.
 3. Enter a **Name** for the token.
 4. Select an **Expiration Date**. The minimum expiration is 24 hours and the maximum is one year from creation.
-5. Click **Select Scopes** to choose the scopes that define what this token can access. Grant only the permissions your workflow requires.
+5. Click **Select Scopes** to choose the scopes that define what this token can access. Grant only the permissions your workflow requires, then click **Save**.
 
 {{< img src="account_management/personal-access-tokens/pat-create.png" alt="Create a Personal Access Token by entering a name and selecting an expiration date" style="width:80%;" >}}
-
-After clicking **Select Scopes**, choose the scopes for the token. Scopes are grouped by product area and can be filtered by name. Select only the scopes your workflow requires, then click **Save**.
-
-{{< img src="account_management/personal-access-tokens/pat-scopes.png" alt="Select scopes for a Personal Access Token from the scope selection dialog" style="width:80%;" >}}
 
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time. Copy and store it securely. You cannot retrieve it later.</div>
 
@@ -71,15 +67,14 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 
 ### Application key header
 
-Pass the PAT in the `dd-application-key` header. When you use this method, you **must** also provide an API key in the `dd-api-key` header:
+Pass the PAT in the `dd-application-key` header. This is useful for migrating existing integrations that already use the application key header format:
 
 ```bash
 curl -X GET "https://api.datadoghq.com/api/v2/users" \
-  -H "dd-api-key: <DATADOG_API_KEY>" \
   -H "dd-application-key: <YOUR_PAT>"
 ```
 
-**Note:** If you provide both an API key and a PAT, Datadog resolves only the PAT for authentication and does not use the API key for authorization.
+**Note:** When a valid PAT is provided in the `dd-application-key` header, Datadog authenticates with the PAT only. The `dd-api-key` header is optional and its value is not evaluated.
 
 ## Manage Personal Access Tokens
 
