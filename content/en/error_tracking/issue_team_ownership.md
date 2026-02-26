@@ -52,7 +52,7 @@ You can programmatically assign team ownership at the time an error is raised by
 
 **Note**: After a team is assigned to an issue through the `team` attribute, the assignment is immutable.
 
-**APM**
+### APM
 
 Set the `team` attribute on the span:
 
@@ -60,11 +60,11 @@ Set the `team` attribute on the span:
 span.set_tag("team", "payments-backend")
 ```
 
-**Logs**
+### Logs
 
 Set the `team` attribute on the log. See the [Log Collection documentation][4] for details on adding attributes to your logs.
 
-**RUM**
+### RUM
 
 Set the `team` attribute on the RUM event:
 
