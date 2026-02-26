@@ -17,7 +17,7 @@ Personal Access Tokens (PATs) are a credential type that authenticates Datadog A
 With PATs, you can:
 - **Authenticate API calls with a single credential**—no API key required.
 - **Enforce the principle of least privilege** by selecting only the scopes your workflow needs.
-- **Limit the blast radius of leaked credentials** through mandatory time-to-live (TTL) values.
+- **Limit the blast radius of leaked credentials** through mandatory time-to-live (TTL) values. Expired tokens are automatically revoked, so inactive credentials do not persist indefinitely.
 - **Separate concerns**: reserve API keys for telemetry submission (Agent, logs, metrics) and use PATs for all other web API calls.
 
 ### PATs compared to application keys
