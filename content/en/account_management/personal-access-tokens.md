@@ -27,7 +27,7 @@ With PATs, you can:
 | Standalone authentication | Yes—no API key pairing needed | No—requires an API key |
 | Scoped by default | Yes—scopes are mandatory | Optional—unscoped by default |
 | Time-to-live (TTL) | Required (24 hours to one year) | No expiration |
-| Identifiable prefix | Yes—`ddpat_` | No |
+| Identifiable prefix | Yes—`ddpat_` | Yes—`ddap_` |
 | Linked to | Individual user | Individual user |
 
 ## Prerequisites
