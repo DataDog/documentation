@@ -12,15 +12,15 @@ further_reading:
   text: "Learn more about Cloud Security Vulnerabilities"
 ---
 
-{{< frontier-signup-cta header="Join the frontier group" hide_image="true" btn_title="Sign Up" btn_url="https://frontier-signup.vercel.app/">}}
-  An opt-in program where you get access to the newest AI features we’re developing. We’ll only enable what we’re comfortable enabling for our own internal security team. 
-{{< /frontier-signup-cta >}}
+{{< learning-center-callout header="Join the frontier group" hide_image="true" btn_title="Sign Up" btn_url="https://frontier-signup.vercel.app/">}}
+  An opt-in program that provides access to the newest AI features in development, enabled only after validation by the Datadog internal security team.
+{{< /learning-center-callout >}}
 
 ## What's included
 
 ### Ownership agent
 **Status: available for frontier partners**
-Automated inference on who owns a particular resource and should be responsible for remediating it. 
+Automated inference on who owns a particular resource and should be responsible for remediating it.
 
 ### 1-click CSPM remediation
 *Status: available for frontier partners*
@@ -36,11 +36,11 @@ CI/CD vulnerability scans, command line integrations for agentic feedback.
 
 ### Container public accessibility
 *Status: coming soon*
-More accurate public access evaluations of containers via EKS and runtime data.
+More accurate public access evaluations of containers through EKS and runtime data.
 
 ### Critical assets
 *Status: coming soon*
-Automatic critical asset inference based on observability data, overridable via manual queries.
+Automatic critical asset inference based on observability data, overridable through manual queries.
 
 ## Further Reading
 
