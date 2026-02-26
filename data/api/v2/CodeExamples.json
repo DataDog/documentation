@@ -2008,6 +2008,11 @@
   "UpsertCatalogEntity": [
     {
       "group": "software_catalog",
+      "suffix": "",
+      "description": "Create or update entities returns \"ACCEPTED\" response"
+    },
+    {
+      "group": "software_catalog",
       "suffix": "_586948155",
       "description": "Create or update software catalog entity using schema v3 returns \"ACCEPTED\" response"
     }
