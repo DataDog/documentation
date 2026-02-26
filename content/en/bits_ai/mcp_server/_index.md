@@ -64,6 +64,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans
+- `product-analytics`: Tools for interacting with [Product Analytics][35] queries
 - `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
@@ -662,3 +663,4 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [32]: /network_monitoring/devices/
 [33]: /security/threats/security_signals/
 [34]: /security/misconfigurations/findings/
+[35]: /product_analytics

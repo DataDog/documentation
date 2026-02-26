@@ -1,0 +1,108 @@
+// Message action buttons (thumbs up/down/copy) + inline status
+.conv-search-message-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2px;
+    margin-top: 6px;
+}
+
+.conv-search-action-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: rgba($conv-search-text-muted, 0.6);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+        background: $conv-search-surface;
+        color: $conv-search-text-muted;
+    }
+
+    &:active {
+        transform: scale(0.92);
+    }
+
+    &.active {
+        background: rgba($conv-search-purple, 0.08);
+        color: $conv-search-purple;
+
+        &:hover {
+            background: rgba($conv-search-purple, 0.12);
+        }
+
+        img,
+        svg {
+            filter: invert(20%) sepia(77%) saturate(1858%) hue-rotate(258deg) brightness(75%) contrast(96%);
+        }
+    }
+
+    svg,
+    img {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.conv-search-feedback-inline {
+    margin-left: 8px;
+    min-height: 18px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: opacity 0.15s ease, background 0.15s ease;
+
+    &.feedback-success,
+    &.feedback-error {
+        opacity: 1;
+        animation: conv-search-feedback-reveal 0.28s ease-out;
+    }
+
+    &.feedback-success {
+        color: #3d2a5a;
+        background: rgba($conv-search-purple, 0.1);
+    }
+
+    &.feedback-error {
+        color: #9f1f17;
+        background: rgba(#c0392b, 0.12);
+    }
+}
+
+@keyframes conv-search-feedback-reveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        transform: translateX(-4px);
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .conv-search-feedback-inline {
+        transition: none;
+    }
+
+    .conv-search-feedback-inline.feedback-success,
+    .conv-search-feedback-inline.feedback-error {
+        animation: none;
+    }
+}

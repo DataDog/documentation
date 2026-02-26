@@ -185,9 +185,9 @@ Each gate has the following fields:
   - `patch_coverage_percentage`: The minimum coverage percentage on code changed in the pull request.
 - `config` (required): Gate configuration options. Supported values:
   - `threshold` (required): The minimum coverage percentage (0-100).
-  - `services`: (optional) A list of service name patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching service.
-  - `codeowners`: (optional) A list of code owner patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching code owner.
-  - `flags`: (optional) A list of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. When set, coverage is evaluated separately for each matching flag.
+  - `services`: (optional) A list of service name patterns to scope the gate to. Use `*` as a wildcard. Prefix a value with `!` to exclude matching services. When set, coverage is evaluated separately for each matching service.
+  - `codeowners`: (optional) A list of code owner patterns to scope the gate to. Use `*` as a wildcard. Prefix a value with `!` to exclude matching code owners. When set, coverage is evaluated separately for each matching code owner.
+  - `flags`: (optional) A list of [flag][3] name patterns to scope the gate to. Use `*` as a wildcard. Prefix a value with `!` to exclude matching flags. When set, coverage is evaluated separately for each matching flag.
 
 ### Examples
 
@@ -264,6 +264,27 @@ gates:
       threshold: 90
       flags:
         - "integration-tests"
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Excluding with negation" level="h4" %}}
+Use the `!` prefix to exclude specific services, code owners, or flags from a gate. For example, to enforce coverage on all services except experimental ones, and on all flags except nightly tests:
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+gates:
+  - type: total_coverage_percentage
+    config:
+      threshold: 80
+      services:
+        - "*"
+        - "!experimental-*"
+
+  - type: patch_coverage_percentage
+    config:
+      threshold: 90
+      flags:
+        - "*"
+        - "!nightly-*"
 {{< /code-block >}}
 {{% /collapse-content %}}
 

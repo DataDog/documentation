@@ -5199,21 +5199,26 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 505
+    - name: MCP Server
+      url: llm_observability/mcp_server
+      parent: llm_obs
+      identifier: llm_obs_mcp_server
+      weight: 6
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 6
+      weight: 7
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 7
+      weight: 8
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 9
     - name: CI Visibility
       url: continuous_integration/
       pre: ci

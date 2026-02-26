@@ -1,0 +1,128 @@
+// Home Page Search Row (search bar + AI button inline)
+.home-search-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 13px;
+
+    .nav-search-wrapper {
+        flex: 0 1 auto;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+    }
+
+    .searchbox-container {
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 991px) {
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .nav-search-wrapper {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+.home-ai-divider {
+    display: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    font-weight: 400;
+
+    .conv-search-enabled & {
+        display: inline;
+
+        @media (max-width: 991px) {
+            display: none;
+        }
+    }
+}
+
+.home-ai-btn {
+    $home-ai-main: rgb(79, 35, 132);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 16px;
+    height: 38px;
+    border: none;
+    border-radius: 4px;
+    background: lighten($home-ai-main, 4%);
+    color: white;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    overflow: hidden;
+    transition: background 0.15s ease;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: conic-gradient(
+            from 180deg,
+            rgba(177, 141, 255, 0.95) 0deg,
+            rgba(152, 111, 245, 0.92) 110deg,
+            rgba(126, 82, 225, 0.9) 220deg,
+            rgba(177, 141, 255, 0.95) 360deg
+        );
+        mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    @supports not ((-webkit-mask-composite: xor) or (mask-composite: exclude)) {
+        border: 1px solid rgba(139, 108, 246, 0.65);
+
+        &::before {
+            display: none;
+        }
+    }
+
+    .conv-search-enabled & {
+        display: inline-flex;
+    }
+
+    span, svg, img {
+        position: relative;
+        z-index: 1;
+    }
+
+    svg, img {
+        flex-shrink: 0;
+        width: 15px;
+        height: 15px;
+        filter: brightness(0) invert(1);
+    }
+
+    &:hover {
+        background: $home-ai-main;
+    }
+
+    &:active {
+        background: darken($home-ai-main, 4%);
+    }
+}

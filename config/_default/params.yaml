@@ -311,6 +311,7 @@ unsupported_sites:
   incident_ai: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
+  jira_error_tracking: [gov]
   linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
