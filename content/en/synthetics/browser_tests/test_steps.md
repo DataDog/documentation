@@ -256,8 +256,8 @@ Create this interaction step to simulate dragging an element from one location t
 |--------|-------------|
 | **User Specified Locator** (optional) | A custom CSS or XPath selector when the recorder picks the wrong element. See [When to use a custom locator](#when-to-use-a-custom-locator-optional) below. |
 | **Interaction Point** | Where on the element the action occurs: **Center** (default) or **Offset (Top-Left)**. |
-| **Delay before drag** | Pause between mouse press and start of drag. |
-| **Delay before drop** | Pause after reaching the drop target before release. Increase for animated or complex UIs. |
+| **Delay before drag** | Pause between mouse press and start of drag (default 0ms). |
+| **Delay before drop** | Pause after reaching the drop target before release (default 0ms). Increase for animated or complex UIs. |
 
 #### When to use a custom locator (optional)
 
