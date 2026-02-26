@@ -22,15 +22,15 @@ Datadog provides a range of features for controlling which users can see and int
 
 ## Access control features
 
-| Feature | Description | Availability | Documentation |
-|---------|-------------|--------------|---------------|
-| Data Access Control policies | Restricts datasets to specific Teams. | See supported products [here][1]. | [Data Access Control][2] |
-| Hierarchical Team Access | Supports nesting teams within each other. Sub-teams inherit the roles and permissions of their parent teams, as well as access to restricted datasets or resources. | [Dataset access][3] and [resource access][4] | [Hierarchical Teams][5] |
-| Individual Resource Restrictions | Restricts access to specific dashboards and monitors to members of a specified Team. | See supported products [here][4]. | [Granular Access Control][6] |
-| Personalized Team Views | Filters information in Datadog by Team without revoking access. | See supported products [here][4] | [Team filter][7] |
-| Team-based Restriction Policies | Restricts editing access to Teams identified by the `team:` tag. | Preview; supported for [Monitors][8] and [Dashboards][9] | Available for Preview orgs |
-| Team Tag Enforcement Policies | Enforces Team tag requirements for newly created monitors. | Supported for [Monitors][8] | [Monitors Tag Policy][10] |
-| Team-linked Roles | Assigns roles to a Team. All Team members receive the role, including its permissions and any granted access. | Preview | Available for Preview orgs |
+| Feature | Supported Products | Description |
+|---------|--------------|-------------|
+| [Data Access Control policies][2] | [Telemetry types][1] | Restricts datasets to specific Teams. |
+| [Hierarchical Team Access][5] | [Dataset access][3] [Resource access][4] | Supports nesting teams within each other. Sub-teams inherit the roles and permissions of their parent teams, as well as access to restricted datasets or resources. |
+| [Individual Resource Restrictions][6] | [Resource list][4] | Restricts access to specific dashboards and monitors to members of a specified Team. |
+| [Personalized Team Views][7] | [Resource list][4] | Filters information in Datadog by Team without revoking access. |
+| Team-based Restriction Policies (in Preview) | [Monitors][8] [Dashboards][9] | Restricts editing access to Teams identified by the `team:<>` tag. |
+| [Team Tag Enforcement Policies][10] | [Monitors][8] | Enforces Team tag requirements for newly created monitors. |
+| Team-linked Roles (in Preview) | N/A | Assigns roles to a Team. All Team members inherit the role, including its permissions and any granted access. |
 
 ## Further reading
 
