@@ -48,6 +48,6 @@ More accurate public access evaluations of containers through EKS and runtime da
 ***Status:*** *coming soon*<br>
 Automatic critical asset inference based on observability data, overridable through manual queries.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
