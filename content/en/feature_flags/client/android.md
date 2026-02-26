@@ -19,7 +19,7 @@ further_reading:
 
 This page describes how to instrument your Android or Android TV application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
-The Datadog Feature Flags SDK uses the industry-standard [OpenFeature](https://openfeature.dev/) API, giving you a vendor-neutral, future-proof integration that follows community-driven standards.
+The Datadog Feature Flags SDK for Android is built on [OpenFeature][1], an open standard for feature flag management. This guide explains how to install the SDK, configure the Datadog provider, and evaluate flags in your application.
 
 <div class="alert alert-info">For most applications, the OpenFeature API is the right choice. If you need multiple independent evaluation contexts in the same app, see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a> at the end of this guide.</div>
 
@@ -434,3 +434,5 @@ print(details.errorCode)  // The error that occurred during evaluation, if any
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://openfeature.dev/
