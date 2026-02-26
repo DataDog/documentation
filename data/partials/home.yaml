@@ -18,79 +18,138 @@ guides:
 nav_sections:
     # For a better rendering, sections should include sub-sections with multiple of 4.
   - nav_section:
-    - name: 'Platform Services'
+    - name: 'Platform Capabilities'
     - navtiles:
-      - title: Agent
-        link: agent/
-        icon: agent-fill
-        desc: Install and configure the Datadog Agent to collect and send data
-      - title: Integrations
-        link: integrations/
-        icon: integrations
-        desc: Gather data about your applications, services, and systems
-      - title: OpenTelemetry
-        link: opentelemetry/
-        icon: open-telemetry
-        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
+      - title: Alerts
+        link: monitors/
+        icon: monitor
+        desc: Create, edit, and manage your monitors and notifications
       - title: Dashboards
         link: dashboards/
         icon: dashboard
         desc: Visualize, analyze, and generate insights about your data
-      - title: Monitors and Alerting
-        link: monitors/
-        icon: monitor
-        desc: Create, edit, and manage your monitors and notifications
-      - title: Datadog Watchdog
-        link: watchdog/
-        icon: watchdog
-        desc: Detect and surface application and infrastructure anomalies
-      - title: Mobile Application
+      - title: Notebooks
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Mobile App
         link: mobile/
         icon: mobile
         desc: View Datadog alerts, incidents, and more on your mobile device
-      - title: Incident Management
-        link: service_management/incident_management
-        icon: incidents
-        desc: Identify, analyze, and mitigate disruptive incidents in your organization
-      - title: Events
+      - title: Fleet Automation
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Access Control
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Event Management
         link: events/
         icon: events
         desc: Track notable changes and alerts in your applications and infrastructure
-      - title: Workflow Automation
-        link: service_management/workflows/
-        icon: workflows
-        desc: Automate and orchestrate processes across your tech stack
-      - title: App Builder
-        link: service_management/app_builder/
-        icon: app-builder
-        desc: Create low-code applications to streamline your internal tools
+      - title: CoScreen
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Teams
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
+      - title: Integrations
+        link: integrations/
+        icon: integrations
+        desc: Gather data about your applications, services, and systems
+      - title: API
+        link: api/latest/
+        icon: api
+        desc: Try the Datadog API
+      - title: Marketplace
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
   - nav_section:
-    - name: 'Products'
+    - name: 'AI'
     - navtiles:
-      - title: Infrastructure
+      - title: AI Integrations
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Bits AI Agents
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Bits AI SRE
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: Detect and surface application and infrastructure anomalies
+  - nav_section:
+    - name: 'Observability'
+    - navtiles:
+      - title: Infrastructure Monitoring
         link: infrastructure/
         icon: host-map
         desc: Track your hosts, containers, processes, and serverless functions
-      - title: Serverless
-        link: serverless/
-        icon: serverless
-        desc: Detect and resolve performance issues in your serverless applications
+      - title: Metrics
+        link: metrics/
+        icon: metric
+        desc: Explore, search, and create distributions for your metrics
       - title: Network Monitoring
         link: network_monitoring/
         icon: network
         desc: Use tagged objects to collect and graph data about your network traffic
+      - title: Container Monitoring
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Kubernetes Autoscaling
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Serverless
+        link: serverless/
+        icon: serverless
+        desc: Detect and resolve performance issues in your serverless applications
       - title: Cloud Cost Management
         link: cloud_cost_management/
         icon: cloud-cost-management
         desc: Take control of your cloud spend with unified observability and cost data
-      - title: APM
+      - title: Cloudcraft
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Storage Management
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Application Performance Monitoring
         link: tracing/
         icon: apm
         desc: Explore out-of-the-box performance dashboards and distributed traces
+      - title: Universal Service Monitoring
+        link: universal_service_monitoring/
+        icon: usm
+        desc: Discover, map, and monitor services without changing code
       - title: Continuous Profiler
         link: profiler/
         icon: profiling-1
         desc: Compare performance snapshots and investigate bottlenecks
+      - title: Dynamic Instrumentation
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: Trace, monitor, and secure your LLM applications
       - title: Database Monitoring
         link: database_monitoring/
         icon: database-2
@@ -99,26 +158,49 @@ nav_sections:
         link: data_streams/
         icon: datastreams-monitoring
         desc: Track and improve performance of your data streaming pipelines
-      - title: Data Observability
-        link: data_observability/
-        icon: data-jobs-monitoring
-        desc: Monitor data quality, performance, and cost
-      - title: Universal Service Monitoring
-        link: universal_service_monitoring/
-        icon: usm
-        desc: Discover, map, and monitor services without changing code
-      - title: Synthetic Monitoring
-        link: synthetics/
-        icon: synthetics
-        desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Quality Monitoring
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Jobs Monitoring
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Log Management
+        link: logs/
+        icon: log
+        desc: Process, monitor, and archive your ingested logs
+      - title: Sensitive Data Scanner
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Audit Trail
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Observability Pipelines
+        link: observability_pipelines/
+        icon: pipelines
+        desc: Manage and monitor your telemetry pipelines
       - title: Error Tracking
         link: error_tracking/
         icon: error-tracking
         desc: Identify critical errors and accelerate resolution across web, mobile, and backend
-      - title: Real User Monitoring
-        link: real_user_monitoring/
-        icon: rum
-        desc: Capture, observe, and analyze the user experience of your applications
+      - title: CloudPrem
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+  - nav_section:
+    - name: 'Digital Experience'
+    - navtiles:
+      - title: Browser Real User Monitoring
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Mobile Real User Monitoring
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
       - title: Product Analytics
         link: product_analytics/
         icon: product-analytics
@@ -127,14 +209,25 @@ nav_sections:
         link: session_replay/
         icon: session-replay
         desc: Capture and visually replay the user experience of your users
-      - title: Mobile Application Testing
+      - title: Synthetic Monitoring
+        link: synthetics/
+        icon: synthetics
+        desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Mobile App Testing
         link: mobile_app_testing/
         icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
-      - title: Continuous Testing
-        link: continuous_testing/
-        icon: continuous-testing
-        desc: Perform codeless integration and end-to-end testing with CI/CD providers
+      - title: Error Tracking
+        link: error_tracking/
+        icon: error-tracking
+        desc: Identify critical errors and accelerate resolution across web, mobile, and backend
+  - nav_section:
+    - name: 'Software Delivery'
+    - navtiles:
+      - title: Internal Developer Portal
+        link: internal_developer_portal
+        icon: internal-developer-portal-wui
+        desc: Unify telemetry, metadata, and workflows to accelerate delivery
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
@@ -143,61 +236,68 @@ nav_sections:
         link: tests/
         icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests
+      - title: Continuous Testing
+        link: continuous_testing/
+        icon: continuous-testing
+        desc: Perform codeless integration and end-to-end testing with CI/CD providers
+      - title: IDE Plugins
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: DORA Metrics
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Feature Flags
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
       - title: Code Coverage
         link: code_coverage/
         icon: ci
         desc: Visualize coverage data trends and block PR merges based on coverage thresholds
-      - title: Security
-        link: security/
-        icon: security-platform
-        desc: Detect threats, vulnerabilities, and misconfigurations
-      - title: Metrics
-        link: metrics/
-        icon: metric
-        desc: Explore, search, and create distributions for your metrics
-      - title: Log Management
-        link: logs/
-        icon: log
-        desc: Process, monitor, and archive your ingested logs
-      - title: Observability Pipelines
-        link: observability_pipelines/
-        icon: pipelines
-        desc: Manage and monitor your telemetry pipelines
-      - title: LLM Observability
-        link: llm_observability/
-        icon: llm-observability
-        desc: Trace, monitor, and secure your LLM applications
-      - title: Internal Developer Portal
-        link: internal_developer_portal
-        icon: internal-developer-portal-wui
-        desc: Unify telemetry, metadata, and workflows to accelerate delivery
-      - title: On-Call
-        link: service_management/on-call/
-        icon: on-call
-        desc: Manage paging, escalation, and on-call schedules in one platform
   - nav_section:
-    - name: 'Configuration'
+    - name: 'Security'
     - navtiles:
-      - title: API
-        link: api/latest/
-        icon: api
-        desc: Try the Datadog API
-      - title: Account Management
-        link: account_management/
-        icon: cog-2
-        desc: Access org-based settings and billing
-      - title: Data Security
-        link: data_security/
-        icon: security-lock
-        desc: Learn how Datadog protects your data
-      - title: Extend Datadog
-        link: extend/
-        icon: dev-code
-        desc: Extend the Datadog platform
-      - title: Partners
-        link: partners/
-        icon: colab
-        desc: Learn about best practices and get started monitoring your clients' environments.
+      - title: Code Security
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Cloud Security
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Threat Management
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+  - nav_section:
+    - name: 'Service Management'
+    - navtiles:
+      - title: Incident Response
+        link: service_management/incident_management
+        icon: incidents
+        desc: Identify, analyze, and mitigate disruptive incidents in your organization
+      - title: Software Catalog
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Service Level Objectives
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Case Management
+        link: agent/
+        icon: agent-fill
+        desc: TKTK
+      - title: Workflow Automation
+        link: service_management/workflows/
+        icon: workflows
+        desc: Automate and orchestrate processes across your tech stack
+      - title: App Builder
+        link: service_management/app_builder/
+        icon: app-builder
+        desc: Create low-code applications to streamline your internal tools
 
 popular_searches:
   - title: API documentation
