@@ -7441,6 +7441,11 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
+    - name: Frontier Group
+      url: security/cloud_security_management/frontier_group/
+      parent: csm
+      identifier: csm_frontier_group
+      weight: 13
     - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
