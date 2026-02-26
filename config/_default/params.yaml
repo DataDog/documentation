@@ -264,6 +264,7 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   actions: [gov]
+  actioncatalog: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
   agentless_scanning: [gov] # docs page
@@ -341,5 +342,6 @@ unsupported_sites:
   universal_service_monitoring: [gov]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov]
   wiz: [gov]
+  workflow-automation: [gov]
   workflows: [gov]
   workload_security_active_protection: [gov]
