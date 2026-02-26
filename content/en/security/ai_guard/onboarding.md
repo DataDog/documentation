@@ -94,6 +94,17 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 
+## Try the AI Guard Playground {#playground}
+
+The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation—including user input, assistant output, and tool calls—and see the evaluation result (action and reason) in real time.
+
+Use the Playground to:
+- Experiment with different prompt patterns and see how AI Guard responds.
+- Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
+- Tweak the evaluation sensitivity threshold and see how it affects detection results.
+- Test sensitive data scanning on your conversations.
+- Share evaluation results with your team during development.
+
 ## Use the AI Guard API {#api}
 
 ### REST API integration {#rest-api-integration}
@@ -146,6 +157,7 @@ curl -s -XPOST \
                  }
               }
             ]
+          }
         ]
       }
     }
@@ -610,6 +622,26 @@ After completing the [setup steps](#setup) and using an [SDK](#sdks) to instrume
 
 <div class="alert alert-info">You can't see data in Datadog for evaluations performed directly using the REST API.</div>
 
+## Configure AI Guard policies {#configure-policies}
+
+AI Guard provides two settings to control how evaluations are enforced and how sensitive threat detection is.
+
+### Blocking policy {#blocking-policy}
+
+By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the [blocking policy][20] for your services.
+
+You can configure blocking at different levels of granularity, with more specific settings taking priority:
+1. **Organization-wide**: Apply a default blocking policy to all services and environments.
+2. **Per environment**: Override the organization default for a specific environment.
+3. **Per service**: Override the organization default for a specific service.
+4. **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+
+### Evaluation sensitivity {#evaluation-sensitivity}
+
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). The [evaluation sensitivity][21] setting controls the minimum confidence score required for a threat to be flagged. It is a value between 0.0 and 1.0, with a default of 0.5.
+
+A lower value increases sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives. A higher value decreases sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
+
 ## Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
 
 To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][9]. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
@@ -731,3 +763,6 @@ The Security Signals explorers allow you to filter, prioritize, and investigate 
 [16]: https://app.datadoghq.com/security/siem/signals
 [17]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
 [18]: https://app.datadoghq.com/security/ai-guard/signals
+[19]: https://app.datadoghq.com/security/ai-guard/playground
+[20]: https://app.datadoghq.com/security/ai-guard/settings/services
+[21]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
