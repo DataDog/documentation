@@ -21,6 +21,8 @@ Search your metrics by metric name or tag using the **Metric** or **Tag** search
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
+**Note**: Tag values are retained in the **Tag** search field for 28 hours. Values not submitted in the past 28 hours do not appear as search options, even if they remain visible in the metric details side panel.
+
 You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
 
 {{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The metrics summary page with fuzzy search searching shopist checkout" style="width:75%;">}}
@@ -180,7 +182,7 @@ To determine why a particular metric name is emitting a large number of custom m
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
-**Note:** Metrics without Limits™ is only available for custom metrics.
+**Note**: Metrics without Limits™ is only available for custom metrics.
 
 You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to **Configure Metrics -> Manage tags** in the [Metrics page][34], or by clicking the **Manage Tags** button in a metric's details side panel. 
 

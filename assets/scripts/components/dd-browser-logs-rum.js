@@ -32,7 +32,7 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackUserInteractions: true,
-            enableExperimentalFeatures: ['zero_lcp_telemetry'],
+            enableExperimentalFeatures: ['zero_lcp_telemetry', "feature_flags"],
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
             trackResources: true,

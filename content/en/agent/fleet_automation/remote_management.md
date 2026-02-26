@@ -127,15 +127,17 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
-1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
-1. **Select and configure** the products (for example, APM, Logs, or NDM) that you want the target Agents to run.
+1. In Fleet Automation, open the [Configure Agents][16] tab and click **Configure Agents**.
+1. **Scope the configuration to the target Agents.** You can target a group of Agents by filtering on host information or tags.
 
-   {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Scope this configuration step in Fleet Automation's Configure Agents workflow, showing filters for environment, operating system, and hostname, a list of 33 Agents included in scope, and a Configuration Summary panel on the right." style="width:100%;" >}}
 
-1. **Review** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
-1. **Scope Agents** to deploy configuration to (for example, through tags such as host names, site, or environment).
+1. **Select the products** (for example, APM, Logs, or NDM) that the target Agents should run.
+
+   {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="The Select products to configure step in Fleet Automation's Configure Agents workflow, showing product tiles grouped under Core Observability (Infrastructure Monitoring, Log Management, APM) and Additional Observability (Live Process Monitoring, Cloud Network Monitoring, Network Device Monitoring)." style="width:100%;" >}}
+
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
-1. **Start deployment** and track progress from the Deployments page.
+1. Click **Deploy Configuration** to start the deployment and track its progress from the [Deployments page][10].
 {{% /collapse-content %}}
 
 

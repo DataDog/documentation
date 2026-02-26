@@ -86,24 +86,24 @@ You can also use issue team ownership to filter issues by teams in the Error Tra
 
 {{< img src="error_tracking/ownership-search-bar.png" alt="Team owner filtering in the search bar" style="width:80%;" >}}
 
-### Manage team ownership on issues
+### Manage team ownership for issues
 
-In addition to automatic team ownership assignment, you can manually add or remove teams from issues.
+In addition to automatic team ownership, you can manually add or remove teams from issues.
 
 #### Add a team
 
 To add a team to an issue:
 
 1. Open the issue details panel.
-2. Click **Add Team**.
-3. Select the team you want to add.
+2. Click **Add team**.
+3. Select the team to add.
 
 #### Remove a team
 
 To remove a team from an issue:
 
 1. Open the issue details panel.
-2. Click on the team you want to remove.
+2. Click the team to remove.
 3. Click **Unlink team from issue**.
 
 ## Configuration

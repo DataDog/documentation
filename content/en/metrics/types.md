@@ -11,13 +11,13 @@ aliases:
     - /developers/metrics/metrics_type/
     - /developers/metrics/types/
 further_reading:
-    - link: 'developers/dogstatsd'
+    - link: 'extend/dogstatsd'
       tag: 'Documentation'
       text: 'Learn more about DogStatsD'
     - link: '/metrics/units'
       tag: 'Documentation'
       text: 'Metrics Units'
-    - link: 'developers/libraries'
+    - link: 'extend/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
 algolia:
@@ -346,7 +346,7 @@ Below is a summary of all available metric submission sources and methods. This 
 [5]: /metrics/custom_metrics/agent_metrics_submission/
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [7]: /api/v1/metrics/#submit-metrics
-[8]: /developers/dogstatsd/#how-it-works
+[8]: /extend/dogstatsd/#how-it-works
 [9]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
 [10]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
 [11]: /metrics/custom_metrics/agent_metrics_submission/?tab=gauge

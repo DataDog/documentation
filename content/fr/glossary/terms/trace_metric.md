@@ -16,7 +16,7 @@ Les métriques de trace peuvent être exportées vers un dashboard à partir de 
 Les métriques de trace sont idéales pour la surveillance. Il est possible de définir des monitors d'APM depuis les pages [New monitor][3], [Service][4] ou [Resource][5]. Des suggestions de monitors sont affichées sur la page [Service][4] ou [Resource][5].
 
 
-[1]: /fr/developers/guide/data-collection-resolution-retention/
+[1]: /fr/extend/guide/data-collection-resolution/
 [2]: https://app.datadoghq.com/metric/summary
 [3]: https://app.datadoghq.com/monitors
 [4]: /fr/tracing/services/service_page/
