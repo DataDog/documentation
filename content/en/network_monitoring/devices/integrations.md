@@ -35,7 +35,7 @@ The following integrations cover **wireless networking platforms** that support 
 
 {{< partial name="ndm/wireless.html" >}}
 
-<br>
+<div class="alert alert-info">Aruba Central and Juniper Mist integrations are in Preview. Reach out to your Datadog representative to sign up.</div>
 
 ## Virtualization
 
