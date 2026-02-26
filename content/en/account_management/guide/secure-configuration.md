@@ -57,7 +57,7 @@ The following permissions are assigned to the Datadog Admin Role by default. The
 
 | Permission           | Description                           |
 |----------------------|---------------------------------------|
-| `org_app_keys_write` | Manage Application Keys for all users |
+| `org_app_keys_write` | Manage application keys for all users |
 | `api_keys_write`     | Create and rename API keys            |
 | `api_keys_delete`    | Delete API keys                       |
 
@@ -175,7 +175,7 @@ This endpoint enables:
 
 #### Manage API and application keys
 
-Datadog administrators can create, rotate, or delete API and Application keys through the API.
+Datadog administrators can create, rotate, or delete API and application keys through the API.
 
 ##### Create an application key
 {{< code-block lang="shell">}}
