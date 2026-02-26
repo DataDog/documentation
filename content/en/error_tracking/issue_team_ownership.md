@@ -19,6 +19,8 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 
 **Note**: Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
 
+**Note**: After a team is assigned to an issue through CODEOWNERS or the `team` attribute, the assignment is immutable.
+
 ## Leverage team ownership
 
 Team ownership information appears on the issue details panel when available:
