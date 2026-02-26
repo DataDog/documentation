@@ -48,7 +48,7 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 ## Requirements
 
-Datadog users must have the `Incidents Read` [permission][18] to use the MCP Server.
+Datadog users must have the `MCP Read` and/or `MCP Write` [permissions][18] to use the MCP server.
 
 For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
 
@@ -647,7 +647,7 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [1]: https://modelcontextprotocol.io/
 [15]: /api/latest/events/
 [16]: /account_management/audit_trail/
-[18]: /account_management/rbac/permissions/#case-and-incident-management
+[18]: /account_management/rbac/permissions/#mcp
 [19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [20]: /synthetics/
 [21]: /continuous_integration/
