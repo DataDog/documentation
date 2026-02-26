@@ -10,4 +10,8 @@ further_reading:
     text: 'Quality Monitoring'
 ---
 
+{{< whatsnext desc="Guides:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/guides/anomaly_detection" >}}Anomaly Detection for Data Observability Monitors{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
