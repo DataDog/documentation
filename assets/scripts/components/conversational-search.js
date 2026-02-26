@@ -223,24 +223,48 @@ class ConversationalSearch {
             }
         }
 
+        // Hover tooltip for ref chips — show on enter wrap, hide on leave wrap
+        this.messagesContainer.addEventListener('mouseover', (e) => {
+            const wrap = e.target.closest('.conv-search-source-ref-wrap');
+            if (!wrap || !this.messagesContainer.contains(wrap)) return;
+            const btn = wrap.querySelector('.conv-search-source-ref-btn');
+            if (btn && !wrap.querySelector('.conv-search-source-tooltip.open')) {
+                this.closeAllSourceTooltips();
+                this.showSourceTooltip(btn);
+            }
+        });
+
+        this.messagesContainer.addEventListener('mouseout', (e) => {
+            const wrap = e.target.closest('.conv-search-source-ref-wrap');
+            if (!wrap || !this.messagesContainer.contains(wrap)) return;
+            if (!wrap.contains(e.relatedTarget)) {
+                this.closeAllSourceTooltips();
+            }
+        });
+
         this.messagesContainer.addEventListener('click', (e) => {
+            // Click on ref chip → navigate directly to source
             const sourceRefBtn = e.target.closest('.conv-search-source-ref-btn');
             if (sourceRefBtn && this.messagesContainer.contains(sourceRefBtn)) {
                 e.preventDefault();
                 e.stopPropagation();
-                this.toggleSourceTooltip(sourceRefBtn);
 
                 const sourceNumber = sourceRefBtn.dataset.sourceNumber;
-                const tooltip = sourceRefBtn.parentNode?.querySelector('.conv-search-source-tooltip a');
+                const tooltipLink = sourceRefBtn.parentNode?.querySelector('.conv-search-source-tooltip a');
+
                 this.logAction('Conversational Search Source Ref Click', {
                     conversational_search: {
                         action: 'source_ref_click',
                         source_number: sourceNumber ? parseInt(sourceNumber, 10) : null,
-                        source_url: tooltip?.href || null,
-                        source_title: tooltip?.textContent || null,
+                        source_url: tooltipLink?.href || null,
+                        source_title: tooltipLink?.textContent || null,
                         conversation_id: this.conversationId
                     }
                 });
+
+                if (tooltipLink?.href) {
+                    window.open(tooltipLink.href, '_blank', 'noopener,noreferrer');
+                }
                 return;
             }
 
@@ -433,6 +457,18 @@ class ConversationalSearch {
         this.messagesContainer.querySelectorAll('.conv-search-source-ref-btn[aria-expanded="true"]').forEach((btn) => {
             btn.setAttribute('aria-expanded', 'false');
         });
+    }
+
+    showSourceTooltip(button) {
+        const wrap = button.closest('.conv-search-source-ref-wrap');
+        if (!wrap) return;
+
+        const tooltip = wrap.querySelector('.conv-search-source-tooltip');
+        if (!tooltip) return;
+
+        tooltip.classList.add('open');
+        button.setAttribute('aria-expanded', 'true');
+        this.repositionTooltip(tooltip);
     }
 
     toggleSourceTooltip(button) {

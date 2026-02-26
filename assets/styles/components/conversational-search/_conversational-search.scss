@@ -1,7 +1,6 @@
 // Variables
 // Colors: Bootstrap body-color (#212529) cascades naturally for text.
 // The site's _global.scss overrides p specifically to #4a4a4a.
-// We don't set a text color — let the cascade do its job.
 $conv-search-purple: #632CA6;
 $conv-search-purple-dark: #4f2384;
 $conv-search-purple-light: #f3eefa;
@@ -148,8 +147,8 @@ $conv-search-text-muted: #6b7280;
             border-radius: 18px 18px 4px 18px;
             max-width: 80%;
             padding: 10px 16px;
-            font-size: 15px;
-            line-height: 22px;
+            font-size: 16px;
+            line-height: 26px;
         }
     }
 
@@ -176,7 +175,6 @@ $conv-search-text-muted: #6b7280;
     line-height: 27px;
     color: #1a1a1a;
     word-break: break-word;
-    letter-spacing: -0.006em;
 
     p, ul, ol, li, blockquote, td, th, dd, dt {
         font-size: inherit;
@@ -350,6 +348,7 @@ $conv-search-text-muted: #6b7280;
     border-radius: 0;
     padding: 4px 0;
     font-size: 15px;
+    font-weight:300;
     line-height: 1.5;
     background: transparent;
     font-family: inherit;

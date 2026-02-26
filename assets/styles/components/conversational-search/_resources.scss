@@ -12,25 +12,27 @@
     min-width: 20px;
     height: 20px;
     padding: 0 5px;
-    border: none;
+    border: 1px solid rgba(231, 231, 231, 0.883);
     border-radius: 5px;
-    background: rgba(0, 0, 0, 0.06);
-    color: #555;
+    background: rgba(0, 0, 0, 0.04);
+    color: #71717a;
     cursor: pointer;
-    vertical-align: middle;
+    vertical-align: baseline;
     font-size: 12px;
     font-weight: 600;
     line-height: 20px;
     text-align: center;
-    transition: background 0.12s ease, color 0.12s ease;
+    position: relative;
+    top: -1px;
+    transition: background 0.15s ease, color 0.15s ease;
 
     &:hover {
-        background: rgba(0, 0, 0, 0.1);
-        color: #212529;
+        background: rgba(0, 0, 0, 0.10);
+        color: #3f3f46;
     }
 
     &:focus-visible {
-        outline: 2px solid rgba(0, 0, 0, 0.2);
+        outline: 2px solid rgba(0, 0, 0, 0.12);
         outline-offset: 1px;
     }
 }
@@ -43,44 +45,75 @@
 .conv-search-source-tooltip {
     position: absolute;
     z-index: 100;
-    top: calc(100% + 6px);
-    left: 0;
-    min-width: 180px;
-    max-width: 280px;
-    padding: 8px 12px;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    max-width: 300px;
+    padding: 10px 14px;
     border: 1px solid $conv-search-border;
     border-radius: 10px;
     background: $conv-search-bg;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
     display: none;
+    pointer-events: auto;
+
+    // Invisible bridge above tooltip to keep hover alive during mouse travel
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        height: 10px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 8px;
+        height: 8px;
+        background: $conv-search-bg;
+        border-left: 1px solid $conv-search-border;
+        border-top: 1px solid $conv-search-border;
+        z-index: 1;
+    }
 
     &.open {
         display: block;
-        animation: conv-search-tooltip-in 0.15s ease-out;
     }
 
     a {
-        color: $conv-search-purple;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1a1a1a;
         text-decoration: none;
         font-size: 13px;
+        font-weight: 500;
         line-height: 1.4;
         word-break: break-word;
 
-        &:hover {
-            color: $conv-search-purple-dark;
-            text-decoration: underline;
+        &::before {
+            content: '↗';
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: rgba($conv-search-purple, 0.08);
+            color: $conv-search-purple;
+            font-size: 12px;
         }
-    }
-}
 
-@keyframes conv-search-tooltip-in {
-    from {
-        opacity: 0;
-        transform: translateY(2px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        &:hover {
+            color: $conv-search-purple;
+        }
     }
 }
 
