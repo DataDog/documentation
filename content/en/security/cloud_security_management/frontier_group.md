@@ -21,37 +21,31 @@ further_reading:
 ### Ownership agent
 
 ***Status:*** *available for frontier partners*
-
 Automated inference on who owns a particular resource and should be responsible for remediating it.
 
 ### 1-click CSPM remediation
 
 ***Status:*** *available for frontier partners*
-
 Automated (except human-in-the-loop) remediation on running cloud resources and the IaC definitions of those resources.
 
 ### Unified explorer
 
 ***Status:*** *available for frontier partners*
-
 Misconfigurations, Identity Risks, and Attack Paths combined in a single explorer.
 
 ### CLI vulnerabilities
 
 ***Status:*** *available for frontier partners*
-
 CI/CD vulnerability scans, command line integrations for agentic feedback.
 
 ### Container public accessibility
 
 ***Status:*** *coming soon*
-
 More accurate public access evaluations of containers through EKS and runtime data.
 
 ### Critical assets
 
 ***Status:*** *coming soon*
-
 Automatic critical asset inference based on observability data, overridable through manual queries.
 
 ## Further Reading
