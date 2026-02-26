@@ -1,11 +1,11 @@
 ---
 title: DeepEval Evaluations
 aliases:
- - /llm_observability/submit_nemo_evaluations/
+ - /llm_observability/evaluations/deepeval_evaluations/
 further_reading:
-- link: "/llm_observability/evaluations/external_evaluations/deepeval"
+- link: "/llm_observability/guide/evaluation_developer_guide/deepeval"
   tag: "Documentation"
-  text: "Submit Evaluations"
+  text: "Submit DeepEval Evaluations"
 ---
 
 ## Overview

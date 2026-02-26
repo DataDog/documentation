@@ -49,7 +49,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator: class-based and function-based.
+There are two ways to define an evaluator using LLMObs: class-based and function-based. In addition to these evaluators, LLMObs has integrations with open source evaluation frameworks such as [DeepEval][] that can be used in LLMObs Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|
