@@ -76,23 +76,31 @@ In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your tea
 
 You can programmatically assign team ownership at the time an error is raised by setting the `team` attribute to a Datadog team handle.
 
-**APM and Logs**
+**APM**
 
-Set the `team` attribute directly on the span or log.
+Set the `team` attribute on the span.
 
-For example :
+For example:
 
 ```python
 span.set_tag("team", "payments-backend")
 ```
 
-```java
-span.setTag("team", "payments-backend");
+**Logs**
+
+Set the `team` attribute on the log.
+
+For example:
+
+```python
+logger.error("Payment processing failed", extra={"team": "payments-backend"})
 ```
 
 **RUM**
 
-Set the `team` attribute on the RUM event:
+Set the `team` attribute on the RUM event.
+
+For example:
 
 ```javascript
 datadogRum.addError(error, { team: 'payments-frontend' });
