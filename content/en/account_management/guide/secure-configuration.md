@@ -95,6 +95,18 @@ The following permissions are assigned to the Datadog Admin Role by default. The
 
 ### APM controls
 
+| Permission                               | Description                       |
+|------------------------------------------|-----------------------------------|
+| `apm_retention_filter_write`             | Manage trace retention filters    |
+| `apm_service_ingest_write`               | Configure APM ingestion settings  |
+| `apm_apdex_manage_write`                 | Manage Apdex thresholds           |
+| `apm_tag_management_write`               | Configure APM tag management      |
+| `apm_primary_operation_write`            | Modify primary operations         |
+| `apm_service_renaming_write`             | Manage service renaming           |
+| `debugger_capture_variables`             | Configure dynamic instrumentation |
+| `error_tracking_settings_write`          | Configure Error Tracking          |
+| `error_tracking_exclusion_filters_write` | Configure error exclusion filters |
+
 ### Security Monitoring
 
 ### Observability Pipelines and Fleet Automation
