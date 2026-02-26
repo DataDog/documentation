@@ -133,4 +133,4 @@ You can declare an incident from individual Handoff Notification cards.
 [12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages
 [14]: /integrations/google-hangouts-chat/
-[15]: /security/code-security/secrets/
+[15]: /security/code_security/secret_scanning/
