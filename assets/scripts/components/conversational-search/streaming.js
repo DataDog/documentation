@@ -6,6 +6,7 @@ export function getTypesenseClient(typesenseConfig) {
     if (client) return client;
 
     client = new Typesense.Client({
+        nearestNode: { host: `${typesenseConfig.host}.a1.typesense.net`, port: 443, protocol: 'https' },
         nodes: [
             { host: `${typesenseConfig.host}-1.a1.typesense.net`, port: 443, protocol: 'https' },
             { host: `${typesenseConfig.host}-2.a1.typesense.net`, port: 443, protocol: 'https' },
