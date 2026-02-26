@@ -93630,7 +93630,7 @@ paths:
       security:
       - apiKeyAuth: []
       servers:
-      - url: https://{subdomain}.{site}
+      - url: https://{subdomain}-{site}
         variables:
           site:
             default: datadoghq.com
