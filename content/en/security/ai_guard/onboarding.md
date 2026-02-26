@@ -96,7 +96,7 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 
 ## Try the AI Guard Playground {#playground}
 
-The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation—including user input, assistant output, and tool calls—and see the evaluation result (action and reason) in real time.
+The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
 Use the Playground to:
 - Experiment with different prompt patterns and see how AI Guard responds.
