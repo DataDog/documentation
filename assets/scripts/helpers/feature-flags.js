@@ -28,17 +28,17 @@ const DD_INTERNAL_STORAGE_KEY = 'docs_dd_internal';
 
 export const isDatadogEmployee = () => {
     try {
-        console.log('isDatadogEmployee');
 
         if (localStorage.getItem(DD_INTERNAL_STORAGE_KEY) === '1') return true;
 
         const params = new URLSearchParams(window.location.search);
-        console.log('params', params);
         if (params.get(DD_INTERNAL_PARAM) === '1') {
             localStorage.setItem(DD_INTERNAL_STORAGE_KEY, '1');
             return true;
         }
-    } catch { /* private browsing / storage blocked */ }
+    } catch {
+        console.error('Error checking if user is Datadog employee');
+    }
     return false;
 };
 
