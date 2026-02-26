@@ -42,7 +42,9 @@ Verify that your feature flag is enabled, evaluating in the correct environment,
 
 ### Step 2: Confirm metric events are firing
 
-After you confirm the experiment is receiving traffic, check whether the assigned users have associated metric events.
+After you confirm the experiment is receiving traffic, check whether the assigned users have associated metric events. 
+
+Work through the following checks sequentially. Each section builds on the previous one, so start with the first and continue to the next if the issue persists.
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
