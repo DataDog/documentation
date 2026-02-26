@@ -65,6 +65,15 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.zoom_password}}` | The Zoom meeting password, if one exists. |
 | `{{incident.zoom_link}}` | A Markdown link to the Zoom meeting. The display text is `Zoom Meeting {id}`. |
 
+## Variables available only in postmortem templates
+
+The following variables work only in postmortem templates. They are not available in notification or Jira templates.
+
+| Variable | Description |
+|---|---|
+| `{{incident.card}}` | Inserts a self-updating incident card into the postmortem. **Only available for postmortems created in Datadog Notebooks.** This variable does not work for postmortems created in third-party locations such as Confluence or Google Drive. |
+| `{{incident.timeline}}` | Copies all timeline events from the incident into the postmortem when used in a postmortem template. |
+
 ## AI variables
 {{< site-region region="gov" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
