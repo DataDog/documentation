@@ -23,23 +23,32 @@ const getRumTargetingKey = () => {
     }
 };
 
-/**
- * Check if the visitor is a logged-in Datadog user via the corpsite /locate
- * endpoint, which returns `user_status: true` when the global `dogwebu`
- * cookie is present on `.datadoghq.com`.
- *
- * The result is cached as a singleton promise so multiple callers share one
- * network request.
- */
+const DD_INTERNAL_PARAM = 'dd_internal';
+const DD_INTERNAL_STORAGE_KEY = 'docs_dd_internal';
+
+export const isDatadogEmployee = () => {
+    try {
+        console.log('isDatadogEmployee');
+
+        if (localStorage.getItem(DD_INTERNAL_STORAGE_KEY) === '1') return true;
+
+        const params = new URLSearchParams(window.location.search);
+        console.log('params', params);
+        if (params.get(DD_INTERNAL_PARAM) === '1') {
+            localStorage.setItem(DD_INTERNAL_STORAGE_KEY, '1');
+            return true;
+        }
+    } catch { /* private browsing / storage blocked */ }
+    return false;
+};
+
 let datadogUserPromise = null;
 
 export const fetchDatadogUserStatus = () => {
     if (datadogUserPromise) return datadogUserPromise;
 
-    const locateUrl = window.location.hostname === 'docs.datadoghq.com'
-        ? 'https://www.datadoghq.com/locate'
-        : 'https://corpsite-staging.datadoghq.com/locate';
-
+    const locateUrl = 'https://www.datadoghq.com/locate'
+       
     datadogUserPromise = fetch(locateUrl, { credentials: 'include' })
         .then((res) => res.json())
         .then((data) => !!data.user_status)
@@ -59,19 +68,15 @@ export const initializeFeatureFlags = () => {
 
         const client = OpenFeature.getClient();
 
-        // Initialize provider first so it can fetch flags.
         const provider = new DatadogProvider({
             applicationId: config.ddApplicationId,
             clientToken: config.ddClientToken,
             env
         });
 
-        // Wait for the provider to connect before reading flags.
         await OpenFeature.setProviderAndWait(provider);
 
-        // TODO(DOCSENG-249): Temporary experiment behavior.
-        // Keep RUM context enrichment blocking for now, then revert to non-blocking after experiments finish.
-        // As we need the targeting key to use weighted rollouts.
+        // Blocking: weighted rollouts need the RUM targeting key in context.
         await enrichContextWithRum();
 
         return client;
@@ -84,43 +89,21 @@ export const initializeFeatureFlags = () => {
     return initializationPromise;
 };
 
-// Blocking enrichment: wait a short time for RUM, fetch /locate user status
-// in parallel, then set the combined context for flag evaluation.
-// If /locate resolves before RUM and the user is a Datadog user, we break
-// early so conversational search can appear without the full RUM wait.
+// Polls briefly for RUM targeting key while fetching /locate in parallel.
+// RUM is either ready within ~500ms or blocked (ad-blocker). No point waiting longer.
 const enrichContextWithRum = async () => {
-    let locateResolved = false;
-    let isDatadogUser = false;
+    const locatePromise = fetchDatadogUserStatus();
 
-    fetchDatadogUserStatus().then((val) => {
-        locateResolved = true;
-        isDatadogUser = val;
-    });
-
-    const maxRetries = 30;
-    const retryDelayMs = 100;
-    let targetingKey = null;
-
-    for (let retries = 0; retries < maxRetries; retries++) {
-        targetingKey = getRumTargetingKey();
-        if (targetingKey) {
-            console.log('[Flags] RUM context found.', targetingKey);
-            break;
+    let targetingKey = getRumTargetingKey();
+    if (!targetingKey) {
+        for (let i = 0; i < 5; i++) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            targetingKey = getRumTargetingKey();
+            if (targetingKey) break;
         }
-
-        if (locateResolved && isDatadogUser) {
-            console.log('[Flags] Datadog user detected via /locate, skipping remaining RUM retries.');
-            break;
-        }
-
-        console.log('[Flags] RUM context not found, retrying...', retries);
-        await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
     }
 
-    // Ensure /locate has settled if it hasn't yet.
-    if (!locateResolved) {
-        isDatadogUser = await fetchDatadogUserStatus();
-    }
+    const isDatadogUser = await locatePromise;
 
     const context = { isDatadogUser };
     if (targetingKey) context.targetingKey = targetingKey;

@@ -1,7 +1,8 @@
-export function logAction(message, data, { selectedModelId } = {}) {
+export function logAction(message, data, { selectedModelId, isDatadogUser } = {}) {
     const conversationalSearchData = {
         docs_ai: true,
         model_id: selectedModelId,
+        is_datadog_user: isDatadogUser ?? false,
         ...(data?.conversational_search || {})
     };
     const payload = {
@@ -18,11 +19,12 @@ export function logAction(message, data, { selectedModelId } = {}) {
     }
 }
 
-export function logError(message, error, { selectedModelId, conversationId } = {}) {
+export function logError(message, error, { selectedModelId, conversationId, isDatadogUser } = {}) {
     const errorData = {
         docs_ai: true,
         model_id: selectedModelId,
         conversation_id: conversationId,
+        is_datadog_user: isDatadogUser ?? false,
         error_message: error?.message || String(error),
         error_name: error?.name || 'Error'
     };

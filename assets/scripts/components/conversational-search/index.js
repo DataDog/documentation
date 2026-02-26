@@ -1,5 +1,5 @@
 import { getConfig } from '../../helpers/getConfig';
-import { initializeFeatureFlags, getBooleanFlag, fetchDatadogUserStatus } from 'scripts/helpers/feature-flags';
+import { initializeFeatureFlags, getBooleanFlag, isDatadogEmployee, fetchDatadogUserStatus } from 'scripts/helpers/feature-flags';
 
 import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
@@ -21,15 +21,18 @@ const USE_LEGACY_MODEL_FLAG_KEY = 'DOCS_AI_USE_LEGACY_MODEL';
 
 const RENDER_THROTTLE = 50;
 
+let isDatadogUser = false;
+
 initializeFeatureFlags().then(async (client) => {
     IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
 
-    if (!IS_CONVERSATIONAL_SEARCH_ENABLED) {
-        const isDatadogUser = await fetchDatadogUserStatus();
-        if (isDatadogUser) {
-            IS_CONVERSATIONAL_SEARCH_ENABLED = true;
-        }
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED && isDatadogEmployee()) {
+        IS_CONVERSATIONAL_SEARCH_ENABLED = true;
     }
+
+    // /locate tells us if the visitor is a logged-in Datadog app user.
+    // Not used for feature gating — included in every Docs AI log event.
+    isDatadogUser = await fetchDatadogUserStatus();
 
     if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
         document.body.classList.add('conv-search-enabled');
@@ -55,7 +58,7 @@ class ConversationalSearch {
     }
 
     get ctx() {
-        return { selectedModelId: this.selectedModelId, conversationId: this.conversationId };
+        return { selectedModelId: this.selectedModelId, conversationId: this.conversationId, isDatadogUser };
     }
 
     log(message, data) { logAction(message, data, this.ctx); }
