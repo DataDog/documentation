@@ -31,7 +31,7 @@ Verify that your feature flag is enabled, evaluating in the correct environment,
 
 1. **If the flag is not receiving any traffic**, verify that the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
 
-1. **If the flag is receiving traffic**, check whether that traffic is reaching the experiment's [targeting rule][6] in the waterfall. The waterfall is an ordered list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule — such as rules that exclude internal users or specific organizations — can capture traffic before it reaches the experiment.
+1. **If the flag is receiving traffic**, check whether that traffic is reaching the experiment's [targeting rule][6] in the waterfall. The waterfall is an ordered list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="The Targeting Rules & Rollouts section of a feature flag showing the experiment targeting rule with 269 users and rollout percentages for each variant across four stages." style="width:90%;" >}}
 
@@ -96,7 +96,7 @@ If the subject values match and users are assigned to the experiment, you can in
 
    {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics event stream filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, and action count." style="width:90%;" >}}
 
-1. Select individual sessions from users who were assigned to the experiment. Verify that the expected metric event is firing within the session. Check the timing of events in the session timeline — events that occur **before** the feature flag is evaluated are not included in experiment results.
+1. Select individual sessions from users who were assigned to the experiment. Verify that the expected metric event is firing within the session. Check the timing of events in the session timeline, events that occur **before** the feature flag is evaluated are not included in experiment results.
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
