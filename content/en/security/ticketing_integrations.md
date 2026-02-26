@@ -122,8 +122,10 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
    3. The [ServiceNow integration is configured within the project][3].
       1. Go to **Settings > Integrations > ServiceNow**.
       2. Enter your **Instance name** (your ServiceNow subdomain) and **Assignment group**.
-      3. Enable the **Sync data between Case Management and ServiceNow** option.
-      4. Complete the remaining settings, and then click **Save changes**.
+      3. Choose the operating mode (`ITSM` for incidents with bidirectional sync, `ITOM` for events without bidirectional sync). Use `ITSM` for security triage workflows.
+      4. Enable the **Sync data between Case Management and ServiceNow** option.
+      5. Complete the remaining settings, and then click **Save changes**.
+   4. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
 2. Verify that bidirectional Case Management integration with ServiceNow is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Open any Security finding.
@@ -173,10 +175,14 @@ The following steps create a bidirectional ticket for a Security finding.
    1. **Case Management project:** select a Case Management project that has [ServiceNow integration enabled][3].
    2. **Instance:** select the ServiceNow instance where you want the ticket created.
    3. **Assignment group:** select the ServiceNow group to assign the ticket to.
-3. Click **Create Ticket**.
+3. Choose a creation mode:
+   - **One ticket for all findings**: creates a single aggregated ticket linked to all selected findings.
+   - **One ticket per finding**: creates an individual ticket for each selected finding.
+4. Click **Create Ticket**.
 
 **Notes**:
-- Bidirectional sync with ServiceNow syncs status, priority, and comments between Datadog and ServiceNow.
+- Bidirectional sync is supported for `ITSM` mode only. `ITOM` events do not support bidirectional sync.
+- Attaching to an existing ticket is supported for `ITSM` mode only.
 - Only ServiceNow incident URLs are supported. Problem and change request URLs are not accepted.
 {{% /collapse-content %}}
 
@@ -266,3 +272,4 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 [19]: /api/latest/security-monitoring/#attach-security-findings-to-a-jira-issue
 [20]: /security/ticketing_integrations/#supported-products
 [21]: /integrations/servicenow/
+[22]: /integrations/guide/servicenow-itom-itsm-setup/
