@@ -17,6 +17,8 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 - owner of the service where the issue happens.
 - identified by the `team` attribute set on the error event at runtime.
 
+When multiple ownership methods apply to the same issue, ownership is resolved in the following priority order: `team` attribute, `CODEOWNERS`, then service ownership.
+
 **Note**: Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
 
 **Note**: After a team is assigned to an issue through CODEOWNERS or the `team` attribute, the assignment is immutable.
