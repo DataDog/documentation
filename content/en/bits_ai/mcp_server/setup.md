@@ -204,7 +204,7 @@ To install the extension:
 
 {{% tab "Other" %}}
 
-The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use **remote authentication** when your client supports it. For Cline (and when remote authentication is unreliable), use **local binary authentication**.
+The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use **remote authentication** when your client supports it. For Cline or when remote authentication is unreliable, use **local binary authentication**.
 
 #### Remote authentication
 
