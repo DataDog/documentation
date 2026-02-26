@@ -99,13 +99,9 @@ print(f"View experiment: {experiment.url}")
 ```
 
 ### Usage
-After you complete the setup steps, you can view the DeepEval evaluation results per instance in the dataset in Datadog:
+After you run an experiment with a DeepEval evaluation, you can view the DeepEval evaluation results per instance in the corresponding experiment run in Datadog:
 
-{{< img src="llm_observability/nemo-demo-after-eval.png" alt="An LLM Observability trace with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
-
-You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview, as well as overlay the evaluation results on topic clusters generated on the [Cluster Map][2]. On the traces list, click on **Options** to add the evaluation scores as a column:
-
-{{< img src="llm_observability/nemo-demo-traces-view-eval.png" alt="An LLM Observability traces list with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
+{{< img src="llm_observability/deepeval-experiment-result.ong" alt="An LLM Observability experiment with a DeepEval evaluator." style="width:100%;" >}}
 
 ## Further reading
 
