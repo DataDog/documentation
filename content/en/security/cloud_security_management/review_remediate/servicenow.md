@@ -27,7 +27,7 @@ Use the [ServiceNow integration][1] to create ServiceNow tickets for resources i
 
 **Notes**:
 - To create ServiceNow tickets, you must have the `security_monitoring_findings_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security.
-- You can select up to 25 findings per ticket creation or attachment request.
+- You can select up to 50 findings per ticket creation or attachment request.
 - Findings already linked to another case are automatically detached before being linked to the new ticket.
 
 ## Configure the ServiceNow integration
@@ -39,6 +39,16 @@ To create ServiceNow tickets for Cloud Security issues, configure the [ServiceNo
 3. Enable the integration and enter the following:
    - **Instance name**: your ServiceNow subdomain (for example, `example` for `example.service-now.com`)
    - **Assignment group**: the ServiceNow group that tickets are assigned to
+4. Choose the operating mode. This controls which ServiceNow record type is created:
+
+   | Mode | ServiceNow record | Bidirectional sync |
+   |---|---|---|
+   | `ITSM` | `incident` | Supported |
+   | `ITOM` | `em_event` | Not supported |
+
+   **Note**: ITOM long-term support is not guaranteed. Use `ITSM` for triage workflows that require bidirectional sync.
+
+   For ITSM bidirectional sync, ServiceNow users who update incidents must have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][6] for details.
 
 ## Create a ServiceNow ticket for impacted resources
 
@@ -51,11 +61,14 @@ To create a ServiceNow ticket for one or more resources impacted by a misconfigu
 1. On the [Misconfigurations explorer][1], select a misconfiguration.
 2. Under **Resources Impacted**, select one or more findings.
 3. On the **Actions** dropdown menu, select **Create ServiceNow Ticket**.
-4. Optionally customize the title, description, and priority. If left blank, Datadog generates them from the finding data:
+4. Choose a creation mode:
+   - **One ticket for all findings**: creates a single aggregated ticket linked to all selected findings.
+   - **One ticket per finding**: creates an individual ticket for each selected finding.
+5. Optionally customize the title, description, and priority. If left blank, Datadog generates them from the finding data:
    - **Title**: derived from finding severity, resource, and title
    - **Priority**: mapped from finding severity (critical → P1, high → P2, medium → P3, low → P4, informational → P5)
    - **Due date**: set to the earliest due date across the selected findings
-5. Click **Create**.
+6. Click **Create**.
 
 A Datadog case is created and a ServiceNow incident is opened in your configured instance, assigned to the configured assignment group. After the ticket is created, a link to the ServiceNow incident is displayed on the side panel.
 
@@ -70,11 +83,14 @@ To create a ServiceNow ticket for one or more resources impacted by an identity 
 1. On the [Identity Risks explorer][1], select an identity risk.
 2. Under **Resources Impacted**, select one or more findings.
 3. On the **Actions** dropdown menu, select **Create ServiceNow Ticket**.
-4. Optionally customize the title, description, and priority. If left blank, Datadog generates them from the finding data:
+4. Choose a creation mode:
+   - **One ticket for all findings**: creates a single aggregated ticket linked to all selected findings.
+   - **One ticket per finding**: creates an individual ticket for each selected finding.
+5. Optionally customize the title, description, and priority. If left blank, Datadog generates them from the finding data:
    - **Title**: derived from finding severity, resource, and title
    - **Priority**: mapped from finding severity (critical → P1, high → P2, medium → P3, low → P4, informational → P5)
    - **Due date**: set to the earliest due date across the selected findings
-5. Click **Create**.
+6. Click **Create**.
 
 A Datadog case is created and a ServiceNow incident is opened in your configured instance, assigned to the configured assignment group. After the ticket is created, a link to the ServiceNow incident is displayed on the side panel.
 
@@ -105,6 +121,7 @@ The result depends on whether the ServiceNow ticket is already linked to a Datad
 | Ticket is linked to a case in a different project | An error is returned |
 
 **Notes**:
+- Attaching to an existing ticket is supported for `ITSM` mode only.
 - The instance in the provided URL must match the instance configured in your project's ServiceNow integration settings.
 - Only ServiceNow incident URLs are supported (`incident.do`). Problem and change request URLs are not accepted.
 - The `sys_id` parameter must be a valid 32-character hexadecimal string.
@@ -118,3 +135,4 @@ The result depends on whether the ServiceNow ticket is already linked to a Datad
 [3]: /account_management/rbac/permissions/#cloud-security-platform
 [4]: https://app.datadoghq.com/integrations/servicenow
 [5]: https://app.datadoghq.com/cases
+[6]: /integrations/guide/servicenow-itom-itsm-setup/
