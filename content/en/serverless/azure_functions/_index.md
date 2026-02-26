@@ -35,13 +35,12 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**. Add the following lines to your main application entry point file (for example, `app.js`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
+   
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step. Node options in Azure Functions can be configured with the environment variable `languageWorkers__node__arguments`.
 
-   ```js
-   require('@datadog/serverless-compat').start();
-
-   // This line must come before importing any instrumented module.
-   const tracer = require('dd-trace').init()
+   ```
+   languageWorkers__node__arguments='--require=@datadog/serverless-compat/init --require=dd-trace/init'
    ```
 
 3. **Configure the Datadog Node.js tracer**
