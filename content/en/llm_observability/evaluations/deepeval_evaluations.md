@@ -27,9 +27,6 @@ from deepeval.test_case import LLMTestCaseParams
 
 from ddtrace.llmobs import LLMObs
 
-import ddtrace
-import asyncio
-import os
 
 LLMObs.enable(
     api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
@@ -101,7 +98,7 @@ print(f"View experiment: {experiment.url}")
 ### Usage
 After you run an experiment with a DeepEval evaluation, you can view the DeepEval evaluation results per instance in the corresponding experiment run in Datadog:
 
-{{< img src="llm_observability/deepeval-experiment-result.ong" alt="An LLM Observability experiment with a DeepEval evaluator." style="width:100%;" >}}
+{{< img src="llm_observability/deepeval-experiment-result.png" alt="An LLM Observability experiment with a DeepEval evaluator." style="width:100%;" >}}
 
 ## Further reading
 
