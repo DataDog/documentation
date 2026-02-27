@@ -133,6 +133,10 @@ nav_sections:
   - nav_section:
     - name: 'Software Delivery'
     - navtiles:
+      - title: Internal Developer Portal
+        link: internal_developer_portal/
+        icon: internal-developer-portal-wui
+        desc: Unify telemetry, metadata, and workflows to accelerate delivery
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
@@ -203,10 +207,6 @@ nav_sections:
         link: incident_response/status_pages/
         icon: status-page-wui
         desc: Communicate service availability and incident updates to your users and stakeholders
-      - title: Internal Developer Portal
-        link: internal_developer_portal/
-        icon: internal-developer-portal-wui
-        desc: Unify telemetry, metadata, and workflows to accelerate delivery
       - title: Service Level Objectives
         link: service_level_objectives/
         icon: slos
