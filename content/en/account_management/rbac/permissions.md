@@ -65,7 +65,7 @@ Unlike Managed Roles, custom roles do not receive new permissions when Datadog r
 To configure Automatic Updates for custom roles:
 1. Go to the Organization Settings page, then click the **Roles** tab.
 2. Click the role you want to update, then click **Edit Role** in the top right.
-3. Under `Automatically Received Permissions`, choose an option from the dropdown: None, Datadog Read Only Role, Datadog Standard Role, Datadog Admin Role.
+3. Under `Automatically Receives Permissions`, choose an option from the dropdown: None, Datadog Read Only Role, Datadog Standard Role, Datadog Admin Role.
 
 If the custom role is configured to receive automatic updates based on a selected role template, the custom role will receive any new permissions given to the selected role template as they are released. No already-released permissions will be added. You can add or remove any permissions from this role and continue to receive automatic updates.
 
