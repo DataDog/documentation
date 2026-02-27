@@ -352,7 +352,7 @@ Install CloudPrem:
 ```shell
 helm install cloudprem datadog/cloudprem \
   --namespace datadog-cloudprem \
-  --values values.yaml \
+  --values values.yaml
 ```
 
 ### Step 8: Add internal GCE ingress
@@ -435,7 +435,7 @@ spec:
 Install the Datadog Agent:
 
 ```shell
-helm apply -f datadog-operator-values.yaml
+kubectl apply -f datadog-operator-values.yaml
 ```
 
 Verify the Datadog Agent is running:
