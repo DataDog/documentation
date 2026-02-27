@@ -58,7 +58,7 @@ Managed roles are created and maintained by Datadog. Their permissions may be au
 
 ### Custom roles
 
-Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3]. You can also add a permission to multiple custom roles at once by selecting that permission from the Roles page.
+Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3]. You can also add a permission to multiple custom roles at once by selecting that permission from the Roles page and choosing which roles to update.
 
 Unlike Managed Roles, custom roles do not receive new permissions when Datadog releases new products and features, unless configured to receive Automatic Updates. If Automatic Updates are off, custom roles will only receive new permissions to maintain compatibility when Datadog releases a new permission gating existing functionality.
 
