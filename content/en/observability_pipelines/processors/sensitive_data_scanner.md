@@ -122,6 +122,186 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% /collapse-content %}}
 
+## Set up the Sensitive Data Scanner processor using Terraform
+
+You can use the [Datadog Observability Pipeline Terraform resource][4] to set up a pipeline with the Sensitive Data Scanner processor. To add a rule to the Sensitive Data Scanner processor using Terraform:
+
+1. Use the [Datadog Sensitive Data Scanner Standard Pattern][5] data resource to retrieve the rule ID of the Sensitive Data Scanner [library rule][6].
+
+   ```terraform
+   data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
+     filter = "<RULE_NAME>"
+   }
+   ```
+
+   Replace the placeholders:
+
+   - `<RULE_IDENTIFIER>` with a name that is used later when you set up the Sensitive Data Scanner processor in the Observability Pipeline resource.
+   - `<RULE_NAME>` with the exact name of the rule. See [Library Rules][6] for the full list of rules, including the rule name to use for the data source `filter`.
+
+   For example, if you want to use the [AWS Access Key ID Scanner][7] and [US Social Security Number Scanner][8] rules, configure the data source as follows:
+
+   ```terraform
+   data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
+     filter = "AWS Access Key ID Scanner"
+   }
+   data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
+     filter = "US Social Security Number Scanner"
+   }
+   ```
+
+1. Add a [rule][9] block in your Observability Pipeline resource for the library rule.
+
+   ```terraform
+   ...
+     sensitive_data_scanner {
+       rule {
+         name = "<YOUR_RULE_NAME>"
+         tags = []
+         on_match {
+           redact {
+             replace = "***"
+           }
+         }
+         pattern {
+           library {
+             id                       = data.datadog_sensitive_data_scanner_standard_pattern.<RULE_IDENTIFIER>.id
+             use_recommended_keywords = true
+           }
+         }
+         scope {
+           all = true
+         }
+       }
+     }
+   }
+   ```
+
+   Replace the placeholders:
+
+   - `<YOUR_RULE_NAME>` with a name for the rule. This name is shown in the Pipelines UI.
+   - `<RULE_IDENTIFIER>` with the rule identifier you used in the data source in step 1.
+
+   For example, if you want to use the [AWS Access Key ID Scanner][7] data source from step 1:
+
+   ```terraform
+   ...
+     sensitive_data_scanner {
+       rule {
+         name = "Redact AWS Access Key IDs"
+         tags = []
+         on_match {
+           redact {
+             replace = "***"
+           }
+         }
+         pattern {
+           library {
+             id                       = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.id
+             use_recommended_keywords = true
+           }
+         }
+         scope {
+           all = true
+         }
+       }
+     }
+   }
+   ```
+
+   See [Sensitive Data Scanner configuration example](#sensitive-data-scanner-configuration-example) for a full configuration example.
+
+1. Repeat steps 1 and 2 for all library rules you want to add.
+
+### Sensitive Data Scanner configuration example {#sensitive-data-scanner-configuration-example}
+
+In this example, the Sensitive Data Scanner processor scans for AWS Access Key IDs and US Social Security Numbers, and redacts the data with the string `***`. The [Observability Pipelines resource configuration example](#configuration-example):
+
+1. Uses the [Datadog Sensitive Data Scanner Standard Pattern][5] data source to retrieve the AWS Access Key ID Scanner's rule ID and US Social Security Number Scanner's rule ID.
+1. Uses the Sensitive Data Scanner rules defined in the data source in the [Datadog Observability Pipeline][4] resource's Sensitive Data Scanner processor.
+
+#### Configuration example {#configuration-example}
+
+```terraform
+data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
+  filter = "AWS Access Key ID Scanner"
+}
+data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
+  filter = "US Social Security Number Scanner"
+}
+
+resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
+  name = "Sensitive Data Pipeline"
+
+  config {
+    source {
+      id = "source-0"
+      datadog_agent {}
+    }
+
+    processor_group {
+      display_name = "Processors"
+      enabled      = true
+      id           = "group-0"
+      include      = "*"
+      inputs       = ["source-0"]
+
+      processor {
+        display_name = "Sensitive Data Scanner"
+        enabled      = true
+        id           = "processor-sds-0"
+        include      = "*"
+
+        sensitive_data_scanner {
+          rule {
+            name = "Redact AWS Access Key IDs"
+            tags = []
+            on_match {
+              redact {
+                replace = "***"
+              }
+            }
+            pattern {
+              library {
+                id                       = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.id
+                use_recommended_keywords = true
+              }
+            }
+            scope {
+              all = true
+            }
+          }
+          rule {
+            name = "Redact US SSNs"
+            tags = []
+            on_match {
+              redact {
+                replace = "***"
+              }
+            }
+            pattern {
+              library {
+                id                       = data.datadog_sensitive_data_scanner_standard_pattern.us_ssn.id
+                use_recommended_keywords = true
+              }
+            }
+            scope {
+              all = true
+            }
+          }
+        }
+      }
+    }
+
+    destination {
+      id     = "destination-0"
+      inputs = ["group-0"]
+      datadog_logs {}
+    }
+  }
+}
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -129,3 +309,9 @@ After adding scanning rules from the library, you can edit each rule separately 
 [1]: /observability_pipelines/search_syntax/logs/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/guide/regex_log_parsing/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/sensitive_data_scanner_standard_pattern
+[6]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[7]: /security/sensitive_data_scanner/scanning_rules/library_rules/?search=AWS+Access+Key+ID+Scanner
+[8]: /security/sensitive_data_scanner/scanning_rules/library_rules/?search=US+Social+Security+Number+Scanner
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline#nested-schema-for-configprocessor_groupprocessorsensitive_data_scanner
