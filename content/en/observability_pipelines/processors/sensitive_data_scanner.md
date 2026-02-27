@@ -45,7 +45,7 @@ To set up the processor:
 
  For the following message structure:
 
-```json
+{{< code-block lang="json" >}}
 {
     "outer_key": {
         "inner_key": "inner_value",
@@ -57,7 +57,7 @@ To set up the processor:
     },
     "d": "d value"
 }
-```
+{{< /code-block >}}
 
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
@@ -103,7 +103,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
  For the following message structure:
 
-```json
+{{< code-block lang="json" >}}
 {
     "outer_key": {
         "inner_key": "inner_value",
@@ -115,7 +115,7 @@ After adding scanning rules from the library, you can edit each rule separately 
     },
     "d": "d value"
 }
-```
+{{< /code-block >}}
 
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
@@ -128,11 +128,11 @@ You can use the [Datadog Observability Pipeline Terraform resource][4] to set up
 
 1. Use the [Datadog Sensitive Data Scanner Standard Pattern][5] data resource to retrieve the rule ID of the Sensitive Data Scanner [library rule][6].
 
-   ```terraform
-   data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
-     filter = "<RULE_NAME>"
-   }
-   ```
+   {{< code-block lang="terraform" >}}
+data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
+  filter = "<RULE_NAME>"
+}
+   {{< /code-block >}}
 
    Replace the placeholders:
 
@@ -141,41 +141,40 @@ You can use the [Datadog Observability Pipeline Terraform resource][4] to set up
 
    For example, if you want to use the [AWS Access Key ID Scanner][7] and [US Social Security Number Scanner][8] rules, configure the data source as follows:
 
-   ```terraform
-   data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
-     filter = "AWS Access Key ID Scanner"
-   }
-   data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
-     filter = "US Social Security Number Scanner"
-   }
-   ```
+   {{< code-block lang="terraform" >}}
+data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
+  filter = "AWS Access Key ID Scanner"
+}
+data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
+  filter = "US Social Security Number Scanner"
+}
+   {{< /code-block >}}
 
 1. Add a [rule][9] block in your Observability Pipeline resource for the library rule.
 
-   ```terraform
-   ...
-     sensitive_data_scanner {
-       rule {
-         name = "<YOUR_RULE_NAME>"
-         tags = []
-         on_match {
-           redact {
-             replace = "***"
-           }
-         }
-         pattern {
-           library {
-             id                       = data.datadog_sensitive_data_scanner_standard_pattern.<RULE_IDENTIFIER>.id
-             use_recommended_keywords = true
-           }
-         }
-         scope {
-           all = true
-         }
-       }
-     }
-   }
-   ```
+   {{< code-block lang="terraform" >}}
+...
+  sensitive_data_scanner {
+    rule {
+      name = "<YOUR_RULE_NAME>"
+      tags = []
+      on_match {
+        redact {
+          replace = "***"
+        }
+      }
+      pattern {
+        library {
+          id                       = data.datadog_sensitive_data_scanner_standard_pattern.<RULE_IDENTIFIER>.id
+          use_recommended_keywords = true
+        }
+      }
+      scope {
+        all = true
+      }
+    }
+  }
+   {{< /code-block >}}
 
    Replace the placeholders:
 
@@ -184,30 +183,29 @@ You can use the [Datadog Observability Pipeline Terraform resource][4] to set up
 
    For example, if you want to use the [AWS Access Key ID Scanner][7] data source from step 1:
 
-   ```terraform
-   ...
-     sensitive_data_scanner {
-       rule {
-         name = "Redact AWS Access Key IDs"
-         tags = []
-         on_match {
-           redact {
-             replace = "***"
-           }
-         }
-         pattern {
-           library {
-             id                       = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.id
-             use_recommended_keywords = true
-           }
-         }
-         scope {
-           all = true
-         }
-       }
-     }
-   }
-   ```
+   {{< code-block lang="terraform" >}}
+...
+  sensitive_data_scanner {
+    rule {
+      name = "Redact AWS Access Key IDs"
+      tags = []
+      on_match {
+        redact {
+          replace = "***"
+        }
+      }
+      pattern {
+        library {
+          id                       = data.datadog_sensitive_data_scanner_standard_pattern.aws_access_key.id
+          use_recommended_keywords = true
+        }
+      }
+      scope {
+        all = true
+      }
+    }
+  }
+   {{< /code-block >}}
 
    See [Sensitive Data Scanner configuration example](#sensitive-data-scanner-configuration-example) for a full configuration example.
 
@@ -222,7 +220,7 @@ In this example, the Sensitive Data Scanner processor scans for AWS Access Key I
 
 #### Configuration example {#configuration-example}
 
-```terraform
+{{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   filter = "AWS Access Key ID Scanner"
 }
@@ -300,7 +298,7 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
     }
   }
 }
-```
+{{< /code-block >}}
 
 ## Further reading
 
