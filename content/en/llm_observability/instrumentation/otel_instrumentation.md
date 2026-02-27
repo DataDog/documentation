@@ -38,9 +38,9 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 This environment variable enables version 1.37+-compliant OpenTelemetry traces for frameworks that now support the version 1.37+ semantic conventions, but previously supported older versions (such as [strands-agents][5]).
 
-**Note**: If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. Refer to your library's documentation for the appropriate configuration method.
-
-**Note**: When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your LLM Observability access controls. See [Data Access Control][8] for more information.
+**Note**:
+* If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. Refer to your library's documentation for the appropriate configuration method.
+* When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your LLM Observability access controls. See [Data Access Control][8] for more information.
 
 #### Using strands-agents
 

@@ -103,7 +103,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 ### LLM Observability
 
-When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
+When using [OpenTelemetry instrumentation][13], some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
 ## Select tags for access
@@ -229,3 +229,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
+[13]: /llm_observability/instrumentation/otel_instrumentation/
