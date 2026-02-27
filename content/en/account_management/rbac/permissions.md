@@ -58,9 +58,16 @@ Managed roles are created and maintained by Datadog. Their permissions may be au
 
 ### Custom roles
 
-Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3].
+Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3]. You can also add a permission to multiple custom roles at once by selecting that permission from the Roles page.
 
-Unlike Managed Roles, custom roles do not receive new permissions when Datadog releases new products and features. Custom roles only receive new permissions to maintain compatibility when Datadog releases a new permission gating existing functionality.
+Unlike Managed Roles, custom roles do not receive new permissions when Datadog releases new products and features, unless configured to receive Automatic Updates. If Automatic Updates are off, custom roles will only receive new permissions to maintain compatibility when Datadog releases a new permission gating existing functionality.
+
+To configure Automatic Updates for custom roles:
+1. Go to the Organization Settings page, then click the **Roles** tab.
+2. Click the role you want to update, then click **Edit Role** in the top right.
+3. Under `Automatically Received Permissions`, choose an option from the dropdown: None, Datadog Read Only Role, Datadog Standard Role, Datadog Admin Role.
+
+If the custom role is configured to receive automatic updates based on a selected role template, the custom role will receive any new permissions given to the selected role template as they are released. No already-released permissions will be added. You can add or remove any permissions from this role and continue to receive automatic updates.
 
 **Note**: When adding a new custom role to a user, make sure to remove the managed Datadog role associated with that user to enforce the new role permissions.
 
