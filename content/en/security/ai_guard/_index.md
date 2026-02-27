@@ -35,4 +35,4 @@ For information on how to set up AI Guard, see [Get Started with AI Guard][1].
 [1]: /security/ai_guard/onboarding/
 [2]: https://genai.owasp.org/llm-top-10/
 [3]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
-[4]: https://app.datadoghq.com/security/ai-guard/playground
+[4]: /security/ai_guard/onboarding/#playground
