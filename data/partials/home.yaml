@@ -18,80 +18,6 @@ guides:
 nav_sections:
     # For a better rendering, sections should include sub-sections with multiple of 4.
   - nav_section:
-    - name: 'Platform Capabilities and Extending Datadog'
-    - navtiles:
-      - title: Alerts
-        link: monitors/
-        icon: monitor
-        desc: Create, edit, and manage your monitors and notifications
-      - title: Dashboards
-        link: dashboards/
-        icon: dashboard
-        desc: Visualize, analyze, and generate insights about your data
-      - title: Notebooks
-        link: notebooks/
-        icon: notebook
-        desc: Create rich-text documents with live graphs for investigations, postmortems, and runbooks
-      - title: Mobile App
-        link: mobile/
-        icon: mobile
-        desc: View Datadog alerts, incidents, and more on your mobile device
-      - title: Fleet Automation
-        link: agent/fleet_automation/
-        icon: agent
-        desc: Remotely configure, upgrade, and manage your Agents at scale
-      - title: Account Management
-        link: account_management/
-        icon: cog-2
-        desc: Manage org-based settings, billing, and data access controls
-      - title: Event Management
-        link: events/
-        icon: events
-        desc: Track notable changes and alerts in your applications and infrastructure
-      - title: CoScreen
-        link: coscreen/
-        icon: coscreen
-        desc: Share and interact with application windows for pair programming and incident management
-      - title: OpenTelemetry
-        link: opentelemetry/
-        icon: open-telemetry
-        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
-      - title: Integrations
-        link: integrations/
-        icon: integrations
-        desc: Gather data about your applications, services, and systems
-      - title: API
-        link: api/latest/
-        icon: api
-        desc: Try the Datadog API
-      - title: Data Security
-        link: data_security/
-        icon: security-lock
-        desc: Learn how Datadog protects your data
-      - title: Extend Datadog
-        link: extend/
-        icon: dev-code
-        desc: Extend the Datadog platform
-      - title: Partners
-        link: partners/
-        icon: colab
-        desc: Learn about best practices and get started monitoring your clients' environments.
-  - nav_section:
-    - name: 'AI'
-    - navtiles:
-      - title: Bits AI Agents
-        link: bits_ai/
-        icon: bits-ai
-        desc: Your agentic teammate that automates development, security, and operational workflows
-      - title: Watchdog
-        link: watchdog/
-        icon: watchdog
-        desc: Detect and surface application and infrastructure anomalies
-      - title: LLM Observability
-        link: llm_observability/
-        icon: llm-observability
-        desc: Trace, monitor, and secure your LLM applications
-  - nav_section:
     - name: 'Observability'
     - navtiles:
       - title: Infrastructure
@@ -102,22 +28,22 @@ nav_sections:
         link: metrics/
         icon: metric
         desc: Explore, search, and create distributions for your metrics
-      - title: Network Monitoring
-        link: network_monitoring/
-        icon: network
-        desc: Use tagged objects to collect and graph data about your network traffic
       - title: Container Monitoring
         link: containers/
         icon: container
         desc: Monitor the health, performance, and security of your containerized environments
-      - title: End User Device Monitoring
-        link: infrastructure/end_user_device_monitoring/
-        icon: desktop-wui
-        desc: Monitor the performance and security of your end user devices
       - title: Serverless
         link: serverless/
         icon: serverless
         desc: Detect and resolve performance issues in your serverless applications
+      - title: Network Monitoring
+        link: network_monitoring/
+        icon: network
+        desc: Use tagged objects to collect and graph data about your network traffic
+      - title: End User Device Monitoring
+        link: infrastructure/end_user_device_monitoring/
+        icon: desktop-wui
+        desc: Monitor the performance and security of your end user devices
       - title: Cloud Cost Management
         link: cloud_cost_management/
         icon: cloud-cost-management
@@ -171,6 +97,21 @@ nav_sections:
         icon: error-tracking
         desc: Identify critical errors and accelerate resolution across web, mobile, and backend
   - nav_section:
+    - name: 'AI'
+    - navtiles:
+      - title: Bits AI Agents
+        link: bits_ai/
+        icon: bits-ai
+        desc: Your agentic teammate that automates development, security, and operational workflows
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: Detect and surface application and infrastructure anomalies
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: Trace, monitor, and secure your LLM applications
+  - nav_section:
     - name: 'Digital Experience'
     - navtiles:
       - title: Real User Monitoring
@@ -193,10 +134,6 @@ nav_sections:
         link: mobile_app_testing/
         icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
-      - title: Error Tracking
-        link: error_tracking/
-        icon: error-tracking
-        desc: Identify critical errors and accelerate resolution across web, mobile, and backend
   - nav_section:
     - name: 'Software Delivery'
     - navtiles:
@@ -206,7 +143,7 @@ nav_sections:
         desc: Monitor the health and performance of your CI pipelines
       - title: Test Optimization
         link: tests/
-        icon: ci
+        icon: flaky-test-wui
         desc: Detect flaky tests and identify commits introducing flaky tests
       - title: Continuous Testing
         link: continuous_testing/
@@ -226,7 +163,7 @@ nav_sections:
         desc: Toggle features, run A/B tests, and gradually roll out functionality without code deployments
       - title: Code Coverage
         link: code_coverage/
-        icon: ci
+        icon: code-3
         desc: Visualize coverage data trends and block PR merges based on coverage thresholds
   - nav_section:
     - name: 'Security'
@@ -258,7 +195,7 @@ nav_sections:
   - nav_section:
     - name: 'Service Management'
     - navtiles:
-      - title: Incident Response
+      - title: Incident Management
         link: service_management/incident_management
         icon: incidents
         desc: Identify, analyze, and mitigate disruptive incidents in your organization
@@ -290,6 +227,65 @@ nav_sections:
         link: service_management/app_builder/
         icon: app-builder
         desc: Create low-code applications to streamline your internal tools
+  - nav_section:
+    - name: 'Platform Capabilities and Extending Datadog'
+    - navtiles:
+      - title: Alerts
+        link: monitors/
+        icon: monitor
+        desc: Create, edit, and manage your monitors and notifications
+      - title: Dashboards
+        link: dashboards/
+        icon: dashboard
+        desc: Visualize, analyze, and generate insights about your data
+      - title: Notebooks
+        link: notebooks/
+        icon: notebook
+        desc: Create rich-text documents with live graphs for investigations, postmortems, and runbooks
+      - title: Mobile App
+        link: mobile/
+        icon: mobile
+        desc: View Datadog alerts, incidents, and more on your mobile device
+      - title: Fleet Automation
+        link: agent/fleet_automation/
+        icon: fleet-automation-wui
+        desc: Remotely configure, upgrade, and manage your Agents at scale
+      - title: Account Management
+        link: account_management/
+        icon: cog-2
+        desc: Manage org-based settings, billing, and data access controls
+      - title: Event Management
+        link: events/
+        icon: events
+        desc: Track notable changes and alerts in your applications and infrastructure
+      - title: CoScreen
+        link: coscreen/
+        icon: coscreen
+        desc: Share and interact with application windows for pair programming and incident management
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
+      - title: Integrations
+        link: integrations/
+        icon: integrations
+        desc: Gather data about your applications, services, and systems
+      - title: API
+        link: api/latest/
+        icon: api
+        desc: Try the Datadog API
+      - title: Data Security
+        link: data_security/
+        icon: security-lock
+        desc: Learn how Datadog protects your data
+      - title: Extend Datadog
+        link: extend/
+        icon: dev-code
+        desc: Extend the Datadog platform
+      - title: Partners
+        link: partners/
+        icon: colab
+        desc: Learn about best practices and get started monitoring your clients' environments.
 
 popular_searches:
   - title: API documentation
