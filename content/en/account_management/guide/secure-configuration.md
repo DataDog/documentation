@@ -1,6 +1,7 @@
 ---
 title: Recommended Secure Configuration
-description: Describes the capabilities of the Datadog Admin Role
+description: Learn how to securely configure and manage the Datadog Admin Role, including
+  permissions, API access, and recommended security practices.
 further_reading:
 - link: "account_management/rbac/permissions/"
   tag: "Documentation"
@@ -17,7 +18,7 @@ The Datadog Admin Role is the highest-privileged managed role within a Datadog o
 - Governance and compliance configuration
 
 The Admin Role is a managed role, which means it has the following properties:
-- It is provided out-of-the-box (OOTB) in every Datadog organization.
+- It is provided out-of-the-box in every Datadog organization.
 - It automatically receives new permissions when new Datadog features are released.
 - It inherits all permissions from lower-privilege managed roles (Standard and Read-Only).
 - It cannot be deleted or decommissioned, but all users can be removed from the role.
@@ -142,7 +143,7 @@ The following permissions are assigned to the Datadog Admin Role by default. The
 | `ci_provider_settings_write`     | Configure CI provider settings      |
 | `ci_ingestion_control_write`     | Configure CI ingestion filters      |
 | `quality_gate_rules_write`       | Manage PR gate rules                |
-| `static_analysis_settings_write` | CConfigure static analysis settings |
+| `static_analysis_settings_write` | Configure static analysis settings |
 
 ### Network Monitoring and Infrastructure Monitoring
 
