@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This guide provides recommendations to Datadog organization administrators on how to use Datadog Teams effectively. It is applicable for the following situations:
+This guide provides recommendations to Datadog organization administrators on how to use Datadog Teams effectively. It applies to the following situations:
 
 - You want to use Datadog Teams to drive ownership workflows (including routing, visibility, governance, and access), not only as a directory.
 - You already have team data spread across multiple systems. The systems may include IdP groups, SAML attributes, GitHub teams/CODEOWNERS, internal tools, Terraform, spreadsheets, Slack, and others.
@@ -23,16 +23,16 @@ This guide provides recommendations to Datadog organization administrators on ho
 
 This guide does not provide UI instructions. Instead, it focuses on decisions, sequencing, and common failure modes.
 
-## What problem Datadog Teams solves
+## Purpose of Datadog Teams
 
-Datadog Teams helps you create a **single, usable model of ownership** inside Datadog that can be referenced consistently across products and workflows, without requiring you to manually manage it.
+Datadog Teams helps you create a single model of ownership inside Datadog that can be referenced consistently across products and workflows.
 
-Think of Teams as the place where you can answer, operationally:
+Teams answers the following operational questions:
 
-- *Who owns this service/monitor/error?*
-- *How do you contact them (channel, email, runbook)?*
-- *How does ownership roll up (team to org unit / platform group)?*
-- *Who has access, or can grant access, to this resource?*
+- Who owns this service, monitor, or error?
+- After finding the owner, how do you contact them?
+- What is the ownership hierarchy?
+- Who has access, or can grant access, to this resource?
 
 ## Before you start: Assess your existing sources of team data
 
