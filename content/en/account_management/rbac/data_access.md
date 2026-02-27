@@ -78,7 +78,7 @@ After you turn on Data Access Control, Datadog disables or limits other features
 ### Real User Monitoring (RUM)
 
 #### Session Replay: Extended Retention
-By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention. 
+By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention.
 
 #### Session Replay: Playlists
 
@@ -103,7 +103,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 ### LLM Observability
 
-When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring a Restricted Dataset on APM with matching data boundaries.
+When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
 ## Select tags for access
