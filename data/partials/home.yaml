@@ -40,10 +40,6 @@ nav_sections:
         link: network_monitoring/
         icon: network
         desc: Use tagged objects to collect and graph data about your network traffic
-      - title: End User Device Monitoring
-        link: infrastructure/end_user_device_monitoring/
-        icon: desktop-wui
-        desc: Monitor the performance and security of your end user devices
       - title: Cloud Cost Management
         link: cloud_cost_management/
         icon: cloud-cost-management
@@ -230,7 +226,7 @@ nav_sections:
   - nav_section:
     - name: 'Platform Capabilities and Extending Datadog'
     - navtiles:
-      - title: Alerts
+      - title: Monitors and Alerting
         link: monitors/
         icon: monitor
         desc: Create, edit, and manage your monitors and notifications
