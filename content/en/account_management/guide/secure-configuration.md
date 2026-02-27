@@ -45,13 +45,13 @@ The following permissions are assigned to the Datadog Admin Role by default. The
 
 ### Access and organization management
 
-| Permission                 | Description                                                 |
-|----------------------------|-------------------------------------------------------------|
-| `user_access_manage`       | Manage users, disable users, manage roles and SAML mappings |
-| `service_account_write`    | Create and disable service accounts                         |
-| `org_management`           | Edit organization configuration and security settings       |
-| `org_connections_write`    | Manage organization connections                             |
-| `governance_console_write` | Enforce governance policies through the Governance Console  |
+| Permission                 | Description                                                                      |
+|----------------------------|----------------------------------------------------------------------------------|
+| `user_access_manage`       | Manage users, disable users. Manage roles, SAML mappings, and sensitive datasets |
+| `service_account_write`    | Create and disable service accounts                                              |
+| `org_management`           | Edit organization configuration and security settings                            |
+| `org_connections_write`    | Manage organization connections                                                  |
+| `governance_console_write` | Enforce governance policies through the Governance Console                       |
 
 ### API and application keys
 
@@ -109,15 +109,56 @@ The following permissions are assigned to the Datadog Admin Role by default. The
 
 ### Security Monitoring
 
+| Permission                                    | Description                                   |
+|-----------------------------------------------|-----------------------------------------------|
+| `security_pipelines_write`                    | Manage Security Pipelines                     |
+| `security_monitoring_cws_agent_rules_actions` | Manage Cloud Workload Security rules          |
+| `bits_security_analyst_write`                 | Run Bits AI security investigations (Preview) |
+| `bits_security_analyst_config_write`          | Configure Bits AI settings (Preview)          |
+| `monitor_config_policy_write`                 | Manage monitor configuration policies         |
+
 ### Observability Pipelines and Fleet Automation
+
+| Permission                       | Description                           |
+|----------------------------------|---------------------------------------|
+| `observability_pipelines_delete` | Delete observability pipelines        |
+| `observability_pipelines_deploy` | Deploy observability pipelines        |
+| `agent_upgrade_write`            | Upgrade agents using Fleet Automation |
+| `fleet_policies_write`           | Create and deploy agent policies      |
 
 ### Synthetic Monitoring and RUM
 
+| Permission                          | Description                         |
+|-------------------------------------|-------------------------------------|
+| `synthetics_private_location_write` | Manage Synthetic private locations  |
+| `rum_delete_data`                   | Delete RUM data                     |
+| `rum_extend_retention`              | Extend RUM session replay retention |
+| `rum_settings_write`                | Configure RUM settings              |
+
 ### Software Delivery
+
+| Permission                       | Description                         |
+|----------------------------------|-------------------------------------|
+| `ci_provider_settings_write`     | Configure CI provider settings      |
+| `ci_ingestion_control_write`     | Configure CI ingestion filters      |
+| `quality_gate_rules_write`       | Manage PR gate rules                |
+| `static_analysis_settings_write` | CConfigure static analysis settings |
 
 ### Network Monitoring and Infrastructure Monitoring
 
+| Permission                   | Description                  |
+|------------------------------|------------------------------|
+| `ndm_device_profiles_edit`   | Edit network device profiles |
+| `ndm_geomap_locations_write` | Manage NDM geomap locations  |
+| `ndm_device_config_read`     | Read device configurations   |
+
 ### On-call and Status Pages
+
+| Permission                    | Description                           |
+|-------------------------------|---------------------------------------|
+| `on_call_admin`               | Manage advanced On-Call configuration |
+| `status_pages_settings_write` | Configure Status Pages                |
+| `status_pages_incident_write` | Publish status page notices           |
 
 ## API access to the Datadog Admin Role
 
