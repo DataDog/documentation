@@ -13,15 +13,15 @@ further_reading:
   text: "GitHub Teams Integration"
 ---
 
-## Who this guide is for
+## Overview
 
-This guide is for Datadog Org Admins who:
+This guide provides recommendations to Datadog organization administrators on how to use Datadog Teams effectively. It is applicable for the following situations:
 
-- Want Datadog Teams to be dependable enough to power ownership workflows (routing, visibility, governance, access), not a directory.
-- Already have "team" data spread across multiple systems (IdP groups, SAML attributes, GitHub teams/CODEOWNERS, internal tools, Terraform, spreadsheets, Slack, and others).
-- Are early in Datadog Teams adoption and want a practical way to get to a reliable model without breaking existing workflows.
+- You want to use Datadog Teams to drive ownership workflows (including routing, visibility, governance, and access), not only as a directory.
+- You already have team data spread across multiple systems. The systems may include IdP groups, SAML attributes, GitHub teams/CODEOWNERS, internal tools, Terraform, spreadsheets, Slack, and others.
+- Your organization wants to adopt Datadog Teams without breaking existing workflows.
 
-This guide is not a UI walkthrough. It focuses on decisions, sequencing, and common failure modes.
+This guide does not provide UI instructions. Instead, it focuses on decisions, sequencing, and common failure modes.
 
 ## What problem Datadog Teams solves
 
@@ -258,6 +258,10 @@ How to avoid:
 ### 3) Plan for "next sources," but don't block on them
 
 Design your Teams foundation so you can attach other sources later as enrichment, not as a required first step.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /account_management/scim/
