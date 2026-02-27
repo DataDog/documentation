@@ -20,13 +20,9 @@ The sections below provide details on the behavior of each mode as well as how t
 
 ## Changing Agent's infrastructure mode
 
-To change the infrastructure mode, edit or add the `infrastructure_mode: [full | basic | none]` option in the main Agent configuration file (`datadog.yaml`) and then [restart the Datadog Agent][1].
+To change the infrastructure mode, edit or add the `infrastructure_mode: [full | basic | none]` option in the main [Agent configuration file][1] and then [restart the Datadog Agent][2].
 
 If the `infrastructure_mode` option is not explicitly set in the configuration file, the agent will operate in `full` mode.
-
-```yaml
-infrastructure_mode: basic
-```
 
 You can verify the configured infrastructure mode of an agent in Fleet Automation by searching for or grouping by the `Infrastructure Mode` facet.
 
@@ -38,6 +34,12 @@ You can verify the configured infrastructure mode of an agent in Fleet Automatio
 
 Full mode is the default Agent infrastructure mode and is recommended for most use cases.
 All Agent infrastructure monitoring features are available in full mode.
+
+To configure Agent in full mode, add the following to `datadog.yaml`:
+
+```yaml
+infrastructure_mode: full
+```
 
 ### Basic mode
 
@@ -52,48 +54,61 @@ Basic mode is available in the following Agent versions:
 | Linux          | 7.73.0                |
 | Windows        | 7.76.2                |
 | macOS          | 7.73.0                |
-| IoT            | Not applicable        |
-| AIX            | Not applicable        |
 
 Only the following integrations run in basic mode:
-  - [System Check][2]
-  - [Disk][3]
-  - [Network][4]
-  - [NTP][5]
-  - [Processes][6]
-  - [Systemd][7]
-  - [Windows Crash Detection][8]
-  - [Windows Kernel Memory][9]
-  - [Windows Services][10]
-  - [Custom checks][11] prefixed with `custom_`
-  - Logs-only integrations such as [journald][12] or [Windows Event Log][13]
+  - [System Check][3]
+  - [Disk][4]
+  - [Network][5]
+  - [NTP][6]
+  - [Processes][7]
+  - [Systemd][8]
+  - [Windows Crash Detection][9]
+  - [Windows Kernel Memory][10]
+  - [Windows Services][11]
+  - [Custom checks][12] prefixed with `custom_`
+  - Logs-only integrations such as [journald][13] or [Windows Event Log][14]
 
 Integrations that are configured, but not included in the list above, will not be scheduled by the Datadog agent.
 To run other integrations, change the agent to full mode.
+
+To configure Agent in basic mode, add the following to `datadog.yaml`:
+
+```yaml
+infrastructure_mode: basic
+```
 
 ### None mode
 
 None mode disables all infrastructure monitoring in the Agent.
 No infrastructure metrics will be collected from the host.
 
-None mode is compatible with other Datadog products that do not require infrastructure monitoring such as [Log Management][14] and [Error Tracking][15].
+None mode is compatible with other Datadog products that do not require infrastructure monitoring such as [Log Management][15] and [Error Tracking][16].
+
+None mode is available with agent version `7.77.0` or later.
+
+To configure Agent in none mode, add the following to `datadog.yaml`:
+
+```yaml
+infrastructure_mode: none
+```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/agent-configuration-files/
-[2]: /integrations/system/
-[3]: /integrations/disk/
-[4]: /integrations/network/
-[5]: /integrations/ntp/
-[6]: /integrations/process/
-[7]: /integrations/systemd/
-[8]: /integrations/wincrashdetect/
-[9]: /integrations/winkmem/
-[10]: /integrations/windows-service/
-[11]: /extend/custom_checks/
-[12]: /integrations/journald/
-[13]: /integrations/event-viewer/
-[14]: /logs/
-[15]: /error_tracking/
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /integrations/system/
+[4]: /integrations/disk/
+[5]: /integrations/network/
+[6]: /integrations/ntp/
+[7]: /integrations/process/
+[8]: /integrations/systemd/
+[9]: /integrations/wincrashdetect/
+[10]: /integrations/winkmem/
+[11]: /integrations/windows-service/
+[12]: /extend/custom_checks/
+[13]: /integrations/journald/
+[14]: /integrations/event-viewer/
+[15]: /logs/
+[16]: /error_tracking/
