@@ -1,6 +1,6 @@
 ---
 title: Issue Team Ownership
-description: Automatically assign issues to teams based on service owners, Git CODEOWNERS files or the team attribute.
+description: Automatically assign issues to teams based on service owners, Git CODEOWNERS files, or the team attribute.
 further_reading:
 - link: '/error_tracking/auto_assign/'
   tag: 'Documentation'
@@ -28,13 +28,16 @@ Your team owns an issue if it is the code owner of the top-level stack frame of 
 
 **Note**: After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
 
-**Note**: Issue Team Ownership only supports GitHub.
+**Notes**: 
+-  Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
+- After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
+- Issue Team Ownership only supports GitHub.
 
 ### Setup
 
 1. Ensure [Source Code Integration][1] is set up.
 2. Install [the GitHub integration][2].
-3. Make sure all requested permissions (Contents, Members) are granted for the GitHub integration.
+3. Make sure the GitHub integration has all requested permissions (Contents and Members).
 4. Create a valid `CODEOWNERS` file in your repository following [GitHub's CODEOWNERS standards][3].
 5. In Datadog, go to [**Teams**](https://app.datadoghq.com/teams) > Select your team > **Settings** > **GitHub Connection** to map your Datadog teams to the corresponding GitHub teams defined in your `CODEOWNERS` file.
 
@@ -42,7 +45,7 @@ Your team owns an issue if it is the code owner of the top-level stack frame of 
 
 ## Service ownership
 
-Your team owns an issue if it owns the service where the issue happens. Service ownership is inferred from your existing service ownership configuration in Datadog — no additional setup is required.
+Your team owns an issue if it owns the service where the issue happens. Service ownership is inferred from your existing service ownership configuration in Datadog. No additional setup is required.
 
 **Note**: Teams assigned through service ownership cannot be removed from an issue and are dynamically updated based on the current service ownership.
 
