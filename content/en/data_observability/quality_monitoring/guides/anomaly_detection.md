@@ -42,7 +42,7 @@ While the core model logic is shared across metric types, each type has addition
 
 ### Freshness
 
-Freshness monitors alert when the time since the last refresh is longer than expected based on historical update patterns. The model adds a small buffer to the upper bound to avoid alerting on minor delays. The lower bound is set to zero, since arriving earlier than expected is not typically a problem.
+Freshness monitors alert when the time since the last refresh is longer than expected based on historical update patterns. The model adds a small buffer to the upper bound to avoid alerting on minor delays. The lower bound is set to zero, since refreshing earlier than expected is not typically a problem.
 
 ### Row count
 
