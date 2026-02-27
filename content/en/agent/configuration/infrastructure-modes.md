@@ -30,7 +30,7 @@ infrastructure_mode: basic
 
 You can verify the configured infrastructure mode of an agent in Fleet Automation by searching for or grouping by the `Infrastructure Mode` facet.
 
-{{< img src="/static/images/agent/configuration/fleet_automation_group_by_infra_mode.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:100%" >}}
+{{< img src="agent/configuration/fleet_automation_group_by_infra_mode.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:100%" >}}
 
 ## Infrastructure mode behaviors
 
