@@ -21,4 +21,4 @@ You can use authorization scopes with OAuth2 clients for your [Datadog Apps][1].
 
 {{< api-scopes >}}
 
-[1]: https://docs.datadoghq.com/extend/datadog_apps/#oauth-api-access
+[1]: /extend/authorization/oauth2_in_datadog
