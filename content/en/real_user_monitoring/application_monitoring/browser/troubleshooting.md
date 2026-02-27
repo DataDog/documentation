@@ -82,7 +82,7 @@ If your application uses Enterprise User Administration (EUA) with a redirect to
 To record the browser test successfully:
 
 1. **Record using the popup window mode**: When starting the browser test recording, select **Open in Popup** instead of recording inside the iframe. This allows the authentication flow to complete without losing the CSRF token.
-2. **Log out before recording**: Make sure there is no active session or saved cookies. Begin the recording with a completely clean session.
+2. **Log out before recording**: Make sure there is no active session or saved cookies. Start the recording with a completely clean session.
 3. **Use incognito/private browsing mode**: This prevents cached credentials or cookies from interfering with the authentication flow.
 4. **Record once using the popup window**: After the test is recorded through the popup, it runs correctly from the private location.
 
