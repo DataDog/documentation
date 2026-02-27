@@ -17,7 +17,7 @@ products:
 
 The Sensitive Data Scanner processor scans logs to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
 
-## Setup
+## Set up the processor in the UI
 
 To set up the processor:
 
@@ -122,7 +122,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% /collapse-content %}}
 
-## Set up the Sensitive Data Scanner processor using Terraform
+## Set up processor using Terraform
 
 You can use the [Datadog Observability Pipeline Terraform resource][4] to set up a pipeline with the Sensitive Data Scanner processor. To add a rule to the Sensitive Data Scanner processor using Terraform:
 
@@ -213,7 +213,7 @@ You can use the [Datadog Observability Pipeline Terraform resource][4] to set up
 
 1. Repeat steps 1 and 2 for all library rules you want to add.
 
-### Sensitive Data Scanner configuration example {#sensitive-data-scanner-configuration-example}
+### Sensitive Data Scanner configuration example
 
 In this example, the Sensitive Data Scanner processor scans for AWS Access Key IDs and US Social Security Numbers, and redacts the data with the string `***`. The [Observability Pipelines resource configuration example](#configuration-example):
 
