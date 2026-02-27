@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< learning-center-callout header="Join the frontier group" hide_image="true" btn_title="Sign Up" btn_url="https://frontier-signup.vercel.app/">}}
-  An opt-in program where you get access to the newest AI features we're developing. We'll only enable what we're comfortable enabling for our own internal security team.
+The frontier group is an opt-in program where you get access to the newest AI features Datadog is developing. We'll only enable what we would be comfortable enabling for our own internal security team.
 {{< /learning-center-callout >}}
 
 ## What's included
