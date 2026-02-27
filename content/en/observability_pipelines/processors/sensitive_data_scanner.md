@@ -46,15 +46,17 @@ To set up the processor:
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
-1. Navigate to your [pipeline][2].
+1. Navigate to your [pipeline][1].
 1. In the Sensitive Data Scanner processor with the rule you want to edit, click **Manage Scanning Rules**.
 1. Toggle **Use recommended keywords** if you want the rule to use them. Otherwise, add your own keywords to the **Create keyword dictionary** field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. Click **Update**.
 
+[1]: https://app.datadoghq.com/observability-pipelines
+
 {{% /tab %}}
 {{% tab "Custom rules" %}}
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid. See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
+1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. See [Writing Effective Grok Parsing Rules with Regular Expressions][1] for more information.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -66,6 +68,7 @@ After adding scanning rules from the library, you can edit each rule separately 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
+1. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.
 1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
@@ -78,6 +81,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 1. Add a name for the scanning rule.
 1. Optionally, add a description for the rule.
 1. Click **Add Rule**.
+
+[1]: /logs/guide/regex_log_parsing/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -108,5 +113,3 @@ After adding scanning rules from the library, you can edit each rule separately 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/search_syntax/logs/
-[2]: https://app.datadoghq.com/observability-pipelines
-[3]: /logs/guide/regex_log_parsing/
