@@ -1,0 +1,128 @@
+### Application Security
+
+`DD_API_SECURITY_DOWNSTREAM_BODY_ANALYSIS_SAMPLE_RATE`
+: **Since**: 2.29.0 <br>
+**Type**: `decimal`<br>
+**Default**: `0.5`<br>
+Defines the probability of a downstream request body being sampled, or said differently, defines the overall number of requests for which the request and response body should be sampled / analysed.
+  
+
+`DD_API_SECURITY_ENABLED`
+: **Aliases**: `DD_EXPERIMENTAL_API_SECURITY_ENABLED`<br>
+**Type**: `boolean`<br>
+**Default**: `true`<br>
+Controls whether API Security features are enabled. If unset, API Security is enabled by default.
+
+`DD_API_SECURITY_ENDPOINT_COLLECTION_ENABLED`
+: **Type**: `boolean`<br>
+**Default**: `true`<br>
+Controls whether API endpoint definitions are collected for API catalog features. If unset, endpoint collection is enabled by default.
+
+`DD_API_SECURITY_MAX_DOWNSTREAM_REQUEST_BODY_ANALYSIS`
+: **Since**: 2.29.0 <br>
+**Type**: `int`<br>
+**Default**: `1`<br>
+The maximum number of downstream requests per request for which the request and response body should be analysed.
+
+`DD_API_SECURITY_REQUEST_SAMPLE_RATE`
+: **Type**: `decimal`<br>
+**Default**: `0.1`<br>
+Sets the sampling rate for API Security schema extraction. Values are clamped to the range 0.0 to 1.0; if unset or invalid, a default rate is used.
+
+`DD_API_SECURITY_SAMPLE_DELAY`
+: **Type**: `decimal`<br>
+**Default**: `30`<br>
+Sets the delay (in seconds) between API Security schema samples. This setting is intended for system testing and is not meant for general use.
+
+`DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING`
+: **Type**: `string`<br>
+**Default**: `safe`<br>
+Controls automated user events tracking for AppSec, including enabling/disabling it and selecting a tracking mode. Deprecated; prefer the appsec.auto_user_instrumentation.mode setting.
+
+`DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE`
+: **Type**: `string`<br>
+**Default**: `identification`<br>
+Selects the AppSec automatic user instrumentation mode, which controls how user events are collected.
+
+`DD_APPSEC_ENABLED`
+: **Type**: `boolean`<br>
+**Default**: `false`<br>
+Enables or disables the AppSec product inside the tracer. When enabled the tracer initializes the AppSec module (in-app WAF, header/body collection and AppSec telemetry)
+
+`DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML`
+: **Type**: `string`<br>
+**Default**: N/A<br>
+Path to a local HTML template file that will be returned when a request is blocked and the response should be HTML. If unset or invalid, the tracer uses the default blocking HTML template defined by the product RFC. The tracer decides HTML or JSON according to `Accept` header or the block action's parameters.
+
+`DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON`
+: **Type**: `string`<br>
+**Default**: N/A<br>
+Path to a local JSON template file that will be returned when a request is blocked and the response should be JSON. If unset or invalid, the tracer uses the default blocking HTML template defined by the product RFC. The tracer decides HTML or JSON according to `Accept` header or the block action's parameters.
+
+`DD_APPSEC_HTTP_BLOCKED_TEMPLATE_TEXT`
+: **Type**: `string`<br>
+**Default**: N/A<br>
+Path to a plain-text template file used for blocked-request responses when plain text is the chosen format. If unset, the tracer uses its default text template or falls back to the JSON/HTML default behavior
+
+`DD_APPSEC_MAX_STACK_TRACES`
+: **Aliases**: `DD_APPSEC_MAX_STACKTRACES`<br>
+**Type**: `int`<br>
+**Default**: `2`<br>
+Limits how many separate stacktraces are captured and attached to an AppSec/IAST event to keep payload sizes reasonable. Evidence stacktraces are useful for triage, but unbounded capture can leak sensitive data and consume excessive bandwidth; this limit balances evidence value and safety. Set to 0 to collect all.
+
+`DD_APPSEC_MAX_STACK_TRACE_DEPTH`
+: **Aliases**: `DD_APPSEC_MAX_STACKTRACE_DEPTH`<br>
+**Type**: `int`<br>
+**Default**: `32`<br>
+Sets the maximum number of stack frames retained for any captured stacktrace attached to AppSec events. Tracers should prioritise top-of-stack frames and truncate deeper frames when this limit is reached. The setting helps keep evidentiary stacktraces compact while preserving the most actionable frames
+
+`DD_APPSEC_MAX_STACK_TRACE_DEPTH_TOP_PERCENT`
+: **Type**: `int`<br>
+**Default**: `75`<br>
+When the tracer must trim a stacktrace, this value controls how much of the top portion of the stacktrace is preserved at higher fidelity (a percentage). This lets implementations keep more of the top frames (most actionable) while trimming the less usefully deep frames
+
+`DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP`
+: **Type**: `string`<br>
+**Default**: `(?i)pass|pw(?:or)?d|secret|(?:api|private|public|access)[_-]?key|token|consumer[_-]?(?:id|key|secret)|sign(?:ed|ature)|bearer|authorization|jsessionid|phpsessid|asp\.net[_-]sessionid|sid|jwt`<br>
+A regular expression used by the AppSec obfuscator to identify parameter keys that must cause full redaction. When any `key_path` string matches this regexp the entire parameter is replaced by `<redacted by datadog>`. The default key regexp matches common secret/key names (password, token, authorization, jwt, etc.) an empty string disables the key regexp
+
+`DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP`
+: **Type**: `string`<br>
+**Default**: `(?i)(?:p(?:ass)?w(?:or)?d|pass(?:[_-]?phrase)?|secret(?:[_-]?key)?|(?:(?:api|private|public|access)[_-]?)key(?:[_-]?id)?|(?:(?:auth|access|id|refresh)[_-]?)?token|consumer[_-]?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?|jsessionid|phpsessid|asp\.net(?:[_-]|-)sessionid|sid|jwt)(?:\s*=[^;]|"\s*:\s*"[^"]+")|bearer\s+[a-z0-9\._\-]+|token:[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L][\w=-]+\.ey[I-L][\w=-]+(?:\.[\w.+\/=-]+)?|[\-]{5}BEGIN[a-z\s]+PRIVATE\sKEY[\-]{5}[^\-]+[\-]{5}END[a-z\s]+PRIVATE\sKEY|ssh-rsa\s*[a-z0-9\/\.+]{100,}`<br>
+Regular expression used to find and redact sensitive substrings inside parameter values and highlights. Matches are replaced with `<redacted by datadog>`. This regexp complements the key regexp: the key regexp takes precedence; when no key match exists, the value regexp runs. The default pattern targeted at tokens, JWTs, private key blocks, and other credential shapes. Empty string disables the value regexp
+
+`DD_APPSEC_RASP_ENABLED`
+: **Type**: `boolean`<br>
+**Default**: `true`<br>
+Turns on the tracer's RASP / Exploit Prevention capabilities. When enabled the tracer runs synchronous, pre-execution checks and may generate block actions or exploit signals. RASP may have separate activation and implementation details per language; enabling it usually activates extra synchronous instrumentation and additional evidence capture for detections
+
+`DD_APPSEC_RULES`
+: **Type**: `string`<br>
+**Default**: N/A<br>
+Override the default rules file provided. Must be a path to a valid JSON rules file
+
+`DD_APPSEC_SCA_ENABLED`
+: **Type**: `boolean`<br>
+**Default**: N/A<br>
+Enables the tracer's runtime Software Composition Analysis (Runtime SCA) capability, which reports runtime dependency/SBOM information and powers runtime vulnerability detection. Useful for testing and demonstrations as well as production runtime vulnerability workflows; SCA may have billing/usage implications and language compatibility constraints described in the SCA runbooks
+
+`DD_APPSEC_STACK_TRACE_ENABLED`
+: **Aliases**: `DD_APPSEC_STACKTRACE_ENABLED`<br>
+**Type**: `boolean`<br>
+**Default**: `true`<br>
+Enables security-related stack traces generation when security events occur.
+
+`DD_APPSEC_TRACE_RATE_LIMIT`
+: **Type**: `int`<br>
+**Default**: `100`<br>
+Controls the maximum amount of AppSec traces, per second.
+
+`DD_APPSEC_WAF_DEBUG`
+: **Type**: `boolean`<br>
+**Default**: `false`<br>
+Turns on internal debug/trace logging for the in-app WAF. This is intended for debugging and is very verbose — it can severely impact performance. Use together with `DD_APPSEC_WAF_TIMEOUT` when debugging and prefer narrow log filters on production systems
+
+`DD_APPSEC_WAF_TIMEOUT`
+: **Type**: `string`<br>
+**Default**: `5000`<br>
+Limits the WAF synchronous execution time (in microseconds)

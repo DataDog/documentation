@@ -292,6 +292,10 @@ A comma-separated list of HTTP header names. HTTP server instrumentations captur
 : **Datadog convention**: `DD_TRACE_EXTENSIONS_PATH` <br>
 A comma-separated list of paths to extension jar files, or folders containing jar files. If pointing to a folder, every jar file in that folder is treated as a separate, independent extension. <br>
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/opentelemetry" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

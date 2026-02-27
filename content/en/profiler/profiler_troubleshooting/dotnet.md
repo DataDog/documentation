@@ -211,7 +211,6 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 - Runtime type and version (for example, .NET Framework 4.8 or .NET Core 6.0).
 - Application type (for example, Web application running in IIS).
 
-
 ## Reduce overhead when using the profiler
 
 The [different profile types][3] have a fixed CPU and memory overhead, so *the more profiled applications, the higher the overhead.*
@@ -259,11 +258,13 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 
    3. Send the resulting output to [Datadog Support][2].
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/dotnet-core/profiler" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/

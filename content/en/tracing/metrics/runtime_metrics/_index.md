@@ -294,6 +294,10 @@ Each supported language collects a set of runtime metrics that provide insights 
 {{< /tab >}}
 {{< /tabs >}}
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/runtime_metrics" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -703,11 +703,15 @@ For more comprehensive detection rule capabilities, see [detection rules][15].
 
 To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
 - [Application and API Protection Security Signals explorer][18]
-- [Cloud SIEM Security Signals explorer][16] 
-  
+- [Cloud SIEM Security Signals explorer][16]
+
   In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
 
 The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
+
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/ai_guard" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
 
 ## Further reading
 

@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "generated_at": "2026-02-27T19:55:47.211444+00:00",
+    "language": "python",
+    "requested_language": "python",
+    "total_registry_entries": 2333,
+    "matched_entries": 1
+  },
+  "configurations": [
+    {
+      "name": "DD_AI_GUARD_ENABLED",
+      "description": "Enables AI Guard request inspection in the tracer; when disabled, AI Guard checks are skipped.",
+      "type": "boolean",
+      "default_value": "false",
+      "from_version": "3.12.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    }
+  ]
+}

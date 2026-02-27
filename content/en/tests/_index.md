@@ -171,6 +171,10 @@ When creating a [dashboard][4] or a [notebook][5], you can use CI test data in y
 
 When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the **Export** button.
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/tests" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

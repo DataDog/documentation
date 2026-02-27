@@ -156,6 +156,10 @@ Configure [monitors][14] to receive notifications when an event of interest is e
 
 Instead of disabling Remote Configuration globally, Datadog recommends opting out for specific Datadog products. For more information, see [the documentation for the relevant product](#product-specific-configuration).
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/remote_configuration" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

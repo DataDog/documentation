@@ -217,6 +217,9 @@ To create a span tag probe:
 
 You can use a *span tag probe* as an alternative to [using Custom Instrumentation to add tags in code][14].
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/dynamic_instrumentation" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
 
 ## Further Reading
 

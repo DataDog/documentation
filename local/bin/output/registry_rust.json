@@ -1,0 +1,429 @@
+{
+  "metadata": {
+    "generated_at": "2026-02-27T19:55:53.185207+00:00",
+    "language": "rust",
+    "requested_language": "rust",
+    "total_registry_entries": 2333,
+    "matched_entries": 34
+  },
+  "configurations": [
+    {
+      "name": "DD_AGENT_HOST",
+      "description": "The host name to use to connect the Datadog agent for traces. The host name can be IPv4, IPv6, or a domain name. If DD_TRACE_AGENT_URL is specified, the value of DD_AGENT_HOST is ignored.",
+      "type": "string",
+      "default_value": "localhost",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [
+        "DD_TRACE_AGENT_HOSTNAME"
+      ],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_DOGSTATSD_HOST",
+      "description": "Override the address of the trace Agent host that the default tracer attempts to submit DogStatsD metrics to. Use `DD_AGENT_HOST` to override `DD_DOGSTATSD_HOST`.",
+      "type": "string",
+      "default_value": "localhost",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [
+        "DD_DOGSTATSD_HOSTNAME"
+      ],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_DOGSTATSD_PORT",
+      "description": "The port of the DogStatsD Agent that metrics are submitted to. If the Agent configuration sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.",
+      "type": "int",
+      "default_value": "8125",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_DOGSTATSD_URL",
+      "description": "The URL to use to connect the Datadog agent for Dogstatsd metrics.",
+      "type": "string",
+      "default_value": "http://localhost:8125",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_ENV",
+      "description": "Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable is used.",
+      "type": "string",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_INSTRUMENTATION_TELEMETRY_ENABLED",
+      "description": "Datadog may collect environmental and diagnostic information about your system to improve the product. When false, this telemetry data will not be collected. **Default**: true",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_LOGS_OTEL_ENABLED",
+      "description": "Enables support for exporting logs via OTLP.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_LOG_LEVEL",
+      "description": "Sets the internal log level for the tracer.",
+      "type": "string",
+      "default_value": "ERROR",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_METRICS_OTEL_ENABLED",
+      "description": "Enable or disable OpenTelemetry metrics export.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_REMOTE_CONFIGURATION_ENABLED",
+      "description": "Enable or disable remote configuration. Also accepts the alias `DD_REMOTE_CONFIG_ENABLED`.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [
+        "DD_REMOTE_CONFIG_ENABLED"
+      ],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS",
+      "description": "**Since**: 0.2.0 Sets how often, in seconds, the Datadog Agent is queried for Remote Configuration updates.",
+      "type": "decimal",
+      "default_value": "5.0",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_SERVICE",
+      "description": "Sets the service name for your application.",
+      "type": "string",
+      "default_value": "unnamed-rust-service",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TAGS",
+      "description": "Custom tags applied to traces profiles and metrics, provided as comma-separated key:value pairs (e.g. `layer:api,team:intake`).",
+      "type": "map",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TELEMETRY_HEARTBEAT_INTERVAL",
+      "description": "Sets the interval for the telemetry status heartbeat (in seconds)",
+      "type": "decimal",
+      "default_value": "60.0",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TELEMETRY_LOG_COLLECTION_ENABLED",
+      "description": "**Default**: true : Enable or disable log collection for telemetry.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_AGENT_PORT",
+      "description": "The port of the Trace Agent that the tracer submits to. If the Agent configuration sets receiver_port or DD_APM_RECEIVER_PORT to something other than the default 8126, then DD_TRACE_AGENT_PORT or DD_TRACE_AGENT_URL must match it.",
+      "type": "int",
+      "default_value": "8126",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_AGENT_URL",
+      "description": "Sets the URL endpoint where profiles are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Defaults to `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.",
+      "type": "string",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [
+        "DD_TRACE_URL"
+      ],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_ENABLED",
+      "description": "**Default**: true Enable web framework and library instrumentation. When false, the application code doesn't generate any traces. See also DD_APM_TRACING_ENABLED.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_PARTIAL_FLUSH_ENABLED",
+      "description": "Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans.",
+      "type": "boolean",
+      "default_value": "false",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_PARTIAL_FLUSH_MIN_SPANS",
+      "description": "Minimum number of spans in a trace before partial flush is triggered.",
+      "type": "int",
+      "default_value": "300",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_PROPAGATION_EXTRACT_FIRST",
+      "description": "When set to true, stops extracting after the first successful trace context extraction.",
+      "type": "boolean",
+      "default_value": "false",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_PROPAGATION_STYLE",
+      "description": "A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific DD_TRACE_PROPAGATION_STYLE_INJECT and DD_TRACE_PROPAGATION_STYLE_EXTRACT configurations take priority when present.",
+      "type": "array",
+      "default_value": "datadog,tracecontext",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_PROPAGATION_STYLE_EXTRACT",
+      "description": "A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.",
+      "type": "array",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_PROPAGATION_STYLE_INJECT",
+      "description": "A comma-separated list of header formats to include to propagate distributed traces between services.",
+      "type": "array",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_RATE_LIMIT",
+      "description": "Sets the maximum number of traces to sample per second; applies only when either DD_TRACE_SAMPLING_RULES or DD_TRACE_SAMPLE_RATE is set.",
+      "type": "int",
+      "default_value": "100",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_SAMPLING_RULES",
+      "description": "Configures custom sampling rules for traces. Rules are evaluated in order, and the first matching rule determines the sampling rate. If no rules match, the default sampling rate is used. For more information about how these configurations affect trace ingestion, see Ingestion Mechanisms.",
+      "type": "array",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_STATS_COMPUTATION_ENABLED",
+      "description": "Controls whether client-side trace statistics computation is enabled. Defaults to true.",
+      "type": "boolean",
+      "default_value": "true",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [
+        "DD_TRACE_TRACER_METRICS_ENABLED"
+      ],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_TRACE_X_DATADOG_TAGS_MAX_LENGTH",
+      "description": "Maximum length of the `x-datadog-tags` header for trace tag propagation. Set to 0 to disable.",
+      "type": "int",
+      "default_value": "512",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "DD_VERSION",
+      "description": "Set the application's version, for example: `1.2.3` or `6c44da20`.",
+      "type": "string",
+      "default_value": "",
+      "from_version": "datadog-opentelemetry-v0.1.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT",
+      "description": "Specifies the URL for sending OTLP logs. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`. : **Default (gRPC)**: `http://localhost:4317` : **Default (HTTP)**: `http://localhost:4318/v1/logs`",
+      "type": "string",
+      "default_value": null,
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_LOGS_HEADERS",
+      "description": "Specifies a comma-separated list of key-value pairs to be used as headers on outgoing OTLP logs requests. Takes precedence over the general `OTEL_EXPORTER_OTLP_HEADERS`.",
+      "type": "string",
+      "default_value": null,
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_LOGS_PROTOCOL",
+      "description": "Specifies the OTLP transport protocol for logs. Takes precedence over `OTEL_EXPORTER_OTLP_PROTOCOL`. : **Accepted values**: `grpc`, `http/protobuf`, `http/json`",
+      "type": "string",
+      "default_value": "SDK-dependent, but will typically be either http/protobuf or grpc.",
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "OTEL_EXPORTER_OTLP_LOGS_TIMEOUT",
+      "description": "Specifies the timeout (in milliseconds) for a single outgoing OTLP logs request. Takes precedence over the general `OTEL_EXPORTER_OTLP_TIMEOUT`.",
+      "type": "int",
+      "default_value": "10000",
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    },
+    {
+      "name": "OTEL_LOGS_EXPORTER",
+      "description": "Datadog SDKs that support OTLP log export should default to otlp; all others should default to None/null.",
+      "type": "string",
+      "default_value": "otlp",
+      "from_version": "0.3.0",
+      "to_version": null,
+      "deprecated": false,
+      "aliases": [],
+      "internal": false,
+      "configuration": null
+    }
+  ]
+}

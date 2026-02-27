@@ -1,11 +1,37 @@
+{{- $ctx := . -}}
 {{- $page := .Get 0 -}}
+{{- $normalizedPage := replaceRE "^/" "" $page -}}
+{{- $isFeatureParityInclude := hasPrefix $normalizedPage "tracing/trace_collection/library_config/" -}}
+{{- $isLibraryConfigLanguagePage := and
+    (eq (len (findRE "^tracing/trace_collection/library_config/[^/]+\\.md$" .Page.File.Path)) 1)
+    (ne .Page.File.Path "tracing/trace_collection/library_config/_index.md")
+-}}
+{{- $showSince := and $isFeatureParityInclude $isLibraryConfigLanguagePage -}}
 
 {{- with .Site.GetPage $page -}}
-    {{ .Content }}
+    {{- if $isFeatureParityInclude -}}
+        {{- $content := .RawContent -}}
+        {{- if not $showSince -}}
+            {{- /* Keep definition-list prefix so **Type** stays on the details line. */ -}}
+            {{- $content = replaceRE "(?m)^: \\*\\*Since\\*\\*:.*(?:\\r?\\n|$)" ": " $content -}}
+        {{- end -}}
+        {{- $ctx.Page.RenderString $content -}}
+    {{- else -}}
+        {{ .Content }}
+    {{- end -}}
 {{- else -}}
     {{ warnf "[include-markdown shortcode] Page %s not found in %s (language: %s). Using default english page" $page .Page.File.Path .Page.Lang }}
     {{ with .Site.Sites.Default.GetPage $page }}
-        {{/*  use english (first site) markdown for Content as default  */}}
-        {{ .Content }}
+        {{/* use english (first site) markdown for Content as default */}}
+        {{- if $isFeatureParityInclude -}}
+            {{- $content := .RawContent -}}
+            {{- if not $showSince -}}
+                {{- /* Keep definition-list prefix so **Type** stays on the details line. */ -}}
+                {{- $content = replaceRE "(?m)^: \\*\\*Since\\*\\*:.*(?:\\r?\\n|$)" ": " $content -}}
+            {{- end -}}
+            {{- $ctx.Page.RenderString $content -}}
+        {{- else -}}
+            {{ .Content }}
+        {{- end -}}
     {{ end }}
 {{- end -}}
