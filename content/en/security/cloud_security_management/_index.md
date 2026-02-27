@@ -95,6 +95,8 @@ On the [Cloud Security homepage][4], in the **Dashboards** section, you can jump
 
 Additionally, you can click the **More Options** icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}} to manage your pinned dashboards, including setting one as your Cloud Security homepage default view.
 
+Use Cloud Security dashboards to prioritize remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows you can start directly from your reporting view. You can also add existing custom dashboards or create dashboards directly from Cloud Security. For more information, see [Dashboards][23].
+
 ### Track your security posture score
 
 Available for [Cloud Security Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
@@ -160,3 +162,4 @@ To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3
 [20]: /security/audit_trail/
 [21]: https://app.datadoghq.com/security/map
 [22]: /datadog_cloudcraft/overlays/#security
+[23]: /dashboards/
