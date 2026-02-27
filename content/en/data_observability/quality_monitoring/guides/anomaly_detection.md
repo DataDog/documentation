@@ -54,7 +54,7 @@ Percentage metrics are bounded between 0 and 100. When a metric has historically
 
 ### Custom SQL
 
-For custom SQL monitors, the model infers the expected range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound accordingly.
+For custom SQL monitors with "Default" model type, the model infers the expected range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound to 0.
 
 ## Metric properties
 
