@@ -42,14 +42,14 @@ Instrumentation starts when the application is launched.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-1. Add the `ddtrace` package to your project using your package manager.
-1. Initialize the tracer by doing one of the following:
-   - Set `NODE_OPTIONS` with `--require=dd-trace/init`
-   - Include the tracer in your application's entrypoint file:
-     ```javascript
-     const tracer = require('dd-trace').init({ logInjection: true, });
-     ```
-     This also configures trace log correlation.
+1. Install the `dd-trace` package
+   ```
+   npm install dd-trace
+   ```
+2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
+   ```
+   NODE_OPTIONS='--require=dd-trace/init'
+   ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}

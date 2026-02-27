@@ -2549,6 +2549,18 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "QueryProductAnalyticsScalar": {
+    "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
+    "summary": "Compute scalar analytics",
+    "request_description": "",
+    "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
+  "QueryProductAnalyticsTimeseries": {
+    "description": "Compute timeseries analytics results for Product Analytics data.\nReturns time-bucketed values for charts and trend analysis.\nThe `compute.interval` field (milliseconds) is required for time bucketing.",
+    "summary": "Compute timeseries analytics",
+    "request_description": "",
+    "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
     "summary": "Query event filtered users",

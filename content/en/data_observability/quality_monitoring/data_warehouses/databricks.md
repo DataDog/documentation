@@ -80,9 +80,12 @@ These permissions are needed for the following reasons:
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
+After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_observability/jobs_monitoring/databricks/
 [2]: /integrations/databricks/
+[3]: /monitors/types/data_observability/
