@@ -40,6 +40,23 @@ At a high level, Datadog Admin Role has the following capabilities:
 - Configure Synthetic private locations
 - Manage security pipelines and sensitive data scanning
 
+## Security considerations
+
+The Datadog Admin role can perform the following sensitive actions:
+- Delete telemetry and monitoring data
+- Modify ingestion and retention policies
+- Control billing and subscription settings
+- Change authentication and SSO configuration
+- Create and rotate API keys
+- Unmask sensitive data
+
+Therefore, Datadog strongly recommends that customers take the following precautions:
+- Limit Datadog Admin Role access to a small number of trusted users
+- Use custom roles for day-to-day operational access
+- Enable Audit Trail to monitor Datadog Admin Role activity
+- Regularly review user access, including the Datadog Admin Role
+- Separate duties wherever possible, assigning the least amount of privilege possible for associated job functions
+
 ## Datadog Admin Role permissions
 
 The following permissions are assigned to the Datadog Admin Role by default. The Datadog Admin Role also inherits all Standard and Read-Only permissions.
@@ -262,7 +279,6 @@ This endpoint enables:
 - SIEM export workflows
 - Governance reporting
 
-
 ## UI and IdP-managed security settings
 
 Several authentication and identity settings must be managed through the Datadog UI or Identity Provider (IdP). You cannot manage the following settings through the API:
@@ -273,24 +289,6 @@ Several authentication and identity settings must be managed through the Datadog
 - SAML configuration
 
 Typically, administrators manage these controls within the Datadog organization settings in the UI or through their identity provider (for example, Okta or Azure AD).
-
-## Security considerations
-
-The Datadog Admin role can perform the following sensitive actions:
-- Delete telemetry and monitoring data
-- Modify ingestion and retention policies
-- Control billing and subscription settings
-- Change authentication and SSO configuration
-- Create and rotate API keys
-- Unmask sensitive data
-
-Therefore, Datadog strongly recommends that customers take the following precautions:
-- Limit Datadog Admin Role access to a small number of trusted users
-- Use custom roles for day-to-day operational access
-- Enable Audit Trail to monitor Datadog Admin Role activity
-- Regularly review user access, including the Datadog Admin Role
-- Separate duties wherever possible, assigning the least amount of privilege possible for associated job functions
-
 
 ## Further reading
 
