@@ -122,7 +122,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% /collapse-content %}}
 
-## Set up processor using Terraform
+## Set up the processor using Terraform
 
 You can use the [Datadog Observability Pipeline Terraform resource][4] to set up a pipeline with the Sensitive Data Scanner processor. To add a rule to the Sensitive Data Scanner processor using Terraform:
 
