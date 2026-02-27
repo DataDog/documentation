@@ -38,11 +38,11 @@ nav_sections:
         desc: View Datadog alerts, incidents, and more on your mobile device
       - title: Fleet Automation
         link: agent/fleet_automation/
-        icon: agent-fill
+        icon: agent
         desc: Remotely configure, upgrade, and manage your Agents at scale
       - title: Account Management
         link: account_management/
-        icon: agent-fill
+        icon: cog-2
         desc: Manage org-based settings, billing, and data access controls
       - title: Event Management
         link: events/
@@ -50,7 +50,7 @@ nav_sections:
         desc: Track notable changes and alerts in your applications and infrastructure
       - title: CoScreen
         link: coscreen/
-        icon: agent-fill
+        icon: coscreen
         desc: Share and interact with application windows for pair programming and incident management
       - title: OpenTelemetry
         link: opentelemetry/
@@ -69,7 +69,7 @@ nav_sections:
     - navtiles:
       - title: Bits AI Agents
         link: bits_ai/
-        icon: agent-fill
+        icon: bits-ai
         desc: Your agentic teammate that automates development, security, and operational workflows
       - title: Watchdog
         link: watchdog/
@@ -92,7 +92,7 @@ nav_sections:
         desc: Use tagged objects to collect and graph data about your network traffic
       - title: Container Monitoring
         link: containers/
-        icon: agent-fill
+        icon: container
         desc: Monitor the health, performance, and security of your containerized environments
       - title: Serverless
         link: serverless/
@@ -104,11 +104,11 @@ nav_sections:
         desc: Take control of your cloud spend with unified observability and cost data
       - title: Cloudcraft
         link: cloudcraft/
-        icon: agent-fill
+        icon: cloudcraft
         desc: Visualize and diagram your cloud infrastructure in real time
       - title: Storage Management
         link: infrastructure/storage_management/
-        icon: agent-fill
+        icon: file-wui
         desc: Optimize and troubleshoot your cloud storage spend, usage, and data freshness
       - title: Application Performance Monitoring
         link: tracing/
@@ -132,7 +132,7 @@ nav_sections:
         desc: Track and improve performance of your data streaming pipelines
       - title: Data Observability
         link: data_observability/
-        icon: agent-fill
+        icon: data-observability-wui
         desc: Monitor data quality, performance, and cost to detect anomalies and prevent downstream issues
       - title: Log Management
         link: logs/
@@ -140,7 +140,7 @@ nav_sections:
         desc: Process, monitor, and archive your ingested logs
       - title: Sensitive Data Scanner
         link: security/sensitive_data_scanner/
-        icon: agent-fill
+        icon: sensitive-data-scanner
         desc: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry
       - title: Observability Pipelines
         link: observability_pipelines/
@@ -155,7 +155,7 @@ nav_sections:
     - navtiles:
       - title: Real User Monitoring
         link: real_user_monitoring/
-        icon: agent-fill
+        icon: rum
         desc: Capture, observe, and analyze the user experience of your applications
       - title: Product Analytics
         link: product_analytics/
@@ -194,15 +194,15 @@ nav_sections:
         desc: Perform codeless integration and end-to-end testing with CI/CD providers
       - title: IDE Plugins
         link: ide_plugins/
-        icon: agent-fill
+        icon: ide
         desc: Interact with Datadog services directly from your IDE as you code
       - title: DORA Metrics
         link: dora_metrics/
-        icon: agent-fill
+        icon: ci
         desc: Measure and improve your organization's software delivery processes
       - title: Feature Flags
         link: feature_flags/
-        icon: agent-fill
+        icon: signpost
         desc: Toggle features, run A/B tests, and gradually roll out functionality without code deployments
       - title: Code Coverage
         link: code_coverage/
@@ -213,27 +213,27 @@ nav_sections:
     - navtiles:
       - title: Cloud SIEM
         link: security/cloud_siem/
-        icon: agent-fill
+        icon: siem
         desc: Detect, investigate, and respond to security threats across your cloud and on-premises systems
       - title: Code Security
         link: security/code_security/
-        icon: agent-fill
+        icon: security-code-security
         desc: Detect and fix vulnerabilities in your code, dependencies, and infrastructure as code
       - title: Cloud Security
         link: security/cloud_security_management/
-        icon: agent-fill
+        icon: cloud-security-management
         desc: Continuously audit configurations, assess identity risks, and detect threats across your cloud infrastructure
       - title: App and API Protection
         link: security/application_security/
-        icon: agent-fill
+        icon: app-sec
         desc: Detect and block threats targeting your production applications and APIs in real time
       - title: Workload Protection
         link: security/workload_protection/
-        icon: agent-fill
+        icon: security-workload-security
         desc: Monitor file, network, and process activity to detect real-time threats to your infrastructure
       - title: Sensitive Data Scanner
         link: security/sensitive_data_scanner/
-        icon: agent-fill
+        icon: sensitive-data-scanner
         desc: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry
   - nav_section:
     - name: 'Service Management'
@@ -248,11 +248,11 @@ nav_sections:
         desc: Unify telemetry, metadata, and workflows to accelerate delivery
       - title: Service Level Objectives
         link: service_level_objectives/
-        icon: agent-fill
+        icon: slos
         desc: Define and track performance targets to deliver a consistent customer experience
       - title: Case Management
         link: incident_response/case_management/
-        icon: agent-fill
+        icon: case-management
         desc: Triage, track, and remediate issues with centralized ownership and team collaboration
       - title: Workflow Automation
         link: service_management/workflows/
