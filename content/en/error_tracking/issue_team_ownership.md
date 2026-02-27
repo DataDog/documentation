@@ -24,11 +24,9 @@ When multiple methods apply to the same issue, ownership is resolved in the foll
 
 Your team owns an issue if it is the code owner of the top-level stack frame of the issue according to your GitHub `CODEOWNERS` file.
 
-**Note**: Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
-
 **Note**: After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
 
-**Notes**: 
+**Notes**:
 -  Stack frames of third-party files are not taken into account. Only the top-most stack frame related to a file present in your repository is considered.
 - After a team is assigned to an issue through CODEOWNERS, the assignment is immutable.
 - Issue Team Ownership only supports GitHub.
