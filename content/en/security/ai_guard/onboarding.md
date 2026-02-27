@@ -101,7 +101,7 @@ The [AI Guard Playground][19] lets you test AI Guard evaluations directly from t
 Use the Playground to:
 - Experiment with different prompt patterns and see how AI Guard responds.
 - Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
-- Tweak the evaluation sensitivity threshold and see how it affects detection results.
+- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity](#evaluation-sensitivity) settings.
 - Test sensitive data scanning on your conversations.
 - Share evaluation results with your team during development.
 
