@@ -104,6 +104,8 @@ Once the service account has been created and the necessary roles and APIs have 
 
 After you configure the integration, Datadog begins syncing your information schema and query history in the background. Initial syncs can take several hours depending on the size of your BigQuery deployment.
 
+After the initial sync completes, create a [Data Observability monitor][14] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -121,3 +123,4 @@ After you configure the integration, Datadog begins syncing your information sch
 [11]: https://cloud.google.com/compute/docs/reference/rest/v1
 [12]: https://cloud.google.com/resource-manager/reference/rest
 [13]: https://cloud.google.com/bigquery/docs/reference/rest
+[14]: /monitors/types/data_observability/
