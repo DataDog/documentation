@@ -222,6 +222,7 @@ jspm_packages
 *.DS_Store
 .AppleDouble
 .LSOverride
+.teddy
 
 # Icon must end with two \r
 Icon
