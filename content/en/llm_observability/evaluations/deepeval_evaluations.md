@@ -16,9 +16,7 @@ You can use LLM Observability to run DeepEval evaluations in [Experiments][1]. D
 
 ## Setup
 
-Follow the steps here to set up an LLMObs [Experiment][2] and [Dataset][4]. 
-
-To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo evaluation scores alongside `span_id` and `trace_id`.
+Follow the steps here to set up an LLMObs [Experiment][2] and [Dataset][4]. Provide a DeepEval evaluator to the `evaluators` parameter in an LLMObs `Experiment` as demonstrated below. A working example is available [here][6].
 
 ```python 
 
@@ -109,3 +107,4 @@ After you run an experiment with a DeepEval evaluation, you can view the DeepEva
 [3]: https://deepeval.com/docs/metrics-introduction
 [4]: /llm_observability/experiments/setup#create-a-dataset
 [5]: /llm_observability/experiments/datasets
+[6]: https://github.com/DataDog/llm-observability/blob/0b832ac332cb262c208804fce6fbff7676834452/experiments/eval-integrations/1-deepeval-demo.py
