@@ -94,7 +94,7 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 
-## Try the AI Guard Playground {#playground}
+## Evaluate conversations in AI Guard Playground {#playground}
 
 The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
