@@ -261,6 +261,407 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 | **Missed alert** | Contract bounds to alert on this behavior. |
 | **Ignore** | Exclude annotated data when modeling bounds. |
 
+## Manage with Terraform and API
+
+Data Observability monitors can be managed programmatically using Terraform or the Datadog Monitors API. Both use the standard `datadog_monitor` resource type with `type = "data-quality alert"`.
+
+### Export from the UI
+
+The easiest way to get started is to build a monitor in the UI and export its configuration:
+
+1. Open an existing Data Observability monitor or create a new one.
+2. Click **Export** in the top-right corner.
+3. Select the **Terraform** tab to copy the ready-to-use HCL block, or the **JSON** tab for the API payload.
+
+{{< img src="monitors/monitor_types/data_observability/export_monitor_terraform.png" alt="Export Monitor dialog with Terraform tab selected" style="width:80%;" >}}
+
+### Terraform
+
+Data Observability monitors require **Datadog Terraform provider version 3.86.0 or later**. To check or upgrade your provider version, see the [Terraform Registry][10].
+
+#### Resource structure
+
+```hcl
+resource "datadog_monitor" "<RESOURCE_NAME>" {
+  name    = "<MONITOR_NAME>"
+  type    = "data-quality alert"
+  message = "<NOTIFICATION_MESSAGE>"
+
+  # Anomaly detection (default)
+  query = <<EOT
+formula("anomalies(query1)").last("30m") > 0
+EOT
+
+  # Or threshold detection:
+  # query = <<EOT
+  # formula("query1").last("30m") > 900
+  # EOT
+
+  require_full_window = false
+
+  variables {
+    data_quality_query {
+      name           = "query1"
+      data_source    = "data_quality_metrics"
+      schema_version = "0.0.1"
+      measure        = "<MEASURE>"
+      filter         = "<FILTER_QUERY>"
+      group_by       = ["entity_id", "table", "schema", "database"]
+
+      # Optional
+      monitor_options {
+        group_by_columns = []
+      }
+    }
+  }
+}
+```
+
+#### Required fields
+
+| Field | Description |
+|---|---|
+| `type` | Must be `"data-quality alert"`. |
+| `query` | The alert formula. See [Detection methods](#terraform-detection-methods). |
+| `require_full_window` | Must be `false` for data quality monitors. |
+| `variables.data_quality_query.name` | Query variable name referenced in `query`. Typically `"query1"`. |
+| `variables.data_quality_query.data_source` | Must be `"data_quality_metrics"`. |
+| `variables.data_quality_query.schema_version` | Must be `"0.0.1"`. |
+| `variables.data_quality_query.measure` | The metric type to monitor. See [Measures](#terraform-measures). |
+| `variables.data_quality_query.filter` | The entity filter query. See [Filter syntax](#terraform-filter-syntax). |
+| `variables.data_quality_query.group_by` | Dimensions for alert grouping. See [Group by](#terraform-group-by). |
+
+#### Detection methods {#terraform-detection-methods}
+
+{{< tabs >}}
+{{% tab "Anomaly" %}}
+
+Uses machine learning to detect deviations from expected behavior. No threshold value is required.
+
+```hcl
+query = <<EOT
+formula("anomalies(query1)").last("30m") > 0
+EOT
+```
+
+{{% /tab %}}
+{{% tab "Threshold" %}}
+
+Alerts when the metric crosses a fixed value. Replace `<OPERATOR>` with `>`, `>=`, `<`, `<=`, `==`, or `!=`, and `<VALUE>` with your threshold.
+
+```hcl
+query = <<EOT
+formula("query1").last("30m") <OPERATOR> <VALUE>
+EOT
+
+# Monitor thresholds must match the query operator
+monitor_thresholds {
+  critical = <VALUE>
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Measures {#terraform-measures}
+
+Set `measure` to one of the following values:
+
+| Value | Description | Entity type |
+|---|---|---|
+| `freshness` | Time since last update (table) or most recent date in a datetime column | Table or column |
+| `row_count` | Number of rows in a table | Table |
+| `custom` | Value returned by a custom SQL query | Table |
+| `uniqueness` | Percentage of unique values | Column |
+| `nullness` | Percentage of null values | Column |
+| `cardinality` | Number of distinct values | Column |
+| `percent_zero` | Percentage of values equal to zero | Column |
+| `percent_negative` | Percentage of negative values | Column |
+| `min` | Minimum value | Column |
+| `max` | Maximum value | Column |
+| `mean` | Average value | Column |
+| `sum` | Sum of all values | Column |
+| `stddev` | Standard deviation | Column |
+| `bytes` | Storage size in bytes | Table |
+
+#### Filter syntax {#terraform-filter-syntax}
+
+The `filter` field uses the Aastra query language to select which tables or columns to monitor:
+
+```
+search for [ENTITY_TYPE] where `[CONDITIONS]`
+```
+
+`ENTITY_TYPE` is one of:
+- `table` — monitor at the table level
+- `column` — monitor at the column level
+
+Conditions use `key:value` pairs. Wildcards (`*`) are supported at the prefix or suffix of a value.
+
+| Filter | Example | Description |
+|---|---|---|
+| `name` | `` `name:ORDERS` `` | Match by table or column name |
+| `schema` | `` `schema:PROD` `` | Match by schema name |
+| `database` | `` `database:ANALYTICS_DB` `` | Match by database name |
+| `account` | `` `account:my_account` `` | Match by account name |
+| `entity_id` | `` `entity_id:("abc123" OR "def456")` `` | Match by specific entity IDs (generated by Datadog) |
+
+Combine conditions with `AND` or `OR`, and exclude with `-`:
+
+```hcl
+# All tables in the access_control schema
+filter = "search for table where `schema:access_control`"
+
+# Tables whose names start with dim_ in any schema under ANALYTICS_DB
+filter = "search for table where `name:dim_* AND database:ANALYTICS_DB`"
+
+# Specific tables by entity ID
+filter = "search for table where `entity_id:(\"abc123\" OR \"def456\")`"
+
+# All datetime columns, excluding temp tables
+filter = "search for column where `data_super_type:datetime AND -table_super_type:view`"
+```
+
+**Note**: Entity IDs are stable internal identifiers assigned by Datadog. Export an existing monitor from the UI to find the entity IDs for your tables or columns.
+
+#### Group by {#terraform-group-by}
+
+The `group_by` field controls which dimensions are used to split and identify alert groups.
+
+For **table** monitors use:
+```hcl
+group_by = ["entity_id", "table", "schema", "database"]
+```
+
+For **column** monitors use:
+```hcl
+group_by = ["entity_id", "column", "table", "schema", "database"]
+```
+
+`entity_id` is the primary identifier and must always be included. The remaining fields are descriptive labels that appear in alert notifications.
+
+#### monitor_options reference
+
+The `monitor_options` block inside `data_quality_query` provides advanced configuration:
+
+| Field | Type | Description |
+|---|---|---|
+| `group_by_columns` | `list(string)` | Additional columns to group by (user-defined dimensions beyond the defaults). |
+| `custom_where` | `string` | SQL `WHERE` clause to filter the data evaluated by the monitor. |
+| `custom_sql` | `string` | Custom SQL query returning a single `dd_value` alias. Required when `measure = "custom"`. |
+| `crontab_override` | `string` | Cron expression for the monitor schedule. Omit for hourly (default). Use `"0 0 * * *"` for daily at midnight UTC. |
+| `model_type_override` | `string` | Override the anomaly model type for Custom SQL monitors. One of `"freshness"`, `"percentage"`, or `"any"`. |
+
+**Note**: Omit the `monitor_options` block entirely if all fields would be empty. An empty `monitor_options {}` block causes a provider error in some versions.
+
+#### Full examples
+
+{{< tabs >}}
+{{% tab "Freshness (anomaly)" %}}
+
+Monitor freshness on all tables in the `access_control` schema. Alert when data becomes unexpectedly stale.
+
+```hcl
+resource "datadog_monitor" "access_control_freshness" {
+  name    = "access_control tables — freshness anomaly"
+  type    = "data-quality alert"
+  message = "@slack-data-eng Freshness anomaly detected on {{table.name}} in {{schema.name}}."
+
+  query = <<EOT
+formula("anomalies(query1)").last("30m") > 0
+EOT
+
+  require_full_window = false
+
+  variables {
+    data_quality_query {
+      name           = "query1"
+      data_source    = "data_quality_metrics"
+      schema_version = "0.0.1"
+      measure        = "freshness"
+      filter         = "search for table where `schema:access_control`"
+      group_by       = ["entity_id", "table", "schema", "database"]
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Row count (threshold)" %}}
+
+Alert when the row count of any `dim_` table drops below 1000.
+
+```hcl
+resource "datadog_monitor" "dim_tables_row_count" {
+  name    = "dim_ tables — row count below threshold"
+  type    = "data-quality alert"
+  message = "@pagerduty-data-on-call Row count dropped on {{table.name}}."
+
+  query = <<EOT
+formula("query1").last("30m") < 1000
+EOT
+
+  require_full_window = false
+
+  monitor_thresholds {
+    critical = 1000
+  }
+
+  variables {
+    data_quality_query {
+      name           = "query1"
+      data_source    = "data_quality_metrics"
+      schema_version = "0.0.1"
+      measure        = "row_count"
+      filter         = "search for table where `name:dim_* AND database:ANALYTICS_DB`"
+      group_by       = ["entity_id", "table", "schema", "database"]
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Custom SQL" %}}
+
+Monitor a business metric using a custom SQL query. Runs daily at midnight UTC.
+
+```hcl
+resource "datadog_monitor" "failed_orders_count" {
+  name    = "Failed orders — custom SQL"
+  type    = "data-quality alert"
+  message = "@slack-data-eng High failed order count detected."
+
+  query = <<EOT
+formula("anomalies(query1)").last("30m") > 0
+EOT
+
+  require_full_window = false
+
+  variables {
+    data_quality_query {
+      name           = "query1"
+      data_source    = "data_quality_metrics"
+      schema_version = "0.0.1"
+      measure        = "custom"
+      filter         = "search for table where `entity_id:(\"abc1234567890\")`"
+      group_by       = ["entity_id", "table", "schema", "database"]
+
+      monitor_options {
+        custom_sql         = "SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'"
+        crontab_override   = "0 0 * * *"
+        model_type_override = "any"
+      }
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Column nullness" %}}
+
+Monitor null percentage on all email columns, grouped by region.
+
+```hcl
+resource "datadog_monitor" "email_nullness" {
+  name    = "Users email column — nullness anomaly"
+  type    = "data-quality alert"
+  message = "@slack-data-eng Unexpected nulls detected in {{column.name}} on {{table.name}}."
+
+  query = <<EOT
+formula("anomalies(query1)").last("30m") > 0
+EOT
+
+  require_full_window = false
+
+  variables {
+    data_quality_query {
+      name           = "query1"
+      data_source    = "data_quality_metrics"
+      schema_version = "0.0.1"
+      measure        = "nullness"
+      filter         = "search for column where `name:EMAIL AND table:USERS`"
+      group_by       = ["entity_id", "column", "table", "schema", "database"]
+
+      monitor_options {
+        group_by_columns = ["region"]
+      }
+    }
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### API
+
+Data Observability monitors use the standard [Monitors API][11]. Use `POST /api/v1/monitor` to create a monitor and `PUT /api/v1/monitor/<MONITOR_ID>` to update one.
+
+#### Request body
+
+```json
+{
+  "name": "<MONITOR_NAME>",
+  "type": "data-quality alert",
+  "query": "formula(\"anomalies(query1)\").last(\"30m\") > 0",
+  "message": "<NOTIFICATION_MESSAGE>",
+  "options": {
+    "require_full_window": false,
+    "variables": [
+      {
+        "name": "query1",
+        "data_source": "data_quality_metrics",
+        "schema_version": "0.0.1",
+        "measure": "<MEASURE>",
+        "filter": "<FILTER_QUERY>",
+        "group_by": ["entity_id", "table", "schema", "database"],
+        "monitor_options": {
+          "group_by_columns": [],
+          "custom_where": "<OPTIONAL_WHERE_CLAUSE>",
+          "custom_sql": "<OPTIONAL_CUSTOM_SQL>",
+          "crontab_override": "<OPTIONAL_CRON>",
+          "model_type_override": "<OPTIONAL_MODEL_TYPE>"
+        }
+      }
+    ]
+  }
+}
+```
+
+The `query` field accepts the same formulas as the Terraform resource:
+- Anomaly detection: `formula("anomalies(query1)").last("30m") > 0`
+- Threshold: `formula("query1").last("30m") <OPERATOR> <VALUE>`
+
+Fields inside `monitor_options` are all optional. Omit any field you do not need.
+
+#### Example: create a freshness monitor
+
+```shell
+curl -X POST "https://api.datadoghq.com/api/v1/monitor" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "access_control tables — freshness anomaly",
+    "type": "data-quality alert",
+    "query": "formula(\"anomalies(query1)\").last(\"30m\") > 0",
+    "message": "@slack-data-eng Freshness anomaly on {{table.name}}.",
+    "options": {
+      "require_full_window": false,
+      "variables": [
+        {
+          "name": "query1",
+          "data_source": "data_quality_metrics",
+          "schema_version": "0.0.1",
+          "measure": "freshness",
+          "filter": "search for table where `schema:access_control`",
+          "group_by": ["entity_id", "table", "schema", "database"]
+        }
+      ]
+    }
+  }'
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -274,3 +675,5 @@ On a monitor's status page, click **Annotate Bounds**, select a time range on th
 [7]: https://app.datadoghq.com/data-obs/monitors
 [8]: /monitors/configuration/?tab=thresholdalert#thresholds
 [9]: /help/
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest
+[11]: /api/latest/monitors/
