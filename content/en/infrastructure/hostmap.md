@@ -15,19 +15,19 @@ further_reading:
 
 Datadog's [Host Map][1] visualizes your hosts, pods, containers, and clusters, helping you to understand and diagnose your infrastructure.
 
-{{< img src="infrastructure/hostmap/new-host-map.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="infrastructure/hostmap/new-host-map.png" alt="The Host Map showing hosts grouped by availability zone and colored by CPU usage. Hexagonal cells range from green (low usage) to orange-red (high usage). Groups include no availability-zone with 395 hosts, eastus with 183, eastus-1 with 153, and many additional regions." style="width:100%;" >}}
 
 ## Usage
 
 Use the drop-down in the upper left to view suggested queries, or click <span class="ui">Create</span> to write a custom query.
 
-{{< img src="infrastructure/hostmap/draft-query.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="infrastructure/hostmap/draft-query.png" alt="The Draft Query editor with two levels. The parent object is set to Host with Fill by CPU usage. The child object is set to Pod with Fill by Readiness." style="width:100%;" >}}
 
 - <span class="ui">Parent/Child Object</span>: Select resources (<span class="ui">Host</span>, <span class="ui">Pod</span>, <span class="ui">Container</span>, <span class="ui">Cluster</span>) to view. Parent and Child objects have hierarchical relationships.
 - <span class="ui">Fill by</span>: By default, the color of each object represents CPU usage, where the color ranges from green (0% utilized) to orange (100% utilized). Use the <span class="ui">Fill by</span> drop-down to color your objects by various metrics or signals, such as memory or error logs.
 - <span class="ui">Group by</span>: Spatially arrange your objects into groups. You can use multiple groupings. For example, if you group by `tags.availability-zone` `tags.instance-type`, your objects are first arranged by availability zone and then further subdivided by instance type.
 
-  {{< img src="infrastructure/hostmap/group-by.png" alt="Your image description" style="width:85%;" >}}
+  {{< img src="infrastructure/hostmap/group-by.png" alt="The Host Map grouped by both tags.availability-zone and tags.instance-type. Hosts are arranged first into availability zone sections such as us-east-1a and us-east-1b, then subdivided by instance type such as m5a.2xlarge and t2.micro. Cells are colored by CPU usage from green to orange-red." style="width:85%;" >}}
 - <span class="ui">Filter</span>: Limit the Host Map to a specific subset of your infrastructure. For example, you can filter by `production` to only view your production resources. The <span class="ui">Filter</span> input supports logical operators (`AND`, `NOT`, `OR`) and wildcards (`*`). For example: `(availability-zone:ap* OR availability-zone:eu*) NOT agent_version:5.3*`.
 
 ## Use the legacy Host Map
