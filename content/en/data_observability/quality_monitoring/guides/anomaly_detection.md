@@ -46,7 +46,7 @@ Freshness monitors alert when the time since the last refresh is longer than exp
 
 ### Row count
 
-Row count monitors alert when a table's row count has flatlined — that is, when it has not changed for longer than normal. Flatline detection is important because a stalled row count may indicate a broken pipeline even though the value itself has not changed.
+Row count monitors alert when a table's row count has flatlined — that is, when it has not changed for longer than normal. Flatline detection is important because a stalled row count may indicate a broken pipeline.
 
 ### Percentage (nullness, uniqueness)
 
