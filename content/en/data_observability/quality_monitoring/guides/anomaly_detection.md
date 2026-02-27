@@ -76,7 +76,7 @@ When seasonality is detected, the model shifts expected bounds to reflect the ty
 
 Stationarity describes whether a metric's average value is constant over time or trending in one direction.
 
-- **Stationary metrics** have a consistent average (for example, a table that is always refreshed with a similar row count).
+- **Stationary metrics** have a consistent average (for example, a row count for a table that occasionally adds or drops rows in equal measure).
 - **Non-stationary metrics** trend upward or downward over time (for example, a growing events table that adds millions of rows per week).
 
 The model accounts for trend direction when setting bounds. For non-stationary metrics, it adjusts expectations based on the direction and rate of change rather than treating deviation from a flat baseline as anomalous.
