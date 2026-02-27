@@ -101,6 +101,10 @@ If you are concerned about unauthorized data access through monitors, Datadog re
   * `@git.repository.id`
   * `@gitlab.groups`
 
+### LLM Observability
+
+When using OpenTelemetry instrumentation, some data sent to LLM Observability may also be written to the corresponding APM traces. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring a Restricted Dataset on APM with matching data boundaries.
+
 
 ## Select tags for access
 
