@@ -111,18 +111,44 @@ On the **General** tab, select the regions for data collection from the **Region
 
 ### Metric and log collection
 
-Use the **Metric collection** and **Log collection** tabs to configure which metrics and logs are sent to Datadog:
+Use the **Metric collection** and **Log collection** tabs to configure which metrics and logs are sent to Datadog.
 
-- **Enable** or **disable** collection of metrics or logs for the entire tenancy.
-- **Include** or **exclude** specific compartments based on `key:value` format compartment tags. For example:
-   - `datadog:monitored,env:prod*` includes compartments if **either** of these tags is present.
-   - `!env:staging,!testing` excludes compartments only if **both** tags are present.
-   - `datadog:monitored,!region:us-phoenix-1` includes compartments that **both have** the tag `datadog:monitored` **and do not have** the tag `region:us-phoenix-1`.
-- **Enable** or **disable** collection for specific OCI services.
+**Note**: Filters are evaluated in order: **Selected Services** acts as the primary toggle for data collection from a service, then compartment tag filters are applied, and finally resource tag filters.
 
-**Notes**:
-- After modifying tags in OCI, it may take up to 15 minutes for the changes to appear in Datadog.
-- In OCI, child compartments do not inherit tags; you must tag each compartment individually.
+#### Enable or disable all collection
+
+Both the metric and log collection tabs have a main toggle to disable collection of that data type for the entire tenancy.
+
+#### Limit collection to specific OCI services
+
+Use the **Selected Services** section to enable or disable collection from individual OCI services. Disabling a service stops all collection from it, regardless of any resource tag filters configured for it. When a service is enabled, resource tag filters can further narrow collection to specific resources within that service—resources without a matching inclusion tag are excluded.
+
+**Note**: Service toggle changes may take up to 5 minutes to take effect.
+
+{{% collapse-content title="Tag filter syntax" level="h5" id="tag-filter-syntax" %}}
+
+The **Compartment Tags** and **Limit Collection to Specific Resources** sections accept comma-separated `key:value` OCI tags. Prefix a tag with `!` to negate it. The comma separator behaves differently depending on the tag types used:
+
+- **Positive tags only**: OR logic—included if the OCI object has **any** of the listed tags.
+- **Negative tags only** (prefixed with `!`): OR logic—excluded if **any** of the negated tags is present.
+- **Mixed positive and negative tags**: AND logic—must satisfy **all** listed conditions to be included.
+
+For example:
+- `datadog:monitored,env:prod*`: include if **either** tag is present.
+- `!env:staging,!testing:true`: exclude if **either** tag is present.
+- `datadog:monitored,!region:us-phoenix-1`: include only if the `datadog:monitored` tag is present **and** the `region:us-phoenix-1` tag is absent.
+
+{{% /collapse-content %}}
+
+#### Limit collection by compartment
+
+Use the **Compartment Tags** section to include or exclude specific compartments based on OCI compartment tags. See [Tag filter syntax](#tag-filter-syntax) for syntax reference.
+
+**Note**: In OCI, tags are not inherited by child compartments; each compartment must be tagged individually. After modifying tags in OCI, it may take up to 15 minutes for the changes to appear in Datadog.
+
+#### Limit collection to specific resources
+
+Use the **Limit Collection to Specific Resources** section to define which resources send their metrics or logs to Datadog. Select an OCI service from the dropdown, then specify the resource tags to target. See [Tag filter syntax](#tag-filter-syntax) for syntax reference.
 
 ### Resource collection
 
