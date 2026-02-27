@@ -55,7 +55,7 @@ You can use dashboards to see posture scores across teams, services, accounts, e
 
 You can graph your organization's compliance data in dashboards using the `datadog.csm.findings.count` metric. You can also see your organization's [security posture score][3] in the OOTB Compliance Dashboard.
 
-<div class="alert alert-info">this metric estimates the true values in the Compliance page, and some error is expected. You can filter the <a href="https://app.datadoghq.com/security/compliance/home/essential-cloud-security-controls">Compliance Framework page</a> to see exact values for any combination of account, service, environment, and team.</div>
+<div class="alert alert-info">This metric estimates the true values in the Compliance page, and some error is expected. You can filter the <a href="https://app.datadoghq.com/security/compliance/home/essential-cloud-security-controls">Compliance Framework page</a> to see exact values for any combination of account, service, environment, and team.</div>
 
 ## Show or hide compliance frameworks
 
