@@ -121,7 +121,7 @@ Both the metric and log collection tabs have a main toggle to disable collection
 
 #### Limit collection to specific OCI services
 
-Use the **Selected Services** section to enable or disable collection from individual OCI services. Disabling a service stops all collection from it, regardless of any resource tag filters configured for it. When a service is enabled, resource tag filters can further narrow collection to specific resources within that service—resources without a matching inclusion tag are excluded.
+Use the **Selected Services** section to enable or disable collection from individual OCI services. Disabling a service stops all collection from it, regardless of any resource tag filters configured for it. When a service is enabled, resource tag filters can further narrow collection to specific resources within that service. Resources without a matching inclusion tag are excluded.
 
 **Note**: Service toggle changes may take up to 5 minutes to take effect.
 
