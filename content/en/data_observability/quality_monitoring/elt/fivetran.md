@@ -20,6 +20,13 @@ Lineage is derived for all [supported data warehouse destinations][4].
 
 ### Generate an API key
 
+Fivetran supports two types of API keys:
+
+- **Scoped Key**: Links to a specific user account and inherits that user's RBAC permissions. Any Fivetran user can create one.
+- **System Key**: An organization-managed API key-secret pair with permissions set at the key level, managed centrally by an administrator.
+
+Datadog recommends using a **Scoped Key** created by a user with the **Account Administrator** role. This is the simplest way to get started and helps ensure the key has the required permissions to connect to Datadog.
+
 To generate a Fivetran API key and secret, navigate to **Settings > API Config** in your Fivetran account. For details, see the [Fivetran API authentication documentation][1].
 
 ### Add the Fivetran integration
