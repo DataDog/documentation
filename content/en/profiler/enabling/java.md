@@ -64,13 +64,13 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 
 - All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-- Java Profiler is not currently supported on serverless environments 
+- Java Profiler is not supported on serverless environments.
 
 ## Installation
 
 To begin profiling applications:
 
-1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][3]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. Install and run Datadog Agent v6+. Datadog recommends using [Datadog Agent v7+][3]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
@@ -127,12 +127,11 @@ java \
 
 4. Optional: Set up [Source Code Integration][5] to connect your profiling data with your Git repositories.
 
-5. For more information on available profile types , see [Profile Types][11].
+5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6].
 
-5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6]. 
+6. For more information on available profile types, see [Profile Types][11].
 
-7. For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Native Image][8].
-
+**Note**: For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Native Image][8].
 
 
 
@@ -148,8 +147,6 @@ You can configure the profiler using the following environment variables:
 | `DD_SERVICE`                                     | String        | The [service][7] name, for example, `web-backend`. |
 | `DD_VERSION`                                     | String        | The [version][7] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
-
-
 
 ## Not sure what to do next?
 

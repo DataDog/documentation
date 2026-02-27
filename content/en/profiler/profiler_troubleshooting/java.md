@@ -18,7 +18,7 @@ The Java profiler uses two different profiling engines depending on your operati
 | **Datadog Profiler** | Linux |
 | **Java Flight Recorder (JFR)** | Windows, macOS, Linux (fallback) |
 
-- **Datadog Profiler**: The Datadog Java profiler was implemented on top of async-profiler and used JVM sampling hooks such as `AsyncGetCallTrace` (and, on Linux, the kernel perf subsystem) to collect stacks and samples. To improve robustness the tracer now performs its own stack unwinding / stack walking in newer agent releases: starting with dd-trace-java 1.55.0 the Datadog profiler uses its own stable stack-walker implementation instead of relying solely on `AsyncGetCallTrace`. That reduces ASGCT-related crashes and gives the profiler more control over unwinding across JVMs and GC modes.
+- **Datadog Profiler**: The default profiling engine on Linux. Starting with dd-trace-java 1.55.0, the Datadog profiler uses its own stable stack-walker implementation for improved robustness across JVMs and GC modes. On Linux, it uses the kernel perf subsystem for accurate CPU sampling and provides the full set of profile types including wallclock profiling for latency analysis.
 - **Java Flight Recorder (JFR)**: Uses the JVM's built-in flight recorder. Available on all platforms but with fewer profile types. On Linux, used as a fallback when the Datadog Profiler cannot be enabled.
 
 The profiler automatically selects the appropriate engine based on your environment. You do not need to configure this manually. Below are the different profile types and the related configurations.
@@ -67,8 +67,7 @@ The JFR-based allocation profiling engine:
 | **JFR** (Java 8) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
 | **JFR** (Java 16) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationSample` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationSample` |
 
-**Note**: On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications. Alternatively for JFR, you can enable the following events in your `jfp` override template file 
-[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+**Note**: On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications. Alternatively for JFR, you can enable the following events in your `jfp` override template file. [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
 ```
 #Java8
@@ -83,7 +82,7 @@ jdk.ObjectAllocationSample#enabled=true
 ## Live heap profiling
 
 The live-heap profiler engine:
-- Useful for investigating the overall memory usage of service and identifying potential memory leaks
+- Useful for investigating the overall memory usage of your service and identifying potential memory leaks
 - Samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle
 - Uses the number of surviving samples to estimate the number of live objects in the heap
 - Limits the number of tracked samples to avoid unbounded growth of the profiler's memory usage
@@ -98,7 +97,7 @@ The live-heap profiler engine:
 **Note**: The live-heap engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
 
-## Heap Profiling
+## Heap profiling
 <div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 
 To enable the heap profiler, start your application with one of the following:
@@ -128,7 +127,7 @@ To enable the heap histogram metrics, start your application with one of the fol
 
 ## GraalVM native-image
 
-For applications compiled as GraalVM native images, see [Enabling the Profiler for GraalVM Native Image][3].
+For applications compiled as GraalVM native images, only JFR-based profiling is supported. See [Enabling the Profiler for GraalVM Native Image][3] for setup instructions.
 
 | Platform | CPU | Allocation |
 |----------|:---:|:----------:|
@@ -153,12 +152,12 @@ If you've configured the profiler and don't see profiles in the profile search p
 
 ## Reduce overhead from default setup
 
-If the default setup overhead is not acceptable, you can use profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
+If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
 
 - Increases sampling threshold to 500ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Disables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
 
-To use the minimal configuration change your service ensure you have a recent version of java tracer, then change the service invocation to the following:
+To use the minimal configuration, verify you have a recent version of the Java tracer, then change the service invocation to the following:
 
 ```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
@@ -166,50 +165,16 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr
 
 ## Increase profiler information granularity
 
-If you want more granularity in your profiling data, you can specify the `comprehensive` configuration. Note that this approach will increase your profiler overhead at the cost of further granularity. Comprehensive configuration has the following changes compared to the default:
+If you want more granularity in your profiling data, you can specify the `comprehensive` configuration. This approach increases your profiler overhead at the cost of further granularity. Comprehensive configuration has the following changes compared to the default:
 
 - Reduces sampling threshold to 10ms for `ThreadSleep`, `ThreadPark`, and `JavaMonitorWait` events compared to 100ms default
 - Enables `ObjectAllocationInNewTLAB`, `ObjectAllocationOutsideTLAB`, `ExceptionSample`, `ExceptionCount` events
 
-To use the comprehensive configuration ensure you have a recent version of java tracer, change your service invocation to the following:
+To use the comprehensive configuration, verify you have a recent version of the Java tracer, then change your service invocation to the following:
 
 ```
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
-
-## Enabling the allocation profiler
-
-On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications.
-
-To enable the allocation profiler, start your application with the `-Ddd.profiling.allocation.enabled=true` JVM setting or the `DD_PROFILING_ALLOCATION_ENABLED=true` environment variable.
-
-Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
-
-```
-jdk.ObjectAllocationInNewTLAB#enabled=true
-jdk.ObjectAllocationOutsideTLAB#enabled=true
-```
-
-[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
-
-## Enabling the heap profiler
-<div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
-To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
-
-Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
-
-```
-jdk.OldObjectSample#enabled=true
-```
-
-[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
-
-## Enabling the heap class histogram collection
-<div class="alert alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
-
-To enable the heap class histogram collection, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable. This powers the Heap Occupancy metrics and improves the Memory Leaks workflow.
-
-This data is collected when the JVM performs a Full Garbage Collection cycle and may only appear intermittently or not at all if your service does not have significant memory pressure.
 
 ## Removing sensitive information from profiles
 
@@ -342,6 +307,24 @@ Below are basic troubleshooting steps for resolving those issues:
     DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
     ```
 
+## Collecting native stack traces
+
+If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
+
+<div class="alert alert-danger">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</div>
+
+To enable native stack trace collection, set:
+
+```shell
+export DD_PROFILING_DDPROF_CSTACK=dwarf
+```
+
+or:
+
+```
+-Ddd.profiling.ddprof.cstack=dwarf
+```
+
 ## Summary - Advanced profiler engine configuration
 
 The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
@@ -357,7 +340,7 @@ The following settings allow fine-grained control over the profiler engines. The
 
 ## JDK Mission Control (JMC) event reference
 
-If you are analyzing profiles with JDK Mission Control, the following table provides a quick reference for events emitted by the profiler. 
+If you are analyzing profiles with JDK Mission Control, the following table provides a reference for events emitted by the profiler.
 
 | Profile type | JFR event | Datadog event |
 |--------------|-----------|---------------|
