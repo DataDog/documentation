@@ -25,7 +25,8 @@ To set up the processor:
 1. Click **Add Scanning Rule**.
 1. Select one of the following:
 
-{{% collapse-content title="Add rules from the library" level="h5" %}}
+{{< tabs >}}
+{{% tab "Library rules" %}}
 
 1. In the dropdown menu, select the library rule you want to use.
 1. Recommended keywords are automatically added based on the library rule selected. After the scanning rule has been added, you can [add additional keywords or remove recommended keywords](#add-additional-keywords).
@@ -71,8 +72,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 1. Toggle **Use recommended keywords** if you want the rule to use them. Otherwise, add your own keywords to the **Create keyword dictionary** field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. Click **Update**.
 
-{{% /collapse-content %}}
-{{% collapse-content title="Add a custom rule" level="h5" %}}
+{{% /tab %}}
+{{% tab "Custom rules" %}}
 
 1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid. See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
@@ -120,7 +121,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
