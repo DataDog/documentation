@@ -81,7 +81,10 @@ export const initializeFeatureFlags = () => {
 
         return client;
     })().catch((error) => {
-        console.error('[Flags] Initialization failed:', error);
+        const isAdBlockerLikely = typeof window !== 'undefined' && (!window.DD_RUM || error?.message?.includes('Unexpected end of JSON input'));
+        const contextMsg = isAdBlockerLikely ? ' (Likely blocked by an ad blocker or privacy extension)' : '';
+        
+        console.warn(`[Flags] Initialization failed${contextMsg}:`, error);
         initializationPromise = null;
         return null;
     });
