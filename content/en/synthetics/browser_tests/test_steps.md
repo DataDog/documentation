@@ -263,7 +263,7 @@ Create this interaction step to simulate dragging an element from one location t
 
 Use **User Specified Locator** for the following scenarios:
 
-* **Ghost or overlay elements**: Your app shows a floating copy of the dragged item (for example, a drag preview). The recorder may target that copy instead of the real drop zone. Edit the drop target to the actual container or enter a custom selector.
+* **Ghost or overlay elements**: Your application shows a floating copy of the dragged item (for example, a drag preview). The recorder may target that copy instead of the real drop zone. Edit the drop target to the actual container or enter a custom selector.
 * **Deep or nested elements**: The draggable/droppable behavior is on a parent, but the recorder picked a child. Inspect the page and choose the parent element that has the right classes or attributes.
 * **Same element for drag and drop**: The recorder used one element as both drag source and drop target. Edit the drop target and select the real destination element.
 
