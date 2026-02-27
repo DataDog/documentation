@@ -82,6 +82,10 @@ nav_sections:
   - nav_section:
     - name: 'Observability'
     - navtiles:
+      - title: Infrastructure
+        link: infrastructure/
+        icon: host-map
+        desc: View the health and performance of your hosts and infrastructure components
       - title: Metrics
         link: metrics/
         icon: metric
@@ -94,6 +98,10 @@ nav_sections:
         link: containers/
         icon: container
         desc: Monitor the health, performance, and security of your containerized environments
+      - title: End User Device Monitoring
+        link: infrastructure/end_user_device_monitoring/
+        icon: desktop-wui
+        desc: Monitor the performance and security of your end user devices
       - title: Serverless
         link: serverless/
         icon: serverless
@@ -242,6 +250,14 @@ nav_sections:
         link: service_management/incident_management
         icon: incidents
         desc: Identify, analyze, and mitigate disruptive incidents in your organization
+      - title: On-Call
+        link: incident_response/on-call/
+        icon: on-call
+        desc: Route and escalate alerts to the right team members with on-call schedules and paging
+      - title: Status Pages
+        link: incident_response/status_pages/
+        icon: status-page-wui
+        desc: Communicate service availability and incident updates to your users and stakeholders
       - title: Internal Developer Portal
         link: internal_developer_portal/
         icon: internal-developer-portal-wui
