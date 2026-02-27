@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Datadog Profiler support for GraalVM native-image is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+Datadog Profiler support for GraalVM native-image is in Preview. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
 </div>
 
 This page describes how to enable profiling for applications compiled as GraalVM native images. For standard JVM applications, see [Enabling the Java Profiler][1].
