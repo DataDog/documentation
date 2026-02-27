@@ -221,7 +221,7 @@ The following bash script sends a complete pipeline run to Datadog. It demonstra
 
 1. Save the script below as `send_pipeline.sh`.
 2. Export your Datadog API key: `export DD_API_KEY=<your-api-key>`
-3. Optionally set your Datadog site (defaults to `datadoghq.com`): `export DD_SITE=us5.datadoghq.com`
+3. Set your Datadog site (your site is {{< region-param key="dd_site" code="true" >}}): `export DD_SITE=`{{< region-param key="dd_site" code="true" >}}
 4. Run the script: `bash send_pipeline.sh`
 
 The script requires `bash`, `curl`, and `uuidgen` (available on macOS and most Linux distributions).
