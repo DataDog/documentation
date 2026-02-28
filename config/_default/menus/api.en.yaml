@@ -13109,6 +13109,32 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Import email subscriptions
+      url: '#import-email-subscriptions'
+      identifier: status-pages-import-email-subscriptions
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportEmailSubscriptions
+        unstable:
+          - v2
+        order: 14
+    - name: List email subscriptions
+      url: '#list-email-subscriptions'
+      identifier: status-pages-list-email-subscriptions
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEmailSubscriptions
+        unstable:
+          - v2
+        order: 13
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13253,6 +13279,19 @@ menu:
           - DeleteStatusPage
         unstable: []
         order: 5
+    - name: Create an internal email subscription
+      url: '#create-an-internal-email-subscription'
+      identifier: status-pages-create-an-internal-email-subscription
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateInternalEmailSubscription
+        unstable:
+          - v2
+        order: 12
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations

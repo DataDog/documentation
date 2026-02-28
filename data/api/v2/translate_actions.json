@@ -3777,6 +3777,12 @@
     "description": "Lists all degradations for the organization. Optionally filter by status and page.",
     "summary": "List degradations"
   },
+  "CreateInternalEmailSubscription": {
+    "description": "Creates an internal email subscription for a status page.",
+    "summary": "Create an internal email subscription",
+    "request_description": "",
+    "request_schema_description": "Request to create an email subscription."
+  },
   "DeleteStatusPage": {
     "description": "Deletes a status page by its ID.",
     "summary": "Delete status page"
@@ -3834,6 +3840,16 @@
     "summary": "Update degradation",
     "request_description": "",
     "request_schema_description": ""
+  },
+  "ListEmailSubscriptions": {
+    "description": "Returns a list of email subscriptions for a status page. Supports filtering by status and pagination.",
+    "summary": "List email subscriptions"
+  },
+  "ImportEmailSubscriptions": {
+    "description": "Imports multiple email subscriptions for a status page. Accepts up to 1000 subscriptions at once.",
+    "summary": "Import email subscriptions",
+    "request_description": "",
+    "request_schema_description": "Request to import multiple email subscriptions."
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
