@@ -27,9 +27,11 @@ Verify that your feature flag is enabled, evaluating in the correct environment,
 
 1. Note the **Environment** the experiment is running in, then click **Go to Flag**.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_flag_link.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
 1. On the feature flag page, confirm that the flag is **Enabled**. If the flag is not enabled, enable it before proceeding.
+
+   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
 1. In the **Real-time Metric Overview**, filter by the experiment's environment to verify that the flag is receiving traffic in that specific environment. See the [Getting Started with Feature Flags][5] guide for details on environments.
 
@@ -72,9 +74,7 @@ Work through the following checks sequentially. Each section builds on the previ
    Datadog excludes events that do not meet both criteria from experiment results.
    </div>
 
-   <div class="alert alert-warning">If the scorecard shows non-zero user assignments but all metric values are zero, the issue is not with traffic; it is with how metric events are being matched to exposures. Continue to the next sections to diagnose.
-
-   <br><br><strong>If the metric event is firing but the experiment scorecard still shows zero</strong>, continue to the next section to verify subject key matching.</div>
+   <div class="alert alert-warning"><strong>If the scorecard shows non-zero user assignments but all metric values are zero</strong>, the issue is not with traffic; it is with how metric events are being matched to exposures. <strong>Continue to the next section</strong> to verify subject key matching.</div>
 
 {{% /collapse-content %}}
 
@@ -82,13 +82,13 @@ Work through the following checks sequentially. Each section builds on the previ
 
 1. Click **View Exposure Logs** on the **Flags & Exposures** tab to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
-   {{< img src="/product_analytics/experiment/troubleshooting_exposure_log.png" alt="The Exposures log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
 
 1. Check that the value in the **Subject** column matches the subject type attribute (typically `@usr.id`). The **Subject** column shows the value passed as [`targetingKey`][7] to the SDK. If the `targetingKey` does not match the subject type attribute, the experiment analysis cannot associate metric events with that exposure.
 
    You can view and configure subject types in [Experiment Settings][9]. By default, the subject type is set to `@usr.id`. Verify that the value you pass as `targetingKey` in your SDK matches the attribute defined on the subject types page.
 
-**If the subject values match but results are still missing**, continue to [Inspect individual sessions](#inspect-individual-sessions).
+**If the subject values match but results are still missing**, continue to the next section to inspect individual sessions.
 
 {{% /collapse-content %}}
 
@@ -106,7 +106,7 @@ If the subject values match and users are assigned to the experiment, you can in
 
 1. Select individual sessions from users who were assigned to the experiment. Verify that the expected metric event is firing within the session. Check the timing of events in the session timeline. Events that occur **before** the feature flag is evaluated do not count toward experiment results.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_inspect_session.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
 {{% /collapse-content %}}
 
