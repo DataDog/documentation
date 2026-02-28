@@ -10461,6 +10461,16 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/NotebookStatus'
+        template_variables:
+          description: List of template variables for this notebook.
+          example:
+          - available_values: []
+            default: '*'
+            name: host
+            prefix: host
+          items:
+            $ref: '#/components/schemas/NotebookTemplateVariable'
+          type: array
         time:
           $ref: '#/components/schemas/NotebookGlobalTime'
       required:
@@ -10764,6 +10774,39 @@ components:
       type: string
       x-enum-varnames:
       - PUBLISHED
+    NotebookTemplateVariable:
+      description: Template variable for a notebook.
+      properties:
+        available_values:
+          description: The list of values that the template variable drop-down is
+            limited to.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: Template variable value.
+            type: string
+          nullable: true
+          type: array
+        default:
+          description: The default value for the template variable.
+          example: '*'
+          nullable: true
+          type: string
+        name:
+          description: The name of the variable.
+          example: host
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable. Only tags with
+            this prefix appear in the variable drop-down.
+          example: host
+          nullable: true
+          type: string
+      required:
+      - name
+      type: object
     NotebookTimeseriesCellAttributes:
       description: The attributes of a notebook `timeseries` cell.
       properties:
@@ -10867,6 +10910,16 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/NotebookStatus'
+        template_variables:
+          description: List of template variables for this notebook.
+          example:
+          - available_values: []
+            default: '*'
+            name: host
+            prefix: host
+          items:
+            $ref: '#/components/schemas/NotebookTemplateVariable'
+          type: array
         time:
           $ref: '#/components/schemas/NotebookGlobalTime'
       required:
@@ -10943,6 +10996,16 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/NotebookStatus'
+        template_variables:
+          description: List of template variables for this notebook.
+          example:
+          - available_values: []
+            default: '*'
+            name: host
+            prefix: host
+          items:
+            $ref: '#/components/schemas/NotebookTemplateVariable'
+          type: array
         time:
           $ref: '#/components/schemas/NotebookGlobalTime'
       required:
