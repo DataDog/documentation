@@ -6,9 +6,9 @@ aliases:
 ---
 
 Bits AI SRE improves over time by combining three distinct sources of knowledge:
-- **Runbooks:** Step-by-step troubleshooting guidance
-- **bits.md:** Context about your environment
-- **Feedback and memories:** Learnings from investigations
+- [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
+- [**bits.md:**](#bitsmd) Context about your environment
+- [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
 
 ## Runbooks
 Think of onboarding Bits AI SRE as you would a new teammate: the more context you provide, the better it can investigate.
