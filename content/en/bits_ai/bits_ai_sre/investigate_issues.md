@@ -40,7 +40,7 @@ In Slack, reply to a monitor notification with `@Datadog Investigate this alert`
 #### APM latency
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Starting Bits AI SRE investigations from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+Bits AI SRE investigations started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 ##### APM latency graphs on service pages
@@ -73,7 +73,7 @@ Good examples:
 Bad example: 
 - App is slow. What’s wrong?
 
-You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits automatically uses the entire thread as investigation context.
+You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits AI SRE automatically uses the entire thread as investigation context.
 
 ### Enable automatic investigations
 
@@ -130,7 +130,7 @@ Bits uses the following data sources during investigations:
 - Database Monitoring
 - Continuous Profiler
 
-<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits correlate data more accurately.</div>
+<div class="alert alert-tip"><b>Add service scoping:</b> For monitors associated with a service, add a service tag to the monitor, or filter or group the monitor query by service. This helps Bits AI SRE correlate data more accurately.</div>
 
 #### Third-party integrations
 - Grafana

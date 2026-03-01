@@ -16,7 +16,7 @@ Bits AI SRE integrates with Bits AI Dev Agent to automatically generate code fix
 {{< img src="bits_ai/bits_ai_sre_suggested_code_fix.png" alt="Flowchart showing Bits' investigation conclusion and a suggested code fix" style="width:100%;" >}}
 
 ## Run triage actions via chat
-From within chat, you can trigger triage actions—without leaving the investigation workflow.
+From within chat, you can trigger triage actions without leaving the investigation workflow.
 
 Supported actions include:
 - Sending Slack and Microsoft Teams messages
@@ -25,6 +25,6 @@ Supported actions include:
 - Creating cases in Datadog Case Management
 - Opening Jira tickets
 
-Bits automatically pulls relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, ensures consistency, and accelerates response time.
+Bits AI SRE automatically pulls relevant context from the investigation and your connected integrations to prefill messages, incident descriptions, and ticket metadata. This reduces manual effort, ensures consistency, and accelerates response time.
 
 [1]: /bits_ai/bits_ai_dev_agent/setup/

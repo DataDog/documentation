@@ -2,10 +2,10 @@
 title: Configure integrations and settings
 ---
 
-Set up integrations to extend Bits’ capabilities:
-- [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context
-- [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms)to streamline incident response
-- [Pull context from knowledge bases](#pull-context-from-knowledge-bases) to incorporate runbooks and documentation into investigations
+Set up integrations to extend Bits AI SRE’s capabilities:
+- [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context.
+- [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms) to streamline incident response.
+- [Pull context from knowledge bases](#pull-context-from-knowledge-bases) to incorporate runbooks and documentation into investigations.
 
 ## Integrate with third-party observability and SCM platforms
 
@@ -122,7 +122,7 @@ Bits AI SRE provides three [Actions][15]:
 - Get Investigation
 - List Investigations
 
-These Actions can be used to build Workflows, Agents, and Apps tailored to your use case.
+You can use these Actions to build Workflows, Agents, and Apps tailored to your use case.
 
 ## API
 
