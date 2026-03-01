@@ -1,5 +1,8 @@
 ---
-title: Knowledge
+title: Knowledge Sources
+aliases:
+- /bits_ai/bits_ai_sre/help_bits_learn/
+
 ---
 
 Bits AI SRE improves over time by combining three distinct sources of knowledge:
@@ -10,10 +13,10 @@ Bits AI SRE improves over time by combining three distinct sources of knowledge:
 ## Runbooks
 Think of onboarding Bits AI SRE as you would a new teammate: the more context you provide, the better it can investigate.
 
-As a best practice, add runbooks or step-by-step troubleshooting instructions to the monitor message. 
+As a best practice, add runbooks or step-by-step troubleshooting instructions to the monitor message.
 - **Include Datadog telemetry links**: Add at least one helpful telemetry link in the monitor message. Think about the first place you'd normally look in Datadog when this monitor triggers. Some examples include a dashboard, logs, traces, or a notebook with helpful widgets. Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
 
-- **Confluence integration**: Bits AI SRE integrates with **Confluence** to find relevant documentation and runbooks. When you link a Confluence page in a monitor message, Bits AI SRE reads the page during the investigation, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its suggestions. 
+- **Confluence integration**: Bits AI SRE integrates with **Confluence** to find relevant documentation and runbooks. When you link a Confluence page in a monitor message, Bits AI SRE reads the page during the investigation, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its suggestions.
 
 <div class="alert alert-tip">Help Bits AI SRE interpret and act on your documentation by following these best practices:
 <br> - Include relevant Datadog telemetry links in your Confluence pages. Bits AI SRE queries these links to extract information for its investigation.
@@ -72,9 +75,9 @@ For pod issues, check Kubernetes events first:
 `source:kubernetes pod_name:<pod> kube_namespace:<namespace>`
 
 Common causes:
-- `FailedMount` → missing Secret/ConfigMap  
-- `ImagePullBackOff` → image/registry issue  
-- `OOMKilled` → memory pressure  
+- `FailedMount` → missing Secret/ConfigMap
+- `ImagePullBackOff` → image/registry issue
+- `OOMKilled` → memory pressure
 
 ---
 
@@ -99,14 +102,14 @@ At the end of an investigation, let Bits AI SRE know whether the conclusion it m
 
 {{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
 
-If the conclusion was inaccurate, provide Bits AI SRE with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Ensure your feedback: 
-- Identifies the actual root cause (not just observed effects or symptoms) 
-- Specifies relevant services, components, or metrics 
+If the conclusion was inaccurate, provide Bits AI SRE with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Ensure your feedback:
+- Identifies the actual root cause (not just observed effects or symptoms)
+- Specifies relevant services, components, or metrics
 - Includes telemetry links that point to the root cause
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
-Every piece of feedback you provide creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation. 
+Every piece of feedback you provide creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
 
 To manage memories, including viewing and deleting them, navigate to the **Memories** column of the [Monitor Management][1] page.
 

@@ -1,7 +1,7 @@
 ---
-title: Investigate issues
+title: Investigate Issues
 description: "Use Bits AI SRE to automatically investigate monitor alerts and provide root cause analysis for faster incident resolution."
-aliases: 
+aliases:
 - /bits_ai/bits_ai_sre/investigate_alerts/
 ---
 
@@ -12,7 +12,7 @@ You can launch a Bits AI SRE investigation from several entry points:
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
-- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages) 
+- [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages)
 - [APM latency Watchdog stories](#apm-latency-watchdog-stories)
 - [General prompt](#general-prompt)
 
@@ -47,11 +47,11 @@ Bits AI SRE investigations started from APM latency graphs and APM Watchdog stor
 
 1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click **Investigate**.
 1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
-1. Click **Investigate with Bits AI SRE** to run a deeper investigation. 
+1. Click **Investigate with Bits AI SRE** to run a deeper investigation.
 
 ##### APM latency Watchdog stories
 
-On a Watchdog APM latency story, click **Investigate with Bits AI SRE**. 
+On a Watchdog APM latency story, click **Investigate with Bits AI SRE**.
 
 #### General prompt
 
@@ -66,11 +66,11 @@ Click on [New Investigation][16] and describe the issue you want to troubleshoot
 
 The more specific your prompt, the more accurate and useful the investigation will be.
 
-Good examples: 
-- Investigate requests to search-service in prod. Some requests are returning empty results when they should not. The issue began around 10:00 UTC. 
-- Investigate what's causing these errors: https://app.datadoghq.com/logs?query=service%3Asearch-service%20status%3Aerror They started appearing about 5 minutes ago. 
+Good examples:
+- Investigate requests to search-service in prod. Some requests are returning empty results when they should not. The issue began around 10:00 UTC.
+- Investigate what's causing these errors: https://app.datadoghq.com/logs?query=service%3Asearch-service%20status%3Aerror They started appearing about 5 minutes ago.
 
-Bad example: 
+Bad example:
 - App is slow. What’s wrong?
 
 You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits AI SRE automatically uses the entire thread as investigation context.
@@ -107,7 +107,7 @@ Starting Bits AI SRE investigations from Synthetic tests is now in Preview. Clic
 {{< /callout >}}
 
 ## How Bits AI SRE investigates
-When Bits AI SRE investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits AI SRE updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause. 
+When Bits AI SRE investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits AI SRE updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
 
 At the end of an investigation, Bits AI SRE either presents a clear, evidence-backed conclusion or marks the investigation as inconclusive when the available data is insufficient to support a defensible conclusion.
 
@@ -165,9 +165,9 @@ The Reports tab enables you to track the number of investigations run over time 
 [5]: https://app.datadoghq.com/bits-ai/monitors/supported
 [6]: https://app.datadoghq.com/monitors/manage
 [8]: /bits_ai/bits_ai_sre/configure#slack
-[9]: /bits_ai/bits_ai_sre/knowledge/
+[9]: /bits_ai/bits_ai_sre/knowledge_sources/
 [10]: /incident_response/on-call/pages/#page-from-notifications
 [14]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [15]: /account_management/rbac/permissions/#bits-ai
-[16]: https://app.datadoghq.com/bits-ai/investigations/new 
+[16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information

@@ -1398,24 +1398,24 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Investigate issues
+    - name: Investigate Issues
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
-    - name: Take action
+    - name: Take Action
       url: bits_ai/bits_ai_sre/take_action
       identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE integrations and settings
+    - name: Bits AI SRE Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 300
-    - name: Knowledge
-      url: bits_ai/bits_ai_sre/knowledge
-      identifier: bits_ai_sre_knowledge
+    - name: Knowledge Sources
+      url: bits_ai/bits_ai_sre/knowledge_sources
+      identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
     - name: Chat with Bits AI SRE
@@ -5180,7 +5180,7 @@ menu:
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
     - name: Advanced Experiment Runs
-      url: llm_observability/experiments/advanced_runs 
+      url: llm_observability/experiments/advanced_runs
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_advanced_runs
       weight: 504
@@ -9003,7 +9003,7 @@ menu:
       weight: 8
     - name: Controls
       identifier: account_management_governance_console_controls
-      url: account_management/governance_console/controls 
+      url: account_management/governance_console/controls
       parent: account_management_governance_console
       weight: 801
     - name: Multi-Factor Authentication

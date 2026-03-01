@@ -13,7 +13,7 @@ cascade:
 
 Bits AI SRE is an autonomous AI agent that investigates production issues end to end. It iteratively forms hypotheses, gathers relevant telemetry, and uses data-based reasoning to help on-call engineers pinpoint root causes. By reducing manual effort and cognitive load, Bits AI SRE makes on-call operations smoother and more efficient.
 
-{{< img src="bits_ai/overview_1.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
+{{< img src="bits_ai/overview_2.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
 
 ## Features
 
@@ -21,7 +21,7 @@ Bits AI SRE is an autonomous AI agent that investigates production issues end to
    {{< nextlink href="bits_ai/bits_ai_sre/investigate_issues" >}}Investigate issues{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/take_action" >}}Take action{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/configure" >}}Bits AI SRE integrations and settings{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_ai_sre/knowledge" >}}Knowledge{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre/knowledge_sources" >}}Knowledge sources{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_sre/chat_bits_ai_sre" >}}Chat with Bits AI SRE{{< /nextlink >}}
 {{< /whatsnext >}}
 
