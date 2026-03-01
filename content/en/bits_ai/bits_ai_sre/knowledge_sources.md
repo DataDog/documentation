@@ -13,16 +13,15 @@ Bits AI SRE improves over time by combining three distinct sources of knowledge:
 ## Runbooks
 Think of onboarding Bits AI SRE as you would a new teammate: the more context you provide, the better it can investigate.
 
-As a best practice, add runbooks or step-by-step troubleshooting instructions to the monitor message.
-- **Include Datadog telemetry links**: Add at least one helpful telemetry link in the monitor message. Think about the first place you'd normally look in Datadog when this monitor triggers. Some examples include a dashboard, logs, traces, or a notebook with helpful widgets. Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows. You don't have to format the links in any particular way; plain links work.
+You can either add step-by-step troubleshooting instructions directly in the monitor message or link to a Confluence page that contains those instructions.
 
-- **Confluence integration**: Bits AI SRE integrates with **Confluence** to find relevant documentation and runbooks. When you link a Confluence page in a monitor message, Bits AI SRE reads the page during the investigation, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its suggestions.
+- **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you’d normally look in Datadog when the monitor triggers—for example, a dashboard, logs, traces, or a notebook with key widgets. Links don’t need special formatting; plain URLs work.
 
-<div class="alert alert-tip">Help Bits AI SRE interpret and act on your documentation by following these best practices:
-<br> - Include relevant Datadog telemetry links in your Confluence pages. Bits AI SRE queries these links to extract information for its investigation.
-<br> - Provide clear, step-by-step instructions for resolving monitor issues. Bits AI SRE follows these instructions precisely, so being specific leads to more accurate outcomes.
-<br> - Document the services or systems involved in detail. Bits AI SRE uses this information to understand the environment and guide investigations effectively.
-<br> The more precisely your Confluence page matches the issue at hand, the more helpful Bits AI SRE can be.</div>
+Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
+
+- **Confluence integration**: If your runbooks live in Confluence, link the relevant pages in the monitor message. During an investigation, Bits AI SRE reads the page, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its recommendations.
+
+To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits AI SRE to conduct more accurate and effective investigations.
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
