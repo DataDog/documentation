@@ -52,7 +52,7 @@ Relative dates update over time; they are calculated from the current time.
 
 | Format                                             | Description                                                                                                                                                                                                                                                                                          |
 | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `N{unit}`<br> See the list of accepted units below | Displays a sliding window of the past N units. Both start and end move forward with time. For example, **3 mo** (the past 3 months). To create a growing window where the end stays at "now," use the `to now` syntax (for example, `10am to now`). See [Growing time frames](#growing-time-frames). |
+| `N{unit}` | Displays a sliding window of the past N units. Accepted units are listed below. Both start and end move forward with time. For example, **3 mo** (the past 3 months). To create a growing window where the end stays at "now," use the `to now` syntax (for example, `10am to now`). For more information, see [Growing time frames](#growing-time-frames). |
 
 The following strings are accepted for any `{unit}` in a relative date:
 
@@ -64,7 +64,7 @@ The following strings are accepted for any `{unit}` in a relative date:
 
 ### Growing time frames
 
-Growing time frames have a fixed start and automatically extend to the current time ("now"). They are useful when you want to see everything that has happened since a specific point in time.
+Growing time frames have a fixed start and automatically extend to the current time ("now"). They are useful when you want to see all activity since a specific point in time.
 
 {{< img src="dashboards/guide/custom_time_frames/custom_growing_time_frame.mp4" alt="Type custom growing time frame" video="true" width="500" >}}
 
