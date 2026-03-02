@@ -27,7 +27,7 @@ On the [Experiments][2] page, select your experiment and hover over the metric s
 
 Verify that your feature flag is enabled, evaluates in the correct environment, and that traffic reaches the experiment's targeting rule.
 
-1. Note the **Environment** the experiment is running in, then click **Go to Flag**.
+1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
@@ -41,13 +41,12 @@ Verify that your feature flag is enabled, evaluates in the correct environment, 
 
 Based on what you see in the **Real-time Metric Overview**, follow the appropriate path:
 
-{{% collapse-content title="The flag is not receiving traffic" level="h4" expanded=false id="flag-not-receiving-traffic" %}}
+#### The flag is not receiving traffic
 
-1. Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
+Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
 
-{{% /collapse-content %}}
 
-{{% collapse-content title="The flag is receiving traffic but experiment assignments are zero" level="h4" expanded=false id="flag-receiving-traffic-no-assignments" %}}
+#### The flag is receiving traffic but experiment assignments are zero
 
 If the flag shows exposures but the experiment scorecard shows zero assignments, traffic is not reaching the experiment's [targeting rule][6].
 
@@ -60,11 +59,10 @@ Check the following:
    - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
    - **Traffic allocation**: Is the traffic allocation to the experiment set correctly?
 
-{{% /collapse-content %}}
 
 ### Step 3: Confirm metric events are firing
 
-After you confirm the experiment is receiving traffic, check whether the assigned users have associated metric events. 
+After you confirm the experiment is receiving traffic, check whether the assigned users have associated metric events.
 
 Work through the following checks sequentially. Each section builds on the previous one, so start with the first and continue to the next if the issue persists.
 
@@ -74,7 +72,7 @@ Work through the following checks sequentially. Each section builds on the previ
 
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
 
-1. **If a metric value is zero**, hover over the metric name to select the &#8942; menu item. Click **Edit Metric** to open the metric definition page. 
+1. **If a metric value is zero**, hover over the metric name and click the &#8942; menu item. Select **Edit Metric** to open the metric definition page. 
 
 1. Verify that the metric event name is correct (for example, check for typos). Check the event volume chart on the right side of the page to confirm the event is firing.
 
@@ -96,13 +94,13 @@ Work through the following checks sequentially. Each section builds on the previ
 
 Datadog matches metric events to experiment exposures using a subject key. If the subject key in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
-1. Click **View Exposure Logs** on the **Flags & Exposures** tab to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
+1. Under the **Flag & Exposures** tab, click **View Exposure Logs** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
 
 1. Compare the value in the **Subject** column to the subject type attribute (typically `@usr.id`). The **Subject** column shows the value your SDK passes as [`targetingKey`][7].
 
-1. If the values do not match, update either the [`targetingKey`][7] in your SDK or the subject type in Datadog to align them. You can view and configure subject types on the [subject types page][9]. By default, the subject type defaults to `@usr.id`.
+1. If the values do not match, update either the [`targetingKey`][7] in your SDK or the subject type in Datadog to align them. You can view and configure subject types on the [subject types page][9]. By default, the subject type is `@usr.id`.
 
 **If the subject values match but experiment results are still missing**, continue to the next section to inspect individual sessions.
 
@@ -122,7 +120,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for two things:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
-   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag is evaluated do not count toward experiment results.
+   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results.
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
@@ -136,16 +134,15 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 
 To check if outlier handling is the cause:
 
-1. On the [Experiments][2] page, hover over the metric name and select **Edit Metric** from the &#8942; menu.
+1. On the [Experiments][2] page, hover over the metric name to click the &#8942; menu item. Select **Edit Metric** to open the metric definition page. 
 1. In the metric definition, toggle **Outlier handling** off.
-1. Save the metric. To trigger an immediate recompute, click the &#8942; menu next to **Last Updated** in the **Metrics** section and select **run an update now**. Otherwise, wait for the next scheduled update.
+1. Save the metric. To trigger an immediate recompute, click the &#8942; menu next to **Last Updated** in the **Metrics** section and click **run an update now**. Otherwise, wait for the next scheduled update.
+
+{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
 If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the metric edit page.
 
 {{< img src="/product_analytics/experiment/troubleshooting_outlier_handling.png" alt="The Edit Metric page with the Outlier handling toggle highlighted." style="width:90%;" >}}
-
-{{< img src="/product_analytics/experiment/troubleshooting_recompute.png" alt="The experiment page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
-
 
 {{% /collapse-content %}}
 
