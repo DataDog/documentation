@@ -23,7 +23,7 @@ Datadog's [Host Map][1] visualizes your hosts, pods, containers, and clusters, h
 
 Use the drop-down in the upper left to view suggested queries, or the saved custom queries written by you or someone else in your organization. To write a custom query, click <span class="ui">Create</span>.
 
-{{< img src="infrastructure/hostmap/draft-query.png" alt="The Draft Query editor with two levels. The parent object is set to Host with Fill by CPU usage. The child object is set to Pod with Fill by Readiness." style="width:100%;" >}}
+{{< img src="infrastructure/hostmap/draft-query.png" alt="The Draft Query editor with two levels. The parent object is set to Host with Fill by CPU usage. The child object is set to Pod with Fill by Readiness." style="width:60%;" >}}
 
 - <span class="ui">Parent/Child Object</span>: Select resources (<span class="ui">Host</span>, <span class="ui">Pod</span>, <span class="ui">Container</span>, <span class="ui">Cluster</span>) to view. Parent and Child objects have hierarchical relationships.
 - <span class="ui">Fill by</span>: By default, the color of each object represents CPU usage, where the color ranges from green (0% utilized) to orange (100% utilized). Use the <span class="ui">Fill by</span> drop-down to color your objects by various metrics or signals, such as memory or error logs.
