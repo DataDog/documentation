@@ -81,6 +81,8 @@ jdk.ObjectAllocationSample#enabled=true
 
 ## Live heap profiling
 
+Live Heap Profiling is a Datadog profiler feature that helps identify memory leaks and understand heap usage by tracking which allocated objects survive garbage collection. Unlike standard allocation profiling (which shows what was allocated), live heap profiling shows what is still alive on the heap — making it more useful for diagnosing memory leaks.
+
 The live-heap profiler engine:
 - Useful for investigating the overall memory usage of your service and identifying potential memory leaks
 - Samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle
@@ -98,6 +100,9 @@ The live-heap profiler engine:
 
 
 ## Heap profiling
+
+Heap profiling uses the JVM's built-in `jdk.OldObjectSample` JFR event to track objects that have survived long enough to be promoted to the old generation of the garbage collector. This helps identify potential memory leaks by showing which objects are accumulating over time. Unlike live heap profiling (which uses the Datadog profiler engine), heap profiling relies on JFR and is available on Linux and Windows.
+
 <div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 
 To enable the heap profiler, start your application with one of the following:
@@ -125,17 +130,9 @@ To enable the heap histogram metrics, start your application with one of the fol
 
 
 
-## GraalVM native-image
+## Trace to profiling integration
 
-For applications compiled as GraalVM native images, only JFR-based profiling is supported. See [Enabling the Profiler for GraalVM Native Image][3] for setup instructions.
-
-| Platform | CPU | Allocation |
-|----------|:---:|:----------:|
-| Linux, Windows, macOS | ✓ | ✓ |
-
-### Trace to profiling integration
-
-The [Trace to Profiling integration][4] identifies code hotspots in slow traces. The following minimum versions are required:
+The [Trace to Profiling integration][3] identifies code hotspots in slow traces. The following minimum versions are required:
 
 | JDK | Minimum version | dd-trace-java version |
 |-----|-----------------|----------------------|
@@ -363,5 +360,4 @@ sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
-[3]: /profiler/enabling/graalvm/
-[4]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
