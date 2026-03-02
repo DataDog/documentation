@@ -7216,7 +7216,7 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_enable
       weight: 10002
-    - name: Updating Agentless Scanning
+    - name: Update Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning/update
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_update
