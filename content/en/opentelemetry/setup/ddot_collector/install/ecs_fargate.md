@@ -100,8 +100,12 @@ Use the following task definition as a starting point:
             "cpu": 0,
             "environment": [
                 {
+                    "name": "OTEL_SERVICE_NAME",
+                    "value": "<SERVICE_NAME>"
+                },
+                {
                     "name": "OTEL_RESOURCE_ATTRIBUTES",
-                    "value": "service.name=<SERVICE_NAME>,deployment.environment=<ENV>"
+                    "value": "service.version=<VERSION>,deployment.environment.name=<ENV>"
                 }
             ],
             "logConfiguration": {
@@ -137,6 +141,7 @@ Replace the following placeholders:
 - `<APP_CONTAINER_NAME>`: The name of your application container.
 - `<APP_IMAGE>`: Your application container image.
 - `<SERVICE_NAME>`: The name of your service.
+- `<VERSION>`: The version of your service.
 - `<ENV>`: Your deployment environment (for example, `production`).
 - `<EXECUTION_ROLE_ARN>`: The ARN of your ECS task execution IAM role.
 
@@ -197,7 +202,7 @@ Because the DDOT Collector runs as a sidecar container in the same ECS task, you
 
 [Unified service tagging][10] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-Set `service.name` and `deployment.environment` using the `OTEL_RESOURCE_ATTRIBUTES` environment variable in your application container, as shown in the task definition above.
+The `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` environment variables in the task definition above configure unified service tagging.
 
 ### Run the application
 
