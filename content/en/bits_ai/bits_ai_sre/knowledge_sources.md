@@ -15,7 +15,7 @@ Think of onboarding Bits AI SRE as you would a new teammate: the more context yo
 
 You can either add step-by-step troubleshooting instructions directly in the monitor message or link to a Confluence page that contains those instructions.
 
-- **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you'd normally look in Datadog when the monitor triggers, for example, a dashboard, logs, traces, or a notebook with key widgets. Links don’t need special formatting; plain URLs work.
+- **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you'd normally look in Datadog when the monitor triggers, such as a dashboard, logs, traces, or a notebook with key widgets. Links don't need special formatting; plain URLs work.
 
 Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
 
