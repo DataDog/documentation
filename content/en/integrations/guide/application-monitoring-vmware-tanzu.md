@@ -12,7 +12,7 @@ further_reading:
 - link: "/tracing/"
   tag: "documentation"
   text: "Monitor your Application Performance"
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "documentation"
   text: "Forward Custom Metrics to Datadog using DogstatsD"
 ---
@@ -61,7 +61,7 @@ Datadog Application Monitoring for VMware Tanzu has the following requirements:
 [2]: /help
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/signup
-[5]: /developers/dogstatsd/?tab=hostagent
+[5]: /extend/dogstatsd/?tab=hostagent
 [6]: /agent/
 [7]: /tracing/
 [8]: /logs/
