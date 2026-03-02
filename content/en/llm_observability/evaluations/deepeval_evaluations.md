@@ -1,7 +1,5 @@
 ---
 title: DeepEval Evaluations
-aliases:
- - /llm_observability/evaluations/deepeval_evaluations/
 further_reading:
 - link: "/llm_observability/guide/evaluation_developer_guide/deepeval"
   tag: "Documentation"
