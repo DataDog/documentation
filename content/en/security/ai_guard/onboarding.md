@@ -386,7 +386,7 @@ result = client.evaluate(
         Message(role="system", content="You are an AI Assistant"),
         Message(role="user", content="What is the weather like today?"),
     ],
-    options=Options(block=False)
+    options=Options(block=True)
 )
 ```
 
@@ -459,7 +459,7 @@ const result = await tracer.aiguard.evaluate([
     { role: 'system', content: 'You are an AI Assistant' },
     { role: 'user', content: 'What is the weather like today?' }
   ],
-  { block: false }
+  { block: true }
 )
 ```
 
@@ -513,7 +513,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
       AIGuard.Message.message("system", "You are an AI Assistant"),
       AIGuard.Message.message("user", "What is the weather like today?")
     ),
-    new AIGuard.Options().block(false)
+    new AIGuard.Options().block(true)
 );
 ```
 
@@ -577,7 +577,7 @@ The following sections provide practical usage examples:
 result = Datadog::AIGuard.evaluate(
   Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
   Datadog::AIGuard.message(role: :user, content: "What is the weather like today?"),
-  allow_raise: false
+  allow_raise: true
 )
 ```
 
