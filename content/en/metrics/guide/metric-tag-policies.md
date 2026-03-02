@@ -51,7 +51,7 @@ Metric names or prefixes
 Prefix exceptions
 : Exclude specific prefixes from the policy scope (for example, apply to `http.*` except `http.debug.*`)
 
-Metric lifecycle
+Metric life cycle
 : * Apply to newly submitted metrics only
   * Apply to existing metrics
   * Apply to metrics that have submitted data for more than `<X>` days
@@ -111,7 +111,7 @@ Reorder policies
 : Change the execution order to adjust how policies interact when multiple policies apply to the same metrics.
 
 Delete a policy
-: Remove policies that are no longer needed.
+: Remove policies that are no longer needed. When you delete a policy, Datadog recomputes the tag configuration for affected metrics based on the remaining policies.
 
 Override policies for a specific metric                                                                                                                                 
 : From the metric's details side panel, set the metric to retain all tags. This bypasses all policies for that metric without modifying them. To reapply policies, restore the metric's default configuration from the same panel.
@@ -125,6 +125,7 @@ When multiple policies apply to the same metrics, Datadog evaluates them sequent
 * Later policies modify the results of earlier policies
 * **Replace** behavior overwrites previous configurations for matching metrics
 * **Merge** behavior builds on existing configurations
+* When multiple policies use **Replace** behavior, the last applied policy determines whether the final configuration is in include or exclude mode
 
 Reorder policies on the [Policies page][1] to change which policy takes precedence. See the examples below to understand how different orders produce different results.
 
@@ -141,7 +142,7 @@ Starting tags:
 
 **Key insight**: The `env` tag is re-added only to the `infra.*` metrics.
 
-### Example 2: Policy Order
+### Example 2: Policy order
 
 When multiple policies apply to the same metrics, they are evaluated in order.  
 Policies that run later can refine or override the effects of earlier policies.
@@ -183,9 +184,18 @@ Starting tags:
 
 **Key insight**: Multiple inclusion policies with **Merge** behavior, applied after an exclusion policy with **Replace** behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
 
+## Metrics without Limits™ compatibility
+
+Tag policies do not automatically override existing [Metrics without Limits™][3] (MWL) per-metric configurations. Existing MWL configurations take precedence and are preserved when tag policies are created or modified.
+
+If a metric's MWL configuration is deleted, tag policies automatically apply to that metric based on the current policy order.
+
+To exclude a specific metric from all tag policies without deleting them, use the metric's details side panel to retain all tags. To reapply policies, restore the metric's default configuration from the same panel.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/settings/policies
 [2]: https://app.datadoghq.com/metric/volume
+[3]: /metrics/metrics-without-limits/
