@@ -19,7 +19,7 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
-- If your Snowflake account restricts network access by IP, the Datadog webhook IPs added to your network policy allowlist. For the list of IPs, see the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Snowflake
 
