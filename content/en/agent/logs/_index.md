@@ -51,6 +51,18 @@ DD_LOGS_ENABLED=true
 
 After activating log collection, the Agent is ready to forward logs to Datadog. Next, configure the Agent on where to collect logs from.
 
+## Automatic collection from running processes
+
+<div class="alert alert-info">Requires Agent version 7.71 or later.</div>
+
+Set `process_collect_all: true` in `datadog.yaml` to have the Agent automatically collect log files from processes running on the host. This removes the need to configure each log source individually. See [Log Collection - Host setup][15] for full configuration details, including privileged log access and workload filtering.
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="false" collapsible="true" >}}
+logs_enabled: true
+logs_config:
+    process_collect_all: true
+{{< /code-block >}}
+
 ## Custom log collection
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
@@ -264,3 +276,4 @@ For both file and journald tailer types, if an `end` or `beginning` position is 
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /metrics/custom_metrics/#overview
 [14]: /getting_started/tagging/
+[15]: /logs/log_collection/?tab=host
