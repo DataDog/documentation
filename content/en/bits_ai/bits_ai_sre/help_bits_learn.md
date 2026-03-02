@@ -2,7 +2,13 @@
 title: Help Bits learn
 ---
 
-Reviewing Bits' findings helps Bits learn from any mistakes it makes, enabling it to produce faster and more accurate investigations in the future. 
+Bits improves over time based on the feedback and guidance you provide. You can help it produce faster, more accurate investigations in three ways:
+
+- Review and correct investigation results
+- Guide how it investigates your environment
+- Manage the memories it creates
+
+## Provide feedback on investigations
 
 At the end of an investigation, let Bits know whether the conclusion it made was correct.
 
@@ -21,27 +27,29 @@ In addition, you can review steps that Bits took throughout the investigation an
 
 {{< img src="bits_ai/bits_ai_sre_step_feedback.png" alt="A research step with options to provide feedback" style="width:100%;" >}}
 
-### Bits.md
+## Configure proactive guidance with bits.md
 
-bits.md is a markdown file that provides specific context to the agent on your environment. It acts as lightweight, structured guidance to improve investigation accuracy, query construction, and terminology alignment. Include team knowledge such as tagging conventions, architectural patterns, glossary, and investigation best practices.
+In addition to reviewing investigations after they complete, you can proactively guide how Bits investigates your environment by creating a `bits.md` file.
+
+`bits.md` is a Markdown file that provides structured context about your environment to the agent. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Include team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-Bits.md is in Preview. Click <strong>Request Access</strong> to join the Preview program.
+<b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-#### Sample Bits.md
+### Sample bits.md
 {{< code-block lang="yaml" filename="bits.md" collapsible="true" >}}
 
-## Scope Rules
+## Scope rules
 - Always carry forward explicit scope from the user (env, service, team, region, namespace).
 - Treat mentioned values as hard filters in all queries.
 - Do not broaden scope unless explicitly asked.
 
 ---
 
-## Tag & Naming Conventions
+## Tag and naming conventions
 
-### Environment Normalization
+### Environment normalization
 Environment values may differ across telemetry sources (monitors, APM, logs, tickets).
 
 Example:
@@ -52,7 +60,7 @@ Rule: When switching data sources, normalize to the correct env value for that s
 
 ---
 
-### Service Name Normalization
+### Service name normalization
 Service/application names may appear in different formats across systems (alerts, logs, tickets, asset systems).
 
 Example:
@@ -67,7 +75,7 @@ Rule:
 
 ---
 
-# Kubernetes Quick Checks
+# Kubernetes quick checks
 For pod issues, check Kubernetes events first:
 `source:kubernetes pod_name:<pod> kube_namespace:<namespace>`
 
@@ -78,7 +86,7 @@ Common causes:
 
 ---
 
-# Known Noise / False Positives
+# Known noise and false positives
 Document recurring patterns that look like incidents but are expected behavior.
 
 Examples:
@@ -94,8 +102,7 @@ Rule:
 
 {{< /code-block >}}
 
-
-### Manage memories
+## Manage memories
 
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to the [Monitor Management][1] page to view and delete memories in the **Memories** column.
 
