@@ -562,8 +562,6 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    Logging Verbosity
    : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker.
 
-   {{< img src="synthetics/private_locations/settings_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
-
    Enable FIPS 140-2 cryptographic mode
    : Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
