@@ -159,6 +159,8 @@ claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unsta
 url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
 ```
 
+After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.
+
 **Gemini CLI, Kiro CLI, or other MCP-compatible clients**:
 
 ```json
