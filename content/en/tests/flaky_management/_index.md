@@ -160,6 +160,12 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
 
+For Bits AI to create a fix, the flaky test must meet the following criteria:
+- **Failure rate**: At least 5%
+- **Wasted time**: At least 2 hours
+- **Failed pipelines**: At least 2 pipelines
+- **Branch**: Must have flaked in the default branch
+
 {{< img src="tests/bits_ai_flaky_test_fixes-2.png" alt="Bits AI Dev Agent displaying a proposed fix for a flaky test" style="width:100%;" >}}
 
 ### Setup

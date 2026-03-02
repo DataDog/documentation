@@ -33,7 +33,7 @@ The minimum tracer version to get all supported App and API Protection capabilit
 
 ### Supported Ruby interpreters
 
-The Datadog Ruby Tracing library is open source. View the [GitHub repository][2] for more information.
+The Datadog Ruby Tracing library is open source. View the [GitHub repository][1] for more information.
 
 - MRI versions 2.5 to 3.5
 - JRuby versions 9.2.21.0+ and 9.4
@@ -70,3 +70,6 @@ The Ruby tracer includes support for the following frameworks, ORMs, and librari
 
 - GraphQL
 - Rack
+
+
+[1]: https://github.com/DataDog/dd-trace-rb

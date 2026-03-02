@@ -403,7 +403,7 @@ Span kinds are required, and are specified on the `options` object passed to the
 
 ### Automatic function argument/output/name capturing
 
-`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for TypeScript) tries to automatically capture inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Annotating a span](#annotating-a-span). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
+`llmobs.wrap` (along with [`llmobs.decorate`](#function-decorators-in-typescript) for TypeScript) tries to automatically capture inputs, outputs, and the name of the function being traced. If you need to manually annotate a span, see [Enriching spans](#enriching-spans). Inputs and outputs you annotate will override the automatic capturing. Additionally, to override the function name, pass the `name` property on the options object to the `llmobs.wrap` function:
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -1016,7 +1016,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% tab "Python" %}}
 To trace an embedding operation, use the function decorator `LLMObs.embedding()`.
 
-**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
+**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify embedding inputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1057,7 +1057,7 @@ def perform_embedding():
 {{% tab "Node.js" %}}
 To trace an embedding operation, specify the span kind as `embedding`, and optionally specify arguments on the options object.
 
-**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify embedding inputs.
+**Note**: Annotating an embedding span's input requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify embedding inputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1103,7 +1103,7 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 {{% tab "Python" %}}
 To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators.retrieval()`.
 
-**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
+**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify retrieval outputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1144,7 +1144,7 @@ def get_relevant_docs(question):
 
 To trace a retrieval span, specify the span kind as `retrieval`, and optionally specify the following arguments on the options object.
 
-**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Annotating a span](#annotating-a-span) for more details on how to specify retrieval outputs.
+**Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify retrieval outputs.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1164,7 +1164,7 @@ To trace a retrieval span, specify the span kind as `retrieval`, and optionally 
 
 #### Example
 
-The following also includes an example of annotating a span. See [Annotating a span](#annotating-a-span) for more information.
+The following also includes an example of annotating a span. See [Enriching spans](#enriching-spans) for more information.
 
 {{< code-block lang="javascript" >}}
 function getRelevantDocs (question) {
@@ -1782,7 +1782,7 @@ Attach structured prompt metadata to the LLM span so you can reproduce results, 
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#enriching-spans).
+Use `LLMObs.annotation_context(prompt=...)` to attach prompt metadata before the LLM call. For more details on span annotation, see [Enriching spans](#enriching-spans).
 
 #### Arguments
 
@@ -1845,7 +1845,7 @@ chain = translation_template | llm
 
 {{% tab "Node.js" %}}
 
-Use `llmobs.annotationContext({ prompt: ... }, () => { ... })` to attach prompt metadata before the LLM call. For more details on span annotation, see [Annotating a span](#enriching-spans).
+Use `llmobs.annotationContext({ prompt: ... }, () => { ... })` to attach prompt metadata before the LLM call. For more details on span annotation, see [Enriching spans](#enriching-spans).
 
 #### Arguments
 
