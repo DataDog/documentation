@@ -1,8 +1,3 @@
-<!--
-This partial contains execution results content that is reused across
-template_variables.mdoc.md and api_template_variables.mdoc.md
--->
-
 ### Execution results
 
 Path: `synthetics.attributes`

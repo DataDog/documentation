@@ -1,8 +1,3 @@
-<!--
-This partial contains local & global variables content that is reused across
-template_variables.mdoc.md and api_template_variables.mdoc.md
--->
-
 ### Local & Global Variables
 
 Use these variables to access locally configured variables and globally defined variables in your notifications.

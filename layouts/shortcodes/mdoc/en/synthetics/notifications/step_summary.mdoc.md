@@ -1,8 +1,3 @@
-<!--
-This partial contains step summary content that is reused across
-template_variables.mdoc.md and api_template_variables.mdoc.md
--->
-
 ## Step summary
 
 Path: `synthetics.attributes.result.steps`

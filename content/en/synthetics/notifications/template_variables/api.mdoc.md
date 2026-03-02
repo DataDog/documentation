@@ -34,7 +34,7 @@ This section covers three categories of variables:
 - [Common variables](#common-variables): Assertions, DNS resolution, and shared timing data available across all protocols.
 - [Execution results](#execution-results): Test status, duration, failure details, and step counts.
 
-<!-- HTTP -->
+<!-- Test results > HTTP -->
 {% if equals($protocol, "http") %}
 
 ### HTTP Protocol Variables
@@ -120,8 +120,9 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > HTTP -->
 
-<!-- DNS -->
+<!-- Test results > DNS -->
 {% if equals($protocol, "dns") %}
 
 ### DNS Protocol Variables
@@ -133,8 +134,9 @@ This section covers three categories of variables:
 : DNS record values
 
 {% /if %}
+<!-- END Test results > DNS -->
 
-<!-- SSL -->
+<!-- Test results > SSL -->
 {% if equals($protocol, "ssl") %}
 
 ### SSL Protocol Variables
@@ -215,8 +217,9 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > SSL -->
 
-<!-- WebSocket -->
+<!-- Test results > WebSocket -->
 {% if equals($protocol, "websocket") %}
 
 ### WebSocket Protocol Variables
@@ -265,8 +268,9 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > WebSocket -->
 
-<!-- UDP -->
+<!-- Test results > UDP -->
 {% if equals($protocol, "udp") %}
 
 ### UDP Protocol Variables
@@ -289,8 +293,9 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > UDP -->
 
-<!-- TCP -->
+<!-- Test results > TCP -->
 {% if equals($protocol, "tcp") %}
 
 ### TCP Protocol Variables
@@ -341,8 +346,9 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > TCP -->
 
-<!-- ICMP -->
+<!-- Test results > ICMP -->
 {% if equals($protocol, "icmp") %}
 
 ### ICMP Protocol Variables
@@ -393,8 +399,9 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > ICMP -->
 
-<!-- gRPC -->
+<!-- Test results > gRPC -->
 {% if equals($protocol, "grpc") %}
 
 ### gRPC Protocol Variables
@@ -433,6 +440,7 @@ This section covers three categories of variables:
 {% /tabs %}
 
 {% /if %}
+<!-- END Test results > gRPC -->
 
 ### Common Variables
 
@@ -482,6 +490,7 @@ These variables are available for all API test protocols.
 {% partial file="synthetics/notifications/execution_results.mdoc.md" /%}
 
 {% /if %}
+<!-- END Test results variables -->
 
 <!-- Test info variables -->
 {% if equals($synthetics_variables, "test_info") %}
@@ -489,6 +498,7 @@ These variables are available for all API test protocols.
 {% partial file="synthetics/notifications/test_metadata.mdoc.md" /%}
 
 {% /if %}
+<!-- END Test info variables -->
 
 <!-- Step details variables -->
 {% if equals($synthetics_variables, "step_details") %}
@@ -525,9 +535,10 @@ These are step execution metadata and results containing detailed information ab
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 
 {% /if %}
+<!-- END Step details variables -->
 
 <!-- Variables -->
-{% if equals($synthetics_variables, "variables") %}
+{% if equals($synthetics_variables, "local_and_global") %}
 
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
 
@@ -536,5 +547,6 @@ Review the [advanced notifications][1] page for an example of how to use local v
 {% /alert %}
 
 {% /if %}
+<!-- END Variables -->
 
 [1]: /synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification

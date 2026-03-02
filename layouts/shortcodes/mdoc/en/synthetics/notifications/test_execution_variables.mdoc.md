@@ -1,8 +1,3 @@
-<!--
-This partial contains test execution variables content that is reused across
-template_variables.mdoc.md and api_template_variables.mdoc.md
--->
-
 ### Test execution variables
 
 Path: `synthetics` (various shortcuts)

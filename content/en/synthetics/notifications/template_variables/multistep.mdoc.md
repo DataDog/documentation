@@ -78,11 +78,6 @@ Use these variables to access test configuration and execution location informat
 `{{synthetics.attributes.location.privateLocation}}`
 : `true` for Private Locations
 {% /tab %}
-{% tab label="Device" %}
-{% alert level="info" %}
-Device information is not available for multistep API tests. Device variables are only available for **Browser** and **Mobile** tests.
-{% /alert %}
-{% /tab %}
 {% /tabs %}
 
 {% /if %}
@@ -147,7 +142,7 @@ These are step execution metadata and results containing detailed information ab
 <!-- end Step details -->
 
 <!-- Variables -->
-{% if equals($synthetics_variables, "variables") %}
+{% if equals($synthetics_variables, "local_and_global") %}
 
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
 

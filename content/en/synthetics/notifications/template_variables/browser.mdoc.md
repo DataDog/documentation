@@ -231,7 +231,7 @@ For information on how to access the `<step-index>`, see the step summary sectio
 <!-- end Step details -->
 
 <!-- Variables -->
-{% if equals($synthetics_variables, "variables") %}
+{% if equals($synthetics_variables, "local_and_global") %}
 
 {% partial file="synthetics/notifications/local_global_variables.mdoc.md" /%}
 

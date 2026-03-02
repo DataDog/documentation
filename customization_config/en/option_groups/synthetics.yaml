@@ -16,4 +16,4 @@ synthetics_variables_options:
     default: true
   - id: test_info
   - id: step_details
-  - id: variables
+  - id: local_and_global

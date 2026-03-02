@@ -461,7 +461,7 @@ options:
   id: step_details
 
 - label: Local & Global
-  id: variables
+  id: local_and_global
 
 - label: DNS
   id: dns

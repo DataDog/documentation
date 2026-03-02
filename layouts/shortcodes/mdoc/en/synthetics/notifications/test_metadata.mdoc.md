@@ -1,8 +1,3 @@
-<!--
-This partial contains test metadata content that is reused across
-template_variables.mdoc.md and api_template_variables.mdoc.md
--->
-
 ### Test metadata
 
 Path: `synthetics.attributes`
