@@ -125,14 +125,13 @@ java \
 
    **Note**: The `-javaagent` argument needs to be before `-jar`. This adds it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][4].
 
-4. Optional: Set up [Source Code Integration][5] to connect your profiling data with your Git repositories.
+Optional: Set up [Source Code Integration][5] to connect your profiling data with your Git repositories.
 
 5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6].
 
 6. For more information on available profile types, see [Profile Types][11].
 
 **Note**: For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Native Image][8].
-
 
 
 ## Configuration
