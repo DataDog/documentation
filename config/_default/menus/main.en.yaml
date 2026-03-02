@@ -882,11 +882,16 @@ menu:
       parent: otel_guides
       weight: 1002
       identifier: otel_guides_otlp_histogram_heatmaps
+    - name: Instrument Unsupported Runtimes
+      url: /opentelemetry/guide/instrument_unsupported_runtimes
+      parent: otel_guides
+      weight: 1003
+      identifier: otel_guides_instrument_unsupported_runtimes
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 1003
+      weight: 1004
     - name: Migrate to OTel Collector v0.120.0+
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
@@ -1398,24 +1403,24 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Investigate issues
+    - name: Investigate Issues
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
-    - name: Remediate issues
-      url: bits_ai/bits_ai_sre/remediate_issues
-      identifier: bits_ai_sre_remediate_issues
+    - name: Take Action
+      url: bits_ai/bits_ai_sre/take_action
+      identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE integrations and settings
+    - name: Bits AI SRE Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 300
-    - name: Help Bits learn
-      url: bits_ai/bits_ai_sre/help_bits_learn
-      identifier: bits_ai_sre_learn
+    - name: Knowledge Sources
+      url: bits_ai/bits_ai_sre/knowledge_sources
+      identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
     - name: Chat with Bits AI SRE
@@ -2527,11 +2532,16 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 207
+    - name: Variables
+      url: incident_response/incident_management/setup_and_configuration/variables
+      parent: incidents_settings
+      identifier: incidents_settings_variables
+      weight: 208
     - name: Integrations
       url: incident_response/incident_management/setup_and_configuration/integrations
       parent: incidents_settings
       identifier: incidents_integrations
-      weight: 208
+      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -5190,7 +5200,7 @@ menu:
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
     - name: Advanced Experiment Runs
-      url: llm_observability/experiments/advanced_runs 
+      url: llm_observability/experiments/advanced_runs
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_advanced_runs
       weight: 504
@@ -7326,7 +7336,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
       weight: 106
-    - name: Deploy via Cloud Integrations
+    - name: Deploy using Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
@@ -9023,7 +9033,7 @@ menu:
       weight: 8
     - name: Controls
       identifier: account_management_governance_console_controls
-      url: account_management/governance_console/controls 
+      url: account_management/governance_console/controls
       parent: account_management_governance_console
       weight: 801
     - name: Multi-Factor Authentication

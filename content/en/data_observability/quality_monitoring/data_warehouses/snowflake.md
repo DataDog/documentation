@@ -19,7 +19,7 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
-- If your Snowflake account restricts network access by IP, the Datadog webhook IPs added to your network policy allowlist. For the list of IPs, see the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Snowflake
 
@@ -180,6 +180,8 @@ When enabled, each task graph run appears as a trace in APM with individual task
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
 
+After the initial sync completes, create a [Data Observability monitor][5] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -188,3 +190,4 @@ After you save, Datadog begins syncing your information schema and query history
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
 [3]: https://app.datadoghq.com/datasets/settings/integrations
 [4]: https://app.datadoghq.com/apm/traces
+[5]: /monitors/types/data_observability/
