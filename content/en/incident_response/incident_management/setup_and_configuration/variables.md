@@ -57,9 +57,11 @@ The following variables are available in notification messages, postmortem templ
 | `{{incident.slack_channel_name}}` | The name of the incident's Slack channel. |
 | `{{incident.slack_channel_url}}` | The URL of the incident's Slack channel. |
 | `{{incident.slack_channel_link}}` | A Markdown link to the incident's Slack channel. |
+| `{{incident.slack_channel_id}}` | The ID of the incident's Slack channel. |
 | `{{incident.ms_teams_channel_name}}` | The name of the incident's Microsoft Teams channel. |
 | `{{incident.ms_teams_channel_url}}` | The URL of the incident's Microsoft Teams channel. |
 | `{{incident.ms_teams_channel_link}}` | A Markdown link to the incident's Microsoft Teams channel. |
+| `{{incident.ms_teams_channel_id}}` | The ID of the incident's Microsoft Teams channel. |
 | `{{incident.zoom_id}}` | The Zoom meeting ID. |
 | `{{incident.zoom_join_url}}` | The Zoom join URL. |
 | `{{incident.zoom_password}}` | The Zoom meeting password, if one exists. |
