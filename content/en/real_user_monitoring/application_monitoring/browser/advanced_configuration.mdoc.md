@@ -1679,47 +1679,13 @@ module.exports = {
 
 [Set up Browser Monitoring][4] in your shell application (main entry point).
 
-**Step 3 - Enable source code context in the micro frontend applications**
-
-{% if equals($lib_src, "npm") %}
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.init({
-  ...,
-  enableExperimentalFeatures: ['source_code_context']
-});
-```
-{% /if %}
-
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-         ...,
-         enableExperimentalFeatures: ['source_code_context']
-    });
-});
-```
-{% /if %}
-
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.init({
-  ...,
-  enableExperimentalFeatures: ['source_code_context']
-});
-```
-{% /if %}
-
-
 The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources, long tasks, vitals) with `service` and `version` from the context map.
 
 {% alert level="warning" %}
 Events that don't match any micro frontend fall back to the shell-level service and version.
 {% /alert %}
 
-**Step 4 - Explore micro frontend data in Datadog**
+**Step 4 - [Explore micro frontend data in Datadog](#explore-micro-frontend-data-in-datadog)**
 
 
 <!-- Version must meet 5.22 -->
