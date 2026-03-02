@@ -118,20 +118,21 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog ServiceNow integration][21].
-   2. A [new Case Management project][9]. A project is a container object that holds a set of cases.
-   3. The [ServiceNow integration is configured within the project][3].
-      1. Go to **Settings > Integrations > ServiceNow**.
+      1. Go to **Settings > Integrations > ServiceNow > Case Management**.
+      2. Choose `ITSM` as the target for security triage workflows.
+   3. A [Case Management project][9] that will link to your ServiceNow table.
+   4. The [ServiceNow integration configured within the project][3].
+      1. Go to **Case Management > Settings** and navigate to the ServiceNow tab under the selected project.
       2. Enter your **Instance name** (your ServiceNow subdomain) and **Assignment group**.
-      3. Choose the operating mode (`ITSM` for incidents with bidirectional sync, `ITOM` for events without bidirectional sync). Use `ITSM` for security triage workflows.
+      3. Opt in for manual or automatic creation of a ServiceNow incident for each case created in the project.
       4. Enable the **Sync data between Case Management and ServiceNow** option.
-      5. Complete the remaining settings, and then click **Save changes**.
-   4. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
+      5. Complete the remaining settings for attribute sync, and then click **Save changes**.
+   5. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
 2. Verify that bidirectional Case Management integration with ServiceNow is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Open any Security finding.
-   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
-   4. Click the **ServiceNow** tab.
-   5. Verify that the **Case Management <-> ServiceNow Integration** section exists and bidirectional sync is enabled.
+   3. Locate the **Add Ticket** option in the explorer or **Next Steps** and select **ServiceNow**.
+   5. Verify that the bidirectional sync is enabled for the configured **Instance** and **Assignment Group**.
 
 You are ready to start creating bidirectional Case Management tickets.
 
@@ -152,7 +153,7 @@ The following steps create a bidirectional ticket for a Security finding.
 
 1. Open [any product supporting bidirectional ticket syncing][20].
 2. Open any Security finding.
-3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
+3. Locate the **Add Ticket** option and select the third-party tool from the dropdown.
 4. Create a ticket for any third-party tool supported (see sections below).
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
