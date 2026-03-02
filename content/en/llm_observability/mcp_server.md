@@ -152,7 +152,14 @@ This method uses the MCP specification's [Streamable HTTP][1] transport.
 claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
 ```
 
-**Configuration file** (Codex CLI, Gemini CLI, Kiro CLI, or any MCP-compatible client):
+**Codex CLI** (`~/.codex/config.toml`):
+
+```toml
+[mcp_servers.datadog]
+url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
+```
+
+**Gemini CLI, Kiro CLI, or other MCP-compatible clients**:
 
 ```json
 {
