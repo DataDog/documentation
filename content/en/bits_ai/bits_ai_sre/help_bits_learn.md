@@ -12,7 +12,7 @@ Bits improves over time based on the feedback and guidance you provide. You can 
 
 At the end of an investigation, let Bits know whether the conclusion it made was correct.
 
-{{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
+{{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with the helpful and unhelpful rating buttons highlighted" style="width:100%;" >}}
 
 If the conclusion was inaccurate, provide Bits with the correct root cause. Your feedback should:
 - Identify the actual root cause (not just observed effects or symptoms)
@@ -22,16 +22,16 @@ If the conclusion was inaccurate, provide Bits with the correct root cause. Your
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
 In addition, you can review steps that Bits took throughout the investigation and refine its behavior by selecting:
-- **Improve This Step**: Share a link to a more effective query for Bits to use next time
-- **Always Take This Step**: Tell Bits that this query was helpful and to run it again next time
+- **Improve This Step**: Share a link to a more effective query for Bits to use next time.
+- **Always Take This Step**: Tell Bits that this query was helpful and to run it again next time.
 
 {{< img src="bits_ai/bits_ai_sre_step_feedback.png" alt="A completed investigation step with Improve This Step and Always Take This Step feedback options" style="width:100%;" >}}
 
 ## Configure proactive guidance with bits.md
 
-In addition to reviewing investigations after they complete, you can proactively guide how Bits investigates your environment by creating a `bits.md` file.
+In addition to reviewing completed investigations, you can proactively guide how Bits investigates your environment by creating a `bits.md` file.
 
-To get started, go to [**Bits AI SRE** > **Settings** > **Bits.md**][2] to create and manage your `bits.md` file.
+Go to [**Bits AI SRE** > **Settings** > **Bits.md**][2] to create and manage your `bits.md` file.
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
