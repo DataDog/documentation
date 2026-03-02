@@ -38,8 +38,8 @@ This guide covers three use cases for conditional branching. Each use case appli
 Use this pattern when your application can show different UI states, such as in A/B tests, and you want a single test that executes different steps depending on which state it encounters.
 
 **Example logic:**
-- IF journey A header is found, run journey A steps
-- ELSE IF journey B header is found, run journey B steps
+- If journey A header is found, run journey A steps
+- Else, if journey B header is found, run journey B steps
 
 To set up this pattern:
 
@@ -62,13 +62,13 @@ For more information on subtest configuration options, see [Subtests][1].
 Use this pattern when you need to interact with the first available option, such as selecting an in-stock product size or the first available item in a list.
 
 **Example logic:**
-- IF product A is available, proceed to purchase
-- ELSE IF product B is available, proceed with product B
-- ELSE skip to the next available product
+- If product A is available, proceed to purchase
+- Else, if product B is available, proceed with product B
+- Else, skip to the next available product
 
 To set up this pattern:
 
-1. Add a step that interacts with the target element (for example, click **Add to cart** or select a size).
+1. Add a step that interacts with the target element (for example, clicking an **add to cart** button or selecting a size from a **select a size** dropdown).
 2. In the step's advanced options, set a **User Specified Locator** using XPath or CSS that targets only available elements (for example, `.size.available` or a class that indicates in-stock status).
 3. Enable **If this step fails, continue to next step** so the test continues if no matching element is found.
 4. Add a follow-up step or subtest that tries the next option (for example, a different size or product).
