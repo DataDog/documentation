@@ -2,7 +2,7 @@
 title: Chat with Bits AI SRE
 ---
 
-Within an investigation, you can chat with Bits to gather additional information about the investigation, related telemetry, and more.
+Within an investigation, you can chat with Bits AI SRE to gather additional information about the investigation, related telemetry, and more.
 
 {{< img src="bits_ai/bits_ai_sre_chat_example.png" alt="Example chat where a user asks Bits AI about related ongoing incidents, and Bits AI responds with a list of related incidents and an explanation on what makes them related" style="width:100%;" >}}
 

@@ -144,7 +144,7 @@ Bits uses the following data sources during investigations:
 A subset of third-party integrations are in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-For best practices on maximizing the effectiveness of investigations, see [Knowledge][9].
+For best practices on maximizing the effectiveness of investigations, see [Knowledge sources][9].
 
 ### Investigation display modes
 There are two display modes: Agent Trace and Investigation.
@@ -156,7 +156,7 @@ Once the investigation is complete, you can switch to the **Investigation** view
 
 ## Reports
 
-The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits on your on-call efficiency.
+The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits AI SRE on your on-call efficiency.
 
 [1]: https://app.datadoghq.com/apm/home
 [2]: /tracing/guide/latency_investigator/

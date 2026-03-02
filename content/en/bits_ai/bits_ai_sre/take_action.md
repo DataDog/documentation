@@ -18,7 +18,7 @@ Bits AI SRE integrates with [Bits AI Dev Agent][2] to automatically generate cod
 {{< img src="bits_ai/bits_ai_sre_suggested_code_fix.png" alt="Flowchart showing Bits' investigation conclusion and a suggested code fix" style="width:100%;" >}}
 
 ## Run triage actions via chat
-From within chat, you can trigger triage actions without leaving the investigation workflow.
+From chat, you can trigger triage actions without leaving the investigation workflow.
 
 Supported actions include:
 - Sending Slack and Microsoft Teams messages
