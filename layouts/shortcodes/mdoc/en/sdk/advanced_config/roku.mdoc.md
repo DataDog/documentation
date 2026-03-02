@@ -1,35 +1,21 @@
----
-title: Roku Advanced Configuration
-description: "Configure advanced Roku RUM SDK settings to enrich user sessions, track custom events, and control data collection for TV channels."
-aliases:
-    - /real_user_monitoring/roku/advanced_configuration/
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
-    - /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-roku
-  tag: "Source Code"
-  text: Source code for dd-sdk-roku
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Explore Datadog RUM
-site_support_id: rum_roku
----
+<!--
+This partial contains advanced configuration instructions for the Roku SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
-## Overview
-
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2]. 
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or see the [Roku RUM setup documentation][2].
 
 ## Track RUM resources
 
 ### `roUrlTransfer`
 
-Network requests made directly with a `roUrlTransfer` node must be tracked. 
+Network requests made directly with a `roUrlTransfer` node must be tracked.
 
 For *synchronous requests*, you can use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but does not support anything related to async network calls.
 
 For example, here's how to do a `GetToString` call:
 
-```brightscript
+```text
     ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
     ddUrlTransfer.SetUrl(url)
     ddUrlTransfer.EnablePeerVerification(false)
@@ -39,7 +25,7 @@ For example, here's how to do a `GetToString` call:
 
 For *asynchronous requests*, automatic instrumentation is not supported. You need to track the resource manually. The following code snippet shows how to report the request as a RUM Resource:
 
-```brightscript
+```text
 sub performRequest()
 
     m.port = CreateObject("roMessagePort")
@@ -49,7 +35,7 @@ sub performRequest()
     timer = CreateObject("roTimespan")
     timer.Mark()
     request.AsyncGetToString()
-    
+
     while (true)
         msg = wait(1000, m.port)
         if (msg <> invalid)
@@ -80,9 +66,9 @@ end sub
 
 ### Streaming resources
 
-Whenever you use a `Video` or an `Audio` node to stream media, you can forward all `roSystemLogEvent` you receive to Datadog as follows: 
+Whenever you use a `Video` or an `Audio` node to stream media, you can forward all `roSystemLogEvent` you receive to Datadog as follows:
 
-```brightscript 
+```text
     sysLog = CreateObject("roSystemLog")
     sysLog.setMessagePort(m.port)
     sysLog.enableType("http.error")
@@ -104,7 +90,7 @@ In addition to the default RUM attributes captured by the RUM Roku SDK automatic
 
 ### Identifying your users
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 * Follow the journey of a given user.
 * Know which users are the most impacted by errors.
 * Monitor performance for your most important users.
@@ -117,7 +103,7 @@ Adding user information to your RUM sessions makes it easy to:
 
 To identify user sessions, use the `datadogUserInfo` global field, after initializing the SDK, for example:
 
-```brightscript
+```text
     m.global.setField("datadogUserInfo", { id: 42, name: "Abcd Efg", email: "abcd.efg@example.com"})
 ```
 
@@ -125,15 +111,9 @@ To identify user sessions, use the `datadogUserInfo` global field, after initial
 
 In addition to the default attributes captured by the SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your Logs and RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (for example by cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
-```brightscript
+```text
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
 ```
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/roku/setup
-
-

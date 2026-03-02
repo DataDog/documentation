@@ -948,6 +948,11 @@ menu:
       parent: sdk
       identifier: sdk_setup
       weight: 1
+    - name: Advanced Configuration
+      url: client_sdks/advanced_configuration/
+      parent: sdk
+      identifier: sdk_advanced_configuration
+      weight: 2
     - name: Developers
       url: developers/
     - name: Extend Datadog

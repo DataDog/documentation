@@ -1,31 +1,12 @@
----
-title: Flutter Advanced Configuration
-description: Learn how to configure Flutter Monitoring.
-aliases:
-    - /real_user_monitoring/flutter/advanced_configuration
-    - /real_user_monitoring/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
-    - /real_user_monitoring/flutter/otel_support/
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
-    - /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-flutter
-  tag: "Source Code"
-  text: Source code for dd-sdk-flutter
-- link: real_user_monitoring/explorer/
-  tag: Documentation
-  text: Learn how to explore your RUM data
-- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
-  tag: Blog
-  text: Monitor Flutter application performance with Datadog Mobile RUM
-
----
-## Overview
+<!--
+This partial contains advanced configuration instructions for the Flutter SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup). For additional manual instrumentation functions, such as automatic view tracking, see [Flutter Libraries for RUM][3].
 
 ## Initialization parameters
+
 You can specify the following parameters in your configuration when initializing the SDK.
 
 `clientToken`
@@ -69,7 +50,7 @@ Defines the Datadog SDK policy for batching data before uploading it to Datadog 
 `batchProcessingLevel`
 : Optional<br/>
 **Type**: Enum<br/>
-**Default**: `medium`
+**Default**: `medium`<br/>
 Defines the maximum number of batches processed sequentially without a delay, within one reading and uploading cycle. With higher levels, more data is sent in a single upload cycle, and more CPU and memory are used to process the data. With lower levels, less data is sent in a single upload cycle, and less CPU and memory are used to process the data. Enum values: `low`, `medium`, and `high`.
 
 `version`
@@ -90,7 +71,7 @@ A list of first party hosts, used in conjunction with Datadog network tracking p
 `firstPartyHostsWithTracingHeaders`
 : Optional<br/>
 **Type**: Map&lt;String, Set&lt;TracingHeaderType&gt;&gt;<br/>
-A map of first party hosts and the types of tracing headers Datadog automatically injects on resource calls, used in conjunction with Datadog network tracking packages. For example:<br/>
+A map of first party hosts and the types of tracing headers Datadog automatically injects on resource calls, used in conjunction with Datadog network tracking packages. For example:
   ```dart
   final configuration = DatadogConfiguration(
    clientToken: <CLIENT_TOKEN>,
@@ -118,7 +99,7 @@ Use the following parameters for the `DatadogRumConfiguration` class.
 
 `applicationId`
 : Required<br/>
-**Type**: String</br>
+**Type**: String<br/>
 The RUM application ID.
 
 `sessionSamplingRate`
@@ -166,7 +147,7 @@ The preferred frequency for collecting mobile vitals. Enum values: `frequent` (1
 `reportFlutterPerformance`
 : Optional<br/>
 **Type**: Boolean<br/>
-**Default**: `false`
+**Default**: `false`<br/>
 Enables reporting Flutter-specific performance metrics, including build and raster times.
 
 `customEndpoint`
@@ -177,7 +158,7 @@ A custom endpoint for sending RUM data.
 `telemetrySampleRate`
 : Optional<br/>
 **Type**: Double<br/>
-**Default**: `20.0`
+**Default**: `20.0`<br/>
 The sampling rate for telemetry data, such as errors and debug logs.
 
 ## Tracking from background isolates
@@ -202,9 +183,9 @@ void _backgroundWork(SendPort port) async {
 }
 ```
 
-`attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call will silently fail and tracking will not be available.
+`attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call silently fails and tracking is not available.
 
-If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` will automatically start tracking resources from the calling isolate.  However, using `Client` from the `http` package or `Dio` will require you re-initialize HTTP tracking for those packages from the background isolate.
+If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` automatically starts tracking resources from the calling isolate. However, using `Client` from the `http` package or `Dio` requires you to re-initialize HTTP tracking for those packages from the background isolate.
 
 ## Automatically track resources
 
@@ -221,7 +202,7 @@ final configuration = DatadogConfiguration(
 
 **Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][11]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][12]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
-In order to enable Datadog [Distributed Tracing][13], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
+To enable Datadog [distributed tracing][13], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
@@ -262,7 +243,7 @@ void _onHeroImageLoaded() {
 }
 ```
 
-Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
+After you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
 
 To create visualizations in your dashboards, [create a measure][15] first.
 
@@ -339,13 +320,13 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -490,10 +471,6 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
  print('$host is a first party host.');
 }
 ```
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/flutter/setup/

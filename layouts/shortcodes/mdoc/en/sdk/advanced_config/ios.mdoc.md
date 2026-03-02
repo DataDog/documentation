@@ -1,26 +1,9 @@
----
-title: iOS Advanced Configuration
-description: "Configure advanced iOS RUM SDK settings to enrich user sessions, track custom events, and control data collection for better insights."
-aliases:
-    - /real_user_monitoring/ios/advanced_configuration
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
-    - /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration
-further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: "Source Code"
-    text: "Source code for dd-sdk-ios"
-  - link: "/real_user_monitoring"
-    tag: "Documentation"
-    text: "RUM & Session Replay"
-  - link: "/real_user_monitoring/application_monitoring/ios/supported_versions/"
-    tag: "Documentation"
-    text: "RUM iOS and tvOS monitoring supported versions"
-  - link: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor"
-    tag: "Source Code"
-    text: "Datadog Integration for Apollo iOS"
----
+<!--
+This partial contains advanced configuration instructions for the iOS SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
-If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or refer to the [RUM iOS setup documentation][2].
+If you have not set up the RUM iOS SDK yet, follow the [in-app setup instructions][1] or see the [RUM iOS setup documentation][2].
 
 ## Enrich user sessions
 
@@ -35,8 +18,8 @@ In addition to [tracking views automatically](#automatically-track-views), you c
 
 For example:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 import DatadogRUM
 
@@ -53,9 +36,8 @@ override func viewDidDisappear(_ animated: Bool) {
   rum.stopView(viewController: self)
 }
 ```
-
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 @import DatadogRUM;
 // in your `UIViewController`:
@@ -74,8 +56,8 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
     [rum stopViewWithViewController:self attributes:nil];
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
@@ -87,8 +69,8 @@ To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.sha
 
 For example:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 import DatadogRUM
 
@@ -103,16 +85,16 @@ let rum = RUMMonitor.shared()
     )
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 - (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
     NSString *name = sender.currentTitle ? sender.currentTitle : @"";
     [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 **Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
@@ -129,8 +111,8 @@ In addition to [tracking resources automatically](#automatically-track-network-r
 
 For example:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 import DatadogRUM
 
@@ -148,8 +130,8 @@ rum.stopResource(
     response: response
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 // in your network client:
 
@@ -161,8 +143,8 @@ rum.stopResource(
                                           response:response
                                         attributes:@{}];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 **Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
@@ -175,19 +157,19 @@ To track specific errors, notify `RUMMonitor.shared()` when an error occurs usin
 - `.addError(message:)`
 - `.addError(error:)`
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 let rum = RUMMonitor.shared()
 rum.addError(message: "error message.")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 [[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
 
@@ -197,7 +179,9 @@ In addition to the [default RUM attributes][6] captured by the RUM iOS SDK autom
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
-<div class="alert alert-info">Custom attributes are intended for small, targeted pieces of information (e.g., IDs, flags, or short labels). Avoid attaching large objects such as full HTTP response payloads. This can significantly increase event size and impact performance.</div>
+{% alert level="info" %}
+Custom attributes are intended for small, targeted pieces of information (for example, IDs, flags, or short labels). Avoid attaching large objects such as full HTTP response payloads. This can significantly increase event size and impact performance.
+{% /alert %}
 
 ### Set a custom global attribute
 
@@ -213,13 +197,13 @@ For better performance in bulk operations (modifying multiple attributes at once
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it easy to:
+Adding user information to your RUM sessions makes it possible to:
 
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" >}}
+{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" /%}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -231,25 +215,26 @@ To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
 
 For example:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 import DatadogCore
 
 Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 [DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 ## Track background events
 
-<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
-</div>
+{% alert level="info" %}
+Tracking background events may lead to additional sessions, which can impact billing. For questions, [contact Datadog support](https://docs.datadoghq.com/help/).
+{% /alert %}
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
 
@@ -329,7 +314,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `longTaskThreshold`
-: The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
+: The threshold for RUM long tasks tracking (in seconds). By default, this is set to `0.1` seconds.
 
 `networkSettledResourcePredicate`
 : The predicate used to classify "initial" resources for the Time-to-Network-Settled (TNS) view timing calculation.
@@ -350,7 +335,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
 
 `trackAnonymousUser`
-: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
+: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID is attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
 `trackBackgroundEvents`
 : Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
@@ -383,34 +368,34 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 You can automatically track views with UIKit and SwiftUI.
 
-{{% collapse-content title="UIKit" level="h4" expanded=true id="auto-track-views-uikit" %}}
+#### UIKit
 
 To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 public protocol UIKitRUMViewsPredicate {
     func rumView(for viewController: UIViewController) -> RUMView?
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```swift
 @objc
 public protocol DDUIKitRUMViewsPredicate: AnyObject {
     func rumView(for viewController: UIViewController) -> DDRUMView?
 }
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 Inside the `rumView(for:)` implementation, your app should decide if a given `UIViewController` instance should start a RUM view (return a value) or not (return `nil`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
 
 For instance, you can configure the predicate to use explicit type check for each view controller in your app:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -423,8 +408,8 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 @interface YourCustomPredicate : NSObject<DDUIKitRUMViewsPredicate>
 
@@ -446,15 +431,15 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 @end
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 You can even come up with a more dynamic solution depending on your app's architecture.
 
 For example, if your view controllers use `accessibilityLabel` consistently, you can name views by the value of accessibility label:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 class YourCustomPredicate: UIKitRUMViewsPredicate {
 
@@ -467,8 +452,8 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 @interface YourCustomPredicate : NSObject<DDUIKitRUMViewsPredicate>
 
@@ -486,13 +471,12 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 @end
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 **Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
-{{% /collapse-content %}}
 
-{{% collapse-content title="SwiftUI" level="h4" expanded=true id="auto-track-views-swiftui" %}}
+#### SwiftUI
 
 To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
 
@@ -500,8 +484,8 @@ The mechanism to extract a SwiftUI view name relies on reflection. As a result, 
 
 You can use the default predicate (`DefaultSwiftUIRUMViewsPredicate`) or provide your own implementation of the `SwiftUIRUMViewsPredicate` protocol to customize or filter view names.
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 public protocol SwiftUIRUMViewsPredicate {
     func rumView(for extractedViewName: String) -> RUMView?
@@ -521,8 +505,8 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 @protocol DDSwiftUIRUMViewsPredicate <NSObject>
 - (DDRUMView * _Nullable)rumViewFor:(NSString * _Nonnull)extractedViewName;
@@ -544,14 +528,13 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
 }
 @end
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 **Notes:**
 - Datadog recommends enabling UIKit view tracking as well, even if your app is built entirely with SwiftUI.
-- Tab bars are not tracked automatically. Use [manual tracking](#custom-views) for each tab view to ensure they are tracked.
+- Tab bars are not tracked automatically. Use [manual tracking](#custom-views) for each tab view to track them.
 - If you use both automatic and manual tracking, you may see duplicate events. To avoid this, rely on a single instrumentation method or use a custom predicate to filter out duplicates.
-{{% /collapse-content %}}
 
 ### Automatically track user actions
 
@@ -564,16 +547,16 @@ To automatically track user tap actions with UIKit, set the `uiKitActionsPredica
 To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
 
 **Notes:**
-- Datadog recommends enabling UIKit action tracking as well even for pure SwiftUI apps as many interactive components are UIKit under the hood.
+- Datadog recommends enabling UIKit action tracking as well even for pure SwiftUI apps as many interactive components rely on UIKit internally.
 - On tvOS, only press interactions on the remote are tracked. Only a UIKit predicate is needed for this. If you have a pure SwiftUI app but want to track remote presses on tvOS, you should also enable UIKit instrumentation.
 - The implementation differs between iOS 18+ and iOS 17 and below:
-  - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (e.g., `SwiftUI_Button`, `SwiftUI_NavigationLink`).
+  - **iOS 18 and above:** Most interactions are reliably tracked with correct component names (for example, `SwiftUI_Button`, `SwiftUI_NavigationLink`).
   - **iOS 17 and below:** The SDK cannot distinguish between interactive and non-interactive components (for example, Button vs. Label). For that reason, actions are reported as `SwiftUI_Unidentified_Element`.
 - If you use both automatic and manual tracking, you may see duplicate events. This is a known limitation. To avoid this, use only one instrumentation type - either automatic or manual.
 - You can use the default predicate, `DefaultSwiftUIRUMActionsPredicate`, or provide your own to filter or rename actions. You can also disable legacy detection (iOS 17 and below) if you only want reliable iOS 18+ tracking:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 // Use the default predicate by disabling iOS 17 and below detection
 let predicate = DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: false)
@@ -586,8 +569,8 @@ class CustomSwiftUIActionsPredicate: SwiftUIRUMActionsPredicate {
     }
 }
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 // Use the default predicate by disabling iOS 17 and below detection
 DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:NO];
@@ -607,8 +590,8 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
 }
 @end
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 #### Action reporting by iOS version
 
@@ -623,14 +606,14 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 
 ### Automatically track network requests
 
-Network requests are automatically tracked after you enable RUM with the `urlSessionTracking` configuration. 
+Network requests are automatically tracked after you enable RUM with the `urlSessionTracking` configuration.
 
 #### (Optional) Enable detailed timing breakdown
 
 To get detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your delegate type:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(
@@ -644,8 +627,8 @@ let session = URLSession(
     delegateQueue: nil
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
@@ -654,20 +637,20 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
                                                       delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 **Notes**:
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
 - Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode, and for all tasks after enabling `URLSessionInstrumentation`.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
-<div class="alert alert-info">Be mindful of delegate retention.
-While Datadog instrumentation does not create memory leaks directly, it relies on <code>URLSession</code> delegates. According to <a href="https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters"> Apple documentation</a>:
-"The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the <code>invalidateAndCancel()</code> or <code>finishTasksAndInvalidate()</code> method, your app leaks memory until it exits."
-To avoid memory leaks, make sure to invalidate any <code>URLSession</code> instances you no longer need.
-</div>
-
+{% alert level="info" %}
+Be mindful of delegate retention.
+While Datadog instrumentation does not create memory leaks directly, it relies on `URLSession` delegates. According to [Apple documentation](https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters):
+"The session object keeps a strong reference to the delegate until your app exits or explicitly invalidates the session. If you do not invalidate the session by calling the `invalidateAndCancel()` or `finishTasksAndInvalidate()` method, your app leaks memory until it exits."
+To avoid memory leaks, make sure to invalidate any `URLSession` instances you no longer need.
+{% /alert %}
 
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
@@ -675,9 +658,8 @@ Also, you can configure first party hosts using `urlSessionTracking`. This class
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
 
-[10]: https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 
 import DatadogRUM
@@ -706,12 +688,9 @@ let session = URLSession(
 )
 ```
 
-This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
-
-
-[1]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum).
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 @import DatadogRUM;
 
@@ -722,8 +701,8 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 
 [DDRUM enableWith:configuration];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 To add custom attributes to resources, use the `URLSessionTracking.resourceAttributesProvider` option when enabling the RUM. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource.
 
@@ -747,20 +726,21 @@ RUM.enable(
 
 If you don't want to track requests, you can disable URLSessionInstrumentation for the delegate type:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 [DDURLSessionInstrumentation disableWithDelegateClass:[<YourSessionDelegate> class]];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 #### Apollo instrumentation
+
 Instrumenting Apollo in your iOS application gives RUM visibility into GraphQL errors and performance. Because GraphQL requests all go to a single endpoint and often return 200 OK even on errors, default HTTP instrumentation lacks context. It lets RUM capture the operation name, operation type, and variables (and optionally the payload). This provides more detailed context for each network request.
 
 This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the instructions for the Apollo iOS version you have below.
@@ -773,7 +753,7 @@ This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the i
    dependencies: [
        // For Apollo iOS 1.0+
        .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
-    
+
        // For Apollo iOS 2.0+
        .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "2.0.0"))
    ]
@@ -786,101 +766,94 @@ This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the i
 
 3. Set up network instrumentation based on your Apollo iOS version:
 
-   {{< tabs >}}
-   {{% tab "Apollo iOS 1.0+" %}}
+{% tabs %}
+{% tab label="Apollo iOS 1.0+" %}
+Set up network instrumentation for Apollo's built-in URLSessionClient:
 
-   Set up network instrumentation for Apollo's built-in URLSessionClient:
+```swift
+import Apollo
 
-   ```swift
-   import Apollo
+URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.self))
+```
 
-   URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.self))
-   ```
+Add the Datadog interceptor to your Apollo Client setup:
 
-   Add the Datadog interceptor to your Apollo Client setup:
+```swift
+import Apollo
+import DatadogApollo
 
-   ```swift
-   import Apollo
-   import DatadogApollo
+class CustomInterceptorProvider: DefaultInterceptorProvider {
+    override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
+        var interceptors = super.interceptors(for: operation)
+        interceptors.insert(DatadogApolloInterceptor(), at: 0)
+        return interceptors
+    }
+}
+```
+{% /tab %}
+{% tab label="Apollo iOS 2.0+" %}
+Configure network instrumentation using the provided `DatadogApolloDelegate` and `DatadogApolloURLSession`:
 
-   class CustomInterceptorProvider: DefaultInterceptorProvider {
-       override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
-           var interceptors = super.interceptors(for: operation)
-           interceptors.insert(DatadogApolloInterceptor(), at: 0)
-           return interceptors
-       }
-   }
-   ```
+```swift
+import Apollo
+import DatadogApollo
+import DatadogCore
 
-   {{% /tab %}}
-   {{% tab "Apollo iOS 2.0+" %}}
+// Create the Datadog delegate
+let delegate = DatadogApolloDelegate()
 
-   Configure network instrumentation using the provided `DatadogApolloDelegate` and `DatadogApolloURLSession`:
+// Create the custom URLSession wrapper
+let customSession = DatadogApolloURLSession(
+    configuration: .default,
+    delegate: delegate
+)
 
-   ```swift
-   import Apollo
-   import DatadogApollo
-   import DatadogCore
+// Enable Datadog instrumentation for the delegate
+URLSessionInstrumentation.enable(
+    with: .init(delegateClass: DatadogApolloDelegate.self)
+)
 
-   // Create the Datadog delegate
-   let delegate = DatadogApolloDelegate()
+// Configure Apollo Client with the custom session
+let networkTransport = RequestChainNetworkTransport(
+    urlSession: customSession,
+    interceptorProvider: NetworkInterceptorProvider(),
+    store: store,
+    endpointURL: url
+)
+```
 
-   // Create the custom URLSession wrapper
-   let customSession = DatadogApolloURLSession(
-       configuration: .default,
-       delegate: delegate
-   )
+Create an interceptor provider with the Datadog interceptor:
 
-   // Enable Datadog instrumentation for the delegate
-   URLSessionInstrumentation.enable(
-       with: .init(delegateClass: DatadogApolloDelegate.self)
-   )
+```swift
+import Apollo
+import DatadogApollo
 
-   // Configure Apollo Client with the custom session
-   let networkTransport = RequestChainNetworkTransport(
-       urlSession: customSession,
-       interceptorProvider: NetworkInterceptorProvider(),
-       store: store,
-       endpointURL: url
-   )
-   ```
+struct NetworkInterceptorProvider: InterceptorProvider {
+    func graphQLInterceptors<Operation>(for operation: Operation) -> [any GraphQLInterceptor] where Operation : GraphQLOperation {
+        return [DatadogApolloInterceptor()] + DefaultInterceptorProvider.shared.graphQLInterceptors(for: operation)
+    }
+}
+```
+{% /tab %}
+{% /tabs %}
 
-   Create an interceptor provider with the Datadog interceptor:
+This lets Datadog RUM extract Operation type, name, variables and Payloads (optional) automatically from the requests to enrich GraphQL Requests RUM Resources.
 
-   ```swift
-   import Apollo
-   import DatadogApollo
-
-   struct NetworkInterceptorProvider: InterceptorProvider {
-       func graphQLInterceptors<Operation>(for operation: Operation) -> [any GraphQLInterceptor] where Operation : GraphQLOperation {
-           return [DatadogApolloInterceptor()] + DefaultInterceptorProvider.shared.graphQLInterceptors(for: operation)
-       }
-   }
-   ```
-
-   {{% /tab %}}
-   {{< /tabs >}}
-
-   This lets Datadog RUM extract Operation type, name, variables and Payloads (optional) automatically from the requests to enrich GraphQL Requests RUM Resources.
-
-   <div class="alert alert-info">
-     <ul>
-       <li>The integration supports Apollo iOS versions <code>1.0+</code> and <code>2.0+</code>.</li>
-       <li>The <code>query</code> and <code>mutation</code> type operations are tracked, <code>subscription</code> operations are not.</li>
-       <li>GraphQL payload sending is disabled by default. To enable it, set the <code>sendGraphQLPayloads</code> flag in the <code>DatadogApolloInterceptor</code> constructor as follows:</li>
-     </ul>
-
-     <pre><code class="language-swift">
-   let datadogInterceptor = DatadogApolloInterceptor(sendGraphQLPayloads: true)
-     </code></pre>
-   </div>
+{% alert level="info" %}
+- The integration supports Apollo iOS versions `1.0+` and `2.0+`.
+- The `query` and `mutation` type operations are tracked; `subscription` operations are not.
+- GraphQL payload sending is disabled by default. To enable it, set the `sendGraphQLPayloads` flag in the `DatadogApolloInterceptor` constructor as follows:
+  ```swift
+  let datadogInterceptor = DatadogApolloInterceptor(sendGraphQLPayloads: true)
+  ```
+{% /alert %}
 
 ### Automatically track errors
 
 All "error" and "critical" logs sent with `Logger` are automatically reported as RUM errors and linked to the current RUM view:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 import DatadogLogs
 
@@ -889,8 +862,8 @@ let logger = Logger.create()
 logger.error("message")
 logger.critical("message")
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 @import DatadogLogs;
 
@@ -898,13 +871,13 @@ DDLogger *logger = [DDLogger create];
 [logger error:@"message"];
 [logger critical:@"message"];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 Similarly, all finished spans marked as error are reported as RUM errors:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 import DatadogTrace
 
@@ -913,23 +886,23 @@ let span = Tracer.shared().startSpan(operationName: "operation")
 span.setError(error)
 span.finish()
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 // ... capture the `error`
 id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
 [span setError:error];
 [span finish];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 ## Modify or drop RUM events
 
 To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the RUM iOS SDK:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
@@ -950,8 +923,8 @@ let configuration = RUM.Configuration(
     }
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
@@ -975,15 +948,15 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
     return RUMLongTaskEvent;
 }];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 Each mapper is a Swift closure with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent.
 
 For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted(_:) -> String` function and use it in `resourceEventMapper`:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
@@ -994,8 +967,8 @@ let configuration = RUM.Configuration(
     }
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+{% /tab %}
+{% tab label="Objective-C" %}
 ```objective-c
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
@@ -1003,8 +976,8 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
     return RUMResourceEvent;
 }];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 Returning `nil` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `nil` (to drop views, customize your implementation of `UIKitRUMViewsPredicate`; read more in [tracking views automatically](#automatically-track-views)).
 
@@ -1087,11 +1060,7 @@ import DatadogCore
 Datadog.stopInstance()
 ```
 
-Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically.
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/ios
