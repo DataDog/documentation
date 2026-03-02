@@ -15,7 +15,11 @@ Think of onboarding Bits AI SRE as you would a new teammate: the more context yo
 
 You can either add step-by-step troubleshooting instructions directly in the monitor message or link to a Confluence page that contains those instructions.
 
+<<<<<<< HEAD
 - **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you'd normally look in Datadog when the monitor triggers, for example, a dashboard, logs, traces, or a notebook with key widgets. Links don’t need special formatting; plain URLs work.
+=======
+- **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you'd normally look in Datadog when the monitor triggers—for example, a dashboard, logs, traces, or a notebook with key widgets. Links don't need special formatting; plain URLs work.
+>>>>>>> c7644644ee (Reorder bits.md intro: lead with action and nav link)
 
 Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
 
@@ -31,12 +35,14 @@ To maximize the value of this integration, document the services, dependencies, 
 <b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
+You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
+
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
-Go to [**Bits AI SRE** > **Settings** > **Bits.md**][2] to create and manage your `bits.md` file.
-
 ### Sample bits.md
+
 {{< code-block lang="markdown" filename="bits.md" collapsible="true" >}}
+
 ## Scope rules
 - Always carry forward explicit scope from the user (env, service, team, region, namespace).
 - Treat mentioned values as hard filters in all queries.
