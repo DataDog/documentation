@@ -26179,8 +26179,8 @@ components:
       description: Used for fixed span times, such as 'March 1 to March 7'.
       properties:
         from:
-          description: Start time in seconds since epoch.
-          example: 1712080128
+          description: Start time in milliseconds since epoch.
+          example: 1712080128000
           format: int64
           minimum: 0
           type: integer
@@ -26188,8 +26188,8 @@ components:
           description: Whether to hide incomplete cost data in the widget.
           type: boolean
         to:
-          description: End time in seconds since epoch.
-          example: 1712083128
+          description: End time in milliseconds since epoch.
+          example: 1712083128000
           format: int64
           minimum: 0
           type: integer

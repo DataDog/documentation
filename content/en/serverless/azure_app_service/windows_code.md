@@ -436,7 +436,7 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
 
 <div class="alert alert-info">Datadog's Node.js tracer, <code>dd-trace</code>, is packaged in the Azure App Services extension. It is automatically appended to the <code>NODE_PATH</code>.<br/><br/> <strong>You do not need to add</strong> <code>dd-trace</code> <strong>as a dependency in</strong> <code>package.json</code>. Explicitly adding <code>dd-trace</code> as a dependency may override the version provided by the extension. For local testing, reference the <a href="https://github.com/DataDog/datadog-aas-extension/releases">release notes</a> to find the appropriate version of the Node.js tracer for your version of the Azure App Service extension.</div>
 
-[1]: /developers/dogstatsd/
+[1]: /extend/dogstatsd/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -722,7 +722,7 @@ Still need help? Contact [Datadog support][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
+[1]: /extend/dogstatsd
 [2]: /metrics/custom_metrics/
 [3]: /integrations/azure/
 [4]: /help

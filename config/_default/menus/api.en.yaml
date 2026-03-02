@@ -7181,6 +7181,45 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an AWS cloud authentication persona mapping
+      url: '#get-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-get-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an AWS cloud authentication persona mapping
+      url: '#delete-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-delete-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Create an AWS cloud authentication persona mapping
+      url: '#create-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-create-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 3
     - name: List AWS cloud authentication persona mappings
       url: '#list-aws-cloud-authentication-persona-mappings'
       identifier: cloud-authentication-list-aws-cloud-authentication-persona-mappings
@@ -7936,9 +7975,9 @@ menu:
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
       generated: true
-    - name: Send an incident event
-      url: '#send-an-incident-event'
-      identifier: dora-metrics-send-an-incident-event
+    - name: Send an incident event (legacy)
+      url: '#send-an-incident-event-legacy'
+      identifier: dora-metrics-send-an-incident-event-legacy
       parent: dora-metrics
       generated: true
       params:
@@ -7947,10 +7986,10 @@ menu:
         operationids:
           - CreateDORAIncident
         unstable: []
-        order: 2
-    - name: Get a failure event
-      url: '#get-a-failure-event'
-      identifier: dora-metrics-get-a-failure-event
+        order: 28
+    - name: Get an incident event
+      url: '#get-an-incident-event'
+      identifier: dora-metrics-get-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7960,9 +7999,9 @@ menu:
           - GetDORAFailure
         unstable: []
         order: 6
-    - name: Get a list of failure events
-      url: '#get-a-list-of-failure-events'
-      identifier: dora-metrics-get-a-list-of-failure-events
+    - name: Get a list of incident events
+      url: '#get-a-list-of-incident-events'
+      identifier: dora-metrics-get-a-list-of-incident-events
       parent: dora-metrics
       generated: true
       params:
@@ -7972,9 +8011,9 @@ menu:
           - ListDORAFailures
         unstable: []
         order: 4
-    - name: Delete a failure event
-      url: '#delete-a-failure-event'
-      identifier: dora-metrics-delete-a-failure-event
+    - name: Delete an incident event
+      url: '#delete-an-incident-event'
+      identifier: dora-metrics-delete-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -7984,9 +8023,9 @@ menu:
           - DeleteDORAFailure
         unstable: []
         order: 7
-    - name: Send a failure event
-      url: '#send-a-failure-event'
-      identifier: dora-metrics-send-a-failure-event
+    - name: Send an incident event
+      url: '#send-an-incident-event'
+      identifier: dora-metrics-send-an-incident-event
       parent: dora-metrics
       generated: true
       params:
@@ -8665,6 +8704,82 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Google Chat Integration
+      url: /api/latest/google-chat-integration/
+      identifier: google-chat-integration
+      generated: true
+    - name: Update organization handle
+      url: '#update-organization-handle'
+      identifier: google-chat-integration-update-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get organization handle
+      url: '#get-organization-handle'
+      identifier: google-chat-integration-get-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Delete organization handle
+      url: '#delete-organization-handle'
+      identifier: google-chat-integration-delete-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Create organization handle
+      url: '#create-organization-handle'
+      identifier: google-chat-integration-create-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get all organization handles
+      url: '#get-all-organization-handles'
+      identifier: google-chat-integration-get-all-organization-handles
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrganizationHandles
+        unstable: []
+        order: 1
+    - name: Get space information by display name
+      url: '#get-space-information-by-display-name'
+      identifier: google-chat-integration-get-space-information-by-display-name
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSpaceByDisplayName
+        unstable: []
+        order: 1
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
@@ -9148,6 +9263,19 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Import an incident
+      url: '#import-an-incident'
+      identifier: incidents-import-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportIncident
+        unstable:
+          - v2
+        order: 49
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
@@ -9512,6 +9640,22 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Integrations
+      url: /api/latest/integrations/
+      identifier: integrations
+      generated: true
+    - name: List Integrations
+      url: '#list-integrations'
+      identifier: integrations-list-integrations
+      parent: integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIntegrations
+        unstable: []
+        order: 1
     - name: Jira Integration
       url: /api/latest/jira-integration/
       identifier: jira-integration
@@ -10956,6 +11100,30 @@ menu:
       url: /api/latest/product-analytics/
       identifier: product-analytics
       generated: true
+    - name: Compute timeseries analytics
+      url: '#compute-timeseries-analytics'
+      identifier: product-analytics-compute-timeseries-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsTimeseries
+        unstable: []
+        order: 3
+    - name: Compute scalar analytics
+      url: '#compute-scalar-analytics'
+      identifier: product-analytics-compute-scalar-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsScalar
+        unstable: []
+        order: 2
     - name: Send server-side events
       url: '#send-server-side-events'
       identifier: product-analytics-send-server-side-events

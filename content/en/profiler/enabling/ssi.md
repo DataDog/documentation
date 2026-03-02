@@ -24,6 +24,7 @@ Continuous Profiler with SSI can be enabled for the following languages:
 | Java               | 1.37.0+                |
 | .NET (x86_64 only) | 3.3.1+                 |
 | Node.js            | 4.39.0+, 5.15.0+       |
+| Python             | 3.0.0+                 |
 
 Kubernetes deployments require at least Datadog Agent 7.57.0. Host and container deployments can
 use 7.56.x versions of the Datadog Agent.
@@ -105,9 +106,9 @@ environment variable. Running processes are not affected. The Datadog library dy
 on the profiler for the processes that are good profiling candidates.
 
 The logic for identifying a process as a good candidate varies by language. For Java, all processes
-are profiled, as Java applications are usually deployed as a single Java process on a host. For Node
-and Python, profiler is only turned on if the application is running for more than 30 seconds and
-has created at least one tracing span.
+are profiled, as Java applications are usually deployed as a single Java process on a host. For Node.js,
+profiler is only turned on if the application is running for more than 30 seconds and has created at least
+one tracing span. For Python, when `DD_PROFILING_ENABLED=auto` (the SSI default), profiling is enabled for SSI-instrumented processes.
 
 SSI can also be configured to inject profiling on each and every process by using the value `true`
 instead of `auto`.
