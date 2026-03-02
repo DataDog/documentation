@@ -45,7 +45,6 @@ Based on what you see in the **Real-time Metric Overview**, follow the appropria
 
 Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
 
-
 #### The flag is receiving traffic but experiment assignments are zero
 
 If the flag shows exposures but the experiment scorecard shows zero assignments, traffic is not reaching the experiment's [targeting rule][6].
@@ -72,7 +71,7 @@ Work through the following checks sequentially. Each section builds on the previ
 
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
 
-1. **If a metric value is zero**, hover over the metric name and click the &#8942; menu item. Select **Edit Metric** to open the metric definition page. 
+1. **If a metric value is zero**, hover over the metric name and click the &#8942; menu item. Select **Edit Metric** to open the metric definition page.
 
 1. Verify that the metric event name is correct (for example, check for typos). Check the event volume chart on the right side of the page to confirm the event is firing.
 
@@ -134,7 +133,7 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 
 To check if outlier handling is the cause:
 
-1. On the [Experiments][2] page, hover over the metric name to click the &#8942; menu item. Select **Edit Metric** to open the metric definition page. 
+1. On the [Experiments][2] page, hover over the metric name to click the &#8942; menu item. Select **Edit Metric** to open the metric definition page.
 1. In the metric definition, toggle **Outlier handling** off.
 1. Save the metric. To trigger an immediate recompute, click the &#8942; menu next to **Last Updated** in the **Metrics** section and click **run an update now**. Otherwise, wait for the next scheduled update.
 
