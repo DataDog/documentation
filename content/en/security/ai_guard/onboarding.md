@@ -90,7 +90,27 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 - **Span rate**: 100%
 - **Trace rate**: 100%
 
-### 6. (Optional) Limit access to AI Guard spans {#limit-access}
+### 6. Configure AI Guard policies {#configure-policies}
+
+AI Guard provides two settings to control how evaluations are enforced and how sensitive threat detection is.
+
+#### Blocking policy {#blocking-policy}
+
+By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the [blocking policy][20] for your services.
+
+You can configure blocking at different levels of granularity, with more specific settings taking priority:
+1. **Organization-wide**: Apply a default blocking policy to all services and environments.
+2. **Per environment**: Override the organization default for a specific environment.
+3. **Per service**: Override the organization default for a specific service.
+4. **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+
+#### Evaluation sensitivity {#evaluation-sensitivity}
+
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). The [evaluation sensitivity][21] setting controls the minimum confidence score required for a threat to be flagged. It is a value between 0.0 and 1.0, with a default of 0.5.
+
+A lower value increases sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives. A higher value decreases sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
+
+### 7. (Optional) Limit access to AI Guard spans {#limit-access}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 
@@ -622,26 +642,6 @@ After completing the [setup steps](#setup) and using an [SDK](#sdks) to instrume
 
 <div class="alert alert-info">You can't see data in Datadog for evaluations performed directly using the REST API.</div>
 
-## Configure AI Guard policies {#configure-policies}
-
-AI Guard provides two settings to control how evaluations are enforced and how sensitive threat detection is.
-
-### Blocking policy {#blocking-policy}
-
-By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the [blocking policy][20] for your services.
-
-You can configure blocking at different levels of granularity, with more specific settings taking priority:
-1. **Organization-wide**: Apply a default blocking policy to all services and environments.
-2. **Per environment**: Override the organization default for a specific environment.
-3. **Per service**: Override the organization default for a specific service.
-4. **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
-
-### Evaluation sensitivity {#evaluation-sensitivity}
-
-AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). The [evaluation sensitivity][21] setting controls the minimum confidence score required for a threat to be flagged. It is a value between 0.0 and 1.0, with a default of 0.5.
-
-A lower value increases sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives. A higher value decreases sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
-
 ## Set up Datadog Monitors for alerting {#set-up-datadog-monitors}
 
 To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][9]. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
@@ -735,8 +735,8 @@ For more comprehensive detection rule capabilities, see [detection rules][15].
 
 To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
 - [Application and API Protection Security Signals explorer][18]
-- [Cloud SIEM Security Signals explorer][16] 
-  
+- [Cloud SIEM Security Signals explorer][16]
+
   In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
 
 The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
