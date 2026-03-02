@@ -15,7 +15,7 @@ If you experience issues with Agentless Scanning, use the following troubleshoot
 
 ## No results after deployment
 
-After deploying Agentless Scanning, results do not appear immediately. First results typically appear within 20 minutes of deployment. In rare cases, such as IAM configuration issues, it can take up to 2 hours.
+After deploying Agentless Scanning, results do not appear immediately. First results typically appear within 30 minutes of deployment. In rare cases, such as IAM configuration issues, it can take up to 2 hours.
 
 If no results appear after 2 hours:
 
