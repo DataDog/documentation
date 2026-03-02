@@ -17,6 +17,8 @@ products:
 
 The Sensitive Data Scanner processor scans logs to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
 
+You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
+
 ## Set up the processor in the UI
 
 To set up the processor:
@@ -91,7 +93,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
  For the following message structure:
 
-{{< code-block lang="json" >}}
+```json
 {
     "outer_key": {
         "inner_key": "inner_value",
@@ -103,7 +105,7 @@ After adding scanning rules from the library, you can edit each rule separately 
     },
     "d": "d value"
 }
-{{< /code-block >}}
+```
 
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
@@ -295,3 +297,4 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 [7]: /security/sensitive_data_scanner/scanning_rules/library_rules/?search=AWS+Access+Key+ID+Scanner
 [8]: /security/sensitive_data_scanner/scanning_rules/library_rules/?search=US+Social+Security+Number+Scanner
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline#nested-schema-for-configprocessor_groupprocessorsensitive_data_scanner
+[10]: /api/latest/observability-pipelines/#create-a-new-pipeline
