@@ -14,10 +14,10 @@ At the end of an investigation, let Bits know whether the conclusion it made was
 
 {{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
 
-If the conclusion was inaccurate, provide Bits with the correct root cause. Ensure your feedback: 
-- Identifies the actual root cause (not just observed effects or symptoms) 
-- Specifies relevant services, components, or metrics 
-- Includes telemetry links that point to the root cause
+If the conclusion was inaccurate, provide Bits with the correct root cause. Your feedback should:
+- Identify the actual root cause (not just observed effects or symptoms)
+- Specify relevant services, components, or metrics
+- Include telemetry links that point to the root cause
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
@@ -25,20 +25,22 @@ In addition, you can review steps that Bits took throughout the investigation an
 - **Improve This Step**: Share a link to a more effective query for Bits to use next time
 - **Always Take This Step**: Tell Bits that this query was helpful and to run it again next time
 
-{{< img src="bits_ai/bits_ai_sre_step_feedback.png" alt="A research step with options to provide feedback" style="width:100%;" >}}
+{{< img src="bits_ai/bits_ai_sre_step_feedback.png" alt="A completed investigation step with Improve This Step and Always Take This Step feedback options" style="width:100%;" >}}
 
 ## Configure proactive guidance with bits.md
 
 In addition to reviewing investigations after they complete, you can proactively guide how Bits investigates your environment by creating a `bits.md` file.
 
-`bits.md` is a Markdown file that provides structured context about your environment to the agent. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Include team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+<!-- SME: Please add a sentence here explaining where the bits.md file should be placed and how Bits picks it up (file path, repo location, or in-app setup). -->
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+`bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+
+{{< callout url="https://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
 <b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
 ### Sample bits.md
-{{< code-block lang="yaml" filename="bits.md" collapsible="true" >}}
+{{< code-block lang="markdown" filename="bits.md" collapsible="true" >}}
 
 ## Scope rules
 - Always carry forward explicit scope from the user (env, service, team, region, namespace).
@@ -75,7 +77,7 @@ Rule:
 
 ---
 
-# Kubernetes quick checks
+## Kubernetes quick checks
 For pod issues, check Kubernetes events first:
 `source:kubernetes pod_name:<pod> kube_namespace:<namespace>`
 
@@ -86,7 +88,7 @@ Common causes:
 
 ---
 
-# Known noise and false positives
+## Known noise and false positives
 Document recurring patterns that look like incidents but are expected behavior.
 
 Examples:
@@ -104,6 +106,6 @@ Rule:
 
 ## Manage memories
 
-Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. You can navigate to the [Monitor Management][1] page to view and delete memories in the **Memories** column.
+Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. Go to the [Monitor Management][1] page to view and delete memories in the **Memories** column.
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
