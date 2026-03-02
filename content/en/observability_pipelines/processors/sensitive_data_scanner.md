@@ -125,14 +125,11 @@ data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
    - `<RULE_IDENTIFIER>` with a name that is used later when you set up the Sensitive Data Scanner processor in the Observability Pipeline resource.
    - `<RULE_NAME>` with the exact name of the rule. See [Library Rules][6] for the full list of rules, including the rule name to use for the data source `filter`.
 
-   For example, if you want to use the [AWS Access Key ID Scanner][7] and [US Social Security Number Scanner][8] rules, configure the data source as follows:
+   For example, if you want to use the [AWS Access Key ID Scanner][7], configure the data source as follows:
 
    {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   filter = "AWS Access Key ID Scanner"
-}
-data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
-  filter = "US Social Security Number Scanner"
 }
    {{< /code-block >}}
 
@@ -167,7 +164,7 @@ data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
    - `<YOUR_RULE_NAME>` with a name for the rule. This name is shown in the Pipelines UI.
    - `<RULE_IDENTIFIER>` with the rule identifier you used in the data source in step 1.
 
-   For example, if you use the [AWS Access Key ID Scanner][7] data source from step 1:
+   For example, if you use the [AWS Access Key ID Scanner][7] data source from step 1, configure the rule block as follows:
 
    {{< code-block lang="terraform" >}}
 ...
@@ -193,18 +190,16 @@ data "datadog_sensitive_data_scanner_standard_pattern" "us_ssn" {
   }
    {{< /code-block >}}
 
-   See [Sensitive Data Scanner configuration example](#sensitive-data-scanner-configuration-example) for a full configuration example.
+   See a [full configuration example](#full-configuration-example) that adds two rules.
 
 1. Repeat steps 1 and 2 for all library rules you want to add.
 
-### Sensitive Data Scanner configuration example
+### Full configuration example
 
-In this example, the Sensitive Data Scanner processor scans for AWS Access Key IDs and US Social Security Numbers, and redacts the data with the string `***`. The [Observability Pipelines resource configuration example](#configuration-example):
+If you want to use the Sensitive Data Scanner processor to scan for AWS Access Key IDs and US Social Security Numbers, and redact the data with the string `***`:
 
-1. Uses the [Datadog Sensitive Data Scanner Standard Pattern][5] data source to retrieve the AWS Access Key ID Scanner's rule ID and US Social Security Number Scanner's rule ID.
-1. Uses the Sensitive Data Scanner rules defined in the data source in the [Datadog Observability Pipeline][4] resource's Sensitive Data Scanner processor.
-
-#### Configuration example {#configuration-example}
+1. Use the [Datadog Sensitive Data Scanner Standard Pattern][5] data source to retrieve the [AWS Access Key ID Scanner's][7] rule ID and [US Social Security Number Scanner's][8] rule ID.
+1. In your [Datadog Observability Pipeline][4] resource's Sensitive Data Scanner processor, use the Sensitive Data Scanner rules defined in the data sources.
 
 {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
