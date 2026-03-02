@@ -2,18 +2,31 @@
 const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const { marked } = require('marked/lib/marked.umd.js');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
 
+// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
+let marked;
+try {
+  const markedModule = require('marked/lib/marked.umd.js');
+  marked = markedModule.marked || markedModule.default || markedModule;
+} catch (_) {
+  const markedModule = require('marked');
+  marked = { parse: markedModule.parse };
+}
+if (!marked || typeof marked.parse !== 'function') {
+  throw new Error('marked.parse not found. Check marked package version.');
+}
+
 const supportedLangs = ['en'];
 
-// Create a renderer once so we don't recreate it on every call set paragraph tag to table-cell
-const renderer = new marked.Renderer();
-renderer.paragraph = (token) => `<p class="table-cell">${token.text}</p>`;
-renderer.heading = (token) => `<h${token.depth} id="${token.text}">${token.text}</h${token.depth}>`;
+/** Parse markdown and add table-cell class to paragraph tags (for API description tables). */
+function parseDescWithTableCell(desc) {
+  const html = marked.parse(desc || '', typeof marked.use === 'function' ? {} : undefined);
+  return (html || '').trim().replace(/<p>/g, '<p class="table-cell">').replace(/<\/p>\s*<p class="table-cell">/g, '</p><p class="table-cell">');
+}
 
 /**
  * Update the menu yaml file with api
@@ -732,7 +745,7 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  const descHtml = desc ? marked.parse(desc, { renderer }).trim() : "";
+  const descHtml = desc ? parseDescWithTableCell(desc) : "";
   const def = (value.default) ? `<p>default: <code>${value.default}</code></p>` : '';
   return `<div class="col-6 column">${descHtml}${def}</div>`.trim();
 };
