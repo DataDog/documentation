@@ -8,7 +8,7 @@ disable_toc: false
 
 ## Overview
 
-[Code Security][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the security and quality of your code. IDE integrations are supported for SAST, SCA, and IAST.
+[Code Security][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the security and quality of your code. IDE integrations are supported for SAST, SCA, SECRETS and IAST.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="ide_plugins/idea/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
