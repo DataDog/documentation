@@ -20,7 +20,7 @@ The Databricks integration connects Datadog to your Databricks workspace to sync
 
 ## Prerequisites
 
-If your Databricks workspace restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+If your Databricks workspace restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Databricks
 
