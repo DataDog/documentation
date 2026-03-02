@@ -327,4 +327,5 @@ layouts/shortcodes/mdoc/en/**/*.ast.json
 static/llms.txt
 
 # AI
-.claude/*local*
+.claude/
+CLAUDE.md
