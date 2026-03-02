@@ -22,10 +22,18 @@ if (!marked || typeof marked.parse !== 'function') {
 
 const supportedLangs = ['en'];
 
-/** Parse markdown and add table-cell class to paragraph tags (for API description tables). */
+/** Parse markdown, add table-cell class to paragraph tags, and add id to headings (for API description tables). */
 function parseDescWithTableCell(desc) {
   const html = marked.parse(desc || '', typeof marked.use === 'function' ? {} : undefined);
-  return (html || '').trim().replace(/<p>/g, '<p class="table-cell">').replace(/<\/p>\s*<p class="table-cell">/g, '</p><p class="table-cell">');
+  let out = (html || '').trim()
+    .replace(/<p>/g, '<p class="table-cell">')
+    .replace(/<\/p>\s*<p class="table-cell">/g, '</p><p class="table-cell">');
+  // Add id to h1–h6 from heading text (matches previous custom renderer behavior)
+  out = out.replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (_, level, inner) => {
+    const id = slugify((inner || '').replace(/<[^>]+>/g, '').trim(), { lower: true }) || 'heading';
+    return `<h${level} id="${id}">${inner}</h${level}>`;
+  });
+  return out;
 }
 
 /**
