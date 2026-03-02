@@ -106,22 +106,24 @@ You can configure blocking at different levels of granularity, with more specifi
 
 #### Evaluation sensitivity {#evaluation-sensitivity}
 
-AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). The [evaluation sensitivity][21] setting controls the minimum confidence score required for a threat to be flagged. It is a value between 0.0 and 1.0, with a default of 0.5.
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to **AI Guard** > **Settings** [**Evaluation Sensitivity**][21].
 
-A lower value increases sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives. A higher value decreases sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
+Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
+- A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
+- A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
 
 ### 7. (Optional) Limit access to AI Guard spans {#limit-access}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
 
-## Try the AI Guard Playground {#playground}
+## Evaluate conversations in AI Guard Playground {#playground}
 
 The [AI Guard Playground][19] lets you test AI Guard evaluations directly from the Datadog UI, without writing any code. Submit a conversation, including user input, assistant output, and tool calls, and see the evaluation result (action and reason) in real time.
 
 Use the Playground to:
 - Experiment with different prompt patterns and see how AI Guard responds.
 - Verify that AI Guard correctly detects prompt injection, jailbreaking, or unsafe tool calls.
-- Tweak the evaluation sensitivity threshold and see how it affects detection results.
+- Tweak the evaluation sensitivity threshold and see how it affects detection results. You can then adjust the threshold in AI Guard's [evaluation sensitivity](#evaluation-sensitivity) settings.
 - Test sensitive data scanning on your conversations.
 - Share evaluation results with your team during development.
 
