@@ -29,13 +29,14 @@ In addition, you can review steps that Bits took throughout the investigation an
 
 ## Configure proactive guidance with bits.md
 
+{{< callout url="https://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+<b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
+
 In addition to reviewing completed investigations, you can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
-{{< callout url="https://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-<b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
 
 ### Sample bits.md
 {{< code-block lang="markdown" filename="bits.md" collapsible="true" >}}
