@@ -132,6 +132,7 @@ data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   filter = "AWS Access Key ID Scanner"
 }
    {{< /code-block >}}
+    See the [full configuration example](#full-configuration-example) on how to add data sources for multiple rules.
 
 1. Add a [rule][9] block in your Observability Pipeline resource for the library rule.
 
@@ -190,7 +191,7 @@ data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   }
    {{< /code-block >}}
 
-   See a [full configuration example](#full-configuration-example) that adds two rules.
+   See the [full configuration example](#full-configuration-example) on how to add multiple rules.
 
 1. Repeat steps 1 and 2 for all library rules you want to add.
 
@@ -201,7 +202,7 @@ If you want to use the Sensitive Data Scanner processor to scan for AWS Access K
 1. Use the [Datadog Sensitive Data Scanner Standard Pattern][5] data source to retrieve the [AWS Access Key ID Scanner's][7] rule ID and [US Social Security Number Scanner's][8] rule ID.
 1. In your [Datadog Observability Pipeline][4] resource's Sensitive Data Scanner processor, use the Sensitive Data Scanner rules defined in the data sources.
 
-{{< code-block lang="terraform" >}}
+    {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   filter = "AWS Access Key ID Scanner"
 }
@@ -279,7 +280,7 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
     }
   }
 }
-{{< /code-block >}}
+    {{< /code-block >}}
 
 ## Further reading
 
