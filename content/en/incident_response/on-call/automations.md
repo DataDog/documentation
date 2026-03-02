@@ -49,8 +49,10 @@ Handover automations are configured at the team level. Each automation is scoped
 2. Scroll to the **Handover Automation** section.
 3. Click **Add an Automation** (or **Add** if automations already exist).
 4. In **Step 1**, select an action type from the left column. Actions are organized by integration: Datadog, Slack, and Microsoft Teams. A live preview appears in the right column.
+   {{< img src="service_management/oncall/handover-automation-step1.png" alt="Step 1 of the handover automation modal showing available action types" style="width:80%;" >}}
 5. Click **Next**.
 6. In **Step 2**, complete the configuration form. All actions require you to select one or more **schedules** scoped to the team. Fill in any additional integration-specific fields (see [Available actions](#available-actions) below).
+   {{< img src="service_management/oncall/handover-automation-step2.png" alt="Step 2 of the handover automation modal showing configuration fields" style="width:80%;" >}}
 7. Click **Add Automation** to save.
 
 ### Edit or delete an automation
@@ -80,6 +82,8 @@ Triggers a [Datadog Workflow Automation][1] when a shift change occurs. The work
 #### Send message
 
 Posts a handover summary to a Slack channel showing who is handing off to whom for each selected schedule. Optionally include an AI-generated shift summary.
+
+{{< img src="service_management/oncall/handover-automation-slack-message.png" alt="Example Slack handover message showing shift change details" style="width:80%;" >}}
 
 | Field | Required |
 |-------|----------|
