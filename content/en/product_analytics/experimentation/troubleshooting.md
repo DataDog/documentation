@@ -23,17 +23,17 @@ On the [Experiments][2] page, select your experiment and hover over the metric s
 
 ### Step 2: Confirm the experiment is receiving traffic
 
-Verify that your feature flag is enabled, evaluating in the correct environment, and that traffic is reaching the experiment's targeting rule.
+Verify that your feature flag is enabled, evaluates in the correct environment, and that traffic reaches the experiment's targeting rule.
 
 1. Note the **Environment** the experiment is running in, then click **Go to Flag**.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
-1. On the feature flag page, confirm that the flag is **Enabled**. If the flag is not enabled, enable it before proceeding.
+1. On the feature flag page, confirm that the flag is **Enabled**. If the flag is disabled, enable it before proceeding.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The feature flag page with the Enabled toggle highlighted in the top-right corner." style="width:90%;" >}}
 
-1. In the **Real-time Metric Overview**, filter by the experiment's environment to verify that the flag is receiving traffic in that specific environment. See the [Getting Started with Feature Flags][5] guide for details on environments.
+1. In the **Real-time Metric Overview** section, filter by the experiment's environment to verify that the flag is receiving traffic in that specific environment. See the [Getting Started with Feature Flags][5] guide for details on environments.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic.png" alt="The feature flag page with the Environment dropdown highlighted in the Real-time Metric Overview section, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
 
@@ -46,9 +46,9 @@ Verify that your feature flag is enabled, evaluating in the correct environment,
    {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="The Targeting Rules & Rollouts section of a feature flag showing the experiment targeting rule with 269 users and rollout percentages for each variant across four stages." style="width:90%;" >}}
 
 1. **If traffic is not reaching the experiment's targeting rule**, check the following:
-   - **Targeting rule order**: Are there targeting rules above the experiment that are capturing traffic before it reaches the experiment rule?
+   - **Targeting rule order**: Are targeting rules above the experiment capturing traffic before it reaches the experiment rule?
    - **Targeting rule filters**: Are the filters in the experiment's targeting rule being satisfied by incoming traffic?
-   - **Traffic allocation**: What percentage of traffic is allocated to the experiment?
+   - **Traffic allocation**: Is the traffic allocation to the experiment set correctly?
 
 ### Step 3: Confirm metric events are firing
 
@@ -58,7 +58,7 @@ Work through the following checks sequentially. Each section builds on the previ
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
-1. On the experiment page, hover over the metric scorecard to see the number of users in each variant, the total metric value, and the average user-level metric value.
+1. On the experiment page, hover over the metric scorecard to see the **User Assignment Count** for each variant, the **Total** metric value across users, and the per-user metric average.
 
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
 
@@ -86,7 +86,7 @@ Work through the following checks sequentially. Each section builds on the previ
 
 1. Check that the value in the **Subject** column matches the subject type attribute (typically `@usr.id`). The **Subject** column shows the value passed as [`targetingKey`][7] to the SDK. If the `targetingKey` does not match the subject type attribute, the experiment analysis cannot associate metric events with that exposure.
 
-   You can view and configure subject types in [Experiment Settings][9]. By default, the subject type is set to `@usr.id`. Verify that the value you pass as `targetingKey` in your SDK matches the attribute defined on the subject types page.
+   You can view and configure subject types on the [subject types page][9]. By default, the subject type is set to `@usr.id`. Verify that the value you pass as `targetingKey` in your SDK matches the attribute defined on the subject types page.
 
 **If the subject values match but results are still missing**, continue to the next section to inspect individual sessions.
 
@@ -128,4 +128,4 @@ If the subject values match and users are assigned to the experiment, you can in
 [6]: /getting_started/feature_flags/#step-4-define-targeting-rules-and-enable-the-feature-flag
 [7]: /feature_flags/client/javascript/#set-the-evaluation-context
 [8]: /feature_flags/client/javascript/
-[9]: https://app.datadoghq.com/product-analytics/experiments/settings
+[9]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
