@@ -97,13 +97,15 @@ Work through the following checks sequentially. Each section builds on the previ
 
 {{% collapse-content title="Verify subject key matching" level="h4" expanded=false id="verify-subject-key-matching" %}}
 
+Datadog matches metric events to experiment exposures using a subject key. If the subject key in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
+
 1. Click **View Exposure Logs** on the **Flags & Exposures** tab to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
 
-1. Check that the value in the **Subject** column matches the subject type attribute (typically `@usr.id`). The **Subject** column shows the value passed as [`targetingKey`][7] to the SDK. If the `targetingKey` does not match the subject type attribute, the experiment analysis cannot associate metric events with that exposure.
+1. Compare the value in the **Subject** column to the subject type attribute (typically `@usr.id`). The **Subject** column shows the value your SDK passes as [`targetingKey`][7].
 
-   You can view and configure subject types on the [subject types page][9]. By default, the subject type defaults to `@usr.id`. Verify that the value you pass as `targetingKey` in your SDK matches the attribute defined on the subject types page.
+1. If the values do not match, update either the [`targetingKey`][7] in your SDK or the subject type in Datadog to align them. You can view and configure subject types on the [subject types page][9]. By default, the subject type defaults to `@usr.id`.
 
 **If the subject values match but experiment results are still missing**, continue to the next section to inspect individual sessions.
 
@@ -133,7 +135,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
 {{% collapse-content title="Check outlier handling" level="h4" expanded=false id="check-outlier-handling" %}}
 
-If you have confirmed that metric events are firing and subject keys match, but metric values are still zero, outlier handling may be the cause. This is most common in early-stage experiments with a small number of users.
+If you have confirmed that metric events are firing and subject keys match, but metric values are still zero, outlier handling may be the cause.
 
 When outlier handling is enabled, Datadog calculates a threshold based on the distribution of metric values across users. If the number of users with a metric event is small, Datadog may compute the threshold as zero, which truncates all metric values to zero.
 
@@ -141,11 +143,13 @@ To check if outlier handling is the cause:
 
 1. On the [Experiments][2] page, hover over the metric name and select **Edit Metric** from the &#8942; menu.
 1. In the metric definition, toggle **Outlier handling** off.
-1. Save the metric and wait for the experiment results to recompute.
+1. Save the metric. To trigger an immediate recompute, click the &#8942; menu next to **Last Updated** in the **Metrics** section and select **run an update now**. Otherwise, wait for the next scheduled update.
 
-If metric values appear after disabling outlier handling, the threshold was truncating your data. You can re-enable outlier handling after the experiment accumulates more users.
+If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the metric edit page.
 
 {{< img src="/product_analytics/experiment/troubleshooting_outlier_handling.png" alt="The Edit Metric page with the Outlier handling toggle highlighted." style="width:90%;" >}}
+
+{{< img src="/product_analytics/experiment/troubleshooting_recompute.png" alt="The experiment page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
 
 {{% /collapse-content %}}
