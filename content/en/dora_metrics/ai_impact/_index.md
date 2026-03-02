@@ -30,7 +30,7 @@ AI coding assistants
 AI review agents
 : Tools that impact how code is validated, such as Codex, CodeRabbit, and Copilot review. These are detected automatically from pull request metadata.
 
-## Measure AI Impact
+## Setup
 
 {{< tabs >}}
 {{% tab "AI Coding Assistants" %}}
