@@ -25,13 +25,14 @@ To set up the processor:
 1. Click **Add Scanning Rule**.
 1. Select one of the following:
 
-{{% collapse-content title="Add rules from the library" level="h5" %}}
+{{< tabs >}}
+{{% tab "Library rules" %}}
 
 1. In the dropdown menu, select the library rule you want to use.
 1. Recommended keywords are automatically added based on the library rule selected. After the scanning rule has been added, you can [add additional keywords or remove recommended keywords](#add-additional-keywords).
 1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
-    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example-lib) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
-    - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-lib) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
+    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
+    - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
     - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
     - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
@@ -41,40 +42,21 @@ To set up the processor:
 1. Optionally, add a description for the rule.
 1. Click **Save**.
 
-### Path notation example {#path-notation-example-lib}
-
- For the following message structure:
-
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
-
 ### Add additional keywords
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
-1. Navigate to your [pipeline][2].
+1. Navigate to your [pipeline][1].
 1. In the Sensitive Data Scanner processor with the rule you want to edit, click **Manage Scanning Rules**.
 1. Toggle **Use recommended keywords** if you want the rule to use them. Otherwise, add your own keywords to the **Create keyword dictionary** field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. Click **Update**.
 
-{{% /collapse-content %}}
-{{% collapse-content title="Add a custom rule" level="h5" %}}
+[1]: https://app.datadoghq.com/observability-pipelines
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid. See [Writing Effective Grok Parsing Rules with Regular Expressions][3] for information.
+{{% /tab %}}
+{{% tab "Custom rules" %}}
+
+1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. See [Writing Effective Grok Parsing Rules with Regular Expressions][1] for more information.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -86,9 +68,10 @@ After adding scanning rules from the library, you can edit each rule separately 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
+1. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.
 1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
-    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example-custom) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
+    - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-custom) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
 1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
     - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
@@ -99,7 +82,12 @@ After adding scanning rules from the library, you can edit each rule separately 
 1. Optionally, add a description for the rule.
 1. Click **Add Rule**.
 
-### Path notation example {#path-notation-example-custom}
+[1]: /logs/guide/regex_log_parsing/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Path notation example
 
  For the following message structure:
 
@@ -120,12 +108,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-{{% /collapse-content %}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/search_syntax/logs/
-[2]: https://app.datadoghq.com/observability-pipelines
-[3]: /logs/guide/regex_log_parsing/
