@@ -7336,7 +7336,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
       weight: 106
-    - name: Deploy via Cloud Integrations
+    - name: Deploy using Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
