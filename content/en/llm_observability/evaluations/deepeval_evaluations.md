@@ -94,7 +94,7 @@ print(f"View experiment: {experiment.url}")
 ```
 
 ### Usage
-After you run an experiment with a DeepEval evaluation, you can view the DeepEval evaluation results per instance in the corresponding experiment run in Datadog:
+After you run an experiment with a DeepEval evaluation, you can view the DeepEval evaluation results per instance in the corresponding experiment run in Datadog. In the experiment below, a DeepEval evaluator with the name "Correctness" was run:
 
 {{< img src="llm_observability/deepeval-experiment-result.png" alt="An LLM Observability experiment with a DeepEval evaluator." style="width:100%;" >}}
 
