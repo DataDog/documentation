@@ -87,7 +87,7 @@ To set up this pattern:
 
 For more information, see [set execution behavior][2].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
