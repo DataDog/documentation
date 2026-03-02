@@ -126,9 +126,11 @@ Bits AI SRE provides three [Actions][15]:
 
 You can use these Actions to build Workflows, Agents, and Apps tailored to your use case.
 
+<!-- Commenting out until API Docs are merged
 ## API
 
 You can trigger and retrieve investigation details programmatically [via API][16].
+-->
 
 [1]: https://app.datadoghq.com/bits-ai/investigations
 [2]: /monitors/notify
@@ -145,4 +147,7 @@ You can trigger and retrieve investigation details programmatically [via API][16
 [13]: /integrations/github/
 [14]: /integrations/source_code/service-mapping/?tab=go
 [15]: /actions/workflows/actions/
+
+<!-- Commenting out until API Docs are merged
 [16]: /api/latest/?tab=java
+-->
