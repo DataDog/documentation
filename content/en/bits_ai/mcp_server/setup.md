@@ -150,7 +150,7 @@ Claude Desktop has limited support for remote authentication. Use **local binary
 
 {{% tab "Codex" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]:
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, if you're using `app.datadoghq.com`, use the US1 endpoint.
 
 | Datadog Site | MCP Server Endpoint |
 |--------|------|
@@ -208,7 +208,7 @@ The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][
 
 #### Remote authentication
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][5]:
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][5]. For example, if you're using `app.datadoghq.com`, use the US1 endpoint.
 
 | Datadog Site | MCP Server Endpoint |
 |--------|------|
@@ -280,16 +280,31 @@ Local authentication is recommended for Cline and when remote authentication is 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Supported clients
+
+| Client | Developer | Notes |
+|--------|------|------|
+| [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
+| [Claude Code][4] | Anthropic | |
+| [Claude&nbsp;Desktop][5] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=claude-desktop#installation) as needed. |
+| [Codex CLI][6] | OpenAI | |
+| [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
+| [Goose][8], [Kiro][9], [Kiro CLI][10], [Cline][11] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote auth is unreliable. |
+
+<div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+
 ## Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
+The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers.
 
-{{< code-block lang="json" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+```json
 {
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}",
       "headers": {
           "DD_API_KEY": "<YOUR_API_KEY>",
           "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
@@ -297,7 +312,7 @@ The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through
     }
   }
 }
-{{< /code-block >}}
+```
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
@@ -309,9 +324,9 @@ For security, use a scoped API key and application key from a [service account][
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
-3. For **URL**, enter the MCP Server endpoint for your regional Datadog site (for example, for US1: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp`). See the endpoint table in the tabs above for other sites.
+3. For **URL**, enter the MCP Server endpoint for your regional Datadog site. For example, for {{< region-param key="dd_site_name" >}}: `{{< region-param key="mcp_server_endpoint" >}}`
 4. Click **Connect**, then go to **Tools** > **List Tools**.
-5. Check if the [available tools][11] appear.
+5. Check if the [available tools][12] appear.
 
 ## Further reading
 
@@ -319,6 +334,18 @@ For security, use a scoped API key and application key from a [service account][
 
 [1]: /account_management/api-app-keys/
 [2]: https://github.com/modelcontextprotocol/inspector
-[11]: /bits_ai/mcp_server#available-tools
+[3]: https://cursor.com
+[4]: https://claude.com/product/claude-code
+[5]: https://claude.com/download
+[6]: https://chatgpt.com/codex
+[7]: https://code.visualstudio.com/
+[8]: https://github.com/block/goose
+[9]: https://kiro.dev/
+[10]: https://kiro.dev/cli/
+[11]: https://cline.bot/
+[12]: /bits_ai/mcp_server#available-tools
 [13]: /account_management/org_settings/service_accounts/
 [14]: https://modelcontextprotocol.io/specification/draft/basic/authorization
+[15]: /ide_plugins/vscode/?tab=cursor
+[16]: /ide_plugins/vscode/
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
