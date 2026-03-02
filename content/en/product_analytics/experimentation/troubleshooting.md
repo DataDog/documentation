@@ -43,10 +43,7 @@ Based on what you see in the **Real-time Metric Overview**, follow the appropria
 
 {{% collapse-content title="The flag is not receiving traffic" level="h4" expanded=false id="flag-not-receiving-traffic" %}}
 
-If the bar chart shows no exposures, the flag is not evaluating in the expected environment.
-
 1. Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
-1. If the flag is enabled but traffic is still zero, verify that your application is pointing to the same environment the experiment targets.
 
 {{% /collapse-content %}}
 
@@ -121,13 +118,11 @@ If subject values match and users are assigned to the experiment, inspect indivi
    @feature_flags.<flag-key>:<variant-value>
    ```
 
-   Replace `<flag-key>` with your feature flag key and `<variant-value>` with the variant you want to inspect.
-
    {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics event stream filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, and action count." style="width:90%;" >}}
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for two things:
-   - **Is the metric event present?** If the expected event does not appear in the session, the instrumentation is not firing for that user. Verify your event tracking code and confirm the event name matches the metric definition.
-   - **Does the metric event occur after the feature flag evaluation?** Datadog only counts metric events that occur *after* the user's first exposure event (`_dd_exposure`). If the metric event fires before the flag evaluation, reorder your instrumentation so the SDK evaluates the flag before the event fires. See the [SDK documentation][8] for initialization guidance.
+   - **Is the metric event present?** Verify that the expected metric event is firing within the session.
+   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag is evaluated do not count toward experiment results.
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
