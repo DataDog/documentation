@@ -31,7 +31,7 @@ In addition, you can review steps that Bits took throughout the investigation an
 
 In addition to reviewing investigations after they complete, you can proactively guide how Bits investigates your environment by creating a `bits.md` file.
 
-<!-- SME: Please add a sentence here explaining where the bits.md file should be placed and how Bits picks it up (file path, repo location, or in-app setup). -->
+To get started, go to [**Bits AI SRE** > **Settings** > **Bits.md**][2] to create and manage your `bits.md` file.
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
@@ -109,3 +109,4 @@ Rule:
 Every piece of feedback you give generates a **memory**. Bits uses these memories to enhance future investigations by recalling relevant patterns, queries, and corrections. Go to the [Monitor Management][1] page to view and delete memories in the **Memories** column.
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
+[2]: https://app.datadoghq.com/bits-ai/settings/bits-md
