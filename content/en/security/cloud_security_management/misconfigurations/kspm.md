@@ -18,7 +18,7 @@ Kubernetes Security Posture Management (KSPM) for Cloud Security helps you proac
 To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations. For detailed instructions, see the following articles:
 
 - [Deploying Cloud Security on the Agent][12]
-- [Deploying Cloud Security via Cloud Integrations][13]
+- [Deploying Cloud Security using Cloud Integrations][13]
 
 This allows Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 

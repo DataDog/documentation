@@ -882,11 +882,16 @@ menu:
       parent: otel_guides
       weight: 1002
       identifier: otel_guides_otlp_histogram_heatmaps
+    - name: Instrument Unsupported Runtimes
+      url: /opentelemetry/guide/instrument_unsupported_runtimes
+      parent: otel_guides
+      weight: 1003
+      identifier: otel_guides_instrument_unsupported_runtimes
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 1003
+      weight: 1004
     - name: Migrate to OTel Collector v0.120.0+
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
@@ -1411,24 +1416,24 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Investigate issues
+    - name: Investigate Issues
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
-    - name: Remediate issues
-      url: bits_ai/bits_ai_sre/remediate_issues
-      identifier: bits_ai_sre_remediate_issues
+    - name: Take Action
+      url: bits_ai/bits_ai_sre/take_action
+      identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE integrations and settings
+    - name: Bits AI SRE Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 300
-    - name: Help Bits learn
-      url: bits_ai/bits_ai_sre/help_bits_learn
-      identifier: bits_ai_sre_learn
+    - name: Knowledge Sources
+      url: bits_ai/bits_ai_sre/knowledge_sources
+      identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
     - name: Chat with Bits AI SRE
@@ -2540,11 +2545,16 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 207
+    - name: Variables
+      url: incident_response/incident_management/setup_and_configuration/variables
+      parent: incidents_settings
+      identifier: incidents_settings_variables
+      weight: 208
     - name: Integrations
       url: incident_response/incident_management/setup_and_configuration/integrations
       parent: incidents_settings
       identifier: incidents_integrations
-      weight: 208
+      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -4196,21 +4206,26 @@ menu:
       parent: tracing_trace_pipeline
       identifier: tracing_adaptive_sampling
       weight: 403
+    - name: Processing Pipelines
+      url: tracing/trace_pipeline/processing_pipelines/
+      parent: tracing_trace_pipeline
+      identifier: tracing_processing_pipelines
+      weight: 404
     - name: Generate Metrics
       url: tracing/trace_pipeline/generate_metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_generate_metrics
-      weight: 404
+      weight: 405
     - name: Trace Retention
       url: tracing/trace_pipeline/trace_retention/
       parent: tracing_trace_pipeline
       identifier: tracing_retention
-      weight: 405
+      weight: 406
     - name: Usage Metrics
       url: tracing/trace_pipeline/metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_metrics
-      weight: 406
+      weight: 407
     - name: Correlate Traces with Other Telemetry
       url: tracing/other_telemetry/
       parent: tracing
@@ -5012,6 +5027,11 @@ menu:
       identifier: jobs_monitoring_dataproc
       parent: data_jobs
       weight: 600000
+    - name: AWS Glue
+      url: data_observability/jobs_monitoring/glue
+      identifier: jobs_monitoring_glue
+      parent: data_jobs
+      weight: 650000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
@@ -5193,7 +5213,7 @@ menu:
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
     - name: Advanced Experiment Runs
-      url: llm_observability/experiments/advanced_runs 
+      url: llm_observability/experiments/advanced_runs
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_advanced_runs
       weight: 504
@@ -5202,21 +5222,26 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 505
+    - name: MCP Server
+      url: llm_observability/mcp_server
+      parent: llm_obs
+      identifier: llm_obs_mcp_server
+      weight: 6
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 6
+      weight: 7
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 7
+      weight: 8
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 9
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5700,26 +5725,31 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_android
       weight: 101
+    - name: Angular
+      url: feature_flags/client/angular
+      parent: feature_flags_client
+      identifier: feature_flags_client_angular
+      weight: 102
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 102
+      weight: 103
     - name: JavaScript
       url: feature_flags/client/javascript
       parent: feature_flags_client
       identifier: feature_flags_client_javascript
-      weight: 103
+      weight: 104
     - name: React
       url: feature_flags/client/react
       parent: feature_flags_client
       identifier: feature_flags_client_react
-      weight: 104
+      weight: 105
     - name: React Native
       url: feature_flags/client/reactnative
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
-      weight: 105
+      weight: 106
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -7319,7 +7349,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
       weight: 106
-    - name: Deploy via Cloud Integrations
+    - name: Deploy using Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
@@ -9016,7 +9046,7 @@ menu:
       weight: 8
     - name: Controls
       identifier: account_management_governance_console_controls
-      url: account_management/governance_console/controls 
+      url: account_management/governance_console/controls
       parent: account_management_governance_console
       weight: 801
     - name: Multi-Factor Authentication

@@ -52,6 +52,12 @@ For more information, see [Investigate Security Signals][4] for App and API Prot
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 
+## From a leaked secret
+
+Declare an incident from [Secret Scanning][15] by clicking **Declare incident** in the detection side panel. The incident is pre-filled with all detection metadata.
+
+{{< img src="/service_management/incidents/declare/declare-secrets.png" alt="Your image description" style="width:90%;" >}}
+
 ## From a case
 
 Declare an incident from [Case Management][5]. From the individual case detail page, click **Declare incident** to escalate a case to an incident.
@@ -127,3 +133,4 @@ You can declare an incident from individual Handoff Notification cards.
 [12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages
 [14]: /integrations/google-hangouts-chat/
+[15]: /security/code_security/secret_scanning/

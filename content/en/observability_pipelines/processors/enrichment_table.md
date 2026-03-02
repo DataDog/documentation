@@ -171,7 +171,7 @@ To see metrics about your Enrichment Table processor, add the tags `component_ty
 : Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
 : The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was either not found in the log, not a string, or an authentication error occurred.
 
-#### Buffer metrics (when buffering is enabled)
+#### Buffer metrics (when enabled)
 
 To see buffer metrics for your Enrichment Table processor, add these tags to buffer metrics:
 
@@ -179,7 +179,7 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 - `component_id=<processor_id>`
 - `buffer_id=enrichment_table_buffer`
 
-{{% observability_pipelines/metrics/buffer %}}
+{{% observability_pipelines/metrics/buffer/processors %}}
 
 #### Reference Table metrics
 
