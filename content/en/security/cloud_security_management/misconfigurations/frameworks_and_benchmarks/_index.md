@@ -53,7 +53,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 
 You can use dashboards to see posture scores across teams, services, accounts, environments, and more. This data can help you prioritize your remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows so you can start them directly from your reporting view. For more information, see [Dashboards][4].
 
-You can graph your organization's compliance data in dashboards using the `datadog.csm.findings.count` metric.
+You can graph your organization's compliance data in dashboards using the `datadog.csm.findings.count` metric. You can also see your organization's [security posture score][3] in the OOTB Compliance Dashboard.
 
 <div class="alert alert-info">This metric estimates the true values in the Compliance page, and some error is expected. You can filter the <a href="https://app.datadoghq.com/security/compliance/home/essential-cloud-security-controls">Compliance Framework page</a> to see exact values for any combination of account, service, environment, and team.</div>
 
