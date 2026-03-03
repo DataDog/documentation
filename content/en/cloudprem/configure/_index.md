@@ -17,6 +17,7 @@ If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not
    {{< nextlink href="/cloudprem/install/aws_eks" >}}AWS Configuration{{< /nextlink >}}
    {{< nextlink href="/cloudprem/install/azure_aks" >}}Azure Configuration{{< /nextlink >}}
    {{< nextlink href="/cloudprem/operate/sizing/" >}}Size your cluster{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/configure/indexes/" >}}Configure indexes{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/pipelines/" >}}Configure processing{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/ingress/" >}}Configure Ingress{{< /nextlink >}}
 {{< /whatsnext >}}
