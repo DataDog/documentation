@@ -9,7 +9,11 @@ further_reading:
       text: 'APM Troubleshooting'
 ---
 
-## Profiler engines
+## Profiler engines and profile types
+
+The profiler automatically configures the optimal engine and settings for your environment. Use the following sections to understand the available profile types, customize their configuration, and troubleshoot common issues.
+
+### Profiler engines
 
 The Java profiler uses two different profiling engines depending on your operating system:
 
@@ -23,7 +27,7 @@ The Java profiler uses two different profiling engines depending on your operati
 
 The profiler automatically selects the appropriate engine based on your environment. You do not need to configure this manually. Below are the different profile types and the related configurations.
 
-## CPU profiling
+### CPU profiling
 
 Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling.
 
@@ -32,9 +36,7 @@ Datadog CPU profiling is scheduled through perf events and is more accurate than
 | **Datadog** (default in v1.7.0+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_CPU_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.cpu.enabled=true` | `datadog.ExecutionSample` | Default on Linux |
 | **JFR** | `DD_PROFILING_DDPROF_CPU_ENABLED=false` | `-Ddd.profiling.ddprof.cpu.enabled=false` | `jdk.ExecutionSample` | To switch from Datadog to JFR (v1.7.0+) |
 
-
-
-## Wallclock
+### Wallclock
 
 The Datadog profiler wallclock engine:
 - Samples all threads, on- or off-CPU, with active tracing activity
@@ -47,8 +49,7 @@ The Datadog profiler wallclock engine:
 |---------------|---------------------|-----------------|-----------|
 | **Enable** (default in v1.7.0+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_WALL_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.wall.enabled=true` | `datadog.MethodSample` |
 
-
-## Allocation profiling
+### Allocation profiling
 
 The Datadog allocation profiling engine:
 - Contextualizes allocation profiles with endpoint information
@@ -79,7 +80,7 @@ jdk.ObjectAllocationSample#enabled=true
 ```
 
 
-## Live heap profiling
+### Live heap profiling
 
 Live Heap Profiling is a Datadog profiler feature that helps identify memory leaks and understand heap usage by tracking which allocated objects survive garbage collection. Unlike standard allocation profiling (which shows what was allocated), live heap profiling shows what is still alive on the heap — making it more useful for diagnosing memory leaks.
 
@@ -99,9 +100,9 @@ The live-heap profiler engine:
 **Note**: The live-heap engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
 
-## Heap profiling
+### Heap profiling
 
-Heap profiling uses the JVM's built-in `jdk.OldObjectSample` JFR event to track objects that have survived long enough to be promoted to the old generation of the garbage collector. This helps identify potential memory leaks by showing which objects are accumulating over time. Unlike live heap profiling (which uses the Datadog profiler engine), heap profiling relies on JFR and is available on Linux and Windows.
+Heap profiling uses the JVM's built-in `jdk.OldObjectSample` JFR event to track objects that have been live in the heap for a sustained period of time. This helps identify potential memory leaks by showing which objects are accumulating over time. Unlike live heap profiling (which uses the Datadog profiler engine), heap profiling relies on JFR and is available on all platforms where JFR is supported.
 
 <div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
 
@@ -118,7 +119,7 @@ jdk.OldObjectSample#enabled=true
 ```
 
 
-## Heap histogram metrics
+### Heap histogram metrics
 
 <div class="alert alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
 
@@ -128,9 +129,9 @@ To enable the heap histogram metrics, start your application with one of the fol
 |---------------------|-----------------|
 | `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` | `-Ddd.profiling.heap.histogram.enabled=true` |
 
+This data is collected when the JVM performs a Full Garbage Collection cycle and may only appear intermittently or not at all if your service does not have significant memory pressure.
 
-
-## Trace to profiling integration
+### Trace to profiling integration
 
 The [Trace to Profiling integration][3] identifies code hotspots in slow traces. The following minimum versions are required:
 
@@ -139,15 +140,34 @@ The [Trace to Profiling integration][3] identifies code hotspots in slow traces.
 | OpenJDK | 8u352, 11.0.17, 17.0.5 | 1.17.0+ |
 | OpenJ9 | 8u362, 11.0.18, 17.0.6 | 1.17.0+ |
 
-## Missing profiles in the profile search page
+### Configuration reference
 
-If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
-- Operating system type and version (for example, Linux Ubuntu 20.04)
-- Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
+| Environment variable | System property | Description |
+|---------------------|-----------------|-------------|
+| `DD_PROFILING_DDPROF_ENABLED` | `-Ddd.profiling.ddprof.enabled` | Enable the Datadog profiler engine (Linux only, default: true since v1.7.0) |
+| `DD_PROFILING_DDPROF_CPU_ENABLED` | `-Ddd.profiling.ddprof.cpu.enabled` | Enable CPU profiling with the Datadog engine |
+| `DD_PROFILING_DDPROF_WALL_ENABLED` | `-Ddd.profiling.ddprof.wall.enabled` | Enable wallclock profiling (default: true since v1.7.0) |
+| `DD_PROFILING_DDPROF_ALLOC_ENABLED` | `-Ddd.profiling.ddprof.alloc.enabled` | Enable allocation profiling with the Datadog engine |
+| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Enable live heap profiling (requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+) |
+| `DD_PROFILING_ENABLED_EVENTS` | `-Ddd.profiling.enabled.events` | Enable specific JFR events (for example: `jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB`) |
+
+### JDK Mission Control (JMC) event reference
+
+If you are analyzing profiles with JDK Mission Control, the following table provides a reference for events emitted by the profiler.
+
+| Profile type | JFR event | Datadog event |
+|--------------|-----------|---------------|
+| CPU | `jdk.ExecutionSample` | `datadog.ExecutionSample` |
+| Wallclock | - | `datadog.MethodSample` |
+| Allocation | `jdk.ObjectAllocationInNewTLAB`, `jdk.ObjectAllocationOutsideTLAB` | `datadog.ObjectAllocationInNewTLAB`, `datadog.ObjectAllocationOutsideTLAB` |
+| Live heap | - | `datadog.HeapLiveObject` |
 
 
-## Reduce overhead from default setup
+## Advanced configuration
+
+### Reduce overhead from default setup
 
 If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
 
@@ -160,7 +180,7 @@ To use the minimal configuration, verify you have a recent version of the Java t
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=minimal -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-## Increase profiler information granularity
+### Increase profiler information granularity
 
 If you want more granularity in your profiling data, you can specify the `comprehensive` configuration. This approach increases your profiler overhead at the cost of further granularity. Comprehensive configuration has the following changes compared to the default:
 
@@ -173,7 +193,7 @@ To use the comprehensive configuration, verify you have a recent version of the 
 java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.jfr-template-override-file=comprehensive -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
 ```
 
-## Removing sensitive information from profiles
+### Removing sensitive information from profiles
 
 If your system properties contain sensitive information such as user names or passwords, turn off the system property event by creating a `jfp` [override template file](#creating-and-using-a-jfr-template-override-file) with `jdk.InitialSystemProperty` disabled:
 
@@ -183,63 +203,7 @@ jdk.InitialSystemProperty#enabled=false
 
 [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
 
-## Large allocation events overwhelming the profiler
-
-To turn off allocation profiling, disable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
-
-```
-jdk.ObjectAllocationInNewTLAB#enabled=false
-jdk.ObjectAllocationOutsideTLAB#enabled=false
-```
-
-[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
-
-## Memory leak detection slowing down garbage collector
-{{< tabs >}}
-{{% tab "JFR" %}}
-To turn off memory leak detection, disable the following event in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
-
-```
-jdk.OldObjectSample#enabled=false
-```
-
-[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
-
-{{% /tab %}}
-{{% tab "Datadog Profiler" %}}
-If you are using the alpha feature of live heap profiling, you can tune the overhead by changing the percentage
-of the tracked allocation samples.
-```shell
-# track only 10% of the allocation samples
-java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.ddprof.liveheap.enabled=true -Ddd.profiling.ddprof.liveheap.sample_percent=10 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-## Exceptions overwhelming the profiler
-
-The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
-
-To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
-
-Note: Turn this setting back on after you've returned to a more typical rate of exceptions.
-
-## Java 8 support
-
-The following OpenJDK 8 vendors are supported for Continuous Profiling because they include JDK Flight Recorder in their latest versions:
-
-| Vendor                      | JDK version that includes Flight Recorder |
-| --------------------------- | ----------------------------------------- |
-| Azul                        | u212 (u262 is recommended)                |
-| AdoptOpenJDK                | u262                                      |
-| RedHat                      | u262                                      |
-| Amazon (Corretto)           | u262                                      |
-| Bell-Soft (Liberica)        | u262                                      |
-| All vendors upstream builds | u272                                      |
-
-If your vendor is not on the list, [open a support ticket][2], as other vendors may be in development or available in Preview support.
-
-## Creating and using a JFR template override file
+### Creating and using a JFR template override file
 
 Override templates let you specify profiling properties to override. However, the default settings are balanced for a good tradeoff between overhead and data density that cover most use cases. To use an override file, perform the following steps:
 
@@ -262,14 +226,96 @@ Override templates let you specify profiling properties to override. However, th
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.logs.injection=true -Ddd.profiling.jfr-template-override-file=</path/to/override.jfp> -jar path/to/your/app.jar
     ```
 
-## PODs are getting evicted due to disk usage
+### Advanced Linux settings for CPU profiles
+
+The CPU profiler engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
+
+```shell
+sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
+```
+
+
+## Troubleshooting
+
+Find solutions for common issues with the Java profiler, including missing profiles, application crashes, and performance overhead.
+
+### Missing profiles in the profile search page
+
+If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
+
+
+### Application crashes
+
+If the profiler causes your application to crash, [open a support ticket][2] with the crash logs and the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
+- Application name and tracer version (for example, dd-trace-java 1.55.0)
+
+
+### High overhead
+
+If you notice increased CPU usage, memory consumption, or application latency after enabling the profiler, [open a support ticket][2] with the following information:
+
+- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
+- Application name and tracer version (for example, dd-trace-java 1.55.0)
+- Description of the overhead observed (for example, CPU increase, memory growth, latency impact)
+- Profiler configuration settings, including any non-default options
+
+
+### Large allocation events overwhelming the profiler
+
+To turn off allocation profiling, disable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+
+```
+jdk.ObjectAllocationInNewTLAB#enabled=false
+jdk.ObjectAllocationOutsideTLAB#enabled=false
+```
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+### Memory leak detection slowing down garbage collector
+{{< tabs >}}
+{{% tab "JFR" %}}
+To turn off memory leak detection, disable the following event in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+
+```
+jdk.OldObjectSample#enabled=false
+```
+
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+{{% /tab %}}
+{{% tab "Datadog Profiler" %}}
+If you are using the alpha feature of live heap profiling, you can tune the overhead by changing the percentage
+of the tracked allocation samples.
+```shell
+# track only 10% of the allocation samples
+java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.ddprof.liveheap.enabled=true -Ddd.profiling.ddprof.liveheap.sample_percent=10 -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Exceptions overwhelming the profiler
+
+The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
+
+To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
+
+Note: Turn this setting back on after you've returned to a more typical rate of exceptions.
+
+### PODs are getting evicted due to disk usage
 
 The profiler uses ephemeral storage (usually `/tmp`) to save captured profiling data.
 If the node is under disk pressure and the pod hasn't requested ephemeral storage, it may be evicted.
 
 Fix: Add a small ephemeral storage request (such as 100MB) in the pod spec to prevent eviction.
 
-## Managing issues related to the tmp folder
+### Managing issues related to the tmp folder
 
 The Continuous Profiler may encounter errors related to the use of the system `/tmp` directory, particularly in environments with strict security or limited execution permissions (for example, Docker, Kubernetes, or SELinux-enabled systems). These issues can lead to:
 
@@ -304,55 +350,20 @@ Below are basic troubleshooting steps for resolving those issues:
     DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
     ```
 
-## Collecting native stack traces
+### Java 8 support
 
-If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
+The following OpenJDK 8 vendors are supported for Continuous Profiling because they include JDK Flight Recorder in their latest versions:
 
-<div class="alert alert-danger">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</div>
+| Vendor                      | JDK version that includes Flight Recorder |
+| --------------------------- | ----------------------------------------- |
+| Azul                        | u212 (u262 is recommended)                |
+| AdoptOpenJDK                | u262                                      |
+| RedHat                      | u262                                      |
+| Amazon (Corretto)           | u262                                      |
+| Bell-Soft (Liberica)        | u262                                      |
+| All vendors upstream builds | u272                                      |
 
-To enable native stack trace collection, set:
-
-```shell
-export DD_PROFILING_DDPROF_CSTACK=dwarf
-```
-
-or:
-
-```
--Ddd.profiling.ddprof.cstack=dwarf
-```
-
-## Summary - Advanced profiler engine configuration
-
-The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
-
-| Environment variable | System property | Description |
-|---------------------|-----------------|-------------|
-| `DD_PROFILING_DDPROF_ENABLED` | `-Ddd.profiling.ddprof.enabled` | Enable the Datadog profiler engine (Linux only, default: true since v1.7.0) |
-| `DD_PROFILING_DDPROF_CPU_ENABLED` | `-Ddd.profiling.ddprof.cpu.enabled` | Enable CPU profiling with the Datadog engine |
-| `DD_PROFILING_DDPROF_WALL_ENABLED` | `-Ddd.profiling.ddprof.wall.enabled` | Enable wallclock profiling (default: true since v1.7.0) |
-| `DD_PROFILING_DDPROF_ALLOC_ENABLED` | `-Ddd.profiling.ddprof.alloc.enabled` | Enable allocation profiling with the Datadog engine |
-| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Enable live heap profiling (requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+) |
-| `DD_PROFILING_ENABLED_EVENTS` | `-Ddd.profiling.enabled.events` | Enable specific JFR events (for example: `jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB`) |
-
-## JDK Mission Control (JMC) event reference
-
-If you are analyzing profiles with JDK Mission Control, the following table provides a reference for events emitted by the profiler.
-
-| Profile type | JFR event | Datadog event |
-|--------------|-----------|---------------|
-| CPU | `jdk.ExecutionSample` | `datadog.ExecutionSample` |
-| Wallclock | - | `datadog.MethodSample` |
-| Allocation | `jdk.ObjectAllocationInNewTLAB`, `jdk.ObjectAllocationOutsideTLAB` | `datadog.ObjectAllocationInNewTLAB`, `datadog.ObjectAllocationOutsideTLAB` |
-| Live heap | - | `datadog.HeapLiveObject` |
-
-### Advanced Linux settings for CPU profiles
-
-The CPU profiler engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
-
-```shell
-sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
-```
+If your vendor is not on the list, [open a support ticket][2], as other vendors may be in development or available in Preview support.
 
 ## Further Reading
 
