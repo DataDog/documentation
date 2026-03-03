@@ -4824,7 +4824,7 @@ menu:
       url: database_monitoring/setup_clickhouse/
       parent: dbm
       identifier: dbm_setup_clickhouse
-      weight: 8
+      weight: 9
     - name: Self-hosted
       url: database_monitoring/setup_clickhouse/selfhosted
       parent: dbm_setup_clickhouse
