@@ -10,9 +10,9 @@ further_reading:
     text: 'Data Observability Monitor'
 ---
 
-## Overview
-
 **Note**: This page applies to anomaly-based Data Observability monitors only. If your monitor uses the **Threshold** detection method, this content does not apply.
+
+## Overview
 
 By default, Data Observability monitors use an anomaly detection model tailored to common patterns in data quality metrics such as table freshness and row count. This model is designed for metrics that have irregular update patterns, sporadic large changes, and business-specific expectations of what is normal.
 
