@@ -3,6 +3,8 @@ title: Setting up ClickHouse
 description: Setting up Database Monitoring on a ClickHouse database
 disable_sidebar: true
 private: true
+aliases:
+  - /database_monitoring/guide/clickhouse/
 ---
 
 <div class="alert alert-info">
