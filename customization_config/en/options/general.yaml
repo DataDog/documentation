@@ -499,5 +499,8 @@ options:
 - label: Elixir
   id: elixir
 
+- label: Error Tracking
+  id: error_tracking
+
 - label: Unity
   id: unity
