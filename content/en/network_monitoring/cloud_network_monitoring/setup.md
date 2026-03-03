@@ -200,7 +200,7 @@ To enable Cloud Network Monitoring for Windows hosts:
 
    [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Cloud Network Monitoring" when running the Agent installation through the GUI.
 
-1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
     ```yaml
     network_config:
