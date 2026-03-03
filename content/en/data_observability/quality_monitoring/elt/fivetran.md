@@ -57,4 +57,4 @@ After syncing, you can explore your Fivetran-sourced tables and their upstream d
 [1]: https://fivetran.com/docs/rest-api/getting-started/system-keys
 [2]: https://app.datadoghq.com/integrations/fivetran
 [3]: https://app.datadoghq.com/data-obs/catalog
-[4]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses
+[4]: /data_observability/quality_monitoring/data_warehouses
