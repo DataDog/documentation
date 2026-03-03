@@ -124,3 +124,4 @@ Start exploring your ingested logs in the [Log Explorer][1].
 [10]: /logs/explorer/analytics/
 [11]: /logs/explorer/patterns/
 [12]: /logs/explorer/saved_views/
+

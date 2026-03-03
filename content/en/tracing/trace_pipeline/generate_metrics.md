@@ -110,3 +110,4 @@ When using custom metrics from traces in monitors, account for this latency to a
 [13]: /tracing/metrics/metrics_namespace/ 
 [14]: https://app.datadoghq.com/apm/traces/generate-metrics
 [15]: /tracing/trace_explorer/trace_queries
+

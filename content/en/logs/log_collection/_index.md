@@ -245,4 +245,3 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [15]: /api/latest/logs/#send-logs
 [16]: /api/latest/logs/#send-logs
 [17]: /agent/logs/#send-logs-over-https
-

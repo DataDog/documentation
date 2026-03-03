@@ -107,4 +107,3 @@ logger.info("Hello world!")
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [5]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
-

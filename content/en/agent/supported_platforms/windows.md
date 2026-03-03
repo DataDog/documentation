@@ -287,3 +287,4 @@ After configuration is complete, [restart the Agent][11].
 [18]: https://docs.datadoghq.com/agent/troubleshooting/
 [400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [500]: https://app.datadoghq.com/organization-settings/api-keys
+

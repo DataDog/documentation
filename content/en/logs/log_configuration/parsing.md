@@ -748,3 +748,4 @@ If your logs contain ASCII control characters, they are serialized upon ingestio
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [3]: /logs/log_configuration/processors/#log-date-remapper
 [4]: /logs/log_configuration/parsing/?tab=filters&tabs=filters#matcher-and-filter
+

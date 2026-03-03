@@ -8,3 +8,4 @@ announcement_banner:
     external_link: 'https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025'
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
 site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
+

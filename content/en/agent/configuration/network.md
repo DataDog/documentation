@@ -334,3 +334,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [30]: /logs/
 [31]: /data_security/logs/#hipaa-enabled-customers
 [32]: /logs/log_collection/#logging-endpoints
+
