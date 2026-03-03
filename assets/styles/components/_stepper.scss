@@ -3,7 +3,7 @@ $stepper-gutter: 48px;
 $stepper-line-width: 1.5px;
 $stepper-line-left: ($stepper-circle-size * 0.5) - ($stepper-line-width * 0.5);
 $stepper-title-pad-top: 16px;
-$stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
+$stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0.5);
 
 .stepper {
     margin-bottom: 24px;
@@ -35,7 +35,7 @@ $stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
         content: counter(stepper-step);
         position: absolute;
         left: 0;
-        top: $stepper-title-pad-top;
+        top: $stepper-title-pad-top + 2px;
         z-index: 1;
         display: flex;
         align-items: center;
@@ -49,6 +49,7 @@ $stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
         font-weight: 700;
         line-height: 1;
         font-variant-numeric: lining-nums;
+        padding-bottom: 1px;
         transition: background-color 0.15s;
         box-shadow: 0 0 0 5px $white;
     }
@@ -104,7 +105,7 @@ $stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
     // Let hidden="until-found" use content-visibility instead of display:none,
     // so browser find-in-page can still search collapsed step content.
     // The !important is needed to override Bootstrap's [hidden] { display: none !important; }.
-    &[hidden="until-found"] {
+    &[hidden='until-found'] {
         display: block !important;
         content-visibility: hidden;
     }
