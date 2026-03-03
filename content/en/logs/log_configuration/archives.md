@@ -239,7 +239,7 @@ To accelerate searches and investigations within your archives (via [Archive Sea
 * **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
 
 <div class="alert alert-info">
-<b>Preview available</b>: You can now index specific attributes (e.g., <code>trace_id</code>) in your archives to accelerate searches via Archive Search. <a href="[https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/](https://www.datadoghq.com/product-preview/flex-frozen-archive-search/)">Register for the Preview</a>.
+<b><a href="[[https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old](https://www.datadoghq.com/product-preview/flex-frozen-archive-search)/](https://www.datadoghq.com/product-preview/flex-frozen-archive-search/)">Register for the Preview</a>.
 </div>
 
 {{< site-region region="us3" >}}
