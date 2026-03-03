@@ -1,6 +1,5 @@
 ---
 title: AWS Integration Troubleshooting
-
 description: "Troubleshooting steps for the Datadog AWS Integration"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -18,12 +17,16 @@ Use this guide to troubleshoot issues related to the Datadog [AWS Integration][1
 
 The `sts:Assumerole` permission error indicates an issue with the trust policy associated with the `DatadogAWSIntegrationRole`. See the [Error: Datadog is not authorized to perform sts:AssumeRole][2] documentation on how to resolve this issue.
 
-**Note**: This error may persist in the Datadog UI for a few hours while the changes propagate.
+{% alert level="info" %}
+**Note:** After changing your IAM trust policy, role name, or external ID, this error can persist in the Datadog UI while AWS IAM changes propagate. Wait at least **15–30 minutes** before re-validating. For AWS Organizations changes (including SCP updates), propagation can take **30–60 minutes**.
+{% /alert %}
 
 ### Resolve all AWS permissions issues
 
 The **Resolve all AWS permissions issues** button in the AWS Integration page allows you to use a CloudFormation QuickStart stack to update your Datadog integration IAM role and resolve missing permissions issues. 
 Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a CloudFormation stack that calls Datadog's public API [endpoint][13] and fetches the latest IAM permissions needed for the integration, creates new IAM policies containing those permissions, and attaches these to the integration role. It also attaches the `SecurityAudit` Managed AWS policy if it is not present.
+
+This can reduce permission warning noise, but depending on the features you enabled, some warnings may still be expected.
 
 The policies created are named with a `datadog-aws-integration-iam-permissions-` prefix, followed by a unique hash to avoid colliding with any existing policies you have configured. You can view the CloudFormation template in Datadog's public [cloudformation-template repository][14].
 
@@ -34,6 +37,33 @@ Clicking <strong>Resolve All AWS Permissions Issues</strong>:<br>
   - Does not impact any policies that you attach to the Datadog integration IAM role<br>
   - If clicked multiple times, any previous policies created with that prefix are deleted before new policies are created
 </div>
+
+### Permission warnings persist after updating IAM
+
+If you updated the AWS IAM policy or trust relationship for your Datadog integration role, you may still see missing permission warnings in the Datadog UI even when the configuration is correct.
+
+#### Why this happens
+
+AWS IAM changes (policy updates, trust policy updates, external ID changes) can take time to propagate. During this window, Datadog’s permission checks may temporarily report missing permissions or authentication errors.
+
+#### What to do
+
+1. **Wait before re-checking the integration**:
+   - **Policy edits (adding or removing permissions)**: wait **10–15 minutes**
+   - **Trust policy or external ID changes**: wait **15–30 minutes**
+   - **AWS Organizations changes (including SCP updates)**: wait **30–60 minutes**
+2. Refresh the AWS integration page and re-check the warnings.
+
+#### If warnings persist after waiting
+
+Verify the following:
+- The **role name and role ARN** in Datadog matches the role you updated in AWS.
+- The role’s **trust relationship** allows Datadog to assume the role (and includes the correct external ID condition, if used).
+- If you use AWS Organizations, confirm that **Service Control Policies (SCPs)** are not explicitly denying required actions. SCP denies override IAM allows.
+
+{% alert level="info" %}
+If metrics are flowing and only warnings remain, see [Integration shows warnings but data is flowing](#integration-shows-warnings-but-data-is-flowing) below. Some warnings are expected depending on which AWS integration features you enabled.
+{% /alert %}
 
 ## Data discrepancies
 
@@ -93,6 +123,38 @@ As this can be counter intuitive, the metrics **aws.elb.healthy_host_count_dedup
 ### Duplicated hosts when installing the Agent
 
 When installing the Agent on an AWS host, you might see duplicated hosts on the Datadog infrastructure page for a few hours if you manually set the hostname in the Agent's configuration. The duplicate hosts disappear a few hours later, and does not affect your billing.
+
+### Integration shows warnings but data is flowing
+
+It is common for the AWS integration to be **partially successful**. For example, CloudWatch metrics may be flowing while the integration tile still shows permission warnings.
+
+This often indicates **scope**, not failure. For example:
+- You intentionally configured a **metrics-only** integration (no logs).
+- You enabled only a subset of **AWS regions**.
+- You are using a **least-privilege** IAM policy and intentionally omitted permissions for features you are not using.
+- Your AWS account does not use certain services, but the integration UI still lists related optional permissions.
+
+#### How to interpret warnings
+
+Use this general guideline:
+
+- **Blocking errors**: prevent Datadog from assuming the role or collecting *any* data.  
+  Examples: `sts:AssumeRole` failures, incorrect role name or ARN, invalid trust relationship, incorrect external ID.
+- **Non-blocking warnings**: affect only specific features and do not necessarily prevent metric collection.  
+  Examples: missing log-related permissions when log collection is not enabled, missing tag-related permissions when tag collection is not enabled.
+
+#### What to do
+
+1. Confirm which AWS integration features you enabled (metrics, logs, tag collection, extended metrics, CSPM).
+2. Treat warnings as actionable **only** if they affect a feature you enabled or intend to use.
+3. Validate data flow directly:
+   - For metrics: check a known CloudWatch metric in Datadog (for example, an ELB, RDS, or Lambda metric you expect).
+   - For tags: confirm tags appear on a recently-updated resource (tag collection can lag behind metrics).
+   - For logs: confirm the log pipeline (forwarder, bucket, subscription) is configured and receiving events.
+
+{% alert level="info" %}
+If you recently changed IAM, region settings, or enabled new features, allow time for propagation and refresh. See [Permission warnings persist after updating IAM](#permission-warnings-persist-after-updating-iam).
+{% /alert %}
 
 ## Datadog Agent
 
