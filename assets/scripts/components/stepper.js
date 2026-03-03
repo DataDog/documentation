@@ -90,9 +90,9 @@ function initStepper(stepper) {
             steps.forEach((step) => {
                 step.classList.remove('stepper__step--active');
                 step.classList.remove('stepper__step--completed');
-                // In show-all mode, CSS shows content; hide nav
+                // In show-all mode, reveal all content; hide nav
                 const content = step.querySelector('.stepper__step-content');
-                if (content) content.style.display = '';
+                if (content) content.removeAttribute('hidden');
                 const nav = step.querySelector('.stepper__nav');
                 if (nav) nav.style.display = 'none';
             });
@@ -109,7 +109,13 @@ function initStepper(stepper) {
                 step.classList.toggle('stepper__step--active', isActive);
                 step.classList.toggle('stepper__step--completed', finished || i < currentIndex);
                 const content = step.querySelector('.stepper__step-content');
-                if (content) content.style.display = isActive ? '' : 'none';
+                if (content) {
+                    if (isActive) {
+                        content.removeAttribute('hidden');
+                    } else {
+                        content.setAttribute('hidden', 'until-found');
+                    }
+                }
                 const nav = step.querySelector('.stepper__nav');
                 if (nav) nav.style.display = (isActive && !finished) ? '' : 'none';
             });
@@ -181,6 +187,23 @@ function initStepper(stepper) {
         persist();
         render();
     }
+
+    // Auto-expand step when browser find-in-page matches hidden content
+    steps.forEach((step, i) => {
+        const content = step.querySelector('.stepper__step-content');
+        if (content) {
+            content.addEventListener('beforematch', () => {
+                if (showAll) return;
+                if (finished) {
+                    currentIndex = i;
+                    persist();
+                    render();
+                } else {
+                    goToStep(i);
+                }
+            });
+        }
+    });
 
     // Bind title clicks to toggle steps (accordion behavior)
     steps.forEach((step, i) => {

@@ -132,10 +132,60 @@ Step 1 contents go here, including tabs, sublists, etc.
 Step 2 contents go here, including tabs, sublists, etc.
 {% /step %}
 
-{% step title="Step 3 title" %}
-Step 3 contents go here, including tabs, sublists, etc.
-{% /step %}
-
 {% /stepper %}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## Lots of steps
+
+{% stepper %}
+
+{% step title="Step 1 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 2 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 3 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 4 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 5 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 6 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 7 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 8 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 9 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 10 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 11 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 12 title" %}
+Contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% /stepper %}
