@@ -50,7 +50,7 @@ Row count monitors alert when a table's row count has flatlined — that is, whe
 
 ### Percentage (nullness, uniqueness)
 
-Percentage metrics are bounded between 0 and 100. When a metric has historically remained at an extreme (always 0% or always 100%), the model expands bounds to avoid constant alerts. If the metric typically stays away from those extremes, a sudden jump to 0% or 100% is more likely to trigger an alert.
+Percentage metrics are bounded between 0 and 100. If the metric stays away from those extremes, a jump to 0% or 100% will trigger an alert.
 
 ### Custom SQL
 
