@@ -331,6 +331,12 @@ options:
 - label: React Native
   id: react_native
 
+- label: Expo
+  id: expo
+
+- label: CodePush
+  id: codepush
+
 - label: RedHat
   id: redhat
 
@@ -492,3 +498,6 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: Unity
+  id: unity
