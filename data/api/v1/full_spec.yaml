@@ -18878,6 +18878,10 @@ components:
           description: Content of the file.
           maxLength: 3145728
           type: string
+        encoding:
+          description: Encoding of the file content. The only supported value is `base64`,
+            indicating the `content` field contains base64-encoded data.
+          type: string
         name:
           description: Name of the file.
           maxLength: 1500
