@@ -460,6 +460,42 @@ options:
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
 
+- label: Mobile
+  id: mobile
+
+- label: Multistep API
+  id: multistep
+
+- label: Test info
+  id: test_info
+
+- label: Test results
+  id: test_results
+
+- label: Step details
+  id: step_details
+
+- label: Local & Global
+  id: local_and_global
+
+- label: DNS
+  id: dns
+
+- label: SSL
+  id: ssl
+
+- label: WebSocket
+  id: websocket
+
+- label: UDP
+  id: udp
+
+- label: ICMP
+  id: icmp
+
+- label: gRPC
+  id: grpc
+
 - label: OpenTelemetry
   id: otel_api
 

@@ -30465,7 +30465,7 @@ components:
             8 indicates Jira.'
           example: 1
           format: int32
-          maximum: 9
+          maximum: 100
           type: integer
         metadata:
           $ref: '#/components/schemas/IncidentIntegrationMetadataMetadata'
@@ -110025,10 +110025,8 @@ tags:
 
     - [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)
 
-
     You can use the Datadog API to create, manage, and organize tests and test suites
     programmatically.
-
 
     For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'
   name: Synthetics

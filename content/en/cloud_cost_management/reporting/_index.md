@@ -53,6 +53,7 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
    - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
    - **Azure Spend by Service Name**: Break down costs by Azure services like Virtual Machines and Azure Monitor.
    - **GCP Spend by Service Name**: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
+   - **Datadog Spend by Product**: Break down costs by Datadog products like Infrastructure Hosts, Custom Metrics, and Indexed Logs.
    - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, Oracle Cloud, and more.
 
 ## Customizing your report
