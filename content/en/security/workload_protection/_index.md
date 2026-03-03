@@ -8,6 +8,8 @@ aliases:
   - /security/threats/security_profiles
   - /security/threats/runtime_anomaly_detection
   - /security/threats/
+  - /security/threats/agent
+  - /security/workload_protection/agent
 further_reading:
   - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
     tag: "Blog"
