@@ -29,6 +29,8 @@ Automations allow you to trigger actions based on events in On-Call. There are t
 
 ## Handover automations
 
+{{< img src="service_management/oncall/handover-automation.png" alt="The Handover Automation section on an On-Call team page" style="width:80%;" >}}
+
 Handover automations run automatically when on-call duty passes from one person to another. They handle tasks that teams typically manage with custom scripts—such as notifying other systems about who's on-call, updating internal chat channels, or triggering downstream workflows.
 
 By using built-in automations instead of maintaining cron jobs or custom scripts, you can eliminate manual steps and help make sure the right actions always run when a shift changes.
@@ -49,14 +51,11 @@ Handover automations are configured at the team level. Each automation is scoped
 2. Scroll to the **Handover Automation** section.
 3. Click **Add an Automation** (or **Add** if automations already exist).
 4. In **Step 1**, select an action type from the left column. Actions are organized by integration: Datadog, Slack, and Microsoft Teams. A live preview appears in the right column.
-   {{< img src="service_management/oncall/handover-automation-step1.png" alt="Step 1 of the handover automation modal showing available action types" style="width:80%;" >}}
 5. Click **Next**.
 6. In **Step 2**, complete the configuration form. All actions require you to select one or more **schedules** scoped to the team. Fill in any additional integration-specific fields (see [Available actions](#available-actions) below).
-   {{< img src="service_management/oncall/handover-automation-step2.png" alt="Step 2 of the handover automation modal showing configuration fields" style="width:80%;" >}}
 7. Click **Add Automation** to save.
 
 ### Edit or delete an automation
-
 - To edit: click the pencil icon on an existing automation, modify the fields, and click **Update Automation**.
 - To delete: click the pencil icon, then click **Delete** in the modal footer.
 
@@ -68,14 +67,15 @@ Handover automations support eight actions across three integrations.
 
 ### Datadog
 
-#### Run workflow {{< preview-inline >}}
+#### Run workflow
 
-Triggers a [Datadog Workflow Automation][1] when a shift change occurs. The workflow receives handover context including schedule information, previous and incoming responders, and a timestamp.
+Triggers a [Datadog Workflow Automation][1] when a shift change occurs. The workflow receives handover context including schedule information, previous and incoming responders, timestamp, and more.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Workflow | Yes |
+Connect it to 1000+ integrations to share context and automate the boring stuff. For instance:
+
+- **Federate permissions:** Only assign the current On-Call responder an IAM role that permits up or downscaling)
+- **On-call Compensation:** Send shift data straight to your HR or your payroll tool.
+- **Automated Handovers:** 
 
 ### Slack
 
@@ -85,46 +85,27 @@ Posts a handover summary to a Slack channel showing who is handing off to whom f
 
 {{< img src="service_management/oncall/handover-automation-slack-message.png" alt="Example Slack handover message showing shift change details" style="width:80%;" >}}
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Workspace | Yes |
-| Channel | Yes |
-| Include AI shift summary | No |
-
 **Note**: This requires the Datadog Slack app—make sure it's [added to your workspace][2].
 
-#### Update channel topic {{< preview-inline >}}
+#### Update channel topic 
 
 Updates a Slack channel topic when a shift changes. Use a customizable template with numbered variables (`{{1}}`, `{{2}}`, and so on) to dynamically reference responders in schedule order.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Workspace | Yes |
-| Channel | Yes |
-| Template | Yes |
+{{< img src="service_management/oncall/handover-automation-slack-channel-topic.png" alt="Configuration form for the Slack Update channel topic automation" style="width:80%;" >}}
 
 Channel topics have a maximum character length. The UI validates this before saving.
 
-#### Send a direct message {{< preview-inline >}}
+#### Send a direct message
 
 Sends a direct message to the incoming on-call person when their shift begins.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Workspace | Yes |
+{{< img src="service_management/oncall/handover-automation-slack-direct-message.png" alt="Configuration form for the Slack Send a direct message automation" style="width:80%;" >}}
 
-#### Update user group {{< preview-inline >}}
+#### Update user group
 
 Updates the members of a Slack user group to match the current on-call responders for the selected schedules.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Workspace | Yes |
-| User Group | Yes |
+{{< img src="service_management/oncall/handover-automation-slack-update-group.png" alt="Configuration form for the Slack Update user group automation" style="width:80%;" >}}
 
 **Note**: This action requires `usergroups:read` and `usergroups:write` permissions on the Datadog Slack app. If these permissions are missing, the UI displays a warning with a link to enable them.
 
@@ -134,37 +115,21 @@ Updates the members of a Slack user group to match the current on-call responder
 
 Posts a handover summary to a Microsoft Teams channel showing who is handing off to whom for each selected schedule. Optionally include an AI-generated shift summary.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Tenant | Yes |
-| Team | Yes |
-| Channel | Yes |
-| Include AI shift summary | No |
+{{< img src="service_management/oncall/handover-automation-ms-teams-message.png" alt="Configuration form for the Microsoft Teams Send message automation" style="width:80%;" >}}
 
 **Note**: This requires the Datadog Teams app—make sure it's [added to your workspace][3].
 
-#### Update channel description {{< preview-inline >}}
+#### Update channel description
 
 Updates a Microsoft Teams channel description when a shift changes. Use a customizable template with numbered variables (`{{1}}`, `{{2}}`, and so on) to dynamically reference responders in schedule order.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Tenant | Yes |
-| Team | Yes |
-| Channel | Yes |
-| Template | Yes |
+{{< img src="service_management/oncall/handover-automation-ms-teams-channel-topic.png" alt="Configuration form for the Microsoft Teams Update channel description automation" style="width:80%;" >}}
 
-#### Send a direct message {{< preview-inline >}}
+#### Send a direct message
 
 Sends a direct message to the incoming on-call person when their shift begins.
 
-| Field | Required |
-|-------|----------|
-| Schedules | Yes |
-| Tenant | Yes |
-
+{{< img src="service_management/oncall/handover-automation-ms-teams-direct-message.png" alt="Configuration form for the Microsoft Teams Send a direct message automation" style="width:80%;" >}}
 ---
 
 ## Template variables
