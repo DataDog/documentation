@@ -283,6 +283,37 @@ After creating your SLO, you can visualize the data through Dashboards and widge
 
 For more information about SLO Widgets, see the [SLO widget][21] and [SLO List widget][22] pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
 
+## SLO status corrections
+
+Status corrections allow you to exclude specific time periods from SLO status and error budget calculations. This way, you can:
+- Prevent expected downtime, such as scheduled maintenance, from depleting your error budget
+- Ignore non-business hours, where you're not expected to conform to your SLOs
+- Ensure that temporary issues caused by deployments do not negatively impact your SLOs
+
+When you apply a correction, the time period you specify is dropped from the SLO's calculation.
+- For monitor-based SLOs, the correction time window is not counted.
+- For metric-based SLOs, all good and bad events in the correction window are not counted.
+- For Time Slice SLOs, the correction time window is treated as uptime.
+
+You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
+
+For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
+
+Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that:
+- If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
+- If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
+
+The 90-day limits per SLO are as follows:
+
+| Correction Type   | Limit per SLO |
+| ----------------- | ------------- |
+| One-time          | 100           |
+| Daily recurring   | 2             |
+| Weekly recurring  | 3             |
+| Monthly recurring | 5             |
+
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
+
 #### Access in the UI
 
 To access SLO status corrections in the UI:
