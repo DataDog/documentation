@@ -19,7 +19,7 @@ This document goes through updating the pipeline in the UI. You can also use the
 1. Make changes to the pipeline.
 	- If you are updating the source or destination settings shown in the tiles, or updating and adding processors, make the changes and then click **Deploy Changes**.
 	- To update source or destination environment variables, click **Go to Worker Installation Steps** and see [Update source or destination environment variables](#update-source-or-destination-environment-variables) for instructions.
-1. If you updated secret identifiers or environment variables, restart the Worker.
+1. Restart the worker if you added, deleted, or updated secret identifiers or environment variables - for instance when you make corresponding updates to either a source or destination.
 
 ### Update source or destination environment variables
 
