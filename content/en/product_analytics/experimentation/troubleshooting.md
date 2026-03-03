@@ -71,21 +71,20 @@ Work through the following checks sequentially. Each section builds on the previ
 
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
 
-1. **If a metric value is zero**, hover over the metric name and click the &#8942; menu item. Select **Edit Metric** to open the metric definition page.
+1. If a metric value is zero, hover over the metric name and click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
 
 1. Verify that the metric event name is correct (for example, check for typos). Check the event volume chart on the right side of the page to confirm the event is firing.
 
    {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="The Edit Metric page showing the metric definition on the left and a bar chart of metric event volume over the past week on the right." style="width:90%;" >}}
 
    <div class="alert alert-info">A metric event must meet two criteria for Datadog to include it in experiment results:
-   <ol>
+   <ul>
    <li>The event must come from a user with at least one experiment exposure event.</li>
    <li>The event must occur after the user's first experiment exposure.</li>
-   </ol>
-   Datadog excludes events that do not meet both criteria from experiment results.
+   </ul>
    </div>
 
-   <div class="alert alert-warning"><strong>If the scorecard shows non-zero user assignments but all metric values are zero</strong>, the issue is not with traffic; it is with how Datadog matches metric events to exposures. <strong>Continue to the next section</strong> to verify subject key matching.</div>
+   <div class="alert alert-warning">If the scorecard shows non-zero user assignments but all metric values are zero, the issue is not with traffic; it is with how Datadog matches metric events to exposures. Continue to the next section to verify subject key matching.</div>
 
 {{% /collapse-content %}}
 
@@ -97,9 +96,9 @@ Datadog matches metric events to experiment exposures using a subject key. If th
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
 
-1. Compare the value in the **Subject** column to the subject type attribute (typically `@usr.id`). The **Subject** column shows the value your SDK passes as [`targetingKey`][7].
+1. The **Subject** column shows the value your SDK passes as [`targetingKey`][7]. Compare this value to the attribute defined for your subject type on the [Subject Types page][9] (typically `@usr.id`). If these identifiers do not match, the experiment cannot associate metric events with exposures.
 
-1. If the values do not match, update either the [`targetingKey`][7] in your SDK or the subject type in Datadog to align them. You can view and configure subject types on the [subject types page][9]. By default, the subject type is `@usr.id`.
+1. To resolve a mismatch, update either the [`targetingKey`][7] in your SDK or the subject type attribute on the [Subject Types page][9] so that both use the same identifier.
 
 **If the subject values match but experiment results are still missing**, continue to the next section to inspect individual sessions.
 
@@ -109,7 +108,7 @@ Datadog matches metric events to experiment exposures using a subject key. If th
 
 If subject values match and users are assigned to the experiment, inspect individual sessions to identify why specific users are not generating metric events.
 
-1. On the [event stream page][4], filter sessions from the experiment by adding the following filter:
+1. On the [Activity Stream page][4], filter sessions from the experiment by adding the following filter:
 
    ```
    @feature_flags.<flag-key>:<variant-value>
@@ -117,7 +116,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
    {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics event stream filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, and action count." style="width:90%;" >}}
 
-1. Select a session from a user assigned to the experiment. In the session timeline, check for two things:
+1. Select a session from a user assigned to the experiment. In the session timeline, check for the following:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
    - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results.
 
@@ -133,15 +132,16 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 
 To check if outlier handling is the cause:
 
-1. On the [Experiments][2] page, hover over the metric name to click the &#8942; menu item. Select **Edit Metric** to open the metric definition page.
-1. In the metric definition, toggle **Outlier handling** off.
+1. On the [Experiments][2] page, select your experiment
+1. Hover over the metric name, then click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
+1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
 1. Save the metric. To trigger an immediate recompute, click the &#8942; menu next to **Last Updated** in the **Metrics** section and click **run an update now**. Otherwise, wait for the next scheduled update.
 
-{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The Experiments page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
-If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the metric edit page.
+If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the Edit Metric page.
 
-{{< img src="/product_analytics/experiment/troubleshooting_outlier_handling.png" alt="The Edit Metric page with the Outlier handling toggle highlighted." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/troubleshooting_outlier_handling.png" alt="The Edit Metric page with the Outlier handling toggles highlighted." style="width:90%;" >}}
 
 {{% /collapse-content %}}
 
