@@ -58,6 +58,11 @@ function initStepper(stepper) {
 
     if (!steps.length) return;
 
+    // Mark first/last steps for CSS (can't rely on :first-child/:last-child
+    // because .stepper__finished is a sibling inside .stepper__steps)
+    steps[0].classList.add('stepper__step--first');
+    steps[steps.length - 1].classList.add('stepper__step--last');
+
     let currentIndex = 0;
     let showAll = false;
     let finished = false;
