@@ -10,6 +10,10 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
+{{< callout header="false" btn_hidden="true">}}
+  Support for deploying the DDOT Collector on ECS Fargate is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector alongside the Datadog Agent on Amazon ECS Fargate. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
