@@ -138,11 +138,11 @@ To improve query performance and reduce scan volume:
 
 ### Default limit for Rehydration of Results
 
-Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Archive Search * across teams. Click **Settings** to configure:
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of **Archive Search** across teams. Click **Settings** to configure:
 
-- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search in **Search & Rehydration ** mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
-- **Rehydration retention periods**: Choose which retention periods are available when creating Archive Search. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+- **Rehydration retention periods**: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ## Cloud-specific permissions
 
