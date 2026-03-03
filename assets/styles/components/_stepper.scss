@@ -75,6 +75,12 @@ $stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
     background-color: $brand-primary;
 }
 
+// Completed step: purple circle with checkmark
+.stepper__step--completed::after {
+    content: '\2713';
+    background-color: $brand-primary;
+}
+
 .stepper__step-title {
     display: block;
     margin: 0;

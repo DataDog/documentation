@@ -89,6 +89,7 @@ function initStepper(stepper) {
             stepper.classList.add('stepper--show-all');
             steps.forEach((step) => {
                 step.classList.remove('stepper__step--active');
+                step.classList.remove('stepper__step--completed');
                 // In show-all mode, hide nav on every step (CSS shows content)
                 const nav = step.querySelector('.stepper__nav');
                 if (nav) nav.style.display = 'none';
@@ -101,7 +102,8 @@ function initStepper(stepper) {
         } else {
             stepper.classList.remove('stepper--show-all');
             steps.forEach((step, i) => {
-                step.classList.toggle('stepper__step--active', i === currentIndex);
+                step.classList.toggle('stepper__step--active', !finished && i === currentIndex);
+                step.classList.toggle('stepper__step--completed', finished || i < currentIndex);
                 const nav = step.querySelector('.stepper__nav');
                 if (nav) nav.style.display = '';
             });
