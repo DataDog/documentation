@@ -1,5 +1,5 @@
 ---
-title: Investigate Agent Events
+title: Agent Events
 disable_toc: false
 aliases:
   - /security/threats/investigate_agent_events
