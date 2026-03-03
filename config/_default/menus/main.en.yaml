@@ -4820,6 +4820,21 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_troubleshooting_mongodb
       weight: 703
+    - name: Setting Up ClickHouse
+      url: database_monitoring/setup_clickhouse/
+      parent: dbm
+      identifier: dbm_setup_clickhouse
+      weight: 8
+    - name: Self-hosted
+      url: database_monitoring/setup_clickhouse/selfhosted
+      parent: dbm_setup_clickhouse
+      identifier: dbm_setup_clickhouse_selfhosted
+      weight: 901
+    - name: ClickHouse Cloud
+      url: database_monitoring/setup_clickhouse/cloud
+      parent: dbm_setup_clickhouse
+      identifier: dbm_setup_clickhouse_cloud
+      weight: 902
     - name: Setting Up Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm
