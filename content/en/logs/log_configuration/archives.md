@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2] or [Archive Search][2].
+Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2] or [Archive Search][16].
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
