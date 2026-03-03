@@ -7461,11 +7461,6 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
-    - name: Create Jira Issues
-      url: security/cloud_security_management/review_remediate/jira
-      parent: csm_review_remediate
-      identifier: csm_jira
-      weight: 103
     - name: Severity Scoring
       url: security/cloud_security_management/severity_scoring/
       parent: csm
