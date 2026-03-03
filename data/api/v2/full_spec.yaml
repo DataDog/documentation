@@ -93630,21 +93630,18 @@ paths:
       security:
       - apiKeyAuth: []
       servers:
-      - url: https://{subdomain}.{site}
+      - url: https://{site}
         variables:
           site:
-            default: datadoghq.com
-            description: The regional site for customers.
+            default: browser-intake-datadoghq.com
+            description: The intake domain for the regional site.
             enum:
-            - datadoghq.com
-            - us3.datadoghq.com
-            - us5.datadoghq.com
-            - ap1.datadoghq.com
-            - ap2.datadoghq.com
-            - datadoghq.eu
-          subdomain:
-            default: browser-intake
-            description: The subdomain where the API is deployed.
+            - browser-intake-datadoghq.com
+            - browser-intake-us3-datadoghq.com
+            - browser-intake-us5-datadoghq.com
+            - browser-intake-ap1-datadoghq.com
+            - browser-intake-ap2-datadoghq.com
+            - browser-intake-datadoghq.eu
       - url: '{protocol}://{name}'
         variables:
           name:
@@ -93659,7 +93656,7 @@ paths:
             default: datadoghq.com
             description: Any Datadog deployment.
           subdomain:
-            default: browser-intake
+            default: api
             description: The subdomain where the API is deployed.
       summary: Send server-side events
       tags:
