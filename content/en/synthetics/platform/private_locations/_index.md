@@ -545,7 +545,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 1. You can apply the following configuration options:
 
-   {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker wizard, MSI installer. Firewall and log settings are displayed." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
    Apply firewall rules needed by this program to Windows Firewall
    : Allow the installer to apply firewall rules on install and remove them on uninstall.

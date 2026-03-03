@@ -3069,10 +3069,7 @@ components:
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionEventsDataSource'
         group_by:
-          description: Group by options.
-          items:
-            $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBy'
-          type: array
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupByConfig'
         indexes:
           description: An array of index names to query in the stream. Omit or use
             `[]` to query all indexes at once.
@@ -3144,6 +3141,40 @@ components:
       required:
       - facet
       type: object
+    FormulaAndFunctionEventQueryGroupByConfig:
+      description: Group by configuration for a formula and functions events query.
+        Accepts either a list of facet objects or a flat object that specifies a list
+        of facet fields.
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupByList'
+      - $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupByFields'
+    FormulaAndFunctionEventQueryGroupByFields:
+      description: Flat group by configuration using multiple event facet fields.
+      properties:
+        fields:
+          description: List of event facets to group by.
+          example:
+          - hostname
+          - service
+          items:
+            description: Event facet.
+            type: string
+          type: array
+        limit:
+          description: Number of groups to return.
+          example: 10
+          format: int64
+          type: integer
+        sort:
+          $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBySort'
+      required:
+      - fields
+      type: object
+    FormulaAndFunctionEventQueryGroupByList:
+      description: List of objects used to group by.
+      items:
+        $ref: '#/components/schemas/FormulaAndFunctionEventQueryGroupBy'
+      type: array
     FormulaAndFunctionEventQueryGroupBySort:
       description: Options for sorting group by results.
       properties:
@@ -18846,6 +18877,10 @@ components:
         content:
           description: Content of the file.
           maxLength: 3145728
+          type: string
+        encoding:
+          description: Encoding of the file content. The only supported value is `base64`,
+            indicating the `content` field contains base64-encoded data.
           type: string
         name:
           description: Name of the file.
