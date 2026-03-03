@@ -22,7 +22,7 @@ There are additional [attributes that are specific to a given event type](#event
 
 The following diagram illustrates the RUM event hierarchy:
 
-{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" /%}
+{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
 ## Views instrumentation versus app lifecycle
 
