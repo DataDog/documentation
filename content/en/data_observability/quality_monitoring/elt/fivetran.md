@@ -22,16 +22,7 @@ Lineage is derived for all [supported data warehouse destinations][4].
 
 Datadog recommends using a **System Key**. Unlike Scoped Keys, which inherit permissions from a user account, System Keys have permissions set at the key level and continue working if the associated user leaves or changes roles.
 
-To create a System Key:
-
-1. Navigate to **Settings > API Config** in your Fivetran account.
-2. Create a System Key with the following permissions:
-   - `ACCOUNT`: `READ`
-   - `DESTINATION`: `READ`
-   - `CONNECTOR`: `READ`
-3. Copy the **API key** and **API secret** somewhere safe.
-
-For details, see the [Fivetran API authentication documentation][1].
+Follow the [Fivetran System Keys documentation][1] to generate an API key and secret.
 
 ### Add the Fivetran integration
 
@@ -56,7 +47,7 @@ After syncing, you can explore your Fivetran-sourced tables and their upstream d
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://fivetran.com/docs/rest-api/getting-started
+[1]: https://fivetran.com/docs/rest-api/getting-started/system-keys
 [2]: https://app.datadoghq.com/integrations/fivetran
 [3]: https://app.datadoghq.com/datasets/catalog
 [4]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses
