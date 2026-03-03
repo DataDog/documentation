@@ -5209,6 +5209,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 505
+    - name: Prompt Optimization
+      url: llm_observability/experiments/prompt_optimization
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_prompt_optimization
+      weight: 506
     - name: MCP Server
       url: llm_observability/mcp_server
       parent: llm_obs
