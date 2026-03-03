@@ -50,13 +50,9 @@ Percentage metrics are bounded between 0 and 100. If the metric stays away from 
 
 For custom SQL monitors with the **Default** model type, the model infers the expected range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound to 0.
 
-## Metric properties
+## Seasonality
 
-The model analyzes up to 400 days of history to detect properties that inform how predictions are generated.
-
-### Seasonality
-
-The model detects repeating patterns and adjusts expected bounds accordingly. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
+The model uses up to 400 days of history to detect seasonal patterns, account for trends, and incorporate feedback from past annotations. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
 
 The following seasonal patterns are detected:
 
@@ -68,7 +64,7 @@ The following seasonal patterns are detected:
 
 Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal ("green") history before it can detect a given pattern.
 
-### Trends
+## Trends
 
 The model accounts for whether a metric is growing or shrinking over time. For a metric that consistently adds rows each week, the model adjusts expectations based on the direction and rate of change rather than treating growth as anomalous.
 
