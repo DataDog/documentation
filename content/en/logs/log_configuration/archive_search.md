@@ -66,15 +66,6 @@ Archive Search results are visible to all users in your organization who have ac
 
 For more information on access controls and log security, see [How to Set Up RBAC for Logs][6].
 
-## Accelerate Searches with Indexed Attributes (Preview)
-
-To significantly reduce search time and scan costs, you can configure **Search Attributes** on your archives. When an attribute like `trace_id` is indexed:
-* Datadog skips irrelevant data blocks in your storage bucket.
-* Searches for high-cardinality values become nearly instantaneous.
-* You reduce the volume of data scanned, lowering cloud egress costs.
-
-To set this up, navigate to the **Advanced** tab of your [Archive configuration][7].
-
 ## Launching a search
 
 1. Go to [**Logs > Archive Search > New Search**][4].
@@ -128,13 +119,22 @@ From the [**Archive Search list view**][5], you can:
 - **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
-## Search performance and scan volume
+## Search Performance and Optimization
 
-Archive Search scans archived log files within the selected time range. **Scan volume** is the total size of those files read during the query. Large scan volumes can increase search time and cost.
+Archive Search scans archived log files within your selected time range. **Scan volume** refers to the total size of the files read during a query. Large scan volumes can increase both search time and cloud egress costs.
 
-To improve query performance and reduce scan volume:
-- Narrow the time range.
-- Administrators with **Logs Write Archives** permission can set maximum scan size per Archive.
+To optimize performance and reduce costs:
+* **Narrow the time range:** Limit your search to the smallest window possible.
+* **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
+* **Use Indexed Attributes (Preview):** This is the most effective way to accelerate searches for high-cardinality data.
+
+### Accelerate Searches with Indexed Attributes
+
+You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, by indexing `trace_id` or `user_id`:
+* Searches for specific values become nearly instantaneous.
+* You significantly reduce the volume of data scanned, lowering your cloud provider's egress fees.
+
+To set this up, refer to the [Advanced Settings (Search Attributes)][1] section of the Log Archives documentation.
 
 ### Default limit for Rehydration of Results
 
