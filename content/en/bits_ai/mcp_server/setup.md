@@ -118,30 +118,73 @@ Claude Desktop has limited support for remote authentication. Use **local binary
 
 1. Install the Datadog MCP Server binary:
 
-   - macOS and Linux: Install the binary to `~/.local/bin/datadog_mcp_cli`:
+    - macOS and Linux: Install the binary to `~/.local/bin/datadog_mcp_cli`:
 
-      ```bash
-      curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-      ```
+       ```bash
+       curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
+       ```
 
-   - Windows: Download the [Windows version][1].
+    - Windows: Download the [Windows version][1].
 
 2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow and choose a [Datadog site][2].
 
-3. Configure Claude Desktop to use the Datadog MCP Server. Add to your Claude Desktop configuration (location varies by OS) with the `stdio` transport pointing to `datadog_mcp_cli`:
-   ```json
-   {
-     "mcpServers": {
-       "datadog": {
-         "type": "stdio",
-         "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-         "args": [],
-         "env": {}
+3. Open your Claude Desktop configuration file:
+
+    | OS | Path |
+    |------|------|
+    | **macOS** | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+    | **Linux** | `~/.config/Claude/claude_desktop_config.json` |
+    | **Windows** | `%APPDATA%\Claude\claude_desktop_config.json` |
+
+    If the file doesn't exist, create it.
+
+4. Add the `mcpServers` block below. If the file already has content (for example, a `"preferences"` key), merge the `mcpServers` key into the existing JSON rather than replacing the file.
+
+    - macOS (replace `<USERNAME>` with your OS username):
+
+       ```json
+       {
+         "mcpServers": {
+           "datadog": {
+             "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
+             "args": [],
+             "env": {}
+           }
+         }
        }
-     }
-   }
-   ```
-   On Windows, replace the `command` path with the location of the downloaded `.exe` file (for example, `C:\Users\<USERNAME>\bin\datadog_mcp_cli.exe`).
+       ```
+
+    - Linux (replace `<USERNAME>` with your OS username):
+
+       ```json
+       {
+         "mcpServers": {
+           "datadog": {
+             "command": "/home/<USERNAME>/.local/bin/datadog_mcp_cli",
+             "args": [],
+             "env": {}
+           }
+         }
+       }
+       ```
+
+    **Tip:** On macOS or Linux, run `which datadog_mcp_cli` to confirm the exact path.
+
+    - Windows (replace `<USERNAME>` with your OS username):
+
+       ```json
+       {
+         "mcpServers": {
+           "datadog": {
+             "command": "C:\\Users\\<USERNAME>\\bin\\datadog_mcp_cli.exe",
+             "args": [],
+             "env": {}
+           }
+         }
+       }
+       ```
+
+5. **Fully quit and reopen Claude Desktop** (not just close the window). The MCP server is only loaded at startup.
 
 [1]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
 [2]: /getting_started/site/
