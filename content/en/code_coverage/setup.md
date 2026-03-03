@@ -90,9 +90,12 @@ Navigate to [Roles settings][4], click `Edit` on the role you need, add the `Cod
 
 ## PR Gates
 
-If you wish to gate on PR coverage, configure PR Gates rules in Datadog.
+If you wish to gate on PR coverage, you can configure PR Gates rules in one of two ways:
 
-Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
+- **Datadog UI**: Navigate to [PR Gates rule creation][5] and configure a rule to gate on total or patch coverage.
+- **YAML configuration file**: Define gates in your [`code-coverage.datadog.yml`][14] file. This allows you to manage gates as code alongside your repository.
+
+Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][14] for YAML gate syntax and examples.
 
 ## Upload code coverage reports
 
@@ -468,7 +471,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [2]: /account_management/rbac/permissions/#custom-roles
 [3]: /account_management/rbac/permissions/#managed-roles
 [4]: https://app.datadoghq.com/organization-settings/roles
-[5]: https://app.datadoghq.com/ci/pr-gates/rule/create
+[5]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [6]: /code_coverage/data_collected/#code-coverage-report-upload
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
@@ -477,3 +480,4 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider
 [13]: https://hub.docker.com/r/datadog/ci
+[14]: /code_coverage/configuration#pr-gates

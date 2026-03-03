@@ -68,5 +68,5 @@ Capabilities:
 [7]: /serverless/azure_app_service/linux_code
 [8]: /serverless/azure_app_service/linux_container
 [9]: /serverless/azure_app_service/windows_code
-[10]: /developers/dogstatsd/
+[10]: /extend/dogstatsd/
 

@@ -110,8 +110,6 @@ import {
     TraceConfiguration
 } from 'expo-datadog';
 
-import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
-
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>', 
     '<ENVIRONMENT_NAME>',
