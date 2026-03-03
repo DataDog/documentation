@@ -80,9 +80,10 @@ infrastructure_mode: basic
 ### None mode
 
 None mode disables all infrastructure monitoring in the Agent.
-No infrastructure metrics will be collected from the host.
+Agent will not collect any infrastructure metrics or run infrastructure integrations in this mode.
+You may still use custom metrics, [custom checks][12] prefixed with `custom_`, and logs-only integrations with Agent in none mode.
 
-None mode is compatible with other Datadog products that do not require infrastructure monitoring such as [Log Management][15] and [Error Tracking][16].
+None mode is compatible with other Datadog products that do not require infrastructure monitoring such as [Log Management][15], [Application Performance Monitoring][16], or [Error Tracking][17].
 
 None mode is available with agent version `7.77.0` or later.
 
@@ -111,4 +112,5 @@ infrastructure_mode: none
 [13]: /integrations/journald/
 [14]: /integrations/event-viewer/
 [15]: /logs/
-[16]: /error_tracking/
+[16]: /tracing/
+[17]: /error_tracking/
