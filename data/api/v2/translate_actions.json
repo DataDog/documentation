@@ -1220,6 +1220,44 @@
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
   },
+  "ListEventEmailAddresses": {
+    "description": "List all API email addresses for your organization.",
+    "summary": "List event email addresses"
+  },
+  "CreateEventEmailAddress": {
+    "description": "Create a new API email address to use in an event email integration rule.",
+    "summary": "Create an event email address",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an event email address."
+  },
+  "ListOnCallEventEmailAddresses": {
+    "description": "List all on-call event email addresses for a given team handle.",
+    "summary": "List on-call event email addresses"
+  },
+  "CreateOnCallEventEmailAddress": {
+    "description": "Create a new on-call event email address associated with a team handle.",
+    "summary": "Create an on-call event email address",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an on-call event email address."
+  },
+  "DeleteOnCallEventEmailAddress": {
+    "description": "Revoke an existing on-call event email address in your organization.",
+    "summary": "Revoke an on-call event email address"
+  },
+  "DeleteEventEmailAddress": {
+    "description": "Revoke an existing API email address in your organization.",
+    "summary": "Revoke an event email address"
+  },
+  "GetEventEmailAddress": {
+    "description": "Get a single API email address for your organization.",
+    "summary": "Get an event email address"
+  },
+  "UpdateEventEmailAddress": {
+    "description": "Update an existing API email address in your organization.",
+    "summary": "Update an event email address",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an event email address."
+  },
   "SearchEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search events",

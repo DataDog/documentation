@@ -23549,6 +23549,299 @@ components:
             the default subdomain.
           type: string
       type: object
+    EventEmailAddressAlertType:
+      description: The alert type of events generated from the email address.
+      enum:
+      - info
+      - warn
+      - error
+      - success
+      example: info
+      type: string
+      x-enum-varnames:
+      - INFO
+      - WARN
+      - ERROR
+      - SUCCESS
+    EventEmailAddressCreateAttributes:
+      description: Attributes for creating an event email address.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventEmailAddressAlertType'
+        description:
+          description: A description of the event email address.
+          example: Email address for production alerts.
+          maxLength: 1024
+          type: string
+        format:
+          $ref: '#/components/schemas/EventEmailAddressFormat'
+        notify_handles:
+          $ref: '#/components/schemas/EventEmailAddressNotifyHandles'
+        tags:
+          $ref: '#/components/schemas/EventEmailAddressTags'
+      required:
+      - format
+      type: object
+    EventEmailAddressCreateData:
+      description: Data for creating an event email address.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventEmailAddressCreateAttributes'
+        type:
+          $ref: '#/components/schemas/EventEmailAddressResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    EventEmailAddressCreateRequest:
+      description: Request body for creating an event email address.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressCreateData'
+      required:
+      - data
+      type: object
+    EventEmailAddressCreatedByRelationship:
+      description: Relationship to the user who created the email address.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressUserData'
+      required:
+      - data
+      type: object
+    EventEmailAddressData:
+      description: A single event email address resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventEmailAddressResponseAttributes'
+        id:
+          description: The UUID of the event email address.
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        relationships:
+          $ref: '#/components/schemas/EventEmailAddressRelationships'
+        type:
+          $ref: '#/components/schemas/EventEmailAddressResourceType'
+      required:
+      - type
+      - id
+      - attributes
+      - relationships
+      type: object
+    EventEmailAddressFormat:
+      description: The format of events ingested through the email address.
+      enum:
+      - json
+      - plain-text
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - PLAIN_TEXT
+    EventEmailAddressIncludedUser:
+      description: An included user resource in an event email address response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventEmailAddressIncludedUserAttributes'
+        id:
+          description: The UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        type:
+          description: The type of the resource.
+          example: users
+          type: string
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    EventEmailAddressIncludedUserAttributes:
+      description: Attributes of an included user resource.
+      properties:
+        name:
+          description: The name of the user.
+          example: John Doe
+          type: string
+      required:
+      - name
+      type: object
+    EventEmailAddressNotifyHandles:
+      description: A list of handles to notify when an email is received.
+      example:
+      - '@slack-my-channel'
+      items:
+        description: A notification handle.
+        maxLength: 256
+        minLength: 1
+        type: string
+      maxItems: 10
+      type: array
+    EventEmailAddressRelationships:
+      description: Relationships associated with an event email address resource.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/EventEmailAddressCreatedByRelationship'
+        revoked_by:
+          $ref: '#/components/schemas/EventEmailAddressRevokedByRelationship'
+      required:
+      - created_by
+      type: object
+    EventEmailAddressResourceType:
+      description: The type of the resource. Must be `event_emails`.
+      enum:
+      - event_emails
+      example: event_emails
+      type: string
+      x-enum-varnames:
+      - EVENT_EMAILS
+    EventEmailAddressResponseAttributes:
+      description: Attributes of an event email address resource.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventEmailAddressAlertType'
+        created_at:
+          description: The timestamp of when the event email address was created.
+          example: '2025-04-11T13:58:07Z'
+          format: date-time
+          type: string
+        description:
+          description: A description of the event email address.
+          example: Email address for production alerts.
+          maxLength: 1024
+          nullable: true
+          type: string
+        email:
+          description: The generated email address for ingesting events.
+          example: api-abc12345@event-intake.datadoghq.com
+          type: string
+        format:
+          $ref: '#/components/schemas/EventEmailAddressFormat'
+        last_used_at:
+          description: The timestamp of when the event email address was last used.
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        notify_handles:
+          $ref: '#/components/schemas/EventEmailAddressNotifyHandles'
+        revoked_at:
+          description: The timestamp of when the event email address was revoked.
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        tags:
+          $ref: '#/components/schemas/EventEmailAddressTags'
+      required:
+      - email
+      - format
+      - created_at
+      type: object
+    EventEmailAddressRevokedByRelationship:
+      description: Relationship to the user who revoked the email address.
+      example: null
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressUserData'
+      type: object
+    EventEmailAddressSingleResponse:
+      description: Response containing a single event email address.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressData'
+        included:
+          description: Related resources included in the response.
+          items:
+            $ref: '#/components/schemas/EventEmailAddressIncludedUser'
+          type: array
+      required:
+      - data
+      type: object
+    EventEmailAddressTags:
+      description: A list of tags to apply to events generated from the email address.
+      example:
+      - env:production
+      - team:my-team
+      items:
+        description: A tag.
+        maxLength: 200
+        minLength: 1
+        type: string
+      maxItems: 20
+      type: array
+    EventEmailAddressUpdateAttributes:
+      description: Attributes for updating an event email address.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventEmailAddressAlertType'
+        description:
+          description: A description of the event email address.
+          example: Updated description for the email address.
+          maxLength: 1024
+          nullable: true
+          type: string
+        notify_handles:
+          $ref: '#/components/schemas/EventEmailAddressNotifyHandles'
+        tags:
+          $ref: '#/components/schemas/EventEmailAddressTags'
+      required:
+      - description
+      - alert_type
+      - tags
+      - notify_handles
+      type: object
+    EventEmailAddressUpdateData:
+      description: Data for updating an event email address.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/EventEmailAddressUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/EventEmailAddressResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    EventEmailAddressUpdateRequest:
+      description: Request body for updating an event email address.
+      properties:
+        data:
+          $ref: '#/components/schemas/EventEmailAddressUpdateData'
+      required:
+      - data
+      type: object
+    EventEmailAddressUserData:
+      description: A user data reference in a relationship.
+      properties:
+        id:
+          description: The UUID of the user.
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        type:
+          description: The type of the resource.
+          example: users
+          type: string
+      required:
+      - type
+      - id
+      type: object
+    EventEmailAddressesResponse:
+      description: Response containing a list of event email addresses.
+      properties:
+        data:
+          description: A list of event email address resources.
+          items:
+            $ref: '#/components/schemas/EventEmailAddressData'
+          type: array
+        included:
+          description: Related resources included in the response.
+          items:
+            $ref: '#/components/schemas/EventEmailAddressIncludedUser'
+          type: array
+      required:
+      - data
+      type: object
     EventPayload:
       additionalProperties: false
       description: Event attributes.
@@ -45840,6 +46133,50 @@ components:
           $ref: '#/components/schemas/OktaIntegrationType'
       required:
       - type
+      type: object
+    OnCallEventEmailAddressCreateAttributes:
+      description: Attributes for creating an on-call event email address.
+      properties:
+        alert_type:
+          $ref: '#/components/schemas/EventEmailAddressAlertType'
+        description:
+          description: A description of the on-call event email address.
+          example: On-call email address for my team.
+          maxLength: 1024
+          type: string
+        format:
+          $ref: '#/components/schemas/EventEmailAddressFormat'
+        tags:
+          $ref: '#/components/schemas/EventEmailAddressTags'
+        team_handle:
+          description: 'The team handle associated with the on-call email address.
+
+            Must contain only alphanumeric characters, hyphens, and underscores.'
+          example: my-team
+          maxLength: 195
+          type: string
+      required:
+      - format
+      - team_handle
+      type: object
+    OnCallEventEmailAddressCreateData:
+      description: Data for creating an on-call event email address.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OnCallEventEmailAddressCreateAttributes'
+        type:
+          $ref: '#/components/schemas/EventEmailAddressResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    OnCallEventEmailAddressCreateRequest:
+      description: Request body for creating an on-call event email address.
+      properties:
+        data:
+          $ref: '#/components/schemas/OnCallEventEmailAddressCreateData'
+      required:
+      - data
       type: object
     OnCallNotificationRule:
       description: A top-level wrapper for a notification rule
@@ -70163,7 +70500,6 @@ components:
       - data
       type: object
     ViewershipHistorySessionData:
-      description: Viewership history session data.
       properties:
         attributes:
           $ref: '#/components/schemas/ViewershipHistorySessionDataAttributes'
@@ -82327,6 +82663,379 @@ paths:
       - Events
       x-codegen-request-body-name: body
       x-menu-order: 2
+  /api/v2/events/mail:
+    get:
+      description: List all API email addresses for your organization.
+      operationId: ListEventEmailAddresses
+      parameters:
+      - description: When set to `true`, returns only active (non-revoked) email addresses.
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+      - description: 'Comma-separated list of related resources to include in the
+          response.
+
+          Supported values are `created_by` and `revoked_by`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,revoked_by
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List event email addresses
+      tags:
+      - Events
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new API email address to use in an event email integration
+        rule.
+      operationId: CreateEventEmailAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventEmailAddressCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressSingleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Method Not Allowed
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create an event email address
+      tags:
+      - Events
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/events/mail/on-call:
+    get:
+      description: List all on-call event email addresses for a given team handle.
+      operationId: ListOnCallEventEmailAddresses
+      parameters:
+      - description: The team handle to filter on-call event email addresses.
+        in: query
+        name: filter[team_handle]
+        required: true
+        schema:
+          example: my-team
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List on-call event email addresses
+      tags:
+      - Events
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new on-call event email address associated with a team
+        handle.
+      operationId: CreateOnCallEventEmailAddress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnCallEventEmailAddressCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressSingleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create an on-call event email address
+      tags:
+      - Events
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/events/mail/on-call/{id}:
+    delete:
+      description: Revoke an existing on-call event email address in your organization.
+      operationId: DeleteOnCallEventEmailAddress
+      parameters:
+      - description: The UUID of the on-call event email address.
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Revoke an on-call event email address
+      tags:
+      - Events
+      x-menu-order: 11
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/events/mail/{email_uuid}:
+    delete:
+      description: Revoke an existing API email address in your organization.
+      operationId: DeleteEventEmailAddress
+      parameters:
+      - description: The UUID of the event email address.
+        in: path
+        name: email_uuid
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Revoke an event email address
+      tags:
+      - Events
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a single API email address for your organization.
+      operationId: GetEventEmailAddress
+      parameters:
+      - description: The UUID of the event email address.
+        in: path
+        name: email_uuid
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressSingleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get an event email address
+      tags:
+      - Events
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing API email address in your organization.
+      operationId: UpdateEventEmailAddress
+      parameters:
+      - description: The UUID of the event email address.
+        in: path
+        name: email_uuid
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventEmailAddressUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEmailAddressSingleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update an event email address
+      tags:
+      - Events
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
