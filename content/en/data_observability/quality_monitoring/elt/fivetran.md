@@ -24,8 +24,12 @@ Datadog recommends using a **System Key**. Unlike Scoped Keys, which inherit per
 
 Follow the [Fivetran System Keys documentation][1] to generate an API key and secret with the following permissions:
 
-- `DESTINATION`: `READ`
-- `CONNECTOR`: `READ`
+```json
+[
+  {"resource_type": "DESTINATION", "access_level": "READ"},
+  {"resource_type": "CONNECTOR", "access_level": "READ"}
+]
+```
 
 ### Add the Fivetran integration
 
