@@ -14,6 +14,9 @@ further_reading:
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to improve your Incident Management'
+  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management/"
+    tag: "Learning Center"
+    text: "Getting Started with Incident Management"
   - link: 'https://www.datadoghq.com/blog/mobile-incident-management-datadog/'
     tag: 'Blog'
     text: 'Manage and resolve incidents on the go with the Datadog Mobile App'
