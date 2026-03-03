@@ -100,7 +100,7 @@ Datadog matches metric events to experiment exposures using a subject key. If th
 
 1. To resolve a mismatch, update either the [`targetingKey`][7] in your SDK or the subject type attribute on the [Subject Types page][9] so that both use the same identifier.
 
-**If the subject values match but experiment results are still missing**, continue to the next section to inspect individual sessions.
+If the subject values match but experiment results are still missing, continue to the next section to inspect individual sessions.
 
 {{% /collapse-content %}}
 
