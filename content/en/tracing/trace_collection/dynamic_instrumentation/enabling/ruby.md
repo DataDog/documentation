@@ -53,9 +53,9 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
-## Ruby-Specific Considerations
+## Ruby-specific considerations
 
-### Instrumentable Code
+### Instrumentable code
 
 Line probes can only be placed on executable lines of code. The following example shows which lines can be targeted:
 
@@ -72,7 +72,7 @@ end                          # Can instrument (method exit)
 
 Lines that cannot be instrumented include method definition lines (`def`), `else`/`elsif` clauses, most `end` keywords (except the final `end` of a method), comment-only lines, and empty lines.
 
-### Expression Language Instance Variable Conflicts
+### Expression language instance variable conflicts
 
 Ruby's use of `@` for instance variables creates conflicts with Dynamic Instrumentation's expression language special variables. The following variable names are reserved and cannot be accessed if used as instance variables in your Ruby code:
 
@@ -85,7 +85,7 @@ Ruby's use of `@` for instance variables creates conflicts with Dynamic Instrume
 
 If your code uses instance variables with these names, rename them to use Dynamic Instrumentation expressions that reference them.
 
-### Code Loading Timing
+### Code loading timing
 
 Dynamic Instrumentation tracks code as it loads. For line probes to work correctly:
 
