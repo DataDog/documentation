@@ -118,7 +118,8 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for the following:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
-   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results.
+   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. 
+
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
@@ -156,5 +157,5 @@ If metric values appear after disabling outlier handling, the threshold was trun
 [5]: /getting_started/feature_flags/
 [6]: /getting_started/feature_flags/#step-4-define-targeting-rules-and-enable-the-feature-flag
 [7]: /feature_flags/client/javascript/#set-the-evaluation-context
-[8]: /feature_flags/client/javascript/
+[8]: /feature_flags/client/
 [9]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
