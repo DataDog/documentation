@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2].
+Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2] or [Archive Search][2].
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
@@ -232,6 +232,19 @@ Use this optional configuration step to define the maximum volume of log data (i
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
 
 {{< site-region region="us3" >}}
+
+#### Archive Search Attributes (Preview)
+
+To accelerate searches and investigations within your archives (via [Archive Search][16]), you can define specific attribute to be indexed directly in your storage bucket.
+
+* **Indexed Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
+* **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
+* **Note**: This feature is currently in **Preview**. Contact [Datadog support](https://docs.datadoghq.com/help/) or your account manager to enable it for your organization.
+
+<div class="alert alert-info">
+<b>Preview available</b>: You can now index specific attributes (e.g., <code>trace_id</code>) in your archives to accelerate searches via Archive Search. <a href="[https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/](https://www.datadoghq.com/product-preview/flex-frozen-archive-search/)">Register for the Preview</a>.
+</div>
+
 #### Firewall rules
 
 {{< tabs >}}
@@ -297,8 +310,6 @@ When creating or updating an S3 archive in Datadog, you can optionally configure
 - **Amazon S3 managed keys**: Forces server-side encryption using Amazon S3 managed keys ([SSE-S3][1]), regardless of the S3 bucket's default encryption.
 - **AWS Key Management Service**: Forces server-side encryption using a customer-managed key (CMK) from [AWS KMS][2], regardless of the S3 bucket's default encryption. You will need to provide the CMK ARN.
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
-[2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{< tabs >}}
 {{% tab "Default S3 Bucket-Level Encryption" %}}
 
@@ -308,20 +319,20 @@ To set or check your S3 bucket's encryption configuration:
 
 1. Navigate to your S3 bucket.
 2. Click the **Properties** tab.
-3. In the **Default Encryption** section, configure or confirm the encryption type. If your encryption uses [AWS KMS][1], ensure that you have a valid CMK and CMK policy attached to your CMK.
+3. In the **Default Encryption** section, configure or confirm the encryption type. If your encryption uses [AWS KMS][18], ensure that you have a valid CMK and CMK policy attached to your CMK.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
 {{% /tab %}}
 {{% tab "Amazon S3 managed keys" %}}
 
-This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket.
+This option ensures that all archives objects are uploaded with [SSE_S3][17], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 {{% /tab %}}
 {{% tab "AWS Key Management Service" %}}
 
-This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket.
+This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][18]. This overrides any default encryption setting on the S3 bucket.
 
 Ensure that you have completed the following steps to create a valid CMK and CMK policy. Then, provide the CMK ARN to successfully configure this encryption type.
 
@@ -381,7 +392,6 @@ Ensure that you have completed the following steps to create a valid CMK and CMK
 
 3. After selecting **AWS Key Management Service** as your **Encryption Type** in Datadog, input your AWS KMS key ARN.
 
-[1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -439,3 +449,8 @@ This directory structure simplifies the process of querying your historical log 
 [13]: /account_management/rbac/permissions#logs_read_data
 [14]: /logs/explorer/live_tail/
 [15]: /events/explorer/
+[16]: https://docs.datadoghq.com/logs/log_configuration/archive_search?tab=amazons3
+[17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
+[18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+
+
