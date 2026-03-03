@@ -70163,7 +70163,6 @@ components:
       - data
       type: object
     ViewershipHistorySessionData:
-      description: Viewership history session data.
       properties:
         attributes:
           $ref: '#/components/schemas/ViewershipHistorySessionDataAttributes'
