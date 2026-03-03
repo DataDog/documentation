@@ -39,7 +39,7 @@ Database Monitoring collects the following data from ClickHouse:
 : Aggregated performance metrics for executed queries, enabling analysis of query behavior and trends over time. Collected from `system.query_log`.
 
 **Query samples**
-: Point-in-time snapshots of currently running queries captured at each sampling interval. Collected from `system.processes` at a 1-second interval. Because ClickHouse queries often complete in under one second, short-lived queries may not always appear in samples.
+: Point-in-time snapshots of currently running queries are captured from `system.processes` at a 1-second interval. Because ClickHouse queries often complete in under one second, short-lived queries may not always appear in samples.
 
 **Query completions**
 : Records of individual completed query executions, capturing all successfully executed queries. Use query completions alongside query samples to ensure complete visibility into all query activity, including short-lived queries not observed during sampling.
@@ -74,7 +74,7 @@ GRANT REMOTE ON *.* TO datadog;
 ```
 
 <div class="alert alert-info">
-The <code>REMOTE</code> privilege is required because the Agent uses ClickHouse's <code>clusterAllReplicas()</code> table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution — it does <strong>not</strong> grant access to any additional databases or tables beyond what was explicitly granted above. The <code>ON *.*</code> syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
+The <code>REMOTE</code> privilege is required because the Agent uses ClickHouse's <code>clusterAllReplicas()</code> table function to aggregate data across all replicas in a ClickHouse Cloud service through the single endpoint. This privilege enables cross-node query execution—it does <strong>not</strong> grant access to any additional databases or tables beyond what was explicitly granted above. The <code>ON *.*</code> syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
 </div>
 
 ### Step 2: Configure the Agent

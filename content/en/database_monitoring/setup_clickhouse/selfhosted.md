@@ -26,7 +26,7 @@ Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into y
 ## Before you begin
 
 Supported ClickHouse versions
-: 23.x, 24.x
+: 21.1 and later (21.x, 22.x, 23.x, 24.x, 25.x). Recommended minimum: 21.1 LTS.
 
 Supported Agent versions
 : 7.78+
@@ -42,7 +42,7 @@ Database Monitoring collects the following data from ClickHouse:
 : Aggregated performance metrics for executed queries, enabling analysis of query behavior and trends over time. Collected from `system.query_log`.
 
 **Query samples**
-: Point-in-time snapshots of currently running queries captured at each sampling interval. Collected from `system.processes` at a 1-second interval. Because ClickHouse queries often complete in under one second, short-lived queries may not always appear in samples.
+: Point-in-time snapshots of currently running queries are captured from `system.processes` at a 1-second interval. Because ClickHouse queries often complete in under one second, short-lived queries may not always appear in samples.
 
 **Query completions**
 : Records of individual completed query executions, capturing all successfully executed queries. Use query completions alongside query samples to ensure complete visibility into all query activity, including short-lived queries not observed during sampling.

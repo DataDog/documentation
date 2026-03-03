@@ -11,10 +11,13 @@ This feature is in preview and requires Datadog Agent v7.78 or later. Customers 
 
 ### ClickHouse versions supported
 
-|                    | Self-hosted | ClickHouse Cloud |
-| ------------------ | ----------- | ---------------- |
-| ClickHouse 23.x    | {{< X >}}   | {{< X >}}        |
-| ClickHouse 24.x    | {{< X >}}   | {{< X >}}        |
+|                              | Self-hosted | ClickHouse Cloud |
+| ---------------------------- | ----------- | ---------------- |
+| ClickHouse 21.x (min. 21.1) | {{< X >}}   |                  |
+| ClickHouse 22.x              | {{< X >}}   |                  |
+| ClickHouse 23.x              | {{< X >}}   | {{< X >}}        |
+| ClickHouse 24.x              | {{< X >}}   | {{< X >}}        |
+| ClickHouse 25.x              | {{< X >}}   | {{< X >}}        |
 
 ### Setup instructions by hosting type
 
