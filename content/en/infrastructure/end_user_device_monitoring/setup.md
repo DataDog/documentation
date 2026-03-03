@@ -40,7 +40,7 @@ infrastructure_mode: end_user_device
 
 ### Overview
 
-The Overview section displays device health status, device type distribution, and OS breakdown. This helps you quickly identify unhealthy devices, track fleet composition, and understand overall system health at a glance.
+The Overview section displays device health status, device type distribution, and OS breakdown. This helps you efficiently identify unhealthy devices, track fleet composition, and understand overall system health at a glance.
 
 ### Device-level Details
 
