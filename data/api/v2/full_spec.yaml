@@ -89149,6 +89149,26 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'The number of seconds of look back (from now) used by the `filter[queried]`
+          filter logic.
+
+          Must be sent with `filter[queried]` and is only applied when `filter[queried]=true`.
+
+          If `filter[queried]=false`, this parameter is ignored and default queried-window
+          behavior applies.
+
+          If `filter[queried]` is not provided, sending this parameter returns a 400.
+
+          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=7776000`.'
+        example: 7776000
+        in: query
+        name: filter[queried][window][seconds]
+        required: false
+        schema:
+          format: int64
+          maximum: 15552000
+          minimum: 0
+          type: integer
       - description: 'Filter metrics that have been submitted with the given tags.
           Supports boolean and wildcard expressions.
 
