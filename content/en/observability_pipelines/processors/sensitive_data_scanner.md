@@ -114,7 +114,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 You can use the [Datadog Observability Pipeline Terraform resource][4] to set up a pipeline with the Sensitive Data Scanner processor. To add a rule to the Sensitive Data Scanner processor using Terraform:
 
-1. Use the [Datadog Sensitive Data Scanner Standard Pattern][5] data resource to retrieve the rule ID of the Sensitive Data Scanner [library rule][6].
+1. Use the [Datadog Sensitive Data Scanner Standard Pattern][5] data source to retrieve the rule ID of the Sensitive Data Scanner [library rule][6].
 
    {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
