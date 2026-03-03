@@ -120,10 +120,10 @@ Telemetry are quantifiable values that can be used for measurements related to t
 |------------|--------|----------------------------|
 | `session.action.count`      | number      | Count of all actions collected for this session. |
 | `session.error.count`      | number      | Count of all errors collected for this session.  |
-| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
+| `session.has_replay` | Boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 | `session.id` | string | Unique ID of the session. |
 | `session.ip` | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][11]. |
-| `session.is_active` | boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the application, and expires after 4 hours of activity or 15 minutes of inactivity. |
+| `session.is_active` | Boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the application, and expires after 4 hours of activity or 15 minutes of inactivity. |
 | `session.initial_view.name` | string | Name of the initial view of the session. |
 | `session.initial_view.url` | string | URL of the initial view of the session. |
 | `session.last_view.url` | string | URL of the last view of the session. |
@@ -145,7 +145,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.error.count`            | number      | Count of all errors collected for this view.                                    |
 | `view.id`                      | string | Unique ID of the initial view corresponding to the event.                                                                      |
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous and start of this (current) view. |
-| `view.is_active`      |    boolean   | Indicates whether the view corresponding to this event is considered active.            |
+| `view.is_active`      |    Boolean   | Indicates whether the view corresponding to this event is considered active.            |
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by the `addViewLoadingTime(override:)` call. |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                |
 | `view.name` | string | Customizable name of the view corresponding to the event. |
@@ -177,7 +177,7 @@ RUM action, error, resource, and long task events contain information about the 
 
 ### Error attributes
 
-Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
+Frontend errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -188,7 +188,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.issue_id`   | string | Unique identifier for the error issue.     |
 | `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR` or `Exception` |
 | `error.file` | string | File where the error happened for the Error Tracking issue. |
-| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
+| `error.is_crash` | Boolean | Indicates whether the error caused the application to crash. |
 
 ### Network errors
 
@@ -238,7 +238,7 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 ## Direct Boot mode support
 
-If your application supports [Direct Boot mode][13], note that data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
+**Note:** If your application supports [Direct Boot mode][13], data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
 [1]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#custom-actions
 [2]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views

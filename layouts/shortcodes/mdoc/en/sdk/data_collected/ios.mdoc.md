@@ -60,11 +60,11 @@ The following device-related attributes are attached automatically to all events
 | `device.batteryLevel`                | number | The current battery level of the device (0.0 to 1.0).                                                    |
 | `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                          |
 | `device.brightnessLevel`             | number | The current screen brightness level (0.0 to 1.0).                                                        |
-| `device.locale`                      | string | The user's locale as a language tag combining language and region (e.g. 'en-US').                        |
+| `device.locale`                      | string | The user's locale as a language tag combining language and region (for example, 'en-US').                        |
 | `device.locales`                     | array (string) | Ordered list of the user's preferred system languages as IETF language tags.                     |
 | `device.model`                       | string | The device model as reported by the device (System User-Agent).                                          |
 | `device.name`                        | string | The device name as reported by the device (System User-Agent).                                           |
-| `device.powerSavingMode`             | boolean | Whether the device is in power saving mode.                                                             |
+| `device.powerSavingMode`             | Boolean | Whether the device is in power saving mode.                                                             |
 | `device.timeZone`                    | string | The device's current time zone identifier.                                                               |
 | `device.type`                        | string | The device type as reported by the device (System User-Agent).                                           |
 
@@ -124,12 +124,12 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `session.action.count`    | number      | Count of all actions collected for this session.    |
 | `session.error.count`     | number      | Count of all errors collected for this session.     |
 | `session.long_task.count` | number      | Count of all long tasks collected for this session. |
-| `session.has_replay` | boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
+| `session.has_replay` | Boolean | Indicates if the session has a captured Session Replay recording attached to visually play the user experience. |
 | `session.id`                 | string | Unique ID of the session.                                                  |
 | `session.initial_view.url`   | string | URL of the initial view of the session.                                     |
 | `session.initial_view.name` | string | Name of the initial view of the session.                                    |
 | `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][9]. |
-| `session.is_active`          | boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.                               |
+| `session.is_active`          | Boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.                               |
 | `session.last_view.url`      | string | URL of the last view of the session.                                        |
 | `session.last_view.name`     | string | Name of the last view of the session.                                       |
 | `session.resource.count`  | number      | Count of all resources collected for this session.  |
@@ -146,7 +146,7 @@ RUM action, error, resource, and long task events contain information about the 
 |-----------------------|-------------|------------------------------------------------------------------------------|
 | `view.action.count`   | number      | Count of all actions collected for this view.                                |
 | `view.error.count`    | number      | Count of all errors collected for this view.                                 |
-| `view.is_active`      | boolean     | Indicates whether the view corresponding to this event is considered active. |
+| `view.is_active`      | Boolean     | Indicates whether the view corresponding to this event is considered active. |
 | `view.id`      | string | Unique ID of the initial view corresponding to the event.  |
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(override:) call. |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
@@ -180,7 +180,7 @@ RUM action, error, resource, and long task events contain information about the 
 
 ### Error attributes
 
-Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
+Frontend errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 | Attribute        | Type   | Description                                                                      |
 |------------------|--------|----------------------------------------------------------------------------------|
@@ -191,7 +191,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.issue_id` | string | The stack trace or complementary information about the error. |
 | `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR`, `App Hang`, `Exception`, `Watchdog Termination`, `Memory Warning` or `Network`. |
 | `error.file` | string | File where the issue found by Error Tracking occurred. |
-| `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
+| `error.is_crash` | Boolean | Indicates whether the error caused the application to crash. |
 | `freeze.duration` | int64 | Duration of the main thread freeze (in nanoseconds). This is only supported for App Hangs. |
 
 ### Network errors
