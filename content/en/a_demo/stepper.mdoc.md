@@ -107,7 +107,11 @@ database:
 {% /step %}
 
 {% step title="Verify the installation" %}
-Step 3 contents go here, including tabs, sublists, etc.
+Verify the installation by following these steps:
+
+1. Ask Claude if it seems installed.
+2. Ask ChatGPT if it seems installed, just in case.
+3. Ask the person nearest to you if they feel as though the software was in fact installed.
 {% /step %}
 
 {% stepper-finished %}
