@@ -340,6 +340,12 @@ options:
 - label: RedHat
   id: redhat
 
+- label: Roku
+  id: roku
+
+- label: Error Tracking
+  id: error_tracking
+
 - label: CentOS
   id: centos
 
@@ -417,6 +423,9 @@ options:
 
 - label: Traces
   id: traces
+
+- label: Unity
+  id: unity
 
 - label: Wget
   id: wget
@@ -498,9 +507,3 @@ options:
 
 - label: Elixir
   id: elixir
-
-- label: Error Tracking
-  id: error_tracking
-
-- label: Unity
-  id: unity
