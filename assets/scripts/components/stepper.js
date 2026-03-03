@@ -74,8 +74,8 @@ function initStepper(stepper) {
             showAll = true;
         } else if (saved.finished) {
             finished = true;
-            currentIndex = steps.length - 1;
-        } else if (typeof saved.stepIndex === 'number' && saved.stepIndex < steps.length) {
+            currentIndex = typeof saved.stepIndex === 'number' ? saved.stepIndex : -1;
+        } else if (typeof saved.stepIndex === 'number' && saved.stepIndex >= 0 && saved.stepIndex < steps.length) {
             currentIndex = saved.stepIndex;
         }
     }
@@ -90,28 +90,42 @@ function initStepper(stepper) {
             steps.forEach((step) => {
                 step.classList.remove('stepper__step--active');
                 step.classList.remove('stepper__step--completed');
-                // In show-all mode, hide nav on every step (CSS shows content)
+                // In show-all mode, CSS shows content; hide nav
+                const content = step.querySelector('.stepper__step-content');
+                if (content) content.style.display = '';
                 const nav = step.querySelector('.stepper__nav');
                 if (nav) nav.style.display = 'none';
             });
             if (finishedEl) finishedEl.style.display = 'none';
             if (controlsEl) {
-                controlsEl.style.display = 'block';
+                controlsEl.style.display = 'flex';
                 if (controlsBtn) controlsBtn.textContent = 'Hide other steps';
+                if (resetBtn) resetBtn.style.display = 'none';
             }
         } else {
             stepper.classList.remove('stepper--show-all');
             steps.forEach((step, i) => {
-                step.classList.toggle('stepper__step--active', !finished && i === currentIndex);
+                const isActive = i === currentIndex;
+                step.classList.toggle('stepper__step--active', isActive);
                 step.classList.toggle('stepper__step--completed', finished || i < currentIndex);
+                const content = step.querySelector('.stepper__step-content');
+                if (content) content.style.display = isActive ? '' : 'none';
                 const nav = step.querySelector('.stepper__nav');
-                if (nav) nav.style.display = '';
+                if (nav) nav.style.display = (isActive && !finished) ? '' : 'none';
             });
             if (finishedEl) {
                 finishedEl.style.display = finished ? '' : 'none';
             }
             if (controlsEl) {
-                controlsEl.style.display = 'none';
+                // Show controls in finished state so user can "Show all" or "Reset"
+                if (finished) {
+                    controlsEl.style.display = 'flex';
+                    if (controlsBtn) controlsBtn.textContent = 'Show all steps';
+                    if (resetBtn) resetBtn.style.display = '';
+                } else {
+                    controlsEl.style.display = 'none';
+                    if (resetBtn) resetBtn.style.display = 'none';
+                }
             }
             // Toggle show-all / hide-others buttons within each step's nav
             steps.forEach((step) => {
@@ -133,10 +147,29 @@ function initStepper(stepper) {
 
     function handleFinish() {
         finished = true;
-        currentIndex = steps.length - 1;
+        currentIndex = -1; // no step expanded initially
         showAll = false;
         persist();
         render();
+    }
+
+    function handleReset() {
+        finished = false;
+        currentIndex = 0;
+        showAll = false;
+        persist();
+        render();
+    }
+
+    // Create a Reset button inside the controls area
+    let resetBtn = null;
+    if (controlsEl) {
+        resetBtn = document.createElement('button');
+        resetBtn.className = 'stepper__btn stepper__reset-btn';
+        resetBtn.textContent = 'Reset';
+        resetBtn.style.display = 'none';
+        controlsEl.appendChild(resetBtn);
+        resetBtn.addEventListener('click', handleReset);
     }
 
     function toggleShowAll() {
@@ -154,7 +187,14 @@ function initStepper(stepper) {
         const title = step.querySelector('.stepper__step-title');
         if (title) {
             title.addEventListener('click', () => {
-                goToStep(i);
+                if (finished) {
+                    // In finished state, toggle expand/collapse without leaving finished
+                    currentIndex = (currentIndex === i) ? -1 : i;
+                    persist();
+                    render();
+                } else {
+                    goToStep(i);
+                }
             });
         }
     });
@@ -175,6 +215,8 @@ function initStepper(stepper) {
             btn.classList.contains('stepper__hide-others-btn')
         ) {
             toggleShowAll();
+        } else if (btn.classList.contains('stepper__reset-btn')) {
+            handleReset();
         } else if (controlsEl && controlsEl.contains(btn)) {
             toggleShowAll();
         }

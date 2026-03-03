@@ -1,4 +1,4 @@
-$stepper-circle-size: 28px;
+$stepper-circle-size: 24px;
 $stepper-gutter: 48px;
 $stepper-line-width: 1.5px;
 $stepper-line-left: ($stepper-circle-size * 0.5) - ($stepper-line-width * 0.5);
@@ -45,7 +45,7 @@ $stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
         border-radius: 50%;
         background-color: $gray-dark;
         color: $white;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 700;
         line-height: 1;
         font-variant-numeric: lining-nums;
@@ -171,6 +171,7 @@ $stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
     display: none;
     padding: 8px 0;
     margin-left: $stepper-gutter;
+    gap: 8px;
 }
 
 // Show-all mode: expand every step's content
