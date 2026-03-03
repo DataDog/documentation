@@ -163,6 +163,9 @@ IAST support for bundled applications has the following limitations:
 - Detection of hardcoded passwords and hardcoded secrets is not supported.
 - Security Controls is not supported.
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/code_security" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
 
 ## Further Reading
 

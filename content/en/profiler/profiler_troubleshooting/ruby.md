@@ -87,10 +87,13 @@ Datadog.configure do |c|
 end
 ```
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/ruby/profiler" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/

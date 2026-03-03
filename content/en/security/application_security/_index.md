@@ -111,6 +111,10 @@ For information on disabling AAP or its features, see the following:
 
 - [Disabling AAP][10]
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/application_security" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Next steps
 
 {{< partial name="whats-next/whats-next.html" >}}

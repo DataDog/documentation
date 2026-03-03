@@ -146,6 +146,10 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/error_tracking" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

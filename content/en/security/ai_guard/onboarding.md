@@ -743,6 +743,10 @@ To view and investigate AI Guard security signals, and correlate them with other
 
 The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/_shared/ai_guard" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

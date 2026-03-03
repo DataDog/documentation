@@ -16,7 +16,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Java OpenJDK 11 AdoptOpenJDK)
 
-
 ## Reduce overhead from default setup
 
 If the default setup overhead is not acceptable, you can use the profiler with minimal configuration settings. Minimal configuration has the following changes compared to the default:
@@ -207,6 +206,11 @@ Below are basic troubleshooting steps for resolving those issues:
     ```
     DD_PROFILING_TEMPDIR: <path_to_writable_exec_enabled_directory>
     ```
+
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/java/profiler" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

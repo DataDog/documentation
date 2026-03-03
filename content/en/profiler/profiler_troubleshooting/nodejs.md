@@ -85,6 +85,10 @@ You can do so to narrow down which feature contributes to CPU, memory, or latenc
 
 After you identify that disabling a specific profiling feature reduces overhead, report your findings so Datadog can investigate further. You can do so by contacting [Datadog support][5].
 
+<!-- FEATURE_PARITY_AUTOGEN_START -->
+{{< include-markdown "tracing/trace_collection/library_config/nodejs/profiler" >}}
+<!-- FEATURE_PARITY_AUTOGEN_END -->
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
