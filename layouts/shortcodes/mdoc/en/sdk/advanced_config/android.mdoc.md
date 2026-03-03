@@ -11,7 +11,7 @@ Android RUM automatically tracks attributes such as user activity, screens, erro
 
 ### Custom views
 
-In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` life cycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
+In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
 {% tabs %}
 {% tab label="Kotlin" %}

@@ -837,7 +837,7 @@ struct NetworkInterceptorProvider: InterceptorProvider {
 {% /tab %}
 {% /tabs %}
 
-This lets Datadog RUM extract Operation type, name, variables and Payloads (optional) automatically from the requests to enrich GraphQL Requests RUM Resources.
+This lets Datadog RUM extract the operation type, name, variables, and payloads (optional) automatically from the requests to enrich GraphQL Requests RUM Resources.
 
 {% alert level="info" %}
 - The integration supports Apollo iOS versions `1.0+` and `2.0+`.

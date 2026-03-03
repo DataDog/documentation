@@ -7,7 +7,7 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ## Track RUM resources
 
-### `roUrlTransfer`
+### roUrlTransfer
 
 Network requests made directly with a `roUrlTransfer` node must be tracked.
 
