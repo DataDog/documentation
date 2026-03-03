@@ -1,0 +1,184 @@
+$stepper-circle-size: 28px;
+$stepper-gutter: 48px;
+$stepper-line-left: ($stepper-circle-size * 0.5) - 1px;
+$stepper-title-pad-top: 16px;
+$stepper-circle-center: $stepper-title-pad-top + ($stepper-circle-size * 0.5);
+
+.stepper {
+  margin-bottom: 24px;
+  counter-reset: stepper-step;
+}
+
+.stepper__steps {
+  padding: 0;
+}
+
+.stepper__step {
+  position: relative;
+  padding-left: $stepper-gutter;
+  counter-increment: stepper-step;
+
+  // Vertical connecting line
+  &::before {
+    content: '';
+    position: absolute;
+    left: $stepper-line-left;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: $gray-light;
+  }
+
+  // Number circle
+  &::after {
+    content: counter(stepper-step);
+    position: absolute;
+    left: 0;
+    top: $stepper-title-pad-top;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $stepper-circle-size;
+    height: $stepper-circle-size;
+    border-radius: 50%;
+    background-color: $gray-dark;
+    color: $white;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    transition: background-color 0.15s;
+  }
+
+  // First step: line starts below the first circle
+  &:first-child::before {
+    top: $stepper-circle-center;
+  }
+
+  // Last step: line ends at the circle center
+  &:last-child::before {
+    bottom: auto;
+    height: $stepper-circle-center;
+  }
+
+  // Single step: no line
+  &:only-child::before {
+    display: none;
+  }
+}
+
+// Active step: purple circle
+.stepper__step--active::after {
+  background-color: $brand-primary;
+}
+
+.stepper__step-title {
+  display: block;
+  margin: 0;
+  padding: $stepper-title-pad-top 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: $stepper-circle-size;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+
+  &:hover {
+    color: $brand-primary;
+  }
+}
+
+.stepper__step-content {
+  display: none;
+  padding-bottom: 8px;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.stepper__step--active .stepper__step-content {
+  display: block;
+}
+
+.stepper__nav {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 16px;
+}
+
+.stepper__step--active .stepper__nav {
+  display: flex;
+}
+
+.stepper__nav-left,
+.stepper__nav-right {
+  display: flex;
+  gap: 8px;
+}
+
+.stepper__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border: 1px solid $brand-primary;
+  border-radius: 4px;
+  background-color: $white;
+  color: $brand-primary;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background-color: $brand-primary;
+    color: $white;
+  }
+}
+
+.stepper__next-btn,
+.stepper__finish-btn {
+  background-color: $brand-primary;
+  color: $white;
+
+  &:hover {
+    background-color: darken($brand-primary, 10%);
+    border-color: darken($brand-primary, 10%);
+  }
+}
+
+.stepper__finished {
+  padding: 16px 0;
+  margin-left: $stepper-gutter;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.stepper__controls {
+  display: none;
+  padding: 8px 0;
+  margin-left: $stepper-gutter;
+}
+
+// Show-all mode: expand every step's content
+.stepper--show-all {
+  .stepper__step-content {
+    display: block;
+  }
+
+  .stepper__step::after {
+    background-color: $brand-primary;
+  }
+
+  .stepper__controls {
+    display: block;
+  }
+
+  .stepper__finished {
+    display: none;
+  }
+}
