@@ -56,7 +56,17 @@ The model analyzes up to 400 days of history to detect properties that inform ho
 
 ### Seasonality
 
-The model detects repeating patterns by hour of day, day of week, and day of month, and adjusts expected bounds accordingly. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
+The model detects repeating patterns and adjusts expected bounds accordingly. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
+
+The following seasonal patterns are detected:
+
+- **Hour of day**: Metrics that follow intraday patterns, such as higher row counts during business hours.
+- **Hour of week**: Metrics with consistent patterns across a full week at hourly granularity.
+- **Day of week**: Metrics that differ across days of the week (for example, lower activity on Sundays).
+- **Day of month**: Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes.
+- **Weekday vs. weekend**: Metrics with systematically different behavior on weekends versus weekdays.
+
+Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal ("green") history before it can detect a given pattern.
 
 ### Trends
 
