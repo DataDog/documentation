@@ -1,7 +1,6 @@
 ---
 title: Auto-Instrumentation
 description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration for seamless monitoring setup."
-beta: true
 code_lang: server
 type: multi-code-lang
 code_lang_weight: 2
@@ -19,11 +18,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
 {{< /site-region >}}
-
-{{< callout url=https://www.datadoghq.com/product-preview/rum-sdk-auto-instrumentation/
- btn_hidden="false" header="Join the Preview!">}}
-RUM Auto-Instrumentation is in Preview. Use this form to sign up.
-{{< /callout >}}
 
 ## Overview
 
