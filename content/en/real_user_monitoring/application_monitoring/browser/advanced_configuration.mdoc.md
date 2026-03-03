@@ -1549,7 +1549,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 ## Micro frontend
 
-The RUM Browser SDK supports micro frontend architectures by attributing events to specific micro frontends using `service` and `version` attributes. A single RUM SDK instance runs at the shell level, with events segmented by `service` and `version` so teams can filter dashboards, set alerts, and track performance per micro frontend.
+The RUM Browser SDK supports micro frontend architectures by attributing events to specific micro frontends using `service` and `version` attributes. A single RUM SDK instance runs at the shell level. Events are segmented by `service` and `version` so teams can filter dashboards, set alerts, and track performance per micro frontend.
 
 Datadog provides two approaches for attributing RUM events to micro frontends:
 
@@ -1564,14 +1564,14 @@ This approach uses a build plugin to inject source code context into your bundle
 #### Prerequisites and supported setups
 
 -   **Separated bundles**: Each micro frontend has its own bundle with distinct file paths, for example, using [module federation][21].
--   **Supported bundler**: A bundler [supported by the Datadog build plugins][22]
+-   **Supported bundler**: Use a bundler [supported by the Datadog build plugins][22]
 -   **Browser SDK**: Browser SDK version v6.27.0 or higher
 
 #### Setup guide
 
 **Step 1 - Configure the [build plugin][23] for each micro frontend**
 
-In each microfrontend's build configuration, enable source code context injection:
+In each micro frontend's build configuration, enable source code context injection:
 
 {% tabs %}
 {% tab label="Webpack" %}
@@ -1675,17 +1675,15 @@ module.exports = {
 {% /tab %}
 {% /tabs %}
 
-**Step 2 - Setup the Browser SDK at the shell level**
+**Step 2 - Set up the Browser SDK at the shell level**
 
-[Set up Browser Monitoring][4] in your shell application (main entry point).
-
-The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources, long tasks, vitals) with `service` and `version` from the context map.
+[Set up Browser Monitoring][4] in your shell application (main entry point). The Browser SDK automatically enriches RUM events (errors, custom actions, XHR/Fetch resources, long tasks, vitals) with `service` and `version` from the context map.
 
 {% alert level="warning" %}
 Events that don't match any micro frontend fall back to the shell-level service and version.
 {% /alert %}
 
-**Step 4 - [Explore micro frontend data in Datadog](#explore-micro-frontend-data-in-datadog)**
+**Step 3 - [Explore micro frontend data in Datadog](#explore-micro-frontend-data-in-datadog)**
 
 
 <!-- Version must meet 5.22 -->
@@ -1767,6 +1765,8 @@ window.DD_RUM && window.DD_RUM.init({
 The regular expression must match your application's file path structure. Adjust the pattern to extract service and version from your bundle URLs. Any query in the RUM Explorer can use the service attribute to filter events.
 <!-- ends  5.22 -->
 
+{% /if %}
+
 ### Limitations
 
 Some events cannot be attributed to an origin because they do not have an associated handling stack:
@@ -1780,11 +1780,9 @@ Some events cannot be attributed to an origin because they do not have an associ
 
 After setup, the `service` and `version` on RUM events identify which micro frontend generated each event. Use these attributes in several places in Datadog:
 
--   **Side panels**: The `service` and `version` attribute appears in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
+-   **Side panels**: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
 -   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
 -   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
-
-{% /if %}
 
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
