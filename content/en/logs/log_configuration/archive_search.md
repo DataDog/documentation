@@ -66,6 +66,15 @@ Archive Search results are visible to all users in your organization who have ac
 
 For more information on access controls and log security, see [How to Set Up RBAC for Logs][6].
 
+## Accelerate Searches with Indexed Attributes (Preview)
+
+To significantly reduce search time and scan costs, you can configure **Search Attributes** on your archives. When an attribute like `trace_id` is indexed:
+* Datadog skips irrelevant data blocks in your storage bucket.
+* Searches for high-cardinality values become nearly instantaneous.
+* You reduce the volume of data scanned, lowering cloud egress costs.
+
+To set this up, navigate to the **Advanced** tab of your [Archive configuration][7].
+
 ## Launching a search
 
 1. Go to [**Logs > Archive Search > New Search**][4].
@@ -204,3 +213,4 @@ In order to search log events from your archives, Datadog uses a service account
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
 [6]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
+[7]: https://docs.datadoghq.com/logs/log_configuration/archives/?tab=awss3#advanced-settings
