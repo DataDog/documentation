@@ -1,25 +1,13 @@
----
-title: Roku Data Collected
-description: "Understand RUM Roku SDK event types, attributes, and telemetry data including sessions, views, actions, and errors for TV channels."
-aliases:
-- /real_user_monitoring/roku/data_collected/
-- /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
-- /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-roku
-  tag: "Source Code"
-  text: Source code for dd-sdk-roku
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Explore Datadog RUM
-site_support_id: rum_roku
----
+<!--
+This partial contains data collected information for the Roku SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 ## Overview
 
-The RUM Roku SDK generates events that have associated telemetry and attributes. Telemetry is quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
+The RUM Roku SDK generates events that have associated telemetry and attributes. Telemetry is quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
+Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
 There are additional [attributes specific to a given event type](#event-specific-attributes). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
 
@@ -34,7 +22,7 @@ There are additional [attributes specific to a given event type](#event-specific
 
 The following diagram illustrates the RUM event hierarchy:
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" >}}
+{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" /%}
 
 ## Default attributes
 
@@ -60,7 +48,6 @@ The following device-related attributes are attached automatically to all events
 | `device.model`                       | string | The device model as reported by the device (System User-Agent).                                         |
 | `device.name`                        | string | The device name as reported by the device (System User-Agent).                                          |
 
-
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -71,10 +58,9 @@ The following OS-related attributes are attached automatically to all events col
 | `os.version`       | string | The OS version as reported by the device (System User-Agent).       |
 | `os.version_major` | string | The OS version major as reported by the device (System User-Agent). |
 
-
 ### Geo-location
 
-The below attributes are related to the geo-location of IP addresses.
+The following attributes are related to the geo-location of IP addresses.
 
 **Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][9].
 
@@ -87,7 +73,6 @@ The below attributes are related to the geo-location of IP addresses.
 | `geo.continent`           | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).                    |
 | `geo.city`                | string | The name of the city (for example, `San Francisco`, `Paris`, or `New York`).                                                              |
 
-
 ### Global user attributes
 
 You can enable [tracking user info][5] globally to collect and apply user attributes to all RUM events.
@@ -98,10 +83,9 @@ You can enable [tracking user info][5] globally to collect and apply user attrib
 | `usr.name`     | string | Name of the user.       |
 | `usr.email`    | string | Email of the user.      |
 
+## Event-specific attributes
 
-## Event-specific attributes 
-
-Telemetry is quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics. 
+Telemetry is quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
 ### Session attributes
 
@@ -172,7 +156,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.stack`    | string | The stack trace or complementary information about the error.                     |
 | `error.issue_id` | string | The unique identifier for the error issue.                                        |
 
-### Network errors 
+### Network errors
 
 Network errors include information about failing HTTP requests. The following facets are also collected:
 
@@ -202,11 +186,7 @@ Network errors include information about failing HTTP requests. The following fa
 
 Before data is uploaded to Datadog, it is stored in cleartext in your channel's [cache directory][6], meaning that this data can't be read by other applications.
 
-**Note**: The OS can evict the data at any time, which could result in data loss in some rare cases. 
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+**Note**: The OS can evict the data at any time, which could result in data loss in some rare cases.
 
 [2]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [4]: /getting_started/tagging/unified_service_tagging/

@@ -1,18 +1,7 @@
----
-title: Android Data Collected
-description: "Understand RUM Android SDK event types, attributes, and telemetry data including sessions, views, actions, resources, and errors."
-aliases:
-- /real_user_monitoring/android/data_collected/
-- /real_user_monitoring/mobile_and_tv_monitoring/data_collected/android
-- /real_user_monitoring/mobile_and_tv_monitoring/android/data_collected
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-android
-  tag: "Source Code"
-  text: Source code for dd-sdk-android
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Explore Datadog RUM
----
+<!--
+This partial contains data collected information for the Android SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 ## Overview
 
@@ -33,7 +22,7 @@ There are additional [attributes that are specific to a given event type](#event
 
 The following diagram illustrates the RUM event hierarchy:
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" >}}
+{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" /%}
 
 ## Views instrumentation versus app lifecycle
 
@@ -45,7 +34,7 @@ The Android RUM SDK offers various strategies to [automatically track views][2] 
 - Navigation (`NavigationViewTrackingStrategy`): Each navigation destination is treated as a distinct RUM view, so view boundaries align with navigation events in your graph.
 - Manual View Tracking: When [tracking views manually][3] using `GlobalRumMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
 
-When the application goes into the background (for example, the user presses the home button or switches apps), RUM automatically stops the current view. Consequently, there is no active view while the app remains in the background. Since RUM's data model requires an active view to correlate and capture events, any events generated in the background are skipped by default. To capture these events instead, refer to the [Track Background Events][4] section.
+When the application goes into the background (for example, the user presses the home button or switches apps), RUM automatically stops the current view. Consequently, there is no active view while the app remains in the background. Since RUM's data model requires an active view to correlate and capture events, any events generated in the background are skipped by default. To capture these events instead, see the [Track Background Events][4] section.
 
 **Note**: If you're tracking views manually, you need to configure whether the view should be stopped when the app leaves the foreground.
 
@@ -184,7 +173,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this attribute does not appear (connectEnd - secureConnectionStart). |
 | `resource.status_code`             | number | The response status code.                                                               |
 | `resource.type`                | string | The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`).          |
-| `resource.url`              | string | The resource URL.                             |
+| `resource.url`              | string | The resource URL.                                             |
 
 ### Error attributes
 
@@ -251,11 +240,7 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 If your application supports [Direct Boot mode][13], note that data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/application_monitoring/android/advanced_configuration//#custom-actions
+[1]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#custom-actions
 [2]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views
 [3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
 [4]: /real_user_monitoring/application_monitoring/android/setup?tab=rum#track-background-events

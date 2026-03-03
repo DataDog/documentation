@@ -1,31 +1,7 @@
----
-title: RUM Browser Data Collected
-description: "Comprehensive guide to RUM Browser SDK event types, attributes, and telemetry data—including sessions, views, resources, errors, and user actions."
-aliases:
-  - /real_user_monitoring/data_collected/
-  - /real_user_monitoring/data_collected/view/
-  - /real_user_monitoring/data_collected/resource/
-  - /real_user_monitoring/data_collected/long_task/
-  - /real_user_monitoring/data_collected/error/
-  - /real_user_monitoring/data_collected/user_action/
-  - /real_user_monitoring/browser/data_collected/
-further_reading:
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-  tag: "Blog"
-  text: "Introducing Datadog Real User Monitoring"
-- link: "/real_user_monitoring/application_monitoring/browser/advanced_configuration"
-  tag: "Documentation"
-  text: "Modifying RUM data and adding context"
-- link: "/real_user_monitoring/explorer/"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/explorer/visualize/"
-  tag: "Documentation"
-  text: "Apply visualizations on your events"
-- link: "/logs/log_configuration/attributes_naming_convention"
-  tag: "Documentation"
-  text: "Datadog standard attributes"
----
+<!--
+This partial contains data collected information for the Browser SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 ## Overview
 
@@ -44,7 +20,7 @@ There are additional [attributes specific to a given event type](#event-specific
 
 The following diagram illustrates the RUM event hierarchy:
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;border:none" >}}
+{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" /%}
 
 ## Default attributes
 
@@ -216,10 +192,6 @@ Source errors include code-level information about the error. For more informati
 | `view.url_query.utm_campaign`  | string | The parameter in the URL identifying the specific marketing campaign tied to that view.              |
 | `view.url_query.utm_content`  | string | The parameter in the URL identifying the specific element a user clicked within a marketing campaign.           |
 | `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /standard-attributes/?product=browser
 [2]: /data_security/real_user_monitoring/#ip-address

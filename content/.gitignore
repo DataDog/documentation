@@ -22,3 +22,12 @@
 /en/synthetics/notifications/template_variables/mobile.md
 /en/synthetics/notifications/template_variables/multistep.md
 /en/synthetics/notifications/template_variables/api.md
+/en/real_user_monitoring/application_monitoring/android/data_collected.md
+/en/real_user_monitoring/application_monitoring/browser/data_collected.md
+/en/real_user_monitoring/application_monitoring/flutter/data_collected.md
+/en/real_user_monitoring/application_monitoring/ios/data_collected.md
+/en/real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected.md
+/en/real_user_monitoring/application_monitoring/react_native/data_collected.md
+/en/real_user_monitoring/application_monitoring/roku/data_collected.md
+/en/real_user_monitoring/application_monitoring/unity/data_collected.md
+/en/client_sdks/data_collected.md

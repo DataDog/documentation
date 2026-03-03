@@ -1,18 +1,7 @@
----
-title: iOS Data Collected
-description: "Understand RUM iOS SDK event types, attributes, and telemetry data including sessions, views, actions, resources, and errors."
-aliases:
-- /real_user_monitoring/ios/data_collected/
-- /real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios/
-- /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-ios"
-    tag: "Source Code"
-    text: "Source code for dd-sdk-ios"
-  - link: "/real_user_monitoring/"
-    tag: "Documentation"
-    text: "Datadog Real User Monitoring"
----
+<!--
+This partial contains data collected information for the iOS SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 ## Overview
 
@@ -31,14 +20,13 @@ There are additional [attributes specific to a given event type](#event-specific
 | Action     | 30 days   | An action represents user activity in your mobile application (for example, application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][1].                                                                                                                                                 |
 | Long task | 15 days | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold. |
 
-
 The following diagram illustrates the RUM event hierarchy:
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;border:none" >}}
+{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" /%}
 
 ## Views instrumentation versus app lifecycle
 
-RUM integrates seamlessly with `UIKit` and `SwiftUI` views and also provides APIs for manual view tracking. The timing of when a view starts and ends depends on the type of instrumentation used:
+RUM integrates with `UIKit` and `SwiftUI` views and also provides APIs for manual view tracking. The timing of when a view starts and ends depends on the type of instrumentation used:
 
 **UIKit Views**: When [automatically tracking UIKit views][3] using `UIKitRUMViewsPredicate`, RUM starts the view at the `viewDidAppear(animated:)` event of the `UIViewController` lifecycle. The view is stopped at `viewDidDisappear(animated:)`.
 **SwiftUI Views**: When [tracking SwiftUI views][4] with the `.trackRUMView(name:)` view modifier, RUM starts the view at the `onAppear(perform:)` callback and stops it at `onDisappear(perform:)`.
@@ -51,7 +39,6 @@ When the application leaves the foreground, RUM automatically stops the current 
 ## Default attributes
 
 RUM collects common attributes for all events and attributes specific to each event by default listed below. You can also choose to enrich your user session data with [additional events][6] to default events specific to your application monitoring and business analytics needs.
-
 
 ### Common core attributes
 
@@ -92,7 +79,6 @@ The following network-related attributes are attached automatically to Resource 
 | `connectivity.cellular.technology`   | string | The type of radio technology used for cellular connection.                                              |
 | `connectivity.cellular.carrier_name` | string | The name of the SIM carrier.                                                                              |
 
-
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -103,7 +89,6 @@ The following OS-related attributes are attached automatically to all events col
 | `os.name`          | string | The OS name as reported by the device (System User-Agent).                |
 | `os.version`       | string | The OS version as reported by the device (System User-Agent).             |
 | `os.version_major` | string | The OS version major as reported by the device (System User-Agent).       |
-
 
 ### Geo-location
 
@@ -120,7 +105,6 @@ The following attributes are related to the geo-location of IP addresses.
 | `geo.continent`                    | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).                        |
 | `geo.city`                         | string | The name of the city (for example, `San Francisco`, `Paris`, or `New York`).                                                                                       |
 
-
 ### Global user attributes
 
 You can enable [tracking user info][7] globally to collect and apply user attributes to all RUM events.
@@ -130,7 +114,6 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `usr.id`      | string | Identifier of the user. |
 | `usr.name`     | string | Name of the user.       |
 | `usr.email`    | string | Email of the user.      |
-
 
 ## Event-specific attributes
 
@@ -175,6 +158,7 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
 
 ### Resource attributes
+
 | Attribute                         | Type           | Description                                                                                     |
 |--------------------------------|----------------|-------------------------------------------------------------------------------------------------|
 | `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                  |
@@ -204,7 +188,7 @@ Front-end errors are collected with Real User Monitoring (RUM). The error messag
 | `error.type`     | string | The error type (or error code in some cases).                                    |
 | `error.message`  | string | A concise, human-readable, one-line message explaining the event.                |
 | `error.stack`    | string | The stack trace or complementary information about the error.                    |
-| `error.issue_id` | string | The stack trace or complementary information about the error.
+| `error.issue_id` | string | The stack trace or complementary information about the error. |
 | `error.category` | string | The high-level grouping for the type of error. Possible values are `ANR`, `App Hang`, `Exception`, `Watchdog Termination`, `Memory Warning` or `Network`. |
 | `error.file` | string | File where the issue found by Error Tracking occurred. |
 | `error.is_crash` | boolean | Indicates whether the error caused the application to crash. |
@@ -223,7 +207,6 @@ Network errors include information about failing HTTP requests. The following fa
 | `error.resource.provider.domain` | string | The resource provider domain.                                                     |
 | `error.resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`). |
 
-
 ### Action attributes
 
 | Attribute                  | Type        | Description                                   |
@@ -240,10 +223,6 @@ Network errors include information about failing HTTP requests. The following fa
 ## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#custom-actions
 [2]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
