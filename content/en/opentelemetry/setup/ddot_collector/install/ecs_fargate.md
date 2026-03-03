@@ -69,16 +69,18 @@ Use the following task definition as a starting point:
                     "value": "true"
                 },
                 {
-                    "name": "DD_API_KEY",
-                    "value": "<DD_API_KEY>"
-                },
-                {
                     "name": "DD_SITE",
                     "value": "<DATADOG_SITE>"
                 },
                 {
                     "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
                     "value": "true"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "DD_API_KEY",
+                    "valueFrom": "<DD_API_KEY_SECRET_ARN>"
                 }
             ],
             "logConfiguration": {
@@ -136,7 +138,7 @@ Use the following task definition as a starting point:
 
 Replace the following placeholders:
 - `<TASK_FAMILY>`: A name for your ECS task definition family.
-- `<DD_API_KEY>`: Your Datadog API key.
+- `<DD_API_KEY_SECRET_ARN>`: The ARN of the AWS Secrets Manager secret or SSM Parameter Store parameter that contains your Datadog API key. The task execution role must have `secretsmanager:GetSecretValue` (Secrets Manager) or `ssm:GetParameters` (SSM) permission to retrieve the secret.
 - `<DATADOG_SITE>`: Your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 - `<AWS_REGION>`: The AWS region where your ECS tasks run (for example, `us-east-1`).
 - `<APP_CONTAINER_NAME>`: The name of your application container.
@@ -207,7 +209,42 @@ The `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` environment variables in 
 
 ### Run the application
 
-Register your ECS task definition and create or update your ECS service to use the new revision. After the updated task runs, unified service tagging is fully enabled for your metrics, traces, and logs.
+1. Register the task definition with AWS:
+
+   {{< code-block lang="bash" >}}
+aws ecs register-task-definition --cli-input-json file://task-definition.json
+{{< /code-block >}}
+
+1. If you don't have an ECS cluster, create one:
+
+   {{< code-block lang="bash" >}}
+aws ecs create-cluster --cluster-name <CLUSTER_NAME>
+{{< /code-block >}}
+
+1. Create an ECS service to run the task:
+
+   {{< code-block lang="bash" >}}
+aws ecs create-service \
+  --cluster <CLUSTER_NAME> \
+  --service-name <SERVICE_NAME> \
+  --task-definition <TASK_FAMILY> \
+  --desired-count 1 \
+  --launch-type FARGATE \
+  --network-configuration "awsvpcConfiguration={subnets=[<SUBNET_IDS>],securityGroups=[<SECURITY_GROUP_IDS>],assignPublicIp=ENABLED}"
+{{< /code-block >}}
+
+   Replace `<CLUSTER_NAME>` with your ECS cluster name, `<SERVICE_NAME>` with a name for your ECS service, `<SUBNET_IDS>` with your subnet IDs (comma-separated), and `<SECURITY_GROUP_IDS>` with your security group IDs.
+
+   If you are updating an existing service to a new task definition revision, run:
+
+   {{< code-block lang="bash" >}}
+aws ecs update-service \
+  --cluster <CLUSTER_NAME> \
+  --service <SERVICE_NAME> \
+  --task-definition <TASK_FAMILY>
+{{< /code-block >}}
+
+After the task starts, unified service tagging is fully enabled for your metrics, traces, and logs.
 
 ### Validate the deployment
 
