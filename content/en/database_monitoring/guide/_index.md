@@ -29,5 +29,5 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ClickHouse guides:" >}}
-    {{< nextlink href="database_monitoring/guide/clickhouse" >}}Setting Up Database Monitoring for ClickHouse{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/setup_clickhouse" >}}Setting Up Database Monitoring for ClickHouse{{< /nextlink >}}
 {{< /whatsnext >}}
