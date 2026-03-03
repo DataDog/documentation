@@ -27,7 +27,7 @@ To complete this guide, you need the following:
 1. Find or create your [Datadog API key][2].
 
 **AWS**:
-- An AWS account with ECS Fargate enabled.
+- An AWS account with access to Amazon ECS Fargate.
 - The [AWS CLI][3] configured with permissions to create and manage ECS task definitions and services.
 
 **Network**: {{% otel-network-requirements %}}
@@ -209,7 +209,16 @@ The `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` environment variables in 
 
 Register your ECS task definition and create or update your ECS service to use the new revision. After the updated task runs, unified service tagging is fully enabled for your metrics, traces, and logs.
 
-## Explore observability data in Datadog
+### Validate the deployment
+
+1. Verify that your ECS task is running and both containers are in `RUNNING` state:
+
+   ```shell
+   aws ecs describe-tasks \
+     --cluster <CLUSTER_NAME> \
+     --tasks <TASK_ID> \
+     --query "tasks[0].containers[*].{name:name,status:lastStatus}" \
+     --output table
 
 Use Datadog to explore the observability data for your application.
 

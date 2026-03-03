@@ -185,7 +185,12 @@ kubectl apply -f deployment.yaml
 
 After the updated pods are running, unified service tagging is fully enabled for your metrics, traces, and logs.
 
-## Explore observability data in Datadog
+### Validate the deployment
+
+1. Verify that all containers in the pod are running:
+
+   ```shell
+   kubectl get pods -l app=<SERVICE>
 
 Use Datadog to explore the observability data for your application.
 
