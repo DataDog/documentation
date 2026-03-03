@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-By default, [Data Observability monitors][1] use an anomaly detection model tailored to common patterns in data quality metrics such as table freshness and row count. This model is designed for metrics that have irregular update patterns, sporadic large changes, and business-specific expectations of what is normal.
+By default, [Data Observability monitors][1] use an anomaly detection model tailored to common patterns in data quality metrics such as table freshness and row count.
 
 The model learns from the metric's history to set expected bounds. When an observed value falls outside those bounds, the monitor triggers an alert.
 
