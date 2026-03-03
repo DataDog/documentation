@@ -22,7 +22,11 @@ Lineage is derived for all [supported data warehouse destinations][4].
 
 Datadog recommends using a **System Key**. Unlike Scoped Keys, which inherit permissions from a user account, System Keys have permissions set at the key level and continue working if the associated user leaves or changes roles.
 
-Follow the [Fivetran System Keys documentation][1] to generate an API key and secret.
+Follow the [Fivetran System Keys documentation][1] to generate an API key and secret with the following permissions:
+
+- `ACCOUNT`: `READ`
+- `DESTINATION`: `READ`
+- `CONNECTOR`: `READ`
 
 ### Add the Fivetran integration
 
