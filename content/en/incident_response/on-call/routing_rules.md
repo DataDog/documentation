@@ -69,17 +69,21 @@ When a routing rule includes support hours, Datadog compares the current time to
 
 #### Example support hour configurations
 
-- Set support hours to standard business hours (Monday–Friday, 9 a.m.–5 p.m.):
+**Note**: The following examples assume the **Outside support hours, hold escalation policy notifications until the next window** toggle is enabled.
 
-  Add one interval: select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
+{{% collapse-content title="Standard business hours" level="h5" %}}
 
-  {{< img src="service_management/oncall/support-hours-biz.png" alt="The support hours pop-up modal with a time interval defined for 9 a.m. to 5 p.m. Monday through Friday" style="width:60%;" >}}
+Add one interval: select Monday through Friday, set the time range to 9 a.m.–5 p.m., and select the `America/New_York` time zone. Pages outside this window are postponed until 9 a.m. on the following Monday.
 
-- Create a split support shift (mornings and afternoons):
+{{< img src="service_management/oncall/support-hours-biz.png" alt="The support hours pop-up modal with a time interval defined for 9 a.m. to 5 p.m. Monday through Friday" style="width:60%;" >}}
 
-  Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m., both with Monday through Friday selected. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
+{{% /collapse-content %}}
 
-**Note**: These examples assume the **Outside support hours, hold escalation policy notifications until the next window** toggle is enabled.
+{{% collapse-content title="Split support shift (mornings and afternoons)" level="h5" %}}
+
+Add two intervals: one from 9 a.m.–12 p.m. and one from 2 p.m.–6 p.m., both with Monday through Friday selected. Pages that arrive between 12 p.m. and 2 p.m. are postponed until the afternoon window opens.
+
+{{% /collapse-content %}}
 
 ### Pages in Slack and Microsoft Teams
 
