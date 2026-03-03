@@ -1,8 +1,9 @@
 ---
 title: Install the DDOT Collector on EKS Fargate
-code_lang: eks_fargate
-type: multi-code-lang
-code_lang_weight: 5
+private: true
+# code_lang: eks_fargate
+# type: multi-code-lang
+# code_lang_weight: 5
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
