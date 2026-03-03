@@ -24,7 +24,13 @@ When you first create an anomaly detection monitor, it enters a **training perio
 
 Training typically takes between **3 and 7 days**, depending on how frequently the underlying metric updates. The model needs to observe both weekday and weekend behavior, since many data pipelines behave differently on weekends.
 
-After training completes, the monitor begins alerting. The chart shows green for normal values and red for outlier values.
+After training completes, the monitor begins alerting. The chart uses color to indicate the current evaluation state:
+
+| Color | State | Description |
+|-------|-------|-------------|
+| Blue | Training | The monitor is learning baseline behavior. No alerts are triggered. |
+| Green | Normal | The observed value is within expected bounds. |
+| Red | Alerting | The observed value fell outside expected bounds. |
 
 ## Model states
 
@@ -33,6 +39,13 @@ The model often reuses prior predictions rather than generating new ones, for ex
 ## Metric-specific behavior
 
 While the core model logic is shared across metric types, each type has additional rules:
+
+| Metric type | Alert condition |
+|-------------|----------------|
+| Freshness | Time since last refresh is longer than expected based on historical update patterns. A small buffer is added to the upper bound to avoid alerting on minor delays. |
+| Row count | Row count has not changed for longer than normal, indicating a stalled or broken pipeline. |
+| Nullness, uniqueness | A jump to 0% or 100% when the metric has historically stayed away from those extremes. |
+| Custom SQL (Default model) | Value falls outside the expected range inferred from history. If the metric has never returned a negative value, the lower bound is constrained to 0. |
 
 ### Freshness
 
@@ -56,11 +69,13 @@ The model uses up to 400 days of history to detect seasonal patterns, account fo
 
 The following seasonal patterns are detected:
 
-- **Hour of day**: Metrics that follow intraday patterns, such as higher row counts during business hours.
-- **Hour of week**: Metrics with consistent patterns across a full week at hourly granularity.
-- **Day of week**: Metrics that differ across days of the week (for example, lower activity on Sundays).
-- **Day of month**: Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes.
-- **Weekday vs. weekend**: Metrics with systematically different behavior on weekends versus weekdays.
+| Pattern | Description |
+|---------|-------------|
+| Hour of day | Metrics that follow intraday patterns, such as higher row counts during business hours. |
+| Hour of week | Metrics with consistent patterns across a full week at hourly granularity. |
+| Day of week | Metrics that differ across days of the week, such as lower activity on Sundays. |
+| Day of month | Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes. |
+| Weekday vs. weekend | Metrics with systematically different behavior on weekends versus weekdays. |
 
 Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal ("green") history before it can detect a given pattern.
 
@@ -71,6 +86,10 @@ The model accounts for whether a metric is growing or shrinking over time. For a
 ## Annotations
 
 Annotations let you provide feedback to the model when it misclassifies a point, either by alerting when it should not have or by missing an alert when it should have. Because data quality expectations are often business-specific, annotations are the primary way to tune the model to your team's needs over time.
+
+Annotations have two effects:
+- **Correcting the current state**: Marking a flagged point as expected moves the monitor out of the alerting state and resumes normal learning.
+- **Shaping future predictions**: The model weights annotated points when generating future bounds, so repeated feedback improves accuracy over time.
 
 See [Annotate bounds][2] on the Data Observability Monitor page for available annotation types and how to apply them.
 
