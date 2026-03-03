@@ -30,11 +30,13 @@ The Infrastructure overlay is ideal for:
 
 ## Resource grouping
 
-Resources are organized in a hierarchical structure:
+Resources are organized in a hierarchical structure. The grouping labels vary by provider:
 
-- **Account**: Top-level grouping by AWS account
-- **Region**: Resources grouped by geographic region within each account
-- **VPC**: Resources grouped by Virtual Private Cloud within each region
+| Level | AWS | Azure | GCP |
+|-------|-----|-------|-----|
+| Top-level | Account | Subscription | Project |
+| Geographic | Region | Region | Region |
+| Network | VPC | Virtual Network | VPC |
 
 This hierarchy helps you understand how resources are distributed across your cloud infrastructure.
 

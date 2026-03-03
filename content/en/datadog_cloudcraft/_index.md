@@ -1,6 +1,6 @@
 ---
 title: Cloudcraft in Datadog
-description: "Visualize and analyze AWS and Azure cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
+description: "Visualize and analyze AWS, Azure, and GCP cloud infrastructure with live Cloudcraft diagrams in Datadog for troubleshooting, security analysis, and cost optimization."
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
   tag: "Blog"
@@ -19,7 +19,7 @@ Cloudcraft offers a powerful, live read-only visualization tool for cloud archit
 
 <div class="alert alert-info">This documentation applies to the Cloudcraft <em>in Datadog</em> product. For information on the standalone Cloudcraft product, please refer to the <a href="/cloudcraft">Cloudcraft (Standalone)</a> documentation.</div>
 
-Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS and Azure cloud resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
+Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS, Azure, and GCP cloud resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
 
 - Trace incidents back to their root causes through infrastructure dependencies.
 - Determine if infrastructure is the cause of an incident, such as cross-region traffic causing latency or increased costs. 
@@ -27,9 +27,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - Onboard new team members.
 - Accelerate incident MTTR and proactive governance tasks by simplifying infrastructure navigation.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_azure_tab_2.mp4" alt="Video showing a Cloudcraft diagram in the security overlay. A resource is selected, opening a side panel with its details. The Changes option is selected from the left hand side of the side panel. In the Security section of the side panel, several misconfigurations are listed. The Investigate button next to one of the misconfigurations is clicked, opening a new side panel with details of the misconfiguration and a Next Steps section with options for Triage, Remediation, and More Actions" video=true >}}
-
-<div class="alert alert-info">Cloudcraft in Datadog is only available for AWS and Azure accounts.</div>
+{{< img src="datadog_cloudcraft/cloudcraft_with_gcp_tab.mp4" alt="Video showing a Cloudcraft diagram in the security overlay. A resource is selected, opening a side panel with its details. The Changes option is selected from the left hand side of the side panel. In the Security section of the side panel, several misconfigurations are listed. The Investigate button next to one of the misconfigurations is clicked, opening a new side panel with details of the misconfiguration and a Next Steps section with options for Triage, Remediation, and More Actions" video=true >}}
 
 ## Prerequisites
 
@@ -85,6 +83,27 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 [16]: /integrations/guide/azure-manual-setup/?tab=azurecli#setup
 
 {{% /tab %}}
+{{% tab "GCP" %}}
+
+- To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
+- Enable [resource collection][17] for your GCP accounts:
+  1. Navigate to [**Integrations > Google Cloud Platform**][18].
+  2. Select the GCP project you want to enable.
+  3. On the **Resource Collection** tab, ensure the **Enable Resource Collection** toggle is enabled.
+
+- Viewing content on the [Security overlay][10] requires additional products to be enabled:
+  - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
+
+**Note**: The [Observability overlay][19] and the [Cloud Cost Management][11] Cost view are not available for GCP accounts. The CCM Recommendations view is supported.
+
+[3]: /security/cloud_security_management
+[10]: /datadog_cloudcraft/overlays#security
+[11]: /datadog_cloudcraft/overlays#cloud-cost-management
+[17]: /integrations/google_cloud_platform/#resource-collection
+[18]: https://app.datadoghq.com/integrations/google-cloud-platform
+[19]: /datadog_cloudcraft/overlays#observability
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Getting started
@@ -97,7 +116,7 @@ To get started using Cloudcraft, use the following steps:
 
 {{< img src="datadog_cloudcraft/getting_started.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions.
+<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the <strong>Project</strong> name comes from your GCP project name in the Google Cloud Platform integration tile.
 </div>
 
 ### Group By
@@ -112,7 +131,7 @@ Enable the **Show All Controls** toggle to display the available **Group By** op
 
 You can group resources by AWS and Azure tags, such as app, service, team, or cost center, to organize your view by team or workload. When grouping by tags, color-coded labels are displayed on each group. When grouping by the `service` tag, a raised block is displayed to visually indicate the service grouping.
 
-**Note**: Grouping by tags is supported for AWS and Azure tags only. Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported. 
+**Note**: Grouping by tags is supported for AWS tags, Azure tags, and GCP labels (for example, `Project`). Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported.
 
 {{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
 

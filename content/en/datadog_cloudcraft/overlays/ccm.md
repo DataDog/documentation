@@ -18,7 +18,9 @@ further_reading:
 
 ## Overview
 
-The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your AWS architecture diagrams. This overlay provides two views: **[Cost](#cost-view)** and **[Recommendations](#recommendations-view)**.
+The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your cloud architecture diagrams. This overlay provides two views: **[Cost](#cost-view)** and **[Recommendations](#recommendations-view)**.
+
+**Note**: The Cost view is not available for GCP accounts. The Recommendations view is supported for GCP.
 
 ## Cost view
 
