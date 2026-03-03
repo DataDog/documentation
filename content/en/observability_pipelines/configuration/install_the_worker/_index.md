@@ -94,7 +94,7 @@ See [Update Existing Pipelines][5] if you want to make changes to your pipeline'
 [3]: /observability_pipelines/guide/environment_variables/
 [4]: /observability_pipelines/configuration/secrets_management
 [5]: /observability_pipelines/configuration/update_existing_pipelines/
-[6]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/?tab=docker#identify-workers-using-pod-and-cluster-names
+[6]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/?tab=docker#use-pod-and-cluster-names-to-identify-workers-in-a-kubernetes-environment
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -306,7 +306,7 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: /observability_pipelines/configuration/secrets_management
-[4]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/?tab=docker#identify-workers-using-pod-and-cluster-names
+[4]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/?tab=docker#use-pod-and-cluster-names-to-identify-workers-in-a-kubernetes-environment
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
