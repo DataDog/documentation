@@ -24,7 +24,6 @@ Datadog recommends using a **System Key**. Unlike Scoped Keys, which inherit per
 
 Follow the [Fivetran System Keys documentation][1] to generate an API key and secret with the following permissions:
 
-- `ACCOUNT`: `READ`
 - `DESTINATION`: `READ`
 - `CONNECTOR`: `READ`
 
