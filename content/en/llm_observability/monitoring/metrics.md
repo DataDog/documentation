@@ -46,6 +46,10 @@ After you instrument your application with LLM Observability, you can access LLM
 
 ### LLM cost metrics
 
+<div class="alert alert-info">
+The unit for estimated cost metrics for LLM Observability is <strong>nanodollars</strong>.
+</div>
+
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.span.llm.input.cost` | Estimated input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source` |
