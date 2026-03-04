@@ -130,9 +130,7 @@ To optimize performance and reduce costs:
 
 ### Accelerate searches with Indexed Attributes
 
-You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, by indexing `trace_id` or `user_id`:
-* Searches for specific values become nearly instantaneous.
-* You significantly reduce the volume of data scanned, lowering your cloud provider's egress fees.
+You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you index `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
 
 To set this up, see the [Log Archives][7] documentation.
 
@@ -140,7 +138,7 @@ To set this up, see the [Log Archives][7] documentation.
 
 Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of **Archive Search** across teams. Click **Settings** to configure:
 
-- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search in **Search & Rehydration ** mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search in **Search & Rehydration** mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
 - **Rehydration retention periods**: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 

@@ -232,8 +232,10 @@ Use this optional configuration step to define the maximum volume of log data (i
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
 
 #### Archive Search Indexed Attribute (Preview)
-
-To accelerate searches and investigations within your archives (via [Archive Search][16]), you can define specific attribute to be indexed directly in your storage bucket.
+{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
+Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
+{{< /callout >}}
+To accelerate searches and investigations in your archives (with [Archive Search][16]), define specific attributes to be indexed directly in your storage bucket.
 
 * **Indexed Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
 * **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
