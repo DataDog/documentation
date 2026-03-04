@@ -240,9 +240,6 @@ To accelerate searches and investigations in your archives (with [Archive Search
 * **Indexed Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
 * **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
 
-<div class="alert alert-info">
-<b><a href="[[https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old](https://www.datadoghq.com/product-preview/flex-frozen-archive-search)/](https://www.datadoghq.com/product-preview/flex-frozen-archive-search/)">Register for the Preview</a>.
-</div>
 
 {{< site-region region="us3" >}}
 
