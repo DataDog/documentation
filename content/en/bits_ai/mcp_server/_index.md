@@ -72,20 +72,22 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
 
 - Retrieve only the core tools (this is the default if `toolsets` is not specified):
-  ```text
-  {{< region-param key="mcp_server_endpoint" >}}
-  ```
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
 - Retrieve only Synthetic Testing-related tools:
-  ```text
-  {{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics
-  ```
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
+
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
-  ```text
-  {{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery
-  ```
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+[36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 ## Available tools
 
