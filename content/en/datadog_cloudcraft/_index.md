@@ -87,14 +87,14 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - Enable [resource collection][17] for your GCP accounts:
-  1. Navigate to [**Integrations > Google Cloud Platform**][18].
-  2. Select the GCP project you want to enable.
-  3. On the **Resource Collection** tab, ensure the **Enable Resource Collection** toggle is enabled.
+  1. In Datadog, navigate to **Datadog Setup > Integration Catalog > Google Cloud Platform**.
+  2. Click on your project name, then select **Resource Collection**.
+  3. Enable the **Enable Resource Collection** toggle.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
 
-**Note**: The [Observability overlay][19] and the [Cloud Cost Management][11] Cost view are not available for GCP accounts. The CCM Recommendations view is supported.
+**Note**: The [Observability overlay][19], the [Cloud Cost Management][11] Cost view, and sensitive data in the Security overlay are not available for GCP accounts. The CCM Recommendations view is supported.
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
@@ -114,9 +114,9 @@ To get started using Cloudcraft, use the following steps:
 
 **Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags to display it.
 
-{{< img src="datadog_cloudcraft/getting_started.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/getting_started_3.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the <strong>Project</strong> name comes from your GCP project name in the Google Cloud Platform integration tile.
+<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the <strong>Project</strong> dropdown lists your GCP project IDs from the Google Cloud Platform integration tile.
 </div>
 
 ### Group By
@@ -125,7 +125,7 @@ With Group By, Cloudcraft divides your diagram into distinct sections based on d
 
 Enable the **Show All Controls** toggle to display the available **Group By** options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **+ Tags** menu.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl_2.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
 
 #### Group by tags
 
@@ -133,7 +133,7 @@ You can group resources by AWS and Azure tags, such as app, service, team, or co
 
 **Note**: Grouping by tags is supported for AWS tags, Azure tags, and GCP labels (for example, `Project`). Tags from the Datadog Agent (for example, locally configured `env` or `team` tags) are not supported.
 
-{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_with_team_tags_2.png" alt="Cloudcraft landing page with Group by highlighted, and grouping by Team" >}}
 
 ### Saved views 
 
@@ -150,13 +150,13 @@ To apply a saved view to your diagram:
 
 Use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource displays a panel with basic information, while clicking on a resource opens a side panel with observability, cost, and security data, along with cross-links to other relevant Datadog products.
 
-{{< img src="datadog_cloudcraft/cloudcraft_with_security_2.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
+{{< img src="datadog_cloudcraft/cloudcraft_with_security_3.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
 #### Projection toggle
 
 Toggle the projection from 3D (default) to 2D to visualize your resources from a top-down view.
 
-{{< img src="datadog_cloudcraft/cloudcraft_2D_2.png" alt="Cloudcraft landing page with the 2D toggle enabled" >}}
+{{< img src="datadog_cloudcraft/cloudcraft_2D_3.png" alt="Cloudcraft landing page with the 2D toggle enabled" >}}
 
 ### Filtering and search
 
@@ -168,7 +168,7 @@ Click the **+ Filter** menu to filter your resources by commonly used tags such 
 
 Use the search bar to locate resources on the diagram by name, ID, or tag. This feature is effective for finding specific resources within your cloud architecture. It highlights the search criteria in the diagram, without creating a new diagram, by greying out the elements that do not match the search criteria.
 
-{{< img src="datadog_cloudcraft/search_highlight_4.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
+{{< img src="datadog_cloudcraft/search_highlight_5.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
 
 ## Permissions
 

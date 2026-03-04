@@ -40,6 +40,8 @@ Resources are organized in a hierarchical structure. The grouping labels vary by
 
 This hierarchy helps you understand how resources are distributed across your cloud infrastructure.
 
+GCP supports additional grouping options: **Firewall**, **Service**, **Subnet**, and **Tags**.
+
 ## Interact with resources
 
 Click any resource to open a side panel with additional details, including:
@@ -52,9 +54,19 @@ Click any resource to open a side panel with additional details, including:
 
 To reduce visual clutter and highlight the most important parts of your architecture, the Infrastructure overlay excludes certain components by default:
 
+**AWS**
 - EBS volumes
 - NAT Gateways
 - Transit Gateways
+
+**GCP**
+- Compute Disk
+- GKE Cronjob
+- GKE Daemonset
+- GKE Deployment
+- GKE Job
+- GKE Pod
+- GKE Statefulset
 
 These components are still part of your infrastructure but are hidden to keep the diagram focused on core resources.
 
