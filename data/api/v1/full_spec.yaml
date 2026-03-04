@@ -20256,7 +20256,7 @@ components:
           type: string
         billing_plan:
           deprecated: true
-          description: The billing plan (metadata). (Deprecated from May 2026)
+          description: The billing plan (metadata). (Deprecated from June 2026)
           type: string
         end_date:
           description: Shows the last date of usage.
