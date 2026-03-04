@@ -119,7 +119,7 @@ From the [**Archive Search list view**][5], you can:
 - **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
-## Search Performance and Optimization
+## Search performance and optimization
 
 Archive Search scans archived log files within your selected time range. **Scan volume** refers to the total size of the files read during a query. Large scan volumes can increase both search time and cloud egress costs.
 
