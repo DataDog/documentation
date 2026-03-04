@@ -89098,14 +89098,18 @@ paths:
         - logs_read_data
   /api/v2/metrics:
     get:
-      description: "Returns all metrics that can be configured in the Metrics Summary
-        page or with Metrics without Limits\u2122 (matching additional filters if
-        specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]`
-        query parameters.\nTo fetch the first page, pass in a query parameter with
-        either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch
-        the next page, pass in the `next_cursor` value from the response as the new
-        `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null,
-        all pages have been retrieved."
+      description: 'Returns all metrics for your organization that match the given
+        filter parameters.
+
+        Optionally, paginate by using the `page[cursor]` and/or `page[size]` query
+        parameters.
+
+        To fetch the first page, pass in a query parameter with either a valid `page[size]`
+        or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the
+        `next_cursor` value from the response as the new `page[cursor]` value.
+
+        Once the `meta.pagination.next_cursor` value is null, all pages have been
+        retrieved.'
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -89170,7 +89174,7 @@ paths:
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
-          Default value is 3600 (1 hour), maximum value is 2,592,000 (30 days).'
+          Default value is 3600 (1 hour), maximum value is 5,184,000 (60 days).'
         example: 3600
         in: query
         name: window[seconds]
