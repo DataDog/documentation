@@ -47,7 +47,7 @@ You can manage session sampling with replays using retention filters. Whenever a
 
 ## Permanent retention filters
 
-Permanent retention filters are predefined retention filters that cannot be modified, disabled, or deleted. They are positioned at the top of your retention filter list.
+Permanent retention filters are predefined retention filters that cannot be modified, disabled, or deleted. They are positioned at the top of your retention filters list.
 
 {{< img src="real_user_monitoring/rum_without_limits/permanent-retention-filters.png" alt="The three permanent retention filters shown at the top of the retention filter list." style="width:100%" >}}
 
@@ -126,14 +126,15 @@ For example, to exclude sessions from South Korea while retaining all other sess
 
 Cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry. When configuring a RUM retention filter, you can enable a cross-product retention filter for APM traces.
 
-PHOTO
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-overview.png" alt="RUM retention filters with cross-product retention filters enabled for APM traces." style="width:100%" >}}
 
 The **APM traces filter** indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
+
+**Note**: The availability of APM traces depends on your **trace sampling SDK configuration** (see <a href="/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum">here</a> how to correlate RUM with APM Traces)
+
   <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 
 <div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
-
-**Note**: The availability of APM traces depends on the initialization parameter `traceSampleRate` of the SDK.
 
 To **find sessions with indexed APM traces** in the RUM Explorer, query `@session.has_indexed_apm_traces:true`.
 
@@ -141,14 +142,13 @@ To **find sessions with indexed APM traces** in the RUM Explorer, query `@sessio
 
 Consider a configuration where you set up a unique RUM retention filter configured as follows:
 
-CHANGE PHOTO
-
 {{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
 
-If you have initialized the SDK with `traceSampleRate:40`, then the outcome is the following:
+If you have configured the SDK to sample 40% of traces, then the outcome will be the following:
 
-- 60% of sessions with at least one error are retained.
-- 25% x 40% = 10% of these retained sessions have the APM traces retained.
+- 40% of ingested RUM sessions will have their traces ingested on APM.
+- 60% of ingested RUM sessions with at least one error will be retained.
+- 25% x 40% = 10% of these retained sessions will have their APM traces indexed.
 
 <div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
 
@@ -156,9 +156,9 @@ For more information, see <a href="/real_user_monitoring/rum_without_limits/rete
 
 ### Cross-product retention filters on permanent filters 
 
-Cross-product retention filters are also available on the <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is only editable on Synthetics Sessions and Sessions with forced replays filters.
+Cross-product retention filters are also available on the <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetics Sessions and Sessions with forced replays filters**.
 
-<div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Force Replay filters are billed under APM.</div>
+<div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
 
 ## Best practices
 
