@@ -2603,7 +2603,7 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
-    - name: Automations
+    - name: Handover automation
       url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
