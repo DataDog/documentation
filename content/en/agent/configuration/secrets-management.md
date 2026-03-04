@@ -47,17 +47,7 @@ secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
 
-#### Supported Agent processes
-
-| Component | Description  | Version |
-|---|---|---|
-| [**Datadog Agent**](/agent/) | The core Agent that powers Infrastructure Monitoring and Log Management. Runs on every host, VM, and container node. | 7.70+ |
-| [**Metrics** (DogStatsD)](/developers/dogstatsd/) | Ingests custom metrics submitted by your applications. Typically runs as part of the Datadog Agent. | 7.70+ |
-| [**Application Performance Monitoring** (APM)](/tracing/) | Collects traces and profiles from your applications. Typically runs as part of the Datadog Agent. | 7.70+ |
-| [**Container Monitoring** (Cluster Agent)](/containers/cluster_agent/) | Powers Kubernetes and Container Monitoring at the cluster level. Enabled by default in Helm and Operator deployments. | 7.77+ |
-
-
-<div class="alert alert-info">Datadog recommends native secrets fetching for managing secrets in the Datadog Agent. If your deployment includes other Agent processes or versions that do not support native secrets fetching, use <a href="#option-2-using-the-built-in-script-for-kubernetes-and-docker">Option 2</a> or <a href="#option-3-creating-a-custom-executable">Option 3</a> for those configurations.</div>
+**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
