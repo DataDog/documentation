@@ -631,23 +631,26 @@ If you are using a firewall, these domains must be added to the allowlist:
 {{< tabs >}}
 {{% tab "Docker and Kubernetes" %}}
 
-- `api.{{< region-param key="dd_site" >}}`
-- `config.{{< region-param key="dd_site" >}}`
-- `http-intake.{{< region-param key="dd_site" >}}`
+
+- `api.<DD_SITE>`
+- `config.<DD_SITE>`
+- `http-intake.<DD_SITE>`
 - `keys.datadoghq.com`
 
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-- `api.{{< region-param key="dd_site" >}}`
-- `config.{{< region-param key="dd_site" >}}`
-- `http-intake.{{< region-param key="dd_site" >}}`
-- `install.{{< region-param key="dd_site" >}}`
+- `api.<DD_SITE>`
+- `config.<DD_SITE>`
+- `http-intake.<DD_SITE>`
+- `install.<DD_SITE>`
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Replace `<DD_SITE>` with `{{< region-param key="dd_site" >}}`.
 
 ## Further reading
 

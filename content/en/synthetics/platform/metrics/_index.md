@@ -37,6 +37,7 @@ Metrics starting with:
     * `synthetics.icmp.*` come from your API [ICMP tests][8]
 * `synthetics.multi.*` come from your [multistep API tests][9]
 * `synthetics.browser.*` come from your [browser tests][10]
+* `synthetics.mobile.*` come from your [mobile app tests][14]
 * `synthetics.pl.*`come from your [private locations][11]
 
 ### General metrics
@@ -85,6 +86,10 @@ For more information on API test timings, read the guide on [API Test Timings an
 
 {{< get-metrics-from-git "synthetics" "synthetics.browser" >}}
 
+### Mobile app tests
+
+{{< get-metrics-from-git "synthetics" "synthetics.mobile" >}}
+
 ### Private locations
 
 {{< get-metrics-from-git "synthetics" "synthetics.pl.worker" >}}
@@ -112,3 +117,4 @@ For more information about parallelization, see [Continuous Testing Settings][13
 [11]: /synthetics/private_locations/
 [12]: /synthetics/guide/api_test_timing_variations/
 [13]: /continuous_testing/settings/#parallelization
+[14]: /mobile_app_testing/

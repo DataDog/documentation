@@ -1,6 +1,8 @@
 
 ---
 title: Agent-Side Filtering for Custom Metrics
+aliases:
+- /metrics/guide/agent-filtering-for-dogstatsd-custom-metrics/
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"

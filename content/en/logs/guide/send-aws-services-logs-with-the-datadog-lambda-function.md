@@ -47,6 +47,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [ECS][16]                          | `-`                                                                                                            | [Use the Docker Agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [IoT Core][74]                     | [Enable Amazon IoT Core logs][75]                                                                              | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                         | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
@@ -99,6 +100,7 @@ The following sources and locations are supported:
 | EKS Container Insights Logs | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
+| IoT Core Logs                    | CloudWatch     |
 | Network Firewall Logs       | S3, CloudWatch |
 | PCS Logs                    | CloudWatch     |
 | Redshift Logs               | S3, Cloudwatch |
@@ -140,6 +142,7 @@ The following sources and locations are supported:
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
+    "iot:GetV2LoggingOptions",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
     "lambda:List*",
@@ -193,6 +196,7 @@ The following sources and locations are supported:
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
@@ -444,5 +448,7 @@ You can also exclude or send only those logs that match a specific pattern by us
 [71]: /integrations/amazon-documentdb/#send-logs-to-datadog
 [72]: /integrations/amazon-vpn/#enable-logging
 [73]: /integrations/amazon_route53/#enable-route53-resolver-query-logging
+[74]: /integrations/amazon-iot/
+[75]: /integrations/amazon-iot/#enable-logging
 [74]: /integrations/amazon-bedrock/
 [75]: /integrations/amazon-pcs/
