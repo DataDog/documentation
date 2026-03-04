@@ -223,7 +223,7 @@ function initStepper(stepper) {
     if (controlsEl) {
         resetBtn = document.createElement('button');
         resetBtn.className = 'stepper__btn stepper__reset-btn';
-        resetBtn.textContent = 'Start over';
+        resetBtn.textContent = 'Reset step list';
         resetBtn.style.display = 'none';
         controlsEl.appendChild(resetBtn);
         resetBtn.addEventListener('click', handleReset);
