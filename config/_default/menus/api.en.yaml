@@ -13109,6 +13109,42 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Update maintenance
+      url: '#update-maintenance'
+      identifier: status-pages-update-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMaintenance
+        unstable: []
+        order: 17
+    - name: Get maintenance
+      url: '#get-maintenance'
+      identifier: status-pages-get-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMaintenance
+        unstable: []
+        order: 19
+    - name: Schedule maintenance
+      url: '#schedule-maintenance'
+      identifier: status-pages-schedule-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMaintenance
+        unstable: []
+        order: 16
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13253,6 +13289,18 @@ menu:
           - DeleteStatusPage
         unstable: []
         order: 5
+    - name: List maintenances
+      url: '#list-maintenances'
+      identifier: status-pages-list-maintenances
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMaintenances
+        unstable: []
+        order: 18
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations
