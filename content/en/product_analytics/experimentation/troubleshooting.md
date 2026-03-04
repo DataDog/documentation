@@ -118,7 +118,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for the following:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
-   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. 
+   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. Make sure that events fire after the experiment's feature flag is evaluated.
 
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
