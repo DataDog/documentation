@@ -21,10 +21,10 @@ For Agent v6.11+, the Datadog Agent can automatically detect the Kubernetes clus
 <div class="alert alert-info">
 This cluster name should be a unique name and abide by the following restrictions:
 <ul>
-  <li/>Must only contain lowercase letters, numbers, and hyphens
-  <li/>Must start with a letter
-  <li/>Must end with a number or a letter
-  <li/>Must be less than or equal to 80 characters
+  <li/>Must contain only lowercase letters, numbers, dots, hyphens and underscores
+  <li/>Must start with an alphanumeric character
+  <li/>Must end with an alphanumeric character
+  <li/>Must be FQDN-like, without a trailing period
 </ul>
 </div>
 
