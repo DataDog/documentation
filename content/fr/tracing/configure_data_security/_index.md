@@ -221,7 +221,7 @@ Le tableau ci-dessous décrit le comportement par défaut de chaque bibliothèqu
 
 {{% /tab %}}
 
-{{% onglet "Envoy" %}}
+{{% tab "Envoy" %}}
 
 **Remarque** : les numéros de carte de crédit sont obscurcis par l'Agent Datadog par défaut.
 
