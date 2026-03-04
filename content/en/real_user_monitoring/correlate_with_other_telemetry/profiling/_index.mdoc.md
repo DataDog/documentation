@@ -251,7 +251,7 @@ The [ProfilingManager API][7] also supports disabling rate limiting during debug
 
 ## Explore profiling data
 
-Profiling data is captured on vitals and rolls up to views and sessions. Use @profiling.has_profile in the Sessions Explorer to filter to profiled events and understand what code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
 
 ### During the time to initial display
 
@@ -323,7 +323,7 @@ If no value is specified, the default `applicationLaunchSampleRate` is 5 percent
 
 ## Explore profiling data
 
-Profiling data is captured on vitals and rolls up to views and sessions. Use @profiling.has_profile in the Sessions Explorer to filter to profiled events and understand what code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
+Profiling data is captured on vitals and rolls up to views and sessions. Use `@profiling.has_profile` in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, and vitals.
 
 ### During the time to initial display
 
