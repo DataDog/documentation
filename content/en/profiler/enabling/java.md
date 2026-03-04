@@ -140,14 +140,14 @@ Optional: Set up [Source Code Integration][5] to connect your profiling data wit
 
 In addition to the environment, service, and version variables shown in the installation steps, you can apply custom tags to uploaded profiles with `DD_TAGS` (a comma-separated list of `<key>:<value>` pairs such as `layer:api, team:intake`).
 
-For additional configuration options, refer the [Configuration reference][10] in the troubleshooting guide.
+For additional configuration options, see the [Configuration reference][10] in the troubleshooting guide.
 
 
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][9] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-Facing issues with while enabling profiler or need troubleshooting guidance? See the [Java Profiler Troubleshooting][12] guide.
+Facing issues while enabling the profiler or need troubleshooting guidance? See the [Java Profiler Troubleshooting][12] guide.
 
 ## Further Reading
 
