@@ -13,7 +13,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: "Source Code"
   text: Source code for dd-sdk-flutter
-- link: real_user_monitoring/explorer/
+- link: /real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
