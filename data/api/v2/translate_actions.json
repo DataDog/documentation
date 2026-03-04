@@ -3777,6 +3777,10 @@
     "description": "Lists all degradations for the organization. Optionally filter by status and page.",
     "summary": "List degradations"
   },
+  "ListMaintenances": {
+    "description": "Lists all maintenances for the organization. Optionally filter by status and page.",
+    "summary": "List maintenances"
+  },
   "DeleteStatusPage": {
     "description": "Deletes a status page by its ID.",
     "summary": "Delete status page"
@@ -3832,6 +3836,22 @@
   "UpdateDegradation": {
     "description": "Updates an existing degradation's attributes.",
     "summary": "Update degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateMaintenance": {
+    "description": "Schedules a new maintenance.",
+    "summary": "Schedule maintenance",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMaintenance": {
+    "description": "Retrieves a specific maintenance by its ID.",
+    "summary": "Get maintenance"
+  },
+  "UpdateMaintenance": {
+    "description": "Updates an existing maintenance's attributes.",
+    "summary": "Update maintenance",
     "request_description": "",
     "request_schema_description": ""
   },
