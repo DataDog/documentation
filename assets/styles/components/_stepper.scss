@@ -121,8 +121,9 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 
 .stepper__nav {
     display: none;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    gap: 8px;
     padding: 8px 0 16px;
 }
 

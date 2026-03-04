@@ -64,97 +64,83 @@ function initStepper(stepper) {
     steps[steps.length - 1].classList.add('stepper__step--last');
 
     let currentIndex = 0;
-    let showAll = false;
     let finished = false;
+    // Tracks which non-active steps are manually expanded (by index)
+    let expandedSteps = new Set();
 
     // Restore saved progress
     const saved = loadProgress(stepperId);
     if (saved) {
-        if (saved.showAll) {
-            showAll = true;
-        } else if (saved.finished) {
+        if (saved.finished) {
             finished = true;
-            currentIndex = typeof saved.stepIndex === 'number' ? saved.stepIndex : -1;
         } else if (typeof saved.stepIndex === 'number' && saved.stepIndex >= 0 && saved.stepIndex < steps.length) {
             currentIndex = saved.stepIndex;
+        }
+        if (Array.isArray(saved.expandedSteps)) {
+            expandedSteps = new Set(saved.expandedSteps);
         }
     }
 
     function persist() {
-        saveProgress(stepperId, { stepIndex: currentIndex, showAll, finished });
+        saveProgress(stepperId, {
+            stepIndex: currentIndex,
+            finished,
+            expandedSteps: [...expandedSteps]
+        });
     }
 
     function render() {
-        if (showAll) {
-            stepper.classList.add('stepper--show-all');
-            steps.forEach((step) => {
-                step.classList.remove('stepper__step--active');
-                step.classList.remove('stepper__step--completed');
-                // In show-all mode, reveal all content; hide nav
-                const content = step.querySelector('.stepper__step-content');
-                if (content) content.removeAttribute('hidden');
-                const nav = step.querySelector('.stepper__nav');
-                if (nav) nav.style.display = 'none';
-            });
-            if (finishedEl) finishedEl.style.display = 'none';
-            if (controlsEl) {
-                controlsEl.style.display = 'flex';
-                if (controlsBtn) controlsBtn.textContent = 'Hide other steps';
-                if (resetBtn) resetBtn.style.display = 'none';
-            }
-        } else {
-            stepper.classList.remove('stepper--show-all');
-            steps.forEach((step, i) => {
-                const isActive = i === currentIndex;
-                step.classList.toggle('stepper__step--active', isActive);
-                step.classList.toggle('stepper__step--completed', finished || i < currentIndex);
-                const content = step.querySelector('.stepper__step-content');
-                if (content) {
-                    if (isActive) {
-                        content.removeAttribute('hidden');
-                    } else {
-                        content.setAttribute('hidden', 'until-found');
-                    }
-                }
-                const nav = step.querySelector('.stepper__nav');
-                if (nav) nav.style.display = (isActive && !finished) ? '' : 'none';
-            });
-            if (finishedEl) {
-                finishedEl.style.display = finished ? '' : 'none';
-            }
-            if (controlsEl) {
-                // Show controls in finished state so user can "Show all" or "Reset"
-                if (finished) {
-                    controlsEl.style.display = 'flex';
-                    if (controlsBtn) controlsBtn.textContent = 'Show all steps';
-                    if (resetBtn) resetBtn.style.display = '';
+        steps.forEach((step, i) => {
+            const isActive = !finished && i === currentIndex;
+            const isCompleted = finished || i < currentIndex;
+            const isExpanded = isActive || expandedSteps.has(i);
+
+            step.classList.toggle('stepper__step--active', isActive);
+            step.classList.toggle('stepper__step--completed', isCompleted);
+
+            const content = step.querySelector('.stepper__step-content');
+            if (content) {
+                if (isActive) {
+                    content.removeAttribute('hidden');
+                    content.style.removeProperty('display');
+                } else if (isExpanded) {
+                    content.removeAttribute('hidden');
+                    content.style.display = 'block';
                 } else {
-                    controlsEl.style.display = 'none';
-                    if (resetBtn) resetBtn.style.display = 'none';
+                    content.setAttribute('hidden', 'until-found');
+                    content.style.removeProperty('display');
                 }
             }
-            // Toggle show-all / hide-others buttons within each step's nav
-            steps.forEach((step) => {
-                const showBtn = step.querySelector('.stepper__show-all-btn');
-                const hideBtn = step.querySelector('.stepper__hide-others-btn');
-                if (showBtn) showBtn.style.display = '';
-                if (hideBtn) hideBtn.style.display = 'none';
-            });
+            const nav = step.querySelector('.stepper__nav');
+            if (nav) nav.style.display = (isActive && !finished) ? '' : 'none';
+        });
+
+        if (finishedEl) {
+            finishedEl.style.display = finished ? '' : 'none';
+        }
+
+        if (controlsEl) {
+            if (finished) {
+                controlsEl.style.display = 'flex';
+                // Hide the original "Show all" button; only show Reset
+                if (controlsBtn) controlsBtn.style.display = 'none';
+                if (resetBtn) resetBtn.style.display = '';
+            } else {
+                controlsEl.style.display = 'none';
+            }
         }
     }
 
     function goToStep(index) {
         finished = false;
         currentIndex = Math.max(0, Math.min(index, steps.length - 1));
-        showAll = false;
         persist();
         render();
     }
 
     function handleFinish() {
         finished = true;
-        currentIndex = -1; // no step expanded initially
-        showAll = false;
+        expandedSteps.clear();
         persist();
         render();
     }
@@ -162,7 +148,7 @@ function initStepper(stepper) {
     function handleReset() {
         finished = false;
         currentIndex = 0;
-        showAll = false;
+        expandedSteps.clear();
         persist();
         render();
     }
@@ -178,24 +164,13 @@ function initStepper(stepper) {
         resetBtn.addEventListener('click', handleReset);
     }
 
-    function toggleShowAll() {
-        showAll = !showAll;
-        if (!showAll) {
-            // Return to single-step view at current position
-            finished = false;
-        }
-        persist();
-        render();
-    }
-
     // Auto-expand step when browser find-in-page matches hidden content
     steps.forEach((step, i) => {
         const content = step.querySelector('.stepper__step-content');
         if (content) {
             content.addEventListener('beforematch', () => {
-                if (showAll) return;
                 if (finished) {
-                    currentIndex = i;
+                    expandedSteps.add(i);
                     persist();
                     render();
                 } else {
@@ -209,15 +184,20 @@ function initStepper(stepper) {
     steps.forEach((step, i) => {
         const title = step.querySelector('.stepper__step-title');
         if (title) {
-            title.addEventListener('click', () => {
-                if (finished) {
-                    // In finished state, toggle expand/collapse without leaving finished
-                    currentIndex = (currentIndex === i) ? -1 : i;
-                    persist();
-                    render();
-                } else {
-                    goToStep(i);
+            title.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (!finished && i === currentIndex) {
+                    // Clicking the active step does nothing
+                    return;
                 }
+                // Toggle expand/collapse for non-active and finished steps
+                if (expandedSteps.has(i)) {
+                    expandedSteps.delete(i);
+                } else {
+                    expandedSteps.add(i);
+                }
+                persist();
+                render();
             });
         }
     });
@@ -233,15 +213,8 @@ function initStepper(stepper) {
             goToStep(currentIndex - 1);
         } else if (btn.classList.contains('stepper__finish-btn')) {
             handleFinish();
-        } else if (
-            btn.classList.contains('stepper__show-all-btn') ||
-            btn.classList.contains('stepper__hide-others-btn')
-        ) {
-            toggleShowAll();
         } else if (btn.classList.contains('stepper__reset-btn')) {
             handleReset();
-        } else if (controlsEl && controlsEl.contains(btn)) {
-            toggleShowAll();
         }
     });
 
