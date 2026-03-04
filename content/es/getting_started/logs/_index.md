@@ -1,4 +1,6 @@
 ---
+description: Recopila logs de múltiples fuentes, procésalos y analízalos, y luego
+  correlaciónalos con trazas (traces) y métricas.
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
   tag: Centro de aprendizaje
@@ -22,7 +24,7 @@ further_reading:
   tag: Documentación
   text: Descubre cómo configurar el etiquetado de servicios unificado
 - link: https://dtdg.co/fe
-  tag: Establecer las bases
+  tag: Habilitación de los fundamentos
   text: Participa en una sesión interactiva para optimizar tu gestión de logs
 title: Empezando con los logs
 ---
@@ -124,7 +126,7 @@ Una vez que se haya configurado una fuente de logs y que tus logs estén disponi
 
 ### Correlación de logs
 
-* [Conecta los logs y trazas][2] con los logs exactos asociados a alguno de los siguientes parámetros concretos: `env`, `service,` o `version`.
+* [Conecta logs y trazas][2] con los logs exactos asociados a alguno de los siguientes parámetros concretos: `env`, `service,` o `version`.
 * Si ya usas métricas en Datadog, puedes [correlacionar los logs y las métricas][3] para obtener más contexto sobre un problema.
 
 ### Guías
@@ -146,7 +148,7 @@ Una vez que se haya configurado una fuente de logs y que tus logs estén disponi
 [4]: /es/security/cloud_siem/
 [5]: /es/getting_started/integrations/
 [6]: /es/agent/
-[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[7]: /es/agent/configuration/agent-commands/#restart-the-agent
 [8]: https://app.datadoghq.com/logs/onboarding/server
 [9]: /es/agent/logs/?tab=tailfiles#custom-log-collection
 [10]: /es/agent/docker/log/?tab=containerinstallation

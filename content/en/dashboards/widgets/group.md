@@ -5,6 +5,9 @@ description: "Group your widgets together in a dashboard widget."
 aliases:
 - /graphing/widgets/group/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"

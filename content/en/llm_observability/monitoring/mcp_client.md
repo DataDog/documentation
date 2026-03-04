@@ -1,6 +1,12 @@
 ---
 title: MCP Clients
 description: Learn how to instrument and monitor MCP clients with LLM Observability.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/mcp-client-monitoring
+    tag: Blog
+    text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
+
 ---
 
 You can monitor your MCP clients with Datadog LLM Observability in two ways:
@@ -407,6 +413,9 @@ java -javaagent:dd-java-agent.jar -Ddd.llmobs.enabled=true -Ddd.llmobs.ml-app=<Y
 
 {{< /tabs >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/modelcontextprotocol/python-sdk
 [2]: /llm_observability/instrumentation/sdk

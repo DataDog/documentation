@@ -1,6 +1,12 @@
 ---
 title: Okta
 description: Learn more about the Okta pack.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/rehydrate-archived-logs-with-observability-pipelines
+    tag: Blog
+    text: Rehydrate archived logs in any SIEM or logging vendor with Observability Pipelines
+
 ---
 
 ## Overview
@@ -14,3 +20,7 @@ What this pack does:
 - Samples routine logins and profile updates
 - Keeps high-value security events
 - Drops low-value or routine system events
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

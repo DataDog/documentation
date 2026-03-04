@@ -12,6 +12,11 @@ further_reading:
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Azure Functions. To collect additional metrics, install the [Datadog Azure integration][5].
 
+Here is the list of supported runtimes, operating systems (OS) and hosting plans for Azure Functions monitoring:
+- **Runtimes**: .NET, Node.js, Python, Java
+- **Operating Systems (OS)**: Windows, Linux
+- **Hosting Plans**: Dedicated (App Service) Plan, Premium Plan, Consumption Plan, Flex Consumption Plan
+
 The recommended installation method depends on your Azure Function’s configuration:
 - For .NET Windows Azure Functions running on Dedicated/App Service or Premium plans: use the [Datadog .NET APM Extension][9].
 - For all other configurations (including different runtimes, operating systems, or hosting plans): Follow the instructions below to install the Serverless Compatibility Layer.
@@ -30,13 +35,12 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
 
-2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**. Add the following lines to your main application entry point file (for example, `app.js`):
+2. **Start the Datadog Serverless Compatibility Layer and initialize the Datadog Node.js tracer**.
+   
+   Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step. Node options in Azure Functions can be configured with the environment variable `languageWorkers__node__arguments`.
 
-   ```js
-   require('@datadog/serverless-compat').start();
-
-   // This line must come before importing any instrumented module.
-   const tracer = require('dd-trace').init()
+   ```
+   languageWorkers__node__arguments='--require @datadog/serverless-compat/init --require dd-trace/init'
    ```
 
 3. **Configure the Datadog Node.js tracer**
@@ -110,7 +114,7 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    Datadog.Serverless.CompatibilityLayer.Start();
    ```
 
-   If your Azure Function app uses the In-Container model, add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
+   If your Azure Function app uses the [legacy in-process model][3], add a NuGet package reference to `Microsoft.Azure.Functions.Extensions`:
    ```shell
    dotnet package add Microsoft.Azure.Functions.Extensions
    ```
@@ -170,8 +174,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    - [Configuring the .NET Core Tracing Library][1]
    - [Configuring the .NET Framework Tracing Library][2]
 
-[1]:/tracing/trace_collection/library_config/dotnet-core
-[2]:/tracing/trace_collection/library_config/dotnet-framework
+[1]: /tracing/trace_collection/library_config/dotnet-core
+[2]: /tracing/trace_collection/library_config/dotnet-framework
+[3]: https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

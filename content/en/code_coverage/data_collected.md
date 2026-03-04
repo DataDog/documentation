@@ -10,10 +10,6 @@ further_reading:
     text: "Set up Code Coverage"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
-
 ## Source Code Provider Integration
 
 The exact data received by Datadog depends on your source code provider type:

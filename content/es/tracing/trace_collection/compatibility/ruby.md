@@ -17,29 +17,30 @@ type: multi-code-lang
 
 ## Compatibilidad
 
-La librería de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
+La biblioteca de Datadog Trace de Ruby es de código abierto. Consulta el repositorio GitHub de [dd-trace-rb][1] para obtener más información.
 
-### Intérpretes compatibles de Ruby
+### Intérpretes compatibles de Ruby 
 
-| Tipo  | Documentación              | Versión   | Tipo de soporte técnico              | Compatibilidad con versiones de Gem |
+<!-- Asegúrate de que todos los comentarios de "# TODO: Ruby 3.5 - " estén abordados antes de incluir 3.5 en nuestros documentos públicos de soporte -->
+| Tipo  | Documentación              | Versión   | Tipo de soporte              | Soporte de la versión del Gem |
 |-------|----------------------------|-----------|---------------------------|---------------------|
-| MRI   | https://www.ruby-lang.org/ | 3.4       | [última](#support-latest) | Última              |
-|       |                            | 3.3       | [última](#support-latest) | Última              |
-|       |                            | 3.2       | [última](#support-latest) | Última              |
-|       |                            | 3.1       | [última](#support-latest) | Última              |
-|       |                            | 3.0       | [última](#support-latest) | Última              |
-|       |                            | 2.7       | [última](#support-latest) | Última              |
-|       |                            | 2.6       | [última](#support-latest) | Última              |
-|       |                            | 2.5       | [última](#support-latest) | Último              |
+| MRI   | https://www.ruby-lang.org/ | 3.4       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.3       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.2       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.1       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 3.0       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.7       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.6       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 2.5       | [Más reciente](#support-latest) | Más reciente              |
 |       |                            | 2.4       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.3       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.2       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.1       | [EOL](#support-eol)       | < 2.0.0             |
 |       |                            | 2.0       | [EOL](#support-eol)       | < 0.50.0            |
 |       |                            | 1.9       | [EOL](#support-eol)       | < 0.27.0            |
-| JRuby | https://www.jruby.org      | 9.4       | [última](#support-latest) | Último              |
-|       |                            | 9.3       | [última](#support-latest) | Último              |
-|       |                            | 9.2.21.0+ | [última](#support-latest) | Último              |
+| JRuby | https://www.jruby.org      | 9.4       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 9.3       | [Más reciente](#support-latest) | Más reciente              |
+|       |                            | 9.2.21.0+ | [Más reciente](#support-latest) | Más reciente              |
 
 ### Servidores web compatibles
 
@@ -49,7 +50,7 @@ La librería de Datadog Trace de Ruby es de código abierto. Consulta el reposit
 | Unicorn   | https://bogomips.org/unicorn/     | 4.8+ / 5.1+  | [última](#support-latest) |
 | Passenger | https://www.phusionpassenger.com/ | v5.0 o posterior         | [última](#support-latest) |
 
-### Marcos de rastreo compatibles
+### Frameworks de rastreo compatibles
 
 | Tipo        | Documentación                                   | Versión | Tipo de compatibilidad        | Compatibilidad con versiones de gem |
 |-------------|-------------------------------------------------|---------|---------------------|---------------------|
@@ -60,14 +61,14 @@ La librería de Datadog Trace de Ruby es de código abierto. Consulta el reposit
 
 | Sistema operativo            | Tipo de compatibilidad                            | Versión del paquete |
 |---------------|-----------------------------------------|-----------------|
-| Linux x86_64  | [última](#support-latest)               | Última          |
+| Linux x86_64  | [última](#support-latest)               | Último          |
 | Linux aarch64 | [última](#support-latest)               | Último          |
 | macOS         | Solo entornos de desarrolladores                    | Último          |
 | MS Windows    | [No implementada](#support-unimplemented) | Último          |
 
 ¿Necesitas soporte de linux para una arquitectura de CPU que no aparece en la lista? [Ponte en contacto con nuestro equipo de atención al cliente para solicitudes especiales][49].
 
-### Versiones compatibles de Datadog Agent
+### Versiones compatibles de Datadog Agent 
 
 | Versión de Datadog Agent | Tipo de compatibilidad              | Versión del paquete |
 |-----------------------|---------------------------|-----------------|
@@ -129,6 +130,7 @@ Para consultar una lista de integraciones disponibles y sus opciones de configur
 | Sneakers                   | `sneakers`                 | `>= 2.12.0`                                 | `>= 2.12.0`                                 | [Enlace][46]       | [Enlace](https://github.com/jondot/sneakers)                                   |
 | Stripe                     | `stripe`                   | `>= 5.15.0`                                 | `>= 5.15.0`                                 | [Enlace][47]       | [Enlace](https://github.com/stripe/stripe-Ruby)                                |
 | Sucker Punch               | `sucker_punch`             | `>= 2.0`                                    | `>= 2.0`                                    | [Enlace][48]       | [Enlace](https://github.com/brandonhilkert/sucker_punch)                       |
+| WaterDrop                  | `waterdrop`                | `>= 2.8.8.rc1`                              | `>= 2.8.8.rc1`                              | [Enlace][55]       | [Enlace](https://github.com/karafka/waterdrop) |
 
 ### Política de soporte técnico
 
@@ -159,11 +161,11 @@ Como esto se refiere a la reducción de soporte de tiempo de ejecución, implica
   de [Beta](#support-prerelease)/[Última](#support-latest) a [Mantenimiento](#support-maintenance).
 - **Las actualizaciones de versiones de parches** (por ejemplo, de `1.0.0` a `1.0.1`) no modificarán la compatibilidad con ningún tiempo de ejecución.
 
-#### Soporte técnico de versiones de la librería
+#### Soporte técnico de versiones de la biblioteca
 
 Datadog para Ruby proporcionará soporte de GA para la última versión principal y soporte de mantenimiento para la versión principal anterior
-de la librería. Este soporte se proporcionará a través de la última versión secundaria o de parche de la versión principal.
-Por ejemplo, si 1.21.0 es la última versión de la librería con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
+de la biblioteca. Este soporte se proporcionará a través de la última versión secundaria o de parche de la versión principal.
+Por ejemplo, si 1.21.0 es la última versión de la biblioteca con soporte de mantenimiento, las correcciones de errores se proporcionarán a través de una
 nueva versión 1.21.0 (o 1.20.1). Estas correcciones no se trasladarán como parches a versiones secundarias anteriores de 1.x.
 
 | Versión principal de Gem | Tipo de compatibilidad                        |

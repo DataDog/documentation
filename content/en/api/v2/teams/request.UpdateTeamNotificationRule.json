@@ -1,0 +1,15 @@
+{
+  "data": {
+    "type": "team_notification_rules",
+    "id": "b8626d7e-cedd-11eb-abf5-da7ad0900001",
+    "attributes": {
+      "pagerduty": {
+        "service_name": "Datadog-prod"
+      },
+      "slack": {
+        "workspace": "Datadog",
+        "channel": "aaa-governance-ops"
+      }
+    }
+  }
+}

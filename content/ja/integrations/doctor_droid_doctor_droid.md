@@ -32,14 +32,14 @@ name: doctor_droid_doctor_droid
 pricing:
 - billing_type: tag_count
   includes_assets: false
-  metric: ''
+  metric: datadog.marketplace.doctor-droid.usage
   product_id: doctor-droid
   short_description: 100 クエリあたり 10 ドル (最初の 100 クエリは無料)
-  tag: ''
+  tag: クエリ
   unit_label: クエリ
   unit_price: 10.0
 public_title: Doctor Droid
-short_description: 本番環境の問題に対するアラートの強化と自動調査
+short_description: 根本原因分析の自動化、オン コール インテリジェンス、ランブックの自動化
 supported_os:
 - linux
 - windows
@@ -57,15 +57,15 @@ tile:
   - Supported OS::macOS
   - Offering::Software License
   configuration: README.md#Setup
-  description: 本番環境の問題に対するアラートの強化と自動調査
+  description: 根本原因分析の自動化、オン コール インテリジェンス、ランブックの自動化
   media:
   - caption: Doctor Droid の Slack インテグレーションをワークスペースに追加します
     image_url: images/1.png
     media_type: image
-  - caption: モニター設定に移動し、宛先として Doctor Droid の Web フックを追加します。
+  - caption: monitor の送信先として Doctor Droid webhook を追加します
     image_url: images/2.png
     media_type: image
-  - caption: Doctor Droid に既存のプレイブックを接続します。
+  - caption: Doctor Droid の既存プレイブックを任意に接続できます
     image_url: images/3.png
     media_type: image
   - caption: プレイブック分析の結果を、直接受信トレイで受け取れます。
@@ -90,15 +90,17 @@ Doctor Droid は、アラートを強化し、Datadog アカウントを自動�
 
 **仕組み**
 
-1.  [Doctor Droid インテグレーション](https://app.datadoghq.com/integrations/doctordroid)をインストールします
+1.  [Doctor Droid インテグレーション][1] をインストールします
 2.  Doctor Droid で調査手順をプレイブックとして定義します (例: 下流のメトリクス確認、最近のデプロイ確認、エラーログ確認などの手順の定義)。
 3.  Doctor Droid の Web フックをモニターに追加します。
 4.  モニターがトリガーされた際に、調査の概要と洞察を自動的に取得します。
 
-## Agent
+## サポート
 
 サポートに関するお問い合わせは、support@drdroid.io までご連絡ください。
 
 
+[1]: https://app.datadoghq.com/integrations/doctordroid
+
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/doctor-droid-doctor-droid" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/doctor-droid-doctor-droid" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

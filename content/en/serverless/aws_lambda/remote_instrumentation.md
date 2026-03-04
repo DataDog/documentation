@@ -1,10 +1,16 @@
 ---
 title: Remote instrumentation for AWS Lambda
+further_reading:
+- link: "https://www.datadoghq.com/blog/faster-visibility-into-aws-lambda-functions"
+  tag: "Blog"
+  text: "Bring faster visibility into AWS Lambda functions with remote instrumentation"
 ---
 
-{{< img src="serverless/lambda/svl_lambda_remote.png" alt="AWS Remote Instrumentation page in Datadog, showing a 'Scope functions to instrument using tags' box and functions available for remote instrumentation." style="width:100%;" >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-_Supported runtimes_: Node.js, Python
+{{< img src="serverless/lambda/svl_lambda_remote.png" alt="AWS Remote Instrumentation page in Datadog, showing a 'Scope functions to instrument using tags' box and functions available for remote instrumentation." style="width:100%;" >}}
 
 You can use remote instrumentation to quickly add instrumentation to your AWS Lambda functions and keep them instrumented securely.
 
@@ -39,11 +45,11 @@ The instrumenter must be deployed to every region and account where you want to 
    The CloudFormation stack deploys the instrumenter function, **datadog-remote-instrumenter**, into your account and region. The stack also creates a CloudTrail and some adjacent resources.
 
 1. After the instrumenter function is deployed, select functions to instrument. You can select functions by function name, tags, or combinations of tags. See the [Selecting functions](#selecting-functions) section for more details.
-   
+
    After you finish your selections, click **Next**.
 
-1. Confirm your function selections. 
-   
+1. Confirm your function selections.
+
    You can also set layer versions and toggle logging and tracing. These settings are used for all future instrumentation and remain fixed until you manually update them. Updates can take a few minutes to be applied.
 
 After you set your configuration, the instrumenter automatically instruments any functions that newly satisfy your configured targeting rules. The instrumenter also keeps your functions instrumented. If Datadog layers or environment variables on a matching function are modified outside of remote instrumentation, the instrumenter automatically re-instruments your function.
@@ -75,12 +81,12 @@ Datadog recommends that you only instrument Lambda functions with a memory size 
 
 ## Verification
 
-After the remote instrumenter Lambda has applied instrumentation to your functions, the status column displays an **Instrumented** status. You can also confirm your functions are instrumented by opening your AWS Console and ensuring that two layers (Datadog Lambda extension and `datadog-lambda-python` or `datadog-lambda-js`) have been added to each selected function.
+After the remote instrumenter Lambda has applied instrumentation to your functions, the status column displays an **Instrumented** status. You can also confirm your functions are instrumented by opening your AWS Console and ensuring that two layers (Datadog Lambda extension and a Datadog tracing layer) have been added to each selected function.
 
 ## Upgrading to a new version
 
 1. Find [datadog-remote-instrument][5] (if you didn't rename it) CloudFormation stack.
-2. Find the current version of the stack template in the **Template** tab. 
+2. Find the current version of the stack template in the **Template** tab.
    ```yaml
    Mappings:
      Constants:
@@ -88,7 +94,7 @@ After the remote instrumenter Lambda has applied instrumentation to your functio
         Version: <TEMPLATE_VERSION>
    ```
    Note down the value of the template version, such as `1.10.0`, in case you run into issues with the new version and need to roll back.
-3. Update the stack using template URL `https://datadog-cloudformation-template.s3.amazonaws.com/aws/remote-instrument/latest.yaml`. You can also replace `latest` with a specific version, such as `1.10.0`, if needed. Check the [releases page][6] for new features and fixes. Make sure to review the changesets before applying the update. 
+3. Update the stack using template URL `https://datadog-cloudformation-template.s3.amazonaws.com/aws/remote-instrument/latest.yaml`. You can also replace `latest` with a specific version, such as `1.10.0`, if needed. Check the [releases page][6] for new features and fixes. Make sure to review the changesets before applying the update.
 
 
 ## Removing instrumentation
@@ -110,3 +116,7 @@ If you see issues related to IAM roles, ensure that you have permission to creat
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
 [5]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=datadog-remote-instrument
 [6]: https://github.com/DataDog/serverless-remote-instrumentation/releases
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

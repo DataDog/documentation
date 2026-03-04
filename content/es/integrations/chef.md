@@ -1,34 +1,18 @@
 ---
-aliases:
-- /es/guides/chef/
+app_id: chef
 categories:
-- automation
-- configuration & deployment
-- issue tracking
-- log collection
-- provisioning
-custom_kind: integration
-dependencies: []
-description: 'Rastrea las ejecuciones del cliente Chef: conoce cuándo fallan, tienen
-  éxito o realizan grandes cambios.'
-doc_link: https://docs.datadoghq.com/integrations/chef/
-draft: false
-git_integration_title: chef
-has_logo: true
-integration_id: chef
-integration_title: Chef
-integration_version: ''
-is_public: true
-manifest_version: '1.0'
-name: chef
-public_title: Integración de AWS con Chef
-short_description: 'Rastrea las ejecuciones del cliente Chef: conoce cuándo fallan,
-  tienen éxito o realizan grandes cambios.'
-version: '1.0'
+- automatización
+- configuración y despliegue
+- seguimiento de problemas
+- recopilación de logs
+- suministro
+custom_kind: integración
+description: Infraestructura TI y entrega de aplicaciones como código para un control
+  flexible y potente.
+media: []
+title: Chef
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
-{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event" popup="true">}}
+{{< img src="integrations/chef/chefdashboard.png" alt="Evento de Chef" popup="true">}}
 
 ## Información general
 
@@ -36,15 +20,15 @@ Chef es una popular herramienta de gestión de configuración escrita en Ruby y 
 
 El despliegue de Datadog con Chef está pensado para ser muy sencillo y brindarle un método para obtener el valor de la monitorización en toda su infraestructura de la forma más simple posible.
 
-Datadog también proporciona un [gestor de informes y ejecución][1] de Chef que puede capturar las fallas de `chef-client` así como métricas relacionadas con la ejecución de Chef, como el tiempos y los recursos actualizados.
+Datadog también proporciona un [gestor de informes y ejecución](https://docs.chef.io/handlers.html) de Chef que puede capturar las fallas de `chef-client` así como métricas relacionadas con la ejecución de Chef, como el tiempos y los recursos actualizados.
 
 ## Configuración
 
 ### Despliegue del Agent
 
-El [cookbook de Chef de Datadog][2] está disponible para automatizar la instalación y la configuración del Datadog Agent.
+El [cookbook de Chef de Datadog](https://supermarket.chef.io/cookbooks/datadog) está disponible para automatizar la instalación y la configuración del Datadog Agent.
 
-Instala la última versión publicada del cookbook de Chef de Datadog desde [Supermarket][2] con Knife, y cárgala en el servidor de Chef:
+Instala la última versión publicada del cookbook de Chef en Datadog desde el [Supermarket](https://supermarket.chef.io/cookbooks/datadog) con Knife, y cárgalo en tu servidor Chef:
 
 ```text
 knife cookbook site install datadog
@@ -69,13 +53,13 @@ run_list(
 )
 default_attributes(
   'datadog' => {
-    'api_key' => "PON_TU_CLAVE_API_AQUI",
-    'application_key' => "PON_TU_CLAVE_DE_APLICACIÓN_AQUÍ"
+    'api_key' => "PUT_YOUR_API_KEY_HERE",
+    'application_key' => "PUT_YOUR_APPLICATION_KEY_HERE"
   }
 )
 ```
 
-**Nota**: Se necesitan dos claves: la [clave API][3] y la [clave de aplicación][4] de Datadog.
+**Nota**: Se necesitan dos claves. Tu [clave de API](https://app.datadoghq.com/organization-settings/api-keys) y tu [clave de aplicación](https://app.datadoghq.com/organization-settings/application-keys) de Datadog.
 
 Proporciona ambos valores en los atributos como se muestra arriba.
 
@@ -116,75 +100,79 @@ default_attributes(
 )
 ```
 
-En este ejemplo, la receta `datadog::dd-handler` se añadió al comienzo de la lista de ejecución del nodo. Agregarla al comienzo permite que el gestor capture detalles sobre todo lo que observa después de ser invocado, por lo que si lo añadiste al final de `run_list` y algo falló antes de que se ejecutara, es posible que no recibas el resultado completo.
+En este ejemplo, el cookbook `datadog::dd-handler` se ha añadido al principio de la lista de ejecución del nodo. Añadirlo al principio permite al manejador capturar detalles de todo lo que observa después de ser invocado, así que si lo has añadido al final de `run_list` y algo ha fallado antes de que se ejecutara, puede que no recibas el resultado completo.
 
-Una vez configurado, carga el rol en el servidor de Chef y espera. Una vez que Chef se haya ejecutado en algunos hosts, se creará un nuevo dashboard automático con las métricas de Chef relevantes. Puedes encontrarlo en tu [Lista de dashboards][5], en el margen derecho.
+Una vez configurado, carga el rol en tu servidor Chef y aguarda. Después de que Chef se haya ejecutado en algunos hosts, se creará un nuevo dashboard automático, con las métricas relevantes de Chef. Puedes encontrarlo en tu [lista de dashboards](https://app.datadoghq.com/dashboard/lists), en la parte derecha.
 
 ### Envío de métricas de Chef a Datadog
 
 1. Si utilizas Berkshelf, añade el cookbook a tu Berksfile:
 
-    ```text
-    cookbook 'datadog'
-    ```
+   ```text
+   cookbook 'datadog'
+   ```
 
-    De lo contrario, instala el cookbook en tu repositorio utilizando Knife:
+   De lo contrario, instala el cookbook en tu repositorio utilizando Knife:
 
-    ```text
-    knife cookbook site install datadog
-    ```
+   ```text
+   knife cookbook site install datadog
+   ```
 
-2. Configura los atributos específicos de Datadog en un rol, entorno u otra receta:
+1. Configura los atributos específicos de Datadog en un rol, entorno u otra receta:
 
-    ```conf
-    # Make sure you replace the API and application key below
-    # with the ones for your account
+   ```conf
+   # Make sure you replace the API and application key below
+   # with the ones for your account
 
-    node.default['datadog']['<API_KEY>'] = "<DATADOG_API_KEY>"
+   node.default['datadog']['<API_KEY>'] = "<DATADOG_API_KEY>"
 
-    # Use an existing application key or create a new one for Chef
-    node.default['datadog']['<APPLICATION_KEY>] ="<DATADOG_APP_KEY>"
-    ```
+   # Use an existing application key or create a new one for Chef
+   node.default['datadog']['<APPLICATION_KEY>] ="<DATADOG_APP_KEY>"
+   ```
 
-3. Carga el cookbook actualizado en el servidor de Chef.
+1. Carga el cookbook actualizado en el servidor de Chef.
 
-    ```bash
-    berks upload
-    # or
-    knife cookbook upload datadog
+   ```bash
+   berks upload
+   # or
+   knife cookbook upload datadog
 
-    knife cookbook list | grep datadog && \
-    echo -e "\033[0;32mdatadog cookbook - OK\033[0m" || \
-    echo -e "\033[0;31mmissing datadog cookbook - OK\033[0m"
-    ```
+   knife cookbook list | grep datadog && \
+   echo -e "\033[0;32mdatadog cookbook - OK\033[0m" || \
+   echo -e "\033[0;31mmissing datadog cookbook - OK\033[0m"
+   ```
 
-    El cookbook está listo para ser aplicado a tus nodos.
+   El cookbook está listo para ser aplicado a tus nodos.
 
-4. Una vez cargado, añádelo a la run_list o el rol de tu nodo:
+1. Una vez cargado, añádelo a la run_list o el rol de tu nodo:
 
-    ```conf
-    "run_list": [
-      "recipe[datadog::dd-handler]"
-    ]
-    ```
+   ```conf
+   "run_list": [
+     "recipe[datadog::dd-handler]"
+   ]
+   ```
 
-5. Espera a la siguiente ejecución programada de chef-client.
+1. Espera a la siguiente ejecución programada de chef-client.
 
 ### Recopilación de logs
 
-La recopilación de logs está disponible con la versión del Agent 6.0 o posteriores; consulta [attributes/default.rb][6] para habilitarla. Para obtener más detalles, consulta el [ejemplo de configuración](#customizations) a continuación.
+La recopilación de logs está disponible con el Agent v6.0 o posterior. Consulta [attributes/default.rb](https://github.com/DataDog/chef-datadog/blob/v2.15.0/attributes/default.rb#L383-L388) para activarla. Para ver más detalles, consulta el [ejemplo de configuración](#customizations) a continuación.
 
 ### Validación
 
-Desde tu [flujo de eventos][7], ingresa `sources:chef` en la barra de búsqueda. Deberían aparecer tus ejecuciones de Chef.
+Desde tu [flujo de eventos](https://app.datadoghq.com/event/stream), introduce `sources:chef` en la barra de búsqueda. Deberían aparecer tus ejecuciones de Chef.
 
 ## Datos recopilados
 
 ### Métricas
 
-{{< get-metrics-from-git >}}
+| | |
+| --- | --- |
+| **chef.resources.elapsed_time** <br>(gauge) | Tiempo total transcurrido durante la ejecución del cliente Chef.<br>_Se muestra en segundos_ |
+| **chef.resources.total** <br>(gauge) | Recuento total de recursos gestionados por Chef.<br>_Se muestra como recurso_ |
+| **chef.resources.updated** <br>(gauge) | Recuento total de recursos actualizados en la ejecución del cliente Chef.<br>_Se muestra como recurso_ |
 
-## Leer más
+## Referencias adicionales
 
 ### Personalizaciones
 
@@ -234,10 +222,6 @@ En este ejemplo, la receta `datadog::apache` se añadió a la lista de ejecució
 
 Lee cada archivo de receta para conocer los detalles exactos de los valores de integración que se deben pasar a la parte de `instances` de los atributos.
 
-[1]: https://docs.chef.io/handlers.html
-[2]: https://supermarket.chef.io/cookbooks/datadog
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://app.datadoghq.com/organization-settings/application-keys
-[5]: https://app.datadoghq.com/dashboard/lists
-[6]: https://github.com/DataDog/chef-datadog/blob/v2.15.0/attributes/default.rb#L383-L388
-[7]: https://app.datadoghq.com/event/stream
+## Solucionar problemas
+
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

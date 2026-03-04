@@ -54,7 +54,7 @@ pod 'DatadogCrashReporting'
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:
@@ -73,7 +73,6 @@ github "DataDog/dd-sdk-ios"
 In Xcode, link the following frameworks:
 ```
 DatadogCrashReporting.xcframework
-CrashReporter.xcframework
 ```
 
 [1]: https://github.com/Carthage/Carthage

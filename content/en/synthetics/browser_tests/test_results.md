@@ -109,7 +109,7 @@ Click the **Resources** pill to access the **Resources** tab and examine the com
 
 You can filter resources by type and search by name in the search bar. The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and display the first 100 in Datadog.
 
-{{< img src="synthetics/browser_tests/resources_panel.png" alt="Resources Panel" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/resources_panel_2.png" alt="Resources Panel, with test types HTML, Image, and JavaScript checked." style="width:100%" >}}
 
 Relative Time 
 : The point in time when the resource began to load during the test step.
@@ -147,7 +147,11 @@ For more information about cross-product correlation, see the [Ease Troubleshoot
 
 ### Step duration
 
-The step duration represents the amount of time the step takes to execute with the [Datadog locator system][9]. Not only does the step duration include the action (such as user interactions), but also it incorporates the wait and retry mechanism, which allows browser tests to ensure an element is able to be interacted with. For more information, see [Advanced Options for Browser Test Steps][9].
+Step duration represents the time a step takes to be considered fully loaded using the [Datadog locator system][9]. For more information, see [How Step Duration is Determined in Browser Tests][25].
+
+If your test reaches the maximum execution time, the timeout message indicates that the total duration includes both test steps and system overhead. As a result, the reported test duration may differ from the sum of individual step durations.
+
+{{< img src="synthetics/browser_tests/test_results/test_execution_error.png" alt="Test duration execution error message stating 'Maximum test execution time reached. This includes test steps and system overhead, so reported test durations may vary'." style="width:90%;" >}}
 
 ## Failed results
 
@@ -209,3 +213,4 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [22]: /real_user_monitoring/explorer
 [23]: /real_user_monitoring/session_replay
 [24]: /synthetics/browser_tests/?tab=requestoptions#fast-retry
+[25]: /synthetics/guide/step-duration/

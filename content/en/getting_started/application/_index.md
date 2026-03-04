@@ -161,12 +161,12 @@ Navigate to the [Monitors List][23] in the app to get started. To learn more, re
 [9]: /tracing/
 [10]: https://app.datadoghq.com/apm/home
 [11]: /real_user_monitoring/
-[12]: /real_user_monitoring/session_replay/browser/
+[12]: /session_replay/browser/
 [13]: https://app.datadoghq.com/rum/sessions
 [14]: /synthetics/
 [15]: https://app.datadoghq.com/synthetics/tests
 [16]: https://www.datadoghq.com/product/platform/integrations/
-[17]: /developers/integrations/
+[17]: /extend/integrations/
 [18]: https://app.datadoghq.com/integrations
 [19]: /integrations/
 [20]: /dashboards/

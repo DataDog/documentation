@@ -4,6 +4,9 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/cloud_storage
 further_reading:
+  - link: "/security/cloud_security_management/agentless_scanning"
+    tag: "Documentation"
+    text: "Cloud Security Agentless Scanning"
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
     text: "Learn more about out-of-the-box library rules"
@@ -11,6 +14,12 @@ further_reading:
     tag: "Documentation"
     text: "Learn more about creating custom rules"
 ---
+
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger">Cloud Storage scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+{{< /site-region >}}
 
 ## Overview
 

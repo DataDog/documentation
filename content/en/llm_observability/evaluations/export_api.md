@@ -110,6 +110,7 @@ Method
 
 | Parameter | Type | Description                  |
 |-------|------------------------------|------|
+| filter[query] | string | Searches for spans using generic EVP query syntax. If no query filter is provided, the other filters take precedence. |
 | filter[span_id] | string | Searches for a specific span by its span ID. |
 | filter[trace_id] | string | Searches for spans by their trace ID. |
 | filter[tag][key] | string | Searches for spans by tag key / value pairs. |
@@ -119,6 +120,7 @@ Method
 | filter[from] | string | Minimum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time minus 15 minutes. |
 | filter[to] | string | Maximum timestamp for requested spans. Supports date-time ISO8601, date math, and regular timestamps (milliseconds). Defaults to the current time. |
 | sort | string | Sort order. Allowed values: timestamp, -timestamp |
+| include_attachments | boolean | Whether to retrieve truncated input and output content. Defaults to True. |
 | page[cursor] | string | List following results with a cursor provided in the previous query. |
 | page[limit] | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
 
@@ -158,6 +160,20 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
       "type": "span",
       "attributes": {
         "duration": 83000,
+        "evaluation": {
+          "failure_to_answer": {
+              "eval_metric_type": "categorical",
+              "value": "answered",
+              "assessment": "pass",
+              "status": "OK",
+              "metadata": {
+                  "_dd": {
+                      "evaluation_kind": "failure_to_answer"
+                  }
+              },
+              "llm_output": "answered"
+          }
+        },
         "input": {
           "value": "hi",
           "messages": [
@@ -261,6 +277,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field | Type | Description |
 |-------|------|-------------|
+| query | string | Searches for spans using generic EVP query syntax. If no query filter is provided, the other filters take precedence. |
 | span_id | string | Searches for a specific span by its span ID. |
 | trace_id | string | Searches for spans by their trace ID. |
 | tags | Dict[key (string), string] | Search for spans by tag key / value pairs. |
@@ -275,6 +292,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | Field | Type | Description |
 |-------|------|-------------|
 | time_offset | integer | The time offset (in seconds) to apply to the query. |
+| include_attachments | boolean | Whether to retrieve truncated input and output content. Defaults to True. |
 
 ### PageQuery
 
@@ -312,6 +330,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | output        | [SearchedIO](#searchedio)                       | The span’s output information. |
 | tool_definitions        | [[ToolDefinition](#tooldefinition)]                       | List of tools available in an LLM request. |
 | metrics        | Dict[key (string), float]                      | Datadog metrics to collect. |
+| evaluation        | Dict[key (string), [SpanEvalMetric](#spanevalmetric)]                      | A map of evaluations associated with the span. |
 
 ### SearchedIO
 
@@ -326,6 +345,26 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 |------------|-------------------------------|--------------------------------------------|
 | content        | string                        | The body of the message. |
 | role        | string                        | The role of the entity. |
+| tool_calls        | [[ToolCall](#toolcall)]                     | List of tool calls made in this message. |
+| tool_results        | [[ToolResults](#toolresult)]                     | List of tool execution results in this message. |
+
+### ToolCall
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| name        | string                        | The name of the tool being called. |
+| arguments        | Dict[key (string), any]                         | The arguments passed to the tool. |
+| tool_id        | string                        | Unique identifier for this tool call. |
+| type        | string                        | The type of tool call. |
+
+### ToolResult
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| name        | string                        | The name of the tool that was called. |
+| result        | string                        | The result returned by the tool. |
+| tool_id        | string                        | Unique identifier matching the corresponding tool call. |
+| type        | string                        | The type of tool result. |
 
 ### ToolDefinition
 
@@ -334,6 +373,30 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | name        | string                        | The name of the tool. |
 | description        | string                       | The description of the tool’s function. |
 | schema        | Dict[key (string), any]                       | Data about the arguments a tool accepts. |
+
+### SpanEvalMetric
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| eval_metric_type        | string                        | The type of evaluation metric. Valid values are `categorical`, `score`, `boolean`, and `json`.  |
+| value        | any                       | The evaluation result. Can be a string, float, Boolean, or JSON value. |
+| reasoning        | string                       | Reasoning for the evaluation result. |
+| assessment        | string                       | Whether the evaluation passed or failed. Valid values are `pass` and `fail`. |
+| status        | string                       | The status of the evaluation run. Valid values are `OK`, `WARN`, and `ERROR`. |
+| error        | [EvalMetricError](#evalmetricerror)                       | Information about the error that occurred when running the evaluation (if any). |
+| tags        | [string]                       | Key-Value pairs associated with the evaluation metric. |
+| action        | string                       | The action taken in response to the evaluation result for user-submitted evaluations. |
+| eval_metric_metadata        | Dict[key (string), any]                        | Arbitrary JSON data associated with the evaluation. |
+| llm_output        | string                       | The raw output from the LLM call used to determine the evaluation result. |
+
+### EvalMetricError
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| message        | string                        | A description of the error. This may include reasons the evaluation was skipped or an error message generated while running the evaluation. |
+| stack        | string                        | The stack trace associated with the evaluation error. |
+| type        | string                        | The error category. One of a fixed set of reasons indicating why the evaluation was skipped or failed. |
+| recommended_resolution        | string                        | The steps required to resolve the error. |
 
 ### Meta
 

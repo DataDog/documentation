@@ -20,9 +20,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cnm-kubernetes-egress/"
       tag: "Blog"
       text: "How Datadog Cloud Network Monitoring helps you move to a deny-by-default network egress policy at scale"
-
-      
-
+    - link: "/network_monitoring/cloud_network_monitoring/glossary"
+      tag: "Doc"
+      text: "CNM Terms and Concepts"
 ---
 
 Datadog Cloud Network Monitoring (CNM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog so you can:
@@ -121,6 +121,16 @@ To enable Cloud Network Monitoring with the Datadog Agent, use the following con
       enabled: true
     ```
 
+    **Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dns_monitoring_ports` option:
+
+    ```yaml
+    network_config:
+      enabled: true
+      dns_monitoring_ports:
+        - 53
+        - 5353
+    ```
+
 4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
 
     ```shell
@@ -190,12 +200,23 @@ To enable Cloud Network Monitoring for Windows hosts:
 
    [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Cloud Network Monitoring" when running the Agent installation through the GUI.
 
-1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
     ```yaml
     network_config:
         enabled: true
     ```
+
+    **Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dns_monitoring_ports` option:
+
+    ```yaml
+    network_config:
+        enabled: true
+        dns_monitoring_ports:
+            - 53
+            - 5353
+    ```
+
 3. [Restart the Agent][2].
 
     For PowerShell (`powershell.exe`):
@@ -224,6 +245,16 @@ To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to 
       enabled: true
   ```
 
+**Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dnsMonitoringPorts` option:
+
+  ```yaml
+  datadog:
+    networkMonitoring:
+      enabled: true
+      dnsMonitoringPorts:
+        - 53
+        - 5353
+  ```
 
 You may require one of the following additional steps depending on your environment:
 
@@ -264,7 +295,7 @@ agents:
         seLinuxOptions:
           user: "system_u"
           role: "system_r"
-          type: "spc_t"
+          type: "super_t"
           level: "s0"
 ```
 
@@ -350,7 +381,7 @@ If you already have the [Agent running with a manifest][3]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -376,10 +407,10 @@ If you already have the [Agent running with a manifest][3]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                     # (...)
                     - name: system-probe
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                       imagePullPolicy: Always
                       securityContext:
                           capabilities:
@@ -484,7 +515,7 @@ docker run --cgroupns host \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
@@ -495,7 +526,7 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 version: '3'
 services:
   datadog:
-    image: "gcr.io/datadoghq/agent:latest"
+    image: "registry.datadoghq.com/agent:latest"
     environment:
       - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
       - DD_PROCESS_AGENT_ENABLED=true

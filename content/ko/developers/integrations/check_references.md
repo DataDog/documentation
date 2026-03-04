@@ -10,7 +10,7 @@ further_reading:
 - link: /developers/integrations/api_integration/
   tag: 설명서
   text: API 기반 통합을 위한 OAuth 사용 방법
-title: 통합 에셋 참조
+title: 통합 자산 참조
 ---
 ## 개요
 
@@ -128,7 +128,7 @@ YAML 구문에 대한 자세한 내용은 [YAML 위키피디아 문서][2]를 �
 | `integration`   | 필수 사항          | 메트릭을 내보내는 통합의 이름입니다. `manifest.json`파일의 `tile.title`는 표준화된  버전이어야 합니다. 문자, 밑줄, 대시 및 숫자를 제외한 모든 문자는 밑줄로 변환됩니다. 예: `Openstack Controller`->`openstack_controller`, `ASP.NET`-> `asp_net`, `CRI-o`->`cri-o`. |
 | `short_name`    | 필수 사항          | 사람이 읽을 수 있는 축약된 버전의 메트릭 이름. 통합 이름을 반복하지 마세요. 예를 들어, `postgresql.index_blocks_hit`는 `idx blks hit`로 줄여야 합니다.                                                                                                                                                                                                                                                                                                     |
 | `curated_metric`| 선택 사항           | 특정 유형 (`cpu`및 `memory` 둘 다 허용됨)에 대해 주목할 만한 통합 메트릭을 표시합니다. 이러한 항목은 다른 통합 메트릭 위의 UI에 표시됩니다. |
-| `sample_tags` | 선택 사항           | 공백 없이 쉼표로 구분된, 메트릭과 관련된 태그 예시 목록. 예: `host,region,deployment` |
+| `sample_tags` | 선택 사항           | 메트릭과 연결된 예시 태그 목록입니다. 쉼표로 구분되며 (공백 없이) 따옴표 안에 위치합니다. 예: `"host,region,deployment"` |
 
 ## 참고 자료
 

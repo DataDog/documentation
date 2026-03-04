@@ -11,6 +11,17 @@ class ExpressionLanguageParser {
 
     // Built-in functions
     this.builtinFunctions = {
+      // Variable operations
+      isDefined: (varNameNode) => {
+        // isDefined receives the AST node directly, not the evaluated value
+        // This allows us to check if a variable exists without throwing an error
+        if (varNameNode && varNameNode.type === 'VARIABLE') {
+          return this.environment.hasOwnProperty(varNameNode.name);
+        }
+        // If it's not a variable node, it must be a value that exists
+        return true;
+      },
+
       // String functions
       len: (value) => {
         if (typeof value === 'string') return value.length;
@@ -290,6 +301,7 @@ class ExpressionLanguageParser {
    */
   _getFunctionDescription(funcName) {
     const descriptions = {
+      'isDefined': 'Checks whether a variable is defined',
       'len': 'Returns the length of a string, array, or object',
       'count': 'Returns the length of a string, array, or object',
       'isEmpty': 'Checks if a string, array, or object is empty',
@@ -1044,6 +1056,15 @@ class ExpressionLanguageParser {
 
       case 'CALL':
         const callee = this._evaluateAst(ast.callee);
+
+        // Special handling for isDefined - pass the AST node directly
+        if (ast.callee.type === 'VARIABLE' && ast.callee.name === 'isDefined') {
+          if (ast.args.length !== 1) {
+            throw new Error('isDefined() requires exactly one argument');
+          }
+          return callee(ast.args[0]);
+        }
+
         const args = ast.args.map(arg => {
           if (arg.type === 'PREDICATE') {
             return arg;

@@ -24,7 +24,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - モニター
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -73,9 +73,9 @@ Elastic Cloud とインテグレーションすることで、ホスティング
 
 #### メトリクスの収集
 
-デプロイ用に読み取り専用の Elastic Cloud ユーザーを作成し、[Elastic Cloud インテグレーションタイル](https://app.datadoghq.com/account/settings#integrations/elastic-cloud)にユーザー資格情報を入力します。
+デプロイメント用に読み取り専用の Elastic Cloud ユーザーを作成し、ユーザーの認証情報を [Elastic Cloud インテグレーション タイル][1] に入力します。
 
-1. すべての [Elastic Cloud デプロイ][1]にアクセスします。
+1. すべての [Elastic Cloud デプロイメント][2] にアクセスします。
 2. デプロイ名を選択します。
 3. **Management** の下にある **Manage permissions** をクリックします。
 4. **Roles** タブで、**Create role** をクリックしてロールを作成します。
@@ -91,7 +91,7 @@ Elastic Cloud とインテグレーションすることで、ホスティング
     4. **create user** をクリックします。
 
 次の手順で Elastic Cloud デプロイの URL を取得します。
-1. すべての [Elastic Cloud デプロイ][1]にアクセスします。
+1. すべての [Elastic Cloud デプロイメント][2] にアクセスします。
 2. デプロイを選択します。
 3. **Applications** の中から **Elasticsearch** を探します。
 4. **Copy Endpoint** をクリックして、デプロイの URL をコピーします。
@@ -125,17 +125,17 @@ Index stats
 
 Elastic Cloud では、セキュリティ対策として、IP アドレスか CIDR ブロックによるトラフィックのフィルタリングが可能です。これにより、デプロイへのアクセス方法を制限できます。Datadog がデプロイからメトリクスを取得できるように、特定の IP アドレスプレフィックスを許可する必要があります。
 
-トラフィックフィルターのルールセットを作成するには、こちらの[手順][2]に従ってください。ルールセットが作成できたら、ルールセットをデプロイと関連付けます。
+トラフィック フィルター ルール セットを作成するには、次の [手順][3] に従ってください。作成後、そのルール セットをデプロイメントに関連付けます。
 
 Datadog の IP プレフィックスを含める方法
 
-1. Datadog の IP 範囲を[こちら][3]で確認します。
+1. Datadog の IP 範囲は [こちら][4] を参照してください。
 2. **webhooks** の各プレフィックスを **source** としてトラフィックルールに入力します。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "elastic-cloud" >}}
+{{< get-metrics-from-git "elastic_cloud" >}}
 
 
 ### Logs
@@ -152,15 +152,16 @@ Elastic Cloud インテグレーションには、サービスのチェック機
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
 
 
 
 
-[1]: https://cloud.elastic.co/deployments
-[2]: https://www.elastic.co/guide/en/cloud-enterprise/current/ece-traffic-filtering-ip.html
-[3]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
-[4]: https://github.com/DataDog/integrations-internal-core/blob/main/elastic_cloud/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help
+[1]: https://app.datadoghq.com/account/settings#integrations/elastic-cloud
+[2]: https://cloud.elastic.co/deployments
+[3]: https://www.elastic.co/guide/en/cloud-enterprise/current/ece-traffic-filtering-ip.html
+[4]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
+[5]: https://github.com/DataDog/integrations-internal-core/blob/main/elastic_cloud/metadata.csv
+[6]: https://docs.datadoghq.com/ja/help

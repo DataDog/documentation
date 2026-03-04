@@ -3,57 +3,79 @@ further_reading:
 - link: service_management/case_management/view_and_manage
   tag: Documentación
   text: Ver y gestionar casos
+- link: service_management/case_management/customization
+  tag: Documentación
+  text: Personalización de incidencias
 title: Crear un caso
 ---
 
 ## Información general
 
-Los casos pueden crearse [manualmente](#manual-case-creation), [automáticamente](#automatic-case-creation) desde Datadog, o [programáticamente](#api) con la API. Existen dos tipos de casos: estándar y de seguridad. Los casos creados a partir de señales de seguridad y de Sensitive Data Scanner se convierten automáticamente en casos de seguridad. El tipo de caso de seguridad tiene todas las características del tipo de caso estándar, junto con un campo obligatorio para especificar la razón por la que se cierra un caso (tests, falso positivo o excepción única). 
+Las incidencias pueden crearse [manualmente](#manual-case-creation), [automáticamente](#automatic-case-creation) desde Datadog, o [programáticamente](#api) con la API. Existen dos tipos de incidencias: estándar y de seguridad. Las incidencias creadas a partir de señales de seguridad y Sensitive Data Scanner se convierten automáticamente en incidencias de seguridad. El tipo de incidencia de seguridad tiene todas las características del tipo de incidencia estándar, junto con un campo obligatorio para especificar el motivo del cierre de una incidencia (test, falso positivo o excepción única).
 
 ## Creación manual de casos
 
-{{< img src="/service_management/case_management/create/manual_case_creation_cropped.png" alt="Página de gestión de casos con el modal del nuevo caso abierto para crear un caso manualmente" style="width:100%;" >}}
-
-En la [página de gestión de casos][1], haz clic en **New Case** (Nuevo Caso).
-1. Selecciona un proyecto en el cual crear el caso. Un caso sólo puede pertenecer a un único proyecto. 
+1. Navega hasta la [página de Case Management][1].
+1. Selecciona un proyecto donde crear la incidencia. **Nota**: Una incidencia solo puede pertenecer a un único proyecto.
+1. Haz clic en **New Case** (Nueva incidencia).
 1. Escribe un título para el caso.
-1. Si quieres, añade una descripción. 
-1. Haz clic en **Create Case** (Crear caso) para terminar. 
+1. Selecciona un [tipo de incidencia](#case-types).
+1. Añade un título.
+1. (Opcional) Añade una descripción.
+1. Haz clic en **Create Case** (Crear caso) para finalizar.
 
-También puedes crear casos manualmente a partir de los siguientes productos:
+También puedes crear casos manualmente, a partir de los siguientes productos:
 
-| Producto | Instrucciones    | 
-| ------  | ----------- | 
-| Logs | - En la [página de estado de un monitor][2], opcionalmente define el ámbito del monitor a un periodo de tiempo y a uno o más grupos de monitores específico(s). A continuación, haz clic en el menú desplegable **Escalate** (Escalar) y selecciona **Create a case** (Crear un caso).<br> - En Slack, haz clic en **Create a case**, bajo una notificación de monitor. |
-| Señales de seguridad | Haz clic en una señal de seguridad para abrir el panel lateral. Haz clic en el menú desplegable **Escalate Investigation** (Escalar investigación) y selecciona **Create a case** (Crear un caso). |
-| Python | Haz clic en una incidencia de seguimiento de errores para abrir el panel lateral. A continuación, haz clic en **Create a case** (Crear un caso). |
-| Datos recopilados | Haz clic en una alerta para abrir su panel lateral. Haz clic en el menú desplegable **Escalate** (Escalar) y selecciona **Create a case** (Crear un caso). |
-| Gestión de eventos (eventos sin procesar) | Haz clic en evento para abrir su panel lateral. Haz clic en el menú desplegable **Escalate** (Escalar) y selecciona **Create a case** (Crear un caso). |
-| Monitorización de bases de datos | Haz clic en una recomendación de costes para abrir su panel lateral. A continuación, haz clic en **Create case** (Crear caso). |
-| Python | Haga clic en **Create case** (Crear caso) junto a una incidencia de Sensitive Data Scanner.  |
-| Slack  | Haz clic en el botón **Create Case** (Crear caso), bajo una notificación de monitores en Slack.  |
+| Producto | Instrucciones    |
+| ------  | ----------- |
+| Monitores | - En una [página de estado del monitor][2], opcionalmente, limita el monitor a un marco temporal y grupos de monitores específicos. A continuación, haz clic en el menú desplegable **Actions** (Acciones) y selecciona **Create a case** (Crear una incidencia).<br> - En Slack, haz clic en **Create a case** bajo una notificación de monitor. |
+| Señales de seguridad | Haz clic en una Señal de seguridad para abrir el panel lateral. Haz clic en **Escalate Investigation** (Escalar investigación) y selecciona **Create a case** (Crear una incidencia). |
+| Error Tracking | Haz clic en un problema de Error Tracking para abrir el panel lateral. A continuación, haz clic en **Actions** (Acciones) y selecciona **Create a case** (Crear un caso). |
+| Watchdog | Haz clic en una alerta para abrir su panel lateral. Haz clic en el menú desplegable **Actions** (Acciones) y selecciona **Create a case** (Crear una incidencia). |
+| Gestión de eventos (eventos sin procesar) | Haz clic en un evento para abrir su panel lateral. Haz clic en el menú desplegable **Actions** (Acciones) y selecciona **Create a case** (Crear una incidencia). |
+| Cloud Cost Management | Haz clic en una recomendación de costes para abrir su panel lateral. A continuación, haz clic en **Create case** (Crear caso). |
+| Sensitive Data Scanner | Haga clic en **Create case** (Crear caso), junto a un incidente de Sensitive Data Scanner.  |
+| Slack  | Haz clic en el botón **Create Case** (Crear caso), bajo una notificación de monitor en Slack.  |
 
 ## Creación automática de casos
 
-Configura los siguientes productos para crear casos automáticamente:
-| Producto | Instrucciones | 
-| ------ | ----------- | 
-| Monitores | Ve a la [página de configuración del proyecto][4], haz clic en **Integrations** > **Datadog Monitors** (Integraciones > Monitores de Datadog) y luego haz clic en el conmutador para obtener tu @caso-<project_handle>. <br><br> Cuando crees un monitor, incluye `@case-{project_handle}` en las secciones **Notify your team** (Notificar a tu equipo) o **Say what's happening** (Di lo que está ocurriendo). Los casos se crean automáticamente cuando el monitor pasa a un estado diferente. Para crear casos sólo para determinadas transiciones de monitor, utiliza [variables condicionales][3]. Por ejemplo, para crear casos sólo cuando se activa un monitor, cubre la mención `@case` con `{{#is_alert}}` y `{{/is_alert}}`. |
-| Gestión de eventos (Correlaciones) | En la gestión de eventos, las correlaciones configuradas para agregar eventos de Datadog y fuentes de terceros crean casos automáticamente.   |
-| Automatización de flujos de trabajo | 1. En un flujo de trabajo nuevo o existente, añade un paso en el generador de flujos de trabajo y busca "Case Management" (Gestión de casos).<br> 2. Selecciona la acción **Create Case** (Crear caso).<br> 3. Si el flujo de trabajo está configurado para ejecutarse en función de un activador de monitor o de una señal de seguridad, añade el identificador del flujo de trabajo a los recursos deseados.|
+Configura los siguientes productos para crear incidencias automáticamente:
+| Productos | Instrucciones    |
+| ------  | ----------- |
+| Monitores | Navega a la [página Configuración de proyecto][4], haz clic en **Integrations** > **Datadog Monitors** (Integraciones > Monitores de Datadog), y haz clic en el conmutador para obtener tu @case-<project_handle>. <br><br> Cuando se crea un monitor, incluye `@case-{project_handle}` en la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones). Las incidencias se crean cuando el monitor transiciona a un estado diferente. Para solo crear incidencias para algunas transiciones de monitor, usa [variables condicionales][3]. Como ejemplo, para crear incidencias solo cuando se activa un monitor, encierra la mención `@case` con `{{#is_alert}}` y `{{/is_alert}}`.<br><br> Activa **Auto-close cases when the monitor group resolves** (Autocerrar incidencias cuando el grupo de monitor se resuelve) para reducir la limpieza manual.|
+| Event Management (Correlaciones) | En Event Management, las correlaciones se configuran para agregar eventos desde Datadog y las fuentes externas crean incidencias automáticamente.   |
+| Workflow Automation | 1. En un proceso nuevo o existente, añade un paso en el compilador de procesos y busca "Case Management."<br> 2. Selecciona la acción **Create Case** (Crear incidencia).<br> 3. Si el proceso se configura para ejecutarse en función de un monitor o un activador de señal de seguridad, añade los activadores de proceso pertinentes y asegúrate que hayas añadido el identificador del proceso a los recursos deseados. Para obtener más información, consulta [Activar un proceso][6].|
+| Error Tracking | En Error Tracking, las incidencias se crean automáticamente cuando un problema se comenta o se asigna. |
 
-## Python
+## Tipos de incidencias
 
-Crea un caso a través del [endpoint de la API][5]. 
+Añade los tipos de incidencias cuando estés creando una incidencia. No todos los tipos de incidencia están disponibles para su configuración entre la creación manual y la automática. Por ejemplo, solo los tipos `Standard`, `Security`, `Change Request` y `Event Management` están disponibles cuando se crean incidencias manualmente.
+
+Para añadir y activar tipos personalizados de incidencia, consulta [Personalización de incidencia][7].
+
+| Tipo de incidencias       | Descripción                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| Standard (Estándar)         | Una incidencia de uso general para tareas operativas, investigaciones y mucho más.     |
+| Solicitud de cambio   | Se utiliza en los procesos de gestión de cambios para realizar un seguimiento de los cambios planificados o aprobados.   |
+| Gestión de eventos | Integrado con el producto Event Management para albergar eventos correlacionados.    |
+| Seguridad         | Utilizado por equipos y productos de seguridad para gestionar investigaciones o alertas.     |
+| Error Tracking   | Vinculado al producto Error Tracking para rastrear y solucionar los problemas de las aplicaciones. |
+| Tipo personalizado      | Añade un tipo de incidencia personalizado. Para obtener más información, consulta [Personalización de incidencia][7]. |
+
+## API
+
+Crea una incidencia a través del [endpoint de API][5].
 
 **Nota**: Este endpoint requiere una autorización con un alcance`cases_write`.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /es/monitors/manage/status/
+[2]: /es/monitors/status/
 [3]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /es/api/latest/case-management/#create-a-case
+[6]: /es/service_management/workflows/trigger/
+[7]: /es/service_management/case_management/customization

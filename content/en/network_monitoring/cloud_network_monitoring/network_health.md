@@ -10,6 +10,9 @@ further_reading:
     - link: '/network_monitoring/cloud_network_monitoring/network_analytics'
       tag: 'Documentation'
       text: 'Learn more about Network Analytics'
+    - link: "https://www.datadoghq.com/blog/cnm-network-health"
+      tag: "Blog"
+      text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
 ---
 <div class="alert alert-info">Network Health is in Preview. Contact your Datadog representative to sign up.
 </div>
@@ -116,7 +119,7 @@ Use the filters at the top of the page to narrow the scope of displayed issues. 
 
 [1]: /network_monitoring/cloud_network_monitoring/setup
 [2]: /actions/workflows/build/
-[3]: /service_management/case_management/create_case
-[4]: /service_management/incident_management/declare/
+[3]: /incident_response/case_management/create_case
+[4]: /incident_response/incident_management/declare/
 [5]: /watchdog/insights
 [6]: /integrations/amazon-web-services/#resource-collection

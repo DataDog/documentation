@@ -3,12 +3,12 @@ aliases:
 - /ko/tracing/tracing_without_limits/
 - /ko/tracing/livesearch/
 - /ko/tracing/trace_search_and_analytics/
-description: 서비스 맵
+description: 트레이스 탐색기
 further_reading:
 - link: tracing/trace_explorer/search
   tag: 설명서
-  text: 설정
-title: 서비스 맵
+  text: 스팬 검색
+title: 트레이스 탐색기
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
@@ -17,7 +17,7 @@ title: 서비스 맵
 
 [Trace Explorer][1]를 통해 모든 스팬의 태그를 사용하여 수집되거나 인덱싱된 모든 스팬을 검색할 수 있습니다. 쿼리로 찾은 스팬은 실시간(지난 15분 동안 수집된 모든 스팬, 롤링) 또는 인덱싱된 스팬(커스텀 필터에 의해 15일 동안 보관된 스팬)을 검색하는지에 따라 달라집니다.
 
-계측된 애플리케이션은 [수집][2]을 위해 트레이스의 100%를 Datadog에 전송하여 트레이스를 15분의 롤링 시간 동안 라이브 트레이스로 사용할 수 있도록 합니다.
+계측된 애플리케이션은 구성된 [수집 제어][2]에 따라 Datadog로 트레이스를 보냅니다. 수집된 트레이스는 15분 동안 Live 트레이스로 사용 가능합니다.
 
 Trace Explorer는 라이브 모드에 있을 때마다 **Live Search - All ingested data** 인디케이터를 표시합니다.
 
@@ -52,7 +52,7 @@ Live Search는 Traces 페이지의 기본 보기입니다. 오른쪽 상단에 �
 
 {{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Live Search" >}}
 
-Live Search를 사용하면 Datadog은 Datadog Agent에서 전송하자마자 보존 필터에 의해 인덱싱되기 전에 스팬을 표시합니다. 수집된 모든 스팬은 지난 15분(롤링 기간) 동안 사용할 수 있으며 샘플링 없이 표시됩니다.
+Live Search를 사용하면 Datadog은 Datadog Agent에서 전송하자마자 보존 필터에 의해 인덱싱되기 전에 스팬을 표시합니다. 수집된 모든 스팬은 지난 15분(롤링 시간) 동안 사용할 수 있으며 샘플링 없이 표시됩니다.
 
 {{< tabs >}}
 {{% tab "List 보기" %}}
@@ -107,7 +107,7 @@ Live Search를 사용하면 Datadog은 Datadog Agent에서 전송하자마자 �
 - 트레이스 세부정보 패널에서 `cart.value` 속성을 클릭하고 검색 쿼리에 추가합니다.
 {{< img src="tracing/live_search/add-attribute-to-query.mp4" alt="쿼리에 속성 추가" video="true" >}}
 
-- 검색어 표시줄에 "cart.value"를 입력하여 `cart.value` 속성이 있는 모든 스팬을 필터링합니다.
+- 검색창에 "cart.value"를 입력하여 `cart.value` 속성이 있는 모든 스팬을 필터링합니다.
 {{< img src="tracing/live_search/filter-by-attribute2.mp4" alt="속성별 Live Search 필터" video="true" >}}
 
 ## 15일 동안 보관되는 인덱싱된 스팬 검색
@@ -119,18 +119,18 @@ Live Search와 동일한 방법으로 보존된 트레이스를 검색할 수 �
 {{< img src="tracing/live_search/searching-retained-traces.mp4" alt="보존된 트레이스 검색" video="true" >}}
 
 {{< tabs >}}
-{{% tab "목록 보기" %}}
+{{% tab "List 보기" %}}
 
-커스텀 보존 필터 *및* 지능형 보존 필터로 인덱싱된 모든 스팬은 List 보기에서 검색할 수 있습니다. 그러나 보존 필터로인덱싱되지 않은 스팬에만 나타나는 태그 기준으로 필터링하면 [Live Search](#live-search-for-15-mins)를 사용할 때와 달리 검색 결과가 반환되지 않습니다.
+커스텀 보존 필터 *및* 지능형 보존 필터로 인덱싱된 모든 스팬은 List 보기에서 검색할 수 있습니다. 그러나 보존 필터로 인덱싱되지 않은 스팬에만 나타나는 태그 기준으로 필터링하면 [Live Search](#live-search-for-15-mins)를 사용할 때와 달리 검색 결과가 반환되지 않습니다.
 
 {{% /tab %}}
-{{% tab "Timeseries View" %}}
+{{% tab "Timeseries 보기" %}}
 
 트레이스 분석을 사용하면 커스텀 보존 필터 또는 지능형 보존 필터로 인덱싱된 모든 스팬을 검색할 수 있습니다.
 
 시계열 보기에서 쿼리를 [대시보드][1], [모니터][2] 또는 [노트북][3]으로 내보내 추가로 조사하거나 집계된 스팬의 수가 특정 임계값을 초과할 때 자동으로 알림을 받을 수 있습니다.
 
-**참고**: 지능형 보존 필터로 인덱싱된 스팬은 대시보드, 노트북에 표시되는 APM 쿼리 및 트레이스 분석 모니터 평가에서 제외됩니다. 자세한 내용은 [트레이스 보존][4]을 참조하세요.
+**참고**: 지능형 보존 필터로 인덱싱된 스팬은 APM 트레이스 분석 모니터 평가에서 제외됩니다. 자세한 내용은 [Trace Retention][4]을 참조하세요.
 
 [1]: /ko/dashboards/widgets/timeseries/
 [2]: /ko/monitors/types/apm/?tab=analytics

@@ -1,5 +1,9 @@
 ---
 title: Enabling App and API Protection for Go
+aliases:
+  - /security/application_security/setup/standalone/go
+  - /security/application_security/enabling/tracing_libraries/threat_detection/go
+  - /security/application_security/enabling/go
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -38,7 +42,7 @@ For detailed compatibility information, including supported Go versions, framewo
 ### AWS
 {{< appsec-integrations >}}
 {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/go" >}}
-{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="../aws/fargate" >}}
+{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
 {{< appsec-integration name="AWS ECS" avatar="amazon-ecs" link="./setup?tab=amazonecs" >}}
 {{< /appsec-integrations >}}
 

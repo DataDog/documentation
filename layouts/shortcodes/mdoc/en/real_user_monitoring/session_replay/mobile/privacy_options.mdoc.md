@@ -1485,5 +1485,5 @@ The following chart shows how we apply different image masking strategies:
 - Masked
 {% /table %}
 
-[1]: /real_user_monitoring/session_replay/privacy_options
+[1]: /session_replay/browser/privacy_options
 [2]: https://github.com/DataDog/dd-sdk-reactnative

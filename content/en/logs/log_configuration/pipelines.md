@@ -4,6 +4,9 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: Blog
   text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
@@ -286,6 +289,8 @@ Identify when the last change to a pipeline or processor was made and which user
 Reorder pipelines precisely with the `Move to` option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the `Move to` modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
+
+Clone pipelines to reuse existing rules and processors without having to start over. When you clone a pipeline, Datadog automatically disables the pipeline you cloned. Click the toggle to enable.
 
 ## Estimated usage metrics
 

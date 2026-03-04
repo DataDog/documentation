@@ -4,6 +4,12 @@ disable_toc: false
 aliases:
   - /security/cloud_siem/open_cybersecurity_schema_framework
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"

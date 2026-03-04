@@ -5,7 +5,12 @@ aliases:
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
   - /continuous_integration/tests/
+  - /tests/repositories/
+  - /tests/search/
 further_reading:
+    - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+      tag: "Learning Center"
+      text: "Getting Started with Test Optimization"
     - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
       tag: "Release Notes"
       text: "Check out the latest Software Delivery releases! (App login required)"
@@ -27,12 +32,23 @@ further_reading:
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Learn how to troubleshoot Test Optimization"
+    - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+      tag: "Blog"
+      text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+    - link: "https://www.datadoghq.com/blog/dbt-data-quality-testing"
+      tag: "Blog"
+      text: "Implement dbt data quality checks with dbt-expectations"
 cascade:
     site_support_id: test_optimization
     algolia:
         rank: 70
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
+
+{{< learning-center-callout header="Try Getting Started with Test Optimization in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-test-optimization">}}
+  Learn how to accelerate your CI pipelines by setting up test monitoring, identifying flaky tests and using Test Impact Analysis to run only the tests that matter.
+{{< /learning-center-callout >}}
+
 
 ## Overview
 
@@ -59,7 +75,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
 | {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
-| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start)| {{< X >}} | {{< X >}} | {{< X >}} (only start) |
+| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (only start) |
 | {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                                        | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for <a href="/tests/test_impact_analysis">Test Impact Analysis</a>.{{< /ci-details >}}                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Test Impact Analysis *" >}}Capability to enable <a href="/tests/test_impact_analysis">Test Impact Analysis</a>, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}} | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
@@ -159,7 +175,7 @@ When you're evaluating failed or flaky tests, or the performance of a CI test, y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-repositories
+[1]: https://app.datadoghq.com/ci/test/health
 [2]: https://app.datadoghq.com/ci/settings/test-optimization
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists

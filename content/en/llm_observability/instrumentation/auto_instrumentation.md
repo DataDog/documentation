@@ -9,6 +9,12 @@ further_reading:
     - link: '/llm_observability/instrumentation/sdk/'
       tag: 'Documentation'
       text: 'LLM Observability SDK Reference'
+    - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+      tag: Blog
+      text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+    - link: https://www.datadoghq.com/blog/mcp-client-monitoring
+      tag: Blog
+      text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
 ---
 
 ## Overview
@@ -36,6 +42,7 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 0.26.5          | >= 2.9.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
+| [Strands Agents](#strands-agents)               | >= 1.11.0          | Any            |
 | [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
 
 
@@ -49,6 +56,7 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
 
 {{% collapse-content title="Support for ESMAScript Modules (ESM)" level="h4" expanded=false id="esm-support" %}}
 Automatic instrumentation for ESM projects is supported starting from `dd-trace@>=5.38.0`. To enable automatic instrumentation in your ESM projects, run your application with the following Node option:
@@ -159,7 +167,15 @@ module.exports = {
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Java" %}}
+| Framework                                  | Supported Versions | Tracer Version |
+|--------------------------------------------|--------------------|----------------|
+| [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 1.59.0      |
+
+{{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-info">Datadog LLM Observability also supports any framework that natively emits <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI semantic convention v1.37+</a>-compliant spans, without requiring the Datadog tracer. See <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry Instrumentation</a> for details.</div>
 
 ## LLM integrations
 
@@ -353,6 +369,25 @@ The Google GenAI integration instruments the following methods:
 [1]: https://ai.google.dev/gemini-api/docs
 [2]: https://ai.google.dev/api/generate-content#method:-models.generatecontent
 [3]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
+{{% /tab %}}
+{{% tab "Node.js" %}}
+The Google GenAI integration automatically traces methods in the [Google GenAI Node.js SDK][1] by instrumenting the [`@google/genai` package][4].
+
+**Note:** The [Google GenAI Node.js SDK][1] succeeds the [Google GenerativeAI SDK][6], and exposes both Gemini Developer API as well as Vertex.
+
+### Traced methods
+
+The Google GenAI integration instruments the following methods:
+
+- [Generating content][2] (including [streamed calls][5])
+- [Embedding content][3]
+
+[1]: https://ai.google.dev/gemini-api/docs#javascript
+[2]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt-JAVASCRIPT
+[3]: https://ai.google.dev/api/embeddings#embed_content-JAVASCRIPT
+[4]: https://www.npmjs.com/package/@google/genai
+[5]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt_streaming-JAVASCRIPT
+[6]: https://www.npmjs.com/package/@google/generative-ai
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -549,7 +584,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][6]:
   - `openai.embeddings.create()` and `azureopenai.embeddings.create()`
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][7] (as of `dd-trace@5.42.0`)
-- [Responses][8] (as of `dd-trace@5.76.0`)
+- [Responses][8]
+  - `openai.responses.create()` (as of `dd-trace@5.76.0`)
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -558,7 +594,44 @@ The OpenAI integration instruments the following methods, including streamed cal
 [5]: https://platform.openai.com/docs/api-reference/chat
 [6]: https://platform.openai.com/docs/api-reference/embeddings
 [7]: https://api-docs.deepseek.com/
-[8]: https://platform.openai.com/docs/api-reference/responses/create
+[8]: https://platform.openai.com/docs/api-reference/responses
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+The [OpenAI integration][1] provides automatic tracing for the [OpenAI Java SDK's][2] completion, chat completion, embeddings, and responses endpoints to OpenAI and Azure OpenAI.
+
+### Traced methods
+
+The OpenAI integration instruments the following methods on `OpenAIClient`, including streamed calls:
+
+- [Completions][3]:
+  - `openAiClient.completions().create()`
+  - `openAiClient.completions().createStreaming()`
+  - `openAiClient.async().completions().create()`
+  - `openAiClient.async().completions().createStreaming()`
+- [Chat completions][4]:
+  - `openAiClient.chat().completions().create()`
+  - `openAiClient.chat().completions().createStreaming()`
+  - `openAiClient.async().chat().completions().create()`
+  - `openAiClient.async().chat().completions().createStreaming()`
+- [Embeddings][5]:
+  - `openAiClient.embeddings().create()`
+  - `openAiClient.async().embeddings().create()`
+- [Responses][6]:
+  - `openAiClient.responses().create()`
+  - `openAiClient.responses().createStreaming()`
+  - `openAiClient.async().responses().create()`
+  - `openAiClient.async().responses().createStreaming()`
+
+The provider (OpenAI vs Azure OpenAI) is automatically detected based on the `baseUrl` configured in `ClientOptions`. All methods support both blocking and async (CompletableFuture-based) variants.
+
+[1]: /integrations/openai/
+[2]: https://platform.openai.com/docs/api-reference/introduction
+[3]: https://platform.openai.com/docs/api-reference/completions
+[4]: https://platform.openai.com/docs/api-reference/chat
+[5]: https://platform.openai.com/docs/api-reference/embeddings
+[6]: https://platform.openai.com/docs/api-reference/responses
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -609,6 +682,21 @@ The Pydantic AI integration instruments the following methods:
 
 [1]: https://ai.pydantic.dev/
 [2]: https://ai.pydantic.dev/agents/
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Strands Agents" level="h3" expanded=false id="strands-agents" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+Starting from [v1.11.0][1], [Strands Agents][2] natively emits spans compliant with [OpenTelemetry GenAI semantic conventions v1.37][3], which Datadog LLM Observability automatically ingests without requiring the Datadog tracer.
+
+For setup instructions and a complete example, see [OpenTelemetry Instrumentation — Using Strands Agents][4].
+
+[1]: https://github.com/strands-agents/sdk-python/releases/tag/v1.11.0
+[2]: https://strandsagents.com
+[3]: https://opentelemetry.io/docs/specs/semconv/gen-ai/
+[4]: /llm_observability/instrumentation/otel_instrumentation#using-strands-agents
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}

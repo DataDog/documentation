@@ -11,13 +11,13 @@ aliases:
     - /developers/metrics/metrics_type/
     - /developers/metrics/types/
 further_reading:
-    - link: 'developers/dogstatsd'
+    - link: 'extend/dogstatsd'
       tag: 'Documentation'
       text: 'Learn more about DogStatsD'
     - link: '/metrics/units'
       tag: 'Documentation'
       text: 'Metrics Units'
-    - link: 'developers/libraries'
+    - link: 'extend/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
 algolia:
@@ -208,7 +208,7 @@ Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distrib
 
 Like other metric types, such as GAUGE or HISTOGRAM, the DISTRIBUTION metric type has the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
 
-Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics. If you were to add percentile aggregations to your distribution metric in-app, the following five additional aggregations are available for query:
+Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics from the metric's [details sidepanel][2]. If you were to add percentile aggregations to your distribution metric in-app, the following five additional aggregations are available for query:
 
 | Metric Name                              | Value | Datadog In-app Type |
 | ---------------------------------------- | ----- | ------------------- |
@@ -227,6 +227,7 @@ This functionality allows you to control tagging for metrics where host-level gr
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
 [1]: /metrics/metrics-without-limits/
+[2]: /metrics/summary/#metric-details-sidepanel
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -345,7 +346,7 @@ Below is a summary of all available metric submission sources and methods. This 
 [5]: /metrics/custom_metrics/agent_metrics_submission/
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [7]: /api/v1/metrics/#submit-metrics
-[8]: /developers/dogstatsd/#how-it-works
+[8]: /extend/dogstatsd/#how-it-works
 [9]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
 [10]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
 [11]: /metrics/custom_metrics/agent_metrics_submission/?tab=gauge

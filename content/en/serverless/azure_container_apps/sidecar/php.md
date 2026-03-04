@@ -45,6 +45,14 @@ apk add libgcc
    {{% aca-install-sidecar-terraform %}}
    {{% /tab %}}
 
+   {{% tab "Bicep" %}}
+   {{% aca-install-sidecar-bicep %}}
+   {{% /tab %}}
+
+   {{% tab "ARM Template" %}}
+   {{% aca-install-sidecar-arm-template %}}
+   {{% /tab %}}
+
    {{% tab "Manual" %}}
    {{% aca-install-sidecar-manual %}}
    {{% /tab %}}
@@ -88,5 +96,5 @@ logInfo('Hello World!');
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
-[3]: /developers/dogstatsd/?tab=php#install-the-dogstatsd-client
+[3]: /extend/dogstatsd/?tab=php#install-the-dogstatsd-client
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=php#code-examples-5

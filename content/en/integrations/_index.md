@@ -17,6 +17,7 @@ aliases:
     - /integrations/open_policy_agent/
     - /integrations/coreos/
     - /integrations/ubuntu/
+    - /integrations/amazon-opsworks/
 description: Gather data from all of your systems, apps, & services
 algolia:
     tags: ['integration', 'integration setup']

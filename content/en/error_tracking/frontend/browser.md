@@ -75,7 +75,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
@@ -105,7 +105,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 <script>
     window.DD_RUM && window.DD_RUM.init({
@@ -198,14 +199,6 @@ Learn more about [tagging][19] in Datadog.
 
 Refer to the [Browser SDK API Reference][9] for the full list of available configuration options.
 
-## Advanced features (optional)
-
-### Manage uploaded source maps
-
-See all uploaded symbols and manage your source maps on the [Debug Symbols][17] page.
-
-**Note**: Source maps are limited in size to **500 MB** each.
-
 ## Next steps
 
 You can monitor unhandled exceptions, unhandled promise rejections, handled exceptions, handled promise rejections, and other errors that the Browser SDK does not automatically track. Learn more about [Collecting Browser Errors][3].
@@ -223,7 +216,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [7]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [8]: /real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[10]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
+[10]: /session_replay/browser/privacy_options#mask-action-names
 [11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [12]: https://github.com
 [13]: https://about.gitlab.com

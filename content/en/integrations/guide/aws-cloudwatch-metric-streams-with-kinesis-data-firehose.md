@@ -20,7 +20,7 @@ Using Amazon CloudWatch Metric Streams and Amazon Data Firehose, you can get Clo
    - Optionally specify a limited set of namespaces or metrics to stream.
 2. Once you create the Metric Stream, Datadog immediately starts receiving the streamed metrics and displays them on the Datadog site with no additional configuration needed.
 
-<div class="alert alert-warning">Per-namespace filtering configured in the AWS Integration tile <b>also applies</b> to CloudWatch Metric Streams.</div>
+<div class="alert alert-warning">Tag filtering configured in the AWS Integration tile <b>also applies</b> to CloudWatch Metric Streams.</div>
 
 ### Metric Streaming versus API polling {#streaming-vs-polling}
 

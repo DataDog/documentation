@@ -10,6 +10,10 @@ further_reading:
   text: "Defining Experiment Metrics"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/datadog-experiments/" >}}
+Datadog Experiments is in Preview. Complete the form to request access.
+{{< /callout >}}
+
 ## Overview 
 Datadog Experimentation allows you to measure the causal relationship that new experiences and features have on user outcomes. To do this, Experimentation randomly allocates traffic between two or more variations, using one of the variations as a control group.
 
