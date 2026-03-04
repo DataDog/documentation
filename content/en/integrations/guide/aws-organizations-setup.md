@@ -43,7 +43,7 @@ The Datadog CloudFormation StackSet performs the following steps:
 1. **Access to the management account**: Your AWS user needs to be able to access the AWS management account.
 2. **An account administrator has enabled Trusted Access with AWS Organizations**: Refer to [Enable trusted access with AWS Organizations][3] to enable trusted access between StackSets and Organizations, to create and deploy stacks using service-managed permissions.
 
-**Note**: The AWS Organizations multi-account setup does not support deployment over existing individually configured AWS account integrations. If a StackSet targets an account that is already individually integrated with Datadog, the existing account integration is deleted and replaced by the Organizations-managed integration.
+**Note**: The AWS Organizations multi-account setup does not support deployment over existing individually configured AWS account integrations. If a StackSet targets an account that is already individually integrated with Datadog, the existing account integration is deleted.
 
 ## Setup
 
