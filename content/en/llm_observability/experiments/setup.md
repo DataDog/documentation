@@ -44,7 +44,7 @@ To correlate your Experiment spans with [APM Traces][5], run LLM Observability t
    )
    ```
 
-If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True`, but APM Trace correlation is not available in that mode.
+If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True`, but corresponding APM spans are not generated for Experiment spans from agentless runs.
 
 ## Create a project
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
