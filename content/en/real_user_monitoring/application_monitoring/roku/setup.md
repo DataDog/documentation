@@ -23,7 +23,7 @@ site_support_id: rum_roku
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Roku SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Roku SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking page setup guide][11] for specific steps.
 
 The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
@@ -48,32 +48,11 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 ### Step 2 - Specify application details in Datadog
 
-{{< tabs >}}
-{{% tab "RUM" %}}
-
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
+1. Navigate to [**Digital Experience** > **Add an Application**][101].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
+3. To disable automatic user data collection for geolocation data or client IP, uncheck the boxes for those settings. For more information, see [Roku Data Collected][201].
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/roku/data_collected
-
-{{% /tab %}}
-{{% tab "Error Tracking" %}}
-
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
-2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][2].
-
-   {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
-
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/application_monitoring/roku/data_collected
-
-{{% /tab %}}
-{{< /tabs >}}
 
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
@@ -162,5 +141,9 @@ This means that even if users open your application while offline, no data is lo
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[9]: /real_user_monitoring/application_monitoring/roku/data_collected
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/roku/data_collected
+[10]: /error_tracking/frontend/mobile/roku
+[11]: /error_tracking/frontend/mobile/roku
+[101]: https://app.datadoghq.com/rum/application/create
+[201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
