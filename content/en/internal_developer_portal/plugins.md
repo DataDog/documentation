@@ -10,7 +10,7 @@ further_reading:
   
 ---
 
-{{< callout url="https://forms.gle/nyNVPmjQqEKdJwre9" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Plugins!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/plugins/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Plugins!" >}}
 {{< /callout >}}
 
 ## Overview

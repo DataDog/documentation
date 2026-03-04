@@ -1,78 +1,28 @@
 ---
 app_id: cyral
-app_uuid: da6e2ea6-1611-4d37-9cc6-efce73bc4f31
-assets:
-  dashboards:
-    Cyral Overview: assets/dashboards/cyral_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: cyral.analysis_time
-      metadata_path: metadata.csv
-      prefix: cyral.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10115
-    source_type_name: Cyral
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Cyral
-  sales_email: product@cyral.com
-  support_email: product@cyral.com
 categories:
 - almacenes de datos
 - seguridad
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cyral
-integration_id: cyral
-integration_title: Cyral
-integration_version: 0.0.1
-is_public: true
-manifest_version: 2.0.0
-name: cyral
-public_title: Cyral
-short_description: Recopila métricas de tiempo de ejecución de una instancia de Cyral
-  que monitoriza MySQL.
+description: Recopila métricas de tiempo de ejecución de una instancia de Cyral que
+  monitoriza MySQL.
+integration_version: 0.1.0
+media: []
 supported_os:
-- linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::Security
-  - Supported OS::Linux
-  - Offering::Integration
-  configuration: README.md#Configuración
-  description: Recopila métricas de tiempo de ejecución de una instancia de Cyral
-    que monitoriza MySQL.
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Cyral
+- Linux
+title: Cyral
 ---
-
-<!--  FUENTE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-Este check monitoriza un sidecar de MySQL para [Cyral][1] a través del Datadog Agent.
+Este check monitoriza un auxiliar [Cyral](https://cyral.com/) MySQL a través del Datadog Agent.
 
 ## Configuración
 
-El check de Cyral no está incluido en el paquete del [Datadog Agent][2], por lo que debes instalarlo.
+El check de Cyral no está incluido en el paquete del [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest), por lo que es necesario instalarlo.
 
 ### Instalación
 
-En el caso de las versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucciones para instalar el check de Cyral en tu host. Para instalarlo con el Docker Agent o versiones anteriores del Agent, consulta [Uso de integraciones de la comunidad][3].
+Para el Agent v7.21 o posterior/v6.21 o posterior, sigue las instrucciones a continuación para instalar el check de Cyral en tu host. Consulta [Uso de integraciones de la comunidad](https://docs.datadoghq.com/agent/guide/use-community-integrations/) para realizar la instalación con el Docker Agent o versiones anteriores del Agent.
 
 1. Ejecuta el siguiente comando para instalar la integración del Agent:
 
@@ -80,31 +30,55 @@ En el caso de las versiones 7.21/6.21 o posteriores del Agent, sigue las siguien
    datadog-agent integration install -t datadog-cyral==<INTEGRATION_VERSION>
    ```
 
-2. Configura tu integración como si fuese una [integración][4] de base.
+1. Configura tu integración de forma similar a las [integraciones](https://docs.datadoghq.com/getting_started/integrations/) centrales.
 
 ### Configuración
 
-1. Edita el archivo `cyral.d/conf.yaml`, que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent, para empezar a recopilar los datos de rendimiento de Cyral. Para conocer todas las opciones de configuración disponibles, consulta el [cyral.d/conf.yaml de ejemplo][5].
+1. Edita el archivo `cyral.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para comenzar a recopilar tus datos de rendimiento de cyral. Consulta [el cyral.d/conf.yaml de ejemplo](https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-    ```yaml
-    init_config:
+   ```yaml
+   init_config:
 
-    instances:
-     # url of the metrics endpoint of prometheus
-     - prometheus_url: http://localhost:9018/metrics
-    ```
+   instances:
+    # url of the metrics endpoint of prometheus
+    - prometheus_url: http://localhost:9018/metrics
+   ```
 
-2. [Reinicia el Agent][6].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][7] y busca `cyral` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `cyral` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "cyral" >}}
 
+| | |
+| --- | --- |
+| **cyral.analysis_time** <br>(count) | Tiempo empleado en realizar el análisis<br>_Se muestra en milisegundos_ |
+| **cyral.authentication_failure_count** <br>(count) | Número de fallos de autenticación|
+| **cyral.catalog_query_count** <br>(count) | |
+| **cyral.closed_client_conns_count** <br>(count) | |
+| **cyral.closed_listeners_count** <br>(count) | |
+| **cyral.high_latency_query_count** <br>(count) | Número de consultas que superan el umbral (configurable)|
+| **cyral.open_client_conns_count** <br>(count) | |
+| **cyral.open_listeners_count** <br>(count) | |
+| **cyral.policy_eval_time** <br>(count) | |
+| **cyral.policy_eval_time_counter** <br>(count) | |
+| **cyral.policy_violation_count** <br>(count) | Número de consultas con infracciones de la política|
+| **cyral.portscan_count** <br>(count) | Número de intentos de portscan detectados|
+| **cyral.queries_with_errors** <br>(count) | |
+| **cyral.query_duration_count** <br>(count) | Número de incrementos a query_duration|
+| **cyral.query_duration_sum** <br>(count) | Duración total de las consultas en milisegundos|
+| **cyral.repo_dial_errors_count** <br>(count) | |
+| **cyral.row_count** <br>(count) | Número de filas por consulta|
+| **cyral.sql_parse_time** <br>(count) | Tiempo de parseo en milisegundos|
+| **cyral.sql_parse_time_counter** <br>(count) | Número de incrementos de sql_parse_time|
+| **cyral.storage_watch_events_count** <br>(count) | |
+| **cyral.wire_dial_errors_count** <br>(count) | |
+| **cyral.wire_parse_duration** <br>(count) | |
+| **cyral.wire_parse_duration_increments** <br>(count) | |
 
 ### Checks de servicio
 
@@ -127,14 +101,4 @@ Cyral no incluye eventos.
 
 Comprueba que la `url` en `cyral.yaml` sea correcta.
 
-¿Necesitas ayuda? [Consulta el servicio de asistencia de Datadog][9].
-
-[1]: https://cyral.com/
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/es/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/es/getting_started/integrations/
-[5]: https://github.com/DataDog/integrations-extras/blob/master/cyral/datadog_checks/cyral/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/cyral/metadata.csv
-[9]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

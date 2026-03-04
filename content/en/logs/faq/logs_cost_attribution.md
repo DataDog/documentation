@@ -60,9 +60,9 @@ Use a [Category Processor][6] to create a new `team` attribute for your logs.
 3. Enter a name for the processor. For example, "Create team attribute".
 4. Enter `team` in the **Set target category attribute** field. This creates a `team` attribute.
 5. In the **Populate category** section, add a category for each team. For example, to add the tag `team:service_a` to log events that match `service:a` and `env:prod`:
-      a. Enter `service:a` and `env:prod` in the **All events that match** field.  
-      b. Enter `service_a` in the **Appear under the value name** field.  
-      c. Click **Add**.
+   1. Enter `service:a` and `env:prod` in the **All events that match** field.  
+   1. Enter `service_a` in the **Appear under the value name** field.  
+   1. Click **Add**.
 6. Add the other teams as separate categories.
 7. Click **Create**.
 
@@ -109,10 +109,10 @@ Use a [Category Processor][6] to create a new `index_name` attribute for identif
 4. Enter **index_name** in the **Set target category attribute** field. This creates an `index_name` attribute.
 5. Add a category for each index. For example, if you have an index named `retention-7` for all logs tagged with `env:staging`:
     {{< img src="logs/faq/logs_cost_attribution/indexes_configuration.png" alt="The indexes list showing the filter query, retention period, and whether online archives is enabled for the retention-30, retention-15, retention-7, and demo indexes" >}} 
-Then, in the **Populate category** section:  
-      a. Enter `env:staging` in the **All events that match** field.  
-      b. Enter `retention-7` in the **Appear under the value name** field.  
-      c. Click **Add**
+   Then, in the **Populate category** section:  
+   1. Enter `env:staging` in the **All events that match** field.  
+   1. Enter `retention-7` in the **Appear under the value name** field.  
+   1. Click **Add**.
 6. Add the other indexes as separate categories.
 7. Click **Create**.
 
@@ -127,9 +127,9 @@ Use a [Category Processor][6] to create a new `retention_period` attribute to as
 3. Enter a name for the processor. For example, "Create retention_period attribute".
 4. Enter `retention_period` in the **Set target category attribute** field. This creates a `retention_period` attribute.
 5. Add a category for each retention period. For example, if you have a 7-day retention index named `retention-7`, then in the **Populate category** section:  
-      a. Enter `@index_name:(retention-7)` in the **All events that match** field.  
-      b. Enter `7` in the **Appear under the value name** field.  
-      c. Click **Add**
+   1. Enter `@index_name:(retention-7)` in the **All events that match** field.  
+   1. Enter `7` in the **Appear under the value name** field.  
+   1. Click **Add**.
 6. Add the other retention periods as separate categories.
 7. Click **Create**.
 
@@ -164,14 +164,14 @@ Use a [Category Processor][6] to create a new `online_archives` attribute to ind
 2. Select **Category Processor** for the processor type.
 3. Enter a name for the processor. For example, "Create online_archives attribute". This creates an `online_archives` attribute.
 4. In the **Populate category** section, add two categories:
-      <br> In the **first category**, the value `true` is assigned to all indexes with Online Archives enabled. For example, if logs in the index named `retention-30` go into Online Archives:  
-      a. Enter `@index_name:(retention-30)` in the **All events that match** field.  
-      b. Enter `true` in the **Appear under the value name** field.  
-      c. Click **Add**
-      <br> In the **second category**, the value `false` is assigned to all other indexes.  
-      a. Enter `*` in the **All events that match** field.  
-      b. Enter `false` in the **Appear under the value name** field.   
-      c. Click **Add**
+   - In the **first category**, the value `true` is assigned to all indexes with Online Archives enabled. For example, if logs in the index named `retention-30` go into Online Archives:  
+     1. Enter `@index_name:(retention-30)` in the **All events that match** field.  
+     1. Enter `true` in the **Appear under the value name** field.  
+     1. Click **Add**.
+   - In the **second category**, the value `false` is assigned to all other indexes.  
+     1. Enter `*` in the **All events that match** field.  
+     1. Enter `false` in the **Appear under the value name** field.   
+     1. Click **Add**.
 5. Click **Create**.
 
 {{< img src="logs/faq/logs_cost_attribution/online_archives_attribute.png" alt="The category processor form fill in with data to create a online_archives attribute" style="width:75%" >}}
@@ -203,13 +203,13 @@ For the Sensitive Data Scanner, billed usage is based on the volume of logs scan
 
 1. Go to the [Sensitive Data Scanner][8].
 2. In each scanning group:  
-      a. Click **Add Scanning Rule**.  
-      b. Enter `.` in the **Define Regex to match** field to match all logs.  
-      c. Select **Entire Event** in the **Scan the entire event or a portion of it** field.  
-      d. Enter `sds:true` in the **Add tags** field.  
-      e. Leave **Define action on match** on **No action**.  
-      f. Enter a name for the scanning rule. For example, "Create sds tag".  
-      g. Click **Create**.  
+   1. Click **Add Scanning Rule**.  
+   1. Enter `.` in the **Define Regex to match** field to match all logs.  
+   1. Select **Entire Event** in the **Scan the entire event or a portion of it** field.  
+   1. Enter `sds:true` in the **Add tags** field.  
+   1. Leave **Define action on match** on **No action**.  
+   1. Enter a name for the scanning rule. For example, "Create sds tag".  
+   1. Click **Create**.  
 
 ## Generate custom logs metrics
 
@@ -296,9 +296,9 @@ Datadog recommends that you configure the table widget for Log Indexing in the f
 2. Select the **Table** widget.
 3. Select the **events** count metric that you generated earlier to count the number of events ingested.
 4. In the **from** field, add the following:  
-      a. `datadog_index:*` to filter to only logs that have been routed to indexes.  
-      b. `datadog_is_excluded:false` to filter to only logs that have not matched any exclusion filter.  
-      c. `retention_period:7` to filter to only logs that are retained for 7 days. You don't need to add this tag if you have the same retention period for all your indexes and therefore did not set up this tag earlier. If you have additional `retention_period` tags, create a separate widget for each one.
+   1. `datadog_index:*` to filter to only logs that have been routed to indexes.  
+   1. `datadog_is_excluded:false` to filter to only logs that have not matched any exclusion filter.  
+   1. `retention_period:7` to filter to only logs that are retained for 7 days. You don't need to add this tag if you have the same retention period for all your indexes and therefore did not set up this tag earlier. If you have additional `retention_period` tags, create a separate widget for each one.
 5. Select the **sum by** field, and add the `team` tag to show the usage in events, by team. You can also add other tags for your different cost buckets.
 6. Add the following formula to convert usage into costs: `Usage in millions of events` * `Unit cost for 7 days of retention`. If your contractual price per million of events changes, you need to update the formula manually.
 7. Click **Save**.

@@ -3,6 +3,8 @@ aliases:
 - /fr/agent/guide/cluster-agent-custom-metrics-server
 - /fr/agent/cluster_agent/external_metrics
 - /fr/containers/cluster_agent/external_metrics
+description: Configurer Kubernetes Horizontal Pod Autoscaler pour utiliser des métriques
+  Datadog custom et externes avec l'Agent de cluster
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
@@ -22,6 +24,8 @@ further_reading:
   text: Dépanner l'Agent de cluster Datadog
 title: Autoscaling avec les métriques externes et custom de l'Agent de cluster
 ---
+
+<div class="alert alert-info">Cette page décrit l'utilisation de Kubernetes Horizontal Pod Autoscaler (HPA). Pour le Kubernetes Autoscaling de Datadog, consultez la section <a href="/containers/autoscaling">Kubernetes Autoscaling</a>.</div>
 
 ## Présentation
 
@@ -56,8 +60,8 @@ Pour activer le serveur de métriques externes pour votre Agent de cluster gér�
   spec:
     global:
       credentials:
-        apiKey: <CLÉ_API_DATADOG>
-        appKey: <CLÉ_APPLICATION_DATADOG>
+        apiKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_APP_KEY>
 
     features:
       externalMetricsServer:
@@ -76,11 +80,11 @@ Pour définir les clés, il est également possible de faire référence aux nom
     global:
       credentials:
         apiSecret:
-          secretName: <NOM_SECRET>
-          keyName: <CLÉ_POUR_CLÉ_API_DATADOG>
+          secretName: <SECRET_NAME>
+          keyName: <KEY_FOR_DATADOG_API_KEY>
         appSecret:
-          secretName: <NOM_SECRET>
-          keyName: <CLÉ_POUR_CLÉ_APPLICATION_DATADOG>
+          secretName: <SECRET_NAME>
+          keyName: <KEY_FOR_DATADOG_APP_KEY>
 
     features:
       externalMetricsServer:
@@ -95,16 +99,16 @@ Pour activer le serveur de métriques externes avec votre Agent de cluster dans 
 
   ```yaml
   datadog:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
     #(...)
 
   clusterAgent:
     enabled: true
-    # Activer le metricsProvider pour pouvoir effectuer un autoscaling en fonction des métriques Datadog
+    # Enable the metricsProvider to be able to scale based on metrics in Datadog
     metricsProvider:
       # clusterAgent.metricsProvider.enabled
-      # Définir sur true pour activer le fournisseur de métriques
+      # Set this to true to enable Metrics Provider
       enabled: true
   ```
 
@@ -197,8 +201,8 @@ Pour activer l'utilisation de la CRD `DatadogMetric`, mettez à jour la ressourc
   spec:
     global:
       credentials:
-        apiKey: <CLÉ_API_DATADOG>
-        appKey: <CLÉ_APPLICATION_DATADOG>
+        apiKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_APP_KEY>
     features:
       externalMetricsServer:
         enabled: true
@@ -258,9 +262,9 @@ Vous pouvez créer un objet `DatadogMetric` à l'aide du manifeste suivant :
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogMetric
 metadata:
-  name: <NOM_MÉTRIQUE_DATADOG>
+  name: <DATADOG_METRIC_NAME>
 spec:
-  query: <REQUÊTE_PERSONNALISÉE>
+  query: <CUSTOM_QUERY>
 ```
 
 #### Exemple d'objet DatadogMetric
@@ -276,12 +280,10 @@ spec:
 ```
 
 ### Utiliser DatadogMetric dans un Autoscaler de pods horizontaux
-Une fois votre Agent de cluster configuré et la ressource `DatadogMetric` créée, mettez à jour votre Autoscaler de pods horizontaux afin de faire référence à la ressource `DatadogMetric` avec son espace de nommage et son nom. Le format standard permet de spécifier la métrique pour l'Autoscaler de pods horizontaux en tant que `type: External` et de fournir le nom de la métrique en respectant le format `datadogmetric@<ESPACE_NOMMAGE>:<NOM_MÉTRIQUE_DATADOG>`.
+Une fois votre Agent de cluster configuré et la ressource `DatadogMetric` créée, mettez à jour votre Autoscaler de pods horizontaux afin de faire référence à la ressource `DatadogMetric` avec son espace de nommage et son nom. Le format standard permet de spécifier la métrique pour l'Autoscaler de pods horizontaux en tant que `type: External` et de fournir le nom de la métrique en respectant le format `datadogmetric@<NAMESPACE>:<DATADOG_METRIC_NAME>`.
 
 #### Exemple d'Autoscalers de pods horizontaux avec DatadogMetric
 L'Autoscaler de pods horizontaux ci-dessous utilise l'objet `DatadogMetric` intitulé `nginx-requests`, en partant du principe que les deux objets se trouvent dans l'espace de nommage `nginx-demo` :
-
-Avec `apiVersion: autoscaling/v2` :
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -305,28 +307,7 @@ spec:
         value: 9
 ```
 
-Avec `apiVersion: autoscaling/v2beta1` :
-
-```yaml
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginxext
-spec:
-  minReplicas: 1
-  maxReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  metrics:
-  - type: External
-    external:
-      metricName: datadogmetric@nginx-demo:nginx-requests
-      targetValue: 9
-```
-
-Dans ces manifestes :
+Dans ce manifeste :
 - L'Autoscaler de pods horizontaux est configuré de façon à effectuer l'autoscaling du déploiement `nginx`.
 - Le nombre maximum de réplicas créés est de `3`, et le minimum est de `1`.
 - L'Autoscaler de pods horizontaux repose sur les `nginx-requests` de `DatadogMetric` dans l'espace de nommage `nginx-demo`.
@@ -343,14 +324,14 @@ spec:
   metrics:
     - type: External
       external:
-        metricName: "<NOM_MÉTRIQUE>"
+        metricName: "<METRIC_NAME>"
         metricSelector:
           matchLabels:
-            <CLÉ_TAG>: <VALEUR_TAG>
+            <TAG_KEY>: <TAG_VALUE>
 ```
 
 ### Exemple d'Autoscalers de pods horizontaux sans DatadogMetric
-Le manifeste d'Autoscaler de pods horizontaux ci-dessous permet de procéder à l'autoscaling d'un déploiement NGINX en fonction de la métrique `nginx.net.request_per_s` de Datadog à l'aide de `apiVersion: autoscaling/v2` :
+Le manifeste d'Autoscaler de pods horizontaux ci-dessous permet de procéder à l'autoscaling d'un déploiement NGINX en fonction de la métrique `nginx.net.request_per_s` de Datadog :
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -374,30 +355,7 @@ spec:
         value: 9
 ```
 
-L'exemple suivant reprend le manifeste ci-dessus, mais cette fois avec `apiVersion: autoscaling/v2beta1` :
-```yaml
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginxext
-spec:
-  minReplicas: 1
-  maxReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  metrics:
-  - type: External
-    external:
-      metricName: nginx.net.request_per_s
-      metricSelector:
-        matchLabels:
-            kube_container_name: nginx
-      targetValue: 9
-```
-
-Dans ces manifestes :
+Dans ce manifeste :
 
 - L'Autoscaler de pods horizontaux est configuré de façon à effectuer l'autoscaling du déploiement `nginx`.
 - Le nombre maximum de réplicas créés est de `3`, et le minimum est de `1`.
@@ -414,6 +372,13 @@ Si vous définissez la variable `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_
 L'Agent de cluster Datadog crée automatiquement des ressources `DatadogMetric` dans son propre espace de nommage (leur nom commence par `dcaautogen-`) afin de permettre une transition en douceur vers `DatadogMetric`.
 
 Si vous choisissez de migrer un Autoscaler de pods horizontaux ultérieurement pour appeler un objet `DatadogMetric`, la ressource créée automatiquement sera nettoyée par l'Agent de cluster Datadog quelques heures plus tard.
+
+Si vous le souhaitez, vous pouvez désactiver ce comportement en définissant `DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN` sur `false` comme suit :
+
+```yaml
+- name: DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN
+  value: "false"
+```
 
 ## Interroger l'Agent de cluster
 L'Agent de cluster transmet les requêtes pour les objets `DatadogMetric` toutes les 30 secondes. Il regroupe également les requêtes de métrique au sein de lots comprenant 35 requêtes. Ainsi, 35 requêtes `DatadogMetric` sont incluses dans une seule requête transmise à l'API de métriques Datadog.
@@ -437,7 +402,7 @@ L'Agent de cluster interroge également les données des cinq dernières minutes
 L'Agent de cluster Datadog se charge de mettre à jour la sous-ressource `status` de toutes les ressources `DatadogMetric` afin de refléter les résultats des requêtes envoyées à Datadog. Ces informations sont à examiner en priorité afin de comprendre ce qui se passe en cas de dysfonctionnement. Vous pouvez exécuter la commande suivante pour récupérer ces informations générées pour vous :
 
 ```shell
-kubectl describe datadogmetric <NOM_RESSOURCE>
+kubectl describe datadogmetric <RESOURCE NAME>
 ```
 
 #### Exemple
@@ -478,7 +443,7 @@ Les quatre conditions vous permettent d'en savoir plus sur l'état actuel de vot
 ### Différence entre les types Value et AverageValue pour la métrique cible
 Les Autoscalers de pods horizontaux utilisés dans les exemples ci-dessus reposent sur le type de cible `Value`, et non `AverageValue`. Ces deux types sont acceptés. Modifiez vos requêtes de métrique Datadog en fonction du type choisi.
 
-Lorsque vous utilisez le type `Value`, l'Autoscaler prend une décision basée sur la valeur de la métrique renvoyée telle quelle par la requête de métrique Datadog. Avec `AverageValue`, la valeur de métrique renvoyée est divisée par le nombre actuel de pods. Définissez donc votre `<VALEUR_MÉTRIQUE>` en fonction du comportement à adopter vis-à-vis de la requête et de la valeur renvoyée.
+Lorsque vous utilisez le type `Value`, l'Autoscaler prend une décision basée sur la valeur de la métrique renvoyée telle quelle par la requête de métrique Datadog. Avec `AverageValue`, la valeur de métrique renvoyée est divisée par le nombre actuel de pods. Définissez donc votre `<Metric Value>` en fonction du comportement à adopter vis-à-vis de la requête et de la valeur renvoyée.
 
 Voici un exemple de configuration du type `Value` avec `apiVersion: autoscaling/v2` :
 ```yaml
@@ -486,10 +451,10 @@ Voici un exemple de configuration du type `Value` avec `apiVersion: autoscaling/
   - type: External
     external:
       metric:
-        name: datadogmetric@<ESPACE_NOMMAGE>:<NOM_MÉTRIQUE_DATADOG>
+        name: datadogmetric@<NAMESPACE>:<DATADOG_METRIC_NAME>
       target:
         type: Value
-        value: <VALEUR_MÉTRIQUE>
+        value: <METRIC_VALUE>
 ```
 
 Un autre exemple de configuration, avec le type `AverageValue` :
@@ -498,13 +463,11 @@ Un autre exemple de configuration, avec le type `AverageValue` :
   - type: External
     external:
       metric:
-        name: datadogmetric@<ESPACE_NOMMAGE>:<NOM_MÉTRIQUE_DATADOG>
+        name: datadogmetric@<NAMESPACE>:<DATADOG_METRIC_NAME>
       target:
         type: AverageValue
-        averageValue: <VALEUR_MÉTRIQUE>
+        averageValue: <METRIC_VALUE>
 ```
-
-Pour `apiVersion: autoscaling/v2beta1`, les options correspondantes sont `targetValue` et `targetAverageValue`.
 
 ## Pour aller plus loin
 

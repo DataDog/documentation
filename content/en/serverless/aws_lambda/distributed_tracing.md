@@ -38,7 +38,7 @@ The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support 
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
-The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. You can install the tracer using the [installation instructions][5]. If you already have the extension installed, ensure that the environment variable `DD_TRACE_ENABLED` is set to `true`.
+The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. You can install the tracer using the [installation instructions][5].
 
 ### Runtime recommendations
 

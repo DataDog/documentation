@@ -33,13 +33,6 @@ cascade:
         rank: 70
 ---
 
-
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 {{< img src="data_streams/map_view2.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Highlights a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
@@ -59,7 +52,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | Amazon SQS | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 | Azure Service Bus | | | {{< X >}} | | | |
 | Google Pub/Sub | {{< X >}} | | | {{< X >}} | | |
-| IBM MQ | | | {{< X >}} | | | |
+| IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
 Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.

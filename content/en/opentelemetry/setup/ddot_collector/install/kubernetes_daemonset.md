@@ -36,11 +36,11 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [kubectl][5]
 
-{{< callout btn_hidden="true" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
-{{< /callout >}}
+**Network**: {{% otel-network-requirements %}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Select installation method
 
@@ -319,11 +319,12 @@ In the snippet below, the Collector configuration is placed directly under the `
               api:
                 key: ${env:DD_API_KEY}
                 site: ${env:DD_SITE}
+              sending_queue:
+                batch:
+                  flush_timeout: 10s
           processors:
             infraattributes:
               cardinality: 2
-            batch:
-              timeout: 10s
           connectors:
             datadog/connector:
               traces:
@@ -331,15 +332,15 @@ In the snippet below, the Collector configuration is placed directly under the `
             pipelines:
               traces:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
 {{< /code-block >}}
 
@@ -410,11 +411,12 @@ spec:
               api:
                 key: ${env:DD_API_KEY}
                 site: ${env:DD_SITE}
+              sending_queue:
+                batch:
+                  flush_timeout: 10s
           processors:
             infraattributes:
               cardinality: 2
-            batch:
-              timeout: 10s
           connectors:
             datadog/connector:
               traces:
@@ -422,15 +424,15 @@ spec:
             pipelines:
               traces:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
 {{< /code-block >}}
 {{% /collapse-content %}}
@@ -472,11 +474,12 @@ data:
         api:
           key: ${env:DD_API_KEY}
           site: ${env:DD_SITE}
+        sending_queue:
+          batch:
+            flush_timeout: 10s
     processors:
       infraattributes:
         cardinality: 2
-      batch:
-        timeout: 10s
     connectors:
       datadog/connector:
         traces:
@@ -484,15 +487,15 @@ data:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
 {{< /code-block >}}
 
@@ -592,11 +595,12 @@ data:
         api:
           key: ${env:DD_API_KEY}
           site: ${env:DD_SITE}
+        sending_queue:
+          batch:
+            flush_timeout: 10s
     processors:
       infraattributes:
         cardinality: 2
-      batch:
-        timeout: 10s
     connectors:
       datadog/connector:
         traces:
@@ -604,15 +608,15 @@ data:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
 {{< /code-block >}}
 {{% /collapse-content %}}
@@ -645,11 +649,12 @@ exporters:
     api:
       key: ${env:DD_API_KEY}
       site: ${env:DD_SITE}
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
   infraattributes:
     cardinality: 2
-  batch:
-    timeout: 10s
 connectors:
   datadog/connector:
     traces:
@@ -657,15 +662,15 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog]
     logs:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog]
 
 {{< /code-block >}}
@@ -679,7 +684,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
-{{< img src="/opentelemetry/embedded_collector/components-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/components-3.jpg" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 
 ##### Datadog connector
 
@@ -701,6 +706,9 @@ exporters:
     api:
       key: ${env:DD_API_KEY}
       site: ${env:DD_SITE}
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 {{< /code-block >}}
 
 **Note**: If `key` is not specified or set to a secret, or if `site` is not specified, the system uses values from the core Agent configuration. By default, the core Agent sets site to `datadoghq.com` (US1).
@@ -819,38 +827,28 @@ env:
 
 [Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
+In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from containers.
 
-In containerized environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables or Kubernetes labels on your deployments and pods. The DDOT detects this tagging configuration and applies it to the data it collects from containers.
-
-To get the full range of unified service tagging, add **both** the environment variables and the deployment/pod labels:
+Add the following environment variables to your application's deployment manifest:
 
 {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-...
-template:
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
-  containers:
-  -  ...
-     env:
-      - name: OTEL_SERVICE_NAME
-        value: "<SERVICE>"
-      - name: OTEL_RESOURCE_ATTRIBUTES
-        value: >-
-          service.name=$(OTEL_SERVICE_NAME),
-          service.version=<VERSION>,
-          deployment.environment.name=<ENV>
+  name: <SERVICE>
+spec:
+  template:
+    spec:
+      containers:
+      - name: <SERVICE>
+        env:
+          - name: OTEL_SERVICE_NAME
+            value: "<SERVICE>"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "service.version=<VERSION>,deployment.environment.name=<ENV>"
 {{< /code-block >}}
+
+<div class="alert alert-info">Alternatively, you can use <a href="/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration">Datadog-specific Kubernetes labels</a> to configure unified service tagging. Do not use both approaches, as this creates duplicate tags.</div>
 
 ### Run the application
 

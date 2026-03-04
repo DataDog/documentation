@@ -19,7 +19,7 @@ Con Amazon CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener mét
    - Opcionalmente, especifica un conjunto limitado de espacios de nombres o métricas para transmitir.
 2. Una vez que creas el Metric Stream, Datadog comienza a recibir inmediatamente las métricas transmitidas y las muestra en el sitio de Datadog sin necesidad de configuración adicional.
 
-<div class="alert alert-warning">El filtrado por espacio de nombres configurado en el cuadro de integración de AWS <b>también se</b> aplica a CloudWatch Metric Streams.</div>
+<div class="alert alert-warning">El filtrado de etiquetas configurado en el cuadro de integración de AWS <b>también se aplica</b> a flujos de métricas de CloudWatch.</div>
 
 ### Transmisión de métricas versus sondeo de API {#streaming-vs-polling}
 

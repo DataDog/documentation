@@ -1,16 +1,6 @@
 ---
 title: Network Path Terms and Concepts
 description: Glossary for Network Path
-further_reading:
-    - link: '/network_monitoring/cloud_network_monitoring/setup/'
-      tag: 'Documentation'
-      text: 'Setting Up Cloud Network Monitoring'
-    - link: '/network_monitoring/cloud_network_monitoring/tags_reference/'
-      tag: 'Documentation'
-      text: 'CNM Tags Reference'
-    - link: '/monitors/types/cloud_network_monitoring/'
-      tag: 'Documentation'
-      text: 'CNM Monitors and Alerts'
 ---
 
 ## Network Path
@@ -49,9 +39,6 @@ Network Path provides hop-by-hop visibility into the route between a source and 
 | **Latency**                         | How long the traceroute took to get from a source to its destination. |
 
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [6]: /network_monitoring/network_path/
 [7]: /network_monitoring/network_path/path_view

@@ -47,7 +47,7 @@ Datadog LLM Observability puede rastrear automáticamente y anotar llamadas a fr
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-| Framework                                  | Versiones compatibles | Versión del rastreador                              |
+| Marco | Versiones compatibles | Versión del rastreador                              |
 |--------------------------------------------|--------------------|---------------------------------------------|
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
@@ -55,6 +55,7 @@ Datadog LLM Observability puede rastrear automáticamente y anotar llamadas a fr
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
 
 {{% collapse-content title="Compatibilidad con módulos ESMAScript (ESM)" level="h4" expanded=false id="esm-support" %}}
 La instrumentación automática para proyectos ESM es compatible a partir de `dd-trace@>=5.38.0`. Para habilitar la instrumentación automática en tus proyectos ESM, ejecuta tu aplicación con la siguiente opción de Node:
@@ -359,6 +360,25 @@ La integración de Google GenAI instrumenta los siguientes métodos:
 [1]: https://ai.google.dev/gemini-api/docs
 [2]: https://ai.google.dev/api/generate-content#method:-models.generatecontent
 [3]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
+{{% /tab %}}
+{{% tab "Node.js" %}}
+La integración de Google GenAI rastrea automáticamente métodos en el [SDK Node.js de Google GenAI][1] instrumentando el [paquete `@google/genai`][4].
+
+**Nota:** El [SDK Node.js de Google GenAI][1] sucede al [SDK de Google GenerativeAI][6], y expone tanto la API de Gemini Developer como Vertex.
+
+### Métodos rastreados
+
+La integración de Google GenAI instrumenta los siguientes métodos:
+
+- [Generación de contenidos][2] (incluyendo [llamadas transmitidas][5])
+- [Contenido incrustado][3]
+
+[1]: https://ai.google.dev/gemini-api/docs#javascript
+[2]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt-JAVASCRIPT
+[3]: https://ai.google.dev/api/embeddings#embed_content-JAVASCRIPT
+[4]: https://www.npmjs.com/package/@google/genai
+[5]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt_streaming-JAVASCRIPT
+[6]: https://www.npmjs.com/package/@google/generative-ai
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}

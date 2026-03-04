@@ -32,24 +32,24 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       fun onResume() {
-         GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
-       }
+   fun onResume() {
+       GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
+   }
 
-       fun onPause() {
-         GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
-       }
+   fun onPause() {
+       GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
+   }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       public void onResume() {
-            GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
-       }
-       
-       public void onPause() {
-            GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
-       }
+   public void onResume() {
+       GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
+   }
+    
+   public void onPause() {
+       GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -63,16 +63,16 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       fun onUserInteraction() { 
-            GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
-       }
+   fun onUserInteraction() { 
+       GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
+   }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       public void onUserInteraction() {
-            GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
-       }
+   public void onUserInteraction() {
+       GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -130,28 +130,28 @@ In addition to [tracking resources automatically][6], you can also track specifi
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
    ```kotlin
-       fun loadResource() {
-            GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
-            try {
-              // do load the resource
-              GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
-            } catch (e: Exception) {
-              GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-            } 
-       }
+   fun loadResource() {
+       GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
+       try {
+           // do load the resource
+           GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
+       } catch (e: Exception) {
+           GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
+       } 
+   }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       public void loadResource() {
-            GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
-            try {
-                // do load the resource
-                GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
-            } catch (Exception e) {
-                GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
-            }
+   public void loadResource() {
+       GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
+       try {
+           // do load the resource
+           GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
+       } catch (Exception e) {
+           GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
        }
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -161,7 +161,7 @@ In addition to [tracking resources automatically][6], you can also track specifi
 To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][7].
 
 ```kotlin
-   GlobalRumMonitor.get().addError(message, source, throwable, attributes)
+GlobalRumMonitor.get().addError(message, source, throwable, attributes)
 ```
 
 ### Add user properties
@@ -193,12 +193,12 @@ fun clearAllData(sdkCore: SdkCore = getInstance()) {
 You can use the `StopInstance` API to stop the SDK instance assigned to the given name (or the default instance if the name is null) from collecting and uploading data further.
 
 ```kotlin
-   fun stopInstance(instanceName: String? = null) {
-       synchronized(registry) {
-           val instance = registry.unregister(instanceName)
-           (instance as? DatadogCore)?.stop()
-       }
-   }
+fun stopInstance(instanceName: String? = null) {
+    synchronized(registry) {
+        val instance = registry.unregister(instanceName)
+        (instance as? DatadogCore)?.stop()
+    }
+}
 ```
 
 ### Control event buildup
@@ -208,10 +208,10 @@ Many operations, such as data processing and event input/output, are queued in b
 You can control the buildup of events on the SDK with the `setBackpressureStrategy` API. This API ignores new tasks if a queue reaches 1024 items.
 
 ```kotlin
-   fun setBackpressureStrategy(backpressureStrategy: BackPressureStrategy): Builder {
-       coreConfig = coreConfig.copy(backpressureStrategy = backpressureStrategy)
-       return this
-   }
+fun setBackpressureStrategy(backpressureStrategy: BackPressureStrategy): Builder {
+    coreConfig = coreConfig.copy(backpressureStrategy = backpressureStrategy)
+    return this
+}
 ```
 
 See an [example of this API][9] being used.
@@ -221,10 +221,10 @@ See an [example of this API][9] being used.
 You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is -1 (allow all).
 
 ```kotlin
-   fun setRemoteLogThreshold(minLogThreshold: Int): Builder {
-       minDatadogLogsPriority = minLogThreshold
-       return this
-   }
+fun setRemoteLogThreshold(minLogThreshold: Int): Builder {
+    minDatadogLogsPriority = minLogThreshold
+    return this
+}
 ```
 
 ## Track custom global attributes
@@ -238,7 +238,7 @@ Adding user information to your RUM sessions makes it possible to:
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/application_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api-1.png" alt="User attributes of a session in the RUM UI" >}}
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -255,11 +255,11 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ### Track attributes
 
 ```kotlin
-    // Adds an attribute to all future RUM events
-    GlobalRumMonitor.get().addAttribute(key, value)
+// Adds an attribute to all future RUM events
+GlobalRumMonitor.get().addAttribute(key, value)
 
-    // Removes an attribute to all future RUM events
-    GlobalRumMonitor.get().removeAttribute(key)
+// Removes an attribute to all future RUM events
+GlobalRumMonitor.get().removeAttribute(key)
 ```
 
 ## Track widgets
@@ -389,16 +389,16 @@ For instance, to set each fragment as a distinct view, use the following configu
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val rumConfig = RumConfiguration.Builder(applicationId)
-        .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
-        .build()
+   val rumConfig = RumConfiguration.Builder(applicationId)
+     .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
+     .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-        .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
-        .build();
+   RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
+    .build();
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -409,39 +409,39 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val rumConfig = RumConfiguration.Builder(applicationId)
-        .useViewTrackingStrategy(
-        ActivityViewTrackingStrategy(
-            trackExtras = true,
-            componentPredicate = object : ComponentPredicate<Activity> {
-                override fun accept(component: Activity): Boolean {
-                    return true
-                }
+   val rumConfig = RumConfiguration.Builder(applicationId)
+     .useViewTrackingStrategy(
+       ActivityViewTrackingStrategy(
+         trackExtras = true,
+         componentPredicate = object : ComponentPredicate<Activity> {
+           override fun accept(component: Activity): Boolean {
+               return true
+           }
 
-                override fun getViewName(component: Activity): String? = null
-            })
-        )
-        .build()  
+           override fun getViewName(component: Activity): String? = null
+         })
+       )
+     .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-            .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
-                true,
-                new ComponentPredicate<Activity>() {
-                    @Override
-                    public boolean accept(Activity component) {
-                        return true;
-                    }
+   RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+       .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
+           true,
+           new ComponentPredicate<Activity>() {
+               @Override
+               public boolean accept(Activity component) {
+                   return true;
+               }
 
-                    @Override
-                    public String getViewName(Activity component) {
-                        return null;
-                    }
-                }
-            ))
-            .build();
+               @Override
+               public String getViewName(Activity component) {
+                   return null;
+               }
+           }
+       ))
+       .build();
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -543,36 +543,36 @@ Long running operations performed on the main thread can impact the visual perfo
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val rumConfig = RumConfiguration.Builder(applicationId)
-        // …
-        .trackLongTasks(durationThreshold)
-        .build()
+   val rumConfig = RumConfiguration.Builder(applicationId)
+     // …
+     .trackLongTasks(durationThreshold)
+     .build()
    ```
 
 For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
    ```kotlin
-      val rumConfig = RumConfiguration.Builder(applicationId)
-        // …
-        .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
-        .build()
+   val rumConfig = RumConfiguration.Builder(applicationId)
+     // …
+     .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
+     .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
   ```java
-      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-        // …
-        .trackLongTasks(durationThreshold)
-        .build();
-   ```
+  RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    // …
+    .trackLongTasks(durationThreshold)
+    .build();
+  ```
 
 For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
    ```java
-      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-        // …
-        .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
-        .build();
+   RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+     // …
+     .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
+     .build();
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -584,28 +584,27 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val rumConfig = RumConfiguration.Builder(applicationId)
-        // ...
-        .setErrorEventMapper(rumErrorEventMapper)
-        .setActionEventMapper(rumActionEventMapper)
-        .setResourceEventMapper(rumResourceEventMapper)
-        .setViewEventMapper(rumViewEventMapper)
-        .setLongTaskEventMapper(rumLongTaskEventMapper)
-        .build()
+   val rumConfig = RumConfiguration.Builder(applicationId)
+     // ...
+     .setErrorEventMapper(rumErrorEventMapper)
+     .setActionEventMapper(rumActionEventMapper)
+     .setResourceEventMapper(rumResourceEventMapper)
+     .setViewEventMapper(rumViewEventMapper)
+     .setLongTaskEventMapper(rumLongTaskEventMapper)
+     .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
   ```java
-      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-        // ...
-        .setErrorEventMapper(rumErrorEventMapper)
-        .setActionEventMapper(rumActionEventMapper)
-        .setResourceEventMapper(rumResourceEventMapper)
-        .setViewEventMapper(rumViewEventMapper)
-        .setLongTaskEventMapper(rumLongTaskEventMapper)
-        .build();
-
-   ```
+  RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    // ...
+    .setErrorEventMapper(rumErrorEventMapper)
+    .setActionEventMapper(rumActionEventMapper)
+    .setResourceEventMapper(rumResourceEventMapper)
+    .setViewEventMapper(rumViewEventMapper)
+    .setLongTaskEventMapper(rumLongTaskEventMapper)
+    .build();
+  ```
 {{% /tab %}}
 {{< /tabs >}}
 

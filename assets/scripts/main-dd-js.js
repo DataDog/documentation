@@ -7,7 +7,6 @@ import 'bootstrap/js/dist/collapse';
 import './datadog-docs';
 import './utms';
 import './alpine';
-import './cookie-banner';
 
 import './components/copy-code';
 import './components/global-modals';
@@ -19,6 +18,7 @@ import './components/navbar'; // should move this to websites-modules
 import './components/mobile-nav'; // should move this to websites-modules
 import './components/accordion-auto-open';
 import './components/signup';
+import './components/conversational-search';
 
 // Add Bootstrap Tooltip across docs
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

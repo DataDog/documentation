@@ -112,10 +112,7 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 Un test se considera `FAILED` si no satisface una o más aserciones o si la solicitud ha fallado prematuramente. En algunos casos, el test puede fallar sin comprobar las aserciones respecto al endpoint.
 
-Entre las razones figuran las siguientes:
-
-`DNS`:
-No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
+Para obtener una lista completa de los códigos de error, consulta [Errores de test de la API][11].
 
 ## Permisos
 
@@ -141,3 +138,4 @@ Si estás utilizando la [función de rol personalizado][10], añade tu usuario a
 [8]: /es/synthetics/settings/#global-variables
 [9]: /es/account_management/rbac/
 [10]: /es/account_management/rbac#custom-roles
+[11]: /es/synthetics/api_tests/errors/#icmp-errors

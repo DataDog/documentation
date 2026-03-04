@@ -4,6 +4,8 @@ code_lang: istio
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats_detection/istio
+  - /security/application_security/setup/istio
+  - /security/application_security/setup/standalone/istio
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -26,23 +28,23 @@ You can enable App and API Protection for your services within an Istio service 
 
 Before you begin, ensure you have the following:
 
-1. A running Kubernetes cluster with [Istio][1] installed.
-2. The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
-    - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
-    - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
-      - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
+- A running Kubernetes cluster with [Istio][1] installed.
+- The [Datadog Agent is installed and configured][2] in your Kubernetes cluster.
+  - Ensure [Remote Configuration][3] is enabled and configured to enable blocking attackers through the Datadog UI.
+  - Ensure [APM is enabled][4] in the Agent. *This allows the external processor service to send its own traces to the Agent.*
+    - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
-## Automated configuration with Gateway Injector
+## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
-  The AppSec Gateway Injector can automatically configure your Istio service mesh for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+  App and API Protection for Kubernetes automatically configures your Istio ingress gateways for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
 </div>
 
-Instead of manually deploying the external processor and configuring `EnvoyFilter` (as shown in the manual configuration section below), use the Appsec Injector to handle this automatically.
+Instead of manually deploying the external processor and configuring `EnvoyFilter` (as shown in the manual configuration section below), enable App and API Protection for Kubernetes automatic configuration to handle this for you.
 
-### When to use the Gateway Injector
+### When to use automatic configuration
 
-Use the Appsec Injector if you want to:
+Use automatic configuration if you want to:
 - Automatically configure Istio ingress gateways for Application Security
 - Simplify deployment and ongoing maintenance
 - Manage configuration through infrastructure-as-code with Helm
@@ -50,41 +52,68 @@ Use the Appsec Injector if you want to:
 
 ### Quick setup
 
-**1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
+1. **Deploy the external processor** using the deployment manifest shown in [Step 1](#step-1-deploy-the-datadog-external-processor-service) below.
+2. **Enable automatic configuration** using Helm or the Datadog Operator.
 
-**2. Enable the Injector** using Helm values:
+   {{< tabs >}}
+   {{% tab "Datadog Operator" %}}
 
-```yaml
-datadog:
-  appsec:
-    injector:
-      enabled: true
-      autoDetect: true
-      processor:
-        service:
-          name: datadog-aap-extproc-service  # Required: name of the processor service
-          namespace: datadog                  # Optional: defaults to Cluster Agent namespace
-        port: 443
-```
+   Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
 
-Install or upgrade the Datadog Helm chart:
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+     annotations:
+       agent.datadoghq.com/appsec.injector.enabled: "true"
+       agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required
+       agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+   spec:
+     # ... your existing DatadogAgent configuration
+   ```
 
-```bash
-helm upgrade -i datadog-agent datadog/datadog -f values.yaml
-```
+   Apply the configuration:
 
-**3. The injector automatically:**
-- Detects your Istio installation
-- Creates `EnvoyFilter` resources in the Istio system namespace (typically `istio-system`)
-- Configures the filters to route traffic to the external processor
+   ```bash
+   kubectl apply -f datadog-agent.yaml
+   ```
 
-**4. Verify** the configuration by checking for created filters:
+   {{% /tab %}}
+   {{% tab "Helm" %}}
 
-```bash
-kubectl get envoyfilter -n istio-system
-```
+   Add the following to your `values.yaml`:
 
-For detailed configuration options, advanced features, and troubleshooting, see the [Appsec Injector documentation](/containers/kubernetes/appsec).
+   ```yaml
+   datadog:
+     appsec:
+       injector:
+         enabled: true
+         processor:
+           service:
+             name: datadog-aap-extproc-service  # Required: must match your external processor service name
+             namespace: datadog                 # Must match the namespace where the service is deployed
+   ```
+
+   Install or upgrade the Datadog Helm chart:
+
+   ```bash
+   helm upgrade -i datadog-agent datadog/datadog -f values.yaml
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+   Once enabled, the Datadog Cluster Agent:
+   - Detects your Istio installation
+   - Creates `EnvoyFilter` resources in the Istio system namespace (typically `istio-system`)
+   - Configures the filters to route traffic to the external processor
+4. **Verify** the configuration by checking for created filters:
+   ```bash
+   kubectl get envoyfilter -n istio-system
+   ```
+
+For detailed configuration options, advanced features, and troubleshooting, see [App and API Protection for Kubernetes](/containers/kubernetes/appsec).
 
 ## Manual configuration (alternative)
 
@@ -92,7 +121,7 @@ If you prefer manual configuration or need fine-grained control over specific ga
 1. Deploying the Datadog External Processor service.
 2. Configuring an `EnvoyFilter` to direct traffic from your Istio Ingress Gateway (or sidecars) to this service.
 
-### 1. Deploy the Datadog External Processor Service
+### Step 1: Deploy the Datadog External Processor Service
 
 This service is a gRPC server that Envoy communicates with to have requests and responses analyzed by App and API Protection.
 
@@ -195,7 +224,7 @@ The External Processor is built on top of the [Datadog Go Tracer][7] and inherit
   <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.
 </div>
 
-### 2. Configure an EnvoyFilter
+### Step 2: Configure an EnvoyFilter
 
 Next, create an `EnvoyFilter` resource to instruct your Istio Ingress Gateway or specific sidecar proxies to send traffic to the `datadog-aap-extproc-service` you deployed. This filter tells Envoy how to connect to the external processor and what traffic to send.
 
@@ -441,7 +470,7 @@ spec:
 
 After applying the chosen `EnvoyFilter`, traffic passing through your Istio Ingress Gateway or selected sidecars will be processed by the Datadog External Processor service, enabling App and API Protection features.
 
-### 3. Validation
+### Step 3: Validation
 
 {{% appsec-getstarted-2-plusrisk %}}
 

@@ -125,25 +125,7 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-These reasons include the following:
-
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
-
-`INVALID_REQUEST`
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][10].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
+For a complete list of SSL error codes, see [API Testing Errors][10].
 
 ## Permissions
 
@@ -168,6 +150,6 @@ If you are using the [custom role feature][12], add your user to any custom role
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors
 [9]: /synthetics/settings/#global-variables
-[10]: /synthetics/api_tests/errors/#ssl-errors
+[10]: /synthetics/api_tests/errors/
 [11]: /account_management/rbac/
 [12]: /account_management/rbac#custom-roles

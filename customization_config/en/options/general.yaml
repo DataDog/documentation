@@ -37,6 +37,9 @@ options:
 - label: API
   id: api
 
+- label: APM
+  id: apm
+
 - label: Authentication
   id: auth
 
@@ -256,6 +259,9 @@ options:
 - label: Maven
   id: maven
 
+- label: Metrics
+  id: metrics
+
 - label: MongoDB
   id: mongo_db
 
@@ -325,8 +331,20 @@ options:
 - label: React Native
   id: react_native
 
+- label: Expo
+  id: expo
+
+- label: CodePush
+  id: codepush
+
 - label: RedHat
   id: redhat
+
+- label: Roku
+  id: roku
+
+- label: Error Tracking
+  id: error_tracking
 
 - label: CentOS
   id: centos
@@ -343,17 +361,29 @@ options:
 - label: Ruby
   id: ruby
 
+- label: RUM
+  id: rum
+
+- label: Rust
+  id: rust
+
 - label: Sensitive Data Scanner
   id: sensitive_data_scanner
 
 - label: Serilog
   id: serilog
 
+- label: Server
+  id: server
+
 - label: Serverless Framework
   id: serverless_framework
 
 - label: Sharded Cluster
   id: sharded_cluster
+
+- label: Show all
+  id: show_all
 
 - label: Splunk HEC
   id: splunk_hec
@@ -391,6 +421,12 @@ options:
 - label: TOML
   id: toml
 
+- label: Traces
+  id: traces
+
+- label: Unity
+  id: unity
+
 - label: Wget
   id: wget
 
@@ -423,3 +459,51 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- label: Mobile
+  id: mobile
+
+- label: Multistep API
+  id: multistep
+
+- label: Test info
+  id: test_info
+
+- label: Test results
+  id: test_results
+
+- label: Step details
+  id: step_details
+
+- label: Local & Global
+  id: local_and_global
+
+- label: DNS
+  id: dns
+
+- label: SSL
+  id: ssl
+
+- label: WebSocket
+  id: websocket
+
+- label: UDP
+  id: udp
+
+- label: ICMP
+  id: icmp
+
+- label: gRPC
+  id: grpc
+
+- label: OpenTelemetry
+  id: otel_api
+
+- label: Datadog
+  id: dd_api
+
+- label: C++
+  id: cpp
+
+- label: Elixir
+  id: elixir

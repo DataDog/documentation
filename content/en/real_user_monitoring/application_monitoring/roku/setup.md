@@ -83,7 +83,6 @@ For more information about setting up a client token, see the [Client Token docu
 
 In the initialization snippet, set an environment name. For more information, see [Using Tags][7].
 
-{{< site-region region="us" >}}
 ```brightscript
 sub RunUserInterface(args as dynamic)
     screen = CreateObject("roSGScreen")
@@ -93,7 +92,7 @@ sub RunUserInterface(args as dynamic)
     datadogroku_initialize({
         clientToken: "<CLIENT_TOKEN>",
         applicationId: "<APPLICATION_ID>"
-        site: "us1",
+        site: "{{< region-param key=roku_site >}}",
         env: "<ENV_NAME>",
         sessionSampleRate: 100, ' the percentage (integer) of sessions to track
         launchArgs: args
@@ -102,112 +101,6 @@ sub RunUserInterface(args as dynamic)
     ' complete your channel setup here
 end sub
 ```
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-```brightscript
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "eu1",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-```brightscript
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "us3",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-```brightscript
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "us5",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```brightscript
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "ap1",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-```brightscript
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "ap2",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-{{< /site-region >}}
 
 #### Sample session rates
 

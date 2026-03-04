@@ -2,6 +2,9 @@
 title: Error Tracking
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: 'https://www.datadoghq.com/blog/error-tracking-and-github/'
   tag: 'Blog'
   text: 'Troubleshoot root causes with GitHub commit and ownership data in Error Tracking'

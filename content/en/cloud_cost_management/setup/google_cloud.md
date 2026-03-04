@@ -28,9 +28,10 @@ To use Google Cloud Cost Management in Datadog, follow these steps:
 
 ## Setup
 
+You can setup using the [API][18], [Terraform][19], or directly in Datadog by following the instructions below.
+
 ### Configure the Google Cloud Platform integration
-Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
-If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
+Navigate to [Setup & Configuration][3], add a Google Cloud Platform account and follow the steps to configure the Google Cloud Platform integration.
 
 <div class="alert alert-danger">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
@@ -200,7 +201,7 @@ The following out-of-the-box tags are available:
 
 [1]: https://console.cloud.google.com/billing/export/
 [2]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-setup
-[3]: https://app.datadoghq.com/cost/setup?cloud=gcp
+[3]: https://app.datadoghq.com/cost/setup
 [4]: https://app.datadoghq.com/integrations/google-cloud-platform
 [5]: https://cloud.google.com/bigquery/docs/enable-transfer-service
 [6]: https://cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add
@@ -215,3 +216,5 @@ The following out-of-the-box tags are available:
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
 [17]: /cloud_cost_management/tags
+[18]: /api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
+[19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config

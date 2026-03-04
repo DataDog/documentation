@@ -34,8 +34,7 @@
                 ],
                 "compute": {
                   "aggregation": "count"
-                },
-                "group_by": []
+                }
               }
             ],
             "response_format": "timeseries",

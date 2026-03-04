@@ -12,9 +12,10 @@ further_reading:
 
 ## Overview
 
-Remote Agent management with Fleet Automation simplifies how you deploy and upgrade your Datadog Agents. Instead of relying on external deployment or configuration tools, you can perform these actions directly from the Datadog platform. With Fleet Automation, you can:
-1. [Upgrade your Agent](#upgrade-agents-remotely)  
-1. [Configure your Agent](#configure-agents)
+Remote Agent management with Fleet Automation simplifies how you deploy and upgrade your Datadog Agents and SDKs. Instead of relying on external deployment or configuration tools, you can perform these actions directly from the Datadog platform. With Fleet Automation, you can:
+1. [Upgrade your Agent](#upgrade-agents)
+1. [Upgrade your SDKs](#upgrade-sdks)
+1. [Configure your Agent](#configure-datadog-agents)
 
 
 ## Getting started 
@@ -58,7 +59,7 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="How to schedule Agent upgrades (in Preview)" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="How to schedule Agent upgrades" level="h4" expanded=false id="id-for-anchoring" %}}
 
 1. From the [**Upgrade Agents** tab][4], click **+ Create Schedule**.
 
@@ -88,6 +89,11 @@ Datadog suggests at least 2GB for the initial Agent install and an additional 2G
    
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="Upgrade Agents using the API" level="h4" expanded=false %}}
+Fleet Automation provides an API to trigger Agent upgrades programmatically or on a recurring schedule. Start upgrades for any set of hosts using filter queries, or create schedules that run during defined maintenance windows with a specified Agent version. For full details, see the [Fleet Automation API][19].
+{{% /collapse-content %}}
+
 <br>
 
 ### Upgrade process
@@ -112,6 +118,51 @@ The Agent ensures that the appropriate permissions are set for these files. No c
 For the most consistent upgrade experience, Datadog recommends managing upgrades from one source at a time. Use either Fleet Automation or a configuration management tool. If you run a configuration management tool on an Agent that has already been upgraded using Fleet Automation, the upgrade reverts the Agent to the [`DD_AGENT_MINOR_VERSION`][9]  specified in your configuration. If no `DD_AGENT_MINOR_VERSION` is set, the Agent is upgraded to the latest available version.
 
 
+## Upgrade SDKs
+
+{{< callout url="https://www.datadoghq.com/product-preview/remote-upgrade-of-sdk-versions/" btn_hidden="false" header="Join the Preview!" >}}
+Remotely upgrade the SDKs that power APM, Profiler, Dynamic Instrumentation, and more. Request access to join the preview.
+{{< /callout >}}
+
+Fleet Automation can centrally manage remote upgrades to the SDKs that power APM, Continuous Profiler, Dynamic Instrumentation, and more. Keeping your services' SDK versions up to date lets you benefit from the latest features, performance improvements, bug fixes, and security updates.
+
+<div class="alert alert-info">
+Scheduling SDK upgrades is not supported.
+</div>
+
+### Requirements
+
+- **Single Step Instrumentation (SSI)**
+
+  You must already be instrumenting services with [Single Step Instrumentation (SSI)][20].
+- **Linux or Windows VMs**
+
+  Supported only for services running on **Linux or Windows VMs**. Remotely upgrading SDKs in containerized or Kubernetes environments is not supported.
+
+
+{{% collapse-content title="How to upgrade SDKs remotely" level="h4" expanded=false id="upgrade-sdks-steps" %}}
+
+1. In Fleet Automation, open the [Upgrade Agents][1] tab and click **Upgrade Now**.
+
+   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrade Agents tab with the Upgrade Now button highlighted." style="width:100%;" >}}
+
+1. Select the **SDK language** and **version**. You can update one language SDK at a time.
+
+   {{< img src="agent/fleet_automation/sdk-upgrade-language.png" alt="Select the language and version to upgrade to." style="width:100%;" >}}
+
+1. Select the hosts on which you want to upgrade the selected SDK. You can target a group by filtering on host information or tags.
+
+   {{< img src="agent/fleet_automation/sdk-upgrade-hosts.png" alt="Service selection screen with filtering options to narrow the list of services to upgrade." style="width:100%;" >}}
+
+1. Review the deployment plan and click **Upgrade Hosts** to start the upgrade.
+
+   {{< img src="agent/fleet_automation/sdk-upgrade-plan.png" alt="Deployment plan view showing the list of services staged for SDK upgrade." style="width:100%;" >}}
+
+1. Restart the services to start using the upgraded SDKs.
+
+[1]: https://app.datadoghq.com/fleet/agent-upgrades
+{{% /collapse-content %}}
+
 ## Configure Datadog Agents
 
 Fleet Automation allows you to roll out and manage Datadog Agent configuration at scale. Configuration changes can be applied using guided workflows in the UI or by providing custom YAML files. Fleet Automation allows you to standardize Agent configuration across environments. With Fleet Automation, you can:
@@ -120,19 +171,19 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 - Manage Agent tags
 - Apply consistent configuration across environments
 
-
-### Configuration steps 
 {{% collapse-content title="Configure multiple Agents" level="h4" expanded=false id="id-for-anchoring" %}}
 
-1. In Fleet Automation, open the [Configure Agents][16] tab and click **Create Configuration**.
-1. **Select and configure** the products (for example, APM, Logs, or NDM) that you want the target Agents to run.
+1. In Fleet Automation, open the [Configure Agents][16] tab and click **Configure Agents**.
+1. **Scope the configuration to the target Agents.** You can target a group of Agents by filtering on host information or tags.
 
-   {{< img src="/agent/fleet_automation/fa_create_agent_configuration2.png" alt="Select which product to enable." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Scope this configuration step in Fleet Automation's Configure Agents workflow, showing filters for environment, operating system, and hostname, a list of 33 Agents included in scope, and a Configuration Summary panel on the right." style="width:100%;" >}}
 
-1. **Review** your final configuration and begin scoping deployment to your Agents. Alternatively, you can save the configuration to edit or deploy to your Agents at a later time from the Configure Agents page.
-1. **Scope Agents** to deploy configuration to (for example, through tags such as host names, site, or environment).
+1. **Select the products** (for example, APM, Logs, or NDM) that the target Agents should run.
+
+   {{< img src="/agent/fleet_automation/fa_create_agent_configuration3.png" alt="The Select products to configure step in Fleet Automation's Configure Agents workflow, showing product tiles grouped under Core Observability (Infrastructure Monitoring, Log Management, APM) and Additional Observability (Live Process Monitoring, Cloud Network Monitoring, Network Device Monitoring)." style="width:100%;" >}}
+
 1. **Review the deployment plan** to confirm scoped Agents and deployment settings, such as rollout concurrency.
-1. **Start deployment** and track progress from the Deployments page.
+1. Click **Deploy Configuration** to start the deployment and track its progress from the [Deployments page][10].
 {{% /collapse-content %}}
 
 
@@ -156,10 +207,15 @@ In the following example, the `logs_enabled` field is changed from `false` to `t
 [18]: https://app.datadoghq.com/fleet
 {{% /collapse-content %}}
 
+{{% collapse-content title="Configure Agents using the API" level="h4" expanded=false %}}
+Fleet Automation provides an API to apply configuration updates to your Agents programmatically. Deploy changes to any group of hosts using filter queries, supplying either full configuration files or targeted patches. Fleet Automation does not support all Agent configuration fields, and settings related to Agent connection or secrets (site, API keys, and other authentication parameters) cannot be managed through the API. Push configuration on demand or integrate it into your existing automation workflows. For full details, see the [Fleet Automation API][19].
+{{% /collapse-content %}}
 
 ### Configuration precedence
 
-The latest configuration is applied if another tool is also used to configure the Datadog Agent. If the latest change is made from another tool aside from Fleet Automation, the change takes effect.
+Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the configuration-field level, Fleet Automation overrides the local value. In short, the most recent configuration change, whether applied by Fleet Automation, configuration management tools, or directly on the host, becomes the Agent's active configuration.
+
+You can use [Fleet Automation Audit Trail][18] to gain visibility into recent configuration changes to your Agents and to set up alerts on those changes.
 
 ### Mirrors and proxies
 
@@ -210,3 +266,6 @@ If you don't upgrade an earlier Agent version to 7.66 or higher, there is no imp
 [15]: /agent/guide/setup_remote_config
 [16]: https://app.datadoghq.com/fleet/agent-management
 [17]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#configuration-order-precedence
+[18]: /agent/fleet_automation#view-agent-audit-trail-events
+[19]: /api/latest/fleet-automation/
+[20]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/

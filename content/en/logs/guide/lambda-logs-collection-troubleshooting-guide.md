@@ -12,14 +12,32 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 1. Navigate to the [Log Explorer's Live Tail view][2].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch` but you can find other possible sources in the table below.
+    * By source: the source is often set to `source:lambda`, `source:aws`, `source:s3` or `source:cloudwatch`.
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
-3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][4] set up. These filters are filtering out your logs.
+3. If logs appear in Live Tail but are missing from the Log Explorer, the discrepancy is likely due to one of the following reasons (see the [logs troubleshooting document for details][4]):
+   * Your log index has exclusion filters that are actively filtering out these logs.
+   * You have exceeded your daily logs quota.
+   * The logs have a timestamp older than 18 hours in the past.
 4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
+
+## Check the Lambda function Permissions
+
+Permission issues may also be impacting the ability of the forwarder to access log sources. The lambda function uses a resource-based policy (unrelated to the Datadog Integration Role policy) to grant access to log sources.
+
+Verify the forwarder's policy by running the following command:
+   ```
+   get-policy command aws lambda get-policy --function-name <FUNCTION_NAME>
+   ```
+
+This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function.
+
+<div class="alert alert-danger">
+The Action and Resource elements in the policy document **must exactly match** the specifications in the <a href="/logs/guide/forwarder/?tab=cloudformation#permissions">Datadog Forwarder permissions</a>.
+</div>
 
 ## Check the Lambda function monitoring tab
 
-[From the AWS console][5]
+[From the AWS console][6]
 
 1. Open your forwarder Lambda function.
 
@@ -27,7 +45,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
     {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
-3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function: 
+3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function:
     * invocations
     * errors
     * logs
@@ -37,7 +55,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 ### Viewing Lambda metrics in Datadog
 
-If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag: 
+If you have enabled AWS Lambda metrics, you can view metrics related to Lambda invocations and errors within Datadog. The following metrics are all tagged with the `functionname` tag:
 
 | Metric                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
@@ -47,7 +65,7 @@ If you have enabled AWS Lambda metrics, you can view metrics related to Lambda i
 | `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
 | `aws.lambda.throttles`        | Count of invocation attempts that were throttled due to invocation rates exceeding customer limits |
 
-For more information on these and other AWS Lambda metrics, see [AWS Lambda Metrics][6].
+For more information on these and other AWS Lambda metrics, see [AWS Lambda Metrics][7].
 
 ### Manage your function triggers
 
@@ -65,7 +83,7 @@ For logs to be forwarded, the forwarder Lambda function needs to have triggers (
    aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>
    ```
 
-4. Set triggers [automatically][7] or [manually][8].
+4. Set triggers [automatically][8] or [manually][9].
 
 For CloudWatch log group, you can use the following metrics within the Datadog platform to confirm whether logs are delivered from the log group to the forwarder Lambda function. Use the `log_group` tag to filter the data when viewing the metrics.
 
@@ -75,6 +93,15 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 | `aws.logs.forwarded_log_events` | The number of log events forwarded to the subscription destination                                 |
 | `aws.logs.delivery_errors`      | The number of log events failed to be delivered to the subscription destination                    |
 | `aws.logs.delivery_throttling`  | The number of log events throttled for delivering to the subscription destination                  |
+
+### Automatic trigger
+
+If Datadog fails to automatically create triggers, follow this troubleshooting checklist:
+
+1. Verify that the Forwarder ARN appears in the Log Collection tab of the AWS Integration.
+2. Verify that the [required permissions][10] are assigned to the integration role.
+3. If the log source is a Lambda log group, verify that the lambda function has the [extension][11] installed.
+4. If the log source is a CloudWatch log group, verify that it does not already have two subscribers (the maximum allowed).
 
 ## Check the Lambda function logs
 
@@ -88,49 +115,29 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
-## Log forwarder sources references
+### Logs filtered by the lambda function
 
-| AWS Service                | Source Filter                                                                                                                                               |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| API Gateway                | `source:apigateway`                                                                                                                                         |
-| AppSync                    | `source:appsync`                                                                                                                                            |
-| Batch                      | `source:batch`                                                                                                                                              |
-| Bedrock                    | `source:bedrock`                                                                                                                                            |
-| Carbonblack                | `source:carbonblack`                                                                                                                                        |
-| CloudFront                 | `source:cloudfront`                                                                                                                                         |
-| CloudTrail                 | `source:cloudtrail`                                                                                                                                         |
-| CodeBuild                  | `source:codebuild`                                                                                                                                          |
-| DocumentDB                 | `source:docdb`                                                                                                                                              |
-| Database Migration Service | `source:dms`                                                                                                                                                |
-| EKS                        | `source:eks`, `source:kubernetes.audit`, `source:kube-scheduler`, `source:kube-apiserver`, `source:kube-controller-manager`, `source:aws-iam-authenticator` |
-| Elastic Load Balancing     | `source:elb`                                                                                                                                                |
-| FSX                        | `source:aws.fsx`                                                                                                                                            |
-| Lambda                     | `source:lambda`                                                                                                                                             |
-| MWAA                       | `source:mwaa`                                                                                                                                               |
-| Network Firewall           | `source:network-firewall`                                                                                                                                   |
-| OpenSearch                 | `source:opensearch`                                                                                                                                         |
-| Parallel Computing Service | `source:apigateway`                                                                                                                                         |
-| RDS                        | `source:rds`, `source:postgresql`, `source:mariadb`, `source:mysql`                                                                                         |
-| Redshift                   | `source:redshift`                                                                                                                                           |
-| Redshift Serverless        | `source:redshift-serverless`                                                                                                                                |
-| Route 53                   | `source:route53`                                                                                                                                            |
-| S3                         | `source:s3`                                                                                                                                                 |
-| Step Functions             | `source:stepfunction`                                                                                                                                       |
-| Systems Manager            | `source:ssm`                                                                                                                                                |
-| Transit Gateway            | `source:transitgateway`                                                                                                                                     |
-| Verified Access            | `source:verified-access`                                                                                                                                    |
-| VPC                        | `source:vpc`                                                                                                                                                |
-| WAF                        | `source:waf`                                                                                                                                                |
+The lambda forwarder uses the following [environment variables][12] to filter logs:
+
+* INCLUDE_AT_MATCH
+* EXCLUDE_AT_MATCH
+
+You can search for these variables in the forwarder's DEBUG logs, which indicates whether or not certain logs are discarded due to the filter.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.datadoghq.com/help
-[2]: https://docs.datadoghq.com/logs/live_tail/#live-tail-view
-[4]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
-[5]: https://console.aws.amazon.com/lambda/home
-[6]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
-[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
-[8]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
+[1]: /help
+[2]: /logs/live_tail/#live-tail-view
+[3]: https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/lambda_function.py
+[4]: /logs/troubleshooting/
+[5]: /logs/guide/forwarder/?tab=cloudformation#permissions
+[6]: https://console.aws.amazon.com/lambda/home
+[7]: /integrations/amazon_lambda/?tab=awsconsole#metrics
+[8]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[9]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
+[10]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#automatically-set-up-triggers
+[11]: /serverless/libraries_integrations/extension/
+[12]: /logs/guide/forwarder/?tab=cloudformation#log-filtering-optional

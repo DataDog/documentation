@@ -23,6 +23,14 @@ To complete this guide, you need the following:
 - Familiarity with [building a custom collector][4] and [OpenTelemetry Collector Builder][5] (OCB).
 - Basic understanding of the [Go](https://go.dev/) compilation process and [Go modules](https://go.dev/blog/using-go-modules).
 
+## Store the desired Datadog Agent version in a shell variable
+
+This ensures all files are compatible:
+
+```shell
+DD_AGENT_VERSION="{{< version key="agent_version" >}}"
+```
+
 ## Download the Dockerfile
 
 Download the Dockerfile template:
@@ -34,18 +42,16 @@ Download the Dockerfile template:
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ddot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/$DD_AGENT_VERSION/Dockerfiles/agent-ddot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
 
-- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag" %}}`.
+- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_version" %}}-full`.
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the DDOT Collector source code.
 - Creates a virtual environment and installs required Python packages.
 - Builds the DDOT Collector (also known as OTel Agent) and copies the resulting binary to the final image.
-
-<div class="alert alert-info">The <code>main</code> branch has the most up-to-date version of the <a href="https://github.com/DataDog/datadog-agent/blob/main/Dockerfiles/agent-ddot/Dockerfile.agent-otel">Dockerfile</a>. However, it is a development branch that is subject to frequent changes and is less stable than the release tags. For production and other stable use cases, use the tagged versions as listed in this guide.</div>
 
 ## Create an OpenTelemetry Collector Builder manifest
 
@@ -53,7 +59,7 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
 
 1. Download the Datadog default manifest:
    ```shell
-   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/comp/otelcol/collector-contrib/impl/manifest.yaml
+   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/$DD_AGENT_VERSION/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
    The highlighted line in this example adds a [metrics transform processor][7]:
@@ -104,9 +110,7 @@ Build your custom Datadog Agent image and push it to a container registry.
 1. Build the image with Docker:
    ```shell
    docker build . -t agent-ddot --no-cache \
-     --build-arg AGENT_REPO="datadog/agent" \
-     --build-arg AGENT_VERSION="{{< version key="agent_tag" >}}" \
-     --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
+     --build-arg AGENT_VERSION=$DD_AGENT_VERSION
    ```
 2. Tag and push the image:
    ```shell
@@ -144,10 +148,6 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
            endpoint: "0.0.0.0:4317"
 
    processors:
-     batch:
-       send_batch_max_size: 1000
-       send_batch_size: 100
-       timeout: 10s
      # Rename system.cpu.usage to system.cpu.usage_time
      metricstransform:
        transforms:
@@ -160,6 +160,11 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
        api:
          site: ${env:DD_SITE}
          key: ${env:DD_API_KEY}
+       sending_queue:
+         batch:
+           flush_timeout: 10s
+           min_size:  100
+           max_size: 1000
 
    connectors:
      datadog/connector:
@@ -169,15 +174,15 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
      pipelines:
        traces:
          receivers: [otlp]
-         processors: [infraattributes, batch]
+         processors: [infraattributes]
          exporters: [datadog, datadog/connector]
        metrics:
          receivers: [otlp, datadog/connector, prometheus]
-         processors: [metricstransform, infraattributes, batch]
+         processors: [metricstransform, infraattributes]
          exporters: [datadog]
        logs:
          receivers: [otlp]
-         processors: [infraattributes, batch]
+         processors: [infraattributes]
          exporters: [datadog]
    ```
 2. Run the DDOT Collector (Agent) using the following Docker command.

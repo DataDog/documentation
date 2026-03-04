@@ -3,6 +3,8 @@ title: Telemetry Data
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data
+  - /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
 further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
@@ -10,9 +12,6 @@ further_reading:
   - link: "/security/sensitive_data_scanner/scanning_rules/custom_rules"
     tag: "Documentation"
     text: "Learn more about creating custom rules"
-  - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
-    tag: "Documentation"
-    text: "Best practices for creating custom scanning rules"
 ---
 
 ## Overview
@@ -33,7 +32,9 @@ For each scanning rule, one of the following actions can be applied to matched s
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 - **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
 
-**Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
+**Notes**:
+- When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
+- Sensitive Data Scanner does not scan integer, float, and double values. If the number is in a string format, the string gets scanned.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
@@ -79,9 +80,12 @@ By default, a newly-created scanning group is disabled. To enable a scanning gro
 
 ### Add scanning rules
 
-A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regular expression (regex) patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
+
+Whenever possible, use Datadog's out-of-the-box library rules. These rules are predefined rules that detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords](#add-custom-keywords).
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
+
 
 To add scanning rules, perform the following steps:
 
@@ -102,7 +106,7 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 
 #### Add custom keywords
 
-The [recommended keywords][15] are used by default when library rules are added. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary.
+The [recommended keywords][15] are used by default when library rules are added. After adding library rules, you can edit each rule separately and add keywords to or remove keywords from the keyword dictionary. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`.
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
 1. Click the scanning group with the rule you want to edit.
@@ -127,7 +131,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 1. Enter a name for the rule.
 1. In the **Priority** dropdown menu, select the priority level for the rule based on your business needs.
 1. (Optional) Enter a description for the rule.
-1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field.<br>
+1. In the **Match conditions** section, specify the regex pattern to use for matching against events in the **Regex pattern** field. Define regex patterns that are as precise as possible because generic patterns result in more false positives.<br>
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -272,6 +276,13 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 - Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
 - Suppressions are defined per rule within a scanning group.
 
+#### Scan or exclude specific attributes
+
+To make matches more precise, you can also do one of the following:
+
+- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
+- Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
+
 ### Edit scanning rules
 
 To edit scanning rules:
@@ -316,6 +327,24 @@ To redact the attribute:
 7. Optionally, add tags.
 8. Click **Add Rules**.
 
+## Log rehydration
+
+When you rehydrate logs from an archive, the Sensitive Data Scanner does not re-scan those logs. Instead, Datadog restores the logs exactly as they were written to the archive.
+
+If your archive is configured to include [Datadog tags][16], and your scanning rules added tags when the logs were initially ingested and processed by Sensitive Data Scanner, you can use those tags to identify which rehydrated logs previously contained sensitive data. This allows you to filter rehydrated logs using queries such as `sensitive_data:<rule_tag_name>`.
+
+The metadata of matched sensitive data is not stored in archived logs, so sensitive data matches are not highlighted when those logs are rehydrated. The archive format contains only the original log payload and any preserved tags. It does not include the positional information that Sensitive Data Scanner uses in the Datadog UI to visually highlight detected values.
+
+What you can do with rehydrated logs:
+
+- If tags were included in the archive, filter for logs that previously matched scanning rules.
+- Investigate historical events that contain sensitive data.
+
+What you **cannot** do with rehydrated logs:
+
+- View in-line highlighted sensitive data matches in the UI: The matches remain obfuscated even if mask, redact, partially redact, or hash was chosen as an action on match.
+- Trigger retroactive scans: Sensitive Data Scanner does not re-scan rehydrated logs.
+
 ## Disable Sensitive Data Scanner
 
 To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each Scanning Group so that they are disabled.
@@ -339,3 +368,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [13]: /observability_pipelines/processors/sensitive_data_scanner/
 [14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags

@@ -12,7 +12,7 @@ further_reading:
 algolia:
   tags: ['data retention']
 filter_all: All
-content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/developers/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
+content: "The following table lists default data retention periods by data type and product. Optionally, search by keyword or description text to find the data type or product you're interested in. For collection interval and minimum resolution information, see [Datadog Data Collection and Resolution](/extend/guide/data-collection-resolution). Still need help? Contact [Datadog support](/help)."
 attributes:
   - product: APM
     data_type: |
@@ -81,7 +81,7 @@ attributes:
   - product: CoScreen
     data_type: |
        - **Sessions**: 15 months
-  - product: Data Jobs Monitoring
+  - product: "Data Observability: Jobs Monitoring"
     data_type: |
        - **Job traces**: 90 days
   - product: Database Monitoring
@@ -91,6 +91,9 @@ attributes:
   - product: Datadog App
     data_type: |
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
+  - product: DORA Metrics
+    data_type: |
+       - **Deployments**: 2 years
   - product: Error Tracking
     data_type: |
        - **Error samples**: 30 days
@@ -123,8 +126,8 @@ attributes:
        - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: |
-       - **NetFlow**: 30 days
-       - **SNMP traps**: 15 days
+       - **NetFlow**: 15, 30, 60, or 90 days, determined by customer plan
+       - **SNMP traps**: Determined by customer plan, default to 15 days
   - product: Cloud Network Monitoring
     data_type: |
        - **Network traffic**: 14 days
@@ -154,6 +157,9 @@ attributes:
   - product: Software Composition Analysis (SCA)
     data_type: |
        - **Detected vulnerabilities**: 15 months
+  - product: Source Code Integration
+    data_type: |
+       - **Source Code**: 7 days
   - product: Synthetics
     data_type: |
        - **Test results (not displayed in UI)**: 2 months

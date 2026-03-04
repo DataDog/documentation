@@ -11,8 +11,7 @@ aliases:
 Before setting up Runtime Code Analysis (IAST), ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
+2. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
 ## Using Datadog Tracing Libraries
 
@@ -86,6 +85,34 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   }
 ]
 ```
+
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+{{< tabs >}}
+{{% tab "Using system properties" %}}
+
+Start your Java application with the Datadog Agent and IAST enabled using system properties:
+
+```bash
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.iast.enabled=true -Ddd.apm.tracing.enabled=false -Ddd.service=<MY_SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
+```
+{{% /tab %}}
+
+{{% tab "Using environment variables" %}}
+
+Set the required environment variables:
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /security/code_security/iast/setup/
@@ -199,6 +226,18 @@ Add the following line to your container Dockerfile:
 ENV DD_IAST_ENABLED=true
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
+
 To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
@@ -280,6 +319,17 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
 [3]: /security/code_security/iast/setup/
@@ -353,6 +403,17 @@ Update your ECS task definition JSON file, by adding this in the environment sec
     "value": "true"
   }
 ]
+```
+
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
 #### Third-Party Library Compatibility Note
@@ -782,13 +843,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework   | Versions     | Runtime Code Analysis (IAST)    |
-|-------------|--------------|---------------------------------|
-| Django      | 1.8          | <i class="icon-check-bold"></i> |
-| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
-| Flask       | 0.10         | <i class="icon-check-bold"></i> |
-
-Support for query strings is not available for Flask.
+| Framework   | Versions | Runtime Code Analysis (IAST)    |
+|-------------|----------|---------------------------------|
+| Django      | 2.2      | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86     | <i class="icon-check-bold"></i> |
+| Flask       | 1.1      | <i class="icon-check-bold"></i> |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

@@ -18,59 +18,20 @@ guides:
 nav_sections:
     # For a better rendering, sections should include sub-sections with multiple of 4.
   - nav_section:
-    - name: 'Platform Services'
-    - navtiles:
-      - title: Agent
-        link: agent/
-        icon: agent-fill
-        desc: Install and configure the Datadog Agent to collect and send data
-      - title: Integrations
-        link: integrations/
-        icon: integrations
-        desc: Gather data about your applications, services, and systems
-      - title: OpenTelemetry
-        link: opentelemetry/
-        icon: open-telemetry
-        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
-      - title: Dashboards
-        link: dashboards/
-        icon: dashboard
-        desc: Visualize, analyze, and generate insights about your data
-      - title: Monitors and Alerting
-        link: monitors/
-        icon: monitor
-        desc: Create, edit, and manage your monitors and notifications
-      - title: Datadog Watchdog
-        link: watchdog/
-        icon: watchdog
-        desc: Detect and surface application and infrastructure anomalies
-      - title: Mobile Application
-        link: mobile/
-        icon: mobile
-        desc: View Datadog alerts, incidents, and more on your mobile device
-      - title: Incident Management
-        link: service_management/incident_management
-        icon: incidents
-        desc: Identify, analyze, and mitigate disruptive incidents in your organization
-      - title: Events
-        link: events/
-        icon: events
-        desc: Track notable changes and alerts in your applications and infrastructure
-      - title: Workflow Automation
-        link: service_management/workflows/
-        icon: workflows
-        desc: Automate and orchestrate processes across your tech stack
-      - title: App Builder
-        link: service_management/app_builder/
-        icon: app-builder
-        desc: Create low-code applications to streamline your internal tools
-  - nav_section:
-    - name: 'Products'
+    - name: 'Observability'
     - navtiles:
       - title: Infrastructure
         link: infrastructure/
         icon: host-map
-        desc: Track your hosts, containers, processes, and serverless functions
+        desc: View the health and performance of your hosts and infrastructure components
+      - title: Metrics
+        link: metrics/
+        icon: metric
+        desc: Explore, search, and create distributions for your metrics
+      - title: Container Monitoring
+        link: containers/
+        icon: container
+        desc: Monitor the health, performance, and security of your containerized environments
       - title: Serverless
         link: serverless/
         icon: serverless
@@ -83,10 +44,22 @@ nav_sections:
         link: cloud_cost_management/
         icon: cloud-cost-management
         desc: Take control of your cloud spend with unified observability and cost data
+      - title: Cloudcraft
+        link: cloudcraft/
+        icon: cloudcraft
+        desc: Visualize and diagram your cloud infrastructure in real time
+      - title: Storage Management
+        link: infrastructure/storage_management/
+        icon: file-wui
+        desc: Optimize and troubleshoot your cloud storage spend, usage, and data freshness
       - title: APM
         link: tracing/
         icon: apm
         desc: Explore out-of-the-box performance dashboards and distributed traces
+      - title: Universal Service Monitoring
+        link: universal_service_monitoring/
+        icon: usm
+        desc: Discover, map, and monitor services without changing code
       - title: Continuous Profiler
         link: profiler/
         icon: profiling-1
@@ -99,22 +72,44 @@ nav_sections:
         link: data_streams/
         icon: datastreams-monitoring
         desc: Track and improve performance of your data streaming pipelines
-      - title: Data Jobs Monitoring
-        link: data_jobs/
-        icon: data-jobs-monitoring
-        desc: Monitor and optimize your data processing jobs
-      - title: Universal Service Monitoring
-        link: universal_service_monitoring/
-        icon: usm
-        desc: Discover, map, and monitor services without changing code
-      - title: Synthetic Monitoring
-        link: synthetics/
-        icon: synthetics
-        desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Data Observability
+        link: data_observability/
+        icon: data-observability-wui
+        desc: Monitor data quality, performance, and cost to detect anomalies and prevent downstream issues
+      - title: Log Management
+        link: logs/
+        icon: log
+        desc: Process, monitor, and archive your ingested logs
+      - title: Sensitive Data Scanner
+        link: security/sensitive_data_scanner/
+        icon: sensitive-data-scanner
+        desc: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry
+      - title: Observability Pipelines
+        link: observability_pipelines/
+        icon: pipelines
+        desc: Manage and monitor your telemetry pipelines
       - title: Error Tracking
         link: error_tracking/
         icon: error-tracking
         desc: Identify critical errors and accelerate resolution across web, mobile, and backend
+  - nav_section:
+    - name: 'AI'
+    - navtiles:
+      - title: Bits AI Agents
+        link: bits_ai/
+        icon: bits-ai
+        desc: Your agentic teammate that automates development, security, and operational workflows
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: Detect and surface application and infrastructure anomalies
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: Trace, monitor, and secure your LLM applications
+  - nav_section:
+    - name: 'Digital Experience'
+    - navtiles:
       - title: Real User Monitoring
         link: real_user_monitoring/
         icon: rum
@@ -123,69 +118,166 @@ nav_sections:
         link: product_analytics/
         icon: product-analytics
         desc: Gain insight into user behavior and make data-driven product decisions
-      - title: Mobile Application Testing
+      - title: Session Replay
+        link: session_replay/
+        icon: session-replay
+        desc: Capture and visually replay the user experience of your users
+      - title: Synthetic Monitoring
+        link: synthetics/
+        icon: synthetics
+        desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Mobile App Testing
         link: mobile_app_testing/
         icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
-      - title: Continuous Testing
-        link: continuous_testing/
-        icon: continuous-testing
-        desc: Perform codeless integration and end-to-end testing with CI/CD providers
+  - nav_section:
+    - name: 'Software Delivery'
+    - navtiles:
+      - title: Internal Developer Portal
+        link: internal_developer_portal/
+        icon: internal-developer-portal-wui
+        desc: Unify telemetry, metadata, and workflows to accelerate delivery
       - title: CI Visibility
         link: continuous_integration/
         icon: ci
         desc: Monitor the health and performance of your CI pipelines
       - title: Test Optimization
         link: tests/
-        icon: ci
+        icon: flaky-test-wui
         desc: Detect flaky tests and identify commits introducing flaky tests
-      - title: Security
-        link: security/
-        icon: security-platform
-        desc: Detect threats, vulnerabilities, and misconfigurations
-      - title: Metrics
-        link: metrics/
-        icon: metric
-        desc: Explore, search, and create distributions for your metrics
-      - title: Log Management
-        link: logs/
-        icon: log
-        desc: Process, monitor, and archive your ingested logs
-      - title: Observability Pipelines
-        link: observability_pipelines/
-        icon: pipelines
-        desc: Manage and monitor your telemetry pipelines
-      - title: LLM Observability
-        link: llm_observability/
-        icon: llm-observability
-        desc: Trace, monitor, and secure your LLM applications
-      - title: Internal Developer Portal
-        link: internal_developer_portal
-        icon: internal-developer-portal-wui
-        desc: Unify telemetry, metadata, and workflows to accelerate delivery
-      - title: On-Call
-        link: service_management/on-call/
-        icon: on-call
-        desc: Manage paging, escalation, and on-call schedules in one platform
+      - title: Continuous Testing
+        link: continuous_testing/
+        icon: continuous-testing
+        desc: Perform codeless integration and end-to-end testing with CI/CD providers
+      - title: IDE Plugins
+        link: ide_plugins/
+        icon: ide
+        desc: Interact with Datadog services directly from your IDE as you code
+      - title: DORA Metrics
+        link: dora_metrics/
+        icon: ci
+        desc: Measure and improve your organization's software delivery processes
+      - title: Feature Flags
+        link: feature_flags/
+        icon: signpost
+        desc: Toggle features, run A/B tests, and gradually roll out functionality without code deployments
+      - title: Code Coverage
+        link: code_coverage/
+        icon: code-3
+        desc: Visualize coverage data trends and block PR merges based on coverage thresholds
   - nav_section:
-    - name: 'Configuration'
+    - name: 'Security'
     - navtiles:
+      - title: Cloud SIEM
+        link: security/cloud_siem/
+        icon: siem
+        desc: Detect, investigate, and respond to security threats across your cloud and on-premises systems
+      - title: Code Security
+        link: security/code_security/
+        icon: security-code-security
+        desc: Detect and fix vulnerabilities in your code, dependencies, and infrastructure as code
+      - title: Cloud Security
+        link: security/cloud_security_management/
+        icon: cloud-security-management
+        desc: Continuously audit configurations, assess identity risks, and detect threats across your cloud infrastructure
+      - title: App and API Protection
+        link: security/application_security/
+        icon: app-sec
+        desc: Detect and block threats targeting your production applications and APIs in real time
+      - title: Workload Protection
+        link: security/workload_protection/
+        icon: security-workload-security
+        desc: Monitor file, network, and process activity to detect real-time threats to your infrastructure
+      - title: Sensitive Data Scanner
+        link: security/sensitive_data_scanner/
+        icon: sensitive-data-scanner
+        desc: Detect and redact sensitive data like PII, API keys, and credit card numbers across your telemetry
+  - nav_section:
+    - name: 'Service Management'
+    - navtiles:
+      - title: Incident Management
+        link: service_management/incident_management
+        icon: incidents
+        desc: Identify, analyze, and mitigate disruptive incidents in your organization
+      - title: On-Call
+        link: incident_response/on-call/
+        icon: on-call
+        desc: Route and escalate alerts to the right team members with on-call schedules and paging
+      - title: Status Pages
+        link: incident_response/status_pages/
+        icon: status-page-wui
+        desc: Communicate service availability and incident updates to your users and stakeholders
+      - title: Service Level Objectives
+        link: service_level_objectives/
+        icon: slos
+        desc: Define and track performance targets to deliver a consistent customer experience
+      - title: Case Management
+        link: incident_response/case_management/
+        icon: case-management
+        desc: Triage, track, and remediate issues with centralized ownership and team collaboration
+      - title: Workflow Automation
+        link: service_management/workflows/
+        icon: workflows
+        desc: Automate and orchestrate processes across your tech stack
+      - title: App Builder
+        link: service_management/app_builder/
+        icon: app-builder
+        desc: Create low-code applications to streamline your internal tools
+  - nav_section:
+    - name: 'Platform Capabilities and Extending Datadog'
+    - navtiles:
+      - title: Monitors and Alerting
+        link: monitors/
+        icon: monitor
+        desc: Create, edit, and manage your monitors and notifications
+      - title: Dashboards
+        link: dashboards/
+        icon: dashboard
+        desc: Visualize, analyze, and generate insights about your data
+      - title: Notebooks
+        link: notebooks/
+        icon: notebook
+        desc: Create rich-text documents with live graphs for investigations, postmortems, and runbooks
+      - title: Mobile App
+        link: mobile/
+        icon: mobile
+        desc: View Datadog alerts, incidents, and more on your mobile device
+      - title: Fleet Automation
+        link: agent/fleet_automation/
+        icon: fleet-automation-wui
+        desc: Remotely configure, upgrade, and manage your Agents at scale
+      - title: Account Management
+        link: account_management/
+        icon: cog-2
+        desc: Manage org-based settings, billing, and data access controls
+      - title: Event Management
+        link: events/
+        icon: events
+        desc: Track notable changes and alerts in your applications and infrastructure
+      - title: CoScreen
+        link: coscreen/
+        icon: coscreen
+        desc: Share and interact with application windows for pair programming and incident management
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: Pipe your OpenTelemetry metrics, logs, and traces into Datadog
+      - title: Integrations
+        link: integrations/
+        icon: integrations
+        desc: Gather data about your applications, services, and systems
       - title: API
         link: api/latest/
         icon: api
         desc: Try the Datadog API
-      - title: Account Management
-        link: account_management/
-        icon: cog-2
-        desc: Access org-based settings and billing
       - title: Data Security
         link: data_security/
         icon: security-lock
         desc: Learn how Datadog protects your data
-      - title: Developers
-        link: developers/
+      - title: Extend Datadog
+        link: extend/
         icon: dev-code
-        desc: Develop on the Datadog platform
+        desc: Extend the Datadog platform
       - title: Partners
         link: partners/
         icon: colab

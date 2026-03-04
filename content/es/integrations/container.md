@@ -1,66 +1,17 @@
 ---
 app_id: contenedor
-app_uuid: ac3cc203-5b28-457d-8737-bbe32fa7c3b9
-assets:
-  dashboards:
-    Containers: assets/dashboards/containers.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: container.uptime
-      metadata_path: metadata.csv
-      prefix: contenedor.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10242
-    source_type_name: Contenedor
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - contenedores
-- Kubernetes
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/container/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: contenedor
-integration_id: contenedor
-integration_title: Contenedor
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: contenedor
-public_title: Contenedor
-short_description: Seguimiento de tus métricas de contenedor con Datadog
+- kubernetes
+custom_kind: integración
+description: Rastreo de tus métricas de contenedor con Datadog
+integration_version: 1.0.0
+media: []
 supported_os:
-- Linux
-- Windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Categoría::Contenedores
-  - Categoría::Kubernetes
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Oferta::Integración
-  configuration: README.md#Configuración
-  description: Seguimiento de tus métricas de contenedor con Datadog
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Contenedor
+- linux
+- windows
+title: Contenedor
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
 Este check informa de un conjunto de métricas de cualquier contenedor en ejecución, independientemente del tiempo de ejecución utilizado para iniciarlos.
@@ -85,25 +36,55 @@ El check `container` no expone ningún parámetro de configuración específico.
 
 1. Crea el archivo `container.d/conf.yaml` en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent.
 
-2. [Reinicia el Agent][1].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent)
 
 El check `container` puede recopilar métricas de CPU, memoria, red y E/S en discos.
 Algunas métricas pueden no estar disponibles dependiendo de tu entorno (Linux/Windows, por ejemplo).
 
 ### Validación
 
-[Ejecuta el subcomando `status` del Agent][1] y busca `container` en la sección **Checks**.
+[Ejecuta el subcomando `status` del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent) y busca `container` en la sección **Checks**.
 
 ## Datos recopilados
 
 ### Métricas
 
-Para ver la lista de métricas proporcionadas por esta integración, consulta [metadata.csv][2].
+| | |
+| --- | --- |
+| **container.cpu.limit** <br>(gauge) | El tiempo máximo de CPU disponible para el contenedor<br>_Mostrado como nanocore_. |
+| **container.cpu.system** <br>(gauge) | El uso de la CPU del sistema del contenedor<br>_Mostrado como nanocore_. |
+| **container.cpu.throttled** <br>(gauge) | El tiempo total de aceleración de la cpu<br>_Mostrado como nanosegundo_ |
+| **container.cpu.throttled.periods** <br>(gauge) | El número de periodos durante los cuales el contenedor estaba limitado|
+| **container.cpu.usage** <br>(gauge) | El uso total de la CPU del contenedor<br>_Mostrado como nanocore_. |
+| **container.cpu.user** <br>(gauge) | El uso de CPU del espacio de usuario del contenedor<br>_Mostrado como nanocore_. |
+| **container.io.read** <br>(gauge) | El número de bytes leídos de los discos por este contenedor<br>_Mostrado como byte_ |
+| **container.io.read.operations** <br>(gauge) | El número de operaciones de lectura realizadas por este contenedor|
+| **container.io.write** <br>(gauge) | El número de bytes escritos en discos por este contenedor<br>_Mostrado como byte_ |
+| **container.io.write.operations** <br>(gauge) | El número de operaciones de escritura realizadas por este contenedor|
+| **container.memory.cache** <br>(gauge) | El uso de la caché del contenedor<br>_Mostrado como byte_ |
+| **container.memory.commit** <br>(gauge) | El uso de memoria de confirmaciones del contenedor<br>_Mostrado como byte_ |
+| **container.memory.commit.peak** <br>(gauge) | Uso máximo de memoria de confirmaciones del contenedor<br>_Mostrado como byte_ |
+| **container.memory.kernel** <br>(gauge) | El uso de memoria del núcleo del contenedor<br>_Mostrado como byte_ |
+| **container.memory.limit** <br>(gauge) | El límite de memoria del contenedor<br>_Mostrado como byte_ |
+| **container.memory.major_page_faults** <br>(count) | Número de averías graves de la page (página) |
+| **container.memory.oom_events** <br>(gauge) | Número de eventos OOM provocados por el contenedor|
+| **container.memory.page_faults** <br>(count) | Número total de fallos de la page (página) |
+| **container.memory.rss** <br>(gauge) | El uso RSS del contenedor<br>_Mostrado como byte_ |
+| **container.memory.soft_limit** <br>(gauge) | El límite suave de memoria del contenedor<br>_Mostrado como byte_ |
+| **container.memory.swap** <br>(gauge) | El uso de intercambio de contenedores<br>_Mostrado como byte_ |
+| **container.memory.usage** <br>(gauge) | El uso total de memoria del contenedor<br>_Mostrado como byte_ |
+| **container.memory.usage.peak** <br>(gauge) | El uso máximo de memoria registrado desde que se inició el contenedor<br>_Mostrado como byte_ |
+| **container.memory.working_set** <br>(gauge) | Uso del conjunto de trabajo del contenedor<br>_Mostrado como byte_ |
+| **container.net.rcvd** <br>(gauge) | El número de bytes de red recibidos (por interfaz)<br>_Mostrado como byte_ |
+| **container.net.rcvd.packets** <br>(gauge) | El número de paquetes de red recibidos (por interfaz)|
+| **container.net.sent** <br>(gauge) | El número de bytes de red enviados (por interfaz)<br>_Mostrado como byte_ |
+| **container.net.sent.packets** <br>(gauge) | El número de paquetes de red enviados (por interfaz)|
+| **container.pid.open_files** <br>(gauge) | El número de descriptores de archivo abiertos (solo Linux)|
+| **container.pid.thread_count** <br>(gauge) | El número de subprocesos que se ejecutan en este contenedor|
+| **container.pid.thread_limit** <br>(gauge) | El número máximo de subprocesos para este contenedor|
+| **container.restarts** <br>(gauge) | El número de contenedores reiniciados|
+| **container.uptime** <br>(gauge) | El tiempo de actividad del contenedor<br>_Mostrado como segundos_ |
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
-
-[1]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[2]: https://github.com/DataDog/integrations-core/blob/master/container/metadata.csv
-[3]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con [asistencia técnica de Datadog](https://docs.datadoghq.com/help/).

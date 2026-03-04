@@ -227,7 +227,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_endpoint": "<INSTANCE_ENDPOINT>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.

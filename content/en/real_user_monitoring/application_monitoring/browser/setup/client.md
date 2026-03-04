@@ -8,7 +8,7 @@ further_reading:
 - link: '/real_user_monitoring/application_monitoring/browser/advanced_configuration/'
   tag: 'Documentation'
   text: 'Advanced configuration'
-- link: '/real_user_monitoring/session_replay/browser/'
+- link: '/session_replay/browser/'
   tag: 'Documentation'
   text: 'Setup Session Replay'
 - link: '/real_user_monitoring/error_tracking/browser/'
@@ -68,7 +68,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
 </script>
@@ -81,7 +81,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js','DD_RUM')
 </script>
@@ -94,7 +94,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js','DD_RUM')
 </script>
@@ -107,7 +107,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js','DD_RUM')
 </script>
@@ -120,7 +120,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js','DD_RUM')
 </script>
@@ -133,7 +133,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js','DD_RUM')
 </script>
@@ -146,7 +146,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v6.js','DD_RUM')
 </script>
@@ -166,7 +166,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -176,7 +177,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -186,7 +188,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -196,7 +199,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -206,7 +210,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -216,7 +221,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
@@ -226,7 +232,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/datadog-rum-v6.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 ```
 
