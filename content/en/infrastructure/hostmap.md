@@ -32,7 +32,7 @@ Use the drop-down in the upper left to view suggested queries, or the saved cust
 - <span class="ui">Group by</span>: Spatially arrange your objects into groups. You can use multiple groupings. For example, if you group by `tags.availability-zone` `tags.instance-type`, your objects are first arranged by availability zone and then further subdivided by instance type.
 
   {{< img src="infrastructure/hostmap/group-by.png" alt="The Host Map grouped by both tags.availability-zone and tags.instance-type. Hosts are arranged first into availability zone sections such as us-east-1a and us-east-1b, then subdivided by instance type such as m5a.2xlarge and t2.micro. Cells are colored by CPU usage from green to orange-red." style="width:85%;" >}}
-- <span class="ui">Filter</span>: Limit the Host Map to a specific subset of your infrastructure. For example, you can filter by `production` to only view your production resources. The <span class="ui">Filter</span> input supports logical operators (`AND`, `NOT`, `OR`) and wildcards (`*`). For example: `(availability-zone:ap* OR availability-zone:eu*) NOT agent_version:5.3*`.
+- <span class="ui">Filter</span>: Limit the Host Map to a specific subset of your infrastructure. For example, you can filter by `production` to only view your production resources. The <span class="ui">Filter</span> input supports logical operators (`AND`, `NOT`, `OR`) and wildcards (`*`). For example: `(tags.availability-zone:ap* OR tags.availability-zone:eu*) NOT agent_version:5.3*`.
 
 ## Use cases
 
