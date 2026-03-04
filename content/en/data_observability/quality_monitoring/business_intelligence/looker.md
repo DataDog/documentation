@@ -49,7 +49,7 @@ If your Git repositories already appear on the Datadog [repositories page][5], n
 
 It can take up to 60 minutes for data to appear after the initial setup.
 
-After syncing, you can explore your Looker assets and their upstream dependencies in the [Data Catalog][3].
+After syncing, you can explore your Looker assets and their upstream dependencies in the [Data Observability Catalog][3].
 
 ## Further reading
 
