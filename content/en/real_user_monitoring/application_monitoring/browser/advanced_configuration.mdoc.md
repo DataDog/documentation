@@ -1564,8 +1564,8 @@ This approach uses a build plugin to inject source code context into your bundle
 #### Prerequisites and supported setups
 
 -   **Separated bundles**: Each micro frontend has its own bundle with distinct file paths, for example, using [module federation][21].
--   **Supported bundler**: Use a bundler [supported by the Datadog build plugins][22]
--   **Browser SDK**: Browser SDK version v6.27.0 or higher
+-   **Supported bundler**: Use a bundler [supported by the Datadog build plugins][22].
+-   **Browser SDK**: Browser SDK version v6.30.1 or higher.
 
 #### Setup guide
 
