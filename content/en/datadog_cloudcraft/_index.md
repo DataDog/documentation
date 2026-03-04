@@ -87,7 +87,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - Enable [resource collection][17] for your GCP accounts:
-  1. In Datadog, navigate to **Datadog Setup > Integration Catalog > Google Cloud Platform**.
+  1. In Datadog, navigate to **Datadog Setup > Integration Catalog > Google Cloud**.
   2. Click on your project name, then select **Resource Collection**.
   3. Enable the **Enable Resource Collection** toggle.
 
@@ -116,7 +116,7 @@ To get started using Cloudcraft, use the following steps:
 
 {{< img src="datadog_cloudcraft/getting_started_3.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the <strong>Project</strong> dropdown lists your GCP project IDs from the Google Cloud Platform integration tile.
+<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the <strong>Project</strong> dropdown lists your GCP project IDs from the Google Cloud integration tile.
 </div>
 
 ### Group By
