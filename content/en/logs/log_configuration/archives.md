@@ -449,7 +449,7 @@ This directory structure simplifies the process of querying your historical log 
 [13]: /account_management/rbac/permissions#logs_read_data
 [14]: /logs/explorer/live_tail/
 [15]: /events/explorer/
-[16]: https://docs.datadoghq.com/logs/log_configuration/archive_search?tab=amazons3
+[16]: /logs/log_configuration/archive_search/?tab=amazons3
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
