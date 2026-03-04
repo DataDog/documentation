@@ -35,7 +35,7 @@ By default, the security overlay shows Critical, High, and Medium severity misco
 
 You can click on any resource that has findings to open a side panel with more details, allowing deeper investigation without leaving the diagram. Click **Investigate** to get more context about the finding and learn how to remediate it.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_misconfigurations_2.png" alt="Security overlay in Cloudcraft with the misconfigurations filter applied in the collapsible legend in the bottom of the screen, and highlighting the Investigate button" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_security_overlay_misconfigurations_3.png" alt="Security overlay in Cloudcraft with the misconfigurations filter applied in the collapsible legend in the bottom of the screen, and highlighting the Investigate button" style="width:100%;" >}}
 
 ## Investigate sensitive data
 
