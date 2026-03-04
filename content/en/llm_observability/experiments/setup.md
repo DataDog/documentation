@@ -32,7 +32,7 @@ If you have not already set up LLM Observability:
 
 ### APM Trace correlation
 
-If you want to correlate your Experiment spans with [APM Traces][5], make sure LLM Observability is running through a Datadog Agent (the default). Do **not** set `agentless_enabled=True`, because agentless mode sends trace data directly to Datadog\u2019s intake and bypasses the Agent, so APM traces are not generated.
+To correlate your Experiment spans with [APM Traces][5], run LLM Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
 
    ```python
    LLMObs.enable(
