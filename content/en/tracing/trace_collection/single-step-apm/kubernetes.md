@@ -158,7 +158,7 @@ Use the following advanced options to customize how Single Step Instrumentation 
 
 SSI supports multiple injection modes, which control how the injector and APM library files are delivered to your application containers.
 
-**Note**: The default mode changed from `init_container` to `auto` in Datadog Agent 7.76.
+**Note**: For Datadog Agent 7.75 and earlier, the default mode is `init_container`. For Datadog Agent 7.76 and later, the default mode is `auto`.
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
