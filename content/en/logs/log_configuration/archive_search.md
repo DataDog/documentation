@@ -134,7 +134,7 @@ You can configure **Search Attributes** on your archives to skip irrelevant data
 * Searches for specific values become nearly instantaneous.
 * You significantly reduce the volume of data scanned, lowering your cloud provider's egress fees.
 
-To set this up, refer to the [Advanced Settings (Search Attributes)][1] section of the Log Archives documentation.
+To set this up, see the [Log Archives][7] documentation.
 
 ### Default limit for Rehydration of Results
 
