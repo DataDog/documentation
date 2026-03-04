@@ -120,6 +120,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
    - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. Make sure that events fire after the experiment's feature flag is evaluated.
 
+   If the metric event is not present or fires before the feature flag evaluation, share these session details with the [Datadog support team][1].
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
@@ -133,9 +134,9 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 
 To check if outlier handling is the cause:
 
-1. On the [Experiments][2] page, select your experiment
+1. On the [Experiments][2] page, select your experiment.
 1. Hover over the metric name, then click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
-1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
+1. On the Edit Metric page, expand the Experiment settings accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
 1. Save the metric. To trigger an immediate recompute, click the &#8942; menu next to **Last Updated** in the **Metrics** section and click **run an update now**. Otherwise, wait for the next scheduled update.
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The Experiments page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
