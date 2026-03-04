@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Datadog's Looker integration collects metadata and field-level lineage for objects in your Looker account. When Datadog connects, it:
+Datadog's Looker integration helps data teams make changes to their data platform without breaking dashboards and Looks, and identify unused content to remove. The integration collects metadata and field-level lineage for objects in your Looker account. When Datadog connects, it:
 
 - Pulls metadata from your Looker instance, including projects, models, explores, views, dashboards, Looks, and folders
 - Generates field-level lineage between warehouse tables and columns and downstream Looker views and derived tables, and between Looker views and other Looker objects such as dashboards and explores
