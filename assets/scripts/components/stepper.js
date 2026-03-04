@@ -65,6 +65,8 @@ function initStepper(stepper) {
 
     let currentIndex = 0;
     let finished = false;
+    let animating = false;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     // Tracks which non-active steps are manually expanded (by index)
     let expandedSteps = new Set();
 
@@ -132,10 +134,73 @@ function initStepper(stepper) {
     }
 
     function goToStep(index) {
+        if (animating) return;
+
+        const prevContent = !finished ? steps[currentIndex]?.querySelector('.stepper__step-content') : null;
+        const prevIsVisible = prevContent && !prevContent.hasAttribute('hidden');
+
         finished = false;
         currentIndex = Math.max(0, Math.min(index, steps.length - 1));
         persist();
+
+        if (prefersReducedMotion || !prevIsVisible) {
+            render();
+            return;
+        }
+
+        animating = true;
+
+        const newContent = steps[currentIndex]?.querySelector('.stepper__step-content');
+        const newAlreadyVisible = newContent && !newContent.hasAttribute('hidden');
+
+        // Measure old content height before render() changes the DOM
+        const prevHeight = prevContent.offsetHeight;
+
+        // Prime new content at height 0 so render() won't flash it open
+        if (newContent && !newAlreadyVisible) {
+            newContent.style.overflow = 'hidden';
+            newContent.style.height = '0';
+        }
+
+        // Update all state immediately (classes, nav, active step, etc.)
         render();
+
+        // render() set hidden="until-found" on prevContent (content-visibility: hidden).
+        // Override that with an inline style so it stays visible for the slide-up.
+        prevContent.style.setProperty('content-visibility', 'visible');
+        prevContent.style.overflow = 'hidden';
+        prevContent.style.height = prevHeight + 'px';
+
+        // Track completion; both animations start in the same frame
+        let pending = newAlreadyVisible ? 1 : 2;
+        const onDone = () => {
+            if (--pending > 0) return;
+            prevContent.style.removeProperty('content-visibility');
+            prevContent.style.removeProperty('overflow');
+            prevContent.style.removeProperty('height');
+            prevContent.style.removeProperty('transition');
+            animating = false;
+        };
+
+        requestAnimationFrame(() => {
+            // Slide up old content
+            prevContent.style.transition = 'height 0.2s ease';
+            prevContent.style.height = '0';
+            prevContent.addEventListener('transitionend', () => onDone(), { once: true });
+
+            // Slide down new content
+            if (newContent && !newAlreadyVisible) {
+                const targetHeight = newContent.scrollHeight;
+                newContent.style.transition = 'height 0.2s ease';
+                newContent.style.height = targetHeight + 'px';
+                newContent.addEventListener('transitionend', () => {
+                    newContent.style.removeProperty('transition');
+                    newContent.style.removeProperty('overflow');
+                    newContent.style.removeProperty('height');
+                    onDone();
+                }, { once: true });
+            }
+        });
     }
 
     function handleFinish() {
