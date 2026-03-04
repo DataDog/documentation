@@ -146,7 +146,7 @@ The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4
 {{< /code-block >}}
 
 
-**Note**: As of operator `v1.22.0`, the DDOT container uses the `ddot-collector` image instead of the `-full` agent image. When overriding the node agent image tag, use a tag ≥ 7.67.0 so the OTel container is scheduled (`ddot-collector` image is only supported ≥ 7.67.0). The `ddot-collector` image has no `-full` variant; if you need a `-full` image, set `spec.override.nodeAgent.image.name` to a full agent image (e.g. `gcr.io/datadoghq/agent:7.72.1-full`). That override is applied to all node agent containers, including the OTel one, so it will run the agent `-full` image instead of `ddot-collector`.
+**Note**: As of operator `v1.22.0`, the DDOT container uses the `ddot-collector` image instead of the `-full` agent image. When overriding the node agent image tag, use a tag ≥ 7.67.0 so the OTel container is scheduled (`ddot-collector` image is only supported ≥ 7.67.0). The `ddot-collector` image has no `-full` variant; if you need a `-full` image, set `spec.override.nodeAgent.image.name` to a full agent image (For example `gcr.io/datadoghq/agent:7.72.1-full`). 
 
 [1]: /getting_started/site
 [2]: /containers/guide/changing_container_registry/
