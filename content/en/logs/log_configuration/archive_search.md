@@ -128,6 +128,9 @@ To optimize performance and reduce costs:
 * **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
 * **Use Indexed Attributes (Preview):** This is the most effective way to accelerate searches for high-cardinality data.
 
+**Note**: Only logs archived after you configure indexed attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
+
+
 ### Accelerate searches with Indexed Attributes
 
 You can configure **Search Attributes** on your archives to skip irrelevant data blocks in your storage bucket. For example, if you index `trace_id` or `user_id` you significantly reduce the volume of data scanned and lower your cloud provider's egress fees.
