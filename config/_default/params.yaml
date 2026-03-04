@@ -83,6 +83,7 @@ code_language_ids:
     kotlin-multiplatform: Kotlin Multiplatform
     swiftui: Swift UI
     java: Java
+    graalvm: GraalVM
     cpp: 'C++'
     php: PHP
     nodejs: "Node.js"
