@@ -6899,6 +6899,11 @@ menu:
       parent: cloudprem
       identifier: cloudprem_configure
       weight: 5
+    - name: Indexes
+      url: /cloudprem/configure/indexes
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_indexes
+      weight: 500
     - name: Retention Policy
       url: /cloudprem/configure/retention
       parent: cloudprem_configure
