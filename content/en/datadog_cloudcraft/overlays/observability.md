@@ -30,7 +30,7 @@ On the Observability overlay, you can take action on individual resources or gro
 - Click a resource group, such as a subnet or VPC, to open a side panel that allows you to apply bulk updates across all the hosts in that resource group.
 - To select multiple (but not all) hosts, hold down the <kbd>Command</kbd> key on Mac or the <kbd>Control</kbd> key on Windows while clicking on each host.
 
-{{< img src="datadog_cloudcraft/observability_overlay_with_fleet_2.mp4" alt="Observability overlay in Cloudcraft, clicking on a resource group, and opening the side panel to display the bulk update feature." video=true >}}
+{{< img src="datadog_cloudcraft/overlays/observability_overlay_with_fleet_3.mp4" alt="Observability overlay in Cloudcraft, clicking on a resource group, and opening the side panel to display the bulk update feature." video=true >}}
 
 ## View Datadog coverage
 
