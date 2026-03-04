@@ -21,18 +21,18 @@ Datadog's [Host Map][1] visualizes your hosts, pods, containers, and clusters, h
 
 {{< img src="infrastructure/hostmap/query-selector.png" alt="The query selector dropdown showing a list of suggested queries such as 'What is the CPU usage across my hosts?' and 'How many errors are being logged across my infrastructure?', along with saved custom queries. A Create button and Filter views search field are at the top." style="width:60%;" >}}
 
-Use the drop-down in the upper left to view suggested queries, or the saved custom queries written by you or someone else in your organization. To write a custom query, click <span class="ui">Create</span>.
+Use the drop-down in the upper left to view suggested queries, or the saved custom queries written by you or someone else in your organization. To write a custom query, click {{< ui >}}Create{{< /ui >}}.
 
 {{< img src="infrastructure/hostmap/draft-query.png" alt="The Draft Query editor with two levels. The parent object is set to Host with Fill by CPU usage. The child object is set to Pod with Fill by Readiness." style="width:100%;" >}}
 
-- <span class="ui">Parent/Child Object</span>: Select resources (<span class="ui">Host</span>, <span class="ui">Pod</span>, <span class="ui">Container</span>, <span class="ui">Cluster</span>) to view. Parent and Child objects have hierarchical relationships.
-- <span class="ui">Fill by</span>: By default, the color of each object represents CPU usage, where the color ranges from green (0% utilized) to orange (100% utilized). Use the <span class="ui">Fill by</span> drop-down to color your objects by various metrics or signals, such as memory or error logs.
-- <span class="ui">Size by</span>: If you do not specify a Child object, you can use the <span class="ui">Size by</span> selector to size each object by a metric or signal.
+- {{< ui >}}Parent/Child Object{{< /ui >}}: Select resources ({{< ui >}}Host{{< /ui >}}, {{< ui >}}Pod{{< /ui >}}, {{< ui >}}Container{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}) to view. Parent and Child objects have hierarchical relationships.
+- {{< ui >}}Fill by{{< /ui >}}: By default, the color of each object represents CPU usage, where the color ranges from green (0% utilized) to orange (100% utilized). Use the {{< ui >}}Fill by{{< /ui >}} drop-down to color your objects by various metrics or signals, such as memory or error logs.
+- {{< ui >}}Size by{{< /ui >}}: If you do not specify a Child object, you can use the {{< ui >}}Size by{{< /ui >}} selector to size each object by a metric or signal.
   {{< img src="infrastructure/hostmap/size-by.png" alt="The Host Map query editor with Parent Object set to Host, Fill by set to CPU usage, and Size by set to Error logs. The map below shows 1.61k hosts as hexagons of varying sizes and colors, with a tooltip on one host showing 88% average CPU usage." style="width:85%;" >}}
-- <span class="ui">Group by</span>: Spatially arrange your objects into groups. You can use multiple groupings. For example, if you group by `tags.availability-zone` `tags.instance-type`, your objects are first arranged by availability zone and then further subdivided by instance type.
+- {{< ui >}}Group by{{< /ui >}}: Spatially arrange your objects into groups. You can use multiple groupings. For example, if you group by `tags.availability-zone` `tags.instance-type`, your objects are first arranged by availability zone and then further subdivided by instance type.
 
   {{< img src="infrastructure/hostmap/group-by.png" alt="The Host Map grouped by both tags.availability-zone and tags.instance-type. Hosts are arranged first into availability zone sections such as us-east-1a and us-east-1b, then subdivided by instance type such as m5a.2xlarge and t2.micro. Cells are colored by CPU usage from green to orange-red." style="width:85%;" >}}
-- <span class="ui">Filter</span>: Limit the Host Map to a specific subset of your infrastructure. For example, you can filter by `production` to only view your production resources. The <span class="ui">Filter</span> input supports logical operators (`AND`, `NOT`, `OR`) and wildcards (`*`). For example: `(tags.availability-zone:ap* OR tags.availability-zone:eu*) NOT tags.agent_version:5.3*`.
+- {{< ui >}}Filter{{< /ui >}}: Limit the Host Map to a specific subset of your infrastructure. For example, you can filter by `production` to only view your production resources. The {{< ui >}}Filter{{< /ui >}} input supports logical operators (`AND`, `NOT`, `OR`) and wildcards (`*`). For example: `(tags.availability-zone:ap* OR tags.availability-zone:eu*) NOT tags.agent_version:5.3*`.
 
 ## Use cases
 
