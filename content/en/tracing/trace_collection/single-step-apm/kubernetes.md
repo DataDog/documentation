@@ -154,6 +154,44 @@ Use one of the following setup methods:
 
 Use the following advanced options to customize how Single Step Instrumentation behaves in your environment. These settings are optional and typically only needed in specialized setups.
 
+### Configure injection modes
+
+SSI supports multiple injection modes, which control how the injector and APM library files are delivered to your application containers. Starting with Datadog Agent 7.76, the default mode is `auto`, which selects the best available method based on your cluster's capabilities.
+
+| Mode | Description | Requirements |
+|------|-------------|--------------|
+| `auto` | Automatically selects the best available injection method based on cluster capabilities. Default since Datadog Agent 7.76. | See requirements for each mode below. |
+| `init_container` | Copies injector and APM library files into application containers using init containers. Default before Datadog Agent 7.76. | Datadog Agent, Helm Chart, or Datadog Operator (any supported version). |
+| `csi` | Mounts injector and APM library files directly into application containers using the [Datadog CSI driver][40]. Faster than init container mode, but requires the CSI driver to be enabled (disabled by default). Available as a preview. | Datadog Agent 7.76.0+ and Datadog CSI driver 1.2.0+. These requirements are automatically satisfied with Datadog Helm Chart 3.178.1+. |
+| `image_volume` | Mounts injector and APM library images using the Kubernetes native [Image Volume][41] feature. Faster than init container mode and bypasses CSI driver security constraints. | Datadog Agent 7.77.0+, Datadog Helm Chart 3.178.1+, Kubernetes v1.33+, and a container runtime that supports image volumes (containerd v2.2.0+ or CRI-O v1.33+). |
+
+You typically do not need to configure this setting manually. Consider adjusting it if you notice significant pod startup delays or higher-than-expected resource usage (CPU, memory) during pod initialization.
+
+#### Configure injection mode globally with Helm
+
+To set the injection mode cluster-wide, add `injectionMode` to your `datadog-values.yaml`:
+
+```yaml
+datadog:
+  apm:
+    instrumentation:
+      injectionMode: auto
+```
+
+Replace `auto` with one of: `init_container`, `csi`, or `image_volume`.
+
+**Note**: Datadog Operator support for this setting is not available.
+
+#### Configure injection mode per pod
+
+To override the injection mode for a specific pod, add the following annotation to the pod spec:
+
+```yaml
+admission.datadoghq.com/apm-inject.injection-mode: "auto"
+```
+
+Replace `auto` with one of: `init_container`, `csi`, or `image_volume`.
+
 ### Target specific workloads
 
 By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
@@ -802,6 +840,8 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [37]: /profiler/
 [38]: /security/application_security/
 [39]: /tracing/trace_pipeline/ingestion_controls/
+[40]: /containers/kubernetes/csi_driver/
+[41]: https://kubernetes.io/docs/concepts/storage/image-volumes/
 
 
 
