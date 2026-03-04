@@ -60,32 +60,9 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
-## Use Pod and cluster names to identify Workers in a Kubernetes environment
+## Identify Workers in a Kubernetes environment using Pod and cluster names
 
-By default, a Worker's hostname is the machine's hostname, such as `COMP-JLXPKWTGJF`. If you run your pipeline across multiple clusters or containers, assign each Worker a unique hostname based on the Pod name and cluster name to make them easier to identify.
-
-In the Helm chart:
-1. Configure the environment variable [`POD_NAME`][22] to be automatically set to the Pod's name.
-    ```yaml
-    env:
-      - name: POD_NAME
-        valueFrom:
-         fieldRef:
-            fieldPath: metadata.name
-    ```
-1. Set the [`CLUSTER_NAME`][23] environment variable in the Helm chart.
-    ```
-    env:
-      - name: CLUSTER_NAME
-        value: "<MY_CLUSTER_NAME>"
-    ```
-1. To assign unique Worker names, configure [`VECTOR_HOSTNAME`][24] to the `POD_NAME` and `CLUSTER_NAME`.
-    ```yaml
-    args:
-      - >
-        export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}";
-        exec /usr/bin/observability-pipelines-worker run
-    ```
+{{% observability_pipelines/install_worker/pod_cluster_name_worker %}}
 
 ## Worker logs issues
 
@@ -219,6 +196,3 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [19]: /remote_configuration/#security-considerations
 [20]: /help/
 [21]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
-[22]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L156C3-L159C33
-[23]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L154-L155
-[24]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L141-L142

@@ -77,7 +77,7 @@ After setting up your pipeline using the API or Terraform, follow the instructio
             ```
             -p 8282:8088 datadog/observability-pipelines-worker run
             ```
-        - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you [identify the Worker][6].
+        - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][4] for more information.
     1. Restart the Worker to use the updated bootstrap file:
@@ -94,7 +94,6 @@ See [Update Existing Pipelines][5] if you want to make changes to your pipeline'
 [3]: /observability_pipelines/guide/environment_variables/
 [4]: /observability_pipelines/configuration/secrets_management
 [5]: /observability_pipelines/configuration/update_existing_pipelines/
-[6]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/?tab=docker#use-pod-and-cluster-names-to-identify-workers-in-a-kubernetes-environment
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -181,6 +180,10 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 #### LoadBalancer service
 
 If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][9] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
+
+#### Set the Worker name using the Pod and cluster name
+
+{{% observability_pipelines/install_worker/pod_cluster_name_worker %}}
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
@@ -290,7 +293,7 @@ After you set up your source, destinations, and processors on the Build page of 
         ```
         -p 8282:8088 datadog/observability-pipelines-worker run
         ```
-        - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you [identify the Worker][4].
+        - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
@@ -306,7 +309,6 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: /observability_pipelines/configuration/secrets_management
-[4]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/?tab=docker#use-pod-and-cluster-names-to-identify-workers-in-a-kubernetes-environment
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -381,6 +383,10 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 #### LoadBalancer service
 
 If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][8] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
+
+#### Set the Worker name based on Pod and cluster name
+
+{{% observability_pipelines/install_worker/pod_cluster_name_worker %}}
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
