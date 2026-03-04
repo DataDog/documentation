@@ -245,7 +245,7 @@ This feature only applies to baggage extracted from incoming HTTP headers. Bagga
   - To disable this feature, set the value to an empty string.
 
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
+[1]: /extend/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/

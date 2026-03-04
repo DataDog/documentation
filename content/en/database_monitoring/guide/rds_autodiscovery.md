@@ -121,8 +121,7 @@ database_monitoring:
   autodiscovery:
     rds:
       enabled: true
-      dbm_tag:
-        - "use_dbm:true"
+      dbm_tag: "use_dbm:true"
 ```
 
 The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
@@ -152,6 +151,8 @@ instances:
     port: "%%port%%"
     username: datadog
     dbm: "%%extra_dbm%%"
+    database_autodiscovery:
+      enabled: true
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"

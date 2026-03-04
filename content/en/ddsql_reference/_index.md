@@ -27,6 +27,7 @@ This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [Data types](#data-types)
 - [Type literals](#type-literals)
+- [Arrays](#arrays)
 - [SQL functions](#functions)
 - [Regular expressions](#regular-expressions)
 - [Window functions](#window-functions)
@@ -179,7 +180,7 @@ DDSQL supports the following data types:
 
 ### Array types
 
-All data types support array types. Arrays can contain multiple values of the same data type.
+All data types support array types. See [Arrays](#arrays) for array literals, element access, and array functions.
 
 ## Type literals
 
@@ -197,17 +198,6 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 
 The type prefix can be omitted and the type is automatically inferred from the value. For example, `'hello world'` is inferred as `VARCHAR`, `123` as `BIGINT`, and `true` as `BOOLEAN`. Use explicit type prefixes when values could be ambiguous; for example,`TIMESTAMP '2025-01-01'` would be inferred as `VARCHAR` without the prefix.
 
-### Array literals
-
-Array literals use the syntax `ARRAY[value1, value2, ...]`. The array type is automatically inferred from the values.
-
-{{< code-block lang="sql" >}}
-SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits; -- Inferred as VARCHAR array
-SELECT ARRAY[1, 2, 3] AS numbers;                    -- Inferred as BIGINT array
-SELECT ARRAY[true, false, true] AS flags;            -- Inferred as BOOLEAN array
-SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DECIMAL array
-{{< /code-block >}}
-
 ### Example
 
 {{< code-block lang="sql" >}}
@@ -219,6 +209,105 @@ SELECT
 FROM products
 WHERE created_at > TIMESTAMP '2025-01-01';
 {{< /code-block >}}
+
+## Arrays
+
+Arrays are ordered collections of values that all share the same data type. Every DDSQL base type has a corresponding array type.
+
+### Array literals
+
+Use the `ARRAY[value1, value2, ...]` syntax to construct an array literal. The array's type is automatically inferred from the values.
+
+{{< code-block lang="sql" >}}
+SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits;  -- VARCHAR array
+SELECT ARRAY[1, 2, 3] AS numbers;                     -- BIGINT array
+SELECT ARRAY[true, false, true] AS flags;             -- BOOLEAN array
+SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;              -- DECIMAL array
+{{< /code-block >}}
+
+### Element access
+
+Access individual array elements with a 1-based subscript. Accessing an index that is out of bounds returns `NULL`.
+
+{{< code-block lang="sql" >}}
+SELECT ARRAY['a', 'b', 'c'][1];   -- Returns 'a'
+SELECT ARRAY['a', 'b', 'c'][2];   -- Returns 'b'
+SELECT ARRAY['a', 'b', 'c'][10];  -- Returns NULL (out of bounds)
+{{< /code-block >}}
+
+To access elements of an array column, use the same subscript syntax:
+
+{{< code-block lang="sql" >}}
+SELECT recipients[1] AS first_recipient
+FROM emails
+{{< /code-block >}}
+
+### Array functions
+
+The following functions operate on arrays:
+
+| Function | Return Type | Description |
+|----------|-------------|-------------|
+| `CARDINALITY(array a)` | `BIGINT` | Returns the number of elements in the array. |
+| `ARRAY_POSITION(array a, typeof_array value)` | `BIGINT` | Returns the 1-based index of the first occurrence of `value` in the array, or `NULL` if not found. |
+| `STRING_TO_ARRAY(string s, string delimiter)` | `VARCHAR[]` | Splits a string into an array of strings on the given delimiter. |
+| `ARRAY_TO_STRING(array a, string delimiter)` | `VARCHAR` | Joins array elements into a string with the given delimiter. |
+| `ARRAY_AGG(expression e)` | array of input type | Aggregates values from multiple rows into an array. |
+| `UNNEST(array a [, array b...])` | rows of a [, b...] | Expands one or more arrays into a set of rows. Only valid in a `FROM` clause. |
+
+{{% collapse-content title="Examples" level="h3" %}}
+
+### `CARDINALITY`
+{{< code-block lang="sql" >}}
+SELECT
+  CARDINALITY(recipients) AS recipient_count
+FROM
+  emails
+{{< /code-block >}}
+
+### `ARRAY_POSITION`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_POSITION(recipients, 'hello@example.com') AS position
+FROM
+  emails
+{{< /code-block >}}
+
+### `STRING_TO_ARRAY`
+{{< code-block lang="sql" >}}
+SELECT
+  STRING_TO_ARRAY('a,b,c,d,e,f', ',') AS parts
+{{< /code-block >}}
+
+### `ARRAY_TO_STRING`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_TO_STRING(ARRAY['a', 'b', 'c'], ',') AS joined_string
+{{< /code-block >}}
+
+### `ARRAY_AGG`
+{{< code-block lang="sql" >}}
+SELECT
+  sender,
+  ARRAY_AGG(subject) AS subjects,
+  ARRAY_AGG(DISTINCT subject) AS distinct_subjects
+FROM
+  emails
+GROUP BY
+  sender
+{{< /code-block >}}
+
+### `UNNEST`
+{{< code-block lang="sql" >}}
+SELECT
+  sender,
+  recipient
+FROM
+  emails,
+  UNNEST(recipients) AS recipient
+{{< /code-block >}}
+
+{{% /collapse-content %}}
 
 ## Functions
 
@@ -605,47 +694,6 @@ WHERE
   purchase_date > NOW() - INTERVAL '1 hour'
 {{< /code-block >}}
 
-### `CARDINALITY`
-{{< code-block lang="sql" >}}
-SELECT
-  CARDINALITY(recipients)
-FROM
-  emails
-{{< /code-block >}}
-
-### `ARRAY_POSITION`
-{{< code-block lang="sql" >}}
-SELECT
-  ARRAY_POSITION(recipients, 'hello@example.com')
-FROM
-  emails
-{{< /code-block >}}
-
-### `STRING_TO_ARRAY`
-{{< code-block lang="sql" >}}
-SELECT
-  STRING_TO_ARRAY('a,b,c,d,e,f', ',')
-{{< /code-block >}}
-
-### `ARRAY_TO_STRING`
-{{< code-block lang="sql" >}}
-SELECT
-  ARRAY_TO_STRING(ARRAY['a', 'b', 'c'], ',') AS joined_string
-{{< /code-block >}}
-
-### `ARRAY_AGG`
-{{< code-block lang="sql" >}}
-SELECT
-  sender,
-  ARRAY_AGG(subject) subjects,
-  ARRAY_AGG(ALL subject) all_subjects,
-  ARRAY_AGG(DISTINCT subject) distinct_subjects
-FROM
-  emails
-GROUP BY
-  sender
-{{< /code-block >}}
-
 ### `APPROX_PERCENTILE`
 {{< code-block lang="sql" >}}
 -- Calculate the median (50th percentile) response time
@@ -663,16 +711,6 @@ FROM
   logs
 GROUP BY
   service_name
-{{< /code-block >}}
-
-### `UNNEST`
-{{< code-block lang="sql" >}}
-SELECT
-  sender,
-  recipient
-FROM
-  emails,
-  UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
 {{% /collapse-content %}}

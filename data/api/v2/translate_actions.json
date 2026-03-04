@@ -745,6 +745,20 @@
     "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
     "summary": "List AWS cloud authentication persona mappings"
   },
+  "CreateAWSCloudAuthPersonaMapping": {
+    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
+    "summary": "Create an AWS cloud authentication persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
+  },
+  "DeleteAWSCloudAuthPersonaMapping": {
+    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
+    "summary": "Delete an AWS cloud authentication persona mapping"
+  },
+  "GetAWSCloudAuthPersonaMapping": {
+    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
+    "summary": "Get an AWS cloud authentication persona mapping"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
@@ -1095,7 +1109,7 @@
     "request_schema_description": "Request containing the desired email domain allowlist configuration."
   },
   "CreateDORADeployment": {
-    "description": "Use this API endpoint to provide deployment data.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
+    "description": "Use this API endpoint to provide deployment data.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate\n- Failed Deployment Recovery Time",
     "summary": "Send a deployment event",
     "request_description": "",
     "request_schema_description": "Request to create a DORA deployment event."
@@ -1115,36 +1129,36 @@
     "summary": "Get a deployment event"
   },
   "PatchDORADeployment": {
-    "description": "Use this API endpoint to patch a deployment event.",
+    "description": "Update a deployment's change failure status. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation.",
     "summary": "Patch a deployment event",
     "request_description": "",
     "request_schema_description": "Request to patch a DORA deployment event."
   },
   "CreateDORAFailure": {
-    "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
-    "summary": "Send a failure event",
-    "request_description": "",
-    "request_schema_description": "Request to create a DORA failure event."
-  },
-  "DeleteDORAFailure": {
-    "description": "Use this API endpoint to delete a failure event.",
-    "summary": "Delete a failure event"
-  },
-  "ListDORAFailures": {
-    "description": "Use this API endpoint to get a list of failure events.",
-    "summary": "Get a list of failure events",
-    "request_description": "",
-    "request_schema_description": "Request to get a list of failures."
-  },
-  "GetDORAFailure": {
-    "description": "Use this API endpoint to get a failure event.",
-    "summary": "Get a failure event"
-  },
-  "CreateDORAIncident": {
-    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "description": "Use this API endpoint to provide incident data for DORA Metrics.\nNote that change failure rate and failed deployment recovery time are computed from change failures detected on deployments, not from incident events sent through this endpoint.\nTracking incidents gives a side-by-side view of how failed deployments translate into real-world incidents, including their severity and frequency.",
     "summary": "Send an incident event",
     "request_description": "",
-    "request_schema_description": "Request to create a DORA failure event."
+    "request_schema_description": "Request to create a DORA incident event."
+  },
+  "DeleteDORAFailure": {
+    "description": "Use this API endpoint to delete an incident event.",
+    "summary": "Delete an incident event"
+  },
+  "ListDORAFailures": {
+    "description": "Use this API endpoint to get a list of incident events.",
+    "summary": "Get a list of incident events",
+    "request_description": "",
+    "request_schema_description": "Request to get a list of incidents."
+  },
+  "GetDORAFailure": {
+    "description": "Use this API endpoint to get an incident event.",
+    "summary": "Get an incident event"
+  },
+  "CreateDORAIncident": {
+    "description": "**Note**: This endpoint is deprecated. Please use `/api/v2/dora/failure` instead.\n\nUse this API endpoint to provide incident data.\nTracking incidents gives a side-by-side view of how failed deployments translate into real-world incidents.",
+    "summary": "Send an incident event (legacy)",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA incident event."
   },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",
@@ -1362,6 +1376,12 @@
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
   },
+  "ImportIncident": {
+    "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
+    "summary": "Import an incident",
+    "request_description": "Incident import payload.",
+    "request_schema_description": "Import request for an incident. Used to import historical incidents from external systems."
+  },
   "SearchIncidents": {
     "description": "Search for incidents matching a certain query.",
     "summary": "Search for incidents"
@@ -1559,6 +1579,34 @@
     "summary": "Create a Datadog GCP principal",
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
+  },
+  "GetSpaceByDisplayName": {
+    "description": "Get the resource name and organization binding ID of a space in the Datadog Google Chat integration.",
+    "summary": "Get space information by display name"
+  },
+  "ListOrganizationHandles": {
+    "description": "Get a list of all organization handles from the Datadog Google Chat integration.",
+    "summary": "Get all organization handles"
+  },
+  "CreateOrganizationHandle": {
+    "description": "Create an organization handle in the Datadog Google Chat integration.",
+    "summary": "Create organization handle",
+    "request_description": "Organization handle payload.",
+    "request_schema_description": "Create organization handle request."
+  },
+  "DeleteOrganizationHandle": {
+    "description": "Delete an organization handle from the Datadog Google Chat integration.",
+    "summary": "Delete organization handle"
+  },
+  "GetOrganizationHandle": {
+    "description": "Get an organization handle from the Datadog Google Chat integration.",
+    "summary": "Get organization handle"
+  },
+  "UpdateOrganizationHandle": {
+    "description": "Update an organization handle from the Datadog Google Chat integration.",
+    "summary": "Update organization handle",
+    "request_description": "Organization handle payload.",
+    "request_schema_description": "Update organization handle request."
   },
   "ListJiraAccounts": {
     "description": "Get all Jira accounts for the organization.",
@@ -2500,6 +2548,18 @@
     "summary": "Query accounts",
     "request_description": "",
     "request_schema_description": ""
+  },
+  "QueryProductAnalyticsScalar": {
+    "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
+    "summary": "Compute scalar analytics",
+    "request_description": "",
+    "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
+  "QueryProductAnalyticsTimeseries": {
+    "description": "Compute timeseries analytics results for Product Analytics data.\nReturns time-bucketed values for charts and trend analysis.\nThe `compute.interval` field (milliseconds) is required for time bucketing.",
+    "summary": "Compute timeseries analytics",
+    "request_description": "",
+    "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
   },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
