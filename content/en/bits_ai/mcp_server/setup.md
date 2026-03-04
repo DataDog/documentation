@@ -297,22 +297,25 @@ Local authentication is recommended for Cline and when remote authentication is 
 
 The MCP Server uses OAuth 2.0 for [authentication][14]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
-```json
-{
+<pre><code>{
   "mcpServers": {
     "datadog": {
       "type": "http",
       "url": "{{< region-param key="mcp_server_endpoint" >}}",
       "headers": {
-          "DD_API_KEY": "<YOUR_API_KEY>",
-          "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
+          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
+          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
       }
     }
   }
 }
-```
+</code></pre>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
@@ -324,7 +327,10 @@ For security, use a scoped API key and application key from a [service account][
    npx @modelcontextprotocol/inspector
    ```
 2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
-3. For **URL**, enter the MCP Server endpoint for your regional Datadog site. For example, for {{< region-param key="dd_site_name" >}}: `{{< region-param key="mcp_server_endpoint" >}}`
+3. For **URL**, enter the MCP Server endpoint for your regional Datadog site. 
+   {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+   For example, for {{< region-param key="dd_site_name" >}}: <code>{{< region-param key="mcp_server_endpoint" >}}</code>
+   {{< /site-region >}}
 4. Click **Connect**, then go to **Tools** > **List Tools**.
 5. Check if the [available tools][12] appear.
 
