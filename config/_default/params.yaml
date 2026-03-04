@@ -263,6 +263,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  advanced_analysis: [gov]
   actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
@@ -303,6 +304,7 @@ unsupported_sites:
   getting_started_feature_flags: [gov]
   gcp-private-service-connect: [us,us3,gov,ap1,ap2]
   google-hangouts-chat: [gov]
+  google_chat: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2]
