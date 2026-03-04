@@ -201,7 +201,7 @@ def embed_url():
     return jsonify({"iframeUrl": iframe_url})
 ```
 
-Frontend (vanilla JS):
+Frontend (vanilla JavaScript):
 ```html
 <div id="container">Loading...</div>
 <script>
@@ -265,6 +265,15 @@ HTML template:
 
 **Share type is not editable**
 : You cannot change an existing shared dashboard to or from the Secure Embed type. Delete the shared dashboard and create a new one to switch share types.
+
+## Troubleshooting
+
+### CORS errors on the `/api/embed-url` fetch
+
+If you are using client-side rendering and see CORS errors when your frontend fetches the embed URL, check the following:
+
+- Your backend must set `Access-Control-Allow-Origin` to either `*` (all origins) or the exact origin of the requesting website.
+- If your frontend fetch includes `credentials: 'include'`, the wildcard `*` is not valid for `Access-Control-Allow-Origin`. Your backend must respond with the exact requesting origin and also include the header `Access-Control-Allow-Credentials: true`.
 
 ## Further reading
 
