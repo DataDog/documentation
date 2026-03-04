@@ -20255,7 +20255,8 @@ components:
           description: The account public ID.
           type: string
         billing_plan:
-          description: The billing plan.
+          deprecated: true
+          description: The billing plan (metadata). (Deprecated from May 2026)
           type: string
         end_date:
           description: Shows the last date of usage.
