@@ -25,8 +25,6 @@ The Java profiler uses two different profiling engines depending on your operati
 - **Datadog Profiler**: The default profiling engine on Linux. Starting with dd-trace-java 1.55.0, the Datadog profiler uses its own stable stack-walker implementation for improved robustness across JVMs and GC modes. On Linux, it uses the kernel perf subsystem for accurate CPU sampling and provides the full set of profile types including wallclock profiling for latency analysis.
 - **Java Flight Recorder (JFR)**: Uses the JVM's built-in flight recorder. Available on all platforms but with fewer profile types. On Linux, used as a fallback when the Datadog Profiler cannot be enabled.
 
-The profiler automatically selects the appropriate engine based on your environment. You do not need to configure this manually. Below are the different profile types and the related configurations.
-
 ### CPU profiling
 
 Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling.
@@ -54,31 +52,31 @@ The Datadog profiler wallclock engine:
 The Datadog allocation profiling engine:
 - Contextualizes allocation profiles with endpoint information
 - Supports allocation profiles filtered by endpoint
-- Relies on JVMTI APIs; automatically disabled on OpenJDK < 21.0.3 to prevent stability issues
+- Requires Java 11+; automatically disabled on JDK versions with unstable JVMTI APIs (below 11.0.23, 17.0.11, 21.0.3) to prevent stability issues
 - For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`
 
 The JFR-based allocation profiling engine:
-- Enabled by default since JDK 16
-- Not enabled by default for JDK 8 and 11, as allocation-intensive applications can lead to high overhead and large recording sizes
-- For JMC users, the JFR allocation events are `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB`
+- Enabled by default on JDK 16+
+- Not enabled by default on lower JDKs (8-15), as allocation-intensive applications can lead to high overhead and large recording sizes.
+- For JMC users, the JFR allocation events are `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB` for Java 8+, `jdk.ObjectAllocationSample` for Java 16+
+
 
 | Engine | Environment Variable | System Property |
 |--------|---------------------|-----------------|
-| **Datadog** (default) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_ALLOC_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.alloc.enabled=true` |
-| **JFR** (Java 8) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
-| **JFR** (Java 16) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationSample` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationSample` |
+| **Datadog** (default on Java 11.0.23+, 17.0.11+, 21.0.3+, 22+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_ALLOC_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.alloc.enabled=true` |
+| **JFR** (Java 8+) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
+| **JFR** (Java 16+) | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationSample` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationSample` |
 
-**Note**: On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications. Alternatively for JFR, you can enable the following events in your `jfp` override template file. [Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
 
 ```
-#Java8
+#Java 8+
 jdk.ObjectAllocationInNewTLAB#enabled=true
 jdk.ObjectAllocationOutsideTLAB#enabled=true
 
-#Java16
+#Java 16+
 jdk.ObjectAllocationSample#enabled=true
 ```
-
 
 ### Live heap profiling
 
@@ -129,7 +127,7 @@ To enable the heap histogram metrics, start your application with one of the fol
 |---------------------|-----------------|
 | `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` | `-Ddd.profiling.heap.histogram.enabled=true` |
 
-This data is collected when the JVM performs a Full Garbage Collection cycle and may only appear intermittently or not at all if your service does not have significant memory pressure.
+This data is collected when the JVM performs a Full Garbage Collection cycle and may only appear intermittently or not at all if your service does not have significant memory pressure. For more information, see [Diagnosing and solving memory leaks][4].
 
 ### Trace to profiling integration
 
@@ -201,7 +199,8 @@ If your system properties contain sensitive information such as user names or pa
 jdk.InitialSystemProperty#enabled=false
 ```
 
-[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+See following section to learn how to use override templates
+
 
 ### Creating and using a JFR template override file
 
@@ -372,3 +371,4 @@ If your vendor is not on the list, [open a support ticket][2], as other vendors 
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[4]: /profiler/guide/solve-memory-leaks/

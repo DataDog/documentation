@@ -35,12 +35,12 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - I/O profiling
 
 
-| JDK Version | CPU | Wallclock | Allocation | Live Heap |
-|-------------|:---:|:---------:|:----------:|:---------:|
-| OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ | ✓ | ✓ | ✓ | ✓ |
-| Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+ | ✓ | ✓ | ✓ | ✓ |
-| OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ | ✓ | ✓ | ✓ | ✓ |
-| Azul Platform Prime 23.05.0.0+ | ✓ | ✓ | ✓ | ✓ |
+| JDK Distribution | Minimum Version | Notes |
+|------------------|-----------------|-------|
+| OpenJDK | 8u352+, 11.0.17+, 17.0.5+, 21+ | Includes builds from Amazon Corretto, Azul Zulu, Eclipse Temurin, BellSoft Liberica, and other OpenJDK-based distributions |
+| Oracle JDK | 8u351+, 11.0.17+, 17.0.5+, 21+ | |
+| OpenJ9 JDK | 8u372+, 11.0.18+, 17.0.6+ | Includes Eclipse OpenJ9, IBM JDK, and IBM Semeru Runtime |
+| Azul Platform Prime | 23.05.0.0+ | |
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -63,6 +63,8 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 {{< /tabs >}}
 
 - All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
+
+- The profiler supports only actively maintained LTS JDK versions and the most recent General Availability (GA) JDK releases.
 
 - Java Profiler is not supported on serverless environments.
 
@@ -127,31 +129,25 @@ java \
 
 Optional: Set up [Source Code Integration][5] to connect your profiling data with your Git repositories.
 
-5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6].
+4. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6].
 
-6. For more information on available profile types, see [Profile Types][11].
+5. For more information on available profile types, see [Profile Types][11].
 
 **Note**: For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Native Image][8].
 
 
 ## Configuration
 
-You can configure the profiler using the following environment variables:
+In addition to the environment, service, and version variables shown in the installation steps, you can apply custom tags to uploaded profiles with `DD_TAGS` (a comma-separated list of `<key>:<value>` pairs such as `layer:api, team:intake`).
 
-| Environment variable                             | Type          | Description                                                                                      |
-| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
-| `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
-| `DD_ENV`                                         | String        | The [environment][7] name, for example: `production`. |
-| `DD_SERVICE`                                     | String        | The [service][7] name, for example, `web-backend`. |
-| `DD_VERSION`                                     | String        | The [version][7] of your service. |
-| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
+For additional configuration options, refer the [Configuration reference][10] in the troubleshooting guide.
+
 
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][9] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-For additional configuration options and troubleshooting guidance, see [Java Profiler Troubleshooting][10].
+Facing issues with while enabling profiler or need troubleshooting guidance? See the [Java Profiler Troubleshooting][12] guide.
 
 ## Further Reading
 
@@ -166,6 +162,7 @@ For additional configuration options and troubleshooting guidance, see [Java Pro
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /profiler/enabling/graalvm/
 [9]: /getting_started/profiler/
-[10]: /profiler/profiler_troubleshooting/java/
+[10]: /profiler/profiler_troubleshooting/java/#configuration-reference
 [11]: /profiler/profile_types/?tab=java
+[12]: /profiler/profiler_troubleshooting/java/
 

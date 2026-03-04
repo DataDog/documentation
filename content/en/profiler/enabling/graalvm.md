@@ -59,13 +59,9 @@ After a couple of minutes, your profiles appear on the [Datadog APM > Profiler p
 
 ## Configuration
 
-| Environment variable              | Description                                                              |
-|-----------------------------------|--------------------------------------------------------------------------|
-| `DD_PROFILING_ENABLED`            | Set to `true` to enable the profiler.                                    |
-| `DD_PROFILING_DIRECTALLOCATION_ENABLED` | Set to `true` to enable allocation profiling.                      |
-| `DD_SERVICE`                      | The [service][5] name.                                                   |
-| `DD_ENV`                          | The [environment][5] name.                                               |
-| `DD_VERSION`                      | The [version][5] of your service.                                        |
+In addition to the environment, service, and version variables shown in the installation steps, you can apply custom tags to uploaded profiles with `DD_TAGS` (a comma-separated list of `<key>:<value>` pairs such as `layer:api, team:intake`).
+
+For profile type configuration options, see the [Configuration reference][7] in the Java profiler troubleshooting guide.
 
 ## Limitations
 
@@ -86,4 +82,5 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: https://app.datadoghq.com/profiling
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /getting_started/profiler/
+[7]: /profiler/profiler_troubleshooting/java/#configuration-reference
 
