@@ -66,7 +66,7 @@ PR Gates offers the following rule types:
 {{< tabs >}}
 {{% tab "Static Code Analysis (SAST)" %}}
 
-You can create rules to block code changes from being merged when a pull request's modified lines introduce at least one new code vulnerability or code quality violation of a certain severity. When defining conditions, you can also select **Filter out findings identified as false positives by Bits AI** to exclude findings that Bits AI has identified as false positives.
+You can create rules to block code changes from being merged when a pull request's modified lines introduce at least one new code vulnerability or code quality violation of a certain severity.
 
 {{< img src="pr_gates/setup/static_analysis_3.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
 
