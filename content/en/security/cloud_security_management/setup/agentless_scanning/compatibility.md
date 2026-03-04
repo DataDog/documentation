@@ -6,9 +6,7 @@ aliases:
 
 ## Availability
 
-Agentless Scanning is supported on AWS, Azure, and GCP. Oracle Cloud Infrastructure (OCI) is not yet supported.
-
-This feature is available in all commercial Datadog data centers. GovCloud is not supported.
+Agentless Scanning is supported on AWS, Azure, GCP, and OCI.
 
 The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
 

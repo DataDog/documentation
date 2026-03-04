@@ -745,6 +745,20 @@
     "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
     "summary": "List AWS cloud authentication persona mappings"
   },
+  "CreateAWSCloudAuthPersonaMapping": {
+    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
+    "summary": "Create an AWS cloud authentication persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
+  },
+  "DeleteAWSCloudAuthPersonaMapping": {
+    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
+    "summary": "Delete an AWS cloud authentication persona mapping"
+  },
+  "GetAWSCloudAuthPersonaMapping": {
+    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
+    "summary": "Get an AWS cloud authentication persona mapping"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
@@ -2535,6 +2549,18 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "QueryProductAnalyticsScalar": {
+    "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
+    "summary": "Compute scalar analytics",
+    "request_description": "",
+    "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
+  "QueryProductAnalyticsTimeseries": {
+    "description": "Compute timeseries analytics results for Product Analytics data.\nReturns time-bucketed values for charts and trend analysis.\nThe `compute.interval` field (milliseconds) is required for time bucketing.",
+    "summary": "Compute timeseries analytics",
+    "request_description": "",
+    "request_schema_description": "Request for computing analytics results (scalar or timeseries)."
+  },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
     "summary": "Query event filtered users",
@@ -3751,6 +3777,10 @@
     "description": "Lists all degradations for the organization. Optionally filter by status and page.",
     "summary": "List degradations"
   },
+  "ListMaintenances": {
+    "description": "Lists all maintenances for the organization. Optionally filter by status and page.",
+    "summary": "List maintenances"
+  },
   "DeleteStatusPage": {
     "description": "Deletes a status page by its ID.",
     "summary": "Delete status page"
@@ -3806,6 +3836,22 @@
   "UpdateDegradation": {
     "description": "Updates an existing degradation's attributes.",
     "summary": "Update degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateMaintenance": {
+    "description": "Schedules a new maintenance.",
+    "summary": "Schedule maintenance",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetMaintenance": {
+    "description": "Retrieves a specific maintenance by its ID.",
+    "summary": "Get maintenance"
+  },
+  "UpdateMaintenance": {
+    "description": "Updates an existing maintenance's attributes.",
+    "summary": "Update maintenance",
     "request_description": "",
     "request_schema_description": ""
   },

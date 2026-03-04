@@ -18,7 +18,7 @@ further_reading:
 site_support_id: otlp_agentless
 ---
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP traces intake endpoint is in Preview. To request access, contact your account representative.
+  The Datadog OTLP traces intake endpoint is in Preview. To request access, contact your Customer Success Manager.
 {{< /callout >}}
 
 ## Overview
@@ -199,7 +199,7 @@ service:
 If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates one of the following issues:
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP traces intake endpoint.
-   **Solution**: To request access, contact your account representative.
+   **Solution**: To request access, contact your Customer Success Manager.
 - The `dd-otlp-source` header is missing or has an incorrect value.
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 - The endpoint URL is incorrect for your organization.

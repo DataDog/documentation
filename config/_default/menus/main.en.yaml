@@ -882,11 +882,16 @@ menu:
       parent: otel_guides
       weight: 1002
       identifier: otel_guides_otlp_histogram_heatmaps
+    - name: Instrument Unsupported Runtimes
+      url: /opentelemetry/guide/instrument_unsupported_runtimes
+      parent: otel_guides
+      weight: 1003
+      identifier: otel_guides_instrument_unsupported_runtimes
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 1003
+      weight: 1004
     - name: Migrate to OTel Collector v0.120.0+
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
@@ -932,139 +937,160 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
-    - name: Developers
-      url: developers/
+    - name: Client SDKs
+      url: client_sdks/
+      pre: building-block
+      identifier: sdk
+      parent: essentials_heading
+      weight: 60000
+    - name: Setup
+      url: client_sdks/setup/
+      parent: sdk
+      identifier: sdk_setup
+      weight: 1
+    - name: Advanced Configuration
+      url: client_sdks/advanced_configuration/
+      parent: sdk
+      identifier: sdk_advanced_configuration
+      weight: 2
+    - name: Data Collected
+      url: client_sdks/data_collected/
+      parent: sdk
+      identifier: sdk_data_collected
+      weight: 3
+    - name: Extend Datadog
+      url: extend/
       pre: dev-code
       identifier: dev_tools
       parent: essentials_heading
       weight: 70000
     - name: Authorization
-      url: developers/authorization/
+      url: extend/authorization/
       parent: dev_tools
       identifier: dev_tools_authorization
       weight: 1
     - name: OAuth2 in Datadog
-      url: developers/authorization/oauth2_in_datadog/
+      url: extend/authorization/oauth2_in_datadog/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_in_datadog
       weight: 101
     - name: Authorization Endpoints
-      url: developers/authorization/oauth2_endpoints/
+      url: extend/authorization/oauth2_endpoints/
       parent: dev_tools_authorization
       identifier: dev_tools_authorization_oauth2_endpoints
       weight: 102
     - name: DogStatsD
-      url: developers/dogstatsd/
+      url: extend/dogstatsd/
       parent: dev_tools
       identifier: dev_tools_dogstatsd
       weight: 2
     - name: Datagram Format
       identifier: dev_tools_dogstatsd_datagram_format
-      url: developers/dogstatsd/datagram_shell
+      url: extend/dogstatsd/datagram_shell
       parent: dev_tools_dogstatsd
       weight: 201
     - name: Unix Domain Socket
       identifier: dev_tools_dogstatsd_unix_socket
-      url: /developers/dogstatsd/unix_socket
+      url: /extend/dogstatsd/unix_socket
       parent: dev_tools_dogstatsd
       weight: 202
     - name: High Throughput Data
       identifier: dev_tools_dogstatsd_high_throughput
-      url: developers/dogstatsd/high_throughput/
+      url: extend/dogstatsd/high_throughput/
       parent: dev_tools_dogstatsd
       weight: 203
     - name: Data Aggregation
       identifier: dev_tools_dogstatsd_data_agregation
-      url: developers/dogstatsd/data_aggregation/
+      url: extend/dogstatsd/data_aggregation/
       parent: dev_tools_dogstatsd
       weight: 204
     - name: DogStatsD Mapper
       identifier: dev_tools_dogstatsd_mapper
-      url: developers/dogstatsd/dogstatsd_mapper/
+      url: extend/dogstatsd/dogstatsd_mapper/
       parent: dev_tools_dogstatsd
       weight: 205
     - name: Custom Checks
-      url: developers/custom_checks/
+      url: extend/custom_checks/
       parent: dev_tools
       identifier: custom_checks
       weight: 3
     - name: Writing a Custom Agent Check
       identifier: dev_tools_write_agent_check
-      url: developers/custom_checks/write_agent_check/
+      url: extend/custom_checks/write_agent_check/
       parent: custom_checks
       weight: 301
     - name: Writing a Custom OpenMetrics Check
       identifier: dev_tools_custom_checks_prometheus
-      url: developers/custom_checks/prometheus/
+      url: extend/custom_checks/prometheus/
       parent: custom_checks
       weight: 302
     - name: Integrations
-      url: developers/integrations/
+      url: extend/integrations/
       parent: dev_tools
       identifier: dev_tools_integrations
       weight: 4
     - name: Build an Integration with Datadog
       identifier: dev_tools_integrations_build
-      url: developers/integrations/build_integration/
+      url: extend/integrations/build_integration/
       parent: dev_tools_integrations
       weight: 401
     - name: Create an Agent-based Integration
       identifier: dev_tools_integrations_agent
-      url: developers/integrations/agent_integration/
+      url: extend/integrations/agent_integration/
       parent: dev_tools_integrations
       weight: 402
     - name: Create an API-based Integration
       identifier: dev_tools_integrations_api
-      url: developers/integrations/api_integration/
+      url: extend/integrations/api_integration/
       parent: dev_tools_integrations
       weight: 403
     - name: Create a Log Pipeline
       identifier: dev_tools_integrations_log
-      url: developers/integrations/log_pipeline/
+      url: extend/integrations/log_pipeline/
       parent: dev_tools_integrations
       weight: 404
     - name: Integration Assets Reference
       identifier: dev_tools_integrations_check_references
-      url: developers/integrations/check_references/
+      url: extend/integrations/check_references/
       parent: dev_tools_integrations
       weight: 405
     - name: Build a Marketplace Offering
-      url: developers/integrations/marketplace_offering/
+      url: extend/integrations/marketplace_offering/
       parent: dev_tools_integrations
       identifier: dev_tools__integrations_marketplace_offering
       weight: 406
     - name: Create an Integration Dashboard
       identifier: dev_tools_integrations_dashboard
-      url: developers/integrations/create-an-integration-dashboard
+      url: extend/integrations/create-an-integration-dashboard
       parent: dev_tools_integrations
       weight: 407
     - name: Create a Monitor Template
       identifier: dev_tools_integrations_monitor_template
-      url: developers/integrations/create-an-integration-monitor-template
+      url: extend/integrations/create-an-integration-monitor-template
       parent: dev_tools_integrations
       weight: 408
     - name: Create a Cloud SIEM Detection Rule
       identifier: dev_tools_integrations_cloud_siem_detection_rule
-      url: developers/integrations/create-a-cloud-siem-detection-rule
+      url: extend/integrations/create-a-cloud-siem-detection-rule
       parent: dev_tools_integrations
       weight: 409
     - name: Install Agent Integration Developer Tool
       identifier: dev_tools_integrations_install_developer_tool
-      url: developers/integrations/python/
+      url: extend/integrations/python/
       parent: dev_tools_integrations
       weight: 410
     - name: Service Checks
-      url: developers/service_checks/
+      url: extend/service_checks/
       parent: dev_tools
       identifier: dev_tools_service_check
       weight: 6
     - name: "Submission - Agent Check "
-      url: developers/service_checks/agent_service_checks_submission/
+      url: extend/service_checks/agent_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_agent_check
       weight: 601
     - name: Submission - DogStatsD
-      url: developers/service_checks/dogstatsd_service_checks_submission/
+      url: extend/service_checks/dogstatsd_service_checks_submission/
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_dogstatsd
       weight: 602
@@ -1074,17 +1100,17 @@ menu:
       identifier: dev_tools_service_check_api
       weight: 603
     - name: Community
-      url: developers/community/
+      url: extend/community/
       parent: dev_tools
       identifier: dev_community
       weight: 7
     - name: Libraries
       identifier: dev_community_libraries
-      url: developers/community/libraries/
+      url: extend/community/libraries/
       parent: dev_community
       weight: 701
     - name: Guides
-      url: developers/guide/
+      url: extend/guide/
       parent: dev_tools
       identifier: dev_tools_guides
       weight: 8
@@ -1398,24 +1424,24 @@ menu:
       identifier: bits_ai_sre
       parent: bits_ai
       weight: 1
-    - name: Investigate issues
+    - name: Investigate Issues
       url: bits_ai/bits_ai_sre/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 100
-    - name: Remediate issues
-      url: bits_ai/bits_ai_sre/remediate_issues
-      identifier: bits_ai_sre_remediate_issues
+    - name: Take Action
+      url: bits_ai/bits_ai_sre/take_action
+      identifier: bits_ai_sre_take_action
       parent: bits_ai_sre
       weight: 200
-    - name: Bits AI SRE integrations and settings
+    - name: Bits AI SRE Integrations and Settings
       url: bits_ai/bits_ai_sre/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
       weight: 300
-    - name: Help Bits learn
-      url: bits_ai/bits_ai_sre/help_bits_learn
-      identifier: bits_ai_sre_learn
+    - name: Knowledge Sources
+      url: bits_ai/bits_ai_sre/knowledge_sources
+      identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
       weight: 400
     - name: Chat with Bits AI SRE
@@ -1433,9 +1459,9 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_setup
       weight: 200
-    - name: Chat with Bits AI
-      url: bits_ai/chat_with_bits_ai
-      identifier: bits_ai_chat_with_bits_ai
+    - name: Bits Assistant
+      url: bits_ai/bits_assistant
+      identifier: bits_ai_bits_assistant
       parent: bits_ai
       weight: 3
     - name: MCP Server
@@ -2527,11 +2553,16 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 207
+    - name: Variables
+      url: incident_response/incident_management/setup_and_configuration/variables
+      parent: incidents_settings
+      identifier: incidents_settings_variables
+      weight: 208
     - name: Integrations
       url: incident_response/incident_management/setup_and_configuration/integrations
       parent: incidents_settings
       identifier: incidents_integrations
-      weight: 208
+      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -2563,21 +2594,21 @@ menu:
       parent: oncall
       identifier: oncall_teams
       weight: 1
-    - name: Trigger a Page
-      url: incident_response/on-call/triggering_pages/
+    - name: Pages
+      url: incident_response/on-call/pages/
       parent: oncall
-      identifier: oncall_triggering_pages
+      identifier: oncall_pages
       weight: 2
     - name: Live Call Routing
-      url: incident_response/on-call/triggering_pages/live_call_routing
+      url: incident_response/on-call/pages/live_call_routing/
       identifier: oncall_live_call_routing
-      parent: oncall_triggering_pages
-      weight: 201
+      parent: oncall_pages
+      weight: 1
     - name: Cross-org Paging
-      url: incident_response/on-call/cross_org_paging
+      url: incident_response/on-call/pages/cross_org_paging/
       identifier: oncall_cross_org_paging
-      parent: oncall_triggering_pages
-      weight: 202
+      parent: oncall_pages
+      weight: 2
     - name: Routing Rules
       url: incident_response/on-call/routing_rules/
       parent: oncall
@@ -2593,7 +2624,7 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
-    - name: Automations
+    - name: Handover automation
       url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
@@ -4183,21 +4214,26 @@ menu:
       parent: tracing_trace_pipeline
       identifier: tracing_adaptive_sampling
       weight: 403
+    - name: Processing Pipelines
+      url: tracing/trace_pipeline/processing_pipelines/
+      parent: tracing_trace_pipeline
+      identifier: tracing_processing_pipelines
+      weight: 404
     - name: Generate Metrics
       url: tracing/trace_pipeline/generate_metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_generate_metrics
-      weight: 404
+      weight: 405
     - name: Trace Retention
       url: tracing/trace_pipeline/trace_retention/
       parent: tracing_trace_pipeline
       identifier: tracing_retention
-      weight: 405
+      weight: 406
     - name: Usage Metrics
       url: tracing/trace_pipeline/metrics/
       parent: tracing_trace_pipeline
       identifier: tracing_pipeline_metrics
-      weight: 406
+      weight: 407
     - name: Correlate Traces with Other Telemetry
       url: tracing/other_telemetry/
       parent: tracing
@@ -4805,6 +4841,21 @@ menu:
       parent: dbm_setup_mongodb
       identifier: dbm_troubleshooting_mongodb
       weight: 703
+    - name: Setting Up ClickHouse
+      url: database_monitoring/setup_clickhouse/
+      parent: dbm
+      identifier: dbm_setup_clickhouse
+      weight: 9
+    - name: Self-hosted
+      url: database_monitoring/setup_clickhouse/selfhosted
+      parent: dbm_setup_clickhouse
+      identifier: dbm_setup_clickhouse_selfhosted
+      weight: 901
+    - name: ClickHouse Cloud
+      url: database_monitoring/setup_clickhouse/cloud
+      parent: dbm_setup_clickhouse
+      identifier: dbm_setup_clickhouse_cloud
+      weight: 902
     - name: Setting Up Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm
@@ -4819,7 +4870,7 @@ menu:
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
       identifier: dbm_connect_dbm_and_apm
-      weight: 9
+      weight: 10
     - name: Data Collected
       url: database_monitoring/data_collected
       parent: dbm
@@ -4938,6 +4989,16 @@ menu:
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: ELT Integrations
+      url: data_observability/quality_monitoring/elt
+      identifier: elt_integrations
+      parent: quality_monitoring
+      weight: 275000
+    - name: Fivetran
+      url: data_observability/quality_monitoring/elt/fivetran
+      identifier: elt_integrations_fivetran
+      parent: elt_integrations
+      weight: 1000000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
@@ -5004,6 +5065,11 @@ menu:
       identifier: jobs_monitoring_dataproc
       parent: data_jobs
       weight: 600000
+    - name: AWS Glue
+      url: data_observability/jobs_monitoring/glue
+      identifier: jobs_monitoring_glue
+      parent: data_jobs
+      weight: 650000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
@@ -5185,7 +5251,7 @@ menu:
       identifier: llm_obs_experiments_analyzing_results
       weight: 503
     - name: Advanced Experiment Runs
-      url: llm_observability/experiments/advanced_runs 
+      url: llm_observability/experiments/advanced_runs
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_advanced_runs
       weight: 504
@@ -5194,21 +5260,31 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 505
+    - name: Prompt Optimization
+      url: llm_observability/experiments/prompt_optimization
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_prompt_optimization
+      weight: 506
+    - name: MCP Server
+      url: llm_observability/mcp_server
+      parent: llm_obs
+      identifier: llm_obs_mcp_server
+      weight: 6
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 6
+      weight: 7
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 7
+      weight: 8
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 8
+      weight: 9
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5692,26 +5768,31 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_android
       weight: 101
+    - name: Angular
+      url: feature_flags/client/angular
+      parent: feature_flags_client
+      identifier: feature_flags_client_angular
+      weight: 102
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 102
+      weight: 103
     - name: JavaScript
       url: feature_flags/client/javascript
       parent: feature_flags_client
       identifier: feature_flags_client_javascript
-      weight: 103
+      weight: 104
     - name: React
       url: feature_flags/client/react
       parent: feature_flags_client
       identifier: feature_flags_client_react
-      weight: 104
+      weight: 105
     - name: React Native
       url: feature_flags/client/reactnative
       parent: feature_flags_client
       identifier: feature_flags_client_react_native
-      weight: 105
+      weight: 106
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -7311,7 +7392,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_without_infrastructure_monitoring
       weight: 106
-    - name: Deploy via Cloud Integrations
+    - name: Deploy using Cloud Integrations
       url: security/cloud_security_management/setup/cloud_integrations
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
@@ -7942,10 +8023,30 @@ menu:
       identifier: synthetics_notifications
       weight: 10
     - name: Template Variables
-      url: synthetics/notifications/template_variables
+      url: synthetics/notifications/template_variables/
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
       weight: 1001
+    - name: Browser
+      url: synthetics/notifications/template_variables/browser/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_browser
+      weight: 100101
+    - name: Mobile
+      url: synthetics/notifications/template_variables/mobile/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_mobile
+      weight: 100102
+    - name: Multistep API
+      url: synthetics/notifications/template_variables/multistep/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_multistep
+      weight: 100103
+    - name: API
+      url: synthetics/notifications/template_variables/api/
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_api
+      weight: 100104
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
@@ -9008,7 +9109,7 @@ menu:
       weight: 8
     - name: Controls
       identifier: account_management_governance_console_controls
-      url: account_management/governance_console/controls 
+      url: account_management/governance_console/controls
       parent: account_management_governance_console
       weight: 801
     - name: Multi-Factor Authentication

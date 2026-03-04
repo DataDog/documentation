@@ -36,6 +36,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [API Gateway][3]                   | [Enable Amazon API Gateway logs][4]                                                                            | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [AppSync][64]                      | [Enable AWS AppSync Logs][65]                                                                                  | [Manual][65] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | Batch                              | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                  |
+| [Bedrock Agentcore][74]            | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [Cloudfront][6]                    | [Enable Amazon CloudFront logs][7]                                                                             | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] and [automatic](#automatically-set-up-triggers) log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
 | [CodeBuild][66]                    | [Enable AWS CodeBuild logs][67]                                                                                | [Manual][67] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
@@ -46,9 +47,11 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [ECS][16]                          | `-`                                                                                                            | [Use the Docker Agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [IoT Core][74]                     | [Enable Amazon IoT Core logs][75]                                                                              | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                         | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [PCS][75]                          | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [RDS][23]                          | [Enable Amazon RDS logs][24]                                                                                   | [Manual][25] log collection.                                                                                                |
 | [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | Redshift Serverless                | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
@@ -85,6 +88,7 @@ The following sources and locations are supported:
 | Application ELB Access Logs | S3             |
 | AppSync Logs                | CloudWatch     |
 | Batch                       | CloudWatch     |
+| Bedrock Agentcore Logs      | S3, CloudWatch |
 | Classic ELB Access Logs     | S3             |
 | CloudFront Access Logs      | S3             |
 | Cloudtrail Logs             | S3, CloudWatch |
@@ -96,7 +100,9 @@ The following sources and locations are supported:
 | EKS Container Insights Logs | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
+| IoT Core Logs                    | CloudWatch     |
 | Network Firewall Logs       | S3, CloudWatch |
+| PCS Logs                    | CloudWatch     |
 | Redshift Logs               | S3, Cloudwatch |
 | Redshift Serverless Logs    | CloudWatch     |
 | RDS Logs                    | CloudWatch     |
@@ -136,12 +142,16 @@ The following sources and locations are supported:
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
+    "iot:GetV2LoggingOptions",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
     "lambda:List*",
     "logs:DeleteSubscriptionFilter",
+    "logs:DescribeDeliveries",
+    "logs:DescribeDeliverySources",
     "logs:DescribeLogGroups",
     "logs:DescribeSubscriptionFilters",
+    "logs:GetDeliveryDestination",
     "logs:PutSubscriptionFilter",
     "network-firewall:DescribeLoggingConfiguration",
     "network-firewall:ListFirewalls",
@@ -186,13 +196,17 @@ The following sources and locations are supported:
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
     | `logs:DescribeLogGroups`                                    | Describe CloudWatch log groups.                                              |
+    | `logs:DescribeDeliveries`                                   | Describe CloudWatch log deliveries.                                          |
+    | `logs:DescribeDeliverySources`                              | Describe CloudWatch log delivery sources.                                    |
     | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
+    | `logs:GetDeliveryDestination`                               | Get a CloudWatch log delivery destination.                                   |
     | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall.                                 |
     | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls.                                         |
     | `rds:DescribeDBClusters`                                    | List all RDS clusters.                                                       |
@@ -434,3 +448,7 @@ You can also exclude or send only those logs that match a specific pattern by us
 [71]: /integrations/amazon-documentdb/#send-logs-to-datadog
 [72]: /integrations/amazon-vpn/#enable-logging
 [73]: /integrations/amazon_route53/#enable-route53-resolver-query-logging
+[74]: /integrations/amazon-iot/
+[75]: /integrations/amazon-iot/#enable-logging
+[74]: /integrations/amazon-bedrock/
+[75]: /integrations/amazon-pcs/
