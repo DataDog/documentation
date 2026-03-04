@@ -52,6 +52,8 @@ You can configure PR Gates rules for the following categories. Please note that 
 | [**Software Composition Analysis**][2] | - Library vulnerabilities<br/> - Library license violations |
 | [**Code Coverage**][3] | - Total code coverage<br/> - Patch code coverage |
 | [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities |
+| [**Secret Scanning**][10] | - Leaked secrets |
+| [**New Flaky Tests**][11] | - New flaky tests |
 
 After creating PR Gates rules, Datadog will automatically create checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
@@ -91,6 +93,20 @@ You can create rules to block code changes from being merged when a pull request
 {{< img src="pr_gates/setup/iac.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
+
+{{% tab "Secret Scanning" %}}
+You can create rules to block code changes from being merged when a pull request's modified lines introduce at least one new leaked secret of a certain severity.
+
+{{< img src="pr_gates/setup/secret_scanning.png" alt="A PR Gate rule that fails when one or more critical or high severity leaked secrets are detected in the repository" style="width:80%" >}}
+
+{{% /tab %}}
+
+{{% tab "New Flaky Tests" %}}
+You can create rules to block code changes from being merged when a pull request introduces at least one new flaky test.
+
+{{< img src="pr_gates/setup/flaky_tests.png" alt="A PR Gate rule that fails when a pull request introduces at least one new flaky test" style="width:80%" >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 To create a PR Gate rule, see the [Setup documentation][7]. 
@@ -116,3 +132,5 @@ You can see all of the rules defined by the organization.
 [7]: /pr_gates/setup/
 [8]: https://app.datadoghq.com/ci/pr-gates
 [9]: /monitors/
+[10]: /security/code_security/secret_scanning/
+[11]: /tests/flaky_tests/
