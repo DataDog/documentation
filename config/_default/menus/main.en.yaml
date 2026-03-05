@@ -7356,6 +7356,11 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_enable
       weight: 10002
+    - name: Update Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning/update
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_update
+      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
@@ -7491,6 +7496,11 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
+    - name: Agentless Scanning
+      url: security/cloud_security_management/troubleshooting/agentless_scanning
+      parent: csm_troubleshooting
+      identifier: csm_troubleshooting_agentless_scanning
+      weight: 1203
     - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
