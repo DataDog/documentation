@@ -108,7 +108,7 @@ The following values are automatically applied when you set `indexer.podSize` in
 
 {{% collapse-content title="Ingest API configuration per tier" level="h3" expanded=false %}}
 
-The following values are automatically applied when you set `indexer.podSize` in the Helm chart. See the [Ingest API configuration][2] reference for details on each parameter.
+The following values are automatically applied when you set `indexer.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Ingest API configuration][2].
 
 | Size | max_queue_memory_usage | max_queue_disk_usage |
 |------|------------------------|----------------------|
