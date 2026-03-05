@@ -52,56 +52,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
    <div class="alert alert-info">Requires Agent version 7.71 or later.</div>
 
-   Set `process_collect_all: true` in `datadog.yaml` to have the Agent automatically collect log files from processes running on the host:
-
-   ```yaml
-   logs_enabled: true
-   logs_config:
-     process_collect_all: true
-   ```
-
-   You can also enable this during Agent installation by passing `DD_LOGS_CONFIG_PROCESS_COLLECT_ALL=true` to the install script:
-
-   ```shell
-   DD_API_KEY=<YOUR_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_LOGS_CONFIG_PROCESS_COLLECT_ALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-   ```
-
-   This sets both `logs_enabled: true` and `process_collect_all: true` in a single step.
-
-   To allow the Agent to access log files without manually granting file permissions, enable privileged logs (requires Agent 7.72+). Add the following to `system-probe.yaml`:
-
-   ```yaml
-   privileged_logs:
-     enabled: true
-   ```
-
-   With install script version 1.42.0 or later, privileged logs is automatically enabled when `DD_LOGS_CONFIG_PROCESS_COLLECT_ALL=true` is set.
-
-   **Filter collected log files**
-
-   <div class="alert alert-info">Workload filtering requires Agent version 7.73 or later.</div>
-
-   To exclude specific processes or log files from collection, add [CEL-based][6] workload filter rules to `datadog.yaml`:
-
-   ```yaml
-   cel_workload_exclude:
-     - products: ["logs"]
-       rules:
-         processes:
-           - "process.name == 'mysql'"
-           - "process.name == 'nginx' && process.log_file.contains('error.log')"
-           - "process.log_file.startsWith('/var/log/noisy/')"
-   ```
-
-   Supported filter expressions:
-
-   | Expression | Description |
-   |---|---|
-   | `process.name == '<NAME>'` | Match by process name |
-   | `process.log_file.contains('<SUBSTRING>')` | Match by substring in the log file path |
-   | `process.log_file.startsWith('<PREFIX>')` | Match by log file path prefix |
-
-   Combine expressions with `&&` (AND) and `||` (OR) operators.
+   Enable process-based log discovery to have the Agent automatically collect log files from processes running on the host. This removes the need to configure each log source individually. See [Host Agent Log collection - Automatic collection][6] for full configuration details, including privileged log access and workload filtering.
 
    **Manual collection**
 
@@ -112,7 +63,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 [5]: /agent/logs/
-[6]: https://github.com/google/cel-spec
+[6]: /agent/logs/#automatic-collection-from-running-processes
 {{% /tab %}}
 
 {{% tab "Application" %}}
