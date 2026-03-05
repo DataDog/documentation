@@ -230,7 +230,7 @@ terraform init
 terraform apply
 ```
 
-**Note**: The Agent autodiscovery can only discover RDS instances running within the same AWS region. The `use_dbm` field in the autodiscovery configuration controls which RDS instances are discovered. In this guide, `use_dbm:true` is used, but you can replace it with any custom tag applied to your RDS instances. To monitor all RDS instances in the account and region with datadog standard integration to get high level metrics, set `tags` to an empty array in `datadog.yaml`:
+**Note**: The Agent autodiscovery can only discover RDS instances running within the same AWS region. The `use_dbm` field in the autodiscovery configuration controls which RDS instances are discovered. In this guide, `use_dbm:true` is used, but you can replace it with any custom tag applied to your RDS instances. To monitor all RDS instances in the account with database standard integration to get high level metrics, set `tags` to an empty array in `datadog.yaml`:
 
 ```yaml
 database_monitoring:
