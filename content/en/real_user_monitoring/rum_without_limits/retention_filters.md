@@ -154,7 +154,7 @@ If you have configured the SDK to sample 40% of traces, then the outcome is the 
 
 For more information, see <a href="/real_user_monitoring/rum_without_limits/retention_filters/#how-it-works">How it works</a>.</div>
 
-### Cross-product retention filters on permanent filters 
+### Cross-product retention filters on permanent filters
 
 Cross-product retention filters are also available on the <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetic Monitoring Sessions and Sessions with forced replays filters**.
 
