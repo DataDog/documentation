@@ -25,9 +25,9 @@ If no results appear after two hours:
 
 ## Deployment fails due to VPC creation restrictions
 
-If your organization uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.
+If your organization is using Terraform and uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.
 
-To fix this, use the **existing VPC** option during setup to deploy the scanner into an existing VPC. See the [enterprise networking considerations][5] section of the deployment guide.
+To fix this, use the [**custom VPC**][8] option during setup to deploy the scanner into an existing VPC instead of creating a new one.
 
 ## Scanner instances appear as vulnerable hosts
 
@@ -66,3 +66,4 @@ Agentless Scanning is not available in GovCloud because it requires [Remote Conf
 [5]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#enterprise-networking-considerations
 [6]: /security/cloud_security_management/vulnerabilities
 [7]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
