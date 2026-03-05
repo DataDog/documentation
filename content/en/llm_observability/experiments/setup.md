@@ -30,6 +30,22 @@ If you have not already set up LLM Observability:
 
    <div class="alert alert-warning">You must supply both an <code>api_key</code> and <code>app_key</code>.</div>
 
+### APM Trace correlation
+
+To correlate your Experiment spans with [APM Traces][5], run LLM Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
+
+   ```python
+   LLMObs.enable(
+       api_key="<YOUR_API_KEY>",
+       app_key="<YOUR_APP_KEY>",
+       site="datadoghq.com",
+       agentless_enabled=False,  # default — required for APM Trace correlation
+       project_name="<YOUR_PROJECT>",
+   )
+   ```
+
+If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True`, but corresponding APM spans are not generated for Experiment spans from agentless runs.
+
 ## Create a project
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
 You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist in `LLMObs.enable`.
@@ -262,3 +278,4 @@ Note: LLM Experiments traces are retained for 90 days.
 [2]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
 [4]: /llm_observability/guide/evaluation_developer_guide
+[5]: /llm_observability/monitoring/llm_observability_and_apm/
