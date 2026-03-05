@@ -230,6 +230,31 @@ The template variable `%%extra_managed_authentication_enabled%%` resolves to `tr
 
 [2]: /database_monitoring/guide/managed_authentication/?tab=rds#configure-iam-authentication
 {{% /collapse-content %}}
+{{% collapse-content title="Custom global_view_db (7.75.0+)" level="h5" id="global-view-db" %}}
+##### Custom global view database
+
+To set a custom global view database for database autodiscovery, make sure that you are using Agent version 7.75.0 or above and use the following template:
+
+``` yaml {hl_lines=["11"]}
+ad_identifiers:
+  - _dbm_postgres
+init_config:
+instances:
+  - host: "%%host%%"
+    port: "%%port%%"
+    username: datadog
+    dbm: true
+    database_autodiscovery:
+      enabled: true
+      global_view_db: "%%extra_global_view_db%%"
+    aws:
+      instance_endpoint: "%%host%%"
+      region: "%%extra_region%%"
+    tags:
+      - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
+      - "region:%%extra_region%%"
+```
+{{% /collapse-content %}}
 {{% /tab %}}
 
 {{% tab "MySQL" %}}
@@ -317,31 +342,6 @@ instances:
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
 [2]: /database_monitoring/guide/managed_authentication/?tab=rds#configure-iam-authentication
-{{% /collapse-content %}}
-{{% collapse-content title="Custom global_view_db (7.75.0+)" level="h5" id="global-view-db" %}}
-##### Custom global view database
-
-To set a custom global view database for database autodiscovery, make sure that you are using Agent version 7.75.0 or above and use the following template:
-
-``` yaml {hl_lines=["11"]}
-ad_identifiers:
-  - _dbm_postgres
-init_config:
-instances:
-  - host: "%%host%%"
-    port: "%%port%%"
-    username: datadog
-    dbm: true
-    database_autodiscovery:
-      enabled: true
-      global_view_db: "%%extra_global_view_db%%"
-    aws:
-      instance_endpoint: "%%host%%"
-      region: "%%extra_region%%"
-    tags:
-      - "dbclusteridentifier:%%extra_dbclusteridentifier%%"
-      - "region:%%extra_region%%"
-```
 {{% /collapse-content %}}
 {{% /tab %}}
 {{< /tabs >}}
