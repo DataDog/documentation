@@ -233,7 +233,7 @@ By default, the Helm chart pulls images from Google Artifact Registry (`gcr.io/d
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator chart is migrating to `registry.datadoghq.com` for both the operator image and Agent images it manages. Previously, Agent images were pulled from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To keep using the previous site-specific registries, set `useDatadogRegistry: false` in your Operator Helm `values.yaml`.
+The Datadog Operator chart is migrating to `registry.datadoghq.com` for both the operator image and Agent images it manages. Previously, Agent images were pulled from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To keep using the previous site-specific registries, set `registryMigrationMode: ""` in your Operator Helm `values.yaml`.
 
 To use a different container registry, modify `global.registry` in `datadog-agent.yaml`.
 

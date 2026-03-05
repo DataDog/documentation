@@ -89,7 +89,7 @@ clusterChecksRunner:
 
 ## Kubernetes with the Datadog Operator
 
-As of Operator chart version 2.19.0, the Datadog Operator is migrating to `registry.datadoghq.com` for both the operator image and Agent images it manages. Previously, Agent images were pulled from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To keep using the previous site-specific registries, set `useDatadogRegistry: false` in your Operator Helm `values.yaml`.
+As of Operator chart version 2.19.0, the Datadog Operator is migrating to `registry.datadoghq.com` for both the operator image and Agent images it manages. Previously, Agent images were pulled from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To keep using the previous site-specific registries, set `registryMigrationMode: ""` in your Operator Helm `values.yaml`.
 
 To update your registry while deploying the Datadog Agent (or Datadog Cluster Agent) with the Datadog Operator:
 
