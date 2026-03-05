@@ -343,8 +343,8 @@ options:
 - label: Roku
   id: roku
 
-- id: error_tracking
-  label: Error Tracking
+- label: Error Tracking
+  id: error_tracking
 
 - label: CentOS
   id: centos

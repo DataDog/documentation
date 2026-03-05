@@ -2059,6 +2059,13 @@
       "description": "Create degradation returns \"Created\" response"
     }
   ],
+  "CreateMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "_2202276054",
+      "description": "Create maintenance returns \"Created\" response"
+    }
+  ],
   "CreateStatusPage": [
     {
       "group": "status_pages",
@@ -2078,6 +2085,13 @@
       "group": "status_pages",
       "suffix": "",
       "description": "Update degradation returns \"OK\" response"
+    }
+  ],
+  "UpdateMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update maintenance returns \"OK\" response"
     }
   ],
   "UpdateStatusPage": [

@@ -1,31 +1,7 @@
----
-title: RUM Browser Data Collected
-description: "Comprehensive guide to RUM Browser SDK event types, attributes, and telemetry data—including sessions, views, resources, errors, and user actions."
-aliases:
-  - /real_user_monitoring/data_collected/
-  - /real_user_monitoring/data_collected/view/
-  - /real_user_monitoring/data_collected/resource/
-  - /real_user_monitoring/data_collected/long_task/
-  - /real_user_monitoring/data_collected/error/
-  - /real_user_monitoring/data_collected/user_action/
-  - /real_user_monitoring/browser/data_collected/
-further_reading:
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-  tag: "Blog"
-  text: "Introducing Datadog Real User Monitoring"
-- link: "/real_user_monitoring/application_monitoring/browser/advanced_configuration"
-  tag: "Documentation"
-  text: "Modifying RUM data and adding context"
-- link: "/real_user_monitoring/explorer/"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/explorer/visualize/"
-  tag: "Documentation"
-  text: "Apply visualizations on your events"
-- link: "/logs/log_configuration/attributes_naming_convention"
-  tag: "Documentation"
-  text: "Datadog standard attributes"
----
+<!--
+This partial contains data collected information for the Browser SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
 ## Overview
 
@@ -37,14 +13,14 @@ There are additional [attributes specific to a given event type](#event-specific
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Session   | 30 days   | A user session begins when a user starts browsing the web application. It contains high-level information about the user (browser, device, geo-location). It aggregates all RUM events collected during the user journey with a unique `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. |
 | View      | 30 days   | A view event is generated each time a user visits a page of the web application. While the user remains on the same page, resource, long-task, error, and action events are linked to the related RUM view with the `view.id` attribute.                       |
-| Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                              |
+| Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a web page. It includes detailed loading timing information.                                                                                                              |
 | Long Task | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
 | Error     | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                     |
 | Action    | 30 days   | RUM action events track user interactions during a user journey and can also be manually sent to monitor custom user actions.                                                                                                                                 |
 
 The following diagram illustrates the RUM event hierarchy:
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;border:none" >}}
+{% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
 ## Default attributes
 
@@ -69,20 +45,20 @@ See a complete list of [Standard Attributes][1] for RUM Browser. By default, the
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `session.id`                      | string | Randomly generated ID for each session.                                                                      |
 | `session.ip`                      | string | Client IP address. If you want to stop collecting this attribute, change the setting in your [application details][2].                                                                       |
-| `session.is_active`                      | boolean | Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.                                                                     |
+| `session.is_active`                      | Boolean | Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.                                                                     |
 | `session.type`                     | string | The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests][3] are excluded from billing. |
 | `session.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed. |
 | `session.initial_view.id`        | string | The ID of the first RUM view generated by the user. |
 | `session.initial_view.url_host`        | string | The host part of the URL. |
 | `session.initial_view.url_path`        | string | The path part of the URL. |
 | `session.initial_view.url_path_group`  | string | The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`). |
-| `session.initial_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `session.initial_view.url_query` | object | The query string parts of the URL decomposed as query params key-value attributes. |
 | `session.initial_view.url_scheme` | object | The scheme part of the URL. |
 | `session.last_view.id`        | string | The ID of the last RUM view generated by the user. |
 | `session.last_view.url_host`        | string | The host part of the URL. |
 | `session.last_view.url_path`        | string | The path part of the URL. |
 | `session.last_view.url_path_group`  | string | The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`). |
-| `session.last_view.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
+| `session.last_view.url_query` | object | The query string parts of the URL decomposed as query params key-value attributes. |
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
 ### View timing attributes
@@ -137,7 +113,7 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.url`             | string | The resource URL.                                                                                    |
 | `resource.url_host`        | string | The host part of the URL.                                                                            |
 | `resource.url_path`        | string | The path part of the URL.                                                                            |
-| `resource.url_query`       | object | The query string parts of the URL decomposed as query params key/value attributes.                   |
+| `resource.url_query`       | object | The query string parts of the URL decomposed as query params key-value attributes.                   |
 | `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                                        |
 | `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                                    |
 | `resource.provider.domain` | string | The resource provider domain.                                                                        |
@@ -216,10 +192,6 @@ Source errors include code-level information about the error. For more informati
 | `view.url_query.utm_campaign`  | string | The parameter in the URL identifying the specific marketing campaign tied to that view.              |
 | `view.url_query.utm_content`  | string | The parameter in the URL identifying the specific element a user clicked within a marketing campaign.           |
 | `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /standard-attributes/?product=browser
 [2]: /data_security/real_user_monitoring/#ip-address
