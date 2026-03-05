@@ -29,7 +29,7 @@ Datadog only reads GitHub teams. Datadog never modifies, creates, or deletes Git
 ### GitHub integration
 Ensure your Datadog organization is [connected][3] to a GitHub organization. Your GitHub integration must have the `members_read` permission to read team data.
 
-<div class="alert alert-info">GitHub Enterprise Cloud and GitHub Enterprise Server customers are supported. However, enterprise-managed teams (teams managed at the GitHub enterprise level across multiple organizations) are not supported. GitHub does not provide APIs for enterprise-managed teams. Only organization-level GitHub teams can be provisioned into Datadog.</div>
+<div class="alert alert-info">GitHub Enterprise Cloud and GitHub Enterprise Server customers are supported. However, enterprise-managed teams (teams managed at the GitHub enterprise level across multiple organizations) are not supported. Only organization-level GitHub teams can be provisioned into Datadog.</div>
 
 ### Permissions
 - To link and create teams, your Datadog user must have the `teams_manage` permission. 
