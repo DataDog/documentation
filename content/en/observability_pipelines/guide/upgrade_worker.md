@@ -279,7 +279,7 @@ Worker version 2.7.0 gives you access to the following:
 
 - [The HTTP Client destination][16]: Send logs to an HTTP Client, such as a logging platform or SIEM.
 - [Processor Groups][17]: Organize your processors into logical groups to help you manage them.
-- [Disk][18] and [memory][19] buffering options are available for destinations.
+- [Disk and memory][18] buffering options are available for destinations.
 
 #### Enhancements
 
@@ -312,15 +312,14 @@ Worker version 2.7.0 gives you access to the following:
 [15]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.7.0
 [16]: /observability_pipelines/destinations/http_client/
 [17]: /observability_pipelines/processors/#processor-groups
-[18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
-[19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#component-buffers
+[18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffers
 [20]: /observability_pipelines/processors/sample/#group-by-example
 [21]: /observability_pipelines/destinations/elasticsearch/#set-up-the-destination
 [22]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.1
 [23]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.0
 [24]: /observability_pipelines/processors/custom_processor
 [25]: /observability_pipelines/configuration/live_capture/
-[26]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[26]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffers
 [27]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.12.0
 [28]: /observability_pipelines/processors/enrichment_table/
 [29]: /observability_pipelines/destinations/http_client/

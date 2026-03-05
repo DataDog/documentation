@@ -7,4 +7,4 @@ Toggle the switch to enable **Buffering Options**. Enable a configurable buffer 
         1. Maximum disk buffer size is 500 GB.
     1. In the **Behavior on full buffer** dropdown menu, select whether you want to **block** events or **drop new events** when the buffer is full.
 
-[100]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[100]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffers
