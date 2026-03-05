@@ -20,19 +20,19 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines are designed for durability and to mitigate the impact of destinations becoming unavailable. If a destination is unavailable (for example, due to connection issues), the Observability Pipelines Worker retries to connect to the destination until the connection is reestablished or the destination times out. As a result, events accumulate in the pipeline components' internal buffers, eventually blocking the source from ingesting new events. This behavior is called **backpressure**.
+Observability Pipelines are designed for durability and to mitigate the impact when destinations are unavailable. If a destination is unavailable (for example, due to connection issues), the Observability Pipelines Worker retries its connection to the destination until the connection is reestablished or the destination times out. During this time, events accumulate in the pipeline components' internal buffers, eventually blocking the source from ingesting new events. This behavior is called **backpressure**.
 
-It is important to consider how backpressure propagates through your architecture in the event of a destination outage. For example, backpressure can block your application from sending logs to Observability Pipelines and those logs may contend for memory or disk resources needed by your service. To prevent backpressure from reaching your application, configure a destination buffer and right-size it to your pipeline's throughput, which helps the Worker absorb backpressure due to your destination being unavailable. You may also want to consider configuring the on-full buffer behavior to `drop newest`, which prevents backpressure by dropping incoming events when the buffer is full. See the [destination buffers section](#destination-buffers) for more information on configurable destination buffers.
+It is important to consider how backpressure propagates through your architecture in the event of a destination outage. For example, backpressure can block your application from sending logs to Observability Pipelines and those logs may contend for memory or disk resources needed by your service. To prevent backpressure from reaching your application, [configure a destination buffer](#choosing-buffer-types) and size it according to your pipeline's throughput, which helps the Worker absorb backpressure when the destination is unavailable. You may also want to configure the [on-full buffer behavior](#choosing-buffer-on-full-behavior) to `drop newest`, which prevents backpressure by dropping incoming events when the buffer is full. See the [destination buffers section](#destination-buffers) for more information on configurable destination buffers.
 
-All components in the Observability Pipelines Worker have an in-memory buffer to help smooth the handoff of events between components. All sources have a buffer with a capacity of 1000 events per worker thread. Sources write events to their respective downstream buffer upon ingestion. All processors have an in-memory buffer with a capacity of 100 events, which the processors consume from upstream. Source and processor buffers are not configurable.
+All components in the Observability Pipelines Worker have an in-memory buffer to help smooth the handoff of events between components. All sources have a buffer with a capacity of 1,000 events per worker thread. Sources write events to their respective downstream buffer upon ingestion. All processors have an in-memory buffer with a capacity of 100 events, which the processors consume upstream. Source and processor buffers are not configurable.
 
 ## Destination buffers
 
-By default, destinations have an in-memory buffer with a capacity of 500 events. This buffer is configurable, enabling you to control the following parameters:
+By default, destinations have an in-memory buffer with a capacity of 500 events. This buffer is configurable, enabling you to control these parameters:
 
 - **Buffer type**: Either an in-memory buffer or a disk buffer
 - **Buffer size**: The maximum byte capacity of the buffer
-- **Buffer on-full behavior**: Determines the overflow behavior of the buffer, to either block events and propagate backpressure or drop incoming events to prevent backpressure propagation.
+- **Buffer on-full behavior**: Determines the overflow behavior of the buffer, either block events and propagate backpressure or drop incoming events to prevent backpressure propagation.
 
 For each of those settings, choose the option that best aligns with your logging strategy.
 
@@ -50,7 +50,7 @@ Use a disk buffer if you need to mitigate data loss and the throughput of your p
 
 **Block (default)**: If the buffer is full, incoming events are blocked from being written to the buffer. Use this option if you want to help ensure no events are dropped.
 
-**Drop Newest**: If the buffer is full, incoming events are dropped. This allows the source to continue to ingest events and prevents backpressure from propagating back to your application. See [Using buffers with multiple destinations](#using-buffers-with-multiple-destinations) for details on how this behaves when you have multiple destinations.
+**Drop Newest**: If the buffer is full, incoming events are dropped. This allows the source to continue to ingest events and prevents backpressure from propagating back to your application. See [Using buffers with multiple destinations](#using-buffers-with-multiple-destinations) for details on how this works when you have multiple destinations.
 
 This table compares the differences between the memory and disk buffer.
 
@@ -64,9 +64,9 @@ This table compares the differences between the memory and disk buffer.
 
 ### Using buffers with multiple destinations
 
-After your events are sent through your processors, the events go through a fanout to all of your pipeline's destinations. If backpressure propagates to the fanout from any destination, **all** destinations are blocked. No additional events are sent by any destination until the blocking destination resumes sending events successfully.
+After your events are sent through your processors, the events go through a fanout to all of your pipeline's destinations. If backpressure propagates to the fanout from any destination, **all** destinations are blocked. No additional events are sent by any destination until the blocked destination resumes sending events successfully.
 
-Using the `drop_newest` on-full behavior drops incoming events when the destination's buffer is full. This prevents backpressure from propagating to the fanout from this destination, allowing your other destinations to continue ingesting events from the fanout. This can be helpful if you want to help ensure events are delivered reliably to one destination, but are okay with another destination dropping events if it becomes unavailable to prevent backpressure propagation.
+The `drop_newest` on-full behavior drops incoming events when a destination's buffer is full. This prevents backpressure from propagating to the fanout from that destination, allowing your other destinations to continue ingesting events from the fanout. This can be helpful if you want to help ensure events are delivered reliably to one destination, but are okay with another destination dropping events if it becomes unavailable to prevent backpressure propagation.
 
 ## Kubernetes persistent volumes
 
