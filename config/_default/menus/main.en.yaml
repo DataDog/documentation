@@ -4901,11 +4901,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka Messages
-      url: data_streams/messages
-      identifier: data_streams_kafka_messages
+    - name: Kafka 
+      url: data_streams/kafka
+      identifier: data_streams_kafka
       parent: data_streams
       weight: 2
+    - name: Messages 
+      url: data_streams/kafka/messages 
+      identifier: data_streams_kafka_messages
+      parent: data_streams_kafka 
+      weight: 201
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
