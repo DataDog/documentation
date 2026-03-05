@@ -153,5 +153,9 @@ origin.datadoghq.com/location:
 ```
 
 {{% /collapse-content %}}
+
+For the Helm use case Datadog provides open source helm plugin which you can install
+and use to add annotations automatically. Please check plugin repo on [Github](https://github.com/DataDog/helm-plugin).
+
 {{% /tab %}}
 {{< /tabs >}}
