@@ -160,29 +160,7 @@ Use this option if direct remote authentication is not available for you. After 
 
 ### Authentication
 
-The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through the OAuth flow (for example, on a server), you can authenticate with one of the following methods:
-
-#### Personal Access Token (recommended)
-
-If your organization has [Personal Access Tokens][24] enabled, use a PAT in the `Authorization` header. PATs are short-lived, scoped by design, and do not require an API key:
-
-{{< code-block lang="json" >}}
-{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-      "headers": {
-          "Authorization": "Bearer <YOUR_PAT>"
-      }
-    }
-  }
-}
-{{< /code-block >}}
-
-#### API key and application key
-
-Alternatively, provide a Datadog [API key and application key][3] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][3] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
 
 {{< code-block lang="json" >}}
 {
@@ -234,4 +212,3 @@ For security, use a scoped API key and application key from a [service account][
 [20]: /bits_ai/mcp_server#available-tools
 [22]: https://kiro.dev/
 [23]: /account_management/org_settings/service_accounts/
-[24]: /account_management/personal-access-tokens/
