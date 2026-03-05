@@ -1,6 +1,6 @@
 ---
 title: Auto-Instrumentation
-description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration for seamless monitoring setup."
+description: "Automatically inject RUM Browser SDK into HTML responses through web server or proxy configuration."
 code_lang: server
 type: multi-code-lang
 code_lang_weight: 2
@@ -40,5 +40,3 @@ Select a platform to start collecting RUM data on your application:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
