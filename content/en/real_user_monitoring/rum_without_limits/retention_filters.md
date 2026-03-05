@@ -148,7 +148,7 @@ If you have configured the SDK to sample 40% of traces, then the outcome is the 
 
 - 40% of ingested RUM sessions have their traces ingested on APM.
 - 60% of ingested RUM sessions with at least one error are retained.
-- 25% x 40% = 10% of these retained sessions will have their APM traces indexed.
+- 25% x 40% = 10% of these retained sessions have their APM traces indexed.
 
 <div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
 
