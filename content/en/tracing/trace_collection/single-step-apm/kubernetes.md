@@ -162,10 +162,10 @@ SSI supports multiple injection modes, which control how the injector and APM li
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
-| `auto` | Automatically selects the optimal injection method based on cluster capabilities. | Requirements vary by selected mode. |
-| `init_container` | Copies injector and APM library files into application containers using init containers. | Datadog Agent, Helm Chart, or Datadog Operator. |
-| `csi` | Mounts injector and APM library files directly into application containers using the [Datadog CSI driver][40]. Faster than init container mode, but requires the CSI driver to be enabled (disabled by default). | Datadog Agent 7.76.0+ and Datadog CSI driver 1.2.0+. Datadog Helm Chart 3.178.1+ satisfies these requirements automatically. Available as a preview. |
-| `image_volume` | Mounts injector and APM library images using the Kubernetes native [Image Volume][41] feature. Faster than init container mode and bypasses CSI driver security constraints. | Datadog Agent 7.77.0+, Datadog Helm Chart 3.178.1+, Kubernetes v1.33+, and a container runtime that supports image volumes (containerd v2.2.0+ or CRI-O v1.33+). |
+| `auto` | Automatically selects the optimal injection method based on cluster capabilities. | Requirements vary by selected mode |
+| `init_container` | Copies injector and APM library files into application containers using init containers. | Datadog Agent, Helm Chart, or Datadog Operator |
+| `csi` | Mounts injector and APM library files directly into application containers using the [Datadog CSI driver][40]. Faster than init container mode, but requires the CSI driver to be enabled (disabled by default).<br><br> This injection mode is available as a preview. | <ul><li>Datadog Agent 7.76.0+</li><li>Datadog CSI driver 1.2.0+ </li></ul><br> Datadog Helm Chart 3.178.1+ automatically satisfies these requirements.|
+| `image_volume` | Mounts injector and APM library images using the Kubernetes native [Image Volume][41] feature. Faster than init container mode and bypasses CSI driver security constraints. | <ul><li>Datadog Agent 7.77.0+</li><li>Datadog Helm Chart 3.178.1+</li><li>Kubernetes v1.33+</li><li>A container runtime that supports image volumes (containerd v2.2.0+ or CRI-O v1.33+)</li></ul> |
 
 You typically do not need to configure this setting manually. Consider adjusting it if you notice significant pod startup delays or higher-than-expected resource usage (CPU, memory) during pod initialization.
 
