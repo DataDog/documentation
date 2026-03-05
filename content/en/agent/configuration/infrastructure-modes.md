@@ -35,6 +35,7 @@ The Agent supports three infrastructure modes: `full`, `basic`, and `none`.
 
 **Note**: If the `infrastructure_mode` option is not explicitly set in the configuration file, the Agent operates in `full` mode.
 
+<!-- CONFIRM: I wonder if this should lead to this sample config file: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml. The `infrastructure_mode` option does not yet seem to be in this file, but I assume it will be there once this is GA? -->
 To change the infrastructure mode, edit or add the `infrastructure_mode` option in the main [Agent configuration file][1] and then [restart the Datadog Agent][2]:
 
 ```yaml
@@ -43,7 +44,7 @@ infrastructure_mode: <Mode>
 
 To verify the configured infrastructure mode of an Agent in [Fleet Automation][101], search or group by the `Infrastructure Mode` facet.
 
-{{< img src="agent/configuration/fleet_automation_group_by_infra_mode.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:100%" >}}
+{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:90%" >}}
 
 ### Infrastructure mode behaviors
 
@@ -51,10 +52,9 @@ To verify the configured infrastructure mode of an Agent in [Fleet Automation][1
 {{% tab "Full" %}}
 
 <!-- TODO: 
-- Confirm with author what specific use cases full mode is recommended for
-- Confirm with author what specific capabilities are included (container monitoring, Live Processes, etc.)
+- Confirm what specific use cases full mode is recommended for
+- Confirm what specific capabilities are included (container monitoring, Live Processes, etc.)
 - Confirm minimum Agent version for full mode 
-- Confirm Agent version
 -->
 
 The `full` mode requires Agent version X.xx.x or later. 
@@ -135,7 +135,7 @@ infrastructure_mode: basic
 
 The `none` mode requires Agent version 7.77.0 or later. 
 
-Datadog recommends `none` mode for Agents that do not require infrastructure monitoring (for example, Agents configured to collect only [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3]).
+Datadog recommends `none` mode for Agents that do not require infrastructure monitoring (for example, Agents configured only for [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3]).
 
 When in `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can still use custom metrics, [custom checks][4] prefixed with `custom_`, and logs-only integrations.
 
