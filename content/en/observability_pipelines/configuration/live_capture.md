@@ -64,9 +64,9 @@ If you want to use Live Capture and are using a firewall, you must add these dom
 1. After the capture is complete:
     1. Click a specific captured event to see the data that was received and sent out. You can also search for specific events in the search bar. Use the dropdown menu next to the search bar to show events based on status (`MODIFIED`, `UNMODIFIED`, `DROPPED`, and `REDUCED`).
     1. In the **Workers - Capture Execution Details** section, click **View Logs** to see the Worker logs for the capture.
-1. To see other captures for the same component, click **Captures** on the top left of the side panel.
-1. You can filter captures by capture event ID, filter query, pipeline version, or status (`in_progress` or `completed`).
-    - For the **Total Events** column, the maximum captured events per Worker is 200 when including both the input and output of an event.
+1. To see other captures for the same component, click **Captures** on the top left of the side panel. **Note**: Viewing other captures only applies if all active Workers are version 2.13 or later.
+   - You can filter captures by capture event ID, filter query, pipeline version, or status (`in_progress` or `completed`).
+   - For the **Total Events** column, the maximum captured events per Worker is 200 when including both the input and output of an event.
 
 ## Further reading
 
