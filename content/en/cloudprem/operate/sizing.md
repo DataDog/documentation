@@ -90,9 +90,9 @@ The CloudPrem Helm chart provides predefined sizing tiers through the `indexer.p
 | 6xlarge | 24 | 96 GB |
 | 8xlarge | 32 | 128 GB |
 
-{{% collapse-content title="Indexer configuration per tier" level="h3" expanded=false %}}
+{{% collapse-content title="Indexer configuration per tier" level="h4" expanded=false %}}
 
-The following values are automatically applied when you set `indexer.podSize` in the Helm chart. See the [Indexer configuration][1] reference for details on each parameter.
+The following values are automatically applied when you set `indexer.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Indexer configuration][1].
 
 | Size | split_store_max_num_bytes | split_store_max_num_splits |
 |------|---------------------------|----------------------------|
