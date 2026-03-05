@@ -953,8 +953,6 @@ menu:
       parent: sdk
       identifier: sdk_advanced_configuration
       weight: 2
-    - name: Developers
-      url: developers/
     - name: Extend Datadog
       url: extend/
       pre: dev-code
