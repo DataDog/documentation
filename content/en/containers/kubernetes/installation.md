@@ -226,12 +226,14 @@ Datadog publishes container images to the Datadog Container Registry, Google Art
 
 {{% container-images-table %}}
 
-By default, the Helm chart and Datadog Operator pull images from Google Artifact Registry (`gcr.io/datadoghq`).
+By default, the Datadog Operator chart pulls images from the Datadog Container Registry (`registry.datadoghq.com`). The Helm chart defaults to Google Artifact Registry (`gcr.io/datadoghq`) but is progressively migrating to the Datadog Container Registry.
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from another registry. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
+The Datadog Operator chart uses `registry.datadoghq.com` by default for both the operator image and Agent images it manages. To pull Agent images from Google Artifact Registry (`gcr.io/datadoghq`) instead of `registry.datadoghq.com`, set `useDatadogRegistry: false` in your Operator Helm `values.yaml`.
 
 To use a different container registry, modify `global.registry` in `datadog-agent.yaml`.
 

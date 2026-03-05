@@ -27,7 +27,7 @@ When selecting a container registry, Datadog recommends the following approach:
 
 4. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
 
-<div class="alert alert-info">The Helm chart and Datadog Operator will default to the Datadog Container Registry in a future release.</div>
+<div class="alert alert-info">The Datadog Operator chart defaults to the Datadog Container Registry as of version 2.19.0. The Helm chart is progressively migrating to the Datadog Container Registry.</div>
 
 To update your registry, update your registry values based on the type of container environment you are deploying on. You can also use a private registry, but you need to [create a pull secret][1] to pull the images.
 
@@ -89,9 +89,11 @@ clusterChecksRunner:
 
 ## Kubernetes with the Datadog Operator
 
+As of Operator chart version 2.19.0, the Datadog Operator defaults to `registry.datadoghq.com` for both the operator image and Agent images it manages. To pull Agent images from Google Artifact Registry (`gcr.io/datadoghq`) instead of `registry.datadoghq.com`, set `useDatadogRegistry: false` in your Operator Helm `values.yaml`.
+
 To update your registry while deploying the Datadog Agent (or Datadog Cluster Agent) with the Datadog Operator:
 
-1. Update the Datadog Agent manifest file to override the default registry (`gcr.io/datadoghq`). For example, with `public.ecr.aws/datadog`:
+1. Update the Datadog Agent manifest file to override the default registry (`registry.datadoghq.com`). For example, with `public.ecr.aws/datadog`:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -132,7 +134,7 @@ For more information about the Datadog Operator, see [Deploying an Agent with th
 
 ### Using another container registry with Helm
 
-You can switch from the default `gcr.io/datadoghq` registry to another registry, such as `public.ecr.aws/datadog` when installing the Operator with the Helm chart:
+You can switch from the default `registry.datadoghq.com` registry to another registry, such as `public.ecr.aws/datadog` when installing the Operator with the Helm chart:
 
 Update [`values.yaml`][6] with the new image:
 
