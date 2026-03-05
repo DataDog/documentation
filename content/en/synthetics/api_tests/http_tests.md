@@ -169,7 +169,7 @@ To perform `OR` logic in an assertion, use the `matches regex` comparator to def
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
-The response body is only returned if you have added assertions on its content and these assertions have failed. If a test contains an assertion on the response body and succeeds, the body payload drops and only a starting snippet of the response body is shown.
+The response body is only returned if you have added assertions on its content and these assertions have failed. If a test contains an assertion on the response body and succeeds, the body payload drops and only a snippet of the first 50 characters of the response body is shown.
 
 If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
