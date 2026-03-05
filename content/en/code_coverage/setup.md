@@ -454,6 +454,19 @@ If the paths in your report are relative to a different directory in your reposi
 datadog-ci coverage upload --base-path=frontend/src .
 {{< /code-block >}}
 
+### Inaccurate coverage from non-executable lines
+
+Some coverage tools include non-executable lines (such as comments, blank lines, and closing brackets) in their reports, counting them as uncovered. This can lower your coverage percentages and produce false negatives for lines that can never be executed.
+
+During upload, the CLI automatically scans your source files to identify these non-executable lines so they can be excluded from coverage calculations.
+
+File fixes support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
+
+You can control this behavior with the following options:
+
+- `--disable-file-fixes`: Disable file fixes generation entirely.
+- `--file-fixes-search-path <dir>`: Override the root directory used to scan source files. By default, the repository root is used. This is useful in monorepos or when your coverage reports only cover a subset of the codebase, as it speeds up the scan by limiting the directory tree traversed.
+
 ### Discrepancy between Datadog UI and coverage report values
 
 Datadog automatically merges coverage reports for the same commit.
