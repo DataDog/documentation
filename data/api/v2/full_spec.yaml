@@ -70924,6 +70924,42 @@ components:
         usage_type:
           $ref: '#/components/schemas/HourlyUsageType'
       type: object
+    UsageAttributionTypesAttributes:
+      description: List of usage attribution types.
+      properties:
+        values:
+          description: List of usage attribution types.
+          items:
+            description: A given usage type in a list.
+            example: infra_host
+            type: string
+          type: array
+      type: object
+    UsageAttributionTypesBody:
+      description: Usage attribution types data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageAttributionTypesAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageAttributionTypesType'
+      type: object
+    UsageAttributionTypesResponse:
+      description: Usage attribution types response.
+      properties:
+        data:
+          $ref: '#/components/schemas/UsageAttributionTypesBody'
+      type: object
+    UsageAttributionTypesType:
+      default: usage_attribution_types
+      description: Type of usage attribution types data.
+      enum:
+      - usage_attribution_types
+      type: string
+      x-enum-varnames:
+      - USAGE_ATTRIBUTION_TYPES
     UsageDataObject:
       description: Usage data.
       properties:
@@ -111259,6 +111295,42 @@ paths:
         permissions:
         - usage_read
         - billing_read
+  /api/v2/usage/usage-attribution-types:
+    get:
+      description: Get usage attribution types.
+      operationId: GetUsageAttributionTypes
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAttributionTypesResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get usage attribution types
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.

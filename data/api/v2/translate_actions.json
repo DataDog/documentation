@@ -4268,6 +4268,10 @@
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
   },
+  "GetUsageAttributionTypes": {
+    "description": "Get usage attribution types.",
+    "summary": "Get usage attribution types"
+  },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",
     "summary": "Send invitation emails",
