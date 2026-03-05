@@ -160,7 +160,7 @@ All structured output types accept `reasoning=True` to include an explanation in
 #### Example: Boolean evaluation
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+from ddtrace.llmobs import LLMJudge, BooleanStructuredOutput
 
 judge = LLMJudge(
     provider="openai",
@@ -177,7 +177,7 @@ judge = LLMJudge(
 #### Example: Score-based evaluation with thresholds
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, ScoreStructuredOutput
+from ddtrace.llmobs import LLMJudge, ScoreStructuredOutput
 
 judge = LLMJudge(
     provider="anthropic",
@@ -196,7 +196,7 @@ judge = LLMJudge(
 #### Example: Categorical evaluation
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, CategoricalStructuredOutput
+from ddtrace.llmobs import LLMJudge, CategoricalStructuredOutput
 
 judge = LLMJudge(
     provider="openai",
@@ -217,7 +217,7 @@ judge = LLMJudge(
 #### Example: Azure OpenAI
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+from ddtrace.llmobs import LLMJudge, BooleanStructuredOutput
 
 judge = LLMJudge(
     provider="azure_openai",
@@ -248,7 +248,7 @@ The `azure_openai` provider accepts the following `client_options`:
 #### Example: Custom LLM client
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+from ddtrace.llmobs import LLMJudge, BooleanStructuredOutput
 
 def my_llm_client(provider, messages, json_schema, model, model_params):
     response = call_my_llm(messages, model)
