@@ -128,7 +128,7 @@ database_monitoring:
 
 The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It does not set its value to the value of the tag.
 
-The listener provides an `%%extra_global_view_db%%` variable that can be used to set the `global_view_db` for the instance. This value defaults to the value of the tag `datadoghq.com/global_view_div`. To specify a custom tag for this value use `global_view_db_tag`:
+The listener provides an `%%extra_global_view_db%%` variable that can be used to set the `global_view_db` for the instance. This value defaults to the value of the tag `datadoghq.com/global_view_db`. To specify a custom tag for this value use `global_view_db_tag`:
 
 ``` yaml {hl_lines=["5"]}
 database_monitoring:
