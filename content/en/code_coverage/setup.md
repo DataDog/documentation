@@ -393,6 +393,19 @@ test:
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
 See the [`datadog-ci` documentation][10] for more details on the `datadog-ci coverage upload` command.
 
+### File fixes
+
+Some coverage tools include non-executable lines (such as comments, blank lines, and closing brackets) in their reports, counting them as uncovered. This can lower your coverage percentages and produce false negatives for lines that can never be executed.
+
+During upload, the CLI automatically scans your source files to identify these non-executable lines so they can be excluded from coverage calculations.
+
+File fixes currently support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
+
+You can control this behavior with the following options:
+
+- `--disable-file-fixes`: Disable file fixes generation entirely.
+- `--file-fixes-search-path <dir>`: Override the root directory used to scan source files. By default, the repository root is used. This is useful in monorepos or when your coverage reports only cover a subset of the codebase, as it speeds up the scan by limiting the directory tree traversed.
+
 Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values.
 You can also view your coverage data aggregated by pull request in the [Code Coverage page][11] in Datadog, with the ability to examine individual files and lines of code.
 
