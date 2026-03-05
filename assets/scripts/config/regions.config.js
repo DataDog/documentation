@@ -364,7 +364,8 @@ export default {
     us5: 'https://otlp.us5.datadoghq.com/v1/traces',
     eu: 'https://otlp.datadoghq.eu/v1/traces',
     ap1: 'https://otlp.ap1.datadoghq.com/v1/traces',
-    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces'
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces',
+    gov: 'https://otlp.ddog-gov.com/v1/traces'
   },
   otlp_metrics_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/metrics',
@@ -372,7 +373,8 @@ export default {
     us5: 'https://otlp.us5.datadoghq.com/v1/metrics',
     eu: 'https://otlp.datadoghq.eu/v1/metrics',
     ap1: 'https://otlp.ap1.datadoghq.com/v1/metrics',
-    ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics'
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/metrics',
+    gov: 'https://otlp.ddog-gov.com/v1/metrics'
   },
   otlp_logs_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/logs',
@@ -380,7 +382,8 @@ export default {
     us5: 'https://otlp.us5.datadoghq.com/v1/logs',
     eu: 'https://otlp.datadoghq.eu/v1/logs',
     ap1: 'https://otlp.ap1.datadoghq.com/v1/logs',
-    ap2: 'https://otlp.ap2.datadoghq.com/v1/logs'
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/logs',
+    gov: 'https://otlp.ddog-gov.com/v1/logs'
   },
   custom_costs_endpoint: {
     us: 'api.datadoghq.com/api/v2/cost/custom_costs',

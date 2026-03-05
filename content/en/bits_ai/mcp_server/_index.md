@@ -565,13 +565,29 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 - Find high-severity security signals related to my production environment.
 - List Cloud SIEM signals triggered by suspicious login attempts.
 
-### `search_datadog_security_findings`
+### `security_findings_schema`
 *Toolset: **security***\
-Searches and retrieves security findings from Datadog Security, including misconfigurations, identity risks, and library vulnerabilities.
+Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
-- Show me critical security findings for my cloud infrastructure.
-- Find misconfigurations in my AWS environment.
-- List security findings related to identity risks.
+- What fields are available for security findings?
+- Show me the schema for library vulnerability findings.
+- Get the full schema including descriptions for misconfiguration findings.
+
+### `analyze_security_findings`
+*Toolset: **security***\
+Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
+
+- Show me the top 10 rules with the most critical findings.
+- Count open findings grouped by severity and finding type.
+- Find library vulnerabilities with exploits available, grouped by resource.
+
+### `search_security_findings`
+*Toolset: **security***\
+Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
+
+- Get full details for critical findings in my AWS environment.
+- Retrieve complete finding objects for a specific rule.
+- List all open identity risk findings with full metadata.
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\

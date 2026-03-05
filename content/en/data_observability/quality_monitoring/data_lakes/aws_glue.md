@@ -8,6 +8,9 @@ further_reading:
   - link: '/integrations/amazon-web-services/'
     tag: 'Documentation'
     text: 'AWS Integration'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitors'
 ---
 
 ## Overview

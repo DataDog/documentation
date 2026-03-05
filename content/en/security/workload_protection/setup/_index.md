@@ -40,7 +40,7 @@ Workload Protection supports the following Linux distributions:
 
 | Linux Distributions                                           | Supported Versions      |
 |---------------------------------------------------------------|-------------------------|
-| Ubuntu LTS                                                    | 18.04, 20.04, 22.04     |
+| Ubuntu LTS                                                    | 18.04, 20.04, 22.04, 24.04|
 | Debian                                                        | 10 or later             |
 | Amazon Linux 2                                                | Kernels 4.14 and higher |
 | Amazon Linux 2023                                             | All versions            |

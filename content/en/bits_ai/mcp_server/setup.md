@@ -161,20 +161,20 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
 | **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
 | **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
 
-Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site.
+1. Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site. Example configuration (US1):
 
-Example JSON-style configuration (US1):
+   ```toml
+   [mcp_servers.datadog]
+   url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+   ```
 
-```json
-{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
-    }
-  }
-}
-```
+2. Log in to the Datadog MCP Server by running:
+
+   ```bash
+   codex mcp login datadog
+   ```
+
+   This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
 
 [1]: /getting_started/site/
 
