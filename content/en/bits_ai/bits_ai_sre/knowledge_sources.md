@@ -15,7 +15,7 @@ Think of onboarding Bits AI SRE as you would a new teammate: the more context yo
 
 You can either add step-by-step troubleshooting instructions directly in the monitor message or link to a Confluence page that contains those instructions.
 
-- **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you’d normally look in Datadog when the monitor triggers—for example, a dashboard, logs, traces, or a notebook with key widgets. Links don’t need special formatting; plain URLs work.
+- **Include Datadog telemetry links**: When adding instructions in the monitor message, include links to the most relevant telemetry. Start with the first place you'd normally look in Datadog when the monitor triggers, such as a dashboard, logs, traces, or a notebook with key widgets. Links don't need special formatting; plain URLs work.
 
 Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
 
@@ -27,23 +27,28 @@ To maximize the value of this integration, document the services, dependencies, 
 
 ## Bits.md
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
+{{< callout url="https://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
 <b>Bits.md</b> is in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-`bits.md` is a Markdown file that provides structured context about your environment to the agent. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Include team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [**Bits AI SRE** > **Settings** > **Bits.md**][2].
 
-#### Sample bits.md
-{{< code-block lang="yaml" filename="bits.md" collapsible="true" >}}
-### Scope rules
+`bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+
+### Sample bits.md
+
+{{< code-block lang="markdown" filename="bits.md" collapsible="true" >}}
+
+## Scope rules
 - Always carry forward explicit scope from the user (env, service, team, region, namespace).
 - Treat mentioned values as hard filters in all queries.
 - Do not broaden scope unless explicitly asked.
 
 ---
-### Tag & naming conventions
 
-#### Environment normalization
+## Tag and naming conventions
+
+### Environment normalization
 Environment values may differ across telemetry sources (monitors, APM, logs, tickets).
 
 Example:
@@ -54,7 +59,7 @@ Rule: When switching data sources, normalize to the correct env value for that s
 
 ---
 
-#### Service name normalization
+### Service name normalization
 Service/application names may appear in different formats across systems (alerts, logs, tickets, asset systems).
 
 Example:
@@ -69,7 +74,7 @@ Rule:
 
 ---
 
-# Kubernetes quick checks
+## Kubernetes quick checks
 For pod issues, check Kubernetes events first:
 `source:kubernetes pod_name:<pod> kube_namespace:<namespace>`
 
@@ -80,7 +85,7 @@ Common causes:
 
 ---
 
-# Known noise / false positives
+## Known noise and false positives
 Document recurring patterns that look like incidents but are expected behavior.
 
 Examples:
@@ -99,17 +104,18 @@ Rule:
 
 At the end of an investigation, let Bits AI SRE know whether the conclusion it made was correct.
 
-{{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with buttons to rate the conclusion helpful or unhelpful highlighted" style="width:100%;" >}}
+{{< img src="bits_ai/help_bits_ai_learn_1.png" alt="An investigation conclusion with the helpful and unhelpful rating buttons highlighted" style="width:100%;" >}}
 
-If the conclusion was inaccurate, provide Bits AI SRE with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Ensure your feedback:
-- Identifies the actual root cause (not just observed effects or symptoms)
-- Specifies relevant services, components, or metrics
-- Includes telemetry links that point to the root cause
+If the conclusion was inaccurate, provide Bits AI SRE with the correct root cause, highlighting what it missed, and explaining what it should do differently next time. Your feedback should:
+- Identify the actual root cause (not just observed effects or symptoms)
+- Specify relevant services, components, or metrics
+- Include telemetry links that point to the root cause
 
 **Example high-quality root cause feedback**: "High memory usage in auth-service pod due to memory leak in session cache, causing OOM kills every 2 hours starting at 2025-11-15 14:30 UTC. This is evidenced by `https://app.datadoghq.com/logs?<rest_of_link>`"
 
 Every piece of feedback you provide creates a **memory**. Bits AI SRE dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits AI SRE to adapt to your environment, becoming more accurate and efficient with each investigation.
 
-To manage memories, including viewing and deleting them, navigate to the **Memories** column of the [Monitor Management][1] page.
+To manage memories, including viewing and deleting them, go to the **Memories** column of the [Monitor Management][1] page.
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
+[2]: https://app.datadoghq.com/bits-ai/settings/bits-md

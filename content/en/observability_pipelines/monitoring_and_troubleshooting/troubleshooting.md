@@ -60,6 +60,10 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
+## Identify Workers in a Kubernetes environment using Pod and cluster names
+
+{{% observability_pipelines/install_worker/pod_cluster_name_worker %}}
+
 ## Worker logs issues
 
 ### No Worker logs in Log Explorer
@@ -134,7 +138,7 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 
 The curl command you use is based on the port you are using, as well as the path and expected payload from your source.
 
-**Note**: See [Add domains to firewall allowlist][23] for the list of domains that must be added to your allowlist if you are using a firewall.
+**Note**: See [Add domains to firewall allowlist][21] for the list of domains that must be added to your allowlist if you are using a firewall.
 
 ### Too many files error
 
@@ -191,4 +195,4 @@ The quota processor is synchronized across all Workers in a Datadog organization
 [18]: /observability_pipelines/guide/environment_variables/
 [19]: /remote_configuration/#security-considerations
 [20]: /help/
-[23]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
+[21]: /observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist

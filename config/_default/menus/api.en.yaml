@@ -9751,6 +9751,231 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: LLM Observability
+      url: /api/latest/llm-observability/
+      identifier: llm-observability
+      generated: true
+    - name: Delete LLM Observability dataset records
+      url: '#delete-llm-observability-dataset-records'
+      identifier: llm-observability-delete-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 12
+    - name: Append records to an LLM Observability dataset
+      url: '#append-records-to-an-llm-observability-dataset'
+      identifier: llm-observability-append-records-to-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 8
+    - name: Update LLM Observability dataset records
+      url: '#update-llm-observability-dataset-records'
+      identifier: llm-observability-update-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 10
+    - name: List LLM Observability dataset records
+      url: '#list-llm-observability-dataset-records'
+      identifier: llm-observability-list-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 7
+    - name: Update an LLM Observability dataset
+      url: '#update-an-llm-observability-dataset'
+      identifier: llm-observability-update-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsDataset
+        unstable:
+          - v2
+        order: 9
+    - name: Delete LLM Observability datasets
+      url: '#delete-llm-observability-datasets'
+      identifier: llm-observability-delete-llm-observability-datasets
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsDatasets
+        unstable:
+          - v2
+        order: 11
+    - name: Create an LLM Observability dataset
+      url: '#create-an-llm-observability-dataset'
+      identifier: llm-observability-create-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsDataset
+        unstable:
+          - v2
+        order: 6
+    - name: List LLM Observability datasets
+      url: '#list-llm-observability-datasets'
+      identifier: llm-observability-list-llm-observability-datasets
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasets
+        unstable:
+          - v2
+        order: 5
+    - name: Update an LLM Observability project
+      url: '#update-an-llm-observability-project'
+      identifier: llm-observability-update-an-llm-observability-project
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsProject
+        unstable:
+          - v2
+        order: 3
+    - name: Delete LLM Observability projects
+      url: '#delete-llm-observability-projects'
+      identifier: llm-observability-delete-llm-observability-projects
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsProjects
+        unstable:
+          - v2
+        order: 4
+    - name: Create an LLM Observability project
+      url: '#create-an-llm-observability-project'
+      identifier: llm-observability-create-an-llm-observability-project
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsProject
+        unstable:
+          - v2
+        order: 2
+    - name: List LLM Observability projects
+      url: '#list-llm-observability-projects'
+      identifier: llm-observability-list-llm-observability-projects
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsProjects
+        unstable:
+          - v2
+        order: 1
+    - name: Push events for an LLM Observability experiment
+      url: '#push-events-for-an-llm-observability-experiment'
+      identifier: llm-observability-push-events-for-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsExperimentEvents
+        unstable:
+          - v2
+        order: 17
+    - name: Update an LLM Observability experiment
+      url: '#update-an-llm-observability-experiment'
+      identifier: llm-observability-update-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsExperiment
+        unstable:
+          - v2
+        order: 15
+    - name: Delete LLM Observability experiments
+      url: '#delete-llm-observability-experiments'
+      identifier: llm-observability-delete-llm-observability-experiments
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsExperiments
+        unstable:
+          - v2
+        order: 16
+    - name: Create an LLM Observability experiment
+      url: '#create-an-llm-observability-experiment'
+      identifier: llm-observability-create-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsExperiment
+        unstable:
+          - v2
+        order: 14
+    - name: List LLM Observability experiments
+      url: '#list-llm-observability-experiments'
+      identifier: llm-observability-list-llm-observability-experiments
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperiments
+        unstable:
+          - v2
+        order: 13
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -13109,6 +13334,42 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Update maintenance
+      url: '#update-maintenance'
+      identifier: status-pages-update-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMaintenance
+        unstable: []
+        order: 17
+    - name: Get maintenance
+      url: '#get-maintenance'
+      identifier: status-pages-get-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMaintenance
+        unstable: []
+        order: 19
+    - name: Schedule maintenance
+      url: '#schedule-maintenance'
+      identifier: status-pages-schedule-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMaintenance
+        unstable: []
+        order: 16
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13253,6 +13514,18 @@ menu:
           - DeleteStatusPage
         unstable: []
         order: 5
+    - name: List maintenances
+      url: '#list-maintenances'
+      identifier: status-pages-list-maintenances
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMaintenances
+        unstable: []
+        order: 18
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations
