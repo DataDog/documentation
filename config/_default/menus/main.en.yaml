@@ -5194,6 +5194,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 40202
+    - name: DeepEval Evaluations
+      url: llm_observability/evaluations/deepeval_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_deepeval_evaluations
+      weight: 40301
     - name: Annotation Queues
       url: llm_observability/evaluations/annotation_queues
       parent: llm_obs_evaluations
