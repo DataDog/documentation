@@ -144,7 +144,7 @@ Consider a configuration where you set up a unique RUM retention filter configur
 
 {{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
 
-If you have configured the SDK to sample 40% of traces, then the outcome will be the following:
+If you have configured the SDK to sample 40% of traces, then the outcome is the following:
 
 - 40% of ingested RUM sessions will have their traces ingested on APM.
 - 60% of ingested RUM sessions with at least one error will be retained.
