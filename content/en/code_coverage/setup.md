@@ -460,7 +460,7 @@ Some coverage tools include non-executable lines (such as comments, blank lines,
 
 During upload, the CLI automatically scans your source files to identify these non-executable lines so they can be excluded from coverage calculations.
 
-File fixes currently support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
+File fixes support the following languages: Go, Kotlin, C/C++, Swift, Objective-C, and PHP.
 
 You can control this behavior with the following options:
 

@@ -61,7 +61,7 @@ The `datadog-ci coverage upload` command sends the following data to Datadog:
 - **Git metadata**: Git repository URL, branch name, commit SHA, timestamp, author information, and list of file paths that were changed in the commit. You can disable Git metadata upload by adding `--skip-git-metadata-upload=1` to the command.
 - **Git diff summary**: List of file paths that were changed in the commit, along with the numbers of added and removed lines. You can disable Diff data upload by adding `--upload-git-diff=0` to the command.
 - **CI metadata**: Information about the CI environment, such as the CI provider, job ID, and pipeline ID.
-- **File fixes**: A mapping of source file paths to bitmaps indicating which lines are non-executable (comments, blank lines, closing brackets, etc.). This data is used to exclude non-executable lines from coverage calculations. No source code content is included—only file paths and line classification bitmaps. You can disable this by adding `--disable-file-fixes` to the command.
+- **File fixes**: A mapping of source file paths to bitmaps indicating which lines are non-executable (such as comments, blank lines, and closing brackets). This data is used to exclude non-executable lines from coverage calculations. No source code content is included—only file paths and line classification bitmaps. You can disable this by adding `--disable-file-fixes` to the command.
 
 No source code is uploaded to Datadog.
 
