@@ -151,7 +151,7 @@ The task definition files provided in the previous section are minimal. These fi
 For additional features:
 
 #### APM
-Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23].
+Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm-uds.json][23].
 
 #### Log Management
 Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
@@ -348,7 +348,7 @@ Need help? Contact [Datadog support][11].
 [5]: https://docs.datadoghq.com/agent/autodiscovery/
 [6]: /containers/amazon_ecs/apm/
 [7]: /containers/amazon_ecs/logs/
-[8]: /developers/dogstatsd/?tab=containeragent
+[8]: /extend/dogstatsd/?tab=containeragent
 [9]: https://aws.amazon.com/cli
 [10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
 [11]: https://docs.datadoghq.com/help/
