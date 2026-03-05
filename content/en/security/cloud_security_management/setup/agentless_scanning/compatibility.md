@@ -6,7 +6,7 @@ aliases:
 
 ## Availability
 
-Agentless Scanning is supported on AWS, Azure, and GCP. Oracle Cloud Infrastructure (OCI) is not yet supported.
+Agentless Scanning is supported on AWS, Azure, GCP, and OCI.
 
 The following table provides a summary of Agentless Scanning technologies in relation to their corresponding components for each supported cloud provider:
 

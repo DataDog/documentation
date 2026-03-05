@@ -35,7 +35,7 @@ To get started with Cloud Security, review the following:
 - [Enable additional features](#enable-additional-features)
   - [Container Image Scanning in CI/CD](#container-image-scanning-in-cicd)
   - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
-  - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
+  - [Deploy using cloud integrations](#deploy-using-cloud-integrations)
 - [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
 
@@ -116,9 +116,9 @@ Scan container images for vulnerabilities during your CI/CD pipelines, before de
 
 Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
 
-### Deploy via cloud integrations
+### Deploy using cloud integrations
 
-Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security via Cloud Integrations][7].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, GCP, and OCI resources. For more information, see [Deploying Cloud Security using Cloud Integrations][7].
 
 ## Disable Cloud Security
 

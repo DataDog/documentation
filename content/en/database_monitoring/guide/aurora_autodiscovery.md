@@ -153,6 +153,8 @@ instances:
     port: "%%port%%"
     username: datadog
     dbm: "%%extra_dbm%%"
+    database_autodiscovery:
+      enabled: true
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"
