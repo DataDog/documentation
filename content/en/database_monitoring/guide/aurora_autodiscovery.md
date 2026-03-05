@@ -118,7 +118,7 @@ database_monitoring:
 
 The listener provides an `%%extra_dbm%%` variable that can be used to enable or disable DBM for the instance. This value defaults to `true` if the tag `datadoghq.com/dbm:true` is present. To specify a custom tag for this value use `dbm_tag`:
 
-``` yaml {hl_lines=["5-6"]}
+``` yaml {hl_lines=["5"]}
 database_monitoring:
   autodiscovery:
     aurora:
@@ -130,7 +130,7 @@ The `%%extra_dbm%%` value is true if the tag is present, and false otherwise. It
 
 The listener provides an `%%extra_global_view_db%%` variable that can be used to set the `global_view_db` for the instance. This value defaults to the value of the tag `datadoghq.com/global_view_div`. To specify a custom tag for this value use `global_view_db_tag`:
 
-``` yaml {hl_lines=["5-6"]}
+``` yaml {hl_lines=["5"]}
 database_monitoring:
   autodiscovery:
     aurora:
