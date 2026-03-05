@@ -49,7 +49,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator using LLMObs: class-based and function-based. In addition to these evaluators, LLMObs has integrations with open source evaluation frameworks such as [DeepEval][6] that can be used in LLMObs Experiments.
+There are two ways to define an evaluator using LLM Observability: class-based and function-based. In addition to these evaluators, LLM Observability has integrations with open source evaluation frameworks, such as [DeepEval][6], that can be used in LLM Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|

@@ -1,22 +1,18 @@
 ---
 title: DeepEval Evaluations
-aliases:
- - /llm_observability/evaluations/deepeval_evaluations/
-further_reading:
-- link: "/llm_observability/guide/evaluation_developer_guide/deepeval"
-  tag: "Documentation"
-  text: "Submit DeepEval Evaluations"
+description: Use DeepEval evaluations with LLM Observability Experiments.
 ---
 
 ## Overview
 
-DeepEval is an opensource LLM Evaluation framework that provides ready-to-use LLM Metrics and allows for customizable LLM Evaluations. For more information, see [DeepEval's documentation][3].
+DeepEval is an open source framework that provides ready-to-use LLM metrics and allows for customizable LLM evaluations. For more information, see [DeepEval's documentation][3].
 
-You can use LLM Observability to run DeepEval evaluations in [Experiments][1]. DeepEval evaluation results appear as evaluator results tied to each instance in an [LLM Obs Dataset][5].
+You can use LLM Observability to run DeepEval evaluations in [Experiments][1]. DeepEval evaluation results appear as evaluator results tied to each instance in an [LLM Observability dataset][5].
 
 ## Setup
 
-Follow the steps here to set up an LLMObs [Experiment][2] and [Dataset][4]. Provide a DeepEval evaluator to the `evaluators` parameter in an LLMObs `Experiment` as demonstrated below. A working example is available [here][6].
+1. Set up an [LLM Observability Experiment][2] and an [LLM Observability Dataset][4].
+2. Provide a DeepEval evaluator to the `evaluators` parameter in an LLMObs `Experiment` as demonstrated in the following code sample. For a working example, see [Datadog's DeepEval demo in GitHub][6].
 
 ```python 
 
