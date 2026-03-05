@@ -106,7 +106,7 @@ The following values are automatically applied when you set `indexer.podSize` in
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Ingest API configuration per tier" level="h3" expanded=false %}}
+{{% collapse-content title="Ingest API configuration per tier" level="h4" expanded=false %}}
 
 The following values are automatically applied when you set `indexer.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Ingest API configuration][2].
 
