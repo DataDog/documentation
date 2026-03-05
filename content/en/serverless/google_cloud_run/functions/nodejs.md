@@ -18,17 +18,15 @@ further_reading:
 
 1. **Install the Datadog Node.js tracer**.
 
-   1. In your main application, add `dd-trace-js`.
+   1. In your main application, install the `dd-trace` package.
 
       {{< code-block lang="shell" disable_copy="false" >}}
-npm install dd-trace --save
+npm install dd-trace
 {{< /code-block >}}
 
-   2. Add the following to your application code to initialize the tracer:
-   {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
- logInjection: true,
-});
+   2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
+   {{< code-block lang="dockerfile" disable_copy="false" >}}
+ENV NODE_OPTIONS="--require dd-trace/init"
 {{< /code-block >}}
 
    For more information, see [Tracing Node.js applications][1].
@@ -57,9 +55,6 @@ const tracer = require('dd-trace').init({
 
    In this step, configure your logging library to write logs to the file set in `DD_SERVERLESS_LOG_PATH`. In Node.js, Datadog recommend writing logs in a JSON format. For example, you can use a third-party logging library such as `winston`:
    {{< code-block lang="javascript" disable_copy="false" >}}
-const tracer = require('dd-trace').init({
-  logInjection: true,
-});
 const { createLogger, format, transports } = require('winston');
 
 const LOG_FILE = "/shared-volume/logs/app.log"
