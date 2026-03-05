@@ -68,7 +68,7 @@ After your events are sent through your processors, the events go through a fano
 
 The `drop_newest` on-full behavior drops incoming events when a destination's buffer is full. This prevents backpressure from propagating to the fanout from that destination, allowing your other destinations to continue ingesting events from the fanout. This can be helpful if you want to help ensure events are delivered reliably to one destination, but are okay with another destination dropping events if it becomes unavailable to prevent backpressure propagation.
 
-## Kubernetes persistent volumes
+### Kubernetes persistent volumes
 
 If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes, then sent downstream.
 
