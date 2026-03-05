@@ -60,6 +60,10 @@ The build system automatically fetches:
 - `Makefile` + `Makefile.config` - Build orchestration
 - Environment-specific parameters in `config/{env}/params.yaml`
 
+## Critical Rules
+
+- **NEVER push directly to `master`.** Always create a PR and go through the review process. Direct pushes bypass branch protection and code review.
+
 ## Branch and PR Guidelines
 
 ### Branch Naming
