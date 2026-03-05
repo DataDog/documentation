@@ -107,4 +107,4 @@ After you run an experiment with a DeepEval evaluation, you can view the DeepEva
 [3]: https://deepeval.com/docs/metrics-introduction
 [4]: /llm_observability/experiments/setup#create-a-dataset
 [5]: /llm_observability/experiments/datasets
-[6]: https://github.com/DataDog/llm-observability/blob/0b832ac332cb262c208804fce6fbff7676834452/experiments/eval-integrations/1-deepeval-demo.py
+[6]: https://github.com/DataDog/llm-observability/blob/main/experiments/eval-integrations/1-deepeval-demo.py
