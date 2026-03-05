@@ -15124,6 +15124,87 @@ components:
       - findings
       - project
       type: object
+    CreateMaintenanceRequest:
+      example:
+        data:
+          attributes:
+            completed_date: '2026-02-18T19:51:13.332360075Z'
+            completed_description: We have completed maintenance on the API to improve
+              performance.
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: operational
+            in_progress_description: We are currently performing maintenance on the
+              API to improve performance.
+            scheduled_description: We will be performing maintenance on the API to
+              improve performance.
+            start_date: '2026-02-18T19:21:13.332360075Z'
+            title: API Maintenance
+          type: maintenances
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateMaintenanceRequestData'
+      type: object
+    CreateMaintenanceRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateMaintenanceRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataType'
+      required:
+      - attributes
+      - type
+      type: object
+    CreateMaintenanceRequestDataAttributes:
+      description: The supported attributes for creating a maintenance.
+      properties:
+        completed_date:
+          description: Timestamp of when the maintenance was completed.
+          format: date-time
+          type: string
+        completed_description:
+          description: The description shown when the maintenance is completed.
+          type: string
+        components_affected:
+          description: The components affected by the maintenance.
+          items:
+            $ref: '#/components/schemas/CreateMaintenanceRequestDataAttributesComponentsAffectedItems'
+          type: array
+        in_progress_description:
+          description: The description shown while the maintenance is in progress.
+          type: string
+        scheduled_description:
+          description: The description shown when the maintenance is scheduled.
+          type: string
+        start_date:
+          description: Timestamp of when the maintenance is scheduled to start.
+          format: date-time
+          type: string
+        title:
+          description: The title of the maintenance.
+          example: API Maintenance
+          type: string
+      required:
+      - components_affected
+      - title
+      type: object
+    CreateMaintenanceRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataAttributesComponentsAffectedItemsStatus'
+      required:
+      - id
+      - status
+      type: object
     CreateNotificationChannelAttributes:
       description: Attributes for creating an on-call notification channel.
       properties:
@@ -19760,7 +19841,7 @@ components:
           description: The included related resources of a degradation. Client must
             explicitly request these resources by name in the `include` query parameter.
           items:
-            $ref: '#/components/schemas/DegradationArrayIncluded'
+            $ref: '#/components/schemas/DegradationIncluded'
           type: array
       type: object
     DegradationArray:
@@ -19773,17 +19854,13 @@ components:
           description: The included related resources of a degradation. Client must
             explicitly request these resources by name in the `include` query parameter.
           items:
-            $ref: '#/components/schemas/DegradationArrayIncluded'
+            $ref: '#/components/schemas/DegradationIncluded'
           type: array
         meta:
-          $ref: '#/components/schemas/StatusPagesResponseMeta'
+          $ref: '#/components/schemas/PaginationMeta'
       required:
       - data
       type: object
-    DegradationArrayIncluded:
-      oneOf:
-      - $ref: '#/components/schemas/StatusPagesUser'
-      - $ref: '#/components/schemas/StatusPageAsIncluded'
     DegradationData:
       properties:
         attributes:
@@ -19818,6 +19895,8 @@ components:
           description: Timestamp of when the degradation was last modified.
           format: date-time
           type: string
+        source:
+          $ref: '#/components/schemas/DegradationDataAttributesSource'
         status:
           $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
         title:
@@ -19846,6 +19925,33 @@ components:
       - id
       - status
       type: object
+    DegradationDataAttributesSource:
+      description: The source of the degradation.
+      properties:
+        created_at:
+          description: Timestamp of when the source was created.
+          example: ''
+          format: date-time
+          type: string
+        source_id:
+          description: The ID of the source.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/DegradationDataAttributesSourceType'
+      required:
+      - created_at
+      - source_id
+      - type
+      type: object
+    DegradationDataAttributesSourceType:
+      description: The type of the source.
+      enum:
+      - incident
+      example: incident
+      type: string
+      x-enum-varnames:
+      - INCIDENT
     DegradationDataAttributesUpdatesItems:
       properties:
         components_affected:
@@ -19870,6 +19976,10 @@ components:
           description: Timestamp of when the update was last modified.
           format: date-time
           readOnly: true
+          type: string
+        started_at:
+          description: Timestamp of when the update started.
+          format: date-time
           type: string
         status:
           $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
@@ -19963,6 +20073,10 @@ components:
       - type
       - id
       type: object
+    DegradationIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
     DeleteAppResponse:
       description: The response object after an app is successfully deleted.
       properties:
@@ -30465,7 +30579,7 @@ components:
             8 indicates Jira.'
           example: 1
           format: int32
-          maximum: 9
+          maximum: 100
           type: integer
         metadata:
           $ref: '#/components/schemas/IncidentIntegrationMetadataMetadata'
@@ -37188,6 +37302,251 @@ components:
       - ms_channel_id
       - ms_channel_name
       - redirect_url
+      type: object
+    Maintenance:
+      properties:
+        data:
+          $ref: '#/components/schemas/MaintenanceData'
+        included:
+          description: The included related resources of a maintenance. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/DegradationIncluded'
+          type: array
+      type: object
+    MaintenanceArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/MaintenanceData'
+          type: array
+        included:
+          description: The included related resources of a maintenance. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/DegradationIncluded'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+      required:
+      - data
+      type: object
+    MaintenanceData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MaintenanceDataAttributes'
+        id:
+          description: The ID of the maintenance.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/MaintenanceDataRelationships'
+        type:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataType'
+      required:
+      - type
+      type: object
+    MaintenanceDataAttributes:
+      description: The attributes of a maintenance.
+      properties:
+        completed_date:
+          description: Timestamp of when the maintenance was completed.
+          format: date-time
+          type: string
+        completed_description:
+          description: The description shown when the maintenance is completed.
+          type: string
+        components_affected:
+          description: Components affected by the maintenance.
+          items:
+            $ref: '#/components/schemas/MaintenanceDataAttributesComponentsAffectedItems'
+          type: array
+        in_progress_description:
+          description: The description shown while the maintenance is in progress.
+          type: string
+        modified_at:
+          description: Timestamp of when the maintenance was last modified.
+          format: date-time
+          type: string
+        published_date:
+          description: Timestamp of when the maintenance was published.
+          format: date-time
+          type: string
+        scheduled_description:
+          description: The description shown when the maintenance is scheduled.
+          type: string
+        start_date:
+          description: Timestamp of when the maintenance is scheduled to start.
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/MaintenanceDataAttributesStatus'
+          description: The status of the maintenance.
+        title:
+          description: Title of the maintenance.
+          type: string
+        updates:
+          description: Past updates made to the maintenance.
+          items:
+            $ref: '#/components/schemas/MaintenanceDataAttributesUpdatesItems'
+          type: array
+      type: object
+    MaintenanceDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataAttributesComponentsAffectedItemsStatus'
+      required:
+      - id
+      - status
+      type: object
+    MaintenanceDataAttributesStatus:
+      description: The status of the maintenance.
+      enum:
+      - scheduled
+      - in_progress
+      - completed
+      type: string
+      x-enum-varnames:
+      - SCHEDULED
+      - IN_PROGRESS
+      - COMPLETED
+    MaintenanceDataAttributesUpdatesItems:
+      properties:
+        components_affected:
+          description: The components affected at the time of the update.
+          items:
+            $ref: '#/components/schemas/MaintenanceDataAttributesUpdatesItemsComponentsAffectedItems'
+          type: array
+        created_at:
+          description: Timestamp of when the update was created.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the update.
+          type: string
+        id:
+          description: Identifier of the update.
+          format: uuid
+          readOnly: true
+          type: string
+        manual_transition:
+          description: Whether the update was applied manually by a user (true) or
+            automatically by the system (false).
+          readOnly: true
+          type: boolean
+        modified_at:
+          description: Timestamp of when the update was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        started_at:
+          description: Timestamp of when the update started.
+          format: date-time
+          type: string
+        status:
+          description: The status of the update.
+          type: string
+      type: object
+    MaintenanceDataAttributesUpdatesItemsComponentsAffectedItems:
+      properties:
+        id:
+          description: Identifier of the component affected at the time of the update.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        name:
+          description: The name of the component affected at the time of the update.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataAttributesComponentsAffectedItemsStatus'
+          description: The status of the component affected at the time of the update.
+      required:
+      - id
+      - status
+      type: object
+    MaintenanceDataRelationships:
+      description: The relationships of a maintenance.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/MaintenanceDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the maintenance.
+        last_modified_by_user:
+          $ref: '#/components/schemas/MaintenanceDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the maintenance.
+        status_page:
+          $ref: '#/components/schemas/MaintenanceDataRelationshipsStatusPage'
+          description: The status page the maintenance belongs to.
+      type: object
+    MaintenanceDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/MaintenanceDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    MaintenanceDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the maintenance.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    MaintenanceDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/MaintenanceDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    MaintenanceDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the maintenance.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    MaintenanceDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/MaintenanceDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    MaintenanceDataRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
       type: object
     MemberTeam:
       description: A member team
@@ -46989,6 +47348,80 @@ components:
           format: int64
           type: integer
       type: object
+    PaginationMeta:
+      description: Response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/PaginationMetaPage'
+      readOnly: true
+      type: object
+    PaginationMetaPage:
+      description: Offset-based pagination schema.
+      example:
+        first_offset: 0
+        last_offset: 900
+        limit: 100
+        next_offset: 100
+        offset: 0
+        prev_offset: 100
+        total: 1000
+        type: offset_limit
+      properties:
+        first_offset:
+          description: Integer representing the offset to fetch the first page of
+            results.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Integer representing the offset to fetch the last page of results.
+          example: 900
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Integer representing the number of elements to be returned
+            in the results.
+          example: 100
+          format: int64
+          type: integer
+        next_offset:
+          description: Integer representing the index of the first element in the
+            next page of results. Equal to page size added to the current offset.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Integer representing the index of the first element in the
+            results.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Integer representing the index of the first element in the
+            previous page of results.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Integer representing the total number of elements available.
+          example: 1000
+          format: int64
+          nullable: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/PaginationMetaPageType'
+      type: object
+    PaginationMetaPageType:
+      default: offset_limit
+      enum:
+      - offset_limit
+      example: offset_limit
+      type: string
+      x-enum-varnames:
+      - OFFSET_LIMIT
     Parameter:
       description: The definition of `Parameter` object.
       properties:
@@ -47296,6 +47729,107 @@ components:
       required:
       - data
       type: object
+    PatchMaintenanceRequest:
+      example:
+        data:
+          attributes:
+            completed_date: '2026-02-18T20:01:13.332360075Z'
+            in_progress_description: We are currently performing maintenance on the
+              API to improve performance for 40 minutes.
+            scheduled_description: We will be performing maintenance on the API to
+              improve performance for 40 minutes.
+            start_date: '2026-02-18T19:21:13.332360075Z'
+            title: API Maintenance
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: maintenances
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchMaintenanceRequestData'
+      type: object
+    PatchMaintenanceRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataAttributes'
+        id:
+          description: The ID of the maintenance.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    PatchMaintenanceRequestDataAttributes:
+      description: The supported attributes for updating a maintenance.
+      properties:
+        completed_date:
+          description: Timestamp of when the maintenance was completed.
+          format: date-time
+          type: string
+        completed_description:
+          description: The description shown when the maintenance is completed.
+          type: string
+        components_affected:
+          description: The components affected by the maintenance.
+          items:
+            $ref: '#/components/schemas/PatchMaintenanceRequestDataAttributesComponentsAffectedItems'
+          type: array
+        in_progress_description:
+          description: The description shown while the maintenance is in progress.
+          type: string
+        scheduled_description:
+          description: The description shown when the maintenance is scheduled.
+          type: string
+        start_date:
+          description: Timestamp of when the maintenance is scheduled to start.
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/MaintenanceDataAttributesStatus'
+          description: The status of the maintenance.
+        title:
+          description: The title of the maintenance.
+          type: string
+      type: object
+    PatchMaintenanceRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchMaintenanceRequestDataAttributesComponentsAffectedItemsStatus'
+      required:
+      - id
+      - status
+      type: object
+    PatchMaintenanceRequestDataAttributesComponentsAffectedItemsStatus:
+      description: The status of the component.
+      enum:
+      - operational
+      - maintenance
+      example: operational
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - MAINTENANCE
+    PatchMaintenanceRequestDataType:
+      default: maintenances
+      description: Maintenances resource type.
+      enum:
+      - maintenances
+      example: maintenances
+      type: string
+      x-enum-varnames:
+      - MAINTENANCES
     PatchNotificationRuleParameters:
       description: Body of the notification rule patch request.
       properties:
@@ -63281,7 +63815,7 @@ components:
             $ref: '#/components/schemas/StatusPageArrayIncluded'
           type: array
         meta:
-          $ref: '#/components/schemas/StatusPagesResponseMeta'
+          $ref: '#/components/schemas/PaginationMeta'
       required:
       - data
       type: object
@@ -63720,6 +64254,7 @@ components:
       - degraded
       - partial_outage
       - major_outage
+      - maintenance
       example: operational
       type: string
       x-enum-varnames:
@@ -63727,6 +64262,7 @@ components:
       - DEGRADED
       - PARTIAL_OUTAGE
       - MAJOR_OUTAGE
+      - MAINTENANCE
     StatusPagesComponentDataRelationships:
       description: The relationships of a component.
       properties:
@@ -63896,6 +64432,7 @@ components:
       - degraded
       - partial_outage
       - major_outage
+      - maintenance
       readOnly: true
       type: string
       x-enum-varnames:
@@ -63903,6 +64440,7 @@ components:
       - DEGRADED
       - PARTIAL_OUTAGE
       - MAJOR_OUTAGE
+      - MAINTENANCE
     StatusPagesComponentGroupAttributesComponentsItemsType:
       description: The type of the component.
       enum:
@@ -64015,71 +64553,6 @@ components:
       type: string
       x-enum-varnames:
       - COMPONENTS
-    StatusPagesPagination:
-      description: Offset-based pagination schema.
-      properties:
-        first_offset:
-          description: Integer representing the offset to fetch the first page of
-            results.
-          example: 0
-          format: int64
-          type: integer
-        last_offset:
-          description: Integer representing the offset to fetch the last page of results.
-          example: 900
-          format: int64
-          nullable: true
-          type: integer
-        limit:
-          description: Integer representing the number of elements to returned in
-            the results.
-          example: 100
-          format: int64
-          type: integer
-        next_offset:
-          description: Integer representing the index of the first element in the
-            next page of results. Equal to page size added to the current offset.
-          example: 100
-          format: int64
-          nullable: true
-          type: integer
-        offset:
-          description: Integer representing the index of the first element in the
-            results.
-          example: 0
-          format: int64
-          type: integer
-        prev_offset:
-          description: Integer representing the index of the first element in the
-            previous page of results.
-          example: 100
-          format: int64
-          nullable: true
-          type: integer
-        total:
-          description: Integer representing the total number of elements available.
-          example: 1000
-          format: int64
-          nullable: true
-          type: integer
-        type:
-          $ref: '#/components/schemas/StatusPagesPaginationType'
-      type: object
-    StatusPagesPaginationType:
-      default: offset_limit
-      enum:
-      - offset_limit
-      example: offset_limit
-      type: string
-      x-enum-varnames:
-      - OFFSET_LIMIT
-    StatusPagesResponseMeta:
-      description: Response metadata.
-      properties:
-        page:
-          $ref: '#/components/schemas/StatusPagesPagination'
-      readOnly: true
-      type: object
     StatusPagesUser:
       description: The included Datadog user resource.
       properties:
@@ -89149,6 +89622,26 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'The number of seconds of look back (from now) used by the `filter[queried]`
+          filter logic.
+
+          Must be sent with `filter[queried]` and is only applied when `filter[queried]=true`.
+
+          If `filter[queried]=false`, this parameter is ignored and default queried-window
+          behavior applies.
+
+          If `filter[queried]` is not provided, sending this parameter returns a 400.
+
+          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=7776000`.'
+        example: 7776000
+        in: query
+        name: filter[queried][window][seconds]
+        required: false
+        schema:
+          format: int64
+          maximum: 15552000
+          minimum: 0
+          type: integer
       - description: 'Filter metrics that have been submitted with the given tags.
           Supports boolean and wildcard expressions.
 
@@ -104565,6 +105058,12 @@ paths:
         name: filter[status]
         schema:
           type: string
+      - description: 'Sort order. Prefix with ''-'' for descending. Supported values:
+          created_at, -created_at, modified_at, -modified_at.'
+        in: query
+        name: sort
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -104582,6 +105081,68 @@ paths:
       tags:
       - Status Pages
       x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+  /api/v2/statuspages/maintenances:
+    get:
+      description: Lists all maintenances for the organization. Optionally filter
+        by status and page.
+      operationId: ListMaintenances
+      parameters:
+      - description: Optional page id filter.
+        in: query
+        name: filter[page_id]
+        schema:
+          type: string
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of maintenances to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: 'Optional maintenance status filter. Supported values: scheduled,
+          in_progress, completed.'
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      - description: 'Sort order. Prefix with ''-'' for descending. Supported values:
+          created_at, -created_at, start_date, -start_date.'
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List maintenances
+      tags:
+      - Status Pages
+      x-menu-order: 18
       x-permission:
         operator: AND
         permissions:
@@ -105122,6 +105683,160 @@ paths:
       tags:
       - Status Pages
       x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/maintenances:
+    post:
+      description: Schedules a new maintenance.
+      operationId: CreateMaintenance
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the maintenance.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMaintenanceRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Maintenance'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Schedule maintenance
+      tags:
+      - Status Pages
+      x-menu-order: 16
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/maintenances/{maintenance_id}:
+    get:
+      description: Retrieves a specific maintenance by its ID.
+      operationId: GetMaintenance
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the maintenance.
+        in: path
+        name: maintenance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Maintenance'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get maintenance
+      tags:
+      - Status Pages
+      x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing maintenance's attributes.
+      operationId: UpdateMaintenance
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the maintenance.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: The ID of the maintenance.
+        in: path
+        name: maintenance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchMaintenanceRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Maintenance'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update maintenance
+      tags:
+      - Status Pages
+      x-menu-order: 17
       x-permission:
         operator: AND
         permissions:
@@ -110025,10 +110740,8 @@ tags:
 
     - [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)
 
-
     You can use the Datadog API to create, manage, and organize tests and test suites
     programmatically.
-
 
     For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'
   name: Synthetics

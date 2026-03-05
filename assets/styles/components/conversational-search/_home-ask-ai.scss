@@ -44,16 +44,16 @@
 }
 
 .home-ai-btn {
-    $home-ai-main: rgb(79, 35, 132);
+    $home-ai-main: #b325b5;
     display: none;
     align-items: center;
     justify-content: center;
     gap: 6px;
     padding: 0 16px;
     height: 38px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 4px;
-    background: lighten($home-ai-main, 4%);
+    background: $home-ai-main;
     color: white;
     font-size: 16px;
     line-height: 24px;
@@ -63,52 +63,10 @@
     cursor: pointer;
     flex-shrink: 0;
     white-space: nowrap;
-    position: relative;
-    z-index: 0;
-    isolation: isolate;
-    overflow: hidden;
-    transition: background 0.15s ease;
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        padding: 1px;
-        background: conic-gradient(
-            from 180deg,
-            rgba(177, 141, 255, 0.95) 0deg,
-            rgba(152, 111, 245, 0.92) 110deg,
-            rgba(126, 82, 225, 0.9) 220deg,
-            rgba(177, 141, 255, 0.95) 360deg
-        );
-        mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    @supports not ((-webkit-mask-composite: xor) or (mask-composite: exclude)) {
-        border: 1px solid rgba(139, 108, 246, 0.65);
-
-        &::before {
-            display: none;
-        }
-    }
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 
     .conv-search-enabled & {
         display: inline-flex;
-    }
-
-    span, svg, img {
-        position: relative;
-        z-index: 1;
     }
 
     svg, img {
@@ -119,10 +77,12 @@
     }
 
     &:hover {
-        background: $home-ai-main;
+        background: darken($home-ai-main, 6%);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 12px rgba($home-ai-main, 0.35);
     }
 
     &:active {
-        background: darken($home-ai-main, 4%);
+        background: darken($home-ai-main, 10%);
     }
 }

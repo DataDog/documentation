@@ -73,12 +73,12 @@ To configure a repository environment:
 1. Click **Add Environment** to create a repository configuration:
    1. Select a repository from the dropdown.
    1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
-   1. (Optional) Define environment variables or secrets. These are available during both environment setup and Dev Agent execution.
+   1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Dev Agent execution. Secrets are available as environment variables only during environment setup.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
-When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. Once setup is complete, network access is disabled during Agent execution for security.
+The Dev Agent runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, network access is disabled during Agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
