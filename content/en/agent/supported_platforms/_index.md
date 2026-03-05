@@ -293,13 +293,15 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 | 10.12         |           | <= 6.34.0 | <= 7.34.0       |
 | 10.13         |           | <= 6.38.2 | <= 7.38.2       |
 | 10.14         |           |           | 7.39.0 - 7.61.0 |
-| >= 11.0       |           |           | >= 7.39.0       |
+| 11.0          |           |           | 7.39.0 - 7.74.1 |
+| >= 12.0       |           |           | >= 7.39.0       |
 
 ## Apple ARM64
 
 | macOS version | Agent 7               |
 |---------------|-----------------------|
-| >= 11.0       | >= 7.70.0*            |
+| 11.0          | 7.70.0 - 7.74.1*      |
+| >= 12.0       | >= 7.70.0*            |
 
 *Earlier versions for 64-BIT X86 may be used on Apple ARM64 through [Rosetta 2](https://support.apple.com/en-us/102527) emulation.
 
