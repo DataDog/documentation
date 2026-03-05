@@ -146,7 +146,7 @@ Consider a configuration where you set up a unique RUM retention filter configur
 
 If you have configured the SDK to sample 40% of traces, then the outcome is the following:
 
-- 40% of ingested RUM sessions will have their traces ingested on APM.
+- 40% of ingested RUM sessions have their traces ingested on APM.
 - 60% of ingested RUM sessions with at least one error will be retained.
 - 25% x 40% = 10% of these retained sessions will have their APM traces indexed.
 
