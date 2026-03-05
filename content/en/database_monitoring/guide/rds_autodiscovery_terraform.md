@@ -29,7 +29,7 @@ Prerequisites
 
 ## 1. Create the Datadog monitoring user on each RDS instance
 
-Follow the Datadog documentation to create the monitoring user on each RDS instance:
+Follow the Datadog documentation to create the `datadog` monitoring user on each RDS instance:
 
 - [Postgres][2]
 - [MySQL][3]
@@ -203,6 +203,10 @@ resource "aws_instance" "agent" {
         dbm: "%%extra_dbm%%"
         database_autodiscovery:
           enabled: true
+        collect_schemas:
+          enabled: true
+        collect_settings:
+          enabled: ture
         aws:
           instance_endpoint: "%%host%%"
           region: "%%extra_region%%"
@@ -226,9 +230,7 @@ terraform init
 terraform apply
 ```
 
-**Note**: The Agent only discovers RDS instances running in the same AWS region as the EC2 instance.
-
-**Note**: The `tags` field in the autodiscovery configuration controls which RDS instances are discovered. In this guide, `use_dbm:true` is used, but you can replace it with any custom tag applied to your RDS instances. To monitor all RDS instances in the account and region, set `tags` to an empty array in `datadog.yaml`:
+**Note**: The Agent autodiscovery can only discover RDS instances running within the same AWS region. The `use_dbm` field in the autodiscovery configuration controls which RDS instances are discovered. In this guide, `use_dbm:true` is used, but you can replace it with any custom tag applied to your RDS instances. To monitor all RDS instances in the account and region with datadog standard integration to get high level metrics, set `tags` to an empty array in `datadog.yaml`:
 
 ```yaml
 database_monitoring:
@@ -251,5 +253,5 @@ The following variables are populated automatically by the Agent at runtime from
 | `%%extra_dbm%%`                  | Whether DBM is enabled, based on the `dbm_tag` value |
 
 [1]: https://app.datadoghq.com/databases
-[2]: https://docs.datadoghq.com/database_monitoring/setup_postgres/rds/?tab=postgres15
+[2]: https://docs.datadoghq.com/database_monitoring/setup_postgres/rds/?tab=postgres15#grant-the-agent-access
 [3]: https://docs.datadoghq.com/database_monitoring/setup_mysql/rds/?tab=mysql57#grant-the-agent-access
