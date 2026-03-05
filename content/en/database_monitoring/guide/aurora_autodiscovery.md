@@ -361,6 +361,7 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%extra_dbm%% | Whether DBM is enabled on the cluster. Determined by the presence of `dbm_tag`, which defaults to `datadoghq.com/dbm:true`.                                              |
 | %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for the connection. |
 | %%global_view_db%%                       | The value of the `global_view_db_tag`, which defaults to `datadoghq.com/global_view_db`.                                                      |
+
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
