@@ -122,9 +122,9 @@ The following values are automatically applied when you set `indexer.podSize` in
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Searcher configuration per tier" level="h3" expanded=false %}}
+{{% collapse-content title="Searcher configuration per tier" level="h4" expanded=false %}}
 
-The following values are automatically applied to searcher configuration when you set `searcher.podSize` in the Helm chart. See the [Searcher configuration][3] reference for details on each parameter.
+The following values are automatically applied to searcher configuration when you set `searcher.podSize` in the Helm chart. For more details on each parameter, see the [Quickwit Searcher configuration][3].
 
 | Size | fast_field_cache_capacity | split_footer_cache_capacity | partial_request_cache_capacity | max_num_concurrent_split_searches | aggregation_memory_limit |
 |------|---------------------------|-----------------------------|-------------------------------|-----------------------------------|--------------------------|
