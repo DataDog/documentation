@@ -4,7 +4,7 @@ private: true
 description: "Configure Oracle Fusion to authorize Datadog to access its REST APIs using OAuth 2.0."
 ---
 
-{{< callout url="#" header="Join the Preview!" btn_hidden="false" >}}
+{{< callout url="#" header="false" btn_hidden="true" >}}
   Oracle Fusion is in Preview.
 {{< /callout >}}
 
