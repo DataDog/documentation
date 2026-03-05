@@ -11,4 +11,4 @@ client_sdk_platform_options:
 client_sdk_product_options:
 - default: true
   id: rum
-- id: seguimiento_de_errores
+- id: error_tracking
