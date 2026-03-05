@@ -4526,6 +4526,18 @@ menu:
       url: /api/latest/usage-metering/
       identifier: usage-metering
       generated: true
+    - name: Get usage attribution types
+      url: '#get-usage-attribution-types'
+      identifier: usage-metering-get-usage-attribution-types
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageAttributionTypes
+        unstable: []
+        order: 5
     - name: Get projected cost across your account
       url: '#get-projected-cost-across-your-account'
       identifier: usage-metering-get-projected-cost-across-your-account
