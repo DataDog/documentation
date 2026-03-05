@@ -323,7 +323,7 @@ The template variable `%%extra_managed_authentication_enabled%%` resolves to `tr
 
 To set a custom global view database for database autodiscovery, make sure that you are using Agent version 7.75.0 or above and use the following template:
 
-``` yaml {hl_lines=["12-13"]}
+``` yaml {hl_lines=["11"]}
 ad_identifiers:
   - _dbm_postgres
 init_config:
