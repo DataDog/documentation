@@ -11,7 +11,7 @@ further_reading:
 
 ## Update the CloudFormation stack
 
-Datadog recommends updating the CloudFormation stack regularly to get access to new features and bug fixes as they are released.
+Datadog recommends updating the CloudFormation stack regularly so you can get access to new features and bug fixes as they are released.
 
 1. Log in to your AWS console and go to the CloudFormation Stacks page.
 1. Expand the parent **DatadogIntegration** stack to reveal its nested sub-stacks. Select the **DatadogIntegration-DatadogAgentlessScanning-...** sub-stack, click **Update**, then click **Update nested stack**.
@@ -21,12 +21,14 @@ Datadog recommends updating the CloudFormation stack regularly to get access to 
 
 ## Update the Terraform module
 
-Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases).
+Update the `source` reference for the Agentless Scanner modules to the latest release. You can find the latest version on [GitHub Releases][2].
 
-For usage examples, see the [GitHub repository](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples).
+For usage examples, see the [GitHub repository][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases
+[3]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples

@@ -29,7 +29,7 @@ Datadog recommends the following guidelines:
 
 The deployment topology you use depends on how many cloud accounts (AWS accounts, Azure subscriptions, or GCP projects) you need to scan, and which regions they cover.
 
-- **Cloud accounts**: If you only need to scan a single account, deploy one or more scanners directly in that account. This is called **cross-account scanning**. Otherwise, use a dedicated scanner account, and use delegate roles to grant it access to scan other accounts.
+- **Cloud accounts**: If you only need to scan a single account, deploy one or more scanners directly in that account. Otherwise, use a dedicated scanner account, and use delegate roles to grant it access to scan other accounts. This is called **cross-account scanning**.
 - **Regions**: A single scanner can scan hosts in any region, including regions other than its own. However, cross-region scanning incurs data transfer costs. Whether you deploy additional scanners depends on how many hosts you have in each region.
 
 These tabs contain information on how to configure your deployment topology. Select the tab that describes how many accounts you need to scan, then learn more based on how many regions you need to cover.
@@ -107,9 +107,7 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 
 ## Enterprise networking considerations
 
-By default, the scanner creates a new VPC during deployment. If your organization has **Service Control Policies (SCPs) that restrict VPC creation**, use the **existing VPC** option during setup.
-
-<div class="alert alert-info">If your deployment fails due to SCP violations, the existing VPC option is likely the solution. See the <a href="/security/cloud_security_management/setup/agentless_scanning/enable">Agentless Scanning setup instructions</a> for your cloud provider and deployment method.</div>
+By default, the scanner creates a new VPC during deployment. If your organization has Service Control Policies (SCPs) that restrict VPC creation, use the **existing VPC** option during setup.
 
 ## Further reading
 
