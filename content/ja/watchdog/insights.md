@@ -23,7 +23,7 @@ title: Watchdog Insights
 Datadog の大半を通して、Watchdog は以下の 2 種類のインサイトを返します。
 
 - **異常**: Watchdog が組織のデータをスキャンして見つけた、アクティブな検索クエリに一致するすべての事前計算された [Watchdog アラート][11]。[Watchdog アラートエクスプローラー][12]で全リストにアクセスできます。
-- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
+- **Outliers**: 一部のイベント タイプで特定のタグが異常に頻出する (たとえば errors) ことや、連続メトリクスの値を押し上げる (たとえば latency) タグを指します。 Outliers は、アクティブなクエリと時間範囲に一致するデータをもとに動的に算出されます。
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="Watchdog Insights のバナーと 5 つのログ異常が表示されたログエクスプローラー" style="width:100%;" >}}
 
@@ -42,12 +42,13 @@ Watchdog Insights のカルーセルは、以下の製品ページの上部付�
     - [プロセスエクスプローラー][7]
     - [サーバーレスエクスプローラー][8]
     - [Kubernetes エクスプローラー][9]
-- [リアルユーザーモニタリング (RUM) エクスプローラー][10]
-- [エラー追跡の問題サイドパネル][13]
+    - [リアルユーザーモニタリング (RUM) エクスプローラー][10]
+    - [Synthetic Monitoring & Testing Explorer][15]
+    - [エラー追跡の問題サイドパネル][13]
 
 カルーセルを展開すると、概要が表示されます。最も優先度の高いインサイト (`Insight type`、`State`、`Status`、`Start time`、`Anomaly type` に基づく) が左側に表示されます。
 
-{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="ログエクスプローラーの Watchdog Insights カルーセルには、Web ストアサービスの新しいエラーログ、商品レコメンドサービスのエラーログの急増、商品レコメンドサービスのエラーログの別の急増の 3 つの異常が表示されています" style="width:100%;">}}
+{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="Log Explorer の Watchdog Insights カルーセル。 web-store サービスの新規エラー ログ、および product-recommendation サービスで発生した 2 件のエラー ログのスパイクという 3 つの異常を表示している" style="width:100%;">}}
 
 **View all** をクリックするとパネルが展開されます。右側からサイドパネルが開き、Watchdog Insights の垂直リストが表示されます。各エントリには詳細表示があり、サマリーカードより多くの情報が表示されます。
 
@@ -55,26 +56,27 @@ Watchdog Insights のカルーセルは、以下の製品ページの上部付�
 
 ### Filter on Insight クエリ
 
-To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
-**Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
+現在の表示を Watchdog Insight に合わせて絞り込むには、Insight サマリー カードの右上にカーソルを合わせます。 2 つのアイコンが表示されるので、ツールチップが **Filter on Insight** になっている逆三角形のアイコンをクリックします。ページが更新され、該当する Insight に対応するエントリーの一覧が表示されます。
+**Note**: Watchdog Insights でフィルタリングすると、確認対象のスコープが自動的に変わります。その結果、外れ値の Insight を選ぶと、それがベースラインとして扱われるため表示されなくなります。
 
 {{< img src="watchdog/filter_on_insight.png" alt="インサイトコンテキストでのエクスプローラーのフィルター" style="width:70%;">}}
 
-### Share an outlier
+### 外れ値を共有する
 
-To share a given outlier, click on it in the insight panel to open the details side panel. Click the **Copy Link** button at the top of the details panel:
+特定の外れ値を共有するには、Insight パネルでその外れ値をクリックして詳細のサイド パネルを開きます。続いて、詳細パネル上部の **Copy Link** ボタンをクリックします。
 
-{{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
+{{< img src="watchdog/share-outlier.png" alt="リンクをコピーする手順を示す Outlier サイド パネル" style="width:80%;">}}
 
-The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
+外れ値へのリンクは、元となるデータの保持期間が過ぎると失効します。たとえば、外れ値の算出に使ったログの保持期間が 15 日の場合、その外れ値へのリンクもログと同じく 15 日で失効します。
 
-## Explore graph insights with Watchdog explains
-{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="Filter out the offending tag, in this case researcher-query, to compare the original against what the graph would look like without the offending tag" style="width:90%;" >}}
-Datadog collects various types of data to provide insights into application performance, including metrics, traces, and logs, which tell you what, how, and why something is happening. Watchdog Explains analyzes high-level trends such as latency, error rates, or request count evolution to detect critical signals. Upon observing a spike in these graphs, Watchdog Explains helps you investigate the immediate questions:
-- What is the source of the spike?
-- Does this anomaly affect everyone or is an isolated incident?
+## Watchdog Explains でグラフの Insight を調べる
+{{< img src="dashboards/graph_insights/watchdog_explains/graph_filter_tag.png" alt="問題のタグ (この例では researcher-query) を除外し、元の状態と、問題のタグを除外した場合にグラフがどう見えるかを比較する" style="width:90%;" >}}
 
-For more information, see the [Watchdog Explains][14] documentation.
+Datadog は、メトリクス、トレース、ログなど、アプリケーションパフォーマンスに関するさまざまなデータを収集し、「何が」「どのように」「なぜ」起こっているのかを明らかにします。Watchdog Explains は、レイテンシー、エラー率、リクエスト数の推移などの大まかなトレンドを分析し、重要なシグナルを検出します。これらのグラフでスパイクが確認された際、Watchdog Explains は次のような重要な疑問を迅速に解明する手助けをします。
+- このスパイクの原因は？
+- この異常は全体に影響しているのか、それとも単独の事象なのか？
+
+詳細は [Watchdog Explains][14] のドキュメントを参照してください。
 
 ## 外れ値タイプ
 
@@ -145,7 +147,7 @@ APM の外れ値は、Watchdog Insights カルーセルが利用可能なすべ�
 * タグを含むスパンのレイテンシー分布と残りのデータのベースライン
 * 外れ値タグの対象レイテンシー値のパーセンタイルと、残りのデータのベースラインとの差
 
-{{< img src="tracing/trace_explorer/watchdog_insights/latency_outliers_s_card.png" alt="Latency Outlier banner card" style="width:30%;" >}}
+{{< img src="tracing/trace_explorer/watchdog_insights/latency_outliers_s_card.png" alt="レイテンシー外れ値バナーカード" style="width:30%;" >}}
 
 フルサイドパネルでは、タグとベースラインのレイテンシー分布グラフを見ることができます。X 軸には `p50`、`p75`、`p99`、`max` の増分と、フィールドを含む APM イベントのリストが表示されます。
 
@@ -154,7 +156,7 @@ APM の外れ値は、Watchdog Insights カルーセルが利用可能なすべ�
 {{% /tab %}}
 {{% tab "プロファイリング" %}}
 
-### Lock contention outlier
+### Lock Contention の外れ値
 
 バナーカードビューでは、次のことがわかります。
 
@@ -162,37 +164,37 @@ APM の外れ値は、Watchdog Insights カルーセルが利用可能なすべ�
   * 影響を受けるスレッドの数
   * 潜在的な CPU の節約 (および推定コスト節約)
 
-{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Lock Contention に関する Profiling Insight" style="width:50%;">}}
 
-In the full side panel, you can see instructions on how to resolve the lock contention:
+詳細のサイド パネルでは Lock Contention を解消するための手順を確認できます。
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to address the Lock Contention outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Lock Contention の外れ値への対処方法に関する情報がすべて表示されたサイド パネル" style="width:100%;">}}
 
 ### ガベージコレクション外れ値
 
 バナーカードビューでは、次のことがわかります。
 
   * 影響を受けるサービスの名前
-  * The amount of CPU time used to perform garbage collection
+  * ガベージ コレクションの実行に使用された CPU 時間
 
 {{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="ガベージコレクションに関するプロファイリングのインサイト" style="width:30%;">}}
 
 フルサイドパネルでは、ガベージコレクションをより適切に構成して CPU 時間を解放する方法を確認できます。
 
-{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to address the Garbage Collection outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Garbage Collection の外れ値への対処方法に関する情報がすべて表示されたサイド パネル" style="width:100%;">}}
 
 ### 正規表現コンパイル外れ値
 
 バナーカードビューでは、次のことがわかります。
 
   * 影響を受けるサービスの名前
-  * The amount of CPU time spent on compiling regexes
+  * 正規表現のコンパイルに費やされた CPU 時間
 
 {{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="正規表現コンパイルに関するプロファイリングのインサイト" style="width:30%;">}}
 
 フルサイドパネルでは、正規表現のコンパイル時間を改善する方法や、コード内で改善できる関数の例を確認できます。
 
-{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to address the Regex Compilation outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Regex Compilation の外れ値への対処方法に関する情報がすべて表示されたサイド パネル" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "データベース" %}}
@@ -210,7 +212,7 @@ Database Monitoring では、Watchdog は以下のメトリクスに関するイ
 
 {{< img src="watchdog/side_panel_dbm_insights.png" alt="インサイトでデータベースをフィルターするカルーセル" style="width:100%;">}}
 
-そして、データベースにオーバーレイが設定され、さまざまなインサイトをハイライトするピンクの錠剤が表示され、何が起こったかを詳細に確認することができます。
+その後、データベース上にオーバーレイが表示され、ピンクのピル型ラベルで各 Insight がハイライトされます。あわせて、何が起きたのかの追加情報も表示されます。
 
 {{< img src="watchdog/overlay_database_insight.png" alt="Watchdog インサイトがデータベースにオーバーレイされ、何が起きているのかがハイライトされています" style="width:100%;">}}
 
@@ -247,8 +249,25 @@ Database Monitoring では、Watchdog は以下のメトリクスに関するイ
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="レイテンシー外れ値フルサイドパネルビュー" style="width:100%;" >}}
 
 [1]: /ja/real_user_monitoring/explorer/search/#facets
-[2]: /ja/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /ja/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[2]: /ja/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /ja/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+{{% /tab %}}
+{{% tab "Synthetic Monitoring" %}}
+
+### エラー外れ値
+
+Synthetic Monitoring の Error Outliers は、想定外の挙動やパフォーマンスの逸脱を示します。これらの異常から、あなたの [Synthetic Browser Tests][101] における信頼性の問題を把握できます。 Error Outliers を特定することで、失敗したテスト実行で発生したエラーの原因調査がしやすくなり、デバッグを効率化して Mean Time To Resolution (MTTR) を短縮できます。
+
+失敗したテスト実行を確認すると、失敗したテストに紐づく Error Outliers の数が表示されます。
+
+{{< img src="watchdog/synthetics_watchdog_outlier.png" alt="失敗したブラウザ テストの実行の概要。テスト ステップの詳細と、失敗したテスト ステップの Error Outlier として Watchdog が特定したエラー メッセージが表示されている" style="width:100%;" >}}
+
+Error Outlier のメッセージを確認するには、外れ値をクリックします。続いて、テスト ステップのサイド パネルで **Errors & Warnings** タブをクリックします。
+
+{{< img src="watchdog/outlier_step_error_2.png" alt="Watchdog が失敗したテスト ステップの Error Outlier として特定したエラー メッセージ" style="width:100%;" >}}
+
+[101]: /ja/synthetics/browser_tests
+
 {{% /tab %}}
 {{% tab "サーバーレス" %}}
 
@@ -266,7 +285,7 @@ Database Monitoring では、Watchdog は以下のメトリクスに関するイ
 
 {{< img src="watchdog/side_panel_serverless_facet_insights.png" alt="インサイトでサーバーレス関数をフィルターするファセット" style="width:30%;">}}
 
-An overlay is then set on the function, with pink pills highlighting the different insights and giving more information about what happened.
+その後、関数上にオーバーレイが表示され、ピンクのピル型ラベルで各 Insight がハイライトされます。あわせて、何が起きたのかの追加情報も表示されます。
 
 {{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog インサイトが関数にオーバーレイされ、何が起きているのかがハイライトされています" style="width:100%;">}}
 
@@ -274,7 +293,7 @@ An overlay is then set on the function, with pink pills highlighting the differe
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
+プロセスエクスプローラーの場合、Watchdog インサイトカルーセルには、プロセスエクスプローラーの現在のコンテキストの[すべてのプロセスの異常][1]が反映されます。
 
 [1]: https://app.datadoghq.com/process
 {{% /tab %}}
@@ -305,3 +324,4 @@ Kubernetes エクスプローラーの場合、Watchdog インサイトカルー
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
 [14]: /ja/dashboards/graph_insights/watchdog_explains
+[15]: https://app.datadoghq.com/synthetics/explorer

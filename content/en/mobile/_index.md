@@ -280,7 +280,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
 
 ### Bits AI SRE
 {{< tabs >}}
@@ -350,6 +350,6 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [24]: /dashboards/configure/#configuration-actions
 [25]: /logs/explorer/watchdog_insights/
 [26]: /watchdog/insights/?tab=logmanagement
-[27]: /bits_ai/chat_with_bits_ai/
+[27]: /bits_ai/bits_assistant/
 [28]: /bits_ai/bits_ai_sre/
 [29]: /account_management/multi_organization/#custom-sub-domains
