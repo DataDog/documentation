@@ -217,13 +217,11 @@ If a page requires structured navigation (for example, a long multi-stage workfl
 
 Contributors may use AI code assistants (such as Claude Code, GitHub Copilot, Cursor, and others) when working on documentation. If you do, keep the following in mind:
 
-**Transparency**: Disclose AI tool usage in your pull request description. This helps reviewers understand how the content was produced and calibrate their review. Use the AI assistance section in the PR template.
+**Transparency**: Note AI tool usage in your pull request description using the AI assistance section in the PR template. This helps reviewers calibrate their review.
 
-**Quality and accuracy**: AI-assisted contributions are held to the same quality bar as any other contribution. You are responsible for verifying the accuracy and correctness of all content, regardless of how it was produced. Do not submit AI-generated content without reviewing it yourself.
+**Quality and accuracy**: AI-assisted contributions are held to the same quality bar as any other contribution. You are responsible for the accuracy of all content you submit, regardless of how it was produced.
 
-**Style compliance**: AI tools may not follow the [Datadog documentation style guide][4] or [Vale linting rules][4]. Run `vale` on your changes and fix any issues before submitting.
-
-**Sensitive information**: Do not paste proprietary, confidential, or customer-specific information into AI tools. Use placeholder values in examples as described in the [Code substitution](#code-substitution) section.
+**Style compliance**: AI tools don't follow the Datadog documentation [style guide][4] or [Vale linting rules][4]. Run `vale` on your changes and fix any issues before submitting.
 
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119
