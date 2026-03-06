@@ -396,7 +396,7 @@ In addition, some Kubernetes pod tags that are common between all pods on the sa
 
 {% /if %}
 
-{% if or(equals($platform, "google"), equals($platform, "azure")) %}
+{% if includes($platform, ["google", "azure"]) %}
 ### Kubernetes
 
 In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
