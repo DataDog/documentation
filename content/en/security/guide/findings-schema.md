@@ -1313,7 +1313,11 @@ The following sections describe all available attributes in the Security Finding
 
 
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Core Attributes" level="h3" id="core-attributes" %}}
+=======
+{{% collapse-content title="Core Attributes" level="h3" %}}
+>>>>>>> Stashed changes
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
 
@@ -1416,7 +1420,11 @@ These attributes are present on all security findings and describe the fundament
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Workflow" level="h3" id="workflow" %}}
+=======
+{{% collapse-content title="Workflow" level="h3" %}}
+>>>>>>> Stashed changes
 
 All mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through pipelines.
 
@@ -1622,7 +1630,11 @@ Muting information and metadata.
     <tr>
       <td><code>is_muted_by_rule</code></td>
       <td>boolean</td>
+<<<<<<< Updated upstream
       <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>True if the finding is muted by an automation rule; false otherwise. If true, the relevant automation rule is referenced in the workflow.automations section.</td>
+=======
+      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>True if the finding is muted by an automation rule; false otherwise. If true, the relevant automation rule is referenced in the workflow.automation section.</td>
+>>>>>>> Stashed changes
     </tr>
     <tr>
       <td><code>rule_id</code></td>
@@ -1706,7 +1718,11 @@ Integrations like Jira, Case Management, or ServiceNow used to triage and remedi
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Risk" level="h3" id="risk" %}}
+=======
+{{% collapse-content title="Risk" level="h3" %}}
+>>>>>>> Stashed changes
 
 Risk-related attributes for the finding. Each key must have a matching key in the `risk_details` namespace.
 
@@ -1784,7 +1800,11 @@ Risk-related attributes for the finding. Each key must have a matching key in th
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Risk Details" level="h3" id="risk-details" %}}
+=======
+{{% collapse-content title="Risk Details" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation.
 
@@ -2447,7 +2467,11 @@ Groups information about whether SHA1 is used in a weak hash.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Rule" level="h3" id="rule" %}}
+=======
+{{% collapse-content title="Rule" level="h3" %}}
+>>>>>>> Stashed changes
 
 Describes how to discover a vulnerability. Vulnerability findings with rules mean the vulnerability was detected in source code or running code. Rules are also used for non-vulnerability findings such as misconfigurations or API security.
 
@@ -2490,7 +2514,11 @@ Describes how to discover a vulnerability. Vulnerability findings with rules mea
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Advisory" level="h3" id="advisory" %}}
+=======
+{{% collapse-content title="Advisory" level="h3" %}}
+>>>>>>> Stashed changes
 
 Ties a vulnerability to a set of specific software versions. Vulnerability findings with advisories mean a vulnerable version of the software was detected (typically through SBOMs).
 
@@ -2543,7 +2571,11 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Vulnerability" level="h3" id="vulnerability" %}}
+=======
+{{% collapse-content title="Vulnerability" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains information specific to vulnerabilities.
 
@@ -2632,7 +2664,11 @@ Specifies the technological stack where the vulnerability was found.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Remediation" level="h3" id="remediation" %}}
+=======
+{{% collapse-content title="Remediation" level="h3" %}}
+>>>>>>> Stashed changes
 
 Groups information about the finding's remediation.
 
@@ -2973,7 +3009,11 @@ Specifies the closest patch available to address the current advisory.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Compliance" level="h3" id="compliance" %}}
+=======
+{{% collapse-content title="Compliance" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains information specific to compliance findings, such as compliance rule or evaluation (pass/fail).
 
@@ -3011,7 +3051,11 @@ Contains information specific to compliance findings, such as compliance rule or
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Cloud Resource" level="h3" id="cloud-resource" %}}
+=======
+{{% collapse-content title="Cloud Resource" level="h3" %}}
+>>>>>>> Stashed changes
 
 Groups attributes identifying the cloud resource affected by the finding.
 
@@ -3089,7 +3133,11 @@ Groups attributes identifying the cloud resource affected by the finding.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Iac Resource" level="h3" id="iac-resource" %}}
+=======
+{{% collapse-content title="Iac Resource" level="h3" %}}
+>>>>>>> Stashed changes
 
 Groups attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
 
@@ -3117,7 +3165,11 @@ Groups attributes identifying the Infrastructure as Code (IaC) resource related 
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="K8S" level="h3" id="k8s" %}}
+=======
+{{% collapse-content title="K8S" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains Kubernetes fields for findings generated against Kubernetes resources.
 
@@ -3140,7 +3192,11 @@ Contains Kubernetes fields for findings generated against Kubernetes resources.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Host" level="h3" id="host" %}}
+=======
+{{% collapse-content title="Host" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains host information.
 
@@ -3209,7 +3265,11 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Service" level="h3" id="service" %}}
+=======
+{{% collapse-content title="Service" level="h3" %}}
+>>>>>>> Stashed changes
 
 <table>
   <thead>
@@ -3240,7 +3300,11 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Container Image" level="h3" id="container-image" %}}
+=======
+{{% collapse-content title="Container Image" level="h3" %}}
+>>>>>>> Stashed changes
 
 <table>
   <thead>
@@ -3306,7 +3370,11 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Git" level="h3" id="git" %}}
+=======
+{{% collapse-content title="Git" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains Git metadata linking a finding to source code context. Includes information about the repository, branch, commit, author, and committer.
 
@@ -3436,7 +3504,11 @@ Contains details about the committer.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Code Location" level="h3" id="code-location" %}}
+=======
+{{% collapse-content title="Code Location" level="h3" %}}
+>>>>>>> Stashed changes
 
 Groups attributes pinpointing the specific file and line numbers where the finding is located.
 
@@ -3494,7 +3566,11 @@ Groups attributes pinpointing the specific file and line numbers where the findi
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Package" level="h3" id="package" %}}
+=======
+{{% collapse-content title="Package" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains package manager information. A package manager automates the installation, upgrading, configuration, and removal of software packages.
 
@@ -3766,7 +3842,11 @@ Version declared for the root parent.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Secret" level="h3" id="secret" %}}
+=======
+{{% collapse-content title="Secret" level="h3" %}}
+>>>>>>> Stashed changes
 
 <table>
   <thead>
@@ -3787,7 +3867,11 @@ Version declared for the root parent.
 
 {{% /collapse-content %}}
 
+<<<<<<< Updated upstream
 {{% collapse-content title="Api Endpoint" level="h3" id="api-endpoint" %}}
+=======
+{{% collapse-content title="Api Endpoint" level="h3" %}}
+>>>>>>> Stashed changes
 
 Contains the HTTP endpoint representation.
 

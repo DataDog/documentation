@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:support.google.com)",
+      "Bash(git commit:*)",
+      "Bash(cp:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh repo view:*)",
+      "Bash(chmod:*)",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(dos2unix:*)",
+      "Bash(mv:*)"
+    ]
+  }
+}
