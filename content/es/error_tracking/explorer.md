@@ -110,7 +110,7 @@ Ver un nuevo incidente en cuanto se produce te da la oportunidad de identificarl
 
 Puedes exportar directamente tu consulta de búsqueda desde el Explorador para crear un monitor de Error Tracking en el contexto relacionado:
 
-{{< img src="/error_tracking/create-monitor-2.mp4" alt="Exportar tu consulta de búsqueda a un monitor de Error Tracking" video=true >}}
+{{< img src="/error_tracking/create-monitor.mp4" alt="Exportar tu consulta de búsqueda a un monitor de Error Tracking" video=true >}}
 
 ## Referencias adicionales
 

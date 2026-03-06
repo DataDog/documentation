@@ -56,7 +56,7 @@ title: 오류 추적 탐색기
 
 생성된 각 이벤트에는 버전, 서비스 및 환경에 태그가 지정되어 알림을 받고자 하는 이슈를 세밀하게 제어할 수 있습니다. 탐색기에서 검색 쿼리를 직접 내보내 관련 범위에 대한 이벤트 모니터를 만들 수 있습니다:
 
-{{< img src="error_tracking/create-monitor-2.mp4" alt="검색 쿼리를 오류 추적 모니터로 내보내기" video=true >}}
+{{< img src="real_user_monitoring/error_tracking/export_to_monitor.mp4" alt="검색 쿼리를 오류 추적 모니터로 내보내기" video=true >}}
 
 ## 참고 자료
 

@@ -110,7 +110,7 @@ Seeing a new issue as soon as it happens gives you the chance to proactively ide
 
 You can directly export your search query from the explorer to create an Error Tracking Monitor on the related scope:
 
-{{< img src="/error_tracking/create-monitor-2.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
+{{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
 
 ## Further Reading
 

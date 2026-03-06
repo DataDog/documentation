@@ -56,7 +56,7 @@ En étant informé d'un nouveau problème dès qu'il se présente, vous avez la 
 
 Chaque événement généré reçoit automatiquement les tags de version, de service et d'environnement pour vous permettre de contrôler avec précision les problèmes pour lesquels vous souhaitez recevoir une alerte. Vous pouvez exporter votre requête de recherche directement depuis l'explorateur afin de créer un monitor d'événement correspondant :
 
-{{< img src="error_tracking/create-monitor-2.mp4" alt="Exporter votre requête de recherche vers un monitor du suivi des erreurs" video=true >}}
+{{< img src="real_user_monitoring/error_tracking/export_to_monitor.mp4" alt="Exporter votre requête de recherche vers un monitor du suivi des erreurs" video=true >}}
 
 ## Pour aller plus loin
 
