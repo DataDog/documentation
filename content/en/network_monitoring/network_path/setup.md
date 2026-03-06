@@ -82,8 +82,6 @@ Agent `v7.59+` is required.
 
 Agent `v7.75+` is required.
 
-**Note**: Dynamic path tests are not supported on macOS.
-
 1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
 
    ```
