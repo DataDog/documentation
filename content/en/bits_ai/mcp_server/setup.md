@@ -51,37 +51,38 @@ To install the extension:
 
 You can connect Claude Code to the Datadog MCP Server using remote authentication (HTTP) or local binary authentication (stdio).
 
-#### Remote authentication
+### Remote authentication
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, if you're using `app.datadoghq.com`, use the US1 endpoint.
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
-
-* **Command line**: Run (use the endpoint for your site from the table above):
-  ```bash
-  claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
-  ```
+* **Command line**: Run:
+  <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}
+  </code></pre>
 
 * **Configuration file**: Add to `~/.claude.json`:
-  ```json
-  {
+  <pre><code>{
     "mcpServers": {
       "datadog": {
         "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+        "url": "{{< region-param key="mcp_server_endpoint" >}}"
       }
     }
   }
-  ```
+  </code></pre>
 
-#### Local binary authentication
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
+
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+### Local binary authentication
 
 Use this option if remote authentication is not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
@@ -109,7 +110,6 @@ Use this option if remote authentication is not available. After installation, y
    Or run: `claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli`
 
 [1]: /getting_started/site/
-
 {{% /tab %}}
 
 {{% tab "Claude Desktop" %}}
@@ -150,23 +150,16 @@ Claude Desktop has limited support for remote authentication. Use **local binary
 
 {{% tab "Codex" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, if you're using `app.datadoghq.com`, use the US1 endpoint.
+You can connect Codex CLI to the Datadog MCP Server using HTTP transport.
 
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site. Example configuration (US1):
+1. Edit `~/.codex/config.toml` (or your Codex CLI configuration file) to add the Datadog MCP Server with HTTP transport and the endpoint URL for your site. Example configuration ({{< region-param key="dd_site_name" >}}):
 
-   ```toml
-   [mcp_servers.datadog]
-   url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
-   ```
+   <pre><code>[mcp_servers.datadog]
+   url = "{{< region-param key="mcp_server_endpoint" >}}"
+   </code></pre>
 
 2. Log in to the Datadog MCP Server by running:
 
@@ -177,7 +170,15 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
    This opens your browser to complete the OAuth flow. Codex stores the resulting credentials so you don't need to log in again until the token expires.
 
 [1]: /getting_started/site/
+{{< /site-region >}}
 
+{{< site-region region="gov" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
+
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+[1]: /getting_started/site/
+{{< /site-region >}}
 {{% /tab %}}
 
 {{% tab "VS Code" %}}
@@ -206,18 +207,10 @@ To install the extension:
 
 The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use **remote authentication** when your client supports it. For Cline or when remote authentication is unreliable, use **local binary authentication**.
 
-#### Remote authentication
+### Remote authentication
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][5]. For example, if you're using `app.datadoghq.com`, use the US1 endpoint.
-
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 Add the Datadog MCP Server to your client's configuration using the HTTP transport and the endpoint above. Example config file locations:
 
@@ -226,20 +219,30 @@ Add the Datadog MCP Server to your client's configuration using the HTTP transpo
 | Gemini CLI | `~/.gemini/settings.json` |
 | Kiro CLI | `~/.kiro/settings/mcp.json` |
 
-Example JSON configuration (US1):
+Example JSON configuration ({{< region-param key="dd_site_name" >}}):
 
-```json
-{
+<pre><code>{
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
+      "url": "{{< region-param key="mcp_server_endpoint" >}}"
     }
   }
 }
-```
+</code></pre>
 
-#### Local binary authentication
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
+
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+### Local binary authentication
 
 Local authentication is recommended for Cline and when remote authentication is unreliable.
 
