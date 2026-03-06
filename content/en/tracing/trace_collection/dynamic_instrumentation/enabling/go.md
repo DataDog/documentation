@@ -15,7 +15,7 @@ further_reading:
 
 {{< partial name="dynamic_instrumentation/beta-callout.html" language="Go" limitations_anchor="unsupported-features" >}}
 
-Dynamic Instrumentation is a feature of the Datadog tracing library. If you already have [APM][10] set up and your Agent and tracing library meet the [prerequisites](#prerequisites), go directly to enabling Dynamic Instrumentation.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Go.
 
 ## Prerequisites
 
@@ -109,4 +109,3 @@ See the [Live Debugger documentation][4] for information about adding instrument
 [7]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [8]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 [9]: /dynamic_instrumentation/#prerequisites
-[10]: /tracing/trace_collection/

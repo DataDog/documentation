@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of the Datadog tracing library. If you already have [APM][1] set up and your Agent and tracing library meet the [prerequisites](#prerequisites), go directly to enabling Dynamic Instrumentation.
+Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Node.js.
 
 ## Prerequisites
 
@@ -78,7 +78,6 @@ The following limitations apply to the Node.js implementation:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/
 [2]: /tracing/trace_collection/dd_libraries/nodejs/
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /dynamic_instrumentation/
