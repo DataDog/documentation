@@ -43,16 +43,16 @@ After you create a Wildcard widget, you can configure the widget either as a [ne
 ### Configure a new Wildcard widget
 
 1. [Check native widgets][4]. See if a Datadog widget can fulfill your requirements.
-1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click **Add Widgets**.
+1. If no Datadog widget meets your requirements, in a new or pre-existing dashboard, click {{< ui >}}Add Widgets{{< /ui >}}.
 1. Click and drag the Wildcard Widget icon from the widget tray.
-1. Select from the **Request Type** dropdown. For more information on Scalar and Timeseries types, see the [Formulas Scalar vs. Formulas Timeseries](#formulas-scalar-vs-formulas-timeseries) section of this page.
+1. Select from the {{< ui >}}Request Type{{< /ui >}} dropdown. For more information on Scalar and Timeseries types, see the [Formulas Scalar vs. Formulas Timeseries](#formulas-scalar-vs-formulas-timeseries) section of this page.
 1. Copy a Vega-Lite Definition from the [public gallery][5] to find a starter Vega-Lite specification.
-1. Open the Wildcard widget [full screen editor][6] and click **Define Visual**.
+1. Open the Wildcard widget [full screen editor][6] and click {{< ui >}}Define Visual{{< /ui >}}.
 1. Paste the copied Vega-Lite definition.
-1. Click **Run** to apply your configuration changes, see a preview of the visualization, and iterate on your design.
-   **Note**: You must click **Run** to add your changes, however this does not save your configuration.
+1. Click {{< ui >}}Run{{< /ui >}} to apply your configuration changes, see a preview of the visualization, and iterate on your design.
+   **Note**: You must click {{< ui >}}Run{{< /ui >}} to add your changes, however this does not save your configuration.
 1. (Optional) Debug Vega-Lite specification mismatches with [Data Preview](#data-preview). Make sure the query in your Vega-Lite specification maps to the Datadog query.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 #### Formulas Scalar vs. Formulas Timeseries
 
@@ -100,7 +100,7 @@ To see how Datadog values map to the Vega-Lite specification, start with the exa
 
 {{< img src="/dashboards/widgets/wildcard/example_configuration_query.png" alt="Example widget configuration metric query for system.cpu.user grouped by env" style="width:100%;" >}}
 
-Click on the **Define Visual** tab to view how this query maps to Vega-Lite. Open the Data Preview panel and notice the matching **query1** and **env** fields listed in the Vega-Lite specification and the Data Preview column.
+Click on the {{< ui >}}Define Visual{{< /ui >}} tab to view how this query maps to Vega-Lite. Open the Data Preview panel and notice the matching **query1** and **env** fields listed in the Vega-Lite specification and the Data Preview column.
 
 {{< highlight json "hl_lines=8 12" >}}
   {

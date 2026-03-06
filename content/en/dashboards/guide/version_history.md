@@ -23,7 +23,7 @@ All dashboards retain 30 days worth of version history by default. In order to s
 With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing dashboards. 
 
 ## View versions
-From an individual dashboard, click **Configure** on the top right of the page and select **Version History**. If there are no edits within the retention period, Version History is disabled.
+From an individual dashboard, click {{< ui >}}Configure{{< /ui >}} on the top right of the page and select {{< ui >}}Version History{{< /ui >}}. If there are no edits within the retention period, Version History is disabled.
 
 {{< img src="/dashboards/guide/version_history/configure_actions_version_history.png" alt="Disabled version history option in the dashboard Configure Actions menu" style="width:50%;" >}}
 
@@ -42,13 +42,13 @@ There are two ways you can restore your dashboard to a previous version.
 
 {{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History side panel shows past dashboard versions and ways to restore them." style="width:100%;" >}}
 
-- From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this version**.
-- When the Version History side panel opens up, a button appears at the top of the page to **Restore this version**.
+- From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select {{< ui >}}Restore this version{{< /ui >}}.
+- When the Version History side panel opens up, a button appears at the top of the page to {{< ui >}}Restore this version{{< /ui >}}.
 
 Restoring a version updates the dashboard to that version for all users and a new entry is added to the version history showing the restore. This does not overwrite the history of your changes, so you are still able preview and restore to any versions within your retention period. 
 
 ## Clone a version
-If you do not want to change your current dashboard but you'd like to create a copy of a previous version, you can create a clone from any version in your version history. From the Version History side panel after you choose the version you want to make a copy of, click the kebab menu to the right of a user profile and select **Clone**.
+If you do not want to change your current dashboard but you'd like to create a copy of a previous version, you can create a clone from any version in your version history. From the Version History side panel after you choose the version you want to make a copy of, click the kebab menu to the right of a user profile and select {{< ui >}}Clone{{< /ui >}}.
 
 ## Version History retention
 

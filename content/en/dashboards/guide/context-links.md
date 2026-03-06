@@ -38,7 +38,7 @@ Users with [edit permissions][3] to dashboards can configure which links are acc
  
  {{< img src="dashboards/guide/context_links/default-links.png" alt="Default links" style="width:75%;" >}}
 
-By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click **More Related Data Actions** to see additional links in the dropdown menu. 
+By default, the widget menu displays links to your host, [traces][4], and [logs][5]—along with links that correspond to the widget's data sources. For example, the menu displays a link to the [**RUM Explorer**][6] if your widget uses [RUM data][7]. Click {{< ui >}}More Related Data Actions{{< /ui >}} to see additional links in the dropdown menu. 
 
 The widget contains links to the following pages:  
 

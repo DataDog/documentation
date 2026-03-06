@@ -27,8 +27,8 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
 ### Configuration
 1. Choose the visualization layer:
-    * **Regions**: Aggregate measures at a country or country subdivisions level.
-    * **Points**: Overlay events as points on the map to display geographic event data.
+    * {{< ui >}}Regions{{< /ui >}}: Aggregate measures at a country or country subdivisions level.
+    * {{< ui >}}Points{{< /ui >}}: Overlay events as points on the map to display geographic event data.
 
 2. Choose the data to graph: <br>
   **Note**: Support for data sources varies based on the visualization layer you select.
@@ -66,7 +66,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   {{% /tab %}}
   {{< /tabs >}}
 
-3. (Optional) Under **Visual Options**, use the **Set widget default view** dropdown to select where to initially focus the map. Select **Custom** to define a custom region, or search for the name of a country, state, or province.
+3. (Optional) Under {{< ui >}}Visual Options{{< /ui >}}, use the {{< ui >}}Set widget default view{{< /ui >}} dropdown to select where to initially focus the map. Select {{< ui >}}Custom{{< /ui >}} to define a custom region, or search for the name of a country, state, or province.
 
 ### Options
 

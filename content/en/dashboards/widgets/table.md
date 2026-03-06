@@ -27,11 +27,11 @@ The table visualization displays columns of aggregated data grouped by tag key. 
     * Metric: See the [Main graphing documentation][1] to configure a metric query.
     * Non-metric data sources: See the [Log search documentation][2] to configure an event query.
 
-2. Add additional columns to the table by using the **+ Add Query** and **+ Add Formula** buttons.
+2. Add additional columns to the table by using the {{< ui >}}+ Add Query{{< /ui >}} and {{< ui >}}+ Add Formula{{< /ui >}} buttons.
 
 ### Options
 
-* Rename column headers by setting aliases, click the **as...** button.
+* Rename column headers by setting aliases, click the {{< ui >}}as...{{< /ui >}} button.
 * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
 #### Column formatting

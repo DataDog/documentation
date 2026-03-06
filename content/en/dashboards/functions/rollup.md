@@ -14,7 +14,7 @@ Every metric query is inherently aggregated. However, appending the `.rollup()` 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
 
-To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+To apply a rollup, navigate to the {{< ui >}}Add function{{< /ui >}} (Σ) button of the graphing editor: 
 
 {{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 

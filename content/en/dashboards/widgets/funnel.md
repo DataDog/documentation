@@ -25,7 +25,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 1. Choose the data to graph:
     * RUM: See the [Search RUM Events documentation][1] to configure a RUM query.
-2. Select **View** or **Action** and choose a query from the dropdown menu.
+2. Select {{< ui >}}View{{< /ui >}} or {{< ui >}}Action{{< /ui >}} and choose a query from the dropdown menu.
 3. Click the **+** button and select another query from the dropdown menu to visualize the funnel. See the [RUM Visualize documentation][2] for more information on visualizing Funnel analysis.
 
 ### Options

@@ -35,8 +35,8 @@ Metric Correlations can help you find potential root causes for an observed issu
 
 You can start your metric correlations exploration from any of your dashboards, notebooks, APM, Watchdog alerts, or monitor status pages.
 
-* Left click on any graph and select **Find correlated metrics**.
-* From a full-screen graph, click the **Correlations** tab.
+* Left click on any graph and select {{< ui >}}Find correlated metrics{{< /ui >}}.
+* From a full-screen graph, click the {{< ui >}}Correlations{{< /ui >}} tab.
 
 {{< img src="dashboards/correlations/find_correlated_metrics.png" alt="Dashboard graph menu option find correlated metrics" style="width:80%;">}}
 
@@ -44,15 +44,15 @@ You can start your metric correlations exploration from any of your dashboards, 
 
 Correlations *tries* to automatically detect the area of interest (anomalous behavior) for your metric. If the area of interest is not selected automatically or needs adjustment, you can manually draw the area of interest from the [edit search](#edit) option. Datadog searches for other metrics that exhibit anomalous behavior at times matching the area of interest.
 
-**Note**: Correlation searches are available for a single metric. For graphs with multiple metrics, select the series of interest. From a full-screen graph, select one series on the graph legend, then click the **Correlations** tab.
+**Note**: Correlation searches are available for a single metric. For graphs with multiple metrics, select the series of interest. From a full-screen graph, select one series on the graph legend, then click the {{< ui >}}Correlations{{< /ui >}} tab.
 
 ## Customize your search
 
-You can customize the default search parameters of correlations. From a full-screen graph, on the *Correlations* tab, click the **Edit Search** button, or click directly on the graph.
+You can customize the default search parameters of correlations. From a full-screen graph, on the {{< ui >}}Correlations{{< /ui >}} tab, click the {{< ui >}}Edit Search{{< /ui >}} button, or click directly on the graph.
 
 1. Click and drag on the graph to set the time frame for your correlations search. 
 1. Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
-1. Select **Auto-select** or **Custom select** from specific categories. For custom metrics, at least one selection is required.
+1. Select {{< ui >}}Auto-select{{< /ui >}} or {{< ui >}}Custom select{{< /ui >}} from specific categories. For custom metrics, at least one selection is required.
    * Custom metrics is the only category not selected by default. Choose metric namespaces or single metrics to search correlations upon.
 1. Use the tag filter box to scope the search by a tag.
 

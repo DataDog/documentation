@@ -41,9 +41,9 @@ Use the SLO widget to visualize a [Service Level Objective (SLO)][1] on a dashbo
 #### Set the time windows
 
 Select up to three different time windows from the following:
-- **Rolling time windows**: 7, 30, or 90 days
-- **Calendar time windows**: week to date, previous week, month to date, or previous month
-- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 3 months of historical info for monitor-based SLOs. For Time Slice and metric-based SLOs, the supported historical view matches your account's metrics retention duration (by default, this is 15 months).
+- {{< ui >}}Rolling time windows{{< /ui >}}: 7, 30, or 90 days
+- {{< ui >}}Calendar time windows{{< /ui >}}: week to date, previous week, month to date, or previous month
+- {{< ui >}}Global time{{< /ui >}}: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 3 months of historical info for monitor-based SLOs. For Time Slice and metric-based SLOs, the supported historical view matches your account's metrics retention duration (by default, this is 15 months).
 
 #### Display preferences
 

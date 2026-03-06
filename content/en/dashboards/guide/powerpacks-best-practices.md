@@ -90,7 +90,7 @@ Each Powerpack user decides whether to save a variable to their dashboard to all
 
 ### Updating a Powerpack
 
-Changes to an existing custom Powerpack are applied to all instances of that Powerpack, simplifying updates across multiple dashboards. Click **Edit Powerpack Layout** to modify synced Powerpack instances.
+Changes to an existing custom Powerpack are applied to all instances of that Powerpack, simplifying updates across multiple dashboards. Click {{< ui >}}Edit Powerpack Layout{{< /ui >}} to modify synced Powerpack instances.
 
 ### Permissions
 By default, edit permissions for Powerpacks are restricted to the author. Editing permission can be modified at any time through the kebab menu in the widget tray or in the header of a Powerpack instance.

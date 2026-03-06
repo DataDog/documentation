@@ -59,11 +59,11 @@ For line graphs, different metrics can be assigned specific palettes by separati
 
 ### Sorting
 
-Order the graph by **Tags** or by **Values** to sort timeseries legends and stacked graphs. This only sorts the graph visualization, and does not impact the query. Toggle the **Reverse** option to sort by reverse alphabetical order or by descending values. 
+Order the graph by {{< ui >}}Tags{{< /ui >}} or by {{< ui >}}Values{{< /ui >}} to sort timeseries legends and stacked graphs. This only sorts the graph visualization, and does not impact the query. Toggle the {{< ui >}}Reverse{{< /ui >}} option to sort by reverse alphabetical order or by descending values. 
 
 ### Metric aliasing
 
-Each query or formula, along with any [filtering tags][7], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
+Each query or formula, along with any [filtering tags][7], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on {{< ui >}}as...{{< /ui >}} and enter your metric alias:
 
 {{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Adding an alias to a search query in the Timeseries widget editor" style="width:100%;" >}}
 
@@ -79,7 +79,7 @@ With the event overlay, you can see how actions within the organization impact a
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events.
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click {{< ui >}}Add Event Overlay{{< /ui >}} in the {{< ui >}}Event Overlays{{< /ui >}} section and enter a query to display those events.
 
 Use the same query format as for the [Event Explorer][8], for example:
 
@@ -91,11 +91,11 @@ Use the same query format as for the [Event Explorer][8], for example:
 
 ### Markers
 
-To add markers for additional data sets, click **Add Marker** in the **Markers** section.
+To add markers for additional data sets, click {{< ui >}}Add Marker{{< /ui >}} in the {{< ui >}}Markers{{< /ui >}} section.
 
 1. Select a Line or Range and input a value or a range or values.
-2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
-3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox.
+2. In the {{< ui >}}Show as{{< /ui >}} field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
+3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the {{< ui >}}Label{{< /ui >}} checkbox.
 
 ### Y-Axis controls
 
@@ -118,7 +118,7 @@ Because the mathematical log function does not accept negative values, the Datad
 
 ### Legend configuration
 
-You can add configurable legends to your screenboards by selecting from the following options in the **Legend** section:
+You can add configurable legends to your screenboards by selecting from the following options in the {{< ui >}}Legend{{< /ui >}} section:
 
 * Automatic (default)
 * Compact
@@ -129,7 +129,7 @@ For timeboards, legends display automatically when a dashboard is set to L or XL
 
 ### Context links
 
-To add a context link in the dropdown menu that appears when you click in a dashboard widget, click **Add a Context Link** in the **Context Links** section.
+To add a context link in the dropdown menu that appears when you click in a dashboard widget, click {{< ui >}}Add a Context Link{{< /ui >}} in the {{< ui >}}Context Links{{< /ui >}} section.
 
 For more information about editing and deleting context links, see [Context Links][10].
 
@@ -141,7 +141,7 @@ For more information, see [Explore your data in full-screen graph mode][12].
 
 ### Metrics info
 
-On a metric graph, click on the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## API
 

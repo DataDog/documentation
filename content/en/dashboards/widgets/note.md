@@ -10,7 +10,7 @@ further_reading:
   text: "Learn how to build dashboards using JSON"
 ---
 
-The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options. 
+The {{< ui >}}Notes & Links{{< /ui >}} widget is similar to the [free text widget][1] but contains more formatting and display options. 
 
 **Note**: The Notes & Links widget does not support inline HTML.
 
@@ -19,12 +19,12 @@ The **Notes & Links** widget is similar to the [free text widget][1] but contain
 1. Enter the text you want to display. Markdown is supported.
 2. Select a preset template or customize the display options. 
 3. Select a text size and the widget's background color.
-4. To adjust the position of the text, click on the **Alignment** buttons. To not include padding, click **No Padding**.
-5. To include a pointer, click **Show Pointer** and select a position from the dropdown menu.
+4. To adjust the position of the text, click on the {{< ui >}}Alignment{{< /ui >}} buttons. To not include padding, click {{< ui >}}No Padding{{< /ui >}}.
+5. To include a pointer, click {{< ui >}}Show Pointer{{< /ui >}} and select a position from the dropdown menu.
 
 {{< img src="dashboards/widgets/note/overview.png" alt="Adding text in the Markdown field of the Notes & Links widget editor" style="width:90%;" >}}
 
-When you are ready to create the widget, click **Save**.
+When you are ready to create the widget, click {{< ui >}}Save{{< /ui >}}.
 
 This widget supports template variables. Use the `$<VARIABLE_NAME>.value` syntax to dynamically update the widget content.
 

@@ -33,7 +33,7 @@ Anomalies can be sharp spikes or drops, but may also be more subtle trends like 
 
 ## Watchdog Explains isolates the cause with dimensional analysis
 
-You can start your investigation from any timeseries graph that uses metric data. When Watchdog Explains detects an anomaly, it highlights the affected region with a pink box. To begin investigating, click **Investigate Anomaly**.
+You can start your investigation from any timeseries graph that uses metric data. When Watchdog Explains detects an anomaly, it highlights the affected region with a pink box. To begin investigating, click {{< ui >}}Investigate Anomaly{{< /ui >}}.
 
 This opens a full-screen investigation view. Watchdog analyzes the anomaly and surfaces any tag groups that significantly contributed to the shape or scale of the anomaly. Click on a tag to see how removing or isolating that dimension affects the graph. Use this to identify root causes like specific customers, services, or environments.
 
@@ -47,7 +47,7 @@ This opens a full-screen investigation view. Watchdog analyzes the anomaly and s
 
 {{< img src="/dashboards/graph_insights/watchdog_explains/disable_anomaly_detection.png" alt="Disabling anomaly detection in Watchdog Explains" style="width:100%;" >}}
 
-To disable anomaly detection on a dashboard, open **Anomalies** at the top of the dashboard and click **Turn Off**.
+To disable anomaly detection on a dashboard, open {{< ui >}}Anomalies{{< /ui >}} at the top of the dashboard and click {{< ui >}}Turn Off{{< /ui >}}.
 
 ## Further reading
 

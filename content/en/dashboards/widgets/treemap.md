@@ -44,7 +44,7 @@ The treemap widget allows you to display proportions of one or more datasets. Th
 
 In the case where multiple groups of data are plotted at once, you can filter the widget to a single category and view proportions within it.
 
-To filter and focus on a single category, hover over the outer portion of the category, and click. To go back to the previous view, click the **back** button on the top left header of the widget.
+To filter and focus on a single category, hover over the outer portion of the category, and click. To go back to the previous view, click the {{< ui >}}back{{< /ui >}} button on the top left header of the widget.
 
 {{< img src="dashboards/widgets/treemap/focus_animation.mp4" alt="Animation showing how to filter and view a single category at a time in the treemap widget." video="true">}}
 
