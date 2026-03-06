@@ -15,11 +15,11 @@ Cross-org paging is in Public Preview and is supported only for automated workfl
 
 ## Overview
 
-Cross-org paging enables users to automatically trigger alerts to On-Call teams that reside in other Datadog organizations or data centers. Cross-org paging is useful when your operational or organizational setup spans multiple Datadog orgs or data centers, and you want to centralize incident response in one single org.
+Cross-org paging enables users to automatically trigger alerts to On-Call Teams that reside in other Datadog organizations or data centers. Cross-org paging is useful when your operational or organizational setup spans multiple Datadog orgs or data centers, and you want to centralize incident response in one single org.
 
 With cross-org paging, you can:
 
-- **Manage On-Call teams in a central org**: Consolidate all On-Call teams in a single org, and trigger pages from any org or region.
+- **Manage On-Call Teams in a central org**: Consolidate all On-Call Teams in a single org, and trigger Pages from any org or region.
 
 - **Avoid duplicating On-Call configs**: Instead of replicating the same team structures across orgs, use one set of configs and page teams from anywhere.
 
@@ -27,11 +27,11 @@ With cross-org paging, you can:
 
 ## Setup
 
-To enable paging between orgs or datacenters, you must establish a secure connection between the **source org** (where alerts originate) and the **destination org** (where the On-Call team is managed).
+To enable paging between orgs or datacenters, you must establish a secure connection between the **source org** (where alerts originate) and the **destination org** (where the On-Call Team is managed).
 
 1. In your destination org, [create a service account][1] with On-Call API access. Assign the service account to a role that includes the following permissions:
-   - `on_call_read` - Read access to On-Call teams and configurations
-   - `on_call_page` - Ability to trigger pages to On-Call teams
+   - `on_call_read` - Read access to On-Call Teams and configurations
+   - `on_call_page` - Ability to trigger pages to On-Call Teams
    - `on_call_respond` - Respond to On-Call Pages
    - `user_access_read` - Read user information (automatically included in most roles)
 
@@ -51,12 +51,12 @@ To enable paging between orgs or datacenters, you must establish a secure connec
    - **API Key**: The API key you created in your destination org.
    - **Application Key**: The application key you created in your destination org for this source org.
 
-When you create this connection, Datadog securely stores your credentials and fetches available On-Call team handles from the destination org. This process may take up to five minutes.
+When you create this connection, Datadog securely stores your credentials and fetches available On-Call Team handles from the destination org. This process may take up to five minutes.
 
 After this process is complete, destination org team handles appear in your source org's autocomplete menus (for example, in monitors).
 
 ### Usage
-After the setup process is complete, you can reference cross-org On-Call team handles in automated alert workflows, in the same way that you reference local handles.
+After the setup process is complete, you can reference cross-org On-Call Team handles in automated alert workflows, in the same way that you reference local handles.
 
 For example, if your `@oncall-core-infra` team is managed in your destination org, you can use the following in an automated alert in your source org:
 
@@ -64,12 +64,12 @@ For example, if your `@oncall-core-infra` team is managed in your destination or
 High memory usage detected on backend services. @oncall-core-infra
 ```
 
-When an alert is triggered, Datadog detects that the handle is external, and the page is routed to the correct destination org using the stored service account credentials.
+When an alert is triggered, Datadog detects that the handle is external, and the Page is routed to the correct destination org using the stored service account credentials.
 
 ## Limitations
 - Manual paging (for example, through the API or web UI) is not supported across orgs. Manual paging is only supported within your current org or data center.
 - Links in cross-org notifications (for example, monitor or incident URLs) point to the source org. They may not resolve cleanly in the destination org UI.
-- Handle syncing happens periodically; changes in destination org On-Call teams may take time to propagate.
+- Handle syncing happens periodically; changes in destination org On-Call Teams may take time to propagate.
 
 ## Further Reading
 

@@ -99,7 +99,7 @@ If the escalation policy references OpsGenie schedules, Datadog automatically mi
    - Retry behavior
    - Auto-resolution settings
 
-1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. Datadog creates the escalation policy under your On-Call team.
+1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. Datadog creates the escalation policy under your On-Call Team.
 
 ## Known limitations
 
