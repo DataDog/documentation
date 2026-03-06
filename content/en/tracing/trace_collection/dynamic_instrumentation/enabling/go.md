@@ -4,7 +4,7 @@ description: Set up Dynamic Instrumentation for Go applications to add probes an
 private: false
 code_lang: go
 type: multi-code-lang
-code_lang_weight: 50
+code_lang_weight: 70
 aliases:
     - /dynamic_instrumentation/enabling/go
 further_reading:

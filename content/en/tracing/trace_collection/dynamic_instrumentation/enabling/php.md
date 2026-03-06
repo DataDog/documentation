@@ -7,6 +7,7 @@ aliases:
 private: false
 code_lang: php
 type: multi-code-lang
+code_lang_weight: 60
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
