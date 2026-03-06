@@ -93,7 +93,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [graphql-yoga][65]       | `>=3.6.0` | Fully supported | Supports graphql-yoga v3 executor          |
 | [graphql][10]            | `>=0.10`  | Fully supported | Supports Apollo Server and express-graphql |
 | [ldapjs][86]             | `>=2`     | Fully supported |                                            |
-| [stripe][85]             | `>=9`     | Fully supported |                                            |
 | [undici][76]             |           | Fully supported |                                            |
 | [ws][84]                 | `>=8`     | Fully supported |                                            |
 
@@ -231,7 +230,7 @@ While the Datadog tracer doesn't provide direct support for modules listed here 
 
 | Module           | Versions  | Comment    |
 | ---------------- | --------- | --------------- |
-| [axios][91]      |           | Axios depends on the internal `http` module. |
+| [axios][85]      |           | Axios depends on the internal `http` module. |
 
 
 ## Unsupported libraries
@@ -328,10 +327,9 @@ For additional information or to discuss [leave a comment on this github issue][
 [82]: https://www.npmjs.com/package/@google/genai
 [83]: https://nodejs.org/api/child_process.html
 [84]: https://www.npmjs.com/package/ws
-[85]: https://www.npmjs.com/package/stripe
+[85]: https://www.npmjs.com/package/axios
 [86]: https://www.npmjs.com/package/ldapjs
 [87]: https://www.npmjs.com/package/avsc
 [88]: https://www.npmjs.com/package/apollo-server-core
 [89]: https://www.npmjs.com/package/@apollo/server
 [90]: https://www.npmjs.com/package/@apollo/gateway
-[91]: https://www.npmjs.com/package/axios
