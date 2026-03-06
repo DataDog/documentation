@@ -47,9 +47,7 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Java ap
 {{% /tab %}}
 {{< /tabs >}}
 
-   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.34.0 and later.
-
-3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+4. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
    {{< tabs >}}
 {{% tab "Command arguments" %}}
 
@@ -87,7 +85,7 @@ java \
    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
+5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
 
 ## Configuration
 

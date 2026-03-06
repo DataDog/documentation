@@ -33,8 +33,6 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][7]. Python 
    pip install ddtrace
    ```
 
-   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 2.2.0 and higher.
-
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
 {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -58,7 +56,7 @@ DynamicInstrumentation.enable()
 {{% /tab %}}
 {{< /tabs >}}
 
-4. After starting your service with Dynamic Instrumentation enabled, you can start using it on the [APM > Dynamic Instrumentation page][3].
+5. After starting your service with Dynamic Instrumentation enabled, you can start using it on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
 

@@ -16,21 +16,20 @@ further_reading:
 
 {{< partial name="dynamic_instrumentation/beta-callout.html" language="PHP" limitations_anchor="unsupported-features" >}}
 
-Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, verify that your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, verify that your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 3.
 
 ## Prerequisites
 
 Before you begin, review the [Dynamic Instrumentation prerequisites][10]. PHP applications also require:
 
-- Tracing library [`dd-trace-php`][11] version 1.5.0 or higher.
+- Tracing library [`dd-trace-php`][11] version 1.5.0 or higher. See the [installation instructions][2] for setup details.
 
 ## Installation
 
 1. Install or upgrade your Agent to version [7.49.0][7] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the PHP tracing library to version 1.5.0, by following the [relevant instructions][2].
-4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+3. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
 
