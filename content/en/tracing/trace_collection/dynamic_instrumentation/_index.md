@@ -43,19 +43,12 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.49.0 or higher (7.73.0+ for Go) is installed alongside your service.
+- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
-- For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
-- For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
-- (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
-- (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
-- (Limited Preview) For Go applications, tracing library [`dd-trace-go`][21] >=1.74.6 (major version 1), or >=2.2.3 (major version 2).
-- (Limited Preview) For Go applications, the Agent and your application must run on the same host, with Linux kernel >=5.17.
+- A supported Datadog tracing library is installed and up to date. See the [language-specific setup pages][22] for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended, [autocomplete and search (in Preview)][17] is enabled.
-- Recommended, [Source Code Integration][7] is set up for your service.
+- Recommended: [autocomplete and search][17] is enabled.
+- Recommended: [Source Code Integration][7] is set up for your service.
 
 ### Permissions
 
@@ -90,9 +83,8 @@ For more detailed instructions, select your runtime below:
 
 ### Limitations
 
-- Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
-- Full support is available for applications built with Python, Java, .NET, and Node.js.
-- Limited previews are ongoing for applications built with Ruby and PHP.
+- Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
+- Not all probe types are supported in every language. See the [language-specific setup pages][22] for supported features and limitations.
 - The Java tracer library does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
@@ -243,3 +235,4 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [19]: https://github.com/DataDog/dd-trace-rb
 [20]: https://github.com/DataDog/dd-trace-php
 [21]: https://github.com/DataDog/dd-trace-go
+[22]: /tracing/trace_collection/dynamic_instrumentation/enabling/
