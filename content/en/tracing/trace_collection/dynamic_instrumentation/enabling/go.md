@@ -17,6 +17,11 @@ further_reading:
 
 Dynamic Instrumentation is a feature of Datadog tracing libraries that lets you capture application state at runtime without modifying or redeploying code. This page describes how to enable Dynamic Instrumentation for Go applications.
 
+## Requirements
+
+- The Datadog Agent and your application must run on the same host.
+- Linux kernel version 5.17 or higher.
+
 ## Installation
 
 To use Dynamic Instrumentation, you must enable it in both the Datadog Agent and your application.
