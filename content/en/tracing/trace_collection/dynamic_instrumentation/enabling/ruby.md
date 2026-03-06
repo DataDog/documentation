@@ -20,7 +20,7 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-In addition to the [general prerequisites](/dynamic_instrumentation/#prerequisites), Ruby applications require:
+In addition to the [general prerequisites][12], Ruby applications require:
 
 - **Tracing library**: [`ddtrace`][13] version 2.9.0 or higher.
 - **Ruby version**: Ruby 2.6 or higher.
