@@ -321,6 +321,7 @@ unsupported_sites:
   live_debugger: [gov]
   llm_observability: [gov]
   logs_scheduled_reports: [gov]
+  mcp_server: [gov]
   mobile_app_testing: [gov]
   network_config_management: [gov]
   observability_pipelines: [gov]
