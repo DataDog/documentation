@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Set up the Datadog MCP server to instrument your frontend applications with coding agents like Cursor or Claude Code.
+description: Set up the Datadog MCP server to instrument your applications with coding agents like Cursor or Claude Code.
 
 ---
 
@@ -10,14 +10,15 @@ Agentic Onboarding is in Preview.
 
 ## Overview
 
-Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], [Product Analytics][5], and Infrastructure Monitoring with a single prompt.
+Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], [Product Analytics][5], Infrastructure Monitoring, and [Serverless Monitoring][7] with a single prompt.
 
 Your coding assistant, such as [Cursor][1] or [Claude Code][2], detects your project's frameworks, adds configuration, and provisions required tokens and apps directly from your IDE.
 
 ## Supported frameworks
 Agentic Onboarding is available for the following frameworks:
-- **Error Tracking, RUM, and Product Analytics**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue. 
+- **Error Tracking, RUM, and Product Analytics**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue.
 - **Infrastructure Monitoring with Kubernetes**: Terraform, Ansible, Kustomize, and more.
+- **Serverless Monitoring for AWS Lambda**: Terraform, AWS CDK, Serverless Framework, and more.
 
 ## Setup
 
@@ -103,6 +104,12 @@ To get started:
    ```console
    Add Datadog for Kubernetes to my project
    ```
+  {{% /tab %}}
+
+   {{% tab "Serverless Monitoring" %}}
+   ```console
+   Instrument my AWS Lambda functions with Datadog
+   ```
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -118,4 +125,5 @@ Commit the changes to your repository and configure the provided environment var
 [4]: /real_user_monitoring/
 [5]: /product_analytics/
 [6]: /integrations/kubernetes
+[7]: /serverless/
 

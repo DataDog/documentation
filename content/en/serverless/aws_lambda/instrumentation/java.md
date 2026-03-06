@@ -24,10 +24,6 @@ If you previously set up your Lambda functions using the Datadog Forwarder, see 
 
 If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the [special instructions to upgrade][10].
 
-{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
-Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
-{{< /callout >}}
-
 ## Setup
 
 {{< tabs >}}
@@ -263,6 +259,11 @@ module "lambda-datadog" {
 [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
 [3]: https://github.com/DataDog/terraform-aws-lambda-datadog?tab=readme-ov-file#inputs
 [4]: /getting_started/site/
+{{% /tab %}}
+{{% tab "Onboarding MCP Tool" %}}
+
+{{< lambda-onboarding-mcp-tool >}}
+
 {{% /tab %}}
 {{% tab "Custom" %}}
 
