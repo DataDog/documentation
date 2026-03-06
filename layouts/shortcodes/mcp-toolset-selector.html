@@ -1,0 +1,435 @@
+{{ $client := .Get "client" | default "url" }}
+
+<div class="mcp-url-builder" data-mcp-client="{{ $client }}">
+  <div class="mcp-config-bar">
+    <div class="mcp-config-row">
+      <span class="mcp-config-label">Site</span>
+      <select class="mcp-site-sel">
+        <option value="US1" selected>US1 (datadoghq.com)</option>
+        <option value="US3">US3 (us3.datadoghq.com)</option>
+        <option value="US5">US5 (us5.datadoghq.com)</option>
+        <option value="EU1">EU1 (datadoghq.eu)</option>
+        <option value="AP1">AP1 (ap1.datadoghq.com)</option>
+        <option value="AP2">AP2 (ap2.datadoghq.com)</option>
+      </select>
+    </div>
+    <details class="mcp-toolsets-expand">
+      <summary>
+        <span class="mcp-toolsets-label">Additional Toolsets</span>
+        <span class="mcp-toolsets-badge">Default</span>
+      </summary>
+      <div class="mcp-toolset-grid">
+        <label data-tooltip="Validate monitors, search monitor groups, and retrieve monitor templates"><input type="checkbox" value="alerting"> Alerting</label>
+        <label data-tooltip="In-depth trace analysis, span search, Watchdog insights, and performance investigation"><input type="checkbox" value="apm"> APM</label>
+        <label data-tooltip="Query execution plans and query samples for database performance analysis"><input type="checkbox" value="dbm"> Database Monitoring</label>
+        <label data-tooltip="Search and analyze Error Tracking issues across RUM, Logs, and Traces"><input type="checkbox" value="error-tracking"> Error Tracking</label>
+        <label data-tooltip="Create, list, and manage feature flags and their environments"><input type="checkbox" value="feature-flags"> Feature Flags</label>
+        <label data-tooltip="Search and analyze LLM Observability spans, token usage, and costs"><input type="checkbox" value="llmobs"> LLM Observability</label>
+        <label data-tooltip="Cloud Network Monitoring analysis and Network Device Monitoring"><input type="checkbox" value="networks"> Networks</label>
+        <label data-tooltip="Guided Datadog setup and configuration for various products"><input type="checkbox" value="onboarding"> Onboarding</label>
+        <label data-tooltip="Code security scanning, security signals, and security findings analysis"><input type="checkbox" value="security"> Security</label>
+        <label data-tooltip="CI Visibility, Test Optimization, and flaky test management"><input type="checkbox" value="software-delivery"> Software Delivery</label>
+        <label data-tooltip="Create, edit, and search Synthetic tests"><input type="checkbox" value="synthetics"> Synthetics</label>
+      </div>
+    </details>
+  </div>
+  <div class="mcp-output-bar">
+    <div class="mcp-output-label">
+      <svg class="mcp-terminal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+      {{ if eq $client "claude-code" }}Run in terminal{{ else }}Copy endpoint URL{{ end }}
+    </div>
+    <div class="mcp-output-code-row">
+      <code class="mcp-output-text"></code>
+      <button class="mcp-output-copy" title="Copy to clipboard">Copy</button>
+    </div>
+  </div>
+</div>
+
+{{ if not (.Page.Scratch.Get "mcp-toolset-assets") }}
+{{ .Page.Scratch.Set "mcp-toolset-assets" true }}
+<style>
+.mcp-url-builder {
+  margin: 0 0 0.5rem;
+  border: 1px solid #d4d8dd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Config bar */
+.mcp-config-bar {
+  background: #f8f9fa;
+}
+
+/* Output bar */
+.mcp-output-bar {
+  background: #1e1e2e;
+  padding: 0 12px 10px;
+  border-top: 1px solid #333;
+}
+
+.mcp-output-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 0 6px;
+}
+
+.mcp-terminal-icon {
+  width: 13px;
+  height: 13px;
+  color: #888;
+}
+
+.mcp-output-text {
+  flex: 1;
+  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  color: #e0e0e0;
+  background: none;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+  scrollbar-width: thin;
+}
+
+.mcp-output-code-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mcp-output-copy {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #ccc;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mcp-output-copy:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+
+.mcp-config-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+}
+
+.mcp-config-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  min-width: 30px;
+}
+
+.mcp-site-sel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #23232f;
+  padding: 6px 32px 6px 10px;
+  border: 1px solid #d4d8dd;
+  border-radius: 6px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23777' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center / 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  line-height: 1.4;
+}
+
+.mcp-site-sel:hover {
+  border-color: #b0b5bb;
+}
+
+.mcp-site-sel:focus {
+  outline: none;
+  border-color: #632ca6;
+  box-shadow: 0 0 0 3px rgba(99, 44, 166, 0.12);
+}
+
+/* Toolsets expandable */
+.mcp-toolsets-expand {
+  border-top: 1px solid #e8eaed;
+  margin: 0;
+}
+
+.mcp-toolsets-expand > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.78rem;
+  color: #555;
+  user-select: none;
+}
+
+.mcp-toolsets-expand > summary::-webkit-details-marker { display: none; }
+
+.mcp-toolsets-expand > summary::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid #888;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.mcp-toolsets-expand[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.mcp-toolsets-label {
+  font-weight: 600;
+}
+
+.mcp-toolsets-badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #6c757d;
+  background: #e8eaed;
+  padding: 1px 8px;
+  border-radius: 10px;
+}
+
+.mcp-toolsets-badge.mcp-active {
+  background: #f0ebf8;
+  color: #632ca6;
+}
+
+/* Grid */
+.mcp-toolset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  padding: 2px 12px 10px;
+}
+
+@media (max-width: 768px) {
+  .mcp-toolset-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mcp-toolset-grid label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #23232f;
+  padding: 5px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s;
+}
+
+.mcp-toolset-grid label:hover {
+  background: #eef0f3;
+}
+
+.mcp-toolset-grid input[type="checkbox"] {
+  accent-color: #632ca6;
+  margin: 0;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
+/* CSS tooltips */
+.mcp-toolset-grid label[data-tooltip] {
+  position: relative;
+}
+
+.mcp-toolset-grid label[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #23232f;
+  color: #f0f0f0;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: normal;
+  width: max-content;
+  max-width: 240px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.mcp-toolset-grid label[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #23232f;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+}
+
+.mcp-toolset-grid label[data-tooltip]:hover::after,
+.mcp-toolset-grid label[data-tooltip]:hover::before {
+  opacity: 1;
+}
+</style>
+
+<script>
+(function() {
+  var SITES = {
+    'US1': 'mcp.datadoghq.com',
+    'US3': 'mcp.us3.datadoghq.com',
+    'US5': 'mcp.us5.datadoghq.com',
+    'EU1': 'mcp.datadoghq.eu',
+    'AP1': 'mcp.ap1.datadoghq.com',
+    'AP2': 'mcp.ap2.datadoghq.com'
+  };
+
+  if (!window._mcpState) {
+    window._mcpState = { site: 'US1', toolsets: [] };
+  }
+
+  var MCP_URL_PATTERN = /https:\/\/mcp\.[a-z0-9.]+\/api\/unstable\/mcp-server\/mcp(\?[^\s"'`\\<\])]*)?/g;
+
+  function buildUrl() {
+    var s = window._mcpState;
+    var domain = SITES[s.site] || SITES['US1'];
+    var url = 'https://' + domain + '/api/unstable/mcp-server/mcp';
+    if (s.toolsets.length > 0) {
+      var all = ['core'].concat(s.toolsets.slice().sort());
+      url += '?toolsets=' + all.join(',');
+    }
+    return url;
+  }
+
+  function buildOutput(client, url) {
+    if (client === 'claude-code') {
+      return 'claude mcp add --transport http datadog-mcp ' + url;
+    }
+    return url;
+  }
+
+  function updateAll() {
+    var url = buildUrl();
+
+    document.querySelectorAll('.mcp-url-builder').forEach(function(widget) {
+      var client = widget.dataset.mcpClient;
+      var outputEl = widget.querySelector('.mcp-output-text');
+      if (outputEl) {
+        outputEl.textContent = buildOutput(client, url);
+      }
+    });
+
+    document.querySelectorAll('.mcp-site-sel').forEach(function(sel) {
+      sel.value = window._mcpState.site;
+    });
+    document.querySelectorAll('.mcp-toolset-grid input[type="checkbox"]').forEach(function(cb) {
+      cb.checked = window._mcpState.toolsets.indexOf(cb.value) !== -1;
+    });
+
+    document.querySelectorAll('.mcp-toolsets-badge').forEach(function(badge) {
+      if (window._mcpState.toolsets.length === 0) {
+        badge.textContent = 'Default';
+        badge.classList.remove('mcp-active');
+      } else {
+        badge.textContent = window._mcpState.toolsets.length + ' selected';
+        badge.classList.add('mcp-active');
+      }
+    });
+
+    var codeElements = document.querySelectorAll('#mainContent pre, #mainContent code, #mainContent .highlight');
+    codeElements.forEach(function(el) {
+      if (el.classList.contains('mcp-output-text')) return;
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+      var node;
+      while (node = walker.nextNode()) {
+        MCP_URL_PATTERN.lastIndex = 0;
+        var original = node.nodeValue;
+        var updated = original.replace(MCP_URL_PATTERN, function() { return url; });
+        if (updated !== original) {
+          node.nodeValue = updated;
+        }
+      }
+    });
+
+    var tableCells = document.querySelectorAll('#mainContent td');
+    tableCells.forEach(function(td) {
+      var walker = document.createTreeWalker(td, NodeFilter.SHOW_TEXT, null, false);
+      var node;
+      while (node = walker.nextNode()) {
+        MCP_URL_PATTERN.lastIndex = 0;
+        var orig = node.nodeValue;
+        var upd = orig.replace(MCP_URL_PATTERN, function() { return url; });
+        if (upd !== orig) {
+          node.nodeValue = upd;
+        }
+      }
+    });
+  }
+
+  function collectToolsets(source) {
+    var checked = source.closest('.mcp-url-builder').querySelectorAll('.mcp-toolset-grid input:checked');
+    var ts = [];
+    checked.forEach(function(cb) { ts.push(cb.value); });
+    return ts;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    updateAll();
+
+    document.querySelectorAll('.mcp-site-sel').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        window._mcpState.site = this.value;
+        updateAll();
+      });
+    });
+
+    document.querySelectorAll('.mcp-toolset-grid input[type="checkbox"]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        window._mcpState.toolsets = collectToolsets(this);
+        updateAll();
+      });
+    });
+
+    document.querySelectorAll('.mcp-output-copy').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var text = this.closest('.mcp-output-bar').querySelector('.mcp-output-text').textContent;
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'Copied!';
+          setTimeout(function() { btn.textContent = 'Copy'; }, 1200);
+        });
+      });
+    });
+  });
+})();
+</script>
+{{ end }}
