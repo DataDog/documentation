@@ -72,12 +72,9 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
-  - To view sensitive data, [Sensitive Data Scanner][12] must be enabled. For a user to turn the layer on, they must have the [`data_scanner_read`][13] permission.
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
-[12]: /security/sensitive_data_scanner
-[13]: /account_management/rbac/permissions/#compliance
 [14]: /getting_started/integrations/azure/
 [15]: https://app.datadoghq.com/integrations/azure
 [16]: /integrations/guide/azure-manual-setup/?tab=azurecli#setup
