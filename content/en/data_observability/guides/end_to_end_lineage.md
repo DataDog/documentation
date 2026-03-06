@@ -29,7 +29,7 @@ Use lineage to answer questions like:
 
 The lineage graph covers your entire data stack, left to right from upstream to downstream:
 
-**Ingestion sources** (Fivetran, S3, Kafka) → **Warehouses and lakes** (Snowflake, BigQuery, Databricks, Redshift) → **Transformation jobs** (dbt, Airflow, Spark, Glue) → **BI tools** (Looker, Tableau, Power BI, Metabase, Sigma)
+**[Ingestion sources][14]** (Fivetran) → **[Warehouses and lakes][15]** (Snowflake, BigQuery, Databricks, Redshift) → **[Transformation jobs][16]** (dbt, Airflow, Spark, Glue) → **[BI tools][17]** (Looker, Tableau, Power BI, Metabase, Sigma)
 
 You can enable any combination of integrations. Datadog merges lineage from all of them into one graph.
 
@@ -147,3 +147,7 @@ Lineage is most valuable when something goes wrong and you need to understand wh
 [11]: /data_observability/quality_monitoring/business_intelligence/powerbi
 [12]: /data_observability/quality_monitoring/business_intelligence/metabase
 [13]: /data_observability/quality_monitoring/business_intelligence/sigma
+[14]: /data_observability/quality_monitoring/elt/
+[15]: /data_observability/quality_monitoring/
+[16]: /data_observability/jobs_monitoring/
+[17]: /data_observability/quality_monitoring/business_intelligence/
