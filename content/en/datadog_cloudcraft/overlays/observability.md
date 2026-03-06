@@ -18,8 +18,6 @@ further_reading:
 
 ## Overview
 
-**Note**: The Observability overlay is not available for GCP accounts.
-
 The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Log Management, and more. This helps you to assess visibility gaps across your environment.
 
 ## Take action on resources

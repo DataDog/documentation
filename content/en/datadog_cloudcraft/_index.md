@@ -94,7 +94,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
 
-**Note**: The [Observability overlay][19], the [Cloud Cost Management][11] Cost view, and sensitive data in the Security overlay are not available for GCP accounts. The CCM Recommendations view is supported.
+**Note**: The [Cloud Cost Management][11] Cost view and sensitive data in the Security overlay are not available for GCP accounts. The CCM Recommendations view is supported.
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
