@@ -78,6 +78,54 @@ Agent `v7.59+` is required.
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
 {{% /tab %}}
+{{% tab "macOS" %}}
+
+Agent `v7.75+` is required.
+
+**Note**: Dynamic path tests are not supported on macOS.
+
+1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+
+   ```
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable `network_path` to monitor new destinations from this Agent by creating or editing the `/opt/datadog-agent/etc/conf.d/network_path.d/conf.yaml` file:
+
+   ```yaml
+   init_config:
+     min_collection_interval: 60 # in seconds, default 60 seconds
+   instances:
+     # configure the endpoints you want to monitor, one check instance per endpoint
+     # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+
+     - hostname: api.datadoghq.eu # endpoint hostname or IP
+       protocol: TCP
+       port: 443
+       tags:
+         - "tag_key:tag_value"
+         - "tag_key2:tag_value2"
+       min_collection_interval: 120 # set min_collection_interval at the instance level
+     ## optional configs:
+     # max_ttl: 30 # max traceroute TTL, default is 30
+     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+
+     # more endpoints
+     - hostname: 1.1.1.1 # endpoint hostname or IP
+       protocol: UDP
+       tags:
+         - "tag_key:tag_value"
+         - "tag_key2:tag_value2"
+
+    ```
+
+3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+{{% /tab %}}
 {{% tab "Windows" %}}
 
 Agent `v7.72+` is required.
