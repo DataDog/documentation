@@ -19,10 +19,6 @@ further_reading:
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. If you're interested in this feature, complete this form. Read more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
-{{< /callout >}}
-
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 * **Query** metrics, logs, traces, errors, dashboards, monitors, incidents, and services​.
