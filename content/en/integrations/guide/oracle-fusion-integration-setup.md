@@ -5,7 +5,7 @@ description: "Configure Oracle Fusion to authorize Datadog to access its REST AP
 ---
 
 {{< callout url="#" header="false" btn_hidden="true" >}}
-  Oracle Fusion is in Preview.
+  The Oracle Fusion integration is in Preview.
 {{< /callout >}}
 
 ## Overview
