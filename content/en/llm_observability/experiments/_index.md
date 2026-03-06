@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
     tag: "Blog"
     text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
+  - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
+    tag: "Blog"
+    text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
 ---
 
 {{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 12 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}

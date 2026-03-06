@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-suites/"
   tag: "Blog"
   text: "Get organized, actionable insights from complex test environments"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understanding Synthetic Monitor Alerting"
 ---
 
 ## Overview

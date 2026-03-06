@@ -12,8 +12,8 @@ Observability Pipelines Worker を使い、必要な HTTP サーバー ログだ
 {{% observability_pipelines/use_case_images/log_volume_control %}}
 
 このドキュメントでは、以下について説明します。
-1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
-1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
+1. Observability Pipelines の設定に必要な[前提条件](#prerequisites)
+1. [Observability Pipelines のセットアップ](#set-up-observability-pipelines)
 
 ## 前提条件
 
@@ -22,16 +22,16 @@ Observability Pipelines Worker を使い、必要な HTTP サーバー ログだ
 ## 観測可能性パイプラインを設定する
 
 1. [Observability Pipelines][1] に移動します。
-1. Select the **Log Volume Control** template to create a new pipeline.
-1. Select **HTTP Client** as the source.
+1. **Log Volume Control** テンプレートを選択して新しいパイプラインを作成します。
+1. ソースとして **HTTP Client** を選択します。
 
-### Set up the source
+### ソースの設定
 
 {{% observability_pipelines/source_settings/http_client %}}
 
-### Set up the destinations
+### 宛先の設定
 
-Enter the following information based on your selected logs destinations.
+選択したログの送信先に応じて、以下の情報を入力します。
 
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -45,7 +45,7 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/prerequisites/amazon_security_lake %}}
 
-##### Set up the destination
+##### 宛先の設定
 
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
@@ -137,7 +137,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add additional destinations
+#### 送信先を追加する
 
 {{% observability_pipelines/multiple_destinations %}}
 
@@ -150,82 +150,82 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "Add env vars" %}}
+{{% tab "環境変数を追加" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
-{{% tab "Add hostname" %}}
+{{% tab "ホスト名を追加" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
-{{% tab "Custom Processor" %}}
+{{% tab "カスタム プロセッサー" %}}
 
 {{% observability_pipelines/processors/custom_processor %}}
 
 {{% /tab %}}
-{{% tab "Dedupe" %}}
+{{% tab "重複排除" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Edit fields" %}}
+{{% tab "フィールドを編集" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
-{{% tab "Enrichment table" %}}
+{{% tab "エンリッチメント テーブル" %}}
 
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
-{{% tab "Filter" %}}
+{{% tab "フィルター" %}}
 
 {{% observability_pipelines/processors/filter %}}
 
 {{% /tab %}}
-{{% tab "Generate metrics" %}}
+{{% tab "メトリクスを生成" %}}
 
 {{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
-{{% tab "Grok Parser" %}}
+{{% tab "Grok パーサー" %}}
 
 {{% observability_pipelines/processors/grok_parser %}}
 
 {{% /tab %}}
-{{% tab "Parse JSON" %}}
+{{% tab "JSON をパース" %}}
 
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
-{{% tab "Parse XML" %}}
+{{% tab "XML をパース" %}}
 
 {{% observability_pipelines/processors/parse_xml %}}
 
 {{% /tab %}}
-{{% tab "Quota" %}}
+{{% tab "クォータ" %}}
 
 {{% observability_pipelines/processors/quota %}}
 
 {{% /tab %}}
-{{% tab "Reduce" %}}
+{{% tab "削減" %}}
 
 {{% observability_pipelines/processors/reduce %}}
 
 {{% /tab %}}
-{{% tab "Remap to OCSF" %}}
+{{% tab "OCSF へ再マッピング" %}}
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
-{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
+{{% collapse-content title="ライブラリ マッピング" level="h5" expanded=false id="library_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
+{{% collapse-content title="カスタム マッピング" level="h5" expanded=false id="custom_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
 
@@ -234,7 +234,7 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/filter_syntax %}}
 
 {{% /tab %}}
-{{% tab "Sample" %}}
+{{% tab "サンプリング" %}}
 
 {{% observability_pipelines/processors/sample %}}
 
@@ -243,36 +243,36 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="Add rules from the library" level="h5" %}}
+{{% collapse-content title="ライブラリからルールを追加" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Add a custom rule" level="h5" %}}
+{{% collapse-content title="カスタム ルールを追加" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Split array" %}}
+{{% tab "配列を分割" %}}
 
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
-{{% tab "Tags Processor" %}}
+{{% tab "タグ プロセッサー" %}}
 
 {{% observability_pipelines/processors/tags_processor %}}
 
 {{% /tab %}}
-{{% tab "Throttle" %}}
+{{% tab "スロットリング" %}}
 
 {{% observability_pipelines/processors/throttle %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add another set of processors and destinations
+#### 別のプロセッサーと送信先のセットを追加する
 
 {{% observability_pipelines/multiple_processors %}}
 
@@ -280,7 +280,7 @@ Enter the following information based on your selected logs destinations.
 1. **Choose your installation platform** ドロップダウンメニューで使用するプラットフォームを選択します。
 1. HTTP/S エンドポイント URL のフルパスを入力します (例: `https://127.0.0.8/logs`)。Observability Pipelines Worker はこのエンドポイントからログイベントを収集します。
 
-1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
+1. 選択した各送信先の環境変数を指定します。詳しくは、[前提条件](#prerequisites) を参照してください。
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
@@ -309,7 +309,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
-For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
+Datadog Archives の送信先については、ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 

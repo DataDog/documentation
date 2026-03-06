@@ -3,7 +3,7 @@ This partial contains .NET traces content for the OTel API.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Setup
+## Setup {% #setup-otel-dotnet %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -17,7 +17,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [OpenTelemetry instrumentation libraries][154].
 
-## Creating custom spans
+## Creating custom spans {% #creating-custom-spans-otel-dotnet %}
 
 To manually create spans that start a new, independent trace:
 
@@ -33,7 +33,7 @@ using (Activity? activity = Telemetry.ActivitySource.StartActivity("<RESOURCE NA
 }
 ```
 
-## Creating spans
+## Creating spans {% #creating-spans-otel-dotnet %}
 
 To create custom spans within an existing trace context:
 
@@ -52,7 +52,7 @@ using (Activity? parentScope = Telemetry.ActivitySource.StartActivity("<RESOURCE
 }
 ```
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-otel-dotnet %}
 
 Add custom tags to your spans to provide additional context:
 
@@ -76,7 +76,7 @@ public class ShoppingCartController : Controller
 }
 ```
 
-## Setting errors on spans
+## Setting errors on spans {% #setting-errors-on-spans-otel-dotnet %}
 
 Set error information on a span when an error occurs during its execution:
 
@@ -94,7 +94,7 @@ catch(Exception e)
 }
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-otel-dotnet %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 2.53.0 or higher.
@@ -118,7 +118,7 @@ activity.AddEvent(new ActivityEvent("Event With Some Attributes", DateTimeOffset
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-otel-dotnet %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 

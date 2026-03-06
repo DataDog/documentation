@@ -83,6 +83,7 @@ code_language_ids:
     kotlin-multiplatform: Kotlin Multiplatform
     swiftui: Swift UI
     java: Java
+    graalvm: GraalVM
     cpp: 'C++'
     php: PHP
     nodejs: "Node.js"
@@ -140,9 +141,9 @@ code_language_ids:
     haproxy: "HAProxy"
     traces: "Traces"
     metrics: "Metrics"
-    logs: "Logs"    
+    logs: "Logs"
     topology: "Topology Map"
-    geomap: "Geomap" 
+    geomap: "Geomap"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -263,6 +264,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  advanced_analysis: [gov]
   actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
@@ -276,17 +278,20 @@ unsupported_sites:
   azure-private-link: [us,us5,eu,gov,ap1,ap2]
   backstage: [gov]
   bits_ai: [gov]
-  bits_ai_sre: [gov, ap2]
+  bits_ai_sre: [gov]
   case_management: [gov]
   ci_visibility: [gov]
   code_coverage: [gov]
   code_security: [gov]
   configuration_at_runtime: [gov]
+  containers_kubernetes_appsec: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
   cloudprem: [gov]
+  csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov]
+  data_streams: [gov]
   datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
   dora_metrics: [gov]
@@ -295,11 +300,13 @@ unsupported_sites:
   eng_reports: [gov]
   events_from_sns_emails: [gov]
   exception_replay: [gov]
+  experimentation: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
   gcp-private-service-connect: [us,us3,gov,ap1,ap2]
   google-hangouts-chat: [gov]
+  google_chat: [gov]
   fips-compliance: [us,us3,us5,eu,ap1,ap2]
   fips-integrations: [us,us3,us5,eu,ap1,ap2]
   fips-proxy: [us,us3,us5,eu,ap1,ap2]
@@ -309,13 +316,16 @@ unsupported_sites:
   incident_ai: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
+  jira_error_tracking: [gov]
   linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
+  logs_scheduled_reports: [gov]
+  mcp_server: [gov]
   mobile_app_testing: [gov]
+  network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
-  otlp_agentless: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
   resource_based_sampling: [gov]

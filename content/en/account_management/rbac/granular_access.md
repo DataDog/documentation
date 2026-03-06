@@ -21,6 +21,7 @@ Use the different principals to control access patterns in your organization and
 | [Cross Org Connections][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Services][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -69,3 +70,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [22]: /incident_response/on-call/#granular-access-control
 [23]: /observability_pipelines/configuration/access_control/
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
+[25]: /getting_started/feature_flags/

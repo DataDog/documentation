@@ -7,15 +7,15 @@ title: Splunk HTTP Event Collector (HEC) 向け Sensitive Data Redaction
 
 ## 概要
 
-Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks.
+クレジットカード番号、銀行のルーティング番号、API キーなどの機密データは、意図せずログに含まれる可能性があり、組織を財務面やプライバシー面のリスクにさらすおそれがあります。
 
 Observability Pipelines では、ログを複数の宛先へ転送したりインフラ外へ送ったりする前に、機密情報を検出してタグ付けし、必要に応じてマスキングやハッシュ化を行えます。すぐに使えるスキャン ルールで、メール アドレス、クレジット カード番号、API キー、認可トークンなどの一般的なパターンを検出できます。さらに、正規表現 (regex) を使ったカスタム スキャン ルールを作成し、機密情報に一致させることも可能です。
 
 {{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
 このドキュメントでは、次の手順を説明します。
-1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
-1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
+1. Observability Pipelines の設定に必要な[前提条件](#prerequisites)
+1. [Observability Pipelines のセットアップ](#set-up-observability-pipelines)
 1. [Splunk HEC 経由で Observability Pipelines Worker にログを送信する](#send-logs-to-the-observability-pipelines-worker-over-splunk-hec)
 
 ## 前提条件
@@ -28,13 +28,13 @@ Observability Pipelines では、ログを複数の宛先へ転送したりイ�
 1. 新しいパイプラインを作成するには、 **Sensitive Data Redaction** テンプレートを選択します。
 1. ソースとして **Splunk HEC** を選択します。
 
-### Set up the source
+### ソースの設定
 
 {{% observability_pipelines/source_settings/splunk_hec %}}
 
-### Set up the destination
+### 宛先の設定
 
-Enter the following information based on your selected logs destinations.
+選択したログの送信先に応じて、以下の情報を入力します。
 
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -48,7 +48,7 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/prerequisites/amazon_security_lake %}}
 
-##### Set up the destination
+##### 宛先の設定
 
 {{% observability_pipelines/destination_settings/amazon_security_lake %}}
 
@@ -140,7 +140,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add additional destinations
+#### 送信先を追加する
 
 {{% observability_pipelines/multiple_destinations %}}
 
@@ -153,82 +153,82 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/add_processors_sds %}}
 
 {{< tabs >}}
-{{% tab "Add env vars" %}}
+{{% tab "環境変数を追加" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
-{{% tab "Add hostname" %}}
+{{% tab "ホスト名を追加" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
-{{% tab "Custom Processor" %}}
+{{% tab "カスタム プロセッサー" %}}
 
 {{% observability_pipelines/processors/custom_processor %}}
 
 {{% /tab %}}
-{{% tab "Dedupe" %}}
+{{% tab "重複排除" %}}
 
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Edit fields" %}}
+{{% tab "フィールドを編集" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
-{{% tab "Enrichment table" %}}
+{{% tab "エンリッチメント テーブル" %}}
 
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
-{{% tab "Filter" %}}
+{{% tab "フィルター" %}}
 
 {{% observability_pipelines/processors/filter %}}
 
 {{% /tab %}}
-{{% tab "Generate metrics" %}}
+{{% tab "メトリクスを生成" %}}
 
 {{% observability_pipelines/processors/generate_metrics %}}
 
 {{% /tab %}}
-{{% tab "Grok Parser" %}}
+{{% tab "Grok パーサー" %}}
 
 {{% observability_pipelines/processors/grok_parser %}}
 
 {{% /tab %}}
-{{% tab "Parse JSON" %}}
+{{% tab "JSON をパース" %}}
 
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
-{{% tab "Parse XML" %}}
+{{% tab "XML をパース" %}}
 
 {{% observability_pipelines/processors/parse_xml %}}
 
 {{% /tab %}}
-{{% tab "Quota" %}}
+{{% tab "クォータ" %}}
 
 {{% observability_pipelines/processors/quota %}}
 
 {{% /tab %}}
-{{% tab "Reduce" %}}
+{{% tab "削減" %}}
 
 {{% observability_pipelines/processors/reduce %}}
 
 {{% /tab %}}
-{{% tab "Remap to OCSF" %}}
+{{% tab "OCSF へ再マッピング" %}}
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
-{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
+{{% collapse-content title="ライブラリ マッピング" level="h5" expanded=false id="library_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
+{{% collapse-content title="カスタム マッピング" level="h5" expanded=false id="custom_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
 
@@ -237,7 +237,7 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/processors/filter_syntax %}}
 
 {{% /tab %}}
-{{% tab "Sample" %}}
+{{% tab "サンプリング" %}}
 
 {{% observability_pipelines/processors/sample %}}
 
@@ -246,43 +246,43 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="Add rules from the library" level="h5" %}}
+{{% collapse-content title="ライブラリからルールを追加" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="Add a custom rule" level="h5" %}}
+{{% collapse-content title="カスタム ルールを追加" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Split array" %}}
+{{% tab "配列を分割" %}}
 
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
-{{% tab "Tags Processor" %}}
+{{% tab "タグ プロセッサー" %}}
 
 {{% observability_pipelines/processors/tags_processor %}}
 
 {{% /tab %}}
-{{% tab "Throttle" %}}
+{{% tab "スロットリング" %}}
 
 {{% observability_pipelines/processors/throttle %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Add another set of processors and destinations
+#### 別のプロセッサーと送信先のセットを追加する
 
 {{% observability_pipelines/multiple_processors %}}
 
 ### 観測可能性パイプラインワーカーのインストール
 1. **Choose your installation platform** ドロップダウンメニューで使用するプラットフォームを選択します。
 1. Splunk HEC アドレスを入力します。これはアプリケーションがログ データを送信する先のアドレスとポートです。Observability Pipelines Worker はこのアドレスで受信ログを待ち受けます。
-1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
+1. 選択した各送信先の環境変数を指定します。詳しくは、[前提条件](#prerequisites) を参照してください。
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
@@ -311,7 +311,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
-For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
+Datadog Archives の送信先については、ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 

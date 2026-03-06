@@ -38,7 +38,7 @@ By default, destinations have an in-memory buffer which can store 500 events. De
 
 ### Destination buffer behavior
 
-If a destination becomes unavailable, events start to fill the destination buffer. The destination retries indefinitely to ensure the pipeline flows again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events from being processed upstream. This eventually results in backpressure propagation, which stops any new events from being ingested from your source. 
+If a destination becomes unavailable, events start to fill the destination buffer. The destination retries indefinitely to ensure the pipeline flows again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events from being processed upstream. This eventually results in backpressure propagation, which stops your source from ingesting any new events. 
 
 #### Which buffer type to use for a destination
 
@@ -69,9 +69,25 @@ This table compares the differences between the memory and disk buffer.
 
 If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes and then sent downstream.
 
-#### Buffer metrics (when enabled)
+### Buffer metrics
 
-{{% observability_pipelines/metrics/buffer %}}
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
+
+#### Source buffer metrics
+
+{{% observability_pipelines/metrics/buffer/sources %}}
+
+#### Processor buffer metrics
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
+#### Destination buffer metrics
+
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ## Further reading
 
