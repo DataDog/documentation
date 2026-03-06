@@ -46,7 +46,7 @@ Based on what you see in the **Real-time metric overview**, follow the appropria
 
 #### The flag is not receiving traffic
 
-Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3]. 
+Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
 
 See the [Getting Started with Feature Flags][5] guide for details on environments.
 
@@ -71,7 +71,7 @@ Work through the following checks in order. Each builds on the previous one, so 
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
-1. On the [Experiments][2] page, select your experiment. 
+1. On the [Experiments][2] page, select your experiment.
 1. On the experiment details page, hover over the metric scorecard to see the per-user metric average, the **Total** metric value across users, and the **User Assignment Count** for each variant.
 
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
@@ -97,7 +97,7 @@ Work through the following checks in order. Each builds on the previous one, so 
 
 Datadog matches metric events to experiment exposures using a subject key. If the subject key in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
-1. Go to the experiment details page. 
+1. Go to the experiment details page.
 1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures Log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
@@ -124,8 +124,8 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for the following:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
-   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. 
-   
+   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results.
+
    If the metric event is missing or fires before the feature flag evaluation, share the session details with the [Datadog support team][1].
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
@@ -143,7 +143,7 @@ To check if outlier handling is the cause:
 1. On the [Experiments][2] page, select your experiment.
 1. Hover over the metric name, then click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
 1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
-1. Save the metric. 
+1. Save the metric.
 1. To trigger an immediate recompute, click the &#8942; menu icon next to **Last Updated** in the **Metrics** section of the experiment details page and click **run an update now**. Otherwise, wait for the next scheduled update.
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment details page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
