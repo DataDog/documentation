@@ -29,7 +29,7 @@ Update Markdown-supported dashboard descriptions or associate [teams][1] with a 
 1. Hover the dashboard title. A dropdown panel opens.
 1. Click on the dashboard title or description to edit them.
 1. Click the check button, to change the title.
-1. Select up to 5 teams from the <span class="ui">Teams</span> dropdown.
+1. Select up to 5 teams from the {{< ui >}}Teams{{< /ui >}} dropdown.
 1. (Optional) Add `[[suggested_dashboards]]` inside the dashboard description for a list of suggested dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other dashboards.
 
 ## Template variables
@@ -41,19 +41,19 @@ Update Markdown-supported dashboard descriptions or associate [teams][1] with a 
 
 ## Configuration actions
 
-Click <span class="ui">Configure</span> to open a menu of configuration options available for your dashboard, including:
+Click {{< ui >}}Configure{{< /ui >}} to open a menu of configuration options available for your dashboard, including:
 
 | Configuration    | Description |
 | ----------- | ----------- |
-| <span class="ui">Clone dashboard</span> | Copy the entire dashboard to a new dashboard. You are prompted to name the clone. |
-| <span class="ui">Display UTC time</span> | Toggle between UTC time and your default time zone. |
-| <span class="ui">Include Flex Logs</span> | Control whether widgets search [Flex Logs][3] or [Standard Indexed][4] logs. Switch between recent and historical data without editing individual widgets. This is a user-level preference that persists across sessions for this dashboard. |
-| <span class="ui">Increase density</span> | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
-| <span class="ui">Keyboard shortcuts</span> | View a list of available keyboard shortcuts. |
-| <span class="ui">Pause Auto-Refresh</span> | Pause automatic refresh by default for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |
-| <span class="ui">TV Mode</span> | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
-| <span class="ui">Version history</span> | Preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][6]. |
-| <span class="ui">View audit events</span> | See who is using this dashboard within your organization. As an individual, you can see a stream of your own actions. For more information, see [Datadog Audit Trail][7]. |
+| {{< ui >}}Clone dashboard{{< /ui >}} | Copy the entire dashboard to a new dashboard. You are prompted to name the clone. |
+| {{< ui >}}Display UTC time{{< /ui >}} | Toggle between UTC time and your default time zone. |
+| {{< ui >}}Include Flex Logs{{< /ui >}} | Control whether widgets search [Flex Logs][3] or [Standard Indexed][4] logs. Switch between recent and historical data without editing individual widgets. This is a user-level preference that persists across sessions for this dashboard. |
+| {{< ui >}}Increase density{{< /ui >}} | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
+| {{< ui >}}Keyboard shortcuts{{< /ui >}} | View a list of available keyboard shortcuts. |
+| {{< ui >}}Pause Auto-Refresh{{< /ui >}} | Pause automatic refresh by default for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |
+| {{< ui >}}TV Mode{{< /ui >}} | Toggle to display key performance metrics on large screens or TVs. For more information, see [Using TV mode for Dashboards][5]. |
+| {{< ui >}}Version history{{< /ui >}} | Preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][6]. |
+| {{< ui >}}View audit events{{< /ui >}} | See who is using this dashboard within your organization. As an individual, you can see a stream of your own actions. For more information, see [Datadog Audit Trail][7]. |
 
 ### Notifications
 
@@ -67,21 +67,21 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ### Copy, import, or export dashboard JSON
 
-Copy, import, or export a dashboard's JSON by clicking the <span class="ui">Configure</span> icon (upper right) with the following options:
+Copy, import, or export a dashboard's JSON by clicking the {{< ui >}}Configure{{< /ui >}} icon (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span class="ui">Copy dashboard JSON</span>   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
-| <span class="ui">Import dashboard JSON</span> | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
-| <span class="ui">Export dashboard JSON</span> | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
+| {{< ui >}}Copy dashboard JSON{{< /ui >}}   | Copy the dashboard's JSON to your clipboard.                                                                                                                               |
+| {{< ui >}}Import dashboard JSON{{< /ui >}} | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
+| {{< ui >}}Export dashboard JSON{{< /ui >}} | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
-Options for copying or exporting the JSON can also be accessed from the <span class="ui">Share</span> icon in the upper right.
+Options for copying or exporting the JSON can also be accessed from the {{< ui >}}Share{{< /ui >}} icon in the upper right.
 
 ### Delete dashboard
 
 <div class="alert alert-danger">Dashboards must be unstarred before deletion.</div>
 
-Use this option to permanently delete your dashboard. Use the preset <span class="ui">Recently Deleted</span> list to restore deleted dashboards. Dashboards in <span class="ui">Recently Deleted</span> are permanently deleted after 30 days. For more information, see the [Dashboard list][9] documentation.
+Use this option to permanently delete your dashboard. Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted dashboards. Dashboards in {{< ui >}}Recently Deleted{{< /ui >}} are permanently deleted after 30 days. For more information, see the [Dashboard list][9] documentation.
 
 ## Permissions
 
@@ -90,28 +90,28 @@ Use this option to permanently delete your dashboard. Use the preset <span class
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
 Use granular access controls to limit the [roles][10] that may edit a particular dashboard:
-1. While viewing a dashboard, click on the cog <span class="ui">Configure</span> in the upper right.
-1. Select <span class="ui">Permissions</span>.
-1. Click <span class="ui">Restrict Access</span>.
-1. The dialog box updates to show that members of your organization have <span class="ui">Viewer</span> access by default.
+1. While viewing a dashboard, click on the cog {{< ui >}}Configure{{< /ui >}} in the upper right.
+1. Select {{< ui >}}Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restrict Access{{< /ui >}}.
+1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
-1. Click <span class="ui">Add</span>.
-1. The dialog box updates to show that the role you selected has the <span class="ui">Editor</span> permission.
-1. Click <span class="ui">Save</span>.
+1. Click {{< ui >}}Add{{< /ui >}}.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][10].
 
 To restore general access to a dashboard with restricted access, follow the steps below:
-1. While viewing a dashboard, click on the cog <span class="ui">Configure</span> in the upper right.
-1. Select <span class="ui">Permissions</span>.
-1. Click <span class="ui">Restore Full Access</span>.
-1. Click <span class="ui">Save</span>.
+1. While viewing a dashboard, click on the cog {{< ui >}}Configure{{< /ui >}} in the upper right.
+1. Select {{< ui >}}Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
 If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][11].
 
-The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say <span class="ui">Gain Edit Access</span> or <span class="ui">Request Edit Access</span>. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
+The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say {{< ui >}}Gain Edit Access{{< /ui >}} or {{< ui >}}Request Edit Access{{< /ui >}}. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
 
 ## Further Reading
