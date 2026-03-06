@@ -547,8 +547,10 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
        TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
    tracedHostsWithHeaderType.put("example.com", headerTypes);
    tracedHostsWithHeaderType.put("example.eu", headerTypes);
-   CronetEngine cronetEngine = CronetEngine.Builder(context)
+   CronetEngine.Builder builder = new CronetEngine.Builder(context);
+   CronetEngine cronetEngine = CronetIntegrationPluginKt
        .configureDatadogInstrumentation(
+           builder,
            new RumNetworkInstrumentationConfiguration(),
            new ApmNetworkInstrumentationConfiguration(tracedHostsWithHeaderType)
        )

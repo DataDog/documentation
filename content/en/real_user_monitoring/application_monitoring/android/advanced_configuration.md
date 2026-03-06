@@ -522,8 +522,10 @@ val cronetEngine = CronetEngine.Builder(context)
     {{% tab "Java" %}}
 
 ```java
-CronetEngine cronetEngine = CronetEngine.Builder(context)
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
     .configureDatadogInstrumentation(
+        builder,
         new RumNetworkInstrumentationConfiguration(),
         new ApmNetworkInstrumentationConfiguration(
             Arrays.asList("example.com", "example.eu")

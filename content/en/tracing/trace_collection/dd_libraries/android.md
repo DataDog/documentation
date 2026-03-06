@@ -847,8 +847,11 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-   CronetEngine cronetEngine = CronetEngine.Builder(context)
+   CronetEngine.Builder builder = new CronetEngine.Builder(context);
+   CronetEngine cronetEngine = CronetIntegrationPluginKt
      .configureDatadogInstrumentation(
+       builder,
+       null,
        new ApmNetworkInstrumentationConfiguration(
          Arrays.asList("example.com", "example.eu")
        )
@@ -878,8 +881,11 @@ val cronetEngine = CronetEngine.Builder(context)
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-CronetEngine cronetEngine = CronetEngine.Builder(context)
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
   .configureDatadogInstrumentation(
+    builder,
+    null,
     new ApmNetworkInstrumentationConfiguration(
       Arrays.asList("example.com", "example.eu")
     ).setTraceScope(ApmNetworkTracingScope.ALL)
@@ -910,8 +916,10 @@ val cronetEngine = CronetEngine.Builder(context)
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-CronetEngine cronetEngine = CronetEngine.Builder(context)
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
   .configureDatadogInstrumentation(
+    builder,
     new RumNetworkInstrumentationConfiguration(),
     new ApmNetworkInstrumentationConfiguration(
       Arrays.asList("example.com", "example.eu")
@@ -940,8 +948,11 @@ val cronetEngine = CronetEngine.Builder(context)
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-CronetEngine cronetEngine = CronetEngine.Builder(context)
+CronetEngine.Builder builder = new CronetEngine.Builder(context);
+CronetEngine cronetEngine = CronetIntegrationPluginKt
   .configureDatadogInstrumentation(
+    builder,
+    null,
     new ApmNetworkInstrumentationConfiguration(
       Arrays.asList("example.com", "example.eu")
     ).setTraceSampleRate(20f)
