@@ -937,19 +937,6 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
-    - name: Client SDKs
-      url: client_sdks/
-      pre: building-block
-      identifier: sdk
-      parent: essentials_heading
-      weight: 60000
-    - name: Setup
-      url: client_sdks/setup/
-      parent: sdk
-      identifier: sdk_setup
-      weight: 1
-    - name: Developers
-      url: developers/
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -5755,11 +5742,6 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
-    - name: Client SDKs
-      url: feature_flags/client
-      parent: feature_flags
-      identifier: feature_flags_client
-      weight: 1
     - name: Android and Android TV
       url: feature_flags/client/android
       parent: feature_flags_client
