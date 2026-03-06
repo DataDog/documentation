@@ -43,7 +43,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service (7.73.0 or higher for Go).
 - [Remote Configuration][2] is enabled in that Agent.
 - A supported Datadog tracing library is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
