@@ -40,8 +40,6 @@ Resources are organized in a hierarchical structure. The grouping labels vary by
 
 This hierarchy helps you understand how resources are distributed across your cloud infrastructure.
 
-GCP supports additional grouping options: **Firewall**, **Service**, **Subnet**, and **Tags**.
-
 ## Interact with resources
 
 Click any resource to open a side panel with additional details, including:
