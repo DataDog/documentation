@@ -104,9 +104,9 @@ spec:
       selfHeal: true
 {{< /code-block >}}
 
-### Stage 2: Datadog Operator Application
+### Stage 2: Datadog Operator application
 
-This ArgoCD Application deploys the Datadog Operator using Helm, which creates the necessary CRDs.
+This ArgoCD application deploys the Datadog Operator using Helm, which creates the necessary CRDs.
 
 {{< code-block lang="yaml" filename="argocd/apps/datadog-operator.yaml" >}}
 apiVersion: argoproj.io/v1alpha1
@@ -134,9 +134,9 @@ spec:
       - ServerSideApply=true
 {{< /code-block >}}
 
-### Stage 3: Datadog Agent Application
+### Stage 3: Datadog Agent application
 
-This ArgoCD Application deploys the DatadogAgent custom resource.
+This ArgoCD application deploys the DatadogAgent custom resource.
 
 {{< code-block lang="yaml" filename="argocd/apps/datadog-agent.yaml" >}}
 apiVersion: argoproj.io/v1alpha1
@@ -199,9 +199,9 @@ spec:
           value: "true"
 {{< /code-block >}}
 
-### Stage 4: NGINX Application with DatadogPodAutoscaler
+### Stage 4: NGINX application with DatadogPodAutoscaler
 
-This ArgoCD Application deploys an NGINX workload with a DatadogPodAutoscaler using a Helm chart.
+This ArgoCD application deploys an NGINX workload with a DatadogPodAutoscaler using a Helm chart.
 
 {{< code-block lang="yaml" filename="argocd/apps/nginx-dka-demo.yaml" >}}
 apiVersion: argoproj.io/v1alpha1
@@ -387,15 +387,15 @@ kubectl create secret generic datadog-secret \
   -n datadog
 {{< /code-block >}}
 
-### Deploy root Application
+### Deploy root application
 
-Deploy the root Application, which manages all child Applications using the App of Apps pattern:
+Deploy the root application, which manages all child applications using the App of Apps pattern:
 
 {{< code-block lang="bash" >}}
 kubectl apply -f argocd/root-app.yaml
 {{< /code-block >}}
 
-ArgoCD now monitors your Git repository and automatically deploys all Applications in the correct order based on sync waves.
+ArgoCD now monitors your Git repository and automatically deploys all applications in the correct order based on sync waves.
 
 ### Enable autoscaling on the cluster in Datadog
 
@@ -403,13 +403,13 @@ Navigate to the [autoscaling settings page](https://app.datadoghq.com/orchestrat
 
 ### Verify sync wave progression
 
-Watch ArgoCD Applications synchronize in order:
+Watch ArgoCD applications synchronize in order:
 
 {{< code-block lang="bash" >}}
 kubectl get applications -n argocd
 {{< /code-block >}}
 
-You should see all Applications appear and synchronize in wave order: `datadog-operator` (wave 0), then `datadog-agent` (wave 1), and `nginx-dka-demo` (wave 2).
+You should see all applications appear and synchronize in wave order: `datadog-operator` (wave 0), then `datadog-agent` (wave 1), and `nginx-dka-demo` (wave 2).
 
 ### Validate deployment
 
@@ -445,13 +445,13 @@ Congratulations, you have a workload managed by the Datadog Kubernetes Autoscale
 
 ## Cleanup
 
-To remove all resources, delete the root Application. This cascades deletion to all child Applications:
+To remove all resources, delete the root application. This cascades deletion to all child applications:
 
 {{< code-block lang="bash" >}}
 kubectl delete application dka-root -n argocd
 {{< /code-block >}}
 
-Alternatively, delete Applications individually in reverse order:
+Alternatively, delete applications individually in reverse order:
 
 {{< code-block lang="bash" >}}
 kubectl delete application nginx-dka-demo -n argocd
@@ -469,7 +469,7 @@ kubectl delete secret datadog-secret -n datadog
 
 ### ArgoCD sync failures
 
-Check Application status and sync errors:
+Check application status and sync errors:
 
 {{< code-block lang="bash" >}}
 kubectl describe application datadog-operator -n argocd
@@ -477,7 +477,7 @@ kubectl describe application datadog-agent -n argocd
 kubectl describe application nginx-dka-demo -n argocd
 {{< /code-block >}}
 
-View ArgoCD Application Controller logs:
+View ArgoCD application Controller logs:
 
 {{< code-block lang="bash" >}}
 kubectl logs -n argocd -l app.kubernetes.io/name=argocd-application-controller
@@ -492,7 +492,7 @@ kubectl get crd | grep datadoghq
 kubectl get pods -n datadog
 {{< /code-block >}}
 
-The sync wave annotations ensure proper ordering, but you can manually refresh the Application:
+The sync wave annotations ensure proper ordering, but you can manually refresh the application:
 
 {{< code-block lang="bash" >}}
 argocd app sync datadog-agent
