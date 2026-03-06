@@ -18,7 +18,7 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-In addition to the [general prerequisites][9], .NET applications require:
+Before you begin, review the [prerequisites][9]. .NET applications also require:
 
 - .NET tracing library version 2.54.0 or higher ([.NET Framework][2] or [.NET Core][3]).
 

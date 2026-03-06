@@ -18,7 +18,7 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-In addition to the [general prerequisites][9], Java applications require:
+Before you begin, review the [prerequisites][9]. Java applications also require:
 
 - JDK version 8 or higher.
 - Tracing library [`dd-java-agent.jar`][8] version 1.34.0 or higher.

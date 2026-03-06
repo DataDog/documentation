@@ -20,7 +20,7 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-In addition to the [general prerequisites][10], PHP applications require:
+Before you begin, review the [prerequisites][10]. PHP applications also require:
 
 - Tracing library [`dd-trace-php`][11] version 1.5.0 or higher.
 

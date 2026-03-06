@@ -18,7 +18,7 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-In addition to the [general prerequisites][7], Python applications require:
+Before you begin, review the [prerequisites][7]. Python applications also require:
 
 - Tracing library [`ddtrace`][8] version 2.2.0 or higher.
 
