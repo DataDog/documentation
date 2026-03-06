@@ -85,11 +85,11 @@ In voicemail routing, callers are prompted to leave a message. The message is tr
 
 #### Best practices
 
-- Confirm team members have notification preferences configured to receive pages.
+- Confirm team members have notification preferences configured to receive Pages.
 - Test your routing setup regularly:
   - Test each keypad option to verify it routes to the correct team.
   - Confirm that voicemail recordings are properly captured and transcribed.
-  - Verify that pages are created and sent to the correct team members.
+  - Verify that Pages are created and sent to the correct team members.
 
 ## Troubleshooting
 
@@ -102,11 +102,11 @@ If your route isn't accepting calls:
 
 ### Keypad problems
 
-- Ensure keypad options are linked to a valid On-Call Team, and test each option individually. 
+- Ensure keypad options are linked to a valid On-Call Team, and test each option individually.
 - Verify that your phone system supports DTMF (touch-tone) input.
 
-### Voicemail and page issues
+### Voicemail and Page issues
 
-If voicemail isn't converting to pages:
+If voicemail isn't converting to Pages:
 - For **direct call routing**: If calls fall back to voicemail or fail to page, confirm that the On-Call Team is properly configured and that team members have valid notification preferences in place.
 - For **voicemail routing**: Confirm that your routing type is set to voicemail, the On-Call Team is properly configured, and team members have valid notification preferences configured to receive Pages.

@@ -37,7 +37,7 @@ The following table shows how OpsGenie resources map to Datadog On-Call resource
 | Rotation participants (user-type) | Schedule layer members | Only user-type participants are migrated. |
 | Time restrictions | Layer restrictions | Both daily and weekday-and-time-of-day restriction types are migrated. |
 | Repeat count | Policy retries | Repeat count maps directly to policy retries with no conversion. |
-| Close alert after all | Resolve page on policy end | Close alert after all maps directly to resolve page on policy end with no conversion. |
+| Close alert after all | Resolve Page on policy end | Close alert after all maps directly to resolve Page on policy end with no conversion. |
 
 ## Migration steps
 
@@ -111,7 +111,7 @@ If the escalation policy references OpsGenie schedules, Datadog automatically mi
 Before relying on migrated resources for production incidents:
 
 - **Verify schedule coverage**: Check that all migrated schedules have proper coverage with no gaps. Go to [On-Call Schedules][3] and review each schedule's timeline.
-- **Test escalation policies**: Use the [Manual Page][4] feature to send a test page and verify that escalation policies escalate correctly and notify the right people.
+- **Test escalation policies**: Use the [Manual Page][4] feature to send a test Page and verify that escalation policies escalate correctly and notify the right people.
 - **Check user mappings**: Verify that all users are correctly mapped and can receive notifications through their preferred channels (email, SMS, push, voice).
 - **Review team ownership**: Confirm that each escalation policy is owned by the correct Datadog team.
 - **Validate time restrictions**: If your schedules use time restrictions, verify that they apply correctly by checking on-call coverage during restricted and unrestricted periods.

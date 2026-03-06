@@ -31,7 +31,7 @@ To enable paging between orgs or datacenters, you must establish a secure connec
 
 1. In your destination org, [create a service account][1] with On-Call API access. Assign the service account to a role that includes the following permissions:
    - `on_call_read` - Read access to On-Call Teams and configurations
-   - `on_call_page` - Ability to trigger pages to On-Call Teams
+   - `on_call_page` - Ability to trigger Pages to On-Call Teams
    - `on_call_respond` - Respond to On-Call Pages
    - `user_access_read` - Read user information (automatically included in most roles)
 
