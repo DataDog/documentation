@@ -21,26 +21,28 @@ On the [Experiments][2] page, select your experiment and hover over the metric s
 - If the **User Assignment Count** for each variant is zero, start with [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
 - If you see assignments but no metric values, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
 
+In the following example, the **User Assignment Count** is 12,427 for Variant A and 12,573 for Variant B.
+
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
 
 ### Step 2: Confirm the experiment is receiving traffic
 
 Verify that your feature flag is enabled, evaluates in the correct environment, and that traffic reaches the experiment's targeting rule.
 
-1. On the experiment details page, hover over the `<experiment>-flag` flag label.
+1. On the experiment details page, hover over the experiment flag label (for example, `new-product-photos`).
 1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
 
-1. On the feature flag page, select the correct environment tab and confirm that the flag is **Enabled**. If the flag is disabled, enable it before proceeding.
+1. On the **Feature Flags** page, select the correct environment tab and confirm that the flag is **Enabled**. If the flag is disabled, enable it before proceeding.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The feature flag page with the Enabled toggle highlighted in the top-right corner." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The Feature Flags page with the Enabled toggle highlighted in the top-right corner." style="width:90%;" >}}
 
-1. In the **Real-time Metric Overview** section, verify that the flag is receiving traffic.
+1. In the **Real-time metric overview** section, confirm that the bar chart shows exposure events.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic.png" alt="The feature flag page with the Environment dropdown highlighted in the Real-time Metric Overview section, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic1.png" alt="The Feature Flags page with the Environment dropdown highlighted in the Real-time Metric Overview section, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
 
-Based on what you see in the **Real-time Metric Overview**, follow the appropriate path:
+Based on what you see in the **Real-time metric overview**, follow the appropriate path:
 
 #### The flag is not receiving traffic
 
@@ -50,9 +52,9 @@ See the [Getting Started with Feature Flags][5] guide for details on environment
 
 #### The flag is receiving traffic but experiment assignments are zero
 
-If the flag shows exposures but the experiment scorecard shows zero assignments, traffic is not reaching the experiment's [targeting rule][6].
+If the flag shows exposures but the metric scorecard shows zero assignments, traffic is not reaching the experiment's [targeting rule][6].
 
-The waterfall is a list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
+The **Targeting Rules & Rollouts** section displays a waterfall, a list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="The Targeting Rules & Rollouts section of a feature flag showing the experiment targeting rule with 269 users and rollout percentages for each variant across four stages." style="width:90%;" >}}
 
@@ -122,7 +124,9 @@ If subject values match and users are assigned to the experiment, inspect indivi
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for the following:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
-   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. If the metric event is missing or fires before the feature flag evaluation, share the session details with the [Datadog support team][1].
+   - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results. 
+   
+   If the metric event is missing or fires before the feature flag evaluation, share the session details with the [Datadog support team][1].
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
@@ -139,7 +143,8 @@ To check if outlier handling is the cause:
 1. On the [Experiments][2] page, select your experiment.
 1. Hover over the metric name, then click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
 1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
-1. Save the metric. To trigger an immediate recompute, click the &#8942; menu icon next to **Last Updated** in the **Metrics** section and click **run an update now**. Otherwise, wait for the next scheduled update.
+1. Save the metric. 
+1. To trigger an immediate recompute, click the &#8942; menu icon next to **Last Updated** in the **Metrics** section of the experiment details page and click **run an update now**. Otherwise, wait for the next scheduled update.
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The Experiments page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
