@@ -47,7 +47,7 @@ Dynamic Instrumentation requires the following:
 - [Remote Configuration][2] is enabled in that Agent.
 - A supported Datadog tracing library is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended: [Autocomplete and search][17] are enabled.
+- Recommended: [Autocomplete and search (in Preview)][17] are enabled.
 - Recommended: [Source Code Integration][7] is set up for your service.
 
 ### Permissions
@@ -66,11 +66,11 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 Dynamic Instrumentation creates "dynamic logs" that are sent to Datadog and appear alongside your regular application logs.
 
-If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not filtered:
+If you use [Exclusion filters][9], verify that Dynamic Instrumentation logs are not filtered:
 
 1. Create a logs index and [configure it][10] to the desired retention with **no sampling**.
 2. Set the filter to match on the `source:dd_debugger` tag. All Dynamic Instrumentation logs have this source.
-3. Ensure that the new index takes precedence over any other with filters that match that tag, because the first match wins.
+3. Verify that the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
 ### Enable Dynamic Instrumentation
 
@@ -216,23 +216,14 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 
 [1]: /agent/
 [2]: /tracing/guide/remote_config
-[3]: https://github.com/DataDog/dd-trace-java
-[4]: https://github.com/DataDog/dd-trace-py
-[5]: https://github.com/DataDog/dd-trace-dotnet
 [6]: /getting_started/tagging/unified_service_tagging/
 [7]: /integrations/guide/source-code-integration/
 [8]: /account_management/rbac/permissions#apm
 [9]: /logs/log_configuration/indexes/#exclusion-filters
 [10]: /logs/log_configuration/indexes/#add-indexes
-[11]: /dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
 [13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /dynamic_instrumentation/symdb/
-[18]: https://github.com/DataDog/dd-trace-js
-[19]: https://github.com/DataDog/dd-trace-rb
-[20]: https://github.com/DataDog/dd-trace-php
-[21]: https://github.com/DataDog/dd-trace-go
-[22]: /tracing/trace_collection/dynamic_instrumentation/enabling/
