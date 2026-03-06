@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, verify that your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of the Datadog tracing library. If you already have [APM][1] set up and your Agent and tracing library meet the [prerequisites](#prerequisites), go directly to enabling Dynamic Instrumentation.
 
 ## Prerequisites
 
@@ -24,11 +24,10 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][15]. Node.j
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.49.0][6] or higher.
-2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. If your source code is transpiled during deployment (for example, if using TypeScript), ensure that source maps are published along with the deployed Node.js application.
-4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+2. If your source code is transpiled during deployment (for example, if using TypeScript), ensure that source maps are published along with the deployed Node.js application.
+3. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
 
 ## Configuration
 
@@ -84,7 +83,6 @@ The following limitations apply to the Node.js implementation:
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /dynamic_instrumentation/
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [7]: /dynamic_instrumentation/#creating-log-probes
 [8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [9]: /integrations/guide/source-code-integration/?tab=nodejs#embed-git-information-in-your-build-artifacts

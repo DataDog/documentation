@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, verify that your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of the Datadog tracing library. If you already have [APM][1] set up and your Agent and tracing library meet the [prerequisites](#prerequisites), go directly to enabling Dynamic Instrumentation.
 
 ## Prerequisites
 
@@ -25,10 +25,9 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Java ap
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.49.0][2] or higher.
-2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
-3. Download `dd-java-agent.jar`:
+2. Download `dd-java-agent.jar`:
  {{< tabs >}}
  {{% tab "Wget" %}}
    ```shell
@@ -47,7 +46,7 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][9]. Java ap
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
+3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
    {{< tabs >}}
 {{% tab "Command arguments" %}}
 
@@ -85,7 +84,7 @@ java \
    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-5. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
+4. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][4].
 
 ## Configuration
 
@@ -112,7 +111,6 @@ See [Dynamic Instrumentation][6] for information about adding instrumentations a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
