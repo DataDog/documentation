@@ -415,6 +415,8 @@ To configure Datadog using SST v3, follow these steps:
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}
