@@ -1,6 +1,5 @@
 ---
 title: Personal Access Tokens
-kind: documentation
 description: "Create and manage short-lived, scoped Personal Access Tokens to authenticate Datadog API calls without pairing API and application keys."
 aliases:
     - /account_management/faq/personal-access-tokens/
