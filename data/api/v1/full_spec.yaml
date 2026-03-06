@@ -4715,10 +4715,11 @@ components:
           type: array
       type: object
     HourlyUsageAttributionUsageType:
-      description: 'Supported products for hourly usage attribution requests.
+      description: 'Supported products for hourly usage attribution requests. Usage
+        types are in the format `<usage_type>_usage`.
 
-        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
-        `estimated_ingested_spans_usage`.'
+        To obtain the complete list of valid usage types, make a request to the [Get
+        usage attribution types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
       enum:
       - api_usage
       - apm_fargate_usage
@@ -4730,6 +4731,8 @@ components:
       - asm_serverless_traced_invocations_percentage
       - bits_ai_investigations_usage
       - browser_usage
+      - ci_code_coverage_committers_percentage
+      - ci_code_coverage_committers_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
@@ -4815,6 +4818,8 @@ components:
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
       - BITS_AI_INVESTIGATIONS_USAGE
       - BROWSER_USAGE
+      - CI_CODE_COVERAGE_COMMITTERS_PERCENTAGE
+      - CI_CODE_COVERAGE_COMMITTERS_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -9268,7 +9273,11 @@ components:
           type: array
       type: object
     MonthlyUsageAttributionSupportedMetrics:
-      description: Supported metrics for monthly usage attribution requests.
+      description: 'Supported metrics for monthly usage attribution requests. Usage
+        types are in the format `<usage_type>_usage`.
+
+        To obtain the complete list of valid usage types, make a request to the [Get
+        usage attribution types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
       enum:
       - api_usage
       - api_percentage
@@ -9599,10 +9608,7 @@ components:
       - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
-      description: 'Fields in Usage Summary by tag(s).
-
-        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
-        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`.'
+      description: Fields in Usage Summary by tag(s).
       properties:
         api_percentage:
           description: The percentage of synthetic API test usage by tag(s).
@@ -9680,6 +9686,14 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        ci_code_coverage_committers_percentage:
+          description: The percentage of Code Coverage committers usage by tag(s).
+          format: double
+          type: number
+        ci_code_coverage_committers_usage:
+          description: The total Code Coverage committers usage by tag(s).
           format: double
           type: number
         ci_pipeline_indexed_spans_percentage:
@@ -19758,6 +19772,23 @@ components:
       x-enum-varnames:
       - BARS
       - AREA
+    TimeseriesRequestStyle:
+      description: Define request widget style for timeseries widgets.
+      properties:
+        has_value_labels:
+          description: If true, the value is displayed as a label relative to the
+            data point.
+          type: boolean
+        line_type:
+          $ref: '#/components/schemas/WidgetLineType'
+        line_width:
+          $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+      type: object
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -19933,7 +19964,7 @@ components:
           deprecated: true
           description: Deprecated - Use `queries` and `formulas` instead.
         style:
-          $ref: '#/components/schemas/WidgetRequestStyle'
+          $ref: '#/components/schemas/TimeseriesRequestStyle'
       type: object
     ToplistWidgetDefinition:
       description: The top list visualization enables you to display a list of Tag
@@ -38662,10 +38693,7 @@ paths:
         code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
-        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\nThe
-        following values have been **deprecated**:\n    `estimated_indexed_spans_usage`,
-        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`,
-        `llm_observability_usage`, `llm_observability_percentage`."
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38686,9 +38714,14 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Usage type to retrieve. The following values have been **deprecated**:
+      - description: 'Usage type to retrieve. Usage types are in the format `<usage_type>_usage`.
 
-          `estimated_indexed_spans_usage`, `estimated_ingested_spans_usage`.'
+          Example: `infra_host_usage`
+
+          To obtain the complete list of active usage types that can be used to replace
+
+          `<usage_type>` in the field names, make a request to the [Get usage attribution
+          types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
         in: query
         name: usage_type
         required: true
@@ -39249,10 +39282,15 @@ paths:
       - description: 'Comma-separated list of usage types to return, or `*` for all
           usage types.
 
-          The following values have been **deprecated**:
+          Usage types are in the format `<usage_type>_usage` and `<usage_type>_percentage`.
 
-          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`, `llm_observability_usage`, `llm_observability_percentage`.'
+          Example: `infra_host_usage,infra_host_percentage`
+
+          To obtain the complete list of usage attribution types that can be used
+          to replace
+
+          `<usage_type>` in the field names, make a request to the [Get usage attribution
+          types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
         in: query
         name: fields
         required: true
@@ -39264,12 +39302,15 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageSortDirection'
-      - description: 'The field to sort by.
+      - description: 'The field to sort by. Sort fields are in the format `<usage_type>_usage`.
 
-          The following values have been **deprecated**:
+          Example: `infra_host_usage`
 
-          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`.'
+          To obtain the complete list of usage attribution types that can be used
+          to replace
+
+          `<usage_type>` in the field names, make a request to the [Get usage attribution
+          types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
         in: query
         name: sort_name
         required: false
