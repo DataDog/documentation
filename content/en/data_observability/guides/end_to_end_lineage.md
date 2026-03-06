@@ -148,6 +148,6 @@ Lineage is most valuable when something goes wrong and you need to understand wh
 [12]: /data_observability/quality_monitoring/business_intelligence/metabase
 [13]: /data_observability/quality_monitoring/business_intelligence/sigma
 [14]: /data_observability/quality_monitoring/elt/
-[15]: /data_observability/quality_monitoring/
+[15]: /data_observability/quality_monitoring/data_warehouses/
 [16]: /data_observability/jobs_monitoring/
 [17]: /data_observability/quality_monitoring/business_intelligence/
