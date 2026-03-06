@@ -40,7 +40,7 @@ Verify that your feature flag is enabled, evaluates in the correct environment, 
 
 1. In the **Real-time metric overview** section, confirm that the bar chart shows exposure events.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic1.png" alt="The Feature Flags page with the Environment dropdown highlighted in the Real-time Metric Overview section, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic1.png" alt="The Feature Flags page with the Environment dropdown highlighted in the Real-time metric overview section, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
 
 Based on what you see in the **Real-time metric overview**, follow the appropriate path:
 
@@ -146,7 +146,7 @@ To check if outlier handling is the cause:
 1. Save the metric. 
 1. To trigger an immediate recompute, click the &#8942; menu icon next to **Last Updated** in the **Metrics** section of the experiment details page and click **run an update now**. Otherwise, wait for the next scheduled update.
 
-{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The Experiments page Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment details page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
 If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the Edit Metric page.
 
