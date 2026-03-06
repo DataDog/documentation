@@ -68,6 +68,36 @@ APM provides out-of-the-box instrumentation for many popular frameworks and libr
 
 For details about how to how to toggle and configure plugins, check out the [API documentation][5].
 
+
+### Native module compatibility
+
+| Module              | Support Type        | Notes |
+| ------------------- | ------------------- | ------------------------------------------ |
+| [child_process][83] | Fully supported     |       |
+| [dns][22]           | Fully supported     |       |
+| [http][24]          | Fully supported     | This includes the built-in `fetch` function.      |
+| [https][25]         | Fully supported     |       |
+| [http2][26]         | Partially supported | Only HTTP2 clients are currently supported and not servers. |
+| [net][27]           | Fully supported     |       |
+
+
+### Protocol compatibility
+
+| Module                   | Versions  | Support Type    | Notes                                      |
+| ------------------------ | --------- | --------------- | ------------------------------------------ |
+| [@apollo/gateway][90]    | `>=2.3.0` | Fully supported |                                            |
+| [@apollo/server][89]     | `>=4`     | Fully supported |                                            |
+| [apollo-server-core][88] | `>=3`     | Fully supported | Used for Apollo Server v2 and v3           |
+| [avsc][87]               | `>=5`     | Fully supported |                                            |
+| [gRPC][11]               | `>=1.13`  | Fully supported |                                            |
+| [graphql-yoga][65]       | `>=3.6.0` | Fully supported | Supports graphql-yoga v3 executor          |
+| [graphql][10]            | `>=0.10`  | Fully supported | Supports Apollo Server and express-graphql |
+| [ldapjs][86]             | `>=2`     | Fully supported |                                            |
+| [stripe][85]             | `>=9`     | Fully supported |                                            |
+| [undici][76]             |           | Fully supported |                                            |
+| [ws][84]                 | `>=8`     | Fully supported |                                            |
+
+
 ### Web framework compatibility
 
 | Module                  | Versions | Support Type    | Notes                                      |
@@ -75,9 +105,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [connect][6]           | `>=2`    | Fully supported |                                             |
 | [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
-| [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
-| [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
-| [gRPC][11]              | `>=1.13` | Fully supported |                                            |
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [hono][71]              | `>=4`    | Fully supported |                                            |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
@@ -115,17 +142,6 @@ Or, modify the `package.json` file if you typically start an application with np
 **Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
 
 
-### Native module compatibility
-
-| Module      | Support Type        | Notes |
-| ----------- | ------------------- | ------------------------------------------ |
-| [dns][22]   | Fully supported     |       |
-| [http][24]  | Fully supported     | This includes the built-in `fetch` function.      |
-| [https][25] | Fully supported     |       |
-| [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
-| [net][27]   | Fully supported     |       |
-| [undici][76] | Fully supported    |       |
-
 ### Data store compatibility
 
 | Module                 | Versions   | Support Type    | Notes                                            |
@@ -146,11 +162,12 @@ Or, modify the `package.json` file if you typically start an application with np
 | [opensearch][69]       | `>=1`      | Fully supported |                                                  |
 | [oracledb][37]         | `>=5`      | Fully supported |                                                  |
 | [pg][38]               | `>=4`      | Fully supported | Supports `pg-native` when used with `pg`         |
-| [Prisma][70]           | `>=6.1.0`  | Fully supported |                                                  |
+| [prisma][70]           | `>=6.1.0`  | Fully supported |                                                  |
 | [redis][39]            | `>=0.12`   | Fully supported |                                                  |
 | [sequelize][74]        | `>=4`      | Fully supported |                                                  |
 | [sharedb][40]          | `>=1`      | Fully supported |                                                  |
 | [tedious][41]          | `>=1`      | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+
 
 ### Worker compatibility
 
@@ -168,16 +185,24 @@ Or, modify the `package.json` file if you typically start an application with np
 | [kafkajs][46]                        | `>=1.4`     | Fully supported |                                                        |
 | [rhea][48]                           | `>=1`       | Fully supported |                                                        |
 
-### SDK compatibility
+
+### AI/LLM compatibility
 
 | Module                    | Versions   | Support Type        | Notes                                                  |
 | ------------------------- | ---------- | ------------------- | ------------------------------------------------------ |
 | [@anthropic-ai/sdk][80]   | `>=0.14.0` | Fully supported     |                                                        |
-| [aws-sdk][49]             | `>=2.1.35` | Fully supported     | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
 | [@google-cloud/vertexai][81] | `>=1`   | Fully supported     |                                                        |
 | [@google/genai][82]       | `>=1.19.0` | Fully supported     |                                                        |
 | [langchain][66]           | `>=0.1.0`  | Partially supported | The following workflow invocations are supported: <br /><br /><ul><li>`chain.invoke` and `chain.batch`</li><li>`chat_model.invoke`</li><li>`llm.invoke`</li><li>`openaiEmbeddings.embedQuery` and `openaiEmbeddings.embedDocuments`</li></ul> |
 | [openai][64]              | `>=3.0.0`  | Fully supported     |                                                        |
+
+
+### SDK compatibility
+
+| Module                    | Versions   | Support Type        | Notes                                                  |
+| ------------------------- | ---------- | ------------------- | ------------------------------------------------------ |
+| [aws-sdk][49]             | `>=2.1.35` | Fully supported     | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+
 
 ### Promise library compatibility
 
@@ -189,6 +214,7 @@ Or, modify the `package.json` file if you typically start an application with np
 | [q][53]          | `>=1`     | Fully supported |
 | [when][54]       | `>=3`     | Fully supported |
 
+
 ### Logger compatibility
 
 | Module           | Versions  | Support Type    |
@@ -197,6 +223,16 @@ Or, modify the `package.json` file if you typically start an application with np
 | [paperplane][56] | `>=2.3.2` | Fully supported |
 | [pino][57]       | `>=2`     | Fully supported |
 | [winston][58]    | `>=1`     | Fully supported |
+
+
+### Known transitive package compatibility
+
+While the Datadog tracer doesn't provide direct support for modules listed here they are known to work as they depend on modules that the tracer does instrument.
+
+| Module           | Versions  | Comment    |
+| ---------------- | --------- | --------------- |
+| [axios][91]      |           | Axios depends on the internal `http` module. |
+
 
 ## Unsupported libraries
 
@@ -290,3 +326,12 @@ For additional information or to discuss [leave a comment on this github issue][
 [80]: https://github.com/anthropics/anthropic-sdk-node
 [81]: https://github.com/googleapis/nodejs-vertexai
 [82]: https://www.npmjs.com/package/@google/genai
+[83]: https://nodejs.org/api/child_process.html
+[84]: https://www.npmjs.com/package/ws
+[85]: https://www.npmjs.com/package/stripe
+[86]: https://www.npmjs.com/package/ldapjs
+[87]: https://www.npmjs.com/package/avsc
+[88]: https://www.npmjs.com/package/apollo-server-core
+[89]: https://www.npmjs.com/package/@apollo/server
+[90]: https://www.npmjs.com/package/@apollo/gateway
+[91]: https://www.npmjs.com/package/axios
