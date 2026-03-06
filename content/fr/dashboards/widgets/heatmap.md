@@ -24,7 +24,7 @@ Une nouvelle expérience Host Map est disponible en version Preview. Utilisez ce
 
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="Exemple de visualisation de graphique de carte thermique" style="width:100%;">}} 
 
-Le widget de carte thermique) affiche des métriques agrégées selon plusieurs tags. Utilisez les widgets de carte thermique pour visualiser les histogrammes OpenTelemetry, les métriques de distribution, la haute résolution et l'affichage des données.
+Le widget de carte thermique affiche des métriques agrégées selon plusieurs tags. Utilisez les widgets de carte thermique pour visualiser les histogrammes OpenTelemetry, les métriques de distribution, la haute résolution et l'affichage des données.
 
 ## Configuration
 
