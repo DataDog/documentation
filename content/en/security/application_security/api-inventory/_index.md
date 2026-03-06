@@ -126,10 +126,11 @@ To use this data source, configure the [Source Code Integration][16] with GitHub
 
 | Language | Framework |
 |----------|-----------|
-| Python   | FastAPI   |
+| Python   | FastAPI, Flask, Tornado |
 | Java     | Spring    |
 | Go       | Beego, Chi, Echo, Fiber, Gin, Gorilla Mux, fasthttp, go-zero |
 | C#       | ASP.NET Core MVC |
+| Node.js  | Express, Fastify |
 
 To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
 
@@ -143,15 +144,15 @@ The matching occurs within your application, and none of the sensitive data is s
 
 To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
 
-#### Create custom scanners
+#### Create API data scanners
 
-By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides custom scanners to define scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
+By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides API data scanners to define custom scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
 
-In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
+In an API data scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
 
 When the scanner detects sensitive data, it tags the API endpoint with the category and type and displays it in [API Endpoints][7].
 
-To create a customer scanner and view its results, do the following:
+To create an API data scanner and view its results, do the following:
 
 1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
 2. Click **New Scanner**.

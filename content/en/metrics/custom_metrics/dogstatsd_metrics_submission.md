@@ -8,7 +8,7 @@ aliases:
   - /developers/metrics/dogstatsd_metrics_submission/
   - /metrics/dogstatsd_metrics_submission
 further_reading:
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
 - link: "/metrics/types/"
@@ -1131,7 +1131,7 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd/
+[1]: /extend/dogstatsd/
 [2]: /metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
