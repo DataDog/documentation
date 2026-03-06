@@ -29,7 +29,7 @@ Use lineage to answer questions like:
 
 The lineage graph covers your entire data stack, left to right from upstream to downstream:
 
-**[Ingestion sources][14]** (Fivetran) → **[Warehouses and lakes][15]** (Snowflake, BigQuery, Databricks, Redshift) → **[Transformation jobs][16]** (dbt, Airflow, Spark, Glue) → **[BI tools][17]** (Looker, Tableau, Power BI, Metabase, Sigma)
+**[Ingestion sources][14]** (such as Fivetran) → **[Warehouses and lakes][15]** (such as Snowflake, BigQuery, Databricks, or Redshift) → **[Transformation jobs][16]** (such as dbt, Airflow, Spark, or Glue) → **[BI tools][17]** (such as Looker, Tableau, Power BI, Metabase, or Sigma)
 
 You can enable any combination of integrations. Datadog merges lineage from all of them into one graph.
 
