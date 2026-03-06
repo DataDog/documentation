@@ -221,7 +221,7 @@ Contributors may use AI code assistants (such as Claude Code, GitHub Copilot, Cu
 
 **Quality and accuracy**: AI-assisted contributions are held to the same quality bar as any other contribution. You are responsible for the accuracy of all content you submit, regardless of how it was produced.
 
-**Style compliance**: AI tools don't follow the Datadog documentation [style guide][4] or [Vale linting rules][4]. Run `vale` on your changes and fix any issues before submitting.
+**Style compliance**: AI tools may not follow the Datadog documentation [style guide][4] or [Vale linting rules][4]. Run `vale` on your changes and fix any issues before submitting.
 
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119
