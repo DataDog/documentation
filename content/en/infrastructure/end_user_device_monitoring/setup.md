@@ -18,7 +18,6 @@ This page explains how to configure the Datadog Agent to enable End User Device 
 - Windows 10 and later
 - macOS
 - Linux
-- Virtual desktop environments such as Amazon WorkSpaces, Azure Virtual Desktop, and Google Cloud Workstations
 
 ## Configure the Datadog Agent
 

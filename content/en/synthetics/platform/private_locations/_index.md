@@ -604,6 +604,14 @@ Additional parameters can be added:
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
+To enable FIPS 140-2 cryptographic mode, set the `ENABLE_FIPS=1` environment variable before running the worker executable. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+
+Example:
+
+```cmd
+set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
+```
+
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
 {{< /tab >}}
@@ -656,6 +664,14 @@ Example:
 ```text
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
 ```
+
+To enable FIPS 140-2 cryptographic mode, include `ENABLE_FIPS=1`:
+
+```text
+set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
+
+The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
 {{% /tab %}}
 {{< /tabs >}}
