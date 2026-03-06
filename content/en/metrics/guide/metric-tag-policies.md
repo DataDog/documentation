@@ -1,6 +1,6 @@
 ---
 title: Metric Tag Policies
-description: "Use tag policies to configure metrics proactively, before ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization"
+description: "Use tag policies to configure metrics proactively, after ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization"
 further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"
@@ -18,9 +18,7 @@ private: true
 
 ## Overview
 
-Tag policies are centralized rules, evaluated sequentially, that control which tags are retained on your metrics before ingestion. They manage tag cardinality and reduce costs without requiring changes to your application code.
-
-Define rules based on metric names or prefixes to specify which tags to retain or exclude. Tag policies apply automatically to groups of metrics, including new metrics as they are submitted, preventing cost spikes from high cardinality without reactive cleanup.
+Tag policies are centralized, sequentially evaluated aggregation rules that determine which tags are retained on metrics after ingestion. They let you define persistent, account-level controls based on metric names or prefixes to specify which tags to retain or exclude. This helps proactively manage cardinality and reduce costs without requiring code changes.
 
 ## Create a tag policy
 
@@ -35,9 +33,6 @@ Alternatively, create policies from the [Metrics Volume][2] page by opening the 
 
 1. Enter a policy name.
    Use a descriptive name that clearly identifies the purpose of the policy.
-2. Select a policy type, and whether it should merge with or replace previously evaluated policies:
-   1. **Include tags** (define an allowlist of tags that remain queryable)
-   2. **Exclude tags** (define a blocklist of tags to drop)
 
 ### Step 2: Define policy scope
 
@@ -45,16 +40,15 @@ Choose which metrics the policy applies to.
 
 Scope a policy using one or more of the following options:
 
+Policy type
+: * **Include tags** (define an allowlist of tags that remain queryable)
+  * **Exclude tags** (define a blocklist of tags to aggregate)
+
 Metric names or prefixes
 : Apply the policy to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
 
 Prefix exceptions
 : Exclude specific prefixes from the policy scope (for example, apply to `http.*` except `http.debug.*`)
-
-Metric life cycle
-: * Apply to newly submitted metrics only
-  * Apply to existing metrics
-  * Apply to metrics that have submitted data for more than `<X>` days
 
 Metric usage
 : * Apply to metrics not queried within a selected time window
