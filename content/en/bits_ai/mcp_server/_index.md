@@ -25,10 +25,6 @@ algolia:
   rank: 90
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 Ready to get started? See [Set Up the Datadog MCP Server][27] for connection instructions.
@@ -40,8 +36,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 ## Disclaimers
 
-- The Datadog MCP Server is not supported for production use during the Preview.
-- Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
@@ -667,7 +661,7 @@ You can view information about calls made by MCP Server tools in Datadog's [Audi
 
 ## Feedback
 
-The Datadog MCP Server is under significant development. During the Preview, use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
+The Datadog MCP Server is under significant development. Use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
 
 ## Further reading
 
