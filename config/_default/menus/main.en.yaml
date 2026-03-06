@@ -937,6 +937,17 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
+    - name: Client SDKs
+      url: client_sdks/
+      pre: building-block
+      identifier: sdk
+      parent: essentials_heading
+      weight: 60000
+    - name: Data Collected
+      url: client_sdks/data_collected/
+      parent: sdk
+      identifier: sdk_data_collected
+      weight: 3
     - name: Extend Datadog
       url: extend/
       pre: dev-code
