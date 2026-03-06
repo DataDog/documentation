@@ -5194,6 +5194,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 40202
+    - name: DeepEval Evaluations
+      url: llm_observability/evaluations/deepeval_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_deepeval_evaluations
+      weight: 40301
     - name: Annotation Queues
       url: llm_observability/evaluations/annotation_queues
       parent: llm_obs_evaluations
@@ -7351,6 +7356,11 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_enable
       weight: 10002
+    - name: Update Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning/update
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_update
+      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
@@ -7461,11 +7471,6 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
-    - name: Create Jira Issues
-      url: security/cloud_security_management/review_remediate/jira
-      parent: csm_review_remediate
-      identifier: csm_jira
-      weight: 103
     - name: Severity Scoring
       url: security/cloud_security_management/severity_scoring/
       parent: csm
@@ -7486,6 +7491,11 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
+    - name: Agentless Scanning
+      url: security/cloud_security_management/troubleshooting/agentless_scanning
+      parent: csm_troubleshooting
+      identifier: csm_troubleshooting_agentless_scanning
+      weight: 1203
     - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading

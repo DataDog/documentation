@@ -93,6 +93,8 @@ logger.info("Hello world!")
 
 {{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}

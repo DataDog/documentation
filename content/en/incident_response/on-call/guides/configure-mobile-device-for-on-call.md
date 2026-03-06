@@ -145,24 +145,24 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 </div>
 
 ## On-Call mobile widgets
-Add On-Call home screen and lock screen widgets to easily access your pages and shifts.
+Add On-Call home screen and lock screen widgets to easily access your Pages and shifts.
 
 ### On-Call home screen widget
 
-View your On-Call shifts and On-Call pages on your mobile home screen with Datadog widgets.
+View your On-Call shifts and On-Call Pages on your mobile home screen with Datadog widgets.
 
 You can customize your On-Call shift widgets by filtering on:
 
 - Organization
 - Period of time
 
-You can customize your On-Call page widgets by filtering on:
+You can customize your On-Call Page widgets by filtering on:
 
 - Organization
 - Team
 - Order
 
-**Note**: You can add additional filters for the On-Call pages widget.
+**Note**: You can add additional filters for the On-Call Pages widget.
 
 #### Edit an On-Call shift widget
 

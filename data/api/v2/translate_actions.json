@@ -2210,7 +2210,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]` query parameters.\nTo fetch the first page, pass in a query parameter with either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the `next_cursor` value from the response as the new `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null, all pages have been retrieved.",
+    "description": "Returns all metrics for your organization that match the given filter parameters.\nOptionally, paginate by using the `page[cursor]` and/or `page[size]` query parameters.\nTo fetch the first page, pass in a query parameter with either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the `next_cursor` value from the response as the new `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null, all pages have been retrieved.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -4267,6 +4267,10 @@
   "GetProjectedCost": {
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
+  },
+  "GetUsageAttributionTypes": {
+    "description": "Get usage attribution types.",
+    "summary": "Get usage attribution types"
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",

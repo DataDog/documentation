@@ -655,6 +655,15 @@ export default {
     ap2: 'intake.synthetics.ap2.datadoghq.com',
     gov: 'intake.synthetics.ddog-gov.com'
   },
+  mcp_server_endpoint: {
+    us: 'https://mcp.datadoghq.com/api/unstable/mcp-server/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp',
+    eu: 'https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp',
+    gov: 'The MCP Server endpoint for GOV is not supported.'
+  },
   cursor_mcp_install_deeplink: {
     us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',
     us3: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us3&config=eyJ1cmwiOiJodHRwczovL21jcC51czMuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
