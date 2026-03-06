@@ -125,7 +125,7 @@ data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
    Replace the placeholders:
 
    - `<RULE_IDENTIFIER>` with a name to use when you later set up the Sensitive Data Scanner processor in the Observability Pipeline resource.
-   - `<RULE_NAME>` with the exact name of the rule. See [Library Rules][6] for the full list of rules, including the rule name to use for the data source `filter`.
+   - `<RULE_NAME>` with the exact name of the rule. See [Library Rules][6] for the full list of rules.
 
    For example, if you want to use the [AWS Access Key ID Scanner][7], configure the data source as follows:
 
