@@ -82,6 +82,17 @@ In the Datadog UI, enter the following values in the Oracle Fusion integration t
 - **OAuth Scope**
 - **Client Secret**
 
+## Validation
+
+If you enabled ESS and audit logs during account creation, Datadog automatically validates your credentials and displays error messages with suggested remedies if the connection fails.
+
+To confirm the integration is working after your account is created:
+
+- In the [Log Explorer][2], filter by `source:oracle-fusion` to view ESS and audit logs.
+- In the [Metrics Explorer][3], search for `oracle.fusion.*` to view Oracle Fusion metrics, such as `oracle.fusion.ess.jobs`.
+
+If the integration is not returning data, see the [optional linking step](#link-the-confidential-application-to-the-integration-user-optional) below.
+
 ## Link the confidential application to the integration user (optional)
 
 This step may not be required for all environments.
@@ -98,3 +109,5 @@ This association confirms that tokens issued when Datadog authenticates using cl
 
 
 [1]: https://docs.oracle.com/en/cloud/saas/applications-common/25d/farca/configure_oauth.html
+[2]: /logs/explorer/
+[3]: /metrics/explorer/
