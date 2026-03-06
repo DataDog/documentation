@@ -6,6 +6,10 @@ content_filters:
     label: "SDK"
 ---
 
+## Overview
+
+After you complete the initial SDK setup, use the advanced configuration options below to customize data collection, privacy settings, and SDK behavior for your platform.
+
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 {% partial file="sdk/advanced_config/browser.mdoc.md" /%}
