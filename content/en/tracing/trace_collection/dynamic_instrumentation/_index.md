@@ -47,7 +47,7 @@ Dynamic Instrumentation requires the following:
 - [Remote Configuration][2] is enabled in that Agent.
 - A supported Datadog tracing library is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended: [autocomplete and search][17] is enabled.
+- Recommended: [autocomplete and search][17] are enabled.
 - Recommended: [Source Code Integration][7] is set up for your service.
 
 ### Permissions
