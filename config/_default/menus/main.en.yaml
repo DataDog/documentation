@@ -4968,6 +4968,11 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
+    - name: Guides
+      url: data_observability/quality_monitoring/guides
+      identifier: quality_monitoring_guides
+      parent: quality_monitoring
+      weight: 300000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
