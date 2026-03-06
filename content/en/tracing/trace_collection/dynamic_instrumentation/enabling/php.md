@@ -20,8 +20,9 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-- [Datadog Agent][7] version 7.49.0 or higher.
-- Tracing library [`dd-trace-php`][10] version 1.5.0 or higher.
+In addition to the [Dynamic Instrumentation prerequisites][10], PHP applications require:
+
+- Tracing library [`dd-trace-php`][11] version 1.5.0 or higher.
 
 ## Installation
 
@@ -75,4 +76,5 @@ See [Dynamic Instrumentation][5] for information about adding instrumentations a
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [9]: /integrations/guide/source-code-integration/?tab=php
-[10]: https://github.com/DataDog/dd-trace-php
+[10]: /dynamic_instrumentation/#prerequisites
+[11]: https://github.com/DataDog/dd-trace-php

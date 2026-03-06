@@ -18,9 +18,9 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-- [Datadog Agent][7] version 7.49.0 or higher.
+In addition to the [Dynamic Instrumentation prerequisites][9], .NET applications require:
+
 - .NET tracing library version 2.54.0 or higher ([.NET Framework][2] or [.NET Core][3]).
-- Datadog recommends enabling [autocomplete and search][8].
 
 ## Installation
 
@@ -58,3 +58,4 @@ See [Dynamic Instrumentation][6] for information about adding instrumentations a
 [6]: /dynamic_instrumentation/
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [8]: /dynamic_instrumentation/symdb/
+[9]: /dynamic_instrumentation/#prerequisites

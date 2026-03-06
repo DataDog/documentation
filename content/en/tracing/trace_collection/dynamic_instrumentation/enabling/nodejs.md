@@ -18,8 +18,9 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-- [Datadog Agent][6] version 7.49.0 or higher.
-- Tracing library [`dd-trace-js`][15] version 5.48.0 or higher.
+In addition to the [Dynamic Instrumentation prerequisites][15], Node.js applications require:
+
+- Tracing library [`dd-trace-js`][16] version 5.48.0 or higher.
 
 ## Installation
 
@@ -93,4 +94,5 @@ The following limitations apply to the Node.js implementation:
 [12]: https://babeljs.io/docs/options#sourcemaps
 [13]: https://webpack.js.org/configuration/devtool/
 [14]: https://coffeescript.org/#usage
-[15]: https://github.com/DataDog/dd-trace-js
+[15]: /dynamic_instrumentation/#prerequisites
+[16]: https://github.com/DataDog/dd-trace-js

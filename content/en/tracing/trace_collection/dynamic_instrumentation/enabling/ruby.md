@@ -20,8 +20,9 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-- [Datadog Agent][7] version 7.49.0 or higher.
-- Tracing library [`ddtrace`][12] version 2.9.0 or higher.
+In addition to the [Dynamic Instrumentation prerequisites][12], Ruby applications require:
+
+- Tracing library [`ddtrace`][13] version 2.9.0 or higher.
 - **Ruby version**: Ruby 2.6 or higher.
 - **Ruby implementation**: Only MRI (CRuby) is supported. JRuby and other Ruby implementations are not supported.
 - **Web framework**: Only Rack-based applications are supported (including Rails, Sinatra, and other Rack-compatible frameworks). Background processes and jobs (including Sidekiq, Resque, etc.) are not supported.
@@ -127,4 +128,5 @@ The following features available in other languages are not supported for Ruby:
 [9]: /integrations/guide/source-code-integration/?tab=ruby
 [10]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [11]: /dynamic_instrumentation/expression-language/
-[12]: https://github.com/DataDog/dd-trace-rb
+[12]: /dynamic_instrumentation/#prerequisites
+[13]: https://github.com/DataDog/dd-trace-rb
