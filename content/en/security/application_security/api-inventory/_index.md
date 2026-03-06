@@ -19,7 +19,7 @@ API security relies on visibility. The biggest failure mode in most applications
 2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
-3. **API Findings:** *Which API weaknesses, attacks or misconfigurations require investigation or remediation?*
+3. **API Findings:** *Which API weaknesses, attacks, or misconfigurations require investigation or remediation?*
     
     API Findings are security detections and policy evaluation results tied to endpoints. These represent known or inferred weaknesses or threats in API behavior or configuration.
 
@@ -31,7 +31,7 @@ These explorers correspond to the common API security operational flow:
 
 ## API Endpoints
 
-API Endpoints monitors your API traffic to provide visibility into the security posture of your APIs, including:
+[API Endpoints][7] monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
 - **Authentication**: Whether the API enforces authentication.
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
@@ -85,7 +85,7 @@ The following risks are calculated for each endpoint.
 
 ### Data sources
 
-In the **API Endpoints** explorer, the **Data Sources** show where visibility originates.
+In the [API Endpoints][7] explorer, the **Data Sources** show where visibility originates.
 
 The following data sources are explored.
 
@@ -112,15 +112,56 @@ What actions you take depend on each of the attack surfaces:
 - **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII, and limit access to necessary services.
 - **Unauthenticated endpoint:** If the endpoint is not intentionally public, enforce authentication and update service configurations.
 
+#### Static Endpoint Discovery
+
+<div class="alert alert-info">Static Endpoint Discovery is in Preview.</div>
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
+The **Source Code** data source shows API endpoints discovered directly from your source code. This complements runtime-based discovery by surfacing endpoints earlier in the development life cycle, including endpoints that may not receive live traffic.
+
+To use this data source, configure the [Source Code Integration][16] with GitHub, GitLab, or Azure DevOps. The following languages and frameworks are supported:
+
+| Language | Framework |
+|----------|-----------|
+| Python   | FastAPI, Flask, Tornado |
+| Java     | Spring    |
+| Go       | Beego, Chi, Echo, Fiber, Gin, Gorilla Mux, fasthttp, go-zero |
+| C#       | ASP.NET Core MVC |
+| Node.js  | Express, Fastify |
+
+To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
+
 ### Processing sensitive data
 
-[App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
+[App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
 #### Supported data types
 
-To see the supported data types, use the **Personal Information (PII)** facet. You can also see the data type used in the **Sensitive Data** column.
+To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
+
+#### Create API data scanners
+
+By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides API data scanners to define custom scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
+
+In an API data scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
+
+When the scanner detects sensitive data, it tags the API endpoint with the category and type and displays it in [API Endpoints][7].
+
+To create an API data scanner and view its results, do the following:
+
+1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
+2. Click **New Scanner**.
+3. In **Select your scanner tags**, define the category and type to classify the senstive data. The scanner tags API endpoints with the format `category:type`.
+4. In **Define conditions on JSON keys and values**, define the JSON key or value conditions to trigger the scanner.
+5. Click **Save Scanner**. The scanner is enabled by default.
+6. To view the results of the scanner, go to App and API Protection [API Endpoints][7].
+7. In the **Schema Sensitive Data** facet, the category and type of your custom scanner is listed in the format `category:type`. Customer scanner `category:type` tags are also visible in the **Sensitive Data** column of the explorer.
+
 
 ### Business logic
 
@@ -146,6 +187,8 @@ Authentication is determined by:
 - The presence of `Authorization`, `Token` or `X-Api-Key` headers.
 - The presence of a user ID within the trace (for example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
+- Custom [Endpoint Tagging][15] rules that you configured
+
 
 When the type of authentication is available, Datadog reports it in a header through the **Authentication Method** facet.
 
@@ -158,6 +201,19 @@ When the type of authentication is available, Datadog reports it in a header thr
 | Basic Authentication                              | `basic_auth`     |
 | Digest access authentication                      | `digest_auth`    |
 
+#### Custom Authentication support
+
+Custom authentication detection is possible by configuring [Endpoint Tagging Rules][15]. These rules require the following minimum tracer versions:
+
+|Technology| Minimum tracer version |
+|----------|------------------------|
+|Java      | v1.55.0                |
+|.NET      | Coming Soon            |
+|Node.js   | v5.76.0                |
+|Python    | v3.17.0                |
+|Ruby      | v2.23.0                |
+|PHP       | v1.15.0                |
+|Golang    | v2.4.0                 |
 
 ## Services
 
@@ -234,3 +290,6 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [11]: /security/application_security/setup/
 [12]: /security/application_security/policies/custom_rules/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
+[14]: https://app.datadoghq.com/security/appsec/policies/scanners
+[15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
+[16]: /integrations/guide/source-code-integration/

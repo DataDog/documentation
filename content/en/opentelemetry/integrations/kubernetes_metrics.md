@@ -164,14 +164,6 @@ The `k8sclusterreceiver` collects cluster-level metrics, such as the status and 
 
 {{< mapping-table resource="k8scluster.csv">}}
 
-### Host metrics receiver
-
-The `hostmetricsreceiver` gathers system-level metrics from each node in the cluster.
-
-{{< mapping-table resource="host.csv">}}
-
-See [OpenTelemetry Metrics Mapping][5] for more information.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

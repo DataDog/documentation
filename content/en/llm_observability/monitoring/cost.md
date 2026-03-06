@@ -13,7 +13,7 @@ Use cases:
 - Track changes in token usage and cost over time to proactively guard against higher bills in the future
 - Correlate LLM cost with overall application performance, model versions, model providers, and prompt details in a single view
 
-## Set up monitoring costs
+## Setting up cost monitoring 
 
 Datadog provides two ways to monitor your LLM costs:
 - [Automatic](#automatic): Use [supported LLM providers'](#supported-providers) public pricing rates
@@ -26,7 +26,7 @@ If your LLM requests involve any of the [listed supported providers](#supported-
 - The model provider's public pricing rates
 
 ### Manual
-To manually supply cost information, follow the instrumentation steps described in the [SDK Reference][2] or [API][3].
+To manually supply cost information, follow the instrumentation steps described in the [SDK Reference][2] or [API][3]. When setting your costs up manually (e.g. setting `total_cost`), the unit must be in dollar units; however, the unit will be stored as nanodollars.
 
 <div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
@@ -35,14 +35,10 @@ Datadog automatically calculates the cost of LLM requests made to the following 
 
 <div class="alert alert-info">Datadog only supports monitoring costs for text-based models.</div>
 
-- OpenAI: [OpenAI Pricing][4]
-- Anthropic: [Claude Pricing][5]
-- Azure OpenAI: [Azure OpenAI Pricing][6]
-    - For consistency, Datadog uses US East 2 and Global Standard Deployment Pricing for all requests
-- Google Gemini: [Gemini Pricing][7]
+Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
 ## Metrics
-You can find cost metrics in [LLM Observability Metrics][8].
+You can find cost metrics in [LLM Observability Metrics][5]. The unit for LLM Observability estimated cost metrics is **nanodollars**. 
 
 The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
@@ -53,7 +49,7 @@ The cost metrics include a `source` tag to indicate where the value originated:
 View your app in LLM Observability and select **Cost** on the left. The _Cost view_ features:
 - A high-level overview of your LLM usage over time including **Total Cost**, **Cost Change**, **Total Tokens**, and **Token Change**
 - **Breakdown by Token Type**: A breakdown of token usage, along with associated costs
-- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions ( powered by [Prompt Tracking][9])
+- **Breakdown by Provider/Model** or **Prompt ID/Version**: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
 - **Most Expensive LLM Calls**: A list of your most expensive requests
 
 {{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
@@ -67,9 +63,6 @@ Selecting an individual LLM span shows similar cost metrics specific to that LLM
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs
 [3]: /llm_observability/instrumentation/api/#metrics
-[4]: https://platform.openai.com/docs/pricing
-[5]: https://platform.claude.com/docs/en/about-claude/models/overview#model-pricing
-[6]: https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/
-[7]: https://ai.google.dev/gemini-api/docs/pricing#standard
-[8]: /llm_observability/monitoring/metrics/#llm-cost-metrics
-[9]: /llm_observability/monitoring/prompt_tracking
+[4]: https://github.com/pydantic/genai-prices/tree/main?tab=readme-ov-file#providers
+[5]: /llm_observability/monitoring/metrics/#llm-cost-metrics
+[6]: /llm_observability/monitoring/prompt_tracking

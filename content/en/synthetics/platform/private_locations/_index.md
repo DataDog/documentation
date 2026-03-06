@@ -93,6 +93,11 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
+**Enable FIPS 140-2 cryptographic mode**: </br>
+Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location `v1.63.0` and above.
+
+{{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
+
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
@@ -105,7 +110,7 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant.{{< /site-region >}} |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions `1.32.0` and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. For **Windows Private Locations**, FIPS-compliant encryption is supported in version `1.63.0` and later.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -540,7 +545,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 1. You can apply the following configuration options:
 
-   {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker wizard, MSI installer. Firewall and log settings are displayed." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker wizard, MSI installer. FIPS 140-2 cryptographic mode setting is displayed." style="width:80%;" >}}
 
    Apply firewall rules needed by this program to Windows Firewall
    : Allow the installer to apply firewall rules on install and remove them on uninstall.
@@ -556,6 +561,9 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
    Logging Verbosity
    : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker.
+
+   Enable FIPS 140-2 cryptographic mode
+   : Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
 1. Click **Next** and **Install** to start the installation process.
 

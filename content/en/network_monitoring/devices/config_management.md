@@ -5,6 +5,7 @@ further_reading:
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
+site_support_id: network_config_management
 ---
 
 <div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>
@@ -104,7 +105,7 @@ Network Configuration Management is accessible from the device side panel in Net
 
 ### Time picker and retention
 
-The time controls at the top of the page allow you to select which configuration history to view. By default, the view shows the last 2 days of configuration changes. You can extend this range to view older versions, up to the retention limit (1 year).
+The time controls at the top of the page allow you to select which configuration history to view. You can extend this range to view older versions, up to the retention limit (1 year).
 
 The timeline and configuration version list automatically update based on your selected time range.
 

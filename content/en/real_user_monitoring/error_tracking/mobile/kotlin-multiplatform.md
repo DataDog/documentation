@@ -58,7 +58,7 @@ kotlin {
 
 2. Enable NDK crash collection after initializing the SDK.
 
-``` kotlin
+```kotlin
 // in Android source set
 NdkCrashReports.enable()
 ```

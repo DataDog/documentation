@@ -200,6 +200,10 @@ When a test fails, fast retry allows you to retry the test X times after Y ms be
 
 Since location uptime is computed based on the final test result after retries complete, fast retry intervals directly impact what appears in your total uptime graph. The total uptime is computed based on the configured alert conditions, and notifications are sent based on the total uptime.
 
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
+
 ### Configure the test monitor
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
@@ -258,17 +262,13 @@ You can switch tabs in a browser test recording to perform an action on your app
    Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
 
-## Step replay
+## Replay your steps
 
-Step replay allows you to re-run one or more steps of your browser test directly in your browser with the [Datadog Record Test extension][11]. This feature helps you establish the correct state when adding or editing steps in the middle of a test, so you don't need to do it manually.
+To re-run one or more steps of your browser test directly in your browser, download the [Datadog Record Test extension][11].
 
-### Debugger permission
+The Step Replay feature helps you debug individual steps, reach the right application state when editing a browser test, and confirm entire flows before saving your test.
 
-JavaScript-based steps and keystroke simulations require the debugger permission.
-
-The first time the extension is updated to a version requiring debugger permission, you'll see a permission request and the extension is disabled until you approve it:
-{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
-<p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
+**Note**: Step Replay may behave differently than a full Synthetic Monitoring test run due to different conditions (browser version, network, user agent, login state) or limitations.
 
 ### How to use step replay
 
@@ -323,7 +323,14 @@ The following table summarizes which Browser Test step types are supported by st
 | Extract from email body  | Not supported yet        |
 | Go to email link         | Not supported yet        |
 | Upload files             | Not supported yet        |
-| Assert natural language  | Not supported yet        |
+
+### Debugger permission
+
+To be as close as possible to a full Synthetic Monitoring test run, some steps like JavaScript-based steps or keystroke simulations require the debugger permission to be replayed.
+
+The first time the extension is updated to a version requiring debugger permission, a permission request appears and the extension is disabled until you approve it:
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
 
 ## Permissions
 
@@ -374,3 +381,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
 [18]: https://www.microsoft.com/edge
+[19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

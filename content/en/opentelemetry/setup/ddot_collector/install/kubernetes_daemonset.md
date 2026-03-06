@@ -147,6 +147,10 @@ The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4
 
 When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
+**Note**: As of operator `v1.22.0`, the DDOT container uses the `ddot-collector` image instead of the `-full` agent image.
+- When overriding the node agent image tag, use a tag >= `7.67.0` so the OTel container is scheduled (the `ddot-collector` image is only supported in >= `7.67.0`).
+- The `ddot-collector` image has no `-full` variant. If you need a `-full` image, set `spec.override.nodeAgent.image.name` to a full agent image (for example, `gcr.io/datadoghq/agent:7.72.1-full`).
+
 [1]: /getting_started/site
 [2]: /containers/guide/changing_container_registry/
 {{% /tab %}}
@@ -319,11 +323,12 @@ In the snippet below, the Collector configuration is placed directly under the `
               api:
                 key: ${env:DD_API_KEY}
                 site: ${env:DD_SITE}
+              sending_queue:
+                batch:
+                  flush_timeout: 10s
           processors:
             infraattributes:
               cardinality: 2
-            batch:
-              timeout: 10s
           connectors:
             datadog/connector:
               traces:
@@ -331,15 +336,15 @@ In the snippet below, the Collector configuration is placed directly under the `
             pipelines:
               traces:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
 {{< /code-block >}}
 
@@ -410,11 +415,12 @@ spec:
               api:
                 key: ${env:DD_API_KEY}
                 site: ${env:DD_SITE}
+              sending_queue:
+                batch:
+                  flush_timeout: 10s
           processors:
             infraattributes:
               cardinality: 2
-            batch:
-              timeout: 10s
           connectors:
             datadog/connector:
               traces:
@@ -422,15 +428,15 @@ spec:
             pipelines:
               traces:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
-                processors: [infraattributes, batch]
+                processors: [infraattributes]
                 exporters: [debug, datadog]
 {{< /code-block >}}
 {{% /collapse-content %}}
@@ -472,11 +478,12 @@ data:
         api:
           key: ${env:DD_API_KEY}
           site: ${env:DD_SITE}
+        sending_queue:
+          batch:
+            flush_timeout: 10s
     processors:
       infraattributes:
         cardinality: 2
-      batch:
-        timeout: 10s
     connectors:
       datadog/connector:
         traces:
@@ -484,15 +491,15 @@ data:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
 {{< /code-block >}}
 
@@ -592,11 +599,12 @@ data:
         api:
           key: ${env:DD_API_KEY}
           site: ${env:DD_SITE}
+        sending_queue:
+          batch:
+            flush_timeout: 10s
     processors:
       infraattributes:
         cardinality: 2
-      batch:
-        timeout: 10s
     connectors:
       datadog/connector:
         traces:
@@ -604,15 +612,15 @@ data:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
-          processors: [infraattributes, batch]
+          processors: [infraattributes]
           exporters: [debug, datadog]
 {{< /code-block >}}
 {{% /collapse-content %}}
@@ -645,11 +653,12 @@ exporters:
     api:
       key: ${env:DD_API_KEY}
       site: ${env:DD_SITE}
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
   infraattributes:
     cardinality: 2
-  batch:
-    timeout: 10s
 connectors:
   datadog/connector:
     traces:
@@ -657,15 +666,15 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog]
     logs:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog]
 
 {{< /code-block >}}
@@ -679,7 +688,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
-{{< img src="/opentelemetry/embedded_collector/components-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/components-3.jpg" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 
 ##### Datadog connector
 
@@ -701,6 +710,9 @@ exporters:
     api:
       key: ${env:DD_API_KEY}
       site: ${env:DD_SITE}
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 {{< /code-block >}}
 
 **Note**: If `key` is not specified or set to a secret, or if `site` is not specified, the system uses values from the core Agent configuration. By default, the core Agent sets site to `datadoghq.com` (US1).

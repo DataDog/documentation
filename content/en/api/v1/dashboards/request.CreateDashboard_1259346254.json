@@ -1,0 +1,21 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with order_by values",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "q": "avg:system.cpu.user{*} by {host}",
+            "style": {
+              "palette": "warm",
+              "order_by": "values"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ]
+}
