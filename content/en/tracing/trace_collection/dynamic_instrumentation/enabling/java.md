@@ -16,11 +16,12 @@ further_reading:
 
 Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
-## Requirements
+## Prerequisites
 
 - JDK version 8 or higher.
+- [Datadog Agent][2] version 7.49.0 or higher.
 - Tracing library [`dd-java-agent.jar`][8] version 1.34.0 or higher.
-- For a better experience, Datadog recommends enabling [autocomplete and search][7].
+- Datadog recommends enabling [autocomplete and search][7].
 
 ## Installation
 

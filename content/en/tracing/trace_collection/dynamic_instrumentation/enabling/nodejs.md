@@ -16,6 +16,11 @@ further_reading:
 
 Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
+## Prerequisites
+
+- [Datadog Agent][6] version 7.49.0 or higher.
+- Tracing library [`dd-trace-js`][15] version 5.48.0 or higher.
+
 ## Installation
 
 1. Install or upgrade your Agent to version [7.49.0][6] or higher.
@@ -88,3 +93,4 @@ The following limitations apply to the Node.js implementation:
 [12]: https://babeljs.io/docs/options#sourcemaps
 [13]: https://webpack.js.org/configuration/devtool/
 [14]: https://coffeescript.org/#usage
+[15]: https://github.com/DataDog/dd-trace-js

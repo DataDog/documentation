@@ -18,11 +18,11 @@ further_reading:
 
 Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
-## Requirements
+## Prerequisites
 
-Dynamic Instrumentation for Ruby has the following requirements:
-
-- **Ruby version**: Ruby 2.6 or higher
+- [Datadog Agent][7] version 7.49.0 or higher.
+- Tracing library [`ddtrace`][12] version 2.9.0 or higher.
+- **Ruby version**: Ruby 2.6 or higher.
 - **Ruby implementation**: Only MRI (CRuby) is supported. JRuby and other Ruby implementations are not supported.
 - **Web framework**: Only Rack-based applications are supported (including Rails, Sinatra, and other Rack-compatible frameworks). Background processes and jobs (including Sidekiq, Resque, etc.) are not supported.
 - **Environment**: `RAILS_ENV` or `RACK_ENV` must be set to `production`. Development environments are not supported.
@@ -127,3 +127,4 @@ The following features available in other languages are not supported for Ruby:
 [9]: /integrations/guide/source-code-integration/?tab=ruby
 [10]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [11]: /dynamic_instrumentation/expression-language/
+[12]: https://github.com/DataDog/dd-trace-rb

@@ -18,7 +18,9 @@ Dynamic Instrumentation is a feature provided by the Datadog tracing library. If
 
 ## Prerequisites
 
-Recommended, [autocomplete and search (in Preview)][6] is enabled.
+- [Datadog Agent][2] version 7.49.0 or higher.
+- Tracing library [`ddtrace`][7] version 2.2.0 or higher.
+- Datadog recommends enabling [autocomplete and search][6].
 
 ## Installation
 
@@ -85,3 +87,4 @@ See [Dynamic Instrumentation][5] for information about adding instrumentations a
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
 [6]: /dynamic_instrumentation/symdb/
+[7]: https://github.com/DataDog/dd-trace-py
