@@ -94,7 +94,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [graphql][10]            | `>=0.10`  | Fully supported | Supports Apollo Server and express-graphql |
 | [ldapjs][86]             | `>=2`     | Fully supported |                                            |
 | [undici][76]             |           | Fully supported |                                            |
-| [ws][84]                 | `>=8`     | Fully supported |                                            |
+| [ws][84]                 | `>=8`     | Fully supported | More info at [WebSocket Observability][91] |
 
 
 ### Web framework compatibility
@@ -333,3 +333,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [88]: https://www.npmjs.com/package/apollo-server-core
 [89]: https://www.npmjs.com/package/@apollo/server
 [90]: https://www.npmjs.com/package/@apollo/gateway
+[91]: https://docs.datadoghq.com/tracing/guide/websocket_observability/
