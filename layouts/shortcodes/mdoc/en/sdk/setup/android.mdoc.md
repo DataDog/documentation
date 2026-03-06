@@ -502,6 +502,67 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][16] for third-party providers and network requests.
 
+#### Cronet
+
+If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for RUM resource tracking and distributed tracing.
+
+1. Add the Gradle dependencies in the module-level `build.gradle` file:
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-cronet:x.x.x"
+    }
+    ```
+
+2. Instrument the `CronetEngine.Builder`:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+
+   ```kotlin
+   val tracedHostsWithHeaderType = mapOf(
+       "example.com" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT),
+       "example.eu" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT))
+   val cronetEngine = CronetEngine.Builder(context)
+       .configureDatadogInstrumentation(
+           rumInstrumentationConfiguration = RumNetworkInstrumentationConfiguration(),
+           apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+               tracedHostsWithHeaderType
+           )
+       )
+       .build()
+   ```
+
+   {{% /tab %}}
+
+   {{% tab "Java" %}}
+
+   ```java
+   Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+   Set<TracingHeaderType> headerTypes = new HashSet<>(Arrays.asList(
+       TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+   tracedHostsWithHeaderType.put("example.com", headerTypes);
+   tracedHostsWithHeaderType.put("example.eu", headerTypes);
+   CronetEngine cronetEngine = CronetEngine.Builder(context)
+       .configureDatadogInstrumentation(
+           new RumNetworkInstrumentationConfiguration(),
+           new ApmNetworkInstrumentationConfiguration(tracedHostsWithHeaderType)
+       )
+       .build();
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+**Notes**:
+
+- Tracing headers are not propagated for redirected requests due to Cronet API limitations.
+- Retries cannot be instrumented.
+
 To filter out specific errors reported by `DatadogInterceptor`, you can configure a custom `EventMapper` in your `RumConfiguration`:
 
 {% tabs %}
