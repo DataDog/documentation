@@ -71,6 +71,30 @@ The sections below provide instructions for completing each page of the template
 1. Review the finalized deployment details.
 2. Click **Create**.
 
+## Resource tag filtering
+
+Use tag filters to control which Azure resources have their logs forwarded to Datadog. A tag filter is a comma-separated list of tags in the form `key:value`. Logs are only collected for resources that have at least one of the tags in the filter.
+
+You can use wildcards in your tag filters:
+- `?` matches a single character
+- `*` matches multiple characters
+
+To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes precedence over inclusion, and a resource matches the filter if it matches any tag in the list.
+
+For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
+
+### Adjust tag filters after deployment
+
+To update tag filters after a successful deployment:
+
+1. In the Azure portal, search for an Azure resource whose name begins with **resources-task.** and click on it.
+2. In the left sidebar, expand **Settings** and click **Environment Variables**.
+3. Click the **RESOURCE_TAG_FILTERS** variable.
+4. In the **Value** field, click to show the current value.
+5. Edit the tag list. Tags must be comma-separated and follow [Datadog tag syntax][16].
+6. Click **Apply** at the bottom of the **RESOURCE_TAG_FILTERS** window.
+7. Click **Apply** again at the bottom of the **Environment variables** window.
+
 ## Architecture
 
 ### Services used
@@ -156,3 +180,4 @@ The script first discovers any instances running in each subscription, then prom
 [13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
 [14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
 [15]: https://learn.microsoft.com/azure/azure-functions/
+[16]: /getting_started/tagging/
