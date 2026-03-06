@@ -238,6 +238,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_732700533",
+      "description": "Create a new dashboard with formulas and functions events query using facet group by"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4018282928",
+      "description": "Create a new dashboard with formulas and functions events query using flat group by fields"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2104498738",
       "description": "Create a new dashboard with formulas and functions scatterplot widget"
     },

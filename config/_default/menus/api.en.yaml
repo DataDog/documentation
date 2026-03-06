@@ -4526,6 +4526,18 @@ menu:
       url: /api/latest/usage-metering/
       identifier: usage-metering
       generated: true
+    - name: Get usage attribution types
+      url: '#get-usage-attribution-types'
+      identifier: usage-metering-get-usage-attribution-types
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageAttributionTypes
+        unstable: []
+        order: 5
     - name: Get projected cost across your account
       url: '#get-projected-cost-across-your-account'
       identifier: usage-metering-get-projected-cost-across-your-account
@@ -7181,6 +7193,45 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an AWS cloud authentication persona mapping
+      url: '#get-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-get-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 2
+    - name: Delete an AWS cloud authentication persona mapping
+      url: '#delete-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-delete-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Create an AWS cloud authentication persona mapping
+      url: '#create-an-aws-cloud-authentication-persona-mapping'
+      identifier: cloud-authentication-create-an-aws-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 3
     - name: List AWS cloud authentication persona mappings
       url: '#list-aws-cloud-authentication-persona-mappings'
       identifier: cloud-authentication-list-aws-cloud-authentication-persona-mappings
@@ -8665,6 +8716,82 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Google Chat Integration
+      url: /api/latest/google-chat-integration/
+      identifier: google-chat-integration
+      generated: true
+    - name: Update organization handle
+      url: '#update-organization-handle'
+      identifier: google-chat-integration-update-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get organization handle
+      url: '#get-organization-handle'
+      identifier: google-chat-integration-get-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Delete organization handle
+      url: '#delete-organization-handle'
+      identifier: google-chat-integration-delete-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Create organization handle
+      url: '#create-organization-handle'
+      identifier: google-chat-integration-create-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get all organization handles
+      url: '#get-all-organization-handles'
+      identifier: google-chat-integration-get-all-organization-handles
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrganizationHandles
+        unstable: []
+        order: 1
+    - name: Get space information by display name
+      url: '#get-space-information-by-display-name'
+      identifier: google-chat-integration-get-space-information-by-display-name
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSpaceByDisplayName
+        unstable: []
+        order: 1
     - name: High Availability MultiRegion
       url: /api/latest/high-availability-multiregion/
       identifier: high-availability-multiregion
@@ -9148,6 +9275,19 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Import an incident
+      url: '#import-an-incident'
+      identifier: incidents-import-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportIncident
+        unstable:
+          - v2
+        order: 49
     - name: Update an incident type
       url: '#update-an-incident-type'
       identifier: incidents-update-an-incident-type
@@ -9623,6 +9763,231 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: LLM Observability
+      url: /api/latest/llm-observability/
+      identifier: llm-observability
+      generated: true
+    - name: Delete LLM Observability dataset records
+      url: '#delete-llm-observability-dataset-records'
+      identifier: llm-observability-delete-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 12
+    - name: Append records to an LLM Observability dataset
+      url: '#append-records-to-an-llm-observability-dataset'
+      identifier: llm-observability-append-records-to-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 8
+    - name: Update LLM Observability dataset records
+      url: '#update-llm-observability-dataset-records'
+      identifier: llm-observability-update-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 10
+    - name: List LLM Observability dataset records
+      url: '#list-llm-observability-dataset-records'
+      identifier: llm-observability-list-llm-observability-dataset-records
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasetRecords
+        unstable:
+          - v2
+        order: 7
+    - name: Update an LLM Observability dataset
+      url: '#update-an-llm-observability-dataset'
+      identifier: llm-observability-update-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsDataset
+        unstable:
+          - v2
+        order: 9
+    - name: Delete LLM Observability datasets
+      url: '#delete-llm-observability-datasets'
+      identifier: llm-observability-delete-llm-observability-datasets
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsDatasets
+        unstable:
+          - v2
+        order: 11
+    - name: Create an LLM Observability dataset
+      url: '#create-an-llm-observability-dataset'
+      identifier: llm-observability-create-an-llm-observability-dataset
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsDataset
+        unstable:
+          - v2
+        order: 6
+    - name: List LLM Observability datasets
+      url: '#list-llm-observability-datasets'
+      identifier: llm-observability-list-llm-observability-datasets
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsDatasets
+        unstable:
+          - v2
+        order: 5
+    - name: Update an LLM Observability project
+      url: '#update-an-llm-observability-project'
+      identifier: llm-observability-update-an-llm-observability-project
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsProject
+        unstable:
+          - v2
+        order: 3
+    - name: Delete LLM Observability projects
+      url: '#delete-llm-observability-projects'
+      identifier: llm-observability-delete-llm-observability-projects
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsProjects
+        unstable:
+          - v2
+        order: 4
+    - name: Create an LLM Observability project
+      url: '#create-an-llm-observability-project'
+      identifier: llm-observability-create-an-llm-observability-project
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsProject
+        unstable:
+          - v2
+        order: 2
+    - name: List LLM Observability projects
+      url: '#list-llm-observability-projects'
+      identifier: llm-observability-list-llm-observability-projects
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsProjects
+        unstable:
+          - v2
+        order: 1
+    - name: Push events for an LLM Observability experiment
+      url: '#push-events-for-an-llm-observability-experiment'
+      identifier: llm-observability-push-events-for-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsExperimentEvents
+        unstable:
+          - v2
+        order: 17
+    - name: Update an LLM Observability experiment
+      url: '#update-an-llm-observability-experiment'
+      identifier: llm-observability-update-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsExperiment
+        unstable:
+          - v2
+        order: 15
+    - name: Delete LLM Observability experiments
+      url: '#delete-llm-observability-experiments'
+      identifier: llm-observability-delete-llm-observability-experiments
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsExperiments
+        unstable:
+          - v2
+        order: 16
+    - name: Create an LLM Observability experiment
+      url: '#create-an-llm-observability-experiment'
+      identifier: llm-observability-create-an-llm-observability-experiment
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsExperiment
+        unstable:
+          - v2
+        order: 14
+    - name: List LLM Observability experiments
+      url: '#list-llm-observability-experiments'
+      identifier: llm-observability-list-llm-observability-experiments
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsExperiments
+        unstable:
+          - v2
+        order: 13
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -10972,6 +11337,30 @@ menu:
       url: /api/latest/product-analytics/
       identifier: product-analytics
       generated: true
+    - name: Compute timeseries analytics
+      url: '#compute-timeseries-analytics'
+      identifier: product-analytics-compute-timeseries-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsTimeseries
+        unstable: []
+        order: 3
+    - name: Compute scalar analytics
+      url: '#compute-scalar-analytics'
+      identifier: product-analytics-compute-scalar-analytics
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsScalar
+        unstable: []
+        order: 2
     - name: Send server-side events
       url: '#send-server-side-events'
       identifier: product-analytics-send-server-side-events
@@ -12957,6 +13346,42 @@ menu:
       url: /api/latest/status-pages/
       identifier: status-pages
       generated: true
+    - name: Update maintenance
+      url: '#update-maintenance'
+      identifier: status-pages-update-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMaintenance
+        unstable: []
+        order: 17
+    - name: Get maintenance
+      url: '#get-maintenance'
+      identifier: status-pages-get-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMaintenance
+        unstable: []
+        order: 19
+    - name: Schedule maintenance
+      url: '#schedule-maintenance'
+      identifier: status-pages-schedule-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMaintenance
+        unstable: []
+        order: 16
     - name: Update degradation
       url: '#update-degradation'
       identifier: status-pages-update-degradation
@@ -13101,6 +13526,18 @@ menu:
           - DeleteStatusPage
         unstable: []
         order: 5
+    - name: List maintenances
+      url: '#list-maintenances'
+      identifier: status-pages-list-maintenances
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMaintenances
+        unstable: []
+        order: 18
     - name: List degradations
       url: '#list-degradations'
       identifier: status-pages-list-degradations

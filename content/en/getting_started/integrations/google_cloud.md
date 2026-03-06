@@ -348,8 +348,6 @@ You can also specify additional locations not listed and disable any global metr
 
 {{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the Enable Global Metrics option highlighted and a subset of regions selected. The Additional Locations option is also highlighted with a multi-region filter defined" style="width:80%;">}}
 
-**Note**: These metric collection filters do not apply to `gcp.prometheus.*` metrics and a subset of `gcp.gke.*` metrics.
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
@@ -482,7 +480,7 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [29]: https://www.datadoghq.com/blog/datadog-google-security-command-center/
 [30]: https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/
 [31]: /agent/
-[32]: /developers/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
+[32]: /extend/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
 [33]: /integrations/gke/?tab=standard
 [34]: /integrations/
 [35]: /tracing/
