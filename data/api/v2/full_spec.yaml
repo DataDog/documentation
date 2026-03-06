@@ -70924,6 +70924,42 @@ components:
         usage_type:
           $ref: '#/components/schemas/HourlyUsageType'
       type: object
+    UsageAttributionTypesAttributes:
+      description: List of usage attribution types.
+      properties:
+        values:
+          description: List of usage attribution types.
+          items:
+            description: A given usage type in a list.
+            example: infra_host
+            type: string
+          type: array
+      type: object
+    UsageAttributionTypesBody:
+      description: Usage attribution types data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UsageAttributionTypesAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UsageAttributionTypesType'
+      type: object
+    UsageAttributionTypesResponse:
+      description: Usage attribution types response.
+      properties:
+        data:
+          $ref: '#/components/schemas/UsageAttributionTypesBody'
+      type: object
+    UsageAttributionTypesType:
+      default: usage_attribution_types
+      description: Type of usage attribution types data.
+      enum:
+      - usage_attribution_types
+      type: string
+      x-enum-varnames:
+      - USAGE_ATTRIBUTION_TYPES
     UsageDataObject:
       description: Usage data.
       properties:
@@ -91580,14 +91616,18 @@ paths:
         - logs_read_data
   /api/v2/metrics:
     get:
-      description: "Returns all metrics that can be configured in the Metrics Summary
-        page or with Metrics without Limits\u2122 (matching additional filters if
-        specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]`
-        query parameters.\nTo fetch the first page, pass in a query parameter with
-        either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch
-        the next page, pass in the `next_cursor` value from the response as the new
-        `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null,
-        all pages have been retrieved."
+      description: 'Returns all metrics for your organization that match the given
+        filter parameters.
+
+        Optionally, paginate by using the `page[cursor]` and/or `page[size]` query
+        parameters.
+
+        To fetch the first page, pass in a query parameter with either a valid `page[size]`
+        or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the
+        `next_cursor` value from the response as the new `page[cursor]` value.
+
+        Once the `meta.pagination.next_cursor` value is null, all pages have been
+        retrieved.'
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -91672,7 +91712,7 @@ paths:
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
-          Default value is 3600 (1 hour), maximum value is 2,592,000 (30 days).'
+          Default value is 3600 (1 hour), maximum value is 5,184,000 (60 days).'
         example: 3600
         in: query
         name: window[seconds]
@@ -111255,6 +111295,42 @@ paths:
         permissions:
         - usage_read
         - billing_read
+  /api/v2/usage/usage-attribution-types:
+    get:
+      description: Get usage attribution types.
+      operationId: GetUsageAttributionTypes
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageAttributionTypesResponse'
+          description: OK
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get usage attribution types
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
