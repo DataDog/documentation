@@ -27,7 +27,7 @@ Prerequisites
 2. [Set your secrets as environment variables](#2-set-your-secrets-as-environment-variables)
 3. [Deploy the Agent with Terraform](#3-deploy-the-agent-with-terraform)
 
-## 1. Create the Datadog monitoring user on each RDS instance
+## Create the Datadog monitoring user on each RDS instance
 
 Follow the Datadog documentation to create the `datadog` monitoring user on each RDS instance:
 
@@ -36,7 +36,7 @@ Follow the Datadog documentation to create the `datadog` monitoring user on each
 
 Use the same password you will set for `TF_VAR_datadog_db_password` in the next step.
 
-## 2. Set your secrets as environment variables
+## Set your secrets as environment variables
 
 Export your secrets to the shell before running Terraform. This avoids storing sensitive values in files on disk.
 
@@ -47,7 +47,7 @@ export TF_VAR_datadog_db_password="<YOUR_DATADOG_DB_PASSWORD>"
 
 Your Datadog API key can be found at **Organization Settings → API Keys** in the Datadog UI.
 
-## 3. Deploy the Agent with Terraform
+## Deploy the Agent with Terraform
 
 Create a file named `main.tf` with the following content. Replace the following values before applying:
 
