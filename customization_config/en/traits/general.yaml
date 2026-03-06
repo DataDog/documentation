@@ -58,6 +58,11 @@ traits:
   type: text
   internal_notes: The tool through which the user is performing a task or otherwise accessing Datadog features. For example, web UI, API, CLI, or Terraform.
 
+- id: runtime
+  label: "Runtime"
+  type: text
+  internal_notes: The runtime environment, such as JVM or GraalVM Native Image. Used when a language has multiple runtime targets.
+
 - id: secrets_source
   label: Secrets source
   type: text
