@@ -18,8 +18,8 @@ If experiment results are missing after you launch an experiment, start by check
 ### Step 1: Confirm the experiment is assigning users
 
 On the [Experiments][2] page, select your experiment. On the experiment details page, hover over the metric scorecard:
-- If the **User Assignment Count** for each variant is zero, start with [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
-- If you see assignments but no metric values, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
+- If the **User Assignment Count** for each variant is zero, go to [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
+- If the **User Assignment Count** is greater than zero, but the metric values are zero, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
 
 In the following example, the **User Assignment Count** is 12,427 for Variant A and 12,573 for Variant B.
 
@@ -29,7 +29,7 @@ In the following example, the **User Assignment Count** is 12,427 for Variant A 
 
 Verify that your feature flag is enabled and evaluates in the correct environment. Then, confirm that traffic reaches the experiment's targeting rule.
 
-1. On the experiment details page, hover over the experiment flag label (for example, `new-product-photos`).
+1. On the [Experiments][2] page, select your experiment. On the experiment details page, hover over the experiment flag label (for example, `new-product-photos`).
 1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
@@ -46,11 +46,11 @@ Based on what you see in the **Real-time metric overview**, follow the appropria
 
 #### The flag is not receiving traffic
 
-If the Real-time metric overview shows no exposure events, the flag is not evaluating in the expected environment.
+If the **Real-time metric overview** section shows no exposure events, the flag is not receiving traffic from your application.
 
 Confirm the flag is enabled in the environment where your application runs. You can manage environments on the [Environments page][3]. See the [Getting Started with Feature Flags][5] guide for details on environments.
 
-After you fix the flag configuration, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that user assignments are increasing.
+After you fix the flag configuration, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the **User Assignment Count** is increasing.
 
 #### The flag is receiving traffic but experiment assignments are zero
 
@@ -65,11 +65,11 @@ Check the following and edit the targeting rule and traffic allocation as needed
    - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
    - **Traffic allocation**: Is the traffic allocation to the experiment set correctly?
 
-After you update the targeting rules, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that user assignments are increasing.
+After you update the targeting rules, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the **User Assignment Count** is increasing.
 
 ### Step 3: Confirm metric events are firing
 
-After you confirm the experiment is receiving traffic, check whether the assigned users have associated metric events.
+If users are assigned to the experiment but the metric values are missing, check whether the assigned users have associated metric events.
 
 Work through the following checks in order. Each builds on the previous one, so continue to the next if the issue persists.
 
@@ -91,7 +91,7 @@ Work through the following checks in order. Each builds on the previous one, so 
 
    {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="The Edit Metric page showing the metric definition on the left and a bar chart of metric event volume over the past week on the right." style="width:90%;" >}}
 
-   <div class="alert alert-warning">If the scorecard shows non-zero user assignments but all metric values are zero, the issue is not with traffic; it is with how Datadog matches metric events to exposures. Continue to the next section to verify subject key matching.</div>
+   <div class="alert alert-warning">If the scorecard shows non-zero user assignments but all metric values are zero, Datadog cannot match metric events to exposures. Continue to the next section to verify subject key matching.</div>
 
 {{% /collapse-content %}}
 
@@ -106,23 +106,21 @@ Datadog matches metric events to experiment exposures using a subject key. If th
 
 1. The **Subject** column shows the value your SDK passes as [`targetingKey`][7]. Compare this value to the attribute defined for your subject type on the [Subject Types page][9] (typically `@usr.id`). If these identifiers do not match, update them before proceeding.
 
-1. To resolve a mismatch, update either the [`targetingKey`][7] in your SDK or the subject type attribute on the [Subject Types page][9] so that both use the same identifier.
-
-If the subject values match but experiment results are still missing, continue to the next section to inspect individual sessions.
+1. To resolve a mismatch, update either the [`targetingKey`][7] in your SDK or the attribute on the [Subject Types page][9] so that both use the same identifier.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Inspect individual sessions" level="h4" expanded=false id="inspect-individual-sessions" %}}
 
-If subject values match and users are assigned to the experiment, inspect individual sessions to identify why specific users are not generating metric events.
+If subject values match and users are assigned to the experiment but experiment results are still missing, inspect individual sessions to identify why specific users are not generating metric events.
 
-1. On the [Activity Stream page][4], filter for experiment sessions by adding a filter with the following format:
+1. On the [Activity Stream page][4], filter for experiment sessions using the following syntax:
 
    ```
    @feature_flags.<flag-key>:<variant-value>
    ```
 
-   For example, to filter sessions for the `false` variant of the `new-product-photos` flag, enter `@feature_flags.new-product-photos:false`.
+   For example, to filter sessions for the `false` variant of the `new-product-photos` flag, use `@feature_flags.new-product-photos:false`.
 
    {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics Activity Stream page filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, action count, frustration count, initial view name, and last view name." style="width:90%;" >}}
 
@@ -145,14 +143,14 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 To check if outlier handling is the cause:
 
 1. On the [Experiments][2] page, select your experiment.
-1. Hover over the metric name, then click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
+1. Hover over the metric name, click the &#8942; menu icon, and select **Edit Metric** to open the metric definition page.
 1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
 1. Save the metric.
 1. To trigger an immediate recompute, click the &#8942; menu icon next to **Last Updated** in the **Metrics** section of the experiment details page and click **run an update now**. Otherwise, wait for the next scheduled update.
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment details page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
-If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the Edit Metric page.
+If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the **Edit Metric** page.
 
 {{< img src="/product_analytics/experiment/troubleshooting_outlier_handling.png" alt="The Edit Metric page with the Outlier handling toggles highlighted." style="width:90%;" >}}
 
