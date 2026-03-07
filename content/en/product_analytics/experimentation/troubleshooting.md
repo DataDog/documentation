@@ -146,7 +146,7 @@ To check if outlier handling is the cause:
 1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
 1. Save the metric.
 1. To trigger an immediate recompute, go to the **Metrics** section of the experiment
-  details page. Click the &#8942; menu icon next to **Last Updated** and select **run an update now**. Otherwise, wait for the next scheduled update. 
+  details page. Click the &#8942; menu icon next to **Last Updated** and select **run an update now**. Otherwise, wait for the next scheduled update.
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment details page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
