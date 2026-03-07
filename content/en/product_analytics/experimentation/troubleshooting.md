@@ -36,11 +36,11 @@ Verify that your feature flag is enabled, evaluates in the correct environment, 
 
 1. On the **Feature Flags** page, select the correct environment tab and confirm that the flag is **Enabled**. If the flag is disabled, enable it before proceeding.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The Feature Flags page with the Enabled toggle highlighted in the top-right corner." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_feature_flag_page.png" alt="The Feature Flags page with the Enabled toggle highlighted in the Targeting rules and rollouts section." style="width:90%;" >}}
 
 1. In the **Real-time metric overview** section, confirm that the bar chart shows exposure events.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic1.png" alt="The Feature Flags page with the Environment dropdown highlighted in the Real-time metric overview section, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_flag_traffic1.png" alt="The Real-time metric overview section of the Feature Flags page, showing a bar chart of exposures over time broken down by variant." style="width:90%;" >}}
 
 Based on what you see in the **Real-time metric overview**, follow the appropriate path:
 
@@ -98,7 +98,7 @@ Datadog matches metric events to experiment exposures using a subject key. If th
 1. On the [Experiments][2] page, select your experiment.
 1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
-   {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures Log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log showing the flag key and allocation key as header metadata, with a table of recently exposed users listing timestamp, subject, and variant columns." style="width:90%;" >}}
 
 1. The **Subject** column shows the value your SDK passes as [`targetingKey`][7]. Compare this value to the attribute defined for your subject type on the [Subject Types page][9] (typically `@usr.id`). If these identifiers do not match, update them before proceeding.
 
