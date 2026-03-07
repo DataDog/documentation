@@ -24,8 +24,9 @@ Tag policies are centralized, sequentially evaluated aggregation rules that dete
 
 After you create a policy, Datadog automatically applies it to all matching metrics.
 
-1. Navigate to [**Metrics → Settings → Policies**][1].
-2. Click **+ Create policy**.
+1. Navigate to [**Metrics → Settings**][4].
+2. Click **+ Create Policy**.
+3. Select **Tag Policy**.
 
 Alternatively, create policies from the [Metrics Volume][2] page by opening the **More** menu next to **Export as CSV**.
 
@@ -193,3 +194,4 @@ To exclude a specific metric from all tag policies without deleting them, use th
 [1]: https://app.datadoghq.com/metric/settings/policies
 [2]: https://app.datadoghq.com/metric/volume
 [3]: /metrics/metrics-without-limits/
+[4]: https://app.datadoghq.com/metric/settings
