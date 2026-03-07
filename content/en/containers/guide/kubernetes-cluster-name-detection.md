@@ -24,7 +24,7 @@ This cluster name should be a unique name and abide by the following restriction
   <li/>Must contain only lowercase letters, numbers, dots, hyphens, and underscores
   <li/>Must start with an alphanumeric character
   <li/>Must end with an alphanumeric character
-  <li/>Must be FQDN-like, without a trailing period
+  <li/>Must be similar to a Fully Qualified Domain Name (FQDN), without a trailing period
 </ul>
 </div>
 
