@@ -17,7 +17,7 @@ If experiment results are missing after you launch an experiment, start by check
 
 ### Step 1: Confirm the experiment is assigning users
 
-On the [Experiments][2] page, select your experiment and hover over the metric scorecard:
+On the [Experiments][2] page, select your experiment. On the experiment details page, hover over the metric scorecard:
 - If the **User Assignment Count** for each variant is zero, start with [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
 - If you see assignments but no metric values, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
 
@@ -74,8 +74,6 @@ Work through the following checks in order. Each builds on the previous one, so 
 1. On the [Experiments][2] page, select your experiment.
 1. On the experiment details page, hover over the metric scorecard to see the per-user metric average, the **Total** metric value across users, and the **User Assignment Count** for each variant.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
-
 1. If a metric value is zero, hover over the metric name and click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
 
 1. Verify that the metric event name is correct (for example, check for typos). Then, review the event volume chart on the right side of the page to confirm the event is firing.
@@ -97,7 +95,7 @@ Work through the following checks in order. Each builds on the previous one, so 
 
 Datadog matches metric events to experiment exposures using a subject key. If the subject key in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
-1. Go to the experiment details page.
+1. On the [Experiments][2] page, select your experiment.
 1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures Log table showing columns for variant, timestamp, subject, flag key, experiment key, and allocation key for recently exposed users." style="width:90%;" >}}
