@@ -82,10 +82,9 @@ Work through the following checks in order. Each builds on the previous one, so 
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
-1. On the [Experiments][2] page, select your experiment.
-1. On the experiment details page, hover over the metric scorecard to see the per-user metric average, the **Total** metric value across users, and the **User Assignment Count** for each variant.
-
-1. If a metric value is zero, hover over the metric name and click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
+1. From the metric scorecard you checked in [Step 1](#step-1-confirm-the-experiment-is-assigning-users), hover over the metric with a
+zero value and click the &#8942; menu icon. Select **Edit Metric** to open the metric
+definition page.
 
 1. Verify that the metric event name is correct (for example, check for typos). Then, review the event volume chart on the right side of the page to confirm the event is firing.
 
@@ -146,7 +145,8 @@ To check if outlier handling is the cause:
 1. Hover over the metric name, click the &#8942; menu icon, and select **Edit Metric** to open the metric definition page.
 1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
 1. Save the metric.
-1. To trigger an immediate recompute, click the &#8942; menu icon next to **Last Updated** in the **Metrics** section of the experiment details page and click **run an update now**. Otherwise, wait for the next scheduled update.
+1. To trigger an immediate recompute, go to the **Metrics** section of the experiment
+  details page. Click the &#8942; menu icon next to **Last Updated** and select **run an update now**. Otherwise, wait for the next scheduled update. 
 
 {{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment details page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
