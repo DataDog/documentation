@@ -90,7 +90,7 @@ definition page.
 
    {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="The Edit Metric page showing the metric definition on the left and a bar chart of metric event volume over the past week on the right." style="width:90%;" >}}
 
-   <div class="alert alert-warning">If the scorecard shows non-zero user assignments but all metric values are zero, Datadog cannot match metric events to exposures. Continue to the next section to verify subject key matching.</div>
+   <div class="alert alert-warning">If the event is firing but metric values are still zero, the metric events may not be matching to experiment exposures. Continue to the next section to verify subject key matching.</div>
 
 {{% /collapse-content %}}
 
