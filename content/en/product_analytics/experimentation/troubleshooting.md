@@ -27,7 +27,7 @@ In the following example, the **User Assignment Count** is 12,427 for Variant A 
 
 ### Step 2: Confirm the experiment is receiving traffic
 
-Verify that your feature flag is enabled, evaluates in the correct environment, and that traffic reaches the experiment's targeting rule.
+Verify that your feature flag is enabled and evaluates in the correct environment. Then, confirm that traffic reaches the experiment's targeting rule.
 
 1. On the experiment details page, hover over the experiment flag label (for example, `new-product-photos`).
 1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
@@ -46,9 +46,11 @@ Based on what you see in the **Real-time metric overview**, follow the appropria
 
 #### The flag is not receiving traffic
 
-Confirm the flag is enabled in the correct environment. You can manage environments on the [Environments page][3].
+If the Real-time metric overview shows no exposure events, the flag is not evaluating in the expected environment.
 
-See the [Getting Started with Feature Flags][5] guide for details on environments.
+Confirm the flag is enabled in the environment where your application runs. You can manage environments on the [Environments page][3]. See the [Getting Started with Feature Flags][5] guide for details on environments.
+
+After you fix the flag configuration, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that user assignments are increasing.
 
 #### The flag is receiving traffic but experiment assignments are zero
 
@@ -63,11 +65,20 @@ Check the following and edit the targeting rule and traffic allocation as needed
    - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
    - **Traffic allocation**: Is the traffic allocation to the experiment set correctly?
 
+After you update the targeting rules, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that user assignments are increasing.
+
 ### Step 3: Confirm metric events are firing
 
 After you confirm the experiment is receiving traffic, check whether the assigned users have associated metric events.
 
 Work through the following checks in order. Each builds on the previous one, so continue to the next if the issue persists.
+
+<div class="alert alert-info">A metric event must meet two criteria for Datadog to include it in experiment results:
+<ul>
+<li>The event must come from a user with at least one experiment exposure event.</li>
+<li>The event must occur after the user's first experiment exposure.</li>
+</ul>
+</div>
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
@@ -79,13 +90,6 @@ Work through the following checks in order. Each builds on the previous one, so 
 1. Verify that the metric event name is correct (for example, check for typos). Then, review the event volume chart on the right side of the page to confirm the event is firing.
 
    {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="The Edit Metric page showing the metric definition on the left and a bar chart of metric event volume over the past week on the right." style="width:90%;" >}}
-
-   <div class="alert alert-info">A metric event must meet two criteria for Datadog to include it in experiment results:
-   <ul>
-   <li>The event must come from a user with at least one experiment exposure event.</li>
-   <li>The event must occur after the user's first experiment exposure.</li>
-   </ul>
-   </div>
 
    <div class="alert alert-warning">If the scorecard shows non-zero user assignments but all metric values are zero, the issue is not with traffic; it is with how Datadog matches metric events to exposures. Continue to the next section to verify subject key matching.</div>
 
@@ -112,11 +116,13 @@ If the subject values match but experiment results are still missing, continue t
 
 If subject values match and users are assigned to the experiment, inspect individual sessions to identify why specific users are not generating metric events.
 
-1. On the [Activity Stream page][4], filter for experiment sessions by adding the following:
+1. On the [Activity Stream page][4], filter for experiment sessions by adding a filter with the following format:
 
    ```
    @feature_flags.<flag-key>:<variant-value>
    ```
+
+   For example, to filter sessions for the `false` variant of the `new-product-photos` flag, enter `@feature_flags.new-product-photos:false`.
 
    {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics Activity Stream page filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, action count, frustration count, initial view name, and last view name." style="width:90%;" >}}
 
@@ -124,7 +130,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
    - **Does the metric event occur after the feature flag evaluation?** Events that occur **before** the feature flag evaluates do not count toward experiment results.
 
-   If the metric event is missing or fires before the feature flag evaluation, share the session details with the [Datadog support team][1].
+   If the metric event is missing or fires before the feature flag evaluation, [contact Datadog support][1] with the session URL, the experiment name, and the metric event name.
 
    {{< img src="/product_analytics/experiment/troubleshooting_inspect_session1.png" alt="An individual session detail view showing a timeline of events including a view load and multiple _dd_exposure custom actions fired at 5.39 seconds into the session." style="width:90%;" >}}
 
