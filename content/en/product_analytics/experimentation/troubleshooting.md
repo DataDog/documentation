@@ -118,7 +118,7 @@ If subject values match and users are assigned to the experiment, inspect indivi
    @feature_flags.<flag-key>:<variant-value>
    ```
 
-   {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics Activity Stream page filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, and action count." style="width:90%;" >}}
+   {{< img src="/product_analytics/experiment/troubleshooting_event_stream.png" alt="The Product Analytics Activity Stream page filtered by @feature_flags.new-product-photos:false, showing a list of sessions with columns for date, session type, time spent, view count, error count, action count, frustration count, initial view name, and last view name." style="width:90%;" >}}
 
 1. Select a session from a user assigned to the experiment. In the session timeline, check for the following:
    - **Is the metric event present?** Verify that the expected metric event is firing within the session.
