@@ -199,6 +199,53 @@ To install the extension:
 
 {{% /tab %}}
 
+{{% tab "JetBrains IDEs" %}}
+
+JetBrains offers [Junie][1] and [AI Assistant][2] as plugins for their range of IDEs. The Datadog MCP can be configured for either plugin.
+
+#### Junie
+
+To configure the Datadog MCP server with Junie, in **Settings** go to `Tools > Junie > MCP Settings` and add:
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}"
+    }
+  }
+}
+</code></pre>
+
+#### AI Assistant
+
+To configure the Datadog MCP Server with AI Assistant, in **Settings** go to `Tools > AI Assistant > Model Context Protocol (MCP)` and add:
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "url": "{{< region-param key="mcp_server_endpoint" >}}"
+      "headers": {
+        "DD_API_KEY": "<YOUR-API-KEY>",
+        "DD_APPLICATION_KEY": "<YOUR-APP-KEY>"
+      }
+    }
+  }
+}
+</code></pre>
+
+#### Agent CLIs
+
+Many developers use an agent CLI such as Claude Code, Codex or Gemini alongside their IDE. See configuration details elsewhere.
+
+The [Datadog plugin for JetBrains IDEs][1] integrates with these agent CLIs so for the best experience please install the plugin at the same time as the **Datadog MCP Server**.
+
+[1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
+[2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
+[3]: /ide_plugins/idea/
+
+{{% /tab %}}
+
 {{% tab "Other" %}}
 
 The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use **remote authentication** when your client supports it. For Cline or when remote authentication is unreliable, use **local binary authentication**.
@@ -288,6 +335,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 | [Claude&nbsp;Desktop][5] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=claude-desktop#installation) as needed. |
 | [Codex CLI][6] | OpenAI | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
+| [JetBrains IDEs][18] | JetBrains | |
 | [Goose][8], [Kiro][9], [Kiro CLI][10], [Cline][11] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -354,3 +402,4 @@ For security, use a scoped API key and application key from a [service account][
 [15]: /ide_plugins/vscode/?tab=cursor
 [16]: /ide_plugins/vscode/
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[18]: /ide_plugins/idea/
