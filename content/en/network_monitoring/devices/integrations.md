@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Network Device Monitoring (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the integration icons below to explore which integrations include built-in SNMP profiles or metadata that can be collected through NDM.
+Network Device Monitoring (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the tables below to find which integrations support NDM collection and how each one connects to Datadog.
 
 <div class="alert alert-info">Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 <a href="/network_monitoring/devices/supported_devices/">supported vendors</a>.</div>
 
@@ -32,9 +32,6 @@ The following integrations cover **software-defined and edge networking platform
 | [VMware VeloCloud SD-WAN](/integrations/velocloud-sd-wan/) | Monitors SD-WAN edge device health, link quality, and application performance from the VMware VeloCloud Orchestrator API. | Agent-based |
 | [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Agent-based |
 | [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based |
-{{< partial name="ndm/sd-wan.html" >}}
-
-<br>
 
 ## Wireless Networking
 
@@ -43,10 +40,6 @@ The following integrations cover **wireless networking platforms** that support 
 | Integration | Summary | Collection type |
 |---|---|---|
 | [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based |
-
-{{< partial name="ndm/wireless.html" >}}
-
-<br>
 
 ## Virtualization
 
@@ -57,10 +50,6 @@ NDM can also monitor **virtualized environments** that expose network telemetry 
 | [VMware vSphere](/integrations/vsphere/) | Monitors vSphere hosts, virtual machines, data stores, and clusters for resource utilization and network performance through the vCenter API. | Agent-based |
 | [OpenStack](/integrations/openstack/) | Collects hypervisor, VM, and virtual network metrics from OpenStack services including Nova, Neutron, and Cinder. | Agent-based |
 | [Proxmox VE](/integrations/proxmox/) | Monitors Proxmox Virtual Environment nodes, VMs, and containers for resource usage and cluster health through the Proxmox REST API. | Agent-based |
-
-{{< partial name="ndm/virtualization.html" >}}
-
-<br>
 
 ## Next steps
 
