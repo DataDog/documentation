@@ -267,8 +267,10 @@ MCP Server tools require the following [RBAC permissions][18]:
 
 | Permission | Required for |
 |------------|-------------|
-| `mcp_read` | Tools that read data from Datadog (for example, querying monitors, searching logs, retrieving dashboards) |
-| `mcp_write` | Tools that create or modify resources in Datadog (for example, creating monitors, muting hosts) |
+| <code style="white-space:nowrap">mcp_read</code> | Tools that read data from Datadog (for example, querying monitors, searching logs, retrieving dashboards) |
+| <code style="white-space:nowrap">mcp_write</code> | Tools that create or modify resources in Datadog (for example, creating monitors, muting hosts) |
+
+In addition to `mcp_read` or `mcp_write`, users need the standard Datadog permissions for the underlying resource. For example, using an MCP tool that reads monitors requires both `mcp_read` and the [Monitors Read][20] permission. See [RBAC Permissions][18] for the full list of resource-level permissions.
 
 Users with the **Datadog Standard Role** have both permissions by default. If your organization uses [custom roles][19], add the permissions manually:
 
@@ -341,3 +343,4 @@ For security, use a scoped API key and application key from a [service account][
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [18]: /account_management/rbac/permissions/
 [19]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[20]: /account_management/rbac/permissions/#monitors
