@@ -51,13 +51,13 @@ To create a Network Path monitor in Datadog, use the main navigation: [**Monitor
 
 The following table lists the different Network Path metrics that you can create monitors on.
 
-| Metric Name                    | Definition                                                                     |
+| Metric                         | Metric Name            |    Definition                                         |
 | -------------------------------| ------------------------------------------------------------------------------ |
-| E2E Probe RTT Latency (Average)| End-to-end round-trip time (RTT) measured for the probe, representing the average time elapsed to receive a response from the destination across all probe packets |
-| E2E Probe Packets Sent         | Number of packets sent |
-| E2E Probe Packets Received     | Number of packets for which a response was received |
-| E2E Probe Packet Loss          | Ratio of packets sent that did not receive a response |
-| E2E Probe Jitter               | Variation in round-trip time (RTT) between consecutive packets  |
+| E2E Probe RTT Latency (Average)| `e2e_probe.rtt.avg`    | End-to-end round-trip time (RTT) measured for the probe, representing the average time elapsed to receive a response from the destination across all probe packets |
+| E2E Probe Packets Sent         | `e2e_probe.packets_sent`| Number of packets sent |
+| E2E Probe Packets Received     | `e2e_probe.packets_received`| Number of packets for which a response was received |
+| E2E Probe Packet Loss          | `e2e_probe.packet_loss_percentage`| Ratio of packets sent that did not receive a response |
+| E2E Probe Jitter               | `e2e_probe.jitter`| Variation in round-trip time (RTT) between consecutive packets  |
 
 ## Set alert conditions
 
@@ -66,6 +66,28 @@ Configure monitors to trigger if the query value crosses a threshold, and custom
 ## Notifications
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
+
+## Common monitors
+
+You can create monitors on Network Path with the following common monitors. These provide a good starting point to be alerted if your network traffic is experiencing issues or irregular behavior.
+{{% collapse-content title="Round Trip Time (RTT)" level="h4" expanded=false %}}
+
+The RTT monitor alerts you if the average round-trip time of a network path from a source to a destination breaches a threshold. Monitoring this can help proactively address performance problems and bottlenecks within your network before they escalate to a more severe state.
+
+{{< img src="monitors/monitor_types/network_path/common_monitors_round_trip_time_rtt.png" alt="Example configuration for a round trip time (RTT) monitor" style="width:100%;" >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Packet Loss" level="h4" expanded=false %}}
+The packet loss monitor alerts you if there is an increase in the number of packets that aren't reaching their destination from a source. Monitoring packet loss helps ensure reliable connectivity and detect issues that may impact availability or application performance.
+
+{{< img src="monitors/monitor_types/network_path/common_monitors_packet_loss.png" alt="Example configuration for a packet loss monitor" style="width:100%;" >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Jitter" level="h4" expanded=false %}}
+The jitter monitor alerts you if there is a change in RTT variance for your network paths. Use this monitor to ensure network consistency and help track issues such as network congestion, bandwidth limitations, or faulty equipment.
+
+{{< img src="monitors/monitor_types/network_path/common_monitors_jitter.png" alt="Example configuration for a jitter monitor" style="width:100%;" >}}
+{{% /collapse-content %}}
 
 ## Further reading
 
