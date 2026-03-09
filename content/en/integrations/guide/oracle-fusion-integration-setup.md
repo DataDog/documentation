@@ -2,6 +2,7 @@
 title: Oracle Fusion Integration Setup
 private: true
 description: "Configure Oracle Fusion to authorize Datadog to access its REST APIs using OAuth 2.0."
+site_support_id: oracle_fusion_integration_setup
 ---
 
 {{< callout url="#" header="false" btn_hidden="true" >}}
