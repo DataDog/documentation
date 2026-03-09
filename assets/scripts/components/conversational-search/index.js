@@ -5,7 +5,7 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamConversation } from './streaming';
+import { streamConversation, resetTypesenseClient } from './streaming';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -51,10 +51,12 @@ class ConversationalSearch {
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
+        this.ready = false;
 
-        this.createElements();
+        if (!this.createElements()) return;
         this.bindEvents();
         this.resolveModelFromFlag();
+        this.ready = true;
     }
 
     get ctx() {
@@ -75,8 +77,11 @@ class ConversationalSearch {
     createElements() {
         const template = document.getElementById('conv-search-template');
         if (!template) {
-            console.error('[Conversational Search] Template #conv-search-template not found in DOM');
-            return;
+            console.warn(
+                `[Conversational Search] Skipped — #conv-search-template not in DOM on ${window.location.pathname}. ` +
+                `This layout (404) does not include the conversational-search partial.`
+            );
+            return false;
         }
 
         const content = template.content;
@@ -100,6 +105,7 @@ class ConversationalSearch {
         this.messagesContainer = messagesContainer;
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
+        return true;
     }
 
     injectEmptyState(container) {
@@ -374,6 +380,7 @@ class ConversationalSearch {
                 responseContainer.textContent = 'Request cancelled.';
             } else {
                 this.logErr('Conversational Search Response Error', error);
+                resetTypesenseClient();
                 responseContainer.textContent = 'Sorry, something went wrong. Please try again.';
             }
         } finally {
@@ -456,7 +463,8 @@ let conversationalSearchInstance = null;
 
 function initConversationalSearch() {
     if (!IS_CONVERSATIONAL_SEARCH_ENABLED || conversationalSearchInstance) return;
-    conversationalSearchInstance = new ConversationalSearch();
+    const instance = new ConversationalSearch();
+    if (instance.ready) conversationalSearchInstance = instance;
 }
 
 function askDocsAI(query, options = {}) {

@@ -91,6 +91,9 @@ attributes:
   - product: Datadog App
     data_type: |
        - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
+  - product: DORA Metrics
+    data_type: |
+       - **Deployments**: 2 years
   - product: Error Tracking
     data_type: |
        - **Error samples**: 30 days

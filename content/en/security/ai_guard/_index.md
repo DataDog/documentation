@@ -24,6 +24,8 @@ Datadog AI Guard is a defense-in-depth product designed to **inspect**, **block*
 
 AI Guard protects against prompt injection, jailbreaking, and sensitive data exfiltration attacks with Prompt Protection and Tool Protection. Together, these capabilities protect against the [agentic lethal trifecta][3] - privileged system access, exposure to untrusted data, and outbound communication. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure.
 
+To quickly evaluate a conversation without any code or setup, use the [AI Guard Playground][4] to submit user input, assistant output, and tool calls, and see the evaluation result in real time.
+
 For information on how to set up AI Guard, see [Get Started with AI Guard][1].
 
 ## Further reading
@@ -33,3 +35,4 @@ For information on how to set up AI Guard, see [Get Started with AI Guard][1].
 [1]: /security/ai_guard/onboarding/
 [2]: https://genai.owasp.org/llm-top-10/
 [3]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
+[4]: /security/ai_guard/onboarding/#playground
