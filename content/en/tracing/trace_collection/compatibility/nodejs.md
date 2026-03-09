@@ -53,7 +53,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 3.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+| 3.x, 4.x            | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 |                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
 |                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
@@ -101,9 +101,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
-| [fastify][9]           | `>=1`    | Fully supported |                                             |
+| [connect][6]            | `>=2`    | Fully supported |                                            |
+| [express][7]            | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
+| [fastify][9]            | `>=1`    | Fully supported |                                            |
 | [hapi][12]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
 | [hono][71]              | `>=4`    | Fully supported |                                            |
 | [koa][13]               | `>=2`    | Fully supported |                                            |
@@ -171,7 +171,7 @@ Or, modify the `package.json` file if you typically start an application with np
 ### Worker compatibility
 
 | Module                               | Versions    | Support Type    | Notes                                                  |
-| --------------------------           | --------    | --------------- | ------------------------------------------------------ |
+| ------------------------------------ | ----------- | --------------- | ------------------------------------------------------ |
 | [@azure/event-hubs][78]              | `>=6.0.0`   | Fully supported |                                                        |
 | [@azure/functions][79]               | `>=4`       | Fully supported | Disabled by default. Enable with `DD_TRACE_AZURE_FUNCTIONS_ENABLED=true`. |
 | [@azure/service-bus][68]             | `>=7.9.2`   | Fully supported |                                                        |
@@ -227,9 +227,9 @@ The [JavaScript and TypeScript Tests][66] page contains a list of instrumented t
 
 While the Datadog tracer doesn't provide direct support for modules listed here they are known to work as they depend on modules that the tracer does instrument.
 
-| Module           | Versions  | Comment    |
-| ---------------- | --------- | --------------- |
-| [axios][85]      |           | Axios depends on the internal `http` module. |
+| Module           | Notes           |
+| ---------------- | --------------- |
+| [axios][85]      | Axios depends on the internal `http` module. |
 
 
 ## Unsupported libraries
