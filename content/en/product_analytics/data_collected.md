@@ -28,9 +28,9 @@ Product Analytics collects user activity data as events. Each event has two type
 
 Every event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their country (`geo.country`). To identify individual users across sessions, Product Analytics relies on the `usr.id` and `usr.email` attributes.
 
-There are additional [measurements and attributes specific to a given event type](#event-specific-attributes). For example, `view.time_spent` is a measurement on view events, and `action.name` is an attribute on action events.
+There are additional [telemetry and attributes specific to a given event type](#event-specific-attributes). For example, `view.time_spent` is a measurement on view events, and `action.name` is an attribute on action events.
 
-<div class="alert alert-info">Unlike RUM, Product Analytics does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
+<div class="alert alert-info">Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM) to collect data. Unlike RUM, Product Analytics does not collect Errors, Resources, Long Tasks, or Vitals events. For the full list of RUM event types and attributes, see the data collected pages for <a href="/real_user_monitoring/application_monitoring/browser/data_collected/">browser</a>, <a href="/real_user_monitoring/application_monitoring/ios/data_collected/">iOS</a>, and <a href="/real_user_monitoring/application_monitoring/android/data_collected/">Android</a>.</div>
 
 | Event Type | Retention | Description |
 |------------|-----------|-------------|
