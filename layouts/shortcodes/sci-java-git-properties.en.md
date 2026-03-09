@@ -63,4 +63,4 @@ tasks.register<Copy>("ddGitProperties") {
 tasks["classes"].dependsOn("ddGitProperties")
 ```
 
-<div class="alert alert-warning">Both plugins require access to the <code>.git</code> folder at build time.
+<div class="alert alert-warning">Both plugins require access to the <code>.git</code> folder at build time.</div>
