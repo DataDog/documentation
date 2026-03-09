@@ -1,5 +1,8 @@
 ---
 title: Stepper test
+content_filters:
+  - trait_id: prog_lang
+    option_group_id: otel_api_support_language_options
 ---
 
 ## With "finished" section
@@ -137,6 +140,26 @@ Step 2 contents go here, including tabs, sublists, etc.
 {% /step %}
 
 {% /stepper %}
+
+## Conditionally displayed filter (for rendering / listener glitches)
+
+{% if not(equals($prog_lang, "java")) %}
+Set the prog lang to Java to see the stepper.
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+{% stepper %}
+
+{% step title="Step 1 title" %}
+Step 1 contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% step title="Step 2 title" %}
+Step 2 contents go here, including tabs, sublists, etc.
+{% /step %}
+
+{% /stepper %}
+{% /if %}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 

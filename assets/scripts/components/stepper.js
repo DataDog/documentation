@@ -17,12 +17,9 @@ function loadProgress(stepperId) {
 function saveProgress(stepperId, state) {
     try {
         pruneOldEntries();
-        localStorage.setItem(
-            getStorageKey(stepperId),
-            JSON.stringify({ ...state, timestamp: Date.now() })
-        );
+        localStorage.setItem(getStorageKey(stepperId), JSON.stringify({ ...state, timestamp: Date.now() }));
     } catch {
-        // localStorage unavailable or full — silently ignore
+        // Ignore storage errors, the stepper will still work without localStorage persistence
     }
 }
 
@@ -45,7 +42,7 @@ function pruneOldEntries() {
             }
         }
     } catch {
-        // Ignore storage errors
+        // Ignore storage errors, the stepper will still work without localStorage persistence
     }
 }
 
@@ -113,7 +110,7 @@ function initStepper(stepper) {
                 }
             }
             const nav = step.querySelector('.stepper__nav');
-            if (nav) nav.style.display = (isActive && !finished) ? '' : 'none';
+            if (nav) nav.style.display = isActive && !finished ? '' : 'none';
         });
 
         if (finishedEl) {
@@ -125,24 +122,7 @@ function initStepper(stepper) {
         }
     }
 
-    function goToStep(index) {
-        if (animating) return;
-
-        const prevContent = !finished ? steps[currentIndex]?.querySelector('.stepper__step-content') : null;
-        const prevIsVisible = prevContent && !prevContent.hasAttribute('hidden');
-
-        finished = false;
-        currentIndex = Math.max(0, Math.min(index, steps.length - 1));
-        persist();
-
-        if (prefersReducedMotion || !prevIsVisible) {
-            render();
-            return;
-        }
-
-        animating = true;
-
-        const newContent = steps[currentIndex]?.querySelector('.stepper__step-content');
+    function animateTransition(prevContent, newContent, onComplete) {
         const newAlreadyVisible = newContent && !newContent.hasAttribute('hidden');
 
         // Measure old content height before render() changes the DOM
@@ -171,7 +151,7 @@ function initStepper(stepper) {
             prevContent.style.removeProperty('overflow');
             prevContent.style.removeProperty('height');
             prevContent.style.removeProperty('transition');
-            animating = false;
+            onComplete();
         };
 
         requestAnimationFrame(() => {
@@ -185,14 +165,38 @@ function initStepper(stepper) {
                 const targetHeight = newContent.scrollHeight;
                 newContent.style.transition = 'height 0.2s ease';
                 newContent.style.height = targetHeight + 'px';
-                newContent.addEventListener('transitionend', () => {
-                    newContent.style.removeProperty('transition');
-                    newContent.style.removeProperty('overflow');
-                    newContent.style.removeProperty('height');
-                    onDone();
-                }, { once: true });
+                newContent.addEventListener(
+                    'transitionend',
+                    () => {
+                        newContent.style.removeProperty('transition');
+                        newContent.style.removeProperty('overflow');
+                        newContent.style.removeProperty('height');
+                        onDone();
+                    },
+                    { once: true }
+                );
             }
         });
+    }
+
+    function goToStep(index) {
+        if (animating) return;
+
+        const prevContent = !finished ? steps[currentIndex]?.querySelector('.stepper__step-content') : null;
+        const prevIsVisible = prevContent && !prevContent.hasAttribute('hidden');
+
+        finished = false;
+        currentIndex = Math.max(0, Math.min(index, steps.length - 1));
+        persist();
+
+        if (prefersReducedMotion || !prevIsVisible) {
+            render();
+            return;
+        }
+
+        animating = true;
+        const newContent = steps[currentIndex]?.querySelector('.stepper__step-content');
+        animateTransition(prevContent, newContent, () => { animating = false; });
     }
 
     function handleFinish() {
