@@ -26,7 +26,7 @@ Additional features are available depending on the source of the error. See [sup
 
 ## For developers
 
-Developers can triage and fix issues completely within IntelliJ IDEA, PyCharm, WebStorm, GoLand, PhpStorm and RubyMine using the [Error Tracking integration][8] in the **Datadog plugin for JetBrains IDEs**. Ask your local AI agent to analyze and fix errors with a single click to provide the full error context.
+Developers can triage and fix issues completely within IntelliJ IDEA, PyCharm, WebStorm, GoLand, PhpStorm, and RubyMine using the [Error Tracking integration][8] in the **Datadog plugin for JetBrains IDEs**. Ask your local AI agent to analyze and fix errors with a single click to provide the full error context.
 
 ## Getting started
 
