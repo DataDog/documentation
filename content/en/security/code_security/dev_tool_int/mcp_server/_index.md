@@ -40,7 +40,7 @@ brew update
 brew install --cask datadog-labs/pack/datadog-code-security-mcp
 ```
 
-#### GitHub Releases
+#### GitHub releases
 
 ```bash
 curl -L "https://github.com/datadog-labs/datadog-code-security-mcp/releases/latest/download/datadog-code-security-mcp-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m).tar.gz" | tar xz
