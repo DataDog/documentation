@@ -7077,11 +7077,11 @@ components:
       description: The definition of the `AzureTenant` object.
       properties:
         app_client_id:
-          description: 'The Client ID, also known as the Application ID in Azure,
-            is a unique identifier for an application. It''s used to identify the
-            application during the authentication process. Your Application (client)
-            ID is listed in the application''s overview page. You can navigate to
-            your application via the Azure Directory. '
+          description: The Client ID, also known as the Application ID in Azure, is
+            a unique identifier for an application. It's used to identify the application
+            during the authentication process. Your Application (client) ID is listed
+            in the application's overview page. You can navigate to your application
+            via the Azure Directory.
           example: ''
           type: string
         client_secret:
@@ -7125,11 +7125,11 @@ components:
       description: The definition of the `AzureTenant` object.
       properties:
         app_client_id:
-          description: 'The Client ID, also known as the Application ID in Azure,
-            is a unique identifier for an application. It''s used to identify the
-            application during the authentication process. Your Application (client)
-            ID is listed in the application''s overview page. You can navigate to
-            your application via the Azure Directory. '
+          description: The Client ID, also known as the Application ID in Azure, is
+            a unique identifier for an application. It's used to identify the application
+            during the authentication process. Your Application (client) ID is listed
+            in the application's overview page. You can navigate to your application
+            via the Azure Directory.
           type: string
         client_secret:
           description: "The Client Secret is a confidential piece of information known
@@ -54966,7 +54966,7 @@ components:
         query:
           default: '*'
           description: The search query - following the RUM search syntax.
-          example: '@service:web-ui: '
+          example: '@service:web-ui:'
           type: string
       required:
       - query
@@ -59017,7 +59017,7 @@ components:
               last_seen: '2020-06-23T14:46:49.000Z'
               rule:
                 id: 0f5-e0c-805
-                name: 'Brute Force Attack Grouped By User '
+                name: Brute Force Attack Grouped By User
                 version: 12
           type: object
         message:
@@ -110818,9 +110818,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -110902,9 +110902,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -111243,9 +111243,9 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
