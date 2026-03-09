@@ -47,6 +47,7 @@ secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
 
+**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 

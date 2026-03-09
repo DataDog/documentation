@@ -331,8 +331,20 @@ options:
 - label: React Native
   id: react_native
 
+- label: Expo
+  id: expo
+
+- label: CodePush
+  id: codepush
+
 - label: RedHat
   id: redhat
+
+- label: Roku
+  id: roku
+
+- label: Error Tracking
+  id: error_tracking
 
 - label: CentOS
   id: centos
@@ -411,6 +423,9 @@ options:
 
 - label: Traces
   id: traces
+
+- label: Unity
+  id: unity
 
 - label: Wget
   id: wget
