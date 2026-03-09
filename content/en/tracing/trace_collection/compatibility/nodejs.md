@@ -185,17 +185,6 @@ Or, modify the `package.json` file if you typically start an application with np
 | [rhea][48]                           | `>=1`       | Fully supported |                                                        |
 
 
-### AI/LLM compatibility
-
-| Module                    | Versions   | Support Type        | Notes                                                  |
-| ------------------------- | ---------- | ------------------- | ------------------------------------------------------ |
-| [@anthropic-ai/sdk][80]   | `>=0.14.0` | Fully supported     |                                                        |
-| [@google-cloud/vertexai][81] | `>=1`   | Fully supported     |                                                        |
-| [@google/genai][82]       | `>=1.19.0` | Fully supported     |                                                        |
-| [langchain][66]           | `>=0.1.0`  | Partially supported | The following workflow invocations are supported: <br /><br /><ul><li>`chain.invoke` and `chain.batch`</li><li>`chat_model.invoke`</li><li>`llm.invoke`</li><li>`openaiEmbeddings.embedQuery` and `openaiEmbeddings.embedDocuments`</li></ul> |
-| [openai][64]              | `>=3.0.0`  | Fully supported     |                                                        |
-
-
 ### SDK compatibility
 
 | Module                    | Versions   | Support Type        | Notes                                                  |
@@ -222,6 +211,16 @@ Or, modify the `package.json` file if you typically start an application with np
 | [paperplane][56] | `>=2.3.2` | Fully supported |
 | [pino][57]       | `>=2`     | Fully supported |
 | [winston][58]    | `>=1`     | Fully supported |
+
+
+### AI/LLM compatibility
+
+The [Automatic Instrumentation for LLM Observability][64] page contains a list of instrumented LLM packages (including Amazon Bedrock, Anthropic, LangChain, OpenAI, Azure OpenAI, Vercel AI SDK, VertexAI, and Google GenAI).
+
+
+### Testing framework compatibility
+
+The [JavaScript and TypeScript Tests][66] page contains a list of instrumented testing framework packages (including Jest, Mocha, Cucumber, Cypress, Playwright, and Vitest).
 
 
 ### Known transitive package compatibility
@@ -306,9 +305,9 @@ For additional information or to discuss [leave a comment on this github issue][
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
-[64]: https://github.com/openai/openai-node
+[64]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs#supported-frameworks-and-libraries
 [65]: https://github.com/dotansimha/graphql-yoga
-[66]: https://js.langchain.com/
+[66]: /tests/setup/javascript/?tab=ciproviderwithautoinstrumentationsupport#compatibility
 [67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
 [68]: https://www.npmjs.com/package/@azure/service-bus
 [69]: https://github.com/opensearch-project/opensearch-js
@@ -322,9 +321,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [77]: https://github.com/taskforcesh/bullmq
 [78]: https://www.npmjs.com/package/@azure/event-hubs
 [79]: https://www.npmjs.com/package/@azure/functions
-[80]: https://github.com/anthropics/anthropic-sdk-node
-[81]: https://github.com/googleapis/nodejs-vertexai
-[82]: https://www.npmjs.com/package/@google/genai
 [83]: https://nodejs.org/api/child_process.html
 [84]: https://www.npmjs.com/package/ws
 [85]: https://www.npmjs.com/package/axios
