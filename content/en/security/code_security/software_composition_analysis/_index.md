@@ -81,7 +81,7 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 Use [PR Gates][16] to enforce security standards on open source library usage before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies any vulnerabilities or license violations above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
 
-You can configure PR Gates to block on:                                                                                                
+You can configure PR Gates to block on:
 - **Security vulnerabilities**: libraries with known CVEs above a configured severity threshold.
 - **License violations**: libraries using licenses that do not comply with your organization's policy.
 
