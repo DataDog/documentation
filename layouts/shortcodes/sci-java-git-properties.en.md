@@ -1,7 +1,6 @@
 Embed git information directly in your application's JAR using a build plugin. The Datadog Java tracer automatically reads the embedded `datadog_git.properties` file at startup.
 
-{{< tabs >}}
-{{% tab "Maven" %}}
+**Maven**
 
 Add the following plugin to your `pom.xml`. This generates both `git.properties` (for Spring Boot Actuator compatibility) and `datadog_git.properties` (read by the Datadog tracer):
 
@@ -33,8 +32,7 @@ Add the following plugin to your `pom.xml`. This generates both `git.properties`
 </plugin>
 ```
 
-{{% /tab %}}
-{{% tab "Gradle" %}}
+**Gradle**
 
 Add the following to your `build.gradle.kts`. This generates `git.properties` (for Spring Boot Actuator compatibility) and copies it to `datadog_git.properties` (read by the Datadog tracer):
 
@@ -64,8 +62,5 @@ tasks.register<Copy>("ddGitProperties") {
 
 tasks["classes"].dependsOn("ddGitProperties")
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-warning">Both plugins require access to the <code>.git</code> folder at build time.
