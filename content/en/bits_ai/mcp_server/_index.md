@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
   text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server"
-- link: "developers/ide_plugins/vscode/?tab=cursor"
+- link: "ide_plugins/vscode/?tab=cursor"
   tag: "Documentation"
   text: "Datadog Extension for Cursor"
 - link: "bits_ai/mcp_server/setup"
@@ -43,31 +43,51 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 - The Datadog MCP Server is not supported for production use during the Preview.
 - Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
+- The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 
 ## Requirements
 
-Datadog users must have the `Incidents Read` [permission][18] to use the MCP Server.
+Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
 
-For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
+For setup instructions, see [Set Up the Datadog MCP Server][27].
 
 ## Toolsets
 
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
 
-- `core`: The default toolset
-- `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
-- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
-- `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
+- `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
+- `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `dbm`: Tools for interacting with [Database Monitoring][26]
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
+- `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
+- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans
+- `product-analytics`: Tools for interacting with [Product Analytics][35] queries
+- `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
+- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
+- `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
 
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
+
+- Retrieve only the core tools (this is the default if `toolsets` is not specified):
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+- Retrieve only Synthetic Testing-related tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
+
+- Retrieve core, Synthetic Testing, and Software Delivery tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+[36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 ## Available tools
 
@@ -226,29 +246,348 @@ Search Datadog RUM events using advanced query syntax.
 - Find pages that are loading slowly (more than 3 seconds).
 - Show recent user interactions on product detail pages.
 
-### `get_synthetics_tests`
-*Toolset: **synthetics***\
-Searches Datadog Synthetic tests.
+### `validate_datadog_monitor`
+*Toolset: **alerting***\
+Validates a monitor definition for correctness before creating or updating it.
 
-- Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
-- There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
-- Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
+- Validate this monitor definition before I create it.
+- Check if my monitor query syntax is correct.
 
-### `edit_synthetics_tests`
-*Toolset: **synthetics***\
-Edits Datadog Synthetic HTTP API tests.
+### `get_datadog_monitor_templates`
+*Toolset: **alerting***\
+Retrieves available monitor templates to help you create monitors.
 
-- Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
-- Pause the test `aaa-bbb-ccc` and set the locations to only European locations.
-- Add my team tag to the test `aaa-bbb-ccc`.
+- Show me the available monitor templates.
+- What templates can I use to create a new monitor?
 
-### `synthetics_test_wizard`
-*Toolset: **synthetics***\
-Preview and create Datadog Synthetics HTTP API Tests.
+### `search_datadog_monitor_groups`
+*Toolset: **alerting***\
+Searches monitor groups by name or criteria.
 
-- Create Synthetics tests on every endpoint defined in this code file.
-- Create a Synthetics test on `/path/to/endpoint`.
-- Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+- Show me all monitor groups in an alerting state.
+- Find monitor groups related to the checkout service.
+
+### `apm_search_spans`
+*Toolset: **apm***\
+Searches for spans using APM query syntax, with support for pagination and tag filtering.
+
+- Show me spans with errors from the checkout service in the last hour.
+- Find slow database queries taking more than 2 seconds.
+- Search for spans with `service:payments` and `status:error`.
+
+### `apm_explore_trace`
+*Toolset: **apm***\
+Executes queries on trace data for deep analysis and exploration of specific spans within a trace.
+
+- Explore the spans in trace `abc123` and show me the database calls.
+- Analyze the error spans in this trace.
+
+### `apm_trace_summary`
+*Toolset: **apm***\
+Generates an AI-powered summary of a trace, providing high-level analysis of what the trace shows.
+
+- Summarize trace `7d5d747be160e280504c099d984bcfe0`.
+- Give me an overview of what happened in this trace.
+
+### `apm_trace_comparison`
+*Toolset: **apm***\
+Compares two traces to identify performance differences and bottlenecks between a fast trace and a slow trace.
+
+- Compare these two traces to find out why one is slower.
+- What changed between this baseline trace and the slow trace?
+
+### `apm_analyze_trace_metrics`
+*Toolset: **apm***\
+Analyzes APM trace metrics over time for a specific operation, querying metric data and providing AI-generated analysis.
+
+- Analyze latency trends for the `web.request` operation on `service:api` over the last 6 hours.
+- Show me error rate metrics for my database service.
+
+### `apm_discover_span_tags`
+*Toolset: **apm***\
+Discovers available tag keys on spans within a time range.
+
+- What tags are available on spans for `service:checkout`?
+- Show me the tag keys I can filter by in APM.
+
+### `apm_get_primary_tag_keys`
+*Toolset: **apm***\
+Retrieves the primary tag keys configured for the organization.
+
+- What are my organization's primary tag keys?
+
+### `apm_search_watchdog_stories`
+*Toolset: **apm***\
+Searches for Watchdog anomaly detection stories for a service within a time range, providing AI-powered insights into latency, error rate, and traffic anomalies.
+
+- Show me Watchdog anomalies for the checkout service in the last 24 hours.
+- Are there any latency anomalies detected for my API service?
+
+### `apm_get_watchdog_story`
+*Toolset: **apm***\
+Retrieves detailed information about a specific Watchdog story by its ID.
+
+- Get the details of Watchdog story `abc123`.
+
+### `apm_search_change_stories`
+*Toolset: **apm***\
+Searches for change stories (deployments, feature flags, and infrastructure changes) for a service within a time range.
+
+- Show me recent deployments and changes for the payments service.
+- What infrastructure changes happened around the time of this latency spike?
+
+### `apm_latency_bottleneck_analysis`
+*Toolset: **apm***\
+Analyzes latency bottlenecks across traces in an anomaly period by calculating self-time.
+
+- What are the latency bottlenecks for the checkout service during this anomaly?
+- Identify which spans are contributing the most to latency.
+
+### `apm_latency_tag_analysis`
+*Toolset: **apm***\
+Compares span tags between an anomaly period and a baseline period to identify what changed.
+
+- Compare tags between the anomaly window and baseline to find what changed.
+- What tag values are different during this latency spike?
+
+### `apm_search_recommendations`
+*Toolset: **apm***\
+Searches for APM recommendations from Datadog.
+
+- Show me APM recommendations for my services.
+- Are there any optimization suggestions for my application?
+
+### `apm_get_recommendation`
+*Toolset: **apm***\
+Retrieves full details of a specific APM recommendation by ID.
+
+- Get the details of recommendation `abc123`.
+
+### `apm_investigation_methodology`
+*Toolset: **apm***\
+Provides guidance for investigating APM service issues like latency, errors, and performance problems.
+
+- How should I investigate a latency increase in my API service?
+- Guide me through debugging an error spike in production.
+
+### `search_datadog_dbm_plans`
+*Toolset: **dbm***\
+Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
+
+- Show me execution plans for slow queries on `host:db-prod-1` from the last hour.
+- Find query plans with `@db.plan.type:explain_analyze` for the production database.
+- Get execution plans for queries by `@db.user:app_user` with duration greater than 1 second.
+
+### `search_datadog_dbm_samples`
+*Toolset: **dbm***\
+Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
+
+- Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
+- Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
+- Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
+
+### `search_datadog_error_tracking_issues`
+*Toolset: **error-tracking***\
+Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
+
+- Show me all Error Tracking Issues in the checkout service from the last 24 hours.
+- What are the most common errors in my application over the past week?
+- Find Error Tracking Issues in the production environment with `service:api`.
+
+### `get_datadog_error_tracking_issue`
+*Toolset: **error-tracking***\
+Retrieves detailed information about a specific Error Tracking Issue from Datadog.
+
+- Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
+- Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+### `list_datadog_feature_flags`
+*Toolset: **feature-flags***\
+Lists feature flags with pagination support.
+
+- Show me all feature flags in my organization.
+- List feature flags for the checkout service.
+
+### `get_datadog_feature_flag`
+*Toolset: **feature-flags***\
+Retrieves details about a specific feature flag.
+
+- Get details for the `dark-mode-enabled` feature flag.
+- What are the current settings for flag `new-checkout-flow`?
+
+### `create_datadog_feature_flag`
+*Toolset: **feature-flags***\
+Creates a new feature flag.
+
+- Create a feature flag called `enable-new-dashboard` for gradual rollout.
+- Set up a new boolean feature flag for the beta feature.
+
+### `list_datadog_feature_flag_environments`
+*Toolset: **feature-flags***\
+Lists environments configured for feature flags.
+
+- Show me the available feature flag environments.
+- What environments can I target with feature flags?
+
+### `list_datadog_feature_flag_allocations`
+*Toolset: **feature-flags***\
+Lists allocations for a feature flag in a specific environment.
+
+- Show me the allocation rules for flag `new-checkout-flow` in production.
+
+### `update_datadog_feature_flag_environment`
+*Toolset: **feature-flags***\
+Updates a feature flag configuration in a specific environment.
+
+- Enable the `dark-mode` flag in the staging environment.
+- Roll out flag `new-checkout-flow` to 50% of users in production.
+
+### `check_datadog_flag_implementation`
+*Toolset: **feature-flags***\
+Checks if a feature flag is implemented in code.
+
+- Verify that the `enable-new-dashboard` flag is implemented in my codebase.
+
+### `sync_datadog_feature_flag_allocations`
+*Toolset: **feature-flags***\
+Syncs feature flag allocations for a specific environment.
+
+- Sync the allocations for flag `new-checkout-flow` in production.
+
+### `search_datadog_llmobs_spans`
+*Toolset: **llmobs***\
+Retrieves and analyzes [LLM Observability][30] spans from Datadog, showing the complete request flow, model interactions, token usage, costs, and associated metadata.
+
+- Show me LLM Observability spans for my chatbot service in the last hour.
+- Find spans where the LLM model returned an error.
+- Analyze token usage and costs for my AI application over the past day.
+
+### `analyze_cloud_network_monitoring`
+*Toolset: **networks***\
+Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
+
+- Analyze network traffic between my web servers and the database cluster.
+- Are there any retransmission issues between `service:api` and `service:payments`?
+- Investigate network flow data for anomalies in the production environment.
+
+### `search_ndm_devices`
+*Toolset: **networks***\
+Searches network devices (routers, switches, firewalls) monitored by Datadog [Network Device Monitoring][32].
+
+- Show me all network devices in the `us-east-1` datacenter.
+- Find firewalls that are reporting errors.
+- List all monitored switches and their statuses.
+
+### `get_ndm_device`
+*Toolset: **networks***\
+Retrieves detailed information about a specific network device by its device ID.
+
+- Get details for network device `device:abc123`.
+- Show me the configuration and status of this router.
+
+### `search_ndm_interfaces`
+*Toolset: **networks***\
+Retrieves all network interfaces for a specific device.
+
+- Show me all interfaces on device `device:abc123`.
+- List the interface statuses for my core router.
+
+### `browser_onboarding`
+*Toolset: **onboarding***\
+Guides you through onboarding Browser RUM to Datadog.
+
+- Help me set up Browser RUM monitoring for my web application.
+
+### `devices_onboarding`
+*Toolset: **onboarding***\
+Guides you through onboarding devices to Datadog monitoring.
+
+- Help me set up device monitoring in Datadog.
+
+### `kubernetes_onboarding`
+*Toolset: **onboarding***\
+Guides you through onboarding Kubernetes clusters to Datadog.
+
+- Help me set up Datadog monitoring for my Kubernetes cluster.
+
+### `llm_observability_onboarding `
+*Toolset: **onboarding***\
+Guides you through onboarding LLM Observability in Datadog.
+
+- Help me set up LLM Observability for my AI application.
+
+### `test_optimization_onboarding`
+*Toolset: **onboarding***\
+Guides you through onboarding Test Optimization in Datadog.
+
+- Help me set up Test Optimization for my CI pipeline.
+
+### `serverless_onboarding`
+*Toolset: **onboarding***\
+Guides you through onboarding serverless applications to Datadog.
+
+- Help me monitor my AWS Lambda functions with Datadog.
+
+### `source_map_uploads `
+*Toolset: **onboarding***\
+Guides you through uploading source maps for RUM error mapping.
+
+- Help me upload source maps so my RUM errors show original source code.
+
+### `datadog_code_security_scan`
+*Toolset: **security***\
+Runs a comprehensive security scan that detects both vulnerabilities (SQL injection, XSS, path traversal, and others) and secrets (API keys, passwords, credentials, and others) in parallel.
+
+- Scan my code for security vulnerabilities and hardcoded secrets.
+- Run a full security scan on this pull request.
+- Check this file for any security issues.
+
+### `datadog_sast_scan`
+*Toolset: **security***\
+Scans code for security vulnerabilities using static analysis (SAST), detecting SQL injection, XSS, path traversal, command injection, insecure cryptography, and other security weaknesses.
+
+- Scan this file for security vulnerabilities.
+- Check my code for SQL injection and XSS vulnerabilities.
+
+### `datadog_secrets_scan`
+*Toolset: **security***\
+Scans code for hardcoded secrets and credentials, detecting AWS keys, API keys, passwords, tokens, private keys, and database credentials.
+
+- Scan my code for hardcoded secrets.
+- Check if there are any API keys or passwords committed in this file.
+
+### `search_datadog_security_signals`
+*Toolset: **security***\
+Searches and retrieves security signals from Datadog Security Monitoring, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals.
+
+- Show me security signals from the last 24 hours.
+- Find high-severity security signals related to my production environment.
+- List Cloud SIEM signals triggered by suspicious login attempts.
+
+### `security_findings_schema`
+*Toolset: **security***\
+Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
+
+- What fields are available for security findings?
+- Show me the schema for library vulnerability findings.
+- Get the full schema including descriptions for misconfiguration findings.
+
+### `analyze_security_findings`
+*Toolset: **security***\
+Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
+
+- Show me the top 10 rules with the most critical findings.
+- Count open findings grouped by severity and finding type.
+- Find library vulnerabilities with exploits available, grouped by resource.
+
+### `search_security_findings`
+*Toolset: **security***\
+Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
+
+- Get full details for critical findings in my AWS environment.
+- Retrieve complete finding objects for a specific rule.
+- List all open identity risk findings with full metadata.
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -291,37 +630,29 @@ Searches [Test Optimization][24] test events with filters and returns details on
 - Show me all flaky test runs for the checkout service.
 - Find tests owned by `@team-name` that are failing.
 
-### `search_datadog_error_tracking_issues`
-*Toolset: **error-tracking***\
-Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
+### `get_synthetics_tests`
+*Toolset: **synthetics***\
+Searches Datadog Synthetic tests.
 
-- Show me all Error Tracking Issues in the checkout service from the last 24 hours.
-- What are the most common errors in my application over the past week?
-- Find Error Tracking Issues in the production environment with `service:api`.
+- Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
+- There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
+- Are Synthetic tests on my website `api.mycompany.com` still working in the past hour?
 
-### `get_datadog_error_tracking_issue`
-*Toolset: **error-tracking***\
-Retrieves detailed information about a specific Error Tracking Issue from Datadog.
+### `edit_synthetics_tests`
+*Toolset: **synthetics***\
+Edits Datadog Synthetic HTTP API tests.
 
-- Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
-- What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
-- Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+- Improve the assertions of the Synthetic test defined on my endpoint `/v1/my/tested/endpoint`.
+- Pause the test `aaa-bbb-ccc` and set the locations to only European locations.
+- Add my team tag to the test `aaa-bbb-ccc`.
 
-### `search_datadog_dbm_plans`
-*Toolset: **dbm***\
-Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
+### `synthetics_test_wizard`
+*Toolset: **synthetics***\
+Preview and create Datadog Synthetics HTTP API Tests.
 
-- Show me execution plans for slow queries on `host:db-prod-1` from the last hour.
-- Find query plans with `@db.plan.type:explain_analyze` for the production database.
-- Get execution plans for queries by `@db.user:app_user` with duration greater than 1 second.
-
-### `search_datadog_dbm_samples`
-*Toolset: **dbm***\
-Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
-
-- Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
-- Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
-- Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
+- Create Synthetics tests on every endpoint defined in this code file.
+- Create a Synthetics test on `/path/to/endpoint`.
+- Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
 ## Context efficiency
 
@@ -345,7 +676,7 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [1]: https://modelcontextprotocol.io/
 [15]: /api/latest/events/
 [16]: /account_management/audit_trail/
-[18]: /account_management/rbac/permissions/#case-and-incident-management
+[18]: /account_management/rbac/permissions/#mcp
 [19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [20]: /synthetics/
 [21]: /continuous_integration/
@@ -353,3 +684,12 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [25]: /error_tracking/
 [26]: /database_monitoring/
 [27]: /bits_ai/mcp_server/setup
+[28]: /tracing/
+[29]: /feature_flags/
+[30]: /llm_observability/
+[31]: /network_monitoring/cloud_network_monitoring/
+[32]: /network_monitoring/devices/
+[33]: /security/threats/security_signals/
+[34]: /security/misconfigurations/findings/
+[35]: /product_analytics
+[36]: /getting_started/site/#navigate-the-datadog-documentation-by-site

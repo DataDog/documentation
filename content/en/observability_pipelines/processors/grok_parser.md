@@ -17,9 +17,9 @@ further_reading:
 
 ## Overview
 
-This processor parses logs using the grok parsing rules that are available for a set of sources. The rules are automatically applied to logs based on the log source. Therefore, logs must have a `source` field with the source name. If this field is not added when the log is sent to the Observability Pipelines Worker, you can use the **Add field** processor to add it.
+<div class="alert alert-warning">To process logs with the Grok Parser processor, the logs <b>must</b> have a <code>source</code> field with the source name. If this field is not added when the log is sent to the Observability Pipelines Worker, you can use the <a href="/observability_pipelines/processors/edit_fields#add-field">Add field</a> processor to add it.</div>
 
-If the `source` field of a log matches one of the grok parsing rule sets, the log's `message` field is checked against those rules. If a rule matches, the resulting parsed data is added in the `message` field as a JSON object, overwriting the original `message`.
+The Grok Parser processor parses logs using the grok parsing rules available for a set of sources. If the `source` field of a log matches one of the grok parsing rule sets, the log's `message` field is checked against those rules. If a rule matches, the resulting parsed data is added in the `message` field as a JSON object, overwriting the original `message`.
 
 If there isn't a `source` field on the log, or no rule matches the log `message`, then no changes are made to the log and it is sent to the next step in the pipeline.
 
@@ -32,7 +32,7 @@ See [Parsing][1] for more information on Datadog's Grok patterns.
 
 ## Setup
 
-To set up the grok parser, define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+To set up the grok parser, define a **filter query**. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][3] for more information.
 
 To test log samples for out-of-the-box rules:
 1. Click the **Preview Library Rules** button.
@@ -51,8 +51,7 @@ To add a custom parsing rule:
 
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
-
-{{% observability_pipelines/processors/filter_syntax %}}
+[3]: /observability_pipelines/search_syntax/logs/
 
 ## Further reading
 

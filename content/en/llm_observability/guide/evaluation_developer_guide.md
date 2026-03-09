@@ -15,19 +15,22 @@ further_reading:
 
 ## Overview
 
-This guide covers how to build custom evaluators with the LLM Observability SDK and use them in LLM Experiments and in production. 
+This guide covers how to build custom evaluators with the LLM Observability SDK and use them in LLM Experiments and in production.
 
 ## Key concepts
 
 An **evaluation** measures a specific quality of your LLM application's output, such as accuracy, tone, or harmfulness. You write the evaluation logic inside an **evaluator**, which receives context about the LLM interaction and returns a result.
 
 ### Running evaluators in an Experiment
+
 To test your LLM application against a dataset before deploying, run your evaluators in [LLM Experiments][4]. In Experiments, evaluators run automatically: the SDK calls your evaluator on each distinct record. Use evaluators through the SDK.
 
 ### Running evaluators in production
+
 To monitor the quality of your live LLM responses, run evaluators in production. You can run evaluators manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluations][5]. Use evaluators through the SDK, HTTP API, or the Datadog UI.
 
 For production, there are two approaches:
+
 - **Manual evaluations** (this guide): You run evaluators in your application code and submit results with `LLMObs.submit_evaluation()` or the HTTP API. This gives you full control over evaluation logic and timing.
 - **Custom LLM-as-a-judge evaluations**: You configure evaluations in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
 
@@ -49,7 +52,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator: class-based and function-based.
+There are two ways to define an evaluator using LLM Observability: class-based and function-based. In addition to these evaluators, LLM Observability has integrations with open source evaluation frameworks, such as [DeepEval][6], that can be used in LLM Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|
@@ -119,6 +122,160 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
 
+### LLMJudge
+
+The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, and custom LLM clients with structured output formats.
+
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user_prompt` | `str` | Yes | Prompt template with `{{field.path}}` syntax for span context injection. |
+| `system_prompt` | `str` | No | System prompt to set the judge's behavior or persona. |
+| `structured_output` | `StructuredOutput` | No | Output format specification. See [structured output types](#structured-output-types). |
+| `provider` | `str` | Conditional | LLM provider: `"openai"`, `"azure_openai"`, `"anthropic"`, or `"bedrock"`. Required if `client` is not provided. |
+| `model` | `str` | No | Model identifier (for example, `"gpt-4o"`, `"claude-sonnet-4-20250514"`). |
+| `model_params` | `dict` | No | Additional parameters passed to the LLM API (for example, `temperature`). |
+| `client` | callable | Conditional | Custom LLM client function. Required if `provider` is not provided. |
+| `name` | `str` | No | Evaluator name for identification in results. |
+| `client_options` | `dict` | No | Provider-specific configuration (for example, API keys). |
+
+#### Template variables
+
+The `user_prompt` supports `{{field.path}}` syntax to inject context from the evaluated span. Nested paths are supported.
+
+- `{{input_data}}` — The span's input data.
+- `{{output_data}}` — The span's output data.
+- `{{expected_output}}` — Expected output for comparison (if available).
+- `{{metadata.key}}` — Nested metadata fields (for example, `{{metadata.topic}}`).
+
+#### Structured output types
+
+| Output type | Description |
+|-------------|-------------|
+| `BooleanStructuredOutput` | Returns `True`/`False` with optional pass/fail assessment. |
+| `ScoreStructuredOutput` | Returns a numeric score within a defined range, with optional thresholds. |
+| `CategoricalStructuredOutput` | Returns one of a predefined set of categories, with optional pass values. |
+| `Dict[str, JSONType]` | Custom JSON schema for arbitrary structured output. |
+
+All structured output types accept `reasoning=True` to include an explanation in results, and `reasoning_description` to customize the reasoning field's description.
+
+#### Example: Boolean evaluation
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    user_prompt="Is this response factually accurate? Response: {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Whether the response is factually accurate",
+        reasoning=True,
+        pass_when=True,
+    ),
+)
+{{< /code-block >}}
+
+#### Example: Score-based evaluation with thresholds
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, ScoreStructuredOutput
+
+judge = LLMJudge(
+    provider="anthropic",
+    model="claude-sonnet-4-20250514",
+    user_prompt="Rate the helpfulness of this response (1-10): {{output_data}}",
+    structured_output=ScoreStructuredOutput(
+        description="Helpfulness score",
+        min_score=1,
+        max_score=10,
+        reasoning=True,
+        min_threshold=7,  # Scores >= 7 pass
+    ),
+)
+{{< /code-block >}}
+
+#### Example: Categorical evaluation
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, CategoricalStructuredOutput
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    user_prompt="Classify the sentiment: {{output_data}}",
+    structured_output=CategoricalStructuredOutput(
+        categories={
+            "positive": "The response has a positive sentiment.",
+            "neutral": "The response has a neutral sentiment.",
+            "negative": "The response has a negative sentiment.",
+        },
+        reasoning=True,
+        pass_values=["positive", "neutral"],
+    ),
+)
+{{< /code-block >}}
+
+#### Example: Azure OpenAI
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+
+judge = LLMJudge(
+    provider="azure_openai",
+    model="gpt-4o",
+    user_prompt="Is this response factually accurate? Response: {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Whether the response is factually accurate",
+        reasoning=True,
+        pass_when=True,
+    ),
+    client_options={
+        "azure_endpoint": "<https://your-resource.openai.azure.com>",
+        "api_version": "2024-10-21",
+        "azure_deployment": "gpt-4o",
+    },
+)
+{{< /code-block >}}
+
+The `azure_openai` provider accepts the following `client_options`:
+
+| Option | Environment variable | Description |
+|--------|---------------------|-------------|
+| `api_key` | `AZURE_OPENAI_API_KEY` | Azure OpenAI API key. |
+| `azure_endpoint` | `AZURE_OPENAI_ENDPOINT` | Azure OpenAI endpoint URL. |
+| `api_version` | `AZURE_OPENAI_API_VERSION` | API version. Defaults to `"2024-10-21"`. |
+| `azure_deployment` | `AZURE_OPENAI_DEPLOYMENT` | Deployment name. Falls back to the `model` parameter. |
+
+#### Example: Custom LLM client
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
+
+def my_llm_client(provider, messages, json_schema, model, model_params):
+    response = call_my_llm(messages, model)
+    return response
+
+judge = LLMJudge(
+    client=my_llm_client,
+    model="my-custom-model",
+    user_prompt="Is this response accurate? {{output_data}}",
+    structured_output=BooleanStructuredOutput(
+        description="Accuracy check",
+        reasoning=True,
+        pass_when=True,
+    ),
+)
+{{< /code-block >}}
+
+#### Key points
+
+- Requires either a `provider` (`"openai"`, `"azure_openai"`, `"anthropic"`, or `"bedrock"`) or a custom `client`.
+- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`). For Azure OpenAI, set `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`. For Bedrock, configure AWS credentials through environment variables or `client_options`.
+- Use `reasoning=True` in structured outputs to include an explanation in results.
+- Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
+
 ### Built-in evaluators
 
 The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
@@ -138,12 +295,15 @@ Performs string comparison operations between `output_data` and `expected_output
 from ddtrace.llmobs._evaluators import StringCheckEvaluator
 
 # Perform an exact match (default)
+
 evaluator = StringCheckEvaluator(operation="eq", case_sensitive=True)
 
 # Check whether output_data contains expected_output (case-insensitive)
+
 evaluator = StringCheckEvaluator(operation="icontains", strip_whitespace=True)
 
 # Extract field from dict output before comparison
+
 evaluator = StringCheckEvaluator(
     operation="eq",
     output_extractor=lambda x: x.get("message", "") if isinstance(x, dict) else str(x),
@@ -165,12 +325,14 @@ from ddtrace.llmobs._evaluators import RegexMatchEvaluator
 import re
 
 # Validate email format
+
 evaluator = RegexMatchEvaluator(
     pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
     match_mode="fullmatch"
 )
 
 # Validate output pattern (case-insensitive)
+
 evaluator = RegexMatchEvaluator(
     pattern=r"success|completed",
     flags=re.IGNORECASE
@@ -191,9 +353,11 @@ Validates output length constraints.
 from ddtrace.llmobs._evaluators import LengthEvaluator
 
 # Ensure response is 50-200 characters
+
 evaluator = LengthEvaluator(min_length=50, max_length=200, count_type="characters")
 
 # Validate word count
+
 evaluator = LengthEvaluator(min_length=10, max_length=100, count_type="words")
 {{< /code-block >}}
 
@@ -205,9 +369,11 @@ Validates that output is valid JSON, and optionally checks for required keys.
 from ddtrace.llmobs._evaluators import JSONEvaluator
 
 # Validate JSON syntax
+
 evaluator = JSONEvaluator()
 
 # Validate that required keys exist
+
 evaluator = JSONEvaluator(required_keys=["name", "status", "data"])
 {{< /code-block >}}
 
@@ -263,6 +429,7 @@ def evaluator_function(
 {{< /code-block >}}
 
 You can return either:
+
 - A plain value (`str`, `float`, `int`, `bool`, `dict`), or
 - An `EvaluatorResult` for rich results with reasoning and metadata
 
@@ -274,6 +441,7 @@ Pass your evaluators to `LLMObs.experiment()` to run them against every record i
 from ddtrace.llmobs import LLMObs, Dataset, DatasetRecord
 
 # Create dataset
+
 dataset = Dataset(
     name="qa_dataset",
     records=[
@@ -289,14 +457,17 @@ dataset = Dataset(
 )
 
 # Define task
+
 def qa_task(input_data, config):
     return generate_answer(input_data["question"])
 
 # Create evaluators
+
 semantic_eval = SemanticSimilarityEvaluator(threshold=0.7)
 summary_eval = AverageScoreEvaluator("semantic_similarity")
 
 # Run experiment
+
 experiment = LLMObs.experiment(
     name="qa_experiment",
     task=qa_task,
@@ -334,6 +505,7 @@ experiment.run()
 #### Mapping dataset data to prompt variables with `transform_fn`
 
 When you configure an LLM-as-a-judge in the Datadog UI, the [prompt template uses variables][6] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps the following:
+
 - `input_data` → `span_input`
 - `output_data` → `span_output`
 - `expected_output` → `meta.expected_output`
@@ -500,4 +672,5 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [3]: /llm_observability/instrumentation/otel_instrumentation
 [4]: /llm_observability/experiments
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
-[6]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations#configure-the-prompt
+[6]: /llm_observability/evaluations/deepeval_evaluations/
+
