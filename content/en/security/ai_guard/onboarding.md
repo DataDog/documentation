@@ -13,7 +13,7 @@ further_reading:
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. This page describes how to set it up so you can keep your data secure against these AI-based threats.
+AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, sensitive data exfiltration attacks, and exposure of sensitive data such as PII and secrets. This page describes how to set it up so you can keep your data secure against these AI-based threats.
 
 For an overview on AI Guard, see [AI Guard][13].
 
@@ -92,7 +92,7 @@ To view AI Guard evaluations in Datadog, create a custom [retention filter][5] f
 
 ### 6. Configure AI Guard policies {#configure-policies}
 
-AI Guard provides two settings to control how evaluations are enforced and how sensitive threat detection is.
+AI Guard provides settings to control how evaluations are enforced, how sensitive threat detection is, and whether sensitive data scanning is enabled.
 
 #### Blocking policy {#blocking-policy}
 
@@ -111,6 +111,12 @@ AI Guard assigns a confidence score to each threat category it detects (for exam
 Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
 - A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
+
+#### Sensitive data scanning {#sensitive-data-scanning}
+
+AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. To enable sensitive data scanning, go to **AI Guard** > **Settings** > [**Sensitive Data Scanning**][22] for your services.
+
+When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings are returned in the evaluation response as an `sds_findings` array, where each finding includes the rule name, category (`pii` or `secrets`), matched text, and its location within the message. Findings also appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
 
 ### 7. (Optional) Limit access to AI Guard spans {#limit-access}
 
@@ -768,3 +774,4 @@ The Security Signals explorers allow you to filter, prioritize, and investigate 
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: https://app.datadoghq.com/security/ai-guard/settings/services
 [21]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
+[22]: https://app.datadoghq.com/security/ai-guard/settings/sensitive-data-scanning
