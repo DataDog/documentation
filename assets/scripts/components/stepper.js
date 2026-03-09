@@ -54,7 +54,6 @@ function initStepper(stepper) {
     const steps = stepper.querySelectorAll('.stepper__step');
     const finishedEl = stepper.querySelector('.stepper__finished');
     const controlsEl = stepper.querySelector('.stepper__controls');
-    const controlsBtn = controlsEl ? controlsEl.querySelector('.stepper__btn') : null;
 
     if (!steps.length) return;
 
@@ -122,14 +121,7 @@ function initStepper(stepper) {
         }
 
         if (controlsEl) {
-            if (finished) {
-                controlsEl.style.display = 'flex';
-                // Hide the original "Show all" button; only show Reset
-                if (controlsBtn) controlsBtn.style.display = 'none';
-                if (resetBtn) resetBtn.style.display = '';
-            } else {
-                controlsEl.style.display = 'none';
-            }
+            controlsEl.style.display = finished ? 'flex' : 'none';
         }
     }
 
@@ -216,17 +208,6 @@ function initStepper(stepper) {
         expandedSteps.clear();
         persist();
         render();
-    }
-
-    // Create a Reset button inside the controls area
-    let resetBtn = null;
-    if (controlsEl) {
-        resetBtn = document.createElement('button');
-        resetBtn.className = 'stepper__btn stepper__reset-btn';
-        resetBtn.textContent = 'Reset step list';
-        resetBtn.style.display = 'none';
-        controlsEl.appendChild(resetBtn);
-        resetBtn.addEventListener('click', handleReset);
     }
 
     // Auto-expand step when browser find-in-page matches hidden content
