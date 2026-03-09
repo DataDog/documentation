@@ -4731,6 +4731,8 @@ components:
       - asm_serverless_traced_invocations_percentage
       - bits_ai_investigations_usage
       - browser_usage
+      - ci_code_coverage_committers_percentage
+      - ci_code_coverage_committers_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
@@ -4816,6 +4818,8 @@ components:
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
       - BITS_AI_INVESTIGATIONS_USAGE
       - BROWSER_USAGE
+      - CI_CODE_COVERAGE_COMMITTERS_PERCENTAGE
+      - CI_CODE_COVERAGE_COMMITTERS_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -9682,6 +9686,14 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        ci_code_coverage_committers_percentage:
+          description: The percentage of Code Coverage committers usage by tag(s).
+          format: double
+          type: number
+        ci_code_coverage_committers_usage:
+          description: The total Code Coverage committers usage by tag(s).
           format: double
           type: number
         ci_pipeline_indexed_spans_percentage:
@@ -19760,6 +19772,23 @@ components:
       x-enum-varnames:
       - BARS
       - AREA
+    TimeseriesRequestStyle:
+      description: Define request widget style for timeseries widgets.
+      properties:
+        has_value_labels:
+          description: If true, the value is displayed as a label relative to the
+            data point.
+          type: boolean
+        line_type:
+          $ref: '#/components/schemas/WidgetLineType'
+        line_width:
+          $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+      type: object
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -19935,7 +19964,7 @@ components:
           deprecated: true
           description: Deprecated - Use `queries` and `formulas` instead.
         style:
-          $ref: '#/components/schemas/WidgetRequestStyle'
+          $ref: '#/components/schemas/TimeseriesRequestStyle'
       type: object
     ToplistWidgetDefinition:
       description: The top list visualization enables you to display a list of Tag

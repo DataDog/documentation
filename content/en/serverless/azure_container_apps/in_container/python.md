@@ -80,6 +80,8 @@ logger.info("Hello world!")
 
 {{% serverless-init-env-vars-in-container language="python" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
