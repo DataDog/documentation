@@ -117,4 +117,26 @@
             }
         }
     }
+
+    // Enum collapsible styles
+    .enum-values-hidden {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .enum-toggle-link {
+        color: #632CA6;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus {
+            outline: 2px solid #632CA6;
+            outline-offset: 2px;
+        }
+    }
 }
