@@ -12,10 +12,6 @@ further_reading:
 site_support_id: snmp_profile_manager
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
-  SNMP Profile Manager is in Preview. Use this form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Device profiles define which metrics to collect and how to transform them into Datadog metrics. Each [profile][2] is expected to monitor a class of similar devices from the same vendor. 
@@ -36,7 +32,7 @@ For more information on advanced profile details, review the [Profile Format Ref
   - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
   - [NDM Device Profiles Edit][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
 - Set `use_remote_config_profiles: true` in your configuration:
-  - For SNMP Autodiscovery, add to `datadog.yaml` under `network_devices.autodiscovery`:
+  - For SNMP Autodiscovery, add the following to your `datadog.yaml` file under `network_devices.autodiscovery`:
 
     ```yaml
     network_devices:
@@ -44,7 +40,7 @@ For more information on advanced profile details, review the [Profile Format Ref
           use_remote_config_profiles: true
     ```
 
-  - For manual SNMP checks, add to `conf.d/snmp.d/conf.yaml` under `init_config`:
+  - For manual SNMP checks, add the following to your `conf.d/snmp.d/conf.yaml` file under `init_config`:
 
     ```yaml
     init_config:
@@ -66,7 +62,7 @@ For more information on advanced profile details, review the [Profile Format Ref
 
 ### Step 1: Profile details
 
-  1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
+  1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Settings][1]. 
   2. Click on **SNMP Profile Manager > + Create New Profile**. This brings you to the profile creation page shown below.
      {{< img src="/network_device_monitoring/profile_onboarding/create_profile_3.png" alt="The Network Device profile creation page" style="width:100%;">}}
 
@@ -372,5 +368,5 @@ Datadog recommends enabling Remote Configuration to take advantage of the full U
 [17]: /network_monitoring/devices/profiles/#metadata-definition-by-profile
 [18]: /agent/remote_config/?tab=configurationyamlfile&site=us#setup
 [19]: /network_monitoring/devices/guide/device_profiles/?tab=manual#apply-a-profile-to-created-devices
-[20]: https://docs.datadoghq.com/account_management/rbac/permissions/#network-device-monitoring
-[21]: https://docs.datadoghq.com/help/
+[20]: /account_management/rbac/permissions/#network-device-monitoring
+[21]: /help/
