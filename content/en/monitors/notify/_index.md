@@ -71,7 +71,7 @@ In both notification rules and individual monitors, you can use an `@notificatio
 
 An @notification must have a space between it and the last line character:
 
-| 🟢 Correct Format | ❌ Incorrect Format |
+| Correct Format | Incorrect Format |
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
