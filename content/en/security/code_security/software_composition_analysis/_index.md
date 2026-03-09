@@ -63,7 +63,7 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 
 ### View findings by repository
 
-The [repositories explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets, and Infrastructure as Code (IaC).  Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
+The [repositories explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC).  Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA
 * The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
