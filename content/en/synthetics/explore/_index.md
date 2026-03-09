@@ -16,7 +16,7 @@ further_reading:
 - link: "/synthetics/explore/results_explorer"
   tag: "Documentation"
   text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
-- link: "/service_management/events/explorer"
+- link: "/events/explorer"
   tag: "Documentation"
   text: "Learn about the Events Explorer"
 ---

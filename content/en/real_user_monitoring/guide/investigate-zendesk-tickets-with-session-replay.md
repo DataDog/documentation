@@ -35,5 +35,5 @@ You can also add the replay to a playlist to group related issues together for e
 
 [1]: /integrations/zendesk/#zendesk-rum-app-installation
 [2]: https://www.zendesk.com/sg/marketplace/apps/support/993138/datadog-rum/?queryID=fb54e1e367559c15de7e8a0f1eb8aa6f
-[3]: /real_user_monitoring/session_replay/browser/
-[4]: /real_user_monitoring/session_replay/playlists
+[3]: /session_replay/browser/
+[4]: /session_replay/playlists

@@ -6,16 +6,19 @@ further_reading:
 - link: /security/vulnerabilities
   tag: ドキュメント
   text: Cloud Security Vulnerabilities についてもっと読む
+- link: /security/sensitive_data_scanner/setup/cloud_storage
+  tag: ドキュメント
+  text: クラウドストレージ用に Sensitive Data Scanner をセットアップする
 title: Cloud Security Agentless Scanning
 ---
 
 ## 概要
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning は、Datadog Agent をインストールする必要なく、クラウド インフラストラクチャー内に存在する脆弱性への可視性を提供します。Datadog は、クラウド リソース全体の可視性を得る最初のステップとして Agentless Scanning を有効化し、さらに深いセキュリティとオブザーバビリティのコンテキストのために、時間をかけてコア アセットに Datadog Agent をインストールすることを推奨します。
 
 ## 仕組み
 
-After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
+リソースに対して [Agentless scanning の設定][1] を行うと、Datadog は [Remote Configuration][2] を通じて 12 時間間隔で自動スキャンをスケジュールします。スキャン サイクルの間、Agentless スキャナーは Lambda コードの依存関係を収集し、VM インスタンスのスナップショットを作成します。これらのスナップショットを用いて、Agentless スキャナーはスキャンを実行し、パッケージのリストを生成して Datadog に送信し、Lambda コードの依存関係とともに脆弱性を確認します。スナップショットのスキャンが完了すると、そのスナップショットは削除されます。機密情報や個人情報があなたのインフラストラクチャーの外部に送信されることはありません。
 
 [Cloud Security 評価 フィルター][15] を設定している場合、Agentless Scanning はこれらのフィルターを適用し、設定した条件に合致するリソースだけをスキャンします。
 

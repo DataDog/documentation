@@ -13,3 +13,7 @@ fi
 # Check for circular aliases in markdown files
 echo "Checking for circular aliases..."
 python3 .husky/check-circular-aliases.py
+
+# Check that Cdocs gitignored files are not tracked
+echo "Checking Cdocs gitignore tracking status..."
+python3 .husky/check-cdocs-gitignore.py

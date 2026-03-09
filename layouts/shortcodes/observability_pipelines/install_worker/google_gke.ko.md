@@ -28,4 +28,4 @@
 파이프라인 구성을 변경하고 싶으면 [기존 파이프라인 업데이트][802]을 참고하세요.
 
 [801]: /resources/yaml/observability_pipelines/v2/setup/google_gke.yaml
-[802]: /ko/observability_pipelines/update_existing_pipelines
+[802]: /ko/observability_pipelines/configuration/update_existing_pipelines

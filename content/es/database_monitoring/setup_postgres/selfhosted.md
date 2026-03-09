@@ -4,6 +4,9 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentación
   text: Integración Postgres básica
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para Postgres autoalojado
 ---
 
@@ -24,7 +27,7 @@ Requisitos previos
 : Los módulos de Postgres adicionales proporcionados deben estar instalados. En la mayoría de las instalaciones, esto se incluye por defecto, pero las instalaciones menos convencionales pueden requerir una instalación adicional de tu versión del [paquete `postgresql-contrib`][1].
 
 Versiones del Agent compatibles
-: v7.36.1 o posterior
+: 7.36.1 o posteriores
 
 Impacto en el rendimiento
 : La configuración de Database Monitoring predeterminada del Agent es conservadora, pero puedes ajustar algunos parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas según tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de la consulta en la base de datos y menos del uno por ciento del uso de CPU. <br/><br/>
@@ -49,7 +52,7 @@ Configura los siguientes [parámetros][4] en el archivo `postgresql.conf` y lueg
 | `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrearán consultas como SELECT, UPDATE y DELETE. |
 | `track_io_timing` | `on` | Opcional. Habilita la recopilación de los tiempos de lectura y escritura de bloques para las consultas. |
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
@@ -132,7 +135,7 @@ SECURITY DEFINER;
 
 <div class="alert alert-info">Para la recopilación de datos o métricas personalizadas que requieren consultar tablas adicionales, es posible que tengas que conceder el permiso <code>SELECT</code> en esas tablas al usuario <code>Datadog</code>. Ejemplo: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. Para obtener más información, consulta <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">Recopilación de métricas personalizadas de PostgreSQL</a>. </div>
 
-Crea la función **en cada base de datos** para permitir al Agent recopilar explain-plans.
+Crea la función **en cada base de datos** para permitir al Agent recopilar planes de explicación.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -146,6 +149,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -157,7 +162,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Guardar tu contraseña de forma segura
+### Guarda tu contraseña de forma segura
 {{% dbm-secret %}}
 
 ### Verificación
@@ -205,7 +210,7 @@ psql -h localhost -U datadog postgres -A \
 
 Cuando se te pida una contraseña, utiliza la que introdujiste al crear el usuario `datadog`.
 
-## Instalación del Agent
+## Instalar el Agent
 
 Al instalar el Datadog Agent también se instala el check Postgres, necesario para Database Monitoring en Postgres.
 Si aún no has instalado el Agent, consulta las [instrucciones de instalación del Agent][8], y luego regresa aquí para continuar con las instrucciones de tu método de instalación.
@@ -280,7 +285,7 @@ La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no i
 ## Configuraciones del Agent de ejemplo
 {{% dbm-postgres-agent-config-examples %}}
 
-## Resolución de problemas
+## Solucionar problemas
 
 Si has instalado y configurado las integraciones y el Agent como se describe, pero no funcionan como se esperaba, consulta [Solucionar problemas][15].
 

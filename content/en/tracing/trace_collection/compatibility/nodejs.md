@@ -139,10 +139,12 @@ Or, modify the `package.json` file if you typically start an application with np
 | [mysql][35]            | `>=2`    | Fully supported |                                                  |
 | [mysql2][36]           | `>=1`    | Fully supported |                                                  |
 | [oracledb][37]         | `>=5`    | Fully supported |                                                  |
+| [opensearch][69]       | `>=1`    | Fully supported |                                                  |
 | [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
 | [redis][39]            | `>=0.12` | Fully supported |                                                  |
 | [sharedb][40]          | `>=1`    | Fully supported |                                                  |
 | [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [Prisma][69]           | `>=6.1.0`| Fully supported |                                                  |
 
 ### Worker compatibility
 
@@ -262,3 +264,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [66]: https://js.langchain.com/
 [67]: https://www.npmjs.com/package/@confluentinc/kafka-javascript
 [68]: https://www.npmjs.com/package/@azure/service-bus
+[69]: https://github.com/opensearch-project/opensearch-js

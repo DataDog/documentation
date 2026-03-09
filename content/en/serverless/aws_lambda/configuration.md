@@ -634,17 +634,9 @@ If your Lambda functions are configured to use code signing, you must add Datado
 
 Datadog's Signing Profile ARN:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
-```
-{{< /site-region >}}
 
 
 ## Migrate to the Datadog Lambda extension

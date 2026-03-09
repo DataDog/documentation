@@ -5,7 +5,7 @@ is_beta: true
 private: false
 code_lang: python
 type: multi-code-lang
-code_lang_weight: 10
+code_lang_weight: 20
 aliases:
     - /dynamic_instrumentation/symdb/python
     - /tracing/dynamic_instrumentation/symdb/python

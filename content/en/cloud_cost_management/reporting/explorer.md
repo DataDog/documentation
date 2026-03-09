@@ -142,15 +142,15 @@ Download your cost data for offline analysis, reporting, or sharing with stakeho
 
 ### Create a dashboard widget
 Save your current query as a dashboard widget to monitor costs alongside other metrics:
-1. Click **Export** and select **Export to Dashboard**
-2. Choose an existing dashboard or create a new one
-3. Customize the widget title and settings
+1. Click **Export** and select **Export to Dashboard**.
+2. Choose an existing dashboard or create one.
+3. Customize the widget title and settings.
 
 ### Create a cost monitor
 Set up alerts based on your current query to get notified when costs exceed thresholds or change unexpectedly:
-1. Click **Export** and select **Create Monitor**
-2. Configure alert conditions (for example, when costs exceed $10,000 or increase by 20%)
-3. Set notification channels (email, Slack, PagerDuty)
+1. Click **Export** and select **Create Monitor**.
+2. Configure alert conditions (for example, when costs exceed $10,000 or increase by 20%).
+3. Set notification channels (email, Slack, PagerDuty).
 
 Learn more about [Cloud Cost Monitors][8].
 

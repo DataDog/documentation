@@ -35,7 +35,7 @@ After creating a Team, you can add reference links, configure notifications, and
 
 To add or update an entity's owner in Datadog:
 
-1. Go to **Service Management** > **Software Catalog**, and open the entity.
+1. Go to **Software Catalog**, and open the entity.
 2. Click **Edit in UI** on the entity page.
 3. In the **Ownership** section, set the **Owner** and optionally add **Additional owners**.
    - Search by team name or paste a handle (for example, `team:example-team`).

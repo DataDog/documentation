@@ -35,7 +35,7 @@ The following table shows feature compatibility across different setups:
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
@@ -43,20 +43,20 @@ The following table shows feature compatibility across different setups:
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
 | [Continuous Profiler][12] | {{< X >}} | | | |
-| [Data Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
+| [Data Observability: Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
 ## API support
 
-Datadog provides support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
+Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
 
 | Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Node.js][33] | {{< X >}} | *Not Yet Supported* | {{< X >}} |
+| [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 | [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 | [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |

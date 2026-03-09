@@ -292,7 +292,7 @@ final configuration = DatadogConfiguration(
 You can manage content masking while still allowing system or bundled images to be visible.
 
 <!-- iOS and React Native -->
-{% if or(equals($platform, "ios"), equals($platform, "react_native")) %}
+{% if includes($platform, ["ios", "react_native"]) %}
 Use the `maskNonBundledOnly` setting to replace non-bundled images with a "Content Image" placeholder in the replay.
 
 - In UIKit, the SDK can determine whether an image is bundled and can mask it accordingly.
@@ -564,7 +564,7 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 
 
 <!-- Android, iOS, or Flutter -->
-{% if or(equals($platform, "android"), equals($platform, "ios"), equals($platform, "flutter")) %}
+{% if includes($platform, ["android", "ios", "flutter"]) %}
 
 ### Text and input override
 
@@ -1485,5 +1485,5 @@ The following chart shows how we apply different image masking strategies:
 - Masked
 {% /table %}
 
-[1]: /real_user_monitoring/session_replay/privacy_options
+[1]: /session_replay/browser/privacy_options
 [2]: https://github.com/DataDog/dd-sdk-reactnative

@@ -417,12 +417,12 @@ To enable the Android SDK to start sending data:
 {{% tab "Kotlin" %}}
 
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
 ```
 
 {{% /tab %}}
@@ -430,12 +430,12 @@ To enable the Android SDK to start sending data:
 {{% tab "Java" %}}
 
 ```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
 ```
 
 {{% /tab %}}
@@ -530,15 +530,15 @@ To filter out specific errors reported by `DatadogInterceptor`, you can configur
    {{% tab "Kotlin" %}}
 
    ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-        .setErrorEventMapper { errorEvent ->
-            if (errorEvent.shouldBeDiscarded()) {
-                null
-            } else {
-                errorEvent
-            }
-    }
-    .build();
+   val rumConfig = RumConfiguration.Builder(applicationId)
+       .setErrorEventMapper { errorEvent ->
+           if (errorEvent.shouldBeDiscarded()) {
+               null
+           } else {
+               errorEvent
+           }
+       }
+       .build();
    ```
 
    {{% /tab %}}

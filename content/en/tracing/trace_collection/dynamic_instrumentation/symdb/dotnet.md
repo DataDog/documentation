@@ -5,7 +5,7 @@ is_beta: true
 private: false
 code_lang: dotnet
 type: multi-code-lang
-code_lang_weight: 10
+code_lang_weight: 30
 aliases:
     - /dynamic_instrumentation/symdb/dotnet
     - /tracing/dynamic_instrumentation/symdb/dotnet
