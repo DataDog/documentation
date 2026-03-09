@@ -449,14 +449,6 @@ Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
-### `search_datadog_llmobs_spans`
-*Toolset: **llmobs***\
-Retrieves and analyzes [LLM Observability][30] spans from Datadog, showing the complete request flow, model interactions, token usage, costs, and associated metadata.
-
-- Show me LLM Observability spans for my chatbot service in the last hour.
-- Find spans where the LLM model returned an error.
-- Analyze token usage and costs for my AI application over the past day.
-
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
 Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
