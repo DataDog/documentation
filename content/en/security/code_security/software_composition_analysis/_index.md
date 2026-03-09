@@ -69,8 +69,7 @@ The [repositories explorer][12] provides a repository-centric view of all scan r
 
 Recommended steps for remediating detected vulnerabilities can be found in the side panel for each vulnerability in SCA. Steps are provided for upgrading the library to the safest (non-vulnerable) version, as well as the closest version.
 
-To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results
-  are linked to Datadog services and teams, see [Link findings to Datadog services and teams][18].
+To filter your results, use the facets to the left of the list or the search bar at the top. Results can be filtered by service or team facets. For more information about how results are linked to Datadog services and teams, see [Link findings to Datadog services and teams][18].
 
 Every row represents a unique library and version combination. Each combination is associated with the specific commit and branch that is selected in the filters at the top of the page (by default, the latest commit on the default branch of the repository you selected).
 
