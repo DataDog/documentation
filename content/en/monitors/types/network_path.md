@@ -52,7 +52,7 @@ To create a Network Path monitor in Datadog, use the main navigation: [**Monitor
 The following table lists the different Network Path metrics that you can create monitors on.
 
 | Metric                         | Metric Name            |    Definition                                         |
-| -------------------------------| ------------------------------------------------------------------------------ |
+| -------------------------------| -----------------------|------------------------------------------------------ |
 | E2E Probe RTT Latency (Average)| `e2e_probe.rtt.avg`    | End-to-end round-trip time (RTT) measured for the probe, representing the average time elapsed to receive a response from the destination across all probe packets |
 | E2E Probe Packets Sent         | `e2e_probe.packets_sent`| Number of packets sent |
 | E2E Probe Packets Received     | `e2e_probe.packets_received`| Number of packets for which a response was received |
