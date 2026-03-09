@@ -462,10 +462,9 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 
 {{% collapse-content title="Instrument a deployment slot" level="h4" %}}
 
-To instrument a [deployment slot][801] instead of the main web app, use one of the following methods. Configure [unified service tagging][802] with distinct tag values for each slot to differentiate their telemetry.
+To instrument a [deployment slot][801] instead of the main web app, use one of the following methods.
 
 [801]: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
-[802]: /getting_started/tagging/unified_service_tagging/
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}

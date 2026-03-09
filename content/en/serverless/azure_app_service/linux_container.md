@@ -527,10 +527,9 @@ If you are setting up monitoring for a .NET application, configure the following
 
 {{% collapse-content title="Instrument a deployment slot" level="h4" %}}
 
-To instrument a [deployment slot][901] instead of the main web app, use one of the following methods. Configure [unified service tagging][902] with distinct tag values for each slot to differentiate their telemetry.
+To instrument a [deployment slot][901] instead of the main web app, use one of the following methods.
 
 [901]: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
-[902]: /getting_started/tagging/unified_service_tagging/
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
