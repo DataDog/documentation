@@ -24,7 +24,7 @@ Datadog provides a range of features for controlling which users can see and int
 
 | Feature | Supported Products | Description |
 |---------|--------------|-------------|
-| [Data Access Control policies][2] | [Telemetry types][1] | Restricts datasets to specific Teams. |
+| [Data Access Control policies][2] | [Telemetry types][1] | Restricts sensitive telemetry data to specific Teams. |
 | [Hierarchical Team Access][5] | [Dataset access][3] [Resource access][4] | Supports nesting teams within each other. Sub-teams inherit the roles and permissions of their parent teams, as well as access to restricted datasets or resources. |
 | [Individual Resource Restrictions][6] | Filters information in Datadog by Team across Dashboards, Monitors, Service Catalog, and more. See the full [resource list][4]. | Restricts access to specific dashboards and monitors to members of a specified Team. |
 | [Personalized Team Views][7] | Filters information in Datadog by Team across Dashboards, Monitors, Service Catalog, and more. See the full [resource list][4]. | Filters information in Datadog by Team without revoking access. |
