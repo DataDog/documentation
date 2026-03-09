@@ -21,7 +21,7 @@ This page describes how to instrument your Android or Android TV application wit
 
 The Datadog Feature Flags SDK for Android is built on [OpenFeature][1], an open standard for feature flag management. This guide explains how to install the SDK, configure the Datadog provider, and evaluate flags in your application.
 
-<div class="alert alert-info">For most applications, the OpenFeature API is the right choice. If you need multiple independent evaluation contexts in the same app, see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a> at the end of this guide.</div>
+<div class="alert alert-info">For most applications, the OpenFeature API is the recommended approach. If you need multiple independent evaluation contexts in the same application, see <a href="#direct-flagsclient-integration-advanced">Direct FlagsClient Integration</a>.</div>
 
 ## Getting started
 
@@ -128,7 +128,7 @@ OpenFeatureAPI.setProviderAndWait(provider)
 
 ## Set the evaluation context
 
-Define who or what the flag evaluation applies to using an `ImmutableContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Set this before evaluating flags to ensure proper targeting.
+Define who or what the flag evaluation applies to using an `ImmutableContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Set this before evaluating flags to help ensure proper targeting.
 
 {{< code-block lang="kotlin" >}}
 import dev.openfeature.kotlin.sdk.ImmutableContext
@@ -145,7 +145,7 @@ OpenFeatureAPI.setEvaluationContext(
 )
 {{< /code-block >}}
 
-<div class="alert alert-info">All attribute values must use <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example in <code>SharedPreferences</code>.</div>
+<div class="alert alert-info">All attribute values must use a <code>Value.String()</code> wrapper. The targeting key should be consistent for the same user to help ensure consistent flag evaluation across sessions. For anonymous users, use a persistent UUID stored, for example, in <code>SharedPreferences</code>.</div>
 
 ## Evaluate flags
 
@@ -296,7 +296,7 @@ val provider = FlagsClient.Builder()
 OpenFeatureAPI.setProviderAndWait(provider)
 {{< /code-block >}}
 
-## Direct FlagsClient integration (Advanced)
+## Direct FlagsClient integration (advanced)
 
 For most applications, the OpenFeature API described above is the recommended approach. However, you can use the Datadog `FlagsClient` directly if you have specific requirements that the OpenFeature abstraction doesn't support.
 
@@ -304,9 +304,9 @@ For most applications, the OpenFeature API described above is the recommended ap
 
 - Require **multiple independent evaluation contexts** in the same app (for example, different contexts for different users in a multi-user app)
 - Want to work with **native Kotlin types** directly (`JSONObject` instead of `Value.Structure`)
-- Need **fine-grained control** over client lifecycle and configuration per instance
+- Need **fine-grained control** over client life cycle and configuration per instance
 
-### Installation (Direct)
+### Installation (FlagsClient)
 
 If you only need the direct API, you can omit the OpenFeature dependency:
 
@@ -319,7 +319,7 @@ dependencies {
 }
 {{< /code-block >}}
 
-### Create and retrieve a client (Direct)
+### Create and retrieve a client (FlagsClient)
 
 Create a client once, typically during app startup:
 
@@ -342,7 +342,7 @@ val flagsClient = FlagsClient.get("checkout")
 
 <div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>
 
-### Set the evaluation context (Direct)
+### Set the evaluation context (FlagsClient)
 
 {{< code-block lang="kotlin" >}}
 flagsClient.setEvaluationContext(
@@ -356,9 +356,9 @@ flagsClient.setEvaluationContext(
 )
 {{< /code-block >}}
 
-This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations once the background operation completes.
+This method fetches flag assignments from the server asynchronously in the background. The operation is non-blocking and thread-safe. Flag updates are available for subsequent evaluations after the background operation completes.
 
-### Evaluate flags (Direct)
+### Evaluate flags (FlagsClient)
 
 {{% collapse-content title="Boolean flags" level="h4" %}}
 {{< code-block lang="kotlin" >}}
@@ -421,6 +421,8 @@ print(details.errorCode)  // The error that occurred during evaluation, if any
 {{% /collapse-content %}}
 
 ### API comparison
+
+This table highlights key differences between the OpenFeature and `FlagsClient` APIs to help you choose the integration that fits your requirements.
 
 | Feature | **OpenFeature** | **FlagsClient** |
 |---------|----------------|-----------------|
