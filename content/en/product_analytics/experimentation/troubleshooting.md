@@ -22,7 +22,7 @@ On the [Experiments][2] page, select your experiment. On the experiment details 
 
 In the following example, the subject assignment count is 12,427 for Variant A and 12,573 for Variant B.
 
-<div class="alert alert-info"> If your metric scorecard shows <strong>N/A</strong>, this means the analysis has not run yet. Wait for it to run, then continue with the troubleshooting steps, as needed.</div>
+<div class="alert alert-info"> If your metric scorecard shows <strong>N/A</strong> for metric values or subject assignment counts, this means the analysis has not run yet. Wait for it to run, then continue with the troubleshooting steps as needed.</div>
 
    {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the subject assignment count for each variant." style="width:90%;" >}}
 
@@ -97,7 +97,11 @@ If the event is firing but metric values are still zero, the metric events may n
 
 {{% collapse-content title="Verify identifiers match" level="h4" expanded=false id="verify-subject-key-matching" %}}
 
-Datadog matches metric events to experiment exposures using a set of identifiers: a [`targetingKey`][7]and a [subject type attribute][9]. If the `targetingKey` in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
+Datadog matches metric events to experiment exposures using a set of identifiers:
+- A [`targetingKey`][7]
+- A [subject type attribute][9] 
+
+If the `targetingKey` in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
 1. On the [Experiments][2] page, select your experiment.
 1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
