@@ -12,16 +12,11 @@ further_reading:
 
 ## Overview
 
-Issue Team Ownership automates your triaging work by assigning issues to the right teams. There are three independent ways to infer team ownership:
+Issue Team Ownership automates your triaging work by assigning issues to the right teams. There are three independent ways to infer team ownership, in order of priority:
 
-- [Team attribute](#team-attribute): based on the `team` attribute set on the error event at runtime.
-- [CODEOWNERS](#codeowners-file): based on the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
-- [Service ownership](#service-ownership): based on the owner of the service where the issue happens.
-
-When multiple methods apply to the same issue, ownership is resolved in the following priority order:
-1. `team` attribute
-2. `CODEOWNERS` file
-3. Service ownership
+1. [Team attribute](#team-attribute): based on the `team` attribute set on the error event at runtime.
+2. [CODEOWNERS](#codeowners-file): based on the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
+3. [Service ownership](#service-ownership): based on the owner of the service where the issue happens.
 
 ## CODEOWNERS file
 
