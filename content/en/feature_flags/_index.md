@@ -11,14 +11,13 @@ further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Set up Feature Flags for server-side applications"
+- link: "/feature_flags/guide/migrate_from_launchdarkly"
+  tag: "Guide"
+  text: "Migrate Your Feature Flags from LaunchDarkly"
 - link: "/feature_flags/guide/migrate_from_statsig"
   tag: "Guide"
   text: "Migrate Your Feature Flags from Statsig"
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
 
 ## Overview
 

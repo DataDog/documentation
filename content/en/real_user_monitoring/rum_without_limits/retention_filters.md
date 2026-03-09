@@ -11,6 +11,9 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
+  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+    tag: "Blog"
+    text: "Unify and correlate frontend and backend data with retention filters"
 ---
 ## Overview
 

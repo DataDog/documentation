@@ -39,7 +39,7 @@ You can setup using the [API][13], [Terraform][14], or directly in Datadog by fo
 {{% /site-region %}}
 
 ### Configure the Azure integration
-Navigate to [Setup & Configuration][3] and select an Azure account from the menu to pull costs from. If you do not see your Azure account in the list, view your [Azure integration][4] to add your account.
+Navigate to [Setup & Configuration][3], add an Azure account and follow the steps to configure the Azure integration.
 
 ### Generate cost exports
 
@@ -251,7 +251,7 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 
 [1]:  https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]:  https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
-[3]:  https://app.datadoghq.com/cost/setup?cloud=azure
+[3]:  https://app.datadoghq.com/cost/setup
 [4]:  https://app.datadoghq.com/integrations/azure
 [5]:  https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/config
 [6]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli

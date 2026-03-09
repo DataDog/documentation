@@ -241,6 +241,56 @@ NetFlow data is retained for 30 days by default, with options for 15, 30, 60, an
 
 <div class="alert alert-warning">To retain NetFlow data for longer periods of time, contact your account representative.</div>
 
+## Limit flow volume per flush interval
+
+To control NetFlow volume and associated costs, configure the Agent to cap the number of flow records submitted per flush interval. The flush interval is the period during which flows are aggregated before being forwarded to Datadog.
+
+When this limit is enabled, the Agent retains only the **top flows by byte count** up to the configured maximum, and drops lower-volume flows for that flush interval.
+
+### Configuration
+
+**Note**: Requires Agent version `7.75.1` or later.
+
+Configure the following in your `datadog.yaml`:
+
+```yaml
+network_devices:
+  netflow:
+    enabled: true
+    aggregator_max_flows_per_flush_interval: 10000
+```
+
+With this configuration, the Agent submits at most 10,000 NetFlow records per flush interval (5 minutes by default). The Agent prioritizes the highest-volume flows and drops the rest.
+
+### Estimating daily volume
+
+Your approximate daily maximum flow count is:
+
+`max_flows_per_flush_interval * (minutes_per_day / flush_interval_minutes)`
+
+For example, with `10,000` flows per flush and a 5-minute flush interval:
+
+`10,000 * (1440 / 5) = 2,880,000 flows/day`
+
+### Expected behavior
+
+- **Top talkers are prioritized:** This is best for workflows focused on high-volume traffic (for example, bandwidth drivers and noisy links).
+- **Reduced visibility for low-volume flows:** Lower-traffic source/destination pairs may not appear when the cap is reached.
+- **Per-Agent behavior:** The limit is enforced on each Agent independently. If multiple Agents see traffic for the same conversations, they are not globally aggregated before truncation.
+
+### Monitoring truncation
+
+When flow limiting is enabled, the Agent emits metrics you can use to understand how much data is being kept versus dropped:
+
+- `ndm.flow_truncation.flows_total`
+- `ndm.flow_truncation.flows_kept`
+- `ndm.flow_truncation.flows_dropped`
+- `ndm.flow_truncation.keep_ratio`
+- `ndm.flow_truncation.threshold_value`
+- `ndm.flow_truncation.runtime_ms`
+
+Use these metrics to validate your chosen cap and to detect when truncation is occurring frequently (which may indicate you should adjust the cap or the flush interval).
+
 ## Troubleshooting
 
 ### NetFlow packet drops

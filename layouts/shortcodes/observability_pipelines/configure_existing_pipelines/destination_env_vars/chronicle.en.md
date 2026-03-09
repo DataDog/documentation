@@ -1,2 +1,2 @@
 - Google SecOps endpoint URL:
-   - Stored in the environment variable `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
+   - The default environment variable is `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.

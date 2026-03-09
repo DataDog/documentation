@@ -33,7 +33,10 @@ This change comes with a set of [new features](#new-features) that use the new s
 
 - If you use certain API endpoints or Terraform resources, **changes will be required**:
   - For [List findings][15] and [Get a finding][16] API endpoints, update your API calls to use the new unified [Search security findings][18] endpoint.
-  - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax, starting January 28, 2026.
+  - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax:
+    - Starting January 28, 2026, you can migrate your notification rules if they only include finding types that support the new data model (those listed as ***Supported*** in the [Security Findings](#security-findings) table).
+    - If your Terraform notification rules include a finding type that does not yet support the new data model (those listed with ***Support coming later*** in the [Security Findings](#security-findings) table), you should wait until full support is available.
+    - If you choose not to migrate Terraform notification rules whose finding types support the new data model, your existing notification rules continue to operate until full support for all finding types is available. Any ***required*** changes are clearly communicated in advance.
 - If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required**. The following queries are updated automatically in the UI:
   - Explorers
   - Dashboards

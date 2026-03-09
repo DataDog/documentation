@@ -11,11 +11,11 @@ Datadog provides support for custom instrumentation in Rust applications through
 
 Because this library is built on OpenTelemetry, you use the standard OpenTelemetry API to create traces and spans.
 
-## Setup
+## Setup {% #setup-otel-rust %}
 
 To configure your Rust application to send OpenTelemetry traces to Datadog:
 
-### 1. Add dependencies
+### 1. Add dependencies {% #add-dependencies-otel-rust %}
 
 Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.toml`:
 
@@ -23,7 +23,7 @@ Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.to
 cargo add datadog-opentelemetry opentelemetry
 ```
 
-### 2. Initialize the Tracer
+### 2. Initialize the Tracer {% #initialize-tracer-otel-rust %}
 
 In your application's main function, initialize the Datadog tracer provider:
 
@@ -58,17 +58,17 @@ fn main() {
 }
 ```
 
-### 3. Ensure Agent is running
+### 3. Ensure Agent is running {% #ensure-agent-running-otel-rust %}
 
 The Datadog exporter sends traces to the Datadog Agent, which must be running and accessible.
 
-## Configuration
+## Configuration {% #configuration-otel-rust %}
 
 The Datadog Rust SDK is configured using environment variables. For a complete list of options, see the [Configuration documentation][171].
 
-## Examples
+## Examples {% #examples-otel-rust %}
 
-### Get a Tracer
+### Get a Tracer {% #get-a-tracer-otel-rust %}
 
 Get an instance of a `Tracer` from the global provider:
 
@@ -78,7 +78,7 @@ use opentelemetry::global;
 let tracer = global::tracer("my-component");
 ```
 
-### Create a span
+### Create a span {% #create-a-span-otel-rust %}
 
 Use `tracer.in_span` to create a new span. The span is automatically ended when the closure finishes:
 
@@ -95,7 +95,7 @@ fn do_work() {
 }
 ```
 
-### Create a child span
+### Create a child span {% #create-a-child-span-otel-rust %}
 
 To create a child span, nest `in_span` calls:
 
@@ -115,7 +115,7 @@ fn parent_operation() {
 }
 ```
 
-### Add span tags
+### Add span tags {% #add-span-tags-otel-rust %}
 
 Add attributes to a span using the `set_attribute` method:
 
@@ -135,7 +135,7 @@ fn add_tags_to_span() {
 }
 ```
 
-### Add span events
+### Add span events {% #add-span-events-otel-rust %}
 
 Add time-stamped log messages to a span using the `add_event` method:
 
@@ -161,7 +161,7 @@ fn add_events_to_span() {
 }
 ```
 
-## Context propagation
+## Context propagation {% #context-propagation-otel-rust %}
 
 Because Rust does not have automatic instrumentation, you must manually propagate the trace context when making or receiving remote calls to connect traces across services.
 
