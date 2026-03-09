@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog provides a range of features for controlling which users can see and interact with resources in your organization. This page summarizes the available access control capabilities to help you choose the right combination for your team.
+Datadog provides a range of features for controlling which users can see and interact with data and assets across your organization. This page summarizes how Datadog Teams can help you scale your access policies.
 
 ## Access control features
 
