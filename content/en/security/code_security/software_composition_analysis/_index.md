@@ -163,7 +163,6 @@ Software Composition Analysis (SCA) supports the following languages:
 [12]: https://app.datadoghq.com/ci/code-analysis
 [13]: /security/code_security/software_composition_analysis/setup_static/#upload-third-party-sbom-to-datadog
 [14]: /security/code_security/software_composition_analysis/library_inventory
-[15]: /security/code_security/software_composition_analysis/#set-up-sca
 [16]: /pr_gates/
 [17]: /pr_gates/setup
 [18]: /security/code_security/software_composition_analysis/setup_static/?tab=github#link-findings-to-datadog-services-and-teams
