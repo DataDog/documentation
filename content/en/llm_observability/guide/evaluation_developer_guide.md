@@ -15,22 +15,19 @@ further_reading:
 
 ## Overview
 
-This guide covers how to build custom evaluators with the LLM Observability SDK and use them in LLM Experiments and in production.
+This guide covers how to build custom evaluators with the LLM Observability SDK and use them in LLM Experiments and in production. 
 
 ## Key concepts
 
 An **evaluation** measures a specific quality of your LLM application's output, such as accuracy, tone, or harmfulness. You write the evaluation logic inside an **evaluator**, which receives context about the LLM interaction and returns a result.
 
 ### Running evaluators in an Experiment
-
 To test your LLM application against a dataset before deploying, run your evaluators in [LLM Experiments][4]. In Experiments, evaluators run automatically: the SDK calls your evaluator on each distinct record. Use evaluators through the SDK.
 
 ### Running evaluators in production
-
 To monitor the quality of your live LLM responses, run evaluators in production. You can run evaluators manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluations][5]. Use evaluators through the SDK, HTTP API, or the Datadog UI.
 
 For production, there are two approaches:
-
 - **Manual evaluations** (this guide): You run evaluators in your application code and submit results with `LLMObs.submit_evaluation()` or the HTTP API. This gives you full control over evaluation logic and timing.
 - **Custom LLM-as-a-judge evaluations**: You configure evaluations in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
 
@@ -232,7 +229,7 @@ judge = LLMJudge(
         pass_when=True,
     ),
     client_options={
-        "azure_endpoint": "<https://your-resource.openai.azure.com>",
+        "azure_endpoint": "https://your-resource.openai.azure.com",
         "api_version": "2024-10-21",
         "azure_deployment": "gpt-4o",
     },
@@ -295,15 +292,12 @@ Performs string comparison operations between `output_data` and `expected_output
 from ddtrace.llmobs._evaluators import StringCheckEvaluator
 
 # Perform an exact match (default)
-
 evaluator = StringCheckEvaluator(operation="eq", case_sensitive=True)
 
 # Check whether output_data contains expected_output (case-insensitive)
-
 evaluator = StringCheckEvaluator(operation="icontains", strip_whitespace=True)
 
 # Extract field from dict output before comparison
-
 evaluator = StringCheckEvaluator(
     operation="eq",
     output_extractor=lambda x: x.get("message", "") if isinstance(x, dict) else str(x),
@@ -325,14 +319,12 @@ from ddtrace.llmobs._evaluators import RegexMatchEvaluator
 import re
 
 # Validate email format
-
 evaluator = RegexMatchEvaluator(
     pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
     match_mode="fullmatch"
 )
 
 # Validate output pattern (case-insensitive)
-
 evaluator = RegexMatchEvaluator(
     pattern=r"success|completed",
     flags=re.IGNORECASE
@@ -353,11 +345,9 @@ Validates output length constraints.
 from ddtrace.llmobs._evaluators import LengthEvaluator
 
 # Ensure response is 50-200 characters
-
 evaluator = LengthEvaluator(min_length=50, max_length=200, count_type="characters")
 
 # Validate word count
-
 evaluator = LengthEvaluator(min_length=10, max_length=100, count_type="words")
 {{< /code-block >}}
 
@@ -369,11 +359,9 @@ Validates that output is valid JSON, and optionally checks for required keys.
 from ddtrace.llmobs._evaluators import JSONEvaluator
 
 # Validate JSON syntax
-
 evaluator = JSONEvaluator()
 
 # Validate that required keys exist
-
 evaluator = JSONEvaluator(required_keys=["name", "status", "data"])
 {{< /code-block >}}
 
@@ -429,7 +417,6 @@ def evaluator_function(
 {{< /code-block >}}
 
 You can return either:
-
 - A plain value (`str`, `float`, `int`, `bool`, `dict`), or
 - An `EvaluatorResult` for rich results with reasoning and metadata
 
@@ -441,7 +428,6 @@ Pass your evaluators to `LLMObs.experiment()` to run them against every record i
 from ddtrace.llmobs import LLMObs, Dataset, DatasetRecord
 
 # Create dataset
-
 dataset = Dataset(
     name="qa_dataset",
     records=[
@@ -457,17 +443,14 @@ dataset = Dataset(
 )
 
 # Define task
-
 def qa_task(input_data, config):
     return generate_answer(input_data["question"])
 
 # Create evaluators
-
 semantic_eval = SemanticSimilarityEvaluator(threshold=0.7)
 summary_eval = AverageScoreEvaluator("semantic_similarity")
 
 # Run experiment
-
 experiment = LLMObs.experiment(
     name="qa_experiment",
     task=qa_task,
@@ -504,8 +487,7 @@ experiment.run()
 
 #### Mapping dataset data to prompt variables with `transform_fn`
 
-When you configure an LLM-as-a-judge in the Datadog UI, the [prompt template uses variables][6] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps the following:
-
+When you configure an LLM-as-a-judge in the Datadog UI, the [prompt template uses variables][7] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps the following:
 - `input_data` → `span_input`
 - `output_data` → `span_output`
 - `expected_output` → `meta.expected_output`
@@ -673,4 +655,4 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [4]: /llm_observability/experiments
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [6]: /llm_observability/evaluations/deepeval_evaluations/
-
+[7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations#configure-the-prompt
