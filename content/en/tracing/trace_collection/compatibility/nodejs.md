@@ -225,7 +225,7 @@ The [JavaScript and TypeScript Tests][66] page contains a list of instrumented t
 
 ### Known transitive package compatibility
 
-While the Datadog tracer doesn't provide direct support for modules listed here they are known to work as they depend on modules that the tracer does instrument.
+While the Datadog tracer doesn't provide direct support for modules listed here, they are known to work, as they depend on modules that the tracer does instrument.
 
 | Module           | Notes           |
 | ---------------- | --------------- |
