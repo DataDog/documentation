@@ -9,7 +9,7 @@ further_reading:
 ## Overview
 Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
 
-Your feedback is invaluable to Datadog during this preview stage. Please share your feedback using [Datadog Public Slack](https://chat.datadoghq.com/).
+Your feedback is invaluable to Datadog during this preview stage. Please share your feedback with your Customer Success Manager.
 
 
 ## Setup 
@@ -58,7 +58,7 @@ After you define an action, you can find it in the [list of labeled actions][4].
 
 ## Known limitations 
 - Action Management only works for web pages at this time.
-- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with the Product Analytics Product Manager, Milene Darnis, using [Datadog Public Slack](https://chat.datadoghq.com/) to inform future improvements. 
+- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with your Customer Success Manager to inform future improvements. 
 - Labeled actions can only be used in Funnels and Retention graphs at this time.
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
 

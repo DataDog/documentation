@@ -30,6 +30,22 @@ If you have not already set up LLM Observability:
 
    <div class="alert alert-warning">You must supply both an <code>api_key</code> and <code>app_key</code>.</div>
 
+### APM Trace correlation
+
+To correlate your Experiment spans with [APM Traces][5], run LLM Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
+
+   ```python
+   LLMObs.enable(
+       api_key="<YOUR_API_KEY>",
+       app_key="<YOUR_APP_KEY>",
+       site="datadoghq.com",
+       agentless_enabled=False,  # default — required for APM Trace correlation
+       project_name="<YOUR_PROJECT>",
+   )
+   ```
+
+If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True`, but corresponding APM spans are not generated for Experiment spans from agentless runs.
+
 ## Create a project
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
 You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist in `LLMObs.enable`.
@@ -258,130 +274,8 @@ To create an experiment:
 
 Note: LLM Experiments traces are retained for 90 days.
 
-### Setting up your experiment in CI/CD
-You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
-
-#### GitHub Actions
-This section assumes you have completed the [setup](#setup), [projects](#create-a-project), [datasets](#create-a-dataset), and [experiments](#create-an-experiment) sections successfully. You can use the following Python script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
-
-**Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
-
-```python
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs import EvaluatorResult
-from typing import Dict, Any, Optional, List
-
-LLMObs.enable(
-    api_key="<YOUR_API_KEY>",  # defaults to DD_API_KEY environment variable
-    app_key="<YOUR_APP_KEY>",  # defaults to DD_APP_KEY environment variable
-    site="datadoghq.com",      # defaults to DD_SITE environment variable
-    project_name="<YOUR_PROJECT>"  # defaults to DD_LLMOBS_PROJECT_NAME environment variable, or "default-project" if the environment variable is not set
-)
-
-
-dataset = LLMObs.create_dataset(
-    dataset_name="capitals-of-the-world",
-    project_name="capitals-project",  # optional, defaults to project_name used in LLMObs.enable
-    description="Questions about world capitals",
-    records=[
-        {
-            "input_data": {
-                "question": "What is the capital of China?"
-            },  # required, JSON or string
-            "expected_output": "Beijing",  # optional, JSON or string
-            "metadata": {"difficulty": "easy"},  # optional, JSON
-        },
-        {
-            "input_data": {
-                "question": "Which city serves as the capital of South Africa?"
-            },
-            "expected_output": "Pretoria",
-            "metadata": {"difficulty": "medium"},
-        },
-    ],
-)
-
-def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
-    question = input_data["question"]
-    # Your LLM or processing logic here
-    return "Beijing" if "China" in question else "Unknown"
-
-
-def exact_match(
-    input_data: Dict[str, Any], output_data: str, expected_output: str
-) -> bool:
-    return output_data == expected_output
-
-
-def overlap(
-    input_data: Dict[str, Any], output_data: str, expected_output: str
-) -> float:
-    expected_output_set = set(expected_output)
-    output_set = set(output_data)
-
-    intersection = len(output_set.intersection(expected_output_set))
-    union = len(output_set.union(expected_output_set))
-
-    return intersection / union
-
-
-def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
-    fake_llm_call = "excellent"
-    return EvaluatorResult(
-        value=fake_llm_call,
-        reasoning="the model explains itself",
-        assessment="pass", # or fail
-        tags={"task": "judge_llm_call"},
-    )
-
-
-def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
-    return evaluators_results["exact_match"].count(True)
-
-
-experiment = LLMObs.experiment(
-    name="capital-cities-test",
-    task=task,
-    dataset=dataset,
-    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
-    summary_evaluators=[num_exact_matches],  # optional
-    description="Testing capital cities knowledge",
-    config={"model_name": "gpt-4", "version": "1.0"},
-)
-
-results = experiment.run(jobs=4, raise_errors=True)
-
-print(f"View experiment: {experiment.url}")
-```
-
-```yaml
-name: Experiment SDK Test
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    environment: protected-main-env # The job uses secrets defined in this environment
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13.0' # Or your desired Python version
-      - name: Install Dependencies
-        run: pip install ddtrace>=4.1.0 dotenv
-      - name: Run Script
-        run: python ./experiment_sdk_demo/main.py
-        env:
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
-          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
-```
-
 [1]: /llm_observability/experiments/datasets
 [2]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
 [4]: /llm_observability/guide/evaluation_developer_guide
+[5]: /llm_observability/monitoring/llm_observability_and_apm/

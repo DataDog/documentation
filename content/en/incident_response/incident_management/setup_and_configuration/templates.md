@@ -4,6 +4,9 @@ aliases:
 - /service_management/incident_management/incident_settings/templates/
 - /incident_response/incident_management/incident_settings/templates
 further_reading:
+- link: "/incident_response/incident_management/setup_and_configuration/variables"
+  tag: "Documentation"
+  text: "Incident variables reference"
 - link: "/incident_response/incident_management/notification"
   tag: "Documentation"
   text: "Learn more about Incident Management Notifications"
@@ -17,7 +20,7 @@ Customizable settings for postmortem analysis can provide valuable information a
 
 ## Messages
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications][1], or automated notification rules. Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications][1], or automated notification rules. Message templates use [template variables][4], such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
 
 To create a message template:
 
@@ -32,7 +35,7 @@ To create a message template:
 
 ## Postmortems
 
-Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][2] or [Confluence page][3] that is automatically populated with incident information after an incident has been resolved. Postmortem templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. 
+Postmortem templates are dynamic, reusable templates used to create a [Datadog Notebook][2] or [Confluence page][3] that is automatically populated with incident information after an incident has been resolved. Postmortem templates use [template variables][4], such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the postmortem is being created for. 
 
 To create a postmortem template:
 
@@ -50,3 +53,4 @@ To create a postmortem template:
 [1]: /incident_response/incident_management/notifications
 [2]: /notebooks/
 [3]: /integrations/confluence/
+[4]: /incident_response/incident_management/setup_and_configuration/variables

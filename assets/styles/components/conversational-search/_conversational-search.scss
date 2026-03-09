@@ -1,0 +1,416 @@
+// Variables
+// Colors: Bootstrap body-color (#212529) cascades naturally for text.
+// The site's _global.scss overrides p specifically to #4a4a4a.
+$conv-search-purple: #632CA6;
+$conv-search-purple-dark: #4f2384;
+$conv-search-purple-light: #f3eefa;
+$conv-search-bg: #ffffff;
+$conv-search-surface: #f4f4f5;
+$conv-search-border: #e4e4e7;
+$conv-search-text-muted: #6b7280;
+
+@import "dialog";
+@import "resources";
+@import "message-actions";
+@import "home-ask-ai";
+
+.conv-search-messages {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    --fade: 10px;
+    mask-image:
+        linear-gradient(to bottom, transparent, black var(--fade),
+                         black calc(100% - var(--fade)), transparent);
+    -webkit-mask-image:
+        linear-gradient(to bottom, transparent, black var(--fade),
+                         black calc(100% - var(--fade)), transparent);
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.08);
+        border-radius: 3px;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+    }
+}
+
+// Empty State with Suggestions
+.conv-search-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 32px 40px;
+}
+
+.conv-search-empty-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: $conv-search-purple-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    svg, img {
+        width: 24px;
+        height: 24px;
+        filter: invert(18%) sepia(80%) saturate(3000%) hue-rotate(260deg) brightness(80%) contrast(95%);
+    }
+}
+
+.conv-search-empty-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px 0;
+}
+
+.conv-search-empty-subtitle {
+    font-size: 14px;
+    color: #374151;
+    margin: 0 0 28px 0;
+}
+
+.conv-search-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.conv-search-suggestion {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: transparent;
+    border: 1px solid $conv-search-border;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-align: left;
+    font-family: inherit;
+    line-height: 1.45;
+    color: #374151;
+
+    svg {
+        flex-shrink: 0;
+        color: #374151;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
+    }
+
+    &:hover {
+        border-color: rgba($conv-search-purple, 0.35);
+        background: rgba($conv-search-purple, 0.025);
+        color: $conv-search-purple;
+
+        svg {
+            opacity: 1;
+            transform: translateX(0);
+            color: $conv-search-purple;
+        }
+    }
+}
+
+.conv-search-message {
+    display: flex;
+    flex-direction: column;
+
+    &-user {
+        align-items: flex-end;
+
+        .conv-search-message-content {
+            background: $conv-search-surface;
+            border-radius: 18px 18px 4px 18px;
+            max-width: 80%;
+            padding: 10px 16px;
+            font-size: 16px;
+            line-height: 26px;
+        }
+    }
+
+    &-assistant {
+        align-items: stretch;
+
+        .conv-search-message-content {
+            background: transparent;
+            border-radius: 0;
+            max-width: 100%;
+            padding: 4px 0;
+        }
+    }
+}
+
+// Typography baseline.
+// marked.js sometimes wraps <li> content in <p> (when LLM leaves blank lines
+// between items) and sometimes doesn't. The global p rule sets a different
+// font-size/color than body, creating visible mismatches. We normalise here
+// so every element inside the chat uses the same size, color, and line-height
+// regardless of whether marked.js emits a <p> wrapper or not.
+.conv-search-message-content {
+    font-size: 18px;
+    line-height: 27px;
+    color: #1a1a1a;
+    word-break: break-word;
+
+    p, ul, ol, li, blockquote, td, th, dd, dt {
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    pre {
+        position: relative;
+        background: #fff;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        border-top: 3px solid rgba(119, 0, 255, 0.3);
+        padding: 10px;
+        overflow-x: auto;
+        margin: 12px 0 16px;
+
+        code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #374151;
+            letter-spacing: -0.01em;
+        }
+
+        .hljs-comment,
+        .hljs-quote { color: #177500; font-style: italic; }
+
+        .hljs-keyword,
+        .hljs-selector-tag,
+        .hljs-built_in { color: #a90d91; }
+
+        .hljs-string,
+        .hljs-title,
+        .hljs-section,
+        .hljs-attribute,
+        .hljs-literal,
+        .hljs-template-tag,
+        .hljs-template-variable,
+        .hljs-type,
+        .hljs-addition { color: #c41a16; }
+
+        .hljs-deletion,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo,
+        .hljs-meta { color: #633820; }
+
+        .hljs-doctag,
+        .hljs-attr { color: #836c28; }
+
+        .hljs-symbol,
+        .hljs-bullet,
+        .hljs-subst,
+        .hljs-name { color: #3f6e75; }
+
+        .hljs-number,
+        .hljs-link { color: #1c01ce; }
+
+        .hljs-class .hljs-title,
+        .hljs-title.class_ { color: #3f6e75; }
+
+        .hljs-emphasis { font-style: italic; }
+        .hljs-strong { font-weight: bold; }
+    }
+}
+
+.conv-search-code-copy {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    cursor: pointer;
+    opacity: 1;
+    transition: background 0.15s ease;
+
+    img {
+        opacity: 0.4;
+        transition: opacity 0.15s ease;
+    }
+
+    &:hover {
+        background: #f5f5f5;
+
+        img {
+            opacity: 0.7;
+        }
+    }
+}
+
+// Typing cursor animation
+.conv-search-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background: $conv-search-purple;
+    animation: conv-search-blink 1s infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes conv-search-blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+.conv-search-footer {
+    background: $conv-search-bg;
+    flex-shrink: 0;
+    padding: 6px 0 0;
+    border-radius: 0 0 16px 16px;
+
+    @media (max-height: 600px) {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+    }
+
+    @media (max-width: 640px) {
+        border-radius: 0;
+    }
+}
+
+.conv-search-input-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin: 0 16px;
+    padding: 8px 8px 8px 18px;
+    background: $conv-search-surface;
+    border: 1px solid $conv-search-border;
+    border-radius: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+        border-color: rgba($conv-search-purple, 0.4);
+        box-shadow: 0 0 0 3px rgba($conv-search-purple, 0.05);
+    }
+}
+
+.conv-search-disclaimer {
+    margin: 0;
+    padding: 6px 20px 12px;
+    font-size: 12px;
+    color: $conv-search-text-muted;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.conv-search-input {
+    flex: 1;
+    resize: none;
+    border: none;
+    border-radius: 0;
+    padding: 4px 0;
+    font-size: 15px;
+    font-weight:300;
+    line-height: 1.5;
+    background: transparent;
+    font-family: inherit;
+    min-height: 24px;
+    max-height: 120px;
+
+    &::placeholder {
+        color: $conv-search-text-muted;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.conv-search-send {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: $conv-search-purple;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    transition: background 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+
+    &:hover:not(:disabled) {
+        background: $conv-search-purple-dark;
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.95);
+    }
+
+    &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+// Loading state for messages
+.conv-search-message-assistant .conv-search-message-content:empty::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $conv-search-border;
+    border-top-color: $conv-search-purple;
+    border-radius: 50%;
+    animation: conv-search-spin 0.8s linear infinite;
+}
+
+@keyframes conv-search-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
