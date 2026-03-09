@@ -279,35 +279,51 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-info">The Java client library version 1.12.0 or later is required.</div>
+<div class="alert alert-info">
+The Java client library version 1.48.0 or later is required for embedded git properties. Version 1.12.0 or later is required for other options.
+</div>
 
 ### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: embedding git properties in your build artifact, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-#### Option 1: Docker
+#### Option 1: Embedded git properties (recommended)
+
+{{% sci-java-git-properties %}}
+
+#### Option 2: Docker
 
 {{% sci-docker %}}
 
-#### Option 2: `DD_GIT_*` environment variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
 ### Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have three options depending on your serverless application's setup.
 
-#### Option 1: Datadog tooling
+#### Option 1: Embedded git properties (recommended)
+
+{{% sci-java-git-properties %}}
+
+#### Option 2: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: `DD_GIT_*` environment variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
 ### Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+If you are using a host, you have two options.
+
+#### Option 1: Embedded git properties (recommended)
+
+{{% sci-java-git-properties %}}
+
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
