@@ -11,7 +11,6 @@
     align-items: center;
     padding: 8px;
     cursor: pointer;
-    outline: none;
     background-color: #ffffff00;
     border-radius: 7px 7px 7px 7px;
     transition: background-color 0.3s,
@@ -20,6 +19,15 @@
 /* hide marker on safari */
 .collapsible-header::-webkit-details-marker {
   display: none;
+}
+
+.collapsible-header:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.collapsible-header:focus-visible {
+    outline: 2px solid #632DA6;
+    outline-offset: -2px;
 }
 
 .collapsible-header:hover {
