@@ -58,7 +58,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
-- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans
+- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
 - `product-analytics`: Tools for interacting with [Product Analytics][35] queries
 - `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
@@ -672,7 +672,7 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [27]: /bits_ai/mcp_server/setup
 [28]: /tracing/
 [29]: /feature_flags/
-[30]: /llm_observability/
+[30]: /llm_observability/mcp_server/
 [31]: /network_monitoring/cloud_network_monitoring/
 [32]: /network_monitoring/devices/
 [33]: /security/threats/security_signals/
