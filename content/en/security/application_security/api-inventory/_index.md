@@ -134,6 +134,25 @@ To use this data source, configure the [Source Code Integration][16] with GitHub
 
 To filter for source code endpoints, use **Source Code** in the **Data Source** facet or the query `datasource:source_code`. Scans run when code is pushed to the default branch and on an 8-hour recurring schedule. Discovered endpoints are removed after 12 hours if they are not re-discovered by a subsequent scan.
 
+##### Map source code endpoints to services
+
+Static Endpoint Discovery uses heuristics to infer which service an endpoint belongs to. For more accurate mapping, explicitly define service-to-code relationships using the `codeLocations` field in your [Software Catalog service definition (v3 schema)][17]:
+
+```yaml
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+  owner: my-team
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/org/myrepo.git
+      paths:
+        - path/to/service/code/**
+```
+
+This is the same mapping mechanism used by [Code Security][18]. Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
+
 ### Processing sensitive data
 
 [App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
@@ -293,3 +312,5 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [14]: https://app.datadoghq.com/security/appsec/policies/scanners
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
 [16]: /integrations/guide/source-code-integration/
+[17]: /internal_developer_portal/software_catalog/entity_model/
+[18]: /security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
