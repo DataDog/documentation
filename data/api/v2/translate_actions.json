@@ -3794,6 +3794,10 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "GetLicenses": {
+    "description": "Returns a list of all available license identifiers and display names that can be used for filtering and categorization in SCA.",
+    "summary": "Get list of available licenses"
+  },
   "CreateSCAResolveVulnerableSymbols": {
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",

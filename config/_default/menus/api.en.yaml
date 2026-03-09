@@ -13329,6 +13329,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get list of available licenses
+      url: '#get-list-of-available-licenses'
+      identifier: static-analysis-get-list-of-available-licenses
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLicenses
+        unstable:
+          - v2
+        order: 3
     - name: Post dependencies for analysis
       url: '#post-dependencies-for-analysis'
       identifier: static-analysis-post-dependencies-for-analysis

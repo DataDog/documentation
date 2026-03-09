@@ -36127,6 +36127,51 @@ components:
       required:
       - name
       type: object
+    LicensesListRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/LicensesListRequestData'
+      type: object
+    LicensesListRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LicensesListRequestDataAttributes'
+        id:
+          description: Unique identifier for the request
+          type: string
+        type:
+          $ref: '#/components/schemas/LicensesListRequestDataType'
+      required:
+      - type
+      type: object
+    LicensesListRequestDataAttributes:
+      properties:
+        licenses:
+          description: List of available licenses
+          items:
+            $ref: '#/components/schemas/LicensesListRequestLicense'
+          type: array
+      type: object
+    LicensesListRequestDataType:
+      default: licenserequest
+      enum:
+      - licenserequest
+      example: licenserequest
+      type: string
+      x-enum-varnames:
+      - LICENSEREQUEST
+    LicensesListRequestLicense:
+      properties:
+        display_name:
+          description: The display name of the license
+          type: string
+        identifier:
+          description: The SPDX identifier of the license
+          type: string
+        short_name:
+          description: The short name of the license
+          type: string
+      type: object
     Links:
       description: The JSON:API links related to pagination.
       properties:
@@ -106388,6 +106433,32 @@ paths:
       tags:
       - Static Analysis
       x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis-sca/licenses/list:
+    get:
+      description: Returns a list of all available license identifiers and display
+        names that can be used for filtering and categorization in SCA.
+      operationId: GetLicenses
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicensesListRequest'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - code_analysis_read
+      summary: Get list of available licenses
+      tags:
+      - Static Analysis
+      x-menu-order: 3
       x-unstable: '**Note**: This endpoint may be subject to changes.'
   /api/v2/static-analysis-sca/vulnerabilities/resolve-vulnerable-symbols:
     post:
