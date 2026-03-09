@@ -317,7 +317,7 @@ print(result["ui_url"])
 
 `LLMObs.publish_evaluator()` returns `{"ui_url": "..."}`, which links to the evaluator in Datadog.
 
-<div class="alert alert-info"><ul><li>Each call to <code>LLMObs.publish_evaluator()</code> creates or updates the evaluator draft. Activate it from the Datadog UI to run it in production.
+<div class="alert alert-info"><ul><li>Each call to <code>LLMObs.publish_evaluator()</code> creates or updates the evaluator draft. Activate it from the Datadog UI to run it in production.</div>
 
 ### Built-in evaluators
 
