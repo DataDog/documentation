@@ -201,7 +201,9 @@ To install the extension:
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers [Junie][1] and [AI Assistant][2] as plugins for their range of IDEs. The Datadog MCP can be configured for either plugin.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. The sections below describe how to configure the Datadog MCP Server for use by these plugins.
+
+Alternately, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE. The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs so you are recommended to install the plugin at the same time as you configure the **Datadog MCP Server**.
 
 #### Junie
 
@@ -216,6 +218,8 @@ To configure the Datadog MCP server with Junie, in **Settings** go to `Tools > J
   }
 }
 </code></pre>
+
+You will be prompted to login via OAuth. The status indicator in the settings will display a green tick when the connection is successful.
 
 #### AI Assistant
 
@@ -234,15 +238,22 @@ To configure the Datadog MCP Server with AI Assistant, in **Settings** go to `To
 }
 </code></pre>
 
+The status indicator in the settings will display a green tick when the connection is successful.
+
 #### Agent CLIs
 
-Many developers use an agent CLI such as Claude Code, Codex or Gemini alongside their IDE. See configuration details elsewhere.
+Many developers use an agent CLI such as Claude Code, Codex or Gemini alongside their IDE. 
 
-The [Datadog plugin for JetBrains IDEs][1] integrates with these agent CLIs so for the best experience please install the plugin at the same time as the **Datadog MCP Server**.
+- Claude Code : see the [configuration details][4]
+- Codex : see the [configuration details][5]
+
+The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs so you are recommended to install the plugin at the same time as you configure the **Datadog MCP Server**.
 
 [1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
 [2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
 [3]: /ide_plugins/idea/
+[4]: /bits_ai/mcp_server/setup/?tab=claudecode
+[5]: /bits_ai/mcp_server/setup/?tab=codex
 
 {{% /tab %}}
 
