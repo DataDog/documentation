@@ -80,6 +80,8 @@ logger.info('Hello world!');
 
 {{% serverless-init-env-vars-in-container language="nodejs" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Distributed tracing with Pub/Sub
 
 To get end-to-end distributed traces between Pub/Sub producers and Cloud Run jobs, configure your push subscriptions with the `--push-no-wrapper` and `--push-no-wrapper-write-metadata` flags. This moves message attributes from the JSON body to HTTP headers, allowing Datadog to extract producer trace context and create proper span links.

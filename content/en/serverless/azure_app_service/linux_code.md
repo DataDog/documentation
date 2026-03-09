@@ -454,6 +454,8 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ### View traces in Datadog
 
 After your application restarts, go to Datadog's [APM Service page][2] and search for the service name you set for your application (`DD_SERVICE`).
