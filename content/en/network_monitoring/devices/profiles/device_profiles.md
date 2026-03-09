@@ -28,25 +28,39 @@ The SNMP Profile Manager template provides a guided, GUI-based experience to:
 
 For more information on advanced profile details, review the [Profile Format Reference][3] page.
 
-## Prerequisites 
+## Prerequisites
 
-- The minimum Agent version required is `7.65` or higher.
+- Agent version `7.75.2` or later.
 - [Remote Configuration][14] enabled for your organization.
 - Permissions required:
   - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
   - [NDM Device Profiles Edit][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
-- To [automatically apply created device profiles](#apply-a-profile-to-created-devices) using Remote Configuration, enable the following setting in your `datadog-agent/conf.d/snmp.d/conf.yaml` file:
+- Set `use_remote_config_profiles: true` in your configuration:
+  - For SNMP Autodiscovery, add to `datadog.yaml` under `network_devices.autodiscovery`:
 
-  {{< highlight yaml "hl_lines=5" >}}
+    ```yaml
+    network_devices:
+        autodiscovery:
+          use_remote_config_profiles: true
+    ```
+
+  - For manual SNMP checks, add to `conf.d/snmp.d/conf.yaml` under `init_config`:
+
+    ```yaml
     init_config:
-      loader: core
-      use_device_id_as_hostname: true
-      min_collection_interval: 15
       use_remote_config_profiles: true
+    ```
 
-    instances:
-    ......
-  {{< /highlight >}}
+- If you have existing custom profiles configured on the Agent, upload them to the Profile Manager UI.
+- Enable device scanning by setting `network_devices.default_scan.enabled: true` in `datadog.yaml`:
+
+  ```yaml
+  network_devices:
+      default_scan:
+        enabled: true
+  ```
+
+  **Note**: EXOS 33.1.1 devices may crash when device scan is enabled due to a firmware bug. As a workaround, disable device scan globally (`network_devices.default_scan.enabled: false`) or upgrade the device firmware. If you are affected by this issue, contact [Datadog Support][21] for assistance.
 
 ## Setup
 
@@ -314,23 +328,34 @@ If no matching devices are found, it may be due to the following reasons:
 
 ### Why would a device not be scanned?
 
-* The device scan may take up to 10 minutes to complete. You can monitor the scan's progress in the UI. If errors occur, try restarting the scan or selecting a different [reference device](#step-3-select-reference-devices).
+The device scan may take up to 10 minutes to complete. You can monitor the scan's progress in the UI.
 
-### What if I don't have Remote Configuration enabled on my collectors? 
+If a device is not being scanned, it may be due to the following reasons:
 
-* If you are using an Agent version earlier than `7.47.0` and do not already have [Remote Configuration][18] manually enabled on your hosts, you will not be able to trigger device scans or sync profiles to the Agents through the UI. However, you can perform these steps manually. <br /><br>
+- **Default device scan is disabled**: Device scan is disabled by default in Agent 7.75.2+. Set `network_devices.default_scan.enabled: true` in `datadog.yaml`.
+- **Infinite loop detected**: The scan detected an infinite loop and was terminated. Check the Agent logs for `next OID 'X' is not after last OID 'Y'`. This can occur with some device firmware.
+- **Known issue: EXOS 33.1.1 firmware bug**: EXOS 33.1.1 devices may crash when device scan is enabled. As a workaround, keep device scan disabled or upgrade the device firmware. Contact [Datadog Support][21] for assistance.
 
-   To scan a device, follow the instructions in the UI: <br /><br>
+### Remote Configuration is not enabled on collectors
 
-   {{< img src="/network_device_monitoring/profile_onboarding/remote_configuration.png" alt="Screenshot of the " style="width:80%;">}}
+The Profile Manager requires:
 
-   Or, to apply the profiles to your Agents manually:  
+- Agent version `7.75.2` or later
+- [Remote Configuration][14] enabled
+- `use_remote_config_profiles: true` in your SNMP configuration
+- `network_devices.default_scan.enabled: true` for device scanning
 
-     1. Save the profile.  
-     2. Click on the download button to save a zip file of all your profiles.  
-     3. Upload the zip file to your Agents by following the instructions in the [manually apply a profile to created devices][19] section.
+If you do not have Remote Configuration enabled on your hosts, you cannot trigger device scans or sync profiles to the Agents through the UI. However, you can perform these steps manually.
 
-Datadog strongly recommends enabling Remote Configuration to ensure a seamless, UI-based experience and to minimize unnecessary interactions with the Agent.
+To apply profiles to your Agents manually:
+
+1. Save the profile.
+2. Click the download button to save a zip file of all your profiles.
+3. Upload the zip file to your Agents by following the instructions in the [manually apply a profile to created devices][19] section.
+
+**Note**: In GovCloud environments, device scans cannot be triggered from the UI. Enable the default device scan (`network_devices.default_scan.enabled: true`) and trigger scans manually from the Agent for specific devices.
+
+Datadog recommends enabling Remote Configuration to take advantage of the full UI-based experience and minimize manual Agent interactions.
 
 ## Further Reading
 
@@ -346,3 +371,4 @@ Datadog strongly recommends enabling Remote Configuration to ensure a seamless, 
 [18]: /agent/remote_config/?tab=configurationyamlfile&site=us#setup
 [19]: /network_monitoring/devices/guide/device_profiles/?tab=manual#apply-a-profile-to-created-devices
 [20]: https://docs.datadoghq.com/account_management/rbac/permissions/#network-device-monitoring
+[21]: https://docs.datadoghq.com/help/
