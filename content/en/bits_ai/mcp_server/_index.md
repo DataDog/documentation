@@ -37,6 +37,7 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 ## Disclaimers
 
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
+- The Datadog MCP Server has fair-use rate limits in place. For questions or requests, [contact Datadog support][37].
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
@@ -46,6 +47,19 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
 
 For setup instructions, see [Set Up the Datadog MCP Server][27].
+
+## Monitoring the Datadog MCP Server usage
+
+You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
+
+All tool calls are recorded in the Datadog [Audit Trail][16] with metadata identifying them as MCP actions, including the tool name, arguments, user identity, and the MCP client used. See [Track tool calls in Audit Trail](#track-tool-calls-in-audit-trail) for more information.
+
+Datadog also emits two standard metrics that you can use to monitor MCP Server activity:
+
+- `datadog.mcp.session.starts`: Emitted on each session initialization.
+- `datadog.mcp.tool.calls`: Emitted on each tool call, tagged with `tool_name`.
+
+Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
 
 ## Toolsets
 
@@ -687,3 +701,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [34]: /security/misconfigurations/findings/
 [35]: /product_analytics
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[37]: https://help.datadoghq.com/hc/en-us/requests/new
