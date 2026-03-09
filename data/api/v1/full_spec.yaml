@@ -38239,9 +38239,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -39943,9 +39943,9 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
