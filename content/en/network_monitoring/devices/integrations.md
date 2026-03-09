@@ -25,13 +25,13 @@ Network Device Monitoring (NDM) supports a growing set of integrations for route
 
 The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
-| Integration | Summary | Collection type | Setup guide |
-|---|---|---|---|
-| [Cisco ACI](/integrations/cisco-aci/) | Monitors Cisco Application Centric Infrastructure (ACI) fabric topology, endpoint group health, and tenant policy status through the APIC REST API. | Agent-based | [Setup guide](/integrations/cisco-aci/) |
-| [Cisco SD-WAN](/integrations/cisco-sdwan/) | Collects device health, tunnel status, and WAN link performance metrics from Cisco Catalyst SD-WAN (vManage) through the vManage REST API. | Agent-based | [Setup guide](/integrations/cisco-sdwan/) |
-| [VMware VeloCloud SD-WAN](/integrations/velocloud-sd-wan/) | Monitors SD-WAN edge device health, link quality, and application performance from the VMware VeloCloud Orchestrator API. | Agent-based | [Setup guide](/integrations/velocloud-sd-wan/) |
-| [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Agent-based | [Setup guide](/integrations/fortinet-fortimanager/) |
-| [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based | [Setup guide](/integrations/versa/) |
+| Integration | Summary | Collection type |
+|---|---|---|
+| [Cisco ACI](/integrations/cisco-aci/) | Monitors Cisco Application Centric Infrastructure (ACI) fabric topology, endpoint group health, and tenant policy status through the APIC REST API. | Agent-based |
+| [Cisco SD-WAN](/integrations/cisco-sdwan/) | Collects device health, tunnel status, and WAN link performance metrics from Cisco Catalyst SD-WAN (vManage) through the vManage REST API. | Agent-based |
+| [VMware VeloCloud SD-WAN](/integrations/velocloud-sd-wan/) | Monitors SD-WAN edge device health, link quality, and application performance from the VMware VeloCloud Orchestrator API. | Agent-based |
+| [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Agent-based |
+| [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based |
 {{< partial name="ndm/sd-wan.html" >}}
 
 <br>
@@ -40,9 +40,9 @@ The following integrations cover **software-defined and edge networking platform
 
 The following integrations cover **wireless networking platforms** that support NDM collection. These integrations provide visibility into wireless access points, client connections, and network performance across your wireless infrastructure.
 
-| Integration | Summary | Collection type | Setup guide |
-|---|---|---|---|
-| [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based | [Setup guide](/integrations/meraki/) |
+| Integration | Summary | Collection type |
+|---|---|---|
+| [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based |
 
 {{< partial name="ndm/wireless.html" >}}
 
@@ -52,11 +52,11 @@ The following integrations cover **wireless networking platforms** that support 
 
 NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
 
-| Integration | Summary | Collection type | Setup guide |
-|---|---|---|---|
-| [VMware vSphere](/integrations/vsphere/) | Monitors vSphere hosts, virtual machines, data stores, and clusters for resource utilization and network performance through the vCenter API. | Agent-based | [Setup guide](/integrations/vsphere/) |
-| [OpenStack](/integrations/openstack/) | Collects hypervisor, VM, and virtual network metrics from OpenStack services including Nova, Neutron, and Cinder. | Agent-based | [Setup guide](/integrations/openstack/) |
-| [Proxmox VE](/integrations/proxmox/) | Monitors Proxmox Virtual Environment nodes, VMs, and containers for resource usage and cluster health through the Proxmox REST API. | Agent-based | [Setup guide](/integrations/proxmox/) |
+| Integration | Summary | Collection type |
+|---|---|---|
+| [VMware vSphere](/integrations/vsphere/) | Monitors vSphere hosts, virtual machines, data stores, and clusters for resource utilization and network performance through the vCenter API. | Agent-based |
+| [OpenStack](/integrations/openstack/) | Collects hypervisor, VM, and virtual network metrics from OpenStack services including Nova, Neutron, and Cinder. | Agent-based |
+| [Proxmox VE](/integrations/proxmox/) | Monitors Proxmox Virtual Environment nodes, VMs, and containers for resource usage and cluster health through the Proxmox REST API. | Agent-based |
 
 {{< partial name="ndm/virtualization.html" >}}
 
