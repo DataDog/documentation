@@ -17,12 +17,14 @@ If experiment results are missing after you launch an experiment, start by check
 ### Step 1: Confirm the experiment is assigning users
 
 On the [Experiments][2] page, select your experiment. On the experiment details page, hover over the metric scorecard:
-- If the **User Assignment Count** for each variant is zero, go to [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
-- If the **User Assignment Count** is greater than zero, but the metric values are zero, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
+- If the subject assignment count for each variant is zero, go to [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
+- If the subject assignment count is greater than zero, but the metric values are zero, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
 
-In the following example, the **User Assignment Count** is 12,427 for Variant A and 12,573 for Variant B.
+In the following example, the subject assignment count is 12,427 for Variant A and 12,573 for Variant B.
 
-   {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the user assignment count for each variant." style="width:90%;" >}}
+<div class="alert alert-info"> If your metric scorecard shows <strong>N/A</strong>, this means the analysis has not run yet. Wait for it to run, then continue with the troubleshooting steps, as needed.</div>
+
+   {{< img src="/product_analytics/experiment/troubleshooting_tooltip.png" alt="An experiment scorecard tooltip showing the metric name, the average user-level metric value per variant, the total metric value, and the subject assignment count for each variant." style="width:90%;" >}}
 
 ### Step 2: Confirm the experiment is receiving traffic
 
@@ -49,22 +51,22 @@ If the **Real-time metric overview** section shows no exposure events, the flag 
 
 Confirm the flag is enabled in the environment where your application runs. You can manage environments on the [Environments page][3]. See the [Getting Started with Feature Flags][5] guide for details on environments.
 
-After you fix the flag configuration, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the **User Assignment Count** is increasing.
+After you fix the flag configuration, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
 
 #### The flag is receiving traffic but experiment assignments are zero
 
 If the flag shows exposures but the metric scorecard shows zero assignments, traffic is not reaching the experiment's [targeting rule][6].
 
-The **Targeting Rules & Rollouts** section displays a waterfall, a list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
+The **Targeting Rules & Rollouts** section displays a list of targeting rules that the flag evaluates from top to bottom. Rules above the experiment's targeting rule, such as rules that exclude internal users or specific organizations, can capture traffic before it reaches the experiment.
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="The Targeting Rules & Rollouts section of a feature flag showing the experiment targeting rule with 269 users and rollout percentages for each variant across four stages." style="width:90%;" >}}
 
 Check the following and edit the targeting rule and traffic allocation as needed:
    - **Targeting rule order**: Are targeting rules above the experiment capturing traffic before it reaches the experiment rule?
    - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
-   - **Traffic allocation**: Is the traffic allocation to the experiment set correctly?
+   - **Traffic exposure**: Is the traffic exposure for the targeting rule set correctly?
 
-After making the necessary changes, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the **User Assignment Count** is increasing.
+After making the necessary changes, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
 
 ### Step 3: Confirm metric events are firing
 
@@ -89,20 +91,20 @@ definition page.
 
    {{< img src="/product_analytics/experiment/troubleshooting_metric_page.png" alt="The Edit Metric page showing the metric definition on the left and a bar chart of metric event volume over the past week on the right." style="width:90%;" >}}
 
-   <div class="alert alert-warning">If the event is firing but metric values are still zero, the metric events may not be matching to experiment exposures. Continue to the next section to verify subject key matching.</div>
+If the event is firing but metric values are still zero, the metric events may not be matching to experiment exposures. Continue to the next section to verify that the exposure and metric identifiers match.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Verify subject key matching" level="h4" expanded=false id="verify-subject-key-matching" %}}
+{{% collapse-content title="Verify identifiers match" level="h4" expanded=false id="verify-subject-key-matching" %}}
 
-Datadog matches metric events to experiment exposures using a subject key. If the subject key in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
+Datadog matches metric events to experiment exposures using a set of identifiers: a [`targetingKey`][7]and a [subject type attribute][9]. If the `targetingKey` in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
 1. On the [Experiments][2] page, select your experiment.
 1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log showing the flag key and allocation key as header metadata, with a table of recently exposed users listing timestamp, subject, and variant columns." style="width:90%;" >}}
 
-1. The **Subject** column shows the value your SDK passes as [`targetingKey`][7]. Compare this value to the attribute defined for your subject type on the [Subject Types page][9] (typically `@usr.id`). If these identifiers do not match, update them before proceeding.
+1. The **Subject** column shows the value your SDK passes as [`targetingKey`][7]. Confirm that the `targetingKey` in your SDK matches the [subject type attribute][9] (for example, `@usr.id`). If these identifiers do not match, update them before proceeding.
 
 1. To resolve a mismatch, update either the [`targetingKey`][7] in your SDK or the attribute on the [Subject Types page][9] so that both use the same identifier.
 
@@ -110,7 +112,7 @@ Datadog matches metric events to experiment exposures using a subject key. If th
 
 {{% collapse-content title="Inspect individual sessions" level="h4" expanded=false id="inspect-individual-sessions" %}}
 
-If subject values match and users are assigned to the experiment but experiment results are still missing, inspect individual sessions to identify why specific users are not generating metric events.
+If identifiers match and users are assigned to the experiment but experiment results are still missing, inspect individual sessions to identify why specific users are not generating metric events.
 
 1. On the [Activity Stream page][4], filter for experiment sessions using the following syntax:
 
@@ -134,7 +136,7 @@ If subject values match and users are assigned to the experiment but experiment 
 
 {{% collapse-content title="Check outlier handling" level="h4" expanded=false id="check-outlier-handling" %}}
 
-If you have confirmed that metric events are firing and subject keys match, but metric values are still zero, outlier handling may be the cause.
+If you have confirmed that metric events are firing and identifiers match, but metric values are still zero, outlier handling may be the cause.
 
 When outlier handling is enabled, Datadog calculates a threshold based on the distribution of metric values across users. If the number of users with a metric event is small, Datadog may compute the threshold as zero, which truncates all metric values to zero.
 
