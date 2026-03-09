@@ -3,7 +3,7 @@ This partial contains setup instructions for the Browser SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your web applications with the Datadog Browser SDK. The Browser SDK supports [Real User Monitoring (RUM)][7], [Error Tracking][11], Session Replay, and Product Analytics.
+This page describes how to instrument your web applications with the Datadog Browser SDK. The Browser SDK supports [Real User Monitoring (RUM)][7], [Error Tracking][11], [Session Replay][14], and [Product Analytics][15].
 
 The Browser SDK supports all modern desktop and mobile browsers.
 
