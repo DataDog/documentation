@@ -118,25 +118,29 @@
         }
     }
 
-    // Enum collapsible styles
-    .enum-values-hidden {
-        transition: opacity 0.3s ease-in-out;
-    }
+    // Enum collapsible styles using native <details>/<summary>
+    .enum-details {
+        display: inline;
 
-    .enum-toggle-link {
-        color: #632CA6;
-        text-decoration: none;
-        font-size: 14px;
-        cursor: pointer;
-        white-space: nowrap;
+        summary {
+            display: inline;
+            cursor: pointer;
+            color: #632CA6;
+            font-size: 14px;
+            list-style: none; // removes default disclosure triangle
 
-        &:hover {
-            text-decoration: underline;
-        }
+            &::-webkit-details-marker {
+                display: none; // hide triangle in webkit browsers
+            }
 
-        &:focus {
-            outline: 2px solid #632CA6;
-            outline-offset: 2px;
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &:focus {
+                outline: 2px solid #632CA6;
+                outline-offset: 2px;
+            }
         }
     }
 }

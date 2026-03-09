@@ -182,29 +182,3 @@ if (bodyClassContains('api')) {
         apiSideNav.scrollTop = distanceToTop - 110;
     }
 }
-
-// Enum toggle functionality
-document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('enum-toggle-link')) {
-        event.preventDefault();
-
-        const link = event.target;
-        const tableCell = link.closest('.table-cell');
-        const hiddenEnums = tableCell.querySelector('.enum-values-hidden');
-
-        if (hiddenEnums) {
-            const isHidden = hiddenEnums.classList.contains('d-none');
-
-            if (isHidden) {
-                // Show all enum values
-                hiddenEnums.classList.remove('d-none');
-                link.textContent = 'Show fewer';
-            } else {
-                // Hide extra enum values
-                hiddenEnums.classList.add('d-none');
-                const totalCount = link.getAttribute('data-total');
-                link.textContent = `Show all ${totalCount} values`;
-            }
-        }
-    }
-});

@@ -748,8 +748,8 @@ const descColumn = (key, value) => {
       if (enumArray.length > ENUM_DISPLAY_LIMIT) {
         const visibleEnums = enumArray.slice(0, ENUM_DISPLAY_LIMIT).join(',');
         const hiddenEnums = enumArray.slice(ENUM_DISPLAY_LIMIT).join(',');
-        const totalCount = enumArray.length;
-        desc = `${value.description  } \nAllowed enum values: <code class="enum-values-visible">${visibleEnums}</code><code class="enum-values-hidden d-none">,${hiddenEnums}</code> <a href="#" class="enum-toggle-link" data-total="${totalCount}">Show all ${totalCount} values</a>`;
+        const remainingCount = enumArray.length - ENUM_DISPLAY_LIMIT;
+        desc = `${value.description  } \nAllowed enum values: <code>${visibleEnums}</code><details class="enum-details"><summary class="enum-summary">Show ${remainingCount} more</summary><code>,${hiddenEnums}</code></details>`;
       } else {
         desc = `${value.description  } \nAllowed enum values: <code>${value.enum}</code>`;
       }
