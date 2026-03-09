@@ -60,6 +60,14 @@ For Amazon Web Services (AWS) API Gateway integration, you must set up the follo
 
 API Endpoints are discovered from the Datadog Software Catalog and specifically from API definitions [uploaded to Datadog][13].
 
+To upload an API definition through the Datadog UI:
+
+1. Navigate to the [API view][17] in Software Catalog.
+1. Click **+ API**.
+1. Upload your OpenAPI definition file.
+
+For other methods of adding API definitions, see [Create Entities][13].
+
 For information on what library versions are compatible with API Security Inventory, see [Enabling App and API Protection][11]. [Remote Configuration][1] is required.
 
 |Technology|Minimum tracer version| Support for sensitive data scanning |
@@ -293,3 +301,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [14]: https://app.datadoghq.com/security/appsec/policies/scanners
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
 [16]: /integrations/guide/source-code-integration/
+[17]: https://app.datadoghq.com/software?selectedComponent=api
