@@ -692,6 +692,14 @@ Many organizations use [Azure Resource Management (ARM) templates](https://docs.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for .NET and Node.js on Azure App Service Windows.
+</div>
+
+To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true`.
+
 ## Deployment
 
 {{% aas-workflow-windows %}}
@@ -729,3 +737,4 @@ Still need help? Contact [Datadog support][4].
 [3]: /integrations/azure/
 [4]: /help
 [5]: https://app.datadoghq.com/integrations/azure
+[6]: /profiler/

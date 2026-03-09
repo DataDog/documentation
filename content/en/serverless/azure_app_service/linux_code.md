@@ -472,6 +472,10 @@ To configure your application to submit custom metrics, follow the appropriate s
 
 ### Continuous Profiler
 
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Azure App Service Linux.
+</div>
+
 To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][8].
 
 ## Deployment

@@ -78,6 +78,14 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
+8. **Enable profiling (preview)**.
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Google Cloud Run Jobs.
+</div>
+
+   To enable the [Continuous Profiler][7], set the environment variable `DD_PROFILING_ENABLED=true`.
+
 {{% serverless-init-env-vars-in-container language="nodejs" defaultSource="cloudrun" %}}
 
 {{% svl-tracing-env %}}
@@ -160,3 +168,4 @@ gcloud pubsub subscriptions update \
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
 [5]: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/
 [6]: https://cloud.google.com/pubsub/docs/payload-unwrapping
+[7]: /profiler/
