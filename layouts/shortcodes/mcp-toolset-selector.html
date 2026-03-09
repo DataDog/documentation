@@ -45,9 +45,7 @@
   </div>
 </div>
 
-{{ if not (.Page.Scratch.Get "mcp-toolset-assets") }}
-{{ .Page.Scratch.Set "mcp-toolset-assets" true }}
-<style>
+<style data-mcp-assets>
 .mcp-url-builder {
   margin: 0 0 0.5rem;
   border: 1px solid #d4d8dd;
@@ -305,6 +303,13 @@
 
 <script>
 (function() {
+  if (window._mcpAssetsLoaded) return;
+  window._mcpAssetsLoaded = true;
+
+  // Remove duplicate style blocks (keep only the first)
+  var styles = document.querySelectorAll('style[data-mcp-assets]');
+  for (var i = 1; i < styles.length; i++) styles[i].remove();
+
   var SITES = {
     'US1': 'mcp.datadoghq.com',
     'US3': 'mcp.us3.datadoghq.com',
@@ -312,6 +317,15 @@
     'EU1': 'mcp.datadoghq.eu',
     'AP1': 'mcp.ap1.datadoghq.com',
     'AP2': 'mcp.ap2.datadoghq.com'
+  };
+
+  var APP_SITES = {
+    'US1': 'app.datadoghq.com',
+    'US3': 'us3.datadoghq.com',
+    'US5': 'us5.datadoghq.com',
+    'EU1': 'app.datadoghq.eu',
+    'AP1': 'ap1.datadoghq.com',
+    'AP2': 'ap2.datadoghq.com'
   };
 
   if (!window._mcpState) {
@@ -364,6 +378,12 @@
         badge.textContent = window._mcpState.toolsets.length + ' selected';
         badge.classList.add('mcp-active');
       }
+    });
+
+    var appDomain = APP_SITES[window._mcpState.site] || APP_SITES['US1'];
+    document.querySelectorAll('.mcp-app-link').forEach(function(link) {
+      var path = link.getAttribute('data-path') || '';
+      link.href = 'https://' + appDomain + path;
     });
 
     var codeElements = document.querySelectorAll('#mainContent pre, #mainContent code, #mainContent .highlight');
@@ -432,4 +452,3 @@
   });
 })();
 </script>
-{{ end }}

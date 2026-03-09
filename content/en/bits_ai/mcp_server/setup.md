@@ -41,7 +41,7 @@ Alternatively, add the server directly to `~/.claude.json`:
 }
 ```
 
-### Local binary authentication
+{{% collapse-content title="Local binary authentication" level="h4" %}}
 
 Use this option if remote authentication is not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
@@ -67,6 +67,8 @@ Use this option if remote authentication is not available. After installation, y
    }
    ```
    Or run: `claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli`
+
+{{% /collapse-content %}}
 
 [1]: /getting_started/site/
 {{% /tab %}}
@@ -203,7 +205,7 @@ Example JSON configuration:
 }
 ```
 
-### Local binary authentication
+{{% collapse-content title="Local binary authentication" level="h4" %}}
 
 Local authentication is recommended for Cline and when remote authentication is unreliable.
 
@@ -234,6 +236,8 @@ Local authentication is recommended for Cline and when remote authentication is 
    ```
    On Windows, replace the `command` path with the location of the downloaded `.exe` file (for example, `C:\Users\<USERNAME>\bin\datadog_mcp_cli.exe`).
 
+{{% /collapse-content %}}
+
 [1]: https://github.com/block/goose
 [2]: https://kiro.dev/
 [3]: https://kiro.dev/cli/
@@ -256,6 +260,25 @@ Local authentication is recommended for Cline and when remote authentication is 
 | [Goose][8], [Kiro][9], [Kiro CLI][10], [Cline][11] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+
+## Permissions
+
+MCP Server tools require the following [RBAC permissions][18]:
+
+| Permission | Required for |
+|------------|-------------|
+| `mcp_read` | Tools that read data from Datadog (for example, querying monitors, searching logs, retrieving dashboards) |
+| `mcp_write` | Tools that create or modify resources in Datadog (for example, creating monitors, muting hosts) |
+
+Users with the **Datadog Standard Role** have both permissions by default. If your organization uses [custom roles][19], add the permissions manually:
+
+1. Go to <a href="https://app.datadoghq.com/organization-settings/roles" class="mcp-app-link" data-path="/organization-settings/roles">Organization Settings > Roles</a> as an admin.
+2. Click the role you want to update.
+3. Click **Edit Role** (pencil icon).
+4. Under the permissions list, select the **MCP Read** and **MCP Write** checkboxes.
+5. Click **Save**.
+
+Organization administrators can manage global MCP access and disable write capabilities from the <a href="https://app.datadoghq.com/organization-settings/preferences" class="mcp-app-link" data-path="/organization-settings/preferences">Organization Settings</a> page.
 
 ## Authentication
 
@@ -316,3 +339,5 @@ For security, use a scoped API key and application key from a [service account][
 [15]: /ide_plugins/vscode/?tab=cursor
 [16]: /ide_plugins/vscode/
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[18]: /account_management/rbac/permissions/
+[19]: /account_management/rbac/?tab=datadogapplication#custom-roles
