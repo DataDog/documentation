@@ -13,25 +13,27 @@ aliases:
 - /bits_ai/chat_with_bits_ai
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Bits Assistant is in Preview" >}}
-Request access to Bits Assistant.
+{{< callout url="#" btn_hidden="true" header="Bits Assistant is in Preview" >}}
+Fill out the [Preview form](https://www.datadoghq.com/product-preview/bits-assistant/) to get access to Bits Assistant.
 {{< /callout >}}
 
 
 ## Overview
 
-Bits Assistant is your personal Datadog AI agent that lets you ask, search, and act across Datadog using natural language. To use it, make sure the **Bits Assistant Access** permission is enabled.
+Bits Assistant is an AI-powered companion in Datadog that helps you search and act across Datadog using natural language. Bits Assistant is available across the web application, mobile app, and Slack. To use Bits Assistant, make sure the **Bits Assistant Access** permission is enabled.
 
 Ask Bits Assistant questions like:
-- `Who is on call for the payments service?`
-- `What monitors are currently triggered for the database cluster?`
-- `Summarize any active high-severity incidents.`
-- `Are there any upstream or downstream dependency issues affecting the authentication service?`
-- `What deployments happened in the last 24 hours and did any cause errors?`
+- `Summarize high severity incidents that have occurred in the last day`
+- `Which services have the most errors right now?`
+- `Show me what changed in alerts for the checkout service in the last 24 hours.`
+- `What's causing 400 errors on the checkout endpoint in the last hour?`
+- `How do I configure log collection for the Datadog Agent?`
+- `Do we already have monitors for high latency on the payments service?`
+- `Summarize the key findings from Kubernetes overview dashboard.`
 
 ### Skills
 
-Bits Assistant includes specialized skills for specific Datadog products, available across all platforms.
+Bits Assistant also includes skills that help with specialized tasks.
 
 **Dashboards**
 
@@ -59,11 +61,11 @@ Example prompts:
 
 ### Web Application
 
-The **Bits Assistant Access** permission is required to use this feature.
-
 To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>, or click **Bits AI** in the left-side navigation panel.
 
-{{< img src="bits_ai/getting_started/bits_assistant_panel.png" alt="Bits Assistant side panel showing example prompts including 'What can you do?', 'Summarize any current high-severity incidents', and 'Look up documentation related to the current page'" style="width:40%;">}}
+{{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Assistant side panel showing example prompts" style="width:40%;">}}
+
+{{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Assistant interface showing conversation history and prompt suggestions" style="width:100%;">}}
 
 ### Mobile Application
 
