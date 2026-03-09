@@ -50,7 +50,7 @@ For setup instructions, see [Set Up the Datadog MCP Server][27].
 
 ## Monitoring the Datadog MCP Server usage
 
-You can track Datadog MCP Server usage for your organization using Datadog Metrics and Audit Trail.
+You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
 
 All tool calls are recorded in the Datadog [Audit Trail][16] with metadata identifying them as MCP actions, including the tool name, arguments, user identity, and the MCP client used. See [Track tool calls in Audit Trail](#track-tool-calls-in-audit-trail) for more information.
 
