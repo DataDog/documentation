@@ -6170,24 +6170,24 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_amazon_opensearch
       weight: 401
-    - name: Amazon S3
-      identifier: observability_pipelines_destinations_amazon_s3
-      url: observability_pipelines/destinations/amazon_s3/
-      parent: observability_pipelines_destinations
-      weight: 402
     - name: Amazon Security Lake
       identifier: observability_pipelines_destinations_amazon_security_lake
       url: observability_pipelines/destinations/amazon_security_lake/
       parent: observability_pipelines_destinations
-      weight: 403
+      weight: 402
     - name: Azure Storage
       identifier: observability_pipelines_azure_storage
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
-      weight: 404
+      weight: 403
     - name: CrowdStrike NG-SIEM
       identifier: observability_pipelines_crowdstrike_ng_siem
       url: observability_pipelines/destinations/crowdstrike_ng_siem/
+      parent: observability_pipelines_destinations
+      weight: 404
+    - name: Datadog Archives
+      identifier: observability_pipelines_destinations_datadog_archives
+      url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
       weight: 405
     - name: Datadog CloudPrem
