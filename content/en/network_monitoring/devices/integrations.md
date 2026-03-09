@@ -21,7 +21,9 @@ Network Device Monitoring (NDM) supports a growing set of integrations for route
 
 <div class="alert alert-info">Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 <a href="/network_monitoring/devices/supported_devices/">supported vendors</a>.</div>
 
-## Supported integrations
+## Software Defined Networking
+
+The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
 | Integration | Summary | Collection type | Setup guide |
 |---|---|---|---|
@@ -31,13 +33,6 @@ Network Device Monitoring (NDM) supports a growing set of integrations for route
 | [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Agent-based | [Setup guide](/integrations/fortinet-fortimanager/) |
 | [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based | [Setup guide](/integrations/versa/) |
 | [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based | [Setup guide](/integrations/meraki/) |
-| [VMware vSphere](/integrations/vsphere/) | Monitors vSphere hosts, virtual machines, data stores, and clusters for resource utilization and network performance through the vCenter API. | Agent-based | [Setup guide](/integrations/vsphere/) |
-| [OpenStack](/integrations/openstack/) | Collects hypervisor, VM, and virtual network metrics from OpenStack services including Nova, Neutron, and Cinder. | Agent-based | [Setup guide](/integrations/openstack/) |
-| [Proxmox VE](/integrations/proxmox/) | Monitors Proxmox Virtual Environment nodes, VMs, and containers for resource usage and cluster health through the Proxmox REST API. | Agent-based | [Setup guide](/integrations/proxmox/) |
-
-## Software Defined Networking
-
-The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
 {{< partial name="ndm/sd-wan.html" >}}
 
@@ -54,6 +49,12 @@ The following integrations cover **wireless networking platforms** that support 
 ## Virtualization
 
 NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
+
+| Integration | Summary | Collection type | Setup guide |
+|---|---|---|---|
+| [VMware vSphere](/integrations/vsphere/) | Monitors vSphere hosts, virtual machines, data stores, and clusters for resource utilization and network performance through the vCenter API. | Agent-based | [Setup guide](/integrations/vsphere/) |
+| [OpenStack](/integrations/openstack/) | Collects hypervisor, VM, and virtual network metrics from OpenStack services including Nova, Neutron, and Cinder. | Agent-based | [Setup guide](/integrations/openstack/) |
+| [Proxmox VE](/integrations/proxmox/) | Monitors Proxmox Virtual Environment nodes, VMs, and containers for resource usage and cluster health through the Proxmox REST API. | Agent-based | [Setup guide](/integrations/proxmox/) |
 
 {{< partial name="ndm/virtualization.html" >}}
 
