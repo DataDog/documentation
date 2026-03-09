@@ -32,8 +32,6 @@ The following integrations cover **software-defined and edge networking platform
 | [VMware VeloCloud SD-WAN](/integrations/velocloud-sd-wan/) | Monitors SD-WAN edge device health, link quality, and application performance from the VMware VeloCloud Orchestrator API. | Agent-based | [Setup guide](/integrations/velocloud-sd-wan/) |
 | [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Agent-based | [Setup guide](/integrations/fortinet-fortimanager/) |
 | [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based | [Setup guide](/integrations/versa/) |
-| [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based | [Setup guide](/integrations/meraki/) |
-
 {{< partial name="ndm/sd-wan.html" >}}
 
 <br>
@@ -41,6 +39,10 @@ The following integrations cover **software-defined and edge networking platform
 ## Wireless Networking
 
 The following integrations cover **wireless networking platforms** that support NDM collection. These integrations provide visibility into wireless access points, client connections, and network performance across your wireless infrastructure.
+
+| Integration | Summary | Collection type | Setup guide |
+|---|---|---|---|
+| [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based | [Setup guide](/integrations/meraki/) |
 
 {{< partial name="ndm/wireless.html" >}}
 
