@@ -22,6 +22,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "https://www.youtube.com/watch?v=nuxmVf9ByE0"
+  tag: "Video"
+  text: "Datadog Tips & Tricks: How to write annotations in Kubernetes with JSON for Datadog Autodiscovery"
 ---
 
 This page covers how to install and configure integrations for your Kubernetes infrastructure by using a Datadog feature known as _Autodiscovery_. This enables you to use [variables][16] like `%%host%%` to dynamically populate your configuration settings. For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][12]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Container Discovery Management][23].
