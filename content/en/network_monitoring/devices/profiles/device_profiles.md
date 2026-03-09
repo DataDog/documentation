@@ -336,6 +336,10 @@ If a device is not being scanned, it may be due to the following reasons:
 - **Infinite loop detected**: The scan detected an infinite loop and was terminated. Check the Agent logs for `next OID 'X' is not after last OID 'Y'`. This can occur with some device firmware.
 - **Known issue: EXOS 33.1.1 firmware bug**: EXOS 33.1.1 devices may crash when device scan is enabled. As a workaround, keep device scan disabled or upgrade the device firmware. Contact [Datadog Support][21] for assistance.
 
+{{< site-region region="gov" >}}
+- **GovCloud**: Device scans cannot be triggered from the UI. Enable the default device scan (`network_devices.default_scan.enabled: true`) and trigger scans manually from the Agent for specific devices.
+{{< /site-region >}}
+
 ### Remote Configuration is not enabled on collectors
 
 The Profile Manager requires:
@@ -352,8 +356,6 @@ To apply profiles to your Agents manually:
 1. Save the profile.
 2. Click the download button to save a zip file of all your profiles.
 3. Upload the zip file to your Agents by following the instructions in the [manually apply a profile to created devices][19] section.
-
-**Note**: In GovCloud environments, device scans cannot be triggered from the UI. Enable the default device scan (`network_devices.default_scan.enabled: true`) and trigger scans manually from the Agent for specific devices.
 
 Datadog recommends enabling Remote Configuration to take advantage of the full UI-based experience and minimize manual Agent interactions.
 
