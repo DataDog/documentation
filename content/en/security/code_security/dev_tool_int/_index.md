@@ -10,5 +10,5 @@ disable_toc: false
    {{< nextlink href="/pr_gates/" >}}Pull Request Gates{{< /nextlink >}}
    {{< nextlink href="/security/code_security/dev_tool_int/ide_plugins/" >}}IDE Plugins{{< /nextlink >}}
    {{< nextlink href="/security/code_security/dev_tool_int/git_hooks/" >}}Git Hooks{{< /nextlink >}}
-   {{< nextlink href="/security/code_security/dev_tool_int/mcp_server/" >}}Git Hooks{{< /nextlink >}}
+   {{< nextlink href="/security/code_security/dev_tool_int/mcp_server/" >}}MCP Server{{< /nextlink >}}
 {{< /whatsnext >}}
