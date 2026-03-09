@@ -266,6 +266,7 @@ function initStepper(stepper) {
 
     // Initial render
     render();
+    stepper.classList.add('stepper--initialized');
 }
 
 function initAllSteppers() {

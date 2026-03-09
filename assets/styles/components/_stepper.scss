@@ -8,6 +8,11 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 .stepper {
     margin-bottom: 24px;
     counter-reset: stepper-step;
+    opacity: 0;
+
+    &--initialized {
+        opacity: 1;
+    }
 }
 
 .stepper__steps {
