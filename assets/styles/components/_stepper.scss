@@ -124,8 +124,6 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     }
 }
 
-// Show the first step's content before JS adds --active classes
-.stepper__step:first-child .stepper__step-content,
 .stepper__step--active .stepper__step-content {
     display: block;
 }
@@ -138,7 +136,6 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     padding: 8px 0 16px;
 }
 
-.stepper__step:first-child .stepper__nav,
 .stepper__step--active .stepper__nav {
     display: flex;
 }
@@ -152,14 +149,14 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 .stepper__btn {
     display: inline-flex;
     align-items: center;
-    padding: 6px 16px;
+    padding: 9px 16px 11px;
     border: 1px solid $brand-primary;
     border-radius: 4px;
     background-color: $white;
     color: $brand-primary;
     font-size: 16px;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1;
     cursor: pointer;
     transition: background-color 0.15s, color 0.15s;
 
