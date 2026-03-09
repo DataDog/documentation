@@ -26,7 +26,7 @@ Begin with [Key configuration settings](#key-configuration-settings) to check th
 When a monitor shows `No Data` but you expect it to have data, check these three settings first:
 
 Evaluation window (alert timeframe)
-: The evaluation window defines the time period the monitor uses to evaluate your query. A window that's too small may not capture enough data points.
+: Found under **Evaluation Details**, this setting defines the time period the monitor uses to evaluate your query. A window that's too small may not capture enough data points.
 
 Evaluation delay / New group delay
 : Found under **Advanced Options**, this setting adds a delay before the monitor evaluates data. This is crucial for metrics that report with a delay, such as cloud provider metrics.
@@ -51,7 +51,7 @@ The monitor shows `No Data`, and when you graph the metric, no data appears.
 4. Check if data points appear.
 
 #### Understanding (no groups found) vs. No Data
-While they look similar, `(no groups found)` is specific to multi alert monitors (grouped by a tag). It indicates that the monitor has no active entities to evaluate, whereas `No Data` refers to the metric itself being empty and is controlled by your monitor's [On Missing Data](#enabling-no-data-notifications) settings.
+While they look similar, `(no groups found)` is specific to multi alert monitors (grouped by a tag). It indicates that the monitor has no active entities to evaluate, whereas `No Data` refers to the metric itself being empty and is controlled by your monitor's [If data is missing](#enabling-no-data-notifications) settings.
 
 `(no groups found)` typically occurs in the following cases:
 
@@ -59,7 +59,7 @@ While they look similar, `(no groups found)` is specific to multi alert monitors
 - Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. Different types of groups have different retention periods:
   - **Standard Monitors**: Groups age out after 24 hours.
   - **Host/Service Checks**: Groups age out after 48 hours.
-  - **Custom**: This can be extended up to 72 hours through the **On Missing Data** setting.
+  - **Custom**: This can be extended through the **Missing data options** setting (**If a group stops reporting data, resolve after X hours**).
 
 {{% /collapse-content %}}
 
@@ -67,10 +67,10 @@ While they look similar, `(no groups found)` is specific to multi alert monitors
 
 Data exists but doesn't appear consistently or arrives late.
 
-#### Methods to verify
+#### Verify data frequency
 1. Graph the metric over 2-3 times the evaluation timeframe.
    - Example: For a 5-minute evaluation window, graph the last 15 minutes.
-2. Observe the frequency and consistency of data points.
+2. Look for gaps between data points or inconsistent reporting intervals, which indicate sparse or delayed metrics.
 
 #### Possible solutions
 - In [Metric monitor Advanced Options][6], enable the **"Do not require a full window of data for evaluation"** setting.
@@ -87,7 +87,7 @@ To learn how to apply these changes, see [Adjusting No Data alerts for metric mo
 The monitor shows `No Data` even though data exists.
 
 #### Why this happens
-Rollups aggregate metric data into buckets. If the monitor doesn't have at least one complete bucket, it reports `No Data`. Datadog does not recommend defining rollups in monitor queries. Rollups make sense if you are monitoring one aggregated value over a long period or monitoring sparse metrics (typically over 24 hours).
+Rollups aggregate metric data into buckets. If the monitor doesn't have at least one complete bucket, it reports `No Data`. Datadog does not recommend defining rollups in monitor queries, unless you are monitoring aggregated values over long periods or sparse metrics (typically over 24 hours).
 
 #### Solution
 If you use rollups in your monitor query, add an evaluation delay at least equal to the rollup period. This ensures the monitor has at least one bucket of data to evaluate. For example, a 1-hour rollup requires a 3600-second evaluation delay.
@@ -100,13 +100,12 @@ If you use rollups in your monitor query, add an evaluation delay at least equal
 
 The monitor shows `No Data`, but data exists in dashboards.
 
-#### How to troubleshoot
+#### Verify
 1. Create a notebook or dashboard with your monitor query.
 2. Look for groups with N/A tag values.
-3. Adjust your grouping or scoping to exclude N/A tags.
 
 #### Why this happens
-Monitors use AND logic for tags. If you group by multiple tags, the metric must have all those tags. Datadog automatically applies N/A values in dashboards when tags are missing, but in monitors, this results in a `No Data` status. For example, a query scoped by `env:production` won't match metrics where the `env` tag is N/A.
+When a metric is missing one or more of the tags your monitor groups by, Datadog assigns N/A to those tags. In dashboards, N/A values are displayed automatically, but monitors use AND logic — all specified tags must be present on the metric. If any required tag is N/A, the monitor reports `No Data`. For example, a query scoped by `env:production` won't match metrics where the `env` tag is N/A.
 
 #### Solution
 Ensure that all tags specified in your monitor are present on your metric data. If any tag is missing (shows as N/A), update your metric submission to include all required tags, or adjust your monitor query to group or scope only by tags that are always available.
@@ -122,11 +121,12 @@ Anomaly or Forecast monitor shows `No Data`.
 
 | Cause                        | Details                                                                                                                                                                                                                    |
 |------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Insufficient historical data** | - Anomaly monitors require at least 3 seasons of historical data to establish a baseline.<br>- Forecast monitors need varying amounts of historical data depending on the length of the forecast period.                |
+| **Insufficient historical data** | - Anomaly monitors require at least 3 seasons (repeating cycles, such as daily or weekly) of historical data to establish a baseline.<br>- Forecast monitors need varying amounts of historical data depending on the length of the forecast period.                |
 | **Rollups in the monitor query** | Adding a rollup in the monitor query overrides Datadog's automatic rollup, which is based on your alert timeframe. Datadog automatically selects rollups to provide 4-6 data points per evaluation. Manual rollups may result in too few points, increasing the risk of `No Data` or inaccurate evaluations.<br><br> Adjusting anomaly rollups can be used to address:<br>- **Sparse metrics**: Increase the rollup interval to capture more points<br>- **Noisy metrics**: Increase the rollup to smooth data by averaging points together|
 
 #### Solution
-Review both your data history and whether any manual rollups are present in your monitor query when troubleshooting `No Data` for these monitor types.
+- **Insufficient historical data**: Allow time for the metric to accumulate more data.
+- **Manual rollups**: Remove the rollup from your monitor query, or add an evaluation delay at least equal to the rollup period.
 
 {{% /collapse-content %}}
 
@@ -146,7 +146,7 @@ If any part of an arithmetic expression is NaN (Not a Number, which can happen i
 1. Create a notebook or dashboard.
 2. Graph each part of the arithmetic expression separately.
 3. Identify which query returns NaN.
-4. If one query meets `No Data` criteria, the monitor behaved as expected.
+4. If at least one query meets `No Data` criteria, the monitor behaved as expected.
 
 {{% /collapse-content %}}
 
@@ -154,7 +154,7 @@ If any part of an arithmetic expression is NaN (Not a Number, which can happen i
 ## Troubleshoot No Data alerts
 
 If you expect a `No Data` alert but don't receive one, make sure you have the required settings:
-1. **Notify if data is missing** must be enabled.
+1. **If data is missing** must be set to **Show NO DATA and notify**.
 2. **Notification message** must:
    - Apply to all state changes (without conditional blocks), or
    - Include the `{{#is_no_data}}` template variable.
@@ -168,7 +168,7 @@ If your monitor has the correct settings but still isn't alerting as expected, c
 
 ## Enable No Data notifications
 
-1. Enable the **Notify on No Data** setting.
+1. Set **If data is missing** to **Show NO DATA and notify**.
 2. Set the **No Data timeframe** to at least 2x the evaluation window.
 3. Set the **Notification message** to either:
    - Apply to all state changes (no conditional blocks), or
