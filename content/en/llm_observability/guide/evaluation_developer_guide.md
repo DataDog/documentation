@@ -275,13 +275,14 @@ judge = LLMJudge(
 
 #### Publishing an LLMJudge to Datadog
 
-Use `publish()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without rebuilding the configuration in the UI.
+Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without rebuilding the configuration in the UI.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
+| `evaluator` | `LLMJudge` | Yes | The `LLMJudge` instance to publish. |
 | `ml_app` | `str` | Yes | The LLM application name. |
-| `eval_name` | `Optional[str]` | No | The evaluator name in Datadog. If omitted, the SDK uses `LLMJudge.name`. |
-| `variable_mapping` | `Optional[dict[str, str]]` | No | Remaps `{{...}}` variables in the user prompt before publishing (for example, `{"input_data": "span_input"}`). |
+| `eval_name` | `str` | No | The name to use for the evaluator in Datadog. If omitted, defaults to the `name` set on the `LLMJudge` instance. |
+| `variable_mapping` | `dict[str, str]` | No | Remaps variable names in `user_prompt` to Datadog span field paths in the published evaluator. |
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -306,16 +307,17 @@ judge = LLMJudge(
     name="my-correctness-judge",
 )
 
-result = judge.publish(
+result = LLMObs.publish_evaluator(
+    judge,
     ml_app="my-ml-app",
     variable_mapping={"input_data": "span_input", "output_data": "span_output"},
 )
 print(result["ui_url"])
 {{< /code-block >}}
 
-`publish()` returns `{"ui_url": "..."}`, which links to the evaluator in Datadog.
+`LLMObs.publish_evaluator()` returns `{"ui_url": "..."}`, which links to the evaluator in Datadog.
 
-<div class="alert alert-info"><ul><li>Published evaluators are always created or updated as drafts. Activate them from the Datadog UI to run them in production.</li><li><code>variable_mapping</code> applies only to the <code>user_prompt</code>. The <code>system_prompt</code> is published as-is.</li></ul></div>
+<div class="alert alert-info"><ul><li>Each call to <code>LLMObs.publish_evaluator()</code> creates or updates the evaluator draft. Activate it from the Datadog UI to run it in production.
 
 ### Built-in evaluators
 
