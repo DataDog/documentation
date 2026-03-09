@@ -36,8 +36,10 @@ This approach helps ensure your monitor titles and messages are clear, actionabl
 - **Message field**: The message field supports standard [Markdown formatting][4] and [variables][5]. Use [conditional variables][6] to modulate the notification text sent to different contacts with [@notifications](#notifications). Use [synthetics template variables][23] to enrich the alert message with synthetics failure context.
 
 <div class="alert alert-info"> Markdown formatting support differs by notification method. Some channels support only a subset of Markdown syntax.
-- Slack notifications: Support basic formatting (bold, italics, inline code, links). Markdown headers (for example, #, ##) and tables are not rendered; they appear as plain text.
-- Email notifications: Support basic formatting (bold, italics, inline code, links). Tables are not rendered as Markdown tables and appear as plain text in the message body.
+<ul> 
+  <li/>Slack notifications: Support basic formatting (bold, italics, inline code, links). Markdown headers (for example, <code>#</code>, <code>##</code>) and tables are not rendered; they appear as plain text.
+  <li/>Email notifications: Support basic formatting (bold, italics, inline code, links). Tables are not rendered as Markdown tables and appear as plain text in the message body.
+</ul>
 </div>
 
 {{% collapse-content title="Example monitor message" level="h4" expanded=false %}}
