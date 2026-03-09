@@ -139,6 +139,18 @@ In addition to the [standard full screen options][11], you can apply quick funct
 
 For more information, see [Explore your data in full-screen graph mode][12].
 
+### Compare time
+
+The **Compare Time** tab lets you compare current metric performance against a previous time period to spot changes at a glance. Use this when investigating a spike in system load or validating the impact of a deployment.
+
+To open the **Compare Time** tab, open a widget in inspect mode by clicking the expand icon from the widget control options, then click **Compare Time**.
+
+The tab displays two graphs:
+- **Current**: Your metric data for the active time window. Use the time range dropdown and playback controls to adjust the window.
+- **Previous**: The comparison period. Select **Period**, **Day**, **Week**, **Month**, or **Custom** to set the offset.
+
+To view both periods on the same graph, click **Overlay**. To return to the side-by-side view, click **Grid**.
+
 ### Metrics info
 
 On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.

@@ -49,7 +49,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator: class-based and function-based.
+There are two ways to define an evaluator using LLM Observability: class-based and function-based. In addition to these evaluators, LLM Observability has integrations with open source evaluation frameworks, such as [DeepEval][6], that can be used in LLM Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|
@@ -588,3 +588,4 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [3]: /llm_observability/instrumentation/otel_instrumentation
 [4]: /llm_observability/experiments
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+[6]: /llm_observability/evaluations/deepeval_evaluations/

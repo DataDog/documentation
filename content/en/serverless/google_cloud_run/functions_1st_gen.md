@@ -43,7 +43,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    Use the `--require` option to load and initialize the Serverless Compatibility Layer and the Datadog Node.js tracer in one step.
 
    ```
-   NODE_OPTIONS='--require=@datadog/serverless-compat/init --require=dd-trace/init'
+   NODE_OPTIONS='--require @datadog/serverless-compat/init --require dd-trace/init'
    ```
 
 3. (Optional) **Enable runtime metrics**. See [Node.js Runtime Metrics][2].
@@ -189,6 +189,8 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
    | `service` | The name of your service matching the `DD_SERVICE` env var. |
 
    For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
+
+{{% svl-tracing-env %}}
 
 ## Example functions
 The following examples contain a sample function with tracing and metrics set up.

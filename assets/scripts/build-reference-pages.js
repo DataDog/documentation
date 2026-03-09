@@ -2,10 +2,22 @@
 const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const { marked } = require('marked/lib/marked.umd.js');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
+
+// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
+let marked;
+try {
+  const markedModule = require('marked/lib/marked.umd.js');
+  marked = markedModule.marked || markedModule.default || markedModule;
+} catch (_) {
+  const markedModule = require('marked');
+  marked = { parse: markedModule.parse };
+}
+if (!marked || typeof marked.parse !== 'function') {
+  throw new Error('marked.parse not found. Check marked package version.');
+}
 
 const supportedLangs = ['en'];
 

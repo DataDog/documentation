@@ -13,7 +13,7 @@ further_reading:
 ## Overview
 
 {{< callout url="#" btn_hidden="true" header="Preview Feature">}}
-Annotation Queues are in Preview. To request access, contact ml-observability-product@datadoghq.com.
+Annotation Queues are in Preview.
 {{< /callout >}}
 
 Annotation Queues provide a structured workflow for human review of LLM traces. Use annotation queues to:
