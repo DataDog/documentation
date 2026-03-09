@@ -77,7 +77,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [dns][22]           | Fully supported     |       |
 | [http][24]          | Fully supported     | This includes the built-in `fetch` function.      |
 | [https][25]         | Fully supported     |       |
-| [http2][26]         | Partially supported | Only HTTP2 clients are currently supported and not servers. |
+| [http2][26]         | Partially supported | Only HTTP2 clients are supported, not servers. |
 | [net][27]           | Fully supported     |       |
 
 
