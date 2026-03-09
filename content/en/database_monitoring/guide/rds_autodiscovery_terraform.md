@@ -23,9 +23,9 @@ Prerequisites
 
 ## Overview
 
-1. [Create the Datadog monitoring user on each RDS instance](#1-create-the-datadog-monitoring-user-on-each-rds-instance)
-2. [Set your secrets as environment variables](#2-set-your-secrets-as-environment-variables)
-3. [Deploy the Agent with Terraform](#3-deploy-the-agent-with-terraform)
+1. [Create the Datadog monitoring user on each RDS instance](#create-the-datadog-monitoring-user-on-each-rds-instance)
+2. [Set your secrets as environment variables](#set-your-secrets-as-environment-variables)
+3. [Deploy the Agent with Terraform](#deploy-the-agent-with-terraform)
 
 ## Create the Datadog monitoring user on each RDS instance
 
@@ -40,7 +40,7 @@ Use the same password you will set for `TF_VAR_datadog_db_password` in the next 
 
 Export your secrets to the shell before running Terraform. This avoids storing sensitive values in files on disk.
 
-```bash
+```shell
 export TF_VAR_datadog_api_key="<YOUR_DATADOG_API_KEY>"
 export TF_VAR_datadog_db_password="<YOUR_DATADOG_DB_PASSWORD>"
 ```
@@ -55,7 +55,7 @@ Create a file named `main.tf` with the following content. Replace the following 
 - `vpc_id` — the ID of your existing VPC
 - `subnet_id` — the ID of the subnet to deploy the Agent into
 
-```hcl
+```shell
 terraform {
   required_version = ">= 1.3.0"
   required_providers {
@@ -225,7 +225,7 @@ resource "aws_instance" "agent" {
 
 Initialize and apply:
 
-```bash
+```shell
 terraform init
 terraform apply
 ```
