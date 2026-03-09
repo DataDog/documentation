@@ -41,19 +41,11 @@ Choose which metrics the policy applies to.
 
 Scope a policy using one or more of the following options:
 
-Policy type
-: * **Include tags** (define an allowlist of tags that remain queryable)
-  * **Exclude tags** (define a blocklist of tags to aggregate)
-
 Metric names or prefixes
 : Apply the policy to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
 
 Prefix exceptions
 : Exclude specific prefixes from the policy scope (for example, apply to `http.*` except `http.debug.*`)
-
-Metric usage
-: * Apply to metrics not queried within a selected time window
-  * Apply only to metrics tied to Datadog assets such as dashboards, monitors, notebooks, or SLOs
 
 If multiple policies apply to the same metrics, Datadog evaluates them in order. Optionally, use **Replace** behavior to override previously evaluated policies for the selected metrics.
 
@@ -62,13 +54,10 @@ If multiple policies apply to the same metrics, Datadog evaluates them in order.
 Define how the policy handles tags for metrics in scope:
 
 Select tags to include or exclude
-: Choose specific tag keys to allow or block.
+: * **Include tags** (use an allowlist of tags that remain queryable)
+  * **Exclude tags** (use a blocklist to define non-queryable tags)
 
-Include tags used on assets
-: Retain tags used on dashboards, monitors, notebooks, or SLOs to avoid breaking critical assets.
-
-Exclude inactive tags
-: Optionally drop tags not queried within a selected time window, with an additional grace period for new tags.
+  Add the tag keys you want to include or exclude.
 
 Merge or replace existing configurations
 : * Merge—applies this policy on top of existing tag configurations. Metrics with no prior configuration are unaffected.
