@@ -13,30 +13,55 @@ aliases:
 - /bits_ai/chat_with_bits_ai
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Bits Assistant is in preview. Reach out to your account manager if you have questions.
+{{< callout url="https://www.datadoghq.com/product-preview/bits-assistant/" btn_hidden="false" header="Bits Assistant is in Preview" >}}
+Request access to Bits Assistant.
 {{< /callout >}}
 
 
-## Bits Assistant in Datadog
+## Overview
 
-Bits Assistant brings conversational AI to Datadog, enabling you to explore and act on your observability data using natural language. Query logs, metrics, traces, dashboards, monitors, infrastructure, and more—all from a single intelligent interface.
+Bits Assistant is your personal Datadog AI agent that lets you ask, search, and act across Datadog using natural language. To use it, make sure the **Bits Assistant Access** permission is enabled.
 
-You can ask Bits Assistant questions such as:
-- `Who is on call for example-service?`
-- `Find me the example-service dashboard.`
-- `What is going on with example-service?`
-- `Are there any issues with example-service's dependencies?`
+Ask Bits Assistant questions like:
+- `Who is on call for the payments service?`
+- `What monitors are currently triggered for the database cluster?`
+- `Summarize any active high-severity incidents.`
+- `Are there any upstream or downstream dependency issues affecting the authentication service?`
+- `What deployments happened in the last 24 hours and did any cause errors?`
 
-When relevant to your query, Bits Assistant surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
+### Skills
+
+Bits Assistant includes specialized skills for specific Datadog products, available across all platforms.
+
+**Dashboards**
+
+Build dashboards and widgets from natural language descriptions.
+
+Example prompts:
+- `Show me a dashboard of high-impact alerts from the past week and which services they affected`
+- `Add a widget about CPU usage in the payments service`
+
+**Notebooks**
+
+Create investigation notebooks and enhance existing ones with summaries and analysis.
+
+Example prompts:
+- `Create an investigation for the recent spike of errors in the checkout service`
+- `Add an executive summary for this cost spike report`
+
+**Cloud Cost Management**
+
+Investigate cost changes and identify the teams or resources responsible.
+
+Example prompts:
+- `Investigate why EC2 costs changed between January and February`
+- `Which teams are responsible for the highest S3 storage costs this month?`
 
 ### Web Application
 
 The **Bits Assistant Access** permission is required to use this feature.
 
-To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, click **Bits AI** in the left-side navigation panel, or use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
-
-Some responses from Bits Assistant include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
+To open Bits Assistant, click **Ask Bits** in the top-right of the navigation bar, use <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>, or click **Bits AI** in the left-side navigation panel.
 
 {{< img src="bits_ai/getting_started/bits_assistant_panel.png" alt="Bits Assistant side panel showing example prompts including 'What can you do?', 'Summarize any current high-severity incidents', and 'Look up documentation related to the current page'" style="width:40%;">}}
 
@@ -44,7 +69,7 @@ Some responses from Bits Assistant include a **suggestions** button. Clicking it
 
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
-## Bits Assistant in Slack
+### Slack
 
 1. [Connect your Datadog account to your Slack workspace][1].
 1. In Slack, use the `/dd connect` command to display a list of accounts to connect to.
