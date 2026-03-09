@@ -18,7 +18,10 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 - [Team attribute](#team-attribute): based on the `team` attribute set on the error event at runtime.
 - [Service ownership](#service-ownership): based on the owner of the service where the issue happens.
 
-When multiple methods apply to the same issue, ownership is resolved in the following priority order: `team` attribute, `CODEOWNERS`, then service ownership.
+When multiple methods apply to the same issue, ownership is resolved in the following priority order:
+1. `team` attribute,
+2. `CODEOWNERS` file,
+3. Service ownership.
 
 ## CODEOWNERS file
 
