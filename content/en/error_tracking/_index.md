@@ -2,6 +2,9 @@
 title: Error Tracking
 disable_toc: false
 further_reading:
+- link: "/ide_plugins/idea/error_tracking/"
+  tag: "Documentation"
+  text: "Learn more about Error Tracking in JetBrains IDEs"
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
   text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
@@ -20,6 +23,10 @@ further_reading:
 {{% error-tracking-description %}}
 
 Additional features are available depending on the source of the error. See [supported error sources](#supported-error-sources).
+
+## For developers
+
+Developers can triage and fix issues completely within IntelliJ IDEA, PyCharm, WebStorm, GoLand, PhpStorm and RubyMine via the [Error Tracking integration][8] provided by the **Datadog plugin for JetBrains IDEs**. The plugin provides a convenient workflow to provide error context to your local AI agent to analyze and fix errors.
 
 ## Getting started
 
@@ -62,3 +69,4 @@ For details, see the product-specific Error Tracking documentation:
 [5]: /error_tracking/explorer
 [6]: /error_tracking/frontend/browser
 [7]: /error_tracking/frontend/mobile
+[8]: /ide_plugins/idea/error_tracking/
