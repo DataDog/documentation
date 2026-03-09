@@ -209,7 +209,7 @@ In order to search log events from your archives, Datadog uses a service account
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/archives/?tab=awss3
-[2]: /observability_pipelines/destinations/amazon_s3/?tab=docker
+[2]: /observability_pipelines/destinations/datadog_archives/?tab=docker
 [3]: /logs/log_configuration/archives/?tab=awss3
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/
