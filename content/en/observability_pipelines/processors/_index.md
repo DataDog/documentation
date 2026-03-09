@@ -91,7 +91,7 @@ You can organize your processors into logical groups to help you manage them. Ea
 
 Processor groups and the processors within each group are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To change the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
-**Note**: There is a limit of 25 processor groups for a pipeline canvas. For example, if you have a dual ship pipeline with two destinations, the combined number of processor groups across both destinations cannot exceed 25. You could have 15 groups on one destination and 10 on the other, or any other combination up to a total of 25 groups.
+**Note**: There is a limit of 25 processor groups per pipeline canvas. For example, in a dual-ship pipeline with two destinations, the combined number of processor groups across both destinations cannot exceed 25. You can have the groups in any combination, such as 15 on one destination and 10 on the other.
 
 ## Further Reading
 
