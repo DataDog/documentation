@@ -345,7 +345,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 | [Claude&nbsp;Desktop][5] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=claude-desktop#installation) as needed. |
 | [Codex CLI][6] | OpenAI | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
-| [JetBrains IDEs][18] | JetBrains | |
+| [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
 | [Goose][8], [Kiro][9], [Kiro CLI][10], [Cline][11] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
