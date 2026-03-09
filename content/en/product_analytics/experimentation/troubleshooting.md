@@ -65,7 +65,7 @@ Check the following and edit the targeting rule and traffic allocation as needed
    - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
    - **Traffic allocation**: Is the traffic allocation to the experiment set correctly?
 
-After you update the targeting rules, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the **User Assignment Count** is increasing.
+After making the necessary changes, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the **User Assignment Count** is increasing.
 
 ### Step 3: Confirm metric events are firing
 
