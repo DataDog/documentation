@@ -28,9 +28,7 @@ The Datadog Feature Flags SDK for Android is built on [OpenFeature][1], an open 
 Here's a minimal example to get feature flags working in your Android app:
 
 {{< code-block lang="kotlin" >}}
-// 1. Add dependencies to build.gradle:
-//    implementation "com.datadoghq:dd-sdk-android-flags:<latest-version>"
-//    implementation "com.datadoghq:dd-sdk-android-flags-openfeature:<latest-version>"
+// 1. Add dependencies (see Installation section)
 
 // 2. Initialize Datadog SDK (in Application.onCreate)
 val configuration = Configuration.Builder(
@@ -38,7 +36,7 @@ val configuration = Configuration.Builder(
     env = "<ENV_NAME>",
     variant = "<APP_VARIANT_NAME>"
 )
-    .useSite(DatadogSite.US1) // Use your Datadog site
+    .useSite(DatadogSite.{{< region-param key="dd_site_name" code="true" >}})
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
@@ -80,7 +78,7 @@ dependencies {
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This ensures all feature flag evaluations and telemetry are captured correctly.
+Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly.
 
 ```kotlin
 val configuration = Configuration.Builder(
@@ -88,7 +86,7 @@ val configuration = Configuration.Builder(
     env = "<ENV_NAME>",
     variant = "<APP_VARIANT_NAME>"
 )
-    .useSite(DatadogSite.{{< region-param key="jenkins_site_name" code="true" >}})
+    .useSite(DatadogSite.{{< region-param key="dd_site_name" code="true" >}})
     .build()
 
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
@@ -233,7 +231,7 @@ val fontSize = config.asStructure()?.get("fontSize")?.asInteger()
 
 ### Flag evaluation details
 
-When you need more than just the flag value, you can get detailed evaluation metadata including the evaluated value, variant name, reason, and any error codes:
+When you need more than the flag value, you can get detailed evaluation metadata including the evaluated value, variant name, reason, and any error codes:
 
 {{< code-block lang="kotlin" >}}
 val details = client.getStringDetails(
@@ -304,7 +302,7 @@ For most applications, the OpenFeature API described above is the recommended ap
 
 - Require **multiple independent evaluation contexts** in the same app (for example, different contexts for different users in a multi-user app)
 - Want to work with **native Kotlin types** directly (`JSONObject` instead of `Value.Structure`)
-- Need **fine-grained control** over client life cycle and configuration per instance
+- Need **fine-grained control** over client lifecycle and configuration per instance
 
 ### Installation (FlagsClient)
 
@@ -430,7 +428,7 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 | **Evaluation Context** | Global/static | Per client instance |
 | **Structured Flags** | `Value.Structure` | `JSONObject` |
 | **Type Safety** | OpenFeature `Value` types | Kotlin-native types |
-| **Vendor Lock-in** | Low (easy to swap) | Higher (Datadog-specific) |
+| **Vendor Lock-in** | Low (vendor-neutral) | Higher (Datadog-specific) |
 | **State Management** | Flow-based observation | Manual listener registration |
 
 ## Further reading
