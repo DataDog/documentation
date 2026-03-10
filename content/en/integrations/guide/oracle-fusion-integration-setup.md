@@ -15,11 +15,11 @@ Use this guide to give Datadog access to Oracle Fusion REST APIs using OAuth 2.0
 
 Datadog queries Oracle Fusion REST APIs, including enterprise service scheduler (ESS) logs and data from enterprise resource planning (ERP), human capital management (HCM), supply chain management and manufacturing (SCM), customer experience (CX), and more. To set up the integration, create the following components in your Fusion environment:
 
-1. **Confidential Application**: An OAuth 2.0 client used for secure machine-to-machine authentication.
-2. **Integration User**: A dedicated Fusion user with read-only and ESS-related roles, created in Fusion Security Console.
-3. **Role Assignments**: Permissions for Datadog to read job logs and REST resources, granted to the integration user.
-4. **Datadog tile configuration**: The credentials and URLs collected during setup, entered in the Oracle Fusion integration tile.
-5. **Confidential application user assignment** (optional): Associates the integration user with the confidential application so that OAuth tokens carry the correct identity and roles.
+1. [**Confidential Application**](#create-a-confidential-application): An OAuth 2.0 client used for secure machine-to-machine authentication.
+2. [**Integration User**](#create-a-fusion-integration-user): A dedicated Fusion user with read-only and ESS-related roles, created in Fusion Security Console.
+3. [**Role Assignments**](#assign-required-roles): Permissions for Datadog to read job logs and REST resources, granted to the integration user.
+4. [**Datadog tile configuration**](#configure-the-datadog-tile): The credentials and URLs collected during setup, entered in the Oracle Fusion integration tile.
+5. [**Confidential application user assignment**](#link-the-confidential-application-to-the-integration-user-optional) (optional): Associates the integration user with the confidential application so that OAuth tokens carry the correct identity and roles.
 
 After configuration is complete, Datadog obtains OAuth access tokens from your Fusion Identity Domain and uses them to call your Fusion REST APIs.
 
