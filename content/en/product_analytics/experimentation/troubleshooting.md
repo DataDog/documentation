@@ -83,9 +83,7 @@ Work through the following checks in order. Each builds on the previous one, so 
 
 {{% collapse-content title="Check the metric scorecard" level="h4" expanded=true id="check-the-metric-scorecard" %}}
 
-1. From the metric scorecard you checked in [Step 1](#step-1-confirm-the-experiment-is-assigning-users), hover over the metric with a
-zero value and click the &#8942; menu icon. Select **Edit Metric** to open the metric
-definition page.
+1. From the metric scorecard you checked in [Step 1](#step-1-confirm-the-experiment-is-assigning-users), hover over the metric with a zero value and click the &#8942; menu icon. Select **Edit Metric** to open the metric definition page.
 
 1. Verify that the metric event name is correct (for example, check for typos). Then, review the event volume chart on the right side of the page to confirm the event is firing.
 
@@ -103,7 +101,7 @@ Datadog matches metric events to experiment exposures using a set of identifiers
 
 If the `targetingKey` in your SDK does not match the subject type attribute configured in Datadog, the experiment cannot associate metrics with users.
 
-1. On the [Experiments][2] page, select your experiment.
+1. On the [Experiments][2] page, select your experiment to open its detail page.
 1. Select the **Flag & Exposures** tab. Then, click **View Exposures Log** to see a list of recently exposed subjects. For details on how exposure events are tracked, see the [SDK documentation][8].
 
    {{< img src="/product_analytics/experiment/troubleshooting_exposure_log1.png" alt="The Exposures log showing the flag key and allocation key as header metadata, with a table of recently exposed users listing timestamp, subject, and variant columns." style="width:90%;" >}}
