@@ -48,7 +48,7 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 
 ### Review and prioritize vulnerabilities
 
-The [vulnerabilities explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST, IAST, Secrets Scanning, and IaC). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
+The [Vulnerabilities Explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST, IAST, Secrets Scanning, and IaC). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 To assist in prioritizing remediation, Datadog modifies the base CVSS score into the **Datadog Severity Score** by incorporating runtime context and exploitability signals. These factors help distinguish theoretical risk from vulnerabilities that are more likely to be exploited in real-world environments. The table below describes how each factor influences the final score.
 
