@@ -36,7 +36,18 @@
 <body
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
   {{- with partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
-  <div class="visually-hidden exclude-from-md">For a plaintext version of this page, see: {{ . }}</div>
+  <!-- Test 1: visually-hidden (Bootstrap sr-only pattern with clip) -->
+  <div class="visually-hidden exclude-from-md" data-test="visually-hidden">LLM-TEST-1-VISUALLY-HIDDEN: For a plaintext version of this page, see: {{ . }}</div>
+  <!-- Test 2: position off-screen -->
+  <div style="position:absolute;left:-9999px" class="exclude-from-md" data-test="offscreen">LLM-TEST-2-OFFSCREEN: For a plaintext version of this page, see: {{ . }}</div>
+  <!-- Test 3: opacity zero only -->
+  <div style="opacity:0" class="exclude-from-md" data-test="opacity">LLM-TEST-3-OPACITY: For a plaintext version of this page, see: {{ . }}</div>
+  <!-- Test 4: font-size zero, transparent color -->
+  <div style="font-size:0;color:transparent" class="exclude-from-md" data-test="fontsize">LLM-TEST-4-FONTSIZE: For a plaintext version of this page, see: {{ . }}</div>
+  <!-- Test 5: height 1px, overflow hidden (no clip) -->
+  <div style="height:1px;overflow:hidden" class="exclude-from-md" data-test="overflow">LLM-TEST-5-OVERFLOW: For a plaintext version of this page, see: {{ . }}</div>
+  <!-- Test 6: display:none (baseline - expected to fail) -->
+  <div style="display:none" class="exclude-from-md" data-test="displaynone">LLM-TEST-6-DISPLAYNONE: For a plaintext version of this page, see: {{ . }}</div>
   {{- end -}}
 
   <div class="greyside">
