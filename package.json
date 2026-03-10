@@ -1,7 +1,7 @@
 {
     "name": "docs",
     "version": "1.0.0",
-    "description": "Datadog Docs built on HUGO",
+    "description": "Datadog Docs built on HUGO!",
     "private": true,
     "scripts": {
         "typesense:sync:preview": "NODE_ENV=preview node ./local/bin/js/typesense_sync.cjs",
