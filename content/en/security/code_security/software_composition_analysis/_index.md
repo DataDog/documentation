@@ -133,7 +133,6 @@ Libraries that are loaded more than 1 hour after the service has started.
 - **Cold Libraries:**
 Libraries from services that are alive for less than 2 hours (such as jobs).
   - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
-  
 ## SCA language support
 
 Software Composition Analysis (SCA) supports the following languages:
