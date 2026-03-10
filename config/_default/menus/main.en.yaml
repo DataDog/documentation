@@ -3471,11 +3471,16 @@ menu:
       parent: serverless
       identifier: serverless_azure_functions
       weight: 6
+    - name: Azure Logic Apps (Preview)
+      url: serverless/logic_apps
+      parent: serverless
+      identifier: serverless_logic_apps
+      weight: 7
     - name: Google Cloud Run
       url: serverless/google_cloud_run
       parent: serverless
       identifier: serverless_gcr
-      weight: 7
+      weight: 8
     - name: Containers
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
@@ -3495,17 +3500,17 @@ menu:
       url: serverless/libraries_integrations
       parent: serverless
       identifier: libraries_integrations
-      weight: 8
+      weight: 9
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 9
+      weight: 10
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 10
+      weight: 11
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
