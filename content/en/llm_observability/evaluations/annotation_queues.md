@@ -61,7 +61,7 @@ Instead of manually selecting traces, use Automation Rules to route traces into 
 
 To add an annotation queue action to an Automation Rule:
 1. Navigate to  [**AI Observability > Traces**][1]
-2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax]("https://docs.datadoghq.com/logs/explorer/search_syntax/").
+2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 3. Click **Automate Query**
 4. Configure sampling rate (for example, 10% of matching traces).
 5. Under **Actions**, select **Add to Annotation Queue**.
