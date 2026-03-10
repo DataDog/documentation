@@ -21,7 +21,7 @@ To help maintain PCI compliance, **Datadog strongly recommends** the use of the 
 - [**Sensitive Data Scanner**][2]: discover, classify, and redact sensitive cardholder data
 - [**Audit Trail**][3]: search and analyze detailed audit events for up to 90 days for long-term retention and archiving
 - [**File Integrity Monitoring**][4]: watch for changes to key files and directories
-- [**Cloud Security Management**][5]: track conformance to requirements of industry benchmarks and other controls
+- [**Cloud Security**][5]: track conformance to requirements of industry benchmarks and other controls
 
 ## Further Reading
 
