@@ -63,7 +63,7 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 
 ### View findings by repository
 
-The [repositories explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC).  Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
+The [repositories explorer][12] provides a repository-centric view of all scan results across Static Code Analysis (SAST), Software Composition Analysis (SCA), Secrets Scanning, and Infrastructure as Code (IaC). Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.
 * The **Library Vulnerabilities** tab contains the vulnerable library versions found by Datadog SCA
 * The **Library Catalog** tab contains all of the libraries (vulnerable or not) found by Datadog SCA.
 
@@ -85,7 +85,7 @@ You can configure PR Gates to block on:
 - **Security vulnerabilities**: libraries with known CVEs above a configured severity threshold.
 - **License violations**: libraries using licenses that do not comply with your organization's policy.
 
-PR Gates only fails and blocks a PR if the developer **introduces a new violation as part of that PR** — existing violations already present in the codebase before the PR was opened do not trigger a block. By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. GitLab support is currently in preview. For setup instructions, see [Set up PR Gate Rules][17].
+PR Gates only fails and blocks a PR if the developer **introduces a new violation as part of that PR**—existing violations already present in the codebase before the PR was opened do not trigger a block. By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. GitLab support is currently in preview. For setup instructions, see [Set up PR Gate Rules][17].
 
 ### Manage your library inventory
 
@@ -100,7 +100,7 @@ To learn more about how the inventory is generated, how Static and Runtime data 
 
 ### Library vulnerability context in APM
 
-SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
+SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match against current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
 
 ## Understanding SCA views
 
@@ -155,7 +155,6 @@ Software Composition Analysis (SCA) supports the following languages:
 [1]: /security/code_security/software_composition_analysis/setup_static/
 [2]: /security/code_security/software_composition_analysis/setup_runtime/
 [3]: https://app.datadoghq.com/security/appsec/vm
-[5]: /getting_started/code_security/
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
 [9]: /account_management/rbac/permissions/#integrations
 [10]: https://app.datadoghq.com/services?lens=Security
