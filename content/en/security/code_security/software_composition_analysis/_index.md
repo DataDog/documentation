@@ -87,7 +87,7 @@ You can configure PR Gates to block on:
 - **Security vulnerabilities**: libraries with known CVEs above a configured severity threshold.
 - **License violations**: libraries using licenses that do not comply with your organization's policy.
 
-PR Gates only fails and blocks a PR if the developer **introduces a new violation as part of that PR**—existing violations already present in the codebase before the PR and its branch were created do not trigger a block. By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
+PR Gates marks a PR check as failed only if the developer **introduces a new violation as part of that PR**—existing violations already present in the codebase before the PR and its branch were created do not cause the check to fail. By default, failed checks are informational and do not block merging, but you can configure them as blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
 
 ### Manage your library inventory
 
