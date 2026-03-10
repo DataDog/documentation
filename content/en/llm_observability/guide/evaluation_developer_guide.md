@@ -273,9 +273,9 @@ judge = LLMJudge(
 - Use `reasoning=True` in structured outputs to include an explanation in results.
 - Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
 
-#### Publishing an LLMJudge to Datadog
+#### Publishing an LLMJudge as a Datadog managed evaluation
 
-Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without rebuilding the configuration in the UI.
+Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without manually recreating the configuration in the UI.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
