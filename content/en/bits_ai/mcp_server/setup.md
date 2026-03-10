@@ -201,12 +201,12 @@ To install the extension:
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. As an alternative (or in addition to) these plugins many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE. The sections below describe how to configure the Datadog MCP Server for use by these AI tools.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. Alternately, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE. The sections below describe how to configure the Datadog MCP Server for use by these AI tools.
 
 
 #### Junie
 
-To configure the Datadog MCP Server with Junie, in the IDE **Settings** go to `Tools > Junie > MCP Settings` and add:
+To configure the Datadog MCP Server with Junie, navigate to the IDE settings. Go to **Tools** > **Junie** > **MCP Settings** and add the following block:
 
 <pre><code>{
   "mcpServers": {
@@ -218,11 +218,11 @@ To configure the Datadog MCP Server with Junie, in the IDE **Settings** go to `T
 }
 </code></pre>
 
-You will be prompted to login via OAuth. The status indicator in the settings will display a green tick when the connection is successful.
+You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
 
 #### AI Assistant
 
-To configure the Datadog MCP Server with AI Assistant, in the IDE **Settings** go to `Tools > AI Assistant > Model Context Protocol (MCP)` and add:
+To configure the Datadog MCP Server with AI Assistant, navigate to the IDE settings. Go to **Tools** > **AI Assistant** > **Model Context Protocol (MCP)** and add the following block:
 
 <pre><code>{
   "mcpServers": {
@@ -237,16 +237,15 @@ To configure the Datadog MCP Server with AI Assistant, in the IDE **Settings** g
 }
 </code></pre>
 
-The status indicator in the settings will display a green tick when the connection is successful.
+The status indicator in the settings displays a green tick when the connection is successful.
 
 #### Agent CLIs
 
-Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. The configuration for these CLI tools is described elsewhere:
+Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
+- [Claude Code][4]
+- [Codex][5]
 
-- Claude Code : see the [configuration details][4]
-- Codex : see the [configuration details][5]
-
-The [Datadog plugin][3] integrates with these agent CLIs so you are recommended to install the plugin at the same time as you configure the **Datadog MCP Server**.
+The [Datadog plugin][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
 
 [1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
 [2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
