@@ -1,6 +1,7 @@
 ---
 title: Ticketing Integrations
 description: "Security ticketing integrations"
+site_support_id: case_management
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
