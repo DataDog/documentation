@@ -28,7 +28,7 @@ Click the **Export** button on the right hand corner and select an option from t
 - Export your search results to a [CI Pipeline monitor][5] that triggers alerts on predefined thresholds.
 - Export your search results to an [existing notebook][6] for reporting or consolidation purposes.
 - Download your search results as a CSV file for individual CI Visibility test or pipeline events and specific aggregations.
-- Export your search results to [sheets][8] for deeper data exploration and visualization.
+- Export your search results to [Datadog Sheets][8] for deeper data exploration and visualization.
 - Export your search results to [DDSQL Editor][9] for complex aggregations and custom analysis.
 
 Options available for some visualization types are not supported in others. For example, you cannot download a distribution graph into a CSV file.
