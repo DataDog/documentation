@@ -1,5 +1,5 @@
 ---
-title: Export Pipeline Executions 
+title: Export Pipeline Executions
 further_reading:
 - link: "/continuous_integration/search/"
   tag: "Documentation"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-You can use your CI Visibility search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search Pipeline Events endpoint][1]. 
+You can use your CI Visibility search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search Pipeline Events endpoint][1].
 
 ## Export the search query or visualization
 
@@ -28,6 +28,8 @@ Click the **Export** button on the right hand corner and select an option from t
 - Export your search results to a [CI Pipeline monitor][5] that triggers alerts on predefined thresholds.
 - Export your search results to an [existing notebook][6] for reporting or consolidation purposes.
 - Download your search results as a CSV file for individual CI Visibility test or pipeline events and specific aggregations.
+- Export your search results to [sheets][8] for deeper data exploration and visualization.
+- Export your search results to [DDSQL Editor][9] for complex aggregations and custom analysis.
 
 Options available for some visualization types are not supported in others. For example, you cannot download a distribution graph into a CSV file.
 
@@ -42,3 +44,5 @@ Options available for some visualization types are not supported in others. For 
 [5]: /monitors/types/ci/
 [6]: /notebooks/
 [7]: /continuous_integration/explorer/saved_views/
+[8]: /sheets
+[9]: /ddsql_editor
