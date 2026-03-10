@@ -31,7 +31,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
 
-<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-to-datadog">Publishing an LLMJudge to Datadog</a>.</div>
+<div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
 
 Learn more about the [compatibility requirements][6].
 
