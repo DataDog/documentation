@@ -273,7 +273,7 @@ To set up the integration:
 
 4. Click **Add Organizations**.
 
-5. Follow the repository installation steps and **run the setup script**. If the script is not run, some DORA metrics calculations will be missing.
+5. Follow the repository installation steps and **run the setup script**. If the script is not run, commits made before a pull request is created will not be associated with that pull request.
 
 6. After the script completes, verify the integration status on the tile. The connected repositories and projects appear in the list.
 
