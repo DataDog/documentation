@@ -70,7 +70,7 @@ Using commit-level granularity provides a more accurate view of engineering perf
 * Change lead time is not available if the most recent deployment of a service was more than 60 days ago.
 * The calculation includes a maximum of 5000 commits per deployment.
 * When squashing commits to merge pull requests:
-  * For GitHub and GitLab: Metrics are emitted for the original commits.
+  * For GitHub, GitLab and Azure DevOps: Metrics are emitted for the original commits.
   * For other Git providers: Metrics are emitted for the new commit added to the target branch.
 * When rebasing, either manually or to merge pull requests, metrics are calculated using the original commit timestamps, but the SHA shown reflects the newly created rebased commit.
 
@@ -90,7 +90,7 @@ Datadog breaks down change lead time into the following fields, which represent 
 
 #### Limitations {#limitations-clt-stages}
 
-* Change lead time stage breakdown metrics are only available when the source of repository metadata is GitHub or GitLab.
+* Change lead time stage breakdown metrics are only available when the source of repository metadata is GitHub, GitLab or Azure DevOps.
 * For most stages, there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
 * When rebasing, either manually or to merge pull requests, the change lead time stage breakdown is unavailable for these commits. This is because rebased commits are not associated with any pull request.
 
