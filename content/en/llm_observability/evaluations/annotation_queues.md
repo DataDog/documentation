@@ -52,6 +52,8 @@ Add traces to a queue manually from the Trace Explorer:
 3. Select individual traces or bulk select multiple traces
 4. Click **Flag for Annotation**
 5. Choose **Create New Queue** or select an existing queue
+
+[1]: https://app.datadoghq.com/llm/traces
 {{% /tab %}}
 
 {{% tab "Using Automation Rules" %}}
@@ -68,6 +70,7 @@ To add an annotation queue action to an Automation Rule:
 
 Traces matching the rule's filters are added to the queue automatically as they arrive.
 
+[1]: https://app.datadoghq.com/llm/traces
 {{% /tab %}}
 {{< /tabs >}}
 
