@@ -14,25 +14,25 @@ Personal Access Tokens are in Preview.
 Personal Access Tokens (PATs) are a credential type that authenticates Datadog API calls. Unlike application keys, PATs do not need to be paired with an API key. They are short-lived and scoped by default, giving you tighter control over what each token can access and how long it remains valid.
 
 With PATs, you can:
-- **Authenticate API calls with a single credential**—no API key required.
-- **Enforce the principle of least privilege** by selecting only the scopes your workflow needs.
-- **Limit the blast radius of leaked credentials** through mandatory time-to-live (TTL) values. Expired tokens are automatically revoked, so inactive credentials do not persist indefinitely.
-- **Separate concerns**: reserve API keys for telemetry submission (Agent, logs, metrics) and use PATs for all other web API calls.
+- Authenticate API calls with a single credential.
+- Enforce the principle of least privilege by selecting only the scopes your workflow needs.
+- Limit the blast radius of leaked credentials through mandatory time-to-live (TTL) values. Expired tokens are automatically revoked, so inactive credentials do not persist indefinitely.
+- Separate concerns by reserving API keys for telemetry submission (Agent, logs, metrics) and use PATs for all other web API calls.
 
 ### PATs compared to application keys
 
 | | Personal Access Tokens | Application keys |
 |---|---|---|
-| Standalone authentication | Yes—no API key pairing needed | No—requires an API key |
-| Scoped by default | Yes—scopes are mandatory | Optional—unscoped by default |
+| Standalone authentication | Yes; no API key pairing needed | No; requires an API key |
+| Scoped by default | Yes; scopes are mandatory | Optional; unscoped by default |
 | Time-to-live (TTL) | Required (24 hours to one year) | No expiration |
-| Identifiable prefix | Yes—`ddpat_` | Yes—`ddap_` (new) |
+| Identifiable prefix | Yes; `ddpat_` | Yes; `ddap_` (new) |
 | Linked to | Individual user | Individual user |
 
 ## Prerequisites
 
-- A Datadog user account with the `user_app_keys` permission to create your own PATs.
-- To manage PATs for other users in the organization, you need the `org_app_keys_write` permission.
+- A Datadog user account with the `user_app_keys` permission
+- The `org_app_keys_write` permission if you want to manage PATs for other users in the organization
 
 ## Create a Personal Access Token
 
@@ -40,16 +40,9 @@ With PATs, you can:
 2. Click **+ New Access Token**.
 3. Enter a **Name** for the token.
 4. Select an **Expiration Date**. The minimum expiration is 24 hours and the maximum is one year from creation.
-5. Click **Select Scopes** to choose the scopes that define what this token can access. Grant only the permissions your workflow requires, then click **Save**.
-
-{{< img src="account_management/personal-access-tokens/pat-create.png" alt="Create a Personal Access Token by entering a name and selecting an expiration date" style="width:80%;" >}}
+5. Click **Select Scopes** to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click **Save**.
 
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time. Copy and store it securely. You cannot retrieve it later.</div>
-
-**Notes:**
-
-- PATs have a minimum expiration of 24 hours and a maximum of one year from creation.
-- All PATs require at least one scope. There is no concept of an unscoped PAT.
 
 ## Use a Personal Access Token
 
@@ -79,9 +72,9 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 
 ### View your tokens
 
-Navigate to [**Personal Settings** > **Access Tokens**][1] to see all PATs associated with your account, including their name, scopes, expiration date, and last usage information.
+Navigate to [**Personal Settings** > **Access Tokens**][1] to see all PATs associated with your account, including their names, scopes, expiration dates, and last usage information.
 
-After creating a token, a details panel displays the token secret, name, Token ID, owner, scopes, and expiration date. From this panel you can also edit or revoke the token.
+After creating a token, a details panel displays the token secret, name, Token ID, owner, scopes, and expiration date. From this panel, you can also edit or revoke the token.
 
 {{< img src="account_management/personal-access-tokens/pat-details.png" alt="Personal Access Token details showing the token secret, name, Token ID, owner, scopes, and expiration" style="width:60%;" >}}
 
@@ -95,7 +88,7 @@ Organization administrators with the `org_app_keys_read` and `org_app_keys_write
 ### Revoke a token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1], or [**Organization Settings** > **Access Tokens**][2] for administrators.
-2. Click **Revoke** next to the token you want to revoke.
+2. Mouse over the token you want to revoke and click the **Revoke Token** icon.
 
 Revoked tokens can no longer authenticate API calls. Revocation takes effect within seconds.
 
