@@ -16,7 +16,7 @@ If experiment results are missing after you launch an experiment, start by check
 
 ### Step 1: Confirm the experiment is assigning users
 
-On the [Experiments][2] page, select your experiment. On the experiment details page, hover over the metric scorecard:
+On the [Experiments][2] page, select your experiment to open its detail page. Hover over the metric scorecard:
 - If the subject assignment count for each variant is zero, go to [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
 - If the subject assignment count is greater than zero, but the metric values are zero, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
 
@@ -30,7 +30,7 @@ In the following example, the subject assignment count is 12,427 for Variant A a
 
 Verify that your feature flag is enabled and evaluates in the correct environment. Then, confirm that traffic reaches the experiment's targeting rule.
 
-1. On the [Experiments][2] page, select your experiment. On the experiment details page, hover over the experiment flag label (for example, `new-product-photos`).
+1. On the [Experiments][2] page, select your experiment to open its detail page. Hover over the experiment flag label (for example, `new-product-photos`).
 1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
@@ -146,14 +146,14 @@ When outlier handling is enabled, Datadog calculates a threshold based on the di
 
 To check if outlier handling is the cause:
 
-1. On the [Experiments][2] page, select your experiment.
+1. On the [Experiments][2] page, select your experiment to open its detail page.
 1. Hover over the metric name, click the &#8942; menu icon, and select **Edit Metric** to open the metric definition page.
-1. On the Edit Metric page, expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
+1. Expand the **Experiment settings** accordion. Under **Outlier handling**, toggle off both **Lower bound percentile** and **Upper bound percentile**.
 1. Save the metric.
-1. To trigger an immediate recompute, go to the **Metrics** section of the experiment
-  details page. Click the &#8942; menu icon next to **Last Updated** and select **run an update now**. Otherwise, wait for the next scheduled update.
+1. To trigger an immediate recompute, go to the **Metrics** section of the experiment's
+  detail page. Click the &#8942; menu icon next to **Last Updated** and select **run an update now**. Otherwise, wait for the next scheduled update.
 
-{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment details page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/troubleshooting_recompute1.png" alt="The experiment's detail page, in the Metrics section showing the Last Updated menu with the option to run an update now." style="width:90%;" >}}
 
 If metric values appear after disabling outlier handling, the threshold was truncating your data. To resolve this, keep outlier handling disabled or set a higher threshold on the **Edit Metric** page.
 
