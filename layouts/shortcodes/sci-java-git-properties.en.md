@@ -32,9 +32,9 @@ Add the following to your `build.gradle.kts`:
 
 ```kotlin
 plugins {
-    id("org.springframework.boot") version "X.X.X" // required
+    id("org.springframework.boot") version "2.5.7" // required
     // ...
-    id("com.gorylenko.gradle-git-properties") version "2.5.2"
+    id("com.gorylenko.gradle-git-properties") version "2.5.7"
 }
 ```
 

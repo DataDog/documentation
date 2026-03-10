@@ -355,20 +355,18 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 
 ## Build inside a Docker container
 
-If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access Git information:
+If your build process is executed in CI within a Docker container, use a [named context][docker-named-context] to make your `.git` folder available at build time:
 
-1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL.
+1. Add your `.git` folder as a named build context:
 
-   ```
-   !.git/HEAD
-   !.git/config
-   !.git/refs
+   ```shell
+   docker build [...] --build-context dotgit=<path to your local .git folder>
    ```
 
-2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is run.
+2. In your `Dockerfile`, mount the `.git` folder before running your build:
 
-   ```
-   COPY .git ./.git
+   ```dockerfile
+   RUN --mount=from=dotgit,target=<path to where you expect .git to be in your build container> <your build command>
    ```
 
 ## Configure telemetry tagging
@@ -382,3 +380,4 @@ For unsupported languages, use the `git.commit.sha` and `git.repository_url` tag
 [6]: /tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [9]: /tracing/trace_collection/dd_libraries/
+[docker-named-context]: https://docs.docker.com/build/concepts/context/#named-contexts
