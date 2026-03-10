@@ -37,7 +37,7 @@ Using Software Composition Analysis provides organizations with the following be
 ## How it works
 
 SCA supports two complementary detection modes:
-- **Static detection** scans your repositories by analyzing dependency files (lockfiles and manifests) at each commit. Scans run automatically on every push to a connected repository, or can be triggered from your CI/CD pipeline. See [Set up Static SCA][1] to get started.
+- **Static detection** scans your repositories by analyzing dependency files (lockfiles and manifests). Scans run when changes are committed that update supported dependency manifests/lockfiles in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported on <code>push</code> event triggers). See [Set up Static SCA][1] to get started.
 - **Runtime detection** identifies libraries that are actually loaded and used by your services at runtime, using instrumentation from Datadog APM. See [Set up Runtime SCA][2] to get started.
 
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
@@ -49,6 +49,8 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 ### Review and prioritize vulnerabilities
 
 The [Vulnerabilities Explorer][11] provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST, IAST, Secrets Scanning, and IaC). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
+
+#### Datadog severity score
 
 To assist in prioritizing remediation, Datadog modifies the base CVSS score into the **Datadog Severity Score** by incorporating runtime context and exploitability signals. These factors help distinguish theoretical risk from vulnerabilities that are more likely to be exploited in real-world environments. The table below describes how each factor influences the final score.
 
@@ -85,7 +87,7 @@ You can configure PR Gates to block on:
 - **Security vulnerabilities**: libraries with known CVEs above a configured severity threshold.
 - **License violations**: libraries using licenses that do not comply with your organization's policy.
 
-PR Gates only fails and blocks a PR if the developer **introduces a new violation as part of that PR**—existing violations already present in the codebase before the PR and its branch were created do not trigger a block. By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. GitLab support is currently in preview. For setup instructions, see [Set up PR Gate Rules][17].
+PR Gates only fails and blocks a PR if the developer **introduces a new violation as part of that PR**—existing violations already present in the codebase before the PR and its branch were created do not trigger a block. By default, checks are informational, but you can make them blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
 
 ### Manage your library inventory
 
@@ -133,6 +135,7 @@ Libraries that are loaded more than 1 hour after the service has started.
 - **Cold Libraries:**
 Libraries from services that are alive for less than 2 hours (such as jobs).
   - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+
 ## SCA language support
 
 Software Composition Analysis (SCA) supports the following languages:
