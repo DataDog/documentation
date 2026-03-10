@@ -23,13 +23,13 @@ further_reading:
       text: 'Understanding Request Latency with Profiling'
 ---
 
-Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler before, it can seem confusing at first.
+Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler, it can be confusing.
 
-This guide explains profiling, provides a sample service with a performance problem, and leverages the Datadog Continuous Profiler to understand and fix the problem.
+This guide explains profiling, provides a sample service with a performance problem, and uses the Datadog Continuous Profiler to understand and fix the problem.
 
 ## Overview
 
-A profiler shows how much "work" each function is doing by collecting data about the program as it's running. For example, once you set up infrastructure monitoring and your app servers are using 80% of their CPU, you may not know why. Profiling shows a simple breakdown of the work, for example:
+A profiler shows how much "work" each function is doing by collecting data about the program as it's running. For example, after you set up infrastructure monitoring and your app servers are using 80% of their CPU, you may not know why. Profiling shows a breakdown of the work, for example:
 
 | Function      | CPU usage |
 |---------------|-----------|
@@ -47,7 +47,7 @@ The Datadog Continuous Profiler can track various types of "work", including CPU
 
 ### Prerequisites
 
-Before getting started, please ensure you have the following prerequisites:
+Before getting started, make sure you have the following prerequisites:
 
 1. [docker-compose][1]
 2. A Datadog account and [API key][2]. If you need a Datadog account, [sign up for a free trial][3].
