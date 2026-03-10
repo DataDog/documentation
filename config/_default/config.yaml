@@ -8,6 +8,7 @@ enableRobotsTXT: true
 # don't publish cdocs source files
 ignoreFiles:
   - "\\.mdoc\\.md$"
+  - "\\.tempAst\\.json$"
   - "^integrations_data/"
   - "^hugpython/"
   - "^examples/"
@@ -136,6 +137,9 @@ module:
       target: static
     - source: layouts
       target: layouts
+      excludeFiles:
+        - 'shortcodes/.cdocs_temp/*'
+        - 'shortcodes/mdoc/*'
     - source: data
       target: data
     - source: static

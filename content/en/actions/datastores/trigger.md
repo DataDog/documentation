@@ -24,7 +24,7 @@ To create a new automation rule:
 1. Select a datastore. 
 1. Click **Automation Rules**, then **+ New Automation Rule**. 
 1. Configure your new automation rule: 
-    1. Choose if the rule will be triggered when a new entry is added, a value has changed, or an entry is deleted.
+    1. Choose if the rule will be triggered when new entries are added, a value has changed, or an entry is deleted.
     1. Choose the workflow that will be triggered when the event occurs. 
     1. Name your rule. 
 1. Click **Save**.

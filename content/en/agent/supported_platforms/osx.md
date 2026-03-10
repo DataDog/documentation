@@ -125,7 +125,7 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=macos
 [2]: /agent/troubleshooting/
-[3]: /developers/guide/custom-python-package/
+[3]: /extend/guide/custom-python-package/
 [4]: /integrations/
 [5]: https://docs.datadoghq.com/agent/supported_platforms/?tab=macos
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=macos

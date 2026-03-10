@@ -42,14 +42,14 @@ Instrumentation starts when the application is launched.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-1. Add the `ddtrace` package to your project using your package manager.
-1. Initialize the tracer by doing one of the following:
-   - Set `NODE_OPTIONS` with `--require=dd-trace/init`
-   - Include the tracer in your application's entrypoint file:
-     ```javascript
-     const tracer = require('dd-trace').init({ logInjection: true, });
-     ```
-     This also configures trace log correlation.
+1. Install the `dd-trace` package
+   ```
+   npm install dd-trace
+   ```
+2. Initialize the Node.js tracer with the `NODE_OPTIONS` environment variable:
+   ```
+   NODE_OPTIONS='--require dd-trace/init'
+   ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -454,6 +454,8 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ### View traces in Datadog
 
 After your application restarts, go to Datadog's [APM Service page][2] and search for the service name you set for your application (`DD_SERVICE`).
@@ -492,11 +494,11 @@ Share the content of the **Log stream** with [Datadog Support][9].
 
 [1]: /serverless/guide/azure_app_service_linux_code_wrapper_script
 [2]: /tracing/services/service_page/
-[3]: /developers/dogstatsd/?tab=java#dogstatsd-client
+[3]: /extend/dogstatsd/?tab=java#dogstatsd-client
 [4]: https://github.com/brightcove/hot-shots
-[5]: /developers/dogstatsd/?tab=dotnet#dogstatsd-client
-[6]: /developers/dogstatsd/?tab=php#dogstatsd-client
-[7]: /developers/dogstatsd/?tab=python#dogstatsd-client
+[5]: /extend/dogstatsd/?tab=dotnet#dogstatsd-client
+[6]: /extend/dogstatsd/?tab=php#dogstatsd-client
+[7]: /extend/dogstatsd/?tab=python#dogstatsd-client
 [8]: /profiler/
 [9]: /help
 [10]: https://app.datadoghq.com/integrations/azure

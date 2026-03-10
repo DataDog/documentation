@@ -1,6 +1,7 @@
 ---
 title: Analysis Features
 description: "Perform advanced data analysis in Notebooks with SQL queries, data transformations, joins, and visualizations across multiple datasets."
+site_support_id: advanced_analysis
 aliases:
 - /logs/workspaces/
 - /logs/workspaces/export/
@@ -12,12 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "Getting Started with Analysis Features"
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-Notebooks Advanced Analysis is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
-</div>
-{{% /site-region %}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
 If you want to query data sources not yet available, use this form to submit your request.
