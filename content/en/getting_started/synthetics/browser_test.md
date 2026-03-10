@@ -87,11 +87,22 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Configure the test monitor 
 
-Design your alert message and add an email address you want your test to send alerts to.
+Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
 
-{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Example browser test configuration" video="true" >}}
+{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
-You can also use [notifications integrations][6] such as Slack, PagerDuty, Microsoft Teams, and webhooks. In order to trigger a Synthetic alert to these notification tools, you first need to set up the corresponding [integration][7].
+For example, to create a monitor that iterates over steps extracting variables for browser tests, add the following to the monitor message:
+
+   ```text
+   {{! List extracted variables across all successful steps }}
+   # Extracted variables
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Name**: `{{extractedValue.name}}`
+   **Value:** {{#if extractedValue.secure}}*Obfuscated (value hidden)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
 When you're ready to save your test configuration and monitor, click **Save & Edit Recording**.
 
@@ -145,7 +156,7 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 [5]: /continuous_testing/cicd_integrations
 [6]: /integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
-[8]: /synthetics/guide/synthetic-test-monitors
+[8]: /monitors/types/synthetic_monitoring/
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [10]: /synthetics/browser_tests/test_results#test-failure
 [11]: /synthetics/browser_tests/test_results#errors
