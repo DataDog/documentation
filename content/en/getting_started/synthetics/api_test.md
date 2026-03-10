@@ -107,11 +107,11 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 ### Configure the test monitor
 
-Notification messages include the **message** defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
+Use this section to build the **message** that you want to send with the notification. The notification includes your custom message and details about any failing locations. Pre-filled monitor messages are included in the message body:
 
 {{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Synthetic Monitoring monitor section, highlighting the pre-filled monitor messages" style="width:100%;" >}}
 
-For example, to create a monitor that iterates over steps extracting variables for browser tests, add the following to the monitor message:
+For example, the following monitor message creates a monitor that iterates over steps and extracts variables for browser tests:
 
    ```text
    {{! List extracted variables across all successful steps }}
