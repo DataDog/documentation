@@ -49,7 +49,7 @@ El estado de un problema aparece en cualquier lugar donde se pueda ver, como en 
 ## Historial del problema
 Ve un historial de la actividad de tu problema con la **Línea temporal de la actividad**. En el panel de detalles de cualquier problema de Seguimiento de errores, ve la Línea temporal de la actividad haciendo clic en la pestaña **Activity** (Actividad).
 
-{{< img src="error_tracking/issue-status-history.png" alt="La línea temporal de la actividad en el problema del Seguimiento de errores" style="width:80%;" >}}
+{{< img src="error_tracking/issue-status-history-3.png" alt="La línea temporal de la actividad en el problema del Seguimiento de errores" style="width:80%;" >}}
 
 ## Referencias adicionales
 

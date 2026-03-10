@@ -4504,41 +4504,46 @@ menu:
       parent: profiler_enabling
       identifier: profiler_enabling_java
       weight: 102
+    - name: GraalVM
+      url: profiler/enabling/graalvm/
+      parent: profiler_enabling
+      identifier: profiler_enabling_graalvm
+      weight: 103
     - name: Python
       url: profiler/enabling/python/
       parent: profiler_enabling
       identifier: profiler_enabling_python
-      weight: 103
+      weight: 104
     - name: Go
       url: profiler/enabling/go/
       parent: profiler_enabling
       identifier: profiler_enabling_go
-      weight: 104
+      weight: 105
     - name: Ruby
       url: profiler/enabling/ruby/
       parent: profiler_enabling
       identifier: profiler_enabling_ruby
-      weight: 105
+      weight: 106
     - name: Node.js
       url: profiler/enabling/nodejs/
       parent: profiler_enabling
       identifier: profiler_enabling_nodejs
-      weight: 106
+      weight: 107
     - name: .NET
       url: profiler/enabling/dotnet/
       parent: profiler_enabling
       identifier: profiler_enabling_dotnet
-      weight: 107
+      weight: 108
     - name: PHP
       url: profiler/enabling/php/
       parent: profiler_enabling
       identifier: profiler_enabling_php
-      weight: 108
+      weight: 109
     - name: C/C++/Rust
       url: profiler/enabling/ddprof/
       parent: profiler_enabling
       identifier: profiler_enabling_linux
-      weight: 109
+      weight: 110
     - name: Profile Types
       url: profiler/profile_types/
       parent: profiler
@@ -5189,6 +5194,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 40202
+    - name: DeepEval Evaluations
+      url: llm_observability/evaluations/deepeval_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_deepeval_evaluations
+      weight: 40301
     - name: Annotation Queues
       url: llm_observability/evaluations/annotation_queues
       parent: llm_obs_evaluations
@@ -7346,6 +7356,11 @@ menu:
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_enable
       weight: 10002
+    - name: Update Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning/update
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_update
+      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
@@ -7456,11 +7471,6 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
-    - name: Create Jira Issues
-      url: security/cloud_security_management/review_remediate/jira
-      parent: csm_review_remediate
-      identifier: csm_jira
-      weight: 103
     - name: Severity Scoring
       url: security/cloud_security_management/severity_scoring/
       parent: csm
@@ -7481,6 +7491,11 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
+    - name: Agentless Scanning
+      url: security/cloud_security_management/troubleshooting/agentless_scanning
+      parent: csm_troubleshooting
+      identifier: csm_troubleshooting_agentless_scanning
+      weight: 1203
     - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading

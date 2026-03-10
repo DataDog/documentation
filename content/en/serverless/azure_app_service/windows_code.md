@@ -363,6 +363,8 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ## Custom metrics
 
 The Azure App Service extension includes an instance of [DogStatsD][1], Datadog's metrics aggregation service. This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
