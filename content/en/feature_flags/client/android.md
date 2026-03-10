@@ -27,7 +27,7 @@ The Datadog Feature Flags SDK for Android is built on [OpenFeature][1], an open 
 
 Here's a minimal example to get feature flags working in your Android app:
 
-{{< code-block lang="kotlin" >}}
+```kotlin
 // 1. Add dependencies (see Installation section)
 
 // 2. Initialize Datadog SDK (in Application.onCreate)
@@ -58,7 +58,7 @@ OpenFeatureAPI.setEvaluationContext(
 // 6. Evaluate flags anywhere in your app
 val client = OpenFeatureAPI.getClient()
 val isEnabled = client.getBooleanValue("my-feature", false)
-{{< /code-block >}}
+```
 
 The rest of this guide explains each step in detail.
 
