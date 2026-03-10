@@ -30,7 +30,7 @@ The Agent supports three infrastructure modes: `full`, `basic`, and `none`.
 {{< tabs >}}
 {{% tab "Full" %}}
 
-The `full` mode requires Agent version X.xx.x or later. 
+The `full` mode requires Agent version 7.73.0 or later. 
 
 Datadog recommends `full` mode for most use cases. When in this mode, all Agent infrastructure monitoring features are available.
 
@@ -126,20 +126,12 @@ infrastructure_mode: none
 ### Configure Agent infrastructure mode
 
 1. Add or edit the `infrastructure_mode` option in the main [Agent configuration file][1] on the same level as the API key.
-2. [Restart the Datadog Agent][2]. 
 
-{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}} 
-## @param api_key - string - required
-## @env DD_API_KEY - string - required
-## The Datadog API key used by your Agent to submit metrics and events to Datadog.
-## Create a new API key here: https://app.datadoghq.com/organization-settings/api-keys .
-## Read more about API keys here: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys.
-api_key:
-
-## @param infrastructure_mode - string - optional - default: full
-## The infrastructure mode to use. Valid values are 'full' (default), 'basic', and 'none'.
+```sh
 infrastructure_mode: <MODE>
-{{< /code-block >}}
+```
+
+2. [Restart the Datadog Agent][2]. 
 
 ### Verify infrastructure mode
 
