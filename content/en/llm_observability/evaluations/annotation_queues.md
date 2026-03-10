@@ -105,7 +105,7 @@ For each trace:
 
 **Be consistent**:
 - Review the queue description and label definitions before starting.
-- When multiple annotators work on the same queue, establish shared understanding of criteria
+- When multiple annotators work on the same queue, establish shared understanding of criteria.
 - Document reasoning in notes for borderline cases
 
 **Provide reasoning**:
