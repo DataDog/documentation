@@ -5742,11 +5742,6 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
-    - name: Client SDKs
-      url: feature_flags/client
-      parent: feature_flags
-      identifier: feature_flags_client
-      weight: 1
     - name: Android and Android TV
       url: feature_flags/client/android
       parent: feature_flags_client
@@ -8157,7 +8152,7 @@ menu:
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 20000
+      weight: 30000
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
@@ -8859,7 +8854,7 @@ menu:
       pre: play-circle
       identifier: session_replay
       parent: digital_experience_heading
-      weight: 60000
+      weight: 50000
     - name: Browser
       url: /session_replay/browser
       parent: session_replay
