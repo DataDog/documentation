@@ -104,7 +104,7 @@ For each trace:
 ### Best practices for annotation
 
 **Be consistent**:
-- Review the queue description and label definitions before starting
+- Review the queue description and label definitions before starting.
 - When multiple annotators work on the same queue, establish shared understanding of criteria
 - Document reasoning in notes for borderline cases
 
