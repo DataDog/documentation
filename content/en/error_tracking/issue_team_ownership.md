@@ -22,11 +22,33 @@ Issue Team Ownership automates your triaging work by assigning issues to the rig
 
 Team ownership information appears on the issue details panel when available:
 
-{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
+{{< img src="error_tracking/ownership-details-2.png" alt="Team ownership information on issue details" style="width:80%;" >}}
 
 You can also use issue team ownership to filter issues by teams in the Error Tracking Explorer.
 
 {{< img src="error_tracking/ownership-search-bar.png" alt="Team owner filtering in the search bar" style="width:80%;" >}}
+
+### Manage team ownership for issues
+
+In addition to automatic team ownership, you can manually add or remove teams from issues.
+
+#### Add a team
+
+To add a team to an issue:
+
+1. Open the issue details panel.
+2. Click **Add team**.
+3. Select the team to add.
+
+#### Remove a team
+
+To remove a team from an issue:
+
+1. Open the issue details panel.
+2. Click the team to remove.
+3. Click **Unlink team from issue**.
+
+**Note**: Teams added through service ownership cannot be removed. Datadog updates these teams automatically based on the current service ownership.
 
 ## Setup
 

@@ -9,15 +9,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo
   tag: ブログ
   text: Datadog で SLO を管理するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
+  tag: ブログ
+  text: Datadog Synthetic Monitoring を活用して SLO の精度とパフォーマンスを向上させる
 title: モニターベース SLO
 ---
 
 ## 概要
-To build an SLO from new or existing Datadog monitors, create a monitor-based SLO. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
+新規または既存の Datadog モニターから SLO を作成するには、モニター ベース SLO を作成します。モニター ベース SLO を使うと、システムが正常に動作している時間を総時間で割ることで、サービス レベル インジケーター (SLI) を算出できます。
 
-<div class="alert alert-info">Time Slice SLOs are another way to create SLOs with a time-based SLI calculation. With Time Slice SLOs, you can create an uptime SLO without going through a monitor, so you don’t have to create and maintain both a monitor and an SLO.</div>
+<div class="alert alert-info">Time Slice SLO は、時間ベースで SLI を計算して SLO を作成する別の方法です。Time Slice SLO を使えば、モニターを介さずに uptime SLO を作成できるため、モニターと SLO を両方作成して維持管理する必要がありません。</div>
 
-{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="monitor-based SLO example" >}}
+{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="モニター ベース SLO の例" >}}
 
 ## 前提条件
 
@@ -26,11 +29,11 @@ To build an SLO from new or existing Datadog monitors, create a monitor-based SL
 Datadog のモニターベースの SLO は、以下のモニタータイプをサポートしています。
 - メトリクスモニターの種類 (メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値)
 - Synthetic
-- サービスチェック (オープンベータ)
+- サービス チェック
 
 ## セットアップ
 
-On the [SLO status page][2], click **+ New SLO**. Then, select **By Monitor Uptime**.
+[SLO ステータス ページ][2] で **+ New SLO** をクリックし、続けて **By Monitor Uptime** を選択します。
 
 ### クエリの定義
 
@@ -39,14 +42,14 @@ On the [SLO status page][2], click **+ New SLO**. Then, select **By Monitor Upti
 
 **注**:
 
-- If you're using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. 
-- If you're adding multiple monitors to your SLO, group selection is not supported. You can add up to 20 monitors.
+- SLO で単一のマルチ アラート モニターを使用する場合は、必要に応じて "Calculate on selected groups" を選択し、最大 20 個のグループを指定できます。
+- SLO に複数のモニターを追加する場合、グループの選択には対応していません。追加できるモニターは最大 20 個です。
 
 ### SLO ターゲットの設定
 
 **目標**パーセンテージ、*タイムウィンドウ**、オプションで**警告**レベルを選択します。
 
-The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state. The time window specifies the rolling period the SLO runs its calculation.
+target percentage は、SLO の基盤となるモニターが ALERT 状態にならない時間の割合を示します。time window は、SLO が計算を行うローリング期間を指定します。
 
 SLI の値に応じて、Datadog UI は SLO のステータスを異なる色で表示します。
 - SLI が目標値を超えている間は、UI に SLO のステータスが緑色で表示されます。
@@ -65,15 +68,15 @@ SLO の詳細 UI では、7 日および 30 日のタイムウィンドウで構
 
 ### 名前とタグを追加する
 
-Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO. Select **Create** or **Create & Set Alert** to save your new SLO.
+SLO の名前と詳細な説明を入力します。SLO に関連付けたいタグを選択します。**Create** または **Create & Set Alert** を選択して、新しい SLO を保存します。
 
 ## ステータス計算
 
-{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="Monitor-based SLO with groups" >}}
+{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="グループを含むモニター ベース SLO" >}}
 
-Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected:
-- If specific groups have been selected (up to 20), the SLO status is calculated with only those groups. The UI displays all selected groups. 
-- If no specific groups are selected, the SLO status is calculated across *all* groups. The UI displays all underlying groups of the SLO. 
+Datadog は、特定のグループが選択されていない限り、すべてのモニターまたはモニター グループの uptime パーセンテージを用いて、SLO の全体ステータスを計算します:
+- 特定のグループが選択されている場合 (最大 20 グループ)、SLO ステータスはそれらのグループだけを対象に計算されます。UI には選択されたグループがすべて表示されます。
+- 特定のグループが選択されていない場合、SLO ステータスは *すべて* のグループにまたがって計算されます。UI には、SLO の配下にあるグループがすべて表示されます。
 
 **注**: グループがあるモニターベースの SLO では、最大 5,000 グループを含む SLO に対してすべてのグループを表示できます。5,000 を超えるグループを含む SLO の場合、SLO はすべてのグループに基づいて計算されますが、UI にはグループは表示されません。
 
@@ -90,6 +93,8 @@ Datadog calculates the overall SLO status as the uptime percentage across all mo
 
 この例では、全体のステータスが個々のステータスの平均値よりも低くなっています。
 
+モニターをミュートしても SLO の計算には影響しません。SLO の計算から特定の期間を除外したい場合は、[SLO ステータス修正][5] 機能を使用してください。
+
 ### Synthetic テストの例外
 場合によっては、1 つのグループ化された Synthetic テストで構成されるモニターベースの SLO のステータス計算に例外があります。Synthetic テストには、テストが ALERT 状態に入るときの動作を変更し、その結果、全体的なアップタイムに影響を与えるオプションの特別なアラート条件があります。
 
@@ -101,36 +106,30 @@ Datadog calculates the overall SLO status as the uptime percentage across all mo
 
 Synthetic テストのアラート条件の詳細については、[Synthetic モニタリング][4]を参照してください。
 
-### 手動および自動モニターアップデートの影響
+### 欠損データ
+#### メトリクス モニター
+メトリクス モニターを作成する際に、[モニターが欠損データをどう扱うか][6] を選択します。この設定によって、モニター ベース SLO の計算で欠損データをどのように解釈するかが変わります:
 
-モニターが手動で解決された場合、または **_After x hours automatically resolve this monitor from a triggered state_** (x 時間後、このモニターをトリガー状態から自動的に解決する) 設定の結果として、SLO 計算が変更されることはありません。これらがワークフローにとって重要なツールである場合、モニターのクローンを作成し、自動解決設定と`@-notification` 設定を削除し、SLO にクローンを使用することを検討してください。
+| Monitor configuration     | 欠損データの SLO 計算 |
+|---------------------------|---------------------------------|
+| `Evaluate as zero`        | モニターのアラートのしきい値に依存します。<br> たとえば、しきい値が `> 10` の場合は Uptime (Monitor のステータスが `OK` になるため) になり、しきい値が `< 10` の場合は Downtime になります。                             |
+| `Show last known status`  | SLO の前回の状態を維持          |
+| `Show NO DATA`            | アップタイム                          |
+| `Show NO DATA and notify` | Downtime                        |
+| `Show OK`                 | アップタイム                          |
 
-Datadog では、SLO の下地として `Alert Recovery Threshold` と `Warning Recovery Threshold` を持つモニターを使用しないことを推奨しています。これらの設定は、SLI の良い動作と悪い動作をきれいに区別することを難しくします。
-
-モニターをミュートしても、SLO の計算には影響しません。
-
-SLO の計算から期間を除外するには、[SLO ステータス修正][5]機能を使用します。
-
-### データがない
-メトリクスモニターまたはサービスチェックを作成する際に、データが欠落している場合にアラートを送信するかどうかを選択します。この構成は、モニターベースの SLO 計算が欠落データをどのように解釈するかに影響します。欠落データを無視するように構成されたモニターの場合、欠落データのある時間帯は、SLO によって OK (アップタイム) として扱われます。欠落データにアラートを出すように構成されたモニターの場合、欠落データのある時間帯は、SLO によってアラート (ダウンタイム) として扱われます。
+#### その他のモニターの種類
+サービス チェック モニターを作成する場合、データが欠損しているときにアラートを送信するかどうかを選択します。この設定によって、モニター ベース SLO の計算で欠損データをどのように解釈するかが変わります。欠損データを無視するよう設定されたモニターでは、欠損が発生している期間は SLO によって OK (uptime) として扱われます。欠損データでアラートを出すよう設定されたモニターでは、欠損が発生している期間は SLO によって ALERT (downtime) として扱われます。
 
 Synthetic テストを一時停止すると、SLO はデータが欠落している期間を計算から除外します。UI では、これらの期間は SLO ステータスバーで薄いグレーで表示されます。
-
-
-## 基底のモニターと SLO 履歴
-
-メトリクスモニタータイプに基づく SLO には、SLO Replay という機能があり、基礎となるモニターのメトリクスとクエリ構成から取り出した履歴データで SLO ステータスを埋め戻します。新しいメトリクスモニターを作成し、その新しいモニターに SLO を設定する場合、SLO のステータスを表示するために 7 日、30 日、または 90 日間待つ必要はありません。その代わり、SLO Replay は新しい SLO を作成したときにトリガーされ、モニターの基礎となるメトリクスとクエリの履歴を調べて、ステータスを記入します。
-
-SLO Replay は、基礎となるメトリクスモニターのクエリを変更して、新しいモニター構成に基づいてステータスを修正した場合にもトリガーされます。SLO Replay が SLO のステータス履歴を再計算する結果、モニターの更新後、モニターのステータス履歴と SLO のステータス履歴が一致しない場合があります。
-
-**注:** Synthetic テストまたはサービスチェックに基づく SLO は、SLO Replay をサポートしません。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create
+[1]: https://app.datadoghq.com/monitors/create
 [2]: https://app.datadoghq.com/slo
 [3]: /ja/service_management/service_level_objectives/metric/
 [4]: /ja/synthetics/api_tests/?tab=httptest#alert-conditions
 [5]: /ja/service_management/service_level_objectives/#slo-status-corrections
+[6]: /ja/monitors/configuration/#no-data

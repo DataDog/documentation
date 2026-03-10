@@ -26,7 +26,7 @@ Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI co
 
 ## Setup
 
-**Note**: Datadog recommends using Go tracer v2 to instrument AWS Lambda functions. See the [Go tracer migration instructions](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/migration/#migration-instructions) for guidance on upgrading from v1 to v2.
+**Note**: Datadog recommends using v2 of the Go tracer to instrument AWS Lambda functions. See the [migration instructions](https://github.com/DataDog/dd-trace-go/tree/main/contrib/aws/datadog-lambda-go) for guidance on upgrading from v1 to v2.
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
@@ -316,6 +316,8 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 ### Install the Datadog Lambda library
 

@@ -18,4 +18,4 @@ To avoid inconsistencies and unexpected behavior, ensure that your `cluster_name
 If you are using MongoDB Atlas, you might encounter a `ServerSelectionTimeoutError` when connecting to the cluster. This error occurs when the Agent is unable to connect to the MongoDB Atlas cluster due to a network issue or TLS misconfiguration. To resolve this issue, ensure that `tls` is set to `true` in the integration configuration file. If you are still encountering issues, check the MongoDB Atlas cluster's network access configuration to ensure that the Agent's IP address is allowed to connect to the cluster.
 
 [1]: /database_monitoring/setup_mongodb/
-[2]: /developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
+[2]: /extend/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags

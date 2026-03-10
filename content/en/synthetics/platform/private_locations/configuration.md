@@ -248,6 +248,11 @@ Overrides variables used in tests running on the Private Location with environme
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
 All variables imported this way are obfuscated.
 
+`--retryAPIErrors`
+: **Type**: Boolean <br>
+**Default**: `false`<br>
+Retry any error in API tests
+
 `--allowedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
