@@ -42,7 +42,7 @@ SCA supports two complementary detection modes:
 
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
-When Datadog ingests a new advisory, it is matched against your last known library inventory and appears in the Vulnerabilities Explorer even if you haven’t rescanned the repository. The Repositories Explorer is commit-scoped and reflects what was known at the time the scan ran—so a scan that executed before Datadog ingested the advisory will not show that newly published advisory in the Repositories Explorer for that commit. See [Understanding SCA views](#understanding-sca-views) for more details.
+When Datadog ingests a new advisory, it is matched against your last known library inventory and appears in the Vulnerabilities Explorer even if you have not rescanned the repository. The Repositories Explorer is commit-scoped and reflects what was known at the time the scan ran—so a scan that executed before Datadog ingested the advisory will not show that newly published advisory in the Repositories Explorer for that commit. See [Understanding SCA views](#understanding-sca-views) for more details.
 
 ## Key capabilities
 
