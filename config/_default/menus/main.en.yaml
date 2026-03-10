@@ -5054,6 +5054,11 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
+    - name: Guides
+      url: data_observability/guides/
+      identifier: data_observability_guides
+      parent: data_observability_heading
+      weight: 90000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
