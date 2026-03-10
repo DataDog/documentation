@@ -88,11 +88,9 @@ logger.info('Hello world!');
 
 5. **Enable profiling (preview)**.
 
-<div class="alert alert-info">
-Datadog's Continuous Profiler is available in preview for Azure Container Apps.
-</div>
-
    To enable the [Continuous Profiler][4], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Azure Container Apps.</div>
 
 {{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="cloudrun" %}}
 

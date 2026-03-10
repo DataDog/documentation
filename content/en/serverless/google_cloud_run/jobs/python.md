@@ -93,11 +93,9 @@ logger.info("Hello world!")
 
 8. **Enable profiling (preview)**.
 
-<div class="alert alert-info">
-Datadog's Continuous Profiler is available in preview for Google Cloud Run Jobs.
-</div>
-
    To enable the [Continuous Profiler][7], set the environment variable `DD_PROFILING_ENABLED=true`.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Google Cloud Run Jobs.</div>
 
 {{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
 

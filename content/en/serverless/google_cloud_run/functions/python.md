@@ -85,10 +85,6 @@ logger.info('Hello world!')
 
 6. **Enable profiling (preview)**.
 
-<div class="alert alert-info">
-Datadog's Continuous Profiler is available in preview for 2nd gen Cloud Run functions.
-</div>
-
    To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true` in your application container and add `import ddtrace.auto` at the top of your function file:
 
    {{< code-block lang="python" disable_copy="false" >}}
@@ -96,6 +92,8 @@ import ddtrace.auto
 
 # ... rest of your function code
 {{< /code-block >}}
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for 2nd gen Cloud Run functions.</div>
 
 {{% serverless-init-env-vars-sidecar language="python" function="true" defaultSource="cloudrun" %}}
 
