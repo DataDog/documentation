@@ -42,6 +42,14 @@ The Browser SDK supports all modern desktop and mobile browsers and provides aut
 
 Choose the installation method for the Browser SDK.
 
+| Method | Best for | Page load impact | Captures early events? |
+|---|---|---|---|
+| NPM | Apps with a JavaScript bundler (webpack, Vite, etc.) | None | No (events before init are missed) |
+| CDN async | Sites where page load speed is critical | None | No (events before init are missed) |
+| CDN sync | Sites that need complete event coverage | Yes (blocks rendering until loaded) | Yes |
+
+If you use a bundler, choose NPM. If you don't, choose CDN sync for completeness or CDN async for performance.
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -246,7 +254,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
 
-In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][3].
+In the initialization snippet, replace all placeholder values. Setting `service`, `env`, and `version` is strongly recommended: they enable APM trace correlation, environment filtering, and version-based regression tracking. See the full list of [initialization parameters][3].
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -255,14 +263,14 @@ In the initialization snippet, set an environment name, service name, and client
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-   applicationId: '<APP_ID>',
-   clientToken: '<CLIENT_TOKEN>',
-   // `site` refers to the Datadog site parameter of your organization
-   // see https://docs.datadoghq.com/getting_started/site/
-   site: '<DATADOG_SITE>',
-  //  service: 'my-web-application',
-  //  env: 'production',
-  //  version: '1.0.0',
+  applicationId: '<APP_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  // `site` refers to the Datadog site parameter of your organization
+  // see https://docs.datadoghq.com/getting_started/site/
+  site: '<DATADOG_SITE>',
+  service: '<SERVICE_NAME>',
+  env: '<ENV_NAME>',
+  version: '<APP_VERSION>',
 });
 
 ```
@@ -289,9 +297,9 @@ window.DD_RUM.init({
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: '<DATADOG_SITE>',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
     });
   })
 </script>
@@ -308,10 +316,9 @@ window.DD_RUM.init({
       // `site` refers to the Datadog site parameter of your organization
       // see https://docs.datadoghq.com/getting_started/site/
       site: '<DATADOG_SITE>',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-
+      service: '<SERVICE_NAME>',
+      env: '<ENV_NAME>',
+      version: '<APP_VERSION>',
     });
 </script>
 ```
@@ -331,13 +338,32 @@ To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK le
 
 If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][6] for additional setup steps.
 
-### Step 4 - Visualize your data
+### Step 4 - Verify setup and explore your data
 
-Now that you’ve completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
+After completing initialization, confirm that the SDK is sending data to Datadog.
 
-Visualize the [data collected][8] in [dashboards][9] or create a search query in the [RUM Explorer][10].
+#### Verify the SDK is running
 
-Your application appears as pending on the Applications page until Datadog starts receiving data.
+1. Open your application in a browser.
+2. Open the browser developer tools (**F12** or **Cmd+Option+I**).
+3. In the **Console** tab, run:
+   ```javascript
+   DD_RUM.getInternalContext()
+   ```
+   If the SDK is initialized, this returns an object containing your `application_id` and `session_id`. If it returns `undefined`, the SDK hasn't initialized. Confirm that your init snippet runs before this console call and that `clientToken` and `applicationId` are correct.
+
+4. In the **Network** tab, filter requests by `rum` or `browser-intake`. You should see POST requests to the Datadog intake endpoint after interacting with the page (clicking, navigating). If you don't see these requests:
+   - Confirm that `site` matches your Datadog organization's site (for example, `datadoghq.eu` for EU customers).
+   - Check whether your Content Security Policy blocks requests to `*.datadoghq.com` or `*.browser-intake-datadoghq.com`. See [CSP configuration][6] for the required directives.
+
+#### View your data in Datadog
+
+After the SDK sends its first events, your application's status changes from **Pending** to active on the [**Digital Experience > RUM Applications**][1] page. This typically takes under two minutes.
+
+From there:
+- See a summary of what the SDK collects automatically in [Data Collected][8].
+- Open the [RUM Explorer][10] to search sessions, page views, errors, and resources.
+- Use the pre-built [RUM dashboards][9] for an overview of performance and error trends.
 
 ## Further reading
 
