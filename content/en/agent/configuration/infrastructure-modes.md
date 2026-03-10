@@ -1,6 +1,6 @@
 ---
 title: Infrastructure Modes
-description: "Learn how to optimize Agent behavior for specialized compute scenarios"
+description: "Optimize Agent behavior for specialized compute scenarios."
 further_reading:
 - link: "/agent/configuration/agent-configuration-files/"
   tag: "Guide"
@@ -23,39 +23,12 @@ The Agent infrastructure mode determines which capabilities, integrations, and m
 
 ## Agent infrastructure mode
 
-### Infrastructure mode options
-
 The Agent supports three infrastructure modes: `full`, `basic`, and `none`.
-
-| Mode | Description |
-| ---- | ----------- |
-| `full` | Default. All Agent infrastructure monitoring features are available. |
-| `basic` | Collects core system metrics only. |
-| `none` | Disables all infrastructure monitoring in the Agent. |
 
 **Note**: If the `infrastructure_mode` option is not explicitly set in the configuration file, the Agent operates in `full` mode.
 
-<!-- CONFIRM: I wonder if this should lead to this sample config file: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml. The `infrastructure_mode` option does not yet seem to be in this file, but I assume it will be there once this is GA? -->
-To change the infrastructure mode, edit or add the `infrastructure_mode` option in the main [Agent configuration file][1] and then [restart the Datadog Agent][2]:
-
-```yaml
-infrastructure_mode: <Mode>
-```
-
-To verify the configured infrastructure mode of an Agent in [Fleet Automation][101], search or group by the `Infrastructure Mode` facet.
-
-{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:90%" >}}
-
-### Infrastructure mode behaviors
-
 {{< tabs >}}
 {{% tab "Full" %}}
-
-<!-- TODO: 
-- Confirm what specific use cases full mode is recommended for
-- Confirm what specific capabilities are included (container monitoring, Live Processes, etc.)
-- Confirm minimum Agent version for full mode 
--->
 
 The `full` mode requires Agent version X.xx.x or later. 
 
@@ -129,9 +102,6 @@ infrastructure_mode: basic
 
 {{% /tab %}}
 {{% tab "None" %}}
-<!-- TODO: 
-- Confirm with author what happens to the host in the Datadog UI (does it disappear from Infrastructure List?)
--->
 
 The `none` mode requires Agent version 7.77.0 or later. 
 
@@ -152,6 +122,30 @@ infrastructure_mode: none
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Configure Agent infrastructure mode
+
+1. Add or edit the `infrastructure_mode` option in the main [Agent configuration file][1] on the same level as the API key.
+2. [Restart the Datadog Agent][2]. 
+
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}} 
+## @param api_key - string - required
+## @env DD_API_KEY - string - required
+## The Datadog API key used by your Agent to submit metrics and events to Datadog.
+## Create a new API key here: https://app.datadoghq.com/organization-settings/api-keys .
+## Read more about API keys here: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys.
+api_key:
+
+## @param infrastructure_mode - string - optional - default: full
+## The infrastructure mode to use. Valid values are 'full' (default), 'basic', and 'none'.
+infrastructure_mode: <MODE>
+{{< /code-block >}}
+
+### Verify infrastructure mode
+
+To verify the configured infrastructure mode of an Agent in [Fleet Automation][101], search or group by the `Infrastructure Mode` facet.
+
+{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:90%" >}}
 
 ## Further Reading
 
