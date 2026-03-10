@@ -106,12 +106,12 @@ For each trace:
 **Be consistent**:
 - Review the queue description and label definitions before starting.
 - When multiple annotators work on the same queue, establish shared understanding of criteria.
-- Document reasoning in notes for borderline cases
+- Document reasoning in notes for borderline cases.
 
 **Provide reasoning**:
-- Use free-form notes to document why you applied specific labels
-- Note patterns you observe across multiple traces
-- Reasoning helps refine evaluation criteria and understand failure modes
+- Use free-form notes to document why you applied specific labels.
+- Note patterns you observe across multiple traces.
+- Reasoning helps refine evaluation criteria and understand failure modes.
 
 ## Managing queues
 
@@ -128,12 +128,12 @@ use the **Annotation Labels** facet to filter traces by labels applied in annota
 ### Editing queue schema
 
 You can modify a queue's label schema after creation:
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-2. Open the queue
-3. If the Details panel is hidden, click **View Details**
-4. Click **Edit**
-5. Add, remove, or modify labels
-6. Click **Save Changes**
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. If the Details panel is hidden, click **View Details**.
+4. Click **Edit**.
+5. Add, remove, or modify labels.
+6. Click **Save Changes**.
 
 <div class="alert alert-info">Changing the schema doesn't affect already-applied labels, but annotators will see the updated schema going forward.</div>
 
@@ -141,20 +141,20 @@ You can modify a queue's label schema after creation:
 
 Export annotated traces for analysis or use in other workflows:
 
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-2. Open the queue
-3. Select traces (or select all)
-4. Click **Export**
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. Select traces (or select all).
+4. Click **Export**.
 
 ### Adding to datasets
 
 Transfer annotated traces to datasets for experiment evaluation:
 
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-2. Open the queue
-3. Select traces to transfer
-4. Click **Add to Dataset**
-5. Choose an existing dataset, or create a dataset
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. Select traces to transfer.
+4. Click **Add to Dataset**.
+5. Choose an existing dataset, or create a dataset.
 
 Labels are included with each trace as metadata.
 
@@ -163,9 +163,9 @@ See [Datasets][3] for more information about using datasets in experiments.
 ### Deleting queues
 
 To delete a queue:
-1. Navigate to [**AI Observability > Experiment > Annotations**][2]
-2. Open the queue
-3. Click **Delete** in the Details panel
+1. Navigate to [**AI Observability > Experiment > Annotations**][2].
+2. Open the queue.
+3. Click **Delete** in the Details panel.
 
 <div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
 
