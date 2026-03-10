@@ -104,7 +104,7 @@ You are ready to start creating bidirectional Case Management tickets.
 If you do not see the **Case Management  <-> Jira Integration** section, ensure that you have completed the prerequisites.
 
 [2]: /integrations/jira/
-[3]: /incident_response//case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [8]: /integrations/jira/#configure-a-jira-webhook
 [9]: /incident_response/case_management/projects/
 [20]: /security/ticketing_integrations/#supported-products
@@ -253,7 +253,7 @@ Users can also [create Jira issues for security findings][18] and [attach securi
 
 [1]: /incident_response/case_management/
 [2]: /integrations/jira/
-[3]: /incident_response//case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [4]: https://app.datadoghq.com/security/siem/signals
 [5]: https://app.datadoghq.com/security/code-security
 [6]: https://app.datadoghq.com/security/appsec/signals
