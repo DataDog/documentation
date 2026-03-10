@@ -37,7 +37,7 @@ To add [entity definitions][13] to Software Catalog, you can:
 
 ## Through the Datadog UI
 
-The Software Catalog UI provides a guided workflow for creating entity definitions. After you select an entity type from the **Kind** dropdown (Service, API, System, and others), the form presents metadata fields and options specific to that type. For example, selecting **API** surfaces fields for uploading an API specification, while selecting **Service** surfaces fields for defining the service type and lifecycle.
+Software Catalog provides a guided workflow for creating entity definitions. After you select an entity type from the **Kind** dropdown (Service, API, System, and others), the form presents metadata fields and options specific to that type. For example, selecting **API** surfaces fields for uploading an API specification, while selecting **Service** surfaces fields for defining the service type and lifecycle.
 
 To create an entity definition:
 
