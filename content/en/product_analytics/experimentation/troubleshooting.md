@@ -16,7 +16,7 @@ If experiment results are missing after you launch an experiment, start by check
 
 ### Step 1: Confirm the experiment is assigning users
 
-On the [Experiments][2] page, select your experiment to open its detail page. Hover over the metric scorecard:
+On the [Experiments][2] page, select your experiment to open its detail page. Hover over the values of the metric scorecard:
 - If the subject assignment count for each variant is zero, go to [Step 2](#step-2-confirm-the-experiment-is-receiving-traffic) to debug traffic.
 - If the subject assignment count is greater than zero, but the metric values are zero, skip to [Step 3](#step-3-confirm-metric-events-are-firing).
 
