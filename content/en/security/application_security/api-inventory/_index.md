@@ -151,7 +151,7 @@ datadog:
         - path/to/service/code/**
 ```
 
-This is the same mapping mechanism used by [Code Security][18]. Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
+Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
 
 ### Processing sensitive data
 
@@ -313,4 +313,3 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
 [16]: /integrations/guide/source-code-integration/
 [17]: /internal_developer_portal/software_catalog/entity_model/
-[18]: /security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
