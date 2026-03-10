@@ -20,7 +20,7 @@ You can use your CI Visibility search query and visualization graphs in dashboar
 
 You can copy, export, or download your aggregated search query and visualization graphs in the [CI Visibility Explorer][2].
 
-{{< img src="continuous_integration/explorer/pipeline_export.png" alt="Export your pipelines view in the CI Visibility Explorer" style="width:100%;">}}
+{{< img src="continuous_integration/explorer/pipeline_export_updated.png" alt="Export your pipelines view in the CI Visibility Explorer" style="width:100%;">}}
 
 Click the **Export** button on the right hand corner and select an option from the dropdown menu:
 

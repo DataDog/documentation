@@ -20,7 +20,7 @@ You can use your Test Optimization search query and visualization graphs in dash
 
 You can copy, export, or download your aggregated search query and visualization graphs in the [Test Optimization Explorer][2].
 
-{{< img src="/tests/explorer/export.png" text="Download the list of queried tests results in the Test Optimization as a CSV file" style="width:100%" >}}
+{{< img src="/tests/explorer/export_updated.png" text="Download the list of queried tests results in the Test Optimization as a CSV file" style="width:100%" >}}
 
 Click the **Export** button on the right hand corner and select an option from the dropdown menu:
 
