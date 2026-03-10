@@ -16,7 +16,7 @@ Flag History allows you to track changes and maintain an audit trail of your Dat
 
 ## Individual flag history
 
-When you view an individual feature flag, the **History** sidebar displays all changes made to that specific flag. 
+When you view an individual feature flag, the **Version history** sidebar section displays all changes made to that specific flag. 
 
 - Use the **Environment** filter to view changes in a particular environment or all environments.
 - Select **View diff** to display a diff view of a specific change.
