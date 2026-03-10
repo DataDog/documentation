@@ -1,5 +1,5 @@
 ---
-title: Export Test Runs 
+title: Export Test Runs
 further_reading:
 - link: "/tests/explorer/"
   tag: "Documentation"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-You can use your Test Optimization search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search Tests Events endpoint][1]. 
+You can use your Test Optimization search query and visualization graphs in dashboards, monitors, and notebooks, or programmatically search for events using the [Search Tests Events endpoint][1].
 
 ## Export the search query or visualization
 
@@ -28,6 +28,7 @@ Click the **Export** button on the right hand corner and select an option from t
 - Export your search results to a [CI Test monitor][4] that triggers alerts on predefined thresholds.
 - Export your search results to an [existing notebook][5] for reporting or consolidation purposes.
 - Download your search results as a CSV file for individual CI Visibility test events and specific aggregations.
+- Export your search results to [DDSQL Editor][7] for complex aggregations and custom analysis.
 
 Options available for some visualization types are not supported in others. For example, you cannot download a distribution graph into a CSV file.
 
@@ -41,3 +42,4 @@ Options available for some visualization types are not supported in others. For 
 [4]: /monitors/types/ci/
 [5]: /notebooks/
 [6]: /tests/explorer/saved_views/
+[7]: /ddsql_editor
