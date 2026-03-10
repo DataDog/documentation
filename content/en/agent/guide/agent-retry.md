@@ -106,7 +106,7 @@ The Logs Agent guarantees log delivery during transmission. When a payload fails
 #### Registry and restart behavior
 The Logs Agent maintains a registry that tracks log sources and current read offsets. The Agent flushes the registry to disk every second and reloads it when the Agent restarts. You cannot configure this process.
 
-On restart, the Agent resumes reading from the position recorded in the registry. A small number of duplicate logs may occur if the Agent sends a payload before flushing the registry.
+On restart, the Agent resumes reading from the position recorded in the registry.
 
 ### Advanced shipping configuration
 
