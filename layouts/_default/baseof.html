@@ -36,7 +36,7 @@
 <body
   class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
   {{- with partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
-  <div style="display:none" class="exclude-from-md">For a plaintext version of this page, see: {{ . }}</div>
+  <div class="visually-hidden exclude-from-md">For a plaintext version of this page, see: {{ . }}</div>
   {{- end -}}
 
   <div class="greyside">
