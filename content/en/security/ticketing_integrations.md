@@ -69,7 +69,7 @@ Bidirectional syncing is supported for the following Code and Cloud Security fin
 
 Bidirectional syncing enables you to sync tickets with Datadog cases. However, Datadog is the single source of truth for issue detection and resolution.
 
-A Datadog finding's related ticket can be closed manually. However, the Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction ensures that a finding is not closed and removed when someone closes a related ticket.
+A Datadog finding's related ticket can be closed manually. However, the Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction helps ensure that a finding is not closed and removed when someone closes a related ticket.
 
 Closing a Datadog case without remediation does not close the finding either.
 
@@ -93,10 +93,8 @@ The following steps set up bidirectional syncing with Jira and verify that setup
       3. Complete the remaining settings, and then click **Save changes**.
 2. Verify that bidirectional Case Management integration with Jira is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
-   2. Open any Security finding.
-   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
-   4. Click the **Jira** tab.
-   5. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
+   2. Locate the ticketing dropdown option in the explorer or finding page and select **Jira**. The button opens a **Jira Ticket** modal.
+   3. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
 
 {{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
@@ -119,29 +117,29 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog ServiceNow integration][21].
       1. Go to **Settings > Integrations > ServiceNow > Case Management**.
-      2. Choose `ITSM` as the target for security triage workflows.
-   3. A [Case Management project][9] that will link to your ServiceNow table.
-   4. The [ServiceNow integration configured within the project][3].
+      2. Choose `Datadog Cases ITSM` as the target for security triage workflows.
+   2. A [Case Management project][9]. A project is a container object that holds a set of cases linked to your ServiceNow table.
+   3. The [ServiceNow integration configured within the project][3].
       1. Go to **Case Management > Settings** and navigate to the ServiceNow tab under the selected project.
       2. Enter your **Instance name** (your ServiceNow subdomain) and **Assignment group**.
       3. Opt in for manual or automatic creation of a ServiceNow incident for each case created in the project.
       4. Enable the **Sync data between Case Management and ServiceNow** option.
       5. Complete the remaining settings for attribute sync, and then click **Save changes**.
-   5. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
+   4. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
 2. Verify that bidirectional Case Management integration with ServiceNow is working:
-   1. Open [any product supporting bidirectional ticket syncing][20].
-   2. Open any Security finding.
-   3. Locate the **Add Ticket** option in the explorer or **Next Steps** and select **ServiceNow**.
-   5. Verify that the bidirectional sync is enabled for the configured **Instance** and **Assignment Group**.
+   1. Open [any product supporting bidirectional ticket syncing][20].     
+   2. Locate the ticketing dropdown option in the explorer or finding page and select **ServiceNow**. The button opens a **ServiceNow Ticket** modal.
+   3. Verify that the bidirectional sync is enabled for the configured **Instance** and **Assignment Group**.
 
 You are ready to start creating bidirectional Case Management tickets.
 
 If you do not see the **Case Management <-> ServiceNow Integration** section, ensure that you have completed the prerequisites.
 
-[3]: /incident_response//case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response/case_management/notifications_integrations/#third-party-tickets
 [9]: /incident_response/case_management/projects/
 [20]: /security/ticketing_integrations/#supported-products
 [21]: /integrations/servicenow/
+[22]: /integrations/guide/servicenow-itom-itsm-setup/
 
 {{% /tab %}}
 
@@ -152,8 +150,8 @@ If you do not see the **Case Management <-> ServiceNow Integration** section, en
 The following steps create a bidirectional ticket for a Security finding.
 
 1. Open [any product supporting bidirectional ticket syncing][20].
-2. Open any Security finding.
-3. Locate the **Add Ticket** option and select the third-party tool from the dropdown.
+2. Locate the **Ticketing** icon dropdown option for a finding in the explorer or under **Next Steps** in the finding page.
+3. Select the third-party tool from the dropdown.
 4. Create a ticket for any third-party tool supported (see sections below).
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
