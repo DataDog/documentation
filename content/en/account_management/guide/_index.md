@@ -17,6 +17,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Account Management:" >}}
+    {{< nextlink href="account_management/guide/secure-configuration" >}}Recommended secure configuration{{< /nextlink >}}
     {{< nextlink href="account_management/guide/manage-datadog-with-terraform" >}}Manage Datadog with Terraform{{< /nextlink >}}
     {{< nextlink href="account_management/guide/access-your-support-ticket" >}}Access your Support ticket{{< /nextlink >}}
 {{< /whatsnext >}}

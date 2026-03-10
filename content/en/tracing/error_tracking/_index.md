@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -30,7 +30,7 @@ Error Tracking is available for all languages supported by APM. It requires no a
 
 Optionally, to see code snippets in your stack traces, set up the [GitHub integration][4].
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
 
 To get started with configuring your repository, see the [Source Code Integration documentation][6].
 

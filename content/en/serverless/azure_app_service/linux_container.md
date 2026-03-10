@@ -519,6 +519,8 @@ If you are setting up monitoring for a .NET application, configure the following
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ## Example application
 The following example contains a single app with tracing, metrics, and logs set up.
 

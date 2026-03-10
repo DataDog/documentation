@@ -56,6 +56,8 @@ logger.info "Hello world!"
 
 {{% serverless-init-env-vars-in-container language="ruby" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
@@ -66,5 +68,5 @@ logger.info "Hello world!"
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#instrument-your-application
 [2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
-[3]: /developers/dogstatsd/?tab=ruby#install-the-dogstatsd-client
+[3]: /extend/dogstatsd/?tab=ruby#install-the-dogstatsd-client
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples-5

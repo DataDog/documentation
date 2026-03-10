@@ -86,6 +86,8 @@ logger.info("Hello world!")
 
 {{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -97,5 +99,5 @@ logger.info("Hello world!")
 [1]: https://pypi.org/project/ddtrace/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5

@@ -79,6 +79,14 @@
     "name": "Case Management Type",
     "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "change-management": {
+    "name": "Change Management",
+    "description": "View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
+  "cloud-authentication": {
+    "name": "Cloud Authentication",
+    "description": "Configure AWS cloud authentication mappings for persona and intake authentication through the Datadog API."
+  },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
@@ -90,6 +98,10 @@
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
+  },
+  "code-coverage": {
+    "name": "Code Coverage",
+    "description": "Retrieve and analyze code coverage data from Code Coverage. See the [Code Coverage page](https://docs.datadoghq.com/code_coverage/) for more information."
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
@@ -151,6 +163,10 @@
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
+  "google-chat-integration": {
+    "name": "Google Chat Integration",
+    "description": "Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)\ndirectly through the Datadog API."
+  },
   "high-availability-multiregion": {
     "name": "High Availability MultiRegion",
     "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."
@@ -171,6 +187,10 @@
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
+  "integrations": {
+    "name": "Integrations",
+    "description": "The Integrations API is used to list available integrations\nand retrieve information about their installation status."
+  },
   "jira-integration": {
     "name": "Jira Integration",
     "description": "Manage your Jira Integration. Atlassian Jira is a project management and issue tracking tool for teams to coordinate work and handle tasks efficiently."
@@ -178,6 +198,10 @@
   "key-management": {
     "name": "Key Management",
     "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
+  },
+  "llm-observability": {
+    "name": "LLM Observability",
+    "description": "Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API."
   },
   "logs": {
     "name": "Logs",
@@ -273,7 +297,7 @@
   },
   "roles": {
     "name": "Roles",
-    "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
+    "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).\n\nRoles can also be managed in bulk through the Datadog UI, which provides\nthe capability to assign a single permission to multiple roles simultaneously."
   },
   "rum-audience-management": {
     "name": "Rum Audience Management",
@@ -306,6 +330,10 @@
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
+  },
+  "seats": {
+    "name": "Seats",
+    "description": "The seats API allows you to view, assign, and unassign seats for your organization."
   },
   "security-monitoring": {
     "name": "Security Monitoring",
@@ -361,7 +389,7 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+    "description": "Synthetic tests use simulated requests and actions so you can monitor the availability and performance of systems and applications. Datadog supports the following types of synthetic tests:\n- [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\n- [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)\n- [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)\n- [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)\nYou can use the Datadog API to create, manage, and organize tests and test suites programmatically.\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   },
   "teams": {
     "name": "Teams",
