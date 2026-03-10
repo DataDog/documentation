@@ -51,7 +51,7 @@ If the **Real-time metric overview** section shows no exposure events, the flag 
 
 Confirm the flag is enabled in the environment where your application runs. You can manage environments on the [Environments page][3]. See the [Getting Started with Feature Flags][5] guide for details on environments.
 
-After you fix the flag configuration, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
+After you enable the flag, check the **Real-time metric overview** for incoming exposure events. Then, return to [Step 1](#step-1-confirm-the-experiment-is-assigning-users) to verify that the subject assignment count is increasing.
 
 #### The flag is receiving traffic but experiment assignments are zero
 
@@ -61,7 +61,7 @@ The **Targeting Rules & Rollouts** section displays a list of targeting rules th
 
 {{< img src="/product_analytics/experiment/troubleshooting_flag_waterfall.png" alt="The Targeting Rules & Rollouts section of a feature flag showing the experiment targeting rule with 269 users and rollout percentages for each variant across four stages." style="width:90%;" >}}
 
-Check the following and edit the targeting rule and traffic allocation as needed:
+Check the following and edit the targeting rule and traffic exposure as needed:
    - **Targeting rule order**: Are targeting rules above the experiment capturing traffic before it reaches the experiment rule?
    - **Targeting rule filters**: Does incoming traffic match the filters in the experiment's targeting rule?
    - **Traffic exposure**: Is the traffic exposure for the targeting rule set correctly?
