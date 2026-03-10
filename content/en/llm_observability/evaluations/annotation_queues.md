@@ -98,7 +98,7 @@ Review Mode displays:
 
 For each trace:
 1. **Review the full trace context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
-2. **Apply labels**: Fill in the configured labels based on your assessment
+2. **Apply labels**: Fill in the configured labels based on your assessment.
 3. Labels will be auto saved
     
 ### Best practices for annotation
