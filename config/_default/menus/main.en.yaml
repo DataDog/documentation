@@ -6410,10 +6410,10 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
       weight: 7
-    - name: Handling Load and Backpressure
-      url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
+    - name: Buffering and Backpressure
+      url: observability_pipelines/scaling_and_performance/buffering_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
-      identifier: observability_pipelines_handling_load_and_backpressure
+      identifier: observability_pipelines_buffering_and_backpressure
       weight: 701
     - name: Scaling Best Practices
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
