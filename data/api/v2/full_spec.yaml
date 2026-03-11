@@ -45055,7 +45055,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45085,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -49361,6 +49360,8 @@ components:
       x-enum-varnames:
       - PERMISSIONS
     Playlist:
+      description: A single RUM replay playlist resource returned by create, update,
+        or get operations.
       properties:
         data:
           $ref: '#/components/schemas/PlaylistData'
@@ -49368,8 +49369,10 @@ components:
       - data
       type: object
     PlaylistArray:
+      description: A list of RUM replay playlists returned by a list operation.
       properties:
         data:
+          description: Array of playlist data objects.
           items:
             $ref: '#/components/schemas/PlaylistData'
           type: array
@@ -49377,10 +49380,13 @@ components:
       - data
       type: object
     PlaylistData:
+      description: Data object representing a RUM replay playlist, including its identifier,
+        type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/PlaylistDataAttributes'
         id:
+          description: Unique identifier of the playlist.
           type: string
         type:
           $ref: '#/components/schemas/PlaylistDataType'
@@ -49388,39 +49394,53 @@ components:
       - type
       type: object
     PlaylistDataAttributes:
+      description: Attributes of a RUM replay playlist, including its name, description,
+        session count, and audit timestamps.
       properties:
         created_at:
+          description: Timestamp when the playlist was created.
           format: date-time
           type: string
         created_by:
           $ref: '#/components/schemas/PlaylistDataAttributesCreatedBy'
         description:
+          description: Optional human-readable description of the playlist's purpose
+            or contents.
           type: string
         name:
+          description: Human-readable name of the playlist.
           example: My Playlist
           type: string
         session_count:
+          description: Number of replay sessions currently in the playlist.
           format: int64
           type: integer
         updated_at:
+          description: Timestamp when the playlist was last updated.
           format: date-time
           type: string
       required:
       - name
       type: object
     PlaylistDataAttributesCreatedBy:
+      description: Information about the user who created the playlist.
       properties:
         handle:
+          description: Email handle of the user who created the playlist.
           example: john.doe@example.com
           type: string
         icon:
+          description: URL or identifier of the user's avatar icon.
           type: string
         id:
+          description: Unique identifier of the user who created the playlist.
           example: 00000000-0000-0000-0000-000000000001
           type: string
         name:
+          description: Display name of the user who created the playlist.
           type: string
         uuid:
+          description: UUID of the user who created the playlist.
           example: 00000000-0000-0000-0000-000000000001
           type: string
       required:
@@ -49438,6 +49458,8 @@ components:
       x-enum-varnames:
       - RUM_REPLAY_PLAYLIST
     PlaylistsSession:
+      description: A single RUM replay session resource as it appears within a playlist
+        context.
       properties:
         data:
           $ref: '#/components/schemas/PlaylistsSessionData'
@@ -49445,8 +49467,10 @@ components:
       - data
       type: object
     PlaylistsSessionArray:
+      description: A list of RUM replay sessions belonging to a playlist.
       properties:
         data:
+          description: Array of playlist session data objects.
           items:
             $ref: '#/components/schemas/PlaylistsSessionData'
           type: array
@@ -49454,10 +49478,13 @@ components:
       - data
       type: object
     PlaylistsSessionData:
+      description: Data object representing a session within a playlist, including
+        its identifier, type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/PlaylistsSessionDataAttributes'
         id:
+          description: Unique identifier of the RUM replay session.
           type: string
         type:
           $ref: '#/components/schemas/ViewershipHistorySessionDataType'
@@ -49465,11 +49492,16 @@ components:
       - type
       type: object
     PlaylistsSessionDataAttributes:
+      description: Attributes of a session within a playlist, including the session
+        event data and its replay track.
       properties:
         session_event:
           additionalProperties: {}
+          description: Raw event data associated with the replay session.
           type: object
         track:
+          description: Replay track identifier indicating which recording track the
+            session belongs to.
           type: string
       type: object
     PostmortemAttachmentRequest:
@@ -63166,8 +63198,11 @@ components:
       - data
       type: object
     SessionIdArray:
+      description: A collection of session identifiers used for bulk add or remove
+        operations on a playlist.
       properties:
         data:
+          description: Array of session identifier data objects.
           items:
             $ref: '#/components/schemas/SessionIdData'
           type: array
@@ -63175,8 +63210,10 @@ components:
       - data
       type: object
     SessionIdData:
+      description: A session identifier data object used for bulk playlist operations.
       properties:
         id:
+          description: Unique identifier of the RUM replay session.
           example: 00000000-0000-0000-0000-000000000001
           type: string
         type:
@@ -63695,13 +63732,17 @@ components:
       x-enum-varnames:
       - SLO_STATUS
     Snapshot:
+      description: A single heatmap snapshot resource returned by create or update
+        operations.
       properties:
         data:
           $ref: '#/components/schemas/SnapshotData'
       type: object
     SnapshotArray:
+      description: A list of heatmap snapshots returned by a list operation.
       properties:
         data:
+          description: Array of heatmap snapshot data objects.
           items:
             $ref: '#/components/schemas/SnapshotData'
           type: array
@@ -63709,6 +63750,7 @@ components:
       - data
       type: object
     SnapshotCreateRequest:
+      description: Request body for creating a heatmap snapshot.
       properties:
         data:
           $ref: '#/components/schemas/SnapshotCreateRequestData'
@@ -63716,6 +63758,8 @@ components:
       - data
       type: object
     SnapshotCreateRequestData:
+      description: Data object for a heatmap snapshot creation request, containing
+        the resource type and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/SnapshotCreateRequestDataAttributes'
@@ -63725,31 +63769,45 @@ components:
       - type
       type: object
     SnapshotCreateRequestDataAttributes:
+      description: Attributes for creating a heatmap snapshot, including the view,
+        session, event, and device context.
       properties:
         application_id:
+          description: Unique identifier of the RUM application.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         device_type:
+          description: Device type used when capturing the snapshot (e.g., desktop,
+            mobile, tablet).
           example: desktop
           type: string
         event_id:
+          description: Unique identifier of the RUM event associated with the snapshot.
           example: 11111111-2222-3333-4444-555555555555
           type: string
         is_device_type_selected_by_user:
+          description: Indicates whether the device type was explicitly selected by
+            the user rather than auto-detected.
           example: false
           type: boolean
         session_id:
+          description: Unique identifier of the RUM session associated with the snapshot.
           type: string
         snapshot_name:
+          description: Human-readable name for the snapshot.
           example: My Snapshot
           type: string
         start:
+          description: Offset in milliseconds from the start of the session at which
+            the snapshot was captured.
           example: 0
           format: int64
           type: integer
         view_id:
+          description: Unique identifier of the RUM view associated with the snapshot.
           type: string
         view_name:
+          description: URL path or name of the view where the snapshot was captured.
           example: /home
           type: string
       required:
@@ -63762,10 +63820,13 @@ components:
       - is_device_type_selected_by_user
       type: object
     SnapshotData:
+      description: Data object representing a heatmap snapshot, including its identifier,
+        type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/SnapshotDataAttributes'
         id:
+          description: Unique identifier of the heatmap snapshot.
           readOnly: true
           type: string
         type:
@@ -63774,50 +63835,71 @@ components:
       - type
       type: object
     SnapshotDataAttributes:
+      description: Attributes of a heatmap snapshot, including view context, device
+        information, and audit metadata.
       properties:
         application_id:
+          description: Unique identifier of the RUM application.
           type: string
         created_at:
+          description: Timestamp when the snapshot was created.
           format: date-time
           readOnly: true
           type: string
         created_by:
+          description: Display name of the user who created the snapshot.
           readOnly: true
           type: string
         created_by_handle:
+          description: Email handle of the user who created the snapshot.
           readOnly: true
           type: string
         created_by_user_id:
+          description: Numeric identifier of the user who created the snapshot.
           format: int64
           readOnly: true
           type: integer
         device_type:
+          description: Device type used when capturing the snapshot (e.g., desktop,
+            mobile, tablet).
           type: string
         event_id:
+          description: Unique identifier of the RUM event associated with the snapshot.
           type: string
         is_device_type_selected_by_user:
+          description: Indicates whether the device type was explicitly selected by
+            the user rather than auto-detected.
           type: boolean
         modified_at:
+          description: Timestamp when the snapshot was last modified.
           format: date-time
           readOnly: true
           type: string
         org_id:
+          description: Numeric identifier of the organization that owns the snapshot.
           format: int64
           readOnly: true
           type: integer
         session_id:
+          description: Unique identifier of the RUM session associated with the snapshot.
           type: string
         snapshot_name:
+          description: Human-readable name for the snapshot.
           type: string
         start:
+          description: Offset in milliseconds from the start of the session at which
+            the snapshot was captured.
           format: int64
           type: integer
         view_id:
+          description: Unique identifier of the RUM view associated with the snapshot.
           type: string
         view_name:
+          description: URL path or name of the view where the snapshot was captured.
           type: string
       type: object
     SnapshotUpdateRequest:
+      description: Request body for updating a heatmap snapshot.
       properties:
         data:
           $ref: '#/components/schemas/SnapshotUpdateRequestData'
@@ -63825,10 +63907,13 @@ components:
       - data
       type: object
     SnapshotUpdateRequestData:
+      description: Data object for a heatmap snapshot update request, containing the
+        resource identifier, type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/SnapshotUpdateRequestDataAttributes'
         id:
+          description: Unique identifier of the heatmap snapshot to update.
           example: 00000000-0000-0000-0000-000000000001
           type: string
         type:
@@ -63837,20 +63922,29 @@ components:
       - type
       type: object
     SnapshotUpdateRequestDataAttributes:
+      description: Attributes for updating a heatmap snapshot, including event, session,
+        and view context.
       properties:
         event_id:
+          description: Unique identifier of the RUM event associated with the snapshot.
           example: 11111111-2222-3333-4444-555555555555
           type: string
         is_device_type_selected_by_user:
+          description: Indicates whether the device type was explicitly selected by
+            the user rather than auto-detected.
           example: false
           type: boolean
         session_id:
+          description: Unique identifier of the RUM session associated with the snapshot.
           type: string
         start:
+          description: Offset in milliseconds from the start of the session at which
+            the snapshot was captured.
           example: 0
           format: int64
           type: integer
         view_id:
+          description: Unique identifier of the RUM view associated with the snapshot.
           type: string
       required:
       - event_id
@@ -71875,8 +71969,10 @@ components:
       - UPDATE
       - DELETE
     ViewershipHistorySessionArray:
+      description: A list of RUM replay sessions from a user's viewership history.
       properties:
         data:
+          description: Array of viewership history session data objects.
           items:
             $ref: '#/components/schemas/ViewershipHistorySessionData'
           type: array
@@ -71884,10 +71980,13 @@ components:
       - data
       type: object
     ViewershipHistorySessionData:
+      description: Data object representing a session in the viewership history, including
+        its identifier, type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/ViewershipHistorySessionDataAttributes'
         id:
+          description: Unique identifier of the RUM replay session.
           type: string
         type:
           $ref: '#/components/schemas/ViewershipHistorySessionDataType'
@@ -71895,17 +71994,25 @@ components:
       - type
       type: object
     ViewershipHistorySessionDataAttributes:
+      description: Attributes of a viewership history session entry, capturing when
+        it was last watched and the associated event data.
       properties:
         event_id:
+          description: Unique identifier of the RUM event associated with the watched
+            session.
           type: string
         last_watched_at:
+          description: Timestamp when the session was last watched by the user.
           example: '2026-01-13T17:15:53.208340Z'
           format: date-time
           type: string
         session_event:
           additionalProperties: {}
+          description: Raw event data associated with the replay session.
           type: object
         track:
+          description: Replay track identifier indicating which recording track the
+            session belongs to.
           type: string
       required:
       - last_watched_at
@@ -72408,6 +72515,7 @@ components:
       - X_PATH_INJECTION
       - XSS
     Watch:
+      description: A single RUM replay session watch resource returned by create operations.
       properties:
         data:
           $ref: '#/components/schemas/WatchData'
@@ -72415,10 +72523,13 @@ components:
       - data
       type: object
     WatchData:
+      description: Data object representing a session watch record, including its
+        identifier, type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/WatchDataAttributes'
         id:
+          description: Unique identifier of the watch record.
           type: string
         type:
           $ref: '#/components/schemas/WatchDataType'
@@ -72426,16 +72537,23 @@ components:
       - type
       type: object
     WatchDataAttributes:
+      description: Attributes for recording a session watch event, including the application,
+        event reference, and timestamp.
       properties:
         application_id:
+          description: Unique identifier of the RUM application containing the session.
           example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
           type: string
         data_source:
+          description: Data source type indicating the origin of the session data
+            (e.g., rum or product_analytics).
           type: string
         event_id:
+          description: Unique identifier of the RUM event that was watched.
           example: 11111111-2222-3333-4444-555555555555
           type: string
         timestamp:
+          description: Timestamp when the session was watched.
           example: '2026-01-13T17:15:53.208340Z'
           format: date-time
           type: string
@@ -72454,8 +72572,10 @@ components:
       x-enum-varnames:
       - RUM_REPLAY_WATCH
     WatcherArray:
+      description: A list of users who have watched a RUM replay session.
       properties:
         data:
+          description: Array of watcher data objects.
           items:
             $ref: '#/components/schemas/WatcherData'
           type: array
@@ -72463,10 +72583,13 @@ components:
       - data
       type: object
     WatcherData:
+      description: Data object representing a session watcher, including their identifier,
+        type, and attributes.
       properties:
         attributes:
           $ref: '#/components/schemas/WatcherDataAttributes'
         id:
+          description: Unique identifier of the watcher user.
           type: string
         type:
           $ref: '#/components/schemas/WatcherDataType'
@@ -72474,19 +72597,26 @@ components:
       - type
       type: object
     WatcherDataAttributes:
+      description: Attributes of a user who has watched a RUM replay session, including
+        contact information and watch statistics.
       properties:
         handle:
+          description: Email handle of the user who watched the session.
           example: john.doe@example.com
           type: string
         icon:
+          description: URL or identifier of the watcher's avatar icon.
           type: string
         last_watched_at:
+          description: Timestamp when the watcher last viewed the session.
           example: '2026-01-13T17:15:53.208340Z'
           format: date-time
           type: string
         name:
+          description: Display name of the user who watched the session.
           type: string
         watch_count:
+          description: Total number of times the user has watched the session.
           example: 0
           format: int32
           maximum: 2147483647

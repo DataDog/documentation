@@ -2883,7 +2883,7 @@
     "description": "Create a heatmap snapshot.",
     "summary": "Create replay heatmap snapshot",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a heatmap snapshot."
   },
   "DeleteReplayHeatmapSnapshot": {
     "description": "Delete a heatmap snapshot.",
@@ -2893,7 +2893,7 @@
     "description": "Update a heatmap snapshot.",
     "summary": "Update replay heatmap snapshot",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for updating a heatmap snapshot."
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
@@ -3077,7 +3077,7 @@
     "description": "Create a playlist.",
     "summary": "Create rum replay playlist",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "DeleteRumReplayPlaylist": {
     "description": "Delete a playlist.",
@@ -3091,13 +3091,13 @@
     "description": "Update a playlist.",
     "summary": "Update rum replay playlist",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A single RUM replay playlist resource returned by create, update, or get operations."
   },
   "BulkRemoveRumReplayPlaylistSessions": {
     "description": "Remove sessions from a playlist.",
     "summary": "Bulk remove rum replay playlist sessions",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A collection of session identifiers used for bulk add or remove operations on a playlist."
   },
   "ListRumReplayPlaylistSessions": {
     "description": "List sessions in a playlist.",
@@ -3127,7 +3127,7 @@
     "description": "Record a session watch.",
     "summary": "Create rum replay session watch",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "A single RUM replay session watch resource returned by create operations."
   },
   "ListRumReplayViewershipHistorySessions": {
     "description": "List watched sessions.",
