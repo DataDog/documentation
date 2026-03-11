@@ -383,71 +383,71 @@ Provides guidance for investigating APM service issues like latency, errors, and
 *Toolset: **cases***\
 Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open P1 cases.
-- Find cases assigned to me in the last 7 days.
-- Search for closed cases in the Support project.
+- What are the open P1 cases that need attention right now?
+- Show me all cases opened this week related to the payment service outage.
+- Are there any unresolved security cases assigned to the platform team?
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
-- Get details for case CASE-1234.
-- Show me the timeline and comments for this case.
-- What's the current status and priority of case ABC-567?
+- What's the latest update on CASE-1234? Show me the full timeline.
+- Who's working on this case and what progress has been made so far?
+- Pull up the details and all comments for the database migration case.
 
 ### `create_datadog_case`
 *Toolset: **cases***\
 Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
 
-- Create a new P2 case titled "Investigate checkout latency spike" in the Platform project.
-- Open a case for tracking the Redis memory issue.
-- Create a case and assign it to the on-call engineer.
+- I'm seeing a latency spike on the checkout service — create a P2 case to track the investigation.
+- Open a security review case for the suspicious login activity we found in the logs.
+- Create a case to track the production deployment rollback and assign it to the on-call engineer.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
-- Change the priority of CASE-1234 to P1.
-- Update the status of this case to In Progress.
-- Assign case ABC-567 to jane.doe@company.com and set the due date to 2026-03-20.
+- This issue is now customer-impacting — escalate CASE-1234 to P1.
+- Mark the database migration case as resolved.
+- Reassign this case to the security team and set a due date for end of week.
 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 Adds a comment to a case's timeline. Comments support markdown formatting.
 
-- Add a comment to CASE-1234 summarizing the investigation findings.
-- Post an update on this case with the latest deployment status.
-- Comment on the case that the root cause has been identified.
+- Add a note to the case summarizing what we found in the logs and traces.
+- Post an update that the hotfix has been deployed and we're monitoring.
+- Document the root cause analysis findings on this case.
 
 ### `link_jira_issue_to_datadog_case`
 *Toolset: **cases***\
 Links an existing Jira issue to a Datadog case for cross-platform tracking. The Jira issue appears in the case's integrations section.
 
-- Link Jira issue PROJ-456 to case CASE-1234.
-- Connect the Jira ticket for the infrastructure migration to this case.
+- Link the Jira ticket for the infrastructure migration to this case so we can track both together.
+- Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
-Lists available [Case Management][38] projects with optional filtering by name or key. Use this to find the project ID needed for creating cases.
+Lists available [Case Management][38] projects with optional filtering by name or key.
 
-- Show me all available case projects.
-- Find the project for the Platform team.
-- List projects matching "support".
+- Which case projects are available for the security team?
+- Show me the projects I can create cases in.
+- Is there a project for tracking production incidents?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 Retrieves details for a specific case project by ID.
 
-- Get details for this case project.
-- What's the name and key for project ID abc-123?
+- Show me the details of the Security Reviews project.
+- What project is this case part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
-Searches for Datadog users by email, name, or handle. Returns matching users with their UUIDs, which are needed for case assignment.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
 
-- Find the user with email john.doe@company.com.
-- Search for users named "Jane" to assign a case.
-- Look up the UUID for user handle jane.doe.
+- Who on the platform team can I assign this case to?
+- Find Jane from the security team so I can assign her this investigation.
+- Look up the on-call engineer to assign this urgent case.
 
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
