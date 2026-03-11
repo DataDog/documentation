@@ -2552,6 +2552,11 @@ menu:
       parent: post_incident
       identifier: post_incident_follow_ups
       weight: 301
+    - name: Postmortems
+      url: incident_response/incident_management/post_incident/postmortems
+      parent: post_incident
+      identifier: post_incident_postmortems
+      weight: 302
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
