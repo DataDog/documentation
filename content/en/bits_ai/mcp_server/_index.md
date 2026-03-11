@@ -70,6 +70,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
 - `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
 - `dbm`: Tools for interacting with [Database Monitoring][26]
+- `cases`: Tools for [Case Management][38], including creating, searching, updating cases, managing projects, and linking Jira issues
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
@@ -377,6 +378,76 @@ Provides guidance for investigating APM service issues like latency, errors, and
 
 - How should I investigate a latency increase in my API service?
 - Guide me through debugging an error spike in production.
+
+### `search_datadog_cases`
+*Toolset: **cases***\
+Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+
+- Show me all open P1 cases.
+- Find cases assigned to me in the last 7 days.
+- Search for closed cases in the Support project.
+
+### `get_datadog_case`
+*Toolset: **cases***\
+Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+
+- Get details for case CASE-1234.
+- Show me the timeline and comments for this case.
+- What's the current status and priority of case ABC-567?
+
+### `create_datadog_case`
+*Toolset: **cases***\
+Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+
+- Create a new P2 case titled "Investigate checkout latency spike" in the Platform project.
+- Open a case for tracking the Redis memory issue.
+- Create a case and assign it to the on-call engineer.
+
+### `update_datadog_case`
+*Toolset: **cases***\
+Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+
+- Change the priority of CASE-1234 to P1.
+- Update the status of this case to In Progress.
+- Assign case ABC-567 to jane.doe@company.com and set the due date to 2026-03-20.
+
+### `add_comment_to_datadog_case`
+*Toolset: **cases***\
+Adds a comment to a case's timeline. Comments support markdown formatting.
+
+- Add a comment to CASE-1234 summarizing the investigation findings.
+- Post an update on this case with the latest deployment status.
+- Comment on the case that the root cause has been identified.
+
+### `link_jira_issue_to_datadog_case`
+*Toolset: **cases***\
+Links an existing Jira issue to a Datadog case for cross-platform tracking. The Jira issue appears in the case's integrations section.
+
+- Link Jira issue PROJ-456 to case CASE-1234.
+- Connect the Jira ticket for the infrastructure migration to this case.
+
+### `list_datadog_case_projects`
+*Toolset: **cases***\
+Lists available [Case Management][38] projects with optional filtering by name or key. Use this to find the project ID needed for creating cases.
+
+- Show me all available case projects.
+- Find the project for the Platform team.
+- List projects matching "support".
+
+### `get_datadog_case_project`
+*Toolset: **cases***\
+Retrieves details for a specific case project by ID.
+
+- Get details for this case project.
+- What's the name and key for project ID abc-123?
+
+### `search_datadog_users`
+*Toolset: **cases***\
+Searches for Datadog users by email, name, or handle. Returns matching users with their UUIDs, which are needed for case assignment.
+
+- Find the user with email john.doe@company.com.
+- Search for users named "Jane" to assign a case.
+- Look up the UUID for user handle jane.doe.
 
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
@@ -694,3 +765,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [35]: /product_analytics
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
+[38]: /service_management/case_management/
