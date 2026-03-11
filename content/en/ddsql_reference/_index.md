@@ -872,18 +872,21 @@ dd.logs(
     to_timestamp ? => timestamp
 ) AS (column_name type [, ...])</pre>
       </td>
-      <td>Returns log data as a table. The columns parameter specifies which log fields to extract, and the AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data.</td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract (nested fields are accessed using dot notation, and non-core attributes need to be prepended by @). The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data.</td>
       <td>
         {{< code-block lang="sql" >}}
-SELECT timestamp, host, service, message
+SELECT timestamp, host, service, message, asset_id
 FROM dd.logs(
     filter  => 'source:java',
-    columns => ARRAY['timestamp','host', 'service','message']
+    columns => ARRAY['timestamp','host','service','message','@asset.id'],
+    from_timestamp => TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    to_timestamp => TIMESTAMP '2025-07-17 00:00:00.000-04:00'
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
     service   VARCHAR,
-    message   VARCHAR
+    message   VARCHAR,
+    asset_id  VARCHAR
 ){{< /code-block >}}
       </td>
     </tr>
