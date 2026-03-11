@@ -22530,6 +22530,11 @@ components:
             wireless devices over all hours in the current date for all organizations.
           format: int64
           type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for all organizations.
+          format: int64
+          type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Cloud Network Monitoring
             hosts (formerly known as Network hosts) over all hours in the current
@@ -23696,6 +23701,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         npm_host_top99p:
@@ -24884,6 +24894,11 @@ components:
         network_device_wireless_top99p_sum:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        network_path_agg_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
