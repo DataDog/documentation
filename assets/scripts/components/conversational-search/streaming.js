@@ -2,6 +2,10 @@ import Typesense from 'typesense';
 
 let client = null;
 
+export function resetTypesenseClient() {
+    client = null;
+}
+
 export function getTypesenseClient(typesenseConfig) {
     if (client) return client;
 
@@ -17,6 +21,20 @@ export function getTypesenseClient(typesenseConfig) {
     });
 
     return client;
+}
+
+/**
+ * Strips Typesense query syntax that breaks hybrid (keyword + vector) search:
+ *  - "double quotes" trigger exact-phrase mode; when 0 keyword hits match,
+ *    Typesense skips vector search entirely and returns 0 results.
+ *  - -dash prefix triggers token exclusion, which is not meaningful for
+ *    a conversational AI query.
+ */
+export function sanitizeQuery(raw) {
+    return raw
+        .replace(/"/g, '')
+        .replace(/(^|\s)-/g, '$1')
+        .trim();
 }
 
 export async function streamConversation({
@@ -42,7 +60,7 @@ export async function streamConversation({
     const commonSearchParams = {
         conversation: true,
         conversation_model_id: modelId,
-        q: query,
+        q: sanitizeQuery(query),
         conversation_stream: true
     };
 

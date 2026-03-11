@@ -49,7 +49,7 @@ The typical flow:
 
 ## Building evaluators
 
-There are two ways to define an evaluator: class-based and function-based.
+There are two ways to define an evaluator using LLM Observability: class-based and function-based. In addition to these evaluators, LLM Observability has integrations with open source evaluation frameworks, such as [DeepEval][6], that can be used in LLM Observability Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|
@@ -273,6 +273,52 @@ judge = LLMJudge(
 - Use `reasoning=True` in structured outputs to include an explanation in results.
 - Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
 
+#### Publishing an LLMJudge as a Datadog managed evaluation
+
+Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without manually recreating the configuration in the UI.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `evaluator` | `LLMJudge` | Yes | The `LLMJudge` instance to publish. |
+| `ml_app` | `str` | Yes | The LLM application name. |
+| `eval_name` | `str` | No | The name to use for the evaluator in Datadog. If omitted, defaults to the `name` set on the `LLMJudge` instance. |
+| `variable_mapping` | `dict[str, str]` | No | Remaps variable names in `user_prompt` to Datadog span field paths in the published evaluator. |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs._evaluators import BooleanStructuredOutput, LLMJudge
+
+LLMObs.enable(
+    ml_app="my-ml-app",
+    api_key="<DD_API_KEY>",
+    app_key="<DD_APP_KEY>",
+)
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    system_prompt="You are a helpful evaluator.",
+    user_prompt=(
+        "Does the output correctly answer the question?\n"
+        "Input: {{input_data}}\n"
+        "Output: {{output_data}}"
+    ),
+    structured_output=BooleanStructuredOutput("correctness", pass_when=True),
+    name="my-correctness-judge",
+)
+
+result = LLMObs.publish_evaluator(
+    judge,
+    ml_app="my-ml-app",
+    variable_mapping={"input_data": "span_input", "output_data": "span_output"},
+)
+print(result["ui_url"])
+{{< /code-block >}}
+
+`LLMObs.publish_evaluator()` returns `{"ui_url": "..."}`, which links to the evaluator in Datadog.
+
+<div class="alert alert-info">Each call to <code>LLMObs.publish_evaluator()</code> creates or updates the evaluator draft. Activate it from the Datadog UI to run it in production.</div>
+
 ### Built-in evaluators
 
 The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
@@ -464,7 +510,7 @@ experiment.run()
 
 ## Using evaluators in production
 
-<div class="alert alert-info">To evaluate production traces without code changes, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
+<div class="alert alert-info">This section covers evaluations you run and submit manually from your application code. To have Datadog run evaluations automatically on production traces, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
 
 To submit evaluations from your application code, construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
@@ -563,8 +609,8 @@ The metric type is set when submitting an evaluation (through `submit_evaluation
 Evaluation labels must follow these conventions:
 
 - Must start with a letter
-- Must only contain ASCII alphanumerics or underscores
-- Other characters, including spaces, are converted to underscores
+- Must only contain ASCII alphanumerics, underscores, or hyphens
+- Spaces and other unsupported characters are converted to underscores
 - Unicode is not supported
 - Must not exceed 200 characters (fewer than 100 is preferred)
 - Must be unique for a given LLM application (`ml_app`) and organization
@@ -588,3 +634,4 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [3]: /llm_observability/instrumentation/otel_instrumentation
 [4]: /llm_observability/experiments
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
+[6]: /llm_observability/evaluations/deepeval_evaluations/
