@@ -3974,6 +3974,7 @@ components:
         key_path:
           description: Specific path for the input.
           items:
+            description: A path segment for the input key.
             type: string
           type: array
       required:
@@ -4089,6 +4090,7 @@ components:
 
             !exact_match operator.'
           items:
+            description: A value to match against in the condition.
             type: string
           type: array
         options:
@@ -4365,6 +4367,8 @@ components:
           description: The client IP addresses matched by the exclusion filter (CIDR
             notation is supported).
           items:
+            description: A client IP address or CIDR range matched by the exclusion
+              filter.
             example: 198.51.100.72
             type: string
           type: array
@@ -4377,6 +4381,8 @@ components:
             HTTP query string and HTTP request body. Nested parameters can be matched
             by joining fields with a dot character.
           items:
+            description: A parameter name matched by the exclusion filter in the HTTP
+              query string or request body.
             example: list.search.query
             type: string
           type: array
@@ -4415,6 +4421,8 @@ components:
           description: The client IP addresses matched by the exclusion filter (CIDR
             notation is supported).
           items:
+            description: A client IP address or CIDR range matched by the exclusion
+              filter.
             example: 198.51.100.72
             type: string
           type: array
@@ -4425,6 +4433,8 @@ components:
             HTTP query string and HTTP request body. Nested parameters can be matched
             by joining fields with a dot character.
           items:
+            description: A parameter name matched by the exclusion filter in the HTTP
+              query string or request body.
             example: list.search.query
             type: string
           type: array
@@ -4580,6 +4590,8 @@ components:
           description: The client IP addresses matched by the exclusion filter (CIDR
             notation is supported).
           items:
+            description: A client IP address or CIDR range matched by the exclusion
+              filter.
             example: 198.51.100.72
             type: string
           type: array
@@ -4590,6 +4602,8 @@ components:
             HTTP query string and HTTP request body. Nested parameters can be matched
             by joining fields with a dot character.
           items:
+            description: A parameter name matched by the exclusion filter in the HTTP
+              query string or request body.
             example: list.search.query
             type: string
           type: array
@@ -45055,7 +45069,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45099,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
