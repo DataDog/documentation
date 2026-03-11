@@ -13,7 +13,7 @@ further_reading:
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, sensitive data exfiltration attacks, and exposure of sensitive data such as PII and secrets. This page describes how to set it up so you can keep your data secure against these AI-based threats.
+AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. AI Guard can also detect sensitive data such as PII and secrets in LLM conversations. This page describes how to set it up so you can keep your data secure against these AI-based threats.
 
 For an overview on AI Guard, see [AI Guard][13].
 
@@ -116,7 +116,7 @@ Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 
 AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. To enable sensitive data scanning, go to **AI Guard** > **Settings** > [**Sensitive Data Scanning**][22] for your services.
 
-When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings are returned in the evaluation response as an `sds_findings` array, where each finding includes the rule name, category (`pii` or `secrets`), matched text, and its location within the message. Findings also appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
+When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
 
 ### 7. (Optional) Limit access to AI Guard spans {#limit-access}
 
