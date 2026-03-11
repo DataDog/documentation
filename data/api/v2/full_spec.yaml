@@ -45055,7 +45055,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45085,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -62530,15 +62529,18 @@ components:
           type: array
       type: object
     ServiceList:
+      description: The response body for the service list endpoint.
       properties:
         data:
           $ref: '#/components/schemas/ServiceListData'
       type: object
     ServiceListData:
+      description: A single data item in the service list response.
       properties:
         attributes:
           $ref: '#/components/schemas/ServiceListDataAttributes'
         id:
+          description: The unique identifier of the service.
           type: string
         type:
           $ref: '#/components/schemas/ServiceListDataType'
@@ -62546,21 +62548,30 @@ components:
       - type
       type: object
     ServiceListDataAttributes:
+      description: Attributes of a service list entry, containing metadata and a list
+        of service names.
       properties:
         metadata:
+          description: A list of metadata items associated with the service.
           items:
             $ref: '#/components/schemas/ServiceListDataAttributesMetadataItems'
           type: array
         services:
+          description: A list of service names.
           items:
+            description: A single service name.
             type: string
           type: array
       type: object
     ServiceListDataAttributesMetadataItems:
+      description: An object containing metadata flags for a service, indicating whether
+        it is traced by APM or monitored via Universal Service Monitoring.
       properties:
         isTraced:
+          description: Indicates whether the service is traced by APM.
           type: boolean
         isUsm:
+          description: Indicates whether the service uses Universal Service Monitoring.
           type: boolean
       type: object
     ServiceListDataType:
