@@ -8844,6 +8844,11 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_mde
       weight: 503
+    - name: Troubleshooting
+      url: product_analytics/experimentation/troubleshooting
+      parent: pa_experiments
+      identifier: pa_experiments_troubleshooting
+      weight: 504
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
