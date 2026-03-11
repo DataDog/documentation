@@ -15,7 +15,7 @@ private: true
 
 ## Overview
 
-Infrastructure modes let you control how much infrastructure monitoring the Datadog Agent performs on a host. Use a non-default mode to reduce resource overhead on hosts that only need system metrics or no infrastructure monitoring at all, such as hosts dedicated to log or APM.
+Infrastructure modes let you control how much infrastructure monitoring the Datadog Agent performs on a host. Use a non-default mode to reduce resource overhead on hosts that only need system metrics or no infrastructure monitoring, such as hosts dedicated to log collection or APM.
 
 ## Available modes
 
@@ -32,7 +32,7 @@ If your host only needs system resource metrics, use `basic` mode. If it does no
 
 The `full` mode requires Agent version 7.73.0 or later.
 
-Datadog recommends `full` mode for most use cases. When in this mode, all Agent infrastructure monitoring features are available.
+Datadog recommends `full` mode for most use cases. In `full` mode, all Agent infrastructure monitoring features are available.
 
 {{% /tab %}}
 {{% tab "Basic" %}}
@@ -88,11 +88,11 @@ In `basic` mode, only the following integrations run. All others, including Cont
 
 The `none` mode requires Agent version 7.77.0 or later.
 
-Datadog recommends `none` mode for Agents that do not require infrastructure monitoring. This mode is best for Agents configured only for [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3].
+Datadog recommends `none` mode for Agents that do not require infrastructure monitoring, such as those configured only for [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3].
 
 When in `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][4] prefixed with `custom_`, and logs-only integrations.
 
-The host appears in [Fleet Automation][5] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
+The host in `none` mode appears in [Fleet Automation][5] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
 [1]: /logs/
 [2]: /tracing/
@@ -115,11 +115,11 @@ infrastructure_mode: <MODE>
 
 2. [Restart the Datadog Agent][2].
 
-### Verify infrastructure mode
+## Verify infrastructure mode
 
-In [Fleet Automation][101], group by the `Infrastructure Mode` facet to see which mode each Agent is running.
+In [Fleet Automation][101], group by the `Infrastructure Mode` facet to see a grouping of hosts by mode.
 
-{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Fleet Automation page with hosts grouped by Infrastructure Mode, showing Full and Basic groups" style="width:90%" >}}
+{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Fleet Automation View Agents page with hosts grouped by Infrastructure Mode, showing Full and Basic groups with host counts." style="width:90%" >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
