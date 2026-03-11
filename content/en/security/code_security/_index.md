@@ -81,7 +81,7 @@ Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanni
 ## Infrastructure as Code Security (IaC Security)
 IaC Security analyzes infrastructure-as-code to detect misconfigurations before they are provisioned to your cloud environment. You can secure your infrastructure and CI/CD with:
 - In-line pull request comments with deterministic suggested fixes and incremental/diff-aware scanning
-- PR gates to block high-severity misconfigurations from reaching your production environment
+- Pull-request gates to block high-severity misconfigurations from reaching your production environment
 - 900+ detections across Terraform, CloudFormation, Kubernetes, GitHub Actions, and more
 
 With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
