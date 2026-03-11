@@ -13640,6 +13640,7 @@ components:
         image_tags:
           description: List of image tags associated with the container image.
           items:
+            description: An image tag associated with the container.
             type: string
           nullable: true
           type: array
@@ -13655,6 +13656,7 @@ components:
         tags:
           description: List of tags associated with the container.
           items:
+            description: A tag associated with the container.
             type: string
           type: array
       type: object
@@ -45055,7 +45057,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45087,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
