@@ -58,6 +58,17 @@ Cost data is also available within your application’s traces and spans, allowi
 Click any trace or span to open a detailed side-panel view that includes cost metrics for the full trace and for each individual LLM call.
 At the top of the trace view, the banner shows aggregated cost information for the full trace, including estimated cost and total tokens. Hovering over these values reveals a breakdown of input and output token/costs.
 
+To query cost-related data in Traces page, use the left side **Cost** facets. 
+
+Alternatively, query the following span attributes directly:
+- `@metrics.input_tokens` / `@metrics.estimated_input_cost`
+- `@metrics.output_tokens` / `@metrics.estimated_output_cost`
+- `@metrics.total_tokens` / `@metrics.estimated_total_cost`
+- `@metrics.non_cached_input_tokens` / `@metrics.estimated_non_cached_input_cost`
+- `@metrics.cache_read_input_tokens` / `@metrics.estimated_cache_read_input_cost`
+- `@metrics.cache_write_input_tokens` / `@metrics.estimated_cache_write_input_cost`
+- `@metrics.reasoning_output_tokens` / `@metrics.estimated_reasoning_output_cost`
+
 Selecting an individual LLM span shows similar cost metrics specific to that LLM request.
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
