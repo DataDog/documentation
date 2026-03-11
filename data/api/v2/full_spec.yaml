@@ -21022,6 +21022,7 @@ components:
           - device_ip:1.2.3.4
           - device_id:example:1.2.3.4
           items:
+            description: A tag string in `key:value` format.
             type: string
           type: array
         vendor:
@@ -28159,6 +28160,7 @@ components:
           - device_ip:1.2.3.4
           - device_id:example:1.2.3.4
           items:
+            description: A tag string in `key:value` format.
             type: string
           type: array
         vendor:
@@ -33339,6 +33341,7 @@ components:
           - 1.1.1.1
           - 1.1.1.2
           items:
+            description: An IP address assigned to the interface.
             type: string
           type: array
         mac_address:
@@ -37163,6 +37166,7 @@ components:
           - tag:test
           - tag:testbis
           items:
+            description: A tag string in `key:value` format.
             type: string
           type: array
       type: object
@@ -45055,7 +45059,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45089,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
