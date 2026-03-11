@@ -24351,6 +24351,8 @@ components:
           example:
           - urn:ietf:params:scim:schemas:core:2.0:User
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
         title:
@@ -24398,6 +24400,8 @@ components:
           example:
           - urn:ietf:params:scim:schemas:core:2.0:Group
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
       type: object
@@ -24457,6 +24461,8 @@ components:
           example:
           - urn:ietf:params:scim:api:messages:2.0:PatchOp
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
       type: object
@@ -24528,6 +24534,8 @@ components:
           example:
           - urn:ietf:params:scim:api:messages:2.0:PatchOp
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
       type: object
@@ -36737,6 +36745,8 @@ components:
           example:
           - urn:ietf:params:scim:api:messages:2.0:ListResponse
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
         startIndex:
@@ -36781,6 +36791,8 @@ components:
           example:
           - urn:ietf:params:scim:schemas:core:2.0:Group
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
       type: object
@@ -36867,6 +36879,8 @@ components:
           example:
           - urn:ietf:params:scim:api:messages:2.0:ListResponse
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
         startIndex:
@@ -36906,6 +36920,8 @@ components:
           example:
           - urn:ietf:params:scim:schemas:core:2.0:User
           items:
+            description: A SCIM schema URI identifying the protocol or schema used
+              in this object.
             type: string
           type: array
         title:
@@ -45055,7 +45071,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45101,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
