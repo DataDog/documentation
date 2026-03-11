@@ -2388,6 +2388,7 @@ components:
           - amplify:ListBackendEnvironments
           - amplify:ListBranches
           items:
+            description: An AWS IAM permission required for the Datadog integration.
             example: account:GetContactInformation
             type: string
           type: array
@@ -2447,6 +2448,7 @@ components:
           description: List of Datadog Lambda Log Forwarder ARNs in your AWS account.
             Defaults to `[]`.
           items:
+            description: The ARN of a Datadog Lambda Log Forwarder function.
             example: arn:aws:lambda:us-east-1:123456789012:function:DatadogLambdaLogForwarder
             type: string
           type: array
@@ -2463,6 +2465,7 @@ components:
 
             endpoint.'
           items:
+            description: An AWS service ID for which automatic log collection is enabled.
             example: s3
             type: string
           type: array
@@ -2533,6 +2536,7 @@ components:
           example:
           - s3
           items:
+            description: The name of an AWS service that can send logs to Datadog.
             example: s3
             type: string
           type: array
@@ -2618,6 +2622,7 @@ components:
           - AWS/ElasticMapReduce
           - AWS/Usage
           items:
+            description: An AWS CloudWatch namespace to exclude from metrics collection.
             example: AWS/SQS
             type: string
           type: array
@@ -2632,6 +2637,7 @@ components:
           example:
           - AWS/EC2
           items:
+            description: An AWS CloudWatch namespace to include in metrics collection.
             example: AWS/EC2
             type: string
           type: array
@@ -2686,6 +2692,7 @@ components:
           example:
           - AWS/ApiGateway
           items:
+            description: An AWS CloudWatch namespace name.
             example: AWS/ApiGateway
             type: string
           type: array
@@ -2783,6 +2790,7 @@ components:
           example:
           - us-east-1
           items:
+            description: An AWS region to include in metrics collection.
             example: us-east-1
             type: string
           type: array
@@ -45055,7 +45063,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45093,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -72847,6 +72854,7 @@ components:
           example:
           - AWS/AppSync
           items:
+            description: An AWS X-Ray service name to include in traces collection.
             example: AWS/AppSync
             type: string
           type: array
