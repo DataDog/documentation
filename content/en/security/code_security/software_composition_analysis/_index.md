@@ -102,7 +102,7 @@ To learn more about how the inventory is generated, how Static and Runtime data 
 
 ### Library vulnerability context in APM
 
-SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match against current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
+SCA enriches the information that Application Performance Monitoring (APM) is already collecting by flagging libraries that match against current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
 
 ## Understanding SCA views
 
