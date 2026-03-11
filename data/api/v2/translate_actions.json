@@ -1238,7 +1238,7 @@
     "description": "Create or update the High Availability Multi-Region (HAMR) organization connection.\nThis endpoint allows you to configure the HAMR connection between the authenticated organization\nand a target organization, including setting the connection status (ONBOARDING, PASSIVE, FAILOVER, ACTIVE, RECOVERY)",
     "summary": "Create or update HAMR organization connection",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",

@@ -29493,6 +29493,7 @@ components:
       - value
       type: object
     HamrOrgConnectionAttributesRequest:
+      description: Attributes for a HAMR organization connection request.
       properties:
         hamr_status:
           $ref: '#/components/schemas/HamrOrgConnectionStatus'
@@ -29531,6 +29532,7 @@ components:
       - modified_by
       type: object
     HamrOrgConnectionAttributesResponse:
+      description: Attributes of a HAMR organization connection response.
       properties:
         hamr_status:
           $ref: '#/components/schemas/HamrOrgConnectionStatus'
@@ -29575,6 +29577,7 @@ components:
       - modified_by
       type: object
     HamrOrgConnectionDataRequest:
+      description: Data object for a HAMR organization connection request.
       properties:
         attributes:
           $ref: '#/components/schemas/HamrOrgConnectionAttributesRequest'
@@ -29591,6 +29594,7 @@ components:
       - attributes
       type: object
     HamrOrgConnectionDataResponse:
+      description: Data object for a HAMR organization connection response.
       properties:
         attributes:
           $ref: '#/components/schemas/HamrOrgConnectionAttributesResponse'
@@ -29606,6 +29610,7 @@ components:
       - attributes
       type: object
     HamrOrgConnectionRequest:
+      description: Request payload for creating or updating a HAMR organization connection.
       properties:
         data:
           $ref: '#/components/schemas/HamrOrgConnectionDataRequest'
@@ -29613,6 +29618,7 @@ components:
       - data
       type: object
     HamrOrgConnectionResponse:
+      description: Response payload for a HAMR organization connection.
       properties:
         data:
           $ref: '#/components/schemas/HamrOrgConnectionDataResponse'
@@ -45055,7 +45061,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45091,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
