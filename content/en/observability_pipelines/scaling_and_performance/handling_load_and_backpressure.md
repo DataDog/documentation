@@ -48,7 +48,7 @@ Use a disk buffer if you need to mitigate data loss and the throughput of your p
 
 ### Choosing buffer on-full behavior
 
-**Block (default)**: If the buffer is full, incoming events are blocked from being written to the buffer. Use this option if you want to help ensure no events are dropped.
+**Block** (default): If the buffer is full, incoming events are blocked from being written to the buffer. Use this option if you want to help ensure no events are dropped.
 
 **Drop Newest**: If the buffer is full, incoming events are dropped. This allows the source to continue to ingest events and prevents backpressure from propagating back to your application. See [Using buffers with multiple destinations](#using-buffers-with-multiple-destinations) for details on how this works when you have multiple destinations.
 
