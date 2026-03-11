@@ -5534,6 +5534,7 @@ components:
           example:
           - staging
           items:
+            description: An environment where the asset is deployed.
             example: staging
             type: string
           type: array
@@ -5550,6 +5551,7 @@ components:
           example:
           - compute
           items:
+            description: A team that owns the asset.
             example: compute
             type: string
           type: array
@@ -36223,6 +36225,7 @@ components:
           description: Related library or package names (such as child packages or
             affected binary paths).
           items:
+            description: A related library or package name affected by the vulnerability.
             example: linux-tools-common
             type: string
           type: array
@@ -45055,7 +45058,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45088,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -55699,6 +55701,7 @@ components:
         dependsOn:
           description: The components that are dependencies of the ref component.
           items:
+            description: A package URL (purl) identifying a dependency of the component.
             example: pkg:golang/google.golang.org/grpc@1.68.1
             type: string
           required:
@@ -56313,6 +56316,8 @@ components:
           example:
           - production
           items:
+            description: An origin identifier for the last successful scan of the
+              asset.
             example: production
             type: string
           type: array
@@ -72049,6 +72054,7 @@ components:
           example:
           - CVE-2023-0615
           items:
+            description: A CVE identifier associated with the vulnerability.
             example: CVE-2023-0615
             type: string
           type: array
@@ -72099,6 +72105,8 @@ components:
           example:
           - agentless-scanner
           items:
+            description: The detection origin of the vulnerability (for example, the
+              scanner type).
             example: agentless-scanner
             type: string
           type: array
@@ -72111,6 +72119,8 @@ components:
           description: Vulnerability `repo_digest` list (when the vulnerability is
             related to `Image` asset).
           items:
+            description: A container image repository digest identifying the affected
+              image.
             example: sha256:0ae7da091191787229d321e3638e39c319a97d6e20f927d465b519d699215bf7
             type: string
           type: array
@@ -72252,6 +72262,7 @@ components:
           example:
           - NIST
           items:
+            description: An exploit source reporting this vulnerability.
             example: NIST
             type: string
           type: array
