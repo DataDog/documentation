@@ -85,7 +85,7 @@ IaC Security analyzes infrastructure-as-code to detect misconfigurations before 
 - 900+ detections across Terraform, CloudFormation, Kubernetes, GitHub Actions, and more
 
 With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
-xs
+
 ## Supply Chain Security
 Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
 
