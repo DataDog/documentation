@@ -139,6 +139,8 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    ecs_fargate: "ECS Fargate"
+    eks_fargate: "EKS Fargate"
     haproxy: "HAProxy"
     traces: "Traces"
     metrics: "Metrics"
