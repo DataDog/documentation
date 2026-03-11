@@ -47,7 +47,7 @@ The `basic` mode requires the following Agent versions:
 
 Datadog recommends `basic` mode for VMs and physical servers that only need system resource metrics.
 
-When in `basic` mode, the Agent reports system resource usage data for the following:
+In `basic` mode, the Agent reports system resource usage data for the following:
 - CPU
 - Memory
 - Disk
@@ -90,7 +90,7 @@ The `none` mode requires Agent version 7.77.0 or later.
 
 Datadog recommends `none` mode for Agents that do not require infrastructure monitoring, such as those configured only for [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3].
 
-When in `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][4] prefixed with `custom_`, and logs-only integrations.
+In `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][4] prefixed with `custom_`, and logs-only integrations.
 
 The host in `none` mode appears in [Fleet Automation][5] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
