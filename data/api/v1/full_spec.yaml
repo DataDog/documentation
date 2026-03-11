@@ -22129,9 +22129,20 @@ components:
             org.
           format: int64
           type: integer
+        csm_host_enterprise_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise OCI hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         csm_host_enterprise_total_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro OCI hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_aas_host_top99p:
@@ -22412,6 +22423,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for all organizations.
@@ -22512,6 +22528,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for all organizations.
           format: int64
           type: integer
         npm_host_top99p:
@@ -23272,9 +23293,20 @@ components:
             org.
           format: int64
           type: integer
+        csm_host_enterprise_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise OCI hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         csm_host_enterprise_total_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro OCI hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_aas_host_top99p:
@@ -23564,6 +23596,11 @@ components:
             current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for the given org.
@@ -23664,6 +23701,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         npm_host_top99p:
@@ -24422,9 +24464,19 @@ components:
             Enterprise GCP hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
+        csm_host_enterprise_oci_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise OCI hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         csm_host_enterprise_total_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        csm_host_pro_oci_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro OCI hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_aas_host_top99p_sum:
@@ -24717,6 +24769,11 @@ components:
             2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p_sum:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current month for all organizations.
@@ -24837,6 +24894,11 @@ components:
         network_device_wireless_top99p_sum:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        network_path_agg_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
@@ -38239,9 +38301,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -39943,9 +40005,9 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false

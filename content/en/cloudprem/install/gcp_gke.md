@@ -306,27 +306,19 @@ metastore:
       memory: 2Gi
 
 # Searcher configuration
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# Choose a tier based on your query complexity, concurrency, and data access patterns.
 searcher:
   enabled: true
   replicaCount: 2
-  resources:
-    limits:
-      cpu: 2
-      memory: 8Gi
-    requests:
-      cpu: 1
-      memory: 4Gi
+  podSize: xlarge
 
 # Indexer configuration
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
-  resources:
-    limits:
-      cpu: 2
-      memory: 8Gi
-    requests:
-      cpu: 1
-      memory: 4Gi
+  podSize: xlarge
 
 # Quickwit configuration
 quickwit:
