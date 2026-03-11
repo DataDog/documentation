@@ -30,11 +30,11 @@ If you already have data or services registered in Backstage or ServiceNow, you 
 
 ### Sync Backstage entities into Datadog Software Catalog
 
-Use the [Datadog Backstage plugin][3] to automatically sync your Backstage catalog entities to the Datadog Software Catalog on a configurable schedule. The plugin runs as a Backstage backend service and supports entity filtering. You can control which entity types are synced—for example, components, APIs, systems, or resources.
+Use the [Datadog Backstage plugin][3] to automatically sync your Backstage catalog entities to the Datadog Software Catalog [entity model][5] on a configurable schedule. The plugin runs as a Backstage backend service and supports entity filtering. You can control which entity types are synced—for example, components, APIs, systems, or resources.
 
 **Prerequisites**
 
-- A Datadog [API key][6], [application key][7], and [site][8]
+- Your Datadog [API key][6], [application key][7], and [Datadog site][8]
 
 For installation and configuration instructions, see the [plugin README][9].
 
@@ -96,7 +96,6 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 
 [2]: /integrations/servicenow/#service-ingestion
 [3]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend
-[4]: https://backstage.io/docs/features/software-catalog/descriptor-format
 [5]: /internal_developer_portal/software_catalog/entity_model/
 [6]: /account_management/api-app-keys/#api-keys
 [7]: /account_management/api-app-keys/#application-keys
