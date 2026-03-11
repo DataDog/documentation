@@ -22423,6 +22423,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for all organizations.
@@ -23586,6 +23591,11 @@ components:
             current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for the given org.
@@ -24747,6 +24757,11 @@ components:
           description: Shows the sum of all log events indexed over all hours in the
             current month for all organizations (To be deprecated on October 1st,
             2024).
+          format: int64
+          type: integer
+        infra_edge_monitoring_devices_top99p_sum:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current month for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:

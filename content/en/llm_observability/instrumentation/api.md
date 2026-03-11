@@ -587,8 +587,8 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. |
-| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. |
+| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. Must be a decimal string (for example, `"20245611112024561111"`). If your instrumentation produces hexadecimal span IDs (such as OpenTelemetry), convert them to decimal before submitting. |
+| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. Must be a decimal string (for example, `"13932955089405749200"`) or a 32-character lowercase hexadecimal string for 128-bit trace IDs. |
 
 #### TagContext
 
