@@ -1267,11 +1267,6 @@
   "ValidatePipeline": [
     {
       "group": "observability_pipelines",
-      "suffix": "_884022323",
-      "description": "Validate a metrics pipeline with opentelemetry source returns \"OK\" response"
-    },
-    {
-      "group": "observability_pipelines",
       "suffix": "",
       "description": "Validate an observability pipeline returns \"OK\" response"
     },
