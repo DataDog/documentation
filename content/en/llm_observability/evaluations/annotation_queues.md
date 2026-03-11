@@ -99,7 +99,7 @@ Review Mode displays:
 For each trace:
 1. **Review the full trace context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
 2. **Apply labels**: Fill in the configured labels based on your assessment.
-3. Labels will be autosaved.
+3. Annotations are be autosaved.
     
 ### Best practices for annotation
 
@@ -172,10 +172,10 @@ To delete a queue:
 ## Data retention
 
 
-| Data              | Retention period |
-| ----------------- | ---------------- |
-| Traces in queues  | 15 days          |
-| Annotation labels | Indefinite       |
+| Data              | Retention period                                    |
+| ----------------- | ----------------------------------------------------|
+| Traces in queues  | Capped by your organization's trace retention period|
+| Annotation labels | Indefinite                                          |
 
 
 ## Example workflows
