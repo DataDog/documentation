@@ -45055,7 +45055,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45085,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -69452,7 +69451,8 @@ components:
           $ref: '#/components/schemas/TimeseriesResponseValuesList'
       type: object
     TimeseriesResponseSeries:
-      description: ''
+      description: A single series in a timeseries query response, containing the
+        query index, unit information, and group tags.
       properties:
         group_tags:
           $ref: '#/components/schemas/GroupTags'
