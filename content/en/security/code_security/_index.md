@@ -71,13 +71,21 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates exposed credentials, API keys, and other sensitive secrets in your codebase. You can embed secret detection throughout the software development lifecycle with:
+Secret Scanning identifies and validates exposed credentials, API keys, and other sensitive secrets in your codebase. You can prevent leaked secrets throughout your software development lifecycle with:
 - Pre-commit hooks to block secrets from being committed locally before they ever reach your repository
-- Third-party validation to confirm whether a detected secret is active and exploitable, reducing noise from rotated or invalid credentials
 - Pull-request gates to block leaked secrets from reaching your default branch
+- Third-party validation to confirm whether a detected secret is active and exploitable, reducing noise from rotated or invalid credentials
 
-See [Secret Scanning setup][9] to get started.
+Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning. See [Secret Scanning setup][9] to get started.
 
+## Infrastructure as Code Security (IaC Security)
+IaC Security analyzes infrastructure-as-code to detect misconfigurations before they are provisioned to your cloud environment. You can secure your infrastructure and CI/CD with:
+- In-line pull request comments with deterministic suggested fixes and incremental/diff-aware scanning
+- PR gates to block high-severity misconfigurations from reaching your production environment
+- 900+ detections across Terraform, CloudFormation, Kubernetes, GitHub Actions, and more
+
+With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
+xs
 ## Supply Chain Security
 Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
 
@@ -102,3 +110,5 @@ Prevent malicious packages from entering your development environments with Data
 [14]: /security/notifications/
 [15]: /security/automation_pipelines/
 [16]: /security/code_security/dev_tool_int/
+[17]: /security/code_security/iac_security/setup/?tab=github
+[18]: /security/cloud_security_management/
