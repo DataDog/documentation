@@ -35296,6 +35296,7 @@ components:
           example:
           - rec-7c3f5a1b-9e2d-4f8a-b1c6-3d7e9f0a2b4c
           items:
+            description: A record ID to delete.
             type: string
           type: array
       required:
@@ -35328,6 +35329,7 @@ components:
           example:
           - 9f64e5c7-dc5a-45c8-a17c-1b85f0bec97d
           items:
+            description: A dataset ID to delete.
             type: string
           type: array
       required:
@@ -35360,6 +35362,7 @@ components:
           example:
           - 3fd6b5e0-8910-4b1c-a7d0-5b84de329012
           items:
+            description: An experiment ID to delete.
             type: string
           type: array
       required:
@@ -35392,6 +35395,7 @@ components:
           example:
           - a33671aa-24fd-4dcd-9b33-a8ec7dde7751
           items:
+            description: A project ID to delete.
             type: string
           type: array
       required:
@@ -35615,6 +35619,7 @@ components:
         tags:
           description: List of tags associated with the metric.
           items:
+            description: A tag string in `key:value` format.
             type: string
           type: array
         timestamp_ms:
@@ -35688,6 +35693,7 @@ components:
         tags:
           description: List of tags associated with the span.
           items:
+            description: A tag string in `key:value` format.
             type: string
           type: array
         trace_id:
@@ -45055,7 +45061,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45091,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
