@@ -6,12 +6,21 @@ $stepper-title-pad-top: 16px;
 $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0.5);
 
 .stepper {
+    position: relative;
     margin-bottom: 24px;
-    counter-reset: stepper-step;
     opacity: 0;
+
+    &--open {
+        opacity: 1;
+    }
 
     &--initialized {
         opacity: 1;
+    }
+
+    // Hide any element with data-hidden="true" within steppers
+    [data-hidden="true"] {
+        display: none !important;
     }
 }
 
@@ -22,7 +31,6 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 .stepper__step {
     position: relative;
     padding-left: $stepper-gutter;
-    counter-increment: stepper-step;
 
     // Vertical connecting line
     &::before {
@@ -35,9 +43,9 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
         background-color: $gray-light;
     }
 
-    // Number circle
+    // Number circle (uses data attribute set by JS instead of CSS counter)
     &::after {
-        content: counter(stepper-step);
+        content: attr(data-step-number);
         position: absolute;
         left: 0;
         top: $stepper-title-pad-top + 2px;
@@ -81,6 +89,13 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     background-color: $brand-primary;
 }
 
+// All-expanded mode: all circles purple with step numbers
+.stepper--all-expanded .stepper__step::after {
+    content: attr(data-step-number);
+    background-color: $brand-primary;
+    background-image: none;
+}
+
 // Completed step: green circle with checkmark icon
 .stepper__step--completed::after {
     content: '';
@@ -100,10 +115,9 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     line-height: $stepper-circle-size;
     cursor: pointer;
     user-select: none;
-    transition: color 0.15s;
 
-    &:hover {
-        color: $brand-primary;
+    .stepper--all-expanded & {
+        cursor: default;
     }
 }
 
@@ -111,37 +125,34 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     display: none;
     padding-bottom: 8px;
 
-    // Let hidden="until-found" use content-visibility instead of display:none,
-    // so browser find-in-page can still search collapsed step content.
-    // The !important is needed to override Bootstrap's [hidden] { display: none !important; }.
-    &[hidden='until-found'] {
-        display: block !important;
-        content-visibility: hidden;
-    }
-
     > *:last-child {
         margin-bottom: 0;
     }
 }
 
+// Show content for the active step
 .stepper__step--active .stepper__step-content {
     display: block;
 }
 
+// Show all content in expanded mode
+.stepper--all-expanded .stepper__step-content {
+    display: block;
+}
+
 .stepper__nav {
-    display: none;
+    display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
     padding: 8px 0 16px;
 }
 
-.stepper__step--active .stepper__nav {
-    display: flex;
-}
-
-.stepper__nav-left,
-.stepper__nav-right {
+.stepper__viz-controls {
+    position: absolute;
+    top: $stepper-title-pad-top;
+    right: 0;
+    z-index: 2;
     display: flex;
     gap: 8px;
 }
@@ -168,7 +179,9 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 
 .stepper__next-btn,
 .stepper__finish-btn,
-.stepper__reset-btn {
+.stepper__reset-btn,
+.stepper__show-all-btn,
+.stepper__collapse-btn {
     background-color: $brand-primary;
     color: $white;
 
@@ -187,28 +200,7 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     }
 }
 
-.stepper__controls {
-    display: none;
+.stepper__reset {
     padding: 8px 0;
     margin-left: $stepper-gutter;
-    gap: 8px;
-}
-
-// Show-all mode: expand every step's content
-.stepper--show-all {
-    .stepper__step-content {
-        display: block;
-    }
-
-    .stepper__step::after {
-        background-color: $brand-primary;
-    }
-
-    .stepper__controls {
-        display: block;
-    }
-
-    .stepper__finished {
-        display: none;
-    }
 }
