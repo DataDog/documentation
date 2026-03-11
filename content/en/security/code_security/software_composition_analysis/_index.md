@@ -116,10 +116,10 @@ The Repositories Explorer and Vulnerabilities Explorer serve complementary but d
 
 ### Retroactive advisory matching
 
-Datadog automatically applies new advisories to all existing scan results, including results from older commits. This means:
-- You do not need to trigger a new scan for a newly published CVE to be reflected in your vulnerability posture.
-- The Vulnerabilities Explorer always shows the most current risk picture based on your last known library inventory.
-- The Repositories Explorer remains a historical record of what was known at scan time.
+Datadog continuously matches newly published advisories against the stored library inventory from past scans. This updates vulnerability records in the Vulnerabilities Explorer without changing the original Repositories Explorer snapshots. This means:
+- You do not need to trigger a new scan for a newly published CVE to be reflected in your vulnerability posture in the Vulnerabilities Explorer.
+- The Vulnerabilities Explorer always shows the most current risk picture based on your last known library inventory, even for older commits that have not been rescanned.
+- The Repositories Explorer remains a fixed, point-in-time historical record of what was known at scan time and does not update when new advisories are published.
 
 ### Vulnerability lifecycle
 Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
