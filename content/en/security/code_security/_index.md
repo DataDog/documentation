@@ -71,7 +71,7 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
+Secret Scanning identifies and validates leaked secrets in your codebase. See [Secret Scanning setup][9] to get started.
 
 ## Supply Chain Security
 Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
@@ -89,7 +89,7 @@ Prevent malicious packages from entering your development environments with Data
 [6]: /security/code_security/static_analysis/setup/
 [7]: /security/code_security/iast/setup/
 [8]: /security/code_security/secret_scanning/
-[9]: https://www.datadoghq.com/product-preview/secret-scanning/
+[9]: /security/code_security/secret_scanning/#set-up-secret-scanning
 [10]: /security/code_security/iac_security
 [11]: https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc
 [12]: https://www.datadoghq.com/product-preview/malicious-pr-protection/
