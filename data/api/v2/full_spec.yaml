@@ -40703,6 +40703,7 @@ components:
           - prod
           - staging
           items:
+            description: A valid tag value for the monitor configuration policy.
             maxLength: 255
             type: string
           type: array
@@ -40725,6 +40726,7 @@ components:
           - prod
           - staging
           items:
+            description: A valid tag value for the monitor configuration policy.
             maxLength: 255
             type: string
           type: array
@@ -40923,6 +40925,7 @@ components:
           - team:product
           - host:abc
           items:
+            description: A tag key:value pair to match against monitor notifications.
             maxLength: 255
             type: string
           maxItems: 20
@@ -41346,6 +41349,7 @@ components:
           - value1
           - value2
           items:
+            description: An available value for the template variable.
             minLength: 1
             type: string
             uniqueItems: true
@@ -41355,6 +41359,7 @@ components:
           example:
           - defaultValue
           items:
+            description: A default value for the template variable.
             minLength: 0
             type: string
             uniqueItems: true
@@ -45055,7 +45060,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45090,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
