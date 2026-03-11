@@ -1,13 +1,16 @@
 ---
 aliases:
+- /es/real_user_monitoring/session_replay/heatmaps
+- /es/real_user_monitoring/heatmaps
+- /es/product_analytics/session_replay/heatmaps
 - /es/product_analytics/heatmaps
-description: Los mapas de calor son un tipo de visualización que te permite ver dónde
-  hacen clic los usuarios en tu sitio web.
+description: Los mapas de calor son un tipo de visualización que muestra dónde hacen
+  clic los usuarios en tu sitio web.
 further_reading:
-- link: /product_analytics/session_replay/browser/
+- link: /session_replay/browser/
   tag: Documentación
   text: Session Replay para navegadores
-- link: /product_analytics/session_replay/mobile/
+- link: /session_replay/mobile/
   tag: Documentación
   text: Session Replay para móviles
 - link: https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/
@@ -17,33 +20,57 @@ further_reading:
 title: Mapas de calor
 ---
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-landing.png" alt="Información general de la página de Mapas de calor que muestra la opción Mapa de clic." style="width:100%;">}}
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-landing.png" alt="Información general de la funcionalidad del mapa de calor." style="width:100%;">}}
 
-Un heatmap (o mapa de calor) es una visualización de las interacciones de tus usuarios superpuesta a los datos de Session Replay. Análisis de producto dispone de tres tipos diferentes de mapas de calor:
+Un heatmap (o mapa de calor) es una visualización de las interacciones de tus usuarios superpuesta a los datos de Session Replay. Existen tres tipos diferentes de mapas de calor:
 
 - **Mapas de clics:** Consulta las interacciones de los usuarios (clics) para comprender cómo interactúan con tu página.
-- **Principales elementos:** Visualiza una clasificación de los 10 elementos con los que más se interactuó en una página.
+- **Elementos principales:** permite ver una clasificación de los 10 elementos con los que más se interactuó en una página determinada.
 - **Mapas de desplazamiento:** Observa hasta dónde se desplazan los usuarios por una página, incluyendo dónde se encuentra el pliegue medio de una página. El pliegue medio es el punto más bajo de una página que un usuario puede ver en su dispositivo sin desplazarse.
 
-Utiliza mapas de calor para revisar los datos de interacción de los usuarios e identificar formas de mejorar tu experiencia de usuario.
+Utiliza mapas de calor para revisar datos complejos de un vistazo y obtener información para optimizar la experiencia del usuario.
 
 ## Requisitos previos
 
 Para empezar con los mapas de calor:
 
 1. Verifica la versión de tu SDK:
-   - Para los mapas de clic, debes estar en la última versión del kit de desarrollo de software (SDK) (v4.40.0+).
-   - Para los mapas de desplazamiento, debes estar en la versión 4.50.0+.
+   - Para los mapas de clics, debes tener la última versión del SDK (v4.40.0 o posterior).
+   - Para los mapas de desplazamiento, debes tener (v4.50.0 o posterior).
 2. Activa [Session Replay][1].
-3. Establece `trackUserInteractions: true` en la inicialización del kit de desarrollo de software (SDK) para activar el seguimiento de acción (necesario para los mapas de clic).
+3. Configura `trackUserInteractions: true` en la inicialización del SDK para habilitar el seguimiento de acciones (necesario para los mapas de clics).
 
 ## Empezando
 
-Ve a [**Experiencia digital > Análisis de productos > Session Replay > Mapas de calor**][2]. Selecciona tu aplicación y visualízala.
+{{< tabs >}}
+{{% tab "RUM" %}}
 
-A la izquierda del selector de marco temporal, puedes seleccionar el tipo de mapa de calor que deseas ver: Elementos principales, Mapa de clics o Mapa de desplazamiento.
+Ve a [**Digital Experience > Real User Monitoring > Session Replay > Heatmaps**[[1] (Experiencia digital > Real User Monitoring > Session Replay > Mapas de calor). Selecciona tu aplicación y visualízalos.
+
+En la [página de inicio de Real User Monitoring][2], selecciona tu aplicación en el selector de aplicaciones y visualízala. A la izquierda del selector de marco temporal, puedes seleccionar el tipo de mapa de calor que deseas ver: Elementos principales, Mapa de clics o Mapa de desplazamiento.
+
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-different-views.png" alt="La página de mapas de calor tiene múltiples formas de mostrar diferentes vistas: por aplicación, tipo de mapa, tipo de dispositivo, nombre de acción y filtros detallados." style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/rum/heatmap/
+[2]: https://app.datadoghq.com/rum/performance-monitoring
+
+{{% /tab %}}
+{{% tab "Product Analytics" %}}
+
+Ve a [**Digital Experience > Product Analytics > Heatmaps**][1] (Experiencia digital > Product Analytics > Mapas de calor). Selecciona tu aplicación y visualízala.
+
+Desde esta página, puedes seleccionar el tipo de mapa de calor (Elementos principales, Mapa de clics, Mapa de desplazamiento) que deseas ver para una vista concreta.
 
 {{< img src="product_analytics/heatmaps/pa-heatmaps-page.png" alt="Para cada vista, puedes seleccionar un tipo de mapa de calor diferente: Elementos principales, Mapa de clics, Mapa de desplazamientos." style="width:100%;">}}
+
+Haz clic en el nombre de una vista para ver con más detalle el mapa de calor correspondiente.
+
+{{< img src="product_analytics/heatmaps/pa-heatmaps-annotated.png" alt="La página de mapas de calor tiene diferentes formas de mostrar diferentes vistas: por aplicación, tipo de mapa, tipo de dispositivo, nombre de acción y filtros granulares." style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/product-analytics/heatmap
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Dispones de las siguientes opciones de visualización adicionales:
 
@@ -51,8 +78,6 @@ Dispones de las siguientes opciones de visualización adicionales:
 - Para cambiar la vista del dispositivo, utiliza el selector **Tipo de dispositivo**.
 - Para filtrar por el nombre de acción, utiliza el desplegable **Filtrar acciones por**.
 - Para añadir filtros más granulares, como una geografía específica, por ejemplo, haz clic en el botón **Add Filter** (Añadir filtro).
-
-{{< img src="product_analytics/heatmaps/pa-heatmaps-annotated.png" alt="La página de mapas de calor tiene diferentes formas de mostrar diferentes vistas: por aplicación, tipo de mapa, tipo de dispositivo, nombre de acción y filtros granulares." style="width:100%;">}}
 
 ## Elementos principales
 
@@ -66,7 +91,7 @@ Pasa el ratón por encima de cualquier nombre de acción del panel para resaltar
 
 Un mapa de clics te muestra las acciones con las que más se interactuó en una vista determinada, agregando acciones de clic de las sesiones y visualizándolas como manchas en el mapa.
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmaps.png" alt="Datos del mapa de clic superpuestos en un sitio web." style="width:100%;">}}
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-clickmaps.png" alt="Datos de mapas de clics superpuestos en un sitio web." style="width:100%;">}}
 
 A la izquierda hay una lista de todas las acciones que ocurrieron en la página, enumeradas por frecuencia. Al hacer clic en una acción, puedes obtener más información sobre esa interacción, por ejemplo:
 
@@ -81,7 +106,7 @@ En esta vista, también puedes hacer clic en el botón **Start a Funnel** (Inici
 
 Los mapas de desplazamiento muestran la actividad de desplazamiento agregada en una página determinada. Utiliza los mapas de desplazamiento para ver dónde se encuentra el pliegue medio de la página y cuántos usuarios se desplazan hasta una profundidad determinada. Puedes arrastrar la barra azul flotante de un mapa de desplazamiento hasta la profundidad que quieras evaluar.
 
-{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-scrollmap.png" alt="Mapa de desplazamiento de una página de comercio electrónico de ejemplo que muestra el pliegue medio y la distribución de profundidad del desplazamiento." style="width:100%;">}}
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-scrollmap.png" alt="Mapa de desplazamientos de la página de destino en una aplicación de comercio electrónico de ejemplo" style="width:100%;">}}
 
 El panel situado a la izquierda del mapa de desplazamiento proporciona información muy clara con enlaces directos a los resultados de la consulta, como un enlace a una lista de las visualizaciones en las que el usuario se desplazó más allá de un percentil determinado. Debajo del panel de información hay un minimapa de la página y un gráfico de distribución que muestra datos de desplazamiento detallados, útiles para identificar dónde se producen los mayores abandonos de la página.
 
@@ -119,29 +144,38 @@ Para eliminar la captura de pantalla guardada actualmente y volver a una autosel
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-unpin-screenshot-1.png" alt="Haz clic en Desfijar para eliminar la captura de pantalla fijada actualmente." style="width:100%;">}}
 
+## Conservación de datos
+
+Los periodos que puedes ver en un mapa de calor dependen de dónde accedas a él:
+
+- **RUM**: los mapas de calor de Session Replay utilizan datos de clics de RUM (eventos de acción de RUM), que tienen un periodo de retención de 30 días.
+- **Product Analytics**: los mapas de calor utilizan datos de clics de Product Analytics, que tienen un periodo de retención de 15 meses.
+
 ## Siguientes pasos
 
-Después de analizar los mapas de calor, explora los datos relacionados para entender por qué los usuarios se comportan de esa manera. Ve al [Explorer de análisis][3] o mira las [Session Replays][1] asociadas para ver visualmente las acciones de los usuarios en el contexto de su sesión global.
+Tras analizar los mapas de calor, el siguiente paso es comprender la acción del usuario explorando los datos relacionados. Mire las [Session Replays][1] asociadas para ver las acciones del usuario en el contexto de su sesión global, o navega a un Explorer de análisis en [RUM][3] o [Product Analytics][4] para analizar tus datos de usuario.
 
 ## Solucionar problemas
 
 ### Estoy viendo un mapa de calor para una vista determinada, pero me muestra una página inesperada.
 
-Los mapas de calor se basan en los nombres de las vistas de Product Analytics. Según cómo esté configurada tu aplicación de Product Analytics, muchas páginas pueden estar agrupadas bajo el mismo nombre de vista, o puedes tener nombres de vista muy específicos.
+Los mapas de calor se basan en nombres de vistas. Según cómo esté configurada tu aplicación, muchas páginas pueden empezar a agruparse bajo el mismo nombre de vista, o puedes empezar a tener nombres de vista específicos.
 
 ### La vista que seleccioné no muestra el contenido inicial.
 
-Los mapas de calor se generan con datos de Session Replay. Datadog selecciona automáticamente una repetición que sea reciente y se acerque al estado inicial de la página. En algunos casos, es posible que desees ver el mapa de calor para un estado de vista diferente. Para cambiar la captura de pantalla del mapa de calor, haz clic en **Change Screenshot** (Cambiar captura de pantalla) y, a continuación, en **Grab from replay** (Capturar desde la repetición) para navegar por los distintos estados de una repetición y encontrar el que buscas. Si la repetición que estás viendo no tiene la captura de pantalla que buscas, puedes utilizar el botón **Choose Another Replay** (Elegir otra repetición) para seleccionar otra repetición de la misma vista.
+Los mapas de calor se generan con datos de Session Replay. El algoritmo inteligente de Datadog elige la repetición más reciente y que mejor se ajusta al estado inicial de la página. En algunos casos, es posible que esta repetición no sea la que quieres utilizar. Para cambiar el snapshot de tu mapa de calor, utiliza el botón **Change Snapshot** (Cambiar instantánea) para navegar por los diferentes estados de una repetición y encontrar la que deseas. Si la repetición que estás viendo no tiene el snapshot que buscas, puedes utilizar el botón **Choose Another Replay** (Elegir otra repetición) para seleccionar otra repetición de la misma vista.
+
+{{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-change-the-snapshot.mp4" alt="Selecciona un fondo diferente al hacer clic en el botón Cambiar snapshot" video=true >}}
 
 ### En la lista de acciones en el lado de mi mapa de calor, veo un icono que muestra un elemento que no es visible en el mapa de calor.
 
-El globo del icono dice que el elemento no es visible. Esto significa que el elemento es una acción común en tu página, pero no se muestra en la captura de pantalla en el mapa de calor. Para ver ese elemento, puedes hacer clic en **Change Screenshot** (Cambiar captura de pantalla) en la esquina superior derecha para cambiar la captura de pantalla de tu mapa de calor a una en la que esté presente ese elemento.
+El globo del icono dice que el elemento no es visible. Esto significa que el elemento es una acción común en tu página, pero no se muestra en el snapshot en el mapa de calor. Para ver ese elemento, puedes hacer clic en **Change Snapshot** (Cambiar snapshot) en la esquina superior derecha para cambiar el snapshot de tu mapa de calor a uno en el que esté presente ese elemento.
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-hidden-elements.png" alt="Elementos ocultos en la lista de acciones del mapa de calor." style="width:100%;">}}
 
 ### Después de intentar crear un mapa de calor, veo que aparece el estado "No Replay Data" (No hay datos de repeticiones).
 
-Esto significa que Datadog no logró encontrar ninguna Session Replay para utilizarla como un fondo del mapa de calor que coincida con los filtros actuales de búsqueda. Si acabas de empezar a grabar sesiones con el [SDK del navegador][4], puede que la Session Replay tarde unos minutos en estar disponible para su visualización.
+El estado "No Replay Data" significa que Datadog no pudo encontrar ninguna Session Replay para usar como fondo del mapa de calor que coincida con los filtros de búsqueda actuales. Si acabas de empezar a grabar sesiones con el [kit de desarrollo de software (SDK) del navegador][2], también es posible que Session Replay tarde unos minutos en estar disponible para su visualización.
 
 ### Después de intentar crear un mapa de calor, veo que aparece el estado "Not enough data to generate a heatmap" (No hay suficientes datos para generar un mapa de calor).
 
@@ -152,12 +186,12 @@ Esto significa que Datadog no ha podido emparejar ninguna acción del usuario co
 
 ### Toda la información del usuario en la página está vacía.
 
-La información del usuario no se recopila por defecto. Los mapas de calor utilizan la información de usuario disponible en los datos de sesión para mostrar información relevante sobre el comportamiento. Para rellenar la información del usuario, configura los atributos de usuario en la implementación del kit de desarrollo de software (SDK).
+La información del usuario no se recopila por defecto. Los mapas de calor utilizan la información de usuario disponible en tus datos de sesión para mostrar información relevante sobre el comportamiento.
 
 ## Referencias adicionales
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/product_analytics/session_replay/browser/
-[2]: https://app.datadoghq.com/product-analytics/heatmap
-[3]: /es/product_analytics/analytics_explorer/
-[4]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
+[1]: /es/session_replay/
+[2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
+[3]: /es/real_user_monitoring/explorer/
+[4]: /es/product_analytics/charts/analytics_explorer/
