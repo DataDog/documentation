@@ -1,6 +1,6 @@
 ---
 title: Infrastructure Modes
-description: "Optimize Agent behavior for specialized compute scenarios."
+description: "Change Agent behavior to control how much infrastructure monitoring the Datadog Agent performs on a host."
 further_reading:
 - link: "/agent/configuration/agent-configuration-files/"
   tag: "Guide"
@@ -15,28 +15,24 @@ private: true
 
 ## Overview
 
-The Agent infrastructure mode determines which capabilities, integrations, and metrics the Agent collects for hosts. This guide explains the behavior of each mode and how to configure it.
+Infrastructure modes let you control how much infrastructure monitoring the Datadog Agent performs on a host. Use a non-default mode to reduce resource overhead on hosts that only need system metrics or no infrastructure monitoring at all, such as hosts dedicated to log or APM.
 
-**Note**: The availability and behavior of a mode may change between Agent versions.
-
-## Agent infrastructure mode
+## Available modes
 
 The Agent supports three infrastructure modes: `full`, `basic`, and `none`.
 
-**Note**: If the `infrastructure_mode` option is not explicitly set in the configuration file, the Agent operates in `full` mode.
+If the `infrastructure_mode` option is not explicitly set in the configuration file, the Agent operates in `full` mode.
+
+If your host only needs system resource metrics, use `basic` mode. If it does not need any infrastructure monitoring, use `none` mode.
 
 {{< tabs >}}
 {{% tab "Full" %}}
+<div class="alert alert-info"> This is the default. You do not need additional configuration unless you are switching from another mode.
+</div>
 
-The `full` mode requires Agent version 7.73.0 or later. 
+The `full` mode requires Agent version 7.73.0 or later.
 
 Datadog recommends `full` mode for most use cases. When in this mode, all Agent infrastructure monitoring features are available.
-
-To configure the Agent in `full` mode, add the following setting to `datadog.yaml`:
-
-```yaml
-infrastructure_mode: full
-```
 
 {{% /tab %}}
 {{% tab "Basic" %}}
@@ -49,7 +45,7 @@ The `basic` mode requires the following Agent versions:
 | Windows  | 7.76.2  |
 | macOS    | 7.73.0  |
 
-Datadog recommends `basic` mode for VMs and physical servers with low observability requirements.
+Datadog recommends `basic` mode for VMs and physical servers that only need system resource metrics.
 
 When in `basic` mode, the Agent reports system resource usage data for the following:
 - CPU
@@ -58,12 +54,7 @@ When in `basic` mode, the Agent reports system resource usage data for the follo
 - Network
 - Process and service data (limited)
 
-Datadog disables the following features in `basic` mode:
-- Container monitoring
-- Live Processes
-- Agent integrations (See exceptions below)
-
-Only the following integrations run in `basic` mode:
+In `basic` mode, only the following integrations run. All others, including Container Monitoring and Live Processes, are disabled:
 
 - [System Check][1]
 - [Disk][2]
@@ -77,13 +68,7 @@ Only the following integrations run in `basic` mode:
 - [Custom checks][10] prefixed with `custom_`
 - Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
 
-**Note**: Configured integrations that are not in the list above are ignored. To run them, switch to `full` mode. 
-
-To configure the Agent in `basic` mode, add the following setting to `datadog.yaml`:
-
-```yaml
-infrastructure_mode: basic
-```
+**Note**: Configured integrations that are not in the previous list do not run. To run them, switch to `full` mode.
 
 [1]: /integrations/system/
 [2]: /integrations/disk/
@@ -101,44 +86,42 @@ infrastructure_mode: basic
 {{% /tab %}}
 {{% tab "None" %}}
 
-The `none` mode requires Agent version 7.77.0 or later. 
+The `none` mode requires Agent version 7.77.0 or later.
 
-Datadog recommends `none` mode for Agents that do not require infrastructure monitoring (for example, Agents configured only for [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3]).
+Datadog recommends `none` mode for Agents that do not require infrastructure monitoring. This mode is best for Agents configured only for [Log Management][1], [Application Performance Monitoring][2], or [Error Tracking][3].
 
-When in `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can still use custom metrics, [custom checks][4] prefixed with `custom_`, and logs-only integrations.
+When in `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][4] prefixed with `custom_`, and logs-only integrations.
 
-To configure the Agent in `none` mode, add the following setting to `datadog.yaml`:
-
-```yaml
-infrastructure_mode: none
-```
+The host appears in [Fleet Automation][5] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
 [1]: /logs/
 [2]: /tracing/
 [3]: /error_tracking/
 [4]: /extend/custom_checks/
+[5]: https://app.datadoghq.com/fleet
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure Agent infrastructure mode
+## Configure Agent infrastructure mode
 
-1. Add or edit the `infrastructure_mode` option in the main [Agent configuration file][1] on the same level as the API key.
+1. Add the `infrastructure_mode` option at the root level of the [Agent configuration file][1] (`datadog.yaml`).
 
-```sh
+    {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
+      collapsible="true" >}}
+api_key: <API_KEY>
 infrastructure_mode: <MODE>
-```
+    {{< /code-block >}}
 
-2. [Restart the Datadog Agent][2]. 
+2. [Restart the Datadog Agent][2].
 
 ### Verify infrastructure mode
 
-To verify the configured infrastructure mode of an Agent in [Fleet Automation][101], search or group by the `Infrastructure Mode` facet.
+In [Fleet Automation][101], group by the `Infrastructure Mode` facet to see which mode each Agent is running.
 
-{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Screenshot of Fleet Automation showing hosts grouped by their infrastructure mode" style="width:90%" >}}
+{{< img src="agent/configuration/fleet_automation_group_by_infra_mode1.png" alt="Fleet Automation page with hosts grouped by Infrastructure Mode, showing Full and Basic groups" style="width:90%" >}}
 
 ## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/agent-configuration-files/
