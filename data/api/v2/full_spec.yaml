@@ -7460,6 +7460,7 @@ components:
       description: The request body for deleting multiple rows from a reference table.
       properties:
         data:
+          description: List of row resources to delete from the reference table.
           items:
             $ref: '#/components/schemas/BatchDeleteRowsRequestData'
           maxItems: 200
@@ -7471,6 +7472,7 @@ components:
       description: Row resource containing a single row identifier for deletion.
       properties:
         id:
+          description: The primary key value that uniquely identifies the row to delete.
           example: primary_key_value
           type: string
         type:
@@ -7484,6 +7486,8 @@ components:
         reference table.
       properties:
         data:
+          description: List of row resources to create or update in the reference
+            table.
           items:
             $ref: '#/components/schemas/BatchUpsertRowsRequestData'
           maxItems: 200
@@ -7498,6 +7502,8 @@ components:
         attributes:
           $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributes'
         id:
+          description: The primary key value that uniquely identifies the row to create
+            or update.
           example: primary_key_value
           type: string
         type:
@@ -15971,6 +15977,7 @@ components:
           - tag_1
           - tag_2
           items:
+            description: A tag associated with the reference table.
             type: string
           type: array
       required:
@@ -16122,6 +16129,7 @@ components:
           example:
           - field_1
           items:
+            description: A field name used as a primary key.
             type: string
           type: array
       required:
@@ -16370,6 +16378,7 @@ components:
           - field_1
           - field_2
           items:
+            description: A column header name from the CSV file.
             type: string
           type: array
         part_count:
@@ -16432,6 +16441,7 @@ components:
           description: The pre-signed URLs for uploading parts. These URLs expire
             after 5 minutes.
           items:
+            description: A pre-signed URL for uploading a single file part.
             type: string
           type: array
       type: object
@@ -45055,7 +45065,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45095,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -49144,6 +49153,7 @@ components:
           - tag_1
           - tag_2
           items:
+            description: A tag associated with the reference table.
             type: string
           type: array
       type: object
@@ -49274,6 +49284,7 @@ components:
           example:
           - field_1
           items:
+            description: A field name used as a primary key.
             type: string
           type: array
       required:
@@ -66938,6 +66949,7 @@ components:
           - tag_1
           - tag_2
           items:
+            description: A tag associated with the reference table.
             type: string
           type: array
         updated_at:
@@ -67096,6 +67108,7 @@ components:
           example:
           - field_1
           items:
+            description: A field name used as a primary key.
             type: string
           type: array
       required:
