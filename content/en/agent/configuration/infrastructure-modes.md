@@ -105,7 +105,7 @@ The host in `none` mode appears in [Fleet Automation][5] under the **View Agents
 
 ## Configure Agent infrastructure mode
 
-1. Add the `infrastructure_mode` option at the root level of the [Agent configuration file][1] (`datadog.yaml`).
+1. Add the `infrastructure_mode` option at the root level of the [Agent configuration file][1].
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
