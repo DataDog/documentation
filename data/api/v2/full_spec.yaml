@@ -19696,6 +19696,7 @@ components:
           example:
           - role:94172442-be03-11e9-a77a-3b7612558ac1
           items:
+            description: An access principal identifier formatted as `principal_type:id`.
             example: role:94172442-be03-11e9-a77a-3b7612558ac1
             type: string
           type: array
@@ -19731,6 +19732,7 @@ components:
           example:
           - role:86245fce-0a4e-11f0-92bd-da7ad0900002
           items:
+            description: An access principal identifier formatted as `principal_type:id`.
             example: role:86245fce-0a4e-11f0-92bd-da7ad0900002
             type: string
           type: array
@@ -24970,6 +24972,7 @@ components:
           example:
           - '@application.id:ABCD'
           items:
+            description: A tag-based filter expression using Datadog tag query syntax.
             example: '@application.id:ABCD'
             type: string
           type: array
@@ -45055,7 +45058,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45088,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
