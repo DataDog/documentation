@@ -78,7 +78,7 @@ clusterAgent:
 {{% /tab %}}
 {{< /tabs >}}
 
-By setting this pod label or changing the mutate unlabelled setting the Admission Controller will modify your newly created pods with the APM configurations for connectivity. For more details, see the [Datadog Admission Controller documentation][1].
+By setting this pod label or changing the `mutateUnlabelled` setting the Admission Controller modifies your newly created pods with the APM configurations for connectivity. For more details, see the [Datadog Admission Controller documentation][1].
 
 ### Step 2: Annotate pods for library injection
 
@@ -128,7 +128,7 @@ To view available library versions, see the tracer repositories for each languag
 
 #### Add Unified Service Tags
 
-Use Unified Service Tagging (USTs) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. The Admission Controller will automatically add the corresponding `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables to match your pod labels.
+Use Unified Service Tagging (USTs) to apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. The Admission Controller automatically adds the corresponding `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables to match your pod labels.
 
 ```yaml
     metadata:
