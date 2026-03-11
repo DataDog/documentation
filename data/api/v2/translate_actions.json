@@ -3982,12 +3982,12 @@
   "CreateSyntheticsSuite": {
     "summary": "Create a test suite",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or editing a Synthetic test suite."
   },
   "DeleteSyntheticsSuites": {
     "summary": "Bulk delete suites",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for bulk deleting Synthetic test suites."
   },
   "SearchSuites": {
     "description": "Search for test suites.",
@@ -3999,12 +3999,12 @@
   "EditSyntheticsSuite": {
     "summary": "Edit a test suite",
     "request_description": "New suite details to be saved.",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating or editing a Synthetic test suite."
   },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for bulk deleting Synthetic tests."
   },
   "CreateSyntheticsNetworkTest": {
     "summary": "Create a Network Path test",

@@ -20358,15 +20358,19 @@ components:
       - data
       type: object
     DeletedSuiteResponseData:
+      description: Data object for a deleted Synthetic test suite.
       properties:
         attributes:
           $ref: '#/components/schemas/DeletedSuiteResponseDataAttributes'
         id:
+          description: The public ID of the deleted Synthetic test suite.
           type: string
         type:
           $ref: '#/components/schemas/SyntheticsSuiteTypes'
       type: object
     DeletedSuiteResponseDataAttributes:
+      description: Attributes of a deleted Synthetic test suite, including deletion
+        timestamp and public ID.
       properties:
         deleted_at:
           description: Deletion timestamp of the Synthetic suite ID.
@@ -20376,10 +20380,12 @@ components:
           type: string
       type: object
     DeletedSuitesRequestDelete:
+      description: Data object for a bulk delete Synthetic test suites request.
       properties:
         attributes:
           $ref: '#/components/schemas/DeletedSuitesRequestDeleteAttributes'
         id:
+          description: An optional identifier for the delete request.
           type: string
         type:
           $ref: '#/components/schemas/DeletedSuitesRequestType'
@@ -20387,19 +20393,24 @@ components:
       - attributes
       type: object
     DeletedSuitesRequestDeleteAttributes:
+      description: Attributes for a bulk delete Synthetic test suites request.
       properties:
         force_delete_dependencies:
+          description: Whether to force deletion of suites that have dependent resources.
           type: boolean
         public_ids:
+          description: List of public IDs of the Synthetic test suites to delete.
           example:
           - ''
           items:
+            description: The public ID of a Synthetic test suite to delete.
             type: string
           type: array
       required:
       - public_ids
       type: object
     DeletedSuitesRequestDeleteRequest:
+      description: Request body for bulk deleting Synthetic test suites.
       properties:
         data:
           $ref: '#/components/schemas/DeletedSuitesRequestDelete'
@@ -20408,6 +20419,7 @@ components:
       type: object
     DeletedSuitesRequestType:
       default: delete_suites_request
+      description: Type for the bulk delete Synthetic suites request, `delete_suites_request`.
       enum:
       - delete_suites_request
       example: delete_suites_request
@@ -20415,22 +20427,28 @@ components:
       x-enum-varnames:
       - DELETE_SUITES_REQUEST
     DeletedSuitesResponse:
+      description: Response containing the list of deleted Synthetic test suites.
       properties:
         data:
+          description: List of deleted Synthetic suite data objects.
           items:
             $ref: '#/components/schemas/DeletedSuiteResponseData'
           type: array
       type: object
     DeletedTestResponseData:
+      description: Data object for a deleted Synthetic test.
       properties:
         attributes:
           $ref: '#/components/schemas/DeletedTestResponseDataAttributes'
         id:
+          description: The public ID of the deleted Synthetic test.
           type: string
         type:
           $ref: '#/components/schemas/DeletedTestsResponseType'
       type: object
     DeletedTestResponseDataAttributes:
+      description: Attributes of a deleted Synthetic test, including deletion timestamp
+        and public ID.
       properties:
         deleted_at:
           description: Deletion timestamp of the Synthetic test ID.
@@ -20440,10 +20458,12 @@ components:
           type: string
       type: object
     DeletedTestsRequestDelete:
+      description: Data object for a bulk delete Synthetic tests request.
       properties:
         attributes:
           $ref: '#/components/schemas/DeletedTestsRequestDeleteAttributes'
         id:
+          description: An optional identifier for the delete request.
           type: string
         type:
           $ref: '#/components/schemas/DeletedTestsRequestType'
@@ -20451,19 +20471,24 @@ components:
       - attributes
       type: object
     DeletedTestsRequestDeleteAttributes:
+      description: Attributes for a bulk delete Synthetic tests request.
       properties:
         force_delete_dependencies:
+          description: Whether to force deletion of tests that have dependent resources.
           type: boolean
         public_ids:
+          description: List of public IDs of the Synthetic tests to delete.
           example:
           - ''
           items:
+            description: The public ID of a Synthetic test to delete.
             type: string
           type: array
       required:
       - public_ids
       type: object
     DeletedTestsRequestDeleteRequest:
+      description: Request body for bulk deleting Synthetic tests.
       properties:
         data:
           $ref: '#/components/schemas/DeletedTestsRequestDelete'
@@ -20472,6 +20497,7 @@ components:
       type: object
     DeletedTestsRequestType:
       default: delete_tests_request
+      description: Type for the bulk delete Synthetic tests request, `delete_tests_request`.
       enum:
       - delete_tests_request
       example: delete_tests_request
@@ -20479,14 +20505,17 @@ components:
       x-enum-varnames:
       - DELETE_TESTS_REQUEST
     DeletedTestsResponse:
+      description: Response containing the list of deleted Synthetic tests.
       properties:
         data:
+          description: List of deleted Synthetic test data objects.
           items:
             $ref: '#/components/schemas/DeletedTestResponseData'
           type: array
       type: object
     DeletedTestsResponseType:
       default: delete_tests
+      description: Type for the bulk delete Synthetic tests response, `delete_tests`.
       enum:
       - delete_tests
       example: delete_tests
@@ -28814,6 +28843,7 @@ components:
       - data
       type: object
     GlobalVariableJsonPatchRequestData:
+      description: Data object for a JSON Patch request on a Synthetic global variable.
       properties:
         attributes:
           $ref: '#/components/schemas/GlobalVariableJsonPatchRequestDataAttributes'
@@ -28821,6 +28851,7 @@ components:
           $ref: '#/components/schemas/GlobalVariableJsonPatchType'
       type: object
     GlobalVariableJsonPatchRequestDataAttributes:
+      description: Attributes for a JSON Patch request on a Synthetic global variable.
       properties:
         json_patch:
           description: JSON Patch operations following RFC 6902.
@@ -45055,7 +45086,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45116,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -65866,6 +65896,7 @@ components:
           type: number
       type: object
     SuiteCreateEdit:
+      description: Data object for creating or editing a Synthetic test suite.
       properties:
         attributes:
           $ref: '#/components/schemas/SyntheticsSuite'
@@ -65876,6 +65907,7 @@ components:
       - type
       type: object
     SuiteCreateEditRequest:
+      description: Request body for creating or editing a Synthetic test suite.
       properties:
         data:
           $ref: '#/components/schemas/SuiteCreateEdit'
@@ -65884,6 +65916,7 @@ components:
       type: object
     SuiteSearchResponseType:
       default: suites_search
+      description: Type for the Synthetics suites search response, `suites_search`.
       enum:
       - suites_search
       example: suites_search
@@ -66311,6 +66344,7 @@ components:
           $ref: '#/components/schemas/SyntheticsNetworkTestRequest'
       type: object
     SyntheticsNetworkTestEdit:
+      description: Data object for creating or editing a Network Path test.
       properties:
         attributes:
           $ref: '#/components/schemas/SyntheticsNetworkTest'
@@ -66487,6 +66521,7 @@ components:
             type: string
           type: array
         tests:
+          description: Array of Synthetic tests included in the suite.
           items:
             $ref: '#/components/schemas/SyntheticsSuiteTest'
           type: array
@@ -66540,6 +66575,7 @@ components:
         attributes:
           $ref: '#/components/schemas/SyntheticsSuiteSearchResponseDataAttributes'
         id:
+          description: The unique identifier of the suite search response data.
           format: uuid
           type: string
         type:
@@ -66549,10 +66585,12 @@ components:
       description: Synthetics suite search response data attributes
       properties:
         suites:
+          description: List of Synthetic suites matching the search query.
           items:
             $ref: '#/components/schemas/SyntheticsSuite'
           type: array
         total:
+          description: Total number of Synthetic suites matching the search query.
           format: int32
           maximum: 2147483647
           type: integer
@@ -66564,6 +66602,7 @@ components:
         alerting_criticality:
           $ref: '#/components/schemas/SyntheticsSuiteTestAlertingCriticality'
         public_id:
+          description: The public ID of the Synthetic test included in the suite.
           example: ''
           type: string
       required:
