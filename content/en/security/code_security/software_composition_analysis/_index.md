@@ -110,7 +110,7 @@ The Repositories Explorer and Vulnerabilities Explorer serve complementary but d
 
 **Repositories Explorer** reflects a **point-in-time snapshot** of the libraries and vulnerabilities detected at the time of the scan. It shows which libraries were present in a given repository at a specific commit, along with any vulnerabilities that were known at scan time. This view does not update retroactively if new advisories are published after the scan runs.
 
-**Vulnerabilities Explorer** provides a **live view** that is continuously matched against the latest advisory database. If a new vulnerability advisory is published after a repository scan, it automatically appears in the Vulnerabilities Explorer, even if the repository has not been rescanned and even if the advisory targets an older commit. This means your vulnerability exposure is always up to date, regardless of when the last scan ran.
+**Vulnerabilities Explorer** provides a **live view** that is continuously matched against the latest advisory database. If a new vulnerability advisory is published after a repository scan, it automatically appears in the Vulnerabilities Explorer, even if the repository has not been rescanned since that commit or if your last scan was on an older commit. This means your vulnerability exposure is always up to date, regardless of when the last scan ran.
 
 > **Example:** If a scan runs at 10:00 AM and a CVE advisory for a library in your repository is published at 4:00 PM the same day, the Repositories Explorer for that commit will not show the CVE, but the Vulnerabilities Explorer will reflect it as soon as the advisory is available in Datadog's database.
 
