@@ -12,22 +12,17 @@ further_reading:
   text: "Datadog MCP Server for cloud-based access to Datadog features"
 ---
 
-## Overview
-
-{{< callout url="#" btn_hidden="true" header="Preview Feature">}}
+{{< callout url="#" btn_hidden="true" header="Preview">}}
 Datadog Code Security MCP Server is in Preview.
 {{< /callout >}}
 
-Datadog Code Security MCP exposes all Code Security scanning capabilities to AI coding assistants such as Claude Desktop and Cursor. It can also be used as a CLI tool.
+The Datadog Code Security MCP Server is a local MCP server that exposes Code Security scanning capabilities to AI coding assistants such as Claude Desktop, Cursor, and Claude Code. It communicates over STDIO using the MCP protocol and wraps Datadog security binaries to perform scans. It can also be used as a CLI tool.
 
-**How it works:**
-
-- Communicates with AI assistants over STDIO using the MCP protocol.
-- Wraps Datadog security binaries (datadog-static-analyzer, datadog-sbom-generator, datadog-security-cli, datadog-iac-scanner) to perform scans.
-
-**Difference with Datadog Remote MCP:** This is a _local_ MCP server that wraps Datadog security binaries for code-level scanning. It is separate from the [Datadog MCP Server][2], which provides cloud-based access to Datadog features and data.
+<div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
 
 ## Available tools
+
+The MCP server exposes the following tools that AI coding assistants can call to run security scans on your codebase:
 
 | Tool                                                        | Description                                                 | Auth Required |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | :-----------: |
@@ -42,9 +37,9 @@ For detailed parameters, required binaries, and output formats for each tool, se
 
 ## Setup
 
-### Get your Datadog API and Application keys
+### Prerequisites
 
-SAST, Secrets, SCA, and IaC scanning require a Datadog API key and Application key. Read [API and Application Keys][3] to create them. SBOM generation works without authentication.
+The MCP server supports Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning, all of which require a Datadog API key and application key. For instructions on creating them, see [API and Application Keys][3].
 
 ### Install the MCP server
 
@@ -76,20 +71,22 @@ sudo install -m 755 datadog-code-security-mcp /usr/local/bin/
 datadog-code-security-mcp version
 ```
 
-The MCP server orchestrates the following Datadog security binaries. If a binary is missing when a scan runs, the server provides platform-specific installation instructions.
+### Install security binaries
+
+The MCP server calls the following Datadog security binaries to perform scans. Install the ones you need for the scan types you want to use:
 
 | Binary                    | Used For      | Install Method                                         |
 | ------------------------- | ------------- | ------------------------------------------------------ |
 | `datadog-static-analyzer` | SAST, Secrets | `brew install datadog-static-analyzer`                 |
-| `datadog-sbom-generator`  | SBOM, SCA     | [GitHub Releases][4]                                   |
+| `datadog-sbom-generator`  | SBOM, SCA     | [GitHub releases][4]                                   |
 | `datadog-security-cli`    | SCA           | `brew install --cask datadog/tap/datadog-security-cli` |
-| `datadog-iac-scanner`     | IaC           | [GitHub Releases][5]                                   |
+| `datadog-iac-scanner`     | IaC           | [GitHub releases][5]                                   |
 
 <div class="alert alert-info"><code>datadog-sbom-generator</code> and <code>datadog-security-cli</code> are not available on Windows. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
 
 ### Configure your client
 
-Set the following environment variables in your client configuration:
+Each client configuration requires the following environment variables:
 
 | Variable     | Required | Description                                |
 | ------------ | :------: | ------------------------------------------ |
@@ -98,8 +95,6 @@ Set the following environment variables in your client configuration:
 | `DD_SITE`    |    No    | Your [Datadog site][13] (defaults to `datadoghq.com`) |
 
 \*Required for SAST, Secrets, SCA, and IaC scanning. SBOM generation works without authentication.
-
-Select your client to see the configuration:
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
@@ -189,7 +184,7 @@ Add the following to your VS Code settings (`.vscode/settings.json` or user sett
 ```
 
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "Other" %}}
 
 For any other MCP-compatible client, use the following configuration pattern:
 
@@ -198,57 +193,52 @@ For any other MCP-compatible client, use the following configuration pattern:
 - **Transport:** STDIO
 - **Environment variables:** `DD_API_KEY`, `DD_APP_KEY`, `DD_SITE`
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Usage examples
 
 ### AI assistant prompts
 
 After configuration, ask your AI assistant to perform scans using natural language:
 
-**Comprehensive scanning:**
-
-- "Run a full security scan on this project"
-- "Check this directory for all security issues"
-
-**SAST:**
-
-- "Scan `src/` for security vulnerabilities"
-- "Are there any SQL injection or XSS issues in this code?"
-
-**Secrets detection:**
-
-- "Check if there are any hardcoded secrets in `config/`"
-- "Find all API keys and passwords in this repository"
-
-**SCA / Dependency vulnerabilities:**
-
-- "Scan for vulnerable dependencies"
-- "Check if the project's dependencies have any known CVEs"
-
-**IaC scanning:**
-
-- "Check the Terraform files for misconfigurations"
-- "Scan the Kubernetes manifests for security issues"
-
-**SBOM generation:**
-
-- "Generate an SBOM for this project"
-- "What dependencies does this project have?"
-- "List all components and their licenses"
+| Scan Type              | Example Prompt                                              |
+| ---------------------- | ----------------------------------------------------------- |
+| Comprehensive          | "Run a full security scan on this project"                  |
+| SAST                   | "Scan `src/` for security vulnerabilities"                  |
+| Secrets detection      | "Check if there are any hardcoded secrets in `config/`"     |
+| SCA                    | "Check if the project's dependencies have any known CVEs"   |
+| IaC                    | "Check the Terraform files for misconfigurations"           |
+| SBOM generation        | "Generate an SBOM for this project"                         |
 
 ### CLI commands
 
-The MCP server can also be used directly as a CLI tool:
+The MCP server can also be used directly as a CLI tool.
+
+Run a comprehensive scan across all scan types:
 
 ```bash
 datadog-code-security-mcp scan all ./src
+```
 
+Run individual scan types:
+
+```bash
 datadog-code-security-mcp scan sast ./src
 datadog-code-security-mcp scan secrets ./config
 datadog-code-security-mcp scan sca ./
 datadog-code-security-mcp scan iac ./terraform
+```
 
+Generate an SBOM:
+
+```bash
 datadog-code-security-mcp generate-sbom .
+```
 
+Add `--json` to any command for JSON output:
+
+```bash
 datadog-code-security-mcp scan all ./src --json
 datadog-code-security-mcp generate-sbom . --json
 ```
@@ -257,7 +247,6 @@ datadog-code-security-mcp generate-sbom . --json
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /bits_ai/mcp_server
 [3]: /account_management/api-app-keys/
 [4]: https://github.com/DataDog/datadog-sbom-generator/releases
 [5]: https://github.com/DataDog/datadog-iac-scanner/releases

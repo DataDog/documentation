@@ -2,6 +2,13 @@
 title: Troubleshooting
 description: Common issues and solutions for the Datadog Code Security MCP Server.
 is_beta: true
+further_reading:
+- link: "/security/code_security/dev_tool_int/mcp_server/"
+  tag: "Documentation"
+  text: "Code Security MCP Server overview and setup"
+- link: "/security/code_security/dev_tool_int/mcp_server/tools_reference/"
+  tag: "Documentation"
+  text: "Tools Reference"
 ---
 
 If you experience issues with the Datadog Code Security MCP Server, use the following solutions to diagnose and resolve common problems.
@@ -47,6 +54,10 @@ When running a comprehensive scan (`datadog_code_security_scan`), some scan type
 - Error messages with installation instructions for any scanners that failed.
 
 This is expected behavior. Install the missing binaries and re-run to get complete results.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/dev_tool_int/mcp_server/#prerequisites
 [2]: /account_management/api-app-keys/
