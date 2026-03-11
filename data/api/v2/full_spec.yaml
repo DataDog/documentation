@@ -21127,6 +21127,7 @@ components:
         domains:
           description: The list of domains in the email domain allowlist.
           items:
+            description: An email domain in the allowlist.
             type: string
           type: array
         enabled:
@@ -21167,6 +21168,7 @@ components:
         domains:
           description: The list of domains in the email domain allowlist.
           items:
+            description: An email domain in the allowlist.
             type: string
           type: array
         enabled:
@@ -45055,7 +45057,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45087,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
