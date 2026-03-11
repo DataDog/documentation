@@ -9876,6 +9876,7 @@ components:
       - data
       type: object
     CaseManagementProjectData:
+      description: Data object representing a case management project.
       properties:
         id:
           description: Unique identifier of the case management project.
@@ -14676,6 +14677,7 @@ components:
       description: List of requests to create cases for security findings.
       properties:
         data:
+          description: Array of case creation request data objects.
           items:
             $ref: '#/components/schemas/CreateCaseRequestData'
           type: array
@@ -15158,6 +15160,7 @@ components:
       description: List of requests to create Jira issues for security findings.
       properties:
         data:
+          description: Array of Jira issue creation request data objects.
           items:
             $ref: '#/components/schemas/CreateJiraIssueRequestData'
           type: array
@@ -25034,6 +25037,7 @@ components:
       description: List of case responses.
       properties:
         data:
+          description: Array of case response data objects.
           items:
             $ref: '#/components/schemas/FindingCaseResponseData'
           type: array
@@ -25070,8 +25074,11 @@ components:
         attributes:
           additionalProperties:
             items:
+              description: A custom attribute value string.
               type: string
             type: array
+          description: Custom attributes associated with the case as key-value pairs
+            where values are string arrays.
           type: object
         closed_at:
           description: Timestamp of when the case was closed.
@@ -25151,6 +25158,7 @@ components:
           description: Project in which the case was created.
       type: object
     FindingData:
+      description: Data object representing a security finding.
       properties:
         id:
           description: Unique identifier of the security finding.
@@ -25377,6 +25385,7 @@ components:
       description: A list of security findings.
       properties:
         data:
+          description: Array of security finding data objects.
           items:
             $ref: '#/components/schemas/FindingData'
           type: array
@@ -45055,7 +45064,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45094,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
