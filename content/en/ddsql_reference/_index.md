@@ -865,22 +865,21 @@ Table functions are used to query logs, metrics, and other unstructured data sou
       <td>
         <pre>
 dd.logs(
-    filter => varchar,
     columns => array < varchar >,
+    filter ? => varchar,
     indexes ? => array < varchar >,
+    storage ? => varchar,
     from_timestamp ? => timestamp,
     to_timestamp ? => timestamp
 ) AS (column_name type [, ...])</pre>
       </td>
-      <td>Returns log data as a table. The columns parameter specifies which log fields to extract (nested fields are accessed using dot notation, and non-core attributes need to be prepended by @). The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data.</td>
+      <td>Returns log data as a table. The columns parameter specifies which log fields to extract. Nested fields are accessed using dot notation, and non-core fields need to be prepended by @. The AS clause defines the schema of the returned table. Optional: filtering by index or time range. When time is not specified, we default to the past 1 hour of data. Optional: specifying the storage to use (e.g., hot, flex_tier). When not specified, we default to hot storage.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT timestamp, host, service, message, asset_id
 FROM dd.logs(
     filter  => 'source:java',
-    columns => ARRAY['timestamp','host','service','message','@asset.id'],
-    from_timestamp => TIMESTAMP '2025-07-10 00:00:00.000-04:00',
-    to_timestamp => TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+    columns => ARRAY['timestamp','host','service','message','@asset.id']
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
@@ -933,6 +932,76 @@ ORDER BY timestamp, service;{{< /code-block >}}
   </tbody>
 </table>
 
+{{% collapse-content title="Examples" level="h3" %}}
+
+### Absolute timestamps
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+    columns => ARRAY['timestamp','host','service','message'],
+    from_timestamp => TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    to_timestamp => TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+)
+{{< /code-block >}}
+
+### Relative timestamps
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+    columns => ARRAY['timestamp','host', 'service','message'],
+    from_timestamp => now() - INTERVAL '7 days',
+    to_timestamp =>  now()
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
+)
+{{< /code-block >}}
+
+### Optional filters
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+   columns => ARRAY['timestamp','host', 'service','message'],
+   filter  => 'source:java',
+   indexes => ARRAY['trino'],
+   storage => 'hot'
+) AS (
+   timestamp TIMESTAMP,
+   host      VARCHAR,
+   service   VARCHAR,
+   message   VARCHAR
+)
+{{< /code-block >}}
+
+### Nested field access
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM dd.logs(
+    filter  => 'source:java',
+    columns => ARRAY['timestamp','host','service','message','@asset.id','@view.url','@data.resource.type']
+) AS (
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR,
+    asset_id  VARCHAR,
+    view_url  VARCHAR,
+    data_resource_type VARCHAR
+)
+{{< /code-block >}}
+
+{{% /collapse-content %}}
 
 ## Tags
 
