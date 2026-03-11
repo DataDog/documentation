@@ -295,9 +295,9 @@ example/notifications/notifier.go:104.3,104.10 1 3
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-<div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#github-actions">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
-
 ### Install the datadog-ci CLI
+
+<div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
 
 Install the [`datadog-ci`][7] CLI globally using `npm`:
 
