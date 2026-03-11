@@ -4,7 +4,7 @@ import Tooltip from 'bootstrap/js/dist/tooltip';
 // Script to add copy buttons to markdown fenced (```), and {{ highlight }} hugo function code blocks
 
 function initCopyCode () {
-    addCopyButton()
+    addCopyButton(['shell', 'json', 'yaml', 'sql', 'bash', 'hcl', 'python'])
 
     // Add Event Listener
     const copyButtons = document.querySelectorAll(['.js-copy-button', '#tryRuleModal .copy-icon']);
@@ -18,16 +18,20 @@ function initCopyCode () {
 }
 
 /**
- * Adds copy button to all code examples (fenced code blocks and highlight hugo function)
+ * Adds copy button to code examples that use the highlight hugo function or are fenced code blocks in markdown
+ * @param {Array} fencedLangs - Array of languages to target specific fenced codeblocks
  */
-function addCopyButton () {
+function addCopyButton (fencedLangs) {
     const highlights = document.querySelectorAll("div.highlight")
 
     highlights.forEach(highlightEl => {
-        const alreadyHasButton = highlightEl.classList.contains('js-appended-copy-btn')
+        const dl = highlightEl.querySelector('[data-lang]');
+        const codeLang = dl ? dl.dataset.lang : "";
+        const isNestedInAppendableContainer = highlightEl.parentElement.classList.contains('append-copy-btn') //
+        const isFencedCodeExample = [...fencedLangs].includes(codeLang.toLowerCase()) // markdown fenced code block
 
-        // Add copy button to all code blocks that don't already have one
-        if(!alreadyHasButton){
+        const shouldAddCopyBtn = isFencedCodeExample || isNestedInAppendableContainer
+        if(shouldAddCopyBtn){
             highlightEl.classList.add('code-snippet', 'js-appended-copy-btn')
             const copyBtn = `
             <div class="code-button-wrapper position-absolute">
