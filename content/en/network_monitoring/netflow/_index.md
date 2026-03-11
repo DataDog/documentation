@@ -228,6 +228,20 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
 
+## Conversation stitching
+
+By default, NetFlow records separate unidirectional flows for each direction of traffic between two endpoints (A → B and B → A). Conversation stitching combines these into a single bidirectional record, giving you a complete view of the total traffic exchanged between two endpoints (A ↔ B).
+
+With conversation stitching, you can:
+
+- See total traffic exchanged between two endpoints as one conversation instead of separate directional flows
+- Identify true initiators and responders so that source and destination widgets reflect accurate roles
+- Remove noise where servers incorrectly appear as top sources
+
+To toggle between stitched (bidirectional) and unstitched (unidirectional) views, navigate to any endpoint-based NetFlow view and use the **Bidirectional** toggle under the time picker.
+
+{{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="Conversation stitching toggle in the NetFlow view" width="100%" >}}
+
 ## Sampling rate
 
 NetFlow's sampling rate is taken into account in the computation of bytes and packets by default. The displayed values for bytes and packets are computed with the sampling rate applied.
