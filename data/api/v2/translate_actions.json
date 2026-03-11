@@ -2655,13 +2655,13 @@
     "description": "Get facet information for account attributes including possible values and counts",
     "summary": "Get account facet info",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for retrieving facet value information for a specified attribute with optional filtering."
   },
   "QueryAccounts": {
     "description": "Query accounts with flexible filtering by account properties",
     "summary": "Query accounts",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for querying accounts with optional filtering, column selection, and sorting."
   },
   "QueryProductAnalyticsScalar": {
     "description": "Compute scalar analytics results for Product Analytics data.\nReturns aggregated values (counts, averages, percentiles) optionally grouped by facets.",
@@ -2679,19 +2679,19 @@
     "description": "Query users filtered by both user properties and event platform data",
     "summary": "Query event filtered users",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for querying users filtered by user properties combined with event platform activity."
   },
   "GetUserFacetInfo": {
     "description": "Get facet information for user attributes including possible values and counts",
     "summary": "Get user facet info",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for retrieving facet value information for a specified attribute with optional filtering."
   },
   "QueryUsers": {
     "description": "Query users with flexible filtering by user properties, with optional wildcard search",
     "summary": "Query users",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for querying users with optional filtering, column selection, and sorting."
   },
   "GetMapping": {
     "description": "Get entity mapping configuration including all available attributes and their properties",
@@ -2701,13 +2701,13 @@
     "description": "Create a new data connection and its fields for an entity",
     "summary": "Create connection",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for creating a new data source connection for an entity."
   },
   "UpdateConnection": {
     "description": "Update an existing data connection by adding, updating, or deleting fields",
     "summary": "Update connection",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request body for updating an existing data source connection by adding, modifying, or removing fields."
   },
   "DeleteConnection": {
     "description": "Delete an existing data connection for an entity",
