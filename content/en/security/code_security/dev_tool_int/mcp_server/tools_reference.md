@@ -13,9 +13,11 @@ further_reading:
 
 The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Each tool wraps one or more Datadog security binaries and accepts file paths or directories to scan.
 
+<div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+
 ## `datadog_code_security_scan`
 
-Run a comprehensive security scan combining SAST, Secrets detection, SCA, and IaC scanning. All scan types execute **in parallel** for maximum performance.
+Run a comprehensive security scan combining Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning. All scan types execute in parallel for maximum performance.
 
 ### Parameters
 
@@ -28,11 +30,9 @@ Run a comprehensive security scan combining SAST, Secrets detection, SCA, and Ia
 
 `datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-security-cli`, `datadog-iac-scanner`
 
-<div class="alert alert-info">If any binary is missing, the server returns results from the available scanners along with installation instructions for the missing ones.</div>
-
 ## `datadog_sast_scan`
 
-Run Static Application Security Testing (SAST) to detect security vulnerabilities in source code, such as SQL injection, XSS, path traversal, and insecure cryptography.
+Run SAST to detect security vulnerabilities in source code, such as SQL injection, XSS, path traversal, and insecure cryptography.
 
 ### Parameters
 
@@ -62,9 +62,9 @@ Detect hardcoded credentials, API keys, passwords, and tokens in source code and
 
 ## `datadog_sca_scan`
 
-Run Software Composition Analysis to detect known vulnerabilities (CVEs) in your project's dependencies. This tool performs a two-step process:
+Run SCA to detect known vulnerabilities (CVEs) in your project's dependencies. This tool performs a two-step process:
 
-1. Generates an SBOM from the specified directories.
+1. Generates a Software Bill of Materials (SBOM) from the specified directories.
 2. Scans the SBOM for known vulnerabilities using Datadog's vulnerability database.
 
 ### Parameters
@@ -84,7 +84,7 @@ Vulnerabilities with CVE ID, severity, affected component, version, and descript
 
 ## `datadog_iac_scan`
 
-Detect misconfigurations, compliance issues, and security vulnerabilities in Infrastructure-as-Code files.
+Detect misconfigurations, compliance issues, and security vulnerabilities in IaC files.
 
 ### Parameters
 
@@ -111,7 +111,7 @@ Security findings with severity, rule, file location, and remediation guidance.
 
 ## `datadog_generate_sbom`
 
-Generate a comprehensive Software Bill of Materials (SBOM) listing all software components, dependencies, versions, and licenses in a repository.
+Generate a comprehensive SBOM listing all software components, dependencies, versions, and licenses in a repository.
 
 ### Parameters
 

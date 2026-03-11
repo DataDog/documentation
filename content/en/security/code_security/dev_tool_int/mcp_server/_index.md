@@ -53,21 +53,21 @@ The MCP server is available on the following platforms:
 
 #### Homebrew (recommended)
 
-```bash
+```shell
 brew update
 brew install --cask datadog-labs/pack/datadog-code-security-mcp
 ```
 
 #### GitHub releases
 
-```bash
+```shell
 curl -L "https://github.com/datadog-labs/datadog-code-security-mcp/releases/latest/download/datadog-code-security-mcp-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m).tar.gz" | tar xz
 sudo install -m 755 datadog-code-security-mcp /usr/local/bin/
 ```
 
-#### Verify installation
+Run the following command to verify the installation:
 
-```bash
+```shell
 datadog-code-security-mcp version
 ```
 
@@ -91,7 +91,7 @@ Each client configuration requires the following environment variables:
 | Variable     | Required | Description                                |
 | ------------ | :------: | ------------------------------------------ |
 | `DD_API_KEY` |  Yes\*   | Your [Datadog API key][3]                  |
-| `DD_APP_KEY` |  Yes\*   | Your [Datadog Application key][3]          |
+| `DD_APP_KEY` |  Yes\*   | Your [Datadog application key][3]          |
 | `DD_SITE`    |    No    | Your [Datadog site][13] (defaults to `datadoghq.com`) |
 
 \*Required for SAST, Secrets, SCA, and IaC scanning. SBOM generation works without authentication.
@@ -101,7 +101,7 @@ Each client configuration requires the following environment variables:
 
 Use the Claude CLI to add the MCP server:
 
-```bash
+```shell
 claude mcp add datadog-code-security \
   -e DD_API_KEY=<your-api-key> \
   -e DD_APP_KEY=<your-app-key> \
@@ -111,7 +111,7 @@ claude mcp add datadog-code-security \
 
 Verify the configuration:
 
-```bash
+```shell
 claude mcp list | grep datadog-code-security
 ```
 
@@ -217,13 +217,13 @@ The MCP server can also be used directly as a CLI tool.
 
 Run a comprehensive scan across all scan types:
 
-```bash
+```shell
 datadog-code-security-mcp scan all ./src
 ```
 
 Run individual scan types:
 
-```bash
+```shell
 datadog-code-security-mcp scan sast ./src
 datadog-code-security-mcp scan secrets ./config
 datadog-code-security-mcp scan sca ./
@@ -232,13 +232,13 @@ datadog-code-security-mcp scan iac ./terraform
 
 Generate an SBOM:
 
-```bash
+```shell
 datadog-code-security-mcp generate-sbom .
 ```
 
 Add `--json` to any command for JSON output:
 
-```bash
+```shell
 datadog-code-security-mcp scan all ./src --json
 datadog-code-security-mcp generate-sbom . --json
 ```

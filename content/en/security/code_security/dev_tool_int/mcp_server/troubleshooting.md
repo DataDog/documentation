@@ -13,33 +13,35 @@ further_reading:
 
 If you experience issues with the [Datadog Code Security MCP Server][3], use the following solutions to diagnose and resolve common problems.
 
+<div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+
 ## Binary not found
 
-If a scan returns an error about a missing binary, install the required binary using the instructions in the [Prerequisites][1] section. The server automatically detects missing binaries and provides platform-specific installation commands.
+If a scan returns an error about a missing binary, install it using the instructions in the [Install security binaries][1] section.
 
 ## Authentication errors
 
-Verify your API and Application keys are set correctly:
+Check that your API and application keys are set:
 
-```bash
+```shell
 echo $DD_API_KEY
 echo $DD_APP_KEY
 echo $DD_SITE
 ```
 
-Verify your keys have the correct permissions. Read [API and Application Keys][2] for details.
+If the values are set but scans still fail, verify your keys have the correct permissions. See [API and Application Keys][2] for details.
 
 ## MCP server not responding
 
 1. Check that the binary is installed and accessible:
 
-    ```bash
+    ```shell
     datadog-code-security-mcp version
     ```
 
 2. Check MCP server logs:
 
-    ```bash
+    ```shell
     tail -f ~/Library/Logs/Claude/mcp*.log
     tail -f ~/.claude/logs/mcp*.log
     ```
@@ -59,6 +61,6 @@ This is expected behavior. Install the missing binaries and re-run to get comple
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/code_security/dev_tool_int/mcp_server/#prerequisites
+[1]: /security/code_security/dev_tool_int/mcp_server/#install-security-binaries
 [2]: /account_management/api-app-keys/
 [3]: /security/code_security/dev_tool_int/mcp_server/
