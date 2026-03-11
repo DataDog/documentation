@@ -194,6 +194,10 @@ This approach is recommended for clusters in **Standard** access mode.
 
     The script above downloads and runs the latest init script for Data Observability: Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.14.0.sh` to use version `0.14.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
+1. Grant read-only permissions to the init script.
+  1. At the volume level, grant the `READ VOLUME` permission to all account users.
+  1. At the catalog level, grant the `USE CATALOG` permission to all account users.
+
 1. **Add the init script to the allowlist**: For clusters in **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
 
 **Configure the compute policy**
