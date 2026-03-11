@@ -3530,24 +3530,31 @@ components:
       - $ref: '#/components/schemas/AnyValueBoolean'
       type: object
     AnyValueArray:
+      description: An array of arbitrary values.
       items:
         $ref: '#/components/schemas/AnyValueItem'
       type: array
     AnyValueBoolean:
+      description: A scalar boolean value.
       type: boolean
     AnyValueItem:
+      description: A single item in an array of arbitrary values, which can be a string,
+        number, object, or boolean.
       oneOf:
       - $ref: '#/components/schemas/AnyValueString'
       - $ref: '#/components/schemas/AnyValueNumber'
       - $ref: '#/components/schemas/AnyValueObject'
       - $ref: '#/components/schemas/AnyValueBoolean'
     AnyValueNumber:
+      description: A scalar numeric value.
       format: double
       type: number
     AnyValueObject:
       additionalProperties: {}
+      description: An arbitrary object value with additional properties.
       type: object
     AnyValueString:
+      description: A scalar string value.
       type: string
     ApiID:
       description: API identifier.
@@ -45055,7 +45062,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45092,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
