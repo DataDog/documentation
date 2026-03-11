@@ -8478,6 +8478,7 @@ components:
           - ubuntu-18.04
           - n2.large
           items:
+            description: A label used to select or identify the node.
             type: string
           type: array
         name:
@@ -18879,6 +18880,7 @@ components:
           example:
           - shopist
           items:
+            description: A service name impacted by the incident.
             type: string
           type: array
         severity:
@@ -19046,6 +19048,7 @@ components:
           example:
           - shopist
           items:
+            description: A service name impacted by the incident.
             type: string
           type: array
         severity:
@@ -20728,6 +20731,7 @@ components:
           - resource1
           - resource2
           items:
+            description: A resource name to exclude from faulty deployment detection.
             type: string
           type: array
       type: object
@@ -25419,12 +25423,15 @@ components:
           - '@foo'
           - '@bar'
           items:
+            description: A code owner of the test as inferred from the repository
+              configuration.
             type: string
           type: array
         envs:
           description: List of environments where this test has been flaky.
           example: prod
           items:
+            description: An environment name where this test has been flaky.
             type: string
           type: array
         first_flaked_branch:
@@ -25524,6 +25531,7 @@ components:
           - foo
           - bar
           items:
+            description: A test service name where this test has been flaky.
             type: string
           type: array
         suite:
@@ -36587,8 +36595,10 @@ components:
       x-enum-varnames:
       - LIST_DEPLOYMENT_RULES
     ListDeploymentRulesResponseDataAttributes:
+      description: Attributes of the response for listing deployment rules.
       properties:
         rules:
+          description: The list of deployment rules.
           items:
             $ref: '#/components/schemas/DeploymentRuleResponseDataAttributes'
           type: array
@@ -45055,7 +45065,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45095,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
