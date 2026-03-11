@@ -11,7 +11,7 @@ further_reading:
   text: "Tools Reference"
 ---
 
-If you experience issues with the Datadog Code Security MCP Server, use the following solutions to diagnose and resolve common problems.
+If you experience issues with the [Datadog Code Security MCP Server][3], use the following solutions to diagnose and resolve common problems.
 
 ## Binary not found
 
@@ -61,3 +61,4 @@ This is expected behavior. Install the missing binaries and re-run to get comple
 
 [1]: /security/code_security/dev_tool_int/mcp_server/#prerequisites
 [2]: /account_management/api-app-keys/
+[3]: /security/code_security/dev_tool_int/mcp_server/

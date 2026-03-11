@@ -11,7 +11,7 @@ further_reading:
   text: "Troubleshooting the Code Security MCP Server"
 ---
 
-The Datadog Code Security MCP Server exposes the following tools for AI coding assistants and CLI usage. Each tool wraps one or more Datadog security binaries and accepts file paths or directories to scan.
+The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Each tool wraps one or more Datadog security binaries and accepts file paths or directories to scan.
 
 ## `datadog_code_security_scan`
 
@@ -143,3 +143,5 @@ JSON containing a summary (total components, breakdown by language/package manag
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/code_security/dev_tool_int/mcp_server/
