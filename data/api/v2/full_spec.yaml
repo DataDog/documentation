@@ -14849,6 +14849,7 @@ components:
       - id
       type: object
     CreateConnectionRequest:
+      description: Request body for creating a new data source connection for an entity.
       example:
         data:
           attributes:
@@ -14873,10 +14874,13 @@ components:
           $ref: '#/components/schemas/CreateConnectionRequestData'
       type: object
     CreateConnectionRequestData:
+      description: The data object containing the resource type and attributes for
+        creating a new connection.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateConnectionRequestDataAttributes'
         id:
+          description: Unique identifier for the new connection resource.
           type: string
         type:
           $ref: '#/components/schemas/UpdateConnectionRequestDataType'
@@ -14884,22 +14888,31 @@ components:
       - type
       type: object
     CreateConnectionRequestDataAttributes:
+      description: Attributes defining the data source connection, including join
+        configuration and custom fields.
       properties:
         fields:
+          description: List of custom attribute fields to import from the data source.
           items:
             $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
           type: array
         join_attribute:
+          description: The attribute in the data source used to join records with
+            the entity.
           example: ''
           type: string
         join_type:
+          description: The type of join key used to link the data source to the entity
+            (for example, email or user_id).
           example: ''
           type: string
         metadata:
           additionalProperties:
             type: string
+          description: Additional key-value metadata associated with the connection.
           type: object
         type:
+          description: The type of data source connection (for example, ref_table).
           example: ''
           type: string
       required:
@@ -14908,22 +14921,32 @@ components:
       - type
       type: object
     CreateConnectionRequestDataAttributesFieldsItems:
+      description: Definition of a custom attribute field to import from a data source
+        connection.
       properties:
         description:
+          description: Human-readable explanation of what the field represents.
           type: string
         display_name:
+          description: The human-readable label for the field shown in the UI.
           type: string
         groups:
+          description: List of group labels used to categorize the field.
           items:
+            description: A group label name for categorizing the field.
             type: string
           type: array
         id:
+          description: The unique identifier for the field within the connection.
           example: ''
           type: string
         source_name:
+          description: The name of the column or attribute in the source data system
+            that maps to this field.
           example: ''
           type: string
         type:
+          description: The data type of the field (for example, string or number).
           example: ''
           type: string
       required:
@@ -24553,6 +24576,8 @@ components:
       - ADD
       - REPLACE
     FacetInfoRequest:
+      description: Request body for retrieving facet value information for a specified
+        attribute with optional filtering.
       example:
         data:
           attributes:
@@ -24569,10 +24594,13 @@ components:
           $ref: '#/components/schemas/FacetInfoRequestData'
       type: object
     FacetInfoRequestData:
+      description: The data object containing the resource type and attributes for
+        the facet info request.
       properties:
         attributes:
           $ref: '#/components/schemas/FacetInfoRequestDataAttributes'
         id:
+          description: Unique identifier for the facet info request resource.
           type: string
         type:
           $ref: '#/components/schemas/FacetInfoRequestDataType'
@@ -24580,11 +24608,16 @@ components:
       - type
       type: object
     FacetInfoRequestDataAttributes:
+      description: Attributes for the facet info request, specifying which facet to
+        query and optional filters to apply.
       properties:
         facet_id:
+          description: The identifier of the facet attribute to retrieve value information
+            for.
           example: ''
           type: string
         limit:
+          description: Maximum number of facet values to return in the response.
           example: 0
           format: int64
           type: integer
@@ -24597,13 +24630,20 @@ components:
       - limit
       type: object
     FacetInfoRequestDataAttributesSearch:
+      description: Query-based search configuration for filtering the audience context
+        when retrieving facet values.
       properties:
         query:
+          description: The filter expression used to scope the audience from which
+            facet values are retrieved.
           type: string
       type: object
     FacetInfoRequestDataAttributesTermSearch:
+      description: Term-level search configuration for filtering facet values by an
+        exact or partial term match.
       properties:
         value:
+          description: The term string to match against facet values.
           type: string
       type: object
     FacetInfoRequestDataType:
@@ -24616,6 +24656,8 @@ components:
       x-enum-varnames:
       - USERS_FACET_INFO_REQUEST
     FacetInfoResponse:
+      description: Response containing facet information for an attribute, including
+        its distinct values and occurrence counts.
       example:
         data:
           attributes:
@@ -24638,10 +24680,13 @@ components:
           $ref: '#/components/schemas/FacetInfoResponseData'
       type: object
     FacetInfoResponseData:
+      description: The data object containing the resource type and attributes for
+        the facet info response.
       properties:
         attributes:
           $ref: '#/components/schemas/FacetInfoResponseDataAttributes'
         id:
+          description: Unique identifier for the facet info response resource.
           type: string
         type:
           $ref: '#/components/schemas/FacetInfoResponseDataType'
@@ -24649,32 +24694,44 @@ components:
       - type
       type: object
     FacetInfoResponseDataAttributes:
+      description: Attributes of the facet info response, containing the facet result
+        data.
       properties:
         result:
           $ref: '#/components/schemas/FacetInfoResponseDataAttributesResult'
       type: object
     FacetInfoResponseDataAttributesResult:
+      description: The facet query result containing discrete value counts or a numeric
+        range for the requested facet.
       properties:
         range:
           $ref: '#/components/schemas/FacetInfoResponseDataAttributesResultRange'
         values:
+          description: List of discrete facet values with their occurrence counts.
           items:
             $ref: '#/components/schemas/FacetInfoResponseDataAttributesResultValuesItems'
           type: array
       type: object
     FacetInfoResponseDataAttributesResultRange:
+      description: The numeric range of a facet attribute, representing the minimum
+        and maximum observed values.
       properties:
         max:
+          description: The maximum observed value for the numeric facet attribute.
           type: object
         min:
+          description: The minimum observed value for the numeric facet attribute.
           type: object
       type: object
     FacetInfoResponseDataAttributesResultValuesItems:
+      description: A single facet value with its occurrence count in the dataset.
       properties:
         count:
+          description: The number of records that have this facet value.
           format: int64
           type: integer
         value:
+          description: The facet value (for example, a browser name or country code).
           type: string
       type: object
     FacetInfoResponseDataType:
@@ -28232,6 +28289,8 @@ components:
       - CASE
       - TEAM_OWNERS
     GetMappingResponse:
+      description: Response containing the entity attribute mapping configuration
+        including all available attributes and their properties.
       example:
         data:
           attributes:
@@ -28272,10 +28331,13 @@ components:
           $ref: '#/components/schemas/GetMappingResponseData'
       type: object
     GetMappingResponseData:
+      description: The data object containing the resource type and attributes for
+        the get mapping response.
       properties:
         attributes:
           $ref: '#/components/schemas/GetMappingResponseDataAttributes'
         id:
+          description: Unique identifier for the get mapping response resource.
           type: string
         type:
           $ref: '#/components/schemas/GetMappingResponseDataType'
@@ -28283,27 +28345,40 @@ components:
       - type
       type: object
     GetMappingResponseDataAttributes:
+      description: Attributes of the get mapping response, containing the list of
+        configured entity attributes.
       properties:
         attributes:
+          description: The list of entity attributes and their mapping configurations.
           items:
             $ref: '#/components/schemas/GetMappingResponseDataAttributesAttributesItems'
           type: array
       type: object
     GetMappingResponseDataAttributesAttributesItems:
+      description: Details of a single entity attribute including its mapping configuration
+        and metadata.
       properties:
         attribute:
+          description: The attribute identifier as used in the entity data model.
           type: string
         description:
+          description: Human-readable explanation of what the attribute represents.
           type: string
         display_name:
+          description: The human-readable label for the attribute shown in the UI.
           type: string
         groups:
+          description: List of group labels used to categorize the attribute.
           items:
+            description: A group label name for categorizing the attribute.
             type: string
           type: array
         is_custom:
+          description: Whether this attribute is a custom user-defined attribute rather
+            than a built-in one.
           type: boolean
         type:
+          description: The data type of the attribute (for example, string or number).
           type: string
       type: object
     GetMappingResponseDataType:
@@ -36465,6 +36540,8 @@ components:
       - data
       type: object
     ListConnectionsResponse:
+      description: Response containing the list of all data source connections configured
+        for an entity.
       example:
         data:
           attributes:
@@ -36502,10 +36579,13 @@ components:
           $ref: '#/components/schemas/ListConnectionsResponseData'
       type: object
     ListConnectionsResponseData:
+      description: The data object containing the resource type and attributes for
+        the list connections response.
       properties:
         attributes:
           $ref: '#/components/schemas/ListConnectionsResponseDataAttributes'
         id:
+          description: Unique identifier for the list connections response resource.
           type: string
         type:
           $ref: '#/components/schemas/ListConnectionsResponseDataType'
@@ -36513,44 +36593,62 @@ components:
       - type
       type: object
     ListConnectionsResponseDataAttributes:
+      description: Attributes of the list connections response, containing the collection
+        of data source connections.
       properties:
         connections:
+          description: The list of data source connections configured for the entity.
           items:
             $ref: '#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItems'
           type: array
       type: object
     ListConnectionsResponseDataAttributesConnectionsItems:
+      description: Details of a single data source connection, including its fields,
+        join configuration, and audit metadata.
       properties:
         created_at:
+          description: Timestamp indicating when the connection was created.
           format: date-time
           type: string
         created_by:
+          description: Identifier of the user who created the connection.
           type: string
         fields:
+          description: List of custom attribute fields imported from the data source.
           items:
             $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
           type: array
         id:
+          description: Unique identifier of the connection.
           type: string
         join:
           $ref: '#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsJoin'
         metadata:
           additionalProperties:
             type: string
+          description: Additional key-value metadata associated with the connection.
           type: object
         type:
+          description: The type of data source connection (for example, ref_table).
           type: string
         updated_at:
+          description: Timestamp indicating when the connection was last updated.
           format: date-time
           type: string
         updated_by:
+          description: Identifier of the user who last updated the connection.
           type: string
       type: object
     ListConnectionsResponseDataAttributesConnectionsItemsJoin:
+      description: The join configuration describing how the data source is linked
+        to the entity.
       properties:
         attribute:
+          description: The entity attribute used as the join key to link records from
+            the data source.
           type: string
         type:
+          description: The type of join key used (for example, email or user_id).
           type: string
       type: object
     ListConnectionsResponseDataType:
@@ -45055,7 +45153,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45183,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -51005,6 +51102,8 @@ components:
       - $ref: '#/components/schemas/DataTransform'
       - $ref: '#/components/schemas/StateVariable'
     QueryAccountRequest:
+      description: Request body for querying accounts with optional filtering, column
+        selection, and sorting.
       example:
         data:
           attributes:
@@ -51030,10 +51129,13 @@ components:
           $ref: '#/components/schemas/QueryAccountRequestData'
       type: object
     QueryAccountRequestData:
+      description: The data object containing the resource type and attributes for
+        querying accounts.
       properties:
         attributes:
           $ref: '#/components/schemas/QueryAccountRequestDataAttributes'
         id:
+          description: Unique identifier for the query account request resource.
           type: string
         type:
           $ref: '#/components/schemas/QueryAccountRequestDataType'
@@ -51041,26 +51143,38 @@ components:
       - type
       type: object
     QueryAccountRequestDataAttributes:
+      description: Attributes for filtering and shaping the account query results.
       properties:
         limit:
+          description: Maximum number of account records to return in the response.
           format: int64
           type: integer
         query:
+          description: Filter expression using account attribute conditions to narrow
+            results.
           type: string
         select_columns:
+          description: List of account attribute column names to include in the response.
           items:
+            description: Name of an account attribute column to include in the response.
             type: string
           type: array
         sort:
           $ref: '#/components/schemas/QueryAccountRequestDataAttributesSort'
         wildcard_search_term:
+          description: Free-text term used for wildcard search across account attribute
+            values.
           type: string
       type: object
     QueryAccountRequestDataAttributesSort:
+      description: Sorting configuration specifying the field and direction for ordering
+        query results.
       properties:
         field:
+          description: The attribute field name to sort results by.
           type: string
         order:
+          description: The sort direction, either ascending or descending.
           type: string
       type: object
     QueryAccountRequestDataType:
@@ -51073,6 +51187,8 @@ components:
       x-enum-varnames:
       - QUERY_ACCOUNT_REQUEST
     QueryEventFilteredUsersRequest:
+      description: Request body for querying users filtered by user properties combined
+        with event platform activity.
       example:
         data:
           attributes:
@@ -51100,10 +51216,14 @@ components:
           $ref: '#/components/schemas/QueryEventFilteredUsersRequestData'
       type: object
     QueryEventFilteredUsersRequestData:
+      description: The data object containing the resource type and attributes for
+        querying event-filtered users.
       properties:
         attributes:
           $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributes'
         id:
+          description: Unique identifier for the query event filtered users request
+            resource.
           type: string
         type:
           $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataType'
@@ -51111,34 +51231,51 @@ components:
       - type
       type: object
     QueryEventFilteredUsersRequestDataAttributes:
+      description: Attributes for filtering users by both user properties and event
+        platform activity.
       properties:
         event_query:
           $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributesEventQuery'
         include_row_count:
+          description: Whether to include the total count of matching users in the
+            response.
           type: boolean
         limit:
+          description: Maximum number of user records to return in the response.
           format: int64
           type: integer
         query:
+          description: Filter expression using user attribute conditions to narrow
+            results.
           type: string
         select_columns:
+          description: List of user attribute column names to include in the response.
           items:
+            description: Name of a user attribute column to include in the response.
             type: string
           type: array
       type: object
     QueryEventFilteredUsersRequestDataAttributesEventQuery:
+      description: Event platform query used to filter users based on their event
+        activity within a specified time window.
       properties:
         query:
+          description: The event platform query expression for filtering users by
+            their event activity.
           type: string
         time_frame:
           $ref: '#/components/schemas/QueryEventFilteredUsersRequestDataAttributesEventQueryTimeFrame'
       type: object
     QueryEventFilteredUsersRequestDataAttributesEventQueryTimeFrame:
+      description: The time window defining the start and end of the event query period
+        as Unix timestamps.
       properties:
         end:
+          description: End of the time frame as a Unix timestamp in seconds.
           format: int64
           type: integer
         start:
+          description: Start of the time frame as a Unix timestamp in seconds.
           format: int64
           type: integer
       type: object
@@ -51165,6 +51302,8 @@ components:
       - formula
       type: object
     QueryResponse:
+      description: Response containing the query results with matched records and
+        total count.
       example:
         data:
           attributes:
@@ -51210,10 +51349,13 @@ components:
           $ref: '#/components/schemas/QueryResponseData'
       type: object
     QueryResponseData:
+      description: The data object containing the resource type and attributes of
+        the query response.
       properties:
         attributes:
           $ref: '#/components/schemas/QueryResponseDataAttributes'
         id:
+          description: Unique identifier for the query response resource.
           type: string
         type:
           $ref: '#/components/schemas/QueryResponseDataType'
@@ -51221,12 +51363,20 @@ components:
       - type
       type: object
     QueryResponseDataAttributes:
+      description: Attributes of the query response, containing the matched records
+        and total count.
       properties:
         hits:
+          description: The list of matching records returned by the query, each as
+            a map of attribute names to values.
           items:
             additionalProperties: {}
+            description: A single matched record represented as a map of attribute
+              names to their values.
           type: array
         total:
+          description: Total number of records matching the query, regardless of the
+            limit applied.
           format: int64
           type: integer
       type: object
@@ -51250,6 +51400,8 @@ components:
       - ASC
       - DESC
     QueryUsersRequest:
+      description: Request body for querying users with optional filtering, column
+        selection, and sorting.
       example:
         data:
           attributes:
@@ -51275,10 +51427,13 @@ components:
           $ref: '#/components/schemas/QueryUsersRequestData'
       type: object
     QueryUsersRequestData:
+      description: The data object containing the resource type and attributes for
+        querying users.
       properties:
         attributes:
           $ref: '#/components/schemas/QueryUsersRequestDataAttributes'
         id:
+          description: Unique identifier for the query users request resource.
           type: string
         type:
           $ref: '#/components/schemas/QueryUsersRequestDataType'
@@ -51286,26 +51441,38 @@ components:
       - type
       type: object
     QueryUsersRequestDataAttributes:
+      description: Attributes for filtering and shaping the user query results.
       properties:
         limit:
+          description: Maximum number of user records to return in the response.
           format: int64
           type: integer
         query:
+          description: Filter expression using user attribute conditions to narrow
+            results.
           type: string
         select_columns:
+          description: List of user attribute column names to include in the response.
           items:
+            description: Name of a user attribute column to include in the response.
             type: string
           type: array
         sort:
           $ref: '#/components/schemas/QueryUsersRequestDataAttributesSort'
         wildcard_search_term:
+          description: Free-text term used for wildcard search across user attribute
+            values.
           type: string
       type: object
     QueryUsersRequestDataAttributesSort:
+      description: Sorting configuration specifying the field and direction for ordering
+        user query results.
       properties:
         field:
+          description: The user attribute field name to sort results by.
           type: string
         order:
+          description: The sort direction, either ascending or descending.
           type: string
       type: object
     QueryUsersRequestDataType:
@@ -70029,6 +70196,8 @@ components:
           type: string
       type: object
     UpdateConnectionRequest:
+      description: Request body for updating an existing data source connection by
+        adding, modifying, or removing fields.
       example:
         data:
           attributes:
@@ -70056,10 +70225,13 @@ components:
           $ref: '#/components/schemas/UpdateConnectionRequestData'
       type: object
     UpdateConnectionRequestData:
+      description: The data object containing the resource identifier and attributes
+        for updating an existing connection.
       properties:
         attributes:
           $ref: '#/components/schemas/UpdateConnectionRequestDataAttributes'
         id:
+          description: The unique identifier of the connection to update.
           example: ''
           type: string
         type:
@@ -70069,33 +70241,47 @@ components:
       - id
       type: object
     UpdateConnectionRequestDataAttributes:
+      description: Attributes specifying the field modifications to apply to an existing
+        connection.
       properties:
         fields_to_add:
+          description: New fields to add to the connection from the data source.
           items:
             $ref: '#/components/schemas/CreateConnectionRequestDataAttributesFieldsItems'
           type: array
         fields_to_delete:
+          description: Identifiers of existing fields to remove from the connection.
           items:
+            description: The identifier of a field to delete from the connection.
             type: string
           type: array
         fields_to_update:
+          description: Existing fields with updated metadata to apply to the connection.
           items:
             $ref: '#/components/schemas/UpdateConnectionRequestDataAttributesFieldsToUpdateItems'
           type: array
       type: object
     UpdateConnectionRequestDataAttributesFieldsToUpdateItems:
+      description: Specification for updating an existing field in a connection, including
+        which field to modify and the new values.
       properties:
         field_id:
+          description: The identifier of the existing field to update.
           example: ''
           type: string
         updated_description:
+          description: The new description to set for the field.
           type: string
         updated_display_name:
+          description: The new human-readable display name to set for the field.
           type: string
         updated_field_id:
+          description: The new identifier to assign to the field, if renaming it.
           type: string
         updated_groups:
+          description: The updated list of group labels to associate with the field.
           items:
+            description: A group label name for categorizing the field.
             type: string
           type: array
       required:
