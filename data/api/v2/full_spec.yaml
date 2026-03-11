@@ -10107,6 +10107,7 @@ components:
     CaseObjectAttributes:
       additionalProperties:
         items:
+          description: An attribute value.
           type: string
         type: array
       description: The definition of `CaseObjectAttributes` object.
@@ -10850,6 +10851,7 @@ components:
           example:
           - team-handle-1
           items:
+            description: A team handle to request decisions from.
             type: string
           type: array
         start_date:
@@ -11117,6 +11119,7 @@ components:
     ChangeRequestObjectAttributes:
       additionalProperties:
         items:
+          description: An attribute value.
           type: string
         type: array
       description: Custom attributes of the change request as key-value pairs.
@@ -33107,6 +33110,7 @@ components:
           description: Whether incident integration is enabled
           type: boolean
         field_mappings:
+          description: List of mappings between incident fields and case fields
           items:
             $ref: '#/components/schemas/IntegrationIncidentFieldMappingsItems'
           type: array
@@ -33117,17 +33121,23 @@ components:
           $ref: '#/components/schemas/IntegrationIncidentSeverityConfig'
       type: object
     IntegrationIncidentFieldMappingsItems:
+      description: Mapping between an incident user-defined field and a case field
       properties:
         case_field:
+          description: The case field to map the incident field value to
           type: string
         incident_user_defined_field_id:
+          description: The identifier of the incident user-defined field to map from
           type: string
       type: object
     IntegrationIncidentSeverityConfig:
+      description: Severity configuration for mapping incident priorities to case
+        priorities
       properties:
         priority_mapping:
           additionalProperties:
             type: string
+          description: Mapping of incident severity values to case priority values
           type: object
       type: object
     IntegrationJira:
@@ -33144,34 +33154,46 @@ components:
           $ref: '#/components/schemas/IntegrationJiraSync'
       type: object
     IntegrationJiraAutoCreation:
+      description: Auto-creation settings for Jira issues from cases
       properties:
         enabled:
+          description: Whether automatic Jira issue creation is enabled
           type: boolean
       type: object
     IntegrationJiraMetadata:
+      description: Metadata for connecting a case management project to a Jira project
       properties:
         account_id:
+          description: The Jira account identifier
           type: string
         issue_type_id:
+          description: The Jira issue type identifier to use when creating issues
           type: string
         project_id:
+          description: The Jira project identifier to associate with this case project
           type: string
       type: object
     IntegrationJiraSync:
+      description: Synchronization configuration for Jira integration
       properties:
         enabled:
+          description: Whether Jira field synchronization is enabled
           type: boolean
         properties:
           $ref: '#/components/schemas/IntegrationJiraSyncProperties'
       type: object
     IntegrationJiraSyncDueDate:
+      description: Due date synchronization configuration for Jira integration
       properties:
         jira_field_id:
+          description: The Jira field identifier used to store the due date
           type: string
         sync_type:
+          description: The type of synchronization to apply for the due date field
           type: string
       type: object
     IntegrationJiraSyncProperties:
+      description: Field synchronization properties for Jira integration
       properties:
         assignee:
           $ref: '#/components/schemas/SyncProperty'
@@ -33180,6 +33202,7 @@ components:
         custom_fields:
           additionalProperties:
             $ref: '#/components/schemas/IntegrationJiraSyncPropertiesCustomFieldsAdditionalProperties'
+          description: Map of custom field identifiers to their sync configurations
           type: object
         description:
           $ref: '#/components/schemas/SyncProperty'
@@ -33193,8 +33216,10 @@ components:
           $ref: '#/components/schemas/SyncProperty'
       type: object
     IntegrationJiraSyncPropertiesCustomFieldsAdditionalProperties:
+      description: Synchronization configuration for a Jira custom field
       properties:
         sync_type:
+          description: The type of synchronization to apply for this custom field
           type: string
         value:
           $ref: '#/components/schemas/AnyValue'
@@ -33233,28 +33258,38 @@ components:
           description: Whether On-Call integration is enabled
           type: boolean
         escalation_queries:
+          description: List of escalation queries for routing cases to on-call responders
           items:
             $ref: '#/components/schemas/IntegrationOnCallEscalationQueriesItems'
           type: array
       type: object
     IntegrationOnCallEscalationQueriesItems:
+      description: An On-Call escalation query entry used to route cases to on-call
+        responders
       properties:
         enabled:
+          description: Whether this escalation query is enabled
           type: boolean
         id:
+          description: Unique identifier of the escalation query
           type: string
         query:
+          description: The query used to match cases for escalation
           type: string
         target:
           $ref: '#/components/schemas/IntegrationOnCallEscalationQueriesItemsTarget'
       type: object
     IntegrationOnCallEscalationQueriesItemsTarget:
+      description: The target recipient for an On-Call escalation query
       properties:
         dynamic_team_paging:
+          description: Whether to use dynamic team paging for escalation
           type: boolean
         team_id:
+          description: The identifier of the team to escalate to
           type: string
         user_id:
+          description: The identifier of the user to escalate to
           type: string
       type: object
     IntegrationServiceNow:
@@ -33275,18 +33310,23 @@ components:
           $ref: '#/components/schemas/IntegrationServiceNowSyncConfig'
       type: object
     IntegrationServiceNowAutoCreation:
+      description: Auto-creation settings for ServiceNow incidents from cases
       properties:
         enabled:
+          description: Whether automatic ServiceNow incident creation is enabled
           type: boolean
       type: object
     IntegrationServiceNowSyncConfig:
+      description: Synchronization configuration for ServiceNow integration
       properties:
         enabled:
+          description: Whether ServiceNow synchronization is enabled
           type: boolean
         properties:
           $ref: '#/components/schemas/IntegrationServiceNowSyncConfig139772721534496'
       type: object
     IntegrationServiceNowSyncConfig139772721534496:
+      description: Field-level synchronization properties for ServiceNow integration
       properties:
         comments:
           $ref: '#/components/schemas/SyncProperty'
@@ -33296,16 +33336,20 @@ components:
           $ref: '#/components/schemas/SyncPropertyWithMapping'
       type: object
     IntegrationServiceNowSyncConfigPriority:
+      description: Priority synchronization configuration for ServiceNow integration
       properties:
         impact_mapping:
           additionalProperties:
             type: string
+          description: Mapping of case priority values to ServiceNow impact values
           type: object
         sync_type:
+          description: The type of synchronization to apply for priority
           type: string
         urgency_mapping:
           additionalProperties:
             type: string
+          description: Mapping of case priority values to ServiceNow urgency values
           type: object
       type: object
     IntegrationType:
@@ -45055,7 +45099,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs, metrics'
+        **Supported pipeline types:** logs'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,7 +45129,6 @@ components:
       type: object
       x-pipeline-types:
       - logs
-      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -50676,6 +50719,7 @@ components:
         enabled_custom_case_types:
           description: List of enabled custom case type IDs
           items:
+            description: A custom case type identifier
             type: string
           type: array
         key:
@@ -50696,24 +50740,31 @@ components:
       description: Project columns configuration
       properties:
         columns:
+          description: List of column configurations for the project board view
           items:
             $ref: '#/components/schemas/ProjectColumnsConfigColumnsItems'
           type: array
       type: object
     ProjectColumnsConfigColumnsItems:
+      description: Configuration for a single column in a project board view
       properties:
         sort:
           $ref: '#/components/schemas/ProjectColumnsConfigColumnsItemsSort'
         sort_field:
+          description: The field used to sort items in this column
           type: string
         type:
+          description: The type of column
           type: string
       type: object
     ProjectColumnsConfigColumnsItemsSort:
+      description: Sort configuration for a project board column
       properties:
         ascending:
+          description: Whether to sort in ascending order
           type: boolean
         priority:
+          description: The sort priority order for this column
           format: int64
           type: integer
       type: object
@@ -50734,6 +50785,7 @@ components:
         enabled_custom_case_types:
           description: List of enabled custom case type IDs
           items:
+            description: A custom case type identifier
             type: string
           type: array
         key:
@@ -50765,24 +50817,34 @@ components:
         destinations:
           description: Notification destinations (1=email, 2=slack, 3=in-app)
           items:
+            description: Notification channel identifier (1=email, 2=slack, 3=in-app)
             type: integer
           type: array
         enabled:
           description: Whether notifications are enabled
           type: boolean
         notify_on_case_assignment:
+          description: Whether to send a notification when a case is assigned
           type: boolean
         notify_on_case_closed:
+          description: Whether to send a notification when a case is closed
           type: boolean
         notify_on_case_comment:
+          description: Whether to send a notification when a comment is added to a
+            case
           type: boolean
         notify_on_case_comment_mention:
+          description: Whether to send a notification when a user is mentioned in
+            a case comment
           type: boolean
         notify_on_case_priority_change:
+          description: Whether to send a notification when a case's priority changes
           type: boolean
         notify_on_case_status_change:
+          description: Whether to send a notification when a case's status changes
           type: boolean
         notify_on_case_unassignment:
+          description: Whether to send a notification when a case is unassigned
           type: boolean
       type: object
     ProjectRelationship:
@@ -50867,6 +50929,7 @@ components:
         enabled_custom_case_types:
           description: List of enabled custom case type IDs
           items:
+            description: A custom case type identifier
             type: string
           type: array
         name:
@@ -65920,6 +65983,7 @@ components:
       description: Sync property configuration
       properties:
         sync_type:
+          description: The direction and type of synchronization for this property
           type: string
       type: object
     SyncPropertyWithMapping:
@@ -65928,12 +65992,15 @@ components:
         mapping:
           additionalProperties:
             type: string
+          description: Map of source values to destination values for synchronization
           type: object
         name_mapping:
           additionalProperties:
             type: string
+          description: Map of source names to display names used during synchronization
           type: object
         sync_type:
+          description: The direction and type of synchronization for this property
           type: string
       type: object
     SyntheticsGlobalVariable:
