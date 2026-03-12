@@ -1,0 +1,94 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "cfef4abb8ab3b8df03640969075878ee": {
+            "string": "Flutter 監視のセットアップ"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "3f8f66b847132eef4e7900ebe9201cbb": {
+            "string": "Flutter プロジェクトから RUM と Error Tracking のデータを収集します。"
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "/real_user_monitoring/application_monitoring/flutter/advanced_configuration",
+            "text": {
+              "itemTranslationData": {
+                "d0d3d262dada3589a56771fe2a2ff31a": {
+                  "string": "RUM Flutter の高度なコンフィギュレーション"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "https://github.com/DataDog/dd-sdk-flutter",
+            "text": {
+              "itemTranslationData": {
+                "b1861a7bd7c82f20d5ed32f18da5b7ec": {
+                  "string": "dd-sdk-flutter のソースコード"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "8b3aa9bd6876eae15440cf30cc58eabb": {
+                  "string": "ソース コード"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "real_user_monitoring/explorer/",
+            "text": {
+              "itemTranslationData": {
+                "8c80f5c8c8c715df0af43b80d665d2d0": {
+                  "string": "RUM データの調査方法"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/",
+            "text": {
+              "itemTranslationData": {
+                "cf3417ec426bf56ecfa2917419bc76ba": {
+                  "string": "Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "ce398c8650bdffe4e3b395be51b8e293": {
+                  "string": "ブログ"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

@@ -277,6 +277,10 @@ A dictionary of metrics to collect for the span. The keys are metric names (stri
 - `input_tokens` - The number of input tokens (LLM spans)
 - `output_tokens` - The number of output tokens (LLM spans)
 - `total_tokens` - The total number of tokens (LLM spans)
+- `non_cached_input_tokens` - The number of non-cached input tokens (LLM spans)
+- `cache_read_input_tokens` - The number of cache read input tokens (LLM spans)
+- `cache_write_input_tokens` - The number of cache write input tokens (LLM spans)
+- `reasoning_output_tokens` - The number of reasoning tokens (LLM spans)
 - `time_to_first_token` - Time in seconds for first output token (streaming LLM, root spans)
 - `time_per_output_token` - Time in seconds per output token (streaming LLM, root spans)
 - `input_cost` - Input cost in dollars (LLM and embedding spans)
@@ -285,6 +289,7 @@ A dictionary of metrics to collect for the span. The keys are metric names (stri
 - `non_cached_input_cost` - Non-cached input cost in dollars (LLM spans)
 - `cache_read_input_cost` - Cache read input cost in dollars (LLM spans)
 - `cache_write_input_cost` - Cache write input cost in dollars (LLM spans)
+- `reasoning_output_cost`- Reasoning output cost in dollars (LLM spans)
 
 Type: `Dict[key (string), float64]`
 
