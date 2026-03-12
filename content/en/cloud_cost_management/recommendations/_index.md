@@ -701,7 +701,7 @@ For each cloud account that you would like to receive recommendations for:
 
 ## Recommendation statuses
 
-Assign a status to each recommendation to track triage progress across your team. Statuses persist when recommendations regenerate daily. You don't need to re-triage the same recommendations.
+Assign a status to each recommendation to track cost optimization progress across your teams. Statuses persist when recommendations regenerate daily. You don't need to re-triage the same recommendations.
 
 | Status | Description |
 |--------|-------------|
