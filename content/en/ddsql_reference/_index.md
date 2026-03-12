@@ -955,7 +955,7 @@ FROM dd.logs(
 {{< code-block lang="sql" >}}
 SELECT *
 FROM dd.logs(
-    columns => ARRAY['timestamp','host', 'service','message'],
+    columns => ARRAY['timestamp','host','service','message'],
     from_timestamp => now() - INTERVAL '7 days',
     to_timestamp =>  now()
 ) AS (
@@ -966,35 +966,35 @@ FROM dd.logs(
 )
 {{< /code-block >}}
 
-### Optional filters
+### Optional parameters
 
 {{< code-block lang="sql" >}}
 SELECT *
 FROM dd.logs(
-   columns => ARRAY['timestamp','host', 'service','message'],
-   filter  => 'source:java',
-   indexes => ARRAY['trino'],
-   storage => 'hot'
+    columns => ARRAY['timestamp','host','service','message'],
+    filter  => 'source:java',
+    indexes => ARRAY['trino'],
+    storage => 'hot'
 ) AS (
-   timestamp TIMESTAMP,
-   host      VARCHAR,
-   service   VARCHAR,
-   message   VARCHAR
+    timestamp TIMESTAMP,
+    host      VARCHAR,
+    service   VARCHAR,
+    message   VARCHAR
 )
 {{< /code-block >}}
 
 ### Nested field access
 
+Column aliases cannot contain dots; replace them with underscores or any other valid character when defining the alias.
+
 {{< code-block lang="sql" >}}
-SELECT *
+SELECT timestamp, host, asset_id, view_url, data_resource_type
 FROM dd.logs(
-    filter  => 'source:java',
-    columns => ARRAY['timestamp','host','service','message','@asset.id','@view.url','@data.resource.type']
+    filter  => 'service:mcp',
+    columns => ARRAY['timestamp','host','@asset.id','@view.url','@data.resource.type']
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
-    service   VARCHAR,
-    message   VARCHAR,
     asset_id  VARCHAR,
     view_url  VARCHAR,
     data_resource_type VARCHAR
