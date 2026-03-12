@@ -107,6 +107,9 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 }
 
 .stepper__step-title {
+    #cdoc-content.customizable & {
+        scroll-margin-top: 175px;
+    }
     display: block;
     margin: 0;
     padding: $stepper-title-pad-top 0;
