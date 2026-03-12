@@ -444,7 +444,7 @@ An out-of-the-box [Storage Management S3 dashboard template][8] is available to 
 
 ## Act on optimizations with Storage Management Recommendations
 
-Storage Management analyzes your inventory data and access logs to surface prefix-level [recommendations][4] for reducing S3 storage costs. These recommendations are available to all Storage Management customers. Potential savings are estimated using AWS list prices. If you have [Cloud Cost Management][7] enabled, recommendations also appear in Cloud Cost Recommendations, and you can track actual savings from optimizations.
+Storage Management analyzes your inventory data and access logs to surface prefix-level recommendations for reducing S3 storage costs. These recommendations are available to all Storage Management customers. Potential savings are estimated using AWS list prices. If you have [Cloud Cost Management][7] enabled, recommendations also appear in Cloud Cost Recommendations, and you can track actual savings from optimizations.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
