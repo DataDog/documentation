@@ -34,7 +34,7 @@ After training completes, the monitor begins alerting. The chart uses color to i
 
 ## Model states
 
-The model often reuses prior predictions rather than generating new ones, for example when a value hasn't changed or when the monitor is in an alerting state. As a result, adding [annotations][2] is the primary way to get an alerting monitor back to a normal state and resume learning from new values.
+The model often reuses prior predictions rather than generating new ones, such as when a value hasn't changed or when the monitor is in an alerting state. As a result, adding [annotations][2] is the primary way to get an alerting monitor back to a normal state and resume learning from new values.
 
 ## Metric-specific behavior
 
