@@ -146,7 +146,7 @@ The following steps create a bidirectional ticket for a Security finding.
 
 1. Open [any product supporting bidirectional ticket syncing][20].
 2. Locate the **Ticketing** icon dropdown option for a finding in the explorer or under **Next Steps** in the finding page.
-3. You can also select up to 50 findings at at time to create multiple tickets or one ticket for multiple findings.
+3. You can also select up to 50 findings at a time to create multiple tickets or one ticket for multiple findings.
 4. Select the third-party tool from the dropdown.
 5. Create a ticket for any third-party tool supported (see sections below).
 
