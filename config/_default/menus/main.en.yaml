@@ -7315,6 +7315,16 @@ menu:
       url: /security/code_security/dev_tool_int/mcp_server/
       parent: dev_tool_int
       weight: 5
+    - name: Tools Reference
+      identifier: dev_tool_int_mcp_server_tools_reference
+      url: /security/code_security/dev_tool_int/mcp_server/tools_reference/
+      parent: dev_tool_int_mcp_server
+      weight: 1
+    - name: Troubleshooting
+      identifier: dev_tool_int_mcp_server_troubleshooting
+      url: /security/code_security/dev_tool_int/mcp_server/troubleshooting/
+      parent: dev_tool_int_mcp_server
+      weight: 2
     - name: Troubleshooting
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
