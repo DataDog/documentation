@@ -9,20 +9,19 @@ In the Helm chart:
          fieldRef:
             fieldPath: metadata.name
     ```
-1. Set the [`CLUSTER_NAME`][102] environment variable in the Helm chart.
+1. Set the [`CLUSTER_NAME`][101] environment variable in the Helm chart.
     ```
     env:
       - name: CLUSTER_NAME
         value: "<MY_CLUSTER_NAME>"
     ```
-1. To assign unique Worker names, configure [`VECTOR_HOSTNAME`][103] to the `POD_NAME` and `CLUSTER_NAME`.
+1. To assign unique Worker names, configure [`VECTOR_HOSTNAME`][102] to the `POD_NAME` and `CLUSTER_NAME`.
     ```yaml
     args:
       - >
         export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}";
         exec /usr/bin/observability-pipelines-worker run
     ```
-    
-[101]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L156C3-L159C33
-[102]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f424187cc/charts/observability-pipelines-worker/values.yaml#L154-L155
-[103]: https://github.com/DataDog/helm-charts/blob/3cbc416fb81e5a733caf38bcc5a9f86f4103187cc/charts/observability-pipelines-worker/values.yaml#L141-L142
+
+[101]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L142-L145
+[102]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L138-L140
