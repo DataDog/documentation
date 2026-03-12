@@ -95,7 +95,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
-[11]: /datadog_cloudcraft/overlays#cloud-cost-management
+[11]: /datadog_cloudcraft/overlays/ccm/
 [17]: /integrations/google_cloud_platform/#resource-changes-collection
 [18]: https://app.datadoghq.com/integrations/google-cloud-platform
 [19]: /datadog_cloudcraft/overlays#observability
@@ -194,7 +194,7 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [8]: /datadog_cloudcraft/overlays#infrastructure
 [9]: /datadog_cloudcraft/overlays#observability
 [10]: /datadog_cloudcraft/overlays#security
-[11]: /datadog_cloudcraft/overlays#cloud-cost-management
+[11]: /datadog_cloudcraft/overlays/ccm/
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
 [14]: /account_management/rbac/permissions/#infrastructure
