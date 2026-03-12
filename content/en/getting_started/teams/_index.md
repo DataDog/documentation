@@ -34,47 +34,49 @@ Teams answers the following operational questions:
 - What is the ownership hierarchy?
 - Who has access, or can grant access, to this resource?
 
-## Before you start: Assess your existing sources of team data
+## Assess your sources of team data
 
-You move faster (and avoid rework) if you inventory your sources first. In practice, admins commonly pull "team truth" from a mix of identity, collaboration, and operational tools.
+Before getting started with Datadog teams, inventory your existing sources of team data.
+A combination of identity, collaboration, and operational tools commonly contribute to the full picture of team membership and areas of responsibility at an organization.
 
 The following sources are some of the most common. For each source, trace it upstream to identify the ultimate source of truth.
 
-### Identity sources (membership and life cycle)
+### Identity sources
 
-These sources answer "who is in which group, today?". Often the best source for joiners/leavers and for permissioning purposes.
+These sources answer the question of who is in which group. Identity sources provide the most accurate information on additions and removals, and for access permissions.
 
-- Okta, Entra groups, or other IdP
-- Workday / Rippling / other HR system
-- Spreadsheet, notepad, or slide (when everything else failed, this is what you use to track how people work in practice)
+- IdP, such as Okta or Entra groups
+- HR systems, including Workday or Rippling
+- As a last resort, informal documents such as spreadsheets, text files, or presentation decks
 
-### Ownership sources (code and service accountability)
+### Ownership sources
 
-These sources answer "who owns this service?":
+These sources provide information about who owns which service:
 
 - GitHub teams and CODEOWNERS file
-- Backstage, Port, or Cortex
+- Developer portal software such as Backstage, Port, or Cortex
 - Internal ownership registries or catalogs
 
-**Things to note:**
+Be aware of the following common problems with GitHub data:
+- GitHub teams often have extra members
+- CODEOWNERS files become inaccurate over time due to reorgs 
 
-- Whether GitHub teams are "clean" enough to be authoritative
-- How CODEOWNERS changes are maintained consistently during reorgs (this is frequently painful)
+### Operational sources
 
-### Operational sources (how teams are actually used)
+Operational sources describe how the organization uses teams. These sources drive workflow impact:
+- On-call tools such as PagerDuty or OpsGenie
+- Incident response tools, including ServiceNow
+- Alert routing
+- Slack or Microsoft Teams channels
+- Email lists
 
-These sources drive workflow impact:
-
-- On-call tools such as PagerDuty or OpsGenie, incident response (ServiceNow), alert routing
-- Slack or MS Teams channels, email lists
-
-## How Datadog Teams fits into a multi-source reality
+## Using Datadog Teams with multiple sources
 
 **Datadog Teams works best as a consolidation and enrichment layer.** You can keep different sources responsible for different parts of the team model, and still have one consolidated view in Datadog Teams.
 
 ## Choosing your sync strategy
 
-Datadog supports managing or syncing Teams data through:
+Datadog supports managing or syncing Teams data through the following:
 
 - Identity providers (Okta, Entra) through [SCIM][1]-managed teams
 - [SAML][2] attribute mapping to Teams
@@ -83,61 +85,61 @@ Datadog supports managing or syncing Teams data through:
 - [GitHub teams][5] and CODEOWNERS-driven enrichment and provisioning
 - PagerDuty
 
-Below is how to choose, with the tradeoffs that usually matter.
+The following sections describe the tradeoffs between the available strategies.
 
-### Option A: IdP-driven sync (Okta or Entra)
+### IdP-driven sync (Okta or Entra)
 
-Use IdP-driven sync when:
+Use IdP-driven sync if your organization has the following characteristics:
 
-- Your top priority is automated and accurate membership life cycle (joiners and leavers)
-- You want IT or platform to "own membership hygiene" centrally
-- You can map groups to real teams without exploding your team list
+- Your top priority is automatically capturing the accurate membership life cycle, including joiners and leavers.
+- You want IT or the platform team to control team membership
+- You can map groups to real teams without making your team list unmanageably large
 
-How it behaves:
+When you sync Datadog Teams to your IdP, those teams are managed external to Datadog. You don't use Datadog to manually edit team membership.
 
-- Teams created from IdP groups are **externally managed** ("managed teams"): membership is kept in-sync with the IdP group.
-- Practically, for managed teams, you typically **don't edit membership manually in Datadog**.
-
-Important notes:
-
-- As of February 2026, **team provisioning through SCIM is unavailable in Entra** due to a Microsoft freeze on third-party app updates.
+#### Limitations
+- Team provisioning through SCIM is unavailable in Entra due to a Microsoft freeze on third-party app updates.
 - Okta does not support hierarchical relationships between groups.
 
-**Best use:** make IdP your authority for **membership**, then enrich ownership/metadata elsewhere.
+#### Best practices
+Make the IdP the authority for membership, then enrich ownership and metadata using other sources.
 
-### Option B: SAML attribute mapping
+### SAML attribute mapping
 
-Use SAML mapping when:
+Use SAML mapping to sync Datadog Teams if your organization has the following characteristics:
 
 - You already have SAML configured for login
 - You want team assignment to happen as part of authentication-based provisioning
-- You need a low-effort way to start without building custom sync or asking another team in your org to help you set up
+- You need a low-effort way to start using teams without building a custom sync
 
-Tradeoff to plan for:
+**Note:** SAML mappings take effect during login. Suppose a user moves from Team A to Team B during an active login session. The team change is reflected in Datadog only after the user logs out and logs back in.
 
-- SAML mappings take effect during login. So if a user was moved from Team A to Team B, this is reflected in Datadog only after the user re-logs in.
+#### Best practices
+Use SAML mapping as practical, temporary solution when SCIM team creation isn't available or you want provisioning without building a full pipeline.
 
-**Best use:** a pragmatic bridge when SCIM team creation isn't available or you want provisioning without building a full pipeline.
+### GitHub-driven teams (teams, hierarchy, CODEOWNERS)
 
-### Option C: GitHub-driven teams (teams, hierarchy, CODEOWNERS)
+Use GitHub to sync Datadog Teams if your organization has the following characteristics:
 
-Use GitHub when:
-
-- GitHub teams already reflect your real org structure (or close enough)
+- GitHub teams closely reflect your real org structure
 - CODEOWNERS is your best ownership signal and you want Datadog to reflect it
 - You care about hierarchy and nested teams
 
-In Datadog's [GitHub provisioning flow][5], you can choose between two modes. Team enrichment only links existing teams. Full provisioning and membership management creates teams in Datadog based on the existing teams in GitHub, preserving hierarchy and membership. Both modes can use CODEOWNERS for richer ownership signals.
+In Datadog's [GitHub provisioning flow][5], you can choose between two modes:
+- Team enrichment only links existing teams.
+- Full provisioning and membership management creates teams in Datadog based on the existing teams in GitHub, preserving hierarchy and membership.
+Both modes of GitHub provisioning can use CODEOWNERS for richer ownership signals.
 
-What to watch:
+#### Common issues
 
 - GitHub teams often diverge from actual org structure due to stale membership or ad-hoc team creation.
   - You can use the "partial selection" flow to indicate which parts of your GitHub org you want to provision into Datadog.
-- GitHub-based membership usually reflects engineering reality, not necessarily HR or IT life cycle reality.
+- GitHub-based membership usually reflects the way that engineers work together. GitHub may not accurately reflect the company's formal organization structure or its IT life cycle.
 
-**Best use:** make GitHub your authority for **code ownership and hierarchy**, while another system remains the authority for identity life cycle.
+#### Best practices
+Use GitHub as your authority for code ownership and hierarchy, while another system remains the authority for identity life cycle.
 
-### Option D: API-driven / Terraform management (custom source of truth)
+### API-driven / Terraform management (custom source of truth)
 
 Use the API or Terraform when:
 
