@@ -442,7 +442,7 @@
     "request_schema_description": "A new Datadog-Slack integration."
   },
   "UpdateSlackIntegration": {
-    "description": "Add channels to your existing Datadog-Slack integration.\n\nThis method updates your integration configuration by **replacing**\nyour current configuration with the new one sent to your Datadog organization.",
+    "description": "**Deprecated**: This endpoint is deprecated.\n\nThis method **completely rewrites** your integration configuration by **replacing**\nyour current configuration with the new one sent to your Datadog organization.\nPlease ensure that all fields—including the Slack webhook URL—are valid\nbecause an invalid URL will break your Slack notifications.",
     "summary": "Add channels to Slack integration",
     "request_description": "Update an existing Datadog-Slack integration request body.",
     "request_schema_description": "Configuration of your Slack channels."
