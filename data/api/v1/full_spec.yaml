@@ -31575,12 +31575,11 @@ paths:
       x-menu-order: 3
     put:
       deprecated: true
-      description: 'Add channels to your existing Datadog-Slack integration.
-
-
-        This method updates your integration configuration by **replacing**
-
-        your current configuration with the new one sent to your Datadog organization.'
+      description: "**Deprecated**: This endpoint is deprecated.\n\nThis method **completely
+        rewrites** your integration configuration by **replacing**\nyour current configuration
+        with the new one sent to your Datadog organization.\nPlease ensure that all
+        fields\u2014including the Slack webhook URL\u2014are valid\nbecause an invalid
+        URL will break your Slack notifications."
       operationId: UpdateSlackIntegration
       requestBody:
         content:
