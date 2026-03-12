@@ -103,7 +103,6 @@ Datadog provides reasonable defaults for most devices through out-of-the-box (OO
   
   2. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets, and in the NDM device view of a selected device:
 
-     <!-- TODO: Replace screenshot - needs new NDM device view showing metadata -->
      {{< img src="/network_device_monitoring/profile_onboarding/device_metadata_2.png" alt="The NDM device view, highlighting the metadata sections." style="width:100%;">}}
 
 ### Step 6: Define metrics
