@@ -53,7 +53,7 @@ All official integrations must include the following:
 
 - **Telemetry**: Your integration must send at least one type of observability data (metrics, logs, traces, or events) to Datadog.
 - **Out-of-the-box dashboard**: A prebuilt dashboard that visualizes the data your integration sends. See [Create an integration dashboard][10].
-- **Tile images**: Screenshots or diagrams that appear on your tile in the Integrations or Marketplace page. See [Build an integration][11] for details.
+- **Tile images**: Screenshots or diagrams that appear on your tile in the Integrations or Marketplace page. See [Build an integration][11].
 
 Depending on what your integration does, the following are also required:
 
@@ -61,7 +61,7 @@ Depending on what your integration does, the following are also required:
 |--------------------------------|--------------------------------|
 | API-based integrations         | [OAuth 2.0 authentication][12] |
 | Log integrations               | [Log pipeline][13]             |
-| Integrations that send metrics | [Recommended Monitor][14]      |
+| Integrations that send metrics | [Monitor template][14]      |
 
 ## Getting started
 
@@ -75,7 +75,7 @@ Before you begin developing an integration:
    2. On your personal homepage, click **Learn More** under **Sandbox Access**.
    3. Select **Request Sandbox Upgrade**.
 
-Creating a developer sandbox may take up to one or two business days. After your sandbox is created, you can [invite members from your organization][7] to collaborate.
+After your sandbox is created, you can [invite members from your organization][7] to collaborate.
 
 <div class="alert alert-info">If you are already a member of a Datadog organization (including a trial org), you may need to switch to your newly created sandbox. For more information, see the <a href="https://docs.datadoghq.com/account_management/org_switching/">Account Management documentation</a>.</div>
 
