@@ -71,7 +71,7 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates exposed credentials, API keys, and other sensitive secrets in your codebase. You can prevent leaked secrets throughout your software development lifecycle with:
+Secret Scanning identifies and validates exposed credentials, API keys, and other sensitive secrets in your codebase. You can prevent leaked secrets throughout your software development life cycle with:
 - Pre-commit hooks to block secrets from being committed locally before they ever reach your repository
 - Pull-request gates to block leaked secrets from reaching your default branch
 - Third-party validation to confirm whether a detected secret is active and exploitable, reducing noise from rotated or invalid credentials
