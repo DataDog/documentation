@@ -89,7 +89,7 @@ The Agent retries failed log payloads until the logs intake endpoint becomes ava
 ### Logs buffering mechanisms and limits
 
 #### Backpressure and consumption
-The Logs Agent guarantees log delivery during transmission. When a payload fails to send, the Agent applies backpressure and stops reading from the log source. When the intake becomes available, the Agent resumes reading from the last known position.
+The Logs Agent guarantees log delivery during transmission. When a payload fails to send, the Agent applies backpressure by stopping reading from the log source and resuming from the last known position when the intake becomes available.
 
 #### Data loss scenarios
   - **Kubernetes**: Log files may rotate before intake recovery
