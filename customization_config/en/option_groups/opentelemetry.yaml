@@ -16,3 +16,11 @@ otel_api_support_signal_options:
     default: true
   - id: metrics
   - id: logs
+
+ddot_collector_deployment_options:
+  - id: kubernetes_daemonset
+    default: true
+  - id: kubernetes_gateway
+  - id: linux
+  - id: ecs_fargate
+  - id: eks_fargate

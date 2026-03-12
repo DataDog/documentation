@@ -653,7 +653,7 @@ menu:
       parent: otel_collect
       weight: 401
     - name: Install the DDOT Collector
-      url: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset
+      url: /opentelemetry/setup/ddot_collector/install/
       identifier: otel-setup-ddot-install
       parent: otel-setup-ddot
       weight: 4011
