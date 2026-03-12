@@ -30,7 +30,7 @@ In the following example, the subject assignment count is 12,427 for Variant A a
 
 Verify that your feature flag is enabled and evaluates in the correct environment. Then, confirm that traffic reaches the experiment's targeting rule.
 
-1. On the [Experiments][2] page, select your experiment to open its detail page. Hover over the experiment flag label (for example, `new-product-photos`).
+1. On the [Experiments][2] page, select your experiment to open its detail page. Hover over the Feature flag label (for example, `new-product-photos`).
 1. Note the **Environment** where the experiment is running, then click **Go to Flag**.
 
    {{< img src="/product_analytics/experiment/troubleshooting_flag_link1.png" alt="An experiment page showing a tooltip on the feature flag with the environment (dev, enabled) and a Go to Flag link highlighted." style="width:90%;" >}}
