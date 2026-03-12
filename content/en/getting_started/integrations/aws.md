@@ -33,11 +33,11 @@ further_reading:
 
 ## Overview
 
-This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations, install the Datadog Agent on EC2 instances for deeper visibility, and configure log forwarding.
+This guide will walk you through the process of integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. Once you have completed setup, you can easily enable individual AWS service integrations, install the Datadog Agent on EC2 instances for deeper visibility, and configure log forwarding to ensure that all your data is collected.
 
 ## Prerequisites
 
-Before you begin, ensure that you have an [AWS][7] account. The CloudFormation template creates an IAM role and associated policy, allowing Datadog's AWS account to make API calls to your AWS account to collect and push data. Your AWS user must have the following IAM permissions to run the template:
+Before you begin, ensure you have an [AWS][7] account and administrative access to your AWS console. The CloudFormation template creates an IAM role and associated policy, allowing Datadog's AWS account to make API calls to your AWS account to collect and push data. Note that your AWS user must have the following IAM permissions to run the template:
 
 {{% collapse-content title="Required IAM permissions" level="h4" expanded=false id="iam-permissions" %}}
 - cloudformation:CreateStack
@@ -130,14 +130,20 @@ Use the **Metric Collection** tab on the [AWS integration page][8] to configure 
 
 Under the **General** tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.
 
+### Tag filtering
+
+You can leverage tag-based filtering to control which AWS resources Datadog monitors. By utilizing tag filters under the **Metric Collection** tab, you can easily include or exclude specific resources. This allows you to fine-tune your monitoring setup to only collect metrics from the resources that matter to your team.
+
 ## Send logs
 
 There are two ways to send AWS service logs to Datadog:
 
-- [Amazon Data Firehose destination][10]: Recommended for high-volume CloudWatch logs.
+- [Amazon Data Firehose destination][10]: Recommended for high-volume CloudWatch logs. This is the simplest option and requires no additional infrastructure.
 - [Forwarder Lambda function][11]: Required for traces, enhanced metrics, or custom metrics from Lambda functions. Also recommended for logs from S3 or other resources that cannot stream directly to Amazon Data Firehose.
 
 See [Enable logging for your AWS service][14] for setup instructions.
+
+**Tip**: If you are currently unsure which method to use, start with the Amazon Data Firehose destination, as it is easier to set up and maintain.
 
 ### Validation
 
