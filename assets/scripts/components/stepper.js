@@ -148,7 +148,6 @@ function initStepper(stepper) {
     function handleReset() {
         finished = false;
         currentIndex = 0;
-        isAllExpanded = stepper.classList.contains('stepper--open');
         persist();
         render();
     }
