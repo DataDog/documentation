@@ -76,7 +76,7 @@ Secret Scanning identifies and validates exposed credentials, API keys, and othe
 - Pull-request gates to block leaked secrets from reaching your default branch
 - Third-party validation to confirm whether a detected secret is active and exploitable, reducing noise from rotated or invalid credentials
 
-Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning. See [Secret Scanning setup][9] to get started.
+Scans can run through your CI/CD pipelines or directly in Datadog with hosted scanning. See [Secret Scanning setup][9] to get started.
 
 ## Infrastructure as Code Security (IaC Security)
 IaC Security analyzes infrastructure-as-code to detect misconfigurations before they are provisioned to your cloud environment. You can secure your infrastructure and CI/CD with:
