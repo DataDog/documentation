@@ -5,7 +5,7 @@ disable_toc: true
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
-  text: "Cloud Security Management"
+  text: "Cloud Security"
 - link: "/security/code_security/"
   tag: "Documentation"
   text: "Code Security"

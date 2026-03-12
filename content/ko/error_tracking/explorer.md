@@ -9,7 +9,7 @@ title: 오류 추적 탐색기
 
 ## 개요
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
 
 오류 추적 탐색기를 사용하면 이슈를 확인하고, 필터링하고, 조사할 수 있습니다. 이슈는 동일한 버그와 관련된 유사한 오류의 그룹입니다. Datadog에서는 오류 유형, 오류 메시지 또는 스택 추적과 같은 일부 속성을 사용하여 각 오류에 대한 지문을 계산하여 이슈를 만듭니다. 동일한 지문을 가진 오류는 동일한 이슈에 함께 그룹화됩니다.
 
@@ -40,11 +40,11 @@ title: 오류 추적 탐색기
 
 이슈를 클릭하면 이슈 패널이 열리고 해당 이슈에 대한 자세한 정보를 확인할 수 있습니다.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="문제에 대한 요약 보기를 제공하는 오류 추적 이슈 패널의 상단 부분" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="문제에 대한 요약 보기를 제공하는 오류 추적 이슈 패널의 상단 부분" style="width:80%;" >}}
 
 문제를 해결할 때 필요한 높은 수준의 세부 정보는 패널 상단에서 찾을 수 있습니다. 여기에서 특정 이슈의 최초 및 마지막 발생 날짜, 총 횟수, 시간 경과에 따른 횟수 등 수명 주기를 이해할 수 있습니다.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="오류 샘플을 제공하는 오류 추적 이슈 패널의 하단 부분" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="오류 샘플을 제공하는 오류 추적 이슈 패널의 하단 부분" style="width:80%;" >}}
 
 이슈 패널에 표시되는 정보는 오류 원인에 따라 다릅니다. 예를 들어 애플리케이션 성능 모니터링(APM) 오류에서 생성된 이슈에는 리소스 또는 작업 이름과 같은 오류 스팬(span) 태그 가 표시되며, 관련 트레이스 또는 연결된 로그에 직접 액세스할 수 있습니다.
 

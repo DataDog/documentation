@@ -97,7 +97,15 @@ logger.info('Hello world!')
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
+5. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Azure Container Apps.</div>
+
 {{% serverless-init-env-vars-sidecar language="python" defaultSource="containerapp" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
@@ -112,3 +120,4 @@ logger.info('Hello world!')
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [4]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+[6]: /profiler/

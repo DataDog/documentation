@@ -72,11 +72,12 @@ After setting up your pipeline using the API or Terraform, follow the instructio
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
         - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
         - See [Environment Variables][3] for a list of destination environment variables.
-
-    **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
-    ```
-    -p 8282:8088 datadog/observability-pipelines-worker run
-    ```
+    - **Notes**:
+        - By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
+            ```
+            -p 8282:8088 datadog/observability-pipelines-worker run
+            ```
+        - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][4] for more information.
     1. Restart the Worker to use the updated bootstrap file:
@@ -180,12 +181,16 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 
 If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][9] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
 
+#### Set the Worker name using the Pod and cluster name
+
+{{% observability_pipelines/install_worker/pod_cluster_name_worker %}}
+
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [4]: /observability_pipelines/guide/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
-[6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[6]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 [8]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
 [9]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
@@ -283,10 +288,12 @@ After you set up your source, destinations, and processors on the Build page of 
 1. Run the command provided in the UI to install the Worker. If you are using:
     - Secrets Manager: The command points to the Worker bootstrap file that you configure to resolve secrets using your secrets manager.
     - Environment variables: The command is automatically populated with the environment variables you entered earlier.
-    -  **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
+    -  **Notes**:
+        - By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
         ```
         -p 8282:8088 datadog/observability-pipelines-worker run
         ```
+        - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
@@ -377,11 +384,15 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
 
 If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][8] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
 
+#### Set the Worker name based on Pod and cluster name
+
+{{% observability_pipelines/install_worker/pod_cluster_name_worker %}}
+
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 [4]: https://app.datadoghq.com/organization-settings/remote-config/setup
-[5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[5]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 [7]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
 [8]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
@@ -626,23 +637,26 @@ If you are using a firewall, these domains must be added to the allowlist:
 {{< tabs >}}
 {{% tab "Docker and Kubernetes" %}}
 
-- `api.{{< region-param key="dd_site" >}}`
-- `config.{{< region-param key="dd_site" >}}`
-- `http-intake.{{< region-param key="dd_site" >}}`
+
+- `api.<DD_SITE>`
+- `config.<DD_SITE>`
+- `http-intake.<DD_SITE>`
 - `keys.datadoghq.com`
 
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-- `api.{{< region-param key="dd_site" >}}`
-- `config.{{< region-param key="dd_site" >}}`
-- `http-intake.{{< region-param key="dd_site" >}}`
-- `install.{{< region-param key="dd_site" >}}`
+- `api.<DD_SITE>`
+- `config.<DD_SITE>`
+- `http-intake.<DD_SITE>`
+- `install.<DD_SITE>`
 - `yum.datadoghq.com`
 - `keys.datadoghq.com`
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Replace `<DD_SITE>` with `{{< region-param key="dd_site" >}}`.
 
 ## Further reading
 
