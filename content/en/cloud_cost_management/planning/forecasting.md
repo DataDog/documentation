@@ -52,7 +52,7 @@ To generate accurate forecasts, CCM requires:
 
 If you have newly created resources or services, forecasts become available once sufficient historical data is collected.
 
-<!-- ## View forecasts in reports
+## View forecasts in reports
 
 Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your cost reports.
 
@@ -67,7 +67,7 @@ The report displays:
 - **Forecast toggle and controls**: Located in the left panel to enable forecasting and select the time period.
 - **Historical costs**: Your actual spending shown in solid colors.
 - **Forecasted costs**: Predicted costs shown with a hatched pattern.
-- **Forecast summary card**: At the top of the page showing the total forecasted cost for the selected period. -->
+- **Forecast summary card**: At the top of the page showing the total forecasted cost for the selected period.
 
 ## View forecasts in budgets
 
