@@ -32,7 +32,7 @@ If you already have data or services registered in Backstage or ServiceNow, you 
 
 Use the [Datadog Backstage plugin][3] to automatically sync your Backstage catalog entities to the Datadog Software Catalog [entity model][5] on a configurable schedule. The plugin runs as a Backstage backend service and supports entity filtering (for example, you can sync only entities with a specific Backstage component type, such as services or repositories).
 
-You need a Datadog [API key][6], [application key][7], and [Datadog site][8] to configure the plugin. For installation and configuration instructions, see the [plugin README][9].
+You need a Datadog [API key][6], [application key][7], and [Datadog site][8] parameter (for example, `datadoghq.com`) to configure the plugin. For installation and configuration instructions, see the [plugin README][9].
 
 ### Import entity descriptor files from Backstage
 
