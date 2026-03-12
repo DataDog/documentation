@@ -61,6 +61,10 @@ After configuration, SNMP traps are forwarded as logs to Datadog. You can find t
 
    <div class="alert alert-info">Even though SNMP traps are <em>forwarded as logs</em>, <code>logs_enabled</code> does <strong>not</strong> need to be set to <code>true</code>.</div>
 
+You can also view SNMP traps directly from the NDM device view. Select a device in [**Infrastructure > Network Devices**][8] and click the **Events** tab. Syslog messages and SNMP traps are combined in a single view — use the filters to narrow results by event type.
+
+[8]: https://app.datadoghq.com/devices
+
 ### Using the default SNMP trap port 162
 
 Binding to a port number under `1024` requires elevated permissions. To bind to a port number such as the default SNMP Trap port `162`, use the following instructions:
