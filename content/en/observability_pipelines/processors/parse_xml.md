@@ -44,7 +44,7 @@ The following image shows a Windows Event 4625 log in XML, next to the same log 
 
 To set up this processor:
 
-1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Enter the path to the log field on which you want to parse XML. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-parse-xml) below.
 1. Optionally, in the `Enter text key` field, input the key name to use for the text node when XML attributes are appended. See the [text key example](#text-key-example). If the field is left empty, `value` is used as the key name.
 1. Optionally, select `Always use text key` if you want to store text inside an object using the text key even when no attributes exist.
@@ -138,7 +138,7 @@ Then it is converted to the JSON:
 }
 ```
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/
 
 ## Further reading
 

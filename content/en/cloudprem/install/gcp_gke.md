@@ -322,29 +322,18 @@ indexer:
       memory: "8Gi"
 
 # Searcher configuration
-# The searcher is responsible for executing search queries against the indexed data stored in S3.
-# It handles search requests from Datadog's query service and returns matching results.
-#
-# The searcher is horizontally scalable - you can increase `replicaCount` to handle more concurrent searches.
-# Resource requirements for searchers are highly workload-dependent and should be determined empirically.
-# Key factors that impact searcher performance include:
-# - Query complexity (for example, number of terms, use of wildcards or regex)
-# - Query concurrency (number of simultaneous searches)
-# - Amount of data scanned per query
-# - Data access patterns (cache hit rates)
-#
-# Memory is particularly important for searchers as they cache frequently accessed index data in memory.
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# Choose a tier based on your query complexity, concurrency, and data access patterns.
 searcher:
   replicaCount: 2
+  podSize: xlarge
 
-  resources:
-    requests:
-      cpu: "4"
-      memory: "16Gi"
-    limits:
-      cpu: "4"
-      memory: "16Gi"
-
+# Indexer configuration
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# See the sizing guide for available tiers and their configurations.
+indexer:
+  replicaCount: 2
+  podSize: xlarge
 ```
 
 Install CloudPrem:

@@ -20,7 +20,7 @@ The default timeout for each step is 60 seconds. You can override this default t
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
+After you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
 
 ### Click
 
@@ -56,6 +56,26 @@ To record an **Upload** step, either:
 Datadog records steps you perform on your application, such as uploading, and a recap appears as a step in the left corner. You can upload up to 10 files with a limit of 5MB each.
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step" style="width:70%;" >}}
+
+### Drag and drop
+
+Datadog records drag and drop interactions you perform on your application as a step.
+
+Common use cases include:
+- Dragging a widget into a dashboard
+- Reordering filters
+- Moving a card into a group
+- Rearranging notebook elements
+
+{{< img src="synthetics/browser_tests/drag_and_drop.mp4" alt="Drag and drop step recorded in a browser test" video="true" width="90%" >}}
+
+To record a drag and drop step, start the recorder and perform the drag and drop action in your application. The recorder detects the drag source and drop target and creates a single **Drag and Drop** step.
+
+After recording, you can review and edit the drag source element, drop target element, interaction points, and timing settings.
+
+For complex applications or non-native drag and drop implementations, see [drag and drop](#drag-and-drop-1) in the manually added steps section.
+
+<!-- TODO: Confirm whether drag and drop is available in GovCloud before publishing -->
 
 ## Manually added steps
 
@@ -217,6 +237,37 @@ To press keys that are not automatically recorded, specify the values that need 
 This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
 
 Select **Hover** and click on an element to add a step.
+
+#### Drag and drop
+
+Create this interaction step to simulate dragging an element from one location to another. This is useful when refining existing tests or when recording is not practical.
+
+1. Click **Add Step**.
+2. Select **Interaction**.
+3. Choose **Drag and Drop**.
+4. Select the element to drag.
+5. Select the element to drop onto.
+
+{{< img src="synthetics/browser_tests/drag_and_drop_manual_step.mp4" alt="Drag and drop manual interaction step configuration" video="true" width="90%" >}}
+
+**Step options**
+
+| Option | Description |
+|--------|-------------|
+| **User Specified Locator** (optional) | A custom CSS or XPath selector when the recorder picks the wrong element. See [When to use a custom locator](#when-to-use-a-custom-locator-optional) below. |
+| **Interaction Point** | Where on the element the action occurs: **Center** (default) or **Offset (Top-Left)**. |
+| **Delay before drag** | Pause between mouse press and start of drag (default 0ms). |
+| **Delay before drop** | Pause after reaching the drop target before release (default 0ms). Increase for animated or complex UIs. |
+
+#### When to use a custom locator (optional)
+
+Use **User Specified Locator** for the following scenarios:
+
+* **Ghost or overlay elements**: Your application shows a floating copy of the dragged item (for example, a drag preview). The recorder may target that copy instead of the real drop zone. Edit the drop target to the actual container or enter a custom selector.
+* **Deep or nested elements**: The draggable/droppable behavior is on a parent, but the recorder picked a child. Inspect the page and choose the parent element that has the right classes or attributes.
+* **Same element for drag and drop**: The recorder used one element as both drag source and drop target. Edit the drop target and select the real destination element.
+
+**Note**: If the draggable element only appears after hovering on another element, add a **Hover** step before the drag and drop step.
 
 #### Scroll
 

@@ -21,6 +21,7 @@ You might prefer this option if you're looking for a straightforward setup and w
 
 - [OTLP logs intake endpoint][3]
 - [OTLP metrics intake endpoint][4]
+- OTLP traces intake endpoint (in Preview): To request access, contact your Customer Success Manager.
 
 ## Further reading
 
