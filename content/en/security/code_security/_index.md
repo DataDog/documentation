@@ -26,8 +26,8 @@ Code Security scans your first-party code and open source libraries used in your
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
 - [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
-- [Secret Scanning][8] for identifying and validating leaked secrets (in Preview)
-- [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in Terraform files stored in your repositories
+- [Secret Scanning][8] for identifying and validating leaked secrets
+- [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in IaC stored in your repositories
 - [Supply Chain Security](#supply-chain-security) for preventing malicious packages from entering your development environment and code repositories 
 
 Code Security helps teams implement DevSecOps throughout the organization:
