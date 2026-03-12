@@ -87,13 +87,19 @@ Datadog enriches IPs with public cloud provider service and region for IPv4 addr
 
 Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443). 
 
-#### Custom port enrichment
+### Custom port enrichment
 
 You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
 From the **Configuration** tab in NetFlow, click **+ Add Enrichment** to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
+
+### Custom IP enrichment
+
+You can also add your own custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+
+From the [**Enrichment** settings page][10], click **+ Add Enrichment** to add mappings manually or upload a CSV file to add mappings in bulk.
 
 ### Reverse DNS private IP enrichment
 
@@ -364,3 +370,4 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
 [8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
 [9]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
+[10]: https://app.datadoghq.com/devices/settings/enrichment/ip
