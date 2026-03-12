@@ -24977,7 +24977,7 @@ components:
           description: 'Name of the product the dataset is for. Possible values are
             ''apm'', ''rum'',
 
-            ''metrics'', ''logs'', ''error_tracking'', and ''cloud_cost''.'
+            ''metrics'', ''logs'', ''error_tracking'', ''cloud_cost'', and ''sd_repoinfo''.'
           example: logs
           type: string
       required:
@@ -45055,7 +45055,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs'
+        **Supported pipeline types:** logs, metrics'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,6 +45085,7 @@ components:
       type: object
       x-pipeline-types:
       - logs
+      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -54973,6 +54974,60 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+    RumCrossProductSampling:
+      description: The configuration for cross-product retention filters.
+      properties:
+        trace_enabled:
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      type: object
+    RumCrossProductSamplingCreate:
+      description: The configuration for cross-product retention filters.
+      properties:
+        trace_enabled:
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      required:
+      - trace_sample_rate
+      type: object
+    RumCrossProductSamplingUpdate:
+      description: The configuration for cross-product retention filters. All fields
+        are optional for partial updates.
+      properties:
+        trace_enabled:
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -55260,6 +55315,8 @@ components:
     RumRetentionFilterAttributes:
       description: The object describing attributes of a RUM retention filter.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSampling'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -55274,6 +55331,8 @@ components:
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSamplingCreate'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -55375,6 +55434,8 @@ components:
     RumRetentionFilterUpdateAttributes:
       description: The object describing attributes of a RUM retention filter to update.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSamplingUpdate'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
