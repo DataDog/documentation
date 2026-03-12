@@ -41,7 +41,7 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Select where to run static SCA scans
-By default, scans run when changes are committed that update supported dependency manifests/lockfiles in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported on `push` events).
+By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI/CD pipeline; CI jobs are supported for `push` events.
 
 ### Scan with Datadog-hosted scanning
 

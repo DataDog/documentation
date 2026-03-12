@@ -37,8 +37,8 @@ Using Software Composition Analysis provides organizations with the following be
 ## How it works
 
 SCA supports two complementary detection modes:
-- **Static detection** scans your repositories by analyzing dependency files (lockfiles and manifests). Scans run when changes are committed that update supported dependency manifests/lockfiles in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported on <code>push</code> event triggers). See [Set up Static SCA][1] to get started.
-- **Runtime detection** identifies libraries that are actually loaded and used by your services at runtime, using instrumentation from Datadog APM. See [Set up Runtime SCA][2] to get started.
+- **Static detection** scans repositories by analyzing dependency files (lockfiles and manifests). By default, scans run when a commit updates a supported dependency manifest or lockfile in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported for `push` events). See [Set up Static SCA][1] to get started.
+- **Runtime detection** identifies libraries that are loaded and used by your services at runtime using instrumentation from Datadog APM. See [Set up Runtime SCA][2] to get started.
 
 Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
 
@@ -81,13 +81,13 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 ### Automatically block risky changes with PR Gates
 
-Use [PR Gates][16] to enforce security standards on open source library usage before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies any vulnerabilities or license violations above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
+Use [PR Gates][16] to enforce security standards for open source libraries before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies vulnerabilities or license violations that exceed your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
 
 You can configure PR Gates to block on:
 - **Security vulnerabilities**: libraries with known CVEs above a configured severity threshold.
 - **License violations**: libraries using licenses that do not comply with your organization's policy.
 
-PR Gates marks a PR check as failed only if the developer **introduces a new violation as part of that PR**—existing violations already present in the codebase before the PR and its branch were created do not cause the check to fail. By default, failed checks are informational and do not block merging, but you can configure them as blocking in GitHub or Azure DevOps to prevent merging when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
+PR Gates marks a PR check as failed only if the developer introduces a new violation in that PR. Violations that already existed in the codebase before the PR branch was created do not cause the check to fail. By default, failed checks are informational and do not block merging, but you can configure them as blocking in GitHub or Azure DevOps to prevent merges when critical issues are detected. For setup instructions, see [Set up PR Gate Rules][17].
 
 ### Manage your library inventory
 
@@ -102,24 +102,25 @@ To learn more about how the inventory is generated, how Static and Runtime data 
 
 ### Library vulnerability context in APM
 
-SCA enriches the information that Application Performance Monitoring (APM) is already collecting by flagging libraries that match against current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
+SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Software Catalog][10].
 
 ## Understanding SCA views
 
 The Repositories Explorer and Vulnerabilities Explorer serve complementary but distinct purposes.
 
-**Repositories Explorer** reflects a **point-in-time snapshot** of the libraries and vulnerabilities detected at the time of the scan. It shows which libraries were present in a given repository at a specific commit, along with any vulnerabilities that were known at scan time. This view does not update retroactively if new advisories are published after the scan runs.
+Repositories Explorer reflects a point-in-time snapshot of the libraries and vulnerabilities detected at the time of the scan. It shows which libraries were present in a given repository at a specific commit, along with any vulnerabilities that were known at scan time. This view does not update retroactively if new advisories are published after the scan runs.
 
-**Vulnerabilities Explorer** provides a **live view** that is continuously matched against the latest advisory database. If a new vulnerability advisory is published after a repository scan, it automatically appears in the Vulnerabilities Explorer, even if the repository has not been rescanned since that commit or if your last scan was on an older commit. This means your vulnerability exposure is always up to date, regardless of when the last scan ran.
+Vulnerabilities Explorer provides a live view that is continuously matched against the latest advisory database. If a new vulnerability advisory is published after a repository scan, it automatically appears in the Vulnerabilities Explorer, even if the repository has not been rescanned or if your last scan was on an older commit. This ensures your vulnerability exposure is always up to date.
 
-> **Example:** If a scan runs at 10:00 AM and a CVE advisory for a library in your repository is published at 4:00 PM the same day, the Repositories Explorer for that commit will not show the CVE, but the Vulnerabilities Explorer will reflect it as soon as the advisory is available in Datadog's database.
+<div class="alert alert-info"><b>Example</b>: If a scan runs at 10:00 AM and a CVE advisory for a library in your repository is published at 4:00 PM, the Repositories Explorer for that commit will not show the CVE, but the Vulnerabilities Explorer will reflect it as soon as the advisory is available in Datadog's database.</div>
 
 ### Retroactive advisory matching
 
-Datadog continuously matches newly published advisories against the stored library inventory from past scans. This updates vulnerability records in the Vulnerabilities Explorer without changing the original Repositories Explorer snapshots. This means:
-- You do not need to trigger a new scan for a newly published CVE to be reflected in your vulnerability posture in the Vulnerabilities Explorer.
-- The Vulnerabilities Explorer always shows the most current risk picture based on your last known library inventory, even for older commits that have not been rescanned.
-- The Repositories Explorer remains a fixed, point-in-time historical record of what was known at scan time and does not update when new advisories are published.
+Datadog continuously matches newly published advisories against the stored library inventory from past scans. This updates vulnerability records in the Vulnerabilities Explorer without altering the original Repositories Explorer snapshots. This means:
+
+- You do not need to trigger a new scan for a newly published CVE to appear in the Vulnerabilities Explorer.
+- The Vulnerabilities Explorer reflects the most current risk based on your last known library inventory, even for older commits.
+- The Repositories Explorer remains a fixed, point-in-time record of what was known at scan time and does not update when new advisories are published.
 
 ### Vulnerability lifecycle
 Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
