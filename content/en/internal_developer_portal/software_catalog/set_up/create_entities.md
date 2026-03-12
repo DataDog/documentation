@@ -44,7 +44,7 @@ To create an entity definition:
 1. Navigate to the [Software Catalog Setup & Config][3] page.
 1. Click **Create a New Entry**.
 1. Select the entity type from the **Kind** dropdown.
-1. Fill in the metadata fields, such as ownership and documentation links.
+1. Fill in the metadata fields, such as ownership and reference links.
 1. (Optional) Switch to **YAML** or **JSON** to see the generated code and cURL command. In the code editors, Datadog automatically flags invalid data.
 
    {{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
