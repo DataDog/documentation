@@ -6081,16 +6081,6 @@ menu:
       parent: cloudprem_advanced_configuration
       identifier: cloudprem_processing
       weight: 406
-    - name: Management
-      url: /cloudprem/manage/
-      parent: cloudprem
-      identifier: cloudprem_manage
-      weight: 5
-    - name: Supported Features
-      url: /cloudprem/supported_features/
-      parent: cloudprem
-      identifier: cloudprem_supported_features
-      weight: 6
     - name: Troubleshooting
       url: /cloudprem/troubleshooting/
       parent: cloudprem
