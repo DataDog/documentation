@@ -27,7 +27,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 {{< tabs >}}
 {{% tab "Azure Table" %}}
 1. Create a JSON file for your rule parameters, including the `streamDeclarations` property that lists the log fields you want mapped to the Azure table. See the [Supported Azure Tables][3] for all available tables to which you send data.
-    - For example, this JSON file adds the log fields to be mapped to the [`CommonSecurityLog`][1] table:
+    - For example, this JSON file (`dcr-commonsecuritylog.json`) adds the log fields to be mapped to the [`CommonSecurityLog`][1] table:
         ```bash
         {
             "location": "eastus",
