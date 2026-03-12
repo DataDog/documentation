@@ -129,7 +129,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 
 - Show me CPU utilization metrics for all hosts in the last 4 hours.
 - Get Redis latency metrics for the production environment.
-- Display memory usage trends for our database servers.
+- How much did my cloud costs change from January to February?
 
 ### `get_datadog_metric_context`
 *Toolset: **core***\
