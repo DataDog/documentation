@@ -58,7 +58,7 @@ Bidirectional syncing is supported for the following Code and Cloud Security fin
 - Libraries (SCA)
 - Static Code (SAST)
 - Runtime Code (IAST)
-- Secret Scanning (SDS)
+- Secret Scanning 
 - Infrastructure as Code (IaC)
 - Misconfigurations
 - Identity Risks
@@ -155,29 +155,30 @@ The following steps create a bidirectional ticket for a Security finding.
 4. Create a ticket for any third-party tool supported (see sections below).
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
-1. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
-2. In **Case Management  <-> Jira Integration**, complete the following settings:
-   1. **Case Management project:** select a Case Management project that has [Jira integration enabled][3].
-   2. **Jira account:** select the Jira account where you want the ticket created.
-   3. **Project:** select the Jira project to use.
-   4. **Issue type:** select the Jira issue type to create.
+1. Click the **Jira** icon to start ticket creation. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
+2. Complete the following settings:
+   1. **Jira account:** select the Jira account where you want the ticket created.
+   2. **Jira Project:** select the Jira project to use.
+   3. **Jira work type:** select the Jira work type to create.
+   4. **Assignee and Priority:** optionally select the assigned user and priority.
 3. To add more fields to the Jira ticket Datadog creates, use **Add Optional Field** to add the fields.
-4. Click **Create Ticket**.
+4. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
+5. Click **Create**.
 
 **Notes**:
 - Bidirectional sync with Jira is available for certain Jira ticket attributes, such as status, assignee, and comments, but not all Jira fields are available.
 {{% /collapse-content %}}
 
 {{% collapse-content title="ServiceNow ticket" level="h4" expanded=false %}}
-1. Click the **ServiceNow** tab. You can use a new or existing ticket.
-2. In **Case Management <-> ServiceNow Integration**, complete the following settings:
-   1. **Case Management project:** select a Case Management project that has [ServiceNow integration enabled][3].
-   2. **Instance:** select the ServiceNow instance where you want the ticket created.
-   3. **Assignment group:** select the ServiceNow group to assign the ticket to.
-3. Choose a creation mode:
-   - **One ticket for all findings**: creates a single aggregated ticket linked to all selected findings.
-   - **One ticket per finding**: creates an individual ticket for each selected finding.
-4. Click **Create Ticket**.
+1. Click the **ServiceNow** icon to start ticket creation. You can use a new or existing ticket. Let's look at creating a new ServiceNow ticket.
+2. Complete the following settings:
+   1. **Instance:** select the ServiceNow instance where you want the ticket created.
+   2. **Assignment group:** select the ServiceNow group to assign the ticket to.
+3. If you are creating a ticket for multiple findings, choose a creation mode:
+   - **Single Ticket:** creates a single aggregated ticket linked to all selected findings.
+   - **Multiple Tickets:** creates an individual ticket for each selected finding.
+4. View **Data Sync Settings** to review and update the Case Management Project linked and the bidirectional sync settings per field.
+5. Click **Create**.
 
 **Notes**:
 - Bidirectional sync is supported for `ITSM` mode only. `ITOM` events do not support bidirectional sync.
