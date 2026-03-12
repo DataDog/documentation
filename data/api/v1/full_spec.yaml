@@ -22423,6 +22423,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for all organizations.
@@ -22523,6 +22528,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for all organizations.
           format: int64
           type: integer
         npm_host_top99p:
@@ -23586,6 +23596,11 @@ components:
             current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for the given org.
@@ -23686,6 +23701,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         npm_host_top99p:
@@ -24749,6 +24769,11 @@ components:
             2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p_sum:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current month for all organizations.
@@ -24869,6 +24894,11 @@ components:
         network_device_wireless_top99p_sum:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        network_path_agg_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:

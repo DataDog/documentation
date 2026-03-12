@@ -1,42 +1,9 @@
----
-title: iOS and tvOS Monitoring Setup
-beta: true
-description: "Collect RUM data from your iOS and tvOS applications."
-aliases:
-  - /real_user_monitoring/ios
-  - /real_user_monitoring/ios/getting_started
-  - /real_user_monitoring/ios/swiftui/
-  - /real_user_monitoring/swiftui/
-  - /real_user_monitoring/mobile_and_tv_monitoring/swiftui/
-  - /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
-  - /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
-further_reading:
- - link: /real_user_monitoring/application_monitoring/ios/advanced_configuration
-   tag: Documentation
-   text: RUM iOS Advanced Configuration
- - link: "https://github.com/DataDog/dd-sdk-ios"
-   tag: "Source Code"
-   text: "Source code for dd-sdk-ios"
- - link: "/real_user_monitoring"
-   tag: "Documentation"
-   text: "Learn how to explore your RUM data"
- - link: "/real_user_monitoring/error_tracking/ios/"
-   tag: "Documentation"
-   text: "Learn how to track iOS errors"
- - link: "/real_user_monitoring/ios/swiftui/"
-   tag: "Documentation"
-   text: "Learn about instrumenting SwiftUI applications"
- - link: "/real_user_monitoring/application_monitoring/ios/supported_versions"
-   tag: "Documentation"
-   text: "RUM iOS and tvOS monitoring supported versions"
- - link: "/real_user_monitoring/guide/mobile-sdk-upgrade"
-   tag: "Documentation"
-   text: "Upgrade RUM Mobile SDKs"
----
+<!--
+This partial contains setup instructions for the iOS SDK.
+It can be included directly in language-specific pages or wrapped in conditionals.
+-->
 
-## Overview
-
-This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] using the Datadog iOS SDK. Follow the steps below to set up RUM monitoring, which includes Error Tracking.
+This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] with the iOS SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][14] for specific steps.
 
 ## Prerequisites
 
@@ -49,7 +16,7 @@ Before you begin, ensure you have:
 
 **Choose your setup method:**
 
-- **[Agentic Onboarding (in Preview)][14]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **[Agentic Onboarding (in Preview)][16]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
 - **Manual setup** (below): Follow the instructions to manually add and configure the RUM SDK in your iOS application.
 
 ### Manual setup
@@ -60,54 +27,65 @@ To send RUM data from your iOS or tvOS application to Datadog, complete the foll
 
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
 
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
+{% tabs %}
+{% tab label="Swift Package Manager (SPM)" %}
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
+
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:
+
 ```
 DatadogCore
 DatadogRUM
 ```
 
-{{% /tab %}}
-{{% tab "CocoaPods" %}}
+{% /tab %}
+{% tab label="CocoaPods" %}
 
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
+You can use [CocoaPods][2] to install `dd-sdk-ios`:
+
 ```
 pod 'DatadogCore'
 pod 'DatadogRUM'
 ```
 
-[1]: https://cocoapods.org/
-{{% /tab %}}
-{{% tab "Carthage" %}}
+[2]: https://cocoapods.org/
 
-You can use [Carthage][1] to install `dd-sdk-ios`:
+{% /tab %}
+{% tab label="Carthage" %}
+
+You can use [Carthage][3] to install `dd-sdk-ios`:
+
 ```
 github "DataDog/dd-sdk-ios"
 ```
 
-**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source.
+{% alert level="info" %}
+Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source.
+{% /alert %}
+
 To build and integrate the SDK, run:
+
 ```
 carthage bootstrap --use-xcframeworks --no-use-binaries
 ```
 
 After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
+
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
 DatadogRUM.xcframework
 ```
 
-[1]: https://github.com/Carthage/Carthage
-{{% /tab %}}
-{{< /tabs >}}
+[3]: https://github.com/Carthage/Carthage
+
+{% /tab %}
+{% /tabs %}
 
 ### Step 2 - Specify application details in the UI
 
@@ -123,13 +101,15 @@ The SDK should be initialized as early as possible in the app lifecycle, specifi
 
 This ensures the SDK can correctly capture all measurements, including application startup duration. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
-<div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
+{% alert level="warning" %}
+Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
+{% /alert %}
 
 For more information, see [Using Tags][4].
 
-{{< site-region region="us" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% site-region region="us" %}
+{% tabs %}
+{% tab label="Swift" %}
 
 ```swift
 import DatadogCore
@@ -144,8 +124,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent  // GDPR compliance setting
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -156,13 +138,15 @@ configuration.service = @"<service name>";  // Your app's service name
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];  // GDPR compliance setting
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
-{{< site-region region="eu" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="eu" %}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
@@ -176,8 +160,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -188,13 +174,15 @@ configuration.site = [DDSite eu1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
-{{< site-region region="us3" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="us3" %}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
@@ -208,8 +196,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -220,13 +210,15 @@ configuration.site = [DDSite us3];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
-{{< site-region region="us5" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="us5" %}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
@@ -240,8 +232,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -252,13 +246,15 @@ configuration.site = [DDSite us5];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
-{{< site-region region="gov" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="gov" %}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
@@ -272,8 +268,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -284,13 +282,15 @@ configuration.site = [DDSite us1_fed];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
-{{< site-region region="ap1" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="ap1" %}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
@@ -304,8 +304,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -316,13 +318,15 @@ configuration.site = [DDSite ap1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
 
-{{< site-region region="ap2" >}}
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="ap2" %}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 import DatadogCore
 
@@ -336,8 +340,10 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogCore;
 
@@ -348,9 +354,10 @@ configuration.site = [DDSite ap2];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 ```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
 
 The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. To add GDPR compliance for your EU users (required for apps targeting European users) and configure other [initialization parameters][5], see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
@@ -360,8 +367,9 @@ To control the data your application sends to Datadog RUM, you can specify a sam
 
 For example, to only keep 50% of sessions use:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
 // Configure RUM with 50% session sampling
 let configuration = RUM.Configuration(
@@ -369,15 +377,18 @@ let configuration = RUM.Configuration(
     sessionSampleRate: 50  // Only track 50% of user sessions
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 // Configure RUM with 50% session sampling
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 configuration.sessionSampleRate = 50;  // Only track 50% of user sessions
 ```
-{{% /tab %}}
-{{< /tabs >}}
+
+{% /tab %}
+{% /tabs %}
 
 #### Set tracking consent (GDPR compliance)
 
@@ -399,10 +410,11 @@ For example, if the current tracking consent is `.pending`:
 ### Step 4 - Start sending data
 
 #### Enable RUM
+
 Configure and start RUM. This should be done once and as early as possible, specifically in your `AppDelegate`:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
 
 ```swift
 import DatadogRUM
@@ -418,8 +430,10 @@ RUM.enable(
   )
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 @import DatadogRUM;
 
@@ -432,19 +446,19 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 
 [DDRUM enableWith:configuration];
 ```
-{{% /tab %}}
-{{% /tabs %}}
 
-Network requests are automatically tracked after you enable RUM with `urlSessionTracking` configuration.
+{% /tab %}
+{% /tabs %}
 
-#### (Optional) Enable detailed timing breakdown
+#### Enable `URLSessionInstrumentation`
 
-To capture additional detailed network timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your delegate type:
+To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
+{% tabs %}
+{% tab label="Swift" %}
+
 ```swift
-URLSessionInstrumentation.enableDurationBreakdown(
+URLSessionInstrumentation.enable(
     with: .init(
         delegateClass: <YourSessionDelegate>.self
     )
@@ -456,8 +470,10 @@ let session = URLSession(
     delegateQueue: nil
 )
 ```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
 ```objective-c
 DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
 [DDURLSessionInstrumentation enableWithConfiguration:config];
@@ -466,8 +482,9 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
                                                       delegate:[[<YourSessionDelegate> alloc] init]
                                                  delegateQueue:nil];
 ```
-{{% /tab %}}
-{{< /tabs >}}
+
+{% /tab %}
+{% /tabs %}
 
 ### Instrument views
 
@@ -496,7 +513,9 @@ The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view
 
 The Datadog iOS SDK allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
-<div class="alert alert-warning">Using <code>.trackRUMTapAction(name:)</code> for <code>SwiftUI</code> controls inside a <code>List</code> can break its default gestures. For example, it may disable the <code>Button</code> action or break <code>NavigationLink</code>. To track taps in a <code>List</code> element, use the <a href="/real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions">Custom Actions</a> API instead.</div>
+{% alert level="warning" %}
+Using `.trackRUMTapAction(name:)` for `SwiftUI` controls inside a `List` can break its default gestures. For example, it may disable the `Button` action or break `NavigationLink`. To track taps in a `List` element, use the [Custom Actions][15] API instead.
+{% /alert %}
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -545,10 +564,6 @@ This means that even if users open your application while offline, no data is lo
 
 See [Supported versions][9] for a list of operating system versions and platforms that are compatible with the iOS SDK.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /real_user_monitoring/
 [2]: /account_management/api-app-keys/#api-keys
 [3]: /account_management/api-app-keys/#client-tokens
@@ -562,4 +577,7 @@ See [Supported versions][9] for a list of operating system versions and platform
 [11]: /real_user_monitoring/ios/web_view_tracking/
 [12]: /real_user_monitoring/ios/data_collected/
 [13]: https://app.datadoghq.com/rum/application/
-[14]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[14]: /error_tracking/
+[15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
+[16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+
