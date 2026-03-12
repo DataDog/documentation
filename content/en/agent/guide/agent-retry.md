@@ -161,10 +161,9 @@ The Agent retries failed Processes requests using an exponential backoff strateg
 - Base backoff time: 2 seconds
 - Maximum backoff time: [64 seconds][401]
 - Maximum backoff time is reached after 6 retries
+See **Metrics retry strategy** for complete details on retry scenarios and exceptions.
 
 <div class="alert alert-info"> On-disk buffering is not supported for Processes. </div>
-
-See **Metrics retry strategy** for complete details on retry scenarios and exceptions.
 
 ### Processes buffering mechanisms and limits
 
