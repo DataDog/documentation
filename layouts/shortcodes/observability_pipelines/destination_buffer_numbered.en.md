@@ -3,7 +3,8 @@
 	- To configure a buffer on your destination:
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
-			- Maximum memory buffer size is 128 GB.
-			- Maximum disk buffer size is 500 GB.
+			1. Maximum memory buffer size is 128 GB.
+			1. Maximum disk buffer size is 500 GB.
+		1. In the **Behavior on full buffer** dropdown menu, select whether you want to **block** events or **drop new events** when the buffer is full.
 
 [100]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
