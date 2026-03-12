@@ -17,9 +17,10 @@ In the Helm chart:
     ```
 1. To assign unique Worker names, configure [`VECTOR_HOSTNAME`][102] to the `POD_NAME` and `CLUSTER_NAME`.
     ```yaml
+    command: ["/bin/sh", "-c"]
     args:
-      - >
-        export VECTOR_HOSTNAME="${POD_NAME}.${CLUSTER_NAME}";
+      - |
+        export VECTOR_HOSTNAME="${CLUSTER_NAME}_${POD_NAME}";
         exec /usr/bin/observability-pipelines-worker run
     ```
 
