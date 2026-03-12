@@ -19,6 +19,7 @@ If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not
    {{< nextlink href="/cloudprem/operate/sizing/" >}}Size your cluster{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/pipelines/" >}}Configure processing{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/ingress/" >}}Configure Ingress{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/configure/lambda/" >}}Lambda Search Offloading{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://www.datadoghq.com/product-preview/cloudprem/
