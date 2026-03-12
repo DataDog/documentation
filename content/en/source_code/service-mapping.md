@@ -279,35 +279,51 @@ If you are using a host, configure your application with the `DD_TAGS` environme
 {{% /tab %}}
 {{% tab "Java" %}}
 
-<div class="alert alert-info">The Java client library version 1.12.0 or later is required.</div>
+<div class="alert alert-info">
+The Java client library version 1.48.0 or later is required for embedded git properties. Version 1.12.0 or later is required for other options.
+</div>
 
 ### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: embedding git properties in your build artifact, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-#### Option 1: Docker
+#### Option 1: Embedded git properties (recommended)
+
+{{% sci-java-git-properties %}}
+
+#### Option 2: Docker
 
 {{% sci-docker %}}
 
-#### Option 2: `DD_GIT_*` environment variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
 ### Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have three options depending on your serverless application's setup.
 
-#### Option 1: Datadog tooling
+#### Option 1: Embedded git properties (recommended)
+
+{{% sci-java-git-properties %}}
+
+#### Option 2: Datadog tooling
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: `DD_GIT_*` environment variables
+#### Option 3: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
 ### Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+If you are using a host, you have two options.
+
+#### Option 1: Embedded git properties (recommended)
+
+{{% sci-java-git-properties %}}
+
+#### Option 2: `DD_GIT_*` environment variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -339,20 +355,18 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 
 ## Build inside a Docker container
 
-If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access Git information:
+If your build process is executed in CI within a Docker container, use a [named context][docker-named-context] to make your `.git` folder available at build time:
 
-1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL.
+1. Add your `.git` folder as a named build context:
 
-   ```
-   !.git/HEAD
-   !.git/config
-   !.git/refs
+   ```shell
+   docker build [...] --build-context dotgit=<path to your local .git folder>
    ```
 
-2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is run.
+2. In your `Dockerfile`, mount the `.git` folder before running your build:
 
-   ```
-   COPY .git ./.git
+   ```dockerfile
+   RUN --mount=from=dotgit,target=<path to where you expect .git to be in your build container> <your build command>
    ```
 
 ## Configure telemetry tagging
@@ -366,3 +380,4 @@ For unsupported languages, use the `git.commit.sha` and `git.repository_url` tag
 [6]: /tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [9]: /tracing/trace_collection/dd_libraries/
+[docker-named-context]: https://docs.docker.com/build/concepts/context/#named-contexts

@@ -454,6 +454,8 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ### View traces in Datadog
 
 After your application restarts, go to Datadog's [APM Service page][2] and search for the service name you set for your application (`DD_SERVICE`).
@@ -469,6 +471,10 @@ To configure your application to submit custom metrics, follow the appropriate s
 - [Python][7]
 
 ### Continuous Profiler
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Linux Azure App Service.
+</div>
 
 To enable the Continuous Profiler, set the environment variable `DD_PROFILING_ENABLED=true`. For more information, see the [Continuous Profiler documentation][8].
 
