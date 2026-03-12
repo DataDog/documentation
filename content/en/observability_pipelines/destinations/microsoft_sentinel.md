@@ -23,25 +23,8 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. [Add Microsoft Sentinel][6] to the workspace.
 1. [Create a Data Collection Endpoint (DCE)][7].
 1. [Create a Log Analytics Workspace][8] in the workspace if you haven't already.
-1. Follow the instructions for the type of table you want to create.
+1. Follow the instructions for the type of table to which you want to send data.
 {{< tabs >}}
-{{% tab "Custom table" %}}
-1. In the Log Analytics Workspace, navigate to **Settings** > **Tables**.
-1. Click **+ Create**.
-1. Define a custom table (for example, `MyOPWLogs`).
-    - **Notes**:<br>- After the table is configured, the prefix `Custom-` and suffix `_CL` are automatically appended to the table name. For example, if you defined the table name in Azure to be `MyOPWLogs`, the full table name is stored as `Custom-MyOPWLogs_CL`. You must use the full table name when you set up the Observability Pipelines Microsoft Sentinel destination.<br>-The full table name can be found in the resource JSON of the DCR under `streamDeclarations`.
-1. Select **New Custom Log (DCR-based)**.
-1. Click **Create a new data collection rule** and select the DCE you created earlier.
-1. Click **Next**.
-1. Upload a sample JSON Log. For this example, the following JSON is used for the **Schema and Transformation**, where  `TimeGenerated` is required:
-    ```json
-    {
-        "TimeGenerated": "2024-07-22T11:47:51Z",
-        "event": {}
-    }
-    ```
-1. Click **Create**.
-{{% /tab %}}
 {{% tab "Azure Table" %}}
 1. Create a JSON file for your rule parameters, including the `streamDeclarations` property that lists the log fields you want mapped to the Azure table. See the [Supported Azure Tables][3] for all available tables to which you send data.
     - For example, this JSON file adds the log fields to be mapped to the [`CommonSecurityLog`][1] table:
@@ -104,6 +87,23 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 [3]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables
 [4]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog#columns
 
+{{% /tab %}}
+{{% tab "Custom table" %}}
+1. In the Log Analytics Workspace, navigate to **Settings** > **Tables**.
+1. Click **+ Create**.
+1. Define a custom table (for example, `MyOPWLogs`).
+    - **Notes**:<br>- After the table is configured, the prefix `Custom-` and suffix `_CL` are automatically appended to the table name. For example, if you defined the table name in Azure to be `MyOPWLogs`, the full table name is stored as `Custom-MyOPWLogs_CL`. You must use the full table name when you set up the Observability Pipelines Microsoft Sentinel destination.<br>-The full table name can be found in the resource JSON of the DCR under `streamDeclarations`.
+1. Select **New Custom Log (DCR-based)**.
+1. Click **Create a new data collection rule** and select the DCE you created earlier.
+1. Click **Next**.
+1. Upload a sample JSON Log. For this example, the following JSON is used for the **Schema and Transformation**, where  `TimeGenerated` is required:
+    ```json
+    {
+        "TimeGenerated": "2024-07-22T11:47:51Z",
+        "event": {}
+    }
+    ```
+1. Click **Create**.
 {{% /tab %}}
 {{< /tabs >}}
 1. In Azure, navigate to **Microsoft Entra ID**.
