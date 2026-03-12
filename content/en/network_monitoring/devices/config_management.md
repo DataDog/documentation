@@ -56,7 +56,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
    instances:
      ## ip_address - string - required
      ## The IP address of the network device to collect configurations from.
-     ip_address: <IP_ADDRESS>
+   - ip_address: <IP_ADDRESS>
      ## @param auth - object - required
      ## Authentication credentials to connect to the network device.
      auth:
