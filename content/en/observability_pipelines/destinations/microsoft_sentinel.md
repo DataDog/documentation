@@ -72,7 +72,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
             }
             ```
     - See [CommonSecurityLog Columns][4] for a full list of `commonsecuritylog` table columns.
-1. Run the [`az monitor data-collection rule create`][2] Azure CLI command to create a DCR for the Azure table. For example:
+1. Run the [`az monitor data-collection rule create`][2] Azure CLI command to create a DCR with JSON file you just created. For example, with the `dcr-commonsecuritylog.json` file:
     ```bash
     az monitor data-collection rule create \
         --resource-group "myResourceGroup" \
@@ -83,7 +83,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
     ```
 
 [1]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog
-[2]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/rule?view=azure-cli-latest
+[2]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/rule?view=azure-cli-latest#az-monitor-data-collection-rule-create
 [3]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables
 [4]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog#columns
 
