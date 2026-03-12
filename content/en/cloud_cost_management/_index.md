@@ -139,4 +139,4 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 [6]: /account_management/rbac/data_access/
 [7]: https://www.datadoghq.com/product-preview/data-access-control/
 [8]: /cloud_cost_management/datadog_costs
-[9]: /cloud_cost_management/permissions
+[9]: /cloud_cost_management/setup/permissions
