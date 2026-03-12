@@ -701,13 +701,13 @@ For each cloud account that you would like to receive recommendations for:
 
 ## Recommendation statuses
 
-Assign statuses to recommendations to track triage progress across your team. Statuses persist when recommendations regenerate daily, so you don't need to re-triage the same recommendations.
+Assign a status to each recommendation to track triage progress across your team. Statuses persist when recommendations regenerate daily. You don't need to re-triage the same recommendations.
 
 | Status | Description |
 |--------|-------------|
-| Open | Default status. The recommendation has not been triaged. |
+| Open | (Default) The recommendation has not been triaged. |
 | In Progress | Work is underway to address this recommendation. |
-| Completed | The recommended action has been taken, or is no longer relevant. |
+| Completed | The recommended action has been taken or is no longer relevant. |
 | Dismissed | No work is planned for this recommendation over the time frame specified when dismissing. |
 
 ### Change a recommendation status
