@@ -1,5 +1,5 @@
 ---
-title: Teams and Access
+title: Manage Your Access with Teams
 description: "An overview of Datadog's features for controlling user access to resources, including teams, roles, permissions, and granular access controls."
 further_reading:
 - link: "/account_management/teams/"
