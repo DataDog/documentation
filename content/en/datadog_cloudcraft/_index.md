@@ -96,7 +96,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 [3]: /security/cloud_security_management
 [10]: /datadog_cloudcraft/overlays#security
 [11]: /datadog_cloudcraft/overlays#cloud-cost-management
-[17]: /integrations/google_cloud_platform/#resource-collection
+[17]: /integrations/google_cloud_platform/#resource-changes-collection
 [18]: https://app.datadoghq.com/integrations/google-cloud-platform
 [19]: /datadog_cloudcraft/overlays#observability
 

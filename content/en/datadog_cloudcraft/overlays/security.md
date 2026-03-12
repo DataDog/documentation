@@ -39,7 +39,7 @@ You can click on any resource that has findings to open a side panel with more d
 
 ## Investigate sensitive data
 
-**Note**: Sensitive data is available for AWS accounts only.
+**Note**: Viewing sensitive data is available for AWS accounts only.
 
 You can view sensitive data matches for your S3 buckets. Click a resource with matches to learn more about the bucket's sensitive data matches. Then, hover over a filename and click its **Inspect in AWS** button.
 
