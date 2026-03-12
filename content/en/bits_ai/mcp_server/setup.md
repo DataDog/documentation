@@ -13,10 +13,6 @@ further_reading:
   text: "Datadog Extension for Cursor"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
 This page explains how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients.
 
 ## Installation
@@ -203,6 +199,62 @@ To install the extension:
 
 {{% /tab %}}
 
+{{% tab "JetBrains IDEs" %}}
+
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. Alternately, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE. The sections below describe how to configure the Datadog MCP Server for use by these AI tools.
+
+
+#### Junie
+
+To configure the Datadog MCP Server with Junie, navigate to the IDE settings. Go to **Tools** > **Junie** > **MCP Settings** and add the following block:
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "type": "http",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}"
+    }
+  }
+}
+</code></pre>
+
+You are prompted to login through OAuth. The status indicator in the settings displays a green tick when the connection is successful.
+
+#### AI Assistant
+
+To configure the Datadog MCP Server with AI Assistant, navigate to the IDE settings. Go to **Tools** > **AI Assistant** > **Model Context Protocol (MCP)** and add the following block:
+
+<pre><code>{
+  "mcpServers": {
+    "datadog": {
+      "url": "{{< region-param key="mcp_server_endpoint" >}}"
+      "headers": {
+        "DD_API_KEY": "your API key",
+        "DD_APPLICATION_KEY": "your APP key"
+      }
+    }
+  }
+}
+</code></pre>
+
+The status indicator in the settings displays a green tick when the connection is successful.
+
+#### Agent CLIs
+
+Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
+- [Claude Code][4]
+- [Codex][5]
+
+The [Datadog plugin][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
+
+[1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
+[2]: https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
+[3]: /ide_plugins/idea/
+[4]: /bits_ai/mcp_server/setup/?tab=claudecode
+[5]: /bits_ai/mcp_server/setup/?tab=codex
+
+{{% /tab %}}
+
 {{% tab "Other" %}}
 
 The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use **remote authentication** when your client supports it. For Cline or when remote authentication is unreliable, use **local binary authentication**.
@@ -292,6 +344,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 | [Claude&nbsp;Desktop][5] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=claude-desktop#installation) as needed. |
 | [Codex CLI][6] | OpenAI | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
+| [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
 | [Goose][8], [Kiro][9], [Kiro CLI][10], [Cline][11] | Various | See the **Other** tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -358,3 +411,4 @@ For security, use a scoped API key and application key from a [service account][
 [15]: /ide_plugins/vscode/?tab=cursor
 [16]: /ide_plugins/vscode/
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[18]: /ide_plugins/idea/

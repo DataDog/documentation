@@ -205,6 +205,14 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 - You can view your Azure Functions traces in [Trace Explorer][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
 - You can use the [Serverless > Azure Functions][4] page to see your traces enriched with telemetry collected by the [Datadog Azure integration][5].
 
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Azure Functions.
+</div>
+
+To enable the [Continuous Profiler][10], set the environment variable `DD_PROFILING_ENABLED=true`.
+
 ## Troubleshooting
 
 ### Enable debug logs
@@ -230,3 +238,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://learn.microsoft.com/en-us/azure/azure-functions/flex-consumption-plan
 [9]: /serverless/azure_app_service/windows_code/?tab=net
+[10]: /profiler/

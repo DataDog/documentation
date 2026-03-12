@@ -89,6 +89,7 @@ components:
         the config ID for an account, use the
 
         [List all AWS integrations](https://docs.datadoghq.com/api/latest/aws-integration/#list-all-aws-integrations)
+
         endpoint and query by AWS Account ID.'
       in: path
       name: aws_account_config_id
@@ -1907,6 +1908,82 @@ components:
       required:
       - role_name
       type: object
+    AWSCcmConfig:
+      description: AWS Cloud Cost Management config.
+      properties:
+        data_export_configs:
+          description: List of data export configurations for Cost and Usage Reports.
+          items:
+            $ref: '#/components/schemas/DataExportConfig'
+          type: array
+      required:
+      - data_export_configs
+      type: object
+    AWSCcmConfigRequest:
+      description: AWS CCM Config Create/Update Request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSCcmConfigRequestData'
+      required:
+      - data
+      type: object
+    AWSCcmConfigRequestAttributes:
+      description: AWS CCM Config attributes for Create/Update requests.
+      properties:
+        ccm_config:
+          $ref: '#/components/schemas/AWSCcmConfig'
+      required:
+      - ccm_config
+      type: object
+    AWSCcmConfigRequestData:
+      description: AWS CCM Config Create/Update Request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSCcmConfigRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSCcmConfigType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSCcmConfigResponse:
+      description: AWS CCM Config response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSCcmConfigResponseData'
+      required:
+      - data
+      type: object
+    AWSCcmConfigResponseAttributes:
+      description: AWS CCM Config response attributes.
+      properties:
+        data_export_configs:
+          description: List of data export configurations for Cost and Usage Reports.
+          items:
+            $ref: '#/components/schemas/DataExportConfig'
+          type: array
+      type: object
+    AWSCcmConfigResponseData:
+      description: AWS CCM Config response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSCcmConfigResponseAttributes'
+        id:
+          $ref: '#/components/schemas/AWSAccountConfigID'
+        type:
+          $ref: '#/components/schemas/AWSCcmConfigType'
+      required:
+      - type
+      type: object
+    AWSCcmConfigType:
+      default: ccm_config
+      description: AWS CCM Config resource type.
+      enum:
+      - ccm_config
+      example: ccm_config
+      type: string
+      x-enum-varnames:
+      - CCM_CONFIG
     AWSCloudAuthPersonaMappingAttributesResponse:
       description: Attributes for AWS cloud authentication persona mapping response
       properties:
@@ -2380,7 +2457,9 @@ components:
 
             Discover the list of available services with the
 
-            [Get list of AWS log ready services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
+            [Get list of AWS log ready
+
+            services](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)
 
             endpoint.'
           items:
@@ -7077,11 +7156,11 @@ components:
       description: The definition of the `AzureTenant` object.
       properties:
         app_client_id:
-          description: 'The Client ID, also known as the Application ID in Azure,
-            is a unique identifier for an application. It''s used to identify the
-            application during the authentication process. Your Application (client)
-            ID is listed in the application''s overview page. You can navigate to
-            your application via the Azure Directory. '
+          description: The Client ID, also known as the Application ID in Azure, is
+            a unique identifier for an application. It's used to identify the application
+            during the authentication process. Your Application (client) ID is listed
+            in the application's overview page. You can navigate to your application
+            via the Azure Directory.
           example: ''
           type: string
         client_secret:
@@ -7125,11 +7204,11 @@ components:
       description: The definition of the `AzureTenant` object.
       properties:
         app_client_id:
-          description: 'The Client ID, also known as the Application ID in Azure,
-            is a unique identifier for an application. It''s used to identify the
-            application during the authentication process. Your Application (client)
-            ID is listed in the application''s overview page. You can navigate to
-            your application via the Azure Directory. '
+          description: The Client ID, also known as the Application ID in Azure, is
+            a unique identifier for an application. It's used to identify the application
+            during the authentication process. Your Application (client) ID is listed
+            in the application's overview page. You can navigate to your application
+            via the Azure Directory.
           type: string
         client_secret:
           description: "The Client Secret is a confidential piece of information known
@@ -18482,7 +18561,7 @@ components:
           finished_at: 1693491984000000000
           git:
             commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-            repository_url: https://github.com/organization/example-repository
+            repository_id: github.com/organization/example-repository
           service: shopist
           started_at: 1693491974000000000
           team: backend
@@ -18513,7 +18592,7 @@ components:
           format: int64
           type: integer
         git:
-          $ref: '#/components/schemas/DORAGitInfo'
+          $ref: '#/components/schemas/DORAGitInfoResponse'
         service:
           description: Service name.
           example: shopist
@@ -18724,7 +18803,7 @@ components:
             finished_at: 1693491984000000000
             git:
               commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-              repository_url: https://github.com/organization/example-repository
+              repository_id: github.com/organization/example-repository
             service: shopist
             started_at: 1693491974000000000
             team: backend
@@ -18739,7 +18818,7 @@ components:
             finished_at: 1693492084000000000
             git:
               commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-              repository_url: https://github.com/organization/api-service
+              repository_id: github.com/organization/api-service
             service: api-service
             started_at: 1693492074000000000
             team: backend
@@ -18911,6 +18990,17 @@ components:
           $ref: '#/components/schemas/GitRepositoryURL'
       required:
       - repository_url
+      - commit_sha
+      type: object
+    DORAGitInfoResponse:
+      description: Git info returned by DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_id:
+          $ref: '#/components/schemas/GitRepositoryID'
+      required:
+      - repository_id
       - commit_sha
       type: object
     DORAIncidentObject:
@@ -19367,6 +19457,37 @@ components:
       required:
       - destination_key
       - source_keys
+      type: object
+    DataExportConfig:
+      description: AWS Cost and Usage Report data export configuration.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where the Cost and Usage Report is stored.
+          example: billing
+          type: string
+        bucket_region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        report_name:
+          description: Name of the Cost and Usage Report.
+          example: cost-and-usage-report
+          type: string
+        report_prefix:
+          description: S3 prefix where the Cost and Usage Report is stored.
+          example: reports
+          type: string
+        report_type:
+          description: Type of the Cost and Usage Report. Currently only `CUR2.0`
+            is supported.
+          example: CUR2.0
+          type: string
+      required:
+      - report_name
+      - report_prefix
+      - report_type
+      - bucket_name
+      - bucket_region
       type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
@@ -24867,7 +24988,7 @@ components:
           description: 'Name of the product the dataset is for. Possible values are
             ''apm'', ''rum'',
 
-            ''metrics'', ''logs'', ''error_tracking'', and ''cloud_cost''.'
+            ''metrics'', ''logs'', ''error_tracking'', ''cloud_cost'', and ''sd_repoinfo''.'
           example: logs
           type: string
       required:
@@ -28513,6 +28634,10 @@ components:
       description: Git Commit SHA.
       example: 66adc9350f2cc9b250b69abddab733dd55e1a588
       pattern: ^[a-fA-F0-9]{40,}$
+      type: string
+    GitRepositoryID:
+      description: Git Repository ID
+      example: github.com/organization/example-repository
       type: string
     GitRepositoryURL:
       description: Git Repository URL
@@ -44945,7 +45070,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs'
+        **Supported pipeline types:** logs, metrics'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -44975,6 +45100,7 @@ components:
       type: object
       x-pipeline-types:
       - logs
+      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -46585,6 +46711,15 @@ components:
           description: Optional name of the Splunk index where logs are written.
           example: main
           type: string
+        indexed_fields:
+          description: List of log field names to send as indexed fields to Splunk
+            HEC. Available only when `encoding` is `json`.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          type: array
         inputs:
           description: A list of component IDs whose output is used as the `input`
             for this component.
@@ -54863,6 +54998,60 @@ components:
       type: string
       x-enum-varnames:
       - RULESET
+    RumCrossProductSampling:
+      description: The configuration for cross-product retention filters.
+      properties:
+        trace_enabled:
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      type: object
+    RumCrossProductSamplingCreate:
+      description: The configuration for cross-product retention filters.
+      properties:
+        trace_enabled:
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      required:
+      - trace_sample_rate
+      type: object
+    RumCrossProductSamplingUpdate:
+      description: The configuration for cross-product retention filters. All fields
+        are optional for partial updates.
+      properties:
+        trace_enabled:
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
+          example: true
+          type: boolean
+        trace_sample_rate:
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
+          example: 25.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the rum-based metric.
       properties:
@@ -54966,7 +55155,7 @@ components:
         query:
           default: '*'
           description: The search query - following the RUM search syntax.
-          example: '@service:web-ui: '
+          example: '@service:web-ui:'
           type: string
       required:
       - query
@@ -55150,6 +55339,8 @@ components:
     RumRetentionFilterAttributes:
       description: The object describing attributes of a RUM retention filter.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSampling'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -55164,6 +55355,8 @@ components:
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSamplingCreate'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -55265,6 +55458,8 @@ components:
     RumRetentionFilterUpdateAttributes:
       description: The object describing attributes of a RUM retention filter to update.
       properties:
+        cross_product_sampling:
+          $ref: '#/components/schemas/RumCrossProductSamplingUpdate'
         enabled:
           $ref: '#/components/schemas/RumRetentionFilterEnabled'
         event_type:
@@ -59017,7 +59212,7 @@ components:
               last_seen: '2020-06-23T14:46:49.000Z'
               rule:
                 id: 0f5-e0c-805
-                name: 'Brute Force Attack Grouped By User '
+                name: Brute Force Attack Grouped By User
                 version: 12
           type: object
         message:
@@ -86222,6 +86417,151 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
+  /api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config:
+    delete:
+      description: 'Delete the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: DeleteAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete AWS CCM config
+      tags:
+      - AWS Integration
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Get the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: GetAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCcmConfigResponse'
+          description: AWS CCM Config object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS CCM config
+      tags:
+      - AWS Integration
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Update the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: UpdateAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSCcmConfigRequest'
+        description: Update a Cloud Cost Management config for an AWS Account Integration
+          Config.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCcmConfigResponse'
+          description: AWS CCM Config object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update AWS CCM config
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: CreateAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSCcmConfigRequest'
+        description: Create a Cloud Cost Management config for an AWS Account Integration
+          Config.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCcmConfigResponse'
+          description: AWS CCM Config object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create AWS CCM config
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/aws/available_namespaces:
     get:
       description: Get a list of available AWS CloudWatch namespaces that can send
@@ -91681,8 +92021,8 @@ paths:
 
           If `filter[queried]` is not provided, sending this parameter returns a 400.
 
-          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=7776000`.'
-        example: 7776000
+          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=15552000`.'
+        example: 15552000
         in: query
         name: filter[queried][window][seconds]
         required: false
@@ -91710,7 +92050,7 @@ paths:
         schema:
           type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
-          filter[tag] or filter[queried] query.
+          filter[tag] query.
 
           Default value is 3600 (1 hour), maximum value is 5,184,000 (60 days).'
         example: 3600
@@ -96172,21 +96512,18 @@ paths:
       security:
       - apiKeyAuth: []
       servers:
-      - url: https://{subdomain}.{site}
+      - url: https://{site}
         variables:
           site:
-            default: datadoghq.com
-            description: The regional site for customers.
+            default: browser-intake-datadoghq.com
+            description: The intake domain for the regional site.
             enum:
-            - datadoghq.com
-            - us3.datadoghq.com
-            - us5.datadoghq.com
-            - ap1.datadoghq.com
-            - ap2.datadoghq.com
-            - datadoghq.eu
-          subdomain:
-            default: browser-intake
-            description: The subdomain where the API is deployed.
+            - browser-intake-datadoghq.com
+            - browser-intake-us3-datadoghq.com
+            - browser-intake-us5-datadoghq.com
+            - browser-intake-ap1-datadoghq.com
+            - browser-intake-ap2-datadoghq.com
+            - browser-intake-datadoghq.eu
       - url: '{protocol}://{name}'
         variables:
           name:
@@ -96201,7 +96538,7 @@ paths:
             default: datadoghq.com
             description: Any Datadog deployment.
           subdomain:
-            default: browser-intake
+            default: api
             description: The subdomain where the API is deployed.
       summary: Send server-side events
       tags:
@@ -110821,9 +111158,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -110905,9 +111242,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -111246,9 +111583,9 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
