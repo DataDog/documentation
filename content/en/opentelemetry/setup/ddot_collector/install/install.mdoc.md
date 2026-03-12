@@ -32,26 +32,14 @@ further_reading:
 ---
 
 {% if equals($deployment, "linux") %}
-{% callout btn_hidden=true %}
+{% callout header="false" btn_hidden=true %}
 Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview.
 {% /callout %}
 {% /if %}
 
 {% if equals($deployment, "kubernetes_gateway") %}
-{% callout btn_hidden=true %}
+{% callout header="false" btn_hidden=true %}
 Support for installing the DDOT Collector as a gateway on Kubernetes is in Preview.
-{% /callout %}
-{% /if %}
-
-{% if equals($deployment, "ecs_fargate") %}
-{% callout btn_hidden=true %}
-Support for deploying the DDOT Collector on ECS Fargate is in Preview.
-{% /callout %}
-{% /if %}
-
-{% if equals($deployment, "eks_fargate") %}
-{% callout btn_hidden=true %}
-Support for deploying the DDOT Collector on EKS Fargate is in Preview.
 {% /callout %}
 {% /if %}
 
