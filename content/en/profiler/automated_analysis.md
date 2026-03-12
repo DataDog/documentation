@@ -111,6 +111,8 @@ Automated Analysis supports finding the following insights:
 {{% tab "Node.js" %}}
 | Name                         | Priority   | Description |
 |------------------------------|------------|-------------|
+| CPU Burst                    | Medium     | Triggers if there is more than 75% CPU utilization across a 10s window. |
+| CPU Starvation               | High       | Triggers if no CPU samples were captured for at least 100ms. |
 | Event Loop Blocking          | Medium     | Triggers if callbacks were running for an extended period of time on the Main Event Loop thread. |
 | GC Overhead                  | Low        | Triggers if more than 20% of CPU time is related to GC activities or allocation overhead. |
 | Libuv Pool Overload          | Low        | Triggers if there were more concurrent tasks scheduled to run on the libuv thread pool than it has threads. |

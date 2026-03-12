@@ -37,6 +37,7 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 ## Disclaimers
 
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
+- The Datadog MCP Server has fair-use rate limits in place. For questions or requests, [contact Datadog support][37].
 - The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
@@ -46,6 +47,19 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
 
 For setup instructions, see [Set Up the Datadog MCP Server][27].
+
+## Monitoring the Datadog MCP Server usage
+
+You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
+
+All tool calls are recorded in the Datadog [Audit Trail][16] with metadata identifying them as MCP actions, including the tool name, arguments, user identity, and the MCP client used. See [Track tool calls in Audit Trail](#track-tool-calls-in-audit-trail) for more information.
+
+Datadog also emits two standard metrics that you can use to monitor MCP Server activity:
+
+- `datadog.mcp.session.starts`: Emitted on each session initialization.
+- `datadog.mcp.tool.calls`: Emitted on each tool call, tagged with `tool_name`.
+
+Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
 
 ## Toolsets
 
@@ -58,7 +72,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
-- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans
+- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
 - `product-analytics`: Tools for interacting with [Product Analytics][35] queries
 - `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
@@ -115,7 +129,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 
 - Show me CPU utilization metrics for all hosts in the last 4 hours.
 - Get Redis latency metrics for the production environment.
-- Display memory usage trends for our database servers.
+- How much did my cloud costs change from January to February?
 
 ### `get_datadog_metric_context`
 *Toolset: **core***\
@@ -449,14 +463,6 @@ Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
-### `search_datadog_llmobs_spans`
-*Toolset: **llmobs***\
-Retrieves and analyzes [LLM Observability][30] spans from Datadog, showing the complete request flow, model interactions, token usage, costs, and associated metadata.
-
-- Show me LLM Observability spans for my chatbot service in the last hour.
-- Find spans where the LLM model returned an error.
-- Analyze token usage and costs for my AI application over the past day.
-
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
 Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
@@ -680,10 +686,11 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [27]: /bits_ai/mcp_server/setup
 [28]: /tracing/
 [29]: /feature_flags/
-[30]: /llm_observability/
+[30]: /llm_observability/mcp_server/
 [31]: /network_monitoring/cloud_network_monitoring/
 [32]: /network_monitoring/devices/
 [33]: /security/threats/security_signals/
 [34]: /security/misconfigurations/findings/
 [35]: /product_analytics
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[37]: https://help.datadoghq.com/hc/en-us/requests/new
