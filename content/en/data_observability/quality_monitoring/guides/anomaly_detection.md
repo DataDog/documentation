@@ -20,7 +20,7 @@ The model learns from the metric's history to set expected bounds. When an obser
 
 ## Training period
 
-When you first create an anomaly detection monitor, it enters a training period. During training, the monitor collects historical values to learn the metric's baseline behavior. It does not trigger alerts during this period, and the monitor chart appears in blue.
+When you create an anomaly detection monitor, it enters a training period. During training, the monitor collects historical values to learn the metric's baseline behavior. It does not trigger alerts during this period, and the monitor chart appears in blue.
 
 Training typically takes between 3 and 7 days, depending on how frequently the underlying metric updates. The model needs to observe both weekday and weekend behavior, since many data pipelines behave differently on weekends.
 
