@@ -5,14 +5,22 @@ import sys
 import subprocess
 from pathlib import Path
 
-CONTENT_ROOT = Path('content/en')
+def get_repo_root():
+    """Get the git repository root directory."""
+    result = subprocess.run(
+        ['git', 'rev-parse', '--show-toplevel'],
+        capture_output=True,
+        text=True,
+        check=True
+    )
+    return Path(result.stdout.strip())
 
 
 def get_staged_files():
-    """Get staged markdown files under content/en/."""
+    """Get staged markdown files under content/en/ that are newly added."""
     try:
         result = subprocess.run(
-            ['git', 'diff', '--cached', '--name-only', '--diff-filter=ACMR'],
+            ['git', 'diff', '--cached', '--name-only', '--diff-filter=A'],
             capture_output=True,
             text=True,
             check=True
@@ -26,6 +34,8 @@ def get_staged_files():
 
 def check_missing_index_files():
     """Check that every ancestor directory of staged files has an _index.md."""
+    repo_root = get_repo_root()
+    content_root = repo_root / 'content' / 'en'
     staged_files = get_staged_files()
     missing = set()
 
@@ -33,23 +43,30 @@ def check_missing_index_files():
         if not file_path:
             continue
 
-        path = Path(file_path)
+        path = repo_root / file_path
         # Walk from the file's parent up to (but not including) content/en/
         current = path.parent
-        while current != CONTENT_ROOT and current != Path('.'):
-            index_file = current / '_index.md'
-            if not index_file.exists():
-                # Also check if it's staged (new but not yet on disk)
-                try:
-                    subprocess.run(
-                        ['git', 'show', f':{index_file}'],
-                        capture_output=True,
-                        text=True,
-                        check=True
-                    )
-                except subprocess.CalledProcessError:
-                    # Not on disk and not staged
-                    missing.add(current)
+        while current != content_root and current != repo_root:
+            # _index.mdoc.md files compile to _index.md during build
+            has_index = (current / '_index.md').exists() or (current / '_index.mdoc.md').exists()
+            if not has_index:
+                # Also check if either variant is staged (new but not yet on disk)
+                staged = False
+                for name in ('_index.md', '_index.mdoc.md'):
+                    relative = (current / name).relative_to(repo_root)
+                    try:
+                        subprocess.run(
+                            ['git', 'show', f':{relative}'],
+                            capture_output=True,
+                            text=True,
+                            check=True
+                        )
+                        staged = True
+                        break
+                    except subprocess.CalledProcessError:
+                        pass
+                if not staged:
+                    missing.add(current.relative_to(repo_root))
             current = current.parent
 
     return sorted(missing)
