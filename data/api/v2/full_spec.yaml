@@ -46696,6 +46696,15 @@ components:
           description: Optional name of the Splunk index where logs are written.
           example: main
           type: string
+        indexed_fields:
+          description: List of log field names to send as indexed fields to Splunk
+            HEC. Available only when `encoding` is `json`.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          type: array
         inputs:
           description: A list of component IDs whose output is used as the `input`
             for this component.
