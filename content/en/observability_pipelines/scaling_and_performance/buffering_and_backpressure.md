@@ -1,8 +1,9 @@
 ---
-title: Handling Load and Backpressure
+title: Buffering and Backpressure
 disable_toc: false
 aliases:
   - /observability_pipelines/performance/
+  - /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
 further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
   tag: "Documentation"
