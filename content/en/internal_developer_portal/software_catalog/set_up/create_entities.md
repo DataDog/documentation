@@ -47,7 +47,7 @@ To create an entity definition:
 1. Fill in the metadata fields, such as ownership and reference links.
 1. (Optional) Switch to **YAML** or **JSON** to see the generated code and cURL command. In the code editors, Datadog automatically flags invalid data.
 
-   {{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
+   {{< img src="tracing/software_catalog/software_catalog_definition_editor.png" alt="Service metadata editor showing sample service definition." >}}
 
 1. Submit the metadata by clicking **Save Entry** or by running the provided cURL command.
 
