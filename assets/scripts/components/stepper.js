@@ -157,7 +157,8 @@ function initStepper(stepper) {
     steps.forEach((step, i) => {
         const title = step.querySelector('.stepper__step-title');
         if (title) {
-            title.addEventListener('click', () => {
+            title.addEventListener('click', (e) => {
+                e.preventDefault();
                 if (isAllExpanded) return;
                 goToStep(i);
             });
