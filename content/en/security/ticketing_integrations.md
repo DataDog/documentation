@@ -119,7 +119,7 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
    1. The [Datadog ServiceNow integration][21].
       1. Go to **Settings > Integrations > ServiceNow > Case Management**.
       2. Choose `Datadog Cases ITSM` as the case table for bidirectional sync. 
-   2. A [Case Management project][9] to link to your assignment group. A project is a container object that holds a set of cases linked to your ServiceNow table. If there is no linked project, we will create a new project when you create a ticket.
+   2. A [Case Management project][9] to link to your assignment group. A project is a container object that holds a set of cases linked to your ServiceNow table. If there is no linked project, Datadog creates a project when you create a ticket.
    3. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
 2. Verify that bidirectional Case Management integration with ServiceNow is working:
    1. Open [any product supporting bidirectional ticket syncing][20].     
