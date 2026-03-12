@@ -118,14 +118,9 @@ The following steps set up bidirectional syncing with ServiceNow and verify that
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog ServiceNow integration][21].
       1. Go to **Settings > Integrations > ServiceNow > Case Management**.
-      2. Choose `Datadog Cases ITSM` as the target for security triage workflows.
+      2. Choose `Datadog Cases ITSM` as the case table for bidirectional sync. 
    2. A [Case Management project][9] to link to your assignment group. A project is a container object that holds a set of cases linked to your ServiceNow table. If there is no linked project, we will create a new project when you create a ticket.
-   3. The [ServiceNow integration configured within the project][3].
-      1. Go to **Case Management > Settings** and navigate to the ServiceNow tab under the selected project.
-      2. Enter your **Instance name** (your ServiceNow subdomain) and **Assignment group**.
-      3. Enable the **Sync data between Case Management and ServiceNow** option.
-      4. Complete the remaining settings for attribute sync, and then click **Save changes**.
-   4. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
+   3. For ITSM bidirectional sync, ensure ServiceNow users who update incidents have at least the `itil` role. See [ServiceNow ITOM/ITSM setup][22] for details.
 2. Verify that bidirectional Case Management integration with ServiceNow is working:
    1. Open [any product supporting bidirectional ticket syncing][20].     
    2. Locate the ticketing dropdown option in the explorer or finding page and select **ServiceNow**. The button opens a **ServiceNow Ticket** modal.
@@ -151,11 +146,12 @@ The following steps create a bidirectional ticket for a Security finding.
 
 1. Open [any product supporting bidirectional ticket syncing][20].
 2. Locate the **Ticketing** icon dropdown option for a finding in the explorer or under **Next Steps** in the finding page.
-3. Select the third-party tool from the dropdown.
-4. Create a ticket for any third-party tool supported (see sections below).
+3. You can also select up to 50 findings at at time to create multiple tickets or one ticket for multiple findings.
+4. Select the third-party tool from the dropdown.
+5. Create a ticket for any third-party tool supported (see sections below).
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
-1. Click the **Jira** icon to start ticket creation. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
+1. Open the **Jira Ticket** modal. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
 2. Complete the following settings:
    1. **Jira account:** select the Jira account where you want the ticket created.
    2. **Jira Project:** select the Jira project to use.
@@ -170,7 +166,7 @@ The following steps create a bidirectional ticket for a Security finding.
 {{% /collapse-content %}}
 
 {{% collapse-content title="ServiceNow ticket" level="h4" expanded=false %}}
-1. Click the **ServiceNow** icon to start ticket creation. You can use a new or existing ticket. Let's look at creating a new ServiceNow ticket.
+1. Open the **ServiceNow Ticket** modal. You can use a new or existing ticket. Let's look at creating a new ServiceNow ticket.
 2. Complete the following settings:
    1. **Instance:** select the ServiceNow instance where you want the ticket created.
    2. **Assignment group:** select the ServiceNow group to assign the ticket to.
