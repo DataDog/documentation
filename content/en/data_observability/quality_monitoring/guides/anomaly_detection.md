@@ -85,7 +85,7 @@ The model accounts for whether a metric is growing or shrinking over time. For a
 
 ## Annotations
 
-Annotations let you provide feedback to the model when it misclassifies a point, either by alerting when it should not have or by missing an alert when it should have. Because data quality expectations are often business-specific, annotations are the primary way to tune the model to your team's needs over time.
+Annotations let you provide feedback to the model when it misclassifies a point, either by missing an alert or by generating a false alert. Because data quality expectations are often business-specific, annotations are the primary way to tune the model to your team's needs over time.
 
 Annotations have two effects:
 - **Correcting the current state**: Marking a flagged point as expected moves the monitor out of the alerting state and resumes normal learning.
