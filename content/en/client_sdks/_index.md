@@ -1,5 +1,6 @@
 ---
 title: Client SDKs
+private: true
 description: "Instrument your client-side applications with Datadog SDKs to monitor user experience, performance, and errors."
 ---
 

@@ -1510,6 +1510,26 @@
     "request_description": "",
     "request_schema_description": "AWS Account Update Request body."
   },
+  "DeleteAWSAccountCCMConfig": {
+    "description": "Delete the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Delete AWS CCM config"
+  },
+  "GetAWSAccountCCMConfig": {
+    "description": "Get the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Get AWS CCM config"
+  },
+  "UpdateAWSAccountCCMConfig": {
+    "description": "Update the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Update AWS CCM config",
+    "request_description": "Update a Cloud Cost Management config for an AWS Account Integration Config.",
+    "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
+  "CreateAWSAccountCCMConfig": {
+    "description": "Create the Cloud Cost Management config for an AWS Account Integration Config using Cost and Usage Report\n(CUR) 2.0 by config ID.",
+    "summary": "Create AWS CCM config",
+    "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
+    "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
     "summary": "List available namespaces"
@@ -4267,6 +4287,10 @@
   "GetProjectedCost": {
     "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).",
     "summary": "Get projected cost across your account"
+  },
+  "GetUsageAttributionTypes": {
+    "description": "Get usage attribution types.",
+    "summary": "Get usage attribution types"
   },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",

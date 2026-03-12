@@ -115,7 +115,7 @@ Starting with [version 4.13.0][16], you can also optionally define the associate
 <!-- version exclusive examples below-->
 
 <!-- before 4.13 -->
-{% if or(equals($rum_browser_sdk_version, "lt_2_13_0"), equals($rum_browser_sdk_version, "gte_2_13_0"), equals($rum_browser_sdk_version, "gte_2_17_0")) %}
+{% if includes($rum_browser_sdk_version, ["lt_2_13_0", "gte_2_13_0", "gte_2_17_0"]) %}
 
 ## Manually track pageviews
 
@@ -147,7 +147,7 @@ window.DD_RUM && window.DD_RUM.startView('checkout')
 <!-- ends before 4.13 -->
 
 <!-- Between 4.13 and 5.28 -->
-{% if or(equals($rum_browser_sdk_version, "gte_4_13_0"), equals($rum_browser_sdk_version, "gte_4_49_0"), equals($rum_browser_sdk_version, "gte_5_22_0")) %}
+{% if includes($rum_browser_sdk_version, ["gte_4_13_0", "gte_4_49_0", "gte_5_22_0"]) %}
 
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
 
