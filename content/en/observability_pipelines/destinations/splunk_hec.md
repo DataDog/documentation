@@ -25,9 +25,10 @@ Set up the Splunk HEC destination and its environment variables when you [set up
 #### Optional settings
 
 1. Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
-1. Select whether the timestamp should be auto-extracted. If set to `true`, Splunk extracts the timestamp from the message with the expected format of `yyyy-mm-dd hh:mm:ss`.
-1. When using JSON encoding, you may populate the indexed fields list with keys of the fields you want extracted as [indexed fields](https://help.splunk.com/en/splunk-enterprise/get-started/get-data-in/9.0/get-data-with-http-event-collector/automate-indexed-field-extractions-with-http-event-collector). This indexes the specified fields at ingest-time in your Splunk HTTP event collector.  
+1. Select whether the timestamp should be auto-extracted. If set to `true`, Splunk extracts the timestamp from the message with the expected format of `yyyy-mm-dd hh:mm:ss`.  
 1. Optionally, set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][3] if you want to route logs to different source types based on specific fields in your logs.
+1. Select the **Encoding** in the dropdown menu (**JSON** or **Raw**).
+    - If you selected **JSON**, optionally click **Add Field** to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
 
 ##### Buffering options
 
@@ -70,3 +71,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
+[4]: https://help.splunk.com/en/splunk-enterprise/get-started/get-data-in/9.0/get-data-with-http-event-collector/automate-indexed-field-extractions-with-http-event-collector
