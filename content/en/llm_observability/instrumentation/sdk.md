@@ -1927,8 +1927,7 @@ Attach token metrics (for automatic cost tracking) or cost metrics (for manual c
 
 If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
 
-<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/mon
-  itoring/metrics/">LLM Observability metrics</a>, which are Datadog platform metrics automatically generated from your span data for use in dashboards and monitors.</div>
+<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">LLM Observability metrics</a>, which are Datadog platform metrics automatically generated from your span data for use in dashboards and monitors.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
