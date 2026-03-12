@@ -457,14 +457,8 @@ To verify your setup:
 
 ### Troubleshooting
 
-If you don't see data for buckets you set up for Storage Management:
-   - Check **Storage Management** > **Amazon S3** > [**Enable Buckets**][6] for any errors:
-        
-      - **IAM Role(s) Lacking Permissions**: Ensure `s3:GetObject` and `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role. Verify all S3-related permissions are granted as part of [Resource Collection][2].
-        
-      - **Problem reading inventory**: Ensure the destination bucket policy allows S3 to write inventory files. See [Example Bucket Policy][5]. **Note**: This error may also appear if the first inventory file has not yet been generated (takes up to 24 hours) or if the buckets you are enabling are empty.
-      
-   - If you're still encountering issues, [contact Datadog][1].
+If you don't see data for buckets you set up for Storage Management use the [Storage Management Settings][9] page to view all configured buckets, their inventory status, and any configuration errors. The page surfaces issues with actionable remediation steps.
+If you have any questions, [contact Datadog][1].
 
 ## Visualize granular S3 usage with inventory metrics
 
@@ -476,6 +470,8 @@ If you don't see data for buckets you set up for Storage Management:
 | aws.s3.inventory.prefix_object_count.levels            | `bucketname`, `prefixN*`, `region`, `storagetype`, `extension`, `delete_marker`               | Object counts aggregated to hierarchical prefix levels, used for treemap visualizations.                                                       |
 | aws.s3.inventory.total_prefix_size.levels              | `bucketname`, `prefixN*`, `region`, `storagetype`, `extension`, `delete_marker`               | Prefix size aggregated to hierarchical prefix levels, used for treemap visualizations.                                                         |
 | aws.s3.inventory.prefix_age_days                       | `bucketname`, `prefix`, `region`                                                              | Age, in days, of the oldest object in the bucket or prefix.                                                                                    |
+| aws.s3.inventory.prefix_small_file_size                | `bucketname`, `prefix`, `region`, `storagetype`                                               | Total size, in bytes, of objects smaller than 128KB in a prefix. Helps identify overhead costs on storage tiers like Glacier and Standard-IA.   |
+| aws.s3.inventory.prefix_small_file_count               | `bucketname`, `prefix`, `region`, `storagetype`                                               | Number of objects smaller than 128KB in a prefix. Helps identify overhead costs on storage tiers like Glacier and Standard-IA.                   |
 | aws.s3.inventory.access_logs.total_requests_by_method  | `bucketname`, `prefix`, `region`, `method`                                                    | Total number of requests for objects in a prefix, optionally split by request method (for example, GET or PUT). Requires S3 Access Logs in Datadog.   |
 | aws.s3.inventory.access_logs.request_latency_by_method | `bucketname`, `prefix`, `region`, `method`                                                    | Server response time for requests in a prefix, optionally split by request method. Requires S3 Access Logs in Datadog.                          |
 
@@ -483,10 +479,11 @@ If you don't see data for buckets you set up for Storage Management:
 
   **Note:** For the most accurate monitoring and visualization, ensure that S3 inventory reports use the CSV format and include all object versions if you wish to view non-current object recommendations or metrics. 
 
+An out-of-the-box [Storage Management S3 dashboard template][8] is available to help you visualize these metrics. You can clone and customize it to fit your needs.
 
 ## Act on optimizations with Storage Management Recommendations
 
-Storage Management generated recommendations are available in [Cloud Cost Recommendations][4]. Storage Management generates recommendations to reduce your S3 costs with granular details, like which prefixes you can optimize, by combining observability data with access logs. In order to see these recommendations, you must enable Storage Management for S3 buckets and enable Cloud Cost Management to see the Recommendations.
+Storage Management analyzes your inventory data and access logs to surface prefix-level [recommendations][4] for reducing S3 storage costs. These recommendations are available to all Storage Management customers. Potential savings are estimated using AWS list prices. If you have [Cloud Cost Management][7] enabled, recommendations also appear in Cloud Cost Recommendations, and you can track actual savings from optimizations.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
@@ -497,15 +494,18 @@ Seeing recommendations requires the following prerequisites:
 3. If you would like to see recommendations for identifying non-current versions in prefixes, ensure you're including "All versions" as part of the S3 inventory configuration.
 
 ### Available recommendations
-- Transition S3 bucket prefix to Infrequent Access
+- Transition unaccessed S3 data in prefix to Infrequent Access
 - Expire old non-current version objects in S3 bucket prefix
 - Consolidate small files in prefix to minimize per-object storage costs
 
-  {{< img src="infrastructure/storage_management/storage-recs.png" alt="Storage Management Recommendations in CCM" responsive="true">}}
+  {{< img src="infrastructure/storage_management/storage-recs.png" alt="Storage Management Recommendations" responsive="true">}}
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: /integrations/amazon-web-services/#resource-types-and-permissions
 [3]: https://app.datadoghq.com/storage-monitoring
-[4]: https://docs.datadoghq.com/cloud_cost_management/recommendations
+[4]: https://docs.datadoghq.com/infrastructure/storage_management/recommendations
 [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-s3-inventory
 [6]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
+[7]: /cloud_cost_management/
+[8]: https://app.datadoghq.com/dash/integration/32296/storage-management-for-amazon-s3
+[9]: https://app.datadoghq.com/storage-management/settings
