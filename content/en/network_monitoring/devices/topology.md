@@ -23,7 +23,7 @@ further_reading:
 
 The [Network Device Topology Map][2] uses [Cloudcraft][7] diagrams to provide an interactive visual representation of your network's physical connections. The map automatically discovers and displays devices, their interfaces, and the relationships between them. This visualization helps you identify issues in your network devices, understand their upstream and downstream impacts, troubleshoot connectivity problems, and gain insights into how traffic flows through your infrastructure.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_2.mp4" alt="A user adds team, service, and vendor tags to the network device topology map, then selects a device to open its side panel." video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_3.mp4" alt="A user adds team, service, and vendor tags to the network device topology map, then selects a device to open the NDM device view." video="true" >}}
 
 ## Setup
 
@@ -62,21 +62,22 @@ By default, the **Unmonitored Device** option is unchecked, which hides devices 
 
 ## Investigating devices
 
-In addition to showing an overview of your network's physical connections, the Device Topology Map lets you investigate individual devices to understand their connections, flows, and overall status. Hover over a device to see its status and key metrics, or click a device to open a side panel with details such as its IP address, tags, throughput, CPU, and memory.
+In addition to showing an overview of your network's physical connections, the Device Topology Map lets you investigate individual devices to understand their connections, flows, and overall status. Hover over a device to see its status and key metrics, or click a device to open the NDM device view with details such as its IP address, tags, throughput, CPU, and memory.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_6.png" alt="The Network Device Topology Map with a device selected, displaying information about the device in the side panel." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="The Network Device Topology Map with a device selected, displaying information in the NDM device view." style="width:100%;" >}}
 
 ### Link details
 
 Click on a link between devices to explore connection details including traffic volume, bandwidth utilization, errors, and discards, with options to view the data in [Device Overview][10] or [NetFlow Monitoring][11].
 
-{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="A user clicking on a link between devices to open a side panel showing additional link details." video="true" >}}
+<!-- TODO: Replace video - needs new NDM device view video instead of side panel -->
+{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="A user clicking on a link between devices to view additional link details." video="true" >}}
 
 ### View flow details
 
-Click the **NetFlow** tab in the side panel to explore the device's traffic sources, destinations, and volume. The data is automatically filtered by the device's `@device.ip`. For more information, see [NetFlow Monitoring][1].
+To explore a device's traffic sources, destinations, and volume, click the **Open Device Page** dropdown and select **NetFlow Monitoring**. The data is automatically filtered by the device's `@device.ip`. For more information, see [NetFlow Monitoring][1].
 
-{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_3.png" alt="View of the Device side panel, with the NetFlow tab highlighted." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="The NDM device view with the Open Device Page dropdown showing the NetFlow Monitoring option." style="width:100%;" >}}
 
 ### Icon legend
 

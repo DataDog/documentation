@@ -186,9 +186,10 @@ After your network devices are configured and the Datadog Agent is running, you 
 
 4. Optionally, to observe Syslog messages in NDM, navigate to [**Infrastructure > Network Devices**][5].
     - Select a device that is configured to send Syslog messages.
-    - In the device side panel, click the **Syslog** tab to view your Syslog messages:
+    - In the NDM device view, click the **Syslog** tab to view your Syslog messages:
 
-    {{< img src="network_device_monitoring/syslog/syslog_tab.png" alt="Network Device Monitoring side panel, highlighting the Syslog tab." style="width:100%;" >}}
+    <!-- TODO: Replace screenshot - needs new NDM device view with Syslog tab -->
+    {{< img src="network_device_monitoring/syslog/syslog_tab.png" alt="The NDM device view, highlighting the Syslog tab." style="width:100%;" >}}
 
 ## Further Reading
 

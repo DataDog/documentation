@@ -43,7 +43,8 @@ Configure device locations using the following steps:
 
 1. Tag devices using the `geolocation:<value>` format, where `<value>` is the location identifier. See the [network device tagging][4] documentation for more information.
 
-   {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="Network Device side panel of a device, highlighting the `geolocation:boston-office` tag." style="width:100%;" >}}
+   <!-- TODO: Replace screenshot - needs new NDM device view showing geolocation tag -->
+   {{< img src="network_device_monitoring/geomap/device_side_panel.png" alt="The NDM device view of a device, highlighting the `geolocation:boston-office` tag." style="width:100%;" >}}
 
 2. From the Device Geomap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
 
@@ -64,9 +65,10 @@ Configure device locations using the following steps:
 
 ## Viewing devices
 
-After devices are added to the map, you can zoom in to click on an individual device or select a device cluster to view all devices in that location. Clicking on any device opens a side panel with detailed device information, including status, tags, and key metrics.
+After devices are added to the map, you can zoom in to click on an individual device or select a device cluster to view all devices in that location. Clicking on any device opens the NDM device view with detailed device information, including status, tags, and key metrics.
 
-{{< img src="network_device_monitoring/geomap/geomap_device_cluster.mp4" alt="A user zooming in on the map, clicking on a device cluster, and opening the side panel of a device that is unreachable. " video=true >}}
+<!-- TODO: Replace video - needs new NDM device view instead of side panel -->
+{{< img src="network_device_monitoring/geomap/geomap_device_cluster.mp4" alt="A user zooming in on the map, clicking on a device cluster, and opening the NDM device view of a device that is unreachable." video=true >}}
 
 ## Troubleshooting
 
@@ -74,7 +76,7 @@ If you experience issues using Device Geomap, use the following troubleshooting 
 
 ### Device appears in multiple locations
 
-When a device is tagged with multiple `geolocation` tags, it displays at only one location on the map. However, when you click on any device cluster containing that device, it appears in the side panel for all tagged locations. 
+When a device is tagged with multiple `geolocation` tags, it displays at only one location on the map. However, when you click on any device cluster containing that device, it appears in the NDM device view for all tagged locations. 
 
 ### CSV upload fails
 

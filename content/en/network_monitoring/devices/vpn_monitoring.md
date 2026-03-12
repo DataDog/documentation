@@ -95,7 +95,7 @@ network_devices:
 To view VPN tunnels in the UI:
 
 1. Select a monitored device in NDM that has VPN tunnels.
-2. Click on the **VPN Tunnels** tab in the device's side panel.
+2. Click on the **VPN Tunnels** tab in the NDM device view.
 
 ### Metrics collected
 

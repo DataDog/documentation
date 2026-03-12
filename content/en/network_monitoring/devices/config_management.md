@@ -90,13 +90,14 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Viewing configurations
 
-Network Configuration Management is accessible from the device side panel in Network Device Monitoring:
+Network Configuration Management is accessible from the NDM device view in Network Device Monitoring:
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
-3. Open the **Configuration** tab in the device side panel.
+3. Open the **Configuration** tab in the NDM device view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:100%;" >}}
+   <!-- TODO: Replace screenshot - needs new NDM device view with Configuration tab -->
+   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="The NDM device view, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter what the configuration list displays:
    - **All**: Shows both running and startup configurations
