@@ -120,7 +120,7 @@ You can click on the gear icon to customize which metrics are displayed within t
 | Device Type           | Type of GPU device. | `gpu_device`
 | Total Devices         | Count of all devices sending data during this time frame. | `gpu.device.total`
 | Allocated Devices     | (only available if using Kubernetes) Count of devices that have been allocated to a workload. | `gpu.device.total`
-| Active Devices        | Count of deevices that are actively used for a workload / busy. If using Kubernetes, Count of allocated devices that are actively used for a workload. | `gpu.gr_engine_active`
+| Active Devices        | Count of devices that are actively used for a workload / busy. If using Kubernetes: count of allocated devices that are actively used for a workload. | `gpu.gr_engine_active`
 | Effective Devices     | Count of devices that are used and working for more than 50% of their lifespan. | `gpu.sm_active`
 | Graphics Engine Activity| Percentage of time that the graphics engine was active. | `gpu.gr_engine_active`
 | SM Activity           | Percentage of time the streaming multiprocessor was active. | `gpu.sm_active`
