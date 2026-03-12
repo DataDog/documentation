@@ -22,7 +22,7 @@ Before setting up the PHP Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
 - **Datadog PHP tracer** `ddtrace` version 1.16.0 or later
-- **OpenFeature PHP SDK** `open-feature/sdk` version 2.0 or later
+- **OpenFeature PHP SDK** `open-feature/sdk` version 1.0 or later
 
 Set the following environment variables:
 
@@ -52,7 +52,7 @@ Or add the OpenFeature SDK to your `composer.json`:
 {{< code-block lang="json" filename="composer.json" >}}
 {
     "require": {
-        "open-feature/sdk": "^2.0"
+        "open-feature/sdk": "^1.0"
     }
 }
 {{< /code-block >}}
@@ -67,9 +67,8 @@ Register the Datadog OpenFeature provider with the OpenFeature API. The provider
 use OpenFeature\API;
 use DDTrace\OpenFeature\DataDogProvider;
 
-// Create and register the Datadog provider
-$provider = new DataDogProvider();
-API::setProvider($provider);
+// Register the Datadog provider
+API::setProvider(new DataDogProvider());
 
 // Create an OpenFeature client
 $client = API::getClient();
@@ -79,7 +78,7 @@ $client = API::getClient();
 
 ## Set the evaluation context
 
-Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations are returned:
 
 {{< code-block lang="php" >}}
 use OpenFeature\implementation\flags\EvaluationContext;
@@ -127,6 +126,8 @@ $theme = $client->getStringValue('ui-theme', 'light', $context);
 
 if ($theme === 'dark') {
     setDarkTheme();
+} elseif ($theme === 'light') {
+    setLightTheme();
 } else {
     setLightTheme();
 }
@@ -164,8 +165,13 @@ When you need more than just the flag value, use the `*Details` methods. These r
 $details = $client->getBooleanDetails('new-feature', false, $context);
 
 echo "Value: " . var_export($details->getValue(), true) . "\n";
-echo "Reason: " . $details->getReason() . "\n";
-echo "Variant: " . $details->getVariant() . "\n";
+echo "Variant: " . ($details->getVariant() ?? '') . "\n";
+echo "Reason: " . ($details->getReason() ?? '') . "\n";
+$error = $details->getError();
+if ($error !== null) {
+    echo "Error Code: " . $error->getErrorCode() . "\n";
+    echo "Error Message: " . ($error->getErrorMessage() ?? '') . "\n";
+}
 {{< /code-block >}}
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
@@ -184,11 +190,47 @@ if ($maintenanceMode) {
 }
 {{< /code-block >}}
 
+## PHP-specific considerations
+
+### Shared-nothing architecture
+
+PHP uses a shared-nothing model where each request is handled by an independent process or thread. This means:
+
+- **Exposure deduplication is per-process**: The SDK deduplicates exposure events within a single request, so the same flag/subject combination is sent only once per process lifecycle. The cache does not persist across PHP-FPM worker restarts or separate Apache mod_php requests.
+- **No blocking provider initialization**: PHP cannot use `setProviderAndWait()`. The provider initializes at the start of each request by reading the latest flag configuration that the Datadog tracer has already received from Remote Configuration.
+
+### PHP-FPM and Apache mod_php
+
+The SDK supports both **PHP-FPM** and **Apache mod_php**. Both SAPIs behave the same way with respect to flag evaluation and exposure logging. For PHP-FPM, configure the tracer settings through environment variables in your FPM pool configuration file.
+
+### OTel metrics
+
+To emit feature flag evaluation metrics (counter: `feature_flag.evaluations`) through OpenTelemetry, set the following environment variables and install the OTel packages:
+
+{{< code-block lang="bash" >}}
+export DD_METRICS_OTEL_ENABLED=true
+export OTEL_PHP_AUTOLOAD_ENABLED=true
+export OTEL_METRICS_EXPORTER=otlp
+export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://<AGENT_HOST>:4318/v1/metrics
+{{< /code-block >}}
+
+Add the OTel SDK and OTLP exporter to your `composer.json`:
+
+{{< code-block lang="json" filename="composer.json" >}}
+{
+    "require": {
+        "open-feature/sdk": "^1.0",
+        "open-telemetry/sdk": "^1.0.0",
+        "open-telemetry/exporter-otlp": "^1.0.0"
+    }
+}
+{{< /code-block >}}
+
 ## Troubleshooting
 
 ### Provider not enabled
 
-If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
+If you receive warnings about the provider not being enabled, confirm `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment:
 
 {{< code-block lang="bash" >}}
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
@@ -196,7 +238,7 @@ export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 ### Remote Configuration not working
 
-Verify the following to ensure that Remote Configuration is working:
+Verify the following to confirm that Remote Configuration is working:
 - Datadog Agent is version 7.55 or later
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
