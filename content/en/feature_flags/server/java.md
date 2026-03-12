@@ -26,7 +26,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java APM Tracer**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
-- **Datadog Agent**: Version **7.x or later** with Remote Configuration enabled
+- **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
 - **Datadog API Key**: Required for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
@@ -49,7 +49,7 @@ dependencies {
     implementation 'dev.openfeature:sdk:1.18.2'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:X.X.X'
+    implementation 'com.datadoghq:dd-openfeature:1.57.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -63,7 +63,7 @@ dependencies {
     implementation("dev.openfeature:sdk:1.18.2")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:X.X.X")
+    implementation("com.datadoghq:dd-openfeature:1.57.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -84,7 +84,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>X.X.X</version>
+        <version>1.57.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
@@ -193,10 +193,13 @@ public class App {
             client = api.getClient("my-app");
             logger.info("OpenFeature provider initialized successfully");
         } catch (ProviderNotReadyError e) {
-            // Optional: Handle gracefully - app will use default flag values
-            logger.warn("Provider not ready (no tracer/configuration available), continuing with defaults", e);
+            // Handle gracefully - app will use default flag values
+            logger.warn("Provider not ready (no tracer/config available), continuing with defaults", e);
             client = api.getClient("my-app");
             logger.info("App will use default flag values until provider is ready");
+        } catch (Exception e) {
+            logger.error("Failed to initialize OpenFeature provider", e);
+            throw e;
         }
 
         // Your application code here
@@ -567,3 +570,5 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /remote_configuration/

@@ -28,6 +28,17 @@
         "description": "Markdoc code block with attributes and tabstop choices"
     },
 
+    "Collapse content": {
+        "scope": "markdoc",
+        "prefix": ";;collapse-content",
+        "body": [
+            "{% collapse-content title=\"${1:Your title}\" level=\"${2|h4,h1,h2,h3,h5|}\" expanded=${3|true,false|} id=\"${4:unique-id}\" %}",
+            "${5:Collapsible content goes here.}",
+            "{% /collapse-content %}"
+        ],
+        "description": "Markdoc collapse block with customizable label"
+    },
+
     "Definition list": {
         "scope": "markdoc",
         "prefix": ";;list",
@@ -59,6 +70,19 @@
         "description": "Markdoc if tag with equals condition"
     },
 
+    "Version": {
+        "scope": "markdoc",
+        "prefix": ";;version",
+        "body": [
+            "<!-- Version must meet ${1:version} -->",
+            "{% if semverIsAtLeast($${2:semver_trait_id}, \"${1:version}\") %}",
+            "${3:Content shown if version is met}",
+            "{% /if %}",
+            "<!-- ends  ${1:version} -->"
+        ],
+        "description": "Show content that meets a semantic version"
+    },
+
     "Image": {
         "scope": "markdoc",
         "prefix": ";;image",
@@ -70,7 +94,7 @@
 
     "Video": {
         "scope": "markdoc",
-        "prefix": ";;;video",
+        "prefix": ";;video",
         "body": ["{% img src=\"${1:path/to/video.mp4}\" alt=\"${2:Descriptive video alt text}\" video=\"true\" /%}"],
         "description": "Markdoc video tag using img with video attribute"
     },
@@ -132,10 +156,43 @@
         "description": "Markdoc tabs block with two labeled tabs"
     },
 
+    "Tooltip": {
+        "scope": "markdoc",
+        "prefix": ";;tooltip",
+        "body": ["{% tooltip contents=\"${1:Popup text}\" %}", "${2:display text}", "{% /tooltip %}"],
+        "description": "Markdoc tooltip block with customizable content"
+    },
+
     "Check mark": {
         "scope": "markdoc",
         "prefix": ";;check",
         "body": "{% x/ %}",
         "description": "X tag (self-closing) for checkmark"
+    },
+
+    "Includes": {
+        "scope": "markdoc",
+        "prefix": ";;includes",
+        "body": [
+            "<!-- Content applies to specified options: ${2:option_id_1} ${3:option_id_2} -->",
+            "{% if includes($${1:trait_id}, [\"${2:option_id_1}\", \"${3:option_id_2}\"]) %}",
+            "${4:Content shown for the specified options}",
+            "{% /if %}"
+        ],
+        "description": "Markdoc includes function to show content for specific trait options"
+    },
+
+    "Underline": {
+        "scope": "markdoc",
+        "prefix": ";;u",
+        "body": "{% u %}${1:underlined text}{% /u %}",
+        "description": "Markdoc underline tag"
+    },
+
+    "Superscript": {
+        "scope": "markdoc",
+        "prefix": ";;sup",
+        "body": "{% sup %}${1:superscript text}{% /sup %}",
+        "description": "Markdoc superscript tag"
     }
 }

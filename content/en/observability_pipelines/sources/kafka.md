@@ -11,7 +11,7 @@ products:
 
 Use Observability Pipelines' Kafka source to receive logs from your Kafka topics. Select and set up this source when you [set up a pipeline][1]. The Kafka source uses [librdkafka][2].
 
-You can also [send Azure Event Hub logs to Observability Pipelines using the Kafka source](/observability_pipelines/sources/azure_event_hub/#send-azure-event-hub-logs-to-observability-pipelines-using-the-kafka-source).
+You can also [send Azure Event Hub logs to Observability Pipelines using the Kafka source][6].
 
 ## Prerequisites
 
@@ -106,3 +106,4 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 [3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [4]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [5]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[6]: /observability_pipelines/sources/azure_event_hubs/

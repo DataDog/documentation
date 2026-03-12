@@ -36,34 +36,37 @@ Observability Pipelines ingested bytes
 ## Host metrics
 
 Uptime
-: **Metrics**: `pipelines.host.uptime`
+: **Metric**: `pipelines.host.uptime`
 : **Description:** The amount of time since the host was started, in seconds.
 
 Bytes in
-: **Metrics**: `pipelines.host.network_receive_bytes_total`
+: **Metric**: `pipelines.host.network_receive_bytes_total`
 : **Description:** The number of bytes received by the host on all interfaces. Use the `device` tag to filter per interface, for example `device:eth0`.
 
 Bytes out
-: **Metrics**: `pipelines.host.network_transmit_bytes_total`
+: **Metric**: `pipelines.host.network_transmit_bytes_total`
 : **Description:** The number of bytes sent by the host on all interfaces. Use the `device` tag to filter per interface.
 
 ## Process metrics
 
 Uptime
-: **Metrics**: `pipelines.uptime_seconds`
+: **Metric**: `pipelines.uptime_seconds`
 : **Description:** The amount of time since the Worker process was started, in seconds.
 
 CPU usage
-: **Metrics**: `pipelines.cpu_usage_seconds_total`
+: **Metric**: `pipelines.cpu_usage_seconds_total`
 : **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
 
 Memory usage
-: **Metrics**: `pipelines.resident_memory_used_bytes`
+: **Metric**: `pipelines.resident_memory_used_bytes`
 : **Description:** The amount of RSS memory used by the Worker process in bytes.
 
 ## Component metrics
 
 These metrics are available for sources, processors, and destinations.
+
+- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
 
 Events in
 : **Metric**: `pipelines.component_received_events_total`
@@ -110,10 +113,25 @@ Utilization
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
 : **Available for**: Processors and destinations.
 
-## Buffer metrics (when buffering is enabled)
+## Buffer metrics (when enabled)
 
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
 
-{{% observability_pipelines/metrics/buffer %}}
+### Source buffer metrics
+
+{{% observability_pipelines/metrics/buffer/sources %}}
+
+### Processor buffer metrics
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
+### Destination buffer metrics
+
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ## Further reading
 
