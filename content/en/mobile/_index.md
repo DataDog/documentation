@@ -102,7 +102,7 @@ You can initiate a page to an individual or team, and also override existing shi
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
 
 <div class="alert alert-info">
-If your use case is limited to accessing On-Call on mobile and you prefer to restrict access to sensitive telemetry data on mobile devices, reach out to support.
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
 </div>
 
 ## Incidents
