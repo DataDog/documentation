@@ -632,14 +632,14 @@ Searches [Test Optimization][24] test events with filters and returns details on
 
 ### `get_datadog_code_coverage_branch_summary`
 *Toolset: **software-delivery***\
-Fetches aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner/flag breakdowns.
+Fetches aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 - What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
 - Show me the coverage summary for the `release/1.x` branch of `github.com/my-org/my-repo`.
 
 ### `get_datadog_code_coverage_commit_summary`
 *Toolset: **software-delivery***\
-Fetches aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner/flag breakdowns.
+Fetches aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 - Show me the code coverage for commit `abc123abc123abc123abc123abc123abc123abcd` in `github.com/my-org/my-repo`.
 - What's the patch coverage for the latest commit on my branch?

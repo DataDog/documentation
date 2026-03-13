@@ -28,7 +28,7 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Identifying flaky tests**: Query for flaky tests in your repository and get prioritized recommendations for which to fix first.
 - **Analyzing CI performance**: Get aggregated statistics on pipeline durations, failure rates, and trends over time.
 - **Triaging test failures**: Understand which tests are failing, their ownership, and historical patterns.
-- **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service, code owner or custom flag.
+- **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
 
 ## Available tools
 
@@ -50,10 +50,10 @@ The `software-delivery` toolset includes the following tools:
 : Search test events with filters and get details on them.
 
 `get_datadog_code_coverage_branch_summary`
-: Fetch aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner/flag breakdowns.
+: Fetch aggregated code coverage summary metrics for a repository branch, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 `get_datadog_code_coverage_commit_summary`
-: Fetch aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner/flag breakdowns.
+: Fetch aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
 
 ## Example prompts
 
