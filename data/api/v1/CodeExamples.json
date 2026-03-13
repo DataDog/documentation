@@ -821,6 +821,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3541766733",
       "description": "Create a monitor with assets returns \"OK\" response"
     },

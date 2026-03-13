@@ -18561,7 +18561,7 @@ components:
           finished_at: 1693491984000000000
           git:
             commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-            repository_url: https://github.com/organization/example-repository
+            repository_id: github.com/organization/example-repository
           service: shopist
           started_at: 1693491974000000000
           team: backend
@@ -18592,7 +18592,7 @@ components:
           format: int64
           type: integer
         git:
-          $ref: '#/components/schemas/DORAGitInfo'
+          $ref: '#/components/schemas/DORAGitInfoResponse'
         service:
           description: Service name.
           example: shopist
@@ -18803,7 +18803,7 @@ components:
             finished_at: 1693491984000000000
             git:
               commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-              repository_url: https://github.com/organization/example-repository
+              repository_id: github.com/organization/example-repository
             service: shopist
             started_at: 1693491974000000000
             team: backend
@@ -18818,7 +18818,7 @@ components:
             finished_at: 1693492084000000000
             git:
               commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-              repository_url: https://github.com/organization/api-service
+              repository_id: github.com/organization/api-service
             service: api-service
             started_at: 1693492074000000000
             team: backend
@@ -18990,6 +18990,17 @@ components:
           $ref: '#/components/schemas/GitRepositoryURL'
       required:
       - repository_url
+      - commit_sha
+      type: object
+    DORAGitInfoResponse:
+      description: Git info returned by DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_id:
+          $ref: '#/components/schemas/GitRepositoryID'
+      required:
+      - repository_id
       - commit_sha
       type: object
     DORAIncidentObject:
@@ -28623,6 +28634,10 @@ components:
       description: Git Commit SHA.
       example: 66adc9350f2cc9b250b69abddab733dd55e1a588
       pattern: ^[a-fA-F0-9]{40,}$
+      type: string
+    GitRepositoryID:
+      description: Git Repository ID
+      example: github.com/organization/example-repository
       type: string
     GitRepositoryURL:
       description: Git Repository URL
@@ -45055,7 +45070,7 @@ components:
         Protocol (OTLP) over gRPC and HTTP.
 
 
-        **Supported pipeline types:** logs'
+        **Supported pipeline types:** logs, metrics'
       properties:
         grpc_address_key:
           description: Environment variable name containing the gRPC server address
@@ -45085,6 +45100,7 @@ components:
       type: object
       x-pipeline-types:
       - logs
+      - metrics
     ObservabilityPipelineOpentelemetrySourceType:
       default: opentelemetry
       description: The source type. The value should always be `opentelemetry`.
@@ -46695,6 +46711,15 @@ components:
           description: Optional name of the Splunk index where logs are written.
           example: main
           type: string
+        indexed_fields:
+          description: List of log field names to send as indexed fields to Splunk
+            HEC. Available only when `encoding` is `json`.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          type: array
         inputs:
           description: A list of component IDs whose output is used as the `input`
             for this component.
@@ -49337,6 +49362,11 @@ components:
         name:
           description: Name of the permission.
           type: string
+        name_aliases:
+          description: List of alias names for the permission.
+          items:
+            type: string
+          type: array
         restricted:
           description: Whether or not the permission is restricted.
           type: boolean
@@ -54974,26 +55004,16 @@ components:
       x-enum-varnames:
       - RULESET
     RumCrossProductSampling:
-      description: 'Configuration for additional APM trace data retention for sessions
-        that match this retention filter.
-
-        When a session matches the filter and is retained (based on `sample_rate`),
-        you can configure
-
-        the percentage of retained sessions with ingested traces whose traces are
-        indexed.'
+      description: The configuration for cross-product retention filters.
       properties:
         trace_enabled:
-          description: Indicates whether trace cross-product sampling is enabled.
-            If `false`, no traces are indexed regardless of `trace_sample_rate`.
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
           example: true
           type: boolean
         trace_sample_rate:
-          description: 'The percentage (0-100) of retained sessions with ingested
-            traces whose traces are indexed.
-
-            For example, 25.0 means 25% of retained sessions with ingested traces
-            have their traces indexed.'
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
           example: 25.0
           format: double
           maximum: 100
@@ -55001,16 +55021,16 @@ components:
           type: number
       type: object
     RumCrossProductSamplingCreate:
-      description: Configuration for cross-product sampling when creating a retention
-        filter.
+      description: The configuration for cross-product retention filters.
       properties:
         trace_enabled:
-          description: Indicates whether trace cross-product sampling is enabled.
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
           example: true
           type: boolean
         trace_sample_rate:
-          description: The percentage (0-100) of retained sessions with ingested traces
-            whose traces are indexed.
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
           example: 25.0
           format: double
           maximum: 100
@@ -55020,16 +55040,17 @@ components:
       - trace_sample_rate
       type: object
     RumCrossProductSamplingUpdate:
-      description: Configuration for cross-product sampling when updating a retention
-        filter. All fields are optional for partial updates.
+      description: The configuration for cross-product retention filters. All fields
+        are optional for partial updates.
       properties:
         trace_enabled:
-          description: Indicates whether trace cross-product sampling is enabled.
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
           example: true
           type: boolean
         trace_sample_rate:
-          description: The percentage (0-100) of retained sessions with ingested traces
-            whose traces are indexed.
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
           example: 25.0
           format: double
           maximum: 100
@@ -92005,8 +92026,8 @@ paths:
 
           If `filter[queried]` is not provided, sending this parameter returns a 400.
 
-          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=7776000`.'
-        example: 7776000
+          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=15552000`.'
+        example: 15552000
         in: query
         name: filter[queried][window][seconds]
         required: false
@@ -92034,7 +92055,7 @@ paths:
         schema:
           type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
-          filter[tag] or filter[queried] query.
+          filter[tag] query.
 
           Default value is 3600 (1 hour), maximum value is 5,184,000 (60 days).'
         example: 3600
