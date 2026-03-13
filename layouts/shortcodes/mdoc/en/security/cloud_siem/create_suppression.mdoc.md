@@ -6,7 +6,9 @@
 1. (Optional) Enter a description.
 1. Enter a suppression query.
 1. (Optional) Add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**.
-    - **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
+   {% alert level="info" %}
+   The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
+   {% /alert %}
 
 ### Add to existing suppression
 

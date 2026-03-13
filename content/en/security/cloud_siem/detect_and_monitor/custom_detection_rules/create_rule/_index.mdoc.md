@@ -145,9 +145,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 For the current step and the next step:
 
 1. In the **within** dropdown menu, select an evaluation window for the transition.
-    - **Note**: The total evaluation time across the sequence can be up to 24 hours.
+   {% alert level="info" %}
+   The total evaluation time across the sequence can be up to 24 hours.
+   {% /alert %}
 1. Follow the instructions in [Add step](#add-step) to complete the step.
-    - **Note**: You can select different `group by` fields between steps. For example, link `@usr.email`from an earlier step to `@ip.address` in a later step.
+   {% alert level="info" %}
+   You can select different `group by` fields between steps. For example, link `@usr.email`from an earlier step to `@ip.address` in a later step.
+   {% /alert %}
 1. Click **Add Step** if you want to add more steps.
 
 ### Severity and notification
