@@ -32,6 +32,8 @@ Database Monitoring for Supabase Cloud provides visibility into your Supabase da
 
 Datadog connects to your Supabase project and begins collecting Database Monitoring telemetry. No Agent installation is required.
 
+<div class="alert alert-info">Your first Supabase database instance monitored with Database Monitoring is free. Each additional Supabase project must be configured separately — adding new projects to a connected Supabase account does not automatically enable Database Monitoring.</div>
+
 ## Data collected
 
 After you enable Database Monitoring, Datadog collects the following telemetry from your Supabase Cloud database:
