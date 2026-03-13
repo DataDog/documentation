@@ -9718,6 +9718,11 @@ menu:
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
+      weight: 11
+    - name: RUM Export
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
       weight: 12
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
