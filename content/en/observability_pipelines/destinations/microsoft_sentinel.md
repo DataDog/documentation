@@ -26,11 +26,11 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. Follow the instructions for the type of table to which you want to send data.
 {{< tabs >}}
 {{% tab "Azure Table" %}}
-1. Create a JSON file for your Data Collection Rule (DCR) parameters. See [Data collection rule (DCR)][5] for more information.
-    - In the `streamDeclarations` property, you must list all log fields you want mapped to the corresponding Azure table column. See [Stream declarations][7] for more information.
-    - In the `transformKql` property, you must list all fields on the log that are not mapped to the table. See [Data flow properties][8] for more information.
-    - **Note**: Each log field must either be listed in one of the properties: `streamDeclarations` or `transformKql`, otherwise the log is dropped. See [Monitor DCR data collection in Azure Monitor][6] on how to set up an alert when logs are dropped.
-    - For example, this JSON file (`dcr-commonsecuritylog.json`) adds the log fields to be mapped to the [`CommonSecurityLog`][1] table:
+1. Create a JSON file for your Data Collection Rule (DCR) parameters. See [Data collection rule (DCR)][1] for more information.
+    - In the `streamDeclarations` property, you must list all log fields you want mapped to the corresponding Azure table column. See [Stream declarations][2] for more information.
+    - In the `transformKql` property, you must list all fields on the log that are not mapped to the table. See [Data flow properties][3] for more information.
+    - **Note**: Each log field must either be listed in one of the properties: `streamDeclarations` or `transformKql`, otherwise the log is dropped. See [Monitor DCR data collection in Azure Monitor][4] on how to set up an alert when logs are dropped.
+    - For example, this JSON file (`dcr-commonsecuritylog.json`) adds the log fields to be mapped to the [`CommonSecurityLog`][5] table:
         ```bash
         {
             "location": "eastus",
@@ -92,9 +92,9 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
             --query "id" --output tsv
             ```
 
-    - See [CommonSecurityLog Columns][4] for a full list of `commonsecuritylog` table columns.
-    - See the [Supported Azure Tables][3] for all available tables to which you can send data.
-1. Run the [`az monitor data-collection rule create`][2] Azure CLI command to create a DCR with the JSON file you created in the previous step. For example, with the `dcr-commonsecuritylog.json` example file:
+    - See [CommonSecurityLog Columns][6] for a full list of `commonsecuritylog` table columns.
+    - See the [Supported Azure Tables][7] for all available tables to which you can send data.
+1. Run the [`az monitor data-collection rule create`][8] Azure CLI command to create a DCR with the JSON file you created in the previous step. For example, with the `dcr-commonsecuritylog.json` example file:
     ```bash
     az monitor data-collection rule create \
         --resource-group "myResourceGroup" \
@@ -104,14 +104,14 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
         --rule-file "\path\to\json\dcr-commonsecuritylog.json"
     ```
 
-[1]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog
-[2]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/rule?view=azure-cli-latest#az-monitor-data-collection-rule-create
-[3]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables
-[4]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog#columns
-[5]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#data-collection-rule-dcr
-[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-monitor
-[7]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-structure#stream-declarations
-[8]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-structure#data-flow-properties
+[1]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#data-collection-rule-dcr
+[2]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-structure#stream-declarations
+[3]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-structure#data-flow-properties
+[4]: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-monitor
+[5]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog
+[6]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog#columns
+[7]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables
+[8]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/rule?view=azure-cli-latest#az-monitor-data-collection-rule-create
 
 {{% /tab %}}
 {{% tab "Custom table" %}}
