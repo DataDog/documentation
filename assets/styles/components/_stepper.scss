@@ -226,6 +226,7 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 
     @media (max-width: 479px) {
         display: inline-block;
+        left: 9px;
     }
 }
 
