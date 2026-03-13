@@ -9,6 +9,9 @@ further_reading:
   tag: "Documentation"
   text: "Mobile App Documentation"
 ---
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
 
 Being on-call requires reliable and timely notifications to ensure you can respond to incidents effectively. This guide walks you through the steps to configure your mobile device for optimal performance with [Datadog On-Call][5].
 
