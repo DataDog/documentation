@@ -44146,7 +44146,7 @@ components:
       - algorithm
       type: object
     ObservabilityPipelineHttpClientDestinationCompressionAlgorithm:
-      description: Compression algorithm.
+      description: The compression algorithm used for HTTP client destinations.
       enum:
       - gzip
       example: gzip
