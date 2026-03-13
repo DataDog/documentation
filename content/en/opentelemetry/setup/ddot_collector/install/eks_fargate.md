@@ -1,18 +1,13 @@
 ---
 title: Install the DDOT Collector on EKS Fargate
-private: true
-# code_lang: eks_fargate
-# type: multi-code-lang
-# code_lang_weight: 5
+code_lang: eks_fargate
+type: multi-code-lang
+code_lang_weight: 5
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
-
-{{< callout header="false" btn_hidden="true">}}
-  Support for deploying the DDOT Collector on EKS Fargate is in Preview.
-{{< /callout >}}
 
 ## Overview
 

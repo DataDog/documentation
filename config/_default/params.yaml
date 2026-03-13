@@ -139,6 +139,8 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    ecs_fargate: "ECS Fargate"
+    eks_fargate: "EKS Fargate"
     haproxy: "HAProxy"
     traces: "Traces"
     metrics: "Metrics"
@@ -321,7 +323,6 @@ unsupported_sites:
   linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
-  logs_scheduled_reports: [gov]
   mcp_server: [gov]
   mobile_app_testing: [gov]
   network_config_management: [gov]
