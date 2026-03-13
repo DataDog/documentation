@@ -419,7 +419,7 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 - Document the root cause analysis findings on this case.
 
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***\
+*Toolset: **cases***
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
