@@ -182,15 +182,32 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 
 .stepper__next-btn,
 .stepper__finish-btn,
-.stepper__reset-btn,
-.stepper__show-all-btn,
-.stepper__collapse-btn {
+.stepper__reset-btn {
     background-color: $brand-primary;
     color: $white;
 
     &:hover {
         background-color: darken($brand-primary, 10%);
         border-color: darken($brand-primary, 10%);
+    }
+}
+
+.stepper__show-all-btn,
+.stepper__collapse-btn {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    color: $brand-primary;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: $stepper-circle-size;
+
+    &:hover {
+        background-color: transparent;
+        color: darken($brand-primary, 10%);
+        text-decoration: underline;
     }
 }
 
