@@ -69,7 +69,7 @@ To open Bits Assistant, click **Ask Bits** in the top-right of the navigation ba
 
 ### Mobile Application
 <div class="alert alert-info">
-Bits Assistant is only available on iOS v5.8.4+/a>.
+Bits Assistant is only available on iOS v5.8.4+.
 </div>
 1. [Download the mobile app and log in][2].
 2. Tap Bits Assistant from the home screen.
