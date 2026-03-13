@@ -7461,23 +7461,89 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/BatchDeleteRowsRequestData'
+            $ref: '#/components/schemas/TableRowResourceIdentifier'
           maxItems: 200
           type: array
       required:
       - data
       type: object
-    BatchDeleteRowsRequestData:
-      description: Row resource containing a single row identifier for deletion.
+    BatchRowsQueryDataType:
+      default: reference-tables-batch-rows-query
+      description: Resource type identifier for batch queries of reference table rows.
+      enum:
+      - reference-tables-batch-rows-query
+      example: reference-tables-batch-rows-query
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLES_BATCH_ROWS_QUERY
+    BatchRowsQueryRequest:
       properties:
-        id:
-          example: primary_key_value
-          type: string
+        data:
+          $ref: '#/components/schemas/BatchRowsQueryRequestData'
+      type: object
+    BatchRowsQueryRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BatchRowsQueryRequestDataAttributes'
         type:
-          $ref: '#/components/schemas/TableRowResourceDataType'
+          $ref: '#/components/schemas/BatchRowsQueryDataType'
       required:
       - type
-      - id
+      type: object
+    BatchRowsQueryRequestDataAttributes:
+      properties:
+        row_ids:
+          example:
+          - row_id_1
+          - row_id_2
+          items:
+            type: string
+          type: array
+        table_id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      required:
+      - row_ids
+      - table_id
+      type: object
+    BatchRowsQueryResponse:
+      example:
+        data:
+          id: 00000000-0000-0000-0000-000000000000
+          relationships:
+            rows:
+              data:
+              - id: row_id_1
+                type: row
+              - id: row_id_2
+                type: row
+          type: reference-tables-batch-rows-query
+      properties:
+        data:
+          $ref: '#/components/schemas/BatchRowsQueryResponseData'
+      type: object
+    BatchRowsQueryResponseData:
+      properties:
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/BatchRowsQueryResponseDataRelationships'
+        type:
+          $ref: '#/components/schemas/BatchRowsQueryDataType'
+      required:
+      - type
+      type: object
+    BatchRowsQueryResponseDataRelationships:
+      properties:
+        rows:
+          $ref: '#/components/schemas/BatchRowsQueryResponseDataRelationshipsRows'
+      type: object
+    BatchRowsQueryResponseDataRelationshipsRows:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TableRowResourceIdentifier'
+          type: array
       type: object
     BatchUpsertRowsRequestArray:
       description: The request body for creating or updating multiple rows into a
@@ -67187,6 +67253,18 @@ components:
       type: string
       x-enum-varnames:
       - ROW
+    TableRowResourceIdentifier:
+      description: Row resource containing a single row identifier.
+      properties:
+        id:
+          example: primary_key_value
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      - id
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -97008,6 +97086,58 @@ paths:
         operator: OR
         permissions:
         - timeseries_query
+  /api/v2/reference-tables/queries/batch-rows:
+    post:
+      description: Batch query reference table rows by their primary key values.  Returns
+        only found rows in the included array.
+      operationId: BatchRowsQuery
+      requestBody:
+        content:
+          application/json:
+            examples:
+              happy_path:
+                summary: Batch query reference table rows by their primary key values.
+                value:
+                  data:
+                    attributes:
+                      row_ids:
+                      - row_id_1
+                      - row_id_2
+                      table_id: 00000000-0000-0000-0000-000000000000
+                    type: reference-tables-batch-rows-query
+            schema:
+              $ref: '#/components/schemas/BatchRowsQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchRowsQueryResponse'
+          description: Successfully retrieved rows. Some or all requested rows were
+            found. Response includes found rows in the included section.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Batch rows query
+      tags:
+      - Reference Tables
+      x-menu-order: 10
   /api/v2/reference-tables/tables:
     get:
       description: List all reference tables in this organization.
