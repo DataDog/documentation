@@ -273,6 +273,8 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 {{% collapse-content title="Cloud Shell" level="h3" id="gcp-cloud-shell-setup" %}}
 Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/gcp/agentless) that wraps the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
+**Required GCP permissions:** The identity you use in Cloud Shell must have **Owner** or equivalent on the scanner project. The script creates a GCS bucket for Terraform state, so you must also have **Storage** permissions on that project (for example, `roles/storage.admin` or `storage.buckets.create` / `storage.buckets.get` / `storage.buckets.update`). Alternatively, you can **reuse an existing bucket** for Terraform state by setting the `TF_STATE_BUCKET` environment variable to an existing bucket name; the script will not create a bucket in that case. If you see a 403 error on "Setting up Terraform state storage", see [GCP: Failed to create state bucket][26] in the troubleshooting guide.
+
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
 1. Expand the account containing the project where you want to deploy the Agentless scanner.
 1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
@@ -299,6 +301,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
 
 [25]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=gcp
+[26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 
 {{% /tab %}}
 {{< /tabs >}}
