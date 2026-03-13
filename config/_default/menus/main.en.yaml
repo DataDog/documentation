@@ -8773,21 +8773,26 @@ menu:
       parent: rum
       identifier: rum_operations_monitoring
       weight: 10
+    - name: Managed Archive
+      url: real_user_monitoring/managed_archive/
+      parent: rum
+      identifier: rum_managed_archive
+      weight: 11
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 11
+      weight: 12
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 12
+      weight: 13
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 13
+      weight: 14
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics
