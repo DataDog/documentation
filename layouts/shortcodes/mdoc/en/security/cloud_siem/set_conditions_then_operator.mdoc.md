@@ -12,7 +12,7 @@
       {% alert level="info" %}
       The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
       {% /alert %}
-1. In the **Add notify** section, click **Add Recipient** to optionally configure [notification targets][101].
+1. In the **And notify** section, click **Add Recipient** to optionally configure [notification targets][101].
     - You can create [notification rules][102] to manage notifications automatically, avoiding manual edits for each detection rule.
 
 [101]: /security_platform/notifications/#notification-channels

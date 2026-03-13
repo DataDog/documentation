@@ -1,6 +1,6 @@
 1. If you have a single query, skip to step 2. If you have multiple queries, you can create a **Simple condition** or **Then condition**.
-    - If you want to create a simple condition, leave the selection as is.
-    - If you want to create a `then` condition, click **THEN condition**.
+    - If you want to create a **simple** condition, leave the selection as is.
+    - If you want to create a **then** condition, click **THEN condition**.
       - Use the **Then condition** when you want to trigger a signal if query A occurs and then query B occurs.
         {% alert level="info" %}
         The `then` operator can only be used on a single rule condition.
@@ -14,7 +14,7 @@
       {% alert level="info" %}
       The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
       {% /alert %}
-1. (Optional) In the **Add notify** section, click **Add Recipient** to configure [notification targets][101].
+1. (Optional) In the **And notify** section, click **Add Recipient** to configure [notification targets][101].
     - You can also create [notification rules][102] to avoid manual edits to notification preferences for individual detection rules.
 
 [101]: /security_platform/notifications/#notification-channels

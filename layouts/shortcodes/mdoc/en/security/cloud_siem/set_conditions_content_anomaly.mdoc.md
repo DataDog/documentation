@@ -10,7 +10,7 @@
       {% /alert %}
 1. In the **within a window of** dropdown menu, select the time period during which a signal is triggered if the condition is met.
     - An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates cases in real time.
-1. In the **Add notify** section, click **Add Recipient** to optionally configure [notification targets][101].
+1. In the **And notify** section, click **Add Recipient** to optionally configure [notification targets][101].
     - You can also create [notification rules][102] to avoid manual edits to notification preferences for individual detection rules.
 
 [101]: /security_platform/notifications/#notification-channels
