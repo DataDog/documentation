@@ -84028,7 +84028,6 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-        appKeyAuth: []
       servers:
       - url: https://{subdomain}.{site}
         variables:
