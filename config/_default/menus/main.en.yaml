@@ -8773,15 +8773,15 @@ menu:
       parent: rum
       identifier: rum_operations_monitoring
       weight: 10
-    - name: RUM Export
-      url: real_user_monitoring/rum_export/
-      parent: rum
-      identifier: rum_export
-      weight: 11
     - name: Managed Archive
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
+      weight: 11
+    - name: RUM Export
+      url: real_user_monitoring/rum_export/
+      parent: rum
+      identifier: rum_export
       weight: 12
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
