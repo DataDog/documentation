@@ -69,11 +69,12 @@ To open Bits Assistant, click **Ask Bits** in the top-right of the navigation ba
 
 ### Mobile Application
 <div class="alert alert-info">
-Bits Assistant is only available on iOS v5.8.4+.
+Bits Assistant is available on iOS v5.8.4+.
 </div>
+
 1. [Download the mobile app and log in][2].
-2. Tap Bits Assistant from the home screen.
-3. Start chatting with Bits Assitant in chat or voice mode.
+2. Tap Bits Assistant on the home screen.
+3. Start chatting with Bits Assistant in chat or voice mode.
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
 ### Slack
