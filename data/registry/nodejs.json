@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-03-13T08:58:09.391531+00:00",
+    "generated_at": "2026-03-13T11:13:54.292223+00:00",
     "language": "nodejs",
     "total_registry_entries": 2341,
     "matched_entries": 568
@@ -617,7 +617,7 @@
       "description": "Configuration key which is used as a flag to tell us whether we are instrumenting an Azure App Service using the AAS Site Extension.",
       "type": null,
       "default_value": "undefined",
-      "from_version": "5.55.0",
+      "from_version": null,
       "to_version": "5.65.0",
       "deprecated": false,
       "aliases": [],
@@ -2485,7 +2485,7 @@
       "description": "Enables new GCP PubSub Push subscription plugin for Node.js Distributed Tracing. ",
       "type": "boolean",
       "default_value": "true",
-      "from_version": "",
+      "from_version": null,
       "to_version": null,
       "deprecated": false,
       "aliases": [],
@@ -4274,7 +4274,7 @@
       "description": "Enables adding a runtime-id tag to runtime metrics (experimental). Alias for DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED.",
       "type": "boolean",
       "default_value": "false",
-      "from_version": "5.55.0",
+      "from_version": null,
       "to_version": "5.57.0",
       "deprecated": false,
       "aliases": [],
@@ -6788,7 +6788,7 @@
       "description": "null",
       "type": null,
       "default_value": null,
-      "from_version": "5.55.0",
+      "from_version": null,
       "to_version": "5.57.0",
       "deprecated": false,
       "aliases": [],

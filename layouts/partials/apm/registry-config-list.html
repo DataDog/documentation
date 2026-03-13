@@ -21,13 +21,11 @@
 {{- if $data -}}
   {{- $configs := $data.configurations -}}
 
-  {{/* Filter to only current (non-retired) configs */}}
-  {{- $currentConfigs := slice -}}
-  {{- range $configs -}}
-    {{- if not .to_version -}}
-      {{- $currentConfigs = $currentConfigs | append . -}}
-    {{- end -}}
-  {{- end -}}
+  {{/* TODO: Add version filtering here to exclude retired configs (those with a specific
+     to_version like "v1.57.0"). Configs with to_version null or "latest" are current. */}}
+  {{- $currentConfigs := $configs -}}
+
+  <p class="registry-config-total"><strong>{{ len $currentConfigs }}</strong> configuration keys available for this library.</p>
 
   {{- if $categories -}}
     {{/* Inline SVG for copy-link icon (Material Design link icon) */}}

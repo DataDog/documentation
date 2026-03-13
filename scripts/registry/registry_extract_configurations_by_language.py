@@ -16,6 +16,7 @@ default value, and supported version range.
 import argparse
 import json
 import os
+import re
 from datetime import datetime, timezone
 
 import requests
@@ -36,6 +37,55 @@ LANGUAGE_TO_OUTPUT_FILES = {
     "rust": ["rust"],
     "cpp": ["cpp"],
 }
+
+# Versions at or below this threshold are considered "initial" and the "Since"
+# field is hidden (the config existed from the start of registry tracking).
+# Use bare semver (no "v" prefix). Configs with from_version <= threshold
+# won't display a "Since" badge.
+SINCE_THRESHOLDS = {
+    "golang": "2.3.0",
+    "java": "1.54.0",
+    "ruby": "2.22.0",
+    "dotnet": "3.37.0",
+    "python": "3.12.0",    # TODO: update to real initial version once known
+    "rust": "0.1.0",
+    "php": "1.1.1",         # TODO: update to real initial version once known
+    "cpp": "1.1.1",         # TODO: update to real initial version once known
+    "nodejs": "5.55.0",
+}
+
+
+def parse_semver(version_str: str) -> tuple:
+    """Extract a (major, minor, patch) tuple from a version string.
+
+    Handles formats like "v1.2.3", "1.2.3", "1.54", and
+    "datadog-opentelemetry-v0.1.0" (strips known prefixes).
+    Returns (0, 0, 0) if unparseable.
+    """
+    if not version_str:
+        return (0, 0, 0)
+    # Strip known non-semver prefixes (e.g. "datadog-opentelemetry-v0.1.0")
+    match = re.search(r'v?(\d+\.\d+(?:\.\d+)?)', version_str)
+    if not match:
+        return (0, 0, 0)
+    parts = match.group(1).split(".")
+    major = int(parts[0])
+    minor = int(parts[1]) if len(parts) > 1 else 0
+    patch = int(parts[2]) if len(parts) > 2 else 0
+    return (major, minor, patch)
+
+
+def normalize_version(version_str: str) -> str:
+    """Normalize a version string to always have a 'v' prefix and 3-part semver.
+
+    "1.54" -> "v1.54.0", "v2.3.0" -> "v2.3.0",
+    "datadog-opentelemetry-v0.1.0" -> "v0.1.0"
+    Returns empty string if unparseable.
+    """
+    sem = parse_semver(version_str)
+    if sem == (0, 0, 0) and version_str:
+        return version_str  # can't parse, return as-is
+    return f"v{sem[0]}.{sem[1]}.{sem[2]}"
 
 
 def fetch_registry_configurations() -> list[dict]:
@@ -168,6 +218,26 @@ def annotate_categories(results, key_to_category):
             entry["integration_pattern"] = info["integration_pattern"]
 
 
+def process_versions(results, language):
+    """Normalize from_version to 'vX.Y.Z' format and remove it when at or below the threshold."""
+    threshold_str = SINCE_THRESHOLDS.get(language)
+    threshold = parse_semver(threshold_str) if threshold_str else None
+
+    for entry in results:
+        raw = entry.get("from_version")
+        if not raw:
+            entry["from_version"] = None
+            continue
+
+        normalized = normalize_version(raw)
+        sem = parse_semver(raw)
+
+        if threshold and sem <= threshold:
+            entry["from_version"] = None
+        else:
+            entry["from_version"] = normalized
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Extract registry configuration keys for a specific language."
@@ -203,6 +273,7 @@ def main():
     for language in languages:
         results = extract_for_language(registry_entries, language)
         annotate_categories(results, key_to_category)
+        process_versions(results, language)
 
         output = {
             "metadata": {
