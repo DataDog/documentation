@@ -18,7 +18,7 @@ further_reading:
 This guide provides recommendations to Datadog organization administrators on how to use Datadog Teams effectively. It applies to the following situations:
 
 - You want to use Datadog Teams to drive ownership workflows (including routing, visibility, governance, and access), not only as a directory.
-- You already have team data spread across multiple systems. The systems may include Identity Provider (IdP) groups, SAML attributes, GitHub teams/CODEOWNERS, internal tools, Terraform, spreadsheets, or Slack.
+- You already have team data spread across multiple systems. The systems may include Identity Provider (IdP) groups, SAML attributes, GitHub teams and CODEOWNERS files, internal tools, Terraform, spreadsheets, or Slack.
 - Your organization wants to adopt Datadog Teams without breaking existing workflows.
 
 This guide does not provide UI instructions. Instead, it focuses on decisions, sequencing, and common failure modes.
@@ -53,13 +53,13 @@ These sources answer the question of who is in which group. Identity sources pro
 
 These sources provide information about who owns which service:
 
-- GitHub teams and CODEOWNERS file
+- GitHub teams and CODEOWNERS files
 - Developer portal software such as Backstage, Port, or Cortex
 - Internal ownership registries or catalogs
 
 Be aware of the following common problems with GitHub data:
 - GitHub teams often have extra members
-- CODEOWNERS files become inaccurate over time due to reorgs 
+- CODEOWNERS files become inaccurate over time due to organizational changes
 
 ### Operational sources
 
@@ -89,7 +89,7 @@ The following sections describe the tradeoffs between the available strategies.
 
 ### IdP-driven sync
 You can sync teams from Okta or Entra IdPs. Use IdP-driven sync if your organization has the following characteristics:
-- Your top priority is automatically capturing the accurate membership life cycle, including joiners and leavers.
+- You prioritize automatically capturing the accurate membership life cycle, including joiners and leavers.
 - You want IT or the platform team to control team membership
 - You can map groups to real teams without making your team list unmanageably large
 
@@ -113,23 +113,24 @@ Use SAML mapping to sync Datadog Teams if your organization has the following ch
 **Note:** SAML mappings take effect during login. Suppose a user moves from Team A to Team B during an active login session. The team change is reflected in Datadog only after the user logs out and logs back in.
 
 #### Best practices
-Use SAML mapping as practical, temporary solution when SCIM team creation isn't available or you want provisioning without building a full pipeline.
+Use SAML mapping as a practical, temporary solution when SCIM team creation isn't available, or you want provisioning without building a full pipeline.
 
 ### GitHub-driven teams
 From GitHub, Datadog Teams can apply GitHub teams, hierarchy, and CODEOWNERS information. Use GitHub to sync Datadog Teams if your organization has the following characteristics:
-- GitHub teams closely reflect your real org structure
+- GitHub teams closely reflect your real organizational structure
 - CODEOWNERS is your best ownership signal and you want Datadog to reflect it
 - You care about hierarchy and nested teams
 
 In Datadog's [GitHub provisioning flow][5], you can choose between two modes:
 - Team enrichment only links existing teams.
 - Full provisioning and membership management creates teams in Datadog based on the existing teams in GitHub, preserving hierarchy and membership.
+
 Both modes of GitHub provisioning can use CODEOWNERS for richer ownership signals.
 
 #### Common issues
 
-- GitHub teams often diverge from actual org structure due to stale membership or ad-hoc team creation.
-  - You can use the "partial selection" flow to indicate which parts of your GitHub org you want to provision into Datadog.
+- GitHub teams often diverge from actual organizational structure due to stale membership or ad-hoc team creation.
+  - You can use the partial selection flow to indicate which parts of your GitHub organization you want to provision into Datadog.
 - GitHub-based membership usually reflects the way that engineers work together. GitHub may not accurately reflect the company's formal organization structure or its IT life cycle.
 
 #### Best practices
@@ -140,7 +141,7 @@ Using API endpoints or Terraform to manage teams lets you provide a custom sourc
 
 Use the API or Terraform if your organization has the following characteristics:
 - You have internal tools that model teams
-- You need custom logic (for example: merging, aliasing, special naming)
+- You need custom logic (for example, merging, aliasing, or special naming)
 - You want to centrally control team structure and membership and feed different systems, including Datadog included
 
 #### Limitations
@@ -188,8 +189,8 @@ This approach enforces consistency before broader adoption, reducing the risk of
 ### Conflicting sources managing the same field
 
 Symptoms:
-- Membership "snaps back" after manual edits
-- Duplicate teams appear (for example, "platform" and "platform_github")
+- Membership reverts to a previous state after manual edits
+- Duplicate teams appear (for example, `platform` and `platform_github`)
 - Ownership and identity point to different team names
 
 How to avoid:
@@ -237,16 +238,16 @@ How to avoid:
 
 ### Validate your model before scaling
 
-- Select 5-10 teams and validate the following:
-  - Membership correctness
-  - Ownership correctness (using CODEOWNERS, repo signals, or service mapping)
-  - Metadata usefulness (using contacts, runbooks, and channels)
+Select 5-10 teams and validate the following:
+- Membership correctness
+- Ownership correctness (using CODEOWNERS, repo signals, or service mapping)
+- Metadata usefulness (using contacts, runbooks, and channels)
 
 ### Expand in controlled iterations
 
 - Add one source or one organizational unit at a time.
 - Measure drift: identify where teams differ between IdP and GitHub and investigate the cause.
-- Establish change control (Terraform/API) for fields that must remain stable.
+- Establish change control (Terraform or API) for fields that must remain stable.
 
 ### 3 Plan for future sources
 
