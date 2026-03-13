@@ -238,6 +238,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_732700533",
+      "description": "Create a new dashboard with formulas and functions events query using facet group by"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_4018282928",
+      "description": "Create a new dashboard with formulas and functions events query using flat group by fields"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2104498738",
       "description": "Create a new dashboard with formulas and functions scatterplot widget"
     },
@@ -440,6 +450,11 @@
       "group": "dashboards",
       "suffix": "_3982498788",
       "description": "Create a new dashboard with timeseries widget containing style attributes"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
     },
     {
       "group": "dashboards",
@@ -803,6 +818,16 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
     },
     {
       "group": "monitors",

@@ -75,6 +75,17 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 
 There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
 
+## "No cookie support detected" error with EUA authentication
+
+If your application uses Enterprise User Administration (EUA) with a redirect to CMS IDM for authentication, the login flow fails when it occurs inside an iframe. During the redirect, the CSRF token is dropped, which is expected security behavior. Because CSRF protection cannot function correctly when the authentication sequence begins within an iframe, the application returns a `No cookie support detected` error.
+
+To record the browser test successfully:
+
+1. **Record using the popup window mode**: When starting the browser test recording, select **Open in Popup** instead of recording inside the iframe. This allows the authentication flow to complete without losing the CSRF token.
+2. **Log out before recording**: Make sure there is no active session or saved cookies. Start the recording with a completely clean session.
+3. **Use incognito/private browsing mode**: This prevents cached credentials or cookies from interfering with the authentication flow.
+4. **Record once using the popup window**: After the test is recorded through the popup, it runs correctly from the private location.
+
 ## Technical limitations
 
 Each event sent by the RUM Browser SDK is built with the following:

@@ -25,10 +25,6 @@ algolia:
   rank: 90
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
-{{< /callout >}}
-
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
 Ready to get started? See [Set Up the Datadog MCP Server][27] for connection instructions.
@@ -40,17 +36,30 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 ## Disclaimers
 
-- The Datadog MCP Server is not supported for production use during the Preview.
-- Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
 - The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
+- The Datadog MCP Server has fair-use rate limits in place. For questions or requests, [contact Datadog support][37].
+- The Datadog MCP Server is not GovCloud compatible.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 
 ## Requirements
 
-Datadog users must have the `MCP Read` and/or `MCP Write` [permissions][18] to use the MCP server.
+Datadog users must have the `MCP Read` [permission][18] to use the MCP Server for read access, and the `MCP Write` [permission][18] for write access.
 
-For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
+For setup instructions, see [Set Up the Datadog MCP Server][27].
+
+## Monitoring the Datadog MCP Server usage
+
+You can track Datadog MCP Server usage for your organization using Datadog metrics and Audit Trail.
+
+All tool calls are recorded in the Datadog [Audit Trail][16] with metadata identifying them as MCP actions, including the tool name, arguments, user identity, and the MCP client used. See [Track tool calls in Audit Trail](#track-tool-calls-in-audit-trail) for more information.
+
+Datadog also emits two standard metrics that you can use to monitor MCP Server activity:
+
+- `datadog.mcp.session.starts`: Emitted on each session initialization.
+- `datadog.mcp.tool.calls`: Emitted on each tool call, tagged with `tool_name`.
+
+Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
 
 ## Toolsets
 
@@ -63,18 +72,30 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
-- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans
+- `llmobs`: Tools for searching and analyzing [LLM Observability][30] spans and experiments
+- `product-analytics`: Tools for interacting with [Product Analytics][35] queries
 - `networks`: Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
 - `security`: Tools for code security scanning and searching [security signals][33] and [security findings][34]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication][27] only). 
 
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
-- `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,synthetics,software-delivery` retrieves core, Synthetic Testing, and Software Delivery tools.
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+For example, based on your selected [Datadog site][36] ({{< region-param key="dd_site_name" >}}):
+
+- Retrieve only the core tools (this is the default if `toolsets` is not specified):
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+- Retrieve only Synthetic Testing-related tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
+
+- Retrieve core, Synthetic Testing, and Software Delivery tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
+
+[36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 ## Available tools
 
@@ -108,7 +129,7 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 
 - Show me CPU utilization metrics for all hosts in the last 4 hours.
 - Get Redis latency metrics for the production environment.
-- Display memory usage trends for our database servers.
+- How much did my cloud costs change from January to February?
 
 ### `get_datadog_metric_context`
 *Toolset: **core***\
@@ -442,14 +463,6 @@ Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
-### `search_datadog_llmobs_spans`
-*Toolset: **llmobs***\
-Retrieves and analyzes [LLM Observability][30] spans from Datadog, showing the complete request flow, model interactions, token usage, costs, and associated metadata.
-
-- Show me LLM Observability spans for my chatbot service in the last hour.
-- Find spans where the LLM model returned an error.
-- Analyze token usage and costs for my AI application over the past day.
-
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
 Investigates network-level issues using [Cloud Network Monitoring][31] data, analyzing network flow data to detect anomalies like elevated retransmission rates.
@@ -552,13 +565,29 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 - Find high-severity security signals related to my production environment.
 - List Cloud SIEM signals triggered by suspicious login attempts.
 
-### `search_datadog_security_findings`
+### `security_findings_schema`
 *Toolset: **security***\
-Searches and retrieves security findings from Datadog Security, including misconfigurations, identity risks, and library vulnerabilities.
+Returns the schema (available fields and their types) for security findings. Call this first before using `analyze_security_findings` to discover queryable fields. Supports filtering by finding type and controlling response size.
 
-- Show me critical security findings for my cloud infrastructure.
-- Find misconfigurations in my AWS environment.
-- List security findings related to identity risks.
+- What fields are available for security findings?
+- Show me the schema for library vulnerability findings.
+- Get the full schema including descriptions for misconfiguration findings.
+
+### `analyze_security_findings`
+*Toolset: **security***\
+Primary tool for analyzing security findings using SQL queries. Queries live data from the last 24 hours with flexible SQL aggregations, filtering, and grouping. Call `security_findings_schema` first to discover available fields, then use this tool to query.
+
+- Show me the top 10 rules with the most critical findings.
+- Count open findings grouped by severity and finding type.
+- Find library vulnerabilities with exploits available, grouped by resource.
+
+### `search_security_findings`
+*Toolset: **security***\
+Fallback tool for retrieving full security finding details. Prefer `analyze_security_findings` for most analysis tasks. Use this tool only when you need complete finding objects or when SQL queries are insufficient.
+
+- Get full details for critical findings in my AWS environment.
+- Retrieve complete finding objects for a specific rule.
+- List all open identity risk findings with full metadata.
 
 ### `search_datadog_ci_pipeline_events`
 *Toolset: **software-delivery***\
@@ -638,7 +667,7 @@ You can view information about calls made by MCP Server tools in Datadog's [Audi
 
 ## Feedback
 
-The Datadog MCP Server is under significant development. During the Preview, use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
+The Datadog MCP Server is under significant development. Use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
 
 ## Further reading
 
@@ -657,8 +686,11 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [27]: /bits_ai/mcp_server/setup
 [28]: /tracing/
 [29]: /feature_flags/
-[30]: /llm_observability/
+[30]: /llm_observability/mcp_server/
 [31]: /network_monitoring/cloud_network_monitoring/
 [32]: /network_monitoring/devices/
 [33]: /security/threats/security_signals/
 [34]: /security/misconfigurations/findings/
+[35]: /product_analytics
+[36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[37]: https://help.datadoghq.com/hc/en-us/requests/new

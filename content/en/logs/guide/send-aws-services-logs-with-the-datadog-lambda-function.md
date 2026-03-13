@@ -47,6 +47,8 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [ECS][16]                          | `-`                                                                                                            | [Use the Docker Agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Glue][76]                         | [Enable AWS Glue logs][77]                                                                                     | [Manual][77] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [IoT Core][74]                     | [Enable Amazon IoT Core logs][75]                                                                              | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
 | [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Network Firewall][57]             | [Enable AWS Network Firewall logs][58]                                                                         | [Manual][58] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
@@ -97,8 +99,10 @@ The following sources and locations are supported:
 | ECS Logs                    | CloudWatch     |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
+| Glue Jobs Logs              | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
+| IoT Core Logs                    | CloudWatch     |
 | Network Firewall Logs       | S3, CloudWatch |
 | PCS Logs                    | CloudWatch     |
 | Redshift Logs               | S3, Cloudwatch |
@@ -140,6 +144,11 @@ The following sources and locations are supported:
     "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
+    "glue:BatchGetJobs",
+    "glue:GetJobs",
+    "glue:GetJob",
+    "glue:ListJobs",
+    "iot:GetV2LoggingOptions",
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
     "lambda:List*",
@@ -191,8 +200,13 @@ The following sources and locations are supported:
     | `ecs:ListTaskDefinitionFamilies`                            | List all task definition families.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
+    | `glue:BatchGetJobs`                                             | Get information about multiple Glue jobs.                                    |
+    | `glue:GetJob`                                               | Get information about a Glue job.                                            |
+    | `glue:GetJobs`                                              | List all Glue jobs.                                                          |
+    | `glue:ListJobs`                                             | List all Glue job names.                                                     |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
@@ -227,7 +241,7 @@ The following sources and locations are supported:
 3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.
 4. In the **Datadog Forwarder Lambda** section, enter the ARN of the Lambda created in the previous section and click **Add**. The Lambda function appears in the table below with its name, version, and region.
 5. In the **Log Autosubscription** section, under **Log Sources**, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
-6. (Optional) In the **Log Source Tag Filters** section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected.
+6. (Optional) In the **Log Source Tag Filters** section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected. **Note**: Resource tags are automatically lowercased to match Datadog platform conventions. Define your tag filters in lowercase to avoid mismatches.
 7. If you have logs across multiple regions, you must create additional Lambda functions in those regions and add them in the **Datadog Forwarder Lambda** section.
 8. To stop collecting all AWS logs from a specific Lambda function, hover over the Lambda in the table and click the delete icon. All triggers for that function are removed.
 9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
@@ -444,5 +458,9 @@ You can also exclude or send only those logs that match a specific pattern by us
 [71]: /integrations/amazon-documentdb/#send-logs-to-datadog
 [72]: /integrations/amazon-vpn/#enable-logging
 [73]: /integrations/amazon_route53/#enable-route53-resolver-query-logging
+[74]: /integrations/amazon-iot/
+[75]: /integrations/amazon-iot/#enable-logging
 [74]: /integrations/amazon-bedrock/
 [75]: /integrations/amazon-pcs/
+[76]: /integrations/amazon_glue/
+[77]: /integrations/amazon_glue/#log-collection

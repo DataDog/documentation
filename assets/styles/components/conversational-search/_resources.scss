@@ -1,0 +1,213 @@
+// Inline reference chips
+.conv-search-source-ref-wrap {
+    position: relative;
+    display: inline;
+}
+
+.conv-search-source-ref-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border: 1px solid rgba(231, 231, 231, 0.883);
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.04);
+    color: #71717a;
+    cursor: pointer;
+    vertical-align: baseline;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    position: relative;
+    top: -1px;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.10);
+        color: #3f3f46;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba(0, 0, 0, 0.12);
+        outline-offset: 1px;
+    }
+}
+
+.conv-search-source-ref-number {
+    display: block;
+    text-align: center;
+}
+
+.conv-search-source-tooltip {
+    position: absolute;
+    z-index: 100;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    max-width: 300px;
+    padding: 10px 14px;
+    border: 1px solid $conv-search-border;
+    border-radius: 10px;
+    background: $conv-search-bg;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+    display: none;
+    pointer-events: auto;
+
+    // Invisible bridge above tooltip to keep hover alive during mouse travel
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        height: 10px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 8px;
+        height: 8px;
+        background: $conv-search-bg;
+        border-left: 1px solid $conv-search-border;
+        border-top: 1px solid $conv-search-border;
+        z-index: 1;
+    }
+
+    &.open {
+        display: block;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4;
+        word-break: break-word;
+
+        &::before {
+            content: '↗';
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: rgba($conv-search-purple, 0.08);
+            color: $conv-search-purple;
+            font-size: 12px;
+        }
+
+        &:hover {
+            color: $conv-search-purple;
+        }
+    }
+}
+
+.conv-search-sources {
+    margin-top: 20px;
+    padding-top: 0;
+}
+
+.conv-search-sources-title {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $conv-search-text-muted;
+    letter-spacing: 0.02em;
+}
+
+.conv-search-sources-cards {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+
+    &::-webkit-scrollbar {
+        height: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.08);
+        border-radius: 2px;
+    }
+}
+
+.conv-search-source-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    width: 240px;
+    min-width: 240px;
+    border: 1px solid $conv-search-border;
+    border-radius: 10px;
+    background: $conv-search-bg;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+        border-color: rgba($conv-search-purple, 0.35);
+    }
+
+    a {
+        flex: 1;
+        min-width: 0;
+        color: inherit;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
+    }
+}
+
+.conv-search-source-card-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    color: #bbb;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.conv-search-source-card-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.06);
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 22px;
+}
