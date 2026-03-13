@@ -1,0 +1,83 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "ocsf-mapper-processor",
+                "include": "service:my-service",
+                "mappings": [
+                  {
+                    "include": "source:custom",
+                    "mapping": {
+                      "mapping": [
+                        {
+                          "default": "",
+                          "dest": "time",
+                          "source": "timestamp"
+                        },
+                        {
+                          "default": "",
+                          "dest": "severity",
+                          "source": "level"
+                        },
+                        {
+                          "default": "",
+                          "dest": "device.type",
+                          "lookup": {
+                            "table": [
+                              {
+                                "contains": "Desktop",
+                                "value": "desktop"
+                              }
+                            ]
+                          },
+                          "source": "host.type"
+                        }
+                      ],
+                      "metadata": {
+                        "class": "Device Inventory Info",
+                        "profiles": [
+                          "container"
+                        ],
+                        "version": "1.3.0"
+                      },
+                      "version": 1
+                    }
+                  }
+                ],
+                "type": "ocsf_mapper"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "OCSF Custom Mapper Pipeline"
+    },
+    "type": "pipelines"
+  }
+}

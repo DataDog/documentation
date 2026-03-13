@@ -6,6 +6,8 @@ type: multi-code-lang
 
 This page describes configuration options that behave consistently across all languages. To view these common configuration options, see [Common configuration options](#common-configuration-options).
 
+{{% apm-config-visibility %}}
+
 For configuration options specific to your programming language, choose your language from the options below:
 
 {{< partial name="apm/apm-compatibility.html" >}}
@@ -243,7 +245,7 @@ This feature only applies to baggage extracted from incoming HTTP headers. Bagga
   - To disable this feature, set the value to an empty string.
 
 
-[1]: /developers/community/libraries/#apm-tracing-client-libraries
+[1]: /extend/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/

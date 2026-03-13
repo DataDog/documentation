@@ -25,7 +25,7 @@ Custom tags and measures work with the following CI providers:
 - Buildkite
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
-- GitHub.com (SaaS): For adding tags and measures to GitHub jobs, see the [section below](#add-tags-and-measures-to-github-jobs).
+- GitHub.com (SaaS)
 - Jenkins: For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
 - Azure DevOps Pipelines
 
@@ -91,13 +91,20 @@ DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci measure --level job -
 
 To create a measure, click the gear icon next to a measures name on the [Pipeline Executions page][4] and click **Create Measure**.
 
-## Add tags and measures to GitHub jobs
+## Troubleshooting
 
+### Limitations
 
-Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+- The maximum amount of tags that can be added to a pipeline or job is 100.
+- The maximum amount of measures that can be added to a pipeline or job is 100.
+- The maximum length of a tag or measure is 300 characters (key + value).
+
+### GitHub Actions custom commands not appearing in Datadog
+
+Older versions of the datadog-ci CLI may require additional setup:
 
 <details>
-<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+<summary><strong>For datadog-ci versions prior to 4.1.1 in GitHub Actions</strong></summary>
 
 If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][7]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
 
@@ -126,12 +133,6 @@ If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does 
         - run: datadog-ci tag ...
     ```
 </details>
-
-## Limitations
-
-- The maximum amount of tags that can be added to a pipeline or job is 100.
-- The maximum amount of measures that can be added to a pipeline or job is 100.
-- The maximum length of a tag or measure is 300 characters (key + value).
 
 ## Further reading
 

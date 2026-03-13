@@ -18,28 +18,38 @@ further_reading:
 
 ## Overview
 
-Governance Console provides a centralized, self-service view of Datadog usage and adoption across your organization. Governance Console helps administrators centrally manage the configuration of a large, multi-team Datadog deployment. For organizations that need centralized governance, strong defaults, and automatic policy enforcement, Governance Console helps establish and maintain an environment compliant with best practices.
+Governance Console provides centralized configuration and governance for multi-team Datadog accounts. It offers a unified view of usage, adoption, and configuration across your Datadog deployment. Governance Console enforces policies, applies default configurations, and transforms your organization's activity into insights for optimization. 
 
-{{< img src="account_management/governance_console/governance-console-overview.png" alt="Governance console screenshot, showing summary page. Top section labeled Total Org Usage contains metrics including Active dashboards (monthly), Active integrations (total), and Active users (monthly)" style="width:100%;" >}}
-
-## Permissions
+### Required permissions
 
 The `governance_console_read` permission controls access to the Governance Console. Users with `governance_console_read` assigned to their role can view the Governance Console UI and associated reporting and insights.
 
 Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metrics_write` permission.
 
-## Explore usage insights
+## Using Governance Console
 
-In the total org usage section, Governance Console displays your organization's use and adoption of Datadog, such as active users and time spent in the product.
+{{< img src="account_management/governance_console/governance-console-overview-3.png" alt="Governance Console Summary page. Shows an Org Usage Summary section with visualizations of key metrics." style="width:100%;" >}}
 
-Governance Console also exposes per-product insights to learn more about usage and configuration trends on key platform features and products. You can learn about your adoption and maturity, and identify interesting trends or adoption behaviors.
+### Summary 
 
-{{< img src="account_management/governance_console/log-management-product.png" alt="Governance console screenshot, showing Log Management usage metrics, including Indexed logs (monthly), Ingested logs (weekly), and Unparsed logs (total)" style="width:100%;" >}}
+The [Summary page][1] displays an overview of your organization's usage of Datadog products.
 
-## Use controls to enforce organization policies
+### Products
 
-Datadog governance controls help you automatically implement policies in your Datadog organization by identifying configuration drift and notifying the accountable users. Each control helps establish and maintain your compliance with best practices.
+The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select **View Details** to see more information about your organization's usage of a particular product, including limits and quotas.
+
+### Controls
+
+Datadog Governance Controls help you automatically implement policies in your Datadog organization by identifying configuration drift and notifying the accountable users. Each control helps establish and maintain your compliance with best practices.
+
+The [Controls page][3] displays a list of controls, for which you can configure detection, notification, and automatic enforcement. See [Governance Console Controls][4] for more information.
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/governance/summary
+[2]: https://app.datadoghq.com/governance/products
+[3]: https://app.datadoghq.com/governance/controls
+[4]: /account_management/governance_console/controls

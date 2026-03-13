@@ -758,6 +758,20 @@
       "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
+  "CreateOrganizationHandle": [
+    {
+      "group": "google_chat_integration",
+      "suffix": "",
+      "description": "Create organization handle returns \"CREATED\" response"
+    }
+  ],
+  "UpdateOrganizationHandle": [
+    {
+      "group": "google_chat_integration",
+      "suffix": "",
+      "description": "Update organization handle returns \"OK\" response"
+    }
+  ],
   "UpdateIPAllowlist": [
     {
       "group": "ip_allowlist",
@@ -857,6 +871,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Create incident notification template returns \"Created\" response"
+    }
+  ],
+  "ImportIncident": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Import an incident returns \"CREATED\" response"
     }
   ],
   "UpdateIncidentIntegration": [
@@ -1212,6 +1233,13 @@
       "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
+  "UpdateInterfaceUserTags": [
+    {
+      "group": "network_device_monitoring",
+      "suffix": "",
+      "description": "Update the tags for an interface returns \"OK\" response"
+    }
+  ],
   "CreatePipeline": [
     {
       "group": "observability_pipelines",
@@ -1239,8 +1267,33 @@
   "ValidatePipeline": [
     {
       "group": "observability_pipelines",
+      "suffix": "_884022323",
+      "description": "Validate a metrics pipeline with opentelemetry source returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "",
       "description": "Validate an observability pipeline returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3024756866",
+      "description": "Validate an observability pipeline with OCSF mapper custom mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3565101276",
+      "description": "Validate an observability pipeline with OCSF mapper library mapping returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1330454428",
+      "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_2899320203",
+      "description": "Validate an observability pipeline with source secret key returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
@@ -2011,6 +2064,13 @@
       "description": "Create degradation returns \"Created\" response"
     }
   ],
+  "CreateMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "_2202276054",
+      "description": "Create maintenance returns \"Created\" response"
+    }
+  ],
   "CreateStatusPage": [
     {
       "group": "status_pages",
@@ -2032,6 +2092,13 @@
       "description": "Update degradation returns \"OK\" response"
     }
   ],
+  "UpdateMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update maintenance returns \"OK\" response"
+    }
+  ],
   "UpdateStatusPage": [
     {
       "group": "status_pages",
@@ -2039,18 +2106,25 @@
       "description": "Update status page returns \"OK\" response"
     }
   ],
-  "SetOnDemandConcurrencyCap": [
+  "CreateSyntheticsNetworkTest": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+      "description": "Create a Network Path test returns \"OK\" response"
     }
   ],
   "CreateSyntheticsSuite": [
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Synthetics: Create a test suite returns \"OK\" response"
+      "description": "Create a test suite returns \"OK\" response"
+    }
+  ],
+  "SetOnDemandConcurrencyCap": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
   "AddTeamHierarchyLink": [
@@ -2105,6 +2179,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update a team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamMembership": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update a user's membership attributes on a team returns \"OK\" response"
     }
   ],
   "UpdateTeamPermissionSetting": [
