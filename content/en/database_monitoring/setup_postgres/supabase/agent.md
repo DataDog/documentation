@@ -1,6 +1,6 @@
 ---
-title: Setting Up Database Monitoring for Supabase
-description: Install and configure Database Monitoring for Supabase.
+title: Setting Up Database Monitoring for Supabase Self-Hosted
+description: Install and configure Database Monitoring for Supabase with the Datadog Agent.
 further_reading:
     - link: '/integrations/postgres/'
       tag: 'Documentation'
