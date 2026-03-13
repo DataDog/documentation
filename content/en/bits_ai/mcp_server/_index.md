@@ -69,6 +69,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating monitors, searching monitor groups, and retrieving monitor templates
 - `apm`: Tools for in-depth [APM][28] trace analysis, span search, Watchdog insights, and performance investigation
+- `cases`: Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `feature-flags`: Tools for managing [feature flags][29], including creating, listing, and updating flags and their environments
@@ -377,6 +378,70 @@ Provides guidance for investigating APM service issues like latency, errors, and
 
 - How should I investigate a latency increase in my API service?
 - Guide me through debugging an error spike in production.
+
+### `search_datadog_cases`
+*Toolset: **cases***\
+Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+
+- Show me all open cases assigned to me.
+- Are there any open P1 cases in the Security Reviews project?
+- Show me all cases opened this week related to the payment service.
+
+### `get_datadog_case`
+*Toolset: **cases***\
+Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+
+- What's the latest update on CASE-1234? Show me the full timeline.
+- Who's working on this case and what progress has been made so far?
+- Pull up the details and all comments for the database migration case.
+
+### `create_datadog_case`
+*Toolset: **cases***\
+Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+
+- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- Open a security review case for the suspicious login activity we found in the logs.
+
+### `update_datadog_case`
+*Toolset: **cases***\
+Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+
+- This issue is now customer-impacting. Escalate CASE-1234 to P1.
+- Mark the database migration case as resolved.
+- Set a due date for end of week on CASE-1234.
+
+### `add_comment_to_datadog_case`
+*Toolset: **cases***\
+Adds a comment to a case's timeline. Comments support markdown formatting.
+
+- Add a note to the case summarizing what we found in the logs and traces.
+- Post an update that the hotfix has been deployed and we're monitoring.
+- Document the root cause analysis findings on this case.
+
+### `link_jira_issue_to_datadog_case`
+*Toolset: **cases***
+
+- Link the Jira ticket for the infrastructure migration to this case so we can track both together.
+- Connect PROJ-456 to the Datadog case so the engineering team has visibility.
+
+### `list_datadog_case_projects`
+*Toolset: **cases***\
+Lists available [Case Management][38] projects with optional filtering by name or key.
+
+- What projects are available in Case Management?
+- Is there a project related to security in Case Management?
+
+### `get_datadog_case_project`
+*Toolset: **cases***\
+Retrieves details for a specific case project by ID.
+
+- What project is this case part of?
+
+### `search_datadog_users`
+*Toolset: **cases***\
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+
+- Find the Datadog user account for jane.doe@example.com.
 
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
@@ -694,3 +759,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [35]: /product_analytics
 [36]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [37]: https://help.datadoghq.com/hc/en-us/requests/new
+[38]: /service_management/case_management/
