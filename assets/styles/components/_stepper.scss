@@ -162,6 +162,7 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     display: flex;
     gap: 8px;
     flex-shrink: 0;
+    margin-right: 4px;
 }
 
 .stepper__btn {
@@ -203,15 +204,34 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     border-radius: 0;
     background-color: transparent;
     color: $brand-primary;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
     line-height: $stepper-circle-size;
+    gap: 4px;
 
     &:hover {
         background-color: transparent;
         color: darken($brand-primary, 10%);
         text-decoration: underline;
+    }
+}
+
+.stepper__btn-icon {
+    display: none;
+    width: 26px;
+    height: 26px;
+    position: relative;
+    top: 6px;
+
+    @media (max-width: 479px) {
+        display: inline-block;
+    }
+}
+
+.stepper__btn-label {
+    @media (max-width: 479px) {
+        display: none;
     }
 }
 
