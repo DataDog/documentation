@@ -1,0 +1,22 @@
+{{/*
+  Registry Config Entry partial
+  Renders a single configuration entry as a <dt>/<dd> pair with an anchor ID and copy-link button.
+  Expects a config object with: name, type, default_value, from_version, aliases, description.
+*/}}
+{{- $anchor := .name | lower | replaceRE "[^a-z0-9]+" "-" -}}
+<dt id="{{ $anchor }}"><code>{{ .name }}</code><a class="registry-copy-link" href="#{{ $anchor }}" title="Copy link" aria-label="Copy link to {{ .name }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></dt>
+<dd>
+  {{- with .type -}}<strong>Type</strong>: <code>{{ . }}</code><br>{{- end -}}
+  {{- with .default_value -}}<strong>Default</strong>: <code>{{ . }}</code><br>{{- end -}}
+  {{- with .from_version -}}<strong>Since</strong>: <code>{{ . }}</code><br>{{- end -}}
+  {{- with .aliases -}}
+    {{- if gt (len .) 0 -}}
+      <strong>Key Aliases</strong>:
+      {{- range $i, $a := . -}}
+        {{- if $i -}}, {{ end -}}
+        <code>{{ $a }}</code>
+      {{- end -}}<br>
+    {{- end -}}
+  {{- end -}}
+  {{ .description | markdownify }}
+</dd>
