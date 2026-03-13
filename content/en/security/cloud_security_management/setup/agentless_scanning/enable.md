@@ -281,7 +281,7 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 1. Select the **GCP projects** you want to scan.
 1. Configure the scanner:
    - If you already have scanners deployed, you can choose to **use an existing scanner** (recommended) or **deploy a new scanner**.
-   - If deploying a new scanner, select the **Scanner project** (must be one of the selected projects) and up to 4 **Scanner regions**. Select the region with the most hosts, and add any additional region with more than 150 hosts.
+   - If deploying a new scanner, select the Scanner project (which must be one of the selected projects). We recommend installing scanners in every region where you have more than 150 hosts
 1. Click **Copy command** to copy the generated command, and click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region(s).
 1. After the command completes, return to the Datadog setup page and click **Done**.
 {{% /collapse-content %}}
