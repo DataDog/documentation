@@ -75,21 +75,21 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
             }
             ```
     - Replace the placeholders:
-        - `<DCE_RESOURCE_ID>` with the ID of the DCE resource you created in step 2. Run this command to get the DCE resource ID:
+        - `<DCE_RESOURCE_ID>` with the ID of the DCE resource you created in step 2. Run the [az monitor data-collection endpoint show][9] command to get the DCE resource ID. For example:
             ```
             az monitor data-collection endpoint show \
-            --name "obs-pipelines-e2e-tests" \
-            --resource-group obs-pipelines-e2e-tests \
-            --subscription 8c56d827-5f07-45ce-8f2b-6c5001db5c6f \
-            --query "id" --output tsv
+            --name "<DCE_NAME>" \
+            --resource-group <RESOURCE_GROUP> \
+            --subscription <SUBSCRIPTION_ID> \
+            --query "id"
             ```
-        - `<WORKSPACE_RESOURCE_ID>` with the ID of the Logs Analytics Workspace you created in step 3. Run this command to get the Workspace resource ID:
+        - `<WORKSPACE_RESOURCE_ID>` with the ID of the Logs Analytics Workspace you created in step 3. Run the [az monitor log-analytics workspace show][10] command to get the Workspace resource ID. For example:
             ```
             az monitor log-analytics workspace show \
-            --workspace-name "obs-pipelines-e2e-tests" \
-            --resource-group obs-pipelines-e2e-tests \
-            --subscription 8c56d827-5f07-45ce-8f2b-6c5001db5c6f \
-            --query "id" --output tsv
+            --workspace-name "<DCE_NAME>" \
+            --resource-group <RESOURCE_GROUP> \
+            --subscription <SUBSCRIPTION_ID> \
+            --query "id"
             ```
 
     - See [CommonSecurityLog Columns][6] for a full list of `commonsecuritylog` table columns.
@@ -112,6 +112,8 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 [6]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/commonsecuritylog#columns
 [7]: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-ingestion-api-overview#supported-tables
 [8]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/rule?view=azure-cli-latest#az-monitor-data-collection-rule-create
+[9]: https://learn.microsoft.com/en-us/cli/azure/monitor/data-collection/endpoint?view=azure-cli-latest#az-monitor-data-collection-endpoint-show
+[10]: https://learn.microsoft.com/en-us/cli/azure/monitor/log-analytics/workspace?view=azure-cli-latest#az-monitor-log-analytics-workspace-show
 
 {{% /tab %}}
 {{% tab "Custom table" %}}
