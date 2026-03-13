@@ -204,6 +204,7 @@ Closed Jira tickets are green.
 
 In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
+[1]: /incident_response/case_management/
 {{% /tab %}}
 
 {{% tab "ServiceNow" %}}
@@ -214,6 +215,7 @@ Hover over the ServiceNow ticket to see its details, including status, priority,
 
 In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
+[1]: /incident_response/case_management/
 {{% /tab %}}
 
 {{< /tabs >}}
