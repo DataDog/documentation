@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/product_analytics/experimentation/defining_metrics"
+- link: "/experiments/defining_metrics"
   tag: "Documentation"
   text: "Defining Experiment Metrics"
 ---
@@ -87,7 +87,7 @@ After specifying your metrics, you can launch your experiment.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experiments
-[2]: /product_analytics/experimentation/defining_metrics
-[3]: /product_analytics/experimentation/minimum_detectable_effect
+[2]: /experiments/defining_metrics
+[3]: /experiments/minimum_detectable_effect
 [4]: /getting_started/feature_flags/
-[5]: /product_analytics/experimentation/reading_results
+[5]: /experiments/reading_results

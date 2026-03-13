@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/product_analytics/experimentation/reading_results"
+- link: "/experiments/reading_results"
   tag: "Documentation"
   text: "Reading Experiment Results"
 ---

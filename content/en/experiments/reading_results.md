@@ -50,4 +50,4 @@ Subject level properties are based on attributes at the initial time of exposure
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /product_analytics/experimentation/
+[1]: /experiments/
