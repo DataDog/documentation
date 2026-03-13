@@ -699,6 +699,22 @@ For each cloud account that you would like to receive recommendations for:
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
 
+## Recommendation statuses
+
+Assign a status to each recommendation to track cost optimization progress across your teams. Statuses persist when recommendations regenerate daily. You don't need to re-triage the same recommendations.
+
+| Status | Description |
+|--------|-------------|
+| Open | (Default) The recommendation has not been triaged. |
+| In Progress | Work is underway to address this recommendation. |
+| Completed | The recommended action has been taken or is no longer relevant. |
+| Dismissed | No work is planned for this recommendation over the time frame specified when dismissing. |
+
+### Change a recommendation status
+
+1. Click a recommendation in the [**Cloud Cost Recommendations**][1] list to open the side panel.
+1. Use the status dropdown to select a new status.
+
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
