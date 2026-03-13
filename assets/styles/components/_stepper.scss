@@ -151,13 +151,17 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     padding: 8px 0 16px;
 }
 
+.stepper__step-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+}
+
 .stepper__viz-controls {
-    position: absolute;
-    top: $stepper-title-pad-top;
-    right: 0;
-    z-index: 2;
     display: flex;
     gap: 8px;
+    flex-shrink: 0;
 }
 
 .stepper__btn {
