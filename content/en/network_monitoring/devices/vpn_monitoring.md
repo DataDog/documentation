@@ -92,6 +92,8 @@ network_devices:
 
 ## Viewing VPN tunnels
 
+<!-- TODO: Waiting to hear back from PM on how a user accesses VPN Tunnel information now -->
+
 To view VPN tunnels in the UI:
 
 1. Select a monitored device in NDM that has VPN tunnels.

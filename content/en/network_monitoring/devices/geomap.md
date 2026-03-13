@@ -66,7 +66,7 @@ Configure device locations using the following steps:
 
 After devices are added to the map, you can zoom in to click on an individual device or select a device cluster to view all devices in that location. Clicking on any device opens the NDM device view with detailed device information, including status, tags, and key metrics.
 
-{{< img src="network_device_monitoring/geomap/geomap_device_cluster_2.mp4" alt="A user zooming in on the map, clicking on a device cluster, and opening the NDM device view of a device that is unreachable." video=true >}}
+{{< img src="network_device_monitoring/geomap/geomap_device_cluster_3.mp4" alt="A user zooming in on the map, clicking on a device cluster, and opening the NDM device view of a device." video=true >}}
 
 ## Troubleshooting
 

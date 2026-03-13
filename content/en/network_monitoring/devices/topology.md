@@ -23,7 +23,7 @@ further_reading:
 
 The [Network Device Topology Map][2] uses [Cloudcraft][7] diagrams to provide an interactive visual representation of your network's physical connections. The map automatically discovers and displays devices, their interfaces, and the relationships between them. This visualization helps you identify issues in your network devices, understand their upstream and downstream impacts, troubleshoot connectivity problems, and gain insights into how traffic flows through your infrastructure.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_3.mp4" alt="A user adds team, service, and vendor tags to the network device topology map, then selects a device to open the NDM device view." video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_4.mp4" alt="A user adds team, service, and vendor tags to the network device topology map, then selects a device to open the NDM device view." video="true" >}}
 
 ## Setup
 
@@ -70,25 +70,24 @@ In addition to showing an overview of your network's physical connections, the D
 
 Click the **Metrics** tab in the NDM device view to see all metrics collected for the device. You can star metrics you care about for quick access, view key metrics and Datadog-highlighted metrics, and browse all additional metrics.
 
-<!-- TODO: Screenshot - NDM device view Metrics tab showing starred and key metrics -->
+{{< img src="/network_device_monitoring/network_topology_map/metrics_2.png" alt="The NDM device view with the Metrics tab open, showing starred and key metrics." style="width:100%;" >}}
 
 ### Traffic
 
 Click the **Traffic** tab to view traffic trends, throughput changes, and a Sankey diagram of traffic flows. You can drill down into traffic at the interface level and jump to [NetFlow Monitoring][1] for further investigation.
 
-<!-- TODO: Screenshot - NDM device view Traffic tab with Sankey diagram -->
+{{< img src="/network_device_monitoring/network_topology_map/traffic.png" alt="The NDM device view with the Traffic tab open, showing a Sankey diagram of traffic flows." style="width:100%;" >}}
 
 ### Events
 
 Click the **Events** tab to view Syslog messages and SNMP traps in a single, combined view. Use filters to narrow results by event type. Spikes in event volume are visually highlighted, making it easier to identify and investigate errors.
 
-<!-- TODO: Screenshot - NDM device view Events tab -->
+{{< img src="/network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
 ### Link details
 
 Click on a link between devices to explore connection details including traffic volume, bandwidth utilization, errors, and discards, with options to view the data in [Device Overview][10] or [NetFlow Monitoring][11].
 
-<!-- TODO: Replace video - needs new NDM device view video instead of side panel -->
 {{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="A user clicking on a link between devices to view additional link details." video="true" >}}
 
 ### View flow details

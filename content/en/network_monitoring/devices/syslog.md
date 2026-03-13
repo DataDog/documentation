@@ -188,8 +188,7 @@ After your network devices are configured and the Datadog Agent is running, you 
     - Select a device that is configured to send Syslog messages.
     - In the NDM device view, click the **Events** tab. Syslog messages and SNMP traps are combined in a single view. Use the filters to narrow results by event type.
 
-    <!-- TODO: Screenshot - NDM device view Events tab filtered to Syslog -->
-    {{< img src="network_device_monitoring/syslog/syslog_events_tab.png" alt="The NDM device view Events tab, filtered to display Syslog messages." style="width:100%;" >}}
+    {{< img src="network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
 ## Further Reading
 
