@@ -70,7 +70,6 @@ Grant the following roles to the integration user so that Datadog can read ESS l
 |------|---------|
 | ESS Monitor | Read ESS job requests and job logs |
 | Integration Specialist | Access ERP Integration REST endpoints |
-| ORA_FND_READ_ONLY_ACCESS_ABSTRACT | Read-only access across Fusion functional areas |
 | Internal Auditor | Read-only access to audit data |
 
 ## Configure the Datadog tile
