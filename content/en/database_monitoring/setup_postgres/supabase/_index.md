@@ -67,5 +67,5 @@ After setup, navigate to the [Database Monitoring][2] page in Datadog to see you
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/integrations/supabase
+[1]: https://app.datadoghq.com/integrations/supabase-cloud
 [2]: https://app.datadoghq.com/databases
