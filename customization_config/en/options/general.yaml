@@ -507,3 +507,39 @@ options:
 
 - label: Elixir
   id: elixir
+
+- id: real_time_rule
+  label: Real-time rule
+
+- id: scheduled_rule
+  label: Scheduled rule
+
+- id: historical_job
+  label: Historical job
+
+- id: new_value
+  label: New value
+
+- id: anomaly
+  label: Anomaly
+
+- id: content_anomaly
+  label: Content anomaly
+
+- id: impossible_travel
+  label: Impossible travel
+
+- id: third_party
+  label: Third party
+
+- id: signal_correlation
+  label: Signal correlation
+
+- id: sequence
+  label: Sequence
+
+- id: event_query
+  label: Event Query
+
+- id: sql
+  label: SQL
