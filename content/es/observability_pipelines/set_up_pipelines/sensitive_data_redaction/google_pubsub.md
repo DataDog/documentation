@@ -1,79 +1,29 @@
 ---
-aliases:
-- /es/observability_pipelines/set_up_pipelines/archive_logs/google_pub_sub/
 disable_toc: false
-title: Archivar logs para Google Pub/Sub
+title: Redacción de datos sensibles para Google Pub/Sub
 ---
 
 ## Información general
 
-Configura Google Pub/Sub para que el worker de Observability Pipelines formatee los logs recopilados en un formato que Datadog pueda volver a usar antes de enrutarlos a los archivos de log de Datadog.
+Los datos confidenciales, como números de tarjeta de crédito, números de ruta bancaria y claves de API, pueden revelarse involuntariamente en tus logs, lo que puede exponer a tu organización a riesgos financieros y de privacidad.
 
-{{% observability_pipelines/use_case_images/archive_logs %}}
+Utiliza Observability Pipelines para identificar, etiquetar y, de manera opcional, redactar o codificar información confidencial antes de enviar los logs a diferentes destinos y fuera de tu infraestructura. Puedes utilizar reglas de análisis predefinidas para detectar patrones comunes, como direcciones de correo electrónico, números de tarjeta de crédito, claves de API, tokens de autorización y más. También puedes crear reglas de análisis personalizadas con patrones de expresiones regulares para buscar información confidencial.
+
+{{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
 
 Este documento te guiará a través de los siguientes pasos:
-1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
-1. [Configuración de un archivo de log](#configure-a-log-archive)
+1. [Requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
 
 ## Requisitos previos
 
 {{% observability_pipelines/prerequisites/google_pubsub %}}
 
-## Configurar los archivos de log
-
-Si ya tienes un archivo de log de Datadog configurado para Observability Pipelines, pasa a [Configurar Observability Pipelines](#set-up-observability-pipelines).
-
-A fin de configurar el archivo de log de Datadog, debes tener instalada la integración de Datadog para tu proveedor de nube. Consulta la documentación de la [integración de AWS][1], [Google Cloud Platform][2] y la [integración de Azure][3] para obtener más información.
-
-Selecciona el proveedor de nube que usas para archivar tus logs.
-
-{{% collapse-content title="Amazon S3" level="h4" %}}
-{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
-
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
-
-{{% /tab %}}
-{{% tab "Amazon EKS" %}}
-
-{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
-
-{{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
-
-{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Google Cloud Storage" level="h4" %}}
-
-{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
-
-{{% /collapse-content %}}
-{{% collapse-content title="Azure Storage" level="h4" %}}
-
-{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
-
-{{% /collapse-content %}}
-
 ## Configurar Observability Pipelines
 
-1. Navega hasta [Observability Pipelines][4].
-1. Selecciona la plantilla **Archive Logs** (Archivar logs) para crear un pipeline nuevo.
-1. Selecciona **Google Pub/Sub** como fuente.
+1. Ve a [Observability Pipelines][1].
+1. Selecciona la plantilla **Sensitive Data Redactions** (Redacción de datos sensibles) para crear un nuevo pipeline.
+1. Selecciona la fuente **Google Pub/Sub**.
 
 ### Configurar la fuente
 
@@ -119,7 +69,9 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
+{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
+
+Para configurar el destino, sigue las instrucciones del proveedor de la nube que utilices para archivar tus logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -195,7 +147,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{% observability_pipelines/processors/add_processors %}}
+{{% observability_pipelines/processors/add_processors_sds %}}
 
 {{< tabs >}}
 {{% tab "Add env vars" %}}
@@ -208,7 +160,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
-{{% tab "Procesador personalizado" %}}
+{{% tab "Procesador personalizado" %}} 
 
 {{% observability_pipelines/processors/custom_processor %}}
 
@@ -449,7 +401,4 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /es/integrations/amazon_web_services/#setup
-[2]: /es/integrations/google_cloud_platform/#setup
-[3]: /es/integrations/azure/#setup
-[4]: https://app.datadoghq.com/observability-pipelines
+[1]: https://app.datadoghq.com/observability-pipelines
