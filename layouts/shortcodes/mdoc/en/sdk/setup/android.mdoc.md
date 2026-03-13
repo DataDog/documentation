@@ -560,7 +560,7 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
    {{% /tab %}}
    {{< /tabs >}}
 
-**Notes**:
+**Known limitations**:
 
 - Tracing headers are not propagated for redirected requests due to Cronet API limitations.
 - Retries cannot be instrumented.
@@ -595,7 +595,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder("applicationId")
                  }
              })
              .build();
- 
+
 ```
 
 {% /tab %}

@@ -861,7 +861,7 @@ If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for 
    {{% /tab %}}
    {{< /tabs >}}
 
-This creates a span around each request processed by the `CronetEngine` (matching the provided hosts), with all the relevant information automatically filled (URL, method, status code, error), and propagates the tracing information to your backend.
+This creates a span around each request processed by the `CronetEngine` that matches the provided hosts. All relevant information is automatically filled (URL, method, status code, error), and tracing information is propagated to your backend.
 
 #### Tracing redirects
 
