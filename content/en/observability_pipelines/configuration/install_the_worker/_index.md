@@ -581,10 +581,12 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 ## Upgrade the Worker
 
-To upgrade the Worker to the latest version, run the following command:
+To upgrade the Worker to the latest version:
 
 {{< tabs >}}
 {{% tab "APT" %}}
+
+Run this command:
 
 ```
 sudo apt-get install --only-upgrade observability-pipelines-worker
@@ -593,9 +595,24 @@ sudo apt-get install --only-upgrade observability-pipelines-worker
 {{% /tab %}}
 {{% tab "RPM" %}}
 
+Run this command:
+
 ```
 sudo yum install --only-upgrade observability-pipelines-worker
 ```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+1. Pin to a specific version and upgrade in your `values.yaml` file.
+2. Use the chart's default image tag (upgrade by chart version).
+    - If you explicitly set `image.tag` in your `values.yaml` file, your deployment continues using that image tag until you update it.
+    - If you do not set `image.tag`, the deployment uses the chart's default image tag. To get the latest chart defaults, update the repo and upgrade the release along with any overrides you might have been using prior:
+        ```
+        helm repo update
+        helm upgrade --install opw datadog/observability-pipelines-worker -f <your-values-file>.yaml
+        ```
+**Note**: To simplify upgrades, keep all of your custom settings in your own values file and override only the values you need. This makes it easier to re-run `helm upgrade` without having to reapply multiple manual overrides.
 
 {{% /tab %}}
 {{< /tabs >}}
