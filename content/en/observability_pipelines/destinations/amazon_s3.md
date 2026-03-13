@@ -68,7 +68,12 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
     1. Enter the ARN of the IAM role you want to assume.
     1. Optionally, enter the assumed role session name and external ID.
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+#### Optional settings
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 #### Example destination and log archive setup
 

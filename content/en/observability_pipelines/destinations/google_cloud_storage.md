@@ -40,7 +40,12 @@ Set up the Google Cloud Storage destination and its environment variables when y
     - See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Optionally, click **Add Header** to add metadata.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+#### Optional settings
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 
