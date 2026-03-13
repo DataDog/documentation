@@ -277,11 +277,12 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 1. Expand the account containing the project where you want to deploy the Agentless scanner.
 1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
-1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled.
-1. Create an **Application key**.
+1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
 1. Select the **GCP projects** you want to scan.
-1. Configure the **Scanner project** (the project where the scanner will be deployed, which must be one of the selected projects) and **Scanner region**.
-1. Click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the displayed command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region.
+1. Configure the scanner:
+   - If you already have scanners deployed, you can choose to **use an existing scanner** (recommended) or **deploy a new scanner**.
+   - If deploying a new scanner, select the **Scanner project** (must be one of the selected projects) and up to 4 **Scanner regions**. Select the region with the most hosts, and add any additional region with more than 150 hosts.
+1. Click **Copy command** to copy the generated command, and click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region(s).
 1. After the command completes, return to the Datadog setup page and click **Done**.
 {{% /collapse-content %}}
 {{% collapse-content title="Terraform" level="h3" id="gcp-terraform-setup" %}}
@@ -381,7 +382,7 @@ DD_API_KEY="<DD_API_KEY>" \
 DD_APP_KEY="<DD_APP_KEY>" \
 DD_SITE="<DD_SITE>" \
 SCANNER_PROJECT="<SCANNER_PROJECT>" \
-SCANNER_REGIONS="<SCANNER_REGION>" \
+SCANNER_REGIONS="<SCANNER_REGIONS>" \
 PROJECTS_TO_SCAN="<PROJECTS>" \
 python3 gcp_agentless_setup.pyz destroy
 ```
