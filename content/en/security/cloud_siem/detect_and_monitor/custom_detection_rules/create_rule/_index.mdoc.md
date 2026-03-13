@@ -14,7 +14,17 @@ content_filters:
 
 ## Overview
 
+{% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}
 Real-time detection rules continuously monitors and analyzes incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
+{% /if %}
+{% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}
+Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
+
+Scheduled rules complement real-time monitoring by ensuring periodic, in-depth analysis of logs using [calculated fields][7].
+{% /if %}
+{% if equals($cloud_siem_detection_rule_type, "historical_job") %}
+Historical jobs are one-time executable queries on historical logs used to backtest detection rules and assess their effectiveness on past data. The generated job results are lightweight versions of signals providing information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results needing immediate action into signals.
+{% /if %}
 
 ## Create a rule
 
@@ -33,11 +43,11 @@ Real-time detection rules continuously monitors and analyzes incoming logs for s
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/threshold_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/threshold_query.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -47,11 +57,11 @@ Real-time detection rules continuously monitors and analyzes incoming logs for s
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/new_value_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/new_value_query.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -62,11 +72,11 @@ Real-time detection rules continuously monitors and analyzes incoming logs for s
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 1. (Optional) In the **Count** dropdown menu, select attributes whose unique values you want to count during the specified time frame.
-   {% partial file="cloud_siem/anomaly_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/anomaly_query.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -76,11 +86,11 @@ Real-time detection rules continuously monitors and analyzes incoming logs for s
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/content_anomaly_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/content_anomaly_query.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -93,11 +103,11 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/impossible_travel_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/impossible_travel_query.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -109,7 +119,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over a 24-hour roll-up period.
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Add Root Query** and repeat steps 2-4 to add and test additional queries.
 1. Click **Save Rule**.
 {% /if %}
@@ -176,13 +186,13 @@ Choose the query language you want to use.
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/threshold_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/threshold_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /collapse-content %}
 {% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}
@@ -218,13 +228,13 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/new_value_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/new_value_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -235,13 +245,13 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/anomaly_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/anomaly_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -252,13 +262,13 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/content_anomaly_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/content_anomaly_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -272,13 +282,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/impossible_travel_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/impossible_travel_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -291,11 +301,11 @@ All logs and events matching this query are analyzed for potential impossible tr
 1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over a 24-hour roll-up period.
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Add Root Query** and repeat steps 3-7 to add and test additional queries.
 1. Click **Save Rule**.
 {% /if %}
@@ -320,13 +330,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/threshold_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/threshold_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -336,13 +346,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/new_value_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/new_value_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -352,13 +362,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/anomaly_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/anomaly_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -368,13 +378,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/content_anomaly_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/content_anomaly_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -387,13 +397,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
-   {% partial file="cloud_siem/impossible_travel_query.mdoc.md" /%}
+   {% partial file="security/cloud_siem/impossible_travel_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
 {% /if %}
 
@@ -405,11 +415,11 @@ All logs and events matching this query are analyzed for potential impossible tr
 1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
 1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over a 24-hour roll-up period.
 1. (Optional) To create calculated fields that transform your logs during query time:
-   {% partial file="cloud_siem/add_calculated_fields.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_calculated_fields.mdoc.md" /%}
 1. (Optional) Filter logs using reference tables:
-   {% partial file="cloud_siem/add_reference_tables.mdoc.md" /%}
+   {% partial file="security/cloud_siem/add_reference_tables.mdoc.md" /%}
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
-   {% partial file="cloud_siem/unit_testing.mdoc.md" /%}
+   {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Add Root Query** and repeat steps 2-6 to add and test additional queries.
 1. Click **Save Rule**.
 {% /if %}
@@ -420,330 +430,330 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_threshold.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_threshold.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-rt-threshold %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-rt-threshold %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-rt-threshold %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND new value -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Forget value {% #forget-value-rt-new-value%}
 
-{% partial file="cloud_siem/forget_value.mdoc.md" /%}
+{% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
 #### 2. Rule multi-triggering behavior {% #rule-multi-triggering-rt-new-value%}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 3. Decrease severity for non-production environments {% #decrease-severity-new-value%}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 4. Enable optional group by {% #enable-group-by-rt-new-value%}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND anomaly -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/anomaly_notification.png" alt="Set your severity, anomaly percentile, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_anomaly.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_anomaly.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-rt-anomaly %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-rt-anomaly %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-rt-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND content anomaly -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_content_anomaly.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_content_anomaly.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Content anomaly detection {% #content-anomaly-rt-content-anomaly %}
 
-{% partial file="cloud_siem/content_anomaly_options.mdoc.md" /%}
+{% partial file="security/cloud_siem/content_anomaly_options.mdoc.md" /%}
 
 #### 2. Rule multi-triggering behavior {% #rule-multi-triggering-rt-content-anomaly %}
 
-{% partial file="cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
 
 #### 3. Decrease severity for non-production environments {% #decrease-severity-rt-content-anomaly %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 4. Enable optional group by {% #enable-group-by-rt-content-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND impossible travel -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-rt-impossible-travel %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-rt-impossible-travel %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-rt-impossible-travel %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND third party -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/condition_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_third_party.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_third_party.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Decrease severity for non-production environments {% #decrease-severity-rt-third-party %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 2. Enable optional group by {% #enable-group-by-rt-third-party %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND sequence -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "sequence")) %}
 #### 1. Rule multi-triggering {% #rule-multi-triggering-rt-sequence %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-rt-sequence %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-rt-sequence %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND signal correlation -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "signal_correlation")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_then_operator.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_then_operator.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-rt-signal-correlation %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-rt-signal-correlation %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND threshold -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_threshold.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_threshold.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-schedule-threshold %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-schedule-threshold %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-schedule-threshold %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND new value -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Forget value {% #forget-value-scheduled-new-value %}
 
-{% partial file="cloud_siem/forget_value.mdoc.md" /%}
+{% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
 #### 2. Rule multi-triggering behavior {% #rule-multi-triggering-scheduled-new-value %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 3. Decrease severity for non-production environments {% #decrease-severity-scheduled-new-value %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 4. Enable optional group by {% #enable-group-by-scheduled-new-value %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
 #### 5. Enable instantaneous baseline {% #enable-instantaneous-baseline-new-value %}
 
-{% partial file="cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND anomaly -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-scheduled-anomaly %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-scheduled-anomaly %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-scheduled-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND content anomaly -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_content_anomaly.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_content_anomaly.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Content anomaly detection {% #content-anomaly-scheduled-content-anomaly %}
 
-{% partial file="cloud_siem/content_anomaly_options.mdoc.md" /%}
+{% partial file="security/cloud_siem/content_anomaly_options.mdoc.md" /%}
 
 #### 2. Rule multi-triggering behavior {% #rule-multi-triggering-scheduled-content-anomaly %}
 
-{% partial file="cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
 
 #### 3. Decrease severity for non-production environments {% #decrease-severity-scheduled-content-anomaly %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 4. Enable optional group by {% #enable-group-by-scheduled-content-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND impossible travel -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-scheduled-impossible-travel %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-scheduled-impossible-travel %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-scheduled-impossible-travel %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND third party -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/condition_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_third_party.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_third_party.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Decrease severity for non-production environments {% #decrease-severity-scheduled-third-party %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
 #### 2. Enable optional group by {% #enable-group-by-scheduled-third-party %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND signal correlation -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "signal_correlation")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_then_operator.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_then_operator.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Rule multi-triggering {% #rule-multi-triggering-scheduled-signal-correlation %}
 
-{% partial file="cloud_siem/rule_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
 #### 2. Decrease severity for non-production environments {% #decrease-severity-scheduled-signal-correlation %}
 
-{% partial file="cloud_siem/enable_decrease_severity.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND threshold -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
 {% img src="security/security_monitoring/detection_rules/threshold_historical_condition.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
-{% partial file="cloud_siem/set_conditions_threshold.mdoc.md" /%}
+{% partial file="security/cloud_siem/set_conditions_threshold.mdoc.md" /%}
 
 ### Other parameters
 
 #### 1. Job multi-triggering {% #job-multi-triggering-threshold %}
 
-{% partial file="cloud_siem/job_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
 #### 2. Enable optional group by {% #enable-group-by-historical-threshold %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND new value -->
@@ -753,19 +763,19 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 #### 1. Forget value {% #forget-value-historical-new-value %}
 
-{% partial file="cloud_siem/forget_value.mdoc.md" /%}
+{% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
 #### 2. Job multi-triggering behavior {% #job-multi-triggering-historical-new-value %}
 
-{% partial file="cloud_siem/job_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-historical-new-value %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
 #### 4. Enable instantaneous baseline {% #enable-instantaneous-baseline-new-value %}
 
-{% partial file="cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND anomaly -->
@@ -774,11 +784,11 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 #### 1. Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
 
-{% partial file="cloud_siem/job_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
 #### 2. Enable optional group by {% #enable-group-by-historical-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND content anomaly -->
@@ -801,15 +811,15 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 #### 1. Content anomaly detection {% #content-anomaly-historical-content-anomaly %}
 
-{% partial file="cloud_siem/content_anomaly_options.mdoc.md" /%}
+{% partial file="security/cloud_siem/content_anomaly_options.mdoc.md" /%}
 
 #### 2. Job multi-triggering behavior {% #job-multi-triggering-historical-content-anomaly %}
 
-{% partial file="cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
+{% partial file="security/cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
 
 #### 3. Enable optional group by {% #enable-group-by-historical-content-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND impossible travel -->
@@ -818,11 +828,11 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 #### 1. Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
 
-{% partial file="cloud_siem/job_multi_triggering.mdoc.md" /%}
+{% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
 #### 2. Enable optional group by {% #enable-group-by-historical-anomaly %}
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND third party -->
@@ -835,7 +845,64 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-{% partial file="cloud_siem/enable_group_by.mdoc.md" /%}
+{% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+{% /if %}
+
+<!-- Scheduled rule only: Add custom schedule section -->
+{% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}
+## Add custom schedule
+
+You can set specific evaluation time and how often it runs by creating a [custom schedule](#create-custom-schedule) or using a [recurrence rule (RRULE)](#use-rrule).
+
+### Create custom schedule
+
+{% img src="security/security_monitoring/detection_rules/custom_schedule.png" alt="The Use custom schedule section with an example" style="width:100%;" /%}
+
+1. Select **Create Custom Schedules**.
+1. Set how often and at what time you want the rule to run.
+
+### Use RRULE
+
+{% img src="security/security_monitoring/detection_rules/rrule_example.png" alt="The Use RRULE section with an example" style="width:100%;" /%}
+
+Recurrence rule (RRULE) is a property name from the [iCalendar RFC][8], which is the standard for defining recurring events. Use the [official RRULE generator][9] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases.
+
+For example, if the RRULE is:
+
+```text
+FREQ=DAILY;INTERVAL=1;BYHOUR=6;BYMINUTE=0
+```
+
+The example RRULE runs the scheduled rule once a day at 6:00 AM.
+
+{% alert level="info" %}
+- Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`).
+- Evaluation frequencies must be a day or longer. For shorter evaluation frequencies, use the default monitor schedules.
+{% /alert %}
+
+To write a custom RRULE for your detection rule:
+
+1. Select **</> Use RRULE**.
+1. Set the date and time for when you want the rule to start.
+1. Input a [RRULE string][9] to set how often you want the rule to run.
+{% /if %}
+
+<!-- Historical job only: Notify when job is complete section -->
+{% if equals($cloud_siem_detection_rule_type, "historical_job") %}
+## Notify when job is complete
+
+(Optional) Click **Add Recipient** to send notifications upon the completion of job analysis. See [Notification channels][3] for more information.
+{% /if %}
+
+## Describe your playbook
+
+{% partial file="security/security-rule-say-whats-happening.mdoc.md" /%}
+
+<!-- Real-time and scheduled rules: Create a suppression section -->
+{% if or(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}
+## Create a suppression
+
+{% partial file="security/cloud_siem/create_suppression.mdoc.md" /%}
 {% /if %}
 
 [1]: /logs/search_syntax/
@@ -844,3 +911,6 @@ All logs and events matching this query are analyzed for potential impossible tr
 [4]: /security/notifications/rules/
 [5]: /ddsql_reference/
 [6]: https://app.datadoghq.com/security/configuration/datasets
+[7]: /logs/explorer/calculated_fields/
+[8]: https://icalendar.org/rrule-tool.html
+[9]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
