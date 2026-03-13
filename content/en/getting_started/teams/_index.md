@@ -18,7 +18,7 @@ further_reading:
 This guide provides recommendations to Datadog organization administrators on how to use Datadog Teams effectively. It applies to the following situations:
 
 - You want to use Datadog Teams to drive ownership workflows (including routing, visibility, governance, and access), not only as a directory.
-- You already have team data spread across multiple systems. The systems may include IdP groups, SAML attributes, GitHub teams/CODEOWNERS, internal tools, Terraform, spreadsheets, Slack, and others.
+- You already have team data spread across multiple systems. The systems may include Identity Provider (IdP) groups, SAML attributes, GitHub teams/CODEOWNERS, internal tools, Terraform, spreadsheets, or Slack.
 - Your organization wants to adopt Datadog Teams without breaking existing workflows.
 
 This guide does not provide UI instructions. Instead, it focuses on decisions, sequencing, and common failure modes.
@@ -27,7 +27,7 @@ This guide does not provide UI instructions. Instead, it focuses on decisions, s
 
 Datadog Teams helps you create a single model of ownership inside Datadog that can be referenced consistently across products and workflows.
 
-Teams answers the following operational questions:
+Using Teams lets you answer the following operational questions:
 
 - Who owns this service, monitor, or error?
 - After finding the owner, how do you contact them?
@@ -87,10 +87,8 @@ Datadog supports managing or syncing Teams data through the following:
 
 The following sections describe the tradeoffs between the available strategies.
 
-### IdP-driven sync (Okta or Entra)
-
-Use IdP-driven sync if your organization has the following characteristics:
-
+### IdP-driven sync
+You can sync teams from Okta or Entra IdPs. Use IdP-driven sync if your organization has the following characteristics:
 - Your top priority is automatically capturing the accurate membership life cycle, including joiners and leavers.
 - You want IT or the platform team to control team membership
 - You can map groups to real teams without making your team list unmanageably large
@@ -117,10 +115,8 @@ Use SAML mapping to sync Datadog Teams if your organization has the following ch
 #### Best practices
 Use SAML mapping as practical, temporary solution when SCIM team creation isn't available or you want provisioning without building a full pipeline.
 
-### GitHub-driven teams (teams, hierarchy, CODEOWNERS)
-
-Use GitHub to sync Datadog Teams if your organization has the following characteristics:
-
+### GitHub-driven teams
+From GitHub, Datadog Teams can apply GitHub teams, hierarchy, and CODEOWNERS information. Use GitHub to sync Datadog Teams if your organization has the following characteristics:
 - GitHub teams closely reflect your real org structure
 - CODEOWNERS is your best ownership signal and you want Datadog to reflect it
 - You care about hierarchy and nested teams
@@ -139,127 +135,122 @@ Both modes of GitHub provisioning can use CODEOWNERS for richer ownership signal
 #### Best practices
 Use GitHub as your authority for code ownership and hierarchy, while another system remains the authority for identity life cycle.
 
-### API-driven / Terraform management (custom source of truth)
+### API-driven or Terraform management
+Using API endpoints or Terraform to manage teams lets you provide a custom source of truth.
 
-Use the API or Terraform when:
+Use the API or Terraform if your organization has the following characteristics:
+- You have internal tools that model teams
+- You need custom logic (for example: merging, aliasing, special naming)
+- You want to centrally control team structure and membership and feed different systems, including Datadog included
 
-- You have internal tools that already model teams
-- You need custom logic (merge, aliasing, special naming)
-- You want to centrally control Team structure and membership and feed different systems (Datadog included)
+#### Limitations
+When manually provisioning teams through the API or Terraform, you must define and maintain your own desired state to avoid drift.
 
-Tradeoffs:
-
-- You must define and maintain your own "desired state" to avoid drift.
-
-**Best use:** a stable backbone for platform teams, metadata standards, and controlled rollout.
+#### Best practices
+Use API endpoints or Terraform to configure a stable backbone for platform teams, metadata standards, and controlled rollout.
 
 ## Recommended starting paths
 
-Pick a path that matches your *current* reality. You can change later, but starting cleanly matters.
+Select the path that best matches your organization's existing infrastructure. As your setup matures, you can make adjustments.
 
-### Path 1: Start with your IdP, then enrich with GitHub
+### Start with your IdP, then enrich with GitHub
 
-Choose this if you want a clean membership life cycle first.
+Use this path to establish a clean membership life cycle before adding code ownership signals.
 
-1. Sync or map teams from Okta, Entra, or SAML (membership baseline).
-2. Treat membership as managed—avoid manual overrides that get reverted.
-3. Add GitHub connections for ownership enrichment (CODEOWNERS, repo signals) after the team list is stable.
+1. Sync or map teams from Okta, Entra, or SAML to establish a membership baseline.
+2. Treat membership as managed, and avoid manual overrides that can be reverted.
+3. After the team list is stable, add GitHub connections (for example, CODEOWNERS or repo signals) to enrich ownership information.
 
-**Why this works:** you stabilize "who is on the team" first, then layer "what they own."
+This approach stabilizes team membership before layering in ownership data.
 
-### Path 2: Start with GitHub when code ownership is the driver
+### Start with GitHub when code ownership is the driver
 
-Choose this if CODEOWNERS is already how you route issues/ownership.
+Use this path if CODEOWNERS is already how your organization routes issues and ownership.
 
-1. Link Datadog Teams to GitHub teams (initially often by name/handle match).
+1. Link Datadog Teams to GitHub teams (usually by matching handle to name).
 2. Use CODEOWNERS to enrich ownership signals in Datadog.
 3. Add IdP-driven membership later if you need life cycle correctness.
 
-**Why this works:** you get immediate value for ownership routing, even if your IdP groups aren't ready.
+This approach delivers immediate value for ownership routing, independent of IdP group readiness.
 
-### Path 3: Start with Terraform for platform teams (then expand outward)
+### Start with Terraform for platform teams, then expand outward
 
-Choose this if your platform team needs tight control and auditability.
+Use this path if your platform team requires tight control and auditability.
 
-1. Define a small set of foundational teams (platform, SRE, security, shared services).
+1. Define a small set of foundational teams (for example, platform, SRE, security, and shared services).
 2. Use Terraform to establish stable identifiers and required metadata standards.
-3. Expand to product teams through IdP or GitHub after conventions are proven.
+3. Expand to product teams through IdP or GitHub after people are comfortable with the foundational teams.
 
-**Why this works:** you prevent the "wild west" phase where everyone creates teams inconsistently.
+This approach enforces consistency before broader adoption, reducing the risk of fragmented or conflicting team definitions.
 
-## Common pitfalls and how to avoid them
+## Common pitfalls
 
-### Pitfall 1: Conflicting sources fighting over the same field
+### Conflicting sources managing the same field
 
 Symptoms:
-
-- Membership "snaps back" after you edit it
-- Teams duplicate ("platform" vs "platform_github")
-- Ownership points to one team name while identity points to another
+- Membership "snaps back" after manual edits
+- Duplicate teams appear (for example, "platform" and "platform_github")
+- Ownership and identity point to different team names
 
 How to avoid:
+- Assign clear ownership per field:
+  - IdP owns membership
+  - GitHub owns code ownership and hierarchy
+  - Terraform or the API owns metadata standards
+- When combining sources, use enrichment. Do not co-manage the same attribute across multiple sources.
 
-- Decide who owns what:
-  - **IdP owns membership**
-  - **GitHub owns code ownership/hierarchy**
-  - **Terraform/API owns metadata standards**
-- When you must combine sources, combine them by **enrichment**, not by co-managing the same attribute.
-
-### Pitfall 2: Over-syncing (turning every group into a team)
+### Over-syncing, or creating a team for every group
 
 Symptoms:
 
-- Hundreds/thousands of Teams with unclear purpose
+- Hundreds or thousands of Datadog Teams without a clear purpose
 - Teams used for permissions leak into ownership workflows
 
 How to avoid:
+- Sync a curated subset first consisting of operational teams only.
+- Define a naming convention and eligibility rule (for example, only groups with a specific prefix, or groups in an allowlist).
+- Pilot with one organizational unit, then expand.
 
-- Sync a curated subset first ("real teams" only).
-- Create a naming convention and eligibility rule (for example, only groups with a prefix, or only groups in an allowlist).
-- Pilot with one org unit, then expand.
+### No clear owner for team hygiene
 
-### Pitfall 3: Unclear ownership of "team hygiene"
+Symptoms:
+- No defined owner for team metadata updates
+- Reorganizations create churn and stale records, particularly around renames
+
+How to avoid:
+- Assign an operational owner per team, even when membership is automated.
+- Account for renames in your operational plan. Renames and downstream handle changes carry significant cost, especially with CODEOWNERS.
+
+### Unexpected SAML provisioning limitations
 
 Symptoms:
 
-- Nobody knows who updates team metadata
-- Reorgs create churn and stale records (especially around renames)
+- The features you expected to automate through SAML are not fully supported
+- You add manual mapping steps
 
 How to avoid:
 
-- Assign a clear operational owner per team (even if membership is automated).
-- Expect renames and plan: customers frequently flag that renames and downstream handle changes are costly, especially with CODEOWNERS.
+- Validate your SAML assertion early, and keep the mapping model straightforward.
+- If you automate roles through SAML mapping, explicitly test whether your desired team automation is supported end-to-end before committing to that approach.
 
-### Pitfall 4: SAML provisioning complexity surprises
+## Next steps
 
-Symptoms:
+### Validate your model before scaling
 
-- You can't fully automate what you expected through SAML
-- You end up with manual mapping steps
-
-How to avoid:
-
-- Validate your SAML assertion early and keep the mapping model straightforward.
-- If you already automate roles through SAML mapping, explicitly test whether your desired team automation is supported end-to-end.
-
-## What to do next
-
-### 1) Validate your model (before scaling)
-
-- Pick 5-10 teams and validate:
+- Select 5-10 teams and validate the following:
   - Membership correctness
-  - Ownership correctness (CODEOWNERS, repo signals, service mapping)
-  - Metadata usefulness (contacts, runbooks, channels)
+  - Ownership correctness (using CODEOWNERS, repo signals, or service mapping)
+  - Metadata usefulness (using contacts, runbooks, and channels)
 
-### 2) Expand in controlled iterations
+### Expand in controlled iterations
 
-- Add one source or one org unit at a time.
-- Measure drift: where do teams differ between IdP and GitHub, and why?
-- Establish change control (Terraform/API) for fields that must be stable.
+- Add one source or one organizational unit at a time.
+- Measure drift: identify where teams differ between IdP and GitHub and investigate the cause.
+- Establish change control (Terraform/API) for fields that must remain stable.
 
-### 3) Plan for "next sources," but don't block on them
+### 3 Plan for future sources
 
-Design your Teams foundation so you can attach other sources later as enrichment, not as a required first step.
+Build your Teams foundation so additional sources can be added later as enrichment, without requiring a full rebuild.
 
 ## Further Reading
 
