@@ -23,6 +23,8 @@ Database Monitoring for Supabase Cloud provides visibility into your Supabase da
 
 ## Setup
 
+{{< img src="database_monitoring/supabase_cloud_integration_tile.png" alt="Supabase Cloud integration tile configuration" style="width:80%;" >}}
+
 1. Navigate to the [Supabase integration tile][1] in Datadog.
 1. Click **Add Account**.
 1. Enter your Supabase **Project ID** and **API Key**.
@@ -64,6 +66,8 @@ Collected every 5 seconds:
 ## Validate
 
 After setup, navigate to the [Database Monitoring][2] page in Datadog to see your Supabase database queries and performance metrics.
+
+{{< img src="database_monitoring/supabase_cloud_product.png" alt="Database Monitoring overview for a Supabase Cloud instance" style="width:100%;" >}}
 
 ## Further reading
 
