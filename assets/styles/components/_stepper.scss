@@ -219,10 +219,10 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 
 .stepper__btn-icon {
     display: none;
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     position: relative;
-    top: 6px;
+    top: 8px;
 
     @media (max-width: 479px) {
         display: inline-block;
