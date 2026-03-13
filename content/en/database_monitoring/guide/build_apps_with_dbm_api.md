@@ -15,7 +15,7 @@ further_reading:
   text: "Metrics API"
 ---
 
-Database Monitoring data is accessible through the Datadog API, which lets you build custom tooling, automated analysis pipelines, and integrations with external systems. This guide explains the data entities captured by DBM, how to query each one through the API, and how to combine them to answer questions about query performance.
+Database Monitoring data is accessible through the Datadog API, which lets you build custom tooling, automated analysis pipelines, and integrations with external systems. This guide explains the data entities that DBM captures, how to query each one through the API, and how to combine them to answer questions about query performance.
 
 ## Data entities
 
@@ -120,7 +120,7 @@ curl -X POST "https://app.${DD_SITE}/api/v1/logs-analytics/list?type=databaseque
       "indexes": ["databasequery"],
       "limit": 25,
       "search": {
-        "query": "dbm_type:activity @db.query_signature:44c22fe3377aff9b @service:my-service @env:prod"
+        "query": "dbm_type:activity @db.query_signature:44c22fe3377aff9b service:my-service env:prod"
       },
       "sorts": [
         {"time": {"order": "desc"}}
@@ -137,7 +137,7 @@ curl -X POST "https://app.${DD_SITE}/api/v1/logs-analytics/list?type=databaseque
 |-------|-------------|
 | `list.indexes` | Must be `["databasequery"]` |
 | `list.limit` | Number of events to return (max 1000) |
-| `list.search.query` | Datadog search syntax. `dbm_type:activity` filters to query samples. Narrow results with `@db.query_signature:<sig>`, `@service:<name>`, `@env:<env>`, `@host:<host>`, or `@db.instance:<instance>` |
+| `list.search.query` | Datadog search syntax. `dbm_type:activity` filters to query samples. Narrow results with `@db.query_signature:<sig>`, `service:<name>`, `env:<env>`, `host:<host>`, or `@db.instance:<instance>` |
 | `list.sorts` | Sort order; `time.order` is `desc` or `asc` |
 | `list.time.from` / `to` | Time range as **milliseconds** since Unix epoch |
 
@@ -194,7 +194,7 @@ Each record in `result.events` contains plan details at `event.custom.db`, inclu
 | `event.custom.db.plan.cost` | Estimated total cost from the planner |
 | `event.custom.db.plan.signature` | Hash of the plan structure, used to identify distinct plans for the same query |
 
-## Example: identify top queries with sequential scans
+## Example: Identify top queries with sequential scans
 
 The following example combines all three entity types to produce a report of your highest-impact queries that contain sequential scans in their explain plans. Sequential scans (full table scans) read every row in a table and can degrade performance significantly as table size grows.
 
@@ -213,7 +213,7 @@ pip install requests
 
 ### Code
 
-```python
+{{< code-block lang="python" filename="identify_sequential_scans.py" disable_copy="false" >}}
 #!/usr/bin/env python3
 """
 Identify top PostgreSQL queries that contain sequential scans.
@@ -482,7 +482,7 @@ def print_report(reports: list) -> None:
 if __name__ == "__main__":
     reports = analyze()
     print_report(reports)
-```
+{{< /code-block >}}
 
 ### Run the script
 
