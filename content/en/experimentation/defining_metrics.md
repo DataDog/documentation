@@ -1,6 +1,8 @@
 ---
 title: Defining Metrics
 description: Define the metrics you want to measure during your experimentation.
+aliases:
+  - /product_analytics/experimentation/defining_metrics/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

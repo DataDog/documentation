@@ -1,6 +1,8 @@
 ---
 title: Reading Experiment Results
 description: Read and understand the results of your Experimentation.
+aliases:
+  - /product_analytics/experimentation/reading_results/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"

@@ -1,6 +1,8 @@
 ---
 title: Minimum Detectable Effects
 description: Determine the smallest detectable difference that may result in a statistically significant experiment result.
+aliases:
+  - /product_analytics/experimentation/minimum_detectable_effect/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
