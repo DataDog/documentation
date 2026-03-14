@@ -81,7 +81,7 @@ Use these tables to decide which solution to start with:
 | Cloud provider                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                    | Linux, Windows                 |
 | Serverless                    | AWS Lambda, Amazon ECS Fargate, GCP Cloud Run (container deployment only)         | Not applicable                 |
-| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only) | Not applicable                 |
+| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only) | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
