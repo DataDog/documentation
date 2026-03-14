@@ -38823,6 +38823,8 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/MetricName'
+        relationships:
+          $ref: '#/components/schemas/MetricRelationships'
         type:
           $ref: '#/components/schemas/MetricType'
       type: object
@@ -39598,6 +39600,12 @@ components:
           format: double
           type: number
       type: object
+    MetricRelationships:
+      description: Relationships to related metric objects.
+      properties:
+        metric_volumes:
+          $ref: '#/components/schemas/MetricVolumesRelationship'
+      type: object
     MetricResource:
       description: Metric resource.
       example:
@@ -40041,6 +40049,33 @@ components:
       oneOf:
       - $ref: '#/components/schemas/MetricDistinctVolume'
       - $ref: '#/components/schemas/MetricIngestedIndexedVolume'
+    MetricVolumesInclude:
+      description: Comma-separated list of additional data to include in the response.
+        Allowed values are `metric_volumes`.
+      enum:
+      - metric_volumes
+      - generated_metric_attributes
+      type: string
+      x-enum-varnames:
+      - METRIC_VOLUMES
+      - GENERATED_METRIC_ATTRIBUTES
+    MetricVolumesRelationship:
+      description: Relationship to a metric's ingested and indexed volumes.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricVolumesRelationshipData'
+      type: object
+    MetricVolumesRelationshipData:
+      description: Relationship data for a metric's ingested and indexed volumes.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricName'
+        type:
+          $ref: '#/components/schemas/MetricIngestedIndexedVolumeType'
+      required:
+      - type
+      - id
+      type: object
     MetricVolumesResponse:
       description: Response object which includes a single metric's volume.
       properties:
@@ -40086,6 +40121,12 @@ components:
           description: Array of metrics and metric tag configurations.
           items:
             $ref: '#/components/schemas/MetricsAndMetricTagConfigurations'
+          type: array
+        included:
+          description: Array of included metric volume objects. Only present when
+            `include=metric_volumes` is requested.
+          items:
+            $ref: '#/components/schemas/MetricIngestedIndexedVolume'
           type: array
         links:
           $ref: '#/components/schemas/MetricsListResponseLinks'
@@ -92050,7 +92091,13 @@ paths:
         `next_cursor` value from the response as the new `page[cursor]` value.
 
         Once the `meta.pagination.next_cursor` value is null, all pages have been
-        retrieved.'
+        retrieved.
+
+        Use the `include` query parameter to fetch additional data with the response.
+        When `include=metric_volumes` is specified, the response includes volume data
+        for each custom metric in the `included` array, with a corresponding `relationships`
+        link on each metric in `data`. Volume data is only returned for custom metrics.
+        All volume values represent a 1-hour timeframe.'
       operationId: ListTagConfigurations
       parameters:
       - description: Filter custom metrics that have configured tags.
@@ -92132,6 +92179,16 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: 'Comma-separated list of additional data to include in the response.
+          Allowed values: `metric_volumes`. When `metric_volumes` is specified, the
+          response includes volume data for each custom metric in the `included` array,
+          with a corresponding `relationships` link on each metric in `data`.'
+        example: metric_volumes
+        in: query
+        name: include
+        required: false
+        schema:
+          $ref: '#/components/schemas/MetricVolumesInclude'
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] query.
 
