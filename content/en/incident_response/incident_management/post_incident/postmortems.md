@@ -77,7 +77,7 @@ Templates support variables that populate with incident data when the postmortem
 | `{{incident.severity}}` | The incident severity level |
 | `{{incident.commander}}` | The incident commander's name, or their email or handle if no name is set |
 
-Any [custom fields][5] you have defined are also available as variables.
+Any [custom property fields][5] you have defined are also available as variables.
 
 **The incident card variable** (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically, reducing the need to switch between the two. **Note**: The incident card is only supported in Datadog Notebooks.
 
@@ -101,5 +101,5 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [2]: /integrations/confluence/
 [3]: /integrations/google_drive/
 [4]: https://app.datadoghq.com/incidents/settings?section=postmortem-templates
-[5]: /incident_response/incident_management/setup_and_configuration/#custom-fields
+[5]: /incident_response/incident_management/setup_and_configuration/property_fields
 [6]: /incident_response/incident_management/setup_and_configuration/variables
