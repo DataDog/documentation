@@ -7461,89 +7461,23 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/TableRowResourceIdentifier'
+            $ref: '#/components/schemas/BatchDeleteRowsRequestData'
           maxItems: 200
           type: array
       required:
       - data
       type: object
-    BatchRowsQueryDataType:
-      default: reference-tables-batch-rows-query
-      description: Resource type identifier for batch queries of reference table rows.
-      enum:
-      - reference-tables-batch-rows-query
-      example: reference-tables-batch-rows-query
-      type: string
-      x-enum-varnames:
-      - REFERENCE_TABLES_BATCH_ROWS_QUERY
-    BatchRowsQueryRequest:
-      properties:
-        data:
-          $ref: '#/components/schemas/BatchRowsQueryRequestData'
-      type: object
-    BatchRowsQueryRequestData:
-      properties:
-        attributes:
-          $ref: '#/components/schemas/BatchRowsQueryRequestDataAttributes'
-        type:
-          $ref: '#/components/schemas/BatchRowsQueryDataType'
-      required:
-      - type
-      type: object
-    BatchRowsQueryRequestDataAttributes:
-      properties:
-        row_ids:
-          example:
-          - row_id_1
-          - row_id_2
-          items:
-            type: string
-          type: array
-        table_id:
-          example: 00000000-0000-0000-0000-000000000000
-          type: string
-      required:
-      - row_ids
-      - table_id
-      type: object
-    BatchRowsQueryResponse:
-      example:
-        data:
-          id: 00000000-0000-0000-0000-000000000000
-          relationships:
-            rows:
-              data:
-              - id: row_id_1
-                type: row
-              - id: row_id_2
-                type: row
-          type: reference-tables-batch-rows-query
-      properties:
-        data:
-          $ref: '#/components/schemas/BatchRowsQueryResponseData'
-      type: object
-    BatchRowsQueryResponseData:
+    BatchDeleteRowsRequestData:
+      description: Row resource containing a single row identifier for deletion.
       properties:
         id:
+          example: primary_key_value
           type: string
-        relationships:
-          $ref: '#/components/schemas/BatchRowsQueryResponseDataRelationships'
         type:
-          $ref: '#/components/schemas/BatchRowsQueryDataType'
+          $ref: '#/components/schemas/TableRowResourceDataType'
       required:
       - type
-      type: object
-    BatchRowsQueryResponseDataRelationships:
-      properties:
-        rows:
-          $ref: '#/components/schemas/BatchRowsQueryResponseDataRelationshipsRows'
-      type: object
-    BatchRowsQueryResponseDataRelationshipsRows:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TableRowResourceIdentifier'
-          type: array
+      - id
       type: object
     BatchUpsertRowsRequestArray:
       description: The request body for creating or updating multiple rows into a
@@ -20808,6 +20742,29 @@ components:
             type: string
           type: array
       type: object
+    DeploymentRuleOptionsFaultyDeploymentDetectionResponse:
+      additionalProperties: false
+      description: Faulty deployment detection options returned in deployment rule
+        responses. The `excluded_resources` field is always present, which allows
+        disambiguating this type from monitor options when both share a `duration`
+        field.
+      properties:
+        duration:
+          description: The duration for faulty deployment detection.
+          example: 3600
+          format: int64
+          type: integer
+        excluded_resources:
+          description: Resources to exclude from faulty deployment detection.
+          example:
+          - resource1
+          - resource2
+          items:
+            type: string
+          type: array
+      required:
+      - excluded_resources
+      type: object
     DeploymentRuleOptionsMonitor:
       additionalProperties: false
       description: Monitor options for deployment rules.
@@ -20870,7 +20827,7 @@ components:
           example: My deployment rule
           type: string
         options:
-          $ref: '#/components/schemas/DeploymentRulesOptions'
+          $ref: '#/components/schemas/DeploymentRulesOptionsResponse'
         type:
           $ref: '#/components/schemas/DeploymentRuleResponseDataAttributesType'
         updated_at:
@@ -20935,10 +20892,17 @@ components:
       - id
       type: object
     DeploymentRulesOptions:
-      description: Options for deployment rule response representing either faulty
+      description: Options for deployment rule requests representing either faulty
         deployment detection or monitor options.
       oneOf:
       - $ref: '#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection'
+      - $ref: '#/components/schemas/DeploymentRuleOptionsMonitor'
+    DeploymentRulesOptionsResponse:
+      description: Options returned in deployment rule responses representing either
+        faulty deployment detection or monitor options. Faulty deployment detection
+        responses always include `excluded_resources`, making the two variants unambiguous.
+      oneOf:
+      - $ref: '#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetectionResponse'
       - $ref: '#/components/schemas/DeploymentRuleOptionsMonitor'
     DetachCaseRequest:
       description: Request for detaching security findings from their case.
@@ -67253,18 +67217,6 @@ components:
       type: string
       x-enum-varnames:
       - ROW
-    TableRowResourceIdentifier:
-      description: Row resource containing a single row identifier.
-      properties:
-        id:
-          example: primary_key_value
-          type: string
-        type:
-          $ref: '#/components/schemas/TableRowResourceDataType'
-      required:
-      - type
-      - id
-      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -97086,58 +97038,6 @@ paths:
         operator: OR
         permissions:
         - timeseries_query
-  /api/v2/reference-tables/queries/batch-rows:
-    post:
-      description: Batch query reference table rows by their primary key values.  Returns
-        only found rows in the included array.
-      operationId: BatchRowsQuery
-      requestBody:
-        content:
-          application/json:
-            examples:
-              happy_path:
-                summary: Batch query reference table rows by their primary key values.
-                value:
-                  data:
-                    attributes:
-                      row_ids:
-                      - row_id_1
-                      - row_id_2
-                      table_id: 00000000-0000-0000-0000-000000000000
-                    type: reference-tables-batch-rows-query
-            schema:
-              $ref: '#/components/schemas/BatchRowsQueryRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BatchRowsQueryResponse'
-          description: Successfully retrieved rows. Some or all requested rows were
-            found. Response includes found rows in the included section.
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/ForbiddenResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Internal Server Error
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
-      summary: Batch rows query
-      tags:
-      - Reference Tables
-      x-menu-order: 10
   /api/v2/reference-tables/tables:
     get:
       description: List all reference tables in this organization.
