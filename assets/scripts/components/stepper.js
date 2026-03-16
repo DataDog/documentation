@@ -2,7 +2,7 @@ const STORAGE_PREFIX = 'stepper-progress-';
 const MAX_STORED_STEPPERS = 10;
 
 function getStorageKey(stepperId) {
-    return `${STORAGE_PREFIX}${stepperId}`;
+    return `${STORAGE_PREFIX}${location.pathname}:${stepperId}`;
 }
 
 function loadProgress(stepperId) {
@@ -16,8 +16,11 @@ function loadProgress(stepperId) {
 
 function saveProgress(stepperId, state) {
     try {
-        pruneOldEntries();
-        localStorage.setItem(getStorageKey(stepperId), JSON.stringify({ ...state, timestamp: Date.now() }));
+        const key = getStorageKey(stepperId);
+        if (!localStorage.getItem(key)) {
+            pruneOldEntries();
+        }
+        localStorage.setItem(key, JSON.stringify({ ...state, timestamp: Date.now() }));
     } catch {
         // Ignore storage errors, the stepper will still work without localStorage persistence
     }
