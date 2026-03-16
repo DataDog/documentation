@@ -604,6 +604,14 @@ Additional parameters can be added:
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
+To enable FIPS 140-2 cryptographic mode, set the `ENABLE_FIPS=1` environment variable before running the worker executable. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+
+Example:
+
+```cmd
+set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
+```
+
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
 {{< /tab >}}
@@ -656,6 +664,14 @@ Example:
 ```text
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
 ```
+
+To enable FIPS 140-2 cryptographic mode, include `ENABLE_FIPS=1`:
+
+```text
+set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
+
+The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -919,7 +935,7 @@ Start testing your first internal endpoint by launching a fast test on one of yo
 
 Create an API, multistep API, or browser test, and select your **Private Locations** of interest.
 
-{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
 
 Use private locations just like your Datadog managed locations: assign [Synthetic tests][29] to private locations, visualize test results, retrieve [Synthetic metrics][11], and more.
 

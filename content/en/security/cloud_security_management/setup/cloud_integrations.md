@@ -8,6 +8,10 @@ aliases:
 
 Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on AWS, Azure, GCP, and OCI.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Enable resource scanning
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable Cloud Security for each AWS, Azure, Google Cloud Platform, or Oracle Cloud Infrastucture account.

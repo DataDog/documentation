@@ -63,6 +63,7 @@ The build system automatically fetches:
 ## Critical Rules
 
 - **NEVER push directly to `master`.** Always create a PR and go through the review process. Direct pushes bypass branch protection and code review.
+- **Obey the git hooks set up in .husky.** Do not use `--no-verify` or other workarounds to skip repository git hooks.
 
 ## Branch and PR Guidelines
 
