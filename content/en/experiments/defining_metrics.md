@@ -16,7 +16,7 @@ further_reading:
 
 Define the metrics you want to measure during your experiments. Metrics can be built using Product Analytics and Real User Monitoring (RUM) data.
 
-<div class="alert alert-info"> In order to create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
+<div class="alert alert-info"> To create a metric, you must have Datadog’s client SDK installed in your application and be actively capturing data.
 </div>
 
 ## Create your first metric
