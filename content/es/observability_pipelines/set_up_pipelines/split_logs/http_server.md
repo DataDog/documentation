@@ -1,17 +1,16 @@
 ---
 disable_toc: false
-title: Enriquecimiento de logs para el servidor HTTP
+title: Dividir logs para el servidor HTTP
 ---
 
 ## Información general
 
-Usa el worker de Observability Pipelines para enriquecer y transformar los logs de tu cliente HTTP antes de enrutarlos a su destino.
+Utiliza el worker de Observability Pipelines para procesar y enrutar logs de tu cliente HTTP a diferentes destinos en función de tu caso de uso.
 
-
-{{% observability_pipelines/use_case_images/log_enrichment %}}
+{{% observability_pipelines/use_case_images/split_logs %}}
 
 Este documento te guiará a través de los siguientes pasos:
-1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
+1. [Requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
 
 ## Requisitos previos
@@ -21,8 +20,8 @@ Este documento te guiará a través de los siguientes pasos:
 ## Configurar Observability Pipelines
 
 1. Ve a [Observability Pipelines][1].
-1. Selecciona la plantilla **Log Enrichment** (Enriquecimiento de logs) para crear un pipeline nuevo.
-1. Selecciona **HTTP Server** (Servidor HTTP) como fuente.
+1. Selecciona la plantilla **Split Logs** (Dividir logs) para crear un pipeline nuevo.
+1. Selecciona la fuente **HTTP Server** (Servidor HTTP).
 
 ### Configurar la fuente
 
@@ -149,7 +148,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "Add env vars" %}}
+{{% tab "Añadir variables de entorno" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
@@ -242,7 +241,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="Añadir reglas desde la biblioteca" level="h5" %}}
+{{% collapse-content title="Añadir reglas de la biblioteca" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
