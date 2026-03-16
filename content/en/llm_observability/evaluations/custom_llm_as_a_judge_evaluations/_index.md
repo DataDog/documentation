@@ -336,7 +336,7 @@ You can:
 
 ## Estimated token usage
 
-You can monitor the token usage of your LLM evaluations using [this dashboard][3].
+You can monitor the token usage of your LLM evaluations using [this dashboard][8].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
@@ -357,3 +357,5 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
+[8]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
+

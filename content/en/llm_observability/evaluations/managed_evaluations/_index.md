@@ -48,7 +48,7 @@ After you click **Save and Publish**, LLM Observability uses the LLM account you
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/llm/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/evaluation_compatibility
 [3]: /llm_observability/evaluations/managed_evaluations/quality_evaluations#language-mismatch
 [4]: /llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations#sensitive-data-scanning
