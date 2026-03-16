@@ -29,7 +29,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
 1. Create a JSON file for your Data Collection Rule (DCR) parameters. See [Data collection rule (DCR)][1] for more information.
     - In the `streamDeclarations` property, you must list all log fields you want mapped to the corresponding Azure table column. See [Stream declarations][2] for more information.
     - In the `transformKql` property, you must list all fields on the log that are dropped and not mapped to the table. See [Data flow properties][3] for more information.
-    - **Note**: Each log field must either be listed in one of the properties: `streamDeclarations` or `transformKql`, otherwise the log is dropped. See [Monitor DCR data collection in Azure Monitor][4] on how to set up an alert when logs are dropped.
+    - **Note**: Each log field must be listed in one of these properties: either `streamDeclarations` or `transformKql`; otherwise the log is dropped. See [Monitor DCR data collection in Azure Monitor][4] on how to set up an alert when logs are dropped.
     - For example, this JSON file (`dcr-commonsecuritylog.json`) adds the log fields to be mapped to the [`CommonSecurityLog`][5] table:
         ```bash
         {
@@ -75,7 +75,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
             }
             ```
     - Replace the placeholders:
-        - `<DCE_RESOURCE_ID>` with the ID of the DCE resource you created in step 2. Run the [az monitor data-collection endpoint show][9] command to get the DCE resource ID. For example:
+        - `<DCE_RESOURCE_ID>` with the ID of the DCE resource you created in step 2. Run the [`az monitor data-collection endpoint show`][9] command to get the DCE resource ID. For example:
             ```
             az monitor data-collection endpoint show \
             --name "<DCE_NAME>" \
@@ -83,7 +83,7 @@ To set up the Microsoft Sentinel destination, you need to create a Workspace in 
             --subscription <SUBSCRIPTION_ID> \
             --query "id"
             ```
-        - `<WORKSPACE_RESOURCE_ID>` with the ID of the Logs Analytics Workspace you created in step 3. Run the [az monitor log-analytics workspace show][10] command to get the Workspace resource ID. For example:
+        - `<WORKSPACE_RESOURCE_ID>` with the ID of the Logs Analytics Workspace you created in step 3. Run the [`az monitor log-analytics workspace show`][10] command to get the Workspace resource ID. For example:
             ```
             az monitor log-analytics workspace show \
             --workspace-name "<DCE_NAME>" \
