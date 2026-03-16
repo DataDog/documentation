@@ -828,7 +828,7 @@ try restarting the Jenkins instance.
 [27]: /logs/guide/best-practices-for-log-management/
 [28]: /continuous_integration/search/#search-for-pipelines
 [29]: /agent/logs/?tab=tcpudp#custom-log-collection
-[30]: /developers/dogstatsd/
+[30]: /extend/dogstatsd/
 [31]: /containers/docker/apm/#tracing-from-the-host
 [32]: /glossary/#running-pipeline
 [33]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/

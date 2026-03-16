@@ -218,6 +218,11 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Vert.x Redis Client     | 3.9-4.x  | Fully Supported | `vertx-redis-client`                                                                       |
 | Vert.x MySQL Client     | 3.9-4.x  | Fully Supported | `vertx-sql-client`																		                                                       |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
 - Apache Derby

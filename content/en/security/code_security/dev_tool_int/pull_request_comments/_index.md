@@ -22,6 +22,7 @@ You can configure PR comments at the organization or repository level in [Reposi
 - Enabling/disabling PR comments by scan type (SAST, static SCA, Secrets, IaC)
 - Setting severity thresholds for each scan type
 - Excluding findings from test files or dev/test dependencies
+- Filtering out findings identified as false positives by Bits AI
 
 Learn more about [PR comments across Datadog][11].
 
@@ -109,6 +110,7 @@ When configuring PR comments, you can:
 - Enable or disable comments for specific scan types (SAST, SCA, IaC).
 - Set minimum severity thresholds to control when comments appear.
 - Exclude comments for findings in test files or dev/test dependencies to avoid noise from low-priority issues.
+- Filter out findings identified as false positives by Bits AI.
 
 ## Configure PR comments at the organization level
 
@@ -116,7 +118,7 @@ When configuring PR comments, you can:
 1. In **Repository Settings**, click **Global PR Comment Configuration**.
 1. Configure the settings:
     - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
-    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files.
+    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files. Select **Filter out findings identified as false positives by Bits AI** to exclude findings that Bits AI has identified as false positives.
     - **Enable for Software Composition Analysis (SCA)**: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test or dev dependencies** to prevent comments on issues found in dependencies existing only in development or test environments.
     - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
 1. Click **Save**.
@@ -127,7 +129,7 @@ When configuring PR comments, you can:
 1. In **Repository Settings**, select a repository from the list.
 1. Configure the settings:
     - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
-    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files.
+    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files. Select **Filter out findings identified as false positives by Bits AI** to exclude findings that Bits AI has identified as false positives.
     - **Enable for Software Composition Analysis (SCA)**: Toggle this option to enable PR comments for SCA. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test or dev dependencies** to prevent comments on issues found in dependencies existing only in development or test environments.
     - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
     - **Block all comments in this repository**: Enable this to disable all comments for this repository, overriding global settings.

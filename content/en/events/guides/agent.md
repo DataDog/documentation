@@ -3,7 +3,7 @@ title: Events with a Custom Agent Check
 aliases:
 - /service_management/events/guides/agent/
 further_reading:
-- link: "/developers/custom_checks/write_agent_check/"
+- link: "/extend/custom_checks/write_agent_check/"
   tag: "Documentation"
   text: "Writing a Custom Agent Check"
 ---
@@ -107,7 +107,7 @@ This is an example of using a custom Agent check to send one event periodically.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /developers/custom_checks/write_agent_check/
+[1]: /extend/custom_checks/write_agent_check/
 [2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/configuration/agent-commands/#restart-the-agent
 [4]: /agent/configuration/agent-commands/#agent-information
