@@ -43,8 +43,8 @@ To create a postmortem template:
 2. Give the template a name.
 3. Select the location you want the template to generate (Datadog Notebook, Google Drive, Confluence).
 4. Write the template's content (available template variables are listed to the right of the textbox).
-5. (Optional) Set the template as the default
-6. Click **Save**,
+5. (Optional) Set the template as the default.
+6. Click **Save**.
 
 For more information on generating postmortems using these templates, see [Incident Postmortems][5].
 
