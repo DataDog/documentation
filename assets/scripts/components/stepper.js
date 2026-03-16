@@ -117,6 +117,10 @@ function initStepper(stepper) {
             step.classList.toggle('stepper__step--active', isActive);
             step.classList.toggle('stepper__step--completed', isCompleted);
 
+            // The step title, number, etc. should always be visible,
+            // even if the step body itself is not visible
+            setHidden(step, false);
+
             // Nav: hidden when expanded or finished, visible only for active step
             const nav = step.querySelector('.stepper__nav');
             if (nav) {
