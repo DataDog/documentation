@@ -9,7 +9,7 @@ further_reading:
 - link: /integrations/azure_app_service_environment/
   tag: Documentation
   text: Environnement Azure App Service
-title: Instrumenter Azure App Service - Conteneurs Linux
+title: Instrumenter Azure App Service  Containers Linux
 ---
 ## Aperçu
 
@@ -17,13 +17,13 @@ Cette page explique comment intégrer l'agent Datadog à votre application Linux
 
 Ce document part du principe que votre application est configurée pour les sidecars conformément au tutoriel d'Azure intitulé [Configurer un conteneur sidecar pour un conteneur personnalisé dans Azure App Service][1].
 
-Si vous préférez ne pas utiliser l'approche Sidecar (non recommandée), vous pouvez suivre les instructions pour [instrumenter Azure App Service - Conteneur Linux avec `serverless-init`][2].
+Si vous préférez ne pas utiliser l'approche « sidecar » (non recommandée), vous pouvez suivre les instructions pour [instrumenter un conteneur Linux Azure App Service avec `serverless-init`][2].
 
 ## Configuration
 
 ### Intégration Azure
 
-Si ce n'est pas déjà fait, installez l'[intégration Datadog-Azure][3] pour collecter les métriques et les journaux.
+Si ce n'est pas déjà fait, installez l'[intégration DatadogAzure][3] pour collecter les métriques et les journaux.
 
 ### Demande
 
@@ -241,7 +241,7 @@ npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-n
 
 <div class="alert alert-danger">Étant donné que la ressource « Azure Web App for Containers » ne prend pas directement en charge les conteneurs de site, vous devez vous attendre à des divergences dans votre configuration.</div>
 
-Le [module Datadog Terraform pour les applications Web Linux][1] encapsule la ressource [azurerm_linux_web_app][2] et configure automatiquement votre application Web pour la surveillance sans serveur Datadog en ajoutant les variables d'environnement requises ainsi que le sidecar serverless-init.
+Le [module Datadog Terraform pour les applications Web Linux][1] encapsule la ressource [azurerm_linux_web_app][2] et configure automatiquement votre application Web pour la surveillance sans serveur Datadog en ajoutant les variables d'environnement requises et le sidecar serverlessinit.
 
 Si Terraform n'est pas encore installé, [installez Terraform][3], créez un nouveau répertoire et créez un fichier nommé `main.tf`.
 
@@ -472,11 +472,11 @@ Consultez l'onglet [« ](?tab=manual#instrumentation)Manuel » pour obtenir la d
 
 1. Dans le portail Azure, accédez au Centre** de **déploiement et sélectionnez «** Ajouter **».
 2. Dans le formulaire** « Modifier** le conteneur », indiquez les informations suivantes :
-   - Source** de l'image** : Docker Hub ou d'autres registres
-   - Type** d'image** : publique
-   - URL du serveur** de** registre : `index.docker.io`
-   - **Image et balise **: `datadog/serverless-init:latest`
-   - **Port **: 8126
+    **Source de l'image** : Docker Hub ou d'autres registres
+    **Type d'image** : Public
+    **URL du serveur de** registre : `index.docker.io`
+    **Image et balise **: `datadog/serverless-init:latest`
+    **Port **: 8126
 3. Cliquez **sur « Appliquer **».
 
 #### Paramètres de l'application
@@ -485,12 +485,12 @@ Dans les paramètres de votre **application** sur Azure, définissez les variabl
 
 {{< img src="serverless/azure_app_service/app_settings.png" alt="Dans Azure, une section « Variables d'environnement ». Une option 'Allow access to all app settings' est activée avec une case à cocher." >}}
 
-- `DD_API_KEY`: Votre [clé API Datadog][701]
-- `DD_SERVICE`: Comment souhaitez-vous nommer votre service ? Par exemple, `sidecar-azure`
-- `DD_ENV`: Comment souhaitez-vous nommer votre environnement ? Par exemple, `prod`
-- `DD_SERVERLESS_LOG_PATH`: L'emplacement où vous enregistrez vos journaux. Par exemple,`/home/LogFiles/*.log`  ou `/home/LogFiles/myapp/*.log`
-- `DD_AAS_INSTANCE_LOGGING_ENABLED`: Lorsque `true`, la collecte des journaux est automatiquement configurée pour un chemin d'accès supplémentaire : `/home/LogFiles/*$COMPUTERNAME*.log`
-- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: Descripteur de fichier facultatif utilisé pour un suivi plus précis de la fin d'un fichier. Recommandé pour les situations où les fichiers journaux sont régulièrement remplacés. Par exemple, le paramètre`_default_docker`  configure le log tailer pour qu'il ignore les fichiers tournés et se concentre uniquement sur le fichier journal actif d'Azure.
+ `DD_API_KEY`: Votre [clé API Datadog][701]
+ `DD_SERVICE`: Comment souhaitez-vous nommer votre service ? Par exemple, `sidecar-azure`
+ `DD_ENV`: Comment souhaitez-vous nommer votre environnement ? Par exemple, `prod`
+ `DD_SERVERLESS_LOG_PATH`: L'endroit où vous enregistrez vos journaux. Par exemple,`/home/LogFiles/*.log`  ou `/home/LogFiles/myapp/*.log`
+ `DD_AAS_INSTANCE_LOGGING_ENABLED`: Lorsque `true`, la collecte des journaux est automatiquement configurée pour un chemin d'accès supplémentaire : `/home/LogFiles/*$COMPUTERNAME*.log`
+ `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: Descripteur de fichier facultatif utilisé pour un suivi plus précis de la fin d'un fichier. Recommandé pour les situations où les fichiers journaux sont régulièrement remplacés. Par exemple, le paramètre`_default_docker`  configure le log tailer pour qu'il ignore les fichiers tournés et se concentre uniquement sur le fichier journal actif d'Azure.
 
 
    <div class="alert alert-info">Si votre application comporte plusieurs instances, veillez à ce que le nom du fichier journal de votre application inclue la variable<code> </code>$COMPUTERNAME. Cela permet d'éviter que la fonction de mise à jour de la fin du fichier journal ne génère des journaux en double lorsque plusieurs instances lisent le même fichier.</div>
@@ -507,7 +507,7 @@ En définissant cette variable d'environnement sur`true`  , le`/home/`montage es
 Si vous configurez la surveillance d'une application .NET, définissez les variables d'environnement** obligatoires** suivantes.
 
 | Nom de la variable | Valeur |
-| ------------- | ----- |
+|  |  |
 | `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
 | `CORECLR_ENABLE_PROFILING` | `1` |
 | `CORECLR_PROFILER` | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
