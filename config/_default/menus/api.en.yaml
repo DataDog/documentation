@@ -3169,6 +3169,19 @@ menu:
           - GetVulnerabilityNotificationRules
         unstable: []
         order: 15
+    - name: Import vulnerabilities
+      url: '#import-vulnerabilities'
+      identifier: security-monitoring-import-vulnerabilities
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportSecurityVulnerabilities
+        unstable:
+          - v2
+        order: 4
     - name: List vulnerabilities
       url: '#list-vulnerabilities'
       identifier: security-monitoring-list-vulnerabilities
@@ -3182,6 +3195,19 @@ menu:
         unstable:
           - v2
         order: 25
+    - name: Import threat intelligence feed
+      url: '#import-threat-intelligence-feed'
+      identifier: security-monitoring-import-threat-intelligence-feed
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ImportThreatIntel
+        unstable:
+          - v2
+        order: 5
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
       identifier: security-monitoring-patch-a-signal-based-notification-rule
@@ -3351,6 +3377,19 @@ menu:
           - DetachCase
         unstable: []
         order: 46
+    - name: Create security finding
+      url: '#create-security-finding'
+      identifier: security-monitoring-create-security-finding
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFinding
+        unstable:
+          - v2
+        order: 3
     - name: List security findings
       url: '#list-security-findings'
       identifier: security-monitoring-list-security-findings

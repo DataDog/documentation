@@ -18598,6 +18598,244 @@ components:
       required:
       - data
       type: object
+    CycloneDXAdvisory:
+      description: Advisory reference for a vulnerability.
+      properties:
+        url:
+          description: URL to the advisory.
+          example: https://example.com/advisory/CVE-2021-1234
+          type: string
+      type: object
+    CycloneDXAffect:
+      description: Reference to a component affected by a vulnerability.
+      properties:
+        ref:
+          description: Reference to a component's bom-ref.
+          example: a3390fca-c315-41ae-ae05-af5e7859cdee
+          type: string
+      required:
+      - ref
+      type: object
+    CycloneDXAssetComponent:
+      description: The asset component represents the system or host being scanned.
+      properties:
+        bom-ref:
+          description: Optional reference to a component in the components list.
+          example: asset-ref-123
+          type: string
+        name:
+          description: The name of the asset.
+          example: i-12345
+          type: string
+        type:
+          description: The type of the asset component.
+          example: operating-system
+          type: string
+      required:
+      - name
+      type: object
+    CycloneDXBOM:
+      description: CycloneDX 1.5 Bill of Materials (BOM) for importing vulnerabilities.
+      properties:
+        bomFormat:
+          description: The format of the BOM. Must be "CycloneDX".
+          example: CycloneDX
+          type: string
+        components:
+          description: List of components (libraries, applications, or operating systems)
+            that are affected by vulnerabilities.
+          items:
+            $ref: '#/components/schemas/CycloneDXComponent'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/CycloneDXMetadata'
+        specVersion:
+          description: The version of the CycloneDX specification. Must be "1.5".
+          example: '1.5'
+          type: string
+        version:
+          description: The version of the BOM.
+          example: 1
+          format: int64
+          type: integer
+        vulnerabilities:
+          description: List of vulnerabilities to be imported.
+          items:
+            $ref: '#/components/schemas/CycloneDXVulnerability'
+          type: array
+      required:
+      - bomFormat
+      - specVersion
+      - version
+      - metadata
+      - vulnerabilities
+      - components
+      type: object
+    CycloneDXComponent:
+      description: A component (library, application, or operating system) in the
+        BOM.
+      properties:
+        bom-ref:
+          description: Unique reference identifier for this component.
+          example: a3390fca-c315-41ae-ae05-af5e7859cdee
+          type: string
+        name:
+          description: The name of the component.
+          example: lodash
+          type: string
+        purl:
+          description: Package URL for the component. Required for library components.
+          example: pkg:npm/lodash@4.17.21
+          type: string
+        type:
+          $ref: '#/components/schemas/CycloneDXComponentType'
+        version:
+          description: The version of the component.
+          example: 4.17.21
+          type: string
+      required:
+      - bom-ref
+      - type
+      - name
+      - version
+      type: object
+    CycloneDXComponentType:
+      description: The type of the component. Supported types are library, application,
+        and operating-system.
+      enum:
+      - library
+      - application
+      - operating-system
+      example: library
+      type: string
+      x-enum-varnames:
+      - LIBRARY
+      - APPLICATION
+      - OPERATING_SYSTEM
+    CycloneDXMetadata:
+      description: Metadata for the CycloneDX BOM.
+      properties:
+        component:
+          $ref: '#/components/schemas/CycloneDXAssetComponent'
+        tools:
+          $ref: '#/components/schemas/CycloneDXTools'
+      required:
+      - component
+      - tools
+      type: object
+    CycloneDXRating:
+      description: Vulnerability rating information.
+      properties:
+        score:
+          description: The CVSS score.
+          example: 9.0
+          format: double
+          type: number
+        severity:
+          description: The severity level.
+          example: high
+          type: string
+        vector:
+          description: The CVSS vector string.
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:N
+          type: string
+      type: object
+    CycloneDXReference:
+      description: External reference for a vulnerability.
+      properties:
+        id:
+          description: Identifier of the reference.
+          example: GHSA-35m5-8cvj-8783
+          type: string
+        source:
+          $ref: '#/components/schemas/CycloneDXReferenceSource'
+      type: object
+    CycloneDXReferenceSource:
+      description: Source information for a reference.
+      properties:
+        url:
+          description: URL to the source.
+          example: https://example.com
+          type: string
+      type: object
+    CycloneDXToolComponent:
+      description: Tool component that detected the vulnerabilities.
+      properties:
+        name:
+          description: The name of the tool.
+          example: my-scanner
+          type: string
+        type:
+          description: The type of the tool.
+          example: application
+          type: string
+      required:
+      - name
+      type: object
+    CycloneDXTools:
+      description: Tools used to generate the BOM.
+      properties:
+        components:
+          description: List of tool components. Only one tool is supported.
+          items:
+            $ref: '#/components/schemas/CycloneDXToolComponent'
+          maxItems: 1
+          minItems: 1
+          type: array
+      required:
+      - components
+      type: object
+    CycloneDXVulnerability:
+      description: A vulnerability in the CycloneDX BOM.
+      properties:
+        advisories:
+          description: List of advisory references.
+          items:
+            $ref: '#/components/schemas/CycloneDXAdvisory'
+          type: array
+        affects:
+          description: List of component references affected by this vulnerability.
+          items:
+            $ref: '#/components/schemas/CycloneDXAffect'
+          minItems: 1
+          type: array
+        cwes:
+          description: List of CWE (Common Weakness Enumeration) identifiers.
+          example:
+          - 123
+          - 345
+          items:
+            type: integer
+          type: array
+        description:
+          description: Description of the vulnerability.
+          example: Sample vulnerability detected in the application.
+          type: string
+        detail:
+          description: Detailed information about the vulnerability.
+          example: Details about the vulnerability
+          type: string
+        id:
+          description: The unique identifier of the vulnerability (e.g., CVE ID).
+          example: CVE-2021-1234
+          type: string
+        ratings:
+          description: List of vulnerability ratings. Must contain exactly one rating.
+          items:
+            $ref: '#/components/schemas/CycloneDXRating'
+          maxItems: 1
+          minItems: 1
+          type: array
+        references:
+          description: List of external references for the vulnerability.
+          items:
+            $ref: '#/components/schemas/CycloneDXReference'
+          type: array
+      required:
+      - id
+      - ratings
+      - affects
+      type: object
     DORACustomTags:
       description: A list of user-defined tags. The tags must follow the `key:value`
         pattern. Up to 100 may be added per event.
@@ -57723,6 +57961,16 @@ components:
         meta:
           $ref: '#/components/schemas/SecurityFilterMeta'
       type: object
+    SecurityFindingType:
+      description: The type of security finding.
+      enum:
+      - vulnerability
+      - configuration_finding
+      example: vulnerability
+      type: string
+      x-enum-varnames:
+      - VULNERABILITY
+      - CONFIGURATION_FINDING
     SecurityFindingsAttributes:
       description: The JSON object containing all attributes of the security finding.
       properties:
@@ -69267,6 +69515,18 @@ components:
         type:
           $ref: '#/components/schemas/ThreatHuntingJobDataType'
       type: object
+    ThreatIntelIndicatorType:
+      description: The type of threat indicator.
+      enum:
+      - ip_address
+      - domain
+      - sha256
+      example: ip_address
+      type: string
+      x-enum-varnames:
+      - IP_ADDRESS
+      - DOMAIN
+      - SHA256
     TimeAggregation:
       description: 'Time aggregation period (in seconds) is used to aggregate the
         results of the notification rule evaluation.
@@ -101617,6 +101877,69 @@ paths:
         permissions:
         - security_monitoring_findings_read
         - appsec_vm_read
+    post:
+      description: 'Allows external integrations to send security findings to Datadog.
+        This endpoint accepts finding data in a custom format and returns an empty
+        response on success.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: CreateSecurityFinding
+      parameters:
+      - description: The vendor providing the security finding. Must be lowercase.
+        example: vendor-name
+        in: header
+        name: vendor
+        required: true
+        schema:
+          type: string
+      - description: The type of security finding.
+        in: header
+        name: finding_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/SecurityFindingType'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: {}
+              description: Security finding data in a custom format.
+              type: object
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create security finding
+      tags:
+      - Security Monitoring
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/findings/cases:
     delete:
       description: 'Detach security findings from their case.
@@ -102383,6 +102706,93 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_notification_profiles_write
+  /api/v2/security/threat-intel-feed:
+    post:
+      description: 'Import threat intelligence feeds with support for IP addresses,
+        domains, and SHA256 hashes. This endpoint requires specific headers to identify
+        the vendor and indicator type.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ImportThreatIntel
+      parameters:
+      - description: The vendor providing the threat intelligence feed.
+        example: vendor-name
+        in: header
+        name: ti_vendor
+        required: true
+        schema:
+          type: string
+      - description: The type of threat indicator. Valid values are ip_address, domain,
+          or sha256.
+        in: header
+        name: ti_indicator
+        required: true
+        schema:
+          $ref: '#/components/schemas/ThreatIntelIndicatorType'
+      - description: Optional integration account identifier.
+        in: header
+        name: ti_integration_account
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Threat intelligence feed data.
+              type: object
+          application/octet-stream:
+            schema:
+              description: Threat intelligence feed data in binary format.
+              format: binary
+              type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Service Unavailable
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Import threat intelligence feed
+      tags:
+      - Security Monitoring
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - reference_tables_write
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/vulnerabilities:
     get:
       description: "Get a list of vulnerabilities.\n\n### Pagination\n\nPagination
@@ -102797,6 +103207,59 @@ paths:
       x-unstable: '**Note**: This endpoint is a private preview.
 
         If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+    post:
+      description: 'Import vulnerabilities in CycloneDX 1.5 format. This endpoint
+        validates the payload against the CycloneDX 1.5 schema and additional mandatory
+        field requirements.
+
+
+        **Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ImportSecurityVulnerabilities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CycloneDXBOM'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Import vulnerabilities
+      tags:
+      - Security Monitoring
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
