@@ -11,9 +11,6 @@ further_reading:
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
-- link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
-  tag: "Blog"
-  text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 aliases:
     - /llm_observability/evaluations/ootb_evaluations
 ---
@@ -224,7 +221,7 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [3]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
 [4]: /llm_observability/evaluations/managed_evaluations/quality_evaluations
 [5]: /llm_observability/evaluations/managed_evaluations/quality_evaluations#topic-relevancy
-[6]: /llm_observability/evaluations/managed_evaluations/quality_evaluations#hallucination
+[6]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination
 [7]: /llm_observability/evaluations/managed_evaluations/quality_evaluations#failure-to-answer
 [8]: /llm_observability/evaluations/managed_evaluations/quality_evaluations#language-mismatch
 [9]: /llm_observability/evaluations/managed_evaluations/quality_evaluations#sentiment

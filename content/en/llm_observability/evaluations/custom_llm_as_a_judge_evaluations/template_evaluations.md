@@ -8,6 +8,9 @@ further_reading:
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
+- link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
+  tag: "Blog"
+  text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 aliases:
   - /llm_observability/evaluations/agent_evaluations
   - /llm_observability/evaluations/managed_evaluations/agent_evaluations
@@ -15,7 +18,7 @@ aliases:
   - /llm_observability/evaluations/managed_evaluations/session_level_evaluations
 ---
 
-Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
+Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
 
 For best practices and details on how to create LLM-as-a-judge evaluations, read [Create a custom LLM-as-a-judge evaluation][17].
 
@@ -51,6 +54,69 @@ Datadog provides the following categories of Failure to Answer, listed in the fo
 | No Content Response | An empty output accompanied by a message indicating no content is available | Not found, N/A |
 | Redirection Response | Redirects the user to another source or suggests an alternative approach | If you have additional details, I'd be happy to include them|
 | Refusal Response | Explicitly declines to provide an answer or to complete the request | Sorry, I can't answer this question |
+
+### Hallucination
+
+Hallucination evaluations identify instances where the LLM makes a claim that disagrees with the provided input context. This check helps ensure your RAG applications stay grounded in retrieved data and do not fabricate information.
+
+{{< img src="llm_observability/evaluations/hallucination_5.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Definition |
+|---|---|
+| Evaluated on Output | Hallucination flags any output that disagrees with the context provided to the LLM. |
+
+<div class="alert alert-info">Hallucination detection is only available for OpenAI.</div>
+
+#### Configure a Hallucination evaluation
+
+Use [Prompt Tracking][26] annotations to track your prompts and set them up for hallucination detection. Annotate your LLM spans with the user query and context so hallucination detection can evaluate model outputs against the retrieved data.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.types import Prompt
+
+# if your llm call is auto-instrumented...
+with LLMObs.annotation_context(
+        prompt=Prompt(
+            id="generate_answer_prompt",
+            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
+            variables={"user_question": user_question, "article": article},
+            rag_query_variables=["user_question"],
+            rag_context_variables=["article"]
+        ),
+        name="generate_answer"
+):
+    oai_client.chat.completions.create(...) # autoinstrumented llm call
+
+# if your llm call is manually instrumented ...
+@llm(name="generate_answer")
+def generate_answer():
+  ...
+  LLMObs.annotate(
+            prompt=Prompt(
+                id="generate_answer_prompt",
+                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
+                variables={"user_question": user_question, "article": article},
+                rag_query_variables=["user_question"],
+                rag_context_variables=["article"]
+            ),
+  )
+{{< /code-block >}}
+
+The `variables` dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+
+Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
+
+Prompt Tracking is available on Python starting from version 3.15. It also requires an ID for the prompt and the template set up to monitor and track your prompt versions. You can find more examples of prompt tracking and instrumentation in the [SDK documentation][26].
+
+Hallucination detection makes a distinction between two types of hallucinations, which can be configured when Hallucination is enabled:
+
+| Configuration Option | Description |
+|---|---|
+| Contradiction | Claims made in the LLM-generated response that go directly against the provided context |
+| Unsupported Claim | Claims made in the LLM-generated response that are not grounded in the context |
+
+Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
 
 ### Prompt Injection
 
@@ -342,3 +408,5 @@ result = triage_agent.run_sync(
 [22]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#goal-completeness
 [23]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
 [24]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-selection
+[25]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination
+[26]: /llm_observability/instrumentation/sdk?tab=python#prompt-tracking
