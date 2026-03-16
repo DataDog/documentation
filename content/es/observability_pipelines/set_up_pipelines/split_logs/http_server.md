@@ -1,33 +1,31 @@
 ---
-aliases:
-- /es/observability_pipelines/dual_ship_logs/http_client/
 disable_toc: false
-title: Logs de envío doble del cliente HTTP
+title: Dividir logs para el servidor HTTP
 ---
 
 ## Información general
 
-Utiliza el worker de Observability Pipelines para agregar y procesar los logs de tu servidor HTTP antes de dirigirlos a diversas aplicaciones.
+Utiliza el worker de Observability Pipelines para procesar y enrutar logs de tu cliente HTTP a diferentes destinos en función de tu caso de uso.
 
-{{% observability_pipelines/use_case_images/dual_ship_logs %}}
+{{% observability_pipelines/use_case_images/split_logs %}}
 
 Este documento te guiará a través de los siguientes pasos:
-1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
+1. [Requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
 1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
 
 ## Requisitos previos
 
-{{% observability_pipelines/prerequisites/http_client %}}
+{{% observability_pipelines/prerequisites/http_server %}}
 
 ## Configurar Observability Pipelines
 
 1. Ve a [Observability Pipelines][1].
-1. Selecciona la plantilla **Logs de envío doble** para crear un nuevo pipeline.
-1. Selecciona **Cliente HTTP** como fuente.
+1. Selecciona la plantilla **Split Logs** (Dividir logs) para crear un pipeline nuevo.
+1. Selecciona la fuente **HTTP Server** (Servidor HTTP).
 
 ### Configurar la fuente
 
-{{% observability_pipelines/source_settings/http_client %}}
+{{% observability_pipelines/source_settings/http_server %}}
 
 ### Configurar los destinos
 
@@ -243,7 +241,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="Añadir reglas desde la biblioteca" level="h5" %}}
+{{% collapse-content title="Añadir reglas de la biblioteca" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
@@ -278,9 +276,8 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 
 ### Instalar el worker de Observability Pipelines
 1. Selecciona tu plataforma en el menú desplegable **Elige tu plataforma de instalación**.
-1. Ingresa la ruta completa de la URL del endpoint HTTP/S, como `https://127.0.0.8/logs`. El worker de Observability Pipelines recopila eventos de logs de este endpoint.
-
-1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta [Requisitos previos](#prerequisites).
+1. Introduce la dirección del servidor HTTP/S, como `0.0.0.0:9997`. El worker de Observability Pipelines escucha esta dirección de socket para tus logs de cliente HTTP.
+1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta los [requisitos previos](#prerequisites).
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
