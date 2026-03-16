@@ -32,7 +32,14 @@ Historical jobs are one-time executable queries on historical logs used to backt
 1. {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}Select **Real-Time Rule**.{% /if %}
 {% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}Select **Scheduled Rule**.{% /if %}
 {% if equals($cloud_siem_detection_rule_type, "historical_job") %}Select **Historical job**, then select the **Logs Index** and **Timerange** for the job.{% /if %}
-1. Select the detection method you want to use for creating signals.
+1. {% if equals($cloud_siem_detection_rule_search_query, "threshold") %}Select the **Threshold** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "new_value") %}Select the **New value** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "anomaly") %}Select the **Anomaly** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "content_anomaly") %}Select the **Content Anomaly** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "impossible_travel") %}Select the **Impossible travel** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "third_party") %}Select the **Third party** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "sequence") %}Select the **Sequence** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_search_query, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
 
 ## Define your search query
 
@@ -157,7 +164,7 @@ For the current step and the next step:
 ### Severity and notification
 
 1. In the **Trigger** dropdown menu, select the severity status.
-1. (Optional) In the **Add notify** section, click **Add Recipient** to configure [notification targets][3].
+1. (Optional) In the **And notify** section, click **Add Recipient** to configure [notification targets][3].
     - You can create [notification rules][4] to manage notifications automatically, avoiding manual edits for each detection rule.
 
 ### Review the sequence preview
@@ -188,7 +195,7 @@ Choose the query language you want to use.
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. If you are using an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
    {% partial file="security/cloud_siem/threshold_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
@@ -230,7 +237,7 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 {% img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. If you are using an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
    {% partial file="security/cloud_siem/new_value_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
@@ -247,7 +254,7 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 {% img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. If you are using an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
    {% partial file="security/cloud_siem/anomaly_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
@@ -264,7 +271,7 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 {% img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. If you are using an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
    {% partial file="security/cloud_siem/content_anomaly_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
@@ -284,7 +291,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /alert %}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
-1. If you are an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
+1. If you are using an add-on and see the **Index** dropdown menu, select the index of logs you want to analyze.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
    {% partial file="security/cloud_siem/impossible_travel_query.mdoc.md" /%}
 1. (Optional) To create calculated fields that transform your logs during query time:
@@ -438,17 +445,22 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-rt-threshold %}
+#### Rule multi-triggering {% #rule-multi-triggering-rt-threshold %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-rt-threshold %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-threshold %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-rt-threshold %}
+#### Enable optional group by {% #enable-group-by-rt-threshold %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-threshold %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
+
 {% /if %}
 
 <!-- Real-time rule AND new value -->
@@ -459,21 +471,29 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Forget value {% #forget-value-rt-new-value%}
+#### Forget value {% #forget-value-rt-new-value%}
 
 {% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
-#### 2. Rule multi-triggering behavior {% #rule-multi-triggering-rt-new-value%}
+#### Rule multi-triggering behavior {% #rule-multi-triggering-rt-new-value%}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 3. Decrease severity for non-production environments {% #decrease-severity-new-value%}
+#### Decrease severity for non-production environments {% #decrease-severity-new-value%}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 4. Enable optional group by {% #enable-group-by-rt-new-value%}
+#### Enable optional group by {% #enable-group-by-rt-new-value%}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-new-value %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
+
+#### Enable instantaneous baseline {% #enable-instantaneous-baseline-new-value %}
+
+{% partial file="security/cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND anomaly -->
@@ -484,17 +504,21 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-rt-anomaly %}
+#### Rule multi-triggering {% #rule-multi-triggering-rt-anomaly %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-rt-anomaly %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-anomaly %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-rt-anomaly %}
+#### Enable optional group by {% #enable-group-by-rt-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND content anomaly -->
@@ -505,21 +529,25 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Content anomaly detection {% #content-anomaly-rt-content-anomaly %}
+#### Content anomaly detection {% #content-anomaly-rt-content-anomaly %}
 
 {% partial file="security/cloud_siem/content_anomaly_options.mdoc.md" /%}
 
-#### 2. Rule multi-triggering behavior {% #rule-multi-triggering-rt-content-anomaly %}
+#### Rule multi-triggering behavior {% #rule-multi-triggering-rt-content-anomaly %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
 
-#### 3. Decrease severity for non-production environments {% #decrease-severity-rt-content-anomaly %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-content-anomaly %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 4. Enable optional group by {% #enable-group-by-rt-content-anomaly %}
+#### Enable optional group by {% #enable-group-by-rt-content-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-content-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND impossible travel -->
@@ -530,17 +558,21 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-rt-impossible-travel %}
+#### Rule multi-triggering {% #rule-multi-triggering-rt-impossible-travel %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-rt-impossible-travel %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-impossible-travel %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-rt-impossible-travel %}
+#### Enable optional group by {% #enable-group-by-rt-impossible-travel %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-impossible-travel %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND third party -->
@@ -551,28 +583,36 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Decrease severity for non-production environments {% #decrease-severity-rt-third-party %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-third-party %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 2. Enable optional group by {% #enable-group-by-rt-third-party %}
+#### Enable optional group by {% #enable-group-by-rt-third-party %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-third-party %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND sequence -->
 {% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "sequence")) %}
-#### 1. Rule multi-triggering {% #rule-multi-triggering-rt-sequence %}
+#### Rule multi-triggering {% #rule-multi-triggering-rt-sequence %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-rt-sequence %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-sequence %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-rt-sequence %}
+#### Enable optional group by {% #enable-group-by-rt-sequence %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-rt-sequence %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Real-time rule AND signal correlation -->
@@ -583,11 +623,11 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-rt-signal-correlation %}
+#### Rule multi-triggering {% #rule-multi-triggering-rt-signal-correlation %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-rt-signal-correlation %}
+#### Decrease severity for non-production environments {% #decrease-severity-rt-signal-correlation %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 {% /if %}
@@ -600,17 +640,21 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-schedule-threshold %}
+#### Rule multi-triggering {% #rule-multi-triggering-scheduled-threshold %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-schedule-threshold %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-threshold %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-schedule-threshold %}
+#### Enable optional group by {% #enable-group-by-scheduled-threshold %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-scheduled-threshold %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND new value -->
@@ -621,25 +665,25 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Forget value {% #forget-value-scheduled-new-value %}
+#### Forget value {% #forget-value-scheduled-new-value %}
 
 {% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
-#### 2. Rule multi-triggering behavior {% #rule-multi-triggering-scheduled-new-value %}
+#### Rule multi-triggering behavior {% #rule-multi-triggering-scheduled-new-value %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 3. Decrease severity for non-production environments {% #decrease-severity-scheduled-new-value %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-new-value %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 4. Enable optional group by {% #enable-group-by-scheduled-new-value %}
+#### Enable optional group by {% #enable-group-by-scheduled-new-value %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
-#### 5. Enable instantaneous baseline {% #enable-instantaneous-baseline-new-value %}
+#### Group signals {% #group-signals-scheduled-new-value %}
 
-{% partial file="security/cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND anomaly -->
@@ -650,17 +694,21 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-scheduled-anomaly %}
+#### Rule multi-triggering {% #rule-multi-triggering-scheduled-anomaly %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-scheduled-anomaly %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-anomaly %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-scheduled-anomaly %}
+#### Enable optional group by {% #enable-group-by-scheduled-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-scheduled-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND content anomaly -->
@@ -671,21 +719,25 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Content anomaly detection {% #content-anomaly-scheduled-content-anomaly %}
+#### Content anomaly detection {% #content-anomaly-scheduled-content-anomaly %}
 
 {% partial file="security/cloud_siem/content_anomaly_options.mdoc.md" /%}
 
-#### 2. Rule multi-triggering behavior {% #rule-multi-triggering-scheduled-content-anomaly %}
+#### Rule multi-triggering behavior {% #rule-multi-triggering-scheduled-content-anomaly %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
 
-#### 3. Decrease severity for non-production environments {% #decrease-severity-scheduled-content-anomaly %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-content-anomaly %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 4. Enable optional group by {% #enable-group-by-scheduled-content-anomaly %}
+#### Enable optional group by {% #enable-group-by-scheduled-content-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-scheduled-content-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND impossible travel -->
@@ -696,17 +748,21 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-scheduled-impossible-travel %}
+#### Rule multi-triggering {% #rule-multi-triggering-scheduled-impossible-travel %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-scheduled-impossible-travel %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-impossible-travel %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-scheduled-impossible-travel %}
+#### Enable optional group by {% #enable-group-by-scheduled-impossible-travel %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-scheduled-impossible-travel %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND third party -->
@@ -717,13 +773,17 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Decrease severity for non-production environments {% #decrease-severity-scheduled-third-party %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-third-party %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### 2. Enable optional group by {% #enable-group-by-scheduled-third-party %}
+#### Enable optional group by {% #enable-group-by-scheduled-third-party %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-scheduled-third-party %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule AND signal correlation -->
@@ -734,13 +794,17 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Rule multi-triggering {% #rule-multi-triggering-scheduled-signal-correlation %}
+#### Rule multi-triggering {% #rule-multi-triggering-scheduled-signal-correlation %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### 2. Decrease severity for non-production environments {% #decrease-severity-scheduled-signal-correlation %}
+#### Decrease severity for non-production environments {% #decrease-severity-scheduled-signal-correlation %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
+
+#### Group signals {% #group-signals-scheduled-signal-correlation %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND threshold -->
@@ -751,48 +815,67 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Job multi-triggering {% #job-multi-triggering-threshold %}
+#### Job multi-triggering {% #job-multi-triggering-threshold %}
 
 {% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
-#### 2. Enable optional group by {% #enable-group-by-historical-threshold %}
+#### Enable optional group by {% #enable-group-by-historical-threshold %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-historical-threshold %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND new value -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
-<!-- No image?? No instructions?? -->
 ### Other parameters
 
-#### 1. Forget value {% #forget-value-historical-new-value %}
+#### Forget value {% #forget-value-historical-new-value %}
 
 {% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
-#### 2. Job multi-triggering behavior {% #job-multi-triggering-historical-new-value %}
+#### Job multi-triggering behavior {% #job-multi-triggering-historical-new-value %}
 
 {% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-historical-new-value %}
+#### Enable optional group by {% #enable-group-by-historical-new-value %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
-#### 4. Enable instantaneous baseline {% #enable-instantaneous-baseline-new-value %}
+#### Group signals {% #group-signals-historical-new-value %}
 
-{% partial file="security/cloud_siem/enable_instantaneous_baseline.mdoc.md" /%}
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND anomaly -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
 ### Other parameters
 
-#### 1. Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
+#### Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
 
 {% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
-#### 2. Enable optional group by {% #enable-group-by-historical-anomaly %}
+#### Enable optional group by {% #enable-group-by-historical-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-historical-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
+
+#### Bucket duration
+
+In the **Bucket Duration** dropdown, select a duration over which to measure percentiles.
+
+#### Learning duration
+
+In the **Learning Duration** dropdown, select an amount of time for the rule to learn new values.
+
+#### Learning period alerts
+
+In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM to send alerts during the learning period.
 {% /if %}
 
 <!-- Historical job AND content anomaly -->
@@ -813,30 +896,38 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### 1. Content anomaly detection {% #content-anomaly-historical-content-anomaly %}
+#### Content anomaly detection {% #content-anomaly-historical-content-anomaly %}
 
 {% partial file="security/cloud_siem/content_anomaly_options.mdoc.md" /%}
 
-#### 2. Job multi-triggering behavior {% #job-multi-triggering-historical-content-anomaly %}
+#### Job multi-triggering behavior {% #job-multi-triggering-historical-content-anomaly %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering_content_anomaly.mdoc.md" /%}
 
-#### 3. Enable optional group by {% #enable-group-by-historical-content-anomaly %}
+#### Enable optional group by {% #enable-group-by-historical-content-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-historical-content-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND impossible travel -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
 ### Other parameters
 
-#### 1. Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
+#### Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
 
 {% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
-#### 2. Enable optional group by {% #enable-group-by-historical-anomaly %}
+#### Enable optional group by {% #enable-group-by-historical-anomaly %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-historical-anomaly %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Historical job AND third party -->
@@ -849,7 +940,13 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
+#### Enable optional group by {% #enable-group-by-historical-third-party %}
+
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
+
+#### Group signals {% #group-signals-historical-third-party %}
+
+{% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
 
 <!-- Scheduled rule only: Add custom schedule section -->

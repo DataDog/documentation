@@ -2,7 +2,7 @@
 1. The **Location attribute** value is automatically set to `@network.client.geoip`.
     - The `location attribute` specifies which field holds the geographic information for a log.
     - The only supported value is `@network.client.geoip`, which is enriched by the [GeoIP parser][801] to give a log location information based on the client's IP address.
-1. Click the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
+1. Select the **Baseline user locations** checkbox if you want Datadog to learn regular access locations before triggering a signal.
     - When selected, signals are suppressed for the first 24 hours. During that time, Datadog learns the user's regular access locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access.
     - See [How the impossible detection method works][802] for more information.
 
