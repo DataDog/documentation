@@ -75,7 +75,7 @@ You can also add filters to your metrics, similar to other [Product Analytics da
 {{< img src="/product_analytics/experiment/exp_filter_by.png" alt="Filter flow to scope your metric by specific properties." style="width:90%;" >}}
 
 ## Advanced options
-Datadog supports several advanced options specific to Experiments:
+Datadog Experiments supports several advanced options:
 
 `Timeframe filters`
 : - By default, Datadog will include all events between a user's first exposure and the end of the experiment. If you want to measure a time-boxed value such as “sessions within 7 days”, you can add a timeframe filter.
