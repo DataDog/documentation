@@ -1,6 +1,6 @@
 ---
 title: Planning and Launching Experiments
-description: Use Datadog Experiments to measure the causal relationship new experiences or features have on user outcomes.
+description: Use Datadog Experiments to measure the causal relationship that new experiences or features have on user outcomes.
 aliases:
   - /product_analytics/experimentation/
 further_reading:
@@ -30,13 +30,13 @@ To create, configure, and launch your experiment, complete the following steps:
 2. Click **+ Create Experiment**.
 3. Enter your experiment name and hypothesis.
 
-{{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
 
 ### Step 2 - Add metrics
 
 After you’ve created an experiment, add your primary metric and optional guardrails. See [Defining Metrics][2] for details on how to create metrics.
 
-{{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="create an experiment and add a hypothesis for the experiment." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_decision_metrics1.png" alt="The metrics configuration panel with options for primary metric and guardrails." style="width:80%;" >}}
 
 #### Add a sample size calculation (optional)
 
@@ -47,22 +47,22 @@ After selecting your experiment’s metrics, use the optional sample size calcul
 
 1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference that you are able to detect between your experiment’s variants.
 
-{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="Sleect an entrypoint event to run a sample size calculation" style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_sample_size.png" alt="Select an entrypoint event to run a sample size calculation" style="width:90%;" >}}
 
 ### Step 3 - Launch your experiment
 
 After specifying your metrics, you can launch your experiment.
 
-1. Select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
+1. Select a Feature flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
 
-1. Click **Set up experiment on feature flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
+1. Click **Set Up Experiment on Feature Flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
 
 {{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
 
 ## Next steps
 1. **[Defining metrics][2]**: Define the metrics you want to measure during your experiments.
 1. **[Reading Experiment Results][5]**: Review and explore your experiment results.
-1. Learn more about **[Minimum Detectable Effects][3]**: Choose an appropriately sized MDE.
+1. **[Minimum Detectable Effects][3]**: Choose an appropriately sized MDE.
 
 
 ## Further reading

@@ -8789,7 +8789,7 @@ menu:
       parent: rum
       weight: 13
     - name: Product Analytics
-      url: product_analytics
+      url: product_analytics/
       pre: product-analytics
       identifier: product_analytics
       parent: digital_experience_heading
@@ -8840,7 +8840,7 @@ menu:
       identifier: pa_profiles
       weight: 4
     - name: Experiments
-      url: experiments
+      url: experiments/
       pre: experiment-wui
       parent: digital_experience_heading
       identifier: pa_experiments
