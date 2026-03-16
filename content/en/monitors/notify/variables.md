@@ -475,7 +475,20 @@ For instance, assume your composite monitor has a sub-monitor `a`, which is a Lo
 
 ### Character escape
 
-Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+Variable content is HTML-encoded by default. For example, special characters like `&` and `'` are converted to `&amp;` and `&#x27;` in the rendered output. To output raw, unencoded content, use triple curly braces instead of double curly braces:
+
+| Syntax | Output |
+|--------|--------|
+| `{{variable}}` | HTML-encoded (default) |
+| `{{{variable}}}` | Raw, unencoded |
+
+For example, to render the check message without HTML encoding:
+
+```text
+{{{check_message}}}
+```
+
+This is particularly relevant when `{{check_message}}` contains auto-generated URLs with query parameters (for example, on HTTP Check monitors). The `&` characters in those URLs are HTML-encoded by default, which can break clickable links in notifications. Use `{{{check_message}}}` to preserve the URLs as-is.
 
 ## Template variables
 
