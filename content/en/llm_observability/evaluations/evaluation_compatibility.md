@@ -38,9 +38,9 @@ Existing templates for custom LLM-as-a-judge evaluations are supported for the f
 | [Toxicity][7]           | Fully supported  | All third party LLM providers | All span kinds  |
 | [Prompt Injection][8]   | Fully supported  | All third party LLM providers | All span kinds  |
 | [Topic Relevancy][9]    | Fully supported  | All third party LLM providers | All span kinds  |
-| [Tool Selection][1]             | v3.12+            | All third party LLM providers          | LLM only        |
-| [Tool Argument Correctness][2]  | v3.12+            | All third party LLM providers          | LLM only        |
-| [Goal Completeness][3]          | Fully supported   | All third party LLM providers          | LLM only        |
+| [Tool Selection][1]             | Fully supported | All third party LLM providers | LLM only |
+| [Tool Argument Correctness][2]  | Fully supported | All third party LLM providers | LLM only |
+| [Goal Completeness][3]          | Fully supported | All third party LLM providers | LLM only |
 
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-selection

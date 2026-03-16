@@ -17,9 +17,8 @@ aliases:
 
 ## Overview
 
-Managed evaluations are built-in tools to assess your LLM application on dimensions like quality, security, and safety. By creating them, you can assess the effectiveness of your application's responses, including detection of sentiment, topic relevancy, toxicity, failure to answer, and hallucination.
-
-LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
+Managed evaluations are built-in tools to assess your LLM application. LLM Observability associates evaluations with individual
+spans so you can view the inputs and outputs that led to a specific evaluation.
 
 Learn more about the [compatibility requirements][2].
 
