@@ -94,6 +94,8 @@ logrus.WithContext(ctx).Info("Hello World!")
 
 {{% serverless-init-env-vars-sidecar language="go" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}

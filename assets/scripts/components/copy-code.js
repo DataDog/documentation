@@ -4,7 +4,7 @@ import Tooltip from 'bootstrap/js/dist/tooltip';
 // Script to add copy buttons to markdown fenced (```), and {{ highlight }} hugo function code blocks
 
 function initCopyCode () {
-    addCopyButton(['shell', 'json', 'yaml', 'sql'])
+    addCopyButton(['shell', 'json', 'yaml', 'sql', 'bash', 'hcl', 'python'])
 
     // Add Event Listener
     const copyButtons = document.querySelectorAll(['.js-copy-button', '#tryRuleModal .copy-icon']);
@@ -18,7 +18,7 @@ function initCopyCode () {
 }
 
 /**
- * Adds copy button to code examples that use the highlight hugo function or are fenced code blocks in markdown 
+ * Adds copy button to code examples that use the highlight hugo function or are fenced code blocks in markdown
  * @param {Array} fencedLangs - Array of languages to target specific fenced codeblocks
  */
 function addCopyButton (fencedLangs) {

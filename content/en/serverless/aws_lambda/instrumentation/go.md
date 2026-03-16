@@ -317,6 +317,8 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ### Install the Datadog Lambda library
 
 ```

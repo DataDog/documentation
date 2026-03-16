@@ -979,8 +979,12 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         conditional_formats:
           description: List of conditional formats.
           example:
@@ -992,6 +996,8 @@ components:
           type: array
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -999,14 +1005,23 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Widget query.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -1017,8 +1032,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
         style:
@@ -1143,12 +1162,16 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         change_type:
           $ref: '#/components/schemas/WidgetChangeType'
         compare_to:
           $ref: '#/components/schemas/WidgetCompareTo'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -1159,18 +1182,28 @@ components:
           type: boolean
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         order_by:
           $ref: '#/components/schemas/WidgetOrderBy'
         order_dir:
           $ref: '#/components/schemas/WidgetSort'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Query definition.
+          deprecated: true
+          description: Query definition. Deprecated - Use `queries` and `formulas`
+            instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -1181,8 +1214,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         show_present:
           description: Whether to show the present value.
           type: boolean
@@ -1919,8 +1956,6 @@ components:
           description: "Array of one request object to display in the widget.\n\nSee
             the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n
             to learn how to build the `REQUEST_SCHEMA`."
-          example:
-          - q: host:X tags:Y
           items:
             $ref: '#/components/schemas/DistributionWidgetRequest'
           maxItems: 1
@@ -1975,10 +2010,14 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         apm_stats_query:
           $ref: '#/components/schemas/ApmStatsQueryDefinition'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -1986,14 +2025,23 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Widget query.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -2004,12 +2052,20 @@ components:
           $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
         request_type:
           $ref: '#/components/schemas/WidgetHistogramRequestType'
+          description: Distribution of point values for distribution metrics. Renders
+            a histogram of raw metric data points.
         response_format:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+          description: Distribution of aggregated grouped queries. Use `request_type`
+            instead for distribution of point values from distribution metrics.
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
@@ -3873,8 +3929,12 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: The widget metrics query.
+          deprecated: true
+          description: The widget metrics query. Deprecated - Use `queries` and `formulas`
+            instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -3887,8 +3947,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
         style:
@@ -4065,7 +4129,9 @@ components:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         events:
-          description: List of widget events.
+          deprecated: true
+          description: List of widget events. Deprecated - Use `overlay` request type
+            instead.
           items:
             $ref: '#/components/schemas/WidgetEvent'
           type: array
@@ -4125,8 +4191,12 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         event_query:
           $ref: '#/components/schemas/EventQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -4134,14 +4204,23 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Widget query.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -4152,12 +4231,19 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
         request_type:
           $ref: '#/components/schemas/WidgetHistogramRequestType'
+          description: Applicable only for distribution of point values for distribution
+            metrics.
         response_format:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+          description: Applicable only for distribution of aggregated grouped queries.
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
@@ -4272,23 +4358,39 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
           description: Query definition.
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
       type: object
     HostMapWidgetDefinition:
       description: The host map widget graphs any metric across your hosts using the
@@ -4613,10 +4715,11 @@ components:
           type: array
       type: object
     HourlyUsageAttributionUsageType:
-      description: 'Supported products for hourly usage attribution requests.
+      description: 'Supported products for hourly usage attribution requests. Usage
+        types are in the format `<usage_type>_usage`.
 
-        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
-        `estimated_ingested_spans_usage`.'
+        To obtain the complete list of valid usage types, make a request to the [Get
+        usage attribution types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
       enum:
       - api_usage
       - apm_fargate_usage
@@ -4628,6 +4731,8 @@ components:
       - asm_serverless_traced_invocations_percentage
       - bits_ai_investigations_usage
       - browser_usage
+      - ci_code_coverage_committers_percentage
+      - ci_code_coverage_committers_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
@@ -4713,6 +4818,8 @@ components:
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
       - BITS_AI_INVESTIGATIONS_USAGE
       - BROWSER_USAGE
+      - CI_CODE_COVERAGE_COMMITTERS_PERCENTAGE
+      - CI_CODE_COVERAGE_COMMITTERS_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -7845,6 +7952,161 @@ components:
       x-enum-varnames:
       - DRAFT
       - PUBLISHED
+    MonitorFormulaAndFunctionAggregateAugmentQuery:
+      description: Augment query for aggregate augmented queries. Can be an events
+        query or a reference table query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
+    MonitorFormulaAndFunctionAggregateAugmentedDataSource:
+      description: Data source for aggregate augmented queries.
+      enum:
+      - aggregate_augmented_query
+      example: aggregate_augmented_query
+      type: string
+      x-enum-varnames:
+      - AGGREGATE_AUGMENTED_QUERY
+    MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition:
+      additionalProperties: false
+      description: A formula and functions aggregate augmented query. Used to enrich
+        base query results with data from a reference table.
+      properties:
+        augment_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentQuery'
+        base_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateBaseQuery'
+        compute:
+          description: Compute options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+          minItems: 1
+          type: array
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedDataSource'
+        group_by:
+          description: Group by options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        join_condition:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateQueryJoinCondition'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+      required:
+      - data_source
+      - base_query
+      - augment_query
+      - join_condition
+      - compute
+      - group_by
+      type: object
+    MonitorFormulaAndFunctionAggregateBaseQuery:
+      description: Base query for aggregate queries. Can be an events query or a metrics
+        query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsQueryDefinition'
+    MonitorFormulaAndFunctionAggregateFilterQuery:
+      description: Filter query for aggregate filtered queries. Can be an events query
+        or a reference table query.
+      oneOf:
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableQueryDefinition'
+    MonitorFormulaAndFunctionAggregateFilteredDataSource:
+      description: Data source for aggregate filtered queries.
+      enum:
+      - aggregate_filtered_query
+      example: aggregate_filtered_query
+      type: string
+      x-enum-varnames:
+      - AGGREGATE_FILTERED_QUERY
+    MonitorFormulaAndFunctionAggregateFilteredQueryDefinition:
+      additionalProperties: false
+      description: A formula and functions aggregate filtered query. Used to filter
+        base query results using data from another source.
+      properties:
+        base_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateBaseQuery'
+        compute:
+          description: Compute options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinitionCompute'
+          type: array
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredDataSource'
+        filter_query:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilterQuery'
+        filters:
+          description: Filter conditions for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateQueryFilter'
+          type: array
+        group_by:
+          description: Group by options for the query.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryGroupBy'
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+      required:
+      - data_source
+      - base_query
+      - filter_query
+      - filters
+      type: object
+    MonitorFormulaAndFunctionAggregateQueryFilter:
+      additionalProperties: false
+      description: Filter definition for aggregate filtered queries.
+      properties:
+        base_attribute:
+          description: Attribute from the base query to filter on.
+          example: org_id
+          type: string
+        exclude:
+          default: false
+          description: Whether to exclude matching records instead of including them.
+          type: boolean
+        filter_attribute:
+          description: Attribute from the filter query to match against.
+          example: org_id
+          type: string
+      required:
+      - base_attribute
+      - filter_attribute
+      type: object
+    MonitorFormulaAndFunctionAggregateQueryJoinCondition:
+      additionalProperties: false
+      description: Join condition for aggregate augmented queries.
+      properties:
+        augment_attribute:
+          description: Attribute from the augment query to join on.
+          example: org_id
+          type: string
+        base_attribute:
+          description: Attribute from the base query to join on.
+          example: org_id
+          type: string
+        join_type:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateQueryJoinType'
+      required:
+      - base_attribute
+      - augment_attribute
+      - join_type
+      type: object
+    MonitorFormulaAndFunctionAggregateQueryJoinType:
+      description: Join type for aggregate query join conditions.
+      enum:
+      - inner
+      - left
+      example: inner
+      type: string
+      x-enum-varnames:
+      - INNER
+      - LEFT
     MonitorFormulaAndFunctionCostAggregator:
       description: Aggregation methods for metric queries.
       enum:
@@ -8078,6 +8340,11 @@ components:
           description: Measurable attribute to compute.
           example: '@duration'
           type: string
+        name:
+          description: The name assigned to this aggregation, when multiple aggregations
+            are defined for a query.
+          example: compute_result
+          type: string
       required:
       - aggregation
       type: object
@@ -8147,12 +8414,122 @@ components:
       - DATABASE_QUERIES
       - NETWORK
       - NETWORK_PATH
+    MonitorFormulaAndFunctionMetricsAggregator:
+      description: Aggregator for metrics queries.
+      enum:
+      - avg
+      - min
+      - max
+      - sum
+      - last
+      - mean
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      - count_unique
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MIN
+      - MAX
+      - SUM
+      - LAST
+      - MEAN
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+      - COUNT_UNIQUE
+    MonitorFormulaAndFunctionMetricsDataSource:
+      description: Data source for metrics queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: metrics
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionMetricsQueryDefinition:
+      additionalProperties: false
+      description: A formula and functions metrics query for use in aggregate queries.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionMetricsDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The metrics query definition.
+          example: avg:system.cpu.user{*}
+          type: string
+      required:
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition'
+    MonitorFormulaAndFunctionReferenceTableColumn:
+      additionalProperties: false
+      description: A column definition for reference table queries.
+      properties:
+        alias:
+          description: Optional alias for the column.
+          type: string
+        name:
+          description: Name of the column.
+          example: org_id
+          type: string
+      required:
+      - name
+      type: object
+    MonitorFormulaAndFunctionReferenceTableDataSource:
+      description: Data source for reference table queries.
+      enum:
+      - reference_table
+      example: reference_table
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLE
+    MonitorFormulaAndFunctionReferenceTableQueryDefinition:
+      additionalProperties: false
+      description: A reference table query for use in aggregate queries.
+      properties:
+        columns:
+          description: List of columns to retrieve from the reference table.
+          items:
+            $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableColumn'
+          type: array
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionReferenceTableDataSource'
+        name:
+          description: Name of the query.
+          example: filter_query
+          type: string
+        query_filter:
+          description: Optional filter expression for the reference table query.
+          type: string
+        table_name:
+          description: Name of the reference table.
+          example: test_table
+          type: string
+      required:
+      - data_source
+      - table_name
+      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -9166,7 +9543,11 @@ components:
           type: array
       type: object
     MonthlyUsageAttributionSupportedMetrics:
-      description: Supported metrics for monthly usage attribution requests.
+      description: 'Supported metrics for monthly usage attribution requests. Usage
+        types are in the format `<usage_type>_usage`.
+
+        To obtain the complete list of valid usage types, make a request to the [Get
+        usage attribution types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
       enum:
       - api_usage
       - api_percentage
@@ -9497,10 +9878,7 @@ components:
       - SCA_FARGATE_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
-      description: 'Fields in Usage Summary by tag(s).
-
-        The following values have been **deprecated**: `estimated_indexed_spans_usage`,
-        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`.'
+      description: Fields in Usage Summary by tag(s).
       properties:
         api_percentage:
           description: The percentage of synthetic API test usage by tag(s).
@@ -9578,6 +9956,14 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        ci_code_coverage_committers_percentage:
+          description: The percentage of Code Coverage committers usage by tag(s).
+          format: double
+          type: number
+        ci_code_coverage_committers_usage:
+          description: The total Code Coverage committers usage by tag(s).
           format: double
           type: number
         ci_pipeline_indexed_spans_percentage:
@@ -11568,8 +11954,12 @@ components:
           $ref: '#/components/schemas/WidgetAggregator'
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -11577,6 +11967,8 @@ components:
           type: array
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -11584,14 +11976,23 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: TODO.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -11602,8 +12003,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
       type: object
     ReferenceTableLogsLookupProcessor:
       description: '**Note**: Reference Tables are in public beta.
@@ -13335,23 +13740,39 @@ components:
           $ref: '#/components/schemas/ScatterplotWidgetAggregator'
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
           description: Query definition.
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
       type: object
     ScatterPlotWidgetDefinition:
       description: The scatter plot visualization allows you to graph a chosen scope
@@ -15266,10 +15687,16 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -15277,14 +15704,23 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Widget query.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -15295,8 +15731,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
@@ -19303,6 +19743,8 @@ components:
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         apm_stats_query:
           $ref: '#/components/schemas/ApmStatsQueryDefinition'
         cell_display_mode:
@@ -19317,6 +19759,8 @@ components:
           type: array
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -19329,16 +19773,26 @@ components:
           type: integer
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         order:
           $ref: '#/components/schemas/WidgetSort'
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Query definition.
+          deprecated: true
+          description: Query definition. Deprecated - Use `queries` and `formulas`
+            instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -19349,8 +19803,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
         text_formats:
@@ -19584,6 +20042,23 @@ components:
       x-enum-varnames:
       - BARS
       - AREA
+    TimeseriesRequestStyle:
+      description: Define request widget style for timeseries widgets.
+      properties:
+        has_value_labels:
+          description: If true, the value is displayed as a label relative to the
+            data point.
+          type: boolean
+        line_type:
+          $ref: '#/components/schemas/WidgetLineType'
+        line_width:
+          $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+      type: object
     TimeseriesWidgetDefinition:
       description: The timeseries visualization allows you to display the evolution
         of one or more metrics, log events, or Indexed Spans over time.
@@ -19594,7 +20069,9 @@ components:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         events:
-          description: List of widget events.
+          deprecated: true
+          description: List of widget events. Deprecated - Use `overlay` request type
+            instead.
           items:
             $ref: '#/components/schemas/WidgetEvent'
           type: array
@@ -19696,12 +20173,18 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         display_type:
           $ref: '#/components/schemas/WidgetDisplayType'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -19709,6 +20192,8 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         metadata:
           description: Used to define expression aliases.
           items:
@@ -19716,15 +20201,22 @@ components:
           type: array
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         on_right_yaxis:
           description: Whether or not to display a second y-axis on the right.
           type: boolean
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Widget query.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -19735,10 +20227,14 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         style:
-          $ref: '#/components/schemas/WidgetRequestStyle'
+          $ref: '#/components/schemas/TimeseriesRequestStyle'
       type: object
     ToplistWidgetDefinition:
       description: The top list visualization enables you to display a list of Tag
@@ -19823,8 +20319,12 @@ components:
       properties:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         audit_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         conditional_formats:
           description: List of conditional formats.
           example:
@@ -19837,6 +20337,8 @@ components:
           type: array
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -19844,14 +20346,23 @@ components:
           type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         network_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         profile_metrics_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         q:
-          description: Widget query.
+          deprecated: true
+          description: Widget query. Deprecated - Use `queries` and `formulas` instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -19862,8 +20373,12 @@ components:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+          deprecated: true
+          description: Deprecated - Use `queries` and `formulas` instead.
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
         style:
@@ -20087,7 +20602,9 @@ components:
             $ref: '#/components/schemas/WidgetFormula'
           type: array
         q:
-          description: The widget metrics query.
+          deprecated: true
+          description: The widget metrics query. Deprecated - Use `queries` and `formulas`
+            instead.
           type: string
         queries:
           description: List of queries that can be returned directly or used in formulas.
@@ -20255,7 +20772,8 @@ components:
           description: The account public ID.
           type: string
         billing_plan:
-          description: The billing plan.
+          deprecated: true
+          description: The billing plan (metadata). (Deprecated from June 2026)
           type: string
         end_date:
           description: Shows the last date of usage.
@@ -21881,9 +22399,20 @@ components:
             org.
           format: int64
           type: integer
+        csm_host_enterprise_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise OCI hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         csm_host_enterprise_total_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro OCI hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_aas_host_top99p:
@@ -22164,6 +22693,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for all organizations.
@@ -22264,6 +22798,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for all organizations.
           format: int64
           type: integer
         npm_host_top99p:
@@ -23024,9 +23563,20 @@ components:
             org.
           format: int64
           type: integer
+        csm_host_enterprise_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise OCI hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
         csm_host_enterprise_total_host_count_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_pro_oci_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro OCI hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_aas_host_top99p:
@@ -23316,6 +23866,11 @@ components:
             current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current date for the given org.
@@ -23416,6 +23971,11 @@ components:
         network_device_wireless_top99p:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        network_path_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         npm_host_top99p:
@@ -24174,9 +24734,19 @@ components:
             Enterprise GCP hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
+        csm_host_enterprise_oci_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise OCI hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         csm_host_enterprise_total_host_count_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Enterprise hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        csm_host_pro_oci_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro OCI hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_aas_host_top99p_sum:
@@ -24469,6 +25039,11 @@ components:
             2024).
           format: int64
           type: integer
+        infra_edge_monitoring_devices_top99p_sum:
+          description: Shows the 99th percentile of all Edge Devices Monitoring devices
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
             over all hours in the current month for all organizations.
@@ -24589,6 +25164,11 @@ components:
         network_device_wireless_top99p_sum:
           description: Shows the 99th percentile of all Network Device Monitoring
             wireless devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        network_path_agg_sum:
+          description: Shows the sum of all Network Path scheduled tests over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
@@ -25747,6 +26327,7 @@ components:
       - LINE
       - OVERLAY
     WidgetEvent:
+      deprecated: true
       description: 'Event overlay control options.
 
 
@@ -25914,7 +26495,9 @@ components:
       - CHECK
       - CLUSTER
     WidgetHistogramRequestType:
-      description: Request type for the histogram request.
+      description: Request type for distribution of point values for distribution
+        metrics. Query space aggregator must be `histogram:<metric name>` for points
+        distributions.
       enum:
       - histogram
       example: histogram
@@ -30992,12 +31575,11 @@ paths:
       x-menu-order: 3
     put:
       deprecated: true
-      description: 'Add channels to your existing Datadog-Slack integration.
-
-
-        This method updates your integration configuration by **replacing**
-
-        your current configuration with the new one sent to your Datadog organization.'
+      description: "**Deprecated**: This endpoint is deprecated.\n\nThis method **completely
+        rewrites** your integration configuration by **replacing**\nyour current configuration
+        with the new one sent to your Datadog organization.\nPlease ensure that all
+        fields\u2014including the Slack webhook URL\u2014are valid\nbecause an invalid
+        URL will break your Slack notifications."
       operationId: UpdateSlackIntegration
       requestBody:
         content:
@@ -37988,9 +38570,9 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false
@@ -38442,10 +39024,7 @@ paths:
         code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
-        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\nThe
-        following values have been **deprecated**:\n    `estimated_indexed_spans_usage`,
-        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`,
-        `llm_observability_usage`, `llm_observability_percentage`."
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38466,9 +39045,14 @@ paths:
         schema:
           format: date-time
           type: string
-      - description: 'Usage type to retrieve. The following values have been **deprecated**:
+      - description: 'Usage type to retrieve. Usage types are in the format `<usage_type>_usage`.
 
-          `estimated_indexed_spans_usage`, `estimated_ingested_spans_usage`.'
+          Example: `infra_host_usage`
+
+          To obtain the complete list of active usage types that can be used to replace
+
+          `<usage_type>` in the field names, make a request to the [Get usage attribution
+          types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
         in: query
         name: usage_type
         required: true
@@ -39029,10 +39613,15 @@ paths:
       - description: 'Comma-separated list of usage types to return, or `*` for all
           usage types.
 
-          The following values have been **deprecated**:
+          Usage types are in the format `<usage_type>_usage` and `<usage_type>_percentage`.
 
-          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`, `llm_observability_usage`, `llm_observability_percentage`.'
+          Example: `infra_host_usage,infra_host_percentage`
+
+          To obtain the complete list of usage attribution types that can be used
+          to replace
+
+          `<usage_type>` in the field names, make a request to the [Get usage attribution
+          types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
         in: query
         name: fields
         required: true
@@ -39044,12 +39633,15 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/UsageSortDirection'
-      - description: 'The field to sort by.
+      - description: 'The field to sort by. Sort fields are in the format `<usage_type>_usage`.
 
-          The following values have been **deprecated**:
+          Example: `infra_host_usage`
 
-          `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`.'
+          To obtain the complete list of usage attribution types that can be used
+          to replace
+
+          `<usage_type>` in the field names, make a request to the [Get usage attribution
+          types API](https://docs.datadoghq.com/api/latest/usage-metering/#get-usage-attribution-types).'
         in: query
         name: sort_name
         required: false
@@ -39682,9 +40274,9 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: 'Boolean to specify whether to include accounts connected to
-          the current account as partner customers in the Datadog partner network
-          program. Defaults to `false`. '
+      - description: Boolean to specify whether to include accounts connected to the
+          current account as partner customers in the Datadog partner network program.
+          Defaults to `false`.
         in: query
         name: include_connected_accounts
         required: false

@@ -72,7 +72,7 @@ Error Tracking Replay Snippets では、エラー発生の前後 15 秒間にお
 ## エラーをリプレイする
 エラーメッセージやスタック トレースなど、エラーに関する重要な情報を確認したら、問題のサマリーから、エラーが発生した最新のセッションのライブ再現へすぐに遷移できます。スタック トレースの下までスクロールし、リプレイのプレビューをクリックすると、エラーが発生する前のユーザーの操作を確認できます。
 
-{{< img src="error_tracking/error-replay.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
+{{< img src="error_tracking/error-replay-2.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
 
 ## その他の参考資料
 
