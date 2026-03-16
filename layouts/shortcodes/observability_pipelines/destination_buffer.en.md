@@ -1,4 +1,4 @@
-Toggle the switch to enable **Buffering Options**. Enable a configurable buffer on your destination to ensure intermittent latency or an outage at the destination doesn't create immediate backpressure, and allow events to continue to be ingested from your source. Disk buffers can also increase pipeline durability by writing logs to disk, ensuring buffered logs persist through a Worker restart. See [Configurable buffers for destinations][100] for more information.
+Toggle the switch to enable **Buffering Options**. Enable a configurable buffer on your destination to ensure intermittent latency or an outage at the destination doesn't create immediate backpressure, and allow events to continue to be ingested from your source. Disk buffers can also increase pipeline durability by writing logs to disk, ensuring buffered logs persist through a Worker restart. See [Destination buffers][100] for more information.
 - If left unconfigured, your destination uses a memory buffer with a capacity of 500 events.
 - To configure a buffer on your destination:
     1. Select the buffer type you want to set (**Memory** or **Disk**).
@@ -7,4 +7,4 @@ Toggle the switch to enable **Buffering Options**. Enable a configurable buffer 
         1. Maximum disk buffer size is 500 GB.
     1. In the **Behavior on full buffer** dropdown menu, select whether you want to **block** events or **drop new events** when the buffer is full.
 
-[100]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[100]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
