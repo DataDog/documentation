@@ -72,7 +72,7 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
 1. Enter the ARN of the IAM role you want to assume.
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
-1. Optionally, enter the assumed role session name and external ID.
+1. (Optional) Enter the assumed role session name and external ID.
 
 ##### Buffering options
 
