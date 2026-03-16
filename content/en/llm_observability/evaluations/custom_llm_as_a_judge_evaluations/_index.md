@@ -336,7 +336,7 @@ You can:
 
 ## Estimated token usage
 
-You can monitor the token usage of your LLM evaluations using [this dashboard][8].
+You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][8].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
