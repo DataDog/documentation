@@ -8173,8 +8173,7 @@ menu:
           - v2
         operationids:
           - UpdateDataset
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Get a single dataset by ID
       url: '#get-a-single-dataset-by-id'
@@ -8186,8 +8185,7 @@ menu:
           - v2
         operationids:
           - GetDataset
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete a dataset
       url: '#delete-a-dataset'
@@ -8199,8 +8197,7 @@ menu:
           - v2
         operationids:
           - DeleteDataset
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Create a dataset
       url: '#create-a-dataset'
@@ -8212,8 +8209,7 @@ menu:
           - v2
         operationids:
           - CreateDataset
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get all datasets
       url: '#get-all-datasets'
@@ -8225,8 +8221,7 @@ menu:
           - v2
         operationids:
           - GetAllDatasets
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Deployment Gates
       url: /api/latest/deployment-gates/
