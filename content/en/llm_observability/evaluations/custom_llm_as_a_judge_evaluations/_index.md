@@ -334,6 +334,18 @@ You can:
 - **Document your rubric**: Clearly define what "Pass" and "Fail" mean to avoid drift over time.
 - **Re-align your evaluator**: Reassess prompt and few-shot examples when the underlying LLM updates.
 
+## Estimated token usage
+
+You can monitor the token usage of your LLM evaluations using [this dashboard][3].
+
+If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
+
+- `ml_obs.estimated_usage.llm.input.tokens`
+- `ml_obs.estimated_usage.llm.output.tokens`
+- `ml_obs.estimated_usage.llm.total.tokens`
+
+Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
