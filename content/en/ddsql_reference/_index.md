@@ -957,7 +957,7 @@ SELECT *
 FROM dd.logs(
     columns => ARRAY['timestamp','host','service','message'],
     from_timestamp => now() - INTERVAL '7 days',
-    to_timestamp =>  now()
+    to_timestamp => now()
 ) AS (
     timestamp TIMESTAMP,
     host      VARCHAR,
