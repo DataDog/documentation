@@ -351,7 +351,7 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/evaluations
-[2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
+[2]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
 [3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
