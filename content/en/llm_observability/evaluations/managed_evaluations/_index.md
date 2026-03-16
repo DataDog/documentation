@@ -21,8 +21,6 @@ Managed evaluations are built-in tools to assess your LLM application on dimensi
 
 LLM Observability associates evaluations with individual spans so you can view the inputs and outputs that led to a specific evaluation.
 
-LLM Observability managed evaluations leverage LLMs. To connect your LLM provider to Datadog, you need a key from the provider.
-
 Learn more about the [compatibility requirements][2].
 
 ## Create new evaluations
@@ -31,7 +29,7 @@ Learn more about the [compatibility requirements][2].
 1. Click on the **Create Evaluation** button on the top right corner.
 1. Select a specific managed evaluation. This will open the evalution editor window.
 
-After you click **Save and Publish**, LLM Observability uses the LLM account you connected to power the evaluation you enabled. Alternatively, you can **Save as Draft** and edit or enable them later.
+After you click **Save and Publish**, the evaluation goes live. Alternatively, you can **Save as Draft** and edit or enable them later.
 
 ## Edit existing evaluations
 

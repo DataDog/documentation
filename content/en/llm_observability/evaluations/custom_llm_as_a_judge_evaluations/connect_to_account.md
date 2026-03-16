@@ -1,6 +1,11 @@
 ---
 title: Connect your LLM provider account
 description: How to connect to your LLM provider account to support judge LLM based evaluations
+further_reading:
+- link: "/llm_observability/evaluations/custom_llm_as_a_judge_evaluations"
+  tag: "Documentation"
+  text: "Learn about custom LLM-as-a-judge evaluations"
+---
 
 ## Connect your LLM provider account
 
