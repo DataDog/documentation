@@ -1,9 +1,21 @@
 ---
 title: Advanced Experiment Runs
-description: Run experiments multiple times to account for model variability and automate experiment execution in CI/CD pipelines. 
+description: Run experiments multiple times to account for model variability on a subset of the dataset, and automate experiment execution in CI/CD pipelines. 
 ---
 
 This page discusses advanced topics in running experiments, including [multiple experiment runs](#multiple-runs) and [setting up experiments in CI/CD](#setting-up-your-experiment-in-cicd).
+
+## Run an Experiment on a subset of the Dataset
+
+First, add tags to your dataset records. They can be a unique identifier (e.g `name:test_use_case_1`) or represent a property of the scenario (e.g `difficulty:hard`).
+
+Then, use the `tags` argument of `LLMObs.pull_dataset()` to filter down the dataset to the records you want to run an Experiment on.
+
+Example
+```
+LLMObs.pull_dataset(dataset_name="my-dataset", tags=["env:prod", "version:1.0"])
+```
+Finally, run the Experiment as usual.
 
 ## Multiple runs
 
