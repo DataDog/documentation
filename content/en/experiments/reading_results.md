@@ -16,7 +16,7 @@ further_reading:
 
 After [launching your experiment][1], Datadog begins calculating results for your selected metrics. You can add additional metrics, organize metrics into groups, and explore related user sessions to understand the impact of each variant.
 
-{{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="A view of the metrics and their variations in the control and experiment groups ." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="A view of the metrics and their variations in the control and experiment groups." style="width:90%;" >}}
 
 ## Confidence intervals
 For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval.

@@ -42,10 +42,5 @@ If the MDE is too small, the experiment may require excessive traffic or run tim
 
 A common way to choose an MDE is to examine results from past experiments. For example, if historical experiments in a particular domain typically yield effects of 5–10%, selecting an MDE near the lower end of that range (such as 5%) can be a reasonable starting point.
 
-
-
-
-
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
