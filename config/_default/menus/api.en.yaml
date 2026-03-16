@@ -913,6 +913,110 @@ menu:
           - SearchEvents
         unstable: []
         order: 2
+    - name: Update an event email address
+      url: '#update-an-event-email-address'
+      identifier: events-update-an-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateEventEmailAddress
+        unstable:
+          - v2
+        order: 9
+    - name: Get an event email address
+      url: '#get-an-event-email-address'
+      identifier: events-get-an-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEventEmailAddress
+        unstable:
+          - v2
+        order: 8
+    - name: Revoke an event email address
+      url: '#revoke-an-event-email-address'
+      identifier: events-revoke-an-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEventEmailAddress
+        unstable:
+          - v2
+        order: 10
+    - name: Revoke an on-call event email address
+      url: '#revoke-an-on-call-event-email-address'
+      identifier: events-revoke-an-on-call-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallEventEmailAddress
+        unstable:
+          - v2
+        order: 11
+    - name: Create an on-call event email address
+      url: '#create-an-on-call-event-email-address'
+      identifier: events-create-an-on-call-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallEventEmailAddress
+        unstable:
+          - v2
+        order: 6
+    - name: List on-call event email addresses
+      url: '#list-on-call-event-email-addresses'
+      identifier: events-list-on-call-event-email-addresses
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallEventEmailAddresses
+        unstable:
+          - v2
+        order: 7
+    - name: Create an event email address
+      url: '#create-an-event-email-address'
+      identifier: events-create-an-event-email-address
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEventEmailAddress
+        unstable:
+          - v2
+        order: 4
+    - name: List event email addresses
+      url: '#list-event-email-addresses'
+      identifier: events-list-event-email-addresses
+      parent: events
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEventEmailAddresses
+        unstable:
+          - v2
+        order: 5
     - name: Get an event
       url: '#get-an-event'
       identifier: events-get-an-event
