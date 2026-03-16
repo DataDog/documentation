@@ -33,7 +33,7 @@ Existing templates for custom LLM-as-a-judge evaluations are supported for the f
 | Evaluation              | DD-trace version | LLM Provider                  | Applicable span |
 | ----------------------- | ---------------- | ----------------------------- | --------------- |
 | [Failure to Answer][5]  | Fully supported  | All third party LLM providers | All span kinds  |
-| [Hallucination][4]      | v2.18+           | OpenAI                        | LLM only        |
+| [Hallucination][4]      | Fully supported  | All third party LLM providers | LLM only        |
 | [Sentiment][6]          | Fully supported  | All third party LLM providers | All span kinds  |
 | [Toxicity][7]           | Fully supported  | All third party LLM providers | All span kinds  |
 | [Prompt Injection][8]   | Fully supported  | All third party LLM providers | All span kinds  |
