@@ -1252,6 +1252,10 @@ public class MyJavaClass {
 
 ## Enriching spans
 
+<div class="alert alert-info">
+The <code>metrics</code> parameter here refers to numeric values attached as attributes on individual spans — not <a href="/llm_observability/monitoring/metrics/">Datadog platform metrics</a>. For certain recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, and <code>total_tokens</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.tokens</code>) for use in dashboards and monitors.
+</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 The SDK provides the method `LLMObs.annotate()` to enrich spans with inputs, outputs, and metadata.
@@ -1922,6 +1926,8 @@ This gives you the flexibility to either rely on automatic version management ba
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].
 
 If you're using automatic instrumentation, token and cost metrics appear on your spans automatically. If you're instrumenting manually, follow the guidance below.
+
+<div class="alert alert-info">In this context, "token metrics" and "cost metrics" refer to numeric key-value pairs you attach to spans through the <code>metrics</code> parameter of the <code>LLMObs.annotate()</code> method. These are distinct from <a href="/llm_observability/monitoring/metrics/">Datadog platform LLM Observability metrics</a>. For recognized keys such as <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>, and <code>output_cost</code>, Datadog uses these span attributes to generate corresponding platform metrics (such as <code>ml_obs.span.llm.input.cost</code>) for use in dashboards and monitors.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}

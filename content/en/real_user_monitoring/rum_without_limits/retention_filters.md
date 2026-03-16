@@ -130,7 +130,7 @@ Cross-product retention filters allow you to optimize the correlation between di
 
 The **APM traces filter** indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
 
-**Note**: The availability of APM traces depends on your **trace sampling SDK configuration** (learn how to <a href="/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum">Correlate RUM with APM Traces</a>
+**Note**: The availability of APM traces depends on your **trace sampling SDK configuration** (learn how to <a href="/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum">Correlate RUM with APM Traces</a>)
 
   <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 

@@ -72,6 +72,7 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
+    browser: Browser
     android: Android
     ios: iOS
     expo: Expo
@@ -138,6 +139,8 @@ code_language_ids:
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
     kubernetes_gateway: "Kubernetes (Gateway)"
+    ecs_fargate: "ECS Fargate"
+    eks_fargate: "EKS Fargate"
     haproxy: "HAProxy"
     traces: "Traces"
     metrics: "Metrics"
@@ -320,12 +323,12 @@ unsupported_sites:
   linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
-  logs_scheduled_reports: [gov]
   mcp_server: [gov]
   mobile_app_testing: [gov]
   network_config_management: [gov]
   observability_pipelines: [gov]
   on-call: [gov]
+  oracle_fusion_integration_setup: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
   resource_based_sampling: [gov]

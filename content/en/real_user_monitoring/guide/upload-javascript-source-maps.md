@@ -8,7 +8,7 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
-- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command'
+- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps'
   tag: 'Source Code'
   text: 'Sourcemaps command reference'
 ---
@@ -181,8 +181,8 @@ On the other hand, an unminified stack trace provides you with all the context y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum
