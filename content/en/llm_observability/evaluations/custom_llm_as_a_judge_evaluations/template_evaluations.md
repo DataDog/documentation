@@ -59,6 +59,8 @@ Datadog provides the following categories of Failure to Answer, listed in the fo
 
 Hallucination evaluations identify instances where the LLM makes a claim that disagrees with the provided input context. This check helps ensure your RAG applications stay grounded in retrieved data and do not fabricate information.
 
+{{< img src="llm_observability/evaluations/hallucination_5.png" alt="A Hallucination evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+
 | Evaluation Stage | Evaluation Definition |
 |---|---|
 | Evaluated on Output | Hallucination flags any output that disagrees with the context provided to the LLM. |
