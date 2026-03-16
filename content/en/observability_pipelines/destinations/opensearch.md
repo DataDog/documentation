@@ -36,9 +36,10 @@ Set up the OpenSearch destination and its environment variables when you [set up
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
-1. Optionally, Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 
 #### Optional settings
+
+Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 
 ##### Buffering options
 
