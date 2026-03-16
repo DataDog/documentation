@@ -110,7 +110,7 @@ Use this option if remote authentication is not available. After installation, y
 
 {{% tab "Claude" %}}
 
-Connect Claude (including Claude Desktop) to the Datadog MCP Server by adding it as a **custom connector** with the remote MCP URL.
+Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it as a **custom connector** with the remote MCP URL.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Follow the [Claude help center guide on custom connectors][1] to add a new custom connector.
@@ -329,7 +329,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 |--------|------|------|
 | [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
 | [Claude Code][4] | Anthropic | |
-| [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Desktop. |
+| [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
