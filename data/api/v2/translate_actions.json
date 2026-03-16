@@ -3139,6 +3139,44 @@
     "description": "List watched sessions.",
     "summary": "List rum replay viewership history sessions"
   },
+  "ListRumSegments": {
+    "description": "List all user segments for the current organization. Supports sorting and pagination.",
+    "summary": "List all RUM segments"
+  },
+  "CreateRumSegment": {
+    "description": "Create a new user segment for the current organization.",
+    "summary": "Create a RUM segment",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a new segment."
+  },
+  "InitializeRumSegments": {
+    "description": "Initialize default segments for the current organization. This creates a set of predefined segments if they do not already exist.",
+    "summary": "Initialize RUM segments"
+  },
+  "CreateRumStaticSegment": {
+    "description": "Create a new static user segment from a journey query. Static segments contain a fixed list of users computed from the query at creation time.",
+    "summary": "Create a static RUM segment",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a new static segment."
+  },
+  "ListRumSegmentTemplates": {
+    "description": "List all available segment templates. Templates provide predefined segment configurations that can be customized with parameters.",
+    "summary": "List RUM segment templates"
+  },
+  "DeleteRumSegment": {
+    "description": "Delete a user segment by its identifier.",
+    "summary": "Delete a RUM segment"
+  },
+  "GetRumSegment": {
+    "description": "Get a specific user segment by its identifier.",
+    "summary": "Get a RUM segment"
+  },
+  "UpdateRumSegment": {
+    "description": "Update an existing user segment. All fields in the request body are optional.",
+    "summary": "Update a RUM segment",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a segment."
+  },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",

@@ -287,6 +287,10 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-user-segments": {
+    "name": "RUM User Segments",
+    "description": "Manage RUM user segments for audience targeting and analysis."
+  },
   "reference-tables": {
     "name": "Reference Tables",
     "description": "View and manage Reference Tables in your organization."

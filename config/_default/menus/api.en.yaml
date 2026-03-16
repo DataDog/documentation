@@ -11525,6 +11525,114 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM User Segments
+      url: /api/latest/rum-user-segments/
+      identifier: rum-user-segments
+      generated: true
+    - name: Update a RUM segment
+      url: '#update-a-rum-segment'
+      identifier: rum-user-segments-update-a-rum-segment
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumSegment
+        unstable:
+          - v2
+        order: 8
+    - name: Get a RUM segment
+      url: '#get-a-rum-segment'
+      identifier: rum-user-segments-get-a-rum-segment
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumSegment
+        unstable:
+          - v2
+        order: 7
+    - name: Delete a RUM segment
+      url: '#delete-a-rum-segment'
+      identifier: rum-user-segments-delete-a-rum-segment
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumSegment
+        unstable:
+          - v2
+        order: 6
+    - name: List RUM segment templates
+      url: '#list-rum-segment-templates'
+      identifier: rum-user-segments-list-rum-segment-templates
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumSegmentTemplates
+        unstable:
+          - v2
+        order: 5
+    - name: Create a static RUM segment
+      url: '#create-a-static-rum-segment'
+      identifier: rum-user-segments-create-a-static-rum-segment
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumStaticSegment
+        unstable:
+          - v2
+        order: 4
+    - name: Initialize RUM segments
+      url: '#initialize-rum-segments'
+      identifier: rum-user-segments-initialize-rum-segments
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - InitializeRumSegments
+        unstable:
+          - v2
+        order: 3
+    - name: Create a RUM segment
+      url: '#create-a-rum-segment'
+      identifier: rum-user-segments-create-a-rum-segment
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumSegment
+        unstable:
+          - v2
+        order: 2
+    - name: List all RUM segments
+      url: '#list-all-rum-segments'
+      identifier: rum-user-segments-list-all-rum-segments
+      parent: rum-user-segments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumSegments
+        unstable:
+          - v2
+        order: 1
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
