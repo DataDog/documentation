@@ -17,7 +17,7 @@ Datadog Experiments is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview 
-Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Experiments uses [Feature flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
+Datadog Experiments allows you to measure the causal relationship that new experiences and features have on user outcomes. Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.
 
 This page walks you through planning and launching your experiments. 
 
@@ -53,7 +53,7 @@ After selecting your experiment’s metrics, use the optional sample size calcul
 
 After specifying your metrics, you can launch your experiment.
 
-1. Select a Feature flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
+1. Select a Feature Flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
 
 1. Click **Set Up Experiment on Feature Flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
 
