@@ -37,7 +37,7 @@ Para el Agent v7.21/v6.21 o posteriores, sigue las instrucciones a continuación
    datadog-agent integration install -t datadog-hbase_regionserver==<INTEGRATION_VERSION>
    ```
 
-1. Configura tu integración de forma similar a las [integraciones] centrales (https://docs.datadoghq.com/getting_started/integrations/).
+1. Configura tu integración de forma similar a las [integraciones](https://docs.datadoghq.com/getting_started/integrations/) centrales.
 
 ### Configuración
 
