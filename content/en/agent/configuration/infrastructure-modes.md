@@ -15,58 +15,48 @@ private: true
 
 ## Overview
 
-Infrastructure modes let you control how much infrastructure monitoring the Datadog Agent performs on a host. You can choose between three modes, `full`, `basic`, and `none`, based on your monitoring needs. For example, use `basic` mode to reduce resource overhead on hosts that only need system metrics, or `none` mode on hosts dedicated to log collection or APM.
-
-<div class="alert alert-info"> If the <code>infrastructure_mode</code> option is not explicitly set in the configuration file, the Agent operates in <code>full</code> mode. </div>
+Infrastructure modes let you control how much infrastructure monitoring the Datadog Agent performs on a host. You can configure each of your hosts to run in one of three modes, `full`, `basic`, and `none`, allowing you to reduce resource overhead where needed and run different levels of monitoring across your fleet.
 
 ## Available modes
-<!-- TURN THE TABS INTO DESCRIPTIONS -->
-The Agent supports three infrastructure modes: `full`, `basic`, and `none`.
 
-If your host only needs system resource metrics, use `basic` mode. If it does not need any infrastructure monitoring, use `none` mode.
+The level of infrastructure monitoring determines which integrations, metrics, and features the Agent collects. See [Full](#full), [Basic](#basic), and [None](#none) for configuration details.
+
+| Feature | Full | Basic | None |
+|---------|------|-------|------|
+| System resource metrics | {{< X >}} | {{< X >}} | |
+| Infrastructure integrations | All | Limited set | |
+| Container Monitoring | {{< X >}} | | |
+| Live Processes | {{< X >}} | | |
+| Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
+| Custom metrics | {{< X >}} | | {{< X >}} |
+| Appears in infrastructure dashboards | {{< X >}} | {{< X >}} | |
+
 
 <!-- TODO: Confirm with SME:
 - Does basic mode appear in infrastructure dashboards? (Assumed yes, since only none explicitly says it doesn't.)
 - Are custom metrics available in basic mode? (Not stated in docs, left unchecked to be safe.)
 -->
 
-| Feature | Full | Basic | None |
-|---------|:----:|:-----:|:----:|
-| Minimum Agent version | 7.73.0 | 7.73.0 (Linux, macOS), 7.76.2 (Windows) | 7.77.0 |
-| System resource metrics (CPU, Memory, Disk, Network) | {{< X >}} | {{< X >}} | |
-| Process and service data | {{< X >}} | Limited | |
-| Infrastructure integrations | {{< X >}} | System, Disk, Network, NTP, Processes, Systemd, Windows Crash Detection, Windows Kernel Memory, Windows Services | |
-| Container Monitoring | {{< X >}} | | |
-| Live Processes | {{< X >}} | | |
-| Custom checks (prefixed with `custom_`) | {{< X >}} | {{< X >}} | {{< X >}} |
-| Logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} |
-| Custom metrics | {{< X >}} | | {{< X >}} |
-| Appears in Fleet Automation | {{< X >}} | {{< X >}} | {{< X >}} |
-| Appears in infrastructure dashboards | {{< X >}} | {{< X >}} | |
 
 ### Full
-<div class="alert alert-info"> This is the default. You do not need additional configuration unless you are switching from another mode.
-</div>
 
-The `full` mode requires Agent version 7.73.0 or later.
+**Minimum Agent version**: 7.73.0<br>
+**Recommended for**: Most use cases<br>
+**Configuration value**: `full` (default)
 
-In `full` mode, all Agent infrastructure monitoring features are available. Datadog recommends `full` mode for most use cases.
+In `full` mode, the Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. 
 
-<!-- ADD EXAMPLE HERE
-do container monitoring, live processes run here?
--->
+Use `full` mode for hosts that require comprehensive infrastructure monitoring. 
+
+You do not need additional configuration unless you are switching from another mode.
+
+
 
 ### Basic
 
-The `basic` mode requires the following Agent versions:
-
-| Platform | Minimum Version |
-| -------- | ------- |
-| Linux    | 7.73.0  |
-| Windows  | 7.76.2  |
-| macOS    | 7.73.0  |
-
-Datadog recommends `basic` mode for VMs and physical servers that only need system resource metrics.
+**Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
+**Recommended for**: VMs and physical servers that only need system resource metrics<br>
+**Configuration value**: `basic`
 
 In `basic` mode, the Agent reports system resource usage data for the following:
 - CPU
@@ -76,7 +66,7 @@ In `basic` mode, the Agent reports system resource usage data for the following:
 - Process and service data (limited)
 
 In `basic` mode, only the following integrations run:
- 
+
 - [System Check][1]
 - [Disk][2]
 - [Network][3]
@@ -89,18 +79,38 @@ In `basic` mode, only the following integrations run:
 - [Custom checks][10] prefixed with `custom_`
 - Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
 
-**Note**: All other integrations, including Container Monitoring and Live Processes, are disabled. Configured integrations that are not in the previous list do not run. To run them, switch to `full` mode.
+**Note**: The Agent in `basic` mode does not run other integrations or support Container Monitoring and Live Processes. Switch to `full` mode to use all integrations and features.
+
 
 ### None
 
-The `none` mode requires Agent version 7.77.0 or later.
-
-Datadog recommends `none` mode for Agents that do not require infrastructure monitoring, such as those configured only for [Log Management][13], [Application Performance Monitoring][14], or [Error Tracking][15].
+**Minimum Agent version**: 7.77.0<br>
+**Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
+**Configuration value**: `none`
 
 In `none` mode, the Agent does not collect any infrastructure metrics or run infrastructure integrations. You can use custom metrics, [custom checks][16] prefixed with `custom_`, and logs-only integrations.
 
-<!-- STEPS ON HOW TO VIEW NONEs. SEARCH FOR THE NONE BY HOST NAMES. -->
 The host in `none` mode appears in [Fleet Automation][17] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, the host does not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
+
+
+<!-- {{< collapse-content title="Feature comparison across modes" level="h4" >}}
+
+| Feature | Full | Basic | None |
+|---------|----|-----|----|
+| Minimum Agent version | 7.73.0 | 7.73.0 (Linux, macOS), 7.76.2 (Windows) | 7.77.0 |
+| System resource metrics (CPU, Memory, Disk, Network) | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | |
+| Process and service data | <i class="icon-check-bold"></i> | Limited | |
+| Infrastructure integrations | <i class="icon-check-bold"></i> | System, Disk, Network, NTP, Processes, Systemd, Windows Crash Detection, Windows Kernel Memory, Windows Services | |
+| Container Monitoring | <i class="icon-check-bold"></i> | | |
+| Live Processes | <i class="icon-check-bold"></i> | | |
+| Custom checks (prefixed with `custom_`) | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Logs-only integrations | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Custom metrics | <i class="icon-check-bold"></i> | | <i class="icon-check-bold"></i> |
+| Appears in Fleet Automation | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Appears in infrastructure dashboards | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | |
+
+{{< /collapse-content >}} -->
+
 
 ## Configure Agent infrastructure mode
 <!-- ADD LEADING SENTENCE: To select your infrastructure mode -->
@@ -109,7 +119,7 @@ The host in `none` mode appears in [Fleet Automation][17] under the **View Agent
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
 api_key: <API_KEY>
-infrastructure_mode: <MODE>
+infrastructure_mode: <MODE>  # The available options are `full`, `basic`, and `none`.
     {{< /code-block >}}
 
 2. [Restart the Datadog Agent][19].
