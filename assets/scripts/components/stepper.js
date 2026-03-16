@@ -114,10 +114,6 @@ function initStepper(stepper) {
             step.classList.toggle('stepper__step--active', isActive);
             step.classList.toggle('stepper__step--completed', isCompleted);
 
-            // Steps are always visible (titles, circles, lines always show).
-            // Content visibility is handled by CSS via --active and --all-expanded classes.
-            setHidden(step, false);
-
             // Nav: hidden when expanded or finished, visible only for active step
             const nav = step.querySelector('.stepper__nav');
             if (nav) {
@@ -164,7 +160,6 @@ function initStepper(stepper) {
         }
     });
 
-    // Bind all button clicks via delegation
     stepper.addEventListener('click', (e) => {
         const btn = e.target.closest('.stepper__btn');
         if (!btn) return;

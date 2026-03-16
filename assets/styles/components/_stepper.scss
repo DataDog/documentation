@@ -1,5 +1,6 @@
 $stepper-circle-size: 24px;
 $stepper-gutter: 48px;
+$stepper-completed-color: #2a7e41;
 $stepper-line-width: 1px;
 $stepper-line-left: ($stepper-circle-size * 0.5) - ($stepper-line-width * 0.5);
 $stepper-title-pad-top: 16px;
@@ -99,7 +100,7 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 // Completed step: green circle with checkmark icon
 .stepper__step--completed::after {
     content: '';
-    background-color: #2a7e41;
+    background-color: $stepper-completed-color;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath fill='%23fff' d='m22.567 4.73l-1.795-1.219a1.09 1.09 0 0 0-1.507.287l-8.787 12.959l-4.039-4.039a1.09 1.09 0 0 0-1.533 0l-1.533 1.536a1.084 1.084 0 0 0 0 1.534L9.582 22c.349.347.895.615 1.387.615s.988-.31 1.307-.774l10.58-15.606a1.085 1.085 0 0 0-.289-1.505'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
