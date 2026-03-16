@@ -467,7 +467,7 @@ Be sure to replace the following:
 - `<YOUR_APP_KEY>`: Your [application key][3]
 
 ```bash
-curl -X POST "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation" \
+curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>" \
@@ -507,7 +507,7 @@ The field `data.attributes.evaluation_id` contains the unique identifier for thi
 You can fetch the status of a gate evaluation by polling an additional API endpoint using the gate evaluation ID:
 
 ```bash
-curl -X GET "https://api.<YOUR_DD_SITE>/api/unstable/deployments/gates/evaluation/<evaluation_id>" \
+curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
 -H "DD-API-KEY: <YOUR_API_KEY>" \
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
