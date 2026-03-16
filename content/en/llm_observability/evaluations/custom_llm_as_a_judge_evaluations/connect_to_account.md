@@ -121,3 +121,7 @@ Connect your AI Gateway to LLM Observability with your base URL, API key, and he
 {{< /tabs >}}
 
 If your LLM provider restricts IP addresses, you can obtain the required IP ranges by visiting [Datadog's IP ranges documentation][2], selecting your `Datadog Site`, pasting the `GET` URL into your browser, and copying the `webhooks` section.
+
+[1]: https://app.datadoghq.com/llm/settings/integrations
+[2]: /api/latest/ip-ranges/
+
