@@ -69,12 +69,15 @@ You can set the following parameters for Static Code Analysis.
 By default, [Datadog Static Analyzer][8] detects the languages of your codebase and uses the default rulesets to analyze
 your codebase.
 
-To specify and customize the rulesets, add a `static-analysis.datadog.yml` file to your repository's root directory to define which rulesets to use.
+To specify and customize the rulesets, add a `code-security.datadog.yaml` file to your repository's root directory to define which rulesets to use.
 
 ```yaml
-rulesets:
-  - <ruleset-name>
-  - <ruleset-name>
+schema-version: v1.0
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - <ruleset-name>
+    - <ruleset-name>
 ```
 
 Refer to the [Datadog documentation][6] for a complete list of rulesets.
@@ -84,10 +87,13 @@ Refer to the [Datadog documentation][6] for a complete list of rulesets.
 Here is an example for Python-based repositories:
 
 ```yaml
-rulesets:
-  - python-code-style
-  - python-best-practices
-  - python-inclusive
+schema-version: v1.0
+sast:
+  use-default-rulesets: false
+  use-rulesets:
+    - python-code-style
+    - python-best-practices
+    - python-inclusive
 ```
 
 

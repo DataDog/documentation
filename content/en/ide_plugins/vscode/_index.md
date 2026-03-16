@@ -242,7 +242,7 @@ Do you use [Cursor][17], or another fork of VS Code? Find the extension on the [
 [7]: /tests/explorer/
 [8]: /continuous_integration/static_analysis/?tab=githubactions
 [9]: /security/code_security/static_analysis/static_analysis_rules/
-[10]: /security/code_security/static_analysis/setup/
+[10]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [11]: /tracing/error_tracking/exception_replay
 [12]: https://www.datadoghq.com/legal/eula/
 [13]: https://www.datadoghq.com/legal/privacy/

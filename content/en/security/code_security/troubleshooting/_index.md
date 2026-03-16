@@ -11,7 +11,7 @@ If you experience issues setting up or configuring Datadog Code Security, use th
 
 For issues with the Datadog static analyzer, include the following information in a bug report to Datadog Support.
 
-- Your `static-analysis.datadog.yml` file
+- Your `code-security.datadog.yaml` (or legacy `static-analysis.datadog.yml`) file
 - The output of your static analysis tool (such as a CLI) that is run locally or in a CI/CD pipeline
 - The SARIF file produced (if there are any available)
 - The URL of your repository (public or private)
@@ -24,7 +24,7 @@ If you are experiencing performance issues, you can enable the `--performance-st
 
 For performance issues, include the following information:
 
-- Your `static-analysis.datadog.yml` file
+- Your `code-security.datadog.yaml` (or legacy `static-analysis.datadog.yml`) file
 - The output of your static analysis tool (such as a CLI) that is run locally or in a CI/CD pipeline
 - The URL of your repository (public or private)
 
@@ -76,7 +76,7 @@ is too large, consider the following options:
  - Update your configuration to scan only specific directories.
  - Configure the analyzer to run only the rulesets necessary for your codebase.
 
-Updating the configuration is done either in the Datadog application or using the `static-analysis.datadog.yml` file.
+Updating the configuration is done either in the Datadog application or using the `code-security.datadog.yaml` file.
 
 ### `GLIBC_X.YY not found` error message
 
