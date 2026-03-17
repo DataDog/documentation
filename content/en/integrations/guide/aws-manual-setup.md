@@ -168,7 +168,7 @@ If your AWS account is part of an AWS Organization, a [Service Control Policy][1
 
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys** tab.
-5. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
+5. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][2] in the AWS documentation for more information.
 5. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
 6. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
 7. Click **Save**.
@@ -177,7 +177,7 @@ If your AWS account is part of an AWS Organization, a [Service Control Policy][1
 \*{{% mainland-china-disclaimer %}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
-[9]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
+[2]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
 {{% /tab %}}
 {{< /tabs >}}
 
