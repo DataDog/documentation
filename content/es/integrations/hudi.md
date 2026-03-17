@@ -15,7 +15,7 @@ title: Hudi
 ## Información general
 
 Este check monitoriza [Hudi](https://hudi.apache.org/).
-Es compatible con las [versiones] de Hudi (https://github.com/apache/hudi/releases) `0.10.0` y posteriores.
+Es compatible con las [versiones](https://github.com/apache/hudi/releases) de Hudi `0.10.0` y posteriores.
 
 ## Configuración
 
