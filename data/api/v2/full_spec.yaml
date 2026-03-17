@@ -43147,6 +43147,11 @@ components:
 
         **Supported pipeline types:** logs, metrics'
       properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen
+            address for the Datadog Agent source.
+          example: DATADOG_AGENT_ADDRESS
+          type: string
         id:
           description: The unique identifier for this component. Used in other parts
             of the pipeline to reference this component (for example, as the `input`
