@@ -29,7 +29,12 @@ To set up the Worker's Google SecOps destination:
     - The Worker uses standard [Google authentication methods][7].
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
-{{% observability_pipelines/destination_buffer_numbered %}}
+
+#### Optional settings
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 **Note**: Logs sent to the Google SecOps destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][5] for a list of available log types and their respective ingestion labels.
 

@@ -108,39 +108,27 @@ Use this option if remote authentication is not available. After installation, y
 [1]: /getting_started/site/
 {{% /tab %}}
 
-{{% tab "Claude Desktop" %}}
+{{% tab "Claude" %}}
 
-Claude Desktop has limited support for remote authentication. Use **local binary authentication** for reliable setup.
+Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it as a **custom connector** with the remote MCP URL.
 
-1. Install the Datadog MCP Server binary:
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+1. Follow the [Claude help center guide on custom connectors][1] to add a new custom connector.
+2. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}):
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+3. Complete the OAuth login flow when prompted.
 
-   - macOS and Linux: Install the binary to `~/.local/bin/datadog_mcp_cli`:
-
-      ```bash
-      curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-      ```
-
-   - Windows: Download the [Windows version][1].
-
-2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow and choose a [Datadog site][2].
-
-3. Configure Claude Desktop to use the Datadog MCP Server. Add to your Claude Desktop configuration (location varies by OS) with the `stdio` transport pointing to `datadog_mcp_cli`:
-   ```json
-   {
-     "mcpServers": {
-       "datadog": {
-         "type": "stdio",
-         "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-         "args": [],
-         "env": {}
-       }
-     }
-   }
-   ```
-   On Windows, replace the `command` path with the location of the downloaded `.exe` file (for example, `C:\Users\<USERNAME>\bin\datadog_mcp_cli.exe`).
-
-[1]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
+[1]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 [2]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1].
+
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+[1]: /getting_started/site/
+{{< /site-region >}}
 
 {{% /tab %}}
 
@@ -341,7 +329,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 |--------|------|------|
 | [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
 | [Claude Code][4] | Anthropic | |
-| [Claude&nbsp;Desktop][5] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=claude-desktop#installation) as needed. |
+| [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
@@ -412,3 +400,4 @@ For security, use a scoped API key and application key from a [service account][
 [16]: /ide_plugins/vscode/
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [18]: /ide_plugins/idea/
+[19]: https://claude.ai
