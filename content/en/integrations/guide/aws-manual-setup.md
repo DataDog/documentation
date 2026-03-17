@@ -137,10 +137,12 @@ If the integration does not appear to be working after setup, verify the followi
 Run the following command from a machine with AWS CLI access to confirm that the role can be assumed:
 ```shell
 aws sts assume-role \
-  --role-arn "arn:aws:iam::<YOUR_AWS_ACCOUNT_ID>:role/DatadogIntegrationRole" \
+  --role-arn "arn:<YOUR_PARTITION>:iam::<YOUR_AWS_ACCOUNT_ID>:role/DatadogIntegrationRole" \
   --role-session-name "DatadogTest" \
   --external-id "<YOUR_EXTERNAL_ID>"
 ```
+
+Replace `<YOUR_PARTITION>` with your AWS partition. For example, `aws` for commercial regions or `aws-us-gov` for GovCloud.
 
 If this command fails, the trust policy or role configuration has an issue. See [Error: Datadog is not authorized to perform sts:AssumeRole][9] for detailed troubleshooting steps.
 
@@ -185,6 +187,7 @@ If your AWS account is part of an AWS Organization, a [Service Control Policy][1
 \*{{% mainland-china-disclaimer %}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
+[9]: https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/partitions.html
 {{% /tab %}}
 {{< /tabs >}}
 
