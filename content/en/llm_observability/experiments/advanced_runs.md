@@ -7,7 +7,7 @@ This page discusses advanced topics in running experiments, including [multiple 
 
 ## Run an Experiment on a subset of the dataset
 
-First, add tags to your dataset records. They can be a unique identifier (e.g `name:test_use_case_1`) or represent a property of the scenario (e.g `difficulty:hard`).
+First, add tags to your dataset records. These tags can be unique identifiers (for example, `name:test_use_case_1`) or represent properties of the scenario (for example, `difficulty:hard`).
 
 Then, use the `tags` argument of `LLMObs.pull_dataset()` to filter down the dataset to the records you want to run an Experiment on.
 
