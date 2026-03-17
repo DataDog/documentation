@@ -45,10 +45,10 @@ To install the extension:
 
 {{% tab "Claude Code" %}}
 
-You can connect Claude Code to the Datadog MCP Server using remote authentication (HTTP) or local binary authentication (stdio).
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. 
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 * **Command line**: Run:
   <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}
@@ -75,6 +75,10 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
 
 [1]: /getting_started/site/
 {{< /site-region >}}
+
+<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
+
+[1]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Claude" %}}
@@ -214,9 +218,7 @@ The [Datadog plugin][3] integrates with these agent CLIs. For an uninterrupted e
 
 {{% tab "Other" %}}
 
-The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use **remote authentication** when your client supports it. For Cline or when remote authentication is unreliable, use **local binary authentication**.
-
-### Remote authentication
+The following clients can connect to the Datadog MCP Server: [Goose][1], [Kiro][2], [Kiro CLI][3], [Cline][4], and other MCP-compatible clients. Use these instructions for remote authentication when your client supports it. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For example, the endpoint for your selected site ({{< region-param key="dd_site_name" >}}) is: <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
@@ -304,7 +306,7 @@ For security, use a scoped API key and application key from a [service account][
 
 Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
 
-{{% collapse-content title="Set up Datadog MCP Server local binary" level="h5" expanded=true id="mcp-local-binary" %}}
+{{% collapse-content title="Set up Datadog MCP Server local binary" level="h5" expanded=false id="mcp-local-binary" %}}
 
 1. Install the Datadog MCP Server binary (macOS and Linux):
    ```bash
