@@ -132,19 +132,9 @@ If the integration does not appear to be working after setup, verify the followi
 - The **External ID** in the trust policy must match the value shown in the [AWS integration configuration page][1]. External IDs are regenerated after 48 hours if not used.
 - The role ARN entered in Datadog must exactly match the role ARN in AWS, including capitalization.
 
-**Validate role assumption from the AWS CLI:**
+**Validate the integration in Datadog:**
 
-Run the following command from a machine with AWS CLI access to confirm that the role can be assumed:
-```shell
-aws sts assume-role \
-  --role-arn "arn:<YOUR_PARTITION>:iam::<YOUR_AWS_ACCOUNT_ID>:role/DatadogIntegrationRole" \
-  --role-session-name "DatadogTest" \
-  --external-id "<YOUR_EXTERNAL_ID>"
-```
-
-Replace `<YOUR_PARTITION>` with your AWS partition. For example, `aws` for commercial regions or `aws-us-gov` for GovCloud.
-
-If this command fails, the trust policy or role configuration has an issue. See [Error: Datadog is not authorized to perform sts:AssumeRole][9] for detailed troubleshooting steps.
+After configuring the role, return to the [AWS integration page][1] and save the configuration. Datadog validates the role by attempting to assume it from Datadog's own AWS account. If the role cannot be assumed, an error message appears in the UI. See [Error: Datadog is not authorized to perform sts:AssumeRole][9] for detailed troubleshooting steps.
 
 **Service Control Policies (SCPs):**
 
