@@ -117,7 +117,7 @@ If the automatic loading time calculation does not accurately reflect when your 
 window.DD_RUM.setViewLoadingTime()
 ```
 
-Each call replaces any previously set value (last-call-wins). Once called, the automatic loading time detection is stopped and the manual value is used instead.
+Each call replaces any previously set value (last-call-wins). After it is called, the automatic loading time detection is stopped and the manual value is used instead.
 
 After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 
