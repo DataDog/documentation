@@ -279,6 +279,18 @@ $conv-search-text-muted: #6b7280;
     }
 }
 
+.conv-search-status-text {
+    color: #6e6e80;
+    font-size: 13px;
+    margin-right: 6px;
+    animation: conv-search-fade-in 0.3s ease;
+}
+
+@keyframes conv-search-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 // Typing cursor animation
 .conv-search-cursor {
     display: inline-block;

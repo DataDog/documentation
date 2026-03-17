@@ -22,6 +22,13 @@ const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
 
 const RENDER_THROTTLE = 50;
 
+const LOADING_MESSAGES = [
+    'Searching documentation…',
+    'Reviewing relevant pages…',
+    'Analyzing content…',
+    'Generating answer…'
+];
+
 let isDatadogUser = false;
 
 initializeFeatureFlags().then(async (client) => {
@@ -470,15 +477,30 @@ class ConversationalSearch {
     async runFetchConversation(query, responseContainer) {
         this.abortController = new AbortController();
         const startTime = Date.now();
-        responseContainer.innerHTML = '<span class="conv-search-cursor"></span>';
 
-        const response = await fetchConversation({
-            typesenseConfig,
-            query,
-            modelId: this.selectedModelId,
-            conversationId: this.conversationId,
-            signal: this.abortController.signal
-        });
+        let msgIndex = 0;
+        responseContainer.innerHTML =
+            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>` +
+            '<span class="conv-search-cursor"></span>';
+
+        const statusInterval = setInterval(() => {
+            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
+            const el = responseContainer.querySelector('.conv-search-status-text');
+            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
+        }, 3000);
+
+        let response;
+        try {
+            response = await fetchConversation({
+                typesenseConfig,
+                query,
+                modelId: this.selectedModelId,
+                conversationId: this.conversationId,
+                signal: this.abortController.signal
+            });
+        } finally {
+            clearInterval(statusInterval);
+        }
 
         const conversation = response?.conversation || response?.results?.[0]?.conversation;
         if (conversation?.conversation_id) {
