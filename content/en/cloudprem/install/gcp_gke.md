@@ -306,32 +306,18 @@ metastore:
 # The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
 # and transforms it into searchable files called "splits" stored in S3.
 #
-# The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-# Resource requests and limits should be tuned based on your indexing workload.
+# The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput. Resource requests and limits should be tuned based on your indexing workload.
 #
-# The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically. The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "8Gi"
-    limits:
-      cpu: "4"
-      memory: "8Gi"
+  podSize: xlarge
 
 # Searcher configuration
 # The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
 # Choose a tier based on your query complexity, concurrency, and data access patterns.
 searcher:
-  replicaCount: 2
-  podSize: xlarge
-
-# Indexer configuration
-# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
-# See the sizing guide for available tiers and their configurations.
-indexer:
   replicaCount: 2
   podSize: xlarge
 ```
