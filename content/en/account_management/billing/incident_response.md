@@ -44,7 +44,7 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Assign a task to a user within an incident (the assignee does not need a seat)
 - Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack and Microsoft Teams, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack and Microsoft Teams, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack and Microsoft Teams, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through Datadog in Slack and Microsoft Teams, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 
