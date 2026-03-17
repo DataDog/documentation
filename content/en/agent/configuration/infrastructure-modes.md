@@ -43,8 +43,6 @@ In `full` mode, the Agent collects system resource metrics and process data, run
 
 Use `full` mode for hosts that require comprehensive infrastructure monitoring.
 
-You do not need additional configuration unless you are switching from another mode.
-
 ### Basic
 
 **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
@@ -95,7 +93,7 @@ The host in `none` mode appears in [Fleet Automation][17] under the **View Agent
 
 In `end_user_device` mode, the Agent collects system resource metrics, runs a limited set of infrastructure integrations, and supports Live Processes, custom checks, and logs-only integrations. It does not support Container Monitoring, custom metrics, or infrastructure dashboards.
 
-End User Device Monitoring is not intended for general infrastructure monitoring use cases. See [Key capabilities][20] for more information.
+End User Device Monitoring is not intended for general infrastructure monitoring. See [Key capabilities][20] for more information.
 
 {{% /collapse-content %}}
 
@@ -118,7 +116,7 @@ To verify the infrastructure mode set on your hosts:
 
 1. Navigate to [Fleet Automation][17] and click the **View Agents** tab
 1. Select **Infrastructure Mode** from the **Group by** dropdown
-1. Expand the mode group to see your hosts
+1. Click the mode group name to expand it and see the hosts it contains
 1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`)
 
 {{< img src="agent/configuration/fleet_automation_group_by_infra_mode-1.png" alt="Fleet Automation View Agents page with Infrastructure Mode selected in the Group by dropdown, showing the Full group expanded with 311 hosts and columns for hostname, Agent version, integrations, services, and remote configuration status." style="width:90%" >}}
