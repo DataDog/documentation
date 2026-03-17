@@ -421,6 +421,7 @@ sast:
 ## Legacy configuration
 
 Datadog Static Code Analysis (SAST) previously used a different configuration file (`static-analysis.datadog.yml`) and schema. This schema is deprecated and does not receive new updates, but it remains [documented][25] in the `datadog-static-analyzer` repository.
+
 If both files are present, `code-security.datadog.yaml` takes precedence over `static-analysis.datadog.yml`.
 
 
