@@ -33,7 +33,7 @@ To enable APM in a Docker Linux container:
 
 ## Set SDK tracer versions
 
-By default, Single Step Instrumentation installs the latest major versions of Datadog APM SDKs. Minor version updates are applied automatically when they become available.
+By default, Single Step Instrumentation installs the latest major versions of Datadog SDKs. Minor version updates are applied automatically when they become available.
 
 You may want to customize SDK versions based on your application's language version or specific environment requirements. You can control the major and minor versions used by customizing library versions during setup.
 

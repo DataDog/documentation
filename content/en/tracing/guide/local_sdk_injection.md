@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Use the [Datadog Admission Controller][1] to inject APM SDKs into Kubernetes workloads using pod-level annotations and labels.
+Use the [Datadog Admission Controller][1] to inject Datadog SDKs into Kubernetes workloads using pod-level annotations and labels.
 
 The Datadog Agent uses the Kubernetes Admission Controller to intercept pod creation requests and inject an init container that installs the SDK before the application starts. This method provides a manual, pod-level alternative to [Single Step Instrumentation (SSI)][2], which uses Helm or the Datadog Operator to configure instrumentation across your cluster.
 

@@ -179,9 +179,9 @@ To configure [Kubernetes State Metrics][3]:
           tags.datadoghq.com/version: "<VERSION>" 
   ```
 
-###### APM tracer and StatsD client
+###### Datadog SDK and StatsD client
 
-To configure [APM tracer][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
+To configure [Datadog SDK][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
 
 ```yaml
 containers:
@@ -397,11 +397,11 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    When configuring your traces for unified service tagging:
 
-   1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
+   1. Configure the [Datadog SDK][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
    2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the SDK (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-      As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
+      As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the Datadog SDK. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the Datadog SDK also injects the values of these variables into your logs.
 
       **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
@@ -411,7 +411,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    {{% tab "Logs" %}}
 
-   If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
+   If you're using [connected logs and traces][1], enable automatic logs injection if supported for your Datadog SDK. Then, the Datadog SDK automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}

@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog APM SDKs in one step.
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog SDKs in one step.
 
 ## Requirements
 
@@ -171,8 +171,8 @@ Each target block has the following keys:
 | `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
 | `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. For more details, see the [Kubernetes selector documentation][10].|
 | `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][10]. |
-| `ddTraceVersions` | The [Datadog APM SDK][9] version to use for each language. |
-| `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][8]. |
+| `ddTraceVersions` | The [Datadog SDK][9] version to use for each language. |
+| `ddTraceConfigs`  | Datadog SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][8]. |
 
 The file you need to configure depends on how you enabled Single Step Instrumentation:
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
@@ -189,7 +189,7 @@ Review the following examples demonstrating how to select specific services:
 This configuration:
 - enables APM for all namespaces except the `jenkins` namespace.
   - **Note**: use `enabledNamespaces` to disable for all namespaces except those listed.
-- instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
+- instructs Datadog to instrument the Java applications with the default Java SDK and Python applications with `v.3.1.0` of the Python SDK.
 
 {{< highlight yaml "hl_lines=4-10" >}}
    apm:
@@ -212,11 +212,11 @@ This configuration creates two targets blocks:
 
 - The first block (named `login-service_namespace`):
   - enables APM for services in the namespace `login-service`.
-  - instructs Datadog to instrument services in this namespace with the default version of the Java APM SDK.
+  - instructs Datadog to instrument services in this namespace with the default version of the Java SDK.
   - sets environment variable `DD_PROFILING_ENABLED` for this target group
 - The second block (named `billing-service_apps`)
   - enables APM for services in the namespace(s) with label `app:billing-service`.
-  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK.
+  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python SDK.
 
 {{< highlight yaml "hl_lines=4-28" >}}
   apm:
@@ -724,11 +724,11 @@ See [workload selection][4] for additional examples.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Control which APM SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Control which Datadog SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
 
-Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the APM SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
+Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the Datadog SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
 
-#### Example: Specify a Java APM SDK for a namespace
+#### Example: Specify a Java SDK for a namespace
 
 Only Java applications run in the `login-service` namespace. To avoid downloading other SDKs, configure the Agent to target that namespace and inject only the Java SDK version 1.48.2.
 

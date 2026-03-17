@@ -22,7 +22,7 @@ If the configurations described here do not cover your compliance requirements, 
 
 ### Personal information in trace data
 
-Datadog's APM SDKs collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
+Datadog's Datadog SDKs collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users.
 
 The table below describes the personal data categories collected by the automatic instrumentation provided by the SDKs, with some common examples listed.
 

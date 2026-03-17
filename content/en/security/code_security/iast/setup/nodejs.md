@@ -32,7 +32,7 @@ Follow these steps to enable Code Security in your service:
 2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
-   If you initialize the APM library on the command line using the `--require` option to Node.js:
+   If you initialize the Datadog SDK on the command line using the `--require` option to Node.js:
 
    ```shell
    node --require dd-trace/init app.js

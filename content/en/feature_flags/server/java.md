@@ -16,7 +16,7 @@ further_reading:
 
 This page describes how to instrument a Java application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
 
-The Java SDK integrates feature flags directly into the Datadog APM tracer and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
+The Java SDK integrates feature flags directly into the Datadog SDK and implements the [OpenFeature](https://openfeature.dev/) standard for maximum flexibility and compatibility.
 
 <div class="alert alert-info">If you're using Datadog APM and your application already has the Datadog Java SDK and Remote Configuration enabled, skip to <a href="#initialize-the-openfeature-provider">Initialize the OpenFeature provider</a>. You only need to add the OpenFeature dependencies and initialize the provider.</div>
 
@@ -24,7 +24,7 @@ The Java SDK integrates feature flags directly into the Datadog APM tracer and i
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
-- **Datadog Java APM Tracer**: Version **1.57.0** or later
+- **Datadog Java SDK**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
 - **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
 - **Datadog API Key**: Required for Remote Configuration
@@ -37,7 +37,7 @@ Before you begin, make sure you've already [installed and configured the Agent](
 
 ## Installation
 
-Feature flagging is integrated into the Datadog Java APM tracer. You need the SDK JAR and the OpenFeature SDK dependencies.
+Feature flagging is integrated into the Datadog Java Datadog SDK. You need the SDK JAR and the OpenFeature SDK dependencies.
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}

@@ -72,7 +72,7 @@ By default, Software Catalog is automatically populated with entries discovered 
 
 ### APM
 
-When you instrument your application code with Datadog APM SDKs or OpenTelemetry, your applications emit traces and generate unsampled trace metrics. These traces and metrics power the entity discovery and dependency mapping capabilities in IDP. Your instrumentation choices (for example, your Datadog Agent version, your SDK version, and whether you use custom instrumentation or service overrides) affect the quality and accuracy of your dependency maps. See [Discover from APM, USM, and RUM][5] for details.
+When you instrument your application code with Datadog SDKs or OpenTelemetry, your applications emit traces and generate unsampled trace metrics. These traces and metrics power the entity discovery and dependency mapping capabilities in IDP. Your instrumentation choices (for example, your Datadog Agent version, your SDK version, and whether you use custom instrumentation or service overrides) affect the quality and accuracy of your dependency maps. See [Discover from APM, USM, and RUM][5] for details.
 
 ### USM
 

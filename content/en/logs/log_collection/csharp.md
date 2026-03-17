@@ -309,7 +309,7 @@ If logs are in JSON format, Datadog automatically [parses the log messages][7] t
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM .NET instructions][9]
 
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+**Note**: If the Datadog SDK injects `service` into your logs, it overrides the value set in the agent configuration.
 
 ## Agentless logging with APM
 
@@ -328,7 +328,7 @@ It does not require modifying your application code, or installing additional de
 </div>
 
 
-### Configure the APM library
+### Configure the Datadog SDK
 
 Agentless logging is only available when using APM with automatic instrumentation. To get started, instrument your application as described in the following documents:
 

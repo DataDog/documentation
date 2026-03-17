@@ -22,7 +22,7 @@ Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
 
 
-APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
+Datadog SDK integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load.
@@ -80,7 +80,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \*\* Full mode SQL Server for Java/.NET:
 
-<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the Datadog SDK overwrites it.</div>
 
   - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
   - Prerequisites:
