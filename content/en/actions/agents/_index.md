@@ -67,7 +67,7 @@ When configuring your agent, you have the following options for customization.
 
 Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
 
-**Note**: If the workflow is triggered from a [monitor][14], you also need to update the monitor's configuration to trigger the workflow upon alert, warning, or recovery.
+**Note**: If a [monitor][14] triggers the workflow, update the monitor's configuration to trigger the workflow upon alert, warning, or recovery.
 
 ### Instructions
 
