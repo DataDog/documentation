@@ -5,7 +5,7 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamConversation } from './streaming';
+import { streamConversation, resetTypesenseClient } from './streaming';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -380,6 +380,7 @@ class ConversationalSearch {
                 responseContainer.textContent = 'Request cancelled.';
             } else {
                 this.logErr('Conversational Search Response Error', error);
+                resetTypesenseClient();
                 responseContainer.textContent = 'Sorry, something went wrong. Please try again.';
             }
         } finally {

@@ -77,9 +77,9 @@ If the service has a high Downstream Bytes/s rate and a high sampling rate (disp
 
 The **Configuration** column tells you whether or not your services are configured with sampling rules. If the top services are labelled with `AUTOMATIC` configuration, changing the **Agent configuration** will reduce the volume globally across services.
 
-To reduce the ingestion volume at the Agent level, configure `DD_APM_MAX_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
+To reduce the ingestion volume at the Agent level, configure `DD_APM_TARGET_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
 
-**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_MAX_TPS` does not change sampling rates that are applied in tracing libraries.
+**Note**: This configuration option only goes into effect when using **Datadog tracing libraries**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_TARGET_TPS` does not change sampling rates that are applied in tracing libraries.
 
 Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.

@@ -87,13 +87,19 @@ Datadog enriches IPs with public cloud provider service and region for IPv4 addr
 
 Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443). 
 
-#### Custom port enrichment
+### Custom port enrichment
 
 You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
 From the **Configuration** tab in NetFlow, click **+ Add Enrichment** to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="100%" >}}
+
+### Custom IP enrichment
+
+You can also add your own custom enrichments to map IPs and CIDRs to custom tags (for example, to categorize services running on specific IP addresses). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+
+From the [**Enrichment** settings page][10], click **+ Add Enrichment** to add mappings manually or upload a CSV file to add mappings in bulk.
 
 ### Reverse DNS private IP enrichment
 
@@ -228,6 +234,20 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
 
+## Conversation stitching
+
+By default, NetFlow records separate unidirectional flows for each direction of traffic between two endpoints (A → B and B → A). Conversation stitching combines these into a single bidirectional record, giving you a complete view of the total traffic exchanged between two endpoints (A ↔ B).
+
+With conversation stitching, you can:
+
+- See total traffic exchanged between two endpoints as one conversation instead of separate directional flows
+- Identify true initiators and responders so that source and destination widgets reflect accurate roles
+- Remove noise where servers incorrectly appear as top sources
+
+To toggle between stitched (bidirectional) and unstitched (unidirectional) views, navigate to any endpoint-based NetFlow view and use the **Bidirectional** toggle under the time picker.
+
+{{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="Conversation stitching toggle in the NetFlow view" width="100%" >}}
+
 ## Sampling rate
 
 NetFlow's sampling rate is taken into account in the computation of bytes and packets by default. The displayed values for bytes and packets are computed with the sampling rate applied.
@@ -350,3 +370,4 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
 [8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
 [9]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
+[10]: https://app.datadoghq.com/devices/settings/enrichment/ip
