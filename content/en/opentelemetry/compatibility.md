@@ -87,6 +87,16 @@ For more information, see [Cloud Network Monitoring Setup][3].
 
 For unsupported languages in OpenTelemetry setups, [configure telemetry tagging][5] to link data to a specific commit.
 
+## Support levels
+
+Datadog provides different levels of support depending on the type of OpenTelemetry component or configuration:
+
+- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][39], [Datadog Exporter][40], and [Infra Attribute Processor][41]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
+
+- **Community Supported Components**: OpenTelemetry components [included with the DDOT Collector][42] by default. Datadog helps ensure these components are secure, stable, and compatible.
+
+- **Custom Components**: OpenTelemetry components or configurations that are not included by default, such as [custom Collector components][43] or [instrumentation of unsupported runtimes][44]. Datadog provides guidance and documentation as a starting point, but does not provide direct support for these components' functionality. For issues with custom components, Datadog recommends engaging with the [OpenTelemetry community][45] or the component maintainers.
+
 ## Platform and environment support
 
 While the OpenTelemetry Collector can be deployed in many environments, certain platforms have specific limitations or support requirements.
@@ -144,3 +154,10 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [36]: /opentelemetry/instrument/api_support/ruby/
 [37]: /opentelemetry/instrument/api_support/php/
 [38]: /llm_observability/instrumentation/otel_instrumentation/
+[39]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
+[40]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/README.md
+[41]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
+[42]: /opentelemetry/setup/ddot_collector/#opentelemetry-collector-components
+[43]: /opentelemetry/setup/ddot_collector/custom_components
+[44]: /opentelemetry/guide/instrument_unsupported_runtimes
+[45]: https://opentelemetry.io/community/
