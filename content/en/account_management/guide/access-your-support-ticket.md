@@ -16,16 +16,12 @@ further_reading:
 
 <h2>Creating a support ticket</h2>
 
-<p>To create a new support ticket, click on the appropriate Site link and click <strong>Submit a request</strong> to fill out a ticket form.</p>
+<p>To create a new support ticket, navigate to the <a href="https://help.datadoghq.com/">Datadog support site</a>. At the bottom of the page, click <strong>Create a New Ticket</strong> to fill out a ticket form.</p>
 
-{{< whatsnext desc="Support page by Datadog site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1, AP2 {{< /nextlink >}}
-    {{< nextlink href="https://govsupport.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
-{{< /whatsnext >}}
+<p>You can also access this form through Datadog. From the left navigation, mouse over <strong>Help</strong> and click <em>Support</em>. Alternatively, navigate to the <a href="https://app.datadoghq.com/help">Datadog help page</a> and click <strong>New Support Ticket</strong>.</p>
+
 
 {{< img src="/account_management/guide/access_your_support_ticket/support_page.png" alt="Datadog Support landing page" style="width:100%;" >}}
-
-<p>You can also access this form through Datadog from the <a href="https://app.datadoghq.com/help">help page</a>, from the left navigation click on <strong>?</strong> -&gt; <strong>Resources</strong>. Under <em>Support Tickets &amp; Billing Questions</em> click on <strong>New Support Ticket</strong>.</p>
 
 <h2>Accessing existing tickets</h2>
 
