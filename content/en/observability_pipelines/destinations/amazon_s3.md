@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. **Note**: If you want to [rehydrate][1] logs in a S3 bucket to Datadog, use the [Datadog Archives][2] destination, which converts the logs into a Datadog-rehydratable format before they are sent to an S3 bucket.
+Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S3. **Note**: If you want to send logs to a S3 bucket and be able to [rehydrate][1] them to Datadog, use the [Datadog Archives][2] destination.
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -116,7 +116,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | None           | 100,000,000     | 900                 |
 
 [1]: /logs/log_configuration/rehydrating/
-[2]: /observability_pipelines/sources/datadog_archives/
+[2]: /observability_pipelines/destinations/datadog_archives/
 [3]: /integrations/amazon_web_services/#setup
 [4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
 [5]: /observability_pipelines/configuration/set_up_pipelines/
