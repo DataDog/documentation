@@ -12,8 +12,6 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
-Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
-{{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
 Agent Builder is in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
