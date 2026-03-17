@@ -1,74 +1,73 @@
 ---
-description: Aprende a identificar y limpiar el desorden de monitor (noun) analizando
-  los patrones de uso de monitor (noun), identificando los monitores no utilizados
-  o redundantes y aplicando las prácticas recomendadas de gestión de monitor (noun)
-  para mejorar la calidad de las alertas y reducir el ruido.
+description: Aprende a identificar y limpiar el desorden de monitores analizando los
+  patrones de uso de los monitores, identificando monitores no utilizados o redundantes,
+  e implementando las mejores prácticas para la gestión de monitores para mejorar
+  la calidad de las alertas y reducir el ruido.
 further_reading:
 - link: monitors/guide/monitor_best_practices
-  tag: Documentación
-  text: Prácticas recomendadas de monitores
+  tag: Documentation
+  text: Mejores Prácticas de Monitores
 - link: monitors/quality
-  tag: Documentación
-  text: Monitor Quality
-title: Limpia el desorden de monitor (noun)
+  tag: Documentation
+  text: Calidad de Monitores
+title: Limpia el desorden de monitores
 ---
+## Descripción General
 
-## Información general
+El desorden de monitores se acumula con el tiempo, resultando en ruido, alertas duplicadas y un aumento de la fricción operativa. Esta guía describe un enfoque claro para identificar y limpiar monitores desordenados, con casos de uso que te ayudarán a optimizar tus flujos de trabajo de alertas.
 
-El desorden de monitor (noun) se acumula con el tiempo, dando lugar a ruido, alertas duplicadas y una mayor fricción operativa. En esta guía se describe un enfoque claro para identificar y limpiar los monitores desordenados, con casos de uso que te ayudarán a agilizar tus procesos de alertas.
+También proporciona mejores prácticas para ayudar a mantener un entorno de monitoreo limpio, facilitando la escalabilidad y la gobernanza de tu estrategia de monitoreo a medida que tus sistemas crecen.
 
-También se proporcionan prácticas recomendadas para ayudar a mantener un entorno de monitorización limpio, lo que facilita la escalabilidad y el gobierno de tu estrategia de monitorización a medida que crecen tus sistemas.
+### Requisitos Previos
 
-### Requisitos previos
+Debes tener los [permisos de escritura de monitores][10].
 
-Debes tener los [Permisos de escritura de los monitores][10].
+### Casos de Uso
 
-### Casos prácticos
+Esta guía cubre varios casos de uso clave para limpiar el desorden de monitores:
 
-Esta guía cubre varios casos de uso clave para limpiar el desorden de monitor (noun):
+- **[Monitores silenciados a largo plazo](#muted-for-a-long-period-of-time)**: Monitores que han estado silenciados durante períodos prolongados—semanas o incluso meses.
+- **[Monitores atascados en estado de ALERTA](#in-the-alerted-state-for-a-long-period-of-time)**: Monitores que han permanecido en estado de "Alerta" durante un tiempo inusualmente largo sin ser reconocidos o resueltos.
+- **[Monitores duplicados](#duplicate-monitors)**: Múltiples monitores que se activan bajo la misma condición, métrica o servicio—frecuentemente debido a silos de equipo o falta de coordinación.
+- **[Monitores inestables y ruidosos](#flappy-and-noisy-monitors)**: Monitores que se activan y resuelven con frecuencia (es decir, "flap") o producen altos volúmenes de alertas de bajo valor.
+- **[Monitores mal configurados](#misconfigured-monitors)**: Monitores con enlaces rotos a paneles de control, retrasos de evaluación faltantes, constituyentes de alerta faltantes o incorrectos, o etiquetas y convenciones de nombres desactualizadas.
 
-- **[Monitores silenciados durante mucho tiempo](#muted-for-a-long-period-of-time)**: Monitores que han estado silenciados durante largos periodos de tiempo: semanas o incluso meses.
-- **[Monitores atascados en estado de ALERTA](#in-the-alerted-state-for-a-long-period-of-time)**: Monitores que han permanecido en estado de "Alerta" durante un tiempo inusualmente largo sin ser reconocidos ni resueltos.
-- **[Monitores duplicados](#duplicate-monitors)**: Múltiples monitores que se activan en el mismo estado, métrica o servicio, a menudo debido a silos de equipo o falta de coordinación.
-- **[Monitores ruidosos](#floppy-and-noisy-monitors)**: Monitores que se activan y resuelven con frecuencia (es decir, "aletean") o producen grandes volúmenes de alertas de poco valor.
-- **[Monitores mal configurados](#misconfigured-monitors)**: Monitores con enlaces rotos a dashboards, retardos de evaluación faltantes, componentes de alerta faltantes o incorrectos o tags (etiquetas) y convenciones de nomenclatura obsoletas.
+## Silenciados durante un largo período de tiempo
 
-## Silenciado durante un largo periodo de tiempo
+Los monitores sirven como un sistema de advertencia temprana para fallas, amenazas de seguridad y problemas de rendimiento. Sin embargo, tener monitores silenciados durante un largo período de tiempo derrota ese propósito, el silenciado a largo plazo a menudo indica que un monitor es obsoleto, irrelevante o demasiado ruidoso para ser útil. Estos deben ser revisados y ya sea reactivados con la configuración adecuada o retirados para reducir el desorden y eliminar monitores obsoletos de tu entorno de alertas.
 
-Los monitores sirven como sistema de alerta temprana de fallos, amenazas a la seguridad y problemas de rendimiento. Sin embargo, tener monitores silenciados durante un largo periodo de tiempo frustra ese objetivo, el silenciamiento prolongado a menudo indica que un monitor (noun) es obsoleto, irrelevante o demasiado ruidoso para ser útil. Deberían revisarse y volver a activarse con el ajuste adecuado o retirarse para reducir el desorden y eliminar los monitores obsoletos de tu entorno de alerta.
+Limpia los monitores que no están proporcionando valor y reemplaza los silencios a largo plazo con horarios limitados:
 
-Elimina los monitores que no aporten valor y sustituye los silenciamientos prolongados por programaciones temporales:
+### 1. Inspecciona los monitores
 
-### 1. Inspeccionar los monitores
+Audita los monitores que han estado silenciados durante un largo período de tiempo para entender cuáles son realmente necesarios o útiles. Algunos monitores pueden estar silenciados por una buena razón y quieres evitar eliminarlos.
 
-Audita los monitores que han estado silenciados durante un largo periodo de tiempo para saber cuáles son realmente necesarios o útiles. Puede que algunos monitores estén silenciados por un buen motivo y quieras evitar eliminarlos.
+Para ver esos monitores, navega a la página de [Calidad de Monitores][1] y encuentra la lista de monitores que han estado silenciados por más de 60 días. También puedes encontrar monitores silenciados en la [**Lista de Monitores**][8] con la consulta `muted_elapsed:<number_of_days>d`.
 
-Para ver esos monitores, ve a la page (página) [Calidad de monitor (noun)][1] y busca la lista de monitores que han estado silenciados durante más de 60 días. También puedes encontrar monitores silenciados en la [**Lista de Monitores**][8] con la consulta `muted_elapsed:<number_of_days>d`.
+Después de tener tu lista, puedes tomar acción sobre cada monitor desde la página de Calidad de Monitores o hacer una eliminación masiva de monitores con los pasos 2 y 3.
 
-Después de tener tu lista, puedes realizar una acción en cada monitor (noun) de la page (página) Calidad de monitor (noun) o hacer una eliminación masiva de monitores con los pasos 2 y 3.
+### 2. Obtén la lista de IDs de monitores
 
-### 2. Obtener la lista de identificadores de monitor (noun)
-
-Obtén una lista de tus identificadores de monitor (noun) para automatizar los cambios mediante programación. Empieza por los monitores que llevan silenciados más de 60 días.
+Obtén una lista de tus IDs de monitores para automatizar programáticamente los cambios. Comienza con los monitores que han estado silenciados por más de 60 días.
 
 El siguiente comando CURL obtiene esa información:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -H "Content-Type: application/json" | jq -r '
+  H "DDAPIKEY: ${API_KEY}" \
+  H "DDAPPLICATIONKEY: ${APP_KEY}" \
+  H "ContentType: application/json" | jq r '
   .monitors[]
   | select(.quality_issues != null and (.quality_issues | index("muted_duration_over_sixty_days")))
   | [.id, .name, (.quality_issues | join(";"))]
   | @csv' > monitors_muted.csv
 ```
 
-Esto te proporciona los detalles de tus monitores en un archivo CSV para facilitar tu lectura. Puedes refinar la consulta para tu caso de uso específico.
+This gives you the details of your monitors in a CSV file for readability. You can refine the query to your specific use case.
 
-### 3. Borrar los monitores
+### 3. Delete the monitors
 
-Con tu lista de monitores que han estado silenciados durante más de 60 días (del step (UI) / paso (generic) 2), puedes borrarlos con el siguiente script. Antes de ejecutar el script, pon la columna de identificador de monitor (noun) **primero** en la tabla.
+With your list of monitors that have been muted for over 60 days (from Step 2), you can delete them with the following script. Before you run the script, put the monitor ID column **first** in the table.
 
 ```shell
 input_file="monitors_muted.csv"
@@ -76,150 +75,150 @@ tail -n +2 "$input_file" | awk -F',' '{print $1}' | while read -r monitor_id; do
     echo "Deleting monitor ID: $monitor_id"
 
     curl -X DELETE "{{< region-param key=dd_api >}}/api/v1/monitor/${monitor_id}" \
-        -H "Accept: application/json" \
-        -H "DD-API-KEY: ${DD_API_KEY}" \
-        -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
-    echo "Deleted monitor: $monitor_id"
-done
+        H "Accept: application/json" \
+        H "DDAPIKEY: ${DD_API_KEY}" \
+        H "DDAPPLICATIONKEY: ${DD_APP_KEY}"
+    echo "Monitor eliminado: $monitor_id"
+hecho
 ```
 
-## En estado de ALERTA durante un largo periodo de tiempo
+## In an ALERT state for a long period of time
 
-Las alertas persistentes sugieren uno de dos problemas: o bien el problema no es procesable o bien el umbral de monitor (noun) está mal configurado. Ambos casos erosionan la confianza en las alertas y contribuyen a la fatiga de las alertas. Estos monitores deben revisarse y editarse o eliminarse.
+Persistent alerts suggest one of two problems: either the issue is not actionable, or the monitor threshold is misconfigured. Both cases erode trust in alerts and contribute to alert fatigue. These monitors should be reviewed and edited, or removed.
 
-A continuación se indica cómo obtener la lista de monitores que han estado en estado de ALERTA durante más de 60 días:
+Here is how to get the list of monitors which have been in ALERT state for more than 60 days:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -H "Content-Type: application/json" | jq -r '
+  H "DDAPIKEY: ${API_KEY}" \
+  H "DDAPPLICATIONKEY: ${APP_KEY}" \
+  H "ContentType: application/json" | jq r '
   .monitors[]
   | select(.quality_issues != null and (.quality_issues | index("alerted_too_long")))
   | [.id, .name, (.quality_issues | join(";"))]
   | @csv' > monitors_alerted_too_long.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `monitors_alerted_too_long.csv`.
+To delete, use the same process in the [Delete Monitors command](#3-delete-the-monitors). Replace the `input_file` with `monitors_alerted_too_long.csv`.
 
-## Monitores duplicados
+## Duplicate monitors
 
-La creación de monitores separados que solo se diferencian por una tag (etiqueta), puede dar lugar a una duplicación innecesaria. Por ejemplo, monitorizar el uso de la CPU con un monitor (noun) para `prod` y otro para `staging` aumenta el número de monitores (noun).
+Creating separate monitors that differ only by a tag, can lead to unnecessary duplication. For example, monitoring CPU usage with one monitor for `prod` and another for `staging` increases your monitor count.
 
-Los monitores redundantes crean ruido y confusión innecesarios. En muchos casos, pueden consolidarse en un único [monitor (noun) **multialerta**][2] con el alcance y el etiquetado adecuados, lo que reduce la duplicación y hace que las alertas sean más manejables.
+Redundant monitors create unnecessary noise and confusion. In many cases, these can be consolidated into a single [**multi-alert** monitor][2] with proper scoping and tagging, reducing duplication and making alerts more manageable.
 
-Si necesitas enviar notificaciones diferentes en función del valor de la tag (etiqueta) que activó la alerta, utiliza [variables de monitor (noun)][3] para personalizar dinámicamente el mensaje en función de la tag (etiqueta) que superó el umbral.
+If you need to send different notifications depending on the tag value that triggered the alert, use [monitor variables][3] to dynamically customize the message based on the tag that breached the threshold.
 
-## Monitores ruidosos
+## Flappy and noisy monitors
 
-Los monitores ruidosos insensibilizan a los equipos ante los problemas reales. El aleteo (cuando un monitor (noun) cambia con frecuencia entre los estados de alerta y recuperación) suele indicar umbrales inestables, retrasos en la evaluación faltantes o volatilidad subyacente del sistema.
+Noisy monitors desensitize teams to real issues. Flapping (when a monitor frequently switches between alert and recovery states) often indicates unstable thresholds, missing evaluation delays, or underlying system volatility.
 
-Para reducir el ruido, revisa la agregación de evaluación del monitor (noun) y la configuración del umbral. Ajusta los parámetros para estabilizar el comportamiento de la alerta o elimina el monitor (noun) si ya no aporta valor.
+To reduce noise, review the monitor's evaluation aggregation and the threshold configuration. Adjust the settings to stabilize alert behavior, or delete the monitor if it no longer provides value.
 
-A continuación se explica cómo obtener una lista de los monitores que están generando un alto volumen de alertas:
+Here is how to get a list of monitors that are generating a high volume of alerts:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -H "Content-Type: application/json" | jq -r '
+  H "DDAPIKEY: ${API_KEY}" \
+  H "DDAPPLICATIONKEY: ${APP_KEY}" \
+  H "ContentType: application/json" | jq r '
   .monitors[]
   | select(.quality_issues != null and (.quality_issues | index("noisy_monitor")))
   | [.id, .name, (.quality_issues | join(";"))]
   | @csv' > noisy_monitors.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `noisy_monitors.csv`.
+To delete, use the same process in the [Delete Monitors command](#3-delete-the-monitors). Replace the `input_file` with `noisy_monitors.csv`.
 
-## Monitores mal configurados
+## Misconfigured monitors
 
-Los monitores mal configurados son monitores activos que pueden tener un uso adecuado, pero son ineficaces porque no se te notifica. Estas configuraciones erróneas socavan la fiabilidad del monitor (noun) y dificultan la depuración o la clasificación. Limpiarlos garantiza que las alertas sean precisas, procesables e integradas en los procesos de observabilidad.
+Misconfigured monitors are active monitors that may have a proper use, but are inefficient because you won't be notified. These misconfigurations undermine the monitor's reliability and make debugging or triaging harder. Cleaning these up ensures your alerts are accurate, actionable, and integrated into your observability workflows.
 
-### Asa rota
-Utiliza la [**Page (página) Calidad de monitor (noun)**][4] para visualizar qué monitores tienen un asa rota. Las notificaciones de estos monitores no pueden llegar a su destino.
+### Broken handle
+Use the [**Monitor Quality page**][4] to visualize which monitors have a broken handle. Notifications from these monitors can't reach its destination.
 
-**Datadog recomienda** revisar los destinatarios de los monitores para asegurarse de su correcta entrega o borrar el monitor (noun).
+**Datadog recommends** reviewing the monitors' recipients to ensure proper delivery, or deleting the monitor.
 
-A continuación se indica cómo obtener la lista de monitores que tienen asas mal configuradas:
+Here is how to get the list of monitors that have misconfigured handles:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -H "Content-Type: application/json" | jq -r '
+  H "DDAPIKEY: ${API_KEY}" \
+  H "DDAPPLICATIONKEY: ${APP_KEY}" \
+  H "ContentType: application/json" | jq r '
   .monitors[]
   | select(.quality_issues != null and (.quality_issues | index("broken_at_handle")))
   | [.id, .name, (.quality_issues | join(";"))]
   | @csv' > monitors_broken_handle.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `monitors_broken_handle.csv`.
+To delete, use the same process in the [Delete Monitors command](#3-delete-the-monitors). Replace the `input_file` with `monitors_broken_handle.csv`.
 
-### Falta un retraso
-Este problema afecta principalmente a los monitores basados en métricas de AWS. Dado que Datadog recupera las métricas de AWS a través de la API, a menudo se produce un retraso antes de que los datos estén disponibles. Si no se tienes esto en cuenta, los monitores pueden activar falsos positivos debido a datos incompletos o retrasados.
+### Missing a delay
+This issue mainly impacts monitors based on AWS metrics. Because Datadog retrieves AWS metrics through the API, there's often a built-in delay before the data becomes available. If you don't account for this, monitors can trigger false positives due to incomplete or delayed data.
 
-Puedes encontrar los monitores afectados en la page (página) [Calidad de monitor (noun)][4] , donde se marcan los monitores que carecen de un retraso de evaluación.
+You can find affected monitors in the [Monitor Quality][4] page, where monitors missing an evaluation delay are flagged.
 
-**Datadog recomienda** añadir un retraso a todos los monitores que utilicen las métricas de AWS. Un retraso de 300 segundos (5 minutos) suele ser suficiente para tener en cuenta la latencia de la ingesta de datos.
+**Datadog recommends** adding a delay to all monitors that use AWS metrics. A delay of 300 seconds (5 minutes) is typically sufficient to account for data ingestion latency.
 
-A continuación se indica cómo obtener la lista de monitores a los que les falta un retraso:
+Here is how to get the list of monitors that are missing a delay:
 
 ```shell
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -H "Content-Type: application/json" | jq -r '
+  H "DDAPIKEY: ${API_KEY}" \
+  H "DDAPPLICATIONKEY: ${APP_KEY}" \
+  H "ContentType: application/json" | jq r '
   .monitors[]
   | select(.quality_issues != null and (.quality_issues | index("crawler_metric_missing_eval_delay")))
   | [.id, .name, (.quality_issues | join(";"))]
-  | @csv' > monitors_missing_delay.csv
+  | @csv' > monitores_faltantes_retraso.csv
 ```
 
-Para obtener más información, consulta la [Guía de resolución de problemas de AWS][7].
+For more information, see the [AWS Troubleshooting guide][7].
 
-### Componente faltante
+### Missing constituent
 
-Los monitores composite (compuesto) evalúan su estado basándose en la combinación lógica de dos o más monitores (llamados constituyentes). Si alguno de esos monitores constituyentes se elimina o deja de estar disponible, el monitor (noun) composite (compuesto) deja de ser válido o fiable.
+Composite monitors evaluate their state based on the logical combination of two or more monitors (called constituents). If any of those constituent monitors are deleted or become unavailable, the composite monitor becomes invalid or unreliable.
 
-Un componente faltante significa normalmente que al menos uno de los monitores de entrada originales se ha eliminado después de que se creara el monitor (noun) composite (compuesto). Esto hace que el composite (compuesto) esté incompleto y pueda inducir a error en el comportamiento de alerta.
+A missing constituent typically means that at least one of the original input monitors has been removed after the composite monitor was created. This causes the composite to be incomplete and potentially misleading in alerting behavior.
 
-**Datadog recomienda** revisar los monitores composite (compuesto) para sustituir o restaurar los constituyentes faltantes o eliminar el monitor (noun) composite (compuesto). Encontrarás la lista de monitores composite (compuesto) con constituyentes faltantes en la página [Calidad de monitor (noun)][4].
+**Datadog recommends** reviewing the composite monitors to either replace or restore missing constituents, or delete the composite monitor. You can find the list of composite monitors with missing constituents on the [Monitor Quality][4] page.
 
-Para obtener mediante programación la lista de monitores a los que les faltan componentes:
+To programmatically get the list of monitors that are missing constituents:
 
 ```bash
 curl -s -X GET "{{< region-param key=dd_api >}}/api/v1/monitor/search" \
-  -H "DD-API-KEY: ${API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${APP_KEY}" \
-  -H "Content-Type: application/json" | jq -r '
+  H "DDAPIKEY: ${API_KEY}" \
+  H "DDAPPLICATIONKEY: ${APP_KEY}" \
+  H "ContentType: application/json" | jq r '
   .monitors[]
   | select(.quality_issues != null and (.quality_issues | index("composite_has_deleted_constituents")))
   | [.id, .name, (.quality_issues | join(";"))]
-  | @csv' > monitors_missing_constituent.csv
+  | @csv' > monitores_faltantes_constituente.csv
 ```
 
-Para borrar, utiliza el mismo proceso en el [comando Borrar monitores](#3-delete-the-monitors). Sustituye el `input_file` por `monitors_missing_constituent.csv`.
+To delete, use the same process in the [Delete Monitors command](#3-delete-the-monitors). Replace the `input_file` with `monitors_missing_constituent.csv`.
 
-Para obtener más información, consulta [Monitor (noun) composite (compuesto)][11].
+For more information, see [Composite Monitor][11].
 
-## Prácticas recomendadas para evitar el desorden de monitor (noun)
+## Best Practices to avoid Monitor Cluttering
 
-| Prácticas recomendadas | Descripción | Despliegue |
+| Best Practice | Description | Implementation |
 |---------------|-------------|----------------|
-| **Eliminar redundancia** | Evita crear varios monitores que rastreen la misma señal con alcances ligeramente diferentes (como por región, equipo o entorno). | Utiliza **agrupar monitores con tags (etiquetas)**, que son más fáciles de gestionar y escalar. |
-| **Configurar una propiedad clara** | Cada monitor (noun) debe tener un propietario claro para dirigir las alertas a los responsables adecuados y evitar confusiones. | Utiliza las tags (etiquetas) `team:` y las asas de notificación (`@slack-xyz`, `@pagerduty-twilio`). Utiliza el filtro **Creator** (Creador) de la [Lista de monitores][8] para auditar a los creadores más frecuentes de monitor (noun). |
-| **Revisar monitores ruidosos o inactivos** | Los monitores que alertan con demasiada frecuencia o que no alertan nunca pueden causar fatiga o indicar una mala configuración. | Utiliza la [**Page (página) Calidad de monitor (noun)**][4] para identificar y limpiar los monitores ruidosos, rotos u obsoletos. |
-| **Aprovechar las plantillas de monitor (noun)** | Para los patrones comunes (como las métricas RED o la latencia de la API), utiliza plantillas para reducir la duplicación y garantizar la normalización. | Utiliza [plantillas reutilizables][5] para reducir la duplicación y garantizar la normalización en todos los equipos. |
-| **Establece una política de etiquetado** | Las tags (etiquetas) coherentes y significativas te permiten filtrar, agrupar y enrutar fácilmente los monitores. | Utiliza etiquetas coherentes (como `service:`, `env:`, `team:`) y establece una [Política de etiquetado][6]. De este modo se pueden crear dashboards con alcance, alertas y rastreo del cumplimiento. |
-| **Dashboard de calidad de monitor (noun)** | Visualiza las tendencias en la higiene de monitor (noun) en todos los equipos, servicios y entornos para identificar de forma proactiva las deficiencias y rastrear las mejoras. | Configura un [**Dashboard de calidad de monitor (noun)**](#template-monitor-quality-dashboard) para rastrear las mejoras a lo largo del tiempo y priorizar los esfuerzos de limpieza a escala. |
+| **Eliminate redundancy** | Avoid creating multiple monitors that track the same signal with slightly different scopes (such as by region, team, or environment). | Use **group-by monitors with tags**, which are easier to manage and scale. |
+| **Set clear ownership** | Every monitor should have a clear owner to route alerts to the right responders and avoid confusion. | Use `team:` tags and notification handles (`@slack-xyz`, `@pagerduty-twilio`). Use the **Creator** filter on the [Monitors List][8] to audit the most frequent monitor creators. |
+| **Review noisy or dormant monitors** | Monitors that alert too often or never alert at all can cause fatigue or signal a misconfiguration. | Use the [**Monitor Quality page**][4] to identify and clean up noisy, broken, or outdated monitors. |
+| **Leverage monitor templates** | For common patterns (such as RED metrics or API latency), use templates to reduce duplication and ensure standardization. | Use [reusable templates][5] to reduce duplication and ensure standardization across teams. |
+| **Establish a Tagging Policy** | Consistent and meaningful tags allow you to easily filter, group, and route monitors. | Use consistent tags (such as `service:`, `env:`, `team:`) and establish a [Tagging Policy][6]. This enables scoped dashboards, alerts, and compliance tracking. |
+| **Monitor Quality Dashboard** | Visualize trends in monitor hygiene across teams, services, and environments to proactively identify gaps and track improvements. | Set up a [**Monitor Quality dashboard**](#template-monitor-quality-dashboard) to track improvements over time and prioritize cleanup efforts at scale. |
 
-## Dashboard de calidad de monitor de plantilla
+## Template Monitor Quality dashboard
 
-Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON directamente a tu cuenta de Datadog.
+To help you get started, import the following JSON dashboard definition directly into your Datadog account.
 
-1. En la aplicación, ve a [**Dashboards**][9] y haz clic en **New Dashboard** (Nuevo dashboard).
-2. En la parte superior de la page (página), haz clic en **Configure** (Configurar) y selecciona **Import dashboard JSON...** (Importar JSON del dashboard...).
-3. Copia y pega el siguiente JSON para crear un dashboard de calidad de monitor (noun):
+1. In the app, navigate to [**Dashboards**][9] and click **New Dashboard**.
+2. At the top of the page, click **Configure** and select **Import dashboard JSON...**.
+3. Copy and paste the following JSON to build out a Monitor Quality dashboard:
 
 ```json
 {
@@ -301,329 +300,329 @@ Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON 
               "custom_links": [
                 {
                   "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{$team}}"
+                  "link": "https://app.datadoghq.com/monitors/quality?q={{$equipo}}"
                 }
               ]
             },
-            "layout": { "x": 5, "y": 0, "width": 7, "height": 4 }
+            "diseño": { "x": 5, "y": 0, "ancho": 7, "alto": 4 }
           },
           {
             "id": 498569597362654,
-            "definition": {
-              "title": "Evolution of Quality Improvements by Type over Time",
-              "title_size": "16",
-              "title_align": "left",
-              "show_legend": false,
-              "legend_layout": "auto",
-              "legend_columns": ["avg", "min", "max", "value", "sum"],
-              "time": { "hide_incomplete_cost_data": true },
-              "type": "timeseries",
-              "requests": [
+            "definición": {
+              "título": "Evolución de las Mejoras de Calidad por Tipo a lo Largo del Tiempo",
+              "tamaño_título": "16",
+              "alineación_título": "izquierda",
+              "mostrar_leyenda": false,
+              "diseño_leyenda": "automático",
+              "columnas_leyenda": ["promedio", "mínimo", "máximo", "valor", "suma"],
+              "tiempo": { "ocultar_datos_de_costo_incompletos": true },
+              "tipo": "serie_de_tiempo",
+              "solicitudes": [
                 {
-                  "formulas": [{ "formula": "query1" }],
-                  "queries": [
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_team{$team,$service} by {suggestion_type}"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "suma:datadog.monitor.suggested_monitor_health_by_team{$equipo,$servicio} por {tipo_de_sugerencia}"
                     }
                   ],
-                  "response_format": "timeseries",
-                  "style": {
-                    "palette": "datadog16",
-                    "order_by": "values",
-                    "line_type": "solid",
-                    "line_width": "normal"
+                  "formato_de_respuesta": "series_de_tiempo",
+                  "estilo": {
+                    "paleta": "datadog16",
+                    "ordenar_por": "valores",
+                    "tipo_de_linea": "sólido",
+                    "ancho_de_linea": "normal"
                   },
-                  "display_type": "line"
+                  "tipo_de_visualización": "línea"
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{$team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q=","translation_17":""disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }{{$equipo}}"
                 }
               ]
             },
-            "layout": { "x": 0, "y": 4, "width": 12, "height": 4 }
+            "id": 1376609088194674,
           },
           {
-            "id": 1376609088194674,
-            "definition": {
-              "title": "Top Teams Impacted",
-              "title_size": "16",
-              "title_align": "left",
-              "time": { "hide_incomplete_cost_data": true },
-              "type": "toplist",
-              "requests": [
+            "título": "Principales Equipos Afectados",
+            "definición": {
+              "tipo": "lista_principal"
+              "tamaño_título": "16",
+              "alineación_título": "izquierda",
+              "tiempo": { "ocultar_datos_de_costo_incompletos": true },
+              
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "aggregator": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
+                  "response_format": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
                   "sort": {
                     "count": 10,
                     "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                      { "type": "fórmula", "index": 0, "order": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q=","translation_17":""disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }{{team}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" }
+              "estilo": {
+                "display": { "type": "apilado", "legend": "automático" }
               }
             },
             "layout": { "x": 0, "y": 8, "width": 12, "height": 4 }
           },
           {
             "id": 718136447073638,
-            "definition": {
-              "type": "note",
-              "content": "Monitors with Missing Recipients per Team",
-              "background_color": "vivid_blue",
+            "definición": {
+              "type": "nota",
+              "content": "Monitores con Destinatarios Faltantes por Equipo",
+              "background_color": "azul_vivo",
               "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
+              "text_align": "centro",
+              "vertical_align": "centro",
               "show_tick": false,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "tiene_relleno": true
             },
-            "layout": { "x": 0, "y": 12, "width": 6, "height": 1 }
+            "diseño": { "x": 0, "y": 12, "ancho": 6, "alto": 1 }
           },
           {
             "id": 2393792996475864,
-            "definition": {
-              "type": "note",
-              "content": "Monitors with Broken Handles per Team",
-              "background_color": "vivid_green",
+            "definición": {
+              "type": "nota",
+              "contenido": "Monitores con Mangos Rotos por Equipo",
+              "color_de_fondo": "verde_vivo",
               "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
+              "text_align": "centro",
+              "vertical_align": "centro",
               "show_tick": false,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "tiene_relleno": true
             },
-            "layout": { "x": 6, "y": 12, "width": 6, "height": 1 }
+            "diseño": { "x": 6, "y": 12, "ancho": 6, "alto": 1 }
           },
           {
             "id": 4443082314028290,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- no notification handle found in monitor body\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+            "definición": {
+              "type": "nota",
+              "contenido": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n no se encontró mango de notificación en el cuerpo del monitor\n el tipo de monitor no es `synthetics`\n\n_Puede usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_marcador": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_marcador": "inferior",
+              "tiene_relleno": true
             },
-            "layout": { "x": 0, "y": 13, "width": 6, "height": 2 }
+            "diseño": { "x": 0, "y": 13, "ancho": 6, "alto": 2 }
           },
           {
             "id": 3954366540293996,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- notification handle is not valid\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+            "definición": {
+              "type": "nota",
+              "contenido": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el mango de notificación no es válido\n el tipo de monitor no es `synthetics`\n\n_Puede usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_marcador": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_marcador": "inferior",
+              "tiene_relleno": true
             },
-            "layout": { "x": 6, "y": 13, "width": 6, "height": 2 }
+            "diseño": { "x": 6, "y": 13, "ancho": 6, "alto": 2 }
           },
           {
             "id": 2546970864549118,
-            "definition": {
-              "title": "Monitors with Missing Recipients per Team",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "título": "Monitores con Destinatarios Faltantes por Equipo",
+              
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:missing_at_handle,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:missing_at_handle,$team,$service} por {team,suggestion_type}"
+                      "aggregator": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
+                  "response_format": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
                   "sort": {
                     "count": 10,
                     "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                      { "type": "fórmula", "index": 0, "order": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q=","translation_17":""disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }{{team}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "blue"
+              "estilo": {
+                "display": { "type": "apilado", "legend": "automático" },
+                "palette": "azul"
               }
             },
             "layout": { "x": 0, "y": 15, "width": 6, "height": 5 }
           },
           {
             "id": 3744392131942638,
-            "definition": {
-              "title": "Monitors with Broken Handles per Team",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores con Manijas Rotos por Equipo",
+              
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:broken_at_handle,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "aggregator": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
+                  "response_format": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
                   "sort": {
                     "count": 10,
                     "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                      { "type": "fórmula", "index": 0, "order": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q=","translation_17":""disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }{{team}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "green"
+              "estilo": {
+                "display": { "type": "apilado", "legend": "automático" },
+                "palette": "verde"
               }
             },
             "layout": { "x": 6, "y": 15, "width": 6, "height": 5 }
           },
           {
             "id": 2751217590574740,
-            "definition": {
-              "type": "note",
-              "content": "Monitors Muted for Too Long",
-              "background_color": "purple",
+            "definición": {
+              "type": "nota",
+              "content": "Monitores Silenciados por Demasiado Tiempo",
+              "background_color": "morado",
               "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
+              "text_align": "centro",
+              "vertical_align": "centro",
               "show_tick": false,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "tiene_relleno": true
             },
             "layout": { "x": 0, "y": 20, "width": 6, "height": 1 }
           },
           {
             "id": 5158165900159898,
-            "definition": {
-              "type": "note",
-              "content": "Monitors Generating a High Volume of Alerts",
-              "background_color": "green",
+            "definición": {
+              "type": "nota",
+              "content": "Monitores Generando un Alto Volumen de Alertas",
+              "background_color": "verde",
               "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
+              "text_align": "centro",
+              "vertical_align": "centro",
               "show_tick": false,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "tiene_relleno": true
             },
             "layout": { "x": 6, "y": 20, "width": 6, "height": 1 }
           },
           {
             "id": 8032070484951580,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor has been muted for at least 60 days\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor ha estado silenciado por al menos 60 días\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_marcador": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_marcador": "inferior",
+              "tiene_relleno": true
             },
             "layout": { "x": 0, "y": 21, "width": 6, "height": 2 }
           },
           {
             "id": 4153429942317530,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor generates the top 5% of alerts over the past 10 days\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor genera el 5% superior de alertas en los últimos 10 días\n el tipo de monitor no es `synthetics`\n\n_Puede usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_marcador": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_marcador": "inferior",
+              "tiene_relleno": true
             },
             "layout": { "x": 6, "y": 21, "width": 6, "height": 2 }
           },
           {
             "id": 4158897740932848,
-            "definition": {
-              "title": "Monitors Muted for Too Long",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores Silenciados por Demasiado Tiempo",
+              
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:muted_duration_over_sixty_days,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "aggregator": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
+                  "response_format": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
                   "sort": {
                     "count": 10,
                     "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                      { "type": "fórmula", "index": 0, "order": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q=","translation_17":""disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }{{team}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
+              "estilo": {
+                "display": { "type": "apilado", "legend": "automático" },
                 "palette": "semantic"
               }
             },
@@ -631,33 +630,33 @@ Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON 
           },
           {
             "id": 5392245250417816,
-            "definition": {
-              "title": "Monitors Generating a High Volume of Alerts",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores Generando un Alto Volumen de Alertas",
+              
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:noisy_monitor,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "aggregator": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
+                  "response_format": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
                   "sort": {
                     "count": 10,
                     "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                      { "type": "fórmula", "index": 0, "order": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q=","translation_17":""disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }{{team}}"
                 }
               ],
               "style": { "display": { "type": "stacked" }, "palette": "grey" }
@@ -666,389 +665,389 @@ Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON 
           },
           {
             "id": 1271026446632020,
-            "definition": {
-              "type": "note",
-              "content": "Monitors Stuck in Alert State",
+            "definición": {
+              "type": "nota",
+              "content": "Monitores Atascados en Estado de Alerta",
               "background_color": "vivid_yellow",
               "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
+              "text_align": "centro",
+              "vertical_align": "centro",
               "show_tick": false,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "tiene_relleno": true
             },
             "layout": { "x": 0, "y": 28, "width": 6, "height": 1 }
           },
           {
             "id": 6315895116466318,
-            "definition": {
-              "type": "note",
-              "content": "Composite Monitors have Deleted Components",
+            "definición": {
+              "type": "nota",
+              "content": "Monitores Compuestos tienen Componentes Eliminados",
               "background_color": "gray",
               "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
+              "text_align": "centro",
+              "vertical_align": "centro",
               "show_tick": false,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "tiene_relleno": true
             },
             "layout": { "x": 6, "y": 28, "width": 6, "height": 1 }
           },
           {
             "id": 8251226565664096,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor has been alerting for at least 60 days\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor ha estado alertando durante al menos 60 días\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_marcador": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_marcador": "inferior",
+              "tiene_relleno": true
             },
             "layout": { "x": 0, "y": 29, "width": 6, "height": 2 }
           },
           {
             "id": 1329067816249636,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor is a composite one and has deleted components\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor es uno compuesto y tiene componentes eliminados\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_marcador": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_marcador": "inferior",
+              "tiene_relleno": true
             },
             "layout": { "x": 6, "y": 29, "width": 6, "height": 2 }
           },
           {
             "id": 7052384595427880,
-            "definition": {
-              "title": "Monitors Stuck in Alert State",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores Atascados en Estado de Alerta",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:alerted_too_long,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "suma:datadog.monitor.suggested_monitor_health_by_team{!equipo:none,tipo_de_sugerencia:alertado_demasiado_tiempo,$equipo,$servicio} por {equipo,tipo_de_sugerencia}",
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{equipo}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "orange"
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
+                "paleta": "naranja"
               }
             },
-            "layout": { "x": 0, "y": 31, "width": 6, "height": 5 }
+            "diseño": { "x": 0, "y": 31, "ancho": 6, "alto": 5 }
           },
           {
             "id": 2768363536962548,
-            "definition": {
-              "title": "Composite Monitors have Deleted Components",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "título": "Los monitores compuestos tienen componentes eliminados",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_team{!team:none,suggestion_type:composite_has_deleted_constituents ,$team,$service} by {team,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "sum:datadog.monitor.suggested_monitor_health_by_team{!equipo:none,tipo_sugerencia:composite_has_deleted_constituents ,$equipo,$servicio} por {equipo,tipo_sugerencia}",
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{team}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{equipo}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "datadog16"
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
+                "paleta": "datadog16"
               }
             },
-            "layout": { "x": 6, "y": 31, "width": 6, "height": 5 }
+            "diseño": { "x": 6, "y": 31, "ancho": 6, "alto": 5 }
           }
         ]
       },
-      "layout": { "x": 0, "y": 3, "width": 12, "height": 37 }
+      "diseño": { "x": 0, "y": 3, "ancho": 12, "alto": 37 }
     },
     {
       "id": 2841959907422822,
-      "definition": {
-        "title": "General overview - by service",
-        "background_color": "pink",
-        "show_title": true,
-        "type": "group",
-        "layout_type": "ordered",
+      "definición": {
+        "título": "Resumen general por servicio",
+        "color_fondo": "rosa",
+        "mostrar_título": true,
+        "tipo": "grupo",
+        "tipo_diseño": "ordenado",
         "widgets": [
           {
             "id": 3801590205295194,
-            "definition": {
-              "type": "note",
-              "content": "This section is powered by the `datadog.monitor.suggested_monitor_health_by_service` metric, which is emitted daily.\n\nThe monitor counts reported in this metric exclude synthetic monitors.\n\nThese counts represent the total number of suggestions for monitor quality improvements, broken down by service.\n\nUse the `service` filter to view insights specific to your team.\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "white",
+            "definición": {
+              "type": "nota",
+              "content": "Esta sección está impulsada por la métrica `datadog.monitor.suggested_monitor_health_by_service`, que se emite diariamente.\n\nLos conteos de monitores reportados en esta métrica excluyen monitores sintéticos.\n\nEstos conteos representan el número total de sugerencias para mejoras en la calidad del monitor, desglosadas por servicio.\n\nUtiliza el filtro `service` para ver información específica de tu equipo.\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "background_color": "blanco",
               "font_size": "14",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
+              "text_align": "centro",
+              "vertical_align": "centro",
+              "show_tick": falso,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "has_padding": verdadero
             },
             "layout": { "x": 0, "y": 0, "width": 5, "height": 4 }
           },
           {
             "id": 8418200284207718,
-            "definition": {
-              "title": "Distribution of Quality Improvements by Type",
+            "definición": {
+              "title": "Distribución de Mejoras de Calidad por Tipo",
               "title_size": "16",
-              "title_align": "left",
-              "time": { "hide_incomplete_cost_data": true },
-              "requests": [
+              "title_align": "izquierda",
+              "time": { "hide_incomplete_cost_data": verdadero },
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_service{$team,$service} by {suggestion_type}",
-                      "aggregator": "last"
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
+                  "formato_de_respuesta": "escalar",
                   "style": { "palette": "datadog16" },
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
                     "count": 500,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "type": "sunburst",
-              "hide_total": false,
-              "legend": { "type": "automatic" },
-              "custom_links": [
+              "tipo": "sol"
+              "ocultar_total": false,
+              "leyenda": { "tipo": "automático" },
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{$service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{$servicio}}"
                 }
               ]
             },
-            "layout": { "x": 5, "y": 0, "width": 7, "height": 4 }
+            "disposición": { "x": 5, "y": 0, "ancho": 7, "alto": 4 }
           },
           {
             "id": 8281740697966220,
-            "definition": {
-              "title": "Evolution of Quality Improvements by Type over Time",
+            "definición": {
+              "título": "Evolución de las Mejoras de Calidad por Tipo a lo Largo del Tiempo",
               "title_size": "16",
-              "title_align": "left",
-              "show_legend": false,
-              "legend_layout": "auto",
-              "legend_columns": ["avg", "min", "max", "value", "sum"],
-              "time": { "hide_incomplete_cost_data": true },
-              "type": "timeseries",
-              "requests": [
+              "title_align": "izquierda",
+              "mostrar_leyenda": false,
+              "disposición_leyenda": "automático",
+              "columnas_leyenda": ["promedio", "mínimo", "máximo", "valor", "suma"],
+              "time": { "hide_incomplete_cost_data": verdadero },
+              "tipo": "serie de tiempo",
+              "solicitudes": [
                 {
-                  "formulas": [{ "formula": "query1" }],
-                  "queries": [
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_service{$team, $service} by {suggestion_type}"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "suma:datadog.monitor.suggested_monitor_health_by_service{$equipo, $servicio} por {tipo_de_sugerencia}"
                     }
                   ],
-                  "response_format": "timeseries",
-                  "style": {
-                    "palette": "datadog16",
-                    "order_by": "values",
-                    "line_type": "solid",
-                    "line_width": "normal"
+                  "formato_de_respuesta": "serie de tiempo",
+                  "estilo": {
+                    "paleta": "datadog16",
+                    "ordenar_por": "valores",
+                    "tipo_de_linea": "sólido",
+                    "ancho_de_linea": "normal"
                   },
-                  "display_type": "line"
+                  "tipo_de_visualización": "línea"
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{$service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{$servicio}}"
                 }
               ]
             },
-            "layout": { "x": 0, "y": 4, "width": 12, "height": 4 }
+            "disposición": { "x": 0, "y": 4, "ancho": 12, "alto": 4 }
           },
           {
             "id": 5048429332292860,
-            "definition": {
-              "title": "Top services impacted",
+            "definición": {
+              "título": "Principales servicios afectados",
               "title_size": "16",
-              "title_align": "left",
-              "type": "toplist",
-              "requests": [
+              "title_align": "izquierda",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "suma:datadog.monitor.suggested_monitor_health_by_service{!servicio:none,$equipo,$servicio} por {servicio,tipo_de_sugerencia}",
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" }
+              "estilo": {
+                "visualización": { "tipo": "apilado", "leyenda": "automático" }
               }
             },
-            "layout": { "x": 0, "y": 8, "width": 12, "height": 5 }
+            "diseño": { "x": 0, "y": 8, "ancho": 12, "alto": 5 }
           },
           {
             "id": 2233801928907094,
-            "definition": {
-              "type": "note",
-              "content": "Monitors with Missing Recipients per Service",
-              "background_color": "vivid_blue",
-              "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
+            "definición": {
+              "type": "nota",
+              "contenido": "Monitores con Destinatarios Faltantes por Servicio",
+              "color_de_fondo": "azul_vivo",
+              "tamaño_de_fuente": "18",
+              "text_align": "centro",
+              "vertical_align": "centro",
+              "show_tick": falso,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "has_padding": verdadero
             },
-            "layout": { "x": 0, "y": 13, "width": 6, "height": 1 }
+            "diseño": { "x": 0, "y": 13, "ancho": 6, "alto": 1 }
           },
           {
             "id": 7329031300309162,
-            "definition": {
-              "type": "note",
-              "content": "Monitors with Broken Handles per Service",
-              "background_color": "vivid_green",
-              "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
+            "definición": {
+              "type": "nota",
+              "contenido": "Monitores con Mangos Rotos por Servicio",
+              "color_de_fondo": "verde_vivo",
+              "tamaño_de_fuente": "18",
+              "text_align": "centro",
+              "vertical_align": "centro",
+              "show_tick": falso,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "has_padding": verdadero
             },
-            "layout": { "x": 6, "y": 13, "width": 6, "height": 1 }
+            "diseño": { "x": 6, "y": 13, "ancho": 6, "alto": 1 }
           },
           {
             "id": 7627510169738418,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- no notification handle found in monitor body\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
+            "definición": {
+              "type": "nota",
+              "contenido": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n no se encontró mango de notificación en el cuerpo del monitor\n el tipo de monitor no es `synthetics`\n\n_Puede usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
               "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_tic": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_tic": "inferior",}}
+              "has_padding": verdadero
             },
             "layout": { "x": 0, "y": 14, "width": 6, "height": 2 }
           },
           {
             "id": 2826082028591748,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- notification handle is not valid\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el manejador de notificaciones no es válido\n el tipo de monitor no es `synthetics`\n\n_Puede usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
               "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_tic": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_tic": "inferior",}}
+              "has_padding": verdadero
             },
             "layout": { "x": 6, "y": 14, "width": 6, "height": 2 }
           },
           {
             "id": 5050954942402816,
-            "definition": {
-              "title": "Monitors with Missing Recipients per Service",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores con Destinatarios Faltantes por Servicio",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:missing_at_handle,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
                 "palette": "blue"
               }
             },
@@ -1056,37 +1055,37 @@ Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON 
           },
           {
             "id": 7809748805807956,
-            "definition": {
-              "title": "Monitors with Broken Handles per Service",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores con Manejadores Rotos por Servicio",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:broken_at_handle,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
                 "palette": "green"
               }
             },
@@ -1094,316 +1093,316 @@ Para ayudarte a empezar, importa la siguiente definición del dashboard de JSON 
           },
           {
             "id": 8416588682594596,
-            "definition": {
-              "type": "note",
-              "content": "Monitors Muted for Too Long",
+            "definición": {
+              "type": "nota",
+              "content": "Monitores Silenciados por Demasiado Tiempo",
               "background_color": "purple",
-              "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
+              "tamaño_de_fuente": "18",
+              "text_align": "centro",
+              "vertical_align": "centro",
+              "show_tick": falso,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "has_padding": verdadero
             },
             "layout": { "x": 0, "y": 21, "width": 6, "height": 1 }
           },
           {
             "id": 4951606729784970,
-            "definition": {
-              "type": "note",
-              "content": "Monitors Generating a High Volume of Alerts",
-              "background_color": "green",
-              "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
+            "definición": {
+              "type": "nota",
+              "content": "Monitores Generando un Alto Volumen de Alertas",}}
+              "background_color": "verde",
+              "tamaño_de_fuente": "18",
+              "text_align": "centro",
+              "vertical_align": "centro",
+              "show_tick": falso,
               "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+              "tick_edge": "izquierda",
+              "has_padding": verdadero
             },
             "layout": { "x": 6, "y": 21, "width": 6, "height": 1 }
           },
           {
             "id": 1778359756038190,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor has been muted for at least 60 days\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor ha estado silenciado por al menos 60 días\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
               "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_tic": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_tic": "inferior",}}
+              "has_padding": verdadero
             },
             "layout": { "x": 0, "y": 22, "width": 6, "height": 2 }
           },
           {
             "id": 8559060613933804,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor generates the top 5% of alerts over the past 10 days\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
+            "definición": {
+              "type": "nota",
+              "content": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor genera el 5% superior de alertas en los últimos 10 días\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
               "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
+              "alineación_de_texto": "izquierda",
+              "vertical_align": "centro",
+              "mostrar_tic": true,
               "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+              "borde_tic": "inferior",}}
+              "has_padding": verdadero
             },
             "layout": { "x": 6, "y": 22, "width": 6, "height": 2 }
           },
           {
             "id": 7041249940897320,
-            "definition": {
-              "title": "Monitors Muted for Too Long",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores Silenciados por Demasiado Tiempo",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
                       "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:muted_duration_over_sixty_days,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "semantic"
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
+                "palette": "semántico"
               }
             },
             "layout": { "x": 0, "y": 24, "width": 6, "height": 5 }
           },
           {
             "id": 7810615049061724,
-            "definition": {
-              "title": "Monitors Generating a High Volume of Alerts",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "title": "Monitores Generando un Alto Volumen de Alertas",
+              "tipo": "lista_principal",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:noisy_monitor,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:noisy_monitor,$team,$service} by {service,suggestion_type}"
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "grey"
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
+                "paleta": "gris"
               }
             },
-            "layout": { "x": 6, "y": 24, "width": 6, "height": 5 }
+            "disposición": { "x": 6, "y": 24, "ancho": 6, "alto": 5 }
           },
           {
             "id": 5108940190121326,
-            "definition": {
-              "type": "note",
-              "content": "Monitors Stuck in Alert State",
-              "background_color": "vivid_yellow",
-              "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
-              "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+            "definición": {
+              "tipo": "nota",
+              "contenido": "Monitores Atascados en Estado de Alerta",
+              "color_fondo": "amarillo_vivo",
+              "tamaño_fuente": "18",
+              "alineación_texto": "centro",
+              "alineación_vertical": "centro",
+              "mostrar_tick": false,
+              "pos_tick": "50%",
+              "borde_tick": "izquierda",
+              "tiene_relleno": true
             },
-            "layout": { "x": 0, "y": 29, "width": 6, "height": 1 }
+            "diseño": { "x": 0, "y": 29, "ancho": 6, "alto": 1 }
           },
           {
             "id": 4931941666409286,
-            "definition": {
-              "type": "note",
-              "content": "Composite Monitors have Deleted Components",
-              "background_color": "gray",
-              "font_size": "18",
-              "text_align": "center",
-              "vertical_align": "center",
-              "show_tick": false,
-              "tick_pos": "50%",
-              "tick_edge": "left",
-              "has_padding": true
+            "definición": {
+              "tipo": "nota",
+              "contenido": "Los Monitores Compuestos tienen Componentes Eliminados",
+              "color_de_fondo": "gris",
+              "tamaño_fuente": "18",
+              "alineación_texto": "centro",
+              "alineación_vertical": "centro",
+              "mostrar_tick": false,
+              "pos_tick": "50%",
+              "borde_tick": "izquierda",
+              "tiene_relleno": true
             },
-            "layout": { "x": 6, "y": 29, "width": 6, "height": 1 }
+            "diseño": { "x": 6, "y": 29, "ancho": 6, "alto": 1 }
           },
           {
             "id": 6520923360190496,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor has been alerting for at least 60 days\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
-              "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+            "definición": {
+              "tipo": "nota",
+              "contenido": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor ha estado alertando durante al menos 60 días\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "alineación_vertical": "centro",
+              "mostrar_tic": true,
+              "pos_tick": "50%",
+              "borde_tic": "inferior",
+              "tiene_relleno": true
             },
-            "layout": { "x": 0, "y": 30, "width": 6, "height": 2 }
+            "diseño": { "x": 0, "y": 30, "ancho": 6, "alto": 2 }
           },
           {
             "id": 1364025765104008,
-            "definition": {
-              "type": "note",
-              "content": "Monitor counts reported in this metric satisfy the following conditions:\n- the monitor is a composite one and has deleted components\n- monitor type is not `synthetics`\n\n_You can use the context links to jump to the list of affected monitors._",
-              "background_color": "yellow",
-              "font_size": "14",
-              "text_align": "left",
-              "vertical_align": "center",
-              "show_tick": true,
-              "tick_pos": "50%",
-              "tick_edge": "bottom",
-              "has_padding": true
+            "definición": {
+              "tipo": "nota",
+              "contenido": "Los conteos de monitores reportados en esta métrica satisfacen las siguientes condiciones:\n el monitor es uno compuesto y tiene componentes eliminados\n el tipo de monitor no es `synthetics`\n\n_Puedes usar los enlaces de contexto para saltar a la lista de monitores afectados._",
+              "color_de_fondo": "amarillo",
+              "tamaño_de_fuente": "14",
+              "alineación_de_texto": "izquierda",
+              "alineación_vertical": "centro",
+              "mostrar_tic": true,
+              "pos_tick": "50%",
+              "borde_tic": "inferior",
+              "tiene_relleno": true
             },
-            "layout": { "x": 6, "y": 30, "width": 6, "height": 2 }
+            "diseño": { "x": 6, "y": 30, "ancho": 6, "alto": 2 }
           },
           {
             "id": 3670188762233230,
-            "definition": {
-              "title": "Monitors Stuck in Alert State",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "título": "Monitores Atascados en Estado de Alerta",
+              "tipo": "lista superior",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:alerted_too_long,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "suma:datadog.monitor.suggested_monitor_health_by_service{!servicio:none,tipo_de_sugerencia:alertado_demasiado_tiempo,$equipo,$servicio} por {servicio,tipo_de_sugerencia}",
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "orange"
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
+                "paleta": "naranja"
               }
             },
-            "layout": { "x": 0, "y": 32, "width": 6, "height": 5 }
+            "diseño": { "x": 0, "y": 32, "ancho": 6, "alto": 5 }
           },
           {
             "id": 9006201303765196,
-            "definition": {
-              "title": "Composite Monitors have Deleted Components",
-              "type": "toplist",
-              "requests": [
+            "definición": {
+              "título": "Los Monitores Compuestos tienen Componentes Eliminados"
+              "tipo": "lista superior",
+              "solicitudes": [
                 {
-                  "queries": [
+                  "consultas": [
                     {
-                      "name": "query1",
-                      "data_source": "metrics",
-                      "query": "sum:datadog.monitor.suggested_monitor_health_by_service{!service:none,suggestion_type:alerted_too_long,$team,$service} by {service,suggestion_type}",
-                      "aggregator": "last"
+                      "nombre": "consulta1",
+                      "fuente_de_datos": "métricas",
+                      "consulta": "suma:datadog.monitor.suggested_monitor_health_by_service{!servicio:none,tipo_de_sugerencia:alertado_demasiado_tiempo,$equipo,$servicio} por {servicio,tipo_de_sugerencia}",
+                      "agregador": "último"
                     }
                   ],
-                  "response_format": "scalar",
-                  "formulas": [{ "formula": "query1" }],
-                  "sort": {
-                    "count": 10,
-                    "order_by": [
-                      { "type": "formula", "index": 0, "order": "desc" }
+                  "formato_de_respuesta": "escalar",
+                  "fórmulas": [{ "fórmula": "consulta1" }],
+                  "ordenar": {
+                    "cantidad": 10,
+                    "ordenar_por": [
+                      { "tipo": "fórmula", "índice": 0, "orden": "desc" }
                     ]
                   }
                 }
               ],
-              "custom_links": [
+              "enlaces_personalizados": [
                 {
-                  "label": "See list of monitors",
-                  "link": "https://app.datadoghq.com/monitors/quality?q={{service}}"
+                  "etiqueta": "Ver lista de monitores",
+                  "enlace": "https://app.datadoghq.com/monitors/quality?q={{servicio}}"
                 }
               ],
-              "style": {
-                "display": { "type": "stacked", "legend": "automatic" },
-                "palette": "datadog16"
+              "estilo": {
+                "mostrar": { "tipo": "apilado", "leyenda": "automático" },
+                "paleta": "datadog16"
               }
             },
-            "layout": { "x": 6, "y": 32, "width": 6, "height": 5 }
+            "diseño": { "x": 6, "y": 32, "ancho": 6, "alto": 5 }
           }
         ]
       },
-      "layout": {
+      "diseño": {
         "x": 0,
         "y": 40,
-        "width": 12,
-        "height": 38,
-        "is_column_break": true
+        "ancho": 12,
+        "alto": 38,
+        "es_salto_de_columna": true
       }
     }
   ],
-  "template_variables": [
+  "variables_de_plantilla": [
     {
-      "name": "team",
-      "prefix": "team",
-      "available_values": [],
-      "default": "*"
+      "nombre": "equipo",
+      "prefijo": "equipo",
+      "valores_disponibles": [],
+      "predeterminado": "*"
     },
     {
-      "name": "service",
-      "prefix": "service",
-      "available_values": [],
-      "default": "*"
+      "nombre": "servicio",
+      "prefijo": "servicio",
+      "valores_disponibles": [],
+      "predeterminado": "*"
     }
   ],
-  "layout_type": "ordered",
-  "notify_list": [],
-  "reflow_type": "fixed"
+  "tipo_de_diseño": "ordenado",
+  "lista_de_notificaciones": [],
+  "tipo_de_reflujo": "fijo"
 }
 ```
 
-## Referencias adicionales
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

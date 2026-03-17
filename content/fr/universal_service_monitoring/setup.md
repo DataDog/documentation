@@ -1,67 +1,68 @@
 ---
-description: Configura la supervisión de servicios universales con el agente de Datadog
-  en diferentes plataformas, incluidos entornos de Kubernetes, Docker, ECS y Windows.
+description: Configurez la surveillance des services universels à l'aide de l'agent
+  Datadog sur différentes plateformes, notamment les environnements Kubernetes, Docker,
+  ECS et Windows.
 further_reading:
 - link: /universal_service_monitoring/
   tag: Documentation
-  text: Más información sobre la supervisión del servicio universal
+  text: En savoir plus sur la surveillance du service universel
 - link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: Blog
-  text: Señales de oro en cuestión de segundos con Universal Service Monitoring
-title: Configuración de la supervisión del servicio universal
+  text: Des signaux dorés en quelques secondes grâce à Universal Service Monitoring
+title: Configuration de la surveillance du service universel
 ---
-## Versiones compatibles y compatibilidad
+## Versions prises en charge et compatibilité
 
-Versión de Agent necesaria
-: La supervisión de Universal Service requiere que el agente de Datadog instalado junto con tu servicio en contenedores sea, como mínimo, de la versión 6.40 o 7.40. Como se indica a continuación, algunas funciones en fase de prueba requieren versiones superiores.
+Version requise d'Agent
+: La surveillance Universal Service nécessite que l'agent Datadog installé avec votre service conteneurisé soit au moins de la version 6.40 ou 7.40. Comme indiqué ci-dessous, certaines fonctionnalités en préversion nécessitent des versions plus récentes.
 
-Plataformas Linux compatibles
-: Kernel de Linux 4.14 y versiones posteriores<br/>
-CentOS o RHEL 8.0 y versiones posteriores
+Plates-formes Linux prises en charge
+: Noyau Linux 4.14 et versions ultérieures<br/>
+CentOS ou RHEL 8.0 et versions ultérieures
 
-Plataformas de Windows compatibles
-: Windows Server 2012 R2 y versiones posteriores
+Plates-formes Windows prises en charge
+: Windows Server 2012 R2 et versions ultérieures
 
-Protocolos de capa de aplicación compatibles
+Protocoles de la couche application pris en charge
 : HTTP<br/>
 HTTPS (OpenSSL)
 
-Limitaciones conocidas
-: La supervisión de Universal Service requiere el uso de Datadog`system-probe`, que no es compatible con Google Kubernetes Engine (GKE) Autopilot.
+Limites connues
+: La surveillance Universal Service nécessite l'utilisation de Datadog`system-probe`, qui n'est pas prise en charge sur Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Hay protocolos adicionales y métodos de cifrado del tráfico en <a href="/universal_service_monitoring/additional_protocols/">fase de prueba</a>. Si tienes alguna sugerencia sobre las plataformas y los protocolos que te gustaría que fueran compatibles, <a href="/help/">ponte en contacto con el servicio de asistencia</a>.
+D'autres protocoles et méthodes de chiffrement du trafic sont actuellement en phase <a href="/universal_service_monitoring/additional_protocols/">de préversion</a>. Si vous souhaitez nous faire part de vos suggestions concernant les plateformes et les protocoles que vous aimeriez voir pris en charge, <a href="/help/">veuillez contacter le service d'assistance</a>.
 </div>
 
-## Requisitos 
+## Conditions 
 
-- previosSi utilizas Linux: 
-    - tu servicio se ejecuta en un contenedor.
-    - **En versión preliminar:** para servicios que no se ejecutan en contenedores, consulta las [instrucciones aquí](#additional-configuration).
-- Si utilizas Windows: 
-    - tu servicio se ejecuta en una máquina virtual.El agente
--  de Datadog está instalado junto con tu servicio. No _es_ necesario instalar una biblioteca de seguimiento. 
-- Se ha aplicado la`env`etiqueta de [Unified Service Tagging][1] a su implementación. Las `service``version`etiquetas  y  son opcionales.
+- préalablesSi vous utilisez Linux : 
+    - votre service s'exécute dans un conteneur.
+    - **En préversion :** pour les services non conteneurisés, consultez les [instructions ici](#additional-configuration).
+- Si vous utilisez Windows : 
+    - votre service s'exécute sur une machine virtuelle.L'agent
+-  Datadog est installé sur le même serveur que votre service. Il _n'est pas_ nécessaire d'installer
+-  une bibliothèque de traçage. La`env`balise [Unified Service Tagging][1] a été appliquée à votre déploiement. Les balises`service``version`  et  sont facultatives.
 
-## Cómo detecta USM los nombres de los servicios
+## Comment l'USM détecte les noms de services
 
 <div class="alert alert-warning">
-La supervisión de servicios universales detecta los nombres de los servicios a partir de las variables de entorno que existen en el momento en que se inicia un proceso. USM lee estos valores del sistema operativo: desde <code>/proc/PID/environ</code> en Linux, o a través de las API del sistema en Windows.
+La surveillance des services universels détecte les noms de services à partir des variables d'environnement présentes au démarrage d'un processus. USM récupère ces valeurs auprès du système d'exploitation : via le répertoire<code> /proc/PID/environ</code> sous Linux, ou via les API système sous Windows.
 </div>
 
-USM reconoce las siguientes variables de entorno
-- `DD_SERVICE`: Establece explícitamente el nombre del servicio
-- `DD_ENV`: Establece la etiqueta de entorno
-- `DD_VERSION`: Establece la etiqueta de versión
-- `DD_TAGS`: Etiquetas adicionales; pueden incluir la limitación`service:name` de la clave
+USM reconnaît les variables d'environnement
+- `DD_SERVICE` suivantes : Définit explicitement le nom du service
+- `DD_ENV` : Définit la balise d'environnement
+- `DD_VERSION` : Définit la balise de version
+- `DD_TAGS` : Balises supplémentaires ; peut inclure la restriction`service:name` tagKey
 
-###  de etiqueta: USM y variables de entorno establecidas mediante programación para APM
+###  : USM et variables d'environnement définies par programmation pour APM
 
-Si configuras variables de entorno mediante código **dentro de tu** aplicación (por ejemplo,`System.setProperty("dd.service", "my-service")`en Java o`Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")`en .NET), USM no** **detecta estas variables de entorno, aunque sus valores sí funcionen para la instrumentación de rastreo de APM.
+Si vous définissez des variables d'environnement par programmation **dans le code de votre application** (par exemple`System.setProperty("dd.service", "my-service")`en Java ou`Environment.SetEnvironmentVariable("DD_SERVICE", "my-service")`en .NET), celles-ci ne sont **pas** détectées par USM, même si ces valeurs fonctionnent pour l'instrumentation de traçage APM.
 
-Esto ocurre porque USM se ejecuta en el agente de Datadog como un proceso independiente y solo detecta las variables de entorno que se establecieron al iniciar el proceso. Por el contrario, las bibliotecas de instrumentación de APM se ejecutan dentro del proceso de la aplicación y pueden detectar cambios en el entorno de ejecución. 
+Cela s'explique par le fait qu'USM s'exécute dans l'agent Datadog en tant que processus distinct et ne prend en compte que les variables d'environnement définies au moment du démarrage de ce processus. À l'inverse, les bibliothèques d'instrumentation APM s'exécutent au sein du processus de votre application et peuvent détecter les modifications apportées à l'environnement d'exécution. 
 
-**Para garantizar la detección de USM, configura las variables de entorno antes de que se inicie la aplicación**:
+**Pour garantir la détection USM, définissez les variables d'environnement avant le démarrage de l'application** :
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -80,7 +81,7 @@ env:
     value: "production"
 ```
 {{% /tab %}}
-{{% tab "Concha" %}}
+{{% tab "Coquille" %}}
 ```bash
 export DD_SERVICE=my-service
 export DD_ENV=production
@@ -89,14 +90,14 @@ java -jar myapp.jar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Activación de la supervisión del servicio universal
+## Activation de la surveillance du service universel
 
-Active la supervisión de servicios universales en su agente utilizando uno de los siguientes métodos, dependiendo de cómo esté implementado su servicio y de cómo esté configurado su agente:
+Activez la surveillance universelle des services dans votre agent en utilisant l'une des méthodes suivantes, en fonction du mode de déploiement de votre service et de la configuration de votre agent :
 
 {{< tabs >}}
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
-Si utilizas la versión >= 2.26.2 de Datadog Chart, añade lo siguiente a tu archivo de valores:
+Si vous utilisez la version >= 2.26.2 de Datadog Chart, ajoutez ce qui suit à votre fichier de valeurs :
 
 ```
 datadog:
@@ -105,7 +106,7 @@ datadog:
     enabled: true
 ```
 
-Si tu clúster utiliza Google ContainerOptimized OS (COS), añade también lo siguiente a tu archivo de valores:
+Si votre cluster utilise Google ContainerOptimized OS (COS), ajoutez également les éléments suivants à votre fichier de valeurs :
 
 ```
 providers:
@@ -113,7 +114,7 @@ providers:
     cos: true
 ```
 
-Si tu clúster utiliza la distribución Linux Bottlerocket para sus nodos, añade lo siguiente a tu archivo de valores:
+Si votre cluster utilise la distribution Linux Bottlerocket pour ses nœuds, ajoutez ce qui suit à votre fichier de valeurs :
 
 ```
 agents:
@@ -128,11 +129,11 @@ agents:
 ```
 
 {{% /tab %}}
-{{% tab "Operador" %}}
+{{% tab "Opérateur" %}}
 
-Se requiere Datadog Operator v1.0.0 o superior.
+La version 1.0.0 ou une version ultérieure de Datadog Operator est requise.
 
-Para habilitar la supervisión de servicios universales con el [Datadog Operator][1], actualiza tu`datadog-agent.yaml`  manifiesto. En el`DatadogAgent`recurso, establece`spec.features.usm.enabled`  en `true`:
+Pour activer la surveillance des services universels avec [Datadog Operator][1], mettez à jour votre`datadog-agent.yaml`manifeste. Dans la`DatadogAgent`ressource, définissez`spec.features.usm.enabled`  sur `true`:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -157,9 +158,9 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
 [1]: https://github.com/DataDog/datadog-operator
 
 {{% /tab %}}
-{{% tab "Kubernetes sin Helm" %}}
+{{% tab "Kubernetes sans Helm" %}}
 
-1. Añade la anotación`container.apparmor.security.beta.kubernetes.io/system-probe: unconfined`a la`datadog-agent`plantilla:
+1. Ajoutez l'annotation`container.apparmor.security.beta.kubernetes.io/system-probe: unconfined`  sur le`datadog-agent`  modèle :
 
    ```yaml
    spec:
@@ -174,7 +175,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
          annotations:
            container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
-2. Habilita la supervisión de servicios universales con las siguientes variables de entorno en el daemonset del agente. Si está ejecutando un contenedor por cada proceso de Agent, añada las siguientes variables de entorno al`process-agent`contenedor. Si no, añádelos al contenedor`agent`.
+2. Activez la surveillance des services universels à l'aide des variables d'environnement suivantes dans le daemonset de l'agent. Si vous exécutez un conteneur par processus Agent, ajoutez les variables d'environnement suivantes au`process-agent`conteneur. Sinon, ajoutez-les au `agent`conteneur.
 
    ```yaml
    ...
@@ -188,7 +189,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
          value: /var/run/sysprobe/sysprobe.sock
    ```
 
-3. Monta los siguientes volúmenes adicionales en el`datadog-agent`contenedor:
+3. Montez les volumes supplémentaires suivants dans le`datadog-agent`conteneur :
    ```yaml
    ...
    spec:
@@ -203,7 +204,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
        mountPath: /var/run/sysprobe
    ```
 
-4. Añade un nuevo`system-probe`contenedor como sidecar al agente:
+4. Ajoutez un nouveau`system-probe`conteneur en tant que sidecar à l'Agent :
 
    ```yaml
    ...
@@ -280,7 +281,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
              readOnly: true
    ```
 
-5. Añade los siguientes volúmenes a tu manifiesto:
+5. Ajoutez les volumes suivants à votre manifeste :
    ```yaml
    volumes:
      - name: sysprobe-socket-dir
@@ -340,7 +341,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
       name: src
    ```
 
-6. Para habilitar el soporte opcional de HTTPS, añade lo siguiente al`system-probe`contenedor:
+6. Pour activer la prise en charge HTTPS (facultative), ajoutez ce qui suit au`system-probe`conteneur :
 
    ```yaml
    env:
@@ -352,7 +353,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
        readOnly: true
    ```
 
-   Y añade los siguientes volúmenes a tu manifiesto:
+   Et ajoutez les volumes suivants à votre manifeste :
    ```yaml
    volumes:
      - name: hostroot
@@ -363,7 +364,7 @@ Para habilitar la supervisión de servicios universales con el [Datadog Operator
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Añade lo siguiente a tu`docker run`comando:
+Ajoutez ce qui suit à votre`docker run`commande :
 
 ```shell
 docker run --cgroupns host \
@@ -401,7 +402,7 @@ registry.datadoghq.com/agent:latest
 {{% /tab %}}
 {{% tab "Docker Compose" %}}
 
-Añade lo siguiente a tu`docker-compose.yml`archivo:
+Ajoutez ce qui suit à votre`docker-compose.yml`fichier :
 
 ```yaml
 services:
@@ -439,7 +440,7 @@ services:
      - apparmor:unconfined
 ```
 
-Para habilitar el protocolo HTTPS (opcional), añade también:
+Pour activer la prise en charge facultative du protocole HTTPS, ajoutez également :
 
 ```yaml
 services:
@@ -455,17 +456,17 @@ services:
 {{% /tab %}}
 {{% tab "Docker Swarm" %}}
 
-Dado`Docker Swarm`que el sistema operativo aún no admite la modificación de `security_opt`,
-No debe haber ninguna instancia `apparmor`en ejecución.
+Comme  ne`Docker Swarm` prend pas encore en charge la modification de `security_opt`, le système d'exploitation
+Il ne doit pas y avoir d'instance`apparmor` en cours d'exécution.
 
-Si el sistema operativo no tiene ninguna instancia `apparmor`en ejecución, utiliza el mismo`docker-compose.yml`archivo de la`Docker-Compose`[sección][1] que aparece junto al campo`security_opt`.
+Si le système d'exploitation ne dispose pas d'une instance `apparmor`en cours d'exécution, utilisez le même`docker-compose.yml`fichier que celui de la`Docker-Compose`[section][1] à côté du champ`security_opt`.
 
-[1]: /es/universal_service_monitoring/setup/?tab=dockercompose#enabling-universal-service-monitoring
+[1]: /fr/universal_service_monitoring/setup/?tab=dockercompose#enabling-universal-service-monitoring
 
 {{% /tab %}}
-{{% tab "Archivos de configuración (Linux)" %}}
+{{% tab "Fichiers de configuration (Linux)" %}}
 
-Si no utilizas Helm Charts ni variables de entorno, configura lo siguiente en tu`system-probe.yaml`archivo:
+Si vous n'utilisez ni Helm Charts ni de variables d'environnement, configurez les paramètres suivants dans votre`system-probe.yaml`fichier :
 
 ```yaml
 service_monitoring_config:
@@ -473,9 +474,9 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variables de entorno (Linux)" %}}
+{{% tab "Variables d'environnement (Linux)" %}}
 
-Si configura el`system-probe`  mediante variables de entorno, como suele ser habitual en las instalaciones de Docker y ECS, pase la siguiente variable de entorno tanto** al`process-agent`  como** `system-probe`al :
+Si vous configurez le`system-probe`  à l'aide de variables d'environnement, comme c'est souvent le cas avec les installations Docker et ECS, transmettez la variable d'environnement suivante à **la fois** au`process-agent`  et `system-probe`au :
 
 ```yaml
 DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
@@ -484,16 +485,16 @@ DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true
 {{% /tab %}}
 {{% tab "Chef" %}}
 
-Configura los siguientes atributos en tus nodos:
+Définissez les attributs suivants sur vos nœuds :
 
 ```rb
 node["datadog"]["system_probe"]["service_monitoring_enabled"] = true
 ```
 
 {{% /tab %}}
-{{% tab "Marioneta" %}}
+{{% tab "Marionnette" %}}
 
-Conjunto`service_monitoring_enabled`:
+Ensemble `service_monitoring_enabled`:
 
 ```conf
 class { 'datadog_agent::system_probe':
@@ -504,7 +505,7 @@ class { 'datadog_agent::system_probe':
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-Añade los siguientes atributos a tu playbook:
+Ajoutez les attributs suivants dans votre playbook :
 
 ```yaml
 service_monitoring_config:
@@ -515,7 +516,7 @@ service_monitoring_config:
 
 {{% tab "ECS" %}}
 
-Para ECS, habilita USM y el sensor del sistema con la siguiente definición de tarea JSON. Implementa la definición de la tarea como un [servicio de fondo][1].
+Pour ECS, activez l'USM et la sonde système à l'aide de la définition de tâche JSON suivante. Déployez la définition de tâche en tant que [service démon][1].
 
 ```json
 {
@@ -727,7 +728,7 @@ Para ECS, habilita USM y el sensor del sistema con la siguiente definición de t
 }
 ```
 
-Si la imagen del sistema operativo es Ubuntu o Debian, añade lo siguiente después de `environment`:
+Si l'image du système d'exploitation est Ubuntu ou Debian, ajoutez ce qui suit après `environment`:
 
 ```yaml
 "dockerSecurityOptions": [
@@ -735,7 +736,7 @@ Si la imagen del sistema operativo es Ubuntu o Debian, añade lo siguiente despu
 ]
 ```
 
-Para habilitar el protocolo HTTPS (opcional), añade también:
+Pour activer la prise en charge facultative du protocole HTTPS, ajoutez également :
 
 ```yaml
 "mountPoints": [
@@ -759,36 +760,36 @@ Para habilitar el protocolo HTTPS (opcional), añade también:
 ]
 ```
 
-Si utiliza equilibradores de carga con sus servicios, active integraciones en la nube adicionales para permitir que Universal Service Monitoring detecte las entidades gestionadas en la nube: 
+Si vous utilisez des équilibreurs de charge avec vos services, activez des intégrations cloud supplémentaires pour permettre à Universal Service Monitoring de détecter les entités gérées dans le cloud : 
 
-1. Instale la [integración de AWS][2] para obtener visibilidad en el equilibrador de carga de AWS. 
-2. Active la recopilación de métricas de ENI y EC2. 
-3. Añada las siguientes etiquetas a cada equilibrador de carga:
+1. installez l'[intégration AWS][2] pour bénéficier d'une visibilité sur AWS Load Balancer. 
+2. Activez la collecte des métriques ENI et EC2. 
+3. Ajoutez les balises suivantes à chaque équilibreur de charge :
    ```conf
    ENV=<env>
    SERVICE=<service>
    ```
 
-[1]: /es/containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
-[2]: /es/integrations/amazon_web_services/
+[1]: /fr/containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+[2]: /fr/integrations/amazon_web_services/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
 
-**Para los servicios que se ejecutan en IIS: **
+**Pour les services exécutés sur IIS : **
 
-1. Instala el [agente de Datadog][1] (versión 6.41 o 7.41 y posteriores) con el componente del controlador de dispositivo de red del núcleo habilitado.
-   En el caso de la versión 7.44 o anteriores del agente, debe pasar`ADDLOCAL="MainApplication,NPM"`  al`msiexec`comando  durante la instalación, o seleccionar **«Cloud Network Monitoring»** al ejecutar la instalación del agente a través de la interfaz gráfica de usuario. 
+1. installez l'[agent Datadog][1] (version 6.41 ou 7.41 et ultérieures) en activant le composant du pilote de périphérique réseau du noyau.
+   Pour la version 7.44 ou antérieure de l'Agent, vous devez passer`ADDLOCAL="MainApplication,NPM"`  à la`msiexec`  commande lors de l'installation, ou sélectionner «** Cloud Network Monitoring »** lorsque vous lancez l'installation de l'Agent via l'interface graphique. 
 
-2. Edite`C:\ProgramData\Datadog\system-probe.yaml`  para establecer el indicador de activación en `true`:
+2. Modifiez`C:\ProgramData\Datadog\system-probe.yaml`  pour définir le drapeau d'activation sur `true`:
 
    ```yaml
    service_monitoring_config:
      enabled: true
    ```
-**Para servicios que no son de IIS: **
+**Pour les services non IIS : **
 
-La detección de servicios que no son de IIS está habilitada de forma predeterminada a partir de la versión 7.57 del agente. Es posible que las versiones anteriores del agente requieran el siguiente cambio de configuración`system-probe.yaml`:
+la détection des services non IIS est activée par défaut à partir de la version 7.57 de l'Agent. Les versions antérieures de l'Agent peuvent nécessiter la modification de `system-probe.yaml`configuration suivante :
 
 ```yaml
 service_monitoring_config:
@@ -798,37 +799,37 @@ service_monitoring_config:
 ```
 
 <div class="alert alert-warning">
-<strong>Limitación importante para los servicios de Windows que no son de IIS: la supervisión</strong> universal de servicios en Windows utiliza el seguimiento de eventos de Windows (ETW) a través del proveedor<code> </code>MicrosoftWindowsHttpService para la supervisión del tráfico HTTPS. Este proveedor ETW solo está disponible para servicios basados en IIS. Los servicios que no son de IIS (como aplicaciones .NET personalizadas, servidores Node.js, servidores Java u otros servidores HTTP que se ejecutan en Windows) <strong>no admiten la supervisión HTTPS a </strong>través de USM. Solo se puede supervisar el tráfico HTTP sin cifrar en los servicios de Windows que no sean de IIS.
+<strong>Restriction importante concernant les services Windows non IIS : la surveillance</strong> universelle des services sous Windows utilise la fonctionnalité « Event Tracing for Windows » (ETW) via le fournisseur<code> </code>MicrosoftWindowsHttpService pour la surveillance du trafic HTTPS. Ce fournisseur ETW n'est disponible que pour les services basés sur IIS. Les services non IIS (tels que les applications .NET personnalisées, les serveurs Node.js, les serveurs Java ou d'autres serveurs HTTP fonctionnant sous Windows) <strong>ne prennent pas en charge la surveillance HTTPS</strong> via USM. Seul le trafic HTTP standard peut être surveillé pour les services Windows autres que IIS.
 </div>
 
-### Compatibilidad con servicios IIS
+### Prise 
 
-|  y no IISTipo de     |  servicioSupervisión del tráfico  | HTTPSupervisión del tráfico  |
+| en charge des services IIS et non IISType de     |  serviceSurveillance du  | trafic HTTPSurveillance du trafic HTTPSServices  |
 | ---  | ----------- | ----------- |
-| HTTPSServicios      |  |                |
-|  |  | **IISCompatiblesCompatiblesServicios no IISCompatiblesNo compatibles** |
+| IISPrise en      |  | chargePrise en               |
+|  chargeServices non IISPrise en chargeNon  |  | **prise en charge** |
 
    
-[1]: /es/agent/basic_agent_usage/windows/?tab=commandline
+[1]: /fr/agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Configuración adicional
+## Configuration supplémentaire
 
-Los siguientes sistemas o servicios requieren una configuración adicional:
+Les systèmes ou services suivants nécessitent une configuration supplémentaire :
 
-{{< collapse-content title="Servicios no contenidizados en Linux" level="h4" >}}
+{{< collapse-content title="Services non conteneurisés sous Linux" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring permite supervisar los servicios que se ejecutan en máquinas virtuales Linux de tipo «bare metal».
+La surveillance Universal Service Monitoring permet de surveiller les services exécutés en mode bare metal sur des machines virtuelles Linux.
 </div>
 
-Requiere la versión 7.42 o superior de Agent.
+Nécessite la version 7.42 ou une version ultérieure d'Agent.
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe.yaml`:
+Ajoutez la configuration suivante au fichier `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -838,7 +839,7 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
+{{% tab "Variable d'environnement" %}}
 
 ```conf
 DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
@@ -848,22 +849,22 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Supervisión de TLS" level="h4" >}}
+{{< collapse-content title="Surveillance Go TLS" level="h4" >}}
 <div class="alert alert-info">
-La supervisión de servicios universales se encuentra en fase de vista previa para supervisar el tráfico cifrado mediante TLS de los servicios implementados en Golang.
+La fonctionnalité « Universal Service Monitoring » est actuellement en phase de préversion et permet de surveiller le trafic chiffré TLS provenant de services développés en Golang.
 </div>
 
-<strong>Nota</strong>:
+<strong>Remarque </strong>:
 <br>
 <ul role="list">
-  <li>Los servidores Go HTTPS pueden actualizar el protocolo HTTP/1.1 a HTTP/2, que ya es compatible en la versión Preview. Póngase en contacto con su gestor de cuentas para obtener más información.</li>
-  <li>Requiere la versión 7.51 o superior de Agent.</li>
+  <li>Les serveurs Go HTTPS peuvent faire passer le protocole HTTP/1.1 à HTTP/2, qui est pris en charge en version préliminaire. Pour plus d'informations, veuillez contacter votre chargé de compte.</li>
+  <li>Nécessite la version 7.51 ou une version ultérieure d'Agent.</li>
 </ul>
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe.yaml`:
+Ajoutez la configuration suivante au fichier `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -874,14 +875,14 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
+{{% tab "Variable d'environnement" %}}
 
 ```conf
 DD_SERVICE_MONITORING_CONFIG_TLS_GO_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
 ```conf
 agents:
@@ -896,18 +897,18 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Supervisión de TLS en Node.js" level="h4" >}}
+{{< collapse-content title="Surveillance TLS avec Node.js" level="h4" >}}
 
 <div class="alert alert-info">
-La supervisión de servicios universales se encuentra en fase de vista previa para supervisar solicitudes HTTP, HTTP/2 y gRPC de servicios implementados en Node.js.
+La fonctionnalité « Universal Service Monitoring » est actuellement en phase de préversion et permet de surveiller les requêtes HTTP, HTTP/2 et gRPC provenant de services implémentés en Node.js.
 </div>
 
-Requiere la versión 7.54 o superior de Agent.
+Nécessite la version 7.54 ou une version ultérieure d'Agent.
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe.yaml`:
+Ajoutez la configuration suivante au fichier `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -918,14 +919,14 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
+{{% tab "Variable d'environnement" %}}
 
 ```conf
 DD_SERVICE_MONITORING_CONFIG_TLS_NODEJS_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
 ```conf
 agents:
@@ -940,16 +941,16 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Supervisión de Istio" level="h4" >}}
+{{< collapse-content title="Surveillance d'Istio" level="h4" >}}
 
-La supervisión de servicios universales permite supervisar los servicios que se encuentran detrás de <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> y capturar el tráfico cifrado HTTPs, HTTP/2 y gRPC.
+La surveillance des services universelle permet de surveiller les services derrière <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> et de capturer le trafic HTTPS, HTTP/2 et gRPC chiffré.
 
-Requiere la versión 7.50 o superior de Agent.
+Nécessite la version 7.50 ou une version ultérieure d'Agent.
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe.yaml`:
+Ajoutez la configuration suivante au fichier `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -960,14 +961,14 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
+{{% tab "Variable d'environnement" %}}
 
 ```conf
 DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED=true
 ```
 {{% /tab %}}
 
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
 ```conf
 agents:
@@ -983,20 +984,20 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Supervisión de HTTP/2" level="h4" >}}
-Universal Service Monitoring puede capturar tráfico HTTP/2 y gRPC. 
+{{< collapse-content title="Surveillance HTTP/2" level="h4" >}}
+Universal Service Monitoring permet de capturer le trafic HTTP/2 et gRPC. 
 
-<strong>Nota</strong>:
+<strong>Remarque </strong>:
 <br>
 <ul role="list">
-  <li>Requiere el kernel de Linux versión 5.2 o posterior.</li>
-  <li>Requiere la versión 7.53 o superior de Agent.</li>
+  <li>Nécessite le noyau Linux version 5.2 ou ultérieure.</li>
+  <li>Nécessite la version 7.53 ou une version ultérieure d'Agent.</li>
 </ul>
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe.yaml`:
+Ajoutez la configuration suivante au fichier `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -1004,13 +1005,13 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
+{{% tab "Variable d'environnement" %}}
 
 ```conf
 DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING=true
 ```
 {{% /tab %}}
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
 ```conf
 agents:
@@ -1025,24 +1026,24 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Supervisión de Kafka (versión preliminar)" level="h4" >}}
+{{< collapse-content title="Surveillance Kafka (version préliminaire)" level="h4" >}}
 
 <div class="alert alert-info">
-Kafka Monitoring está disponible en <strong>versión preliminar</strong>.
+Kafka Monitoring est disponible en <strong>version préliminaire</strong>.
 </div>
 
-<strong>Nota</strong>:
+<strong>Remarque </strong>:
 <br>
 <ul role="list">
-  <li>Los productores y los consumidores necesitan la versión 5.2 o posterior del núcleo de Linux.</li>
-  <li>Los productores y los consumidores deben estar interactuando con Kafka <strong>sin</strong> TLS.</li>
-  <li>Requiere la versión 7.53 o superior de Agent.</li>
+  <li>Les producteurs et les consommateurs doivent disposer du noyau Linux version 5.2 ou ultérieure.</li>
+  <li>Les producteurs et les consommateurs doivent communiquer avec Kafka <strong>sans</strong> TLS.</li>
+  <li>Nécessite la version 7.53 ou une version ultérieure d'Agent.</li>
 </ul>
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe.yaml`:
+Ajoutez la configuration suivante au fichier `system-probe.yaml`:
 
 ```yaml
 service_monitoring_config:
@@ -1051,14 +1052,14 @@ service_monitoring_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
+{{% tab "Variable d'environnement" %}}
 
 ```conf
 DD_SERVICE_MONITORING_CONFIG_ENABLE_KAFKA_MONITORING=true
 ```
 {{% /tab %}}
 
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
 ```conf
 datadog:
@@ -1080,14 +1081,14 @@ agents:
 {{< /collapse-content >}}
 
 
-## Exclusión y sustitución de rutas
+## Exclusion et remplacement de chemins d'accès
 
-Utilice`http_replace_rules`  o`DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES`  para configurar el agente de modo que descarte los puntos finales HTTP que coincidan con una expresión regular, o para convertir los puntos finales coincidentes a un formato diferente.
+Utilisez`http_replace_rules`  ou`DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES`  pour configurer l'Agent afin qu'il ignore les points de terminaison HTTP correspondant à une expression régulière, ou pour convertir les points de terminaison correspondants dans un autre format.
 
 {{< tabs >}}
-{{% tab "Archivo de configuración" %}}
+{{% tab "Fichier de configuration" %}}
 
-Añade la siguiente configuración al`system-probe`:
+Ajoutez la configuration suivante au fichier `system-probe`:
 
 ```yaml
 network_config:
@@ -1098,7 +1099,7 @@ network_config:
       repl: "<new format>"
 ```
 
-Por ejemplo, la siguiente configuración descarta los puntos finales que comienzan por `/api/`, como `/api/v1/users`. Sin embargo, no omite`/api`  ni `/users/api`:
+Par exemple, la configuration suivante rejette les points de terminaison commençant par `/api/`, tels que `/api/v1/users`. Cependant, il ne supprime`/api`ni  ni `/users/api`:
 
 ```yaml
 network_config:
@@ -1107,7 +1108,7 @@ network_config:
       repl: ""
 ```
 
-La siguiente configuración sustituye un punto final`/api/users`para adaptarlo a un `/api/v1/users`nuevo formato:
+La configuration suivante remplace un point de terminaison`/api/users`afin de l'adapter à un `/api/v1/users`nouveau format :
 
 ```yaml
 network_config:
@@ -1117,16 +1118,16 @@ network_config:
 ```
 
 {{% /tab %}}
-{{% tab "Variable de entorno" %}}
-Añade la siguiente entrada:
+{{% tab "Variable d'environnement" %}}
+Ajoutez l'entrée suivante :
 
 ```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
-{{% tab "Casco" %}}
+{{% tab "Casque" %}}
 
-En el siguiente ejemplo se omite el punto final`/my-api`y se sustituye`/my-api-2`por `/new-version`.
+Dans l'exemple suivant, le point final est `/my-api`supprimé et remplacé`/my-api-2`par `/new-version`.
 
 ```yaml
 agents:
@@ -1141,11 +1142,11 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Compatibilidad con protocolos y métodos </strong><p>de cifrado adicionales: USM se encuentra en fase de vista previa para la detección de servicios en la nube y la decodificación de protocolos y métodos de cifrado del tráfico adicionales. Para obtener más información y solicitar acceso a la versión preliminar, consulta <a href="/universal_service_monitoring/additional_protocols/">«Cloud Service Discovery y protocolos adicionales</a>».</p></div>
+<div class="alert alert-info"><strong>Prise en charge de protocoles et de méthodes </strong><p>de chiffrement supplémentaires : USM est actuellement en phase de préversion pour la découverte de services cloud et le décodage de protocoles et de méthodes de chiffrement du trafic supplémentaires. Pour plus d'informations et pour demander l'accès à la version préliminaire, consultez la section<a href="/universal_service_monitoring/additional_protocols/"> « Cloud Service Discovery and Additional Protocols </a>».</p></div>
 
 
-## Más información
+## Pour en savoir plus
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/getting_started/tagging/unified_service_tagging
+[1]: /fr/getting_started/tagging/unified_service_tagging
