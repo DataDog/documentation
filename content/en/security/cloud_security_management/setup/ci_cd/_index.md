@@ -211,6 +211,11 @@ Add the following annotations to your image at build time:
 - `com.datadoghq.image.source_path`
   The path to the Dockerfile within the repository (for example, `Dockerfile` or `docker/Dockerfile`)
 
+### Optional annotations
+
+- `org.opencontainers.image.base.name`
+  The base image used to build the image (for example, `ubuntu:22.04`)
+
 For more details, see the [OCI Image Spec annotations documentation](https://github.com/opencontainers/image-spec/blob/main/annotations.md).
 
 ### Example
