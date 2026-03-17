@@ -188,6 +188,41 @@ datadog-security-cli image myapp:latest --fail-on high
 datadog-security-cli image myapp:latest --output json
 ```
 
+## Link Dockerfile to vulnerabilities
+
+To enable Datadog to link detected vulnerabilities back to the source code (Dockerfile), you must include specific **OCI image annotations** when building your container image.
+
+This allows Datadog to:
+- Display a **preview of the Dockerfile** directly in the Container Image Vulnerabilities panel
+- Enable **source-based remediation**, helping you quickly identify and fix issues in context
+
+These annotations provide the metadata needed to associate a scanned image with its corresponding repository, commit, and Dockerfile path.
+
+### Required annotations
+
+Add the following annotations to your image at build time:
+
+- `org.opencontainers.image.source`
+  The repository URL (for example, `https://github.com/org/repo`)
+
+- `org.opencontainers.image.revision`
+  The commit SHA used to build the image
+
+- `com.datadoghq.image.source_path`
+  The path to the Dockerfile within the repository (for example, `Dockerfile` or `docker/Dockerfile`)
+
+For more details, see the [OCI Image Spec annotations documentation](https://github.com/opencontainers/image-spec/blob/main/annotations.md).
+
+### Example
+
+```bash
+docker build \
+  --label org.opencontainers.image.source="https://github.com/org/repo" \
+  --label org.opencontainers.image.revision="$(git rev-parse HEAD)" \
+  --label com.datadoghq.image.source_path="Dockerfile" \
+  -t myapp:latest .
+```
+
 ## Troubleshooting
 
 ### Authentication errors
