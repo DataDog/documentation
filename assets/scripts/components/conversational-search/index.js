@@ -17,8 +17,8 @@ const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
 const CONV_MODEL_DOCS_PREVIEW = 'docs-ai-conv-model-v1-preview';
 const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
 const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
-const USE_LEGACY_MODEL_FLAG_KEY = 'DOCS_AI_USE_LEGACY_MODEL';
-const DISABLE_STREAMING_FLAG_KEY = 'DOCS_AI_DISABLE_STREAMING';
+const USE_LEGACY_MODEL_FLAG_KEY = 'docs-ai-use-legacy-model';
+const DISABLE_STREAMING_FLAG_KEY = 'docs-ai-disable-streaming';
 
 const RENDER_THROTTLE = 50;
 
