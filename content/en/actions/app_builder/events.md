@@ -34,7 +34,17 @@ In App Builder, events and reactions work together to determine component behavi
 
 Components (such as button clicks or form submissions) and actions (such as execution finished) can both trigger events. Events differ depending on which component you use. For component-specific event details, see [Components][1].
 
-Reactions specify what happens when an event is triggered. Any component that can trigger an event has the following available reactions: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, and trigger action.
+Reactions specify what happens when an event is triggered. Any component that can trigger an event has the following available reactions: 
+- custom
+- close modal
+- download file
+- open modal
+- open side panel
+- close side panel
+- set component state
+- set state variable value
+- toast notification
+- trigger action
 
 ### Custom reactions
 
