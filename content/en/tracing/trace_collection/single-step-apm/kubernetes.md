@@ -172,7 +172,7 @@ Each target block has the following keys:
 | `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. For more details, see the [Kubernetes selector documentation][10].|
 | `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][10]. |
 | `ddTraceVersions` | The [Datadog APM SDK][9] version to use for each language. |
-| `ddTraceConfigs`  | APM SDK configs that allow setting [Unified Service Tags][8], enabling [SDK-dependent products](#enable-sdk-dependent-products-and-features) beyond tracing (such as [Continuous Profiler][37], [Application Security][38], and [Data Streams Monitoring][40]), and customizing other [APM settings][7]. |
+| `ddTraceConfigs`  | APM SDK configs that allow setting [Unified Service Tags][8], enabling [SDK-dependent products](#enable-sdk-dependent-products-and-features) beyond tracing (such as [Continuous Profiler][11], [Application Security][12], and [Data Streams Monitoring][13]), and customizing other [APM settings][14]. |
 
 The file you need to configure depends on how you enabled Single Step Instrumentation:
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
@@ -326,7 +326,7 @@ This configuration enables APM for all pods except those that have either of the
 
 {{< collapse-content title="Example 6: Enable additional products with <code>ddTraceConfigs</code>" level="h4" >}}
 
-This configuration enables [Application Security][38] and [Continuous Profiler][37] for services in the `web-apps` namespace, using `ddTraceConfigs` to set the required environment variables:
+This configuration enables [Application Security][12] and [Continuous Profiler][11] for services in the `web-apps` namespace, using `ddTraceConfigs` to set the required environment variables:
 
 {{< highlight yaml "hl_lines=4-20" >}}
    apm:
@@ -358,6 +358,10 @@ For a full list of products you can enable through SSI, see [Enable SDK-dependen
 [8]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
 [10]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
+[11]: /profiler/
+[12]: /security/application_security/
+[13]: /data_streams/
+[14]: /tracing/trace_collection/library_config/
 
 {{% /tab %}}
 
@@ -833,7 +837,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [37]: /profiler/
 [38]: /security/application_security/
 [39]: /tracing/trace_pipeline/ingestion_controls/
-[40]: /data_streams/
 
 
 
