@@ -187,6 +187,10 @@
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
+  "integration-accounts": {
+    "name": "Integration Accounts",
+    "description": "Configure and manage third-party integrations with Datadog. This API provides a unified\ninterface for managing integration accounts across various external services.\n\nEach integration has its own unique schema that defines the required settings and secrets.\nBefore creating or updating an account, use the schema endpoint to retrieve the specific\nrequirements, field types, validation rules, and available configuration options for your\nintegration.\n\n**Note**: This API manages integration account configurations only. It does not support\nGrace Resources, Reference Tables, or Custom Queries CRUD operations. For those features,\nrefer to each integration's dedicated documentation.\n\nSupported Integrations:\n  - [Twilio](https://docs.datadoghq.com/integrations/twilio/)\n  - [Snowflake](https://docs.datadoghq.com/integrations/snowflake-web/)\n  - [Databricks](https://docs.datadoghq.com/integrations/databricks/)"
+  },
   "integrations": {
     "name": "Integrations",
     "description": "The Integrations API is used to list available integrations\nand retrieve information about their installation status."
