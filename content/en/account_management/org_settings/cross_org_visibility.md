@@ -11,8 +11,8 @@ Some companies rely on multiple Datadog [organizations][1] to separate data for 
 
 Cross-organization visibility allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
 
-This document explains: 
-- What cross-organization visibility [enables](#capabilities) 
+This document explains:
+- What cross-organization visibility [enables](#capabilities)
 - How to [share](#create-a-connection) data across your organizations
 - How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) with data from your other organizations
 
@@ -38,6 +38,7 @@ Cross-organization visibility supports the following telemetry in [Dashboard and
 * Logs
 * CI Visibility pipelines
 * Test Optimization tests
+* Audit Trail
 
 ## Configure connections
 
@@ -147,20 +148,20 @@ The `cross_org_uuids` parameter is optional. If you omit `cross_org_uuids`, the 
 }
 {{< /highlight >}}
 
-Note the `cross_org_uuids` parameter in the JSON widget definition payload. 
+Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 - This parameter is optional. If omitted, the query runs on the organization on which the widget is defined.
 - Use the organization identifier, which you can recover from the [Organizations endpoint][9], to identify the organization on which the query runs.
 - Though this parameter accepts an array, the array must contain only one element. Adding multiple elements to the `cross_org_uuids` array results in a 400 error.
 
 ## Permissions
-By default, only users attached to roles with the _Org Connection Read_ permission can see the list of cross-organization connections. Users attached to roles with the _Org Connection Write_ permission can create and delete cross-organization connections. 
+By default, only users attached to roles with the _Org Connection Read_ permission can see the list of cross-organization connections. Users attached to roles with the _Org Connection Write_ permission can create and delete cross-organization connections.
 
 ### Granular access controls
 Use [granular access controls][12] to limit the teams, roles, or users that can edit or query a cross-organization connection. These access controls govern:
 - From the source organization: who can edit the connection.
 - From the destination organization: who can view the shared data, and who can edit the connection.
 
-Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org. 
+Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org.
 
 **Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information (PHI) to destination organizations. Customers are responsible for any sensitive data transferred, including PHI.
 
