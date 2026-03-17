@@ -89,11 +89,9 @@ For more detail, see [Cloud Metric Delay][4] and the [CloudWatch Metric Streams 
 
 When transitioning from API polling to CloudWatch Metric Streams, there is an overlap period where both collection methods send data for the same metrics. This can cause metric values to appear doubled in Datadog.
 
-To avoid this:
-1. After enabling Metric Streams, disable the corresponding AWS service namespaces from API polling in the [Metric Collection tab][1].
-2. Allow time for the overlap to clear. The transition period can last several hours, not minutes.
+Datadog automatically detects streamed namespaces and stops polling them, so you do not need to manually disable API polling. Leave your configuration settings in the [AWS integration page][1] unchanged, as Datadog continues to use API polling to collect custom tags, metadata, and metrics that cannot be sent through Metric Streams (such as `aws.s3.bucket_size_bytes` and `aws.billing.estimated_charges`).
 
-See the [CloudWatch Metric Streams guide][6] for migration instructions.
+The overlap period can last several hours. If values still appear doubled after 24 hours, see the [CloudWatch Metric Streams guide][6] for troubleshooting.
 
 ### Which AWS services require additional setup beyond the core integration?
 
@@ -103,7 +101,7 @@ Some AWS services do not emit metrics to CloudWatch by default and require extra
 |---|---|
 | Amazon RDS (OS-level metrics) | Enable [Enhanced Monitoring][9] in the RDS console |
 | Amazon S3 (Storage Lens metrics) | Configure [Storage Lens][10] in the S3 console |
-| AWS billing metrics | Enable [Cost Explorer][11] in the AWS Billing console |
+| AWS billing metrics | Enable `Billing` in the [Metric Collection tab][1], add the `budgets:ViewBudget` permission, and [enable billing metrics][11] in the AWS console. See [Monitor your AWS billing details][13] for full instructions. |
 | Custom CloudWatch namespaces | Enable **Collect Custom Metrics** in the [Metric Collection tab][1] |
 | EC2 detailed monitoring | Enable [detailed monitoring][12] per-instance in the EC2 console |
 
@@ -117,5 +115,6 @@ Some AWS services do not emit metrics to CloudWatch by default and require extra
 [8]: /integrations/#cat-aws
 [9]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.Enabling.html
 [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
-[11]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+[11]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
+[13]: /integrations/guide/monitor-your-aws-billing-details/
 [12]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
