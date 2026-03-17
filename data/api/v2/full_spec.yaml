@@ -3990,19 +3990,29 @@ components:
       - server.request.uri.raw
       - server.request.path_params
       - server.request.query
+      - server.request.headers
       - server.request.headers.no_cookies
+      - server.request.custom-auth
       - server.request.cookies
       - server.request.trailers
       - server.request.body
+      - server.request.body.filenames
       - server.response.status
       - server.response.headers.no_cookies
       - server.response.trailers
+      - server.response.body
       - grpc.server.request.metadata
       - grpc.server.request.message
       - grpc.server.method
       - graphql.server.all_resolvers
       - usr.id
       - http.client_ip
+      - server.llm.event
+      - server.llm.guard.verdict
+      - _dd.appsec.fp.http.header
+      - _dd.appsec.fp.http.network
+      - _dd.appsec.fp.session
+      - _dd.appsec.fp.http.endpoint
       example: server.db.statement
       type: string
       x-enum-varnames:
@@ -4014,19 +4024,29 @@ components:
       - SERVER_REQUEST_URI_RAW
       - SERVER_REQUEST_PATH_PARAMS
       - SERVER_REQUEST_QUERY
+      - SERVER_REQUEST_HEADERS
       - SERVER_REQUEST_HEADERS_NO_COOKIES
+      - SERVER_REQUEST_CUSTOM_AUTH
       - SERVER_REQUEST_COOKIES
       - SERVER_REQUEST_TRAILERS
       - SERVER_REQUEST_BODY
+      - SERVER_REQUEST_BODY_FILENAMES
       - SERVER_RESPONSE_STATUS
       - SERVER_RESPONSE_HEADERS_NO_COOKIES
       - SERVER_RESPONSE_TRAILERS
+      - SERVER_RESPONSE_BODY
       - GRPC_SERVER_REQUEST_METADATA
       - GRPC_SERVER_REQUEST_MESSAGE
       - GRPC_SERVER_METHOD
       - GRAPHQL_SERVER_ALL_RESOLVERS
       - USR_ID
       - HTTP_CLIENT_IP
+      - SERVER_LLM_EVENT
+      - SERVER_LLM_GUARD_VERDICT
+      - DD_APPSEC_FP_HTTP_HEADER
+      - DD_APPSEC_FP_HTTP_NETWORK
+      - DD_APPSEC_FP_SESSION
+      - DD_APPSEC_FP_HTTP_ENDPOINT
     ApplicationSecurityWafCustomRuleConditionOperator:
       description: Operator to use for the WAF Condition.
       enum:
@@ -7461,23 +7481,89 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/BatchDeleteRowsRequestData'
+            $ref: '#/components/schemas/TableRowResourceIdentifier'
           maxItems: 200
           type: array
       required:
       - data
       type: object
-    BatchDeleteRowsRequestData:
-      description: Row resource containing a single row identifier for deletion.
+    BatchRowsQueryDataType:
+      default: reference-tables-batch-rows-query
+      description: Resource type identifier for batch queries of reference table rows.
+      enum:
+      - reference-tables-batch-rows-query
+      example: reference-tables-batch-rows-query
+      type: string
+      x-enum-varnames:
+      - REFERENCE_TABLES_BATCH_ROWS_QUERY
+    BatchRowsQueryRequest:
       properties:
-        id:
-          example: primary_key_value
-          type: string
+        data:
+          $ref: '#/components/schemas/BatchRowsQueryRequestData'
+      type: object
+    BatchRowsQueryRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BatchRowsQueryRequestDataAttributes'
         type:
-          $ref: '#/components/schemas/TableRowResourceDataType'
+          $ref: '#/components/schemas/BatchRowsQueryDataType'
       required:
       - type
-      - id
+      type: object
+    BatchRowsQueryRequestDataAttributes:
+      properties:
+        row_ids:
+          example:
+          - row_id_1
+          - row_id_2
+          items:
+            type: string
+          type: array
+        table_id:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      required:
+      - row_ids
+      - table_id
+      type: object
+    BatchRowsQueryResponse:
+      example:
+        data:
+          id: 00000000-0000-0000-0000-000000000000
+          relationships:
+            rows:
+              data:
+              - id: row_id_1
+                type: row
+              - id: row_id_2
+                type: row
+          type: reference-tables-batch-rows-query
+      properties:
+        data:
+          $ref: '#/components/schemas/BatchRowsQueryResponseData'
+      type: object
+    BatchRowsQueryResponseData:
+      properties:
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/BatchRowsQueryResponseDataRelationships'
+        type:
+          $ref: '#/components/schemas/BatchRowsQueryDataType'
+      required:
+      - type
+      type: object
+    BatchRowsQueryResponseDataRelationships:
+      properties:
+        rows:
+          $ref: '#/components/schemas/BatchRowsQueryResponseDataRelationshipsRows'
+      type: object
+    BatchRowsQueryResponseDataRelationshipsRows:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TableRowResourceIdentifier'
+          type: array
       type: object
     BatchUpsertRowsRequestArray:
       description: The request body for creating or updating multiple rows into a
@@ -18561,7 +18647,7 @@ components:
           finished_at: 1693491984000000000
           git:
             commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-            repository_url: https://github.com/organization/example-repository
+            repository_id: github.com/organization/example-repository
           service: shopist
           started_at: 1693491974000000000
           team: backend
@@ -18592,7 +18678,7 @@ components:
           format: int64
           type: integer
         git:
-          $ref: '#/components/schemas/DORAGitInfo'
+          $ref: '#/components/schemas/DORAGitInfoResponse'
         service:
           description: Service name.
           example: shopist
@@ -18803,7 +18889,7 @@ components:
             finished_at: 1693491984000000000
             git:
               commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-              repository_url: https://github.com/organization/example-repository
+              repository_id: github.com/organization/example-repository
             service: shopist
             started_at: 1693491974000000000
             team: backend
@@ -18818,7 +18904,7 @@ components:
             finished_at: 1693492084000000000
             git:
               commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-              repository_url: https://github.com/organization/api-service
+              repository_id: github.com/organization/api-service
             service: api-service
             started_at: 1693492074000000000
             team: backend
@@ -18990,6 +19076,17 @@ components:
           $ref: '#/components/schemas/GitRepositoryURL'
       required:
       - repository_url
+      - commit_sha
+      type: object
+    DORAGitInfoResponse:
+      description: Git info returned by DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_id:
+          $ref: '#/components/schemas/GitRepositoryID'
+      required:
+      - repository_id
       - commit_sha
       type: object
     DORAIncidentObject:
@@ -28623,6 +28720,10 @@ components:
       description: Git Commit SHA.
       example: 66adc9350f2cc9b250b69abddab733dd55e1a588
       pattern: ^[a-fA-F0-9]{40,}$
+      type: string
+    GitRepositoryID:
+      description: Git Repository ID
+      example: github.com/organization/example-repository
       type: string
     GitRepositoryURL:
       description: Git Repository URL
@@ -42228,6 +42329,191 @@ components:
       type: string
       x-enum-varnames:
       - AMAZON_S3
+    ObservabilityPipelineAmazonS3GenericBatchSettings:
+      description: Event batching settings
+      properties:
+        batch_size:
+          description: Maximum batch size in bytes.
+          example: 100000000
+          format: int64
+          type: integer
+        timeout_secs:
+          description: Maximum number of seconds to wait before flushing the batch.
+          example: 900
+          format: int64
+          type: integer
+      type: object
+    ObservabilityPipelineAmazonS3GenericCompression:
+      description: Compression algorithm applied to encoded logs.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompressionZstd'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompressionGzip'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompressionSnappy'
+    ObservabilityPipelineAmazonS3GenericCompressionGzip:
+      description: Gzip compression.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompressionGzipType'
+        level:
+          description: Gzip compression level.
+          example: 6
+          format: int64
+          type: integer
+      required:
+      - algorithm
+      - level
+      type: object
+    ObservabilityPipelineAmazonS3GenericCompressionGzipType:
+      default: gzip
+      description: The compression type. Always `gzip`.
+      enum:
+      - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - GZIP
+    ObservabilityPipelineAmazonS3GenericCompressionSnappy:
+      description: Snappy compression.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompressionSnappyType'
+      required:
+      - algorithm
+      type: object
+    ObservabilityPipelineAmazonS3GenericCompressionSnappyType:
+      default: snappy
+      description: The compression type. Always `snappy`.
+      enum:
+      - snappy
+      example: snappy
+      type: string
+      x-enum-varnames:
+      - SNAPPY
+    ObservabilityPipelineAmazonS3GenericCompressionZstd:
+      description: Zstd compression.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompressionZstdType'
+        level:
+          description: Zstd compression level.
+          example: 3
+          format: int64
+          type: integer
+      required:
+      - algorithm
+      - level
+      type: object
+    ObservabilityPipelineAmazonS3GenericCompressionZstdType:
+      default: zstd
+      description: The compression type. Always `zstd`.
+      enum:
+      - zstd
+      example: zstd
+      type: string
+      x-enum-varnames:
+      - ZSTD
+    ObservabilityPipelineAmazonS3GenericDestination:
+      description: 'The `amazon_s3_generic` destination sends your logs to an Amazon
+        S3 bucket.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        auth:
+          $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
+        batch_settings:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericBatchSettings'
+        bucket:
+          description: S3 bucket name.
+          example: my-bucket
+          type: string
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericEncoding'
+        id:
+          description: Unique identifier for the destination component.
+          example: generic-s3-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        key_prefix:
+          description: Optional prefix for object keys.
+          type: string
+        region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        storage_class:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3DestinationStorageClass'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - bucket
+      - region
+      - storage_class
+      - encoding
+      - compression
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineAmazonS3GenericDestinationType:
+      default: amazon_s3_generic
+      description: The destination type. Always `amazon_s3_generic`.
+      enum:
+      - amazon_s3_generic
+      example: amazon_s3_generic
+      type: string
+      x-enum-varnames:
+      - GENERIC_ARCHIVES_S3
+    ObservabilityPipelineAmazonS3GenericEncoding:
+      description: Encoding format for the destination.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericEncodingJson'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericEncodingParquet'
+    ObservabilityPipelineAmazonS3GenericEncodingJson:
+      description: JSON encoding.
+      properties:
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericEncodingJsonType'
+      required:
+      - type
+      type: object
+    ObservabilityPipelineAmazonS3GenericEncodingJsonType:
+      default: json
+      description: The encoding type. Always `json`.
+      enum:
+      - json
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+    ObservabilityPipelineAmazonS3GenericEncodingParquet:
+      description: Parquet encoding.
+      properties:
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericEncodingParquetType'
+      required:
+      - type
+      type: object
+    ObservabilityPipelineAmazonS3GenericEncodingParquetType:
+      default: parquet
+      description: The encoding type. Always `parquet`.
+      enum:
+      - parquet
+      example: parquet
+      type: string
+      x-enum-varnames:
+      - PARQUET
     ObservabilityPipelineAmazonS3Source:
       description: 'The `amazon_s3` source ingests logs from an Amazon S3 bucket.
 
@@ -42503,6 +42789,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Destination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3GenericDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/AzureStorageDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestination'
@@ -46696,6 +46983,15 @@ components:
           description: Optional name of the Splunk index where logs are written.
           example: main
           type: string
+        indexed_fields:
+          description: List of log field names to send as indexed fields to Splunk
+            HEC. Available only when `encoding` is `json`.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          type: array
         inputs:
           description: A list of component IDs whose output is used as the `input`
             for this component.
@@ -49338,6 +49634,11 @@ components:
         name:
           description: Name of the permission.
           type: string
+        name_aliases:
+          description: List of alias names for the permission.
+          items:
+            type: string
+          type: array
         restricted:
           description: Whether or not the permission is restricted.
           type: boolean
@@ -54975,26 +55276,16 @@ components:
       x-enum-varnames:
       - RULESET
     RumCrossProductSampling:
-      description: 'Configuration for additional APM trace data retention for sessions
-        that match this retention filter.
-
-        When a session matches the filter and is retained (based on `sample_rate`),
-        you can configure
-
-        the percentage of retained sessions with ingested traces whose traces are
-        indexed.'
+      description: The configuration for cross-product retention filters.
       properties:
         trace_enabled:
-          description: Indicates whether trace cross-product sampling is enabled.
-            If `false`, no traces are indexed regardless of `trace_sample_rate`.
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
           example: true
           type: boolean
         trace_sample_rate:
-          description: 'The percentage (0-100) of retained sessions with ingested
-            traces whose traces are indexed.
-
-            For example, 25.0 means 25% of retained sessions with ingested traces
-            have their traces indexed.'
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
           example: 25.0
           format: double
           maximum: 100
@@ -55002,16 +55293,16 @@ components:
           type: number
       type: object
     RumCrossProductSamplingCreate:
-      description: Configuration for cross-product sampling when creating a retention
-        filter.
+      description: The configuration for cross-product retention filters.
       properties:
         trace_enabled:
-          description: Indicates whether trace cross-product sampling is enabled.
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
           example: true
           type: boolean
         trace_sample_rate:
-          description: The percentage (0-100) of retained sessions with ingested traces
-            whose traces are indexed.
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
           example: 25.0
           format: double
           maximum: 100
@@ -55021,16 +55312,17 @@ components:
       - trace_sample_rate
       type: object
     RumCrossProductSamplingUpdate:
-      description: Configuration for cross-product sampling when updating a retention
-        filter. All fields are optional for partial updates.
+      description: The configuration for cross-product retention filters. All fields
+        are optional for partial updates.
       properties:
         trace_enabled:
-          description: Indicates whether trace cross-product sampling is enabled.
+          description: Whether the cross-product retention filter for APM traces is
+            enabled.
           example: true
           type: boolean
         trace_sample_rate:
-          description: The percentage (0-100) of retained sessions with ingested traces
-            whose traces are indexed.
+          description: The sample rate for the APM cross-product retention filter,
+            between 0 and 100.
           example: 25.0
           format: double
           maximum: 100
@@ -67167,6 +67459,18 @@ components:
       type: string
       x-enum-varnames:
       - ROW
+    TableRowResourceIdentifier:
+      description: Row resource containing a single row identifier.
+      properties:
+        id:
+          example: primary_key_value
+          type: string
+        type:
+          $ref: '#/components/schemas/TableRowResourceDataType'
+      required:
+      - type
+      - id
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -92006,8 +92310,8 @@ paths:
 
           If `filter[queried]` is not provided, sending this parameter returns a 400.
 
-          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=7776000`.'
-        example: 7776000
+          For example: `GET /api/v2/metrics?filter[queried]=true&filter[queried][window][seconds]=15552000`.'
+        example: 15552000
         in: query
         name: filter[queried][window][seconds]
         required: false
@@ -92035,7 +92339,7 @@ paths:
         schema:
           type: boolean
       - description: 'The number of seconds of look back (from now) to apply to a
-          filter[tag] or filter[queried] query.
+          filter[tag] query.
 
           Default value is 3600 (1 hour), maximum value is 5,184,000 (60 days).'
         example: 3600
@@ -96988,6 +97292,58 @@ paths:
         operator: OR
         permissions:
         - timeseries_query
+  /api/v2/reference-tables/queries/batch-rows:
+    post:
+      description: Batch query reference table rows by their primary key values.  Returns
+        only found rows in the included array.
+      operationId: BatchRowsQuery
+      requestBody:
+        content:
+          application/json:
+            examples:
+              happy_path:
+                summary: Batch query reference table rows by their primary key values.
+                value:
+                  data:
+                    attributes:
+                      row_ids:
+                      - row_id_1
+                      - row_id_2
+                      table_id: 00000000-0000-0000-0000-000000000000
+                    type: reference-tables-batch-rows-query
+            schema:
+              $ref: '#/components/schemas/BatchRowsQueryRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchRowsQueryResponse'
+          description: Successfully retrieved rows. Some or all requested rows were
+            found. Response includes found rows in the included section.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Batch rows query
+      tags:
+      - Reference Tables
+      x-menu-order: 10
   /api/v2/reference-tables/tables:
     get:
       description: List all reference tables in this organization.
