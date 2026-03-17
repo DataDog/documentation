@@ -119,7 +119,7 @@ If you are not seeing expected AWS metrics in Datadog, work through the followin
 4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default. For example:
    - Amazon RDS requires [Enhanced Monitoring][18] to be enabled in the RDS console for OS-level metrics.
    - Amazon S3 Storage Lens metrics require Storage Lens to be configured in the S3 console.
-   - AWS billing metrics require [Cost Explorer][19] to be enabled in the AWS Billing console.
+   - AWS billing metrics require enabling `Billing` in the [Metric Collection tab][16], adding the `budgets:ViewBudget` permission, and [enabling billing metrics][19] in the AWS console. See [Monitor your AWS billing details][26] for full instructions.
    - Custom CloudWatch namespaces require the **Collect Custom Metrics** option to be enabled in the [Metric Collection tab][16].
 5. **Wait for the polling interval.** API polling collects metrics approximately every 10 minutes. If you use [CloudWatch Metric Streams][25], expect a 2-3 minute delay. See [Expected metric delays](#expected-metric-delays) for more detail.
 6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or OU level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
@@ -217,7 +217,8 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [15]: /integrations/#cat-aws
 [16]: https://app.datadoghq.com/integrations/amazon-web-services
 [18]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.Enabling.html
-[19]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+[19]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
+[26]: /integrations/guide/monitor-your-aws-billing-details/
 [22]: /metrics/#space-aggregation
 [23]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
 [25]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
