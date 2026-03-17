@@ -898,3 +898,4 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [21]: /tracing/guide/remote_config/
 [22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry
+
