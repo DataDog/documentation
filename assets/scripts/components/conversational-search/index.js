@@ -5,7 +5,7 @@ import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
 import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTooltips, repositionTooltip } from './sources';
 import { addMessageActions, injectCodeCopyButtons } from './actions';
-import { streamConversation, resetTypesenseClient } from './streaming';
+import { streamConversation, fetchConversation, resetTypesenseClient } from './streaming';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -18,6 +18,7 @@ const CONV_MODEL_DOCS_PREVIEW = 'docs-ai-conv-model-v1-preview';
 const CONV_MODEL_DOCS_STABLE = 'docs-ai-conv-model-v1-stable';
 const DEFAULT_CONVERSATION_MODEL_ID = CONV_MODEL_DOCS_STABLE;
 const USE_LEGACY_MODEL_FLAG_KEY = 'DOCS_AI_USE_LEGACY_MODEL';
+const DISABLE_STREAMING_FLAG_KEY = 'DOCS_AI_DISABLE_STREAMING';
 
 const RENDER_THROTTLE = 50;
 
@@ -49,13 +50,14 @@ class ConversationalSearch {
         this.userCancelledRequest = false;
         this.hasLoggedFirstOpen = false;
         this.selectedModelId = DEFAULT_CONVERSATION_MODEL_ID;
+        this.streamingDisabled = false;
         this.isHomepage = document.querySelector('.kind-home') !== null;
         this.homeAiBtnVisible = false;
         this.ready = false;
 
         if (!this.createElements()) return;
         this.bindEvents();
-        this.resolveModelFromFlag();
+        this.resolveFlags();
         this.ready = true;
     }
 
@@ -66,10 +68,13 @@ class ConversationalSearch {
     log(message, data) { logAction(message, data, this.ctx); }
     logErr(message, error) { logError(message, error, this.ctx); }
 
-    resolveModelFromFlag() {
+    resolveFlags() {
         initializeFeatureFlags().then((client) => {
             if (getBooleanFlag(client, USE_LEGACY_MODEL_FLAG_KEY)) {
                 this.selectedModelId = CONV_MODEL_DOCS_PREVIEW;
+            }
+            if (getBooleanFlag(client, DISABLE_STREAMING_FLAG_KEY)) {
+                this.streamingDisabled = true;
             }
         }).catch(() => {});
     }
@@ -374,7 +379,11 @@ class ConversationalSearch {
         const responseContainer = this.addStreamingMessage();
 
         try {
-            await this.runStreamConversation(query, responseContainer);
+            if (this.streamingDisabled) {
+                await this.runFetchConversation(query, responseContainer);
+            } else {
+                await this.runStreamConversation(query, responseContainer);
+            }
         } catch (error) {
             if (error.name === 'AbortError' && this.userCancelledRequest) {
                 responseContainer.textContent = 'Request cancelled.';
@@ -449,6 +458,48 @@ class ConversationalSearch {
                 conversational_search: {
                     action: 'response_received',
                     response_length: accumulatedMessage.length,
+                    conversation_id: this.conversationId,
+                    latency_ms: Date.now() - startTime
+                }
+            });
+        } else {
+            responseContainer.textContent = 'No response received. Please try again.';
+        }
+    }
+
+    async runFetchConversation(query, responseContainer) {
+        this.abortController = new AbortController();
+        const startTime = Date.now();
+        responseContainer.innerHTML = '<span class="conv-search-cursor"></span>';
+
+        const response = await fetchConversation({
+            typesenseConfig,
+            query,
+            modelId: this.selectedModelId,
+            conversationId: this.conversationId,
+            signal: this.abortController.signal
+        });
+
+        const conversation = response?.results?.[0]?.conversation;
+        if (conversation?.conversation_id) {
+            this.conversationId = conversation.conversation_id;
+        }
+
+        const answer = conversation?.answer || '';
+        if (answer) {
+            responseContainer.innerHTML = renderMessageWithSources(answer, {
+                attachTooltips,
+                buildSourceCards
+            });
+            injectCodeCopyButtons(responseContainer, this.ctx);
+            addMessageActions(responseContainer.parentElement, query, answer, this.ctx);
+            this.scrollToBottom();
+
+            this.log('Conversational Search Response', {
+                conversational_search: {
+                    action: 'response_received',
+                    streaming: false,
+                    response_length: answer.length,
                     conversation_id: this.conversationId,
                     latency_ms: Date.now() - startTime
                 }
