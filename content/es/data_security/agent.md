@@ -72,7 +72,8 @@ El programa de gestión de vulnerabilidades de Datadog incluye evaluaciones peri
 
 En lo que respecta específicamente a su Container Agent, Datadog realiza análisis estáticos periódicos de vulnerabilidades, tanto en sus versiones de disponibilidad general (GA) como en las versiones candidatas (RC). El Datadog Container Agent puede encontrarse en registros públicos, como se menciona en [Docker Agent][10], y además, el código fuente del Agent es de código abierto. Esto permite a los clientes realizar análisis de vulnerabilidades con sus herramientas preferidas a un ritmo que satisfaga sus necesidades únicas. Esto proporciona la visibilidad que requieren los clientes que acostumbran monitorizar el Agent en busca de vulnerabilidades potenciales.
 
-Si crees que detectaste un error en la seguridad de Datadog, consulta [Informar de un problema][11]. Para enviar una consulta acerca de la vulnerabilidad de un producto específico como cliente existente, ponte en contacto con el [servicio de asistencia de Datadog][12] a través de tu proceso de asistencia estándar. Si envías un ticket de asistencia a través del sitio web de Datadog, configura el campo `Product type` como `Vulnerability Inquiry on Datadog Product`.
+Si crees que detectaste un error en la seguridad de Datadog, consulta [Informar de un problema][11]. 
+Para consultar el estado de una CVE específica, visita la [página Public Artifact Vulnerabilities][19]. Para obtener información adicional, ponte en contacto con el [servicio de asistencia de Datadog][12] a través de tu proceso de asistencia estándar. Al enviar un ticket de asistencia a través del sitio web de Datadog, configura el campo `Product type` como `Vulnerability Inquiry on Datadog Product`.
 
 ## Ejecución como usuario sin privilegios
 
@@ -224,3 +225,4 @@ Sólo se emiten los métricas aplicables. Por ejemplo, si DBM no está activado,
 [16]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 [17]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
 [18]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
+[19]: /data_security/guide/public_artifact_vulnerabilities/
